@@ -61,6 +61,7 @@ amalgama-ds/
 | Empty State | `empty-state.css` | `empty-state.tsx` | Estado vacio |
 | Back Link | `back-link.css` | `back-link.tsx` | Enlace de retorno |
 | Description | `description.css` | `description-section.tsx` | Seccion editable |
+| Avatar | `person-card.css` | — | Circulo con iniciales (ver docs/avatar.html) |
 
 ### Extended (domain-oriented, incluidos en components.css)
 | Componente | CSS | TSX | Descripcion |
@@ -99,10 +100,14 @@ Modifica `variables.css` para cambiar tokens globalmente:
 
 ## Documentacion
 
-Abre `docs/index.html` en un servidor local para ver el catalogo interactivo:
+Abre `docs/index.html` en un servidor local para ver el catalogo interactivo. Desde la raiz del repo:
 
 ```bash
-python3 -m http.server 8087 -d packages/amalgama-ds
+python3 -m http.server 8087
 ```
 
-Luego abre `http://localhost:8087/docs/index.html`
+Luego abre `http://localhost:8087/docs/index.html`.
+
+## Para Claude Code
+
+Ver [CLAUDE.md](./CLAUDE.md) para una explicacion de la arquitectura (capas CSS, capa React sobre clases, convenciones por componente) y los pasos para agregar un componente nuevo.
