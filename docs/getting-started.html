@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia de uso — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item active">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Guia de uso
+      </div>
+    </header>
+    <div class="docs-content">
+
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Guia de uso</h1>
+        <p class="docs-page-desc">Todo lo que necesitas para empezar a usar Amalgama DS en tu proyecto. Sin npm, sin build tools — solo HTML y CSS.</p>
+      </div>
+
+      <!-- ════════ 1. INSTALACION ════════ -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">1. Instalacion</h2>
+        <p class="docs-section-desc">Agrega las fuentes de Google Fonts y los 4 archivos CSS al <code>&lt;head&gt;</code> de tu HTML. No se necesita ningun otro paso.</p>
+
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>&lt;!-- Google Fonts --&gt;
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Epilogue:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;
+
+&lt;!-- Amalgama Design System --&gt;
+&lt;link rel="stylesheet" href="css/variables.css"&gt;
+&lt;link rel="stylesheet" href="css/base.css"&gt;
+&lt;link rel="stylesheet" href="css/layout.css"&gt;
+&lt;link rel="stylesheet" href="css/components.css"&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <table class="docs-props-table">
+          <thead><tr><th>Archivo</th><th>Contenido</th><th>Lineas</th></tr></thead>
+          <tbody>
+            <tr><td><code>variables.css</code></td><td>Design tokens: colores, radios, sombras, transiciones</td><td>82</td></tr>
+            <tr><td><code>base.css</code></td><td>Reset, tipografia, animaciones, clases utilitarias</td><td>81</td></tr>
+            <tr><td><code>layout.css</code></td><td>App shell: sidebar, topbar, contenido</td><td>189</td></tr>
+            <tr><td><code>components.css</code></td><td>Barrel file que importa todos los componentes</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Opcion B: Solo los componentes que necesitas</h3>
+        <p class="docs-section-desc">En vez de cargar todos los componentes, copia solo los archivos CSS que necesitas desde <code>css/components/</code>:</p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>&lt;!-- Core (requerido) --&gt;
+&lt;link rel="stylesheet" href="css/variables.css"&gt;
+&lt;link rel="stylesheet" href="css/base.css"&gt;
+
+&lt;!-- Solo los componentes que usas --&gt;
+&lt;link rel="stylesheet" href="css/components/button.css"&gt;
+&lt;link rel="stylesheet" href="css/components/form.css"&gt;
+&lt;link rel="stylesheet" href="css/components/table.css"&gt;
+&lt;link rel="stylesheet" href="css/components/badge.css"&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- ════════ 2. ESTRUCTURA DE PAGINA ════════ -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">2. Estructura de pagina</h2>
+        <p class="docs-section-desc">Todas las paginas de la app usan este shell: un sidebar fijo a la izquierda con navegacion, un topbar sticky arriba, y el area de contenido principal.</p>
+
+        <div class="docs-preview full-width" style="padding:0;overflow:hidden;height:280px">
+          <div style="display:flex;height:100%">
+            <div style="width:180px;background:var(--card-bg);border-right:1px solid var(--border);padding:12px 8px;flex-shrink:0">
+              <div style="padding:8px 12px;font-family:'Epilogue',sans-serif;font-weight:600;font-size:13px;margin-bottom:12px;display:flex;align-items:center;gap:6px">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                Mi App
+              </div>
+              <div style="padding:6px 12px;font-size:12px;color:var(--accent);background:var(--accent-light);border-radius:6px;margin-bottom:2px">Dashboard</div>
+              <div style="padding:6px 12px;font-size:12px;color:var(--text-secondary)">Vacantes</div>
+              <div style="padding:6px 12px;font-size:12px;color:var(--text-secondary)">Candidatos</div>
+              <div style="padding:6px 12px;font-size:12px;color:var(--text-secondary)">People</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column">
+              <div style="height:40px;background:var(--card-bg);border-bottom:1px solid var(--border);padding:0 16px;display:flex;align-items:center;font-size:12px;color:var(--text-muted)">Reclutamiento / Dashboard</div>
+              <div style="flex:1;background:var(--bg);padding:16px">
+                <div style="font-family:'Epilogue',sans-serif;font-size:16px;font-weight:600;margin-bottom:12px">Dashboard</div>
+                <div style="display:flex;gap:8px">
+                  <div style="flex:1;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px">
+                    <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px">Vacantes</div>
+                    <div style="font-family:'Epilogue',sans-serif;font-size:20px;font-weight:700">24</div>
+                  </div>
+                  <div style="flex:1;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px">
+                    <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px">Candidatos</div>
+                    <div style="font-family:'Epilogue',sans-serif;font-size:20px;font-weight:700">156</div>
+                  </div>
+                  <div style="flex:1;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px">
+                    <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px">Entrevistas</div>
+                    <div style="font-family:'Epilogue',sans-serif;font-size:20px;font-weight:700">8</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="app"&gt;
+  &lt;!-- Sidebar (220px fijo) --&gt;
+  &lt;aside class="sidebar"&gt;
+    &lt;div class="sidebar-logo"&gt;Mi App&lt;/div&gt;
+    &lt;nav class="sidebar-nav"&gt;
+      &lt;div class="nav-section-label"&gt;Reclutamiento&lt;/div&gt;
+      &lt;a class="nav-item active"&gt;Dashboard&lt;/a&gt;
+      &lt;a class="nav-item"&gt;Vacantes&lt;/a&gt;
+      &lt;a class="nav-item"&gt;Candidatos&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/aside&gt;
+
+  &lt;!-- Main (ocupa el resto) --&gt;
+  &lt;main class="main"&gt;
+    &lt;!-- Topbar (56px sticky) --&gt;
+    &lt;header class="topbar"&gt;
+      &lt;div class="topbar-breadcrumb"&gt;
+        &lt;a href="#"&gt;Reclutamiento&lt;/a&gt;
+        &lt;span class="separator"&gt;/&lt;/span&gt;
+        Dashboard
+      &lt;/div&gt;
+      &lt;div class="avatar"&gt;MG&lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Content --&gt;
+    &lt;div class="content"&gt;
+      &lt;!-- Tu contenido aqui --&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- ════════ 3. USAR UN COMPONENTE ════════ -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">3. Usar un componente</h2>
+        <p class="docs-section-desc">Cada componente es un archivo CSS independiente en <code>css/components/</code>. Copia el archivo CSS a tu proyecto, agrega el <code>&lt;link&gt;</code>, y pega el HTML. Cada archivo incluye un comment header con ejemplo de uso y dependencias.</p>
+
+        <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+          <div style="flex:1;min-width:180px;background:var(--accent-light);border-radius:var(--radius-md);padding:16px;text-align:center">
+            <div style="font-size:24px;margin-bottom:8px">1.</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text-primary)">Buscar</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">Navega por los componentes en la barra lateral</div>
+          </div>
+          <div style="flex:1;min-width:180px;background:var(--accent-light);border-radius:var(--radius-md);padding:16px;text-align:center">
+            <div style="font-size:24px;margin-bottom:8px">2.</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text-primary)">Copiar</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">Click en "Copiar" en el bloque de codigo</div>
+          </div>
+          <div style="flex:1;min-width:180px;background:var(--accent-light);border-radius:var(--radius-md);padding:16px;text-align:center">
+            <div style="font-size:24px;margin-bottom:8px">3.</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text-primary)">Pegar</div>
+            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">Pega el HTML en tu pagina — listo</div>
+          </div>
+        </div>
+
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin-bottom:12px">Ejemplo: pagina de vacantes</h3>
+        <p class="docs-section-desc">Combinando <code>page-header</code>, <code>toolbar</code>, <code>data-table</code> y <code>badge</code> en una sola vista:</p>
+
+        <div class="docs-preview full-width">
+          <div class="page-header">
+            <h1 class="page-title">Vacantes</h1>
+            <button class="btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Nueva vacante
+            </button>
+          </div>
+          <div class="toolbar">
+            <div class="search-field">
+              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" placeholder="Buscar vacantes...">
+            </div>
+            <button class="toolbar-btn">Filtros</button>
+          </div>
+          <div class="result-count">Mostrando <strong>3</strong> vacantes</div>
+          <table class="data-table">
+            <thead>
+              <tr><th>Puesto</th><th>Departamento</th><th>Candidatos</th><th>Estado</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:500">Disenador UX Senior</td>
+                <td>Producto</td>
+                <td>12</td>
+                <td><span class="badge badge-open">Abierta</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500">Frontend Developer</td>
+                <td>Ingenieria</td>
+                <td>8</td>
+                <td><span class="badge badge-open">Abierta</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:500">Product Manager</td>
+                <td>Producto</td>
+                <td>5</td>
+                <td><span class="badge badge-warning">Pendiente</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="content"&gt;
+  &lt;div class="page-header"&gt;
+    &lt;h1 class="page-title"&gt;Vacantes&lt;/h1&gt;
+    &lt;button class="btn-primary"&gt;+ Nueva vacante&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="toolbar"&gt;
+    &lt;div class="search-field"&gt;
+      &lt;svg ...&gt;...&lt;/svg&gt;
+      &lt;input type="text" placeholder="Buscar vacantes..."&gt;
+    &lt;/div&gt;
+    &lt;button class="toolbar-btn"&gt;Filtros&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="result-count"&gt;Mostrando &lt;strong&gt;3&lt;/strong&gt; vacantes&lt;/div&gt;
+
+  &lt;table class="data-table"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;&lt;th&gt;Puesto&lt;/th&gt;&lt;th&gt;Departamento&lt;/th&gt;&lt;th&gt;Estado&lt;/th&gt;&lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;Disenador UX Senior&lt;/td&gt;
+        &lt;td&gt;Producto&lt;/td&gt;
+        &lt;td&gt;&lt;span class="badge badge-open"&gt;Abierta&lt;/span&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- ════════ 4. PERSONALIZAR TOKENS ════════ -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">4. Personalizar tokens</h2>
+        <p class="docs-section-desc">Cambia cualquier variable en <code>variables.css</code> y toda la interfaz se actualiza automaticamente. Estos son los tokens principales:</p>
+
+        <table class="docs-props-table">
+          <thead><tr><th>Token</th><th>Default</th><th>Controla</th></tr></thead>
+          <tbody>
+            <tr><td><code>--accent</code></td><td>#4f80ff</td><td>Botones, links, estados activos, badges accent</td></tr>
+            <tr><td><code>--primary-500</code></td><td>#253e82</td><td>Color navy del brand, hover de botones</td></tr>
+            <tr><td><code>--radius</code></td><td>12px (lg)</td><td>Border-radius de cards, modals, tables</td></tr>
+            <tr><td><code>--radius-md</code></td><td>8px</td><td>Border-radius de inputs, botones, kanban cards</td></tr>
+            <tr><td><code>--bg</code></td><td>var(--neutral-50)</td><td>Fondo de pagina</td></tr>
+            <tr><td><code>--card-bg</code></td><td>#ffffff</td><td>Fondo de tarjetas, sidebar, topbar</td></tr>
+            <tr><td><code>--border</code></td><td>var(--neutral-100)</td><td>Todos los bordes del sistema</td></tr>
+            <tr><td><code>--shadow-md</code></td><td>0 4px 16px rgba(28,36,56,.08)</td><td>Hover en cards, dropdowns</td></tr>
+            <tr><td><code>--duration-fast</code></td><td>120ms</td><td>Todas las transiciones rapidas (hover, focus)</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Ejemplo: cambiar el color accent</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>/* variables.css — cambia solo esta linea */
+--accent: #10b981;    /* de azul a verde */
+
+/* Resultado: TODOS los botones, links, tabs activos,
+   badges accent y focus rings cambian a verde */</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- ════════ 5. ESTRUCTURA DE ARCHIVOS ════════ -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">5. Estructura de archivos</h2>
+
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>frontend/
+  css/
+    variables.css          ← Tokens: colores, radios, sombras, transiciones
+    base.css               ← Reset, tipografia, animaciones, utilidades
+    layout.css             ← App shell: sidebar, topbar, contenido
+    components.css         ← Barrel: importa todos los componentes
+    components/
+      button.css           ← btn-primary, btn-ghost, btn-next, icon-btn
+      badge.css            ← badge con 7 variantes de color
+      card.css             ← Contenedor basico
+      form.css             ← field-group, field-input, select, textarea...
+      table.css            ← data-table con thead/tbody
+      tabs.css             ← Pestanas con panel de contenido
+      toolbar.css          ← search-field, toolbar-btn, result-count
+      modal.css            ← modal-overlay, modal, header/body/footer
+      toast.css            ← Notificaciones success/error/info
+      stat-card.css        ← Tarjetas KPI con stats-grid
+      vacancy-card.css     ← Tarjeta de vacante + assignee-avatar
+      person-card.css      ← Tarjeta de persona + people-grid
+      kanban.css           ← Board, columnas y tarjetas arrastrables
+      skeleton.css         ← Animacion shimmer de carga
+      empty-state.css      ← Placeholder cuando no hay datos
+      page-header.css      ← Encabezado con titulo y acciones
+      back-link.css        ← Enlace de retorno
+      description.css      ← Secciones editables con delete
+      create-form.css      ← Header y footer sticky para forms
+      placeholder.css      ← Panel de contenido vacio
+  ui/
+    index.html             ← Catalogo de componentes
+    getting-started.html   ← Esta guia
+    [component].html       ← Documentacion de cada componente</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <table class="docs-props-table" style="margin-top:16px">
+          <thead><tr><th>Archivo</th><th>Que incluye</th></tr></thead>
+          <tbody>
+            <tr><td><code>variables.css</code></td><td>6 paletas de color (neutral, primary, secondary, success, error, warning), aliases semanticos (--bg, --accent, --border...), escala de radius (sm/md/lg/xl/full), 3 niveles de sombra, tokens de transicion</td></tr>
+            <tr><td><code>base.css</code></td><td>Box-sizing reset, tipografia body (Inter 14px), headings (Epilogue 600), scrollbar custom, 6 keyframe animations, clases utilitarias (.text-muted, .font-mono, .sr-only)</td></tr>
+            <tr><td><code>layout.css</code></td><td>App shell (.app, .main, .content), sidebar (220px fijo), topbar (56px sticky con breadcrumbs y avatar)</td></tr>
+            <tr><td><code>components.css</code></td><td>Barrel file: <code>@import</code> de los 20 archivos en <code>components/</code>. Carga todo de una vez.</td></tr>
+            <tr><td><code>components/*.css</code></td><td>20 archivos individuales. Cada uno es autocontenido con comment header que incluye ejemplo de uso y dependencias.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ════════ 6. CONVENCIONES ════════ -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">6. Convenciones de nombrado</h2>
+
+        <table class="docs-props-table">
+          <thead><tr><th>Patron</th><th>Ejemplo</th><th>Descripcion</th></tr></thead>
+          <tbody>
+            <tr><td><code>.componente</code></td><td><code>.card</code>, <code>.badge</code>, <code>.modal</code></td><td>Clase base del componente</td></tr>
+            <tr><td><code>.componente-elemento</code></td><td><code>.modal-header</code>, <code>.card-title</code></td><td>Elemento hijo del componente</td></tr>
+            <tr><td><code>.componente.modificador</code></td><td><code>.badge.badge-open</code>, <code>.btn-primary.btn-sm</code></td><td>Variante visual</td></tr>
+            <tr><td><code>.text-*</code></td><td><code>.text-muted</code>, <code>.text-accent</code></td><td>Utilidades de color de texto</td></tr>
+            <tr><td><code>.font-*</code></td><td><code>.font-mono</code>, <code>.font-heading</code></td><td>Utilidades de familia tipografica</td></tr>
+            <tr><td><code>--token-escala</code></td><td><code>--neutral-500</code>, <code>--radius-md</code></td><td>Tokens con escala numerica</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Colores semanticos para estados</h3>
+        <div class="docs-preview">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+            <span class="badge badge-open">badge-open</span>
+            <span class="badge badge-active">badge-active</span>
+            <span class="badge badge-closed">badge-closed</span>
+            <span class="badge badge-draft">badge-draft</span>
+            <span class="badge badge-warning">badge-warning</span>
+            <span class="badge badge-accent">badge-accent</span>
+            <span class="badge badge-archived">badge-archived</span>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;!-- Exito / activo → verde --&gt;
+&lt;span class="badge badge-open"&gt;Abierta&lt;/span&gt;
+&lt;span class="badge badge-active"&gt;Activa&lt;/span&gt;
+
+&lt;!-- Error / cerrado → rojo --&gt;
+&lt;span class="badge badge-closed"&gt;Cerrada&lt;/span&gt;
+
+&lt;!-- Warning → amarillo --&gt;
+&lt;span class="badge badge-warning"&gt;Pendiente&lt;/span&gt;
+
+&lt;!-- Neutro → gris --&gt;
+&lt;span class="badge badge-draft"&gt;Borrador&lt;/span&gt;
+&lt;span class="badge badge-archived"&gt;Archivada&lt;/span&gt;
+
+&lt;!-- Accent → azul --&gt;
+&lt;span class="badge badge-accent"&gt;Nueva&lt;/span&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- ════════ 7. PLANTILLA RAPIDA ════════ -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">7. Plantilla rapida</h2>
+        <p class="docs-section-desc">Copia esta plantilla para crear una nueva pagina desde cero:</p>
+
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Mi Pagina — Amalgama&lt;/title&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Epilogue:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;
+  &lt;link rel="stylesheet" href="css/variables.css"&gt;
+  &lt;link rel="stylesheet" href="css/base.css"&gt;
+  &lt;link rel="stylesheet" href="css/layout.css"&gt;
+  &lt;link rel="stylesheet" href="css/components.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="app"&gt;
+    &lt;aside class="sidebar"&gt;
+      &lt;div class="sidebar-logo"&gt;
+        &lt;svg width="20" height="20" ...&gt;...&lt;/svg&gt;
+        NewPeopleForce
+      &lt;/div&gt;
+      &lt;nav class="sidebar-nav"&gt;
+        &lt;div class="nav-section-label"&gt;Menu&lt;/div&gt;
+        &lt;a class="nav-item active"&gt;Dashboard&lt;/a&gt;
+        &lt;a class="nav-item"&gt;Vacantes&lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/aside&gt;
+    &lt;main class="main"&gt;
+      &lt;header class="topbar"&gt;
+        &lt;div class="topbar-breadcrumb"&gt;Dashboard&lt;/div&gt;
+        &lt;div class="avatar"&gt;MG&lt;/div&gt;
+      &lt;/header&gt;
+      &lt;div class="content"&gt;
+        &lt;div class="page-header"&gt;
+          &lt;h1 class="page-title"&gt;Dashboard&lt;/h1&gt;
+        &lt;/div&gt;
+        &lt;!-- Agrega componentes aqui --&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

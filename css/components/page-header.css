@@ -1,0 +1,25 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Page Header
+   Encabezado de pagina con titulo y acciones.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <div class="page-header">
+     <h1 class="page-title">Vacantes</h1>
+     <div class="header-actions">
+       <button class="btn-primary">+ Nueva vacante</button>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.page-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px;
+}
+.page-title {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 22px; font-weight: 600; letter-spacing: -.3px;
+}
+.header-actions { display: flex; align-items: center; gap: 10px; }

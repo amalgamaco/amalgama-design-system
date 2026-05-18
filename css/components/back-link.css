@@ -1,0 +1,23 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Back Link
+   Enlace de retorno con icono para navegacion.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <button class="back-link">
+     <svg width="16" height="16" ...>...</svg>
+     Volver a vacantes
+   </button>
+═══════════════════════════════════════ */
+
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13.5px; color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--duration-fast);
+  margin-bottom: 6px;
+  background: none; border: none; font-family: inherit; padding: 0;
+}
+.back-link:hover { color: var(--text-primary); text-decoration: none; }

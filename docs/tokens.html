@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tokens — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="tokens.html" class="docs-nav-item active">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Tokens
+      </div>
+    </header>
+    <div class="docs-content">
+
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Design Tokens</h1>
+        <p class="docs-page-desc">Variables CSS que definen colores, sombras, radios y transiciones del sistema de diseno. Todos los tokens se encuentran en <code>variables.css</code>.</p>
+      </div>
+
+      <!-- Neutral -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Neutral</h2>
+        <div class="docs-swatch-grid">
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#fafaff"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--neutral-50</div><div class="docs-swatch-value">#fafaff</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#c8d1e7"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--neutral-100</div><div class="docs-swatch-value">#c8d1e7</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#aab2cc"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--neutral-200</div><div class="docs-swatch-value">#aab2cc</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#8b94b2"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--neutral-300</div><div class="docs-swatch-value">#8b94b2</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#5d698c"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--neutral-500</div><div class="docs-swatch-value">#5d698c</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#3a4260"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--neutral-700</div><div class="docs-swatch-value">#3a4260</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#1c2438"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--neutral-900</div><div class="docs-swatch-value">#1c2438</div></div></div>
+        </div>
+      </div>
+
+      <!-- Primary -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Primary</h2>
+        <div class="docs-swatch-grid">
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#f0f0ff"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--primary-50</div><div class="docs-swatch-value">#f0f0ff</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#d5d5ff"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--primary-100</div><div class="docs-swatch-value">#d5d5ff</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#253e82"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--primary-500</div><div class="docs-swatch-value">#253e82</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#1a2d5e"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--primary-700</div><div class="docs-swatch-value">#1a2d5e</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#0f1d40"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--primary-900</div><div class="docs-swatch-value">#0f1d40</div></div></div>
+        </div>
+      </div>
+
+      <!-- Secondary -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Secondary</h2>
+        <div class="docs-swatch-grid">
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#edf2ff"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--secondary-50</div><div class="docs-swatch-value">#edf2ff</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#c5d5ff"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--secondary-100</div><div class="docs-swatch-value">#c5d5ff</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#6b9aff"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--secondary-500</div><div class="docs-swatch-value">#6b9aff</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#4f80ff"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--secondary-700</div><div class="docs-swatch-value">#4f80ff</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#3b65e6"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--secondary-900</div><div class="docs-swatch-value">#3b65e6</div></div></div>
+        </div>
+      </div>
+
+      <!-- Success -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Success</h2>
+        <div class="docs-swatch-grid">
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#e4f8ec"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--success-50</div><div class="docs-swatch-value">#e4f8ec</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#a8e6c3"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--success-100</div><div class="docs-swatch-value">#a8e6c3</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#00c164"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--success-500</div><div class="docs-swatch-value">#00c164</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#009f50"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--success-700</div><div class="docs-swatch-value">#009f50</div></div></div>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Error</h2>
+        <div class="docs-swatch-grid">
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#ffebf0"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--error-50</div><div class="docs-swatch-value">#ffebf0</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#ffc5d0"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--error-100</div><div class="docs-swatch-value">#ffc5d0</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#fd3a45"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--error-500</div><div class="docs-swatch-value">#fd3a45</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#bf0b29"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--error-700</div><div class="docs-swatch-value">#bf0b29</div></div></div>
+        </div>
+      </div>
+
+      <!-- Warning -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Warning</h2>
+        <div class="docs-swatch-grid">
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#fef3c7"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--warning-50</div><div class="docs-swatch-value">#fef3c7</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#f59e0b"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--warning-500</div><div class="docs-swatch-value">#f59e0b</div></div></div>
+          <div class="docs-swatch"><div class="docs-swatch-color" style="background:#d97706"></div><div class="docs-swatch-info"><div class="docs-swatch-name">--warning-700</div><div class="docs-swatch-value">#d97706</div></div></div>
+        </div>
+      </div>
+
+      <!-- Semantic Aliases -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Aliases semanticos</h2>
+        <table class="docs-props-table">
+          <thead><tr><th>Variable</th><th>Valor</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td><code>--bg</code></td><td>var(--neutral-50)</td><td>Fondo de pagina</td></tr>
+            <tr><td><code>--card-bg</code></td><td>#ffffff</td><td>Fondo de tarjetas</td></tr>
+            <tr><td><code>--border</code></td><td>var(--neutral-100)</td><td>Bordes generales</td></tr>
+            <tr><td><code>--text-primary</code></td><td>var(--neutral-900)</td><td>Texto principal</td></tr>
+            <tr><td><code>--text-secondary</code></td><td>var(--neutral-500)</td><td>Texto secundario</td></tr>
+            <tr><td><code>--text-muted</code></td><td>var(--neutral-300)</td><td>Texto deshabilitado</td></tr>
+            <tr><td><code>--accent</code></td><td>#4f80ff</td><td>Color de acento primario</td></tr>
+            <tr><td><code>--accent-light</code></td><td>var(--secondary-50)</td><td>Fondo de acento suave</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Border Radius -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Border Radius</h2>
+        <div class="docs-preview">
+          <div class="docs-radius-demo">
+            <div class="docs-radius-item"><div class="docs-radius-box" style="border-radius:4px"></div><div class="docs-radius-label">--radius-sm<br>4px</div></div>
+            <div class="docs-radius-item"><div class="docs-radius-box" style="border-radius:8px"></div><div class="docs-radius-label">--radius-md<br>8px</div></div>
+            <div class="docs-radius-item"><div class="docs-radius-box" style="border-radius:12px"></div><div class="docs-radius-label">--radius-lg<br>12px</div></div>
+            <div class="docs-radius-item"><div class="docs-radius-box" style="border-radius:16px"></div><div class="docs-radius-label">--radius-xl<br>16px</div></div>
+            <div class="docs-radius-item"><div class="docs-radius-box" style="border-radius:9999px"></div><div class="docs-radius-label">--radius-full<br>9999px</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shadows -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Sombras</h2>
+        <div class="docs-preview">
+          <div class="docs-shadow-demo">
+            <div class="docs-shadow-item"><div class="docs-shadow-box" style="box-shadow:0 1px 3px rgba(28,36,56,.06)"></div><div class="docs-radius-label">--shadow-sm</div></div>
+            <div class="docs-shadow-item"><div class="docs-shadow-box" style="box-shadow:0 4px 16px rgba(28,36,56,.08)"></div><div class="docs-radius-label">--shadow-md</div></div>
+            <div class="docs-shadow-item"><div class="docs-shadow-box" style="box-shadow:0 8px 32px rgba(28,36,56,.12)"></div><div class="docs-radius-label">--shadow-lg</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transitions -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Transiciones</h2>
+        <table class="docs-props-table">
+          <thead><tr><th>Variable</th><th>Valor</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td><code>--ease-default</code></td><td>cubic-bezier(.4,0,.2,1)</td><td>Curva de animacion estandar</td></tr>
+            <tr><td><code>--duration-fast</code></td><td>120ms</td><td>Hover, focus, toggles rapidos</td></tr>
+            <tr><td><code>--duration-normal</code></td><td>200ms</td><td>Transiciones generales</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

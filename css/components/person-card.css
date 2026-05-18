@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Person Card
+   Tarjeta de persona con avatar, nombre y rol.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <div class="people-grid">
+     <div class="person-card">
+       <div class="person-avatar">MG</div>
+       <div class="person-info">
+         <div class="person-name">Maria Garcia</div>
+         <div class="person-role">Desarrolladora Frontend</div>
+       </div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.person-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+.person-card:hover {
+  border-color: var(--neutral-200);
+  box-shadow: var(--shadow-md);
+}
+.person-card .person-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f80ff, #95b3ff);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 15px; font-weight: 600;
+  flex-shrink: 0;
+}
+.person-card .person-info { flex: 1; min-width: 0; }
+.person-card .person-name {
+  font-weight: 600; font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.person-card .person-role {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item active">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Button
+      </div>
+    </header>
+    <div class="docs-content">
+
+      <h1 class="docs-page-title">Button</h1>
+      <p class="docs-page-desc">Botones para acciones primarias, secundarias y de peligro.</p>
+
+      <!-- ══ Installation ══ -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Instalacion</h2>
+        <p class="docs-section-desc">Copia <code>button.tsx</code> a tu proyecto en <code>components/ui/button.tsx</code></p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils"
+
+const buttonVariants = cva(
+  "",
+  {
+    variants: {
+      variant: {
+        primary: "btn-primary",
+        ghost: "btn-ghost",
+        next: "btn-next",
+        icon: "icon-btn",
+        danger: "btn-primary btn-danger",
+        success: "btn-primary btn-success",
+      },
+      size: {
+        default: "",
+        sm: "btn-sm",
+      },
+    },
+    defaultVariants: {
+      variant: "primary",
+      size: "default",
+    },
+  }
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;,
+    VariantProps&lt;typeof buttonVariants&gt; {}
+
+const Button = React.forwardRef&lt;HTMLButtonElement, ButtonProps&gt;(
+  ({ className, variant, size, ...props }, ref) =&gt; {
+    return (
+      &lt;button
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      /&gt;
+    )
+  }
+)
+Button.displayName = "Button"
+
+export { Button, buttonVariants }</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>npm install class-variance-authority clsx</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>&lt;link rel="stylesheet" href="css/variables.css"&gt;
+&lt;link rel="stylesheet" href="css/components/button.css"&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { Button } from "@/components/ui/button"
+
+&lt;Button variant="primary"&gt;Crear vacante&lt;/Button&gt;
+&lt;Button variant="ghost"&gt;Cancelar&lt;/Button&gt;
+&lt;Button variant="danger"&gt;Eliminar&lt;/Button&gt;
+&lt;Button variant="primary" size="sm"&gt;Pequeno&lt;/Button&gt;
+&lt;Button variant="icon"&gt;&lt;svg ...&gt;&lt;/svg&gt;&lt;/Button&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Primary -->
+      <section class="docs-section">
+        <h2>Primary</h2>
+        <div class="docs-preview" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button class="btn-primary">Crear vacante</button>
+          <button class="btn-primary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nueva vacante</button>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;button class=&quot;btn-primary&quot;&gt;Crear vacante&lt;/button&gt;
+
+&lt;button class=&quot;btn-primary&quot;&gt;
+  &lt;svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2.5&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+    &lt;line x1=&quot;12&quot; y1=&quot;5&quot; x2=&quot;12&quot; y2=&quot;19&quot;/&gt;
+    &lt;line x1=&quot;5&quot; y1=&quot;12&quot; x2=&quot;19&quot; y2=&quot;12&quot;/&gt;
+  &lt;/svg&gt;
+  Nueva vacante
+&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Ghost -->
+      <section class="docs-section">
+        <h2>Ghost</h2>
+        <div class="docs-preview">
+          <button class="btn-ghost">Cancelar</button>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;button class=&quot;btn-ghost&quot;&gt;Cancelar&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Small -->
+      <section class="docs-section">
+        <h2>Small</h2>
+        <div class="docs-preview">
+          <button class="btn-primary btn-sm">Guardar</button>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;button class=&quot;btn-primary btn-sm&quot;&gt;Guardar&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Danger -->
+      <section class="docs-section">
+        <h2>Danger</h2>
+        <div class="docs-preview">
+          <button class="btn-primary btn-danger">Eliminar</button>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;button class=&quot;btn-primary btn-danger&quot;&gt;Eliminar&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Success -->
+      <section class="docs-section">
+        <h2>Success</h2>
+        <div class="docs-preview">
+          <button class="btn-primary btn-success">Aprobar</button>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;button class=&quot;btn-primary btn-success&quot;&gt;Aprobar&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Icon Button -->
+      <section class="docs-section">
+        <h2>Icon Button</h2>
+        <div class="docs-preview">
+          <button class="icon-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;button class=&quot;icon-btn&quot;&gt;
+  &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+    &lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot;/&gt;
+    &lt;path d=&quot;M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z&quot;/&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Disabled -->
+      <section class="docs-section">
+        <h2>Disabled</h2>
+        <div class="docs-preview" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button class="btn-primary" disabled>Deshabilitado</button>
+          <button class="btn-ghost" disabled>Deshabilitado</button>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;button class=&quot;btn-primary&quot; disabled&gt;Deshabilitado&lt;/button&gt;
+
+&lt;button class=&quot;btn-ghost&quot; disabled&gt;Deshabilitado&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Props Table -->
+      <section class="docs-section">
+        <h2>Clases CSS</h2>
+        <table class="docs-props-table">
+          <thead>
+            <tr><th>Clase</th><th>Descripcion</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>.btn-primary</code></td><td>Boton primario con fondo de acento</td></tr>
+            <tr><td><code>.btn-ghost</code></td><td>Boton transparente con borde sutil</td></tr>
+            <tr><td><code>.btn-sm</code></td><td>Variante de tamano pequeno</td></tr>
+            <tr><td><code>.btn-danger</code></td><td>Color rojo para acciones destructivas</td></tr>
+            <tr><td><code>.btn-success</code></td><td>Color verde para acciones de confirmacion</td></tr>
+            <tr><td><code>.icon-btn</code></td><td>Boton cuadrado solo con icono</td></tr>
+            <tr><td><code>disabled</code></td><td>Atributo HTML que desactiva el boton</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

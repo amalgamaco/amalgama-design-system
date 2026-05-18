@@ -1,0 +1,88 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Button
+   Botones para acciones primarias, secundarias, navegacion e iconos.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <button class="btn-primary">Crear vacante</button>
+   <button class="btn-primary btn-sm">Pequeno</button>
+   <button class="btn-primary btn-danger">Eliminar</button>
+   <button class="btn-primary btn-success">Aprobar</button>
+   <button class="btn-ghost">Cancelar</button>
+   <button class="btn-next">Siguiente →</button>
+   <button class="icon-btn"><svg>...</svg></button>
+═══════════════════════════════════════ */
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13.5px; font-weight: 600;
+  cursor: pointer;
+  transition: background var(--duration-fast), transform .1s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: #253e82; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled {
+  background: var(--neutral-100);
+  color: var(--neutral-300);
+  cursor: not-allowed;
+  transform: none;
+}
+.btn-primary.btn-sm { padding: 6px 12px; font-size: 12.5px; }
+.btn-primary.btn-danger { background: var(--red); }
+.btn-primary.btn-danger:hover { background: var(--error-700); }
+.btn-primary.btn-success { background: var(--green); }
+.btn-primary.btn-success:hover { background: var(--success-700); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 20px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 13.5px; font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background var(--duration-fast);
+  white-space: nowrap;
+}
+.btn-ghost:hover { background: var(--bg); }
+.btn-ghost:disabled {
+  border-color: var(--neutral-100);
+  color: var(--neutral-300);
+  cursor: not-allowed;
+}
+
+.btn-next {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 24px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13.5px; font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background var(--duration-fast);
+}
+.btn-next:hover { background: #253e82; }
+
+.icon-btn {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-secondary);
+  transition: background var(--duration-fast);
+}
+.icon-btn:hover { background: #eaebfe; }

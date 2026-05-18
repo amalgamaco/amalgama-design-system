@@ -1,0 +1,19 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Card
+   Contenedor basico con borde y fondo blanco.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <div class="card">
+     Contenido de la tarjeta
+   </div>
+═══════════════════════════════════════ */
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}

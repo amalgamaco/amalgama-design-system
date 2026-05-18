@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Person Card — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item active">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Person Card
+      </div>
+    </header>
+    <div class="docs-content">
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Person Card</h1>
+        <p class="docs-page-desc">Tarjeta de persona para directorios de empleados y candidatos.</p>
+      </div>
+
+      <!-- Instalacion TSX -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Instalacion</h2>
+        <p class="docs-section-desc">Copia <code>person-card.tsx</code> a tu proyecto en <code>components/ui/person-card.tsx</code></p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import { cn } from &quot;@/lib/utils&quot;
+
+const PeopleGrid = React.forwardRef&lt;
+  HTMLDivElement,
+  React.HTMLAttributes&lt;HTMLDivElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;div ref={ref} className={cn(&quot;people-grid&quot;, className)} {...props} /&gt;
+))
+PeopleGrid.displayName = &quot;PeopleGrid&quot;
+
+export interface PersonCardProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
+  initials: string
+  name: string
+  role: string
+}
+
+const PersonCard = React.forwardRef&lt;HTMLDivElement, PersonCardProps&gt;(
+  ({ className, initials, name, role, ...props }, ref) =&gt; (
+    &lt;div ref={ref} className={cn(&quot;person-card&quot;, className)} {...props}&gt;
+      &lt;div className=&quot;person-avatar&quot;&gt;{initials}&lt;/div&gt;
+      &lt;div className=&quot;person-info&quot;&gt;
+        &lt;div className=&quot;person-name&quot;&gt;{name}&lt;/div&gt;
+        &lt;div className=&quot;person-role&quot;&gt;{role}&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+)
+PersonCard.displayName = &quot;PersonCard&quot;
+
+export { PeopleGrid, PersonCard }</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>Dependencias</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>CSS requerido</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>css/variables.css
+css/components/person-card.css</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>Ejemplo de uso</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { PeopleGrid, PersonCard } from &quot;@/components/ui/person-card&quot;
+
+&lt;PeopleGrid&gt;
+  &lt;PersonCard initials=&quot;MG&quot; name=&quot;Maria Garcia&quot; role=&quot;Frontend Developer&quot; /&gt;
+  &lt;PersonCard initials=&quot;JP&quot; name=&quot;Juan Perez&quot; role=&quot;Disenador UX&quot; /&gt;
+&lt;/PeopleGrid&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <h2>People Grid</h2>
+      <div class="docs-preview">
+        <div class="people-grid">
+          <div class="person-card">
+            <div class="person-avatar" style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#4f80ff,#95b3ff);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:600;flex-shrink:0">MG</div>
+            <div class="person-info"><div class="person-name">Mercedes Garcia</div><div class="person-role">Disenadora UX</div></div>
+          </div>
+          <div class="person-card">
+            <div class="person-avatar" style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#00c164,#60d594);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:600;flex-shrink:0">CL</div>
+            <div class="person-info"><div class="person-name">Carlos Lopez</div><div class="person-role">Desarrollador Frontend</div></div>
+          </div>
+          <div class="person-card">
+            <div class="person-avatar" style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#a78bfa);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:600;flex-shrink:0">AM</div>
+            <div class="person-info"><div class="person-name">Ana Martinez</div><div class="person-role">Product Manager</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>&lt;div class="people-grid"&gt;
+  &lt;div class="person-card"&gt;
+    &lt;div class="person-avatar" style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#4f80ff,#95b3ff);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:600;flex-shrink:0"&gt;MG&lt;/div&gt;
+    &lt;div class="person-info"&gt;&lt;div class="person-name"&gt;Mercedes Garcia&lt;/div&gt;&lt;div class="person-role"&gt;Disenadora UX&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="person-card"&gt;
+    &lt;div class="person-avatar" style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#00c164,#60d594);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:600;flex-shrink:0"&gt;CL&lt;/div&gt;
+    &lt;div class="person-info"&gt;&lt;div class="person-name"&gt;Carlos Lopez&lt;/div&gt;&lt;div class="person-role"&gt;Desarrollador Frontend&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="person-card"&gt;
+    &lt;div class="person-avatar" style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#a78bfa);display:flex;align-items:center;justify-content:center;color:white;font-size:15px;font-weight:600;flex-shrink:0"&gt;AM&lt;/div&gt;
+    &lt;div class="person-info"&gt;&lt;div class="person-name"&gt;Ana Martinez&lt;/div&gt;&lt;div class="person-role"&gt;Product Manager&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

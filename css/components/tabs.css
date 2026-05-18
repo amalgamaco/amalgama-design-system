@@ -1,0 +1,43 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Tabs
+   Pestanas para organizar contenido en secciones.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <div class="tabs">
+     <div class="tab active">General</div>
+     <div class="tab">Requisitos</div>
+     <div class="tab">Proceso</div>
+   </div>
+   <div class="tab-panel active" id="panel-general">...</div>
+   <div class="tab-panel" id="panel-requisitos">...</div>
+═══════════════════════════════════════ */
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  gap: 0;
+  margin-bottom: 28px;
+}
+.tab {
+  padding: 11px 20px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color var(--duration-fast), border-color var(--duration-fast);
+  white-space: nowrap;
+  user-select: none;
+}
+.tab:hover { color: var(--text-secondary); }
+.tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 500;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }

@@ -1,0 +1,68 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Modal
+   Dialogo modal con overlay, header, body y footer.
+
+   Dependencia: variables.css, base.css (keyframes fadeIn, slideInUp)
+   Requiere: button.css (para botones en el footer)
+
+   Uso:
+   <div class="modal-overlay">
+     <div class="modal">
+       <div class="modal-header">
+         <div class="modal-title">Confirmar accion</div>
+         <button class="modal-close">✕</button>
+       </div>
+       <div class="modal-body">
+         <p>¿Estas seguro de continuar?</p>
+       </div>
+       <div class="modal-footer">
+         <button class="btn-ghost">Cancelar</button>
+         <button class="btn-primary">Confirmar</button>
+       </div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28,36,56,.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+  animation: fadeIn .15s ease;
+}
+.modal {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  width: min(560px, calc(100vw - 48px));
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: slideInUp .2s ease;
+}
+.modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-title {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 17px; font-weight: 600;
+}
+.modal-close {
+  width: 32px; height: 32px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted);
+  transition: background var(--duration-fast);
+}
+.modal-close:hover { background: var(--bg); color: var(--text-primary); }
+.modal-body { padding: 20px 24px; }
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: flex-end;
+  gap: 10px;
+}

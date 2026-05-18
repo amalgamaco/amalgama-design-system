@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+
+  <!-- Sidebar -->
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item active">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">Amalgama DS</a>
+        <span class="separator">/</span>
+        Table
+      </div>
+    </header>
+    <div class="docs-content">
+
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Table</h1>
+        <p class="docs-page-desc">Tabla de datos para listas de candidatos, vacantes y empleados.</p>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Instalacion</h2>
+        <p class="docs-section-desc">Copia <code>table.tsx</code> a tu proyecto en <code>components/ui/table.tsx</code></p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import { cn } from &quot;@/lib/utils&quot;
+
+const Table = React.forwardRef&lt;
+  HTMLTableElement,
+  React.TableHTMLAttributes&lt;HTMLTableElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;table ref={ref} className={cn(&quot;data-table&quot;, className)} {...props} /&gt;
+))
+Table.displayName = &quot;Table&quot;
+
+const TableHeader = React.forwardRef&lt;
+  HTMLTableSectionElement,
+  React.HTMLAttributes&lt;HTMLTableSectionElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;thead ref={ref} className={cn(className)} {...props} /&gt;
+))
+TableHeader.displayName = &quot;TableHeader&quot;
+
+const TableBody = React.forwardRef&lt;
+  HTMLTableSectionElement,
+  React.HTMLAttributes&lt;HTMLTableSectionElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;tbody ref={ref} className={cn(className)} {...props} /&gt;
+))
+TableBody.displayName = &quot;TableBody&quot;
+
+const TableRow = React.forwardRef&lt;
+  HTMLTableRowElement,
+  React.HTMLAttributes&lt;HTMLTableRowElement&gt; &amp; { clickable?: boolean }
+&gt;(({ className, clickable, ...props }, ref) =&gt; (
+  &lt;tr
+    ref={ref}
+    className={cn(clickable &amp;&amp; &quot;clickable&quot;, className)}
+    {...props}
+  /&gt;
+))
+TableRow.displayName = &quot;TableRow&quot;
+
+const TableHead = React.forwardRef&lt;
+  HTMLTableCellElement,
+  React.ThHTMLAttributes&lt;HTMLTableCellElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;th ref={ref} className={cn(className)} {...props} /&gt;
+))
+TableHead.displayName = &quot;TableHead&quot;
+
+const TableCell = React.forwardRef&lt;
+  HTMLTableCellElement,
+  React.TdHTMLAttributes&lt;HTMLTableCellElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;td ref={ref} className={cn(className)} {...props} /&gt;
+))
+TableCell.displayName = &quot;TableCell&quot;
+
+export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>css/variables.css
+css/components/table.css</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from &quot;@/components/ui/table&quot;
+
+&lt;Table&gt;
+  &lt;TableHeader&gt;
+    &lt;TableRow&gt;
+      &lt;TableHead&gt;Nombre&lt;/TableHead&gt;
+      &lt;TableHead&gt;Estado&lt;/TableHead&gt;
+    &lt;/TableRow&gt;
+  &lt;/TableHeader&gt;
+  &lt;TableBody&gt;
+    &lt;TableRow clickable&gt;
+      &lt;TableCell&gt;Vacante 1&lt;/TableCell&gt;
+      &lt;TableCell&gt;Abierta&lt;/TableCell&gt;
+    &lt;/TableRow&gt;
+  &lt;/TableBody&gt;
+&lt;/Table&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Tabla basica -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Tabla basica</h2>
+        <div class="docs-preview full-width">
+          <table class="data-table">
+            <thead><tr><th>Nombre</th><th>Puesto</th><th>Departamento</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td>Mercedes Garcia</td><td>Disenadora UX</td><td>Producto</td><td><span class="badge badge-active">Activa</span></td></tr>
+              <tr><td>Carlos Lopez</td><td>Desarrollador</td><td>Ingenieria</td><td><span class="badge badge-active">Activa</span></td></tr>
+              <tr><td>Ana Martinez</td><td>PM</td><td>Producto</td><td><span class="badge badge-warning">Pendiente</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;table class="data-table"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Nombre&lt;/th&gt;&lt;th&gt;Puesto&lt;/th&gt;&lt;th&gt;Departamento&lt;/th&gt;&lt;th&gt;Estado&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Mercedes Garcia&lt;/td&gt;&lt;td&gt;Disenadora UX&lt;/td&gt;&lt;td&gt;Producto&lt;/td&gt;&lt;td&gt;&lt;span class="badge badge-active"&gt;Activa&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Carlos Lopez&lt;/td&gt;&lt;td&gt;Desarrollador&lt;/td&gt;&lt;td&gt;Ingenieria&lt;/td&gt;&lt;td&gt;&lt;span class="badge badge-active"&gt;Activa&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Ana Martinez&lt;/td&gt;&lt;td&gt;PM&lt;/td&gt;&lt;td&gt;Producto&lt;/td&gt;&lt;td&gt;&lt;span class="badge badge-warning"&gt;Pendiente&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Filas clicables -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Filas clicables</h2>
+        <p class="docs-section-desc">Agrega la clase <code>clickable</code> a las filas del tbody para activar <code>cursor: pointer</code> y un efecto hover mas pronunciado.</p>
+        <div class="docs-preview full-width">
+          <table class="data-table">
+            <thead><tr><th>Nombre</th><th>Puesto</th><th>Departamento</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr class="clickable"><td>Mercedes Garcia</td><td>Disenadora UX</td><td>Producto</td><td><span class="badge badge-active">Activa</span></td></tr>
+              <tr class="clickable"><td>Carlos Lopez</td><td>Desarrollador</td><td>Ingenieria</td><td><span class="badge badge-active">Activa</span></td></tr>
+              <tr class="clickable"><td>Ana Martinez</td><td>PM</td><td>Producto</td><td><span class="badge badge-warning">Pendiente</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;table class="data-table"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Nombre&lt;/th&gt;&lt;th&gt;Puesto&lt;/th&gt;&lt;th&gt;Departamento&lt;/th&gt;&lt;th&gt;Estado&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr class="clickable"&gt;&lt;td&gt;Mercedes Garcia&lt;/td&gt;&lt;td&gt;Disenadora UX&lt;/td&gt;&lt;td&gt;Producto&lt;/td&gt;&lt;td&gt;&lt;span class="badge badge-active"&gt;Activa&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr class="clickable"&gt;&lt;td&gt;Carlos Lopez&lt;/td&gt;&lt;td&gt;Desarrollador&lt;/td&gt;&lt;td&gt;Ingenieria&lt;/td&gt;&lt;td&gt;&lt;span class="badge badge-active"&gt;Activa&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr class="clickable"&gt;&lt;td&gt;Ana Martinez&lt;/td&gt;&lt;td&gt;PM&lt;/td&gt;&lt;td&gt;Producto&lt;/td&gt;&lt;td&gt;&lt;span class="badge badge-warning"&gt;Pendiente&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

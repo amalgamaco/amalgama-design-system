@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stat Card — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item active">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Stat Card
+      </div>
+    </header>
+    <div class="docs-content">
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Stat Card</h1>
+        <p class="docs-page-desc">Tarjetas de metricas para dashboards y reportes.</p>
+      </div>
+
+      <!-- Instalacion TSX -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Instalacion</h2>
+        <p class="docs-section-desc">Copia <code>stat-card.tsx</code> a tu proyecto en <code>components/ui/stat-card.tsx</code></p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import { cn } from &quot;@/lib/utils&quot;
+
+const StatsGrid = React.forwardRef&lt;
+  HTMLDivElement,
+  React.HTMLAttributes&lt;HTMLDivElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;div ref={ref} className={cn(&quot;stats-grid&quot;, className)} {...props} /&gt;
+))
+StatsGrid.displayName = &quot;StatsGrid&quot;
+
+export interface StatCardProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
+  label: string
+  value: string | number
+  change?: string
+  changeColor?: string
+}
+
+const StatCard = React.forwardRef&lt;HTMLDivElement, StatCardProps&gt;(
+  ({ className, label, value, change, changeColor, ...props }, ref) =&gt; (
+    &lt;div ref={ref} className={cn(&quot;stat-card&quot;, className)} {...props}&gt;
+      &lt;div className=&quot;stat-label&quot;&gt;{label}&lt;/div&gt;
+      &lt;div className=&quot;stat-value&quot;&gt;{value}&lt;/div&gt;
+      {change &amp;&amp; (
+        &lt;div className=&quot;stat-change&quot; style={changeColor ? { color: changeColor } : undefined}&gt;
+          {change}
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  )
+)
+StatCard.displayName = &quot;StatCard&quot;
+
+export { StatsGrid, StatCard }</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>Dependencias</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>CSS requerido</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>css/variables.css
+css/components/stat-card.css</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>Ejemplo de uso</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { StatsGrid, StatCard } from &quot;@/components/ui/stat-card&quot;
+
+&lt;StatsGrid&gt;
+  &lt;StatCard label=&quot;Vacantes abiertas&quot; value={24} change=&quot;+12%&quot; changeColor=&quot;var(--green)&quot; /&gt;
+  &lt;StatCard label=&quot;Candidatos activos&quot; value={156} /&gt;
+  &lt;StatCard label=&quot;Entrevistas hoy&quot; value={8} change=&quot;-3%&quot; changeColor=&quot;var(--red)&quot; /&gt;
+&lt;/StatsGrid&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <h2>Stats Grid</h2>
+      <div class="docs-preview">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Vacantes activas</div>
+            <div class="stat-value">24</div>
+            <div class="stat-change text-success">+3 este mes</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Candidatos</div>
+            <div class="stat-value">156</div>
+            <div class="stat-change text-success">+12 esta semana</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Entrevistas hoy</div>
+            <div class="stat-value">8</div>
+            <div class="stat-change text-muted">Sin cambios</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Tiempo promedio</div>
+            <div class="stat-value">18d</div>
+            <div class="stat-change text-error">+2d vs anterior</div>
+          </div>
+        </div>
+      </div>
+      <div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>&lt;div class="stats-grid"&gt;
+  &lt;div class="stat-card"&gt;
+    &lt;div class="stat-label"&gt;Vacantes activas&lt;/div&gt;
+    &lt;div class="stat-value"&gt;24&lt;/div&gt;
+    &lt;div class="stat-change text-success"&gt;+3 este mes&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stat-card"&gt;
+    &lt;div class="stat-label"&gt;Candidatos&lt;/div&gt;
+    &lt;div class="stat-value"&gt;156&lt;/div&gt;
+    &lt;div class="stat-change text-success"&gt;+12 esta semana&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stat-card"&gt;
+    &lt;div class="stat-label"&gt;Entrevistas hoy&lt;/div&gt;
+    &lt;div class="stat-value"&gt;8&lt;/div&gt;
+    &lt;div class="stat-change text-muted"&gt;Sin cambios&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="stat-card"&gt;
+    &lt;div class="stat-label"&gt;Tiempo promedio&lt;/div&gt;
+    &lt;div class="stat-value"&gt;18d&lt;/div&gt;
+    &lt;div class="stat-change text-error"&gt;+2d vs anterior&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

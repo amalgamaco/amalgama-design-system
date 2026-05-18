@@ -1,0 +1,29 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Badge
+   Indicadores de estado con variantes de color.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <span class="badge badge-open">Abierta</span>
+   <span class="badge badge-closed">Cerrada</span>
+   <span class="badge badge-draft">Borrador</span>
+   <span class="badge badge-archived">Archivada</span>
+   <span class="badge badge-warning">Urgente</span>
+   <span class="badge badge-accent">Nuevo</span>
+═══════════════════════════════════════ */
+
+.badge {
+  display: inline-flex; align-items: center;
+  font-size: 11.5px; font-weight: 600;
+  padding: 3px 10px; border-radius: 20px;
+  letter-spacing: .2px;
+  white-space: nowrap;
+}
+.badge-open, .badge-active { background: var(--green-light); color: #006d2c; }
+.badge-closed { background: var(--red-light); color: var(--error-700); }
+.badge-draft { background: var(--neutral-50); color: var(--text-secondary); border: 1px solid var(--border); }
+.badge-archived { background: var(--neutral-50); color: var(--text-muted); }
+.badge-warning { background: var(--warning-50); color: var(--warning-700); }
+.badge-accent { background: var(--accent-light); color: var(--accent); }

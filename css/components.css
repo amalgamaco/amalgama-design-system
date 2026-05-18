@@ -1,0 +1,31 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Library Components
+   Importa este archivo para cargar todos los componentes de la libreria.
+   Para uso individual, copia el archivo del componente que necesitas
+   desde la carpeta css/components/.
+
+   Dependencia: variables.css, base.css
+═══════════════════════════════════════ */
+
+@import url('components/page-header.css');
+@import url('components/button.css');
+@import url('components/toolbar.css');
+@import url('components/badge.css');
+@import url('components/card.css');
+@import url('components/form.css');
+@import url('components/tabs.css');
+@import url('components/table.css');
+@import url('components/stat-card.css');
+@import url('components/back-link.css');
+@import url('components/description.css');
+@import url('components/skeleton.css');
+@import url('components/empty-state.css');
+@import url('components/modal.css');
+@import url('components/toast.css');
+
+/* ── Extended components (domain-oriented) ── */
+@import url('components/vacancy-card.css');
+@import url('components/person-card.css');
+@import url('components/kanban.css');
+@import url('components/create-form.css');
+@import url('components/placeholder.css');
