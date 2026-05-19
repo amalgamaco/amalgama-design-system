@@ -66,6 +66,13 @@
       display: grid;
       place-items: center;
       color: white;
+      overflow: hidden;
+    }
+    .nav-brand-mark img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      display: block;
     }
     .nav-brand-version {
       font-family: 'DM Mono', monospace;
@@ -600,6 +607,71 @@
     }
     .catalog-more:hover { gap: 10px; }
 
+    /* ── Brand showcase ── */
+    .brand {
+      margin: 0 40px 80px;
+    }
+    .brand-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .brand-copy .eyebrow { margin-bottom: 14px; }
+    .brand-lockups {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+    }
+    .brand-lockup {
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 140px;
+      border: 1px solid transparent;
+    }
+    .brand-lockup img {
+      max-width: 100%;
+      max-height: 88px;
+      display: block;
+    }
+    .brand-lockup.light {
+      background: white;
+      border-color: var(--neutral-100);
+    }
+    .brand-lockup.muted {
+      background: var(--secondary-50);
+    }
+    .brand-lockup.navy { background: var(--primary-900); }
+    .brand-lockup.blue { background: #4f80ff; }
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-top: 24px;
+      text-decoration: none;
+    }
+    .brand-link:hover { gap: 12px; }
+
+    @media (max-width: 900px) {
+      .brand { margin: 0 16px 56px; }
+      .brand-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
+    @media (max-width: 540px) {
+      .brand-lockups { grid-template-columns: 1fr; }
+    }
+
     /* ── Final CTA ── */
     .cta {
       background: var(--primary-900);
@@ -712,7 +784,7 @@
   <nav class="nav">
     <a href="index.html" class="nav-brand">
       <span class="nav-brand-mark">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        <img src="logos/icon/icon-white.png" alt="">
       </span>
       Amalgama DS
       <span class="nav-brand-version">v1.0</span>
@@ -907,6 +979,35 @@
       Ver los 22 componentes
       <i data-lucide="arrow-right"></i>
     </a>
+  </section>
+
+  <!-- Brand / Marca -->
+  <section class="brand">
+    <div class="brand-grid">
+      <div class="brand-copy">
+        <span class="eyebrow">Marca</span>
+        <h2>Un planeta, un wordmark, una sola voz.</h2>
+        <p class="section-lede">Tres bloqueos — vertical, horizontal e icono — con variantes para cada fondo. Todos los archivos viven en <code>/logos</code> y se usan tal cual, sin retoques.</p>
+        <a href="docs/logos.html" class="brand-link">
+          Ver todas las variantes
+          <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+      <div class="brand-lockups">
+        <div class="brand-lockup light">
+          <img src="logos/horizontal/horizontal-primary.png" alt="Logo horizontal primario de Amalgama">
+        </div>
+        <div class="brand-lockup navy">
+          <img src="logos/vertical/vertical-on-navy.png" alt="Logo vertical blanco sobre navy">
+        </div>
+        <div class="brand-lockup blue">
+          <img src="logos/horizontal/horizontal-on-blue.png" alt="Logo horizontal blanco sobre Agile Blue">
+        </div>
+        <div class="brand-lockup muted">
+          <img src="logos/vertical/vertical-primary.png" alt="Logo vertical primario de Amalgama">
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Final CTA -->
