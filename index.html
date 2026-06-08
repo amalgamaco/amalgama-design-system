@@ -767,7 +767,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   text-transform: uppercase; letter-spacing: .07em;
   color: var(--color-on-surface-variant);
   border: 1px solid color-mix(in srgb, var(--color-on-surface) 14%, transparent);
-  padding: 2px 7px; border-radius: 4px;
+  padding: 3px 10px; border-radius: 999px;
   line-height: 1.4;
 }
 
@@ -3026,167 +3026,102 @@ body { overflow-x: clip; }
 
   <div class="emb-latest-grid">
 
-    <!-- Card 1: Motion — Bronze/Gold Ringed Giant -->
-    <div class="emb-card" onclick="navigate('styles')">
-      <div class="emb-card-body">
+    <!-- Card 1: Motion -->
+    <div class="nav-card" onclick="navigate('styles')">
+      <div class="nav-card-header">
         <span class="badge badge-tertiary">✦ Nuevo</span>
-        <p class="emb-card-title">Motion & Animaciones</p>
-        <p class="emb-card-desc">Nueva sección de UI Animations: principios de movimiento, duración, easing y patrones reutilizables para todos los productos.</p>
-        <p class="emb-card-meta">Styles → UI Animations</p>
+        <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
       </div>
-      <div class="emb-card-visual motion">
-        <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="ecg1" cx="30%" cy="26%" r="70%">
-              <stop offset="0%" stop-color="#FFFCE8"/><stop offset="10%" stop-color="#FFE066"/>
-              <stop offset="24%" stop-color="#F0A020"/><stop offset="44%" stop-color="#B06018"/>
-              <stop offset="68%" stop-color="#4A2408"/><stop offset="88%" stop-color="#160800"/>
-              <stop offset="100%" stop-color="#060200"/>
-            </radialGradient>
-            <radialGradient id="ech1" cx="50%" cy="50%" r="50%">
-              <stop offset="72%" stop-color="#B06018" stop-opacity="0"/>
-              <stop offset="100%" stop-color="#E09030" stop-opacity="0.24"/>
-            </radialGradient>
-            <linearGradient id="erl1" x1="53" y1="0" x2="297" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#F0A020" stop-opacity="0"/><stop offset="20%" stop-color="#FFD060" stop-opacity="0.88"/>
-              <stop offset="80%" stop-color="#F0A020" stop-opacity="0.70"/><stop offset="100%" stop-color="#F0A020" stop-opacity="0"/>
-            </linearGradient>
-            <clipPath id="eccp1"><circle cx="175" cy="125" r="84"/></clipPath>
-          </defs>
-          <rect width="280" height="210" fill="#060200"/>
-          <!-- Stars -->
-          <circle cx="22" cy="18" r="1.3" fill="#FFE066" opacity="0.85"/><circle cx="50" cy="42" r="1" fill="white" opacity="0.65"/>
-          <circle cx="88" cy="16" r="0.9" fill="white" opacity="0.50"/><circle cx="38" cy="168" r="0.8" fill="#FFD060" opacity="0.60"/>
-          <circle cx="255" cy="22" r="1.2" fill="#FFE8A0" opacity="0.80"/><circle cx="15" cy="95" r="0.7" fill="white" opacity="0.45"/>
-          <!-- Ring back arc -->
-          <path d="M 53 125 A 122 23 0 0 0 297 125" stroke="url(#erl1)" stroke-width="5.5" fill="none" opacity="0.50"/>
-          <!-- Planet glow -->
-          <circle cx="175" cy="125" r="108" fill="url(#ech1)"/>
-          <!-- Planet body -->
-          <circle cx="175" cy="125" r="84" fill="url(#ecg1)"/>
-          <!-- Atmospheric bands -->
-          <g clip-path="url(#eccp1)">
-            <ellipse cx="175" cy="105" rx="84" ry="14" fill="#FFE066" opacity="0.18"/>
-            <ellipse cx="175" cy="124" rx="84" ry="11" fill="#F0A020" opacity="0.16"/>
-            <ellipse cx="175" cy="142" rx="84" ry="9" fill="#B06018" opacity="0.14"/>
-            <ellipse cx="175" cy="158" rx="84" ry="7" fill="#C87828" opacity="0.10"/>
-          </g>
-          <!-- Ring front arc -->
-          <path d="M 53 125 A 122 23 0 0 1 297 125" stroke="url(#erl1)" stroke-width="5.5" fill="none" opacity="0.92"/>
+      <div class="nav-card-content">
+        <div class="nav-card-title">Motion & Animaciones</div>
+        <div class="nav-card-desc">Nueva sección de UI Animations: principios de movimiento, duración, easing y patrones reutilizables para todos los productos.</div>
+        <div class="nav-card-meta">Styles → UI Animations</div>
+      </div>
+      <div class="nav-card-visual nv-info">
+        <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Easing curve axes -->
+          <line x1="60" y1="20" x2="60" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
+          <line x1="60" y1="120" x2="224" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
+          <!-- Main ease-out curve -->
+          <path d="M 60 120 C 82 52, 124 28, 224 20" stroke="currentColor" stroke-width="3" fill="none" opacity=".65" stroke-linecap="round"/>
+          <!-- Linear reference (dashed) -->
+          <path d="M 60 120 L 224 20" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".22" stroke-dasharray="5 4"/>
+          <!-- Ease-in curve (lighter) -->
+          <path d="M 60 120 C 148 116, 188 72, 224 20" stroke="currentColor" stroke-width="2" fill="none" opacity=".35" stroke-linecap="round" stroke-dasharray="4 3"/>
+          <!-- Motion dots along main curve -->
+          <circle cx="98" cy="96" r="3.5" fill="currentColor" opacity=".35"/>
+          <circle cx="136" cy="72" r="4" fill="currentColor" opacity=".48"/>
+          <circle cx="176" cy="48" r="4.5" fill="currentColor" opacity=".60"/>
+          <circle cx="224" cy="20" r="6" fill="currentColor" opacity=".72"/>
         </svg>
       </div>
     </div>
 
-    <!-- Card 2: Dark Mode — Pearl/Silver Luminous Sphere -->
-    <div class="emb-card" onclick="document.getElementById('theme-toggle').click()">
-      <div class="emb-card-body">
+    <!-- Card 2: Dark Mode -->
+    <div class="nav-card" onclick="document.getElementById('theme-toggle').click()">
+      <div class="nav-card-header">
         <span class="badge badge-tertiary">✦ Nuevo</span>
-        <p class="emb-card-title">Dark Mode completo</p>
-        <p class="emb-card-desc">Todos los tokens tienen ahora su par semántico en modo oscuro. Activá el toggle arriba a la derecha para probarlo en vivo.</p>
-        <p class="emb-card-meta">Foundations → Color system</p>
+        <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
       </div>
-      <div class="emb-card-visual darkmode">
-        <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="ecg2" cx="28%" cy="22%" r="72%">
-              <stop offset="0%" stop-color="#FFFFFF"/><stop offset="8%" stop-color="#EAF2FF"/>
-              <stop offset="20%" stop-color="#98B4D4"/><stop offset="40%" stop-color="#3C5880"/>
-              <stop offset="65%" stop-color="#142035"/><stop offset="88%" stop-color="#040A14"/>
-              <stop offset="100%" stop-color="#010408"/>
-            </radialGradient>
-            <radialGradient id="ech2" cx="50%" cy="50%" r="50%">
-              <stop offset="72%" stop-color="#3C5880" stop-opacity="0"/>
-              <stop offset="100%" stop-color="#7AAAE0" stop-opacity="0.24"/>
-            </radialGradient>
-            <linearGradient id="erl2a" x1="27" y1="0" x2="263" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#C0D8F0" stop-opacity="0"/><stop offset="22%" stop-color="#E0EFFF" stop-opacity="0.82"/>
-              <stop offset="78%" stop-color="#C0D8F0" stop-opacity="0.65"/><stop offset="100%" stop-color="#C0D8F0" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="erl2b" x1="45" y1="0" x2="245" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#A0C4E8" stop-opacity="0"/><stop offset="28%" stop-color="#A0C4E8" stop-opacity="0.55"/>
-              <stop offset="72%" stop-color="#A0C4E8" stop-opacity="0.42"/><stop offset="100%" stop-color="#A0C4E8" stop-opacity="0"/>
-            </linearGradient>
-            <clipPath id="eccp2"><circle cx="145" cy="122" r="80"/></clipPath>
-          </defs>
-          <rect width="280" height="210" fill="#010408"/>
-          <!-- Stars -->
-          <circle cx="24" cy="20" r="1.6" fill="white" opacity="0.95"/><circle cx="55" cy="44" r="1" fill="#C0D8F0" opacity="0.80"/>
-          <circle cx="90" cy="18" r="0.9" fill="white" opacity="0.65"/><circle cx="240" cy="25" r="1.4" fill="#E0EFFF" opacity="0.85"/>
-          <circle cx="265" cy="165" r="1" fill="white" opacity="0.50"/><circle cx="18" cy="158" r="0.8" fill="#98B4D4" opacity="0.60"/>
-          <!-- Sparkle -->
-          <path d="M252 55 L254 49 L256 55 L262 57 L256 59 L254 65 L252 59 L246 57Z" fill="white" opacity="0.80"/>
-          <!-- Outer ring back arc -->
-          <path d="M 27 122 A 118 21 0 0 0 263 122" stroke="url(#erl2a)" stroke-width="4.5" fill="none" opacity="0.48"/>
-          <!-- Inner ring back arc -->
-          <path d="M 45 122 A 100 17 0 0 0 245 122" stroke="url(#erl2b)" stroke-width="2.5" fill="none" opacity="0.36"/>
-          <!-- Planet glow -->
-          <circle cx="145" cy="122" r="102" fill="url(#ech2)"/>
-          <!-- Planet body -->
-          <circle cx="145" cy="122" r="80" fill="url(#ecg2)"/>
-          <!-- Atmospheric bands -->
-          <g clip-path="url(#eccp2)">
-            <ellipse cx="145" cy="104" rx="80" ry="13" fill="#EAF2FF" opacity="0.18"/>
-            <ellipse cx="145" cy="122" rx="80" ry="10" fill="#98B4D4" opacity="0.16"/>
-            <ellipse cx="145" cy="138" rx="80" ry="8" fill="#3C5880" opacity="0.14"/>
-          </g>
-          <!-- Outer ring front arc -->
-          <path d="M 27 122 A 118 21 0 0 1 263 122" stroke="url(#erl2a)" stroke-width="4.5" fill="none" opacity="0.90"/>
-          <!-- Inner ring front arc -->
-          <path d="M 45 122 A 100 17 0 0 1 245 122" stroke="url(#erl2b)" stroke-width="2.5" fill="none" opacity="0.72"/>
+      <div class="nav-card-content">
+        <div class="nav-card-title">Dark Mode completo</div>
+        <div class="nav-card-desc">Todos los tokens tienen ahora su par semántico en modo oscuro. Activá el toggle arriba a la derecha para probarlo en vivo.</div>
+        <div class="nav-card-meta">Foundations → Color system</div>
+      </div>
+      <div class="nav-card-visual nv-neutral">
+        <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Sun / moon toggle concept -->
+          <!-- Light side -->
+          <circle cx="96" cy="74" r="28" fill="currentColor" opacity=".30"/>
+          <!-- Sun rays -->
+          <line x1="96" y1="34" x2="96" y2="42" stroke="currentColor" stroke-width="2" opacity=".40" stroke-linecap="round"/>
+          <line x1="96" y1="106" x2="96" y2="114" stroke="currentColor" stroke-width="2" opacity=".40" stroke-linecap="round"/>
+          <line x1="56" y1="74" x2="64" y2="74" stroke="currentColor" stroke-width="2" opacity=".40" stroke-linecap="round"/>
+          <line x1="128" y1="74" x2="136" y2="74" stroke="currentColor" stroke-width="2" opacity=".40" stroke-linecap="round"/>
+          <line x1="68" y1="46" x2="74" y2="52" stroke="currentColor" stroke-width="2" opacity=".30" stroke-linecap="round"/>
+          <line x1="118" y1="96" x2="124" y2="102" stroke="currentColor" stroke-width="2" opacity=".30" stroke-linecap="round"/>
+          <!-- Divider -->
+          <line x1="172" y1="28" x2="172" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".20" stroke-dasharray="5 4"/>
+          <!-- Moon -->
+          <path d="M 210 50 A 28 28 0 1 0 210 98 A 18 18 0 1 1 210 50Z" fill="currentColor" opacity=".40"/>
+          <!-- Stars near moon -->
+          <circle cx="248" cy="44" r="2" fill="currentColor" opacity=".35"/>
+          <circle cx="238" cy="34" r="1.5" fill="currentColor" opacity=".28"/>
+          <circle cx="256" cy="62" r="1.5" fill="currentColor" opacity=".25"/>
         </svg>
       </div>
     </div>
 
-    <!-- Card 3: New Components — Coral/Crimson Ringed Sphere -->
-    <div class="emb-card" onclick="navigate('components')">
-      <div class="emb-card-body">
+    <!-- Card 3: New Components -->
+    <div class="nav-card" onclick="navigate('components')">
+      <div class="nav-card-header">
         <span class="badge badge-info">↑ Actualizado</span>
-        <p class="emb-card-title">Nuevos componentes</p>
-        <p class="emb-card-desc">Badge, Table, Kanban y más — con specs completas, variantes, estados y guías de Do/Don't para cada uno.</p>
-        <p class="emb-card-meta">Components → todos los componentes</p>
+        <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
       </div>
-      <div class="emb-card-visual components">
-        <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="ecg3" cx="30%" cy="25%" r="70%">
-              <stop offset="0%" stop-color="#FFF5F0"/><stop offset="8%" stop-color="#FFB498"/>
-              <stop offset="20%" stop-color="#F06840"/><stop offset="38%" stop-color="#C03820"/>
-              <stop offset="60%" stop-color="#701510"/><stop offset="85%" stop-color="#220505"/>
-              <stop offset="100%" stop-color="#080100"/>
-            </radialGradient>
-            <radialGradient id="ech3" cx="50%" cy="50%" r="50%">
-              <stop offset="72%" stop-color="#C03820" stop-opacity="0"/>
-              <stop offset="100%" stop-color="#E85030" stop-opacity="0.24"/>
-            </radialGradient>
-            <linearGradient id="erl3" x1="31" y1="0" x2="279" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#FF9880" stop-opacity="0"/><stop offset="20%" stop-color="#FF7860" stop-opacity="0.90"/>
-              <stop offset="80%" stop-color="#FF9880" stop-opacity="0.72"/><stop offset="100%" stop-color="#FF9880" stop-opacity="0"/>
-            </linearGradient>
-            <clipPath id="eccp3"><circle cx="155" cy="125" r="82"/></clipPath>
-          </defs>
-          <rect width="280" height="210" fill="#080100"/>
-          <!-- Stars -->
-          <circle cx="20" cy="22" r="1.4" fill="#FFD0C0" opacity="0.90"/><circle cx="52" cy="45" r="1" fill="#FFB498" opacity="0.75"/>
-          <circle cx="85" cy="18" r="0.9" fill="white" opacity="0.60"/><circle cx="248" cy="28" r="1.3" fill="#FFD0C0" opacity="0.82"/>
-          <circle cx="268" cy="162" r="1" fill="white" opacity="0.50"/><circle cx="20" cy="170" r="0.8" fill="#FF9880" opacity="0.60"/>
-          <!-- Sparkle -->
-          <path d="M44 72 L46 66 L48 72 L54 74 L48 76 L46 82 L44 76 L38 74Z" fill="white" opacity="0.85"/>
-          <!-- Ring back arc -->
-          <path d="M 31 125 A 124 23 0 0 0 279 125" stroke="url(#erl3)" stroke-width="6.5" fill="none" opacity="0.50"/>
-          <!-- Planet glow -->
-          <circle cx="155" cy="125" r="106" fill="url(#ech3)"/>
-          <!-- Planet body -->
-          <circle cx="155" cy="125" r="82" fill="url(#ecg3)"/>
-          <!-- Atmospheric bands + great spot -->
-          <g clip-path="url(#eccp3)">
-            <ellipse cx="155" cy="106" rx="82" ry="13" fill="#FFB498" opacity="0.22"/>
-            <ellipse cx="155" cy="124" rx="82" ry="10" fill="#F06840" opacity="0.20"/>
-            <ellipse cx="155" cy="140" rx="82" ry="8" fill="#C03820" opacity="0.16"/>
-            <ellipse cx="108" cy="122" rx="24" ry="15" fill="#FF7860" opacity="0.26"/>
-            <ellipse cx="108" cy="122" rx="14" ry="9" fill="#FFF5F0" opacity="0.18"/>
-          </g>
-          <!-- Ring front arc -->
-          <path d="M 31 125 A 124 23 0 0 1 279 125" stroke="url(#erl3)" stroke-width="6.5" fill="none" opacity="0.92"/>
+      <div class="nav-card-content">
+        <div class="nav-card-title">Nuevos componentes</div>
+        <div class="nav-card-desc">Badge, Table, Kanban y más — con specs completas, variantes, estados y guías de Do/Don't para cada uno.</div>
+        <div class="nav-card-meta">Components → todos los componentes</div>
+      </div>
+      <div class="nav-card-visual nv-secondary">
+        <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Component grid preview -->
+          <!-- Row 1: two card-like blocks -->
+          <rect x="36" y="28" width="90" height="52" rx="8" fill="currentColor" opacity=".20"/>
+          <rect x="44" y="36" width="40" height="7" rx="3.5" fill="currentColor" opacity=".50"/>
+          <rect x="44" y="48" width="60" height="6" rx="3" fill="currentColor" opacity=".30"/>
+          <rect x="44" y="59" width="50" height="6" rx="3" fill="currentColor" opacity=".22"/>
+          <rect x="154" y="28" width="90" height="52" rx="8" fill="currentColor" opacity=".20"/>
+          <rect x="162" y="36" width="40" height="7" rx="3.5" fill="currentColor" opacity=".50"/>
+          <rect x="162" y="48" width="60" height="6" rx="3" fill="currentColor" opacity=".30"/>
+          <rect x="162" y="59" width="50" height="6" rx="3" fill="currentColor" opacity=".22"/>
+          <!-- Row 2: button + badge + input -->
+          <rect x="36" y="92" width="60" height="24" rx="6" fill="currentColor" opacity=".35"/>
+          <rect x="50" y="100" width="32" height="8" rx="4" fill="currentColor" opacity=".60"/>
+          <rect x="108" y="92" width="40" height="24" rx="12" fill="currentColor" opacity=".28"/>
+          <rect x="118" y="100" width="20" height="8" rx="4" fill="currentColor" opacity=".50"/>
+          <rect x="160" y="92" width="84" height="24" rx="6" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".30"/>
+          <rect x="168" y="100" width="44" height="8" rx="4" fill="currentColor" opacity=".25"/>
         </svg>
       </div>
     </div>
@@ -10893,19 +10828,17 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     <div class="nav-card-visual nv-success">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <!-- Eye shape -->
-        <path d="M70 74 C100 44 180 44 210 74 C180 104 100 104 70 74Z" stroke="currentColor" stroke-width="3" fill="currentColor" opacity=".15"/>
-        <!-- Pupil -->
-        <circle cx="140" cy="74" r="18" fill="currentColor" opacity=".45"/>
-        <circle cx="140" cy="74" r="8" fill="currentColor" opacity=".75"/>
-        <!-- Check mark -->
-        <path d="M128 74 L136 82 L154 64" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="1" fill="none"/>
-        <!-- AA text hint -->
-        <rect x="64" y="108" width="24" height="16" rx="4" fill="currentColor" opacity=".30"/>
-        <rect x="94" y="108" width="24" height="16" rx="4" fill="currentColor" opacity=".22"/>
+        <path d="M 80 74 Q 140 36 200 74 Q 140 112 80 74Z" stroke="currentColor" stroke-width="2.5" fill="currentColor" opacity=".15"/>
+        <path d="M 80 74 Q 140 36 200 74 Q 140 112 80 74Z" stroke="currentColor" stroke-width="2.5" fill="none" opacity=".55"/>
+        <circle cx="140" cy="74" r="18" fill="currentColor" opacity=".30"/>
+        <circle cx="140" cy="74" r="10" fill="currentColor" opacity=".55"/>
+        <!-- Checkmark badge -->
+        <circle cx="196" cy="112" r="14" fill="currentColor" opacity=".28"/>
+        <path d="M 189 112 L 194 117 L 203 107" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".80" fill="none"/>
         <!-- Contrast bars -->
-        <rect x="176" y="48" width="48" height="10" rx="5" fill="currentColor" opacity=".55"/>
-        <rect x="176" y="64" width="36" height="10" rx="5" fill="currentColor" opacity=".38"/>
-        <rect x="176" y="80" width="44" height="10" rx="5" fill="currentColor" opacity=".25"/>
+        <rect x="52" y="100" width="10" height="28" rx="3" fill="currentColor" opacity=".50"/>
+        <rect x="66" y="110" width="10" height="18" rx="3" fill="currentColor" opacity=".35"/>
+        <rect x="80" y="118" width="10" height="10" rx="3" fill="currentColor" opacity=".22"/>
       </svg>
     </div>
   </div>
@@ -10922,17 +10855,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     <div class="nav-card-visual nv-warning">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <!-- Text lines -->
-        <rect x="46" y="38" width="120" height="12" rx="6" fill="currentColor" opacity=".70"/>
-        <rect x="46" y="58" width="96" height="8" rx="4" fill="currentColor" opacity=".45"/>
-        <rect x="46" y="72" width="108" height="8" rx="4" fill="currentColor" opacity=".38"/>
-        <rect x="46" y="86" width="80" height="8" rx="4" fill="currentColor" opacity=".30"/>
-        <rect x="46" y="100" width="92" height="8" rx="4" fill="currentColor" opacity=".22"/>
+        <rect x="68" y="38" width="100" height="9" rx="4.5" fill="currentColor" opacity=".60"/>
+        <rect x="68" y="54" width="144" height="7" rx="3.5" fill="currentColor" opacity=".40"/>
+        <rect x="68" y="67" width="128" height="7" rx="3.5" fill="currentColor" opacity=".35"/>
+        <rect x="68" y="80" width="80" height="7" rx="3.5" fill="currentColor" opacity=".28"/>
         <!-- Quote mark -->
-        <text x="178" y="100" font-size="80" fill="currentColor" opacity=".20" font-family="Georgia, serif">"</text>
+        <text x="58" y="100" font-size="42" fill="currentColor" opacity=".22" font-family="serif">"</text>
         <!-- Pen nib -->
-        <path d="M196 42 L218 64 L210 72 L188 50 Z" fill="currentColor" opacity=".40"/>
-        <path d="M210 72 L214 82 L204 78 Z" fill="currentColor" opacity=".55"/>
-        <line x1="196" y1="42" x2="206" y2="32" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".35"/>
+        <path d="M 196 88 L 212 72 L 222 82 L 206 98 Z" fill="currentColor" opacity=".35"/>
+        <path d="M 196 88 L 206 98 L 200 110 Z" fill="currentColor" opacity=".50"/>
+        <line x1="212" y1="72" x2="226" y2="58" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".45"/>
+        <!-- Bottom text lines -->
+        <rect x="68" y="108" width="112" height="6" rx="3" fill="currentColor" opacity=".25"/>
+        <rect x="68" y="120" width="88" height="6" rx="3" fill="currentColor" opacity=".18"/>
       </svg>
     </div>
   </div>
@@ -10949,21 +10884,17 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     <div class="nav-card-visual nv-info">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <!-- Curly braces -->
-        <path d="M72 34 C60 34 56 42 56 50 L56 66 C56 74 50 78 44 78 C50 78 56 82 56 90 L56 106 C56 114 60 122 72 122" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".60"/>
-        <path d="M208 34 C220 34 224 42 224 50 L224 66 C224 74 230 78 236 78 C230 78 224 82 224 90 L224 106 C224 114 220 122 208 122" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".60"/>
-        <!-- Token entries -->
-        <rect x="98" y="52" width="32" height="7" rx="3.5" fill="currentColor" opacity=".65"/>
-        <rect x="136" y="52" width="2" height="7" rx="1" fill="currentColor" opacity=".40"/>
-        <rect x="144" y="52" width="36" height="7" rx="3.5" fill="currentColor" opacity=".45"/>
-        <rect x="98" y="67" width="28" height="7" rx="3.5" fill="currentColor" opacity=".55"/>
-        <rect x="136" y="67" width="2" height="7" rx="1" fill="currentColor" opacity=".40"/>
-        <rect x="144" y="67" width="20" height="7" rx="3.5" fill="currentColor" opacity=".38"/>
-        <rect x="98" y="82" width="36" height="7" rx="3.5" fill="currentColor" opacity=".45"/>
-        <rect x="136" y="82" width="2" height="7" rx="1" fill="currentColor" opacity=".40"/>
-        <rect x="144" y="82" width="28" height="7" rx="3.5" fill="currentColor" opacity=".32"/>
-        <rect x="98" y="97" width="24" height="7" rx="3.5" fill="currentColor" opacity=".38"/>
-        <rect x="136" y="97" width="2" height="7" rx="1" fill="currentColor" opacity=".40"/>
-        <rect x="144" y="97" width="40" height="7" rx="3.5" fill="currentColor" opacity=".28"/>
+        <path d="M 72 44 Q 62 44 62 54 L 62 64 Q 62 74 52 74 Q 62 74 62 84 L 62 94 Q 62 104 72 104" stroke="currentColor" stroke-width="2.5" fill="none" opacity=".55" stroke-linecap="round"/>
+        <path d="M 208 44 Q 218 44 218 54 L 218 64 Q 218 74 228 74 Q 218 74 218 84 L 218 94 Q 218 104 208 104" stroke="currentColor" stroke-width="2.5" fill="none" opacity=".55" stroke-linecap="round"/>
+        <!-- Token key-value rows -->
+        <rect x="84" y="52" width="44" height="7" rx="3.5" fill="currentColor" opacity=".45"/>
+        <rect x="134" y="52" width="56" height="7" rx="3.5" fill="currentColor" opacity=".30"/>
+        <rect x="84" y="66" width="36" height="7" rx="3.5" fill="currentColor" opacity=".40"/>
+        <rect x="126" y="66" width="48" height="7" rx="3.5" fill="currentColor" opacity=".28"/>
+        <rect x="84" y="80" width="52" height="7" rx="3.5" fill="currentColor" opacity=".38"/>
+        <rect x="142" y="80" width="40" height="7" rx="3.5" fill="currentColor" opacity=".25"/>
+        <rect x="84" y="94" width="40" height="7" rx="3.5" fill="currentColor" opacity=".30"/>
+        <rect x="130" y="94" width="60" height="7" rx="3.5" fill="currentColor" opacity=".20"/>
       </svg>
     </div>
   </div>
@@ -10979,25 +10910,28 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     </div>
     <div class="nav-card-visual nv-primary">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Four state buttons -->
-        <rect x="30" y="40" width="52" height="28" rx="8" fill="currentColor" opacity=".55"/>
-        <rect x="90" y="40" width="52" height="28" rx="8" fill="currentColor" opacity=".30"/>
-        <rect x="150" y="36" width="52" height="28" rx="8" stroke="currentColor" stroke-width="2.5" opacity=".55" fill="none"/>
-        <rect x="210" y="40" width="52" height="28" rx="8" fill="currentColor" opacity=".15"/>
+        <!-- Row of 4 state buttons -->
+        <!-- Default -->
+        <rect x="44" y="58" width="44" height="22" rx="6" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity=".12"/>
+        <rect x="52" y="65" width="28" height="7" rx="3.5" fill="currentColor" opacity=".45"/>
+        <!-- Hover -->
+        <rect x="98" y="55" width="44" height="22" rx="6" fill="currentColor" opacity=".25"/>
+        <rect x="106" y="62" width="28" height="7" rx="3.5" fill="currentColor" opacity=".60"/>
+        <!-- Pressed -->
+        <rect x="152" y="58" width="44" height="22" rx="6" fill="currentColor" opacity=".40"/>
+        <rect x="160" y="65" width="28" height="7" rx="3.5" fill="currentColor" opacity=".75"/>
+        <!-- Disabled -->
+        <rect x="206" y="58" width="44" height="22" rx="6" fill="currentColor" opacity=".08"/>
+        <rect x="214" y="65" width="28" height="7" rx="3.5" fill="currentColor" opacity=".22"/>
+        <!-- Focus ring on hover state -->
+        <rect x="95" y="52" width="50" height="28" rx="9" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".50" stroke-dasharray="3 2"/>
         <!-- Labels -->
-        <rect x="38" y="52" width="36" height="4" rx="2" fill="currentColor" opacity=".90"/>
-        <rect x="98" y="52" width="36" height="4" rx="2" fill="currentColor" opacity=".60"/>
-        <rect x="158" y="48" width="36" height="4" rx="2" fill="currentColor" opacity=".65"/>
-        <rect x="218" y="52" width="36" height="4" rx="2" fill="currentColor" opacity=".35"/>
-        <!-- State labels below -->
-        <rect x="32" y="78" width="48" height="6" rx="3" fill="currentColor" opacity=".35"/>
-        <rect x="92" y="78" width="48" height="6" rx="3" fill="currentColor" opacity=".28"/>
-        <rect x="152" y="78" width="48" height="6" rx="3" fill="currentColor" opacity=".28"/>
-        <rect x="212" y="78" width="48" height="6" rx="3" fill="currentColor" opacity=".22"/>
-        <!-- Focus ring highlight -->
-        <rect x="147" y="33" width="58" height="34" rx="11" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" opacity=".45" fill="none"/>
-        <!-- Cursor -->
-        <path d="M122 98 L130 120 L134 110 L144 114 Z" fill="currentColor" opacity=".50"/>
+        <rect x="50" y="84" width="32" height="5" rx="2.5" fill="currentColor" opacity=".25"/>
+        <rect x="104" y="84" width="32" height="5" rx="2.5" fill="currentColor" opacity=".35"/>
+        <rect x="158" y="84" width="32" height="5" rx="2.5" fill="currentColor" opacity=".40"/>
+        <rect x="212" y="84" width="32" height="5" rx="2.5" fill="currentColor" opacity=".18"/>
+        <!-- Cursor pointer on pressed -->
+        <path d="M 170 108 L 170 122 L 173 119 L 176 126 L 178 125 L 175 118 L 179 118 Z" fill="currentColor" opacity=".50"/>
       </svg>
     </div>
   </div>
@@ -11013,22 +10947,27 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     </div>
     <div class="nav-card-visual nv-neutral">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Grid columns -->
-        <rect x="28" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
-        <rect x="62" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
-        <rect x="96" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
-        <rect x="130" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
-        <rect x="164" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
-        <rect x="198" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
-        <rect x="232" y="30" width="20" height="88" rx="4" fill="currentColor" opacity=".20"/>
-        <!-- Content overlay -->
-        <rect x="28" y="38" width="62" height="72" rx="6" fill="currentColor" opacity=".38"/>
-        <rect x="96" y="38" width="130" height="72" rx="6" fill="currentColor" opacity=".28"/>
-        <rect x="232" y="38" width="20" height="72" rx="4" fill="currentColor" opacity=".20"/>
+        <!-- Grid columns (12-col simplified) -->
+        <rect x="36" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="54" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="72" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="90" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="108" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="126" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="144" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="162" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="180" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="198" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="216" y="36" width="14" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <rect x="234" y="36" width="10" height="76" rx="3" fill="currentColor" opacity=".18"/>
+        <!-- Content overlay (spanning cols) -->
+        <rect x="36" y="48" width="120" height="52" rx="6" fill="currentColor" opacity=".28"/>
+        <rect x="162" y="48" width="82" height="24" rx="6" fill="currentColor" opacity=".22"/>
+        <rect x="162" y="76" width="82" height="24" rx="6" fill="currentColor" opacity=".16"/>
         <!-- Breakpoint arrow -->
-        <line x1="28" y1="125" x2="252" y2="125" stroke="currentColor" stroke-width="1.5" opacity=".40"/>
-        <path d="M28 125 L36 120 M28 125 L36 130" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".40"/>
-        <path d="M252 125 L244 120 M252 125 L244 130" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".40"/>
+        <line x1="36" y1="128" x2="244" y2="128" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+        <path d="M 36 124 L 36 132" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+        <path d="M 244 124 L 244 132" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
       </svg>
     </div>
   </div>
@@ -11045,14 +10984,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     <div class="nav-card-visual nv-secondary">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <!-- Abstract A letterform -->
-        <path d="M90 118 L140 30 L190 118" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".55"/>
-        <line x1="108" y1="86" x2="172" y2="86" stroke="currentColor" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+        <path d="M 140 28 L 100 120 L 116 120 L 128 90 L 152 90 L 164 120 L 180 120 Z" fill="currentColor" opacity=".35"/>
+        <rect x="124" y="80" width="32" height="8" rx="4" fill="currentColor" opacity=".15"/>
+        <!-- Horizontal bar of A -->
+        <rect x="118" y="78" width="44" height="7" rx="3.5" fill="currentColor" opacity=".50"/>
         <!-- Clear space dashes -->
-        <rect x="64" y="20" width="152" height="108" rx="4" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 4" opacity=".28" fill="none"/>
-        <!-- Variant dots -->
-        <circle cx="52" cy="134" r="7" fill="currentColor" opacity=".45"/>
-        <rect x="64" y="127" width="14" height="14" rx="3" fill="currentColor" opacity=".30"/>
-        <rect x="83" y="129" width="14" height="10" rx="5" fill="currentColor" opacity=".20"/>
+        <line x1="76" y1="24" x2="92" y2="24" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity=".40"/>
+        <line x1="188" y1="24" x2="204" y2="24" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity=".40"/>
+        <line x1="76" y1="124" x2="92" y2="124" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity=".40"/>
+        <line x1="188" y1="124" x2="204" y2="124" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity=".40"/>
+        <line x1="76" y1="24" x2="76" y2="40" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity=".40"/>
+        <line x1="204" y1="24" x2="204" y2="40" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity=".40"/>
+        <line x1="76" y1="108" x2="76" y2="124" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity=".40"/>
+        <line x1="204" y1="108" x2="204" y2="124" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" opacity=".40"/>
       </svg>
     </div>
   </div>
@@ -11068,19 +11012,23 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     </div>
     <div class="nav-card-visual nv-neutral">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Checklist -->
-        <rect x="52" y="28" width="140" height="96" rx="10" fill="currentColor" opacity=".15"/>
-        <!-- Check rows -->
-        <circle cx="72" cy="52" r="7" fill="currentColor" opacity=".55"/>
-        <path d="M68 52 L71 55 L77 48" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9"/>
-        <rect x="86" y="48" width="90" height="7" rx="3.5" fill="currentColor" opacity=".45"/>
-        <circle cx="72" cy="74" r="7" fill="currentColor" opacity=".45"/>
-        <path d="M68 74 L71 77 L77 70" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9"/>
-        <rect x="86" y="70" width="74" height="7" rx="3.5" fill="currentColor" opacity=".35"/>
-        <circle cx="72" cy="96" r="7" fill="currentColor" opacity=".30"/>
-        <rect x="86" y="92" width="82" height="7" rx="3.5" fill="currentColor" opacity=".28"/>
-        <!-- Decorative arrow right -->
-        <path d="M206 74 L228 74 L220 66 M228 74 L220 82" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".38" fill="none"/>
+        <!-- Checklist items -->
+        <circle cx="74" cy="46" r="8" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity=".15"/>
+        <path d="M 70 46 L 73 49 L 79 43" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".65" fill="none"/>
+        <rect x="90" y="42" width="100" height="7" rx="3.5" fill="currentColor" opacity=".50"/>
+
+        <circle cx="74" cy="68" r="8" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity=".15"/>
+        <path d="M 70 68 L 73 71 L 79 65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".65" fill="none"/>
+        <rect x="90" y="64" width="120" height="7" rx="3.5" fill="currentColor" opacity=".45"/>
+
+        <circle cx="74" cy="90" r="8" stroke="currentColor" stroke-width="1.5" fill="currentColor" opacity=".15"/>
+        <path d="M 70 90 L 73 93 L 79 87" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".65" fill="none"/>
+        <rect x="90" y="86" width="88" height="7" rx="3.5" fill="currentColor" opacity=".38"/>
+
+        <circle cx="74" cy="112" r="8" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".30"/>
+        <rect x="90" y="108" width="108" height="7" rx="3.5" fill="currentColor" opacity=".25"/>
+        <!-- Arrow to the right on last item -->
+        <path d="M 210 112 L 222 112 M 218 108 L 222 112 L 218 116" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".45" fill="none"/>
       </svg>
     </div>
   </div>
@@ -11104,15 +11052,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     </div>
     <div class="nav-card-visual nv-primary">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Color swatch grid -->
-        <rect x="40" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".80"/>
-        <rect x="88" y="30" width="40" height="40" rx="10" fill="currentColor" opacity=".55"/>
-        <rect x="136" y="30" width="40" height="40" rx="4" fill="currentColor" opacity=".38"/>
-        <rect x="184" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".22"/>
-        <rect x="40" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".22"/>
-        <rect x="88" y="78" width="40" height="40" rx="20" fill="currentColor" opacity=".38"/>
-        <rect x="136" y="78" width="40" height="40" rx="10" fill="currentColor" opacity=".55"/>
-        <rect x="184" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".75"/>
+        <!-- Color swatch grid — 4×3 circles -->
+        <circle cx="80"  cy="50" r="18" fill="currentColor" opacity=".70"/>
+        <circle cx="116" cy="50" r="18" fill="currentColor" opacity=".50"/>
+        <circle cx="152" cy="50" r="18" fill="currentColor" opacity=".35"/>
+        <circle cx="188" cy="50" r="18" fill="currentColor" opacity=".20"/>
+        <circle cx="80"  cy="90" r="18" fill="currentColor" opacity=".55"/>
+        <circle cx="116" cy="90" r="18" fill="currentColor" opacity=".38"/>
+        <circle cx="152" cy="90" r="18" fill="currentColor" opacity=".25"/>
+        <circle cx="188" cy="90" r="18" fill="currentColor" opacity=".14"/>
+        <circle cx="80"  cy="130" r="12" fill="currentColor" opacity=".40"/>
+        <circle cx="116" cy="130" r="12" fill="currentColor" opacity=".28"/>
+        <circle cx="152" cy="130" r="12" fill="currentColor" opacity=".18"/>
+        <circle cx="188" cy="130" r="12" fill="currentColor" opacity=".10"/>
       </svg>
     </div>
   </div>
@@ -11128,13 +11080,23 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     </div>
     <div class="nav-card-visual nv-neutral">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Stacked cards with growing shadow -->
-        <rect x="90" y="88" width="100" height="40" rx="8" fill="currentColor" opacity=".08"/>
-        <rect x="80" y="76" width="100" height="40" rx="8" fill="currentColor" opacity=".14"/>
-        <rect x="70" y="64" width="100" height="40" rx="8" fill="currentColor" opacity=".22"/>
-        <rect x="60" y="50" width="100" height="40" rx="8" fill="currentColor" opacity=".35"/>
-        <rect x="50" y="36" width="100" height="40" rx="8" fill="currentColor" opacity=".55"/>
-        <rect x="42" y="28" width="100" height="40" rx="8" fill="currentColor" opacity=".70"/>
+        <!-- Stacked cards showing growing shadow -->
+        <!-- Shadow layer 3 (deepest) -->
+        <rect x="96" y="102" width="120" height="34" rx="8" fill="currentColor" opacity=".08"/>
+        <!-- Card 3 -->
+        <rect x="92" y="94" width="120" height="34" rx="8" fill="currentColor" opacity=".14"/>
+        <!-- Shadow layer 2 -->
+        <rect x="80" y="72" width="120" height="34" rx="8" fill="currentColor" opacity=".12"/>
+        <!-- Card 2 -->
+        <rect x="76" y="64" width="120" height="34" rx="8" fill="currentColor" opacity=".22"/>
+        <rect x="86" y="71" width="60" height="6" rx="3" fill="currentColor" opacity=".40"/>
+        <rect x="86" y="82" width="80" height="5" rx="2.5" fill="currentColor" opacity=".25"/>
+        <!-- Shadow layer 1 (shallowest) -->
+        <rect x="62" y="42" width="120" height="34" rx="8" fill="currentColor" opacity=".18"/>
+        <!-- Card 1 (top) -->
+        <rect x="58" y="34" width="120" height="34" rx="8" fill="currentColor" opacity=".35"/>
+        <rect x="68" y="41" width="60" height="6" rx="3" fill="currentColor" opacity=".60"/>
+        <rect x="68" y="52" width="80" height="5" rx="2.5" fill="currentColor" opacity=".38"/>
       </svg>
     </div>
   </div>
@@ -11148,32 +11110,27 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="nav-card-title">Icons</div>
       <div class="nav-card-desc">Lucide icon set — usage, sizing, and accessibility.</div>
     </div>
-    <div class="nav-card-visual nv-tertiary">
+    <div class="nav-card-visual nv-warning">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Icon grid (abstract icon shapes) -->
+        <!-- 3×3 icon grid, each a simple lucide-style icon -->
         <!-- Row 1 -->
-        <circle cx="68" cy="52" r="14" stroke="currentColor" stroke-width="2" opacity=".55" fill="none"/>
-        <path d="M62 52 C62 48 74 48 74 52 C74 56 68 58 68 58 C68 58 68 58 68 60" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55" fill="none"/>
-        <circle cx="68" cy="64" r="1.5" fill="currentColor" opacity=".55"/>
-
-        <rect x="104" y="38" width="28" height="28" rx="4" stroke="currentColor" stroke-width="2" opacity=".45" fill="none"/>
-        <path d="M110 52 L114 56 L122 46" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".45" fill="none"/>
-
-        <path d="M152 38 L160 52 L152 66 L168 66 L168 52 Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".40" fill="none"/>
-
-        <circle cx="210" cy="52" r="12" fill="currentColor" opacity=".18"/>
-        <path d="M204 52 L210 46 L216 52 L210 58 Z" fill="currentColor" opacity=".45"/>
-
+        <!-- Home icon -->
+        <path d="M 68 58 L 80 48 L 92 58 L 92 70 L 68 70 Z" stroke="currentColor" stroke-width="1.8" fill="none" opacity=".55" stroke-linejoin="round"/>
+        <rect x="74" y="62" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".45"/>
+        <!-- Search icon -->
+        <circle cx="130" cy="58" r="9" stroke="currentColor" stroke-width="1.8" fill="none" opacity=".55"/>
+        <line x1="136" y1="64" x2="142" y2="70" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+        <!-- Bell icon -->
+        <path d="M 192 50 Q 192 44 198 44 Q 204 44 204 50 L 204 62 Q 207 64 207 68 L 189 68 Q 189 64 192 62 Z" stroke="currentColor" stroke-width="1.8" fill="none" opacity=".55"/>
+        <path d="M 195 68 Q 195 72 198 72 Q 201 72 201 68" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".45"/>
         <!-- Row 2 -->
-        <path d="M54 90 L82 90 M68 76 L68 104" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".38"/>
-        <rect x="56" y="85" width="24" height="10" rx="5" fill="currentColor" opacity=".18"/>
-
-        <path d="M104 90 C104 82 118 82 118 90 L118 98 C118 106 104 106 104 98 Z" fill="currentColor" opacity=".35"/>
-
-        <circle cx="160" cy="90" r="14" stroke="currentColor" stroke-width="2" opacity=".35" fill="none"/>
-        <circle cx="160" cy="90" r="5" fill="currentColor" opacity=".45"/>
-
-        <path d="M196 80 L196 100 L224 100 L224 80 Z M196 80 L210 92 L224 80" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".38" fill="none"/>
+        <!-- Settings -->
+        <circle cx="80" cy="96" r="7" stroke="currentColor" stroke-width="1.8" fill="none" opacity=".45"/>
+        <circle cx="80" cy="96" r="3" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".35"/>
+        <!-- Heart -->
+        <path d="M 126 90 Q 124 86 120 87 Q 116 88 116 93 Q 116 98 126 104 Q 136 98 136 93 Q 136 88 132 87 Q 128 86 126 90Z" stroke="currentColor" stroke-width="1.8" fill="none" opacity=".45"/>
+        <!-- Star -->
+        <path d="M 198 87 L 200 93 L 206 93 L 201 97 L 203 103 L 198 99 L 193 103 L 195 97 L 190 93 L 196 93 Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".40"/>
       </svg>
     </div>
   </div>
@@ -11187,16 +11144,22 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="nav-card-title">Illustrations</div>
       <div class="nav-card-desc">Style principles and usage guidelines.</div>
     </div>
-    <div class="nav-card-visual nv-warning">
+    <div class="nav-card-visual nv-success">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Organic blob shapes -->
-        <path d="M80 90 C60 80 55 55 75 44 C95 33 118 45 120 65 C122 85 100 100 80 90Z" fill="currentColor" opacity=".45"/>
-        <path d="M150 100 C128 96 118 74 130 58 C142 42 170 44 178 62 C186 80 172 104 150 100Z" fill="currentColor" opacity=".32"/>
-        <path d="M196 80 C184 68 186 50 200 44 C214 38 228 50 226 64 C224 78 208 92 196 80Z" fill="currentColor" opacity=".22"/>
-        <!-- Paint dot -->
-        <circle cx="88" cy="35" r="8" fill="currentColor" opacity=".55"/>
-        <circle cx="106" cy="28" r="5" fill="currentColor" opacity=".38"/>
-        <circle cx="120" cy="35" r="3" fill="currentColor" opacity=".25"/>
+        <!-- Abstract illustration shapes — layered organic forms -->
+        <ellipse cx="110" cy="90" rx="62" ry="48" fill="currentColor" opacity=".14"/>
+        <ellipse cx="170" cy="72" rx="52" ry="42" fill="currentColor" opacity=".18"/>
+        <ellipse cx="140" cy="100" rx="38" ry="28" fill="currentColor" opacity=".24"/>
+        <!-- Accent circle -->
+        <circle cx="176" cy="52" r="18" fill="currentColor" opacity=".30"/>
+        <!-- Sun/star accent -->
+        <circle cx="96" cy="54" r="12" fill="currentColor" opacity=".22"/>
+        <line x1="96" y1="36" x2="96" y2="42" stroke="currentColor" stroke-width="2" opacity=".35" stroke-linecap="round"/>
+        <line x1="96" y1="66" x2="96" y2="72" stroke="currentColor" stroke-width="2" opacity=".35" stroke-linecap="round"/>
+        <line x1="78" y1="54" x2="84" y2="54" stroke="currentColor" stroke-width="2" opacity=".35" stroke-linecap="round"/>
+        <line x1="108" y1="54" x2="114" y2="54" stroke="currentColor" stroke-width="2" opacity=".35" stroke-linecap="round"/>
+        <!-- Ground line -->
+        <line x1="44" y1="124" x2="236" y2="124" stroke="currentColor" stroke-width="1.5" opacity=".25"/>
       </svg>
     </div>
   </div>
@@ -11212,22 +11175,21 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     </div>
     <div class="nav-card-visual nv-info">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Easing curve -->
-        <path d="M44 118 C44 118 80 118 120 50 C160 -18 216 30 236 30" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none" opacity=".65"/>
-        <!-- Axis lines -->
-        <line x1="44" y1="30" x2="44" y2="118" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
-        <line x1="44" y1="118" x2="236" y2="118" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
-        <!-- Duration markers -->
-        <circle cx="44" cy="118" r="5" fill="currentColor" opacity=".55"/>
-        <circle cx="236" cy="30" r="5" fill="currentColor" opacity=".55"/>
-        <!-- Tick marks -->
-        <line x1="100" y1="115" x2="100" y2="121" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
-        <line x1="156" y1="115" x2="156" y2="121" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
-        <line x1="212" y1="115" x2="212" y2="121" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
-        <!-- Labels -->
-        <rect x="86" y="126" width="28" height="6" rx="3" fill="currentColor" opacity=".28"/>
-        <rect x="142" y="126" width="28" height="6" rx="3" fill="currentColor" opacity=".22"/>
-        <rect x="200" y="126" width="28" height="6" rx="3" fill="currentColor" opacity=".18"/>
+        <!-- Easing curve axes -->
+        <line x1="60" y1="28" x2="60" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
+        <line x1="60" y1="120" x2="220" y2="120" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
+        <!-- Ease-out curve (fast then slow) -->
+        <path d="M 60 120 C 80 60, 120 36, 220 28" stroke="currentColor" stroke-width="2.5" fill="none" opacity=".60" stroke-linecap="round"/>
+        <!-- Ease-in curve (slow then fast) -->
+        <path d="M 60 120 C 140 116, 180 80, 220 28" stroke="currentColor" stroke-width="2" fill="none" opacity=".35" stroke-linecap="round" stroke-dasharray="5 3"/>
+        <!-- Control point dots -->
+        <circle cx="80" cy="60" r="4" fill="currentColor" opacity=".50"/>
+        <circle cx="120" cy="36" r="4" fill="currentColor" opacity=".40"/>
+        <!-- Motion trail dots on the main curve -->
+        <circle cx="100" cy="89" r="3" fill="currentColor" opacity=".35"/>
+        <circle cx="140" cy="66" r="3.5" fill="currentColor" opacity=".45"/>
+        <circle cx="180" cy="46" r="4" fill="currentColor" opacity=".55"/>
+        <circle cx="220" cy="28" r="5" fill="currentColor" opacity=".65"/>
       </svg>
     </div>
   </div>
@@ -11243,19 +11205,20 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     </div>
     <div class="nav-card-visual nv-secondary">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Radius progression -->
-        <rect x="28" y="44" width="42" height="42" rx="0" fill="currentColor" opacity=".45"/>
-        <rect x="82" y="44" width="42" height="42" rx="4" fill="currentColor" opacity=".42"/>
-        <rect x="136" y="44" width="42" height="42" rx="10" fill="currentColor" opacity=".40"/>
-        <rect x="190" y="44" width="42" height="42" rx="21" fill="currentColor" opacity=".38"/>
-        <!-- Radius indicator arcs -->
-        <path d="M28 56 L28 44 L40 44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".75"/>
-        <path d="M82 56 C82 49.4 87.4 44 94 44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".65"/>
+        <!-- Radius progression: sharp → pill, same base rectangle form -->
+        <!-- r=0 (sharp) -->
+        <rect x="40" y="52" width="36" height="36" rx="0" stroke="currentColor" stroke-width="2" fill="currentColor" opacity=".15"/>
+        <!-- r=4 -->
+        <rect x="88" y="52" width="36" height="36" rx="4" stroke="currentColor" stroke-width="2" fill="currentColor" opacity=".20"/>
+        <!-- r=10 -->
+        <rect x="136" y="52" width="36" height="36" rx="10" stroke="currentColor" stroke-width="2" fill="currentColor" opacity=".28"/>
+        <!-- r=18 (full pill) -->
+        <rect x="184" y="52" width="56" height="36" rx="18" stroke="currentColor" stroke-width="2" fill="currentColor" opacity=".35"/>
         <!-- Labels -->
-        <rect x="36" y="92" width="26" height="6" rx="3" fill="currentColor" opacity=".35"/>
-        <rect x="90" y="92" width="26" height="6" rx="3" fill="currentColor" opacity=".30"/>
-        <rect x="144" y="92" width="26" height="6" rx="3" fill="currentColor" opacity=".25"/>
-        <rect x="198" y="92" width="26" height="6" rx="3" fill="currentColor" opacity=".22"/>
+        <rect x="44" y="96" width="28" height="5" rx="2.5" fill="currentColor" opacity=".28"/>
+        <rect x="92" y="96" width="28" height="5" rx="2.5" fill="currentColor" opacity=".32"/>
+        <rect x="140" y="96" width="28" height="5" rx="2.5" fill="currentColor" opacity=".38"/>
+        <rect x="192" y="96" width="40" height="5" rx="2.5" fill="currentColor" opacity=".45"/>
       </svg>
     </div>
   </div>
@@ -11271,21 +11234,30 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     </div>
     <div class="nav-card-visual nv-neutral">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Spacing scale bars -->
-        <rect x="40" y="44" width="4" height="64" rx="2" fill="currentColor" opacity=".65"/>
-        <rect x="52" y="56" width="8" height="52" rx="2" fill="currentColor" opacity=".58"/>
-        <rect x="68" y="64" width="12" height="44" rx="2" fill="currentColor" opacity=".52"/>
-        <rect x="88" y="68" width="16" height="40" rx="2" fill="currentColor" opacity=".46"/>
-        <rect x="112" y="72" width="20" height="36" rx="2" fill="currentColor" opacity=".40"/>
-        <rect x="140" y="74" width="24" height="34" rx="2" fill="currentColor" opacity=".35"/>
-        <rect x="172" y="76" width="28" height="32" rx="2" fill="currentColor" opacity=".28"/>
-        <rect x="208" y="78" width="32" height="30" rx="2" fill="currentColor" opacity=".22"/>
+        <!-- Spacing scale — growing blocks with dimension lines -->
+        <!-- Block 1: 4px -->
+        <rect x="44" y="80" width="4" height="36" rx="2" fill="currentColor" opacity=".45"/>
+        <line x1="44" y1="76" x2="48" y2="76" stroke="currentColor" stroke-width="1.5" opacity=".38"/>
+        <!-- Block 2: 8px -->
+        <rect x="56" y="72" width="8" height="44" rx="2" fill="currentColor" opacity=".45"/>
+        <line x1="56" y1="68" x2="64" y2="68" stroke="currentColor" stroke-width="1.5" opacity=".38"/>
+        <!-- Block 3: 12px -->
+        <rect x="72" y="64" width="12" height="52" rx="2" fill="currentColor" opacity=".45"/>
+        <line x1="72" y1="60" x2="84" y2="60" stroke="currentColor" stroke-width="1.5" opacity=".38"/>
+        <!-- Block 4: 16px -->
+        <rect x="92" y="56" width="16" height="60" rx="2" fill="currentColor" opacity=".45"/>
+        <line x1="92" y1="52" x2="108" y2="52" stroke="currentColor" stroke-width="1.5" opacity=".38"/>
+        <!-- Block 5: 24px -->
+        <rect x="116" y="44" width="24" height="72" rx="2" fill="currentColor" opacity=".45"/>
+        <line x1="116" y1="40" x2="140" y2="40" stroke="currentColor" stroke-width="1.5" opacity=".38"/>
+        <!-- Block 6: 32px -->
+        <rect x="148" y="32" width="32" height="84" rx="2" fill="currentColor" opacity=".45"/>
+        <line x1="148" y1="28" x2="180" y2="28" stroke="currentColor" stroke-width="1.5" opacity=".38"/>
+        <!-- Block 7: 48px -->
+        <rect x="188" y="20" width="48" height="96" rx="2" fill="currentColor" opacity=".35"/>
+        <line x1="188" y1="16" x2="236" y2="16" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
         <!-- Baseline -->
-        <line x1="36" y1="108" x2="248" y2="108" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
-        <!-- Arrow span -->
-        <path d="M36 120 L248 120" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
-        <path d="M36 120 L44 115 M36 120 L44 125" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
-        <path d="M248 120 L240 115 M248 120 L240 125" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+        <line x1="40" y1="116" x2="240" y2="116" stroke="currentColor" stroke-width="1.5" opacity=".28"/>
       </svg>
     </div>
   </div>
@@ -11299,17 +11271,21 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="nav-card-title">Typography</div>
       <div class="nav-card-desc">Epilogue, Inter, and DM Mono — complete type scale.</div>
     </div>
-    <div class="nav-card-visual nv-primary">
+    <div class="nav-card-visual nv-tertiary">
       <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Large E letterform -->
-        <path d="M52 30 L52 118 L132 118 L132 103 L70 103 L70 82 L122 82 L122 67 L70 67 L70 45 L132 45 L132 30 Z" fill="currentColor" opacity=".45"/>
-        <!-- Type scale bars -->
-        <rect x="152" y="30" width="88" height="14" rx="4" fill="currentColor" opacity=".55"/>
-        <rect x="152" y="52" width="72" height="11" rx="3.5" fill="currentColor" opacity=".42"/>
-        <rect x="152" y="70" width="80" height="9" rx="3" fill="currentColor" opacity=".33"/>
-        <rect x="152" y="86" width="64" height="8" rx="3" fill="currentColor" opacity=".26"/>
-        <rect x="152" y="101" width="76" height="7" rx="2.5" fill="currentColor" opacity=".20"/>
-        <rect x="152" y="115" width="56" height="6" rx="2.5" fill="currentColor" opacity=".15"/>
+        <!-- Display / heading size — large text bar -->
+        <rect x="44" y="28" width="160" height="18" rx="4" fill="currentColor" opacity=".60"/>
+        <!-- H1 -->
+        <rect x="44" y="54" width="120" height="13" rx="3" fill="currentColor" opacity=".48"/>
+        <!-- H2 -->
+        <rect x="44" y="74" width="96" height="10" rx="3" fill="currentColor" opacity=".38"/>
+        <!-- Body -->
+        <rect x="44" y="92" width="180" height="8" rx="3" fill="currentColor" opacity=".28"/>
+        <rect x="44" y="105" width="164" height="8" rx="3" fill="currentColor" opacity=".24"/>
+        <rect x="44" y="118" width="80" height="8" rx="3" fill="currentColor" opacity=".20"/>
+        <!-- Mono label -->
+        <rect x="44" y="133" width="64" height="6" rx="3" fill="currentColor" opacity=".30"/>
+        <rect x="114" y="133" width="44" height="6" rx="3" fill="currentColor" opacity=".22"/>
       </svg>
     </div>
   </div>
