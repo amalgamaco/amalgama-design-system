@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="logos.html" class="docs-nav-item">Logos</a>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item active">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Input
+      </div>
+    </header>
+    <div class="docs-content">
+
+      <h1 class="docs-page-title">Input</h1>
+      <p class="docs-page-desc">Campos de texto para formularios con labels, validacion y layouts.</p>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Instalacion</h2>
+        <p class="docs-section-desc">Copia <code>input.tsx</code> a tu proyecto en <code>components/ui/input.tsx</code></p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import { cn } from &quot;@/lib/utils&quot;
+
+export interface InputProps
+  extends React.InputHTMLAttributes&lt;HTMLInputElement&gt; {
+  label?: string
+  required?: boolean
+}
+
+const Input = React.forwardRef&lt;HTMLInputElement, InputProps&gt;(
+  ({ className, label, required, type, ...props }, ref) =&gt; {
+    const input = (
+      &lt;input
+        type={type}
+        ref={ref}
+        className={cn(&quot;field-input&quot;, className)}
+        {...props}
+      /&gt;
+    )
+
+    if (!label) return input
+
+    return (
+      &lt;div className=&quot;field-group&quot;&gt;
+        &lt;label className=&quot;field-label&quot;&gt;
+          {label}
+          {required &amp;&amp; &lt;span className=&quot;field-required&quot;&gt;*&lt;/span&gt;}
+        &lt;/label&gt;
+        {input}
+      &lt;/div&gt;
+    )
+  }
+)
+Input.displayName = &quot;Input&quot;
+
+export { Input }</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>css/variables.css
+css/components/form.css</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { Input } from &quot;@/components/ui/input&quot;
+
+&lt;Input label=&quot;Nombre&quot; placeholder=&quot;Ej: Maria Garcia&quot; required /&gt;
+&lt;Input placeholder=&quot;Sin label...&quot; /&gt;
+&lt;Input label=&quot;Email&quot; type=&quot;email&quot; disabled /&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Basico -->
+      <section class="docs-section">
+        <h2>Basico</h2>
+        <div class="docs-preview">
+          <div class="field-group">
+            <label class="field-label">Nombre completo</label>
+            <input type="text" class="field-input">
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;div class=&quot;field-group&quot;&gt;
+  &lt;label class=&quot;field-label&quot;&gt;Nombre completo&lt;/label&gt;
+  &lt;input type=&quot;text&quot; class=&quot;field-input&quot;&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Con placeholder -->
+      <section class="docs-section">
+        <h2>Con placeholder</h2>
+        <div class="docs-preview">
+          <input type="text" class="field-input" placeholder="Escribe aqui...">
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;input type=&quot;text&quot; class=&quot;field-input&quot; placeholder=&quot;Escribe aqui...&quot;&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Required -->
+      <section class="docs-section">
+        <h2>Required</h2>
+        <div class="docs-preview">
+          <div class="field-group">
+            <label class="field-label">Correo electronico <span class="field-required">*</span></label>
+            <input type="email" class="field-input" required>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;div class=&quot;field-group&quot;&gt;
+  &lt;label class=&quot;field-label&quot;&gt;Correo electronico &lt;span class=&quot;field-required&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+  &lt;input type=&quot;email&quot; class=&quot;field-input&quot; required&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Disabled -->
+      <section class="docs-section">
+        <h2>Disabled</h2>
+        <div class="docs-preview">
+          <input type="text" class="field-input" disabled value="No editable">
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;input type=&quot;text&quot; class=&quot;field-input&quot; disabled value=&quot;No editable&quot;&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Focus state -->
+      <section class="docs-section">
+        <h2>Focus state</h2>
+        <p class="docs-page-desc">Los inputs reciben un borde de acento y un anillo de resplandor (glow ring) al hacer focus. Haz clic en el campo para ver el efecto.</p>
+        <div class="docs-preview">
+          <input type="text" class="field-input" placeholder="Haz clic aqui para ver el focus...">
+        </div>
+      </section>
+
+      <!-- Grid de formulario -->
+      <section class="docs-section">
+        <h2>Grid de formulario</h2>
+        <div class="docs-preview">
+          <div class="fields-grid">
+            <div class="field-group">
+              <label class="field-label">Nombre</label>
+              <input type="text" class="field-input">
+            </div>
+            <div class="field-group">
+              <label class="field-label">Apellido</label>
+              <input type="text" class="field-input">
+            </div>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;div class=&quot;fields-grid&quot;&gt;
+  &lt;div class=&quot;field-group&quot;&gt;
+    &lt;label class=&quot;field-label&quot;&gt;Nombre&lt;/label&gt;
+    &lt;input type=&quot;text&quot; class=&quot;field-input&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;field-group&quot;&gt;
+    &lt;label class=&quot;field-label&quot;&gt;Apellido&lt;/label&gt;
+    &lt;input type=&quot;text&quot; class=&quot;field-input&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Number Input -->
+      <section class="docs-section">
+        <h2>Number Input</h2>
+        <div class="docs-preview">
+          <div class="number-input-wrapper">
+            <button class="number-input-btn" type="button">-</button>
+            <input type="number" class="field-input" value="3">
+            <button class="number-input-btn" type="button">+</button>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;div class=&quot;number-input-wrapper&quot;&gt;
+  &lt;button class=&quot;number-input-btn&quot; type=&quot;button&quot;&gt;-&lt;/button&gt;
+  &lt;input type=&quot;number&quot; class=&quot;field-input&quot; value=&quot;3&quot;&gt;
+  &lt;button class=&quot;number-input-btn&quot; type=&quot;button&quot;&gt;+&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Date Input -->
+      <section class="docs-section">
+        <h2>Date Input</h2>
+        <div class="docs-preview">
+          <div class="date-input-wrapper">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <input type="date" class="field-input">
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <button class="docs-copy-btn">Copiar</button>
+          <pre class="docs-code"><code>&lt;div class=&quot;date-input-wrapper&quot;&gt;
+  &lt;svg width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+    &lt;rect x=&quot;3&quot; y=&quot;4&quot; width=&quot;18&quot; height=&quot;18&quot; rx=&quot;2&quot; ry=&quot;2&quot;/&gt;
+    &lt;line x1=&quot;16&quot; y1=&quot;2&quot; x2=&quot;16&quot; y2=&quot;6&quot;/&gt;
+    &lt;line x1=&quot;8&quot; y1=&quot;2&quot; x2=&quot;8&quot; y2=&quot;6&quot;/&gt;
+    &lt;line x1=&quot;3&quot; y1=&quot;10&quot; x2=&quot;21&quot; y2=&quot;10&quot;/&gt;
+  &lt;/svg&gt;
+  &lt;input type=&quot;date&quot; class=&quot;field-input&quot;&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

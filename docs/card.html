@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+
+  <!-- Sidebar -->
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="logos.html" class="docs-nav-item">Logos</a>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item active">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">Amalgama DS</a>
+        <span class="separator">/</span>
+        Card
+      </div>
+    </header>
+    <div class="docs-content">
+
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Card</h1>
+        <p class="docs-page-desc">Contenedor base para agrupar contenido relacionado.</p>
+      </div>
+
+      <!-- Instalacion TSX -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Instalacion</h2>
+        <p class="docs-section-desc">Copia <code>card.tsx</code> a tu proyecto en <code>components/ui/card.tsx</code></p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import { cn } from &quot;@/lib/utils&quot;
+
+const Card = React.forwardRef&lt;
+  HTMLDivElement,
+  React.HTMLAttributes&lt;HTMLDivElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;div ref={ref} className={cn(&quot;card&quot;, className)} {...props} /&gt;
+))
+Card.displayName = &quot;Card&quot;
+
+const FormCard = React.forwardRef&lt;
+  HTMLDivElement,
+  React.HTMLAttributes&lt;HTMLDivElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;div ref={ref} className={cn(&quot;form-card&quot;, className)} {...props} /&gt;
+))
+FormCard.displayName = &quot;FormCard&quot;
+
+const FormCardTitle = React.forwardRef&lt;
+  HTMLDivElement,
+  React.HTMLAttributes&lt;HTMLDivElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;div ref={ref} className={cn(&quot;form-card-title&quot;, className)} {...props} /&gt;
+))
+FormCardTitle.displayName = &quot;FormCardTitle&quot;
+
+const FormCardDescription = React.forwardRef&lt;
+  HTMLParagraphElement,
+  React.HTMLAttributes&lt;HTMLParagraphElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;p ref={ref} className={cn(&quot;form-card-desc&quot;, className)} {...props} /&gt;
+))
+FormCardDescription.displayName = &quot;FormCardDescription&quot;
+
+export { Card, FormCard, FormCardTitle, FormCardDescription }</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>Dependencias</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>CSS requerido</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>css/variables.css
+css/components/card.css
+css/components/form.css</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>Ejemplo de uso</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { Card, FormCard, FormCardTitle, FormCardDescription } from &quot;@/components/ui/card&quot;
+
+&lt;Card&gt;Contenido simple&lt;/Card&gt;
+
+&lt;FormCard&gt;
+  &lt;FormCardTitle&gt;Informacion basica&lt;/FormCardTitle&gt;
+  &lt;FormCardDescription&gt;Completa los datos del puesto.&lt;/FormCardDescription&gt;
+  {/* form fields here */}
+&lt;/FormCard&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Card basica -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Card basica</h2>
+        <div class="docs-preview">
+          <div class="card">Contenido de la tarjeta con padding y borde.</div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="card"&gt;Contenido de la tarjeta con padding y borde.&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Form Card -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Form Card</h2>
+        <div class="docs-preview column">
+          <div class="form-card">
+            <div class="form-card-title">Informacion general</div>
+            <div class="form-card-desc">Completa los datos basicos de la vacante.</div>
+            <div class="field-group">
+              <label class="field-label">Titulo del puesto</label>
+              <input class="field-input" placeholder="Ej: Disenador UX Senior">
+            </div>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="form-card"&gt;
+  &lt;div class="form-card-title"&gt;Informacion general&lt;/div&gt;
+  &lt;div class="form-card-desc"&gt;Completa los datos basicos de la vacante.&lt;/div&gt;
+  &lt;div class="field-group"&gt;
+    &lt;label class="field-label"&gt;Titulo del puesto&lt;/label&gt;
+    &lt;input class="field-input" placeholder="Ej: Disenador UX Senior"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

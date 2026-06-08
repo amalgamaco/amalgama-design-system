@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avatar — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="logos.html" class="docs-nav-item">Logos</a>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item active">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Avatar
+      </div>
+    </header>
+    <div class="docs-content">
+
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Avatar</h1>
+        <p class="docs-page-desc">Indicador visual de usuario con iniciales y colores de gradiente.</p>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Avatar principal (32px)</h2>
+        <p class="docs-section-desc">Usado en el topbar y en contextos donde se necesita identificar al usuario actual.</p>
+        <div class="docs-preview">
+          <div class="avatar">MG</div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="avatar"&gt;MG&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Avatares de asignado (22px)</h2>
+        <p class="docs-section-desc">Para mostrar asignados en tarjetas de vacantes. Disponible en 4 colores.</p>
+        <div class="docs-preview">
+          <div style="display:flex;gap:8px;align-items:center">
+            <div class="assignee-avatar">CL</div>
+            <div class="assignee-avatar blue">MG</div>
+            <div class="assignee-avatar green">AP</div>
+            <div class="assignee-avatar purple">JR</div>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="assignee-avatar"&gt;CL&lt;/div&gt;
+&lt;div class="assignee-avatar blue"&gt;MG&lt;/div&gt;
+&lt;div class="assignee-avatar green"&gt;AP&lt;/div&gt;
+&lt;div class="assignee-avatar purple"&gt;JR&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Avatar de persona (44px)</h2>
+        <p class="docs-section-desc">Tamano grande para tarjetas de persona y perfiles.</p>
+        <div class="docs-preview">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--secondary-900),var(--secondary-500));display:flex;align-items:center;justify-content:center;color:var(--color-on-primary);font-size:15px;font-weight:600">MG</div>
+            <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--success-500),var(--success-300));display:flex;align-items:center;justify-content:center;color:var(--color-on-primary);font-size:15px;font-weight:600">CL</div>
+            <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--tertiary-900),var(--tertiary-700));display:flex;align-items:center;justify-content:center;color:var(--color-on-primary);font-size:15px;font-weight:600">AM</div>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="person-avatar"&gt;MG&lt;/div&gt;
+
+&lt;!-- person-avatar se define dentro de .person-card --&gt;
+&lt;!-- Gradientes disponibles (usar tokens): --&gt;
+&lt;!-- Azul:   linear-gradient(135deg, var(--secondary-900), var(--secondary-500)) --&gt;
+&lt;!-- Verde:  linear-gradient(135deg, var(--success-500), var(--success-300)) --&gt;
+&lt;!-- Morado: linear-gradient(135deg, var(--tertiary-900), var(--tertiary-700)) --&gt;
+&lt;!-- Rojo:   linear-gradient(135deg, var(--error-600), var(--error-500)) --&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Clases CSS</h2>
+        <table class="docs-props-table">
+          <thead><tr><th>Clase</th><th>Tamano</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td><code>.avatar</code></td><td>32x32px</td><td>Topbar, contextos generales</td></tr>
+            <tr><td><code>.assignee-avatar</code></td><td>22x22px</td><td>Asignados en vacancy cards</td></tr>
+            <tr><td><code>.assignee-avatar.blue</code></td><td>22x22px</td><td>Variante azul</td></tr>
+            <tr><td><code>.assignee-avatar.green</code></td><td>22x22px</td><td>Variante verde</td></tr>
+            <tr><td><code>.assignee-avatar.purple</code></td><td>22x22px</td><td>Variante morada</td></tr>
+            <tr><td><code>.person-avatar</code></td><td>44x44px</td><td>Person cards y perfiles</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

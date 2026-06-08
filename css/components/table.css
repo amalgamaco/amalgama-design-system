@@ -1,0 +1,54 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Table
+   Tabla de datos con encabezados, filas hover y variante clickable.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <table class="data-table">
+     <thead>
+       <tr><th>Nombre</th><th>Estado</th><th>Fecha</th></tr>
+     </thead>
+     <tbody>
+       <tr class="clickable"><td>Vacante 1</td><td>Abierta</td><td>15 Mar</td></tr>
+     </tbody>
+   </table>
+═══════════════════════════════════════ */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.data-table thead {
+  background: var(--color-surface-variant);
+  border-bottom: 1px solid var(--border);
+}
+.data-table th {
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  text-align: left;
+}
+.data-table td {
+  padding: 12px 16px;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  border-top: 1px solid var(--border);
+}
+.data-table tbody tr {
+  transition: background var(--duration-fast);
+}
+.data-table tbody tr:hover {
+  background: var(--color-surface-variant);
+}
+.data-table tbody tr.clickable {
+  cursor: pointer;
+}

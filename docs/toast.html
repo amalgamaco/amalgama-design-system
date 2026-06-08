@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toast — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+
+  <!-- Sidebar -->
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="logos.html" class="docs-nav-item">Logos</a>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item active">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">Amalgama DS</a>
+        <span class="separator">/</span>
+        Toast
+      </div>
+    </header>
+    <div class="docs-content">
+
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Toast</h1>
+        <p class="docs-page-desc">Notificaciones emergentes para confirmar acciones o mostrar errores.</p>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Instalacion</h2>
+        <p class="docs-section-desc">Copia <code>toast.tsx</code> a tu proyecto en <code>components/ui/toast.tsx</code></p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import { cva, type VariantProps } from &quot;class-variance-authority&quot;
+import { cn } from &quot;@/lib/utils&quot;
+
+const toastVariants = cva(
+  &quot;toast&quot;,
+  {
+    variants: {
+      variant: {
+        success: &quot;toast-success&quot;,
+        error: &quot;toast-error&quot;,
+        info: &quot;toast-info&quot;,
+      },
+    },
+    defaultVariants: {
+      variant: &quot;info&quot;,
+    },
+  }
+)
+
+export interface ToastProps
+  extends React.HTMLAttributes&lt;HTMLDivElement&gt;,
+    VariantProps&lt;typeof toastVariants&gt; {
+  icon?: React.ReactNode
+  message: string
+  onClose?: () =&gt; void
+}
+
+const Toast = React.forwardRef&lt;HTMLDivElement, ToastProps&gt;(
+  ({ className, variant, icon, message, onClose, ...props }, ref) =&gt; {
+    return (
+      &lt;div
+        ref={ref}
+        className={cn(toastVariants({ variant, className }))}
+        {...props}
+      &gt;
+        {icon &amp;&amp; &lt;span className=&quot;toast-icon&quot;&gt;{icon}&lt;/span&gt;}
+        &lt;span className=&quot;toast-message&quot;&gt;{message}&lt;/span&gt;
+        {onClose &amp;&amp; (
+          &lt;button className=&quot;toast-close&quot; onClick={onClose}&gt;
+            &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2&quot; strokeLinecap=&quot;round&quot;&gt;
+              &lt;line x1=&quot;18&quot; y1=&quot;6&quot; x2=&quot;6&quot; y2=&quot;18&quot; /&gt;
+              &lt;line x1=&quot;6&quot; y1=&quot;6&quot; x2=&quot;18&quot; y2=&quot;18&quot; /&gt;
+            &lt;/svg&gt;
+          &lt;/button&gt;
+        )}
+      &lt;/div&gt;
+    )
+  }
+)
+Toast.displayName = &quot;Toast&quot;
+
+const ToastContainer = React.forwardRef&lt;
+  HTMLDivElement,
+  React.HTMLAttributes&lt;HTMLDivElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;div ref={ref} className={cn(&quot;toast-container&quot;, className)} {...props} /&gt;
+))
+ToastContainer.displayName = &quot;ToastContainer&quot;
+
+export { Toast, ToastContainer, toastVariants }</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>npm install class-variance-authority clsx</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>css/variables.css
+css/base.css
+css/components/toast.css</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { Toast, ToastContainer } from &quot;@/components/ui/toast&quot;
+
+&lt;ToastContainer&gt;
+  &lt;Toast variant=&quot;success&quot; message=&quot;Vacante creada exitosamente&quot; onClose={() =&gt; {}} /&gt;
+  &lt;Toast variant=&quot;error&quot; message=&quot;Error al guardar&quot; onClose={() =&gt; {}} /&gt;
+  &lt;Toast variant=&quot;info&quot; message=&quot;Procesando...&quot; /&gt;
+&lt;/ToastContainer&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Demo interactiva -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Demo interactiva</h2>
+        <div class="docs-preview">
+          <button class="btn-primary btn-success docs-toast-trigger" data-type="success">Toast exito</button>
+          <button class="btn-primary btn-danger docs-toast-trigger" data-type="error">Toast error</button>
+          <button class="btn-primary docs-toast-trigger" data-type="info">Toast info</button>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;button class="btn-primary btn-success docs-toast-trigger" data-type="success"&gt;Toast exito&lt;/button&gt;
+&lt;button class="btn-primary btn-danger docs-toast-trigger" data-type="error"&gt;Toast error&lt;/button&gt;
+&lt;button class="btn-primary docs-toast-trigger" data-type="info"&gt;Toast info&lt;/button&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <div class="docs-toast-demo-container toast-container"></div>
+      </div>
+
+      <!-- Success -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Success</h2>
+        <div class="docs-preview">
+          <div class="toast toast-success">
+            <span class="toast-icon" style="color:var(--green)"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <span class="toast-message">Vacante creada exitosamente</span>
+            <button class="toast-close"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="toast toast-success"&gt;
+  &lt;span class="toast-icon" style="color:var(--green)"&gt;&lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;path d="M20 6L9 17l-5-5"/&gt;&lt;/svg&gt;&lt;/span&gt;
+  &lt;span class="toast-message"&gt;Vacante creada exitosamente&lt;/span&gt;
+  &lt;button class="toast-close"&gt;&lt;svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;path d="M18 6 6 18M6 6l12 12"/&gt;&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Error</h2>
+        <div class="docs-preview">
+          <div class="toast toast-error">
+            <span class="toast-icon" style="color:var(--red)"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg></span>
+            <span class="toast-message">Ha ocurrido un error</span>
+            <button class="toast-close"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="toast toast-error"&gt;
+  &lt;span class="toast-icon" style="color:var(--red)"&gt;&lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;path d="m15 9-6 6M9 9l6 6"/&gt;&lt;/svg&gt;&lt;/span&gt;
+  &lt;span class="toast-message"&gt;Ha ocurrido un error&lt;/span&gt;
+  &lt;button class="toast-close"&gt;&lt;svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;path d="M18 6 6 18M6 6l12 12"/&gt;&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Info</h2>
+        <div class="docs-preview">
+          <div class="toast toast-info">
+            <span class="toast-icon" style="color:var(--accent)"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
+            <span class="toast-message">Informacion actualizada</span>
+            <button class="toast-close"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="toast toast-info"&gt;
+  &lt;span class="toast-icon" style="color:var(--accent)"&gt;&lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;circle cx="12" cy="12" r="10"/&gt;&lt;path d="M12 16v-4M12 8h.01"/&gt;&lt;/svg&gt;&lt;/span&gt;
+  &lt;span class="toast-message"&gt;Informacion actualizada&lt;/span&gt;
+  &lt;button class="toast-close"&gt;&lt;svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;path d="M18 6 6 18M6 6l12 12"/&gt;&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

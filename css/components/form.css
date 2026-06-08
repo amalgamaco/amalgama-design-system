@@ -1,0 +1,162 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Form
+   Elementos de formulario: campos, labels, selects, textareas,
+   inputs numericos, inputs de fecha, y tarjeta de formulario.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <div class="form-card">
+     <div class="form-card-title">Informacion basica</div>
+     <p class="form-card-desc">Completa los datos del puesto.</p>
+     <div class="fields-grid">
+       <div class="field-group">
+         <label class="field-label">Titulo <span class="field-required">*</span></label>
+         <input class="field-input" placeholder="Ej: Desarrollador Frontend">
+       </div>
+       <div class="field-group">
+         <label class="field-label">Ubicacion</label>
+         <div class="select-wrapper">
+           <select><option>Remoto</option></select>
+           <span class="select-caret">▾</span>
+         </div>
+       </div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.form-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  margin-bottom: 16px;
+}
+.form-card-title {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 15px; font-weight: 600;
+  margin-bottom: 6px;
+}
+.form-card-desc {
+  font-size: 13px; color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 24px;
+  max-width: 680px;
+}
+
+.field-group { margin-bottom: 20px; }
+.field-group:last-child { margin-bottom: 0; }
+
+.field-label {
+  display: block;
+  font-size: 13px; font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.field-required { color: var(--red); margin-left: 2px; }
+
+.field-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  outline: none;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+  appearance: none;
+}
+.field-input:focus {
+  border-color: var(--interactive);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+.field-input::placeholder { color: var(--text-muted); }
+
+input:disabled, select:disabled, textarea:disabled {
+  background: var(--color-surface-variant);
+  color: var(--color-on-disabled);
+  border-color: var(--color-outline);
+  cursor: not-allowed;
+}
+
+.select-wrapper { position: relative; }
+.select-wrapper select {
+  width: 100%;
+  padding: 10px 38px 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+.select-wrapper select:focus {
+  border-color: var(--interactive);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+.select-caret {
+  position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+  pointer-events: none; color: var(--text-muted);
+}
+
+.fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+
+.field-textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.number-input-wrapper {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  transition: border-color var(--duration-fast);
+}
+.number-input-wrapper:focus-within { border-color: var(--interactive); }
+.number-value { font-size: 13.5px; color: var(--text-primary); }
+.number-controls { display: flex; align-items: center; gap: 4px; }
+.number-btn {
+  width: 32px; height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-secondary);
+  transition: background var(--duration-fast);
+  font-family: inherit;
+}
+.number-btn:hover { background: var(--color-surface-container-highest); color: var(--text-primary); }
+
+.date-input-wrapper { position: relative; }
+.date-input-wrapper input {
+  width: 100%;
+  padding: 10px 42px 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-family: inherit;
+  color: var(--text-muted);
+  background: var(--card-bg);
+  outline: none;
+  transition: border-color var(--duration-fast);
+  cursor: pointer;
+}
+.date-input-wrapper input:focus { border-color: var(--interactive); }
+.date-icon {
+  position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted); pointer-events: none;
+}

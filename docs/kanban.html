@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="logos.html" class="docs-nav-item">Logos</a>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item active">Kanban</a>
+    </nav>
+  </aside>
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Kanban
+      </div>
+    </header>
+    <div class="docs-content">
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Kanban</h1>
+        <p class="docs-page-desc">Tablero de columnas para gestionar procesos de seleccion.</p>
+      </div>
+
+      <!-- Instalacion TSX -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Instalacion</h2>
+        <p class="docs-section-desc">Copia <code>kanban.tsx</code> a tu proyecto en <code>components/ui/kanban.tsx</code></p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import { cn } from &quot;@/lib/utils&quot;
+
+const KanbanBoard = React.forwardRef&lt;
+  HTMLDivElement,
+  React.HTMLAttributes&lt;HTMLDivElement&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;div ref={ref} className={cn(&quot;kanban-board&quot;, className)} {...props} /&gt;
+))
+KanbanBoard.displayName = &quot;KanbanBoard&quot;
+
+export interface KanbanColumnProps
+  extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
+  title: string
+  count?: number
+}
+
+const KanbanColumn = React.forwardRef&lt;HTMLDivElement, KanbanColumnProps&gt;(
+  ({ className, title, count, children, ...props }, ref) =&gt; (
+    &lt;div ref={ref} className={cn(&quot;kanban-column&quot;, className)} {...props}&gt;
+      &lt;div className=&quot;kanban-column-header&quot;&gt;
+        {title}
+        {count !== undefined &amp;&amp; &lt;span className=&quot;count&quot;&gt;{count}&lt;/span&gt;}
+      &lt;/div&gt;
+      &lt;div className=&quot;kanban-column-body&quot;&gt;{children}&lt;/div&gt;
+    &lt;/div&gt;
+  )
+)
+KanbanColumn.displayName = &quot;KanbanColumn&quot;
+
+export interface KanbanCardProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
+  title: string
+  meta?: string
+}
+
+const KanbanCard = React.forwardRef&lt;HTMLDivElement, KanbanCardProps&gt;(
+  ({ className, title, meta, children, ...props }, ref) =&gt; (
+    &lt;div ref={ref} className={cn(&quot;kanban-card&quot;, className)} {...props}&gt;
+      &lt;div className=&quot;kanban-card-title&quot;&gt;{title}&lt;/div&gt;
+      {meta &amp;&amp; &lt;div className=&quot;kanban-card-meta&quot;&gt;{meta}&lt;/div&gt;}
+      {children}
+    &lt;/div&gt;
+  )
+)
+KanbanCard.displayName = &quot;KanbanCard&quot;
+
+export { KanbanBoard, KanbanColumn, KanbanCard }</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>Dependencias</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>CSS requerido</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>css/variables.css
+css/components/kanban.css</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+
+        <h3>Ejemplo de uso</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { KanbanBoard, KanbanColumn, KanbanCard } from &quot;@/components/ui/kanban&quot;
+
+&lt;KanbanBoard&gt;
+  &lt;KanbanColumn title=&quot;Aplicados&quot; count={5}&gt;
+    &lt;KanbanCard title=&quot;Juan Perez&quot; meta=&quot;Frontend &middot; 3 dias&quot; /&gt;
+    &lt;KanbanCard title=&quot;Ana Lopez&quot; meta=&quot;Backend &middot; 1 dia&quot; /&gt;
+  &lt;/KanbanColumn&gt;
+  &lt;KanbanColumn title=&quot;Entrevista&quot; count={2}&gt;
+    &lt;KanbanCard title=&quot;Maria Garcia&quot; meta=&quot;UX &middot; 5 dias&quot; /&gt;
+  &lt;/KanbanColumn&gt;
+&lt;/KanbanBoard&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <h2>Kanban Board</h2>
+      <div class="docs-preview">
+        <div class="kanban-board">
+          <div class="kanban-column">
+            <div class="kanban-column-header">Aplicados <span class="count">3</span></div>
+            <div class="kanban-column-body">
+              <div class="kanban-card"><div class="kanban-card-title">Maria Lopez</div><div class="kanban-card-meta">Disenadora UX · hace 2d</div></div>
+              <div class="kanban-card"><div class="kanban-card-title">Pedro Ruiz</div><div class="kanban-card-meta">Frontend Dev · hace 3d</div></div>
+              <div class="kanban-card"><div class="kanban-card-title">Sofia Torres</div><div class="kanban-card-meta">PM · hace 5d</div></div>
+            </div>
+          </div>
+          <div class="kanban-column">
+            <div class="kanban-column-header">Entrevista <span class="count">2</span></div>
+            <div class="kanban-column-body">
+              <div class="kanban-card"><div class="kanban-card-title">Carlos Vega</div><div class="kanban-card-meta">Backend Dev · hace 1d</div></div>
+              <div class="kanban-card"><div class="kanban-card-title">Ana Garcia</div><div class="kanban-card-meta">QA · hace 4d</div></div>
+            </div>
+          </div>
+          <div class="kanban-column">
+            <div class="kanban-column-header">Oferta <span class="count">1</span></div>
+            <div class="kanban-column-body">
+              <div class="kanban-card"><div class="kanban-card-title">Luis Mendoza</div><div class="kanban-card-meta">Data Analyst · hace 1d</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>&lt;div class="kanban-board"&gt;
+  &lt;div class="kanban-column"&gt;
+    &lt;div class="kanban-column-header"&gt;Aplicados &lt;span class="count"&gt;3&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="kanban-column-body"&gt;
+      &lt;div class="kanban-card"&gt;&lt;div class="kanban-card-title"&gt;Maria Lopez&lt;/div&gt;&lt;div class="kanban-card-meta"&gt;Disenadora UX · hace 2d&lt;/div&gt;&lt;/div&gt;
+      &lt;div class="kanban-card"&gt;&lt;div class="kanban-card-title"&gt;Pedro Ruiz&lt;/div&gt;&lt;div class="kanban-card-meta"&gt;Frontend Dev · hace 3d&lt;/div&gt;&lt;/div&gt;
+      &lt;div class="kanban-card"&gt;&lt;div class="kanban-card-title"&gt;Sofia Torres&lt;/div&gt;&lt;div class="kanban-card-meta"&gt;PM · hace 5d&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="kanban-column"&gt;
+    &lt;div class="kanban-column-header"&gt;Entrevista &lt;span class="count"&gt;2&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="kanban-column-body"&gt;
+      &lt;div class="kanban-card"&gt;&lt;div class="kanban-card-title"&gt;Carlos Vega&lt;/div&gt;&lt;div class="kanban-card-meta"&gt;Backend Dev · hace 1d&lt;/div&gt;&lt;/div&gt;
+      &lt;div class="kanban-card"&gt;&lt;div class="kanban-card-title"&gt;Ana Garcia&lt;/div&gt;&lt;div class="kanban-card-meta"&gt;QA · hace 4d&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="kanban-column"&gt;
+    &lt;div class="kanban-column-header"&gt;Oferta &lt;span class="count"&gt;1&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="kanban-column-body"&gt;
+      &lt;div class="kanban-card"&gt;&lt;div class="kanban-card-title"&gt;Luis Mendoza&lt;/div&gt;&lt;div class="kanban-card-meta"&gt;Data Analyst · hace 1d&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>

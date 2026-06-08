@@ -1,0 +1,33 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Empty State
+   Placeholder visual cuando no hay datos para mostrar.
+
+   Dependencia: variables.css
+   Requiere: button.css (para CTA opcional)
+
+   Uso:
+   <div class="empty-state">
+     <div class="empty-state-icon">📭</div>
+     <div class="empty-state-title">No hay vacantes</div>
+     <p class="empty-state-desc">Crea tu primera vacante para empezar.</p>
+     <button class="btn-primary">+ Nueva vacante</button>
+   </div>
+═══════════════════════════════════════ */
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+}
+.empty-state-icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state-title {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 18px; font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.empty-state-desc {
+  font-size: 14px; color: var(--text-muted);
+  max-width: 400px; margin: 0 auto 20px;
+  line-height: 1.6;
+}

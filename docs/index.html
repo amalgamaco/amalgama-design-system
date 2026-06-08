@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amalgama Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+
+  <!-- Sidebar -->
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="logos.html" class="docs-nav-item">Logos</a>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">Amalgama Design System</div>
+    </header>
+    <div class="docs-content">
+
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Amalgama Design System</h1>
+        <p class="docs-page-desc">Libreria de componentes para Amalgama NewPeopleForce. Cada componente esta listo para copiar y pegar — sin dependencias, sin build tools, solo HTML y CSS.</p>
+        <a href="getting-started.html" class="btn-primary" style="margin-top:16px;text-decoration:none">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+          Guia de uso
+        </a>
+      </div>
+
+      <!-- Foundation -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Fundamentos</h2>
+        <div class="docs-card-grid">
+          <a href="logos.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="11" r="5"/><ellipse cx="12" cy="11" rx="10" ry="3.2" transform="rotate(-18 12 11)"/></svg>
+            </div>
+            <div class="docs-component-card-name">Logos</div>
+            <div class="docs-component-card-desc">Bloqueos vertical, horizontal e icono — variantes para cada fondo</div>
+          </a>
+          <a href="tokens.html" class="docs-component-card">
+            <div class="docs-component-card-icon">🎨</div>
+            <div class="docs-component-card-name">Tokens</div>
+            <div class="docs-component-card-desc">Colores, sombras, radios y variables del sistema de diseno</div>
+          </a>
+          <a href="typography.html" class="docs-component-card">
+            <div class="docs-component-card-icon">Aa</div>
+            <div class="docs-component-card-name">Tipografia</div>
+            <div class="docs-component-card-desc">Epilogue, Inter y DM Mono — escala tipografica completa</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Acciones</h2>
+        <div class="docs-card-grid">
+          <a href="button.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="2"/></svg>
+            </div>
+            <div class="docs-component-card-name">Button</div>
+            <div class="docs-component-card-desc">Primary, ghost, danger, icon y variantes de tamano</div>
+          </a>
+          <a href="toolbar.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </div>
+            <div class="docs-component-card-name">Toolbar</div>
+            <div class="docs-component-card-desc">Barra de busqueda, filtros y acciones de lista</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Data Entry -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Entrada de datos</h2>
+        <div class="docs-card-grid">
+          <a href="input.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+            </div>
+            <div class="docs-component-card-name">Input</div>
+            <div class="docs-component-card-desc">Campos de texto, labels, required y grid de formulario</div>
+          </a>
+          <a href="select.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+            <div class="docs-component-card-name">Select</div>
+            <div class="docs-component-card-desc">Selector desplegable con icono de caret personalizado</div>
+          </a>
+          <a href="textarea.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="docs-component-card-name">Textarea</div>
+            <div class="docs-component-card-desc">Area de texto multilinea redimensionable</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Data Display -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Visualizacion</h2>
+        <div class="docs-card-grid">
+          <a href="table.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div class="docs-component-card-name">Table</div>
+            <div class="docs-component-card-desc">Tabla de datos con encabezados, hover y filas clicables</div>
+          </a>
+          <a href="card.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+            </div>
+            <div class="docs-component-card-name">Card</div>
+            <div class="docs-component-card-desc">Contenedor base y variante de formulario</div>
+          </a>
+          <a href="badge.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+            </div>
+            <div class="docs-component-card-name">Badge</div>
+            <div class="docs-component-card-desc">Indicadores de estado: activo, cerrado, draft, warning</div>
+          </a>
+          <a href="stat-card.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            </div>
+            <div class="docs-component-card-name">Stat Card</div>
+            <div class="docs-component-card-desc">Tarjeta de metricas con valor, label y cambio</div>
+          </a>
+          <a href="vacancy-card.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            </div>
+            <div class="docs-component-card-name">Vacancy Card</div>
+            <div class="docs-component-card-desc">Tarjeta de vacante con icono, stats y asignados</div>
+          </a>
+          <a href="person-card.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="docs-component-card-name">Person Card</div>
+            <div class="docs-component-card-desc">Tarjeta de persona con avatar, nombre y rol</div>
+          </a>
+          <a href="avatar.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+            </div>
+            <div class="docs-component-card-name">Avatar</div>
+            <div class="docs-component-card-desc">Circulo con iniciales y variantes de color</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Retroalimentacion</h2>
+        <div class="docs-card-grid">
+          <a href="modal.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+            </div>
+            <div class="docs-component-card-name">Modal</div>
+            <div class="docs-component-card-desc">Dialogo con overlay, header, body y footer</div>
+          </a>
+          <a href="toast.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/></svg>
+            </div>
+            <div class="docs-component-card-name">Toast</div>
+            <div class="docs-component-card-desc">Notificaciones emergentes: exito, error e info</div>
+          </a>
+          <a href="skeleton.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke-dasharray="4 2"/></svg>
+            </div>
+            <div class="docs-component-card-name">Skeleton</div>
+            <div class="docs-component-card-desc">Placeholders animados para estados de carga</div>
+          </a>
+          <a href="empty-state.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/></svg>
+            </div>
+            <div class="docs-component-card-name">Empty State</div>
+            <div class="docs-component-card-desc">Pantalla vacia con icono, titulo y accion</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Navegacion</h2>
+        <div class="docs-card-grid">
+          <a href="navigation.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </div>
+            <div class="docs-component-card-name">Sidebar Nav</div>
+            <div class="docs-component-card-desc">Items de navegacion, secciones y badges</div>
+          </a>
+          <a href="topbar.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+            </div>
+            <div class="docs-component-card-name">Topbar</div>
+            <div class="docs-component-card-desc">Barra superior con breadcrumbs y notificaciones</div>
+          </a>
+          <a href="tabs.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 20h16M4 20V4h6l2 4h8v12"/></svg>
+            </div>
+            <div class="docs-component-card-name">Tabs</div>
+            <div class="docs-component-card-desc">Pestanas con indicador activo y paneles</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Layout -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Layout</h2>
+        <div class="docs-card-grid">
+          <a href="kanban.html" class="docs-component-card">
+            <div class="docs-component-card-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="3" width="5" height="12" rx="1"/><rect x="17" y="3" width="5" height="8" rx="1"/></svg>
+            </div>
+            <div class="docs-component-card-name">Kanban</div>
+            <div class="docs-component-card-desc">Tablero con columnas arrastrables y tarjetas</div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

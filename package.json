@@ -1,0 +1,11 @@
+{
+  "name": "@amalgama/ds",
+  "version": "1.0.0",
+  "description": "Amalgama Design System — Libreria de componentes UI reutilizable",
+  "license": "UNLICENSED",
+  "private": true,
+  "files": [
+    "css/",
+    "components/"
+  ]
+}

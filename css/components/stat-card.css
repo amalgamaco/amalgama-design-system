@@ -1,0 +1,45 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Stat Card
+   Tarjetas KPI con etiqueta, valor grande y cambio porcentual.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <div class="stats-grid">
+     <div class="stat-card">
+       <div class="stat-label">Vacantes abiertas</div>
+       <div class="stat-value">24</div>
+       <div class="stat-change" style="color: var(--green)">+12%</div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.stat-card .stat-label {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.stat-card .stat-value {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -.5px;
+}
+.stat-card .stat-change {
+  font-size: 12px;
+  margin-top: 4px;
+}

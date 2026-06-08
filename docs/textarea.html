@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Textarea — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="logos.html" class="docs-nav-item">Logos</a>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item active">Textarea</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Textarea
+      </div>
+    </header>
+    <div class="docs-content">
+
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Textarea</h1>
+        <p class="docs-page-desc">Area de texto multilinea para descripciones y notas.</p>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Instalacion</h2>
+        <p class="docs-section-desc">Copia <code>textarea.tsx</code> a tu proyecto en <code>components/ui/textarea.tsx</code></p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import { cn } from &quot;@/lib/utils&quot;
+
+export interface TextareaProps
+  extends React.TextareaHTMLAttributes&lt;HTMLTextAreaElement&gt; {
+  label?: string
+  required?: boolean
+}
+
+const Textarea = React.forwardRef&lt;HTMLTextAreaElement, TextareaProps&gt;(
+  ({ className, label, required, ...props }, ref) =&gt; {
+    const textarea = (
+      &lt;textarea
+        ref={ref}
+        className={cn(&quot;field-input field-textarea&quot;, className)}
+        {...props}
+      /&gt;
+    )
+
+    if (!label) return textarea
+
+    return (
+      &lt;div className=&quot;field-group&quot;&gt;
+        &lt;label className=&quot;field-label&quot;&gt;
+          {label}
+          {required &amp;&amp; &lt;span className=&quot;field-required&quot;&gt;*&lt;/span&gt;}
+        &lt;/label&gt;
+        {textarea}
+      &lt;/div&gt;
+    )
+  }
+)
+Textarea.displayName = &quot;Textarea&quot;
+
+export { Textarea }</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>css/variables.css
+css/components/form.css</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { Textarea } from &quot;@/components/ui/textarea&quot;
+
+&lt;Textarea label=&quot;Descripcion&quot; placeholder=&quot;Escribe los detalles...&quot; required /&gt;
+&lt;Textarea placeholder=&quot;Sin label...&quot; rows={4} /&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Basico</h2>
+        <div class="docs-preview full-width">
+          <div class="field-group">
+            <label class="field-label">Descripcion</label>
+            <textarea class="field-input field-textarea" placeholder="Describe los requisitos del puesto..."></textarea>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;div class="field-group"&gt;
+  &lt;label class="field-label"&gt;Descripcion&lt;/label&gt;
+  &lt;textarea class="field-input field-textarea"
+    placeholder="Describe los requisitos del puesto..."&gt;
+  &lt;/textarea&gt;
+&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Deshabilitado</h2>
+        <div class="docs-preview full-width">
+          <div class="field-group">
+            <label class="field-label">Notas</label>
+            <textarea class="field-input field-textarea" disabled>Este campo no es editable.</textarea>
+          </div>
+        </div>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>&lt;textarea class="field-input field-textarea" disabled&gt;
+  Este campo no es editable.
+&lt;/textarea&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+
+      <div class="docs-section">
+        <h2 class="docs-section-title">Clases CSS</h2>
+        <table class="docs-props-table">
+          <thead><tr><th>Clase</th><th>Descripcion</th></tr></thead>
+          <tbody>
+            <tr><td><code>.field-input</code></td><td>Estilos base de campo (borde, padding, focus)</td></tr>
+            <tr><td><code>.field-textarea</code></td><td>Min-height 80px, resize vertical, line-height 1.5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>
