@@ -688,188 +688,172 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 
 /* ── Cards grid (overview) ── */
 /* ════════════════════════════════════════════════════════
-   Nav Card — componente canónico de navegación
-   Fuente única para overview grids, anclas de sección y
-   tarjetas de categoría en todo el Design System.
+   Nav Card v2 — sistema de tarjetas de navegación
+   Layout editorial inspirado en diseño de producto moderno.
 
-   Estructura HTML:
-     <div class="nav-card [nc-*]" onclick="navigate('...')">
-       <div class="nav-card-icon"><i data-lucide="..."></i></div>
-       <div class="nav-card-body">
-         <div class="nav-card-title">Título</div>
-         <div class="nav-card-desc">Descripción</div>
+   FULL card anatomy (con área visual):
+     <div class="nav-card [nv-*]" onclick="navigate('...')">
+       <div class="nav-card-header">
+         <span class="nav-card-tag">Foundations</span>
+         <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
        </div>
-       <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
+       <div class="nav-card-content">
+         <div class="nav-card-title">Color</div>
+         <div class="nav-card-desc">Descripción corta.</div>
+       </div>
+       <div class="nav-card-visual">
+         <svg><!-- ilustración --></svg>
+       </div>
      </div>
 
-   Variantes: nc-primary · nc-secondary · nc-tertiary
-              nc-success · nc-info · nc-warning
-   Backward-compat: .ds-card-link y sus hijos son alias de nav-card
+   COMPACT card (sin área visual — grids densos):
+     <div class="nav-card nav-card--compact" onclick="navigate('...')">
+       <div class="nav-card-header">
+         <span class="nav-card-tag">Component</span>
+         <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+       </div>
+       <div class="nav-card-content">
+         <div class="nav-card-title">Button</div>
+         <div class="nav-card-desc">Descripción corta.</div>
+       </div>
+     </div>
+
+   Visual tint variants (on .nav-card-visual only):
+     nv-primary · nv-secondary · nv-tertiary
+     nv-success · nv-info · nv-warning · nv-neutral
+
+   Backward-compat: .ds-card-link y sus hijos son alias compact nav-card
 ════════════════════════════════════════════════════════ */
 
 /* ── Grid ── */
 .nav-card-grid,
 .ds-card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 16px;
   margin-bottom: 40px;
 }
 
-/* ── Base card (neutral) ── */
+/* ── Base card ── */
 .nav-card,
 .ds-card-link {
-  --nc-bg:           var(--color-surface-container);
-  --nc-border:       var(--ds-card-border);
-  --nc-icon-bg:      var(--ds-accent-bg);
-  --nc-icon-color:   var(--ds-accent);
-  --nc-title:        var(--color-on-surface);
-  --nc-desc:         var(--color-on-surface-variant);
-  --nc-arrow-bg:     var(--ds-accent-bg);
-  --nc-arrow:        var(--ds-accent);
-  --nc-hover-border: color-mix(in srgb, var(--color-primary) 35%, transparent);
-  --nc-hover-shadow: color-mix(in srgb, var(--color-primary) 10%, transparent);
-
-  position: relative;
-  background: var(--nc-bg);
-  border: 1px solid var(--nc-border);
-  border-radius: 20px;
-  padding: 24px;
-  min-height: 172px;
-  cursor: pointer;
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 14px;
   display: flex; flex-direction: column;
-  text-decoration: none;
-  box-shadow: 0 1px 3px rgba(20,23,33,.04), 0 1px 6px rgba(20,23,33,.03);
-  transition: border-color .15s, box-shadow .15s, transform .12s;
+  cursor: pointer; text-decoration: none;
   overflow: hidden;
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 .nav-card:hover,
 .ds-card-link:hover {
-  border-color: var(--nc-hover-border);
-  box-shadow: 0 6px 24px var(--nc-hover-shadow);
   transform: translateY(-2px);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
-.nav-card:hover .nav-card-arrow,
-.ds-card-link:hover .nav-card-arrow { opacity: 1; }
 
-/* ── Icon container ── */
-.nav-card-icon,
-.ds-card-icon {
-  width: 40px; height: 40px; border-radius: 12px;
-  background: var(--nc-icon-bg); color: var(--nc-icon-color);
+/* ── Header row: tag + arrow ── */
+.nav-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 18px 0;
+  flex-shrink: 0;
+}
+
+.nav-card-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--color-on-surface-variant);
+  line-height: 1;
+}
+
+.nav-card-arrow-btn {
+  width: 26px; height: 26px; border-radius: 8px;
+  background: color-mix(in srgb, var(--color-on-surface) 7%, transparent);
+  color: var(--color-on-surface-variant);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  margin-bottom: auto; /* pushes body/name/desc to the bottom */
+  transition: background .12s, color .12s;
 }
-.nav-card-icon svg,
-.ds-card-icon svg { width: 20px; height: 20px; stroke-width: 1.75; }
+.nav-card:hover .nav-card-arrow-btn,
+.ds-card-link:hover .nav-card-arrow-btn {
+  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  color: var(--color-primary);
+}
+.nav-card-arrow-btn svg { width: 13px; height: 13px; stroke-width: 2.25; }
 
-/* ── Content ── */
-.nav-card-body { padding-top: 20px; }
+/* ── Content area ── */
+.nav-card-content {
+  padding: 12px 18px 22px;
+  flex: 1;
+}
+.nav-card-title {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 21px; font-weight: 800;
+  color: var(--color-on-surface);
+  line-height: 1.12; letter-spacing: -.025em;
+  margin-bottom: 8px;
+}
+.nav-card-desc {
+  font-size: 12.5px;
+  color: var(--color-on-surface-variant);
+  line-height: 1.55;
+}
 
-.nav-card-title,
-.ds-card-name {
+/* ── Visual / illustration area ── */
+.nav-card-visual {
+  height: 148px;
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.nav-card-visual svg { width: 100%; height: 100%; }
+
+/* Visual tint variants (on .nav-card-visual only) */
+.nv-primary   { background: var(--color-primary-container);   color: var(--color-on-primary-container); }
+.nv-secondary { background: var(--color-secondary-container); color: var(--color-on-secondary-container); }
+.nv-tertiary  { background: var(--color-tertiary-container);  color: var(--color-on-tertiary-container); }
+.nv-success   { background: var(--color-success-container);   color: var(--color-on-success-container); }
+.nv-info      { background: var(--color-info-container);      color: var(--color-on-info-container); }
+.nv-warning   { background: var(--color-warning-container);   color: var(--color-on-warning-container); }
+.nv-neutral   { background: var(--color-surface-variant);     color: var(--color-on-surface-variant); }
+
+/* ── Compact variant (no visual area) ── */
+.nav-card--compact .nav-card-header { padding: 14px 16px 0; }
+.nav-card--compact .nav-card-content { padding: 10px 16px 16px; }
+.nav-card--compact .nav-card-title { font-size: 14px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 4px; }
+.nav-card--compact .nav-card-desc { font-size: 12px; }
+
+/* ── .ds-card-link backward compat alias (compact style) ──
+   Old HTML: .ds-card-link > .ds-card-icon + .ds-card-name + .ds-card-desc
+   Icon is hidden; name/desc get compact typography.                    */
+.ds-card-link .ds-card-icon { display: none; }
+.ds-card-link .ds-card-name {
   font-family: 'Epilogue', sans-serif;
   font-size: 14px; font-weight: 700;
-  color: var(--nc-title);
-  line-height: 1.2; margin-bottom: 5px;
-  letter-spacing: -.01em;
+  color: var(--color-on-surface);
+  line-height: 1.2; letter-spacing: -.01em;
+  margin-bottom: 4px;
 }
-/* ds-card-link flat structure: name sits directly after icon, needs top spacing */
-.ds-card-link .ds-card-name { margin-top: 20px; }
-
-.nav-card-desc,
-.ds-card-desc {
+.ds-card-link .ds-card-desc {
   font-size: 12px;
-  color: var(--nc-desc);
+  color: var(--color-on-surface-variant);
   line-height: 1.5;
 }
-
-/* ── Arrow indicator (appears on hover) ── */
-.nav-card-arrow {
-  position: absolute;
-  bottom: 18px; right: 18px;
-  width: 28px; height: 28px; border-radius: 9px;
-  background: var(--nc-arrow-bg); color: var(--nc-arrow);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0;
-  transition: opacity .15s;
-  pointer-events: none;
+/* ds-card-link has no .nav-card-header so give it header-like padding
+   and a pseudo arrow via ::after */
+.ds-card-link {
+  padding: 14px 16px 16px;
+  min-height: 0;
+  position: relative;
 }
-.nav-card-arrow svg { width: 14px; height: 14px; stroke-width: 2.5; }
-
-/* ── Colored variants ── */
-.nav-card.nc-primary {
-  --nc-bg:           var(--color-primary-container);
-  --nc-border:       transparent;
-  --nc-icon-bg:      color-mix(in srgb, var(--color-on-primary-container) 12%, transparent);
-  --nc-icon-color:   var(--color-on-primary-container);
-  --nc-title:        var(--color-on-primary-container);
-  --nc-desc:         color-mix(in srgb, var(--color-on-primary-container) 68%, transparent);
-  --nc-arrow-bg:     color-mix(in srgb, var(--color-on-primary-container) 12%, transparent);
-  --nc-arrow:        var(--color-on-primary-container);
-  --nc-hover-border: transparent;
-  --nc-hover-shadow: color-mix(in srgb, var(--color-primary) 16%, transparent);
-}
-.nav-card.nc-secondary {
-  --nc-bg:           var(--color-secondary-container);
-  --nc-border:       transparent;
-  --nc-icon-bg:      color-mix(in srgb, var(--color-on-secondary-container) 12%, transparent);
-  --nc-icon-color:   var(--color-on-secondary-container);
-  --nc-title:        var(--color-on-secondary-container);
-  --nc-desc:         color-mix(in srgb, var(--color-on-secondary-container) 68%, transparent);
-  --nc-arrow-bg:     color-mix(in srgb, var(--color-on-secondary-container) 12%, transparent);
-  --nc-arrow:        var(--color-on-secondary-container);
-  --nc-hover-border: transparent;
-  --nc-hover-shadow: color-mix(in srgb, var(--color-secondary) 14%, transparent);
-}
-.nav-card.nc-tertiary {
-  --nc-bg:           var(--color-tertiary-container);
-  --nc-border:       transparent;
-  --nc-icon-bg:      color-mix(in srgb, var(--color-on-tertiary-container) 12%, transparent);
-  --nc-icon-color:   var(--color-on-tertiary-container);
-  --nc-title:        var(--color-on-tertiary-container);
-  --nc-desc:         color-mix(in srgb, var(--color-on-tertiary-container) 68%, transparent);
-  --nc-arrow-bg:     color-mix(in srgb, var(--color-on-tertiary-container) 12%, transparent);
-  --nc-arrow:        var(--color-on-tertiary-container);
-  --nc-hover-border: transparent;
-  --nc-hover-shadow: color-mix(in srgb, var(--color-tertiary) 14%, transparent);
-}
-.nav-card.nc-success {
-  --nc-bg:           var(--color-success-container);
-  --nc-border:       transparent;
-  --nc-icon-bg:      color-mix(in srgb, var(--color-on-success-container) 12%, transparent);
-  --nc-icon-color:   var(--color-on-success-container);
-  --nc-title:        var(--color-on-success-container);
-  --nc-desc:         color-mix(in srgb, var(--color-on-success-container) 68%, transparent);
-  --nc-arrow-bg:     color-mix(in srgb, var(--color-on-success-container) 12%, transparent);
-  --nc-arrow:        var(--color-on-success-container);
-  --nc-hover-border: transparent;
-  --nc-hover-shadow: color-mix(in srgb, var(--color-success) 14%, transparent);
-}
-.nav-card.nc-info {
-  --nc-bg:           var(--color-info-container);
-  --nc-border:       transparent;
-  --nc-icon-bg:      color-mix(in srgb, var(--color-on-info-container) 12%, transparent);
-  --nc-icon-color:   var(--color-on-info-container);
-  --nc-title:        var(--color-on-info-container);
-  --nc-desc:         color-mix(in srgb, var(--color-on-info-container) 68%, transparent);
-  --nc-arrow-bg:     color-mix(in srgb, var(--color-on-info-container) 12%, transparent);
-  --nc-arrow:        var(--color-on-info-container);
-  --nc-hover-border: transparent;
-  --nc-hover-shadow: color-mix(in srgb, var(--color-info-container) 30%, transparent);
-}
-.nav-card.nc-warning {
-  --nc-bg:           var(--color-warning-container);
-  --nc-border:       transparent;
-  --nc-icon-bg:      color-mix(in srgb, var(--color-on-warning-container) 12%, transparent);
-  --nc-icon-color:   var(--color-on-warning-container);
-  --nc-title:        var(--color-on-warning-container);
-  --nc-desc:         color-mix(in srgb, var(--color-on-warning-container) 68%, transparent);
-  --nc-arrow-bg:     color-mix(in srgb, var(--color-on-warning-container) 12%, transparent);
-  --nc-arrow:        var(--color-on-warning-container);
-  --nc-hover-border: transparent;
-  --nc-hover-shadow: color-mix(in srgb, var(--color-warning) 14%, transparent);
+.ds-card-link::before {
+  content: '';
+  display: block;
+  height: 10px; /* spacing from top before name */
 }
 
 /* ── Hero (overview) ── */
@@ -1843,7 +1827,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 /* emb-gs-anchors → alias de nav-card-grid */
 .emb-gs-anchors {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
   margin-bottom: 64px;
 }
@@ -2081,7 +2065,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 @media (max-width: 600px) {
   .emb-gs-principles { grid-template-columns: 1fr; }
   .emb-gs-two-col    { grid-template-columns: 1fr; }
-  .emb-gs-anchors    { grid-template-columns: repeat(2, 1fr); }
+  .emb-gs-anchors    { grid-template-columns: 1fr; }
 }
 
 /* ─ Consistent docs-section margin rhythm ─ */
@@ -8685,46 +8669,156 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
     <!-- ── ANCHOR BOXES ── -->
     <div class="emb-gs-anchors">
-      <a class="nav-card nc-info" href="#gs-what">
-        <div class="nav-card-icon"><i data-lucide="book-open"></i></div>
-        <div class="nav-card-body">
-          <div class="nav-card-title">¿Qué es Embassy?</div>
-          <div class="nav-card-desc">Definición y propósito del sistema</div>
-        </div>
-        <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
-      </a>
-      <a class="nav-card nc-tertiary" href="#gs-who">
-        <div class="nav-card-icon"><i data-lucide="users"></i></div>
-        <div class="nav-card-body">
-          <div class="nav-card-title">¿Para quién es?</div>
-          <div class="nav-card-desc">Roles y audiencias del DS</div>
-        </div>
-        <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
-      </a>
-      <a class="nav-card nc-primary" href="#gs-using">
-        <div class="nav-card-icon"><i data-lucide="compass"></i></div>
-        <div class="nav-card-body">
-          <div class="nav-card-title">Usar Embassy</div>
-          <div class="nav-card-desc">Cómo está organizada la doc</div>
-        </div>
-        <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
-      </a>
-      <a class="nav-card nc-warning" href="#gs-design">
-        <div class="nav-card-icon"><i data-lucide="pen-tool"></i></div>
-        <div class="nav-card-body">
-          <div class="nav-card-title">Para diseñadores</div>
-          <div class="nav-card-desc">Figma, tokens y componentes</div>
-        </div>
-        <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
-      </a>
-      <a class="nav-card nc-success" href="#gs-develop">
-        <div class="nav-card-icon"><i data-lucide="code-2"></i></div>
-        <div class="nav-card-body">
-          <div class="nav-card-title">Para desarrolladores</div>
-          <div class="nav-card-desc">HTML, CSS y tokens</div>
-        </div>
-        <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
-      </a>
+  <div class="nav-card" onclick="document.getElementById('gs-what').scrollIntoView({behavior:'smooth'})">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Embassy DS</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">¿Qué es Embassy?</div>
+      <div class="nav-card-desc">Definición y propósito del sistema</div>
+    </div>
+    <div class="nav-card-visual nv-info">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Layered system architecture cards -->
+        <rect x="60" y="90" width="160" height="42" rx="8" fill="currentColor" opacity=".18"/>
+        <rect x="50" y="72" width="160" height="42" rx="8" fill="currentColor" opacity=".28"/>
+        <rect x="40" y="54" width="160" height="42" rx="8" fill="currentColor" opacity=".42"/>
+        <rect x="30" y="36" width="160" height="42" rx="8" fill="currentColor" opacity=".60"/>
+        <!-- Token dots on top layer -->
+        <circle cx="48" cy="57" r="4" fill="currentColor" opacity=".9"/>
+        <rect x="57" y="54" width="40" height="6" rx="3" fill="currentColor" opacity=".5"/>
+        <rect x="57" y="64" width="26" height="4" rx="2" fill="currentColor" opacity=".3"/>
+        <!-- Right abstract pattern -->
+        <rect x="210" y="44" width="32" height="32" rx="16" fill="currentColor" opacity=".25"/>
+        <rect x="220" y="84" width="20" height="20" rx="4" fill="currentColor" opacity=".18"/>
+        <rect x="214" y="110" width="28" height="6" rx="3" fill="currentColor" opacity=".12"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="document.getElementById('gs-who').scrollIntoView({behavior:'smooth'})">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Audiencias</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">¿Para quién es?</div>
+      <div class="nav-card-desc">Roles y audiencias del DS</div>
+    </div>
+    <div class="nav-card-visual nv-tertiary">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Two abstract figures -->
+        <circle cx="100" cy="60" r="22" fill="currentColor" opacity=".55"/>
+        <rect x="72" y="88" width="56" height="40" rx="28" fill="currentColor" opacity=".45"/>
+        <circle cx="176" cy="66" r="18" fill="currentColor" opacity=".38"/>
+        <rect x="152" y="90" width="48" height="36" rx="24" fill="currentColor" opacity=".30"/>
+        <!-- Connection line -->
+        <line x1="130" y1="80" x2="154" y2="82" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" opacity=".35"/>
+        <!-- Tag badges -->
+        <rect x="78" y="50" width="44" height="14" rx="7" fill="currentColor" opacity=".18"/>
+        <rect x="158" y="56" width="36" height="12" rx="6" fill="currentColor" opacity=".15"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="document.getElementById('gs-using').scrollIntoView({behavior:'smooth'})">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Guía</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Usar Embassy</div>
+      <div class="nav-card-desc">Cómo está organizada la doc</div>
+    </div>
+    <div class="nav-card-visual nv-primary">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Navigation / map structure -->
+        <rect x="30" y="36" width="80" height="76" rx="10" fill="currentColor" opacity=".22"/>
+        <rect x="40" y="46" width="60" height="8" rx="4" fill="currentColor" opacity=".55"/>
+        <rect x="40" y="60" width="44" height="5" rx="2.5" fill="currentColor" opacity=".35"/>
+        <rect x="40" y="70" width="52" height="5" rx="2.5" fill="currentColor" opacity=".30"/>
+        <rect x="40" y="80" width="38" height="5" rx="2.5" fill="currentColor" opacity=".25"/>
+        <rect x="40" y="90" width="48" height="5" rx="2.5" fill="currentColor" opacity=".20"/>
+        <!-- Arrow pointing to sections -->
+        <path d="M118 74 L168 74 L160 66 M168 74 L160 82" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+        <!-- Content area -->
+        <rect x="174" y="36" width="76" height="76" rx="10" fill="currentColor" opacity=".15"/>
+        <rect x="184" y="48" width="56" height="10" rx="5" fill="currentColor" opacity=".45"/>
+        <rect x="184" y="64" width="40" height="5" rx="2.5" fill="currentColor" opacity=".28"/>
+        <rect x="184" y="74" width="50" height="5" rx="2.5" fill="currentColor" opacity=".22"/>
+        <rect x="184" y="84" width="34" height="5" rx="2.5" fill="currentColor" opacity=".18"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="document.getElementById('gs-design').scrollIntoView({behavior:'smooth'})">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Diseño</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Para diseñadores</div>
+      <div class="nav-card-desc">Figma, tokens y componentes</div>
+    </div>
+    <div class="nav-card-visual nv-warning">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Figma-like frame -->
+        <rect x="50" y="28" width="96" height="92" rx="6" stroke="currentColor" stroke-width="2" opacity=".45"/>
+        <!-- Corner handles -->
+        <rect x="44" y="22" width="10" height="10" rx="2" fill="currentColor" opacity=".55"/>
+        <rect x="134" y="22" width="10" height="10" rx="2" fill="currentColor" opacity=".55"/>
+        <rect x="44" y="112" width="10" height="10" rx="2" fill="currentColor" opacity=".55"/>
+        <rect x="134" y="112" width="10" height="10" rx="2" fill="currentColor" opacity=".55"/>
+        <!-- Color swatches inside frame -->
+        <rect x="62" y="42" width="20" height="20" rx="10" fill="currentColor" opacity=".65"/>
+        <rect x="88" y="42" width="20" height="20" rx="4" fill="currentColor" opacity=".45"/>
+        <rect x="114" y="42" width="20" height="20" rx="10" fill="currentColor" opacity=".30"/>
+        <!-- Component block -->
+        <rect x="62" y="72" width="72" height="28" rx="6" fill="currentColor" opacity=".22"/>
+        <rect x="70" y="80" width="32" height="5" rx="2.5" fill="currentColor" opacity=".50"/>
+        <rect x="70" y="89" width="22" height="4" rx="2" fill="currentColor" opacity=".32"/>
+        <!-- Token list on right -->
+        <rect x="162" y="36" width="68" height="8" rx="4" fill="currentColor" opacity=".40"/>
+        <rect x="162" y="52" width="56" height="8" rx="4" fill="currentColor" opacity=".32"/>
+        <rect x="162" y="68" width="64" height="8" rx="4" fill="currentColor" opacity=".25"/>
+        <rect x="162" y="84" width="48" height="8" rx="4" fill="currentColor" opacity=".18"/>
+        <rect x="162" y="100" width="60" height="8" rx="4" fill="currentColor" opacity=".13"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="document.getElementById('gs-develop').scrollIntoView({behavior:'smooth'})">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Desarrollo</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Para desarrolladores</div>
+      <div class="nav-card-desc">HTML, CSS y tokens</div>
+    </div>
+    <div class="nav-card-visual nv-success">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Terminal window -->
+        <rect x="34" y="28" width="212" height="92" rx="10" fill="currentColor" opacity=".18"/>
+        <!-- Traffic lights -->
+        <circle cx="54" cy="46" r="5" fill="currentColor" opacity=".50"/>
+        <circle cx="68" cy="46" r="5" fill="currentColor" opacity=".38"/>
+        <circle cx="82" cy="46" r="5" fill="currentColor" opacity=".28"/>
+        <!-- Code lines -->
+        <rect x="50" y="62" width="16" height="6" rx="3" fill="currentColor" opacity=".70"/>
+        <rect x="72" y="62" width="44" height="6" rx="3" fill="currentColor" opacity=".45"/>
+        <rect x="122" y="62" width="28" height="6" rx="3" fill="currentColor" opacity=".28"/>
+        <rect x="50" y="76" width="24" height="6" rx="3" fill="currentColor" opacity=".55"/>
+        <rect x="80" y="76" width="56" height="6" rx="3" fill="currentColor" opacity=".38"/>
+        <rect x="50" y="90" width="32" height="6" rx="3" fill="currentColor" opacity=".65"/>
+        <rect x="88" y="90" width="20" height="6" rx="3" fill="currentColor" opacity=".35"/>
+        <rect x="114" y="90" width="40" height="6" rx="3" fill="currentColor" opacity=".25"/>
+        <!-- Cursor blink -->
+        <rect x="160" y="90" width="3" height="6" rx="1" fill="currentColor" opacity=".80"/>
+      </svg>
+    </div>
+  </div>
     </div>
 
     <!-- ══ SECTION 1 — What is Embassy ══ -->
@@ -10430,18 +10524,69 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Develop</div>
       <h1 class="ds-page-title">Develop</h1>
       <p class="ds-page-desc">Platform-specific implementation guides for integrating the Amalgama Design System into your projects — web and mobile.</p>
-      <div class="ds-card-grid" style="margin-bottom:32px">
-        <div class="ds-card-link" onclick="navigate('develop-web')">
-          <div class="ds-card-icon"><i data-lucide="globe"></i></div>
-          <div class="ds-card-name">Web</div>
-          <div class="ds-card-desc">HTML + CSS + JS implementation guide for web projects.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('develop-mobile')">
-          <div class="ds-card-icon"><i data-lucide="smartphone"></i></div>
-          <div class="ds-card-name">Mobile</div>
-          <div class="ds-card-desc">iOS and Android implementation using the Amalgama token layer.</div>
-        </div>
-      </div>
+      <div class="nav-card-grid" style="margin-bottom:32px">
+  <div class="nav-card" onclick="navigate('develop-web')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Develop</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Web</div>
+      <div class="nav-card-desc">HTML + CSS + JS implementation guide for web projects.</div>
+    </div>
+    <div class="nav-card-visual nv-success">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Browser window -->
+        <rect x="36" y="26" width="208" height="96" rx="10" fill="currentColor" opacity=".18"/>
+        <rect x="36" y="26" width="208" height="26" rx="10" fill="currentColor" opacity=".28"/>
+        <rect x="36" y="38" width="208" height="14" fill="currentColor" opacity=".10"/>
+        <circle cx="54" cy="39" r="4" fill="currentColor" opacity=".50"/>
+        <circle cx="66" cy="39" r="4" fill="currentColor" opacity=".38"/>
+        <circle cx="78" cy="39" r="4" fill="currentColor" opacity=".28"/>
+        <rect x="94" y="33" width="100" height="12" rx="6" fill="currentColor" opacity=".22"/>
+        <!-- HTML tags -->
+        <rect x="50" y="64" width="36" height="8" rx="4" fill="currentColor" opacity=".60"/>
+        <rect x="92" y="64" width="56" height="8" rx="4" fill="currentColor" opacity=".35"/>
+        <rect x="50" y="78" width="28" height="8" rx="4" fill="currentColor" opacity=".48"/>
+        <rect x="84" y="78" width="72" height="8" rx="4" fill="currentColor" opacity=".28"/>
+        <rect x="162" y="78" width="36" height="8" rx="4" fill="currentColor" opacity=".20"/>
+        <rect x="50" y="92" width="36" height="8" rx="4" fill="currentColor" opacity=".55"/>
+        <rect x="92" y="92" width="48" height="8" rx="4" fill="currentColor" opacity=".30"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('develop-mobile')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Develop</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Mobile</div>
+      <div class="nav-card-desc">iOS and Android implementation using the Amalgama token layer.</div>
+    </div>
+    <div class="nav-card-visual nv-tertiary">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- iOS phone -->
+        <rect x="84" y="16" width="56" height="100" rx="12" fill="currentColor" opacity=".20"/>
+        <rect x="84" y="16" width="56" height="100" rx="12" stroke="currentColor" stroke-width="2" opacity=".40" fill="none"/>
+        <rect x="96" y="24" width="32" height="4" rx="2" fill="currentColor" opacity=".35"/>
+        <circle cx="112" cy="108" r="5" stroke="currentColor" stroke-width="1.5" opacity=".40" fill="none"/>
+        <!-- Screen content -->
+        <rect x="92" y="34" width="40" height="6" rx="3" fill="currentColor" opacity=".45"/>
+        <rect x="92" y="46" width="32" height="5" rx="2.5" fill="currentColor" opacity=".30"/>
+        <rect x="92" y="58" width="40" height="14" rx="5" fill="currentColor" opacity=".35"/>
+        <rect x="92" y="78" width="40" height="5" rx="2.5" fill="currentColor" opacity=".22"/>
+        <!-- Android phone offset -->
+        <rect x="148" y="28" width="48" height="86" rx="10" fill="currentColor" opacity=".15"/>
+        <rect x="148" y="28" width="48" height="86" rx="10" stroke="currentColor" stroke-width="1.5" opacity=".30" fill="none"/>
+        <rect x="156" y="38" width="32" height="5" rx="2.5" fill="currentColor" opacity=".38"/>
+        <rect x="156" y="50" width="24" height="5" rx="2.5" fill="currentColor" opacity=".25"/>
+        <rect x="156" y="62" width="32" height="12" rx="4" fill="currentColor" opacity=".28"/>
+      </svg>
+    </div>
+  </div>
+</div>
     </section>
 
     <!-- ═══════════ FOUNDATIONS OVERVIEW ═══════════ -->
@@ -10449,43 +10594,211 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Foundations</div>
       <h1 class="ds-page-title">Foundations</h1>
       <p class="ds-page-desc">The core principles, guidelines, and token systems that underpin every Amalgama product — from accessibility rules to logo usage.</p>
-      <div class="ds-card-grid" style="margin-bottom:32px">
-        <div class="ds-card-link" onclick="navigate('accessibility')">
-          <div class="ds-card-icon"><i data-lucide="eye"></i></div>
-          <div class="ds-card-name">Accessibility</div>
-          <div class="ds-card-desc">Color contrast, keyboard nav, and WCAG 2.1 AA guidelines.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('writing')">
-          <div class="ds-card-icon"><i data-lucide="pen-line"></i></div>
-          <div class="ds-card-name">Content Design</div>
-          <div class="ds-card-desc">Voice, tone, microcopy, error messages, and empty states.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('design-tokens')">
-          <div class="ds-card-icon"><i data-lucide="braces"></i></div>
-          <div class="ds-card-name">Design Tokens</div>
-          <div class="ds-card-desc">CSS variables: colors, shadows, radii, and transitions.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('interaction-state')">
-          <div class="ds-card-icon"><i data-lucide="mouse-pointer-click"></i></div>
-          <div class="ds-card-name">Interaction State</div>
-          <div class="ds-card-desc">Spec for all interactive states: hover, focus, pressed, disabled.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('grid')">
-          <div class="ds-card-icon"><i data-lucide="layout-grid"></i></div>
-          <div class="ds-card-name">Layout</div>
-          <div class="ds-card-desc">Grid system, breakpoints, spacing, and app shell structure.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('logos')">
-          <div class="ds-card-icon"><i data-lucide="image"></i></div>
-          <div class="ds-card-name">Logos</div>
-          <div class="ds-card-desc">Official logo variants, usage rules, and file structure.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('usage')">
-          <div class="ds-card-icon"><i data-lucide="book-open"></i></div>
-          <div class="ds-card-name">Usage Guidelines</div>
-          <div class="ds-card-desc">How to use, customize, and extend the Design System.</div>
-        </div>
-      </div>
+      <div class="nav-card-grid" style="margin-bottom:32px">
+  <div class="nav-card" onclick="navigate('accessibility')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Foundations</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Accessibility</div>
+      <div class="nav-card-desc">Color contrast, keyboard nav, and WCAG 2.1 AA guidelines.</div>
+    </div>
+    <div class="nav-card-visual nv-success">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Eye shape -->
+        <path d="M70 74 C100 44 180 44 210 74 C180 104 100 104 70 74Z" stroke="currentColor" stroke-width="3" fill="currentColor" opacity=".15"/>
+        <!-- Pupil -->
+        <circle cx="140" cy="74" r="18" fill="currentColor" opacity=".45"/>
+        <circle cx="140" cy="74" r="8" fill="currentColor" opacity=".75"/>
+        <!-- Check mark -->
+        <path d="M128 74 L136 82 L154 64" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="1" fill="none"/>
+        <!-- AA text hint -->
+        <rect x="64" y="108" width="24" height="16" rx="4" fill="currentColor" opacity=".30"/>
+        <rect x="94" y="108" width="24" height="16" rx="4" fill="currentColor" opacity=".22"/>
+        <!-- Contrast bars -->
+        <rect x="176" y="48" width="48" height="10" rx="5" fill="currentColor" opacity=".55"/>
+        <rect x="176" y="64" width="36" height="10" rx="5" fill="currentColor" opacity=".38"/>
+        <rect x="176" y="80" width="44" height="10" rx="5" fill="currentColor" opacity=".25"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('writing')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Foundations</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Content Design</div>
+      <div class="nav-card-desc">Voice, tone, microcopy, and error messages.</div>
+    </div>
+    <div class="nav-card-visual nv-warning">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Text lines -->
+        <rect x="46" y="38" width="120" height="12" rx="6" fill="currentColor" opacity=".70"/>
+        <rect x="46" y="58" width="96" height="8" rx="4" fill="currentColor" opacity=".45"/>
+        <rect x="46" y="72" width="108" height="8" rx="4" fill="currentColor" opacity=".38"/>
+        <rect x="46" y="86" width="80" height="8" rx="4" fill="currentColor" opacity=".30"/>
+        <rect x="46" y="100" width="92" height="8" rx="4" fill="currentColor" opacity=".22"/>
+        <!-- Quote mark -->
+        <text x="178" y="100" font-size="80" fill="currentColor" opacity=".20" font-family="Georgia, serif">"</text>
+        <!-- Pen nib -->
+        <path d="M196 42 L218 64 L210 72 L188 50 Z" fill="currentColor" opacity=".40"/>
+        <path d="M210 72 L214 82 L204 78 Z" fill="currentColor" opacity=".55"/>
+        <line x1="196" y1="42" x2="206" y2="32" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".35"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('design-tokens')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Foundations</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Design Tokens</div>
+      <div class="nav-card-desc">CSS variables: colors, shadows, radii, transitions.</div>
+    </div>
+    <div class="nav-card-visual nv-info">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Curly braces -->
+        <path d="M72 34 C60 34 56 42 56 50 L56 66 C56 74 50 78 44 78 C50 78 56 82 56 90 L56 106 C56 114 60 122 72 122" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".60"/>
+        <path d="M208 34 C220 34 224 42 224 50 L224 66 C224 74 230 78 236 78 C230 78 224 82 224 90 L224 106 C224 114 220 122 208 122" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".60"/>
+        <!-- Token entries -->
+        <rect x="98" y="52" width="32" height="7" rx="3.5" fill="currentColor" opacity=".65"/>
+        <rect x="136" y="52" width="2" height="7" rx="1" fill="currentColor" opacity=".40"/>
+        <rect x="144" y="52" width="36" height="7" rx="3.5" fill="currentColor" opacity=".45"/>
+        <rect x="98" y="67" width="28" height="7" rx="3.5" fill="currentColor" opacity=".55"/>
+        <rect x="136" y="67" width="2" height="7" rx="1" fill="currentColor" opacity=".40"/>
+        <rect x="144" y="67" width="20" height="7" rx="3.5" fill="currentColor" opacity=".38"/>
+        <rect x="98" y="82" width="36" height="7" rx="3.5" fill="currentColor" opacity=".45"/>
+        <rect x="136" y="82" width="2" height="7" rx="1" fill="currentColor" opacity=".40"/>
+        <rect x="144" y="82" width="28" height="7" rx="3.5" fill="currentColor" opacity=".32"/>
+        <rect x="98" y="97" width="24" height="7" rx="3.5" fill="currentColor" opacity=".38"/>
+        <rect x="136" y="97" width="2" height="7" rx="1" fill="currentColor" opacity=".40"/>
+        <rect x="144" y="97" width="40" height="7" rx="3.5" fill="currentColor" opacity=".28"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('interaction-state')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Foundations</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Interaction State</div>
+      <div class="nav-card-desc">Hover, focus, pressed, and disabled states.</div>
+    </div>
+    <div class="nav-card-visual nv-primary">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Four state buttons -->
+        <rect x="30" y="40" width="52" height="28" rx="8" fill="currentColor" opacity=".55"/>
+        <rect x="90" y="40" width="52" height="28" rx="8" fill="currentColor" opacity=".30"/>
+        <rect x="150" y="36" width="52" height="28" rx="8" stroke="currentColor" stroke-width="2.5" opacity=".55" fill="none"/>
+        <rect x="210" y="40" width="52" height="28" rx="8" fill="currentColor" opacity=".15"/>
+        <!-- Labels -->
+        <rect x="38" y="52" width="36" height="4" rx="2" fill="currentColor" opacity=".90"/>
+        <rect x="98" y="52" width="36" height="4" rx="2" fill="currentColor" opacity=".60"/>
+        <rect x="158" y="48" width="36" height="4" rx="2" fill="currentColor" opacity=".65"/>
+        <rect x="218" y="52" width="36" height="4" rx="2" fill="currentColor" opacity=".35"/>
+        <!-- State labels below -->
+        <rect x="32" y="78" width="48" height="6" rx="3" fill="currentColor" opacity=".35"/>
+        <rect x="92" y="78" width="48" height="6" rx="3" fill="currentColor" opacity=".28"/>
+        <rect x="152" y="78" width="48" height="6" rx="3" fill="currentColor" opacity=".28"/>
+        <rect x="212" y="78" width="48" height="6" rx="3" fill="currentColor" opacity=".22"/>
+        <!-- Focus ring highlight -->
+        <rect x="147" y="33" width="58" height="34" rx="11" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" opacity=".45" fill="none"/>
+        <!-- Cursor -->
+        <path d="M122 98 L130 120 L134 110 L144 114 Z" fill="currentColor" opacity=".50"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('grid')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Foundations</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Layout</div>
+      <div class="nav-card-desc">Grid system, breakpoints, and spacing scale.</div>
+    </div>
+    <div class="nav-card-visual nv-neutral">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Grid columns -->
+        <rect x="28" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
+        <rect x="62" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
+        <rect x="96" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
+        <rect x="130" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
+        <rect x="164" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
+        <rect x="198" y="30" width="28" height="88" rx="4" fill="currentColor" opacity=".20"/>
+        <rect x="232" y="30" width="20" height="88" rx="4" fill="currentColor" opacity=".20"/>
+        <!-- Content overlay -->
+        <rect x="28" y="38" width="62" height="72" rx="6" fill="currentColor" opacity=".38"/>
+        <rect x="96" y="38" width="130" height="72" rx="6" fill="currentColor" opacity=".28"/>
+        <rect x="232" y="38" width="20" height="72" rx="4" fill="currentColor" opacity=".20"/>
+        <!-- Breakpoint arrow -->
+        <line x1="28" y1="125" x2="252" y2="125" stroke="currentColor" stroke-width="1.5" opacity=".40"/>
+        <path d="M28 125 L36 120 M28 125 L36 130" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".40"/>
+        <path d="M252 125 L244 120 M252 125 L244 130" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".40"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('logos')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Foundations</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Logos</div>
+      <div class="nav-card-desc">Official logo variants, usage rules, and clear space.</div>
+    </div>
+    <div class="nav-card-visual nv-secondary">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Abstract A letterform -->
+        <path d="M90 118 L140 30 L190 118" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".55"/>
+        <line x1="108" y1="86" x2="172" y2="86" stroke="currentColor" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+        <!-- Clear space dashes -->
+        <rect x="64" y="20" width="152" height="108" rx="4" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 4" opacity=".28" fill="none"/>
+        <!-- Variant dots -->
+        <circle cx="52" cy="134" r="7" fill="currentColor" opacity=".45"/>
+        <rect x="64" y="127" width="14" height="14" rx="3" fill="currentColor" opacity=".30"/>
+        <rect x="83" y="129" width="14" height="10" rx="5" fill="currentColor" opacity=".20"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('usage')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Foundations</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Usage Guidelines</div>
+      <div class="nav-card-desc">How to use, customize, and extend the DS.</div>
+    </div>
+    <div class="nav-card-visual nv-neutral">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Checklist -->
+        <rect x="52" y="28" width="140" height="96" rx="10" fill="currentColor" opacity=".15"/>
+        <!-- Check rows -->
+        <circle cx="72" cy="52" r="7" fill="currentColor" opacity=".55"/>
+        <path d="M68 52 L71 55 L77 48" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9"/>
+        <rect x="86" y="48" width="90" height="7" rx="3.5" fill="currentColor" opacity=".45"/>
+        <circle cx="72" cy="74" r="7" fill="currentColor" opacity=".45"/>
+        <path d="M68 74 L71 77 L77 70" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9"/>
+        <rect x="86" y="70" width="74" height="7" rx="3.5" fill="currentColor" opacity=".35"/>
+        <circle cx="72" cy="96" r="7" fill="currentColor" opacity=".30"/>
+        <rect x="86" y="92" width="82" height="7" rx="3.5" fill="currentColor" opacity=".28"/>
+        <!-- Decorative arrow right -->
+        <path d="M206 74 L228 74 L220 66 M228 74 L220 82" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".38" fill="none"/>
+      </svg>
+    </div>
+  </div>
+</div>
     </section>
 
     <!-- ═══════════ STYLES OVERVIEW ═══════════ -->
@@ -10493,48 +10806,228 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Styles</div>
       <h1 class="ds-page-title">Styles</h1>
       <p class="ds-page-desc">The visual language of Amalgama — color, typography, icons, motion, shape, and spacing that give our products their distinct character.</p>
-      <div class="ds-card-grid" style="margin-bottom:32px">
-        <div class="ds-card-link" onclick="navigate('color')">
-          <div class="ds-card-icon"><i data-lucide="palette"></i></div>
-          <div class="ds-card-name">Color</div>
-          <div class="ds-card-desc">Primary, secondary, and semantic color palettes.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('elevation')">
-          <div class="ds-card-icon"><i data-lucide="layers"></i></div>
-          <div class="ds-card-name">Elevation</div>
-          <div class="ds-card-desc">Shadow scale for depth and layering.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('icons')">
-          <div class="ds-card-icon"><i data-lucide="star"></i></div>
-          <div class="ds-card-name">Icons</div>
-          <div class="ds-card-desc">Lucide icon set — usage, sizing, and accessibility.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('illustrations')">
-          <div class="ds-card-icon"><i data-lucide="frame"></i></div>
-          <div class="ds-card-name">Illustrations</div>
-          <div class="ds-card-desc">Illustration style principles and usage guidelines.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('animations')">
-          <div class="ds-card-icon"><i data-lucide="zap"></i></div>
-          <div class="ds-card-name">Motion</div>
-          <div class="ds-card-desc">Animation principles, timing tokens, and easing curves.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('shape')">
-          <div class="ds-card-icon"><i data-lucide="square"></i></div>
-          <div class="ds-card-name">Shape</div>
-          <div class="ds-card-desc">Border radius scale and shape token system.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('spacing')">
-          <div class="ds-card-icon"><i data-lucide="move-horizontal"></i></div>
-          <div class="ds-card-name">Spacing</div>
-          <div class="ds-card-desc">Spacing scale and how to apply it consistently.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('typography')">
-          <div class="ds-card-icon"><i data-lucide="type"></i></div>
-          <div class="ds-card-name">Typography</div>
-          <div class="ds-card-desc">Epilogue, Inter, and DM Mono — the complete type scale.</div>
-        </div>
-      </div>
+      <div class="nav-card-grid" style="margin-bottom:32px">
+  <div class="nav-card" onclick="navigate('color')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Styles</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Color</div>
+      <div class="nav-card-desc">Primary, secondary, and semantic color palettes.</div>
+    </div>
+    <div class="nav-card-visual nv-primary">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Color swatch grid -->
+        <rect x="40" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".80"/>
+        <rect x="88" y="30" width="40" height="40" rx="10" fill="currentColor" opacity=".55"/>
+        <rect x="136" y="30" width="40" height="40" rx="4" fill="currentColor" opacity=".38"/>
+        <rect x="184" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".22"/>
+        <rect x="40" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".22"/>
+        <rect x="88" y="78" width="40" height="40" rx="20" fill="currentColor" opacity=".38"/>
+        <rect x="136" y="78" width="40" height="40" rx="10" fill="currentColor" opacity=".55"/>
+        <rect x="184" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".75"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('elevation')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Styles</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Elevation</div>
+      <div class="nav-card-desc">Shadow scale for depth and layering.</div>
+    </div>
+    <div class="nav-card-visual nv-neutral">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Stacked cards with growing shadow -->
+        <rect x="90" y="88" width="100" height="40" rx="8" fill="currentColor" opacity=".08"/>
+        <rect x="80" y="76" width="100" height="40" rx="8" fill="currentColor" opacity=".14"/>
+        <rect x="70" y="64" width="100" height="40" rx="8" fill="currentColor" opacity=".22"/>
+        <rect x="60" y="50" width="100" height="40" rx="8" fill="currentColor" opacity=".35"/>
+        <rect x="50" y="36" width="100" height="40" rx="8" fill="currentColor" opacity=".55"/>
+        <rect x="42" y="28" width="100" height="40" rx="8" fill="currentColor" opacity=".70"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('icons')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Styles</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Icons</div>
+      <div class="nav-card-desc">Lucide icon set — usage, sizing, and accessibility.</div>
+    </div>
+    <div class="nav-card-visual nv-tertiary">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Icon grid (abstract icon shapes) -->
+        <!-- Row 1 -->
+        <circle cx="68" cy="52" r="14" stroke="currentColor" stroke-width="2" opacity=".55" fill="none"/>
+        <path d="M62 52 C62 48 74 48 74 52 C74 56 68 58 68 58 C68 58 68 58 68 60" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55" fill="none"/>
+        <circle cx="68" cy="64" r="1.5" fill="currentColor" opacity=".55"/>
+
+        <rect x="104" y="38" width="28" height="28" rx="4" stroke="currentColor" stroke-width="2" opacity=".45" fill="none"/>
+        <path d="M110 52 L114 56 L122 46" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".45" fill="none"/>
+
+        <path d="M152 38 L160 52 L152 66 L168 66 L168 52 Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".40" fill="none"/>
+
+        <circle cx="210" cy="52" r="12" fill="currentColor" opacity=".18"/>
+        <path d="M204 52 L210 46 L216 52 L210 58 Z" fill="currentColor" opacity=".45"/>
+
+        <!-- Row 2 -->
+        <path d="M54 90 L82 90 M68 76 L68 104" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".38"/>
+        <rect x="56" y="85" width="24" height="10" rx="5" fill="currentColor" opacity=".18"/>
+
+        <path d="M104 90 C104 82 118 82 118 90 L118 98 C118 106 104 106 104 98 Z" fill="currentColor" opacity=".35"/>
+
+        <circle cx="160" cy="90" r="14" stroke="currentColor" stroke-width="2" opacity=".35" fill="none"/>
+        <circle cx="160" cy="90" r="5" fill="currentColor" opacity=".45"/>
+
+        <path d="M196 80 L196 100 L224 100 L224 80 Z M196 80 L210 92 L224 80" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".38" fill="none"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('illustrations')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Styles</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Illustrations</div>
+      <div class="nav-card-desc">Style principles and usage guidelines.</div>
+    </div>
+    <div class="nav-card-visual nv-warning">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Organic blob shapes -->
+        <path d="M80 90 C60 80 55 55 75 44 C95 33 118 45 120 65 C122 85 100 100 80 90Z" fill="currentColor" opacity=".45"/>
+        <path d="M150 100 C128 96 118 74 130 58 C142 42 170 44 178 62 C186 80 172 104 150 100Z" fill="currentColor" opacity=".32"/>
+        <path d="M196 80 C184 68 186 50 200 44 C214 38 228 50 226 64 C224 78 208 92 196 80Z" fill="currentColor" opacity=".22"/>
+        <!-- Paint dot -->
+        <circle cx="88" cy="35" r="8" fill="currentColor" opacity=".55"/>
+        <circle cx="106" cy="28" r="5" fill="currentColor" opacity=".38"/>
+        <circle cx="120" cy="35" r="3" fill="currentColor" opacity=".25"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('animations')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Styles</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Motion</div>
+      <div class="nav-card-desc">Animation tokens, timing, and easing curves.</div>
+    </div>
+    <div class="nav-card-visual nv-info">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Easing curve -->
+        <path d="M44 118 C44 118 80 118 120 50 C160 -18 216 30 236 30" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none" opacity=".65"/>
+        <!-- Axis lines -->
+        <line x1="44" y1="30" x2="44" y2="118" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
+        <line x1="44" y1="118" x2="236" y2="118" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
+        <!-- Duration markers -->
+        <circle cx="44" cy="118" r="5" fill="currentColor" opacity=".55"/>
+        <circle cx="236" cy="30" r="5" fill="currentColor" opacity=".55"/>
+        <!-- Tick marks -->
+        <line x1="100" y1="115" x2="100" y2="121" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+        <line x1="156" y1="115" x2="156" y2="121" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+        <line x1="212" y1="115" x2="212" y2="121" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+        <!-- Labels -->
+        <rect x="86" y="126" width="28" height="6" rx="3" fill="currentColor" opacity=".28"/>
+        <rect x="142" y="126" width="28" height="6" rx="3" fill="currentColor" opacity=".22"/>
+        <rect x="200" y="126" width="28" height="6" rx="3" fill="currentColor" opacity=".18"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('shape')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Styles</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Shape</div>
+      <div class="nav-card-desc">Border radius scale and shape token system.</div>
+    </div>
+    <div class="nav-card-visual nv-secondary">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Radius progression -->
+        <rect x="28" y="44" width="42" height="42" rx="0" fill="currentColor" opacity=".45"/>
+        <rect x="82" y="44" width="42" height="42" rx="4" fill="currentColor" opacity=".42"/>
+        <rect x="136" y="44" width="42" height="42" rx="10" fill="currentColor" opacity=".40"/>
+        <rect x="190" y="44" width="42" height="42" rx="21" fill="currentColor" opacity=".38"/>
+        <!-- Radius indicator arcs -->
+        <path d="M28 56 L28 44 L40 44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".75"/>
+        <path d="M82 56 C82 49.4 87.4 44 94 44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".65"/>
+        <!-- Labels -->
+        <rect x="36" y="92" width="26" height="6" rx="3" fill="currentColor" opacity=".35"/>
+        <rect x="90" y="92" width="26" height="6" rx="3" fill="currentColor" opacity=".30"/>
+        <rect x="144" y="92" width="26" height="6" rx="3" fill="currentColor" opacity=".25"/>
+        <rect x="198" y="92" width="26" height="6" rx="3" fill="currentColor" opacity=".22"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('spacing')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Styles</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Spacing</div>
+      <div class="nav-card-desc">Spacing scale and how to apply it consistently.</div>
+    </div>
+    <div class="nav-card-visual nv-neutral">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Spacing scale bars -->
+        <rect x="40" y="44" width="4" height="64" rx="2" fill="currentColor" opacity=".65"/>
+        <rect x="52" y="56" width="8" height="52" rx="2" fill="currentColor" opacity=".58"/>
+        <rect x="68" y="64" width="12" height="44" rx="2" fill="currentColor" opacity=".52"/>
+        <rect x="88" y="68" width="16" height="40" rx="2" fill="currentColor" opacity=".46"/>
+        <rect x="112" y="72" width="20" height="36" rx="2" fill="currentColor" opacity=".40"/>
+        <rect x="140" y="74" width="24" height="34" rx="2" fill="currentColor" opacity=".35"/>
+        <rect x="172" y="76" width="28" height="32" rx="2" fill="currentColor" opacity=".28"/>
+        <rect x="208" y="78" width="32" height="30" rx="2" fill="currentColor" opacity=".22"/>
+        <!-- Baseline -->
+        <line x1="36" y1="108" x2="248" y2="108" stroke="currentColor" stroke-width="1.5" opacity=".30"/>
+        <!-- Arrow span -->
+        <path d="M36 120 L248 120" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+        <path d="M36 120 L44 115 M36 120 L44 125" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+        <path d="M248 120 L240 115 M248 120 L240 125" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".35"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="nav-card" onclick="navigate('typography')">
+    <div class="nav-card-header">
+      <span class="nav-card-tag">Styles</span>
+      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+    </div>
+    <div class="nav-card-content">
+      <div class="nav-card-title">Typography</div>
+      <div class="nav-card-desc">Epilogue, Inter, and DM Mono — complete type scale.</div>
+    </div>
+    <div class="nav-card-visual nv-primary">
+      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Large E letterform -->
+        <path d="M52 30 L52 118 L132 118 L132 103 L70 103 L70 82 L122 82 L122 67 L70 67 L70 45 L132 45 L132 30 Z" fill="currentColor" opacity=".45"/>
+        <!-- Type scale bars -->
+        <rect x="152" y="30" width="88" height="14" rx="4" fill="currentColor" opacity=".55"/>
+        <rect x="152" y="52" width="72" height="11" rx="3.5" fill="currentColor" opacity=".42"/>
+        <rect x="152" y="70" width="80" height="9" rx="3" fill="currentColor" opacity=".33"/>
+        <rect x="152" y="86" width="64" height="8" rx="3" fill="currentColor" opacity=".26"/>
+        <rect x="152" y="101" width="76" height="7" rx="2.5" fill="currentColor" opacity=".20"/>
+        <rect x="152" y="115" width="56" height="6" rx="2.5" fill="currentColor" opacity=".15"/>
+      </svg>
+    </div>
+  </div>
+</div>
     </section>
 
     <!-- ═══════════ COMPONENTS OVERVIEW ═══════════ -->
@@ -10542,163 +11035,132 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Components</div>
       <h1 class="ds-page-title">Components</h1>
       <p class="ds-page-desc">Production-ready components — each with live previews, installation snippets, CSS class references, and usage guidelines.</p>
-      <div class="ds-card-grid" style="margin-bottom:32px">
-        <div class="ds-card-link" onclick="navigate('c-app-bar')">
-          <div class="ds-card-icon"><i data-lucide="layout"></i></div>
-          <div class="ds-card-name">App bar</div>
-          <div class="ds-card-desc">Top and bottom app bars.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-avatar')">
-          <div class="ds-card-icon"><i data-lucide="user"></i></div>
-          <div class="ds-card-name">Avatar</div>
-          <div class="ds-card-desc">User avatar with initials and image variants.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-badge')">
-          <div class="ds-card-icon"><i data-lucide="tag"></i></div>
-          <div class="ds-card-name">Badges</div>
-          <div class="ds-card-desc">Status, priority, and label badges.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-button')">
-          <div class="ds-card-icon"><i data-lucide="mouse-pointer"></i></div>
-          <div class="ds-card-name">Buttons</div>
-          <div class="ds-card-desc">Primary, ghost, danger, and icon buttons.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-card')">
-          <div class="ds-card-icon"><i data-lucide="layout-template"></i></div>
-          <div class="ds-card-name">Cards</div>
-          <div class="ds-card-desc">Content container with variants.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-carousel')">
-          <div class="ds-card-icon"><i data-lucide="gallery-horizontal"></i></div>
-          <div class="ds-card-name">Carousels</div>
-          <div class="ds-card-desc">Horizontally scrollable item collections.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-checkbox')">
-          <div class="ds-card-icon"><i data-lucide="check-square"></i></div>
-          <div class="ds-card-name">Checkbox</div>
-          <div class="ds-card-desc">Single and group checkbox selection.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-chip')">
-          <div class="ds-card-icon"><i data-lucide="tag"></i></div>
-          <div class="ds-card-name">Chips</div>
-          <div class="ds-card-desc">Assist, filter, input, and suggestion chips.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-date-picker')">
-          <div class="ds-card-icon"><i data-lucide="calendar"></i></div>
-          <div class="ds-card-name">Date and time picker</div>
-          <div class="ds-card-desc">Date, time, and date-range pickers.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-dialog')">
-          <div class="ds-card-icon"><i data-lucide="message-square"></i></div>
-          <div class="ds-card-name">Dialog</div>
-          <div class="ds-card-desc">Prompt dialogs and confirmation modals.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-divider')">
-          <div class="ds-card-icon"><i data-lucide="minus"></i></div>
-          <div class="ds-card-name">Divider</div>
-          <div class="ds-card-desc">Horizontal and vertical dividers.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-empty')">
-          <div class="ds-card-icon"><i data-lucide="inbox"></i></div>
-          <div class="ds-card-name">Empty State</div>
-          <div class="ds-card-desc">Empty state illustrations and CTAs.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-input')">
-          <div class="ds-card-icon"><i data-lucide="text-cursor-input"></i></div>
-          <div class="ds-card-name">Input</div>
-          <div class="ds-card-desc">Text input with states and variants.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-list')">
-          <div class="ds-card-icon"><i data-lucide="list"></i></div>
-          <div class="ds-card-name">Lists</div>
-          <div class="ds-card-desc">Single-line and multi-line list items.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-loading')">
-          <div class="ds-card-icon"><i data-lucide="loader"></i></div>
-          <div class="ds-card-name">Loading and progress</div>
-          <div class="ds-card-desc">Spinners, progress bars, and skeletons.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-menu')">
-          <div class="ds-card-icon"><i data-lucide="menu"></i></div>
-          <div class="ds-card-name">Menu</div>
-          <div class="ds-card-desc">Dropdown and context menus.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-navigation')">
-          <div class="ds-card-icon"><i data-lucide="sidebar"></i></div>
-          <div class="ds-card-name">Navigation</div>
-          <div class="ds-card-desc">Sidebar navigation with groups and items.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-nav-card')">
-          <div class="ds-card-icon"><i data-lucide="layout-grid"></i></div>
-          <div class="ds-card-name">Nav Card</div>
-          <div class="ds-card-desc">Navigation cards for section overviews and category grids.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-person')">
-          <div class="ds-card-icon"><i data-lucide="user-circle"></i></div>
-          <div class="ds-card-name">Person Card</div>
-          <div class="ds-card-desc">Compact candidate/person card.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-radio')">
-          <div class="ds-card-icon"><i data-lucide="circle"></i></div>
-          <div class="ds-card-name">Radio button</div>
-          <div class="ds-card-desc">Single-select radio button groups.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-search')">
-          <div class="ds-card-icon"><i data-lucide="search"></i></div>
-          <div class="ds-card-name">Search</div>
-          <div class="ds-card-desc">Search bar, docked and full-screen.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-select')">
-          <div class="ds-card-icon"><i data-lucide="chevrons-up-down"></i></div>
-          <div class="ds-card-name">Select</div>
-          <div class="ds-card-desc">Dropdown select with options.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-sheet')">
-          <div class="ds-card-icon"><i data-lucide="panel-bottom"></i></div>
-          <div class="ds-card-name">Sheets</div>
-          <div class="ds-card-desc">Bottom and side sheet surfaces.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-slider')">
-          <div class="ds-card-icon"><i data-lucide="sliders-horizontal"></i></div>
-          <div class="ds-card-name">Sliders</div>
-          <div class="ds-card-desc">Continuous and discrete value sliders.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-snackbar')">
-          <div class="ds-card-icon"><i data-lucide="bell"></i></div>
-          <div class="ds-card-name">Snackbars</div>
-          <div class="ds-card-desc">Brief bottom-of-screen notifications.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-switch')">
-          <div class="ds-card-icon"><i data-lucide="toggle-left"></i></div>
-          <div class="ds-card-name">Switch</div>
-          <div class="ds-card-desc">Binary on/off toggle control.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-table')">
-          <div class="ds-card-icon"><i data-lucide="table"></i></div>
-          <div class="ds-card-name">Table</div>
-          <div class="ds-card-desc">Data table with sorting and pagination.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-tabs')">
-          <div class="ds-card-icon"><i data-lucide="layout"></i></div>
-          <div class="ds-card-name">Tabs</div>
-          <div class="ds-card-desc">Tab navigation with active panel.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-textarea')">
-          <div class="ds-card-icon"><i data-lucide="align-left"></i></div>
-          <div class="ds-card-name">Textarea</div>
-          <div class="ds-card-desc">Multi-line text area input.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-tooltip')">
-          <div class="ds-card-icon"><i data-lucide="info"></i></div>
-          <div class="ds-card-name">Tooltips</div>
-          <div class="ds-card-desc">Hover tooltips for UI elements.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('c-topbar')">
-          <div class="ds-card-icon"><i data-lucide="panel-top"></i></div>
-          <div class="ds-card-name">Topbar</div>
-          <div class="ds-card-desc">Top navigation bar with breadcrumb.</div>
-        </div>
-      </div>
+      <div class="nav-card-grid" style="margin-bottom:32px">
+  <div class="nav-card nav-card--compact" onclick="navigate('c-app-bar')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">App bar</div><div class="nav-card-desc">Top and bottom app bars.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-avatar')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Avatar</div><div class="nav-card-desc">User avatar with initials and image variants.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-badge')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Badges</div><div class="nav-card-desc">Status, priority, and label badges.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-button')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Buttons</div><div class="nav-card-desc">Primary, ghost, danger, and icon buttons.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-card')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Cards</div><div class="nav-card-desc">Content container with variants.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-carousel')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Carousels</div><div class="nav-card-desc">Horizontally scrollable item collections.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-checkbox')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Checkbox</div><div class="nav-card-desc">Single and group checkbox selection.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-chip')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Chips</div><div class="nav-card-desc">Assist, filter, input, and suggestion chips.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-date-picker')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Date and time picker</div><div class="nav-card-desc">Date, time, and date-range pickers.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-dialog')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Dialog</div><div class="nav-card-desc">Prompt dialogs and confirmation modals.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-divider')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Divider</div><div class="nav-card-desc">Horizontal and vertical dividers.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-empty')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Empty State</div><div class="nav-card-desc">Empty state illustrations and CTAs.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-input')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Input</div><div class="nav-card-desc">Text input with states and variants.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-list')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Lists</div><div class="nav-card-desc">Single-line and multi-line list items.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-loading')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Loading and progress</div><div class="nav-card-desc">Spinners, progress bars, and skeletons.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-menu')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Menu</div><div class="nav-card-desc">Dropdown and context menus.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-navigation')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Navigation</div><div class="nav-card-desc">Sidebar navigation with groups and items.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-nav-card')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Nav Card</div><div class="nav-card-desc">Navigation cards for section overview grids.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-person')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Person Card</div><div class="nav-card-desc">Compact candidate/person card.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-radio')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Radio button</div><div class="nav-card-desc">Single-select radio button groups.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-search')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Search</div><div class="nav-card-desc">Search bar, docked and full-screen.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-select')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Select</div><div class="nav-card-desc">Dropdown select with options.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-sheet')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Sheets</div><div class="nav-card-desc">Bottom and side sheet surfaces.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-slider')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Sliders</div><div class="nav-card-desc">Continuous and discrete value sliders.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-snackbar')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Snackbars</div><div class="nav-card-desc">Brief bottom-of-screen notifications.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-switch')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Switch</div><div class="nav-card-desc">Binary on/off toggle control.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-table')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Table</div><div class="nav-card-desc">Data table with sorting and pagination.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-tabs')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Tabs</div><div class="nav-card-desc">Tab navigation with active panel.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-textarea')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Textarea</div><div class="nav-card-desc">Multi-line text area input.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-tooltip')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Tooltips</div><div class="nav-card-desc">Hover tooltips for UI elements.</div></div>
+  </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-topbar')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Topbar</div><div class="nav-card-desc">Top navigation bar with breadcrumb.</div></div>
+  </div>
+</div>
     </section>
 
     <!-- ══════════════════════════════════════════════════════
@@ -10712,55 +11174,69 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <!-- Overview -->
       <div class="docs-section">
         <h2 class="docs-section-title">Overview</h2>
-        <p class="docs-body">Nav Cards organize navigation into scannable visual tiles. Each card has an icon at the top-left and content anchored to the bottom-left, with an optional arrow that appears on hover. Cards are available in a neutral (surface) default and six semantic color variants.</p>
+        <p class="docs-body">Nav Cards organize navigation into scannable visual tiles. Full cards have a header row (tag + arrow button), content area (large title + description), and an illustrated visual area. Compact cards omit the visual area for dense grids.</p>
         <div class="nav-card-grid" style="max-width:900px;margin-top:24px">
-          <div class="nav-card nc-info" onclick="">
-            <div class="nav-card-icon"><i data-lucide="book-open"></i></div>
-            <div class="nav-card-body">
-              <div class="nav-card-title">Foundations</div>
-              <div class="nav-card-desc">Color, typography, spacing</div>
+          <div class="nav-card" onclick="">
+            <div class="nav-card-header">
+              <span class="nav-card-tag">Foundations</span>
+              <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
             </div>
-            <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
-          </div>
-          <div class="nav-card nc-tertiary" onclick="">
-            <div class="nav-card-icon"><i data-lucide="layers"></i></div>
-            <div class="nav-card-body">
-              <div class="nav-card-title">Styles</div>
-              <div class="nav-card-desc">Visual design language</div>
+            <div class="nav-card-content">
+              <div class="nav-card-title">Color</div>
+              <div class="nav-card-desc">Semantic token system</div>
             </div>
-            <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
-          </div>
-          <div class="nav-card nc-primary" onclick="">
-            <div class="nav-card-icon"><i data-lucide="layout-grid"></i></div>
-            <div class="nav-card-body">
-              <div class="nav-card-title">Components</div>
-              <div class="nav-card-desc">UI building blocks</div>
+            <div class="nav-card-visual nv-primary">
+              <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="40" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".75"/>
+                <rect x="88" y="30" width="40" height="40" rx="10" fill="currentColor" opacity=".50"/>
+                <rect x="136" y="30" width="40" height="40" rx="4" fill="currentColor" opacity=".35"/>
+                <rect x="184" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".20"/>
+                <rect x="40" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".20"/>
+                <rect x="88" y="78" width="40" height="40" rx="20" fill="currentColor" opacity=".35"/>
+                <rect x="136" y="78" width="40" height="40" rx="10" fill="currentColor" opacity=".50"/>
+                <rect x="184" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".70"/>
+              </svg>
             </div>
-            <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
-          </div>
-          <div class="nav-card nc-success" onclick="">
-            <div class="nav-card-icon"><i data-lucide="code-2"></i></div>
-            <div class="nav-card-body">
-              <div class="nav-card-title">Develop</div>
-              <div class="nav-card-desc">HTML, CSS, and tokens</div>
-            </div>
-            <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
           </div>
           <div class="nav-card" onclick="">
-            <div class="nav-card-icon"><i data-lucide="compass"></i></div>
-            <div class="nav-card-body">
-              <div class="nav-card-title">Neutral card</div>
-              <div class="nav-card-desc">Default surface variant</div>
+            <div class="nav-card-header">
+              <span class="nav-card-tag">Styles</span>
+              <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
             </div>
-            <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
+            <div class="nav-card-content">
+              <div class="nav-card-title">Typography</div>
+              <div class="nav-card-desc">Type scale and font system</div>
+            </div>
+            <div class="nav-card-visual nv-tertiary">
+              <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M52 30 L52 118 L132 118 L132 103 L70 103 L70 82 L122 82 L122 67 L70 67 L70 45 L132 45 L132 30 Z" fill="currentColor" opacity=".40"/>
+                <rect x="152" y="30" width="88" height="14" rx="4" fill="currentColor" opacity=".50"/>
+                <rect x="152" y="52" width="72" height="11" rx="3.5" fill="currentColor" opacity=".38"/>
+                <rect x="152" y="70" width="80" height="9" rx="3" fill="currentColor" opacity=".28"/>
+                <rect x="152" y="86" width="64" height="8" rx="3" fill="currentColor" opacity=".22"/>
+                <rect x="152" y="101" width="76" height="7" rx="2.5" fill="currentColor" opacity=".15"/>
+              </svg>
+            </div>
           </div>
-          <div class="nav-card nc-warning" onclick="">
-            <div class="nav-card-icon"><i data-lucide="pen-tool"></i></div>
-            <div class="nav-card-body">
-              <div class="nav-card-title">Warning variant</div>
-              <div class="nav-card-desc">Amber container color</div>
+          <div class="nav-card nav-card--compact" onclick="">
+            <div class="nav-card-header">
+              <span class="nav-card-tag">Component</span>
+              <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
             </div>
-            <span class="nav-card-arrow"><i data-lucide="arrow-right"></i></span>
+            <div class="nav-card-content">
+              <div class="nav-card-title">Button</div>
+              <div class="nav-card-desc">Primary, secondary, and icon buttons.</div>
+            </div>
+          </div>
+          <div class="nav-card nav-card--compact" onclick="">
+            <div class="nav-card-header">
+              <span class="nav-card-tag">Component</span>
+              <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+            </div>
+            <div class="nav-card-content">
+              <div class="nav-card-title">Badge</div>
+              <div class="nav-card-desc">Status and label indicators.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -10770,24 +11246,29 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <h2 class="docs-section-title">Anatomy</h2>
         <div class="docs-two-col" style="gap:32px;align-items:flex-start">
           <div>
-            <div class="nav-card nc-primary" style="max-width:240px;pointer-events:none">
-              <div class="nav-card-icon"><i data-lucide="layers"></i></div>
-              <div class="nav-card-body">
+            <div class="nav-card" style="max-width:240px;pointer-events:none">
+              <div class="nav-card-header">
+                <span class="nav-card-tag">Foundations</span>
+                <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+              </div>
+              <div class="nav-card-content">
                 <div class="nav-card-title">Card title</div>
                 <div class="nav-card-desc">Optional description text</div>
               </div>
-              <span class="nav-card-arrow" style="opacity:1"><i data-lucide="arrow-right"></i></span>
+              <div class="nav-card-visual nv-primary" style="height:80px"></div>
             </div>
           </div>
           <div>
             <table class="docs-props-table ds-table" style="margin-top:0">
               <thead><tr><th>#</th><th>Element</th><th>Required</th><th>Notes</th></tr></thead>
               <tbody>
-                <tr><td>1</td><td><code>.nav-card-icon</code></td><td>Yes</td><td>40×40 px rounded container, top-left. Holds a 20×20 Lucide icon.</td></tr>
-                <tr><td>2</td><td><code>.nav-card-body</code></td><td>Yes</td><td>Wraps title and description. Pushed to the bottom via <code>margin-bottom: auto</code> on the icon.</td></tr>
-                <tr><td>3</td><td><code>.nav-card-title</code></td><td>Yes</td><td>Epilogue 700, 14px. Primary label.</td></tr>
-                <tr><td>4</td><td><code>.nav-card-desc</code></td><td>No</td><td>12px muted text. Use for one-line supporting copy.</td></tr>
-                <tr><td>5</td><td><code>.nav-card-arrow</code></td><td>No</td><td>Absolute-positioned, bottom-right. Visible only on hover (<code>opacity: 0 → 1</code>).</td></tr>
+                <tr><td>1</td><td><code>.nav-card-header</code></td><td>Yes</td><td>Flex row with tag (left) and arrow button (right).</td></tr>
+                <tr><td>2</td><td><code>.nav-card-tag</code></td><td>Yes</td><td>DM Mono 10px, uppercase. Section category label.</td></tr>
+                <tr><td>3</td><td><code>.nav-card-arrow-btn</code></td><td>Yes</td><td>26×26px button. Holds a Lucide arrow-up-right icon.</td></tr>
+                <tr><td>4</td><td><code>.nav-card-content</code></td><td>Yes</td><td>Wraps title and description. Fills available space.</td></tr>
+                <tr><td>5</td><td><code>.nav-card-title</code></td><td>Yes</td><td>Epilogue 800, 21px. Primary large label.</td></tr>
+                <tr><td>6</td><td><code>.nav-card-desc</code></td><td>No</td><td>12.5px muted text. One to two lines of supporting copy.</td></tr>
+                <tr><td>7</td><td><code>.nav-card-visual</code></td><td>No (full) / omit (compact)</td><td>148px illustration area. Add a tint variant class here.</td></tr>
               </tbody>
             </table>
           </div>
@@ -10796,18 +11277,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
       <!-- Color Variants -->
       <div class="docs-section">
-        <h2 class="docs-section-title">Color variants</h2>
-        <p class="docs-body">Add a variant class alongside <code>.nav-card</code> to apply a semantic container color. All colors are fully token-driven and adapt to light and dark mode automatically.</p>
+        <h2 class="docs-section-title">Visual tint variants</h2>
+        <p class="docs-body">Add a tint class to <code>.nav-card-visual</code> to apply a semantic container color to the illustration area. The card body always stays neutral.</p>
         <table class="docs-props-table ds-table" style="margin-top:20px">
           <thead><tr><th>Class</th><th>Background token</th><th>Use case</th></tr></thead>
           <tbody>
-            <tr><td><em>(none)</em></td><td><code>--color-surface-container</code></td><td>Neutral / default. Use for generic overview cards.</td></tr>
-            <tr><td><code>nc-primary</code></td><td><code>--color-primary-container</code></td><td>Primary actions, main navigation sections.</td></tr>
-            <tr><td><code>nc-secondary</code></td><td><code>--color-secondary-container</code></td><td>Secondary navigation, supporting sections.</td></tr>
-            <tr><td><code>nc-tertiary</code></td><td><code>--color-tertiary-container</code></td><td>Tertiary sections, styles, design-side content.</td></tr>
-            <tr><td><code>nc-success</code></td><td><code>--color-success-container</code></td><td>Developer-facing content, completions, availability.</td></tr>
-            <tr><td><code>nc-info</code></td><td><code>--color-info-container</code></td><td>Informational, documentation, reference content.</td></tr>
-            <tr><td><code>nc-warning</code></td><td><code>--color-warning-container</code></td><td>Caution, editorial, design-authoring contexts.</td></tr>
+            <tr><td><em>(none)</em></td><td><code>--color-surface-variant</code></td><td>Neutral / default visual area.</td></tr>
+            <tr><td><code>nv-primary</code></td><td><code>--color-primary-container</code></td><td>Primary sections, color, typography.</td></tr>
+            <tr><td><code>nv-secondary</code></td><td><code>--color-secondary-container</code></td><td>Secondary sections, logos.</td></tr>
+            <tr><td><code>nv-tertiary</code></td><td><code>--color-tertiary-container</code></td><td>Tertiary, styles, design-side content.</td></tr>
+            <tr><td><code>nv-success</code></td><td><code>--color-success-container</code></td><td>Developer content, accessibility.</td></tr>
+            <tr><td><code>nv-info</code></td><td><code>--color-info-container</code></td><td>Informational, documentation, tokens.</td></tr>
+            <tr><td><code>nv-warning</code></td><td><code>--color-warning-container</code></td><td>Editorial, design-authoring, illustrations.</td></tr>
+            <tr><td><code>nv-neutral</code></td><td><code>--color-surface-variant</code></td><td>Explicit neutral tint (same as default).</td></tr>
           </tbody>
         </table>
       </div>
@@ -10815,21 +11297,30 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <!-- HTML Reference -->
       <div class="docs-section">
         <h2 class="docs-section-title">HTML reference</h2>
-        <p class="docs-body">Full card with all optional elements:</p>
-        <pre class="ds-code-block"><code>&lt;div class="nav-card nc-primary" onclick="navigate('...')"&gt;
-  &lt;div class="nav-card-icon"&gt;&lt;i data-lucide="layers"&gt;&lt;/i&gt;&lt;/div&gt;
-  &lt;div class="nav-card-body"&gt;
-    &lt;div class="nav-card-title"&gt;Section title&lt;/div&gt;
+        <p class="docs-body">Full card with illustration area:</p>
+        <pre class="ds-code-block"><code>&lt;div class="nav-card" onclick="navigate('...')"&gt;
+  &lt;div class="nav-card-header"&gt;
+    &lt;span class="nav-card-tag"&gt;Foundations&lt;/span&gt;
+    &lt;span class="nav-card-arrow-btn"&gt;&lt;i data-lucide="arrow-up-right"&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="nav-card-content"&gt;
+    &lt;div class="nav-card-title"&gt;Color&lt;/div&gt;
     &lt;div class="nav-card-desc"&gt;Short supporting description&lt;/div&gt;
   &lt;/div&gt;
-  &lt;span class="nav-card-arrow"&gt;&lt;i data-lucide="arrow-right"&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;div class="nav-card-visual nv-primary"&gt;
+    &lt;svg&gt;&lt;!-- illustration --&gt;&lt;/svg&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-        <p class="docs-body" style="margin-top:20px">Minimal card (title only, no arrow):</p>
-        <pre class="ds-code-block"><code>&lt;div class="nav-card" onclick="navigate('...')"&gt;
-  &lt;div class="nav-card-icon"&gt;&lt;i data-lucide="compass"&gt;&lt;/i&gt;&lt;/div&gt;
-  &lt;div class="nav-card-body"&gt;
-    &lt;div class="nav-card-title"&gt;Section title&lt;/div&gt;
+        <p class="docs-body" style="margin-top:20px">Compact card (no visual area):</p>
+        <pre class="ds-code-block"><code>&lt;div class="nav-card nav-card--compact" onclick="navigate('...')"&gt;
+  &lt;div class="nav-card-header"&gt;
+    &lt;span class="nav-card-tag"&gt;Component&lt;/span&gt;
+    &lt;span class="nav-card-arrow-btn"&gt;&lt;i data-lucide="arrow-up-right"&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="nav-card-content"&gt;
+    &lt;div class="nav-card-title"&gt;Button&lt;/div&gt;
+    &lt;div class="nav-card-desc"&gt;Short description&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
@@ -10845,18 +11336,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <table class="docs-props-table ds-table">
           <thead><tr><th>Property</th><th>Value</th></tr></thead>
           <tbody>
-            <tr><td>Border radius</td><td>20px</td></tr>
-            <tr><td>Padding</td><td>24px</td></tr>
-            <tr><td>Min height</td><td>172px</td></tr>
-            <tr><td>Icon container</td><td>40×40px, border-radius 12px</td></tr>
-            <tr><td>Icon size</td><td>20×20px, stroke-width 1.75</td></tr>
-            <tr><td>Title font</td><td>Epilogue 700, 14px, letter-spacing −0.01em</td></tr>
-            <tr><td>Desc font</td><td>14px system font, 12px, line-height 1.5</td></tr>
-            <tr><td>Arrow container</td><td>28×28px, border-radius 9px, bottom-right 18px</td></tr>
-            <tr><td>Arrow icon</td><td>14×14px, stroke-width 2.5</td></tr>
+            <tr><td>Border radius</td><td>14px</td></tr>
+            <tr><td>Header padding</td><td>18px 18px 0</td></tr>
+            <tr><td>Content padding</td><td>12px 18px 22px</td></tr>
+            <tr><td>Visual area height</td><td>148px</td></tr>
+            <tr><td>Arrow button size</td><td>26×26px, border-radius 8px</td></tr>
+            <tr><td>Arrow icon</td><td>13×13px, stroke-width 2.25</td></tr>
+            <tr><td>Title font (full)</td><td>Epilogue 800, 21px, letter-spacing −0.025em</td></tr>
+            <tr><td>Title font (compact)</td><td>Epilogue 700, 14px, letter-spacing −0.01em</td></tr>
+            <tr><td>Tag font</td><td>DM Mono 500, 10px, uppercase, letter-spacing 0.08em</td></tr>
+            <tr><td>Desc font</td><td>12.5px (full) / 12px (compact), line-height 1.55</td></tr>
             <tr><td>Hover transform</td><td><code>translateY(-2px)</code></td></tr>
             <tr><td>Grid gap</td><td>16px</td></tr>
-            <tr><td>Grid min column</td><td>200px (auto-fill)</td></tr>
+            <tr><td>Grid min column</td><td>210px (auto-fill)</td></tr>
           </tbody>
         </table>
       </div>
@@ -10868,20 +11360,20 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div>
             <p class="docs-label docs-label-do">Do</p>
             <ul class="docs-list">
-              <li>Use Nav Cards for section-level navigation — overview grids, category landing pages, and shortcut anchors.</li>
-              <li>Always use a Lucide icon. Do not use emojis or custom illustrations in nav cards.</li>
-              <li>Keep title under 3 words and description under 8 words.</li>
-              <li>Use color variants purposefully — one or two colors per grid maximum to avoid visual noise.</li>
-              <li>Keep equal card heights across a grid (min-height handles this automatically).</li>
+              <li>Use full nav cards (with visual area) for top-level section grids — foundations, styles, develop overview pages.</li>
+              <li>Use compact nav cards for dense component lists (29+ items).</li>
+              <li>Keep title under 3 words and description under 10 words.</li>
+              <li>Use tint variants semantically — match the tint to the content category.</li>
+              <li>Use inline SVG illustrations with <code>currentColor</code> so they adapt to light and dark mode automatically.</li>
             </ul>
           </div>
           <div>
             <p class="docs-label docs-label-dont">Don't</p>
             <ul class="docs-list">
               <li>Don't use Nav Cards as content cards (news, articles, profiles) — use <code>.emb-card</code> for editorial content.</li>
-              <li>Don't mix nav-card with the old emoji anchor pattern.</li>
-              <li>Don't override <code>min-height</code> per-card — inconsistent heights break grid alignment.</li>
-              <li>Don't use more than 6 color variants in a single grid.</li>
+              <li>Don't apply tint variants to the card root — only to <code>.nav-card-visual</code>.</li>
+              <li>Don't put more than two lines of description text.</li>
+              <li>Don't use more than one tint color family per grid.</li>
             </ul>
           </div>
         </div>
@@ -10890,7 +11382,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <!-- Backward compat note -->
       <div class="docs-section">
         <h2 class="docs-section-title">Backward compatibility</h2>
-        <p class="docs-body">All existing <code>.ds-card-link</code> / <code>.ds-card-icon</code> / <code>.ds-card-name</code> / <code>.ds-card-desc</code> HTML continues to work unchanged. The CSS for those classes has been updated to share the same token-driven visual design as <code>.nav-card</code>. No HTML migration is required for existing overview grids.</p>
+        <p class="docs-body">Existing <code>.ds-card-link</code> / <code>.ds-card-icon</code> / <code>.ds-card-name</code> / <code>.ds-card-desc</code> HTML continues to work unchanged — it renders as a compact nav card via CSS aliases. No HTML migration is required for existing grids that use <code>.ds-card-link</code>.</p>
       </div>
     </section>
 
