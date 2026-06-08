@@ -4294,6 +4294,7 @@ body { overflow-x: clip; }
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
 
       <!-- ════════════════ OVERVIEW ════════════════ -->
@@ -4608,6 +4609,469 @@ body { overflow-x: clip; }
             </table>
           </div>
         </section>
+      </div>
+
+      <!-- ════════════════ CODE ════════════════ -->
+      <div class="ds-comp-tab-panel" data-tab="code">
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Quick start</h2>
+          <p class="docs-section-desc">Importá la hoja de estilos del DS y usá las clases semánticas. No hace falta ningún JavaScript — los botones son elementos <code>&lt;button&gt;</code> nativos.</p>
+          <div class="bd-callout"><span class="bd-ico">📦</span><span>El sistema de tokens (<code>variables.css</code>) y los estilos de botones (<code>css/components/button.css</code>) deben estar cargados. Todos los valores de color responden automáticamente a <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code>.</span></div>
+        </section>
+
+        <!-- ── All variants HTML ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Todas las variantes — HTML</h2>
+          <p class="docs-section-desc">Copiá y pegá. Cada clase mapea a un nivel de énfasis distinto. Elegí la variante según la jerarquía de la acción, no según el color.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;!-- ═══ FILLED — máxima jerarquía ═══ --&gt;
+&lt;button class=&quot;btn-primary&quot;&gt;Crear vacante&lt;/button&gt;
+
+&lt;!-- ═══ FILLED TONAL — jerarquía media-alta ═══ --&gt;
+&lt;button class=&quot;btn-secondary&quot;&gt;Guardar borrador&lt;/button&gt;
+
+&lt;!-- ═══ OUTLINED — acción alternativa / escape ═══ --&gt;
+&lt;button class=&quot;btn-tertiary&quot;&gt;Cancelar&lt;/button&gt;
+
+&lt;!-- ═══ TEXT — baja jerarquía / inline ═══ --&gt;
+&lt;button class=&quot;btn-text&quot;&gt;Ver más&lt;/button&gt;
+
+&lt;!-- ═══ ICON — acción compacta solo-ícono ═══ --&gt;
+&lt;button class=&quot;icon-btn&quot; aria-label=&quot;Ajustes&quot;&gt;
+  &lt;svg width=&quot;18&quot; height=&quot;18&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;
+       stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;
+       stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+    &lt;!-- ícono SVG --&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Semantic modifiers ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Modificadores semánticos</h2>
+          <p class="docs-section-desc">Los modificadores <code>.btn-danger</code> y <code>.btn-success</code> se aplican <strong>sobre</strong> <code>.btn-primary</code>. Son la única excepción donde un botón cambia de color semántico.</p>
+          <div class="bd-stage" style="margin-bottom:16px">
+            <button class="btn-primary btn-danger">Eliminar</button>
+            <button class="btn-primary btn-success">Aprobar</button>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;!-- Acción destructiva (irreversible) --&gt;
+&lt;button class=&quot;btn-primary btn-danger&quot;&gt;Eliminar cuenta&lt;/button&gt;
+
+&lt;!-- Confirmación positiva --&gt;
+&lt;button class=&quot;btn-primary btn-success&quot;&gt;Aprobar postulación&lt;/button&gt;
+
+&lt;!-- ⚠️  NO usar btn-danger para "Cancelar" —
+     Cancelar no es una acción destructiva irreversible. Usá btn-tertiary. --&gt;
+&lt;button class=&quot;btn-tertiary&quot;&gt;Cancelar&lt;/button&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Size ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Tamaños</h2>
+          <p class="docs-section-desc">El modificador <code>.btn-sm</code> se combina con cualquier variante. Usalo en tablas, toolbars y áreas de alta densidad.</p>
+          <div class="bd-stage" style="gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary">Default</button><span class="bd-state-lbl">36px</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-sm">Small</button><span class="bd-state-lbl">30px</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-secondary">Default</button><span class="bd-state-lbl">36px</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-secondary btn-sm">Small</button><span class="bd-state-lbl">30px</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="icon-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button><span class="bd-state-lbl">36×36</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="icon-btn btn-sm">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button><span class="bd-state-lbl">30×30</span></div>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;!-- Tamaño por defecto (36px altura) --&gt;
+&lt;button class=&quot;btn-primary&quot;&gt;Crear vacante&lt;/button&gt;
+&lt;button class=&quot;btn-secondary&quot;&gt;Guardar borrador&lt;/button&gt;
+
+&lt;!-- Tamaño pequeño — .btn-sm aplica a cualquier variante --&gt;
+&lt;button class=&quot;btn-primary btn-sm&quot;&gt;Crear&lt;/button&gt;
+&lt;button class=&quot;btn-secondary btn-sm&quot;&gt;Guardar&lt;/button&gt;
+&lt;button class=&quot;btn-tertiary btn-sm&quot;&gt;Cancelar&lt;/button&gt;
+&lt;button class=&quot;icon-btn btn-sm&quot; aria-label=&quot;Editar&quot;&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Icons ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Botones con ícono</h2>
+          <p class="docs-section-desc">Los SVGs heredan el color vía <code>currentColor</code> — no pasés un color explícito al SVG. El gap de 8px entre ícono y label ya viene en el estilo base.</p>
+          <div class="bd-stage" style="gap:12px;flex-wrap:wrap;margin-bottom:16px">
+            <button class="btn-primary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nueva vacante</button>
+            <button class="btn-secondary">Exportar <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="btn-tertiary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar</button>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;!-- Ícono antes del label (acción de creación) --&gt;
+&lt;button class=&quot;btn-primary&quot;&gt;
+  &lt;svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;
+       stroke=&quot;currentColor&quot; stroke-width=&quot;2.5&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+    &lt;line x1=&quot;12&quot; y1=&quot;5&quot; x2=&quot;12&quot; y2=&quot;19&quot;/&gt;
+    &lt;line x1=&quot;5&quot; y1=&quot;12&quot; x2=&quot;19&quot; y2=&quot;12&quot;/&gt;
+  &lt;/svg&gt;
+  Nueva vacante
+&lt;/button&gt;
+
+&lt;!-- Ícono después del label (dirección / expansión) --&gt;
+&lt;button class=&quot;btn-secondary&quot;&gt;
+  Exportar
+  &lt;svg width=&quot;15&quot; height=&quot;15&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;
+       stroke=&quot;currentColor&quot; stroke-width=&quot;2.5&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+    &lt;polyline points=&quot;6 9 12 15 18 9&quot;/&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Disabled ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estado deshabilitado</h2>
+          <p class="docs-section-desc">Usá el atributo HTML nativo <code>disabled</code> — no construyas el estado con CSS manual. El lector de pantalla anuncia el estado automáticamente.</p>
+          <div class="bd-stage" style="gap:12px;flex-wrap:wrap;margin-bottom:16px">
+            <button class="btn-primary" disabled>Publicar</button>
+            <button class="btn-secondary" disabled>Guardar</button>
+            <button class="btn-tertiary" disabled>Cancelar</button>
+            <button class="icon-btn" disabled aria-label="Ajustes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;button class=&quot;btn-primary&quot; disabled&gt;Publicar&lt;/button&gt;
+&lt;button class=&quot;btn-secondary&quot; disabled&gt;Guardar&lt;/button&gt;
+&lt;button class=&quot;btn-tertiary&quot; disabled&gt;Cancelar&lt;/button&gt;
+
+&lt;!-- ⚠️  Si deshabilitar es temporal, explicá por qué.
+     Agregá un tooltip o mensaje de ayuda. --&gt;
+&lt;button class=&quot;btn-primary&quot; disabled title=&quot;Completá todos los campos obligatorios&quot;&gt;
+  Enviar
+&lt;/button&gt;</code></pre>
+          </div>
+          <div class="bd-callout"><span class="bd-ico">⚠️</span><span>Nunca uses <code>pointer-events:none</code> o <code>opacity:.5</code> para simular un botón deshabilitado. Usá <code>disabled</code> para que el browser y los lectores de pantalla lo traten correctamente.</span></div>
+        </section>
+
+        <!-- ── Loading ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estado de carga (loading)</h2>
+          <p class="docs-section-desc">Para mostrar que una acción está procesando: deshabilitar el botón + agregar un spinner SVG animado + actualizar el label.</p>
+          <div class="bd-stage" style="margin-bottom:16px">
+            <button class="btn-primary" disabled style="gap:8px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite;flex-shrink:0"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+              Publicando…
+            </button>
+          </div>
+          <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;style&gt;
+@keyframes spin { to { transform: rotate(360deg); } }
+.btn-loading svg { animation: spin 1s linear infinite; }
+&lt;/style&gt;
+
+&lt;!-- Loading state: disabled + spinner + label actualizado --&gt;
+&lt;button class=&quot;btn-primary btn-loading&quot; disabled aria-busy=&quot;true&quot;&gt;
+  &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;
+       stroke=&quot;currentColor&quot; stroke-width=&quot;2.5&quot;
+       stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
+    &lt;path d=&quot;M21 12a9 9 0 1 1-6.219-8.56&quot;/&gt;
+  &lt;/svg&gt;
+  Publicando…
+&lt;/button&gt;
+
+&lt;!-- Con JS: toggle loading state --&gt;
+&lt;script&gt;
+function setLoading(btn, isLoading) {
+  btn.disabled = isLoading;
+  btn.setAttribute('aria-busy', isLoading);
+  btn.classList.toggle('btn-loading', isLoading);
+  btn.textContent = isLoading ? 'Publicando…' : 'Publicar';
+}
+&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Form pattern ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Patrón: pie de formulario</h2>
+          <p class="docs-section-desc">El patrón más común: acción primaria a la derecha, escape tertiary a la izquierda. Una primaria por formulario. Si el formulario tiene múltiples pasos, usá <code>.btn-next</code> para el avance.</p>
+          <div class="bd-card" style="max-width:500px;margin-bottom:16px">
+            <h3 style="font:700 16px 'Epilogue';color:var(--ds-text-1);margin:0 0 6px">Publicar vacante</h3>
+            <p style="font-size:13px;color:var(--ds-text-3);margin:0 0 20px;line-height:1.6">La vacante será visible para todos los candidatos. Podés editarla después.</p>
+            <div style="display:flex;gap:10px;justify-content:flex-end;border-top:1px solid var(--border);padding-top:16px">
+              <button class="btn-tertiary">Cancelar</button>
+              <button class="btn-primary">Publicar vacante</button>
+            </div>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;form&gt;
+  &lt;!-- campos del formulario --&gt;
+
+  &lt;div class=&quot;form-actions&quot; style=&quot;display:flex;gap:10px;justify-content:flex-end&quot;&gt;
+    &lt;!-- Escape: siempre tertiary, nunca danger --&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn-tertiary&quot; onclick=&quot;closeModal()&quot;&gt;Cancelar&lt;/button&gt;
+
+    &lt;!-- Acción principal: type=&quot;submit&quot; --&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;btn-primary&quot;&gt;Publicar vacante&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Destructive confirmation ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Patrón: confirmación destructiva</h2>
+          <p class="docs-section-desc">Para acciones irreversibles (eliminar, archivar definitivamente): usá <code>btn-danger</code> solo en la confirmación final, dentro de un modal de confirmación. Nunca como acción inline directa.</p>
+          <div class="bd-card" style="max-width:420px;margin-bottom:16px">
+            <p style="font:700 15px 'Epilogue';color:var(--ds-text-1);margin:0 0 8px">¿Eliminar esta vacante?</p>
+            <p style="font-size:13px;color:var(--ds-text-3);margin:0 0 20px;line-height:1.6">Esta acción no se puede deshacer. La vacante y todos sus postulantes serán eliminados permanentemente.</p>
+            <div style="display:flex;gap:10px;justify-content:flex-end">
+              <button class="btn-tertiary">Cancelar</button>
+              <button class="btn-primary btn-danger">Eliminar</button>
+            </div>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;!-- Modal de confirmación destructiva --&gt;
+&lt;div role=&quot;alertdialog&quot; aria-modal=&quot;true&quot;
+     aria-labelledby=&quot;dlg-title&quot; aria-describedby=&quot;dlg-desc&quot;&gt;
+  &lt;h2 id=&quot;dlg-title&quot;&gt;¿Eliminar esta vacante?&lt;/h2&gt;
+  &lt;p id=&quot;dlg-desc&quot;&gt;Esta acción no se puede deshacer.&lt;/p&gt;
+  &lt;div style=&quot;display:flex;gap:10px;justify-content:flex-end&quot;&gt;
+    &lt;button class=&quot;btn-tertiary&quot; onclick=&quot;closeDialog()&quot;&gt;Cancelar&lt;/button&gt;
+    &lt;button class=&quot;btn-primary btn-danger&quot; onclick=&quot;confirmDelete()&quot;&gt;Eliminar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- ⚠️  Errores comunes:
+  ✕ &lt;button class=&quot;btn-danger"&gt;  ← btn-danger sin btn-primary no existe como clase
+  ✕ &lt;button class=&quot;btn-primary btn-danger"&gt;Cancelar&lt;/button&gt;  ← cancelar NO es danger
+  ✕ &lt;div class=&quot;btn-primary"&gt;  ← siempre &lt;button&gt;, nunca &lt;div&gt; --&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── React ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <p class="docs-section-desc">Podés usar las clases CSS directamente en JSX o crear un wrapper liviano. Este ejemplo no requiere ninguna dependencia extra.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>// Button.tsx
+type Variant = 'primary' | 'secondary' | 'tertiary' | 'text';
+type Size    = 'default' | 'sm';
+
+interface ButtonProps extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt; {
+  variant?: Variant;
+  size?: Size;
+  danger?: boolean;
+  success?: boolean;
+  loading?: boolean;
+  icon?: React.ReactNode;      // ícono inicial (antes del label)
+  trailingIcon?: React.ReactNode; // ícono final
+}
+
+export function Button({
+  variant = 'primary',
+  size = 'default',
+  danger,
+  success,
+  loading,
+  icon,
+  trailingIcon,
+  children,
+  disabled,
+  className,
+  ...props
+}: ButtonProps) {
+  const classes = [
+    `btn-${variant}`,
+    size === 'sm' ? 'btn-sm' : '',
+    danger  ? 'btn-danger'  : '',
+    success ? 'btn-success' : '',
+    className ?? '',
+  ].filter(Boolean).join(' ');
+
+  return (
+    &lt;button
+      className={classes}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
+      {...props}
+    &gt;
+      {loading &amp;&amp; (
+        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;
+             stroke=&quot;currentColor&quot; stroke-width=&quot;2.5&quot;
+             style={{ animation: 'spin 1s linear infinite', flexShrink: 0 }}&gt;
+          &lt;path d=&quot;M21 12a9 9 0 1 1-6.219-8.56&quot;/&gt;
+        &lt;/svg&gt;
+      )}
+      {!loading &amp;&amp; icon}
+      {children}
+      {!loading &amp;&amp; trailingIcon}
+    &lt;/button&gt;
+  );
+}
+
+// Uso
+&lt;Button variant=&quot;primary&quot; onClick={handleSubmit}&gt;Publicar vacante&lt;/Button&gt;
+&lt;Button variant=&quot;secondary&quot; size=&quot;sm&quot;&gt;Guardar borrador&lt;/Button&gt;
+&lt;Button variant=&quot;tertiary&quot;&gt;Cancelar&lt;/Button&gt;
+&lt;Button variant=&quot;primary&quot; danger onClick={handleDelete}&gt;Eliminar&lt;/Button&gt;
+&lt;Button variant=&quot;primary&quot; loading&gt;Publicando…&lt;/Button&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── React icon button ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — IconButton</h2>
+          <p class="docs-section-desc"><code>aria-label</code> es obligatorio. Sin él el botón es inaccesible para lectores de pantalla. En React usá <code>aria-label</code> como prop, no como atributo inline.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>// IconButton.tsx
+interface IconButtonProps extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt; {
+  label: string;   // aria-label requerido — no opcional
+  size?: 'default' | 'sm';
+  children: React.ReactNode; // ícono SVG
+}
+
+export function IconButton({ label, size = 'default', children, className, ...props }: IconButtonProps) {
+  return (
+    &lt;button
+      className={['icon-btn', size === 'sm' ? 'btn-sm' : '', className].filter(Boolean).join(' ')}
+      aria-label={label}
+      {...props}
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+}
+
+// Uso — el label describe la ACCIÓN, no el ícono
+&lt;IconButton label=&quot;Editar vacante&quot;&gt;&lt;EditIcon /&gt;&lt;/IconButton&gt;
+&lt;IconButton label=&quot;Eliminar vacante&quot; size=&quot;sm&quot;&gt;&lt;TrashIcon /&gt;&lt;/IconButton&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Token reference ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Referencia de tokens CSS</h2>
+          <p class="docs-section-desc">Todos los tokens son semánticos (<code>--color-*</code>). Los tokens <code>--button-secondary-*</code> son aliases específicos del Secondary tonal — no los mezcles con otros componentes.</p>
+          <div class="ds-table-wrap">
+            <table class="docs-props-table">
+              <thead><tr><th>Token</th><th>Variante</th><th>Propiedad</th><th>Light</th><th>Dark</th></tr></thead>
+              <tbody>
+                <tr><td><code>--color-primary</code></td><td>Primary</td><td>background</td><td>#2D52D8</td><td>#8CA8FF</td></tr>
+                <tr><td><code>--color-on-primary</code></td><td>Primary</td><td>color</td><td>#FFFFFF</td><td>#0A1454</td></tr>
+                <tr><td><code>--color-primary-hover</code></td><td>Primary</td><td>bg:hover</td><td>#2347C5</td><td>#9DB6FF</td></tr>
+                <tr><td><code>--button-secondary-bg</code></td><td>Secondary</td><td>background</td><td>#CAD9FF</td><td>#3A5BB0</td></tr>
+                <tr><td><code>--button-secondary-text</code></td><td>Secondary</td><td>color</td><td>#001162</td><td>#E2EAFF</td></tr>
+                <tr><td><code>--button-secondary-border</code></td><td>Secondary</td><td>border-color</td><td>#B2C4F0</td><td>#4D6EC4</td></tr>
+                <tr><td><code>--button-secondary-bg-hover</code></td><td>Secondary</td><td>bg:hover</td><td>#B8CAFF</td><td>#4A6CC4</td></tr>
+                <tr><td><code>--color-outline</code></td><td>Tertiary</td><td>border-color</td><td>#767B8D</td><td>#909099</td></tr>
+                <tr><td><code>--color-surface-variant</code></td><td>Tertiary</td><td>bg:hover</td><td>#E5E8F4</td><td>#2A2D3A</td></tr>
+                <tr><td><code>--color-error</code></td><td>Primary Danger</td><td>background</td><td>#C0393B</td><td>#FFB4AB</td></tr>
+                <tr><td><code>--color-success</code></td><td>Primary Success</td><td>background</td><td>#1C7C3A</td><td>#78DC8A</td></tr>
+                <tr><td><code>--color-disabled</code></td><td>All · disabled</td><td>background</td><td>#E5E8F4</td><td>#2A2D3A</td></tr>
+                <tr><td><code>--color-on-disabled</code></td><td>All · disabled</td><td>color</td><td>#888C9B</td><td>#56586A</td></tr>
+                <tr><td><code>--color-focus</code></td><td>All · focus</td><td>outline</td><td>#2D52D8</td><td>#8CA8FF</td></tr>
+                <tr><td><code>--color-focus-ring</code></td><td>All · focus</td><td>box-shadow</td><td>rgba(45,82,216,.20)</td><td>rgba(140,168,255,.20)</td></tr>
+                <tr><td><code>--radius-md</code></td><td>All</td><td>border-radius</td><td colspan="2">8px</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">🌙</span><span>No necesitás overrides por tema. Los pares <code>--color-primary</code> / <code>--color-on-primary</code> se recalibran automáticamente en <code>[data-theme="dark"]</code> dentro de <code>variables.css</code>.</span></div>
+        </section>
+
+        <!-- ── Common mistakes audit ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Errores frecuentes de implementación</h2>
+          <p class="docs-section-desc">Errores que aparecen en páginas externas de Amalgama y cómo corregirlos.</p>
+          <div class="bd-grid c2">
+            <div class="bd-dd dont">
+              <div class="bd-dd-head">✕ Usar <code>div</code> como botón</div>
+              <div class="bd-dd-body">
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;div class=&quot;btn-primary&quot; onclick=&quot;…&quot;&gt;
+  Crear
+&lt;/div&gt;</code></pre></div>
+                <span class="bd-dd-note">Problema: sin foco nativo, sin soporte Enter/Space, invisible para lectores de pantalla. Usá siempre <code>&lt;button&gt;</code>.</span>
+              </div>
+            </div>
+            <div class="bd-dd do">
+              <div class="bd-dd-head">✓ Corrección</div>
+              <div class="bd-dd-body">
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-primary&quot; onclick=&quot;…&quot;&gt;
+  Crear
+&lt;/button&gt;</code></pre></div>
+                <span class="bd-dd-note">El <code>&lt;button&gt;</code> nativo incluye rol, foco y activación por teclado sin configuración adicional.</span>
+              </div>
+            </div>
+            <div class="bd-dd dont">
+              <div class="bd-dd-head">✕ <code>btn-danger</code> sin <code>btn-primary</code></div>
+              <div class="bd-dd-body">
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-danger&quot;&gt;
+  Eliminar
+&lt;/button&gt;</code></pre></div>
+                <span class="bd-dd-note"><code>btn-danger</code> es un modificador — solo funciona combinado con <code>btn-primary</code>. Solo no tiene estilos base.</span>
+              </div>
+            </div>
+            <div class="bd-dd do">
+              <div class="bd-dd-head">✓ Corrección</div>
+              <div class="bd-dd-body">
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-primary btn-danger&quot;&gt;
+  Eliminar
+&lt;/button&gt;</code></pre></div>
+                <span class="bd-dd-note">Siempre <code>btn-primary btn-danger</code> juntos. Lo mismo aplica a <code>btn-success</code>.</span>
+              </div>
+            </div>
+            <div class="bd-dd dont">
+              <div class="bd-dd-head">✕ Hard-code de color en el botón</div>
+              <div class="bd-dd-body">
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-primary&quot;
+  style=&quot;background:#2D52D8;color:#fff&quot;&gt;
+  Crear
+&lt;/button&gt;</code></pre></div>
+                <span class="bd-dd-note">El inline style sobreescribe los tokens y rompe el dark mode. Nunca pasés colores inline a un botón del DS.</span>
+              </div>
+            </div>
+            <div class="bd-dd do">
+              <div class="bd-dd-head">✓ Corrección</div>
+              <div class="bd-dd-body">
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-primary&quot;&gt;
+  Crear
+&lt;/button&gt;
+&lt;!-- Los tokens del DS manejan light y dark. --&gt;</code></pre></div>
+                <span class="bd-dd-note">Confiá en los tokens semánticos. No se necesitan estilos inline para ningún estado ni tema.</span>
+              </div>
+            </div>
+            <div class="bd-dd dont">
+              <div class="bd-dd-head">✕ Icon button sin <code>aria-label</code></div>
+              <div class="bd-dd-body">
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;icon-btn&quot;&gt;
+  &lt;svg&gt;…&lt;/svg&gt;
+&lt;/button&gt;</code></pre></div>
+                <span class="bd-dd-note">Sin <code>aria-label</code> el lector de pantalla anuncia "botón" sin contexto. El usuario no sabe qué hace.</span>
+              </div>
+            </div>
+            <div class="bd-dd do">
+              <div class="bd-dd-head">✓ Corrección</div>
+              <div class="bd-dd-body">
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;icon-btn&quot; aria-label=&quot;Editar vacante&quot;&gt;
+  &lt;svg&gt;…&lt;/svg&gt;
+&lt;/button&gt;</code></pre></div>
+                <span class="bd-dd-note">El <code>aria-label</code> describe la acción ("Editar vacante"), no el ícono ("lápiz").</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
 
     </section>
