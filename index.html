@@ -756,21 +756,25 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 18px 0;
+  padding: 20px 20px 0;
   flex-shrink: 0;
 }
 
+/* Tag — lightweight editorial label, subtle outline style */
 .nav-card-tag {
   font-family: 'DM Mono', monospace;
-  font-size: 10px; font-weight: 500;
-  text-transform: uppercase; letter-spacing: .08em;
+  font-size: 9.5px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .07em;
   color: var(--color-on-surface-variant);
-  line-height: 1;
+  border: 1px solid color-mix(in srgb, var(--color-on-surface) 14%, transparent);
+  padding: 2px 7px; border-radius: 4px;
+  line-height: 1.4;
 }
 
+/* Arrow — minimal circular indicator */
 .nav-card-arrow-btn {
-  width: 26px; height: 26px; border-radius: 8px;
-  background: color-mix(in srgb, var(--color-on-surface) 7%, transparent);
+  width: 24px; height: 24px; border-radius: 50%;
+  background: color-mix(in srgb, var(--color-on-surface) 6%, transparent);
   color: var(--color-on-surface-variant);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -778,21 +782,21 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 }
 .nav-card:hover .nav-card-arrow-btn,
 .ds-card-link:hover .nav-card-arrow-btn {
-  background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
   color: var(--color-primary);
 }
-.nav-card-arrow-btn svg { width: 13px; height: 13px; stroke-width: 2.25; }
+.nav-card-arrow-btn svg { width: 11px; height: 11px; stroke-width: 2.25; }
 
 /* ── Content area ── */
 .nav-card-content {
-  padding: 12px 18px 22px;
+  padding: 14px 20px 20px;
   flex: 1;
 }
 .nav-card-title {
   font-family: 'Epilogue', sans-serif;
-  font-size: 21px; font-weight: 800;
+  font-size: 22px; font-weight: 800;
   color: var(--color-on-surface);
-  line-height: 1.12; letter-spacing: -.025em;
+  line-height: 1.1; letter-spacing: -.028em;
   margin-bottom: 8px;
 }
 .nav-card-desc {
@@ -801,16 +805,38 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   line-height: 1.55;
 }
 
-/* ── Visual / illustration area ── */
+/* ── Visual / illustration area ──
+   Floats inside the card with margin on all exposed sides,
+   giving it its own rounded shape rather than bleeding to edges. */
 .nav-card-visual {
-  height: 148px;
+  height: 190px;
+  margin: 0 12px 12px;
+  border-radius: 10px;
   background: var(--color-surface-variant);
   color: var(--color-on-surface-variant);
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
+  position: relative;
 }
-.nav-card-visual svg { width: 100%; height: 100%; }
+.nav-card-visual svg { width: 100%; height: 100%; display: block; }
+
+/* Grain / film texture overlay on all visual areas */
+.nav-card-visual::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.45'/%3E%3C/svg%3E");
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Dark cosmic background variant (Get Started planet cards) */
+.nv-cosmic {
+  background: #060410;
+  color: rgba(255,255,255,0.7);
+}
 
 /* Visual tint variants (on .nav-card-visual only) */
 .nv-primary   { background: var(--color-primary-container);   color: var(--color-on-primary-container); }
@@ -8669,6 +8695,8 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
     <!-- ── ANCHOR BOXES ── -->
     <div class="emb-gs-anchors">
+
+  <!-- ① Violet Ringed Giant — ¿Qué es Embassy? -->
   <div class="nav-card" onclick="document.getElementById('gs-what').scrollIntoView({behavior:'smooth'})">
     <div class="nav-card-header">
       <span class="nav-card-tag">Embassy DS</span>
@@ -8678,25 +8706,51 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="nav-card-title">¿Qué es Embassy?</div>
       <div class="nav-card-desc">Definición y propósito del sistema</div>
     </div>
-    <div class="nav-card-visual nv-info">
-      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Layered system architecture cards -->
-        <rect x="60" y="90" width="160" height="42" rx="8" fill="currentColor" opacity=".18"/>
-        <rect x="50" y="72" width="160" height="42" rx="8" fill="currentColor" opacity=".28"/>
-        <rect x="40" y="54" width="160" height="42" rx="8" fill="currentColor" opacity=".42"/>
-        <rect x="30" y="36" width="160" height="42" rx="8" fill="currentColor" opacity=".60"/>
-        <!-- Token dots on top layer -->
-        <circle cx="48" cy="57" r="4" fill="currentColor" opacity=".9"/>
-        <rect x="57" y="54" width="40" height="6" rx="3" fill="currentColor" opacity=".5"/>
-        <rect x="57" y="64" width="26" height="4" rx="2" fill="currentColor" opacity=".3"/>
-        <!-- Right abstract pattern -->
-        <rect x="210" y="44" width="32" height="32" rx="16" fill="currentColor" opacity=".25"/>
-        <rect x="220" y="84" width="20" height="20" rx="4" fill="currentColor" opacity=".18"/>
-        <rect x="214" y="110" width="28" height="6" rx="3" fill="currentColor" opacity=".12"/>
+    <div class="nav-card-visual nv-cosmic">
+      <svg viewBox="0 0 280 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="rg1" cx="36%" cy="30%" r="68%">
+            <stop offset="0%" stop-color="#F5EEFF"/><stop offset="22%" stop-color="#DDB6FF"/>
+            <stop offset="48%" stop-color="#A855F7"/><stop offset="75%" stop-color="#5B21B6"/>
+            <stop offset="100%" stop-color="#1E0B3A"/>
+          </radialGradient>
+          <radialGradient id="h1" cx="50%" cy="50%" r="50%">
+            <stop offset="45%" stop-color="#7C3AED" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#A855F7" stop-opacity="0.22"/>
+          </radialGradient>
+          <linearGradient id="rl1" x1="59" y1="0" x2="291" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F472B6" stop-opacity="0"/><stop offset="18%" stop-color="#E879F9" stop-opacity="0.90"/>
+            <stop offset="82%" stop-color="#F472B6" stop-opacity="0.70"/><stop offset="100%" stop-color="#F472B6" stop-opacity="0"/>
+          </linearGradient>
+          <clipPath id="cp1"><circle cx="175" cy="118" r="72"/></clipPath>
+        </defs>
+        <rect width="280" height="190" fill="#06020E"/>
+        <!-- Stars -->
+        <circle cx="22" cy="20" r="1.5" fill="#F5D0FE" opacity="0.9"/><circle cx="52" cy="47" r="1" fill="white" opacity="0.7"/>
+        <circle cx="82" cy="15" r="0.9" fill="white" opacity="0.55"/><circle cx="240" cy="30" r="1.3" fill="#F0ABFC" opacity="0.8"/>
+        <circle cx="260" cy="158" r="1" fill="white" opacity="0.5"/><circle cx="25" cy="165" r="0.8" fill="#E879F9" opacity="0.6"/>
+        <circle cx="108" cy="175" r="1" fill="white" opacity="0.38"/>
+        <!-- 4-point sparkle -->
+        <path d="M45 74 L47 67 L49 74 L56 76 L49 78 L47 85 L45 78 L38 76Z" fill="white" opacity="0.88"/>
+        <!-- Ring back arc (top, behind planet) -->
+        <path d="M 59 118 A 116 24 0 0 0 291 118" stroke="url(#rl1)" stroke-width="6" fill="none" opacity="0.52"/>
+        <!-- Planet glow -->
+        <circle cx="175" cy="118" r="96" fill="url(#h1)"/>
+        <!-- Planet body -->
+        <circle cx="175" cy="118" r="72" fill="url(#rg1)"/>
+        <!-- Atmospheric bands -->
+        <g clip-path="url(#cp1)">
+          <ellipse cx="175" cy="102" rx="72" ry="14" fill="#E9D5FF" opacity="0.22"/>
+          <ellipse cx="175" cy="122" rx="72" ry="10" fill="#9333EA" opacity="0.20"/>
+          <ellipse cx="175" cy="140" rx="72" ry="8" fill="#4C1D95" opacity="0.16"/>
+        </g>
+        <!-- Ring front arc (bottom, in front of planet) -->
+        <path d="M 59 118 A 116 24 0 0 1 291 118" stroke="url(#rl1)" stroke-width="6" fill="none" opacity="0.90"/>
       </svg>
     </div>
   </div>
 
+  <!-- ② Amber World + Icy Moon — ¿Para quién es? -->
   <div class="nav-card" onclick="document.getElementById('gs-who').scrollIntoView({behavior:'smooth'})">
     <div class="nav-card-header">
       <span class="nav-card-tag">Audiencias</span>
@@ -8706,22 +8760,57 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="nav-card-title">¿Para quién es?</div>
       <div class="nav-card-desc">Roles y audiencias del DS</div>
     </div>
-    <div class="nav-card-visual nv-tertiary">
-      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Two abstract figures -->
-        <circle cx="100" cy="60" r="22" fill="currentColor" opacity=".55"/>
-        <rect x="72" y="88" width="56" height="40" rx="28" fill="currentColor" opacity=".45"/>
-        <circle cx="176" cy="66" r="18" fill="currentColor" opacity=".38"/>
-        <rect x="152" y="90" width="48" height="36" rx="24" fill="currentColor" opacity=".30"/>
-        <!-- Connection line -->
-        <line x1="130" y1="80" x2="154" y2="82" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" opacity=".35"/>
-        <!-- Tag badges -->
-        <rect x="78" y="50" width="44" height="14" rx="7" fill="currentColor" opacity=".18"/>
-        <rect x="158" y="56" width="36" height="12" rx="6" fill="currentColor" opacity=".15"/>
+    <div class="nav-card-visual nv-cosmic">
+      <svg viewBox="0 0 280 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="rg2" cx="32%" cy="28%" r="66%">
+            <stop offset="0%" stop-color="#FFFAEB"/><stop offset="20%" stop-color="#FCD34D"/>
+            <stop offset="45%" stop-color="#F59E0B"/><stop offset="72%" stop-color="#B45309"/>
+            <stop offset="100%" stop-color="#431407"/>
+          </radialGradient>
+          <radialGradient id="moon2" cx="38%" cy="32%" r="62%">
+            <stop offset="0%" stop-color="#F0F9FF"/><stop offset="30%" stop-color="#BAE6FD"/>
+            <stop offset="65%" stop-color="#38BDF8"/><stop offset="100%" stop-color="#0C4A6E"/>
+          </radialGradient>
+          <radialGradient id="h2" cx="50%" cy="50%" r="50%">
+            <stop offset="40%" stop-color="#D97706" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#F59E0B" stop-opacity="0.20"/>
+          </radialGradient>
+          <clipPath id="cp2"><circle cx="228" cy="148" r="90"/></clipPath>
+          <clipPath id="cpm2"><circle cx="68" cy="54" r="30"/></clipPath>
+        </defs>
+        <rect width="280" height="190" fill="#0A0500"/>
+        <!-- Stars -->
+        <circle cx="18" cy="25" r="1.3" fill="white" opacity="0.8"/><circle cx="42" cy="12" r="0.9" fill="#FEF3C7" opacity="0.75"/>
+        <circle cx="110" cy="18" r="1" fill="white" opacity="0.6"/><circle cx="155" cy="32" r="1.2" fill="#FDE68A" opacity="0.70"/>
+        <circle cx="30" cy="85" r="0.8" fill="white" opacity="0.45"/><circle cx="195" cy="12" r="1.5" fill="white" opacity="0.85"/>
+        <circle cx="16" cy="140" r="1" fill="#FDE68A" opacity="0.55"/>
+        <!-- Orbital arc (subtle dashed) -->
+        <ellipse cx="160" cy="102" rx="98" ry="54" stroke="white" stroke-width="0.7" fill="none" stroke-dasharray="3 9" opacity="0.15"/>
+        <!-- Moon glow -->
+        <circle cx="68" cy="54" r="42" fill="#38BDF8" opacity="0.07"/>
+        <!-- Moon body -->
+        <circle cx="68" cy="54" r="30" fill="url(#moon2)"/>
+        <!-- Moon bands -->
+        <g clip-path="url(#cpm2)">
+          <ellipse cx="68" cy="48" rx="30" ry="8" fill="#BAE6FD" opacity="0.22"/>
+          <ellipse cx="68" cy="62" rx="30" ry="6" fill="#0284C7" opacity="0.18"/>
+        </g>
+        <!-- Large planet glow -->
+        <circle cx="228" cy="148" r="114" fill="url(#h2)"/>
+        <!-- Large planet body (partially cropped) -->
+        <circle cx="228" cy="148" r="90" fill="url(#rg2)"/>
+        <!-- Atmospheric bands -->
+        <g clip-path="url(#cp2)">
+          <ellipse cx="228" cy="128" rx="90" ry="18" fill="#FEF3C7" opacity="0.22"/>
+          <ellipse cx="228" cy="152" rx="90" ry="14" fill="#D97706" opacity="0.18"/>
+          <ellipse cx="228" cy="174" rx="90" ry="12" fill="#92400E" opacity="0.15"/>
+        </g>
       </svg>
     </div>
   </div>
 
+  <!-- ③ Teal Double-Ringed World — Usar Embassy -->
   <div class="nav-card" onclick="document.getElementById('gs-using').scrollIntoView({behavior:'smooth'})">
     <div class="nav-card-header">
       <span class="nav-card-tag">Guía</span>
@@ -8731,27 +8820,57 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="nav-card-title">Usar Embassy</div>
       <div class="nav-card-desc">Cómo está organizada la doc</div>
     </div>
-    <div class="nav-card-visual nv-primary">
-      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Navigation / map structure -->
-        <rect x="30" y="36" width="80" height="76" rx="10" fill="currentColor" opacity=".22"/>
-        <rect x="40" y="46" width="60" height="8" rx="4" fill="currentColor" opacity=".55"/>
-        <rect x="40" y="60" width="44" height="5" rx="2.5" fill="currentColor" opacity=".35"/>
-        <rect x="40" y="70" width="52" height="5" rx="2.5" fill="currentColor" opacity=".30"/>
-        <rect x="40" y="80" width="38" height="5" rx="2.5" fill="currentColor" opacity=".25"/>
-        <rect x="40" y="90" width="48" height="5" rx="2.5" fill="currentColor" opacity=".20"/>
-        <!-- Arrow pointing to sections -->
-        <path d="M118 74 L168 74 L160 66 M168 74 L160 82" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
-        <!-- Content area -->
-        <rect x="174" y="36" width="76" height="76" rx="10" fill="currentColor" opacity=".15"/>
-        <rect x="184" y="48" width="56" height="10" rx="5" fill="currentColor" opacity=".45"/>
-        <rect x="184" y="64" width="40" height="5" rx="2.5" fill="currentColor" opacity=".28"/>
-        <rect x="184" y="74" width="50" height="5" rx="2.5" fill="currentColor" opacity=".22"/>
-        <rect x="184" y="84" width="34" height="5" rx="2.5" fill="currentColor" opacity=".18"/>
+    <div class="nav-card-visual nv-cosmic">
+      <svg viewBox="0 0 280 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="rg3" cx="34%" cy="28%" r="66%">
+            <stop offset="0%" stop-color="#ECFDF5"/><stop offset="18%" stop-color="#6EE7B7"/>
+            <stop offset="42%" stop-color="#0EA5E9"/><stop offset="68%" stop-color="#0369A1"/>
+            <stop offset="100%" stop-color="#082F49"/>
+          </radialGradient>
+          <radialGradient id="h3" cx="50%" cy="50%" r="50%">
+            <stop offset="40%" stop-color="#0EA5E9" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.22"/>
+          </radialGradient>
+          <linearGradient id="rl3a" x1="33" y1="0" x2="257" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#67E8F9" stop-opacity="0"/><stop offset="20%" stop-color="#22D3EE" stop-opacity="0.82"/>
+            <stop offset="80%" stop-color="#67E8F9" stop-opacity="0.65"/><stop offset="100%" stop-color="#67E8F9" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="rl3b" x1="55" y1="0" x2="235" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#A5F3FC" stop-opacity="0"/><stop offset="25%" stop-color="#A5F3FC" stop-opacity="0.55"/>
+            <stop offset="75%" stop-color="#A5F3FC" stop-opacity="0.42"/><stop offset="100%" stop-color="#A5F3FC" stop-opacity="0"/>
+          </linearGradient>
+          <clipPath id="cp3"><circle cx="145" cy="118" r="68"/></clipPath>
+        </defs>
+        <rect width="280" height="190" fill="#020B0E"/>
+        <!-- Stars -->
+        <circle cx="20" cy="18" r="1.2" fill="#A5F3FC" opacity="0.85"/><circle cx="55" cy="40" r="1" fill="white" opacity="0.65"/>
+        <circle cx="92" cy="22" r="0.9" fill="white" opacity="0.55"/><circle cx="235" cy="28" r="1.4" fill="#67E8F9" opacity="0.80"/>
+        <circle cx="258" cy="148" r="1" fill="white" opacity="0.5"/><circle cx="30" cy="158" r="0.8" fill="#A5F3FC" opacity="0.55"/>
+        <circle cx="250" cy="85" r="0.9" fill="white" opacity="0.45"/>
+        <!-- Outer ring back arc -->
+        <path d="M 33 118 A 112 22 0 0 0 257 118" stroke="url(#rl3a)" stroke-width="5" fill="none" opacity="0.48"/>
+        <!-- Inner ring back arc -->
+        <path d="M 55 118 A 90 17 0 0 0 235 118" stroke="url(#rl3b)" stroke-width="3.5" fill="none" opacity="0.38"/>
+        <!-- Planet glow -->
+        <circle cx="145" cy="118" r="90" fill="url(#h3)"/>
+        <!-- Planet body -->
+        <circle cx="145" cy="118" r="68" fill="url(#rg3)"/>
+        <!-- Atmospheric bands -->
+        <g clip-path="url(#cp3)">
+          <ellipse cx="145" cy="103" rx="68" ry="13" fill="#A7F3D0" opacity="0.22"/>
+          <ellipse cx="145" cy="122" rx="68" ry="10" fill="#0284C7" opacity="0.20"/>
+          <ellipse cx="145" cy="138" rx="68" ry="8" fill="#075985" opacity="0.16"/>
+        </g>
+        <!-- Outer ring front arc -->
+        <path d="M 33 118 A 112 22 0 0 1 257 118" stroke="url(#rl3a)" stroke-width="5" fill="none" opacity="0.88"/>
+        <!-- Inner ring front arc -->
+        <path d="M 55 118 A 90 17 0 0 1 235 118" stroke="url(#rl3b)" stroke-width="3.5" fill="none" opacity="0.72"/>
       </svg>
     </div>
   </div>
 
+  <!-- ④ Hot Pink Chromatic Sphere — Para diseñadores -->
   <div class="nav-card" onclick="document.getElementById('gs-design').scrollIntoView({behavior:'smooth'})">
     <div class="nav-card-header">
       <span class="nav-card-tag">Diseño</span>
@@ -8761,33 +8880,55 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="nav-card-title">Para diseñadores</div>
       <div class="nav-card-desc">Figma, tokens y componentes</div>
     </div>
-    <div class="nav-card-visual nv-warning">
-      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Figma-like frame -->
-        <rect x="50" y="28" width="96" height="92" rx="6" stroke="currentColor" stroke-width="2" opacity=".45"/>
-        <!-- Corner handles -->
-        <rect x="44" y="22" width="10" height="10" rx="2" fill="currentColor" opacity=".55"/>
-        <rect x="134" y="22" width="10" height="10" rx="2" fill="currentColor" opacity=".55"/>
-        <rect x="44" y="112" width="10" height="10" rx="2" fill="currentColor" opacity=".55"/>
-        <rect x="134" y="112" width="10" height="10" rx="2" fill="currentColor" opacity=".55"/>
-        <!-- Color swatches inside frame -->
-        <rect x="62" y="42" width="20" height="20" rx="10" fill="currentColor" opacity=".65"/>
-        <rect x="88" y="42" width="20" height="20" rx="4" fill="currentColor" opacity=".45"/>
-        <rect x="114" y="42" width="20" height="20" rx="10" fill="currentColor" opacity=".30"/>
-        <!-- Component block -->
-        <rect x="62" y="72" width="72" height="28" rx="6" fill="currentColor" opacity=".22"/>
-        <rect x="70" y="80" width="32" height="5" rx="2.5" fill="currentColor" opacity=".50"/>
-        <rect x="70" y="89" width="22" height="4" rx="2" fill="currentColor" opacity=".32"/>
-        <!-- Token list on right -->
-        <rect x="162" y="36" width="68" height="8" rx="4" fill="currentColor" opacity=".40"/>
-        <rect x="162" y="52" width="56" height="8" rx="4" fill="currentColor" opacity=".32"/>
-        <rect x="162" y="68" width="64" height="8" rx="4" fill="currentColor" opacity=".25"/>
-        <rect x="162" y="84" width="48" height="8" rx="4" fill="currentColor" opacity=".18"/>
-        <rect x="162" y="100" width="60" height="8" rx="4" fill="currentColor" opacity=".13"/>
+    <div class="nav-card-visual nv-cosmic">
+      <svg viewBox="0 0 280 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="rg4" cx="35%" cy="32%" r="65%">
+            <stop offset="0%" stop-color="#FFF1F2"/><stop offset="15%" stop-color="#FBCFE8"/>
+            <stop offset="35%" stop-color="#F472B6"/><stop offset="60%" stop-color="#BE185D"/>
+            <stop offset="85%" stop-color="#831843"/><stop offset="100%" stop-color="#3B0A23"/>
+          </radialGradient>
+          <radialGradient id="h4" cx="50%" cy="50%" r="50%">
+            <stop offset="40%" stop-color="#EC4899" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#F472B6" stop-opacity="0.26"/>
+          </radialGradient>
+          <linearGradient id="rl4" x1="30" y1="0" x2="266" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#F0ABFC" stop-opacity="0"/><stop offset="18%" stop-color="#E879F9" stop-opacity="1"/>
+            <stop offset="82%" stop-color="#F472B6" stop-opacity="0.85"/><stop offset="100%" stop-color="#F472B6" stop-opacity="0"/>
+          </linearGradient>
+          <clipPath id="cp4"><circle cx="148" cy="114" r="76"/></clipPath>
+        </defs>
+        <rect width="280" height="190" fill="#0A0208"/>
+        <!-- Stars -->
+        <circle cx="20" cy="22" r="1.4" fill="#FDF2F8" opacity="0.9"/><circle cx="48" cy="44" r="1" fill="#F9A8D4" opacity="0.75"/>
+        <circle cx="78" cy="18" r="0.9" fill="white" opacity="0.6"/><circle cx="245" cy="35" r="1.3" fill="#FDF2F8" opacity="0.85"/>
+        <circle cx="263" cy="160" r="1" fill="white" opacity="0.5"/><circle cx="22" cy="170" r="0.8" fill="#F9A8D4" opacity="0.6"/>
+        <!-- Sparkle top-right -->
+        <path d="M232 58 L234 52 L236 58 L242 60 L236 62 L234 68 L232 62 L226 60Z" fill="white" opacity="0.85"/>
+        <!-- Ring back arc -->
+        <path d="M 30 114 A 118 22 0 0 0 266 114" stroke="url(#rl4)" stroke-width="7" fill="none" opacity="0.50"/>
+        <!-- Planet glow -->
+        <circle cx="148" cy="114" r="100" fill="url(#h4)"/>
+        <!-- Planet body -->
+        <circle cx="148" cy="114" r="76" fill="url(#rg4)"/>
+        <!-- Jupiter-like chromatic bands -->
+        <g clip-path="url(#cp4)">
+          <ellipse cx="148" cy="95" rx="76" ry="12" fill="#FECDD3" opacity="0.30"/>
+          <ellipse cx="148" cy="108" rx="76" ry="9" fill="#FED7AA" opacity="0.24"/>
+          <ellipse cx="148" cy="119" rx="76" ry="11" fill="#F43F5E" opacity="0.22"/>
+          <ellipse cx="148" cy="130" rx="76" ry="8" fill="#FBBF24" opacity="0.18"/>
+          <ellipse cx="148" cy="140" rx="76" ry="7" fill="#EC4899" opacity="0.20"/>
+          <!-- Great spot -->
+          <ellipse cx="108" cy="118" rx="22" ry="14" fill="#FB7185" opacity="0.28"/>
+          <ellipse cx="108" cy="118" rx="13" ry="8" fill="#FFF1F2" opacity="0.18"/>
+        </g>
+        <!-- Ring front arc -->
+        <path d="M 30 114 A 118 22 0 0 1 266 114" stroke="url(#rl4)" stroke-width="7" fill="none" opacity="0.92"/>
       </svg>
     </div>
   </div>
 
+  <!-- ⑤ Electric Indigo Deep Space — Para desarrolladores -->
   <div class="nav-card" onclick="document.getElementById('gs-develop').scrollIntoView({behavior:'smooth'})">
     <div class="nav-card-header">
       <span class="nav-card-tag">Desarrollo</span>
@@ -8797,28 +8938,68 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="nav-card-title">Para desarrolladores</div>
       <div class="nav-card-desc">HTML, CSS y tokens</div>
     </div>
-    <div class="nav-card-visual nv-success">
-      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Terminal window -->
-        <rect x="34" y="28" width="212" height="92" rx="10" fill="currentColor" opacity=".18"/>
-        <!-- Traffic lights -->
-        <circle cx="54" cy="46" r="5" fill="currentColor" opacity=".50"/>
-        <circle cx="68" cy="46" r="5" fill="currentColor" opacity=".38"/>
-        <circle cx="82" cy="46" r="5" fill="currentColor" opacity=".28"/>
-        <!-- Code lines -->
-        <rect x="50" y="62" width="16" height="6" rx="3" fill="currentColor" opacity=".70"/>
-        <rect x="72" y="62" width="44" height="6" rx="3" fill="currentColor" opacity=".45"/>
-        <rect x="122" y="62" width="28" height="6" rx="3" fill="currentColor" opacity=".28"/>
-        <rect x="50" y="76" width="24" height="6" rx="3" fill="currentColor" opacity=".55"/>
-        <rect x="80" y="76" width="56" height="6" rx="3" fill="currentColor" opacity=".38"/>
-        <rect x="50" y="90" width="32" height="6" rx="3" fill="currentColor" opacity=".65"/>
-        <rect x="88" y="90" width="20" height="6" rx="3" fill="currentColor" opacity=".35"/>
-        <rect x="114" y="90" width="40" height="6" rx="3" fill="currentColor" opacity=".25"/>
-        <!-- Cursor blink -->
-        <rect x="160" y="90" width="3" height="6" rx="1" fill="currentColor" opacity=".80"/>
+    <div class="nav-card-visual nv-cosmic">
+      <svg viewBox="0 0 280 190" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="rg5" cx="38%" cy="30%" r="64%">
+            <stop offset="0%" stop-color="#EEF2FF"/><stop offset="18%" stop-color="#A5B4FC"/>
+            <stop offset="42%" stop-color="#4F46E5"/><stop offset="68%" stop-color="#1E1B4B"/>
+            <stop offset="100%" stop-color="#0A0820"/>
+          </radialGradient>
+          <radialGradient id="h5" cx="50%" cy="50%" r="50%">
+            <stop offset="40%" stop-color="#4F46E5" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#6366F1" stop-opacity="0.22"/>
+          </radialGradient>
+          <linearGradient id="rl5a" x1="38" y1="0" x2="272" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#818CF8" stop-opacity="0"/><stop offset="22%" stop-color="#818CF8" stop-opacity="0.80"/>
+            <stop offset="78%" stop-color="#A5B4FC" stop-opacity="0.65"/><stop offset="100%" stop-color="#A5B4FC" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="rl5b" x1="55" y1="0" x2="255" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#C7D2FE" stop-opacity="0"/><stop offset="25%" stop-color="#C7D2FE" stop-opacity="0.60"/>
+            <stop offset="75%" stop-color="#C7D2FE" stop-opacity="0.48"/><stop offset="100%" stop-color="#C7D2FE" stop-opacity="0"/>
+          </linearGradient>
+          <clipPath id="cp5"><circle cx="155" cy="115" r="70"/></clipPath>
+        </defs>
+        <rect width="280" height="190" fill="#02040E"/>
+        <!-- Stars (more intense) -->
+        <circle cx="20" cy="16" r="1.8" fill="white" opacity="0.95"/><circle cx="48" cy="40" r="1.1" fill="#C7D2FE" opacity="0.8"/>
+        <circle cx="85" cy="20" r="0.9" fill="white" opacity="0.65"/><circle cx="238" cy="28" r="1.5" fill="#A5B4FC" opacity="0.85"/>
+        <circle cx="262" cy="150" r="1" fill="white" opacity="0.55"/><circle cx="24" cy="160" r="0.9" fill="#818CF8" opacity="0.65"/>
+        <circle cx="112" cy="170" r="1" fill="white" opacity="0.40"/><circle cx="248" cy="90" r="1.2" fill="#C7D2FE" opacity="0.60"/>
+        <!-- Large 4-point sparkle -->
+        <path d="M36 72 L38.5 63 L41 72 L50 74.5 L41 77 L38.5 86 L36 77 L27 74.5Z" fill="white" opacity="0.92"/>
+        <!-- Small sparkle -->
+        <path d="M245 50 L246.5 45 L248 50 L253 51.5 L248 53 L246.5 58 L245 53 L240 51.5Z" fill="#C7D2FE" opacity="0.75"/>
+        <!-- Outer ring back arc -->
+        <path d="M 38 115 A 117 22 0 0 0 272 115" stroke="url(#rl5a)" stroke-width="4.5" fill="none" opacity="0.45"/>
+        <!-- Inner ring back arc -->
+        <path d="M 55 115 A 100 18 0 0 0 255 115" stroke="url(#rl5b)" stroke-width="2.5" fill="none" opacity="0.35"/>
+        <!-- Planet glow -->
+        <circle cx="155" cy="115" r="92" fill="url(#h5)"/>
+        <!-- Planet body -->
+        <circle cx="155" cy="115" r="70" fill="url(#rg5)"/>
+        <!-- Atmospheric bands + grid lines -->
+        <g clip-path="url(#cp5)">
+          <ellipse cx="155" cy="100" rx="70" ry="13" fill="#C7D2FE" opacity="0.20"/>
+          <ellipse cx="155" cy="118" rx="70" ry="10" fill="#4338CA" opacity="0.22"/>
+          <ellipse cx="155" cy="134" rx="70" ry="8" fill="#1E1B4B" opacity="0.18"/>
+          <line x1="85" y1="45" x2="85" y2="185" stroke="#818CF8" stroke-width="0.5" opacity="0.14"/>
+          <line x1="115" y1="45" x2="115" y2="185" stroke="#818CF8" stroke-width="0.5" opacity="0.11"/>
+          <line x1="145" y1="45" x2="145" y2="185" stroke="#818CF8" stroke-width="0.5" opacity="0.09"/>
+          <line x1="175" y1="45" x2="175" y2="185" stroke="#818CF8" stroke-width="0.5" opacity="0.11"/>
+          <line x1="205" y1="45" x2="205" y2="185" stroke="#818CF8" stroke-width="0.5" opacity="0.14"/>
+          <line x1="85" y1="100" x2="225" y2="100" stroke="#818CF8" stroke-width="0.5" opacity="0.11"/>
+          <line x1="85" y1="115" x2="225" y2="115" stroke="#818CF8" stroke-width="0.5" opacity="0.14"/>
+          <line x1="85" y1="130" x2="225" y2="130" stroke="#818CF8" stroke-width="0.5" opacity="0.11"/>
+        </g>
+        <!-- Outer ring front arc -->
+        <path d="M 38 115 A 117 22 0 0 1 272 115" stroke="url(#rl5a)" stroke-width="4.5" fill="none" opacity="0.88"/>
+        <!-- Inner ring front arc -->
+        <path d="M 55 115 A 100 18 0 0 1 255 115" stroke="url(#rl5b)" stroke-width="2.5" fill="none" opacity="0.72"/>
       </svg>
     </div>
   </div>
+
     </div>
 
     <!-- ══ SECTION 1 — What is Embassy ══ -->
