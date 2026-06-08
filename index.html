@@ -1686,28 +1686,30 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   transform: translateY(-2px);
 }
 .emb-card-visual {
-  height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 220px;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 }
-.emb-card-visual.motion {
-  background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-700) 100%);
+.emb-card-visual svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
-.emb-card-visual.darkmode {
-  background: linear-gradient(135deg, #0A0C12 0%, #1C202C 100%);
+/* Film grain overlay — same technique as nav-card-visual */
+.emb-card-visual::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.45'/%3E%3C/svg%3E");
+  opacity: 0.16;
+  mix-blend-mode: overlay;
+  pointer-events: none;
 }
-.emb-card-visual.components {
-  background: linear-gradient(135deg, #0d2b3e 0%, #0e3352 100%);
-}
-.emb-card-visual-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
+/* Legacy color overrides — neutralised; SVG handles backgrounds */
+.emb-card-visual.motion,
+.emb-card-visual.darkmode,
+.emb-card-visual.components { background: none; }
+.emb-card-visual-inner { display: none; }
 /* Motion card animation dots */
 .emb-motion-dots {
   display: flex;
@@ -1785,40 +1787,33 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 }
 /* Card body */
 .emb-card-body {
-  padding: 20px 22px 22px;
+  padding: 18px 22px 22px;
 }
-.emb-card-tag {
+.emb-card-body .badge {
+  margin-bottom: 12px;
   display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: .02em;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  margin-bottom: 10px;
+}
+/* Legacy .emb-card-tag kept for backwards compat — now shadowed by .badge */
+.emb-card-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; font-weight: 600; letter-spacing: .02em;
+  padding: 4px 10px; border-radius: var(--radius-full); margin-bottom: 10px;
 }
 .emb-card-tag.new { background: var(--color-tertiary-container); color: var(--color-on-tertiary-container); }
 .emb-card-tag.update { background: var(--color-info-container); color: var(--color-on-info-container); }
 .emb-card-title {
   font-family: 'Epilogue', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 18px; font-weight: 800;
   color: var(--ds-text-1);
-  margin: 0 0 6px;
-  letter-spacing: -.01em;
+  margin: 0 0 7px; letter-spacing: -.02em;
 }
 .emb-card-desc {
-  font-size: 13px;
-  color: var(--ds-text-3);
-  margin: 0;
-  line-height: 1.55;
+  font-size: 13px; color: var(--ds-text-3);
+  margin: 0; line-height: 1.55;
 }
 .emb-card-meta {
-  font-size: 11px;
-  color: var(--ds-text-3);
-  margin-top: 12px;
-  opacity: .6;
+  font-size: 11px; color: var(--ds-text-3);
+  margin-top: 12px; opacity: .55;
 }
 
 /* ── Embassy Get Started ── */
@@ -3027,59 +3022,115 @@ body { overflow-x: clip; }
 
   <div class="emb-latest-grid">
 
-    <!-- Card 1: Motion -->
+    <!-- Card 1: Motion — Amber Gas Giant -->
     <div class="emb-card" onclick="navigate('styles')">
       <div class="emb-card-visual motion">
-        <div class="emb-card-visual-inner">
-          <div class="emb-motion-dots">
-            <div class="emb-motion-dot"></div>
-            <div class="emb-motion-dot"></div>
-            <div class="emb-motion-dot"></div>
-          </div>
-          <div class="emb-motion-label">UI Animations</div>
-        </div>
+        <svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ecg1" cx="22%" cy="18%" r="78%">
+              <stop offset="0%" stop-color="#FFFFE0"/><stop offset="5%" stop-color="#FFE8A0"/>
+              <stop offset="14%" stop-color="#F4A829"/><stop offset="28%" stop-color="#C86B14"/>
+              <stop offset="48%" stop-color="#8A3507"/><stop offset="68%" stop-color="#3A1204"/>
+              <stop offset="88%" stop-color="#110500"/><stop offset="100%" stop-color="#050100"/>
+            </radialGradient>
+            <radialGradient id="ech1" cx="50%" cy="50%" r="50%">
+              <stop offset="78%" stop-color="#C86B14" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#E8821A" stop-opacity="0.22"/>
+            </radialGradient>
+            <clipPath id="eccp1"><circle cx="140" cy="138" r="122"/></clipPath>
+          </defs>
+          <rect width="280" height="220" fill="#050200"/>
+          <circle cx="140" cy="138" r="134" fill="url(#ech1)"/>
+          <circle cx="140" cy="138" r="122" fill="url(#ecg1)"/>
+          <g clip-path="url(#eccp1)">
+            <ellipse cx="140" cy="100" rx="122" ry="16" fill="#FFE8A0" opacity="0.12"/>
+            <ellipse cx="140" cy="120" rx="122" ry="14" fill="#F4A829" opacity="0.14"/>
+            <ellipse cx="140" cy="142" rx="122" ry="20" fill="#C86B14" opacity="0.12"/>
+            <ellipse cx="140" cy="165" rx="122" ry="15" fill="#E89020" opacity="0.10"/>
+            <ellipse cx="86" cy="70" rx="58" ry="30" fill="#FFFFE0" opacity="0.07"/>
+            <ellipse cx="185" cy="120" rx="40" ry="24" fill="#8A3507" opacity="0.14"/>
+          </g>
+        </svg>
       </div>
       <div class="emb-card-body">
-        <div class="emb-card-tag new">✦ Nuevo</div>
+        <span class="badge badge-tertiary">✦ Nuevo</span>
         <p class="emb-card-title">Motion & Animaciones</p>
         <p class="emb-card-desc">Nueva sección de UI Animations: principios de movimiento, duración, easing y patrones reutilizables para todos los productos.</p>
         <p class="emb-card-meta">Styles → UI Animations</p>
       </div>
     </div>
 
-    <!-- Card 2: Dark Mode -->
+    <!-- Card 2: Dark Mode — Blue Ice World -->
     <div class="emb-card" onclick="document.getElementById('theme-toggle').click()">
       <div class="emb-card-visual darkmode">
-        <div class="emb-card-visual-inner">
-          <div class="emb-dm-toggle">
-            <div class="emb-dm-thumb">🌙</div>
-          </div>
-          <div class="emb-dm-label">data-theme="dark"</div>
-        </div>
+        <svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ecg2" cx="24%" cy="20%" r="76%">
+              <stop offset="0%" stop-color="#F8FCFF"/><stop offset="8%" stop-color="#C0E8FF"/>
+              <stop offset="18%" stop-color="#5AB4E8"/><stop offset="35%" stop-color="#1A62B8"/>
+              <stop offset="55%" stop-color="#0A2E6B"/><stop offset="75%" stop-color="#020F28"/>
+              <stop offset="100%" stop-color="#010610"/>
+            </radialGradient>
+            <radialGradient id="ech2" cx="50%" cy="50%" r="50%">
+              <stop offset="78%" stop-color="#1A62B8" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#4090D8" stop-opacity="0.24"/>
+            </radialGradient>
+            <clipPath id="eccp2"><circle cx="140" cy="132" r="120"/></clipPath>
+          </defs>
+          <rect width="280" height="220" fill="#010408"/>
+          <circle cx="140" cy="132" r="132" fill="url(#ech2)"/>
+          <circle cx="140" cy="132" r="120" fill="url(#ecg2)"/>
+          <g clip-path="url(#eccp2)">
+            <ellipse cx="140" cy="96" rx="120" ry="15" fill="#C0E8FF" opacity="0.13"/>
+            <ellipse cx="140" cy="118" rx="120" ry="17" fill="#5AB4E8" opacity="0.14"/>
+            <ellipse cx="140" cy="142" rx="120" ry="13" fill="#1A62B8" opacity="0.10"/>
+            <ellipse cx="140" cy="163" rx="120" ry="15" fill="#3A80C8" opacity="0.08"/>
+            <ellipse cx="140" cy="22" rx="78" ry="36" fill="#F8FCFF" opacity="0.09"/>
+            <ellipse cx="82" cy="72" rx="55" ry="28" fill="#F0FAFF" opacity="0.06"/>
+          </g>
+        </svg>
       </div>
       <div class="emb-card-body">
-        <div class="emb-card-tag new">✦ Nuevo</div>
+        <span class="badge badge-tertiary">✦ Nuevo</span>
         <p class="emb-card-title">Dark Mode completo</p>
         <p class="emb-card-desc">Todos los tokens tienen ahora su par semántico en modo oscuro. Activá el toggle arriba a la derecha para probarlo en vivo.</p>
         <p class="emb-card-meta">Foundations → Color system</p>
       </div>
     </div>
 
-    <!-- Card 3: New Components -->
+    <!-- Card 3: New Components — Copper Rocky World -->
     <div class="emb-card" onclick="navigate('components')">
       <div class="emb-card-visual components">
-        <div class="emb-card-visual-inner">
-          <div class="emb-comp-row">
-            <div class="emb-comp-chip">Badge</div>
-            <div class="emb-comp-chip">Table</div>
-            <div class="emb-comp-chip">Kanban</div>
-            <div class="emb-comp-chip">Avatar</div>
-            <div class="emb-comp-chip">Stat card</div>
-          </div>
-        </div>
+        <svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ecg3" cx="20%" cy="16%" r="80%">
+              <stop offset="0%" stop-color="#FFF5E8"/><stop offset="6%" stop-color="#FFD090"/>
+              <stop offset="16%" stop-color="#E8742A"/><stop offset="32%" stop-color="#B44218"/>
+              <stop offset="52%" stop-color="#6E2210"/><stop offset="72%" stop-color="#280D06"/>
+              <stop offset="100%" stop-color="#090200"/>
+            </radialGradient>
+            <radialGradient id="ech3" cx="50%" cy="50%" r="50%">
+              <stop offset="78%" stop-color="#B44218" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#D85C20" stop-opacity="0.22"/>
+            </radialGradient>
+            <clipPath id="eccp3"><circle cx="140" cy="136" r="124"/></clipPath>
+          </defs>
+          <rect width="280" height="220" fill="#040100"/>
+          <circle cx="140" cy="136" r="136" fill="url(#ech3)"/>
+          <circle cx="140" cy="136" r="124" fill="url(#ecg3)"/>
+          <g clip-path="url(#eccp3)">
+            <ellipse cx="140" cy="98" rx="124" ry="16" fill="#FFD090" opacity="0.11"/>
+            <ellipse cx="140" cy="120" rx="124" ry="18" fill="#E8742A" opacity="0.13"/>
+            <ellipse cx="140" cy="145" rx="124" ry="20" fill="#B44218" opacity="0.11"/>
+            <ellipse cx="140" cy="168" rx="124" ry="13" fill="#C86230" opacity="0.09"/>
+            <ellipse cx="140" cy="18" rx="80" ry="40" fill="#FFF5E8" opacity="0.08"/>
+            <ellipse cx="188" cy="112" rx="42" ry="26" fill="#8A2E0E" opacity="0.16"/>
+            <ellipse cx="90" cy="148" rx="32" ry="20" fill="#A03418" opacity="0.13"/>
+          </g>
+        </svg>
       </div>
       <div class="emb-card-body">
-        <div class="emb-card-tag update">↑ Actualizado</div>
+        <span class="badge badge-info">↑ Actualizado</span>
         <p class="emb-card-title">Nuevos componentes</p>
         <p class="emb-card-desc">Badge, Table, Kanban y más — con specs completas, variantes, estados y guías de Do/Don't para cada uno.</p>
         <p class="emb-card-meta">Components → todos los componentes</p>
