@@ -1672,24 +1672,28 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   margin-bottom: 56px;
 }
 .emb-card {
-  background: var(--ds-card);
-  border: 1px solid var(--ds-card-border);
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline-variant);
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 1px 3px rgba(20,23,33,.05), 0 1px 6px rgba(20,23,33,.04);
   transition: border-color .15s, box-shadow .15s, transform .12s;
 }
 .emb-card:hover {
-  border-color: var(--ds-accent);
-  box-shadow: 0 8px 32px rgba(79,128,255,.12);
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--color-primary) 14%, transparent);
   transform: translateY(-2px);
 }
+/* Visual area — flush bottom, edge-to-edge, no margins */
 .emb-card-visual {
-  height: 220px;
+  height: 210px;
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
+  /* margin: 0 — intentional: image bleeds to card edges */
 }
 .emb-card-visual svg {
   width: 100%;
@@ -1701,11 +1705,11 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   content: '';
   position: absolute; inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.45'/%3E%3C/svg%3E");
-  opacity: 0.16;
+  opacity: 0.15;
   mix-blend-mode: overlay;
   pointer-events: none;
 }
-/* Legacy color overrides — neutralised; SVG handles backgrounds */
+/* Legacy colour overrides — neutralised; SVG handles backgrounds */
 .emb-card-visual.motion,
 .emb-card-visual.darkmode,
 .emb-card-visual.components { background: none; }
@@ -1785,9 +1789,9 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   padding: 4px 10px;
   border-radius: var(--radius-full);
 }
-/* Card body */
+/* Card body — sits above the visual area */
 .emb-card-body {
-  padding: 18px 22px 22px;
+  padding: 20px 22px 18px;
 }
 .emb-card-body .badge {
   margin-bottom: 12px;
@@ -3022,118 +3026,168 @@ body { overflow-x: clip; }
 
   <div class="emb-latest-grid">
 
-    <!-- Card 1: Motion — Amber Gas Giant -->
+    <!-- Card 1: Motion — Bronze/Gold Ringed Giant -->
     <div class="emb-card" onclick="navigate('styles')">
-      <div class="emb-card-visual motion">
-        <svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="ecg1" cx="22%" cy="18%" r="78%">
-              <stop offset="0%" stop-color="#FFFFE0"/><stop offset="5%" stop-color="#FFE8A0"/>
-              <stop offset="14%" stop-color="#F4A829"/><stop offset="28%" stop-color="#C86B14"/>
-              <stop offset="48%" stop-color="#8A3507"/><stop offset="68%" stop-color="#3A1204"/>
-              <stop offset="88%" stop-color="#110500"/><stop offset="100%" stop-color="#050100"/>
-            </radialGradient>
-            <radialGradient id="ech1" cx="50%" cy="50%" r="50%">
-              <stop offset="78%" stop-color="#C86B14" stop-opacity="0"/>
-              <stop offset="100%" stop-color="#E8821A" stop-opacity="0.22"/>
-            </radialGradient>
-            <clipPath id="eccp1"><circle cx="140" cy="138" r="122"/></clipPath>
-          </defs>
-          <rect width="280" height="220" fill="#050200"/>
-          <circle cx="140" cy="138" r="134" fill="url(#ech1)"/>
-          <circle cx="140" cy="138" r="122" fill="url(#ecg1)"/>
-          <g clip-path="url(#eccp1)">
-            <ellipse cx="140" cy="100" rx="122" ry="16" fill="#FFE8A0" opacity="0.12"/>
-            <ellipse cx="140" cy="120" rx="122" ry="14" fill="#F4A829" opacity="0.14"/>
-            <ellipse cx="140" cy="142" rx="122" ry="20" fill="#C86B14" opacity="0.12"/>
-            <ellipse cx="140" cy="165" rx="122" ry="15" fill="#E89020" opacity="0.10"/>
-            <ellipse cx="86" cy="70" rx="58" ry="30" fill="#FFFFE0" opacity="0.07"/>
-            <ellipse cx="185" cy="120" rx="40" ry="24" fill="#8A3507" opacity="0.14"/>
-          </g>
-        </svg>
-      </div>
       <div class="emb-card-body">
         <span class="badge badge-tertiary">✦ Nuevo</span>
         <p class="emb-card-title">Motion & Animaciones</p>
         <p class="emb-card-desc">Nueva sección de UI Animations: principios de movimiento, duración, easing y patrones reutilizables para todos los productos.</p>
         <p class="emb-card-meta">Styles → UI Animations</p>
       </div>
-    </div>
-
-    <!-- Card 2: Dark Mode — Blue Ice World -->
-    <div class="emb-card" onclick="document.getElementById('theme-toggle').click()">
-      <div class="emb-card-visual darkmode">
-        <svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <div class="emb-card-visual motion">
+        <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            <radialGradient id="ecg2" cx="24%" cy="20%" r="76%">
-              <stop offset="0%" stop-color="#F8FCFF"/><stop offset="8%" stop-color="#C0E8FF"/>
-              <stop offset="18%" stop-color="#5AB4E8"/><stop offset="35%" stop-color="#1A62B8"/>
-              <stop offset="55%" stop-color="#0A2E6B"/><stop offset="75%" stop-color="#020F28"/>
-              <stop offset="100%" stop-color="#010610"/>
+            <radialGradient id="ecg1" cx="30%" cy="26%" r="70%">
+              <stop offset="0%" stop-color="#FFFCE8"/><stop offset="10%" stop-color="#FFE066"/>
+              <stop offset="24%" stop-color="#F0A020"/><stop offset="44%" stop-color="#B06018"/>
+              <stop offset="68%" stop-color="#4A2408"/><stop offset="88%" stop-color="#160800"/>
+              <stop offset="100%" stop-color="#060200"/>
             </radialGradient>
-            <radialGradient id="ech2" cx="50%" cy="50%" r="50%">
-              <stop offset="78%" stop-color="#1A62B8" stop-opacity="0"/>
-              <stop offset="100%" stop-color="#4090D8" stop-opacity="0.24"/>
+            <radialGradient id="ech1" cx="50%" cy="50%" r="50%">
+              <stop offset="72%" stop-color="#B06018" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#E09030" stop-opacity="0.24"/>
             </radialGradient>
-            <clipPath id="eccp2"><circle cx="140" cy="132" r="120"/></clipPath>
+            <linearGradient id="erl1" x1="53" y1="0" x2="297" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#F0A020" stop-opacity="0"/><stop offset="20%" stop-color="#FFD060" stop-opacity="0.88"/>
+              <stop offset="80%" stop-color="#F0A020" stop-opacity="0.70"/><stop offset="100%" stop-color="#F0A020" stop-opacity="0"/>
+            </linearGradient>
+            <clipPath id="eccp1"><circle cx="175" cy="125" r="84"/></clipPath>
           </defs>
-          <rect width="280" height="220" fill="#010408"/>
-          <circle cx="140" cy="132" r="132" fill="url(#ech2)"/>
-          <circle cx="140" cy="132" r="120" fill="url(#ecg2)"/>
-          <g clip-path="url(#eccp2)">
-            <ellipse cx="140" cy="96" rx="120" ry="15" fill="#C0E8FF" opacity="0.13"/>
-            <ellipse cx="140" cy="118" rx="120" ry="17" fill="#5AB4E8" opacity="0.14"/>
-            <ellipse cx="140" cy="142" rx="120" ry="13" fill="#1A62B8" opacity="0.10"/>
-            <ellipse cx="140" cy="163" rx="120" ry="15" fill="#3A80C8" opacity="0.08"/>
-            <ellipse cx="140" cy="22" rx="78" ry="36" fill="#F8FCFF" opacity="0.09"/>
-            <ellipse cx="82" cy="72" rx="55" ry="28" fill="#F0FAFF" opacity="0.06"/>
+          <rect width="280" height="210" fill="#060200"/>
+          <!-- Stars -->
+          <circle cx="22" cy="18" r="1.3" fill="#FFE066" opacity="0.85"/><circle cx="50" cy="42" r="1" fill="white" opacity="0.65"/>
+          <circle cx="88" cy="16" r="0.9" fill="white" opacity="0.50"/><circle cx="38" cy="168" r="0.8" fill="#FFD060" opacity="0.60"/>
+          <circle cx="255" cy="22" r="1.2" fill="#FFE8A0" opacity="0.80"/><circle cx="15" cy="95" r="0.7" fill="white" opacity="0.45"/>
+          <!-- Ring back arc -->
+          <path d="M 53 125 A 122 23 0 0 0 297 125" stroke="url(#erl1)" stroke-width="5.5" fill="none" opacity="0.50"/>
+          <!-- Planet glow -->
+          <circle cx="175" cy="125" r="108" fill="url(#ech1)"/>
+          <!-- Planet body -->
+          <circle cx="175" cy="125" r="84" fill="url(#ecg1)"/>
+          <!-- Atmospheric bands -->
+          <g clip-path="url(#eccp1)">
+            <ellipse cx="175" cy="105" rx="84" ry="14" fill="#FFE066" opacity="0.18"/>
+            <ellipse cx="175" cy="124" rx="84" ry="11" fill="#F0A020" opacity="0.16"/>
+            <ellipse cx="175" cy="142" rx="84" ry="9" fill="#B06018" opacity="0.14"/>
+            <ellipse cx="175" cy="158" rx="84" ry="7" fill="#C87828" opacity="0.10"/>
           </g>
+          <!-- Ring front arc -->
+          <path d="M 53 125 A 122 23 0 0 1 297 125" stroke="url(#erl1)" stroke-width="5.5" fill="none" opacity="0.92"/>
         </svg>
       </div>
+    </div>
+
+    <!-- Card 2: Dark Mode — Pearl/Silver Luminous Sphere -->
+    <div class="emb-card" onclick="document.getElementById('theme-toggle').click()">
       <div class="emb-card-body">
         <span class="badge badge-tertiary">✦ Nuevo</span>
         <p class="emb-card-title">Dark Mode completo</p>
         <p class="emb-card-desc">Todos los tokens tienen ahora su par semántico en modo oscuro. Activá el toggle arriba a la derecha para probarlo en vivo.</p>
         <p class="emb-card-meta">Foundations → Color system</p>
       </div>
-    </div>
-
-    <!-- Card 3: New Components — Copper Rocky World -->
-    <div class="emb-card" onclick="navigate('components')">
-      <div class="emb-card-visual components">
-        <svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <div class="emb-card-visual darkmode">
+        <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
-            <radialGradient id="ecg3" cx="20%" cy="16%" r="80%">
-              <stop offset="0%" stop-color="#FFF5E8"/><stop offset="6%" stop-color="#FFD090"/>
-              <stop offset="16%" stop-color="#E8742A"/><stop offset="32%" stop-color="#B44218"/>
-              <stop offset="52%" stop-color="#6E2210"/><stop offset="72%" stop-color="#280D06"/>
-              <stop offset="100%" stop-color="#090200"/>
+            <radialGradient id="ecg2" cx="28%" cy="22%" r="72%">
+              <stop offset="0%" stop-color="#FFFFFF"/><stop offset="8%" stop-color="#EAF2FF"/>
+              <stop offset="20%" stop-color="#98B4D4"/><stop offset="40%" stop-color="#3C5880"/>
+              <stop offset="65%" stop-color="#142035"/><stop offset="88%" stop-color="#040A14"/>
+              <stop offset="100%" stop-color="#010408"/>
             </radialGradient>
-            <radialGradient id="ech3" cx="50%" cy="50%" r="50%">
-              <stop offset="78%" stop-color="#B44218" stop-opacity="0"/>
-              <stop offset="100%" stop-color="#D85C20" stop-opacity="0.22"/>
+            <radialGradient id="ech2" cx="50%" cy="50%" r="50%">
+              <stop offset="72%" stop-color="#3C5880" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#7AAAE0" stop-opacity="0.24"/>
             </radialGradient>
-            <clipPath id="eccp3"><circle cx="140" cy="136" r="124"/></clipPath>
+            <linearGradient id="erl2a" x1="27" y1="0" x2="263" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#C0D8F0" stop-opacity="0"/><stop offset="22%" stop-color="#E0EFFF" stop-opacity="0.82"/>
+              <stop offset="78%" stop-color="#C0D8F0" stop-opacity="0.65"/><stop offset="100%" stop-color="#C0D8F0" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="erl2b" x1="45" y1="0" x2="245" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#A0C4E8" stop-opacity="0"/><stop offset="28%" stop-color="#A0C4E8" stop-opacity="0.55"/>
+              <stop offset="72%" stop-color="#A0C4E8" stop-opacity="0.42"/><stop offset="100%" stop-color="#A0C4E8" stop-opacity="0"/>
+            </linearGradient>
+            <clipPath id="eccp2"><circle cx="145" cy="122" r="80"/></clipPath>
           </defs>
-          <rect width="280" height="220" fill="#040100"/>
-          <circle cx="140" cy="136" r="136" fill="url(#ech3)"/>
-          <circle cx="140" cy="136" r="124" fill="url(#ecg3)"/>
-          <g clip-path="url(#eccp3)">
-            <ellipse cx="140" cy="98" rx="124" ry="16" fill="#FFD090" opacity="0.11"/>
-            <ellipse cx="140" cy="120" rx="124" ry="18" fill="#E8742A" opacity="0.13"/>
-            <ellipse cx="140" cy="145" rx="124" ry="20" fill="#B44218" opacity="0.11"/>
-            <ellipse cx="140" cy="168" rx="124" ry="13" fill="#C86230" opacity="0.09"/>
-            <ellipse cx="140" cy="18" rx="80" ry="40" fill="#FFF5E8" opacity="0.08"/>
-            <ellipse cx="188" cy="112" rx="42" ry="26" fill="#8A2E0E" opacity="0.16"/>
-            <ellipse cx="90" cy="148" rx="32" ry="20" fill="#A03418" opacity="0.13"/>
+          <rect width="280" height="210" fill="#010408"/>
+          <!-- Stars -->
+          <circle cx="24" cy="20" r="1.6" fill="white" opacity="0.95"/><circle cx="55" cy="44" r="1" fill="#C0D8F0" opacity="0.80"/>
+          <circle cx="90" cy="18" r="0.9" fill="white" opacity="0.65"/><circle cx="240" cy="25" r="1.4" fill="#E0EFFF" opacity="0.85"/>
+          <circle cx="265" cy="165" r="1" fill="white" opacity="0.50"/><circle cx="18" cy="158" r="0.8" fill="#98B4D4" opacity="0.60"/>
+          <!-- Sparkle -->
+          <path d="M252 55 L254 49 L256 55 L262 57 L256 59 L254 65 L252 59 L246 57Z" fill="white" opacity="0.80"/>
+          <!-- Outer ring back arc -->
+          <path d="M 27 122 A 118 21 0 0 0 263 122" stroke="url(#erl2a)" stroke-width="4.5" fill="none" opacity="0.48"/>
+          <!-- Inner ring back arc -->
+          <path d="M 45 122 A 100 17 0 0 0 245 122" stroke="url(#erl2b)" stroke-width="2.5" fill="none" opacity="0.36"/>
+          <!-- Planet glow -->
+          <circle cx="145" cy="122" r="102" fill="url(#ech2)"/>
+          <!-- Planet body -->
+          <circle cx="145" cy="122" r="80" fill="url(#ecg2)"/>
+          <!-- Atmospheric bands -->
+          <g clip-path="url(#eccp2)">
+            <ellipse cx="145" cy="104" rx="80" ry="13" fill="#EAF2FF" opacity="0.18"/>
+            <ellipse cx="145" cy="122" rx="80" ry="10" fill="#98B4D4" opacity="0.16"/>
+            <ellipse cx="145" cy="138" rx="80" ry="8" fill="#3C5880" opacity="0.14"/>
           </g>
+          <!-- Outer ring front arc -->
+          <path d="M 27 122 A 118 21 0 0 1 263 122" stroke="url(#erl2a)" stroke-width="4.5" fill="none" opacity="0.90"/>
+          <!-- Inner ring front arc -->
+          <path d="M 45 122 A 100 17 0 0 1 245 122" stroke="url(#erl2b)" stroke-width="2.5" fill="none" opacity="0.72"/>
         </svg>
       </div>
+    </div>
+
+    <!-- Card 3: New Components — Coral/Crimson Ringed Sphere -->
+    <div class="emb-card" onclick="navigate('components')">
       <div class="emb-card-body">
         <span class="badge badge-info">↑ Actualizado</span>
         <p class="emb-card-title">Nuevos componentes</p>
         <p class="emb-card-desc">Badge, Table, Kanban y más — con specs completas, variantes, estados y guías de Do/Don't para cada uno.</p>
         <p class="emb-card-meta">Components → todos los componentes</p>
+      </div>
+      <div class="emb-card-visual components">
+        <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ecg3" cx="30%" cy="25%" r="70%">
+              <stop offset="0%" stop-color="#FFF5F0"/><stop offset="8%" stop-color="#FFB498"/>
+              <stop offset="20%" stop-color="#F06840"/><stop offset="38%" stop-color="#C03820"/>
+              <stop offset="60%" stop-color="#701510"/><stop offset="85%" stop-color="#220505"/>
+              <stop offset="100%" stop-color="#080100"/>
+            </radialGradient>
+            <radialGradient id="ech3" cx="50%" cy="50%" r="50%">
+              <stop offset="72%" stop-color="#C03820" stop-opacity="0"/>
+              <stop offset="100%" stop-color="#E85030" stop-opacity="0.24"/>
+            </radialGradient>
+            <linearGradient id="erl3" x1="31" y1="0" x2="279" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FF9880" stop-opacity="0"/><stop offset="20%" stop-color="#FF7860" stop-opacity="0.90"/>
+              <stop offset="80%" stop-color="#FF9880" stop-opacity="0.72"/><stop offset="100%" stop-color="#FF9880" stop-opacity="0"/>
+            </linearGradient>
+            <clipPath id="eccp3"><circle cx="155" cy="125" r="82"/></clipPath>
+          </defs>
+          <rect width="280" height="210" fill="#080100"/>
+          <!-- Stars -->
+          <circle cx="20" cy="22" r="1.4" fill="#FFD0C0" opacity="0.90"/><circle cx="52" cy="45" r="1" fill="#FFB498" opacity="0.75"/>
+          <circle cx="85" cy="18" r="0.9" fill="white" opacity="0.60"/><circle cx="248" cy="28" r="1.3" fill="#FFD0C0" opacity="0.82"/>
+          <circle cx="268" cy="162" r="1" fill="white" opacity="0.50"/><circle cx="20" cy="170" r="0.8" fill="#FF9880" opacity="0.60"/>
+          <!-- Sparkle -->
+          <path d="M44 72 L46 66 L48 72 L54 74 L48 76 L46 82 L44 76 L38 74Z" fill="white" opacity="0.85"/>
+          <!-- Ring back arc -->
+          <path d="M 31 125 A 124 23 0 0 0 279 125" stroke="url(#erl3)" stroke-width="6.5" fill="none" opacity="0.50"/>
+          <!-- Planet glow -->
+          <circle cx="155" cy="125" r="106" fill="url(#ech3)"/>
+          <!-- Planet body -->
+          <circle cx="155" cy="125" r="82" fill="url(#ecg3)"/>
+          <!-- Atmospheric bands + great spot -->
+          <g clip-path="url(#eccp3)">
+            <ellipse cx="155" cy="106" rx="82" ry="13" fill="#FFB498" opacity="0.22"/>
+            <ellipse cx="155" cy="124" rx="82" ry="10" fill="#F06840" opacity="0.20"/>
+            <ellipse cx="155" cy="140" rx="82" ry="8" fill="#C03820" opacity="0.16"/>
+            <ellipse cx="108" cy="122" rx="24" ry="15" fill="#FF7860" opacity="0.26"/>
+            <ellipse cx="108" cy="122" rx="14" ry="9" fill="#FFF5F0" opacity="0.18"/>
+          </g>
+          <!-- Ring front arc -->
+          <path d="M 31 125 A 124 23 0 0 1 279 125" stroke="url(#erl3)" stroke-width="6.5" fill="none" opacity="0.92"/>
+        </svg>
       </div>
     </div>
 
