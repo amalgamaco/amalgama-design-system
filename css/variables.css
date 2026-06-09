@@ -250,6 +250,70 @@
   --blue-light:     var(--color-info-container);
 
   /* ─────────────────────────────────────
+     Spacing scale  (4px base grid)
+     Consume these tokens — never hardcode px values.
+     Usage:  padding: var(--space-4);  gap: var(--space-2);
+  ───────────────────────────────────── */
+  --space-1:   4px;   /* icon gaps, min separators          */
+  --space-2:   8px;   /* inline element gaps                */
+  --space-3:  12px;   /* badge / chip padding               */
+  --space-4:  16px;   /* compact card padding               */
+  --space-5:  20px;   /* form field gaps                    */
+  --space-6:  24px;   /* standard card padding              */
+  --space-8:  32px;   /* medium section padding             */
+  --space-10: 40px;   /* block separators                   */
+  --space-12: 48px;   /* main content padding               */
+  --space-16: 64px;   /* section separators                 */
+  --space-20: 80px;   /* hero / large section padding       */
+
+  /* ─────────────────────────────────────
+     Typography — Font families
+  ───────────────────────────────────── */
+  --font-heading: 'Epilogue', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+
+  /* ─────────────────────────────────────
+     Typography — Named type scale
+     Consume these tokens for consistent sizing.
+     Format: --font-size-{role}  /  --line-height-{role}
+  ───────────────────────────────────── */
+
+  /* Epilogue — Display & Headings */
+  --font-size-display:     28px;   --line-height-display:     1.15;
+  --font-size-heading-xl:  24px;   --line-height-heading-xl:  1.2;
+  --font-size-heading-lg:  22px;   --line-height-heading-lg:  1.25;
+  --font-size-heading-md:  18px;   --line-height-heading-md:  1.3;
+  --font-size-heading-sm:  17px;   --line-height-heading-sm:  1.35;
+  --font-size-heading-xs:  15px;   --line-height-heading-xs:  1.4;
+
+  /* Inter — Body & UI */
+  --font-size-body-lg:     14px;   --line-height-body-lg:     1.5;
+  --font-size-body-md:     13.5px; --line-height-body-md:     1.5;  /* base: inputs, buttons, table cells */
+  --font-size-body-sm:     12.5px; --line-height-body-sm:     1.6;
+  --font-size-label:       13px;   --line-height-label:       1.4;
+  --font-size-caption:     12px;   --line-height-caption:     1.4;
+  --font-size-badge:       11.5px; --line-height-badge:       1.2;
+  --font-size-overline:    12px;   --line-height-overline:    1.2;  /* uppercase table headers */
+
+  /* DM Mono — Monospace */
+  --font-size-mono-md:     13px;   --line-height-mono-md:     1.5;
+  --font-size-mono-sm:     11px;   --line-height-mono-sm:     1.4;
+
+  /* Font weights */
+  --font-weight-regular:   400;
+  --font-weight-medium:    500;
+  --font-weight-semibold:  600;
+  --font-weight-bold:      700;
+  --font-weight-extrabold: 800;
+
+  /* Letter spacing (heading only) */
+  --letter-spacing-display:    -0.5px;
+  --letter-spacing-heading-xl: -0.4px;
+  --letter-spacing-heading-lg: -0.3px;
+  --letter-spacing-heading-md: -0.2px;
+
+  /* ─────────────────────────────────────
      Layout
   ───────────────────────────────────── */
   --sidebar-width: 220px;

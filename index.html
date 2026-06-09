@@ -3636,38 +3636,38 @@ body { overflow-x: clip; }
     <section class="ds-section" id="s-typography">
       <div class="ds-page-tag">Styles · Typography</div>
       <div class="docs-page-header">
-        <h1 class="docs-page-title">Tipografia</h1>
-        <p class="docs-page-desc">Tres familias tipograficas para encabezados, cuerpo de texto y codigo. Cargadas via Google Fonts CDN.</p>
+        <h1 class="docs-page-title">Tipografía</h1>
+        <p class="docs-page-desc">Tres familias tipográficas para encabezados, cuerpo de texto y código. Tokens definidos en <code>css/variables.css</code>. Cargadas via Google Fonts CDN — ver instrucciones de self-hosting al final de esta sección.</p>
       </div>
 
       <!-- Epilogue -->
       <div class="docs-section">
         <h2 class="docs-section-title">Epilogue — Encabezados</h2>
-        <p class="docs-section-desc">Fuente principal para titulos y encabezados. Peso 600 por defecto, letter-spacing -0.3px.</p>
+        <p class="docs-section-desc">Fuente principal para títulos. Token de familia: <code>--font-heading</code>. Peso 600 por defecto con letter-spacing negativo para legibilidad en tamaños grandes.</p>
         <div class="docs-preview column">
           <div class="docs-type-row">
-            <div class="docs-type-label">28px / 700</div>
-            <div class="docs-type-sample" style="font-family:'Epilogue',sans-serif;font-size:28px;font-weight:700;letter-spacing:-.5px">Metricas del equipo</div>
+            <div class="docs-type-label"><code>--font-size-display</code><br><span style="font-size:11px;color:var(--ds-text-3)">28px / 700 / -0.5px</span></div>
+            <div class="docs-type-sample" style="font-family:'Epilogue',sans-serif;font-size:28px;font-weight:700;letter-spacing:-.5px">Métricas del equipo</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">24px / 600</div>
+            <div class="docs-type-label"><code>--font-size-heading-xl</code><br><span style="font-size:11px;color:var(--ds-text-3)">24px / 600 / -0.4px</span></div>
             <div class="docs-type-sample" style="font-family:'Epilogue',sans-serif;font-size:24px;font-weight:600;letter-spacing:-.4px">Crear nueva vacante</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">22px / 600</div>
+            <div class="docs-type-label"><code>--font-size-heading-lg</code><br><span style="font-size:11px;color:var(--ds-text-3)">22px / 600 / -0.3px</span></div>
             <div class="docs-type-sample" style="font-family:'Epilogue',sans-serif;font-size:22px;font-weight:600;letter-spacing:-.3px">Panel de reclutamiento</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">18px / 600</div>
+            <div class="docs-type-label"><code>--font-size-heading-md</code><br><span style="font-size:11px;color:var(--ds-text-3)">18px / 600 / -0.2px</span></div>
             <div class="docs-type-sample" style="font-family:'Epilogue',sans-serif;font-size:18px;font-weight:600;letter-spacing:-.2px">Detalles del candidato</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">17px / 600</div>
+            <div class="docs-type-label"><code>--font-size-heading-sm</code><br><span style="font-size:11px;color:var(--ds-text-3)">17px / 600</span></div>
             <div class="docs-type-sample" style="font-family:'Epilogue',sans-serif;font-size:17px;font-weight:600">Agendar entrevista</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">15px / 600</div>
-            <div class="docs-type-sample" style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600">Informacion general</div>
+            <div class="docs-type-label"><code>--font-size-heading-xs</code><br><span style="font-size:11px;color:var(--ds-text-3)">15px / 600</span></div>
+            <div class="docs-type-sample" style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600">Información general</div>
           </div>
         </div>
       </div>
@@ -3675,46 +3675,30 @@ body { overflow-x: clip; }
       <!-- Inter -->
       <div class="docs-section">
         <h2 class="docs-section-title">Inter — Cuerpo de texto</h2>
-        <p class="docs-section-desc">Fuente base del sistema. Tamano por defecto 14px, line-height 1.5.</p>
+        <p class="docs-section-desc">Fuente base del sistema. Token de familia: <code>--font-body</code>. Tamaño base 14px, line-height 1.5.</p>
         <div class="docs-preview column">
           <div class="docs-type-row">
-            <div class="docs-type-label">14px / 300</div>
-            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:14px;font-weight:300">Light — texto complementario y descripciones largas</div>
+            <div class="docs-type-label"><code>--font-size-body-lg</code><br><span style="font-size:11px;color:var(--ds-text-3)">14px / 400 / lh 1.5</span></div>
+            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:14px;font-weight:400">Regular — cuerpo de texto estándar del sistema</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">14px / 400</div>
-            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:14px;font-weight:400">Regular — cuerpo de texto estandar del sistema</div>
+            <div class="docs-type-label"><code>--font-size-body-md</code><br><span style="font-size:11px;color:var(--ds-text-3)">13.5px / 400 · base UI</span></div>
+            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:13.5px;font-weight:400">Tamaño base para inputs, botones y celdas de tabla</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">14px / 500</div>
-            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:14px;font-weight:500">Medium — labels y texto con enfasis</div>
-          </div>
-          <div class="docs-type-row">
-            <div class="docs-type-label">14px / 600</div>
-            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:14px;font-weight:600">Semibold — botones y acciones principales</div>
-          </div>
-          <div class="docs-type-row">
-            <div class="docs-type-label">14px / 700</div>
-            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700">Bold — numeros destacados y conteos</div>
-          </div>
-          <div class="docs-type-row">
-            <div class="docs-type-label">13.5px / 400</div>
-            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:13.5px;font-weight:400">Tamano base para inputs, botones y celdas de tabla</div>
-          </div>
-          <div class="docs-type-row">
-            <div class="docs-type-label">13px / 500</div>
+            <div class="docs-type-label"><code>--font-size-label</code><br><span style="font-size:11px;color:var(--ds-text-3)">13px / 500</span></div>
             <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:13px;font-weight:500">Labels de formulario y breadcrumbs</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">12.5px / 400</div>
-            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:12.5px;font-weight:400;color:var(--text-muted)">Meta informacion y texto auxiliar</div>
+            <div class="docs-type-label"><code>--font-size-body-sm</code><br><span style="font-size:11px;color:var(--ds-text-3)">12.5px / 400</span></div>
+            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:12.5px;font-weight:400;color:var(--text-muted)">Meta información y texto auxiliar</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">12px / 600</div>
+            <div class="docs-type-label"><code>--font-size-overline</code><br><span style="font-size:11px;color:var(--ds-text-3)">12px / 600 / uppercase</span></div>
             <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">ENCABEZADO DE TABLA</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">11.5px / 600</div>
+            <div class="docs-type-label"><code>--font-size-badge</code><br><span style="font-size:11px;color:var(--ds-text-3)">11.5px / 600</span></div>
             <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600"><span class="badge badge-open">Badge</span></div>
           </div>
         </div>
@@ -3723,16 +3707,81 @@ body { overflow-x: clip; }
       <!-- DM Mono -->
       <div class="docs-section">
         <h2 class="docs-section-title">DM Mono — Monospace</h2>
-        <p class="docs-section-desc">Para timestamps, codigos, atajos de teclado y datos numericos destacados.</p>
+        <p class="docs-section-desc">Para timestamps, códigos, atajos de teclado y datos numéricos destacados. Token de familia: <code>--font-mono</code>.</p>
         <div class="docs-preview column">
           <div class="docs-type-row">
-            <div class="docs-type-label">13px / 400</div>
+            <div class="docs-type-label"><code>--font-size-mono-md</code><br><span style="font-size:11px;color:var(--ds-text-3)">13px / 400</span></div>
             <div class="docs-type-sample" style="font-family:'DM Mono',monospace;font-size:13px;font-weight:400;color:var(--text-muted)">hace 5d · 14:30</div>
           </div>
           <div class="docs-type-row">
-            <div class="docs-type-label">11px / 400</div>
+            <div class="docs-type-label"><code>--font-size-mono-sm</code><br><span style="font-size:11px;color:var(--ds-text-3)">11px / 400</span></div>
             <div class="docs-type-sample" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:400"><span style="background:#EAEBED;padding:2px 5px;border-radius:4px">⌘K</span></div>
           </div>
+        </div>
+      </div>
+
+      <!-- Token reference table -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Token reference</h2>
+        <p class="docs-section-desc">Referencia completa. Todos los tokens están en <code>css/variables.css</code> — importá el archivo en tu proyecto y consumilos directamente.</p>
+        <div class="ds-table-wrap">
+          <table class="docs-props-table">
+            <thead><tr><th>Token</th><th>Value</th><th>Font</th><th>Use for</th></tr></thead>
+            <tbody>
+              <tr><td><code>--font-size-display</code></td><td>28px / 700 / -0.5px</td><td>Epilogue</td><td>Page titles, hero headings</td></tr>
+              <tr><td><code>--font-size-heading-xl</code></td><td>24px / 600 / -0.4px</td><td>Epilogue</td><td>Section titles</td></tr>
+              <tr><td><code>--font-size-heading-lg</code></td><td>22px / 600 / -0.3px</td><td>Epilogue</td><td>Card headings, modal titles</td></tr>
+              <tr><td><code>--font-size-heading-md</code></td><td>18px / 600 / -0.2px</td><td>Epilogue</td><td>Sub-section titles</td></tr>
+              <tr><td><code>--font-size-heading-sm</code></td><td>17px / 600</td><td>Epilogue</td><td>Widget headers</td></tr>
+              <tr><td><code>--font-size-heading-xs</code></td><td>15px / 600</td><td>Epilogue</td><td>Compact panel headers</td></tr>
+              <tr><td><code>--font-size-body-lg</code></td><td>14px / 400 / lh 1.5</td><td>Inter</td><td>Body copy, descriptions</td></tr>
+              <tr><td><code>--font-size-body-md</code></td><td>13.5px / 400 / lh 1.5</td><td>Inter</td><td>Inputs, buttons, table cells (base UI)</td></tr>
+              <tr><td><code>--font-size-label</code></td><td>13px / 500</td><td>Inter</td><td>Form labels, breadcrumbs, nav items</td></tr>
+              <tr><td><code>--font-size-body-sm</code></td><td>12.5px / 400</td><td>Inter</td><td>Meta info, helper text</td></tr>
+              <tr><td><code>--font-size-caption</code></td><td>12px / 600</td><td>Inter</td><td>Captions, timestamps</td></tr>
+              <tr><td><code>--font-size-overline</code></td><td>12px / 600 / uppercase</td><td>Inter</td><td>Table headers, section overlines</td></tr>
+              <tr><td><code>--font-size-badge</code></td><td>11.5px / 600</td><td>Inter</td><td>Badge labels, chip labels</td></tr>
+              <tr><td><code>--font-size-mono-md</code></td><td>13px / 400</td><td>DM Mono</td><td>Timestamps, code inline</td></tr>
+              <tr><td><code>--font-size-mono-sm</code></td><td>11px / 400</td><td>DM Mono</td><td>Keyboard shortcuts, badge-mono</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Self-hosting -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Self-hosting fonts</h2>
+        <p class="docs-section-desc">Para proyectos que no pueden usar Google Fonts CDN (políticas de privacidad, red corporativa, etc.), descargá las fuentes y servílas localmente.</p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code"><code>/* 1. Download from Google Fonts:
+   https://fonts.google.com/specimen/Epilogue
+   https://fonts.google.com/specimen/Inter
+   https://fonts.google.com/specimen/DM+Mono
+
+   2. Place in /fonts/ directory of your project.
+
+   3. Add to your CSS: */
+
+@font-face {
+  font-family: 'Epilogue';
+  src: url('/fonts/Epilogue-VariableFont_wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-VariableFont_wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Mono';
+  src: url('/fonts/DMMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}</code></pre>
         </div>
       </div>
 
@@ -3768,17 +3817,19 @@ body { overflow-x: clip; }
       <p class="ds-page-desc">El sistema de espaciado usa una base de 4px. Todos los valores son múltiplos de 4 para mantener consistencia visual y alineación en la grilla.</p>
 
       <h2 class="ds-h2">Escala de espaciado</h2>
+      <p style="font-size:13px;color:var(--ds-text-2);margin:0 0 16px">Todos los tokens están definidos en <code>css/variables.css</code>. Consumilos directamente: <code>padding: var(--space-4)</code>, <code>gap: var(--space-2)</code>.</p>
       <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;padding:20px 24px;margin-bottom:24px">
-        <div class="ds-space-row"><div class="ds-space-label">space-1 · 4px</div><div class="ds-space-bar" style="width:4px"></div><div class="ds-space-val">Separación mínima, icon gaps</div></div>
-        <div class="ds-space-row"><div class="ds-space-label">space-2 · 8px</div><div class="ds-space-bar" style="width:8px"></div><div class="ds-space-val">Gap entre elementos inline</div></div>
-        <div class="ds-space-row"><div class="ds-space-label">space-3 · 12px</div><div class="ds-space-bar" style="width:12px"></div><div class="ds-space-val">Padding de badges, chips</div></div>
-        <div class="ds-space-row"><div class="ds-space-label">space-4 · 16px</div><div class="ds-space-bar" style="width:16px"></div><div class="ds-space-val">Padding de cards compactas</div></div>
-        <div class="ds-space-row"><div class="ds-space-label">space-6 · 24px</div><div class="ds-space-bar" style="width:24px"></div><div class="ds-space-val">Padding de cards estándar</div></div>
-        <div class="ds-space-row"><div class="ds-space-label">space-8 · 32px</div><div class="ds-space-bar" style="width:32px"></div><div class="ds-space-val">Padding de secciones medianas</div></div>
-        <div class="ds-space-row"><div class="ds-space-label">space-10 · 40px</div><div class="ds-space-bar" style="width:40px"></div><div class="ds-space-val">Separación entre bloques</div></div>
-        <div class="ds-space-row"><div class="ds-space-label">space-12 · 48px</div><div class="ds-space-bar" style="width:48px"></div><div class="ds-space-val">Padding de contenido principal</div></div>
-        <div class="ds-space-row"><div class="ds-space-label">space-16 · 64px</div><div class="ds-space-bar" style="width:64px"></div><div class="ds-space-val">Separación entre secciones</div></div>
-        <div class="ds-space-row" style="border-bottom:none"><div class="ds-space-label">space-20 · 80px</div><div class="ds-space-bar" style="width:80px"></div><div class="ds-space-val">Padding de secciones hero</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-1</code> · 4px</div><div class="ds-space-bar" style="width:4px"></div><div class="ds-space-val">Separación mínima, icon gaps</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-2</code> · 8px</div><div class="ds-space-bar" style="width:8px"></div><div class="ds-space-val">Gap entre elementos inline</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-3</code> · 12px</div><div class="ds-space-bar" style="width:12px"></div><div class="ds-space-val">Padding de badges, chips</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-4</code> · 16px</div><div class="ds-space-bar" style="width:16px"></div><div class="ds-space-val">Padding de cards compactas</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-5</code> · 20px</div><div class="ds-space-bar" style="width:20px"></div><div class="ds-space-val">Form field gaps</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-6</code> · 24px</div><div class="ds-space-bar" style="width:24px"></div><div class="ds-space-val">Padding de cards estándar</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-8</code> · 32px</div><div class="ds-space-bar" style="width:32px"></div><div class="ds-space-val">Padding de secciones medianas</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-10</code> · 40px</div><div class="ds-space-bar" style="width:40px"></div><div class="ds-space-val">Separación entre bloques</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-12</code> · 48px</div><div class="ds-space-bar" style="width:48px"></div><div class="ds-space-val">Padding de contenido principal</div></div>
+        <div class="ds-space-row"><div class="ds-space-label" style="width:180px"><code>--space-16</code> · 64px</div><div class="ds-space-bar" style="width:64px"></div><div class="ds-space-val">Separación entre secciones</div></div>
+        <div class="ds-space-row" style="border-bottom:none"><div class="ds-space-label" style="width:180px"><code>--space-20</code> · 80px</div><div class="ds-space-bar" style="width:80px"></div><div class="ds-space-val">Padding de secciones hero</div></div>
       </div>
 
       <h2 class="ds-h2">Reglas de aplicación</h2>
@@ -4894,21 +4945,21 @@ body { overflow-x: clip; }
             <table class="docs-props-table">
               <thead><tr><th>Token</th><th>Light value</th><th>Dark value</th><th>Role</th></tr></thead>
               <tbody>
-                <tr><td><code>--color-primary</code></td><td>#2D52D8</td><td>#8CA8FF</td><td>Primary bg</td></tr>
-                <tr><td><code>--color-on-primary</code></td><td>#FFFFFF</td><td>#0A1454</td><td>Primary text</td></tr>
-                <tr><td><code>--color-primary-hover</code></td><td>#2347C5</td><td>#9DB6FF</td><td>Primary hover bg</td></tr>
+                <tr><td><code>--color-primary</code></td><td>#01164D</td><td>#FFFFFF</td><td>Primary bg</td></tr>
+                <tr><td><code>--color-on-primary</code></td><td>#FFFFFF</td><td>#01164D</td><td>Primary text</td></tr>
+                <tr><td><code>--color-primary-hover</code></td><td>#162F6F</td><td>#E4E7EF</td><td>Primary hover bg</td></tr>
                 <tr><td><code>--button-secondary-bg</code></td><td>#CAD9FF</td><td>#3A5BB0</td><td>Secondary bg</td></tr>
-                <tr><td><code>--button-secondary-text</code></td><td>#001162</td><td>#E2EAFF</td><td>Secondary text</td></tr>
-                <tr><td><code>--button-secondary-border</code></td><td>#B2C4F0</td><td>#4D6EC4</td><td>Secondary border</td></tr>
-                <tr><td><code>--button-secondary-bg-hover</code></td><td>#B8CAFF</td><td>#4A6CC4</td><td>Secondary hover bg</td></tr>
-                <tr><td><code>--color-outline</code></td><td>#767B8D</td><td>#909099</td><td>Tertiary border</td></tr>
-                <tr><td><code>--color-surface-variant</code></td><td>#E5E8F4</td><td>#2A2D3A</td><td>Tertiary hover bg</td></tr>
-                <tr><td><code>--color-error</code></td><td>#C0393B</td><td>#FFB4AB</td><td>Danger bg</td></tr>
-                <tr><td><code>--color-success</code></td><td>#1C7C3A</td><td>#78DC8A</td><td>Success bg</td></tr>
-                <tr><td><code>--color-disabled</code></td><td>#E5E8F4</td><td>#2A2D3A</td><td>Disabled bg (all)</td></tr>
-                <tr><td><code>--color-on-disabled</code></td><td>#888C9B</td><td>#56586A</td><td>Disabled text (all)</td></tr>
-                <tr><td><code>--color-focus</code></td><td>#2D52D8</td><td>#8CA8FF</td><td>Focus outline</td></tr>
-                <tr><td><code>--color-focus-ring</code></td><td>rgba(45,82,216,.20)</td><td>rgba(140,168,255,.20)</td><td>Focus shadow</td></tr>
+                <tr><td><code>--button-secondary-text</code></td><td>#01164D</td><td>#DCE6FF</td><td>Secondary text</td></tr>
+                <tr><td><code>--button-secondary-border</code></td><td>transparent</td><td>transparent</td><td>Secondary border (tonal, no border)</td></tr>
+                <tr><td><code>--button-secondary-bg-hover</code></td><td>#B8CAFF <span style="font-size:11px;color:var(--ds-text-3)">(color-mix)</span></td><td>#304D98 <span style="font-size:11px;color:var(--ds-text-3)">(color-mix)</span></td><td>Secondary hover bg</td></tr>
+                <tr><td><code>--color-outline</code></td><td>#9FA3AE</td><td>#747989</td><td>Tertiary border</td></tr>
+                <tr><td><code>--color-surface-variant</code></td><td>#EAEBED</td><td>#282C39</td><td>Tertiary hover bg</td></tr>
+                <tr><td><code>--color-error</code></td><td>#FD3A45</td><td>#F29AA1</td><td>Danger bg</td></tr>
+                <tr><td><code>--color-success</code></td><td>#00C164</td><td>#93E1B3</td><td>Success bg</td></tr>
+                <tr><td><code>--color-disabled</code></td><td>#BFC1C8</td><td>#282C39</td><td>Disabled bg (all)</td></tr>
+                <tr><td><code>--color-on-disabled</code></td><td>#747989</td><td>#747989</td><td>Disabled text (all)</td></tr>
+                <tr><td><code>--color-focus</code></td><td>#4F80FF</td><td>#4F80FF</td><td>Focus outline</td></tr>
+                <tr><td><code>--color-focus-ring</code></td><td>rgba(79,128,255,.15)</td><td>rgba(79,128,255,.15)</td><td>Focus shadow</td></tr>
                 <tr><td><code>--radius-md</code></td><td colspan="2" style="text-align:center">8px</td><td>Button border-radius</td></tr>
               </tbody>
             </table>

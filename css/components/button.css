@@ -149,10 +149,28 @@
 }
 
 /* ─────────────────────────────────────
-   Tamaño pequeño (aplica a cualquier variante)
+   Tamaños (aplica a cualquier variante)
+   XS  → 24px min-height · dense lists, tags
+   SM  → 32px min-height · compact toolbars (default small)
+   MD  → 36px min-height · default (base styles above)
+   LG  → 44px min-height · primary CTAs, touch targets
+   XL  → 52px min-height · hero / marketing surfaces
 ───────────────────────────────────── */
-.btn-sm { padding: 6px 12px; font-size: 12.5px; }
+.btn-xs { padding: 3px 8px;   font-size: 11px;   font-weight: 600; min-height: 24px; }
+.btn-sm { padding: 6px 12px;  font-size: 12.5px; min-height: 32px; }
+.btn-lg { padding: 10px 22px; font-size: 15px;   min-height: 44px; }
+.btn-xl { padding: 14px 30px; font-size: 16px;   font-weight: 700; min-height: 52px; }
+
+.btn-text.btn-xs { padding: 3px 6px; }
 .btn-text.btn-sm { padding: 6px 10px; }
+.btn-text.btn-lg { padding: 10px 16px; }
+.btn-text.btn-xl { padding: 14px 20px; }
+
+/* ─────────────────────────────────────
+   Pill / round shape modifier
+   Stacks with any variant or size class.
+───────────────────────────────────── */
+.btn-rounded { border-radius: var(--radius-full) !important; }
 
 /* ─────────────────────────────────────
    Next · avance de wizard (alias de Primary)
@@ -188,3 +206,17 @@
   cursor: not-allowed;
 }
 .icon-btn.btn-sm { width: 30px; height: 30px; }
+.icon-btn.btn-lg { width: 44px; height: 44px; }
+.icon-btn.btn-xl { width: 52px; height: 52px; }
+
+/* ─────────────────────────────────────
+   Pressed state — 12% state layer (WCAG 2.5.3)
+   Implemented via filter so it works across all variants
+   without a pseudo-element overlay.
+───────────────────────────────────── */
+.btn-primary:active:not(:disabled)              { filter: brightness(0.88); transform: translateY(0); }
+.btn-secondary:active:not(:disabled)            { filter: brightness(0.92); transform: translateY(0); }
+.btn-tertiary:active:not(:disabled),
+.btn-ghost:active:not(:disabled)                { background: var(--color-surface-container-high); }
+.btn-text:active:not(:disabled)                 { background: color-mix(in srgb, var(--color-primary) 16%, transparent); }
+.icon-btn:active:not(:disabled)                 { background: var(--color-surface-container-high); }
