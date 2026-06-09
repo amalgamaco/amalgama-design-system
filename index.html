@@ -4287,6 +4287,37 @@ body { overflow-x: clip; }
         .bd-pass { color:var(--color-success); font-weight:700; }
 
         .bd-sim-focus { outline:2px solid var(--color-focus); outline-offset:2px; box-shadow:0 0 0 4px var(--color-focus-ring); }
+
+        /* ── Extra sizes (XS / LG / XL) ── */
+        .btn-xs { padding: 3px 8px; font-size: 11px; font-weight: 600; }
+        .btn-lg { padding: 10px 22px; font-size: 15px; }
+        .btn-xl { padding: 14px 30px; font-size: 16px; font-weight: 700; }
+        .icon-btn.btn-lg { width: 44px; height: 44px; }
+        .icon-btn.btn-xl { width: 52px; height: 52px; }
+
+        /* ── Pill / round shape ── */
+        .btn-rounded { border-radius: 999px !important; }
+
+        /* ── Button type block (Overview) ── */
+        .bd-type-block { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; }
+        .bd-type-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 4px; }
+        .bd-type-name { font: 700 15px 'Epilogue', sans-serif; color: var(--ds-text-1); }
+        .bd-sub-title { font: 700 13px Inter; color: var(--ds-text-2); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 12px; }
+
+        /* ── Color options grid ── */
+        .bd-color-options { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+        @media (max-width:820px) { .bd-color-options { grid-template-columns: repeat(2, 1fr); } }
+        .bd-color-opt { display: flex; flex-direction: column; gap: 8px; }
+        .bd-color-opt-name { font: 600 12px Inter; color: var(--ds-text-1); display: flex; flex-direction: column; gap: 3px; }
+        .bd-color-opt-note { font: 400 11.5px Inter; color: var(--ds-text-3); line-height: 1.4; }
+
+        /* ── Dark mode demo container ── */
+        .bd-dark-demo { background: #13172B; border-radius: 10px; padding: 18px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+        /* ── Toggle button demo ── */
+        .btn-toggle-on  { background: var(--color-primary); color: var(--color-on-primary); border: 1px solid transparent; }
+        .btn-toggle-off { background: transparent; color: var(--color-primary); border: 1px solid var(--color-outline); }
+        .btn-toggle-on, .btn-toggle-off { display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-md);font:600 13.5px Inter;cursor:pointer; }
       </style>
 
       <div class="ds-comp-tabs">
@@ -4299,314 +4330,889 @@ body { overflow-x: clip; }
 
       <!-- ════════════════ OVERVIEW ════════════════ -->
       <div class="ds-comp-tab-panel active" data-tab="overview">
-        <section class="docs-section">
-          <p class="bd-lead">Los botones permiten a las personas realizar acciones y tomar decisiones con un solo toque. En Embassy cada botón comunica el <strong>nivel de énfasis</strong> de su acción a través de un sistema de cinco variantes, construidas íntegramente con tokens semánticos <code>--color-*</code> para que funcionen sin ajustes en light y dark mode.</p>
-        </section>
 
         <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar botones</h2>
-          <div class="bd-grid c2">
-            <div class="bd-card">
-              <p class="bd-eyebrow" style="color:var(--color-success)">Usar para</p>
-              <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8;color:var(--ds-text-2)">
-                <li>Disparar una acción: guardar, crear, enviar, confirmar</li>
-                <li>Avanzar o retroceder en un flujo o wizard</li>
-                <li>Acciones destructivas con confirmación explícita</li>
-                <li>Acciones dentro de tarjetas, modales y toolbars</li>
-              </ul>
-            </div>
-            <div class="bd-card">
-              <p class="bd-eyebrow" style="color:var(--color-error)">Evitar para</p>
-              <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8;color:var(--ds-text-2)">
-                <li>Navegar a otra página → usar un <strong>link</strong></li>
-                <li>Acciones inline dentro de un párrafo → usar <strong>link text</strong></li>
-                <li>Más de una acción primaria por vista</li>
-                <li>Alternar un estado on/off → usar <strong>switch</strong> o <strong>tabs</strong></li>
-              </ul>
-            </div>
-          </div>
+          <p class="bd-lead">Buttons initiate actions. Each Embassy button communicates its emphasis level through one of five variants, all built with semantic <code>--color-*</code> tokens so they adapt automatically to light and dark mode without any manual overrides.</p>
         </section>
 
+        <!-- ── VARIANTS ── -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Jerarquía de énfasis</h2>
-          <p class="docs-section-desc">Elegí la variante según la importancia de la acción. Una sola acción primaria por pantalla; el resto desciende en énfasis.</p>
-          <div class="bd-card">
-            <div class="bd-hier">
-              <div class="bd-hier-row"><span class="bd-hier-label">Primary</span><span class="bd-hier-bar" style="width:100%;background:var(--color-primary)"></span></div>
-              <div class="bd-hier-row"><span class="bd-hier-label">Secondary</span><span class="bd-hier-bar" style="width:80%;background:var(--button-secondary-bg)"></span></div>
-              <div class="bd-hier-row"><span class="bd-hier-label">Tertiary</span><span class="bd-hier-bar" style="width:60%;background:var(--color-outline)"></span></div>
-              <div class="bd-hier-row"><span class="bd-hier-label">Text</span><span class="bd-hier-bar" style="width:40%;background:var(--color-outline-variant)"></span></div>
-              <div class="bd-hier-row"><span class="bd-hier-label">Icon</span><span class="bd-hier-bar" style="width:30%;background:var(--color-outline-variant)"></span></div>
-            </div>
-          </div>
-        </section>
+          <h2 class="docs-section-title">Variants</h2>
 
-        <section class="docs-section">
-          <h2 class="docs-section-title">Variantes</h2>
+          <h3 class="bd-sub-title">Two variants</h3>
           <div class="bd-grid c2">
             <div class="bd-variant">
-              <div class="bd-stage center"><button class="btn-primary">Crear vacante</button></div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Primary · Filled</span><span class="bd-emphasis"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
-              <p class="bd-variant-desc">Máximo énfasis. La acción principal y más probable de una vista. Una sola por pantalla. Rol: <code>--color-primary</code>.</p>
+              <div class="bd-stage center" style="gap:10px">
+                <button class="btn-primary">Label</button>
+                <button class="btn-secondary">Label</button>
+                <button class="btn-tertiary">Label</button>
+              </div>
+              <div class="bd-variant-head"><span class="bd-variant-name">Default</span></div>
+              <p class="bd-variant-desc">Triggers a single, immediate action. Available in all five color styles, all five sizes, and both shape options. Can include an optional leading icon.</p>
             </div>
             <div class="bd-variant">
-              <div class="bd-stage center"><button class="btn-secondary">Guardar borrador</button></div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Secondary · Filled Tonal</span><span class="bd-emphasis"><i class="on"></i><i class="on"></i><i></i></span></div>
-              <p class="bd-variant-desc">Énfasis medio, claramente distinto del Primary. Botón <strong>tonal</strong> que consume <code>Secondary Container</code> + <code>On Secondary Container</code> (estilo MD3 filled-tonal): light periwinkle claro <code>#CAD9FF</code> + texto navy · dark periwinkle medio <code>#3A5BB0</code> + texto claro. Se diferencia del Primary por inversión de valor. Tokens: <code>--button-secondary-*</code>.</p>
-            </div>
-            <div class="bd-variant">
-              <div class="bd-stage center"><button class="btn-tertiary">Cancelar</button></div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Tertiary · Outlined</span><span class="bd-emphasis"><i class="on"></i><i></i><i></i></span></div>
-              <p class="bd-variant-desc">Énfasis medio. Acción alternativa o secundaria (cancelar, volver). Rol: <code>--color-outline</code> + <code>--color-primary</code>.</p>
-            </div>
-            <div class="bd-variant">
-              <div class="bd-stage center"><button class="btn-text">Ver más</button></div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Text</span><span class="bd-emphasis"><i class="on"></i><i></i><i></i></span></div>
-              <p class="bd-variant-desc">Bajo énfasis. Acciones terciarias, enlaces de acción, áreas densas. Rol: <code>--color-primary</code> sin contenedor.</p>
-            </div>
-            <div class="bd-variant">
-              <div class="bd-stage center"><button class="icon-btn" aria-label="Ajustes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button></div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Icon</span><span class="bd-emphasis"><i class="on"></i><i></i><i></i></span></div>
-              <p class="bd-variant-desc">Acción compacta solo-ícono para toolbars y filas densas. Requiere <code>aria-label</code>.</p>
-            </div>
-            <div class="bd-variant">
-              <div class="bd-stage center" style="gap:10px"><button class="btn-primary btn-danger">Eliminar</button><button class="btn-primary btn-success">Aprobar</button></div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Modificadores semánticos</span></div>
-              <p class="bd-variant-desc">Sobre Primary: <code>.btn-danger</code> para acciones destructivas y <code>.btn-success</code> para confirmaciones positivas.</p>
+              <div class="bd-stage center" style="gap:10px">
+                <button class="btn-toggle-on" aria-pressed="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Saved</button>
+                <button class="btn-toggle-off" aria-pressed="false"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Save</button>
+              </div>
+              <div class="bd-variant-head"><span class="bd-variant-name">Toggle</span></div>
+              <p class="bd-variant-desc">Switches between two states using <code>aria-pressed="true/false"</code>. Used for binary, reversible actions like Save, Follow, Pin, Like. Full pattern in Guidelines → Toggle buttons.</p>
             </div>
           </div>
+
+          <h3 class="bd-sub-title" style="margin-top:32px">Five color options</h3>
+          <div class="bd-color-options">
+            <div class="bd-color-opt">
+              <div class="bd-stage center" style="min-height:68px;background:var(--color-surface-container-high)">
+                <button style="display:inline-flex;align-items:center;padding:8px 16px;border:none;border-radius:8px;background:var(--color-surface-container-high);color:var(--color-primary);font:600 13.5px Inter;cursor:default;box-shadow:0 1px 5px rgba(0,0,0,.16)">Label</button>
+              </div>
+              <span class="bd-color-opt-name">Elevated<span class="bd-color-opt-note">Not in Embassy — use Outlined or surface context</span></span>
+            </div>
+            <div class="bd-color-opt">
+              <div class="bd-stage center" style="min-height:68px"><button class="btn-primary">Label</button></div>
+              <span class="bd-color-opt-name">Filled<span class="bd-mono" style="font-size:10px;margin-top:3px">btn-primary</span></span>
+            </div>
+            <div class="bd-color-opt">
+              <div class="bd-stage center" style="min-height:68px"><button class="btn-secondary">Label</button></div>
+              <span class="bd-color-opt-name">Filled tonal<span class="bd-mono" style="font-size:10px;margin-top:3px">btn-secondary</span></span>
+            </div>
+            <div class="bd-color-opt">
+              <div class="bd-stage center" style="min-height:68px"><button class="btn-tertiary">Label</button></div>
+              <span class="bd-color-opt-name">Outlined<span class="bd-mono" style="font-size:10px;margin-top:3px">btn-tertiary</span></span>
+            </div>
+            <div class="bd-color-opt">
+              <div class="bd-stage center" style="min-height:68px"><button class="btn-text">Label</button></div>
+              <span class="bd-color-opt-name">Text<span class="bd-mono" style="font-size:10px;margin-top:3px">btn-text</span></span>
+            </div>
+          </div>
+
+          <h3 class="bd-sub-title" style="margin-top:32px">Five sizes</h3>
+          <div class="bd-stage" style="align-items:flex-end;gap:24px;flex-wrap:wrap">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+              <button class="btn-primary btn-xs">Label</button>
+              <span class="bd-state-lbl">Extra small</span>
+              <span class="bd-state-tok">btn-xs · 24px</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+              <button class="btn-primary btn-sm">Label</button>
+              <span class="bd-state-lbl">Small</span>
+              <span class="bd-state-tok">btn-sm · 30px</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+              <button class="btn-primary">Label</button>
+              <span class="bd-state-lbl">Medium</span>
+              <span class="bd-state-tok">default · 36px</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+              <button class="btn-primary btn-lg">Label</button>
+              <span class="bd-state-lbl">Large</span>
+              <span class="bd-state-tok">btn-lg · 44px</span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+              <button class="btn-primary btn-xl">Label</button>
+              <span class="bd-state-lbl">Extra large</span>
+              <span class="bd-state-tok">btn-xl · 52px</span>
+            </div>
+          </div>
+          <div class="bd-callout"><span class="bd-ico">ℹ</span><span>Use <b>Medium (default)</b> for most UI. Use <b>Small or XS</b> in dense interfaces like tables and sidebars. Use <b>Large or XL</b> for high-impact CTAs and hero sections only.</span></div>
+
+          <h3 class="bd-sub-title" style="margin-top:32px">Two shape options</h3>
+          <div class="bd-grid c2">
+            <div class="bd-variant">
+              <div class="bd-stage center" style="gap:10px">
+                <button class="btn-primary">Label</button>
+                <button class="btn-secondary">Label</button>
+                <button class="btn-tertiary">Label</button>
+              </div>
+              <div class="bd-variant-head"><span class="bd-variant-name">Square · <code>--radius-md</code> (8px)</span></div>
+              <p class="bd-variant-desc">Default shape. Consistent with Embassy's system-wide radius scale. Use in all standard product UI surfaces.</p>
+            </div>
+            <div class="bd-variant">
+              <div class="bd-stage center" style="gap:10px">
+                <button class="btn-primary btn-rounded">Label</button>
+                <button class="btn-secondary btn-rounded">Label</button>
+                <button class="btn-tertiary btn-rounded">Label</button>
+              </div>
+              <div class="bd-variant-head"><span class="bd-variant-name">Round · pill (999px)</span></div>
+              <p class="bd-variant-desc">For marketing CTAs, hero sections, or editorial contexts. Add <code>.btn-rounded</code>. Don't mix with default-shape buttons in the same action group.</p>
+            </div>
+          </div>
+
+          <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">✏️</span><span><b>Label guidance:</b> Sentence case ("Create vacancy", not "CREATE VACANCY"). Lead with a verb. Keep to 1–3 words. No trailing punctuation. Avoid "OK", "Click here", "Submit".</span></div>
         </section>
 
+        <!-- ── BUTTON TYPES ── -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Ejemplo interactivo</h2>
-          <p class="docs-section-desc">Composición real: jerarquía de acciones en el pie de un formulario. Una primaria, una terciaria de escape.</p>
-          <div class="bd-card" style="max-width:460px">
-            <h3 style="font:700 16px 'Epilogue';color:var(--ds-text-1);margin:0 0 6px">Publicar vacante</h3>
-            <p style="font-size:13px;color:var(--ds-text-3);margin:0 0 18px;line-height:1.6">La vacante será visible para todos los candidatos. Podés editarla luego.</p>
-            <div style="display:flex;gap:10px;justify-content:flex-end">
-              <button class="btn-tertiary">Cancelar</button>
-              <button class="btn-primary">Publicar</button>
+          <h2 class="docs-section-title">Button types</h2>
+          <p class="docs-section-desc">Five types mapped to MD3's emphasis hierarchy. Each type signals a distinct importance level — choose based on how critical the action is relative to others on the same screen.</p>
+
+          <!-- Elevated — not in Embassy -->
+          <div class="bd-type-block">
+            <div class="bd-type-header">
+              <span class="bd-type-name">Elevated button</span>
+              <span class="badge badge-draft badge-label">Not in Embassy</span>
+            </div>
+            <div class="bd-grid c2" style="margin-top:16px">
+              <div>
+                <p class="bd-eyebrow">About elevated buttons</p>
+                <p class="bd-variant-desc">In MD3, elevated buttons use a surface tint + drop shadow to stand out against the background without a filled color. Embassy does not implement an Elevated button variant.</p>
+                <p class="bd-eyebrow" style="margin-top:14px">Embassy equivalent</p>
+                <p class="bd-variant-desc">Use <code>.btn-secondary</code> (Filled tonal) for medium-emphasis actions that need visual distinction without a strong fill. Use <code>.btn-tertiary</code> (Outlined) when the background is already colored or textured.</p>
+              </div>
+              <div>
+                <p class="bd-eyebrow">MD3 reference (not Embassy CSS)</p>
+                <div class="bd-stage center" style="background:linear-gradient(135deg,#e8eaf6 0%,#f3e5f5 100%)">
+                  <button style="display:inline-flex;align-items:center;padding:8px 16px;border:none;border-radius:8px;background:var(--color-surface-container-low);color:var(--color-primary);font:600 13.5px Inter;cursor:default;box-shadow:0 1px 2px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.08)">Elevated</button>
+                </div>
+                <div class="bd-callout" style="margin-top:10px"><span class="bd-ico">💡</span><span>Embassy alternative in this situation: <code>btn-secondary</code> provides differentiation without a heavy fill.</span></div>
+              </div>
             </div>
           </div>
+
+          <!-- Filled / Primary -->
+          <div class="bd-type-block">
+            <div class="bd-type-header">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <span class="bd-type-name">Filled button</span>
+                <code class="bd-mono">btn-primary</code>
+              </div>
+              <span class="badge badge-open badge-label">Highest emphasis</span>
+            </div>
+            <div class="bd-grid c2" style="margin-top:16px">
+              <div>
+                <p class="bd-eyebrow">Description</p>
+                <p class="bd-variant-desc">The most visually prominent button. Solid fill using the primary brand color signals this is the single most important action. Only one Filled button should be visible per view.</p>
+                <p class="bd-eyebrow" style="margin-top:14px">Usage</p>
+                <ul style="margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+                  <li>Submit forms: "Publish", "Send", "Save"</li>
+                  <li>Final step of a multi-step flow</li>
+                  <li>Primary CTA in a card, modal, or empty state</li>
+                  <li>With <code>.btn-danger</code> for irreversible destructive actions</li>
+                  <li>With <code>.btn-success</code> for positive confirmations</li>
+                </ul>
+              </div>
+              <div>
+                <p class="bd-eyebrow">Light mode</p>
+                <div class="bd-stage center" style="gap:10px;margin-bottom:12px">
+                  <button class="btn-primary">Publish vacancy</button>
+                  <button class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add</button>
+                </div>
+                <p class="bd-eyebrow">Dark mode</p>
+                <div class="bd-dark-demo">
+                  <button class="btn-primary" style="background:#8CA8FF;color:#0A1454">Publish vacancy</button>
+                  <button class="btn-primary" style="background:#8CA8FF;color:#0A1454"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add</button>
+                </div>
+              </div>
+            </div>
+            <div class="bd-grid c2" style="margin-top:16px">
+              <div class="bd-dd do">
+                <div class="bd-dd-head">✓ Do</div>
+                <div class="bd-dd-body">
+                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-tertiary">Cancel</button><button class="btn-primary">Publish</button></div>
+                  <span class="bd-dd-note">One Filled per view, paired with a lower-emphasis escape action on the left.</span>
+                </div>
+              </div>
+              <div class="bd-dd dont">
+                <div class="bd-dd-head">✕ Don't</div>
+                <div class="bd-dd-body">
+                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-primary">Save draft</button><button class="btn-primary">Publish</button></div>
+                  <span class="bd-dd-note">Two Filled buttons compete. Use Secondary tonal for the supporting action.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filled Tonal / Secondary -->
+          <div class="bd-type-block">
+            <div class="bd-type-header">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <span class="bd-type-name">Filled tonal button</span>
+                <code class="bd-mono">btn-secondary</code>
+              </div>
+              <span class="badge badge-tertiary badge-label">Medium-high emphasis</span>
+            </div>
+            <div class="bd-grid c2" style="margin-top:16px">
+              <div>
+                <p class="bd-eyebrow">Description</p>
+                <p class="bd-variant-desc">A tonal filled button using Secondary Container tokens (MD3 "filled tonal" pattern). Less visual weight than Filled while still clearly interactive. Light mode: periwinkle <code>#CAD9FF</code> + navy text. Dark mode: medium blue <code>#3A5BB0</code> + light text. Tokens: <code>--button-secondary-*</code>.</p>
+                <p class="bd-eyebrow" style="margin-top:14px">Usage</p>
+                <ul style="margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+                  <li>Supporting action alongside Filled ("Save draft" + "Publish")</li>
+                  <li>Secondary CTA in cards and list items</li>
+                  <li>Filter, sort, and preference actions</li>
+                </ul>
+              </div>
+              <div>
+                <p class="bd-eyebrow">Light mode</p>
+                <div class="bd-stage center" style="gap:10px;margin-bottom:12px">
+                  <button class="btn-secondary">Save draft</button>
+                  <button class="btn-secondary">Export</button>
+                </div>
+                <p class="bd-eyebrow">Dark mode</p>
+                <div class="bd-dark-demo">
+                  <button class="btn-secondary" style="background:#3A5BB0;color:#E2EAFF;border-color:#4D6EC4">Save draft</button>
+                  <button class="btn-secondary" style="background:#3A5BB0;color:#E2EAFF;border-color:#4D6EC4">Export</button>
+                </div>
+              </div>
+            </div>
+            <div class="bd-grid c2" style="margin-top:16px">
+              <div class="bd-dd do">
+                <div class="bd-dd-head">✓ Do</div>
+                <div class="bd-dd-body">
+                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-secondary">Save draft</button><button class="btn-primary">Publish</button></div>
+                  <span class="bd-dd-note">Tonal supports the primary — clearly differentiated by color weight.</span>
+                </div>
+              </div>
+              <div class="bd-dd dont">
+                <div class="bd-dd-head">✕ Don't</div>
+                <div class="bd-dd-body">
+                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-secondary">Cancel</button><button class="btn-primary">Save</button></div>
+                  <span class="bd-dd-note">Don't use Tonal for escape actions. Cancel/Back should always be Outlined (btn-tertiary).</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Outlined / Tertiary -->
+          <div class="bd-type-block">
+            <div class="bd-type-header">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <span class="bd-type-name">Outlined button</span>
+                <code class="bd-mono">btn-tertiary</code>
+              </div>
+              <span class="badge badge-warning badge-label">Medium emphasis</span>
+            </div>
+            <div class="bd-grid c2" style="margin-top:16px">
+              <div>
+                <p class="bd-eyebrow">Description</p>
+                <p class="bd-variant-desc">A bordered button with no fill. The outline signals interactivity; the absence of fill communicates lower priority. Uses <code>--color-outline</code> for the border and <code>--color-primary</code> for text. Also available as alias <code>.btn-ghost</code>.</p>
+                <p class="bd-eyebrow" style="margin-top:14px">Usage</p>
+                <ul style="margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+                  <li>Cancel, Back, Close — escape/dismiss actions</li>
+                  <li>Alternative actions in dialogs and form footers</li>
+                  <li>Secondary choice when two Outlined options have equal weight</li>
+                </ul>
+              </div>
+              <div>
+                <p class="bd-eyebrow">Light mode</p>
+                <div class="bd-stage center" style="gap:10px;margin-bottom:12px">
+                  <button class="btn-tertiary">Cancel</button>
+                  <button class="btn-tertiary">Back</button>
+                </div>
+                <p class="bd-eyebrow">Dark mode</p>
+                <div class="bd-dark-demo">
+                  <button class="btn-tertiary" style="border-color:#909099;color:#8CA8FF;background:transparent">Cancel</button>
+                  <button class="btn-tertiary" style="border-color:#909099;color:#8CA8FF;background:transparent">Back</button>
+                </div>
+              </div>
+            </div>
+            <div class="bd-grid c2" style="margin-top:16px">
+              <div class="bd-dd do">
+                <div class="bd-dd-head">✓ Do</div>
+                <div class="bd-dd-body">
+                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-tertiary">Cancel</button><button class="btn-primary">Save</button></div>
+                  <span class="bd-dd-note">Outlined as the non-destructive escape. Clear left-to-right hierarchy.</span>
+                </div>
+              </div>
+              <div class="bd-dd dont">
+                <div class="bd-dd-head">✕ Don't</div>
+                <div class="bd-dd-body">
+                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-primary btn-danger">Delete</button><button class="btn-tertiary">Cancel</button></div>
+                  <span class="bd-dd-note">Don't put the destructive action first. Escape (Cancel) always goes on the left.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="bd-type-block">
+            <div class="bd-type-header">
+              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                <span class="bd-type-name">Text button</span>
+                <code class="bd-mono">btn-text</code>
+              </div>
+              <span class="badge badge-archived badge-label">Low emphasis</span>
+            </div>
+            <div class="bd-grid c2" style="margin-top:16px">
+              <div>
+                <p class="bd-eyebrow">Description</p>
+                <p class="bd-variant-desc">A text-only button with no container. Minimal visual footprint. A subtle tinted hover state confirms interactivity on hover. Reserve for low-priority or repetitive actions where visual noise must be minimized.</p>
+                <p class="bd-eyebrow" style="margin-top:14px">Usage</p>
+                <ul style="margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+                  <li>Inline actions inside dense lists ("View", "Edit")</li>
+                  <li>Tertiary action in a dialog ("Learn more")</li>
+                  <li>Inside table rows or cards where space is constrained</li>
+                </ul>
+              </div>
+              <div>
+                <p class="bd-eyebrow">Light mode</p>
+                <div class="bd-stage center" style="gap:10px;margin-bottom:12px">
+                  <button class="btn-text">View details</button>
+                  <button class="btn-text">Edit profile</button>
+                </div>
+                <p class="bd-eyebrow">Dark mode</p>
+                <div class="bd-dark-demo">
+                  <button class="btn-text" style="color:#8CA8FF;background:transparent">View details</button>
+                  <button class="btn-text" style="color:#8CA8FF;background:transparent">Edit profile</button>
+                </div>
+              </div>
+            </div>
+            <div class="bd-grid c2" style="margin-top:16px">
+              <div class="bd-dd do">
+                <div class="bd-dd-head">✓ Do</div>
+                <div class="bd-dd-body">
+                  <div class="bd-stage center"><button class="btn-text">View all vacancies →</button></div>
+                  <span class="bd-dd-note">Text button for low-priority supplementary actions in dense UIs.</span>
+                </div>
+              </div>
+              <div class="bd-dd dont">
+                <div class="bd-dd-head">✕ Don't</div>
+                <div class="bd-dd-body">
+                  <div class="bd-stage center"><button class="btn-text">Publish vacancy</button></div>
+                  <span class="bd-dd-note">Don't use Text for critical actions. Low visual weight signals low importance to users.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </section>
       </div>
 
       <!-- ════════════════ SPECS ════════════════ -->
       <div class="ds-comp-tab-panel" data-tab="specs">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Anatomía</h2>
-          <div class="bd-card">
-            <div class="bd-anatomy">
-              <div class="bd-anatomy-fig">
-                <span class="bd-anatomy-pin" style="top:-2px;left:0">1</span>
-                <span class="bd-anatomy-pin" style="top:-2px;left:50%">2</span>
-                <span class="bd-anatomy-pin" style="bottom:-2px;right:-2px">3</span>
-                <button class="btn-primary" style="padding:11px 22px;font-size:15px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nueva vacante</button>
-              </div>
-              <ul class="bd-anatomy-legend">
-                <li><span class="bd-num">1</span><span><b>Ícono inicial</b> (opcional) — refuerza el significado de la acción. 16–18px, hereda <code>currentColor</code>.</span></li>
-                <li><span class="bd-num">2</span><span><b>Label</b> — verbo de acción, peso 600, sin truncar. Es el elemento obligatorio.</span></li>
-                <li><span class="bd-num">3</span><span><b>Contenedor</b> — fondo + radio (<code>--radius-md</code>) + padding. Define la variante y el área táctil.</span></li>
-                <li><span class="bd-num">+</span><span><b>State layer</b> — capa de estado (hover/pressed/focus) que se superpone al contenedor.</span></li>
-              </ul>
-            </div>
-          </div>
-        </section>
 
+        <!-- 1. Variants -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Estados</h2>
-          <p class="docs-section-desc">Cada variante responde a cinco estados. Ejemplo con Primary:</p>
-          <div class="bd-states">
-            <div class="bd-state"><button class="btn-primary">Acción</button><span class="bd-state-lbl">Enabled</span><span class="bd-state-tok">--color-primary</span></div>
-            <div class="bd-state"><button class="btn-primary" style="background:var(--color-primary-hover)">Acción</button><span class="bd-state-lbl">Hover</span><span class="bd-state-tok">--color-primary-hover</span></div>
-            <div class="bd-state"><button class="btn-primary bd-sim-focus">Acción</button><span class="bd-state-lbl">Focus</span><span class="bd-state-tok">+ focus ring</span></div>
-            <div class="bd-state"><button class="btn-primary" style="background:var(--color-primary-hover);transform:translateY(1px)">Acción</button><span class="bd-state-lbl">Pressed</span><span class="bd-state-tok">state layer 12%</span></div>
-            <div class="bd-state"><button class="btn-primary" disabled>Acción</button><span class="bd-state-lbl">Disabled</span><span class="bd-state-tok">--color-disabled</span></div>
-          </div>
-          <div class="bd-callout"><span class="bd-ico">ℹ</span><span>El foco visible (<code>:focus-visible</code>) y el <em>state layer</em> de hover/pressed están definidos en <code>button.css</code> para todas las variantes — no es necesario añadir estilos por componente.</span></div>
-        </section>
-
-        <section class="docs-section">
-          <h2 class="docs-section-title">Tamaños</h2>
-          <div class="bd-stage">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-primary">Default</button><span class="bd-state-lbl">36px · 13.5px</span></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-primary btn-sm">Small</button><span class="bd-state-lbl">30px · 12.5px</span></div>
-          </div>
-        </section>
-
-        <section class="docs-section">
-          <h2 class="docs-section-title">Ícono y disposición</h2>
-          <div class="bd-stage">
-            <button class="btn-primary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Ícono inicial</button>
-            <button class="btn-secondary">Ícono final <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-            <button class="icon-btn" aria-label="Buscar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-          </div>
-          <div class="bd-callout"><span class="bd-ico">ℹ</span><span>Un solo ícono por botón. El ícono inicial refuerza el significado; el final sugiere dirección o salida. Gap label–ícono: <code>8px</code>.</span></div>
-        </section>
-
-        <section class="docs-section">
-          <h2 class="docs-section-title">Medidas y espaciado</h2>
-          <div class="bd-card">
-            <div class="bd-spec"><span>Altura (default / small)</span><b>36px / 30px</b></div>
-            <div class="bd-spec"><span>Padding horizontal (default / small)</span><b>16px / 12px</b></div>
-            <div class="bd-spec"><span>Gap label ↔ ícono</span><b>8px</b></div>
-            <div class="bd-spec"><span>Radio de esquina</span><span class="bd-mono">--radius-md · 8px</span></div>
-            <div class="bd-spec"><span>Tipografía</span><b>Inter 600 · 13.5px</b></div>
-            <div class="bd-spec"><span>Tamaño de ícono</span><b>15–18px</b></div>
-            <div class="bd-spec"><span>Icon button (default / small)</span><b>36×36px / 30×30px</b></div>
-            <div class="bd-spec"><span>Área táctil mínima recomendada</span><b>44×44px</b></div>
-          </div>
-        </section>
-
-        <section class="docs-section">
-          <h2 class="docs-section-title">Referencia de tokens</h2>
+          <h2 class="docs-section-title">Variants</h2>
+          <p class="docs-section-desc">Quick reference for all five Embassy button variants, their CSS class, MD3 equivalent, and emphasis level.</p>
           <div class="ds-table-wrap">
             <table class="docs-props-table">
-              <thead><tr><th>Variante</th><th>Fondo</th><th>Texto</th><th>Borde</th></tr></thead>
+              <thead><tr><th>Preview</th><th>Class</th><th>MD3 name</th><th>Emphasis</th><th>Container</th></tr></thead>
               <tbody>
-                <tr><td><b>Primary</b></td><td><code>--color-primary</code></td><td><code>--color-on-primary</code></td><td>—</td></tr>
-                <tr><td><b>Secondary</b></td><td><code>--button-secondary-bg</code></td><td><code>--button-secondary-text</code></td><td><code>--button-secondary-border</code></td></tr>
-                <tr><td><b>Tertiary</b></td><td>transparent</td><td><code>--color-primary</code></td><td><code>--color-outline</code></td></tr>
-                <tr><td><b>Text</b></td><td>transparent</td><td><code>--color-primary</code></td><td>—</td></tr>
-                <tr><td><b>Icon</b></td><td><code>--color-surface-container</code></td><td><code>--color-on-surface-variant</code></td><td><code>--color-outline</code></td></tr>
-                <tr><td>Disabled (todas)</td><td><code>--color-disabled</code></td><td><code>--color-on-disabled</code></td><td><code>--color-outline-variant</code></td></tr>
-                <tr><td>Focus ring</td><td>—</td><td>—</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+                <tr><td><button class="btn-primary btn-xs">Primary</button></td><td><code>.btn-primary</code></td><td>Filled</td><td>★★★★★</td><td>Solid · Primary color</td></tr>
+                <tr><td><button class="btn-secondary btn-xs">Secondary</button></td><td><code>.btn-secondary</code></td><td>Filled tonal</td><td>★★★★☆</td><td>Tonal · Secondary container</td></tr>
+                <tr><td><button class="btn-tertiary btn-xs">Tertiary</button></td><td><code>.btn-tertiary</code></td><td>Outlined</td><td>★★★☆☆</td><td>Outlined · No fill</td></tr>
+                <tr><td><button class="btn-text btn-xs" style="padding:3px 0">Text</button></td><td><code>.btn-text</code></td><td>Text</td><td>★★☆☆☆</td><td>None · Text only</td></tr>
+                <tr><td><button class="icon-btn" aria-label="icon" style="width:26px;height:26px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></td><td><code>.icon-btn</code></td><td>Icon button</td><td>★★☆☆☆</td><td>Surface container + outline</td></tr>
               </tbody>
             </table>
           </div>
         </section>
 
+        <!-- 2. Configurations -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Código</h2>
-          <div class="docs-code-wrapper">
-            <button class="docs-copy-btn">Copiar</button>
-            <pre class="docs-code"><code>&lt;button class=&quot;btn-primary&quot;&gt;Crear vacante&lt;/button&gt;
-&lt;button class=&quot;btn-secondary&quot;&gt;Guardar borrador&lt;/button&gt;
-&lt;button class=&quot;btn-tertiary&quot;&gt;Cancelar&lt;/button&gt;
-&lt;button class=&quot;btn-text&quot;&gt;Ver más&lt;/button&gt;
-&lt;button class=&quot;icon-btn&quot; aria-label=&quot;Ajustes&quot;&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;
+          <h2 class="docs-section-title">Configurations</h2>
+          <p class="docs-section-desc">All variants support an optional leading icon. Use one icon per button maximum. Trailing icons are reserved for directional affordances only (chevron, arrow).</p>
+          <div class="bd-grid c3">
+            <div class="bd-card">
+              <p class="bd-eyebrow">Label only</p>
+              <div class="bd-stage center" style="margin:10px 0"><button class="btn-primary">Create vacancy</button></div>
+              <p class="bd-variant-desc">Default. Label is the only required element. Always use a verb.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Leading icon + label</p>
+              <div class="bd-stage center" style="margin:10px 0">
+                <button class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Create</button>
+              </div>
+              <p class="bd-variant-desc">Icon reinforces action meaning. 14–16px, inherits <code>currentColor</code>. Gap: 8px.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Trailing icon</p>
+              <div class="bd-stage center" style="margin:10px 0">
+                <button class="btn-secondary">Export <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+              </div>
+              <p class="bd-variant-desc">Only for directional cues (expand, navigate). Gap: 8px.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Icon button</p>
+              <div class="bd-stage center" style="gap:8px;margin:10px 0">
+                <button class="icon-btn" aria-label="Settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+                <button class="icon-btn btn-sm" aria-label="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              </div>
+              <p class="bd-variant-desc">Icon only. Always requires <code>aria-label</code> describing the action.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Semantic modifiers</p>
+              <div class="bd-stage center" style="gap:8px;margin:10px 0">
+                <button class="btn-primary btn-danger btn-sm">Delete</button>
+                <button class="btn-primary btn-success btn-sm">Approve</button>
+              </div>
+              <p class="bd-variant-desc"><code>.btn-danger</code> and <code>.btn-success</code> must be combined with <code>.btn-primary</code>. They override the fill color only.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Toggle state</p>
+              <div class="bd-stage center" style="gap:8px;margin:10px 0">
+                <button class="btn-toggle-on" aria-pressed="true">Saved</button>
+                <button class="btn-toggle-off" aria-pressed="false">Save</button>
+              </div>
+              <p class="bd-variant-desc">Binary state. JS toggles class + <code>aria-pressed</code> attribute and updates the visible label.</p>
+            </div>
+          </div>
+        </section>
 
-&lt;!-- Modificadores --&gt;
-&lt;button class=&quot;btn-primary btn-sm&quot;&gt;Pequeño&lt;/button&gt;
-&lt;button class=&quot;btn-primary btn-danger&quot;&gt;Eliminar&lt;/button&gt;
-&lt;button class=&quot;btn-primary btn-success&quot;&gt;Aprobar&lt;/button&gt;</code></pre>
+        <!-- 3. Tokens & specs -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Tokens & specs</h2>
+          <p class="docs-section-desc">Complete token map per variant and state. All tokens are semantic (<code>--color-*</code>) — never use raw hex values in button styles.</p>
+          <div class="ds-table-wrap">
+            <table class="docs-props-table">
+              <thead><tr><th>Variant · State</th><th>Background token</th><th>Text token</th><th>Border token</th></tr></thead>
+              <tbody>
+                <tr><td><b>Primary</b> · enabled</td><td><code>--color-primary</code></td><td><code>--color-on-primary</code></td><td>—</td></tr>
+                <tr><td><b>Primary</b> · hover</td><td><code>--color-primary-hover</code></td><td>—</td><td>—</td></tr>
+                <tr><td><b>Secondary</b> · enabled</td><td><code>--button-secondary-bg</code></td><td><code>--button-secondary-text</code></td><td><code>--button-secondary-border</code></td></tr>
+                <tr><td><b>Secondary</b> · hover</td><td><code>--button-secondary-bg-hover</code></td><td>—</td><td>—</td></tr>
+                <tr><td><b>Tertiary</b> · enabled</td><td>transparent</td><td><code>--color-primary</code></td><td><code>--color-outline</code></td></tr>
+                <tr><td><b>Tertiary</b> · hover</td><td><code>--color-surface-variant</code></td><td>—</td><td><code>--color-primary</code></td></tr>
+                <tr><td><b>Text</b> · enabled</td><td>transparent</td><td><code>--color-primary</code></td><td>—</td></tr>
+                <tr><td><b>Text</b> · hover</td><td><code>color-mix(primary 10%)</code></td><td>—</td><td>—</td></tr>
+                <tr><td><b>Icon</b> · enabled</td><td><code>--color-surface-container</code></td><td><code>--color-on-surface-variant</code></td><td><code>--color-outline</code></td></tr>
+                <tr><td><b>Icon</b> · hover</td><td><code>--color-surface-variant</code></td><td><code>--color-on-surface</code></td><td>—</td></tr>
+                <tr><td><b>Primary Danger</b></td><td><code>--color-error</code></td><td><code>--color-on-error</code></td><td>—</td></tr>
+                <tr><td><b>Primary Success</b></td><td><code>--color-success</code></td><td><code>--color-on-success</code></td><td>—</td></tr>
+                <tr><td><b>All</b> · disabled</td><td><code>--color-disabled</code></td><td><code>--color-on-disabled</code></td><td><code>--color-outline-variant</code></td></tr>
+                <tr><td><b>All</b> · focus</td><td>—</td><td>—</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 4. Anatomy -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Anatomy</h2>
+          <div class="bd-card">
+            <div class="bd-anatomy">
+              <div class="bd-anatomy-fig">
+                <span class="bd-anatomy-pin" style="top:-10px;left:-8px">1</span>
+                <span class="bd-anatomy-pin" style="top:-10px;left:40%">2</span>
+                <span class="bd-anatomy-pin" style="bottom:-10px;right:-8px">3</span>
+                <span class="bd-anatomy-pin" style="top:50%;transform:translateY(-50%);right:-28px">4</span>
+                <button class="btn-primary" style="padding:11px 24px;font-size:15px">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Create vacancy
+                </button>
+              </div>
+              <ul class="bd-anatomy-legend">
+                <li><span class="bd-num">1</span><span><b>Leading icon</b> (optional) — 14–18px SVG, inherits <code>currentColor</code>. One max. Gap to label: 8px.</span></li>
+                <li><span class="bd-num">2</span><span><b>Label</b> — Verb-led, sentence case, font-weight 600. The only required element. Never truncate.</span></li>
+                <li><span class="bd-num">3</span><span><b>Container</b> — Background color + border-radius (<code>--radius-md</code>) + padding. Defines variant and touch area.</span></li>
+                <li><span class="bd-num">4</span><span><b>State layer</b> — Invisible overlay for hover/focus/press interactions. Applied via CSS transition in <code>button.css</code>.</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Color -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Color</h2>
+          <p class="docs-section-desc">Each variant uses dedicated color role pairs that adapt across light and dark mode. All pairs meet WCAG 2.1 AA contrast (≥ 4.5:1).</p>
+          <div class="bd-contrast">
+            <div class="bd-contrast-item">
+              <div class="bd-contrast-swatch" style="background:var(--color-primary);color:var(--color-on-primary)">Primary filled</div>
+              <div class="bd-contrast-meta"><span>on-primary / primary</span><span class="bd-pass">AAA</span></div>
+            </div>
+            <div class="bd-contrast-item">
+              <div class="bd-contrast-swatch" style="background:var(--button-secondary-bg);color:var(--button-secondary-text);border:1px solid var(--button-secondary-border)">Secondary tonal</div>
+              <div class="bd-contrast-meta"><span>on-secondary / tonal</span><span class="bd-pass">AAA</span></div>
+            </div>
+            <div class="bd-contrast-item">
+              <div class="bd-contrast-swatch" style="background:transparent;color:var(--color-primary);border:1px solid var(--color-outline)">Tertiary outlined</div>
+              <div class="bd-contrast-meta"><span>primary / surface</span><span class="bd-pass">AA+</span></div>
+            </div>
+            <div class="bd-contrast-item">
+              <div class="bd-contrast-swatch" style="background:var(--color-error);color:var(--color-on-error)">Danger</div>
+              <div class="bd-contrast-meta"><span>on-error / error</span><span class="bd-pass">AA+</span></div>
+            </div>
+            <div class="bd-contrast-item">
+              <div class="bd-contrast-swatch" style="background:var(--color-success);color:var(--color-on-success)">Success</div>
+              <div class="bd-contrast-meta"><span>on-success / success</span><span class="bd-pass">AA+</span></div>
+            </div>
+          </div>
+          <div class="bd-callout" style="margin-top:14px"><span class="bd-ico">🌙</span><span>Don't hardcode hex values. All <code>--color-*</code> tokens are recalibrated under <code>[data-theme="dark"]</code> in <code>variables.css</code>. The same class renders correctly in both themes without any extra code.</span></div>
+        </section>
+
+        <!-- 6. States -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">States</h2>
+          <p class="docs-section-desc">All five variants respond to the same interaction states. Shown here on the Primary (Filled) variant.</p>
+          <div class="bd-states">
+            <div class="bd-state"><button class="btn-primary">Action</button><span class="bd-state-lbl">Enabled</span><span class="bd-state-tok">base tokens</span></div>
+            <div class="bd-state"><button class="btn-primary" style="background:var(--color-primary-hover);transform:translateY(-1px)">Action</button><span class="bd-state-lbl">Hover</span><span class="bd-state-tok">--color-primary-hover</span></div>
+            <div class="bd-state"><button class="btn-primary bd-sim-focus">Action</button><span class="bd-state-lbl">Focus</span><span class="bd-state-tok">:focus-visible ring</span></div>
+            <div class="bd-state"><button class="btn-primary" style="background:var(--color-primary-hover)">Action</button><span class="bd-state-lbl">Pressed</span><span class="bd-state-tok">state layer 12%</span></div>
+            <div class="bd-state"><button class="btn-primary" disabled>Action</button><span class="bd-state-lbl">Disabled</span><span class="bd-state-tok">--color-disabled</span></div>
+          </div>
+          <div class="bd-callout"><span class="bd-ico">ℹ</span><span>Focus ring uses <code>:focus-visible</code> — only appears during keyboard navigation, not on mouse click. Defined globally in <code>button.css</code> and applies to all variants automatically.</span></div>
+        </section>
+
+        <!-- 7. Shape morph -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Shape morph</h2>
+          <p class="docs-section-desc">Embassy buttons support two shape options. The default uses the system radius scale (<code>--radius-md</code>). The pill shape is added via modifier class and is context-specific.</p>
+          <div class="bd-grid c3">
+            <div class="bd-card" style="text-align:center">
+              <div class="bd-stage center" style="margin-bottom:12px"><button class="btn-primary">Default</button></div>
+              <code class="bd-mono">--radius-md · 8px</code>
+              <p class="bd-variant-desc" style="margin-top:8px">Standard product UI. Matches Embassy's system-wide corner radius.</p>
+            </div>
+            <div class="bd-card" style="text-align:center">
+              <div class="bd-stage center" style="margin-bottom:12px"><button class="btn-primary btn-rounded">Round</button></div>
+              <code class="bd-mono">.btn-rounded · 999px</code>
+              <p class="bd-variant-desc" style="margin-top:8px">Marketing, hero, and editorial surfaces. Don't mix with default-shape buttons in the same action group.</p>
+            </div>
+            <div class="bd-card" style="text-align:center">
+              <div class="bd-stage center" style="margin-bottom:12px"><button class="btn-primary" style="border-radius:0">Square</button></div>
+              <code class="bd-mono">border-radius: 0</code>
+              <p class="bd-variant-desc" style="margin-top:8px">Full-width edge-to-edge buttons in mobile-first layouts only. Apply via inline style.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Measurements -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Measurements</h2>
+          <div class="bd-card">
+            <div class="bd-spec"><span>XS height / font / padding-x</span><b>24px · 11px · 8px</b></div>
+            <div class="bd-spec"><span>SM height / font / padding-x</span><b>30px · 12.5px · 12px</b></div>
+            <div class="bd-spec"><span>MD height / font / padding-x (default)</span><b>36px · 13.5px · 16px</b></div>
+            <div class="bd-spec"><span>LG height / font / padding-x</span><b>44px · 15px · 22px</b></div>
+            <div class="bd-spec"><span>XL height / font / padding-x</span><b>52px · 16px · 30px</b></div>
+            <div class="bd-spec"><span>Icon button (SM / MD / LG / XL)</span><b>30 / 36 / 44 / 52px square</b></div>
+            <div class="bd-spec"><span>Gap: label ↔ icon</span><b>8px</b></div>
+            <div class="bd-spec"><span>Icon size</span><b>14–18px</b></div>
+            <div class="bd-spec"><span>Border radius (default)</span><span class="bd-mono">--radius-md · 8px</span></div>
+            <div class="bd-spec"><span>Font weight (XS–LG / XL)</span><b>600 / 700</b></div>
+            <div class="bd-spec"><span>Min recommended touch target</span><b>44 × 44px</b></div>
+          </div>
+        </section>
+
+        <!-- 9. Baseline tokens -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Baseline tokens</h2>
+          <p class="docs-section-desc">Token definitions as set in <code>variables.css</code>. Override at the theme level inside <code>[data-theme]</code> — never inline on the element.</p>
+          <div class="ds-table-wrap">
+            <table class="docs-props-table">
+              <thead><tr><th>Token</th><th>Light value</th><th>Dark value</th><th>Role</th></tr></thead>
+              <tbody>
+                <tr><td><code>--color-primary</code></td><td>#2D52D8</td><td>#8CA8FF</td><td>Primary bg</td></tr>
+                <tr><td><code>--color-on-primary</code></td><td>#FFFFFF</td><td>#0A1454</td><td>Primary text</td></tr>
+                <tr><td><code>--color-primary-hover</code></td><td>#2347C5</td><td>#9DB6FF</td><td>Primary hover bg</td></tr>
+                <tr><td><code>--button-secondary-bg</code></td><td>#CAD9FF</td><td>#3A5BB0</td><td>Secondary bg</td></tr>
+                <tr><td><code>--button-secondary-text</code></td><td>#001162</td><td>#E2EAFF</td><td>Secondary text</td></tr>
+                <tr><td><code>--button-secondary-border</code></td><td>#B2C4F0</td><td>#4D6EC4</td><td>Secondary border</td></tr>
+                <tr><td><code>--button-secondary-bg-hover</code></td><td>#B8CAFF</td><td>#4A6CC4</td><td>Secondary hover bg</td></tr>
+                <tr><td><code>--color-outline</code></td><td>#767B8D</td><td>#909099</td><td>Tertiary border</td></tr>
+                <tr><td><code>--color-surface-variant</code></td><td>#E5E8F4</td><td>#2A2D3A</td><td>Tertiary hover bg</td></tr>
+                <tr><td><code>--color-error</code></td><td>#C0393B</td><td>#FFB4AB</td><td>Danger bg</td></tr>
+                <tr><td><code>--color-success</code></td><td>#1C7C3A</td><td>#78DC8A</td><td>Success bg</td></tr>
+                <tr><td><code>--color-disabled</code></td><td>#E5E8F4</td><td>#2A2D3A</td><td>Disabled bg (all)</td></tr>
+                <tr><td><code>--color-on-disabled</code></td><td>#888C9B</td><td>#56586A</td><td>Disabled text (all)</td></tr>
+                <tr><td><code>--color-focus</code></td><td>#2D52D8</td><td>#8CA8FF</td><td>Focus outline</td></tr>
+                <tr><td><code>--color-focus-ring</code></td><td>rgba(45,82,216,.20)</td><td>rgba(140,168,255,.20)</td><td>Focus shadow</td></tr>
+                <tr><td><code>--radius-md</code></td><td colspan="2" style="text-align:center">8px</td><td>Button border-radius</td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
       </div>
 
       <!-- ════════════════ GUIDELINES ════════════════ -->
       <div class="ds-comp-tab-panel" data-tab="guidelines">
+
+        <!-- 1. Usage -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Jerarquía: una acción primaria por vista</h2>
-          <p class="docs-section-desc">Combiná variantes para guiar la atención. Nunca dos primarias compitiendo en la misma área.</p>
+          <h2 class="docs-section-title">Usage</h2>
+          <p class="docs-section-desc">Use buttons to trigger actions. For navigation use links (<code>&lt;a href&gt;</code>). For binary state use Switch. For multiple selections use Checkbox.</p>
           <div class="bd-grid c2">
-            <div class="bd-dd do">
-              <div class="bd-dd-head">✓ Correcto</div>
-              <div class="bd-dd-body">
-                <div class="bd-stage" style="justify-content:flex-end"><button class="btn-tertiary">Cancelar</button><button class="btn-primary">Guardar</button></div>
-                <span class="bd-dd-note">Una primaria clara + una terciaria de escape. Jerarquía evidente.</span>
-              </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow" style="color:var(--color-success)">Use buttons for</p>
+              <ul style="margin:6px 0 0;padding-left:18px;font-size:13.5px;line-height:1.9;color:var(--ds-text-2)">
+                <li>Submitting data — Save, Send, Publish</li>
+                <li>Advancing / going back in a flow</li>
+                <li>Opening dialogs, drawers, or confirmation modals</li>
+                <li>Destructive actions with explicit confirmation</li>
+                <li>Binary toggle actions — Save, Follow, Pin</li>
+              </ul>
             </div>
-            <div class="bd-dd dont">
-              <div class="bd-dd-head">✕ Incorrecto</div>
-              <div class="bd-dd-body">
-                <div class="bd-stage" style="justify-content:flex-end"><button class="btn-primary">Cancelar</button><button class="btn-primary">Guardar</button></div>
-                <span class="bd-dd-note">Dos primarias compiten; el usuario no sabe cuál es la acción esperada.</span>
-              </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow" style="color:var(--color-error)">Don't use buttons for</p>
+              <ul style="margin:6px 0 0;padding-left:18px;font-size:13.5px;line-height:1.9;color:var(--ds-text-2)">
+                <li>Navigating to another page → use <b>&lt;a href&gt;</b></li>
+                <li>Inline text links in a paragraph → use <b>link text</b></li>
+                <li>Persistent on/off state → use <b>Switch</b></li>
+                <li>Selecting from a group of options → use <b>Radio / Checkbox</b></li>
+              </ul>
+            </div>
+          </div>
+          <h3 class="bd-sub-title" style="margin-top:28px">Emphasis hierarchy</h3>
+          <p class="docs-section-desc" style="margin-bottom:12px">One primary action per screen. Combine variants to guide attention — the most important action should always be visually dominant.</p>
+          <div class="bd-card">
+            <div class="bd-hier">
+              <div class="bd-hier-row"><span class="bd-hier-label">Primary · Filled</span><span class="bd-hier-bar" style="width:100%;background:var(--color-primary)"></span></div>
+              <div class="bd-hier-row"><span class="bd-hier-label">Secondary · Tonal</span><span class="bd-hier-bar" style="width:80%;background:var(--button-secondary-bg)"></span></div>
+              <div class="bd-hier-row"><span class="bd-hier-label">Tertiary · Outlined</span><span class="bd-hier-bar" style="width:60%;background:var(--color-outline)"></span></div>
+              <div class="bd-hier-row"><span class="bd-hier-label">Text</span><span class="bd-hier-bar" style="width:40%;background:var(--color-outline-variant)"></span></div>
+              <div class="bd-hier-row"><span class="bd-hier-label">Icon</span><span class="bd-hier-bar" style="width:28%;background:var(--color-outline-variant)"></span></div>
             </div>
           </div>
         </section>
 
+        <!-- 2. Toggle buttons -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Contenido del label</h2>
+          <h2 class="docs-section-title">Toggle buttons</h2>
+          <p class="docs-section-desc">Toggle buttons switch between two states. Use for binary, reversible actions like Save, Follow, Subscribe. Never for navigation or form submissions.</p>
           <div class="bd-grid c2">
+            <div class="bd-card">
+              <p class="bd-eyebrow">Off state — <code>aria-pressed="false"</code></p>
+              <div class="bd-stage center" style="margin:10px 0">
+                <button class="btn-toggle-off" aria-pressed="false"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Save vacancy</button>
+              </div>
+              <p class="bd-variant-desc">Outlined · no fill. Communicates available action. Label uses the action verb.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">On state — <code>aria-pressed="true"</code></p>
+              <div class="bd-stage center" style="margin:10px 0">
+                <button class="btn-toggle-on" aria-pressed="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Saved</button>
+              </div>
+              <p class="bd-variant-desc">Filled · active state. Label changes to past tense to confirm the state is set.</p>
+            </div>
+          </div>
+          <div class="bd-callout" style="margin-top:12px"><span class="bd-ico">ℹ</span><span>Both the class and <code>aria-pressed</code> must be toggled on click. The label must also update ("Save" → "Saved") to give sighted and screen reader users the same state information.</span></div>
+          <div class="bd-grid c2" style="margin-top:16px">
             <div class="bd-dd do">
               <div class="bd-dd-head">✓ Do</div>
               <div class="bd-dd-body">
-                <div class="bd-stage"><button class="btn-primary">Crear vacante</button><button class="btn-secondary">Guardar borrador</button></div>
-                <span class="bd-dd-note">Verbos de acción concretos que describen el resultado.</span>
+                <div class="bd-stage center" style="gap:10px"><button class="btn-toggle-off" aria-pressed="false">Follow</button><button class="btn-toggle-on" aria-pressed="true">Following</button></div>
+                <span class="bd-dd-note">Label updates to reflect state. aria-pressed updated in JS. Both states are visually distinct.</span>
               </div>
             </div>
             <div class="bd-dd dont">
               <div class="bd-dd-head">✕ Don't</div>
               <div class="bd-dd-body">
-                <div class="bd-stage"><button class="btn-primary">OK</button><button class="btn-secondary">Click aquí</button></div>
-                <span class="bd-dd-note">Labels genéricos o ambiguos no comunican qué pasará.</span>
+                <div class="bd-stage center"><button class="btn-primary">Follow</button></div>
+                <span class="bd-dd-note">A Filled Primary button signals a form submission, not a binary toggle. It also can't express the "selected" state distinctly.</span>
               </div>
             </div>
           </div>
-          <div class="bd-callout"><span class="bd-ico">✏️</span><span>Recomendaciones de contenido: verbo + objeto (“Crear vacante”), máximo 1–3 palabras, sin punto final, capitalización tipo oración, sin MAYÚSCULAS sostenidas.</span></div>
         </section>
 
+        <!-- 3. Anatomy / Label rules -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Buenas prácticas</h2>
+          <h2 class="docs-section-title">Anatomy</h2>
+          <p class="docs-section-desc">The label is the most important element. It must communicate exactly what will happen when the user clicks. Follow these rules consistently across all surfaces.</p>
+          <div class="bd-card" style="margin-bottom:16px">
+            <div class="bd-spec"><span>Format</span><b>Verb + optional noun: "Publish vacancy", "Delete", "Save draft"</b></div>
+            <div class="bd-spec"><span>Case</span><b>Sentence case — "Create vacancy", not "Create Vacancy"</b></div>
+            <div class="bd-spec"><span>Length</span><b>1–3 words optimal. 5 words max.</b></div>
+            <div class="bd-spec"><span>Punctuation</span><b>No trailing period, ellipsis, or exclamation mark</b></div>
+            <div class="bd-spec"><span>Avoid</span><b>"OK", "Click here", "Submit", "Yes", "Confirm" alone</b></div>
+            <div class="bd-spec"><span>Avoid</span><b>ALL CAPS — use sentence case only</b></div>
+          </div>
           <div class="bd-grid c2">
-            <div class="bd-card"><p class="bd-eyebrow" style="color:var(--color-success)">Hacer</p><ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8;color:var(--ds-text-2)"><li>Ordenar acciones: primaria a la derecha, escape a la izquierda</li><li>Usar Tertiary/Text para acciones secundarias, no otra Primary</li><li>Usar <code>.btn-sm</code> en tablas y filas densas</li><li>Reservar <code>.btn-danger</code> solo para acciones destructivas</li></ul></div>
-            <div class="bd-card"><p class="bd-eyebrow" style="color:var(--color-error)">Evitar</p><ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8;color:var(--ds-text-2)"><li>Más de una Primary visible por sección</li><li>Deshabilitar sin explicar por qué (usar tooltip)</li><li>Íconos decorativos que no aportan significado</li><li>Mezclar tamaños distintos en un mismo grupo</li></ul></div>
+            <div class="bd-dd do">
+              <div class="bd-dd-head">✓ Good labels</div>
+              <div class="bd-dd-body">
+                <div class="bd-stage" style="flex-wrap:wrap;gap:8px"><button class="btn-primary">Publish vacancy</button><button class="btn-secondary">Save draft</button><button class="btn-primary btn-danger">Delete account</button></div>
+                <span class="bd-dd-note">Verb-led, sentence case, 1–3 words, specific to the outcome.</span>
+              </div>
+            </div>
+            <div class="bd-dd dont">
+              <div class="bd-dd-head">✕ Bad labels</div>
+              <div class="bd-dd-body">
+                <div class="bd-stage" style="flex-wrap:wrap;gap:8px"><button class="btn-primary">OK</button><button class="btn-secondary" style="text-transform:uppercase;letter-spacing:.05em">SAVE</button><button class="btn-primary btn-danger">Yes, I'm sure I want to do this</button></div>
+                <span class="bd-dd-note">Vague, all-caps, or overly long labels break clarity and layout.</span>
+              </div>
+            </div>
           </div>
         </section>
 
+        <!-- 4. Color styles -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Errores comunes</h2>
+          <h2 class="docs-section-title">Color styles</h2>
+          <p class="docs-section-desc">Color communicates emphasis and semantic meaning — not decorative preference. Never choose a button color because it looks good in isolation.</p>
+          <div class="bd-grid c2">
+            <div class="bd-card">
+              <p class="bd-eyebrow" style="color:var(--color-success)">Do</p>
+              <ul style="margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+                <li>Use Filled (Primary) for the single top-priority action</li>
+                <li>Use Tonal (Secondary) for supporting non-destructive actions</li>
+                <li>Use Outlined (Tertiary) for escape / back / cancel</li>
+                <li>Use <code>.btn-danger</code> + <code>.btn-primary</code> for irreversible actions</li>
+                <li>Use <code>.btn-success</code> + <code>.btn-primary</code> for positive confirmations</li>
+                <li>Let tokens handle dark mode — no extra CSS needed</li>
+              </ul>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow" style="color:var(--color-error)">Don't</p>
+              <ul style="margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+                <li>Use <code>.btn-danger</code> alone — it has no base styles without <code>.btn-primary</code></li>
+                <li>Use <code>.btn-danger</code> for "Cancel" — cancel is never destructive</li>
+                <li>Hardcode hex values — tokens auto-adapt to dark mode</li>
+                <li>Use more than one Primary per screen</li>
+                <li>Mix button sizes in the same action group</li>
+                <li>Override button tokens with inline styles</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Adaptive design -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Adaptive design</h2>
+          <p class="docs-section-desc">Button size and layout should adapt to the density and context of the surface.</p>
           <div class="bd-grid c3">
-            <div class="bd-card"><b style="color:var(--ds-text-1);font-size:13px">Primary múltiple</b><p class="bd-variant-desc" style="margin-top:6px">Varias primarias en pantalla diluyen la jerarquía. Dejá una sola.</p></div>
-            <div class="bd-card"><b style="color:var(--ds-text-1);font-size:13px">Danger por defecto</b><p class="bd-variant-desc" style="margin-top:6px">El rojo solo para acciones irreversibles, no para “cancelar”.</p></div>
-            <div class="bd-card"><b style="color:var(--ds-text-1);font-size:13px">Icon sin label</b><p class="bd-variant-desc" style="margin-top:6px">Un icon-btn sin <code>aria-label</code> es invisible para lectores de pantalla.</p></div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Mobile / touch</p>
+              <div class="bd-stage center" style="padding:12px"><button class="btn-primary" style="width:100%">Get started</button></div>
+              <p class="bd-variant-desc">Minimum touch target 44×44px. Use full-width (<code>width:100%</code>) for primary CTAs in single-column mobile layouts. Stack action groups vertically on small screens.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Dense UI (tables / toolbars)</p>
+              <div class="bd-stage center" style="gap:6px">
+                <button class="btn-primary btn-sm">Save</button>
+                <button class="btn-tertiary btn-sm">Cancel</button>
+                <button class="icon-btn btn-sm" aria-label="Edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+              </div>
+              <p class="bd-variant-desc">Use <code>.btn-sm</code> or <code>.btn-xs</code>. Prefer <code>.icon-btn.btn-sm</code> for row-level actions to keep tables scannable.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Hero / marketing</p>
+              <div class="bd-stage center" style="gap:10px">
+                <button class="btn-primary btn-lg btn-rounded">Get started</button>
+                <button class="btn-tertiary btn-lg btn-rounded">Learn more</button>
+              </div>
+              <p class="bd-variant-desc">Use <code>.btn-lg</code> or <code>.btn-xl</code> + <code>.btn-rounded</code> for editorial surfaces. Reserve for high-impact, low-frequency CTAs only.</p>
+            </div>
           </div>
         </section>
       </div>
 
       <!-- ════════════════ ACCESSIBILITY ════════════════ -->
       <div class="ds-comp-tab-panel" data-tab="accessibility">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Contraste</h2>
-          <p class="docs-section-desc">Todas las variantes superan WCAG 2.1 AA (4.5:1 para texto). Ejemplos verificados sobre superficies dark.</p>
-          <div class="bd-contrast">
-            <div class="bd-contrast-item"><div class="bd-contrast-swatch" style="background:var(--color-primary);color:var(--color-on-primary)">Primary</div><div class="bd-contrast-meta"><span>label / fondo</span><span class="bd-pass">AAA</span></div></div>
-            <div class="bd-contrast-item"><div class="bd-contrast-swatch" style="background:var(--button-secondary-bg);color:var(--button-secondary-text);border:1px solid var(--button-secondary-border)">Secondary</div><div class="bd-contrast-meta"><span>label / fondo</span><span class="bd-pass">AAA</span></div></div>
-            <div class="bd-contrast-item"><div class="bd-contrast-swatch" style="background:var(--color-error);color:var(--color-on-error)">Danger</div><div class="bd-contrast-meta"><span>label / fondo</span><span class="bd-pass">AA+</span></div></div>
-          </div>
-          <div class="bd-callout"><span class="bd-ico">◐</span><span>El sistema mantiene el contraste al cambiar de tema porque los pares <code>--color-*</code> / <code>--color-on-*</code> se recalibran juntos en light y dark.</span></div>
-        </section>
 
+        <!-- 1. Use cases -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Foco y teclado</h2>
-          <div class="bd-grid c2">
-            <div class="bd-card">
-              <p class="bd-eyebrow">Foco visible</p>
-              <div class="bd-stage center" style="margin-bottom:10px"><button class="btn-primary bd-sim-focus">Con foco</button></div>
-              <p class="bd-variant-desc">Anillo de 2px (<code>--color-focus</code>) + halo (<code>--color-focus-ring</code>) vía <code>:focus-visible</code>. Visible solo en navegación por teclado.</p>
-            </div>
-            <div class="bd-card">
-              <p class="bd-eyebrow">Navegación por teclado</p>
-              <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9;color:var(--ds-text-2)"><li><b>Tab</b> — mueve el foco al siguiente botón</li><li><b>Shift + Tab</b> — foco al anterior</li><li><b>Enter / Space</b> — activa el botón enfocado</li><li>Orden de tabulación = orden visual del DOM</li></ul>
-            </div>
-          </div>
-        </section>
-
-        <section class="docs-section">
-          <h2 class="docs-section-title">Lectores de pantalla y touch</h2>
-          <ul class="bd-a11y">
-            <li><span class="bd-ico">⌨</span><span><b>Elemento nativo.</b> Usar siempre <code>&lt;button&gt;</code> (no <code>&lt;div&gt;</code>) para obtener rol, foco y activación por teclado gratis.</span></li>
-            <li><span class="bd-ico">🔊</span><span><b>Icon buttons.</b> Requieren <code>aria-label</code> descriptivo: <code>&lt;button class="icon-btn" aria-label="Editar"&gt;</code>. El label debe describir la acción, no el ícono.</span></li>
-            <li><span class="bd-ico">🚫</span><span><b>Disabled.</b> El estado es anunciado por el lector. Para acciones bloqueadas temporalmente, agregá un tooltip explicando por qué.</span></li>
-            <li><span class="bd-ico">👆</span><span><b>Área táctil.</b> Mínimo recomendado <b>44×44px</b> (WCAG 2.5.5). El icon-btn de 36px debe llevar padding o margen extra en interfaces táctiles.</span></li>
-          </ul>
-        </section>
-
-        <section class="docs-section">
-          <h2 class="docs-section-title">Referencia WCAG 2.1</h2>
+          <h2 class="docs-section-title">Use cases</h2>
+          <p class="docs-section-desc">Always use a native <code>&lt;button&gt;</code> element for interactive controls that trigger actions. This gives keyboard focus, Enter/Space activation, and the correct ARIA role for free.</p>
           <div class="ds-table-wrap">
             <table class="docs-props-table">
-              <thead><tr><th>Criterio</th><th>Nivel</th><th>Cómo lo cumple Embassy</th></tr></thead>
+              <thead><tr><th>Scenario</th><th>Element to use</th><th>Why</th></tr></thead>
               <tbody>
-                <tr><td>1.4.3 Contraste mínimo</td><td>AA</td><td>Pares color/on-color ≥ 4.5:1 en ambos temas</td></tr>
-                <tr><td>2.1.1 Teclado</td><td>A</td><td><code>&lt;button&gt;</code> nativo, activable con Enter/Space</td></tr>
-                <tr><td>2.4.7 Foco visible</td><td>AA</td><td><code>:focus-visible</code> con anillo + halo en todas las variantes</td></tr>
-                <tr><td>2.5.5 Tamaño del objetivo</td><td>AAA</td><td>Área táctil objetivo 44×44px</td></tr>
-                <tr><td>4.1.2 Nombre, rol, valor</td><td>A</td><td>Label visible o <code>aria-label</code> en icon buttons</td></tr>
+                <tr><td>Triggers an action (save, delete, open dialog)</td><td><code>&lt;button&gt;</code></td><td>Native role="button", focusable, keyboard-activatable</td></tr>
+                <tr><td>Navigates to another page or URL</td><td><code>&lt;a href="..."&gt;</code></td><td>Correct semantics; supports right-click → open in new tab</td></tr>
+                <tr><td>Submits a form</td><td><code>&lt;button type="submit"&gt;</code></td><td>Integrates with form validation; Enter key submits the form</td></tr>
+                <tr><td>Resets a form</td><td><code>&lt;button type="reset"&gt;</code></td><td>Native reset behavior; no JS required</td></tr>
+                <tr><td>Binary toggle (save, follow, like)</td><td><code>&lt;button aria-pressed&gt;</code></td><td>Announces pressed state to screen readers</td></tr>
+                <tr><td>Icon-only action</td><td><code>&lt;button aria-label="..."&gt;</code></td><td>aria-label is the text equivalent of the visual icon</td></tr>
               </tbody>
             </table>
+          </div>
+          <div class="bd-callout"><span class="bd-ico">⚠️</span><span><b>Never</b> use <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code>, or <code>&lt;a&gt;</code> without <code>href</code> as a button. These elements are not keyboard-focusable by default and carry no semantic role. This is the single most common Embassy implementation error found on external pages.</span></div>
+        </section>
+
+        <!-- 2. Interaction & style -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Interaction & style</h2>
+          <div class="bd-grid c2">
+            <div class="bd-card">
+              <p class="bd-eyebrow">Focus visible</p>
+              <div class="bd-stage center" style="margin:10px 0">
+                <button class="btn-primary bd-sim-focus">Focused</button>
+              </div>
+              <p class="bd-variant-desc">A 2px outline (<code>--color-focus</code>) + 4px halo (<code>--color-focus-ring</code>) via <code>:focus-visible</code>. Only appears during keyboard navigation — not triggered by mouse clicks. Meets WCAG 2.4.7 (AA). Never suppress with <code>outline:none</code> without a replacement.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Contrast — all variants</p>
+              <div class="bd-contrast" style="margin:10px 0">
+                <div class="bd-contrast-item">
+                  <div class="bd-contrast-swatch" style="background:var(--color-primary);color:var(--color-on-primary);font-size:12px">Primary</div>
+                  <div class="bd-contrast-meta"><span>on-primary / primary</span><span class="bd-pass">AAA</span></div>
+                </div>
+                <div class="bd-contrast-item">
+                  <div class="bd-contrast-swatch" style="background:var(--button-secondary-bg);color:var(--button-secondary-text);border:1px solid var(--button-secondary-border);font-size:12px">Secondary</div>
+                  <div class="bd-contrast-meta"><span>on-secondary / tonal</span><span class="bd-pass">AAA</span></div>
+                </div>
+                <div class="bd-contrast-item">
+                  <div class="bd-contrast-swatch" style="background:var(--color-error);color:var(--color-on-error);font-size:12px">Danger</div>
+                  <div class="bd-contrast-meta"><span>on-error / error</span><span class="bd-pass">AA+</span></div>
+                </div>
+              </div>
+              <p class="bd-variant-desc">All color pairs maintain ≥ 4.5:1 contrast in both light and dark mode because the paired <code>--color-*</code> / <code>--color-on-*</code> tokens are calibrated together.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Keyboard navigation -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Keyboard navigation</h2>
+          <div class="bd-grid c2">
+            <div class="bd-card">
+              <p class="bd-eyebrow">Keys</p>
+              <ul class="bd-a11y" style="margin-top:10px">
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:11px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Tab</span><span>Move focus to the next interactive element</span></li>
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">⇧Tab</span><span>Move focus to the previous element</span></li>
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Enter</span><span>Activate the focused button</span></li>
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Space</span><span>Activate the focused button</span></li>
+              </ul>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Tab order rules</p>
+              <ul style="margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+                <li>Tab order = DOM source order</li>
+                <li>Don't use <code>tabindex &gt; 0</code> — it breaks natural focus flow</li>
+                <li>Don't suppress focus with <code>outline:none</code> — use <code>:focus-visible</code></li>
+                <li>Disabled buttons are automatically removed from tab order</li>
+                <li>In action groups: Cancel/escape first (left), confirm/destructive last (right) in DOM order</li>
+              </ul>
+            </div>
+          </div>
+          <div class="bd-callout" style="margin-top:12px"><span class="bd-ico">🎯</span><span>In action groups, put the escape/cancel action <strong>before</strong> the confirm/destructive action in DOM source order. This matches reading direction and ensures keyboard users encounter the safe option first.</span></div>
+        </section>
+
+        <!-- 4. Labeling elements -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Labeling elements</h2>
+          <ul class="bd-a11y">
+            <li>
+              <span class="bd-ico">🏷️</span>
+              <span><b>Visible label = accessible name.</b> All standard buttons have a visible text label that becomes the accessible name automatically. No additional ARIA needed. Keep it concise and action-oriented.</span>
+            </li>
+            <li>
+              <span class="bd-ico">🔊</span>
+              <span><b>Icon buttons require aria-label.</b> <code>&lt;button class="icon-btn" aria-label="Delete vacancy"&gt;</code>. The label describes the <em>action</em> ("Delete vacancy"), not the icon ("trash"). Include object context when multiple icons exist on the same screen.</span>
+            </li>
+            <li>
+              <span class="bd-ico">🔄</span>
+              <span><b>Toggle buttons.</b> Use <code>aria-pressed="true/false"</code>. Update it on every state change. The visible label should also change ("Save" → "Saved") — both together give screen reader users complete state information.</span>
+            </li>
+            <li>
+              <span class="bd-ico">🚫</span>
+              <span><b>Disabled state.</b> Use the native <code>disabled</code> attribute — the browser announces it automatically. If temporarily disabled, explain why: <code>&lt;button disabled title="Complete all required fields"&gt;</code> or use a visible helper message.</span>
+            </li>
+            <li>
+              <span class="bd-ico">⏳</span>
+              <span><b>Loading state.</b> Add <code>aria-busy="true"</code> while processing. Disable the button to prevent double-submission. Update the visible label ("Saving…") so both sighted and screen reader users receive feedback.</span>
+            </li>
+            <li>
+              <span class="bd-ico">⚙️</span>
+              <span><b>Never use aria-label to override visible text.</b> If a button has a visible label, don't add <code>aria-label</code> with different text — it creates a mismatch between what's visible and what's announced.</span>
+            </li>
+          </ul>
+          <div style="margin-top:20px">
+            <p class="bd-eyebrow">WCAG 2.1 compliance reference</p>
+            <div class="ds-table-wrap">
+              <table class="docs-props-table">
+                <thead><tr><th>Criterion</th><th>Level</th><th>How Embassy satisfies it</th></tr></thead>
+                <tbody>
+                  <tr><td>1.4.3 Minimum contrast</td><td>AA</td><td>All color pairs ≥ 4.5:1 in both light and dark mode</td></tr>
+                  <tr><td>2.1.1 Keyboard</td><td>A</td><td>Native <code>&lt;button&gt;</code>, Enter + Space activation out of the box</td></tr>
+                  <tr><td>2.4.7 Focus visible</td><td>AA</td><td><code>:focus-visible</code> ring on every variant</td></tr>
+                  <tr><td>2.5.3 Label in name</td><td>A</td><td>Visible label is the accessible name — no override via aria-label</td></tr>
+                  <tr><td>2.5.5 Target size</td><td>AAA</td><td>44×44px recommended minimum touch target</td></tr>
+                  <tr><td>4.1.2 Name, role, value</td><td>A</td><td>Visible label or aria-label on icon buttons; aria-pressed on toggles</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
       </div>
