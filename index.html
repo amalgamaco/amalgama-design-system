@@ -4369,6 +4369,94 @@ body { overflow-x: clip; }
         .btn-toggle-on  { background: var(--color-primary); color: var(--color-on-primary); border: 1px solid transparent; }
         .btn-toggle-off { background: transparent; color: var(--color-primary); border: 1px solid var(--color-outline); }
         .btn-toggle-on, .btn-toggle-off { display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-md);font:600 13.5px Inter;cursor:pointer; }
+
+        /* ── Overview intro list ── */
+        .bd-overview-list {
+          margin: 0 0 32px;
+          padding-left: 20px;
+          font-size: 14px;
+          line-height: 2;
+          color: var(--ds-text-2);
+        }
+        .bd-overview-list li { padding-left: 4px; }
+        .bd-overview-list b  { color: var(--ds-text-1); font-weight: 600; }
+
+        /* ── Button family overview ── */
+        .bd-family-wrap {
+          background: var(--color-surface-container-low);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-lg);
+          padding: 48px 32px 40px;
+          margin-bottom: 0;
+        }
+        .bd-family-stage {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(24px, 5vw, 64px);
+          flex-wrap: wrap;
+        }
+        .bd-family-col {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+        }
+        .bd-family-btn {
+          pointer-events: none;
+          min-width: 100px;
+          justify-content: center;
+        }
+        /* Elevated — approximation (not an Embassy class) */
+        .bd-family-elevated {
+          display: inline-flex; align-items: center; justify-content: center;
+          padding: 8px 20px;
+          border: none;
+          border-radius: var(--radius-full);
+          background: var(--color-surface-container);
+          color: var(--color-primary);
+          font: 600 13.5px 'Inter', sans-serif;
+          box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.08);
+          min-width: 100px;
+          cursor: default;
+        }
+        .bd-family-num {
+          width: 32px; height: 32px;
+          border-radius: 50%;
+          background: var(--color-on-surface);
+          color: var(--color-surface);
+          display: flex; align-items: center; justify-content: center;
+          font: 600 13px 'Inter', sans-serif;
+        }
+
+        /* ── Button family legend ── */
+        .bd-family-legend {
+          margin: 16px 0 0;
+          padding-left: 0;
+          list-style: none;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px 28px;
+          counter-reset: legend;
+        }
+        .bd-family-legend li {
+          counter-increment: legend;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 13px;
+          color: var(--ds-text-2);
+        }
+        .bd-family-legend li::before {
+          content: counter(legend);
+          width: 22px; height: 22px;
+          border-radius: 50%;
+          background: var(--color-on-surface);
+          color: var(--color-surface);
+          display: flex; align-items: center; justify-content: center;
+          font: 600 11px 'Inter', sans-serif;
+          flex-shrink: 0;
+        }
       </style>
 
       <div class="ds-comp-tabs">
@@ -4381,350 +4469,57 @@ body { overflow-x: clip; }
 
       <!-- ════════════════ OVERVIEW ════════════════ -->
       <div class="ds-comp-tab-panel active" data-tab="overview">
-
         <section class="docs-section">
-          <p class="bd-lead">Buttons initiate actions. Each Embassy button communicates its emphasis level through one of five variants, all built with semantic <code>--color-*</code> tokens so they adapt automatically to light and dark mode without any manual overrides.</p>
-        </section>
 
-        <!-- ── VARIANTS ── -->
-        <section class="docs-section">
-          <h2 class="docs-section-title">Variants</h2>
+          <!-- Intro list -->
+          <ul class="bd-overview-list">
+            <li><b>Two variants:</b> default and toggle</li>
+            <li>Can contain an optional leading icon</li>
+            <li><b>Five color options:</b> elevated, filled, tonal, outlined, and text</li>
+            <li><b>Five size recommendations:</b> extra small, small, medium, large, and extra large</li>
+            <li><b>Two shape options:</b> round and square</li>
+            <li>Keep labels concise and use sentence case</li>
+          </ul>
 
-          <h3 class="bd-sub-title">Two variants</h3>
-          <div class="bd-grid c2">
-            <div class="bd-variant">
-              <div class="bd-stage center" style="gap:10px">
-                <button class="btn-primary">Label</button>
-                <button class="btn-secondary">Label</button>
-                <button class="btn-tertiary">Label</button>
+          <!-- Button family visual -->
+          <div class="bd-family-wrap">
+            <div class="bd-family-stage">
+              <!-- 1 Elevated -->
+              <div class="bd-family-col">
+                <button class="bd-family-btn bd-family-elevated">Elevated</button>
+                <div class="bd-family-num">1</div>
               </div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Default</span></div>
-              <p class="bd-variant-desc">Triggers a single, immediate action. Available in all five color styles, all five sizes, and both shape options. Can include an optional leading icon.</p>
-            </div>
-            <div class="bd-variant">
-              <div class="bd-stage center" style="gap:10px">
-                <button class="btn-toggle-on" aria-pressed="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Saved</button>
-                <button class="btn-toggle-off" aria-pressed="false"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Save</button>
+              <!-- 2 Filled -->
+              <div class="bd-family-col">
+                <button class="btn-primary btn-rounded bd-family-btn">Filled</button>
+                <div class="bd-family-num">2</div>
               </div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Toggle</span></div>
-              <p class="bd-variant-desc">Switches between two states using <code>aria-pressed="true/false"</code>. Used for binary, reversible actions like Save, Follow, Pin, Like. Full pattern in Guidelines → Toggle buttons.</p>
-            </div>
-          </div>
-
-          <h3 class="bd-sub-title" style="margin-top:32px">Five color options</h3>
-          <div class="bd-color-options">
-            <div class="bd-color-opt">
-              <div class="bd-stage center" style="min-height:68px;background:var(--color-surface-container-high)">
-                <button style="display:inline-flex;align-items:center;padding:8px 16px;border:none;border-radius:8px;background:var(--color-surface-container-high);color:var(--color-primary);font:600 13.5px Inter;cursor:default;box-shadow:0 1px 5px rgba(0,0,0,.16)">Label</button>
+              <!-- 3 Tonal -->
+              <div class="bd-family-col">
+                <button class="btn-secondary btn-rounded bd-family-btn">Tonal</button>
+                <div class="bd-family-num">3</div>
               </div>
-              <span class="bd-color-opt-name">Elevated<span class="bd-color-opt-note">Not in Embassy — use Outlined or surface context</span></span>
-            </div>
-            <div class="bd-color-opt">
-              <div class="bd-stage center" style="min-height:68px"><button class="btn-primary">Label</button></div>
-              <span class="bd-color-opt-name">Filled<span class="bd-mono" style="font-size:10px;margin-top:3px">btn-primary</span></span>
-            </div>
-            <div class="bd-color-opt">
-              <div class="bd-stage center" style="min-height:68px"><button class="btn-secondary">Label</button></div>
-              <span class="bd-color-opt-name">Filled tonal<span class="bd-mono" style="font-size:10px;margin-top:3px">btn-secondary</span></span>
-            </div>
-            <div class="bd-color-opt">
-              <div class="bd-stage center" style="min-height:68px"><button class="btn-tertiary">Label</button></div>
-              <span class="bd-color-opt-name">Outlined<span class="bd-mono" style="font-size:10px;margin-top:3px">btn-tertiary</span></span>
-            </div>
-            <div class="bd-color-opt">
-              <div class="bd-stage center" style="min-height:68px"><button class="btn-text">Label</button></div>
-              <span class="bd-color-opt-name">Text<span class="bd-mono" style="font-size:10px;margin-top:3px">btn-text</span></span>
-            </div>
-          </div>
-
-          <h3 class="bd-sub-title" style="margin-top:32px">Five sizes</h3>
-          <div class="bd-stage" style="align-items:flex-end;gap:24px;flex-wrap:wrap">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-              <button class="btn-primary btn-xs">Label</button>
-              <span class="bd-state-lbl">Extra small</span>
-              <span class="bd-state-tok">btn-xs · 24px</span>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-              <button class="btn-primary btn-sm">Label</button>
-              <span class="bd-state-lbl">Small</span>
-              <span class="bd-state-tok">btn-sm · 30px</span>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-              <button class="btn-primary">Label</button>
-              <span class="bd-state-lbl">Medium</span>
-              <span class="bd-state-tok">default · 36px</span>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-              <button class="btn-primary btn-lg">Label</button>
-              <span class="bd-state-lbl">Large</span>
-              <span class="bd-state-tok">btn-lg · 44px</span>
-            </div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
-              <button class="btn-primary btn-xl">Label</button>
-              <span class="bd-state-lbl">Extra large</span>
-              <span class="bd-state-tok">btn-xl · 52px</span>
-            </div>
-          </div>
-          <div class="bd-callout"><span class="bd-ico">ℹ</span><span>Use <b>Medium (default)</b> for most UI. Use <b>Small or XS</b> in dense interfaces like tables and sidebars. Use <b>Large or XL</b> for high-impact CTAs and hero sections only.</span></div>
-
-          <h3 class="bd-sub-title" style="margin-top:32px">Two shape options</h3>
-          <div class="bd-grid c2">
-            <div class="bd-variant">
-              <div class="bd-stage center" style="gap:10px">
-                <button class="btn-primary">Label</button>
-                <button class="btn-secondary">Label</button>
-                <button class="btn-tertiary">Label</button>
+              <!-- 4 Outlined -->
+              <div class="bd-family-col">
+                <button class="btn-tertiary btn-rounded bd-family-btn">Outlined</button>
+                <div class="bd-family-num">4</div>
               </div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Square · <code>--radius-md</code> (8px)</span></div>
-              <p class="bd-variant-desc">Default shape. Consistent with Embassy's system-wide radius scale. Use in all standard product UI surfaces.</p>
-            </div>
-            <div class="bd-variant">
-              <div class="bd-stage center" style="gap:10px">
-                <button class="btn-primary btn-rounded">Label</button>
-                <button class="btn-secondary btn-rounded">Label</button>
-                <button class="btn-tertiary btn-rounded">Label</button>
-              </div>
-              <div class="bd-variant-head"><span class="bd-variant-name">Round · pill (999px)</span></div>
-              <p class="bd-variant-desc">For marketing CTAs, hero sections, or editorial contexts. Add <code>.btn-rounded</code>. Don't mix with default-shape buttons in the same action group.</p>
-            </div>
-          </div>
-
-          <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">✏️</span><span><b>Label guidance:</b> Sentence case ("Create vacancy", not "CREATE VACANCY"). Lead with a verb. Keep to 1–3 words. No trailing punctuation. Avoid "OK", "Click here", "Submit".</span></div>
-        </section>
-
-        <!-- ── BUTTON TYPES ── -->
-        <section class="docs-section">
-          <h2 class="docs-section-title">Button types</h2>
-          <p class="docs-section-desc">Five types mapped to MD3's emphasis hierarchy. Each type signals a distinct importance level — choose based on how critical the action is relative to others on the same screen.</p>
-
-          <!-- Elevated — not in Embassy -->
-          <div class="bd-type-block">
-            <div class="bd-type-header">
-              <span class="bd-type-name">Elevated button</span>
-              <span class="badge badge-draft badge-label">Not in Embassy</span>
-            </div>
-            <div class="bd-grid c2" style="margin-top:16px">
-              <div>
-                <p class="bd-eyebrow">About elevated buttons</p>
-                <p class="bd-variant-desc">In MD3, elevated buttons use a surface tint + drop shadow to stand out against the background without a filled color. Embassy does not implement an Elevated button variant.</p>
-                <p class="bd-eyebrow" style="margin-top:14px">Embassy equivalent</p>
-                <p class="bd-variant-desc">Use <code>.btn-secondary</code> (Filled tonal) for medium-emphasis actions that need visual distinction without a strong fill. Use <code>.btn-tertiary</code> (Outlined) when the background is already colored or textured.</p>
-              </div>
-              <div>
-                <p class="bd-eyebrow">MD3 reference (not Embassy CSS)</p>
-                <div class="bd-stage center" style="background:linear-gradient(135deg,#e8eaf6 0%,#f3e5f5 100%)">
-                  <button style="display:inline-flex;align-items:center;padding:8px 16px;border:none;border-radius:8px;background:var(--color-surface-container-low);color:var(--color-primary);font:600 13.5px Inter;cursor:default;box-shadow:0 1px 2px rgba(0,0,0,.1),0 2px 8px rgba(0,0,0,.08)">Elevated</button>
-                </div>
-                <div class="bd-callout" style="margin-top:10px"><span class="bd-ico">💡</span><span>Embassy alternative in this situation: <code>btn-secondary</code> provides differentiation without a heavy fill.</span></div>
+              <!-- 5 Text -->
+              <div class="bd-family-col">
+                <button class="btn-text bd-family-btn">Text</button>
+                <div class="bd-family-num">5</div>
               </div>
             </div>
           </div>
 
-          <!-- Filled / Primary -->
-          <div class="bd-type-block">
-            <div class="bd-type-header">
-              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-                <span class="bd-type-name">Filled button</span>
-                <code class="bd-mono">btn-primary</code>
-              </div>
-              <span class="badge badge-open badge-label">Highest emphasis</span>
-            </div>
-            <div class="bd-grid c2" style="margin-top:16px">
-              <div>
-                <p class="bd-eyebrow">Description</p>
-                <p class="bd-variant-desc">The most visually prominent button. Solid fill using the primary brand color signals this is the single most important action. Only one Filled button should be visible per view.</p>
-                <p class="bd-eyebrow" style="margin-top:14px">Usage</p>
-                <ul style="margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
-                  <li>Submit forms: "Publish", "Send", "Save"</li>
-                  <li>Final step of a multi-step flow</li>
-                  <li>Primary CTA in a card, modal, or empty state</li>
-                  <li>With <code>.btn-danger</code> for irreversible destructive actions</li>
-                  <li>With <code>.btn-success</code> for positive confirmations</li>
-                </ul>
-              </div>
-              <div>
-                <p class="bd-eyebrow">Light mode</p>
-                <div class="bd-stage center" style="gap:10px;margin-bottom:12px">
-                  <button class="btn-primary">Publish vacancy</button>
-                  <button class="btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add</button>
-                </div>
-                <p class="bd-eyebrow">Dark mode</p>
-                <div class="bd-dark-demo">
-                  <button class="btn-primary" style="background:#8CA8FF;color:#0A1454">Publish vacancy</button>
-                  <button class="btn-primary" style="background:#8CA8FF;color:#0A1454"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add</button>
-                </div>
-              </div>
-            </div>
-            <div class="bd-grid c2" style="margin-top:16px">
-              <div class="bd-dd do">
-                <div class="bd-dd-head">✓ Do</div>
-                <div class="bd-dd-body">
-                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-tertiary">Cancel</button><button class="btn-primary">Publish</button></div>
-                  <span class="bd-dd-note">One Filled per view, paired with a lower-emphasis escape action on the left.</span>
-                </div>
-              </div>
-              <div class="bd-dd dont">
-                <div class="bd-dd-head">✕ Don't</div>
-                <div class="bd-dd-body">
-                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-primary">Save draft</button><button class="btn-primary">Publish</button></div>
-                  <span class="bd-dd-note">Two Filled buttons compete. Use Secondary tonal for the supporting action.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Filled Tonal / Secondary -->
-          <div class="bd-type-block">
-            <div class="bd-type-header">
-              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-                <span class="bd-type-name">Filled tonal button</span>
-                <code class="bd-mono">btn-secondary</code>
-              </div>
-              <span class="badge badge-tertiary badge-label">Medium-high emphasis</span>
-            </div>
-            <div class="bd-grid c2" style="margin-top:16px">
-              <div>
-                <p class="bd-eyebrow">Description</p>
-                <p class="bd-variant-desc">A tonal filled button using Secondary Container tokens (MD3 "filled tonal" pattern). Less visual weight than Filled while still clearly interactive. Light mode: periwinkle <code>#CAD9FF</code> + navy text. Dark mode: medium blue <code>#3A5BB0</code> + light text. Tokens: <code>--button-secondary-*</code>.</p>
-                <p class="bd-eyebrow" style="margin-top:14px">Usage</p>
-                <ul style="margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
-                  <li>Supporting action alongside Filled ("Save draft" + "Publish")</li>
-                  <li>Secondary CTA in cards and list items</li>
-                  <li>Filter, sort, and preference actions</li>
-                </ul>
-              </div>
-              <div>
-                <p class="bd-eyebrow">Light mode</p>
-                <div class="bd-stage center" style="gap:10px;margin-bottom:12px">
-                  <button class="btn-secondary">Save draft</button>
-                  <button class="btn-secondary">Export</button>
-                </div>
-                <p class="bd-eyebrow">Dark mode</p>
-                <div class="bd-dark-demo">
-                  <button class="btn-secondary" style="background:#3A5BB0;color:#E2EAFF;border-color:#4D6EC4">Save draft</button>
-                  <button class="btn-secondary" style="background:#3A5BB0;color:#E2EAFF;border-color:#4D6EC4">Export</button>
-                </div>
-              </div>
-            </div>
-            <div class="bd-grid c2" style="margin-top:16px">
-              <div class="bd-dd do">
-                <div class="bd-dd-head">✓ Do</div>
-                <div class="bd-dd-body">
-                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-secondary">Save draft</button><button class="btn-primary">Publish</button></div>
-                  <span class="bd-dd-note">Tonal supports the primary — clearly differentiated by color weight.</span>
-                </div>
-              </div>
-              <div class="bd-dd dont">
-                <div class="bd-dd-head">✕ Don't</div>
-                <div class="bd-dd-body">
-                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-secondary">Cancel</button><button class="btn-primary">Save</button></div>
-                  <span class="bd-dd-note">Don't use Tonal for escape actions. Cancel/Back should always be Outlined (btn-tertiary).</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Outlined / Tertiary -->
-          <div class="bd-type-block">
-            <div class="bd-type-header">
-              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-                <span class="bd-type-name">Outlined button</span>
-                <code class="bd-mono">btn-tertiary</code>
-              </div>
-              <span class="badge badge-warning badge-label">Medium emphasis</span>
-            </div>
-            <div class="bd-grid c2" style="margin-top:16px">
-              <div>
-                <p class="bd-eyebrow">Description</p>
-                <p class="bd-variant-desc">A bordered button with no fill. The outline signals interactivity; the absence of fill communicates lower priority. Uses <code>--color-outline</code> for the border and <code>--color-primary</code> for text. Also available as alias <code>.btn-ghost</code>.</p>
-                <p class="bd-eyebrow" style="margin-top:14px">Usage</p>
-                <ul style="margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
-                  <li>Cancel, Back, Close — escape/dismiss actions</li>
-                  <li>Alternative actions in dialogs and form footers</li>
-                  <li>Secondary choice when two Outlined options have equal weight</li>
-                </ul>
-              </div>
-              <div>
-                <p class="bd-eyebrow">Light mode</p>
-                <div class="bd-stage center" style="gap:10px;margin-bottom:12px">
-                  <button class="btn-tertiary">Cancel</button>
-                  <button class="btn-tertiary">Back</button>
-                </div>
-                <p class="bd-eyebrow">Dark mode</p>
-                <div class="bd-dark-demo">
-                  <button class="btn-tertiary" style="border-color:#909099;color:#8CA8FF;background:transparent">Cancel</button>
-                  <button class="btn-tertiary" style="border-color:#909099;color:#8CA8FF;background:transparent">Back</button>
-                </div>
-              </div>
-            </div>
-            <div class="bd-grid c2" style="margin-top:16px">
-              <div class="bd-dd do">
-                <div class="bd-dd-head">✓ Do</div>
-                <div class="bd-dd-body">
-                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-tertiary">Cancel</button><button class="btn-primary">Save</button></div>
-                  <span class="bd-dd-note">Outlined as the non-destructive escape. Clear left-to-right hierarchy.</span>
-                </div>
-              </div>
-              <div class="bd-dd dont">
-                <div class="bd-dd-head">✕ Don't</div>
-                <div class="bd-dd-body">
-                  <div class="bd-stage" style="justify-content:flex-end"><button class="btn-primary btn-danger">Delete</button><button class="btn-tertiary">Cancel</button></div>
-                  <span class="bd-dd-note">Don't put the destructive action first. Escape (Cancel) always goes on the left.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Text -->
-          <div class="bd-type-block">
-            <div class="bd-type-header">
-              <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-                <span class="bd-type-name">Text button</span>
-                <code class="bd-mono">btn-text</code>
-              </div>
-              <span class="badge badge-archived badge-label">Low emphasis</span>
-            </div>
-            <div class="bd-grid c2" style="margin-top:16px">
-              <div>
-                <p class="bd-eyebrow">Description</p>
-                <p class="bd-variant-desc">A text-only button with no container. Minimal visual footprint. A subtle tinted hover state confirms interactivity on hover. Reserve for low-priority or repetitive actions where visual noise must be minimized.</p>
-                <p class="bd-eyebrow" style="margin-top:14px">Usage</p>
-                <ul style="margin:4px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
-                  <li>Inline actions inside dense lists ("View", "Edit")</li>
-                  <li>Tertiary action in a dialog ("Learn more")</li>
-                  <li>Inside table rows or cards where space is constrained</li>
-                </ul>
-              </div>
-              <div>
-                <p class="bd-eyebrow">Light mode</p>
-                <div class="bd-stage center" style="gap:10px;margin-bottom:12px">
-                  <button class="btn-text">View details</button>
-                  <button class="btn-text">Edit profile</button>
-                </div>
-                <p class="bd-eyebrow">Dark mode</p>
-                <div class="bd-dark-demo">
-                  <button class="btn-text" style="color:#8CA8FF;background:transparent">View details</button>
-                  <button class="btn-text" style="color:#8CA8FF;background:transparent">Edit profile</button>
-                </div>
-              </div>
-            </div>
-            <div class="bd-grid c2" style="margin-top:16px">
-              <div class="bd-dd do">
-                <div class="bd-dd-head">✓ Do</div>
-                <div class="bd-dd-body">
-                  <div class="bd-stage center"><button class="btn-text">View all vacancies →</button></div>
-                  <span class="bd-dd-note">Text button for low-priority supplementary actions in dense UIs.</span>
-                </div>
-              </div>
-              <div class="bd-dd dont">
-                <div class="bd-dd-head">✕ Don't</div>
-                <div class="bd-dd-body">
-                  <div class="bd-stage center"><button class="btn-text">Publish vacancy</button></div>
-                  <span class="bd-dd-note">Don't use Text for critical actions. Low visual weight signals low importance to users.</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <!-- Legend -->
+          <ol class="bd-family-legend">
+            <li>Elevated button</li>
+            <li>Filled button</li>
+            <li>Filled tonal button</li>
+            <li>Outlined button</li>
+            <li>Text button</li>
+          </ol>
 
         </section>
       </div>
