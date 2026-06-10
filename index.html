@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/variables.css?v=5">
 <link rel="stylesheet" href="css/base.css?v=2">
 <link rel="stylesheet" href="css/layout.css?v=2">
-<link rel="stylesheet" href="css/components.css?v=3">
+<link rel="stylesheet" href="css/components.css?v=4">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -10091,7 +10091,7 @@ export { StatsGrid, StatCard }</code></pre>
           <div class="ds-guideline-grid">
             <div class="ds-guideline-card do">
               <h3>✓ Do</h3>
-              <ul><li>Priorizar búsqueda a la izquierda, filtros en el centro, acciones primarias a la derecha</li><li>Mostrar los filtros activos como chips removibles debajo de la toolbar</li><li>Sincronizar el estado de la toolbar con la URL para permitir compartir la vista filtrada</li></ul>
+              <ul><li>Priorizar búsqueda a la izquierda, filtros en el centro, acciones primarias a la derecha</li><li>Mostrar los filtros activos como <a href="#" onclick="navigate('c-chip');return false;" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">chips removibles</a> debajo de la toolbar</li><li>Sincronizar el estado de la toolbar con la URL para permitir compartir la vista filtrada</li></ul>
             </div>
             <div class="ds-guideline-card dont">
               <h3>✕ Don't</h3>
@@ -12568,18 +12568,20 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         .emb-chip {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          gap: 8px;
           height: 32px;
-          padding: 0 12px;
+          padding: 0 16px;
           border-radius: var(--radius-full);
           border: 1px solid var(--color-outline);
           background: transparent;
           color: var(--color-on-surface);
-          font: 500 13px 'Inter', sans-serif;
+          font: 500 14px 'Inter', sans-serif;
           cursor: default;
           white-space: nowrap;
           pointer-events: none;
         }
+        /* Padding 8px del lado del ícono (spec: 8dp con ícono) */
+        .emb-chip:has(.emb-chip__icon) { padding-left: 8px; }
         /* Filter chip — selected state */
         .emb-chip--filter-on {
           background: var(--color-secondary-container);
@@ -12588,7 +12590,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         }
         /* Input chip — has trailing remove icon */
         .emb-chip--input {
-          padding-right: 6px;
+          padding-right: 8px;
         }
         .emb-chip__remove {
           display: flex; align-items: center; justify-content: center;
@@ -12665,6 +12667,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
 
@@ -12754,13 +12757,15 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
           /* ── Base spec chip ── */
           .cs-chip {
-            display:inline-flex; align-items:center; gap:6px;
-            height:32px; padding:0 12px; border-radius:999px;
+            display:inline-flex; align-items:center; gap:8px;
+            height:32px; padding:0 16px; border-radius:999px;
             border:1px solid var(--color-outline,#9FA3AE);
             color:var(--color-on-surface,#0A0C12);
-            font:500 13px 'Inter',sans-serif;
+            font:500 14px 'Inter',sans-serif;
             pointer-events:none; white-space:nowrap; background:transparent;
           }
+          /* Padding 8px del lado del ícono (spec: 8dp con ícono) */
+          .cs-chip:has(.cs-chip__icon) { padding-left:8px; }
           .cs-chip--selected {
             background:var(--color-secondary-container,#CAD9FF);
             color:var(--color-on-secondary-container,#01164D);
@@ -12792,7 +12797,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             margin:0 0 4px;
           }
           .cs-dark-well {
-            background:#1A1D27; border-radius:8px;
+            background:#13161F; border-radius:8px;
             padding:8px 10px; display:inline-flex;
           }
 
@@ -13326,7 +13331,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                 </svg>
                 <!-- Dark panel -->
                 <svg viewBox="0 0 300 200" style="width:100%;display:block;border-radius:12px;" aria-hidden="true">
-                  <rect width="300" height="200" rx="12" fill="#1A1D27"/>
+                  <rect width="300" height="200" rx="12" fill="#13161F"/>
                   <rect x="100" y="84" width="100" height="32" rx="16" fill="none" stroke="#747989" stroke-width="1"/>
                   <rect x="110" y="91" width="14" height="14" rx="1.5" fill="none" stroke="#EAEBED" stroke-width="1.2"/>
                   <line x1="114" y1="89" x2="114" y2="93" stroke="#EAEBED" stroke-width="1.2"/>
@@ -13670,7 +13675,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                 </svg>
                 <!-- Dark panel -->
                 <svg viewBox="0 0 300 260" style="width:100%;display:block;border-radius:12px;" aria-hidden="true">
-                  <rect width="300" height="260" rx="12" fill="#1A1D27"/>
+                  <rect width="300" height="260" rx="12" fill="#13161F"/>
                   <!-- Chip 1: unselected -->
                   <rect x="30" y="110" width="80" height="32" rx="16" fill="none" stroke="#747989" stroke-width="1"/>
                   <text x="70" y="130" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#BFC1C8">Remoto</text>
@@ -13962,7 +13967,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             display:flex; flex-wrap:wrap; gap:10px; align-items:center;
           }
           .cg-card-body--dark {
-            background:#1A1D27;
+            background:#13161F;
           }
           .cg-card-footer {
             padding:12px 16px;
@@ -14058,7 +14063,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                       <rect y="28" width="360" height="46" fill="white"/>
                       <text x="18" y="56" font-family="Inter,sans-serif" font-size="20" fill="#474D61">≡</text>
                       <text x="180" y="56" text-anchor="middle" font-family="Inter,sans-serif" font-size="15" font-weight="600" fill="#0A0C12">Compartí tus experiencias</text>
-                      <circle cx="340" cy="51" r="14" fill="#BFC8E8"/>
+                      <circle cx="340" cy="51" r="14" fill="#D6DBE8"/>
                       <text x="340" y="56" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#01164D">AV</text>
                       <!-- sub-label -->
                       <text x="180" y="84" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#9FA3AE">Publicando públicamente ⓘ</text>
@@ -14095,7 +14100,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                 <!-- Row 2: text left + Do/Don't right -->
                 <div class="cg-row cg-row--wide">
                   <div class="cg-row__text">
-                    <p class="cg-desc">Los chips y los <span style="text-decoration:underline;">botones</span> son similares. Ambos ofrecen señales visuales para invitar a las personas a realizar acciones y hacer selecciones.</p>
+                    <p class="cg-desc">Los chips y los <a href="#" onclick="navigate('c-button');return false;" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">botones</a> son similares. Ambos ofrecen señales visuales para invitar a las personas a realizar acciones y hacer selecciones.</p>
                     <p class="cg-desc">Mientras que los botones aparecen de manera consistente y con llamadas a la acción conocidas, los chips son dinámicos según la situación y aparecen como un grupo de elementos interactivos.</p>
                     <p class="cg-desc">Usá chips para enriquecer el recorrido actual de una persona y fomentar la acción. Usá botones para avanzar a través del producto y para acciones significativas.</p>
                   </div>
@@ -14440,7 +14445,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                         <path d="M126 67 L160 78" fill="none" stroke="#9FA3AE" stroke-width="1" stroke-dasharray="2 3"/>
                         <!-- avatar input chip -->
                         <rect x="155" y="70" width="136" height="36" rx="18" fill="white" stroke="#9FA3AE" stroke-width="1.2"/>
-                        <circle cx="176" cy="88" r="11" fill="#BFC8E8"/>
+                        <circle cx="176" cy="88" r="11" fill="#D6DBE8"/>
                         <text x="176" y="91.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="700" fill="#01164D">AV</text>
                         <text x="194" y="92.5" font-family="Inter,sans-serif" font-size="12.5" font-weight="500" fill="#0A0C12">Ana Vega</text>
                         <path d="M261 83l9 9M270 83l-9 9" fill="none" stroke="#474D61" stroke-width="1.7" stroke-linecap="round"/>
@@ -14564,7 +14569,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                         </defs>
                         <rect width="240" height="160" fill="#FAFBFC"/>
                         <rect x="14" y="14" width="102" height="50" rx="6" fill="#C8D4B8"/>
-                        <rect x="124" y="14" width="102" height="50" rx="6" fill="#BFC8E8"/>
+                        <rect x="124" y="14" width="102" height="50" rx="6" fill="#D6DBE8"/>
                         <text x="14" y="80" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#0A0C12">Comida &amp; Vino</text>
                         <text x="124" y="80" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#0A0C12">Panadería Local</text>
                         <g filter="url(#anatSh3)">
@@ -14590,7 +14595,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                         </defs>
                         <rect width="240" height="160" fill="#FAFBFC"/>
                         <rect x="14" y="14" width="102" height="50" rx="6" fill="#C8D4B8"/>
-                        <rect x="124" y="14" width="102" height="50" rx="6" fill="#BFC8E8"/>
+                        <rect x="124" y="14" width="102" height="50" rx="6" fill="#D6DBE8"/>
                         <text x="14" y="80" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#0A0C12">Comida &amp; Vino</text>
                         <text x="124" y="80" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#0A0C12">Panadería Local</text>
                         <rect x="14" y="94" width="78" height="24" rx="12" fill="white" stroke="#9FA3AE" stroke-width="1"/>
@@ -14618,7 +14623,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                 <h3 class="cg-subsection-title" style="font:600 18px 'Inter',sans-serif;margin:0 0 16px;">Texto de etiqueta</h3>
                 <div class="cg-row cg-row--wide">
                   <div class="cg-row__text">
-                    <p class="cg-desc">El texto de la etiqueta debe tener 20 caracteres o menos, y usar el mismo estilo tipográfico que los <span style="text-decoration:underline;">botones</span>.</p>
+                    <p class="cg-desc">El texto de la etiqueta debe tener 20 caracteres o menos, y usar el mismo estilo tipográfico que los <a href="#" onclick="navigate('c-button');return false;" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">botones</a>.</p>
                     <p class="cg-desc">Las etiquetas deben mantenerse breves por el espacio limitado disponible. Omití reglas gramaticales convencionales, como los artículos, para ahorrar espacio.</p>
                   </div>
                   <div class="cg-row__visual">
@@ -14700,7 +14705,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                         <rect width="420" height="160" fill="#F4F5F8"/>
                         <!-- avatar input chip -->
                         <rect x="78" y="63" width="118" height="34" rx="17" fill="white" stroke="#9FA3AE" stroke-width="1.2"/>
-                        <circle cx="99" cy="80" r="12" fill="#BFC8E8"/>
+                        <circle cx="99" cy="80" r="12" fill="#D6DBE8"/>
                         <text x="99" y="83.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" fill="#01164D">AV</text>
                         <text x="117" y="84.5" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#0A0C12">Ana Vega</text>
                         <path d="M171 75l10 10M181 75l-10 10" fill="none" stroke="#474D61" stroke-width="1.7" stroke-linecap="round"/>
@@ -14732,7 +14737,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                         <path d="M238 57v32" fill="none" stroke="#9FA3AE" stroke-width="1" stroke-dasharray="2 3"/>
                         <!-- avatar input chip -->
                         <rect x="78" y="80" width="118" height="34" rx="17" fill="white" stroke="#9FA3AE" stroke-width="1.2"/>
-                        <circle cx="99" cy="97" r="12" fill="#BFC8E8"/>
+                        <circle cx="99" cy="97" r="12" fill="#D6DBE8"/>
                         <text x="99" y="100.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" fill="#01164D">AV</text>
                         <text x="117" y="101.5" font-family="Inter,sans-serif" font-size="12" font-weight="500" fill="#0A0C12">Ana Vega</text>
                         <path d="M171 92l10 10M181 92l-10 10" fill="none" stroke="#474D61" stroke-width="1.7" stroke-linecap="round"/>
@@ -14796,7 +14801,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
               <div class="cg-row cg-row--wide">
                 <div class="cg-row__text">
                   <p class="cg-desc">Los assist chips representan acciones inteligentes o automatizadas que pueden abarcar múltiples apps, como abrir un evento del calendario desde la pantalla de inicio. Funcionan como si la persona le pidiera a un asistente completar la acción, y deben aparecer de forma dinámica y contextual en la interfaz.</p>
-                  <p class="cg-desc">Una alternativa a los assist chips son los <span style="text-decoration:underline;">botones</span>, que deben aparecer de forma persistente y consistente.</p>
+                  <p class="cg-desc">Una alternativa a los assist chips son los <a href="#" onclick="navigate('c-button');return false;" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">botones</a>, que deben aparecer de forma persistente y consistente.</p>
                 </div>
                 <div class="cg-row__visual">
                   <div class="cg-device">
@@ -14944,7 +14949,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                             <text x="40" y="138" font-family="Inter,sans-serif" font-size="14" fill="#0A0C12">tacos de la zona</text>
                             <!-- chips -->
                             <rect x="40" y="156" width="120" height="26" rx="13" fill="white" stroke="#9FA3AE" stroke-width="1"/>
-                            <circle cx="56" cy="169" r="8" fill="#BFC8E8"/>
+                            <circle cx="56" cy="169" r="8" fill="#D6DBE8"/>
                             <text x="56" y="172" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" font-weight="700" fill="#01164D">AV</text>
                             <text x="69" y="172.5" font-family="Inter,sans-serif" font-size="9" font-weight="500" fill="#0A0C12">Compartir con Ana</text>
                             <rect x="168" y="156" width="100" height="26" rx="13" fill="white" stroke="#9FA3AE" stroke-width="1"/>
@@ -15402,7 +15407,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                 <h3 class="cg-subsection-title" style="font:600 18px 'Inter',sans-serif;margin:0 0 16px;">Integración con otros componentes</h3>
                 <div class="cg-row cg-row--wide">
                   <div class="cg-row__text">
-                    <p class="cg-desc">Los filter chips pueden usarse junto a otros componentes, como campos de <span style="text-decoration:underline;">búsqueda</span> y <span style="text-decoration:underline;">sheets</span>.</p>
+                    <p class="cg-desc">Los filter chips pueden usarse junto a otros componentes, como campos de <a href="#" onclick="navigate('c-search');return false;" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">búsqueda</a> y <a href="#" onclick="navigate('c-sheet');return false;" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">sheets</a>.</p>
                   </div>
                   <div class="cg-row__visual">
                     <div class="cg-device">
@@ -15445,6 +15450,16 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                 </div>
               </div><!-- /integración -->
 
+              <!-- ── Componentes relacionados ── -->
+              <div class="cg-subsection" id="cg-fl-related">
+                <h3 class="cg-subsection-title" style="font:600 18px 'Inter',sans-serif;margin:32px 0 16px;">Componentes relacionados</h3>
+                <div class="ds-card-grid">
+                  <div class="ds-card-link" onclick="navigate('c-search')"><div class="ds-card-icon"><i data-lucide="search"></i></div><div class="ds-card-name">Search</div><div class="ds-card-desc">Filter chips debajo de la search bar para refinar resultados.</div></div>
+                  <div class="ds-card-link" onclick="navigate('c-toolbar')"><div class="ds-card-icon"><i data-lucide="wrench"></i></div><div class="ds-card-name">Tool Bar</div><div class="ds-card-desc">Filtros activos como chips removibles debajo de la toolbar.</div></div>
+                  <div class="ds-card-link" onclick="navigate('c-button')"><div class="ds-card-icon"><i data-lucide="square-mouse-pointer"></i></div><div class="ds-card-name">Button</div><div class="ds-card-desc">Para acciones persistentes y de mayor jerarquía que un assist chip.</div></div>
+                </div>
+              </div><!-- /relacionados -->
+
             </div><!-- /filter chips -->
           </div><!-- /main content -->
 
@@ -15465,13 +15480,182 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
       </div>
 
+      <!-- ════════════════ ACCESSIBILITY ════════════════ -->
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+
+        <!-- 1. Use cases -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Semántica por variante</h2>
+          <p class="docs-section-desc">Cada variante de chip tiene una semántica distinta. Usá siempre elementos nativos — el rol, el foco y la activación por teclado vienen gratis.</p>
+          <div class="ds-table-wrap">
+            <table class="docs-props-table">
+              <thead><tr><th>Variante</th><th>Elemento a usar</th><th>Por qué</th></tr></thead>
+              <tbody>
+                <tr><td>Assist chip (acción contextual)</td><td><code>&lt;button&gt;</code></td><td>role="button" nativo, enfocable, activable por Enter/Espacio</td></tr>
+                <tr><td>Filter chip (alternancia)</td><td><code>&lt;button aria-pressed&gt;</code></td><td>Anuncia «presionado / no presionado» al lector de pantalla</td></tr>
+                <tr><td>Input chip (información ingresada)</td><td><code>&lt;span&gt;</code> + <code>&lt;button class="chip-remove" aria-label&gt;</code></td><td>El chip es contenido; solo la eliminación es interactiva y necesita nombre accesible</td></tr>
+                <tr><td>Suggestion chip (sugerencia)</td><td><code>&lt;button&gt;</code></td><td>Acción simple que completa o ejecuta la sugerencia</td></tr>
+                <tr><td>Conjunto de chips</td><td><code>&lt;div role="group" aria-label="…"&gt;</code></td><td>Agrupa los filtros bajo un nombre («Filtrar vacantes») para navegación por lector</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="bd-callout"><span class="bd-ico">⚠️</span><span><b>Nunca</b> construyas un chip con <code>&lt;div&gt;</code> o <code>&lt;span&gt;</code> clickeable. Sin elemento nativo no hay foco por teclado ni rol semántico, y el estado seleccionado del filter chip queda invisible para tecnologías de asistencia.</span></div>
+        </section>
+
+        <!-- 2. Touch target & focus -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Área táctil y foco</h2>
+          <div class="bd-grid c2">
+            <div class="bd-card">
+              <p class="bd-eyebrow">Área táctil mínima</p>
+              <p class="bd-variant-desc" style="margin-top:10px">El chip mide <b>32px</b> de alto — menos que el mínimo táctil de <b>48×48px</b> (WCAG 2.5.5). Compensalo con espaciado: el <code>.chip-set</code> usa gap de 8px, y el área táctil efectiva debe extenderse con padding del contenedor o márgenes verticales. En el input chip, el botón de eliminación de 18px también necesita su propia área táctil ampliada — no pongas dos targets de 18px pegados.</p>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Foco visible</p>
+              <div class="bd-stage center" style="margin:10px 0">
+                <button class="chip bd-sim-focus">Enfocado</button>
+              </div>
+              <p class="bd-variant-desc">Un contorno de 2px (<code>--color-focus</code>) + halo de 4px (<code>--color-focus-ring</code>) via <code>:focus-visible</code>. Solo aparece durante la navegación por teclado. Cumple WCAG 2.4.7 (AA).</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Keyboard -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Navegación por teclado</h2>
+          <div class="bd-grid c2">
+            <div class="bd-card">
+              <p class="bd-eyebrow">Teclas</p>
+              <ul class="bd-a11y" style="margin-top:10px">
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:11px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Tab</span><span>Mover el foco al siguiente chip del conjunto</span></li>
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Enter</span><span>Activar el chip enfocado (acción o alternancia)</span></li>
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Espacio</span><span>Activar el chip enfocado</span></li>
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">⌫ / Del</span><span>Eliminar el input chip enfocado (implementar vía JS)</span></li>
+              </ul>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Reglas</p>
+              <ul style="margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+                <li>El estado seleccionado se comunica con <code>aria-pressed</code>, nunca solo con color</li>
+                <li>Al eliminar un input chip, mover el foco al chip anterior (o al campo si era el último)</li>
+                <li>Los chips deshabilitados salen del orden de Tab automáticamente con <code>disabled</code></li>
+                <li>El contraste de los pares <code>on-surface/surface</code> y <code>on-secondary-container/secondary-container</code> es ≥ 4.5:1 en ambos temas</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
       <!-- ════════════════ CODE ════════════════ -->
       <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>Coming soon.</strong> Code examples and implementation reference for chips will be available in an upcoming release.
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Inicio rápido</h2>
+          <p class="docs-section-desc">Importá la hoja de estilos del DS y usá las clases semánticas. Los chips accionables son elementos <code>&lt;button&gt;</code> nativos — no hace falta JavaScript para los estilos.</p>
+          <div class="bd-callout"><span class="bd-ico">📦</span><span>El sistema de tokens (<code>variables.css</code>) y los estilos de chips (<code>css/components/chip.css</code>) deben estar cargados. Todos los valores de color responden automáticamente a <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code>.</span></div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;link rel="stylesheet" href="css/variables.css"&gt;
+&lt;link rel="stylesheet" href="css/components/chip.css"&gt;</code></pre>
           </div>
-        </div>
+        </section>
+
+        <!-- ── All variants HTML ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Las cuatro variantes — HTML</h2>
+          <p class="docs-section-desc">Copiá y pegá. La variante es funcional, no visual: elegila según lo que el chip representa (acción, filtro, entrada o sugerencia).</p>
+          <div class="bd-stage" style="gap:10px;flex-wrap:wrap;margin-bottom:16px">
+            <button class="chip"><span class="chip-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>Agendar entrevista</button>
+            <button class="chip" aria-pressed="false">Remoto</button>
+            <button class="chip chip-selected" aria-pressed="true">Full-time</button>
+            <span class="chip">ana@amalgama.co <button class="chip-remove" aria-label="Quitar ana@amalgama.co"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
+            <button class="chip">Buscar diseñadores</button>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;!-- ═══ ASSIST — acción contextual, con ícono inicial ═══ --&gt;
+&lt;button class=&quot;chip&quot;&gt;
+  &lt;span class=&quot;chip-icon&quot;&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/span&gt;
+  Agendar entrevista
+&lt;/button&gt;
+
+&lt;!-- ═══ FILTER — refina contenido, alterna aria-pressed ═══ --&gt;
+&lt;button class=&quot;chip&quot; aria-pressed=&quot;false&quot;&gt;Remoto&lt;/button&gt;
+&lt;button class=&quot;chip chip-selected&quot; aria-pressed=&quot;true&quot;&gt;Full-time&lt;/button&gt;
+
+&lt;!-- ═══ INPUT — información ingresada, con botón de eliminación ═══ --&gt;
+&lt;span class=&quot;chip&quot;&gt;
+  ana@amalgama.co
+  &lt;button class=&quot;chip-remove&quot; aria-label=&quot;Quitar ana@amalgama.co&quot;&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;
+&lt;/span&gt;
+
+&lt;!-- ═══ SUGGESTION — sugerencia dinámica ═══ --&gt;
+&lt;button class=&quot;chip&quot;&gt;Buscar diseñadores&lt;/button&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Filter selection ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Filter chips — selección</h2>
+          <p class="docs-section-desc">El estado seleccionado se expresa con la clase <code>.chip-selected</code> <strong>y</strong> el atributo <code>aria-pressed=&quot;true&quot;</code>. Alterná ambos juntos al hacer clic — la clase comunica el estado visual y el atributo lo anuncia al lector de pantalla.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;div class=&quot;chip-set&quot; role=&quot;group&quot; aria-label=&quot;Filtrar vacantes&quot;&gt;
+  &lt;button class=&quot;chip&quot; aria-pressed=&quot;false&quot;&gt;Remoto&lt;/button&gt;
+  &lt;button class=&quot;chip&quot; aria-pressed=&quot;false&quot;&gt;Híbrido&lt;/button&gt;
+  &lt;button class=&quot;chip chip-selected&quot; aria-pressed=&quot;true&quot;&gt;Full-time&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  document.querySelectorAll('.chip[aria-pressed]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var on = chip.getAttribute('aria-pressed') === 'true';
+      chip.setAttribute('aria-pressed', String(!on));
+      chip.classList.toggle('chip-selected', !on);
+    });
+  });
+&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Elevated + disabled ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Elevado y deshabilitado</h2>
+          <p class="docs-section-desc">El modificador <code>.chip-elevated</code> reemplaza el borde por una sombra — usalo solo sobre superficies con imagen o alto ruido visual. Para deshabilitar, usá el atributo nativo <code>disabled</code>.</p>
+          <div class="bd-stage" style="gap:10px;flex-wrap:wrap;margin-bottom:16px">
+            <button class="chip chip-elevated">Elevado</button>
+            <button class="chip" disabled>Deshabilitado</button>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;!-- Elevado: sin borde, con sombra --&gt;
+&lt;button class=&quot;chip chip-elevated&quot;&gt;Elevado&lt;/button&gt;
+
+&lt;!-- Deshabilitado: atributo nativo, nunca solo CSS --&gt;
+&lt;button class=&quot;chip&quot; disabled&gt;Deshabilitado&lt;/button&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Class API reference ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Referencia de clases</h2>
+          <div class="ds-table-wrap">
+            <table class="docs-props-table">
+              <thead><tr><th>Clase</th><th>Rol</th></tr></thead>
+              <tbody>
+                <tr><td><code>.chip</code></td><td>Base. Outlined, 32px de alto, radio full. Sirve para las cuatro variantes.</td></tr>
+                <tr><td><code>.chip-selected</code></td><td>Estado seleccionado (filter/input). Fondo <code>--color-secondary-container</code>.</td></tr>
+                <tr><td><code>.chip-elevated</code></td><td>Variante elevada: sin borde, fondo <code>--color-surface-container-low</code> + sombra.</td></tr>
+                <tr><td><code>.chip-icon</code></td><td>Slot de ícono inicial (18px). El padding izquierdo se ajusta a 8px automáticamente.</td></tr>
+                <tr><td><code>.chip-remove</code></td><td>Botón de eliminación final (input chips). Requiere <code>aria-label</code>.</td></tr>
+                <tr><td><code>.chip-dragged</code></td><td>Estado arrastrado durante drag &amp; drop (aplicar vía JS).</td></tr>
+                <tr><td><code>.chip-set</code></td><td>Contenedor de conjunto: flex con wrap y gap de 8px.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
       </div>
     </section>
     <!-- ═══════════ DATE AND TIME PICKER ═══════════ -->
@@ -15687,11 +15871,38 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
       <!-- ══ Component Tabs ══ -->
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
+
+      <!-- ════════════════ OVERVIEW ════════════════ -->
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Qué es</h2>
+          <p class="docs-section-desc">Search permite a las personas encontrar contenido escribiendo una consulta. Es la herramienta correcta cuando el catálogo es grande o la persona sabe qué busca; si el contenido se explora por categorías acotadas, considerá <a href="#" onclick="navigate('c-chip');return false;">filter chips</a> o navegación.</p>
+          <ul class="ch-overview-list">
+            <li><b>Search bar:</b> campo compacto y persistente con forma de píldora. Es el punto de entrada — siempre visible cuando la búsqueda es central en la pantalla.</li>
+            <li><b>Search view:</b> experiencia expandida que muestra sugerencias y resultados mientras se escribe. Se abre desde la search bar, en modo <b>docked</b> (anclada, ventanas medianas/expandidas) o <b>full-screen</b> (ventanas compactas).</li>
+          </ul>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Principios</h2>
+          <ul class="ch-overview-list">
+            <li><b>Una por pantalla:</b> la search bar representa el alcance global de la vista; los refinamientos van en <a href="#" onclick="navigate('c-chip');return false;">chips</a> o filtros, no en una segunda búsqueda.</li>
+            <li><b>Estado inicial útil:</b> al enfocar, la search view debe ofrecer búsquedas recientes o sugerencias — nunca una superficie vacía.</li>
+            <li><b>Alcance explícito:</b> el texto de apoyo nombra qué se busca («Buscar candidatos»), no solo «Buscar».</li>
+          </ul>
+          <div class="bd-callout"><span class="bd-ico">🧭</span><span>Para búsqueda compacta embebida en una <a href="#" onclick="navigate('c-toolbar');return false;">Tool Bar</a> usá <code>.search-field</code> (componente de la toolbar). <code>.search-bar</code> es el componente Search independiente de 56px.</span></div>
+        </section>
+
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
         <div class="cs-specs-layout">
           <!-- ── MAIN CONTENT ── -->
           <div>
@@ -15710,7 +15921,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                   <circle cx="52" cy="132" r="6" fill="none" stroke="#474D61" stroke-width="1.5"/>
                   <line x1="56.5" y1="136.5" x2="61" y2="141" stroke="#474D61" stroke-width="1.5" stroke-linecap="round"/>
                   <text x="72" y="138.5" font-family="Inter,sans-serif" font-size="11" fill="#474D61">Buscar en Embassy</text>
-                  <circle cx="246" cy="134" r="12" fill="#BFC8E8"/>
+                  <circle cx="246" cy="134" r="12" fill="#D6DBE8"/>
                   <text x="246" y="137.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="700" fill="#01164D">AV</text>
                   <!-- 2: search view (docked) -->
                   <circle cx="425" cy="30" r="12" fill="#0A0C12"/>
@@ -15927,7 +16138,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                 <circle cx="174" cy="112" r="6.5" fill="none" stroke="#474D61" stroke-width="1.6"/>
                 <line x1="179" y1="117" x2="184" y2="122" stroke="#474D61" stroke-width="1.6" stroke-linecap="round"/>
                 <text x="196" y="118.5" font-family="Inter,sans-serif" font-size="11" fill="#474D61">Texto de apoyo</text>
-                <circle cx="384" cy="114" r="13" fill="#BFC8E8"/>
+                <circle cx="384" cy="114" r="13" fill="#D6DBE8"/>
                 <text x="384" y="117.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" fill="#01164D">AV</text>
                 <!-- pin 1: container -->
                 <line x1="190" y1="52" x2="190" y2="84" stroke="#474D61" stroke-width="1"/>
@@ -16115,7 +16326,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                   <circle cx="146" cy="70" r="6.5" fill="none" stroke="#474D61" stroke-width="1.6"/>
                   <line x1="151" y1="75" x2="156" y2="80" stroke="#474D61" stroke-width="1.6" stroke-linecap="round"/>
                   <text x="170" y="76.5" font-family="Inter,sans-serif" font-size="11" fill="#474D61">Texto de apoyo</text>
-                  <circle cx="352" cy="72" r="15" fill="#BFC8E8"/>
+                  <circle cx="352" cy="72" r="15" fill="#D6DBE8"/>
                   <text x="352" y="75.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#01164D">AV</text>
                   <!-- height 56 -->
                   <path d="M100 46v52M96 46h8M96 98h8" fill="none" stroke="#4F80FF" stroke-width="1.2"/>
@@ -16210,18 +16421,185 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         </script>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>Coming soon.</strong> This component is on the Amalgama Design System roadmap and will be fully documented — including specs, guidelines, and code examples — in an upcoming release.
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar cada variante</h2>
+          <p class="docs-section-desc">Usá la <strong>search bar</strong> cuando la búsqueda es una función central de la pantalla y debe estar siempre visible (por ejemplo, el listado principal de candidatos o vacantes). Usá la <strong>search view</strong> cuando la persona necesita una experiencia enfocada con sugerencias y resultados: se abre desde la search bar o desde un ícono de búsqueda.</p>
+          <ul class="ch-overview-list">
+            <li><b>Docked:</b> en ventanas medianas y expandidas, la search view se ancla a la search bar y mantiene el contexto de la pantalla.</li>
+            <li><b>Full-screen:</b> en ventanas compactas, la search view ocupa toda la pantalla para maximizar el espacio de resultados.</li>
+          </ul>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Do / Don't</h2>
+          <div class="ds-guideline-grid">
+            <div class="ds-guideline-card do">
+              <h3>✓ Do</h3>
+              <ul><li>Usar texto de apoyo que describa el alcance de la búsqueda («Buscar candidatos», no solo «Buscar»)</li><li>Mostrar búsquedas recientes o sugerencias al enfocar la search view</li><li>Refinar los resultados con <a href="#" onclick="navigate('c-chip');return false;">filter chips</a> debajo de la search bar</li><li>Mantener una sola search bar por pantalla</li></ul>
+            </div>
+            <div class="ds-guideline-card dont">
+              <h3>✕ Don't</h3>
+              <ul><li>Usar la search bar como campo de formulario — para eso está el <a href="#" onclick="navigate('c-input');return false;">Input</a></li><li>Anidar una search bar dentro de una <a href="#" onclick="navigate('c-toolbar');return false;">Tool Bar</a> — la toolbar tiene su propio campo de búsqueda compacto (<code>.search-field</code>)</li><li>Abrir la search view sin un estado inicial (vacío sin sugerencias)</li></ul>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Componentes relacionados</h2>
+          <div class="ds-card-grid">
+            <div class="ds-card-link" onclick="navigate('c-chip')"><div class="ds-card-icon"><i data-lucide="tags"></i></div><div class="ds-card-name">Chips</div><div class="ds-card-desc">Filter chips para refinar los resultados de búsqueda.</div></div>
+            <div class="ds-card-link" onclick="navigate('c-toolbar')"><div class="ds-card-icon"><i data-lucide="wrench"></i></div><div class="ds-card-name">Tool Bar</div><div class="ds-card-desc">Búsqueda compacta embebida en barras de herramientas.</div></div>
+            <div class="ds-card-link" onclick="navigate('c-topbar')"><div class="ds-card-icon"><i data-lucide="panel-top"></i></div><div class="ds-card-name">Top Bar</div><div class="ds-card-desc">Punto de entrada a la búsqueda en la barra superior.</div></div>
+          </div>
+        </section>
+
       </div>
-      <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>Coming soon.</strong> This component is on the Amalgama Design System roadmap and will be fully documented — including specs, guidelines, and code examples — in an upcoming release.
+      <!-- ════════════════ ACCESSIBILITY ════════════════ -->
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+
+        <!-- 1. Semantics -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Semántica</h2>
+          <p class="docs-section-desc">La búsqueda es un landmark: los usuarios de lector de pantalla saltan directo a ella. Usá los roles nativos correctos en cada parte del componente.</p>
+          <div class="ds-table-wrap">
+            <table class="docs-props-table">
+              <thead><tr><th>Parte</th><th>Marcado</th><th>Por qué</th></tr></thead>
+              <tbody>
+                <tr><td>Contenedor (bar o view)</td><td><code>role="search"</code></td><td>Landmark navegable — los lectores listan «búsqueda» en el rotor</td></tr>
+                <tr><td>Campo de texto</td><td><code>&lt;input type="search" aria-label="…"&gt;</code></td><td>El placeholder NO es una etiqueta: desaparece al escribir y los lectores pueden ignorarlo</td></tr>
+                <tr><td>Ícono final / volver</td><td><code>&lt;button aria-label="…"&gt;</code></td><td>Acción solo-ícono necesita equivalente textual</td></tr>
+                <tr><td>Lista de resultados</td><td><code>role="listbox"</code> + <code>role="option"</code></td><td>Patrón combobox: permite navegar resultados con flechas sin perder el foco del input</td></tr>
+                <tr><td>Cantidad de resultados</td><td><code>aria-live="polite"</code></td><td>Anuncia «12 resultados» al escribir, sin interrumpir</td></tr>
+              </tbody>
+            </table>
           </div>
-        </div>
+        </section>
+
+        <!-- 2. Keyboard -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Navegación por teclado</h2>
+          <div class="bd-grid c2">
+            <div class="bd-card">
+              <p class="bd-eyebrow">Teclas</p>
+              <ul class="bd-a11y" style="margin-top:10px">
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:11px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Tab</span><span>Entrar y salir del campo de búsqueda</span></li>
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Enter</span><span>Ejecutar la búsqueda o abrir el resultado resaltado</span></li>
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">↑ ↓</span><span>Recorrer sugerencias y resultados sin abandonar el input</span></li>
+                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Esc</span><span>Cerrar la search view y devolver el foco a la search bar</span></li>
+              </ul>
+            </div>
+            <div class="bd-card">
+              <p class="bd-eyebrow">Gestión del foco</p>
+              <ul style="margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+                <li>Al abrir la search view, el foco va al input automáticamente</li>
+                <li>En modo full-screen, el foco queda contenido dentro de la vista (focus trap)</li>
+                <li>Al cerrar, el foco vuelve al elemento que abrió la búsqueda</li>
+                <li>El cursor de texto usa <code>--color-secondary</code> — visible en ambos temas</li>
+              </ul>
+            </div>
+          </div>
+          <div class="bd-callout" style="margin-top:12px"><span class="bd-ico">⚠️</span><span>No abras la search view con el evento <code>focus</code> solamente — también con clic/Enter. Un cambio de contexto disparado solo por foco viola WCAG 3.2.1 (On Focus) y desorienta a quienes navegan con Tab.</span></div>
+        </section>
+
+        <!-- 3. Contrast -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Contraste</h2>
+          <p class="docs-section-desc">Los pares de tokens del componente mantienen ≥ 4.5:1 en ambos temas: <code>--color-on-surface</code> sobre <code>--color-surface-container-high</code> para el texto de entrada, y <code>--color-on-surface-variant</code> para el texto de apoyo. El texto de apoyo nunca es la única indicación del alcance — el <code>aria-label</code> del input lo replica.</p>
+        </section>
+
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Inicio rápido</h2>
+          <p class="docs-section-desc">Importá la hoja de estilos del DS y usá las clases semánticas. La search bar es un contenedor flex con un <code>&lt;input type=&quot;search&quot;&gt;</code> nativo.</p>
+          <div class="bd-callout"><span class="bd-ico">📦</span><span>El sistema de tokens (<code>variables.css</code>) y los estilos de search (<code>css/components/search.css</code>) deben estar cargados. Todos los valores de color responden automáticamente a <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code>.</span></div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;link rel="stylesheet" href="css/variables.css"&gt;
+&lt;link rel="stylesheet" href="css/components/search.css"&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Search bar ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Search bar — HTML</h2>
+          <p class="docs-section-desc">Ícono inicial + input + elemento final opcional (avatar o ícono de acción). Envolvé el conjunto en <code>role=&quot;search&quot;</code> para que sea un landmark navegable.</p>
+          <div class="bd-stage" style="margin-bottom:16px">
+            <div class="search-bar" role="search">
+              <span class="search-bar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
+              <input class="search-bar-input" type="search" placeholder="Buscar candidatos" aria-label="Buscar candidatos">
+              <span class="search-bar-avatar">AB</span>
+            </div>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;div class=&quot;search-bar&quot; role=&quot;search&quot;&gt;
+  &lt;span class=&quot;search-bar-icon&quot;&gt;&lt;svg&gt;…lupa…&lt;/svg&gt;&lt;/span&gt;
+  &lt;input class=&quot;search-bar-input&quot; type=&quot;search&quot;
+         placeholder=&quot;Buscar candidatos&quot; aria-label=&quot;Buscar candidatos&quot;&gt;
+
+  &lt;!-- Elemento final opcional: avatar de cuenta… --&gt;
+  &lt;span class=&quot;search-bar-avatar&quot;&gt;AB&lt;/span&gt;
+
+  &lt;!-- …o ícono de acción (micrófono, limpiar) --&gt;
+  &lt;button class=&quot;search-bar-trailing&quot; aria-label=&quot;Buscar por voz&quot;&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Search view ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Search view — HTML</h2>
+          <p class="docs-section-desc">Encabezado de 72px con botón de volver + input, divisor de 1px y lista de resultados. Agregá <code>.search-view-fullscreen</code> para el modo a pantalla completa en ventanas compactas.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+            <pre class="docs-code"><code>&lt;!-- Docked (radio 28px). Para full-screen: class=&quot;search-view search-view-fullscreen&quot; --&gt;
+&lt;div class=&quot;search-view&quot; role=&quot;search&quot;&gt;
+  &lt;div class=&quot;search-view-header&quot;&gt;
+    &lt;button class=&quot;search-view-back&quot; aria-label=&quot;Cerrar búsqueda&quot;&gt;&lt;svg&gt;…flecha…&lt;/svg&gt;&lt;/button&gt;
+    &lt;input class=&quot;search-bar-input&quot; type=&quot;search&quot;
+           placeholder=&quot;Buscar candidatos&quot; aria-label=&quot;Buscar candidatos&quot;&gt;
+    &lt;button class=&quot;search-bar-trailing&quot; aria-label=&quot;Buscar por voz&quot;&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;ul class=&quot;search-view-results&quot; role=&quot;listbox&quot; aria-label=&quot;Resultados&quot;&gt;
+    &lt;li class=&quot;search-view-result&quot; role=&quot;option&quot;&gt;
+      &lt;span class=&quot;search-view-result-icon&quot;&gt;&lt;svg&gt;…reloj…&lt;/svg&gt;&lt;/span&gt;
+      Diseñadora UX senior
+    &lt;/li&gt;
+    &lt;li class=&quot;search-view-result&quot; role=&quot;option&quot;&gt;
+      &lt;span class=&quot;search-view-result-icon&quot;&gt;&lt;svg&gt;…reloj…&lt;/svg&gt;&lt;/span&gt;
+      Frontend React remoto
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Class API reference ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Referencia de clases</h2>
+          <div class="ds-table-wrap">
+            <table class="docs-props-table">
+              <thead><tr><th>Clase</th><th>Rol</th></tr></thead>
+              <tbody>
+                <tr><td><code>.search-bar</code></td><td>Contenedor píldora de 56px. Fondo <code>--color-surface-container-high</code>, ancho 360–720px.</td></tr>
+                <tr><td><code>.search-bar-icon</code></td><td>Ícono inicial (24px, lupa).</td></tr>
+                <tr><td><code>.search-bar-input</code></td><td>Input nativo transparente. Cursor <code>--color-secondary</code>, placeholder <code>--color-on-surface-variant</code>.</td></tr>
+                <tr><td><code>.search-bar-trailing</code></td><td>Botón de ícono final opcional (24px). Requiere <code>aria-label</code>.</td></tr>
+                <tr><td><code>.search-bar-avatar</code></td><td>Avatar de cuenta opcional (30px, <code>--color-primary-container</code>).</td></tr>
+                <tr><td><code>.search-view</code></td><td>Vista de búsqueda docked (radio 28px). Mismo fondo que la bar.</td></tr>
+                <tr><td><code>.search-view-fullscreen</code></td><td>Modificador: ocupa toda la pantalla, sin radio.</td></tr>
+                <tr><td><code>.search-view-header</code></td><td>Encabezado de 72px con divisor inferior de 1px (<code>--color-outline</code>).</td></tr>
+                <tr><td><code>.search-view-back</code></td><td>Botón de volver/cerrar (24px). Requiere <code>aria-label</code>.</td></tr>
+                <tr><td><code>.search-view-results</code> / <code>.search-view-result</code></td><td>Lista de resultados y cada ítem (con <code>.search-view-result-icon</code> opcional).</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
       </div>
     </section>
     <!-- ═══════════ SHEETS ═══════════ -->
