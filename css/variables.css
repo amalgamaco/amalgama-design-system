@@ -217,8 +217,12 @@
   --surface:        var(--color-surface-dim);
   --sidebar-bg:     var(--color-surface-container);
   --card-bg:        var(--color-surface-container);
-  --border:         var(--color-outline-variant);  /* borde sutil por defecto (= dark), no el outline prominente */
-  --divider:        var(--color-outline-variant);
+  /* Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad.
+     Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el
+     outline de elementos INTERACTIVOS (--color-outline, botones/chips/inputs) se
+     distinga con claridad. Theme-aware vía color-mix — sin override en dark. */
+  --border:         color-mix(in srgb, var(--color-on-surface) 10%, transparent);
+  --divider:        var(--border);
 
   --text-primary:   var(--color-on-surface);
   --text-secondary: var(--neutral-500);
