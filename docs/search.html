@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — Amalgama DS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+<div class="docs-app">
+  <aside class="docs-sidebar">
+    <a href="index.html" class="docs-sidebar-header">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Amalgama DS
+      <span>v1.0</span>
+    </a>
+    <nav class="docs-nav">
+      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
+      <div class="docs-nav-section">Fundamentos</div>
+      <a href="logos.html" class="docs-nav-item">Logos</a>
+      <a href="tokens.html" class="docs-nav-item">Tokens</a>
+      <a href="typography.html" class="docs-nav-item">Tipografia</a>
+      <div class="docs-nav-section">Acciones</div>
+      <a href="button.html" class="docs-nav-item">Button</a>
+      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
+      <div class="docs-nav-section">Entrada de datos</div>
+      <a href="input.html" class="docs-nav-item">Input</a>
+      <a href="select.html" class="docs-nav-item">Select</a>
+      <a href="textarea.html" class="docs-nav-item">Textarea</a>
+      <a href="chip.html" class="docs-nav-item">Chip</a>
+      <a href="search.html" class="docs-nav-item active">Search</a>
+      <div class="docs-nav-section">Visualizacion</div>
+      <a href="table.html" class="docs-nav-item">Table</a>
+      <a href="card.html" class="docs-nav-item">Card</a>
+      <a href="badge.html" class="docs-nav-item">Badge</a>
+      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
+      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
+      <a href="person-card.html" class="docs-nav-item">Person Card</a>
+      <a href="avatar.html" class="docs-nav-item">Avatar</a>
+      <div class="docs-nav-section">Retroalimentacion</div>
+      <a href="modal.html" class="docs-nav-item">Modal</a>
+      <a href="toast.html" class="docs-nav-item">Toast</a>
+      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
+      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
+      <div class="docs-nav-section">Navegacion</div>
+      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
+      <a href="topbar.html" class="docs-nav-item">Topbar</a>
+      <a href="tabs.html" class="docs-nav-item">Tabs</a>
+      <div class="docs-nav-section">Layout</div>
+      <a href="kanban.html" class="docs-nav-item">Kanban</a>
+    </nav>
+  </aside>
+  <main class="docs-main">
+    <header class="docs-topbar">
+      <div class="docs-breadcrumb">
+        <a href="index.html">DS</a>
+        <span class="separator">/</span>
+        Search
+      </div>
+    </header>
+    <div class="docs-content">
+      <h1>Search</h1>
+      <p>Busqueda de contenido. Dos variantes: search bar (campo persistente de 56px con forma de pildora) y search view (vista expandida con resultados, en modo docked o full-screen).</p>
+      <p>CSS: <code>css/components/search.css</code> · React: <code>components/ui/search.tsx</code> (<code>SearchBar</code>, <code>SearchView</code> y sub-componentes)</p>
+      <p>Para busqueda compacta embebida en una toolbar usa <code>.search-field</code> (<a href="toolbar.html">Toolbar</a>). Para refinar resultados, combina con <a href="chip.html">filter chips</a> debajo de la search bar.</p>
+
+      <h2>Search bar</h2>
+      <div class="docs-preview">
+        <div class="search-bar" role="search">
+          <span class="search-bar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
+          <input class="search-bar-input" type="search" placeholder="Buscar candidatos" aria-label="Buscar candidatos">
+          <span class="search-bar-avatar">AB</span>
+        </div>
+      </div>
+      <div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>&lt;div class="search-bar" role="search"&gt;
+  &lt;span class="search-bar-icon"&gt;&lt;svg&gt;…lupa…&lt;/svg&gt;&lt;/span&gt;
+  &lt;input class="search-bar-input" type="search"
+         placeholder="Buscar candidatos" aria-label="Buscar candidatos"&gt;
+  &lt;span class="search-bar-avatar"&gt;AB&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <h2>Search view (docked)</h2>
+      <div class="docs-preview">
+        <div class="search-view" role="search" style="max-width:480px">
+          <div class="search-view-header">
+            <button class="search-view-back" aria-label="Cerrar busqueda"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+            <input class="search-bar-input" type="search" placeholder="Buscar candidatos" aria-label="Buscar candidatos">
+          </div>
+          <ul class="search-view-results">
+            <li class="search-view-result"><span class="search-view-result-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span>Diseñadora UX senior</li>
+            <li class="search-view-result"><span class="search-view-result-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span>Frontend React remoto</li>
+          </ul>
+        </div>
+      </div>
+      <div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>&lt;!-- Docked (radio 28px). Full-screen: class="search-view search-view-fullscreen" --&gt;
+&lt;div class="search-view" role="search"&gt;
+  &lt;div class="search-view-header"&gt;
+    &lt;button class="search-view-back" aria-label="Cerrar busqueda"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;
+    &lt;input class="search-bar-input" type="search"
+           placeholder="Buscar candidatos" aria-label="Buscar candidatos"&gt;
+  &lt;/div&gt;
+  &lt;ul class="search-view-results"&gt;
+    &lt;li class="search-view-result"&gt;
+      &lt;span class="search-view-result-icon"&gt;&lt;svg&gt;…reloj…&lt;/svg&gt;&lt;/span&gt;
+      Diseñadora UX senior
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <h2>React</h2>
+      <div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>import {
+  SearchBar, SearchBarAvatar,
+  SearchView, SearchViewHeader, SearchViewResults, SearchViewResult,
+} from "@/components/ui/search"
+
+&lt;SearchBar
+  placeholder="Buscar candidatos"
+  aria-label="Buscar candidatos"
+  value={query}
+  onChange={(e) =&gt; setQuery(e.target.value)}
+  trailing={&lt;SearchBarAvatar&gt;AB&lt;/SearchBarAvatar&gt;}
+/&gt;
+
+&lt;SearchView fullscreen={isCompact}&gt;
+  &lt;SearchViewHeader onBack={cerrar}&gt;
+    &lt;input className="search-bar-input" type="search" aria-label="Buscar candidatos" /&gt;
+  &lt;/SearchViewHeader&gt;
+  &lt;SearchViewResults&gt;
+    &lt;SearchViewResult icon={&lt;ClockIcon /&gt;}&gt;Diseñadora UX senior&lt;/SearchViewResult&gt;
+  &lt;/SearchViewResults&gt;
+&lt;/SearchView&gt;</code></pre>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="docs.js"></script>
+</body>
+</html>
