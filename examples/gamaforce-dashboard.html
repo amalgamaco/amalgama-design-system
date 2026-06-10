@@ -60,8 +60,7 @@
   .gf-link { color: var(--interactive); font-size: 13px; font-weight: 500; text-decoration: none; }
   .gf-link:hover { text-decoration: underline; }
   .gf-empty { color: var(--text-secondary); font-size: 13.5px; padding: 8px 0 12px; }
-  .gf-quick { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
-  .gf-quick .btn-tertiary { width: 100%; justify-content: flex-start; gap: 10px; }
+  .gf-quick { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
   .gf-day { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .gf-day:last-child { border-bottom: 0; }
   .gf-day-num { font: 700 18px var(--font-heading); color: var(--interactive); line-height: 1; }
@@ -198,9 +197,11 @@
         <!-- Acciones rápidas — botones .btn-tertiary del DS -->
         <div class="card">
           <div class="gf-card-head"><h2>Acciones rápidas</h2></div>
+          <!-- Jerarquía de Button del DS: UNA acción principal (filled) por contexto,
+               la alternativa como outlined. Tamaño intrínseco, contenido centrado. -->
           <div class="gf-quick">
-            <button class="btn-tertiary">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <button class="btn-primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               Pedir licencia
             </button>
             <button class="btn-tertiary">
