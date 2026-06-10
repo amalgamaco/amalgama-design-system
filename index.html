@@ -6556,6 +6556,31 @@ body { overflow-x: clip; }
               </div>
             </div>
           </div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Tamaño y alineación</h2>
+          <p class="docs-section-desc">El botón tiene <strong>ancho intrínseco</strong> (lo define su contenido) y el contenido siempre va <strong>centrado</strong>. No estirar ni realinear botones para imitar otros componentes: un botón a ancho completo con contenido a la izquierda se lee como un campo de formulario, no como una acción.</p>
+          <div class="bd-card" style="margin-bottom:16px">
+            <div class="bd-spec"><span>Ancho</span><b>Intrínseco (contenido + padding). No usar width:100% por defecto.</b></div>
+            <div class="bd-spec"><span>Alineación del contenido</span><b>Siempre centrado — incluso si el botón se estira</b></div>
+            <div class="bd-spec"><span>Excepción full-width</span><b>Solo en contenedores angostos (diálogos mobile, formularios de una columna), manteniendo el contenido centrado</b></div>
+            <div class="bd-spec"><span>Grupos de acciones</span><b>Botones lado a lado con su ancho natural, gap 8–12px, una sola acción Primary por grupo</b></div>
+          </div>
+          <div class="bd-grid c2">
+            <div class="bd-dd do">
+              <div class="bd-dd-head">✓ Correcto</div>
+              <div class="bd-dd-body">
+                <div class="bd-stage" style="flex-wrap:wrap;gap:10px"><button class="btn-primary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Pedir licencia</button><button class="btn-tertiary">Cargar factura</button></div>
+                <span class="bd-dd-note">Ancho natural, contenido centrado, jerarquía clara: un Primary + alternativa Outlined.</span>
+              </div>
+            </div>
+            <div class="bd-dd dont">
+              <div class="bd-dd-head">✕ Incorrecto</div>
+              <div class="bd-dd-body">
+                <div class="bd-stage" style="flex-direction:column;gap:8px;align-items:stretch"><button class="btn-tertiary" style="width:100%;justify-content:flex-start">+ &nbsp;Pedir licencia</button><button class="btn-tertiary" style="width:100%;justify-content:flex-start">Cargar factura</button></div>
+                <span class="bd-dd-note">Full-width con contenido a la izquierda: se lee como inputs vacíos y elimina la jerarquía entre acciones.</span>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- 4. Color styles -->

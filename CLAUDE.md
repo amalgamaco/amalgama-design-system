@@ -39,6 +39,16 @@ Copy the component file + `components/lib/utils.ts` into the target project (or 
 
 Flat kebab-case, additive variants — **not** BEM: `btn-primary btn-danger`, `chip chip-selected`, `badge badge-open`. Every component CSS file has a header comment with a `Uso:` block showing exact markup. Read it before using a component.
 
+### Applying the DS to an existing product (migration rules)
+
+When restyling or rebuilding an existing screen, **DS rules win over visual fidelity to the legacy design**. Concretely:
+
+1. **Never stretch or realign a component beyond its documented anatomy** to imitate the legacy layout (e.g. a full-width left-aligned button reads as a form field — buttons have intrinsic width and centered content). If the legacy layout demands it, that layout is the thing to change.
+2. **Map legacy elements to the closest documented DS pattern**, not to a visual lookalike. An "action row" is a button group with hierarchy (one `btn-primary` + alternatives), not a stretched outlined button.
+3. **One Primary action per context.** If the legacy screen has several equal-weight actions, introduce hierarchy; don't replicate the flatness.
+4. **If no documented pattern fits, stop and flag it** as a DS gap instead of improvising — same rule as for roadmap components.
+5. **Report every divergence** from the legacy design that these rules force, so designers can validate the trade-off.
+
 ---
 
 ## Component inventory
