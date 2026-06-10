@@ -160,3 +160,141 @@ input:disabled, select:disabled, textarea:disabled {
   position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
   color: var(--text-muted); pointer-events: none;
 }
+
+/* ═══════════════════════════════════════
+   Hover state
+   Distingue visualmente el hover del estado habilitado sin focus.
+   Usa --color-outline (más prominente) vs --color-outline-variant (defecto).
+═══════════════════════════════════════ */
+.field-input:hover:not(:focus):not(:disabled) {
+  border-color: var(--color-outline);
+}
+
+/* ═══════════════════════════════════════
+   Label — color en focus
+   La etiqueta cambia al color interactivo cuando el campo está activo,
+   reforzando el foco visualmente.
+═══════════════════════════════════════ */
+.field-group:focus-within .field-label {
+  color: var(--interactive);
+}
+
+/* ═══════════════════════════════════════
+   Texto de soporte (Supporting text)
+   Área debajo del campo para mensajes de ayuda, errores o contadores.
+
+   Uso:
+   <div class="field-supporting">
+     <span class="field-hint">Máximo 100 caracteres</span>
+     <span class="field-char-count">0/100</span>
+   </div>
+═══════════════════════════════════════ */
+.field-supporting {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 0 2px;
+}
+.field-hint {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-on-surface-variant);
+}
+.field-error-msg {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--color-error);
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+.field-error-msg svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.field-char-count {
+  font-family: 'DM Mono', monospace;
+  font-size: 11.5px;
+  color: var(--color-on-surface-variant);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.field-char-count.is-over {
+  color: var(--color-error);
+}
+
+/* ═══════════════════════════════════════
+   Estado de error
+   Se aplica .is-error al .field-group contenedor.
+   El mensaje de error reemplaza al texto de soporte normal.
+
+   Uso:
+   <div class="field-group is-error">
+     <label class="field-label">Email</label>
+     <input class="field-input" value="texto inválido">
+     <div class="field-supporting">
+       <span class="field-error-msg">
+         <svg>...</svg> Ingresa un correo válido.
+       </span>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+.field-group.is-error .field-label {
+  color: var(--color-error);
+}
+.field-group.is-error:focus-within .field-label {
+  color: var(--color-error); /* el error sobreescribe el color interactivo */
+}
+.field-group.is-error .field-input {
+  border-color: var(--color-error);
+}
+.field-group.is-error .field-input:hover:not(:focus):not(:disabled) {
+  border-color: var(--color-error); /* el error sobreescribe el hover */
+}
+.field-group.is-error .field-input:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(253, 58, 69, .12);
+}
+.field-group.is-error .field-hint {
+  display: none; /* el mensaje de error reemplaza el texto de soporte */
+}
+.field-group.is-error .field-trailing-icon {
+  color: var(--color-error);
+}
+
+/* ═══════════════════════════════════════
+   Íconos iniciales y finales
+   Usa .field-input-wrapper como contenedor relativo.
+   Agrega .has-leading o .has-trailing al .field-input para ajustar padding.
+
+   Uso:
+   <div class="field-input-wrapper">
+     <span class="field-leading-icon"><svg>...</svg></span>
+     <input class="field-input has-leading has-trailing">
+     <span class="field-trailing-icon"><svg>...</svg></span>
+   </div>
+═══════════════════════════════════════ */
+.field-input-wrapper {
+  position: relative;
+}
+.field-leading-icon,
+.field-trailing-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-on-surface-variant);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+.field-leading-icon  { left: 14px; }
+.field-trailing-icon { right: 14px; }
+
+.field-input-wrapper .field-input.has-leading  { padding-left:  42px; }
+.field-input-wrapper .field-input.has-trailing { padding-right: 42px; }
