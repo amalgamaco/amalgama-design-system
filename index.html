@@ -7,7 +7,7 @@
 <meta name="description" content="Sistema de diseño de Amalgama — tokens, componentes y documentación viva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css?v=6">
+<link rel="stylesheet" href="css/variables.css?v=7">
 <link rel="stylesheet" href="css/base.css?v=2">
 <link rel="stylesheet" href="css/layout.css?v=2">
 <link rel="stylesheet" href="css/components.css?v=4">
@@ -3941,6 +3941,24 @@ body { overflow-x: clip; }
       <div class="docs-page-header">
         <h1 class="docs-page-title">Tipografía</h1>
         <p class="docs-page-desc">Tres familias tipográficas para encabezados, cuerpo de texto y código. Tokens definidos en <code>css/variables.css</code>. Cargadas via Google Fonts CDN — ver instrucciones de self-hosting al final de esta sección.</p>
+      </div>
+
+      <!-- Color de la tipografía -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Color del texto</h2>
+        <p class="docs-section-desc">El texto principal de página —títulos y cuerpo— usa el <strong>navy brand</strong> (<code>primary-900</code>), no el casi-negro de la rampa neutral. Es parte de la identidad Embassy: la página entera se lee en navy. En dark mode el alias se recalibra solo.</p>
+        <div class="ds-table-wrap">
+          <table class="docs-props-table">
+            <thead><tr><th>Token</th><th>Claro</th><th>Oscuro</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td><code>--text-primary</code></td><td><span class="ds-cr-chip" style="display:inline-block;vertical-align:-3px;background:#01164D"></span> <code>#01164D</code> (primary-900)</td><td><span class="ds-cr-chip" style="display:inline-block;vertical-align:-3px;background:#EAEBED"></span> <code>#EAEBED</code> (neutral-50)</td><td>Títulos y cuerpo de texto — todo el texto principal de página</td></tr>
+              <tr><td><code>--text-secondary</code></td><td><span class="ds-cr-chip" style="display:inline-block;vertical-align:-3px;background:#353A4A"></span> <code>#353A4A</code> (neutral-500)</td><td><span class="ds-cr-chip" style="display:inline-block;vertical-align:-3px;background:#BFC1C8"></span> <code>#BFC1C8</code> (neutral-100)</td><td>Subtítulos, descripciones, metadata</td></tr>
+              <tr><td><code>--text-muted</code></td><td><span class="ds-cr-chip" style="display:inline-block;vertical-align:-3px;background:#747989"></span> <code>#747989</code> (neutral-300)</td><td><span class="ds-cr-chip" style="display:inline-block;vertical-align:-3px;background:#747989"></span> <code>#747989</code> (neutral-300)</td><td>Texto atenuado, placeholders, hints</td></tr>
+              <tr><td><code>--color-on-surface</code></td><td><code>#0A0C12</code> (neutral-900)</td><td><code>#EAEBED</code> (neutral-50)</td><td>Solo contenido interno de componentes (labels de chips, botones, celdas) — no tipografía de página</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ds-callout" style="margin-top:12px"><strong>Regla.</strong> Para tipografía de página usá siempre <code>var(--text-primary)</code> / <code>var(--text-secondary)</code> — nunca <code>--color-on-surface</code> ni hex directos. El navy es identidad: si el texto de una pantalla Embassy se ve negro, hay un token mal aplicado.</div>
       </div>
 
       <!-- Epilogue -->
@@ -12036,6 +12054,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <tr><td><code>--radius-md</code></td><td>8px</td><td>Border-radius de inputs, botones, kanban cards</td></tr>
             <tr><td><code>--bg</code></td><td>var(--neutral-50)</td><td>Fondo de pagina</td></tr>
             <tr><td><code>--card-bg</code></td><td>#ffffff</td><td>Fondo de tarjetas, sidebar, topbar</td></tr>
+            <tr><td><code>--text-primary</code></td><td>var(--primary-900) · #01164D</td><td>Texto principal de página (títulos y cuerpo) — navy brand. En dark: #EAEBED</td></tr>
             <tr><td><code>--border</code></td><td>on-surface al 10% (color-mix)</td><td>Bordes de contenedores (cards, tablas, paneles). Los elementos interactivos usan <code>--color-outline</code></td></tr>
             <tr><td><code>--shadow-md</code></td><td>0 4px 16px rgba(28,36,56,.08)</td><td>Hover en cards, dropdowns</td></tr>
             <tr><td><code>--duration-fast</code></td><td>120ms</td><td>Todas las transiciones rapidas (hover, focus)</td></tr>

@@ -224,7 +224,12 @@
   --border:         color-mix(in srgb, var(--color-on-surface) 10%, transparent);
   --divider:        var(--border);
 
-  --text-primary:   var(--color-on-surface);
+  /* Tipografía de página (decisión de diseño, jun 2026): el texto principal
+     —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro
+     neutral-900. Igual que el sitio de docs. En dark se recalibra a
+     neutral-50 (override abajo). --color-on-surface queda para contenido
+     interno de componentes (labels de chips, botones, celdas). */
+  --text-primary:   var(--primary-900);
   --text-secondary: var(--neutral-500);
   --text-muted:     var(--color-on-disabled);
   --text-on-dark:   var(--neutral-white);
@@ -427,6 +432,7 @@
   /* Button · Secondary — neutral treatment is theme-aware via --color-* refs (defined once in :root) */
 
   /* Aliases semánticos que dependen de la rampa */
+  --text-primary:   #EAEBED; /* neutral-50 — en dark el navy no contrasta; vuelve a on-surface */
   --text-secondary: #BFC1C8; /* neutral-100 */
   --text-muted:     #747989; /* neutral-300 */
   --interactive-hover:   #909BBE; /* primary-200 */

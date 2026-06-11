@@ -29,6 +29,8 @@ Instead of the barrel (`components.css`), you can cherry-pick individual files f
 
 Fonts: **Inter** (body/UI), **Epilogue** (headings), **DM Mono** (code/labels).
 
+**Typography color is brand navy, not black.** Page text — headings AND body — uses `var(--text-primary)` = `primary-900` (`#01164D`) in light mode, recalibrated to `#EAEBED` in dark. Secondary text: `var(--text-secondary)`. `--color-on-surface` (near-black `#0A0C12`) is reserved for content *inside* components (chip labels, button text, table cells) — never for page typography. If Embassy page text renders black, a token is misapplied.
+
 ### React layer
 
 Thin wrappers in `components/ui/*.tsx` — all styling lives in the CSS classes. Pattern: `cva` (class-variance-authority) for variants + `cn()` from `components/lib/utils.ts` + `React.forwardRef`. Peer deps: `react`, `class-variance-authority`, `clsx`.
