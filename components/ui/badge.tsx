@@ -13,7 +13,10 @@ const badgeVariants = cva(
         draft: "badge-draft",
         archived: "badge-archived",
         warning: "badge-warning",
-        accent: "badge-accent",
+        tertiary: "badge-tertiary",
+        info: "badge-info",
+        /** @deprecated alias de `tertiary` — la clase CSS real es badge-tertiary (badge-accent no existe) */
+        accent: "badge-tertiary",
       },
     },
     defaultVariants: {
