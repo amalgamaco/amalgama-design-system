@@ -27,7 +27,13 @@ Instead of the barrel (`components.css`), you can cherry-pick individual files f
 
 **Tokens are the law.** All colors via `var(--color-*)` or semantic aliases (`--accent`, `--bg`, `--border`), radii via `var(--radius-*)`, shadows via `var(--shadow-*)`, spacing via `var(--space-*)`. Never raw hex. Dark mode is automatic: set `data-theme="dark"` on `<html>` — the semantic `--color-*` layer recalibrates itself; components need zero per-theme overrides.
 
-Fonts: **Inter** (body/UI), **Epilogue** (headings), **DM Mono** (code/labels).
+Fonts: **Inter** (body/UI), **Epilogue** (headings), **DM Mono** (code/labels) — always via `var(--font-body)` / `var(--font-heading)` / `var(--font-mono)`, never quoted family names in component code.
+
+**Every `font-size` flows through a `--font-size-*` token** — never loose px. `base.css` binds h1–h6 to the scale (h1→`display` … h6→`heading-xs`); UI text uses `body-lg/md/sm`, `label`, `caption`, `overline`, `badge`. A legacy size with no exact token snaps to the nearest *role-appropriate* token, not a new px value.
+
+**Icons: Lucide** (CDN `unpkg.com/lucide`, `<i data-lucide="…">` + `lucide.createIcons()`), stroke inherits `currentColor`. 18px inside chips/inputs, 20px in nav, 24px in search bars. One icon set per product — never mix.
+
+**Breakpoints**: canonical values `--breakpoint-md: 768px`, `--breakpoint-lg: 1024px` live in `variables.css` (media queries can't consume `var()` — use the literal values and keep them in sync). The mobile sidebar/shell pattern is a pending design decision — flag it, don't improvise off-canvas patterns.
 
 **Typography color is brand navy, not black.** Page text — headings AND body — uses `var(--text-primary)` = `primary-900` (`#01164D`) in light mode, recalibrated to `#EAEBED` in dark. Secondary text: `var(--text-secondary)`. `--color-on-surface` (near-black `#0A0C12`) is reserved for content *inside* components (chip labels, button text, table cells) — never for page typography. If Embassy page text renders black, a token is misapplied.
 
@@ -42,6 +48,8 @@ Copy the component file + `components/lib/utils.ts` into the target project (or 
 Flat kebab-case, additive variants — **not** BEM: `btn-primary btn-danger`, `chip chip-selected`, `badge badge-open`. Every component CSS file has a header comment with a `Uso:` block showing exact markup. Read it before using a component.
 
 ### Applying the DS to an existing product (migration rules)
+
+**Read [MIGRATION.md](MIGRATION.md) first** — it is the full reverse-mapping contract: the phase workflow (token audit → component inventory → apply → hierarchy pass → verify), the deterministic color-replacement algorithm (classify by element ROLE, never nearest-hex), the legacy-pattern → DS-component mapping table, the anti-pattern catalog, and the machine-checkable verification checklist. Run that checklist before declaring a migration done.
 
 When restyling or rebuilding an existing screen, **DS rules win over visual fidelity to the legacy design**. Concretely:
 
@@ -81,6 +89,20 @@ When restyling or rebuilding an existing screen, **DS rules win over visual fide
 **Roadmap (documented as "Coming soon", no consumable code yet):** checkbox, radio, switch, menu, tooltip, slider, date picker, sheet, list, loading, carousel, divider. **Do not invent styles for these** — compose from existing components or flag the gap.
 
 Component relationships: filter **chips** refine **search** results (chips below the search bar) and toolbar filters; **search-field** (toolbar.css) is the compact in-toolbar search, **search-bar** (search.css) is the standalone 56px component.
+
+Every component CSS header now carries a **`Cuándo usar / Cuándo no / Reemplaza a`** block — that is the per-component decision rule (badge vs chip, modal vs toast, card vs stat-card, etc.). Agents must honor it when mapping legacy elements.
+
+### Where to look things up (authoritative source per information type)
+
+| Information | Authoritative source |
+|---|---|
+| Token values (colors, type scale, spacing, radii, shadows, breakpoints) | `css/variables.css` |
+| Component markup + variants + usage rules | the component's `css/components/*.css` header (`Uso:` + `Cuándo usar`) |
+| Usage guidelines / specs / accessibility (human depth) | root `index.html` |
+| Migration / restyling rules | `MIGRATION.md` |
+| React props | `components/ui/*.tsx` |
+
+The legacy `docs/*.html` pages drift — treat them as secondary; never let them override the sources above.
 
 ---
 
