@@ -232,6 +232,30 @@
         </table>
       </div>
 
+      <!-- Error ring -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Ring de error</h2>
+        <table class="docs-props-table">
+          <thead><tr><th>Variable</th><th>Valor</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td><code>--color-error-ring</code></td><td>color-mix(in srgb, var(--color-error) 12%, transparent)</td><td>Ring de error para inputs (<code>.is-error</code>). Derivado de <code>--color-error</code> via <code>color-mix</code>, por lo que se recalibra solo en dark. Nunca hardcodear el rgba.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Breakpoints -->
+      <div class="docs-section">
+        <h2 class="docs-section-title">Breakpoints</h2>
+        <p class="docs-section-desc">Referencia canónica del DS. Limitación CSS: las media queries <strong>no pueden consumir <code>var()</code></strong> — usá los valores literales en <code>@media</code> y mantenelos sincronizados con estos tokens.</p>
+        <table class="docs-props-table">
+          <thead><tr><th>Variable</th><th>Valor</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td><code>--breakpoint-md</code></td><td>768px</td><td>Debajo: layout de columna única; grids colapsan</td></tr>
+            <tr><td><code>--breakpoint-lg</code></td><td>1024px</td><td>Debajo: contenido compacto; sidebar puede colapsar</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <!-- Border Radius -->
       <div class="docs-section">
         <h2 class="docs-section-title">Border Radius</h2>
