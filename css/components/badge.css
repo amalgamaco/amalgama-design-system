@@ -2,6 +2,10 @@
    Amalgama DS — Badge
    Indicadores de estado y etiquetas de categoría.
 
+   Cuándo usar: estado o categoría de SOLO LECTURA de un ítem (tablas, cards, listas). Todo label categórico debe ser badge — nunca texto plano coloreado.
+   Cuándo no: si es interactivo/filtrable usar Chip; si es una acción usar Button.
+   Reemplaza a: labels de texto plano con color, pills custom, tags legacy.
+
    Dependencia: variables.css
    Requiere: (ninguno)
 
@@ -22,7 +26,7 @@
 /* ── Base ── */
 .badge {
   display: inline-flex; align-items: center;
-  font-size: 11.5px; font-weight: 600;
+  font-size: var(--font-size-badge); font-weight: 600;
   padding: 4px 10px; border-radius: var(--radius-full);
   letter-spacing: .2px;
   white-space: nowrap;
@@ -40,7 +44,7 @@
 
 /* ── Modificador Label: etiqueta de categoría/sección (tipografía monoespaciada) ── */
 .badge-label {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-size: 10.5px; font-weight: 500;
   text-transform: uppercase; letter-spacing: .1em;
 }

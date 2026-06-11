@@ -8,6 +8,10 @@
      Input      · .chip + .chip-remove                 · información ingresada
      Suggestion · .chip                                · sugerencia dinámica
 
+   Cuándo usar: filtros, selección múltiple, sugerencias — siempre interactivo. Filter chips van debajo de la search bar para refinar resultados.
+   Cuándo no: estado de solo lectura (usar Badge); acción principal (usar Button).
+   Reemplaza a: toggles de filtro ad-hoc, tags clickeables legacy.
+
    Specs (Specs → Chips en la documentación):
      Alto 32px · radio full (píldora) · ícono 18px
      Padding 16px (sin ícono) · 8px del lado del ícono · gap 8px

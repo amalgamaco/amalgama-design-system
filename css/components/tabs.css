@@ -2,6 +2,10 @@
    Amalgama DS — Tabs
    Pestanas para organizar contenido en secciones.
 
+   Cuándo usar: alternar vistas dentro del MISMO contexto/página.
+   Cuándo no: navegación entre páginas (usar sidebar de layout.css).
+   Reemplaza a: tab bars legacy.
+
    Dependencia: variables.css
    Requiere: (ninguno)
 
@@ -23,7 +27,7 @@
 }
 .tab {
   padding: 11px 20px;
-  font-size: 13.5px;
+  font-size: var(--font-size-body-md);
   color: var(--text-muted);
   cursor: pointer;
   border-bottom: 2px solid transparent;
@@ -33,6 +37,11 @@
   user-select: none;
 }
 .tab:hover { color: var(--text-secondary); }
+.tab:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
 .tab.active {
   color: var(--interactive);
   border-bottom-color: var(--interactive);

@@ -2,6 +2,10 @@
    Amalgama DS — Card
    Contenedor basico con borde y fondo blanco.
 
+   Cuándo usar: contenedor genérico de contenido agrupado sobre superficie.
+   Cuándo no: métricas (stat-card), personas (person-card), vacantes (vacancy-card).
+   Reemplaza a: paneles/boxes legacy con borde o sombra.
+
    Dependencia: variables.css
    Requiere: (ninguno)
 

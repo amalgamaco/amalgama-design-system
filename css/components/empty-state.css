@@ -2,6 +2,10 @@
    Amalgama DS — Empty State
    Placeholder visual cuando no hay datos para mostrar.
 
+   Cuándo usar: listas/tablas/búsquedas sin resultados o sin datos aún.
+   Cuándo no: features en construcción (usar Placeholder); carga en progreso (usar Skeleton).
+   Reemplaza a: textos sueltos "no hay datos".
+
    Dependencia: variables.css
    Requiere: button.css (para CTA opcional)
 
@@ -21,13 +25,13 @@
 }
 .empty-state-icon { font-size: 48px; margin-bottom: 16px; }
 .empty-state-title {
-  font-family: 'Epilogue', sans-serif;
-  font-size: 18px; font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-md); font-weight: 600;
   color: var(--text-secondary);
   margin-bottom: 8px;
 }
 .empty-state-desc {
-  font-size: 14px; color: var(--text-muted);
+  font-size: var(--font-size-body-lg); color: var(--text-muted);
   max-width: 400px; margin: 0 auto 20px;
   line-height: 1.6;
 }

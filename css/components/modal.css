@@ -2,6 +2,10 @@
    Amalgama DS — Modal
    Dialogo modal con overlay, header, body y footer.
 
+   Cuándo usar: confirmaciones y tareas cortas que bloquean el contexto actual.
+   Cuándo no: formularios largos (página con create-form); feedback pasivo (usar Toast).
+   Reemplaza a: dialogs/popups/lightboxes legacy.
+
    Dependencia: variables.css, base.css (keyframes fadeIn, slideInUp)
    Requiere: button.css (para botones en el footer)
 
@@ -46,8 +50,8 @@
   display: flex; align-items: center; justify-content: space-between;
 }
 .modal-title {
-  font-family: 'Epilogue', sans-serif;
-  font-size: 17px; font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-sm); font-weight: 600;
 }
 .modal-close {
   width: 32px; height: 32px;
@@ -59,6 +63,11 @@
   transition: background var(--duration-fast);
 }
 .modal-close:hover { background: var(--bg); color: var(--text-primary); }
+.modal-close:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
 .modal-body { padding: 20px 24px; }
 .modal-footer {
   padding: 16px 24px;

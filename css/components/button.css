@@ -9,6 +9,10 @@
      Text       · Text only     · acción de baja jerarquía / inline
      Icon       · Icon          · acción compacta solo-ícono
 
+   Cuándo usar: acciones. Jerarquía obligatoria: UN solo btn-primary por contexto; btn-secondary para alternativas; btn-tertiary menor peso; btn-text acciones inline.
+   Cuándo no: navegación (usar links/nav). NUNCA estirar a full-width ni alinear contenido a la izquierda — el botón tiene ancho intrínseco y contenido centrado; si el layout legacy lo pide, se cambia el layout, no el botón.
+   Reemplaza a: cualquier botón/CTA legacy; un "action row" plano se mapea a grupo con jerarquía (un primary + alternativas).
+
    Dependencia: variables.css (Color Roles)
    Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en
    light y dark sin overrides por tema (los roles se recalibran en
@@ -38,7 +42,7 @@
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   font-family: inherit;
-  font-size: 13.5px; font-weight: 600;
+  font-size: var(--font-size-body-md); font-weight: 600;
   line-height: 1.2;
   cursor: pointer;
   white-space: nowrap;
@@ -157,7 +161,7 @@
    XL  → 52px min-height · hero / marketing surfaces
 ───────────────────────────────────── */
 .btn-xs { padding: 3px 8px;   font-size: 11px;   font-weight: 600; min-height: 24px; }
-.btn-sm { padding: 6px 12px;  font-size: 12.5px; min-height: 32px; }
+.btn-sm { padding: 6px 12px;  font-size: var(--font-size-body-sm); min-height: 32px; }
 .btn-lg { padding: 10px 22px; font-size: 15px;   min-height: 44px; }
 .btn-xl { padding: 14px 30px; font-size: 16px;   font-weight: 700; min-height: 52px; }
 
@@ -166,11 +170,9 @@
 .btn-text.btn-lg { padding: 10px 16px; }
 .btn-text.btn-xl { padding: 14px 20px; }
 
-/* ─────────────────────────────────────
-   Pill / round shape modifier
-   Stacks with any variant or size class.
-───────────────────────────────────── */
-.btn-rounded { border-radius: var(--radius-full) !important; }
+/* Los botones tienen una sola forma: --radius-md (8px).
+   La píldora (--radius-full) está reservada a chips y badges —
+   un botón píldora se confunde con un chip seleccionado. */
 
 /* ─────────────────────────────────────
    Next · avance de wizard (alias de Primary)

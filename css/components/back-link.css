@@ -2,6 +2,10 @@
    Amalgama DS — Back Link
    Enlace de retorno con icono para navegacion.
 
+   Cuándo usar: volver a la vista padre desde una página de detalle.
+   Cuándo no: navegación principal (usar sidebar/tabs) ni acciones (usar btn-text).
+   Reemplaza a: links "‹ Volver" ad-hoc.
+
    Dependencia: variables.css
    Requiere: (ninguno)
 
@@ -14,10 +18,15 @@
 
 .back-link {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13.5px; color: var(--text-secondary);
+  font-size: var(--font-size-body-md); color: var(--text-secondary);
   cursor: pointer;
   transition: color var(--duration-fast);
   margin-bottom: 6px;
   background: none; border: none; font-family: inherit; padding: 0;
 }
 .back-link:hover { color: var(--text-primary); text-decoration: none; }
+.back-link:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}

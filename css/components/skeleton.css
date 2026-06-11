@@ -2,6 +2,10 @@
    Amalgama DS — Skeleton
    Animacion de carga shimmer para placeholders.
 
+   Cuándo usar: carga de contenido con estructura conocida (mientras llega la data).
+   Cuándo no: estados vacíos (usar Empty State). No usar spinners ad-hoc.
+   Reemplaza a: spinners/loaders custom.
+
    Dependencia: variables.css
    Requiere: (ninguno)
 

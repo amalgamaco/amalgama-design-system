@@ -12,6 +12,10 @@
      View: encabezado 72px · divisor 1px · radio 28px (docked) ·
            íconos 24px · padding horizontal 16px
 
+   Cuándo usar: search-bar standalone (56px, pill) para vistas de búsqueda dedicadas; search-view para resultados. Combinar con filter chips debajo.
+   Cuándo no: búsqueda compacta dentro de una toolbar (usar .search-field de toolbar.css).
+   Reemplaza a: inputs de búsqueda legacy.
+
    Dependencia: variables.css (Color Roles)
    Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en
    light y dark sin overrides por tema.

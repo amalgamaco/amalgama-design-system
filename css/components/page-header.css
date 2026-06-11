@@ -2,6 +2,10 @@
    Amalgama DS — Page Header
    Encabezado de pagina con titulo y acciones.
 
+   Cuándo usar: título + acciones al tope de cada vista.
+   Cuándo no: dentro de cards o modales (tienen su propio header).
+   Reemplaza a: headers de página ad-hoc.
+
    Dependencia: variables.css
    Requiere: (ninguno)
 
@@ -19,7 +23,7 @@
   margin-bottom: 24px;
 }
 .page-title {
-  font-family: 'Epilogue', sans-serif;
-  font-size: 22px; font-weight: 600; letter-spacing: -.3px;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-lg); font-weight: 600; letter-spacing: -.3px;
 }
 .header-actions { display: flex; align-items: center; gap: 10px; }

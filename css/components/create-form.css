@@ -2,6 +2,10 @@
    Amalgama DS — Create Form
    Encabezado y footer sticky para paginas de creacion.
 
+   Cuándo usar: header + footer pegajoso de formularios de creación full-page.
+   Cuándo no: tareas cortas que caben en un Modal.
+   Reemplaza a: encabezados/footers de formulario custom.
+
    Dependencia: variables.css
    Requiere: button.css (para botones en el footer)
 
@@ -18,8 +22,8 @@
 
 .create-header { margin-bottom: 0; }
 .create-title {
-  font-family: 'Epilogue', sans-serif;
-  font-size: 24px; font-weight: 600; letter-spacing: -.4px;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-xl); font-weight: 600; letter-spacing: -.4px;
   margin-bottom: 20px;
 }
 .create-footer {

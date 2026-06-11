@@ -2,6 +2,10 @@
    Amalgama DS — Stat Card
    Tarjetas KPI con etiqueta, valor grande y cambio porcentual.
 
+   Cuándo usar: métricas numéricas con label y variación (KPIs en dashboards).
+   Cuándo no: contenido no numérico (usar Card).
+   Reemplaza a: widgets de métricas legacy.
+
    Dependencia: variables.css
    Requiere: (ninguno)
 
@@ -28,18 +32,18 @@
   padding: 20px;
 }
 .stat-card .stat-label {
-  font-size: 12.5px;
+  font-size: var(--font-size-body-sm);
   color: var(--text-muted);
   margin-bottom: 8px;
 }
 .stat-card .stat-value {
-  font-family: 'Epilogue', sans-serif;
-  font-size: 28px;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-display);
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -.5px;
 }
 .stat-card .stat-change {
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   margin-top: 4px;
 }

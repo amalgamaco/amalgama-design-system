@@ -3,6 +3,10 @@
    Elementos de formulario: campos, labels, selects, textareas,
    inputs numericos, inputs de fecha, y tarjeta de formulario.
 
+   Cuándo usar: todo campo de entrada — input, select, textarea, number, date — con label, hint y error.
+   Cuándo no: búsqueda (usar search-field de toolbar.css o search-bar de search.css).
+   Reemplaza a: cualquier form control legacy; nunca inventar campos custom.
+
    Dependencia: variables.css
    Requiere: (ninguno)
 
@@ -34,12 +38,12 @@
   margin-bottom: 16px;
 }
 .form-card-title {
-  font-family: 'Epilogue', sans-serif;
-  font-size: 15px; font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-xs); font-weight: 600;
   margin-bottom: 6px;
 }
 .form-card-desc {
-  font-size: 13px; color: var(--text-secondary);
+  font-size: var(--font-size-label); color: var(--text-secondary);
   line-height: 1.55;
   margin-bottom: 24px;
   max-width: 680px;
@@ -50,7 +54,7 @@
 
 .field-label {
   display: block;
-  font-size: 13px; font-weight: 500;
+  font-size: var(--font-size-label); font-weight: 500;
   color: var(--text-primary);
   margin-bottom: 8px;
 }
@@ -61,7 +65,7 @@
   padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  font-size: 13.5px;
+  font-size: var(--font-size-body-md);
   font-family: inherit;
   color: var(--text-primary);
   background: var(--card-bg);
@@ -88,7 +92,7 @@ input:disabled, select:disabled, textarea:disabled {
   padding: 10px 38px 10px 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  font-size: 13.5px;
+  font-size: var(--font-size-body-md);
   font-family: inherit;
   color: var(--text-primary);
   background: var(--card-bg);
@@ -127,7 +131,7 @@ input:disabled, select:disabled, textarea:disabled {
   transition: border-color var(--duration-fast);
 }
 .number-input-wrapper:focus-within { border-color: var(--interactive); }
-.number-value { font-size: 13.5px; color: var(--text-primary); }
+.number-value { font-size: var(--font-size-body-md); color: var(--text-primary); }
 .number-controls { display: flex; align-items: center; gap: 4px; }
 .number-btn {
   width: 32px; height: 32px;
@@ -147,7 +151,7 @@ input:disabled, select:disabled, textarea:disabled {
   padding: 10px 42px 10px 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  font-size: 13.5px;
+  font-size: var(--font-size-body-md);
   font-family: inherit;
   color: var(--text-muted);
   background: var(--card-bg);
@@ -198,12 +202,12 @@ input:disabled, select:disabled, textarea:disabled {
   padding: 0 2px;
 }
 .field-hint {
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.4;
   color: var(--color-on-surface-variant);
 }
 .field-error-msg {
-  font-size: 12px;
+  font-size: var(--font-size-caption);
   line-height: 1.4;
   color: var(--color-error);
   display: flex;
@@ -215,8 +219,8 @@ input:disabled, select:disabled, textarea:disabled {
   margin-top: 1px;
 }
 .field-char-count {
-  font-family: 'DM Mono', monospace;
-  font-size: 11.5px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-badge);
   color: var(--color-on-surface-variant);
   white-space: nowrap;
   flex-shrink: 0;
@@ -256,7 +260,7 @@ input:disabled, select:disabled, textarea:disabled {
 }
 .field-group.is-error .field-input:focus {
   border-color: var(--color-error);
-  box-shadow: 0 0 0 3px rgba(253, 58, 69, .12);
+  box-shadow: 0 0 0 3px var(--color-error-ring);
 }
 .field-group.is-error .field-hint {
   display: none; /* el mensaje de error reemplaza el texto de soporte */

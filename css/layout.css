@@ -1,5 +1,9 @@
 /* ═══════════════════════════════════════
    Layout — App Shell, Sidebar, Topbar
+
+   Cuándo usar: shell de aplicación completo — sidebar + topbar + avatar. Solo para apps con navegación persistente.
+   Cuándo no: páginas standalone (auth, landing) — no cargar layout.css.
+   Reemplaza a: nav bars/sidebars legacy.
 ═══════════════════════════════════════ */
 
 /* ── App Shell ── */
@@ -39,8 +43,8 @@
   height: var(--topbar-height); padding: 0 20px;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 8px;
-  font-family: 'Epilogue', sans-serif;
-  font-weight: 600; font-size: 15px; color: var(--text-primary);
+  font-family: var(--font-heading);
+  font-weight: 600; font-size: var(--font-size-heading-xs); color: var(--text-primary);
 }
 .sidebar-logo svg { color: var(--interactive); }
 
@@ -52,15 +56,15 @@
   border-radius: var(--radius-md);
   padding: 8px 12px;
   color: var(--text-muted);
-  font-size: 13px;
+  font-size: var(--font-size-label);
   cursor: pointer;
   transition: border-color var(--duration-fast);
 }
 .sidebar-search:hover { border-color: var(--neutral-200); }
 .sidebar-search .shortcut {
   margin-left: auto;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono-sm);
   background: var(--neutral-50);
   padding: 2px 5px;
   border-radius: var(--radius-sm);
@@ -82,7 +86,7 @@
   padding: 8px 12px;
   border-radius: var(--radius-md);
   color: var(--text-secondary);
-  font-size: 13.5px;
+  font-size: var(--font-size-body-md);
   cursor: pointer;
   transition: background var(--duration-fast), color var(--duration-fast);
   position: relative;
@@ -111,7 +115,7 @@
   padding-left: 20px;
 }
 .nav-sub-items .nav-item {
-  font-size: 13px;
+  font-size: var(--font-size-label);
   padding: 6px 12px;
 }
 
@@ -135,7 +139,7 @@
 .topbar-breadcrumb {
   margin-right: auto;
   display: flex; align-items: center; gap: 6px;
-  font-size: 13px; color: var(--text-muted);
+  font-size: var(--font-size-label); color: var(--text-muted);
 }
 .topbar-breadcrumb a { color: var(--text-muted); text-decoration: none; }
 .topbar-breadcrumb a:hover { color: var(--text-primary); }
@@ -145,7 +149,7 @@
   display: flex; align-items: center; gap: 8px;
   padding: 8px 16px;
   border-radius: var(--radius-md);
-  font-size: 13px; font-weight: 500;
+  font-size: var(--font-size-label); font-weight: 500;
   cursor: pointer; border: none;
   transition: background var(--duration-fast);
 }
@@ -180,10 +184,10 @@
   width: 32px; height: 32px; border-radius: 50%;
   background: linear-gradient(135deg, var(--primary-500), var(--secondary-900));
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-on-primary); font-size: 12px; font-weight: 600;
+  color: var(--color-on-primary); font-size: var(--font-size-caption); font-weight: 600;
   cursor: pointer;
 }
 .avatar-label {
-  font-size: 13px; font-weight: 500; cursor: pointer;
+  font-size: var(--font-size-label); font-weight: 500; cursor: pointer;
   display: flex; align-items: center; gap: 4px;
 }
