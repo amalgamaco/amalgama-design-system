@@ -5,20 +5,29 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text-primary);
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Headings — ligados al type scale de variables.css (h1 → display … h6 → heading-xs).
+   Regla del DS: todo font-size fluye por tokens --font-size-*; nunca px sueltos. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Epilogue', sans-serif;
+  font-family: var(--font-heading);
   font-weight: 600;
   letter-spacing: -.3px;
 }
+
+h1 { font-size: var(--font-size-display);    line-height: var(--line-height-display);    letter-spacing: var(--letter-spacing-display); }
+h2 { font-size: var(--font-size-heading-xl); line-height: var(--line-height-heading-xl); letter-spacing: var(--letter-spacing-heading-xl); }
+h3 { font-size: var(--font-size-heading-lg); line-height: var(--line-height-heading-lg); letter-spacing: var(--letter-spacing-heading-lg); }
+h4 { font-size: var(--font-size-heading-md); line-height: var(--line-height-heading-md); letter-spacing: var(--letter-spacing-heading-md); }
+h5 { font-size: var(--font-size-heading-sm); line-height: var(--line-height-heading-sm); }
+h6 { font-size: var(--font-size-heading-xs); line-height: var(--line-height-heading-xs); }
 
 a { color: var(--interactive); text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -77,5 +86,5 @@ input, select, textarea { font-family: inherit; }
 .text-success { color: var(--green); }
 .text-error { color: var(--red); }
 
-.font-mono { font-family: 'DM Mono', monospace; }
-.font-heading { font-family: 'Epilogue', sans-serif; }
+.font-mono { font-family: var(--font-mono); }
+.font-heading { font-family: var(--font-heading); }

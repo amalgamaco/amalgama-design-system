@@ -193,6 +193,9 @@
   /* Focus & Overlay */
   --color-focus:                     var(--secondary-900);
   --color-focus-ring:                rgba(79,128,255,.15);
+  /* Ring de error (inputs .is-error): derivado de --color-error vía color-mix,
+     por lo que se recalibra solo en dark. Nunca hardcodear el rgba. */
+  --color-error-ring:                color-mix(in srgb, var(--color-error) 12%, transparent);
   --color-scrim:                     rgba(0,0,0,.32);
 
   /* ─────────────────────────────────────
@@ -327,6 +330,16 @@
   ───────────────────────────────────── */
   --sidebar-width: 220px;
   --topbar-height: 56px;
+
+  /* Breakpoints — referencia canónica del DS.
+     Limitación CSS: las media queries NO pueden consumir var(); usá estos
+     valores literales en @media y mantenelos sincronizados con estos tokens.
+       md  768px  — debajo: layout de columna única; grids colapsan
+       lg 1024px  — debajo: contenido compacto; sidebar puede colapsar
+     El comportamiento del shell (sidebar) en mobile es una decisión de
+     diseño PENDIENTE — no improvisar un patrón off-canvas. */
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
 
   /* ─────────────────────────────────────
      Border radius  (DS scale)
