@@ -7,10 +7,10 @@
 <meta name="description" content="Sistema de diseño de Amalgama — tokens, componentes y documentación viva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css?v=7">
-<link rel="stylesheet" href="css/base.css?v=2">
-<link rel="stylesheet" href="css/layout.css?v=2">
-<link rel="stylesheet" href="css/components.css?v=4">
+<link rel="stylesheet" href="css/variables.css?v=8">
+<link rel="stylesheet" href="css/base.css?v=3">
+<link rel="stylesheet" href="css/layout.css?v=3">
+<link rel="stylesheet" href="css/components.css?v=6">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -4189,7 +4189,7 @@ body { overflow-x: clip; }
           <thead><tr><th>Token</th><th>Valor</th><th>Uso típico</th></tr></thead>
           <tbody>
             <tr><td><code>--radius-sm</code></td><td>4px</td><td>Copy buttons, small chips, inline code</td></tr>
-            <tr><td><code>--radius-md</code></td><td>8px</td><td>Inputs, select, buttons cuadrados, modales</td></tr>
+            <tr><td><code>--radius-md</code></td><td>8px</td><td>Inputs, select, botones, modales</td></tr>
             <tr><td><code>--radius-lg</code></td><td>12px</td><td>Cards, panels, popovers — radio por defecto</td></tr>
             <tr><td><code>--radius-xl</code></td><td>16px</td><td>Cards grandes, drawers, preview boxes</td></tr>
             <tr><td><code>--radius-full</code></td><td>9999px</td><td>Badges, pills, avatares, botones cápsula</td></tr>
@@ -4677,9 +4677,6 @@ body { overflow-x: clip; }
         .icon-btn.btn-lg { width: 44px; height: 44px; }
         .icon-btn.btn-xl { width: 52px; height: 52px; }
 
-        /* ── Pill / round shape ── */
-        .btn-rounded { border-radius: 999px !important; }
-
         /* ── Button type block (Overview) ── */
         .bd-type-block { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; }
         .bd-type-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 4px; }
@@ -4700,7 +4697,6 @@ body { overflow-x: clip; }
         .btn-toggle-on  { background: var(--color-primary); color: var(--color-on-primary); border: 1px solid transparent; }
         .btn-toggle-off { background: transparent; color: var(--color-primary); border: 1px solid var(--color-outline); }
         .btn-toggle-on, .btn-toggle-off { display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-md);font:600 13.5px Inter;cursor:pointer; }
-        .btn-toggle-on.btn-rounded, .btn-toggle-off.btn-rounded { border-radius:var(--radius-full) !important; }
 
         /* ── Overview intro list ── */
         .bd-overview-list {
@@ -4744,7 +4740,7 @@ body { overflow-x: clip; }
           display: inline-flex; align-items: center; justify-content: center;
           padding: 8px 20px;
           border: none;
-          border-radius: var(--radius-full);
+          border-radius: var(--radius-md);
           background: var(--color-surface-container);
           color: var(--color-primary);
           font: 600 13.5px 'Inter', sans-serif;
@@ -4942,7 +4938,7 @@ body { overflow-x: clip; }
             <li>Puede contener un ícono inicial opcional</li>
             <li><b>Cinco opciones de color:</b> elevado, relleno, tonal, con borde y de texto</li>
             <li><b>Cinco tamaños recomendados:</b> extra pequeño, pequeño, mediano, grande y extra grande</li>
-            <li><b>Dos opciones de forma:</b> redondeado y cuadrado</li>
+            <li><b>Una sola forma:</b> esquinas levemente redondeadas (<code>--radius-md</code> · 8px) — la píldora está reservada a chips y badges</li>
             <li>Mantené las etiquetas concisas y usá sentence case</li>
           </ul>
 
@@ -4956,17 +4952,17 @@ body { overflow-x: clip; }
               </div>
               <!-- 2 Filled -->
               <div class="bd-family-col">
-                <button class="btn-primary btn-rounded bd-family-btn">Relleno</button>
+                <button class="btn-primary bd-family-btn">Relleno</button>
                 <div class="bd-family-num">2</div>
               </div>
               <!-- 3 Tonal -->
               <div class="bd-family-col">
-                <button class="btn-secondary btn-rounded bd-family-btn">Tonal</button>
+                <button class="btn-secondary bd-family-btn">Tonal</button>
                 <div class="bd-family-num">3</div>
               </div>
               <!-- 4 Outlined -->
               <div class="bd-family-col">
-                <button class="btn-tertiary btn-rounded bd-family-btn">Con borde</button>
+                <button class="btn-tertiary bd-family-btn">Con borde</button>
                 <div class="bd-family-num">4</div>
               </div>
               <!-- 5 Text -->
@@ -5007,7 +5003,7 @@ body { overflow-x: clip; }
             <li><a class="ds-toc-link" data-target="bs-anatomy">Anatomía</a></li>
             <li><a class="ds-toc-link" data-target="bs-color">Color</a></li>
             <li><a class="ds-toc-link" data-target="bs-states">Estados</a></li>
-            <li><a class="ds-toc-link" data-target="bs-shape">Morfología de forma</a></li>
+            <li><a class="ds-toc-link" data-target="bs-shape">Forma</a></li>
             <li><a class="ds-toc-link" data-target="bs-measurements">Medidas</a></li>
           </ul>
         </nav>
@@ -5024,7 +5020,7 @@ body { overflow-x: clip; }
             <div class="bd-var-preview">
               <div class="bd-var-num">1</div>
               <div class="bd-var-buttons">
-                <button class="btn-primary btn-rounded" style="pointer-events:none">
+                <button class="btn-primary" style="pointer-events:none">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                   Etiqueta
                 </button>
@@ -5044,11 +5040,11 @@ body { overflow-x: clip; }
             <div class="bd-var-preview">
               <div class="bd-var-num">2</div>
               <div class="bd-var-buttons">
-                <button class="btn-toggle-off btn-rounded" aria-pressed="false" style="pointer-events:none">
+                <button class="btn-toggle-off" aria-pressed="false" style="pointer-events:none">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                   No seleccionado
                 </button>
-                <button class="btn-toggle-on btn-rounded" aria-pressed="true" style="pointer-events:none">
+                <button class="btn-toggle-on" aria-pressed="true" style="pointer-events:none">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                   Seleccionado
                 </button>
@@ -5118,48 +5114,35 @@ body { overflow-x: clip; }
               <div class="bd-cfg-num">1</div>
               <div class="bd-cfg-items" style="align-items:flex-end">
                 <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-xs btn-rounded" style="pointer-events:none">Extra pequeño</button>
+                  <button class="btn-primary btn-xs" style="pointer-events:none">Extra pequeño</button>
                 </div>
                 <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-sm btn-rounded" style="pointer-events:none">Pequeño</button>
+                  <button class="btn-primary btn-sm" style="pointer-events:none">Pequeño</button>
                 </div>
                 <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-rounded" style="pointer-events:none">Mediano</button>
+                  <button class="btn-primary" style="pointer-events:none">Mediano</button>
                 </div>
                 <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-lg btn-rounded" style="pointer-events:none">Grande</button>
+                  <button class="btn-primary btn-lg" style="pointer-events:none">Grande</button>
                 </div>
                 <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-xl btn-rounded" style="pointer-events:none">Extra grande</button>
+                  <button class="btn-primary btn-xl" style="pointer-events:none">Extra grande</button>
                 </div>
               </div>
             </div>
 
-            <!-- 2. Shape -->
+            <!-- 2. Color -->
             <div class="bd-cfg-row">
               <div class="bd-cfg-num">2</div>
               <div class="bd-cfg-items">
                 <div class="bd-cfg-item-col">
-                  <button class="btn-tertiary btn-rounded" style="pointer-events:none">Redondeado</button>
+                  <button class="btn-primary" style="pointer-events:none">Relleno</button>
                 </div>
                 <div class="bd-cfg-item-col">
-                  <button class="btn-tertiary" style="pointer-events:none">Cuadrado</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- 3. Color -->
-            <div class="bd-cfg-row">
-              <div class="bd-cfg-num">3</div>
-              <div class="bd-cfg-items">
-                <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-rounded" style="pointer-events:none">Relleno</button>
+                  <button class="btn-secondary" style="pointer-events:none">Tonal</button>
                 </div>
                 <div class="bd-cfg-item-col">
-                  <button class="btn-secondary btn-rounded" style="pointer-events:none">Tonal</button>
-                </div>
-                <div class="bd-cfg-item-col">
-                  <button class="btn-tertiary btn-rounded" style="pointer-events:none">Con borde</button>
+                  <button class="btn-tertiary" style="pointer-events:none">Con borde</button>
                 </div>
                 <div class="bd-cfg-item-col">
                   <button class="btn-text" style="pointer-events:none">Texto</button>
@@ -5167,15 +5150,15 @@ body { overflow-x: clip; }
               </div>
             </div>
 
-            <!-- 4. Padding -->
+            <!-- 3. Padding -->
             <div class="bd-cfg-row">
-              <div class="bd-cfg-num">4</div>
+              <div class="bd-cfg-num">3</div>
               <div class="bd-cfg-items">
                 <div class="bd-cfg-item-col">
-                  <button class="btn-secondary btn-rounded" style="pointer-events:none;padding-left:24px;padding-right:24px">24px padding</button>
+                  <button class="btn-secondary" style="pointer-events:none;padding-left:24px;padding-right:24px">24px padding</button>
                 </div>
                 <div class="bd-cfg-item-col">
-                  <button class="btn-secondary btn-rounded" style="pointer-events:none;padding-left:16px;padding-right:24px">
+                  <button class="btn-secondary" style="pointer-events:none;padding-left:16px;padding-right:24px">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                     16px padding
                   </button>
@@ -5198,11 +5181,8 @@ body { overflow-x: clip; }
                   <td>XS (24px), SM (32px), LG (44px), XL (52px)</td>
                 </tr>
                 <tr>
-                  <td rowspan="2">Forma</td>
-                  <td>Cuadrado — predeterminado (<code>--radius-md</code> · 8px)</td>
-                </tr>
-                <tr>
-                  <td>Redondeado — <code>.btn-rounded</code> (<code>--radius-full</code> · 999px)</td>
+                  <td>Forma</td>
+                  <td>Única — esquinas levemente redondeadas (<code>--radius-md</code> · 8px). La píldora (<code>--radius-full</code>) está reservada a chips y badges.</td>
                 </tr>
                 <tr>
                   <td>Color</td>
@@ -6298,73 +6278,23 @@ body { overflow-x: clip; }
 
         <!-- ══ 7. SHAPE MORPH ══ -->
         <section class="docs-section" id="bs-shape">
-          <h2 class="docs-section-title">Morfología de forma</h2>
-          <p class="docs-section-desc">Los botones Embassy admiten tres estados de forma. La forma es independiente de la variante — cualquier modificador de forma funciona con cualquier variante de color y tamaño.</p>
-          <div class="bd-callout" style="margin-bottom:20px"><span class="bd-ico">⚑</span><span><b>Embassy vs forma predeterminada MD3:</b> La forma predeterminada del botón MD3 es <code>ShapeKeyTokens.CornerFull</code> — totalmente redondeado (píldora). Embassy invierte esto intencionalmente: cuadrado (radio 8px) es el predeterminado para densidad de producto, la píldora está reservada para superficies editoriales. Esta es una decisión de diseño de Embassy, no una discrepancia.</span></div>
+          <h2 class="docs-section-title">Forma</h2>
+          <p class="docs-section-desc">Los botones Embassy tienen una sola forma: esquinas levemente redondeadas (<code>--radius-md</code> · 8px), igual en todas las variantes de color y tamaño. No hay modificadores de forma.</p>
+          <div class="bd-callout" style="margin-bottom:20px"><span class="bd-ico">⚑</span><span><b>Embassy vs MD3:</b> La forma predeterminada del botón MD3 es <code>ShapeKeyTokens.CornerFull</code> — totalmente redondeado (píldora). Embassy diverge intencionalmente: el radio 8px da densidad de producto y coincide con la escala de radios del resto del sistema. Esta es una decisión de diseño de Embassy, no una discrepancia.</span></div>
 
-          <div class="bd-grid c3" style="gap:16px">
-            <div class="bd-card" style="text-align:center;padding:24px 16px">
-              <div class="bd-stage center" style="gap:8px;padding:16px 0;flex-wrap:wrap">
-                <button class="btn-primary" style="pointer-events:none">Label</button>
-                <button class="btn-secondary" style="pointer-events:none">Label</button>
-                <button class="btn-tertiary" style="pointer-events:none">Label</button>
-              </div>
-              <code class="bd-mono" style="display:block;margin-bottom:8px">--radius-md · 8px</code>
-              <p class="bd-sub-title" style="margin-bottom:6px">Cuadrado (predeterminado)</p>
-              <p class="bd-variant-desc" style="font-size:12.5px">UI de producto estándar. Coincide con la escala de radio de esquina de todo el sistema Embassy. Usalo en todas las superficies de aplicación, formularios, dashboards y tablas de datos.</p>
-              <div class="bd-callout" style="margin-top:10px;text-align:left"><span class="bd-ico">✓</span><span>UI de aplicación, formularios, dashboards, tablas</span></div>
+          <div class="bd-card" style="text-align:center;padding:24px 16px">
+            <div class="bd-stage center" style="gap:8px;padding:16px 0;flex-wrap:wrap">
+              <button class="btn-primary" style="pointer-events:none">Relleno</button>
+              <button class="btn-secondary" style="pointer-events:none">Tonal</button>
+              <button class="btn-tertiary" style="pointer-events:none">Con borde</button>
+              <button class="btn-text" style="pointer-events:none">Texto</button>
+              <button class="icon-btn" style="pointer-events:none" aria-label="ícono"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
             </div>
-
-            <div class="bd-card" style="text-align:center;padding:24px 16px">
-              <div class="bd-stage center" style="gap:8px;padding:16px 0;flex-wrap:wrap">
-                <button class="btn-primary btn-rounded" style="pointer-events:none">Label</button>
-                <button class="btn-secondary btn-rounded" style="pointer-events:none">Label</button>
-                <button class="btn-tertiary btn-rounded" style="pointer-events:none">Label</button>
-              </div>
-              <code class="bd-mono" style="display:block;margin-bottom:8px">.btn-rounded · 999px</code>
-              <p class="bd-sub-title" style="margin-bottom:6px">Redondeado (píldora)</p>
-              <p class="bd-variant-desc" style="font-size:12.5px">Superficies editoriales, de marketing y hero. Transmite amabilidad y expresividad de marca. No mezcles botones redondeados y cuadrados en el mismo grupo de acciones.</p>
-              <div class="bd-callout" style="margin-top:10px;text-align:left"><span class="bd-ico">✓</span><span>CTAs hero, landing pages, onboarding</span></div>
-            </div>
-
-            <div class="bd-card" style="text-align:center;padding:24px 16px">
-              <div class="bd-stage center" style="gap:8px;padding:16px 0;flex-wrap:wrap">
-                <button class="btn-primary" style="border-radius:0;pointer-events:none">Label</button>
-                <button class="btn-tertiary" style="border-radius:0;pointer-events:none">Label</button>
-              </div>
-              <code class="bd-mono" style="display:block;margin-bottom:8px">border-radius: 0</code>
-              <p class="bd-sub-title" style="margin-bottom:6px">Agudo (borde a borde)</p>
-              <p class="bd-variant-desc" style="font-size:12.5px">Botones de ancho completo en layouts mobile-first que abarcan el borde del contenedor. Se aplica solo via estilo inline — no existe clase modificadora. Usar raramente.</p>
-              <div class="bd-callout" style="margin-top:10px;text-align:left"><span class="bd-ico">✓</span><span>CTAs mobile de ancho completo, acciones de bottom sheet</span></div>
-            </div>
+            <code class="bd-mono" style="display:block;margin-bottom:8px">--radius-md · 8px</code>
+            <p class="bd-variant-desc" style="font-size:12.5px">La misma forma en todas las variantes y tamaños. Coincide con la escala de radio de esquina de todo el sistema Embassy — superficies de aplicación, formularios, dashboards y tablas de datos.</p>
           </div>
 
-          <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">⚠</span><span><b>No mezcles formas</b> dentro del mismo grupo de acciones. Si un botón de un par usa <code>.btn-rounded</code>, todos los botones de ese grupo también deben usarlo. Mezclar botones redondeados y cuadrados en la misma fila genera inconsistencia visual.</span></div>
-
-          <!-- Shape × Variant matrix -->
-          <h3 class="bd-sub-title" style="margin-top:28px">Matriz de forma × variante</h3>
-          <div class="bd-shape-matrix">
-            <div class="bd-shape-row">
-              <span class="bd-shape-label">Cuadrado</span>
-              <div class="bd-shape-cells">
-                <button class="btn-primary" style="pointer-events:none">Relleno</button>
-                <button class="btn-secondary" style="pointer-events:none">Tonal</button>
-                <button class="btn-tertiary" style="pointer-events:none">Con borde</button>
-                <button class="btn-text" style="pointer-events:none">Texto</button>
-                <button class="icon-btn" style="pointer-events:none" aria-label="ícono"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-              </div>
-            </div>
-            <div class="bd-shape-row">
-              <span class="bd-shape-label">Redondeado</span>
-              <div class="bd-shape-cells">
-                <button class="btn-primary btn-rounded" style="pointer-events:none">Relleno</button>
-                <button class="btn-secondary btn-rounded" style="pointer-events:none">Tonal</button>
-                <button class="btn-tertiary btn-rounded" style="pointer-events:none">Con borde</button>
-                <button class="btn-text" style="pointer-events:none">Texto</button>
-                <button class="icon-btn btn-rounded" style="pointer-events:none" aria-label="ícono"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-              </div>
-            </div>
-          </div>
+          <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">⚠</span><span><b>No uses forma píldora ni radio 0 en botones.</b> La píldora (<code>--radius-full</code>) es la silueta de chips y badges — un botón píldora se confunde con un chip seleccionado. Si un diseño legacy trae botones píldora o de esquinas rectas, mapealos al botón estándar y reportá la divergencia.</span></div>
         </section>
 
         <!-- ══ 8. MEASUREMENTS ══ -->
@@ -6449,8 +6379,7 @@ body { overflow-x: clip; }
           <h3 class="bd-sub-title" style="margin-top:28px">Especificaciones adicionales</h3>
           <div class="bd-card">
             <div class="bd-spec"><span>Ancho de borde (todas las variantes)</span><b>1px · MD3: 1dp ✓</b></div>
-            <div class="bd-spec"><span>Radio de borde predeterminado (Embassy)</span><b><code>--radius-md</code> · 8px · <span style="color:var(--ds-text-3);font-weight:400">MD3 predeterminado: CornerFull (píldora) ⚑</span></b></div>
-            <div class="bd-spec"><span>Radio de borde píldora (<code>.btn-rounded</code>)</span><b><code>--radius-full</code> · 9999px · Forma predeterminada MD3 ✓</b></div>
+            <div class="bd-spec"><span>Radio de borde (única forma)</span><b><code>--radius-md</code> · 8px · <span style="color:var(--ds-text-3);font-weight:400">MD3 usa CornerFull (píldora) — Embassy diverge a propósito ⚑</span></b></div>
             <div class="bd-spec"><span>Ancho del contorno de foco (Embassy)</span><b>2px solid · <span style="color:var(--ds-text-3);font-weight:400">MD3: 3dp ⚑</span></b></div>
             <div class="bd-spec"><span>Offset del contorno de foco</span><b>2px · MD3: 3dp ⚑</b></div>
             <div class="bd-spec"><span>Expansión de sombra del anillo de foco</span><b>0 0 0 4px (brillo Embassy, sin equivalente MD3)</b></div>
@@ -6653,10 +6582,10 @@ body { overflow-x: clip; }
             <div class="bd-card">
               <p class="bd-eyebrow">Hero / marketing</p>
               <div class="bd-stage center" style="gap:10px">
-                <button class="btn-primary btn-lg btn-rounded">Comenzar</button>
-                <button class="btn-tertiary btn-lg btn-rounded">Saber más</button>
+                <button class="btn-primary btn-lg">Comenzar</button>
+                <button class="btn-tertiary btn-lg">Saber más</button>
               </div>
-              <p class="bd-variant-desc">Usar <code>.btn-lg</code> o <code>.btn-xl</code> + <code>.btn-rounded</code> para superficies editoriales. Reservar solo para CTAs de alto impacto y baja frecuencia.</p>
+              <p class="bd-variant-desc">Usar <code>.btn-lg</code> o <code>.btn-xl</code> para superficies editoriales — la forma no cambia. Reservar solo para CTAs de alto impacto y baja frecuencia.</p>
             </div>
           </div>
         </section>
@@ -11776,7 +11705,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <p>Para el setup completo — estructura de archivos, convenciones de nombrado, plantilla de página base y guía de personalización de tokens — dirigite a la sección <strong>Develop</strong>. Ahí está toda la referencia técnica.</p>
           </div>
           <div style="margin-top:24px;">
-            <button class="btn-primary" onclick="navigate('develop')" style="height:44px;padding:0 24px;border-radius:10px;font-size:14px;">Ver guía técnica en Develop →</button>
+            <button class="btn-primary" onclick="navigate('develop')" style="height:44px;padding:0 24px;font-size:14px;">Ver guía técnica en Develop →</button>
           </div>
         </div>
         <div class="emb-gs-visual-col">
