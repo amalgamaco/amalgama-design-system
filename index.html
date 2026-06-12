@@ -3171,10 +3171,12 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-button" onclick="navigate('c-button')">Buttons</div>
       <div class="ds-nav-item" data-section="c-card" onclick="navigate('c-card')">Card</div>
       <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-basic-card" onclick="navigate('c-basic-card')">Basic Card</div>
         <div class="ds-nav-item" data-section="c-person" onclick="navigate('c-person')">Person Card</div>
         <div class="ds-nav-item" data-section="c-vacancy" onclick="navigate('c-vacancy')">Vacancy Card</div>
         <div class="ds-nav-item" data-section="c-kanban" onclick="navigate('c-kanban')">Kanban Card</div>
         <div class="ds-nav-item" data-section="c-stat-card" onclick="navigate('c-stat-card')">Stat Card</div>
+        <div class="ds-nav-item" data-section="c-nav-card" onclick="navigate('c-nav-card')">Nav Card</div>
       </div>
       <div class="ds-nav-item" data-section="c-carousel" onclick="navigate('c-carousel')">Carousels</div>
       <div class="ds-nav-item" data-section="c-checkbox" onclick="navigate('c-checkbox')">Checkbox</div>
@@ -3187,7 +3189,10 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-loading" onclick="navigate('c-loading')">Loading and progress</div>
       <div class="ds-nav-item" data-section="c-menu" onclick="navigate('c-menu')">Menu</div>
       <div class="ds-nav-item" data-section="c-navigation" onclick="navigate('c-navigation')">Navigation</div>
-      <div class="ds-nav-item" data-section="c-nav-card" onclick="navigate('c-nav-card')">Nav Card</div>
+      <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-nav-drawer" onclick="navigate('c-nav-drawer')">Navigation Drawer</div>
+        <div class="ds-nav-item" data-section="c-nav-bar" onclick="navigate('c-nav-bar')">Navigation Bar</div>
+      </div>
       <div class="ds-nav-item" data-section="c-radio" onclick="navigate('c-radio')">Radio button</div>
       <div class="ds-nav-item" data-section="c-search" onclick="navigate('c-search')">Search</div>
       <div class="ds-nav-item" data-section="c-select" onclick="navigate('c-select')">Select</div>
@@ -4994,11 +4999,11 @@ body { overflow-x: clip; }
       </style>
 
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
 
       <!-- ════════════════ OVERVIEW ════════════════ -->
@@ -5014,6 +5019,17 @@ body { overflow-x: clip; }
             <li><b>Una sola forma:</b> esquinas levemente redondeadas (<code>--radius-md</code> · 8px) — la píldora está reservada a chips y badges</li>
             <li>Mantené las etiquetas concisas y usá sentence case</li>
           </ul>
+
+          <!-- Design-decision callout -->
+          <div class="bd-callout" style="margin-bottom:28px;">
+            <span class="bd-ico">△</span>
+            <div>
+              <strong>Decisiones de diseño respecto a Material Design 3</strong><br>
+              Embassy diverge intencionalmente en dos puntos:<br>
+              <b>Forma:</b> MD3 usa esquinas completamente redondeadas (<code>corner-full</code> — píldora). Embassy usa <code>--radius-md</code> (8&nbsp;px) para reservar la píldora a chips y badges, reforzando la jerarquía visual de la marca.<br>
+              <b>Altura:</b> MD3 define 40&nbsp;px para el tamaño "small" estándar. Embassy usa 36&nbsp;px como predeterminado, con XS (24&nbsp;px), SM (32&nbsp;px), LG (44&nbsp;px) y XL (52&nbsp;px). Son decisiones tipográficas y de densidad de la plataforma, no errores de implementación.
+            </div>
+          </div>
 
           <!-- Button family visual -->
           <div class="bd-family-wrap">
@@ -6347,6 +6363,65 @@ body { overflow-x: clip; }
             </div>
           </div><!-- /text -->
 
+          <!-- ── State layer reference table ── -->
+          <h3 class="docs-sub-title" style="margin-top:40px">Referencia de capas de estado (MD3)</h3>
+          <p style="color:var(--ds-text-2);font-size:13.5px;margin-bottom:16px">Las capas de estado de MD3 son superposiciones de color semitransparente aplicadas sobre el componente. El color de la capa depende de la variante; la opacidad es consistente entre variantes para un mismo estado.</p>
+
+          <div class="ds-table-wrap">
+            <table class="docs-props-table">
+              <thead>
+                <tr>
+                  <th>Estado</th>
+                  <th>Opacidad</th>
+                  <th>Relleno <code>btn-primary</code></th>
+                  <th>Tonal <code>btn-secondary</code></th>
+                  <th>Con borde / Texto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hover</td>
+                  <td><b>8%</b></td>
+                  <td><code>$on-primary</code></td>
+                  <td><code>$on-secondary-container</code></td>
+                  <td><code>$primary</code></td>
+                </tr>
+                <tr>
+                  <td>Enfocado</td>
+                  <td><b>12%</b></td>
+                  <td><code>$on-primary</code></td>
+                  <td><code>$on-secondary-container</code></td>
+                  <td><code>$primary</code></td>
+                </tr>
+                <tr>
+                  <td>Presionado</td>
+                  <td><b>12%</b></td>
+                  <td><code>$on-primary</code></td>
+                  <td><code>$on-secondary-container</code></td>
+                  <td><code>$primary</code></td>
+                </tr>
+                <tr>
+                  <td>Deshabilitado (contenedor)</td>
+                  <td><b>12%</b></td>
+                  <td><code>$on-surface</code></td>
+                  <td><code>$on-surface</code></td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Deshabilitado (etiqueta)</td>
+                  <td><b>38%</b></td>
+                  <td><code>$on-surface</code></td>
+                  <td><code>$on-surface</code></td>
+                  <td><code>$on-surface</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="bd-callout" style="margin-top:12px">
+            <span class="bd-ico">⚑</span>
+            <span><b>Implementación en Embassy:</b> El botón de texto usa <code>color-mix(in srgb, var(--color-primary) 10%, transparent)</code> — alineado al modelo MD3. Los botones Relleno y Tonal usan tokens de hover fijos (<code>--color-primary-hover</code>, <code>--button-secondary-bg-hover</code>) en lugar de superposiciones transparentes. Funcionalmente equivalente; la unificación al modelo MD3 está en el roadmap.</span>
+          </div>
+
         </section>
 
         <!-- ══ 7. SHAPE MORPH ══ -->
@@ -7276,11 +7351,11 @@ export function IconButton({ label, size = 'default', children, className, ...pr
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -7296,23 +7371,6 @@ export function IconButton({ label, size = 'default', children, className, ...pr
             <div class="field-group">
               <label class="field-label">Nombre completo</label>
               <input type="text" class="field-input">
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Todo campo de entrada — input, select, textarea, number, date — con label, hint y error</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Búsqueda — usar <code>search-field</code> (toolbar.css) o <code>search-bar</code> (search.css)</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Cualquier form control legacy — nunca inventar campos custom</li></ul>
             </div>
           </div>
         </section>
@@ -7462,6 +7520,12 @@ export function IconButton({ label, size = 'default', children, className, ...pr
             <tr><td>Grilla de formulario</td><td><code>2 columnas</code>, gap <code>16px 20px</code></td></tr>
           </tbody>
         </table>
+      </section>
+      <section class="docs-section">
+        <div class="bd-callout">
+          <span class="bd-ico">⚑</span>
+          <span><b>Embassy vs Text fields MD3:</b> MD3 define dos variantes: <b>Filled</b> (esquinas <code>corner-extra-small-top</code>: 4dp arriba, 0dp abajo; fondo <code>$surface-container-highest</code>; indicador de foco 1dp→3dp en borde inferior) y <b>Outlined</b> (esquinas <code>corner-extra-small</code>: 4dp todos los lados; borde <code>$outline</code> 1px→3px en foco). Embassy usa <code>--radius-md</code> (8px) para ambas variantes y <code>box-shadow 0 0 0 3px var(--color-focus-ring)</code> — divergencia intencional respecto a los 4dp de MD3 para alinearse con la identidad visual Amalgama, pero funcionalmente equivalente.<br><br><b>Label flotante:</b> MD3 anima el label de <code>body-large</code> (reposo) a <code>body-small</code> (foco/relleno). Embassy no implementa labels flotantes — el label va siempre sobre el campo.<br><br><b>Texto de soporte:</b> MD3 define slot de texto auxiliar bajo el campo (<code>$on-surface-variant</code>) y texto de error (<code>$error</code>). Equivale a <code>.form-hint</code> / <code>.form-error</code> en Embassy.</span>
+        </div>
       </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -7666,11 +7730,11 @@ export { Input }</code></pre>
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -7691,23 +7755,6 @@ export { Input }</code></pre>
                 <option value="3">Opcion 3</option>
               </select>
               <span class="select-caret">▾</span>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Todo campo de entrada — input, select, textarea, number, date — con label, hint y error</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Búsqueda — usar <code>search-field</code> (toolbar.css) o <code>search-bar</code> (search.css)</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Cualquier form control legacy — nunca inventar campos custom</li></ul>
             </div>
           </div>
         </section>
@@ -7993,11 +8040,11 @@ export { Select }</code></pre>
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -8013,23 +8060,6 @@ export { Select }</code></pre>
             <div class="field-group">
               <label class="field-label">Descripcion</label>
               <textarea class="field-input field-textarea" placeholder="Describe los requisitos del puesto..."></textarea>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Todo campo de entrada — input, select, textarea, number, date — con label, hint y error</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Búsqueda — usar <code>search-field</code> (toolbar.css) o <code>search-bar</code> (search.css)</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Cualquier form control legacy — nunca inventar campos custom</li></ul>
             </div>
           </div>
         </section>
@@ -8244,35 +8274,31 @@ export { Textarea }</code></pre>
       <div class="ds-page-tag">Components · Display</div>
       <div class="docs-page-header">
         <h1 class="docs-page-title">Card</h1>
-        <p class="docs-page-desc">Contenedor base para agrupar contenido relacionado.</p>
+        <p class="docs-page-desc">Contenedor base para agrupar contenido relacionado. Seleccioná una variante para ver su documentación completa.</p>
         <div class="ds-card-grid" style="margin:14px 0 4px">
+          <div class="ds-card-link" onclick="navigate('c-basic-card')"><div class="ds-card-icon"><i data-lucide="square"></i></div><div class="ds-card-name">Basic Card</div><div class="ds-card-desc">Contenedor base genérico.</div></div>
           <div class="ds-card-link" onclick="navigate('c-person')"><div class="ds-card-icon"><i data-lucide="user"></i></div><div class="ds-card-name">Person Card</div><div class="ds-card-desc">Persona con avatar, nombre y rol.</div></div>
           <div class="ds-card-link" onclick="navigate('c-vacancy')"><div class="ds-card-icon"><i data-lucide="briefcase"></i></div><div class="ds-card-name">Vacancy Card</div><div class="ds-card-desc">Vacante con estado y asignados.</div></div>
           <div class="ds-card-link" onclick="navigate('c-kanban')"><div class="ds-card-icon"><i data-lucide="trello"></i></div><div class="ds-card-name">Kanban Card</div><div class="ds-card-desc">Tarjeta para tableros Kanban.</div></div>
           <div class="ds-card-link" onclick="navigate('c-stat-card')"><div class="ds-card-icon"><i data-lucide="bar-chart-2"></i></div><div class="ds-card-name">Stat Card</div><div class="ds-card-desc">Métrica o estadística destacada.</div></div>
+          <div class="ds-card-link" onclick="navigate('c-nav-card')"><div class="ds-card-icon"><i data-lucide="layout-grid"></i></div><div class="ds-card-name">Nav Card</div><div class="ds-card-desc">Tarjeta de navegación con visual.</div></div>
         </div>
-  
-      
-      
+      </div>
+    </section>
 
-        
-        
-
-        
-        
-
-        
-        
-
-      
-
-      
+    <!-- ═══════════ COMPONENT: BASIC CARD ═══════════ -->
+    <section class="ds-section" id="s-c-basic-card">
+      <div class="ds-page-tag">Components · Display</div>
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Basic Card</h1>
+        <p class="docs-page-desc">Contenedor base para agrupar contenido relacionado.</p>
+      </div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -8288,86 +8314,60 @@ export { Textarea }</code></pre>
             <div class="card">Contenido de la tarjeta con padding y borde.</div>
           </div>
         </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Contenedor genérico de contenido agrupado sobre superficie</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Métricas — usar <code>stat-card</code></li><li>Personas — usar <code>person-card</code></li><li>Vacantes — usar <code>vacancy-card</code></li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Paneles/boxes legacy con borde o sombra</li></ul>
-            </div>
-          </div>
-        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
-<div class="docs-section">
-        <h2 class="docs-section-title">Card basica</h2>
-        <div class="docs-preview">
-          <div class="card">Contenido de la tarjeta con padding y borde.</div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Card básica</h2>
+          <div class="docs-preview">
+            <div class="card">Contenido de la tarjeta con padding y borde.</div>
+          </div>
         </div>
-
-      <!-- Form Card -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Form Card</h2>
-        <div class="docs-preview column">
-          <div class="form-card">
-            <div class="form-card-title">Informacion general</div>
-            <div class="form-card-desc">Completa los datos basicos de la vacante.</div>
-            <div class="field-group">
-              <label class="field-label">Titulo del puesto</label>
-              <input class="field-input" placeholder="Ej: Disenador UX Senior">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Form Card</h2>
+          <div class="docs-preview column">
+            <div class="form-card">
+              <div class="form-card-title">Informacion general</div>
+              <div class="form-card-desc">Completa los datos basicos de la vacante.</div>
+              <div class="field-group">
+                <label class="field-label">Titulo del puesto</label>
+                <input class="field-input" placeholder="Ej: Disenador UX Senior">
+              </div>
             </div>
           </div>
         </div>
-
-      </div>
-      </div>
-
-      <!-- Estados -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Estados</h2>
-        <table class="ds-table">
-          <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
-          <tbody>
-            <tr><td>Reposo</td><td>Único estado: borde de 1px, fondo de superficie — <code>card.css</code> no define hover, focus ni active</td><td><code>--border</code> + <code>--card-bg</code> + <code>--radius</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Clases y tokens -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Clases y tokens</h2>
-        <table class="ds-table">
-          <thead><tr><th>Clase</th><th>Token</th><th>Uso</th></tr></thead>
-          <tbody>
-            <tr><td><code>.card</code></td><td><code>--card-bg</code>, <code>--border</code>, <code>--radius</code></td><td>Contenedor genérico de contenido agrupado</td></tr>
-            <tr><td><code>.form-card</code></td><td><code>--card-bg</code>, <code>--border</code>, <code>--radius</code></td><td>Tarjeta de formulario (form.css), agrupa campos</td></tr>
-            <tr><td><code>.form-card-title</code></td><td><code>--font-heading</code>, <code>--font-size-heading-xs</code></td><td>Título de la tarjeta de formulario</td></tr>
-            <tr><td><code>.form-card-desc</code></td><td><code>--font-size-label</code>, <code>--text-secondary</code></td><td>Descripción bajo el título; máx. 680px</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Medidas -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Medidas</h2>
-        <table class="ds-table">
-          <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
-          <tbody>
-            <tr><td>Padding de <code>.card</code></td><td><code>16px 20px</code></td></tr>
-            <tr><td>Padding de <code>.form-card</code></td><td><code>24px 32px</code>, margen inferior <code>16px</code></td></tr>
-            <tr><td>Borde</td><td><code>1px solid var(--border)</code></td></tr>
-            <tr><td>Radio</td><td><code>var(--radius)</code></td></tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Estados</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Reposo</td><td>Único estado: borde de 1px, fondo de superficie — <code>card.css</code> no define hover, focus ni active</td><td><code>--border</code> + <code>--card-bg</code> + <code>--radius</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Clases y tokens</h2>
+          <table class="ds-table">
+            <thead><tr><th>Clase</th><th>Token</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td><code>.card</code></td><td><code>--card-bg</code>, <code>--border</code>, <code>--radius</code></td><td>Contenedor genérico de contenido agrupado</td></tr>
+              <tr><td><code>.form-card</code></td><td><code>--card-bg</code>, <code>--border</code>, <code>--radius</code></td><td>Tarjeta de formulario (form.css), agrupa campos</td></tr>
+              <tr><td><code>.form-card-title</code></td><td><code>--font-heading</code>, <code>--font-size-heading-xs</code></td><td>Título de la tarjeta de formulario</td></tr>
+              <tr><td><code>.form-card-desc</code></td><td><code>--font-size-label</code>, <code>--text-secondary</code></td><td>Descripción bajo el título; máx. 680px</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Padding de <code>.card</code></td><td><code>16px 20px</code></td></tr>
+              <tr><td>Padding de <code>.form-card</code></td><td><code>24px 32px</code>, margen inferior <code>16px</code></td></tr>
+              <tr><td>Borde</td><td><code>1px solid var(--border)</code></td></tr>
+              <tr><td>Radio</td><td><code>var(--radius)</code></td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
         <div class="docs-section">
@@ -8425,20 +8425,20 @@ export { Textarea }</code></pre>
           <h2 class="docs-section-title">Instalación</h2>
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3>Dependencias</h3>
-<div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
+          <div class="docs-code-wrapper">
+            <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+            <button class="docs-copy-btn">Copiar</button>
+          </div>
           <h3>CSS requerido</h3>
-<div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>css/variables.css
+          <div class="docs-code-wrapper">
+            <pre class="docs-code standalone"><code>css/variables.css
 css/components/card.css
 css/components/form.css</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
+            <button class="docs-copy-btn">Copiar</button>
+          </div>
           <h3>Ejemplo de uso</h3>
-<div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Card, FormCard, FormCardTitle, FormCardDescription } from &quot;@/components/ui/card&quot;
+          <div class="docs-code-wrapper">
+            <pre class="docs-code standalone"><code>import { Card, FormCard, FormCardTitle, FormCardDescription } from "@/components/ui/card"
 
 &lt;Card&gt;Contenido simple&lt;/Card&gt;
 
@@ -8447,64 +8447,63 @@ css/components/form.css</code></pre>
   &lt;FormCardDescription&gt;Completa los datos del puesto.&lt;/FormCardDescription&gt;
   {/* form fields here */}
 &lt;/FormCard&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
+            <button class="docs-copy-btn">Copiar</button>
+          </div>
         </div>
-        </div>
-
-<div class="docs-section">
-        <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>card.tsx</code> a tu proyecto en <code>components/ui/card.tsx</code></p>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
+        <div class="docs-section">
+          <h2 class="docs-section-title">Componente React</h2>
+          <p class="docs-section-desc">Copia <code>card.tsx</code> a tu proyecto en <code>components/ui/card.tsx</code></p>
+          <div class="docs-code-wrapper">
+            <pre class="docs-code standalone"><code>import * as React from "react"
+import { cn } from "@/lib/utils"
 
 const Card = React.forwardRef&lt;
   HTMLDivElement,
   React.HTMLAttributes&lt;HTMLDivElement&gt;
 &gt;(({ className, ...props }, ref) =&gt; (
-  &lt;div ref={ref} className={cn(&quot;card&quot;, className)} {...props} /&gt;
+  &lt;div ref={ref} className={cn("card", className)} {...props} /&gt;
 ))
-Card.displayName = &quot;Card&quot;
+Card.displayName = "Card"
 
 const FormCard = React.forwardRef&lt;
   HTMLDivElement,
   React.HTMLAttributes&lt;HTMLDivElement&gt;
 &gt;(({ className, ...props }, ref) =&gt; (
-  &lt;div ref={ref} className={cn(&quot;form-card&quot;, className)} {...props} /&gt;
+  &lt;div ref={ref} className={cn("form-card", className)} {...props} /&gt;
 ))
-FormCard.displayName = &quot;FormCard&quot;
+FormCard.displayName = "FormCard"
 
 const FormCardTitle = React.forwardRef&lt;
   HTMLDivElement,
   React.HTMLAttributes&lt;HTMLDivElement&gt;
 &gt;(({ className, ...props }, ref) =&gt; (
-  &lt;div ref={ref} className={cn(&quot;form-card-title&quot;, className)} {...props} /&gt;
+  &lt;div ref={ref} className={cn("form-card-title", className)} {...props} /&gt;
 ))
-FormCardTitle.displayName = &quot;FormCardTitle&quot;
+FormCardTitle.displayName = "FormCardTitle"
 
 const FormCardDescription = React.forwardRef&lt;
   HTMLParagraphElement,
   React.HTMLAttributes&lt;HTMLParagraphElement&gt;
 &gt;(({ className, ...props }, ref) =&gt; (
-  &lt;p ref={ref} className={cn(&quot;form-card-desc&quot;, className)} {...props} /&gt;
+  &lt;p ref={ref} className={cn("form-card-desc", className)} {...props} /&gt;
 ))
-FormCardDescription.displayName = &quot;FormCardDescription&quot;
+FormCardDescription.displayName = "FormCardDescription"
 
 export { Card, FormCard, FormCardTitle, FormCardDescription }</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
+            <button class="docs-copy-btn">Copiar</button>
+          </div>
         </div>
-      </div>
-            <div class="docs-section">
-        <h2 class="docs-section-title">Uso</h2>
-        <p class="docs-section-desc">Snippets de código para implementar cada variante.</p>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Card basica</h3>
-<div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;div class="card"&gt;Contenido de la tarjeta con padding y borde.&lt;/div&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Form Card</h3>
-<div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;div class="form-card"&gt;
+        <div class="docs-section">
+          <h2 class="docs-section-title">Uso</h2>
+          <p class="docs-section-desc">Snippets de código para implementar cada variante.</p>
+          <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Card básica</h3>
+          <div class="docs-code-wrapper">
+            <pre class="docs-code"><code>&lt;div class="card"&gt;Contenido de la tarjeta con padding y borde.&lt;/div&gt;</code></pre>
+            <button class="docs-copy-btn">Copiar</button>
+          </div>
+          <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Form Card</h3>
+          <div class="docs-code-wrapper">
+            <pre class="docs-code"><code>&lt;div class="form-card"&gt;
   &lt;div class="form-card-title"&gt;Informacion general&lt;/div&gt;
   &lt;div class="form-card-desc"&gt;Completa los datos basicos de la vacante.&lt;/div&gt;
   &lt;div class="field-group"&gt;
@@ -8512,10 +8511,9 @@ export { Card, FormCard, FormCardTitle, FormCardDescription }</code></pre>
     &lt;input class="field-input" placeholder="Ej: Disenador UX Senior"&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
+            <button class="docs-copy-btn">Copiar</button>
+          </div>
         </div>
-      </div>
-</div>
       </div>
     </section>
 
@@ -8541,11 +8539,11 @@ export { Card, FormCard, FormCardTitle, FormCardDescription }</code></pre>
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -8566,23 +8564,6 @@ export { Card, FormCard, FormCardTitle, FormCardDescription }</code></pre>
             <span class="badge badge-warning">Pendiente</span>
             <span class="badge badge-tertiary">Nueva</span>
             <span class="badge badge-info">Información</span>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Estado o categoría de SOLO LECTURA de un ítem (tablas, cards, listas)</li><li>Todo label categórico debe ser badge — nunca texto plano coloreado</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Si es interactivo/filtrable — usar Chip</li><li>Si es una acción — usar Button</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Labels de texto plano con color</li><li>Pills custom</li><li>Tags legacy</li></ul>
-            </div>
           </div>
         </section>
       </div>
@@ -8856,11 +8837,11 @@ export { Badge, badgeVariants }</code></pre>
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -8881,23 +8862,6 @@ export { Badge, badgeVariants }</code></pre>
                 <tr><td>Ana Martinez</td><td>PM</td><td>Producto</td><td><span class="badge badge-warning">Pendiente</span></td></tr>
               </tbody>
             </table>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Datos tabulares</li><li>Filas navegables con <code>tr.clickable</code></li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Layouts — usar grid</li><li>Tableros de flujo — usar Kanban</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Tablas legacy</li></ul>
-            </div>
           </div>
         </section>
       </div>
@@ -9175,11 +9139,11 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -9198,23 +9162,6 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
               <div class="tab">Proceso</div>
             </div>
             <div class="tab-panel active" style="padding:16px 0;font-size:14px;color:var(--text-secondary)">Contenido de la pestana General. Aqui se muestra la informacion basica de la vacante.</div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Alternar vistas dentro del MISMO contexto/página</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Navegación entre páginas — usar sidebar (layout.css)</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Tab bars legacy</li></ul>
-            </div>
           </div>
         </section>
       </div>
@@ -9274,6 +9221,12 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
           </tbody>
         </table>
       </div>
+      <section class="docs-section">
+        <div class="bd-callout">
+          <span class="bd-ico">⚑</span>
+          <span><b>Embassy vs Tabs MD3:</b> MD3 define dos variantes. <b>Primary tabs:</b> indicador de 3dp con esquinas redondeadas en el extremo superior (<code>corner-full</code>), color activo <code>$primary</code>, ícono opcional de 24dp alineado sobre la etiqueta, altura 48dp. <b>Secondary tabs:</b> indicador plano de 2dp, color activo <code>$on-surface</code>, sin ícono, altura 48dp. Embassy implementa un único estilo con indicador de 2dp (<code>border-bottom: 2px</code>) y color activo vía <code>--color-primary</code> — coincide con Secondary tabs en grosor de indicador y con Primary en color. La diferenciación de variantes Primary/Secondary está en roadmap.</span>
+        </div>
+      </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
         <div class="docs-section">
@@ -9484,11 +9437,11 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -9514,23 +9467,6 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
                 <button class="btn-ghost">Cancelar</button>
                 <button class="btn-primary">Confirmar</button>
               </div>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Confirmaciones y tareas cortas que bloquean el contexto actual</li><li>Decisiones que el usuario debe resolver antes de continuar</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Formularios largos — página dedicada con <code>create-form</code></li><li>Feedback pasivo post-acción — usar Toast</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Dialogs legacy</li><li>Popups</li><li>Lightboxes</li></ul>
             </div>
           </div>
         </section>
@@ -9615,6 +9551,17 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
               <tr><td>Animaciones</td><td><code>fadeIn</code> 150ms (overlay) / <code>slideInUp</code> 200ms (modal)</td></tr>
             </tbody>
           </table>
+        </section>
+        <section class="docs-section">
+          <div class="bd-callout" style="margin-bottom:0">
+            <span class="bd-ico">⚑</span>
+            <span><b>Relación con Material Design 3:</b> MD3 define dos variantes de Dialog:<br>
+            <b>Basic dialog</b> (flotante, esquinas <b>28dp</b>, ancho 280–560dp, centrado sobre scrim) — la variante que implementa Embassy. <b>Full-screen dialog</b> (0dp corners, header y barra de acciones de 56dp, solo en pantallas compactas/mobile; revierte automáticamente a Basic en breakpoints medium/expanded).<br><br>
+            <b>Reglas de acciones:</b> máximo 2 botones. La acción confirmatoria va siempre al extremo trailing; la acción de descarte nunca se deshabilita. Evitar una tercera acción (e.g. "Saber más") — si es necesaria, usar un enlace dentro del body.<br><br>
+            <b>Scroll:</b> el título y las acciones quedan fijos; solo <code>modal-body</code> hace scroll internamente. El dialog no scrollea con el fondo.<br><br>
+            <b>Focus trap:</b> el dialog debe retener el foco hasta que el usuario tome una acción — requerido para accesibilidad con teclado y lectores de pantalla.<br><br>
+            <b>Errores:</b> los errores de campo van inline dentro del dialog; los errores de red (ej. fallo al guardar) abren un nuevo Basic dialog encima del actual.</span>
+          </div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -9862,11 +9809,11 @@ export { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter }</c
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -9894,23 +9841,6 @@ export { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter }</c
               <span class="toast-icon" style="color:var(--interactive)"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span>
               <span class="toast-message">Informacion actualizada</span>
               <button class="toast-close"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Feedback pasivo post-acción (success/error/info)</li><li>Mensajes autodescartables que no interrumpen el flujo</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Confirmaciones que requieren decisión del usuario — usar Modal</li><li>Errores de validación de formularios — mostrarlos inline en el campo</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Alerts legacy</li><li>Snackbars legacy</li></ul>
             </div>
           </div>
         </section>
@@ -9995,6 +9925,12 @@ export { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter }</c
               <tr><td>Animación</td><td><code>slideInRight</code> 250ms ease</td></tr>
             </tbody>
           </table>
+        </section>
+        <section class="docs-section">
+          <div class="bd-callout">
+            <span class="bd-ico">⚑</span>
+            <span><b>Embassy Toast vs Snackbar MD3:</b> Divergencia intencional en posición y superficie. <b>MD3 Snackbar:</b> posicionado en el borde inferior de la pantalla (<code>bottom: 8–12dp</code>), fondo <code>$inverse-surface</code> (superficie oscura en light mode), texto <code>$inverse-on-surface</code>, acción <code>$inverse-primary</code>, altura 48dp (1 línea) / 68dp (2 líneas), esquinas 4dp, elevación nivel 3, máximo 1 acción opcional. <b>Embassy Toast:</b> posicionado top-right (<code>position: fixed; top: 24px; right: 24px</code>), fondo <code>--card-bg</code> (superficie estándar), borde de estado 3px a la izquierda como semáforo visual por tipo (success/error/warning/info), animación <code>slideInRight</code>. La posición top-right es deliberada: se alinea mejor con patrones de escritorio y dashboards donde el usuario interactúa con contenido en el centro de la pantalla.</span>
+          </div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -10205,11 +10141,11 @@ export { Toast, ToastContainer, toastVariants }</code></pre>
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -10230,23 +10166,6 @@ export { Toast, ToastContainer, toastVariants }</code></pre>
               <div style="margin-top:16px"></div>
               <div class="skeleton skeleton-card"></div>
               <div class="skeleton skeleton-card"></div>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Carga de contenido con estructura conocida, mientras llega la data</li><li>Listas, tablas y cards que tardan más de unos cientos de ms</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Estados vacíos — usar Empty State</li><li>No usar spinners ad-hoc en su lugar</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Spinners custom</li><li>Loaders custom</li></ul>
             </div>
           </div>
         </section>
@@ -10461,11 +10380,11 @@ export { Skeleton, skeletonVariants }</code></pre>
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -10483,23 +10402,6 @@ export { Skeleton, skeletonVariants }</code></pre>
               <div class="empty-state-title">Sin vacantes</div>
               <div class="empty-state-desc">Aun no has creado ninguna vacante. Crea tu primera vacante para empezar a recibir candidatos.</div>
               <button class="btn-primary">Crear vacante</button>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Listas, tablas o búsquedas sin resultados</li><li>Vistas sin datos aún (primer uso)</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Features en construcción — usar Placeholder</li><li>Carga en progreso — usar Skeleton</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Textos sueltos "no hay datos"</li></ul>
             </div>
           </div>
         </section>
@@ -10710,11 +10612,11 @@ export { EmptyState }</code></pre>
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -10743,23 +10645,6 @@ export { EmptyState }</code></pre>
                 <div class="stat-value">8</div>
                 <div class="stat-change text-muted">Sin cambios</div>
               </div>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Métricas numéricas con label y variación</li><li>KPIs en dashboards y reportes</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Contenido no numérico — usar Card</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Widgets de métricas legacy</li></ul>
             </div>
           </div>
         </section>
@@ -10983,63 +10868,69 @@ export { StatsGrid, StatCard }</code></pre>
     </section>
 
     <!-- ═══════════ COMPONENT: NAVIGATION ═══════════ -->
+    <!-- ═══════════ COMPONENT: NAVIGATION (landing) ═══════════ -->
     <section class="ds-section" id="s-c-navigation">
       <div class="ds-page-tag">Components · Navigation</div>
-      <h1>Sidebar Nav</h1>
-      <p>Items de navegacion para el sidebar de la aplicacion.</p>
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Navigation</h1>
+        <p class="docs-page-desc">Patrones de navegación principal de la aplicación. Seleccioná una variante para ver su documentación completa.</p>
+        <div class="ds-card-grid" style="margin:14px 0 4px">
+          <div class="ds-card-link" onclick="navigate('c-nav-drawer')"><div class="ds-card-icon"><i data-lucide="panel-left"></i></div><div class="ds-card-name">Navigation Drawer</div><div class="ds-card-desc">Sidebar lateral fijo con ítems y grupos.</div></div>
+          <div class="ds-card-link" onclick="navigate('c-nav-bar')"><div class="ds-card-icon"><i data-lucide="layout-template"></i></div><div class="ds-card-name">Navigation Bar</div><div class="ds-card-desc">Barra inferior para navegar entre 3–5 destinos.</div></div>
+        </div>
+      </div>
+    </section>
 
-      <!-- ══ Component Tabs ══ -->
+    <!-- ═══════════ COMPONENT: NAVIGATION DRAWER ═══════════ -->
+    <section class="ds-section" id="s-c-nav-drawer">
+      <div class="ds-page-tag">Components · Navigation</div>
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Navigation Drawer</h1>
+        <p class="docs-page-desc">Panel lateral persistente de 220 px que organiza la navegación principal en ítems y grupos. Parte del shell de la aplicación.</p>
+      </div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <p class="ds-p">El Navigation Drawer es el panel lateral deslizable de 220 px que contiene la navegación contextual. Se implementa como <code>ds-sidebar-drawer</code> adosado al rail fijo de 72 px (<code>ds-sidebar-rail</code>). Los destinos se organizan en ítems (<code>ds-nav-item</code>) bajo títulos de sección (<code>ds-drawer-section-title</code>), con soporte para sub-grupos (<code>ds-nav-sub</code>) e ítems sin grupo (<code>ds-nav-solo</code>).</p>
           <ul>
-            <li><b>Anatomía:</b> ítems <code>nav-item</code> con ícono de 16px, agrupados bajo <code>nav-section-label</code>; <code>nav-badge</code> para contadores y <code>nav-sub-items</code> para sub-niveles.</li>
-            <li><b>Estados propios:</b> hover (fondo de página) y <code>.active</code> (fondo y texto interactivos, peso 500) sincronizado con la ruta actual.</li>
-            <li><b>Parte del shell:</b> vive dentro del <code>.sidebar</code> fijo de 220px (<code>--sidebar-width</code>) definido en <code>layout.css</code> — no es un componente suelto.</li>
-            <li><b>Sin wrapper React:</b> el shell se consume como markup HTML + <code>layout.css</code>.</li>
-            <li><b>Regla clave:</b> solo para apps con navegación persistente; el patrón mobile del shell es una decisión de diseño pendiente — no improvisar off-canvas.</li>
+            <li><b>Anatomía:</b> ítems <code>ds-nav-item</code> con ícono de 14 px y texto de 13 px, agrupados bajo <code>ds-drawer-section-title</code>.</li>
+            <li><b>Estados:</b> hover y <code>.active</code> usan el mismo fondo <code>--ds-accent-bg</code> y texto <code>--ds-accent</code>; el estado activo añade <code>font-weight: 600</code>.</li>
+            <li><b>Shell:</b> vive dentro del <code>ds-sidebar-drawer</code> de 220 px con fondo <code>--ds-sidebar-bg</code> (<code>--md-surface-container</code>), deslizando sobre el rail de 72 px.</li>
+            <li><b>Sin wrapper React:</b> se consume como markup HTML puro.</li>
           </ul>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div style="width:220px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:8px;overflow:hidden">
-              <div class="nav-section-label">Reclutamiento</div>
-              <div class="nav-item active">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                Dashboard
+            <div style="width:220px;background:var(--ds-sidebar-bg);border:1px solid var(--ds-sidebar-border);border-radius:8px;overflow:hidden">
+              <div class="ds-drawer-section-title">Reclutamiento</div>
+              <div class="ds-nav" style="padding:4px 8px 8px">
+                <div class="ds-nav-item active">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                  Dashboard
+                </div>
+                <div class="ds-nav-item">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                  Vacantes
+                  <span style="margin-left:auto;font-size:11px;font-weight:600;background:var(--ds-accent-bg);color:var(--ds-accent);padding:1px 7px;border-radius:999px">12</span>
+                </div>
+                <div class="ds-nav-item">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  Candidatos
+                </div>
               </div>
-              <div class="nav-item">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                Vacantes
-                <span class="nav-badge">12</span>
+              <div class="ds-drawer-section-title">Organización</div>
+              <div class="ds-nav" style="padding:4px 8px 8px">
+                <div class="ds-nav-item">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  People
+                </div>
               </div>
-              <div class="nav-item">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Candidatos
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Shell de aplicación completo — sidebar + topbar + avatar</li><li>Apps con navegación persistente</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Páginas standalone (auth, landing) — no cargar <code>layout.css</code></li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Nav bars legacy</li><li>Sidebars legacy</li></ul>
             </div>
           </div>
         </section>
@@ -11048,25 +10939,29 @@ export { StatsGrid, StatCard }</code></pre>
         <section class="docs-section">
           <h2 class="docs-section-title">Nav Items</h2>
           <div class="docs-preview">
-            <div style="width:220px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:8px;overflow:hidden">
-              <div class="nav-section-label">Reclutamiento</div>
-              <div class="nav-item active">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                Dashboard
+            <div style="width:220px;background:var(--ds-sidebar-bg);border:1px solid var(--ds-sidebar-border);border-radius:8px;overflow:hidden">
+              <div class="ds-drawer-section-title">Reclutamiento</div>
+              <div class="ds-nav" style="padding:4px 8px 8px">
+                <div class="ds-nav-item active">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                  Dashboard
+                </div>
+                <div class="ds-nav-item">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+                  Vacantes
+                  <span style="margin-left:auto;font-size:11px;font-weight:600;background:var(--ds-accent-bg);color:var(--ds-accent);padding:1px 7px;border-radius:999px">12</span>
+                </div>
+                <div class="ds-nav-item">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  Candidatos
+                </div>
               </div>
-              <div class="nav-item">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                Vacantes
-                <span class="nav-badge">12</span>
-              </div>
-              <div class="nav-item">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                Candidatos
-              </div>
-              <div class="nav-section-label">Organizacion</div>
-              <div class="nav-item">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                People
+              <div class="ds-drawer-section-title">Organización</div>
+              <div class="ds-nav" style="padding:4px 8px 8px">
+                <div class="ds-nav-item">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  People
+                </div>
               </div>
             </div>
           </div>
@@ -11076,9 +10971,9 @@ export { StatsGrid, StatCard }</code></pre>
           <table class="ds-table">
             <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
             <tbody>
-              <tr><td><code>.nav-item</code> hover</td><td>Fondo de página y texto primario, transición rápida</td><td><code>--bg</code>, <code>--text-primary</code>, <code>--duration-fast</code></td></tr>
-              <tr><td><code>.nav-item.active</code></td><td>Fondo interactivo claro, texto e ícono interactivos, peso 500</td><td><code>--interactive-light</code>, <code>--interactive</code></td></tr>
-              <tr><td><code>.sidebar-search</code> hover</td><td>Borde más marcado</td><td><code>--neutral-200</code></td></tr>
+              <tr><td><code>.ds-nav-item</code> hover</td><td>Fondo acento claro, texto acento, transición 0.12s</td><td><code>--ds-accent-bg</code>, <code>--ds-accent</code></td></tr>
+              <tr><td><code>.ds-nav-item.active</code></td><td>Mismo fondo acento, texto acento, peso 600</td><td><code>--ds-accent-bg</code>, <code>--ds-accent</code>, <code>font-weight: 600</code></td></tr>
+              <tr><td><code>.ds-rail-btn</code> hover/active</td><td>Color acento; pill indicator (44×28px) con fondo acento claro</td><td><code>--ds-accent</code>, <code>--ds-accent-bg</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -11087,14 +10982,13 @@ export { StatsGrid, StatCard }</code></pre>
           <table class="ds-table">
             <thead><tr><th>Clase</th><th>Token</th><th>Uso</th></tr></thead>
             <tbody>
-              <tr><td><code>.sidebar</code></td><td><code>--sidebar-width</code>, <code>--sidebar-bg</code>, <code>--border</code></td><td>Contenedor fijo del shell (z-index 10)</td></tr>
-              <tr><td><code>.sidebar-logo</code></td><td><code>--topbar-height</code>, <code>--font-heading</code>, <code>--font-size-heading-xs</code></td><td>Logo alineado con la altura del topbar</td></tr>
-              <tr><td><code>.sidebar-search</code></td><td><code>--bg</code>, <code>--border</code>, <code>--radius-md</code>, <code>--font-size-label</code></td><td>Acceso a búsqueda con shortcut en <code>--font-mono</code></td></tr>
-              <tr><td><code>.nav-section-label</code></td><td><code>--text-muted</code></td><td>Etiqueta de grupo en mayúsculas</td></tr>
-              <tr><td><code>.nav-item</code></td><td><code>--radius-md</code>, <code>--text-secondary</code>, <code>--font-size-body-md</code></td><td>Ítem de navegación con ícono</td></tr>
-              <tr><td><code>.nav-badge</code></td><td><code>--interactive-light</code>, <code>--interactive</code>, <code>--radius-full</code></td><td>Contador a la derecha del ítem</td></tr>
-              <tr><td><code>.nav-sub-items</code></td><td><code>--font-size-label</code></td><td>Sub-ítems indentados</td></tr>
-              <tr><td><code>.sidebar-footer</code></td><td><code>--border</code></td><td>Bloque inferior con borde superior</td></tr>
+              <tr><td><code>.ds-sidebar-drawer</code></td><td><code>--ds-sidebar-bg</code>, <code>--ds-sidebar-border</code></td><td>Panel de 220 px que desliza sobre el rail; <code>box-shadow</code> lateral</td></tr>
+              <tr><td><code>.ds-drawer-section-title</code></td><td><code>--ds-text-3</code>, <code>--ds-sidebar-border</code></td><td>Encabezado de sección — 10 px uppercase, borde inferior</td></tr>
+              <tr><td><code>.ds-nav</code></td><td>—</td><td>Contenedor de ítems; <code>padding: 8px 8px 24px</code></td></tr>
+              <tr><td><code>.ds-nav-item</code></td><td><code>--ds-text-2</code>, <code>--ds-accent-bg</code>, <code>--ds-accent</code></td><td>Ítem con ícono de 14 px; 20 px de sangría izquierda; hover y active idénticos en fondo/color</td></tr>
+              <tr><td><code>.ds-nav-solo</code></td><td><code>--ds-text-2</code>, <code>--ds-accent-bg</code>, <code>--ds-accent</code></td><td>Ítem sin grupo; padding sin sangría adicional (<code>6px 12px</code>)</td></tr>
+              <tr><td><code>.ds-nav-sub</code></td><td>—</td><td>Contenedor semántico de sub-ítems sin estilos propios</td></tr>
+              <tr><td><code>.ds-nav-group-label</code></td><td><code>--ds-text-3</code></td><td>Etiqueta de grupo colapsable con chevron; 10 px uppercase</td></tr>
             </tbody>
           </table>
         </section>
@@ -11103,14 +10997,26 @@ export { StatsGrid, StatCard }</code></pre>
           <table class="ds-table">
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
-              <tr><td>Ancho del sidebar</td><td><code>var(--sidebar-width)</code> = 220px, <code>position: fixed</code>, z-index <code>10</code></td></tr>
-              <tr><td>Altura del logo</td><td><code>var(--topbar-height)</code> = 56px</td></tr>
-              <tr><td>Padding del ítem</td><td><code>8px 12px</code>, gap <code>10px</code>, ícono <code>16×16px</code></td></tr>
-              <tr><td>Sub-ítems</td><td><code>padding-left: 20px</code> en el grupo; ítem <code>6px 12px</code></td></tr>
-              <tr><td>Section label</td><td><code>10px</code> uppercase, letter-spacing <code>.8px</code>, padding <code>16px 12px 6px</code></td></tr>
-              <tr><td>Nav badge</td><td><code>11px</code> peso 600, padding <code>1px 7px</code>, radio <code>var(--radius-full)</code></td></tr>
+              <tr><td>Ancho del drawer</td><td><code>220 px</code>, <code>position: absolute</code> a 72 px del rail; deslizamiento con <code>transform</code></td></tr>
+              <tr><td>Ancho del rail</td><td><code>72 px</code>, siempre visible</td></tr>
+              <tr><td>Encabezado del drawer</td><td><code>56 px</code> de altura; padding <code>14px 16px 10px</code></td></tr>
+              <tr><td>Padding de ítem (<code>.ds-nav-item</code>)</td><td><code>6px 12px 6px 20px</code>, gap <code>8px</code>, ícono <code>14×14 px</code>, font-size <code>13px</code></td></tr>
+              <tr><td>Padding de ítem solo (<code>.ds-nav-solo</code>)</td><td><code>6px 12px</code>, gap <code>8px</code></td></tr>
+              <tr><td>Radio de ítem</td><td><code>8px</code></td></tr>
+              <tr><td>Section label</td><td><code>10px</code> uppercase, letter-spacing <code>.9px</code>, padding <code>14px 16px 10px</code></td></tr>
             </tbody>
           </table>
+        </section>
+        <section class="docs-section">
+          <div class="bd-callout" style="margin-bottom:0">
+            <span class="bd-ico">⚑</span>
+            <span><b>Embassy vs Navigation Drawer MD3:</b> Embassy diverge intencionalmente en cuatro puntos:<br>
+            <b>Ancho:</b> MD3 = 280dp; Embassy = 220px — más compacto para UI de producto densa con sidebar siempre visible.<br>
+            <b>Ícono:</b> MD3 = 24dp; Embassy = 14px — decisión de densidad de plataforma, coherente con la escala visual del DS.<br>
+            <b>Padding de ítem:</b> MD3 = 28dp horizontal; Embassy = 20px izquierda / 12px derecha — misma razón de densidad.<br>
+            <b>Indicador activo:</b> MD3 usa una píldora completamente redondeada con fondo <code>$secondary-container</code> y contenido <code>$on-secondary-container</code>; Embassy usa <code>--ds-accent-bg</code> con <code>border-radius: 8px</code> — alineado con el radio del sistema en lugar del corner-full de MD3.<br>
+            <b>Variante modal:</b> MD3 define Standard (drawer persistente, sin scrim) y Modal (con scrim, bloquea el fondo, mobile). Embassy solo implementa la variante Standard. La variante Modal está en el roadmap.</span>
+          </div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -11119,11 +11025,21 @@ export { StatsGrid, StatCard }</code></pre>
           <div class="ds-guideline-grid">
             <div class="ds-guideline-card">
               <h3>Usar cuando</h3>
-              <ul><li>Navegación principal del sidebar de la aplicación</li><li>Secciones que requieren sub-ítems agrupados por categoría</li><li>Contextos donde el usuario necesita saber en todo momento dónde está</li></ul>
+              <ul>
+                <li>La aplicación tiene 5 o más destinos de nivel superior</li>
+                <li>El usuario necesita saber en todo momento dónde está</li>
+                <li>La jerarquía de navegación tiene sub-secciones agrupables</li>
+                <li>El contexto es desktop o web app con pantalla ancha (≥ 1024 px)</li>
+              </ul>
             </div>
             <div class="ds-guideline-card">
               <h3>Evitar cuando</h3>
-              <ul><li>Más de 3 niveles de jerarquía en el sidebar — simplificar la arquitectura de información</li><li>Como navegación de página (tabs, breadcrumbs) — usar los componentes específicos para eso</li></ul>
+              <ul>
+                <li>La app tiene 4 o menos destinos sin sub-secciones — considerar Navigation Bar</li>
+                <li>El espacio horizontal es limitado (mobile first sin adaptar el shell)</li>
+                <li>Se usa como navegación de página (tabs, breadcrumbs) — usar Tabs</li>
+                <li>La jerarquía supera 3 niveles — simplificar la arquitectura de información</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -11132,11 +11048,21 @@ export { StatsGrid, StatCard }</code></pre>
           <div class="ds-guideline-grid">
             <div class="ds-guideline-card do">
               <h3>✓ Do</h3>
-              <ul><li>Mantener el estado activo (<code>active</code>) siempre sincronizado con la ruta actual</li><li>Usar section labels para agrupar ítems relacionados (máximo 4–5 por grupo)</li><li>Mostrar contadores en badges solo para información que requiere atención del usuario</li></ul>
+              <ul>
+                <li>Mantener el estado activo (<code>active</code>) siempre sincronizado con la ruta actual</li>
+                <li>Usar section labels para agrupar ítems relacionados (máximo 4–5 por grupo)</li>
+                <li>Mostrar badges solo para información que requiere atención del usuario</li>
+                <li>Incluir siempre ícono + etiqueta en el ítem expandido</li>
+              </ul>
             </div>
             <div class="ds-guideline-card dont">
               <h3>✕ Don't</h3>
-              <ul><li>Agregar más de 7–8 ítems sin agrupar — usar section labels para organizar</li><li>Usar íconos sin labels en el sidebar expandido</li><li>Cambiar el orden de los ítems según el rol del usuario sin comunicarlo</li></ul>
+              <ul>
+                <li>Agregar más de 7–8 ítems sin agrupar — usar section labels</li>
+                <li>Usar íconos sin etiquetas en el drawer expandido</li>
+                <li>Mezclar Navigation Drawer con Navigation Bar en el mismo breakpoint</li>
+                <li>Cambiar el orden de los ítems según el rol sin comunicarlo al usuario</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -11144,67 +11070,442 @@ export { StatsGrid, StatCard }</code></pre>
           <h2 class="docs-section-title">Migración</h2>
           <p class="ds-p"><b>Reemplaza a:</b> nav bars y sidebars legacy.</p>
           <ul>
-            <li>Toda navegación lateral legacy se mapea a <code>.sidebar</code> + <code>.nav-item</code> (layout.css), dentro del shell completo.</li>
-            <li>El patrón mobile del shell (sidebar bajo 768px) es una decisión de diseño pendiente — no improvisar off-canvas; flaggear las pantallas que lo necesiten.</li>
-            <li>La navegación de página (tabs, breadcrumbs) no va al sidebar: usar Tabs o el breadcrumb del Topbar.</li>
+            <li>Toda navegación lateral legacy se mapea a <code>.sidebar</code> + <code>.nav-item</code> (<code>layout.css</code>).</li>
+            <li>El patrón mobile del shell (sidebar bajo 768 px) es una decisión de diseño pendiente — no improvisar off-canvas; flaggear las pantallas que lo necesiten.</li>
+            <li>La navegación de página (tabs, breadcrumbs) no va al drawer — usar Tabs o el breadcrumb del Topbar.</li>
           </ul>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="accessibility">
         <div class="docs-section">
           <h2 class="docs-section-title">Foco visible</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span><code>layout.css</code> no define <code>:focus-visible</code> propio para <code>.nav-item</code> — implementar los ítems con elementos nativos (<code>&lt;a&gt;</code> / <code>&lt;button&gt;</code>) para conservar el foco del navegador; no suprimir el outline</li></ul>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span><code>layout.css</code> no define <code>:focus-visible</code> propio para <code>.nav-item</code> — implementar los ítems con elementos nativos (<code>&lt;a&gt;</code> / <code>&lt;button&gt;</code>) para conservar el foco del navegador; no suprimir el outline.</li>
+          </ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Los tokens (<code>--text-secondary</code>, <code>--interactive</code>, <code>--interactive-light</code>) se recalibran solos en tema oscuro — nunca escribir overrides por tema</li><li><span class="ds-a11y-icon">♿</span>No comunicar el ítem activo solo con color — el peso 500 y <code>aria-current</code> lo refuerzan</li></ul>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Los tokens (<code>--text-secondary</code>, <code>--interactive</code>, <code>--interactive-light</code>) se recalibran solos en tema oscuro — nunca escribir overrides por tema.</li>
+            <li><span class="ds-a11y-icon">♿</span>No comunicar el ítem activo solo con color — el peso 500 y <code>aria-current</code> lo refuerzan.</li>
+          </ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Teclado y ARIA</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El sidebar debe ser un <code>&lt;nav aria-label="Sidebar"&gt;</code></li><li><span class="ds-a11y-icon">♿</span>El ítem activo debe tener <code>aria-current="page"</code></li><li><span class="ds-a11y-icon">♿</span>Los grupos de ítems deben estar marcados con <code>role="group"</code> y <code>aria-labelledby</code></li></ul>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>El drawer debe ser un <code>&lt;nav aria-label="Navegación principal"&gt;</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>El ítem activo debe tener <code>aria-current="page"</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Los grupos de ítems deben marcarse con <code>role="group"</code> y <code>aria-labelledby</code>.</li>
+          </ul>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
-      <div class="docs-section">
-        <h2 class="docs-section-title">Instalación</h2>
-        <p class="docs-section-desc">El shell de navegación no tiene wrapper React: se consume como markup HTML con <code>layout.css</code>.</p>
-<div class="docs-code-wrapper">
-        <pre class="docs-code standalone"><code>css/variables.css
-css/base.css
-css/layout.css</code></pre>
-        <button class="docs-copy-btn">Copiar</button>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Instalación</h2>
+          <p class="docs-section-desc">El shell de navegación no tiene wrapper React: se consume como markup HTML puro.</p>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Uso</h2>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn">Copiar</button>
+            <pre class="docs-code"><code>&lt;aside class="ds-sidebar-drawer"&gt;
+  &lt;div class="ds-drawer-section-title"&gt;Reclutamiento&lt;/div&gt;
+  &lt;nav class="ds-nav" aria-label="Navegación principal"&gt;
+    &lt;a class="ds-nav-item active" href="/dashboard" aria-current="page"&gt;
+      &lt;i data-lucide="layout-grid" style="width:14px;height:14px"&gt;&lt;/i&gt;
+      Dashboard
+    &lt;/a&gt;
+    &lt;a class="ds-nav-item" href="/vacantes"&gt;
+      &lt;i data-lucide="briefcase" style="width:14px;height:14px"&gt;&lt;/i&gt;
+      Vacantes
+    &lt;/a&gt;
+    &lt;a class="ds-nav-item" href="/candidatos"&gt;
+      &lt;i data-lucide="users" style="width:14px;height:14px"&gt;&lt;/i&gt;
+      Candidatos
+    &lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;div class="ds-drawer-section-title"&gt;Organización&lt;/div&gt;
+  &lt;nav class="ds-nav"&gt;
+    &lt;a class="ds-nav-item" href="/people"&gt;
+      &lt;i data-lucide="user-check" style="width:14px;height:14px"&gt;&lt;/i&gt;
+      People
+    &lt;/a&gt;
+    &lt;!-- Sub-ítems sin encabezado propio: ds-nav-sub --&gt;
+    &lt;div class="ds-nav-sub"&gt;
+      &lt;a class="ds-nav-item" href="/people/org"&gt;Organigrama&lt;/a&gt;
+      &lt;a class="ds-nav-item" href="/people/roles"&gt;Roles&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+&lt;/aside&gt;</code></pre>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- ═══════════ COMPONENT: NAVIGATION BAR ═══════════ -->
+    <section class="ds-section" id="s-c-nav-bar">
+      <div class="ds-page-tag">Components · Navigation</div>
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Navigation Bar</h1>
+        <p class="docs-page-desc">Barra de navegación inferior para moverse entre 3 y 5 destinos principales de la app. Pensada para layouts compactos y aplicaciones móviles.</p>
       </div>
-      <div class="docs-section">
-        <h2 class="docs-section-title">Uso</h2>
-        <p class="docs-section-desc">Snippets de código para implementar cada variante.</p>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Nav Items</h3>
-<div class="docs-code-wrapper">
-        <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>&lt;div style="width:220px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:8px;overflow:hidden"&gt;
-  &lt;div class="nav-section-label"&gt;Reclutamiento&lt;/div&gt;
-  &lt;div class="nav-item active"&gt;
-    &lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;rect x="3" y="3" width="7" height="7"/&gt;&lt;rect x="14" y="3" width="7" height="7"/&gt;&lt;rect x="3" y="14" width="7" height="7"/&gt;&lt;rect x="14" y="14" width="7" height="7"/&gt;&lt;/svg&gt;
-    Dashboard
-  &lt;/div&gt;
-  &lt;div class="nav-item"&gt;
-    &lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;rect x="2" y="7" width="20" height="14" rx="2"/&gt;&lt;path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/&gt;&lt;/svg&gt;
-    Vacantes
-    &lt;span class="nav-badge"&gt;12&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;div class="nav-item"&gt;
-    &lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/&gt;&lt;circle cx="12" cy="7" r="4"/&gt;&lt;/svg&gt;
-    Candidatos
-  &lt;/div&gt;
-  &lt;div class="nav-section-label"&gt;Organizacion&lt;/div&gt;
-  &lt;div class="nav-item"&gt;
-    &lt;svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"&gt;&lt;path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/&gt;&lt;circle cx="9" cy="7" r="4"/&gt;&lt;path d="M23 21v-2a4 4 0 0 0-3-3.87"/&gt;&lt;path d="M16 3.13a4 4 0 0 1 0 7.75"/&gt;&lt;/svg&gt;
-    People
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+      <div class="ds-comp-tabs">
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
+
+      <!-- ── OVERVIEW ── -->
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="ds-p">La Navigation Bar permite moverse entre 3 y 5 destinos de nivel superior. Se posiciona en el borde inferior de la pantalla, siempre visible. Cada destino tiene un ícono de 24 px centrado en una zona de indicador de 64×32 px y una etiqueta corta debajo. El indicador activo (fondo tipo píldora) aparece solo en el destino seleccionado — los demás preservan la misma zona sin fondo.</p>
+          <p class="ds-p">Solo un ítem puede estar activo a la vez. El ícono activo usa tinta <code>--interactive</code>; el inactivo usa <code>--text-muted</code>.</p>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Vista previa — 4 destinos (con badge)</h2>
+          <div class="docs-preview">
+            <!-- Simulated mobile screen frame -->
+            <div style="width:400px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg);">
+              <!-- App content area -->
+              <div style="height:100px;display:flex;align-items:center;justify-content:center;padding:16px;border-bottom:1px solid var(--border);">
+                <span style="font-size:13px;color:var(--text-muted);font-family:var(--font-body);">Contenido de la vista activa</span>
+              </div>
+              <!-- Navigation Bar — MD3: padding-top:12px, indicator zone 64×32, gap 4px, label below -->
+              <nav aria-label="Navegación principal" style="display:flex;height:80px;background:var(--sidebar-bg);border-top:1px solid var(--border);">
+
+                <!-- ACTIVE item: filled icon + indicator background -->
+                <a aria-current="page" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
+                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--interactive-light);border-radius:16px;margin-bottom:4px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--interactive)" stroke="none" aria-hidden="true">
+                      <rect x="3" y="3" width="7" height="7" rx="1"/>
+                      <rect x="14" y="3" width="7" height="7" rx="1"/>
+                      <rect x="3" y="14" width="7" height="7" rx="1"/>
+                      <rect x="14" y="14" width="7" height="7" rx="1"/>
+                    </svg>
+                  </div>
+                  <span style="font-size:12px;font-weight:700;color:var(--interactive);font-family:var(--font-body);line-height:1;">Inicio</span>
+                </a>
+
+                <!-- INACTIVE item: outlined icon, muted label, no background -->
+                <a style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
+                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
+                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                    </svg>
+                  </div>
+                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Vacantes</span>
+                </a>
+
+                <!-- INACTIVE item with badge -->
+                <a aria-label="Candidatos, 3 notificaciones" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
+                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;position:relative;">
+                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span aria-hidden="true" style="position:absolute;top:2px;right:9px;background:var(--interactive);color:white;font-size:9px;font-weight:700;line-height:1;border-radius:99px;padding:2px 5px;min-width:16px;text-align:center;font-family:var(--font-body);">3</span>
+                  </div>
+                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Candidatos</span>
+                </a>
+
+                <!-- INACTIVE item -->
+                <a style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
+                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
+                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                      <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+                    </svg>
+                  </div>
+                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Más</span>
+                </a>
+
+              </nav>
+            </div>
+          </div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Vista previa — 3 destinos</h2>
+          <div class="docs-preview">
+            <div style="width:360px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg);">
+              <div style="height:80px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);">
+                <span style="font-size:13px;color:var(--text-muted);font-family:var(--font-body);">Contenido de la vista activa</span>
+              </div>
+              <nav aria-label="Navegación principal" style="display:flex;height:80px;background:var(--sidebar-bg);border-top:1px solid var(--border);">
+                <a style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
+                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
+                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  </div>
+                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Inicio</span>
+                </a>
+                <a aria-current="page" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
+                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--interactive-light);border-radius:16px;margin-bottom:4px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--interactive)" stroke="none" aria-hidden="true">
+                      <path d="M20.5 6c-2.61.7-5.67 1-8.5 1s-5.89-.3-8.5-1L3 8c1.86.5 4 .73 6 .85V22h2v-6h2v6h2V8.85c2-.12 4.14-.35 6-.85l-.5-2zM12 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                    </svg>
+                  </div>
+                  <span style="font-size:12px;font-weight:700;color:var(--interactive);font-family:var(--font-body);line-height:1;">People</span>
+                </a>
+                <a style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
+                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
+                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  </div>
+                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Reportes</span>
+                </a>
+              </nav>
+            </div>
+          </div>
+        </section>
       </div>
-</div>
+
+      <!-- ── SPECS ── -->
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Anatomía</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Descripción</th></tr></thead>
+            <tbody>
+              <tr><td>Contenedor (<code>nav</code>)</td><td>Ancho completo, altura fija 80 px, fondo <code>--sidebar-bg</code>, borde superior <code>--border</code>. Display <code>flex</code>, sin padding propio.</td></tr>
+              <tr><td>Ítem de destino</td><td><code>flex:1</code>, <code>flex-direction:column</code>, <code>align-items:center</code>, <code>padding-top:12px</code>. El padding ancla el ícono desde arriba — no usar <code>justify-content:center</code>.</td></tr>
+              <tr><td>Zona de indicador</td><td>Siempre 64×32 px en todos los ítems. <code>border-radius:16px</code>. Fondo <code>--interactive-light</code> solo en el activo. <code>margin-bottom:4px</code> separa del label.</td></tr>
+              <tr><td>Ícono</td><td>24×24 px centrado en la zona de indicador. Activo: relleno <code>--interactive</code> (filled style). Inactivo: stroke <code>--text-muted</code>.</td></tr>
+              <tr><td>Etiqueta</td><td>12 px, <code>line-height:1</code>. Activo: peso 700, <code>--interactive</code>. Inactivo: peso 500, <code>--text-muted</code>. Siempre visible.</td></tr>
+              <tr><td>Badge</td><td>Pill absoluta sobre el ícono: fondo <code>--interactive</code>, texto blanco, 9 px, padding <code>2px 5px</code>, posicionada <code>top:2px right:9px</code> dentro de la zona de indicador.</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Medidas (MD3)</h2>
+          <table class="ds-table">
+            <thead><tr><th>Propiedad</th><th>Valor</th><th>Nota</th></tr></thead>
+            <tbody>
+              <tr><td>Altura de la barra</td><td>80 px</td><td>Fija. No reducir.</td></tr>
+              <tr><td>Padding top de ítem</td><td>12 px</td><td>Ancla la zona de indicador desde el borde superior.</td></tr>
+              <tr><td>Zona de indicador</td><td>64 × 32 px</td><td>Siempre reservada. Solo el background cambia.</td></tr>
+              <tr><td>Radio del indicador</td><td>16 px (= <code>--radius-full</code>)</td><td>Píldora completa.</td></tr>
+              <tr><td>Gap indicador → label</td><td>4 px (<code>margin-bottom</code> en zona)</td><td>No usar <code>gap</code> en el padre — rompe el anclaje.</td></tr>
+              <tr><td>Tamaño de ícono</td><td>24 × 24 px</td><td>Centrado dentro de la zona 64×32.</td></tr>
+              <tr><td>Label font-size</td><td>12 px / line-height 1</td><td>~12 px de alto real.</td></tr>
+              <tr><td>Espacio inferior residual</td><td>≈ 16 px</td><td>80 - 12 - 32 - 4 - 12 = 20 px libre. Queda abajo del label.</td></tr>
+              <tr><td>Cantidad de destinos</td><td>Mínimo 3, máximo 5</td><td>Fuera de rango: considerar Drawer o menú.</td></tr>
+              <tr><td>Tap target mínimo</td><td>48 × 48 px</td><td>Ítem cubre el alto de la barra — cumple sin padding extra.</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Inactivo</td><td>Zona sin fondo. Ícono outlined, etiqueta en peso 500.</td><td><code>--text-muted</code></td></tr>
+              <tr><td>Activo</td><td>Zona con fondo píldora. Ícono filled, etiqueta en peso 700.</td><td><code>--interactive-light</code>, <code>--interactive</code></td></tr>
+              <tr><td>Hover</td><td>Fondo de zona con opacidad reducida (state layer 8%).</td><td><code>--interactive-light</code> a 50%</td></tr>
+              <tr><td>Con badge — dot</td><td>Círculo de 6 px en <code>--interactive</code>, sin número.</td><td><code>--interactive</code></td></tr>
+              <tr><td>Con badge — número</td><td>Píldora 9 px con conteo, posición <code>top:2px right:9px</code> dentro de la zona.</td><td><code>--interactive</code>, white</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <!-- ── GUIDELINES ── -->
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="ds-guideline-grid">
+            <div class="ds-guideline-card">
+              <h3>Usar cuando</h3>
+              <ul>
+                <li>La app tiene entre 3 y 5 destinos de nivel superior sin sub-secciones</li>
+                <li>El contexto es mobile, tablet o layout compacto (ancho &lt; 768 px)</li>
+                <li>Todos los destinos tienen igual jerarquía y deben ser siempre visibles</li>
+                <li>El espacio vertical es abundante pero el horizontal es limitado</li>
+              </ul>
+            </div>
+            <div class="ds-guideline-card">
+              <h3>Evitar cuando</h3>
+              <ul>
+                <li>La app tiene más de 5 destinos de nivel superior — usar Navigation Drawer</li>
+                <li>El layout es desktop con suficiente espacio para un drawer lateral</li>
+                <li>Los destinos tienen sub-secciones que requieren agrupación</li>
+                <li>Se necesita badges en todos los ítems simultáneamente — genera ruido</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Do / Don't</h2>
+          <div class="ds-guideline-grid">
+            <div class="ds-guideline-card do">
+              <h3>✓ Do</h3>
+              <ul>
+                <li>Usar íconos reconocibles y etiquetas de una sola palabra</li>
+                <li>Mostrar siempre la etiqueta — no ocultarla en estado inactivo</li>
+                <li>Mantener un solo ítem activo a la vez</li>
+                <li>Reservar badges únicamente para notificaciones urgentes o conteos relevantes</li>
+                <li>Mantener el mismo orden de destinos en todas las vistas de la app</li>
+              </ul>
+            </div>
+            <div class="ds-guideline-card dont">
+              <h3>✕ Don't</h3>
+              <ul>
+                <li>Mezclar Navigation Bar y Navigation Drawer en el mismo breakpoint</li>
+                <li>Incluir menos de 3 o más de 5 ítems</li>
+                <li>Usar íconos sin relación semántica con el destino</li>
+                <li>Poner acciones (crear, editar) en la barra — es exclusivamente para navegación</li>
+                <li>Cambiar el orden de los ítems según el estado de la app</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Navigation Bar vs Navigation Drawer</h2>
+          <table class="ds-table">
+            <thead><tr><th>Criterio</th><th>Navigation Bar</th><th>Navigation Drawer</th></tr></thead>
+            <tbody>
+              <tr><td>Posición</td><td>Borde inferior</td><td>Borde izquierdo</td></tr>
+              <tr><td>Cantidad de destinos</td><td>3–5, sin sub-ítems</td><td>5 o más, con grupos</td></tr>
+              <tr><td>Contexto ideal</td><td>Mobile / tablet / compacto</td><td>Desktop / web app</td></tr>
+              <tr><td>Tamaño de ícono</td><td>24 px (filled activo)</td><td>16 px (outlined)</td></tr>
+              <tr><td>Sub-ítems</td><td>No</td><td>Sí (<code>nav-sub-items</code>)</td></tr>
+              <tr><td>CSS en el DS</td><td><em>Nuevo — snippet de referencia disponible</em></td><td><code>layout.css</code> (shell)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── ACCESSIBILITY ── -->
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Estructura semántica</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>El contenedor debe ser <code>&lt;nav aria-label="Navegación principal"&gt;</code> para que sea un landmark de navegación.</li>
+            <li><span class="ds-a11y-icon">♿</span>Cada ítem debe ser un <code>&lt;a href="..."&gt;</code> o <code>&lt;button&gt;</code> nativo para recibir foco con teclado y activarse con Enter/Space.</li>
+            <li><span class="ds-a11y-icon">♿</span>El ítem activo debe tener <code>aria-current="page"</code>.</li>
+          </ul>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Tap target y foco</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>El ítem ocupa el alto completo de la barra (80 px) — el tap target de 48 px mínimo queda cubierto sin padding extra.</li>
+            <li><span class="ds-a11y-icon">♿</span>No suprimir el outline de foco nativo. Los tokens de color de foco se recalibran solos en tema oscuro.</li>
+          </ul>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Íconos y badges</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Los íconos son decorativos (el label describe el destino) — agregar <code>aria-hidden="true"</code> al SVG o al <code>&lt;i&gt;</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Los badges numéricos no son visibles para lectores de pantalla por defecto — incluir el conteo en el <code>aria-label</code> del ítem: <code>aria-label="Candidatos, 3 notificaciones"</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>No comunicar el estado activo solo con color — el indicador visual se complementa con <code>aria-current</code> y el peso tipográfico 700.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ── CODE ── -->
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Estado del componente</h2>
+          <p class="docs-section-desc">La Navigation Bar no está incluida aún en <code>css/components/</code>. El snippet siguiente implementa el patrón con estilos inline usando los tokens del DS. Una vez incorporado al catálogo, esta sección se actualizará con las clases definitivas.</p>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Snippet de referencia</h2>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn">Copiar</button>
+            <pre class="docs-code"><code>&lt;nav aria-label="Navegación principal" style="
+  display: flex;
+  height: 80px;
+  width: 100%;
+  background: var(--sidebar-bg);
+  border-top: 1px solid var(--border);
+  position: fixed; bottom: 0; left: 0; right: 0;
+"&gt;
+
+  &lt;!-- Ítem ACTIVO --&gt;
+  &lt;a href="/inicio" aria-current="page" style="
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 12px;
+    text-decoration: none;
+  "&gt;
+    &lt;!-- Zona de indicador: siempre 64×32, background solo en activo --&gt;
+    &lt;div style="
+      width: 64px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--interactive-light);
+      border-radius: 16px;
+      margin-bottom: 4px;
+    "&gt;
+      &lt;!-- Ícono filled (activo) --&gt;
+      &lt;svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"
+        fill="var(--interactive)" stroke="none"&gt;
+        &lt;!-- paths del ícono --&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;span style="font-size:12px;font-weight:700;color:var(--interactive);font-family:var(--font-body);line-height:1;"&gt;Inicio&lt;/span&gt;
+  &lt;/a&gt;
+
+  &lt;!-- Ítem INACTIVO --&gt;
+  &lt;a href="/vacantes" style="
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 12px;
+    text-decoration: none;
+  "&gt;
+    &lt;!-- Zona de indicador: sin background --&gt;
+    &lt;div style="
+      width: 64px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 4px;
+    "&gt;
+      &lt;!-- Ícono outlined (inactivo) --&gt;
+      &lt;svg aria-hidden="true" width="24" height="24" fill="none"
+        stroke="var(--text-muted)" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;
+        &lt;!-- paths del ícono --&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;"&gt;Vacantes&lt;/span&gt;
+  &lt;/a&gt;
+
+  &lt;!-- Ítem INACTIVO con badge --&gt;
+  &lt;a href="/candidatos" aria-label="Candidatos, 3 notificaciones" style="
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 12px;
+    text-decoration: none;
+  "&gt;
+    &lt;div style="
+      width: 64px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 4px;
+      position: relative;
+    "&gt;
+      &lt;svg aria-hidden="true" width="24" height="24" fill="none"
+        stroke="var(--text-muted)" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;
+        &lt;!-- paths del ícono --&gt;
+      &lt;/svg&gt;
+      &lt;!-- Badge numérico --&gt;
+      &lt;span aria-hidden="true" style="
+        position: absolute; top: 2px; right: 9px;
+        background: var(--interactive); color: white;
+        font-size: 9px; font-weight: 700; line-height: 1;
+        border-radius: 99px; padding: 2px 5px;
+        min-width: 16px; text-align: center;
+        font-family: var(--font-body);
+      "&gt;3&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;"&gt;Candidatos&lt;/span&gt;
+  &lt;/a&gt;
+
+&lt;/nav&gt;</code></pre>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ═══════════ COMPONENT: TOPBAR ═══════════ -->
@@ -11215,11 +11516,11 @@ css/layout.css</code></pre>
 
       <!-- ══ Component Tabs ══ -->
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -11250,23 +11551,6 @@ css/layout.css</code></pre>
                 </div>
                 <div class="avatar">MG</div>
               </div>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Shell de aplicación completo — sidebar + topbar + avatar</li><li>Apps con navegación persistente</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Páginas standalone (auth, landing) — no cargar <code>layout.css</code></li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Nav bars legacy</li><li>Headers de app legacy</li></ul>
             </div>
           </div>
         </section>
@@ -11443,11 +11727,11 @@ css/layout.css</code></pre>
 
       
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -11473,23 +11757,6 @@ css/layout.css</code></pre>
                 <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
                 Ordenar
               </button>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Barra de controles sobre listas/tablas — search-field compacto + filtros + acciones</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Búsqueda standalone de página — usar <code>search-bar</code> (search.css)</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Filter bars legacy</li></ul>
             </div>
           </div>
         </section>
@@ -11559,6 +11826,12 @@ css/layout.css</code></pre>
           </tbody>
         </table>
       </div>
+      <section class="docs-section">
+        <div class="bd-callout">
+          <span class="bd-ico">⚑</span>
+          <span><b>Embassy Toolbar ≠ MD3 App Bar:</b> El Toolbar de Embassy es una fila de filtros (search-field + filter chips + result-count), no una barra de aplicación. El equivalente MD3 más cercano es el <b>Top App Bar</b> (4 variantes: Center-aligned 64dp, Small 64dp, Medium 112dp, Large 152dp) con fondo <code>$surface</code>→<code>$surface-container</code> al hacer scroll y elevación nivel 0→2. MD3 también define el <b>Bottom App Bar</b> (80dp, <code>$surface-container</code>, elevación nivel 2, icon buttons + FAB opcional). Si necesitás una barra de navegación superior, usá el layout Topbar de Embassy (<code>layout.css</code>). Si necesitás filtros contextuales en una vista de lista, usá Toolbar (<code>toolbar.css</code>).</span>
+        </div>
+      </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
         <div class="docs-section">
@@ -11755,11 +12028,11 @@ export { Toolbar, SearchField, ToolbarButton, ResultCount }</code></pre>
       
       </div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -11794,23 +12067,6 @@ export { Toolbar, SearchField, ToolbarButton, ResultCount }</code></pre>
                   <div class="kanban-card"><div class="kanban-card-title">Luis Mendoza</div><div class="kanban-card-meta">Data Analyst · hace 1d</div></div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Tableros de flujo por columnas (pipelines de recruiting/HR)</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Datos tabulares — usar Table</li><li>Listas simples — usar cards</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Boards custom</li></ul>
             </div>
           </div>
         </section>
@@ -12014,11 +12270,11 @@ css/components/kanban.css</code></pre>
       
       </div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -12049,23 +12305,6 @@ css/components/kanban.css</code></pre>
                 </div>
                 <div class="vacancy-age">5d</div>
               </div>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Ítem de vacante en listas de recruiting (ícono + nombre + meta + stats)</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Personas — usar Person Card</li><li>Otros dominios — usar Card genérica</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Rows/cards de vacante custom</li></ul>
             </div>
           </div>
         </section>
@@ -12263,11 +12502,11 @@ css/components/badge.css</code></pre>
       
       </div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -12294,23 +12533,6 @@ css/components/badge.css</code></pre>
                 <div class="person-avatar">AM</div>
                 <div class="person-info"><div class="person-name">Ana Martinez</div><div class="person-role">Product Manager</div></div>
               </div>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Ítem de persona en grillas (avatar + nombre + rol)</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Vacantes — usar Vacancy Card</li><li>Datos tabulares de personas — usar Table</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Cards de perfil custom</li></ul>
             </div>
           </div>
         </section>
@@ -12481,11 +12703,11 @@ css/components/person-card.css</code></pre>
 
       <!-- ══ Component Tabs ══ -->
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -12502,23 +12724,6 @@ css/components/person-card.css</code></pre>
               <div class="avatar">MG</div>
               <div class="avatar">CL</div>
               <div class="avatar">AM</div>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Identificar al usuario actual en el topbar del app shell</li><li>Representar personas con iniciales en cards y asignaciones</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Elementos no-persona (productos, categorías) — usar íconos</li><li>Páginas standalone sin app shell — <code>.avatar</code> requiere cargar <code>layout.css</code></li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Avatares custom con fotos o colores hardcodeados</li></ul>
             </div>
           </div>
         </section>
@@ -14251,6 +14456,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="docs-section">
         <div class="ds-callout">
           <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
+          <br><br><strong>Relación con Material Design 3:</strong> La Top Bar de Embassy es una adaptación para el producto de Amalgama (breadcrumbs + notificaciones + avatar), no una implementación directa del MD3 App Bar. MD3 define 4 variantes — Small (64&nbsp;px), Small centrado (64&nbsp;px), Medium (112&nbsp;px) y Large (152&nbsp;px) — con contenedor <code>$surface</code> por defecto que cambia a <code>$surface-container</code> + elevación nivel&nbsp;2 al hacer scroll. Las variantes Medium y Large colapsan a Small al scrollear. Estas variantes están en el roadmap; la Top Bar actual cubre el caso de uso de shell de producto.
           <br><br><strong>Mientras tanto:</strong> usá el topbar del app shell (css/layout.css).
         </div>
       </div>
@@ -14269,6 +14475,14 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
+            <br><br><strong>Variantes MD3 (referencia para implementación futura):</strong>
+            <ul style="margin:8px 0 0;padding-left:20px;font-size:13px;line-height:1.8;">
+              <li><b>Multi-browse</b> — ítem hero grande + ítem siguiente visible (peek ~56&nbsp;dp); scroll horizontal libre.</li>
+              <li><b>Uncontained</b> — ítems de igual tamaño, edge-to-edge.</li>
+              <li><b>Hero</b> — un ítem central ocupa ~100% del ancho, adyacentes muestran ~56&nbsp;dp.</li>
+              <li><b>Full-screen</b> — un ítem por vez, ocupa todo el viewport; snap en swipe.</li>
+            </ul>
+            <br><strong>Especificaciones clave:</strong> radio de ítem <code>corner-extra-large</code> (28&nbsp;px) · gap entre ítems 8&nbsp;dp · elevación en hover nivel&nbsp;1 · indicador de foco usa <code>$secondary</code> (no <code>$primary</code>) · scroll horizontal con momentum y snap.
             <br><br><strong>Mientras tanto:</strong> grilla con scroll horizontal (patrón kanban-board) o flaggear si se necesita carrusel real.
           </div>
         </div>
@@ -14306,7 +14520,16 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> elementos nativos del browser estilizados con tokens de color; flaggear para validación de diseño antes de shippear.
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul style="margin:8px 0 0;padding-left:20px;font-size:13px;line-height:1.8;">
+              <li>Contenedor visible: <b>18&nbsp;×&nbsp;18&nbsp;dp</b> · radio de esquina: <b>2&nbsp;dp</b> · zona de toque: <b>48&nbsp;×&nbsp;48&nbsp;dp</b> (se extiende fuera del contenedor visible).</li>
+              <li>Capa de estado: diámetro <b>40&nbsp;dp</b>, centrada en el contenedor.</li>
+              <li><b>3 estados visuales:</b> sin seleccionar (borde <code>$outline</code>, sin relleno), seleccionado (relleno <code>$primary</code>, tilde <code>$on-primary</code>), indeterminado (guión — para selección parcial en árboles padre-hijo).</li>
+              <li><b>Estados de interacción:</b> habilitado, deshabilitado, hover, enfocado, presionado (sin estado "arrastrado").</li>
+              <li>Tokens: seleccionado → <code>$primary</code> (relleno) + <code>$on-primary</code> (ícono); sin seleccionar → <code>$outline</code> (borde, sin relleno); capa de estado → <code>$primary</code> (seleccionado) / <code>$on-surface</code> (sin seleccionar) al 8&nbsp;%&nbsp;hover / 12&nbsp;%&nbsp;focus-press.</li>
+              <li>La etiqueta adyacente al checkbox usa tipografía body en <code>$on-surface</code> — el color de la etiqueta <b>no cambia</b> al interactuar con el checkbox.</li>
+            </ul>
+            <br><strong>Mientras tanto:</strong> elementos nativos del browser estilizados con tokens de color; flaggear para validación de diseño antes de shippear.
           </div>
         </div>
       </div>
@@ -14314,6 +14537,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
+            <br><br><strong>Guías de uso MD3 (referencia):</strong> usá checkboxes para selección múltiple de opciones relacionadas en una lista. Para selección única, usá radio buttons. Para activar/desactivar una sola opción con efecto inmediato, usá un switch. Tocando la etiqueta adyacente también se activa el checkbox — asegurate de que el área de toque completa tenga 48&nbsp;dp mínimo.
             <br><br><strong>Mientras tanto:</strong> elementos nativos del browser estilizados con tokens de color; flaggear para validación de diseño antes de shippear.
           </div>
         </div>
@@ -14501,11 +14725,11 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
       <!-- ══ Component Tabs ══ -->
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
 
       <!-- ════════════════ OVERVIEW ════════════════ -->
@@ -14574,23 +14798,6 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           </ol>
 
 
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li>Filtros, selección múltiple y sugerencias — el chip es siempre interactivo</li><li>Filter chips van debajo de la search bar para refinar resultados</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Estado de solo lectura — usar Badge</li><li>Acción principal — usar Button</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Toggles de filtro ad-hoc</li><li>Tags clickeables legacy</li></ul>
-            </div>
-          </div>
         </section>
       </div>
 
@@ -14962,6 +15169,21 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                     </div>
                   </div>
 
+                  <div class="ds-color-acc">
+                    <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
+                      <span class="ds-sem-grp-dot" style="background:rgba(71,77,97,.16);border:1px solid #ccc;"></span>
+                      <span class="ds-color-acc-name">Arrastrado</span>
+                      <span class="ds-color-acc-count">2</span>
+                      <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
+                    </button>
+                    <div class="ds-color-acc-body">
+                      <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Estado</th><th>Token</th><th>Opacidad</th></tr></thead><tbody>
+                        <tr><td>No seleccionado</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td>16%</td></tr>
+                        <tr><td>Seleccionado</td><td><span class="ds-sem-tok">--color-on-secondary-container</span></td><td>16%</td></tr>
+                      </tbody></table></div>
+                    </div>
+                  </div>
+
                 </div>
               </div><!-- /filter -->
 
@@ -15030,6 +15252,20 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                     </div>
                   </div>
 
+                  <div class="ds-color-acc">
+                    <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
+                      <span class="ds-sem-grp-dot" style="background:rgba(71,77,97,.16);border:1px solid #ccc;"></span>
+                      <span class="ds-color-acc-name">Arrastrado</span>
+                      <span class="ds-color-acc-count">1</span>
+                      <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
+                    </button>
+                    <div class="ds-color-acc-body">
+                      <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Opacidad</th></tr></thead><tbody>
+                        <tr><td>Capa de estado</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td>16%</td></tr>
+                      </tbody></table></div>
+                    </div>
+                  </div>
+
                 </div>
               </div><!-- /input -->
 
@@ -15092,6 +15328,20 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                     <div class="ds-color-acc-body">
                       <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Opacidad</th></tr></thead><tbody>
                         <tr><td>Capa de estado</td><td><span class="ds-sem-tok">--color-on-surface</span></td><td>12%</td></tr>
+                      </tbody></table></div>
+                    </div>
+                  </div>
+
+                  <div class="ds-color-acc">
+                    <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
+                      <span class="ds-sem-grp-dot" style="background:rgba(10,12,18,.16);border:1px solid #ccc;"></span>
+                      <span class="ds-color-acc-name">Arrastrado</span>
+                      <span class="ds-color-acc-count">1</span>
+                      <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
+                    </button>
+                    <div class="ds-color-acc-body">
+                      <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Opacidad</th></tr></thead><tbody>
+                        <tr><td>Capa de estado</td><td><span class="ds-sem-tok">--color-on-surface</span></td><td>16%</td></tr>
                       </tbody></table></div>
                     </div>
                   </div>
@@ -15780,6 +16030,39 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
               </div>
             </div>
 
+            <!-- ══ CHIP SET ══ -->
+            <div class="docs-section" id="cs-chip-set">
+              <h2 class="docs-section-title">Chip set</h2>
+              <p class="docs-section-desc">Los chips siempre aparecen como grupo (nunca un chip aislado). Las siguientes reglas definen el comportamiento del conjunto.</p>
+
+              <div class="ds-table-wrap" style="margin-top:16px;">
+                <table class="docs-props-table">
+                  <thead><tr><th>Propiedad</th><th>Valor</th><th>Nota</th></tr></thead>
+                  <tbody>
+                    <tr><td>Gap entre chips</td><td><b>8&nbsp;dp mínimo</b></td><td>Aplicar con <code>gap:8px</code> en el contenedor del set.</td></tr>
+                    <tr><td>Área táctil mínima</td><td><b>48&nbsp;×&nbsp;48&nbsp;dp</b></td><td>El contenedor visible tiene 32&nbsp;dp; el área táctil se extiende con padding del contenedor o márgenes verticales (WCAG 2.5.5).</td></tr>
+                    <tr><td>Scroll horizontal</td><td>Activar cuando el set no entra en una fila</td><td>Si se necesitan más de 2 filas con wrap, cambiar a scroll horizontal.</td></tr>
+                    <tr><td>Longitud de etiqueta</td><td>Máximo ~20 caracteres</td><td>Omitir artículos gramaticales para ahorrar espacio; truncar con ellipsis si el espacio es fijo.</td></tr>
+                    <tr><td>Comportamiento de selección</td><td>Multi-select por defecto (filter chips)</td><td>Puede configurarse como single-select — en ese caso, es una alternativa a segmented buttons o radio buttons. Nunca mezclar comportamientos dentro del mismo set.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <p class="cs-h3" style="margin-top:32px;">Chip de entrada — comportamientos especiales del set</p>
+              <div class="ds-table-wrap">
+                <table class="docs-props-table">
+                  <thead><tr><th>Comportamiento</th><th>Descripción</th></tr></thead>
+                  <tbody>
+                    <tr><td>Conversión desde input</td><td>El texto escrito en un campo se convierte en chip al confirmar (Enter / coma).</td></tr>
+                    <tr><td>Edición</td><td>Tocar un chip de entrada lo revierte al string de texto para edición.</td></tr>
+                    <tr><td>Borrado con teclado</td><td>Backspace antes de un chip lo selecciona; segundo Backspace lo elimina.</td></tr>
+                    <tr><td>Reordenamiento</td><td>Los chips de entrada son reordenables y pueden moverse entre campos.</td></tr>
+                    <tr><td>Chip de eliminación — área táctil dual</td><td>El chip principal y el ícono de eliminación son zonas de toque independientes. El mínimo de ancho para un chip con eliminación es <b>88&nbsp;dp</b> para que ambas zonas de 48&nbsp;dp no se solapen.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
           </div><!-- /main content -->
 
           <!-- ── STICKY TOC ── -->
@@ -15793,6 +16076,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                 <li><a class="ds-toc-link" data-target="cs-filter">Chip de filtro</a></li>
                 <li><a class="ds-toc-link" data-target="cs-input">Chip de entrada</a></li>
                 <li><a class="ds-toc-link" data-target="cs-suggestion">Chip de sugerencia</a></li>
+                <li><a class="ds-toc-link" data-target="cs-chip-set">Chip set</a></li>
               </ul>
             </div>
           </aside>
@@ -17538,7 +17822,16 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> input type=&quot;date&quot; con .date-input-wrapper de form.css.
+            <br><br><strong>Variantes MD3 (referencia para implementación futura):</strong>
+            <ul style="margin:8px 0 0;padding-left:20px;font-size:13px;line-height:1.8;">
+              <li><b>Docked</b> — campo de texto outlined + calendario desplegable debajo (desktop/tablet).</li>
+              <li><b>Modal</b> — diálogo completo con grilla de calendario (mobile); soporta selección de rango de fechas.</li>
+              <li><b>Modal date input</b> — entrada por teclado en un diálogo; intercambiable con Modal via ícono de edición.</li>
+              <li><b>Full-screen</b> — cubre toda la pantalla; recomendado en viewports compactos (mobile).</li>
+            </ul>
+            <br><strong>Especificaciones clave:</strong> celda de día <b>40&nbsp;×&nbsp;40&nbsp;dp</b> · ancho del calendario <b>360&nbsp;dp</b> · radio del diálogo <b>28&nbsp;dp</b> · fecha seleccionada → relleno <code>$primary</code> + texto <code>$on-primary</code> · fecha de hoy → borde circular <code>$primary</code> sin relleno · rango seleccionado → tira <code>$secondary-container</code> entre fechas de inicio/fin.
+            <br><br><strong>Regla de ventana:</strong> viewport compacto (mobile) → full-screen modal; viewport medio/expandido → docked o modal estándar. No escalar el picker proporcionalmente al tamaño de la ventana.
+            <br><br><strong>Mientras tanto:</strong> <code>input type="date"</code> con <code>.date-input-wrapper</code> de form.css.
           </div>
         </div>
       </div>
@@ -17546,7 +17839,8 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> input type=&quot;date&quot; con .date-input-wrapper de form.css.
+            <br><br><strong>Guías de uso MD3 (referencia):</strong> para fechas lejanas (ej. fecha de nacimiento), usá el modal date input o el docked — la navegación por calendario es impráctica para fechas muy distantes. Nunca escales el picker proporcionalmente al viewport. El modal y el input de fecha son intercambiables via ícono de edición en el encabezado.
+            <br><br><strong>Mientras tanto:</strong> <code>input type="date"</code> con <code>.date-input-wrapper</code> de form.css.
           </div>
         </div>
       </div>
@@ -17554,7 +17848,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> input type=&quot;date&quot; con .date-input-wrapper de form.css.
+            <br><br><strong>Mientras tanto:</strong> <code>input type="date"</code> con <code>.date-input-wrapper</code> de form.css.
           </div>
         </div>
       </div>
@@ -17577,6 +17871,15 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
             <br><br><strong>Mientras tanto:</strong> borde con var(--border) (el chrome de contenedores ya usa on-surface al 10%).
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul>
+              <li><b>4 variantes:</b> Full-width (100%), Inset (16dp margin leading), Middle-inset (16dp/16dp ambos lados), Vertical (separa columnas en pantallas grandes).</li>
+              <li><b>Grosor:</b> siempre 1dp.</li>
+              <li><b>Token de color:</b> <code>$outline-variant</code> — en Embassy: <code>var(--border)</code> o <code>var(--color-outline-variant)</code>.</li>
+              <li><b>Sin elevación ni estados interactivos</b> — los dividers son no-interactivos. No hover, focus ni pressed.</li>
+              <li><b>Uso moderado:</b> solo cuando el espaciado entre elementos no es suficiente para crear separación visual. Preferir whitespace antes que un divider. En listas con formato repetitivo, considerar omitirlo.</li>
+              <li><b>Full-width</b> para separar secciones de contenido no relacionadas o zonas interactivas de no-interactivas. <b>Inset</b> debe alinearse con el elemento ancla (ícono o avatar). <b>Middle-inset</b> para separar elementos de tipo mixto dentro de una sección.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -17614,6 +17917,16 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
             <br><br><strong>Mientras tanto:</strong> tabla simple (.data-table) o stack de cards según densidad.
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul>
+              <li><b>3 variantes por densidad de texto:</b> Una línea (56dp), Dos líneas (72dp), Tres líneas (88dp).</li>
+              <li><b>Elementos leading intercambiables:</b> ícono 24dp, avatar 40dp (circular, <code>$primary-container</code>), imagen 56×56dp, video pequeño 100×56dp. Deben ser consistentes dentro de una misma lista — no mezclar ícono con avatar en el mismo listado.</li>
+              <li><b>Padding:</b> 16dp leading y trailing; 12dp vertical (una línea). Separador opcional: inset 16dp para alinearse con el texto.</li>
+              <li><b>Tokens de color:</b> container = <code>$surface</code>, texto principal = <code>$on-surface</code>, texto secundario = <code>$on-surface-variant</code>, ícono seleccionado = <code>$primary</code>.</li>
+              <li><b>Estados:</b> hover 8%, enfocado 12%, presionado 12%, arrastrado 16% + elevación nivel 4 (8dp sombra tonal).</li>
+              <li><b>Forma:</b> corner-none (0dp) en el contenedor del ítem. Avatares usan corner-full.</li>
+              <li>Los ítems no-interactivos no reciben capa de estado. Los ítems interactivos (<code>type="button"</code> o <code>type="link"</code>) sí.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -17651,6 +17964,15 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
             <br><br><strong>Mientras tanto:</strong> Skeleton (css/components/skeleton.css) — no spinners ad-hoc.
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul>
+              <li><b>5 variantes:</b> Linear determinado, Linear indeterminado, Linear con buffer (streaming), Circular determinado, Circular indeterminado. Variante de 4 colores (primary → primary-container → tertiary → tertiary-container) para pantallas completas de carga.</li>
+              <li><b>Linear:</b> pista 4dp, indicador activo = <code>$primary</code>, fondo de pista = <code>$surface-container-highest</code>.</li>
+              <li><b>Circular:</b> diámetro 48dp, ancho de trazo 4dp, color = <code>$primary</code>; pista invisible/transparente.</li>
+              <li><b>Sin elevación ni estados interactivos</b> — son componentes de feedback pasivos. No reciben hover ni focus.</li>
+              <li><b>Distinción con Skeleton:</b> el Skeleton (disponible en Embassy) es para placeholders de contenido en carga inicial de UI. Los indicadores de progreso comunican un proceso activo en curso (llamada en vuelo, guardado, etc.). No son intercambiables.</li>
+              <li><b>Accesibilidad:</b> <code>role="progressbar"</code>, <code>aria-valuenow</code> en variantes determinadas, <code>aria-valuemin="0"</code>, <code>aria-valuemax="1"</code>. Las variantes indeterminadas omiten <code>aria-valuenow</code>.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -17688,6 +18010,15 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
             <br><br><strong>Mientras tanto:</strong> select nativo (form.css) o acciones en toolbar; no imitar un menu flotante.
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul>
+              <li><b>3 variantes:</b> Dropdown menu (overflow, context, popup), Exposed dropdown menu (filled u outlined, editable o no), Sub-menu (anidado con <code>md-sub-menu</code>).</li>
+              <li><b>Contenedor:</b> fondo <code>$surface-container</code>, elevación 3dp (sombra tonal), esquinas extra-small (4dp).</li>
+              <li><b>Ítems:</b> texto <code>$on-surface</code>, touch target mínimo 48dp. Puede tener leading icon 24dp y trailing text para shortcuts. Ítem seleccionado: fondo <code>$secondary-container</code>.</li>
+              <li><b>Posicionamiento:</b> anclado al elemento disparador; se invierte horizontal y verticalmente para permanecer en el viewport. Soporta offsets x/y configurables.</li>
+              <li><b>Comportamiento:</b> se cierra al seleccionar un ítem (salvo <code>keepOpen</code>), al perder foco, y al presionar Escape. Restaura el foco al elemento previo al cerrarse. Typeahead con delay 200ms.</li>
+              <li><b>Estados:</b> hover 8%, enfocado 12%, presionado 12%. Los ítems deshabilitados no son interactivos.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -17725,6 +18056,21 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
             <br><br><strong>Mientras tanto:</strong> elementos nativos del browser estilizados con tokens de color; flaggear para validación de diseño antes de shippear.
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul>
+              <li><b>Anatomía:</b> ícono SVG 20×20px (círculo exterior con hueco = anillo de 2px; punto interior visible solo al seleccionar), capa de estado 40×40px, touch target 48×48px.</li>
+              <li><b>Tokens de color:</b>
+                <ul>
+                  <li>Sin seleccionar (anillo): <code>$on-surface-variant</code> en reposo → <code>$on-surface</code> en hover/focus/pressed.</li>
+                  <li>Seleccionado (ambos círculos): <code>$primary</code> en todos los estados interactivos.</li>
+                  <li>Deshabilitado: <code>$on-surface</code> al 38% de opacidad, sin capa de estado.</li>
+                </ul>
+              </li>
+              <li><b>Capas de estado:</b> hover 8%, enfocado 12%, presionado 12%. Color de capa: <code>$on-surface</code> hover/focus sin seleccionar; <code>$primary</code> hover/focus seleccionado; <code>$primary</code> 12% presionado sin seleccionar; <code>$on-surface</code> 12% presionado seleccionado.</li>
+              <li><b>Agrupamiento:</b> atributo <code>name</code> compartido define el grupo. Seleccionar uno desmarca el resto sincrónicamente. Hacer clic en un radio ya marcado no lo desmarca.</li>
+              <li><b>Teclado (roving tabindex):</b> si hay uno seleccionado, solo ese recibe <code>tabindex="0"</code>. Flechas ↑↓←→ navegan y seleccionan dentro del grupo. Hace wrap y salta los deshabilitados. RTL-aware.</li>
+              <li><b>Accesibilidad:</b> <code>role="radio"</code>, <code>aria-checked</code>; el grupo debe tener <code>role="radiogroup"</code> con <code>aria-label</code> o <code>aria-labelledby</code>.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -17753,11 +18099,11 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
       <!-- ══ Component Tabs ══ -->
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Vista general</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Especificaciones</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guías de uso</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accesibilidad</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Código</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
 
       <!-- ════════════════ OVERVIEW ════════════════ -->
@@ -17782,23 +18128,6 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="bd-callout"><span class="bd-ico">🧭</span><span>Para búsqueda compacta embebida en una <a href="#" onclick="navigate('c-toolbar');return false;">Tool Bar</a> usá <code>.search-field</code> (componente de la toolbar). <code>.search-bar</code> es el componente Search independiente de 56px.</span></div>
         </section>
 
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="ds-guideline-grid">
-            <div class="ds-guideline-card">
-              <h3>Cuándo usar</h3>
-              <ul><li><code>search-bar</code> standalone (56px, píldora) para vistas de búsqueda dedicadas</li><li><code>search-view</code> para mostrar resultados</li><li>Combinar con filter chips debajo para refinar</li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Cuándo no</h3>
-              <ul><li>Búsqueda compacta dentro de una toolbar — usar <code>.search-field</code> de <code>toolbar.css</code></li></ul>
-            </div>
-            <div class="ds-guideline-card">
-              <h3>Reemplaza a</h3>
-              <ul><li>Inputs de búsqueda legacy</li></ul>
-            </div>
-          </div>
-        </section>
 
       </div>
 
@@ -18319,6 +18648,12 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             });
           })();
         </script>
+        <section class="docs-section">
+          <div class="bd-callout">
+            <span class="bd-ico">⚑</span>
+            <span><b>Embassy vs Search MD3:</b> Embassy se alinea estrechamente con MD3 en la anatomía del search bar (56dp de altura, forma <code>corner-full</code> / píldora). Divergencias puntuales: <b>Superficie:</b> MD3 usa <code>$surface-container-high</code> y elevación nivel 3 (6dp) en la search bar en reposo. <b>Vista acoplada (docked view):</b> MD3 reduce las esquinas a <code>28dp</code> cuando el search bar se expande a una vista de resultados con foco activo. <b>Vista a pantalla completa (full-screen view):</b> 0dp de esquinas y altura de header <code>72dp</code>; se usa en pantallas compactas donde la búsqueda ocupa toda la pantalla. <b>Indicador de foco:</b> MD3 usa <code>$secondary</code> como color de foco en el search bar — no <code>$primary</code>.</span>
+          </div>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
 
@@ -18529,6 +18864,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
             <br><br><strong>Mientras tanto:</strong> Modal (css/components/modal.css); si el flujo es largo, página completa con create-form.
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul>
+              <li><b>Bottom Sheet:</b> esquinas <code>corner-extra-large-top</code> (28dp arriba, 0dp abajo), drag handle centrado <code>32×4dp</code>, fondo <code>$surface-container-low</code>, elevación nivel 1. Variante modal: incluye scrim sobre el contenido detrás.</li>
+              <li><b>Side Sheet — Standard:</b> ancho <code>256dp</code>, esquinas <code>corner-none</code>, elevación nivel 0 (attached al layout).</li>
+              <li><b>Side Sheet — Modal:</b> esquina leading <code>16dp</code>, elevación nivel 1, con scrim. <b>Detached:</b> <code>16dp</code> todos los lados, separado del borde de pantalla, elevación nivel 1.</li>
+              <li><b>Drag handle:</b> <code>$on-surface-variant</code> al 40% de opacidad; área táctil ≥ 48dp.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -18566,6 +18908,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
             <br><br><strong>Mientras tanto:</strong> input type=&quot;range&quot; nativo + tokens; flaggear para validación de diseño.
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul>
+              <li><b>4 variantes:</b> Continuous (valor libre), Discrete (marcas de tick en la track), With value indicator (burbuja de 28dp sobre el handle), Range slider (dos handles).</li>
+              <li><b>Track:</b> altura <code>16dp</code>, <code>corner-full</code>. Segmento activo: <code>$primary</code>. Segmento inactivo: <code>$secondary-container</code>. Ticks: <code>$on-secondary-container</code> (activo) / <code>$on-surface-variant</code> (inactivo).</li>
+              <li><b>Handle:</b> visual <code>4dp</code> ancho × <code>44dp</code> alto, <code>corner-full</code>, <code>$primary</code>; elevación nivel 1 (0 en deshabilitado). State layer <code>40dp</code> circular centrado en handle.</li>
+              <li><b>Value indicator:</b> burbuja de <code>28dp</code>, <code>corner-full</code>, fondo <code>$primary</code>, etiqueta <code>$on-primary</code>. Solo en variante With value indicator.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -18604,6 +18953,14 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
             <br><br><strong>Mientras tanto:</strong> elementos nativos del browser estilizados con tokens de color; flaggear para validación de diseño antes de shippear.
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul>
+              <li><b>Track:</b> <code>52×32px</code>, <code>corner-full</code>. <b>Activado:</b> <code>$primary</code> fill. <b>Desactivado:</b> <code>$surface-container-highest</code> fill + borde <code>2px $outline</code>.</li>
+              <li><b>Handle:</b> <code>corner-full</code>. Desactivado: <code>16×16px</code> — Activado: <code>24×24px</code> — Presionado: <code>28×28px</code>. Color activado: <code>$on-primary</code>. Color desactivado: <code>$outline</code>.</li>
+              <li><b>Ícono opcional en handle:</b> <code>16px</code>. Checkmark en activado, X en desactivado — mejora la accesibilidad al no depender solo del color para comunicar el estado.</li>
+              <li><b>State layer:</b> círculo <code>40dp</code> centrado en handle; <code>$primary</code> (activado) o <code>$on-surface</code> (desactivado) al 8%/12%/12%.</li>
+              <li><b>Touch target:</b> mínimo <code>48dp</code>. Siempre con label visible — nunca Switch sin descripción adyacente.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -18642,6 +18999,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
             <br><br><strong>Mientras tanto:</strong> atributo title nativo; si la información es esencial, mostrala como texto visible (hint de form.css).
+            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
+            <ul>
+              <li><b>Plain tooltip:</b> fondo <code>$inverse-surface</code>, texto <code>$inverse-on-surface</code>, esquinas <code>corner-extra-small</code> (4dp), altura mínima 24dp, padding <code>4dp vertical / 8dp horizontal</code>, ancho máx. 200dp, tipografía <code>body-small</code>. Sin elevación.</li>
+              <li><b>Rich tooltip:</b> fondo <code>$surface-container</code>, esquinas <code>corner-medium</code> (12dp), elevación nivel 2. Puede tener subheader (<code>title-small</code>), cuerpo (<code>body-medium</code>, máx. 320dp ancho) y acciones (<code>$primary</code> text buttons).</li>
+              <li><b>Timing:</b> aparece tras <code>500ms</code> de hover; inmediato en foco de teclado. Desaparece al mover el cursor fuera o al presionar Escape.</li>
+              <li><b>Accesibilidad:</b> <code>role="tooltip"</code> en el elemento, referenciado con <code>aria-describedby</code> en el trigger. El rich tooltip es solo decorativo — no meter información que no esté disponible de otro modo.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -19650,17 +20014,25 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
          NAV CARD DOCUMENTATION
     ══════════════════════════════════════════════════════ -->
     <section class="ds-section" id="s-c-nav-card">
-      <span class="badge badge-info badge-label" style="margin-bottom:20px">Components</span>
-      <h1 class="ds-page-title">Nav Card</h1>
-      <p class="ds-page-desc">A unified navigation card component for section overviews, category grids, and anchor shortcut rows. A single pattern replaces all ad-hoc card implementations across the Design System.</p>
-
+      <div class="ds-page-tag">Components · Navigation</div>
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Nav Card</h1>
+        <p class="docs-page-desc">Tarjetas de navegación visual para grids de secciones, categorías y atajos de página. Un único patrón reemplaza todas las implementaciones ad-hoc dentro del sitio de docs.</p>
+      </div>
       <div class="ds-callout"><strong>Componente interno del sitio de docs</strong> — no disponible en <code>css/components/</code>. Si lo necesitás en un producto, flaggearlo como gap del DS.</div>
 
-      <!-- Overview -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Overview</h2>
-        <p class="docs-body">Nav Cards organize navigation into scannable visual tiles. Full cards have a header row (tag + arrow button), content area (large title + description), and an illustrated visual area. Compact cards omit the visual area for dense grids.</p>
-        <div class="nav-card-grid" style="max-width:900px;margin-top:24px">
+      <div class="ds-comp-tabs">
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
+      </div>
+
+      <!-- ── Overview ── -->
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="ds-p">Nav Cards organizan la navegación en tiles visuales escaneables. Las tarjetas completas tienen una fila de encabezado (tag + botón flecha), área de contenido (título grande + descripción) y un área visual ilustrada. Las tarjetas compactas omiten el área visual para grids densos.</p>
+          <div class="nav-card-grid" style="max-width:900px;margin-top:24px">
           <div class="nav-card" onclick="">
             <div class="nav-card-header">
               <span class="nav-card-tag">Foundations</span>
@@ -19726,167 +20098,172 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         </div>
       </div>
 
-      <!-- Cuándo usar -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Cuándo usar</h2>
-        <div class="ds-guideline-grid">
-          <div class="ds-guideline-card">
-            <h3>Cuándo usar</h3>
-            <ul><li>Tarjetas de navegación hacia secciones del propio sitio de documentación</li><li>Grids de categorías y atajos a anclas</li></ul>
-          </div>
-          <div class="ds-guideline-card">
-            <h3>Cuándo no</h3>
-            <ul><li>NO es parte de la librería consumible — sus estilos viven inline en <code>index.html</code>, no en <code>css/components/</code></li><li>Para productos usar Card o Stat Card</li></ul>
-          </div>
-          <div class="ds-guideline-card">
-            <h3>Reemplaza a</h3>
-            <ul><li>Implementaciones ad-hoc de cards de navegación dentro del sitio de docs</li></ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Anatomy -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Anatomy</h2>
-        <div class="docs-two-col" style="gap:32px;align-items:flex-start">
-          <div>
-            <div class="nav-card" style="max-width:240px;pointer-events:none">
-              <div class="nav-card-header">
-                <span class="nav-card-tag">Foundations</span>
-                <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+      <!-- ── Specs ── -->
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Anatomía</h2>
+          <div class="docs-two-col" style="gap:32px;align-items:flex-start">
+            <div>
+              <div class="nav-card" style="max-width:240px;pointer-events:none">
+                <div class="nav-card-header">
+                  <span class="nav-card-tag">Foundations</span>
+                  <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+                </div>
+                <div class="nav-card-content">
+                  <div class="nav-card-title">Card title</div>
+                  <div class="nav-card-desc">Optional description text</div>
+                </div>
+                <div class="nav-card-visual nv-primary" style="height:80px"></div>
               </div>
-              <div class="nav-card-content">
-                <div class="nav-card-title">Card title</div>
-                <div class="nav-card-desc">Optional description text</div>
-              </div>
-              <div class="nav-card-visual nv-primary" style="height:80px"></div>
+            </div>
+            <div>
+              <table class="docs-props-table ds-table" style="margin-top:0">
+                <thead><tr><th>#</th><th>Elemento</th><th>Requerido</th><th>Notas</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><code>.nav-card-header</code></td><td>Sí</td><td>Flex row con tag (izquierda) y botón flecha (derecha).</td></tr>
+                  <tr><td>2</td><td><code>.nav-card-tag</code></td><td>Sí</td><td>DM Mono 10px, uppercase. Etiqueta de categoría de sección.</td></tr>
+                  <tr><td>3</td><td><code>.nav-card-arrow-btn</code></td><td>Sí</td><td>Botón 26×26px. Contiene ícono Lucide <code>arrow-up-right</code>.</td></tr>
+                  <tr><td>4</td><td><code>.nav-card-content</code></td><td>Sí</td><td>Envuelve título y descripción. Rellena el espacio disponible.</td></tr>
+                  <tr><td>5</td><td><code>.nav-card-title</code></td><td>Sí</td><td>Epilogue 800, 21px. Etiqueta principal grande.</td></tr>
+                  <tr><td>6</td><td><code>.nav-card-desc</code></td><td>No</td><td>12.5px texto secundario. Una a dos líneas de copy de apoyo.</td></tr>
+                  <tr><td>7</td><td><code>.nav-card-visual</code></td><td>No (full) / omitir (compact)</td><td>Área de ilustración de 148px. Agregar clase de tinte aquí.</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
-          <div>
-            <table class="docs-props-table ds-table" style="margin-top:0">
-              <thead><tr><th>#</th><th>Element</th><th>Required</th><th>Notes</th></tr></thead>
-              <tbody>
-                <tr><td>1</td><td><code>.nav-card-header</code></td><td>Yes</td><td>Flex row with tag (left) and arrow button (right).</td></tr>
-                <tr><td>2</td><td><code>.nav-card-tag</code></td><td>Yes</td><td>DM Mono 10px, uppercase. Section category label.</td></tr>
-                <tr><td>3</td><td><code>.nav-card-arrow-btn</code></td><td>Yes</td><td>26×26px button. Holds a Lucide arrow-up-right icon.</td></tr>
-                <tr><td>4</td><td><code>.nav-card-content</code></td><td>Yes</td><td>Wraps title and description. Fills available space.</td></tr>
-                <tr><td>5</td><td><code>.nav-card-title</code></td><td>Yes</td><td>Epilogue 800, 21px. Primary large label.</td></tr>
-                <tr><td>6</td><td><code>.nav-card-desc</code></td><td>No</td><td>12.5px muted text. One to two lines of supporting copy.</td></tr>
-                <tr><td>7</td><td><code>.nav-card-visual</code></td><td>No (full) / omit (compact)</td><td>148px illustration area. Add a tint variant class here.</td></tr>
-              </tbody>
-            </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="docs-props-table ds-table">
+            <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Radio de borde</td><td>14px</td></tr>
+              <tr><td>Header padding</td><td>18px 18px 0</td></tr>
+              <tr><td>Content padding</td><td>12px 18px 22px</td></tr>
+              <tr><td>Altura del área visual</td><td>148px</td></tr>
+              <tr><td>Tamaño del botón flecha</td><td>26×26px, border-radius 8px</td></tr>
+              <tr><td>Ícono flecha</td><td>13×13px, stroke-width 2.25</td></tr>
+              <tr><td>Font título (full)</td><td>Epilogue 800, 21px, letter-spacing −0.025em</td></tr>
+              <tr><td>Font título (compact)</td><td>Epilogue 700, 14px, letter-spacing −0.01em</td></tr>
+              <tr><td>Font tag</td><td>DM Mono 500, 10px, uppercase, letter-spacing 0.08em</td></tr>
+              <tr><td>Font desc</td><td>12.5px (full) / 12px (compact), line-height 1.55</td></tr>
+              <tr><td>Hover transform</td><td><code>translateY(-2px)</code></td></tr>
+              <tr><td>Grid gap</td><td>16px</td></tr>
+              <tr><td>Grid min column</td><td>210px (auto-fill)</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Variantes de tinte visual</h2>
+          <p class="docs-body">Agregá una clase de tinte a <code>.nav-card-visual</code> para aplicar un color de contenedor semántico al área de ilustración. El cuerpo de la tarjeta siempre permanece neutro.</p>
+          <table class="docs-props-table ds-table" style="margin-top:20px">
+            <thead><tr><th>Clase</th><th>Token de fondo</th><th>Caso de uso</th></tr></thead>
+            <tbody>
+              <tr><td><em>(ninguna)</em></td><td><code>--color-surface-variant</code></td><td>Área visual neutra / por defecto.</td></tr>
+              <tr><td><code>nv-primary</code></td><td><code>--color-primary-container</code></td><td>Secciones primarias, color, tipografía.</td></tr>
+              <tr><td><code>nv-secondary</code></td><td><code>--color-secondary-container</code></td><td>Secciones secundarias, logos.</td></tr>
+              <tr><td><code>nv-tertiary</code></td><td><code>--color-tertiary-container</code></td><td>Terciario, estilos, contenido de diseño.</td></tr>
+              <tr><td><code>nv-success</code></td><td><code>--color-success-container</code></td><td>Contenido developer, accesibilidad.</td></tr>
+              <tr><td><code>nv-info</code></td><td><code>--color-info-container</code></td><td>Informativo, documentación, tokens.</td></tr>
+              <tr><td><code>nv-warning</code></td><td><code>--color-warning-container</code></td><td>Editorial, authoring de diseño, ilustraciones.</td></tr>
+              <tr><td><code>nv-neutral</code></td><td><code>--color-surface-variant</code></td><td>Tinte neutro explícito (igual al default).</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <!-- ── Guidelines ── -->
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="ds-guideline-grid">
+            <div class="ds-guideline-card">
+              <h3>Cuándo usar</h3>
+              <ul><li>Tarjetas de navegación hacia secciones del propio sitio de documentación</li><li>Grids de categorías y atajos a anclas</li></ul>
+            </div>
+            <div class="ds-guideline-card">
+              <h3>Cuándo no</h3>
+              <ul><li>NO es parte de la librería consumible — sus estilos viven inline en <code>index.html</code>, no en <code>css/components/</code></li><li>Para productos usar Card o Stat Card</li></ul>
+            </div>
+            <div class="ds-guideline-card">
+              <h3>Reemplaza a</h3>
+              <ul><li>Implementaciones ad-hoc de cards de navegación dentro del sitio de docs</li></ul>
+            </div>
           </div>
-        </div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Do / Don't</h2>
+          <div class="docs-two-col">
+            <div>
+              <p class="docs-label docs-label-do">Do</p>
+              <ul class="docs-list">
+                <li>Usá tarjetas full (con área visual) para grids de secciones de nivel superior — foundations, styles, páginas de overview de desarrollo.</li>
+                <li>Usá tarjetas compactas para listas de componentes densas (29+ ítems).</li>
+                <li>Mantené el título en menos de 3 palabras y la descripción en menos de 10.</li>
+                <li>Usá variantes de tinte semánticamente — hacé coincidir el tinte con la categoría del contenido.</li>
+                <li>Usá ilustraciones SVG inline con <code>currentColor</code> para que se adapten automáticamente al modo claro y oscuro.</li>
+              </ul>
+            </div>
+            <div>
+              <p class="docs-label docs-label-dont">Don't</p>
+              <ul class="docs-list">
+                <li>No uses Nav Cards como cards de contenido (noticias, artículos, perfiles) — usá <code>.emb-card</code> para contenido editorial.</li>
+                <li>No apliques variantes de tinte al root de la card — solo a <code>.nav-card-visual</code>.</li>
+                <li>No pongas más de dos líneas de texto de descripción.</li>
+                <li>No uses más de una familia de colores de tinte por grid.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Compatibilidad hacia atrás</h2>
+          <p class="docs-body">El HTML existente con <code>.ds-card-link</code> / <code>.ds-card-icon</code> / <code>.ds-card-name</code> / <code>.ds-card-desc</code> sigue funcionando sin cambios — se renderiza como nav card compacta mediante aliases CSS. No se requiere migración de HTML para grids existentes que usen <code>.ds-card-link</code>.</p>
+        </section>
       </div>
 
-      <!-- Color Variants -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Visual tint variants</h2>
-        <p class="docs-body">Add a tint class to <code>.nav-card-visual</code> to apply a semantic container color to the illustration area. The card body always stays neutral.</p>
-        <table class="docs-props-table ds-table" style="margin-top:20px">
-          <thead><tr><th>Class</th><th>Background token</th><th>Use case</th></tr></thead>
-          <tbody>
-            <tr><td><em>(none)</em></td><td><code>--color-surface-variant</code></td><td>Neutral / default visual area.</td></tr>
-            <tr><td><code>nv-primary</code></td><td><code>--color-primary-container</code></td><td>Primary sections, color, typography.</td></tr>
-            <tr><td><code>nv-secondary</code></td><td><code>--color-secondary-container</code></td><td>Secondary sections, logos.</td></tr>
-            <tr><td><code>nv-tertiary</code></td><td><code>--color-tertiary-container</code></td><td>Tertiary, styles, design-side content.</td></tr>
-            <tr><td><code>nv-success</code></td><td><code>--color-success-container</code></td><td>Developer content, accessibility.</td></tr>
-            <tr><td><code>nv-info</code></td><td><code>--color-info-container</code></td><td>Informational, documentation, tokens.</td></tr>
-            <tr><td><code>nv-warning</code></td><td><code>--color-warning-container</code></td><td>Editorial, design-authoring, illustrations.</td></tr>
-            <tr><td><code>nv-neutral</code></td><td><code>--color-surface-variant</code></td><td>Explicit neutral tint (same as default).</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- HTML Reference -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">HTML reference</h2>
-        <p class="docs-body">Full card with illustration area:</p>
-        <pre class="ds-code-block"><code>&lt;div class="nav-card" onclick="navigate('...')"&gt;
+      <!-- ── Code ── -->
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Referencia HTML</h2>
+          <p class="docs-body">Tarjeta completa con área de ilustración:</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn">Copiar</button>
+            <pre class="docs-code"><code>&lt;div class="nav-card" onclick="navigate('...')"&gt;
   &lt;div class="nav-card-header"&gt;
     &lt;span class="nav-card-tag"&gt;Foundations&lt;/span&gt;
     &lt;span class="nav-card-arrow-btn"&gt;&lt;i data-lucide="arrow-up-right"&gt;&lt;/i&gt;&lt;/span&gt;
   &lt;/div&gt;
   &lt;div class="nav-card-content"&gt;
     &lt;div class="nav-card-title"&gt;Color&lt;/div&gt;
-    &lt;div class="nav-card-desc"&gt;Short supporting description&lt;/div&gt;
+    &lt;div class="nav-card-desc"&gt;Descripción de apoyo corta&lt;/div&gt;
   &lt;/div&gt;
   &lt;div class="nav-card-visual nv-primary"&gt;
-    &lt;svg&gt;&lt;!-- illustration --&gt;&lt;/svg&gt;
+    &lt;svg&gt;&lt;!-- ilustración --&gt;&lt;/svg&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-
-        <p class="docs-body" style="margin-top:20px">Compact card (no visual area):</p>
-        <pre class="ds-code-block"><code>&lt;div class="nav-card nav-card--compact" onclick="navigate('...')"&gt;
+          </div>
+          <p class="docs-body" style="margin-top:24px">Tarjeta compacta (sin área visual):</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn">Copiar</button>
+            <pre class="docs-code"><code>&lt;div class="nav-card nav-card--compact" onclick="navigate('...')"&gt;
   &lt;div class="nav-card-header"&gt;
     &lt;span class="nav-card-tag"&gt;Component&lt;/span&gt;
     &lt;span class="nav-card-arrow-btn"&gt;&lt;i data-lucide="arrow-up-right"&gt;&lt;/i&gt;&lt;/span&gt;
   &lt;/div&gt;
   &lt;div class="nav-card-content"&gt;
     &lt;div class="nav-card-title"&gt;Button&lt;/div&gt;
-    &lt;div class="nav-card-desc"&gt;Short description&lt;/div&gt;
+    &lt;div class="nav-card-desc"&gt;Descripción corta&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
-
-        <p class="docs-body" style="margin-top:20px">Grid wrapper:</p>
-        <pre class="ds-code-block"><code>&lt;div class="nav-card-grid"&gt;
+          </div>
+          <p class="docs-body" style="margin-top:24px">Wrapper del grid:</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn">Copiar</button>
+            <pre class="docs-code"><code>&lt;div class="nav-card-grid"&gt;
   &lt;!-- nav-card items --&gt;
 &lt;/div&gt;</code></pre>
-      </div>
-
-      <!-- Specs -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Specs</h2>
-        <table class="docs-props-table ds-table">
-          <thead><tr><th>Property</th><th>Value</th></tr></thead>
-          <tbody>
-            <tr><td>Radio de borde</td><td>14px</td></tr>
-            <tr><td>Header padding</td><td>18px 18px 0</td></tr>
-            <tr><td>Content padding</td><td>12px 18px 22px</td></tr>
-            <tr><td>Visual area height</td><td>148px</td></tr>
-            <tr><td>Arrow button size</td><td>26×26px, border-radius 8px</td></tr>
-            <tr><td>Arrow icon</td><td>13×13px, stroke-width 2.25</td></tr>
-            <tr><td>Title font (full)</td><td>Epilogue 800, 21px, letter-spacing −0.025em</td></tr>
-            <tr><td>Title font (compact)</td><td>Epilogue 700, 14px, letter-spacing −0.01em</td></tr>
-            <tr><td>Tag font</td><td>DM Mono 500, 10px, uppercase, letter-spacing 0.08em</td></tr>
-            <tr><td>Desc font</td><td>12.5px (full) / 12px (compact), line-height 1.55</td></tr>
-            <tr><td>Hover transform</td><td><code>translateY(-2px)</code></td></tr>
-            <tr><td>Grid gap</td><td>16px</td></tr>
-            <tr><td>Grid min column</td><td>210px (auto-fill)</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Usage guidelines -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Usage guidelines</h2>
-        <div class="docs-two-col">
-          <div>
-            <p class="docs-label docs-label-do">Do</p>
-            <ul class="docs-list">
-              <li>Use full nav cards (with visual area) for top-level section grids — foundations, styles, develop overview pages.</li>
-              <li>Use compact nav cards for dense component lists (29+ items).</li>
-              <li>Keep title under 3 words and description under 10 words.</li>
-              <li>Use tint variants semantically — match the tint to the content category.</li>
-              <li>Use inline SVG illustrations with <code>currentColor</code> so they adapt to light and dark mode automatically.</li>
-            </ul>
-          </div>
-          <div>
-            <p class="docs-label docs-label-dont">Don't</p>
-            <ul class="docs-list">
-              <li>Don't use Nav Cards as content cards (news, articles, profiles) — use <code>.emb-card</code> for editorial content.</li>
-              <li>Don't apply tint variants to the card root — only to <code>.nav-card-visual</code>.</li>
-              <li>Don't put more than two lines of description text.</li>
-              <li>Don't use more than one tint color family per grid.</li>
-            </ul>
           </div>
         </div>
-      </div>
-
-      <!-- Backward compat note -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Backward compatibility</h2>
-        <p class="docs-body">Existing <code>.ds-card-link</code> / <code>.ds-card-icon</code> / <code>.ds-card-name</code> / <code>.ds-card-desc</code> HTML continues to work unchanged — it renders as a compact nav card via CSS aliases. No HTML migration is required for existing grids that use <code>.ds-card-link</code>.</p>
       </div>
     </section>
 
@@ -19937,6 +20314,7 @@ const SECTIONS = {
   'c-badge':           { label: 'Badges',                group: 'Components' },
   'c-button':          { label: 'Buttons',               group: 'Components' },
   'c-card':            { label: 'Cards',                 group: 'Components' },
+  'c-basic-card':      { label: 'Basic Card',            group: 'Components', parent: 'c-card' },
   'c-carousel':        { label: 'Carousels',             group: 'Components' },
   'c-checkbox':        { label: 'Checkbox',              group: 'Components' },
   'c-chip':            { label: 'Chips',                 group: 'Components' },
@@ -19950,7 +20328,9 @@ const SECTIONS = {
   'c-loading':         { label: 'Loading and progress',  group: 'Components' },
   'c-menu':            { label: 'Menu',                  group: 'Components' },
   'c-navigation':      { label: 'Navigation',            group: 'Components' },
-  'c-nav-card':        { label: 'Nav Card',              group: 'Components' },
+  'c-nav-bar':         { label: 'Navigation Bar',         group: 'Components', parent: 'c-navigation' },
+  'c-nav-drawer':      { label: 'Navigation Drawer',      group: 'Components', parent: 'c-navigation' },
+  'c-nav-card':        { label: 'Nav Card',              group: 'Components', parent: 'c-card' },
   'c-person':          { label: 'Person Card',         group: 'Components', parent: 'c-card' },
   'c-radio':           { label: 'Radio button',          group: 'Components' },
   'c-search':          { label: 'Search',                group: 'Components' },
