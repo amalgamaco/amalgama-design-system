@@ -42,7 +42,40 @@ find . -path "*/amalgama-ds/tokens/*.css" -o -path "*/styles/tokens/*.css" | hea
 grep -r "color-text-primary\|color-bg-surface\|prim-neutral" --include="*.css" -l | head -3
 ```
 
-If any token files are found: **do NOT use DS token names directly** (e.g. `var(--accent)`, `var(--bg)`, `var(--neutral-900)`). The project has its own semantic token layer; use its names instead. Map DS concepts to the project's equivalents before writing any code. The DS repo is a structural reference (markup patterns, class names, anatomy), not a token import.
+If any token files are found: **do NOT use DS token names directly** (e.g. `var(--accent)`, `var(--bg)`, `var(--neutral-900)`). The project has its own semantic token layer; use its names instead.
+
+**Mandatory — build the mapping table before writing any CSS:**
+
+Read both files and produce an explicit DS-alias → project-alias table. Never guess token names:
+
+```bash
+# DS semantic aliases (short names used in DS component CSS)
+grep -E "^\s+--bg:|^\s+--border:|^\s+--card-bg:|^\s+--sidebar-bg:|^\s+--text-|^\s+--interactive" /tmp/amalgama-ds/css/variables.css
+
+# Project's semantic token names
+cat src/styles/amalgama-ds/tokens/semantics.css   # or your project's equivalent path
+```
+
+Common mapping for projects following the gamaforce token pattern:
+
+| DS repo alias | Project token |
+|---|---|
+| `--bg` | `--color-bg-surface` |
+| `--border` | `--color-border` |
+| `--card-bg` | `--color-bg-surface` |
+| `--sidebar-bg` | `--color-nav-bg` |
+| `--text-primary` | `--color-text-primary` |
+| `--text-secondary` | `--color-text-secondary` |
+| `--text-muted` | `--color-text-muted` |
+| `--interactive` | `--color-interactive-primary` |
+| `--interactive-hover` | `--color-interactive-primary-hover` |
+| `--interactive-light` | `--color-interactive-secondary` |
+| `--surface` | `--color-bg-sunken` |
+| `--neutral-*` | `--prim-neutral-*` (prefixed) |
+| `--primary-*` | `--prim-primary-*` (prefixed) |
+| `--secondary-*` | `--prim-secondary-*` (prefixed) |
+
+These are typical — always verify against the actual files. Do not use this table as a substitute for reading.
 
 If no token files are found: you are building a fresh artifact. Proceed to Step 2A.
 
@@ -130,9 +163,46 @@ The rule: **use the project's existing semantic tokens**. The DS is a reference 
 - What class names to use (from the DS component CSS)
 - What logic/behavior a component should have
 
-When a DS component class (e.g. `.stat-card`) references a DS token (e.g. `var(--card-bg)`), find the equivalent in the project's token layer and either use that name in your Tailwind `className`, or add the component CSS file to the project's DS components directory using the project's token names.
+When a DS component class (e.g. `.stat-card`) references a DS token (e.g. `var(--card-bg)`), use the mapping table from Q2 above to substitute the correct project token name. Add the component CSS file to the project's DS components directory with those project token names.
 
 **Never** create alias variables that re-map DS token names onto project token names in a shared globals file. That is a parallel token layer and it breaks dark mode, causes token drift, and hides mismatches.
+
+#### Third-party component CSS variable bridge
+
+When the project uses a third-party component (shadcn, base-ui, etc.) that completely replaces a DS primitive — e.g. shadcn `<Sidebar>` instead of DS `.sidebar`/`.nav-item` — the third-party library's own CSS variables **must be wired to DS semantic tokens in `globals.css`**. Never hardcode hex values.
+
+```css
+/* ❌ Wrong — hardcoded hex; won't update when the DS palette changes */
+--sidebar: #ffffff;
+--sidebar-foreground: #1c2438;
+--sidebar-accent: #edf2ff;
+--sidebar-accent-foreground: #4f80ff;
+--sidebar-border: #c8d1e7;
+--sidebar-ring: #4f80ff;
+
+/* ✅ Correct — token-driven; dark mode comes for free from semantics.css */
+--sidebar:                    var(--color-nav-bg);
+--sidebar-foreground:         var(--color-text-primary);
+--sidebar-accent:             var(--color-nav-item-active-bg);
+--sidebar-accent-foreground:  var(--color-nav-item-active-text);
+--sidebar-border:             var(--color-border);
+--sidebar-ring:               var(--color-interactive-primary);
+```
+
+Verify coverage: check `[data-theme="dark"]` in `globals.css` — if it overrides those same variables with more hardcoded hex, delete those overrides. When the third-party CSS vars reference DS semantic tokens, dark mode is automatic.
+
+#### Stale component CSS detection
+
+Before using a project-local component CSS file, verify it was synced from the live DS repo (not a stale zip):
+
+```bash
+# Compare class names in the project copy against the live DS source
+grep "^\." src/styles/amalgama-ds/components/button.css | sort > /tmp/project-classes.txt
+grep "^\." /tmp/amalgama-ds/css/components/button.css  | sort > /tmp/ds-classes.txt
+diff /tmp/ds-classes.txt /tmp/project-classes.txt
+```
+
+If class names differ (e.g. project has `.btn--primary`, DS has `.btn-primary`), the project copy is stale — re-sync it from the live DS repo, adapting token names to the project's vocabulary.
 
 ### Step 2C — React / Next.js projects
 
@@ -143,7 +213,15 @@ CSS is canonical. React wrappers are thin. This matters:
 - If no React wrapper exists for a component, write a TSX component that renders the correct CSS class structure; do not invent styles
 - Copy the component `.tsx` file + `components/lib/utils.ts` into the target project if using DS wrappers
 - Peer deps: `class-variance-authority`, `clsx` (`npm i class-variance-authority clsx`)
-- If the project already has adapted wrappers, use those — do not create a second copy
+- If the project already has adapted wrappers, **verify the wrapper's variant → CSS class mapping before using it**:
+
+```bash
+# Check wrapper maps to current DS class names (flat kebab, no double-dash BEM)
+grep -E "btn-|badge-|chip-" src/modules/shared/ui/button.tsx
+grep "^\." /tmp/amalgama-ds/css/components/button.css | head -15
+```
+
+If the wrapper maps to class names that no longer exist in the CSS (e.g. `btn--primary` instead of `btn-primary`), update the wrapper's mapping — never the CSS file.
 
 ---
 
@@ -215,6 +293,8 @@ Amalgama is a **Welltech digital product studio** — health, fitness, and welln
 - [ ] If project has its own token layer: all colors/spacing/radii use **project** semantic token names, not DS names
 - [ ] If fresh artifact: all colors via `var(--…)` tokens — zero raw hex, zero hardcoded font families
 - [ ] No alias bridges added (no new variables that re-map DS token names to project names)
+- [ ] Third-party components (shadcn Sidebar, base-ui, etc.) that replace DS components: their `--sidebar-*` / `--popover-*` / other CSS variables reference DS semantic tokens, not hardcoded hex
+- [ ] React wrappers: variant → CSS class mapping verified against live DS source (no double-dash BEM like `btn--primary`)
 - [ ] No per-theme overrides written (`@media prefers-color-scheme`, `.dark` classes) — dark mode is automatic via `data-theme="dark"` on `<html>` with semantic tokens
 - [ ] Component class names match the repo `Uso:` block exactly — flat kebab-case, additive variants
 - [ ] If React wrappers used: built from CSS class anatomy, not invented
