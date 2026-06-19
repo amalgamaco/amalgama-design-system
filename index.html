@@ -14,6 +14,17 @@
 <link rel="stylesheet" href="css/components.css?v=24">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <script src="https://unpkg.com/lucide@latest"></script>
+<!-- Official @material/web (MD3) — used by the Checkbox & Switch pages. Themed
+     with Embassy tokens automatically via css/md-sys-bridge.css (loaded above).
+     all.js is one bundle so shared internals (md-focus-ring) define only once. -->
+<script type="importmap">
+{ "imports": { "@material/web/": "https://esm.run/@material/web/" } }
+</script>
+<script type="module">
+  import '@material/web/all.js';
+  import { styles as mdTypescale } from '@material/web/typography/md-typescale-styles.js';
+  document.adoptedStyleSheets = [...document.adoptedStyleSheets, mdTypescale.styleSheet];
+</script>
 <style>
 /* ═══════════════════════════════════════════
    AMALGAMA DS — Documentation Shell v2.0
@@ -15441,884 +15452,100 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     <!-- ═══════════ CHECKBOX ═══════════ -->
     <section class="ds-section" id="s-c-checkbox">
 
-  <div class="ds-page-tag">Components · Selección</div>
-  <h1 class="docs-page-title">Checkbox</h1>
-  <p class="docs-page-desc">Los checkboxes permiten seleccionar una o más opciones de un conjunto. Soportan tres estados visuales: sin seleccionar, seleccionado e indeterminado — y se agrupan siempre con una etiqueta adyacente.</p>
+      <div class="ds-page-tag">Components · Selección</div>
+      <h1 class="docs-page-title">Checkbox</h1>
+      <p class="docs-page-desc">Control de selección binaria — marcado, sin marcar o indeterminado. Para selección múltiple dentro de un grupo de opciones relacionadas.</p>
 
-  <!-- ── Tabs ── -->
-  <div class="ds-comp-tabs">
-    <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
-  </div>
+      <div class="ds-callout" style="margin-top:0">
+        <strong>Implementación: Material Web oficial.</strong> Esta página renderiza el componente <code>&lt;md-checkbox&gt;</code> de <code>@material/web</code> (Material Design&nbsp;3), tematizado con los tokens semánticos de Embassy vía <code>md-sys-bridge.css</code> (<code>--md-sys-color-* → --color-*</code>). Estados, ripple, foco y motion son los oficiales de Material; la paleta es la de Embassy.
+      </div>
 
-  <!-- ══════════════════════════════════════════
-       TAB: OVERVIEW
-  ══════════════════════════════════════════ -->
-  <div class="ds-comp-tab-panel active" data-tab="overview">
+      <div class="ds-comp-tabs">
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
+      </div>
 
-    <div class="ds-callout" style="margin-top:0;">
-      <strong>Componente en roadmap.</strong> El Checkbox todavía no tiene implementación CSS ni React en Embassy. La documentación que encontrás acá es la especificación de referencia (basada en MD3) para cuando se desarrolle. <strong>No improvises estilos</strong> — usá el elemento nativo del navegador estilizado con <code>accent-color</code>, o flaggeá el gap.
-    </div>
+      <!-- OVERVIEW -->
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados</h2>
+          <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox aria-label="Sin marcar"></md-checkbox> Sin marcar</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox checked aria-label="Marcado"></md-checkbox> Marcado</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox indeterminate aria-label="Indeterminado"></md-checkbox> Indeterminado</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox disabled aria-label="Deshabilitado"></md-checkbox> Deshabilitado</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox checked disabled aria-label="Deshabilitado marcado"></md-checkbox> Deshab. marcado</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox error aria-label="Error"></md-checkbox> Error</label></div>
+          </div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">¿Qué es?</h2>
+          <p class="docs-section-desc">Permite seleccionar una o más opciones de un conjunto. A diferencia del Switch, el cambio no se aplica al instante — suele requerir confirmación ("Guardar"). El contenedor visible mide 18×18&nbsp;dp, el área de toque 48×48&nbsp;dp, y una capa de estado de 40&nbsp;dp comunica hover, foco y presión.</p>
+        </section>
+      </div>
 
-    <section class="docs-section">
-      <h2 class="docs-section-title">¿Qué es el Checkbox?</h2>
-      <p class="docs-section-desc">El checkbox es un control de selección binaria que puede estar marcado, desmarcado o en estado indeterminado. Se usa para selección múltiple dentro de grupos de opciones relacionadas. A diferencia del switch, el cambio no tiene efecto inmediato — suele requerir una acción de confirmación (un botón "Guardar" o "Aplicar").</p>
-      <p class="docs-section-desc" style="margin-top:8px;">El contenedor visible mide <strong>18 × 18 dp</strong>, pero el área de toque real es de <strong>48 × 48 dp</strong> para garantizar accesibilidad táctil. Una capa de estado de <strong>40 dp de diámetro</strong>, centrada en el contenedor, comunica hover, foco y presión.</p>
-    </section>
+      <!-- GUIDELINES -->
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do">
+              <div class="bd-dd-head">✓ Usar</div>
+              <div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9">
+                <li>Selección múltiple: filtros, permisos, preferencias.</li>
+                <li>Aceptar/rechazar con confirmación explícita ("Acepto los términos").</li>
+                <li>Árboles padre-hijo con estado indeterminado para selección parcial.</li>
+                <li>Formularios donde el cambio se aplica al confirmar.</li>
+              </ul></div>
+            </div>
+            <div class="bd-dd dont">
+              <div class="bd-dd-head">✕ No usar</div>
+              <div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9">
+                <li>Selección exclusiva (una sola opción activa) → <b>Radio</b>.</li>
+                <li>Efecto inmediato (modo oscuro, notificaciones) → <b>Switch</b>.</li>
+                <li>Filtros inline en una toolbar → <b>Chip</b> con <code>chip-selected</code>.</li>
+              </ul></div>
+            </div>
+          </div>
+        </section>
+      </div>
 
-    <section class="docs-section">
-      <h2 class="docs-section-title">Cuándo usar / Cuándo no usar</h2>
-      <div class="ds-guideline-grid">
-        <div class="ds-guideline-card do">
-          <h3>Cuándo usar</h3>
-          <ul>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-tertiary);font-weight:700;flex-shrink:0;">✓</span><span>Selección múltiple: el usuario puede elegir más de una opción de un conjunto (ej. filtros, permisos, preferencias).</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-tertiary);font-weight:700;flex-shrink:0;">✓</span><span>Una sola opción de aceptar / rechazar que necesita confirmación explícita (ej. "Acepto los términos y condiciones").</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-tertiary);font-weight:700;flex-shrink:0;">✓</span><span>Árboles jerárquicos padre-hijo donde el nodo padre refleja la selección parcial con estado indeterminado.</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--md-tertiary);font-weight:700;flex-shrink:0;">✓</span><span>Formularios donde el cambio no se aplica hasta que el usuario confirma con una acción.</span></li>
+      <!-- ACCESSIBILITY -->
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Asociá siempre una etiqueta: envolvé el <code>&lt;md-checkbox&gt;</code> en un <code>&lt;label&gt;</code> o usá <code>aria-label</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Operable por teclado (Espacio); el foco visible usa el focus-ring oficial de Material.</li>
+            <li><span class="ds-a11y-icon">♿</span>El estado indeterminado se comunica con la propiedad <code>indeterminate</code>, no solo de forma visual.</li>
+            <li><span class="ds-a11y-icon">♿</span>El área de toque de 48×48&nbsp;dp la garantiza el propio componente.</li>
           </ul>
-        </div>
-        <div class="ds-guideline-card dont">
-          <h3>Cuándo no usar</h3>
-          <ul>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-error);font-weight:700;flex-shrink:0;">✕</span><span><strong>Selección exclusiva</strong> — si solo puede haber una opción activa a la vez, usá Radio Button (en roadmap).</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-error);font-weight:700;flex-shrink:0;">✕</span><span><strong>Efecto inmediato</strong> — si el toggle activa/desactiva algo al instante (modo oscuro, notificaciones), usá Switch (en roadmap).</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-error);font-weight:700;flex-shrink:0;">✕</span><span><strong>Filtros interactivos</strong> en una barra de herramientas o inline — usá Chip con <code>chip-selected</code>.</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--md-error);font-weight:700;flex-shrink:0;">✕</span><span>Sin etiqueta visible — un checkbox sin texto adyacente no es accesible; si el espacio lo impide, usá <code>aria-label</code> obligatorio.</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Variantes</h2>
-      <p class="docs-section-desc">El checkbox tiene tres estados visuales principales y sus contrapartes de error y deshabilitado.</p>
-      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin-top:16px;">
-
-        <!-- Sin seleccionar -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;padding:28px 32px;display:flex;align-items:center;justify-content:center;">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- touch target outline -->
-              <rect x="4" y="4" width="40" height="40" rx="20" fill="#9FA3AE" fill-opacity="0.08"/>
-              <!-- container -->
-              <rect x="15" y="15" width="18" height="18" rx="2" stroke="#9FA3AE" stroke-width="2" fill="none"/>
-            </svg>
-          </div>
-          <span style="font:500 12px 'DM Mono',monospace;color:var(--ds-text-3);">Sin seleccionar</span>
-        </div>
-
-        <!-- Seleccionado -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;padding:28px 32px;display:flex;align-items:center;justify-content:center;">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="40" height="40" rx="20" fill="#4F80FF" fill-opacity="0.08"/>
-              <rect x="15" y="15" width="18" height="18" rx="2" fill="#4F80FF"/>
-              <path d="M20 24.5L22.5 27L28 21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <span style="font:500 12px 'DM Mono',monospace;color:var(--ds-text-3);">Seleccionado</span>
-        </div>
-
-        <!-- Indeterminado -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;padding:28px 32px;display:flex;align-items:center;justify-content:center;">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="40" height="40" rx="20" fill="#4F80FF" fill-opacity="0.08"/>
-              <rect x="15" y="15" width="18" height="18" rx="2" fill="#4F80FF"/>
-              <line x1="20" y1="24" x2="28" y2="24" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <span style="font:500 12px 'DM Mono',monospace;color:var(--ds-text-3);">Indeterminado</span>
-        </div>
-
-        <!-- Error -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;padding:28px 32px;display:flex;align-items:center;justify-content:center;">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="40" height="40" rx="20" fill="#BA1A1A" fill-opacity="0.08"/>
-              <rect x="15" y="15" width="18" height="18" rx="2" stroke="#BA1A1A" stroke-width="2" fill="none"/>
-            </svg>
-          </div>
-          <span style="font:500 12px 'DM Mono',monospace;color:var(--ds-text-3);">Error</span>
-        </div>
-
-        <!-- Deshabilitado -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-          <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;padding:28px 32px;display:flex;align-items:center;justify-content:center;opacity:0.38;">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="15" y="15" width="18" height="18" rx="2" fill="#4F80FF"/>
-              <path d="M20 24.5L22.5 27L28 21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <span style="font:500 12px 'DM Mono',monospace;color:var(--ds-text-3);">Deshabilitado</span>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Componentes relacionados</h2>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
-        <div class="nav-card nav-card--compact" onclick="navigate('s-c-switch')" style="width:220px;">
-          <div class="nav-card-header"><span class="nav-card-tag">Roadmap</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
-          <div class="nav-card-content"><div class="nav-card-title">Switch</div><div class="nav-card-desc">Toggle de activación/desactivación con efecto inmediato.</div></div>
-        </div>
-        <div class="nav-card nav-card--compact" onclick="navigate('s-c-radio')" style="width:220px;">
-          <div class="nav-card-header"><span class="nav-card-tag">Roadmap</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
-          <div class="nav-card-content"><div class="nav-card-title">Radio Button</div><div class="nav-card-desc">Selección exclusiva dentro de un grupo de opciones.</div></div>
-        </div>
-        <div class="nav-card nav-card--compact" onclick="navigate('s-c-chip')" style="width:220px;">
-          <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
-          <div class="nav-card-content"><div class="nav-card-title">Chip</div><div class="nav-card-desc">Filtros y selección múltiple interactiva en contexto inline.</div></div>
-        </div>
-      </div>
-    </section>
-
-  </div><!-- /overview -->
-
-  <!-- ══════════════════════════════════════════
-       TAB: SPECS
-  ══════════════════════════════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="specs">
-
-    <!-- ── ss-cb-configs: Configuraciones principales ── -->
-    <section class="docs-section" id="ss-cb-configs">
-      <h2 class="docs-section-title">Configuraciones</h2>
-      <p class="docs-section-desc">Las cuatro variantes visuales principales del checkbox — las mismas que el diseñador entregará en Figma como propiedades del componente.</p>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px;">
-
-        <!-- Sin seleccionar -->
-        <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:32px;display:flex;align-items:center;gap:14px;background:var(--md-surface-container-low);">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="40" height="40" rx="20" fill="#9FA3AE" fill-opacity="0.06"/>
-              <rect x="15" y="15" width="18" height="18" rx="2" stroke="#9FA3AE" stroke-width="2" fill="none"/>
-            </svg>
-            <span style="font:500 13px 'Inter',sans-serif;color:var(--ds-text-2);">Opción de ejemplo</span>
-          </div>
-          <div style="padding:14px 18px;border-top:1px solid var(--ds-card-border);">
-            <span style="font:500 11px 'DM Mono',monospace;color:var(--ds-accent);">sin-seleccionar</span>
-          </div>
-        </div>
-
-        <!-- Seleccionado -->
-        <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:32px;display:flex;align-items:center;gap:14px;background:var(--md-surface-container-low);">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="40" height="40" rx="20" fill="#4F80FF" fill-opacity="0.08"/>
-              <rect x="15" y="15" width="18" height="18" rx="2" fill="#4F80FF"/>
-              <path d="M20 24.5L22.5 27L28 21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span style="font:500 13px 'Inter',sans-serif;color:var(--ds-text-2);">Opción de ejemplo</span>
-          </div>
-          <div style="padding:14px 18px;border-top:1px solid var(--ds-card-border);">
-            <span style="font:500 11px 'DM Mono',monospace;color:var(--ds-accent);">seleccionado</span>
-          </div>
-        </div>
-
-        <!-- Indeterminado -->
-        <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:32px;display:flex;align-items:center;gap:14px;background:var(--md-surface-container-low);">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="4" width="40" height="40" rx="20" fill="#4F80FF" fill-opacity="0.08"/>
-              <rect x="15" y="15" width="18" height="18" rx="2" fill="#4F80FF"/>
-              <line x1="20" y1="24" x2="28" y2="24" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <span style="font:500 13px 'Inter',sans-serif;color:var(--ds-text-2);">Selección parcial</span>
-          </div>
-          <div style="padding:14px 18px;border-top:1px solid var(--ds-card-border);">
-            <span style="font:500 11px 'DM Mono',monospace;color:var(--ds-accent);">indeterminado</span>
-          </div>
-        </div>
-
-        <!-- Deshabilitado seleccionado -->
-        <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:32px;display:flex;align-items:center;gap:14px;background:var(--md-surface-container-low);opacity:0.38;">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="15" y="15" width="18" height="18" rx="2" fill="#4F80FF"/>
-              <path d="M20 24.5L22.5 27L28 21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span style="font:500 13px 'Inter',sans-serif;color:var(--ds-text-2);">Opción bloqueada</span>
-          </div>
-          <div style="padding:14px 18px;border-top:1px solid var(--ds-card-border);">
-            <span style="font:500 11px 'DM Mono',monospace;color:var(--ds-accent);">deshabilitado · checked</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── ss-cb-tokens: Tokens de color ── -->
-    <section class="docs-section" id="ss-cb-tokens">
-      <h2 class="docs-section-title">Tokens de color</h2>
-      <p class="docs-section-desc">Todos los valores de color del checkbox se mapean a tokens semánticos de Embassy. Nunca uses hex directamente en una implementación.</p>
-      <div class="ds-color-acc-list" style="margin-top:16px;">
-
-        <!-- Seleccionado -->
-        <div class="ds-color-acc open">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="true">
-            <span class="ds-sem-grp-dot" style="background:#4F80FF;"></span>
-            <span class="ds-color-acc-name">Seleccionado</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:15px;height:15px;"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <div class="ds-table-wrap">
-              <table class="ds-table">
-                <thead><tr><th>Rol</th><th>Token</th><th>Hex (light)</th><th>Preview</th></tr></thead>
-                <tbody>
-                  <tr><td>Relleno del contenedor</td><td><code>var(--color-primary)</code></td><td><code>#4F80FF</code></td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:#4F80FF;border:1px solid rgba(127,127,127,.2);"></span></td></tr>
-                  <tr><td>Indicador (checkmark)</td><td><code>var(--color-on-primary)</code></td><td><code>#FFFFFF</code></td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:#FFFFFF;border:1px solid rgba(127,127,127,.2);"></span></td></tr>
-                  <tr><td>Capa de estado (hover 8%)</td><td><code>var(--color-primary)</code> · 8%</td><td><code>#4F80FF · 08</code></td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:rgba(79,128,255,.08);border:1px solid rgba(127,127,127,.2);"></span></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sin seleccionar -->
-        <div class="ds-color-acc">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
-            <span class="ds-sem-grp-dot" style="background:#9FA3AE;border:2px solid #9FA3AE;background:transparent;"></span>
-            <span class="ds-color-acc-name">Sin seleccionar</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:15px;height:15px;"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <div class="ds-table-wrap">
-              <table class="ds-table">
-                <thead><tr><th>Rol</th><th>Token</th><th>Hex (light)</th><th>Preview</th></tr></thead>
-                <tbody>
-                  <tr><td>Borde del contenedor</td><td><code>var(--color-on-surface-variant)</code></td><td><code>#9FA3AE</code></td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:#9FA3AE;border:1px solid rgba(127,127,127,.2);"></span></td></tr>
-                  <tr><td>Relleno del contenedor</td><td>Transparente (sin token)</td><td>—</td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:transparent;border:1px solid rgba(127,127,127,.4);"></span></td></tr>
-                  <tr><td>Capa de estado (hover 8%)</td><td><code>var(--color-on-surface)</code> · 8%</td><td><code>#0A0C12 · 08</code></td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:rgba(10,12,18,.08);border:1px solid rgba(127,127,127,.2);"></span></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Indeterminado -->
-        <div class="ds-color-acc">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
-            <span class="ds-sem-grp-dot" style="background:#4F80FF;"></span>
-            <span class="ds-color-acc-name">Indeterminado</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:15px;height:15px;"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <div class="ds-table-wrap">
-              <table class="ds-table">
-                <thead><tr><th>Rol</th><th>Token</th><th>Hex (light)</th><th>Preview</th></tr></thead>
-                <tbody>
-                  <tr><td>Relleno del contenedor</td><td><code>var(--color-primary)</code></td><td><code>#4F80FF</code></td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:#4F80FF;border:1px solid rgba(127,127,127,.2);"></span></td></tr>
-                  <tr><td>Indicador (guión —)</td><td><code>var(--color-on-primary)</code></td><td><code>#FFFFFF</code></td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:#FFFFFF;border:1px solid rgba(127,127,127,.2);"></span></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Error -->
-        <div class="ds-color-acc">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
-            <span class="ds-sem-grp-dot" style="background:#BA1A1A;"></span>
-            <span class="ds-color-acc-name">Error</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:15px;height:15px;"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <div class="ds-table-wrap">
-              <table class="ds-table">
-                <thead><tr><th>Rol</th><th>Token</th><th>Hex (light)</th><th>Preview</th></tr></thead>
-                <tbody>
-                  <tr><td>Borde del contenedor</td><td><code>var(--color-error)</code></td><td><code>#BA1A1A</code></td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:#BA1A1A;border:1px solid rgba(127,127,127,.2);"></span></td></tr>
-                  <tr><td>Capa de estado (hover 8%)</td><td><code>var(--color-error)</code> · 8%</td><td><code>#BA1A1A · 08</code></td><td><span style="display:inline-block;width:40px;height:20px;border-radius:4px;background:rgba(186,26,26,.08);border:1px solid rgba(127,127,127,.2);"></span></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Deshabilitado -->
-        <div class="ds-color-acc">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
-            <span class="ds-sem-grp-dot" style="background:#9FA3AE;opacity:0.38;"></span>
-            <span class="ds-color-acc-name">Deshabilitado</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:15px;height:15px;"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <div class="ds-table-wrap">
-              <table class="ds-table">
-                <thead><tr><th>Rol</th><th>Token</th><th>Valor</th><th>Nota</th></tr></thead>
-                <tbody>
-                  <tr><td>Contenedor + ícono</td><td>Hereda del estado activo</td><td><code>opacity: 0.38</code></td><td>Sin capa de estado — el cursor es <code>not-allowed</code></td></tr>
-                  <tr><td>Etiqueta adyacente</td><td><code>var(--color-on-surface)</code></td><td><code>opacity: 0.38</code></td><td>El color de etiqueta tampoco cambia al deshabilitar</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── ss-cb-anatomy: Anatomía ── -->
-    <section class="docs-section" id="ss-cb-anatomy">
-      <h2 class="docs-section-title">Anatomía</h2>
-      <p class="docs-section-desc">El checkbox tiene cuatro partes. Todos los números corresponden a pines en el diagrama.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start;margin-top:20px;">
-
-        <!-- SVG Anatomy diagram -->
-        <svg width="380" height="200" viewBox="0 0 380 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;max-width:100%;">
-          <!-- Background -->
-          <rect width="380" height="200" rx="12" fill="var(--md-surface-container-low,#FAFBFC)"/>
-
-          <!-- Touch target area (dashed) -->
-          <rect x="60" y="76" width="60" height="60" rx="30" stroke="#E01E8C" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
-
-          <!-- State layer (faint circle) -->
-          <circle cx="90" cy="106" r="20" fill="#4F80FF" fill-opacity="0.08"/>
-
-          <!-- Checkbox container (checked) -->
-          <rect x="81" y="97" width="18" height="18" rx="2" fill="#4F80FF"/>
-          <!-- Checkmark -->
-          <path d="M86 106.5L88.5 109L94 103" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-
-          <!-- Label -->
-          <text x="108" y="109" font-family="Inter, sans-serif" font-size="13" fill="var(--md-on-surface,#0A0C12)" font-weight="500">Opción de ejemplo</text>
-
-          <!-- PIN 1: Contenedor -->
-          <line x1="90" y1="97" x2="90" y2="58" stroke="#E01E8C" stroke-width="1"/>
-          <circle cx="90" cy="50" r="10" fill="white" stroke="#E01E8C" stroke-width="1.5"/>
-          <text x="90" y="54" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#E01E8C">1</text>
-
-          <!-- PIN 2: Indicador -->
-          <line x1="94" y1="106" x2="160" y2="80" stroke="#E01E8C" stroke-width="1"/>
-          <circle cx="170" cy="76" r="10" fill="white" stroke="#E01E8C" stroke-width="1.5"/>
-          <text x="170" y="80" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#E01E8C">2</text>
-
-          <!-- PIN 3: Etiqueta -->
-          <line x1="155" y1="106" x2="220" y2="148" stroke="#E01E8C" stroke-width="1"/>
-          <circle cx="230" cy="152" r="10" fill="white" stroke="#E01E8C" stroke-width="1.5"/>
-          <text x="230" y="156" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#E01E8C">3</text>
-
-          <!-- PIN 4: Área de toque -->
-          <line x1="90" y1="136" x2="90" y2="165" stroke="#E01E8C" stroke-width="1"/>
-          <circle cx="90" cy="175" r="10" fill="white" stroke="#E01E8C" stroke-width="1.5"/>
-          <text x="90" y="179" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#E01E8C">4</text>
-        </svg>
-
-        <!-- Legend -->
-        <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;">
-          <li style="display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--ds-text-2);">
-            <span style="flex:none;width:21px;height:21px;border-radius:50%;background:#E01E8C;color:white;font:700 11px Inter,sans-serif;display:flex;align-items:center;justify-content:center;">1</span>
-            <span><strong style="color:var(--ds-text-1);">Contenedor</strong> — cuadrado de 18 × 18 dp, radio de esquina <code>2dp</code> (<code>--radius-sm</code>). Stroke en reposo, relleno en seleccionado/indeterminado.</span>
-          </li>
-          <li style="display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--ds-text-2);">
-            <span style="flex:none;width:21px;height:21px;border-radius:50%;background:#E01E8C;color:white;font:700 11px Inter,sans-serif;display:flex;align-items:center;justify-content:center;">2</span>
-            <span><strong style="color:var(--ds-text-1);">Indicador</strong> — SVG path del tilde (seleccionado) o línea horizontal (indeterminado). Stroke 2dp, color <code>--color-on-primary</code>.</span>
-          </li>
-          <li style="display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--ds-text-2);">
-            <span style="flex:none;width:21px;height:21px;border-radius:50%;background:#E01E8C;color:white;font:700 11px Inter,sans-serif;display:flex;align-items:center;justify-content:center;">3</span>
-            <span><strong style="color:var(--ds-text-1);">Etiqueta</strong> — tipografía <code>body-md</code> en <code>--color-on-surface</code>. Distancia al contenedor: 8 dp. Toca la etiqueta también activa el checkbox.</span>
-          </li>
-          <li style="display:flex;gap:11px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--ds-text-2);">
-            <span style="flex:none;width:21px;height:21px;border-radius:50%;background:#E01E8C;color:white;font:700 11px Inter,sans-serif;display:flex;align-items:center;justify-content:center;">4</span>
-            <span><strong style="color:var(--ds-text-1);">Área de toque</strong> — 48 × 48 dp mínimo, centrada en el contenedor. Invisible visualmente; garantiza accesibilidad táctil.</span>
-          </li>
-        </ul>
-
-      </div>
-    </section>
-
-    <!-- ── ss-cb-color: Modo claro / oscuro ── -->
-    <section class="docs-section" id="ss-cb-color">
-      <h2 class="docs-section-title">Color — modo claro y oscuro</h2>
-      <p class="docs-section-desc">Los tokens semánticos se recalibran automáticamente con <code>data-theme="dark"</code>. El checkbox no necesita ningún override por tema.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
-
-        <!-- Modo claro -->
-        <div style="border:1px solid var(--ds-card-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:10px 16px;background:var(--md-surface-container-high);font:600 11px 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ds-text-3);">Modo claro</div>
-          <div style="padding:28px 24px;background:#FAFBFC;display:flex;flex-direction:column;gap:14px;">
-            <div style="display:flex;align-items:center;gap:12px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="16" height="16" rx="2" stroke="#9FA3AE" stroke-width="2"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#0A0C12;">Sin seleccionar</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="2" fill="#4F80FF"/><path d="M4 9.5L7 12.5L14 5.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#0A0C12;">Seleccionado</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="2" fill="#4F80FF"/><line x1="4" y1="9" x2="14" y2="9" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#0A0C12;">Indeterminado</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="16" height="16" rx="2" stroke="#BA1A1A" stroke-width="2"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#0A0C12;">Error</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;opacity:0.38;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="16" height="16" rx="2" stroke="#9FA3AE" stroke-width="2"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#0A0C12;">Deshabilitado</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modo oscuro -->
-        <div style="border:1px solid var(--ds-card-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:10px 16px;background:var(--md-surface-container-high);font:600 11px 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ds-text-3);">Modo oscuro</div>
-          <div style="padding:28px 24px;background:#13161F;display:flex;flex-direction:column;gap:14px;">
-            <div style="display:flex;align-items:center;gap:12px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="16" height="16" rx="2" stroke="#747989" stroke-width="2"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#EAEBED;">Sin seleccionar</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="2" fill="#B9CCFF"/><path d="M4 9.5L7 12.5L14 5.5" stroke="#1E3A8C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#EAEBED;">Seleccionado</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="2" fill="#B9CCFF"/><line x1="4" y1="9" x2="14" y2="9" stroke="#1E3A8C" stroke-width="2" stroke-linecap="round"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#EAEBED;">Indeterminado</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="16" height="16" rx="2" stroke="#F29AA1" stroke-width="2"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#EAEBED;">Error</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;opacity:0.38;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="16" height="16" rx="2" stroke="#747989" stroke-width="2"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:#EAEBED;">Deshabilitado</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── ss-cb-states: Estados ── -->
-    <section class="docs-section" id="ss-cb-states">
-      <h2 class="docs-section-title">Estados de interacción</h2>
-      <p class="docs-section-desc">Cada estado combina el estado visual (checked/unchecked/indeterminate) con el estado de interacción (enabled, hover, focused, pressed, disabled).</p>
-
-      <svg width="520" height="340" viewBox="0 0 520 340" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;margin-top:16px;">
-        <rect width="520" height="340" rx="12" fill="var(--md-surface-container-low,#FAFBFC)"/>
-
-        <!-- Column headers -->
-        <text x="120" y="28" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#9FA3AE" letter-spacing="0.05em">SIN SELECCIONAR</text>
-        <text x="310" y="28" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#9FA3AE" letter-spacing="0.05em">SELECCIONADO</text>
-        <text x="455" y="28" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#9FA3AE" letter-spacing="0.05em">INDETERMINADO</text>
-
-        <!-- Row labels -->
-        <text x="18" y="68" font-family="Inter,sans-serif" font-size="11" font-weight="500" fill="#747989">Reposo</text>
-        <text x="18" y="118" font-family="Inter,sans-serif" font-size="11" font-weight="500" fill="#747989">Hover</text>
-        <text x="18" y="168" font-family="Inter,sans-serif" font-size="11" font-weight="500" fill="#747989">Foco</text>
-        <text x="18" y="218" font-family="Inter,sans-serif" font-size="11" font-weight="500" fill="#747989">Error</text>
-        <text x="18" y="268" font-family="Inter,sans-serif" font-size="11" font-weight="500" fill="#747989">Deshabl.</text>
-
-        <!-- === ROW 1: Reposo === -->
-        <!-- Sin seleccionar / reposo -->
-        <rect x="102" y="50" width="18" height="18" rx="2" stroke="#9FA3AE" stroke-width="2" fill="none"/>
-        <!-- Seleccionado / reposo -->
-        <rect x="292" y="50" width="18" height="18" rx="2" fill="#4F80FF"/>
-        <path d="M296 59.5L299 62.5L306 55.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Indeterminado / reposo -->
-        <rect x="437" y="50" width="18" height="18" rx="2" fill="#4F80FF"/>
-        <line x1="441" y1="59" x2="451" y2="59" stroke="white" stroke-width="2" stroke-linecap="round"/>
-
-        <!-- === ROW 2: Hover === -->
-        <!-- Sin seleccionar / hover (state layer) -->
-        <circle cx="111" cy="109" r="20" fill="#0A0C12" fill-opacity="0.08"/>
-        <rect x="102" y="100" width="18" height="18" rx="2" stroke="#9FA3AE" stroke-width="2" fill="none"/>
-        <!-- Seleccionado / hover -->
-        <circle cx="301" cy="109" r="20" fill="#4F80FF" fill-opacity="0.08"/>
-        <rect x="292" y="100" width="18" height="18" rx="2" fill="#4F80FF"/>
-        <path d="M296 109.5L299 112.5L306 105.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Indeterminado / hover -->
-        <circle cx="446" cy="109" r="20" fill="#4F80FF" fill-opacity="0.08"/>
-        <rect x="437" y="100" width="18" height="18" rx="2" fill="#4F80FF"/>
-        <line x1="441" y1="109" x2="451" y2="109" stroke="white" stroke-width="2" stroke-linecap="round"/>
-
-        <!-- === ROW 3: Foco === -->
-        <!-- Sin seleccionar / foco -->
-        <circle cx="111" cy="159" r="20" fill="#0A0C12" fill-opacity="0.12"/>
-        <rect x="102" y="150" width="18" height="18" rx="2" stroke="#9FA3AE" stroke-width="2" fill="none"/>
-        <!-- Seleccionado / foco -->
-        <circle cx="301" cy="159" r="20" fill="#4F80FF" fill-opacity="0.12"/>
-        <rect x="292" y="150" width="18" height="18" rx="2" fill="#4F80FF"/>
-        <path d="M296 159.5L299 162.5L306 155.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Indeterminado / foco -->
-        <circle cx="446" cy="159" r="20" fill="#4F80FF" fill-opacity="0.12"/>
-        <rect x="437" y="150" width="18" height="18" rx="2" fill="#4F80FF"/>
-        <line x1="441" y1="159" x2="451" y2="159" stroke="white" stroke-width="2" stroke-linecap="round"/>
-
-        <!-- === ROW 4: Error === -->
-        <!-- Sin seleccionar / error -->
-        <rect x="102" y="200" width="18" height="18" rx="2" stroke="#BA1A1A" stroke-width="2" fill="none"/>
-        <!-- Seleccionado / error -->
-        <rect x="292" y="200" width="18" height="18" rx="2" fill="#BA1A1A"/>
-        <path d="M296 209.5L299 212.5L306 205.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <!-- Indeterminado / error: n/a label -->
-        <text x="446" y="212" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#9FA3AE">—</text>
-
-        <!-- === ROW 5: Deshabilitado === -->
-        <g opacity="0.38">
-          <!-- Sin seleccionar / disabled -->
-          <rect x="102" y="250" width="18" height="18" rx="2" stroke="#9FA3AE" stroke-width="2" fill="none"/>
-          <!-- Seleccionado / disabled -->
-          <rect x="292" y="250" width="18" height="18" rx="2" fill="#4F80FF"/>
-          <path d="M296 259.5L299 262.5L306 255.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Indeterminado / disabled -->
-          <rect x="437" y="250" width="18" height="18" rx="2" fill="#4F80FF"/>
-          <line x1="441" y1="259" x2="451" y2="259" stroke="white" stroke-width="2" stroke-linecap="round"/>
-        </g>
-
-        <!-- Horizontal dividers -->
-        <line x1="80" y1="84" x2="500" y2="84" stroke="#E8EAF0" stroke-width="1"/>
-        <line x1="80" y1="134" x2="500" y2="134" stroke="#E8EAF0" stroke-width="1"/>
-        <line x1="80" y1="184" x2="500" y2="184" stroke="#E8EAF0" stroke-width="1"/>
-        <line x1="80" y1="234" x2="500" y2="234" stroke="#E8EAF0" stroke-width="1"/>
-      </svg>
-
-    </section>
-
-    <!-- ── ss-cb-measures: Medidas ── -->
-    <section class="docs-section" id="ss-cb-measures">
-      <h2 class="docs-section-title">Medidas</h2>
-      <p class="docs-section-desc">Dimensiones en density-independent pixels (dp). En web, 1 dp ≈ 1 px a escala 1×.</p>
-
-      <svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;margin:16px 0;">
-        <rect width="320" height="180" rx="12" fill="var(--md-surface-container-low,#FAFBFC)"/>
-
-        <!-- Touch target (48dp dashed) -->
-        <rect x="96" y="66" width="48" height="48" rx="24" stroke="#E01E8C" stroke-width="1" stroke-dasharray="4 3" fill="none"/>
-
-        <!-- State layer (40dp) -->
-        <circle cx="120" cy="90" r="20" fill="#4F80FF" fill-opacity="0.07"/>
-
-        <!-- Checkbox container (18dp) -->
-        <rect x="111" y="81" width="18" height="18" rx="2" fill="#4F80FF"/>
-        <path d="M115 90.5L117.5 93L123 87" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-
-        <!-- Annotation: 18dp container width -->
-        <line x1="111" y1="74" x2="129" y2="74" stroke="#E01E8C" stroke-width="1"/>
-        <line x1="111" y1="71" x2="111" y2="77" stroke="#E01E8C" stroke-width="1"/>
-        <line x1="129" y1="71" x2="129" y2="77" stroke="#E01E8C" stroke-width="1"/>
-        <text x="120" y="68" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#E01E8C">18dp</text>
-
-        <!-- Annotation: 40dp state layer diameter -->
-        <line x1="100" y1="90" x2="100" y2="140" stroke="#E01E8C" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="140" y1="90" x2="140" y2="140" stroke="#E01E8C" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="100" y1="138" x2="140" y2="138" stroke="#E01E8C" stroke-width="1"/>
-        <line x1="100" y1="135" x2="100" y2="141" stroke="#E01E8C" stroke-width="1"/>
-        <line x1="140" y1="135" x2="140" y2="141" stroke="#E01E8C" stroke-width="1"/>
-        <text x="120" y="152" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#E01E8C">40dp capa de estado</text>
-
-        <!-- Annotation: 48dp touch target -->
-        <line x1="180" y1="66" x2="250" y2="66" stroke="#E01E8C" stroke-width="1"/>
-        <text x="215" y="61" text-anchor="middle" font-family="DM Mono,monospace" font-size="9" fill="#E01E8C">48dp zona de toque</text>
-        <line x1="180" y1="63" x2="180" y2="69" stroke="#E01E8C" stroke-width="1"/>
-        <line x1="228" y1="63" x2="228" y2="69" stroke="#E01E8C" stroke-width="1"/>
-        <line x1="180" y1="66" x2="96" y2="66" stroke="#E01E8C" stroke-width="1" stroke-dasharray="3 2"/>
-        <line x1="228" y1="66" x2="144" y2="66" stroke="#E01E8C" stroke-width="1" stroke-dasharray="3 2"/>
-
-        <!-- Label annotation -->
-        <text x="148" y="93" font-family="Inter,sans-serif" font-size="11" font-weight="400" fill="var(--md-on-surface,#0A0C12)">Etiqueta</text>
-        <line x1="144" y1="90" x2="130" y2="90" stroke="#E01E8C" stroke-width="1"/>
-        <text x="137" y="105" text-anchor="middle" font-family="DM Mono,monospace" font-size="8" fill="#E01E8C">8dp</text>
-      </svg>
-
-      <div class="ds-table-wrap" style="margin-top:8px;">
-        <table class="ds-table">
-          <thead>
-            <tr><th>Propiedad</th><th>Valor</th><th>Token / nota</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Contenedor (ancho × alto)</td><td><code>18 × 18 dp</code></td><td>Fijo — no escala con el texto</td></tr>
-            <tr><td>Radio de esquina</td><td><code>2 dp</code></td><td><code>var(--radius-sm)</code> (más cercano disponible)</td></tr>
-            <tr><td>Grosor del borde (sin seleccionar)</td><td><code>2 dp</code></td><td>—</td></tr>
-            <tr><td>Grosor del stroke del indicador</td><td><code>2 dp</code></td><td>stroke-linecap: round</td></tr>
-            <tr><td>Diámetro de la capa de estado</td><td><code>40 dp</code></td><td>Centrada en el contenedor</td></tr>
-            <tr><td>Zona de toque mínima</td><td><code>48 × 48 dp</code></td><td>Se extiende más allá del contenedor visible</td></tr>
-            <tr><td>Gap contenedor – etiqueta</td><td><code>8 dp</code></td><td><code>var(--space-2)</code></td></tr>
-            <tr><td>Tipografía de etiqueta</td><td><code>body-md</code> / 14px</td><td><code>var(--font-size-body-md)</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </div><!-- /specs -->
-
-  <!-- ══════════════════════════════════════════
-       TAB: GUIDELINES
-  ══════════════════════════════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="guidelines">
-
-    <div class="ds-callout" style="margin-top:0;">
-      <strong>Componente en roadmap.</strong> Las guías de uso están documentadas como referencia de diseño. No hay código consumible todavía — seguí las reglas de CLAUDE.md §"Roadmap" antes de implementar.
-    </div>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Checkbox vs. Switch vs. Radio</h2>
-      <p class="docs-section-desc">Usá la tabla de decisión para elegir el control correcto. Mezclar estos tres componentes sin seguir las reglas de selección genera UX inconsistente.</p>
-      <div class="ds-table-wrap">
-        <table class="ds-table">
-          <thead>
-            <tr>
-              <th>Pregunta</th>
-              <th>Checkbox</th>
-              <th>Switch</th>
-              <th>Radio</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>¿Cuántas opciones puede activar el usuario a la vez?</td>
-              <td>Una o más (selección múltiple)</td>
-              <td>Una sola (on/off)</td>
-              <td>Solo una del grupo</td>
-            </tr>
-            <tr>
-              <td>¿El cambio tiene efecto inmediato?</td>
-              <td>No — requiere confirmar</td>
-              <td>Sí — actúa al instante</td>
-              <td>No — usualmente dentro de un form</td>
-            </tr>
-            <tr>
-              <td>¿Puede haber estado parcial / indeterminado?</td>
-              <td>Sí — árbol padre-hijo</td>
-              <td>No</td>
-              <td>No</td>
-            </tr>
-            <tr>
-              <td>¿Las opciones son independientes entre sí?</td>
-              <td>Sí</td>
-              <td>Sí</td>
-              <td>No — se excluyen mutuamente</td>
-            </tr>
-            <tr>
-              <td>Contexto típico</td>
-              <td>Formularios, filtros, permisos, tareas</td>
-              <td>Ajustes, preferencias, features toggles</td>
-              <td>Tipo de cuenta, género, plan de pago</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Agrupación y etiquetas</h2>
-      <ul style="font-size:14px;line-height:1.8;color:var(--ds-text-2);padding-left:20px;margin:0;">
-        <li>Siempre envolvé un grupo de checkboxes en un <code>&lt;fieldset&gt;</code> con <code>&lt;legend&gt;</code> visible — el legend es el título del grupo y es leído por screen readers antes de cada opción.</li>
-        <li>Toda opción individual necesita una etiqueta visible adyacente — no solo <code>aria-label</code>.</li>
-        <li>Alineá verticalmente los checkboxes de un grupo (una opción por fila) — evitá grillas de 2 o 3 columnas si hay más de 6 opciones.</li>
-        <li>La etiqueta se clickea y también activa el checkbox — asegurate de que el <code>&lt;label for="…"&gt;</code> apunte correctamente al <code>id</code> del input.</li>
-        <li>Separación entre ítems consecutivos: <code>8 dp</code> mínimo — <code>var(--space-2)</code>.</li>
-      </ul>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Estado indeterminado</h2>
-      <p class="docs-section-desc">El estado indeterminado (<code>aria-checked="mixed"</code>) es exclusivo para la <strong>selección jerárquica padre-hijo</strong>. No lo uses como un "tercer estado" personalizado ni como estado de carga.</p>
-      <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;padding:24px;margin-top:12px;">
-        <div style="font:600 13px 'Epilogue',sans-serif;margin-bottom:14px;color:var(--ds-text-1);">Ejemplo: árbol padre-hijo</div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <!-- Parent indeterminate -->
-          <div style="display:flex;align-items:center;gap:10px;">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="2" fill="#4F80FF"/><line x1="4" y1="9" x2="14" y2="9" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
-            <span style="font:500 13px 'Inter',sans-serif;color:var(--ds-text-1);">Todas las ciudades (2 de 3 seleccionadas)</span>
-          </div>
-          <!-- Children -->
-          <div style="padding-left:28px;display:flex;flex-direction:column;gap:8px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="2" fill="#4F80FF"/><path d="M4 9.5L7 12.5L14 5.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:var(--ds-text-2);">Buenos Aires</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="2" fill="#4F80FF"/><path d="M4 9.5L7 12.5L14 5.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:var(--ds-text-2);">Córdoba</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="16" height="16" rx="2" stroke="#9FA3AE" stroke-width="2" fill="none"/></svg>
-              <span style="font:400 13px 'Inter',sans-serif;color:var(--ds-text-2);">Rosario</span>
-            </div>
-          </div>
-        </div>
-        <p style="font-size:12px;color:var(--ds-text-3);margin:14px 0 0;line-height:1.6;">Cuando el padre está indeterminado y se hace clic en él, se seleccionan <em>todos</em> los hijos. Cuando todos están seleccionados, el clic en el padre los deselecciona a todos.</p>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Do / Don't</h2>
-      <div class="ds-guideline-grid">
-        <div class="ds-guideline-card do">
-          <h3>Do</h3>
-          <ul>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-tertiary);font-weight:700;flex-shrink:0;">✓</span><span>Listá las opciones verticalmente, de arriba a abajo, en un orden predecible (alfabético, frecuencia de uso).</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-tertiary);font-weight:700;flex-shrink:0;">✓</span><span>Mostrá un mensaje de validación en rojo debajo del grupo cuando hay error — no solo cambies el color del borde sin texto.</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-tertiary);font-weight:700;flex-shrink:0;">✓</span><span>Seleccioná por defecto las opciones que la mayoría de los usuarios va a querer — reduce fricción.</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--md-tertiary);font-weight:700;flex-shrink:0;">✓</span><span>Usá estado indeterminado en nodos padre de un árbol — nunca como estado de carga o pendiente.</span></li>
-          </ul>
-        </div>
-        <div class="ds-guideline-card dont">
-          <h3>Don't</h3>
-          <ul>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-error);font-weight:700;flex-shrink:0;">✕</span><span>No uses un checkbox para activar/desactivar algo con efecto inmediato — ese es el territorio del Switch.</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-error);font-weight:700;flex-shrink:0;">✕</span><span>No ocultes la etiqueta. Un checkbox sin texto visible no es accesible, aunque tenga <code>aria-label</code>.</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;"><span style="color:var(--md-error);font-weight:700;flex-shrink:0;">✕</span><span>No uses un checkbox como sustituto de un Radio cuando solo puede haber una opción seleccionada.</span></li>
-            <li style="display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--md-error);font-weight:700;flex-shrink:0;">✕</span><span>No ubiques checkboxes a la derecha de la etiqueta en interfaces LTR — el control va a la izquierda.</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-  </div><!-- /guidelines -->
-
-  <!-- ══════════════════════════════════════════
-       TAB: ACCESSIBILITY
-  ══════════════════════════════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="accessibility">
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Rol y atributos ARIA</h2>
-      <div class="ds-table-wrap">
-        <table class="ds-table">
-          <thead>
-            <tr><th>Atributo</th><th>Valor(es)</th><th>Descripción</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>role</code></td><td><code>"checkbox"</code></td><td>Asignado implícitamente al usar <code>&lt;input type="checkbox"&gt;</code>. Si usás un <code>&lt;div&gt;</code> custom, agregalo explícitamente.</td></tr>
-            <tr><td><code>aria-checked</code></td><td><code>"true"</code> / <code>"false"</code> / <code>"mixed"</code></td><td><code>"mixed"</code> corresponde al estado indeterminado — debe setearse por JS ya que el atributo HTML <code>indeterminate</code> no lo expone automáticamente.</td></tr>
-            <tr><td><code>aria-label</code></td><td>Texto descriptivo</td><td>Solo cuando no hay etiqueta visible adyacente. Preferir siempre <code>&lt;label&gt;</code> explícito.</td></tr>
-            <tr><td><code>aria-labelledby</code></td><td>ID del elemento</td><td>Cuando la etiqueta es un elemento separado no asociado via <code>&lt;label for&gt;</code>.</td></tr>
-            <tr><td><code>aria-describedby</code></td><td>ID del mensaje de error / ayuda</td><td>Asocia un mensaje de error o texto auxiliar al checkbox.</td></tr>
-            <tr><td><code>aria-disabled</code></td><td><code>"true"</code></td><td>Usá junto con <code>disabled</code> en inputs nativos. Para custom elements, solo <code>aria-disabled</code>.</td></tr>
-            <tr><td><code>aria-required</code></td><td><code>"true"</code></td><td>En formularios donde la selección es obligatoria (ej. "acepto términos").</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="ds-callout" style="margin-top:12px;">
-        <strong>Estado indeterminado:</strong> el atributo HTML <code>indeterminate</code> en <code>&lt;input type="checkbox"&gt;</code> solo es visual — no afecta el valor del form ni lo anuncia el screen reader. Siempre seteá <code>aria-checked="mixed"</code> por JavaScript simultáneamente:
-        <br><br><code>checkbox.indeterminate = true; checkbox.setAttribute('aria-checked', 'mixed');</code>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Teclado</h2>
-      <div class="ds-table-wrap">
-        <table class="ds-table">
-          <thead>
-            <tr><th>Tecla</th><th>Acción</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><kbd style="background:var(--md-surface-container-high);padding:2px 8px;border-radius:4px;font:600 12px 'DM Mono',monospace;border:1px solid var(--ds-card-border);">Space</kbd></td><td>Alterna el estado del checkbox enfocado (seleccionado ↔ sin seleccionar). Si estaba indeterminado, pasa a seleccionado.</td></tr>
-            <tr><td><kbd style="background:var(--md-surface-container-high);padding:2px 8px;border-radius:4px;font:600 12px 'DM Mono',monospace;border:1px solid var(--ds-card-border);">Tab</kbd></td><td>Mueve el foco al siguiente elemento interactivo de la página.</td></tr>
-            <tr><td><kbd style="background:var(--md-surface-container-high);padding:2px 8px;border-radius:4px;font:600 12px 'DM Mono',monospace;border:1px solid var(--ds-card-border);">Shift + Tab</kbd></td><td>Mueve el foco al elemento interactivo anterior.</td></tr>
-            <tr><td><kbd style="background:var(--md-surface-container-high);padding:2px 8px;border-radius:4px;font:600 12px 'DM Mono',monospace;border:1px solid var(--ds-card-border);">Enter</kbd></td><td>No activa el checkbox (a diferencia de botones). Solo para inputs nativos dentro de un form, puede disparar el submit.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="font-size:13px;line-height:1.7;color:var(--ds-text-2);margin-top:8px;">Cada checkbox del grupo recibe foco individualmente — no uses <code>tabindex="-1"</code> en checkboxes individuales dentro de un grupo (a diferencia de los Radio buttons, que sí usan roving tabindex).</p>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Zona de toque y foco visible</h2>
-      <ul class="ds-a11y-list">
-        <li>
-          <span class="ds-a11y-icon">♿</span>
-          <span>El área de toque mínima es <strong>48 × 48 dp</strong> — requerimiento WCAG 2.5.5 (AAA) y AA en WCAG 2.2. Usá padding negativo o pseudo-elemento <code>::before</code> para extender el área sin agrandar el contenedor visual.</span>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">♿</span>
-          <span>El anillo de foco debe ser visible y de alto contraste. En Embassy, se implementa con <code>outline: 2px solid var(--color-primary); outline-offset: 2px</code> en el estado <code>:focus-visible</code>.</span>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">♿</span>
-          <span>Nunca uses solo <code>:focus</code> sin <code>:focus-visible</code> — el primero muestra el anillo al hacer clic con mouse, lo cual es indeseable visualmente.</span>
-        </li>
-      </ul>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Contraste</h2>
-      <ul class="ds-a11y-list">
-        <li>
-          <span class="ds-a11y-icon">♿</span>
-          <span>El borde del checkbox sin seleccionar (<code>--color-on-surface-variant</code> = <code>#9FA3AE</code>) sobre superficie blanca alcanza contraste ~2.7:1 contra el fondo — suficiente para el límite de UI components (WCAG 1.4.11, ratio mínimo 3:1). En dark mode el token se recalibra automáticamente.</span>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">♿</span>
-          <span>El checkmark blanco sobre azul primario (<code>#FFFFFF</code> sobre <code>#4F80FF</code>) supera 3:1, cumpliendo el mínimo para gráficos informativos.</span>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">♿</span>
-          <span>Nunca comuniques el estado (seleccionado / error / deshabilitado) solo con color — el ícono indicador es la señal primaria.</span>
-        </li>
-      </ul>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Agrupación con fieldset</h2>
-      <p style="font-size:13px;line-height:1.7;color:var(--ds-text-2);margin-bottom:12px;">Un grupo de checkboxes siempre debe estar envuelto en <code>&lt;fieldset&gt;</code> con <code>&lt;legend&gt;</code>. El screen reader anuncia el legend antes de cada opción, dando contexto.</p>
-      <div class="ds-table-wrap">
-        <table class="ds-table">
-          <thead>
-            <tr><th>Elemento</th><th>Rol implícito</th><th>Anuncio típico</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>&lt;fieldset&gt;</code></td><td><code>group</code></td><td>Agrupa opciones relacionadas</td></tr>
-            <tr><td><code>&lt;legend&gt;</code></td><td>Nombre accesible del grupo</td><td>"Preferencias de contacto, grupo" (se anuncia antes de cada opción)</td></tr>
-            <tr><td><code>&lt;input type="checkbox"&gt;</code></td><td><code>checkbox</code></td><td>"Email, checkbox, seleccionado"</td></tr>
-            <tr><td><code>&lt;label&gt;</code></td><td>Nombre accesible del control</td><td>Se anuncia como parte del checkbox</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="ds-callout" style="margin-top:12px;">
-        <strong>Anuncio de screen reader para estado indeterminado:</strong> NVDA y JAWS anuncian "mixto" cuando <code>aria-checked="mixed"</code>. VoiceOver (macOS/iOS) dice "parcialmente marcado". Asegurate de que el texto de la etiqueta dé suficiente contexto para que ese anuncio tenga sentido.
-      </div>
-    </section>
-
-  </div><!-- /accessibility -->
-
-  <!-- ══════════════════════════════════════════
-       TAB: CODE
-  ══════════════════════════════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="code">
-    <section class="docs-section">
-      <div class="ds-callout ds-callout--info" style="background:var(--ds-accent-bg);border-left:4px solid var(--ds-accent);padding:20px 24px;border-radius:var(--radius-md);margin-bottom:32px;">
-        <strong style="display:block;margin-bottom:8px;color:var(--ds-text-1);font-family:'Epilogue',sans-serif;">Componente en roadmap</strong>
-        <p style="margin:0;color:var(--ds-text-2);font-size:14px;line-height:1.6;">El Checkbox todavía no tiene una implementación CSS/React en Embassy. Cuando esté disponible aparecerá acá el código final junto con los tokens de color y las props de la API React.</p>
+        </section>
       </div>
 
-      <h2 class="docs-section-title">Puente provisional — <code>accent-color</code></h2>
-      <p class="docs-section-desc">Mientras el componente no está en Embassy, podés estilizar el checkbox nativo del navegador usando <code>accent-color</code> con el token primario. Esta solución aplica color al estado checked pero no controla el radio de esquina, el tamaño del contenedor ni la capa de estado.</p>
+      <!-- CODE -->
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Código</h2>
+          <p class="docs-section-desc">Cargá el componente oficial una sola vez en el <code>&lt;head&gt;</code> (ya incluido en este sitio). La paleta de Embassy se aplica sola vía <code>md-sys-bridge.css</code>; no hace falta tematizar por instancia.</p>
+          <pre class="docs-code"><code>&lt;!-- carga (una vez, en &lt;head&gt;) --&gt;
+&lt;script type="importmap"&gt;
+{ "imports": { "@material/web/": "https://esm.run/@material/web/" } }
+&lt;/script&gt;
+&lt;script type="module"&gt;import '@material/web/all.js';&lt;/script&gt;
 
-      <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:12px;padding:24px;margin-bottom:24px;">
-        <div style="font:600 12px 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--ds-text-3);margin-bottom:16px;">Vista previa</div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <label style="display:flex;align-items:center;gap:10px;font:400 14px 'Inter',sans-serif;color:var(--ds-text-1);cursor:pointer;accent-color:#4F80FF;">
-            <input type="checkbox" checked style="accent-color:#4F80FF;width:16px;height:16px;">
-            Buenos Aires
-          </label>
-          <label style="display:flex;align-items:center;gap:10px;font:400 14px 'Inter',sans-serif;color:var(--ds-text-1);cursor:pointer;">
-            <input type="checkbox" style="accent-color:#4F80FF;width:16px;height:16px;">
-            Córdoba
-          </label>
-          <label style="display:flex;align-items:center;gap:10px;font:400 14px 'Inter',sans-serif;color:var(--ds-text-1);cursor:pointer;opacity:0.38;">
-            <input type="checkbox" disabled checked style="accent-color:#4F80FF;width:16px;height:16px;">
-            Rosario (deshabilitado)
-          </label>
-        </div>
+&lt;!-- uso --&gt;
+&lt;label&gt;&lt;md-checkbox&gt;&lt;/md-checkbox&gt; Acepto los términos&lt;/label&gt;
+&lt;md-checkbox checked&gt;&lt;/md-checkbox&gt;
+&lt;md-checkbox indeterminate&gt;&lt;/md-checkbox&gt;
+&lt;md-checkbox disabled&gt;&lt;/md-checkbox&gt;
+&lt;md-checkbox error&gt;&lt;/md-checkbox&gt;</code></pre>
+        </section>
       </div>
 
-      <div class="ds-callout warn">
-        <strong>Limitaciones del puente provisional:</strong> <code>accent-color</code> no controla el radio de esquina, el tamaño exacto del contenedor, la capa de estado visible ni el estado de error con token semántico. Flaggeá cualquier uso de este puente para revisión de diseño antes de shippe ar a producción.
-      </div>
     </section>
-
-  </div><!-- /code -->
-
-</section>
     <!-- ═══════════ CHIPS ═══════════ -->
     <section class="ds-section" id="s-c-chip">
       <div class="ds-page-tag">Components · Selection</div>
@@ -21976,975 +21203,98 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     <!-- ═══════════ SWITCH ═══════════ -->
     <section class="ds-section" id="s-c-switch">
 
-  <div class="ds-page-tag">Components · Selección</div>
-  <h1 class="docs-page-title">Switch</h1>
-  <p class="docs-page-desc">Un control binario que activa o desactiva un ajuste de forma inmediata, sin requerir confirmación. El Switch comunica claramente el estado actual y responde en tiempo real al gesto del usuario.</p>
+      <div class="ds-page-tag">Components · Selección</div>
+      <h1 class="docs-page-title">Switch</h1>
+      <p class="docs-page-desc">Alterna un único estado encendido/apagado con efecto inmediato. Para activar o desactivar una opción al instante, sin paso de confirmación.</p>
 
-  <!-- ── Tabs ── -->
-  <div class="ds-comp-tabs">
-    <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
-  </div>
-
-  <!-- ══════════════════════════════════
-       TAB: OVERVIEW
-  ══════════════════════════════════ -->
-  <div class="ds-comp-tab-panel active" data-tab="overview">
-
-    <!-- Descripción principal -->
-    <section class="docs-section">
-      <h2 class="docs-section-title">¿Qué es el Switch?</h2>
-      <p class="docs-section-desc">El Switch es un componente de selección binaria: encendido o apagado. A diferencia del checkbox, su efecto es <strong>inmediato</strong> — no requiere un botón "Guardar" para confirmar el cambio. Se usa exclusivamente cuando el resultado de la acción es claro, reversible y no necesita confirmación adicional.</p>
-      <p class="docs-section-desc">Puede incluir un ícono opcional dentro de la manija para reforzar el estado visualmente.</p>
-    </section>
-
-    <!-- Cuándo usar / no usar -->
-    <section class="docs-section">
-      <h2 class="docs-section-title">Cuándo usar</h2>
-      <ul class="ch-overview-list" style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:8px;">
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-tertiary);font-size:15px;flex-shrink:0;margin-top:1px;">✓</span>
-          <span>Para activar o desactivar un ajuste o preferencia <strong>de manera inmediata</strong>, sin flujo de confirmación.</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-tertiary);font-size:15px;flex-shrink:0;margin-top:1px;">✓</span>
-          <span>Cuando la opción es genuinamente <strong>binaria</strong>: encendido / apagado, activado / desactivado, visible / oculto.</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-tertiary);font-size:15px;flex-shrink:0;margin-top:1px;">✓</span>
-          <span>En pantallas de configuración o preferencias del sistema, donde cada ajuste es independiente.</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-tertiary);font-size:15px;flex-shrink:0;margin-top:1px;">✓</span>
-          <span>Cuando el cambio tiene consecuencias visibles y reversibles de inmediato (ej.: activar modo oscuro, habilitar notificaciones).</span>
-        </li>
-      </ul>
-
-      <h2 class="docs-section-title">Cuándo no usar</h2>
-      <ul class="ch-overview-list" style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:8px;">
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-error);font-size:15px;flex-shrink:0;margin-top:1px;">✗</span>
-          <span><strong>Selección múltiple:</strong> cuando el usuario puede marcar varias opciones de una lista, usá <a onclick="navigate('s-c-checkbox')" style="color:var(--ds-accent);cursor:pointer;text-decoration:underline">Checkbox</a>.</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-error);font-size:15px;flex-shrink:0;margin-top:1px;">✗</span>
-          <span><strong>Requiere guardado:</strong> si el cambio no se aplica hasta que el usuario presione "Guardar" o "Confirmar", usá Checkbox o Radio.</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-error);font-size:15px;flex-shrink:0;margin-top:1px;">✗</span>
-          <span><strong>Más de dos estados:</strong> si el control tiene estados neutrales, parciales o tri-state, considerá otro patrón.</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-error);font-size:15px;flex-shrink:0;margin-top:1px;">✗</span>
-          <span><strong>Sin etiqueta:</strong> el Switch siempre debe ir acompañado de un label descriptivo visible o un <code>aria-label</code> accesible.</span>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Variantes: SVG live illustrations -->
-    <section class="docs-section">
-      <h2 class="docs-section-title">Variantes</h2>
-      <p class="docs-section-desc">El Switch tiene dos variantes: <strong>sin ícono</strong> (predeterminada) y <strong>con ícono</strong>, que agrega un símbolo dentro de la manija para reforzar el estado.</p>
-
-      <!-- Variante 1: Sin ícono -->
-      <div class="ds-preview centered" style="gap:48px;flex-wrap:wrap;margin-bottom:0;">
-        <!-- Activado sin ícono -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-          <svg width="88" height="48" viewBox="0 0 88 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Switch activado" role="img">
-            <rect x="22" y="8" width="44" height="32" rx="16" fill="#4F80FF"/>
-            <circle cx="54" cy="24" r="12" fill="white"/>
-          </svg>
-          <span style="font-size:12px;color:var(--ds-text-2);font-family:'DM Mono',monospace;">Activado</span>
-        </div>
-
-        <!-- Desactivado sin ícono -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-          <svg width="88" height="48" viewBox="0 0 88 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Switch desactivado" role="img">
-            <rect x="22" y="8" width="44" height="32" rx="16" fill="#E8EAF0" stroke="#9FA3AE" stroke-width="2"/>
-            <circle cx="34" cy="24" r="8" fill="#9FA3AE"/>
-          </svg>
-          <span style="font-size:12px;color:var(--ds-text-2);font-family:'DM Mono',monospace;">Desactivado</span>
-        </div>
-      </div>
-      <div class="ds-code-wrap" style="margin-bottom:32px;">
-        <div class="ds-code solo">
-          <code>&lt;!-- Variante predeterminada (sin ícono) --&gt;
-&lt;!-- Coming soon: Embassy switch component --&gt;</code>
-        </div>
+      <div class="ds-callout" style="margin-top:0">
+        <strong>Implementación: Material Web oficial.</strong> Esta página renderiza el componente <code>&lt;md-switch&gt;</code> de <code>@material/web</code> (Material Design&nbsp;3), tematizado con los tokens semánticos de Embassy vía <code>md-sys-bridge.css</code> (<code>--md-sys-color-* → --color-*</code>). Estados, ripple, foco y motion son los oficiales de Material; la paleta es la de Embassy.
       </div>
 
-      <!-- Variante 2: Con ícono -->
-      <h3 class="ds-h3" style="margin-top:8px;">Con ícono</h3>
-      <p class="docs-section-desc" style="margin-bottom:16px;">El ícono aparece dentro de la manija y escala con ella. En estado activado se muestra el ícono de "check"; en desactivado, una "X" o ningún ícono.</p>
-      <div class="ds-preview centered" style="gap:48px;flex-wrap:wrap;margin-bottom:0;">
-        <!-- Activado con ícono -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-          <svg width="88" height="48" viewBox="0 0 88 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Switch activado con ícono de check" role="img">
-            <rect x="22" y="8" width="44" height="32" rx="16" fill="#4F80FF"/>
-            <circle cx="54" cy="24" r="12" fill="white"/>
-            <path d="M48.5 24.5L52 28L59.5 20.5" stroke="#4F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span style="font-size:12px;color:var(--ds-text-2);font-family:'DM Mono',monospace;">Activado + ícono</span>
-        </div>
-
-        <!-- Desactivado con ícono -->
-        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-          <svg width="88" height="48" viewBox="0 0 88 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Switch desactivado con ícono de X" role="img">
-            <rect x="22" y="8" width="44" height="32" rx="16" fill="#E8EAF0" stroke="#9FA3AE" stroke-width="2"/>
-            <circle cx="34" cy="24" r="8" fill="#9FA3AE"/>
-            <path d="M31.5 21.5L36.5 26.5M36.5 21.5L31.5 26.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-          <span style="font-size:12px;color:var(--ds-text-2);font-family:'DM Mono',monospace;">Desactivado + ícono</span>
-        </div>
+      <div class="ds-comp-tabs">
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-code-wrap" style="margin-bottom:32px;">
-        <div class="ds-code solo">
-          <code>&lt;!-- Variante con ícono --&gt;
-&lt;!-- Coming soon: Embassy switch component --&gt;</code>
-        </div>
-      </div>
-    </section>
 
-    <!-- Related components -->
-    <section class="docs-section">
-      <h2 class="docs-section-title">Componentes relacionados</h2>
-      <div class="nav-card-grid" style="grid-template-columns:repeat(2,1fr);max-width:520px;">
-        <div class="nav-card nav-card--compact" onclick="navigate('s-c-checkbox')">
-          <div class="nav-card-header">
-            <span class="nav-card-tag">Component</span>
-            <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+      <!-- OVERVIEW -->
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados</h2>
+          <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch aria-label="Apagado"></md-switch> Apagado</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch selected aria-label="Encendido"></md-switch> Encendido</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch icons aria-label="Apagado con íconos"></md-switch> Íconos (off)</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch selected icons aria-label="Encendido con íconos"></md-switch> Íconos (on)</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch disabled aria-label="Deshabilitado apagado"></md-switch> Deshab. off</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch selected disabled aria-label="Deshabilitado encendido"></md-switch> Deshab. on</label></div>
           </div>
-          <div class="nav-card-content">
-            <div class="nav-card-title">Checkbox</div>
-            <div class="nav-card-desc">Para selección múltiple o cuando el cambio requiere confirmación.</div>
-          </div>
-        </div>
-        <div class="nav-card nav-card--compact" onclick="navigate('s-c-radio')">
-          <div class="nav-card-header">
-            <span class="nav-card-tag">Component</span>
-            <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
-          </div>
-          <div class="nav-card-content">
-            <div class="nav-card-title">Radio</div>
-            <div class="nav-card-desc">Para selección exclusiva de una opción dentro de un grupo.</div>
-          </div>
-        </div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">¿Qué es?</h2>
+          <p class="docs-section-desc">Activa o desactiva una opción con efecto inmediato — no requiere confirmación. Pista de 52×32&nbsp;dp; el handle crece de 16&nbsp;dp (apagado) a 24&nbsp;dp (encendido) y puede mostrar un ícono de check/cross. Área de toque 48×48&nbsp;dp.</p>
+        </section>
       </div>
-    </section>
 
-  </div><!-- /overview -->
-
-
-  <!-- ══════════════════════════════════
-       TAB: SPECS
-  ══════════════════════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="specs">
-
-    <!-- ── ss-sw-configs: Configuraciones ── -->
-    <section class="docs-section" id="ss-sw-configs">
-      <h2 class="docs-section-title">Configuraciones</h2>
-      <p class="docs-section-desc">Las cuatro configuraciones básicas del Switch: estado activado y desactivado, en variante sin ícono y con ícono.</p>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:680px;margin-bottom:32px;">
-
-        <!-- Activado sin ícono -->
-        <div class="ds-preview centered" style="flex-direction:column;gap:12px;padding:24px 20px;">
-          <svg width="88" height="48" viewBox="0 0 88 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Switch activado" role="img">
-            <rect x="22" y="8" width="44" height="32" rx="16" fill="#4F80FF"/>
-            <circle cx="54" cy="24" r="12" fill="white"/>
-          </svg>
-          <span style="font-size:12px;color:var(--ds-text-2);font-family:'DM Mono',monospace;text-align:center;">Activado</span>
-        </div>
-
-        <!-- Desactivado sin ícono -->
-        <div class="ds-preview centered" style="flex-direction:column;gap:12px;padding:24px 20px;">
-          <svg width="88" height="48" viewBox="0 0 88 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Switch desactivado" role="img">
-            <rect x="22" y="8" width="44" height="32" rx="16" fill="#E8EAF0" stroke="#9FA3AE" stroke-width="2"/>
-            <circle cx="34" cy="24" r="8" fill="#9FA3AE"/>
-          </svg>
-          <span style="font-size:12px;color:var(--ds-text-2);font-family:'DM Mono',monospace;text-align:center;">Desactivado</span>
-        </div>
-
-        <!-- Activado con ícono -->
-        <div class="ds-preview centered" style="flex-direction:column;gap:12px;padding:24px 20px;">
-          <svg width="88" height="48" viewBox="0 0 88 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Switch activado con ícono" role="img">
-            <rect x="22" y="8" width="44" height="32" rx="16" fill="#4F80FF"/>
-            <circle cx="54" cy="24" r="12" fill="white"/>
-            <path d="M48.5 24.5L52 28L59.5 20.5" stroke="#4F80FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span style="font-size:12px;color:var(--ds-text-2);font-family:'DM Mono',monospace;text-align:center;">Activado con ícono</span>
-        </div>
-
-        <!-- Desactivado con ícono -->
-        <div class="ds-preview centered" style="flex-direction:column;gap:12px;padding:24px 20px;">
-          <svg width="88" height="48" viewBox="0 0 88 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Switch desactivado con ícono" role="img">
-            <rect x="22" y="8" width="44" height="32" rx="16" fill="#E8EAF0" stroke="#9FA3AE" stroke-width="2"/>
-            <circle cx="34" cy="24" r="8" fill="#9FA3AE"/>
-            <path d="M31.5 21.5L36.5 26.5M36.5 21.5L31.5 26.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-          <span style="font-size:12px;color:var(--ds-text-2);font-family:'DM Mono',monospace;text-align:center;">Desactivado con ícono</span>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── ss-sw-tokens: Tokens y Specs ── -->
-    <section class="docs-section" id="ss-sw-tokens">
-      <h2 class="docs-section-title">Tokens y especificaciones</h2>
-      <p class="docs-section-desc">Los tokens que gobiernan el color de pista, manija e ícono según el estado del Switch.</p>
-
-      <div class="ds-color-acc-list" style="margin-bottom:32px;">
-
-        <!-- Activado -->
-        <div class="ds-color-acc open">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="true">
-            <span class="ds-sem-grp-dot" style="background:#4F80FF;"></span>
-            <span class="ds-color-acc-name">Activado (selected)</span>
-            <span class="ds-color-acc-count">3</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <p class="ds-sem-grp-note">Estado en que el Switch está encendido. La pista adopta el color primario; la manija es blanca sobre él.</p>
-            <div class="ds-table-wrap">
-              <table class="ds-table">
-                <thead>
-                  <tr>
-                    <th>Elemento</th>
-                    <th>Token</th>
-                    <th>Light</th>
-                    <th>Dark</th>
-                    <th>Descripción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Pista</td>
-                    <td><code>--color-primary</code></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#01164D</span></div></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#FFFFFF;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#FFFFFF</span></div></td>
-                    <td style="font-size:12px;color:var(--ds-text-2);">Relleno de la pista en estado activo.</td>
-                  </tr>
-                  <tr>
-                    <td>Manija</td>
-                    <td><code>--color-on-primary</code></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#FFFFFF;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#FFFFFF</span></div></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#01164D</span></div></td>
-                    <td style="font-size:12px;color:var(--ds-text-2);">Color de la manija sobre pista primaria.</td>
-                  </tr>
-                  <tr>
-                    <td>Ícono (si aplica)</td>
-                    <td><code>--color-on-primary-container</code></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#01164D</span></div></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#E4E7EF;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#E4E7EF</span></div></td>
-                    <td style="font-size:12px;color:var(--ds-text-2);">Ícono dentro de la manija activa.</td>
-                  </tr>
-                </tbody>
-              </table>
+      <!-- GUIDELINES -->
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do">
+              <div class="bd-dd-head">✓ Usar</div>
+              <div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9">
+                <li>Activar/desactivar una opción con efecto inmediato (modo oscuro, notificaciones, Wi-Fi).</li>
+                <li>Ajustes de sistema o preferencias que se aplican al instante.</li>
+                <li>Un único estado binario, independiente de otros.</li>
+              </ul></div>
+            </div>
+            <div class="bd-dd dont">
+              <div class="bd-dd-head">✕ No usar</div>
+              <div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9">
+                <li>El cambio necesita confirmación ("Guardar") → <b>Checkbox</b>.</li>
+                <li>Elegir una opción entre varias → <b>Radio</b> o <b>Segmented Button</b>.</li>
+                <li>Selección múltiple en un formulario → <b>Checkbox</b>.</li>
+              </ul></div>
             </div>
           </div>
-        </div>
-
-        <!-- Desactivado -->
-        <div class="ds-color-acc">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
-            <span class="ds-sem-grp-dot" style="background:#9FA3AE;"></span>
-            <span class="ds-color-acc-name">Desactivado (unselected)</span>
-            <span class="ds-color-acc-count">3</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <p class="ds-sem-grp-note">Estado en que el Switch está apagado. La pista usa el contenedor de superficie más alto; la manija y el borde utilizan el color de contorno.</p>
-            <div class="ds-table-wrap">
-              <table class="ds-table">
-                <thead>
-                  <tr>
-                    <th>Elemento</th>
-                    <th>Token</th>
-                    <th>Light</th>
-                    <th>Dark</th>
-                    <th>Descripción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Pista (relleno)</td>
-                    <td><code>--color-surface-container-highest</code></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#BFC1C8</span></div></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#353A4A;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#353A4A</span></div></td>
-                    <td style="font-size:12px;color:var(--ds-text-2);">Superficie del contenedor de la pista.</td>
-                  </tr>
-                  <tr>
-                    <td>Borde de pista</td>
-                    <td><code>--color-outline</code></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#9FA3AE</span></div></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#747989;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#747989</span></div></td>
-                    <td style="font-size:12px;color:var(--ds-text-2);">Borde de 2px sobre la pista desactivada.</td>
-                  </tr>
-                  <tr>
-                    <td>Manija</td>
-                    <td><code>--color-outline</code></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#9FA3AE</span></div></td>
-                    <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#747989;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);flex-shrink:0;"></span><span class="ds-sem-hex">#747989</span></div></td>
-                    <td style="font-size:12px;color:var(--ds-text-2);">Color de la manija en estado no activo (más pequeña: 16dp).</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /ds-color-acc-list -->
-
-      <!-- Tabla de dimensiones -->
-      <h3 class="ds-h3">Medidas y especificaciones</h3>
-      <div class="ds-table-wrap" style="margin-bottom:32px;">
-        <table class="ds-table">
-          <thead>
-            <tr>
-              <th>Propiedad</th>
-              <th>Valor</th>
-              <th>Token / Nota</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Pista — ancho</td><td>52dp</td><td>—</td></tr>
-            <tr><td>Pista — alto</td><td>32dp</td><td>—</td></tr>
-            <tr><td>Pista — radio</td><td>pill</td><td><code>--radius-full</code></td></tr>
-            <tr><td>Manija — diámetro (desactivado)</td><td>16dp</td><td>—</td></tr>
-            <tr><td>Manija — diámetro (activado)</td><td>24dp</td><td>—</td></tr>
-            <tr><td>Manija — diámetro (presionado)</td><td>28dp</td><td>—</td></tr>
-            <tr><td>Ícono — tamaño</td><td>16dp</td><td>Opcional, dentro de la manija</td></tr>
-            <tr><td>Área táctil (touch target)</td><td>48×48dp</td><td>Requerimiento de accesibilidad</td></tr>
-            <tr><td>Capa de estado (state layer)</td><td>40dp diámetro</td><td>Centrada en la manija</td></tr>
-            <tr><td>Duración de transición</td><td>—</td><td><code>--duration-fast</code></td></tr>
-            <tr><td>Curva de animación</td><td>—</td><td><code>--ease-default</code></td></tr>
-            <tr><td>Opacidad deshabilitado (handle/icon)</td><td>38%</td><td>—</td></tr>
-            <tr><td>Opacidad deshabilitado (track)</td><td>12%</td><td>—</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ── ss-sw-anatomy: Anatomía ── -->
-    <section class="docs-section" id="ss-sw-anatomy">
-      <h2 class="docs-section-title">Anatomía</h2>
-      <p class="docs-section-desc">El Switch está compuesto por cuatro elementos: la pista, la manija, el ícono opcional y la capa de estado.</p>
-
-      <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:14px;padding:32px;display:flex;justify-content:center;margin-bottom:16px;overflow-x:auto;">
-        <svg viewBox="0 0 440 180" width="440" height="180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Anatomía del Switch: 1 pista, 2 manija, 3 ícono, 4 capa de estado" role="img" style="max-width:100%;">
-
-          <!-- ── Switch body — centrado en (194,90) ── -->
-          <rect x="168" y="74" width="52" height="32" rx="16" fill="#4F80FF"/>
-          <circle cx="204" cy="90" r="20" stroke="#4F80FF" stroke-width="1.5" stroke-dasharray="4 3" fill="none" opacity="0.5"/>
-          <circle cx="204" cy="90" r="12" fill="white"/>
-          <path d="M198.5 90.5L202 94L209.5 86.5" stroke="#4F80FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-
-          <!-- PIN 1: Pista -->
-          <line x1="168" y1="86" x2="84" y2="52" stroke="#4F80FF" stroke-width="1"/>
-          <circle cx="168" cy="86" r="3" fill="#4F80FF"/>
-          <circle cx="60" cy="44" r="12" fill="white" stroke="#4F80FF" stroke-width="1.5"/>
-          <text x="60" y="48" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#4F80FF">1</text>
-          <text x="78" y="49" font-family="'DM Mono',monospace" font-size="11" fill="#474D61">Pista</text>
-
-          <!-- PIN 2: Manija -->
-          <line x1="204" y1="78" x2="260" y2="44" stroke="#4F80FF" stroke-width="1"/>
-          <circle cx="204" cy="78" r="3" fill="#4F80FF"/>
-          <circle cx="274" cy="36" r="12" fill="white" stroke="#4F80FF" stroke-width="1.5"/>
-          <text x="274" y="40" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#4F80FF">2</text>
-          <text x="292" y="41" font-family="'DM Mono',monospace" font-size="11" fill="#474D61">Manija</text>
-
-          <!-- PIN 3: Ícono -->
-          <line x1="208" y1="94" x2="300" y2="130" stroke="#4F80FF" stroke-width="1"/>
-          <circle cx="208" cy="94" r="3" fill="#4F80FF"/>
-          <circle cx="316" cy="136" r="12" fill="white" stroke="#4F80FF" stroke-width="1.5"/>
-          <text x="316" y="140" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#4F80FF">3</text>
-          <text x="334" y="141" font-family="'DM Mono',monospace" font-size="11" fill="#474D61">Ícono</text>
-
-          <!-- PIN 4: Capa de estado -->
-          <line x1="184" y1="90" x2="108" y2="140" stroke="#4F80FF" stroke-width="1"/>
-          <circle cx="184" cy="90" r="3" fill="#4F80FF"/>
-          <circle cx="94" cy="148" r="12" fill="white" stroke="#4F80FF" stroke-width="1.5"/>
-          <text x="94" y="152" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#4F80FF">4</text>
-          <text x="112" y="153" font-family="'DM Mono',monospace" font-size="11" fill="#474D61">Capa de estado</text>
-
-        </svg>
+        </section>
       </div>
 
-      <ol style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:10px;">
-        <li style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="width:24px;height:24px;border-radius:50%;background:var(--ds-card);border:1.5px solid var(--ds-text-1);color:var(--ds-text-1);font:600 11px/1 'Inter',sans-serif;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>
-          <span><b style="color:var(--ds-text-1);">Pista (Track)</b> — 52×32dp, radio <code>--radius-full</code>. Fondo <code>--color-primary</code> (activo) o <code>--color-surface-container-highest</code> + borde <code>--color-outline</code> (inactivo).</span>
-        </li>
-        <li style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="width:24px;height:24px;border-radius:50%;background:var(--ds-card);border:1.5px solid var(--ds-text-1);color:var(--ds-text-1);font:600 11px/1 'Inter',sans-serif;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>
-          <span><b style="color:var(--ds-text-1);">Manija (Handle)</b> — 16dp (inactivo), 24dp (activo), 28dp (presionado). Se desplaza horizontalmente dentro de la pista con transición animada.</span>
-        </li>
-        <li style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="width:24px;height:24px;border-radius:50%;background:var(--ds-card);border:1.5px solid var(--ds-text-1);color:var(--ds-text-1);font:600 11px/1 'Inter',sans-serif;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>
-          <span><b style="color:var(--ds-text-1);">Ícono</b> — 16dp, opcional. Color <code>--color-on-primary-container</code> sobre la manija activa. Solo disponible en la variante con ícono.</span>
-        </li>
-        <li style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="width:24px;height:24px;border-radius:50%;background:var(--ds-card);border:1.5px solid var(--ds-text-1);color:var(--ds-text-1);font:600 11px/1 'Inter',sans-serif;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">4</span>
-          <span><b style="color:var(--ds-text-1);">Capa de estado (State layer)</b> — círculo de 40dp centrado en la manija. Aparece en hover, foco y presionado con overlay semitransparente. No visible en reposo.</span>
-        </li>
-      </ol>
-    </section>
-
-    <!-- ── ss-sw-color: Color ── -->
-    <section class="docs-section" id="ss-sw-color">
-      <h2 class="docs-section-title">Color</h2>
-      <p class="docs-section-desc">El Switch usa tokens semánticos que cambian automáticamente entre modo claro y oscuro. No se requieren overrides manuales por tema.</p>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;">
-
-        <!-- Light mode -->
-        <div style="background:#FAFBFC;border:1px solid #E4E7EF;border-radius:14px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;gap:20px;">
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#353A4A;">Claro</span>
-          <div style="display:flex;gap:20px;align-items:center;">
-            <svg width="70" height="40" viewBox="0 0 70 40" fill="none" aria-label="Switch activado modo claro">
-              <rect x="9" y="4" width="52" height="32" rx="16" fill="#01164D"/>
-              <circle cx="49" cy="20" r="12" fill="#FFFFFF"/>
-              <path d="M43.5 20.5L47 24L54.5 16.5" stroke="#01164D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <svg width="70" height="40" viewBox="0 0 70 40" fill="none" aria-label="Switch desactivado modo claro">
-              <rect x="9" y="4" width="52" height="32" rx="16" fill="#BFC1C8" stroke="#9FA3AE" stroke-width="2"/>
-              <circle cx="21" cy="20" r="8" fill="#9FA3AE"/>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Dark mode -->
-        <div style="background:#13161F;border:1px solid #1C202C;border-radius:14px;padding:28px 24px;display:flex;flex-direction:column;align-items:center;gap:20px;">
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#747989;">Oscuro</span>
-          <div style="display:flex;gap:20px;align-items:center;">
-            <svg width="70" height="40" viewBox="0 0 70 40" fill="none" aria-label="Switch activado modo oscuro">
-              <rect x="9" y="4" width="52" height="32" rx="16" fill="#FFFFFF"/>
-              <circle cx="49" cy="20" r="12" fill="#01164D"/>
-              <path d="M43.5 20.5L47 24L54.5 16.5" stroke="#E4E7EF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <svg width="70" height="40" viewBox="0 0 70 40" fill="none" aria-label="Switch desactivado modo oscuro">
-              <rect x="9" y="4" width="52" height="32" rx="16" fill="#353A4A" stroke="#747989" stroke-width="2"/>
-              <circle cx="21" cy="20" r="8" fill="#747989"/>
-            </svg>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="ds-table-wrap">
-        <table class="ds-table">
-          <thead>
-            <tr>
-              <th>Elemento</th>
-              <th>Token</th>
-              <th>Light</th>
-              <th>Dark</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Pista (activado)</td>
-              <td><code>--color-primary</code></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#01164D</span></div></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#FFFFFF;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#FFFFFF</span></div></td>
-            </tr>
-            <tr>
-              <td>Manija (activado)</td>
-              <td><code>--color-on-primary</code></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#FFFFFF;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#FFFFFF</span></div></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#01164D</span></div></td>
-            </tr>
-            <tr>
-              <td>Pista (desactivado)</td>
-              <td><code>--color-surface-container-highest</code></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#BFC1C8</span></div></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#353A4A;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#353A4A</span></div></td>
-            </tr>
-            <tr>
-              <td>Borde de pista</td>
-              <td><code>--color-outline</code></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#9FA3AE</span></div></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#747989;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#747989</span></div></td>
-            </tr>
-            <tr>
-              <td>Manija (desactivado)</td>
-              <td><code>--color-outline</code></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#9FA3AE</span></div></td>
-              <td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:#747989;display:inline-block;width:28px;height:28px;border-radius:6px;border:1px solid rgba(0,0,0,.1);"></span> <span class="ds-sem-hex">#747989</span></div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ── ss-sw-states: Estados ── -->
-    <section class="docs-section" id="ss-sw-states">
-      <h2 class="docs-section-title">Estados</h2>
-      <p class="docs-section-desc">El Switch soporta cinco estados de interacción. Cada uno aplica una capa visual distinta sobre la manija y la pista.</p>
-
-      <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:14px;padding:28px 24px;overflow-x:auto;margin-bottom:16px;">
-        <svg viewBox="0 0 560 360" width="560" height="360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Estados del Switch" role="img" style="max-width:100%;">
-
-          <!-- Headers -->
-          <text x="24" y="28" font-family="'DM Mono',monospace" font-size="11" font-weight="700" fill="#474D61">Estado</text>
-          <text x="196" y="28" font-family="'DM Mono',monospace" font-size="11" font-weight="700" fill="#4F80FF" text-anchor="middle">Activado</text>
-          <text x="356" y="28" font-family="'DM Mono',monospace" font-size="11" font-weight="700" fill="#9FA3AE" text-anchor="middle">Desactivado</text>
-          <line x1="8" y1="36" x2="548" y2="36" stroke="#BFC1C8" stroke-width="1" opacity="0.5"/>
-
-          <!-- ROW 1: Habilitado y=68 -->
-          <text x="24" y="74" font-family="Inter,sans-serif" font-size="12" fill="#474D61">Habilitado</text>
-          <rect x="170" y="56" width="52" height="32" rx="16" fill="#4F80FF"/>
-          <circle cx="210" cy="72" r="12" fill="white"/>
-          <rect x="330" y="56" width="52" height="32" rx="16" fill="#E8EAF0" stroke="#9FA3AE" stroke-width="2"/>
-          <circle cx="342" cy="72" r="8" fill="#9FA3AE"/>
-
-          <!-- ROW 2: Hover y=136 -->
-          <text x="24" y="142" font-family="Inter,sans-serif" font-size="12" fill="#474D61">Hover</text>
-          <rect x="170" y="124" width="52" height="32" rx="16" fill="#4F80FF"/>
-          <circle cx="210" cy="140" r="12" fill="white"/>
-          <circle cx="210" cy="140" r="18" stroke="#4F80FF" stroke-width="1.5" stroke-dasharray="3 2" fill="none" opacity="0.6"/>
-          <rect x="330" y="124" width="52" height="32" rx="16" fill="#E8EAF0" stroke="#9FA3AE" stroke-width="2"/>
-          <circle cx="342" cy="140" r="8" fill="#9FA3AE"/>
-          <circle cx="342" cy="140" r="16" stroke="#9FA3AE" stroke-width="1.5" stroke-dasharray="3 2" fill="none" opacity="0.5"/>
-
-          <!-- ROW 3: Enfocado y=204 -->
-          <text x="24" y="210" font-family="Inter,sans-serif" font-size="12" fill="#474D61">Enfocado</text>
-          <rect x="170" y="192" width="52" height="32" rx="16" fill="#4F80FF"/>
-          <circle cx="210" cy="208" r="12" fill="white"/>
-          <rect x="165" y="187" width="62" height="42" rx="20" stroke="#4F80FF" stroke-width="2.5" stroke-dasharray="4 3" fill="none"/>
-          <rect x="330" y="192" width="52" height="32" rx="16" fill="#E8EAF0" stroke="#9FA3AE" stroke-width="2"/>
-          <circle cx="342" cy="208" r="8" fill="#9FA3AE"/>
-          <rect x="325" y="187" width="62" height="42" rx="20" stroke="#4F80FF" stroke-width="2.5" stroke-dasharray="4 3" fill="none"/>
-
-          <!-- ROW 4: Presionado y=272 -->
-          <text x="24" y="278" font-family="Inter,sans-serif" font-size="12" fill="#474D61">Presionado</text>
-          <rect x="170" y="260" width="52" height="32" rx="16" fill="#4F80FF"/>
-          <circle cx="210" cy="276" r="20" fill="rgba(79,128,255,0.18)"/>
-          <circle cx="210" cy="276" r="14" fill="white"/>
-          <rect x="330" y="260" width="52" height="32" rx="16" fill="#E8EAF0" stroke="#9FA3AE" stroke-width="2"/>
-          <circle cx="342" cy="276" r="18" fill="rgba(159,163,174,0.18)"/>
-          <circle cx="342" cy="276" r="10" fill="#9FA3AE"/>
-
-          <!-- ROW 5: Deshabilitado y=340 -->
-          <text x="24" y="345" font-family="Inter,sans-serif" font-size="12" fill="#474D61" opacity="0.5">Deshabilitado</text>
-          <g opacity="0.38">
-            <rect x="170" y="327" width="52" height="32" rx="16" fill="#4F80FF"/>
-            <circle cx="210" cy="343" r="12" fill="white"/>
-          </g>
-          <g opacity="0.38">
-            <rect x="330" y="327" width="52" height="32" rx="16" fill="#E8EAF0" stroke="#9FA3AE" stroke-width="2"/>
-            <circle cx="342" cy="343" r="8" fill="#9FA3AE"/>
-          </g>
-
-          <!-- Separators -->
-          <line x1="154" y1="36" x2="154" y2="360" stroke="#BFC1C8" stroke-width="1" opacity="0.35"/>
-          <line x1="308" y1="36" x2="308" y2="360" stroke="#BFC1C8" stroke-width="1" opacity="0.35"/>
-          <line x1="8" y1="104" x2="548" y2="104" stroke="#BFC1C8" stroke-width="1" opacity="0.25"/>
-          <line x1="8" y1="172" x2="548" y2="172" stroke="#BFC1C8" stroke-width="1" opacity="0.25"/>
-          <line x1="8" y1="240" x2="548" y2="240" stroke="#BFC1C8" stroke-width="1" opacity="0.25"/>
-          <line x1="8" y1="308" x2="548" y2="308" stroke="#BFC1C8" stroke-width="1" opacity="0.25"/>
-
-        </svg>
-      </div>
-
-      <div class="ds-table-wrap" style="margin-bottom:32px;">
-        <table class="ds-table">
-          <thead>
-            <tr><th>Estado</th><th>Descripción visual</th><th>Layer / token</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Habilitado</td><td>Estado de reposo. Sin overlay adicional.</td><td>—</td></tr>
-            <tr><td>Hover</td><td>Capa de estado semitransparente alrededor de la manija.</td><td><code>--color-primary</code> a 8% de opacidad</td></tr>
-            <tr><td>Enfocado</td><td>Anillo de foco sobre el contorno del Switch completo.</td><td><code>--color-secondary</code> · outline 2.5px dashed</td></tr>
-            <tr><td>Presionado</td><td>Manija se expande (28dp) con ripple circular más opaco.</td><td><code>--color-primary</code> a 14% de opacidad</td></tr>
-            <tr><td>Deshabilitado</td><td>Manija e ícono al 38% de opacidad; pista al 12%.</td><td><code>pointer-events: none</code> · opacidad reducida</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ── ss-sw-measures: Medidas ── -->
-    <section class="docs-section" id="ss-sw-measures">
-      <h2 class="docs-section-title">Medidas</h2>
-      <p class="docs-section-desc">Dimensiones exactas del Switch según la especificación MD3. El área táctil de 48dp se mantiene siempre, aunque el componente visible sea más pequeño.</p>
-
-      <div style="background:var(--ds-card);border:1px solid var(--ds-card-border);border-radius:14px;padding:32px;display:flex;justify-content:center;overflow-x:auto;margin-bottom:32px;">
-        <svg viewBox="0 0 400 180" width="400" height="180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Diagrama de medidas del Switch" role="img" style="max-width:100%;">
-
-          <!-- Touch target dashed box: 48×48 -->
-          <rect x="176" y="66" width="48" height="48" rx="6" stroke="#4F80FF" stroke-width="1.5" stroke-dasharray="5 3" fill="none"/>
-
-          <!-- Track: 52×32 -->
-          <rect x="174" y="74" width="52" height="32" rx="16" fill="#4F80FF"/>
-
-          <!-- Handle selected: r=12 -->
-          <circle cx="214" cy="90" r="12" fill="white"/>
-
-          <!-- Handle unselected (ghost) -->
-          <circle cx="186" cy="90" r="8" fill="none" stroke="#9FA3AE" stroke-width="1.5" stroke-dasharray="3 2"/>
-
-          <!-- Track width: 52 -->
-          <line x1="174" y1="62" x2="226" y2="62" stroke="#4F80FF" stroke-width="1.5"/>
-          <line x1="174" y1="58" x2="174" y2="66" stroke="#4F80FF" stroke-width="1.5"/>
-          <line x1="226" y1="58" x2="226" y2="66" stroke="#4F80FF" stroke-width="1.5"/>
-          <text x="200" y="57" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" font-weight="600" fill="#4F80FF">52dp</text>
-
-          <!-- Track height: 32 -->
-          <line x1="234" y1="74" x2="234" y2="106" stroke="#4F80FF" stroke-width="1.5"/>
-          <line x1="230" y1="74" x2="238" y2="74" stroke="#4F80FF" stroke-width="1.5"/>
-          <line x1="230" y1="106" x2="238" y2="106" stroke="#4F80FF" stroke-width="1.5"/>
-          <text x="248" y="94" text-anchor="start" font-family="'DM Mono',monospace" font-size="10" font-weight="600" fill="#4F80FF">32dp</text>
-
-          <!-- Handle labels -->
-          <line x1="214" y1="90" x2="226" y2="90" stroke="#9FA3AE" stroke-width="1" stroke-dasharray="2 2"/>
-          <text x="290" y="88" text-anchor="start" font-family="'DM Mono',monospace" font-size="10" fill="#474D61">Manija activa</text>
-          <text x="290" y="100" text-anchor="start" font-family="'DM Mono',monospace" font-size="10" fill="#4F80FF">24dp</text>
-          <text x="290" y="116" text-anchor="start" font-family="'DM Mono',monospace" font-size="10" fill="#474D61">Manija inactiva</text>
-          <text x="290" y="128" text-anchor="start" font-family="'DM Mono',monospace" font-size="10" fill="#4F80FF">16dp</text>
-
-          <!-- Touch target label -->
-          <text x="200" y="126" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" fill="#4F80FF" opacity="0.8">Touch target: 48dp</text>
-
-          <line x1="226" y1="90" x2="285" y2="94" stroke="#9FA3AE" stroke-width="1" opacity="0.5"/>
-          <line x1="186" y1="90" x2="285" y2="121" stroke="#9FA3AE" stroke-width="1" stroke-dasharray="2 2" opacity="0.5"/>
-
-        </svg>
-      </div>
-    </section>
-
-  </div><!-- /specs -->
-
-
-  <!-- ══════════════════════════════════
-       TAB: GUIDELINES
-  ══════════════════════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="guidelines">
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Efecto inmediato</h2>
-      <p class="docs-section-desc">La regla más importante del Switch: <strong>el cambio se aplica de inmediato</strong>, sin necesidad de confirmar con un botón "Guardar" o "Aceptar". Si el ajuste requiere confirmación antes de guardarse, usá un <strong>Checkbox</strong> en lugar del Switch.</p>
-      <div class="ds-callout">
-        <strong>Regla de oro:</strong> Switch = efecto instantáneo. Checkbox = efecto al confirmar. Si dudás, preguntate si el usuario puede deshacer el cambio con un segundo toque sin consecuencias.
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Etiqueta siempre presente</h2>
-      <p class="docs-section-desc">El Switch nunca debe aparecer solo. Siempre necesita un label descriptivo que explique qué activa o desactiva. El label debe ir a la izquierda o derecha del control, alineado al centro vertical.</p>
-      <ul class="ch-overview-list" style="list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:8px;">
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-tertiary);font-size:15px;flex-shrink:0;margin-top:1px;">✓</span>
-          <span>El label describe <strong>qué ocurre</strong> cuando está activado, no el nombre del control. Ej.: "Recibir notificaciones push" en lugar de "Notificaciones".</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-tertiary);font-size:15px;flex-shrink:0;margin-top:1px;">✓</span>
-          <span>Si el label no es visible (ej.: ícono solo), el elemento debe tener un <code>aria-label</code> explícito.</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-tertiary);font-size:15px;flex-shrink:0;margin-top:1px;">✓</span>
-          <span>El label es clickeable y activa/desactiva el Switch al igual que el propio control.</span>
-        </li>
-      </ul>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Variante con ícono</h2>
-      <p class="docs-section-desc">Usá la variante con ícono cuando el estado visual necesite un refuerzo semántico adicional. El ícono ayuda a usuarios con dificultades para percibir el color o la posición de la manija.</p>
-      <ul class="ch-overview-list" style="list-style:none;padding:0;margin:0 0 16px;display:flex;flex-direction:column;gap:8px;">
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-tertiary);font-size:15px;flex-shrink:0;margin-top:1px;">✓</span>
-          <span>Ícono de <strong>check</strong> para el estado activado.</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-tertiary);font-size:15px;flex-shrink:0;margin-top:1px;">✓</span>
-          <span>Ícono de <strong>X</strong> o sin ícono para el estado desactivado.</span>
-        </li>
-        <li style="display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ds-text-2);line-height:1.6;">
-          <span style="color:var(--md-error);font-size:15px;flex-shrink:0;margin-top:1px;">✗</span>
-          <span>No uses íconos no relacionados con el estado (ej.: un sol o una luna dentro del switch de notificaciones — puede confundir).</span>
-        </li>
-      </ul>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Do / Don't</h2>
-      <div class="ds-guideline-grid">
-
-        <div class="ds-guideline-card do">
-          <h3>Usar con efecto inmediato</h3>
-          <ul>
-            <li>El ajuste se activa/desactiva en el mismo instante del toggle.</li>
-            <li>El usuario puede revertir el cambio instantáneamente.</li>
-            <li>No aparece un botón "Guardar" asociado al Switch.</li>
+      <!-- ACCESSIBILITY -->
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Asociá siempre una etiqueta: envolvé el <code>&lt;md-switch&gt;</code> en un <code>&lt;label&gt;</code> o usá <code>aria-label</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Expone <code>role="switch"</code> nativo; operable por teclado (Espacio/Enter) con foco visible oficial.</li>
+            <li><span class="ds-a11y-icon">♿</span>No comuniques el estado solo por color — la posición del handle y el ícono opcional refuerzan on/off.</li>
+            <li><span class="ds-a11y-icon">♿</span>El área de toque de 48×48&nbsp;dp la garantiza el propio componente.</li>
           </ul>
-        </div>
-
-        <div class="ds-guideline-card dont">
-          <h3>No usar para guardar formularios</h3>
-          <ul>
-            <li>Si el ajuste forma parte de un formulario con "Guardar", usá Checkbox.</li>
-            <li>No combines Switch con "Guardar cambios" en la misma fila.</li>
-            <li>No uses Switch para acciones irreversibles sin confirmación modal.</li>
-          </ul>
-        </div>
-
-        <div class="ds-guideline-card do">
-          <h3>Siempre con label descriptivo</h3>
-          <ul>
-            <li>El texto describe el estado activo con claridad.</li>
-            <li>El label es clickeable y amplía el área de toque.</li>
-            <li>Se provee <code>aria-label</code> si el label no es visible.</li>
-          </ul>
-        </div>
-
-        <div class="ds-guideline-card dont">
-          <h3>No usar para selección múltiple</h3>
-          <ul>
-            <li>Si el usuario puede elegir varias opciones de una lista, usá Checkbox.</li>
-            <li>No copies el patrón de lista de checkboxes con Switches.</li>
-            <li>No uses Switch en grupos de opciones mutuamente excluyentes — usá Radio.</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Componentes relacionados</h2>
-      <div class="nav-card-grid" style="grid-template-columns:repeat(2,1fr);max-width:520px;">
-        <div class="nav-card nav-card--compact" onclick="navigate('s-c-checkbox')">
-          <div class="nav-card-header">
-            <span class="nav-card-tag">Component</span>
-            <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
-          </div>
-          <div class="nav-card-content">
-            <div class="nav-card-title">Checkbox</div>
-            <div class="nav-card-desc">Para selección múltiple o cambios que requieren confirmación.</div>
-          </div>
-        </div>
-        <div class="nav-card nav-card--compact" onclick="navigate('s-c-radio')">
-          <div class="nav-card-header">
-            <span class="nav-card-tag">Component</span>
-            <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
-          </div>
-          <div class="nav-card-content">
-            <div class="nav-card-title">Radio</div>
-            <div class="nav-card-desc">Para selección exclusiva dentro de un grupo de opciones.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div><!-- /guidelines -->
-
-
-  <!-- ══════════════════════════════════
-       TAB: ACCESSIBILITY
-  ══════════════════════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="accessibility">
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Rol y semántica ARIA</h2>
-      <p class="docs-section-desc">El Switch debe implementarse con el rol <code>switch</code> de ARIA para que los lectores de pantalla anuncien correctamente el tipo de control y su estado.</p>
-
-      <ul class="ds-a11y-list" style="margin-bottom:32px;">
-        <li>
-          <span class="ds-a11y-icon">🔖</span>
-          <div>
-            <strong>Rol:</strong> <code>role="switch"</code> — informa al lector de pantalla que es un toggle binario. Alternativa nativa: <code>&lt;input type="checkbox"&gt;</code> con estilos visuales de Switch.
-          </div>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">☑️</span>
-          <div>
-            <strong>Estado:</strong> <code>aria-checked="true"</code> (activado) / <code>aria-checked="false"</code> (desactivado). El estado debe actualizarse dinámicamente al cambiar.
-          </div>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">🏷️</span>
-          <div>
-            <strong>Etiqueta:</strong> asociar siempre mediante <code>aria-label</code> o <code>aria-labelledby</code> apuntando al label visible. Un Switch sin nombre accesible es inutilizable para lectores de pantalla.
-          </div>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">🚫</span>
-          <div>
-            <strong>Deshabilitado:</strong> usar <code>disabled</code> (nativo) o <code>aria-disabled="true"</code>. El control debe excluirse del tab order cuando está deshabilitado.
-          </div>
-        </li>
-      </ul>
-
-      <div class="ds-code-wrap">
-        <div class="ds-code solo">
-          <code>&lt;!-- Implementación semántica recomendada --&gt;
-&lt;label id="sw-notif-label"&gt;Recibir notificaciones&lt;/label&gt;
-&lt;button
-  role="switch"
-  aria-checked="true"
-  aria-labelledby="sw-notif-label"
-  class="sw sw-on"
-&gt;
-  &lt;span class="sw-handle"&gt;&lt;/span&gt;
-&lt;/button&gt;</code>
-        </div>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Teclado</h2>
-
-      <ul class="ds-a11y-list" style="margin-bottom:32px;">
-        <li>
-          <span class="ds-a11y-icon">⌨️</span>
-          <div>
-            <strong><code>Space</code> o <code>Enter</code>:</strong> alterna el estado del Switch (de activado a desactivado y viceversa).
-          </div>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">⇥</span>
-          <div>
-            <strong><code>Tab</code> / <code>Shift+Tab</code>:</strong> mueve el foco hacia el Switch o desde él hacia el siguiente control.
-          </div>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">👁️</span>
-          <div>
-            <strong>Foco visible:</strong> usar <code>:focus-visible</code> para mostrar el anillo de foco únicamente en navegación por teclado. El outline debe ser de al menos 2px con color <code>--color-secondary</code>.
-          </div>
-        </li>
-        <li>
-          <span class="ds-a11y-icon">🎯</span>
-          <div>
-            <strong>Área táctil:</strong> el área de toque mínima es <strong>48×48dp</strong> (requerimiento WCAG 2.5.5). El label asociado también amplía el área activa.
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Lectores de pantalla — comportamiento esperado</h2>
-
-      <div class="ds-table-wrap">
-        <table class="ds-table">
-          <thead>
-            <tr>
-              <th>Estado</th>
-              <th>Anuncio esperado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Activado, en foco</td><td>"Recibir notificaciones, activado, switch"</td></tr>
-            <tr><td>Desactivado, en foco</td><td>"Recibir notificaciones, desactivado, switch"</td></tr>
-            <tr><td>Al activar (Space/Enter)</td><td>"activado" (VoiceOver) / "checked" (NVDA)</td></tr>
-            <tr><td>Al desactivar</td><td>"desactivado" / "unchecked"</td></tr>
-            <tr><td>Deshabilitado</td><td>"Recibir notificaciones, desactivado, switch, atenuado"</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </div><!-- /accessibility -->
-
-
-  <!-- ══════════════════════════════════
-       TAB: CODE (Coming soon)
-  ══════════════════════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="code">
-
-    <section class="docs-section">
-      <div class="bd-callout" style="display:flex;align-items:flex-start;gap:14px;padding:20px 24px;font-size:14px;line-height:1.6;">
-        <span class="bd-ico" style="font-size:22px;flex-shrink:0;margin-top:2px;">🚧</span>
-        <div>
-          <strong>Coming soon</strong><br>
-          El Switch está en el roadmap de Embassy. La implementación CSS y React estará disponible en próximas versiones del Design System. Por ahora, podés componer el comportamiento usando un <code>&lt;input type="checkbox"&gt;</code> con el rol <code>role="switch"</code> y los tokens de esta sección.
-        </div>
+        </section>
       </div>
 
-      <h2 class="docs-section-title" style="margin-top:32px;">Implementación provisional</h2>
-      <p class="docs-section-desc">Hasta que el componente Embassy esté disponible, usá esta base como referencia para una implementación accesible y tokeneada.</p>
+      <!-- CODE -->
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Código</h2>
+          <p class="docs-section-desc">Cargá el componente oficial una sola vez en el <code>&lt;head&gt;</code> (ya incluido en este sitio). La paleta de Embassy se aplica sola vía <code>md-sys-bridge.css</code>.</p>
+          <pre class="docs-code"><code>&lt;!-- carga (una vez, en &lt;head&gt;) --&gt;
+&lt;script type="importmap"&gt;
+{ "imports": { "@material/web/": "https://esm.run/@material/web/" } }
+&lt;/script&gt;
+&lt;script type="module"&gt;import '@material/web/all.js';&lt;/script&gt;
 
-      <div class="ds-code-wrap">
-        <div class="ds-code solo">
-          <code>&lt;div class="sw-row"&gt;
-  &lt;label class="sw-label" for="sw-example"&gt;Activar notificaciones&lt;/label&gt;
-  &lt;button
-    id="sw-example"
-    role="switch"
-    aria-checked="false"
-    class="sw"
-    onclick="this.setAttribute('aria-checked',
-      this.getAttribute('aria-checked') === 'true' ? 'false' : 'true')"
-  &gt;
-    &lt;span class="sw-handle"&gt;&lt;/span&gt;
-  &lt;/button&gt;
-&lt;/div&gt;</code>
-        </div>
-      </div>
-
-      <div class="ds-code-wrap">
-        <div class="ds-code solo">
-          <code>/* CSS provisional — usa tokens Embassy */
-.sw {
-  position: relative;
-  width: 52px; height: 32px;
-  border-radius: var(--radius-full);
-  border: 2px solid var(--color-outline);
-  background: var(--color-surface-container-highest);
-  cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-default),
-              border-color var(--duration-fast) var(--ease-default);
-  outline: none;
-}
-.sw[aria-checked="true"] {
-  background: var(--color-primary);
-  border-color: transparent;
-}
-.sw-handle {
-  position: absolute;
-  top: 50%; left: 4px;
-  transform: translateY(-50%);
-  width: 16px; height: 16px;
-  border-radius: 50%;
-  background: var(--color-outline);
-  transition: left var(--duration-fast) var(--ease-default),
-              width var(--duration-fast) var(--ease-default);
-}
-.sw[aria-checked="true"] .sw-handle {
-  left: calc(100% - 4px - 24px);
-  width: 24px; height: 24px;
-  background: var(--color-on-primary);
-}
-.sw:focus-visible {
-  outline: 2px solid var(--color-secondary);
-  outline-offset: 3px;
-}
-.sw[disabled], .sw[aria-disabled="true"] {
-  opacity: 0.38;
-  pointer-events: none;
-}
-.sw-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-}
-.sw-label {
-  font-size: var(--font-size-body-md);
-  font-family: var(--font-body);
-  color: var(--color-on-surface);
-  cursor: pointer;
-}</code>
-        </div>
+&lt;!-- uso --&gt;
+&lt;label&gt;&lt;md-switch&gt;&lt;/md-switch&gt; Notificaciones&lt;/label&gt;
+&lt;md-switch selected&gt;&lt;/md-switch&gt;
+&lt;md-switch icons&gt;&lt;/md-switch&gt;
+&lt;md-switch selected disabled&gt;&lt;/md-switch&gt;</code></pre>
+        </section>
       </div>
 
     </section>
-
-  </div><!-- /code -->
-
-</section>
     <!-- ═══════════ TEXT FIELD ═══════════ -->
     <!-- ═══════════ TOOLTIPS ═══════════ -->
     <section class="ds-section" id="s-c-tooltip">
