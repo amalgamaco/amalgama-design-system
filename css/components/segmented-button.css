@@ -10,18 +10,19 @@
      de 5 opciones o etiquetas muy dispares (usar Select).
    Reemplaza a: toggle-group custom, radio-button pill legacy.
 
-   Tokens:
-     Contenedor bg    → --color-surface-container
+   Color Roles (Embassy):
+     Contenedor bg    → --color-surface-container           (blanco en light)
      Contenedor borde → color-mix(--color-outline-variant 48%, transparent)
-     Texto inactivo   → --color-on-surface-variant
+     Texto inactivo   → --color-on-surface-variant          (secundario/muted)
+     Hover bg         → color-mix(--color-secondary  8%, transparent)
      Hover texto      → --color-primary
-     Hover bg         → color-mix(--color-secondary 8%, transparent)
-     Activo bg        → --color-secondary-container
+     Activo bg        → color-mix(--color-secondary 12%, transparent)
      Activo texto     → --color-secondary
+     Hover activo bg  → color-mix(--color-secondary 16%, transparent)
+     Presionado bg    → color-mix(--color-secondary 20%, transparent)
+     Disabled texto   → --color-on-disabled
+     Disabled sel. bg → color-mix(--color-on-surface 12%, transparent)
      Radio            → --radius-full (píldora)
-     Padding cont.    → 3px
-     Padding segmento → 6px 16px (md) · 4px 10px (sm) · 8px 20px (lg)
-     Gap segmentos    → 2px
 
    Dependencia: variables.css
    Uso:
@@ -76,7 +77,7 @@
 .seg-btn.selected,
 .seg-btn[aria-selected="true"],
 .seg-btn[aria-pressed="true"] {
-  background: var(--color-secondary-container);
+  background: color-mix(in srgb, var(--color-secondary) 12%, transparent);
   color: var(--color-secondary);
   font-weight: 600;
 }
@@ -85,12 +86,12 @@
 .seg-btn.selected:hover:not(:disabled),
 .seg-btn[aria-selected="true"]:hover:not(:disabled),
 .seg-btn[aria-pressed="true"]:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container));
+  background: color-mix(in srgb, var(--color-secondary) 16%, transparent);
 }
 
 /* ── Presionado ── */
 .seg-btn:active:not(:disabled) {
-  background: color-mix(in srgb, var(--color-on-secondary-container) 12%, var(--color-secondary-container));
+  background: color-mix(in srgb, var(--color-secondary) 20%, transparent);
 }
 
 /* ── Foco visible (WCAG 2.4.7) ── */
