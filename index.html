@@ -217,7 +217,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   user-select: none; -webkit-user-select: none;
 }
 .ds-rail-btn:hover { color: var(--ds-accent); }
-.ds-rail-btn.active { color: var(--ds-accent); }
+.ds-rail-btn.active { color: var(--color-on-secondary-container); }
 
 /* Pill indicator behind icon */
 .ds-rail-icon-wrap {
@@ -228,7 +228,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 }
 .ds-rail-btn:hover .ds-rail-icon-wrap { background: var(--ds-accent-bg); }
 .ds-rail-btn.active .ds-rail-icon-wrap {
-  background: var(--ds-accent-bg);
+  background: var(--color-secondary-container);
 }
 .ds-rail-btn i, .ds-rail-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
 
@@ -319,7 +319,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   white-space: nowrap;
 }
 .ds-nav-item:hover { background: var(--ds-accent-bg); color: var(--ds-accent); }
-.ds-nav-item.active { background: var(--ds-accent-bg); color: var(--ds-accent); font-weight: 600; }
+.ds-nav-item.active { background: var(--color-secondary-container); color: var(--color-on-secondary-container); font-weight: 600; }
 .ds-nav-item svg { width: 14px; height: 14px; flex-shrink: 0; opacity: .7; }
 .ds-nav-solo {
   display: flex; align-items: center; gap: 8px;
@@ -329,7 +329,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   transition: background .12s, color .12s;
 }
 .ds-nav-solo:hover { background: var(--ds-accent-bg); color: var(--ds-accent); }
-.ds-nav-solo.active { background: var(--ds-accent-bg); color: var(--ds-accent); font-weight: 600; }
+.ds-nav-solo.active { background: var(--color-secondary-container); color: var(--color-on-secondary-container); font-weight: 600; }
 
 /* ── Main ── */
 .ds-main { margin-left: 72px; flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 100vh; }
