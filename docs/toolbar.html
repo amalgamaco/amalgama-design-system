@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toolbar — Amalgama DS</title>
+  <title>Search — Amalgama DS</title>
+  <meta http-equiv="refresh" content="0; url=search.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/variables.css">
@@ -108,7 +109,7 @@ const SearchField = React.forwardRef&lt;HTMLInputElement, SearchFieldProps&gt;(
   ({ className, icon, ...props }, ref) =&gt; (
     &lt;div className={cn(&quot;search-field&quot;, className)}&gt;
       {icon ?? (
-        &lt;svg width=&quot;15&quot; height=&quot;15&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+        &lt;svg width=&quot;18&quot; height=&quot;18&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2&quot; viewBox=&quot;0 0 24 24&quot;&gt;
           &lt;circle cx=&quot;11&quot; cy=&quot;11&quot; r=&quot;8&quot; /&gt;
           &lt;path d=&quot;m21 21-4.35-4.35&quot; /&gt;
         &lt;/svg&gt;
@@ -175,15 +176,15 @@ css/components/toolbar.css</code></pre>
         <div class="docs-preview full-width">
           <div class="toolbar">
             <div class="search-field">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
               <input type="text" placeholder="Buscar vacantes...">
             </div>
             <button class="toolbar-btn">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
               Filtros
             </button>
             <button class="toolbar-btn">
-              <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
               Ordenar
             </button>
           </div>
@@ -191,15 +192,15 @@ css/components/toolbar.css</code></pre>
         <div class="docs-code-wrapper">
           <pre class="docs-code"><code>&lt;div class="toolbar"&gt;
   &lt;div class="search-field"&gt;
-    &lt;svg width="15" height="15" ...&gt;...&lt;/svg&gt;
+    &lt;svg width="18" height="18" ...&gt;...&lt;/svg&gt;
     &lt;input type="text" placeholder="Buscar vacantes..."&gt;
   &lt;/div&gt;
   &lt;button class="toolbar-btn"&gt;
-    &lt;svg ...&gt;...&lt;/svg&gt;
+    &lt;svg width="18" height="18" ...&gt;...&lt;/svg&gt;
     Filtros
   &lt;/button&gt;
   &lt;button class="toolbar-btn"&gt;
-    &lt;svg ...&gt;...&lt;/svg&gt;
+    &lt;svg width="18" height="18" ...&gt;...&lt;/svg&gt;
     Ordenar
   &lt;/button&gt;
 &lt;/div&gt;</code></pre>
@@ -223,9 +224,9 @@ css/components/toolbar.css</code></pre>
         <table class="docs-props-table">
           <thead><tr><th>Clase</th><th>Descripcion</th></tr></thead>
           <tbody>
-            <tr><td><code>.toolbar</code></td><td>Contenedor flex con gap 10px</td></tr>
-            <tr><td><code>.search-field</code></td><td>Campo de busqueda con icono y borde</td></tr>
-            <tr><td><code>.toolbar-btn</code></td><td>Boton de accion con icono SVG</td></tr>
+            <tr><td><code>.toolbar</code></td><td>Contenedor flex con gap <code>--space-2</code></td></tr>
+            <tr><td><code>.search-field</code></td><td>Input outlined de búsqueda compacto para toolbar — mismo lenguaje visual que <code>.toolbar-btn</code>: <code>--radius-md</code>, borde <code>--color-outline</code>, fondo <code>surface-container</code>. Íconos 18px</td></tr>
+            <tr><td><code>.toolbar-btn</code></td><td>Botón de filtro/acción secundaria. Íconos 18px</td></tr>
             <tr><td><code>.result-count</code></td><td>Texto de conteo de resultados</td></tr>
           </tbody>
         </table>

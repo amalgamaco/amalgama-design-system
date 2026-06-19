@@ -115,9 +115,10 @@
   width: 28px; height: 28px;
   border-radius: var(--radius-md);
   display: flex; align-items: center; justify-content: center;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   cursor: pointer;
-  transition: background .1s;
+  transition: background var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
   background: none; border: none;
 }
-.more-btn:hover { background: var(--bg); color: var(--text-primary); }
+.more-btn:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }

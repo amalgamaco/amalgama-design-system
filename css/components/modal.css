@@ -59,10 +59,11 @@
   border: none;
   background: transparent;
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: var(--text-muted);
-  transition: background var(--duration-fast);
+  cursor: pointer; color: var(--color-on-surface-variant);
+  transition: background var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
 }
-.modal-close:hover { background: var(--bg); color: var(--text-primary); }
+.modal-close:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
 .modal-close:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;

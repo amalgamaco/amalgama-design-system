@@ -28,7 +28,6 @@
       <a href="typography.html" class="docs-nav-item">Tipografia</a>
       <div class="docs-nav-section">Acciones</div>
       <a href="button.html" class="docs-nav-item">Button</a>
-      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
       <div class="docs-nav-section">Entrada de datos</div>
       <a href="input.html" class="docs-nav-item">Input</a>
       <a href="select.html" class="docs-nav-item">Select</a>
@@ -66,20 +65,20 @@
     </header>
     <div class="docs-content">
       <h1>Search</h1>
-      <p>Busqueda de contenido. Dos variantes: search bar (campo persistente de 56px con forma de pildora) y search view (vista expandida con resultados, en modo docked o full-screen).</p>
+      <p>Búsqueda de contenido. Dos variantes: <strong>search bar</strong> (campo píldora, <code>--radius-full</code>, fondo <code>surface-container-high</code> + borde sutil — <b>40px en <code>.search-row</code></b> desktop, <b>56px standalone</b> mobile/hero) y <strong>search view</strong> (vista expandida con resultados, en modo docked o full-screen).</p>
       <p>CSS: <code>css/components/search.css</code> · React: <code>components/ui/search.tsx</code> (<code>SearchBar</code>, <code>SearchView</code> y sub-componentes)</p>
-      <p>Para busqueda compacta embebida en una toolbar usa <code>.search-field</code> (<a href="toolbar.html">Toolbar</a>). Para refinar resultados, combina con <a href="chip.html">filter chips</a> debajo de la search bar.</p>
+      <p>Patrón canónico para búsqueda con acciones: <code>.search-row</code> + <code>.search-icon-btn</code>. Reusar en cualquier superficie que combine búsqueda y controles contextuales.</p>
 
       <h2>Cuándo usar</h2>
       <table class="docs-props-table">
         <tbody>
-          <tr><td><strong>Cuándo usar</strong></td><td><code>search-bar</code> standalone (56px, pill) para vistas de búsqueda dedicadas; <code>search-view</code> para resultados. Combinar con filter chips debajo.</td></tr>
-          <tr><td><strong>Cuándo no</strong></td><td>Búsqueda compacta dentro de una toolbar (usar <code>.search-field</code> de <code>toolbar.css</code>).</td></tr>
-          <tr><td><strong>Reemplaza a</strong></td><td>Inputs de búsqueda legacy.</td></tr>
+          <tr><td><strong>Cuándo usar</strong></td><td><code>search-bar</code> en <code>.search-row</code> (desktop, 40px) con <code>.search-icon-btn</code> para acciones contextuales. <code>search-bar</code> standalone (56px, mobile o hero de página) cuando no hay acciones adyacentes.</td></tr>
+          <tr><td><strong>Cuándo no</strong></td><td>Usar como campo de formulario — para eso está <code>.form-input</code>. Acompañar con botones de texto — usar <code>.search-icon-btn</code> en su lugar.</td></tr>
+          <tr><td><strong>Reemplaza a</strong></td><td>Inputs de búsqueda legacy, toolbar con search-field y botones de texto.</td></tr>
         </tbody>
       </table>
 
-      <h2>Search bar</h2>
+      <h2>Search bar — standalone</h2>
       <div class="docs-preview">
         <div class="search-bar" role="search">
           <span class="search-bar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
@@ -94,6 +93,115 @@
   &lt;input class="search-bar-input" type="search"
          placeholder="Buscar candidatos" aria-label="Buscar candidatos"&gt;
   &lt;span class="search-bar-avatar"&gt;AB&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <h2>Search + botones de acción</h2>
+      <p>Patrón canónico de Embassy para cualquier contexto toolbar-like. Usar <code>.search-row</code> como wrapper y <code>.search-icon-btn</code> para cada acción adyacente.</p>
+
+      <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:16px 0 8px;color:var(--color-on-surface-variant);">Search + Filtro</h3>
+      <div class="docs-preview full-width">
+        <div class="search-row">
+          <div class="search-bar" role="search">
+            <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
+            <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes">
+          </div>
+          <button class="search-icon-btn" aria-label="Filtros">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 8px;color:var(--color-on-surface-variant);">Search + Filtro + Ordenar</h3>
+      <div class="docs-preview full-width">
+        <div class="search-row">
+          <div class="search-bar" role="search">
+            <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
+            <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes">
+          </div>
+          <button class="search-icon-btn" aria-label="Filtros">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+          </button>
+          <button class="search-icon-btn" aria-label="Ordenar">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 8px;color:var(--color-on-surface-variant);">Con filtro activo (aria-pressed)</h3>
+      <div class="docs-preview full-width">
+        <div class="search-row">
+          <div class="search-bar" role="search">
+            <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
+            <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes">
+          </div>
+          <button class="search-icon-btn active" aria-label="Filtros" aria-pressed="true">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+          </button>
+          <button class="search-icon-btn" aria-label="Ordenar">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
+          </button>
+          <button class="search-icon-btn" aria-label="Vista en grilla">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>&lt;div class="search-row"&gt;
+  &lt;div class="search-bar" role="search"&gt;
+    &lt;span class="search-bar-icon"&gt;&lt;svg&gt;…lupa…&lt;/svg&gt;&lt;/span&gt;
+    &lt;input class="search-bar-input" type="search"
+           placeholder="Buscar vacantes..." aria-label="Buscar vacantes"&gt;
+  &lt;/div&gt;
+  &lt;!-- Filtro activo --&gt;
+  &lt;button class="search-icon-btn active" aria-label="Filtros" aria-pressed="true"&gt;
+    &lt;svg width="20" height="20"&gt;…filtro…&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;!-- Ordenar inactivo --&gt;
+  &lt;button class="search-icon-btn" aria-label="Ordenar"&gt;
+    &lt;svg width="20" height="20"&gt;…ordenar…&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <h2>Desktop vs Mobile</h2>
+
+      <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:16px 0 8px;color:var(--color-on-surface-variant);">Desktop — search + acciones en fila</h3>
+      <div class="docs-preview full-width">
+        <div class="search-row">
+          <div class="search-bar" role="search">
+            <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
+            <input class="search-bar-input" type="search" placeholder="Buscar..." aria-label="Buscar">
+          </div>
+          <button class="search-icon-btn" aria-label="Filtros"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button>
+          <button class="search-icon-btn" aria-label="Ordenar"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg></button>
+        </div>
+      </div>
+      <div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>&lt;!-- Desktop: .search-row + .search-icon-btn --&gt;
+&lt;div class="search-row"&gt;
+  &lt;div class="search-bar" role="search"&gt;...&lt;/div&gt;
+  &lt;button class="search-icon-btn" aria-label="Filtros"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;
+  &lt;button class="search-icon-btn" aria-label="Ordenar"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 8px;color:var(--color-on-surface-variant);">Mobile — ancho completo</h3>
+      <div class="docs-preview full-width">
+        <div class="search-bar" role="search" style="max-width:100%;">
+          <span class="search-bar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
+          <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes">
+        </div>
+      </div>
+      <div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>&lt;!-- Mobile: .search-bar a ancho completo --&gt;
+&lt;div class="search-bar" role="search"&gt;
+  &lt;span class="search-bar-icon"&gt;&lt;svg&gt;…lupa…&lt;/svg&gt;&lt;/span&gt;
+  &lt;input class="search-bar-input" type="search"
+         placeholder="Buscar vacantes..." aria-label="Buscar vacantes"&gt;
 &lt;/div&gt;</code></pre>
       </div>
 
@@ -112,7 +220,7 @@
       </div>
       <div class="docs-code-wrapper">
         <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>&lt;!-- Docked (radio 28px). Full-screen: class="search-view search-view-fullscreen" --&gt;
+        <pre class="docs-code"><code>&lt;!-- Docked. Full-screen: class="search-view search-view-fullscreen" --&gt;
 &lt;div class="search-view" role="search"&gt;
   &lt;div class="search-view-header"&gt;
     &lt;button class="search-view-back" aria-label="Cerrar busqueda"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;
@@ -127,6 +235,21 @@
   &lt;/ul&gt;
 &lt;/div&gt;</code></pre>
       </div>
+
+      <h2>Clases y tokens</h2>
+      <table class="docs-props-table">
+        <thead><tr><th>Clase</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td><code>.search-row</code></td><td>Flex wrapper para <code>.search-bar</code> + <code>.search-icon-btn</code>. La search bar ocupa el espacio disponible (<code>flex:1</code>).</td></tr>
+          <tr><td><code>.search-bar</code></td><td>Píldora <code>--radius-full</code>, fondo <code>surface-container-high</code> + borde <code>var(--border)</code>. Íconos 24px. <b>40px</b> cuando está dentro de <code>.search-row</code> (desktop). <b>56px</b> standalone (mobile/hero).</td></tr>
+          <tr><td><code>.search-icon-btn</code></td><td>Botón circular 40×40px para acciones adyacentes. Agregar <code>.active</code> / <code>aria-pressed="true"</code> para estado seleccionado. Siempre requiere <code>aria-label</code>.</td></tr>
+          <tr><td><code>.search-bar-icon</code></td><td>Ícono de lupa (24×24px). Heredado de <code>currentColor</code>.</td></tr>
+          <tr><td><code>.search-bar-input</code></td><td>Input interno sin bordes. <code>font-size-body-lg</code>, <code>caret-color: --color-secondary</code>.</td></tr>
+          <tr><td><code>.search-bar-avatar</code></td><td>Avatar circular opcional (30px). Fondo <code>--color-primary-container</code>.</td></tr>
+          <tr><td><code>.search-bar-trailing</code></td><td>Ícono final opcional (micrófono, limpiar). 24×24px.</td></tr>
+          <tr><td><code>.search-view</code></td><td>Vista expandida con resultados. Agregar <code>.search-view-fullscreen</code> en ventanas compactas.</td></tr>
+        </tbody>
+      </table>
 
       <h2>React</h2>
       <div class="docs-code-wrapper">

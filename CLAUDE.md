@@ -25,7 +25,7 @@ Always load in this order:
 
 Instead of the barrel (`components.css`), you can cherry-pick individual files from `css/components/`.
 
-**Tokens are the law.** All colors via `var(--color-*)` or semantic aliases (`--accent`, `--bg`, `--border`), radii via `var(--radius-*)`, shadows via `var(--shadow-*)`, spacing via `var(--space-*)`. Never raw hex. Dark mode is automatic: set `data-theme="dark"` on `<html>` — the semantic `--color-*` layer recalibrates itself; components need zero per-theme overrides.
+**Tokens are the law.** All colors via `var(--color-*)` or semantic aliases (`--accent`, `--bg`, `--border`), radii via `var(--radius-*)` (scaled by component size, never by variant — see GOVERNANCE.md §4.3), shadows via `var(--shadow-*)`, spacing via `var(--space-*)`. Never raw hex. Dark mode is automatic: set `data-theme="dark"` on `<html>` — the semantic `--color-*` layer recalibrates itself; components need zero per-theme overrides.
 
 Fonts: **Inter** (body/UI), **Epilogue** (headings), **DM Mono** (code/labels) — always via `var(--font-body)` / `var(--font-heading)` / `var(--font-mono)`, never quoted family names in component code.
 
@@ -47,6 +47,8 @@ Copy the component file + `components/lib/utils.ts` into the target project (or 
 
 Flat kebab-case, additive variants — **not** BEM: `btn-primary btn-danger`, `chip chip-selected`, `badge badge-open`. Every component CSS file has a header comment with a `Uso:` block showing exact markup. Read it before using a component.
 
+Size modifier classes (e.g. `btn-sm`, `btn-lg`, `btn-xl`) carry the size-appropriate `border-radius` — adding the size class is sufficient. Never add a separate `border-radius` inline. The same variant in different size demos must use different size classes, not different inline overrides.
+
 ### Applying the DS to an existing product (migration rules)
 
 **Read [MIGRATION.md](MIGRATION.md) first** — it is the full reverse-mapping contract: the phase workflow (token audit → component inventory → apply → hierarchy pass → verify), the deterministic color-replacement algorithm (classify by element ROLE, never nearest-hex), the legacy-pattern → DS-component mapping table, the anti-pattern catalog, and the machine-checkable verification checklist. Run that checklist before declaring a migration done.
@@ -65,7 +67,7 @@ When restyling or rebuilding an existing screen, **DS rules win over visual fide
 
 | Component | CSS (`css/components/`) | React (`components/ui/`) | Docs page (`docs/`) |
 |---|---|---|---|
-| Button | `button.css` (`btn-primary/-secondary/-tertiary/-text`, `icon-btn`, `btn-sm/-danger/-success`) | `button.tsx` | `button.html` |
+| Button | `button.css` (`btn-primary/-secondary/-tertiary/-text`, `icon-btn`; sizes: `btn-xs/-sm/-lg/-xl`; modifiers: `btn-danger/-success/-compact`; radius scales with size: XS/SM→`--radius-sm`, MD/LG→`--radius-md`, XL→`--radius-lg`) | `button.tsx` | `button.html` |
 | Badge | `badge.css` (`badge badge-{open,active,closed,draft,archived,warning,tertiary,info}`) | `badge.tsx` | `badge.html` |
 | **Chip** | `chip.css` (`chip`, `chip-selected`, `chip-elevated`, `chip-icon`, `chip-remove`, `chip-set`) | `chip.tsx` (`Chip`, `InputChip`, `ChipSet`) | `chip.html` |
 | **Search** | `search.css` (`search-bar` + slots, `search-view` + `-fullscreen`, header/results) | `search.tsx` (`SearchBar`, `SearchView`, …) | `search.html` |
@@ -100,6 +102,7 @@ Every component CSS header now carries a **`Cuándo usar / Cuándo no / Reemplaz
 | Component markup + variants + usage rules | the component's `css/components/*.css` header (`Uso:` + `Cuándo usar`) |
 | Usage guidelines / specs / accessibility (human depth) | root `index.html` |
 | Migration / restyling rules | `MIGRATION.md` |
+| Cross-component consistency rules, state patterns, audit checklist | `GOVERNANCE.md` |
 | React props | `components/ui/*.tsx` |
 
 The legacy `docs/*.html` pages drift — treat them as secondary; never let them override the sources above.

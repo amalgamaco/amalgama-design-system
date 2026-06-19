@@ -9,7 +9,8 @@
 
 @import url('components/page-header.css');
 @import url('components/button.css?v=2');
-@import url('components/toolbar.css');
+@import url('components/segmented-button.css');
+@import url('components/toolbar.css?v=5');
 @import url('components/badge.css?v=2');
 @import url('components/card.css');
 @import url('components/form.css?v=2');
@@ -21,9 +22,9 @@
 @import url('components/skeleton.css');
 @import url('components/empty-state.css');
 @import url('components/modal.css');
-@import url('components/toast.css?v=2');
+@import url('components/toast.css?v=3');
 @import url('components/chip.css');
-@import url('components/search.css');
+@import url('components/search.css?v=8');
 
 /* ── Extended components (domain-oriented) ── */
 @import url('components/vacancy-card.css?v=2');

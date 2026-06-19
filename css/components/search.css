@@ -1,36 +1,53 @@
 /* ═══════════════════════════════════════
    Amalgama DS — Search
-   Búsqueda de contenido. Dos variantes (MD3):
+   Búsqueda de contenido. Dos variantes:
 
-     Search bar  · .search-bar   · campo compacto persistente
+     Search bar  · .search-bar   · campo píldora (--radius-full); 40px en .search-row · 56px standalone
      Search view · .search-view  · vista expandida con resultados
                                    (modos docked y full-screen)
 
-   Specs (Specs → Search en la documentación):
-     Bar:  alto 56px · radio 28px (píldora) · ícono 24px · avatar 30px
-           padding horizontal 16px · ancho 360–720px
+   Specs:
+     Bar:  alto 40px en .search-row · 56px standalone · radio --radius-full (píldora) · ícono 24px · avatar 30px
+           padding horizontal 16px · ancho 360–720px · borde sutil 1px
      View: encabezado 72px · divisor 1px · radio 28px (docked) ·
            íconos 24px · padding horizontal 16px
+     Icon btn: 40×40px · border-radius 50% · ícono 20px
 
-   Cuándo usar: search-bar standalone (56px, pill) para vistas de búsqueda dedicadas; search-view para resultados. Combinar con filter chips debajo.
-   Cuándo no: búsqueda compacta dentro de una toolbar (usar .search-field de toolbar.css).
-   Reemplaza a: inputs de búsqueda legacy.
+   Cuándo usar: search-bar standalone para vistas de búsqueda (desktop y mobile).
+                Acompañar con .search-icon-btn para acciones contextuales (Filtros, Ordenar, Vista).
+   Cuándo no: reemplazar search-bar con un input de formulario (usar .form-input).
+
+   Search con acciones — patrón canónico Embassy:
+     Cuando la búsqueda convive con acciones, usar .search-row + .search-icon-btn.
+     Desktop: search-bar + icon buttons en la misma fila.
+     Mobile:  search-bar ocupa el ancho completo; acciones en overflow o colapsadas.
+
+   Reemplaza a: inputs de búsqueda legacy, toolbar search-field.
 
    Dependencia: variables.css (Color Roles)
    Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en
    light y dark sin overrides por tema.
 
-   Relación: para búsqueda embebida en una Tool Bar usá .search-field
-   (toolbar.css). .search-bar es el componente Search independiente.
-
    Uso:
-   <div class="search-bar">
+   <!-- Search bar standalone -->
+   <div class="search-bar" role="search">
      <span class="search-bar-icon">…lupa…</span>
-     <input class="search-bar-input" type="search" placeholder="Buscar">
-     <span class="search-bar-avatar">AV</span>
+     <input class="search-bar-input" type="search" placeholder="Buscar" aria-label="Buscar">
+     <span class="search-bar-avatar">AV</span>   <!-- opcional -->
    </div>
 
-   <div class="search-view">            <!-- + .search-view-fullscreen -->
+   <!-- Search + icon buttons (patrón canónico para toolbar-like) -->
+   <div class="search-row">
+     <div class="search-bar" role="search">
+       <span class="search-bar-icon">…lupa…</span>
+       <input class="search-bar-input" type="search" placeholder="Buscar" aria-label="Buscar">
+     </div>
+     <button class="search-icon-btn" aria-label="Filtros"><svg>…</svg></button>
+     <button class="search-icon-btn" aria-label="Ordenar"><svg>…</svg></button>
+   </div>
+
+   <!-- Search view (docked). Full-screen: + .search-view-fullscreen -->
+   <div class="search-view" role="search">
      <div class="search-view-header">
        <button class="search-view-back" aria-label="Volver">…</button>
        <input class="search-bar-input" type="search" placeholder="Buscar">
@@ -39,6 +56,20 @@
    </div>
 ═══════════════════════════════════════ */
 
+/* ── Search row — wrapper para search-bar + search-icon-btn ── */
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+.search-row .search-bar {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+  height: 40px; /* alinea con .search-icon-btn en contexto desktop */
+}
+
 /* ── Search bar ── */
 .search-bar {
   display: flex;
@@ -46,18 +77,22 @@
   gap: var(--space-4);                /* 16px entre elementos */
   height: 56px;
   padding: 0 var(--space-4);          /* 16px horizontal */
-  border-radius: var(--radius-full);  /* píldora: 28px de radio efectivo a 56px de alto */
+  border-radius: var(--radius-full);  /* píldora — forma canónica del Search */
   background: var(--color-surface-container-high);
+  border: 1px solid var(--border);    /* borde sutil semitransparente */
   min-width: min(360px, 100%);
   max-width: 720px;
   width: 100%;
-  transition: background var(--duration-fast) var(--ease-default);
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
 }
 .search-bar:hover {
   background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface-container-high));
+  border-color: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
 }
 .search-bar:focus-within {
   background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-high));
+  border-color: var(--color-secondary);
 }
 
 .search-bar-icon {
@@ -124,6 +159,69 @@
 .search-bar:has(.search-bar-input:disabled) * {
   color: color-mix(in srgb, var(--color-on-surface) 38%, transparent);
 }
+
+/* ── Search icon button — acción circular adyacente al Search ──
+   Tamaño: 40×40px. Tratamiento outlined (igual que btn-tertiary):
+   fondo transparente + --color-outline. El fondo se activa sólo en
+   hover/pressed/selected — nunca en el estado default.
+   Estado activo (filtro aplicado): surface-container-high fill — mismo tratamiento que btn-tertiary:active. */
+.search-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--color-outline);
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+}
+.search-icon-btn:hover {
+  background: var(--color-surface-variant);
+  border-color: var(--color-primary);
+  color: var(--color-on-surface);
+}
+.search-icon-btn:active:not(:disabled) {
+  background: var(--color-surface-container-high);
+  border-color: var(--color-outline);
+}
+.search-icon-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.search-icon-btn[aria-pressed="true"],
+.search-icon-btn.active {
+  background: var(--color-surface-container-high);
+  border-color: var(--color-outline);
+  color: var(--color-on-surface);
+}
+.search-icon-btn[aria-pressed="true"]:hover,
+.search-icon-btn.active:hover {
+  background: var(--color-surface-container-high);
+  border-color: var(--color-primary);
+  color: var(--color-on-surface);
+}
+.search-icon-btn[aria-pressed="true"]:active:not(:disabled),
+.search-icon-btn.active:active:not(:disabled) {
+  background: var(--color-surface-container-high);
+  border-color: var(--color-outline);
+}
+.search-icon-btn:disabled,
+.search-icon-btn[aria-disabled="true"] {
+  background: transparent;
+  border-color: var(--color-outline-variant);
+  color: var(--color-on-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.search-icon-btn > svg,
+.search-icon-btn > i { width: 20px; height: 20px; flex-shrink: 0; }
 
 /* ── Search view ── */
 .search-view {

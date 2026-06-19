@@ -207,10 +207,8 @@
      en Light Y Dark. Los tokens semánticos ya son theme-aware, por eso
      se definen UNA sola vez (sin override por tema). Sin hardcodes.
   ───────────────────────────────────── */
-  --button-secondary-bg:             var(--color-secondary-container);      /* MD3-puro: botón = Secondary Container */
-  --button-secondary-text:           var(--color-on-secondary-container);   /* light navy · dark periwinkle claro */
-  --button-secondary-border:         transparent;                           /* tonal, sin borde */
-  --button-secondary-bg-hover:       color-mix(in srgb, var(--color-secondary-container) 88%, #000);
+  /* --button-secondary-* tokens eliminados — btn-secondary consume
+     --color-secondary-container y --color-on-secondary-container directamente. */
 
 
   /* ─────────────────────────────────────
@@ -449,4 +447,69 @@
   --text-secondary: #BFC1C8; /* neutral-100 */
   --text-muted:     #747989; /* neutral-300 */
   --interactive-hover:   #909BBE; /* primary-200 */
+}
+
+/* Light-mode scoped override — permite usar data-theme="light" en un contenedor
+   dentro de una página en modo oscuro (eg. demos de estados en la doc site).
+   Restaura todos los tokens que [data-theme="dark"] sobreescribe.
+   IMPORTANTE: los tokens derivados de --neutral-50/-100/-900 se escriben con
+   valor literal (igual que el bloque dark) porque el shell de la doc reasigna
+   esos primitivos a valores de superficie, causando resolución cruzada. */
+[data-theme="light"] {
+  --color-primary:                   var(--primary-900);         /* #01164D */
+  --color-on-primary:                #FFFFFF;                    /* neutral-white */
+  --color-primary-container:         var(--primary-60);          /* #D7DEFB */
+  --color-on-primary-container:      var(--primary-900);         /* #01164D */
+  --color-primary-hover:             var(--primary-700);         /* #162F6F */
+  --color-secondary:                 var(--secondary-900);       /* #4F80FF */
+  --color-on-secondary:              #FFFFFF;                    /* neutral-white */
+  --color-secondary-container:       var(--secondary-200);       /* #CAD9FF */
+  --color-on-secondary-container:    var(--primary-900);         /* #01164D */
+  --color-tertiary:                  var(--tertiary-900);        /* #7158F4 */
+  --color-on-tertiary:               #FFFFFF;                    /* neutral-white */
+  --color-tertiary-container:        var(--tertiary-100);        /* #E3DEFD */
+  --color-on-tertiary-container:     var(--tertiary-900);        /* #7158F4 */
+  --color-error:                     var(--error-500);           /* #FD3A45 */
+  --color-on-error:                  #FFFFFF;                    /* neutral-white */
+  --color-success:                   var(--success-500);         /* #00C164 */
+  --color-on-success:                #FFFFFF;                    /* neutral-white */
+  --color-warning:                   var(--warning-500);         /* #FFB249 */
+  --color-on-warning:                #0A0C12;                    /* neutral-900 */
+  --color-info:                      var(--info-500);            /* #1E52EE */
+  --color-on-info:                   #FFFFFF;                    /* neutral-white */
+  --color-error-container:           var(--error-50);            /* #FFEBF0 */
+  --color-on-error-container:        var(--error-900);           /* #BF0B29 */
+  --color-success-container:         var(--success-50);          /* #E4F8EC */
+  --color-on-success-container:      var(--success-900);         /* #006D2C */
+  --color-warning-container:         var(--warning-50);          /* #FFF2DF */
+  --color-on-warning-container:      var(--warning-900);         /* #ED4403 */
+  --color-info-container:            var(--info-50);             /* #E9EBFD */
+  --color-on-info-container:         var(--info-900);            /* #001ABA */
+  /* Surfaces — literal hex para neutrals hijackeados por el doc shell */
+  --color-surface:                   #FAFBFC;                    /* neutral-10 */
+  --color-surface-dim:               #EAEBED;                    /* neutral-50 */
+  --color-surface-bright:            #FFFFFF;                    /* neutral-white */
+  --color-surface-container-lowest:  #FAFBFC;                    /* neutral-10 */
+  --color-surface-container-low:     #FAFBFC;                    /* neutral-10 */
+  --color-surface-container:         #FFFFFF;                    /* neutral-white */
+  --color-surface-container-high:    #EAEBED;                    /* neutral-50 */
+  --color-surface-container-highest: #BFC1C8;                    /* neutral-100 */
+  --color-surface-variant:           #EAEBED;                    /* neutral-50 */
+  --color-on-surface:                #0A0C12;                    /* neutral-900 */
+  --color-on-surface-variant:        #474D61;                    /* neutral-400 */
+  /* Outline — literal hex */
+  --color-outline:                   #9FA3AE;                    /* neutral-200 */
+  --color-outline-variant:           #BFC1C8;                    /* neutral-100 */
+  /* Inverse */
+  --color-inverse-surface:           #0A0C12;                    /* neutral-900 */
+  --color-inverse-on-surface:        #EAEBED;                    /* neutral-50 */
+  --color-inverse-primary:           var(--secondary-900);       /* #4F80FF */
+  /* Disabled — literal hex */
+  --color-disabled:                  #BFC1C8;                    /* neutral-100 */
+  --color-on-disabled:               #747989;                    /* neutral-300 */
+  /* Aliases */
+  --text-primary:   var(--primary-900);                          /* #01164D */
+  --text-secondary: #353A4A;                                     /* neutral-500 */
+  --text-muted:     #747989;                                     /* neutral-300 */
+  --interactive-hover: var(--primary-500);                       /* #253E82 */
 }

@@ -18,7 +18,7 @@
    light y dark sin overrides por tema (los roles se recalibran en
    variables.css → [data-theme="dark"]).
 
-   Modificadores: .btn-sm · .btn-danger · .btn-success
+   Modificadores: .btn-sm · .btn-danger · .btn-success · .btn-compact
    Compat: .btn-ghost y .btn-next se mantienen como alias.
 
    Uso:
@@ -38,7 +38,7 @@
 .btn-next {
   position: relative;
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 8px 16px;
+  padding: 8px 24px;
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   font-family: inherit;
@@ -89,18 +89,18 @@
 .btn-primary.btn-success:hover { background: var(--color-success-hover); }
 
 /* ─────────────────────────────────────
-   Secondary · fill TONAL (tokens --button-secondary-* = Secondary Container, estilo MD3
-   filled-tonal). Light: periwinkle claro #CAD9FF + texto navy. Dark: periwinkle medio
+   Secondary · fill TONAL (Secondary Container, estilo MD3 filled-tonal).
+   Light: periwinkle claro #CAD9FF + texto navy. Dark: periwinkle medio
    #3A5BB0 + texto claro. Menor jerarquía que el Primary (filled); se diferencia por
    inversión de valor.
 ───────────────────────────────────── */
 .btn-secondary {
-  background: var(--button-secondary-bg);
-  color: var(--button-secondary-text);
-  border-color: var(--button-secondary-border);
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  border-color: transparent;
 }
 .btn-secondary:hover {
-  background: var(--button-secondary-bg-hover);
+  background: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
   transform: translateY(-1px);
 }
 .btn-secondary:active { transform: translateY(0); }
@@ -160,19 +160,25 @@
    LG  → 44px min-height · primary CTAs, touch targets
    XL  → 52px min-height · hero / marketing surfaces
 ───────────────────────────────────── */
-.btn-xs { padding: 3px 8px;   font-size: 11px;   font-weight: 600; min-height: 24px; }
-.btn-sm { padding: 6px 12px;  font-size: var(--font-size-body-sm); min-height: 32px; }
-.btn-lg { padding: 10px 22px; font-size: 15px;   min-height: 44px; }
-.btn-xl { padding: 14px 30px; font-size: 16px;   font-weight: 700; min-height: 52px; }
+.btn-xs { padding: 3px 8px;   font-size: 11px;   font-weight: 600; min-height: 24px; border-radius: var(--radius-sm); }
+.btn-sm { padding: 6px 12px;  font-size: var(--font-size-body-sm); min-height: 32px; border-radius: var(--radius-sm); }
+.btn-lg { padding: 10px 22px; font-size: 15px;   min-height: 44px; border-radius: var(--radius-md); }
+.btn-xl { padding: 14px 30px; font-size: 16px;   font-weight: 700; min-height: 52px; border-radius: var(--radius-lg); }
 
 .btn-text.btn-xs { padding: 3px 6px; }
 .btn-text.btn-sm { padding: 6px 10px; }
 .btn-text.btn-lg { padding: 10px 16px; }
 .btn-text.btn-xl { padding: 14px 20px; }
 
-/* Los botones tienen una sola forma: --radius-md (8px).
+/* Forma: el radio escala con el tamaño del botón.
+   XS/SM → --radius-sm (4px)  ·  MD/LG → --radius-md (8px)  ·  XL → --radius-lg (12px)
    La píldora (--radius-full) está reservada a chips y badges —
    un botón píldora se confunde con un chip seleccionado. */
+
+/* Variante compacta (MD3): 16px izquierda y derecha.
+   Usar en contextos de mayor densidad (toolbars, formularios, tablas).
+   <button class="btn-primary btn-compact">Guardar</button> */
+.btn-compact { padding-left: 16px; padding-right: 16px; }
 
 /* ─────────────────────────────────────
    Next · avance de wizard (alias de Primary)
@@ -180,7 +186,6 @@
 .btn-next {
   background: var(--color-primary);
   color: var(--color-on-primary);
-  padding: 8px 24px;
 }
 .btn-next:hover { background: var(--color-primary-hover); }
 
@@ -207,9 +212,9 @@
   color: var(--color-on-disabled);
   cursor: not-allowed;
 }
-.icon-btn.btn-sm { width: 30px; height: 30px; }
-.icon-btn.btn-lg { width: 44px; height: 44px; }
-.icon-btn.btn-xl { width: 52px; height: 52px; }
+.icon-btn.btn-sm { width: 30px; height: 30px; border-radius: var(--radius-sm); }
+.icon-btn.btn-lg { width: 44px; height: 44px; border-radius: var(--radius-md); }
+.icon-btn.btn-xl { width: 52px; height: 52px; border-radius: var(--radius-lg); }
 
 /* ─────────────────────────────────────
    Pressed state — 12% state layer (WCAG 2.5.3)
