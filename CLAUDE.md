@@ -92,9 +92,11 @@ When restyling or rebuilding an existing screen, **DS rules win over visual fide
 
 **Extended (domain-oriented):** Vacancy Card, Person Card, Kanban, Create Form, Placeholder — CSS in `css/components/`, docs in `docs/`. Use for recruiting/HR product surfaces.
 
-**Roadmap (documented as "Coming soon", no consumable code yet):** radio, menu, tooltip, slider, date picker, sheet, list, loading, carousel, divider. **Do not invent styles for these** — compose from existing components or flag the gap.
+**Roadmap (documented as "Coming soon", no consumable code yet):** tooltip, date picker, sheet, carousel. **Do not invent styles for these** — compose from existing components or flag the gap.
 
-**Material-backed (official `@material/web`, NOT Embassy CSS):** **Checkbox** (`s-c-checkbox`) and **Switch** (`s-c-switch`) pages render the official MD3 web components (`<md-checkbox>`, `<md-switch>`), loaded buildless from the esm.run CDN (`@material/web/all.js`, in index.html `<head>`) and themed with Embassy tokens automatically via `css/md-sys-bridge.css` (`--md-sys-color-* → --color-*`). These are the only components in the canonical SPA that depend on JS/Lit/Shadow DOM/CDN — a deliberate exception (June 2026 experiment) to the no-build/CSS-only rule, scoped to these two pages. There is no Embassy `*.css` for them; do not write one. Note: in dark mode Embassy `--color-primary` is white, so selected controls render white — see [[md3-structure-adoption]] memory.
+**Material-backed (official `@material/web`, NOT Embassy CSS):** these component pages render official MD3 web components, loaded buildless from the esm.run CDN (`@material/web/all.js`, in index.html `<head>`) and themed with Embassy tokens automatically via `css/md-sys-bridge.css` (`--md-sys-color-* → --color-*`):
+- **Checkbox** (`<md-checkbox>`), **Switch** (`<md-switch>`), **Radio** (`<md-radio>`), **Slider** (`<md-slider>`), **Menu** (`<md-menu>`), **List** (`<md-list>`), **Divider** (`<md-divider>`), **Progress** (`<md-circular/linear-progress>`).
+These depend on JS/Lit/Shadow DOM/CDN — a deliberate exception (June 2026) to the no-build/CSS-only rule. There is no Embassy `*.css` for them; do not write one. Note: in dark mode Embassy `--color-primary` is white, so selected controls render white — see [[md3-structure-adoption]] memory.
 
 Component relationships: filter **chips** refine **search** results (chips below the search bar) and toolbar filters; **search-field** (toolbar.css) is the compact in-toolbar search, **search-bar** (search.css) is the standalone 56px component.
 

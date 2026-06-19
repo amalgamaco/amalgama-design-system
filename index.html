@@ -18854,1349 +18854,200 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     <!-- ═══════════ DIVIDER ═══════════ -->
     <section class="ds-section" id="s-c-divider">
       <div class="ds-page-tag">Components · Containment</div>
-      <h1 class="ds-page-title">Divider</h1>
-      <p class="ds-page-desc">Dividers are thin lines that group content in lists and layouts. They can be full-width, inset, or middle-inset, and horizontal or vertical.</p>
-
-      <!-- ══ Component Tabs ══ -->
+      <h1 class="docs-page-title">Divider</h1>
+      <p class="docs-page-desc">Línea fina que separa contenido en grupos dentro de listas y layouts.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-divider&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> borde con var(--border) (el chrome de contenedores ya usa on-surface al 10%).
-            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
-            <ul>
-              <li><b>4 variantes:</b> Full-width (100%), Inset (16dp margin leading), Middle-inset (16dp/16dp ambos lados), Vertical (separa columnas en pantallas grandes).</li>
-              <li><b>Grosor:</b> siempre 1dp.</li>
-              <li><b>Token de color:</b> <code>$outline-variant</code> — en Embassy: <code>var(--border)</code> o <code>var(--color-outline-variant)</code>.</li>
-              <li><b>Sin elevación ni estados interactivos</b> — los dividers son no-interactivos. No hover, focus ni pressed.</li>
-              <li><b>Uso moderado:</b> solo cuando el espaciado entre elementos no es suficiente para crear separación visual. Preferir whitespace antes que un divider. En listas con formato repetitivo, considerar omitirlo.</li>
-              <li><b>Full-width</b> para separar secciones de contenido no relacionadas o zonas interactivas de no-interactivas. <b>Inset</b> debe alinearse con el elemento ancla (ícono o avatar). <b>Middle-inset</b> para separar elementos de tipo mixto dentro de una sección.</li>
-            </ul>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Full-width e inset</h2>
+          <div style="max-width:380px;border:1px solid var(--border);border-radius:12px;padding:14px 0">
+            <div style="padding:6px 16px">Sección A</div>
+            <md-divider></md-divider>
+            <div style="padding:6px 16px">Sección B</div>
+            <md-divider inset></md-divider>
+            <div style="padding:6px 16px">Sección C (divisor inset)</div>
           </div>
-        </div>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> borde con var(--border) (el chrome de contenedores ya usa on-surface al 10%).
-          </div>
-        </div>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> borde con var(--border) (el chrome de contenedores ya usa on-surface al 10%).
-          </div>
-        </div>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Código</h2>
+          <pre class="docs-code"><code>&lt;md-divider&gt;&lt;/md-divider&gt;
+&lt;md-divider inset&gt;&lt;/md-divider&gt;</code></pre>
+        </section>
       </div>
     </section>
     <!-- ═══════════ LISTS ═══════════ -->
     <section class="ds-section" id="s-c-list">
       <div class="ds-page-tag">Components · Containment</div>
-      <h1 class="ds-page-title">Lists</h1>
-      <p class="ds-page-desc">Lists display information in a vertical, scrollable format. Each row is a list item that can contain leading/trailing elements, headlines, and supporting text.</p>
-
-      <!-- ══ Component Tabs ══ -->
+      <h1 class="docs-page-title">List</h1>
+      <p class="docs-page-desc">Contenedor vertical de ítems de texto o acciones relacionados.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-list&gt;</code> + <code>&lt;md-list-item&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> tabla simple (.data-table) o stack de cards según densidad.
-            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
-            <ul>
-              <li><b>3 variantes por densidad de texto:</b> Una línea (56dp), Dos líneas (72dp), Tres líneas (88dp).</li>
-              <li><b>Elementos leading intercambiables:</b> ícono 24dp, avatar 40dp (circular, <code>$primary-container</code>), imagen 56×56dp, video pequeño 100×56dp. Deben ser consistentes dentro de una misma lista — no mezclar ícono con avatar en el mismo listado.</li>
-              <li><b>Padding:</b> 16dp leading y trailing; 12dp vertical (una línea). Separador opcional: inset 16dp para alinearse con el texto.</li>
-              <li><b>Tokens de color:</b> container = <code>$surface</code>, texto principal = <code>$on-surface</code>, texto secundario = <code>$on-surface-variant</code>, ícono seleccionado = <code>$primary</code>.</li>
-              <li><b>Estados:</b> hover 8%, enfocado 12%, presionado 12%, arrastrado 16% + elevación nivel 4 (8dp sombra tonal).</li>
-              <li><b>Forma:</b> corner-none (0dp) en el contenedor del ítem. Avatares usan corner-full.</li>
-              <li>Los ítems no-interactivos no reciben capa de estado. Los ítems interactivos (<code>type="button"</code> o <code>type="link"</code>) sí.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> tabla simple (.data-table) o stack de cards según densidad.
-          </div>
-        </div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Lista con encabezado y soporte</h2>
+          <md-list style="max-width:380px;border:1px solid var(--border);border-radius:12px;overflow:hidden">
+            <md-list-item><div slot="headline">Bandeja de entrada</div><div slot="supporting-text">128 mensajes sin leer</div></md-list-item>
+            <md-divider></md-divider>
+            <md-list-item><div slot="headline">Destacados</div><div slot="supporting-text">12 mensajes</div></md-list-item>
+            <md-divider></md-divider>
+            <md-list-item type="button"><div slot="headline">Enviados</div></md-list-item>
+          </md-list>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> tabla simple (.data-table) o stack de cards según densidad.
-          </div>
-        </div>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Código</h2>
+          <pre class="docs-code"><code>&lt;md-list&gt;
+  &lt;md-list-item&gt;
+    &lt;div slot="headline"&gt;Bandeja de entrada&lt;/div&gt;
+    &lt;div slot="supporting-text"&gt;128 mensajes&lt;/div&gt;
+  &lt;/md-list-item&gt;
+  &lt;md-divider&gt;&lt;/md-divider&gt;
+  &lt;md-list-item type="button"&gt;&lt;div slot="headline"&gt;Enviados&lt;/div&gt;&lt;/md-list-item&gt;
+&lt;/md-list&gt;</code></pre>
+        </section>
       </div>
     </section>
     <!-- ═══════════ LOADING AND PROGRESS ═══════════ -->
     <section class="ds-section" id="s-c-loading">
       <div class="ds-page-tag">Components · Feedback</div>
-      <h1 class="ds-page-title">Loading and progress</h1>
-      <p class="ds-page-desc">Loading indicators and progress components communicate the state of ongoing processes — determinate, indeterminate, and linear progress. Uses the <code>skeleton</code> pattern for content placeholders.</p>
-
-      <!-- ══ Component Tabs ══ -->
+      <h1 class="docs-page-title">Progress</h1>
+      <p class="docs-page-desc">Indicadores de progreso circular y lineal — determinado (progreso conocido) o indeterminado (duración desconocida).</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-circular-progress&gt;</code> y <code>&lt;md-linear-progress&gt;</code> de <code>@material/web</code> (MD3), tematizados con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> Skeleton (css/components/skeleton.css) — no spinners ad-hoc.
-            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
-            <ul>
-              <li><b>5 variantes:</b> Linear determinado, Linear indeterminado, Linear con buffer (streaming), Circular determinado, Circular indeterminado. Variante de 4 colores (primary → primary-container → tertiary → tertiary-container) para pantallas completas de carga.</li>
-              <li><b>Linear:</b> pista 4dp, indicador activo = <code>$primary</code>, fondo de pista = <code>$surface-container-highest</code>.</li>
-              <li><b>Circular:</b> diámetro 48dp, ancho de trazo 4dp, color = <code>$primary</code>; pista invisible/transparente.</li>
-              <li><b>Sin elevación ni estados interactivos</b> — son componentes de feedback pasivos. No reciben hover ni focus.</li>
-              <li><b>Distinción con Skeleton:</b> el Skeleton (disponible en Embassy) es para placeholders de contenido en carga inicial de UI. Los indicadores de progreso comunican un proceso activo en curso (llamada en vuelo, guardado, etc.). No son intercambiables.</li>
-              <li><b>Accesibilidad:</b> <code>role="progressbar"</code>, <code>aria-valuenow</code> en variantes determinadas, <code>aria-valuemin="0"</code>, <code>aria-valuemax="1"</code>. Las variantes indeterminadas omiten <code>aria-valuenow</code>.</li>
-            </ul>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Circular</h2>
+          <div style="display:flex;gap:32px;align-items:center">
+            <div style="text-align:center"><md-circular-progress indeterminate aria-label="Indeterminado"></md-circular-progress><div class="state" style="font-size:12px;color:var(--text-secondary);margin-top:8px">Indeterminado</div></div>
+            <div style="text-align:center"><md-circular-progress value="0.65" aria-label="65 por ciento"></md-circular-progress><div class="state" style="font-size:12px;color:var(--text-secondary);margin-top:8px">Determinado 65%</div></div>
           </div>
-        </div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Lineal</h2>
+          <div style="display:flex;flex-direction:column;gap:18px;max-width:300px">
+            <div><md-linear-progress indeterminate aria-label="Indeterminado" style="width:100%"></md-linear-progress><div class="state" style="font-size:12px;color:var(--text-secondary);margin-top:8px">Indeterminado</div></div>
+            <div><md-linear-progress value="0.4" aria-label="40 por ciento" style="width:100%"></md-linear-progress><div class="state" style="font-size:12px;color:var(--text-secondary);margin-top:8px">Determinado 40%</div></div>
+          </div>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> Skeleton (css/components/skeleton.css) — no spinners ad-hoc.
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Indeterminado: la operación corre pero no se sabe cuánto falta.</li><li>Determinado: hay un porcentaje real de avance (subida de archivo).</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Placeholder de estructura de layout mientras carga → <b>Skeleton</b>.</li></ul></div></div>
           </div>
-        </div>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> Skeleton (css/components/skeleton.css) — no spinners ad-hoc.
-          </div>
-        </div>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Código</h2>
+          <pre class="docs-code"><code>&lt;md-circular-progress indeterminate&gt;&lt;/md-circular-progress&gt;
+&lt;md-circular-progress value="0.65"&gt;&lt;/md-circular-progress&gt;
+&lt;md-linear-progress indeterminate&gt;&lt;/md-linear-progress&gt;
+&lt;md-linear-progress value="0.4"&gt;&lt;/md-linear-progress&gt;</code></pre>
+        </section>
       </div>
     </section>
     <!-- ═══════════ MENU ═══════════ -->
     <section class="ds-section" id="s-c-menu">
-      <div class="ds-page-tag">Components · Overlay</div>
-      <h1 class="ds-page-title">Menu</h1>
-      <p class="ds-page-desc">Menus display a list of choices on a temporary surface. They appear when users interact with a button, action, or other control.</p>
-
-      <!-- ══ Component Tabs ══ -->
+      <div class="ds-page-tag">Components · Containment</div>
+      <h1 class="docs-page-title">Menu</h1>
+      <p class="docs-page-desc">Lista temporal de acciones u opciones que aparece anclada a un disparador.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-menu&gt;</code> + <code>&lt;md-menu-item&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
-        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> select nativo (form.css) o acciones en toolbar; no imitar un menu flotante.
-            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
-            <ul>
-              <li><b>3 variantes:</b> Dropdown menu (overflow, context, popup), Exposed dropdown menu (filled u outlined, editable o no), Sub-menu (anidado con <code>md-sub-menu</code>).</li>
-              <li><b>Contenedor:</b> fondo <code>$surface-container</code>, elevación 3dp (sombra tonal), esquinas extra-small (4dp).</li>
-              <li><b>Ítems:</b> texto <code>$on-surface</code>, touch target mínimo 48dp. Puede tener leading icon 24dp y trailing text para shortcuts. Ítem seleccionado: fondo <code>$secondary-container</code>.</li>
-              <li><b>Posicionamiento:</b> anclado al elemento disparador; se invierte horizontal y verticalmente para permanecer en el viewport. Soporta offsets x/y configurables.</li>
-              <li><b>Comportamiento:</b> se cierra al seleccionar un ítem (salvo <code>keepOpen</code>), al perder foco, y al presionar Escape. Restaura el foco al elemento previo al cerrarse. Typeahead con delay 200ms.</li>
-              <li><b>Estados:</b> hover 8%, enfocado 12%, presionado 12%. Los ítems deshabilitados no son interactivos.</li>
-            </ul>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Menú anclado a un botón</h2>
+          <div style="position:relative;display:inline-block">
+            <md-filled-button id="menu-anchor-ex" onclick="(function(){var m=document.getElementById('menu-ex');m.open=!m.open;})()">Opciones</md-filled-button>
+            <md-menu id="menu-ex" anchor="menu-anchor-ex">
+              <md-menu-item><div slot="headline">Editar</div></md-menu-item>
+              <md-menu-item><div slot="headline">Duplicar</div></md-menu-item>
+              <md-menu-item><div slot="headline">Eliminar</div></md-menu-item>
+            </md-menu>
           </div>
-        </div>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> select nativo (form.css) o acciones en toolbar; no imitar un menu flotante.
-          </div>
-        </div>
+          <p class="docs-section-desc" style="margin-top:14px">Hacé clic en el botón para abrir el menú. El posicionamiento, foco y navegación por teclado son los oficiales de Material.</p>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> select nativo (form.css) o acciones en toolbar; no imitar un menu flotante.
-          </div>
-        </div>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Código</h2>
+          <pre class="docs-code"><code>&lt;div style="position:relative"&gt;
+  &lt;md-filled-button id="anchor" onclick="menu.open = !menu.open"&gt;Opciones&lt;/md-filled-button&gt;
+  &lt;md-menu id="menu" anchor="anchor"&gt;
+    &lt;md-menu-item&gt;&lt;div slot="headline"&gt;Editar&lt;/div&gt;&lt;/md-menu-item&gt;
+    &lt;md-menu-item&gt;&lt;div slot="headline"&gt;Eliminar&lt;/div&gt;&lt;/md-menu-item&gt;
+  &lt;/md-menu&gt;
+&lt;/div&gt;</code></pre>
+        </section>
       </div>
     </section>
     <!-- ═══════════ RADIO BUTTON ═══════════ -->
     <section class="ds-section" id="s-c-radio">
-
-  <style>
-    /* ── Radio Button section local styles ── */
-    .rb-preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 16px;
-      margin-top: 8px;
-    }
-    .rb-preview-cell {
-      background: var(--color-surface-container-low, #F5F6F8);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg, 12px);
-      padding: 28px 16px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
-    .rb-preview-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--ds-text-2, #474D61);
-      text-align: center;
-      letter-spacing: .04em;
-    }
-    .rb-states-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg, 12px);
-      overflow: hidden;
-    }
-    .rb-states-row {
-      display: contents;
-    }
-    .rb-states-cell {
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-      color: var(--ds-text-2, #474D61);
-    }
-    .rb-states-cell:last-child,
-    .rb-states-cell:nth-last-child(2):nth-child(odd) {
-      border-bottom: none;
-    }
-    .rb-states-header {
-      padding: 10px 24px;
-      background: var(--color-surface-container, #EDEEF2);
-      font-family: 'DM Mono', monospace;
-      font-size: 10.5px;
-      font-weight: 500;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--ds-text-2, #474D61);
-      border-bottom: 1px solid var(--border);
-      grid-column: 1 / -1;
-    }
-    .rb-mode-panels {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 8px;
-    }
-    @media (max-width: 768px) {
-      .rb-mode-panels { grid-template-columns: 1fr; }
-      .rb-states-grid { grid-template-columns: 1fr; }
-    }
-    .rb-mode-panel {
-      border-radius: var(--radius-lg, 12px);
-      border: 1px solid var(--border);
-      padding: 28px 24px;
-    }
-    .rb-mode-panel--light { background: #FAFBFC; }
-    .rb-mode-panel--dark  { background: #13161F; }
-    .rb-mode-label {
-      font: 600 10.5px/1 'DM Mono', monospace;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      color: #9FA3AE;
-    }
-    .rb-group-label {
-      font: 600 11px/1 'Inter', sans-serif;
-      letter-spacing: .04em;
-      margin-bottom: 12px;
-      color: var(--ds-text-2, #474D61);
-      text-transform: uppercase;
-    }
-  </style>
-
-  <div class="ds-page-tag">Components · Selección</div>
-  <h1 class="docs-page-title">Radio Button</h1>
-  <p class="docs-page-desc">Control de selección exclusiva: dentro de un grupo, solo una opción puede estar activa a la vez. Se usa cuando las alternativas son mutuamente excluyentes y el usuario necesita ver todas antes de elegir.</p>
-
-  <!-- ── Tabs ── -->
-  <div class="ds-comp-tabs">
-    <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
-    <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
-  </div>
-
-  <!-- ════════════════ OVERVIEW ════════════════ -->
-  <div class="ds-comp-tab-panel active" data-tab="overview">
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">¿Qué es el Botón de Opción?</h2>
-      <p class="docs-section-desc">
-        El Radio Button (botón de opción) permite al usuario elegir <strong>una única opción dentro de un conjunto de alternativas mutuamente excluyentes</strong>. Seleccionar una opción deselecciona automáticamente cualquier otra del mismo grupo. Siempre aparece en grupos de dos o más — nunca de forma aislada.
-      </p>
-      <ul style="font-size:14px;line-height:2;color:var(--ds-text-2);padding-left:20px;margin:0 0 24px">
-        <li><strong style="color:var(--ds-text-1)">Selección exclusiva:</strong> solo una opción activa por grupo — el aro exterior se rellena con el color primario y aparece el punto interior blanco.</li>
-        <li><strong style="color:var(--ds-text-1)">Visible de un vistazo:</strong> todas las opciones se muestran simultáneamente; el usuario evalúa el conjunto completo antes de decidir.</li>
-        <li><strong style="color:var(--ds-text-1)">Semántica nativa:</strong> se implementa con <code>&lt;input type="radio"&gt;</code> dentro de un <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code> — accesibilidad incluida.</li>
-        <li><strong style="color:var(--ds-text-1)">Sin efecto inmediato:</strong> la selección no dispara acciones — a diferencia del Switch, que activa o desactiva algo al instante.</li>
-      </ul>
-
-      <!-- Comparativa Radio / Checkbox / Switch -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px">
-        <div style="background:var(--color-surface-container-low,#F5F6F8);border:2px solid var(--color-primary,#4F80FF);border-radius:var(--radius-lg,12px);padding:20px 18px">
-          <div style="font:700 13px/1 'Epilogue',sans-serif;color:var(--color-primary,#4F80FF);margin-bottom:8px">Radio Button</div>
-          <div style="font-size:12.5px;color:var(--ds-text-2);line-height:1.7">Una de varias opciones mutuamente excluyentes. El usuario elige una opción del grupo.</div>
-        </div>
-        <div style="background:var(--color-surface-container-low,#F5F6F8);border:1px solid var(--border);border-radius:var(--radius-lg,12px);padding:20px 18px">
-          <div style="font:700 13px/1 'Epilogue',sans-serif;color:var(--ds-text-1);margin-bottom:8px">Checkbox</div>
-          <div style="font-size:12.5px;color:var(--ds-text-2);line-height:1.7">Selección múltiple independiente. Cada opción puede activarse o desactivarse por separado.</div>
-        </div>
-        <div style="background:var(--color-surface-container-low,#F5F6F8);border:1px solid var(--border);border-radius:var(--radius-lg,12px);padding:20px 18px">
-          <div style="font:700 13px/1 'Epilogue',sans-serif;color:var(--ds-text-1);margin-bottom:8px">Switch</div>
-          <div style="font-size:12.5px;color:var(--ds-text-2);line-height:1.7">Activa o desactiva un estado binario con efecto inmediato — como encender/apagar una función.</div>
-        </div>
+      <div class="ds-page-tag">Components · Selección</div>
+      <h1 class="docs-page-title">Radio Button</h1>
+      <p class="docs-page-desc">Selección exclusiva — una sola opción activa dentro de un grupo de valores mutuamente excluyentes.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-radio&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
+      <div class="ds-comp-tabs">
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Cuándo usar / Cuándo no usar</h2>
-      <div class="ds-guideline-grid">
-        <div class="ds-guideline-card do">
-          <h3>✓ Usá Radio Button cuando…</h3>
-          <ul>
-            <li>Las opciones son mutuamente excluyentes (solo una puede estar activa)</li>
-            <li>El usuario necesita ver todas las opciones antes de elegir</li>
-            <li>Hay entre 2 y 6 opciones aproximadamente</li>
-            <li>El valor predeterminado tiene sentido para la mayoría de los casos (preselección)</li>
-            <li>El contexto es un formulario o configuración — la selección se confirma con un botón Submit</li>
-          </ul>
-        </div>
-        <div class="ds-guideline-card dont">
-          <h3>✕ No usás Radio Button cuando…</h3>
-          <ul>
-            <li>Se puede elegir más de una opción → usá Checkbox</li>
-            <li>La acción es binaria con efecto inmediato → usá Switch</li>
-            <li>Hay más de 6–7 opciones → considerá un Select / Dropdown</li>
-            <li>Solo existe una opción posible → un único radio no tiene sentido; usá Checkbox</li>
-            <li>Las opciones son dependientes entre sí → revisá la estructura de datos</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Variantes</h2>
-      <p class="docs-section-desc">El Radio Button no tiene variantes de estilo — solo estados. Lo que varía es la orientación del grupo (vertical u horizontal) y los estados individuales de cada opción.</p>
-
-      <!-- SVG illustration: group variants -->
-      <div class="ds-preview centered" style="background:var(--color-surface-container-low,#F5F6F8);border:1px solid var(--border);border-radius:var(--radius-lg,12px);padding:40px 32px;display:flex;flex-wrap:wrap;gap:40px;justify-content:center;align-items:flex-start">
-
-        <!-- Grupo vertical -->
-        <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
-          <div style="font:600 10.5px/1 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#9FA3AE;margin-bottom:16px">Vertical (default)</div>
-          <svg width="180" height="120" viewBox="0 0 180 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Option 1: unselected -->
-            <circle cx="18" cy="20" r="9" stroke="#9FA3AE" stroke-width="2"/>
-            <text x="34" y="25" font-family="Inter,sans-serif" font-size="13" fill="#0A0C12">Opción A</text>
-            <!-- Option 2: selected -->
-            <circle cx="18" cy="58" r="9" fill="#4F80FF"/>
-            <circle cx="18" cy="58" r="5" fill="#FFFFFF"/>
-            <text x="34" y="63" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#0A0C12">Opción B</text>
-            <!-- Option 3: unselected -->
-            <circle cx="18" cy="96" r="9" stroke="#9FA3AE" stroke-width="2"/>
-            <text x="34" y="101" font-family="Inter,sans-serif" font-size="13" fill="#0A0C12">Opción C</text>
-          </svg>
-        </div>
-
-        <!-- Grupo horizontal -->
-        <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
-          <div style="font:600 10.5px/1 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#9FA3AE;margin-bottom:16px">Horizontal</div>
-          <svg width="240" height="40" viewBox="0 0 240 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Option 1: selected -->
-            <circle cx="14" cy="20" r="9" fill="#4F80FF"/>
-            <circle cx="14" cy="20" r="5" fill="#FFFFFF"/>
-            <text x="30" y="25" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#0A0C12">Sí</text>
-            <!-- Option 2: unselected -->
-            <circle cx="90" cy="20" r="9" stroke="#9FA3AE" stroke-width="2"/>
-            <text x="106" y="25" font-family="Inter,sans-serif" font-size="13" fill="#0A0C12">No</text>
-          </svg>
-        </div>
-
-        <!-- Grupo con error -->
-        <div style="display:flex;flex-direction:column;gap:0;align-items:flex-start">
-          <div style="font:600 10.5px/1 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#9FA3AE;margin-bottom:16px">Estado de error</div>
-          <svg width="180" height="100" viewBox="0 0 180 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Group label error -->
-            <text x="0" y="14" font-family="Inter,sans-serif" font-size="11" fill="#BA1A1A">Seleccioná una opción</text>
-            <!-- Option 1: error unselected -->
-            <circle cx="14" cy="40" r="9" stroke="#BA1A1A" stroke-width="2"/>
-            <text x="30" y="45" font-family="Inter,sans-serif" font-size="13" fill="#0A0C12">Opción A</text>
-            <!-- Option 2: error unselected -->
-            <circle cx="14" cy="76" r="9" stroke="#BA1A1A" stroke-width="2"/>
-            <text x="30" y="81" font-family="Inter,sans-serif" font-size="13" fill="#0A0C12">Opción B</text>
-          </svg>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Componentes relacionados</h2>
-      <div class="ds-card-grid">
-        <div class="ds-card-link" onclick="navigate('s-c-checkbox')">
-          <div class="ds-card-icon"><i data-lucide="check-square"></i></div>
-          <div class="ds-card-name">Checkbox</div>
-          <div class="ds-card-desc">Selección múltiple independiente — cuando se puede activar más de una opción.</div>
-        </div>
-        <div class="ds-card-link" onclick="navigate('s-c-switch')">
-          <div class="ds-card-icon"><i data-lucide="toggle-right"></i></div>
-          <div class="ds-card-name">Switch</div>
-          <div class="ds-card-desc">Activación/desactivación binaria con efecto inmediato — no requiere confirmación.</div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- ════════════════ SPECS ════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="specs">
-
-    <!-- ss-rb-configs -->
-    <section class="docs-section" id="ss-rb-configs">
-      <h2 class="docs-section-title">Configuraciones</h2>
-      <p class="docs-section-desc">Los cuatro estados base de una opción individual dentro del grupo.</p>
-      <div class="rb-preview-grid">
-
-        <div class="rb-preview-cell">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="10" r="9" stroke="#9FA3AE" stroke-width="2"/>
-          </svg>
-          <span class="rb-preview-label">No seleccionado</span>
-        </div>
-
-        <div class="rb-preview-cell">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="10" r="10" fill="#4F80FF"/>
-            <circle cx="10" cy="10" r="5" fill="#FFFFFF"/>
-          </svg>
-          <span class="rb-preview-label">Seleccionado</span>
-        </div>
-
-        <div class="rb-preview-cell">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="10" r="9" stroke="#BA1A1A" stroke-width="2"/>
-          </svg>
-          <span class="rb-preview-label">Error</span>
-        </div>
-
-        <div class="rb-preview-cell" style="opacity:.7">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.38">
-            <circle cx="10" cy="10" r="9" stroke="#9FA3AE" stroke-width="2"/>
-          </svg>
-          <span class="rb-preview-label">Deshabilitado</span>
-        </div>
-
-        <div class="rb-preview-cell" style="opacity:.7">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.38">
-            <circle cx="10" cy="10" r="10" fill="#4F80FF"/>
-            <circle cx="10" cy="10" r="5" fill="#FFFFFF"/>
-          </svg>
-          <span class="rb-preview-label">Deshabilitado seleccionado</span>
-        </div>
-
-        <div class="rb-preview-cell">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- State layer (focus ring) -->
-            <circle cx="24" cy="24" r="20" fill="#4F80FF" fill-opacity=".12"/>
-            <!-- Radio ring -->
-            <circle cx="24" cy="24" r="9" stroke="#4F80FF" stroke-width="2"/>
-          </svg>
-          <span class="rb-preview-label">Enfocado</span>
-        </div>
-
-        <div class="rb-preview-cell">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- State layer (press) -->
-            <circle cx="24" cy="24" r="20" fill="#4F80FF" fill-opacity=".18"/>
-            <!-- Radio filled -->
-            <circle cx="24" cy="24" r="10" fill="#4F80FF"/>
-            <circle cx="24" cy="24" r="5" fill="#FFFFFF"/>
-          </svg>
-          <span class="rb-preview-label">Presionado</span>
-        </div>
-
-        <div class="rb-preview-cell">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- State layer hover -->
-            <circle cx="24" cy="24" r="20" fill="#4F80FF" fill-opacity=".08"/>
-            <!-- Radio ring -->
-            <circle cx="24" cy="24" r="9" stroke="#9FA3AE" stroke-width="2"/>
-          </svg>
-          <span class="rb-preview-label">Hover</span>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ss-rb-tokens -->
-    <section class="docs-section" id="ss-rb-tokens">
-      <h2 class="docs-section-title">Tokens de color</h2>
-      <p class="docs-section-desc">Los tokens que controlan cada estado visual del botón de opción.</p>
-      <div class="ds-color-acc-list">
-
-        <div class="ds-color-acc open">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="true">
-            <span class="ds-sem-grp-dot" style="background:#4F80FF"></span>
-            <span class="ds-color-acc-name">Seleccionado</span>
-            <span class="ds-color-acc-count">2</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <p class="ds-sem-grp-note">El aro exterior se rellena con el color primario; el punto interior usa el color sobre-primario (blanco en light mode).</p>
-            <div class="ds-table-wrap">
-              <table class="ds-table ds-sem-table">
-                <thead><tr><th>Elemento</th><th>Token</th><th>Valor</th><th>Preview</th></tr></thead>
-                <tbody>
-                  <tr>
-                    <td>Aro exterior (fill)</td>
-                    <td><code>--color-primary</code></td>
-                    <td><span style="font-family:'DM Mono',monospace;font-size:12px">#4F80FF</span></td>
-                    <td><span style="display:inline-block;width:40px;height:18px;border-radius:4px;background:#4F80FF;border:1px solid rgba(127,127,127,.2)"></span></td>
-                  </tr>
-                  <tr>
-                    <td>Punto interior (fill)</td>
-                    <td><code>--color-on-primary</code></td>
-                    <td><span style="font-family:'DM Mono',monospace;font-size:12px">#FFFFFF</span></td>
-                    <td><span style="display:inline-block;width:40px;height:18px;border-radius:4px;background:#FFFFFF;border:1px solid rgba(127,127,127,.25)"></span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Grupo de opciones</h2>
+          <div style="display:flex;flex-direction:column;gap:8px;max-width:320px">
+            <label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="plan" value="m" checked aria-label="Mensual"></md-radio> Mensual</label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="plan" value="a" aria-label="Anual"></md-radio> Anual</label>
+            <label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="plan" value="t" aria-label="Trimestral"></md-radio> Trimestral</label>
           </div>
-        </div>
-
-        <div class="ds-color-acc">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
-            <span class="ds-sem-grp-dot" style="background:#9FA3AE;border:2px solid #9FA3AE"></span>
-            <span class="ds-color-acc-name">No seleccionado</span>
-            <span class="ds-color-acc-count">1</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <p class="ds-sem-grp-note">El aro aparece como un borde de 2dp sobre fondo transparente.</p>
-            <div class="ds-table-wrap">
-              <table class="ds-table ds-sem-table">
-                <thead><tr><th>Elemento</th><th>Token</th><th>Valor</th><th>Preview</th></tr></thead>
-                <tbody>
-                  <tr>
-                    <td>Borde del aro</td>
-                    <td><code>--color-on-surface-variant</code></td>
-                    <td><span style="font-family:'DM Mono',monospace;font-size:12px">#9FA3AE</span></td>
-                    <td><span style="display:inline-block;width:40px;height:18px;border-radius:4px;background:#9FA3AE;border:1px solid rgba(127,127,127,.2)"></span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados</h2>
+          <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="s1" aria-label="Sin seleccionar"></md-radio> Sin seleccionar</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="s1" checked aria-label="Seleccionado"></md-radio> Seleccionado</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="s2" disabled aria-label="Deshabilitado"></md-radio> Deshabilitado</label></div>
+            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="s2" checked disabled aria-label="Deshabilitado seleccionado"></md-radio> Deshab. selec.</label></div>
           </div>
-        </div>
-
-        <div class="ds-color-acc">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
-            <span class="ds-sem-grp-dot" style="background:#BA1A1A"></span>
-            <span class="ds-color-acc-name">Error</span>
-            <span class="ds-color-acc-count">1</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <p class="ds-sem-grp-note">El borde del aro y el mensaje de error del grupo usan el token de error. El estado de error afecta todo el grupo, no una opción individual.</p>
-            <div class="ds-table-wrap">
-              <table class="ds-table ds-sem-table">
-                <thead><tr><th>Elemento</th><th>Token</th><th>Valor</th><th>Preview</th></tr></thead>
-                <tbody>
-                  <tr>
-                    <td>Borde del aro (error)</td>
-                    <td><code>--color-error</code></td>
-                    <td><span style="font-family:'DM Mono',monospace;font-size:12px">#BA1A1A</span></td>
-                    <td><span style="display:inline-block;width:40px;height:18px;border-radius:4px;background:#BA1A1A;border:1px solid rgba(127,127,127,.2)"></span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Una sola opción entre 2–5 mutuamente excluyentes.</li><li>Cuando ver todas las opciones a la vez ayuda a comparar.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Selección múltiple → <b>Checkbox</b>.</li><li>Más de 5 opciones → <b>Select</b>.</li><li>On/off inmediato → <b>Switch</b>.</li></ul></div></div>
           </div>
-        </div>
-
-        <div class="ds-color-acc">
-          <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
-            <span class="ds-sem-grp-dot" style="background:#9FA3AE;opacity:.38"></span>
-            <span class="ds-color-acc-name">Deshabilitado</span>
-            <span class="ds-color-acc-count">1</span>
-            <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
-          </button>
-          <div class="ds-color-acc-body">
-            <p class="ds-sem-grp-note">Se aplica <code>opacity: 0.38</code> sobre el control completo (aro + etiqueta). No se usan tokens de color diferentes — la opacidad unifica el tratamiento en ambos temas.</p>
-            <div class="ds-table-wrap">
-              <table class="ds-table ds-sem-table">
-                <thead><tr><th>Propiedad</th><th>Valor</th><th>Nota</th></tr></thead>
-                <tbody>
-                  <tr>
-                    <td><code>opacity</code></td>
-                    <td><span style="font-family:'DM Mono',monospace;font-size:12px">0.38</span></td>
-                    <td>Aplicado al contenedor del control + etiqueta</td>
-                  </tr>
-                  <tr>
-                    <td><code>pointer-events</code></td>
-                    <td><span style="font-family:'DM Mono',monospace;font-size:12px">none</span></td>
-                    <td>Previene interacción accidental</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Código</h2>
+          <pre class="docs-code"><code>&lt;label&gt;&lt;md-radio name="plan" value="m" checked&gt;&lt;/md-radio&gt; Mensual&lt;/label&gt;
+&lt;label&gt;&lt;md-radio name="plan" value="a"&gt;&lt;/md-radio&gt; Anual&lt;/label&gt;
+&lt;label&gt;&lt;md-radio name="plan" value="t"&gt;&lt;/md-radio&gt; Trimestral&lt;/label&gt;</code></pre>
+        </section>
       </div>
     </section>
-
-    <!-- ss-rb-anatomy -->
-    <section class="docs-section" id="ss-rb-anatomy">
-      <h2 class="docs-section-title">Anatomía</h2>
-      <p class="docs-section-desc">Partes que componen un botón de opción individual dentro de su grupo.</p>
-      <div class="ds-preview centered" style="background:var(--color-surface-container-low,#F5F6F8);border:1px solid var(--border);border-radius:var(--radius-lg,12px);padding:32px">
-        <svg width="360" height="200" viewBox="0 0 360 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-          <!-- Touch target dashed -->
-          <rect x="60" y="76" width="48" height="48" rx="24" stroke="#E01E8C" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
-
-          <!-- State layer (subtle) -->
-          <circle cx="84" cy="100" r="18" fill="#4F80FF" fill-opacity=".10"/>
-
-          <!-- Radio outer ring (selected) -->
-          <circle cx="84" cy="100" r="10" fill="#4F80FF"/>
-          <!-- Radio inner dot -->
-          <circle cx="84" cy="100" r="5" fill="#FFFFFF"/>
-
-          <!-- Label text -->
-          <text x="104" y="105" font-family="Inter,sans-serif" font-size="14" fill="#0A0C12">Etiqueta de opción</text>
-
-          <!-- ── Pin 1: Aro exterior ── -->
-          <line x1="84" y1="90" x2="84" y2="44" stroke="#E01E8C" stroke-width="1.2"/>
-          <circle cx="84" cy="44" r="9" fill="#E01E8C"/>
-          <text x="84" y="48.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">1</text>
-          <text x="99" y="44" font-family="Inter,sans-serif" font-size="11" fill="#E01E8C">Aro exterior</text>
-
-          <!-- ── Pin 2: Punto interior ── -->
-          <line x1="93" y1="100" x2="160" y2="62" stroke="#E01E8C" stroke-width="1.2"/>
-          <circle cx="160" cy="62" r="9" fill="#E01E8C"/>
-          <text x="160" y="66.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">2</text>
-          <text x="175" y="62" font-family="Inter,sans-serif" font-size="11" fill="#E01E8C">Punto interior (estado seleccionado)</text>
-
-          <!-- ── Pin 3: Etiqueta ── -->
-          <line x1="148" y1="100" x2="220" y2="148" stroke="#E01E8C" stroke-width="1.2"/>
-          <circle cx="220" cy="148" r="9" fill="#E01E8C"/>
-          <text x="220" y="152.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">3</text>
-          <text x="235" y="148" font-family="Inter,sans-serif" font-size="11" fill="#E01E8C">Etiqueta</text>
-
-          <!-- ── Pin 4: Área de toque ── -->
-          <line x1="60" y1="115" x2="28" y2="155" stroke="#E01E8C" stroke-width="1.2"/>
-          <circle cx="28" cy="155" r="9" fill="#E01E8C"/>
-          <text x="28" y="159.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">4</text>
-          <text x="43" y="155" font-family="Inter,sans-serif" font-size="11" fill="#E01E8C">Área de toque (48×48dp)</text>
-
-        </svg>
-      </div>
-      <div style="margin-top:16px">
-        <table class="docs-props-table">
-          <thead><tr><th>#</th><th>Elemento</th><th>Descripción</th></tr></thead>
-          <tbody>
-            <tr><td>1</td><td>Aro exterior</td><td>Círculo de 20dp. Borde 2dp (<code>--color-on-surface-variant</code>) cuando no está seleccionado; fill <code>--color-primary</code> cuando está seleccionado.</td></tr>
-            <tr><td>2</td><td>Punto interior</td><td>Círculo de 10dp en <code>--color-on-primary</code> (blanco). Solo visible en el estado seleccionado, centrado dentro del aro.</td></tr>
-            <tr><td>3</td><td>Etiqueta</td><td>Texto a la derecha del control. Usa <code>--color-on-surface</code>. La etiqueta amplía el área activa de clic/toque.</td></tr>
-            <tr><td>4</td><td>Área de toque</td><td>Target mínimo de 48×48dp centrado en el control. Garantiza accesibilidad táctil (WCAG 2.5.5).</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ss-rb-color -->
-    <section class="docs-section" id="ss-rb-color">
-      <h2 class="docs-section-title">Light mode / Dark mode</h2>
-      <p class="docs-section-desc">Los tokens semánticos recalibran automáticamente con <code>data-theme="dark"</code> en <code>&lt;html&gt;</code> — no se necesitan overrides por tema.</p>
-      <div class="rb-mode-panels">
-
-        <!-- Light -->
-        <div class="rb-mode-panel rb-mode-panel--light">
-          <div class="rb-mode-label">Light mode</div>
-          <svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Unselected -->
-            <circle cx="16" cy="20" r="9" stroke="#9FA3AE" stroke-width="2"/>
-            <text x="34" y="25" font-family="Inter,sans-serif" font-size="13" fill="#0A0C12">Sin seleccionar</text>
-            <!-- Selected -->
-            <circle cx="16" cy="60" r="10" fill="#4F80FF"/>
-            <circle cx="16" cy="60" r="5" fill="#FFFFFF"/>
-            <text x="34" y="65" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#0A0C12">Seleccionado</text>
-            <!-- Error -->
-            <circle cx="16" cy="100" r="9" stroke="#BA1A1A" stroke-width="2"/>
-            <text x="34" y="105" font-family="Inter,sans-serif" font-size="13" fill="#BA1A1A">Error</text>
-          </svg>
-        </div>
-
-        <!-- Dark -->
-        <div class="rb-mode-panel rb-mode-panel--dark">
-          <div class="rb-mode-label">Dark mode</div>
-          <svg width="200" height="120" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Unselected dark: --color-on-surface-variant dark = #747989 -->
-            <circle cx="16" cy="20" r="9" stroke="#747989" stroke-width="2"/>
-            <text x="34" y="25" font-family="Inter,sans-serif" font-size="13" fill="#EAEBED">Sin seleccionar</text>
-            <!-- Selected dark: --color-primary dark = #84A6FF approx -->
-            <circle cx="16" cy="60" r="10" fill="#84A6FF"/>
-            <circle cx="16" cy="60" r="5" fill="#01164D"/>
-            <text x="34" y="65" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#EAEBED">Seleccionado</text>
-            <!-- Error dark -->
-            <circle cx="16" cy="100" r="9" stroke="#FFB4AB" stroke-width="2"/>
-            <text x="34" y="105" font-family="Inter,sans-serif" font-size="13" fill="#FFB4AB">Error</text>
-          </svg>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ss-rb-states -->
-    <section class="docs-section" id="ss-rb-states">
-      <h2 class="docs-section-title">Estados</h2>
-      <p class="docs-section-desc">Todos los estados posibles de un botón de opción individual. La state layer (capa de estado) se superpone sobre el control para comunicar interacción.</p>
-      <div class="ds-preview centered" style="background:var(--color-surface-container-low,#F5F6F8);border:1px solid var(--border);border-radius:var(--radius-lg,12px);padding:32px">
-        <svg width="480" height="320" viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-          <!-- Column headers -->
-          <text x="64" y="20" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" letter-spacing=".08em" fill="#9FA3AE">NO SELECCIONADO</text>
-          <text x="240" y="20" text-anchor="middle" font-family="'DM Mono',monospace" font-size="10" letter-spacing=".08em" fill="#9FA3AE">SELECCIONADO</text>
-
-          <!-- Row 1: Reposo -->
-          <text x="0" y="58" font-family="Inter,sans-serif" font-size="11" fill="#9FA3AE">Reposo</text>
-          <!-- Unselected rest -->
-          <circle cx="64" cy="52" r="9" stroke="#9FA3AE" stroke-width="2"/>
-          <!-- Selected rest -->
-          <circle cx="240" cy="52" r="10" fill="#4F80FF"/>
-          <circle cx="240" cy="52" r="5" fill="#FFFFFF"/>
-
-          <!-- Row 2: Hover -->
-          <text x="0" y="112" font-family="Inter,sans-serif" font-size="11" fill="#9FA3AE">Hover</text>
-          <!-- Unselected hover -->
-          <circle cx="64" cy="106" r="18" fill="#9FA3AE" fill-opacity=".08"/>
-          <circle cx="64" cy="106" r="9" stroke="#9FA3AE" stroke-width="2"/>
-          <!-- Selected hover -->
-          <circle cx="240" cy="106" r="18" fill="#4F80FF" fill-opacity=".08"/>
-          <circle cx="240" cy="106" r="10" fill="#4F80FF"/>
-          <circle cx="240" cy="106" r="5" fill="#FFFFFF"/>
-
-          <!-- Row 3: Foco -->
-          <text x="0" y="166" font-family="Inter,sans-serif" font-size="11" fill="#9FA3AE">Foco</text>
-          <!-- Unselected focus -->
-          <circle cx="64" cy="160" r="18" fill="#4F80FF" fill-opacity=".12"/>
-          <circle cx="64" cy="160" r="9" stroke="#4F80FF" stroke-width="2"/>
-          <!-- Selected focus -->
-          <circle cx="240" cy="160" r="18" fill="#4F80FF" fill-opacity=".12"/>
-          <circle cx="240" cy="160" r="10" fill="#4F80FF"/>
-          <circle cx="240" cy="160" r="5" fill="#FFFFFF"/>
-
-          <!-- Row 4: Presionado -->
-          <text x="0" y="220" font-family="Inter,sans-serif" font-size="11" fill="#9FA3AE">Presionado</text>
-          <!-- Unselected pressed -->
-          <circle cx="64" cy="214" r="18" fill="#4F80FF" fill-opacity=".18"/>
-          <circle cx="64" cy="214" r="9" stroke="#4F80FF" stroke-width="2"/>
-          <!-- Selected pressed -->
-          <circle cx="240" cy="214" r="18" fill="#4F80FF" fill-opacity=".18"/>
-          <circle cx="240" cy="214" r="10" fill="#4F80FF"/>
-          <circle cx="240" cy="214" r="5" fill="#FFFFFF"/>
-
-          <!-- Row 5: Error -->
-          <text x="0" y="274" font-family="Inter,sans-serif" font-size="11" fill="#9FA3AE">Error</text>
-          <!-- Unselected error -->
-          <circle cx="64" cy="268" r="9" stroke="#BA1A1A" stroke-width="2"/>
-          <!-- Selected error -->
-          <circle cx="240" cy="268" r="10" fill="#BA1A1A"/>
-          <circle cx="240" cy="268" r="5" fill="#FFFFFF"/>
-
-          <!-- Row 6: Deshabilitado -->
-          <text x="0" y="314" font-family="Inter,sans-serif" font-size="11" fill="#9FA3AE">Deshabilitado</text>
-          <!-- Unselected disabled -->
-          <circle cx="64" cy="308" r="9" stroke="#9FA3AE" stroke-width="2" opacity=".38"/>
-          <!-- Selected disabled -->
-          <circle cx="240" cy="308" r="10" fill="#4F80FF" opacity=".38"/>
-          <circle cx="240" cy="308" r="5" fill="#FFFFFF" opacity=".38"/>
-
-        </svg>
-      </div>
-
-      <div style="margin-top:16px">
-        <table class="docs-props-table">
-          <thead><tr><th>Estado</th><th>Descripción visual</th><th>Token state layer</th></tr></thead>
-          <tbody>
-            <tr><td>Reposo</td><td>Sin state layer. Borde <code>on-surface-variant</code> o fill <code>primary</code>.</td><td>—</td></tr>
-            <tr><td>Hover</td><td>State layer 8% de opacidad sobre el control (40dp).</td><td><code>--color-on-surface</code> / <code>--color-primary</code> @ 8%</td></tr>
-            <tr><td>Foco</td><td>State layer 12% + borde del aro cambia a <code>primary</code> también en el estado no-seleccionado.</td><td><code>--color-primary</code> @ 12%</td></tr>
-            <tr><td>Presionado</td><td>State layer 18% — feedback inmediato al tap/click.</td><td><code>--color-primary</code> @ 18%</td></tr>
-            <tr><td>Error</td><td>Borde/fill cambia a <code>--color-error</code>. El texto del mensaje de error también usa ese token.</td><td>—</td></tr>
-            <tr><td>Deshabilitado</td><td><code>opacity: 0.38</code> sobre todo el control. No interactivo.</td><td>—</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ss-rb-measures -->
-    <section class="docs-section" id="ss-rb-measures">
-      <h2 class="docs-section-title">Medidas</h2>
-      <p class="docs-section-desc">Dimensiones y espaciados canónicos del control basados en Material Design 3.</p>
-      <div class="ds-preview centered" style="background:var(--color-surface-container-low,#F5F6F8);border:1px solid var(--border);border-radius:var(--radius-lg,12px);padding:40px">
-        <svg width="400" height="260" viewBox="0 0 400 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-          <!-- Touch target dashed box -->
-          <rect x="76" y="106" width="48" height="48" rx="24" stroke="#E01E8C" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <!-- State layer circle -->
-          <circle cx="100" cy="130" r="20" fill="#4F80FF" fill-opacity=".08"/>
-          <!-- Radio outer (selected) -->
-          <circle cx="100" cy="130" r="10" fill="#4F80FF"/>
-          <!-- Radio inner dot -->
-          <circle cx="100" cy="130" r="5" fill="#FFFFFF"/>
-
-          <!-- ── Annotation: 20dp outer ── -->
-          <!-- horizontal arrow across outer circle diameter -->
-          <line x1="88" y1="170" x2="112" y2="170" stroke="#E01E8C" stroke-width="1.5" marker-start="url(#arrowL)" marker-end="url(#arrowR)"/>
-          <text x="100" y="185" text-anchor="middle" font-family="'DM Mono',monospace" font-size="11" fill="#E01E8C">20dp</text>
-
-          <!-- ── Annotation: 2dp stroke ── -->
-          <line x1="52" y1="130" x2="74" y2="130" stroke="#E01E8C" stroke-width="1.2" stroke-dasharray="2 2"/>
-          <text x="50" y="128" text-anchor="end" font-family="'DM Mono',monospace" font-size="11" fill="#E01E8C">stroke 2dp</text>
-
-          <!-- ── Annotation: 10dp inner dot ── -->
-          <line x1="100" y1="118" x2="148" y2="90" stroke="#E01E8C" stroke-width="1.2"/>
-          <text x="153" y="87" font-family="'DM Mono',monospace" font-size="11" fill="#E01E8C">punto interior 10dp</text>
-
-          <!-- ── Annotation: 48dp touch target ── -->
-          <line x1="76" y1="98" x2="124" y2="98" stroke="#E01E8C" stroke-width="1.5"/>
-          <line x1="76" y1="93" x2="76" y2="103" stroke="#E01E8C" stroke-width="1.5"/>
-          <line x1="124" y1="93" x2="124" y2="103" stroke="#E01E8C" stroke-width="1.5"/>
-          <text x="100" y="88" text-anchor="middle" font-family="'DM Mono',monospace" font-size="11" fill="#E01E8C">48dp touch target</text>
-
-          <!-- ── Annotation: state layer 40dp ── -->
-          <line x1="245" y1="130" x2="245" y2="80" stroke="#E01E8C" stroke-width="1.2" stroke-dasharray="2 2"/>
-          <circle cx="100" cy="130" r="20" stroke="#E01E8C" stroke-width="1" stroke-dasharray="3 2" fill="none" opacity=".6"/>
-          <text x="250" y="77" font-family="'DM Mono',monospace" font-size="11" fill="#E01E8C">state layer 40dp</text>
-
-          <!-- ── Annotation: gap label 16dp ── -->
-          <line x1="110" y1="230" x2="126" y2="230" stroke="#E01E8C" stroke-width="1.5"/>
-          <line x1="110" y1="225" x2="110" y2="235" stroke="#E01E8C" stroke-width="1.5"/>
-          <line x1="126" y1="225" x2="126" y2="235" stroke="#E01E8C" stroke-width="1.5"/>
-          <text x="100" y="248" text-anchor="middle" font-family="'DM Mono',monospace" font-size="11" fill="#E01E8C">gap 16dp</text>
-          <!-- dummy label -->
-          <circle cx="100" cy="230" r="10" fill="#4F80FF"/>
-          <circle cx="100" cy="230" r="5" fill="#FFFFFF"/>
-          <text x="132" y="235" font-family="Inter,sans-serif" font-size="13" fill="#0A0C12">Etiqueta</text>
-
-          <!-- Arrow markers -->
-          <defs>
-            <marker id="arrowL" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
-              <path d="M6,0 L0,3 L6,6" fill="none" stroke="#E01E8C" stroke-width="1.2"/>
-            </marker>
-            <marker id="arrowR" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse">
-              <path d="M6,0 L0,3 L6,6" fill="none" stroke="#E01E8C" stroke-width="1.2"/>
-            </marker>
-          </defs>
-
-        </svg>
-      </div>
-
-      <div style="margin-top:16px">
-        <table class="docs-props-table">
-          <thead><tr><th>Propiedad</th><th>Valor</th><th>Nota</th></tr></thead>
-          <tbody>
-            <tr><td>Diámetro exterior</td><td>20dp</td><td>El círculo base del control</td></tr>
-            <tr><td>Grosor del borde</td><td>2dp</td><td>Estado no-seleccionado; reemplazado por fill en seleccionado</td></tr>
-            <tr><td>Diámetro del punto interior</td><td>10dp</td><td>50% del aro exterior; solo visible en seleccionado</td></tr>
-            <tr><td>State layer (diámetro)</td><td>40dp</td><td>Círculo de interacción — hover, focus y press</td></tr>
-            <tr><td>Touch target</td><td>48×48dp</td><td>Mínimo táctil — WCAG 2.5.5; centrado en el control</td></tr>
-            <tr><td>Gap control → etiqueta</td><td>16dp</td><td>Espacio entre el borde del aro y el inicio del texto</td></tr>
-            <tr><td>Gap entre opciones (vertical)</td><td>16dp</td><td>Espaciado entre filas del grupo</td></tr>
-            <tr><td>Radio del control</td><td><code>--radius-full</code></td><td>El Radio Button es siempre circular — nunca redondeado parcial</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- ════════════════ GUIDELINES ════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="guidelines">
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Reglas fundamentales del grupo</h2>
-      <div class="ds-guideline-grid">
-        <div class="ds-guideline-card do">
-          <h3>✓ Siempre en grupo</h3>
-          <ul>
-            <li>Un Radio Button nunca aparece solo — siempre es parte de un <em>grupo de radio</em></li>
-            <li>El grupo mínimo tiene 2 opciones; si hay una sola, usá Checkbox</li>
-            <li>Envolvé el grupo en <code>&lt;fieldset&gt;</code> con <code>&lt;legend&gt;</code> para que el nombre del grupo sea accesible</li>
-          </ul>
-        </div>
-        <div class="ds-guideline-card dont">
-          <h3>✕ Evitá estos errores de grupo</h3>
-          <ul>
-            <li>No mezcles opciones de grupos distintos en el mismo <code>fieldset</code></li>
-            <li>No uses el mismo <code>name</code> para opciones de grupos diferentes — los navegadores los tratan como el mismo grupo</li>
-            <li>No dejes todos los radios sin selección si hay una opción válida por defecto</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Etiquetas</h2>
-      <div class="ds-guideline-grid">
-        <div class="ds-guideline-card do">
-          <h3>✓ Buenas etiquetas</h3>
-          <ul>
-            <li>La etiqueta va <strong>a la derecha</strong> del control en idiomas LTR — nunca arriba ni abajo</li>
-            <li>La etiqueta del grupo (<code>&lt;legend&gt;</code>) describe qué se está eligiendo: "Modalidad de trabajo", "Frecuencia de notificación"</li>
-            <li>Las etiquetas de cada opción son substantivos o frases cortas: "Presencial", "Remoto", "Híbrido"</li>
-            <li>Usá etiquetas paralelas — todas del mismo tipo gramatical y longitud similar</li>
-          </ul>
-        </div>
-        <div class="ds-guideline-card dont">
-          <h3>✕ Evitá</h3>
-          <ul>
-            <li>No pongas la etiqueta a la izquierda (rompe el patrón táctil esperado)</li>
-            <li>No uses etiquetas muy largas — más de 4–5 palabras por opción sugiere que el grupo necesita rediseño</li>
-            <li>No repitas el nombre del grupo en cada etiqueta: ✗ "Trabajo presencial" / "Trabajo remoto" → ✓ "Presencial" / "Remoto"</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Orientación: vertical vs. horizontal</h2>
-      <div class="ds-guideline-grid">
-        <div class="ds-guideline-card">
-          <h3>Vertical (recomendado)</h3>
-          <ul>
-            <li>Más fácil de escanear — los ojos recorren la columna de izquierda a derecha</li>
-            <li>Las etiquetas largas no se truncan ni generan line-breaks inesperados</li>
-            <li>Mejor comportamiento en pantallas angostas (mobile)</li>
-            <li>Usá vertical siempre que el espacio lo permita</li>
-          </ul>
-        </div>
-        <div class="ds-guideline-card">
-          <h3>Horizontal</h3>
-          <ul>
-            <li>Solo cuando hay 2–3 opciones muy cortas ("Sí / No", "AM / PM")</li>
-            <li>Las opciones deben tener longitud similar para que la grilla se vea equilibrada</li>
-            <li>En mobile, el horizontal puede colapsar a vertical si el viewport es angosto</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Selección predeterminada</h2>
-      <ul style="font-size:14px;line-height:2;color:var(--ds-text-2);padding-left:20px;margin:0">
-        <li><strong style="color:var(--ds-text-1)">Siempre preseleccioná una opción</strong> cuando existe una respuesta que aplica a la mayoría de los usuarios o la más segura — evitá dejar el grupo sin selección</li>
-        <li>Si no hay una opción clara por defecto (ej. preguntas de privacidad sensibles), dejá el grupo sin selección y hacé explícito que es obligatorio con un asterisco y mensaje de error</li>
-        <li>La opción predeterminada debe ser la primera de la lista cuando todas las opciones tienen peso similar</li>
-      </ul>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Do / Don't</h2>
-      <div class="ds-guideline-grid">
-        <div class="ds-guideline-card do">
-          <h3>✓ Do</h3>
-          <ul>
-            <li>Presentar entre 2 y 6 opciones — si hay más, considerar un Select</li>
-            <li>Ordenar las opciones lógicamente (más probable primero, orden cronológico, o alfabético)</li>
-            <li>Mostrar mensajes de error a nivel de grupo (bajo el <code>&lt;legend&gt;</code>), no por opción individual</li>
-            <li>Hacer que la etiqueta también sea clickeable para ampliar el área de toque</li>
-          </ul>
-        </div>
-        <div class="ds-guideline-card dont">
-          <h3>✕ Don't</h3>
-          <ul>
-            <li>Usar Radio Button para activar/desactivar algo de forma inmediata → Switch</li>
-            <li>Usar Radio Button cuando se pueden seleccionar múltiples opciones → Checkbox</li>
-            <li>Deshabilitar todas las opciones sin explicación — siempre aclará por qué el grupo no está disponible</li>
-            <li>Usar más de un grupo de radio en la misma fila horizontal — generan confusión sobre qué opciones pertenecen a qué grupo</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Migración</h2>
-      <p class="docs-section-desc"><strong>Reemplaza a:</strong> selects de una sola opción cuando las alternativas son pocas y visibles, custom toggles de CSS, grupos de botones pill con selección exclusiva.</p>
-      <ul style="font-size:14px;line-height:2;color:var(--ds-text-2);padding-left:20px;margin:0">
-        <li>Grupos pill / toggle button con selección exclusiva → Radio Button (si las opciones no necesitan apariencia de botón con acción inmediata)</li>
-        <li><code>&lt;select&gt;</code> con 2–4 opciones → Radio Button (más visible, menos clics)</li>
-        <li>Botones outlined con selección exclusiva → Radio Button o Segmented Button (según el contexto)</li>
-      </ul>
-    </section>
-
-  </div>
-
-  <!-- ════════════════ ACCESSIBILITY ════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="accessibility">
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Semántica y ARIA</h2>
-      <p class="docs-section-desc">El marcado nativo de HTML provee la accesibilidad correcta sin ARIA adicional cuando se usa <code>&lt;input type="radio"&gt;</code>. Solo agregá ARIA si estás construyendo un control completamente custom.</p>
-      <div class="ds-table-wrap">
-        <table class="docs-props-table">
-          <thead><tr><th>Elemento</th><th>Rol / Atributo</th><th>Por qué</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>Control individual</td>
-              <td><code>role="radio"</code> (implícito en <code>&lt;input type="radio"&gt;</code>)</td>
-              <td>El lector de pantalla anuncia "botón de opción" al enfocar el control</td>
-            </tr>
-            <tr>
-              <td>Estado seleccionado</td>
-              <td><code>aria-checked="true|false"</code> (implícito en native)</td>
-              <td>Anuncia "seleccionado / no seleccionado" — no añadirlo si usás el elemento nativo</td>
-            </tr>
-            <tr>
-              <td>Contenedor del grupo</td>
-              <td><code>role="radiogroup"</code> (implícito en <code>&lt;fieldset&gt;</code>)</td>
-              <td>Agrupa los controles semánticamente; el nombre del grupo se anuncia al entrar</td>
-            </tr>
-            <tr>
-              <td>Nombre del grupo</td>
-              <td><code>&lt;legend&gt;</code> dentro del <code>&lt;fieldset&gt;</code></td>
-              <td>El lector anuncia el legend al entrar al grupo — es el equivalente de <code>aria-label</code> en el radiogroup</td>
-            </tr>
-            <tr>
-              <td>Estado de error</td>
-              <td><code>aria-describedby</code> apuntando al mensaje de error</td>
-              <td>El mensaje de error se anuncia cuando el control recibe foco</td>
-            </tr>
-            <tr>
-              <td>Estado deshabilitado</td>
-              <td><code>disabled</code> (atributo nativo)</td>
-              <td>Anuncia "no disponible" y elimina el control del orden de tabulación</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Navegación por teclado</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-        <div style="background:var(--color-surface-container-low,#F5F6F8);border:1px solid var(--border);border-radius:var(--radius-lg,12px);padding:20px 18px">
-          <p style="font:600 11px/1 'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#9FA3AE;margin-bottom:14px">Teclas de navegación</p>
-          <ul class="ds-a11y-list">
-            <li><span class="ds-a11y-icon" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;background:var(--color-surface-container);border-radius:5px;padding:2px 7px;width:auto;min-width:28px">Tab</span><span>Mueve el foco al grupo de radio (o al primer control seleccionado del grupo)</span></li>
-            <li><span class="ds-a11y-icon" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;background:var(--color-surface-container);border-radius:5px;padding:2px 7px;width:auto;min-width:28px">Tab</span><span>Sale del grupo completo hacia el siguiente elemento focusable</span></li>
-            <li><span class="ds-a11y-icon" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;background:var(--color-surface-container);border-radius:5px;padding:2px 7px;width:auto;min-width:28px">↑ ↓</span><span>Navega y selecciona opciones dentro del grupo (flechas verticales)</span></li>
-            <li><span class="ds-a11y-icon" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;background:var(--color-surface-container);border-radius:5px;padding:2px 7px;width:auto;min-width:28px">← →</span><span>Navega y selecciona opciones dentro del grupo (flechas horizontales)</span></li>
-            <li><span class="ds-a11y-icon" style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;background:var(--color-surface-container);border-radius:5px;padding:2px 7px;width:auto;min-width:28px">Space</span><span>Selecciona la opción enfocada (en custom ARIA radio, no en native)</span></li>
-          </ul>
-        </div>
-        <div style="background:var(--color-surface-container-low,#F5F6F8);border:1px solid var(--border);border-radius:var(--radius-lg,12px);padding:20px 18px">
-          <p style="font:600 11px/1 'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#9FA3AE;margin-bottom:14px">Comportamiento esperado</p>
-          <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
-            <li>El grupo actúa como una sola parada de Tab — las flechas navegan internamente</li>
-            <li>Si ningún radio está seleccionado, Tab lleva al primero del grupo</li>
-            <li>Si hay un radio seleccionado, Tab lleva directo a ese radio (no al primero)</li>
-            <li>Las opciones deshabilitadas se saltan en la navegación por flechas</li>
-            <li>Al final del grupo, las flechas hacen wrap (la última opción conecta con la primera)</li>
-          </ul>
-        </div>
-      </div>
-      <div class="ds-callout" style="margin-top:12px">
-        <strong>Nota importante sobre Tab vs. flechas:</strong> A diferencia del Checkbox donde Tab se mueve entre cada control, en un radio group el comportamiento nativo de los navegadores permite que Tab entre al grupo y las flechas lo recorran. Este es el patrón correcto — no alterar este comportamiento con tabindex personalizado.
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Contraste y percepción</h2>
-      <ul class="ds-a11y-list">
-        <li><span class="ds-a11y-icon">♿</span>El par <code>--color-primary</code> / <code>--color-on-primary</code> garantiza ≥ 4.5:1 entre el fondo del control seleccionado y el punto interior blanco</li>
-        <li><span class="ds-a11y-icon">♿</span>El borde de 2dp en estado no-seleccionado (<code>--color-on-surface-variant</code>) alcanza ≥ 3:1 contra el fondo de la superficie — cumple el criterio de contraste para componentes de UI (WCAG 1.4.11)</li>
-        <li><span class="ds-a11y-icon">♿</span>El estado de error usa <code>--color-error</code> para el borde del aro Y para el texto del mensaje — nunca solo el color para comunicar el error (WCAG 1.4.1)</li>
-        <li><span class="ds-a11y-icon">♿</span>El ring de foco (<code>:focus-visible</code>) debe ser visible con contraste ≥ 3:1 contra el fondo adyacente — no desactivarlo con <code>outline: none</code> sin reemplazarlo</li>
-      </ul>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Lectores de pantalla — anuncios esperados</h2>
-      <div class="ds-table-wrap">
-        <table class="docs-props-table">
-          <thead><tr><th>Situación</th><th>Anuncio típico (VoiceOver / NVDA)</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>Entrar al grupo con Tab</td>
-              <td>"Modalidad de trabajo, grupo de radio — Presencial, botón de opción, seleccionado, 1 de 3"</td>
-            </tr>
-            <tr>
-              <td>Navegar a opción no seleccionada</td>
-              <td>"Remoto, botón de opción, no seleccionado, 2 de 3"</td>
-            </tr>
-            <tr>
-              <td>Seleccionar con flecha</td>
-              <td>"Remoto, botón de opción, seleccionado"</td>
-            </tr>
-            <tr>
-              <td>Opción deshabilitada</td>
-              <td>"Presencial, botón de opción, no seleccionado, no disponible" (o se omite según el navegador)</td>
-            </tr>
-            <tr>
-              <td>Estado de error en el grupo</td>
-              <td>"Presencial, botón de opción, no seleccionado — Seleccioná una opción para continuar" (via <code>aria-describedby</code>)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Checklist de accesibilidad</h2>
-      <ul class="ds-a11y-list">
-        <li><span class="ds-a11y-icon">♿</span>El grupo usa <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code> (o <code>role="radiogroup"</code> + <code>aria-labelledby</code> para custom)</li>
-        <li><span class="ds-a11y-icon">♿</span>Cada <code>&lt;input type="radio"&gt;</code> tiene un <code>&lt;label&gt;</code> asociado (via <code>for</code>/<code>id</code> o wrapping)</li>
-        <li><span class="ds-a11y-icon">♿</span>El mensaje de error del grupo tiene <code>id</code> referenciado con <code>aria-describedby</code> en cada input del grupo</li>
-        <li><span class="ds-a11y-icon">♿</span>El foco visible usa <code>:focus-visible</code> — nunca desactivado sin reemplazo</li>
-        <li><span class="ds-a11y-icon">♿</span>Touch target mínimo de 48×48dp por opción</li>
-        <li><span class="ds-a11y-icon">♿</span>El estado de error no se comunica solo con color — incluye texto descriptivo</li>
-        <li><span class="ds-a11y-icon">♿</span>Opciones deshabilitadas tienen el atributo <code>disabled</code> nativo</li>
-      </ul>
-    </section>
-
-  </div>
-
-  <!-- ════════════════ CODE ════════════════ -->
-  <div class="ds-comp-tab-panel" data-tab="code">
-
-    <section class="docs-section">
-      <div class="ds-callout" style="background:var(--color-surface-container);border-left:4px solid var(--color-primary);padding:20px 24px;border-radius:var(--radius-md);margin-bottom:32px">
-        <strong style="display:block;margin-bottom:8px;color:var(--color-on-surface);font-family:'Epilogue',sans-serif;">Componente en roadmap</strong>
-        <p style="margin:0;color:var(--color-on-surface-variant);font-size:14px;line-height:1.6;">El Radio Button aún no tiene implementación CSS/React en Embassy. Mientras tanto podés usar el puente nativo con estilos del token de accent. El CSS oficial se va a agregar en <code>css/components/radio.css</code> siguiendo este contrato de tokens.</p>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">HTML nativo (puente recomendado)</h2>
-      <p class="docs-section-desc">Usá <code>&lt;input type="radio"&gt;</code> con <code>accent-color</code> para heredar el token primario mientras el componente Embassy no esté disponible. Este enfoque es semánticamente correcto y accesible por defecto.</p>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-        <pre class="docs-code"><code>&lt;!-- Grupo vertical (default) --&gt;
-&lt;fieldset style="border:none;padding:0;margin:0"&gt;
-  &lt;legend style="
-    font-family: var(--font-body, 'Inter', sans-serif);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 12px;
-  "&gt;Modalidad de trabajo&lt;/legend&gt;
-
-  &lt;div style="display:flex;flex-direction:column;gap:16px"&gt;
-
-    &lt;label style="
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      cursor: pointer;
-      font-family: var(--font-body, 'Inter', sans-serif);
-      font-size: 14px;
-      color: var(--color-on-surface);
-    "&gt;
-      &lt;input
-        type="radio"
-        name="modalidad"
-        value="presencial"
-        checked
-        style="
-          width: 20px;
-          height: 20px;
-          accent-color: var(--color-primary);
-          cursor: pointer;
-          flex-shrink: 0;
-        "
-      &gt;
-      Presencial
-    &lt;/label&gt;
-
-    &lt;label style="display:flex;align-items:center;gap:16px;cursor:pointer;
-      font-family:var(--font-body,'Inter',sans-serif);font-size:14px;color:var(--color-on-surface)"&gt;
-      &lt;input type="radio" name="modalidad" value="remoto"
-        style="width:20px;height:20px;accent-color:var(--color-primary);cursor:pointer;flex-shrink:0"&gt;
-      Remoto
-    &lt;/label&gt;
-
-    &lt;label style="display:flex;align-items:center;gap:16px;cursor:pointer;
-      font-family:var(--font-body,'Inter',sans-serif);font-size:14px;color:var(--color-on-surface)"&gt;
-      &lt;input type="radio" name="modalidad" value="hibrido"
-        style="width:20px;height:20px;accent-color:var(--color-primary);cursor:pointer;flex-shrink:0"&gt;
-      Híbrido
-    &lt;/label&gt;
-
-  &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Grupo horizontal</h2>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-        <pre class="docs-code"><code>&lt;fieldset style="border:none;padding:0;margin:0"&gt;
-  &lt;legend style="font:600 14px/1 var(--font-body,'Inter',sans-serif);
-    color:var(--text-primary);margin-bottom:12px"&gt;¿Acepta trabajo remoto?&lt;/legend&gt;
-
-  &lt;div style="display:flex;flex-direction:row;gap:32px;flex-wrap:wrap"&gt;
-    &lt;label style="display:flex;align-items:center;gap:16px;cursor:pointer;
-      font:14px var(--font-body,'Inter',sans-serif);color:var(--color-on-surface)"&gt;
-      &lt;input type="radio" name="remoto" value="si" checked
-        style="width:20px;height:20px;accent-color:var(--color-primary);cursor:pointer"&gt;
-      Sí
-    &lt;/label&gt;
-    &lt;label style="display:flex;align-items:center;gap:16px;cursor:pointer;
-      font:14px var(--font-body,'Inter',sans-serif);color:var(--color-on-surface)"&gt;
-      &lt;input type="radio" name="remoto" value="no"
-        style="width:20px;height:20px;accent-color:var(--color-primary);cursor:pointer"&gt;
-      No
-    &lt;/label&gt;
-  &lt;/div&gt;
-&lt;/fieldset&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Estado de error</h2>
-      <p class="docs-section-desc">El error se muestra a nivel de grupo, no por opción. Usá <code>aria-describedby</code> para asociar el mensaje al grupo.</p>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-        <pre class="docs-code"><code>&lt;fieldset style="border:none;padding:0;margin:0" aria-describedby="modalidad-error"&gt;
-  &lt;legend style="font:600 14px/1 var(--font-body,'Inter',sans-serif);
-    color:var(--color-error);margin-bottom:12px"&gt;Modalidad de trabajo&lt;/legend&gt;
-
-  &lt;div style="display:flex;flex-direction:column;gap:16px"&gt;
-    &lt;label style="display:flex;align-items:center;gap:16px;cursor:pointer;
-      font:14px var(--font-body,'Inter',sans-serif);color:var(--color-on-surface)"&gt;
-      &lt;input type="radio" name="modalidad-err" value="presencial"
-        style="width:20px;height:20px;accent-color:var(--color-error);cursor:pointer"&gt;
-      Presencial
-    &lt;/label&gt;
-    &lt;label style="display:flex;align-items:center;gap:16px;cursor:pointer;
-      font:14px var(--font-body,'Inter',sans-serif);color:var(--color-on-surface)"&gt;
-      &lt;input type="radio" name="modalidad-err" value="remoto"
-        style="width:20px;height:20px;accent-color:var(--color-error);cursor:pointer"&gt;
-      Remoto
-    &lt;/label&gt;
-  &lt;/div&gt;
-
-  &lt;!-- Mensaje de error del grupo --&gt;
-  &lt;p id="modalidad-error" role="alert" style="
-    margin: 8px 0 0;
-    font: 12px/1.4 var(--font-body, 'Inter', sans-serif);
-    color: var(--color-error);
-  "&gt;Seleccioná una opción para continuar.&lt;/p&gt;
-
-&lt;/fieldset&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Estado deshabilitado</h2>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-        <pre class="docs-code"><code>&lt;!-- Opción individual deshabilitada --&gt;
-&lt;label style="display:flex;align-items:center;gap:16px;cursor:not-allowed;opacity:.38;
-  font:14px var(--font-body,'Inter',sans-serif);color:var(--color-on-surface)"&gt;
-  &lt;input type="radio" name="modalidad" value="otro" disabled
-    style="width:20px;height:20px;accent-color:var(--color-primary);cursor:not-allowed"&gt;
-  Otro (no disponible)
-&lt;/label&gt;
-
-&lt;!-- Grupo completo deshabilitado --&gt;
-&lt;fieldset disabled style="border:none;padding:0;margin:0;opacity:.38"&gt;
-  &lt;legend style="font:600 14px/1 var(--font-body,'Inter',sans-serif);
-    color:var(--text-primary);margin-bottom:12px"&gt;Modalidad (deshabilitado)&lt;/legend&gt;
-  &lt;!-- ... opciones ... --&gt;
-&lt;/fieldset&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Contrato CSS futuro (Radio Button Embassy)</h2>
-      <p class="docs-section-desc">Cuando se implemente <code>css/components/radio.css</code>, el marcado esperado será:</p>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-        <pre class="docs-code"><code>&lt;!-- Grupo de radio Embassy (API futura) --&gt;
-&lt;fieldset class="radio-group"&gt;
-  &lt;legend class="radio-group-label"&gt;Modalidad de trabajo&lt;/legend&gt;
-
-  &lt;label class="radio-item"&gt;
-    &lt;input type="radio" class="radio" name="modalidad" value="presencial" checked&gt;
-    &lt;span class="radio-label"&gt;Presencial&lt;/span&gt;
-  &lt;/label&gt;
-
-  &lt;label class="radio-item"&gt;
-    &lt;input type="radio" class="radio" name="modalidad" value="remoto"&gt;
-    &lt;span class="radio-label"&gt;Remoto&lt;/span&gt;
-  &lt;/label&gt;
-
-  &lt;label class="radio-item"&gt;
-    &lt;input type="radio" class="radio" name="modalidad" value="hibrido"&gt;
-    &lt;span class="radio-label"&gt;Híbrido&lt;/span&gt;
-  &lt;/label&gt;
-
-&lt;/fieldset&gt;
-
-&lt;!-- Modificadores planificados --&gt;
-&lt;fieldset class="radio-group radio-group--horizontal"&gt;...&lt;/fieldset&gt;
-&lt;fieldset class="radio-group radio-group--error" aria-describedby="err-id"&gt;...&lt;/fieldset&gt;</code></pre>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Tokens relevantes</h2>
-      <p class="docs-section-desc">Los tokens que implementará <code>radio.css</code> cuando esté disponible.</p>
-      <table class="docs-props-table">
-        <thead><tr><th>Token</th><th>Uso</th></tr></thead>
-        <tbody>
-          <tr><td><code>--color-primary</code></td><td>Fill del aro en estado seleccionado</td></tr>
-          <tr><td><code>--color-on-primary</code></td><td>Punto interior blanco en estado seleccionado</td></tr>
-          <tr><td><code>--color-on-surface-variant</code></td><td>Borde del aro en estado no-seleccionado</td></tr>
-          <tr><td><code>--color-error</code></td><td>Borde del aro y texto del mensaje en estado de error</td></tr>
-          <tr><td><code>--color-on-surface</code></td><td>Texto de las etiquetas de cada opción</td></tr>
-          <tr><td><code>--text-primary</code></td><td>Texto del legend (label del grupo)</td></tr>
-          <tr><td><code>--radius-full</code></td><td>Radio del control — siempre círculo perfecto</td></tr>
-          <tr><td><code>--font-body</code></td><td>Tipografía de etiquetas (Inter)</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-  </div>
-
-</section>
     <!-- ═══════════ SEARCH ═══════════ -->
     <section class="ds-section" id="s-c-search">
       <div class="ds-page-tag">Components · Input</div>
@@ -21157,46 +20008,42 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     </section>
     <!-- ═══════════ SLIDERS ═══════════ -->
     <section class="ds-section" id="s-c-slider">
-      <div class="ds-page-tag">Components · Input</div>
-      <h1 class="ds-page-title">Sliders</h1>
-      <p class="ds-page-desc">Sliders allow users to make selections from a range of values. They can be continuous or discrete, and support single and range selection.</p>
-
-      <!-- ══ Component Tabs ══ -->
+      <div class="ds-page-tag">Components · Selección</div>
+      <h1 class="docs-page-title">Slider</h1>
+      <p class="docs-page-desc">Selección de un valor (o rango) dentro de un continuo — volumen, brillo, precio.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-slider&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> input type=&quot;range&quot; nativo + tokens; flaggear para validación de diseño.
-            <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
-            <ul>
-              <li><b>4 variantes:</b> Continuous (valor libre), Discrete (marcas de tick en la track), With value indicator (burbuja de 28dp sobre el handle), Range slider (dos handles).</li>
-              <li><b>Track:</b> altura <code>16dp</code>, <code>corner-full</code>. Segmento activo: <code>$primary</code>. Segmento inactivo: <code>$secondary-container</code>. Ticks: <code>$on-secondary-container</code> (activo) / <code>$on-surface-variant</code> (inactivo).</li>
-              <li><b>Handle:</b> visual <code>4dp</code> ancho × <code>44dp</code> alto, <code>corner-full</code>, <code>$primary</code>; elevación nivel 1 (0 en deshabilitado). State layer <code>40dp</code> circular centrado en handle.</li>
-              <li><b>Value indicator:</b> burbuja de <code>28dp</code>, <code>corner-full</code>, fondo <code>$primary</code>, etiqueta <code>$on-primary</code>. Solo en variante With value indicator.</li>
-            </ul>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Variantes</h2>
+          <div style="display:flex;flex-direction:column;gap:22px;max-width:360px">
+            <div><div class="state" style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Continuo</div><md-slider value="50" aria-label="Continuo"></md-slider></div>
+            <div><div class="state" style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Con ticks + etiqueta</div><md-slider ticks step="10" labeled value="40" aria-label="Con ticks"></md-slider></div>
+            <div><div class="state" style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Rango</div><md-slider range value-start="20" value-end="70" aria-label="Rango"></md-slider></div>
+            <div><div class="state" style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Deshabilitado</div><md-slider value="30" disabled aria-label="Deshabilitado"></md-slider></div>
           </div>
-        </div>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> input type=&quot;range&quot; nativo + tokens; flaggear para validación de diseño.
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Valor dentro de un rango continuo donde el valor exacto importa poco.</li><li>Feedback inmediato y visual (volumen, brillo, zoom).</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Pocas opciones discretas → <b>Segmented Button</b>.</li><li>Se necesita un valor exacto → <b>Input</b> numérico.</li></ul></div></div>
           </div>
-        </div>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> input type=&quot;range&quot; nativo + tokens; flaggear para validación de diseño.
-          </div>
-        </div>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Código</h2>
+          <pre class="docs-code"><code>&lt;md-slider value="50"&gt;&lt;/md-slider&gt;
+&lt;md-slider ticks step="10" labeled value="40"&gt;&lt;/md-slider&gt;
+&lt;md-slider range value-start="20" value-end="70"&gt;&lt;/md-slider&gt;</code></pre>
+        </section>
       </div>
     </section>
     <!-- ═══════════ SNACKBARS ═══════════ -->
