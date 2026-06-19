@@ -219,15 +219,46 @@ Embassy does not prescribe a single hover model across all variants, but the app
 |---|---|---|
 | Filled, high-emphasis | Dedicated hover token | `var(--color-primary-hover)` |
 | Tonal / container (color-mix darkening) | 12% black blend | `color-mix(in srgb, var(--color-XYZ) 88%, #000)` |
-| Elevated / state layer (MD3 model) | 8% on-container overlay | `color-mix(in srgb, var(--color-on-XYZ) 8%, var(--color-XYZ))` |
+| State layer on transparent surface | 8% `onSurface` overlay | `color-mix(in srgb, var(--color-on-surface) 8%, transparent)` |
+| State layer on filled container | 8% `on-container` overlay | `color-mix(in srgb, var(--color-on-XYZ) 8%, var(--color-XYZ-container))` |
 | Text / ghost | 10% primary overlay | `color-mix(in srgb, var(--color-primary) 10%, transparent)` |
 | Surface swap | Named surface token | `var(--color-surface-variant)` |
 
 A new component must declare its hover model in the CSS header comment and use it consistently for all its states.
 
-### 5.5 Selected state
+### 5.5 State layers — MD3 model
 
-Selected state (chips, tabs, nav items) uses `--color-primary` or `--color-secondary-container` for the container and its paired `on-*` token for content. A selected state must have a clear visual distinction from hover — do not rely solely on color to communicate selection.
+Material Design 3 defines **state layers** as translucent overlays that communicate interaction states without permanently altering the component's color. Embassy follows this model exactly, with `color-mix()` as the CSS implementation.
+
+#### State layer opacities (MD3 spec)
+
+| Interaction | Opacity |
+|---|---|
+| Hover | 8% |
+| Pressed | 12% |
+| Focused | 12% |
+| Dragged | 16% |
+
+#### State layer color by surface type
+
+The state layer color is always the **"on" token** of the surface the interaction occurs on:
+
+| Surface | State layer color | Example expression |
+|---|---|---|
+| Transparent / unselected segment | `--color-on-surface` | `color-mix(in srgb, var(--color-on-surface) 8%, transparent)` |
+| `secondaryContainer` (selected segment) | `--color-on-secondary-container` | `color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container))` |
+| `primaryContainer` | `--color-on-primary-container` | `color-mix(in srgb, var(--color-on-primary-container) 8%, var(--color-primary-container))` |
+| `inverseSurface` (snackbar) | `--color-inverse-on-surface` | `color-mix(in srgb, var(--color-inverse-on-surface) 8%, transparent)` |
+
+#### Implementation note
+
+MD3's reference implementation (Material Web Components) uses `::before` pseudo-elements for state layers. Embassy uses `color-mix()` directly on `background` — a mathematically equivalent approach that produces the same computed color without requiring wrapper markup or `position: relative` on every component.
+
+**Divergence from MD3:** Embassy's `color-mix()` model composites the state layer into the background at paint time, whereas MD3's pseudo-element model layers it visually on top. For solid surfaces the result is identical. The deviation is documented here as a deliberate implementation choice, not a design departure.
+
+### 5.6 Selected state
+
+Selected state (chips, tabs, nav items, segmented buttons) uses `--color-secondary-container` (MD3: `secondaryContainer`) for the container and `--color-on-secondary-container` (MD3: `onSecondaryContainer`) for content. High-emphasis selected items (e.g. nav active) use `--color-primary`. A selected state must have a clear visual distinction from hover — do not rely solely on color to communicate selection.
 
 ---
 
@@ -273,6 +304,17 @@ Every interactive component must implement all applicable states from this table
 |---|---|---|
 | `form.css` | Uses `--interactive` (border) + `:focus` + 3px ring | Pending alignment |
 | `description.css` | Inset ring, `:focus`, 2px | Pending alignment |
+
+### 6.3 State layers — implementation contract
+
+See **§5.5** for the full MD3 state layer model, opacities, and implementation rationale. Components that use state layers must:
+
+1. Declare the state layer color in the CSS header comment under "Color Roles" (using MD3 role names).
+2. Apply 8% opacity for `:hover`, 12% for `:active` / `:focus-visible`.
+3. Use the `on-*` token paired to the component's current surface as the state layer color — never invent a component-specific tint color.
+4. Keep separate `:active` rules for selected vs. unselected surfaces when the surface token differs between those states.
+
+**Components currently using state layers:** `segmented-button.css`, `chip.css` (partial — reconciliation pending), `snackbar-action` in `toast.css`.
 
 ---
 

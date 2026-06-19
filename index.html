@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/variables.css?v=9">
 <link rel="stylesheet" href="css/base.css?v=3">
 <link rel="stylesheet" href="css/layout.css?v=3">
-<link rel="stylesheet" href="css/components.css?v=21">
+<link rel="stylesheet" href="css/components.css?v=22">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -7525,15 +7525,15 @@ export function IconButton({ label, size = 'default', children, className, ...pr
           <h2 class="docs-section-title">Anatomía</h2>
           <div class="bd-anat-canvas" style="overflow:hidden;">
             <svg viewBox="0 0 560 180" width="560" style="max-width:100%;height:auto;display:block;color:var(--ds-text-1);" xmlns="http://www.w3.org/2000/svg">
-              <!-- Container (pill) -->
-              <rect x="155" y="66" width="250" height="48" rx="24" fill="#F0F2F5" stroke="#D1D5DB" stroke-width="1"/>
-              <!-- Unselected segment: Lista (pill) -->
+              <!-- Container (pill) — border: --color-outline #9FA3AE, bg: transparent -->
+              <rect x="155" y="66" width="250" height="48" rx="24" fill="transparent" stroke="#9FA3AE" stroke-width="1"/>
+              <!-- Unselected segment: Lista — transparent, label: --color-on-surface #0A0C12 -->
               <rect x="159" y="69" width="116" height="42" rx="21" fill="transparent"/>
-              <!-- Selected segment: Cuadrícula (pill) -->
-              <rect x="277" y="69" width="124" height="42" rx="21" fill="#E8ECFF"/>
+              <!-- Selected segment: Cuadrícula — --color-secondary-container #CAD9FF -->
+              <rect x="277" y="69" width="124" height="42" rx="21" fill="#CAD9FF"/>
               <!-- Labels -->
-              <text x="217" y="96" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#647089">Lista</text>
-              <text x="339" y="96" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#3654CD">Cuadrícula</text>
+              <text x="217" y="96" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="500" fill="#474D61">Lista</text>
+              <text x="339" y="96" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#01164D">Cuadrícula</text>
               <!-- Pin 1: Contenedor — left side -->
               <line x1="92" y1="90" x2="153" y2="90" stroke="#B0B8CC" stroke-width="1.5"/>
               <circle cx="155" cy="90" r="3" fill="#B0B8CC"/>
@@ -7623,7 +7623,7 @@ export function IconButton({ label, size = 'default', children, className, ...pr
                 <button class="seg-btn" aria-selected="false">Opción B</button>
               </div>
               <div class="bd-state-lbl">Seleccionado</div>
-              <div class="bd-state-tok">--ds-accent-bg / --ds-accent</div>
+              <div class="bd-state-tok">--color-secondary-container / --color-on-secondary-container</div>
             </div>
             <div class="bd-state">
               <div class="seg-btn-group" role="group">
@@ -7637,23 +7637,33 @@ export function IconButton({ label, size = 'default', children, className, ...pr
         </section>
 
         <section class="docs-section" id="sbd-tokens">
-          <h2 class="docs-section-title">Tokens</h2>
+          <h2 class="docs-section-title">Color Roles</h2>
+          <p style="font-size:13px;color:var(--ds-text-2);margin:0 0 16px;">Mapeo directo de los roles semánticos de Material Design 3. No se introducen tokens nuevos — cada rol corresponde a un token existente en Embassy.</p>
           <table style="width:100%;border-collapse:collapse;">
             <thead>
               <tr>
-                <th style="text-align:left;padding:10px 12px;font-size:12px;color:var(--ds-text-3);font-weight:600;border-bottom:1px solid var(--border);">Token</th>
-                <th style="text-align:left;padding:10px 12px;font-size:12px;color:var(--ds-text-3);font-weight:600;border-bottom:1px solid var(--border);">Rol</th>
+                <th style="text-align:left;padding:10px 12px;font-size:12px;color:var(--ds-text-3);font-weight:600;border-bottom:1px solid var(--border);">Token Embassy</th>
+                <th style="text-align:left;padding:10px 12px;font-size:12px;color:var(--ds-text-3);font-weight:600;border-bottom:1px solid var(--border);">Rol MD3</th>
                 <th style="text-align:left;padding:10px 12px;font-size:12px;color:var(--ds-text-3);font-weight:600;border-bottom:1px solid var(--border);">Claro</th>
                 <th style="text-align:left;padding:10px 12px;font-size:12px;color:var(--ds-text-3);font-weight:600;border-bottom:1px solid var(--border);">Oscuro</th>
               </tr>
             </thead>
             <tbody>
-              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--color-surface-container</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Fondo del contenedor</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#F0F2F5</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Superficie oscura</td></tr>
-              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--color-outline-variant</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Borde del contenedor</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#D1D5DB</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Borde atenuado oscuro</td></tr>
-              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--ds-accent-bg</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Fondo segmento activo</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#E8ECFF</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Tonal acento oscuro</td></tr>
-              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--ds-accent</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Texto / ícono activo</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#3654CD</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Acento en modo oscuro</td></tr>
-              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--text-secondary</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Texto segmento inactivo</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Se recalibra automáticamente en dark</td></tr>
-              <tr><td style="padding:10px 12px;"><code style="font-size:12px;">--radius-lg</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Radio del contenedor</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">12px</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">Grupo / Contenedor</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--color-outline</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">outline</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#9FA3AE</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#747989</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">Segmento seleccionado</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--color-secondary-container</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">secondaryContainer</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#CAD9FF</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#3A5BB0</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--color-on-secondary-container</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSecondaryContainer</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#01164D</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#DCE6FF</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">Segmento no seleccionado</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">transparent</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">—</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Sin fondo (hereda superficie)</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--color-on-surface</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSurface</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#0A0C12</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#EAEBED</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">State layers (hover 8% · pressed 12%)</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">color-mix(--color-on-surface 8%, transparent)</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSurface @ 8%</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Hover sobre segmento no seleccionado</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">color-mix(--color-on-secondary-container 8%, --color-secondary-container)</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSecondaryContainer @ 8%</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Hover sobre segmento seleccionado</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">Deshabilitado</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--color-on-disabled</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSurface @ 38%</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#747989 (Embassy token)</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">Forma</td></tr>
+              <tr><td style="padding:10px 12px;"><code style="font-size:12px;">--radius-full</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">—</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">9999px (píldora)</td></tr>
             </tbody>
           </table>
         </section>
