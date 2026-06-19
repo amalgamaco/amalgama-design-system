@@ -9,7 +9,7 @@
 
 @import url('components/page-header.css');
 @import url('components/button.css?v=4');
-@import url('components/segmented-button.css');
+@import url('components/segmented-button.css?v=3');
 @import url('components/toolbar.css?v=5');
 @import url('components/badge.css?v=2');
 @import url('components/card.css');

@@ -16,7 +16,7 @@
      Texto inactivo   → --color-on-surface-variant
      Hover texto      → --color-primary
      Hover bg         → color-mix(--color-secondary 8%, transparent)
-     Activo bg        → color-mix(--color-secondary 12%, transparent)
+     Activo bg        → --color-secondary-container
      Activo texto     → --color-secondary
      Radio            → --radius-full (píldora)
      Padding cont.    → 3px
@@ -76,7 +76,7 @@
 .seg-btn.selected,
 .seg-btn[aria-selected="true"],
 .seg-btn[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--color-secondary) 12%, transparent);
+  background: var(--color-secondary-container);
   color: var(--color-secondary);
   font-weight: 600;
 }
@@ -85,12 +85,12 @@
 .seg-btn.selected:hover:not(:disabled),
 .seg-btn[aria-selected="true"]:hover:not(:disabled),
 .seg-btn[aria-pressed="true"]:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-secondary) 16%, transparent);
+  background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container));
 }
 
 /* ── Presionado ── */
 .seg-btn:active:not(:disabled) {
-  background: color-mix(in srgb, var(--color-secondary) 20%, transparent);
+  background: color-mix(in srgb, var(--color-on-secondary-container) 12%, var(--color-secondary-container));
 }
 
 /* ── Foco visible (WCAG 2.4.7) ── */
