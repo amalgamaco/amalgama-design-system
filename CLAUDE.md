@@ -17,13 +17,16 @@ Always load in this order:
 
 ```html
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css">   <!-- 1. tokens (required) -->
-<link rel="stylesheet" href="css/base.css">        <!-- 2. reset + typography base (required) -->
-<link rel="stylesheet" href="css/components.css">  <!-- 3. barrel: all components -->
-<link rel="stylesheet" href="css/layout.css">      <!-- 4. only for full app shell (sidebar, topbar, avatar) -->
+<link rel="stylesheet" href="css/variables.css">     <!-- 1. tokens (required) -->
+<link rel="stylesheet" href="css/md-sys-bridge.css"> <!-- 1b. optional: exposes MD3 --md-sys-color-* names as aliases of --color-* roles; load right after variables -->
+<link rel="stylesheet" href="css/base.css">          <!-- 2. reset + typography base (required) -->
+<link rel="stylesheet" href="css/components.css">    <!-- 3. barrel: all components -->
+<link rel="stylesheet" href="css/layout.css">        <!-- 4. only for full app shell (sidebar, topbar, avatar) -->
 ```
 
 Instead of the barrel (`components.css`), you can cherry-pick individual files from `css/components/`.
+
+**MD3 system bridge (`css/md-sys-bridge.css`)** — optional layer that aliases Material Design 3's real system-token names (`--md-sys-color-*`) onto Embassy's `--color-*` roles. Components that adopt MD3's component-token layer (currently **Segmented Button** — the reference pattern; see GOVERNANCE.md §2.2) default each token to `var(--md-sys-color-X, var(--color-X))`: with the bridge loaded they use Material's naming; without it they fall back to the Embassy role. Embassy's palette stays the single source of truth either way, and the bridge needs no dark override (the `--color-*` roles already recalibrate). This adopts MD3's token *structure*, **not** the `material-web` component implementations (evaluated June 2026 and rejected: maintenance mode + lacks ~70% of Embassy's components).
 
 **Tokens are the law.** All colors via `var(--color-*)` or semantic aliases (`--accent`, `--bg`, `--border`), radii via `var(--radius-*)` (scaled by component size, never by variant — see GOVERNANCE.md §4.3), shadows via `var(--shadow-*)`, spacing via `var(--space-*)`. Never raw hex. Dark mode is automatic: set `data-theme="dark"` on `<html>` — the semantic `--color-*` layer recalibrates itself; components need zero per-theme overrides.
 

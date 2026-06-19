@@ -8,9 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/variables.css?v=9">
+<link rel="stylesheet" href="css/md-sys-bridge.css?v=1">
 <link rel="stylesheet" href="css/base.css?v=3">
 <link rel="stylesheet" href="css/layout.css?v=3">
-<link rel="stylesheet" href="css/components.css?v=23">
+<link rel="stylesheet" href="css/components.css?v=24">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -7631,14 +7632,14 @@ export function IconButton({ label, size = 'default', children, className, ...pr
                 <button class="seg-btn" aria-selected="false" disabled>Opción B</button>
               </div>
               <div class="bd-state-lbl">Deshabilitado</div>
-              <div class="bd-state-tok">--color-on-disabled</div>
+              <div class="bd-state-tok">onSurface @ 38% / 12%</div>
             </div>
           </div>
         </section>
 
         <section class="docs-section" id="sbd-tokens">
           <h2 class="docs-section-title">Color Roles</h2>
-          <p style="font-size:13px;color:var(--ds-text-2);margin:0 0 16px;">Mapeo directo de los roles semánticos de Material Design 3. No se introducen tokens nuevos — cada rol corresponde a un token existente en Embassy.</p>
+          <p style="font-size:13px;color:var(--ds-text-2);margin:0 0 16px;">El componente implementa la <b>capa de tokens de componente de Material Design 3</b> ("Tokens and specs"): cada fila de la tabla MD3 es una custom property <code>--seg-btn-*</code> declarada en <code>.seg-btn-group</code>, con default <code>var(--md-sys-color-X, var(--color-X))</code>. La tabla siguiente muestra el rol de sistema al que apunta cada token. El bridge <code>css/md-sys-bridge.css</code> resuelve los nombres <code>--md-sys-color-*</code> contra la paleta Embassy; sin él, el componente cae al rol <code>--color-*</code> automáticamente.</p>
           <table style="width:100%;border-collapse:collapse;">
             <thead>
               <tr>
@@ -7657,11 +7658,12 @@ export function IconButton({ label, size = 'default', children, className, ...pr
               <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">Segmento no seleccionado</td></tr>
               <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">transparent</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">—</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Sin fondo (hereda superficie)</td></tr>
               <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--color-on-surface</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSurface</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#0A0C12</td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#EAEBED</td></tr>
-              <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">State layers (hover 8% · pressed 12%)</td></tr>
+              <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">State layers (hover 8% · focus/pressed 12%)</td></tr>
               <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">color-mix(--color-on-surface 8%, transparent)</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSurface @ 8%</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Hover sobre segmento no seleccionado</td></tr>
               <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">color-mix(--color-on-secondary-container 8%, --color-secondary-container)</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSecondaryContainer @ 8%</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Hover sobre segmento seleccionado</td></tr>
               <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">Deshabilitado</td></tr>
-              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">--color-on-disabled</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSurface @ 38%</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">#747989 (Embassy token)</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">color-mix(--color-on-surface 38%, transparent)</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSurface @ 38% (etiqueta)</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Alineado a MD3 (antes <code>--color-on-disabled</code>)</td></tr>
+              <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 12px;"><code style="font-size:12px;">color-mix(--color-on-surface 12%, transparent)</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">onSurface @ 12% (contenedor / borde)</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Alineado a MD3</td></tr>
               <tr style="border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--color-on-surface) 3%,transparent)"><td style="padding:10px 12px;font-size:11px;color:var(--ds-text-3);font-weight:600;text-transform:uppercase;letter-spacing:.06em;" colspan="4">Forma</td></tr>
               <tr><td style="padding:10px 12px;"><code style="font-size:12px;">--radius-full</code></td><td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);font-style:italic;">—</td><td colspan="2" style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">9999px (píldora)</td></tr>
             </tbody>

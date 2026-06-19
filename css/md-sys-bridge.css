@@ -1,0 +1,77 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — MD3 System-Color Bridge  ·  DRAFT (evaluación)
+   ───────────────────────────────────────────────────────────────────
+   Expone los nombres de token de SISTEMA de Material Design 3
+   (--md-sys-color-*) como alias de los roles semánticos Embassy
+   (--color-*). Permite que cualquier componente escrito con la
+   nomenclatura MD3 nativa (p. ej. el prototipo segmented-button.proto.css,
+   o componentes de @material/web) resuelva contra la PALETA EMBASSY.
+
+   Dirección del flujo (Embassy = única fuente de verdad):
+       paleta Embassy (--secondary-200)
+         → rol Embassy (--color-secondary-container)
+           → nombre MD3 (--md-sys-color-secondary-container)   ← este archivo
+
+   THEME-AWARE GRATIS: los roles --color-* ya se recalibran en
+   [data-theme="dark"] (variables.css). Como el bridge apunta al rol, NO
+   necesita override en dark — hereda la recalibración automáticamente.
+
+   Cargar (solo si se adopta la nomenclatura MD3 nativa):
+     <link rel="stylesheet" href="css/variables.css">
+     <link rel="stylesheet" href="css/md-sys-bridge.css">   ← después de variables
+     <link rel="stylesheet" href="css/base.css">
+     ...
+═══════════════════════════════════════ */
+
+:root {
+  /* Primary */
+  --md-sys-color-primary:                 var(--color-primary);
+  --md-sys-color-on-primary:              var(--color-on-primary);
+  --md-sys-color-primary-container:       var(--color-primary-container);
+  --md-sys-color-on-primary-container:    var(--color-on-primary-container);
+
+  /* Secondary */
+  --md-sys-color-secondary:               var(--color-secondary);
+  --md-sys-color-on-secondary:            var(--color-on-secondary);
+  --md-sys-color-secondary-container:     var(--color-secondary-container);
+  --md-sys-color-on-secondary-container:  var(--color-on-secondary-container);
+
+  /* Tertiary */
+  --md-sys-color-tertiary:                var(--color-tertiary);
+  --md-sys-color-on-tertiary:             var(--color-on-tertiary);
+  --md-sys-color-tertiary-container:      var(--color-tertiary-container);
+  --md-sys-color-on-tertiary-container:   var(--color-on-tertiary-container);
+
+  /* Error */
+  --md-sys-color-error:                   var(--color-error);
+  --md-sys-color-on-error:                var(--color-on-error);
+  --md-sys-color-error-container:         var(--color-error-container);
+  --md-sys-color-on-error-container:      var(--color-on-error-container);
+
+  /* Surface / Background */
+  --md-sys-color-surface:                 var(--color-surface);
+  --md-sys-color-surface-dim:             var(--color-surface-dim);
+  --md-sys-color-surface-bright:          var(--color-surface-bright);
+  --md-sys-color-surface-container-lowest: var(--color-surface-container-lowest);
+  --md-sys-color-surface-container-low:   var(--color-surface-container-low);
+  --md-sys-color-surface-container:       var(--color-surface-container);
+  --md-sys-color-surface-container-high:  var(--color-surface-container-high);
+  --md-sys-color-surface-container-highest: var(--color-surface-container-highest);
+  --md-sys-color-surface-variant:         var(--color-surface-variant);
+  --md-sys-color-on-surface:              var(--color-on-surface);
+  --md-sys-color-on-surface-variant:      var(--color-on-surface-variant);
+  --md-sys-color-background:              var(--color-surface);
+  --md-sys-color-on-background:           var(--color-on-surface);
+
+  /* Outline */
+  --md-sys-color-outline:                 var(--color-outline);
+  --md-sys-color-outline-variant:         var(--color-outline-variant);
+
+  /* Inverse */
+  --md-sys-color-inverse-surface:         var(--color-inverse-surface);
+  --md-sys-color-inverse-on-surface:      var(--color-inverse-on-surface);
+  --md-sys-color-inverse-primary:         var(--color-inverse-primary);
+
+  /* Scrim / Shadow */
+  --md-sys-color-scrim:                   var(--color-scrim);
+}
