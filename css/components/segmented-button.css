@@ -1,0 +1,120 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Segmented Button
+   Selector de opción única dentro de un conjunto discreto de opciones
+   mutuamente excluyentes, con forma de píldora (--radius-full).
+
+   Cuándo usar: alternar entre vistas (Lista / Cuadrícula), filtros de
+     categoría o modo dentro del mismo contexto (Día / Semana / Mes).
+   Cuándo no: acciones que disparan efectos (usar Button), selección
+     múltiple (usar Chips), navegación entre páginas (usar Tabs), más
+     de 5 opciones o etiquetas muy dispares (usar Select).
+   Reemplaza a: toggle-group custom, radio-button pill legacy.
+
+   Tokens:
+     Contenedor bg    → --color-surface-container   (blanco en light)
+     Contenedor borde → --color-outline-variant      (#BFC1C8 light)
+     Texto inactivo   → --color-on-surface-variant
+     Hover texto      → --color-on-surface
+     Activo bg        → --color-secondary-container  (#CAD9FF light)
+     Activo texto     → --color-secondary            (#4F80FF light)
+     Radio            → --radius-full (píldora)
+     Padding cont.    → 3px
+     Padding segmento → 6px 16px (md) · 4px 10px (sm) · 8px 20px (lg)
+     Gap segmentos    → 2px
+
+   Dependencia: variables.css
+   Uso:
+   <div class="seg-btn-group" role="group" aria-label="Vista">
+     <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button>
+     <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Cuadrícula</button>
+   </div>
+═══════════════════════════════════════ */
+
+/* ── Contenedor ── */
+.seg-btn-group {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  gap: 2px;
+}
+
+/* ── Segmento individual ── */
+.seg-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-on-surface-variant);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default);
+}
+
+/* ── Hover ── */
+.seg-btn:hover:not(.selected):not([aria-selected="true"]):not([aria-pressed="true"]):not(:disabled) {
+  background: color-mix(in srgb, var(--color-secondary) 8%, transparent);
+  color: var(--color-on-surface);
+}
+
+/* ── Estado activo / seleccionado ── */
+.seg-btn.selected,
+.seg-btn[aria-selected="true"],
+.seg-btn[aria-pressed="true"] {
+  background: var(--color-secondary-container);
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+/* ── Foco visible (WCAG 2.4.7) ── */
+.seg-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  z-index: 1;
+}
+
+/* ── Deshabilitado ── */
+.seg-btn-group:has(.seg-btn:disabled),
+.seg-btn-group[aria-disabled="true"] {
+  background: color-mix(in srgb, var(--color-on-surface) 4%, transparent);
+  border-color: var(--color-outline-variant);
+}
+
+.seg-btn:disabled,
+.seg-btn[aria-disabled="true"] {
+  color: var(--color-on-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.seg-btn.selected:disabled,
+.seg-btn[aria-selected="true"]:disabled {
+  background: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+}
+
+/* ── Tamaño SM — toolbars compactas, filtros inline ── */
+.seg-btn-group-sm .seg-btn {
+  padding: 4px 10px;
+  font-size: var(--font-size-caption);
+}
+
+/* ── Tamaño LG — touch targets, CTAs de cambio de modo ── */
+.seg-btn-group-lg .seg-btn {
+  padding: 8px 20px;
+  font-size: var(--font-size-body-md);
+}
