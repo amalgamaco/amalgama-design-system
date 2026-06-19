@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/variables.css?v=9">
 <link rel="stylesheet" href="css/base.css?v=3">
 <link rel="stylesheet" href="css/layout.css?v=3">
-<link rel="stylesheet" href="css/components.css?v=18">
+<link rel="stylesheet" href="css/components.css?v=19">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -2824,7 +2824,7 @@ body { overflow-x: clip; }
 }
 
 .bd-color-canvas.light button.btn-primary:not(.btn-toggle-off):not(.btn-toggle-on) { background: #01164D !important; color: #fff !important; border-color: transparent !important; opacity: 1 !important; }
-.bd-color-canvas.light button.btn-secondary:not(.btn-toggle-off):not(.btn-toggle-on) { background: transparent !important; color: #01164D !important; border-color: #4F80FF !important; opacity: 1 !important; }
+.bd-color-canvas.light button.btn-secondary:not(.btn-toggle-off):not(.btn-toggle-on) { background: #CAD9FF !important; color: #01164D !important; border-color: transparent !important; opacity: 1 !important; }
 .bd-color-canvas.light button.btn-tertiary:not(.btn-toggle-off):not(.btn-toggle-on) { background: transparent !important; color: #01164D !important; border-color: #9FA3AE !important; opacity: 1 !important; }
 .bd-color-canvas.light button.btn-text { background: transparent !important; color: #01164D !important; opacity: 1 !important; }
 .bd-color-canvas.light button.icon-btn:not(.btn-toggle-off):not(.btn-toggle-on) { background: #F0F1F4 !important; color: #353A4A !important; border-color: #9FA3AE !important; opacity: 1 !important; }
@@ -2833,9 +2833,9 @@ body { overflow-x: clip; }
 .bd-color-canvas.light button.btn-primary.btn-toggle-off {
   background: #E8EBF2 !important; color: #8B91A6 !important; border: none !important; opacity: 1 !important;
 }
-/* Tonal unselected: outlined muted (same language as outlined variant) */
+/* Tonal unselected: lighter tonal tint, muted text */
 .bd-color-canvas.light button.btn-secondary.btn-toggle-off {
-  background: transparent !important; color: #8B91A6 !important; border: 1px solid #C5CAD8 !important; opacity: 1 !important;
+  background: #DDE5F8 !important; color: #8B91A6 !important; border: none !important; opacity: 1 !important;
 }
 /* Outlined unselected: outlined with muted border + text */
 .bd-color-canvas.light button.btn-tertiary.btn-toggle-off {
@@ -2848,9 +2848,9 @@ body { overflow-x: clip; }
 .bd-color-canvas.light button.btn-primary.btn-toggle-on {
   background: #01164D !important; color: #fff !important; border-color: transparent !important; opacity: 1 !important;
 }
-/* Tonal selected: secondary fill (outlined-secondary active/selected state) */
+/* Tonal selected: deeper secondary-container (on-secondary-container) */
 .bd-color-canvas.light button.btn-secondary.btn-toggle-on {
-  background: #4F80FF !important; color: #FFFFFF !important; border-color: transparent !important; opacity: 1 !important;
+  background: #354A8C !important; color: #DCE6FF !important; border-color: transparent !important; opacity: 1 !important;
 }
 /* Outlined selected: on-surface fill (near-black) */
 .bd-color-canvas.light button.btn-tertiary.btn-toggle-on {
@@ -2860,7 +2860,7 @@ body { overflow-x: clip; }
 
 /* ── Dark canvas: base button colors ── */
 .bd-color-canvas.dark button.btn-primary:not(.btn-toggle-off):not(.btn-toggle-on) { background: #FFFFFF !important; color: #01164D !important; border-color: transparent !important; opacity: 1 !important; }
-.bd-color-canvas.dark button.btn-secondary:not(.btn-toggle-off):not(.btn-toggle-on) { background: transparent !important; color: #FFFFFF !important; border-color: #B9CCFF !important; opacity: 1 !important; }
+.bd-color-canvas.dark button.btn-secondary:not(.btn-toggle-off):not(.btn-toggle-on) { background: #3A5BB0 !important; color: #DCE6FF !important; border-color: transparent !important; opacity: 1 !important; }
 .bd-color-canvas.dark button.btn-tertiary:not(.btn-toggle-off):not(.btn-toggle-on) { background: transparent !important; color: #FFFFFF !important; border-color: #747989 !important; opacity: 1 !important; }
 .bd-color-canvas.dark button.btn-text { background: transparent !important; color: #FFFFFF !important; opacity: 1 !important; }
 .bd-color-canvas.dark button.icon-btn:not(.btn-toggle-off):not(.btn-toggle-on) { background: #1E2030 !important; color: #A0AEC0 !important; border-color: #747989 !important; opacity: 1 !important; }
@@ -2875,9 +2875,9 @@ body { overflow-x: clip; }
 .bd-color-canvas.dark button.btn-primary.btn-toggle-off {
   background: #252838 !important; color: #6B6F82 !important; border: none !important; opacity: 1 !important;
 }
-/* Tonal unselected: outlined muted */
+/* Tonal unselected */
 .bd-color-canvas.dark button.btn-secondary.btn-toggle-off {
-  background: transparent !important; color: #6B6F82 !important; border: 1px solid #5A6080 !important; opacity: 1 !important;
+  background: #1E253A !important; color: #6B6F82 !important; border: none !important; opacity: 1 !important;
 }
 /* Outlined unselected */
 .bd-color-canvas.dark button.btn-tertiary.btn-toggle-off {
@@ -2894,9 +2894,9 @@ body { overflow-x: clip; }
 .bd-color-canvas.dark button.btn-primary.btn-toggle-on {
   background: #FFFFFF !important; color: #01164D !important; border-color: transparent !important; opacity: 1 !important;
 }
-/* Tonal selected: secondary fill dark (#B9CCFF bg + navy text) */
+/* Tonal selected: default tonal dark (aligns to --color-secondary-container dark = #3A5BB0) */
 .bd-color-canvas.dark button.btn-secondary.btn-toggle-on {
-  background: #B9CCFF !important; color: #01164D !important; border-color: transparent !important; opacity: 1 !important;
+  background: #3A5BB0 !important; color: #DCE6FF !important; border-color: transparent !important; opacity: 1 !important;
 }
 /* Outlined selected: primary-container dark fill */
 .bd-color-canvas.dark button.btn-tertiary.btn-toggle-on {
@@ -3746,7 +3746,7 @@ body { overflow-x: clip; }
       <div class="ds-callout"><strong>Regla principal: nunca como pares.</strong> Primary y Secondary no deben competir en el mismo nivel. En una pantalla hay <strong>una sola acción Primary dominante</strong>; Secondary acompaña como soporte interactivo (links, chips, estados), nunca como un segundo CTA relleno del mismo peso. Cuando dos elementos azules pelean por la atención, el problema casi siempre es de <em>uso</em>, no de color.</div>
       <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Rol</th><th>Nivel de énfasis</th><th>Usar para</th><th>Evitar</th></tr></thead><tbody>
         <tr><td><strong>Primary</strong> · navy</td><td>Máximo — la acción dominante</td><td>El CTA principal (uno por pantalla), FAB, navegación activa, superficies de marca. Relleno sólido.</td><td>Repetirlo en muchos elementos a la vez; si todo es Primary, nada lo es.</td></tr>
-        <tr><td><strong>Secondary</strong> · agile blue</td><td>Soporte interactivo</td><td>Links, chips de filtro, focus ring, estados activos/seleccionados, acciones de apoyo. Tonal (Container) o texto/ícono.</td><td>Usarlo como botón relleno grande que compita con el Primary. (El botón Secondary usa <code>--color-secondary</code> como borde, no como fill.)</td></tr>
+        <tr><td><strong>Secondary</strong> · agile blue</td><td>Soporte interactivo</td><td>Links, chips de filtro, focus ring, estados activos/seleccionados, acciones de apoyo. Tonal (Container) o texto/ícono.</td><td>Usarlo como botón relleno grande que compita con el Primary. (El botón Secondary usa Secondary Container — fill tonal de menor énfasis.)</td></tr>
         <tr><td><strong>Tertiary</strong> · purple</td><td>Acento especial y puntual</td><td>Destacar algo específico: etiqueta "Nuevo", badge especial, una sección o un acento decorativo.</td><td>Usarlo de forma recurrente; pierde su efecto de contraste si se repite.</td></tr>
       </tbody></table></div>
       <p class="ds-cr-cap"><strong>Por qué la distinción se apoya en el uso.</strong> Primary y Secondary comparten el hue azul de la marca, así que la separación no viene de "apagar" Secondary, sino de la jerarquía de aplicación: Primary domina por <em>presencia</em> (relleno sólido, posición y una sola instancia por pantalla) y Secondary apoya. Tertiary aporta el contraste de hue (púrpura) para momentos puntuales. Respetar estas reglas es lo que hace que la jerarquía se lea con claridad, sin tener que sacrificar la vivacidad de Secondary ni de Tertiary.</p>
@@ -3797,8 +3797,8 @@ body { overflow-x: clip; }
       <h2 class="ds-h2 ds-cr-h" id="cr-secondary">Secondary</h2>
       <p class="ds-p"><strong>Accent color role · jerarquía media.</strong> Secondary es el Agile Blue de Embassy: el color de interacción y soporte, con menos énfasis que Primary. Se usa para los componentes menos prominentes de la UI —links, chips de filtro, acciones de apoyo, estados de navegación y elementos interactivos secundarios—. Donde Primary marca la acción principal de la pantalla, Secondary marca lo complementario y no debe competir como un segundo CTA dominante.</p>
       <p class="ds-cr-cap"><strong>Ejemplos.</strong> Los links y los estados de navegación usan <code>Secondary</code> + <code>On Secondary</code>; los chips de filtro, los tags y los badges de apoyo usan <code>Secondary Container</code> + <code>On Secondary Container</code> (un fill tonal de menor énfasis). El badge "Borrador" es un buen ejemplo de Secondary Container.</p>
-      <div class="ds-callout" style="margin:4px 0 16px"><strong>Botón Secondary = outlined con borde Secondary.</strong> El <strong>botón Secondary</strong> usa <code>--color-secondary</code> como borde (1px) sobre fondo transparente. En <strong>light</strong> el borde es <code>#4F80FF</code> con texto navy; en <strong>dark</strong> es <code>#B9CCFF</code> con texto blanco. Se diferencia de <code>btn-tertiary</code> (outlined neutro, borde <code>--color-outline</code>) en que el borde usa el color de marca. El rol Secondary Container se reserva para chips, badges y chips de filtro.</div>
-      <div class="ds-cr-grid"><div class="ds-cr-card"><div class="ds-cr-role">Secondary</div><div class="ds-cr-tok">emb.color.secondary · --color-secondary</div><div class="ds-cr-vals"><span class="ds-cr-val"><b>Light</b><span class="ds-cr-chip" style="background:#4F80FF"></span>secondary-900</span><span class="ds-cr-val"><b>Dark</b><span class="ds-cr-chip" style="background:#B9CCFF"></span>secondary-300</span></div><div class="ds-cr-desc">Fills, texto e íconos de menor prominencia usados sobre superficies.</div><div class="ds-cr-use"><b>Cuándo usarlo:</b> Como texto, ícono, link, focus ring y estados activos/seleccionados — elementos de poca área que apoyan sin competir con Primary. <b>No</b> como fondo de botón relleno grande: el botón Secondary de énfasis medio usa <code>Secondary Container</code> (fill tonal), no este rol saturado.</div></div><div class="ds-cr-card"><div class="ds-cr-role">On Secondary</div><div class="ds-cr-tok">emb.color.on-secondary · --color-on-secondary</div><div class="ds-cr-vals"><span class="ds-cr-val"><b>Light</b><span class="ds-cr-chip" style="background:#FFFFFF"></span>neutral-white</span><span class="ds-cr-val"><b>Dark</b><span class="ds-cr-chip" style="background:#1E3A8C"></span>secondary-950</span></div><div class="ds-cr-desc">Texto e íconos que se muestran sobre fills Secondary.</div><div class="ds-cr-use"><b>Cuándo usarlo:</b> Garantiza contraste y legibilidad sobre superficies Secondary.</div></div><div class="ds-cr-card"><div class="ds-cr-role">Secondary Container</div><div class="ds-cr-tok">emb.color.secondary-container · --color-secondary-container</div><div class="ds-cr-vals"><span class="ds-cr-val"><b>Light</b><span class="ds-cr-chip" style="background:#CAD9FF"></span>secondary-200</span><span class="ds-cr-val"><b>Dark</b><span class="ds-cr-chip" style="background:#3A5BB0"></span>secondary-925</span></div><div class="ds-cr-desc">Un fill de menor prominencia usado sobre superficies para componentes recesivos y énfasis de apoyo.</div><div class="ds-cr-use"><b>Cuándo usarlo:</b> Chips de filtro, tags, badges de apoyo y estados seleccionados no-primary. Es el fill de los chips/badges de apoyo — el badge "Borrador" lo representa bien.</div></div><div class="ds-cr-card"><div class="ds-cr-role">On Secondary Container</div><div class="ds-cr-tok">emb.color.on-secondary-container · --color-on-secondary-container</div><div class="ds-cr-vals"><span class="ds-cr-val"><b>Light</b><span class="ds-cr-chip" style="background:#01164D"></span>primary-900</span><span class="ds-cr-val"><b>Dark</b><span class="ds-cr-chip" style="background:#DCE6FF"></span>secondary-100</span></div><div class="ds-cr-desc">Texto e íconos que se muestran sobre fills Secondary Container.</div><div class="ds-cr-use"><b>Cuándo usarlo:</b> Mantiene legibilidad y accesibilidad dentro de los componentes Secondary Container.</div></div></div>
+      <div class="ds-callout" style="margin:4px 0 16px"><strong>Botón Secondary = Secondary Container (tonal, estilo MD3).</strong> El <strong>botón Secondary</strong> consume <code>Secondary Container</code> + <code>On Secondary Container</code> — un fill tonal de menor énfasis que el Primary (filled). En <strong>light</strong> es periwinkle claro (<code>#CAD9FF</code>) con texto navy; en <strong>dark</strong> es periwinkle medio (<code>#3A5BB0</code>) con texto claro. Se diferencia del Primary por inversión de valor, no compite con él. El rol Secondary <em>main</em> se reserva para links, focus rings y estados activos.</div>
+      <div class="ds-cr-grid"><div class="ds-cr-card"><div class="ds-cr-role">Secondary</div><div class="ds-cr-tok">emb.color.secondary · --color-secondary</div><div class="ds-cr-vals"><span class="ds-cr-val"><b>Light</b><span class="ds-cr-chip" style="background:#4F80FF"></span>secondary-900</span><span class="ds-cr-val"><b>Dark</b><span class="ds-cr-chip" style="background:#B9CCFF"></span>secondary-300</span></div><div class="ds-cr-desc">Fills, texto e íconos de menor prominencia usados sobre superficies.</div><div class="ds-cr-use"><b>Cuándo usarlo:</b> Como texto, ícono, link, focus ring y estados activos/seleccionados — elementos de poca área que apoyan sin competir con Primary. <b>No</b> como fondo de botón relleno grande: el botón Secondary de énfasis medio usa <code>Secondary Container</code> (fill tonal), no este rol saturado.</div></div><div class="ds-cr-card"><div class="ds-cr-role">On Secondary</div><div class="ds-cr-tok">emb.color.on-secondary · --color-on-secondary</div><div class="ds-cr-vals"><span class="ds-cr-val"><b>Light</b><span class="ds-cr-chip" style="background:#FFFFFF"></span>neutral-white</span><span class="ds-cr-val"><b>Dark</b><span class="ds-cr-chip" style="background:#1E3A8C"></span>secondary-950</span></div><div class="ds-cr-desc">Texto e íconos que se muestran sobre fills Secondary.</div><div class="ds-cr-use"><b>Cuándo usarlo:</b> Garantiza contraste y legibilidad sobre superficies Secondary.</div></div><div class="ds-cr-card"><div class="ds-cr-role">Secondary Container</div><div class="ds-cr-tok">emb.color.secondary-container · --color-secondary-container</div><div class="ds-cr-vals"><span class="ds-cr-val"><b>Light</b><span class="ds-cr-chip" style="background:#CAD9FF"></span>secondary-200</span><span class="ds-cr-val"><b>Dark</b><span class="ds-cr-chip" style="background:#3A5BB0"></span>secondary-925</span></div><div class="ds-cr-desc">Un fill de menor prominencia usado sobre superficies para componentes recesivos y énfasis de apoyo.</div><div class="ds-cr-use"><b>Cuándo usarlo:</b> Chips de filtro, tags, badges de apoyo y estados seleccionados no-primary. Es el fill de los chips/badges de apoyo — el badge "Borrador" lo representa bien. (El botón Secondary SÍ usa este rol: es un fill tonal —light #CAD9FF, dark #3A5BB0—.)</div></div><div class="ds-cr-card"><div class="ds-cr-role">On Secondary Container</div><div class="ds-cr-tok">emb.color.on-secondary-container · --color-on-secondary-container</div><div class="ds-cr-vals"><span class="ds-cr-val"><b>Light</b><span class="ds-cr-chip" style="background:#01164D"></span>primary-900</span><span class="ds-cr-val"><b>Dark</b><span class="ds-cr-chip" style="background:#DCE6FF"></span>secondary-100</span></div><div class="ds-cr-desc">Texto e íconos que se muestran sobre fills Secondary Container.</div><div class="ds-cr-use"><b>Cuándo usarlo:</b> Mantiene legibilidad y accesibilidad dentro de los componentes Secondary Container.</div></div></div>
       <h3 class="ds-cr-sub">Ejemplos visuales</h3>
       <p class="ds-p">Dónde aparece cada par de roles en componentes reales. Alterná entre Light y Dark Mode para ver cómo se adaptan los mismos componentes.</p>
       <div class="ds-role-demo rb-secondary">
@@ -3836,7 +3836,7 @@ body { overflow-x: clip; }
         </div>
       </div>
       <h3 class="ds-cr-sub">Roles Secondary por componente</h3>
-      <p class="ds-p">Qué combinación de color usa cada componente. El <strong>botón Secondary usa Secondary como borde</strong> (outlined-acento): se diferencia de btn-tertiary (outlined neutro) en que el borde usa el color de marca en lugar de --color-outline.</p>
+      <p class="ds-p">Qué combinación de color usa cada componente. El <strong>botón Secondary usa Secondary Container</strong> (fill tonal, estilo MD3): se diferencia del Primary por inversión de valor, no por un tratamiento neutral.</p>
       <div class="ds-table-wrap" style="margin-bottom:8px"><table class="ds-table"><thead><tr><th>Componente</th><th>Combinación de color</th></tr></thead><tbody>
         <tr><td><strong>Botón Primary</strong></td><td><code>Primary</code> + <code>On Primary</code></td></tr>
         <tr><td><strong>Botón Secondary</strong></td><td><code>Secondary Container</code> + <code>On Secondary Container</code> (tonal) — light #CAD9FF / navy · dark #3A5BB0 / claro.</td></tr>
@@ -5409,9 +5409,9 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><em>background</em></td><td>Contenedor</td><td colspan="2" class="bt-tok-note">transparent</td></tr>
-                      <tr><td><code>--color-primary</code></td><td>Etiqueta / ícono</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#01164D"></span> #01164D</span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#FFFFFF;border-color:#ccc"></span> #FFFFFF</span></td></tr>
-                      <tr><td><code>--color-secondary</code></td><td>Border (1px)</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#B9CCFF;border-color:#ccc"></span> #B9CCFF</span></td></tr>
+                      <tr><td><code>--color-secondary-container</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#CAD9FF"></span> #CAD9FF</span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#3A5BB0"></span> #3A5BB0</span></td></tr>
+                      <tr><td><code>--color-on-secondary-container</code></td><td>Etiqueta / ícono</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#01164D"></span> #01164D</span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#DCE6FF;border-color:#ccc"></span> #DCE6FF</span></td></tr>
+                      <tr><td><em>border</em></td><td>Border</td><td colspan="2" class="bt-tok-note">transparent (sin token — valor inline)</td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -5424,7 +5424,7 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>color-mix(in srgb, var(--color-secondary) 10%, transparent)</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:rgba(79,128,255,.1)"></span> ~10% secondary</span></td><td colspan="1" class="bt-tok-note">capa de estado sobre transparente</td></tr>
+                      <tr><td><code>color-mix(in srgb, var(--color-secondary-container) 88%, #000)</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#B8CAFF"></span> ~#B8CAFF</span></td><td colspan="1" class="bt-tok-note">ligeramente oscurecido</td></tr>
                       <tr><td><code>translateY(-1px)</code></td><td>Elevación</td><td colspan="2" class="bt-tok-note">Solo cosmético — sin sombra ni cambio de nivel de elevación</td></tr>
                     </tbody></table>
                   </div>
@@ -5452,7 +5452,7 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>color-mix(in srgb, var(--color-secondary) 16%, transparent)</code></td><td>Contenedor</td><td colspan="2" class="bt-tok-note">16% secondary — mismo patrón de capa de estado que btn-text:active</td></tr>
+                      <tr><td><code>filter: brightness(.92)</code></td><td>Contenedor</td><td colspan="2" class="bt-tok-note">~8% oscurecimiento de <code>--color-secondary-container</code></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -5912,24 +5912,24 @@ body { overflow-x: clip; }
             <h3 class="bst-variant-title">Botón tonal</h3>
 
             <p class="bst-sub-head">Predeterminado</p>
-            <div class="bst-strip bst-strip--light" data-theme="light" style="--bst-bg:transparent;--bst-fg:#01164D;--bst-border:1px solid #4F80FF;--bst-lr:1,22,77;--bst-foc-a:#fff;--bst-foc-b:#4F80FF">
+            <div class="bst-strip bst-strip--light" style="--bst-bg:#CAD9FF;--bst-fg:#01164D;--bst-lr:1,22,77;--bst-foc-a:#01164D;--bst-foc-b:#CAD9FF">
               <div class="bst-mode-tag">Claro</div>
               <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn bst-outlined-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="btn-secondary" disabled>Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
+                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
+                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
+                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
+                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
+                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
               </div>
             </div>
-            <div class="bst-strip bst-strip--dark" data-theme="dark" style="--bst-bg:transparent;--bst-fg:#FFFFFF;--bst-border:1px solid #B9CCFF;--bst-lr:255,255,255;--bst-foc-a:#13111E;--bst-foc-b:#B9CCFF">
+            <div class="bst-strip bst-strip--dark" style="--bst-bg:#3A5BB0;--bst-fg:#DCE6FF;--bst-lr:220,230,255;--bst-foc-a:#DCE6FF;--bst-foc-b:#3A5BB0">
               <div class="bst-mode-tag">Oscuro</div>
               <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn bst-outlined-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="btn-secondary" disabled>Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
+                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
+                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
+                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
+                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
+                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
               </div>
             </div>
 
@@ -6047,7 +6047,7 @@ body { overflow-x: clip; }
           </div>
           <div class="bd-callout" style="margin-top:12px">
             <span class="bd-ico">⚑</span>
-            <span><b>Implementación en Embassy:</b> El botón de texto usa <code>color-mix(in srgb, var(--color-primary) 10%, transparent)</code> — alineado al modelo MD3. El botón Relleno usa <code>--color-primary-hover</code> y el Tonal usa <code>color-mix(in srgb, var(--color-secondary) 10%, transparent)</code> (hover) y 16% (pressed) — capa de estado sobre fondo transparente, mismo patrón que btn-text pero usando Secondary.</span>
+            <span><b>Implementación en Embassy:</b> El botón de texto usa <code>color-mix(in srgb, var(--color-primary) 10%, transparent)</code> — alineado al modelo MD3. El botón Relleno usa <code>--color-primary-hover</code> y el Tonal usa <code>color-mix(in srgb, var(--color-secondary-container) 88%, #000)</code> en lugar de superposiciones transparentes. Funcionalmente equivalente; la unificación al modelo MD3 está en el roadmap.</span>
           </div>
 
         </section>
@@ -6484,7 +6484,7 @@ body { overflow-x: clip; }
                 <h3 class="bd-sub-title">Énfasis relativo</h3>
                 <div class="bd-hier">
                   <div class="bd-hier-row"><span class="bd-hier-label">Relleno</span><span class="bd-hier-bar" style="width:100%;background:var(--color-primary)"></span></div>
-                  <div class="bd-hier-row"><span class="bd-hier-label">Tonal</span><span class="bd-hier-bar" style="width:85%;background:transparent;border:1.5px solid var(--color-secondary)"></span></div>
+                  <div class="bd-hier-row"><span class="bd-hier-label">Tonal</span><span class="bd-hier-bar" style="width:85%;background:var(--color-secondary-container)"></span></div>
                   <div class="bd-hier-row"><span class="bd-hier-label">Elevado</span><span class="bd-hier-bar" style="width:70%;background:var(--color-primary-container);box-shadow:0 1px 3px rgba(0,0,0,.14)"></span></div>
                   <div class="bd-hier-row"><span class="bd-hier-label">Con borde</span><span class="bd-hier-bar" style="width:55%;background:var(--color-outline)"></span></div>
                   <div class="bd-hier-row"><span class="bd-hier-label">Texto</span><span class="bd-hier-bar" style="width:40%;background:var(--color-outline-variant)"></span></div>
@@ -7297,7 +7297,7 @@ export function IconButton({ label, size = 'default', children, className, ...pr
         <!-- ── Token reference ── -->
         <section class="docs-section">
           <h2 class="docs-section-title">Referencia de tokens CSS</h2>
-          <p class="docs-section-desc">Todos los tokens son semánticos (<code>--color-*</code>). El botón Secondary (outlined-acento) usa <code>--color-secondary</code> como borde y <code>--color-primary</code> como texto, sobre fondo transparente.</p>
+          <p class="docs-section-desc">Todos los tokens son semánticos (<code>--color-*</code>). El botón Secondary tonal consume directamente los roles de color <code>--color-secondary-container</code> y <code>--color-on-secondary-container</code>, sin tokens intermedios.</p>
           <div class="ds-table-wrap">
             <table class="docs-props-table">
               <thead><tr><th>Token</th><th>Variante</th><th>Propiedad</th><th>Light</th><th>Dark</th></tr></thead>
@@ -7305,10 +7305,10 @@ export function IconButton({ label, size = 'default', children, className, ...pr
                 <tr><td><code>--color-primary</code></td><td>Primary</td><td>background</td><td>#01164D</td><td>#FFFFFF</td></tr>
                 <tr><td><code>--color-on-primary</code></td><td>Primary</td><td>color</td><td>#FFFFFF</td><td>#01164D</td></tr>
                 <tr><td><code>--color-primary-hover</code></td><td>Primary</td><td>bg:hover</td><td>#162F6F</td><td>#E4E7EF</td></tr>
-                <tr><td><em>transparent</em></td><td>Secondary</td><td>background</td><td colspan="2">transparent</td></tr>
-                <tr><td><code>--color-primary</code></td><td>Secondary</td><td>color</td><td>#01164D</td><td>#FFFFFF</td></tr>
-                <tr><td><code>--color-secondary</code></td><td>Secondary</td><td>border-color</td><td>#4F80FF</td><td>#B9CCFF</td></tr>
-                <tr><td><code>color-mix(in srgb, var(--color-secondary) 10%, transparent)</code></td><td>Secondary</td><td>bg:hover</td><td colspan="2">~10% secondary</td></tr>
+                <tr><td><code>--color-secondary-container</code></td><td>Secondary</td><td>background</td><td>#CAD9FF</td><td>#3A5BB0</td></tr>
+                <tr><td><code>--color-on-secondary-container</code></td><td>Secondary</td><td>color</td><td>#01164D</td><td>#DCE6FF</td></tr>
+                <tr><td><em>border</em></td><td>Secondary</td><td>border-color</td><td>transparent</td><td>transparent</td></tr>
+                <tr><td><code>color-mix(in srgb, var(--color-secondary-container) 88%, #000)</code></td><td>Secondary</td><td>bg:hover</td><td>~#B2BFE0</td><td>~#33509B</td></tr>
                 <tr><td><code>--color-outline</code></td><td>Tertiary</td><td>border-color</td><td>#9FA3AE</td><td>#747989</td></tr>
                 <tr><td><code>--color-surface-variant</code></td><td>Tertiary</td><td>bg:hover</td><td>#EAEBED</td><td>#282C39</td></tr>
                 <tr><td><code>--color-error</code></td><td>Primary Danger</td><td>background</td><td>#FD3A45</td><td>#F29AA1</td></tr>

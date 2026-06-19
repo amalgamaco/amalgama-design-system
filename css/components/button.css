@@ -4,7 +4,7 @@
    pero con identidad Embassy:
 
      Primary    · Filled         · acción de mayor jerarquía
-     Secondary  · Outlined acento · jerarquía media — borde en color secundario de marca
+     Secondary  · Neutral tonal  · jerarquía media — superficie neutra (NO acento)
      Tertiary   · Outlined       · acción secundaria / alternativa
      Text       · Text only     · acción de baja jerarquía / inline
      Icon       · Icon          · acción compacta solo-ícono
@@ -89,27 +89,25 @@
 .btn-primary.btn-success:hover { background: var(--color-success-hover); }
 
 /* ─────────────────────────────────────
-   Secondary · Outlined con acento Secondary.
-   Borde en --color-secondary (#4F80FF light / #B9CCFF dark) sobre fondo
-   transparente. Menor jerarquía que Primary (filled); se diferencia de
-   btn-tertiary (outlined neutro) en que el borde usa el color de marca
-   en lugar del --color-outline neutral.
+   Secondary · fill TONAL (Secondary Container, estilo MD3 filled-tonal).
+   Light: periwinkle claro #CAD9FF + texto navy. Dark: periwinkle medio
+   #3A5BB0 + texto claro. Menor jerarquía que el Primary (filled); se diferencia por
+   inversión de valor.
 ───────────────────────────────────── */
 .btn-secondary {
-  background: transparent;
-  color: var(--color-primary);
-  border-color: var(--color-secondary);
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  border-color: transparent;
 }
 .btn-secondary:hover {
-  background: color-mix(in srgb, var(--color-secondary) 10%, transparent);
-  border-color: var(--color-secondary);
+  background: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
   transform: translateY(-1px);
 }
 .btn-secondary:active { transform: translateY(0); }
 .btn-secondary:disabled {
-  background: transparent;
+  background: var(--color-disabled);
   color: var(--color-on-disabled);
-  border-color: var(--color-outline-variant);
+  border-color: transparent;
   cursor: not-allowed; transform: none;
 }
 
@@ -224,7 +222,7 @@
    without a pseudo-element overlay.
 ───────────────────────────────────── */
 .btn-primary:active:not(:disabled)              { filter: brightness(0.88); transform: translateY(0); }
-.btn-secondary:active:not(:disabled)            { background: color-mix(in srgb, var(--color-secondary) 16%, transparent); transform: translateY(0); }
+.btn-secondary:active:not(:disabled)            { filter: brightness(0.92); transform: translateY(0); }
 .btn-tertiary:active:not(:disabled),
 .btn-ghost:active:not(:disabled)                { background: var(--color-surface-container-high); }
 .btn-text:active:not(:disabled)                 { background: color-mix(in srgb, var(--color-primary) 16%, transparent); }
