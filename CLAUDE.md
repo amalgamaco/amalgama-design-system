@@ -68,6 +68,7 @@ When restyling or rebuilding an existing screen, **DS rules win over visual fide
 | Component | CSS (`css/components/`) | React (`components/ui/`) | Docs page (`docs/`) |
 |---|---|---|---|
 | Button | `button.css` (`btn-primary/-secondary/-tertiary/-text`, `icon-btn`; sizes: `btn-xs/-sm/-lg/-xl`; modifiers: `btn-danger/-success/-compact`; radius scales with size: XS/SM→`--radius-sm`, MD/LG→`--radius-md`, XL→`--radius-lg`) | `button.tsx` | `button.html` |
+| **Segmented Button** | `segmented-button.css` (`seg-btn-group`, `seg-btn`, `seg-btn.selected`; sizes: `seg-btn-group-sm/-lg`; color roles: MD3 `secondaryContainer`/`onSecondaryContainer` for selected, `onSurface` for unselected, `outline` for border; state layers via `color-mix()`) | — | — |
 | Badge | `badge.css` (`badge badge-{open,active,closed,draft,archived,warning,tertiary,info}`) | `badge.tsx` | `badge.html` |
 | **Chip** | `chip.css` (`chip`, `chip-selected`, `chip-elevated`, `chip-icon`, `chip-remove`, `chip-set`) | `chip.tsx` (`Chip`, `InputChip`, `ChipSet`) | `chip.html` |
 | **Search** | `search.css` (`search-bar` + slots, `search-view` + `-fullscreen`, header/results) | `search.tsx` (`SearchBar`, `SearchView`, …) | `search.html` |

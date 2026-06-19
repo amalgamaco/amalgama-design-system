@@ -106,7 +106,7 @@
 /* ── Foco visible (WCAG 2.4.7) ── */
 .seg-btn:focus-visible {
   outline: 2px solid var(--color-focus);
-  outline-offset: 1px;
+  outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--color-focus-ring);
   z-index: 1;
 }
