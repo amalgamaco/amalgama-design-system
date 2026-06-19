@@ -10,19 +10,22 @@
      de 5 opciones o etiquetas muy dispares (usar Select).
    Reemplaza a: toggle-group custom, radio-button pill legacy.
 
-   Color Roles (Embassy):
-     Contenedor bg    → --color-surface-container           (blanco en light)
-     Contenedor borde → color-mix(--color-outline-variant 48%, transparent)
-     Texto inactivo   → --color-on-surface-variant          (secundario/muted)
-     Hover bg         → color-mix(--color-secondary  8%, transparent)
-     Hover texto      → --color-primary
-     Activo bg        → color-mix(--color-secondary 12%, transparent)
-     Activo texto     → --color-secondary
-     Hover activo bg  → color-mix(--color-secondary 16%, transparent)
-     Presionado bg    → color-mix(--color-secondary 20%, transparent)
-     Disabled texto   → --color-on-disabled
-     Disabled sel. bg → color-mix(--color-on-surface 12%, transparent)
-     Radio            → --radius-full (píldora)
+   Color Roles — mapeo MD3 → Embassy
+   ─────────────────────────────────
+   Contenedor bg (unselected)   → transparent
+   Contenedor bg (selected)     → --color-secondary-container   [MD3: secondaryContainer]
+   Texto/ícono (unselected)     → --color-on-surface             [MD3: onSurface]
+   Texto/ícono (selected)       → --color-on-secondary-container [MD3: onSecondaryContainer]
+   Borde grupo                  → --color-outline                [MD3: outline]
+   Hover unselected bg          → color-mix(--color-on-surface 8%, transparent)
+   Hover selected bg            → color-mix(--color-on-secondary-container 8%, --color-secondary-container)
+   Pressed unselected bg        → color-mix(--color-on-surface 12%, transparent)
+   Pressed selected bg          → color-mix(--color-on-secondary-container 12%, --color-secondary-container)
+   Disabled texto               → --color-on-disabled            [MD3: onSurface @ 38%]
+   Disabled selected bg         → color-mix(--color-on-surface 12%, transparent)
+   Disabled contenedor bg       → color-mix(--color-on-surface 4%, transparent)
+   Disabled borde grupo         → color-mix(--color-outline-variant 38%, transparent)
+   Radio                        → --radius-full (píldora)
 
    Dependencia: variables.css
    Uso:
@@ -32,12 +35,12 @@
    </div>
 ═══════════════════════════════════════ */
 
-/* ── Contenedor ── */
+/* ── Contenedor del grupo ── */
 .seg-btn-group {
   display: inline-flex;
   align-items: center;
-  background: var(--color-surface-container);
-  border: 1px solid color-mix(in srgb, var(--color-outline-variant) 48%, transparent);
+  background: transparent;
+  border: 1px solid var(--color-outline);
   border-radius: var(--radius-full);
   padding: 3px;
   gap: 2px;
@@ -49,12 +52,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: var(--space-2);
   padding: 6px 16px;
   border: none;
   border-radius: var(--radius-full);
   background: transparent;
-  color: var(--color-on-surface-variant);
+  color: var(--color-on-surface);
   font-family: var(--font-body);
   font-size: var(--font-size-body-sm);
   font-weight: 500;
@@ -67,48 +70,55 @@
     box-shadow var(--duration-fast) var(--ease-default);
 }
 
-/* ── Hover (inactivo) ── */
+/* ── Hover (unselected) — state layer: onSurface @ 8% ── */
 .seg-btn:hover:not(.selected):not([aria-selected="true"]):not([aria-pressed="true"]):not(:disabled) {
-  background: color-mix(in srgb, var(--color-secondary) 8%, transparent);
-  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-on-surface) 8%, transparent);
 }
 
-/* ── Estado activo / seleccionado ── */
+/* ── Estado seleccionado — secondaryContainer + onSecondaryContainer ── */
 .seg-btn.selected,
 .seg-btn[aria-selected="true"],
 .seg-btn[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--color-secondary) 12%, transparent);
-  color: var(--color-secondary);
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
   font-weight: 600;
 }
 
-/* ── Hover sobre seleccionado ── */
+/* ── Hover (selected) — state layer: onSecondaryContainer @ 8% sobre secondaryContainer ── */
 .seg-btn.selected:hover:not(:disabled),
 .seg-btn[aria-selected="true"]:hover:not(:disabled),
 .seg-btn[aria-pressed="true"]:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-secondary) 16%, transparent);
+  background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container));
 }
 
-/* ── Presionado ── */
-.seg-btn:active:not(:disabled) {
-  background: color-mix(in srgb, var(--color-secondary) 20%, transparent);
+/* ── Presionado (unselected) — state layer: onSurface @ 12% ── */
+.seg-btn:active:not(:disabled):not(.selected):not([aria-selected="true"]):not([aria-pressed="true"]) {
+  background: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+}
+
+/* ── Presionado (selected) — state layer: onSecondaryContainer @ 12% sobre secondaryContainer ── */
+.seg-btn.selected:active:not(:disabled),
+.seg-btn[aria-selected="true"]:active:not(:disabled),
+.seg-btn[aria-pressed="true"]:active:not(:disabled) {
+  background: color-mix(in srgb, var(--color-on-secondary-container) 12%, var(--color-secondary-container));
 }
 
 /* ── Foco visible (WCAG 2.4.7) ── */
 .seg-btn:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 1px;
-  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
   z-index: 1;
 }
 
-/* ── Deshabilitado ── */
+/* ── Deshabilitado — grupo ── */
 .seg-btn-group:has(.seg-btn:disabled),
 .seg-btn-group[aria-disabled="true"] {
   background: color-mix(in srgb, var(--color-on-surface) 4%, transparent);
-  border-color: color-mix(in srgb, var(--color-outline-variant) 24%, transparent);
+  border-color: color-mix(in srgb, var(--color-outline-variant) 38%, transparent);
 }
 
+/* ── Deshabilitado — segmento ── */
 .seg-btn:disabled,
 .seg-btn[aria-disabled="true"] {
   color: var(--color-on-disabled);
@@ -116,8 +126,10 @@
   pointer-events: none;
 }
 
+/* ── Deshabilitado seleccionado — onSurface @ 12% ── */
 .seg-btn.selected:disabled,
-.seg-btn[aria-selected="true"]:disabled {
+.seg-btn[aria-selected="true"]:disabled,
+.seg-btn[aria-pressed="true"]:disabled {
   background: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
 }
 
