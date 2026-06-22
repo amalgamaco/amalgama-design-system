@@ -15462,7 +15462,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <p class="docs-page-desc">Control de selección binaria — marcado, sin marcar o indeterminado. Para selección múltiple dentro de un grupo de opciones relacionadas.</p>
 
       <div class="ds-callout" style="margin-top:0">
-        <strong>Implementación: Material Web oficial.</strong> Esta página renderiza el componente <code>&lt;md-checkbox&gt;</code> de <code>@material/web</code> (Material Design&nbsp;3), tematizado con los tokens semánticos de Embassy vía <code>md-sys-bridge.css</code> (<code>--md-sys-color-* → --color-*</code>). Estados, ripple, foco y motion son los oficiales de Material; la paleta es la de Embassy.
+        <strong>Implementación: shadcn/ui.</strong> Los ejemplos de esta página renderizan el componente <code>Checkbox</code> de <code>shadcn/ui</code> (Radix UI), tematizado con los tokens semánticos de Embassy. El resto de la documentación —specs, guías y código— pertenece al Design System.
       </div>
 
       <div class="ds-comp-tabs">
@@ -15476,14 +15476,8 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <h2 class="docs-section-title">Estados</h2>
-          <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox aria-label="Sin marcar"></md-checkbox> Sin marcar</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox checked aria-label="Marcado"></md-checkbox> Marcado</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox indeterminate aria-label="Indeterminado"></md-checkbox> Indeterminado</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox disabled aria-label="Deshabilitado"></md-checkbox> Deshabilitado</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox checked disabled aria-label="Deshabilitado marcado"></md-checkbox> Deshab. marcado</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-checkbox error aria-label="Error"></md-checkbox> Error</label></div>
-          </div>
+          <!-- shadcn/ui island — Checkbox states (Embassy-themed) -->
+          <div data-island="checkbox-showcase"></div>
         </section>
         <section class="docs-section">
           <h2 class="docs-section-title">¿Qué es?</h2>
@@ -18971,7 +18965,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Components · Selección</div>
       <h1 class="docs-page-title">Radio Button</h1>
       <p class="docs-page-desc">Selección exclusiva — una sola opción activa dentro de un grupo de valores mutuamente excluyentes.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-radio&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Los ejemplos renderizan <code>Radio Group</code> de <code>shadcn/ui</code> (Radix UI), tematizado con los tokens de Embassy. El resto de la documentación pertenece al Design System.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
@@ -18980,20 +18974,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <h2 class="docs-section-title">Grupo de opciones</h2>
-          <div style="display:flex;flex-direction:column;gap:8px;max-width:320px">
-            <label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="plan" value="m" checked aria-label="Mensual"></md-radio> Mensual</label>
-            <label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="plan" value="a" aria-label="Anual"></md-radio> Anual</label>
-            <label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="plan" value="t" aria-label="Trimestral"></md-radio> Trimestral</label>
-          </div>
+          <!-- shadcn/ui island — Radio group (Embassy-themed) -->
+          <div data-island="radio-group"></div>
         </section>
         <section class="docs-section">
           <h2 class="docs-section-title">Estados</h2>
-          <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="s1" aria-label="Sin seleccionar"></md-radio> Sin seleccionar</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="s1" checked aria-label="Seleccionado"></md-radio> Seleccionado</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="s2" disabled aria-label="Deshabilitado"></md-radio> Deshabilitado</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-radio name="s2" checked disabled aria-label="Deshabilitado seleccionado"></md-radio> Deshab. selec.</label></div>
-          </div>
+          <!-- shadcn/ui island — Radio states (Embassy-themed) -->
+          <div data-island="radio-states"></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -20021,7 +20008,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <p class="docs-page-desc">Alterna un único estado encendido/apagado con efecto inmediato. Para activar o desactivar una opción al instante, sin paso de confirmación.</p>
 
       <div class="ds-callout" style="margin-top:0">
-        <strong>Implementación: Material Web oficial.</strong> Esta página renderiza el componente <code>&lt;md-switch&gt;</code> de <code>@material/web</code> (Material Design&nbsp;3), tematizado con los tokens semánticos de Embassy vía <code>md-sys-bridge.css</code> (<code>--md-sys-color-* → --color-*</code>). Estados, ripple, foco y motion son los oficiales de Material; la paleta es la de Embassy.
+        <strong>Implementación: shadcn/ui.</strong> Los ejemplos de esta página renderizan el componente <code>Switch</code> de <code>shadcn/ui</code> (Radix UI), tematizado con los tokens semánticos de Embassy. El resto de la documentación —specs, guías y código— pertenece al Design System.
       </div>
 
       <div class="ds-comp-tabs">
@@ -20035,14 +20022,8 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <h2 class="docs-section-title">Estados</h2>
-          <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch aria-label="Apagado"></md-switch> Apagado</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch selected aria-label="Encendido"></md-switch> Encendido</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch icons aria-label="Apagado con íconos"></md-switch> Íconos (off)</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch selected icons aria-label="Encendido con íconos"></md-switch> Íconos (on)</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch disabled aria-label="Deshabilitado apagado"></md-switch> Deshab. off</label></div>
-            <div class="bd-state"><label style="display:flex;align-items:center;gap:10px;font-size:14px"><md-switch selected disabled aria-label="Deshabilitado encendido"></md-switch> Deshab. on</label></div>
-          </div>
+          <!-- shadcn/ui island — Switch states (Embassy-themed) -->
+          <div data-island="switch-showcase"></div>
         </section>
         <section class="docs-section">
           <h2 class="docs-section-title">¿Qué es?</h2>
