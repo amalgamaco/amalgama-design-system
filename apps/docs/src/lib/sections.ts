@@ -22,7 +22,9 @@ export const COMPONENT_SECTIONS: SectionMeta[] = [
   { id: 'tabs', title: 'Tabs', category: 'Navigation', path: '/components/tabs', status: 'live' },
   { id: 'dialog', title: 'Dialog', category: 'Overlays', path: '/components/dialog', status: 'live' },
   { id: 'tooltip', title: 'Tooltip', category: 'Overlays', path: '/components/tooltip', status: 'live' },
-  { id: 'snackbar', title: 'Snackbar', category: 'Feedback', path: '/components/snackbar', status: 'todo' },
+  { id: 'snackbar', title: 'Snackbar', category: 'Feedback', path: '/components/snackbar', status: 'live' },
+  { id: 'skeleton', title: 'Skeleton', category: 'Feedback', path: '/components/skeleton', status: 'live' },
+  { id: 'empty', title: 'Empty State', category: 'Feedback', path: '/components/empty-state', status: 'live' },
 ]
 
 export const CATEGORY_ORDER = ['Actions', 'Selección', 'Inputs', 'Display', 'Navigation', 'Overlays', 'Feedback']

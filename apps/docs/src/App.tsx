@@ -14,6 +14,9 @@ import { TooltipPage } from './pages/TooltipPage'
 import { ChipPage } from './pages/ChipPage'
 import { SegmentedButtonPage } from './pages/SegmentedButtonPage'
 import { CardPage } from './pages/CardPage'
+import { SnackbarPage } from './pages/SnackbarPage'
+import { SkeletonPage } from './pages/SkeletonPage'
+import { EmptyStatePage } from './pages/EmptyStatePage'
 import { COMPONENT_SECTIONS } from './lib/sections'
 
 function Placeholder() {
@@ -48,6 +51,9 @@ export default function App() {
             <Route path="/components/chip" element={<ChipPage />} />
             <Route path="/components/segmented-button" element={<SegmentedButtonPage />} />
             <Route path="/components/card" element={<CardPage />} />
+            <Route path="/components/snackbar" element={<SnackbarPage />} />
+            <Route path="/components/skeleton" element={<SkeletonPage />} />
+            <Route path="/components/empty-state" element={<EmptyStatePage />} />
             <Route path="*" element={<Placeholder />} />
           </Route>
         </Routes>
