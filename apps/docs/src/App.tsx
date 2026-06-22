@@ -11,6 +11,9 @@ import { BadgePage } from './pages/BadgePage'
 import { TabsPage } from './pages/TabsPage'
 import { DialogPage } from './pages/DialogPage'
 import { TooltipPage } from './pages/TooltipPage'
+import { ChipPage } from './pages/ChipPage'
+import { SegmentedButtonPage } from './pages/SegmentedButtonPage'
+import { CardPage } from './pages/CardPage'
 import { COMPONENT_SECTIONS } from './lib/sections'
 
 function Placeholder() {
@@ -42,6 +45,9 @@ export default function App() {
             <Route path="/components/tabs" element={<TabsPage />} />
             <Route path="/components/dialog" element={<DialogPage />} />
             <Route path="/components/tooltip" element={<TooltipPage />} />
+            <Route path="/components/chip" element={<ChipPage />} />
+            <Route path="/components/segmented-button" element={<SegmentedButtonPage />} />
+            <Route path="/components/card" element={<CardPage />} />
             <Route path="*" element={<Placeholder />} />
           </Route>
         </Routes>

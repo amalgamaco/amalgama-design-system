@@ -18,5 +18,11 @@ export { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "./comp
 export {
   Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectItem,
 } from "./components/ui/select"
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./components/ui/card"
+export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "./components/ui/table"
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./components/ui/accordion"
+export { Chip } from "./components/ui/chip"
+export type { ChipProps } from "./components/ui/chip"
+export { SegmentedButton, SegmentedItem } from "./components/ui/segmented-button"
 export { ThemeProvider, useTheme } from "./lib/theme"
 export { cn } from "./lib/utils"

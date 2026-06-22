@@ -10,6 +10,9 @@ export type SectionMeta = {
 
 export const COMPONENT_SECTIONS: SectionMeta[] = [
   { id: 'button', title: 'Button', category: 'Actions', path: '/components/button', status: 'live' },
+  { id: 'seg-btn', title: 'Segmented Button', category: 'Actions', path: '/components/segmented-button', status: 'live' },
+  { id: 'chip', title: 'Chips', category: 'Selección', path: '/components/chip', status: 'live' },
+  { id: 'card', title: 'Card', category: 'Display', path: '/components/card', status: 'live' },
   { id: 'switch', title: 'Switch', category: 'Selección', path: '/components/switch', status: 'live' },
   { id: 'select', title: 'Select', category: 'Inputs', path: '/components/select', status: 'live' },
   { id: 'checkbox', title: 'Checkbox', category: 'Selección', path: '/components/checkbox', status: 'live' },
