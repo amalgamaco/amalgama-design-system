@@ -1,0 +1,18 @@
+/* Embassy fonts — must precede all other rules */
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+/* Tailwind must scan the @embassy/ui package source (outside apps/docs) so the
+   utility classes used inside the components get generated. */
+@source "../../../packages/ui/src";
+/* Token source of truth (frozen CSS layer, shared) */
+@import "../../../css/variables.css";
+/* Embassy → shadcn bridge (@theme inline) */
+@import "../../../packages/ui/src/styles/bridge.css";
+
+html, body {
+  margin: 0;
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
