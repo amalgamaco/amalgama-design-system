@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { TooltipProvider, Toaster } from '@embassy/ui'
 import { Shell } from './components/Shell'
 import { ButtonPage } from './pages/ButtonPage'
@@ -28,7 +28,8 @@ function Placeholder() {
     <div style={{ maxWidth: 820 }}>
       <p className="text-xs font-semibold tracking-[0.1em] uppercase text-secondary mb-3">Components · {s?.category}</p>
       <h1 className="font-[var(--font-heading)] text-4xl font-extrabold text-foreground m-0">{s?.title ?? 'Component'}</h1>
-      <p className="mt-4 text-base text-muted-foreground">Migración pendiente — esta página todavía se sirve desde <code>index.html</code>. El componente ya existe en <code>@embassy/ui</code>.</p>
+      <p className="mt-4 text-base text-muted-foreground">Esta sección todavía no se migró al sitio nuevo. Mientras tanto está disponible en la documentación anterior.</p>
+      <a href="./legacy.html" className="mt-5 inline-flex items-center gap-2 rounded-md border border-input px-4 h-10 text-sm text-foreground hover:bg-accent transition-colors">Ver en la documentación anterior →</a>
     </div>
   )
 }
@@ -36,7 +37,7 @@ function Placeholder() {
 export default function App() {
   return (
     <TooltipProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route element={<Shell />}>
             <Route index element={<Navigate to="/foundations/color" replace />} />
@@ -61,7 +62,7 @@ export default function App() {
             <Route path="*" element={<Placeholder />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
       <Toaster />
     </TooltipProvider>
   )
