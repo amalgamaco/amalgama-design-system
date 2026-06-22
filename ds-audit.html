@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embassy DS — Visual Audit</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+/* ══════════════════════════════════════
+   AUDIT CHROME — separate from DS styles
+   Prefixed .au- to avoid collisions
+══════════════════════════════════════ */
+:root {
+  --au-sidebar-w: 200px;
+  --au-topbar-h: 52px;
+  --au-magenta: #E91E8C;  /* annotation / spec color */
+}
+
+/* Layout */
+.au-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.au-topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--au-topbar-h);
+  background: var(--primary-900);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 500;
+  gap: 16px;
+}
+.au-topbar-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  color: var(--secondary-300);
+  white-space: nowrap;
+}
+.au-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.au-dark-toggle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 12px;
+  border: 1px solid var(--primary-400);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--neutral-100);
+  cursor: pointer;
+  letter-spacing: .04em;
+}
+.au-dark-toggle:hover { background: var(--primary-700); }
+
+/* Issues count pill */
+.au-issues-count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--neutral-200);
+}
+.au-issues-count .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.pill-err  { background: #DB263C22; color: #F29AA1; border: 1px solid #DB263C55; }
+.pill-warn { background: #FFC97D22; color: #FFC97D; border: 1px solid #FFC97D55; }
+
+.au-sidebar {
+  position: fixed;
+  top: var(--au-topbar-h);
+  left: 0;
+  bottom: 0;
+  width: var(--au-sidebar-w);
+  overflow-y: auto;
+  background: var(--color-surface-container);
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+  z-index: 400;
+}
+.au-nav-section {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 12px 16px 4px;
+}
+.au-nav-section:first-child { padding-top: 4px; }
+.au-nav-link {
+  display: block;
+  padding: 5px 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color .1s, background .1s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.au-nav-link:hover {
+  color: var(--text-primary);
+  background: var(--color-surface-variant);
+  text-decoration: none;
+}
+.au-nav-link.has-err { border-left: 2px solid #DB263C; padding-left: 14px; }
+.au-nav-link.has-warn { border-left: 2px solid var(--warning-400); padding-left: 14px; }
+
+.au-main {
+  margin-left: var(--au-sidebar-w);
+  margin-top: var(--au-topbar-h);
+  padding: 32px 40px 80px;
+  max-width: 1200px;
+}
+
+/* Sections */
+.au-section {
+  margin-bottom: 56px;
+  scroll-margin-top: calc(var(--au-topbar-h) + 16px);
+}
+.au-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+.au-section-id {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--au-magenta);
+  letter-spacing: .05em;
+}
+.au-section-title {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: .02em;
+}
+.au-section-flags {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+/* Row: label + components side by side */
+.au-row {
+  margin-bottom: 24px;
+}
+.au-row-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 8px;
+}
+.au-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 20px;
+  background: var(--color-surface-container);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.au-group.au-dark-bg {
+  background: var(--color-surface-dim);
+}
+.au-group.au-white-bg {
+  background: white;
+}
+.au-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.au-col-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Annotation tags */
+.au-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.au-tag-ok   { background: #E4F8EC; color: #006D2C; border: 1px solid #93E1B3; }
+.au-tag-warn { background: #FFF2DF; color: #5A2A00; border: 1px solid #FFA120; }
+.au-tag-err  { background: #FFEBF0; color: #BF0B29; border: 1px solid #F29AA1; }
+.au-tag-token { background: var(--color-primary-container); color: var(--primary-900); border: 1px solid var(--primary-100); }
+[data-theme="dark"] .au-tag-ok   { background: #00351A55; color: #93E1B3; border-color: #006D2C; }
+[data-theme="dark"] .au-tag-warn { background: #5A2A0055; color: #FFC97D; border-color: #FFA120; }
+[data-theme="dark"] .au-tag-err  { background: #5C001055; color: #F29AA1; border-color: #DB263C; }
+[data-theme="dark"] .au-tag-token { background: var(--primary-800); color: var(--primary-50); border-color: var(--primary-600); }
+
+.au-annotations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+/* Issues panel */
+.au-issues-panel {
+  background: var(--color-surface-container);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.au-issues-panel-header {
+  background: var(--primary-900);
+  color: white;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .05em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.au-issue-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.au-issue-item:last-child { border-bottom: 0; }
+.au-issue-badge {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.au-issue-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.au-issue-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  line-height: 1.5;
+}
+.au-issue-component {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--color-surface-variant);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Color swatches */
+.au-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+}
+.au-swatch {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.au-swatch-color {
+  height: 48px;
+}
+.au-swatch-info {
+  padding: 6px 8px;
+  background: var(--color-surface-container);
+}
+.au-swatch-name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.au-swatch-value {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* Palette strips */
+.au-palette-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+.au-palette-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  width: 80px;
+  flex-shrink: 0;
+  text-align: right;
+  padding-right: 8px;
+}
+.au-palette-swatch {
+  flex: 1;
+  height: 28px;
+  border-radius: 4px;
+  position: relative;
+}
+.au-palette-swatch span {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Typography specimens */
+.au-type-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.au-type-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.au-type-meta strong {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+/* Spacing scale */
+.au-space-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.au-space-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  width: 120px;
+  flex-shrink: 0;
+}
+.au-space-bar {
+  height: 12px;
+  background: var(--color-secondary-container);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.au-space-value {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* Radius demos */
+.au-radius-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.au-radius-item {
+  text-align: center;
+}
+.au-radius-box {
+  width: 60px;
+  height: 60px;
+  background: var(--color-secondary-container);
+  border: 2px solid var(--color-secondary);
+  margin: 0 auto 6px;
+}
+.au-radius-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+}
+.au-radius-meta strong {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 10px;
+  margin-bottom: 1px;
+}
+
+/* Shadow demos */
+.au-shadow-grid {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.au-shadow-item { text-align: center; }
+.au-shadow-box {
+  width: 100px;
+  height: 60px;
+  background: var(--color-surface-container);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  margin: 0 auto 8px;
+}
+.au-shadow-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Border demos */
+.au-border-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+.au-border-item { text-align: center; }
+.au-border-box {
+  width: 100px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-container);
+  margin: 0 auto 6px;
+}
+.au-border-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+/* Simulated state helpers (mirrors :hover/:active/:focus visually) */
+.demo-hover-primary    { background: var(--color-primary-hover) !important; transform: translateY(-1px); }
+.demo-hover-secondary  { background: color-mix(in srgb, var(--color-secondary-container) 88%, #000) !important; transform: translateY(-1px); }
+.demo-hover-tertiary   { background: var(--color-surface-variant) !important; border-color: var(--color-primary) !important; }
+.demo-hover-text       { background: color-mix(in srgb, var(--color-primary) 10%, transparent) !important; }
+.demo-focus            { outline: 2px solid var(--color-focus); outline-offset: 2px; box-shadow: 0 0 0 4px var(--color-focus-ring); }
+.demo-active-primary   { filter: brightness(0.88); }
+
+/* Force states for chip */
+.demo-chip-hover       { background: color-mix(in srgb, var(--color-on-surface) 8%, transparent) !important; }
+.demo-chip-sel-hover   { background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container)) !important; }
+
+/* Inline modal demo (not fixed overlay) */
+.modal-demo .modal-overlay {
+  position: relative !important;
+  inset: unset !important;
+  background: var(--color-scrim) !important;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.modal-demo .modal { animation: none !important; }
+
+/* Inline toast demo */
+.toast-demo .toast-container {
+  position: relative !important;
+  top: unset !important;
+  right: unset !important;
+}
+
+/* Separator line between subsections */
+.au-subsep {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* Divider label */
+.au-divider-label {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin: 24px 0 12px;
+  position: relative;
+}
+.au-divider-label::before, .au-divider-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: var(--border);
+}
+.au-divider-label::before { left: 0; }
+.au-divider-label::after { right: 0; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="au-topbar">
+  <span class="au-topbar-title">Embassy DS — Visual Audit</span>
+  <div class="au-topbar-right">
+    <div class="au-issues-count">
+      <span class="pill pill-err">✗ 7 errors</span>
+      <span class="pill pill-warn">⚠ 9 warnings</span>
+    </div>
+    <button class="au-dark-toggle" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? '' : 'dark'">Toggle Dark</button>
+  </div>
+</div>
+
+<!-- SIDEBAR NAV -->
+<nav class="au-sidebar">
+  <div class="au-nav-section">Foundations</div>
+  <a class="au-nav-link" href="#s-colors">Colors</a>
+  <a class="au-nav-link" href="#s-typography">Typography</a>
+  <a class="au-nav-link" href="#s-spacing">Spacing</a>
+  <a class="au-nav-link" href="#s-radii">Border Radius</a>
+  <a class="au-nav-link" href="#s-shadows">Shadows</a>
+  <a class="au-nav-link" href="#s-borders">Borders</a>
+  <div class="au-nav-section">Components</div>
+  <a class="au-nav-link" href="#s-buttons">Buttons</a>
+  <a class="au-nav-link" href="#s-badges">Badges</a>
+  <a class="au-nav-link" href="#s-chips">Chips</a>
+  <a class="au-nav-link" href="#s-form">Form Inputs</a>
+  <a class="au-nav-link" href="#s-cards">Cards</a>
+  <a class="au-nav-link" href="#s-statcards">Stat Cards</a>
+  <a class="au-nav-link" href="#s-table">Table</a>
+  <a class="au-nav-link" href="#s-tabs">Tabs</a>
+  <a class="au-nav-link" href="#s-modal">Modal</a>
+  <a class="au-nav-link" href="#s-toast">Toast</a>
+  <a class="au-nav-link" href="#s-skeleton">Skeleton</a>
+  <a class="au-nav-link" href="#s-emptystate">Empty State</a>
+  <a class="au-nav-link" href="#s-search">Search</a>
+  <a class="au-nav-link" href="#s-toolbar">Toolbar</a>
+  <a class="au-nav-link" href="#s-pageheader">Page Header</a>
+  <a class="au-nav-link" href="#s-backlink">Back Link</a>
+  <a class="au-nav-link has-err" href="#s-segmented">Segmented Button</a>
+  <a class="au-nav-link" href="#s-description">Description</a>
+  <a class="au-nav-link" href="#s-placeholder">Placeholder</a>
+</nav>
+
+<!-- MAIN -->
+<main class="au-main">
+
+<!-- ══════════════════════════════════════
+     ISSUES SUMMARY
+══════════════════════════════════════ -->
+<div class="au-issues-panel">
+  <div class="au-issues-panel-header">
+    <i data-lucide="triangle-alert" style="width:14px;height:14px"></i>
+    Issues Found — pre-audit analysis
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-err au-issue-badge">✗ critical</span>
+    <div>
+      <div class="au-issue-title">Segmented Button usa tokens sin definir</div>
+      <div class="au-issue-desc">--ds-card, --ds-card-border, --ds-text-1, --ds-text-2, --ds-accent, --ds-accent-bg → no están en variables.css. El componente se renderiza roto.</div>
+    </div>
+    <span class="au-issue-component">segmented-button.css</span>
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-err au-issue-badge">✗ error</span>
+    <div>
+      <div class="au-issue-title">Font-size hardcodeados en Button (no tokens)</div>
+      <div class="au-issue-desc">.btn-xs → 11px · .btn-lg → 15px · .btn-xl → 16px · no mapean a ningún --font-size-* del scale.</div>
+    </div>
+    <span class="au-issue-component">button.css</span>
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-err au-issue-badge">✗ error</span>
+    <div>
+      <div class="au-issue-title">.badge-label usa 10.5px hardcodeado</div>
+      <div class="au-issue-desc">El scale de tipo no tiene --font-size-badge-label. Se usa 10.5px raw en lugar de aproximar al token más cercano (--font-size-badge = 11.5px o --font-size-caption = 12px).</div>
+    </div>
+    <span class="au-issue-component">badge.css</span>
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-err au-issue-badge">✗ error</span>
+    <div>
+      <div class="au-issue-title">Dos tokens de borde para elementos interactivos</div>
+      <div class="au-issue-desc">Chips y Buttons usan --color-outline (#9FA3AE) para sus bordes. Forms usan --border (color-mix on-surface 10%) que resulta en un gris mucho más tenue. Elementos hermanos, contraste diferente.</div>
+    </div>
+    <span class="au-issue-component">form.css / chip.css / button.css</span>
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-warn au-issue-badge">⚠ warn</span>
+    <div>
+      <div class="au-issue-title">.toolbar-btn font-weight: 400 — inconsistente</div>
+      <div class="au-issue-desc">Es el único control interactivo con peso 400. Todos los demás botones usan 500 o 600. Rompe la consistencia de jerarquía tipográfica en controles.</div>
+    </div>
+    <span class="au-issue-component">toolbar.css</span>
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-warn au-issue-badge">⚠ warn</span>
+    <div>
+      <div class="au-issue-title">Padding inconsistente entre contenedores tipo "card"</div>
+      <div class="au-issue-desc">.card = 16px 20px · .stat-card = 20px · .form-card = 24px 32px · .modal-body = 20px 24px · .placeholder-panel = 48px 32px. No hay una regla clara de qué variante aplica cuándo.</div>
+    </div>
+    <span class="au-issue-component">card/stat-card/form/modal/placeholder</span>
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-warn au-issue-badge">⚠ warn</span>
+    <div>
+      <div class="au-issue-title">.stat-change requiere inline style para color</div>
+      <div class="au-issue-desc">El componente Stat Card no tiene variantes de color para la métrica de cambio. Se requiere style="color: var(--green)" inline — anti-patrón del DS.</div>
+    </div>
+    <span class="au-issue-component">stat-card.css</span>
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-warn au-issue-badge">⚠ warn</span>
+    <div>
+      <div class="au-issue-title">Superficie hover diferente en modal-close vs icon-btn</div>
+      <div class="au-issue-desc">.modal-close:hover → background: var(--bg) · .icon-btn:hover → background: var(--color-surface-variant). Son superficies distintas para el mismo patrón (hover de botón ícono).</div>
+    </div>
+    <span class="au-issue-component">modal.css / button.css</span>
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-warn au-issue-badge">⚠ warn</span>
+    <div>
+      <div class="au-issue-title">desc-editor:focus usa patrón de foco diferente</div>
+      <div class="au-issue-desc">box-shadow inset 2px · vs inputs que usan border-color change + box-shadow 3px exterior. Mismo concepto, dos implementaciones.</div>
+    </div>
+    <span class="au-issue-component">description.css</span>
+  </div>
+
+  <div class="au-issue-item">
+    <span class="au-tag au-tag-warn au-issue-badge">⚠ warn</span>
+    <div>
+      <div class="au-issue-title">border-radius inconsistente: .modal usa --radius-lg pero .card usa --radius (alias de --radius-lg)</div>
+      <div class="au-issue-desc">Funcionalmente igual hoy, pero .card consume el alias --radius mientras que modal hardcodea --radius-lg. Si el alias cambia, los componentes divergen.</div>
+    </div>
+    <span class="au-issue-component">card.css / modal.css</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     §01 — COLORS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-colors">
+  <div class="au-section-header">
+    <span class="au-section-id">§01</span>
+    <span class="au-section-title">Color Roles (Semantic Layer)</span>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Primary · Navy</div>
+    <div class="au-swatch-grid">
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-primary)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-primary</div><div class="au-swatch-value">primary-900 · #01164D</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-on-primary)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-on-primary</div><div class="au-swatch-value">neutral-white</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-primary-container)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-primary-container</div><div class="au-swatch-value">primary-60 · #D7DEFB</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-on-primary-container)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-on-primary-container</div><div class="au-swatch-value">primary-900</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-primary-hover)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-primary-hover</div><div class="au-swatch-value">primary-700</div></div></div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Secondary · Agile Blue</div>
+    <div class="au-swatch-grid">
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-secondary)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-secondary</div><div class="au-swatch-value">secondary-900 · #4F80FF</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-secondary-container)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-secondary-container</div><div class="au-swatch-value">secondary-200 · #CAD9FF</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-on-secondary-container)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-on-secondary-container</div><div class="au-swatch-value">primary-900</div></div></div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Status Roles</div>
+    <div class="au-swatch-grid">
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-success)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-success</div><div class="au-swatch-value">success-500</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-success-container)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-success-container</div><div class="au-swatch-value">success-50</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-error)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-error</div><div class="au-swatch-value">error-500</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-error-container)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-error-container</div><div class="au-swatch-value">error-50</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-warning)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-warning</div><div class="au-swatch-value">warning-500</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-warning-container)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-warning-container</div><div class="au-swatch-value">warning-50</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-info)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-info</div><div class="au-swatch-value">info-500</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-info-container)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-info-container</div><div class="au-swatch-value">info-50</div></div></div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Surface Ramp</div>
+    <div class="au-swatch-grid">
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-surface-container-lowest);border-bottom:1px solid var(--border)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-surface-container-lowest</div><div class="au-swatch-value">neutral-10</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-surface-container);border-bottom:1px solid var(--border)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-surface-container</div><div class="au-swatch-value">neutral-white</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-surface-container-high)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-surface-container-high</div><div class="au-swatch-value">neutral-50</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-surface-container-highest)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-surface-container-highest</div><div class="au-swatch-value">neutral-100</div></div></div>
+      <div class="au-swatch"><div class="au-swatch-color" style="background:var(--color-surface-dim)"></div><div class="au-swatch-info"><div class="au-swatch-name">--color-surface-dim</div><div class="au-swatch-value">neutral-50</div></div></div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Text Roles</div>
+    <div class="au-group">
+      <span style="color:var(--text-primary);font-weight:600">text-primary · --text-primary → primary-900</span>
+      <span style="color:var(--text-secondary)">text-secondary · --text-secondary → neutral-500</span>
+      <span style="color:var(--text-muted)">text-muted · --text-muted → color-on-disabled</span>
+      <span style="color:var(--color-on-surface-variant)">on-surface-variant → neutral-400 (#474D61)</span>
+    </div>
+    <div class="au-annotations">
+      <span class="au-tag au-tag-ok">✓ navy brand text → --text-primary = primary-900</span>
+      <span class="au-tag au-tag-ok">✓ dark mode recalibrates via [data-theme="dark"]</span>
+      <span class="au-tag au-tag-warn">⚠ --text-primary ≠ --color-on-surface (near-black #0A0C12 reserved for component internals)</span>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Border / Outline Roles</div>
+    <div class="au-group">
+      <div style="padding:12px 16px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:var(--font-mono)">--border (10% on-surface)</div>
+      <div style="padding:12px 16px;border:1px solid var(--color-outline);border-radius:6px;font-size:12px;font-family:var(--font-mono)">--color-outline #9FA3AE</div>
+      <div style="padding:12px 16px;border:1px solid var(--color-outline-variant);border-radius:6px;font-size:12px;font-family:var(--font-mono)">--color-outline-variant #BFC1C8</div>
+    </div>
+    <div class="au-annotations">
+      <span class="au-tag au-tag-warn">⚠ forms use --border; chips/buttons use --color-outline — different visual weight for interactive elements</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §02 — TYPOGRAPHY
+══════════════════════════════════════ -->
+<section class="au-section" id="s-typography">
+  <div class="au-section-header">
+    <span class="au-section-id">§02</span>
+    <span class="au-section-title">Typography Scale</span>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Epilogue — Display & Headings</div>
+    <div class="au-group au-white-bg" style="flex-direction:column;gap:0">
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-display</strong>28px · lh 1.15<br>letter -0.5px · weight 600+</div>
+        <h1 style="margin:0">Embassy Design System</h1>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-heading-xl</strong>24px · lh 1.2 · -0.4px</div>
+        <h2 style="margin:0">Components & Tokens</h2>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-heading-lg</strong>22px · lh 1.25 · -0.3px</div>
+        <h3 style="margin:0">Color System</h3>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-heading-md</strong>18px · lh 1.3 · -0.2px</div>
+        <h4 style="margin:0">Typography Scale</h4>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-heading-sm</strong>17px · lh 1.35</div>
+        <h5 style="margin:0">Button Component</h5>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-heading-xs</strong>15px · lh 1.4</div>
+        <h6 style="margin:0">Spacing Tokens</h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Inter — Body & UI</div>
+    <div class="au-group au-white-bg" style="flex-direction:column;gap:0">
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-body-lg</strong>14px · lh 1.5</div>
+        <span style="font-size:var(--font-size-body-lg);line-height:var(--line-height-body-lg);font-family:var(--font-body)">Body Large — base para texto de párrafo y contenido</span>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-body-md</strong>13.5px · lh 1.5<br><em>inputs, buttons, cells</em></div>
+        <span style="font-size:var(--font-size-body-md);line-height:var(--line-height-body-md);font-family:var(--font-body)">Body Medium — controles de formulario, celdas de tabla, labels de botón</span>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-body-sm</strong>12.5px · lh 1.6</div>
+        <span style="font-size:var(--font-size-body-sm);line-height:var(--line-height-body-sm);font-family:var(--font-body)">Body Small — texto de soporte, notas secundarias</span>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-label</strong>13px · lh 1.4</div>
+        <span style="font-size:var(--font-size-label);line-height:var(--line-height-label);font-family:var(--font-body);font-weight:500">Label — etiquetas de campo, conteo de resultados</span>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-caption</strong>12px · lh 1.4</div>
+        <span style="font-size:var(--font-size-caption);line-height:var(--line-height-caption);font-family:var(--font-body)">Caption — textos de soporte, mensajes de error, helper text</span>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-badge</strong>11.5px · lh 1.2</div>
+        <span style="font-size:var(--font-size-badge);line-height:var(--line-height-badge);font-family:var(--font-body);font-weight:600">Badge — etiquetas de estado, badges de categoría</span>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-overline</strong>12px · lh 1.2<br>UPPERCASE</div>
+        <span style="font-size:var(--font-size-overline);line-height:var(--line-height-overline);font-family:var(--font-body);font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">Table Header Overline</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">DM Mono — Code & Labels</div>
+    <div class="au-group au-white-bg" style="flex-direction:column;gap:0">
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-mono-md</strong>13px · lh 1.5</div>
+        <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-md)">const token = '--color-primary';</code>
+      </div>
+      <div class="au-type-row">
+        <div class="au-type-meta"><strong>--font-size-mono-sm</strong>11px · lh 1.4</div>
+        <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm)">.btn-primary { background: var(--color-primary); }</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ h1–h6 bound to scale via base.css</span>
+    <span class="au-tag au-tag-ok">✓ 3 font families via tokens: --font-heading, --font-body, --font-mono</span>
+    <span class="au-tag au-tag-warn">⚠ body-md (13.5px) and label (13px) are visually very close — 0.5px diff hard to distinguish</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §03 — SPACING
+══════════════════════════════════════ -->
+<section class="au-section" id="s-spacing">
+  <div class="au-section-header">
+    <span class="au-section-id">§03</span>
+    <span class="au-section-title">Spacing Scale (4px base grid)</span>
+  </div>
+  <div class="au-group au-white-bg" style="flex-direction:column;gap:0">
+    <div class="au-space-row"><div class="au-space-meta">--space-1</div><div class="au-space-bar" style="width:4px"></div><div class="au-space-value">4px · icon gaps</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-2</div><div class="au-space-bar" style="width:8px"></div><div class="au-space-value">8px · inline gaps</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-3</div><div class="au-space-bar" style="width:12px"></div><div class="au-space-value">12px · badge/chip padding</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-4</div><div class="au-space-bar" style="width:16px"></div><div class="au-space-value">16px · compact card padding</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-5</div><div class="au-space-bar" style="width:20px"></div><div class="au-space-value">20px · form field gaps</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-6</div><div class="au-space-bar" style="width:24px"></div><div class="au-space-value">24px · standard card padding</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-8</div><div class="au-space-bar" style="width:32px"></div><div class="au-space-value">32px · medium section padding</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-10</div><div class="au-space-bar" style="width:40px"></div><div class="au-space-value">40px · block separators</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-12</div><div class="au-space-bar" style="width:48px"></div><div class="au-space-value">48px · main content padding</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-16</div><div class="au-space-bar" style="width:64px"></div><div class="au-space-value">64px · section separators</div></div>
+    <div class="au-space-row"><div class="au-space-meta">--space-20</div><div class="au-space-bar" style="width:80px"></div><div class="au-space-value">80px · hero / large padding</div></div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ 4px base grid (consistent ratio)</span>
+    <span class="au-tag au-tag-warn">⚠ --space-7 (28px) and --space-9 (36px) missing — creates gaps in the scale</span>
+    <span class="au-tag au-tag-warn">⚠ some components use raw px values not on scale (e.g. button padding: 8px 24px — 24px is not --space-6=24px but an unaliased value)</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §04 — BORDER RADIUS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-radii">
+  <div class="au-section-header">
+    <span class="au-section-id">§04</span>
+    <span class="au-section-title">Border Radius</span>
+  </div>
+  <div class="au-group au-white-bg">
+    <div class="au-radius-item">
+      <div class="au-radius-box" style="border-radius:var(--radius-sm)"></div>
+      <div class="au-radius-meta"><strong>--radius-sm</strong>4px · XS/SM buttons, chips remove btn</div>
+    </div>
+    <div class="au-radius-item">
+      <div class="au-radius-box" style="border-radius:var(--radius-md)"></div>
+      <div class="au-radius-meta"><strong>--radius-md</strong>8px · MD/LG buttons, inputs, badges, toasts</div>
+    </div>
+    <div class="au-radius-item">
+      <div class="au-radius-box" style="border-radius:var(--radius-lg)"></div>
+      <div class="au-radius-meta"><strong>--radius-lg</strong>12px · XL buttons, cards, modals<br><em>alias: --radius</em></div>
+    </div>
+    <div class="au-radius-item">
+      <div class="au-radius-box" style="border-radius:var(--radius-xl)"></div>
+      <div class="au-radius-meta"><strong>--radius-xl</strong>16px · (reserved, no current component)</div>
+    </div>
+    <div class="au-radius-item">
+      <div class="au-radius-box" style="border-radius:var(--radius-full)"></div>
+      <div class="au-radius-meta"><strong>--radius-full</strong>9999px · chips, badges, search bar, seg-btn</div>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ 5-step scale well-distributed</span>
+    <span class="au-tag au-tag-ok">✓ --radius alias points to --radius-lg (consistent for card surfaces)</span>
+    <span class="au-tag au-tag-warn">⚠ --radius-xl has no assigned component — either document the use case or remove</span>
+    <span class="au-tag au-tag-warn">⚠ modal uses --radius-lg directly; card uses --radius alias — functionally same today but different code paths</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §05 — SHADOWS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-shadows">
+  <div class="au-section-header">
+    <span class="au-section-id">§05</span>
+    <span class="au-section-title">Shadows & Elevation</span>
+  </div>
+  <div class="au-group au-white-bg">
+    <div class="au-shadow-item">
+      <div class="au-shadow-box" style="box-shadow:var(--shadow-sm)"></div>
+      <div class="au-shadow-meta"><strong>--shadow-sm</strong><br>0 1px 3px rgba(28,36,56,.06)<br>chip-elevated, icon-btn</div>
+    </div>
+    <div class="au-shadow-item">
+      <div class="au-shadow-box" style="box-shadow:var(--shadow-md)"></div>
+      <div class="au-shadow-meta"><strong>--shadow-md</strong><br>0 4px 16px rgba(28,36,56,.08)<br>chip-dragged</div>
+    </div>
+    <div class="au-shadow-item">
+      <div class="au-shadow-box" style="box-shadow:var(--shadow-lg)"></div>
+      <div class="au-shadow-meta"><strong>--shadow-lg</strong><br>0 8px 32px rgba(28,36,56,.12)<br>modal, toast</div>
+    </div>
+    <div class="au-shadow-item">
+      <div class="au-shadow-box" style="box-shadow:0 0 0 4px var(--color-focus-ring)"></div>
+      <div class="au-shadow-meta"><strong>focus ring</strong><br>--color-focus-ring<br>rgba(79,128,255,.15)<br>all interactive elements</div>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ 3-level shadow scale</span>
+    <span class="au-tag au-tag-ok">✓ shadow color uses navy-tinted rgba, not pure black</span>
+    <span class="au-tag au-tag-warn">⚠ shadow values are hardcoded rgba — not theme-aware (dark mode shows same shadow intensity)</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §06 — BORDERS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-borders">
+  <div class="au-section-header">
+    <span class="au-section-id">§06</span>
+    <span class="au-section-title">Border Tokens</span>
+  </div>
+  <div class="au-group au-white-bg">
+    <div class="au-border-item">
+      <div class="au-border-box" style="border:1px solid var(--border)"></div>
+      <div class="au-border-meta"><strong>--border</strong><br>color-mix 10% on-surface<br>containers, cards, tables</div>
+    </div>
+    <div class="au-border-item">
+      <div class="au-border-box" style="border:1px solid var(--color-outline)"></div>
+      <div class="au-border-meta"><strong>--color-outline</strong><br>#9FA3AE<br>chips, icon-btn, search-bar-view</div>
+    </div>
+    <div class="au-border-item">
+      <div class="au-border-box" style="border:1px solid var(--color-outline-variant)"></div>
+      <div class="au-border-meta"><strong>--color-outline-variant</strong><br>#BFC1C8<br>disabled states</div>
+    </div>
+    <div class="au-border-item">
+      <div class="au-border-box" style="border:1px solid var(--color-error)"></div>
+      <div class="au-border-meta"><strong>--color-error</strong><br>#FD3A45<br>error inputs</div>
+    </div>
+    <div class="au-border-item">
+      <div class="au-border-box" style="border:1px solid var(--interactive)"></div>
+      <div class="au-border-meta"><strong>--interactive</strong><br>secondary-900<br>focused inputs</div>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-err">✗ --border vs --color-outline: interactive elements inconsistently split between two different border colors</span>
+    <span class="au-tag au-tag-ok">✓ --border is theme-aware via color-mix; --color-outline is static (recalibrated in dark mode override)</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §07 — BUTTONS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-buttons">
+  <div class="au-section-header">
+    <span class="au-section-id">§07</span>
+    <span class="au-section-title">Buttons</span>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Variants — Default state</div>
+    <div class="au-group">
+      <div class="au-col">
+        <div class="au-col-label">Primary</div>
+        <button class="btn-primary">Crear vacante</button>
+      </div>
+      <div class="au-col">
+        <div class="au-col-label">Secondary</div>
+        <button class="btn-secondary">Guardar borrador</button>
+      </div>
+      <div class="au-col">
+        <div class="au-col-label">Tertiary</div>
+        <button class="btn-tertiary">Cancelar</button>
+      </div>
+      <div class="au-col">
+        <div class="au-col-label">Text</div>
+        <button class="btn-text">Ver más</button>
+      </div>
+      <div class="au-col">
+        <div class="au-col-label">Ghost (alias)</div>
+        <button class="btn-ghost">btn-ghost</button>
+      </div>
+      <div class="au-col">
+        <div class="au-col-label">Icon</div>
+        <button class="icon-btn" aria-label="Ajustes">
+          <i data-lucide="settings" style="width:16px;height:16px"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Hover (simulated)</div>
+    <div class="au-group">
+      <button class="btn-primary demo-hover-primary">Primary hover</button>
+      <button class="btn-secondary demo-hover-secondary">Secondary hover</button>
+      <button class="btn-tertiary demo-hover-tertiary">Tertiary hover</button>
+      <button class="btn-text demo-hover-text">Text hover</button>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Focus (simulated)</div>
+    <div class="au-group">
+      <button class="btn-primary demo-focus">Primary focus</button>
+      <button class="btn-secondary demo-focus">Secondary focus</button>
+      <button class="btn-tertiary demo-focus">Tertiary focus</button>
+      <button class="btn-text demo-focus">Text focus</button>
+      <button class="icon-btn demo-focus" aria-label="Focus">
+        <i data-lucide="settings" style="width:16px;height:16px"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Disabled</div>
+    <div class="au-group">
+      <button class="btn-primary" disabled>Primary disabled</button>
+      <button class="btn-secondary" disabled>Secondary disabled</button>
+      <button class="btn-tertiary" disabled>Tertiary disabled</button>
+      <button class="btn-text" disabled>Text disabled</button>
+      <button class="icon-btn" disabled aria-label="Disabled">
+        <i data-lucide="settings" style="width:16px;height:16px"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Semantic Modifiers (Primary only)</div>
+    <div class="au-group">
+      <button class="btn-primary btn-danger">Eliminar</button>
+      <button class="btn-primary btn-success">Confirmar</button>
+      <button class="btn-primary btn-danger demo-hover-primary" style="background:var(--color-error-hover)">Danger hover</button>
+      <button class="btn-primary btn-success demo-hover-primary" style="background:var(--color-success-hover)">Success hover</button>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Sizes — XS / SM / MD (default) / LG / XL</div>
+    <div class="au-group" style="align-items:center">
+      <button class="btn-primary btn-xs">XS button</button>
+      <button class="btn-primary btn-sm">SM button</button>
+      <button class="btn-primary">MD button</button>
+      <button class="btn-primary btn-lg">LG button</button>
+      <button class="btn-primary btn-xl">XL button</button>
+    </div>
+    <div class="au-group" style="margin-top:8px;align-items:center">
+      <button class="btn-tertiary btn-xs">XS tertiary</button>
+      <button class="btn-tertiary btn-sm">SM tertiary</button>
+      <button class="btn-tertiary">MD tertiary</button>
+      <button class="btn-tertiary btn-lg">LG tertiary</button>
+      <button class="btn-tertiary btn-xl">XL tertiary</button>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Icon sizes</div>
+    <div class="au-group" style="align-items:center">
+      <button class="icon-btn btn-sm" aria-label="sm"><i data-lucide="settings" style="width:14px;height:14px"></i></button>
+      <button class="icon-btn" aria-label="md"><i data-lucide="settings" style="width:16px;height:16px"></i></button>
+      <button class="icon-btn btn-lg" aria-label="lg"><i data-lucide="settings" style="width:20px;height:20px"></i></button>
+      <button class="icon-btn btn-xl" aria-label="xl"><i data-lucide="settings" style="width:24px;height:24px"></i></button>
+    </div>
+  </div>
+
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ All variants use --color-* semantic tokens</span>
+    <span class="au-tag au-tag-ok">✓ Disabled state: --color-disabled / --color-on-disabled</span>
+    <span class="au-tag au-tag-ok">✓ Focus ring consistent: 2px solid --color-focus + 4px ring</span>
+    <span class="au-tag au-tag-err">✗ btn-xs: 11px hardcoded · btn-lg: 15px hardcoded · btn-xl: 16px hardcoded (not in --font-size-* scale)</span>
+    <span class="au-tag au-tag-warn">⚠ Primary fw-600 vs Tertiary fw-500 — intentional hierarchy or inconsistency?</span>
+    <span class="au-tag au-tag-warn">⚠ btn-next is an alias for Primary — documented as "wizard" but identical styles, could be removed</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §08 — BADGES
+══════════════════════════════════════ -->
+<section class="au-section" id="s-badges">
+  <div class="au-section-header">
+    <span class="au-section-id">§08</span>
+    <span class="au-section-title">Badges</span>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Status variants</div>
+    <div class="au-group">
+      <span class="badge badge-open">Abierta</span>
+      <span class="badge badge-active">Activa</span>
+      <span class="badge badge-closed">Cerrada</span>
+      <span class="badge badge-draft">Borrador</span>
+      <span class="badge badge-archived">Archivada</span>
+      <span class="badge badge-warning">Urgente</span>
+      <span class="badge badge-tertiary">Nuevo</span>
+      <span class="badge badge-info">Informativo</span>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Badge Label modifier (mono uppercase)</div>
+    <div class="au-group">
+      <span class="badge badge-info badge-label">Styles · Color</span>
+      <span class="badge badge-tertiary badge-label">Component</span>
+      <span class="badge badge-open badge-label">Foundation</span>
+      <span class="badge badge-draft badge-label">Draft</span>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Dark background check</div>
+    <div class="au-group au-dark-bg">
+      <span class="badge badge-open">Abierta</span>
+      <span class="badge badge-closed">Cerrada</span>
+      <span class="badge badge-warning">Urgente</span>
+      <span class="badge badge-draft">Borrador</span>
+      <span class="badge badge-tertiary">Nuevo</span>
+      <span class="badge badge-info">Informativo</span>
+    </div>
+  </div>
+
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ All variants use --color-*-container / --color-on-*-container pairs</span>
+    <span class="au-tag au-tag-ok">✓ badge-open and badge-active share same token pair (success) — intentional dedup</span>
+    <span class="au-tag au-tag-err">✗ .badge-label: 10.5px hardcoded — no matching token in --font-size-* scale</span>
+    <span class="au-tag au-tag-warn">⚠ badge-archived uses opacity: .75 — visual dimming via opacity rather than a dim token</span>
+    <span class="au-tag au-tag-warn">⚠ no badge-secondary variant (secondary blue range unused in badges)</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §09 — CHIPS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-chips">
+  <div class="au-section-header">
+    <span class="au-section-id">§09</span>
+    <span class="au-section-title">Chips</span>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Variants — Default / Selected / Elevated</div>
+    <div class="au-group">
+      <button class="chip">Filter chip</button>
+      <button class="chip chip-selected" aria-pressed="true">Selected</button>
+      <button class="chip chip-elevated">Elevated</button>
+      <button class="chip">
+        <span class="chip-icon"><i data-lucide="star" style="width:18px;height:18px"></i></span>
+        With icon
+      </button>
+      <span class="chip">
+        Input chip
+        <button class="chip-remove" aria-label="Quitar">✕</button>
+      </span>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Hover (simulated)</div>
+    <div class="au-group">
+      <button class="chip demo-chip-hover">Default hover</button>
+      <button class="chip chip-selected demo-chip-sel-hover">Selected hover</button>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Disabled</div>
+    <div class="au-group">
+      <button class="chip" disabled aria-disabled="true">Disabled</button>
+      <button class="chip chip-selected" disabled>Selected disabled</button>
+      <button class="chip chip-elevated" disabled>Elevated disabled</button>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Chip set (layout helper)</div>
+    <div class="au-group">
+      <div class="chip-set">
+        <button class="chip chip-selected">Diseño</button>
+        <button class="chip">Desarrollo</button>
+        <button class="chip">Producto</button>
+        <button class="chip">QA</button>
+        <button class="chip">DevOps</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ All states use semantic --color-* tokens</span>
+    <span class="au-tag au-tag-ok">✓ chip-selected uses --color-secondary-container / --color-on-secondary-container pair</span>
+    <span class="au-tag au-tag-ok">✓ Disabled uses color-mix opacity approach (MD3-compliant)</span>
+    <span class="au-tag au-tag-ok">✓ Padding asymmetry with :has() is clean and spec-compliant</span>
+    <span class="au-tag au-tag-warn">⚠ Chip border uses --color-outline; form inputs use --border — sibling interactive elements, different border tokens</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §10 — FORM INPUTS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-form">
+  <div class="au-section-header">
+    <span class="au-section-id">§10</span>
+    <span class="au-section-title">Form Inputs</span>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Text Input — states</div>
+    <div class="au-group" style="flex-direction:column;max-width:480px">
+      <div class="field-group">
+        <label class="field-label">Default</label>
+        <input class="field-input" placeholder="Escribe aquí...">
+        <div class="field-supporting">
+          <span class="field-hint">Texto de ayuda</span>
+          <span class="field-char-count">0/100</span>
+        </div>
+      </div>
+      <div class="field-group" style="border:none">
+        <label class="field-label" style="color:var(--interactive)">Focus (simulated)</label>
+        <input class="field-input" value="Texto activo" style="border-color:var(--interactive);box-shadow:0 0 0 3px var(--color-focus-ring)">
+      </div>
+      <div class="field-group is-error">
+        <label class="field-label">Error state</label>
+        <input class="field-input" value="texto inválido">
+        <div class="field-supporting">
+          <span class="field-error-msg">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Ingresa un correo válido.
+          </span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Disabled</label>
+        <input class="field-input" value="Valor deshabilitado" disabled>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Input with icons</div>
+    <div class="au-group" style="max-width:480px;flex-direction:column">
+      <div class="field-group">
+        <label class="field-label">Leading icon</label>
+        <div class="field-input-wrapper">
+          <span class="field-leading-icon"><i data-lucide="search" style="width:16px;height:16px"></i></span>
+          <input class="field-input has-leading" placeholder="Buscar...">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Trailing icon</label>
+        <div class="field-input-wrapper">
+          <input class="field-input has-trailing" placeholder="Correo electrónico">
+          <span class="field-trailing-icon"><i data-lucide="mail" style="width:16px;height:16px"></i></span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Both icons</label>
+        <div class="field-input-wrapper">
+          <span class="field-leading-icon"><i data-lucide="lock" style="width:16px;height:16px"></i></span>
+          <input class="field-input has-leading has-trailing" placeholder="Contraseña">
+          <span class="field-trailing-icon"><i data-lucide="eye" style="width:16px;height:16px"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Select</div>
+    <div class="au-group" style="max-width:480px;flex-direction:column">
+      <div class="field-group">
+        <label class="field-label">Select dropdown</label>
+        <div class="select-wrapper">
+          <select>
+            <option>Remoto</option>
+            <option>Híbrido</option>
+            <option>Presencial</option>
+          </select>
+          <span class="select-caret">▾</span>
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Select disabled</label>
+        <div class="select-wrapper">
+          <select disabled><option>Deshabilitado</option></select>
+          <span class="select-caret">▾</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Textarea</div>
+    <div class="au-group" style="max-width:480px;flex-direction:column">
+      <div class="field-group">
+        <label class="field-label">Textarea <span class="field-required">*</span></label>
+        <textarea class="field-input field-textarea" placeholder="Escribe una descripción..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Number input</div>
+    <div class="au-group" style="max-width:280px">
+      <div class="field-group" style="width:100%">
+        <label class="field-label">Vacantes</label>
+        <div class="number-input-wrapper">
+          <span class="number-value">3</span>
+          <div class="number-controls">
+            <button class="number-btn">−</button>
+            <button class="number-btn">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ Labels change color to --interactive on focus via :focus-within</span>
+    <span class="au-tag au-tag-ok">✓ Error state: label, border, ring all use --color-error</span>
+    <span class="au-tag au-tag-ok">✓ Placeholder: --text-muted · Input text: --text-primary</span>
+    <span class="au-tag au-tag-err">✗ field-input border uses --border (subtle, 10% on-surface) — chips/buttons use --color-outline (stronger, #9FA3AE) — inconsistency for interactive elements</span>
+    <span class="au-tag au-tag-warn">⚠ field-input padding: 10px 14px — 14px horizontal not on spacing scale (nearest: --space-4=16px)</span>
+    <span class="au-tag au-tag-warn">⚠ number-btn uses raw 32px width/height — could use icon-btn or be tokenized</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §11 — CARDS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-cards">
+  <div class="au-section-header">
+    <span class="au-section-id">§11</span>
+    <span class="au-section-title">Cards</span>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Card variants (padding comparison)</div>
+    <div class="au-group" style="align-items:stretch;gap:16px">
+      <div style="flex:1">
+        <div class="au-row-label" style="margin-bottom:6px">.card — 16px 20px</div>
+        <div class="card">
+          <p style="font-size:var(--font-size-body-md);color:var(--text-primary)">Contenido básico de tarjeta. Padding: <code style="font-family:var(--font-mono);font-size:11px">16px 20px</code></p>
+        </div>
+      </div>
+      <div style="flex:1">
+        <div class="au-row-label" style="margin-bottom:6px">.stat-card — 20px</div>
+        <div class="stat-card">
+          <div class="stat-label">Vacantes abiertas</div>
+          <div class="stat-value">24</div>
+          <div class="stat-change" style="color:var(--green)">+12% este mes</div>
+        </div>
+      </div>
+      <div style="flex:1">
+        <div class="au-row-label" style="margin-bottom:6px">.form-card — 24px 32px</div>
+        <div class="form-card">
+          <div class="form-card-title">Título de sección</div>
+          <p class="form-card-desc">Descripción de la sección del formulario.</p>
+          <div class="field-group" style="margin-bottom:0">
+            <label class="field-label">Campo</label>
+            <input class="field-input" placeholder="Valor">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="au-annotations">
+      <span class="au-tag au-tag-warn">⚠ .card = 16/20px · .stat-card = 20px · .form-card = 24/32px · .modal-body = 20/24px — no consistent card padding rule</span>
+      <span class="au-tag au-tag-ok">✓ All share --card-bg, --border, --radius tokens</span>
+      <span class="au-tag au-tag-warn">⚠ .card uses --radius (alias); .stat-card uses --radius (alias); .form-card uses --radius (alias) — consistent alias use ✓ but .modal uses --radius-lg directly</span>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Placeholder Panel</div>
+    <div class="au-group" style="max-width:480px">
+      <div class="placeholder-panel" style="width:100%">
+        <div class="placeholder-icon">📋</div>
+        <p>Selecciona una vacante para ver los detalles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §12 — STAT CARDS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-statcards">
+  <div class="au-section-header">
+    <span class="au-section-id">§12</span>
+    <span class="au-section-title">Stat Cards</span>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Vacantes abiertas</div>
+      <div class="stat-value">24</div>
+      <div class="stat-change" style="color:var(--green)">+12% este mes</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Candidatos activos</div>
+      <div class="stat-value">186</div>
+      <div class="stat-change" style="color:var(--red)">−3% esta semana</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Tiempo medio (días)</div>
+      <div class="stat-value">18</div>
+      <div class="stat-change" style="color:var(--text-muted)">Sin cambios</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Entrevistas hoy</div>
+      <div class="stat-value">7</div>
+      <div class="stat-change" style="color:var(--yellow)">⚠ Alta demanda</div>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-warn">⚠ .stat-change has no built-in color variants — requires inline style="color: var(--green/red/yellow)" — anti-pattern</span>
+    <span class="au-tag au-tag-ok">✓ .stat-value uses --font-heading + --font-size-display correctly</span>
+    <span class="au-tag au-tag-ok">✓ .stat-label uses --font-size-body-sm + --text-muted correctly</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §13 — TABLE
+══════════════════════════════════════ -->
+<section class="au-section" id="s-table">
+  <div class="au-section-header">
+    <span class="au-section-id">§13</span>
+    <span class="au-section-title">Table</span>
+  </div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Departamento</th>
+        <th>Fecha</th>
+        <th>Salario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="clickable" tabindex="0">
+        <td>Senior Product Designer</td>
+        <td><span class="badge badge-open">Abierta</span></td>
+        <td>Producto</td>
+        <td>12 Jun 2026</td>
+        <td>$4.500–$6.000</td>
+      </tr>
+      <tr class="clickable" tabindex="0">
+        <td>Frontend Engineer</td>
+        <td><span class="badge badge-active">Activa</span></td>
+        <td>Ingeniería</td>
+        <td>8 Jun 2026</td>
+        <td>$5.000–$7.000</td>
+      </tr>
+      <tr class="clickable" tabindex="0">
+        <td>QA Analyst</td>
+        <td><span class="badge badge-draft">Borrador</span></td>
+        <td>QA</td>
+        <td>5 Jun 2026</td>
+        <td>$3.200–$4.200</td>
+      </tr>
+      <tr>
+        <td>Tech Lead</td>
+        <td><span class="badge badge-closed">Cerrada</span></td>
+        <td>Ingeniería</td>
+        <td>1 Jun 2026</td>
+        <td>$6.500–$9.000</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ Header: --color-surface-variant bg, --text-muted color, overline font-size</span>
+    <span class="au-tag au-tag-ok">✓ Cells: --text-primary, --font-size-body-md</span>
+    <span class="au-tag au-tag-ok">✓ Row hover: --color-surface-variant (consistent with other hover surfaces)</span>
+    <span class="au-tag au-tag-warn">⚠ Table uses --radius on outer border-radius but overflow:hidden — radius is clipped, not actually rendered on cells</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §14 — TABS
+══════════════════════════════════════ -->
+<section class="au-section" id="s-tabs">
+  <div class="au-section-header">
+    <span class="au-section-id">§14</span>
+    <span class="au-section-title">Tabs</span>
+  </div>
+  <div class="au-group au-white-bg" style="flex-direction:column;gap:0;padding:0">
+    <div class="tabs" style="margin-bottom:0;padding:0 20px">
+      <div class="tab active">General</div>
+      <div class="tab">Requisitos</div>
+      <div class="tab">Proceso</div>
+      <div class="tab">Entrevistas</div>
+    </div>
+    <div style="padding:20px">
+      <p style="font-size:var(--font-size-body-md);color:var(--text-secondary)">Contenido de la tab activa. El panel se activa con .tab-panel.active</p>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ Active: --interactive color + 2px border-bottom underline</span>
+    <span class="au-tag au-tag-ok">✓ Inactive: --text-muted · Hover: --text-secondary</span>
+    <span class="au-tag au-tag-warn">⚠ .tabs has margin-bottom: 28px hardcoded — not using --space-* token</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §15 — MODAL
+══════════════════════════════════════ -->
+<section class="au-section" id="s-modal">
+  <div class="au-section-header">
+    <span class="au-section-id">§15</span>
+    <span class="au-section-title">Modal</span>
+  </div>
+  <div class="modal-demo">
+    <div class="modal-overlay" style="position:relative;inset:unset;background:color-mix(in srgb,#000 12%,transparent);border-radius:var(--radius-lg);padding:24px">
+      <div class="modal">
+        <div class="modal-header">
+          <div class="modal-title">Confirmar eliminación</div>
+          <button class="modal-close" aria-label="Cerrar">✕</button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size:var(--font-size-body-md);color:var(--text-secondary);line-height:1.6">¿Estás seguro de que deseas eliminar esta vacante? Esta acción no se puede deshacer.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-tertiary">Cancelar</button>
+          <button class="btn-primary btn-danger">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ Modal uses --card-bg, --shadow-lg, --radius-lg</span>
+    <span class="au-tag au-tag-ok">✓ Header/footer use --border dividers</span>
+    <span class="au-tag au-tag-warn">⚠ .modal-close:hover uses var(--bg) — icon-btn:hover uses var(--color-surface-variant) — same pattern, different token</span>
+    <span class="au-tag au-tag-warn">⚠ modal-footer gap: 10px — not on spacing scale (nearest: --space-2=8px or --space-3=12px)</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §16 — TOAST
+══════════════════════════════════════ -->
+<section class="au-section" id="s-toast">
+  <div class="au-section-header">
+    <span class="au-section-id">§16</span>
+    <span class="au-section-title">Toast</span>
+  </div>
+  <div class="au-group" style="flex-direction:column;gap:8px">
+    <div class="toast toast-success" style="position:relative;animation:none;min-width:unset;max-width:unset">
+      <span class="toast-icon" style="color:var(--green)">
+        <i data-lucide="check-circle" style="width:16px;height:16px"></i>
+      </span>
+      <span class="toast-message">Vacante creada exitosamente</span>
+      <button class="toast-close">✕</button>
+    </div>
+    <div class="toast toast-error" style="position:relative;animation:none;min-width:unset;max-width:unset">
+      <span class="toast-icon" style="color:var(--red)">
+        <i data-lucide="x-circle" style="width:16px;height:16px"></i>
+      </span>
+      <span class="toast-message">Error al guardar los cambios. Intenta de nuevo.</span>
+      <button class="toast-close">✕</button>
+    </div>
+    <div class="toast toast-info" style="position:relative;animation:none;min-width:unset;max-width:unset">
+      <span class="toast-icon" style="color:var(--interactive)">
+        <i data-lucide="info" style="width:16px;height:16px"></i>
+      </span>
+      <span class="toast-message">La sesión expirará en 5 minutos</span>
+      <button class="toast-close">✕</button>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ Left border accent uses --green, --red, --interactive semantic aliases</span>
+    <span class="au-tag au-tag-ok">✓ Background: --card-bg; border: --border; shadow: --shadow-lg</span>
+    <span class="au-tag au-tag-warn">⚠ Toast icon color requires inline style — no built-in .toast-icon-success/error/info class</span>
+    <span class="au-tag au-tag-warn">⚠ .toast-close:hover uses var(--bg) — same inconsistency as modal-close (vs --color-surface-variant)</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §17 — SKELETON
+══════════════════════════════════════ -->
+<section class="au-section" id="s-skeleton">
+  <div class="au-section-header">
+    <span class="au-section-id">§17</span>
+    <span class="au-section-title">Skeleton / Loading</span>
+  </div>
+  <div class="au-group" style="flex-direction:column;gap:0;max-width:400px">
+    <div class="skeleton skeleton-title"></div>
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text" style="width:80%"></div>
+    <div class="skeleton skeleton-text" style="width:65%"></div>
+    <div style="height:12px"></div>
+    <div class="skeleton skeleton-card"></div>
+    <div class="skeleton skeleton-card"></div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ Shimmer uses --color-surface-variant and --color-surface-container-highest</span>
+    <span class="au-tag au-tag-ok">✓ border-radius: --radius-md</span>
+    <span class="au-tag au-tag-warn">⚠ skeleton-title: 22px height hardcoded · skeleton-text: 14px hardcoded — could reference --font-size-* tokens</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §18 — EMPTY STATE
+══════════════════════════════════════ -->
+<section class="au-section" id="s-emptystate">
+  <div class="au-section-header">
+    <span class="au-section-id">§18</span>
+    <span class="au-section-title">Empty State</span>
+  </div>
+  <div class="au-group au-white-bg">
+    <div class="empty-state" style="width:100%">
+      <div class="empty-state-icon">📭</div>
+      <div class="empty-state-title">No hay vacantes</div>
+      <p class="empty-state-desc">Crea tu primera vacante para empezar a recibir candidatos.</p>
+      <button class="btn-primary">+ Nueva vacante</button>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ title: --font-heading, --font-size-heading-md, --text-secondary</span>
+    <span class="au-tag au-tag-ok">✓ desc: --font-size-body-lg, --text-muted</span>
+    <span class="au-tag au-tag-warn">⚠ .empty-state-icon: font-size: 48px hardcoded — no icon size token in the scale</span>
+    <span class="au-tag au-tag-warn">⚠ padding: 48px 24px — 48px = --space-12 ✓ but not referenced by name</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §19 — SEARCH
+══════════════════════════════════════ -->
+<section class="au-section" id="s-search">
+  <div class="au-section-header">
+    <span class="au-section-id">§19</span>
+    <span class="au-section-title">Search</span>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Search Bar (56px pill)</div>
+    <div class="au-group au-dark-bg">
+      <div class="search-bar" style="max-width:480px">
+        <span class="search-bar-icon">
+          <i data-lucide="search" style="width:24px;height:24px"></i>
+        </span>
+        <input class="search-bar-input" type="search" placeholder="Buscar vacantes...">
+        <span class="search-bar-avatar">AB</span>
+      </div>
+    </div>
+    <div class="au-group" style="margin-top:8px">
+      <div class="au-col">
+        <div class="au-col-label">Default</div>
+        <div class="search-bar" style="max-width:360px">
+          <span class="search-bar-icon"><i data-lucide="search" style="width:24px;height:24px"></i></span>
+          <input class="search-bar-input" type="search" placeholder="Buscar...">
+        </div>
+      </div>
+      <div class="au-col">
+        <div class="au-col-label">Focus (simulated)</div>
+        <div class="search-bar" style="max-width:360px;background:color-mix(in srgb,var(--color-on-surface) 12%,var(--color-surface-container-high))">
+          <span class="search-bar-icon"><i data-lucide="search" style="width:24px;height:24px"></i></span>
+          <input class="search-bar-input" type="search" value="Diseñador UX" style="color:var(--color-on-surface)">
+        </div>
+      </div>
+      <div class="au-col">
+        <div class="au-col-label">Disabled</div>
+        <div class="search-bar" aria-disabled="true" style="max-width:360px">
+          <span class="search-bar-icon"><i data-lucide="search" style="width:24px;height:24px"></i></span>
+          <input class="search-bar-input" type="search" placeholder="Deshabilitado" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">Search View (docked)</div>
+    <div class="au-group" style="max-width:480px">
+      <div class="search-view" style="width:100%">
+        <div class="search-view-header">
+          <button class="search-view-back">
+            <i data-lucide="arrow-left" style="width:24px;height:24px"></i>
+          </button>
+          <input class="search-bar-input" type="search" placeholder="Buscar candidatos...">
+        </div>
+        <ul class="search-view-results">
+          <li class="search-view-result">
+            <span class="search-view-result-icon"><i data-lucide="clock" style="width:24px;height:24px"></i></span>
+            Diseñador UX Senior
+          </li>
+          <li class="search-view-result">
+            <span class="search-view-result-icon"><i data-lucide="clock" style="width:24px;height:24px"></i></span>
+            Frontend Engineer React
+          </li>
+          <li class="search-view-result">
+            <span class="search-view-result-icon"><i data-lucide="search" style="width:24px;height:24px"></i></span>
+            QA Analyst
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="au-row">
+    <div class="au-row-label">search-bar (search.css) vs search-field (toolbar.css) — comparison</div>
+    <div class="au-group" style="align-items:flex-start;gap:32px;flex-wrap:wrap">
+
+      <!-- search-bar -->
+      <div style="flex:1;min-width:280px">
+        <div class="au-col-label" style="margin-bottom:10px">search-bar — standalone (search.css)</div>
+        <div class="search-bar" style="max-width:360px">
+          <span class="search-bar-icon"><i data-lucide="search" style="width:24px;height:24px"></i></span>
+          <input class="search-bar-input" type="search" placeholder="Buscar...">
+        </div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:4px">
+          <span class="au-tag au-tag-token">height: 56px fixed</span>
+          <span class="au-tag au-tag-token">border-radius: --radius-full (pill)</span>
+          <span class="au-tag au-tag-token">background: --color-surface-container-high</span>
+          <span class="au-tag au-tag-token">border: none</span>
+          <span class="au-tag au-tag-token">icon: 24px</span>
+          <span class="au-tag au-tag-token">hover: color-mix bg (no border change)</span>
+          <span class="au-tag au-tag-token">focus: color-mix bg darker</span>
+        </div>
+      </div>
+
+      <!-- search-field -->
+      <div style="flex:1;min-width:280px">
+        <div class="au-col-label" style="margin-bottom:10px">search-field — in toolbar (toolbar.css)</div>
+        <div class="search-field" style="max-width:360px">
+          <i data-lucide="search" style="width:15px;height:15px"></i>
+          <input type="text" placeholder="Buscar...">
+        </div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:4px">
+          <span class="au-tag au-tag-token">height: auto (~36px via padding)</span>
+          <span class="au-tag au-tag-token">border-radius: --radius-md (8px rectangular)</span>
+          <span class="au-tag au-tag-token">background: --card-bg</span>
+          <span class="au-tag au-tag-token">border: 1px solid --border</span>
+          <span class="au-tag au-tag-token">icon: 15px</span>
+          <span class="au-tag au-tag-token">hover: border-color → --color-outline-variant (lighter!)</span>
+          <span class="au-tag au-tag-token">focus-within: border-color → --color-outline-variant</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- diff table -->
+    <div style="margin-top:16px;overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:11px">
+        <thead>
+          <tr style="background:var(--color-surface-variant)">
+            <th style="text-align:left;padding:6px 12px;color:var(--text-muted);font-weight:500;border:1px solid var(--border)">Property</th>
+            <th style="text-align:left;padding:6px 12px;color:var(--text-muted);font-weight:500;border:1px solid var(--border)">.search-bar</th>
+            <th style="text-align:left;padding:6px 12px;color:var(--text-muted);font-weight:500;border:1px solid var(--border)">.search-field</th>
+            <th style="text-align:left;padding:6px 12px;color:var(--text-muted);font-weight:500;border:1px solid var(--border)">Delta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-secondary)">Height</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">56px fixed</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">~36px (auto)</td>
+            <td style="padding:5px 12px;border:1px solid var(--border)"><span class="au-tag au-tag-warn">20px taller</span></td>
+          </tr>
+          <tr style="background:var(--color-surface-container-lowest)">
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-secondary)">Shape</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">--radius-full (pill)</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">--radius-md (rect)</td>
+            <td style="padding:5px 12px;border:1px solid var(--border)"><span class="au-tag au-tag-warn">different shape</span></td>
+          </tr>
+          <tr>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-secondary)">Background</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">--color-surface-container-high</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">--card-bg</td>
+            <td style="padding:5px 12px;border:1px solid var(--border)"><span class="au-tag au-tag-warn">different surface token</span></td>
+          </tr>
+          <tr style="background:var(--color-surface-container-lowest)">
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-secondary)">Border</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">none</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">1px solid --border</td>
+            <td style="padding:5px 12px;border:1px solid var(--border)"><span class="au-tag au-tag-warn">one has border, one doesn't</span></td>
+          </tr>
+          <tr>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-secondary)">Icon size</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">24px</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">15px</td>
+            <td style="padding:5px 12px;border:1px solid var(--border)"><span class="au-tag au-tag-warn">9px diff — DS spec: 18px chip, 20px nav, 24px search bar</span></td>
+          </tr>
+          <tr style="background:var(--color-surface-container-lowest)">
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-secondary)">Hover behavior</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">bg darkens (color-mix 8%)</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">border → --color-outline-variant</td>
+            <td style="padding:5px 12px;border:1px solid var(--border)"><span class="au-tag au-tag-err">opposite hover strategy (bg vs border)</span></td>
+          </tr>
+          <tr>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-secondary)">Focus</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">bg darkens (color-mix 12%)</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">border → --color-outline-variant</td>
+            <td style="padding:5px 12px;border:1px solid var(--border)"><span class="au-tag au-tag-err">no --interactive border, no focus ring on search-field</span></td>
+          </tr>
+          <tr style="background:var(--color-surface-container-lowest)">
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-secondary)">Focus ring</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">none (bg change only)</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">none</td>
+            <td style="padding:5px 12px;border:1px solid var(--border)"><span class="au-tag au-tag-warn">neither shows WCAG focus ring — unlike field-input:focus</span></td>
+          </tr>
+          <tr>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-secondary)">Hover border direction</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">N/A (no border)</td>
+            <td style="padding:5px 12px;border:1px solid var(--border);color:var(--text-primary)">→ --color-outline-variant (LIGHTER than default --border)</td>
+            <td style="padding:5px 12px;border:1px solid var(--border)"><span class="au-tag au-tag-err">hover makes border lighter, not darker — inverted from field-input hover</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ search-bar: --color-surface-container-high bg, pill radius (--radius-full), 56px height</span>
+    <span class="au-tag au-tag-ok">✓ search-bar hover/focus: color-mix on-surface approach (consistent with chip pattern)</span>
+    <span class="au-tag au-tag-ok">✓ search-bar disabled: color-mix opacity (consistent with chip disabled)</span>
+    <span class="au-tag au-tag-ok">✓ Avatar: --color-primary-container / --color-on-primary-container</span>
+    <span class="au-tag au-tag-warn">⚠ search-view header divider: --color-outline (not --border) — different from card/table dividers</span>
+    <span class="au-tag au-tag-err">✗ search-field hover darkens border to --color-outline-variant, which is LIGHTER than --border default — hover goes in the wrong visual direction</span>
+    <span class="au-tag au-tag-err">✗ search-field focus uses --color-outline-variant, not --interactive — field-input:focus correctly uses --interactive + box-shadow; search-field doesn't follow the same pattern</span>
+    <span class="au-tag au-tag-warn">⚠ search-field icon: 15px — DS icon spec says 18px (chips/inputs), 20px (nav), 24px (search bars) — 15px is off-spec</span>
+    <span class="au-tag au-tag-warn">⚠ Two search components live in different CSS files (search.css vs toolbar.css) — should the search-field be documented as a sub-component of toolbar, not an independent search pattern?</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §20 — TOOLBAR
+══════════════════════════════════════ -->
+<section class="au-section" id="s-toolbar">
+  <div class="au-section-header">
+    <span class="au-section-id">§20</span>
+    <span class="au-section-title">Toolbar</span>
+  </div>
+  <div class="au-group au-white-bg" style="flex-direction:column;gap:0;padding:16px">
+    <div class="toolbar">
+      <div class="search-field">
+        <i data-lucide="search" style="width:15px;height:15px"></i>
+        <input type="text" placeholder="Buscar vacantes...">
+      </div>
+      <button class="toolbar-btn">
+        <i data-lucide="filter" style="width:15px;height:15px"></i>
+        Filtros
+      </button>
+      <button class="toolbar-btn">
+        <i data-lucide="arrow-up-down" style="width:15px;height:15px"></i>
+        Ordenar
+      </button>
+      <button class="btn-primary btn-sm">+ Nueva</button>
+    </div>
+    <div class="result-count">Mostrando <strong>24</strong> vacantes</div>
+    <table class="data-table">
+      <thead><tr><th>Nombre</th><th>Estado</th><th>Fecha</th></tr></thead>
+      <tbody>
+        <tr class="clickable"><td>Senior Designer</td><td><span class="badge badge-open">Abierta</span></td><td>12 Jun</td></tr>
+        <tr class="clickable"><td>Frontend Dev</td><td><span class="badge badge-active">Activa</span></td><td>8 Jun</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-warn">⚠ search-field is a completely different component from search-bar — different shape, height, bg, border, icon size, and hover strategy. See §19 for the full diff.</span>
+    <span class="au-tag au-tag-err">✗ search-field hover: border → --color-outline-variant (LIGHTER than default --border) — hover makes the field less visible, not more</span>
+    <span class="au-tag au-tag-err">✗ search-field focus-within: also --color-outline-variant, no --interactive border, no box-shadow ring — breaks the focus pattern established by field-input</span>
+    <span class="au-tag au-tag-warn">⚠ search-field icon: 15px — spec says 18px (chips), 20px (nav), 24px (search bar) — 15px is off-spec</span>
+    <span class="au-tag au-tag-warn">⚠ .toolbar-btn font-weight: 400 — every other interactive control uses 500 or 600</span>
+    <span class="au-tag au-tag-warn">⚠ .toolbar-btn border uses --border (tonal, very subtle) — chips and btn-tertiary use --color-outline (stronger, #9FA3AE)</span>
+    <span class="au-tag au-tag-warn">⚠ .toolbar-btn:hover uses var(--bg) — btn-tertiary:hover uses --color-surface-variant — same visual intent, different tokens</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §21 — PAGE HEADER
+══════════════════════════════════════ -->
+<section class="au-section" id="s-pageheader">
+  <div class="au-section-header">
+    <span class="au-section-id">§21</span>
+    <span class="au-section-title">Page Header</span>
+  </div>
+  <div class="au-group au-white-bg" style="flex-direction:column;padding:24px">
+    <div class="page-header">
+      <h1 class="page-title">Vacantes</h1>
+      <div class="header-actions">
+        <button class="btn-tertiary">Exportar</button>
+        <button class="btn-primary">+ Nueva vacante</button>
+      </div>
+    </div>
+    <div class="au-subsep"></div>
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Candidatos</h1>
+        <p style="font-size:var(--font-size-body-md);color:var(--text-muted);margin-top:2px">186 candidatos activos</p>
+      </div>
+      <div class="header-actions">
+        <button class="icon-btn" aria-label="Buscar"><i data-lucide="search" style="width:16px;height:16px"></i></button>
+        <button class="btn-primary">Agregar candidato</button>
+      </div>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ .page-title: --font-heading, --font-size-heading-lg (22px), fw-600, -0.3px letter-spacing</span>
+    <span class="au-tag au-tag-ok">✓ .header-actions: flex, gap: 10px</span>
+    <span class="au-tag au-tag-warn">⚠ margin-bottom: 24px hardcoded — could reference --space-6</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §22 — BACK LINK
+══════════════════════════════════════ -->
+<section class="au-section" id="s-backlink">
+  <div class="au-section-header">
+    <span class="au-section-id">§22</span>
+    <span class="au-section-title">Back Link</span>
+  </div>
+  <div class="au-group au-white-bg" style="flex-direction:column;gap:8px">
+    <button class="back-link">
+      <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+      Volver a vacantes
+    </button>
+    <div class="au-row-label" style="margin:0">+ Page title context:</div>
+    <div>
+      <button class="back-link">
+        <i data-lucide="arrow-left" style="width:16px;height:16px"></i>
+        Volver
+      </button>
+      <h1 class="page-title">Senior Product Designer</h1>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ color: --text-secondary · hover: --text-primary</span>
+    <span class="au-tag au-tag-ok">✓ font-size: --font-size-body-md · gap: 6px</span>
+    <span class="au-tag au-tag-ok">✓ focus-visible: consistent 2px + 4px ring pattern</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §23 — SEGMENTED BUTTON (CRITICAL)
+══════════════════════════════════════ -->
+<section class="au-section" id="s-segmented">
+  <div class="au-section-header">
+    <span class="au-section-id">§23</span>
+    <span class="au-section-title">Segmented Button</span>
+    <div class="au-section-flags">
+      <span class="au-tag au-tag-err">✗ critical</span>
+    </div>
+  </div>
+
+  <div class="au-group" style="flex-direction:column;gap:16px">
+    <div class="au-row-label" style="margin:0">Rendered (broken — undefined --ds-* tokens):</div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+      <div class="seg-btn-group" role="group" aria-label="Vista">
+        <button class="seg-btn selected" aria-selected="true">Lista</button>
+        <button class="seg-btn" aria-selected="false">Cuadrícula</button>
+        <button class="seg-btn" aria-selected="false">Mapa</button>
+      </div>
+      <div class="seg-btn-group" role="group" aria-label="Período">
+        <button class="seg-btn selected" aria-selected="true">Día</button>
+        <button class="seg-btn" aria-selected="false">Semana</button>
+        <button class="seg-btn" aria-selected="false">Mes</button>
+      </div>
+      <div class="seg-btn-group seg-btn-group-sm" role="group" aria-label="Tamaño SM">
+        <button class="seg-btn selected" aria-selected="true">SM</button>
+        <button class="seg-btn">MD</button>
+        <button class="seg-btn">LG</button>
+      </div>
+    </div>
+    <div class="au-row-label" style="margin:0">Tokens referenced in segmented-button.css that ARE NOT defined in variables.css:</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="au-tag au-tag-err">--ds-card (undefined)</span>
+      <span class="au-tag au-tag-err">--ds-card-border (undefined)</span>
+      <span class="au-tag au-tag-err">--ds-text-1 (undefined)</span>
+      <span class="au-tag au-tag-err">--ds-text-2 (undefined)</span>
+      <span class="au-tag au-tag-err">--ds-accent (undefined)</span>
+      <span class="au-tag au-tag-err">--ds-accent-bg (undefined)</span>
+    </div>
+    <div class="au-row-label" style="margin:0">Suggested token mapping:</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <span class="au-tag au-tag-token">--ds-card → --card-bg</span>
+      <span class="au-tag au-tag-token">--ds-card-border → --border</span>
+      <span class="au-tag au-tag-token">--ds-text-1 → --text-primary</span>
+      <span class="au-tag au-tag-token">--ds-text-2 → --text-secondary</span>
+      <span class="au-tag au-tag-token">--ds-accent → --interactive</span>
+      <span class="au-tag au-tag-token">--ds-accent-bg → --interactive-light</span>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-err">✗ Component uses a --ds-* namespace that doesn't exist in variables.css — component is visually broken</span>
+    <span class="au-tag au-tag-ok">✓ Focus, active, disabled states correctly use --color-focus and --color-on-disabled (real tokens)</span>
+    <span class="au-tag au-tag-ok">✓ Component architecture (padding, radius, transition) is sound — only token names need fixing</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §24 — DESCRIPTION SECTION
+══════════════════════════════════════ -->
+<section class="au-section" id="s-description">
+  <div class="au-section-header">
+    <span class="au-section-id">§24</span>
+    <span class="au-section-title">Description Section</span>
+  </div>
+  <div class="au-group" style="max-width:540px;flex-direction:column">
+    <div class="desc-section">
+      <div class="desc-section-header">
+        <input class="desc-title-input" value="Responsabilidades">
+        <button class="desc-delete-btn">✕</button>
+      </div>
+      <div class="desc-editor" contenteditable="false" data-placeholder="Escribe aquí...">
+        Gestioná el diseño de producto end-to-end, desde research hasta entrega final.
+      </div>
+    </div>
+    <div class="desc-section">
+      <div class="desc-section-header">
+        <input class="desc-title-input" value="Requisitos" placeholder="Título de sección">
+        <button class="desc-delete-btn" style="opacity:1;color:var(--text-muted)">✕</button>
+      </div>
+      <div class="desc-editor" data-placeholder="Escribe aquí..." style="min-height:40px;color:var(--text-muted)">
+      </div>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ Border, background, text all via tokens</span>
+    <span class="au-tag au-tag-warn">⚠ desc-editor:focus uses inset box-shadow 2px --color-focus-ring — different pattern than field-input:focus (border-color change + 3px exterior ring)</span>
+    <span class="au-tag au-tag-warn">⚠ desc-delete-btn:hover uses --red-light / --red directly — not the container pattern (--color-error-container / --color-on-error-container)</span>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════
+     §25 — PLACEHOLDER PANEL
+══════════════════════════════════════ -->
+<section class="au-section" id="s-placeholder">
+  <div class="au-section-header">
+    <span class="au-section-id">§25</span>
+    <span class="au-section-title">Placeholder Panel</span>
+  </div>
+  <div class="au-group" style="max-width:540px">
+    <div class="placeholder-panel" style="width:100%">
+      <div class="placeholder-icon">📋</div>
+      <p>Selecciona una vacante para ver los detalles.</p>
+    </div>
+  </div>
+  <div class="au-annotations">
+    <span class="au-tag au-tag-ok">✓ Uses --card-bg, --border, --radius, --text-muted, --font-size-body-lg</span>
+    <span class="au-tag au-tag-warn">⚠ padding: 48px 32px — inconsistent with .card (16px 20px) and other containers despite same visual role</span>
+    <span class="au-tag au-tag-warn">⚠ .placeholder-icon: font-size: 32px hardcoded — no icon size token</span>
+  </div>
+</section>
+
+</main>
+
+<script>
+lucide.createIcons();
+</script>
+</body>
+</html>

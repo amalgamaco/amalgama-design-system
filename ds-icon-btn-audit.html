@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditoría: Search Icon Buttons — Embassy DS</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-900: #01164D;
+      --secondary-200: #CAD9FF;
+      --secondary-900: #4F80FF;
+      --secondary-925: #3A5BB0;
+      --neutral-10: #FAFBFC;
+      --neutral-50: #EAEBED;
+      --neutral-100: #BFC1C8;
+      --neutral-200: #9FA3AE;
+      --neutral-300: #747989;
+      --neutral-400: #474D61;
+      --neutral-500: #353A4A;
+      --neutral-600: #282C39;
+      --neutral-700: #1C202C;
+      --neutral-800: #13161F;
+      --neutral-900: #0A0C12;
+
+      --color-primary: var(--primary-900);
+      --color-secondary: var(--secondary-900);
+      --color-secondary-container: var(--secondary-200);
+      --color-on-secondary-container: var(--primary-900);
+      --color-surface-container: #FFFFFF;
+      --color-surface-container-high: var(--neutral-50);
+      --color-surface-container-highest: var(--neutral-100);
+      --color-surface-variant: var(--neutral-50);
+      --color-on-surface: var(--neutral-900);
+      --color-on-surface-variant: var(--neutral-400);
+      --color-outline: var(--neutral-200);
+      --color-outline-variant: var(--neutral-100);
+      --color-disabled: var(--neutral-100);
+      --color-on-disabled: var(--neutral-300);
+      --color-focus: var(--secondary-900);
+      --color-focus-ring: rgba(79,128,255,.15);
+      --border: color-mix(in srgb, var(--color-on-surface) 10%, transparent);
+
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Epilogue', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+
+      --text-primary: var(--primary-900);
+      --text-secondary: var(--neutral-500);
+
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+      --space-5: 20px; --space-6: 24px; --space-8: 32px;
+      --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px;
+      --radius-full: 9999px;
+      --duration-fast: 120ms;
+      --ease-default: cubic-bezier(.4,0,.2,1);
+
+      --shadow-sm: 0 1px 3px rgba(28,36,56,.06);
+      --shadow-md: 0 4px 16px rgba(28,36,56,.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--neutral-10);
+      color: var(--text-primary);
+      padding: 48px 40px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ─── Typography ─── */
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 24px; font-weight: 700;
+      letter-spacing: -0.4px;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-size: 14px; color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 16px; font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+    }
+    h3 {
+      font-size: 13px; font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    p { font-size: 13.5px; line-height: 1.6; color: var(--text-secondary); }
+    code {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      background: var(--neutral-100);
+      padding: 2px 5px;
+      border-radius: var(--radius-sm);
+      color: var(--neutral-500);
+    }
+
+    /* ─── Layout ─── */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    /* ─── Status badges ─── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 11.5px; font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-ok    { background: #E4F8EC; color: #006D2C; }
+    .badge-warn  { background: #FFF2DF; color: #FC7400; }
+    .badge-error { background: #FFEBF0; color: #BF0B29; }
+    .badge-gap   { background: var(--neutral-100); color: var(--neutral-500); }
+
+    /* ─── Audit table ─── */
+    .audit-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: white;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-outline-variant);
+    }
+    .audit-table th {
+      background: var(--neutral-50);
+      font-weight: 600; font-size: 11px;
+      letter-spacing: .5px; text-transform: uppercase;
+      color: var(--text-secondary);
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--color-outline-variant);
+    }
+    .audit-table td {
+      padding: 10px 14px;
+      vertical-align: top;
+      border-bottom: 1px solid var(--color-outline-variant);
+      line-height: 1.5;
+    }
+    .audit-table tr:last-child td { border-bottom: none; }
+    .audit-table tr:hover td { background: var(--neutral-10); }
+    .prop-col { font-family: var(--font-mono); font-size: 11.5px; color: var(--neutral-500); }
+    .val-col { font-family: var(--font-mono); font-size: 11.5px; color: var(--color-primary); }
+    .note-col { font-size: 12.5px; color: var(--text-secondary); }
+
+    /* ─── State demo grid ─── */
+    .states-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0;
+      background: white;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-outline-variant);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .state-cell {
+      padding: 20px 12px 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      border-right: 1px solid var(--color-outline-variant);
+    }
+    .state-cell:last-child { border-right: none; }
+    .state-label {
+      font-size: 11px; font-weight: 600; letter-spacing: .4px;
+      text-transform: uppercase; color: var(--text-secondary);
+      text-align: center;
+    }
+
+    /* search-icon-btn faithful replica */
+    .sib {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--color-surface-container-high);
+      border: 1px solid var(--border);
+      color: var(--color-on-surface-variant);
+      cursor: pointer; padding: 0;
+      transition: background var(--duration-fast) var(--ease-default),
+                  border-color var(--duration-fast) var(--ease-default),
+                  color var(--duration-fast) var(--ease-default);
+      flex-shrink: 0;
+    }
+    .sib svg { width: 20px; height: 20px; }
+
+    /* States */
+    .sib-hover {
+      background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface-container-high));
+      border-color: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
+      color: var(--color-on-surface);
+    }
+    .sib-focus {
+      outline: 2px solid var(--color-focus);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 4px var(--color-focus-ring);
+    }
+    .sib-pressed {
+      /* PROPOSED: container-highest step, consistent with icon-btn:active */
+      background: var(--color-surface-container-highest);
+      color: var(--color-on-surface);
+    }
+    .sib-selected {
+      background: var(--color-secondary-container);
+      border-color: var(--color-secondary);
+      color: var(--color-on-secondary-container);
+    }
+    .sib-disabled {
+      background: transparent;
+      border-color: var(--color-outline-variant);
+      color: var(--color-on-disabled);
+      cursor: not-allowed;
+      opacity: 1;
+    }
+
+    /* dark state cell */
+    .state-cell-dark {
+      background: var(--neutral-700);
+    }
+    .state-cell-dark .state-label { color: var(--neutral-300); }
+
+    /* ─── Issues / findings ─── */
+    .finding-list { display: flex; flex-direction: column; gap: 12px; }
+    .finding {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 10px;
+      padding: 14px 16px;
+      background: white;
+      border-radius: var(--radius-md);
+      border-left: 3px solid transparent;
+      box-shadow: var(--shadow-sm);
+      align-items: start;
+    }
+    .finding-error  { border-left-color: #EE3043; }
+    .finding-warn   { border-left-color: #FFB249; }
+    .finding-ok     { border-left-color: #00C164; }
+    .finding-gap    { border-left-color: var(--neutral-200); }
+
+    .finding-icon {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0;
+    }
+    .fi-error  { background: #FFEBF0; color: #BF0B29; }
+    .fi-warn   { background: #FFF2DF; color: #FC7400; }
+    .fi-ok     { background: #E4F8EC; color: #006D2C; }
+    .fi-gap    { background: var(--neutral-100); color: var(--neutral-500); }
+
+    .finding-body h3 { margin-bottom: 4px; font-size: 13.5px; }
+    .finding-body p  { font-size: 13px; }
+
+    /* ─── Comparison panel ─── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .compare-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-outline-variant);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .compare-card-header {
+      padding: 12px 16px;
+      background: var(--neutral-50);
+      border-bottom: 1px solid var(--color-outline-variant);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .compare-card-header span { font-size: 13px; font-weight: 600; }
+    .compare-card-body { padding: 16px; }
+
+    /* ─── Dark demo ─── */
+    .dark-band {
+      background: var(--neutral-700);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-top: 16px;
+    }
+    .dark-band .states-grid { background: var(--neutral-600); border-color: var(--neutral-500); }
+    .dark-band .state-cell { border-color: var(--neutral-500); }
+
+    /* dark sib tokens */
+    .dark-sib {
+      --color-surface-container-high: #282C39;
+      --color-on-surface: #EAEBED;
+      --color-on-surface-variant: #BFC1C8;
+      --color-outline-variant: #474D61;
+      --color-secondary-container: #3A5BB0;
+      --color-secondary: #B9CCFF;
+      --color-on-secondary-container: #DCE6FF;
+      --color-on-disabled: #747989;
+      --color-surface-container-highest: #353A4A;
+      --border: color-mix(in srgb, #EAEBED 10%, transparent);
+      background: var(--color-surface-container-high);
+      border-color: var(--border);
+      color: var(--color-on-surface-variant);
+    }
+    .dark-sib-hover {
+      --color-surface-container-high: #282C39;
+      --color-on-surface: #EAEBED;
+      background: color-mix(in srgb, #EAEBED 8%, #282C39);
+      border-color: color-mix(in srgb, #EAEBED 20%, transparent);
+      color: #EAEBED;
+    }
+    .dark-sib-selected {
+      --color-secondary-container: #3A5BB0;
+      --color-secondary: #B9CCFF;
+      --color-on-secondary-container: #DCE6FF;
+      background: #3A5BB0;
+      border-color: #B9CCFF;
+      color: #DCE6FF;
+    }
+    .dark-sib-disabled {
+      background: transparent;
+      border-color: #474D61;
+      color: #747989;
+      cursor: not-allowed;
+    }
+    .dark-sib-pressed {
+      background: #353A4A;
+      color: #EAEBED;
+    }
+
+    /* ─── Wrong example ─── */
+    .sib-wrong-filled {
+      background: var(--secondary-900); /* wrong: direct accent fill as default */
+      border: none;
+      color: white;
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      height: 1px;
+      background: var(--color-outline-variant);
+      margin: 40px 0;
+    }
+
+    .token-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px 2px 4px;
+      border-radius: var(--radius-full);
+      background: var(--neutral-50);
+      border: 1px solid var(--color-outline-variant);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--neutral-500);
+      white-space: nowrap;
+    }
+    .token-chip-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    .infobox {
+      background: #EDF2FF;
+      border-left: 3px solid var(--secondary-900);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--primary-900);
+      line-height: 1.6;
+    }
+    .infobox strong { font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <h1>Auditoría: Search Icon Buttons</h1>
+  <p class="subtitle">Embassy DS — Componente <code>.search-icon-btn</code> · Verificación contra Color Roles, States, y Button spec · Jun 2026</p>
+
+  <!-- ─── Summary ─── -->
+  <section class="section">
+    <h2>Resumen ejecutivo</h2>
+    <div class="infobox">
+      <strong>El componente existe y tiene nombre propio:</strong> <code>.search-icon-btn</code> en <code>search.css</code>. No es un <code>.icon-btn</code> ni una variante de botón inventada. La forma circular (50%), el fill neutral por defecto, y el estado selected via <code>--color-secondary-container</code> están correctamente definidos. Lo que falta son 2 estados (pressed y disabled) y un ajuste en la opacidad del `:active`. La imagen del botón "relleno de azul sólido" que aparece en las capturas corresponde a un override fuera del DS — no es la definición canónica del default.
+    </div>
+  </section>
+
+  <!-- ─── State demo light ─── -->
+  <section class="section">
+    <h2>Estados canónicos · Light mode</h2>
+    <div class="states-grid">
+      <div class="state-cell">
+        <div class="state-label">Default</div>
+        <button class="sib" aria-label="Filtros">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </button>
+        <span class="badge badge-ok">✓ correcto</span>
+      </div>
+      <div class="state-cell">
+        <div class="state-label">Hover</div>
+        <button class="sib sib-hover" aria-label="Filtros">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </button>
+        <span class="badge badge-ok">✓ correcto</span>
+      </div>
+      <div class="state-cell">
+        <div class="state-label">Focus</div>
+        <button class="sib sib-focus" aria-label="Filtros">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </button>
+        <span class="badge badge-ok">✓ correcto</span>
+      </div>
+      <div class="state-cell">
+        <div class="state-label">Pressed</div>
+        <button class="sib sib-pressed" aria-label="Filtros">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </button>
+        <span class="badge badge-warn">⚠ propuesto</span>
+      </div>
+      <div class="state-cell">
+        <div class="state-label">Selected</div>
+        <button class="sib sib-selected" aria-label="Filtros activos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </button>
+        <span class="badge badge-ok">✓ correcto</span>
+      </div>
+      <div class="state-cell">
+        <div class="state-label">Disabled</div>
+        <button class="sib sib-disabled" aria-label="Filtros" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </button>
+        <span class="badge badge-error">✗ faltante</span>
+      </div>
+      <div class="state-cell">
+        <div class="state-label">Wrong ⚠</div>
+        <button class="sib sib-wrong-filled" aria-label="Filtros">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        </button>
+        <span class="badge badge-error">relleno sólido</span>
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:12px; color: var(--text-secondary);">La última columna ("Wrong") muestra el tratamiento incorrecto: fondo accent sólido en estado default. Este patrón no existe en Embassy.</p>
+  </section>
+
+  <!-- ─── State demo dark ─── -->
+  <section class="section">
+    <h2>Estados canónicos · Dark mode</h2>
+    <div class="dark-band">
+      <div class="states-grid" style="background:#282C39; border-color:#474D61;">
+        <div class="state-cell" style="border-color:#474D61;">
+          <div class="state-label" style="color:#BFC1C8;">Default</div>
+          <button class="sib dark-sib" aria-label="Filtros">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </button>
+        </div>
+        <div class="state-cell" style="border-color:#474D61;">
+          <div class="state-label" style="color:#BFC1C8;">Hover</div>
+          <button class="sib dark-sib-hover" style="border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid;cursor:pointer;padding:0;" aria-label="Filtros">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </button>
+        </div>
+        <div class="state-cell" style="border-color:#474D61;">
+          <div class="state-label" style="color:#BFC1C8;">Focus</div>
+          <button class="sib dark-sib sib-focus" style="--color-focus:#B9CCFF;--color-focus-ring:rgba(185,204,255,.15);" aria-label="Filtros">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </button>
+        </div>
+        <div class="state-cell" style="border-color:#474D61;">
+          <div class="state-label" style="color:#BFC1C8;">Pressed</div>
+          <button class="sib dark-sib-pressed" style="border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #474D61;cursor:pointer;padding:0;" aria-label="Filtros">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </button>
+        </div>
+        <div class="state-cell" style="border-color:#474D61;">
+          <div class="state-label" style="color:#BFC1C8;">Selected</div>
+          <button class="sib dark-sib-selected" style="border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0;" aria-label="Filtros activos">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </button>
+        </div>
+        <div class="state-cell" style="border-color:#474D61;">
+          <div class="state-label" style="color:#BFC1C8;">Disabled</div>
+          <button class="sib dark-sib-disabled" style="border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;cursor:not-allowed;padding:0;" aria-label="Filtros" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </button>
+        </div>
+        <div class="state-cell" style="border-color:#474D61;">
+          <div class="state-label" style="color:#BFC1C8;">Wrong ⚠</div>
+          <button style="border-radius:50%;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;background:#4F80FF;border:none;cursor:pointer;padding:0;color:white;" aria-label="Error">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Findings ─── -->
+  <section class="section">
+    <h2>Hallazgos de la auditoría</h2>
+    <div class="finding-list">
+
+      <div class="finding finding-ok">
+        <div class="finding-icon fi-ok">✓</div>
+        <div class="finding-body">
+          <h3>Forma circular correcta</h3>
+          <p><code>.search-icon-btn</code> usa <code>border-radius: 50%</code>. La forma circular no es una invención — está especificada explícitamente en el header de <code>search.css</code>: <em>"Icon btn: 40×40px · border-radius 50% · ícono 20px"</em>. El <code>.icon-btn</code> de <code>button.css</code> usa <code>--radius-md</code> (8px) y NO es circular — si se usó ese clase, está mal mapeado.</p>
+        </div>
+      </div>
+
+      <div class="finding finding-ok">
+        <div class="finding-icon fi-ok">✓</div>
+        <div class="finding-body">
+          <h3>Background default: superficie neutral, no accent</h3>
+          <p>El default correcto es <code>--color-surface-container-high</code> (neutral-50 / #EAEBED en light · #282C39 en dark). No lleva accent fill. Un botón de ícono con background accent sólido por defecto <strong>no existe en Embassy</strong> — ese tratamiento solo aparece en <code>btn-primary</code> (con label).</p>
+        </div>
+      </div>
+
+      <div class="finding finding-ok">
+        <div class="finding-icon fi-ok">✓</div>
+        <div class="finding-body">
+          <h3>Estado selected: secondary-container fill</h3>
+          <p>El estado activo/seleccionado (filtro aplicado) usa <code>--color-secondary-container</code> como background, <code>--color-secondary</code> como borde, y <code>--color-on-secondary-container</code> como color de ícono. En light: periwinkle claro (#CAD9FF). En dark: mid-periwinkle (#3A5BB0). Se activa via <code>[aria-pressed="true"]</code> o clase <code>.active</code>. Alineado con los Color Roles.</p>
+        </div>
+      </div>
+
+      <div class="finding finding-ok">
+        <div class="finding-icon fi-ok">✓</div>
+        <div class="finding-body">
+          <h3>Focus ring</h3>
+          <p>Implementado correctamente: <code>outline: 2px solid var(--color-focus)</code> + <code>box-shadow: 0 0 0 4px var(--color-focus-ring)</code>. Idéntico al patrón compartido del resto del sistema (WCAG 2.4.7).</p>
+        </div>
+      </div>
+
+      <div class="finding finding-warn">
+        <div class="finding-icon fi-warn">!</div>
+        <div class="finding-body">
+          <h3>Estado pressed: solo opacity — inconsistente con el sistema</h3>
+          <p>Actualmente: <code>.search-icon-btn:active { opacity: .85 }</code>. El resto del sistema usa un state layer sobre el fondo (container step o color-mix). La opacidad sola cambia toda la apariencia del botón (incluido el borde y el ícono) y no respeta el patrón de 12% de MD3. <strong>Propuesta:</strong> <code>background: var(--color-surface-container-highest)</code> — consistente con <code>.icon-btn:active</code> en <code>button.css</code>.</p>
+        </div>
+      </div>
+
+      <div class="finding finding-error">
+        <div class="finding-icon fi-error">✗</div>
+        <div class="finding-body">
+          <h3>Estado disabled: no definido</h3>
+          <p><code>.search-icon-btn</code> no tiene regla <code>:disabled</code> ni <code>[aria-disabled]</code>. El botón disabled hereda estilos del default, lo que no comunica el estado. <strong>Debe añadirse</strong> siguiendo el patrón de <code>.icon-btn:disabled</code>: <code>background: transparent; border-color: var(--color-outline-variant); color: var(--color-on-disabled); cursor: not-allowed;</code></p>
+        </div>
+      </div>
+
+      <div class="finding finding-error">
+        <div class="finding-icon fi-error">✗</div>
+        <div class="finding-body">
+          <h3>Fondo "relleno accent" en las capturas → no pertenece al DS</h3>
+          <p>El botón de campanilla (captura 1) muestra un fill azul/índigo sólido como estado <strong>default</strong>. En Embassy, ese tratamiento no existe para icon buttons. El único fill accent definido es el estado selected (<code>--color-secondary-container</code>, que es un periwinkle <em>claro</em> en light). Un fill <code>--color-secondary</code> (#4F80FF) o similar como default es un override fuera del DS que debe eliminarse o redefinirse como estado selected.</p>
+        </div>
+      </div>
+
+      <div class="finding finding-gap">
+        <div class="finding-icon fi-gap">?</div>
+        <div class="finding-body">
+          <h3>Borde <code>var(--border)</code> puede volverse invisible</h3>
+          <p><code>--border</code> es <code>color-mix(in srgb, on-surface 10%, transparent)</code> — un borde de contenedor, no de elemento interactivo. En algunos temas, el contraste visual es muy bajo. Para icon buttons interactivos, considerar <code>--color-outline-variant</code> (neutral-100 / #BFC1C8 en light) que es el borde sutil de elementos interactivos, con más cuerpo que el <code>--border</code> de contenedor.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── Spec table ─── -->
+  <section class="section">
+    <h2>Especificación completa: <code>.search-icon-btn</code></h2>
+    <table class="audit-table">
+      <thead>
+        <tr>
+          <th>Propiedad</th>
+          <th>Estado</th>
+          <th>Token / valor</th>
+          <th>Estado actual en código</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="prop-col">width / height</td>
+          <td>todos</td>
+          <td class="val-col">40px × 40px</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Definido</td>
+        </tr>
+        <tr>
+          <td class="prop-col">border-radius</td>
+          <td>todos</td>
+          <td class="val-col">50% (circular)</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Definido — no usar icon-btn aquí</td>
+        </tr>
+        <tr>
+          <td class="prop-col">icon size</td>
+          <td>todos</td>
+          <td class="val-col">20px × 20px</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Definido via svg/i selector</td>
+        </tr>
+        <tr>
+          <td class="prop-col">background</td>
+          <td>default</td>
+          <td class="val-col">--color-surface-container-high</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Correcto — neutral, no accent</td>
+        </tr>
+        <tr>
+          <td class="prop-col">border</td>
+          <td>default</td>
+          <td class="val-col">1px solid var(--border)</td>
+          <td class="note-col"><span class="badge badge-warn">~</span> Funciona; considerar outline-variant para más cuerpo</td>
+        </tr>
+        <tr>
+          <td class="prop-col">color (icon)</td>
+          <td>default</td>
+          <td class="val-col">--color-on-surface-variant</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Correcto</td>
+        </tr>
+        <tr>
+          <td class="prop-col">background</td>
+          <td>hover</td>
+          <td class="val-col">color-mix(on-surface 8%, surface-container-high)</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Correcto</td>
+        </tr>
+        <tr>
+          <td class="prop-col">border-color</td>
+          <td>hover</td>
+          <td class="val-col">color-mix(on-surface 20%, transparent)</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Correcto</td>
+        </tr>
+        <tr>
+          <td class="prop-col">color (icon)</td>
+          <td>hover</td>
+          <td class="val-col">--color-on-surface</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Correcto</td>
+        </tr>
+        <tr>
+          <td class="prop-col">outline</td>
+          <td>focus</td>
+          <td class="val-col">2px solid --color-focus + 4px ring</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Correcto</td>
+        </tr>
+        <tr>
+          <td class="prop-col">background</td>
+          <td>pressed ⚠</td>
+          <td class="val-col">--color-surface-container-highest (propuesto)</td>
+          <td class="note-col"><span class="badge badge-warn">!</span> Actual: opacity .85 — insuficiente</td>
+        </tr>
+        <tr>
+          <td class="prop-col">background</td>
+          <td>selected</td>
+          <td class="val-col">--color-secondary-container</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Correcto</td>
+        </tr>
+        <tr>
+          <td class="prop-col">border-color</td>
+          <td>selected</td>
+          <td class="val-col">--color-secondary</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Correcto</td>
+        </tr>
+        <tr>
+          <td class="prop-col">color (icon)</td>
+          <td>selected</td>
+          <td class="val-col">--color-on-secondary-container</td>
+          <td class="note-col"><span class="badge badge-ok">✓</span> Correcto</td>
+        </tr>
+        <tr>
+          <td class="prop-col">background</td>
+          <td>disabled ✗</td>
+          <td class="val-col">transparent</td>
+          <td class="note-col"><span class="badge badge-error">✗</span> Falta — no definido</td>
+        </tr>
+        <tr>
+          <td class="prop-col">border-color</td>
+          <td>disabled ✗</td>
+          <td class="val-col">--color-outline-variant</td>
+          <td class="note-col"><span class="badge badge-error">✗</span> Falta — no definido</td>
+        </tr>
+        <tr>
+          <td class="prop-col">color (icon)</td>
+          <td>disabled ✗</td>
+          <td class="val-col">--color-on-disabled</td>
+          <td class="note-col"><span class="badge badge-error">✗</span> Falta — no definido</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ─── Code diff ─── -->
+  <section class="section">
+    <h2>Correcciones a aplicar en <code>search.css</code></h2>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <div class="compare-card-header">
+          <span class="badge badge-error">✗ actual</span>
+          <span>Pressed & Disabled (actual)</span>
+        </div>
+        <div class="compare-card-body">
+          <pre style="font-family:var(--font-mono);font-size:11.5px;line-height:1.7;color:var(--neutral-400);overflow-x:auto;">.search-icon-btn:active {
+  opacity: .85; /* state layer débil */
+}
+
+/* ← sin regla :disabled */</pre>
+        </div>
+      </div>
+      <div class="compare-card">
+        <div class="compare-card-header">
+          <span class="badge badge-ok">✓ propuesto</span>
+          <span>Pressed & Disabled (correcto)</span>
+        </div>
+        <div class="compare-card-body">
+          <pre style="font-family:var(--font-mono);font-size:11.5px;line-height:1.7;color:var(--neutral-500);overflow-x:auto;">.search-icon-btn:active:not(:disabled) {
+  background: var(--color-surface-container-highest);
+  color: var(--color-on-surface);
+}
+
+.search-icon-btn:disabled,
+.search-icon-btn[aria-disabled="true"] {
+  background: transparent;
+  border-color: var(--color-outline-variant);
+  color: var(--color-on-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── icon-btn vs search-icon-btn ─── -->
+  <section class="section">
+    <h2>Cuándo usar cada clase</h2>
+    <table class="audit-table">
+      <thead>
+        <tr><th>Clase</th><th>Forma</th><th>Tamaño</th><th>Contexto</th><th>Selected state</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="prop-col">.icon-btn</td>
+          <td>Rectangular (--radius-md)</td>
+          <td>36×36px</td>
+          <td>Toolbars genéricos, listas, acciones inline</td>
+          <td>No definido</td>
+        </tr>
+        <tr>
+          <td class="prop-col">.search-icon-btn</td>
+          <td>Circular (50%)</td>
+          <td>40×40px</td>
+          <td>Adyacente al search-bar en .search-row</td>
+          <td>secondary-container ✓</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px;">Los botones de las capturas son circulares → deben ser <code>.search-icon-btn</code>, no <code>.icon-btn</code>.</p>
+  </section>
+
+</body>
+</html>

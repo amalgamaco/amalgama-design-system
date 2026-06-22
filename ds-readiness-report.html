@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embassy DS — Readiness Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<style>
+:root {
+  --r-topbar: 52px;
+  --r-sidebar: 240px;
+  --magenta: #E91E8C;
+}
+
+/* ── Layout ── */
+.r-topbar {
+  position: fixed; top:0; left:0; right:0; height: var(--r-topbar);
+  background: var(--primary-900); display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; z-index: 500;
+}
+.r-topbar-title { font-family: var(--font-mono); font-size: 11px; color: var(--secondary-300); letter-spacing: .06em; }
+.r-topbar-actions { display:flex; gap:10px; align-items:center; }
+.r-toggle { font-family: var(--font-mono); font-size:11px; padding: 4px 12px; border:1px solid var(--primary-400); border-radius:20px; background:transparent; color:var(--neutral-100); cursor:pointer; }
+.r-toggle:hover { background:var(--primary-700); }
+
+.r-sidebar {
+  position:fixed; top:var(--r-topbar); left:0; bottom:0; width:var(--r-sidebar);
+  overflow-y:auto; background:var(--color-surface-container); border-right:1px solid var(--border);
+  padding:16px 0; z-index:400;
+}
+.r-nav-group { font-family:var(--font-mono); font-size:9px; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); padding:12px 16px 3px; }
+.r-nav-link { display:block; padding:5px 16px; font-size:12px; color:var(--text-secondary); text-decoration:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:color .1s; }
+.r-nav-link:hover { color:var(--text-primary); background:var(--color-surface-variant); text-decoration:none; }
+.r-nav-link.critical { border-left:3px solid #DB263C; padding-left:13px; }
+.r-nav-link.high { border-left:3px solid var(--warning-400); padding-left:13px; }
+.r-nav-link.done { border-left:3px solid var(--color-success); padding-left:13px; }
+
+.r-main { margin-left:var(--r-sidebar); margin-top:var(--r-topbar); padding:40px 56px 100px; max-width:1080px; }
+
+/* ── Score cards ── */
+.r-scores { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-bottom:48px; }
+.r-score-card { background:var(--color-surface-container); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px 16px; text-align:center; }
+.r-score-num { font-family:var(--font-heading); font-size:36px; font-weight:700; margin-bottom:2px; }
+.r-score-label { font-family:var(--font-mono); font-size:9px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.07em; }
+.r-score-detail { font-size:11px; color:var(--text-secondary); margin-top:6px; }
+
+/* ── Section ── */
+.r-section { margin-bottom:64px; scroll-margin-top:calc(var(--r-topbar) + 16px); }
+.r-section-hdr { display:flex; align-items:baseline; gap:10px; margin-bottom:8px; padding-bottom:12px; border-bottom:2px solid var(--border); }
+.r-section-id { font-family:var(--font-mono); font-size:10px; color:var(--magenta); }
+.r-section-title { font-family:var(--font-mono); font-size:16px; font-weight:500; color:var(--text-primary); }
+.r-section-badges { margin-left:auto; display:flex; gap:6px; }
+.r-section-sub { font-size:13.5px; color:var(--text-secondary); margin-bottom:24px; line-height:1.6; max-width:720px; }
+
+/* ── Tags ── */
+.t { display:inline-flex; align-items:center; gap:3px; font-family:var(--font-mono); font-size:10px; padding:2px 7px; border-radius:4px; white-space:nowrap; }
+.t-crit { background:color-mix(in srgb,var(--color-error) 15%,transparent); color:var(--color-error); border:1px solid var(--color-error); }
+.t-high { background:color-mix(in srgb,var(--color-warning) 15%,transparent); color:color-mix(in srgb,var(--color-warning) 70%,#000); border:1px solid var(--color-warning); }
+.t-ok   { background:var(--color-success-container); color:var(--color-on-success-container); border:1px solid var(--color-success); }
+.t-info { background:var(--color-primary-container); color:var(--primary-900); border:1px solid var(--primary-200); }
+[data-theme="dark"] .t-info { background:var(--primary-800); color:var(--primary-50); border-color:var(--primary-600); }
+.t-warn { background:var(--color-warning-container); color:var(--color-on-warning-container); border:1px solid var(--color-warning); }
+.t-new { background:color-mix(in srgb,var(--color-secondary) 15%,transparent); color:var(--color-secondary); border:1px solid var(--color-secondary); }
+
+/* ── Assessment grid ── */
+.r-assess-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+@media (max-width:768px) { .r-assess-grid { grid-template-columns:1fr; } }
+.r-assess-card {
+  border:1px solid var(--border); border-radius:var(--radius-md); padding:20px;
+  background:var(--card-bg);
+}
+.r-assess-card.ready { border-color:var(--color-success); }
+.r-assess-card.partial { border-color:var(--color-warning); }
+.r-assess-card.not-ready { border-color:var(--color-error); }
+.r-assess-title { font-size:14px; font-weight:600; color:var(--text-primary); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.r-assess-verdict { font-family:var(--font-mono); font-size:10px; padding:3px 8px; border-radius:4px; margin-left:auto; }
+.verdict-ready { background:var(--color-success-container); color:var(--color-on-success-container); }
+.verdict-partial { background:var(--color-warning-container); color:var(--color-on-warning-container); }
+.verdict-not { background:var(--color-error-container); color:var(--color-on-error-container); }
+.r-assess-items { list-style:none; padding:0; margin:0; font-size:12.5px; color:var(--text-secondary); }
+.r-assess-items li { padding:3px 0; display:flex; align-items:flex-start; gap:6px; line-height:1.5; }
+.r-assess-items li::before { content:''; flex-shrink:0; margin-top:6px; width:6px; height:6px; border-radius:50%; }
+.r-assess-items li.ok::before { background:var(--color-success); }
+.r-assess-items li.warn::before { background:var(--color-warning); }
+.r-assess-items li.err::before { background:var(--color-error); }
+
+/* ── Table ── */
+.r-table { width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:11px; margin-bottom:16px; }
+.r-table th { text-align:left; padding:7px 12px; background:var(--color-surface-variant); color:var(--text-muted); font-weight:500; border:1px solid var(--border); }
+.r-table td { padding:7px 12px; border:1px solid var(--border); color:var(--text-primary); vertical-align:top; line-height:1.5; }
+.r-table tr:nth-child(even) td { background:var(--color-surface-container-lowest); }
+.r-table td.ok  { color:var(--color-on-success-container); background:var(--color-success-container); }
+.r-table td.warn{ color:var(--color-on-warning-container); background:var(--color-warning-container); }
+.r-table td.err { color:var(--color-on-error-container); background:var(--color-error-container); }
+.r-table td.new { color:var(--color-secondary); background:color-mix(in srgb,var(--color-secondary) 10%,transparent); }
+.r-table td code { font-family:var(--font-mono); font-size:10.5px; }
+
+/* ── Finding ── */
+.r-finding { border:1px solid var(--border); border-radius:var(--radius-md); margin-bottom:12px; overflow:hidden; }
+.r-finding-hdr { padding:12px 16px; background:var(--color-surface-container); display:flex; align-items:flex-start; gap:10px; }
+.r-finding-title { font-size:12.5px; font-weight:600; color:var(--text-primary); flex:1; }
+.r-finding-body { padding:14px 16px; background:var(--card-bg); font-size:12.5px; color:var(--text-secondary); line-height:1.6; }
+
+/* ── Fix ── */
+.r-fix {
+  background:color-mix(in srgb,var(--color-info-container) 40%,var(--card-bg));
+  border:1px solid var(--color-info); border-radius:var(--radius-sm);
+  padding:10px 14px; margin-top:10px; font-size:12px; color:var(--text-secondary); line-height:1.6;
+}
+.r-fix strong { color:var(--text-primary); }
+[data-theme="dark"] .r-fix { background:color-mix(in srgb,var(--color-info-container) 20%,transparent); }
+
+/* ── Progress bar ── */
+.r-progress-wrap { background:var(--border); border-radius:var(--radius-full); height:8px; margin:6px 0 12px; }
+.r-progress-bar { height:8px; border-radius:var(--radius-full); }
+.r-progress-bar.ok   { background:var(--color-success); }
+.r-progress-bar.warn { background:var(--color-warning); }
+.r-progress-bar.err  { background:var(--color-error); }
+
+/* ── Checklist ── */
+.r-checklist { list-style:none; padding:0; margin:0; }
+.r-checklist li { display:flex; align-items:flex-start; gap:10px; padding:5px 0; font-size:12.5px; color:var(--text-secondary); line-height:1.5; }
+.r-check { width:16px; height:16px; border-radius:3px; flex-shrink:0; margin-top:1px; display:flex; align-items:center; justify-content:center; font-size:10px; }
+.r-check.ok   { background:var(--color-success); color:#fff; }
+.r-check.warn { background:var(--color-warning); color:#000; }
+.r-check.err  { background:var(--color-error); color:#fff; }
+.r-check.new  { background:var(--color-secondary); color:#fff; }
+
+/* ── Divider ── */
+.r-sep { height:1px; background:var(--border); margin:24px 0; }
+
+/* ── Prose ── */
+p { font-size:13.5px; color:var(--text-secondary); line-height:1.7; margin-bottom:16px; max-width:720px; }
+h2 { font-family:var(--font-heading); font-size:var(--font-size-heading-md); font-weight:700; color:var(--text-primary); margin-bottom:16px; }
+
+/* ── Status chip ── */
+.status-chip { display:inline-flex; align-items:center; gap:5px; font-family:var(--font-mono); font-size:10px; padding:3px 8px; border-radius:var(--radius-full); font-weight:500; }
+.status-stable { background:var(--color-success-container); color:var(--color-on-success-container); }
+.status-partial { background:var(--color-warning-container); color:var(--color-on-warning-container); }
+.status-gap { background:var(--color-error-container); color:var(--color-on-error-container); }
+.status-new { background:color-mix(in srgb,var(--color-secondary) 15%,transparent); color:var(--color-secondary); }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="r-topbar">
+  <span class="r-topbar-title">Embassy Design System — Readiness Report · Junio 2026</span>
+  <div class="r-topbar-actions">
+    <button class="r-toggle" onclick="document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'':'dark'">Toggle Dark</button>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<nav class="r-sidebar">
+  <div class="r-nav-group">Resumen</div>
+  <a class="r-nav-link" href="#s-overview">Visión general</a>
+  <a class="r-nav-link" href="#s-scores">Puntajes por área</a>
+
+  <div class="r-nav-group">Readiness</div>
+  <a class="r-nav-link ok" href="#s-new-product">Producto nuevo</a>
+  <a class="r-nav-link high" href="#s-white-label">White-label</a>
+  <a class="r-nav-link ok" href="#s-ai">Skill de IA</a>
+  <a class="r-nav-link high" href="#s-designers">Diseñadores</a>
+  <a class="r-nav-link ok" href="#s-developers">Desarrolladores</a>
+
+  <div class="r-nav-group">Inconsistencias</div>
+  <a class="r-nav-link critical" href="#s-critical">Críticas</a>
+  <a class="r-nav-link high" href="#s-high">Altas</a>
+  <a class="r-nav-link" href="#s-medium">Medias / Bajas</a>
+
+  <div class="r-nav-group">Documentación</div>
+  <a class="r-nav-link" href="#s-doc-audit">Auditoría de docs</a>
+  <a class="r-nav-link done" href="#s-fixes">Correcciones hechas</a>
+  <a class="r-nav-link" href="#s-missing">Docs faltantes</a>
+  <a class="r-nav-link" href="#s-governance">Gaps de Governance</a>
+  <a class="r-nav-link" href="#s-next">Próximos pasos</a>
+</nav>
+
+<main class="r-main">
+
+<!-- Overview -->
+<section class="r-section" id="s-overview">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§00</span>
+    <span class="r-section-title">Visión general</span>
+  </div>
+  <p>Este informe evalúa el estado actual de <strong>Embassy</strong> — el sistema de diseño de Amalgama — como base para construir productos digitales escalables, white-label y consumibles por herramientas de IA. El análisis cubre la documentación existente, la consistencia entre componentes y tokens, y los gaps que bloquearían una adopción confiable.</p>
+  <p>La evaluación se realizó revisando todos los archivos <code>.md</code>, los 22 archivos CSS de componentes, las 17 implementaciones React, el sitio de documentación, el SKILL.md del skill de IA, y comparando las reglas del sistema contra las implementaciones reales.</p>
+
+  <div class="r-assess-grid">
+    <div class="r-assess-card partial">
+      <div class="r-assess-title">Estado general del sistema <span class="r-assess-verdict verdict-partial">PARCIALMENTE LISTO</span></div>
+      <ul class="r-assess-items">
+        <li class="ok">Token system sólido y bien estructurado</li>
+        <li class="ok">CLAUDE.md, GOVERNANCE.md, MIGRATION.md son de alta calidad</li>
+        <li class="ok">22 componentes con CSS funcional</li>
+        <li class="warn">Inconsistencias cross-component significativas (ver §S3–§B4)</li>
+        <li class="err">White-label: sin documentación (corregido en este audit)</li>
+        <li class="err">Motion, Layout, Lifecycle: sin documentación (corregido en este audit)</li>
+        <li class="err">segmented-button.css usa tokens inexistentes (<code>--ds-*</code>)</li>
+      </ul>
+    </div>
+    <div class="r-assess-card partial">
+      <div class="r-assess-title">Documentación <span class="r-assess-verdict verdict-partial">INCOMPLETA</span></div>
+      <ul class="r-assess-items">
+        <li class="ok">GOVERNANCE.md cubre token hierarchy, components, estados, tipografía</li>
+        <li class="ok">MIGRATION.md es completo y actionable</li>
+        <li class="ok">SKILL.md es sólido para consumo por IA</li>
+        <li class="warn">README.md tenía errores críticos (corregidos en este audit)</li>
+        <li class="err">WHITE-LABEL.md: no existía (creado en este audit)</li>
+        <li class="err">CONTRIBUTING.md: no existía (creado en este audit)</li>
+        <li class="err">Motion, Layout, Accessibility, Lifecycle: no existían (añadidos a GOVERNANCE)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Scores -->
+<section class="r-section" id="s-scores">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§01</span>
+    <span class="r-section-title">Puntajes por área</span>
+  </div>
+
+  <table class="r-table">
+    <thead>
+      <tr><th>Área</th><th>Pre-audit</th><th>Post-audit</th><th>Bloqueantes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Token system</strong></td>
+        <td class="ok">85 / 100</td>
+        <td class="ok">85 / 100</td>
+        <td>segmented-button usa <code>--ds-*</code> no definidos — pendiente CSS fix</td>
+      </tr>
+      <tr>
+        <td><strong>Component library</strong></td>
+        <td class="warn">72 / 100</td>
+        <td class="warn">72 / 100</td>
+        <td>Focus/hover inconsistencies, off-scale spacing, avatar primitives — pendiente CSS fixes</td>
+      </tr>
+      <tr>
+        <td><strong>Documentation (MD)</strong></td>
+        <td class="err">48 / 100</td>
+        <td class="ok">78 / 100</td>
+        <td>WHITE-LABEL, CONTRIBUTING creados. Motion/Layout/Lifecycle/A11y añadidos a GOVERNANCE. README corregido.</td>
+      </tr>
+      <tr>
+        <td><strong>Governance</strong></td>
+        <td class="warn">65 / 100</td>
+        <td class="ok">87 / 100</td>
+        <td>§12 expanded con todos los findings. §13–§18 añadidos.</td>
+      </tr>
+      <tr>
+        <td><strong>AI skill readiness</strong></td>
+        <td class="warn">75 / 100</td>
+        <td class="ok">85 / 100</td>
+        <td>CLAUDE.md y GOVERNANCE actualizados → skill tiene refs completas.</td>
+      </tr>
+      <tr>
+        <td><strong>White-label readiness</strong></td>
+        <td class="err">10 / 100</td>
+        <td class="warn">70 / 100</td>
+        <td>WHITE-LABEL.md creado. Quedan CSS bugs (avatar primitives) que afectan el theming.</td>
+      </tr>
+      <tr>
+        <td><strong>Accessibility</strong></td>
+        <td class="err">50 / 100</td>
+        <td class="warn">65 / 100</td>
+        <td>Estándares documentados. Pendiente: focus fix en form/search/search-field, touch targets en btn-xs.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Readiness by use case -->
+<section class="r-section" id="s-new-product">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§02</span>
+    <span class="r-section-title">Readiness: construir un producto nuevo desde cero</span>
+    <div class="r-section-badges"><span class="t t-ok">LISTO CON RESERVAS</span></div>
+  </div>
+  <p class="r-section-sub">Embassy es suficientemente maduro para construir un producto nuevo. Los tokens, la mayoría de los componentes, y la documentación de consumo están en buen estado. Las reservas son inconsistencias que se manifiestan como deuda técnica visible, no como bloqueantes de funcionalidad.</p>
+
+  <ul class="r-checklist">
+    <li><span class="r-check ok">✓</span> Token system completo y bien estructurado. Dark mode automático funcionando.</li>
+    <li><span class="r-check ok">✓</span> 22 componentes CSS consumibles, 17 wrappers React.</li>
+    <li><span class="r-check ok">✓</span> CLAUDE.md es suficiente para onboardear un dev sin ambigüedad.</li>
+    <li><span class="r-check ok">✓</span> App shell (sidebar + topbar) implementado en layout.css.</li>
+    <li><span class="r-check warn">!</span> Roadmap de componentes extenso: checkbox, radio, switch, menú, tooltip, date picker — sin código. Productos que los necesiten deben componer desde existentes.</li>
+    <li><span class="r-check warn">!</span> segmented-button.css usa <code>--ds-*</code> tokens no definidos. El componente no renderiza correctamente hasta que se corrija.</li>
+    <li><span class="r-check warn">!</span> Focus ring ausente en search-bar y search-field (WCAG fail). Usar en productos con accesibilidad requerida implica fix previo.</li>
+    <li><span class="r-check warn">!</span> Inconsistencias de hover (--bg vs --color-surface-variant) y espaciado off-scale son deuda visible pero no bloquean el desarrollo.</li>
+  </ul>
+</section>
+
+<section class="r-section" id="s-white-label">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§03</span>
+    <span class="r-section-title">Readiness: implementaciones white-label</span>
+    <div class="r-section-badges"><span class="t t-warn">LISTO CON CONDICIONES</span></div>
+  </div>
+  <p class="r-section-sub">El token system de Embassy está arquitecturalmente preparado para white-labeling — la separación en primitivos → roles semánticos → componentes es la base correcta. Sin embargo, antes de este audit no existía documentación del proceso, y hay CSS bugs que afectan la confiabilidad del theming.</p>
+
+  <ul class="r-checklist">
+    <li><span class="r-check ok">✓</span> Arquitectura de tokens (primitivos → roles semánticos) es correcta para white-label.</li>
+    <li><span class="r-check ok">✓</span> Dark mode vía <code>data-theme="dark"</code> funciona sin overrides por componente — el theming cascadea automáticamente.</li>
+    <li><span class="r-check new">✓</span> WHITE-LABEL.md creado en este audit — proceso completo documentado con template y worked example.</li>
+    <li><span class="r-check new">✓</span> GOVERNANCE.md §15 establece las reglas de theming y lo que es / no es overrideable.</li>
+    <li><span class="r-check err">✗</span> <strong>Bloqueante:</strong> avatar gradients en vacancy-card.css y person-card.css usan primitivos directamente (<code>--error-600</code>, <code>--secondary-900</code>) — bypassean el sistema semántico. Al cambiar la paleta de un cliente, los avatares NO se actualizarán. Requiere CSS fix.</li>
+    <li><span class="r-check err">✗</span> <strong>Bloqueante:</strong> segmented-button.css usa <code>--ds-*</code> tokens no definidos. El componente se rompe en cualquier producto.</li>
+    <li><span class="r-check warn">!</span> El focus ring (<code>--color-focus</code>) es intencionalmente fijo (Embassy blue). WHITE-LABEL.md documenta cómo manejarlo si el cliente requiere un focus color de marca.</li>
+  </ul>
+</section>
+
+<section class="r-section" id="s-ai">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§04</span>
+    <span class="r-section-title">Readiness: consumo por el skill /design-system</span>
+    <div class="r-section-badges"><span class="t t-ok">LISTO</span></div>
+  </div>
+  <p class="r-section-sub">SKILL.md, CLAUDE.md, GOVERNANCE.md y MIGRATION.md forman un knowledge base sólido para que el skill opere sin introducir inconsistencias. Las mejoras de este audit hacen el sistema más confiable para un agente.</p>
+
+  <ul class="r-checklist">
+    <li><span class="r-check ok">✓</span> SKILL.md tiene instrucciones de Step 0 (detect context), Step 1 (read sources), Step 2 (consume), Step 3 (select components), Step 4 (brand layer), pre-flight checklist.</li>
+    <li><span class="r-check ok">✓</span> CLAUDE.md tiene tabla de autoritative sources por tipo de información.</li>
+    <li><span class="r-check ok">✓</span> GOVERNANCE.md §12 ahora documenta TODAS las inconsistencias conocidas — el skill no las replicará.</li>
+    <li><span class="r-check ok">✓</span> MIGRATION.md tiene el mapping table legacy → DS component.</li>
+    <li><span class="r-check new">✓</span> GOVERNANCE.md ahora incluye Motion (§13), Layout (§14), White-label (§15), Lifecycle (§16), Accessibility (§17), Naming conventions (§18) — el skill tiene cobertura completa.</li>
+    <li><span class="r-check warn">!</span> SKILL.md Step 2A: warning sobre CDN links que sirven GitHub HEAD. Si el repo local tiene cambios no pusheados, el skill puede usar CSS desactualizado. Documentado en el SKILL.</li>
+    <li><span class="r-check warn">!</span> El skill debe saber que segmented-button.css está roto hasta que se corrija — documentado en GOVERNANCE §12.</li>
+  </ul>
+</section>
+
+<section class="r-section" id="s-designers">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§05</span>
+    <span class="r-section-title">Readiness: diseñadores sin contexto previo</span>
+    <div class="r-section-badges"><span class="t t-warn">PARCIAL</span></div>
+  </div>
+
+  <ul class="r-checklist">
+    <li><span class="r-check ok">✓</span> index.html (catálogo) es visualmente completo — estados, anatomy, especificaciones.</li>
+    <li><span class="r-check ok">✓</span> Principios de diseño documentados (en DS Content Strategy Analysis.md y parcialmente en el catálogo).</li>
+    <li><span class="r-check ok">✓</span> Do/Don't rules por componente en los CSS headers (Cuándo usar / Cuándo no).</li>
+    <li><span class="r-check warn">!</span> Sin referencia a Figma library — un diseñador no puede trabajar con el DS sin el archivo Figma. Mencionado como pending en todos los docs pero sin fecha.</li>
+    <li><span class="r-check warn">!</span> Design principles existen solo en DS Content Strategy Analysis.md (análisis interno). No están en el catálogo en una posición accesible para designers nuevos.</li>
+    <li><span class="r-check warn">!</span> CONTRIBUTING.md documenta el proceso de proponer un componente, incluyendo el design phase — pero un designer tiene que saber que CONTRIBUTING.md existe.</li>
+    <li><span class="r-check err">✗</span> Sin "Getting Started" para diseñadores — la DS Content Strategy Analysis.md identifica este gap (rol-based paths) pero no está implementado todavía en el catálogo.</li>
+  </ul>
+</section>
+
+<section class="r-section" id="s-developers">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§06</span>
+    <span class="r-section-title">Readiness: desarrolladores frontend sin contexto previo</span>
+    <div class="r-section-badges"><span class="t t-ok">LISTO</span></div>
+  </div>
+
+  <ul class="r-checklist">
+    <li><span class="r-check ok">✓</span> CLAUDE.md es completo para un dev que empieza desde cero — load order, token rules, component inventory, React pattern.</li>
+    <li><span class="r-check ok">✓</span> README.md (corregido) es un quick start funcional.</li>
+    <li><span class="r-check ok">✓</span> Cada component CSS header tiene un bloque <code>Uso:</code> con markup exacto — copy-paste ready.</li>
+    <li><span class="r-check ok">✓</span> MIGRATION.md cubre el escenario de codebase existente con un workflow completo.</li>
+    <li><span class="r-check new">✓</span> CONTRIBUTING.md (nuevo) cubre cómo agregar o modificar componentes.</li>
+    <li><span class="r-check warn">!</span> React wrappers son implementations de referencia — no hay barrel export file, cada wrapper se importa individualmente.</li>
+    <li><span class="r-check warn">!</span> segmented-button.css no tiene wrapper React y sus tokens están rotos — documentado en GOVERNANCE §12.</li>
+  </ul>
+</section>
+
+<!-- Inconsistencias críticas -->
+<section class="r-section" id="s-critical">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§07</span>
+    <span class="r-section-title">Inconsistencias críticas — bloquean theming o accesibilidad</span>
+    <div class="r-section-badges"><span class="t t-crit">CRITICAL</span></div>
+  </div>
+  <p class="r-section-sub">Estas inconsistencias deben corregirse antes de usar Embassy como base para cualquier white-label o antes de declarar accesibilidad WCAG AA.</p>
+
+  <div class="r-finding">
+    <div class="r-finding-hdr"><span class="t t-crit">✗ CRÍTICO</span><span class="r-finding-title">segmented-button.css usa 6 tokens no definidos (<code>--ds-*</code>)</span></div>
+    <div class="r-finding-body">
+      Los tokens <code>--ds-card</code>, <code>--ds-card-border</code>, <code>--ds-text-1</code>, <code>--ds-text-2</code>, <code>--ds-accent</code>, <code>--ds-accent-bg</code> no existen en <code>variables.css</code>. El componente renderiza sin colores — fondo blanco sobre blanco en light mode, sin contraste en dark.
+      <div class="r-fix"><strong>Fix:</strong> En <code>segmented-button.css</code>, reemplazar: <code>--ds-card → var(--card-bg)</code>, <code>--ds-card-border → var(--border)</code>, <code>--ds-text-1 → var(--text-primary)</code>, <code>--ds-text-2 → var(--text-secondary)</code>, <code>--ds-accent → var(--color-secondary)</code>, <code>--ds-accent-bg → var(--color-secondary-container)</code>.</div>
+    </div>
+  </div>
+
+  <div class="r-finding">
+    <div class="r-finding-hdr"><span class="t t-crit">✗ CRÍTICO</span><span class="r-finding-title">Avatar gradients usan primitivos — bypassean theming</span></div>
+    <div class="r-finding-body">
+      <code>vacancy-card.css</code> y <code>person-card.css</code> usan <code>--error-600</code>, <code>--secondary-900</code>, <code>--success-500</code>, <code>--tertiary-900</code> directamente en gradientes. Al aplicar una paleta de marca cliente, los avatares no cambiarán de color. Además, <code>--color-on-primary</code> se usa como text color para TODOS los avatares independientemente de su background — esto es semánticamente incorrecto y puede resultar en texto ilegible si el background no es <code>--color-primary</code>.
+      <div class="r-fix"><strong>Fix:</strong> Reemplazar gradientes con fills planos usando pares semánticos: variant default → <code>--color-error-container</code> + <code>--color-on-error-container</code>; .blue → <code>--color-secondary-container</code> + <code>--color-on-secondary-container</code>; .green → <code>--color-success-container</code> + <code>--color-on-success-container</code>; .purple → <code>--color-tertiary-container</code> + <code>--color-on-tertiary-container</code>.</div>
+    </div>
+  </div>
+
+  <div class="r-finding">
+    <div class="r-finding-hdr"><span class="t t-crit">✗ CRÍTICO · A11Y</span><span class="r-finding-title">search-bar y search-field no tienen focus ring — WCAG fail</span></div>
+    <div class="r-finding-body">
+      <code>.search-bar:focus-within</code> usa solo un cambio de background (no ring). <code>.search-field:focus-within</code> hace la border más clara — el foco hace el elemento <em>menos</em> visible, no más. Ambos son WCAG 2.4.7 fails.
+      <div class="r-fix"><strong>Fix search-bar:</strong> Agregar <code>outline: 2px solid var(--color-focus); box-shadow: 0 0 0 4px var(--color-focus-ring);</code> en <code>:focus-within</code>.<br><strong>Fix search-field:</strong> Reemplazar el border-color change con el ring estándar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Inconsistencias altas -->
+<section class="r-section" id="s-high">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§08</span>
+    <span class="r-section-title">Inconsistencias de prioridad alta</span>
+    <div class="r-section-badges"><span class="t t-high">HIGH</span></div>
+  </div>
+
+  <table class="r-table">
+    <thead><tr><th>Archivo</th><th>Inconsistencia</th><th>Fix requerido</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>form.css</code></td>
+        <td>Focus usa <code>:focus</code> + <code>--interactive</code> (border) + ring 3px — 3 deviations del standard</td>
+        <td><code>:focus-visible</code> + <code>outline: 2px solid var(--color-focus)</code> + ring 4px</td>
+      </tr>
+      <tr>
+        <td><code>vacancy-card.css</code> <code>toolbar.css</code> <code>modal.css</code> <code>toast.css</code></td>
+        <td>Hover background usa <code>var(--bg)</code> = page surface. Hover hace el elemento disappear en vez de activarse</td>
+        <td>Reemplazar <code>var(--bg)</code> con <code>var(--color-surface-variant)</code> en todos los hover states</td>
+      </tr>
+      <tr>
+        <td><code>form.css</code></td>
+        <td>14px horizontal padding en todos los inputs — off-scale, misaligns icons</td>
+        <td><code>var(--space-4)</code> (16px) — actualizar leading/trailing icon offsets también</td>
+      </tr>
+      <tr>
+        <td><code>description.css</code></td>
+        <td>Focus inset ring 2px + <code>:focus</code> — WCAG marginal</td>
+        <td>Agregar standard focus ring externo + migrar a <code>:focus-visible</code></td>
+      </tr>
+      <tr>
+        <td>5 componentes</td>
+        <td>Icon buttons fragmentados: modal-close (32px), more-btn (28px), desc-delete-btn (28px), toast-close (24px) — ninguno usa <code>.icon-btn</code></td>
+        <td>Extender <code>.icon-btn</code> con modifier ghost; usar para todos</td>
+      </tr>
+      <tr>
+        <td><code>vacancy-card.css</code> <code>person-card.css</code> <code>kanban.css</code></td>
+        <td>Hover en cards clickeables: 3 patrones distintos (border+shadow+lift, shadow+lift, shadow-only)</td>
+        <td>Estandarizar: border → <code>--color-outline-variant</code> + <code>var(--shadow-md)</code> + <code>translateY(-1px)</code></td>
+      </tr>
+      <tr>
+        <td><code>form.css</code></td>
+        <td>Disabled background: <code>--color-surface-variant</code> en vez de <code>--color-disabled</code></td>
+        <td><code>var(--color-disabled)</code> para bg, <code>var(--color-on-disabled)</code> para text</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Inconsistencias medias -->
+<section class="r-section" id="s-medium">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§09</span>
+    <span class="r-section-title">Inconsistencias medias y bajas</span>
+  </div>
+
+  <table class="r-table">
+    <thead><tr><th>Prioridad</th><th>Archivo</th><th>Issue</th></tr></thead>
+    <tbody>
+      <tr><td class="warn">Media</td><td><code>back-link.css</code></td><td>Gap 6px (off-scale) entre ícono y label → <code>var(--space-2)</code></td></tr>
+      <tr><td class="warn">Media</td><td><code>kanban.css</code></td><td>Gaps 6px (meta, title-margin), padding-x 14px — múltiples off-scale values</td></tr>
+      <tr><td class="warn">Media</td><td><code>badge.css</code></td><td>Padding 10px (off-scale), font-size 10.5px (sin token) → <code>--space-3</code>, <code>--font-size-badge</code></td></tr>
+      <tr><td class="warn">Media</td><td><code>chip.css</code></td><td>Disabled usa MD3 opacity model en vez de <code>--color-disabled</code> / <code>--color-on-disabled</code></td></tr>
+      <tr><td class="warn">Media</td><td><code>description.css</code></td><td>Delete btn hover usa <code>--red-light</code>/<code>--red</code> aliases → <code>--color-error-container</code> + <code>--color-on-error-container</code></td></tr>
+      <tr><td class="warn">Media</td><td><code>vacancy-card.css</code></td><td><code>.meta-dot</code> usa <code>--text-muted</code> como background → <code>--color-outline-variant</code></td></tr>
+      <tr><td class="warn">Media</td><td><code>toolbar.css</code></td><td>font-weight 400 en toolbar-btn → 600 para consistencia con btn family</td></tr>
+      <tr><td class="warn">Media</td><td><code>button.css</code> + 4 más</td><td>Transitions usan <code>.1s</code> raw → <code>var(--duration-fast) var(--ease-default)</code></td></tr>
+      <tr><td class="warn">Media</td><td><code>button.css</code></td><td>font-size 11px en btn-xs, 15px en btn-lg, 16px en btn-xl sin token → mapear a <code>--font-size-*</code></td></tr>
+      <tr><td class="warn">Media</td><td>3 componentes</td><td>Avatar containers (vacancy, person, search-bar) usan 3 patrones incompatibles → estandarizar a container pairs semánticos</td></tr>
+      <tr><td class="warn">Media</td><td><code>segmented-button.css</code></td><td>Focus ring 3px en vez de 4px → <code>box-shadow: 0 0 0 4px var(--color-focus-ring)</code></td></tr>
+      <tr><td>Baja</td><td><code>variables.css</code></td><td><code>--color-focus-ring</code> hardcoded como <code>rgba()</code> → <code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code></td></tr>
+      <tr><td>Baja</td><td>shadows</td><td>Sin dark mode override para <code>--shadow-sm/md/lg</code> — casi invisibles en dark</td></tr>
+      <tr><td>Baja</td><td><code>kanban.css</code></td><td>Count pill es un badge variant no documentado → agregar <code>badge-neutral</code> y usar</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Doc audit -->
+<section class="r-section" id="s-doc-audit">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§10</span>
+    <span class="r-section-title">Auditoría de documentos .md existentes</span>
+  </div>
+
+  <table class="r-table">
+    <thead><tr><th>Documento</th><th>Completitud</th><th>Claridad</th><th>Consistencia</th><th>Issues encontrados</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>CLAUDE.md</strong></td>
+        <td class="ok">Alta</td>
+        <td class="ok">Alta</td>
+        <td class="ok">Alta</td>
+        <td>Sólido. Referencia autoritative para AI y humans. Sin issues críticos.</td>
+      </tr>
+      <tr>
+        <td><strong>GOVERNANCE.md</strong></td>
+        <td class="warn">Media</td>
+        <td class="ok">Alta</td>
+        <td class="ok">Alta</td>
+        <td>Faltaban: Motion §13, Layout §14, White-label §15, Lifecycle §16, Accessibility §17, Naming §18. §12 incompleto (solo 7 inconsistencias). <strong>Corregido en este audit.</strong></td>
+      </tr>
+      <tr>
+        <td><strong>MIGRATION.md</strong></td>
+        <td class="ok">Alta</td>
+        <td class="ok">Alta</td>
+        <td class="warn">Media</td>
+        <td>Tabla de color replacement recomienda <code>--interactive</code> — GOVERNANCE §2.4 lo marca como legacy alias. Inconsistencia menor (no genera errores, pero confunde). Pendiente de alinear.</td>
+      </tr>
+      <tr>
+        <td><strong>README.md</strong></td>
+        <td class="err">Baja</td>
+        <td class="warn">Media</td>
+        <td class="err">Baja</td>
+        <td>Errores críticos: variantes de button incorrectas (ghost/next → secondary/tertiary), Epilogue sin weight 800, <code>--radius: 8px</code> incorrecto (<code>--radius</code>=12px), docs URL incorrecta. <strong>Corregido en este audit.</strong></td>
+      </tr>
+      <tr>
+        <td><strong>SKILL.md</strong></td>
+        <td class="ok">Alta</td>
+        <td class="ok">Alta</td>
+        <td class="warn">Media</td>
+        <td>Brand layer hardcodeada a Amalgama (no white-label). Step 0 tiene buen detection logic. Mejora post-audit: el skill ahora puede consultar WHITE-LABEL.md via GOVERNANCE §15 para contexto white-label.</td>
+      </tr>
+      <tr>
+        <td><strong>DS Content Strategy Analysis.md</strong></td>
+        <td class="ok">Alta</td>
+        <td class="ok">Alta</td>
+        <td class="ok">Alta</td>
+        <td>Análisis de contenido excelente. Sus recomendaciones (role-based paths, Get Started restructure) están pendientes de implementación en index.html. No es un doc de consumo — es un análisis interno. Correcto como está.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Fixes done -->
+<section class="r-section" id="s-fixes">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§11</span>
+    <span class="r-section-title">Correcciones realizadas en este audit</span>
+    <div class="r-section-badges"><span class="t t-new">DONE</span></div>
+  </div>
+
+  <table class="r-table">
+    <thead><tr><th>Archivo</th><th>Cambio</th><th>Tipo</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>README.md</code></td>
+        <td>Reescritura completa: variantes de button corregidas (secondary/tertiary), Epilogue 800 añadida, ejemplo de personalización corregido (<code>--radius</code> correcto), URL de docs correcta, tabla de componentes actualizada (Chip, Search, Segmented Button añadidos), instrucciones de dark mode, sección de docs cross-referenciada, links a WHITE-LABEL.md y CONTRIBUTING.md</td>
+        <td class="new">Fix + expand</td>
+      </tr>
+      <tr>
+        <td><code>GOVERNANCE.md</code></td>
+        <td>§12 expandido de 7 a 30+ inconsistencias documentadas, organizadas en 4 sub-secciones (focus, token misuse, spacing off-scale, structural). Añadidos: §13 Motion & Animation, §14 Layout System, §15 White-label Theming, §16 Component Lifecycle, §17 Accessibility Standards, §18 Naming Conventions</td>
+        <td class="new">Expand</td>
+      </tr>
+      <tr>
+        <td><code>CONTRIBUTING.md</code></td>
+        <td>Documento nuevo — ciclo completo de contribución: propuesta → diseño → CSS implementation → React wrapper → docs → review checklist → qué no contribuir</td>
+        <td class="new">Created</td>
+      </tr>
+      <tr>
+        <td><code>WHITE-LABEL.md</code></td>
+        <td>Documento nuevo — proceso completo de theming: modelo de 3 capas, template de brand theme file, override de paleta primaria/secundaria/neutral/radii/fonts, checklist de verificación light+dark, anti-patterns, worked example (SimpleFit)</td>
+        <td class="new">Created</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Missing docs -->
+<section class="r-section" id="s-missing">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§12</span>
+    <span class="r-section-title">Documentos aún faltantes</span>
+  </div>
+  <p class="r-section-sub">Estos documentos no existen y su ausencia reduce la confiabilidad del sistema como fuente única de verdad.</p>
+
+  <table class="r-table">
+    <thead><tr><th>Documento</th><th>Propósito</th><th>Prioridad</th><th>Bloqueante de</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>CHANGELOG.md</strong></td>
+        <td>Historial versionado de cambios. Actualmente existe solo un párrafo en index.html.</td>
+        <td class="warn">Alta</td>
+        <td>Returning users, product upgrade decisions</td>
+      </tr>
+      <tr>
+        <td><strong>TOKENS.md</strong></td>
+        <td>Catálogo machine-readable de todos los tokens con: nombre, valor light, valor dark, rol, uso permitido, uso prohibido. Actualmente la fuente es variables.css (humans must read CSS).</td>
+        <td class="warn">Alta</td>
+        <td>Herramientas de validación automatizada, integración con Figma tokens</td>
+      </tr>
+      <tr>
+        <td><strong>Figma library spec</strong></td>
+        <td>Referencia del archivo Figma: estructura de páginas, naming de componentes, token naming para sincronización. Sin esto, designers trabajan desconectados del código.</td>
+        <td class="err">Crítica</td>
+        <td>Diseñadores, handoff, token sync Figma ↔ code</td>
+      </tr>
+      <tr>
+        <td><strong>ACCESSIBILITY.md</strong></td>
+        <td>Guía de testing de accesibilidad: herramientas (axe, Lighthouse, VoiceOver/NVDA), qué testear por componente, cómo reportar un a11y bug, cómo resolverlo.</td>
+        <td class="warn">Alta</td>
+        <td>Productos con requisito formal de WCAG AA</td>
+      </tr>
+      <tr>
+        <td><strong>ROADMAP.md</strong></td>
+        <td>Lista de componentes en roadmap con: descripción, referencia de diseño, timeline estimado, quién lo lleva. Actualmente solo mencionados en CLAUDE.md sin contexto.</td>
+        <td>Media</td>
+        <td>Planning, expectativas de equipo</td>
+      </tr>
+      <tr>
+        <td><strong>ILLUSTRATIONS.md</strong></td>
+        <td>Guía de ilustraciones: estilo visual, paleta, cuándo usar, formatos. Mencionado en el changelog de index.html pero sin contenido.</td>
+        <td>Media</td>
+        <td>Diseñadores que crean assets</td>
+      </tr>
+      <tr>
+        <td><strong>MOTION.md</strong> (standalone)</td>
+        <td>GOVERNANCE §13 cubre las reglas. Un doc standalone con ejemplos visuales y casos de uso ayudaría a designers. Pendiente.</td>
+        <td>Baja</td>
+        <td>Guía para designers de UX motion</td>
+      </tr>
+      <tr>
+        <td><strong>Get Started reestructurado</strong> (index.html)</td>
+        <td>DS Content Strategy Analysis.md identifica que la página de Get Started actual es un README técnico sin role-based paths. Requiere rediseño del HTML, no un nuevo .md.</td>
+        <td class="warn">Alta</td>
+        <td>Onboarding de nuevo team members</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Governance gaps -->
+<section class="r-section" id="s-governance">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§13</span>
+    <span class="r-section-title">Gaps de Governance pendientes de CSS fix</span>
+  </div>
+  <p class="r-section-sub">La Governance ahora documenta los estándares correctos. Estos son los gaps que requieren cambios en archivos CSS (no en documentación) para cerrar la brecha entre las reglas y la implementación.</p>
+
+  <table class="r-table">
+    <thead><tr><th>Prioridad</th><th>CSS a cambiar</th><th>Regla en GOVERNANCE</th></tr></thead>
+    <tbody>
+      <tr><td class="err">Crítica</td><td><code>segmented-button.css</code>: reemplazar todos los <code>--ds-*</code> tokens</td><td>§2.1 Token hierarchy, §2.3 Prohibited patterns</td></tr>
+      <tr><td class="err">Crítica</td><td><code>vacancy-card.css</code>, <code>person-card.css</code>: reemplazar gradientes de primitivos con container pairs semánticos</td><td>§5.1 Color Role mapping, §2.3 Prohibited patterns</td></tr>
+      <tr><td class="err">Crítica</td><td><code>search.css</code>, <code>toolbar.css</code>: agregar focus ring estándar</td><td>§6.2 Focus canonical pattern</td></tr>
+      <tr><td class="warn">Alta</td><td><code>form.css</code>: focus → <code>:focus-visible</code> + standard ring; disabled → <code>--color-disabled</code>; padding → 16px</td><td>§6.2, §5.3, §7.2</td></tr>
+      <tr><td class="warn">Alta</td><td>4 componentes: hover → <code>var(--color-surface-variant)</code> en vez de <code>var(--bg)</code></td><td>§5.4 Hover approaches</td></tr>
+      <tr><td class="warn">Alta</td><td>5 icon button implementations: unificar usando <code>.icon-btn</code></td><td>§3.1 Single visual identity</td></tr>
+      <tr><td class="warn">Alta</td><td>3 avatar patterns: unificar usando semantic container pairs</td><td>§5.1 Color Role mapping</td></tr>
+      <tr><td class="warn">Media</td><td>8+ componentes: spacing off-scale values → <code>--space-*</code> tokens</td><td>§7.2 Spacing rules</td></tr>
+      <tr><td class="warn">Media</td><td><code>button.css</code>, 4 más: transiciones <code>.1s</code> → <code>var(--duration-fast)</code></td><td>§13.3 Motion rules</td></tr>
+      <tr><td class="warn">Media</td><td><code>button.css</code>: font-size 11px/15px/16px → <code>--font-size-*</code> tokens</td><td>§8.3 Typography rules</td></tr>
+      <tr><td>Baja</td><td><code>variables.css</code>: shadow dark mode overrides, <code>--duration-slow</code>, <code>--duration-stagger</code>, <code>--ease-spring</code></td><td>§9.1, §13.1</td></tr>
+      <tr><td>Baja</td><td><code>chip.css</code>: disabled → Embassy tokens en vez de MD3 opacity model</td><td>§5.3 Disabled pattern</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Next steps -->
+<section class="r-section" id="s-next">
+  <div class="r-section-hdr">
+    <span class="r-section-id">§14</span>
+    <span class="r-section-title">Próximos pasos recomendados</span>
+  </div>
+
+  <table class="r-table">
+    <thead><tr><th>Sprint</th><th>Acción</th><th>Impacto</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Inmediato</strong></td>
+        <td>Fix <code>segmented-button.css</code>: reemplazar tokens <code>--ds-*</code> con los mappings documentados en GOVERNANCE §12.2</td>
+        <td class="err">Crítico — componente roto</td>
+      </tr>
+      <tr>
+        <td><strong>Inmediato</strong></td>
+        <td>Fix avatars en <code>vacancy-card.css</code> y <code>person-card.css</code>: primitivos → semantic container pairs</td>
+        <td class="err">Crítico para white-label</td>
+      </tr>
+      <tr>
+        <td><strong>Inmediato</strong></td>
+        <td>Fix focus ring en <code>search.css</code> y <code>toolbar.css</code> (search-field)</td>
+        <td class="err">WCAG fail</td>
+      </tr>
+      <tr>
+        <td><strong>Semana 1</strong></td>
+        <td>Fix hover tokens: reemplazar <code>var(--bg)</code> con <code>var(--color-surface-variant)</code> en 4 componentes</td>
+        <td class="warn">Alta — UX inconsistency</td>
+      </tr>
+      <tr>
+        <td><strong>Semana 1</strong></td>
+        <td>Fix <code>form.css</code>: focus pattern, disabled token, padding</td>
+        <td class="warn">Alta — a11y + consistency</td>
+      </tr>
+      <tr>
+        <td><strong>Semana 2</strong></td>
+        <td>Crear CHANGELOG.md con historial desde v1.0</td>
+        <td class="warn">Alta — returning users</td>
+      </tr>
+      <tr>
+        <td><strong>Semana 2</strong></td>
+        <td>Reestructurar Get Started en index.html siguiendo DS Content Strategy Analysis.md §7</td>
+        <td class="warn">Alta — designer onboarding</td>
+      </tr>
+      <tr>
+        <td><strong>Semana 3</strong></td>
+        <td>Unificar icon button implementations → extender <code>.icon-btn</code> con ghost modifier</td>
+        <td class="warn">Media — consistency</td>
+      </tr>
+      <tr>
+        <td><strong>Semana 3</strong></td>
+        <td>Fix spacing off-scale values en 8+ componentes</td>
+        <td class="warn">Media — scale consistency</td>
+      </tr>
+      <tr>
+        <td><strong>Sprint 2</strong></td>
+        <td>Crear TOKENS.md (catálogo machine-readable de tokens)</td>
+        <td>Media — tooling integration</td>
+      </tr>
+      <tr>
+        <td><strong>Sprint 2</strong></td>
+        <td>Añadir <code>--duration-slow</code>, <code>--duration-stagger</code>, <code>--ease-spring</code> a <code>variables.css</code></td>
+        <td>Media — motion governance</td>
+      </tr>
+      <tr>
+        <td><strong>Sprint 2</strong></td>
+        <td>Fix font-size hardcoded en button.css, badge.css</td>
+        <td>Media — type scale compliance</td>
+      </tr>
+      <tr>
+        <td><strong>Sprint 3</strong></td>
+        <td>Crear ROADMAP.md con 12 componentes pendientes y timeline</td>
+        <td>Baja — planning</td>
+      </tr>
+      <tr>
+        <td><strong>Sprint 3</strong></td>
+        <td>Definir Figma library structure y documentarla</td>
+        <td class="err">Crítica para designers — pero requiere diseñador responsable</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+</body>
+</html>

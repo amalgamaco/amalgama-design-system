@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditoría de patrón: Icon Buttons — Embassy DS</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-900: #01164D;
+      --secondary-200: #CAD9FF;
+      --secondary-900: #4F80FF;
+      --neutral-10: #FAFBFC;
+      --neutral-50: #EAEBED;
+      --neutral-100: #BFC1C8;
+      --neutral-200: #9FA3AE;
+      --neutral-300: #747989;
+      --neutral-400: #474D61;
+      --neutral-500: #353A4A;
+      --neutral-600: #282C39;
+      --neutral-700: #1C202C;
+      --neutral-900: #0A0C12;
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Epilogue', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--neutral-10); color: var(--primary-900); padding: 48px 40px; max-width: 960px; margin: 0 auto; }
+
+    h1 { font-family: var(--font-heading); font-size: 24px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 6px; }
+    h2 { font-family: var(--font-heading); font-size: 17px; font-weight: 700; margin: 40px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--neutral-100); }
+    h3 { font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+    p  { font-size: 13.5px; line-height: 1.65; color: var(--neutral-500); margin-bottom: 10px; }
+    p:last-child { margin-bottom: 0; }
+    code { font-family: var(--font-mono); font-size: 11.5px; background: var(--neutral-100); padding: 2px 5px; border-radius: 4px; color: var(--neutral-500); }
+    ul { padding-left: 18px; }
+    li { font-size: 13.5px; line-height: 1.7; color: var(--neutral-500); }
+
+    .subtitle { font-size: 13.5px; color: var(--neutral-400); margin-bottom: 40px; }
+
+    .badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 9999px; font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+    .badge-ok     { background: #E4F8EC; color: #006D2C; }
+    .badge-warn   { background: #FFF2DF; color: #FC7400; }
+    .badge-error  { background: #FFEBF0; color: #BF0B29; }
+    .badge-gap    { background: var(--neutral-100); color: var(--neutral-500); }
+    .badge-info   { background: #EDF2FF; color: #003ED6; }
+
+    /* ─── Verdict table ─── */
+    .verdict-table { width: 100%; border-collapse: collapse; font-size: 13px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(28,36,56,.06); border: 1px solid var(--neutral-100); margin-bottom: 32px; }
+    .verdict-table th { background: var(--neutral-50); font-weight: 600; font-size: 11px; letter-spacing: .5px; text-transform: uppercase; color: var(--neutral-400); padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--neutral-100); }
+    .verdict-table td { padding: 12px 16px; vertical-align: top; border-bottom: 1px solid #f0f1f3; line-height: 1.55; }
+    .verdict-table tr:last-child td { border-bottom: none; }
+    .q-col  { font-size: 13px; font-weight: 500; color: var(--primary-900); width: 40%; }
+    .a-col  { font-size: 13px; color: var(--neutral-500); }
+
+    /* ─── Evidence card ─── */
+    .evidence { background: white; border-radius: 12px; border: 1px solid var(--neutral-100); box-shadow: 0 1px 3px rgba(28,36,56,.06); margin-bottom: 20px; overflow: hidden; }
+    .evidence-header { padding: 12px 16px; background: var(--neutral-50); border-bottom: 1px solid var(--neutral-100); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .evidence-header-left { display: flex; align-items: center; gap: 8px; }
+    .evidence-title { font-size: 13px; font-weight: 600; color: var(--primary-900); }
+    .evidence-body { padding: 16px; }
+
+    /* ─── Conflict card ─── */
+    .conflict { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    .conflict-card { background: white; border-radius: 10px; border: 1px solid var(--neutral-100); padding: 16px; }
+    .conflict-card h3 { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .conflict-card ul { padding-left: 16px; }
+    .conflict-card li { font-size: 13px; line-height: 1.6; margin-bottom: 4px; }
+
+    /* ─── Decision paths ─── */
+    .paths { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+    .path-card { background: white; border-radius: 10px; border: 1px solid var(--neutral-100); padding: 16px; }
+    .path-card.recommended { border-color: #00C164; box-shadow: 0 0 0 1px #00C164; }
+    .path-label { font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; margin-bottom: 6px; }
+    .path-ok    { color: #006D2C; }
+    .path-warn  { color: #FC7400; }
+    .path-no    { color: #BF0B29; }
+    .path-title { font-size: 13.5px; font-weight: 600; color: var(--primary-900); margin-bottom: 8px; }
+    .path-card p { font-size: 12.5px; }
+    .path-card ul { font-size: 12.5px; padding-left: 14px; }
+    .path-card li { line-height: 1.6; }
+
+    /* ─── Finding strip ─── */
+    .finding { display: grid; grid-template-columns: 26px 1fr; gap: 10px; padding: 14px 16px; background: white; border-radius: 10px; border-left: 3px solid transparent; box-shadow: 0 1px 3px rgba(28,36,56,.06); margin-bottom: 10px; }
+    .finding-error  { border-left-color: #EE3043; }
+    .finding-warn   { border-left-color: #FFB249; }
+    .finding-ok     { border-left-color: #00C164; }
+    .finding-gap    { border-left-color: var(--neutral-200); }
+    .fi { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .fi-error  { background: #FFEBF0; color: #BF0B29; }
+    .fi-warn   { background: #FFF2DF; color: #FC7400; }
+    .fi-ok     { background: #E4F8EC; color: #006D2C; }
+    .fi-gap    { background: var(--neutral-100); color: var(--neutral-500); }
+    .finding-body h3 { margin-bottom: 4px; font-size: 13.5px; }
+    .finding-body p  { font-size: 13px; margin-bottom: 0; }
+
+    /* ─── GOVERNANCE callout ─── */
+    .gov-callout { background: #FFF8E8; border-left: 3px solid #FFB249; border-radius: 0 10px 10px 0; padding: 12px 16px; margin-bottom: 20px; font-size: 13px; line-height: 1.6; color: var(--primary-900); }
+    .gov-callout strong { font-weight: 600; }
+    .gov-callout code { background: rgba(0,0,0,.06); }
+
+    .infobox { background: #EDF2FF; border-left: 3px solid var(--secondary-900); border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 13px; color: var(--primary-900); line-height: 1.6; margin-bottom: 20px; }
+    .infobox strong { font-weight: 600; }
+
+    .divider { height: 1px; background: var(--neutral-100); margin: 40px 0; }
+
+    /* ─── summary row ─── */
+    .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+    .summary-cell { background: white; border-radius: 10px; border: 1px solid var(--neutral-100); padding: 14px 16px; }
+    .summary-cell-label { font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--neutral-400); margin-bottom: 6px; }
+    .summary-cell-value { font-size: 13px; font-weight: 600; }
+    .val-ok     { color: #006D2C; }
+    .val-warn   { color: #FC7400; }
+    .val-error  { color: #BF0B29; }
+    .val-gap    { color: var(--neutral-400); }
+
+    /* narrow code ref */
+    .source-ref { font-family: var(--font-mono); font-size: 11.5px; color: var(--neutral-400); }
+  </style>
+</head>
+<body>
+
+<h1>Auditoría de patrón: Icon Buttons</h1>
+<p class="subtitle">Embassy DS · Verificación contra Button, Color Roles, States, y Governance · Jun 2026</p>
+
+<!-- ─── TL;DR ─── -->
+<div class="infobox">
+  <strong>Conclusión en una línea:</strong> <code>.search-icon-btn</code> está <em>referenciado</em> como sub-patrón del componente Search, pero NO está especificado como un Icon Button variant en el sistema de botones. Tiene documentación parcial (existe en <code>docs/search.html</code>) pero le falta la especificación de estados, tokens, y el racional de diseño que justifique la forma circular y la separación de <code>.icon-btn</code>. No inventa tokens, no viola Color Roles — pero sí introduce una variante de botón fuera del árbol de Button, sin justificación documentada, y sin mención en GOVERNANCE. Es un gap de documentación y un riesgo de fragmentación.
+</div>
+
+<!-- ─── Quick verdict ─── -->
+<section>
+  <h2>Respuestas directas a las preguntas</h2>
+  <table class="verdict-table">
+    <thead><tr><th>Pregunta</th><th>Respuesta</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="q-col">¿En qué documentación de componente está definido este patrón?</td>
+        <td class="a-col">
+          Está referenciado como sub-componente de <strong>Search</strong>, no como un Icon Button variant. La única documentación es una fila de tabla en <code>docs/search.html</code> ("Botón circular 40×40px para acciones adyacentes"). No hay sección propia, ni estado demos, ni token table, ni anatomy diagram.
+        </td>
+        <td><span class="badge badge-warn">⚠ parcial</span></td>
+      </tr>
+      <tr>
+        <td class="q-col">¿Es un Icon Button variant formalmente especificado?</td>
+        <td class="a-col">
+          <strong>No.</strong> El único Icon Button variant formal es <code>.icon-btn</code> en <code>button.css</code>, documentado en el 5-tab Button section de <code>index.html</code>. <code>.search-icon-btn</code> no aparece allí, ni está cross-referenciado desde Button.
+        </td>
+        <td><span class="badge badge-error">✗ no</span></td>
+      </tr>
+      <tr>
+        <td class="q-col">¿Está documentado en Buttons?</td>
+        <td class="a-col">
+          <strong>No aparece</strong> en la sección Button de <code>index.html</code>. El Button section documenta 5 variantes: Primary, Secondary, Tertiary, Text, Icon (<code>.icon-btn</code>). <code>.search-icon-btn</code> no es la 6ta variante — vive en otro archivo CSS y no está en la jerarquía de botones.
+        </td>
+        <td><span class="badge badge-error">✗ ausente</span></td>
+      </tr>
+      <tr>
+        <td class="q-col">¿Conflicto con Color Roles?</td>
+        <td class="a-col">
+          <strong>No.</strong> Los tokens que usa son correctos: <code>--color-surface-container-high</code> (default), <code>--color-on-surface-variant</code> (icon), <code>--color-secondary-container</code> / <code>--color-secondary</code> / <code>--color-on-secondary-container</code> (selected). Todos son roles semánticos de <code>variables.css</code>. El Color Role mapping de GOVERNANCE §5 justifica el selected state como "secondary / tonal action".
+        </td>
+        <td><span class="badge badge-ok">✓ correcto</span></td>
+      </tr>
+      <tr>
+        <td class="q-col">¿Conflicto con States?</td>
+        <td class="a-col">
+          Parcialmente. El focus ring es correcto. El hover es correcto. El pressed (antes de la fix de ayer) usaba <code>opacity</code> en lugar de state layer. El disabled estaba ausente. Hoy con la fix aplicada, los estados son completos — pero aún no están documentados en una state demo formal.
+        </td>
+        <td><span class="badge badge-warn">⚠ falta demo</span></td>
+      </tr>
+      <tr>
+        <td class="q-col">¿Está documentado en Governance?</td>
+        <td class="a-col">
+          <strong>No directamente.</strong> GOVERNANCE §12.4 ("Known Inconsistencies") ya identifica "Icon button fragmentation" con 5 implementaciones distintas (<code>.icon-btn</code>, <code>.modal-close</code>, <code>.more-btn</code>, <code>.desc-delete-btn</code>, <code>.toast-close</code>) y llama a consolidar. <code>.search-icon-btn</code> es una <em>sexta</em> implementación que no fue capturada en ese audit — lo que confirma el riesgo que señalás.
+        </td>
+        <td><span class="badge badge-error">✗ no registrado</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ─── The two classes ─── -->
+<section>
+  <h2>El problema central: dos clases para icon buttons</h2>
+  <p>Actualmente existen dos definiciones de icon button que coexisten sin jerarquía documentada entre ellas:</p>
+
+  <div class="conflict">
+    <div class="conflict-card">
+      <h3><span class="badge badge-info">Button family</span> <code>.icon-btn</code></h3>
+      <ul>
+        <li>Archivo: <code>button.css</code></li>
+        <li>Tamaño: 36×36px (MD default)</li>
+        <li>Forma: <code>--radius-md</code> = 8px (rectangular)</li>
+        <li>Fondo: <code>--color-surface-container</code></li>
+        <li>Borde: <code>1px solid var(--color-outline)</code></li>
+        <li>Ícono: <code>--color-on-surface-variant</code></li>
+        <li>Selected: <strong>no definido</strong></li>
+        <li>Documentación: ✓ sección completa en <code>index.html</code></li>
+        <li>Pertenece a: jerarquía de Button (5ta variante)</li>
+      </ul>
+    </div>
+    <div class="conflict-card">
+      <h3><span class="badge badge-warn">Search family</span> <code>.search-icon-btn</code></h3>
+      <ul>
+        <li>Archivo: <code>search.css</code></li>
+        <li>Tamaño: 40×40px</li>
+        <li>Forma: <code>border-radius: 50%</code> (circular)</li>
+        <li>Fondo: <code>--color-surface-container-high</code></li>
+        <li>Borde: <code>1px solid var(--border)</code> (más sutil)</li>
+        <li>Ícono: <code>--color-on-surface-variant</code></li>
+        <li>Selected: <code>--color-secondary-container</code> ✓</li>
+        <li>Documentación: ⚠ fila de tabla en <code>docs/search.html</code></li>
+        <li>Pertenece a: componente Search (sub-patrón)</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>La diferencia más importante es la <strong>forma y el tamaño</strong>. <code>.icon-btn</code> usa el radius scale de Button (§4.3 de GOVERNANCE). <code>.search-icon-btn</code> usa <code>border-radius: 50%</code>, que no está en el radius scale ni en la size table de botones — es la forma de avatares y la píldora de chips, aplicada a un elemento cuadrado.</p>
+</section>
+
+<!-- ─── Shape conflict ─── -->
+<section>
+  <h2>¿La forma circular viola el sistema de formas?</h2>
+
+  <div class="gov-callout">
+    <strong>GOVERNANCE §4.2:</strong> "A button with <code>--radius-full</code> is visually indistinguishable from a chip. The pill shape communicates 'selectable tag' — using it on a button breaks hierarchy and misleads users about the element's role. Buttons never use <code>--radius-full</code>."
+  </div>
+
+  <p>El §4.2 prohíbe <code>--radius-full</code> en botones para evitar confusión con chips. Pero <code>.search-icon-btn</code> no usa <code>--radius-full</code> — usa <code>border-radius: 50%</code>. En un elemento cuadrado (40×40), esto produce un <strong>círculo perfecto</strong>, que es visualmente distinto de la píldora de un chip (que requiere que el elemento sea más ancho que alto). Técnicamente no viola la letra de §4.2.</p>
+
+  <p>Sin embargo, <code>border-radius: 50%</code> no está en el radius scale de GOVERNANCE §4.1 (<code>sm/md/lg/xl/full</code>). GOVERNANCE §4.4 dice: "A component must use a radius token, not a computed or hardcoded intermediate value. If no token fits, this is a DS gap." El círculo es un valor hardcoded que no tiene token propio — <strong>esto sí es técnicamente una violación de §4.4</strong>.</p>
+
+  <p>La excepción razonable: avatares también usan <code>border-radius: 50%</code>. El DS acepta implícitamente este valor para elementos circulares. Pero esa excepción no está documentada en GOVERNANCE.</p>
+</section>
+
+<!-- ─── Findings ─── -->
+<section>
+  <h2>Hallazgos</h2>
+
+  <div class="finding finding-error">
+    <div class="fi fi-error">✗</div>
+    <div class="finding-body">
+      <h3>No está documentado como Icon Button variant</h3>
+      <p><code>.search-icon-btn</code> no aparece en el Button section de <code>index.html</code>. Cualquier consumidor que busque "cómo hacer un icon button circular con selected state" en la documentación canónica no lo va a encontrar. Eso es un gap de documentación que produce exactamente el comportamiento que describís: alguien inventa un patrón porque no encontró el existente.</p>
+    </div>
+  </div>
+
+  <div class="finding finding-error">
+    <div class="fi fi-error">✗</div>
+    <div class="finding-body">
+      <h3>GOVERNANCE §12.4 ya registra icon button fragmentation — .search-icon-btn no fue capturado</h3>
+      <p>La tabla de "Known Inconsistencies" lista 5 implementaciones fragmentadas de icon buttons. <code>.search-icon-btn</code> es una sexta que no fue capturada en ese audit. Esto confirma que el problema que señalás es real y ya existía antes de este componente.</p>
+    </div>
+  </div>
+
+  <div class="finding finding-error">
+    <div class="fi fi-error">✗</div>
+    <div class="finding-body">
+      <h3><code>border-radius: 50%</code> no es un radius token — viola GOVERNANCE §4.4</h3>
+      <p>El radius scale del DS es <code>sm/md/lg/xl/full</code>. Ninguno de esos tokens aplicado a un elemento cuadrado produce un círculo. El círculo usa un valor hardcoded sin equivalente en el sistema. Esto no está exceptuado en GOVERNANCE (a diferencia de los avatares, que comparten la misma situación pero tampoco tienen excepción documentada).</p>
+    </div>
+  </div>
+
+  <div class="finding finding-warn">
+    <div class="fi fi-warn">!</div>
+    <div class="finding-body">
+      <h3>No hay state demos ni token table en Search docs</h3>
+      <p>La documentación de <code>.search-icon-btn</code> en <code>docs/search.html</code> es una fila de tabla con una descripción de una línea. No tiene estado demos (default, hover, focus, pressed, selected, disabled), no tiene token table (qué token usa en cada estado), y no tiene racional de diseño. Esto viola el estándar de documentación de GOVERNANCE §10.</p>
+    </div>
+  </div>
+
+  <div class="finding finding-warn">
+    <div class="fi fi-warn">!</div>
+    <div class="finding-body">
+      <h3>No hay regla que defina cuándo usar .icon-btn vs .search-icon-btn</h3>
+      <p>Un consumidor que necesita un icon button circular con selected state no sabe si debe usar <code>.icon-btn</code> + algún modifier, <code>.search-icon-btn</code> fuera del contexto de search, o algo distinto. Esta ambigüedad es la fuente del patrón "inventado" que describís.</p>
+    </div>
+  </div>
+
+  <div class="finding finding-ok">
+    <div class="fi fi-ok">✓</div>
+    <div class="finding-body">
+      <h3>Los tokens usados son correctos — no hay violaciones de Color Roles</h3>
+      <p>El componente consume roles semánticos correctos para cada estado. El visual treatment (neutral fill + border + stroke icon + secondary-container selected) es coherente con los Color Roles definidos en <code>variables.css</code> y con el patrón de selected state documentado en GOVERNANCE §5.5.</p>
+    </div>
+  </div>
+
+  <div class="finding finding-ok">
+    <div class="fi fi-ok">✓</div>
+    <div class="finding-body">
+      <h3>El patrón base (neutral fill + border + icon) sí está establecido por .icon-btn</h3>
+      <p>La combinación visual "fondo de superficie + borde outlined + ícono de trazo" no es nueva. Es exactamente lo que <code>.icon-btn</code> hace. <code>.search-icon-btn</code> no inventa un tratamiento visual — lo adapta con forma circular y selected state para el contexto de búsqueda. El problema no es el visual, es que esta adaptación no está especificada formalmente.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── Options ─── -->
+<section>
+  <h2>¿Qué hacer? Tres opciones</h2>
+
+  <div class="paths">
+    <div class="path-card recommended">
+      <div class="path-label path-ok">✓ Recomendado</div>
+      <div class="path-title">Opción A: Formalizar como sub-componente de Search con documentación completa</div>
+      <p>Mantener <code>.search-icon-btn</code> en <code>search.css</code>, pero documentarlo correctamente:</p>
+      <ul>
+        <li>Agregar state demos en <code>docs/search.html</code></li>
+        <li>Agregar token table por estado</li>
+        <li>Documentar el racional de la forma circular (acompaña el pill shape del search-bar)</li>
+        <li>Agregar <code>border-radius: 50%</code> como excepción explícita en GOVERNANCE §4.4 (igual que avatares)</li>
+        <li>Registrar en GOVERNANCE §12.4 como issue conocido: "search-icon-btn no está cross-referenciado desde Button"</li>
+        <li>Agregar cross-referencia desde Button section de <code>index.html</code></li>
+      </ul>
+    </div>
+    <div class="path-card">
+      <div class="path-label path-warn">~ Alternativa</div>
+      <div class="path-title">Opción B: Consolidar en el sistema de botones como .icon-btn modifier</div>
+      <p>Mover el patrón al árbol de Button como una variante formal:</p>
+      <ul>
+        <li>Agregar <code>.icon-btn.icon-btn-circular</code> o <code>.icon-btn--search</code> en <code>button.css</code></li>
+        <li>Mover los estilos de <code>search.css</code> a <code>button.css</code></li>
+        <li>Documentar en el Button section de <code>index.html</code></li>
+        <li>Requiere decidir si "circular" es una variante de Button o una propiedad de contexto</li>
+        <li>Más difícil de justificar: el círculo es semánticamente correcto junto a un search-bar, no como icon button genérico</li>
+      </ul>
+    </div>
+    <div class="path-card">
+      <div class="path-label path-no">✗ No recomendado</div>
+      <div class="path-title">Opción C: Reemplazar con .icon-btn existente (rectangular)</div>
+      <p>Eliminar <code>.search-icon-btn</code> y usar <code>.icon-btn.btn-lg</code> (44px rectangular):</p>
+      <ul>
+        <li>Simplifica el sistema</li>
+        <li>Pero rompe la coherencia visual: un search-bar circular con botones rectangulares crea tensión de forma</li>
+        <li>Requiere decisión de diseño explícita</li>
+        <li>El selected state de <code>.icon-btn</code> tampoco está definido — necesitaría la misma work</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── What to do now ─── -->
+<section>
+  <h2>Acciones concretas</h2>
+
+  <div class="finding finding-error">
+    <div class="fi fi-error">1</div>
+    <div class="finding-body">
+      <h3>Registrar en GOVERNANCE §12.4 — alta prioridad</h3>
+      <p>Agregar <code>.search-icon-btn</code> a la tabla de "Icon button fragmentation" en §12.4 con la nota: "Sub-variante circular del icon button, definida en search.css. Requiere cross-referencia desde Button section y decisión sobre si consolida en button.css o se formaliza como sub-componente de Search."</p>
+    </div>
+  </div>
+
+  <div class="finding finding-error">
+    <div class="fi fi-error">2</div>
+    <div class="finding-body">
+      <h3>Agregar state demos a docs/search.html — documentación mínima</h3>
+      <p>Sin state demos formales, cualquier implementación futura puede divergir. Se necesita al menos: default, hover, focus, pressed, selected, disabled — con los tokens correspondientes.</p>
+    </div>
+  </div>
+
+  <div class="finding finding-warn">
+    <div class="fi fi-warn">3</div>
+    <div class="finding-body">
+      <h3>Documentar el racional de la forma circular en GOVERNANCE</h3>
+      <p>GOVERNANCE §4.4 prohíbe valores de radius fuera del scale. Hay que agregar una excepción documentada para <code>border-radius: 50%</code> en elementos cuadrados (avatar, search-icon-btn) con la justificación de diseño.</p>
+    </div>
+  </div>
+
+  <div class="finding finding-warn">
+    <div class="fi fi-warn">4</div>
+    <div class="finding-body">
+      <h3>Cross-referenciar desde la sección Button de index.html</h3>
+      <p>El Button section debe mencionar que existe un icon button circular para contextos de búsqueda (<code>.search-icon-btn</code>) y apuntar a la sección Search. Sin esa referencia, cualquier consumidor que busque "icon button con selected state" no lo encuentra.</p>
+    </div>
+  </div>
+
+  <div class="finding finding-gap">
+    <div class="fi fi-gap">5</div>
+    <div class="finding-body">
+      <h3>Decisión de diseño sobre .icon-btn vs .search-icon-btn (cuándo usar cada uno)</h3>
+      <p>Falta una regla explícita: "Usá <code>.icon-btn</code> cuando... Usá <code>.search-icon-btn</code> cuando...". Propuesta: <code>.icon-btn</code> para acciones inline en tablas, listas, y toolbars rectangulares. <code>.search-icon-btn</code> exclusivamente en <code>.search-row</code> — patrón circular que acompaña la forma pill del search-bar.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

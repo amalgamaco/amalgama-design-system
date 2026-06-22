@@ -74,4 +74,26 @@
 
   /* Scrim / Shadow */
   --md-sys-color-scrim:                   var(--color-scrim);
+
+  /* ── Typography ──────────────────────────────────────────────
+     @material/web components default their typescale font to 'Roboto'
+     (not loaded → serif fallback). Map every typescale role's FONT to
+     Embassy's UI typeface (Inter) so md-* components match the system.
+     Only the font family is overridden; Material keeps its own sizes,
+     weights, line-heights and tracking. */
+  --md-sys-typescale-display-large-font:    var(--font-body);
+  --md-sys-typescale-display-medium-font:   var(--font-body);
+  --md-sys-typescale-display-small-font:    var(--font-body);
+  --md-sys-typescale-headline-large-font:   var(--font-body);
+  --md-sys-typescale-headline-medium-font:  var(--font-body);
+  --md-sys-typescale-headline-small-font:   var(--font-body);
+  --md-sys-typescale-title-large-font:      var(--font-body);
+  --md-sys-typescale-title-medium-font:     var(--font-body);
+  --md-sys-typescale-title-small-font:      var(--font-body);
+  --md-sys-typescale-body-large-font:       var(--font-body);
+  --md-sys-typescale-body-medium-font:      var(--font-body);
+  --md-sys-typescale-body-small-font:       var(--font-body);
+  --md-sys-typescale-label-large-font:      var(--font-body);
+  --md-sys-typescale-label-medium-font:     var(--font-body);
+  --md-sys-typescale-label-small-font:      var(--font-body);
 }

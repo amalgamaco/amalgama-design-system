@@ -7,9 +7,5 @@
   "files": [
     "css/",
     "components/"
-  ],
-  "workspaces": [
-    "packages/*",
-    "apps/*"
   ]
 }

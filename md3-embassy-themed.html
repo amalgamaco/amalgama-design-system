@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MD3 Official Components — Embassy-themed</title>
+
+<!-- Embassy tokens: variables.css defines --color-* (light + [data-theme=dark]) -->
+<link rel="stylesheet" href="css/variables.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Official @material/web — single all.js bundle (avoids the duplicate-define issue) -->
+<script type="importmap">
+{ "imports": { "@material/web/": "https://esm.run/@material/web/" } }
+</script>
+<script type="module">
+  import '@material/web/all.js';
+  import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+  document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  window.__md3loaded = true;
+  customElements.whenDefined('md-switch').then(() => { window.__ready = true; });
+</script>
+
+<style>
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 0 auto; padding: 40px; max-width: 960px;
+    background: var(--color-surface); color: var(--text-primary);
+  }
+  h1 { font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 600; margin: 0 0 4px; }
+  .sub { color: var(--text-secondary); margin: 0 0 24px; font-size: 14px; }
+  .note {
+    background: var(--color-surface-container-high); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px; font-size: 13px; color: var(--text-secondary); margin: 0 0 28px;
+  }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .col { padding: 24px; }
+  .col + .col { border-left: 1px solid var(--border); }
+  .col-head { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-secondary); margin: 0 0 18px; }
+  .row { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+  .row label, .row .lbl { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  h2 { font-size: 15px; font-weight: 600; margin: 22px 0 10px; color: var(--text-primary); }
+  h2:first-of-type { margin-top: 0; }
+
+  /* ── THE BRIDGE, scoped to .embassy ──────────────────────────────────
+     Maps Material's system tokens onto Embassy's semantic roles. In
+     production this lives at :root in css/md-sys-bridge.css; here it's
+     scoped to one column so the other stays Material baseline. The official
+     components read these custom properties through their Shadow DOM. */
+  .embassy {
+    --md-sys-color-primary:                  var(--color-primary);
+    --md-sys-color-on-primary:               var(--color-on-primary);
+    --md-sys-color-primary-container:        var(--color-primary-container);
+    --md-sys-color-on-primary-container:     var(--color-on-primary-container);
+    --md-sys-color-secondary:                var(--color-secondary);
+    --md-sys-color-on-secondary:             var(--color-on-secondary);
+    --md-sys-color-secondary-container:      var(--color-secondary-container);
+    --md-sys-color-on-secondary-container:   var(--color-on-secondary-container);
+    --md-sys-color-error:                    var(--color-error);
+    --md-sys-color-on-error:                 var(--color-on-error);
+    --md-sys-color-error-container:          var(--color-error-container);
+    --md-sys-color-on-error-container:       var(--color-on-error-container);
+    --md-sys-color-surface:                  var(--color-surface);
+    --md-sys-color-surface-variant:          var(--color-surface-variant);
+    --md-sys-color-surface-container-lowest:  var(--color-surface-container-lowest);
+    --md-sys-color-surface-container-low:     var(--color-surface-container-low);
+    --md-sys-color-surface-container:         var(--color-surface-container);
+    --md-sys-color-surface-container-high:    var(--color-surface-container-high);
+    --md-sys-color-surface-container-highest: var(--color-surface-container-highest);
+    --md-sys-color-on-surface:               var(--color-on-surface);
+    --md-sys-color-on-surface-variant:       var(--color-on-surface-variant);
+    --md-sys-color-outline:                  var(--color-outline);
+    --md-sys-color-outline-variant:          var(--color-outline-variant);
+    --md-sys-color-inverse-surface:          var(--color-inverse-surface);
+    --md-sys-color-inverse-on-surface:       var(--color-inverse-on-surface);
+    --md-sys-color-scrim:                    var(--color-scrim);
+  }
+
+  .dark-wrap { margin-top: 28px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+  .dark-wrap .col { background: var(--color-surface); color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+  <h1>Official MD3 components — Embassy palette applied</h1>
+  <p class="sub">Identical <code>@material/web</code> Checkbox &amp; Switch. Left: Material's baseline tokens. Right: fed Embassy's <code>--color-*</code> semantic roles via the <code>--md-sys-color-*</code> bridge.</p>
+
+  <div class="note">
+    The components are byte-identical in both columns. The only difference is that the right column sets <code>--md-sys-color-primary: var(--color-primary)</code> and the rest of the role mappings. The official components pick those up through their Shadow DOM — so Embassy's navy/periwinkle replaces Material's baseline purple, with no change to the components themselves.
+  </div>
+
+  <div class="cols">
+    <!-- ── Material baseline ── -->
+    <div class="col">
+      <div class="col-head">Material baseline</div>
+      <h2>Checkbox</h2>
+      <div class="row"><label><md-checkbox aria-label="a"></md-checkbox> Unchecked</label></div>
+      <div class="row"><label><md-checkbox checked aria-label="b"></md-checkbox> Checked</label></div>
+      <div class="row"><label><md-checkbox indeterminate aria-label="c"></md-checkbox> Indeterminate</label></div>
+      <div class="row"><label><md-checkbox checked disabled aria-label="d"></md-checkbox> Disabled checked</label></div>
+      <div class="row"><md-checkbox error aria-label="e"></md-checkbox> <span class="lbl">Error</span></div>
+      <h2>Switch</h2>
+      <div class="row"><md-switch aria-label="f"></md-switch> <span class="lbl">Off</span></div>
+      <div class="row"><md-switch selected aria-label="g"></md-switch> <span class="lbl">On</span></div>
+      <div class="row"><md-switch selected icons aria-label="h"></md-switch> <span class="lbl">On · icons</span></div>
+      <div class="row"><md-switch selected disabled aria-label="i"></md-switch> <span class="lbl">Disabled on</span></div>
+    </div>
+
+    <!-- ── Embassy-themed ── -->
+    <div class="col embassy">
+      <div class="col-head">Embassy palette</div>
+      <h2>Checkbox</h2>
+      <div class="row"><label><md-checkbox aria-label="a2"></md-checkbox> Unchecked</label></div>
+      <div class="row"><label><md-checkbox checked aria-label="b2"></md-checkbox> Checked</label></div>
+      <div class="row"><label><md-checkbox indeterminate aria-label="c2"></md-checkbox> Indeterminate</label></div>
+      <div class="row"><label><md-checkbox checked disabled aria-label="d2"></md-checkbox> Disabled checked</label></div>
+      <div class="row"><md-checkbox error aria-label="e2"></md-checkbox> <span class="lbl">Error</span></div>
+      <h2>Switch</h2>
+      <div class="row"><md-switch aria-label="f2"></md-switch> <span class="lbl">Off</span></div>
+      <div class="row"><md-switch selected aria-label="g2"></md-switch> <span class="lbl">On</span></div>
+      <div class="row"><md-switch selected icons aria-label="h2"></md-switch> <span class="lbl">On · icons</span></div>
+      <div class="row"><md-switch selected disabled aria-label="i2"></md-switch> <span class="lbl">Disabled on</span></div>
+    </div>
+  </div>
+
+  <!-- ── Embassy-themed, DARK (data-theme=dark recalibrates --color-* automatically) ── -->
+  <div class="dark-wrap" data-theme="dark">
+    <div class="col embassy">
+      <div class="col-head">Embassy palette · dark <span style="text-transform:none;font-weight:400">— same bridge, --color-* recalibrates via data-theme="dark"</span></div>
+      <div class="row" style="gap:32px">
+        <label><md-checkbox aria-label="j"></md-checkbox> Unchecked</label>
+        <label><md-checkbox checked aria-label="k"></md-checkbox> Checked</label>
+        <md-switch aria-label="l"></md-switch> <span class="lbl">Off</span>
+        <md-switch selected aria-label="m"></md-switch> <span class="lbl">On</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

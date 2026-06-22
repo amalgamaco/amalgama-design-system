@@ -1,8 +1,2 @@
 .DS_Store
 .claude/
-
-# React/Vite pivot (feat/react-shadcn-pivot)
-node_modules/
-dist/
-*.local
-.vite/
