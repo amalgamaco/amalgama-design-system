@@ -1,0 +1,33 @@
+{
+  "name": "embassy-islands",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "shadcn/ui React islands mounted into the buildless Embassy docs (index.html). Build output (dist/embassy-islands.js + .css) is loaded by index.html; source is NOT part of the DS library.",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "dependencies": {
+    "@radix-ui/react-checkbox": "^1.3.5",
+    "@radix-ui/react-radio-group": "^1.4.1",
+    "@radix-ui/react-slot": "^1.3.0",
+    "@radix-ui/react-switch": "^1.3.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.469.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "tailwindcss": "^4.3.1",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12"
+  }
+}

@@ -1,2 +1,5 @@
 .DS_Store
 .claude/
+
+# islands build deps (the built dist/ IS committed/served)
+islands/node_modules/
