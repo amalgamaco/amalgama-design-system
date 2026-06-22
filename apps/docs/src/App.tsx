@@ -17,11 +17,13 @@ import { CardPage } from './pages/CardPage'
 import { SnackbarPage } from './pages/SnackbarPage'
 import { SkeletonPage } from './pages/SkeletonPage'
 import { EmptyStatePage } from './pages/EmptyStatePage'
-import { COMPONENT_SECTIONS } from './lib/sections'
+import { ColorPage } from './pages/ColorPage'
+import { TypographyPage } from './pages/TypographyPage'
+import { COMPONENT_SECTIONS, FOUNDATION_SECTIONS } from './lib/sections'
 
 function Placeholder() {
   const loc = useLocation()
-  const s = COMPONENT_SECTIONS.find((x) => x.path === loc.pathname)
+  const s = [...FOUNDATION_SECTIONS, ...COMPONENT_SECTIONS].find((x) => x.path === loc.pathname)
   return (
     <div style={{ maxWidth: 820 }}>
       <p className="text-xs font-semibold tracking-[0.1em] uppercase text-secondary mb-3">Components · {s?.category}</p>
@@ -37,7 +39,9 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Shell />}>
-            <Route index element={<Navigate to="/components/button" replace />} />
+            <Route index element={<Navigate to="/foundations/color" replace />} />
+            <Route path="/foundations/color" element={<ColorPage />} />
+            <Route path="/foundations/typography" element={<TypographyPage />} />
             <Route path="/components/button" element={<ButtonPage />} />
             <Route path="/components/switch" element={<SwitchPage />} />
             <Route path="/components/select" element={<SelectPage />} />

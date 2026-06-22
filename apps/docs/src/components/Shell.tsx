@@ -1,17 +1,17 @@
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '@embassy/ui'
-import { COMPONENT_SECTIONS, CATEGORY_ORDER } from '../lib/sections'
+import { COMPONENT_SECTIONS, CATEGORY_ORDER, FOUNDATION_SECTIONS, type SectionMeta } from '../lib/sections'
 
 export function Shell() {
   const { theme, toggle } = useTheme()
   const loc = useLocation()
-  const current = COMPONENT_SECTIONS.find((s) => s.path === loc.pathname)
+  const current = [...FOUNDATION_SECTIONS, ...COMPONENT_SECTIONS].find((s) => s.path === loc.pathname)
 
-  const byCategory = CATEGORY_ORDER.map((cat) => ({
-    cat,
-    items: COMPONENT_SECTIONS.filter((s) => s.category === cat),
-  })).filter((g) => g.items.length)
+  const byCategory: { cat: string; items: SectionMeta[] }[] = [
+    { cat: 'Foundations', items: FOUNDATION_SECTIONS },
+    ...CATEGORY_ORDER.map((cat) => ({ cat, items: COMPONENT_SECTIONS.filter((s) => s.category === cat) })),
+  ].filter((g) => g.items.length)
 
   return (
     <div className="min-h-screen flex bg-background text-foreground">

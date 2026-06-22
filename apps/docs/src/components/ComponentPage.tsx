@@ -37,6 +37,28 @@ export function ComponentPage(props: {
   )
 }
 
+// Non-tabbed content page (Foundations / Styles)
+export function DocPage(props: { category: string; title: string; subtitle: string; children: React.ReactNode }) {
+  return (
+    <article style={{ maxWidth: 820 }}>
+      <p className="text-xs font-semibold tracking-[0.1em] uppercase text-secondary mb-3">{props.category}</p>
+      <h1 className="font-[var(--font-heading)] text-4xl font-extrabold text-foreground leading-tight m-0">{props.title}</h1>
+      <p className="mt-4 mb-10 text-base leading-relaxed text-muted-foreground max-w-[60ch]">{props.subtitle}</p>
+      {props.children}
+    </article>
+  )
+}
+
+export function Swatch({ token, name }: { token: string; name: string }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="h-16 rounded-[10px] border border-border" style={{ background: `var(${token})` }} />
+      <div className="text-[13px] font-medium text-foreground">{name}</div>
+      <code className="text-[11px] text-muted-foreground font-[var(--font-mono)]">{token}</code>
+    </div>
+  )
+}
+
 // ── Shared Overview building blocks ──────────────────────────────
 
 export function Bullets({ items }: { items: React.ReactNode[] }) {

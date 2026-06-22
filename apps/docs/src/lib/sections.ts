@@ -28,3 +28,12 @@ export const COMPONENT_SECTIONS: SectionMeta[] = [
 ]
 
 export const CATEGORY_ORDER = ['Actions', 'Selección', 'Inputs', 'Display', 'Navigation', 'Overlays', 'Feedback']
+
+export const FOUNDATION_SECTIONS: SectionMeta[] = [
+  { id: 'color', title: 'Color', category: 'Foundations', path: '/foundations/color', status: 'live' },
+  { id: 'typography', title: 'Typography', category: 'Foundations', path: '/foundations/typography', status: 'live' },
+  { id: 'spacing', title: 'Spacing', category: 'Foundations', path: '/foundations/spacing', status: 'todo' },
+  { id: 'radius', title: 'Shape & radius', category: 'Foundations', path: '/foundations/radius', status: 'todo' },
+  { id: 'elevation', title: 'Elevation', category: 'Foundations', path: '/foundations/elevation', status: 'todo' },
+  { id: 'icons', title: 'Icons', category: 'Foundations', path: '/foundations/icons', status: 'todo' },
+]
