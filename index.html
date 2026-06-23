@@ -19,17 +19,10 @@
 <link rel="stylesheet" href="islands/dist/embassy-islands.css?v=13">
 <script type="module" src="islands/dist/embassy-islands.js?v=13"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
-<!-- Official @material/web (MD3) — used by the Checkbox & Switch pages. Themed
-     with Embassy tokens automatically via css/md-sys-bridge.css (loaded above).
-     all.js is one bundle so shared internals (md-focus-ring) define only once. -->
-<script type="importmap">
-{ "imports": { "@material/web/": "https://esm.run/@material/web/" } }
-</script>
-<script type="module">
-  import '@material/web/all.js';
-  import { styles as mdTypescale } from '@material/web/typography/md-typescale-styles.js';
-  document.adoptedStyleSheets = [...document.adoptedStyleSheets, mdTypescale.styleSheet];
-</script>
+<!-- @material/web runtime removed (2026-06): every component page now renders via
+     the shadcn/Tailwind React islands (islands/dist/embassy-islands.js); no live
+     <md-*> elements remain. css/md-sys-bridge.css is kept — the Embassy CSS layer
+     and Segmented Button still consume its --md-sys-color-* aliases. -->
 <style>
 /* ═══════════════════════════════════════════
    AMALGAMA DS — Documentation Shell v2.0
