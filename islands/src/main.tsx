@@ -35,6 +35,7 @@ import { NavDrawerShowcase } from "./islands/NavDrawerShowcase"
 import { NavBarShowcase } from "./islands/NavBarShowcase"
 import { TopBarShowcase } from "./islands/TopBarShowcase"
 import { NavCardShowcase } from "./islands/NavCardShowcase"
+import { ButtonConfigShowcase } from "./islands/ButtonConfigShowcase"
 
 const registry: Record<string, ComponentType> = {
   "chip-showcase": ChipShowcase,
@@ -75,6 +76,7 @@ const registry: Record<string, ComponentType> = {
   "nav-bar-showcase": NavBarShowcase,
   "topbar-showcase": TopBarShowcase,
   "nav-card-showcase": NavCardShowcase,
+  "button-config-showcase": ButtonConfigShowcase,
 }
 
 function mountIslands() {

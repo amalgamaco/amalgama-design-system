@@ -16,8 +16,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=8">
-<script type="module" src="islands/dist/embassy-islands.js?v=8"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=9">
+<script type="module" src="islands/dist/embassy-islands.js?v=9"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Official @material/web (MD3) — used by the Checkbox & Switch pages. Themed
      with Embassy tokens automatically via css/md-sys-bridge.css (loaded above).
@@ -5078,64 +5078,8 @@ body { overflow-x: clip; }
         <section class="docs-section" id="bs-configurations">
           <h2 class="docs-section-title">Configuraciones</h2>
 
-          <!-- Visual diagram -->
-          <div class="bd-cfg-diagram">
-
-            <!-- 1. Size -->
-            <div class="bd-cfg-row">
-              <div class="bd-cfg-num">1</div>
-              <div class="bd-cfg-items" style="align-items:flex-end">
-                <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-xs" style="pointer-events:none">Extra pequeño</button>
-                </div>
-                <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-sm" style="pointer-events:none">Pequeño</button>
-                </div>
-                <div class="bd-cfg-item-col">
-                  <button class="btn-primary" style="pointer-events:none">Mediano</button>
-                </div>
-                <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-lg" style="pointer-events:none">Grande</button>
-                </div>
-                <div class="bd-cfg-item-col">
-                  <button class="btn-primary btn-xl" style="pointer-events:none">Extra grande</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- 2. Color -->
-            <div class="bd-cfg-row">
-              <div class="bd-cfg-num">2</div>
-              <div class="bd-cfg-items">
-                <div class="bd-cfg-item-col">
-                  <button class="btn-primary" style="pointer-events:none">Relleno</button>
-                </div>
-                <div class="bd-cfg-item-col">
-                  <button class="btn-secondary" style="pointer-events:none">Tonal</button>
-                </div>
-                <div class="bd-cfg-item-col">
-                  <button class="btn-tertiary" style="pointer-events:none">Con borde</button>
-                </div>
-                <div class="bd-cfg-item-col">
-                  <button class="btn-text" style="pointer-events:none">Texto</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- 3. Padding -->
-            <div class="bd-cfg-row">
-              <div class="bd-cfg-num">3</div>
-              <div class="bd-cfg-items">
-                <div class="bd-cfg-item-col">
-                  <button class="btn-secondary" style="pointer-events:none">24px padding</button>
-                </div>
-                <div class="bd-cfg-item-col">
-                  <button class="btn-secondary btn-compact" style="pointer-events:none">16px padding</button>
-                </div>
-              </div>
-            </div>
-
-          </div>
+          <!-- Visual diagram — island Button (shadcn/Embassy) -->
+          <div data-island="button-config-showcase"></div>
 
           <!-- Configuration legend -->
           <ol class="bd-anat-legend" style="margin-top:12px">
