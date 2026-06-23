@@ -15076,7 +15076,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <section class="docs-section">
           <h2 class="docs-section-title">Accesibilidad</h2>
           <ul class="ds-a11y-list">
-            <li><span class="ds-a11y-icon">♿</span>Asociá siempre una etiqueta: envolvé el <code>&lt;md-checkbox&gt;</code> en un <code>&lt;label&gt;</code> o usá <code>aria-label</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Asociá siempre una etiqueta: envolvé el <code>&lt;Checkbox&gt;</code> en un <code>&lt;label&gt;</code> o usá <code>aria-label</code>.</li>
             <li><span class="ds-a11y-icon">♿</span>Operable por teclado (Espacio); el foco visible usa el focus-ring oficial de Material.</li>
             <li><span class="ds-a11y-icon">♿</span>El estado indeterminado se comunica con la propiedad <code>indeterminate</code>, no solo de forma visual.</li>
             <li><span class="ds-a11y-icon">♿</span>El área de toque de 48×48&nbsp;dp la garantiza el propio componente.</li>
@@ -15088,19 +15088,15 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <p class="docs-section-desc">Cargá el componente oficial una sola vez en el <code>&lt;head&gt;</code> (ya incluido en este sitio). La paleta de Embassy se aplica sola vía <code>md-sys-bridge.css</code>; no hace falta tematizar por instancia.</p>
-          <pre class="docs-code"><code>&lt;!-- carga (una vez, en &lt;head&gt;) --&gt;
-&lt;script type="importmap"&gt;
-{ "imports": { "@material/web/": "https://esm.run/@material/web/" } }
-&lt;/script&gt;
-&lt;script type="module"&gt;import '@material/web/all.js';&lt;/script&gt;
+          <p class="docs-section-desc">Importá el componente desde la capa de implementación (shadcn/Tailwind, sobre Radix). Los tokens de Embassy se aplican solos vía el bridge de Tailwind; no hace falta tematizar por instancia.</p>
+          <pre class="docs-code"><code>import { Checkbox } from "@/components/ui/checkbox"
 
-&lt;!-- uso --&gt;
-&lt;label&gt;&lt;md-checkbox&gt;&lt;/md-checkbox&gt; Acepto los términos&lt;/label&gt;
-&lt;md-checkbox checked&gt;&lt;/md-checkbox&gt;
-&lt;md-checkbox indeterminate&gt;&lt;/md-checkbox&gt;
-&lt;md-checkbox disabled&gt;&lt;/md-checkbox&gt;
-&lt;md-checkbox error&gt;&lt;/md-checkbox&gt;</code></pre>
+&lt;label className="flex items-center gap-2"&gt;
+  &lt;Checkbox /&gt; Acepto los términos
+&lt;/label&gt;
+&lt;Checkbox defaultChecked /&gt;
+&lt;Checkbox checked="indeterminate" /&gt;
+&lt;Checkbox disabled /&gt;</code></pre>
         </section>
       </div>
 
@@ -18543,9 +18539,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;label&gt;&lt;md-radio name="plan" value="m" checked&gt;&lt;/md-radio&gt; Mensual&lt;/label&gt;
-&lt;label&gt;&lt;md-radio name="plan" value="a"&gt;&lt;/md-radio&gt; Anual&lt;/label&gt;
-&lt;label&gt;&lt;md-radio name="plan" value="t"&gt;&lt;/md-radio&gt; Trimestral&lt;/label&gt;</code></pre>
+          <pre class="docs-code"><code>import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+
+&lt;RadioGroup defaultValue="m"&gt;
+  &lt;label&gt;&lt;RadioGroupItem value="m" /&gt; Mensual&lt;/label&gt;
+  &lt;label&gt;&lt;RadioGroupItem value="a" /&gt; Anual&lt;/label&gt;
+  &lt;label&gt;&lt;RadioGroupItem value="t" /&gt; Trimestral&lt;/label&gt;
+&lt;/RadioGroup&gt;</code></pre>
         </section>
       </div>
     </section>
@@ -19609,7 +19609,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <section class="docs-section">
           <h2 class="docs-section-title">Accesibilidad</h2>
           <ul class="ds-a11y-list">
-            <li><span class="ds-a11y-icon">♿</span>Asociá siempre una etiqueta: envolvé el <code>&lt;md-switch&gt;</code> en un <code>&lt;label&gt;</code> o usá <code>aria-label</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Asociá siempre una etiqueta: envolvé el <code>&lt;Switch&gt;</code> en un <code>&lt;label&gt;</code> o usá <code>aria-label</code>.</li>
             <li><span class="ds-a11y-icon">♿</span>Expone <code>role="switch"</code> nativo; operable por teclado (Espacio/Enter) con foco visible oficial.</li>
             <li><span class="ds-a11y-icon">♿</span>No comuniques el estado solo por color — la posición del handle y el ícono opcional refuerzan on/off.</li>
             <li><span class="ds-a11y-icon">♿</span>El área de toque de 48×48&nbsp;dp la garantiza el propio componente.</li>
@@ -19621,18 +19621,15 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <p class="docs-section-desc">Cargá el componente oficial una sola vez en el <code>&lt;head&gt;</code> (ya incluido en este sitio). La paleta de Embassy se aplica sola vía <code>md-sys-bridge.css</code>.</p>
-          <pre class="docs-code"><code>&lt;!-- carga (una vez, en &lt;head&gt;) --&gt;
-&lt;script type="importmap"&gt;
-{ "imports": { "@material/web/": "https://esm.run/@material/web/" } }
-&lt;/script&gt;
-&lt;script type="module"&gt;import '@material/web/all.js';&lt;/script&gt;
+          <p class="docs-section-desc">Importá el componente desde la capa de implementación (shadcn/Tailwind, sobre Radix). Los tokens de Embassy se aplican solos vía el bridge de Tailwind.</p>
+          <pre class="docs-code"><code>import { Switch } from "@/components/ui/switch"
 
-&lt;!-- uso --&gt;
-&lt;label&gt;&lt;md-switch&gt;&lt;/md-switch&gt; Notificaciones&lt;/label&gt;
-&lt;md-switch selected&gt;&lt;/md-switch&gt;
-&lt;md-switch icons&gt;&lt;/md-switch&gt;
-&lt;md-switch selected disabled&gt;&lt;/md-switch&gt;</code></pre>
+&lt;label className="flex items-center gap-2"&gt;
+  &lt;Switch /&gt; Notificaciones
+&lt;/label&gt;
+&lt;Switch defaultChecked /&gt;
+&lt;Switch disabled /&gt;
+&lt;Switch defaultChecked disabled /&gt;</code></pre>
         </section>
       </div>
 
