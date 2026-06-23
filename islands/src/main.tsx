@@ -22,6 +22,19 @@ import { TableShowcase } from "./islands/TableShowcase"
 import { SearchShowcase } from "./islands/SearchShowcase"
 import { CardShowcase } from "./islands/CardShowcase"
 import { StatCardShowcase } from "./islands/StatCardShowcase"
+import { AvatarShowcase } from "./islands/AvatarShowcase"
+import { TooltipShowcase } from "./islands/TooltipShowcase"
+import { SheetShowcase } from "./islands/SheetShowcase"
+import { CarouselShowcase } from "./islands/CarouselShowcase"
+import { DatePickerShowcase } from "./islands/DatePickerShowcase"
+import { SegmentedButtonShowcase } from "./islands/SegmentedButtonShowcase"
+import { VacancyCardShowcase } from "./islands/VacancyCardShowcase"
+import { PersonCardShowcase } from "./islands/PersonCardShowcase"
+import { KanbanShowcase } from "./islands/KanbanShowcase"
+import { NavDrawerShowcase } from "./islands/NavDrawerShowcase"
+import { NavBarShowcase } from "./islands/NavBarShowcase"
+import { TopBarShowcase } from "./islands/TopBarShowcase"
+import { NavCardShowcase } from "./islands/NavCardShowcase"
 
 const registry: Record<string, ComponentType> = {
   "chip-showcase": ChipShowcase,
@@ -49,6 +62,19 @@ const registry: Record<string, ComponentType> = {
   "search-showcase": SearchShowcase,
   "card-showcase": CardShowcase,
   "stat-card-showcase": StatCardShowcase,
+  "avatar-showcase": AvatarShowcase,
+  "tooltip-showcase": TooltipShowcase,
+  "sheet-showcase": SheetShowcase,
+  "carousel-showcase": CarouselShowcase,
+  "date-picker-showcase": DatePickerShowcase,
+  "seg-btn-showcase": SegmentedButtonShowcase,
+  "vacancy-card-showcase": VacancyCardShowcase,
+  "person-card-showcase": PersonCardShowcase,
+  "kanban-showcase": KanbanShowcase,
+  "nav-drawer-showcase": NavDrawerShowcase,
+  "nav-bar-showcase": NavBarShowcase,
+  "topbar-showcase": TopBarShowcase,
+  "nav-card-showcase": NavCardShowcase,
 }
 
 function mountIslands() {

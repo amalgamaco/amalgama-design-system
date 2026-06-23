@@ -16,8 +16,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=2">
-<script type="module" src="islands/dist/embassy-islands.js?v=2"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=3">
+<script type="module" src="islands/dist/embassy-islands.js?v=3"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Official @material/web (MD3) — used by the Checkbox & Switch pages. Themed
      with Embassy tokens automatically via css/md-sys-bridge.css (loaded above).
@@ -7442,45 +7442,8 @@ export function IconButton({ label, size = 'default', children, className, ...pr
 
         <section class="docs-section">
           <h2 class="docs-section-title">Ejemplos</h2>
-          <div class="bd-grid c2">
-            <div>
-              <div class="sbd-label">Vista</div>
-              <div class="sbd-stage">
-                <div class="seg-btn-group" role="group" aria-label="Seleccionar vista">
-                  <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button>
-                  <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Cuadrícula</button>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="sbd-label">Período</div>
-              <div class="sbd-stage">
-                <div class="seg-btn-group" role="group" aria-label="Seleccionar período">
-                  <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Día</button>
-                  <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Semana</button>
-                  <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Mes</button>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="sbd-label">Tamaño pequeño</div>
-              <div class="sbd-stage">
-                <div class="seg-btn-group seg-btn-group-sm" role="group" aria-label="Alinear texto">
-                  <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Izquierda</button>
-                  <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Centro</button>
-                  <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Derecha</button>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="sbd-label">Deshabilitado</div>
-              <div class="sbd-stage">
-                <div class="seg-btn-group" role="group" aria-label="Vista (deshabilitada)">
-                  <button class="seg-btn selected" aria-selected="true" disabled>Lista</button>
-                  <button class="seg-btn" aria-selected="false" disabled>Cuadrícula</button>
-                </div>
-              </div>
-            </div>
+          <div class="docs-preview">
+            <div data-island="seg-btn-showcase"></div>
           </div>
         </section>
 
@@ -11997,31 +11960,7 @@ export { StatsGrid, StatCard }</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div style="width:220px;background:var(--ds-sidebar-bg);border:1px solid var(--ds-sidebar-border);border-radius:8px;overflow:hidden">
-              <div class="ds-drawer-section-title">Reclutamiento</div>
-              <div class="ds-nav" style="padding:4px 8px 8px">
-                <div class="ds-nav-item active">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                  Dashboard
-                </div>
-                <div class="ds-nav-item">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                  Vacantes
-                  <span style="margin-left:auto;font-size:11px;font-weight:600;background:var(--ds-accent-bg);color:var(--ds-accent);padding:1px 7px;border-radius:999px">12</span>
-                </div>
-                <div class="ds-nav-item">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  Candidatos
-                </div>
-              </div>
-              <div class="ds-drawer-section-title">Organización</div>
-              <div class="ds-nav" style="padding:4px 8px 8px">
-                <div class="ds-nav-item">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                  People
-                </div>
-              </div>
-            </div>
+            <div data-island="nav-drawer-showcase"></div>
           </div>
         </section>
       </div>
@@ -12254,95 +12193,8 @@ export { StatsGrid, StatCard }</code></pre>
           <p class="ds-p">Solo un ítem puede estar activo a la vez. El ícono activo usa tinta <code>--interactive</code>; el inactivo usa <code>--text-muted</code>.</p>
         </section>
         <section class="docs-section">
-          <h2 class="docs-section-title">Vista previa — 4 destinos (con badge)</h2>
           <div class="docs-preview">
-            <!-- Simulated mobile screen frame -->
-            <div style="width:400px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg);">
-              <!-- App content area -->
-              <div style="height:100px;display:flex;align-items:center;justify-content:center;padding:16px;border-bottom:1px solid var(--border);">
-                <span style="font-size:13px;color:var(--text-muted);font-family:var(--font-body);">Contenido de la vista activa</span>
-              </div>
-              <!-- Navigation Bar — MD3: padding-top:12px, indicator zone 64×32, gap 4px, label below -->
-              <nav aria-label="Navegación principal" style="display:flex;height:80px;background:var(--sidebar-bg);border-top:1px solid var(--border);">
-
-                <!-- ACTIVE item: filled icon + indicator background -->
-                <a aria-current="page" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
-                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--interactive-light);border-radius:16px;margin-bottom:4px;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--interactive)" stroke="none" aria-hidden="true">
-                      <rect x="3" y="3" width="7" height="7" rx="1"/>
-                      <rect x="14" y="3" width="7" height="7" rx="1"/>
-                      <rect x="3" y="14" width="7" height="7" rx="1"/>
-                      <rect x="14" y="14" width="7" height="7" rx="1"/>
-                    </svg>
-                  </div>
-                  <span style="font-size:12px;font-weight:700;color:var(--interactive);font-family:var(--font-body);line-height:1;">Inicio</span>
-                </a>
-
-                <!-- INACTIVE item: outlined icon, muted label, no background -->
-                <a style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
-                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
-                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                      <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                    </svg>
-                  </div>
-                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Vacantes</span>
-                </a>
-
-                <!-- INACTIVE item with badge -->
-                <a aria-label="Candidatos, 3 notificaciones" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
-                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;position:relative;">
-                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    <span aria-hidden="true" style="position:absolute;top:2px;right:9px;background:var(--interactive);color:white;font-size:9px;font-weight:700;line-height:1;border-radius:99px;padding:2px 5px;min-width:16px;text-align:center;font-family:var(--font-body);">3</span>
-                  </div>
-                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Candidatos</span>
-                </a>
-
-                <!-- INACTIVE item -->
-                <a style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
-                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
-                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
-                    </svg>
-                  </div>
-                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Más</span>
-                </a>
-
-              </nav>
-            </div>
-          </div>
-        </section>
-        <section class="docs-section">
-          <h2 class="docs-section-title">Vista previa — 3 destinos</h2>
-          <div class="docs-preview">
-            <div style="width:360px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg);">
-              <div style="height:80px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);">
-                <span style="font-size:13px;color:var(--text-muted);font-family:var(--font-body);">Contenido de la vista activa</span>
-              </div>
-              <nav aria-label="Navegación principal" style="display:flex;height:80px;background:var(--sidebar-bg);border-top:1px solid var(--border);">
-                <a style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
-                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
-                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                  </div>
-                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Inicio</span>
-                </a>
-                <a aria-current="page" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
-                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--interactive-light);border-radius:16px;margin-bottom:4px;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--interactive)" stroke="none" aria-hidden="true">
-                      <path d="M20.5 6c-2.61.7-5.67 1-8.5 1s-5.89-.3-8.5-1L3 8c1.86.5 4 .73 6 .85V22h2v-6h2v6h2V8.85c2-.12 4.14-.35 6-.85l-.5-2zM12 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
-                    </svg>
-                  </div>
-                  <span style="font-size:12px;font-weight:700;color:var(--interactive);font-family:var(--font-body);line-height:1;">People</span>
-                </a>
-                <a style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;text-decoration:none;cursor:pointer;">
-                  <div style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;">
-                    <svg width="24" height="24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                  </div>
-                  <span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;">Reportes</span>
-                </a>
-              </nav>
-            </div>
+            <div data-island="nav-bar-showcase"></div>
           </div>
         </section>
       </div>
@@ -12624,24 +12476,7 @@ export { StatsGrid, StatCard }</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
-              <div class="topbar" style="position:relative">
-                <div class="topbar-breadcrumb">
-                  <a href="#">Reclutamiento</a>
-                  <span class="separator">/</span>
-                  <span>Vacantes</span>
-                </div>
-                <button class="topbar-btn secondary">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-                  Nueva vacante
-                </button>
-                <div class="topbar-notif">
-                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/></svg>
-                  <span class="notif-badge">3</span>
-                </div>
-                <div class="avatar">MG</div>
-              </div>
-            </div>
+            <div data-island="topbar-showcase"></div>
           </div>
         </section>
       </div>
@@ -12840,29 +12675,7 @@ css/layout.css</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div class="kanban-board">
-              <div class="kanban-column">
-                <div class="kanban-column-header">Aplicados <span class="count">3</span></div>
-                <div class="kanban-column-body">
-                  <div class="kanban-card"><div class="kanban-card-title">Maria Lopez</div><div class="kanban-card-meta">Disenadora UX · hace 2d</div></div>
-                  <div class="kanban-card"><div class="kanban-card-title">Pedro Ruiz</div><div class="kanban-card-meta">Frontend Dev · hace 3d</div></div>
-                  <div class="kanban-card"><div class="kanban-card-title">Sofia Torres</div><div class="kanban-card-meta">PM · hace 5d</div></div>
-                </div>
-              </div>
-              <div class="kanban-column">
-                <div class="kanban-column-header">Entrevista <span class="count">2</span></div>
-                <div class="kanban-column-body">
-                  <div class="kanban-card"><div class="kanban-card-title">Carlos Vega</div><div class="kanban-card-meta">Backend Dev · hace 1d</div></div>
-                  <div class="kanban-card"><div class="kanban-card-title">Ana Garcia</div><div class="kanban-card-meta">QA · hace 4d</div></div>
-                </div>
-              </div>
-              <div class="kanban-column">
-                <div class="kanban-column-header">Oferta <span class="count">1</span></div>
-                <div class="kanban-column-body">
-                  <div class="kanban-card"><div class="kanban-card-title">Luis Mendoza</div><div class="kanban-card-meta">Data Analyst · hace 1d</div></div>
-                </div>
-              </div>
-            </div>
+            <div data-island="kanban-showcase"></div>
           </div>
         </section>
       </div>
@@ -13083,24 +12896,7 @@ css/components/kanban.css</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div class="vacancy-card">
-              <div class="vacancy-icon">&#x1F4BC;</div>
-              <div class="vacancy-info">
-                <div class="vacancy-name">Disenador UX Senior <span class="badge badge-open">Abierta</span></div>
-                <div class="vacancy-meta">Producto <span class="meta-dot"></span> Remoto <span class="meta-dot"></span> Senior</div>
-                <div class="vacancy-stats">
-                  <div class="stat-pill"><span class="count">12</span> candidatos</div>
-                  <div class="stat-pill"><span class="count">3</span> entrevistas</div>
-                </div>
-              </div>
-              <div class="vacancy-right">
-                <div class="assignee" style="display:flex;gap:4px">
-                  <div class="assignee-avatar blue">MG</div>
-                  <div class="assignee-avatar green">CL</div>
-                </div>
-                <div class="vacancy-age">5d</div>
-              </div>
-            </div>
+            <div data-island="vacancy-card-showcase"></div>
           </div>
         </section>
       </div>
@@ -13315,20 +13111,7 @@ css/components/badge.css</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div class="people-grid">
-              <div class="person-card">
-                <div class="person-avatar">MG</div>
-                <div class="person-info"><div class="person-name">Mercedes Garcia</div><div class="person-role">Disenadora UX</div></div>
-              </div>
-              <div class="person-card">
-                <div class="person-avatar">CL</div>
-                <div class="person-info"><div class="person-name">Carlos Lopez</div><div class="person-role">Desarrollador Frontend</div></div>
-              </div>
-              <div class="person-card">
-                <div class="person-avatar">AM</div>
-                <div class="person-info"><div class="person-name">Ana Martinez</div><div class="person-role">Product Manager</div></div>
-              </div>
-            </div>
+            <div data-island="person-card-showcase"></div>
           </div>
         </section>
       </div>
@@ -13515,11 +13298,7 @@ css/components/person-card.css</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div style="display:flex;gap:12px;align-items:center">
-              <div class="avatar">MG</div>
-              <div class="avatar">CL</div>
-              <div class="avatar">AM</div>
-            </div>
+            <div data-island="avatar-showcase"></div>
           </div>
         </section>
       </div>
@@ -15299,11 +15078,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <h1 class="ds-page-title">Carousels</h1>
       <p class="ds-page-desc">Carousels rotate through a set of items, such as images or cards.</p>
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <div class="docs-preview">
+            <div data-island="carousel-showcase"></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
@@ -18653,11 +18440,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
       <!-- ══ Component Tabs ══ -->
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <div class="docs-preview">
+            <div data-island="date-picker-showcase"></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
@@ -19782,11 +19577,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
       <!-- ══ Component Tabs ══ -->
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <div class="docs-preview">
+            <div data-island="sheet-showcase"></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
@@ -19952,11 +19755,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
       <!-- ══ Component Tabs ══ -->
       <div class="ds-comp-tabs">
-        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
-      <div class="ds-comp-tab-panel active" data-tab="specs">
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <div class="docs-preview">
+            <div data-island="tooltip-showcase"></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
         <div class="docs-section">
           <div class="ds-callout">
             <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
@@ -20994,50 +20805,10 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <p class="ds-p">Nav Cards organizan la navegación en tiles visuales escaneables. Las tarjetas completas tienen una fila de encabezado (tag + botón flecha), área de contenido (título grande + descripción) y un área visual ilustrada. Las tarjetas compactas omiten el área visual para grids densos.</p>
-          <div class="nav-card-grid" style="max-width:900px;margin-top:24px">
-          <div class="nav-card" onclick="">
-            <div class="nav-card-header">
-              <span class="nav-card-tag">Foundations</span>
-              <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
-            </div>
-            <div class="nav-card-content">
-              <div class="nav-card-title">Color</div>
-              <div class="nav-card-desc">Semantic token system</div>
-            </div>
-            <div class="nav-card-visual nv-primary">
-              <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="40" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".75"/>
-                <rect x="88" y="30" width="40" height="40" rx="10" fill="currentColor" opacity=".50"/>
-                <rect x="136" y="30" width="40" height="40" rx="4" fill="currentColor" opacity=".35"/>
-                <rect x="184" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".20"/>
-                <rect x="40" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".20"/>
-                <rect x="88" y="78" width="40" height="40" rx="20" fill="currentColor" opacity=".35"/>
-                <rect x="136" y="78" width="40" height="40" rx="10" fill="currentColor" opacity=".50"/>
-                <rect x="184" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".70"/>
-              </svg>
-            </div>
+          <div class="docs-preview" style="margin-top:24px">
+            <div data-island="nav-card-showcase"></div>
           </div>
-          <div class="nav-card" onclick="">
-            <div class="nav-card-header">
-              <span class="nav-card-tag">Styles</span>
-              <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
-            </div>
-            <div class="nav-card-content">
-              <div class="nav-card-title">Typography</div>
-              <div class="nav-card-desc">Type scale and font system</div>
-            </div>
-            <div class="nav-card-visual nv-tertiary">
-              <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M52 30 L52 118 L132 118 L132 103 L70 103 L70 82 L122 82 L122 67 L70 67 L70 45 L132 45 L132 30 Z" fill="currentColor" opacity=".40"/>
-                <rect x="152" y="30" width="88" height="14" rx="4" fill="currentColor" opacity=".50"/>
-                <rect x="152" y="52" width="72" height="11" rx="3.5" fill="currentColor" opacity=".38"/>
-                <rect x="152" y="70" width="80" height="9" rx="3" fill="currentColor" opacity=".28"/>
-                <rect x="152" y="86" width="64" height="8" rx="3" fill="currentColor" opacity=".22"/>
-                <rect x="152" y="101" width="76" height="7" rx="2.5" fill="currentColor" opacity=".15"/>
-              </svg>
-            </div>
-          </div>
-        </div>
+        </section>
       </div>
 
       <!-- ── Specs ── -->
