@@ -16,8 +16,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=1">
-<script type="module" src="islands/dist/embassy-islands.js?v=1"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=2">
+<script type="module" src="islands/dist/embassy-islands.js?v=2"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Official @material/web (MD3) — used by the Checkbox & Switch pages. Themed
      with Embassy tokens automatically via css/md-sys-bridge.css (loaded above).
@@ -5033,35 +5033,9 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <!-- Button family visual -->
+          <!-- Button family visual — shadcn <Button> island -->
           <div class="bd-family-wrap">
-            <div class="bd-family-stage">
-              <!-- 1 Elevated -->
-              <div class="bd-family-col">
-                <button class="bd-family-btn bd-family-elevated">Elevado</button>
-                <div class="bd-family-num">1</div>
-              </div>
-              <!-- 2 Filled -->
-              <div class="bd-family-col">
-                <button class="btn-primary bd-family-btn">Relleno</button>
-                <div class="bd-family-num">2</div>
-              </div>
-              <!-- 3 Tonal -->
-              <div class="bd-family-col">
-                <button class="btn-secondary bd-family-btn">Tonal</button>
-                <div class="bd-family-num">3</div>
-              </div>
-              <!-- 4 Outlined -->
-              <div class="bd-family-col">
-                <button class="btn-tertiary bd-family-btn">Con borde</button>
-                <div class="bd-family-num">4</div>
-              </div>
-              <!-- 5 Text -->
-              <div class="bd-family-col">
-                <button class="btn-text bd-family-btn">Texto</button>
-                <div class="bd-family-num">5</div>
-              </div>
-            </div>
+            <div data-island="button-showcase"></div>
           </div>
 
           <!-- Legend -->
@@ -7915,10 +7889,7 @@ export function IconButton({ label, size = 'default', children, className, ...pr
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div class="field-group">
-              <label class="field-label">Nombre completo</label>
-              <input type="text" class="field-input">
-            </div>
+            <div data-island="input-showcase"></div>
           </div>
         </section>
       </div>
@@ -8294,15 +8265,7 @@ export { Input }</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div class="select-wrapper">
-              <select>
-                <option value="">Seleccionar...</option>
-                <option value="1">Opcion 1</option>
-                <option value="2">Opcion 2</option>
-                <option value="3">Opcion 3</option>
-              </select>
-              <span class="select-caret">▾</span>
-            </div>
+            <div data-island="select-showcase"></div>
           </div>
         </section>
       </div>
@@ -8604,10 +8567,7 @@ export { Select }</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div class="field-group">
-              <label class="field-label">Descripcion</label>
-              <textarea class="field-input field-textarea" placeholder="Describe los requisitos del puesto..."></textarea>
-            </div>
+            <div data-island="textarea-showcase"></div>
           </div>
         </section>
       </div>
@@ -9119,14 +9079,7 @@ export { Textarea }</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-            <span class="badge badge-open">Abierta</span>
-            <span class="badge badge-active">Activa</span>
-            <span class="badge badge-closed">Cerrada</span>
-            <span class="badge badge-draft">Borrador</span>
-            <span class="badge badge-archived">Archivada</span>
-            <span class="badge badge-warning">Pendiente</span>
-            <span class="badge badge-tertiary">Nueva</span>
-            <span class="badge badge-info">Información</span>
+            <div data-island="badge-showcase"></div>
           </div>
         </section>
       </div>
@@ -9417,14 +9370,7 @@ export { Badge, badgeVariants }</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <table class="data-table">
-              <thead><tr><th>Nombre</th><th>Puesto</th><th>Departamento</th><th>Estado</th></tr></thead>
-              <tbody>
-                <tr><td>Mercedes Garcia</td><td>Disenadora UX</td><td>Producto</td><td><span class="badge badge-active">Activa</span></td></tr>
-                <tr><td>Carlos Lopez</td><td>Desarrollador</td><td>Ingenieria</td><td><span class="badge badge-active">Activa</span></td></tr>
-                <tr><td>Ana Martinez</td><td>PM</td><td>Producto</td><td><span class="badge badge-warning">Pendiente</span></td></tr>
-              </tbody>
-            </table>
+            <div data-island="table-showcase"></div>
           </div>
         </section>
       </div>
@@ -9732,14 +9678,7 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
 <div class="docs-section">
         <h2 class="docs-section-title">Interactivo</h2>
         <div class="docs-preview full-width">
-          <div class="tabs">
-            <div class="tab active" onclick="switchTab(this,'general')">General</div>
-            <div class="tab" onclick="switchTab(this,'requisitos')">Requisitos</div>
-            <div class="tab" onclick="switchTab(this,'proceso')">Proceso</div>
-          </div>
-          <div class="tab-panel active" id="panel-general" style="padding:16px 0;font-size:14px;color:var(--text-secondary)">Contenido de la pestana General. Aqui se muestra la informacion basica de la vacante.</div>
-          <div class="tab-panel" id="panel-requisitos" style="padding:16px 0;font-size:14px;color:var(--text-secondary)">Contenido de la pestana Requisitos. Lista de habilidades y experiencia necesaria.</div>
-          <div class="tab-panel" id="panel-proceso" style="padding:16px 0;font-size:14px;color:var(--text-secondary)">Contenido de la pestana Proceso. Etapas de seleccion y timeline.</div>
+          <div data-island="tabs-showcase"></div>
         </div>
         
       </div>
@@ -10018,19 +9957,7 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div class="modal" style="margin:0 auto;max-width:480px">
-              <div class="modal-header">
-                <div class="modal-title">Confirmar accion</div>
-                <button class="modal-close"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-              </div>
-              <div class="modal-body">
-                <p>¿Estas seguro de continuar?</p>
-              </div>
-              <div class="modal-footer">
-                <button class="btn-ghost">Cancelar</button>
-                <button class="btn-primary">Confirmar</button>
-              </div>
-            </div>
+            <div data-island="dialog-showcase"></div>
           </div>
         </section>
       </div>
@@ -10388,6 +10315,14 @@ export { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter }</c
           <span>Pueden desaparecer automáticamente (4 s por defecto) o permanecer en pantalla hasta que el usuario realice una acción.</span>
         </li>
       </ul>
+    </section>
+
+    <section class="docs-section">
+      <h2 class="docs-section-title">Ejemplo en vivo</h2>
+      <p class="docs-section-desc">Implementación: <strong>Sonner</strong> (shadcn/ui), tematizado con <code>--color-inverse-surface</code> y la acción en <code>--color-inverse-primary</code>. Probá los disparadores — el snackbar aparece abajo y centrado.</p>
+      <div class="ds-preview" style="padding:24px;margin-top:8px;">
+        <div data-island="snackbar-showcase"></div>
+      </div>
     </section>
 
     <section class="docs-section">
@@ -11366,15 +11301,7 @@ export { Snackbar, snackbarVariants }</code></pre></div>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div style="max-width:400px">
-              <div class="skeleton skeleton-title"></div>
-              <div class="skeleton skeleton-text" style="width:100%"></div>
-              <div class="skeleton skeleton-text" style="width:85%"></div>
-              <div class="skeleton skeleton-text" style="width:70%"></div>
-              <div style="margin-top:16px"></div>
-              <div class="skeleton skeleton-card"></div>
-              <div class="skeleton skeleton-card"></div>
-            </div>
+            <div data-island="skeleton-showcase"></div>
           </div>
         </section>
       </div>
@@ -11605,12 +11532,7 @@ export { Skeleton, skeletonVariants }</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div class="empty-state">
-              <div class="empty-state-icon">&#x1F4CB;</div>
-              <div class="empty-state-title">Sin vacantes</div>
-              <div class="empty-state-desc">Aun no has creado ninguna vacante. Crea tu primera vacante para empezar a recibir candidatos.</div>
-              <button class="btn-primary">Crear vacante</button>
-            </div>
+            <div data-island="empty-state-showcase"></div>
           </div>
         </section>
       </div>
@@ -11837,23 +11759,7 @@ export { EmptyState }</code></pre>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
-            <div class="stats-grid">
-              <div class="stat-card">
-                <div class="stat-label">Vacantes activas</div>
-                <div class="stat-value">24</div>
-                <div class="stat-change text-success">+3 este mes</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Candidatos</div>
-                <div class="stat-value">156</div>
-                <div class="stat-change text-success">+12 esta semana</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Entrevistas hoy</div>
-                <div class="stat-value">8</div>
-                <div class="stat-change text-muted">Sin cambios</div>
-              </div>
-            </div>
+            <div data-island="stat-card-showcase"></div>
           </div>
         </section>
       </div>
@@ -18816,7 +18722,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Components · Containment</div>
       <h1 class="docs-page-title">Divider</h1>
       <p class="docs-page-desc">Línea fina que separa contenido en grupos dentro de listas y layouts.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-divider&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza el componente <code>Separator</code> (Radix UI), tematizado con el token <code>--border</code> de Embassy.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
@@ -18824,20 +18730,14 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <h2 class="docs-section-title">Full-width e inset</h2>
-          <div style="max-width:380px;border:1px solid var(--border);border-radius:12px;padding:14px 0">
-            <div style="padding:6px 16px">Sección A</div>
-            <md-divider></md-divider>
-            <div style="padding:6px 16px">Sección B</div>
-            <md-divider inset></md-divider>
-            <div style="padding:6px 16px">Sección C (divisor inset)</div>
-          </div>
+          <div data-island="divider-showcase"></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;md-divider&gt;&lt;/md-divider&gt;
-&lt;md-divider inset&gt;&lt;/md-divider&gt;</code></pre>
+          <pre class="docs-code"><code>&lt;Separator /&gt;
+&lt;Separator inset /&gt;</code></pre>
         </section>
       </div>
     </section>
@@ -18846,7 +18746,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Components · Containment</div>
       <h1 class="docs-page-title">List</h1>
       <p class="docs-page-desc">Contenedor vertical de ítems de texto o acciones relacionados.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-list&gt;</code> + <code>&lt;md-list-item&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Componente <code>List</code> + <code>ListItem</code> (List no tiene primitiva shadcn de origen — es un componente propio en el idiom shadcn), tematizado con los tokens de superficie de Embassy.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
@@ -18854,26 +18754,17 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <h2 class="docs-section-title">Lista con encabezado y soporte</h2>
-          <md-list style="max-width:380px;border:1px solid var(--border);border-radius:12px;overflow:hidden">
-            <md-list-item><div slot="headline">Bandeja de entrada</div><div slot="supporting-text">128 mensajes sin leer</div></md-list-item>
-            <md-divider></md-divider>
-            <md-list-item><div slot="headline">Destacados</div><div slot="supporting-text">12 mensajes</div></md-list-item>
-            <md-divider></md-divider>
-            <md-list-item type="button"><div slot="headline">Enviados</div></md-list-item>
-          </md-list>
+          <div data-island="list-showcase"></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;md-list&gt;
-  &lt;md-list-item&gt;
-    &lt;div slot="headline"&gt;Bandeja de entrada&lt;/div&gt;
-    &lt;div slot="supporting-text"&gt;128 mensajes&lt;/div&gt;
-  &lt;/md-list-item&gt;
-  &lt;md-divider&gt;&lt;/md-divider&gt;
-  &lt;md-list-item type="button"&gt;&lt;div slot="headline"&gt;Enviados&lt;/div&gt;&lt;/md-list-item&gt;
-&lt;/md-list&gt;</code></pre>
+          <pre class="docs-code"><code>&lt;List&gt;
+  &lt;ListItem headline="Bandeja de entrada" supporting="128 mensajes" /&gt;
+  &lt;Separator /&gt;
+  &lt;ListItem headline="Enviados" asButton /&gt;
+&lt;/List&gt;</code></pre>
         </section>
       </div>
     </section>
@@ -18882,7 +18773,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Components · Feedback</div>
       <h1 class="docs-page-title">Progress</h1>
       <p class="docs-page-desc">Indicadores de progreso circular y lineal — determinado (progreso conocido) o indeterminado (duración desconocida).</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-circular-progress&gt;</code> y <code>&lt;md-linear-progress&gt;</code> de <code>@material/web</code> (MD3), tematizados con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> El lineal usa el componente <code>Progress</code> (Radix UI); el circular es un SVG propio (no hay primitiva circular en shadcn/Radix). Indicador en <code>--color-primary</code>, pista en <code>--color-surface-variant</code>.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
@@ -18891,17 +18782,11 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <h2 class="docs-section-title">Circular</h2>
-          <div style="display:flex;gap:32px;align-items:center">
-            <div style="text-align:center"><md-circular-progress indeterminate aria-label="Indeterminado"></md-circular-progress><div class="state" style="font-size:12px;color:var(--text-secondary);margin-top:8px">Indeterminado</div></div>
-            <div style="text-align:center"><md-circular-progress value="0.65" aria-label="65 por ciento"></md-circular-progress><div class="state" style="font-size:12px;color:var(--text-secondary);margin-top:8px">Determinado 65%</div></div>
-          </div>
+          <div data-island="progress-circular"></div>
         </section>
         <section class="docs-section">
           <h2 class="docs-section-title">Lineal</h2>
-          <div style="display:flex;flex-direction:column;gap:18px;max-width:300px">
-            <div><md-linear-progress indeterminate aria-label="Indeterminado" style="width:100%"></md-linear-progress><div class="state" style="font-size:12px;color:var(--text-secondary);margin-top:8px">Indeterminado</div></div>
-            <div><md-linear-progress value="0.4" aria-label="40 por ciento" style="width:100%"></md-linear-progress><div class="state" style="font-size:12px;color:var(--text-secondary);margin-top:8px">Determinado 40%</div></div>
-          </div>
+          <div data-island="progress-linear"></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -18928,7 +18813,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Components · Containment</div>
       <h1 class="docs-page-title">Menu</h1>
       <p class="docs-page-desc">Lista temporal de acciones u opciones que aparece anclada a un disparador.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-menu&gt;</code> + <code>&lt;md-menu-item&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Componente <code>DropdownMenu</code> (Radix UI), anclado a un <code>Button</code> de Embassy. Posicionamiento, foco y teclado vienen de Radix.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
@@ -18936,27 +18821,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <h2 class="docs-section-title">Menú anclado a un botón</h2>
-          <div style="position:relative;display:inline-block">
-            <md-filled-button id="menu-anchor-ex" onclick="(function(){var m=document.getElementById('menu-ex');m.open=!m.open;})()">Opciones</md-filled-button>
-            <md-menu id="menu-ex" anchor="menu-anchor-ex">
-              <md-menu-item><div slot="headline">Editar</div></md-menu-item>
-              <md-menu-item><div slot="headline">Duplicar</div></md-menu-item>
-              <md-menu-item><div slot="headline">Eliminar</div></md-menu-item>
-            </md-menu>
-          </div>
-          <p class="docs-section-desc" style="margin-top:14px">Hacé clic en el botón para abrir el menú. El posicionamiento, foco y navegación por teclado son los oficiales de Material.</p>
+          <div data-island="menu-showcase"></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;div style="position:relative"&gt;
-  &lt;md-filled-button id="anchor" onclick="menu.open = !menu.open"&gt;Opciones&lt;/md-filled-button&gt;
-  &lt;md-menu id="menu" anchor="anchor"&gt;
-    &lt;md-menu-item&gt;&lt;div slot="headline"&gt;Editar&lt;/div&gt;&lt;/md-menu-item&gt;
-    &lt;md-menu-item&gt;&lt;div slot="headline"&gt;Eliminar&lt;/div&gt;&lt;/md-menu-item&gt;
-  &lt;/md-menu&gt;
-&lt;/div&gt;</code></pre>
+          <pre class="docs-code"><code>&lt;DropdownMenu&gt;
+  &lt;DropdownMenuTrigger asChild&gt;&lt;Button&gt;Opciones&lt;/Button&gt;&lt;/DropdownMenuTrigger&gt;
+  &lt;DropdownMenuContent&gt;
+    &lt;DropdownMenuItem&gt;Editar&lt;/DropdownMenuItem&gt;
+    &lt;DropdownMenuItem&gt;Eliminar&lt;/DropdownMenuItem&gt;
+  &lt;/DropdownMenuContent&gt;
+&lt;/DropdownMenu&gt;</code></pre>
         </section>
       </div>
     </section>
@@ -19039,10 +18916,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
         <section class="docs-section">
           <div class="docs-preview full-width">
-            <div class="search-bar" role="search">
-              <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
-              <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes">
-            </div>
+            <div data-island="search-showcase"></div>
           </div>
         </section>
 
@@ -19964,7 +19838,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Components · Selección</div>
       <h1 class="docs-page-title">Slider</h1>
       <p class="docs-page-desc">Selección de un valor (o rango) dentro de un continuo — volumen, brillo, precio.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: Material Web oficial.</strong> Renderiza <code>&lt;md-slider&gt;</code> de <code>@material/web</code> (MD3), tematizado con los tokens de Embassy vía <code>md-sys-bridge.css</code>.</div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Componente <code>Slider</code> (Radix UI). Pista en <code>--color-surface-variant</code>, rango y thumb en <code>--color-primary</code>; soporta rango (dos thumbs).</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
@@ -19973,12 +19847,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <h2 class="docs-section-title">Variantes</h2>
-          <div style="display:flex;flex-direction:column;gap:22px;max-width:360px">
-            <div><div class="state" style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Continuo</div><md-slider value="50" aria-label="Continuo"></md-slider></div>
-            <div><div class="state" style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Con ticks + etiqueta</div><md-slider ticks step="10" labeled value="40" aria-label="Con ticks"></md-slider></div>
-            <div><div class="state" style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Rango</div><md-slider range value-start="20" value-end="70" aria-label="Rango"></md-slider></div>
-            <div><div class="state" style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Deshabilitado</div><md-slider value="30" disabled aria-label="Deshabilitado"></md-slider></div>
-          </div>
+          <div data-island="slider-showcase"></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -19993,9 +19862,9 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;md-slider value="50"&gt;&lt;/md-slider&gt;
-&lt;md-slider ticks step="10" labeled value="40"&gt;&lt;/md-slider&gt;
-&lt;md-slider range value-start="20" value-end="70"&gt;&lt;/md-slider&gt;</code></pre>
+          <pre class="docs-code"><code>&lt;Slider defaultValue={[50]} /&gt;
+&lt;Slider defaultValue={[40]} step={10} /&gt;
+&lt;Slider defaultValue={[20, 70]} /&gt;  {/* rango */}</code></pre>
         </section>
       </div>
     </section>

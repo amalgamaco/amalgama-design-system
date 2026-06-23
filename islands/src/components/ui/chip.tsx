@@ -1,52 +1,119 @@
 import * as React from "react"
-import { X } from "lucide-react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../../lib/utils"
 
-// shadcn-style chip (Radix has no chip primitive) — Embassy-bridged tokens.
 const chipVariants = cva(
-  "inline-flex items-center gap-2 h-8 rounded-full border px-4 text-sm font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 [&>svg]:size-[18px]",
+  "inline-flex items-center gap-2 h-8 px-4 rounded-full border border-outline bg-transparent text-on-surface text-body-lg font-medium cursor-pointer whitespace-nowrap transition-all duration-fast ease-in-out focus-visible:focus-ring",
   {
     variants: {
-      selected: {
-        true: "border-transparent bg-secondary text-secondary-foreground",
-        false: "border-input bg-transparent text-foreground hover:bg-accent",
+      variant: {
+        outlined: "hover:bg-on-surface-state-hover active:bg-on-surface-state-press",
+        elevated: "border-transparent bg-surface-container-low shadow-sm hover:bg-chip-elevated-hover active:bg-chip-elevated-press",
+        selected: "bg-secondary-container text-on-secondary-container border-transparent hover:bg-on-secondary-state-hover active:bg-on-secondary-state-press",
       },
     },
-    defaultVariants: { selected: false },
+    defaultVariants: {
+      variant: "outlined",
+    },
   }
 )
 
 export interface ChipProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type">,
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof chipVariants> {
   icon?: React.ReactNode
-  onRemove?: () => void
+  selected?: boolean
 }
 
 export const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
-  ({ className, selected, icon, onRemove, children, ...props }, ref) => (
-    <button
-      ref={ref}
-      type="button"
-      className={cn(chipVariants({ selected }), icon && "pl-2.5", onRemove && "pr-2", className)}
-      aria-pressed={selected ?? undefined}
-      {...props}
-    >
-      {icon}
-      {children}
-      {onRemove && (
-        <span
-          role="button"
-          aria-label="Eliminar"
-          tabIndex={-1}
-          onClick={(e) => { e.stopPropagation(); onRemove() }}
-          className="flex size-[18px] items-center justify-center rounded-full text-muted-foreground hover:text-foreground"
-        >
-          <X className="size-3.5" />
-        </span>
-      )}
-    </button>
-  )
+  ({ className, variant, selected, icon, children, ...props }, ref) => {
+    const effectiveVariant = selected ? "selected" : (variant ?? "outlined")
+    return (
+      <button
+        ref={ref}
+        type="button"
+        aria-pressed={selected !== undefined ? selected : undefined}
+        className={cn(
+          chipVariants({ variant: effectiveVariant }),
+          icon ? "pl-2" : "",
+          className
+        )}
+        {...props}
+      >
+        {icon && (
+          <span className="inline-flex items-center justify-center w-[18px] h-[18px] flex-shrink-0 [&_svg]:w-[18px] [&_svg]:h-[18px]">
+            {icon}
+          </span>
+        )}
+        {children}
+      </button>
+    )
+  }
 )
 Chip.displayName = "Chip"
+
+export interface InputChipProps extends React.HTMLAttributes<HTMLDivElement> {
+  icon?: React.ReactNode
+  onRemove?: () => void
+  removeLabel?: string
+  selected?: boolean
+  variant?: "outlined" | "elevated" | "selected"
+}
+
+export const InputChip = React.forwardRef<HTMLDivElement, InputChipProps>(
+  ({ className, variant = "outlined", selected, icon, onRemove, removeLabel = "Quitar", children, ...props }, ref) => {
+    const effectiveVariant = selected ? "selected" : variant
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          chipVariants({ variant: effectiveVariant }),
+          "cursor-default",
+          icon ? "pl-2" : "",
+          onRemove ? "pr-2" : "",
+          className
+        )}
+        {...props}
+      >
+        {icon && (
+          <span className="inline-flex items-center justify-center w-[18px] h-[18px] flex-shrink-0 [&_svg]:w-[18px] [&_svg]:h-[18px]">
+            {icon}
+          </span>
+        )}
+        {children}
+        {onRemove && (
+          <button
+            type="button"
+            aria-label={removeLabel}
+            onClick={(e) => { e.stopPropagation(); onRemove() }}
+            className="inline-flex items-center justify-center w-[18px] h-[18px] p-0 -mr-1 ml-0 border-none bg-transparent rounded-full text-on-surface-variant cursor-pointer flex-shrink-0 hover:bg-on-surface-state-press [&_svg]:w-3.5 [&_svg]:h-3.5"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        )}
+      </div>
+    )
+  }
+)
+InputChip.displayName = "InputChip"
+
+export interface ChipSetProps extends React.HTMLAttributes<HTMLDivElement> {
+  label?: string
+}
+
+export const ChipSet = React.forwardRef<HTMLDivElement, ChipSetProps>(
+  ({ className, label, ...props }, ref) => (
+    <div
+      ref={ref}
+      role="group"
+      aria-label={label}
+      className={cn("flex flex-wrap gap-2", className)}
+      {...props}
+    />
+  )
+)
+ChipSet.displayName = "ChipSet"
+
+export { chipVariants }
