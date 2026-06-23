@@ -23,16 +23,19 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
           "flex h-7 w-7 items-center justify-center rounded hover:bg-surface-variant text-fg",
           "disabled:opacity-30 disabled:cursor-not-allowed transition-colors",
         ].join(" "),
-        month_grid: "w-full border-collapse",
+        month_grid: "border-collapse",
         weekdays: "flex",
-        weekday: "flex-1 text-center text-label text-fg-subtle pb-1",
-        week: "flex w-full",
-        day: "flex-1 p-0",
+        weekday: "w-9 text-center text-label text-fg-subtle pb-1",
+        week: "flex w-full mt-0.5",
+        day: "w-9 h-9 p-0 text-center",
         day_button: [
-          "h-8 w-full rounded text-body-sm text-fg transition-colors",
-          "hover:bg-surface-variant focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "h-9 w-9 rounded text-body-sm text-fg transition-colors",
+          "hover:bg-surface-variant focus:outline-none focus-visible:focus-ring",
         ].join(" "),
-        selected: "[&>button]:bg-primary [&>button]:text-on-primary [&>button]:hover:bg-primary",
+        // `selected` must beat `today` when a day is both — important keeps the
+        // on-primary label legible on the primary fill (equal-specificity utilities
+        // otherwise resolve by source order, which `text-primary` was winning).
+        selected: "[&>button]:bg-primary! [&>button]:text-on-primary! [&>button]:hover:bg-primary",
         today: "[&>button]:font-bold [&>button]:text-primary",
         outside: "[&>button]:text-fg-subtle [&>button]:opacity-40",
         disabled: "[&>button]:opacity-30 [&>button]:cursor-not-allowed",

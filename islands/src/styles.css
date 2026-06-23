@@ -4,7 +4,10 @@
    already loads variables.css (tokens) and Inter. We bring Tailwind utilities
    without preflight (preflight would fight the host page's own reset). */
 
-@layer theme;
+/* Layer order: `base` (our resets) is lowest priority, then `theme`. Tailwind
+   utilities are imported UNLAYERED below, so they outrank everything here —
+   the button reset beats UA defaults but never fights a utility. */
+@layer base, theme;
 @import "tailwindcss/theme.css" layer(theme);
 
 /* CRITICAL: utilities are intentionally UNLAYERED. Embassy base.css has an
@@ -13,6 +16,12 @@
    win over `*` (0,0,0) on specificity merit. */
 @import "tailwindcss/utilities.css";
 
+/* Enter/exit animation utilities (animate-in, fade-in-0, zoom-in-95,
+   slide-in-from-*, data-[state=closed]:animate-out …) used by Radix overlays:
+   Tooltip, Sheet, Dialog, DropdownMenu, Select. Tailwind v4 port of
+   tailwindcss-animate. */
+@import "tw-animate-css";
+
 @source "./**/*.{ts,tsx}";
 
 /* Box-sizing reset scoped to island roots only (replaces preflight). */
@@ -20,6 +29,25 @@
 [data-island] *,
 [data-island] *::before,
 [data-island] *::after { box-sizing: border-box; }
+
+/* Minimal button reset scoped to islands (the part of Tailwind preflight we
+   still need without enabling full preflight). Embassy base.css does NOT
+   neutralize the UA button appearance, so any island button that doesn't set
+   its own background or border leaks the native control look (grey #efefef
+   fill + 2px outset border) — e.g. calendar day cells and segmented-button
+   segments. Element-selector specificity (0,0,1) stays below utility classes
+   (0,1,0), so components that set their own colour utilities still win. */
+@layer base {
+  [data-island] button {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    background-image: none;
+    border: 0 solid currentColor;
+    color: inherit;
+    font: inherit;
+  }
+}
 
 /* ── Hover / press computed tokens (from TW repo hover-tokens.css) ──────── */
 :root {
