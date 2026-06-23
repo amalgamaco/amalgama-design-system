@@ -8810,32 +8810,8 @@ export { Textarea }</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <p class="ds-p">La Basic Card agrupa un <b>tag</b> de categoría, un <b>título</b> y un <b>subtítulo</b>. Es el patrón de tarjeta base de la librería — sin área visual ilustrada. El botón de acción (flecha superior derecha) es opcional y solo debe aparecer cuando la tarjeta navega a otra sección o tiene una acción explícita.</p>
-          <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:28px;align-items:flex-start">
-            <div>
-              <p class="ds-overline" style="margin-bottom:10px;color:var(--text-secondary)">Sin acción</p>
-              <div class="nav-card nav-card--compact" style="width:256px;pointer-events:none;cursor:default">
-                <div class="nav-card-header">
-                  <span class="nav-card-tag">Component</span>
-                </div>
-                <div class="nav-card-content">
-                  <div class="nav-card-title">Button</div>
-                  <div class="nav-card-desc">Primary, secondary, and icon buttons.</div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p class="ds-overline" style="margin-bottom:10px;color:var(--text-secondary)">Con acción</p>
-              <div class="nav-card nav-card--compact" style="width:256px" onclick="">
-                <div class="nav-card-header">
-                  <span class="nav-card-tag">Component</span>
-                  <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
-                </div>
-                <div class="nav-card-content">
-                  <div class="nav-card-title">Button</div>
-                  <div class="nav-card-desc">Primary, secondary, and icon buttons.</div>
-                </div>
-              </div>
-            </div>
+          <div class="docs-preview" style="margin-top:28px">
+            <div data-island="card-showcase"></div>
           </div>
         </section>
       </div>
@@ -18801,10 +18777,19 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;md-circular-progress indeterminate&gt;&lt;/md-circular-progress&gt;
-&lt;md-circular-progress value="0.65"&gt;&lt;/md-circular-progress&gt;
-&lt;md-linear-progress indeterminate&gt;&lt;/md-linear-progress&gt;
-&lt;md-linear-progress value="0.4"&gt;&lt;/md-linear-progress&gt;</code></pre>
+          <pre class="docs-code"><code>import { Progress, CircularProgress } from "@/components/ui/progress"
+
+// Circular indeterminado
+&lt;CircularProgress indeterminate aria-label="Cargando" /&gt;
+
+// Circular determinado
+&lt;CircularProgress value={65} aria-label="65 por ciento" /&gt;
+
+// Lineal indeterminado
+&lt;Progress indeterminate aria-label="Cargando" /&gt;
+
+// Lineal determinado
+&lt;Progress value={40} aria-label="40 por ciento" /&gt;</code></pre>
         </section>
       </div>
     </section>

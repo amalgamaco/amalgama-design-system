@@ -11,7 +11,7 @@ export function MenuShowcase() {
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="filled" size="sm">Opciones</Button>
+          <Button variant="primary" size="sm">Opciones</Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
           <DropdownMenuItem>Editar</DropdownMenuItem>
