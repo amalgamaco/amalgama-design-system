@@ -13,14 +13,14 @@ export function RadioGroupShowcase() {
 }
 
 export function RadioStatesShowcase() {
+  // Every RadioGroupItem must live inside its own RadioGroup — a bare item throws
+  // (Radix requires the RadioGroup context) and takes the whole island down.
   return (
     <div className="bd-states" style={{ gridTemplateColumns: "repeat(auto-fit,minmax(160px,1fr))" }}>
-      <RadioGroup defaultValue="x2" style={{ display: "contents" }}>
-        <div className="bd-state"><label style={lbl}><RadioGroupItem value="x1" /> Sin seleccionar</label></div>
-        <div className="bd-state"><label style={lbl}><RadioGroupItem value="x2" /> Seleccionado</label></div>
-      </RadioGroup>
-      <div className="bd-state"><label style={{ ...lbl, opacity: 0.6 }}><RadioGroupItem value="d1" disabled /> Deshabilitado</label></div>
-      <div className="bd-state"><label style={{ ...lbl, opacity: 0.6 }}><RadioGroup defaultValue="d2" style={{ display: "contents" }}><RadioGroupItem value="d2" disabled /></RadioGroup> Deshab. selec.</label></div>
+      <div className="bd-state"><RadioGroup><label style={lbl}><RadioGroupItem value="x1" /> Sin seleccionar</label></RadioGroup></div>
+      <div className="bd-state"><RadioGroup defaultValue="x2"><label style={lbl}><RadioGroupItem value="x2" /> Seleccionado</label></RadioGroup></div>
+      <div className="bd-state"><RadioGroup><label style={{ ...lbl, opacity: 0.6 }}><RadioGroupItem value="d1" disabled /> Deshabilitado</label></RadioGroup></div>
+      <div className="bd-state"><RadioGroup defaultValue="d2"><label style={{ ...lbl, opacity: 0.6 }}><RadioGroupItem value="d2" disabled /> Deshab. selec.</label></RadioGroup></div>
     </div>
   )
 }

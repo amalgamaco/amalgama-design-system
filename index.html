@@ -16,8 +16,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=9">
-<script type="module" src="islands/dist/embassy-islands.js?v=9"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=11">
+<script type="module" src="islands/dist/embassy-islands.js?v=11"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Official @material/web (MD3) — used by the Checkbox & Switch pages. Themed
      with Embassy tokens automatically via css/md-sys-bridge.css (loaded above).
@@ -10205,52 +10205,6 @@ export { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter }</c
       <p class="docs-section-desc">Implementación: <strong>Sonner</strong> (shadcn/ui), tematizado con <code>--color-inverse-surface</code> y la acción en <code>--color-inverse-primary</code>. Probá los disparadores — el snackbar aparece abajo y centrado.</p>
       <div class="ds-preview" style="padding:24px;margin-top:8px;">
         <div data-island="snackbar-showcase"></div>
-      </div>
-    </section>
-
-    <section class="docs-section">
-      <h2 class="docs-section-title">Modo claro y modo oscuro</h2>
-      <p class="docs-section-desc">El Snackbar usa <strong>superficie inversa</strong> (<code>--color-inverse-surface</code>) — oscuro sobre fondo claro, claro sobre fondo oscuro — para garantizar contraste sin overrides por tema.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px;">
-
-        <div>
-          <p style="font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--color-on-surface-variant);text-transform:uppercase;margin:0 0 10px;">Modo claro</p>
-          <div class="ds-preview" style="padding:0;overflow:hidden;min-height:160px;background:#F5F6F8;">
-            <svg viewBox="0 0 280 184" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;" aria-label="Snackbar en modo claro" role="img">
-              <rect width="280" height="184" fill="#F5F6F8"/>
-              <rect x="20" y="18" width="140" height="9" rx="4.5" fill="#BFC1C8" opacity=".5"/>
-              <rect x="20" y="33" width="96" height="7" rx="3.5" fill="#BFC1C8" opacity=".3"/>
-              <rect x="20" y="50" width="240" height="60" rx="8" fill="#EAEBED"/>
-              <rect x="32" y="62" width="96" height="7" rx="3.5" fill="#9FA3AE" opacity=".5"/>
-              <rect x="32" y="74" width="160" height="6" rx="3" fill="#9FA3AE" opacity=".3"/>
-              <rect x="32" y="85" width="112" height="6" rx="3" fill="#9FA3AE" opacity=".2"/>
-              <rect x="20" y="124" width="240" height="48" rx="4" fill="#0A0C12"/>
-              <text x="36" y="153" font-family="Inter,sans-serif" font-size="12.5" fill="#EAEBED">Archivo eliminado</text>
-              <text x="196" y="153" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#4F80FF">DESHACER</text>
-            </svg>
-          </div>
-          <p style="font-size:11px;color:var(--color-on-surface-variant);margin:8px 0 0;font-family:'DM Mono',monospace;">inverse-surface: #0A0C12</p>
-        </div>
-
-        <div>
-          <p style="font-family:'DM Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--color-on-surface-variant);text-transform:uppercase;margin:0 0 10px;">Modo oscuro</p>
-          <div class="ds-preview" style="padding:0;overflow:hidden;min-height:160px;background:#13161F;">
-            <svg viewBox="0 0 280 184" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;" aria-label="Snackbar en modo oscuro" role="img">
-              <rect width="280" height="184" fill="#13161F"/>
-              <rect x="20" y="18" width="140" height="9" rx="4.5" fill="#474D61" opacity=".5"/>
-              <rect x="20" y="33" width="96" height="7" rx="3.5" fill="#474D61" opacity=".3"/>
-              <rect x="20" y="50" width="240" height="60" rx="8" fill="#1C202C"/>
-              <rect x="32" y="62" width="96" height="7" rx="3.5" fill="#747989" opacity=".5"/>
-              <rect x="32" y="74" width="160" height="6" rx="3" fill="#747989" opacity=".3"/>
-              <rect x="32" y="85" width="112" height="6" rx="3" fill="#747989" opacity=".2"/>
-              <rect x="20" y="124" width="240" height="48" rx="4" fill="#EAEBED"/>
-              <text x="36" y="153" font-family="Inter,sans-serif" font-size="12.5" fill="#13161F">Archivo eliminado</text>
-              <text x="196" y="153" font-family="Inter,sans-serif" font-size="11.5" font-weight="700" fill="#162F6F">DESHACER</text>
-            </svg>
-          </div>
-          <p style="font-size:11px;color:var(--color-on-surface-variant);margin:8px 0 0;font-family:'DM Mono',monospace;">inverse-surface: #EAEBED</p>
-        </div>
-
       </div>
     </section>
 
@@ -20749,9 +20703,50 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <p class="ds-p">Nav Cards organizan la navegación en tiles visuales escaneables. Las tarjetas completas tienen una fila de encabezado (tag + botón flecha), área de contenido (título grande + descripción) y un área visual ilustrada. Las tarjetas compactas omiten el área visual para grids densos.</p>
-          <div class="docs-preview" style="margin-top:24px">
-            <div data-island="nav-card-showcase"></div>
+          <div class="nav-card-grid" style="max-width:900px;margin-top:24px">
+          <div class="nav-card" onclick="">
+            <div class="nav-card-header">
+              <span class="nav-card-tag">Foundations</span>
+              <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+            </div>
+            <div class="nav-card-content">
+              <div class="nav-card-title">Color</div>
+              <div class="nav-card-desc">Semantic token system</div>
+            </div>
+            <div class="nav-card-visual nv-primary">
+              <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="40" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".75"/>
+                <rect x="88" y="30" width="40" height="40" rx="10" fill="currentColor" opacity=".50"/>
+                <rect x="136" y="30" width="40" height="40" rx="4" fill="currentColor" opacity=".35"/>
+                <rect x="184" y="30" width="40" height="40" rx="20" fill="currentColor" opacity=".20"/>
+                <rect x="40" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".20"/>
+                <rect x="88" y="78" width="40" height="40" rx="20" fill="currentColor" opacity=".35"/>
+                <rect x="136" y="78" width="40" height="40" rx="10" fill="currentColor" opacity=".50"/>
+                <rect x="184" y="78" width="40" height="40" rx="4" fill="currentColor" opacity=".70"/>
+              </svg>
+            </div>
           </div>
+          <div class="nav-card" onclick="">
+            <div class="nav-card-header">
+              <span class="nav-card-tag">Styles</span>
+              <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
+            </div>
+            <div class="nav-card-content">
+              <div class="nav-card-title">Typography</div>
+              <div class="nav-card-desc">Type scale and font system</div>
+            </div>
+            <div class="nav-card-visual nv-tertiary">
+              <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M52 30 L52 118 L132 118 L132 103 L70 103 L70 82 L122 82 L122 67 L70 67 L70 45 L132 45 L132 30 Z" fill="currentColor" opacity=".40"/>
+                <rect x="152" y="30" width="88" height="14" rx="4" fill="currentColor" opacity=".50"/>
+                <rect x="152" y="52" width="72" height="11" rx="3.5" fill="currentColor" opacity=".38"/>
+                <rect x="152" y="70" width="80" height="9" rx="3" fill="currentColor" opacity=".28"/>
+                <rect x="152" y="86" width="64" height="8" rx="3" fill="currentColor" opacity=".22"/>
+                <rect x="152" y="101" width="76" height="7" rx="2.5" fill="currentColor" opacity=".15"/>
+              </svg>
+            </div>
+          </div>
+        </div>
         </section>
       </div>
 
