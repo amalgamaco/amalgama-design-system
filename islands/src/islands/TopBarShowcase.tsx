@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback } from "../components/ui/avatar"
-import { Button } from "../components/ui/button"
+import { Avatar, AvatarFallback } from "@ds/avatar"
+import { Button } from "@ds/button"
 
 export function TopBarShowcase() {
   return (

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Calendar } from "../components/ui/calendar"
+import { Calendar } from "@ds/calendar"
 import { format } from "date-fns"
 import { es } from "date-fns/locale"
 

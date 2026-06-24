@@ -1,4 +1,4 @@
-import { Button } from "../components/ui/button"
+import { Button } from "@ds/button"
 import {
   Dialog,
   DialogTrigger,
@@ -8,7 +8,7 @@ import {
   DialogBody,
   DialogFooter,
   DialogClose,
-} from "../components/ui/dialog"
+} from "@ds/dialog"
 
 export function DialogShowcase() {
   return (

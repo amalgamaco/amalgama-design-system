@@ -1,4 +1,4 @@
-import { VacancyCard } from "../components/ui/vacancy-card"
+import { VacancyCard } from "@ds/vacancy-card"
 
 const vacancies = [
   {

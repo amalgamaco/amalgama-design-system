@@ -1,4 +1,4 @@
-import { Button } from "../components/ui/button"
+import { Button } from "@ds/button"
 
 /* Reproduces the Button page's "Configuraciones" diagram (size · color · padding)
    with the live island Button, reusing the page's .bd-cfg-* layout classes so the

@@ -1,4 +1,4 @@
-import { Progress, CircularProgress } from "../components/ui/progress"
+import { Progress, CircularProgress } from "@ds/progress"
 
 const cap: React.CSSProperties = { fontSize: 12, color: "var(--text-secondary)", marginTop: 8 }
 

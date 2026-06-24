@@ -1,5 +1,6 @@
-import { Input, Textarea } from "../components/ui/input"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../components/ui/select"
+import { Input } from "@ds/input"
+import { Textarea } from "@ds/textarea"
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@ds/select"
 
 // Reuse the page's .field-group/.field-label so only the control is shadcn.
 export function InputShowcase() {

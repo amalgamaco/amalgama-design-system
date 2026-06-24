@@ -1,10 +1,10 @@
-import { Button } from "../components/ui/button"
+import { Button } from "@ds/button"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "../components/ui/dropdown-menu"
+} from "@ds/dropdown-menu"
 
 export function MenuShowcase() {
   return (

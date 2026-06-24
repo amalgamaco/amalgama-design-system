@@ -1,4 +1,4 @@
-import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group"
+import { RadioGroup, RadioGroupItem } from "@ds/radio-group"
 
 const lbl: React.CSSProperties = { display: "flex", alignItems: "center", gap: 10, fontSize: 14 }
 

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Calendar, Check } from "lucide-react"
-import { Chip, InputChip } from "../components/ui/chip"
+import { Chip, InputChip } from "@ds/chip"
 
 export function ChipShowcase() {
   const [on, setOn] = useState(true)

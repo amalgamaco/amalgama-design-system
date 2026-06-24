@@ -1,4 +1,4 @@
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "../components/ui/carousel"
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@ds/carousel"
 
 const slides = [
   { label: "Slide 1", color: "bg-primary-container text-on-primary-container" },

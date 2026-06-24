@@ -1,5 +1,5 @@
-import { PersonCard } from "../components/ui/person-card"
-import { Button } from "../components/ui/button"
+import { PersonCard } from "@ds/person-card"
+import { Button } from "@ds/button"
 
 const people = [
   { name: "María González", role: "Diseñadora UX", meta: "Buenos Aires" },

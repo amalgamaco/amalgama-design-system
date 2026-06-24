@@ -1,5 +1,5 @@
-import { Button } from "../components/ui/button"
-import { Toaster, toast } from "../components/ui/sonner"
+import { Button } from "@ds/button"
+import { Toaster, toast } from "@ds/sonner"
 
 // Live Sonner demo. The triggers fire real toasts (bottom-center) themed with
 // Embassy inverse-surface tokens — the actual shadcn/Sonner implementation, not

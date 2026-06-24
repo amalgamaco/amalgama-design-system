@@ -1,5 +1,5 @@
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../components/ui/tooltip"
-import { Button } from "../components/ui/button"
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@ds/tooltip"
+import { Button } from "@ds/button"
 
 export function TooltipShowcase() {
   return (

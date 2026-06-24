@@ -9,8 +9,8 @@ import {
   SheetBody,
   SheetFooter,
   SheetClose,
-} from "../components/ui/sheet"
-import { Button } from "../components/ui/button"
+} from "@ds/sheet"
+import { Button } from "@ds/button"
 
 export function SheetShowcase() {
   const [side, setSide] = useState<"right" | "left" | "bottom">("right")

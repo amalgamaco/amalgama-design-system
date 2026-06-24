@@ -92,13 +92,33 @@ When restyling or rebuilding an existing screen, **DS rules win over visual fide
 
 **Extended (domain-oriented):** Vacancy Card, Person Card, Kanban, Create Form, Placeholder — CSS in `css/components/`, docs in `docs/`. Use for recruiting/HR product surfaces.
 
-**Roadmap (documented as "Coming soon", no consumable code yet):** tooltip, date picker, sheet, carousel. **Do not invent styles for these** — compose from existing components or flag the gap.
+**shadcn/Radix islands (interactive components, rendered in `index.html` only):** the
+interactive components are React (shadcn/ui + Radix) + Tailwind v4, built in `islands/`
+to `islands/dist/embassy-islands.{js,css}` and mounted into `[data-island]` slots in
+`index.html`. They consume tokens via the Embassy→Tailwind bridge (`islands/src/styles.css`)
+and import their implementations from the in-repo **`@amalgama/ds`** package at
+**`packages/ds/`** (linked via `file:../packages/ds`; `@ds/*` alias → the package's
+`exports`). This repo is a **monorepo**: `packages/ds/` is the single source of truth for
+component code, the root is the docs + tokens + governance. (See `islands/INTEGRATION.md`
+and `CONSOLIDATION-PLAN.md`.) Covered: **checkbox, switch, radio, slider, menu (dropdown),
+list, divider (separator), progress, chip, input/textarea, select, tabs, dialog, tooltip,
+date picker, sheet, carousel, segmented-button, avatar, snackbar (sonner)** + domain cards
+(kanban/person/vacancy).
 
-**Material-backed (official `@material/web`, NOT Embassy CSS):** these component pages render official MD3 web components, loaded buildless from the esm.run CDN (`@material/web/all.js`, in index.html `<head>`) and themed with Embassy tokens automatically via `css/md-sys-bridge.css` (`--md-sys-color-* → --color-*`):
-- **Checkbox** (`<md-checkbox>`), **Switch** (`<md-switch>`), **Radio** (`<md-radio>`), **Slider** (`<md-slider>`), **Menu** (`<md-menu>`), **List** (`<md-list>`), **Divider** (`<md-divider>`), **Progress** (`<md-circular/linear-progress>`).
-- **(2026-06-22 expansion)** **Chips** (`<md-assist/filter/input/suggestion-chip>`), **Text field / Input** (`<md-outlined/filled-text-field>`), **Select** (`<md-outlined/filled-select>` + `<md-select-option>`), **Tabs** (`<md-tabs>` + `<md-primary/secondary-tab>`), **Dialog** (`<md-dialog>`). These replaced the former custom Embassy implementations in the SPA — the user explicitly overrode the original "reject material-web" decision for every component Material Web actually offers.
+> **History:** an earlier experiment rendered these via official `@material/web` web
+> components. That runtime was **removed (2026-06)** — there are **0 live `<md-*>` elements**.
+> `css/md-sys-bridge.css` stays (Embassy CSS + Segmented Button still consume `--md-sys-color-*`).
+> These islands are a deliberate exception to the no-build/CSS-only rule; there is **no Embassy
+> `css/components/*.css` for islands-only components** — do not write one. Components that DO have
+> a `css/components/*.css` (button, badge, card, chip, search, etc.) keep it as the **buildless
+> consumption layer** for the `design-system` skill (artifacts/dashboards/presentations); the
+> island is the docs-site rendering of the same component.
 
-These depend on JS/Lit/Shadow DOM/CDN — a deliberate exception to the no-build/CSS-only rule. There is no Embassy `*.css` for them; do not write one. **Canonical Overview structure (all pages):** badge → title → subtitle → 4 tabs (Overview / Guidelines / Accessibility / Code) → key-characteristic bullets → single-mode variant showcase → numbered references. **Show only one color mode at a time — no side-by-side light/dark; examples follow the global theme toggle.** Gotchas: Lucide stroke icons in a Material `slot="icon"` need `[slot=icon] *{fill:none}`; `md-dialog` needs `md-dialog{margin:auto;max-width;max-height}` re-added per page (Embassy's global margin reset breaks its inherited centering). Note: in dark mode Embassy `--color-primary` is white, so selected controls render white — see [[md3-structure-adoption]] memory.
+**Canonical Overview structure (all component pages):** badge → title → subtitle → 4 tabs
+(Overview / Guidelines / Accessibility / Code) → key-characteristic bullets → single-mode
+variant showcase → numbered references. **Show only one color mode at a time — no side-by-side
+light/dark; examples follow the global theme toggle.** Note: in dark mode Embassy `--color-primary`
+is white, so selected controls render white — see [[md3-structure-adoption]] memory.
 
 Component relationships: filter **chips** refine **search** results (chips below the search bar) and toolbar filters; **search-field** (toolbar.css) is the compact in-toolbar search, **search-bar** (search.css) is the standalone 56px component.
 

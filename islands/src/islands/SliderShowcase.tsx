@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Slider } from "../components/ui/slider"
+import { Slider } from "@ds/slider"
 
 const lbl: React.CSSProperties = { fontSize: 12, color: "var(--text-secondary)", marginBottom: 4 }
 

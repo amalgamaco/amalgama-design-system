@@ -1,4 +1,4 @@
-import { SearchBar, SearchBarTrailing } from "../components/ui/search"
+import { SearchBar, SearchBarTrailing } from "@ds/search"
 
 function MicIcon() {
   return (

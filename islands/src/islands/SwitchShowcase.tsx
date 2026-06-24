@@ -1,4 +1,4 @@
-import { Switch } from "../components/ui/switch"
+import { Switch } from "@ds/switch"
 
 const lbl: React.CSSProperties = { display: "flex", alignItems: "center", gap: 10, fontSize: 14 }
 

@@ -1,4 +1,4 @@
-import { Checkbox } from "../components/ui/checkbox"
+import { Checkbox } from "@ds/checkbox"
 
 const lbl: React.CSSProperties = { display: "flex", alignItems: "center", gap: 10, fontSize: 14 }
 

@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@ds/avatar"
 
 const people = [
   { initials: "MG", name: "María González" },

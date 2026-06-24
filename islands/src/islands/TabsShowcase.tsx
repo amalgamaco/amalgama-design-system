@@ -1,4 +1,4 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@ds/tabs"
 
 export function TabsShowcase() {
   return (

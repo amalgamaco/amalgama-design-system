@@ -1,4 +1,4 @@
-import { Badge } from "../components/ui/badge"
+import { Badge } from "@ds/badge"
 
 const variants = [
   { variant: "open",     label: "Abierta" },

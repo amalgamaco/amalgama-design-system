@@ -1,0 +1,44 @@
+/* css/hover-tokens.css
+   Computed hover/press/state color tokens — color-mix() values that require
+   runtime CSS resolution and cannot be expressed as static @theme values.
+   Auto-imported by tailwind.theme.css; also importable standalone.
+   Do NOT modify css/variables.css — these extend it non-destructively.
+*/
+:root {
+  /* ── Button: Secondary hover ── */
+  --color-secondary-container-hover: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
+
+  /* ── Button: Text hover / press ── */
+  --color-primary-state-hover:  color-mix(in srgb, var(--color-primary) 10%, transparent);
+  --color-primary-state-press:  color-mix(in srgb, var(--color-primary) 16%, transparent);
+
+  /* ── Chip / interactive surface hover / press ── */
+  --color-on-surface-state-hover:  color-mix(in srgb, var(--color-on-surface) 8%, transparent);
+  --color-on-surface-state-press:  color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+
+  /* ── Chip: selected hover / press ── */
+  --color-on-secondary-state-hover:  color-mix(in srgb, var(--color-on-secondary-container) 8%,  var(--color-secondary-container));
+  --color-on-secondary-state-press:  color-mix(in srgb, var(--color-on-secondary-container) 12%, var(--color-secondary-container));
+
+  /* ── Chip: elevated hover / press ── */
+  --color-chip-elevated-hover:  color-mix(in srgb, var(--color-on-surface) 8%,  var(--color-surface-container-low));
+  --color-chip-elevated-press:  color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-low));
+
+  /* ── Search bar / toolbar search-field hover / focus ── */
+  --color-search-field-hover:        color-mix(in srgb, var(--color-on-surface) 8%,  var(--color-surface-container-high));
+  --color-search-field-focus:        color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-high));
+  --color-search-field-border-hover: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
+
+  /* ── Search bar: disabled states ── */
+  --color-search-disabled-bg:   color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+  --color-search-disabled-text: color-mix(in srgb, var(--color-on-surface) 38%, transparent);
+
+  /* ── Snackbar (inverse context) ── */
+  --color-snackbar-action-hover:  color-mix(in srgb, var(--color-inverse-primary) 8%,  transparent);
+  --color-snackbar-action-press:  color-mix(in srgb, var(--color-inverse-primary) 12%, transparent);
+  --color-snackbar-close-hover:   color-mix(in srgb, var(--color-inverse-on-surface) 8%,  transparent);
+  --color-snackbar-close-press:   color-mix(in srgb, var(--color-inverse-on-surface) 12%, transparent);
+
+  /* ── Input: error focus ring ── */
+  --color-error-ring: color-mix(in srgb, var(--color-error) 12%, transparent);
+}

@@ -1,4 +1,4 @@
-import { KanbanCard, KanbanColumn } from "../components/ui/kanban-card"
+import { KanbanCard, KanbanColumn } from "@ds/kanban-card"
 
 export function KanbanShowcase() {
   return (

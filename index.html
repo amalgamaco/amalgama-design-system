@@ -16,8 +16,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=13">
-<script type="module" src="islands/dist/embassy-islands.js?v=13"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=21">
+<script type="module" src="islands/dist/embassy-islands.js?v=21"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- @material/web runtime removed (2026-06): every component page now renders via
      the shadcn/Tailwind React islands (islands/dist/embassy-islands.js); no live
@@ -9254,14 +9254,7 @@ export { Badge, badgeVariants }</code></pre>
 <div class="docs-section">
         <h2 class="docs-section-title">Tabla basica</h2>
         <div class="docs-preview full-width">
-          <table class="data-table">
-            <thead><tr><th>Nombre</th><th>Puesto</th><th>Departamento</th><th>Estado</th></tr></thead>
-            <tbody>
-              <tr><td>Mercedes Garcia</td><td>Disenadora UX</td><td>Producto</td><td><span class="badge badge-active">Activa</span></td></tr>
-              <tr><td>Carlos Lopez</td><td>Desarrollador</td><td>Ingenieria</td><td><span class="badge badge-active">Activa</span></td></tr>
-              <tr><td>Ana Martinez</td><td>PM</td><td>Producto</td><td><span class="badge badge-warning">Pendiente</span></td></tr>
-            </tbody>
-          </table>
+          <div data-island="table-basic"></div>
         </div>
         
       <!-- Filas clicables -->
@@ -9269,14 +9262,7 @@ export { Badge, badgeVariants }</code></pre>
         <h2 class="docs-section-title">Filas clicables</h2>
         <p class="docs-section-desc">Agrega la clase <code>clickable</code> a las filas del tbody para activar <code>cursor: pointer</code> y un efecto hover mas pronunciado.</p>
         <div class="docs-preview full-width">
-          <table class="data-table">
-            <thead><tr><th>Nombre</th><th>Puesto</th><th>Departamento</th><th>Estado</th></tr></thead>
-            <tbody>
-              <tr class="clickable" tabindex="0"><td>Mercedes Garcia</td><td>Disenadora UX</td><td>Producto</td><td><span class="badge badge-active">Activa</span></td></tr>
-              <tr class="clickable" tabindex="0"><td>Carlos Lopez</td><td>Desarrollador</td><td>Ingenieria</td><td><span class="badge badge-active">Activa</span></td></tr>
-              <tr class="clickable" tabindex="0"><td>Ana Martinez</td><td>PM</td><td>Producto</td><td><span class="badge badge-warning">Pendiente</span></td></tr>
-            </tbody>
-          </table>
+          <div data-island="table-clickable"></div>
         </div>
 
       </div>
@@ -11370,12 +11356,7 @@ export { Skeleton, skeletonVariants }</code></pre>
         <section class="docs-section">
           <h2 class="docs-section-title">Empty state</h2>
           <div class="docs-preview">
-            <div class="empty-state">
-              <div class="empty-state-icon">&#x1F4CB;</div>
-              <div class="empty-state-title">Sin vacantes</div>
-              <div class="empty-state-desc">Aun no has creado ninguna vacante. Crea tu primera vacante para empezar a recibir candidatos.</div>
-              <button class="btn-primary">Crear vacante</button>
-            </div>
+            <div data-island="empty-state-anatomy"></div>
           </div>
         </section>
         <section class="docs-section">
@@ -11597,28 +11578,7 @@ export { EmptyState }</code></pre>
         <section class="docs-section">
           <h2 class="docs-section-title">Stats Grid</h2>
           <div class="docs-preview">
-            <div class="stats-grid">
-              <div class="stat-card">
-                <div class="stat-label">Vacantes activas</div>
-                <div class="stat-value">24</div>
-                <div class="stat-change text-success">+3 este mes</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Candidatos</div>
-                <div class="stat-value">156</div>
-                <div class="stat-change text-success">+12 esta semana</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Entrevistas hoy</div>
-                <div class="stat-value">8</div>
-                <div class="stat-change text-muted">Sin cambios</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-label">Tiempo promedio</div>
-                <div class="stat-value">18d</div>
-                <div class="stat-change text-error">+2d vs anterior</div>
-              </div>
-            </div>
+            <div data-island="stat-card-grid"></div>
           </div>
         </section>
         <section class="docs-section">

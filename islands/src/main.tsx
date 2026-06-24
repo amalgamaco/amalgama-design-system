@@ -17,11 +17,11 @@ import { TabsShowcase } from "./islands/TabsShowcase"
 import { DialogShowcase } from "./islands/DialogShowcase"
 import { BadgeShowcase } from "./islands/BadgeShowcase"
 import { SkeletonShowcase } from "./islands/SkeletonShowcase"
-import { EmptyStateShowcase } from "./islands/EmptyStateShowcase"
-import { TableShowcase } from "./islands/TableShowcase"
+import { EmptyStateShowcase, EmptyStateAnatomy } from "./islands/EmptyStateShowcase"
+import { TableShowcase, TableBasic, TableClickable } from "./islands/TableShowcase"
 import { SearchShowcase } from "./islands/SearchShowcase"
 import { CardShowcase } from "./islands/CardShowcase"
-import { StatCardShowcase } from "./islands/StatCardShowcase"
+import { StatCardShowcase, StatCardGrid } from "./islands/StatCardShowcase"
 import { AvatarShowcase } from "./islands/AvatarShowcase"
 import { TooltipShowcase } from "./islands/TooltipShowcase"
 import { SheetShowcase } from "./islands/SheetShowcase"
@@ -58,10 +58,14 @@ const registry: Record<string, ComponentType> = {
   "badge-showcase": BadgeShowcase,
   "skeleton-showcase": SkeletonShowcase,
   "empty-state-showcase": EmptyStateShowcase,
+  "empty-state-anatomy": EmptyStateAnatomy,
   "table-showcase": TableShowcase,
+  "table-basic": TableBasic,
+  "table-clickable": TableClickable,
   "search-showcase": SearchShowcase,
   "card-showcase": CardShowcase,
   "stat-card-showcase": StatCardShowcase,
+  "stat-card-grid": StatCardGrid,
   "avatar-showcase": AvatarShowcase,
   "tooltip-showcase": TooltipShowcase,
   "sheet-showcase": SheetShowcase,

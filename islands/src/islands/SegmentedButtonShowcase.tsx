@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { SegmentedButtonGroup, SegmentedButtonItem } from "../components/ui/segmented-button"
+import { SegmentedButtonGroup, SegmentedButtonItem } from "@ds/segmented-button"
 
 export function SegmentedButtonShowcase() {
   const [view, setView] = useState("lista")

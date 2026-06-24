@@ -1,5 +1,5 @@
-import { List, ListItem } from "../components/ui/list"
-import { Separator } from "../components/ui/separator"
+import { List, ListItem } from "@ds/list"
+import { Separator } from "@ds/separator"
 
 export function ListShowcase() {
   return (

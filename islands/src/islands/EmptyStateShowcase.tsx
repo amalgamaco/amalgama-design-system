@@ -1,5 +1,5 @@
-import { EmptyState } from "../components/ui/empty-state"
-import { Button } from "../components/ui/button"
+import { EmptyState } from "@ds/empty-state"
+import { Button } from "@ds/button"
 
 export function EmptyStateShowcase() {
   return (
@@ -14,6 +14,19 @@ export function EmptyStateShowcase() {
       description="No encontramos vacantes que coincidan con los filtros aplicados. Probá ajustando tu búsqueda."
     >
       <Button variant="primary" size="sm">Limpiar filtros</Button>
+    </EmptyState>
+  )
+}
+
+// Specs-tab canonical anatomy demo (was inline `class="empty-state"` markup).
+export function EmptyStateAnatomy() {
+  return (
+    <EmptyState
+      icon={<span aria-hidden="true">📋</span>}
+      title="Sin vacantes"
+      description="Aun no has creado ninguna vacante. Crea tu primera vacante para empezar a recibir candidatos."
+    >
+      <Button variant="primary">Crear vacante</Button>
     </EmptyState>
   )
 }
