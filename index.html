@@ -7323,6 +7323,11 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
           <div class="docs-preview">
             <div data-island="seg-btn-showcase"></div>
           </div>
+          <ol class="bd-anat-legend" style="margin-top:12px;">
+            <li><span class="bd-anat-legend-num">A</span> Tamaños — <code>sm</code> (~28px), <code>md</code> default (~36px), <code>lg</code> (~44px)</li>
+            <li><span class="bd-anat-legend-num">B</span> Estados — segmento seleccionado (fondo de acento) vs. no seleccionado (transparente)</li>
+            <li><span class="bd-anat-legend-num">C</span> Forma de píldora con borde <code>--color-outline</code> que envuelve 2 a 5 segmentos</li>
+          </ol>
         </section>
 
         <section class="docs-section">
@@ -7621,15 +7626,15 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
             </thead>
             <tbody>
               <tr style="border-bottom:1px solid var(--border);">
-                <td style="padding:10px 12px;"><kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">Tab</kbd></td>
+                <td style="padding:10px 12px;"><kbd style="font-family:'DM Mono',monospace;font-size:12px;background:color-mix(in srgb,var(--color-primary) 12%,transparent);color:var(--color-primary);padding:2px 6px;border-radius:4px;">Tab</kbd></td>
                 <td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Lleva el foco al grupo (al segmento seleccionado) y, de nuevo, fuera del grupo — no recorre los segmentos uno por uno (roving tabindex de Radix).</td>
               </tr>
               <tr style="border-bottom:1px solid var(--border);">
-                <td style="padding:10px 12px;"><kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">←</kbd> / <kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">→</kbd></td>
+                <td style="padding:10px 12px;"><kbd style="font-family:'DM Mono',monospace;font-size:12px;background:color-mix(in srgb,var(--color-primary) 12%,transparent);color:var(--color-primary);padding:2px 6px;border-radius:4px;">←</kbd> / <kbd style="font-family:'DM Mono',monospace;font-size:12px;background:color-mix(in srgb,var(--color-primary) 12%,transparent);color:var(--color-primary);padding:2px 6px;border-radius:4px;">→</kbd></td>
                 <td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Mueve el foco entre los segmentos dentro del grupo.</td>
               </tr>
               <tr>
-                <td style="padding:10px 12px;"><kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">Space</kbd> / <kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">Enter</kbd></td>
+                <td style="padding:10px 12px;"><kbd style="font-family:'DM Mono',monospace;font-size:12px;background:color-mix(in srgb,var(--color-primary) 12%,transparent);color:var(--color-primary);padding:2px 6px;border-radius:4px;">Space</kbd> / <kbd style="font-family:'DM Mono',monospace;font-size:12px;background:color-mix(in srgb,var(--color-primary) 12%,transparent);color:var(--color-primary);padding:2px 6px;border-radius:4px;">Enter</kbd></td>
                 <td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Activa el segmento enfocado.</td>
               </tr>
             </tbody>
@@ -7756,6 +7761,19 @@ const [vista, setVista] = useState(&quot;lista&quot;)
           <div class="docs-preview">
             <div data-island="input-showcase"></div>
           </div>
+        </section>
+        <section class="docs-section">
+          <p class="docs-page-desc">El ejemplo de arriba muestra el campo de texto base. La familia de Input cubre estas variantes (ver pestaña Specs para el detalle de cada una):</p>
+          <ol>
+            <li><b>Texto básico</b> — <code>.field-group</code> + <code>.field-label</code> + <code>.field-input</code>.</li>
+            <li><b>Con placeholder</b> — ejemplo de formato dentro del campo, nunca en reemplazo del label.</li>
+            <li><b>Required</b> — label con asterisco <code>.field-required</code>.</li>
+            <li><b>Disabled</b> — campo no editable, atenuado.</li>
+            <li><b>Focus</b> — borde <code>--interactive</code> + anillo <code>--color-focus-ring</code>.</li>
+            <li><b>Grid de formulario</b> — dos columnas con <code>.fields-grid</code>.</li>
+            <li><b>Number</b> — control con steppers (<code>.number-input-wrapper</code>).</li>
+            <li><b>Date</b> — campo con ícono de calendario (<code>.date-input-wrapper</code>).</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -8132,6 +8150,11 @@ export { Input }</code></pre>
           <div class="docs-preview">
             <div data-island="select-showcase"></div>
           </div>
+          <ol class="ds-variant-legend">
+            <li><b>Básico:</b> select dentro de <code>.select-wrapper</code> con caret personalizado.</li>
+            <li><b>Con label:</b> envuelto en <code>.field-group</code> con <code>.field-label</code> asociado.</li>
+            <li><b>Disabled:</b> atributo <code>disabled</code> — fondo atenuado y cursor <code>not-allowed</code>.</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -8194,7 +8217,7 @@ export { Input }</code></pre>
           <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
           <tbody>
             <tr><td>Reposo</td><td>Borde de 1px, fondo de superficie, cursor <code>pointer</code></td><td><code>--border</code> + <code>--card-bg</code></td></tr>
-            <tr><td>Focus</td><td>Borde interactivo + anillo de 3px (<code>.select-wrapper select:focus</code>)</td><td><code>--interactive</code> + <code>--color-focus-ring</code></td></tr>
+            <tr><td>Focus</td><td>Borde primario + anillo de 3px (<code>focus:border-[var(--color-primary)]</code>)</td><td><code>--color-primary</code> + <code>--color-focus-ring</code></td></tr>
             <tr><td>Disabled</td><td>Fondo atenuado, texto deshabilitado, cursor <code>not-allowed</code> (<code>select:disabled</code>)</td><td><code>--color-surface-variant</code> + <code>--color-on-disabled</code> + <code>--color-outline</code></td></tr>
           </tbody>
         </table>
@@ -8268,7 +8291,7 @@ export { Input }</code></pre>
       <div class="ds-comp-tab-panel" data-tab="accessibility">
         <div class="docs-section">
           <h2 class="docs-section-title">Foco visible</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El select en focus muestra borde <code>var(--interactive)</code> y anillo de 3px <code>var(--color-focus-ring)</code> — implementado en <code>.select-wrapper select:focus</code></li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El trigger en focus muestra borde <code>var(--color-primary)</code> y anillo de 3px <code>var(--color-focus-ring)</code> — implementado con <code>focus:border-[var(--color-primary)]</code> y <code>focus:shadow-[0_0_0_3px_var(--color-focus-ring)]</code></li></ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
@@ -8276,7 +8299,7 @@ export { Input }</code></pre>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Teclado y ARIA</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El <code>&lt;select&gt;</code> nativo tiene soporte de teclado y lectores de pantalla incluido</li><li><span class="ds-a11y-icon">♿</span>Siempre incluir un <code>&lt;label&gt;</code> visible asociado al select con <code>for</code>/<code>id</code></li><li><span class="ds-a11y-icon">♿</span>El atributo <code>disabled</code> es leído correctamente por tecnologías de asistencia</li><li><span class="ds-a11y-icon">♿</span>El caret (<code>.select-caret</code>) es decorativo: <code>pointer-events: none</code> y fuera del orden de foco</li><li><span class="ds-a11y-icon">♿</span>Si implementas un select custom, implementa el patrón WAI-ARIA <em>Combobox</em></li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El componente se apoya en Radix Select: implementa el patrón <em>listbox</em> de WAI-ARIA con roles y <code>aria-*</code> gestionados automáticamente</li><li><span class="ds-a11y-icon">♿</span>Navegación por teclado nativa de Radix: flechas para moverse entre opciones (roving focus), <code>Enter</code>/<code>Espacio</code> para seleccionar, <code>Esc</code> para cerrar y typeahead por escritura</li><li><span class="ds-a11y-icon">♿</span>Asociar siempre un label visible al trigger (por ejemplo dentro de <code>.field-group</code> con <code>.field-label</code>)</li><li><span class="ds-a11y-icon">♿</span>El atributo <code>disabled</code> y <code>data-[disabled]</code> en los items son expuestos correctamente a tecnologías de asistencia</li><li><span class="ds-a11y-icon">♿</span>El caret (<code>ChevronDown</code>) es decorativo: lo renderiza <code>SelectPrimitive.Icon</code> y queda fuera del orden de foco</li></ul>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
@@ -8312,44 +8335,75 @@ css/components/form.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/select.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/select.tsx</code>) &mdash; composición shadcn/Radix; mostrado como referencia, no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import * as SelectPrimitive from &quot;@radix-ui/react-select&quot;
+import { Check, ChevronDown } from &quot;lucide-react&quot;
 import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
-export interface SelectProps
-  extends React.SelectHTMLAttributes&lt;HTMLSelectElement&gt; {
-  label?: string
-  required?: boolean
-}
+export const Select = SelectPrimitive.Root
+export const SelectValue = SelectPrimitive.Value
 
-const Select = React.forwardRef&lt;HTMLSelectElement, SelectProps&gt;(
-  ({ className, label, required, children, ...props }, ref) =&gt; {
-    const select = (
-      &lt;div className=&quot;select-wrapper&quot;&gt;
-        &lt;select ref={ref} className={cn(className)} {...props}&gt;
-          {children}
-        &lt;/select&gt;
-        &lt;span className=&quot;select-caret&quot;&gt;&#9662;&lt;/span&gt;
-      &lt;/div&gt;
-    )
+export const SelectTrigger = React.forwardRef&lt;
+  React.ElementRef&lt;typeof SelectPrimitive.Trigger&gt;,
+  React.ComponentPropsWithoutRef&lt;typeof SelectPrimitive.Trigger&gt;
+&gt;(({ className, children, ...props }, ref) =&gt; (
+  &lt;SelectPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      &quot;flex w-full items-center justify-between rounded-md border border-border bg-[var(--card-bg)] px-3.5 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--color-primary)] focus:shadow-[0_0_0_3px_var(--color-focus-ring)] disabled:cursor-not-allowed disabled:opacity-50&quot;,
+      className
+    )}
+    {...props}
+  &gt;
+    {children}
+    &lt;SelectPrimitive.Icon asChild&gt;
+      &lt;ChevronDown className=&quot;size-4 shrink-0 text-[var(--text-muted)]&quot; /&gt;
+    &lt;/SelectPrimitive.Icon&gt;
+  &lt;/SelectPrimitive.Trigger&gt;
+))
+SelectTrigger.displayName = &quot;SelectTrigger&quot;
 
-    if (!label) return select
+export const SelectContent = React.forwardRef&lt;
+  React.ElementRef&lt;typeof SelectPrimitive.Content&gt;,
+  React.ComponentPropsWithoutRef&lt;typeof SelectPrimitive.Content&gt;
+&gt;(({ className, children, position = &quot;popper&quot;, ...props }, ref) =&gt; (
+  &lt;SelectPrimitive.Portal&gt;
+    &lt;SelectPrimitive.Content
+      ref={ref}
+      position={position}
+      className={cn(
+        &quot;relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-lg&quot;,
+        className
+      )}
+      {...props}
+    &gt;
+      &lt;SelectPrimitive.Viewport className=&quot;p-1.5&quot;&gt;{children}&lt;/SelectPrimitive.Viewport&gt;
+    &lt;/SelectPrimitive.Content&gt;
+  &lt;/SelectPrimitive.Portal&gt;
+))
+SelectContent.displayName = &quot;SelectContent&quot;
 
-    return (
-      &lt;div className=&quot;field-group&quot;&gt;
-        &lt;label className=&quot;field-label&quot;&gt;
-          {label}
-          {required &amp;&amp; &lt;span className=&quot;field-required&quot;&gt;*&lt;/span&gt;}
-        &lt;/label&gt;
-        {select}
-      &lt;/div&gt;
-    )
-  }
-)
-Select.displayName = &quot;Select&quot;
-
-export { Select }</code></pre>
+export const SelectItem = React.forwardRef&lt;
+  React.ElementRef&lt;typeof SelectPrimitive.Item&gt;,
+  React.ComponentPropsWithoutRef&lt;typeof SelectPrimitive.Item&gt;
+&gt;(({ className, children, ...props }, ref) =&gt; (
+  &lt;SelectPrimitive.Item
+    ref={ref}
+    className={cn(
+      &quot;relative flex w-full cursor-pointer select-none items-center rounded-sm py-2 pl-3 pr-8 text-sm outline-none focus:bg-muted data-[disabled]:pointer-events-none data-[disabled]:opacity-50&quot;,
+      className
+    )}
+    {...props}
+  &gt;
+    &lt;SelectPrimitive.ItemText&gt;{children}&lt;/SelectPrimitive.ItemText&gt;
+    &lt;span className=&quot;absolute right-2 flex size-4 items-center justify-center&quot;&gt;
+      &lt;SelectPrimitive.ItemIndicator&gt;&lt;Check className=&quot;size-4&quot; /&gt;&lt;/SelectPrimitive.ItemIndicator&gt;
+    &lt;/span&gt;
+  &lt;/SelectPrimitive.Item&gt;
+))
+SelectItem.displayName = &quot;SelectItem&quot;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
       </div>
@@ -8678,9 +8732,20 @@ export { Textarea }</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <p class="ds-p">La Basic Card agrupa un <b>tag</b> de categoría, un <b>título</b> y un <b>subtítulo</b>. Es el patrón de tarjeta base de la librería — sin área visual ilustrada. El botón de acción (flecha superior derecha) es opcional y solo debe aparecer cuando la tarjeta navega a otra sección o tiene una acción explícita.</p>
+          <ul class="ds-key-list">
+            <li>Compone tag de categoría, título y subtítulo en un contenedor de superficie con borde.</li>
+            <li>Dos variantes: estática (sin interacción) e interactiva (con botón de acción y hover).</li>
+            <li>El botón de acción (flecha superior derecha) aparece solo cuando la tarjeta navega o tiene una acción explícita.</li>
+            <li>Sin área visual ilustrada — para ilustración usá Nav Card completa.</li>
+            <li>Tokens semánticos garantizan contraste AA en claro y oscuro sin overrides por tema.</li>
+          </ul>
           <div class="docs-preview" style="margin-top:28px">
             <div data-island="card-showcase"></div>
           </div>
+          <ol class="docs-legend">
+            <li><strong>Estática</strong> — sin botón de acción ni interacción; usar para ítems no navegables.</li>
+            <li><strong>Interactiva</strong> — con botón de acción (flecha) y hover; usar cuando la tarjeta navega o ejecuta una acción.</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -8873,6 +8938,24 @@ export { Textarea }</code></pre>
           </div>
         </div>
         <div class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <p class="docs-section-desc">El patrón <code>.nav-card</code> de la Basic Card no tiene wrapper React propio. Para tarjetas en proyectos React usá el componente <code>Card</code> de la librería como contenedor base y componé el header/título/subtítulo con las clases <code>.nav-card-*</code>. No redefinas <code>Card</code> — importalo de <code>@amalgama/ds/card</code>.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn">Copiar</button>
+            <pre class="docs-code"><code>import { Card } from "@amalgama/ds/card"
+
+&lt;Card className="nav-card nav-card--compact"&gt;
+  &lt;div className="nav-card-header"&gt;
+    &lt;span className="nav-card-tag"&gt;Component&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div className="nav-card-content"&gt;
+    &lt;div className="nav-card-title"&gt;Button&lt;/div&gt;
+    &lt;div className="nav-card-desc"&gt;Primary, secondary, and icon buttons.&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/Card&gt;</code></pre>
+          </div>
+        </div>
+        <div class="docs-section">
           <h2 class="docs-section-title">Grid wrapper</h2>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn">Copiar</button>
@@ -8925,6 +9008,16 @@ export { Textarea }</code></pre>
           <div class="docs-preview" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
             <div data-island="badge-showcase"></div>
           </div>
+          <ul>
+            <li><b>Abierta</b> · <code>badge-open</code> — vacante abierta / disponible</li>
+            <li><b>Activa</b> · <code>badge-active</code> — proceso activo / en curso</li>
+            <li><b>Cerrada</b> · <code>badge-closed</code> — cerrada / finalizada</li>
+            <li><b>Borrador</b> · <code>badge-draft</code> — sin publicar (con borde)</li>
+            <li><b>Archivada</b> · <code>badge-archived</code> — inactiva (opacidad reducida)</li>
+            <li><b>Pendiente</b> · <code>badge-warning</code> — requiere atención</li>
+            <li><b>Nueva</b> · <code>badge-tertiary</code> — destacada</li>
+            <li><b>Información</b> · <code>badge-info</code> — informativo / categoría / versión</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -9503,6 +9596,11 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
             </div>
             <div class="tab-panel active" style="padding:16px 0;font-size:14px;color:var(--text-secondary)">Contenido de la pestana General. Aqui se muestra la informacion basica de la vacante.</div>
           </div>
+          <ul style="margin-top:12px">
+            <li><b>Tab activa:</b> texto y borde inferior de 2px en color <code>--interactive</code>, peso 500.</li>
+            <li><b>Tabs en reposo:</b> texto atenuado <code>--text-muted</code>, borde inferior transparente.</li>
+            <li><b>Panel:</b> solo el panel asociado a la tab activa se muestra (<code>.tab-panel.active</code>).</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -9640,6 +9738,7 @@ css/components/tabs.css</code></pre>
 &lt;/Tabs&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
+          <p class="docs-section-desc" style="margin-top:12px">Construido sobre <code>@radix-ui/react-tabs</code>: el estado activo se controla con <code>defaultValue</code>/<code>value</code> y el indicador se aplica vía <code>data-[state=active]</code>. La navegación con flechas (roving focus) y el cableado ARIA (<code>role=&quot;tab&quot;</code>/<code>tabpanel</code>) los provee Radix.</p>
         </div>
 
 <div class="docs-section">
@@ -9647,77 +9746,51 @@ css/components/tabs.css</code></pre>
         <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/tabs.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import * as TabsPrimitive from &quot;@radix-ui/react-tabs&quot;
 import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
-interface TabsContextValue {
-  activeTab: string
-  setActiveTab: (id: string) =&gt; void
-}
+// shadcn Tabs (Radix) — estilo Embassy con subrayado: activa = texto primary +
+// indicador de 2px; inactiva = on-surface-variant.
+export const Tabs = TabsPrimitive.Root
 
-const TabsContext = React.createContext&lt;TabsContextValue&gt;({
-  activeTab: &quot;&quot;,
-  setActiveTab: () =&gt; {},
-})
-
-export interface TabsProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
-  defaultValue: string
-}
-
-function Tabs({ defaultValue, children, ...props }: TabsProps) {
-  const [activeTab, setActiveTab] = React.useState(defaultValue)
-  return (
-    &lt;TabsContext.Provider value={{ activeTab, setActiveTab }}&gt;
-      &lt;div {...props}&gt;{children}&lt;/div&gt;
-    &lt;/TabsContext.Provider&gt;
-  )
-}
-
-const TabsList = React.forwardRef&lt;
-  HTMLDivElement,
-  React.HTMLAttributes&lt;HTMLDivElement&gt;
+export const TabsList = React.forwardRef&lt;
+  React.ElementRef&lt;typeof TabsPrimitive.List&gt;,
+  React.ComponentPropsWithoutRef&lt;typeof TabsPrimitive.List&gt;
 &gt;(({ className, ...props }, ref) =&gt; (
-  &lt;div ref={ref} className={cn(&quot;tabs&quot;, className)} {...props} /&gt;
+  &lt;TabsPrimitive.List
+    ref={ref}
+    className={cn(&quot;inline-flex w-full items-center gap-1 border-b border-border&quot;, className)}
+    {...props}
+  /&gt;
 ))
 TabsList.displayName = &quot;TabsList&quot;
 
-export interface TabProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
-  value: string
-}
+export const TabsTrigger = React.forwardRef&lt;
+  React.ElementRef&lt;typeof TabsPrimitive.Trigger&gt;,
+  React.ComponentPropsWithoutRef&lt;typeof TabsPrimitive.Trigger&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;TabsPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      &quot;-mb-px cursor-pointer border-b-2 border-transparent px-4 py-2.5 text-sm font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground data-[state=active]:border-primary data-[state=active]:text-primary&quot;,
+      className
+    )}
+    {...props}
+  /&gt;
+))
+TabsTrigger.displayName = &quot;TabsTrigger&quot;
 
-const Tab = React.forwardRef&lt;HTMLDivElement, TabProps&gt;(
-  ({ className, value, ...props }, ref) =&gt; {
-    const { activeTab, setActiveTab } = React.useContext(TabsContext)
-    return (
-      &lt;div
-        ref={ref}
-        className={cn(&quot;tab&quot;, activeTab === value &amp;&amp; &quot;active&quot;, className)}
-        onClick={() =&gt; setActiveTab(value)}
-        {...props}
-      /&gt;
-    )
-  }
-)
-Tab.displayName = &quot;Tab&quot;
-
-export interface TabPanelProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
-  value: string
-}
-
-const TabPanel = React.forwardRef&lt;HTMLDivElement, TabPanelProps&gt;(
-  ({ className, value, ...props }, ref) =&gt; {
-    const { activeTab } = React.useContext(TabsContext)
-    return (
-      &lt;div
-        ref={ref}
-        className={cn(&quot;tab-panel&quot;, activeTab === value &amp;&amp; &quot;active&quot;, className)}
-        {...props}
-      /&gt;
-    )
-  }
-)
-TabPanel.displayName = &quot;TabPanel&quot;
-
-export { Tabs, TabsList, Tab, TabPanel }</code></pre>
+export const TabsContent = React.forwardRef&lt;
+  React.ElementRef&lt;typeof TabsPrimitive.Content&gt;,
+  React.ComponentPropsWithoutRef&lt;typeof TabsPrimitive.Content&gt;
+&gt;(({ className, ...props }, ref) =&gt; (
+  &lt;TabsPrimitive.Content
+    ref={ref}
+    className={cn(&quot;py-4 text-sm text-muted-foreground outline-none&quot;, className)}
+    {...props}
+  /&gt;
+))
+TabsContent.displayName = &quot;TabsContent&quot;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
       </div>
@@ -9790,6 +9863,11 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
           <div class="docs-preview">
             <div data-island="dialog-showcase"></div>
           </div>
+          <ol class="docs-legend">
+            <li><b>Confirmación:</b> dialog corto con título, mensaje breve y dos acciones (descartar + confirmar al extremo trailing).</li>
+            <li><b>Formulario corto:</b> <code>modal-body</code> con campos (<code>field-group</code>) para tareas rápidas que no justifican una página dedicada.</li>
+            <li><b>Alerta crítica:</b> dialog que exige atención inmediata; la acción de descarte nunca se deshabilita.</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -10734,7 +10812,7 @@ export { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter }</c
 
     <div class="docs-section">
       <h2 class="docs-section-title">Cómo usar</h2>
-      <p class="docs-section-desc">Las clases del Snackbar están incluidas en <code>toast.css?v=3</code> (dentro del barrel <code>components.css</code>). No se requieren dependencias adicionales.</p>
+      <p class="docs-section-desc">En React, el Snackbar se consume desde <code>@amalgama/ds/sonner</code> (ver «Componente React» más abajo). Las clases <code>.snackbar-*</code> de <code>toast.css</code> y el «Markup» que sigue son la referencia de implementación para contextos sin React (buildless / SSR estático).</p>
       <div class="bd-callout"><span class="bd-ico">ℹ</span><span>Los tokens <code>--color-inverse-*</code> se recalibran automáticamente en dark mode. No agregues overrides por tema — el componente funciona en light y dark sin modificaciones.</span></div>
 
       <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Demos en vivo</h3>
@@ -10964,83 +11042,70 @@ export { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter }</c
     </div>
 
     <div class="docs-section">
-      <h2 class="docs-section-title">Componente React (referencia)</h2>
-      <p class="docs-section-desc">Contrato de API para el wrapper React futuro, basado en el patrón <code>cva</code> + <code>cn()</code> + <code>forwardRef</code> de Embassy.</p>
-      <div class="docs-code-wrapper"><pre class="docs-code standalone"><code>import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@amalgama/ds/lib/utils"
+      <h2 class="docs-section-title">Componente React (@amalgama/ds)</h2>
+      <p class="docs-section-desc">El Snackbar se implementa con <a href="https://sonner.emilkowal.ski/" target="_blank" rel="noopener">Sonner</a> (patrón shadcn), tematizado a la spec Embassy. El paquete expone <code>Toaster</code> (la región live, montada una sola vez) y la función imperativa <code>toast</code>. <strong>No lo redefinas</strong> ni recrees las clases <code>.snackbar-*</code>: importá del paquete.</p>
 
-const snackbarVariants = cva("snackbar", {
-  variants: {
-    layout: {
-      inline:  "",
-      stacked: "snackbar--stacked",
-    },
-  },
-  defaultVariants: { layout: "inline" },
+      <div class="bd-callout"><span class="bd-ico">ℹ</span><span>Montá <code>&lt;Toaster /&gt;</code> una única vez cerca de la raíz de la app. Después disparás notificaciones desde cualquier componente con <code>toast(...)</code> — no hace falta renderizar nada más.</span></div>
+
+      <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Instalación y montaje</h3>
+      <div class="docs-code-wrapper"><pre class="docs-code standalone"><code>// 1. Instalar
+// npm install @amalgama/ds
+
+// 2. Montar el Toaster una sola vez (root de la app)
+import { Toaster } from "@amalgama/ds/sonner"
+
+export function App() {
+  return (
+    &lt;&gt;
+      {/* ...resto de la app... */}
+      &lt;Toaster /&gt;
+    &lt;/&gt;
+  )
+}</code></pre></div>
+
+      <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Disparar notificaciones</h3>
+      <div class="docs-code-wrapper"><pre class="docs-code standalone"><code>import { toast } from "@amalgama/ds/sonner"
+
+// Solo mensaje
+toast("Archivo eliminado correctamente")
+
+// Mensaje + botón de acción (patrón "Deshacer")
+toast("Archivo eliminado", {
+  action: { label: "Deshacer", onClick: () =&gt; restore() },
 })
 
-export interface SnackbarProps
-  extends React.HTMLAttributes&lt;HTMLDivElement&gt;,
-    VariantProps&lt;typeof snackbarVariants&gt; {
-  message: string
-  action?: string
-  onAction?: () =&gt; void
-  onClose?: () =&gt; void
-  /** role del contenedor live region. Default: "status" */
-  liveRole?: "status" | "alert"
+// Error recuperable
+toast.error("No se pudo guardar. Revisá tu conexión.", {
+  action: { label: "Reintentar", onClick: () =&gt; retry() },
+})</code></pre></div>
+
+      <p class="docs-section-desc" style="margin-top:16px;">Referencia del wrapper Embassy (<code>components/ui/sonner.tsx</code>) — fija posición <code>bottom-center</code> y los tokens de la spec. No copiar; importar del paquete.</p>
+      <div class="docs-code-wrapper"><pre class="docs-code standalone"><code>import { Toaster as SonnerToaster, toast } from "sonner"
+
+// Wrapper de shadcn, tematizado a la spec del Snackbar de Embassy:
+// fondo inverse-surface + texto inverse-on-surface (auto-flip por [data-theme]),
+// acción como texto inverse-primary, radius-sm.
+export function Toaster(props: React.ComponentProps&lt;typeof SonnerToaster&gt;) {
+  return (
+    &lt;SonnerToaster
+      position="bottom-center"
+      toastOptions={{
+        style: {
+          background: "var(--color-inverse-surface)",
+          color: "var(--color-inverse-on-surface)",
+          border: "none",
+          borderRadius: "var(--radius-sm)",
+          fontFamily: "var(--font-body)",
+          fontSize: "13.5px",
+          boxShadow: "var(--shadow-lg, 0 4px 16px rgba(0,0,0,.24))",
+        },
+      }}
+      {...props}
+    /&gt;
+  )
 }
 
-const Snackbar = React.forwardRef&lt;HTMLDivElement, SnackbarProps&gt;(
-  ({
-    className,
-    layout,
-    message,
-    action,
-    onAction,
-    onClose,
-    liveRole = "status",
-    ...props
-  }, ref) =&gt; {
-    return (
-      &lt;div
-        role={liveRole}
-        aria-live={liveRole === "alert" ? "assertive" : "polite"}
-        aria-atomic="true"
-        className="snackbar-region"
-      &gt;
-        &lt;div
-          ref={ref}
-          className={cn(snackbarVariants({ layout, className }))}
-          role="presentation"
-          {...props}
-        &gt;
-          &lt;span className="snackbar-message"&gt;{message}&lt;/span&gt;
-          {action &amp;&amp; (
-            &lt;button className="snackbar-action" onClick={onAction}&gt;
-              {action}
-            &lt;/button&gt;
-          )}
-          {onClose &amp;&amp; (
-            &lt;button
-              className="snackbar-close"
-              onClick={onClose}
-              aria-label="Cerrar notificación"
-            &gt;
-              &lt;svg width="24" height="24" fill="none" stroke="currentColor"
-                   strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true"&gt;
-                &lt;path d="M18 6 6 18M6 6l12 12" /&gt;
-              &lt;/svg&gt;
-            &lt;/button&gt;
-          )}
-        &lt;/div&gt;
-      &lt;/div&gt;
-    )
-  }
-)
-Snackbar.displayName = "Snackbar"
-
-export { Snackbar, snackbarVariants }</code></pre></div>
+export { toast }</code></pre></div>
     </div>
 
   </div>
@@ -11751,6 +11816,12 @@ export { StatsGrid, StatCard }</code></pre>
           <div class="ds-card-link" onclick="navigate('c-nav-drawer')"><div class="ds-card-icon"><i data-lucide="panel-left"></i></div><div class="ds-card-name">Navigation Drawer</div><div class="ds-card-desc">Sidebar lateral fijo con ítems y grupos.</div></div>
           <div class="ds-card-link" onclick="navigate('c-nav-bar')"><div class="ds-card-icon"><i data-lucide="layout-template"></i></div><div class="ds-card-name">Navigation Bar</div><div class="ds-card-desc">Barra inferior para navegar entre 3–5 destinos.</div></div>
         </div>
+        <ul style="margin:8px 0 0;padding-left:20px;color:var(--text-secondary);font-size:var(--font-size-body-md);line-height:1.7">
+          <li>Elegí <strong>Navigation Drawer</strong> en pantallas anchas (desktop/tablet) y cuando tengas muchos destinos o jerarquía con grupos.</li>
+          <li>Elegí <strong>Navigation Bar</strong> en mobile y cuando haya entre 3 y 5 destinos de máximo nivel.</li>
+          <li>Usá un solo patrón de navegación principal por contexto — no combines drawer y bar para los mismos destinos.</li>
+          <li>El destino activo se marca con <code>var(--color-primary)</code> sobre fondo de container; el resto usa <code>var(--text-secondary)</code>.</li>
+        </div>
       </div>
     </section>
 
@@ -11782,6 +11853,12 @@ export { StatsGrid, StatCard }</code></pre>
           <div class="docs-preview">
             <div data-island="nav-drawer-showcase"></div>
           </div>
+          <ul>
+            <li><b>Ítem por defecto:</b> <code>ds-nav-item</code> en reposo — texto secundario, sin fondo.</li>
+            <li><b>Ítem activo:</b> <code>ds-nav-item.active</code> — fondo y texto de acento, peso 600, sincronizado con la ruta.</li>
+            <li><b>Ítem con badge:</b> <code>ds-nav-item</code> con contador alineado a la derecha para destinos que requieren atención.</li>
+            <li><b>Título de sección:</b> <code>ds-drawer-section-title</code> que agrupa ítems relacionados.</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -12011,10 +12088,24 @@ export { StatsGrid, StatCard }</code></pre>
         <section class="docs-section">
           <p class="ds-p">La Navigation Bar permite moverse entre 3 y 5 destinos de nivel superior. Se posiciona en el borde inferior de la pantalla, siempre visible. Cada destino tiene un ícono de 24 px centrado en una zona de indicador de 64×32 px y una etiqueta corta debajo. El indicador activo (fondo tipo píldora) aparece solo en el destino seleccionado — los demás preservan la misma zona sin fondo.</p>
           <p class="ds-p">Solo un ítem puede estar activo a la vez. El ícono activo usa tinta <code>--interactive</code>; el inactivo usa <code>--text-muted</code>.</p>
+          <ul class="docs-list">
+            <li>Barra fija en el borde inferior, siempre visible, para 3–5 destinos de nivel superior.</li>
+            <li>Cada ítem reserva una zona de indicador de 64×32 px; solo el activo muestra el fondo píldora (<code>--interactive-light</code>).</li>
+            <li>Ícono de 24 px: filled + tinta <code>--interactive</code> en el activo, outlined + <code>--text-muted</code> en el inactivo.</li>
+            <li>Etiqueta corta siempre visible (peso 700 activa / 500 inactiva); un solo ítem activo a la vez.</li>
+            <li>Badge opcional (dot o número) sobre el ícono para notificaciones o conteos.</li>
+            <li>Pensada para mobile/tablet/layouts compactos; fuera del rango 3–5 usar Navigation Drawer.</li>
+          </ul>
         </section>
         <section class="docs-section">
           <div class="docs-preview">
             <div data-island="nav-bar-showcase"></div>
+          </div>
+          <ol class="docs-list">
+            <li><b>Ítem activo</b> — zona de indicador con fondo píldora, ícono filled en <code>--interactive</code> y etiqueta en peso 700.</li>
+            <li><b>Ítem inactivo</b> — zona sin fondo, ícono outlined en <code>--text-muted</code> y etiqueta en peso 500.</li>
+            <li><b>Ítem con badge</b> — dot o píldora numérica sobre el ícono en <code>--interactive</code> para notificaciones o conteos.</li>
+            <li><b>Cantidad de destinos</b> — entre 3 y 5; fuera de ese rango usar Navigation Drawer.</li>
           </div>
         </section>
       </div>
@@ -12298,6 +12389,12 @@ export { StatsGrid, StatCard }</code></pre>
           <div class="docs-preview">
             <div data-island="topbar-showcase"></div>
           </div>
+          <ul>
+            <li><b>Breadcrumb:</b> contexto de navegación a la izquierda (<code>topbar-breadcrumb</code>).</li>
+            <li><b>Acción de la vista:</b> botón secundario opcional (<code>topbar-btn secondary</code>).</li>
+            <li><b>Notificaciones:</b> botón con contador flotante (<code>topbar-notif</code> + <code>notif-badge</code>).</li>
+            <li><b>Avatar:</b> iniciales del usuario, siempre alineado a la derecha.</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -12497,6 +12594,20 @@ css/layout.css</code></pre>
           <div class="docs-preview">
             <div data-island="kanban-showcase"></div>
           </div>
+          <ol>
+            <li><b>Columnas como estados</b> — cada columna es una etapa del pipeline (Aplicados, Entrevista, Oferta…) con su título y un <code>count</code> de tarjetas.</li>
+            <li><b>Tarjeta (reposo)</b> — <code>kanban-card</code> con título + metadata; cursor <code>grab</code>.</li>
+            <li><b>Hover</b> — elevación <code>--shadow-md</code> + <code>translateY(-1px)</code>.</li>
+            <li><b>Arrastrando</b> — clase <code>.dragging</code>: opacidad 50% + <code>rotate(2deg)</code>.</li>
+            <li><b>Foco</b> — <code>:focus-visible</code> con outline <code>--color-focus</code> + ring <code>--color-focus-ring</code>.</li>
+          </ol>
+          <ol>
+            <li><b>Columnas como estados</b> — cada columna es una etapa del pipeline (Aplicados, Entrevista, Oferta…) con su título y un <code>count</code> de tarjetas.</li>
+            <li><b>Tarjeta (reposo)</b> — <code>kanban-card</code> con título + metadata; cursor <code>grab</code>.</li>
+            <li><b>Hover</b> — elevación <code>--shadow-md</code> + <code>translateY(-1px)</code>.</li>
+            <li><b>Arrastrando</b> — clase <code>.dragging</code>: opacidad 50% + <code>rotate(2deg)</code>.</li>
+            <li><b>Foco</b> — <code>:focus-visible</code> con outline <code>--color-focus</code> + ring <code>--color-focus-ring</code>.</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -12640,7 +12751,27 @@ css/components/kanban.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Este componente <b>no tiene wrapper React</b>: se consume directo con HTML + clases CSS de <code>kanban.css</code> (ver snippets abajo). El wrapper <code>components/ui/kanban.tsx</code> está pendiente en el roadmap de la librería.</p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente en <code>packages/ds/components/ui/kanban-card.tsx</code>) — exporta <code>KanbanColumn</code> y <code>KanbanCard</code>. Mostrado como referencia; no lo redefinas en tu proyecto. El contenedor <code>kanban-board</code> (flex con scroll horizontal) se arma con clases CSS; para uso buildless con HTML + clases CSS, ver los snippets de abajo.</p>
+        <div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>import { KanbanColumn, KanbanCard } from &quot;@amalgama/ds/kanban-card&quot;
+
+&lt;div className=&quot;flex gap-4 overflow-x-auto pb-4&quot;&gt;
+  &lt;KanbanColumn title=&quot;Aplicados&quot; count={3}&gt;
+    &lt;KanbanCard
+      title=&quot;Maria Lopez&quot;
+      meta=&quot;Diseñadora UX · hace 2d&quot;
+      badgeLabel=&quot;Nuevo&quot;
+      badgeVariant=&quot;tertiary&quot;
+      avatarLabel=&quot;ML&quot;
+    /&gt;
+    &lt;KanbanCard title=&quot;Pedro Ruiz&quot; meta=&quot;Frontend Dev · hace 3d&quot; /&gt;
+  &lt;/KanbanColumn&gt;
+  &lt;KanbanColumn title=&quot;Entrevista&quot; count={2}&gt;
+    &lt;KanbanCard title=&quot;Carlos Vega&quot; meta=&quot;Backend Dev · hace 1d&quot; /&gt;
+  &lt;/KanbanColumn&gt;
+&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
       </div>
             <div class="docs-section">
         <h2 class="docs-section-title">Uso</h2>
@@ -12718,6 +12849,11 @@ css/components/kanban.css</code></pre>
           <div class="docs-preview">
             <div data-island="vacancy-card-showcase"></div>
           </div>
+          <ol class="docs-legend">
+            <li><b>Abierta</b> — vacante activa con badge <code>badge-open</code> y asignados visibles.</li>
+            <li><b>Activa / en proceso</b> — badge de estado intermedio y métricas de candidatos/entrevistas.</li>
+            <li><b>Cerrada / archivada</b> — badge de cierre, sin acciones de asignación nuevas.</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -12860,7 +12996,20 @@ css/components/badge.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Este componente <b>no tiene wrapper React</b>: se consume directo con HTML + clases CSS de <code>vacancy-card.css</code> (ver snippets abajo). El wrapper <code>components/ui/vacancy-card.tsx</code> está pendiente en el roadmap de la librería. El badge de estado sí tiene wrapper (<code>badge.tsx</code>).</p>
+        <p class="docs-section-desc">Existe un wrapper React en <code>@amalgama/ds/vacancy-card</code> que expone <code>VacancyCard</code> con props <code>name</code>, <code>icon</code>, <code>department</code>, <code>badgeLabel</code>, <code>badgeVariant</code> y <code>meta</code>. Importalo, <b>no lo redefinas</b>. El badge de estado se renderiza internamente con <code>Badge</code> (<code>badge.tsx</code>).</p>
+<div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>import { VacancyCard } from "@amalgama/ds/vacancy-card"
+
+&lt;VacancyCard
+  name="Diseñador UX Senior"
+  department="Producto · Remoto · Senior"
+  badgeLabel="Abierta"
+  badgeVariant="open"
+  meta="5d"
+/&gt;</code></pre>
+      </div>
+        <p class="docs-section-desc">El wrapper es una variante simplificada (sin <code>stat-pill</code> ni múltiples asignados). Para la anatomía completa documentada arriba, consumí las clases CSS de <code>vacancy-card.css</code> directamente (snippet buildless abajo).</p>
       </div>
             <div class="docs-section">
         <h2 class="docs-section-title">Uso</h2>
@@ -13062,7 +13211,21 @@ css/components/person-card.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Este componente <b>no tiene wrapper React</b>: se consume directo con HTML + clases CSS de <code>person-card.css</code> (ver snippets abajo). El wrapper <code>components/ui/person-card.tsx</code> está pendiente en el roadmap de la librería.</p>
+        <p class="docs-section-desc">En React, importá <code>PersonCard</code> desde <code>@amalgama/ds/person-card</code>. Recibe <code>name</code> (requerido), <code>role</code>, <code>avatarSrc</code>, <code>avatarFallback</code> (si no se pasa, deriva las iniciales del nombre), <code>meta</code> y <code>actions</code>. No lo redefinas: el estilo y las iniciales sobre el gradiente de marca vienen del componente.</p>
+<div class="docs-code-wrapper">
+        <button class="docs-copy-btn">Copiar</button>
+        <pre class="docs-code"><code>import { PersonCard } from "@amalgama/ds/person-card"
+
+&lt;div className="people-grid"&gt;
+  &lt;PersonCard name="Mercedes Garcia" role="Diseñadora UX" /&gt;
+  &lt;PersonCard name="Carlos Lopez" role="Desarrollador Frontend" /&gt;
+  &lt;PersonCard
+    name="Ana Martinez"
+    role="Product Manager"
+    avatarSrc="/avatars/ana.jpg"
+  /&gt;
+&lt;/div&gt;</code></pre>
+      </div>
       </div>
             <div class="docs-section">
         <h2 class="docs-section-title">Uso</h2>
@@ -13246,30 +13409,40 @@ css/components/person-card.css</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
       <div class="docs-section">
         <h2 class="docs-section-title">Uso</h2>
-        <p class="docs-section-desc">Snippets de código para implementar cada variante.</p>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Avatar principal (32px)</h3>
+        <p class="docs-section-desc">El componente React vive en <code>@amalgama/ds</code> y envuelve la primitiva <code>@radix-ui/react-avatar</code> (<code>Avatar</code> / <code>AvatarImage</code> / <code>AvatarFallback</code>). No lo redefinas ni inventes una variante nueva: importalo tal cual.</p>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">React (@amalgama/ds)</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;div class="avatar"&gt;MG&lt;/div&gt;</code></pre>
+          <pre class="docs-code"><code>import { Avatar, AvatarImage, AvatarFallback } from "@amalgama/ds/avatar"
+
+// Solo iniciales (fallback sobre el gradiente de marca)
+&lt;Avatar size="sm"&gt;
+  &lt;AvatarFallback&gt;MG&lt;/AvatarFallback&gt;
+&lt;/Avatar&gt;
+
+// Con imagen + fallback de iniciales mientras carga / si falla
+&lt;Avatar size="lg"&gt;
+  &lt;AvatarImage src="/users/mg.jpg" alt="Martina González" /&gt;
+  &lt;AvatarFallback&gt;MG&lt;/AvatarFallback&gt;
+&lt;/Avatar&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Avatares de asignado (22px)</h3>
+        <p class="docs-section-desc">Tamaños vía la prop <code>size</code>: <code>sm</code> (28px), <code>md</code> (36px, default), <code>lg</code> (44px), <code>xl</code> (56px). El fallback usa <code>bg-primary</code> / <code>text-on-primary</code> (tokens Embassy), sin hex hardcodeado.</p>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Buildless (clases CSS)</h3>
+        <p class="docs-section-desc">En contextos sin React (app shell, plantillas estáticas) usá las clases del shell. El gradiente y la tipografía salen de tokens en <code>layout.css</code> / <code>person-card.css</code> / <code>vacancy-card.css</code> — no repliques los gradientes con hex.</p>
 <div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;div class="assignee-avatar"&gt;CL&lt;/div&gt;
+          <pre class="docs-code"><code>&lt;!-- Topbar / app shell (32px) --&gt;
+&lt;div class="avatar"&gt;MG&lt;/div&gt;
+
+&lt;!-- Asignados en vacancy cards (22px) --&gt;
+&lt;div class="assignee-avatar"&gt;CL&lt;/div&gt;
 &lt;div class="assignee-avatar blue"&gt;MG&lt;/div&gt;
 &lt;div class="assignee-avatar green"&gt;AP&lt;/div&gt;
-&lt;div class="assignee-avatar purple"&gt;JR&lt;/div&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Avatar de persona (44px)</h3>
-<div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;div class="person-avatar"&gt;MG&lt;/div&gt;
+&lt;div class="assignee-avatar purple"&gt;JR&lt;/div&gt;
 
-&lt;!-- person-avatar se define dentro de .person-card --&gt;
-&lt;!-- Gradientes disponibles: --&gt;
-&lt;!-- Azul:   linear-gradient(135deg, #4F80FF, #95B3FF) --&gt;
-&lt;!-- Verde:  linear-gradient(135deg, #00c164, #60d594) --&gt;
-&lt;!-- Morado: linear-gradient(135deg, #8b5cf6, #a78bfa) --&gt;
-&lt;!-- Rojo:   linear-gradient(135deg, #ee3043, #fd3a45) --&gt;</code></pre>
+&lt;!-- Person card (44px) — requiere ancestro .person-card --&gt;
+&lt;div class="person-card"&gt;
+  &lt;div class="person-avatar"&gt;MG&lt;/div&gt;
+&lt;/div&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
       </div>
@@ -14905,6 +15078,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <ul class="docs-list" style="margin:0 0 20px;padding-left:20px;font-size:14px;line-height:1.7;">
+            <li>Rota un conjunto de ítems (imágenes o cards) con scroll horizontal y snap.</li>
+            <li>Variantes: un ítem por slide y múltiples ítems por slide (<code>basis-1/2</code>).</li>
+            <li>Controles de navegación previo/siguiente (<code>CarouselPrevious</code> / <code>CarouselNext</code>).</li>
+            <li>Radio de ítem <code>corner-extra-large</code>; gap de 8&nbsp;dp entre ítems; elevación nivel&nbsp;1 en hover.</li>
+            <li>El indicador de foco usa el rol <code>secondary</code>, no <code>primary</code>.</li>
+          </ul>
           <div class="docs-preview">
             <div data-island="carousel-showcase"></div>
           </div>
@@ -14936,10 +15116,27 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> grilla con scroll horizontal (patrón kanban-board) o flaggear si se necesita carrusel real.
-          </div>
+          <p class="docs-body">Importá los subcomponentes desde <code>@amalgama/ds/carousel</code>. El carrusel es compuesto: <code>Carousel</code> provee el contexto, <code>CarouselContent</code> envuelve los <code>CarouselItem</code>, y <code>CarouselPrevious</code> / <code>CarouselNext</code> controlan la navegación. No lo redefinas: usá los componentes tal como se exportan.</p>
+          <pre class="docs-code"><code>import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@amalgama/ds/carousel"
+
+&lt;Carousel className="max-w-sm"&gt;
+  &lt;CarouselContent&gt;
+    {slides.map((slide) =&gt; (
+      &lt;CarouselItem key={slide.id}&gt;
+        {slide.content}
+      &lt;/CarouselItem&gt;
+    ))}
+  &lt;/CarouselContent&gt;
+  &lt;CarouselPrevious /&gt;
+  &lt;CarouselNext /&gt;
+&lt;/Carousel&gt;</code></pre>
+          <p class="docs-body">Para mostrar varios ítems por slide, pasá <code>opts={{ align: "start" }}</code> al <code>Carousel</code> y una clase de ancho (ej. <code>basis-1/2</code>) a cada <code>CarouselItem</code>. El motor de scroll/snap es Embla; opciones avanzadas van por <code>opts</code> y el control imperativo por la <code>CarouselApi</code>.</p>
         </div>
       </div>
     </section>
@@ -14971,6 +15168,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <section class="docs-section">
           <h2 class="docs-section-title">¿Qué es?</h2>
           <p class="docs-section-desc">Permite seleccionar una o más opciones de un conjunto. A diferencia del Switch, el cambio no se aplica al instante — suele requerir confirmación ("Guardar"). El contenedor visible mide 18×18&nbsp;dp, el área de toque 48×48&nbsp;dp, y una capa de estado de 40&nbsp;dp comunica hover, foco y presión.</p>
+          <ul style="margin:12px 0 0;padding-left:18px;line-height:1.9">
+            <li>Tres estados: marcado, sin marcar e indeterminado (selección parcial padre-hijo).</li>
+            <li>Contenedor visible de 18×18&nbsp;dp con área de toque de 48×48&nbsp;dp.</li>
+            <li>Capa de estado de 40&nbsp;dp que comunica hover, foco y presión.</li>
+            <li>El cambio no se aplica al instante — suele requerir confirmación explícita.</li>
+            <li>Para selección múltiple dentro de un grupo de opciones relacionadas.</li>
+          </ul>
         </section>
       </div>
 
@@ -18295,6 +18499,20 @@ const [on, setOn] = useState(false)
           <div class="docs-preview">
             <div data-island="date-picker-showcase"></div>
           </div>
+          <ul class="docs-key-points" style="margin:16px 0 0;padding-left:20px;font-size:14px;line-height:1.8;color:var(--text-secondary);">
+            <li>Permite seleccionar una fecha, hora o rango de fechas.</li>
+            <li>Dos formatos: modal (diálogo) para mobile y docked (inline) para desktop/tablet.</li>
+            <li>La variante de input por teclado es intercambiable con el calendario via ícono de edición.</li>
+            <li>Especificaciones: celda de día 40×40 dp, ancho de calendario 360 dp, radio de diálogo 28 dp.</li>
+            <li>La fecha seleccionada usa relleno <code>--color-primary</code>; hoy se marca con borde circular; el rango usa <code>--color-secondary-container</code>.</li>
+            <li><strong>En roadmap:</strong> todavía sin código consumible — componé con <code>input type="date"</code> + <code>.date-input-wrapper</code> mientras tanto.</li>
+          </ul>
+          <ol class="docs-variant-legend" style="margin:16px 0 0;padding-left:20px;font-size:13px;line-height:1.8;color:var(--text-secondary);">
+            <li><b>Docked</b> — campo de texto outlined + calendario desplegable debajo (desktop/tablet).</li>
+            <li><b>Modal</b> — diálogo completo con grilla de calendario (mobile); soporta selección de rango.</li>
+            <li><b>Modal date input</b> — entrada por teclado en un diálogo; intercambiable con Modal via ícono de edición.</li>
+            <li><b>Full-screen</b> — cubre toda la pantalla; recomendado en viewports compactos (mobile).</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -18345,15 +18563,31 @@ const [on, setOn] = useState(false)
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <ul class="docs-key-points">
+            <li>Línea de 1px que usa el token <code>--border</code>; recalibra en dark mode automáticamente, sin overrides por tema.</li>
+            <li>Dos variantes: <strong>full-width</strong> (de borde a borde) e <strong>inset</strong> (con sangría izquierda de 16px para alinearse con el contenido del ítem).</li>
+            <li>Separa grupos de contenido dentro de listas y layouts; no agrega peso visual ni color de marca.</li>
+            <li>Orientación horizontal por defecto; soporta <code>orientation="vertical"</code> para divisiones en línea.</li>
+          </ul>
+        </section>
+        <section class="docs-section">
           <h2 class="docs-section-title">Full-width e inset</h2>
           <div data-island="divider-showcase"></div>
+          <ol class="docs-legend">
+            <li><strong>Full-width</strong> — <code>&lt;Separator /&gt;</code> de borde a borde; separa secciones de igual jerarquía.</li>
+            <li><strong>Inset</strong> — <code>&lt;Separator inset /&gt;</code> con sangría de 16px; alinea con texto/contenido de los ítems en listas.</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;Separator /&gt;
-&lt;Separator inset /&gt;</code></pre>
+          <pre class="docs-code"><code>import { Separator } from "@amalgama/ds/separator"
+
+&lt;Separator /&gt;             // full-width
+&lt;Separator inset /&gt;       // sangría de 16px
+&lt;Separator orientation="vertical" /&gt;</code></pre>
+          <div class="ds-callout" style="margin-top:12px"><strong>No lo redefinas.</strong> <code>Separator</code> es el componente de <code>@amalgama/ds</code> (Radix UI), tematizado con <code>--border</code>. Importalo tal cual; no recrees el primitivo.</div>
         </section>
       </div>
     </section>
@@ -18369,6 +18603,15 @@ const [on, setOn] = useState(false)
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <h2 class="docs-section-title">Características</h2>
+          <ul class="docs-list">
+            <li>Contenedor vertical de ítems relacionados: cada <code>ListItem</code> tiene una línea principal (<code>headline</code>) y texto de soporte opcional (<code>supporting</code>).</li>
+            <li>Los ítems pueden ser estáticos o accionables (<code>asButton</code>), con estados hover/focus tematizados con tokens de superficie.</li>
+            <li>Usá <code>Separator</code> para dividir grupos de ítems dentro de una misma lista.</li>
+            <li>Tematizada con los tokens de superficie de Embassy (<code>bg-card</code>, <code>text-foreground</code>, <code>text-muted-foreground</code>); se adapta a modo claro/oscuro sin overrides.</li>
+          </ul>
+        </section>
+        <section class="docs-section">
           <h2 class="docs-section-title">Lista con encabezado y soporte</h2>
           <div data-island="list-showcase"></div>
         </section>
@@ -18376,7 +18619,10 @@ const [on, setOn] = useState(false)
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;List&gt;
+          <pre class="docs-code"><code>import { List, ListItem } from "@amalgama/ds/list"
+import { Separator } from "@amalgama/ds/separator"
+
+&lt;List&gt;
   &lt;ListItem headline="Bandeja de entrada" supporting="128 mensajes" /&gt;
   &lt;Separator /&gt;
   &lt;ListItem headline="Enviados" asButton /&gt;
@@ -18397,6 +18643,16 @@ const [on, setOn] = useState(false)
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <h2 class="docs-section-title">Características</h2>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>Dos formas: <b>circular</b> (compacto, sobre contenido o botones) y <b>lineal</b> (a lo ancho de un contenedor o región).</li>
+            <li>Dos modos: <b>determinado</b> (<code>value</code> 0–100, progreso conocido) e <b>indeterminado</b> (animación continua, duración desconocida).</li>
+            <li>Indicador en <code>var(--color-primary)</code>; pista en <code>var(--color-surface-variant)</code>; se recalibra solo en dark mode.</li>
+            <li>El lineal usa el componente <code>Progress</code> (Radix); el circular es un SVG propio (no hay primitiva circular en shadcn/Radix).</li>
+            <li>Siempre acompañar con un <code>aria-label</code> descriptivo para lectores de pantalla.</li>
+          </ul>
+        </section>
+        <section class="docs-section">
           <h2 class="docs-section-title">Circular</h2>
           <div data-island="progress-circular"></div>
         </section>
@@ -18412,6 +18668,18 @@ const [on, setOn] = useState(false)
             <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Indeterminado: la operación corre pero no se sabe cuánto falta.</li><li>Determinado: hay un porcentaje real de avance (subida de archivo).</li></ul></div></div>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Placeholder de estructura de layout mientras carga → <b>Skeleton</b>.</li></ul></div></div>
           </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>Tanto <code>Progress</code> (lineal, vía Radix) como <code>CircularProgress</code> exponen <code>role="progressbar"</code>.</li>
+            <li>En modo determinado se publica <code>aria-valuenow</code> con el porcentaje actual (Radix también emite <code>aria-valuemin</code>/<code>aria-valuemax</code> en el lineal); en indeterminado <code>aria-valuenow</code> se omite.</li>
+            <li>Siempre pasar un <code>aria-label</code> descriptivo (p. ej. "Cargando" o "65 por ciento"): el indicador no tiene texto visible asociado.</li>
+            <li>El contraste del indicador (<code>var(--color-primary)</code>) sobre la pista (<code>var(--color-surface-variant)</code>) cumple en light y dark mode sin overrides.</li>
+            <li>No depender solo del color para comunicar avance; en operaciones largas acompañar con texto de estado para usuarios de lectores de pantalla.</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
@@ -18445,8 +18713,18 @@ const [on, setOn] = useState(false)
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <h2 class="docs-section-title">Características</h2>
+          <ul class="docs-list">
+            <li>Lista temporal de acciones u opciones anclada a un disparador (un <code>Button</code> o <code>icon-btn</code>); se cierra al elegir un ítem o al hacer clic afuera.</li>
+            <li>Construido sobre Radix <code>DropdownMenu</code>: posicionamiento, foco y navegación por teclado (flechas, <code>Esc</code>, <code>Home</code>/<code>End</code>) vienen incluidos.</li>
+            <li>Soporta ítems normales, separadores (<code>DropdownMenuSeparator</code>) e ítems destructivos; usalo para acciones contextuales, no para navegación principal.</li>
+            <li>Superficie, texto y estados <em>hover</em>/<em>focus</em> con tokens Embassy; sin colores hardcodeados, y se adapta solo a modo claro y oscuro.</li>
+          </ul>
+        </section>
+        <section class="docs-section">
           <h2 class="docs-section-title">Menú anclado a un botón</h2>
           <div data-island="menu-showcase"></div>
+          <p class="docs-caption">El disparador es un <code>Button</code> de Embassy; el panel agrupa <code>DropdownMenuItem</code> y puede separarlos con <code>DropdownMenuSeparator</code>.</p>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
@@ -18478,6 +18756,16 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <h2 class="docs-section-title">Características</h2>
+          <ul class="ch-overview-list">
+            <li><b>Selección exclusiva:</b> solo una opción puede estar activa por grupo de valores mutuamente excluyentes.</li>
+            <li><b>Rango ideal:</b> 2–5 opciones visibles a la vez para comparar; con más de 5 conviene un <b>Select</b>.</li>
+            <li><b>Estados completos:</b> default, seleccionado, hover, focus y disabled.</li>
+            <li><b>Tematizado con tokens de Embassy:</b> <code>--color-primary</code> para el indicador y <code>--color-outline</code> para el borde.</li>
+            <li><b>Etiquetas clicables:</b> toda la fila <code>label</code> + control activa la selección.</li>
+          </ul>
+        </section>
+        <section class="docs-section">
           <h2 class="docs-section-title">Grupo de opciones</h2>
           <!-- shadcn/ui island — Radio group (Embassy-themed) -->
           <div data-island="radio-group"></div>
@@ -18486,6 +18774,13 @@ import { Button } from &quot;@amalgama/ds/button&quot;
           <h2 class="docs-section-title">Estados</h2>
           <!-- shadcn/ui island — Radio states (Embassy-themed) -->
           <div data-island="radio-states"></div>
+          <ol class="ch-overview-list">
+            <li><b>Default:</b> opción no seleccionada, borde <code>--color-outline</code>.</li>
+            <li><b>Seleccionado:</b> indicador relleno con <code>--color-primary</code>.</li>
+            <li><b>Hover:</b> state layer sobre el control al pasar el cursor.</li>
+            <li><b>Focus:</b> anillo de foco visible para navegación por teclado.</li>
+            <li><b>Disabled:</b> control atenuado y no interactivo.</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -19436,9 +19731,20 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <ul class="ds-key-points">
+            <li>Dos variantes: <strong>bottom sheet</strong> (anclado al borde inferior) y <strong>side sheet</strong> (anclado al lateral).</li>
+            <li><strong>Modal vs. standard:</strong> la variante modal incluye scrim sobre el contenido detrás; la standard queda attached al layout, sin scrim.</li>
+            <li>El bottom sheet lleva drag handle centrado (32×4dp) y esquinas <code>corner-extra-large-top</code> (28dp arriba, 0dp abajo).</li>
+            <li>Contiene contenido suplementario o acciones contextuales — no flujos largos ni navegación principal.</li>
+            <li><strong>En roadmap:</strong> todavía sin código consumible — componé con Modal o create-form mientras tanto.</li>
+          </ul>
           <div class="docs-preview">
             <div data-island="sheet-showcase"></div>
           </div>
+          <ol class="ds-legend">
+            <li><strong>Bottom sheet</strong> — superficie anclada al borde inferior, con drag handle. Variante modal con scrim; standard sin scrim.</li>
+            <li><strong>Side sheet</strong> — superficie anclada al lateral (256dp). Standard attached al layout; modal/detached con scrim y esquina leading redondeada.</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -19486,8 +19792,23 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <h2 class="docs-section-title">Características clave</h2>
+          <ul style="margin:0 0 8px;padding-left:18px;line-height:1.9">
+            <li>Selecciona un valor dentro de un rango continuo donde el valor exacto importa poco.</li>
+            <li>Pista en <code>--color-surface-variant</code>; rango activo y thumb en <code>--color-primary</code>.</li>
+            <li>Soporta modo rango con dos thumbs (<code>defaultValue</code> con dos valores).</li>
+            <li>Admite pasos discretos mediante la prop <code>step</code>.</li>
+            <li>Feedback inmediato y visual: ideal para volumen, brillo, zoom o precio.</li>
+          </ul>
+        </section>
+        <section class="docs-section">
           <h2 class="docs-section-title">Variantes</h2>
           <div data-island="slider-showcase"></div>
+          <ol style="margin:8px 0 0;padding-left:18px;line-height:1.9">
+            <li><b>Default</b> — un único thumb sobre un rango continuo (<code>defaultValue={[50]}</code>).</li>
+            <li><b>Con step</b> — avanza en pasos discretos (<code>step={10}</code>).</li>
+            <li><b>Rango</b> — dos thumbs definen un intervalo (<code>defaultValue={[20, 70]}</code>).</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -19502,9 +19823,12 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;Slider defaultValue={[50]} /&gt;
+          <pre class="docs-code"><code>import { Slider } from "@amalgama/ds/slider"
+
+&lt;Slider defaultValue={[50]} /&gt;
 &lt;Slider defaultValue={[40]} step={10} /&gt;
 &lt;Slider defaultValue={[20, 70]} /&gt;  {/* rango */}</code></pre>
+          <p class="docs-note" style="margin-top:12px">Wrapper de <code>@radix-ui/react-slider</code>: el número de thumbs se deriva del largo de <code>value</code>/<code>defaultValue</code>. No lo redefinas — importalo de <code>@amalgama/ds/slider</code>.</p>
         </section>
       </div>
     </section>
@@ -19533,10 +19857,22 @@ import { Button } from &quot;@amalgama/ds/button&quot;
           <h2 class="docs-section-title">Estados</h2>
           <!-- shadcn/ui island — Switch states (Embassy-themed) -->
           <div data-island="switch-showcase"></div>
+          <ol style="margin:12px 0 0;padding-left:18px;line-height:1.9;color:var(--text-secondary)">
+            <li><b>Apagado</b> — estado off: pista neutra, handle de 16&nbsp;dp a la izquierda.</li>
+            <li><b>Encendido</b> — estado on: pista de acento, handle de 24&nbsp;dp a la derecha.</li>
+            <li><b>Deshabilitado</b> — no interactivo y con opacidad reducida.</li>
+            <li><b>Deshabilitado + encendido</b> — on bloqueado: muestra el valor sin permitir cambiarlo.</li>
+          </ol>
         </section>
         <section class="docs-section">
           <h2 class="docs-section-title">¿Qué es?</h2>
           <p class="docs-section-desc">Activa o desactiva una opción con efecto inmediato — no requiere confirmación. Pista de 52×32&nbsp;dp; el handle crece de 16&nbsp;dp (apagado) a 24&nbsp;dp (encendido) y puede mostrar un ícono de check/cross. Área de toque 48×48&nbsp;dp.</p>
+          <ul style="margin:8px 0 0;padding-left:18px;line-height:1.9">
+            <li>Pista de 52×32&nbsp;dp; handle de 16&nbsp;dp (apagado) a 24&nbsp;dp (encendido), con ícono check/cross opcional.</li>
+            <li>Efecto inmediato — no requiere confirmación.</li>
+            <li>Estado binario único, independiente de otras opciones.</li>
+            <li>Área de toque garantizada de 48×48&nbsp;dp.</li>
+          </ul>
         </section>
       </div>
 
@@ -19611,9 +19947,19 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
+          <ul class="ds-key-points">
+            <li>Aparece al hacer hover, focus o tap sobre un elemento; el texto debe ser breve y no repetir el contenido adyacente.</li>
+            <li>Dos tipos: <b>plain tooltip</b> (etiqueta corta sobre <code>inverse-surface</code>) y <b>rich tooltip</b> (con subheader, cuerpo y acciones opcionales).</li>
+            <li>Timing: 500ms de hover para aparecer, inmediato en foco de teclado; se cierra al salir el cursor o con Escape.</li>
+            <li>En roadmap: todavía sin código consumible. Mientras tanto usá el atributo <code>title</code> nativo o mostrá la información como texto visible.</li>
+          </ul>
           <div class="docs-preview">
             <div data-island="tooltip-showcase"></div>
           </div>
+          <ol class="docs-legend">
+            <li><b>Plain tooltip</b> — etiqueta corta de una línea sobre <code>inverse-surface</code>, sin elevación.</li>
+            <li><b>Rich tooltip</b> — subheader, cuerpo y acciones opcionales sobre <code>surface-container</code>, con elevación.</li>
+          </ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -20654,6 +21000,13 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <p class="ds-p">Nav Cards organizan la navegación en tiles visuales escaneables. Las tarjetas completas tienen una fila de encabezado (tag + botón flecha), área de contenido (título grande + descripción) y un área visual ilustrada. Las tarjetas compactas omiten el área visual para grids densos.</p>
+          <ul class="docs-list" style="margin-top:16px">
+            <li>Tres zonas: header (tag + botón flecha), contenido (título grande + descripción) y área visual ilustrada opcional.</li>
+            <li>Dos modos: <strong>full</strong> (con área visual de 148px) para grids de secciones de nivel superior y <strong>compact</strong> (sin área visual) para listas densas de componentes.</li>
+            <li>8 tintes semánticos de área visual (default neutro + <code>nv-primary</code>/<code>nv-secondary</code>/<code>nv-tertiary</code>/<code>nv-success</code>/<code>nv-info</code>/<code>nv-warning</code>/<code>nv-neutral</code>) — el tinte va solo en <code>.nav-card-visual</code>, nunca en el root.</li>
+            <li>Ilustraciones SVG inline con <code>currentColor</code> que se adaptan automáticamente a modo claro y oscuro.</li>
+            <li>Componente interno del sitio de docs: sus estilos viven inline en <code>index.html</code>, no en <code>css/components/</code>, y no tiene API <code>@amalgama/ds</code>.</li>
+          </ul>
           <div class="nav-card-grid" style="max-width:900px;margin-top:24px">
           <div class="nav-card" onclick="">
             <div class="nav-card-header">
@@ -20698,6 +21051,10 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             </div>
           </div>
         </div>
+          <ol class="docs-list" style="margin-top:16px">
+            <li><strong>Color</strong> — tarjeta <em>full</em> con tinte <code>nv-primary</code> en el área visual.</li>
+            <li><strong>Typography</strong> — tarjeta <em>full</em> con tinte <code>nv-tertiary</code> en el área visual.</li>
+          </ol>
         </section>
       </div>
 
