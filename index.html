@@ -7122,103 +7122,44 @@ function setLoading(btn, isLoading) {
 
         <!-- ── React ── -->
         <section class="docs-section">
-          <h2 class="docs-section-title">React — componente wrapper</h2>
-          <p class="docs-section-desc">Podés usar las clases CSS directamente en JSX o crear un wrapper liviano. Este ejemplo no requiere ninguna dependencia extra.</p>
+          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn)</h2>
+          <p class="docs-section-desc">En proyectos React + Tailwind v4, instalá <code>@amalgama/ds</code> e importá el componente — los estilos vienen del tema (<code>@amalgama/ds/theme</code>), no hace falta cargar <code>button.css</code>. <code>danger</code>, <code>success</code> e <code>icon</code> son <strong>variantes</strong>, no props sueltas.</p>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-            <pre class="docs-code"><code>// Button.tsx
-type Variant = 'primary' | 'secondary' | 'tertiary' | 'text';
-type Size    = 'default' | 'sm';
+            <pre class="docs-code"><code>// app entry CSS — tokens → utilidades Tailwind
+@import &quot;@amalgama/ds/theme&quot;;
 
-interface ButtonProps extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt; {
-  variant?: Variant;
-  size?: Size;
-  danger?: boolean;
-  success?: boolean;
-  loading?: boolean;
-  icon?: React.ReactNode;      // ícono inicial (antes del label)
-  trailingIcon?: React.ReactNode; // ícono final
-}
+// Componente (shadcn/Radix + cva, ya estilado con tokens Embassy)
+import { Button } from &quot;@amalgama/ds/button&quot;
 
-export function Button({
-  variant = 'primary',
-  size = 'default',
-  danger,
-  success,
-  loading,
-  icon,
-  trailingIcon,
-  children,
-  disabled,
-  className,
-  ...props
-}: ButtonProps) {
-  const classes = [
-    `btn-${variant}`,
-    size === 'sm' ? 'btn-sm' : '',
-    danger  ? 'btn-danger'  : '',
-    success ? 'btn-success' : '',
-    className ?? '',
-  ].filter(Boolean).join(' ');
-
-  return (
-    &lt;button
-      className={classes}
-      disabled={disabled || loading}
-      aria-busy={loading || undefined}
-      {...props}
-    &gt;
-      {loading &amp;&amp; (
-        &lt;svg width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot;
-             stroke=&quot;currentColor&quot; stroke-width=&quot;2.5&quot;
-             style={{ animation: 'spin 1s linear infinite', flexShrink: 0 }}&gt;
-          &lt;path d=&quot;M21 12a9 9 0 1 1-6.219-8.56&quot;/&gt;
-        &lt;/svg&gt;
-      )}
-      {!loading &amp;&amp; icon}
-      {children}
-      {!loading &amp;&amp; trailingIcon}
-    &lt;/button&gt;
-  );
-}
-
-// Uso
+// Variantes: primary · secondary · tertiary · text · icon · danger · success · ghost
+// Tamaños:   xs · sm · (default) · lg · xl      ·      prop booleana: compact
 &lt;Button variant=&quot;primary&quot; onClick={handleSubmit}&gt;Publicar vacante&lt;/Button&gt;
 &lt;Button variant=&quot;secondary&quot; size=&quot;sm&quot;&gt;Guardar borrador&lt;/Button&gt;
 &lt;Button variant=&quot;tertiary&quot;&gt;Cancelar&lt;/Button&gt;
-&lt;Button variant=&quot;primary&quot; danger onClick={handleDelete}&gt;Eliminar&lt;/Button&gt;
-&lt;Button variant=&quot;primary&quot; loading&gt;Publicando…&lt;/Button&gt;</code></pre>
+&lt;Button variant=&quot;text&quot;&gt;Ver más&lt;/Button&gt;
+&lt;Button variant=&quot;danger&quot; onClick={handleDelete}&gt;Eliminar&lt;/Button&gt;
+&lt;Button variant=&quot;success&quot;&gt;Aprobar&lt;/Button&gt;
+&lt;Button variant=&quot;primary&quot; compact&gt;Compacto&lt;/Button&gt;</code></pre>
           </div>
         </section>
 
         <!-- ── React icon button ── -->
         <section class="docs-section">
-          <h2 class="docs-section-title">React — IconButton</h2>
-          <p class="docs-section-desc"><code>aria-label</code> es obligatorio. Sin él el botón es inaccesible para lectores de pantalla. En React usá <code>aria-label</code> como prop, no como atributo inline.</p>
+          <h2 class="docs-section-title">React — botón de ícono</h2>
+          <p class="docs-section-desc">No hay un componente aparte: usá <code>variant="icon"</code>. <code>aria-label</code> es obligatorio — sin él el botón es inaccesible para lectores de pantalla — y describe la <strong>acción</strong>, no el ícono.</p>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-            <pre class="docs-code"><code>// IconButton.tsx
-interface IconButtonProps extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt; {
-  label: string;   // aria-label requerido — no opcional
-  size?: 'default' | 'sm';
-  children: React.ReactNode; // ícono SVG
-}
+            <pre class="docs-code"><code>import { Button } from &quot;@amalgama/ds/button&quot;
+import { Pencil, Trash2 } from &quot;lucide-react&quot;
 
-export function IconButton({ label, size = 'default', children, className, ...props }: IconButtonProps) {
-  return (
-    &lt;button
-      className={['icon-btn', size === 'sm' ? 'btn-sm' : '', className].filter(Boolean).join(' ')}
-      aria-label={label}
-      {...props}
-    &gt;
-      {children}
-    &lt;/button&gt;
-  );
-}
+&lt;Button variant=&quot;icon&quot; aria-label=&quot;Editar vacante&quot;&gt;
+  &lt;Pencil /&gt;
+&lt;/Button&gt;
 
-// Uso — el label describe la ACCIÓN, no el ícono
-&lt;IconButton label=&quot;Editar vacante&quot;&gt;&lt;EditIcon /&gt;&lt;/IconButton&gt;
-&lt;IconButton label=&quot;Eliminar vacante&quot; size=&quot;sm&quot;&gt;&lt;TrashIcon /&gt;&lt;/IconButton&gt;</code></pre>
+&lt;Button variant=&quot;icon&quot; size=&quot;sm&quot; aria-label=&quot;Eliminar vacante&quot;&gt;
+  &lt;Trash2 /&gt;
+&lt;/Button&gt;</code></pre>
           </div>
         </section>
 
@@ -7660,11 +7601,11 @@ export function IconButton({ label, size = 'default', children, className, ...pr
             </li>
             <li>
               <span class="bd-ico">⌨️</span>
-              <div><b>Usar elementos <code>&lt;button&gt;</code> reales.</b> Garantiza navegación con Tab y activación con Space / Enter sin JS adicional. No usar <code>&lt;div&gt;</code> o <code>&lt;span&gt;</code>.</div>
+              <div><b>Usar elementos <code>&lt;button&gt;</code> reales.</b> Garantiza navegación por teclado (flechas dentro del grupo) y activación con Space / Enter. La implementación shadcn usa Radix ToggleGroup (roving tabindex). No usar <code>&lt;div&gt;</code> o <code>&lt;span&gt;</code>.</div>
             </li>
             <li>
               <span class="bd-ico">🎨</span>
-              <div><b>Contraste mínimo 4.5:1.</b> Texto activo (<code>--ds-accent</code>) sobre fondo activo (<code>--ds-accent-bg</code>) y texto inactivo (<code>--text-secondary</code>) sobre contenedor deben cumplir WCAG AA.</div>
+              <div><b>Contraste mínimo 4.5:1.</b> Texto activo (<code>--color-on-secondary-container</code>) sobre fondo activo (<code>--color-secondary-container</code>) y texto inactivo (<code>--color-on-surface</code>) sobre el contenedor cumplen WCAG AA.</div>
             </li>
           </ul>
         </section>
@@ -7681,7 +7622,11 @@ export function IconButton({ label, size = 'default', children, className, ...pr
             <tbody>
               <tr style="border-bottom:1px solid var(--border);">
                 <td style="padding:10px 12px;"><kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">Tab</kbd></td>
-                <td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Mueve el foco al siguiente segmento (o fuera del grupo si es el último).</td>
+                <td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Lleva el foco al grupo (al segmento seleccionado) y, de nuevo, fuera del grupo — no recorre los segmentos uno por uno (roving tabindex de Radix).</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);">
+                <td style="padding:10px 12px;"><kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">←</kbd> / <kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">→</kbd></td>
+                <td style="padding:10px 12px;font-size:13px;color:var(--ds-text-2);">Mueve el foco entre los segmentos dentro del grupo.</td>
               </tr>
               <tr>
                 <td style="padding:10px 12px;"><kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">Space</kbd> / <kbd style="font-family:'DM Mono',monospace;font-size:12px;background:var(--ds-accent-bg);color:var(--ds-accent);padding:2px 6px;border-radius:4px;">Enter</kbd></td>
@@ -7719,7 +7664,27 @@ export function IconButton({ label, size = 'default', children, className, ...pr
         </section>
 
         <section class="docs-section">
-          <h2 class="docs-section-title">JavaScript</h2>
+          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn)</h2>
+          <p class="docs-section-desc">En React + Tailwind v4, el estado y la accesibilidad (roles, navegación por teclado) los maneja el componente (Radix ToggleGroup) — no hace falta la función JS de abajo. Importá desde <code>@amalgama/ds</code>.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { SegmentedButtonGroup, SegmentedButtonItem } from &quot;@amalgama/ds/segmented-button&quot;
+
+// Estado controlado — onValueChange recibe el value seleccionado
+const [vista, setVista] = useState(&quot;lista&quot;)
+
+&lt;SegmentedButtonGroup value={vista} onValueChange={(v) =&gt; v &amp;&amp; setVista(v)}&gt;
+  &lt;SegmentedButtonItem value=&quot;lista&quot;&gt;Lista&lt;/SegmentedButtonItem&gt;
+  &lt;SegmentedButtonItem value=&quot;cuadricula&quot;&gt;Cuadrícula&lt;/SegmentedButtonItem&gt;
+&lt;/SegmentedButtonGroup&gt;
+
+// Tamaños: size=&quot;sm&quot; | &quot;md&quot; (default) | &quot;lg&quot;
+&lt;SegmentedButtonGroup size=&quot;sm&quot; value={p} onValueChange={setP}&gt;…&lt;/SegmentedButtonGroup&gt;</code></pre>
+          </div>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">JavaScript (sólo buildless / HTML)</h2>
           <div class="docs-code-wrapper">
 <pre class="docs-code"><code>function segSwitch(el) {
   var grp = el.closest('.seg-btn-group');
@@ -8002,7 +7967,7 @@ export function IconButton({ label, size = 'default', children, className, ...pr
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <pre class="docs-code standalone"><code>npm install @amalgama/ds</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
@@ -8013,7 +7978,7 @@ css/components/form.css</code></pre>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Input } from &quot;@/components/ui/input&quot;
+          <pre class="docs-code standalone"><code>import { Input } from &quot;@amalgama/ds/input&quot;
 
 &lt;Input label=&quot;Nombre&quot; placeholder=&quot;Ej: Maria Garcia&quot; required /&gt;
 &lt;Input placeholder=&quot;Sin label...&quot; /&gt;
@@ -8024,10 +7989,10 @@ css/components/form.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>input.tsx</code> a tu proyecto en <code>components/ui/input.tsx</code></p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/input.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
+import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
 export interface InputProps
   extends React.InputHTMLAttributes&lt;HTMLInputElement&gt; {
@@ -8320,7 +8285,7 @@ export { Input }</code></pre>
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <pre class="docs-code standalone"><code>npm install @amalgama/ds</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
@@ -8331,12 +8296,15 @@ css/components/form.css</code></pre>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Select } from &quot;@/components/ui/select&quot;
+          <pre class="docs-code standalone"><code>import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from &quot;@amalgama/ds/select&quot;
 
-&lt;Select label=&quot;Ubicacion&quot; required&gt;
-  &lt;option&gt;Remoto&lt;/option&gt;
-  &lt;option&gt;Presencial&lt;/option&gt;
-  &lt;option&gt;Hibrido&lt;/option&gt;
+&lt;Select value={ubicacion} onValueChange={setUbicacion}&gt;
+  &lt;SelectTrigger&gt;&lt;SelectValue placeholder=&quot;Elegí una ubicación&quot; /&gt;&lt;/SelectTrigger&gt;
+  &lt;SelectContent&gt;
+    &lt;SelectItem value=&quot;remoto&quot;&gt;Remoto&lt;/SelectItem&gt;
+    &lt;SelectItem value=&quot;presencial&quot;&gt;Presencial&lt;/SelectItem&gt;
+    &lt;SelectItem value=&quot;hibrido&quot;&gt;Híbrido&lt;/SelectItem&gt;
+  &lt;/SelectContent&gt;
 &lt;/Select&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
@@ -8344,10 +8312,10 @@ css/components/form.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>select.tsx</code> a tu proyecto en <code>components/ui/select.tsx</code></p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/select.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
+import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
 export interface SelectProps
   extends React.SelectHTMLAttributes&lt;HTMLSelectElement&gt; {
@@ -8591,7 +8559,7 @@ export { Select }</code></pre>
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <pre class="docs-code standalone"><code>npm install @amalgama/ds</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
@@ -8602,7 +8570,7 @@ css/components/form.css</code></pre>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Textarea } from &quot;@/components/ui/textarea&quot;
+          <pre class="docs-code standalone"><code>import { Textarea } from &quot;@amalgama/ds/textarea&quot;
 
 &lt;Textarea label=&quot;Descripcion&quot; placeholder=&quot;Escribe los detalles...&quot; required /&gt;
 &lt;Textarea placeholder=&quot;Sin label...&quot; rows={4} /&gt;</code></pre>
@@ -8612,10 +8580,10 @@ css/components/form.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>textarea.tsx</code> a tu proyecto en <code>components/ui/textarea.tsx</code></p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/textarea.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
+import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes&lt;HTMLTextAreaElement&gt; {
@@ -9103,18 +9071,19 @@ export { Textarea }</code></pre>
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3>Dependencias</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install class-variance-authority clsx</code></pre>
+          <pre class="docs-code standalone"><code>npm install @amalgama/ds
+# peers: react react-dom tailwindcss class-variance-authority clsx tailwind-merge</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3>CSS requerido</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>css/variables.css
-css/components/badge.css</code></pre>
+          <pre class="docs-code standalone"><code>@import &quot;@amalgama/ds/theme&quot;;   /* React + Tailwind v4 */
+/* uso buildless (HTML/clases): css/variables.css + css/components/badge.css */</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3>Ejemplo de uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Badge } from &quot;@/components/ui/badge&quot;
+          <pre class="docs-code standalone"><code>import { Badge } from &quot;@amalgama/ds/badge&quot;
 
 &lt;Badge variant=&quot;open&quot;&gt;Abierta&lt;/Badge&gt;
 &lt;Badge variant=&quot;closed&quot;&gt;Cerrada&lt;/Badge&gt;
@@ -9128,11 +9097,11 @@ css/components/badge.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>badge.tsx</code> a tu proyecto en <code>components/ui/badge.tsx</code></p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente en <code>packages/ds/components/ui/badge.tsx</code>) — mostrado como referencia; no lo redefinas en tu proyecto.</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
 import { cva, type VariantProps } from &quot;class-variance-authority&quot;
-import { cn } from &quot;@/lib/utils&quot;
+import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
 const badgeVariants = cva(
   &quot;badge&quot;,
@@ -9368,7 +9337,7 @@ export { Badge, badgeVariants }</code></pre>
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <pre class="docs-code standalone"><code>npm install @amalgama/ds</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
@@ -9379,7 +9348,7 @@ css/components/table.css</code></pre>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from &quot;@/components/ui/table&quot;
+          <pre class="docs-code standalone"><code>import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from &quot;@amalgama/ds/table&quot;
 
 &lt;Table&gt;
   &lt;TableHeader&gt;
@@ -9401,10 +9370,10 @@ css/components/table.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>table.tsx</code> a tu proyecto en <code>components/ui/table.tsx</code></p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/table.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
+import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
 const Table = React.forwardRef&lt;
   HTMLTableElement,
@@ -9648,7 +9617,7 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <pre class="docs-code standalone"><code>npm install @amalgama/ds</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
@@ -9659,15 +9628,15 @@ css/components/tabs.css</code></pre>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Tabs, TabsList, Tab, TabPanel } from &quot;@/components/ui/tabs&quot;
+          <pre class="docs-code standalone"><code>import { Tabs, TabsList, TabsTrigger, TabsContent } from &quot;@amalgama/ds/tabs&quot;
 
 &lt;Tabs defaultValue=&quot;general&quot;&gt;
   &lt;TabsList&gt;
-    &lt;Tab value=&quot;general&quot;&gt;General&lt;/Tab&gt;
-    &lt;Tab value=&quot;requisitos&quot;&gt;Requisitos&lt;/Tab&gt;
+    &lt;TabsTrigger value=&quot;general&quot;&gt;General&lt;/TabsTrigger&gt;
+    &lt;TabsTrigger value=&quot;requisitos&quot;&gt;Requisitos&lt;/TabsTrigger&gt;
   &lt;/TabsList&gt;
-  &lt;TabPanel value=&quot;general&quot;&gt;Contenido general&lt;/TabPanel&gt;
-  &lt;TabPanel value=&quot;requisitos&quot;&gt;Contenido requisitos&lt;/TabPanel&gt;
+  &lt;TabsContent value=&quot;general&quot;&gt;Contenido general&lt;/TabsContent&gt;
+  &lt;TabsContent value=&quot;requisitos&quot;&gt;Contenido requisitos&lt;/TabsContent&gt;
 &lt;/Tabs&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
@@ -9675,10 +9644,10 @@ css/components/tabs.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>tabs.tsx</code> a tu proyecto en <code>components/ui/tabs.tsx</code></p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/tabs.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
+import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
 interface TabsContextValue {
   activeTab: string
@@ -9973,7 +9942,7 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <pre class="docs-code standalone"><code>npm install @amalgama/ds</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
@@ -9986,8 +9955,8 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter } from "@/components/ui/modal"
-import { Button } from "@/components/ui/button"
+          <pre class="docs-code standalone"><code>import { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter } from "@amalgama/ds/modal"
+import { Button } from "@amalgama/ds/button"
 
 const [open, setOpen] = React.useState(false)
 
@@ -10049,7 +10018,7 @@ const [open, setOpen] = React.useState(false)
         <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Componente React</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from "react"
-import { cn } from "@/lib/utils"
+import { cn } from "@amalgama/ds/lib/utils"
 
 export interface ModalProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
   open?: boolean
@@ -10999,7 +10968,7 @@ export { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter }</c
       <p class="docs-section-desc">Contrato de API para el wrapper React futuro, basado en el patrón <code>cva</code> + <code>cn()</code> + <code>forwardRef</code> de Embassy.</p>
       <div class="docs-code-wrapper"><pre class="docs-code standalone"><code>import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
+import { cn } from "@amalgama/ds/lib/utils"
 
 const snackbarVariants = cva("snackbar", {
   variants: {
@@ -11239,7 +11208,7 @@ css/components/skeleton.css</code></pre>
         </div>
           <h3>Ejemplo de uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Skeleton } from &quot;@/components/ui/skeleton&quot;
+          <pre class="docs-code standalone"><code>import { Skeleton } from &quot;@amalgama/ds/skeleton&quot;
 
 &lt;Skeleton variant=&quot;title&quot; /&gt;
 &lt;Skeleton variant=&quot;text&quot; /&gt;
@@ -11251,11 +11220,11 @@ css/components/skeleton.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>skeleton.tsx</code> a tu proyecto en <code>components/ui/skeleton.tsx</code></p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/skeleton.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
 import { cva, type VariantProps } from &quot;class-variance-authority&quot;
-import { cn } from &quot;@/lib/utils&quot;
+import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
 const skeletonVariants = cva(
   &quot;skeleton&quot;,
@@ -11450,7 +11419,7 @@ export { Skeleton, skeletonVariants }</code></pre>
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3>Dependencias</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <pre class="docs-code standalone"><code>npm install @amalgama/ds</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3>CSS requerido</h3>
@@ -11461,8 +11430,8 @@ css/components/empty-state.css</code></pre>
         </div>
           <h3>Ejemplo de uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { EmptyState } from &quot;@/components/ui/empty-state&quot;
-import { Button } from &quot;@/components/ui/button&quot;
+          <pre class="docs-code standalone"><code>import { EmptyState } from &quot;@amalgama/ds/empty-state&quot;
+import { Button } from &quot;@amalgama/ds/button&quot;
 
 &lt;EmptyState icon=&quot;&#x1F4ED;&quot; title=&quot;No hay vacantes&quot; description=&quot;Crea tu primera vacante para empezar.&quot;&gt;
   &lt;Button&gt;+ Nueva vacante&lt;/Button&gt;
@@ -11473,10 +11442,10 @@ import { Button } from &quot;@/components/ui/button&quot;
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>empty-state.tsx</code> a tu proyecto en <code>components/ui/empty-state.tsx</code></p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/empty-state.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
+import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
 export interface EmptyStateProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
   icon?: React.ReactNode
@@ -11675,7 +11644,7 @@ export { EmptyState }</code></pre>
           <p class="docs-section-desc">Dependencias y configuración necesaria para usar este componente.</p>
           <h3>Dependencias</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
+          <pre class="docs-code standalone"><code>npm install @amalgama/ds</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3>CSS requerido</h3>
@@ -11686,7 +11655,7 @@ css/components/stat-card.css</code></pre>
         </div>
           <h3>Ejemplo de uso</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { StatsGrid, StatCard } from &quot;@/components/ui/stat-card&quot;
+          <pre class="docs-code standalone"><code>import { StatsGrid, StatCard } from &quot;@amalgama/ds/stat-card&quot;
 
 &lt;StatsGrid&gt;
   &lt;StatCard label=&quot;Vacantes abiertas&quot; value={24} change=&quot;+12%&quot; changeColor=&quot;var(--green)&quot; /&gt;
@@ -11699,10 +11668,10 @@ css/components/stat-card.css</code></pre>
 
 <div class="docs-section">
         <h2 class="docs-section-title">Componente React</h2>
-        <p class="docs-section-desc">Copia <code>stat-card.tsx</code> a tu proyecto en <code>components/ui/stat-card.tsx</code></p>
+        <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/stat-card.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
+import { cn } from &quot;@amalgama/ds/lib/utils&quot;
 
 const StatsGrid = React.forwardRef&lt;
   HTMLDivElement,
@@ -15049,7 +15018,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
           <p class="docs-section-desc">Importá el componente desde la capa de implementación (shadcn/Tailwind, sobre Radix). Los tokens de Embassy se aplican solos vía el bridge de Tailwind; no hace falta tematizar por instancia.</p>
-          <pre class="docs-code"><code>import { Checkbox } from "@/components/ui/checkbox"
+          <pre class="docs-code"><code>import { Checkbox } from "@amalgama/ds/checkbox"
 
 &lt;label className="flex items-center gap-2"&gt;
   &lt;Checkbox /&gt; Acepto los términos
@@ -18216,6 +18185,35 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           </div>
         </section>
 
+        <!-- ── React — @amalgama/ds ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn)</h2>
+          <p class="docs-section-desc">En React + Tailwind v4 importá desde <code>@amalgama/ds</code>. En el filter chip, la prop <code>selected</code> maneja el estado visual <strong>y</strong> el <code>aria-pressed</code> automáticamente — no hace falta togglear clases a mano.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Chip, InputChip, ChipSet } from &quot;@amalgama/ds/chip&quot;
+import { Calendar, Check } from &quot;lucide-react&quot;
+
+// Assist — acción contextual
+&lt;Chip icon={&lt;Calendar /&gt;}&gt;Agendar&lt;/Chip&gt;
+
+// Filter — toggle; `selected` controla estado visual + aria-pressed
+const [on, setOn] = useState(false)
+&lt;Chip selected={on} icon={on ? &lt;Check /&gt; : undefined} onClick={() =&gt; setOn(v =&gt; !v)}&gt;
+  Remoto
+&lt;/Chip&gt;
+
+// Suggestion
+&lt;Chip&gt;Buscar diseñadores&lt;/Chip&gt;
+
+// Input chip — removible
+&lt;InputChip onRemove={() =&gt; removeTag(id)}&gt;ana@amalgama.co&lt;/InputChip&gt;
+
+// Conjunto — agrupa filtros bajo un nombre accesible (role="group")
+&lt;ChipSet aria-label=&quot;Filtrar vacantes&quot;&gt;…&lt;/ChipSet&gt;</code></pre>
+          </div>
+        </section>
+
         <!-- ── Filter selection ── -->
         <section class="docs-section">
           <h2 class="docs-section-title">Filter chips — selección</h2>
@@ -18419,7 +18417,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>import { Progress, CircularProgress } from "@/components/ui/progress"
+          <pre class="docs-code"><code>import { Progress, CircularProgress } from "@amalgama/ds/progress"
 
 // Circular indeterminado
 &lt;CircularProgress indeterminate aria-label="Cargando" /&gt;
@@ -18454,7 +18452,10 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>&lt;DropdownMenu&gt;
+          <pre class="docs-code"><code>import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from &quot;@amalgama/ds/dropdown-menu&quot;
+import { Button } from &quot;@amalgama/ds/button&quot;
+
+&lt;DropdownMenu&gt;
   &lt;DropdownMenuTrigger asChild&gt;&lt;Button&gt;Opciones&lt;/Button&gt;&lt;/DropdownMenuTrigger&gt;
   &lt;DropdownMenuContent&gt;
     &lt;DropdownMenuItem&gt;Editar&lt;/DropdownMenuItem&gt;
@@ -18499,7 +18500,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
-          <pre class="docs-code"><code>import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+          <pre class="docs-code"><code>import { RadioGroup, RadioGroupItem } from "@amalgama/ds/radio-group"
 
 &lt;RadioGroup defaultValue="m"&gt;
   &lt;label&gt;&lt;RadioGroupItem value="m" /&gt; Mensual&lt;/label&gt;
@@ -19582,7 +19583,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <section class="docs-section">
           <h2 class="docs-section-title">Código</h2>
           <p class="docs-section-desc">Importá el componente desde la capa de implementación (shadcn/Tailwind, sobre Radix). Los tokens de Embassy se aplican solos vía el bridge de Tailwind.</p>
-          <pre class="docs-code"><code>import { Switch } from "@/components/ui/switch"
+          <pre class="docs-code"><code>import { Switch } from "@amalgama/ds/switch"
 
 &lt;label className="flex items-center gap-2"&gt;
   &lt;Switch /&gt; Notificaciones
