@@ -348,7 +348,7 @@ export function ButtonDoSpecificLabel() {
   return (
     <div style={{ display: "flex", gap: "8px" }}>
       <Button variant="primary">Eliminar cuenta</Button>
-      <Button variant="primary" size="sm">Crear postulante</Button>
+      <Button variant="primary">Crear postulante</Button>
     </div>
   )
 }
