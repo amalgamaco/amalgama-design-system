@@ -31,6 +31,7 @@ import { DatePickerShowcase } from "./islands/DatePickerShowcase"
 import { SegmentedButtonShowcase } from "./islands/SegmentedButtonShowcase"
 import { SegBtnSizeSm, SegBtnSizeMd, SegBtnSizeLg, SegBtnStateDefault, SegBtnStateSelected, SegBtnStateDisabled, SegBtnDoViews, SegBtnDontActions, SegBtnDoPeriod, SegBtnDontTooMany } from "./islands/SegBtnPhaseB"
 import { SearchActionsShowcase, SearchDesktopShowcase, SearchBarMobileShowcase, SearchBarShowcase as SearchBarPhaseB, SearchActionsCodeShowcase } from "./islands/SearchPhaseB"
+import { SearchConfigBar, SearchConfigTrailing, SearchConfigMulti, SearchConfigAvatar } from "./islands/SearchConfigShowcase"
 import { VacancyCardShowcase } from "./islands/VacancyCardShowcase"
 import { PersonCardShowcase } from "./islands/PersonCardShowcase"
 import { KanbanShowcase } from "./islands/KanbanShowcase"
@@ -151,6 +152,10 @@ const registry: Record<string, ComponentType> = {
   "search-bar-mobile-showcase": SearchBarMobileShowcase,
   "search-bar-showcase": SearchBarPhaseB,
   "search-actions-code-showcase": SearchActionsCodeShowcase,
+  "search-config-bar": SearchConfigBar,
+  "search-config-trailing": SearchConfigTrailing,
+  "search-config-multi": SearchConfigMulti,
+  "search-config-avatar": SearchConfigAvatar,
   "card-showcase": CardShowcase,
   "stat-card-showcase": StatCardShowcase,
   "stat-card-grid": StatCardGrid,
