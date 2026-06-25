@@ -14630,6 +14630,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -14663,12 +14664,25 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
-            
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Explorar un conjunto de ítems visuales homogéneos (imágenes, cards) cuando el espacio es limitado.</li><li>Contenido secundario que el usuario hojea de forma opcional.</li><li>Acompañá siempre con controles previo/siguiente visibles, no solo swipe.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Contenido crítico que el usuario debe ver sí o sí (puede quedar oculto fuera de vista).</li><li>Comparar opciones lado a lado → usá una grilla o <b>Table</b>.</li><li>Navegación principal o pasos de un flujo → <b>Tabs</b> / pantallas.</li></ul></div></div>
           </div>
-        </div>
+          <div class="ds-callout" style="margin-top:12px"><strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.</div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>La región se expone con <code>role="region"</code> y <code>aria-roledescription="carousel"</code>; cada slide como <code>role="group"</code> ("ítem X de N").</li>
+            <li><span class="ds-a11y-icon">♿</span><code>CarouselPrevious</code> / <code>CarouselNext</code> son botones reales con <code>aria-label</code>, operables por teclado (<code>←/→</code>, <code>Tab</code>) y se deshabilitan en los extremos.</li>
+            <li><span class="ds-a11y-icon">♿</span>No usar auto-avance sin control de pausa; si rota solo, respetá <code>prefers-reduced-motion</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>El indicador de foco usa el rol <code>secondary</code> y mantiene contraste visible en ambos temas.</li>
+          </ul>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <div class="docs-section">
@@ -14709,6 +14723,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
@@ -14731,6 +14746,35 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <li>El cambio no se aplica al instante — suele requerir confirmación explícita.</li>
             <li>Para selección múltiple dentro de un grupo de opciones relacionadas.</li>
           </ul>
+        </section>
+      </div>
+
+      <!-- SPECS -->
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Contenedor visible</td><td>18×18&nbsp;dp, radio <code>--radius-sm</code></td><td><code>--color-outline</code> (borde sin marcar)</td></tr>
+              <tr><td>Área de toque</td><td>48×48&nbsp;dp</td><td>—</td></tr>
+              <tr><td>Capa de estado</td><td>40&nbsp;dp (hover / foco / presión)</td><td><code>--color-primary-state-hover</code></td></tr>
+              <tr><td>Marca (check / dash)</td><td>Ícono sobre relleno cuando está marcado</td><td><code>--color-on-primary</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados y tokens</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Sin marcar</td><td>Contenedor transparente, borde de 2px</td><td><code>--color-outline</code></td></tr>
+              <tr><td>Marcado / Indeterminado</td><td>Relleno sólido con ícono</td><td><code>--color-primary</code> + <code>--color-on-primary</code></td></tr>
+              <tr><td>Hover</td><td>State layer sobre el control</td><td><code>--color-primary-state-hover</code></td></tr>
+              <tr><td>Focus visible</td><td>Anillo de foco de 2px + 4px</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+              <tr><td>Disabled</td><td>Control atenuado, no interactivo</td><td><code>--color-disabled</code></td></tr>
+            </tbody>
+          </table>
         </section>
       </div>
 
@@ -18022,6 +18066,7 @@ const [on, setOn] = useState(false)
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -18067,9 +18112,20 @@ const [on, setOn] = useState(false)
           <div class="ds-callout">
             <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
             <br><br><strong>Guías de uso MD3 (referencia):</strong> para fechas lejanas (ej. fecha de nacimiento), usá el modal date input o el docked — la navegación por calendario es impráctica para fechas muy distantes. Nunca escales el picker proporcionalmente al viewport. El modal y el input de fecha son intercambiables via ícono de edición en el encabezado.
-            
+
           </div>
         </div>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>La grilla del calendario (<code>react-day-picker</code>) se expone como <code>role="grid"</code>; cada día es un botón con su fecha como nombre accesible.</li>
+            <li><span class="ds-a11y-icon">♿</span>Navegación por teclado: <code>←/→/↑/↓</code> entre días, <code>PageUp</code>/<code>PageDown</code> entre meses, <code>Enter</code>/<code>Espacio</code> para elegir.</li>
+            <li><span class="ds-a11y-icon">♿</span>Ofrecé la entrada por teclado (date input) además del calendario: para fechas lejanas es más rápida y accesible.</li>
+            <li><span class="ds-a11y-icon">♿</span>El estado seleccionado no depende solo del color: el relleno <code>--color-primary</code> con texto <code>--color-on-primary</code> mantiene contraste AA, y "hoy" se marca con borde además del color.</li>
+          </ul>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
@@ -18100,6 +18156,9 @@ const [range, setRange] = useState&lt;DateRange | undefined&gt;()
       <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza el componente <code>Separator</code> (Radix UI), tematizado con el token <code>--border</code> de Embassy.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -18118,6 +18177,42 @@ const [range, setRange] = useState&lt;DateRange | undefined&gt;()
             <li><strong>Full-width</strong> — <code>&lt;Separator /&gt;</code> de borde a borde; separa secciones de igual jerarquía.</li>
             <li><strong>Inset</strong> — <code>&lt;Separator inset /&gt;</code> con sangría de 16px; alinea con texto/contenido de los ítems en listas.</li>
           </ol>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Medidas y tokens</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Grosor de línea</td><td>1px (horizontal o vertical)</td><td><code>--border</code></td></tr>
+              <tr><td>Full-width</td><td>De borde a borde del contenedor</td><td>—</td></tr>
+              <tr><td>Inset</td><td>Sangría izquierda de 16px para alinear con el contenido del ítem</td><td>—</td></tr>
+              <tr><td>Vertical</td><td><code>orientation="vertical"</code>, alto del contenedor</td><td><code>--border</code></td></tr>
+              <tr><td>Espaciado recomendado</td><td>8px arriba/abajo entre grupos</td><td><code>--space-2</code></td></tr>
+            </tbody>
+          </table>
+          <p class="docs-caption">El Divider no aporta color de marca ni elevación: es la separación visual más liviana del sistema.</p>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Separar grupos de contenido relacionados dentro de una lista o layout.</li><li><b>Inset</b> cuando los ítems tienen ícono/avatar a la izquierda y la línea debe alinear con el texto.</li><li>Dividir secciones de igual jerarquía sin agregar peso visual.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Como recurso decorativo o para "rellenar" espacio.</li><li>Apilar varios dividers seguidos → usá espaciado (<code>--space-*</code>).</li><li>Para enmarcar contenido → usá una <b>Card</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Radix <code>Separator</code> expone <code>role="separator"</code> con <code>aria-orientation</code> correcto según la orientación.</li>
+            <li><span class="ds-a11y-icon">♿</span>Si el divider es puramente decorativo, marcá <code>decorative</code> para que se exponga como <code>aria-hidden</code> y no agregue ruido al lector de pantalla.</li>
+            <li><span class="ds-a11y-icon">♿</span>No dependas solo del divider para comunicar agrupación: reforzá con encabezados de sección o espaciado.</li>
+            <li><span class="ds-a11y-icon">♿</span>El contraste de 1px sobre la superficie cumple porque deriva de <code>--border</code>, calibrado para ambos temas.</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
@@ -18140,6 +18235,9 @@ const [range, setRange] = useState&lt;DateRange | undefined&gt;()
       <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Componente <code>List</code> + <code>ListItem</code> (List no tiene primitiva shadcn de origen — es un componente propio en el idiom shadcn), tematizado con los tokens de superficie de Embassy.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -18155,6 +18253,53 @@ const [range, setRange] = useState&lt;DateRange | undefined&gt;()
         <section class="docs-section">
           <h2 class="docs-section-title">Lista con encabezado y soporte</h2>
           <div data-island="list-showcase"></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Anatomía del ítem</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Contenedor</td><td>Fondo de tarjeta, ancho completo</td><td><code>--card-bg</code></td></tr>
+              <tr><td>Ítem (una línea)</td><td>Altura mínima 48px, padding horizontal 16px</td><td><code>--color-on-surface</code></td></tr>
+              <tr><td>Ítem (dos líneas)</td><td>Altura mínima 64px (headline + supporting)</td><td>—</td></tr>
+              <tr><td>Headline</td><td>Texto principal, <code>body-md</code></td><td><code>--text-primary</code></td></tr>
+              <tr><td>Supporting</td><td>Texto secundario, <code>body-sm</code></td><td><code>--text-secondary</code></td></tr>
+              <tr><td>Separador entre grupos</td><td><code>&lt;Separator /&gt;</code> de 1px</td><td><code>--border</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados (ítem accionable)</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Reposo</td><td>Fondo de tarjeta</td><td><code>--card-bg</code></td></tr>
+              <tr><td>Hover</td><td>State layer del 8% (solo si <code>asButton</code>)</td><td><code>--color-on-surface-state-hover</code></td></tr>
+              <tr><td>Focus visible</td><td>Anillo de foco de 2px + 4px</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Presentar un conjunto de ítems homogéneos (mensajes, archivos, ajustes).</li><li>Cuando cada ítem tiene texto principal y, opcionalmente, soporte o una acción.</li><li>Agrupar con <code>Separator</code> cuando hay subgrupos lógicos.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Datos tabulares comparables en columnas → usá <b>Table</b>.</li><li>Tarjetas con jerarquía visual rica y media → usá <b>Card</b>.</li><li>Navegación principal de la app → usá <b>Navigation</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Una lista semántica se expone con <code>role="list"</code> y sus ítems con <code>role="listitem"</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Los ítems accionables (<code>asButton</code>) son botones reales: operables con <code>Enter</code>/<code>Espacio</code> y con foco visible.</li>
+            <li><span class="ds-a11y-icon">♿</span>No comuniques significado solo por la posición: usá <code>headline</code>/<code>supporting</code> con texto claro.</li>
+            <li><span class="ds-a11y-icon">♿</span>El área de toque mínima de 48px de alto la garantiza el propio <code>ListItem</code>.</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
@@ -18179,6 +18324,7 @@ import { Separator } from "@amalgama/ds/separator"
       <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> El lineal usa el componente <code>Progress</code> (Radix UI); el circular es un SVG propio (no hay primitiva circular en shadcn/Radix). Indicador en <code>--color-primary</code>, pista en <code>--color-surface-variant</code>.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
@@ -18201,6 +18347,32 @@ import { Separator } from "@amalgama/ds/separator"
         <section class="docs-section">
           <h2 class="docs-section-title">Lineal</h2>
           <div data-island="progress-linear"></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Medidas y tokens</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Indicador (avance)</td><td>Color de marca, ambas formas</td><td><code>--color-primary</code></td></tr>
+              <tr><td>Pista (track)</td><td>Fondo de la porción no completada</td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Lineal — alto</td><td>4px, radio completo en los extremos</td><td><code>--radius-full</code></td></tr>
+              <tr><td>Circular — diámetro</td><td>20px (inline) / 48px (bloque), trazo de 4px</td><td>—</td></tr>
+              <tr><td>Indeterminado</td><td>Animación continua (~1.5s loop)</td><td><code>--duration-normal</code></td></tr>
+            </tbody>
+          </table>
+          <p class="docs-caption">El lineal renderiza el componente <code>Progress</code> (Radix); el circular es un SVG propio porque shadcn/Radix no incluye una primitiva circular.</p>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Determinado vs. indeterminado</h2>
+          <table class="ds-table">
+            <thead><tr><th>Modo</th><th>Cuándo</th><th>API</th></tr></thead>
+            <tbody>
+              <tr><td>Determinado</td><td>Se conoce el porcentaje de avance</td><td><code>value={0–100}</code></td></tr>
+              <tr><td>Indeterminado</td><td>La operación corre pero la duración es desconocida</td><td>sin <code>value</code></td></tr>
+            </tbody>
+          </table>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -18251,6 +18423,9 @@ import { Separator } from "@amalgama/ds/separator"
       <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Componente <code>DropdownMenu</code> (Radix UI), anclado a un <code>Button</code> de Embassy. Posicionamiento, foco y teclado vienen de Radix.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -18267,6 +18442,54 @@ import { Separator } from "@amalgama/ds/separator"
           <h2 class="docs-section-title">Menú anclado a un botón</h2>
           <div data-island="menu-showcase"></div>
           <p class="docs-caption">El disparador es un <code>Button</code> de Embassy; el panel agrupa <code>DropdownMenuItem</code> y puede separarlos con <code>DropdownMenuSeparator</code>.</p>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Anatomía y medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Panel (contenedor)</td><td>Radio <code>--radius-md</code> (8px), padding vertical 4px, elevación nivel 2</td><td><code>--color-surface-container-high</code>, <code>--shadow-lg</code></td></tr>
+              <tr><td>Borde del panel</td><td>1px sutil</td><td><code>--border</code></td></tr>
+              <tr><td>Ítem</td><td>Altura mínima 36px, padding 8px&nbsp;12px, radio <code>--radius-sm</code></td><td><code>--color-on-surface</code></td></tr>
+              <tr><td>Separador</td><td>Línea de 1px, margen vertical 4px</td><td><code>--color-outline-variant</code></td></tr>
+              <tr><td>Ícono de ítem</td><td>18px, hereda <code>currentColor</code></td><td><code>--color-on-surface-variant</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados del ítem</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Reposo</td><td>Fondo transparente, texto sobre superficie</td><td><code>--color-on-surface</code></td></tr>
+              <tr><td>Hover / Focus</td><td>State layer del 8% sobre el ítem</td><td><code>--color-on-surface-state-hover</code></td></tr>
+              <tr><td>Destructivo</td><td>Texto e ícono en color de error</td><td><code>--color-error</code></td></tr>
+              <tr><td>Disabled</td><td>Opacidad reducida, no interactivo</td><td><code>--color-disabled</code></td></tr>
+            </tbody>
+          </table>
+          <p class="docs-caption">El posicionamiento (lado, alineación, colisión con el borde de la ventana) lo resuelve Radix automáticamente.</p>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Acciones contextuales sobre un elemento (editar, duplicar, eliminar).</li><li>Agrupar opciones secundarias que no caben en la barra de acciones.</li><li>Separar acciones destructivas con un <code>DropdownMenuSeparator</code>.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Navegación principal de la app → usá <b>Navigation</b> / <b>Tabs</b>.</li><li>Elegir un valor de un conjunto largo → <b>Select</b>.</li><li>Filtrar resultados → <b>Chips</b> de filtro.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Radix expone <code>role="menu"</code> y <code>role="menuitem"</code> con la relación ARIA correcta hacia el disparador.</li>
+            <li><span class="ds-a11y-icon">♿</span>Totalmente operable por teclado: <code>↑/↓</code> para navegar, <code>Enter</code>/<code>Espacio</code> para activar, <code>Esc</code> para cerrar, <code>Home</code>/<code>End</code> a los extremos.</li>
+            <li><span class="ds-a11y-icon">♿</span>El foco se traslada al panel al abrir y vuelve al disparador al cerrar (focus trap + restauración).</li>
+            <li><span class="ds-a11y-icon">♿</span>Las acciones destructivas no se distinguen solo por color: reforzá con un ícono o etiqueta clara.</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
@@ -18293,7 +18516,9 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Los ejemplos renderizan <code>Radio Group</code> de <code>shadcn/ui</code> (Radix UI), tematizado con los tokens de Embassy. El resto de la documentación pertenece al Design System.</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -18325,6 +18550,33 @@ import { Button } from &quot;@amalgama/ds/button&quot;
           </ol>
         </section>
       </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Contenedor visible</td><td>20×20&nbsp;dp, borde de 2px</td><td><code>--color-outline</code></td></tr>
+              <tr><td>Indicador (relleno)</td><td>Punto central de 10&nbsp;dp cuando está seleccionado</td><td><code>--color-primary</code></td></tr>
+              <tr><td>Área de toque</td><td>48×48&nbsp;dp</td><td>—</td></tr>
+              <tr><td>Capa de estado</td><td>40&nbsp;dp (hover / foco / presión)</td><td><code>--color-primary-state-hover</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados y tokens</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Default</td><td>Anillo vacío, borde de 2px</td><td><code>--color-outline</code></td></tr>
+              <tr><td>Seleccionado</td><td>Anillo + punto central relleno</td><td><code>--color-primary</code></td></tr>
+              <tr><td>Hover</td><td>State layer sobre el control</td><td><code>--color-primary-state-hover</code></td></tr>
+              <tr><td>Focus visible</td><td>Anillo de foco de 2px + 4px</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+              <tr><td>Disabled</td><td>Control atenuado, no interactivo</td><td><code>--color-disabled</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
         <section class="docs-section">
           <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
@@ -18332,6 +18584,17 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Una sola opción entre 2–5 mutuamente excluyentes.</li><li>Cuando ver todas las opciones a la vez ayuda a comparar.</li></ul></div></div>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Selección múltiple → <b>Checkbox</b>.</li><li>Más de 5 opciones → <b>Select</b>.</li><li>On/off inmediato → <b>Switch</b>.</li></ul></div></div>
           </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Radix <code>RadioGroup</code> expone <code>role="radiogroup"</code> y cada ítem <code>role="radio"</code> con <code>aria-checked</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Navegación por teclado: <code>Tab</code> entra al grupo, <code>↑/↓</code> (o <code>←/→</code>) mueven la selección entre opciones; una sola parada de tabulación por grupo (roving tabindex).</li>
+            <li><span class="ds-a11y-icon">♿</span>Cada opción se asocia a un <code>&lt;label&gt;</code> clicable: toda la fila activa la selección, ampliando el área objetivo.</li>
+            <li><span class="ds-a11y-icon">♿</span>El estado seleccionado no se comunica solo por color: el punto central relleno lo refuerza.</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
@@ -19173,6 +19436,7 @@ import { Mic } from &quot;lucide-react&quot;
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -19209,12 +19473,25 @@ import { Mic } from &quot;lucide-react&quot;
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
-            
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Contenido suplementario o acciones contextuales sobre la pantalla actual.</li><li><b>Bottom sheet</b> en mobile para acciones/listas; <b>side sheet</b> para filtros o detalle en desktop.</li><li>Variante <b>modal</b> (con scrim) cuando la tarea requiere foco; <b>standard</b> cuando conviven con el contenido.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Flujos largos de varios pasos → una pantalla o <b>Dialog</b> dedicado.</li><li>Navegación principal de la app → <b>Navigation</b>.</li><li>Mensajes breves y transitorios → <b>Snackbar</b>.</li></ul></div></div>
           </div>
-        </div>
+          <div class="ds-callout" style="margin-top:12px"><strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.</div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Construido sobre Radix Dialog: expone <code>role="dialog"</code> con <code>aria-modal</code> en la variante modal y atrapa el foco mientras está abierto.</li>
+            <li><span class="ds-a11y-icon">♿</span>Se cierra con <code>Esc</code> o click en el scrim; al cerrar, el foco vuelve al elemento disparador.</li>
+            <li><span class="ds-a11y-icon">♿</span>Asociá un título con <code>SheetTitle</code> para que el panel tenga nombre accesible (<code>aria-labelledby</code>).</li>
+            <li><span class="ds-a11y-icon">♿</span>El drag handle es decorativo: el cierre por teclado y el botón explícito garantizan operación sin gesto de arrastre.</li>
+          </ul>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
@@ -19244,7 +19521,9 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Componente <code>Slider</code> (Radix UI). Pista en <code>--color-surface-variant</code>, rango y thumb en <code>--color-primary</code>; soporta rango (dos thumbs).</div>
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -19268,6 +19547,33 @@ import { Button } from &quot;@amalgama/ds/button&quot;
           </ol>
         </section>
       </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Pista (track)</td><td>Alto 4px, radio <code>--radius-full</code></td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Rango activo</td><td>Porción desde el inicio hasta el thumb</td><td><code>--color-primary</code></td></tr>
+              <tr><td>Thumb</td><td>20&nbsp;dp circular, con borde/sombra sutil</td><td><code>--color-primary</code></td></tr>
+              <tr><td>Área de toque</td><td>48&nbsp;dp de alto alrededor del thumb</td><td>—</td></tr>
+              <tr><td>Step</td><td>Marcas opcionales según la prop <code>step</code></td><td>—</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados y tokens</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Reposo</td><td>Pista neutra, rango y thumb de acento</td><td><code>--color-primary</code></td></tr>
+              <tr><td>Hover / Press</td><td>State layer alrededor del thumb</td><td><code>--color-primary-state-hover</code></td></tr>
+              <tr><td>Focus visible</td><td>Anillo de foco de 2px + 4px en el thumb</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+              <tr><td>Disabled</td><td>Opacidad reducida, no interactivo</td><td><code>--color-disabled</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
         <section class="docs-section">
           <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
@@ -19275,6 +19581,17 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Valor dentro de un rango continuo donde el valor exacto importa poco.</li><li>Feedback inmediato y visual (volumen, brillo, zoom).</li></ul></div></div>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Pocas opciones discretas → <b>Segmented Button</b>.</li><li>Se necesita un valor exacto → <b>Input</b> numérico.</li></ul></div></div>
           </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Radix <code>Slider</code> expone cada thumb como <code>role="slider"</code> con <code>aria-valuemin</code>, <code>aria-valuemax</code> y <code>aria-valuenow</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Operable por teclado: <code>←/→</code> (o <code>↑/↓</code>) mueven de a un paso, <code>Home</code>/<code>End</code> a los extremos, <code>PageUp</code>/<code>PageDown</code> en saltos grandes.</li>
+            <li><span class="ds-a11y-icon">♿</span>Asociá un <code>aria-label</code> o <code>&lt;label&gt;</code> que describa qué controla el valor (ej. "Volumen").</li>
+            <li><span class="ds-a11y-icon">♿</span>Si el valor numérico exacto es importante, mostralo como texto junto al slider — no dejes que dependa solo de la posición del thumb.</li>
+          </ul>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
@@ -19303,6 +19620,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
 
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
@@ -19330,6 +19648,35 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <li>Estado binario único, independiente de otras opciones.</li>
             <li>Área de toque garantizada de 48×48&nbsp;dp.</li>
           </ul>
+        </section>
+      </div>
+
+      <!-- SPECS -->
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Pista (track)</td><td>52×32&nbsp;dp, radio <code>--radius-full</code></td><td><code>--color-surface-variant</code> (off)</td></tr>
+              <tr><td>Handle apagado</td><td>16&nbsp;dp, alineado a la izquierda</td><td><code>--color-outline</code></td></tr>
+              <tr><td>Handle encendido</td><td>24&nbsp;dp, alineado a la derecha</td><td><code>--color-on-primary</code></td></tr>
+              <tr><td>Área de toque</td><td>48×48&nbsp;dp</td><td>—</td></tr>
+              <tr><td>Ícono opcional</td><td>check / cross dentro del handle</td><td><code>currentColor</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Estados y tokens</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Apagado</td><td>Pista neutra, handle chico a la izquierda</td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Encendido</td><td>Pista de acento, handle grande a la derecha</td><td><code>--color-primary</code></td></tr>
+              <tr><td>Focus visible</td><td>Anillo de foco de 2px + 4px</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+              <tr><td>Disabled</td><td>Opacidad reducida, no interactivo</td><td><code>--color-disabled</code></td></tr>
+            </tbody>
+          </table>
         </section>
       </div>
 
@@ -19400,6 +19747,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -19435,12 +19783,25 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
-            
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Plain tooltip</b> para aclarar un ícono o control sin etiqueta visible.</li><li><b>Rich tooltip</b> cuando hace falta un título, una explicación y una acción opcional.</li><li>Texto breve y autoexplicativo, sin repetir lo que ya dice la interfaz.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Para información esencial que el usuario necesita sí o sí → ponela en la UI.</li><li>Como sustituto de un <b>Dialog</b> o <b>Popover</b> con contenido interactivo extenso.</li><li>En elementos sin trigger de foco/hover claro (no es accesible por teclado).</li></ul></div></div>
           </div>
-        </div>
+          <div class="ds-callout" style="margin-top:12px"><strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.</div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>El <b>plain tooltip</b> (Radix) se asocia al trigger con <code>aria-describedby</code> y se muestra tanto en hover como en foco de teclado.</li>
+            <li><span class="ds-a11y-icon">♿</span>El <b>rich tooltip</b> usa Popover: se abre con click/Enter, atrapa el foco, se cierra con <code>Esc</code> o click afuera y devuelve el foco al trigger.</li>
+            <li><span class="ds-a11y-icon">♿</span>No metas información crítica solo en un tooltip — debe estar disponible por otra vía, ya que el hover no existe en táctil.</li>
+            <li><span class="ds-a11y-icon">♿</span>El contraste de texto sobre <code>inverse-surface</code> / <code>surface-container-high</code> cumple AA en ambos temas.</li>
+          </ul>
+        </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
@@ -20475,6 +20836,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'specs')">Specs</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
 
@@ -20660,6 +21022,19 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section">
           <h2 class="docs-section-title">Compatibilidad hacia atrás</h2>
           <p class="docs-body">El HTML existente con <code>.ds-card-link</code> / <code>.ds-card-icon</code> / <code>.ds-card-name</code> / <code>.ds-card-desc</code> sigue funcionando sin cambios — se renderiza como nav card compacta mediante aliases CSS. No se requiere migración de HTML para grids existentes que usen <code>.ds-card-link</code>.</p>
+        </section>
+      </div>
+
+      <!-- ── Accessibility ── -->
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Toda la tarjeta es un destino de navegación: usá un <code>&lt;a&gt;</code> real (o envolvé el contenido en uno) para que sea enfocable y operable con <code>Enter</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>El botón de flecha es decorativo (<code>aria-hidden</code>): el nombre accesible lo aporta el título de la tarjeta, no el ícono.</li>
+            <li><span class="ds-a11y-icon">♿</span>Las ilustraciones SVG llevan <code>aria-hidden="true"</code> — no agregan ruido al lector de pantalla; el significado vive en el título y la descripción.</li>
+            <li><span class="ds-a11y-icon">♿</span>El foco visible y el contraste de texto sobre la superficie cumplen AA; los tintes de <code>nav-card-visual</code> nunca van detrás del texto.</li>
+          </ul>
         </section>
       </div>
 
