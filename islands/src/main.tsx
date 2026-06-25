@@ -39,6 +39,18 @@ import { NavBarShowcase } from "./islands/NavBarShowcase"
 import { TopBarShowcase } from "./islands/TopBarShowcase"
 import { ButtonConfigShowcase } from "./islands/ButtonConfigShowcase"
 import { ButtonStatesShowcase, ButtonShapeShowcase, ButtonHierarchyFilled, ButtonHierarchyTonal, ButtonHierarchyOutlined, ButtonHierarchyText, ButtonHierarchyIcon, ButtonToggleOff, ButtonToggleOn, ButtonLayoutDo, ButtonLayoutDont, ButtonAdaptiveMobile, ButtonAdaptiveDense, ButtonAdaptiveHero, ButtonIconsDo, ButtonIconsDont, ButtonShapeDo, ButtonShapeDont, ButtonSemanticDo, ButtonSemanticDont, ButtonDoSinglePrimary, ButtonDontMultiPrimary, ButtonDoSpecificLabel, ButtonDontGenericLabel, ButtonDoIconAria, ButtonDontNavLinks, ButtonFocusShowcase, ButtonSemanticPreview, ButtonSizesPreview, ButtonIconPreview, ButtonDisabledPreview, ButtonLoadingPreview, ButtonFormFooterPreview, ButtonDestructivePreview } from "./islands/ButtonPhaseB"
+import { TextareaBasic, TextareaDisabled } from "./islands/TextareaPhaseB"
+import { SelectSpecBasic, SelectSpecLabeled, SelectSpecDisabled } from "./islands/SelectPhaseB"
+import { BadgeStateShowcase, BadgeLabelShowcase, BadgeContextShowcase } from "./islands/BadgePhaseB"
+import { TabsOverviewShowcase } from "./islands/TabsPhaseB"
+import { DialogDemo } from "./islands/DialogPhaseB"
+import { SnackbarMessageDemo, SnackbarActionDemo, SnackbarCloseDemo, SnackbarMultilineDemo } from "./islands/SnackbarPhaseB"
+import { SkeletonSpecsVariants } from "./islands/SkeletonPhaseB"
+import { KanbanSpecsBoard } from "./islands/KanbanPhaseB"
+import { VacancySpecExample } from "./islands/VacancyPhaseB"
+import { PersonGridSpecsShowcase } from "./islands/PersonPhaseB"
+import { AvatarMainShowcase, AvatarAssigneeShowcase, AvatarPersonShowcase } from "./islands/AvatarPhaseB"
+import { ChipVariantsGuidelines, ChipFocusState, ChipCodeVariants, ChipElevatedDisabled } from "./islands/ChipPhaseB"
 
 const registry: Record<string, ComponentType> = {
   "chip-showcase": ChipShowcase,
@@ -77,6 +89,31 @@ const registry: Record<string, ComponentType> = {
   "button-loading-preview": ButtonLoadingPreview,
   "button-form-footer-preview": ButtonFormFooterPreview,
   "button-destructive-preview": ButtonDestructivePreview,
+  "textarea-basic": TextareaBasic,
+  "textarea-disabled": TextareaDisabled,
+  "select-spec-basic": SelectSpecBasic,
+  "select-spec-labeled": SelectSpecLabeled,
+  "select-spec-disabled": SelectSpecDisabled,
+  "badge-state-showcase": BadgeStateShowcase,
+  "badge-label-showcase": BadgeLabelShowcase,
+  "badge-context-showcase": BadgeContextShowcase,
+  "tabs-overview-showcase": TabsOverviewShowcase,
+  "dialog-demo": DialogDemo,
+  "snackbar-message-demo": SnackbarMessageDemo,
+  "snackbar-action-demo": SnackbarActionDemo,
+  "snackbar-close-demo": SnackbarCloseDemo,
+  "snackbar-multiline-demo": SnackbarMultilineDemo,
+  "skeleton-specs-variants": SkeletonSpecsVariants,
+  "kanban-specs-board": KanbanSpecsBoard,
+  "vacancy-spec-example": VacancySpecExample,
+  "person-grid-specs-showcase": PersonGridSpecsShowcase,
+  "avatar-main-showcase": AvatarMainShowcase,
+  "avatar-assignee-showcase": AvatarAssigneeShowcase,
+  "avatar-person-showcase": AvatarPersonShowcase,
+  "chip-variants-guidelines": ChipVariantsGuidelines,
+  "chip-focus-state": ChipFocusState,
+  "chip-code-variants": ChipCodeVariants,
+  "chip-elevated-disabled": ChipElevatedDisabled,
   "snackbar-showcase": SnackbarShowcase,
   "switch-showcase": SwitchShowcase,
   "checkbox-showcase": CheckboxShowcase,
