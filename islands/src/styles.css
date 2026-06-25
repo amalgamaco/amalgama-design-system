@@ -23,6 +23,11 @@
 @import "tw-animate-css";
 
 @source "./**/*.{ts,tsx}";
+/* The @amalgama/ds package is a file: dep symlinked under node_modules, which
+   Tailwind's auto-content-detection excludes. Scan its component source
+   explicitly so utilities used ONLY inside package components (e.g. the
+   Popover's w-72) are generated. */
+@source "../../packages/ds/components/**/*.{ts,tsx}";
 
 /* Box-sizing reset scoped to island roots only (replaces preflight). */
 [data-island],

@@ -46,6 +46,7 @@ import { BadgeStateShowcase, BadgeLabelShowcase, BadgeContextShowcase } from "./
 import { TabsOverviewShowcase } from "./islands/TabsPhaseB"
 import { DialogDemo } from "./islands/DialogPhaseB"
 import { SnackbarMessageDemo, SnackbarActionDemo, SnackbarCloseDemo, SnackbarMultilineDemo } from "./islands/SnackbarPhaseB"
+import { SnackbarConfigMessage, SnackbarConfigAction, SnackbarConfigClose, SnackbarConfigMultiline } from "./islands/SnackbarConfigShowcase"
 import { SkeletonSpecsVariants } from "./islands/SkeletonPhaseB"
 import { KanbanSpecsBoard } from "./islands/KanbanPhaseB"
 import { VacancySpecExample } from "./islands/VacancyPhaseB"
@@ -104,6 +105,10 @@ const registry: Record<string, ComponentType> = {
   "snackbar-action-demo": SnackbarActionDemo,
   "snackbar-close-demo": SnackbarCloseDemo,
   "snackbar-multiline-demo": SnackbarMultilineDemo,
+  "snackbar-config-message": SnackbarConfigMessage,
+  "snackbar-config-action": SnackbarConfigAction,
+  "snackbar-config-close": SnackbarConfigClose,
+  "snackbar-config-multiline": SnackbarConfigMultiline,
   "skeleton-specs-variants": SkeletonSpecsVariants,
   "kanban-specs-board": KanbanSpecsBoard,
   "vacancy-spec-example": VacancySpecExample,
