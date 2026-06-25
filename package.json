@@ -1,11 +1,11 @@
 {
-  "name": "@amalgama/ds",
+  "name": "amalgama-design-system",
   "version": "1.0.0",
-  "description": "Amalgama Design System — Libreria de componentes UI reutilizable",
+  "description": "Amalgama Design System (Embassy) — monorepo root: docs site (index.html), tokens, governance, the buildless css/ + components/ layer, and the @amalgama/ds package (packages/ds).",
   "license": "UNLICENSED",
   "private": true,
-  "files": [
-    "css/",
-    "components/"
+  "workspaces": [
+    "packages/ds",
+    "islands"
   ]
 }
