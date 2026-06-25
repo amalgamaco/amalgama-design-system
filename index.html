@@ -16,8 +16,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=23">
-<script type="module" src="islands/dist/embassy-islands.js?v=23"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=24">
+<script type="module" src="islands/dist/embassy-islands.js?v=24"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- @material/web runtime removed (2026-06): every component page now renders via
      the shadcn/Tailwind React islands (islands/dist/embassy-islands.js); no live
@@ -5778,146 +5778,7 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Estados</h2>
           <p class="docs-section-desc" style="margin-bottom:28px">Los estados son representaciones visuales que comunican el estado de un componente o elemento interactivo.</p>
 
-          <!-- ═══ ELEVATED ═══ -->
-          <div class="bst-variant-block" style="margin-top:4px">
-            <h3 class="bst-variant-title">Botón elevado</h3>
-            <p class="bst-variant-desc">El estilo de botón elevado tiene una elevación de 1 por defecto y 0 cuando está deshabilitado.</p>
-
-            <p class="bst-sub-head">Predeterminado</p>
-            <div class="bst-strip bst-strip--light" style="--bst-bg:#D7DEFB;--bst-fg:#01164D;--bst-shadow:0 1px 3px rgba(0,0,0,.14),0 2px 6px rgba(0,0,0,.09);--bst-lr:1,22,77;--bst-foc-a:#01164D;--bst-foc-b:#D7DEFB">
-              <div class="bst-mode-tag">Claro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-            <div class="bst-strip bst-strip--dark" style="--bst-bg:#475993;--bst-fg:#E4E7EF;--bst-shadow:0 2px 6px rgba(0,0,0,.45);--bst-lr:228,231,239;--bst-foc-a:#E4E7EF;--bst-foc-b:#475993">
-              <div class="bst-mode-tag">Oscuro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-
-          </div><!-- /elevated -->
-
-          <!-- ═══ FILLED ═══ -->
-          <div class="bst-variant-block">
-            <h3 class="bst-variant-title">Botón relleno</h3>
-
-            <p class="bst-sub-head">Predeterminado</p>
-            <div class="bst-strip bst-strip--light" style="--bst-bg:#01164D;--bst-fg:#fff;--bst-lr:255,255,255;--bst-foc-a:#fff;--bst-foc-b:#01164D">
-              <div class="bst-mode-tag">Claro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-            <div class="bst-strip bst-strip--dark" style="--bst-bg:#FFFFFF;--bst-fg:#01164D;--bst-lr:1,22,77;--bst-foc-a:#13111E;--bst-foc-b:#8BAEFF">
-              <div class="bst-mode-tag">Oscuro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-
-          </div><!-- /filled -->
-
-          <!-- ═══ FILLED TONAL ═══ -->
-          <div class="bst-variant-block">
-            <h3 class="bst-variant-title">Botón tonal</h3>
-
-            <p class="bst-sub-head">Predeterminado</p>
-            <div class="bst-strip bst-strip--light" style="--bst-bg:#CAD9FF;--bst-fg:#01164D;--bst-lr:1,22,77;--bst-foc-a:#01164D;--bst-foc-b:#CAD9FF">
-              <div class="bst-mode-tag">Claro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-            <div class="bst-strip bst-strip--dark" style="--bst-bg:#3A5BB0;--bst-fg:#DCE6FF;--bst-lr:220,230,255;--bst-foc-a:#DCE6FF;--bst-foc-b:#3A5BB0">
-              <div class="bst-mode-tag">Oscuro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-
-          </div><!-- /tonal -->
-
-          <!-- ═══ OUTLINED ═══ -->
-          <div class="bst-variant-block">
-            <h3 class="bst-variant-title">Botón con borde</h3>
-
-            <p class="bst-sub-head">Predeterminado</p>
-            <div class="bst-strip bst-strip--light" data-theme="light" style="--bst-bg:transparent;--bst-fg:#01164D;--bst-border:1px solid #9FA3AE;--bst-lr:1,22,77;--bst-foc-a:#fff;--bst-foc-b:#01164D">
-              <div class="bst-mode-tag">Claro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn bst-outlined-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="btn-tertiary" disabled>Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-            <div class="bst-strip bst-strip--dark" data-theme="dark" style="--bst-bg:transparent;--bst-fg:#FFFFFF;--bst-border:1px solid #747989;--bst-lr:255,255,255;--bst-foc-a:#13111E;--bst-foc-b:#FFFFFF">
-              <div class="bst-mode-tag">Oscuro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn bst-outlined-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="btn-tertiary" disabled>Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn bst-outlined-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-
-          </div><!-- /outlined -->
-
-          <!-- ═══ TEXT ═══ -->
-          <div class="bst-variant-block">
-            <h3 class="bst-variant-title">Botón de texto</h3>
-
-            <p class="bst-sub-head">Predeterminado</p>
-            <div class="bst-strip bst-strip--light" style="--bst-bg:transparent;--bst-fg:#01164D;--bst-lr:1,22,77;--bst-foc-a:#fff;--bst-foc-b:#01164D">
-              <div class="bst-mode-tag">Claro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn bst-text-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn bst-text-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn bst-text-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn bst-text-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn bst-text-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-            <div class="bst-strip bst-strip--dark" style="--bst-bg:transparent;--bst-fg:#FFFFFF;--bst-lr:255,255,255;--bst-foc-a:#13111E;--bst-foc-b:#8BAEFF">
-              <div class="bst-mode-tag">Oscuro</div>
-              <div class="bst-cells">
-                <div class="bst-cell"><div class="bst-wrap"><button class="bst-btn bst-text-btn">Action</button></div><span class="bst-cell-label">Habilitado</span></div>
-                <div class="bst-cell bst-dis"><div class="bst-wrap"><button class="bst-btn bst-text-btn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Action</button></div><span class="bst-cell-label">Deshabilitado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-hov"><button class="bst-btn bst-text-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Hover</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-foc"><button class="bst-btn bst-text-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Enfocado</span></div>
-                <div class="bst-cell"><div class="bst-wrap bst-prs"><button class="bst-btn bst-text-btn">Action</button><div class="bst-ly"></div></div><span class="bst-cell-label">Presionado</span></div>
-              </div>
-            </div>
-
-          </div><!-- /text -->
+          <div data-island="button-states-showcase"></div>
 
           <!-- ── State layer reference table ── -->
           <h3 class="docs-sub-title" style="margin-top:40px">Referencia de capas de estado (MD3)</h3>
@@ -6324,28 +6185,7 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Forma y radio</h2>
           <div class="bd-card">
             <p class="bd-eyebrow">Escala de radio por tamaño</p>
-            <div class="bd-stage" style="flex-wrap:wrap;align-items:flex-end;gap:16px;padding:20px 0">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-                <button class="btn-primary btn-xs" style="pointer-events:none">Acción</button>
-                <span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">XS · <code>--radius-sm</code> · 4px</span>
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-                <button class="btn-primary btn-sm" style="pointer-events:none">Acción</button>
-                <span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">SM · <code>--radius-sm</code> · 4px</span>
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-                <button class="btn-primary" style="pointer-events:none">Acción MD</button>
-                <span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">MD · <code>--radius-md</code> · 8px</span>
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-                <button class="btn-primary btn-lg" style="pointer-events:none">Acción LG</button>
-                <span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">LG · <code>--radius-md</code> · 8px</span>
-              </div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-                <button class="btn-primary btn-xl" style="pointer-events:none">Acción XL</button>
-                <span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">XL · <code>--radius-lg</code> · 12px</span>
-              </div>
-            </div>
+            <div data-island="button-shape-showcase"></div>
           </div>
           <p style="font-size:13px;color:var(--text-secondary);margin-top:12px">Lógica de diseño y comparación visual en <a class="ds-toc-link" style="display:inline;padding:0;border:none;background:none;color:var(--color-primary);cursor:pointer" onclick="document.querySelector('[data-tab-trigger=\'guidelines\']')?.click();setTimeout(()=>{document.getElementById('bg-shape')?.scrollIntoView({behavior:'smooth',block:'start'})},300)">Guidelines → Shape &amp; Radius</a>.</p>
         </section>
@@ -6426,13 +6266,13 @@ body { overflow-x: clip; }
                   </thead>
                   <tbody>
                     <tr>
-                      <td><button class="btn-primary btn-sm" style="pointer-events:none">Relleno</button></td>
+                      <td><span data-island="button-hierarchy-filled"></span></td>
                       <td><code>.btn-primary</code></td>
                       <td>Es la acción de mayor prioridad de la pantalla. Una por contexto — atrae la vista inmediatamente.</td>
                       <td>Hay múltiples acciones de igual peso o es una acción de apoyo.</td>
                     </tr>
                     <tr>
-                      <td><button class="btn-secondary btn-sm" style="pointer-events:none">Tonal</button></td>
+                      <td><span data-island="button-hierarchy-tonal"></span></td>
                       <td><code>.btn-secondary</code></td>
                       <td>Acción de apoyo que acompaña a un Relleno. Usa <code>--color-secondary-container</code>; buen énfasis sin competir.</td>
                       <td>Es la única acción disponible — en ese caso, Relleno es más apropiado.</td>
@@ -6444,19 +6284,19 @@ body { overflow-x: clip; }
                       <td>Superficies planas donde Tonal o Relleno son más claros.</td>
                     </tr>
                     <tr>
-                      <td><button class="btn-tertiary btn-sm" style="pointer-events:none">Con borde</button></td>
+                      <td><span data-island="button-hierarchy-outlined"></span></td>
                       <td><code>.btn-tertiary</code></td>
                       <td>Alternativa, cancelar o volver junto a un Relleno o Tonal. Señala opcionalidad sin competir.</td>
                       <td>Como CTA principal sin una acción de mayor peso en pantalla.</td>
                     </tr>
                     <tr>
-                      <td><button class="btn-text btn-sm" style="pointer-events:none">Texto</button></td>
+                      <td><span data-island="button-hierarchy-text"></span></td>
                       <td><code>.btn-text</code></td>
                       <td>Acción de baja prioridad en diálogos con ≥ 3 opciones, acciones inline o superficies con muchos controles.</td>
                       <td>CTA principal, acciones destructivas o sin ancla contextual de jerarquía.</td>
                     </tr>
                     <tr>
-                      <td><button class="icon-btn btn-sm" aria-label="Acción" style="pointer-events:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button></td>
+                      <td><span data-island="button-hierarchy-icon"></span></td>
                       <td><code>.icon-btn</code></td>
                       <td>Acción compacta con ícono universalmente reconocible. Barras de herramientas y filas de tabla.</td>
                       <td>Sin <code>aria-label</code>. Para acciones que requieran etiqueta visible para ser comprendidas.</td>
@@ -6471,14 +6311,14 @@ body { overflow-x: clip; }
                 <div class="bd-card">
                   <p class="bd-eyebrow">Estado apagado — <code>aria-pressed="false"</code></p>
                   <div class="bd-stage center" style="margin:10px 0">
-                    <button class="btn-toggle-off" aria-pressed="false"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Guardar vacante</button>
+                    <div data-island="button-toggle-off"></div>
                   </div>
                   <p class="bd-variant-desc">Con borde · sin relleno. Comunica acción disponible. La etiqueta usa el verbo de la acción.</p>
                 </div>
                 <div class="bd-card">
                   <p class="bd-eyebrow">Estado encendido — <code>aria-pressed="true"</code></p>
                   <div class="bd-stage center" style="margin:10px 0">
-                    <button class="btn-toggle-on" aria-pressed="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Guardado</button>
+                    <div data-island="button-toggle-on"></div>
                   </div>
                   <p class="bd-variant-desc">Relleno · estado activo. La etiqueta cambia al pasado para confirmar que el estado está activado.</p>
                 </div>
@@ -6500,14 +6340,14 @@ body { overflow-x: clip; }
                 <div class="bd-dd do">
                   <div class="bd-dd-head">✓ Correcto</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="flex-wrap:wrap;gap:10px"><button class="btn-primary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Pedir licencia</button><button class="btn-tertiary">Cargar factura</button></div>
+                    <div data-island="button-layout-do"></div>
                     <span class="bd-dd-note">Ancho natural, contenido centrado, jerarquía clara: un Primary + alternativa Outlined.</span>
                   </div>
                 </div>
                 <div class="bd-dd dont">
                   <div class="bd-dd-head">✕ Incorrecto</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="flex-direction:column;gap:8px;align-items:stretch"><button class="btn-tertiary" style="width:100%;justify-content:flex-start">+ &nbsp;Pedir licencia</button><button class="btn-tertiary" style="width:100%;justify-content:flex-start">Cargar factura</button></div>
+                    <div data-island="button-layout-dont"></div>
                     <span class="bd-dd-note">Full-width con contenido a la izquierda: se lee como inputs vacíos y elimina la jerarquía entre acciones.</span>
                   </div>
                 </div>
@@ -6517,24 +6357,17 @@ body { overflow-x: clip; }
               <div class="bd-grid c3">
                 <div class="bd-card">
                   <p class="bd-eyebrow">Mobile / táctil</p>
-                  <div class="bd-stage center" style="padding:12px"><button class="btn-primary" style="width:100%">Comenzar</button></div>
+                  <div class="bd-stage center" style="padding:12px"><div data-island="button-adaptive-mobile" style="width:100%"></div></div>
                   <p class="bd-variant-desc">Objetivo táctil mínimo 44×44px. Usar ancho completo (<code>width:100%</code>) para CTAs primarios en layouts mobile de una columna. Apilar grupos de acciones verticalmente en pantallas pequeñas.</p>
                 </div>
                 <div class="bd-card">
                   <p class="bd-eyebrow">UI densa (tablas / barras de herramientas)</p>
-                  <div class="bd-stage center" style="gap:6px">
-                    <button class="btn-primary btn-sm">Guardar</button>
-                    <button class="btn-tertiary btn-sm">Cancelar</button>
-                    <button class="icon-btn btn-sm" aria-label="Editar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                  </div>
+                  <div class="bd-stage center"><div data-island="button-adaptive-dense"></div></div>
                   <p class="bd-variant-desc">Usar <code>.btn-sm</code> o <code>.btn-xs</code>. Preferir <code>.icon-btn.btn-sm</code> para acciones a nivel de fila para mantener las tablas escaneables.</p>
                 </div>
                 <div class="bd-card">
                   <p class="bd-eyebrow">Hero / marketing</p>
-                  <div class="bd-stage center" style="gap:10px">
-                    <button class="btn-primary btn-lg">Comenzar</button>
-                    <button class="btn-tertiary btn-lg">Saber más</button>
-                  </div>
+                  <div class="bd-stage center"><div data-island="button-adaptive-hero"></div></div>
                   <p class="bd-variant-desc">Usar <code>.btn-lg</code> o <code>.btn-xl</code> para superficies editoriales — la forma no cambia. Reservar solo para CTAs de alto impacto y baja frecuencia.</p>
                 </div>
               </div>
@@ -6555,20 +6388,14 @@ body { overflow-x: clip; }
                 <div class="bd-dd do">
                   <div class="bd-dd-head">✓ Correcto</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="flex-wrap:wrap;gap:8px">
-                      <button class="btn-primary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Crear vacante</button>
-                      <button class="icon-btn" aria-label="Editar perfil"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                    </div>
+                    <div data-island="button-icons-do"></div>
                     <span class="bd-dd-note">Ícono a la izquierda (18px) refuerza la etiqueta. <code>.icon-btn</code> con <code>aria-label</code> para solo-ícono.</span>
                   </div>
                 </div>
                 <div class="bd-dd dont">
                   <div class="bd-dd-head">✕ Incorrecto</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="flex-wrap:wrap;gap:8px">
-                      <button class="btn-primary">Crear vacante <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:2px"><polyline points="9 18 15 12 9 6"/></svg></button>
-                      <button class="btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-                    </div>
+                    <div data-island="button-icons-dont"></div>
                     <span class="bd-dd-note">Ícono trailing genérico no añade información. Botón solo-ícono sin <code>aria-label</code> es inaccesible.</span>
                   </div>
                 </div>
@@ -6588,23 +6415,14 @@ body { overflow-x: clip; }
                 <div class="bd-dd do">
                   <div class="bd-dd-head">✓ Botones Embassy</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="flex-wrap:wrap;gap:10px;align-items:center">
-                      <button class="btn-primary btn-xs" style="pointer-events:none">Acción XS</button>
-                      <button class="btn-primary btn-sm" style="pointer-events:none">Acción SM</button>
-                      <button class="btn-primary" style="pointer-events:none">Acción MD</button>
-                      <button class="btn-primary btn-xl" style="pointer-events:none">Acción XL</button>
-                    </div>
+                    <div data-island="button-shape-do"></div>
                     <span class="bd-dd-note">Radio sutil que escala con el tamaño. La forma rectangular preserva la identidad del componente botón.</span>
                   </div>
                 </div>
                 <div class="bd-dd dont">
                   <div class="bd-dd-head">✕ Nunca pill</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="flex-wrap:wrap;gap:10px;align-items:center">
-                      <button class="btn-primary btn-xs" style="pointer-events:none;border-radius:9999px">Acción</button>
-                      <button class="btn-primary" style="pointer-events:none;border-radius:9999px">Acción</button>
-                      <button class="btn-secondary" style="pointer-events:none;border-radius:9999px">Acción</button>
-                    </div>
+                    <div data-island="button-shape-dont"></div>
                     <span class="bd-dd-note">La forma cápsula hace que los botones se confundan con chips o badges. <code>--radius-full</code> está reservado para esos componentes.</span>
                   </div>
                 </div>
@@ -6643,14 +6461,14 @@ body { overflow-x: clip; }
                 <div class="bd-dd do">
                   <div class="bd-dd-head">✓ Buenas etiquetas</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="flex-wrap:wrap;gap:8px"><button class="btn-primary">Publicar vacante</button><button class="btn-secondary">Guardar borrador</button><button class="btn-primary btn-danger">Eliminar cuenta</button></div>
+                    <div data-island="button-semantic-do"></div>
                     <span class="bd-dd-note">Con verbo al inicio, sentence case, 1–3 palabras, específico al resultado.</span>
                   </div>
                 </div>
                 <div class="bd-dd dont">
                   <div class="bd-dd-head">✕ Malas etiquetas</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="flex-wrap:wrap;gap:8px"><button class="btn-primary">OK</button><button class="btn-secondary" style="text-transform:uppercase;letter-spacing:.05em">GUARDAR</button><button class="btn-primary btn-danger">Sí, estoy seguro de que quiero hacer esto</button></div>
+                    <div data-island="button-semantic-dont"></div>
                     <span class="bd-dd-note">Las etiquetas vagas, en mayúsculas o excesivamente largas rompen la claridad y el layout.</span>
                   </div>
                 </div>
@@ -6694,45 +6512,42 @@ body { overflow-x: clip; }
                 <div class="bd-dd do">
                   <div class="bd-dd-head">✓ Un solo Primary por contexto</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="gap:8px"><button class="btn-primary">Publicar</button><button class="btn-tertiary">Guardar borrador</button><button class="btn-text">Cancelar</button></div>
+                    <div data-island="button-do-single-primary"></div>
                     <span class="bd-dd-note">Una sola acción de mayor jerarquía, con alternativas de menor peso a su lado.</span>
                   </div>
                 </div>
                 <div class="bd-dd dont">
                   <div class="bd-dd-head">✕ Múltiples Primary iguales</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="gap:8px"><button class="btn-primary">Publicar</button><button class="btn-primary">Guardar borrador</button><button class="btn-primary">Cancelar</button></div>
+                    <div data-island="button-dont-multi-primary"></div>
                     <span class="bd-dd-note">Tres rellenos compiten por la atención — el usuario no puede discernir qué acción es la principal.</span>
                   </div>
                 </div>
                 <div class="bd-dd do">
                   <div class="bd-dd-head">✓ Etiqueta específica con verbo</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="gap:8px"><button class="btn-primary">Eliminar cuenta</button><button class="btn-primary btn-sm">Crear postulante</button></div>
+                    <div data-island="button-do-specific-label"></div>
                     <span class="bd-dd-note">El usuario sabe exactamente qué sucederá sin leer el contexto circundante.</span>
                   </div>
                 </div>
                 <div class="bd-dd dont">
                   <div class="bd-dd-head">✕ Etiquetas genéricas</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="gap:8px"><button class="btn-primary">OK</button><button class="btn-primary btn-danger">Sí</button></div>
+                    <div data-island="button-dont-generic-label"></div>
                     <span class="bd-dd-note">"OK" y "Sí" no dicen nada por sí solos — dependen del contexto para tener sentido.</span>
                   </div>
                 </div>
                 <div class="bd-dd do">
                   <div class="bd-dd-head">✓ Ícono solo con aria-label</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="gap:8px">
-                      <button class="icon-btn" aria-label="Editar vacante"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                      <button class="icon-btn" aria-label="Eliminar vacante"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></button>
-                    </div>
+                    <div data-island="button-do-icon-aria"></div>
                     <span class="bd-dd-note"><code>.icon-btn</code> con <code>aria-label</code> descriptivo. Accesible para lectores de pantalla.</span>
                   </div>
                 </div>
                 <div class="bd-dd dont">
                   <div class="bd-dd-head">✕ Botones como links de navegación</div>
                   <div class="bd-dd-body">
-                    <div class="bd-stage" style="gap:8px"><button class="btn-text">Ir al perfil →</button><button class="btn-text">Ver todas las vacantes</button></div>
+                    <div data-island="button-dont-nav-links"></div>
                     <span class="bd-dd-note">Estos son links de navegación — usar <code>&lt;a href&gt;</code> en su lugar para semántica correcta y compatibilidad con lectores de pantalla.</span>
                   </div>
                 </div>
@@ -6773,7 +6588,7 @@ body { overflow-x: clip; }
             <div class="bd-card">
               <p class="bd-eyebrow">Foco visible</p>
               <div class="bd-stage center" style="margin:10px 0">
-                <button class="btn-primary bd-sim-focus">Enfocado</button>
+                <div data-island="button-focus-showcase"></div>
               </div>
               <p class="bd-variant-desc">Un contorno de 2px (<code>--color-focus</code>) + halo de 4px (<code>--color-focus-ring</code>) via <code>:focus-visible</code>. Solo aparece durante la navegación por teclado — no se dispara con clics de mouse. Cumple WCAG 2.4.7 (AA). Nunca suprimas con <code>outline:none</code> sin un reemplazo.</p>
             </div>
@@ -6916,8 +6731,7 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Modificadores semánticos</h2>
           <p class="docs-section-desc">Los modificadores <code>.btn-danger</code> y <code>.btn-success</code> se aplican <strong>sobre</strong> <code>.btn-primary</code>. Son la única excepción donde un botón cambia de color semántico.</p>
           <div class="bd-stage" style="margin-bottom:16px">
-            <button class="btn-primary btn-danger">Eliminar</button>
-            <button class="btn-primary btn-success">Aprobar</button>
+            <div data-island="button-semantic-preview"></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
@@ -6937,17 +6751,8 @@ body { overflow-x: clip; }
         <section class="docs-section">
           <h2 class="docs-section-title">Tamaños</h2>
           <p class="docs-section-desc">El modificador <code>.btn-sm</code> se combina con cualquier variante. Usalo en tablas, toolbars y áreas de alta densidad.</p>
-          <div class="bd-stage" style="gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary">Default</button><span class="bd-state-lbl">36px</span></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-sm">Small</button><span class="bd-state-lbl">30px</span></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-secondary">Default</button><span class="bd-state-lbl">36px</span></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-secondary btn-sm">Small</button><span class="bd-state-lbl">30px</span></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="icon-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            </button><span class="bd-state-lbl">36×36</span></div>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="icon-btn btn-sm">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-            </button><span class="bd-state-lbl">30×30</span></div>
+          <div class="bd-stage" style="margin-bottom:16px">
+            <div data-island="button-sizes-preview"></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
@@ -6968,9 +6773,7 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Botones con ícono</h2>
           <p class="docs-section-desc">Los SVGs heredan el color vía <code>currentColor</code> — no pasés un color explícito al SVG. El gap de 8px entre ícono y label ya viene en el estilo base.</p>
           <div class="bd-stage" style="gap:12px;flex-wrap:wrap;margin-bottom:16px">
-            <button class="btn-primary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nueva vacante</button>
-            <button class="btn-secondary">Exportar <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-            <button class="btn-tertiary"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Editar</button>
+            <div data-island="button-icon-preview"></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
@@ -7000,10 +6803,7 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Estado deshabilitado</h2>
           <p class="docs-section-desc">Usá el atributo HTML nativo <code>disabled</code> — no construyas el estado con CSS manual. El lector de pantalla anuncia el estado automáticamente.</p>
           <div class="bd-stage" style="gap:12px;flex-wrap:wrap;margin-bottom:16px">
-            <button class="btn-primary" disabled>Publicar</button>
-            <button class="btn-secondary" disabled>Guardar</button>
-            <button class="btn-tertiary" disabled>Cancelar</button>
-            <button class="icon-btn" disabled aria-label="Ajustes"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+            <div data-island="button-disabled-preview"></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
@@ -7025,10 +6825,7 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Estado de carga (loading)</h2>
           <p class="docs-section-desc">Para mostrar que una acción está procesando: deshabilitar el botón + agregar un spinner SVG animado + actualizar el label.</p>
           <div class="bd-stage" style="margin-bottom:16px">
-            <button class="btn-primary" disabled style="gap:8px">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite;flex-shrink:0"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-              Publicando…
-            </button>
+            <div data-island="button-loading-preview"></div>
           </div>
           <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
           <div class="docs-code-wrapper">
@@ -7067,10 +6864,7 @@ function setLoading(btn, isLoading) {
           <div class="bd-card" style="max-width:500px;margin-bottom:16px">
             <h3 style="font:700 16px 'Epilogue';color:var(--ds-text-1);margin:0 0 6px">Publicar vacante</h3>
             <p style="font-size:13px;color:var(--ds-text-3);margin:0 0 20px;line-height:1.6">La vacante será visible para todos los candidatos. Podés editarla después.</p>
-            <div style="display:flex;gap:10px;justify-content:flex-end;border-top:1px solid var(--border);padding-top:16px">
-              <button class="btn-tertiary">Cancelar</button>
-              <button class="btn-primary">Publicar vacante</button>
-            </div>
+            <div style="border-top:1px solid var(--border);padding-top:16px"><div data-island="button-form-footer-preview"></div></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
@@ -7095,10 +6889,7 @@ function setLoading(btn, isLoading) {
           <div class="bd-card" style="max-width:420px;margin-bottom:16px">
             <p style="font:700 15px 'Epilogue';color:var(--ds-text-1);margin:0 0 8px">¿Eliminar esta vacante?</p>
             <p style="font-size:13px;color:var(--ds-text-3);margin:0 0 20px;line-height:1.6">Esta acción no se puede deshacer. La vacante y todos sus postulantes serán eliminados permanentemente.</p>
-            <div style="display:flex;gap:10px;justify-content:flex-end">
-              <button class="btn-tertiary">Cancelar</button>
-              <button class="btn-primary btn-danger">Eliminar</button>
-            </div>
+            <div data-island="button-destructive-preview"></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
