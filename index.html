@@ -19092,8 +19092,29 @@ import { Button } from &quot;@amalgama/ds/button&quot;
 
         <!-- ── Search bar ── -->
         <section class="docs-section">
-          <h2 class="docs-section-title">Search bar — HTML</h2>
-          <p class="docs-section-desc">Ícono inicial + input + elemento final opcional (avatar o ícono de acción). Envolvé el conjunto en <code>role=&quot;search&quot;</code> para que sea un landmark navegable.</p>
+          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn)</h2>
+          <p class="docs-section-desc">En React + Tailwind v4 importá <code>SearchBar</code> desde <code>@amalgama/ds/search</code> — no hay primitiva de búsqueda en shadcn/Radix, así que es un componente Embassy tematizado con tokens. <code>icon</code> y <code>trailing</code> son slots; el resto de props pasan al <code>&lt;input&gt;</code>.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { SearchBar, SearchBarTrailing } from &quot;@amalgama/ds/search&quot;
+import { Mic } from &quot;lucide-react&quot;
+
+// Search bar básica
+&lt;SearchBar placeholder=&quot;Buscar vacantes…&quot; onChange={(e) =&gt; setQuery(e.target.value)} /&gt;
+
+// Con acción final (búsqueda por voz, limpiar, etc.)
+&lt;SearchBar
+  placeholder=&quot;Buscar…&quot;
+  trailing={
+    &lt;SearchBarTrailing aria-label=&quot;Buscar por voz&quot;&gt;&lt;Mic /&gt;&lt;/SearchBarTrailing&gt;
+  }
+/&gt;</code></pre>
+          </div>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Search bar — HTML (buildless)</h2>
+          <p class="docs-section-desc">Para artefactos sin build, usá las clases CSS. Ícono inicial + input + elemento final opcional (avatar o ícono de acción). Envolvé el conjunto en <code>role=&quot;search&quot;</code> para que sea un landmark navegable.</p>
           <div class="bd-stage" style="margin-bottom:16px">
             <div data-island="search-bar-showcase"></div>
           </div>
