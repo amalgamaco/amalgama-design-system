@@ -99,8 +99,8 @@ to `islands/dist/embassy-islands.{js,css}` and mounted into `[data-island]` slot
 and import their implementations from the in-repo **`@amalgama/ds`** package at
 **`packages/ds/`** (linked via `file:../packages/ds`; `@ds/*` alias → the package's
 `exports`). This repo is a **monorepo**: `packages/ds/` is the single source of truth for
-component code, the root is the docs + tokens + governance. (See `islands/INTEGRATION.md`
-and `CONSOLIDATION-PLAN.md`.) Covered: **checkbox, switch, radio, slider, menu (dropdown),
+component code, the root is the docs + tokens + governance. (See `islands/INTEGRATION.md`.)
+Covered: **checkbox, switch, radio, slider, menu (dropdown),
 list, divider (separator), progress, chip, input/textarea, select, tabs, dialog, tooltip,
 date picker, sheet, carousel, segmented-button, avatar, snackbar (sonner)** + domain cards
 (kanban/person/vacancy).

@@ -41,23 +41,32 @@ python3 -m http.server 8087
 
 ```
 amalgama-ds/
-├── css/
+├── index.html                # Sitio de documentación canónico (SPA, una sola página)
+├── css/                      # Capa buildless (tokens + estilos) — consumida por el skill y vía CDN
 │   ├── variables.css         # Design tokens (fuente de verdad)
 │   ├── base.css              # Reset, tipografía, animaciones
 │   ├── layout.css            # App shell (sidebar, topbar, avatar)
+│   ├── md-sys-bridge.css     # Alias de nombres MD3 (--md-sys-color-*) → roles Embassy
 │   ├── components.css        # Barrel: importa todos los componentes
-│   └── components/           # 22 archivos CSS individuales
-├── components/
+│   └── components/           # CSS individual por componente
+├── components/               # Capa React buildless (clases CSS) — la copia el skill a otros proyectos
 │   ├── lib/utils.ts          # cn() utility (clsx wrapper)
-│   └── ui/                   # 17+ componentes React (.tsx)
-├── docs/                     # Páginas de documentación legacy
-├── skills/
-│   └── design-system/
-│       └── SKILL.md          # Instrucciones para el skill de IA
+│   └── ui/                   # Wrappers .tsx basados en clases (btn-primary, …)
+├── packages/ds/              # @amalgama/ds — implementación Tailwind v4 + shadcn/Radix
+│   ├── components/ui/        # Componentes React reales (fuente de verdad del código)
+│   ├── css/                  # Copia GENERADA de los tokens (no editar; ver scripts/sync-tokens.mjs)
+│   └── tailwind.theme.css
+├── islands/                  # Glue Vite: monta @amalgama/ds en el index.html
+│   ├── src/                  # Showcases + registro (main.tsx)
+│   └── dist/                 # Bundle COMMITEADO y servido (embassy-islands.{js,css})
+├── docs/                     # Páginas de documentación legacy (+ docs.css, requerido por index.html)
+├── scripts/sync-tokens.mjs   # Sincroniza css/variables.css → packages/ds (con --check para CI)
+├── skills/design-system/     # SKILL.md — instrucciones para el skill de IA
 ├── CLAUDE.md                 # Guía de consumo (humanos + IA)
 ├── GOVERNANCE.md             # Contrato de consistencia
 ├── MIGRATION.md              # Guía de migración desde legacy
 ├── WHITE-LABEL.md            # Theming de marca cliente
+├── DEPLOYMENT.md             # Cómo se actualiza producción y por qué puede no reflejarse
 └── CONTRIBUTING.md           # Cómo agregar o modificar componentes
 ```
 
@@ -183,4 +192,4 @@ Ver [WHITE-LABEL.md](./WHITE-LABEL.md) para el proceso completo con checklist de
 | [MIGRATION.md](./MIGRATION.md) | Cómo migrar un producto existente al DS |
 | [WHITE-LABEL.md](./WHITE-LABEL.md) | Theming de marca cliente |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Cómo agregar o modificar componentes |
-| `DS Content Strategy Analysis.md` | Análisis de contenido del sitio de docs |
+| [DEPLOYMENT.md](./DEPLOYMENT.md) | Cómo se actualiza el sitio publicado y por qué los cambios pueden no reflejarse |

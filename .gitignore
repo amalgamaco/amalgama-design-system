@@ -1,13 +1,18 @@
 .DS_Store
 .claude/
 
-# islands build deps (the built dist/ IS committed/served)
+# Dependencies — never commit. NOTE: the built islands/dist/ IS committed and
+# served by index.html; only the node_modules are ignored.
+node_modules/
 islands/node_modules/
+packages/ds/node_modules/
 
-# Session working artifacts (audit/scratch)
+# Scratch / working artifacts — keep the tree clean for the next developer
+*.bak
+*.bak-*
+index.html.bak-*
 audit-results.json
 phase-a-patches.json
 phase-b-batch1.json
 phase-b-batch2.json
 specs-svg-audit.json
-index.html.bak-*
