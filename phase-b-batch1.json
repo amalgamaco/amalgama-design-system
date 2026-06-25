@@ -1,0 +1,411 @@
+[
+ {
+  "component": "ButtonPhaseB.tsx",
+  "fileWritten": "/Users/aniborthagaray/Documents/Claude/Projects/Design System Amalgama/islands/src/islands/ButtonPhaseB.tsx",
+  "summary": "Created /Users/aniborthagaray/Documents/Claude/Projects/Design System Amalgama/islands/src/islands/ButtonPhaseB.tsx exporting 30 React components that re-render every variant/state/do-don't/live-preview example on the s-c-button page using the real @ds Button (import { Button } from \"@ds/button\") with variant/size props (primary|secondary|tertiary|text|icon|danger|success, sizes xs|sm|default|lg|xl) and lucide-react icons. Verified the API against packages/ds/components/ui/button.tsx and confirmed the simulation utilities used (focus-ring @utility, bg-primary-hover, bg-secondary-container-hover, bg-surface-variant, brightness-*, bg-primary-state-hover/press, animate-spin) all resolve to registered Embassy tokens in islands/src/styles.css + packages/ds/css. STATES section: the original rendered light+dark side-by-side with hardcoded-hex .bst-btn swatches and manual hover/focus/pressed layers — I collapsed this to ONE island (ButtonStatesShowcase) rendering a single mode per the canonical one-mode rule, with one strip per variant (relleno/tonal/con borde/texto) showing Habilitado (real)/Deshabilitado (real disabled)/Hover/Enfocado/Presionado (approximated via the component's own state-token utility classes, still the real Button). For do/don't panels the real Button is shown misused (className=\"w-full justify-start\", style borderRadius:9999, uppercase, generic/long labels, nav-as-button). The toggle pattern (page-local btn-toggle-off/-on, not Embassy classes) is rendered as real tertiary=off / secondary=on Buttons with aria-pressed.\n\nIMPORTANT scoping notes for the orchestrator: (1) The States section is one large block (index.html ~5781-5920, five bst-variant-block divs). I provide ONE findBlock spanning the whole States content for a single island slot; replacing the 5 individual variant blocks individually would be brittle because the per-cell markup is near-identical across blocks (not globally unique). (2) The Specs anatomy (~5739) and Medidas (~5985) diagrams and ALL escaped <code>/<pre> blocks are intentionally left untouched. (3) The hierarchy table buttons are returned as 5 separate single-cell islands so the accompanying <code> class labels remain in the table cells. (4) index.html and main.tsx were NOT edited (orchestrator wires those). Token-violation note: the bespoke bst-btn hex CSS and .bd-dark-demo are eliminated by the States conversion; the orchestrator may also remove the now-dead .bst-* page-local CSS.",
+  "islands": [
+   {
+    "registryKey": "button-states-showcase",
+    "exportName": "ButtonStatesShowcase",
+    "note": "RISKY/largest block: replaces all five bst-variant-block strips (Elevated, Filled, Tonal, Outlined, Text) with one single-mode island. Confirmed globally unique by the leading 'ELEVATED' comment + first variant title. The 'Botón elevado' variant is intentionally NOT reproduced as a separate strip (no Embassy 'elevated' Button variant exists; the audit/CLAUDE.md flag .bd-family-elevated as a non-Embassy approximation) — the island covers the four real variants. Keeps the section's <h2>Estados</h2> intro and the downstream State-layer reference table + callout intact. Replace ONLY the markup between the ELEVATED comment and the closing of the TEXT block.",
+    "findBlock": "          <!-- ═══ ELEVATED ═══ -->\n          <div class=\"bst-variant-block\" style=\"margin-top:4px\">\n            <h3 class=\"bst-variant-title\">Botón elevado</h3>\n            <p class=\"bst-variant-desc\">El estilo de botón elevado tiene una elevación de 1 por defecto y 0 cuando está deshabilitado.</p>\n\n            <p class=\"bst-sub-head\">Predeterminado</p>",
+    "replaceWith": "          <div data-island=\"button-states-showcase\"></div>\n          <!-- ═══ STATES (collapsed to single-mode island) ═══ -->\n          <div style=\"display:none\">\n            <p class=\"bst-sub-head\">Predeterminado</p>"
+   },
+   {
+    "registryKey": "button-shape-showcase",
+    "exportName": "ButtonShapeShowcase",
+    "note": "Specs 'Forma y radio' radius-scale stage. Replaces the inner .bd-stage (5 size demos + labels) with the island; keeps the bd-card eyebrow and the explanatory <p> with the Guidelines link below.",
+    "findBlock": "            <div class=\"bd-stage\" style=\"flex-wrap:wrap;align-items:flex-end;gap:16px;padding:20px 0\">\n              <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\">\n                <button class=\"btn-primary btn-xs\" style=\"pointer-events:none\">Acción</button>\n                <span style=\"font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)\">XS · <code>--radius-sm</code> · 4px</span>\n              </div>\n              <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\">\n                <button class=\"btn-primary btn-sm\" style=\"pointer-events:none\">Acción</button>\n                <span style=\"font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)\">SM · <code>--radius-sm</code> · 4px</span>\n              </div>\n              <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\">\n                <button class=\"btn-primary\" style=\"pointer-events:none\">Acción MD</button>\n                <span style=\"font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)\">MD · <code>--radius-md</code> · 8px</span>\n              </div>\n              <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\">\n                <button class=\"btn-primary btn-lg\" style=\"pointer-events:none\">Acción LG</button>\n                <span style=\"font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)\">LG · <code>--radius-md</code> · 8px</span>\n              </div>\n              <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\">\n                <button class=\"btn-primary btn-xl\" style=\"pointer-events:none\">Acción XL</button>\n                <span style=\"font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)\">XL · <code>--radius-lg</code> · 12px</span>\n              </div>\n            </div>",
+    "replaceWith": "            <div data-island=\"button-shape-showcase\"></div>"
+   },
+   {
+    "registryKey": "button-hierarchy-filled",
+    "exportName": "ButtonHierarchyFilled",
+    "note": "Hierarchy table cell — keeps the adjacent <code>.btn-primary</code> label in the next <td>.",
+    "findBlock": "                      <td><button class=\"btn-primary btn-sm\" style=\"pointer-events:none\">Relleno</button></td>",
+    "replaceWith": "                      <td><span data-island=\"button-hierarchy-filled\"></span></td>"
+   },
+   {
+    "registryKey": "button-hierarchy-tonal",
+    "exportName": "ButtonHierarchyTonal",
+    "note": "Hierarchy table cell — keeps adjacent <code>.btn-secondary</code> label.",
+    "findBlock": "                      <td><button class=\"btn-secondary btn-sm\" style=\"pointer-events:none\">Tonal</button></td>",
+    "replaceWith": "                      <td><span data-island=\"button-hierarchy-tonal\"></span></td>"
+   },
+   {
+    "registryKey": "button-hierarchy-outlined",
+    "exportName": "ButtonHierarchyOutlined",
+    "note": "Hierarchy table cell — keeps adjacent <code>.btn-tertiary</code> label. The 'Elevado' row uses inline-token markup (not a btn class) and is intentionally left as-is (no Embassy elevated variant).",
+    "findBlock": "                      <td><button class=\"btn-tertiary btn-sm\" style=\"pointer-events:none\">Con borde</button></td>",
+    "replaceWith": "                      <td><span data-island=\"button-hierarchy-outlined\"></span></td>"
+   },
+   {
+    "registryKey": "button-hierarchy-text",
+    "exportName": "ButtonHierarchyText",
+    "note": "Hierarchy table cell — keeps adjacent <code>.btn-text</code> label.",
+    "findBlock": "                      <td><button class=\"btn-text btn-sm\" style=\"pointer-events:none\">Texto</button></td>",
+    "replaceWith": "                      <td><span data-island=\"button-hierarchy-text\"></span></td>"
+   },
+   {
+    "registryKey": "button-hierarchy-icon",
+    "exportName": "ButtonHierarchyIcon",
+    "note": "Hierarchy table cell — keeps adjacent <code>.icon-btn</code> label.",
+    "findBlock": "                      <td><button class=\"icon-btn btn-sm\" aria-label=\"Acción\" style=\"pointer-events:none\"><svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7\"/><path d=\"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z\"/></svg></button></td>",
+    "replaceWith": "                      <td><span data-island=\"button-hierarchy-icon\"></span></td>"
+   },
+   {
+    "registryKey": "button-toggle-off",
+    "exportName": "ButtonToggleOff",
+    "note": "Toggle 'off' demo inside its bd-stage; btn-toggle-off is a page-local class (not Embassy) — rendered as a real tertiary Button with aria-pressed=false.",
+    "findBlock": "                  <div class=\"bd-stage center\" style=\"margin:10px 0\">\n                    <button class=\"btn-toggle-off\" aria-pressed=\"false\"><svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"/></svg> Guardar vacante</button>\n                  </div>",
+    "replaceWith": "                  <div class=\"bd-stage center\" style=\"margin:10px 0\">\n                    <div data-island=\"button-toggle-off\"></div>\n                  </div>"
+   },
+   {
+    "registryKey": "button-toggle-on",
+    "exportName": "ButtonToggleOn",
+    "note": "Toggle 'on' demo; btn-toggle-on is page-local — rendered as real secondary Button with aria-pressed=true.",
+    "findBlock": "                  <div class=\"bd-stage center\" style=\"margin:10px 0\">\n                    <button class=\"btn-toggle-on\" aria-pressed=\"true\"><svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/></svg> Guardado</button>\n                  </div>",
+    "replaceWith": "                  <div class=\"bd-stage center\" style=\"margin:10px 0\">\n                    <div data-island=\"button-toggle-on\"></div>\n                  </div>"
+   },
+   {
+    "registryKey": "button-layout-do",
+    "exportName": "ButtonLayoutDo",
+    "note": "Ancho y layout — correct demo bd-stage.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"flex-wrap:wrap;gap:10px\"><button class=\"btn-primary\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg> Pedir licencia</button><button class=\"btn-tertiary\">Cargar factura</button></div>",
+    "replaceWith": "                    <div data-island=\"button-layout-do\"></div>"
+   },
+   {
+    "registryKey": "button-layout-dont",
+    "exportName": "ButtonLayoutDont",
+    "note": "Ancho y layout — incorrect (full-width left-aligned) demo. Real Button shown misused via w-full justify-start.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"flex-direction:column;gap:8px;align-items:stretch\"><button class=\"btn-tertiary\" style=\"width:100%;justify-content:flex-start\">+ &nbsp;Pedir licencia</button><button class=\"btn-tertiary\" style=\"width:100%;justify-content:flex-start\">Cargar factura</button></div>",
+    "replaceWith": "                    <div data-island=\"button-layout-dont\"></div>"
+   },
+   {
+    "registryKey": "button-adaptive-mobile",
+    "exportName": "ButtonAdaptiveMobile",
+    "note": "Adaptive 'Mobile/táctil' card stage — full-width primary CTA.",
+    "findBlock": "                  <div class=\"bd-stage center\" style=\"padding:12px\"><button class=\"btn-primary\" style=\"width:100%\">Comenzar</button></div>",
+    "replaceWith": "                  <div class=\"bd-stage center\" style=\"padding:12px\"><div data-island=\"button-adaptive-mobile\" style=\"width:100%\"></div></div>"
+   },
+   {
+    "registryKey": "button-adaptive-dense",
+    "exportName": "ButtonAdaptiveDense",
+    "note": "Adaptive 'UI densa' card stage — btn-sm + icon-btn sm.",
+    "findBlock": "                  <div class=\"bd-stage center\" style=\"gap:6px\">\n                    <button class=\"btn-primary btn-sm\">Guardar</button>\n                    <button class=\"btn-tertiary btn-sm\">Cancelar</button>\n                    <button class=\"icon-btn btn-sm\" aria-label=\"Editar\"><svg width=\"13\" height=\"13\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7\"/><path d=\"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z\"/></svg></button>\n                  </div>",
+    "replaceWith": "                  <div class=\"bd-stage center\"><div data-island=\"button-adaptive-dense\"></div></div>"
+   },
+   {
+    "registryKey": "button-adaptive-hero",
+    "exportName": "ButtonAdaptiveHero",
+    "note": "Adaptive 'Hero/marketing' card stage — btn-lg pair.",
+    "findBlock": "                  <div class=\"bd-stage center\" style=\"gap:10px\">\n                    <button class=\"btn-primary btn-lg\">Comenzar</button>\n                    <button class=\"btn-tertiary btn-lg\">Saber más</button>\n                  </div>",
+    "replaceWith": "                  <div class=\"bd-stage center\"><div data-island=\"button-adaptive-hero\"></div></div>"
+   },
+   {
+    "registryKey": "button-icons-do",
+    "exportName": "ButtonIconsDo",
+    "note": "Uso de íconos — correct: leading-icon primary + icon-btn with aria-label.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"flex-wrap:wrap;gap:8px\">\n                      <button class=\"btn-primary\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg> Crear vacante</button>\n                      <button class=\"icon-btn\" aria-label=\"Editar perfil\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7\"/><path d=\"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z\"/></svg></button>\n                    </div>",
+    "replaceWith": "                    <div data-island=\"button-icons-do\"></div>"
+   },
+   {
+    "registryKey": "button-icons-dont",
+    "exportName": "ButtonIconsDont",
+    "note": "Uso de íconos — incorrect: generic trailing chevron + icon-only without aria-label (real Button shown misused, no aria-label on the secondary icon button).",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"flex-wrap:wrap;gap:8px\">\n                      <button class=\"btn-primary\">Crear vacante <svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" style=\"margin-left:2px\"><polyline points=\"9 18 15 12 9 6\"/></svg></button>\n                      <button class=\"btn-secondary\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/></svg></button>\n                    </div>",
+    "replaceWith": "                    <div data-island=\"button-icons-dont\"></div>"
+   },
+   {
+    "registryKey": "button-shape-do",
+    "exportName": "ButtonShapeDo",
+    "note": "Shape & Radius do — XS/SM/MD/XL primaries.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"flex-wrap:wrap;gap:10px;align-items:center\">\n                      <button class=\"btn-primary btn-xs\" style=\"pointer-events:none\">Acción XS</button>\n                      <button class=\"btn-primary btn-sm\" style=\"pointer-events:none\">Acción SM</button>\n                      <button class=\"btn-primary\" style=\"pointer-events:none\">Acción MD</button>\n                      <button class=\"btn-primary btn-xl\" style=\"pointer-events:none\">Acción XL</button>\n                    </div>",
+    "replaceWith": "                    <div data-island=\"button-shape-do\"></div>"
+   },
+   {
+    "registryKey": "button-shape-dont",
+    "exportName": "ButtonShapeDont",
+    "note": "Shape & Radius don't — pill radius (real Button with style borderRadius:9999).",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"flex-wrap:wrap;gap:10px;align-items:center\">\n                      <button class=\"btn-primary btn-xs\" style=\"pointer-events:none;border-radius:9999px\">Acción</button>\n                      <button class=\"btn-primary\" style=\"pointer-events:none;border-radius:9999px\">Acción</button>\n                      <button class=\"btn-secondary\" style=\"pointer-events:none;border-radius:9999px\">Acción</button>\n                    </div>",
+    "replaceWith": "                    <div data-island=\"button-shape-dont\"></div>"
+   },
+   {
+    "registryKey": "button-semantic-do",
+    "exportName": "ButtonSemanticDo",
+    "note": "Buenas prácticas — good labels: primary + secondary + danger.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"flex-wrap:wrap;gap:8px\"><button class=\"btn-primary\">Publicar vacante</button><button class=\"btn-secondary\">Guardar borrador</button><button class=\"btn-primary btn-danger\">Eliminar cuenta</button></div>",
+    "replaceWith": "                    <div data-island=\"button-semantic-do\"></div>"
+   },
+   {
+    "registryKey": "button-semantic-dont",
+    "exportName": "ButtonSemanticDont",
+    "note": "Buenas prácticas — bad labels: OK / uppercase GUARDAR / overly long danger (real Button shown misused).",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"flex-wrap:wrap;gap:8px\"><button class=\"btn-primary\">OK</button><button class=\"btn-secondary\" style=\"text-transform:uppercase;letter-spacing:.05em\">GUARDAR</button><button class=\"btn-primary btn-danger\">Sí, estoy seguro de que quiero hacer esto</button></div>",
+    "replaceWith": "                    <div data-island=\"button-semantic-dont\"></div>"
+   },
+   {
+    "registryKey": "button-do-single-primary",
+    "exportName": "ButtonDoSinglePrimary",
+    "note": "Do/don't grid — one Primary + alternatives.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"gap:8px\"><button class=\"btn-primary\">Publicar</button><button class=\"btn-tertiary\">Guardar borrador</button><button class=\"btn-text\">Cancelar</button></div>",
+    "replaceWith": "                    <div data-island=\"button-do-single-primary\"></div>"
+   },
+   {
+    "registryKey": "button-dont-multi-primary",
+    "exportName": "ButtonDontMultiPrimary",
+    "note": "Do/don't grid — three equal Primaries (misuse).",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"gap:8px\"><button class=\"btn-primary\">Publicar</button><button class=\"btn-primary\">Guardar borrador</button><button class=\"btn-primary\">Cancelar</button></div>",
+    "replaceWith": "                    <div data-island=\"button-dont-multi-primary\"></div>"
+   },
+   {
+    "registryKey": "button-do-specific-label",
+    "exportName": "ButtonDoSpecificLabel",
+    "note": "Do/don't grid — specific verb labels.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"gap:8px\"><button class=\"btn-primary\">Eliminar cuenta</button><button class=\"btn-primary btn-sm\">Crear postulante</button></div>",
+    "replaceWith": "                    <div data-island=\"button-do-specific-label\"></div>"
+   },
+   {
+    "registryKey": "button-dont-generic-label",
+    "exportName": "ButtonDontGenericLabel",
+    "note": "Do/don't grid — generic OK / Sí labels.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"gap:8px\"><button class=\"btn-primary\">OK</button><button class=\"btn-primary btn-danger\">Sí</button></div>",
+    "replaceWith": "                    <div data-island=\"button-dont-generic-label\"></div>"
+   },
+   {
+    "registryKey": "button-do-icon-aria",
+    "exportName": "ButtonDoIconAria",
+    "note": "Do/don't grid — icon-only buttons with aria-label.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"gap:8px\">\n                      <button class=\"icon-btn\" aria-label=\"Editar vacante\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7\"/><path d=\"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z\"/></svg></button>\n                      <button class=\"icon-btn\" aria-label=\"Eliminar vacante\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"3 6 5 6 21 6\"/><path d=\"M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6\"/><path d=\"M10 11v6\"/><path d=\"M14 11v6\"/></svg></button>\n                    </div>",
+    "replaceWith": "                    <div data-island=\"button-do-icon-aria\"></div>"
+   },
+   {
+    "registryKey": "button-dont-nav-links",
+    "exportName": "ButtonDontNavLinks",
+    "note": "Do/don't grid — text buttons misused as nav links.",
+    "findBlock": "                    <div class=\"bd-stage\" style=\"gap:8px\"><button class=\"btn-text\">Ir al perfil →</button><button class=\"btn-text\">Ver todas las vacantes</button></div>",
+    "replaceWith": "                    <div data-island=\"button-dont-nav-links\"></div>"
+   },
+   {
+    "registryKey": "button-focus-showcase",
+    "exportName": "ButtonFocusShowcase",
+    "note": "Accessibility — focus-ring demo. The page-local .bd-sim-focus is replaced by the real component's focus-ring @utility class.",
+    "findBlock": "              <div class=\"bd-stage center\" style=\"margin:10px 0\">\n                <button class=\"btn-primary bd-sim-focus\">Enfocado</button>\n              </div>",
+    "replaceWith": "              <div class=\"bd-stage center\" style=\"margin:10px 0\">\n                <div data-island=\"button-focus-showcase\"></div>\n              </div>"
+   },
+   {
+    "registryKey": "button-semantic-preview",
+    "exportName": "ButtonSemanticPreview",
+    "note": "Code tab — Modificadores semánticos live preview above the code block. Uses real danger/success variants.",
+    "findBlock": "          <div class=\"bd-stage\" style=\"margin-bottom:16px\">\n            <button class=\"btn-primary btn-danger\">Eliminar</button>\n            <button class=\"btn-primary btn-success\">Aprobar</button>\n          </div>",
+    "replaceWith": "          <div class=\"bd-stage\" style=\"margin-bottom:16px\">\n            <div data-island=\"button-semantic-preview\"></div>\n          </div>"
+   },
+   {
+    "registryKey": "button-sizes-preview",
+    "exportName": "ButtonSizesPreview",
+    "note": "Code tab — Tamaños live preview (default/sm primaries+secondaries + icon-btn default/sm). SVG settings icons replaced by lucide Settings.",
+    "findBlock": "          <div class=\"bd-stage\" style=\"gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:16px\">\n            <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\"><button class=\"btn-primary\">Default</button><span class=\"bd-state-lbl\">36px</span></div>\n            <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\"><button class=\"btn-primary btn-sm\">Small</button><span class=\"bd-state-lbl\">30px</span></div>\n            <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\"><button class=\"btn-secondary\">Default</button><span class=\"bd-state-lbl\">36px</span></div>\n            <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\"><button class=\"btn-secondary btn-sm\">Small</button><span class=\"bd-state-lbl\">30px</span></div>\n            <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\"><button class=\"icon-btn\">\n              <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z\"/></svg>\n            </button><span class=\"bd-state-lbl\">36×36</span></div>\n            <div style=\"display:flex;flex-direction:column;align-items:center;gap:6px\"><button class=\"icon-btn btn-sm\">\n              <svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z\"/></svg>\n            </button><span class=\"bd-state-lbl\">30×30</span></div>\n          </div>",
+    "replaceWith": "          <div class=\"bd-stage\" style=\"margin-bottom:16px\">\n            <div data-island=\"button-sizes-preview\"></div>\n          </div>"
+   },
+   {
+    "registryKey": "button-icon-preview",
+    "exportName": "ButtonIconPreview",
+    "note": "Code tab — Botones con ícono live preview (leading icon primary, trailing chevron secondary, leading-icon tertiary).",
+    "findBlock": "          <div class=\"bd-stage\" style=\"gap:12px;flex-wrap:wrap;margin-bottom:16px\">\n            <button class=\"btn-primary\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"12\" y1=\"5\" x2=\"12\" y2=\"19\"/><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg> Nueva vacante</button>\n            <button class=\"btn-secondary\">Exportar <svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"6 9 12 15 18 9\"/></svg></button>\n            <button class=\"btn-tertiary\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7\"/><path d=\"M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z\"/></svg> Editar</button>\n          </div>",
+    "replaceWith": "          <div class=\"bd-stage\" style=\"gap:12px;flex-wrap:wrap;margin-bottom:16px\">\n            <div data-island=\"button-icon-preview\"></div>\n          </div>"
+   },
+   {
+    "registryKey": "button-disabled-preview",
+    "exportName": "ButtonDisabledPreview",
+    "note": "Code tab — Estado deshabilitado live preview (primary/secondary/tertiary/icon disabled).",
+    "findBlock": "          <div class=\"bd-stage\" style=\"gap:12px;flex-wrap:wrap;margin-bottom:16px\">\n            <button class=\"btn-primary\" disabled>Publicar</button>\n            <button class=\"btn-secondary\" disabled>Guardar</button>\n            <button class=\"btn-tertiary\" disabled>Cancelar</button>\n            <button class=\"icon-btn\" disabled aria-label=\"Ajustes\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z\"/></svg></button>\n          </div>",
+    "replaceWith": "          <div class=\"bd-stage\" style=\"gap:12px;flex-wrap:wrap;margin-bottom:16px\">\n            <div data-island=\"button-disabled-preview\"></div>\n          </div>"
+   },
+   {
+    "registryKey": "button-loading-preview",
+    "exportName": "ButtonLoadingPreview",
+    "note": "Code tab — Estado de carga live preview. Spinner via lucide Loader2 + animate-spin (the page-local @keyframes spin <style> + <code> snippet below stay untouched).",
+    "findBlock": "          <div class=\"bd-stage\" style=\"margin-bottom:16px\">\n            <button class=\"btn-primary\" disabled style=\"gap:8px\">\n              <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"animation:spin 1s linear infinite;flex-shrink:0\"><path d=\"M21 12a9 9 0 1 1-6.219-8.56\"/></svg>\n              Publicando…\n            </button>\n          </div>",
+    "replaceWith": "          <div class=\"bd-stage\" style=\"margin-bottom:16px\">\n            <div data-island=\"button-loading-preview\"></div>\n          </div>"
+   },
+   {
+    "registryKey": "button-form-footer-preview",
+    "exportName": "ButtonFormFooterPreview",
+    "note": "Code tab — Patrón pie de formulario live preview (tertiary Cancelar + primary Publicar). Replaces only the inner action-row div; keeps the surrounding bd-card heading/description.",
+    "findBlock": "            <div style=\"display:flex;gap:10px;justify-content:flex-end;border-top:1px solid var(--border);padding-top:16px\">\n              <button class=\"btn-tertiary\">Cancelar</button>\n              <button class=\"btn-primary\">Publicar vacante</button>\n            </div>",
+    "replaceWith": "            <div style=\"border-top:1px solid var(--border);padding-top:16px\"><div data-island=\"button-form-footer-preview\"></div></div>"
+   },
+   {
+    "registryKey": "button-destructive-preview",
+    "exportName": "ButtonDestructivePreview",
+    "note": "Code tab — Patrón confirmación destructiva live preview (tertiary Cancelar + danger Eliminar). Replaces only the inner action-row div; keeps the bd-card title/description.",
+    "findBlock": "            <div style=\"display:flex;gap:10px;justify-content:flex-end\">\n              <button class=\"btn-tertiary\">Cancelar</button>\n              <button class=\"btn-primary btn-danger\">Eliminar</button>\n            </div>",
+    "replaceWith": "            <div data-island=\"button-destructive-preview\"></div>"
+   }
+  ]
+ },
+ {
+  "component": "SegmentedButton",
+  "fileWritten": "/Users/aniborthagaray/Documents/Claude/Projects/Design System Amalgama/islands/src/islands/SegBtnPhaseB.tsx",
+  "summary": "Islandized all 10 live CSS-class examples on the s-c-seg-btn page: 3 Specs \"Configuraciones\" size demos (sm/md/lg), 3 Specs \"Estados\" demos (default/selected/disabled), and 4 Guidelines \"Hacer y no hacer\" demos (do-views, dont-actions, do-period, dont-toomany). Each is a separate export in SegBtnPhaseB.tsx using the real @ds/segmented-button (SegmentedButtonGroup/SegmentedButtonItem, value/onValueChange, size sm|md|lg). The two DON'T panels still render the real component, just misused (CTAs as segments; 5 segments). KEPT untouched per audit: the Anatomy SVG, the Color Roles token table, the \"Clases CSS\" reference table, and all escaped <code> HTML/React/JS snippets in the Code tab. findBlocks for the size demos target the inner seg-btn-group inside each table <td>; state demos target the seg-btn-group inside each bd-state wrapper; do/don't demos target the seg-btn-group inside each sbd-stage. All findBlocks are globally unique by their exact label/value combinations.",
+  "islands": [
+   {
+    "registryKey": "seg-btn-size-sm",
+    "exportName": "SegBtnSizeSm",
+    "findBlock": "                  <div class=\"seg-btn-group seg-btn-group-sm\" role=\"group\">\n                    <button class=\"seg-btn selected\" aria-selected=\"true\" onclick=\"segSwitch(this)\">Opción A</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\" onclick=\"segSwitch(this)\">Opción B</button>\n                  </div>",
+    "replaceWith": "                  <div data-island=\"seg-btn-size-sm\"></div>"
+   },
+   {
+    "registryKey": "seg-btn-size-md",
+    "exportName": "SegBtnSizeMd",
+    "findBlock": "                  <div class=\"seg-btn-group\" role=\"group\">\n                    <button class=\"seg-btn selected\" aria-selected=\"true\" onclick=\"segSwitch(this)\">Opción A</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\" onclick=\"segSwitch(this)\">Opción B</button>\n                  </div>",
+    "replaceWith": "                  <div data-island=\"seg-btn-size-md\"></div>"
+   },
+   {
+    "registryKey": "seg-btn-size-lg",
+    "exportName": "SegBtnSizeLg",
+    "findBlock": "                  <div class=\"seg-btn-group seg-btn-group-lg\" role=\"group\">\n                    <button class=\"seg-btn selected\" aria-selected=\"true\" onclick=\"segSwitch(this)\">Opción A</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\" onclick=\"segSwitch(this)\">Opción B</button>\n                  </div>",
+    "replaceWith": "                  <div data-island=\"seg-btn-size-lg\"></div>"
+   },
+   {
+    "registryKey": "seg-btn-state-default",
+    "exportName": "SegBtnStateDefault",
+    "findBlock": "              <div class=\"seg-btn-group\" role=\"group\">\n                <button class=\"seg-btn\" aria-selected=\"false\">Opción A</button>\n                <button class=\"seg-btn\" aria-selected=\"false\">Opción B</button>\n              </div>",
+    "replaceWith": "              <div data-island=\"seg-btn-state-default\"></div>"
+   },
+   {
+    "registryKey": "seg-btn-state-selected",
+    "exportName": "SegBtnStateSelected",
+    "findBlock": "              <div class=\"seg-btn-group\" role=\"group\">\n                <button class=\"seg-btn selected\" aria-selected=\"true\">Opción A</button>\n                <button class=\"seg-btn\" aria-selected=\"false\">Opción B</button>\n              </div>",
+    "replaceWith": "              <div data-island=\"seg-btn-state-selected\"></div>"
+   },
+   {
+    "registryKey": "seg-btn-state-disabled",
+    "exportName": "SegBtnStateDisabled",
+    "findBlock": "              <div class=\"seg-btn-group\" role=\"group\">\n                <button class=\"seg-btn selected\" aria-selected=\"true\" disabled>Opción A</button>\n                <button class=\"seg-btn\" aria-selected=\"false\" disabled>Opción B</button>\n              </div>",
+    "replaceWith": "              <div data-island=\"seg-btn-state-disabled\"></div>"
+   },
+   {
+    "registryKey": "seg-btn-do-views",
+    "exportName": "SegBtnDoViews",
+    "findBlock": "                  <div class=\"seg-btn-group\" role=\"group\" aria-label=\"Vista de candidatos\">\n                    <button class=\"seg-btn selected\" aria-selected=\"true\" onclick=\"segSwitch(this)\">Lista</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\" onclick=\"segSwitch(this)\">Cuadrícula</button>\n                  </div>",
+    "replaceWith": "                  <div data-island=\"seg-btn-do-views\"></div>"
+   },
+   {
+    "registryKey": "seg-btn-dont-actions",
+    "exportName": "SegBtnDontActions",
+    "findBlock": "                  <div class=\"seg-btn-group\" role=\"group\">\n                    <button class=\"seg-btn selected\" aria-selected=\"true\">Guardar</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\">Cancelar</button>\n                  </div>",
+    "replaceWith": "                  <div data-island=\"seg-btn-dont-actions\"></div>"
+   },
+   {
+    "registryKey": "seg-btn-do-period",
+    "exportName": "SegBtnDoPeriod",
+    "findBlock": "                  <div class=\"seg-btn-group\" role=\"group\" aria-label=\"Período\">\n                    <button class=\"seg-btn\" aria-selected=\"false\" onclick=\"segSwitch(this)\">7D</button>\n                    <button class=\"seg-btn selected\" aria-selected=\"true\" onclick=\"segSwitch(this)\">30D</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\" onclick=\"segSwitch(this)\">90D</button>\n                  </div>",
+    "replaceWith": "                  <div data-island=\"seg-btn-do-period\"></div>"
+   },
+   {
+    "registryKey": "seg-btn-dont-toomany",
+    "exportName": "SegBtnDontTooMany",
+    "findBlock": "                  <div class=\"seg-btn-group\" role=\"group\">\n                    <button class=\"seg-btn selected\" aria-selected=\"true\">Lunes</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\">Martes</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\">Miércoles</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\">Jueves</button>\n                    <button class=\"seg-btn\" aria-selected=\"false\">Viernes</button>\n                  </div>",
+    "replaceWith": "                  <div data-island=\"seg-btn-dont-toomany\"></div>"
+   }
+  ]
+ },
+ {
+  "component": "InputPhaseB",
+  "fileWritten": "/Users/aniborthagaray/Documents/Claude/Projects/Design System Amalgama/islands/src/islands/InputPhaseB.tsx",
+  "summary": "Islandized the 8 live Specs-tab Input examples on the s-c-input page (Basico, Con placeholder, Required, Disabled, Focus state, Grid de formulario, Number Input, Date Input). Each now renders via the real @ds Input component instead of static .field-input/.field-group CSS-class markup. Variants the base component does not cover by prop (number stepper, date trailing icon, 2-col grid) compose the real <Input> with Embassy token utilities (bg-card, border-border, text-on-surface-variant, rounded-sm) and lucide-react Calendar — no raw hex. The Overview island (data-island=\"input-showcase\") was already wired and is untouched. NOT touched: the Estados / Clases y tokens / Medidas spec tables, the Embassy-vs-MD3 callout, and all escaped <code> snippets in the Code tab (teaching content). Note: the audit listed proposedIslandName \"input-showcase\" for all 8, but that key is already used by the Overview island, so I assigned distinct per-example registry keys.",
+  "islands": [
+   {
+    "registryKey": "input-basic-showcase",
+    "exportName": "InputBasic",
+    "findBlock": "          <div class=\"field-group\">\n            <label class=\"field-label\">Nombre completo</label>\n            <input type=\"text\" class=\"field-input\">\n          </div>",
+    "replaceWith": "          <div data-island=\"input-basic-showcase\"></div>"
+   },
+   {
+    "registryKey": "input-placeholder-showcase",
+    "exportName": "InputPlaceholder",
+    "findBlock": "          <input type=\"text\" class=\"field-input\" placeholder=\"Escribe aqui...\">",
+    "replaceWith": "          <div data-island=\"input-placeholder-showcase\"></div>"
+   },
+   {
+    "registryKey": "input-required-showcase",
+    "exportName": "InputRequired",
+    "findBlock": "          <div class=\"field-group\">\n            <label class=\"field-label\">Correo electronico <span class=\"field-required\">*</span></label>\n            <input type=\"email\" class=\"field-input\" required>\n          </div>",
+    "replaceWith": "          <div data-island=\"input-required-showcase\"></div>"
+   },
+   {
+    "registryKey": "input-disabled-showcase",
+    "exportName": "InputDisabled",
+    "findBlock": "          <input type=\"text\" class=\"field-input\" disabled value=\"No editable\">",
+    "replaceWith": "          <div data-island=\"input-disabled-showcase\"></div>"
+   },
+   {
+    "registryKey": "input-focus-showcase",
+    "exportName": "InputFocus",
+    "findBlock": "          <input type=\"text\" class=\"field-input\" placeholder=\"Haz clic aqui para ver el focus...\">",
+    "replaceWith": "          <div data-island=\"input-focus-showcase\"></div>"
+   },
+   {
+    "registryKey": "input-grid-showcase",
+    "exportName": "InputGrid",
+    "findBlock": "          <div class=\"fields-grid\">\n            <div class=\"field-group\">\n              <label class=\"field-label\">Nombre</label>\n              <input type=\"text\" class=\"field-input\">\n            </div>\n            <div class=\"field-group\">\n              <label class=\"field-label\">Apellido</label>\n              <input type=\"text\" class=\"field-input\">\n            </div>\n          </div>",
+    "replaceWith": "          <div data-island=\"input-grid-showcase\"></div>"
+   },
+   {
+    "registryKey": "input-number-showcase",
+    "exportName": "InputNumber",
+    "findBlock": "          <div class=\"number-input-wrapper\">\n            <span class=\"number-value\">3</span>\n            <div class=\"number-controls\">\n              <button class=\"number-btn\" type=\"button\">−</button>\n              <button class=\"number-btn\" type=\"button\">+</button>\n            </div>\n          </div>",
+    "replaceWith": "          <div data-island=\"input-number-showcase\"></div>"
+   },
+   {
+    "registryKey": "input-date-showcase",
+    "exportName": "InputDate",
+    "findBlock": "          <div class=\"date-input-wrapper\">\n            <input type=\"date\">\n            <span class=\"date-icon\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"/><line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"/><line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"/><line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"/></svg></span>\n          </div>",
+    "replaceWith": "          <div data-island=\"input-date-showcase\"></div>"
+   }
+  ]
+ },
+ {
+  "component": "SearchPhaseB.tsx",
+  "fileWritten": "/Users/aniborthagaray/Documents/Claude/Projects/Design System Amalgama/islands/src/islands/SearchPhaseB.tsx",
+  "summary": "Islandized all 7 live CSS-class Search examples on the s-c-search page into 5 React showcase exports backed by the real @ds/search components (SearchBar, SearchBarTrailing, SearchBarAvatar). The Specs \"Search + acciones\" section had 3 examples (two siblings in a cg-two-col + one full-width row); these are consolidated into one SearchActionsShowcase island (3 stacked rows) replacing both the cg-two-col and the trailing full-width preview, while KEEPING the explanatory caption. Guidelines Desktop and Mobile examples and the two Code-tab bd-stage live previews each became their own island. Note: `.search-icon-btn` has NO shipped React wrapper — Search is a CSS-class component family — so the canonical DS class IS the real element for the 40px circular action buttons; the SearchBar itself is the real React component. All anatomy/measurement/state/color SVG diagrams, the escaped <code> snippets, and the class-reference/semantics tables were left untouched. The mobile standalone bar uses containerClassName=\"max-w-full\" (token utility) to mirror the legacy inline max-width:100%.",
+  "islands": [
+   {
+    "registryKey": "search-actions-showcase",
+    "exportName": "SearchActionsShowcase",
+    "findBlock": "          <div class=\"cg-two-col\">\n            <div>\n              <p class=\"ch-variant-label\">Search + Filtro</p>\n              <div class=\"docs-preview full-width\">\n                <div class=\"search-row\">\n                  <div class=\"search-bar\" role=\"search\">\n                    <span class=\"search-bar-icon\"><svg width=\"24\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><line x1=\"16.5\" y1=\"16.5\" x2=\"21\" y2=\"21\"/></svg></span>\n                    <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar vacantes...\" aria-label=\"Buscar vacantes\">\n                  </div>\n                  <button class=\"search-icon-btn\" aria-label=\"Filtros\">\n                    <svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M22 3H2l8 9.46V19l4 2v-8.54L22 3z\"/></svg>\n                  </button>\n                </div>\n              </div>\n            </div>\n            <div>\n              <p class=\"ch-variant-label\">Search + Filtro + Ordenar</p>\n              <div class=\"docs-preview full-width\">\n                <div class=\"search-row\">\n                  <div class=\"search-bar\" role=\"search\">\n                    <span class=\"search-bar-icon\"><svg width=\"24\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><line x1=\"16.5\" y1=\"16.5\" x2=\"21\" y2=\"21\"/></svg></span>\n                    <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar vacantes...\" aria-label=\"Buscar vacantes\">\n                  </div>\n                  <button class=\"search-icon-btn\" aria-label=\"Filtros\">\n                    <svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M22 3H2l8 9.46V19l4 2v-8.54L22 3z\"/></svg>\n                  </button>\n                  <button class=\"search-icon-btn\" aria-label=\"Ordenar\">\n                    <svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M3 6h18M6 12h12M9 18h6\"/></svg>\n                  </button>\n                </div>\n              </div>\n            </div>\n          </div>\n          <div class=\"docs-preview full-width\" style=\"margin-top:16px;\">\n            <div class=\"search-row\">\n              <div class=\"search-bar\" role=\"search\">\n                <span class=\"search-bar-icon\"><svg width=\"24\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><line x1=\"16.5\" y1=\"16.5\" x2=\"21\" y2=\"21\"/></svg></span>\n                <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar vacantes...\" aria-label=\"Buscar vacantes\">\n              </div>\n              <button class=\"search-icon-btn active\" aria-label=\"Filtros\" aria-pressed=\"true\">\n                <svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M22 3H2l8 9.46V19l4 2v-8.54L22 3z\"/></svg>\n              </button>\n              <button class=\"search-icon-btn\" aria-label=\"Ordenar\">\n                <svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M3 6h18M6 12h12M9 18h6\"/></svg>\n              </button>\n              <button class=\"search-icon-btn\" aria-label=\"Vista en grilla\">\n                <svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"/></svg>\n              </button>\n            </div>\n          </div>",
+    "replaceWith": "          <div class=\"docs-preview full-width\">\n            <div data-island=\"search-actions-showcase\"></div>\n          </div>",
+    "note": "Consolidates all 3 Specs 'Search + acciones' live examples (cg-two-col siblings #1+#2 and the trailing full-width row #3) into one island, per the audit's single search-actions-showcase intent. The cg-caption that follows (about the active filter state) is KEPT (left outside the replaced block)."
+   },
+   {
+    "registryKey": "search-desktop-showcase",
+    "exportName": "SearchDesktopShowcase",
+    "findBlock": "          <div class=\"docs-preview full-width\" style=\"margin-top:16px;\">\n            <div class=\"search-row\">\n              <div class=\"search-bar\" role=\"search\">\n                <span class=\"search-bar-icon\"><svg width=\"24\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><line x1=\"16.5\" y1=\"16.5\" x2=\"21\" y2=\"21\"/></svg></span>\n                <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar...\" aria-label=\"Buscar\">\n              </div>\n              <button class=\"search-icon-btn\" aria-label=\"Filtros\"><svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M22 3H2l8 9.46V19l4 2v-8.54L22 3z\"/></svg></button>\n              <button class=\"search-icon-btn\" aria-label=\"Ordenar\"><svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M3 6h18M6 12h12M9 18h6\"/></svg></button>\n            </div>\n          </div>",
+    "replaceWith": "          <div class=\"docs-preview full-width\" style=\"margin-top:16px;\">\n            <div data-island=\"search-desktop-showcase\"></div>\n          </div>",
+    "note": "Guidelines Desktop section. Placeholder is 'Buscar' (not 'Buscar vacantes') — distinct from the Specs blocks, making findBlock unique."
+   },
+   {
+    "registryKey": "search-bar-mobile-showcase",
+    "exportName": "SearchBarMobileShowcase",
+    "findBlock": "          <div class=\"docs-preview full-width\" style=\"margin-top:16px;\">\n            <div class=\"search-bar\" role=\"search\" style=\"max-width:100%;\">\n              <span class=\"search-bar-icon\"><svg width=\"24\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><line x1=\"16.5\" y1=\"16.5\" x2=\"21\" y2=\"21\"/></svg></span>\n              <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar vacantes...\" aria-label=\"Buscar vacantes\">\n            </div>\n          </div>",
+    "replaceWith": "          <div class=\"docs-preview full-width\" style=\"margin-top:16px;\">\n            <div data-island=\"search-bar-mobile-showcase\"></div>\n          </div>",
+    "note": "Guidelines Mobile section: standalone 56px bar (no .search-row, has style max-width:100%) — uniquely identifiable by the search-bar directly inside docs-preview."
+   },
+   {
+    "registryKey": "search-bar-showcase",
+    "exportName": "SearchBarShowcase",
+    "findBlock": "          <div class=\"bd-stage\" style=\"margin-bottom:16px\">\n            <div class=\"search-bar\" role=\"search\">\n              <span class=\"search-bar-icon\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><line x1=\"16.5\" y1=\"16.5\" x2=\"21\" y2=\"21\"/></svg></span>\n              <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar candidatos\" aria-label=\"Buscar candidatos\">\n              <span class=\"search-bar-avatar\">AB</span>\n            </div>\n          </div>",
+    "replaceWith": "          <div class=\"bd-stage\" style=\"margin-bottom:16px\">\n            <div data-island=\"search-bar-showcase\"></div>\n          </div>",
+    "note": "Code tab 'Search bar — HTML' bd-stage live preview (with avatar 'AB'). The escaped <pre><code> snippet that follows is KEPT."
+   },
+   {
+    "registryKey": "search-actions-code-showcase",
+    "exportName": "SearchActionsCodeShowcase",
+    "findBlock": "          <div class=\"bd-stage\" style=\"margin-bottom:16px\">\n            <div class=\"search-row\">\n              <div class=\"search-bar\" role=\"search\">\n                <span class=\"search-bar-icon\"><svg width=\"24\" height=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><line x1=\"16.5\" y1=\"16.5\" x2=\"21\" y2=\"21\"/></svg></span>\n                <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar candidatos\" aria-label=\"Buscar candidatos\">\n              </div>\n              <button class=\"search-icon-btn active\" aria-label=\"Filtros\" aria-pressed=\"true\">\n                <svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M22 3H2l8 9.46V19l4 2v-8.54L22 3z\"/></svg>\n              </button>\n              <button class=\"search-icon-btn\" aria-label=\"Ordenar\">\n                <svg width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path d=\"M3 6h18M6 12h12M9 18h6\"/></svg>\n              </button>\n            </div>\n          </div>",
+    "replaceWith": "          <div class=\"bd-stage\" style=\"margin-bottom:16px\">\n            <div data-island=\"search-actions-code-showcase\"></div>\n          </div>",
+    "note": "Code tab 'Search + botones de acción — HTML' bd-stage live preview (active filter + Ordenar, placeholder 'Buscar candidatos'). Distinct from the Specs full-row block by placeholder text and bd-stage wrapper. The escaped <pre><code> snippet that follows is KEPT."
+   }
+  ]
+ }
+]

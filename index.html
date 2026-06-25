@@ -16,8 +16,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=21">
-<script type="module" src="islands/dist/embassy-islands.js?v=21"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=23">
+<script type="module" src="islands/dist/embassy-islands.js?v=23"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- @material/web runtime removed (2026-06): every component page now renders via
      the shadcn/Tailwind React islands (islands/dist/embassy-islands.js); no live
@@ -7412,10 +7412,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
                 <td style="padding:12px;border-bottom:1px solid var(--border);"><code style="font-size:12px;">seg-btn-group-sm</code></td>
                 <td style="padding:12px;font-size:13px;color:var(--ds-text-2);border-bottom:1px solid var(--border);">~28px</td>
                 <td style="padding:12px;border-bottom:1px solid var(--border);">
-                  <div class="seg-btn-group seg-btn-group-sm" role="group">
-                    <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Opción A</button>
-                    <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Opción B</button>
-                  </div>
+                  <div data-island="seg-btn-size-sm"></div>
                 </td>
               </tr>
               <tr>
@@ -7423,10 +7420,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
                 <td style="padding:12px;border-bottom:1px solid var(--border);"><code style="font-size:12px;">seg-btn-group</code></td>
                 <td style="padding:12px;font-size:13px;color:var(--ds-text-2);border-bottom:1px solid var(--border);">~36px</td>
                 <td style="padding:12px;border-bottom:1px solid var(--border);">
-                  <div class="seg-btn-group" role="group">
-                    <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Opción A</button>
-                    <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Opción B</button>
-                  </div>
+                  <div data-island="seg-btn-size-md"></div>
                 </td>
               </tr>
               <tr>
@@ -7434,10 +7428,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
                 <td style="padding:12px;"><code style="font-size:12px;">seg-btn-group-lg</code></td>
                 <td style="padding:12px;font-size:13px;color:var(--ds-text-2);">~44px</td>
                 <td style="padding:12px;">
-                  <div class="seg-btn-group seg-btn-group-lg" role="group">
-                    <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Opción A</button>
-                    <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Opción B</button>
-                  </div>
+                  <div data-island="seg-btn-size-lg"></div>
                 </td>
               </tr>
             </tbody>
@@ -7448,25 +7439,16 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
           <h2 class="docs-section-title">Estados</h2>
           <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(148px,1fr));">
             <div class="bd-state">
-              <div class="seg-btn-group" role="group">
-                <button class="seg-btn" aria-selected="false">Opción A</button>
-                <button class="seg-btn" aria-selected="false">Opción B</button>
-              </div>
+              <div data-island="seg-btn-state-default"></div>
               <div class="bd-state-lbl">Default</div>
             </div>
             <div class="bd-state">
-              <div class="seg-btn-group" role="group">
-                <button class="seg-btn selected" aria-selected="true">Opción A</button>
-                <button class="seg-btn" aria-selected="false">Opción B</button>
-              </div>
+              <div data-island="seg-btn-state-selected"></div>
               <div class="bd-state-lbl">Seleccionado</div>
               <div class="bd-state-tok">--color-secondary-container / --color-on-secondary-container</div>
             </div>
             <div class="bd-state">
-              <div class="seg-btn-group" role="group">
-                <button class="seg-btn selected" aria-selected="true" disabled>Opción A</button>
-                <button class="seg-btn" aria-selected="false" disabled>Opción B</button>
-              </div>
+              <div data-island="seg-btn-state-disabled"></div>
               <div class="bd-state-lbl">Deshabilitado</div>
               <div class="bd-state-tok">onSurface @ 38% / 12%</div>
             </div>
@@ -7539,10 +7521,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
               <div class="bd-dd-head">✓ Alternancia de vistas</div>
               <div class="bd-dd-body">
                 <div class="sbd-stage center">
-                  <div class="seg-btn-group" role="group" aria-label="Vista de candidatos">
-                    <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button>
-                    <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Cuadrícula</button>
-                  </div>
+                  <div data-island="seg-btn-do-views"></div>
                 </div>
                 <span class="bd-dd-note">Dos opciones claras, mutuamente excluyentes, controlan la vista dentro de la misma pantalla.</span>
               </div>
@@ -7551,10 +7530,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
               <div class="bd-dd-head">✕ Acciones como segmentos</div>
               <div class="bd-dd-body">
                 <div class="sbd-stage center" style="opacity:.7;">
-                  <div class="seg-btn-group" role="group">
-                    <button class="seg-btn selected" aria-selected="true">Guardar</button>
-                    <button class="seg-btn" aria-selected="false">Cancelar</button>
-                  </div>
+                  <div data-island="seg-btn-dont-actions"></div>
                 </div>
                 <span class="bd-dd-note">Las acciones de CTA deben ser botones independientes con jerarquía (btn-primary / btn-tertiary), no segmentos.</span>
               </div>
@@ -7563,11 +7539,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
               <div class="bd-dd-head">✓ Filtro de período compacto</div>
               <div class="bd-dd-body">
                 <div class="sbd-stage center">
-                  <div class="seg-btn-group" role="group" aria-label="Período">
-                    <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">7D</button>
-                    <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">30D</button>
-                    <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">90D</button>
-                  </div>
+                  <div data-island="seg-btn-do-period"></div>
                 </div>
                 <span class="bd-dd-note">Etiquetas cortas y homogéneas, 3 opciones, sin espacio para un Select.</span>
               </div>
@@ -7576,13 +7548,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
               <div class="bd-dd-head">✕ Demasiadas opciones</div>
               <div class="bd-dd-body">
                 <div class="sbd-stage center" style="opacity:.7;">
-                  <div class="seg-btn-group" role="group">
-                    <button class="seg-btn selected" aria-selected="true">Lunes</button>
-                    <button class="seg-btn" aria-selected="false">Martes</button>
-                    <button class="seg-btn" aria-selected="false">Miércoles</button>
-                    <button class="seg-btn" aria-selected="false">Jueves</button>
-                    <button class="seg-btn" aria-selected="false">Viernes</button>
-                  </div>
+                  <div data-island="seg-btn-dont-toomany"></div>
                 </div>
                 <span class="bd-dd-note">Más de 5 opciones sobrecarga el componente. Usar un Select o Chips horizontales.</span>
               </div>
@@ -7780,10 +7746,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
 <section class="docs-section">
         <h2>Basico</h2>
         <div class="docs-preview">
-          <div class="field-group">
-            <label class="field-label">Nombre completo</label>
-            <input type="text" class="field-input">
-          </div>
+          <div data-island="input-basic-showcase"></div>
         </div>
 
       </section>
@@ -7792,7 +7755,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
       <section class="docs-section">
         <h2>Con placeholder</h2>
         <div class="docs-preview">
-          <input type="text" class="field-input" placeholder="Escribe aqui...">
+          <div data-island="input-placeholder-showcase"></div>
         </div>
         
       </section>
@@ -7801,10 +7764,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
       <section class="docs-section">
         <h2>Required</h2>
         <div class="docs-preview">
-          <div class="field-group">
-            <label class="field-label">Correo electronico <span class="field-required">*</span></label>
-            <input type="email" class="field-input" required>
-          </div>
+          <div data-island="input-required-showcase"></div>
         </div>
         
       </section>
@@ -7813,7 +7773,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
       <section class="docs-section">
         <h2>Disabled</h2>
         <div class="docs-preview">
-          <input type="text" class="field-input" disabled value="No editable">
+          <div data-island="input-disabled-showcase"></div>
         </div>
         
       </section>
@@ -7823,7 +7783,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
         <h2>Focus state</h2>
         <p class="docs-page-desc">Los inputs reciben un borde de acento y un anillo de resplandor (glow ring) al hacer focus. Haz clic en el campo para ver el efecto.</p>
         <div class="docs-preview">
-          <input type="text" class="field-input" placeholder="Haz clic aqui para ver el focus...">
+          <div data-island="input-focus-showcase"></div>
         </div>
       </section>
 
@@ -7831,16 +7791,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
       <section class="docs-section">
         <h2>Grid de formulario</h2>
         <div class="docs-preview">
-          <div class="fields-grid">
-            <div class="field-group">
-              <label class="field-label">Nombre</label>
-              <input type="text" class="field-input">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Apellido</label>
-              <input type="text" class="field-input">
-            </div>
-          </div>
+          <div data-island="input-grid-showcase"></div>
         </div>
         
       </section>
@@ -7849,13 +7800,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
       <section class="docs-section">
         <h2>Number Input</h2>
         <div class="docs-preview">
-          <div class="number-input-wrapper">
-            <span class="number-value">3</span>
-            <div class="number-controls">
-              <button class="number-btn" type="button">−</button>
-              <button class="number-btn" type="button">+</button>
-            </div>
-          </div>
+          <div data-island="input-number-showcase"></div>
         </div>
 
       </section>
@@ -7864,10 +7809,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
       <section class="docs-section">
         <h2>Date Input</h2>
         <div class="docs-preview">
-          <div class="date-input-wrapper">
-            <input type="date">
-            <span class="date-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-          </div>
+          <div data-island="input-date-showcase"></div>
         </div>
 
       </section>
@@ -19361,55 +19303,8 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section" id="ss-actions" style="scroll-margin-top:84px;">
           <h2 class="docs-section-title">Search + acciones</h2>
           <p class="docs-section-desc">Cuando la búsqueda convive con acciones contextuales (Filtros, Ordenar, Vista), las acciones se representan como botones de ícono circulares (<code>.search-icon-btn</code>) dentro de un <code>.search-row</code>. La search bar usa <b>40px</b> en este contexto — misma altura que los icon buttons.</p>
-          <div class="cg-two-col">
-            <div>
-              <p class="ch-variant-label">Search + Filtro</p>
-              <div class="docs-preview full-width">
-                <div class="search-row">
-                  <div class="search-bar" role="search">
-                    <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
-                    <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes">
-                  </div>
-                  <button class="search-icon-btn" aria-label="Filtros">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p class="ch-variant-label">Search + Filtro + Ordenar</p>
-              <div class="docs-preview full-width">
-                <div class="search-row">
-                  <div class="search-bar" role="search">
-                    <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
-                    <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes">
-                  </div>
-                  <button class="search-icon-btn" aria-label="Filtros">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
-                  </button>
-                  <button class="search-icon-btn" aria-label="Ordenar">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="docs-preview full-width" style="margin-top:16px;">
-            <div class="search-row">
-              <div class="search-bar" role="search">
-                <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
-                <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes">
-              </div>
-              <button class="search-icon-btn active" aria-label="Filtros" aria-pressed="true">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
-              </button>
-              <button class="search-icon-btn" aria-label="Ordenar">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
-              </button>
-              <button class="search-icon-btn" aria-label="Vista en grilla">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              </button>
-            </div>
+          <div class="docs-preview full-width">
+            <div data-island="search-actions-showcase"></div>
           </div>
           <p class="cg-caption" style="margin-top:8px;">Estado activo (filtro aplicado): el botón muestra <code>--color-surface-container-high</code> con <code>aria-pressed="true"</code> — mismo tratamiento que el estado Presionado de <code>btn-tertiary</code>.</p>
         </section>
@@ -19480,14 +19375,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <li>Los filtros activos se muestran como <a href="#" onclick="navigate('c-chip');return false;">filter chips</a> debajo de la fila de búsqueda.</li>
           </ul>
           <div class="docs-preview full-width" style="margin-top:16px;">
-            <div class="search-row">
-              <div class="search-bar" role="search">
-                <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
-                <input class="search-bar-input" type="search" placeholder="Buscar..." aria-label="Buscar">
-              </div>
-              <button class="search-icon-btn" aria-label="Filtros"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button>
-              <button class="search-icon-btn" aria-label="Ordenar"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg></button>
-            </div>
+            <div data-island="search-desktop-showcase"></div>
           </div>
           <p class="cg-caption" style="margin-top:8px;">La search bar (40px) y los icon buttons comparten la misma grilla horizontal.</p>
         </section>
@@ -19500,10 +19388,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <li>Las acciones secundarias pueden colapsar en botones de ícono o en un menú de desbordamiento.</li>
           </ul>
           <div class="docs-preview full-width" style="margin-top:16px;">
-            <div class="search-bar" role="search" style="max-width:100%;">
-              <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
-              <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes">
-            </div>
+            <div data-island="search-bar-mobile-showcase"></div>
           </div>
           <p class="cg-caption" style="margin-top:8px;">Search bar standalone (56px), ancho completo. Las acciones secundarias se colapsan.</p>
         </section>
@@ -19600,11 +19485,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
           <h2 class="docs-section-title">Search bar — HTML</h2>
           <p class="docs-section-desc">Ícono inicial + input + elemento final opcional (avatar o ícono de acción). Envolvé el conjunto en <code>role=&quot;search&quot;</code> para que sea un landmark navegable.</p>
           <div class="bd-stage" style="margin-bottom:16px">
-            <div class="search-bar" role="search">
-              <span class="search-bar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
-              <input class="search-bar-input" type="search" placeholder="Buscar candidatos" aria-label="Buscar candidatos">
-              <span class="search-bar-avatar">AB</span>
-            </div>
+            <div data-island="search-bar-showcase"></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
@@ -19627,18 +19508,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
           <h2 class="docs-section-title">Search + botones de acción — HTML</h2>
           <p class="docs-section-desc">Patrón canónico para cualquier contexto donde la búsqueda convive con acciones (listas, tablas, dashboards). Usá <code>.search-row</code> como wrapper y <code>.search-icon-btn</code> para cada acción.</p>
           <div class="bd-stage" style="margin-bottom:16px">
-            <div class="search-row">
-              <div class="search-bar" role="search">
-                <span class="search-bar-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg></span>
-                <input class="search-bar-input" type="search" placeholder="Buscar candidatos" aria-label="Buscar candidatos">
-              </div>
-              <button class="search-icon-btn active" aria-label="Filtros" aria-pressed="true">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
-              </button>
-              <button class="search-icon-btn" aria-label="Ordenar">
-                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
-              </button>
-            </div>
+            <div data-island="search-actions-code-showcase"></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>

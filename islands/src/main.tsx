@@ -13,6 +13,7 @@ import { ProgressCircularShowcase, ProgressLinearShowcase } from "./islands/Prog
 import { MenuShowcase } from "./islands/MenuShowcase"
 import { SliderShowcase } from "./islands/SliderShowcase"
 import { InputShowcase, TextareaShowcase, SelectShowcase } from "./islands/FormShowcases"
+import { InputBasic, InputPlaceholder, InputRequired, InputDisabled, InputFocus, InputGrid, InputNumber, InputDate } from "./islands/InputPhaseB"
 import { TabsShowcase } from "./islands/TabsShowcase"
 import { DialogShowcase } from "./islands/DialogShowcase"
 import { BadgeShowcase } from "./islands/BadgeShowcase"
@@ -28,6 +29,8 @@ import { SheetShowcase } from "./islands/SheetShowcase"
 import { CarouselShowcase } from "./islands/CarouselShowcase"
 import { DatePickerShowcase } from "./islands/DatePickerShowcase"
 import { SegmentedButtonShowcase } from "./islands/SegmentedButtonShowcase"
+import { SegBtnSizeSm, SegBtnSizeMd, SegBtnSizeLg, SegBtnStateDefault, SegBtnStateSelected, SegBtnStateDisabled, SegBtnDoViews, SegBtnDontActions, SegBtnDoPeriod, SegBtnDontTooMany } from "./islands/SegBtnPhaseB"
+import { SearchActionsShowcase, SearchDesktopShowcase, SearchBarMobileShowcase, SearchBarShowcase as SearchBarPhaseB, SearchActionsCodeShowcase } from "./islands/SearchPhaseB"
 import { VacancyCardShowcase } from "./islands/VacancyCardShowcase"
 import { PersonCardShowcase } from "./islands/PersonCardShowcase"
 import { KanbanShowcase } from "./islands/KanbanShowcase"
@@ -51,6 +54,14 @@ const registry: Record<string, ComponentType> = {
   "menu-showcase": MenuShowcase,
   "slider-showcase": SliderShowcase,
   "input-showcase": InputShowcase,
+  "input-basic-showcase": InputBasic,
+  "input-placeholder-showcase": InputPlaceholder,
+  "input-required-showcase": InputRequired,
+  "input-disabled-showcase": InputDisabled,
+  "input-focus-showcase": InputFocus,
+  "input-grid-showcase": InputGrid,
+  "input-number-showcase": InputNumber,
+  "input-date-showcase": InputDate,
   "textarea-showcase": TextareaShowcase,
   "select-showcase": SelectShowcase,
   "tabs-showcase": TabsShowcase,
@@ -63,6 +74,11 @@ const registry: Record<string, ComponentType> = {
   "table-basic": TableBasic,
   "table-clickable": TableClickable,
   "search-showcase": SearchShowcase,
+  "search-actions-showcase": SearchActionsShowcase,
+  "search-desktop-showcase": SearchDesktopShowcase,
+  "search-bar-mobile-showcase": SearchBarMobileShowcase,
+  "search-bar-showcase": SearchBarPhaseB,
+  "search-actions-code-showcase": SearchActionsCodeShowcase,
   "card-showcase": CardShowcase,
   "stat-card-showcase": StatCardShowcase,
   "stat-card-grid": StatCardGrid,
@@ -72,6 +88,16 @@ const registry: Record<string, ComponentType> = {
   "carousel-showcase": CarouselShowcase,
   "date-picker-showcase": DatePickerShowcase,
   "seg-btn-showcase": SegmentedButtonShowcase,
+  "seg-btn-size-sm": SegBtnSizeSm,
+  "seg-btn-size-md": SegBtnSizeMd,
+  "seg-btn-size-lg": SegBtnSizeLg,
+  "seg-btn-state-default": SegBtnStateDefault,
+  "seg-btn-state-selected": SegBtnStateSelected,
+  "seg-btn-state-disabled": SegBtnStateDisabled,
+  "seg-btn-do-views": SegBtnDoViews,
+  "seg-btn-dont-actions": SegBtnDontActions,
+  "seg-btn-do-period": SegBtnDoPeriod,
+  "seg-btn-dont-toomany": SegBtnDontTooMany,
   "vacancy-card-showcase": VacancyCardShowcase,
   "person-card-showcase": PersonCardShowcase,
   "kanban-showcase": KanbanShowcase,
