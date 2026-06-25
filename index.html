@@ -19,10 +19,9 @@
 <link rel="stylesheet" href="islands/dist/embassy-islands.css?v=26">
 <script type="module" src="islands/dist/embassy-islands.js?v=26"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
-<!-- @material/web runtime removed (2026-06): every component page now renders via
-     the shadcn/Tailwind React islands (islands/dist/embassy-islands.js); no live
-     <md-*> elements remain. css/md-sys-bridge.css is kept — the Embassy CSS layer
-     and Segmented Button still consume its --md-sys-color-* aliases. -->
+<!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
+     css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
+     --md-sys-color-* alias tokens. -->
 <style>
 /* ═══════════════════════════════════════════
    AMALGAMA DS — Documentation Shell v2.0
@@ -18191,6 +18190,7 @@ import { Separator } from "@amalgama/ds/separator"
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'guidelines')">Guidelines</button>
+        <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'accessibility')">Accessibility</button>
         <button class="ds-comp-tab-btn" onclick="switchCompTab(this,'code')">Code</button>
       </div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
