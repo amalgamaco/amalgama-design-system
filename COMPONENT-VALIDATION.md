@@ -82,3 +82,16 @@ Legend: ⬜ not reviewed · 🔍 reviewing · ✅ validated · ⚠ issue found
 
 ### Correction to earlier ✅ marks
 Button/Segmented Button/Badge/Chip/Input/Textarea/Select were marked ✅ on tokens+Code only. Per the structural rubric they are **minor-gaps**: Overview compliant + Code tab now correct, but Specs/Guidelines/Code still contain CSS-class examples that should be islands (Button alone: 19), and most lack the Overview variant legend.
+
+---
+
+## Phase B complete (2026-06-25) — islandization
+
+All 20 flagged components islandized across 2 parallel batches → **124 `[data-island]` slots**, 0 console errors, verified light + dark.
+- **Batch 1:** button (34), seg-btn (10), input (8), search (5) = 57.
+- **Batch 2:** textarea (2), select (3), badge (3), tabs (1), dialog (1), snackbar (4), skeleton (1), kanban (1), vacancy (1), person (1), avatar (3), chip (4) = 25.
+- **Empty (correctly no conversion):** basic-card (nav-card CSS, no pkg), empty (already islandized), nav-drawer/topbar (shells, no pkg).
+- New showcase files: `*PhaseB.tsx` (16). Wired in `main.tsx`; slots swapped in `index.html` (v=25).
+- Notable: button States section (5 hardcoded-hex strips, light+dark side-by-side) collapsed to one single-mode island — fixed the token + one-mode violations. do/don't panels render the real component shown misused.
+
+**Remaining before gate:** prune dead `.bst-*` CSS (harmless); optional — loading Accessibility tab. Then full sign-off → push + PR + deploy + review.
