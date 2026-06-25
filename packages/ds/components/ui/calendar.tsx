@@ -11,10 +11,13 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
       className={cn("p-3 bg-surface border border-border rounded-lg inline-block", className)}
       classNames={{
         months: "flex gap-4",
-        month: "space-y-3",
-        month_caption: "flex items-center justify-between px-1 pb-1",
+        month: "space-y-3 relative",
+        // Caption centers the month label; the nav row is absolutely overlaid on top
+        // so the chevrons split to the edges (prev-left / next-right) — react-day-picker
+        // v10 renders nav in normal flow otherwise, stacking both chevrons on the left.
+        month_caption: "flex items-center justify-center h-8 mb-1 px-1",
         caption_label: "font-heading text-body-md font-semibold text-fg",
-        nav: "flex items-center gap-1",
+        nav: "absolute top-0 inset-x-0 z-10 flex items-center justify-between h-8 px-1",
         button_previous: [
           "flex h-7 w-7 items-center justify-center rounded hover:bg-surface-variant text-fg",
           "disabled:opacity-30 disabled:cursor-not-allowed transition-colors",

@@ -25,7 +25,7 @@ export const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "-mb-px cursor-pointer border-b-2 border-transparent px-4 py-2.5 text-sm font-medium text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-foreground data-[state=active]:border-primary data-[state=active]:text-primary",
+      "-mb-px cursor-pointer border-b-2 border-transparent px-4 py-2.5 text-sm font-medium text-on-surface-variant outline-none transition-colors hover:text-on-surface focus-visible:text-on-surface data-[state=active]:border-primary data-[state=active]:text-primary",
       className
     )}
     {...props}
@@ -39,7 +39,7 @@ export const TabsContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <TabsPrimitive.Content
     ref={ref}
-    className={cn("py-4 text-sm text-muted-foreground outline-none", className)}
+    className={cn("py-4 text-sm text-on-surface-variant outline-none", className)}
     {...props}
   />
 ))

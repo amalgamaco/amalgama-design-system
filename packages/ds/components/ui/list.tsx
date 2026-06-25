@@ -8,7 +8,7 @@ export const List = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} role="list" className={cn("flex flex-col bg-card text-foreground", className)} {...props} />
+  <div ref={ref} role="list" className={cn("flex flex-col bg-card text-on-surface", className)} {...props} />
 ))
 List.displayName = "List"
 
@@ -27,14 +27,14 @@ export const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
       className={cn(
         "flex min-h-14 flex-col justify-center gap-0.5 px-4 py-2.5 outline-none",
         asButton &&
-          "cursor-pointer transition-colors hover:bg-muted focus-visible:bg-muted",
+          "cursor-pointer transition-colors hover:bg-surface-variant focus-visible:bg-surface-variant",
         className
       )}
       {...props}
     >
       <span className="text-sm leading-tight">{headline}</span>
       {supporting && (
-        <span className="text-[12.5px] leading-tight text-muted-foreground">{supporting}</span>
+        <span className="text-[12.5px] leading-tight text-on-surface-variant">{supporting}</span>
       )}
     </div>
   )

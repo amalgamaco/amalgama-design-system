@@ -18,7 +18,7 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-1/2 top-1/2 z-[100] w-[calc(100%-2rem)] max-w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-card p-0 text-foreground shadow-xl outline-none",
+        "fixed left-1/2 top-1/2 z-[100] w-[calc(100%-2rem)] max-w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-card p-0 text-on-surface shadow-xl outline-none",
         className
       )}
       {...props}
@@ -33,7 +33,7 @@ export function DialogHeader({ className, children, ...props }: React.HTMLAttrib
   return (
     <div className={cn("flex items-center justify-between border-b border-border px-5 py-4", className)} {...props}>
       {children}
-      <DialogPrimitive.Close className="flex size-7 items-center justify-center rounded-md text-muted-foreground outline-none transition-colors hover:bg-muted hover:text-foreground">
+      <DialogPrimitive.Close className="flex size-7 items-center justify-center rounded-md text-on-surface-variant outline-none transition-colors hover:bg-surface-variant hover:text-on-surface">
         <X className="size-4" />
       </DialogPrimitive.Close>
     </div>
@@ -49,7 +49,7 @@ export const DialogTitle = React.forwardRef<
 DialogTitle.displayName = "DialogTitle"
 
 export function DialogBody({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("px-5 py-4 text-sm text-muted-foreground", className)} {...props} />
+  return <div className={cn("px-5 py-4 text-sm text-on-surface-variant", className)} {...props} />
 }
 
 export function DialogFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
