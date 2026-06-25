@@ -17,13 +17,16 @@ Always load in this order:
 
 ```html
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css">   <!-- 1. tokens (required) -->
-<link rel="stylesheet" href="css/base.css">        <!-- 2. reset + typography base (required) -->
-<link rel="stylesheet" href="css/components.css">  <!-- 3. barrel: all components -->
-<link rel="stylesheet" href="css/layout.css">      <!-- 4. only for full app shell (sidebar, topbar, avatar) -->
+<link rel="stylesheet" href="css/variables.css">     <!-- 1. tokens (required) -->
+<link rel="stylesheet" href="css/md-sys-bridge.css"> <!-- 1b. optional: exposes MD3 --md-sys-color-* names as aliases of --color-* roles; load right after variables -->
+<link rel="stylesheet" href="css/base.css">          <!-- 2. reset + typography base (required) -->
+<link rel="stylesheet" href="css/components.css">    <!-- 3. barrel: all components -->
+<link rel="stylesheet" href="css/layout.css">        <!-- 4. only for full app shell (sidebar, topbar, avatar) -->
 ```
 
 Instead of the barrel (`components.css`), you can cherry-pick individual files from `css/components/`.
+
+**MD3 system bridge (`css/md-sys-bridge.css`)** — optional layer that aliases Material Design 3's real system-token names (`--md-sys-color-*`) onto Embassy's `--color-*` roles, and maps all `--md-sys-typescale-*-font` tokens to `var(--font-body)` (Inter) so `@material/web` components don't fall back to Roboto/serif. (After editing the bridge, bump the `?v=` on its `<link>` in `index.html` or the browser serves the cached old file.) Components that adopt MD3's component-token layer (currently **Segmented Button** — the reference pattern; see GOVERNANCE.md §2.2) default each token to `var(--md-sys-color-X, var(--color-X))`: with the bridge loaded they use Material's naming; without it they fall back to the Embassy role. Embassy's palette stays the single source of truth either way, and the bridge needs no dark override (the `--color-*` roles already recalibrate). This adopts MD3's token *structure*, **not** the `material-web` component implementations (evaluated June 2026 and rejected: maintenance mode + lacks ~70% of Embassy's components).
 
 **Tokens are the law.** All colors via `var(--color-*)` or semantic aliases (`--accent`, `--bg`, `--border`), radii via `var(--radius-*)` (scaled by component size, never by variant — see GOVERNANCE.md §4.3), shadows via `var(--shadow-*)`, spacing via `var(--space-*)`. Never raw hex. Dark mode is automatic: set `data-theme="dark"` on `<html>` — the semantic `--color-*` layer recalibrates itself; components need zero per-theme overrides.
 
@@ -89,7 +92,33 @@ When restyling or rebuilding an existing screen, **DS rules win over visual fide
 
 **Extended (domain-oriented):** Vacancy Card, Person Card, Kanban, Create Form, Placeholder — CSS in `css/components/`, docs in `docs/`. Use for recruiting/HR product surfaces.
 
-**Roadmap (documented as "Coming soon", no consumable code yet):** checkbox, radio, switch, menu, tooltip, slider, date picker, sheet, list, loading, carousel, divider. **Do not invent styles for these** — compose from existing components or flag the gap.
+**shadcn/Radix islands (interactive components, rendered in `index.html` only):** the
+interactive components are React (shadcn/ui + Radix) + Tailwind v4, built in `islands/`
+to `islands/dist/embassy-islands.{js,css}` and mounted into `[data-island]` slots in
+`index.html`. They consume tokens via the Embassy→Tailwind bridge (`islands/src/styles.css`)
+and import their implementations from the in-repo **`@amalgama/ds`** package at
+**`packages/ds/`** (linked via `file:../packages/ds`; `@ds/*` alias → the package's
+`exports`). This repo is a **monorepo**: `packages/ds/` is the single source of truth for
+component code, the root is the docs + tokens + governance. (See `islands/INTEGRATION.md`
+and `CONSOLIDATION-PLAN.md`.) Covered: **checkbox, switch, radio, slider, menu (dropdown),
+list, divider (separator), progress, chip, input/textarea, select, tabs, dialog, tooltip,
+date picker, sheet, carousel, segmented-button, avatar, snackbar (sonner)** + domain cards
+(kanban/person/vacancy).
+
+> **History:** an earlier experiment rendered these via official `@material/web` web
+> components. That runtime was **removed (2026-06)** — there are **0 live `<md-*>` elements**.
+> `css/md-sys-bridge.css` stays (Embassy CSS + Segmented Button still consume `--md-sys-color-*`).
+> These islands are a deliberate exception to the no-build/CSS-only rule; there is **no Embassy
+> `css/components/*.css` for islands-only components** — do not write one. Components that DO have
+> a `css/components/*.css` (button, badge, card, chip, search, etc.) keep it as the **buildless
+> consumption layer** for the `design-system` skill (artifacts/dashboards/presentations); the
+> island is the docs-site rendering of the same component.
+
+**Canonical Overview structure (all component pages):** badge → title → subtitle → 4 tabs
+(Overview / Guidelines / Accessibility / Code) → key-characteristic bullets → single-mode
+variant showcase → numbered references. **Show only one color mode at a time — no side-by-side
+light/dark; examples follow the global theme toggle.** Note: in dark mode Embassy `--color-primary`
+is white, so selected controls render white — see [[md3-structure-adoption]] memory.
 
 Component relationships: filter **chips** refine **search** results (chips below the search bar) and toolbar filters; **search-field** (toolbar.css) is the compact in-toolbar search, **search-bar** (search.css) is the standalone 56px component.
 

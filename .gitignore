@@ -1,2 +1,13 @@
 .DS_Store
 .claude/
+
+# islands build deps (the built dist/ IS committed/served)
+islands/node_modules/
+
+# Session working artifacts (audit/scratch)
+audit-results.json
+phase-a-patches.json
+phase-b-batch1.json
+phase-b-batch2.json
+specs-svg-audit.json
+index.html.bak-*

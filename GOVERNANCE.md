@@ -35,16 +35,32 @@ Primitives  →  Color Roles  →  Semantic Aliases  →  (component code)
 | **Primitives** | `css/variables.css` (top) | `--primary-900`, `--neutral-100`, `--secondary-200` | Color Roles only |
 | **Color Roles** | `css/variables.css` (middle) | `--color-primary`, `--color-disabled`, `--color-focus` | Component CSS, aliases |
 | **Semantic aliases** | `css/variables.css` (bottom) | `--bg`, `--border`, `--text-primary`, `--interactive` | Product CSS, layout code |
-| **Component tokens** | _do not exist for most components_ | ~~`--button-bg`~~ (eliminated) | — |
+| **Component tokens** | _opt-in per component; see §2.2_ | `--seg-btn-selected-container-color` (segmented-button, MD3 layer) | That component's CSS only |
+| **MD3 system aliases** | `css/md-sys-bridge.css` (optional) | `--md-sys-color-secondary-container` → `var(--color-secondary-container)` | Component tokens that adopt MD3 naming |
 
 ### 2.2 When a component may introduce its own token
 
-Almost never. A component token is justified only when:
+Almost never — **with one sanctioned exception (the MD3 component-token layer, below)**. Outside that exception, a component token is justified only when:
 - The value is specific to that component AND cannot be expressed as any existing Color Role
 - The token will be consumed by 2+ files (not just the component's own CSS)
 - A designer decision was made and documented
 
 In all other cases, consume a Color Role directly. The `--button-secondary-*` tokens were eliminated precisely because they duplicated `--color-secondary-container` / `--color-on-secondary-container`.
+
+#### Sanctioned exception — MD3 component-token layer
+
+A component **may** declare a full component-token layer that mirrors Material Design 3's "Tokens and specs" table — **one custom property per MD3 component token**, declared on the component root, consumed by every rule. **Reference implementation: `segmented-button.css`.** This is normally a "shadow token" (§2.3) but is permitted here because it reproduces MD3's *documented three-layer architecture* (palette → system role → component token → CSS), making the component's spec table machine-mappable and each instance themeable by overriding one token.
+
+Rules for adopting this pattern:
+1. **Every** component token defaults to its MD3 system role via the bridge, with the Embassy role as fallback: `var(--md-sys-color-X, var(--color-X))`. Never default to a primitive or a hardcoded value.
+2. Token names follow MD3's token path, kebab-cased and prefixed with the component (`md.comp.segmented-button.selected.container.color` → `--seg-btn-selected-container-color`).
+3. The CSS rules consume **only** component tokens — never a `--color-*` role or `--md-sys-color-*` name directly.
+4. The header comment carries the MD3-token → component-token → default mapping table.
+5. Deliberate divergences from MD3 defaults (e.g. the focus ring) are documented in the header.
+
+The **MD3 system bridge** (`css/md-sys-bridge.css`) exposes `--md-sys-color-*` (Material's real system-token names) as aliases of the Embassy `--color-*` roles. It is the only place those names are defined; it needs no dark override because the `--color-*` roles already recalibrate. It is optional to load — the `var(--md-sys-color-X, var(--color-X))` fallback keeps adopting components working without it (they resolve to Embassy roles directly).
+
+> Why this is **not** the rejected `material-web` path: this adopts MD3's token *structure and naming* in plain Embassy CSS (no build, no Lit, no Shadow DOM, Embassy palette as source of truth). It does **not** adopt MD3's component *implementations*. See the architecture note in this section's history (June 2026 evaluation: `material-web` is in maintenance mode and lacks ~70% of Embassy's components).
 
 ### 2.3 Prohibited patterns
 
