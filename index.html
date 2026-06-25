@@ -7990,7 +7990,7 @@ export { Input }</code></pre>
           <ul>
             <li>Campos de selección legacy migran a la anatomía de <code>form.css</code>: <code>.select-wrapper</code> dentro de <code>.field-group</code> con label.</li>
             <li>Filtros interactivos tipo toggle no son selects: usar <code>.chip</code> / <code>.chip-selected</code>.</li>
-            <li>Radio, checkbox y menu están en roadmap (sin código consumible) — no inventar estilos: usar el select nativo de <code>form.css</code> o flaggear el gap.</li>
+            <li>Para selección binaria usá Checkbox/Switch; para acciones en un menú, Menu — todos disponibles en <code>@amalgama/ds</code>.</li>
           </ul>
         </div>
       </div>
@@ -14333,7 +14333,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <h1 class="ds-page-title">Mobile</h1>
       <p class="ds-page-desc">Implementation guide for iOS and Android using the Amalgama Design System token layer and component library.</p>
       <div class="ds-callout">
-        <strong>En roadmap.</strong> Esta página es parte del roadmap del Amalgama Design System y se va a documentar en una próxima versión.
+        <strong>Implementado.</strong> Avatar se consume desde <code>@amalgama/ds/avatar</code> (<code>Avatar</code> / <code>AvatarImage</code> / <code>AvatarFallback</code>), tematizado con tokens Embassy.
       </div>
     </section>
     <!-- ═══════════ DESIGN TOKENS ═══════════ -->
@@ -14636,9 +14636,9 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       </div>
       <div class="docs-section">
         <div class="ds-callout">
-          <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
+          <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
           <br><br><strong>Relación con Material Design 3:</strong> La Top Bar de Embassy es una adaptación para el producto de Amalgama (breadcrumbs + notificaciones + avatar), no una implementación directa del MD3 App Bar. MD3 define 4 variantes — Small (64&nbsp;px), Small centrado (64&nbsp;px), Medium (112&nbsp;px) y Large (152&nbsp;px) — con contenedor <code>$surface</code> por defecto que cambia a <code>$surface-container</code> + elevación nivel&nbsp;2 al hacer scroll. Las variantes Medium y Large colapsan a Small al scrollear. Estas variantes están en el roadmap; la Top Bar actual cubre el caso de uso de shell de producto.
-          <br><br><strong>Mientras tanto:</strong> usá el topbar del app shell (css/layout.css).
+          <br><br><strong>Implementación:</strong> el App Bar es el topbar del app shell (<code>css/layout.css</code>); ver también la página Top Bar.
         </div>
       </div>
     </section>
@@ -14670,7 +14670,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel" data-tab="specs">
         <div class="docs-section">
           <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
+            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
             <br><br><strong>Variantes MD3 (referencia para implementación futura):</strong>
             <ul style="margin:8px 0 0;padding-left:20px;font-size:13px;line-height:1.8;">
               <li><b>Multi-browse</b> — ítem hero grande + ítem siguiente visible (peek ~56&nbsp;dp); scroll horizontal libre.</li>
@@ -14679,15 +14679,15 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
               <li><b>Full-screen</b> — un ítem por vez, ocupa todo el viewport; snap en swipe.</li>
             </ul>
             <br><strong>Especificaciones clave:</strong> radio de ítem <code>corner-extra-large</code> (28&nbsp;px) · gap entre ítems 8&nbsp;dp · elevación en hover nivel&nbsp;1 · indicador de foco usa <code>$secondary</code> (no <code>$primary</code>) · scroll horizontal con momentum y snap.
-            <br><br><strong>Mientras tanto:</strong> grilla con scroll horizontal (patrón kanban-board) o flaggear si se necesita carrusel real.
+            
           </div>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
         <div class="docs-section">
           <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> grilla con scroll horizontal (patrón kanban-board) o flaggear si se necesita carrusel real.
+            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
+            
           </div>
         </div>
       </div>
@@ -18056,7 +18056,7 @@ const [on, setOn] = useState(false)
             <li>La variante de input por teclado es intercambiable con el calendario via ícono de edición.</li>
             <li>Especificaciones: celda de día 40×40 dp, ancho de calendario 360 dp, radio de diálogo 28 dp.</li>
             <li>La fecha seleccionada usa relleno <code>--color-primary</code>; hoy se marca con borde circular; el rango usa <code>--color-secondary-container</code>.</li>
-            <li><strong>En roadmap:</strong> todavía sin código consumible — componé con <code>input type="date"</code> + <code>.date-input-wrapper</code> mientras tanto.</li>
+            <li><strong>React:</strong> <code>import { Calendar } from "@amalgama/ds/calendar"</code> — basado en react-day-picker, tematizado con tokens Embassy.</li>
           </ul>
           <ol class="docs-variant-legend" style="margin:16px 0 0;padding-left:20px;font-size:13px;line-height:1.8;color:var(--text-secondary);">
             <li><b>Docked</b> — campo de texto outlined + calendario desplegable debajo (desktop/tablet).</li>
@@ -18069,7 +18069,7 @@ const [on, setOn] = useState(false)
       <div class="ds-comp-tab-panel" data-tab="specs">
         <div class="docs-section">
           <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
+            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
             <br><br><strong>Variantes MD3 (referencia para implementación futura):</strong>
             <ul style="margin:8px 0 0;padding-left:20px;font-size:13px;line-height:1.8;">
               <li><b>Docked</b> — campo de texto outlined + calendario desplegable debajo (desktop/tablet).</li>
@@ -18079,26 +18079,37 @@ const [on, setOn] = useState(false)
             </ul>
             <br><strong>Especificaciones clave:</strong> celda de día <b>40&nbsp;×&nbsp;40&nbsp;dp</b> · ancho del calendario <b>360&nbsp;dp</b> · radio del diálogo <b>28&nbsp;dp</b> · fecha seleccionada → relleno <code>$primary</code> + texto <code>$on-primary</code> · fecha de hoy → borde circular <code>$primary</code> sin relleno · rango seleccionado → tira <code>$secondary-container</code> entre fechas de inicio/fin.
             <br><br><strong>Regla de ventana:</strong> viewport compacto (mobile) → full-screen modal; viewport medio/expandido → docked o modal estándar. No escalar el picker proporcionalmente al tamaño de la ventana.
-            <br><br><strong>Mientras tanto:</strong> <code>input type="date"</code> con <code>.date-input-wrapper</code> de form.css.
+            
           </div>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
         <div class="docs-section">
           <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
+            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
             <br><br><strong>Guías de uso MD3 (referencia):</strong> para fechas lejanas (ej. fecha de nacimiento), usá el modal date input o el docked — la navegación por calendario es impráctica para fechas muy distantes. Nunca escales el picker proporcionalmente al viewport. El modal y el input de fecha son intercambiables via ícono de edición en el encabezado.
-            <br><br><strong>Mientras tanto:</strong> <code>input type="date"</code> con <code>.date-input-wrapper</code> de form.css.
+            
           </div>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> <code>input type="date"</code> con <code>.date-input-wrapper</code> de form.css.
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn)</h2>
+          <p class="docs-section-desc">El calendario se implementa con <code>react-day-picker</code> tematizado con tokens Embassy (celda de día seleccionada en <code>--color-primary</code>, hoy con borde, rango en <code>--color-secondary-container</code>). Importá <code>Calendar</code> desde <code>@amalgama/ds/calendar</code>.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Calendar } from &quot;@amalgama/ds/calendar&quot;
+import { useState } from &quot;react&quot;
+
+// Selección simple
+const [date, setDate] = useState&lt;Date | undefined&gt;(new Date())
+&lt;Calendar mode=&quot;single&quot; selected={date} onSelect={setDate} /&gt;
+
+// Selección de rango
+const [range, setRange] = useState&lt;DateRange | undefined&gt;()
+&lt;Calendar mode=&quot;range&quot; selected={range} onSelect={setRange} /&gt;</code></pre>
           </div>
-        </div>
+        </section>
       </div>
     </section>
     <!-- ═══════════ DIALOG ═══════════ -->
@@ -19237,7 +19248,7 @@ import { Mic } from &quot;lucide-react&quot;
             <li><strong>Modal vs. standard:</strong> la variante modal incluye scrim sobre el contenido detrás; la standard queda attached al layout, sin scrim.</li>
             <li>El bottom sheet lleva drag handle centrado (32×4dp) y esquinas <code>corner-extra-large-top</code> (28dp arriba, 0dp abajo).</li>
             <li>Contiene contenido suplementario o acciones contextuales — no flujos largos ni navegación principal.</li>
-            <li><strong>En roadmap:</strong> todavía sin código consumible — componé con Modal o create-form mientras tanto.</li>
+            <li><strong>React:</strong> <code>import { Sheet, SheetContent } from "@amalgama/ds/sheet"</code> — panel lateral de Radix tematizado con tokens Embassy.</li>
           </ul>
           <div class="docs-preview">
             <div data-island="sheet-showcase"></div>
@@ -19251,8 +19262,8 @@ import { Mic } from &quot;lucide-react&quot;
       <div class="ds-comp-tab-panel" data-tab="specs">
         <div class="docs-section">
           <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> Modal (css/components/modal.css); si el flujo es largo, página completa con create-form.
+            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
+            
             <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
             <ul>
               <li><b>Bottom Sheet:</b> esquinas <code>corner-extra-large-top</code> (28dp arriba, 0dp abajo), drag handle centrado <code>32×4dp</code>, fondo <code>$surface-container-low</code>, elevación nivel 1. Variante modal: incluye scrim sobre el contenido detrás.</li>
@@ -19266,18 +19277,29 @@ import { Mic } from &quot;lucide-react&quot;
       <div class="ds-comp-tab-panel" data-tab="guidelines">
         <div class="docs-section">
           <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> Modal (css/components/modal.css); si el flujo es largo, página completa con create-form.
+            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
+            
           </div>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> Modal (css/components/modal.css); si el flujo es largo, página completa con create-form.
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn)</h2>
+          <p class="docs-section-desc">Sheet es el panel lateral de Radix (Dialog) tematizado con tokens Embassy. Importá los subcomponentes desde <code>@amalgama/ds/sheet</code>; <code>side</code> controla el borde (top/right/bottom/left).</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from &quot;@amalgama/ds/sheet&quot;
+import { Button } from &quot;@amalgama/ds/button&quot;
+
+&lt;Sheet&gt;
+  &lt;SheetTrigger asChild&gt;&lt;Button variant=&quot;secondary&quot;&gt;Abrir panel&lt;/Button&gt;&lt;/SheetTrigger&gt;
+  &lt;SheetContent side=&quot;right&quot;&gt;
+    &lt;SheetHeader&gt;&lt;SheetTitle&gt;Filtros&lt;/SheetTitle&gt;&lt;/SheetHeader&gt;
+    {/* contenido */}
+  &lt;/SheetContent&gt;
+&lt;/Sheet&gt;</code></pre>
           </div>
-        </div>
+        </section>
       </div>
     </section>
     <!-- ═══════════ SLIDERS ═══════════ -->
@@ -19452,7 +19474,7 @@ import { Mic } from &quot;lucide-react&quot;
             <li>Aparece al hacer hover, focus o tap sobre un elemento; el texto debe ser breve y no repetir el contenido adyacente.</li>
             <li>Dos tipos: <b>plain tooltip</b> (etiqueta corta sobre <code>inverse-surface</code>) y <b>rich tooltip</b> (con subheader, cuerpo y acciones opcionales).</li>
             <li>Timing: 500ms de hover para aparecer, inmediato en foco de teclado; se cierra al salir el cursor o con Escape.</li>
-            <li>En roadmap: todavía sin código consumible. Mientras tanto usá el atributo <code>title</code> nativo o mostrá la información como texto visible.</li>
+            <li><strong>React:</strong> <code>import { Tooltip, TooltipContent } from "@amalgama/ds/tooltip"</code> — Radix tematizado con tokens Embassy (envolvé en <code>TooltipProvider</code>).</li>
           </ul>
           <div class="docs-preview">
             <div data-island="tooltip-showcase"></div>
@@ -19466,8 +19488,8 @@ import { Mic } from &quot;lucide-react&quot;
       <div class="ds-comp-tab-panel" data-tab="specs">
         <div class="docs-section">
           <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> atributo title nativo; si la información es esencial, mostrala como texto visible (hint de form.css).
+            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
+            
             <br><br><strong>Especificaciones MD3 (referencia para implementación futura):</strong>
             <ul>
               <li><b>Plain tooltip:</b> fondo <code>$inverse-surface</code>, texto <code>$inverse-on-surface</code>, esquinas <code>corner-extra-small</code> (4dp), altura mínima 24dp, padding <code>4dp vertical / 8dp horizontal</code>, ancho máx. 200dp, tipografía <code>body-small</code>. Sin elevación.</li>
@@ -19481,18 +19503,28 @@ import { Mic } from &quot;lucide-react&quot;
       <div class="ds-comp-tab-panel" data-tab="guidelines">
         <div class="docs-section">
           <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> atributo title nativo; si la información es esencial, mostrala como texto visible (hint de form.css).
+            <strong>Implementado</strong> vía <code>@amalgama/ds</code> (Tailwind + shadcn/Radix), tematizado con tokens Embassy.
+            
           </div>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
-        <div class="docs-section">
-          <div class="ds-callout">
-            <strong>En roadmap.</strong> Este componente todavía no tiene código consumible. <strong>No inventes estilos para este componente</strong> — componé con componentes existentes o flaggeá el gap (regla de CLAUDE.md / MIGRATION.md).
-            <br><br><strong>Mientras tanto:</strong> atributo title nativo; si la información es esencial, mostrala como texto visible (hint de form.css).
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn)</h2>
+          <p class="docs-section-desc">Tooltip usa Radix tematizado con tokens Embassy (<code>inverse-surface</code> / <code>inverse-on-surface</code>). Envolvé la app (o el árbol) en <code>TooltipProvider</code> una vez; <code>side</code> controla la posición. Importá desde <code>@amalgama/ds/tooltip</code>.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from &quot;@amalgama/ds/tooltip&quot;
+import { Button } from &quot;@amalgama/ds/button&quot;
+
+&lt;TooltipProvider&gt;
+  &lt;Tooltip&gt;
+    &lt;TooltipTrigger asChild&gt;&lt;Button variant=&quot;secondary&quot;&gt;Hover&lt;/Button&gt;&lt;/TooltipTrigger&gt;
+    &lt;TooltipContent side=&quot;top&quot;&gt;Texto de ayuda&lt;/TooltipContent&gt;
+  &lt;/Tooltip&gt;
+&lt;/TooltipProvider&gt;</code></pre>
           </div>
-        </div>
+        </section>
       </div>
     </section>
 
