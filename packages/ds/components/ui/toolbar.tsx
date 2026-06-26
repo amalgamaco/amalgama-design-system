@@ -1,3 +1,12 @@
+/**
+ * Toolbar — barra de búsqueda con filtros y acciones para listas de datos.
+ *
+ * Cuándo usar: barra de controles sobre listas/tablas — search-field compacto + filtros + acciones.
+ * Cuándo no: búsqueda standalone de página (usar search-bar de search.css).
+ * Reemplaza a: filter bars legacy.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/toolbar.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 

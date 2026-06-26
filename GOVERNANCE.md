@@ -15,7 +15,7 @@ When a rule in a component file conflicts with this document, **this document wi
 
 1. **Consistency over customization.** A component must look and behave identically wherever it is used — in a demo, in a spec, in a live product. Visual drift between contexts is always a bug.
 2. **Reuse before creating.** Before adding a new token, pattern, or component, verify that an existing one doesn't already solve the problem. The cost of a new abstraction is paid by every future reader and every consumer of the DS.
-3. **One source of truth.** Token values live in `css/variables.css`. Component markup contracts live in each component's `css/components/*.css` header. Behavior specifications live in `index.html`. Nothing else is authoritative.
+3. **One source of truth.** Token values live in `css/variables.css`. **Component code (variants, contracts) lives in `packages/ds/components/ui/*.tsx`** (Tailwind, self-contained — the `@amalgama/ds` package). Behavior specifications live in `index.html`. Nothing else is authoritative. *(The buildless `css/components/*.css` layer was **deleted** in 2026-06; each component's `Cuándo usar / Cuándo no` decision rule now lives in its `.tsx` header comment.)*
 4. **Semantic tokens only in component code.** Components must never reference primitive tokens directly (e.g. `--primary-900`, `--neutral-100`). They always go through a Color Role (`--color-primary`, `--color-disabled`). Primitives are referenced only in `css/variables.css` and in documentation that explicitly teaches the hierarchy.
 5. **No per-theme overrides in components.** Semantic tokens recalibrate in `[data-theme="dark"]` inside `variables.css`. A component that needs a `[data-theme="dark"]` override block has chosen the wrong token.
 6. **Zero hardcoded values.** No raw hex, no raw px for font-size or radius, no arbitrary `rgba()` outside `variables.css`. The only exception is computed values that cannot be expressed as a token reference (e.g. `color-mix()` expressions) — these are implementation expressions, not tokens, and must be documented as such.
@@ -91,8 +91,8 @@ A component has exactly one correct visual appearance. The live demo, the anatom
 
 | Property | Source of truth |
 |---|---|
-| Colors | `css/components/<name>.css` token references |
-| Spacing (padding, gap) | `css/components/<name>.css` — uses `--space-*` or absolute px anchored in the component spec |
+| Colors | `packages/ds/components/ui/<name>.tsx` token-backed Tailwind utilities |
+| Spacing (padding, gap) | `packages/ds/components/ui/<name>.tsx` — uses `--space-*`-backed utilities or absolute px anchored in the component spec |
 | Border radius | `css/variables.css` radius scale |
 | Elevation (shadow) | `css/variables.css` shadow scale |
 | Typography (size, weight, family) | `css/variables.css` font scale |
@@ -129,7 +129,7 @@ Note: XL is the only size with `font-weight: 700`. All others use `font-weight: 
 **Rules:**
 - No documentation, demo, or product implementation may introduce a button size that is not in this table.
 - All documentation (Overview, Specs, Measurements, Anatomy, Guidelines, Code, audit pages) must label button sizes using these names and class names — never MD3 density labels (Small/Medium/Large/Extra Large/Extra Extra Large) or dp values.
-- The source of truth for all pixel values is `css/components/button.css`. If a doc value conflicts with CSS, the CSS wins and the doc must be updated.
+- The source of truth for all pixel values is `packages/ds/components/ui/button.tsx`. If a doc value conflicts with the component, the component wins and the doc must be updated.
 - Every property in the table above (height, padding, font-size, font-weight, icon size, gap, radius) must be identical in every place a button of that size appears — token panels, anatomy diagrams, measurement SVGs, live demos, and product code.
 - Border radius per size is defined in §4.3.
 
@@ -153,7 +153,7 @@ A button with `--radius-full` is visually indistinguishable from a chip. The pil
 
 ### 4.3 Button radius scales with button size
 
-Radius on buttons is determined by **size, not by variant**. All five variants (Primary, Secondary, Tertiary, Text, Icon) at the same size must compute to the same `border-radius`. The radius is set once per size modifier in `css/components/button.css`:
+Radius on buttons is determined by **size, not by variant**. All five variants (Primary, Secondary, Tertiary, Text, Icon) at the same size must compute to the same `border-radius`. The radius is set once per size in `packages/ds/components/ui/button.tsx`:
 
 | Size class | Token | Value | Min-height |
 |---|---|---|---|
@@ -474,22 +474,21 @@ Documentation copy is **Spanish (rioplatense)**. Code, token names, and class na
 
 Use this checklist when adding a new component or updating an existing one.
 
-### 11.1 CSS file (`css/components/<name>.css`)
+### 11.1 Component file (`packages/ds/components/ui/<name>.tsx`)
 
-- [ ] Header comment includes: description, specs, `Dependencia:`, `Uso:` block with exact markup, `Cuándo usar`, `Cuándo no`, `Reemplaza a`
-- [ ] Zero raw hex values (only `var(--color-*)` or `var(--text-*)`)
-- [ ] Zero raw px for `font-size` (only `var(--font-size-*)`)
-- [ ] Border radius uses `var(--radius-*)` tokens; for buttons, verify size-to-radius mapping matches §4.3 (same size = same computed `border-radius` for all variants)
-- [ ] Shadow uses `var(--shadow-*)` tokens
-- [ ] Font families use `var(--font-body)`, `var(--font-heading)`, or `var(--font-mono)`
-- [ ] Spacing uses `var(--space-*)` or pinned spec values documented in the header
-- [ ] Focus: `outline: 2px solid var(--color-focus); outline-offset: 2px; box-shadow: 0 0 0 4px var(--color-focus-ring);` on `:focus-visible`
-- [ ] Disabled: `var(--color-disabled)` (bg) + `var(--color-on-disabled)` (text) + `cursor: not-allowed; pointer-events: none`
-- [ ] Hover: model declared in header comment, consistent within the component
-- [ ] Pressed: state layer or `filter:brightness()` applied on `:active:not(:disabled)`
-- [ ] No `[data-theme="dark"]` block in the component file
-- [ ] No `!important` flags
-- [ ] Added `@import` to `css/components.css`
+Author as a self-contained Tailwind component (see CONTRIBUTING §4). **Do not create a `css/components/*.css` file** — that layer was deleted (2026-06); component code lives only in the `.tsx`.
+
+- [ ] Header comment includes: description, `Cuándo usar`, `Cuándo no`, `Reemplaza a`
+- [ ] Variants defined in-file via `cva`; classes merged through `cn()`
+- [ ] Zero raw hex — color via token utilities (`bg-primary`, `text-on-surface`, …)
+- [ ] Zero arbitrary font sizes — use the scale (`text-body-md`, `text-label`, …)
+- [ ] Border radius uses `rounded-sm/md/lg/xl`; for buttons, size-to-radius mapping matches §4.3 (same size = same radius for all variants)
+- [ ] Shadow uses `shadow-sm/md/lg`; font families use `font-body` / `font-heading` / `font-mono`
+- [ ] Focus: `focus-visible:focus-ring` (the shared utility = `--color-focus` outline + `--color-focus-ring` halo)
+- [ ] Disabled: `disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed`
+- [ ] Hover / pressed states declared and consistent within the component
+- [ ] No `dark:` variants or `[data-theme="dark"]` overrides (dark mode is automatic via the token layer)
+- [ ] No custom CSS class; no new `tailwind.theme.css` utility for anything expressible as atomic Tailwind
 
 ### 11.2 Dark mode verification
 
@@ -512,7 +511,6 @@ Use this checklist when adding a new component or updating an existing one.
 - [ ] Token notes clarify: Color Role, primitive source, dark mode behavior
 - [ ] State demos in `bst-strip` cover: default, hover, focus, pressed, disabled (+ selected if applicable)
 - [ ] "Cuándo usar / No usés cuando" table is complete
-- [ ] Legacy `docs/<name>.html` page created and cross-linked
 
 ### 11.5 Accessibility
 
@@ -523,19 +521,18 @@ Use this checklist when adding a new component or updating an existing one.
 - [ ] Disabled state uses `disabled` attribute (not only visual styling) OR `aria-disabled="true"` + `pointer-events: none`
 - [ ] `role` and `aria-*` attributes documented in the Accessibility tab
 
-### 11.6 React wrapper
+### 11.6 React API
 
-- [ ] Pattern: `cva` (class-variance-authority) + `cn()` from `components/lib/utils.ts` + `React.forwardRef`
-- [ ] All styling in CSS classes — no inline styles in the React component
+- [ ] Pattern: `cva` (class-variance-authority) + `cn()` from `packages/ds/components/lib/utils.ts` + `React.forwardRef`
+- [ ] All styling via Tailwind utilities in the component — no inline styles, no custom CSS class
 - [ ] `disabled` prop wires to the HTML `disabled` attribute
 - [ ] `aria-busy` wired for loading states
-- [ ] Exports added to barrel file if one exists
+- [ ] Exported via the package `exports` map (import as `@amalgama/ds/<name>`); islands showcase added + bundle rebuilt if it renders in the docs site
 
 ### 11.7 Cross-references
 
 - [ ] Component inventory table in `CLAUDE.md` is updated
 - [ ] Related components are cross-linked in each other's `index.html` sections
-- [ ] Component appears in the `docs/` legacy catalog
 
 ---
 
@@ -785,7 +782,7 @@ A brand theme is a single CSS file loaded **after** `variables.css` and **before
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="brand/client-theme.css">  <!-- brand overrides -->
 <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
+<!-- Components are Tailwind now: @import "@amalgama/ds/tailwind.theme.css" + copy the .tsx -->
 ```
 
 ### 15.4 Verification after theming

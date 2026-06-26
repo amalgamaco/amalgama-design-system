@@ -1,3 +1,12 @@
+/**
+ * Search — búsqueda de contenido (search-bar standalone + search-view expandida).
+ *
+ * Cuándo usar: search-bar standalone para vistas de búsqueda (desktop y mobile). Acompañar con .search-icon-btn para acciones contextuales (Filtros, Ordenar, Vista).
+ * Cuándo no: reemplazar search-bar con un input de formulario (usar .form-input).
+ * Reemplaza a: inputs de búsqueda legacy, toolbar search-field.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/search.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 

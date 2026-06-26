@@ -1,3 +1,12 @@
+/**
+ * Tabs — pestañas para organizar contenido en secciones.
+ *
+ * Cuándo usar: alternar vistas dentro del MISMO contexto/página.
+ * Cuándo no: navegación entre páginas (usar sidebar de layout.css).
+ * Reemplaza a: tab bars legacy.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/tabs.css.
+ */
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
 import { cn } from "../lib/utils"

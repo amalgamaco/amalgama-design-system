@@ -1,3 +1,12 @@
+/**
+ * Card — contenedor básico con borde y fondo.
+ *
+ * Cuándo usar: contenedor genérico de contenido agrupado sobre superficie.
+ * Cuándo no: métricas (stat-card), personas (person-card), vacantes (vacancy-card).
+ * Reemplaza a: paneles/boxes legacy con borde o sombra.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/card.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 

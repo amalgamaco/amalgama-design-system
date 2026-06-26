@@ -1,180 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Skeleton — Amalgama DS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/variables.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="docs.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skeleton · Amalgama DS (movido)</title>
+<meta http-equiv="refresh" content="0; url=../index.html#c-skeleton">
+<link rel="canonical" href="../index.html#c-skeleton">
+<script>location.replace("../index.html#c-skeleton");</script>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Inter", sans-serif; margin: 0;
+         min-height: 100vh; display: grid; place-items: center; text-align: center;
+         background: #fff; color: #01164D; padding: 24px; }
+  @media (prefers-color-scheme: dark) { body { background: #13161F; color: #EAEBED; } }
+  a { color: #4F80FF; font-weight: 600; }
+  p { max-width: 32rem; line-height: 1.6; }
+</style>
 </head>
 <body>
-<div class="docs-app">
-  <aside class="docs-sidebar">
-    <a href="index.html" class="docs-sidebar-header">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      Amalgama DS
-      <span>v1.0</span>
-    </a>
-    <nav class="docs-nav">
-      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
-      <div class="docs-nav-section">Fundamentos</div>
-      <a href="logos.html" class="docs-nav-item">Logos</a>
-      <a href="tokens.html" class="docs-nav-item">Tokens</a>
-      <a href="typography.html" class="docs-nav-item">Tipografia</a>
-      <div class="docs-nav-section">Acciones</div>
-      <a href="button.html" class="docs-nav-item">Button</a>
-      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
-      <div class="docs-nav-section">Entrada de datos</div>
-      <a href="input.html" class="docs-nav-item">Input</a>
-      <a href="select.html" class="docs-nav-item">Select</a>
-      <a href="textarea.html" class="docs-nav-item">Textarea</a>
-      <a href="chip.html" class="docs-nav-item">Chip</a>
-      <a href="search.html" class="docs-nav-item">Search</a>
-      <div class="docs-nav-section">Visualizacion</div>
-      <a href="table.html" class="docs-nav-item">Table</a>
-      <a href="card.html" class="docs-nav-item">Card</a>
-      <a href="badge.html" class="docs-nav-item">Badge</a>
-      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
-      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
-      <a href="person-card.html" class="docs-nav-item">Person Card</a>
-      <a href="avatar.html" class="docs-nav-item">Avatar</a>
-      <div class="docs-nav-section">Retroalimentacion</div>
-      <a href="modal.html" class="docs-nav-item">Modal</a>
-      <a href="toast.html" class="docs-nav-item">Toast</a>
-      <a href="skeleton.html" class="docs-nav-item active">Skeleton</a>
-      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
-      <div class="docs-nav-section">Navegacion</div>
-      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
-      <a href="topbar.html" class="docs-nav-item">Topbar</a>
-      <a href="tabs.html" class="docs-nav-item">Tabs</a>
-      <div class="docs-nav-section">Layout</div>
-      <a href="kanban.html" class="docs-nav-item">Kanban</a>
-    </nav>
-  </aside>
-  <main class="docs-main">
-    <header class="docs-topbar">
-      <div class="docs-breadcrumb">
-        <a href="index.html">DS</a>
-        <span class="separator">/</span>
-        Skeleton
-      </div>
-    </header>
-    <div class="docs-content">
-      <div class="docs-page-header">
-        <h1 class="docs-page-title">Skeleton</h1>
-        <p class="docs-page-desc">Placeholders animados para estados de carga.</p>
-      </div>
-
-      <!-- Cuándo usar -->
-      <section class="docs-section">
-        <h2 class="docs-section-title">Cuándo usar</h2>
-        <table class="docs-props-table">
-          <tbody>
-            <tr><td><strong>Cuándo usar</strong></td><td>Carga de contenido con estructura conocida (mientras llega la data).</td></tr>
-            <tr><td><strong>Cuándo no</strong></td><td>Estados vacíos (usar <a href="empty-state.html">Empty State</a>). No usar spinners ad-hoc.</td></tr>
-            <tr><td><strong>Reemplaza a</strong></td><td>Spinners/loaders custom.</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- Instalacion TSX -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Instalacion</h2>
-        <p class="docs-section-desc">Copia <code>skeleton.tsx</code> a tu proyecto en <code>components/ui/skeleton.tsx</code></p>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cva, type VariantProps } from &quot;class-variance-authority&quot;
-import { cn } from &quot;@/lib/utils&quot;
-
-const skeletonVariants = cva(
-  &quot;skeleton&quot;,
-  {
-    variants: {
-      variant: {
-        text: &quot;skeleton-text&quot;,
-        title: &quot;skeleton-title&quot;,
-        card: &quot;skeleton-card&quot;,
-      },
-    },
-  }
-)
-
-export interface SkeletonProps
-  extends React.HTMLAttributes&lt;HTMLDivElement&gt;,
-    VariantProps&lt;typeof skeletonVariants&gt; {}
-
-const Skeleton = React.forwardRef&lt;HTMLDivElement, SkeletonProps&gt;(
-  ({ className, variant, ...props }, ref) =&gt; (
-    &lt;div
-      ref={ref}
-      className={cn(skeletonVariants({ variant, className }))}
-      {...props}
-    /&gt;
-  )
-)
-Skeleton.displayName = &quot;Skeleton&quot;
-
-export { Skeleton, skeletonVariants }</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>Dependencias</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install class-variance-authority clsx</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>CSS requerido</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>css/variables.css
-css/components/skeleton.css</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>Ejemplo de uso</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Skeleton } from &quot;@/components/ui/skeleton&quot;
-
-&lt;Skeleton variant=&quot;title&quot; /&gt;
-&lt;Skeleton variant=&quot;text&quot; /&gt;
-&lt;Skeleton variant=&quot;text&quot; style={{ width: &quot;80%&quot; }} /&gt;
-&lt;Skeleton variant=&quot;card&quot; /&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <h2>Skeleton Variants</h2>
-      <div class="docs-preview">
-        <div style="max-width:400px">
-          <div class="skeleton skeleton-title"></div>
-          <div class="skeleton skeleton-text" style="width:100%"></div>
-          <div class="skeleton skeleton-text" style="width:85%"></div>
-          <div class="skeleton skeleton-text" style="width:70%"></div>
-          <div style="margin-top:16px"></div>
-          <div class="skeleton skeleton-card"></div>
-          <div class="skeleton skeleton-card"></div>
-        </div>
-      </div>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>&lt;div style="max-width:400px"&gt;
-  &lt;div class="skeleton skeleton-title"&gt;&lt;/div&gt;
-  &lt;div class="skeleton skeleton-text" style="width:100%"&gt;&lt;/div&gt;
-  &lt;div class="skeleton skeleton-text" style="width:85%"&gt;&lt;/div&gt;
-  &lt;div class="skeleton skeleton-text" style="width:70%"&gt;&lt;/div&gt;
-  &lt;div style="margin-top:16px"&gt;&lt;/div&gt;
-  &lt;div class="skeleton skeleton-card"&gt;&lt;/div&gt;
-  &lt;div class="skeleton skeleton-card"&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-      </div>
-    </div>
+  <main>
+    <h1 style="font-size:18px;margin:0 0 8px">Esta página se movió</h1>
+    <p>La documentación de <strong>Skeleton</strong> ahora vive en el sitio canónico (SPA).
+       Si no se te redirige automáticamente,
+       <a href="../index.html#c-skeleton">abrí Skeleton en el nuevo sitio</a>.</p>
   </main>
-</div>
-<script src="docs.js"></script>
 </body>
 </html>

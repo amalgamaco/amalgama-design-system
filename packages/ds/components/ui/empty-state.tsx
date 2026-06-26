@@ -1,3 +1,12 @@
+/**
+ * Empty State — placeholder visual cuando no hay datos para mostrar.
+ *
+ * Cuándo usar: listas/tablas/búsquedas sin resultados o sin datos aún.
+ * Cuándo no: features en construcción (usar Placeholder); carga en progreso (usar Skeleton).
+ * Reemplaza a: textos sueltos "no hay datos".
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/empty-state.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 

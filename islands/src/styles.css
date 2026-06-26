@@ -29,6 +29,13 @@
    Popover's w-72) are generated. */
 @source "../../packages/ds/components/**/*.{ts,tsx}";
 
+/* The docs site (root index.html + legacy docs/*.html) now styles its component
+   examples and chrome with raw Tailwind utilities (replacing the deprecated
+   css/components/*.css). Scan those HTML files so their utilities are generated
+   into this bundle — the docs site has no other Tailwind build. */
+@source "../../index.html";
+@source "../../docs/*.html";
+
 /* Box-sizing reset scoped to island roots only (replaces preflight). */
 [data-island],
 [data-island] *,

@@ -1,249 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Select — Amalgama DS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/variables.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="docs.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select · Amalgama DS (movido)</title>
+<meta http-equiv="refresh" content="0; url=../index.html#c-select">
+<link rel="canonical" href="../index.html#c-select">
+<script>location.replace("../index.html#c-select");</script>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Inter", sans-serif; margin: 0;
+         min-height: 100vh; display: grid; place-items: center; text-align: center;
+         background: #fff; color: #01164D; padding: 24px; }
+  @media (prefers-color-scheme: dark) { body { background: #13161F; color: #EAEBED; } }
+  a { color: #4F80FF; font-weight: 600; }
+  p { max-width: 32rem; line-height: 1.6; }
+</style>
 </head>
 <body>
-<div class="docs-app">
-  <aside class="docs-sidebar">
-    <a href="index.html" class="docs-sidebar-header">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      Amalgama DS
-      <span>v1.0</span>
-    </a>
-    <nav class="docs-nav">
-      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
-      <div class="docs-nav-section">Fundamentos</div>
-      <a href="logos.html" class="docs-nav-item">Logos</a>
-      <a href="tokens.html" class="docs-nav-item">Tokens</a>
-      <a href="typography.html" class="docs-nav-item">Tipografia</a>
-      <div class="docs-nav-section">Acciones</div>
-      <a href="button.html" class="docs-nav-item">Button</a>
-      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
-      <div class="docs-nav-section">Entrada de datos</div>
-      <a href="input.html" class="docs-nav-item">Input</a>
-      <a href="select.html" class="docs-nav-item active">Select</a>
-      <a href="textarea.html" class="docs-nav-item">Textarea</a>
-      <a href="chip.html" class="docs-nav-item">Chip</a>
-      <a href="search.html" class="docs-nav-item">Search</a>
-      <div class="docs-nav-section">Visualizacion</div>
-      <a href="table.html" class="docs-nav-item">Table</a>
-      <a href="card.html" class="docs-nav-item">Card</a>
-      <a href="badge.html" class="docs-nav-item">Badge</a>
-      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
-      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
-      <a href="person-card.html" class="docs-nav-item">Person Card</a>
-      <a href="avatar.html" class="docs-nav-item">Avatar</a>
-      <div class="docs-nav-section">Retroalimentacion</div>
-      <a href="modal.html" class="docs-nav-item">Modal</a>
-      <a href="toast.html" class="docs-nav-item">Toast</a>
-      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
-      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
-      <div class="docs-nav-section">Navegacion</div>
-      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
-      <a href="topbar.html" class="docs-nav-item">Topbar</a>
-      <a href="tabs.html" class="docs-nav-item">Tabs</a>
-      <div class="docs-nav-section">Layout</div>
-      <a href="kanban.html" class="docs-nav-item">Kanban</a>
-    </nav>
-  </aside>
-  <main class="docs-main">
-    <header class="docs-topbar">
-      <div class="docs-breadcrumb">
-        <a href="index.html">DS</a>
-        <span class="separator">/</span>
-        Select
-      </div>
-    </header>
-    <div class="docs-content">
-
-      <h1 class="docs-page-title">Select</h1>
-      <p class="docs-page-desc">Selector desplegable con caret personalizado.</p>
-
-      <!-- Cuándo usar -->
-      <section class="docs-section">
-        <h2 class="docs-section-title">Cuándo usar</h2>
-        <table class="docs-props-table">
-          <tbody>
-            <tr><td><strong>Cuándo usar</strong></td><td>Todo campo de entrada — input, select, textarea, number, date — con label, hint y error.</td></tr>
-            <tr><td><strong>Cuándo no</strong></td><td>Búsqueda (usar <code>search-field</code> de <code>toolbar.css</code> o <code>search-bar</code> de <code>search.css</code>).</td></tr>
-            <tr><td><strong>Reemplaza a</strong></td><td>Cualquier form control legacy; nunca inventar campos custom.</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <div class="docs-section">
-        <h2 class="docs-section-title">Instalacion</h2>
-        <p class="docs-section-desc">Copia <code>select.tsx</code> a tu proyecto en <code>components/ui/select.tsx</code></p>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
-
-export interface SelectProps
-  extends React.SelectHTMLAttributes&lt;HTMLSelectElement&gt; {
-  label?: string
-  required?: boolean
-}
-
-const Select = React.forwardRef&lt;HTMLSelectElement, SelectProps&gt;(
-  ({ className, label, required, children, ...props }, ref) =&gt; {
-    const select = (
-      &lt;div className=&quot;select-wrapper&quot;&gt;
-        &lt;select ref={ref} className={cn(className)} {...props}&gt;
-          {children}
-        &lt;/select&gt;
-        &lt;span className=&quot;select-caret&quot;&gt;&#9662;&lt;/span&gt;
-      &lt;/div&gt;
-    )
-
-    if (!label) return select
-
-    return (
-      &lt;div className=&quot;field-group&quot;&gt;
-        &lt;label className=&quot;field-label&quot;&gt;
-          {label}
-          {required &amp;&amp; &lt;span className=&quot;field-required&quot;&gt;*&lt;/span&gt;}
-        &lt;/label&gt;
-        {select}
-      &lt;/div&gt;
-    )
-  }
-)
-Select.displayName = &quot;Select&quot;
-
-export { Select }</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>css/variables.css
-css/components/form.css</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Select } from &quot;@/components/ui/select&quot;
-
-&lt;Select label=&quot;Ubicacion&quot; required&gt;
-  &lt;option&gt;Remoto&lt;/option&gt;
-  &lt;option&gt;Presencial&lt;/option&gt;
-  &lt;option&gt;Hibrido&lt;/option&gt;
-&lt;/Select&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <!-- Basico -->
-      <section class="docs-section">
-        <h2>Basico</h2>
-        <div class="docs-preview">
-          <div class="select-wrapper">
-            <select class="field-input">
-              <option value="">Seleccionar...</option>
-              <option value="1">Opcion 1</option>
-              <option value="2">Opcion 2</option>
-              <option value="3">Opcion 3</option>
-            </select>
-            <svg class="select-caret" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-        </div>
-        <div class="docs-code-wrapper">
-          <button class="docs-copy-btn">Copiar</button>
-          <pre class="docs-code"><code>&lt;div class=&quot;select-wrapper&quot;&gt;
-  &lt;select class=&quot;field-input&quot;&gt;
-    &lt;option value=&quot;&quot;&gt;Seleccionar...&lt;/option&gt;
-    &lt;option value=&quot;1&quot;&gt;Opcion 1&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Opcion 2&lt;/option&gt;
-    &lt;option value=&quot;3&quot;&gt;Opcion 3&lt;/option&gt;
-  &lt;/select&gt;
-  &lt;svg class=&quot;select-caret&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
-    &lt;polyline points=&quot;6 9 12 15 18 9&quot;/&gt;
-  &lt;/svg&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-      </section>
-
-      <!-- Con label -->
-      <section class="docs-section">
-        <h2>Con label</h2>
-        <div class="docs-preview">
-          <div class="field-group">
-            <label class="field-label">Departamento</label>
-            <div class="select-wrapper">
-              <select class="field-input">
-                <option value="">Seleccionar...</option>
-                <option value="rh">Recursos Humanos</option>
-                <option value="tech">Tecnologia</option>
-                <option value="mkt">Marketing</option>
-              </select>
-              <svg class="select-caret" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-          </div>
-        </div>
-        <div class="docs-code-wrapper">
-          <button class="docs-copy-btn">Copiar</button>
-          <pre class="docs-code"><code>&lt;div class=&quot;field-group&quot;&gt;
-  &lt;label class=&quot;field-label&quot;&gt;Departamento&lt;/label&gt;
-  &lt;div class=&quot;select-wrapper&quot;&gt;
-    &lt;select class=&quot;field-input&quot;&gt;
-      &lt;option value=&quot;&quot;&gt;Seleccionar...&lt;/option&gt;
-      &lt;option value=&quot;rh&quot;&gt;Recursos Humanos&lt;/option&gt;
-      &lt;option value=&quot;tech&quot;&gt;Tecnologia&lt;/option&gt;
-      &lt;option value=&quot;mkt&quot;&gt;Marketing&lt;/option&gt;
-    &lt;/select&gt;
-    &lt;svg class=&quot;select-caret&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
-      &lt;polyline points=&quot;6 9 12 15 18 9&quot;/&gt;
-    &lt;/svg&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-      </section>
-
-      <!-- Disabled -->
-      <section class="docs-section">
-        <h2>Disabled</h2>
-        <div class="docs-preview">
-          <div class="select-wrapper">
-            <select class="field-input" disabled>
-              <option value="">Seleccionar...</option>
-              <option value="1">Opcion 1</option>
-              <option value="2">Opcion 2</option>
-            </select>
-            <svg class="select-caret" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-        </div>
-        <div class="docs-code-wrapper">
-          <button class="docs-copy-btn">Copiar</button>
-          <pre class="docs-code"><code>&lt;div class=&quot;select-wrapper&quot;&gt;
-  &lt;select class=&quot;field-input&quot; disabled&gt;
-    &lt;option value=&quot;&quot;&gt;Seleccionar...&lt;/option&gt;
-    &lt;option value=&quot;1&quot;&gt;Opcion 1&lt;/option&gt;
-    &lt;option value=&quot;2&quot;&gt;Opcion 2&lt;/option&gt;
-  &lt;/select&gt;
-  &lt;svg class=&quot;select-caret&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;
-    &lt;polyline points=&quot;6 9 12 15 18 9&quot;/&gt;
-  &lt;/svg&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-      </section>
-
-    </div>
+  <main>
+    <h1 style="font-size:18px;margin:0 0 8px">Esta página se movió</h1>
+    <p>La documentación de <strong>Select</strong> ahora vive en el sitio canónico (SPA).
+       Si no se te redirige automáticamente,
+       <a href="../index.html#c-select">abrí Select en el nuevo sitio</a>.</p>
   </main>
-</div>
-<script src="docs.js"></script>
 </body>
 </html>

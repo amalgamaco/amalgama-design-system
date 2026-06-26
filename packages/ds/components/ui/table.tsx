@@ -1,3 +1,12 @@
+/**
+ * Table — tabla de datos con encabezados, filas hover y variante clickable.
+ *
+ * Cuándo usar: datos tabulares; filas navegables con tr.clickable.
+ * Cuándo no: layouts (usar grid); tableros de flujo (usar Kanban).
+ * Reemplaza a: tablas legacy.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/table.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 

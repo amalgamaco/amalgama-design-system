@@ -1,3 +1,12 @@
+/**
+ * Description Section — secciones colapsables con editor de texto y botón eliminar.
+ *
+ * Cuándo usar: secciones de descripción editables (título + editor rich-text).
+ * Cuándo no: campos simples de formulario (usar form.css).
+ * Reemplaza a: editores de descripción ad-hoc.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/description.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 

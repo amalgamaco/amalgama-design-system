@@ -1,3 +1,12 @@
+/**
+ * Chip — elementos compactos que representan una acción, filtro, entrada o sugerencia.
+ *
+ * Cuándo usar: filtros, selección múltiple, sugerencias — siempre interactivo. Filter chips van debajo de la search bar para refinar resultados.
+ * Cuándo no: estado de solo lectura (usar Badge); acción principal (usar Button).
+ * Reemplaza a: toggles de filtro ad-hoc, tags clickeables legacy.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/chip.css.
+ */
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../lib/utils"

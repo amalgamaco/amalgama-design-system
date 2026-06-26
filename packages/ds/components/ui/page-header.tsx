@@ -1,3 +1,12 @@
+/**
+ * Page Header — encabezado de página con título y acciones.
+ *
+ * Cuándo usar: título + acciones al tope de cada vista.
+ * Cuándo no: dentro de cards o modales (tienen su propio header).
+ * Reemplaza a: headers de página ad-hoc.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/page-header.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 

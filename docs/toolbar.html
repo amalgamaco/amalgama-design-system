@@ -1,240 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search — Amalgama DS</title>
-  <meta http-equiv="refresh" content="0; url=search.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/variables.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="docs.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tool Bar · Amalgama DS (movido)</title>
+<meta http-equiv="refresh" content="0; url=../index.html#c-topbar">
+<link rel="canonical" href="../index.html#c-topbar">
+<script>location.replace("../index.html#c-topbar");</script>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Inter", sans-serif; margin: 0;
+         min-height: 100vh; display: grid; place-items: center; text-align: center;
+         background: #fff; color: #01164D; padding: 24px; }
+  @media (prefers-color-scheme: dark) { body { background: #13161F; color: #EAEBED; } }
+  a { color: #4F80FF; font-weight: 600; }
+  p { max-width: 32rem; line-height: 1.6; }
+</style>
 </head>
 <body>
-<div class="docs-app">
-  <aside class="docs-sidebar">
-    <a href="index.html" class="docs-sidebar-header">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      Amalgama DS
-      <span>v1.0</span>
-    </a>
-    <nav class="docs-nav">
-      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
-      <div class="docs-nav-section">Fundamentos</div>
-      <a href="logos.html" class="docs-nav-item">Logos</a>
-      <a href="tokens.html" class="docs-nav-item">Tokens</a>
-      <a href="typography.html" class="docs-nav-item">Tipografia</a>
-      <div class="docs-nav-section">Acciones</div>
-      <a href="button.html" class="docs-nav-item">Button</a>
-      <a href="toolbar.html" class="docs-nav-item active">Toolbar</a>
-      <div class="docs-nav-section">Entrada de datos</div>
-      <a href="input.html" class="docs-nav-item">Input</a>
-      <a href="select.html" class="docs-nav-item">Select</a>
-      <a href="textarea.html" class="docs-nav-item">Textarea</a>
-      <a href="chip.html" class="docs-nav-item">Chip</a>
-      <a href="search.html" class="docs-nav-item">Search</a>
-      <div class="docs-nav-section">Visualizacion</div>
-      <a href="table.html" class="docs-nav-item">Table</a>
-      <a href="card.html" class="docs-nav-item">Card</a>
-      <a href="badge.html" class="docs-nav-item">Badge</a>
-      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
-      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
-      <a href="person-card.html" class="docs-nav-item">Person Card</a>
-      <a href="avatar.html" class="docs-nav-item">Avatar</a>
-      <div class="docs-nav-section">Retroalimentacion</div>
-      <a href="modal.html" class="docs-nav-item">Modal</a>
-      <a href="toast.html" class="docs-nav-item">Toast</a>
-      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
-      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
-      <div class="docs-nav-section">Navegacion</div>
-      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
-      <a href="topbar.html" class="docs-nav-item">Topbar</a>
-      <a href="tabs.html" class="docs-nav-item">Tabs</a>
-      <div class="docs-nav-section">Layout</div>
-      <a href="kanban.html" class="docs-nav-item">Kanban</a>
-    </nav>
-  </aside>
-
-  <main class="docs-main">
-    <header class="docs-topbar">
-      <div class="docs-breadcrumb">
-        <a href="index.html">DS</a>
-        <span class="separator">/</span>
-        Toolbar
-      </div>
-    </header>
-    <div class="docs-content">
-
-      <div class="docs-page-header">
-        <h1 class="docs-page-title">Toolbar</h1>
-        <p class="docs-page-desc">Barra de busqueda con filtros y acciones para listas de datos.</p>
-      </div>
-
-      <!-- Cuándo usar -->
-      <section class="docs-section">
-        <h2 class="docs-section-title">Cuándo usar</h2>
-        <table class="docs-props-table">
-          <tbody>
-            <tr><td><strong>Cuándo usar</strong></td><td>Barra de controles sobre listas/tablas — <code>search-field</code> compacto + filtros + acciones.</td></tr>
-            <tr><td><strong>Cuándo no</strong></td><td>Búsqueda standalone de página (usar <code>search-bar</code> de <code>search.css</code>).</td></tr>
-            <tr><td><strong>Reemplaza a</strong></td><td>Filter bars legacy.</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <div class="docs-section">
-        <h2 class="docs-section-title">Instalacion</h2>
-        <p class="docs-section-desc">Copia <code>toolbar.tsx</code> a tu proyecto en <code>components/ui/toolbar.tsx</code></p>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
-
-const Toolbar = React.forwardRef&lt;
-  HTMLDivElement,
-  React.HTMLAttributes&lt;HTMLDivElement&gt;
-&gt;(({ className, ...props }, ref) =&gt; (
-  &lt;div ref={ref} className={cn(&quot;toolbar&quot;, className)} {...props} /&gt;
-))
-Toolbar.displayName = &quot;Toolbar&quot;
-
-export interface SearchFieldProps
-  extends React.InputHTMLAttributes&lt;HTMLInputElement&gt; {
-  icon?: React.ReactNode
-}
-
-const SearchField = React.forwardRef&lt;HTMLInputElement, SearchFieldProps&gt;(
-  ({ className, icon, ...props }, ref) =&gt; (
-    &lt;div className={cn(&quot;search-field&quot;, className)}&gt;
-      {icon ?? (
-        &lt;svg width=&quot;18&quot; height=&quot;18&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; strokeWidth=&quot;2&quot; viewBox=&quot;0 0 24 24&quot;&gt;
-          &lt;circle cx=&quot;11&quot; cy=&quot;11&quot; r=&quot;8&quot; /&gt;
-          &lt;path d=&quot;m21 21-4.35-4.35&quot; /&gt;
-        &lt;/svg&gt;
-      )}
-      &lt;input ref={ref} type=&quot;text&quot; {...props} /&gt;
-    &lt;/div&gt;
-  )
-)
-SearchField.displayName = &quot;SearchField&quot;
-
-const ToolbarButton = React.forwardRef&lt;
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt;
-&gt;(({ className, ...props }, ref) =&gt; (
-  &lt;button ref={ref} className={cn(&quot;toolbar-btn&quot;, className)} {...props} /&gt;
-))
-ToolbarButton.displayName = &quot;ToolbarButton&quot;
-
-export interface ResultCountProps
-  extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
-  count: number
-  label: string
-}
-
-const ResultCount = React.forwardRef&lt;HTMLDivElement, ResultCountProps&gt;(
-  ({ className, count, label, ...props }, ref) =&gt; (
-    &lt;div ref={ref} className={cn(&quot;result-count&quot;, className)} {...props}&gt;
-      Mostrando &lt;strong&gt;{count}&lt;/strong&gt; {label}
-    &lt;/div&gt;
-  )
-)
-ResultCount.displayName = &quot;ResultCount&quot;
-
-export { Toolbar, SearchField, ToolbarButton, ResultCount }</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Dependencias</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>css/variables.css
-css/components/toolbar.css</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Toolbar, SearchField, ToolbarButton, ResultCount } from &quot;@/components/ui/toolbar&quot;
-
-&lt;Toolbar&gt;
-  &lt;SearchField placeholder=&quot;Buscar vacantes...&quot; /&gt;
-  &lt;ToolbarButton&gt;Filtros&lt;/ToolbarButton&gt;
-  &lt;ToolbarButton&gt;Ordenar&lt;/ToolbarButton&gt;
-&lt;/Toolbar&gt;
-&lt;ResultCount count={24} label=&quot;vacantes&quot; /&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <div class="docs-section">
-        <h2 class="docs-section-title">Toolbar completo</h2>
-        <div class="docs-preview full-width">
-          <div class="toolbar">
-            <div class="search-field">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              <input type="text" placeholder="Buscar vacantes...">
-            </div>
-            <button class="toolbar-btn">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
-              Filtros
-            </button>
-            <button class="toolbar-btn">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 6h18M6 12h12M9 18h6"/></svg>
-              Ordenar
-            </button>
-          </div>
-        </div>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;div class="toolbar"&gt;
-  &lt;div class="search-field"&gt;
-    &lt;svg width="18" height="18" ...&gt;...&lt;/svg&gt;
-    &lt;input type="text" placeholder="Buscar vacantes..."&gt;
-  &lt;/div&gt;
-  &lt;button class="toolbar-btn"&gt;
-    &lt;svg width="18" height="18" ...&gt;...&lt;/svg&gt;
-    Filtros
-  &lt;/button&gt;
-  &lt;button class="toolbar-btn"&gt;
-    &lt;svg width="18" height="18" ...&gt;...&lt;/svg&gt;
-    Ordenar
-  &lt;/button&gt;
-&lt;/div&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <div class="docs-section">
-        <h2 class="docs-section-title">Conteo de resultados</h2>
-        <div class="docs-preview full-width">
-          <div class="result-count">Mostrando <strong>24</strong> vacantes</div>
-        </div>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;div class="result-count"&gt;Mostrando &lt;strong&gt;24&lt;/strong&gt; vacantes&lt;/div&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <div class="docs-section">
-        <h2 class="docs-section-title">Clases CSS</h2>
-        <table class="docs-props-table">
-          <thead><tr><th>Clase</th><th>Descripcion</th></tr></thead>
-          <tbody>
-            <tr><td><code>.toolbar</code></td><td>Contenedor flex con gap <code>--space-2</code></td></tr>
-            <tr><td><code>.search-field</code></td><td>Input outlined de búsqueda compacto para toolbar — mismo lenguaje visual que <code>.toolbar-btn</code>: <code>--radius-md</code>, borde <code>--color-outline</code>, fondo <code>surface-container</code>. Íconos 18px</td></tr>
-            <tr><td><code>.toolbar-btn</code></td><td>Botón de filtro/acción secundaria. Íconos 18px</td></tr>
-            <tr><td><code>.result-count</code></td><td>Texto de conteo de resultados</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
+  <main>
+    <h1 style="font-size:18px;margin:0 0 8px">Esta página se movió</h1>
+    <p>La documentación de <strong>Tool Bar</strong> ahora vive en el sitio canónico (SPA).
+       Si no se te redirige automáticamente,
+       <a href="../index.html#c-topbar">abrí Tool Bar en el nuevo sitio</a>.</p>
   </main>
-</div>
-<script src="docs.js"></script>
 </body>
 </html>

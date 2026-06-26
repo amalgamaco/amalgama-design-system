@@ -1,223 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vacancy Card — Amalgama DS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/variables.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="docs.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vacancy Card · Amalgama DS (movido)</title>
+<meta http-equiv="refresh" content="0; url=../index.html#c-vacancy">
+<link rel="canonical" href="../index.html#c-vacancy">
+<script>location.replace("../index.html#c-vacancy");</script>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Inter", sans-serif; margin: 0;
+         min-height: 100vh; display: grid; place-items: center; text-align: center;
+         background: #fff; color: #01164D; padding: 24px; }
+  @media (prefers-color-scheme: dark) { body { background: #13161F; color: #EAEBED; } }
+  a { color: #4F80FF; font-weight: 600; }
+  p { max-width: 32rem; line-height: 1.6; }
+</style>
 </head>
 <body>
-<div class="docs-app">
-  <aside class="docs-sidebar">
-    <a href="index.html" class="docs-sidebar-header">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      Amalgama DS
-      <span>v1.0</span>
-    </a>
-    <nav class="docs-nav">
-      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
-      <div class="docs-nav-section">Fundamentos</div>
-      <a href="logos.html" class="docs-nav-item">Logos</a>
-      <a href="tokens.html" class="docs-nav-item">Tokens</a>
-      <a href="typography.html" class="docs-nav-item">Tipografia</a>
-      <div class="docs-nav-section">Acciones</div>
-      <a href="button.html" class="docs-nav-item">Button</a>
-      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
-      <div class="docs-nav-section">Entrada de datos</div>
-      <a href="input.html" class="docs-nav-item">Input</a>
-      <a href="select.html" class="docs-nav-item">Select</a>
-      <a href="textarea.html" class="docs-nav-item">Textarea</a>
-      <a href="chip.html" class="docs-nav-item">Chip</a>
-      <a href="search.html" class="docs-nav-item">Search</a>
-      <div class="docs-nav-section">Visualizacion</div>
-      <a href="table.html" class="docs-nav-item">Table</a>
-      <a href="card.html" class="docs-nav-item">Card</a>
-      <a href="badge.html" class="docs-nav-item">Badge</a>
-      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
-      <a href="vacancy-card.html" class="docs-nav-item active">Vacancy Card</a>
-      <a href="person-card.html" class="docs-nav-item">Person Card</a>
-      <a href="avatar.html" class="docs-nav-item">Avatar</a>
-      <div class="docs-nav-section">Retroalimentacion</div>
-      <a href="modal.html" class="docs-nav-item">Modal</a>
-      <a href="toast.html" class="docs-nav-item">Toast</a>
-      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
-      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
-      <div class="docs-nav-section">Navegacion</div>
-      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
-      <a href="topbar.html" class="docs-nav-item">Topbar</a>
-      <a href="tabs.html" class="docs-nav-item">Tabs</a>
-      <div class="docs-nav-section">Layout</div>
-      <a href="kanban.html" class="docs-nav-item">Kanban</a>
-    </nav>
-  </aside>
-  <main class="docs-main">
-    <header class="docs-topbar">
-      <div class="docs-breadcrumb">
-        <a href="index.html">DS</a>
-        <span class="separator">/</span>
-        Vacancy Card
-      </div>
-    </header>
-    <div class="docs-content">
-      <div class="docs-page-header">
-        <h1 class="docs-page-title">Vacancy Card</h1>
-        <p class="docs-page-desc">Tarjeta de vacante con informacion del puesto y asignados.</p>
-      </div>
-
-      <!-- Cuándo usar -->
-      <section class="docs-section">
-        <h2 class="docs-section-title">Cuándo usar</h2>
-        <table class="docs-props-table">
-          <tbody>
-            <tr><td><strong>Cuándo usar</strong></td><td>Ítem de vacante en listas de recruiting (ícono + nombre + meta + stats).</td></tr>
-            <tr><td><strong>Cuándo no</strong></td><td>Personas (<a href="person-card.html">person-card</a>); otros dominios (usar <a href="card.html">Card</a> genérica).</td></tr>
-            <tr><td><strong>Reemplaza a</strong></td><td>Rows/cards de vacante custom.</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- Instalacion TSX -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Instalacion</h2>
-        <p class="docs-section-desc">Copia <code>vacancy-card.tsx</code> a tu proyecto en <code>components/ui/vacancy-card.tsx</code></p>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
-
-const VacanciesList = React.forwardRef&lt;
-  HTMLDivElement,
-  React.HTMLAttributes&lt;HTMLDivElement&gt;
-&gt;(({ className, ...props }, ref) =&gt; (
-  &lt;div ref={ref} className={cn(&quot;vacancies-list&quot;, className)} {...props} /&gt;
-))
-VacanciesList.displayName = &quot;VacanciesList&quot;
-
-export interface VacancyCardProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
-  icon?: React.ReactNode
-  name: string
-  badge?: React.ReactNode
-  meta?: string[]
-  age?: string
-}
-
-const VacancyCard = React.forwardRef&lt;HTMLDivElement, VacancyCardProps&gt;(
-  ({ className, icon, name, badge, meta, age, children, ...props }, ref) =&gt; (
-    &lt;div ref={ref} className={cn(&quot;vacancy-card&quot;, className)} {...props}&gt;
-      {icon &amp;&amp; &lt;div className=&quot;vacancy-icon&quot;&gt;{icon}&lt;/div&gt;}
-      &lt;div className=&quot;vacancy-info&quot;&gt;
-        &lt;div className=&quot;vacancy-name&quot;&gt;
-          {name}
-          {badge}
-        &lt;/div&gt;
-        {meta &amp;&amp; meta.length &gt; 0 &amp;&amp; (
-          &lt;div className=&quot;vacancy-meta&quot;&gt;
-            {meta.map((item, i) =&gt; (
-              &lt;React.Fragment key={i}&gt;
-                {i &gt; 0 &amp;&amp; &lt;span className=&quot;meta-dot&quot; /&gt;}
-                {item}
-              &lt;/React.Fragment&gt;
-            ))}
-          &lt;/div&gt;
-        )}
-        {children}
-      &lt;/div&gt;
-      {age &amp;&amp; (
-        &lt;div className=&quot;vacancy-right&quot;&gt;
-          &lt;div className=&quot;vacancy-age&quot;&gt;{age}&lt;/div&gt;
-        &lt;/div&gt;
-      )}
-    &lt;/div&gt;
-  )
-)
-VacancyCard.displayName = &quot;VacancyCard&quot;
-
-export { VacanciesList, VacancyCard }</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>Dependencias</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>CSS requerido</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>css/variables.css
-css/components/vacancy-card.css
-css/components/badge.css</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>Ejemplo de uso</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { VacanciesList, VacancyCard } from &quot;@/components/ui/vacancy-card&quot;
-import { Badge } from &quot;@/components/ui/badge&quot;
-
-&lt;VacanciesList&gt;
-  &lt;VacancyCard
-    icon=&quot;&#x1F4BC;&quot;
-    name=&quot;Desarrollador Frontend&quot;
-    badge={&lt;Badge variant=&quot;open&quot;&gt;Abierta&lt;/Badge&gt;}
-    meta={[&quot;Tecnologia&quot;, &quot;Remoto&quot;]}
-    age=&quot;3d&quot;
-  /&gt;
-&lt;/VacanciesList&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <h2>Vacancy Card</h2>
-      <div class="docs-preview">
-        <div class="vacancy-card">
-          <div class="vacancy-icon">&#x1F4BC;</div>
-          <div class="vacancy-info">
-            <div class="vacancy-name">Disenador UX Senior <span class="badge badge-open">Abierta</span></div>
-            <div class="vacancy-meta">Producto <span class="meta-dot"></span> Remoto <span class="meta-dot"></span> Senior</div>
-            <div class="vacancy-stats">
-              <div class="stat-pill"><span class="count">12</span> candidatos</div>
-              <div class="stat-pill"><span class="count">3</span> entrevistas</div>
-            </div>
-          </div>
-          <div class="vacancy-right">
-            <div class="assignee" style="display:flex;gap:4px">
-              <div class="assignee-avatar blue">MG</div>
-              <div class="assignee-avatar green">CL</div>
-            </div>
-            <div class="vacancy-age">5d</div>
-          </div>
-        </div>
-      </div>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>&lt;div class="vacancy-card"&gt;
-  &lt;div class="vacancy-icon"&gt;&#x1F4BC;&lt;/div&gt;
-  &lt;div class="vacancy-info"&gt;
-    &lt;div class="vacancy-name"&gt;Disenador UX Senior &lt;span class="badge badge-open"&gt;Abierta&lt;/span&gt;&lt;/div&gt;
-    &lt;div class="vacancy-meta"&gt;Producto &lt;span class="meta-dot"&gt;&lt;/span&gt; Remoto &lt;span class="meta-dot"&gt;&lt;/span&gt; Senior&lt;/div&gt;
-    &lt;div class="vacancy-stats"&gt;
-      &lt;div class="stat-pill"&gt;&lt;span class="count"&gt;12&lt;/span&gt; candidatos&lt;/div&gt;
-      &lt;div class="stat-pill"&gt;&lt;span class="count"&gt;3&lt;/span&gt; entrevistas&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class="vacancy-right"&gt;
-    &lt;div class="assignee" style="display:flex;gap:4px"&gt;
-      &lt;div class="assignee-avatar blue"&gt;MG&lt;/div&gt;
-      &lt;div class="assignee-avatar green"&gt;CL&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class="vacancy-age"&gt;5d&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-      </div>
-    </div>
+  <main>
+    <h1 style="font-size:18px;margin:0 0 8px">Esta página se movió</h1>
+    <p>La documentación de <strong>Vacancy Card</strong> ahora vive en el sitio canónico (SPA).
+       Si no se te redirige automáticamente,
+       <a href="../index.html#c-vacancy">abrí Vacancy Card en el nuevo sitio</a>.</p>
   </main>
-</div>
-<script src="docs.js"></script>
 </body>
 </html>

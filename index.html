@@ -11,13 +11,12 @@
 <link rel="stylesheet" href="css/md-sys-bridge.css?v=1">
 <link rel="stylesheet" href="css/base.css?v=3">
 <link rel="stylesheet" href="css/layout.css?v=3">
-<link rel="stylesheet" href="css/components.css?v=24">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=31">
-<script type="module" src="islands/dist/embassy-islands.js?v=31"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=32">
+<script type="module" src="islands/dist/embassy-islands.js?v=32"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -2731,10 +2730,10 @@ body { overflow-x: clip; }
 .bt-tok-selector { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
 .bt-tok-selector-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; color: var(--ds-text-3); flex-shrink: 0; }
 /* Category tabs (Color / Size) */
-/* bt-cat-tabs replaced by .seg-btn-group — see css/components/segmented-button.css */
+/* bt-cat-tabs replaced by .seg-btn-group — see packages/ds/components/ui/segmented-button.tsx */
 /* Sub-variant tabs (Filled / Tonal / … or XS / SM / …) */
 .bt-subvar-row { margin-bottom: 16px; }
-/* bt-var-tabs replaced by .seg-btn-group — see css/components/segmented-button.css */
+/* bt-var-tabs replaced by .seg-btn-group — see packages/ds/components/ui/segmented-button.tsx */
 
 .bt-tok-panel { display: none; }
 .bt-tok-panel.active { display: block; }
@@ -3047,6 +3046,492 @@ body { overflow-x: clip; }
 .ds-cr-stage.light { background: #FAFBFC; }
 .ds-cr-stage.dark  { background: #0A0C12; border-color: #282C39; }
 .ds-cr-elev { display: flex; flex-wrap: wrap; gap: 0; align-items: flex-end; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Re-homed doc-CHROME component styles (2026-06)
+   These rules style the docs SITE's own chrome (hero/nav badges, CTA buttons,
+   the token-tab segmented switcher, and the static "Vacantes" mockup) — NOT
+   component demos (those render via React islands). They were moved here from
+   the now-deleted buildless css/components/*.css so the page no longer depends
+   on that layer. Token-driven (var(--…)) → dark mode works with no overrides.
+   The canonical component implementations live in packages/ds/components/ui/.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Badge (badge.css) ── */
+.badge {
+  display: inline-flex; align-items: center;
+  font-size: var(--font-size-badge); font-weight: 600;
+  padding: 4px 10px; border-radius: var(--radius-full);
+  letter-spacing: .2px;
+  white-space: nowrap;
+}
+.badge-open   { background: var(--color-success-container); color: var(--color-on-success-container); }
+.badge-active { background: var(--color-success-container); color: var(--color-on-success-container); }
+.badge-closed { background: var(--color-error-container);   color: var(--color-on-error-container); }
+.badge-draft  { background: var(--color-surface-variant);   color: var(--color-on-surface-variant); border: 1px solid var(--color-outline); }
+.badge-archived { background: var(--color-surface-variant); color: var(--color-on-surface-variant); opacity: .75; }
+.badge-warning  { background: var(--color-warning-container); color: var(--color-on-warning-container); }
+.badge-tertiary { background: var(--color-tertiary-container); color: var(--color-on-tertiary-container); }
+.badge-info     { background: var(--color-info-container);    color: var(--color-on-info-container); }
+.badge-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .1em;
+}
+
+/* ── Button (button.css) ── */
+.btn-primary,
+.btn-secondary,
+.btn-tertiary,
+.btn-text,
+.btn-ghost,
+.btn-next {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 8px 24px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--font-size-body-md); font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default),
+              transform .1s var(--ease-default);
+}
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-tertiary:focus-visible,
+.btn-text:focus-visible,
+.btn-ghost:focus-visible,
+.btn-next:focus-visible,
+.icon-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+.btn-primary:hover { background: var(--color-primary-hover); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled {
+  background: var(--color-disabled);
+  color: var(--color-on-disabled);
+  cursor: not-allowed; transform: none; box-shadow: none;
+}
+.btn-primary.btn-danger  { background: var(--color-error);   color: var(--color-on-error);   }
+.btn-primary.btn-danger:hover  { background: var(--color-error-hover);   }
+.btn-primary.btn-success { background: var(--color-success); color: var(--color-on-success); }
+.btn-primary.btn-success:hover { background: var(--color-success-hover); }
+.btn-secondary {
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  border-color: transparent;
+}
+.btn-secondary:hover {
+  background: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
+  transform: translateY(-1px);
+}
+.btn-secondary:active { transform: translateY(0); }
+.btn-secondary:disabled {
+  background: var(--color-disabled);
+  color: var(--color-on-disabled);
+  border-color: transparent;
+  cursor: not-allowed; transform: none;
+}
+.btn-tertiary,
+.btn-ghost {
+  background: transparent;
+  border-color: var(--color-outline);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+.btn-tertiary:hover,
+.btn-ghost:hover {
+  background: var(--color-surface-variant);
+  border-color: var(--color-primary);
+}
+.btn-tertiary:disabled,
+.btn-ghost:disabled {
+  background: transparent;
+  border-color: var(--color-outline-variant);
+  color: var(--color-on-disabled);
+  cursor: not-allowed;
+}
+.btn-text {
+  background: transparent;
+  color: var(--color-primary);
+  padding: 8px 12px;
+}
+.btn-text:hover {
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+.btn-text:disabled {
+  background: transparent;
+  color: var(--color-on-disabled);
+  cursor: not-allowed;
+}
+.btn-xs { padding: 3px 8px;   font-size: 11px;   font-weight: 600; min-height: 24px; border-radius: var(--radius-sm); }
+.btn-sm { padding: 6px 12px;  font-size: var(--font-size-body-sm); min-height: 32px; border-radius: var(--radius-sm); }
+.btn-lg { padding: 10px 22px; font-size: 15px;   min-height: 44px; border-radius: var(--radius-md); }
+.btn-xl { padding: 14px 30px; font-size: 16px;   font-weight: 700; min-height: 52px; border-radius: var(--radius-lg); }
+.btn-text.btn-xs { padding: 3px 6px; }
+.btn-text.btn-sm { padding: 6px 10px; }
+.btn-text.btn-lg { padding: 10px 16px; }
+.btn-text.btn-xl { padding: 14px 20px; }
+.btn-compact { padding-left: 16px; padding-right: 16px; }
+.btn-next {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+.btn-next:hover { background: var(--color-primary-hover); }
+.icon-btn {
+  position: relative;
+  width: 36px; height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline);
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--color-on-surface-variant);
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+}
+.icon-btn:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.icon-btn:disabled {
+  background: transparent;
+  border-color: var(--color-outline-variant);
+  color: var(--color-on-disabled);
+  cursor: not-allowed;
+}
+.icon-btn.btn-sm { width: 30px; height: 30px; border-radius: var(--radius-sm); }
+.icon-btn.btn-lg { width: 44px; height: 44px; border-radius: var(--radius-md); }
+.icon-btn.btn-xl { width: 52px; height: 52px; border-radius: var(--radius-lg); }
+.btn-primary:active:not(:disabled)              { filter: brightness(0.88); transform: translateY(0); }
+.btn-secondary:active:not(:disabled)            { filter: brightness(0.92); transform: translateY(0); }
+.btn-tertiary:active:not(:disabled),
+.btn-ghost:active:not(:disabled)                { background: var(--color-surface-container-high); }
+.btn-text:active:not(:disabled)                 { background: color-mix(in srgb, var(--color-primary) 16%, transparent); }
+.icon-btn:active:not(:disabled)                 { background: var(--color-surface-container-high); }
+
+/* ── Segmented Button (segmented-button.css) — token-tab switcher ── */
+.seg-btn-group {
+  --seg-btn-container-shape:                var(--radius-full);
+  --seg-btn-outline-color:                  var(--md-sys-color-outline, var(--color-outline));
+  --seg-btn-label-color:                    var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-icon-color:                     var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-selected-container-color:       var(--md-sys-color-secondary-container, var(--color-secondary-container));
+  --seg-btn-selected-label-color:           var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-icon-color:            var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-hover-layer-color:              var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-hover-layer-opacity:            8%;
+  --seg-btn-focus-layer-color:              var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-focus-layer-opacity:            12%;
+  --seg-btn-pressed-layer-color:            var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-pressed-layer-opacity:          12%;
+  --seg-btn-selected-hover-layer-color:     var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-hover-layer-opacity:   8%;
+  --seg-btn-selected-focus-layer-color:     var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-focus-layer-opacity:   12%;
+  --seg-btn-selected-pressed-layer-color:   var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-pressed-layer-opacity: 12%;
+  --seg-btn-disabled-group-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-group-opacity:         4%;
+  --seg-btn-disabled-container-color:       var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-container-opacity:     12%;
+  --seg-btn-disabled-label-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-label-opacity:         38%;
+  --seg-btn-disabled-outline-color:         var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-outline-opacity:       12%;
+  --seg-btn-focus-outline-color:            var(--color-focus);
+  --seg-btn-focus-ring-color:               var(--color-focus-ring);
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--seg-btn-outline-color);
+  border-radius: var(--seg-btn-container-shape);
+  padding: 3px;
+  gap: 2px;
+}
+.seg-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 6px 16px;
+  border: none;
+  border-radius: var(--seg-btn-container-shape);
+  background: transparent;
+  color: var(--seg-btn-label-color);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default);
+}
+.seg-btn svg,
+.seg-btn i { color: var(--seg-btn-icon-color); }
+.seg-btn:hover:not(.selected):not([aria-selected="true"]):not([aria-pressed="true"]):not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-hover-layer-color) var(--seg-btn-hover-layer-opacity), transparent);
+}
+.seg-btn.selected,
+.seg-btn[aria-selected="true"],
+.seg-btn[aria-pressed="true"] {
+  background: var(--seg-btn-selected-container-color);
+  color: var(--seg-btn-selected-label-color);
+  font-weight: 600;
+}
+.seg-btn.selected svg, .seg-btn.selected i,
+.seg-btn[aria-selected="true"] svg, .seg-btn[aria-selected="true"] i,
+.seg-btn[aria-pressed="true"] svg, .seg-btn[aria-pressed="true"] i {
+  color: var(--seg-btn-selected-icon-color);
+}
+.seg-btn.selected:hover:not(:disabled),
+.seg-btn[aria-selected="true"]:hover:not(:disabled),
+.seg-btn[aria-pressed="true"]:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-selected-hover-layer-color) var(--seg-btn-selected-hover-layer-opacity), var(--seg-btn-selected-container-color));
+}
+.seg-btn:focus-visible {
+  outline: 2px solid var(--seg-btn-focus-outline-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--seg-btn-focus-ring-color);
+  z-index: 1;
+}
+.seg-btn:focus-visible:not(.selected):not([aria-selected="true"]):not([aria-pressed="true"]):not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-focus-layer-color) var(--seg-btn-focus-layer-opacity), transparent);
+}
+.seg-btn.selected:focus-visible:not(:disabled),
+.seg-btn[aria-selected="true"]:focus-visible:not(:disabled),
+.seg-btn[aria-pressed="true"]:focus-visible:not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-selected-focus-layer-color) var(--seg-btn-selected-focus-layer-opacity), var(--seg-btn-selected-container-color));
+}
+.seg-btn:active:not(:disabled):not(.selected):not([aria-selected="true"]):not([aria-pressed="true"]) {
+  background: color-mix(in srgb, var(--seg-btn-pressed-layer-color) var(--seg-btn-pressed-layer-opacity), transparent);
+}
+.seg-btn.selected:active:not(:disabled),
+.seg-btn[aria-selected="true"]:active:not(:disabled),
+.seg-btn[aria-pressed="true"]:active:not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-selected-pressed-layer-color) var(--seg-btn-selected-pressed-layer-opacity), var(--seg-btn-selected-container-color));
+}
+.seg-btn-group:has(.seg-btn:disabled),
+.seg-btn-group[aria-disabled="true"] {
+  background: color-mix(in srgb, var(--seg-btn-disabled-group-color) var(--seg-btn-disabled-group-opacity), transparent);
+  border-color: color-mix(in srgb, var(--seg-btn-disabled-outline-color) var(--seg-btn-disabled-outline-opacity), transparent);
+}
+.seg-btn:disabled,
+.seg-btn[aria-disabled="true"] {
+  color: color-mix(in srgb, var(--seg-btn-disabled-label-color) var(--seg-btn-disabled-label-opacity), transparent);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.seg-btn.selected:disabled,
+.seg-btn[aria-selected="true"]:disabled,
+.seg-btn[aria-pressed="true"]:disabled {
+  background: color-mix(in srgb, var(--seg-btn-disabled-container-color) var(--seg-btn-disabled-container-opacity), transparent);
+}
+.seg-btn-group-sm .seg-btn {
+  padding: 4px 10px;
+  font-size: var(--font-size-caption);
+}
+.seg-btn-group-lg .seg-btn {
+  padding: 8px 20px;
+  font-size: var(--font-size-body-md);
+}
+
+/* ── Page Header (page-header.css) ── */
+.page-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px;
+}
+.page-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-lg); font-weight: 600; letter-spacing: -.3px;
+}
+.header-actions { display: flex; align-items: center; gap: 10px; }
+
+/* ── Toolbar + search-field (toolbar.css) — Vacantes mockup ── */
+.toolbar {
+  display: flex; align-items: center; gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.search-field {
+  flex: 1;
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: 8px var(--space-4);
+  background: var(--color-surface-container-high);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--color-on-surface-variant);
+  cursor: text;
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
+}
+.search-field:hover {
+  background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface-container-high));
+  border-color: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
+}
+.search-field:focus-within {
+  background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-high));
+  border-color: var(--color-secondary);
+}
+.search-field > svg,
+.search-field > i { width: 18px; height: 18px; flex-shrink: 0; color: inherit; }
+.search-field input {
+  flex: 1; min-width: 0;
+  border: none; outline: none; background: transparent;
+  font-family: var(--font-body); font-size: var(--font-size-body-md);
+  color: var(--color-on-surface);
+  caret-color: var(--color-secondary);
+}
+.search-field input::placeholder { color: var(--color-on-surface-variant); }
+.search-field input::-webkit-search-cancel-button { display: none; }
+.toolbar-btn {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 8px 16px;
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-md); font-weight: 500;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+}
+.toolbar-btn:hover {
+  background: var(--color-surface-variant);
+  border-color: var(--color-outline-variant);
+  color: var(--color-on-surface);
+}
+.toolbar-btn:active { opacity: .85; }
+.toolbar-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.toolbar-btn > svg,
+.toolbar-btn > i { width: 18px; height: 18px; }
+.result-count {
+  font-size: var(--font-size-label);
+  color: var(--color-on-surface-variant);
+  margin-bottom: 14px;
+  padding: 0 2px;
+}
+.result-count strong { color: var(--color-on-surface); font-weight: 500; }
+
+/* ── Data table (table.css) — Vacantes mockup ── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.data-table thead {
+  background: var(--color-surface-variant);
+  border-bottom: 1px solid var(--border);
+}
+.data-table th {
+  padding: 10px 16px;
+  font-size: var(--font-size-overline);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  text-align: left;
+}
+.data-table td {
+  padding: 12px 16px;
+  font-size: var(--font-size-body-md);
+  color: var(--text-primary);
+  border-top: 1px solid var(--border);
+}
+.data-table tbody tr {
+  transition: background var(--duration-fast);
+}
+.data-table tbody tr:hover {
+  background: var(--color-surface-variant);
+}
+.data-table tbody tr.clickable {
+  cursor: pointer;
+}
+.data-table tbody tr.clickable:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+/* ── Toast (toast.css) — JS-triggered toast demo (.docs-toast-trigger) ── */
+.toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  box-shadow: var(--shadow-lg);
+  display: flex; align-items: center; gap: 10px;
+  font-size: var(--font-size-body-md);
+  animation: slideInRight .25s ease;
+  min-width: 280px;
+  max-width: 420px;
+}
+.toast-success { border-left: 3px solid var(--green); }
+.toast-error { border-left: 3px solid var(--red); }
+.toast-info { border-left: 3px solid var(--interactive); }
+.toast .toast-icon { flex-shrink: 0; }
+.toast .toast-message { flex: 1; }
+.toast .toast-close {
+  width: 24px; height: 24px;
+  border: none; background: none;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--color-on-surface-variant);
+  border-radius: var(--radius-sm);
+  transition: background var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+}
+.toast .toast-close:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.toast .toast-close:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+/* ── Placeholder panel (placeholder.css) ── */
+.placeholder-panel {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 32px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--font-size-body-lg);
+}
+.placeholder-panel .placeholder-icon { font-size: 32px; margin-bottom: 12px; }
+.placeholder-panel p { line-height: 1.6; }
 
 </style>
 </head>
@@ -6693,7 +7178,7 @@ body { overflow-x: clip; }
         <section class="docs-section">
           <h2 class="docs-section-title">Inicio rápido</h2>
           <p class="docs-section-desc">Importá la hoja de estilos del DS y usá las clases semánticas. No hace falta ningún JavaScript — los botones son elementos <code>&lt;button&gt;</code> nativos.</p>
-          <div class="bd-callout"><span class="bd-ico">📦</span><span>El sistema de tokens (<code>variables.css</code>) y los estilos de botones (<code>css/components/button.css</code>) deben estar cargados. Todos los valores de color responden automáticamente a <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code>.</span></div>
+          <div class="bd-callout"><span class="bd-ico">📦</span><span>Importá el theme <code>@amalgama/ds/tailwind.theme.css</code> y usá el componente desde <code>@amalgama/ds/button</code>. Todos los valores de color responden automáticamente a <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code>.</span></div>
         </section>
 
         <!-- ── All variants HTML ── -->
@@ -7723,7 +8208,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/form.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
@@ -8020,7 +8505,7 @@ export { Input }</code></pre>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/form.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
@@ -8319,7 +8804,7 @@ SelectItem.displayName = &quot;SelectItem&quot;</code></pre>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/form.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
@@ -8408,7 +8893,7 @@ export { Textarea }</code></pre>
           <div class="ds-card-link" onclick="navigate('c-basic-card')"><div class="ds-card-icon"><i data-lucide="square"></i></div><div class="ds-card-name">Basic Card</div><div class="ds-card-desc">Contenedor base genérico.</div></div>
           <div class="ds-card-link" onclick="navigate('c-person')"><div class="ds-card-icon"><i data-lucide="user"></i></div><div class="ds-card-name">Person Card</div><div class="ds-card-desc">Persona con avatar, nombre y rol.</div></div>
           <div class="ds-card-link" onclick="navigate('c-vacancy')"><div class="ds-card-icon"><i data-lucide="briefcase"></i></div><div class="ds-card-name">Vacancy Card</div><div class="ds-card-desc">Vacante con estado y asignados.</div></div>
-          <div class="ds-card-link" onclick="navigate('c-kanban')"><div class="ds-card-icon"><i data-lucide="trello"></i></div><div class="ds-card-name">Kanban Card</div><div class="ds-card-desc">Tarjeta para tableros Kanban.</div></div>
+          <div class="ds-card-link" onclick="navigate('c-kanban')"><div class="ds-card-icon"><i data-lucide="square-kanban"></i></div><div class="ds-card-name">Kanban Card</div><div class="ds-card-desc">Tarjeta para tableros Kanban.</div></div>
           <div class="ds-card-link" onclick="navigate('c-stat-card')"><div class="ds-card-icon"><i data-lucide="bar-chart-2"></i></div><div class="ds-card-name">Stat Card</div><div class="ds-card-desc">Métrica o estadística destacada.</div></div>
           <div class="ds-card-link" onclick="navigate('c-nav-card')"><div class="ds-card-icon"><i data-lucide="layout-grid"></i></div><div class="ds-card-name">Nav Card</div><div class="ds-card-desc">Tarjeta de navegación con visual.</div></div>
         </div>
@@ -8600,7 +9085,7 @@ export { Textarea }</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <div class="docs-section">
           <h2 class="docs-section-title">CSS requerido</h2>
-          <p class="docs-section-desc">Los estilos de Basic Card forman parte del sistema de <code>.nav-card</code>, definido inline en <code>index.html</code>. No están disponibles en <code>css/components/</code>. Para usarlos en un producto, flaggearlo como gap del DS o copiar los bloques <code>.nav-card</code> y <code>.nav-card--compact</code>.</p>
+          <p class="docs-section-desc">Los estilos de Basic Card forman parte del sistema de <code>.nav-card</code>, definido inline en <code>index.html</code>. No tienen componente en <code>@amalgama/ds</code> (packages/ds). Para usarlos en un producto, flaggearlo como gap del DS o copiar los bloques <code>.nav-card</code> y <code>.nav-card--compact</code>.</p>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">HTML — Variante estática</h2>
@@ -8861,7 +9346,7 @@ export { Textarea }</code></pre>
           <h3>CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>@import &quot;@amalgama/ds/theme&quot;;   /* React + Tailwind v4 */
-/* uso buildless (HTML/clases): css/variables.css + css/components/badge.css */</code></pre>
+import { Badge } from &quot;@amalgama/ds/badge&quot;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3>Ejemplo de uso</h3>
@@ -9126,7 +9611,7 @@ export { Badge, badgeVariants }</code></pre>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/table.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
@@ -9406,7 +9891,7 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/tabs.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
@@ -9683,10 +10168,10 @@ TabsContent.displayName = &quot;TabsContent&quot;</code></pre>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>&lt;link rel="stylesheet" href="css/variables.css"&gt;
-&lt;link rel="stylesheet" href="css/base.css"&gt;
-&lt;link rel="stylesheet" href="css/components/modal.css"&gt;
-&lt;link rel="stylesheet" href="css/components/button.css"&gt;</code></pre>
+          <pre class="docs-code standalone"><code>@import "@amalgama/ds/tailwind.theme.css";
+
+import { Modal } from "@amalgama/ds/modal"
+import { Button } from "@amalgama/ds/button"</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Uso</h3>
@@ -10529,7 +11014,7 @@ export { Modal, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalFooter }</c
 
     <div class="docs-section">
       <h2 class="docs-section-title">CSS provisional (referencia de implementación)</h2>
-      <p class="docs-section-desc">Especificación CSS completa para cuando se cree <code>css/components/snackbar.css</code>. No copiar en producción hasta que sea la versión oficial de Embassy.</p>
+      <p class="docs-section-desc">Especificación CSS completa para cuando se cree el componente Snackbar en <code>@amalgama/ds</code> (packages/ds). No copiar en producción hasta que sea la versión oficial de Embassy.</p>
       <div class="docs-code-wrapper"><pre class="docs-code standalone"><code>/*
  * Snackbar — Embassy Design System
  * Componente: retroalimentación transitoria, inferior-centro
@@ -10885,7 +11370,7 @@ export { toast }</code></pre></div>
           <h3>CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/skeleton.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3>Ejemplo de uso</h3>
@@ -11107,7 +11592,7 @@ export { Skeleton, skeletonVariants }</code></pre>
           <h3>CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/empty-state.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3>Ejemplo de uso</h3>
@@ -11332,7 +11817,7 @@ export { EmptyState }</code></pre>
           <h3>CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/stat-card.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
           <h3>Ejemplo de uso</h3>
@@ -11873,7 +12358,7 @@ export { StatsGrid, StatCard }</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <div class="docs-section">
           <h2 class="docs-section-title">Estado del componente</h2>
-          <p class="docs-section-desc">La Navigation Bar no está incluida aún en <code>css/components/</code>. El snippet siguiente implementa el patrón con estilos inline usando los tokens del DS. Una vez incorporado al catálogo, esta sección se actualizará con las clases definitivas.</p>
+          <p class="docs-section-desc">La Navigation Bar no está incluida aún en <code>@amalgama/ds</code> (packages/ds). El snippet siguiente implementa el patrón con estilos inline usando los tokens del DS. Una vez incorporada al catálogo, esta sección se actualizará con el componente definitivo.</p>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Snippet de referencia</h2>
@@ -12339,7 +12824,7 @@ css/layout.css</code></pre>
           <h3>CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/kanban.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
         </div>
@@ -12566,8 +13051,7 @@ css/components/kanban.css</code></pre>
           <h3>CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/vacancy-card.css
-css/components/badge.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
         </div>
@@ -12769,7 +13253,7 @@ css/components/badge.css</code></pre>
           <h3>CSS requerido</h3>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>css/variables.css
-css/components/person-card.css</code></pre>
+@amalgama/ds/tailwind.theme.css</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
         </div>
@@ -12838,7 +13322,7 @@ css/components/person-card.css</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <ul>
-            <li><b>Anatomía:</b> círculo con iniciales de 2 letras sobre gradiente de marca — la clase <code>.avatar</code> (32px) vive en <code>css/layout.css</code> como parte del app shell, no tiene archivo propio en <code>css/components/</code>.</li>
+            <li><b>Anatomía:</b> círculo con iniciales de 2 letras sobre gradiente de marca — la clase <code>.avatar</code> (32px) vive en <code>css/layout.css</code> como parte del app shell, no tiene componente propio en <code>@amalgama/ds</code> (packages/ds).</li>
             <li><b>Gradiente de marca:</b> <code>--primary-500</code> → <code>--secondary-900</code> en diagonal (135deg), con iniciales en <code>--color-on-primary</code>.</li>
             <li><b>Tres tamaños según contexto:</b> 32px en el topbar (<code>.avatar</code>), 44px en person cards (<code>.person-avatar</code>, definido en <code>person-card.css</code>) y 22px para asignados (<code>.assignee-avatar</code>, en <code>vacancy-card.css</code>).</li>
             <li><b>Regla clave:</b> solo para personas — imágenes de producto, categorías u otros elementos no-persona usan íconos, no avatares.</li>
@@ -13338,7 +13822,8 @@ css/components/person-card.css</code></pre>
 &lt;!-- 2. Design System CSS (en este orden) --&gt;
 &lt;link rel="stylesheet" href="path/to/amalgama-ds/css/variables.css"&gt;
 &lt;link rel="stylesheet" href="path/to/amalgama-ds/css/base.css"&gt;
-&lt;link rel="stylesheet" href="path/to/amalgama-ds/css/components.css"&gt;
+&lt;!-- Tailwind v4: importá el theme una vez y copiá los componentes .tsx desde @amalgama/ds --&gt;
+@import "@amalgama/ds/tailwind.theme.css";
 
 &lt;!-- 3. Icons (opcional) --&gt;
 &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
@@ -13366,7 +13851,7 @@ css/components/person-card.css</code></pre>
           <tr><td><code>css/variables.css</code></td><td>Todos los tokens. Todo depende de este.</td><td>✓ Siempre</td></tr>
           <tr><td><code>css/base.css</code></td><td>Reset, tipografía base, scrollbar, keyframes</td><td>✓ Siempre</td></tr>
           <tr><td><code>css/layout.css</code></td><td>App shell (sidebar + topbar)</td><td>Solo si usás el shell</td></tr>
-          <tr><td><code>css/components.css</code></td><td>Barrel que importa todos los componentes</td><td>O cherry-pick individual</td></tr>
+          <tr><td><code>@amalgama/ds/tailwind.theme.css</code></td><td>Theme (tokens + mapping). Importalo una vez y copiá los componentes <code>.tsx</code> desde <code>packages/ds/components/ui/</code></td><td>✓ Para componentes</td></tr>
         </tbody>
       </table></div>
 
@@ -13394,19 +13879,14 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 ├── css/
 │   ├── variables.css          ← tokens primitivos
 │   ├── base.css               ← reset + tipografía
-│   ├── layout.css             ← app shell
-│   ├── components.css         ← barrel
-│   └── components/
-│       ├── button.css
-│       ├── badge.css
-│       ├── card.css
-│       └── ...
-├── components/
-│   └── ui/
-│       ├── button.tsx         ← wrappers React
-│       └── ...
+│   └── layout.css             ← app shell
+├── packages/ds/               ← @amalgama/ds (Tailwind — fuente de verdad)
+│   ├── components/ui/
+│   │   ├── button.tsx         ← variantes Tailwind in-file
+│   │   └── ...
+│   └── tailwind.theme.css     ← tokens + mapeo de theme
 ├── logos/                     ← assets de marca
-└── docs/                      ← documentación individual</code></pre>
+└── docs/                      ← redirects a index.html (SPA)</code></pre>
       </div>
     </section>
 
@@ -13836,20 +14316,21 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                 <div class="emb-gs-file-leaf accent">  variables.css</div>
                 <div class="emb-gs-file-leaf accent">  base.css</div>
                 <div class="emb-gs-file-leaf accent">  layout.css</div>
-                <div class="emb-gs-file-leaf accent">  components.css</div>
                 <div style="height:8px"></div>
-                <div class="emb-gs-file-dir">css/components/</div>
-                <div class="emb-gs-file-leaf">  button.css</div>
-                <div class="emb-gs-file-leaf">  input.css</div>
-                <div class="emb-gs-file-leaf">  card.css</div>
-                <div class="emb-gs-file-leaf">  badge.css</div>
+                <div class="emb-gs-file-dir">packages/ds/</div>
+                <div class="emb-gs-file-leaf accent">  tailwind.theme.css</div>
+                <div class="emb-gs-file-dir">packages/ds/components/ui/</div>
+                <div class="emb-gs-file-leaf">  button.tsx</div>
+                <div class="emb-gs-file-leaf">  input.tsx</div>
+                <div class="emb-gs-file-leaf">  card.tsx</div>
+                <div class="emb-gs-file-leaf">  badge.tsx</div>
                 <div class="emb-gs-file-leaf" style="color:var(--ds-text-3);font-style:italic">  ···</div>
                 <div style="height:8px"></div>
                 <div class="emb-gs-file-dir">docs/</div>
                 <div class="emb-gs-file-leaf">  index.html</div>
               </div>
               <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--ds-card-border)">
-                <div style="font-size:11px;color:var(--ds-text-3);line-height:1.6">Link los 4 archivos CSS base. Copiá componentes individuales según necesites.</div>
+                <div style="font-size:11px;color:var(--ds-text-3);line-height:1.6">Importá el theme una vez. Copiá los componentes <code>.tsx</code> que necesites desde <code>packages/ds/components/ui/</code>.</div>
               </div>
             </div>
           </div>
@@ -13916,7 +14397,8 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 &lt;link rel="stylesheet" href="css/variables.css"&gt;
 &lt;link rel="stylesheet" href="css/base.css"&gt;
 &lt;link rel="stylesheet" href="css/layout.css"&gt;
-&lt;link rel="stylesheet" href="css/components.css"&gt;</code></pre>
+&lt;!-- Tailwind v4: importá el theme una vez --&gt;
+@import "@amalgama/ds/tailwind.theme.css";</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
 
@@ -13926,22 +14408,21 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <tr><td><code>variables.css</code></td><td>Design tokens: colores, radios, sombras, transiciones</td><td>82</td></tr>
             <tr><td><code>base.css</code></td><td>Reset, tipografia, animaciones, clases utilitarias</td><td>81</td></tr>
             <tr><td><code>layout.css</code></td><td>App shell: sidebar, topbar, contenido</td><td>189</td></tr>
-            <tr><td><code>components.css</code></td><td>Barrel file que importa todos los componentes</td><td>—</td></tr>
+            <tr><td><code>@amalgama/ds/tailwind.theme.css</code></td><td>Theme (tokens + mapping). Importalo una vez y copiá los componentes <code>.tsx</code> desde <code>packages/ds/components/ui/</code></td><td>—</td></tr>
           </tbody>
         </table>
 
         <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Opcion B: Solo los componentes que necesitas</h3>
-        <p class="docs-section-desc">En vez de cargar todos los componentes, copia solo los archivos CSS que necesitas desde <code>css/components/</code>:</p>
+        <p class="docs-section-desc">Importá el theme una vez y copiá los componentes <code>.tsx</code> que necesites desde <code>packages/ds/components/ui/</code>:</p>
         <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>&lt;!-- Core (requerido) --&gt;
-&lt;link rel="stylesheet" href="css/variables.css"&gt;
-&lt;link rel="stylesheet" href="css/base.css"&gt;
+          <pre class="docs-code standalone"><code>/* Theme (requerido, una sola vez) */
+@import "@amalgama/ds/tailwind.theme.css";
 
-&lt;!-- Solo los componentes que usas --&gt;
-&lt;link rel="stylesheet" href="css/components/button.css"&gt;
-&lt;link rel="stylesheet" href="css/components/form.css"&gt;
-&lt;link rel="stylesheet" href="css/components/table.css"&gt;
-&lt;link rel="stylesheet" href="css/components/badge.css"&gt;</code></pre>
+// Solo los componentes que usas
+import { Button } from "@amalgama/ds/button"
+import { Input } from "@amalgama/ds/input"
+import { Table } from "@amalgama/ds/table"
+import { Badge } from "@amalgama/ds/badge"</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
       </div>
@@ -14023,7 +14504,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <!-- ════════ 3. USAR UN COMPONENTE ════════ -->
       <div class="docs-section">
         <h2 class="docs-section-title">3. Usar un componente</h2>
-        <p class="docs-section-desc">Cada componente es un archivo CSS independiente en <code>css/components/</code>. Copia el archivo CSS a tu proyecto, agrega el <code>&lt;link&gt;</code>, y pega el HTML. Cada archivo incluye un comment header con ejemplo de uso y dependencias.</p>
+        <p class="docs-section-desc">Cada componente es un archivo <code>.tsx</code> autocontenido en <code>packages/ds/components/ui/</code>. Importá el theme una vez (<code>@amalgama/ds/tailwind.theme.css</code>), copiá el <code>.tsx</code> (+ <code>components/lib/utils.ts</code> para <code>cn()</code>) a tu proyecto, e importalo. Cada archivo incluye un comment header con ejemplo de uso y la regla de decisión.</p>
 
         <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;max-width:100%;box-sizing:border-box;">
           <div style="flex:1;min-width:180px;background:var(--interactive-light);border-radius:var(--radius-md);padding:16px;text-align:center">
@@ -14164,32 +14645,15 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
     variables.css          ← Tokens: colores, radios, sombras, transiciones
     base.css               ← Reset, tipografia, animaciones, utilidades
     layout.css             ← App shell: sidebar, topbar, contenido
-    components.css         ← Barrel: importa todos los componentes
-    components/
-      button.css           ← btn-primary, btn-ghost, btn-next, icon-btn
-      badge.css            ← badge con 7 variantes de color
-      card.css             ← Contenedor basico
-      form.css             ← field-group, field-input, select, textarea...
-      table.css            ← data-table con thead/tbody
-      tabs.css             ← Pestanas con panel de contenido
-      toolbar.css          ← search-field, toolbar-btn, result-count
-      modal.css            ← modal-overlay, modal, header/body/footer
-      toast.css            ← Notificaciones success/error/info
-      stat-card.css        ← Tarjetas KPI con stats-grid
-      vacancy-card.css     ← Tarjeta de vacante + assignee-avatar
-      person-card.css      ← Tarjeta de persona + people-grid
-      kanban.css           ← Board, columnas y tarjetas arrastrables
-      skeleton.css         ← Animacion shimmer de carga
-      empty-state.css      ← Placeholder cuando no hay datos
-      page-header.css      ← Encabezado con titulo y acciones
-      back-link.css        ← Enlace de retorno
-      description.css      ← Secciones editables con delete
-      create-form.css      ← Header y footer sticky para forms
-      placeholder.css      ← Panel de contenido vacio
+  @amalgama/ds (Tailwind)  ← componentes (fuente de verdad)
+    tailwind.theme.css     ← tokens + mapeo de theme (unica hoja del paquete)
+    components/ui/
+      button.tsx           ← cada .tsx define sus variantes con utilidades Tailwind
+      badge.tsx            ← (bg-primary, text-on-surface, rounded-md, text-body-md...)
+      card.tsx
+      ...                  ← autocontenidos: copia el .tsx + importa el theme
   ui/
-    index.html             ← Catalogo de componentes
-    getting-started.html   ← Esta guia
-    [component].html       ← Documentacion de cada componente</code></pre>
+    index.html             ← Catalogo de componentes (SPA canonica)</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
 
@@ -14199,8 +14663,8 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <tr><td><code>variables.css</code></td><td>6 paletas de color (neutral, primary, secondary, success, error, warning), aliases semanticos (--bg, --tertiary, --border...), escala de radius (sm/md/lg/xl/full), 3 niveles de sombra, tokens de transicion</td></tr>
             <tr><td><code>base.css</code></td><td>Box-sizing reset, tipografia body (Inter 14px), headings (Epilogue 600), scrollbar custom, 6 keyframe animations, clases utilitarias (.text-muted, .font-mono, .sr-only)</td></tr>
             <tr><td><code>layout.css</code></td><td>App shell (.app, .main, .content), sidebar (220px fijo), topbar (56px sticky con breadcrumbs y avatar)</td></tr>
-            <tr><td><code>components.css</code></td><td>Barrel file: <code>@import</code> de los 20 archivos en <code>components/</code>. Carga todo de una vez.</td></tr>
-            <tr><td><code>components/*.css</code></td><td>20 archivos individuales. Cada uno es autocontenido con comment header que incluye ejemplo de uso y dependencias.</td></tr>
+            <tr><td><code>@amalgama/ds/tailwind.theme.css</code></td><td>Única hoja del paquete: tokens + mapeo de theme. Importala una vez (<code>@import "@amalgama/ds/tailwind.theme.css"</code>).</td></tr>
+            <tr><td><code>packages/ds/components/ui/*.tsx</code></td><td>Componentes React autocontenidos (Tailwind in-file). Copiá el <code>.tsx</code> + <code>components/lib/utils.ts</code>; no hay CSS por componente que copiar.</td></tr>
           </tbody>
         </table>
       </div>
@@ -14271,7 +14735,8 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
   &lt;link rel="stylesheet" href="css/variables.css"&gt;
   &lt;link rel="stylesheet" href="css/base.css"&gt;
   &lt;link rel="stylesheet" href="css/layout.css"&gt;
-  &lt;link rel="stylesheet" href="css/components.css"&gt;
+  &lt;!-- Tailwind v4: importá el theme una vez y copiá los componentes .tsx desde @amalgama/ds --&gt;
+  @import "@amalgama/ds/tailwind.theme.css";
 &lt;/head&gt;
 &lt;body&gt;
   &lt;div class="app"&gt;
@@ -17926,11 +18391,12 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <section class="docs-section">
           <h2 class="docs-section-title">Inicio rápido</h2>
           <p class="docs-section-desc">Importá la hoja de estilos del DS y usá las clases semánticas. Los chips accionables son elementos <code>&lt;button&gt;</code> nativos — no hace falta JavaScript para los estilos.</p>
-          <div class="bd-callout"><span class="bd-ico">📦</span><span>El sistema de tokens (<code>variables.css</code>) y los estilos de chips (<code>css/components/chip.css</code>) deben estar cargados. Todos los valores de color responden automáticamente a <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code>.</span></div>
+          <div class="bd-callout"><span class="bd-ico">📦</span><span>Importá el theme <code>@amalgama/ds/tailwind.theme.css</code> y usá el componente desde <code>@amalgama/ds/chip</code>. Todos los valores de color responden automáticamente a <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code>.</span></div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-            <pre class="docs-code"><code>&lt;link rel="stylesheet" href="css/variables.css"&gt;
-&lt;link rel="stylesheet" href="css/components/chip.css"&gt;</code></pre>
+            <pre class="docs-code"><code>@import "@amalgama/ds/tailwind.theme.css";
+
+import { Chip } from "@amalgama/ds/chip"</code></pre>
           </div>
         </section>
 
@@ -19290,11 +19756,12 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section">
           <h2 class="docs-section-title">Inicio rápido</h2>
           <p class="docs-section-desc">Importá la hoja de estilos del DS y usá las clases semánticas. La search bar es un contenedor flex con un <code>&lt;input type=&quot;search&quot;&gt;</code> nativo.</p>
-          <div class="bd-callout"><span class="bd-ico">📦</span><span>El sistema de tokens (<code>variables.css</code>) y los estilos de search (<code>css/components/search.css</code>) deben estar cargados. Todos los valores de color responden automáticamente a <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code>.</span></div>
+          <div class="bd-callout"><span class="bd-ico">📦</span><span>Importá el theme <code>@amalgama/ds/tailwind.theme.css</code> y usá el componente desde <code>@amalgama/ds/search</code>. Todos los valores de color responden automáticamente a <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code>.</span></div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-            <pre class="docs-code"><code>&lt;link rel="stylesheet" href="css/variables.css"&gt;
-&lt;link rel="stylesheet" href="css/components/search.css"&gt;</code></pre>
+            <pre class="docs-code"><code>@import "@amalgama/ds/tailwind.theme.css";
+
+import { SearchBar } from "@amalgama/ds/search"</code></pre>
           </div>
         </section>
 
@@ -20830,7 +21297,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <h1 class="docs-page-title">Nav Card</h1>
         <p class="docs-page-desc">Tarjetas de navegación visual para grids de secciones, categorías y atajos de página. Un único patrón reemplaza todas las implementaciones ad-hoc dentro del sitio de docs.</p>
       </div>
-      <div class="ds-callout"><strong>Componente interno del sitio de docs</strong> — no disponible en <code>css/components/</code>. Si lo necesitás en un producto, flaggearlo como gap del DS.</div>
+      <div class="ds-callout"><strong>Componente interno del sitio de docs</strong> — no disponible en <code>@amalgama/ds</code> (packages/ds); vive inline en <code>index.html</code>. Si lo necesitás en un producto, flaggearlo como gap del DS.</div>
 
       <div class="ds-comp-tabs">
         <button class="ds-comp-tab-btn active" onclick="switchCompTab(this,'overview')">Overview</button>
@@ -20849,7 +21316,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <li>Dos modos: <strong>full</strong> (con área visual de 148px) para grids de secciones de nivel superior y <strong>compact</strong> (sin área visual) para listas densas de componentes.</li>
             <li>8 tintes semánticos de área visual (default neutro + <code>nv-primary</code>/<code>nv-secondary</code>/<code>nv-tertiary</code>/<code>nv-success</code>/<code>nv-info</code>/<code>nv-warning</code>/<code>nv-neutral</code>) — el tinte va solo en <code>.nav-card-visual</code>, nunca en el root.</li>
             <li>Ilustraciones SVG inline con <code>currentColor</code> que se adaptan automáticamente a modo claro y oscuro.</li>
-            <li>Componente interno del sitio de docs: sus estilos viven inline en <code>index.html</code>, no en <code>css/components/</code>, y no tiene API <code>@amalgama/ds</code>.</li>
+            <li>Componente interno del sitio de docs: sus estilos viven inline en <code>index.html</code> y no tiene componente en <code>@amalgama/ds</code> (packages/ds).</li>
           </ul>
           <div class="nav-card-grid" style="max-width:900px;margin-top:24px">
           <div class="nav-card" onclick="">
@@ -20987,7 +21454,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             </div>
             <div class="ds-guideline-card">
               <h3>Cuándo no</h3>
-              <ul><li>NO es parte de la librería consumible — sus estilos viven inline en <code>index.html</code>, no en <code>css/components/</code></li><li>Para productos usar Card o Stat Card</li></ul>
+              <ul><li>NO es parte de la librería consumible — sus estilos viven inline en <code>index.html</code>, no en <code>@amalgama/ds</code> (packages/ds)</li><li>Para productos usar Card o Stat Card</li></ul>
             </div>
             <div class="ds-guideline-card">
               <h3>Reemplaza a</h3>

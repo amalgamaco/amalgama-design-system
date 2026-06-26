@@ -1,173 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chip — Amalgama DS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/variables.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="docs.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chips · Amalgama DS (movido)</title>
+<meta http-equiv="refresh" content="0; url=../index.html#c-chip">
+<link rel="canonical" href="../index.html#c-chip">
+<script>location.replace("../index.html#c-chip");</script>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Inter", sans-serif; margin: 0;
+         min-height: 100vh; display: grid; place-items: center; text-align: center;
+         background: #fff; color: #01164D; padding: 24px; }
+  @media (prefers-color-scheme: dark) { body { background: #13161F; color: #EAEBED; } }
+  a { color: #4F80FF; font-weight: 600; }
+  p { max-width: 32rem; line-height: 1.6; }
+</style>
 </head>
 <body>
-<div class="docs-app">
-  <aside class="docs-sidebar">
-    <a href="index.html" class="docs-sidebar-header">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      Amalgama DS
-      <span>v1.0</span>
-    </a>
-    <nav class="docs-nav">
-      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
-      <div class="docs-nav-section">Fundamentos</div>
-      <a href="logos.html" class="docs-nav-item">Logos</a>
-      <a href="tokens.html" class="docs-nav-item">Tokens</a>
-      <a href="typography.html" class="docs-nav-item">Tipografia</a>
-      <div class="docs-nav-section">Acciones</div>
-      <a href="button.html" class="docs-nav-item">Button</a>
-      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
-      <div class="docs-nav-section">Entrada de datos</div>
-      <a href="input.html" class="docs-nav-item">Input</a>
-      <a href="select.html" class="docs-nav-item">Select</a>
-      <a href="textarea.html" class="docs-nav-item">Textarea</a>
-      <a href="chip.html" class="docs-nav-item active">Chip</a>
-      <a href="search.html" class="docs-nav-item">Search</a>
-      <div class="docs-nav-section">Visualizacion</div>
-      <a href="table.html" class="docs-nav-item">Table</a>
-      <a href="card.html" class="docs-nav-item">Card</a>
-      <a href="badge.html" class="docs-nav-item">Badge</a>
-      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
-      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
-      <a href="person-card.html" class="docs-nav-item">Person Card</a>
-      <a href="avatar.html" class="docs-nav-item">Avatar</a>
-      <div class="docs-nav-section">Retroalimentacion</div>
-      <a href="modal.html" class="docs-nav-item">Modal</a>
-      <a href="toast.html" class="docs-nav-item">Toast</a>
-      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
-      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
-      <div class="docs-nav-section">Navegacion</div>
-      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
-      <a href="topbar.html" class="docs-nav-item">Topbar</a>
-      <a href="tabs.html" class="docs-nav-item">Tabs</a>
-      <div class="docs-nav-section">Layout</div>
-      <a href="kanban.html" class="docs-nav-item">Kanban</a>
-    </nav>
-  </aside>
-  <main class="docs-main">
-    <header class="docs-topbar">
-      <div class="docs-breadcrumb">
-        <a href="index.html">DS</a>
-        <span class="separator">/</span>
-        Chip
-      </div>
-    </header>
-    <div class="docs-content">
-      <h1>Chip</h1>
-      <p>Elementos compactos que representan una accion, filtro, entrada o sugerencia. Cuatro variantes funcionales: assist, filter, input y suggestion. Alto 32px, radio full, tipografia Inter 500 14px.</p>
-      <p>CSS: <code>css/components/chip.css</code> · React: <code>components/ui/chip.tsx</code> (<code>Chip</code>, <code>InputChip</code>, <code>ChipSet</code>)</p>
-
-      <h2>Cuándo usar</h2>
-      <table class="docs-props-table">
-        <tbody>
-          <tr><td><strong>Cuándo usar</strong></td><td>Filtros, selección múltiple, sugerencias — siempre interactivo. Filter chips van debajo de la search bar para refinar resultados.</td></tr>
-          <tr><td><strong>Cuándo no</strong></td><td>Estado de solo lectura (usar <a href="badge.html">Badge</a>); acción principal (usar <a href="button.html">Button</a>).</td></tr>
-          <tr><td><strong>Reemplaza a</strong></td><td>Toggles de filtro ad-hoc, tags clickeables legacy.</td></tr>
-        </tbody>
-      </table>
-
-      <h2>Las cuatro variantes</h2>
-      <div class="docs-preview">
-        <div class="chip-set">
-          <button class="chip"><span class="chip-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>Agendar entrevista</button>
-          <button class="chip" aria-pressed="false">Remoto</button>
-          <button class="chip chip-selected" aria-pressed="true">Full-time</button>
-          <span class="chip">ana@amalgama.co <button class="chip-remove" aria-label="Quitar ana@amalgama.co"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span>
-          <button class="chip">Buscar diseñadores</button>
-        </div>
-      </div>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>&lt;!-- ASSIST: accion contextual, con icono inicial --&gt;
-&lt;button class="chip"&gt;
-  &lt;span class="chip-icon"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/span&gt;
-  Agendar entrevista
-&lt;/button&gt;
-
-&lt;!-- FILTER: refina contenido, alterna aria-pressed + .chip-selected --&gt;
-&lt;button class="chip" aria-pressed="false"&gt;Remoto&lt;/button&gt;
-&lt;button class="chip chip-selected" aria-pressed="true"&gt;Full-time&lt;/button&gt;
-
-&lt;!-- INPUT: informacion ingresada, con boton de eliminacion --&gt;
-&lt;span class="chip"&gt;
-  ana@amalgama.co
-  &lt;button class="chip-remove" aria-label="Quitar ana@amalgama.co"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/button&gt;
-&lt;/span&gt;
-
-&lt;!-- SUGGESTION: sugerencia dinamica --&gt;
-&lt;button class="chip"&gt;Buscar diseñadores&lt;/button&gt;</code></pre>
-      </div>
-
-      <h2>Elevado y deshabilitado</h2>
-      <div class="docs-preview">
-        <div class="chip-set">
-          <button class="chip chip-elevated">Elevado</button>
-          <button class="chip" disabled>Deshabilitado</button>
-        </div>
-      </div>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>&lt;button class="chip chip-elevated"&gt;Elevado&lt;/button&gt;
-&lt;button class="chip" disabled&gt;Deshabilitado&lt;/button&gt;</code></pre>
-      </div>
-
-      <h2>Conjunto de chips (filtros)</h2>
-      <div class="docs-preview">
-        <div class="chip-set" role="group" aria-label="Filtrar vacantes">
-          <button class="chip" aria-pressed="false">Diseño</button>
-          <button class="chip chip-selected" aria-pressed="true">Ingenieria</button>
-          <button class="chip" aria-pressed="false">Producto</button>
-          <button class="chip" aria-pressed="false">Datos</button>
-        </div>
-      </div>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>&lt;div class="chip-set" role="group" aria-label="Filtrar vacantes"&gt;
-  &lt;button class="chip" aria-pressed="false"&gt;Diseño&lt;/button&gt;
-  &lt;button class="chip chip-selected" aria-pressed="true"&gt;Ingenieria&lt;/button&gt;
-  &lt;button class="chip" aria-pressed="false"&gt;Producto&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;script&gt;
-  document.querySelectorAll('.chip[aria-pressed]').forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      var on = chip.getAttribute('aria-pressed') === 'true';
-      chip.setAttribute('aria-pressed', String(!on));
-      chip.classList.toggle('chip-selected', !on);
-    });
-  });
-&lt;/script&gt;</code></pre>
-      </div>
-
-      <h2>React</h2>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>import { Chip, InputChip, ChipSet } from "@/components/ui/chip"
-
-&lt;ChipSet label="Filtrar vacantes"&gt;
-  &lt;Chip selected={filtro === 'remoto'} onClick={() =&gt; toggle('remoto')}&gt;Remoto&lt;/Chip&gt;
-  &lt;Chip icon={&lt;CalendarIcon /&gt;}&gt;Agendar entrevista&lt;/Chip&gt;
-  &lt;Chip variant="elevated"&gt;Elevado&lt;/Chip&gt;
-  &lt;InputChip onRemove={() =&gt; quitar(email)} removeLabel={`Quitar ${email}`}&gt;
-    {email}
-  &lt;/InputChip&gt;
-&lt;/ChipSet&gt;</code></pre>
-      </div>
-    </div>
+  <main>
+    <h1 style="font-size:18px;margin:0 0 8px">Esta página se movió</h1>
+    <p>La documentación de <strong>Chips</strong> ahora vive en el sitio canónico (SPA).
+       Si no se te redirige automáticamente,
+       <a href="../index.html#c-chip">abrí Chips en el nuevo sitio</a>.</p>
   </main>
-</div>
-<script src="docs.js"></script>
 </body>
 </html>

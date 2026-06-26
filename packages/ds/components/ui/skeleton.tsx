@@ -1,3 +1,12 @@
+/**
+ * Skeleton — animación de carga shimmer para placeholders.
+ *
+ * Cuándo usar: carga de contenido con estructura conocida (mientras llega la data).
+ * Cuándo no: estados vacíos (usar Empty State). No usar spinners ad-hoc.
+ * Reemplaza a: spinners/loaders custom.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/skeleton.css.
+ */
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../lib/utils"

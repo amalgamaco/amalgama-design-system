@@ -1,3 +1,12 @@
+/**
+ * Vacancy Card — tarjeta de vacante con ícono, título, metadata, stats y asignados.
+ *
+ * Cuándo usar: ítem de vacante en listas de recruiting (ícono + nombre + meta + stats).
+ * Cuándo no: personas (person-card); otros dominios (usar Card genérica).
+ * Reemplaza a: rows/cards de vacante custom.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/vacancy-card.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 import { Badge, type BadgeProps } from "./badge"
