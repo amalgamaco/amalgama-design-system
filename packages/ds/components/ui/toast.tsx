@@ -1,3 +1,12 @@
+/**
+ * Toast + Snackbar — dos componentes de retroalimentación temporal (Toast flotante top-right con borde semántico; Snackbar bottom-centered con superficie inversa).
+ *
+ * Cuándo usar Snackbar: confirmación de acciones reversibles ("Archivo eliminado — DESHACER"), avisos no críticos que no requieren respuesta.
+ * Cuándo usar Toast: notificaciones del sistema (éxito/error) con ícono y clasificación semántica.
+ * Cuándo no: confirmaciones que requieren decisión → usar Modal.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/toast.css.
+ */
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../lib/utils"

@@ -35,8 +35,14 @@ Create `brand/<client-slug>-theme.css`. Load it **after** `variables.css` and **
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="brand/<client-slug>-theme.css">   <!-- ← brand overrides here -->
 <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
+<!-- Components are Tailwind: @import "@amalgama/ds/tailwind.theme.css" + copy the .tsx
+     (the buildless css/components layer was deleted in 2026-06) -->
 ```
+
+> **Tailwind consumers** (canonical): white-labeling is identical — it overrides the **primitive
+> palette**, which both layers read. Load the brand override before the theme import
+> (`@import "brand/<client-slug>-theme.css"; @import "@amalgama/ds/tailwind.theme.css";`) or
+> redefine the primitives in `:root` after it. Components need no changes either way.
 
 ---
 

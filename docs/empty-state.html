@@ -1,178 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Empty State — Amalgama DS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/variables.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="docs.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empty State · Amalgama DS (movido)</title>
+<meta http-equiv="refresh" content="0; url=../index.html#c-empty">
+<link rel="canonical" href="../index.html#c-empty">
+<script>location.replace("../index.html#c-empty");</script>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Inter", sans-serif; margin: 0;
+         min-height: 100vh; display: grid; place-items: center; text-align: center;
+         background: #fff; color: #01164D; padding: 24px; }
+  @media (prefers-color-scheme: dark) { body { background: #13161F; color: #EAEBED; } }
+  a { color: #4F80FF; font-weight: 600; }
+  p { max-width: 32rem; line-height: 1.6; }
+</style>
 </head>
 <body>
-<div class="docs-app">
-  <aside class="docs-sidebar">
-    <a href="index.html" class="docs-sidebar-header">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      Amalgama DS
-      <span>v1.0</span>
-    </a>
-    <nav class="docs-nav">
-      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
-      <div class="docs-nav-section">Fundamentos</div>
-      <a href="logos.html" class="docs-nav-item">Logos</a>
-      <a href="tokens.html" class="docs-nav-item">Tokens</a>
-      <a href="typography.html" class="docs-nav-item">Tipografia</a>
-      <div class="docs-nav-section">Acciones</div>
-      <a href="button.html" class="docs-nav-item">Button</a>
-      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
-      <div class="docs-nav-section">Entrada de datos</div>
-      <a href="input.html" class="docs-nav-item">Input</a>
-      <a href="select.html" class="docs-nav-item">Select</a>
-      <a href="textarea.html" class="docs-nav-item">Textarea</a>
-      <a href="chip.html" class="docs-nav-item">Chip</a>
-      <a href="search.html" class="docs-nav-item">Search</a>
-      <div class="docs-nav-section">Visualizacion</div>
-      <a href="table.html" class="docs-nav-item">Table</a>
-      <a href="card.html" class="docs-nav-item">Card</a>
-      <a href="badge.html" class="docs-nav-item">Badge</a>
-      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
-      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
-      <a href="person-card.html" class="docs-nav-item">Person Card</a>
-      <a href="avatar.html" class="docs-nav-item">Avatar</a>
-      <div class="docs-nav-section">Retroalimentacion</div>
-      <a href="modal.html" class="docs-nav-item">Modal</a>
-      <a href="toast.html" class="docs-nav-item">Toast</a>
-      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
-      <a href="empty-state.html" class="docs-nav-item active">Empty State</a>
-      <div class="docs-nav-section">Navegacion</div>
-      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
-      <a href="topbar.html" class="docs-nav-item">Topbar</a>
-      <a href="tabs.html" class="docs-nav-item">Tabs</a>
-      <div class="docs-nav-section">Layout</div>
-      <a href="kanban.html" class="docs-nav-item">Kanban</a>
-    </nav>
-  </aside>
-  <main class="docs-main">
-    <header class="docs-topbar">
-      <div class="docs-breadcrumb">
-        <a href="index.html">DS</a>
-        <span class="separator">/</span>
-        Empty State
-      </div>
-    </header>
-    <div class="docs-content">
-      <div class="docs-page-header">
-        <h1 class="docs-page-title">Empty State</h1>
-        <p class="docs-page-desc">Pantallas vacias con mensaje e icono para cuando no hay datos.</p>
-      </div>
-
-      <!-- Cuándo usar -->
-      <section class="docs-section">
-        <h2 class="docs-section-title">Cuándo usar</h2>
-        <table class="docs-props-table">
-          <tbody>
-            <tr><td><strong>Cuándo usar</strong></td><td>Listas/tablas/búsquedas sin resultados o sin datos aún.</td></tr>
-            <tr><td><strong>Cuándo no</strong></td><td>Features en construcción (usar Placeholder); carga en progreso (usar <a href="skeleton.html">Skeleton</a>).</td></tr>
-            <tr><td><strong>Reemplaza a</strong></td><td>Textos sueltos "no hay datos".</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- Instalacion TSX -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Instalacion</h2>
-        <p class="docs-section-desc">Copia <code>empty-state.tsx</code> a tu proyecto en <code>components/ui/empty-state.tsx</code></p>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cn } from &quot;@/lib/utils&quot;
-
-export interface EmptyStateProps extends React.HTMLAttributes&lt;HTMLDivElement&gt; {
-  icon?: React.ReactNode
-  title: string
-  description?: string
-}
-
-const EmptyState = React.forwardRef&lt;HTMLDivElement, EmptyStateProps&gt;(
-  ({ className, icon, title, description, children, ...props }, ref) =&gt; (
-    &lt;div ref={ref} className={cn(&quot;empty-state&quot;, className)} {...props}&gt;
-      {icon &amp;&amp; &lt;div className=&quot;empty-state-icon&quot;&gt;{icon}&lt;/div&gt;}
-      &lt;div className=&quot;empty-state-title&quot;&gt;{title}&lt;/div&gt;
-      {description &amp;&amp; &lt;p className=&quot;empty-state-desc&quot;&gt;{description}&lt;/p&gt;}
-      {children}
-    &lt;/div&gt;
-  )
-)
-EmptyState.displayName = &quot;EmptyState&quot;
-
-export { EmptyState }</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>Dependencias</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install clsx</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>CSS requerido</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>css/variables.css
-css/components/empty-state.css</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>Ejemplo de uso</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { EmptyState } from &quot;@/components/ui/empty-state&quot;
-import { Button } from &quot;@/components/ui/button&quot;
-
-&lt;EmptyState icon=&quot;&#x1F4ED;&quot; title=&quot;No hay vacantes&quot; description=&quot;Crea tu primera vacante para empezar.&quot;&gt;
-  &lt;Button&gt;+ Nueva vacante&lt;/Button&gt;
-&lt;/EmptyState&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <h2>Empty state</h2>
-      <div class="docs-preview">
-        <div class="empty-state">
-          <div class="empty-state-icon">&#x1F4CB;</div>
-          <div class="empty-state-title">Sin vacantes</div>
-          <div class="empty-state-desc">Aun no has creado ninguna vacante. Crea tu primera vacante para empezar a recibir candidatos.</div>
-          <button class="btn-primary">Crear vacante</button>
-        </div>
-      </div>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>&lt;div class="empty-state"&gt;
-  &lt;div class="empty-state-icon"&gt;&#x1F4CB;&lt;/div&gt;
-  &lt;div class="empty-state-title"&gt;Sin vacantes&lt;/div&gt;
-  &lt;div class="empty-state-desc"&gt;Aun no has creado ninguna vacante. Crea tu primera vacante para empezar a recibir candidatos.&lt;/div&gt;
-  &lt;button class="btn-primary"&gt;Crear vacante&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-      </div>
-
-      <h2>Placeholder panel</h2>
-      <div class="docs-preview">
-        <div class="placeholder-panel">
-          <div class="placeholder-icon">&#x1F4C4;</div>
-          <p>Selecciona una vacante para ver los detalles</p>
-        </div>
-      </div>
-      <div class="docs-code-wrapper">
-        <button class="docs-copy-btn">Copiar</button>
-        <pre class="docs-code"><code>&lt;div class="placeholder-panel"&gt;
-  &lt;div class="placeholder-icon"&gt;&#x1F4C4;&lt;/div&gt;
-  &lt;p&gt;Selecciona una vacante para ver los detalles&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-      </div>
-    </div>
+  <main>
+    <h1 style="font-size:18px;margin:0 0 8px">Esta página se movió</h1>
+    <p>La documentación de <strong>Empty State</strong> ahora vive en el sitio canónico (SPA).
+       Si no se te redirige automáticamente,
+       <a href="../index.html#c-empty">abrí Empty State en el nuevo sitio</a>.</p>
   </main>
-</div>
-<script src="docs.js"></script>
 </body>
 </html>

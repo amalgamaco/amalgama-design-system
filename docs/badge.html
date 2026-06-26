@@ -1,223 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Badge — Amalgama DS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/variables.css">
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/layout.css">
-  <link rel="stylesheet" href="../css/components.css">
-  <link rel="stylesheet" href="docs.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Badges · Amalgama DS (movido)</title>
+<meta http-equiv="refresh" content="0; url=../index.html#c-badge">
+<link rel="canonical" href="../index.html#c-badge">
+<script>location.replace("../index.html#c-badge");</script>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Inter", sans-serif; margin: 0;
+         min-height: 100vh; display: grid; place-items: center; text-align: center;
+         background: #fff; color: #01164D; padding: 24px; }
+  @media (prefers-color-scheme: dark) { body { background: #13161F; color: #EAEBED; } }
+  a { color: #4F80FF; font-weight: 600; }
+  p { max-width: 32rem; line-height: 1.6; }
+</style>
 </head>
 <body>
-<div class="docs-app">
-  <aside class="docs-sidebar">
-    <a href="index.html" class="docs-sidebar-header">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      Amalgama DS
-      <span>v1.0</span>
-    </a>
-    <nav class="docs-nav">
-      <a href="getting-started.html" class="docs-nav-item">Guia de uso</a>
-      <div class="docs-nav-section">Fundamentos</div>
-      <a href="logos.html" class="docs-nav-item">Logos</a>
-      <a href="tokens.html" class="docs-nav-item">Tokens</a>
-      <a href="typography.html" class="docs-nav-item">Tipografia</a>
-      <div class="docs-nav-section">Acciones</div>
-      <a href="button.html" class="docs-nav-item">Button</a>
-      <a href="toolbar.html" class="docs-nav-item">Toolbar</a>
-      <div class="docs-nav-section">Entrada de datos</div>
-      <a href="input.html" class="docs-nav-item">Input</a>
-      <a href="select.html" class="docs-nav-item">Select</a>
-      <a href="textarea.html" class="docs-nav-item">Textarea</a>
-      <a href="chip.html" class="docs-nav-item">Chip</a>
-      <a href="search.html" class="docs-nav-item">Search</a>
-      <div class="docs-nav-section">Visualizacion</div>
-      <a href="table.html" class="docs-nav-item">Table</a>
-      <a href="card.html" class="docs-nav-item">Card</a>
-      <a href="badge.html" class="docs-nav-item active">Badge</a>
-      <a href="stat-card.html" class="docs-nav-item">Stat Card</a>
-      <a href="vacancy-card.html" class="docs-nav-item">Vacancy Card</a>
-      <a href="person-card.html" class="docs-nav-item">Person Card</a>
-      <a href="avatar.html" class="docs-nav-item">Avatar</a>
-      <div class="docs-nav-section">Retroalimentacion</div>
-      <a href="modal.html" class="docs-nav-item">Modal</a>
-      <a href="toast.html" class="docs-nav-item">Toast</a>
-      <a href="skeleton.html" class="docs-nav-item">Skeleton</a>
-      <a href="empty-state.html" class="docs-nav-item">Empty State</a>
-      <div class="docs-nav-section">Navegacion</div>
-      <a href="navigation.html" class="docs-nav-item">Sidebar Nav</a>
-      <a href="topbar.html" class="docs-nav-item">Topbar</a>
-      <a href="tabs.html" class="docs-nav-item">Tabs</a>
-      <div class="docs-nav-section">Layout</div>
-      <a href="kanban.html" class="docs-nav-item">Kanban</a>
-    </nav>
-  </aside>
-  <main class="docs-main">
-    <header class="docs-topbar">
-      <div class="docs-breadcrumb">
-        <a href="index.html">DS</a>
-        <span class="separator">/</span>
-        Badge
-      </div>
-    </header>
-    <div class="docs-content">
-
-      <h1 class="docs-page-title">Badge</h1>
-      <p class="docs-page-desc">Indicadores de estado para vacantes, candidatos y procesos.</p>
-
-      <!-- Cuándo usar -->
-      <section class="docs-section">
-        <h2 class="docs-section-title">Cuándo usar</h2>
-        <table class="docs-props-table">
-          <tbody>
-            <tr><td><strong>Cuándo usar</strong></td><td>Estado o categoría de SOLO LECTURA de un ítem (tablas, cards, listas). Todo label categórico debe ser badge — nunca texto plano coloreado.</td></tr>
-            <tr><td><strong>Cuándo no</strong></td><td>Si es interactivo/filtrable usar <a href="chip.html">Chip</a>; si es una acción usar <a href="button.html">Button</a>.</td></tr>
-            <tr><td><strong>Reemplaza a</strong></td><td>Labels de texto plano con color, pills custom, tags legacy.</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- Instalacion TSX -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">Instalacion</h2>
-        <p class="docs-section-desc">Copia <code>badge.tsx</code> a tu proyecto en <code>components/ui/badge.tsx</code></p>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
-import { cva, type VariantProps } from &quot;class-variance-authority&quot;
-import { cn } from &quot;@/lib/utils&quot;
-
-const badgeVariants = cva(
-  &quot;badge&quot;,
-  {
-    variants: {
-      variant: {
-        open: &quot;badge-open&quot;,
-        active: &quot;badge-active&quot;,
-        closed: &quot;badge-closed&quot;,
-        draft: &quot;badge-draft&quot;,
-        archived: &quot;badge-archived&quot;,
-        warning: &quot;badge-warning&quot;,
-        accent: &quot;badge-accent&quot;,
-      },
-    },
-    defaultVariants: {
-      variant: &quot;open&quot;,
-    },
-  }
-)
-
-export interface BadgeProps
-  extends React.HTMLAttributes&lt;HTMLSpanElement&gt;,
-    VariantProps&lt;typeof badgeVariants&gt; {}
-
-const Badge = React.forwardRef&lt;HTMLSpanElement, BadgeProps&gt;(
-  ({ className, variant, ...props }, ref) =&gt; {
-    return (
-      &lt;span
-        ref={ref}
-        className={cn(badgeVariants({ variant, className }))}
-        {...props}
-      /&gt;
-    )
-  }
-)
-Badge.displayName = &quot;Badge&quot;
-
-export { Badge, badgeVariants }</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>Dependencias</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>npm install class-variance-authority clsx</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>CSS requerido</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>css/variables.css
-css/components/badge.css</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <h3>Ejemplo de uso</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>import { Badge } from &quot;@/components/ui/badge&quot;
-
-&lt;Badge variant=&quot;open&quot;&gt;Abierta&lt;/Badge&gt;
-&lt;Badge variant=&quot;closed&quot;&gt;Cerrada&lt;/Badge&gt;
-&lt;Badge variant=&quot;warning&quot;&gt;Urgente&lt;/Badge&gt;
-&lt;Badge variant=&quot;draft&quot;&gt;Borrador&lt;/Badge&gt;
-&lt;Badge variant=&quot;accent&quot;&gt;Nuevo&lt;/Badge&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <!-- Todas las variantes -->
-      <section class="docs-section">
-        <h2>Todas las variantes</h2>
-        <div class="docs-preview" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-          <span class="badge badge-open">Abierta</span>
-          <span class="badge badge-active">Activa</span>
-          <span class="badge badge-closed">Cerrada</span>
-          <span class="badge badge-draft">Borrador</span>
-          <span class="badge badge-archived">Archivada</span>
-          <span class="badge badge-warning">Pendiente</span>
-          <span class="badge badge-accent">Nueva</span>
-        </div>
-        <div class="docs-code-wrapper">
-          <button class="docs-copy-btn">Copiar</button>
-          <pre class="docs-code"><code>&lt;span class=&quot;badge badge-open&quot;&gt;Abierta&lt;/span&gt;
-&lt;span class=&quot;badge badge-active&quot;&gt;Activa&lt;/span&gt;
-&lt;span class=&quot;badge badge-closed&quot;&gt;Cerrada&lt;/span&gt;
-&lt;span class=&quot;badge badge-draft&quot;&gt;Borrador&lt;/span&gt;
-&lt;span class=&quot;badge badge-archived&quot;&gt;Archivada&lt;/span&gt;
-&lt;span class=&quot;badge badge-warning&quot;&gt;Pendiente&lt;/span&gt;
-&lt;span class=&quot;badge badge-accent&quot;&gt;Nueva&lt;/span&gt;</code></pre>
-        </div>
-      </section>
-
-      <!-- Uso en contexto -->
-      <section class="docs-section">
-        <h2>Uso en contexto</h2>
-        <div class="docs-preview">
-          <div style="display:flex;align-items:center;gap:8px;font-weight:600">Disenador UX <span class="badge badge-open">Abierta</span></div>
-        </div>
-        <div class="docs-code-wrapper">
-          <button class="docs-copy-btn">Copiar</button>
-          <pre class="docs-code"><code>&lt;div style=&quot;display:flex;align-items:center;gap:8px;font-weight:600&quot;&gt;
-  Disenador UX
-  &lt;span class=&quot;badge badge-open&quot;&gt;Abierta&lt;/span&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-      </section>
-
-      <!-- Props Table -->
-      <section class="docs-section">
-        <h2>Clases CSS</h2>
-        <table class="docs-props-table">
-          <thead>
-            <tr><th>Clase</th><th>Color</th><th>Uso</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>.badge-open</code></td><td>Verde</td><td>Vacante abierta / disponible</td></tr>
-            <tr><td><code>.badge-active</code></td><td>Azul</td><td>Proceso activo / en curso</td></tr>
-            <tr><td><code>.badge-closed</code></td><td>Rojo</td><td>Cerrada / finalizada</td></tr>
-            <tr><td><code>.badge-draft</code></td><td>Gris</td><td>Borrador / sin publicar</td></tr>
-            <tr><td><code>.badge-archived</code></td><td>Gris oscuro</td><td>Archivada / inactiva</td></tr>
-            <tr><td><code>.badge-warning</code></td><td>Amarillo / ambar</td><td>Pendiente / requiere atencion</td></tr>
-            <tr><td><code>.badge-accent</code></td><td>Acento (violeta)</td><td>Nueva / destacada</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-    </div>
+  <main>
+    <h1 style="font-size:18px;margin:0 0 8px">Esta página se movió</h1>
+    <p>La documentación de <strong>Badges</strong> ahora vive en el sitio canónico (SPA).
+       Si no se te redirige automáticamente,
+       <a href="../index.html#c-badge">abrí Badges en el nuevo sitio</a>.</p>
   </main>
-</div>
-<script src="docs.js"></script>
 </body>
 </html>

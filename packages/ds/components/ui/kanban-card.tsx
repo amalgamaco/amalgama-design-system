@@ -1,3 +1,12 @@
+/**
+ * Kanban — tablero kanban con columnas y tarjetas arrastrables.
+ *
+ * Cuándo usar: tableros de flujo por columnas (pipelines de recruiting/HR).
+ * Cuándo no: datos tabulares (usar Table); listas simples (usar cards).
+ * Reemplaza a: boards custom.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/kanban.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 import { Badge, type BadgeProps } from "./badge"

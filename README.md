@@ -1,32 +1,31 @@
 # Embassy — Amalgama Design System
 
-Librería de componentes UI reutilizable. Sin npm, sin build tools — solo HTML, CSS y componentes React de referencia.
+Librería de componentes UI reutilizable. El código de componentes vive en el paquete **`@amalgama/ds`** (`packages/ds/`): componentes React **Tailwind v4 + shadcn/Radix**, cada uno **autocontenido** — define sus variantes in-file con utilidades Tailwind que resuelven a tokens Embassy. La única hoja de estilos es `tailwind.theme.css` (tokens + mapeo de theme). Copiás el archivo del componente y funciona.
+
+> **La capa CSS buildless (`css/components/*.css` + el barrel `css/components.css`) fue eliminada (2026-06).** El único origen de verdad de los componentes es Tailwind (`packages/ds/components/ui/*.tsx`). Los tokens (`css/variables.css`, `css/base.css`, `css/layout.css`, `css/md-sys-bridge.css`) **no** están deprecados y siguen siendo el origen de los tokens.
 
 > **AI agents**: ver [CLAUDE.md](./CLAUDE.md) para la guía de consumo completa. Ver [GOVERNANCE.md](./GOVERNANCE.md) para el contrato de calidad. Ver [MIGRATION.md](./MIGRATION.md) para aplicar el DS a un producto existente. Ver [WHITE-LABEL.md](./WHITE-LABEL.md) para implementaciones de marca cliente.
 
 ---
 
-## Inicio rápido
+## Inicio rápido (Tailwind — canónico)
 
-Agregá las fuentes y los archivos CSS al `<head>` de tu HTML **en este orden** (el orden importa):
+En un proyecto Tailwind v4, importá el theme una vez y usá los componentes:
 
-```html
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="path/to/amalgama-ds/css/variables.css">   <!-- 1. tokens (obligatorio) -->
-<link rel="stylesheet" href="path/to/amalgama-ds/css/base.css">        <!-- 2. reset + tipografía base (obligatorio) -->
-<link rel="stylesheet" href="path/to/amalgama-ds/css/components.css">  <!-- 3. barrel: todos los componentes -->
-<!-- layout.css solo para app shell completo (sidebar + topbar + avatar) -->
+```css
+/* tu hoja de estilos global */
+@import "@amalgama/ds/tailwind.theme.css";  /* tokens + mapeo de theme — la ÚNICA hoja del DS */
 ```
 
-O cargá solo los componentes que necesitás:
+```tsx
+import { Button } from "@amalgama/ds/button"   // autocontenido — no hay CSS extra que copiar
 
-```html
-<link rel="stylesheet" href="path/to/amalgama-ds/css/variables.css">
-<link rel="stylesheet" href="path/to/amalgama-ds/css/base.css">
-<link rel="stylesheet" href="path/to/amalgama-ds/css/components/button.css">
-<link rel="stylesheet" href="path/to/amalgama-ds/css/components/badge.css">
+<Button variant="primary">Crear vacante</Button>
 ```
+
+Cada archivo en `packages/ds/components/ui/` es la implementación completa. Para "vendorizar" un componente, copiá su `.tsx` + `components/lib/utils.ts` (`cn()`); solo necesita el import del theme de arriba. Cargá las fuentes (DM Mono / Epilogue / Inter) por separado.
+
+> **Sin componentes buildless.** El viejo path "linkeá `css/components.css` y usá `btn-primary`" ya no existe (fue eliminado en 2026-06). Para tokens sin build podés seguir linkeando `css/variables.css` + `css/base.css`, pero los componentes son Tailwind: importá `@amalgama/ds/tailwind.theme.css` y copiá el `.tsx`.
 
 Abrí `index.html` en un servidor local para ver el catálogo interactivo:
 
@@ -42,24 +41,22 @@ python3 -m http.server 8087
 ```
 amalgama-ds/
 ├── index.html                # Sitio de documentación canónico (SPA, una sola página)
-├── css/                      # Capa buildless (tokens + estilos) — consumida por el skill y vía CDN
+├── css/                      # Tokens + base (fuente de verdad de tokens)
 │   ├── variables.css         # Design tokens (fuente de verdad)
 │   ├── base.css              # Reset, tipografía, animaciones
 │   ├── layout.css            # App shell (sidebar, topbar, avatar)
 │   ├── md-sys-bridge.css     # Alias de nombres MD3 (--md-sys-color-*) → roles Embassy
-│   ├── components.css        # Barrel: importa todos los componentes
-│   └── components/           # CSS individual por componente
-├── components/               # Capa React buildless (clases CSS) — la copia el skill a otros proyectos
-│   ├── lib/utils.ts          # cn() utility (clsx wrapper)
-│   └── ui/                   # Wrappers .tsx basados en clases (btn-primary, …)
-├── packages/ds/              # @amalgama/ds — implementación Tailwind v4 + shadcn/Radix
-│   ├── components/ui/        # Componentes React reales (fuente de verdad del código)
+│   ├── components.css        # ⚠️ DEPRECADO/congelado — barrel buildless (solo para el docs site)
+│   └── components/           # ⚠️ DEPRECADO/congelado — CSS por componente (no agregar nada)
+├── packages/ds/              # @amalgama/ds — FUENTE DE VERDAD de los componentes (Tailwind v4 + shadcn/Radix)
+│   ├── components/ui/        # Componentes React autocontenidos (variantes Tailwind in-file)
+│   ├── components/lib/utils.ts # cn() (extendTailwindMerge con tokens Embassy)
 │   ├── css/                  # Copia GENERADA de los tokens (no editar; ver scripts/sync-tokens.mjs)
-│   └── tailwind.theme.css
+│   └── tailwind.theme.css    # Tokens + mapeo de theme — la única hoja de estilos del paquete
 ├── islands/                  # Glue Vite: monta @amalgama/ds en el index.html
 │   ├── src/                  # Showcases + registro (main.tsx)
 │   └── dist/                 # Bundle COMMITEADO y servido (embassy-islands.{js,css})
-├── docs/                     # Páginas de documentación legacy (+ docs.css, requerido por index.html)
+├── docs/                     # Stubs de redirect a la SPA index.html (+ docs.css, requerido por index.html)
 ├── scripts/sync-tokens.mjs   # Sincroniza css/variables.css → packages/ds (con --check para CI)
 ├── skills/design-system/     # SKILL.md — instrucciones para el skill de IA
 ├── CLAUDE.md                 # Guía de consumo (humanos + IA)
@@ -76,7 +73,7 @@ amalgama-ds/
 
 ### Core (genéricos)
 
-| Componente | CSS | TSX | Descripción |
+| Componente | CSS (legacy — eliminado) | TSX (canónico) | Descripción |
 |---|---|---|---|
 | Button | `button.css` | `button.tsx` | Primary, secondary, tertiary, text, icon; 5 tamaños |
 | Badge | `badge.css` | `badge.tsx` | Indicadores de estado (9 variantes) |
@@ -99,13 +96,13 @@ amalgama-ds/
 
 ### Extended (orientados a dominio)
 
-| Componente | CSS | TSX | Descripción |
+| Componente | CSS (legacy — eliminado) | TSX (canónico) | Descripción |
 |---|---|---|---|
-| Vacancy Card | `vacancy-card.css` | — | Tarjeta de vacante con stats y asignados |
-| Person Card | `person-card.css` | — | Tarjeta de persona / candidato |
-| Kanban | `kanban.css` | — | Tablero kanban con columnas y cards |
-| Create Form | `create-form.css` | — | Header/footer para formularios de creación |
-| Placeholder | `placeholder.css` | — | Panel para secciones en construcción |
+| Vacancy Card | `vacancy-card.css` | `vacancy-card.tsx` | Tarjeta de vacante con stats y asignados |
+| Person Card | `person-card.css` | `person-card.tsx` | Tarjeta de persona / candidato |
+| Kanban | `kanban.css` | `kanban-card.tsx` | Tablero kanban con columnas y cards |
+| Create Form | `create-form.css` | `create-form.tsx` | Header/footer para formularios de creación |
+| Placeholder | `placeholder.css` | `placeholder.tsx` | Panel para secciones en construcción |
 
 ### App Shell (layout.css)
 
@@ -115,28 +112,30 @@ amalgama-ds/
 | Sidebar | `.sidebar` / `.nav-item` | Navegación lateral |
 | Avatar | `.avatar` | Círculo con iniciales o imagen |
 
-### En roadmap (sin código consumible aún)
+### Interactivos (en `@amalgama/ds`, vía islands)
 
-Checkbox, radio, switch, menú, tooltip, slider, date picker, sheet, list, loading, carousel, divider. No improvises estilos para estos — componé desde los existentes o reportá el gap.
+Checkbox, radio, switch, menú (dropdown), tooltip, slider, date picker (calendar), sheet, list, progress, carousel, divider (separator), dialog, popover, avatar, snackbar (sonner). Implementados en `packages/ds/components/ui/` (Tailwind + Radix) y renderizados en el docs site vía islands. No improvises estilos — usá estos componentes o reportá el gap.
 
 ---
 
 ## Uso con React
 
-Los componentes TSX son implementaciones de referencia que usan `class-variance-authority` y `clsx`:
+Los componentes son autocontenidos: definen sus variantes con utilidades Tailwind (que resuelven a tokens Embassy). Solo necesitás importar el theme una vez (`@amalgama/ds/tailwind.theme.css`) y los peer deps:
 
 ```bash
-npm install class-variance-authority clsx
+npm install class-variance-authority clsx tailwind-merge tailwindcss
 ```
 
 ```tsx
-import { Button } from "@amalgama/ds/components/ui/button"
+import { Button } from "@amalgama/ds/button"
 
 <Button variant="primary">Crear vacante</Button>
 <Button variant="secondary">Cancelar</Button>
 <Button variant="tertiary">Ver detalle</Button>
 <Button variant="text">Más opciones</Button>
 ```
+
+> En las tablas de arriba, la columna **CSS** lista los archivos `css/components/*.css` **ya eliminados** (2026-06) — referencia histórica del origen de cada componente; la columna **TSX** es el componente canónico en `packages/ds/components/ui/`.
 
 ---
 

@@ -1,3 +1,12 @@
+/**
+ * Input — campo de entrada de formulario (input). Parte de la familia Form (input / select / textarea).
+ *
+ * Cuándo usar: todo campo de entrada — input, select, textarea, number, date — con label, hint y error.
+ * Cuándo no: búsqueda (usar search-field de toolbar.css o search-bar de search.css).
+ * Reemplaza a: cualquier form control legacy; nunca inventar campos custom.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/form.css (shared across input/select/textarea).
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 

@@ -1,3 +1,12 @@
+/**
+ * Badge — indicadores de estado y etiquetas de categoría.
+ *
+ * Cuándo usar: estado o categoría de SOLO LECTURA de un ítem (tablas, cards, listas). Todo label categórico debe ser badge — nunca texto plano coloreado.
+ * Cuándo no: si es interactivo/filtrable usar Chip; si es una acción usar Button.
+ * Reemplaza a: labels de texto plano con color, pills custom, tags legacy.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/badge.css.
+ */
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../lib/utils"

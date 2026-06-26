@@ -51,111 +51,47 @@ Share the proposal with at least one other designer before writing CSS.
 
 ---
 
-## 4. CSS implementation
+## 4. Component implementation (Tailwind, in `@amalgama/ds`)
+
+> **2026-06:** components are now authored as **self-contained Tailwind components** in
+> `packages/ds/components/ui/`. **Do not create `css/components/*.css` files** — that buildless
+> layer is deprecated/frozen. All styling lives in-file as Tailwind utilities that resolve to
+> Embassy tokens.
 
 ### 4.1 File location and naming
 
-- `css/components/<component-name>.css` — kebab-case, all lowercase
-- Add `@import url('components/<component-name>.css');` to `css/components.css` (barrel)
-- Bump any `?v=N` query strings if caching is in use
+- `packages/ds/components/ui/<component-name>.tsx` — kebab-case, all lowercase
+- No barrel to edit — the package exports `./components/ui/*.tsx` via its `exports` map (import as `@amalgama/ds/<name>`)
+- If the component should render in the docs site, add a showcase in `islands/src/islands/`, register it, and rebuild (`cd islands && npm run build`)
 
 ### 4.2 Mandatory file structure
 
-```css
-/* ═══════════════════════════════════════
-   Embassy DS — [Component Name]
-   [Description — one sentence]
+```tsx
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "../lib/utils"
 
+/* ═══════════════════════════════════════
+   Embassy DS — [Component Name]  ([Description — one sentence])
    Cuándo usar: [use case]
    Cuándo no: [anti-use-cases — be specific]
    Reemplaza a: [what legacy pattern this replaces]
-
-   Dependencia: variables.css
-   Requiere: [any peer — e.g. lucide icons]
-
-   Uso:
-   <div class="component-name">
-     <span class="component-part">Text</span>
-   </div>
 ═══════════════════════════════════════ */
 
-.component-name {
-  /* base styles — tokens only */
-}
-
-.component-name:hover:not(:disabled) {
-  /* hover state */
-}
-
-.component-name:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
-}
-
-.component-name:active:not(:disabled) {
-  /* pressed state */
-}
-
-.component-name:disabled,
-.component-name[aria-disabled="true"] {
-  background: var(--color-disabled);
-  color: var(--color-on-disabled);
-  cursor: not-allowed;
-  pointer-events: none;
-}
-```
-
-### 4.3 Prohibited patterns in component CSS
-
-These will block a PR:
-
-- `color: #hex` — use `var(--color-*)` or `var(--text-*)`
-- `font-size: Npx` — use `var(--font-size-*)`
-- `border-radius: Npx` — use `var(--radius-*)`
-- `font-family: 'Inter'` or any quoted family — use `var(--font-body)`, `var(--font-heading)`, `var(--font-mono)`
-- `transition: X .1s` — use `var(--duration-fast) var(--ease-default)`
-- `[data-theme="dark"]` override block — wrong semantic token chosen; fix the token instead
-- Direct primitive tokens (`--primary-900`, `--neutral-100`) — use Color Roles only
-- `!important` — fix selector specificity instead
-
----
-
-## 5. React wrapper (optional but preferred)
-
-If a React wrapper is appropriate for the component:
-
-- Location: `components/ui/<component-name>.tsx`
-- Pattern: `cva` (class-variance-authority) + `cn()` from `components/lib/utils.ts` + `React.forwardRef`
-- All styling in CSS classes — no inline styles in the wrapper
-- `disabled` prop must wire to the HTML `disabled` attribute
-- `aria-busy` wired for loading states
-- Prop types must document all variants with JSDoc
-
-Example skeleton:
-
-```tsx
-import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '../lib/utils'
-import React from 'react'
-
-const componentVariants = cva('component-name', {
-  variants: {
-    variant: {
-      primary: 'component-primary',
-      secondary: 'component-secondary',
+const componentVariants = cva(
+  // base — Tailwind utilities resolving to Embassy tokens only
+  "inline-flex items-center rounded-md text-body-md transition-all duration-fast focus-visible:focus-ring disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
+  {
+    variants: {
+      variant: {
+        primary: "bg-primary text-on-primary hover:bg-primary-hover",
+        secondary: "bg-secondary-container text-on-secondary-container hover:bg-secondary-container-hover",
+      },
+      size: { sm: "px-3 py-1.5 text-body-sm", md: "px-6 py-2", lg: "px-[22px] py-2.5" },
     },
-    size: {
-      sm: 'component-sm',
-      md: '',       // default — base class only
-      lg: 'component-lg',
-    },
-  },
-  defaultVariants: {
-    variant: 'primary',
-    size: 'md',
-  },
-})
+    defaultVariants: { variant: "primary", size: "md" },
+  }
+)
 
 export interface ComponentProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -163,15 +99,26 @@ export interface ComponentProps
 
 export const Component = React.forwardRef<HTMLDivElement, ComponentProps>(
   ({ className, variant, size, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn(componentVariants({ variant, size }), className)}
-      {...props}
-    />
+    <div ref={ref} className={cn(componentVariants({ variant, size }), className)} {...props} />
   )
 )
-Component.displayName = 'Component'
+Component.displayName = "Component"
 ```
+
+### 4.3 Prohibited patterns
+
+These will block a PR:
+
+- Raw hex (`bg-[#...]`, `text-[#...]`) — use token utilities (`bg-primary`, `text-on-surface`, …)
+- Arbitrary font sizes (`text-[14px]`) — use the scale (`text-body-lg`, `text-label`, …)
+- Arbitrary radii (`rounded-[8px]`) — use `rounded-sm/md/lg/xl`
+- Quoted font families — use `font-body` / `font-heading` / `font-mono` utilities
+- `dark:` variants or `[data-theme="dark"]` overrides — wrong token chosen; dark mode is automatic via the token layer
+- A **custom CSS class** (e.g. `btn-primary`) or a new `css/components/*.css` file — author variants in-file
+- Merging classes without `cn()` — always merge through `cn()` so `tailwind-merge` resolves token utilities
+- A new utility in `tailwind.theme.css` for something expressible as atomic Tailwind utilities — only add there for genuinely-unexpressible patterns (shimmer, `::before` placeholder)
+
+Carry the `Cuándo usar / Cuándo no / Reemplaza a` decision rule as a header comment in the `.tsx`.
 
 ---
 
@@ -211,7 +158,9 @@ Overview  |  Specs  |  Guidelines  |  Accessibility  |  Code
 - React usage snippet if a wrapper exists
 - Token reference table
 
-Also create a legacy page at `docs/<component-name>.html`. Use an existing docs page as a template.
+> The legacy `docs/*.html` per-component pages were **retired (2026-06)** — they are now
+> redirect stubs to the canonical `index.html` SPA. Do **not** create a `docs/<name>.html`
+> page; the component's documentation lives only in `index.html`.
 
 ---
 
@@ -219,12 +168,11 @@ Also create a legacy page at `docs/<component-name>.html`. Use an existing docs 
 
 ### 7.1 Non-breaking changes (variants, states, sizing)
 
-1. Read the component's current CSS + docs before touching anything
+1. Read the component's current `.tsx` (`packages/ds/components/ui/<name>.tsx`) + docs before touching anything
 2. Verify the change against GOVERNANCE.md — the change must comply with all rules in §§ 2–11
-3. Update the CSS
+3. Update the component `.tsx` (and its islands showcase, then rebuild the bundle)
 4. Update `index.html` documentation to reflect the change
-5. Update `docs/<name>.html`
-6. If the change affects CLAUDE.md's component inventory table, update it
+5. If the change affects CLAUDE.md's component inventory table, update it
 
 ### 7.2 Breaking changes (markup changes, variant name changes, token changes)
 
@@ -248,15 +196,12 @@ Run through GOVERNANCE.md §11 (the full audit checklist). Additionally:
 
 - [ ] The component has a clear proposal answering the questions in §2 above
 - [ ] The design was reviewed by at least one other designer
-- [ ] The CSS file has the mandatory header comment with all fields filled
-- [ ] No prohibited patterns (§4.3) appear in the CSS
-- [ ] Dark mode tested manually: `data-theme="dark"` on `<html>`, all states readable
+- [ ] `packages/ds/components/ui/<name>.tsx` created, self-contained, with the header comment (incl. `Cuándo usar / Cuándo no`)
+- [ ] No prohibited patterns (§4.3): no raw hex, no arbitrary sizes/radii, no custom CSS class, no `css/components/*.css` file, classes merged via `cn()`
+- [ ] Dark mode tested manually: `data-theme="dark"` on `<html>`, all states readable (no `dark:` overrides)
 - [ ] WCAG color contrast verified for all text/background combinations in the component
-- [ ] `index.html` has the 5-tab documentation section
-- [ ] `docs/<name>.html` page created
+- [ ] `index.html` has the 5-tab documentation section (+ islands showcase if interactive)
 - [ ] `CLAUDE.md` component inventory updated
-- [ ] `css/components.css` barrel updated
-- [ ] React wrapper created and verified (if applicable)
 
 ---
 

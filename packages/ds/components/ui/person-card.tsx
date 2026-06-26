@@ -1,3 +1,12 @@
+/**
+ * Person Card — tarjeta de persona con avatar, nombre y rol.
+ *
+ * Cuándo usar: ítem de persona en grillas (avatar + nombre + rol).
+ * Cuándo no: vacantes (vacancy-card); datos tabulares de personas (Table).
+ * Reemplaza a: cards de perfil custom.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/person-card.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar"

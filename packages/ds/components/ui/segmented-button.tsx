@@ -1,3 +1,12 @@
+/**
+ * Segmented Button — selector de opción única dentro de un conjunto discreto de opciones mutuamente excluyentes, con forma de píldora.
+ *
+ * Cuándo usar: alternar entre vistas (Lista / Cuadrícula), filtros de categoría o modo dentro del mismo contexto (Día / Semana / Mes).
+ * Cuándo no: acciones que disparan efectos (usar Button), selección múltiple (usar Chips), navegación entre páginas (usar Tabs), más de 5 opciones o etiquetas muy dispares (usar Select).
+ * Reemplaza a: toggle-group custom, radio-button pill legacy.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/segmented-button.css.
+ */
 import * as React from "react"
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group"
 import { cva, type VariantProps } from "class-variance-authority"

@@ -16,8 +16,9 @@ Live site: <https://presentations.amalgama.co/p/amalgama-design-system/>
 - **The live site is a separately-published, manual snapshot** hosted on the
   `presentations.amalgama.co` platform. It is not wired to this repo.
 - As of this writing the live snapshot is **pre-pivot ("v2.0 · Mayo 2026")**:
-  it loads the buildless `css/*` layer and has **no `embassy-islands.js`** — so
-  none of the June 2026 shadcn/Tailwind island work is visible in production.
+  it still loads the old buildless component CSS (`css/components.css`, since **deleted**
+  from the repo) and has **no `embassy-islands.js`** — so none of the June 2026
+  shadcn/Tailwind island work is visible in production. A republish is mandatory.
 
 To update production, someone has to **re-publish the current files to the
 presentations platform** (see "How to update production" below). Confirm the
@@ -26,19 +27,28 @@ it lives outside this repo.
 
 ---
 
-## The two rendering layers (important)
+## The rendering layer
 
-This repo ships the **same components in two layers**, for two different
-consumers. Confusing them is the usual root cause of "my change didn't show up."
+The single source of truth for component code is the **`@amalgama/ds` package**
+(`packages/ds/components/ui/*.tsx`, Tailwind, self-contained), rendered in the docs site via
+React **islands**. The repo historically also shipped a parallel **buildless CSS** rendering
+(`css/components/*.css` + the `components.css` barrel); that layer was **deleted (2026-06)**.
 
 | Layer | Files | Who consumes it | How a component renders |
 |---|---|---|---|
-| **Buildless CSS** | `css/variables.css`, `css/base.css`, `css/layout.css`, `css/components.css` + `css/components/*.css` | The `design-system` skill (artifacts, dashboards, **presentations.amalgama.co**), and external pages via the jsDelivr CDN | `class="btn-primary"` etc. — pure CSS classes, **no JS build** |
-| **Islands (Tailwind/shadcn)** | `islands/dist/embassy-islands.{js,css}`, built from `islands/src/` + `packages/ds/` | The repo's **own `index.html`** docs site | React islands mounted into `[data-island]` slots |
+| **Islands (Tailwind/shadcn)** — the only component path | `islands/dist/embassy-islands.{js,css}`, built from `islands/src/` + `packages/ds/` | The repo's **own `index.html`** docs site; any Tailwind consumer of `@amalgama/ds` | React islands mounted into `[data-island]` slots |
+| **Tokens (CSS)** — not components | `css/variables.css`, `css/base.css`, `css/layout.css`, `css/md-sys-bridge.css` | `index.html`, brand themes, no-build artifacts | CSS custom properties + base reset (no component classes) |
 
-The repo's `index.html` loads **both** (buildless `css/*` for structure +
-`embassy-islands.js` for interactive components). **The deployed snapshot loads
-only the buildless `css/*` layer** — that's why it looks "old."
+> **Buildless component CSS was deleted (2026-06).** `css/components/*.css` and the
+> `components.css` barrel are gone — author all component code in `packages/ds` as Tailwind
+> `.tsx`. The docs site's own chrome (hero/nav badges, CTA buttons, the token-tab switcher,
+> the Vacantes mockup, the toast demo) now carries those styles inline in `index.html`'s
+> embedded `<style>`; the legacy `docs/*.html` pages are redirect stubs to the SPA.
+
+The repo's `index.html` loads the **token CSS** (`css/variables.css`, `css/base.css`,
+`css/layout.css`, `css/md-sys-bridge.css`) + `docs/docs.css` + its own embedded chrome styles,
+and `embassy-islands.{js,css}` for the component demos. **The deployed snapshot may be older** —
+if it looks "old," it predates a rebuild/publish.
 
 ---
 
@@ -88,9 +98,10 @@ In rough order of likelihood:
    until the cache is purged (`purge.jsdelivr.net/gh/amalgamaco/...`).
 4. **Browser / `?v=` cache.** If `islands/dist/*` changed but the `?v=` query in
    `index.html` was not bumped, browsers serve the stale bundle.
-5. **Editing the wrong layer.** A change to an island (`islands/src/` /
-   `packages/ds/`) will never show on a deployment that only serves the buildless
-   `css/*` layer, and vice-versa. Match the layer to what the target consumes.
+5. **Stale deployed snapshot.** A change to an island (`islands/src/` /
+   `packages/ds/`) will never show on the old deployment, which predates the islands
+   bundle (and the buildless component CSS it served was since deleted from the repo).
+   Production must be republished from the current `index.html` + `embassy-islands.*`.
 
 ---
 
@@ -102,8 +113,8 @@ In rough order of likelihood:
    GitHub Action (none exists today).
 3. **Re-publish once** to bring production from v2.0 → current, then diff the
    live site against the repo `index.html` to confirm parity.
-4. **Confirm which layer production should use** — buildless `css/*` only, or the
-   islands bundle too. The live snapshot currently uses buildless only; the repo
-   `index.html` uses both.
+4. **Production must serve the islands bundle.** The buildless component CSS was
+   deleted, so the old "buildless only" snapshot can no longer render components —
+   publish `index.html` + token CSS + `embassy-islands.{js,css}` together.
 5. **Token flow:** after any `css/variables.css` edit, run `sync-tokens.mjs` and
    purge jsDelivr so CDN consumers update.

@@ -1,3 +1,12 @@
+/**
+ * Stat Card — tarjetas KPI con etiqueta, valor grande y cambio porcentual.
+ *
+ * Cuándo usar: métricas numéricas con label y variación (KPIs en dashboards).
+ * Cuándo no: contenido no numérico (usar Card).
+ * Reemplaza a: widgets de métricas legacy.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/stat-card.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 

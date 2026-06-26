@@ -1,3 +1,12 @@
+/**
+ * Button — jerarquía de énfasis (alto → bajo).
+ *
+ * Cuándo usar: acciones. Jerarquía obligatoria: UN solo btn-primary por contexto; btn-secondary para alternativas; btn-tertiary menor peso; btn-text acciones inline.
+ * Cuándo no: navegación (usar links/nav). NUNCA estirar a full-width ni alinear contenido a la izquierda — el botón tiene ancho intrínseco y contenido centrado; si el layout legacy lo pide, se cambia el layout, no el botón.
+ * Reemplaza a: cualquier botón/CTA legacy; un "action row" plano se mapea a grupo con jerarquía (un primary + alternativas).
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/button.css.
+ */
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../lib/utils"

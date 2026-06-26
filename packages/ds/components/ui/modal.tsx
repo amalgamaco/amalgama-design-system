@@ -1,3 +1,12 @@
+/**
+ * Modal — diálogo modal con overlay, header, body y footer.
+ *
+ * Cuándo usar: confirmaciones y tareas cortas que bloquean el contexto actual.
+ * Cuándo no: formularios largos (página con create-form); feedback pasivo (usar Toast).
+ * Reemplaza a: dialogs/popups/lightboxes legacy.
+ *
+ * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/modal.css.
+ */
 import * as React from "react"
 import { cn } from "../lib/utils"
 
