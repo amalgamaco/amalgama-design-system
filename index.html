@@ -8893,7 +8893,7 @@ export { Textarea }</code></pre>
           <div class="ds-card-link" onclick="navigate('c-basic-card')"><div class="ds-card-icon"><i data-lucide="square"></i></div><div class="ds-card-name">Basic Card</div><div class="ds-card-desc">Contenedor base genérico.</div></div>
           <div class="ds-card-link" onclick="navigate('c-person')"><div class="ds-card-icon"><i data-lucide="user"></i></div><div class="ds-card-name">Person Card</div><div class="ds-card-desc">Persona con avatar, nombre y rol.</div></div>
           <div class="ds-card-link" onclick="navigate('c-vacancy')"><div class="ds-card-icon"><i data-lucide="briefcase"></i></div><div class="ds-card-name">Vacancy Card</div><div class="ds-card-desc">Vacante con estado y asignados.</div></div>
-          <div class="ds-card-link" onclick="navigate('c-kanban')"><div class="ds-card-icon"><i data-lucide="trello"></i></div><div class="ds-card-name">Kanban Card</div><div class="ds-card-desc">Tarjeta para tableros Kanban.</div></div>
+          <div class="ds-card-link" onclick="navigate('c-kanban')"><div class="ds-card-icon"><i data-lucide="square-kanban"></i></div><div class="ds-card-name">Kanban Card</div><div class="ds-card-desc">Tarjeta para tableros Kanban.</div></div>
           <div class="ds-card-link" onclick="navigate('c-stat-card')"><div class="ds-card-icon"><i data-lucide="bar-chart-2"></i></div><div class="ds-card-name">Stat Card</div><div class="ds-card-desc">Métrica o estadística destacada.</div></div>
           <div class="ds-card-link" onclick="navigate('c-nav-card')"><div class="ds-card-icon"><i data-lucide="layout-grid"></i></div><div class="ds-card-name">Nav Card</div><div class="ds-card-desc">Tarjeta de navegación con visual.</div></div>
         </div>
@@ -13879,19 +13879,14 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 ├── css/
 │   ├── variables.css          ← tokens primitivos
 │   ├── base.css               ← reset + tipografía
-│   ├── layout.css             ← app shell
-│   ├── components.css         ← barrel
-│   └── components/
-│       ├── button.css
-│       ├── badge.css
-│       ├── card.css
-│       └── ...
-├── components/
-│   └── ui/
-│       ├── button.tsx         ← wrappers React
-│       └── ...
+│   └── layout.css             ← app shell
+├── packages/ds/               ← @amalgama/ds (Tailwind — fuente de verdad)
+│   ├── components/ui/
+│   │   ├── button.tsx         ← variantes Tailwind in-file
+│   │   └── ...
+│   └── tailwind.theme.css     ← tokens + mapeo de theme
 ├── logos/                     ← assets de marca
-└── docs/                      ← documentación individual</code></pre>
+└── docs/                      ← redirects a index.html (SPA)</code></pre>
       </div>
     </section>
 
@@ -14650,32 +14645,15 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
     variables.css          ← Tokens: colores, radios, sombras, transiciones
     base.css               ← Reset, tipografia, animaciones, utilidades
     layout.css             ← App shell: sidebar, topbar, contenido
-    components.css         ← Barrel: importa todos los componentes
-    components/
-      button.css           ← btn-primary, btn-ghost, btn-next, icon-btn
-      badge.css            ← badge con 7 variantes de color
-      card.css             ← Contenedor basico
-      form.css             ← field-group, field-input, select, textarea...
-      table.css            ← data-table con thead/tbody
-      tabs.css             ← Pestanas con panel de contenido
-      toolbar.css          ← search-field, toolbar-btn, result-count
-      modal.css            ← modal-overlay, modal, header/body/footer
-      toast.css            ← Notificaciones success/error/info
-      stat-card.css        ← Tarjetas KPI con stats-grid
-      vacancy-card.css     ← Tarjeta de vacante + assignee-avatar
-      person-card.css      ← Tarjeta de persona + people-grid
-      kanban.css           ← Board, columnas y tarjetas arrastrables
-      skeleton.css         ← Animacion shimmer de carga
-      empty-state.css      ← Placeholder cuando no hay datos
-      page-header.css      ← Encabezado con titulo y acciones
-      back-link.css        ← Enlace de retorno
-      description.css      ← Secciones editables con delete
-      create-form.css      ← Header y footer sticky para forms
-      placeholder.css      ← Panel de contenido vacio
+  @amalgama/ds (Tailwind)  ← componentes (fuente de verdad)
+    tailwind.theme.css     ← tokens + mapeo de theme (unica hoja del paquete)
+    components/ui/
+      button.tsx           ← cada .tsx define sus variantes con utilidades Tailwind
+      badge.tsx            ← (bg-primary, text-on-surface, rounded-md, text-body-md...)
+      card.tsx
+      ...                  ← autocontenidos: copia el .tsx + importa el theme
   ui/
-    index.html             ← Catalogo de componentes
-    getting-started.html   ← Esta guia
-    [component].html       ← Documentacion de cada componente</code></pre>
+    index.html             ← Catalogo de componentes (SPA canonica)</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
 
@@ -14685,8 +14663,8 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
             <tr><td><code>variables.css</code></td><td>6 paletas de color (neutral, primary, secondary, success, error, warning), aliases semanticos (--bg, --tertiary, --border...), escala de radius (sm/md/lg/xl/full), 3 niveles de sombra, tokens de transicion</td></tr>
             <tr><td><code>base.css</code></td><td>Box-sizing reset, tipografia body (Inter 14px), headings (Epilogue 600), scrollbar custom, 6 keyframe animations, clases utilitarias (.text-muted, .font-mono, .sr-only)</td></tr>
             <tr><td><code>layout.css</code></td><td>App shell (.app, .main, .content), sidebar (220px fijo), topbar (56px sticky con breadcrumbs y avatar)</td></tr>
-            <tr><td><code>components.css</code></td><td>Barrel file: <code>@import</code> de los 20 archivos en <code>components/</code>. Carga todo de una vez.</td></tr>
-            <tr><td><code>components/*.css</code></td><td>20 archivos individuales. Cada uno es autocontenido con comment header que incluye ejemplo de uso y dependencias.</td></tr>
+            <tr><td><code>@amalgama/ds/tailwind.theme.css</code></td><td>Única hoja del paquete: tokens + mapeo de theme. Importala una vez (<code>@import "@amalgama/ds/tailwind.theme.css"</code>).</td></tr>
+            <tr><td><code>packages/ds/components/ui/*.tsx</code></td><td>Componentes React autocontenidos (Tailwind in-file). Copiá el <code>.tsx</code> + <code>components/lib/utils.ts</code>; no hay CSS por componente que copiar.</td></tr>
           </tbody>
         </table>
       </div>
