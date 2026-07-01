@@ -71,36 +71,76 @@
   /* Button secondary */
   --color-secondary-container-hover: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
 
+  /* ── MD3 state-layer opacity system tokens (md.sys.state.*) ──
+     Single source of truth for every interaction-state layer (see
+     packages/ds/css/hover-tokens.css). MD3: hover 8% · focus 10% ·
+     pressed 10% · dragged 16%; disabled content 38% · container 12%. */
+  --md-sys-state-hover-opacity:              8%;
+  --md-sys-state-focus-opacity:              10%;
+  --md-sys-state-pressed-opacity:            10%;
+  --md-sys-state-dragged-opacity:            16%;
+  --md-sys-state-disabled-content-opacity:   38%;
+  --md-sys-state-disabled-container-opacity: 12%;
+
   /* Button text state layers */
-  --color-primary-state-hover:  color-mix(in srgb, var(--color-primary) 10%, transparent);
-  --color-primary-state-press:  color-mix(in srgb, var(--color-primary) 16%, transparent);
+  --color-primary-state-hover:  color-mix(in srgb, var(--color-primary) var(--md-sys-state-hover-opacity),   transparent);
+  --color-primary-state-press:  color-mix(in srgb, var(--color-primary) var(--md-sys-state-pressed-opacity), transparent);
 
   /* Surface state layers */
-  --color-on-surface-state-hover:  color-mix(in srgb, var(--color-on-surface) 8%,  transparent);
-  --color-on-surface-state-press:  color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+  --color-on-surface-state-hover:  color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-hover-opacity),   transparent);
+  --color-on-surface-state-press:  color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-pressed-opacity), transparent);
 
   /* Chip selected state */
-  --color-on-secondary-state-hover:  color-mix(in srgb, var(--color-on-secondary-container) 8%,  var(--color-secondary-container));
-  --color-on-secondary-state-press:  color-mix(in srgb, var(--color-on-secondary-container) 12%, var(--color-secondary-container));
+  --color-on-secondary-state-hover:  color-mix(in srgb, var(--color-on-secondary-container) var(--md-sys-state-hover-opacity),   var(--color-secondary-container));
+  --color-on-secondary-state-press:  color-mix(in srgb, var(--color-on-secondary-container) var(--md-sys-state-pressed-opacity), var(--color-secondary-container));
 
-  /* Chip elevated state */
-  --color-chip-elevated-hover:  color-mix(in srgb, var(--color-on-surface) 8%,  var(--color-surface-container-low));
-  --color-chip-elevated-press:  color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-low));
+  /* Navigation / menu interactive states — Embassy "blue hover" language.
+     Shared by main nav, component side menu, dropdown menus, lists. Hover =
+     soft secondary tint + blue content; selected = secondary-container fill. */
+  /* Canonical md.comp tier + backward-compatible --color-nav-* aliases */
+  --md-comp-nav-hover:            color-mix(in srgb, var(--color-secondary-container) 45%, transparent);
+  --md-comp-nav-hover-content:    var(--color-secondary);
+  --md-comp-nav-press:            color-mix(in srgb, var(--color-secondary-container) 70%, transparent);
+  --md-comp-nav-selected:         var(--color-secondary-container);
+  --md-comp-nav-selected-content: var(--color-on-secondary-container);
+  --color-nav-hover:            var(--md-comp-nav-hover);
+  --color-nav-hover-content:    var(--md-comp-nav-hover-content);
+  --color-nav-press:            var(--md-comp-nav-press);
+  --color-nav-selected:         var(--md-comp-nav-selected);
+  --color-nav-selected-content: var(--md-comp-nav-selected-content);
+
+  /* ── md.comp.* — component-tier state tokens (canonical), with legacy
+     --color-* names kept as backward-compatible aliases for the bg-* utils ── */
+
+  /* Elevated chip */
+  --md-comp-chip-elevated-hover:  color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-hover-opacity),   var(--color-surface-container-low));
+  --md-comp-chip-elevated-press:  color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-pressed-opacity), var(--color-surface-container-low));
+  --color-chip-elevated-hover:  var(--md-comp-chip-elevated-hover);
+  --color-chip-elevated-press:  var(--md-comp-chip-elevated-press);
 
   /* Search bar */
-  --color-search-field-hover:        color-mix(in srgb, var(--color-on-surface) 8%,  var(--color-surface-container-high));
-  --color-search-field-focus:        color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-high));
-  --color-search-field-border-hover: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
-  --color-search-disabled-bg:        color-mix(in srgb, var(--color-on-surface) 12%, transparent);
-  --color-search-disabled-text:      color-mix(in srgb, var(--color-on-surface) 38%, transparent);
+  --md-comp-search-field-hover:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-hover-opacity), var(--color-surface-container-high));
+  --md-comp-search-field-focus:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-focus-opacity), var(--color-surface-container-high));
+  --md-comp-search-field-border-hover: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
+  --md-comp-search-disabled-bg:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-disabled-container-opacity), transparent);
+  --md-comp-search-disabled-text:      color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-disabled-content-opacity),   transparent);
+  --color-search-field-hover:        var(--md-comp-search-field-hover);
+  --color-search-field-focus:        var(--md-comp-search-field-focus);
+  --color-search-field-border-hover: var(--md-comp-search-field-border-hover);
+  --color-search-disabled-bg:        var(--md-comp-search-disabled-bg);
+  --color-search-disabled-text:      var(--md-comp-search-disabled-text);
 
   /* Snackbar */
-  --color-snackbar-action-hover:  color-mix(in srgb, var(--color-inverse-primary) 8%,  transparent);
-  --color-snackbar-action-press:  color-mix(in srgb, var(--color-inverse-primary) 12%, transparent);
-  --color-snackbar-close-hover:   color-mix(in srgb, var(--color-inverse-on-surface) 8%,  transparent);
-  --color-snackbar-close-press:   color-mix(in srgb, var(--color-inverse-on-surface) 12%, transparent);
+  --md-comp-snackbar-action-hover:  color-mix(in srgb, var(--color-inverse-primary)    var(--md-sys-state-hover-opacity),   transparent);
+  --md-comp-snackbar-action-press:  color-mix(in srgb, var(--color-inverse-primary)    var(--md-sys-state-pressed-opacity), transparent);
+  --md-comp-snackbar-close-hover:   color-mix(in srgb, var(--color-inverse-on-surface) var(--md-sys-state-hover-opacity),   transparent);
+  --md-comp-snackbar-close-press:   color-mix(in srgb, var(--color-inverse-on-surface) var(--md-sys-state-pressed-opacity), transparent);
+  --color-snackbar-action-hover:  var(--md-comp-snackbar-action-hover);
+  --color-snackbar-action-press:  var(--md-comp-snackbar-action-press);
+  --color-snackbar-close-hover:   var(--md-comp-snackbar-close-hover);
+  --color-snackbar-close-press:   var(--md-comp-snackbar-close-press);
 
-  /* Input error focus ring */
+  /* Input error focus ring (bespoke halo, not a state layer) */
   --color-error-ring: color-mix(in srgb, var(--color-error) 12%, transparent);
 }
 

@@ -60,3 +60,48 @@ export function SheetShowcase() {
     </div>
   )
 }
+
+// Focused single-side showcases for the split Bottom Sheet / Side Sheet pages.
+function OneSheet({ side, trigger }: { side: "bottom" | "right"; trigger: string }) {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="secondary" size="sm">{trigger}</Button>
+      </SheetTrigger>
+      <SheetContent side={side}>
+        <SheetHeader>
+          <SheetTitle>{side === "bottom" ? "Acciones" : "Filtros"}</SheetTitle>
+          <SheetDescription>
+            {side === "bottom"
+              ? "Bottom sheet — anclado al borde inferior, ideal en mobile."
+              : "Side sheet — anclado al lateral, para filtros o detalle en desktop."}
+          </SheetDescription>
+        </SheetHeader>
+        <SheetBody>
+          <p className="text-body-sm text-fg leading-relaxed">
+            Panel modal con scrim, compuesto sobre el primitivo Dialog de Radix y tematizado con tokens de Embassy.
+          </p>
+          <p className="text-body-sm text-fg-subtle leading-relaxed mt-3">
+            Cierre con Escape, clic en el overlay o el botón de abajo.
+          </p>
+        </SheetBody>
+        <SheetFooter>
+          <SheetClose asChild>
+            <Button variant="secondary" size="sm">Cancelar</Button>
+          </SheetClose>
+          <SheetClose asChild>
+            <Button variant="primary" size="sm">Aplicar</Button>
+          </SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  )
+}
+
+export function BottomSheetShowcase() {
+  return <OneSheet side="bottom" trigger="Abrir bottom sheet" />
+}
+
+export function SideSheetShowcase() {
+  return <OneSheet side="right" trigger="Abrir side sheet" />
+}

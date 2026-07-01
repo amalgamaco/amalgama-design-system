@@ -10,10 +10,10 @@ import { RadioGroupShowcase, RadioStatesShowcase } from "./islands/RadioShowcase
 import { DividerShowcase } from "./islands/DividerShowcase"
 import { ListShowcase } from "./islands/ListShowcase"
 import { ProgressCircularShowcase, ProgressLinearShowcase } from "./islands/ProgressShowcase"
-import { MenuShowcase } from "./islands/MenuShowcase"
+import { MenuShowcase, MenuConfig, MenuStates } from "./islands/MenuShowcase"
 import { SliderShowcase } from "./islands/SliderShowcase"
 import { InputShowcase, TextareaShowcase, SelectShowcase } from "./islands/FormShowcases"
-import { InputBasic, InputPlaceholder, InputRequired, InputDisabled, InputFocus, InputGrid, InputNumber, InputDate } from "./islands/InputPhaseB"
+import { InputBasic, InputPlaceholder, InputRequired, InputDisabled, InputFocus, InputGrid, InputNumber, InputDate, InputStates, InputFeatures, InputAnatomy } from "./islands/InputPhaseB"
 import { TabsShowcase } from "./islands/TabsShowcase"
 import { DialogShowcase } from "./islands/DialogShowcase"
 import { BadgeShowcase } from "./islands/BadgeShowcase"
@@ -25,11 +25,11 @@ import { CardShowcase } from "./islands/CardShowcase"
 import { StatCardShowcase, StatCardGrid } from "./islands/StatCardShowcase"
 import { AvatarShowcase } from "./islands/AvatarShowcase"
 import { TooltipShowcase } from "./islands/TooltipShowcase"
-import { SheetShowcase } from "./islands/SheetShowcase"
+import { SheetShowcase, BottomSheetShowcase, SideSheetShowcase } from "./islands/SheetShowcase"
 import { CarouselShowcase } from "./islands/CarouselShowcase"
 import { DatePickerShowcase } from "./islands/DatePickerShowcase"
 import { SegmentedButtonShowcase } from "./islands/SegmentedButtonShowcase"
-import { SegBtnSizeSm, SegBtnSizeMd, SegBtnSizeLg, SegBtnStateDefault, SegBtnStateSelected, SegBtnStateDisabled, SegBtnDoViews, SegBtnDontActions, SegBtnDoPeriod, SegBtnDontTooMany } from "./islands/SegBtnPhaseB"
+import { SegBtnSizeSm, SegBtnSizeMd, SegBtnSizeLg, SegBtnStateDefault, SegBtnStateSelected, SegBtnStateDisabled, SegBtnDoViews, SegBtnDontActions, SegBtnDoPeriod, SegBtnDontTooMany, SegBtnAnatomy, SegBtnIcons, SegBtnIconsOnly, SegBtnSingle, SegBtnMulti, RoleBoardMode, BtCatTabs, BtColorVariants, BtSizeVariants } from "./islands/SegBtnPhaseB"
 import { SearchActionsShowcase, SearchDesktopShowcase, SearchBarMobileShowcase, SearchBarShowcase as SearchBarPhaseB, SearchActionsCodeShowcase } from "./islands/SearchPhaseB"
 import { SearchConfigBar, SearchConfigTrailing, SearchConfigMulti, SearchConfigAvatar } from "./islands/SearchConfigShowcase"
 import { VacancyCardShowcase } from "./islands/VacancyCardShowcase"
@@ -53,6 +53,27 @@ import { VacancySpecExample } from "./islands/VacancyPhaseB"
 import { PersonGridSpecsShowcase } from "./islands/PersonPhaseB"
 import { AvatarMainShowcase, AvatarAssigneeShowcase, AvatarPersonShowcase } from "./islands/AvatarPhaseB"
 import { ChipVariantsGuidelines, ChipFocusState, ChipCodeVariants, ChipElevatedDisabled } from "./islands/ChipPhaseB"
+import {
+  ChipAssistAnatomy, ChipAssistColor, ChipAssistStates, ChipAssistMeasures,
+  ChipFilterAnatomyUnselected, ChipFilterAnatomySelected, ChipFilterAnatomyLeading,
+  ChipFilterColor, ChipFilterStates, ChipFilterMeasures,
+  ChipInputAnatomyAvatar, ChipInputAnatomyLeading, ChipInputMeasures,
+  ChipSuggestionAnatomy, ChipSuggestionMeasures,
+  ChipGuidelinesAnatomy, ChipGuidelinesContainer, ChipGuidelinesUsageScene, ChipGlLeadingIcon,
+} from "./islands/ChipSpecs"
+import {
+  SearchBarAnatomy, SearchViewAnatomy, SearchColor, SearchStates, SearchBarMeasures, SearchViewMeasures,
+} from "./islands/SearchSpecs"
+import { SnackbarAnatomy, SnackbarColor, SnackbarMeasures, SnackbarAnimation } from "./islands/SnackbarSpecs"
+import { SwitchAnatomy, SwitchStates, SwitchMeasures } from "./islands/SwitchSpecs"
+import {
+  CheckboxAnatomy, CheckboxStates, CheckboxMeasures,
+  RadioAnatomy, RadioStates, RadioMeasures,
+  SliderAnatomy, SliderStates, SliderMeasures,
+  ProgressAnatomy, ProgressStates, ProgressMeasures,
+} from "./islands/ControlSpecs"
+import { ButtonSizeMatrix, ButtonTouchTarget } from "./islands/ButtonSpecs"
+import { ChipSceneRestaurant, ChipSceneDialog, ChipSceneTaskButton, ChipSceneTaskChip, ChipSceneScroll, ChipSceneSingle, ChipSceneElevHero, ChipSceneElevDoBorder, ChipSceneElevDoImage, ChipSceneElevDontPage, ChipSceneElevDontPressed, ChipSceneLabelShort, ChipSceneLabelLong, ChipSceneTrailingTouch, ChipSceneAssistHero, ChipSceneAssistInfo, ChipSceneAssistModal, ChipSceneAssistActionsA, ChipSceneAssistActionsB, ChipSceneAssistPlacement, ChipSceneFilterHero, ChipSceneFilterShopping, ChipSceneFilterRealEstate, ChipSceneFilterMultiSelected, ChipSceneFilterMultiDynamic, ChipSceneFilterSingle, ChipSceneFilterTrailingClose, ChipSceneFilterTrailingMenu, ChipSceneFilterCaution, ChipSceneFilterIntegration } from "./islands/ChipScenes"
 
 const registry: Record<string, ComponentType> = {
   "chip-showcase": ChipShowcase,
@@ -120,8 +141,84 @@ const registry: Record<string, ComponentType> = {
   "chip-focus-state": ChipFocusState,
   "chip-code-variants": ChipCodeVariants,
   "chip-elevated-disabled": ChipElevatedDisabled,
+  "chip-assist-anatomy": ChipAssistAnatomy,
+  "chip-assist-color": ChipAssistColor,
+  "chip-assist-states": ChipAssistStates,
+  "chip-assist-measures": ChipAssistMeasures,
+  "chip-filter-anatomy-unselected": ChipFilterAnatomyUnselected,
+  "chip-filter-anatomy-selected": ChipFilterAnatomySelected,
+  "chip-filter-anatomy-leading": ChipFilterAnatomyLeading,
+  "chip-filter-color": ChipFilterColor,
+  "chip-filter-states": ChipFilterStates,
+  "chip-filter-measures": ChipFilterMeasures,
+  "chip-input-anatomy-avatar": ChipInputAnatomyAvatar,
+  "chip-input-anatomy-leading": ChipInputAnatomyLeading,
+  "chip-input-measures": ChipInputMeasures,
+  "chip-suggestion-anatomy": ChipSuggestionAnatomy,
+  "chip-suggestion-measures": ChipSuggestionMeasures,
+  "chip-guidelines-anatomy": ChipGuidelinesAnatomy,
+  "chip-guidelines-container": ChipGuidelinesContainer,
+  "chip-guidelines-usage-scene": ChipGuidelinesUsageScene,
+  "chip-gl-leading-icon": ChipGlLeadingIcon,
+  "search-bar-anatomy": SearchBarAnatomy,
+  "search-view-anatomy": SearchViewAnatomy,
+  "search-color": SearchColor,
+  "search-states": SearchStates,
+  "search-bar-measures": SearchBarMeasures,
+  "search-view-measures": SearchViewMeasures,
+  "snackbar-anatomy": SnackbarAnatomy,
+  "snackbar-color": SnackbarColor,
+  "snackbar-measures": SnackbarMeasures,
+  "snackbar-animation": SnackbarAnimation,
+  "button-size-matrix": ButtonSizeMatrix,
+  "button-touch-target": ButtonTouchTarget,
+  "chip-scene-restaurant": ChipSceneRestaurant,
+  "chip-scene-dialog": ChipSceneDialog,
+  "chip-scene-task-button": ChipSceneTaskButton,
+  "chip-scene-task-chip": ChipSceneTaskChip,
+  "chip-scene-scroll": ChipSceneScroll,
+  "chip-scene-single": ChipSceneSingle,
+  "chip-scene-elev-hero": ChipSceneElevHero,
+  "chip-scene-elev-do-border": ChipSceneElevDoBorder,
+  "chip-scene-elev-do-image": ChipSceneElevDoImage,
+  "chip-scene-elev-dont-page": ChipSceneElevDontPage,
+  "chip-scene-elev-dont-pressed": ChipSceneElevDontPressed,
+  "chip-scene-label-short": ChipSceneLabelShort,
+  "chip-scene-label-long": ChipSceneLabelLong,
+  "chip-scene-trailing-touch": ChipSceneTrailingTouch,
+  "chip-scene-assist-hero": ChipSceneAssistHero,
+  "chip-scene-assist-info": ChipSceneAssistInfo,
+  "chip-scene-assist-modal": ChipSceneAssistModal,
+  "chip-scene-assist-actions-a": ChipSceneAssistActionsA,
+  "chip-scene-assist-actions-b": ChipSceneAssistActionsB,
+  "chip-scene-assist-placement": ChipSceneAssistPlacement,
+  "chip-scene-filter-hero": ChipSceneFilterHero,
+  "chip-scene-filter-shopping": ChipSceneFilterShopping,
+  "chip-scene-filter-realestate": ChipSceneFilterRealEstate,
+  "chip-scene-filter-multi-selected": ChipSceneFilterMultiSelected,
+  "chip-scene-filter-multi-dynamic": ChipSceneFilterMultiDynamic,
+  "chip-scene-filter-single": ChipSceneFilterSingle,
+  "chip-scene-filter-trailing-close": ChipSceneFilterTrailingClose,
+  "chip-scene-filter-trailing-menu": ChipSceneFilterTrailingMenu,
+  "chip-scene-filter-caution": ChipSceneFilterCaution,
+  "chip-scene-filter-integration": ChipSceneFilterIntegration,
   "snackbar-showcase": SnackbarShowcase,
   "switch-showcase": SwitchShowcase,
+  "switch-anatomy": SwitchAnatomy,
+  "switch-states": SwitchStates,
+  "switch-measures": SwitchMeasures,
+  "checkbox-anatomy": CheckboxAnatomy,
+  "checkbox-states": CheckboxStates,
+  "checkbox-measures": CheckboxMeasures,
+  "radio-anatomy": RadioAnatomy,
+  "radio-states-grid": RadioStates,
+  "radio-measures": RadioMeasures,
+  "slider-anatomy": SliderAnatomy,
+  "slider-states": SliderStates,
+  "slider-measures": SliderMeasures,
+  "progress-anatomy": ProgressAnatomy,
+  "progress-states": ProgressStates,
+  "progress-measures": ProgressMeasures,
   "checkbox-showcase": CheckboxShowcase,
   "radio-group": RadioGroupShowcase,
   "radio-states": RadioStatesShowcase,
@@ -130,9 +227,14 @@ const registry: Record<string, ComponentType> = {
   "progress-circular": ProgressCircularShowcase,
   "progress-linear": ProgressLinearShowcase,
   "menu-showcase": MenuShowcase,
+  "menu-config-showcase": MenuConfig,
+  "menu-states-showcase": MenuStates,
   "slider-showcase": SliderShowcase,
   "input-showcase": InputShowcase,
   "input-basic-showcase": InputBasic,
+  "input-states-showcase": InputStates,
+  "input-features-showcase": InputFeatures,
+  "input-anatomy-showcase": InputAnatomy,
   "input-placeholder-showcase": InputPlaceholder,
   "input-required-showcase": InputRequired,
   "input-disabled-showcase": InputDisabled,
@@ -167,6 +269,8 @@ const registry: Record<string, ComponentType> = {
   "avatar-showcase": AvatarShowcase,
   "tooltip-showcase": TooltipShowcase,
   "sheet-showcase": SheetShowcase,
+  "bottom-sheet-showcase": BottomSheetShowcase,
+  "side-sheet-showcase": SideSheetShowcase,
   "carousel-showcase": CarouselShowcase,
   "date-picker-showcase": DatePickerShowcase,
   "seg-btn-showcase": SegmentedButtonShowcase,
@@ -176,6 +280,15 @@ const registry: Record<string, ComponentType> = {
   "seg-btn-state-default": SegBtnStateDefault,
   "seg-btn-state-selected": SegBtnStateSelected,
   "seg-btn-state-disabled": SegBtnStateDisabled,
+  "seg-btn-anatomy": SegBtnAnatomy,
+  "seg-btn-single": SegBtnSingle,
+  "seg-btn-multi": SegBtnMulti,
+  "seg-btn-icons": SegBtnIcons,
+  "seg-btn-icons-only": SegBtnIconsOnly,
+  "role-board-mode": RoleBoardMode,
+  "bt-cat-tabs": BtCatTabs,
+  "bt-color-variants": BtColorVariants,
+  "bt-size-variants": BtSizeVariants,
   "seg-btn-do-views": SegBtnDoViews,
   "seg-btn-dont-actions": SegBtnDontActions,
   "seg-btn-do-period": SegBtnDoPeriod,

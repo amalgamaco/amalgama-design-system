@@ -1,47 +1,47 @@
-import * as React from "react"
 import { Button } from "@ds/button"
 import { Input } from "@ds/input"
 import {
-  Modal,
-  ModalHeader,
-  ModalTitle,
-  ModalClose,
-  ModalBody,
-  ModalFooter,
-} from "@ds/modal"
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogBody,
+  DialogFooter,
+  DialogClose,
+} from "@ds/dialog"
 
 /**
  * Specs › "Demo interactiva".
- * Replaces the hand-wired trigger button + static .modal-overlay/.modal markup
- * with the real @ds/modal component, opened from a real @ds Button.
+ * Uses the canonical shadcn Dialog (Radix) — the former custom @ds/modal
+ * was a duplicate of this and has been removed. Trigger/Close are the
+ * uncontrolled shadcn pattern (focus trap, Esc, scrim handled by Radix).
  */
 export function DialogDemo() {
-  const [open, setOpen] = React.useState(false)
   return (
-    <>
-      <Button variant="primary" onClick={() => setOpen(true)}>
-        Abrir modal
-      </Button>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <ModalHeader>
-          <ModalTitle>Agendar entrevista</ModalTitle>
-          <ModalClose onClick={() => setOpen(false)} />
-        </ModalHeader>
-        <ModalBody>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="primary">Abrir modal</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Agendar entrevista</DialogTitle>
+        </DialogHeader>
+        <DialogBody>
           <div className="flex flex-col gap-4">
             <Input label="Candidato" placeholder="Nombre del candidato" />
             <Input label="Fecha" type="date" />
           </div>
-        </ModalBody>
-        <ModalFooter>
-          <Button variant="tertiary" onClick={() => setOpen(false)}>
-            Cancelar
-          </Button>
-          <Button variant="primary" onClick={() => setOpen(false)}>
-            Agendar
-          </Button>
-        </ModalFooter>
-      </Modal>
-    </>
+        </DialogBody>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button variant="tertiary">Cancelar</Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button variant="primary">Agendar</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
