@@ -15,8 +15,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=58">
-<script type="module" src="islands/dist/embassy-islands.js?v=58"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=60">
+<script type="module" src="islands/dist/embassy-islands.js?v=60"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -5472,6 +5472,7 @@ body { overflow-x: clip; }
         <section class="docs-section" id="bs-tokens">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Usá el selector de variante para explorar el conjunto de tokens de cada botón, organizado por estado de interacción. Todos los tokens son <b>Color Roles globales de Embassy</b> definidos en <code>css/variables.css</code> — no son tokens propios del componente botón ni de Material Design 3 (cuya nomenclatura es diferente). Los botones consumen roles semánticos globales directamente; no existen tokens de componente dedicados (<code>--button-*</code>).</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="button-tokens"></div></div>
 
           <div class="bt-tok-wrap">
 
@@ -6985,6 +6986,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
 
         <section class="docs-section" id="sbd-tokens">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="seg-btn-tokens"></div></div>
           <p style="font-size:13px;color:var(--ds-text-2);margin:0 0 16px;">El componente implementa la <b>capa de tokens de componente de Material Design 3</b> ("Tokens and specs"): cada fila de la tabla MD3 es una custom property <code>--seg-btn-*</code> declarada en <code>.seg-btn-group</code>, con default <code>var(--md-sys-color-X, var(--color-X))</code>. La tabla siguiente muestra el rol de sistema al que apunta cada token. El bridge <code>css/md-sys-bridge.css</code> resuelve los nombres <code>--md-sys-color-*</code> contra la paleta Embassy; sin él, el componente cae al rol <code>--color-*</code> automáticamente.</p>
           <table style="width:100%;border-collapse:collapse;">
             <thead>
@@ -7451,6 +7453,7 @@ const [vista, setVista] = useState(&quot;lista&quot;)
       <section class="docs-section" id="tc-input-s-4">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
         <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Los roles se recalibran solos en dark mode — sin overrides por tema.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="input-tokens"></div></div>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
@@ -7864,6 +7867,7 @@ export { Input }
       <section class="docs-section" id="tc-select-s-4">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
         <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="select-tokens"></div></div>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
@@ -8204,6 +8208,7 @@ SelectItem.displayName = &quot;SelectItem&quot;</code></pre>
       <div class="docs-section" id="tc-textarea-s-4">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
         <p class="docs-section-desc">Comparte el tratamiento de campo con <code>Input</code>. Los roles se recalibran solos en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="textarea-tokens"></div></div>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
@@ -8495,6 +8500,7 @@ export { Textarea }</code></pre>
         <section class="docs-section" id="tc-card-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="basic-card-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th><th>Uso</th></tr></thead>
             <tbody>
@@ -8785,6 +8791,7 @@ export { Textarea }</code></pre>
         <section class="docs-section" id="tc-badge-s-4">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Cada variante mapea a un par <code>container</code> / <code>on-container</code>; se recalibran solos en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="badge-tokens"></div></div>
           <table class="ds-table">
             <thead>
               <tr><th>variant</th><th>Color</th><th>Token</th><th>Uso</th></tr>
@@ -9105,6 +9112,7 @@ export { Badge, badgeVariants }</code></pre>
       <div class="docs-section" id="tc-table-s-4">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
         <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="table-tokens"></div></div>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
@@ -9424,6 +9432,7 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
       <div class="docs-section" id="tc-tabs-s-3">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
         <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="tabs-tokens"></div></div>
         <table class="ds-table">
           <thead><tr><th>Parte / estado</th><th>Rol / token</th></tr></thead>
           <tbody>
@@ -9739,6 +9748,7 @@ TabsContent.displayName = &quot;TabsContent&quot;</code></pre>
         <section class="docs-section" id="tc-dialog-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="dialog-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte (shadcn)</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -9996,6 +10006,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
     <div class="docs-section" id="ss-sn-tokens">
       <h2 class="docs-section-title">Tokens y especificaciones</h2>
       <p class="docs-section-desc">El Snackbar usa la familia de tokens <b>inverse</b> — los únicos tokens del sistema diseñados para funcionar en superficies de contraste invertido. Son independientes del tema activo: siempre producen el contraste correcto tanto en light como en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="snackbar-tokens"></div></div>
       <div class="ds-color-acc-list">
 
         <div class="ds-color-acc open">
@@ -10688,6 +10699,7 @@ export { toast }</code></pre></div>
         <section class="docs-section" id="tc-skeleton-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">El gradiente shimmer combina dos roles de superficie; se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="skeleton-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -10951,6 +10963,7 @@ export { Skeleton, skeletonVariants }</code></pre>
         <section class="docs-section" id="tc-empty-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="empty-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -11216,6 +11229,7 @@ export { EmptyState }</code></pre>
         <section class="docs-section" id="tc-stat-card-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="stat-card-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -11525,6 +11539,7 @@ export { StatsGrid, StatCard }</code></pre>
         </section>
         <section class="docs-section" id="tc-navigation-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="nav-drawer-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Clase</th><th>Token</th><th>Uso</th></tr></thead>
             <tbody>
@@ -11780,6 +11795,7 @@ export { StatsGrid, StatCard }</code></pre>
         <section class="docs-section" id="tc-nav-bar-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="nav-bar-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte / estado</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -12101,6 +12117,7 @@ export { StatsGrid, StatCard }</code></pre>
         </section>
         <section class="docs-section" id="tc-topbar-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="topbar-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Clase</th><th>Token</th><th>Uso</th></tr></thead>
             <tbody>
@@ -12336,6 +12353,7 @@ css/layout.css</code></pre>
       <div class="docs-section" id="tc-kanban-s-3">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
         <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="kanban-tokens"></div></div>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
@@ -12600,6 +12618,7 @@ css/layout.css</code></pre>
       <div class="docs-section" id="tc-vacancy-s-3">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
         <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="vacancy-tokens"></div></div>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
@@ -12846,6 +12865,7 @@ css/layout.css</code></pre>
       <div class="docs-section" id="tc-person-s-3">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
         <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="person-tokens"></div></div>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
@@ -13081,6 +13101,7 @@ css/layout.css</code></pre>
       <div class="docs-section" id="tc-avatar-s-4">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
         <p class="docs-section-desc">Cada variante usa un gradiente de la paleta; las iniciales en <code>--color-on-primary</code>. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="avatar-tokens"></div></div>
         <table class="ds-table">
           <thead><tr><th>Variante</th><th>Rol / token</th></tr></thead>
           <tbody>
@@ -14893,6 +14914,7 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
         <section class="docs-section" id="tc-app-bar-s-4">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="carousel-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -15101,6 +15123,7 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
         <section class="docs-section" id="tc-checkbox-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Los roles se recalibran solos en dark mode — sin overrides por tema.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="checkbox-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th><th>Valor (referencia)</th></tr></thead>
             <tbody>
@@ -15506,6 +15529,7 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
             <div class="docs-section" id="cs-tokens">
               <h2 class="docs-section-title">Tokens y especificaciones</h2>
               <p class="docs-section-desc">Seleccioná una variante para ver sus elementos, atributos, tokens y valores en modo claro y oscuro.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="chip-tokens"></div></div>
 
               <!-- Variant tabs -->
               <div class="ds-comp-tabs" role="tablist" style="margin-bottom:24px;">
@@ -16545,6 +16569,7 @@ const [on, setOn] = useState(false)
         <section class="docs-section" id="tc-date-picker-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="date-picker-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte / estado</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -16739,6 +16764,7 @@ const [range, setRange] = useState&lt;DateRange | undefined&gt;()
         <section class="docs-section" id="tc-divider-s-2">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Un único rol de color; se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="divider-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -16921,6 +16947,7 @@ const [range, setRange] = useState&lt;DateRange | undefined&gt;()
         <section class="docs-section" id="tc-list-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="list-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -17101,6 +17128,7 @@ import { Separator } from "@amalgama/ds/separator"
         <section class="docs-section" id="tc-loading-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">El progress es no interactivo (sin estados de hover/focus/disabled). Mapeo de color, igual en lineal y circular; se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="loading-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th><th>Valor (referencia)</th></tr></thead>
             <tbody>
@@ -17265,6 +17293,7 @@ import { Separator } from "@amalgama/ds/separator"
         <section class="docs-section" id="tc-menu-s-2">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="menu-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -17558,6 +17587,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section" id="tc-radio-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Los roles se recalibran solos en dark mode — sin overrides por tema.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="radio-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th><th>Valor (referencia)</th></tr></thead>
             <tbody>
@@ -17742,6 +17772,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <div class="docs-section" id="ss-tokens">
               <h2 class="docs-section-title">Tokens y especificaciones</h2>
               <p class="docs-section-desc">Seleccioná una variante para ver sus elementos, atributos, tokens y valores en modo claro y oscuro.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="search-tokens"></div></div>
 
               <div class="ds-comp-tabs" role="tablist" style="margin-bottom:24px;">
                 <button class="ds-comp-tab-btn active" type="button" onclick="ssTokVariant('bar',this)">Search bar</button>
@@ -18313,6 +18344,7 @@ import { Mic } from &quot;lucide-react&quot;
         <section class="docs-section" id="tc-bottom-sheet-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy (recalibra en dark mode).</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="bottom-sheet-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -18507,6 +18539,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section" id="tc-side-sheet-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy (recalibra en dark mode).</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="side-sheet-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -18694,6 +18727,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section" id="tc-slider-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Los roles se recalibran solos en dark mode — sin overrides por tema.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="slider-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th><th>Valor (referencia)</th></tr></thead>
             <tbody>
@@ -18881,6 +18915,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section" id="tc-switch-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy (con valores de referencia claro/oscuro; los roles se recalibran solos).</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="switch-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Elemento</th><th>Rol Embassy</th><th>Claro</th><th>Oscuro</th></tr></thead>
             <tbody>
@@ -19087,6 +19122,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section" id="tc-tooltip-s-4">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="tooltip-tokens"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -20353,6 +20389,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section" id="tc-nav-card-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">El root usa los tokens de superficie; el tinte (8 roles semánticos) va <b>solo</b> en <code>.nav-card-visual</code>. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="nav-card-tokens"></div></div>
           <p class="docs-body">Agregá una clase de tinte a <code>.nav-card-visual</code> para aplicar un color de contenedor semántico al área de ilustración. El cuerpo de la tarjeta siempre permanece neutro.</p>
           <table class="docs-props-table ds-table" style="margin-top:20px">
             <thead><tr><th>Clase</th><th>Token de fondo</th><th>Caso de uso</th></tr></thead>
