@@ -15,8 +15,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=61">
-<script type="module" src="islands/dist/embassy-islands.js?v=61"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=62">
+<script type="module" src="islands/dist/embassy-islands.js?v=62"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -11471,31 +11471,7 @@ export { StatsGrid, StatCard }</code></pre>
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Panel deslizable (<code>ds-sidebar-drawer</code>) con títulos de sección (<code>ds-drawer-section-title</code>) e ítems (<code>ds-nav-item</code>, con ícono + etiqueta + badge opcional), adosado al rail fijo.</p>
           <div class="docs-preview">
-            <div style="width:220px;background:var(--ds-sidebar-bg);border:1px solid var(--ds-sidebar-border);border-radius:8px;overflow:hidden">
-              <div class="ds-drawer-section-title">Reclutamiento</div>
-              <div class="ds-nav" style="padding:4px 8px 8px">
-                <div class="ds-nav-item active">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                  Dashboard
-                </div>
-                <div class="ds-nav-item">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-                  Vacantes
-                  <span style="margin-left:auto;font-size:11px;font-weight:600;background:var(--ds-accent-bg);color:var(--ds-accent);padding:1px 7px;border-radius:999px">12</span>
-                </div>
-                <div class="ds-nav-item">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  Candidatos
-                </div>
-              </div>
-              <div class="ds-drawer-section-title">Organización</div>
-              <div class="ds-nav" style="padding:4px 8px 8px">
-                <div class="ds-nav-item">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                  People
-                </div>
-              </div>
-            </div>
+            <div data-island="nav-drawer-showcase"></div>
           </div>
         </section>
         <section class="docs-section" id="tc-navigation-s-1">
