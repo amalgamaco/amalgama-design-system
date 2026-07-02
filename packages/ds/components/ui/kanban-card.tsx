@@ -9,6 +9,7 @@
  */
 import * as React from "react"
 import { cn } from "../lib/utils"
+import { Card } from "./card"
 import { Badge, type BadgeProps } from "./badge"
 
 interface KanbanCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -29,9 +30,9 @@ function KanbanCard({
   ...props
 }: KanbanCardProps) {
   return (
-    <div
+    <Card
       className={cn(
-        "rounded-lg border border-border bg-surface px-3 py-3 cursor-default hover:shadow-sm transition-shadow",
+        "bg-surface px-3 py-3 cursor-default hover:shadow-sm transition-shadow",
         className
       )}
       {...props}
@@ -48,7 +49,7 @@ function KanbanCard({
           </div>
         )}
       </div>
-    </div>
+    </Card>
   )
 }
 

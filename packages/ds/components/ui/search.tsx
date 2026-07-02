@@ -136,7 +136,7 @@ const SearchViewResult = React.forwardRef<HTMLLIElement, SearchViewResultProps>(
     <li
       ref={ref}
       className={cn(
-        "flex items-center gap-3 px-4 py-3 cursor-pointer text-on-surface text-body-md transition-colors duration-fast ease-in-out hover:bg-on-surface-state-hover first:rounded-t-[27px] last:rounded-b-[27px]",
+        "flex items-center gap-3 px-4 py-3 cursor-pointer text-on-surface text-body-md transition-colors duration-fast ease-in-out hover:bg-[var(--color-nav-hover)] first:rounded-t-[27px] last:rounded-b-[27px]",
         className
       )}
       {...props}

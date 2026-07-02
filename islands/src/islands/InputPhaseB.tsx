@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Input } from "@ds/input"
-import { Calendar } from "lucide-react"
+import { Calendar, Mail, Phone, Eye } from "lucide-react"
 
 // Specs tab — every live Input variant/state example rendered via the real
 // @ds Input component. Variants the base component does not cover by prop
@@ -85,6 +85,90 @@ export function InputDate() {
       <Calendar
         size={16}
         className="absolute right-[14px] text-on-surface-variant pointer-events-none"
+      />
+    </div>
+  )
+}
+
+
+// ─── MD3 Text Fields — state matrix (Overview/Specs). Real <Input>, states pinned via token classes. ───
+function StateCell({ caption, children }: { caption: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="text-caption font-medium text-fg-subtle">{caption}</span>
+      {children}
+    </div>
+  )
+}
+
+export function InputStates() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
+      <StateCell caption="Enabled">
+        <Input defaultValue="Texto ingresado" aria-label="Enabled" />
+      </StateCell>
+      <StateCell caption="Hover">
+        <Input defaultValue="Texto ingresado" className="border-outline" aria-label="Hover" />
+      </StateCell>
+      <StateCell caption="Focus">
+        <Input defaultValue="Texto ingresado" className="border-link shadow-[0_0_0_3px_var(--color-focus-ring)]" aria-label="Focus" />
+      </StateCell>
+      <StateCell caption="Disabled">
+        <Input defaultValue="Texto ingresado" disabled aria-label="Disabled" />
+      </StateCell>
+      <StateCell caption="Error">
+        <Input defaultValue="valor@" error="Ingresá un email válido." aria-label="Error" />
+      </StateCell>
+      <StateCell caption="Error + focus">
+        <Input defaultValue="valor@" error="Ingresá un email válido." className="shadow-[0_0_0_3px_var(--color-error-ring)]" aria-label="Error con foco" />
+      </StateCell>
+    </div>
+  )
+}
+
+// ─── MD3 Text Fields — features (label, supporting, required/optional, icons, validation) ───
+export function InputFeatures() {
+  return (
+    <div className="flex flex-col gap-1 max-w-md">
+      <Input
+        label="Correo electrónico"
+        type="email"
+        required
+        placeholder="maria@empresa.com"
+        hint="Usá tu correo de trabajo."
+        leadingIcon={<Mail />}
+      />
+      <Input
+        label="Teléfono"
+        type="tel"
+        placeholder="+54 9 11 …"
+        hint="Opcional — para contacto rápido."
+        leadingIcon={<Phone />}
+      />
+      <Input
+        label="Contraseña"
+        type="password"
+        required
+        defaultValue="123"
+        error="La contraseña debe tener al menos 8 caracteres."
+        leadingIcon={<Mail />}
+        trailingIcon={<Eye />}
+      />
+    </div>
+  )
+}
+
+// ─── Anatomy — one field showing every part (label, leading icon, input, supporting text) ───
+export function InputAnatomy() {
+  return (
+    <div className="max-w-md">
+      <Input
+        label="Correo electrónico"
+        required
+        type="email"
+        placeholder="maria@empresa.com"
+        hint="Texto de ayuda (supporting text)."
+        leadingIcon={<Mail />}
       />
     </div>
   )

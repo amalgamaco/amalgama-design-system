@@ -2,6 +2,7 @@ import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 import { cn } from "../lib/utils"
+import { Button } from "./button"
 
 // shadcn Dialog (Radix) — Embassy modal anatomy (header/body/footer), scrim
 // overlay, surface card with radius-lg.
@@ -33,8 +34,10 @@ export function DialogHeader({ className, children, ...props }: React.HTMLAttrib
   return (
     <div className={cn("flex items-center justify-between border-b border-border px-5 py-4", className)} {...props}>
       {children}
-      <DialogPrimitive.Close className="flex size-7 items-center justify-center rounded-md text-on-surface-variant outline-none transition-colors hover:bg-surface-variant hover:text-on-surface">
-        <X className="size-4" />
+      <DialogPrimitive.Close asChild>
+        <Button variant="icon" aria-label="Cerrar">
+          <X className="size-[18px]" aria-hidden="true" />
+        </Button>
       </DialogPrimitive.Close>
     </div>
   )
