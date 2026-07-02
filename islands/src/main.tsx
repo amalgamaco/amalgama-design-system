@@ -22,6 +22,7 @@ import { EmptyStateShowcase, EmptyStateAnatomy } from "./islands/EmptyStateShowc
 import { TableShowcase, TableBasic, TableClickable } from "./islands/TableShowcase"
 import { SearchShowcase } from "./islands/SearchShowcase"
 import { CardShowcase } from "./islands/CardShowcase"
+import { CardElevated, CardFilled, CardOutlined } from "./islands/CardVariantsShowcase"
 import { StatCardShowcase, StatCardGrid } from "./islands/StatCardShowcase"
 import { AvatarShowcase } from "./islands/AvatarShowcase"
 import { TooltipShowcase } from "./islands/TooltipShowcase"
@@ -302,6 +303,9 @@ const registry: Record<string, ComponentType> = {
   "search-config-multi": SearchConfigMulti,
   "search-config-avatar": SearchConfigAvatar,
   "card-showcase": CardShowcase,
+  "card-elevated": CardElevated,
+  "card-filled": CardFilled,
+  "card-outlined": CardOutlined,
   "stat-card-showcase": StatCardShowcase,
   "stat-card-grid": StatCardGrid,
   "avatar-showcase": AvatarShowcase,

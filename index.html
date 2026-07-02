@@ -15,8 +15,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=60">
-<script type="module" src="islands/dist/embassy-islands.js?v=60"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=61">
+<script type="module" src="islands/dist/embassy-islands.js?v=61"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -8442,73 +8442,60 @@ export { Textarea }</code></pre>
         <div class="ds-toc-body">
 
         <section class="docs-section" id="tc-card-s-0">
-          <h2 class="docs-section-title">Anatomía</h2>
-          <div class="docs-two-col" style="gap:32px;align-items:flex-start">
-            <div>
-              <div class="nav-card nav-card--compact" style="max-width:240px;pointer-events:none;cursor:default">
-                <div class="nav-card-header">
-                  <span class="nav-card-tag">Component</span>
-                  <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
-                </div>
-                <div class="nav-card-content">
-                  <div class="nav-card-title">Button</div>
-                  <div class="nav-card-desc">Primary, secondary, and icon buttons.</div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <table class="docs-props-table ds-table" style="margin-top:0">
-                <thead><tr><th>#</th><th>Elemento</th><th>Requerido</th><th>Notas</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td><code>.nav-card-tag</code></td><td>Sí</td><td>DM Mono 9.5px, uppercase. Etiqueta de categoría.</td></tr>
-                  <tr><td>2</td><td><code>.nav-card-arrow-btn</code></td><td>No</td><td>Botón circular 24×24px. Solo cuando la tarjeta tiene acción.</td></tr>
-                  <tr><td>3</td><td><code>.nav-card-title</code></td><td>Sí</td><td>Epilogue 700, 14px. Nombre del componente o sección.</td></tr>
-                  <tr><td>4</td><td><code>.nav-card-desc</code></td><td>Sí</td><td>12px, texto secundario. Una a dos líneas de descripción.</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <h2 class="docs-section-title">Tokens y especificaciones</h2>
+          <p class="docs-section-desc">Todos los tokens que definen la card y sus tres variantes, agrupados por categorÃ­a. Color, radio y elevaciÃ³n son propios de la card; tipografÃ­a, espaciado, radio y elevaciÃ³n consumen las escalas globales. Se recalibra solo en dark mode.</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="basic-card-tokens"></div></div>
         </section>
         <section class="docs-section" id="tc-card-s-1">
-          <h2 class="docs-section-title">Medidas</h2>
+          <h2 class="docs-section-title">Elevated card</h2>
+          <p class="docs-section-desc">SeparaciÃ³n por <b>elevaciÃ³n</b>: fondo <code>surface-container-low</code> + sombra <code>shadow-sm</code>, sin borde. Se usa cuando la card debe destacarse sobre un fondo del mismo tono. <code>&lt;Card variant="elevated"&gt;</code></p>
+          <div class="bd-family-wrap"><div data-island="card-elevated"></div></div>
           <table class="ds-table">
-            <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+            <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
-              <tr><td>Radio de borde</td><td>14px</td></tr>
-              <tr><td>Header padding</td><td>14px 16px 0</td></tr>
-              <tr><td>Content padding</td><td>10px 16px 16px</td></tr>
-              <tr><td>Font título</td><td>Epilogue 700, 14px, letter-spacing −0.01em</td></tr>
-              <tr><td>Font tag</td><td>DM Mono 500, 9.5px, uppercase, letter-spacing 0.07em</td></tr>
-              <tr><td>Font descripción</td><td>12px, line-height 1.55</td></tr>
-              <tr><td>Botón de acción</td><td>24×24px, border-radius 50%</td></tr>
-              <tr><td>Ícono flecha</td><td>11×11px, stroke-width 2.25</td></tr>
-              <tr><td>Hover transform</td><td><code>translateY(-2px)</code></td></tr>
+              <tr><td>Contenedor</td><td><code>--color-surface-container-low</code></td></tr>
+              <tr><td>Elevación</td><td><code>--shadow-sm</code></td></tr>
+              <tr><td>Borde</td><td>transparente (sin borde)</td></tr>
             </tbody>
           </table>
         </section>
         <section class="docs-section" id="tc-card-s-2">
-          <h2 class="docs-section-title">Estados</h2>
+          <h2 class="docs-section-title">Filled card</h2>
+          <p class="docs-section-desc">Agrupación <b>sutil</b>: fondo <code>surface-container-highest</code>, sin borde ni sombra. Menor énfasis; se apoya solo en el contraste de superficie. <code>&lt;Card variant="filled"&gt;</code></p>
+          <div class="bd-family-wrap"><div data-island="card-filled"></div></div>
           <table class="ds-table">
-            <thead><tr><th>Variante</th><th>Estado</th><th>Tratamiento visual</th></tr></thead>
+            <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
-              <tr><td>Estática</td><td>Reposo</td><td>Sin hover ni foco — usar <code>pointer-events:none</code> cuando no es interactiva</td></tr>
-              <tr><td>Interactiva</td><td>Reposo</td><td>Borde + fondo de superficie contenedor</td></tr>
-              <tr><td>Interactiva</td><td>Hover</td><td><code>translateY(-2px)</code> + sombra primaria suave + flecha en color primario</td></tr>
+              <tr><td>Contenedor</td><td><code>--color-surface-container-highest</code></td></tr>
+              <tr><td>Borde / sombra</td><td>ninguno</td></tr>
             </tbody>
           </table>
         </section>
         <section class="docs-section" id="tc-card-s-3">
-          <h2 class="docs-section-title">Tokens y especificaciones</h2>
-          <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
-          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="basic-card-tokens"></div></div>
+          <h2 class="docs-section-title">Outlined card</h2>
+          <p class="docs-section-desc">Bajo énfasis con <b>borde</b>: superficie + borde 1px, sin elevación. Variante predeterminada; máxima definición de límite en fondos claros. <code>&lt;Card&gt;</code> / <code>&lt;Card variant="outlined"&gt;</code></p>
+          <div class="bd-family-wrap"><div data-island="card-outlined"></div></div>
           <table class="ds-table">
-            <thead><tr><th>Parte</th><th>Rol / token</th><th>Uso</th></tr></thead>
+            <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
-              <tr><td><code>.nav-card--compact</code></td><td><code>--color-surface-container</code></td><td>Contenedor base de la Basic Card</td></tr>
-              <tr><td><code>.nav-card-tag</code></td><td><code>--color-on-surface-variant</code></td><td>Etiqueta de categoría en DM Mono uppercase</td></tr>
-              <tr><td><code>.nav-card-arrow-btn</code></td><td><code>--color-on-surface-variant</code></td><td>Botón de acción; solo si la tarjeta es interactiva</td></tr>
-              <tr><td><code>.nav-card-title</code></td><td><code>--color-on-surface</code></td><td>Título principal de la tarjeta</td></tr>
-              <tr><td><code>.nav-card-desc</code></td><td><code>--color-on-surface-variant</code></td><td>Subtítulo / descripción de apoyo</td></tr>
+              <tr><td>Contenedor</td><td><code>--color-card</code> (superficie)</td></tr>
+              <tr><td>Borde</td><td><code>--color-border</code> · 1px</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section" id="tc-card-s-4">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Radio de borde</td><td><code>--radius-lg</code></td></tr>
+              <tr><td>Padding</td><td><code>py-4 px-5</code> — 16px vertical · 20px horizontal</td></tr>
+              <tr><td>Header (margin inferior)</td><td><code>mb-3</code> — 12px</td></tr>
+              <tr><td>Footer (margin superior · gap)</td><td><code>mt-4</code> — 16px · <code>gap-2</code> — 8px</td></tr>
+              <tr><td>Título</td><td>Epilogue 600 · <code>text-heading-xs</code></td></tr>
+              <tr><td>Descripción</td><td><code>text-label</code> · line-height 1.55</td></tr>
+              <tr><td>Contenido</td><td><code>text-body-md</code></td></tr>
+              <tr><td>Sombra (elevated)</td><td><code>--shadow-sm</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -8518,10 +8505,11 @@ export { Textarea }</code></pre>
           <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="ds-toc-title">En esta página</div>
           <ul class="ds-toc-list">
-            <li><a class="ds-toc-link" data-target="tc-card-s-0">Anatomía</a></li>
-            <li><a class="ds-toc-link" data-target="tc-card-s-1">Medidas</a></li>
-            <li><a class="ds-toc-link" data-target="tc-card-s-2">Estados</a></li>
-            <li><a class="ds-toc-link" data-target="tc-card-s-3">Tokens y especificaciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-card-s-0">Tokens y especificaciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-card-s-1">Elevated card</a></li>
+            <li><a class="ds-toc-link" data-target="tc-card-s-2">Filled card</a></li>
+            <li><a class="ds-toc-link" data-target="tc-card-s-3">Outlined card</a></li>
+            <li><a class="ds-toc-link" data-target="tc-card-s-4">Medidas</a></li>
           </ul>
         </nav>
         </div>
