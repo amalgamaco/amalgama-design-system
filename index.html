@@ -5407,7 +5407,7 @@ body { overflow-x: clip; }
         <div class="bs-specs-layout">
 
         <!-- TOC sidebar -->
-        <nav class="ds-toc" id="bs-toc" aria-label="En esta página">
+        <nav class="ds-toc" data-toc-auto id="bs-toc" aria-label="En esta página">
           <button class="ds-toc-toggle" type="button" aria-expanded="false">
             <span class="ds-toc-current">En esta página</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -16168,11 +16168,12 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
           </div><!-- /main content -->
 
           <!-- ── STICKY TOC ── -->
-          <aside class="cs-toc ds-toc" id="cs-toc">
+          <aside class="cs-toc ds-toc" data-toc-auto id="cs-toc">
             <button class="ds-toc-toggle" onclick="this.closest('.ds-toc').classList.toggle('ds-toc--open')">En esta página</button>
             <div class="ds-toc-body">
               <div class="ds-toc-title">En esta página</div>
               <ul class="ds-toc-list">
+                <li><a class="ds-toc-link" data-target="cs-anatomy">Anatomía</a></li>
                 <li><a class="ds-toc-link" data-target="cs-tokens">Tokens y especificaciones</a></li>
                 <li><a class="ds-toc-link" data-target="cs-assist">Chip de asistencia</a></li>
                 <li><a class="ds-toc-link" data-target="cs-filter">Chip de filtro</a></li>
@@ -17958,7 +17959,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
           </div><!-- /main content -->
 
           <!-- ── STICKY TOC ── -->
-          <aside class="cs-toc ds-toc" id="ss-toc">
+          <aside class="cs-toc ds-toc" data-toc-auto id="ss-toc">
             <button class="ds-toc-toggle" onclick="this.closest('.ds-toc').classList.toggle('ds-toc--open')">En esta página</button>
             <div class="ds-toc-body">
               <div class="ds-toc-title">En esta página</div>
@@ -21347,59 +21348,7 @@ function btStateToggle(headBtn) {
 })();
 
 // ── Buttons → Specs tab TOC (bs-toc) ──
-(function() {
-  var toc = document.getElementById('bs-toc');
-  if (!toc) return;
-  var links = [].slice.call(toc.querySelectorAll('.ds-toc-link'));
-  var currentLabel = toc.querySelector('.ds-toc-current');
-  var toggle = toc.querySelector('.ds-toc-toggle');
-  var byId = {};
-  links.forEach(function(l) { byId[l.getAttribute('data-target')] = l; });
-  var targets = links
-    .map(function(l) { return document.getElementById(l.getAttribute('data-target')); })
-    .filter(Boolean);
-
-  function setActive(id) {
-    links.forEach(function(l) {
-      l.classList.toggle('active', l.getAttribute('data-target') === id);
-    });
-    if (currentLabel && byId[id]) currentLabel.textContent = byId[id].textContent;
-  }
-
-  // Click → smooth scroll
-  links.forEach(function(l) {
-    l.addEventListener('click', function(e) {
-      e.preventDefault();
-      var t = document.getElementById(l.getAttribute('data-target'));
-      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      toc.classList.remove('open');
-      if (toggle) toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-
-  // Mobile toggle
-  if (toggle) {
-    toggle.addEventListener('click', function() {
-      var open = toc.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  // Scroll-spy via IntersectionObserver
-  var visible = {};
-  if ('IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(en) { visible[en.target.id] = en.isIntersecting; });
-      for (var i = 0; i < targets.length; i++) {
-        if (visible[targets[i].id]) { setActive(targets[i].id); return; }
-      }
-    }, { rootMargin: '-84px 0px -72% 0px', threshold: 0 });
-    targets.forEach(function(t) { obs.observe(t); });
-  }
-
-  // Default to first section
-  if (targets.length) setActive(targets[0].id);
-})();
+/* bs-toc now uses the generic .ds-toc[data-toc-auto] initializer */
 </script>
 </body>
 </html>
