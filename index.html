@@ -15188,60 +15188,28 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
 
-          <p class="bd-lead">La familia Chart compone primitivos de <code>@amalgama/ds/chart</code> (theming, tooltip, leyenda) con los componentes de <a href="https://recharts.org" target="_blank" rel="noopener">Recharts</a> para armar gráficos de línea, barra y torta reales — no imágenes. Todos los colores de serie salen de tokens Embassy y recalibran solos en dark mode.</p>
-
-          <ul class="bd-overview-list">
-            <li><b>Tres tipos:</b> línea (tendencias en el tiempo), barra (comparación entre categorías) y torta (composición/proporciones).</li>
-            <li><b>Paleta de 5 series</b> (<code>--color-chart-1</code> … <code>--color-chart-5</code>), mapeada a los roles <code>secondary</code>/<code>tertiary</code>/<code>success</code>/<code>warning</code>/<code>info</code> — nunca <code>--color-primary</code>, que se vuelve blanco en dark mode y leería como "sin serie".</li>
-            <li><b>Rango de tiempo intercambiable:</b> semanal, mensual y anual con el mismo <code>Segmented Button</code> que el resto del DS.</li>
-            <li><b>Tooltip, leyenda, ejes y grilla</b> incluidos por defecto — sin armarlos a mano por gráfico.</li>
-            <li><b>Responsive:</b> cada gráfico vive dentro de un <code>ResponsiveContainer</code>, se adapta al ancho del contenedor padre.</li>
-            <li><b>Estados:</b> vacío, cargando y error documentados para cuando todavía no hay datos o falla el fetch.</li>
-          </ul>
+          <p class="bd-lead">La familia Chart compone primitivos de <code>@amalgama/ds/chart</code> con los componentes de <a href="https://recharts.org" target="_blank" rel="noopener">Recharts</a> para armar gráficos reales — no imágenes. Tres tipos disponibles:</p>
 
           <div class="bd-family-wrap">
             <div data-island="line-chart-showcase"></div>
           </div>
           <ol class="bd-family-legend">
-            <li><b>Line chart</b> — dos series (ingresos/gastos) por día de la semana, con tooltip y leyenda.</li>
+            <li><b>Line chart</b> — tendencias en el tiempo.</li>
           </ol>
 
           <div class="bd-family-wrap" style="margin-top:20px">
             <div data-island="bar-chart-showcase"></div>
           </div>
           <ol class="bd-family-legend">
-            <li><b>Bar chart</b> — vacantes abiertas por área, una serie categórica.</li>
+            <li><b>Bar chart</b> — comparación entre categorías.</li>
           </ol>
 
           <div class="bd-family-wrap" style="margin-top:20px;max-width:420px;margin-left:auto;margin-right:auto;">
             <div data-island="pie-chart-showcase"></div>
           </div>
           <ol class="bd-family-legend">
-            <li><b>Pie chart</b> — composición de fuentes de candidatos, con leyenda por segmento.</li>
+            <li><b>Pie chart</b> — composición o proporciones.</li>
           </ol>
-
-          <h2 class="docs-section-title" style="margin-top:28px">Rango de tiempo: semanal / mensual / anual</h2>
-          <p class="ds-p">El mismo gráfico puede alternar granularidad con un <code>SegmentedButtonGroup</code> — solo cambia la fuente de datos, no el componente.</p>
-          <div class="bd-family-wrap">
-            <div data-island="chart-time-range-showcase"></div>
-          </div>
-
-          <h2 class="docs-section-title" style="margin-top:28px">Estados</h2>
-          <p class="ds-p">Todo gráfico que depende de datos remotos necesita representar estos tres casos:</p>
-          <div class="bd-grid c3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
-            <div>
-              <p class="docs-section-desc" style="margin-bottom:8px"><b>Vacío</b></p>
-              <div data-island="chart-empty-state"></div>
-            </div>
-            <div>
-              <p class="docs-section-desc" style="margin-bottom:8px"><b>Cargando</b></p>
-              <div data-island="chart-loading-state"></div>
-            </div>
-            <div>
-              <p class="docs-section-desc" style="margin-bottom:8px"><b>Error</b></p>
-              <div data-island="chart-error-state"></div>
-            </div>
-          </div>
 
         </section>
       </div>
@@ -15256,23 +15224,28 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
           <table class="ds-table">
             <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
             <tbody>
-              <tr><td><code>ChartContainer</code></td><td>Envoltorio con <code>ResponsiveContainer</code> de Recharts; inyecta las variables CSS de color por serie</td><td><code>bg-transparent</code></td></tr>
+              <tr><td><code>ChartContainer</code></td><td>Envoltorio responsive — mide su propio contenedor y le pasa dimensiones explícitas al gráfico; inyecta las variables CSS de color por serie</td><td><code>bg-transparent</code></td></tr>
               <tr><td>Grilla (<code>CartesianGrid</code>)</td><td>Solo líneas horizontales (<code>vertical={false}</code>), color sutil</td><td><code>--color-border</code></td></tr>
-              <tr><td>Ejes (<code>XAxis</code>/<code>YAxis</code>)</td><td>Sin línea ni tick marks, solo etiquetas</td><td><code>--color-fg-muted</code>, <code>text-caption</code></td></tr>
-              <tr><td><code>ChartTooltipContent</code></td><td>Tarjeta flotante con indicador de color + valor por serie</td><td><code>bg-card</code>, <code>border-border</code>, <code>shadow-lg</code></td></tr>
-              <tr><td><code>ChartLegendContent</code></td><td>Fila de chips de color + etiqueta debajo del gráfico</td><td><code>text-fg-muted</code></td></tr>
+              <tr><td>Ejes y etiquetas (<code>XAxis</code>/<code>YAxis</code>)</td><td>Sin línea ni tick marks, solo etiquetas de categoría/valor</td><td><code>--color-fg-muted</code>, <code>text-caption</code></td></tr>
+              <tr><td>Tooltip (<code>ChartTooltipContent</code>)</td><td>Tarjeta flotante con indicador de color + valor por serie al pasar el cursor</td><td><code>bg-card</code>, <code>border-border</code>, <code>shadow-lg</code></td></tr>
+              <tr><td>Leyenda (<code>ChartLegendContent</code>)</td><td>Fila de chips de color + etiqueta debajo del gráfico, siempre presente con más de una serie</td><td><code>text-fg-muted</code></td></tr>
               <tr><td>Series (Line/Bar/Pie)</td><td>Color por <code>ChartConfig</code>, nunca hardcodeado</td><td><code>--color-chart-1</code>…<code>--color-chart-5</code></td></tr>
             </tbody>
           </table>
+          <p class="docs-section-desc" style="margin-top:10px">Responsive por diseño: cada gráfico vive dentro de un contenedor medido en tiempo real y se adapta al ancho del padre — no tiene un ancho fijo.</p>
         </section>
         <section class="docs-section" id="tc-charts-s-1">
           <h2 class="docs-section-title">Configuraciones</h2>
-          <ul style="margin:0;padding-left:20px;font-size:14px;line-height:1.8;">
+          <ul style="margin:0 0 16px;padding-left:20px;font-size:14px;line-height:1.8;">
             <li><b>Line chart</b> — <code>&lt;LineChart&gt;</code> + <code>&lt;Line&gt;</code> por serie; usar para tendencias temporales.</li>
             <li><b>Bar chart</b> — <code>&lt;BarChart&gt;</code> + <code>&lt;Bar&gt;</code> por serie; usar para comparar categorías discretas.</li>
             <li><b>Pie chart</b> — <code>&lt;PieChart&gt;</code> + <code>&lt;Pie&gt;</code>/<code>&lt;Cell&gt;</code> por segmento; usar para composición/proporciones (máx. 5–6 segmentos).</li>
-            <li><b>Rango de tiempo</b> — mismo <code>ChartContainer</code>, cambiando solo el array de datos según semanal/mensual/anual (ver Overview).</li>
           </ul>
+          <h3 class="bd-sub-title">Rango de tiempo: semanal / mensual / anual</h3>
+          <p class="docs-section-desc">El mismo <code>ChartContainer</code> puede alternar granularidad con un <code>SegmentedButtonGroup</code> — solo cambia el array de datos, no el componente.</p>
+          <div class="bd-family-wrap">
+            <div data-island="chart-time-range-showcase"></div>
+          </div>
         </section>
         <section class="docs-section" id="tc-charts-s-2">
           <h2 class="docs-section-title">Estados</h2>
@@ -15286,6 +15259,21 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
               <tr><td>Error</td><td>Mensaje + acción de reintento (<code>Button variant="tertiary"</code>)</td><td><code>--color-error</code></td></tr>
             </tbody>
           </table>
+          <p class="docs-section-desc" style="margin:16px 0 8px"><b>Vacío / cargando / error</b> — todo gráfico que depende de datos remotos necesita representar estos tres casos:</p>
+          <div class="bd-grid c3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+            <div>
+              <p class="docs-section-desc" style="margin-bottom:8px"><b>Vacío</b></p>
+              <div data-island="chart-empty-state"></div>
+            </div>
+            <div>
+              <p class="docs-section-desc" style="margin-bottom:8px"><b>Cargando</b></p>
+              <div data-island="chart-loading-state"></div>
+            </div>
+            <div>
+              <p class="docs-section-desc" style="margin-bottom:8px"><b>Error</b></p>
+              <div data-island="chart-error-state"></div>
+            </div>
+          </div>
         </section>
         <section class="docs-section" id="tc-charts-s-3">
           <h2 class="docs-section-title">Medidas</h2>
