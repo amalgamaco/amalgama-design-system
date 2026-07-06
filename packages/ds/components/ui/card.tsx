@@ -1,22 +1,40 @@
 /**
- * Card — contenedor básico con borde y fondo.
+ * Card — contenedor básico de contenido agrupado sobre una superficie.
  *
  * Cuándo usar: contenedor genérico de contenido agrupado sobre superficie.
  * Cuándo no: métricas (stat-card), personas (person-card), vacantes (vacancy-card).
  * Reemplaza a: paneles/boxes legacy con borde o sombra.
  *
+ * MD3 tiene tres variantes de card, todas expresadas con roles Embassy:
+ *   - outlined (predeterminado): superficie + borde 1px. Bajo énfasis, sin elevación.
+ *   - elevated: surface-container-low + sombra sm, sin borde. Separación por elevación.
+ *   - filled: surface-container-highest, sin borde ni sombra. Agrupación sutil.
+ * Dark mode automático vía los roles --color-*; sin overrides por tema.
+ *
  * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/card.css.
  */
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../lib/utils"
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("bg-card border border-border rounded-lg py-4 px-5", className)}
-      {...props}
-    />
+const cardVariants = cva("rounded-lg py-4 px-5", {
+  variants: {
+    variant: {
+      outlined: "bg-card border border-border",
+      elevated: "bg-surface-container-low border border-transparent shadow-sm",
+      filled: "bg-surface-container-highest border border-transparent",
+    },
+  },
+  defaultVariants: { variant: "outlined" },
+})
+
+export interface CardProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof cardVariants> {}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant, ...props }, ref) => (
+    <div ref={ref} className={cn(cardVariants({ variant }), className)} {...props} />
   )
 )
 Card.displayName = "Card"
@@ -56,4 +74,4 @@ const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
 )
 CardFooter.displayName = "CardFooter"
 
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
+export { Card, cardVariants, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }

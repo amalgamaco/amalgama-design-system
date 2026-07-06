@@ -33,8 +33,15 @@ export const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center rounded-sm px-3 py-2 text-sm outline-none transition-colors duration-fast ease-default",
-      "focus:bg-surface-variant data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
+      // Item base — DS navigation item geometry: 8px radius, 8px gap, 18px icons at .7 opacity.
+      "relative flex cursor-pointer select-none items-center gap-2 rounded-md px-3 py-2 text-sm outline-none transition-colors duration-fast ease-default [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:opacity-70",
+      // Hover / keyboard highlight — shared Embassy "blue hover": soft secondary tint + blue label/icon (weaker than selected).
+      "focus:bg-[var(--color-nav-hover)] focus:text-[var(--color-nav-hover-content)] data-[highlighted]:bg-[var(--color-nav-hover)] data-[highlighted]:text-[var(--color-nav-hover-content)]",
+      // Keyboard focus — its own ring; Pressed — stronger secondary tint (transient, still < selected fill).
+      "focus-visible:shadow-[inset_0_0_0_2px_var(--color-focus-ring)] active:bg-[var(--color-nav-press)]",
+      // Selected (checkbox/radio menu items) — secondary-container fill + on-secondary-container label/icon, bolder (like nav .active).
+      "data-[state=checked]:bg-[var(--color-nav-selected)] data-[state=checked]:text-[var(--color-nav-selected-content)] data-[state=checked]:font-medium",
+      "data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
       className
     )}
     {...props}

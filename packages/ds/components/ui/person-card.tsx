@@ -9,6 +9,7 @@
  */
 import * as React from "react"
 import { cn } from "../lib/utils"
+import { Card } from "./card"
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
 
 interface PersonCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -40,9 +41,9 @@ function PersonCard({
       .toUpperCase()
 
   return (
-    <div
+    <Card
       className={cn(
-        "flex flex-col items-center text-center gap-2 rounded-lg border border-border bg-surface p-5 hover:bg-surface-variant transition-colors",
+        "flex flex-col items-center text-center gap-2 bg-surface p-5 hover:bg-surface-variant transition-colors",
         className
       )}
       {...props}
@@ -57,7 +58,7 @@ function PersonCard({
         {meta && <p className="text-label text-fg-subtle">{meta}</p>}
       </div>
       {actions && <div className="flex gap-2 flex-wrap justify-center">{actions}</div>}
-    </div>
+    </Card>
   )
 }
 

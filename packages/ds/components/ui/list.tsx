@@ -27,7 +27,7 @@ export const ListItem = React.forwardRef<HTMLDivElement, ListItemProps>(
       className={cn(
         "flex min-h-14 flex-col justify-center gap-0.5 px-4 py-2.5 outline-none",
         asButton &&
-          "cursor-pointer transition-colors hover:bg-surface-variant focus-visible:bg-surface-variant",
+          "cursor-pointer transition-colors hover:bg-[var(--color-nav-hover)] hover:text-[var(--color-nav-hover-content)] focus-visible:bg-[var(--color-nav-hover)] focus-visible:text-[var(--color-nav-hover-content)] active:bg-[var(--color-nav-press)]",
         className
       )}
       {...props}

@@ -12,16 +12,28 @@ import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../lib/utils"
 
-/* Embassy Segmented Button (segmented-button.css):
-   - Group: transparent bg, 1px outline border, full pill radius, 3px padding, 2px gap.
-   - Segment: individually pill-rounded, transparent bg, on-surface label, intrinsic
-     width (NOT stretched), NO dividers between segments.
-   - Selected: secondary-container fill + on-secondary-container label.
-   - Hover (unselected): on-surface 8% state layer; (selected): on-secondary-container
-     8% over the container. */
+/* Embassy Segmented Button — token mapping (all via semantic Color Roles).
+   Lighter ("Option B") treatment: subtler outline-variant frame + primary-container tonal
+   fill — lighter than secondary-container while keeping a branded tonal selection and the
+   same dark on-primary-container label for AAA contrast. No new tokens / no hardcoded hex.
+   - Group container border ........ --color-outline-variant    (border-outline-variant) — lighter frame
+   - Group: transparent bg, full pill radius, 3px padding, 2px gap, no dividers.
+   - Segment (unselected) label ..... --color-on-surface-variant (text-on-surface-variant) — lower emphasis, still readable
+   - Segment: individually pill-rounded, transparent bg, intrinsic width (not stretched).
+   - Selected segment background .... --color-primary-container          (bg-primary-container)
+   - Selected segment label ......... --color-on-primary-container       (text-on-primary-container)
+   - Hover  (unselected) ............ --color-on-surface-state-hover      (on-surface 8% layer)
+   - Pressed(unselected) ............ --color-on-surface-state-press      (on-surface 12% layer)
+   - Hover  (selected) .............. on-primary-container 8% over primary-container  (color-mix of existing roles)
+   - Pressed(selected) .............. on-primary-container 12% over primary-container (color-mix of existing roles)
+   - Focus .......................... focus-ring utility (--color-focus / --color-focus-ring)
+   - Disabled ....................... whole control at 38% opacity (DS standard; keeps the
+     selected indicator legible — preserves outline + selected fill contrast). Applied at the
+     GROUP via :has(:disabled) so the outline fades together with the segments.
+   Unselected state-layer tokens live in css/hover-tokens.css (mirrors the Chip implementation). */
 
 const segGroupVariants = cva(
-  "inline-flex items-center bg-transparent border border-outline rounded-full p-[3px] gap-[2px]",
+  "inline-flex items-center bg-transparent border border-outline-variant rounded-full p-[3px] gap-[2px] has-[:disabled]:opacity-[0.38] has-[:disabled]:pointer-events-none",
   {
     variants: {
       size: { sm: "", md: "", lg: "" },
@@ -33,12 +45,13 @@ const segGroupVariants = cva(
 const segItemVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 rounded-full",
-    "bg-transparent text-on-surface font-medium leading-[1.2]",
+    "[&_svg]:w-[18px] [&_svg]:h-[18px] [&_svg]:shrink-0",
+    "bg-transparent text-on-surface-variant font-medium leading-[1.2]",
     "cursor-pointer whitespace-nowrap transition-colors duration-fast ease-default",
-    "hover:bg-[color-mix(in_srgb,var(--color-on-surface)_8%,transparent)]",
-    "data-[state=on]:bg-secondary-container data-[state=on]:text-on-secondary-container data-[state=on]:font-semibold",
-    "data-[state=on]:hover:bg-[color-mix(in_srgb,var(--color-on-secondary-container)_8%,var(--color-secondary-container))]",
-    "disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none",
+    "hover:bg-on-surface-state-hover active:bg-on-surface-state-press",
+    "data-[state=on]:bg-primary-container data-[state=on]:text-on-primary-container data-[state=on]:font-semibold",
+    "data-[state=on]:hover:bg-[color-mix(in_srgb,var(--color-on-primary-container)_8%,var(--color-primary-container))] data-[state=on]:active:bg-[color-mix(in_srgb,var(--color-on-primary-container)_12%,var(--color-primary-container))]",
+    "disabled:cursor-not-allowed",
     "focus:outline-none focus-visible:focus-ring focus-visible:z-10",
   ].join(" "),
   {

@@ -49,7 +49,7 @@ In all other cases, consume a Color Role directly. The `--button-secondary-*` to
 
 #### Sanctioned exception — MD3 component-token layer
 
-A component **may** declare a full component-token layer that mirrors Material Design 3's "Tokens and specs" table — **one custom property per MD3 component token**, declared on the component root, consumed by every rule. **Reference implementation: `segmented-button.css`.** This is normally a "shadow token" (§2.3) but is permitted here because it reproduces MD3's *documented three-layer architecture* (palette → system role → component token → CSS), making the component's spec table machine-mappable and each instance themeable by overriding one token.
+A component **may** declare a full component-token layer that mirrors Material Design 3's "Tokens and specs" table — **one custom property per MD3 component token**, declared on the component root, consumed by every rule. **Reference implementation: `segmented-button.tsx`** (canonical Tailwind component; the `--seg-btn-*` MD3 component-token layer is retained in the docs site's `index.html` for the doc-chrome switchers). This is normally a "shadow token" (§2.3) but is permitted here because it reproduces MD3's *documented three-layer architecture* (palette → system role → component token → CSS), making the component's spec table machine-mappable and each instance themeable by overriding one token.
 
 Rules for adopting this pattern:
 1. **Every** component token defaults to its MD3 system role via the bridge, with the Embassy role as fallback: `var(--md-sys-color-X, var(--color-X))`. Never default to a primitive or a hardcoded value.
@@ -59,6 +59,8 @@ Rules for adopting this pattern:
 5. Deliberate divergences from MD3 defaults (e.g. the focus ring) are documented in the header.
 
 The **MD3 system bridge** (`css/md-sys-bridge.css`) exposes `--md-sys-color-*` (Material's real system-token names) as aliases of the Embassy `--color-*` roles. It is the only place those names are defined; it needs no dark override because the `--color-*` roles already recalibrate. It is optional to load — the `var(--md-sys-color-X, var(--color-X))` fallback keeps adopting components working without it (they resolve to Embassy roles directly).
+
+**Component-tier state tokens (`md.comp.*`, jul 2026).** The component/family-specific state colors — elevated chip, search field, snackbar action/close, and the **navigation/menu family** (`--md-comp-nav-*`) — live in a `--md-comp-*` component tier defined in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css`). Each derives from a role token (and, where it's a state *layer*, from the `md.sys.state.*-opacity` tokens in §5.5). The legacy `--color-chip-elevated-*` / `--color-search-field-*` / `--color-snackbar-*` / `--color-nav-*` names are **kept as backward-compatible aliases** (`--color-X: var(--md-comp-X)`) — they are what components consume (generated `bg-*` utilities for chip/search/snackbar; `bg-[var(--color-nav-*)]` and raw CSS vars for nav) — so no component code changed. **This is the single canonical shape for every derived component/family state-token set**; a new one MUST follow it (canonical `--md-comp-<family>-<state>` + `--color-*` alias), never a `--color-*`-only or one-off token. To restyle one family's state, retarget its `--md-comp-*` var. Role-level state layers (`--color-on-surface-state-*`, `--color-primary-state-*`, `--color-on-secondary-state-*`) stay in the `md.sys` tier and use the `--color-<role>-state-<state>` naming; the `-state-` segment is **reserved** for those role layers and is intentionally absent from the `md.comp` tier.
 
 > Why this is **not** the rejected `material-web` path: this adopts MD3's token *structure and naming* in plain Embassy CSS (no build, no Lit, no Shadow DOM, Embassy palette as source of truth). It does **not** adopt MD3's component *implementations*. See the architecture note in this section's history (June 2026 evaluation: `material-web` is in maintenance mode and lacks ~70% of Embassy's components).
 
@@ -239,21 +241,59 @@ Embassy does not prescribe a single hover model across all variants, but the app
 | State layer on filled container | 8% `on-container` overlay | `color-mix(in srgb, var(--color-on-XYZ) 8%, var(--color-XYZ-container))` |
 | Text / ghost | 10% primary overlay | `color-mix(in srgb, var(--color-primary) 10%, transparent)` |
 | Surface swap | Named surface token | `var(--color-surface-variant)` |
+| **Menu-like / navigation** | **Shared "blue hover" tokens** | `var(--color-nav-hover)` + `var(--color-nav-hover-content)` |
 
 A new component must declare its hover model in the CSS header comment and use it consistently for all its states.
+
+#### Navigation / menu hover — the shared "blue hover" language (jul 2026)
+
+Every **menu-like or navigation-like** surface — main app-shell nav (`.nav-item`), docs component side menu (`.ds-nav-item`), dropdown menus (`dropdown-menu.tsx`), lists (`list.tsx`), and search result rows (`search.tsx`) — shares **one** hover/selected vocabulary so hover reads **blue / light-blue, never neutral gray**. It is built on the `secondary` accent and defined once as semantic tokens in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css`):
+
+| Aspect | Token | Derivation |
+|---|---|---|
+| Hover background | `--color-nav-hover` | `secondary-container` @ 45% over transparent |
+| Hover icon + label | `--color-nav-hover-content` | `secondary` (blue) |
+| Pressed background | `--color-nav-press` | `secondary-container` @ 70% (transient, still weaker than the selected fill) |
+| Selected background | `--color-nav-selected` | `secondary-container` (100%) |
+| Selected icon + label | `--color-nav-selected-content` | `on-secondary-container` |
+
+Hover/pressed are a **translucent fraction of `secondary-container`** — the *same family* the selected fill uses, one step lighter. This is deliberate: it (a) stays **visible in dark mode** where plain `secondary` is too light to register as a fill, and (b) mirrors the icon-rail's own hover-lighter-than-selected logic. The **lightness ramp `45% < 70% < 100%`** gives hover ≠ pressed ≠ selected on its own; the **different content color** (hover = `secondary` blue text; selected = `on-secondary-container` + bolder weight) reinforces hover ≠ selected. All recalibrate in dark via the `--color-*` roles (light `secondary-container` `#CAD9FF`; dark `#3A5BB0`).
+
+Consume via `bg-[var(--color-nav-*)]` / `text-[var(--color-nav-*-content)]` (React) or the raw vars (CSS) — **never** a neutral `--color-on-surface-state-*` layer for a menu/nav item, and **never** a one-off blue token (the docs `--ds-accent`/`--ds-accent-bg` are documentation-chrome accents only — spec tables, kbd chips, callouts — and must NOT be used for nav/menu hover). Components with their own documented selection systems (Segmented Button → `primary-container`; Chip → chip states) are **not** menu-like and keep their own models.
+
+**Every menu-like/nav surface uses these tokens — no exceptions, no per-item overrides:** dropdown menus, lists, search result rows, the app-shell main nav (`.nav-item`), and *all* docs-shell navigation — the icon **rail** (`.ds-rail-btn` + its `.ds-rail-icon-wrap` pill), drawer items (`.ds-nav-item`), solo items (`.ds-nav-solo`), group-label hovers (`.ds-nav-group-name`/`-toggle`), and the mobile menu button (`.ds-menu-btn`). If two items in the same menu (or two menus in the same shell) hover differently, a surface is off-token — fix the surface, don't add a local color.
 
 ### 5.5 State layers — MD3 model
 
 Material Design 3 defines **state layers** as translucent overlays that communicate interaction states without permanently altering the component's color. Embassy follows this model exactly, with `color-mix()` as the CSS implementation.
 
-#### State layer opacities (MD3 spec)
+#### The opacity is a system token — never a literal (jul 2026)
 
-| Interaction | Opacity |
-|---|---|
-| Hover | 8% |
-| Pressed | 12% |
-| Focused | 12% |
-| Dragged | 16% |
+The state-layer opacities are **`md.sys.state.*` system tokens**, defined once in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css` for the bundle). Every state-layer color is **derived** from them via `color-mix()` — no `.tsx`/CSS may hardcode a `8%`/`10%` literal inside a state expression. Change the opacity in one place and it propagates to every role/surface/component state.
+
+```css
+--md-sys-state-hover-opacity:              8%;
+--md-sys-state-focus-opacity:              10%;
+--md-sys-state-pressed-opacity:            10%;   /* reconciled from ad-hoc 12–16% */
+--md-sys-state-dragged-opacity:            16%;
+--md-sys-state-disabled-content-opacity:   38%;
+--md-sys-state-disabled-container-opacity: 12%;
+
+/* derive any state color — never inline the % */
+--color-on-surface-state-hover: color-mix(in srgb,
+  var(--color-on-surface) var(--md-sys-state-hover-opacity), transparent);
+```
+
+| Interaction | Opacity | System token |
+|---|---|---|
+| Hover | 8% | `--md-sys-state-hover-opacity` |
+| Focus | 10% | `--md-sys-state-focus-opacity` |
+| Pressed | 10% | `--md-sys-state-pressed-opacity` |
+| Dragged | 16% | `--md-sys-state-dragged-opacity` |
+| Disabled content | 38% | `--md-sys-state-disabled-content-opacity` |
+| Disabled container | 12% | `--md-sys-state-disabled-container-opacity` |
+
+> **Reconciled (jul 2026):** pressed was previously an ad-hoc 12–16% per token (primary 16%, on-surface 12%) and focus 12%. Both were unified to the MD3 spec (pressed 10%, focus 10%) by routing every state color through the opacity tokens above. Token **names** were preserved, so nothing consuming `--color-*-state-*` broke — only the derivation changed. Non-state hover *darkens* (`--color-primary-hover`, `--color-secondary-container-hover`) and the input `--color-error-ring` halo are intentionally **not** state layers and keep their own values.
 
 #### State layer color by surface type
 
@@ -280,10 +320,13 @@ The mapping splits by anatomy, not by "emphasis" (the previous wording here allo
 
 | Anatomy | Selected treatment | Components |
 |---|---|---|
-| Has a container (pill/segment) | `--color-secondary-container` (MD3 `secondaryContainer`) fill + `--color-on-secondary-container` (MD3 `onSecondaryContainer`) content | Chip, Segmented Button |
+| Has a container (pill/segment) | `--color-secondary-container` (MD3 `secondaryContainer`) fill + `--color-on-secondary-container` (MD3 `onSecondaryContainer`) content | Chip |
+| Has a container (pill/segment), lighter "Option B" variant | `--color-primary-container` (MD3 `primaryContainer`) fill + `--color-on-primary-container` (MD3 `onPrimaryContainer`) content | Segmented Button |
 | Text-only, no container (underline/indicator) | `--color-secondary` directly, on both the label and the indicator | Tabs |
 
 `--color-primary` is reserved for actual page-level/sidebar navigation active state, which lives in the docs shell's own chrome (`index.html`), not in `packages/ds` components — it is out of this rule's scope, not a second option for it.
+
+**Segmented Button — softer "Option B" variant (2026-06):** the segmented button uses a *lighter* tonal selection — container `--color-primary-container` + content `--color-on-primary-container`, with an `--color-outline-variant` frame and `--color-on-surface-variant` unselected labels. This is a deliberate, documented deviation from the MD3 segmented-button spec (which assigns `secondaryContainer`): it stays within MD3 *roles* and the tonal-selection principle while reading lighter/cleaner. Canonical token mapping lives in `packages/ds/components/ui/segmented-button.tsx` and the component's Specs → Color Roles table.
 
 ---
 
