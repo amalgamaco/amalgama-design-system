@@ -86,7 +86,7 @@ function CarouselPrevious({ className, ...props }: React.ButtonHTMLAttributes<HT
   return (
     <button
       className={cn(
-        "absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-surface border border-border shadow-sm text-fg hover:bg-surface-variant disabled:opacity-30 transition-colors",
+        "absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-surface border border-border shadow-sm text-fg hover:bg-surface-variant disabled:opacity-30 transition-colors duration-fast ease-default",
         className
       )}
       disabled={!canScrollPrev}
@@ -104,7 +104,7 @@ function CarouselNext({ className, ...props }: React.ButtonHTMLAttributes<HTMLBu
   return (
     <button
       className={cn(
-        "absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-surface border border-border shadow-sm text-fg hover:bg-surface-variant disabled:opacity-30 transition-colors",
+        "absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-surface border border-border shadow-sm text-fg hover:bg-surface-variant disabled:opacity-30 transition-colors duration-fast ease-default",
         className
       )}
       disabled={!canScrollNext}

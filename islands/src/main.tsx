@@ -39,6 +39,8 @@ import { NavDrawerShowcase } from "./islands/NavDrawerShowcase"
 import { NavBarShowcase } from "./islands/NavBarShowcase"
 import { TopBarShowcase } from "./islands/TopBarShowcase"
 import { ButtonConfigShowcase } from "./islands/ButtonConfigShowcase"
+import { MotionCardGridShowcase } from "./islands/MotionCardGridShowcase"
+import { ComponentTabsNav } from "./islands/ComponentTabsNav"
 import { ButtonStatesShowcase, ButtonShapeShowcase, ButtonHierarchyFilled, ButtonHierarchyTonal, ButtonHierarchyOutlined, ButtonHierarchyText, ButtonHierarchyIcon, ButtonToggleOff, ButtonToggleOn, ButtonLayoutDo, ButtonLayoutDont, ButtonAdaptiveMobile, ButtonAdaptiveDense, ButtonAdaptiveHero, ButtonIconsDo, ButtonIconsDont, ButtonShapeDo, ButtonShapeDont, ButtonSemanticDo, ButtonSemanticDont, ButtonDoSinglePrimary, ButtonDontMultiPrimary, ButtonDoSpecificLabel, ButtonDontGenericLabel, ButtonDoIconAria, ButtonDontNavLinks, ButtonFocusShowcase, ButtonSemanticPreview, ButtonSizesPreview, ButtonIconPreview, ButtonDisabledPreview, ButtonLoadingPreview, ButtonFormFooterPreview, ButtonDestructivePreview } from "./islands/ButtonPhaseB"
 import { TextareaBasic, TextareaDisabled } from "./islands/TextareaPhaseB"
 import { SelectSpecBasic, SelectSpecLabeled, SelectSpecDisabled } from "./islands/SelectPhaseB"
@@ -187,6 +189,8 @@ const registry: Record<string, ComponentType> = {
   "nav-bar-showcase": NavBarShowcase,
   "topbar-showcase": TopBarShowcase,
   "button-config-showcase": ButtonConfigShowcase,
+  "motion-card-grid-showcase": MotionCardGridShowcase,
+  "component-tabs-nav": ComponentTabsNav,
 }
 
 function mountIslands() {
@@ -197,7 +201,12 @@ function mountIslands() {
     if (!Comp) return
     el.dataset.mounted = "1"
     el.style.flex = "1 1 auto"
-    createRoot(el).render(<Comp />)
+    try {
+      createRoot(el).render(<Comp />)
+    } catch (err) {
+      // One island's render error must never stop the rest of the page from mounting.
+      console.error(`[islands] failed to mount "${name}"`, err)
+    }
   })
 }
 

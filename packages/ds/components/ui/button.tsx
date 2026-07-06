@@ -14,28 +14,30 @@ import { cn } from "../lib/utils"
 const buttonVariants = cva(
   // Base: layout, typography, cursor, transition. No padding/radius — each variant sets its own
   // so tailwind-merge can cleanly resolve size overrides.
-  "inline-flex items-center justify-center gap-2 border font-semibold leading-[1.2] cursor-pointer whitespace-nowrap no-underline transition-all duration-fast ease-in-out focus-visible:focus-ring",
+  // Spatial (transform: press/lift) uses the Expressive overshoot curve; effects
+  // (color/background/shadow) stay on Standard — MD3 never overshoots effects.
+  "inline-flex items-center justify-center gap-2 border font-semibold leading-[1.2] cursor-pointer whitespace-nowrap no-underline transition-[background-color,border-color,color,box-shadow,transform] duration-fast [transition-timing-function:var(--ease-default),var(--ease-default),var(--ease-default),var(--ease-default),var(--ease-expressive)] focus-visible:focus-ring",
   {
     variants: {
       variant: {
         primary:
-          "px-6 py-2 rounded-md bg-primary text-on-primary border-transparent hover:bg-primary-hover hover:-translate-y-px active:brightness-[0.88] active:translate-y-0 disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none",
+          "px-6 py-2 rounded-md bg-primary text-on-primary border-transparent hover:bg-primary-hover hover:-translate-y-px active:brightness-[0.88] active:translate-y-0 active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none",
         secondary:
-          "px-6 py-2 rounded-md bg-secondary-container text-on-secondary-container border-transparent hover:bg-secondary-container-hover hover:-translate-y-px active:brightness-[0.92] active:translate-y-0 disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
+          "px-6 py-2 rounded-md bg-secondary-container text-on-secondary-container border-transparent hover:bg-secondary-container-hover hover:-translate-y-px active:brightness-[0.92] active:translate-y-0 active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
         tertiary:
-          "px-6 py-2 rounded-md bg-transparent border-outline text-primary font-medium hover:bg-surface-variant hover:border-primary active:bg-surface-container-high disabled:bg-transparent disabled:border-outline-variant disabled:text-on-disabled disabled:cursor-not-allowed",
+          "px-6 py-2 rounded-md bg-transparent border-outline text-primary font-medium hover:bg-surface-variant hover:border-primary active:bg-surface-container-high active:scale-[0.96] disabled:bg-transparent disabled:border-outline-variant disabled:text-on-disabled disabled:cursor-not-allowed",
         text:
-          "px-3 py-2 rounded-md bg-transparent border-transparent text-primary hover:bg-primary-state-hover active:bg-primary-state-press disabled:bg-transparent disabled:text-on-disabled disabled:cursor-not-allowed",
+          "px-3 py-2 rounded-md bg-transparent border-transparent text-primary hover:bg-primary-state-hover active:bg-primary-state-press active:scale-[0.96] disabled:bg-transparent disabled:text-on-disabled disabled:cursor-not-allowed",
         icon:
-          "w-9 h-9 p-0 rounded-md bg-surface-container border-outline text-on-surface-variant hover:bg-surface-variant hover:text-on-surface active:bg-surface-container-high disabled:bg-transparent disabled:border-outline-variant disabled:text-on-disabled disabled:cursor-not-allowed",
+          "w-9 h-9 p-0 rounded-md bg-surface-container border-outline text-on-surface-variant hover:bg-surface-variant hover:text-on-surface active:bg-surface-container-high active:scale-[0.9] disabled:bg-transparent disabled:border-outline-variant disabled:text-on-disabled disabled:cursor-not-allowed",
         danger:
-          "px-6 py-2 rounded-md bg-error text-on-error border-transparent hover:bg-error-hover hover:-translate-y-px active:brightness-[0.88] active:translate-y-0 disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
+          "px-6 py-2 rounded-md bg-error text-on-error border-transparent hover:bg-error-hover hover:-translate-y-px active:brightness-[0.88] active:translate-y-0 active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
         success:
-          "px-6 py-2 rounded-md bg-success text-on-success border-transparent hover:bg-success-hover hover:-translate-y-px active:brightness-[0.88] active:translate-y-0 disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
+          "px-6 py-2 rounded-md bg-success text-on-success border-transparent hover:bg-success-hover hover:-translate-y-px active:brightness-[0.88] active:translate-y-0 active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
         next:
-          "px-6 py-2 rounded-md bg-primary text-on-primary border-transparent hover:bg-primary-hover active:brightness-[0.88] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
+          "px-6 py-2 rounded-md bg-primary text-on-primary border-transparent hover:bg-primary-hover active:brightness-[0.88] active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
         ghost:
-          "px-6 py-2 rounded-md bg-transparent border-outline text-primary font-medium hover:bg-surface-variant hover:border-primary active:bg-surface-container-high disabled:bg-transparent disabled:border-outline-variant disabled:text-on-disabled disabled:cursor-not-allowed",
+          "px-6 py-2 rounded-md bg-transparent border-outline text-primary font-medium hover:bg-surface-variant hover:border-primary active:bg-surface-container-high active:scale-[0.96] disabled:bg-transparent disabled:border-outline-variant disabled:text-on-disabled disabled:cursor-not-allowed",
       },
       size: {
         default: "",

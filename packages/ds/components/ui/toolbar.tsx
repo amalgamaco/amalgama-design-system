@@ -26,7 +26,7 @@ const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
   ({ className, containerClassName, icon, ...props }, ref) => (
     <div
       className={cn(
-        "group flex-1 flex items-center gap-2 px-4 py-2 bg-surface-container-high border border-border rounded-md text-on-surface-variant cursor-text transition-[background,border-color] duration-fast ease-in-out hover:bg-search-field-hover hover:border-search-field-border-hover focus-within:bg-search-field-focus focus-within:border-secondary",
+        "group flex-1 flex items-center gap-2 px-4 py-2 bg-surface-container-high border border-border rounded-md text-on-surface-variant cursor-text transition-[background,border-color] duration-fast ease-default hover:bg-search-field-hover hover:border-search-field-border-hover focus-within:bg-search-field-focus focus-within:border-secondary",
         containerClassName
       )}
     >
@@ -57,7 +57,7 @@ const ToolbarButton = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttrib
       ref={ref}
       type="button"
       className={cn(
-        "inline-flex items-center gap-2 px-4 py-2 bg-surface-container border border-outline rounded-md font-body text-body-md font-medium text-on-surface-variant cursor-pointer whitespace-nowrap transition-[background,border-color,color] duration-fast ease-in-out hover:bg-surface-variant hover:border-outline-variant hover:text-on-surface active:opacity-85 focus-visible:focus-ring [&_svg]:w-[18px] [&_svg]:h-[18px]",
+        "inline-flex items-center gap-2 px-4 py-2 bg-surface-container border border-outline rounded-md font-body text-body-md font-medium text-on-surface-variant cursor-pointer whitespace-nowrap transition-[background,border-color,color] duration-fast ease-default hover:bg-surface-variant hover:border-outline-variant hover:text-on-surface active:opacity-85 focus-visible:focus-ring [&_svg]:w-[18px] [&_svg]:h-[18px]",
         className
       )}
       {...props}

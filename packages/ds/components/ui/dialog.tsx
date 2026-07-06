@@ -14,11 +14,15 @@ export const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <DialogPrimitive.Portal>
-    <DialogPrimitive.Overlay className="fixed inset-0 z-[100] bg-[var(--color-scrim)] data-[state=open]:animate-in data-[state=open]:fade-in-0" />
+    <DialogPrimitive.Overlay className="fixed inset-0 z-[100] bg-[var(--color-scrim)] data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:duration-normal data-[state=open]:ease-enter data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:duration-fast data-[state=closed]:ease-exit" />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
         "fixed left-1/2 top-1/2 z-[100] w-[calc(100%-2rem)] max-w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-card p-0 text-on-surface shadow-xl outline-none",
+        // Expressive: the content's zoom-in is the "hero moment" — the overlay's plain
+        // fade stays Standard, since MD3 never overshoots effects (opacity/color).
+        "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:duration-medium data-[state=open]:ease-expressive-enter",
+        "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=closed]:duration-fast data-[state=closed]:ease-exit",
         className
       )}
       {...props}
@@ -33,7 +37,7 @@ export function DialogHeader({ className, children, ...props }: React.HTMLAttrib
   return (
     <div className={cn("flex items-center justify-between border-b border-border px-5 py-4", className)} {...props}>
       {children}
-      <DialogPrimitive.Close className="flex size-7 items-center justify-center rounded-md text-on-surface-variant outline-none transition-colors hover:bg-surface-variant hover:text-on-surface">
+      <DialogPrimitive.Close className="flex size-7 items-center justify-center rounded-md text-on-surface-variant outline-none transition-colors duration-fast ease-default hover:bg-surface-variant hover:text-on-surface">
         <X className="size-4" />
       </DialogPrimitive.Close>
     </div>

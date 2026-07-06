@@ -20,7 +20,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
   ({ className, containerClassName, icon, trailing, ...props }, ref) => (
     <div
       className={cn(
-        "flex items-center gap-4 h-14 px-4 rounded-full bg-surface-container-high border border-border min-w-[min(360px,100%)] max-w-[720px] w-full transition-[background,border-color] duration-fast ease-in-out hover:bg-search-field-hover hover:border-search-field-border-hover focus-within:bg-search-field-focus focus-within:border-secondary",
+        "flex items-center gap-4 h-14 px-4 rounded-full bg-surface-container-high border border-border min-w-[min(360px,100%)] max-w-[720px] w-full transition-[background,border-color] duration-fast ease-default hover:bg-search-field-hover hover:border-search-field-border-hover focus-within:bg-search-field-focus focus-within:border-secondary",
         containerClassName
       )}
       role="search"
@@ -136,7 +136,7 @@ const SearchViewResult = React.forwardRef<HTMLLIElement, SearchViewResultProps>(
     <li
       ref={ref}
       className={cn(
-        "flex items-center gap-3 px-4 py-3 cursor-pointer text-on-surface text-body-md transition-colors duration-fast ease-in-out hover:bg-on-surface-state-hover first:rounded-t-[27px] last:rounded-b-[27px]",
+        "flex items-center gap-3 px-4 py-3 cursor-pointer text-on-surface text-body-md transition-colors duration-fast ease-default hover:bg-on-surface-state-hover first:rounded-t-[27px] last:rounded-b-[27px]",
         className
       )}
       {...props}

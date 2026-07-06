@@ -17,6 +17,7 @@ export const DropdownMenuContent = React.forwardRef<
       className={cn(
         "z-50 min-w-[10rem] overflow-hidden rounded-md border border-border bg-surface-container-high p-1.5 text-on-surface shadow-lg",
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
+        "data-[state=open]:duration-fast data-[state=open]:ease-expressive-enter data-[state=closed]:duration-fast data-[state=closed]:ease-exit",
         className
       )}
       {...props}
@@ -32,7 +33,7 @@ export const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-pointer select-none items-center rounded-sm px-3 py-2 text-sm outline-none transition-colors",
+      "relative flex cursor-pointer select-none items-center rounded-sm px-3 py-2 text-sm outline-none transition-colors duration-fast ease-default",
       "focus:bg-surface-variant data-[disabled]:pointer-events-none data-[disabled]:opacity-40",
       className
     )}

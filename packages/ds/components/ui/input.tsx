@@ -11,7 +11,7 @@ import * as React from "react"
 import { cn } from "../lib/utils"
 
 const fieldInputBase =
-  "w-full px-[14px] py-[10px] border border-border rounded-md text-body-md font-body text-fg bg-card outline-none transition-[border-color,box-shadow] duration-fast ease-in-out appearance-none placeholder:text-fg-muted hover:border-outline focus:border-link focus:shadow-[0_0_0_3px_var(--color-focus-ring)] disabled:bg-surface-variant disabled:text-on-disabled disabled:border-outline disabled:cursor-not-allowed"
+  "w-full px-[14px] py-[10px] border border-border rounded-md text-body-md font-body text-fg bg-card outline-none transition-[border-color,box-shadow] duration-fast ease-default appearance-none placeholder:text-fg-muted hover:border-outline focus:border-link focus:shadow-[0_0_0_3px_var(--color-focus-ring)] disabled:bg-surface-variant disabled:text-on-disabled disabled:border-outline disabled:cursor-not-allowed"
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string

@@ -17,6 +17,7 @@ const SheetOverlay = React.forwardRef<
       "fixed inset-0 z-50 bg-scrim/40 backdrop-blur-sm",
       "data-[state=open]:animate-in data-[state=closed]:animate-out",
       "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "data-[state=open]:duration-medium data-[state=open]:ease-enter data-[state=closed]:duration-normal data-[state=closed]:ease-exit",
       className
     )}
     {...props}
@@ -25,7 +26,9 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const sheetVariants = cva(
-  "fixed z-50 flex flex-col bg-surface border-border shadow-xl transition ease-in-out data-[state=closed]:duration-200 data-[state=open]:duration-300",
+  // Expressive: the panel's slide-in is the spatial "hero moment"; the overlay
+  // above stays Standard since its fade is effects-only (MD3 never overshoots effects).
+  "fixed z-50 flex flex-col bg-surface border-border shadow-xl transition data-[state=open]:duration-medium data-[state=open]:ease-expressive-enter data-[state=closed]:duration-normal data-[state=closed]:ease-exit",
   {
     variants: {
       side: {

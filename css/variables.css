@@ -359,9 +359,22 @@
   /* ─────────────────────────────────────
      Transitions
   ───────────────────────────────────── */
+  /* Standard scheme — functional, minimal bounce (MD3 fallback for Web) */
   --ease-default:    cubic-bezier(.4,0,.2,1);
+  --ease-enter:      cubic-bezier(0,0,0,1);
+  --ease-exit:       cubic-bezier(.3,0,1,1);
+  /* Expressive scheme — CSS-engineered overshoot approximating MD3's spring
+     physics (which MD3 itself says has no native Web/CSS implementation).
+     Spatial use only (movement/scale/rotate) — MD3 explicitly excludes
+     effects (opacity/color) from overshoot, so never pair these with a
+     color/opacity transition. */
+  --ease-expressive:        cubic-bezier(.34,1.56,.64,1);
+  --ease-expressive-enter:  cubic-bezier(.175,.885,.32,1.4);
+  --ease-expressive-exit:   cubic-bezier(.3,0,.8,.15);
   --duration-fast:   120ms;
   --duration-normal: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow:   450ms;
 }
 
 /* ═══════════════════════════════════════

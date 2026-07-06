@@ -34,7 +34,7 @@ const segItemVariants = cva(
   [
     "relative inline-flex items-center justify-center gap-2 rounded-full",
     "bg-transparent text-on-surface font-medium leading-[1.2]",
-    "cursor-pointer whitespace-nowrap transition-colors",
+    "cursor-pointer whitespace-nowrap transition-colors duration-fast ease-default",
     "hover:bg-[color-mix(in_srgb,var(--color-on-surface)_8%,transparent)]",
     "data-[state=on]:bg-secondary-container data-[state=on]:text-on-secondary-container data-[state=on]:font-semibold",
     "data-[state=on]:hover:bg-[color-mix(in_srgb,var(--color-on-secondary-container)_8%,var(--color-secondary-container))]",

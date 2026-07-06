@@ -100,7 +100,7 @@ const ModalClose = React.forwardRef<HTMLButtonElement, ModalCloseProps>(
       type="button"
       aria-label="Cerrar"
       className={cn(
-        "inline-flex items-center justify-center w-8 h-8 rounded-md border-none bg-transparent text-fg-muted cursor-pointer hover:bg-surface-variant hover:text-fg transition-colors duration-[120ms] focus-visible:focus-ring [&_svg]:w-5 [&_svg]:h-5",
+        "inline-flex items-center justify-center w-8 h-8 rounded-md border-none bg-transparent text-fg-muted cursor-pointer hover:bg-surface-variant hover:text-fg transition-colors duration-fast focus-visible:focus-ring [&_svg]:w-5 [&_svg]:h-5",
         className
       )}
       {...props}

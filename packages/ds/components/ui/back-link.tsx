@@ -19,7 +19,7 @@ const BackLink = React.forwardRef<HTMLButtonElement, BackLinkProps>(
       ref={ref}
       type="button"
       className={cn(
-        "inline-flex items-center gap-1.5 text-body-md text-fg-subtle cursor-pointer transition-colors duration-fast ease-in-out mb-1.5 bg-transparent border-none p-0 font-body hover:text-fg focus-visible:focus-ring",
+        "inline-flex items-center gap-1.5 text-body-md text-fg-subtle cursor-pointer transition-colors duration-fast ease-default mb-1.5 bg-transparent border-none p-0 font-body hover:text-fg focus-visible:focus-ring",
         className
       )}
       {...props}

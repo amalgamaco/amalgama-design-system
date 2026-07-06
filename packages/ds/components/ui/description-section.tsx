@@ -52,7 +52,7 @@ const DescDeleteBtn = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttrib
       ref={ref}
       type="button"
       className={cn(
-        "w-7 h-7 rounded-md border-none bg-transparent inline-flex items-center justify-center text-fg-muted cursor-pointer transition-[background,color] duration-fast ease-in-out flex-shrink-0 opacity-0 group-hover:opacity-100 hover:bg-error-container hover:text-error",
+        "w-7 h-7 rounded-md border-none bg-transparent inline-flex items-center justify-center text-fg-muted cursor-pointer transition-[background,color] duration-fast ease-default flex-shrink-0 opacity-0 group-hover:opacity-100 hover:bg-error-container hover:text-error",
         className
       )}
       {...props}
@@ -73,7 +73,7 @@ const DescEditor = React.forwardRef<HTMLDivElement, DescEditorProps>(
       suppressContentEditableWarning
       data-placeholder={placeholder}
       className={cn(
-        "min-h-[100px] px-4 py-[14px] text-body-md font-body text-fg leading-[1.6] outline-none bg-card transition-shadow duration-fast focus:shadow-[inset_0_0_0_2px_var(--color-focus-ring)] desc-placeholder",
+        "min-h-[100px] px-4 py-[14px] text-body-md font-body text-fg leading-[1.6] outline-none bg-card transition-shadow duration-fast ease-default focus:shadow-[inset_0_0_0_2px_var(--color-focus-ring)] desc-placeholder",
         className
       )}
       {...props}

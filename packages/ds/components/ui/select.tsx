@@ -24,7 +24,7 @@ export const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex w-full items-center justify-between rounded-md border border-border bg-[var(--card-bg)] px-3.5 py-2.5 text-[13.5px] text-[var(--text-primary)] outline-none transition-[border-color,box-shadow] data-[placeholder]:text-[var(--text-muted)] focus:border-[var(--color-primary)] focus:shadow-[0_0_0_3px_var(--color-focus-ring)] disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate",
+      "flex w-full items-center justify-between rounded-md border border-border bg-[var(--card-bg)] px-3.5 py-2.5 text-[13.5px] text-[var(--text-primary)] outline-none transition-[border-color,box-shadow] duration-fast ease-default data-[placeholder]:text-[var(--text-muted)] focus:border-[var(--color-primary)] focus:shadow-[0_0_0_3px_var(--color-focus-ring)] disabled:cursor-not-allowed disabled:opacity-50 [&>span]:truncate",
       className
     )}
     {...props}
@@ -47,6 +47,8 @@ export const SelectContent = React.forwardRef<
       position={position}
       className={cn(
         "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-border bg-surface-container-high text-on-surface shadow-lg",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
+        "data-[state=open]:duration-fast data-[state=open]:ease-expressive-enter data-[state=closed]:duration-fast data-[state=closed]:ease-exit",
         position === "popper" && "data-[side=bottom]:translate-y-1",
         className
       )}

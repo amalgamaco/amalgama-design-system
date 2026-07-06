@@ -58,6 +58,19 @@
   /* ── Transition durations ── */
   --duration-fast:   120ms;
   --duration-normal: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow:   450ms;
+
+  /* ── Easing: Standard scheme (MD3 Web fallback — functional, minimal bounce) ── */
+  --ease-default: cubic-bezier(.4,0,.2,1);
+  --ease-enter:   cubic-bezier(0,0,0,1);
+  --ease-exit:    cubic-bezier(.3,0,1,1);
+
+  /* ── Easing: Expressive scheme (CSS overshoot approximating MD3's spring
+     physics — spatial properties only, never opacity/color) ── */
+  --ease-expressive:       cubic-bezier(.34,1.56,.64,1);
+  --ease-expressive-enter: cubic-bezier(.175,.885,.32,1.4);
+  --ease-expressive-exit:  cubic-bezier(.3,0,.8,.15);
 
   /* ── Shadows (static — same in light & dark) ── */
   --shadow-sm: 0 1px 3px rgba(28,36,56,.06);
@@ -65,9 +78,9 @@
   --shadow-lg: 0 8px 32px rgba(28,36,56,.12);
 
   /* ── Modal / overlay animations ── */
-  --animate-fade-in:        fadeIn .15s ease both;
-  --animate-slide-in-up:    slideInUp .2s ease both;
-  --animate-slide-in-right: slideInRight .25s ease both;
+  --animate-fade-in:        fadeIn var(--duration-normal) var(--ease-enter) both;
+  --animate-slide-in-up:    slideInUp var(--duration-medium) var(--ease-enter) both;
+  --animate-slide-in-right: slideInRight var(--duration-normal) var(--ease-enter) both;
 }
 
 /* ══════════════════════════════════════
@@ -201,6 +214,34 @@
   100% { background-position: -200% 0; }
 }
 
+/* ── Grid/list entrance — spatial (translateY + scale), pairs with per-item
+   animation-delay for a staggered cascade. Reads --tw-duration/--tw-ease so
+   it inherits whichever duration-*/ease-* utility classes are applied
+   alongside it — swap ease-expressive-enter (bounce) for ease-enter
+   (Standard, no bounce) to change scheme with no other code change. ── */
+@keyframes ds-grid-enter {
+  from { opacity: 0; transform: translateY(16px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@utility animate-grid-enter {
+  animation-name: ds-grid-enter;
+  animation-duration: var(--tw-duration, var(--duration-medium));
+  animation-timing-function: var(--tw-ease, var(--ease-expressive-enter));
+  animation-fill-mode: both;
+}
+
+/* ── Reduced motion — built into the DS, not a consumer responsibility.
+   Any project that imports this theme file gets this automatically.
+   Per-component overrides (e.g. Snackbar's reduced-motion fade) may still
+   define their own tighter @media (prefers-reduced-motion: reduce) rule. ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ══════════════════════════════════════
    Custom utilities — patterns not expressible as atomic Tailwind classes.
 ══════════════════════════════════════ */
@@ -232,11 +273,27 @@
   }
 }
 
-/* ── Transition duration utilities ── */
+/* ── Transition duration utilities ──
+   Set --tw-duration alongside transition-duration: tw-animate-css's
+   animate-in/animate-out (used by Radix Dialog/Sheet/etc.) reads
+   --tw-duration for animation-duration, not transition-duration — without
+   it these utilities silently no-op on animation-based components. */
 @utility duration-fast {
+  --tw-duration: 120ms;
   transition-duration: 120ms;
 }
 
 @utility duration-normal {
+  --tw-duration: 200ms;
   transition-duration: 200ms;
+}
+
+@utility duration-medium {
+  --tw-duration: 300ms;
+  transition-duration: 300ms;
+}
+
+@utility duration-slow {
+  --tw-duration: 450ms;
+  transition-duration: 450ms;
 }

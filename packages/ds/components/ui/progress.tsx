@@ -72,7 +72,7 @@ export function CircularProgress({
         strokeDasharray={c}
         strokeDashoffset={indeterminate ? c * 0.75 : offset}
         transform={`rotate(-90 ${size / 2} ${size / 2})`}
-        style={{ transition: indeterminate ? undefined : "stroke-dashoffset .3s ease" }}
+        style={{ transition: indeterminate ? undefined : "stroke-dashoffset var(--duration-medium, .3s) var(--ease-default, ease)" }}
       />
     </svg>
   )

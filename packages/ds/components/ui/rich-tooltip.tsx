@@ -54,7 +54,7 @@ export function RichTooltip({
           {!hideClose ? (
             <PopoverClose
               aria-label="Cerrar"
-              className="shrink-0 grid place-items-center -mr-1 -mt-1 w-7 h-7 rounded-full text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors outline-none focus-visible:focus-ring"
+              className="shrink-0 grid place-items-center -mr-1 -mt-1 w-7 h-7 rounded-full text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors duration-fast ease-default outline-none focus-visible:focus-ring"
             >
               <X className="w-[18px] h-[18px]" />
             </PopoverClose>

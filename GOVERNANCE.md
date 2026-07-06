@@ -274,7 +274,16 @@ MD3's reference implementation (Material Web Components) uses `::before` pseudo-
 
 ### 5.6 Selected state
 
-Selected state (chips, tabs, nav items, segmented buttons) uses `--color-secondary-container` (MD3: `secondaryContainer`) for the container and `--color-on-secondary-container` (MD3: `onSecondaryContainer`) for content. High-emphasis selected items (e.g. nav active) use `--color-primary`. A selected state must have a clear visual distinction from hover — do not rely solely on color to communicate selection.
+Selected state uses the **Secondary family** — never `--color-primary`. Primary flips to white in dark mode (Embassy's dark-mode definition), which reads as "no color" for a passive selection indicator and breaks visual consistency with every other selected/active state in the library. Secondary stays a consistent blue in both themes. A selected state must have a clear visual distinction from hover — do not rely solely on color to communicate selection (Tabs also gains `font-semibold`; Chip/Segmented Button already gain a filled container).
+
+The mapping splits by anatomy, not by "emphasis" (the previous wording here allowed both and caused Tabs to drift onto `--color-primary` — do not reintroduce that branch):
+
+| Anatomy | Selected treatment | Components |
+|---|---|---|
+| Has a container (pill/segment) | `--color-secondary-container` (MD3 `secondaryContainer`) fill + `--color-on-secondary-container` (MD3 `onSecondaryContainer`) content | Chip, Segmented Button |
+| Text-only, no container (underline/indicator) | `--color-secondary` directly, on both the label and the indicator | Tabs |
+
+`--color-primary` is reserved for actual page-level/sidebar navigation active state, which lives in the docs shell's own chrome (`index.html`), not in `packages/ds` components — it is out of this rule's scope, not a second option for it.
 
 ---
 
@@ -489,6 +498,16 @@ Author as a self-contained Tailwind component (see CONTRIBUTING §4). **Do not c
 - [ ] Hover / pressed states declared and consistent within the component
 - [ ] No `dark:` variants or `[data-theme="dark"]` overrides (dark mode is automatic via the token layer)
 - [ ] No custom CSS class; no new `tailwind.theme.css` utility for anything expressible as atomic Tailwind
+
+### 11.1a Motion
+
+See the Motion page (Styles) for the full token reference and transition-pattern spec.
+
+- [ ] No raw easing/duration values (`ease-in-out`, `duration-[150ms]`, inline `"stroke .3s ease"`) — always `duration-fast/normal/medium/slow` + `ease-default/enter/exit`
+- [ ] Directional asymmetry respected: exit uses a shorter duration and `ease-exit`; enter uses `ease-enter` (never the same duration for both on anything larger than the fast tier)
+- [ ] Enter/exit overlays (Dialog, Sheet, Dropdown, Select, Popover, Tooltip) declare **both** `data-[state=open]` and `data-[state=closed]` animation classes — an entrance without a matching exit is a gap, not a style choice
+- [ ] If the component enters/exits, it maps to one of the adopted transition patterns (Enter and exit / Lateral / Top level / Skeleton loaders) documented on the Motion page — a pattern not on that list is a gap to flag, not one to improvise
+- [ ] Continuous/looping animations (shimmer, indeterminate spinners) are exempt from the enter/exit tokens — they're a different category
 
 ### 11.2 Dark mode verification
 

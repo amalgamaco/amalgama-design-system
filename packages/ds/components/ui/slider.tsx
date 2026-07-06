@@ -26,7 +26,7 @@ export const Slider = React.forwardRef<
       {thumbs.map((_, i) => (
         <SliderPrimitive.Thumb
           key={i}
-          className="block size-5 rounded-full border-2 border-primary bg-primary shadow-sm outline-none transition-[box-shadow] focus-visible:ring-4 focus-visible:ring-[var(--color-focus-ring)]"
+          className="block size-5 rounded-full border-2 border-primary bg-primary shadow-sm outline-none transition-[box-shadow] duration-fast ease-default focus-visible:ring-4 focus-visible:ring-[var(--color-focus-ring)]"
         />
       ))}
     </SliderPrimitive.Root>

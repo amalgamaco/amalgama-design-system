@@ -139,11 +139,42 @@
   /* Transition durations */
   --duration-fast:   120ms;
   --duration-normal: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow:   450ms;
+
+  /* Easing: Standard scheme (MD3 Web fallback) */
+  --ease-default: cubic-bezier(.4,0,.2,1);
+  --ease-enter:   cubic-bezier(0,0,0,1);
+  --ease-exit:    cubic-bezier(.3,0,1,1);
+
+  /* Easing: Expressive scheme (CSS overshoot — spatial only, never opacity/color) */
+  --ease-expressive:       cubic-bezier(.34,1.56,.64,1);
+  --ease-expressive-enter: cubic-bezier(.175,.885,.32,1.4);
+  --ease-expressive-exit:  cubic-bezier(.3,0,.8,.15);
 
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(28,36,56,.06);
   --shadow-md: 0 4px 16px rgba(28,36,56,.08);
   --shadow-lg: 0 8px 32px rgba(28,36,56,.12);
+
+  /* Modal / overlay animations (mirrors packages/ds/tailwind.theme.css) */
+  --animate-fade-in:        fadeIn var(--duration-normal) var(--ease-enter) both;
+  --animate-slide-in-up:    slideInUp var(--duration-medium) var(--ease-enter) both;
+  --animate-slide-in-right: slideInRight var(--duration-normal) var(--ease-enter) both;
+}
+
+/* ── Keyframes for modal / overlay animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 /* ── Runtime @theme inline — Embassy color roles ────────────────────────── */
@@ -278,18 +309,54 @@
   animation: shimmer 1.5s infinite;
 }
 
+/* --tw-duration set alongside transition-duration: tw-animate-css's
+   animate-in/animate-out (Radix Dialog/Sheet/etc.) reads --tw-duration
+   for animation-duration, not transition-duration. */
 @utility duration-fast {
+  --tw-duration: 120ms;
   transition-duration: 120ms;
 }
 
 @utility duration-normal {
+  --tw-duration: 200ms;
   transition-duration: 200ms;
+}
+
+@utility duration-medium {
+  --tw-duration: 300ms;
+  transition-duration: 300ms;
+}
+
+@utility duration-slow {
+  --tw-duration: 450ms;
+  transition-duration: 450ms;
 }
 
 /* ── Keyframes ───────────────────────────────────────────────────────────── */
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* ── Grid/list entrance (mirrors packages/ds/tailwind.theme.css) ── */
+@keyframes ds-grid-enter {
+  from { opacity: 0; transform: translateY(16px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@utility animate-grid-enter {
+  animation-name: ds-grid-enter;
+  animation-duration: var(--tw-duration, var(--duration-medium));
+  animation-timing-function: var(--tw-ease, var(--ease-expressive-enter));
+  animation-fill-mode: both;
+}
+
+/* ── Reduced motion (mirrors packages/ds/tailwind.theme.css) ── */
+@media (prefers-reduced-motion: reduce) {
+  [data-island] *, [data-island] *::before, [data-island] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @keyframes emb-linear {
