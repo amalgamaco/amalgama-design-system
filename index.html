@@ -15,8 +15,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=63">
-<script type="module" src="islands/dist/embassy-islands.js?v=63"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=74">
+<script type="module" src="islands/dist/embassy-islands.js?v=74"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -3533,6 +3533,7 @@ body { overflow-x: clip; }
         <div class="ds-nav-item" data-section="c-nav-card" onclick="navigate('c-nav-card')">Nav Card</div>
       </div>
       <div class="ds-nav-item" data-section="c-carousel" onclick="navigate('c-carousel')">Carousels</div>
+      <div class="ds-nav-item" data-section="c-charts" onclick="navigate('c-charts')">Charts</div>
       <div class="ds-nav-item" data-section="c-checkbox" onclick="navigate('c-checkbox')">Checkbox</div>
       <div class="ds-nav-item" data-section="c-chip" onclick="navigate('c-chip')">Chips</div>
       <div class="ds-nav-item" data-section="c-date-picker" onclick="navigate('c-date-picker')">Date Picker</div>
@@ -15174,6 +15175,322 @@ import { Badge } from "@amalgama/ds/badge"</code></pre>
         </div>
       </div>
     </section>
+    <!-- ═══════════ CHARTS ═══════════ -->
+    <section class="ds-section" id="s-c-charts">
+      <div class="ds-page-tag">Components · Data display</div>
+      <h1 class="ds-page-title">Charts</h1>
+      <p class="ds-page-desc">Gráficos de línea, barra y torta para dashboards y analytics — construidos sobre Recharts (patrón shadcn/ui) y tematizados con tokens Embassy.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui + Recharts.</strong> <code>ChartContainer</code>/<code>ChartTooltip</code>/<code>ChartLegend</code> son los primitivos de <code>@amalgama/ds/chart</code>; cada gráfico (línea, barra, torta) se compone con ellos + los componentes de Recharts (<code>Line</code>, <code>Bar</code>, <code>Pie</code>...). No son imágenes estáticas — son componentes reales, responsivos y con datos.</div>
+
+      <div data-island="component-tabs-nav"></div>
+
+      <!-- OVERVIEW -->
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+
+          <p class="bd-lead">La familia Chart compone primitivos de <code>@amalgama/ds/chart</code> (theming, tooltip, leyenda) con los componentes de <a href="https://recharts.org" target="_blank" rel="noopener">Recharts</a> para armar gráficos de línea, barra y torta reales — no imágenes. Todos los colores de serie salen de tokens Embassy y recalibran solos en dark mode.</p>
+
+          <ul class="bd-overview-list">
+            <li><b>Tres tipos:</b> línea (tendencias en el tiempo), barra (comparación entre categorías) y torta (composición/proporciones).</li>
+            <li><b>Paleta de 5 series</b> (<code>--color-chart-1</code> … <code>--color-chart-5</code>), mapeada a los roles <code>secondary</code>/<code>tertiary</code>/<code>success</code>/<code>warning</code>/<code>info</code> — nunca <code>--color-primary</code>, que se vuelve blanco en dark mode y leería como "sin serie".</li>
+            <li><b>Rango de tiempo intercambiable:</b> semanal, mensual y anual con el mismo <code>Segmented Button</code> que el resto del DS.</li>
+            <li><b>Tooltip, leyenda, ejes y grilla</b> incluidos por defecto — sin armarlos a mano por gráfico.</li>
+            <li><b>Responsive:</b> cada gráfico vive dentro de un <code>ResponsiveContainer</code>, se adapta al ancho del contenedor padre.</li>
+            <li><b>Estados:</b> vacío, cargando y error documentados para cuando todavía no hay datos o falla el fetch.</li>
+          </ul>
+
+          <div class="bd-family-wrap">
+            <div data-island="line-chart-showcase"></div>
+          </div>
+          <ol class="bd-family-legend">
+            <li><b>Line chart</b> — dos series (ingresos/gastos) por día de la semana, con tooltip y leyenda.</li>
+          </ol>
+
+          <div class="bd-family-wrap" style="margin-top:20px">
+            <div data-island="bar-chart-showcase"></div>
+          </div>
+          <ol class="bd-family-legend">
+            <li><b>Bar chart</b> — vacantes abiertas por área, una serie categórica.</li>
+          </ol>
+
+          <div class="bd-family-wrap" style="margin-top:20px;max-width:420px;margin-left:auto;margin-right:auto;">
+            <div data-island="pie-chart-showcase"></div>
+          </div>
+          <ol class="bd-family-legend">
+            <li><b>Pie chart</b> — composición de fuentes de candidatos, con leyenda por segmento.</li>
+          </ol>
+
+          <h2 class="docs-section-title" style="margin-top:28px">Rango de tiempo: semanal / mensual / anual</h2>
+          <p class="ds-p">El mismo gráfico puede alternar granularidad con un <code>SegmentedButtonGroup</code> — solo cambia la fuente de datos, no el componente.</p>
+          <div class="bd-family-wrap">
+            <div data-island="chart-time-range-showcase"></div>
+          </div>
+
+          <h2 class="docs-section-title" style="margin-top:28px">Estados</h2>
+          <p class="ds-p">Todo gráfico que depende de datos remotos necesita representar estos tres casos:</p>
+          <div class="bd-grid c3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+            <div>
+              <p class="docs-section-desc" style="margin-bottom:8px"><b>Vacío</b></p>
+              <div data-island="chart-empty-state"></div>
+            </div>
+            <div>
+              <p class="docs-section-desc" style="margin-bottom:8px"><b>Cargando</b></p>
+              <div data-island="chart-loading-state"></div>
+            </div>
+            <div>
+              <p class="docs-section-desc" style="margin-bottom:8px"><b>Error</b></p>
+              <div data-island="chart-error-state"></div>
+            </div>
+          </div>
+
+        </section>
+      </div>
+
+      <!-- SPECS -->
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout">
+        <div class="ds-toc-body">
+
+        <section class="docs-section" id="tc-charts-s-0">
+          <h2 class="docs-section-title">Anatomía</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td><code>ChartContainer</code></td><td>Envoltorio con <code>ResponsiveContainer</code> de Recharts; inyecta las variables CSS de color por serie</td><td><code>bg-transparent</code></td></tr>
+              <tr><td>Grilla (<code>CartesianGrid</code>)</td><td>Solo líneas horizontales (<code>vertical={false}</code>), color sutil</td><td><code>--color-border</code></td></tr>
+              <tr><td>Ejes (<code>XAxis</code>/<code>YAxis</code>)</td><td>Sin línea ni tick marks, solo etiquetas</td><td><code>--color-fg-muted</code>, <code>text-caption</code></td></tr>
+              <tr><td><code>ChartTooltipContent</code></td><td>Tarjeta flotante con indicador de color + valor por serie</td><td><code>bg-card</code>, <code>border-border</code>, <code>shadow-lg</code></td></tr>
+              <tr><td><code>ChartLegendContent</code></td><td>Fila de chips de color + etiqueta debajo del gráfico</td><td><code>text-fg-muted</code></td></tr>
+              <tr><td>Series (Line/Bar/Pie)</td><td>Color por <code>ChartConfig</code>, nunca hardcodeado</td><td><code>--color-chart-1</code>…<code>--color-chart-5</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section" id="tc-charts-s-1">
+          <h2 class="docs-section-title">Configuraciones</h2>
+          <ul style="margin:0;padding-left:20px;font-size:14px;line-height:1.8;">
+            <li><b>Line chart</b> — <code>&lt;LineChart&gt;</code> + <code>&lt;Line&gt;</code> por serie; usar para tendencias temporales.</li>
+            <li><b>Bar chart</b> — <code>&lt;BarChart&gt;</code> + <code>&lt;Bar&gt;</code> por serie; usar para comparar categorías discretas.</li>
+            <li><b>Pie chart</b> — <code>&lt;PieChart&gt;</code> + <code>&lt;Pie&gt;</code>/<code>&lt;Cell&gt;</code> por segmento; usar para composición/proporciones (máx. 5–6 segmentos).</li>
+            <li><b>Rango de tiempo</b> — mismo <code>ChartContainer</code>, cambiando solo el array de datos según semanal/mensual/anual (ver Overview).</li>
+          </ul>
+        </section>
+        <section class="docs-section" id="tc-charts-s-2">
+          <h2 class="docs-section-title">Estados</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Con datos</td><td>Series renderizadas con animación de entrada de Recharts</td><td><code>--color-chart-*</code></td></tr>
+              <tr><td>Hover / tooltip activo</td><td>Cursor de referencia + tarjeta de tooltip</td><td><code>--color-border</code>, <code>bg-card</code></td></tr>
+              <tr><td>Vacío</td><td>Contenedor con borde punteado y mensaje, misma altura que el gráfico real</td><td><code>border-dashed border-border</code></td></tr>
+              <tr><td>Cargando</td><td>Barras esqueleto con <code>animate-pulse</code>, sin layout shift al llegar los datos</td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Error</td><td>Mensaje + acción de reintento (<code>Button variant="tertiary"</code>)</td><td><code>--color-error</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section" id="tc-charts-s-3">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Alto por defecto</td><td>280px (ancho: 100% del contenedor padre, responsive)</td></tr>
+              <tr><td>Radio de barras</td><td><code>rounded-t</code> (6px) en el borde superior</td></tr>
+              <tr><td>Radio interior de torta (donut)</td><td>60px</td></tr>
+              <tr><td>Grosor de línea</td><td>2px, sin puntos salvo en el punto activo (hover)</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section" id="tc-charts-s-4">
+          <h2 class="docs-section-title">Tokens y especificaciones</h2>
+          <p class="docs-section-desc">Paleta categórica — nunca hardcodear un hex de serie.</p>
+          <table class="ds-table">
+            <thead><tr><th>Token</th><th>Rol Embassy</th></tr></thead>
+            <tbody>
+              <tr><td><code>--color-chart-1</code></td><td><code>--color-secondary</code></td></tr>
+              <tr><td><code>--color-chart-2</code></td><td><code>--color-tertiary</code></td></tr>
+              <tr><td><code>--color-chart-3</code></td><td><code>--color-success</code></td></tr>
+              <tr><td><code>--color-chart-4</code></td><td><code>--color-warning</code></td></tr>
+              <tr><td><code>--color-chart-5</code></td><td><code>--color-info</code></td></tr>
+            </tbody>
+          </table>
+          <div class="ds-callout" style="margin-top:12px">
+            <strong>Por qué no <code>--color-primary</code>.</strong> Igual que en Tabs (ver Guidelines del DS), <code>--color-primary</code> se vuelve blanco en dark mode — en una serie de datos eso lee como "ausencia de color". La paleta de charts usa solo roles que se mantienen saturados en ambos temas.
+          </div>
+        </section>
+
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-charts-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-charts-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-charts-s-1">Configuraciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-charts-s-2">Estados</a></li>
+            <li><a class="ds-toc-link" data-target="tc-charts-s-3">Medidas</a></li>
+            <li><a class="ds-toc-link" data-target="tc-charts-s-4">Tokens y especificaciones</a></li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+
+      <!-- GUIDELINES -->
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <div class="ds-toc-layout">
+        <div class="ds-toc-body">
+
+        <section class="docs-section" id="tc-charts-g-0">
+          <h2 class="docs-section-title">Cuándo usar cada tipo</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Line</b> para tendencias en el tiempo (ingresos, tráfico, uso).</li><li><b>Bar</b> para comparar categorías discretas entre sí.</li><li><b>Pie/donut</b> para mostrar composición de un total en pocos segmentos (≤ 6).</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Pie chart con más de 6–7 segmentos → usar Bar chart.</li><li>Un solo número puntual → <b>Stat Card</b>, no un gráfico.</li><li>Datos exactos que el usuario necesita leer uno por uno → <b>Table</b>.</li></ul></div></div>
+          </div>
+        </section>
+        <section class="docs-section" id="tc-charts-g-1">
+          <h2 class="docs-section-title">Do / Don't</h2>
+          <div class="ds-guideline-grid">
+            <div class="ds-guideline-card do"><h3>✓ Do</h3><ul><li>Incluir siempre leyenda cuando hay más de una serie.</li><li>Usar la paleta <code>--color-chart-*</code> en orden — no elegir colores salteados entre gráficos de la misma página.</li><li>Mostrar el estado vacío/cargando/error en vez de un gráfico con datos falsos.</li></ul></div>
+            <div class="ds-guideline-card dont"><h3>✕ Don't</h3><ul><li>Usar imágenes estáticas o capturas de pantalla de un gráfico.</li><li>Hardcodear colores hex por serie — siempre <code>--color-chart-*</code> u otro rol semántico.</li><li>Animar el gráfico si el usuario tiene <code>prefers-reduced-motion</code> activado.</li></ul></div>
+          </div>
+        </section>
+        <section class="docs-section" id="tc-charts-g-2">
+          <h2 class="docs-section-title">Accesibilidad de color</h2>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>No comuniques una serie solo por color: la leyenda y el tooltip siempre repiten la etiqueta en texto.</li>
+            <li>En pie/donut, cada segmento lleva su nombre en la leyenda — nunca solo el color.</li>
+            <li>Los pares de color de la paleta (secondary/tertiary/success/warning/info) fueron elegidos por ser distinguibles entre sí, pero para datos críticos (ej. aprobado/rechazado) preferí <code>--color-success</code>/<code>--color-error</code> explícitos en vez de la paleta genérica.</li>
+          </ul>
+        </section>
+        <section class="docs-section" id="tc-charts-g-3">
+          <h2 class="docs-section-title">Migración</h2>
+          <p class="ds-p"><b>Reemplaza a:</b> gráficos armados con imágenes estáticas, canvas custom o librerías de charting sin theming.</p>
+          <ul>
+            <li>Todo gráfico legacy se mapea a <code>ChartContainer</code> + los componentes de Recharts (<code>@amalgama/ds/chart</code>), con la paleta <code>--color-chart-*</code>.</li>
+            <li>Si el "gráfico" en realidad muestra un solo valor, migrar a <b>Stat Card</b>, no a Chart.</li>
+          </ul>
+        </section>
+
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-charts-g-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-charts-g-0">Cuándo usar cada tipo</a></li>
+            <li><a class="ds-toc-link" data-target="tc-charts-g-1">Do / Don't</a></li>
+            <li><a class="ds-toc-link" data-target="tc-charts-g-2">Accesibilidad de color</a></li>
+            <li><a class="ds-toc-link" data-target="tc-charts-g-3">Migración</a></li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+
+      <!-- ACCESSIBILITY -->
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Cada serie se identifica por texto en la leyenda y el tooltip, nunca solo por color — cumple con no depender del color como único indicador.</li>
+            <li><span class="ds-a11y-icon">♿</span>El contraste de <code>--color-chart-1</code>…<code>-5</code> contra <code>--color-card</code> cumple AA en ambos temas (son los mismos roles usados en botones/badges de la librería).</li>
+            <li><span class="ds-a11y-icon">♿</span>Las animaciones de entrada de Recharts respetan <code>prefers-reduced-motion</code> a través de la regla global del DS (ver página Motion).</li>
+            <li><span class="ds-a11y-icon">♿</span>Para datos tabulares que un usuario de lector de pantalla necesite consultar con precisión, acompañá el gráfico con una <b>Table</b> equivalente o datos en texto — SVG puro no es accesible por sí solo.</li>
+            <li><span class="ds-a11y-icon">♿</span>El <code>SegmentedButtonGroup</code> de rango de tiempo hereda el mismo soporte de teclado/ARIA documentado en su propia página.</li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- CODE -->
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Instalación</h2>
+          <p class="docs-section-desc">Los primitivos de Chart envuelven Recharts. Instalá ambas dependencias.</p>
+          <div class="docs-code-wrapper"><pre class="docs-code standalone"><code>npm install @amalgama/ds recharts</code></pre><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button></div>
+          <div class="docs-code-wrapper"><pre class="docs-code standalone"><code>@import "@amalgama/ds/tailwind.theme.css";</code></pre><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button></div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Line chart</h2>
+          <p class="docs-section-desc">Definí un <code>ChartConfig</code> con label + color por serie, y pasalo a <code>ChartContainer</code>.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code standalone"><code>import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend } from "recharts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegendContent, type ChartConfig } from "@amalgama/ds/chart"
+
+const data = [
+  { day: "Lun", ingresos: 1200, gastos: 900 },
+  { day: "Mar", ingresos: 1800, gastos: 1100 },
+  // ...
+]
+
+const config = {
+  ingresos: { label: "Ingresos", color: "var(--color-chart-1)" },
+  gastos:   { label: "Gastos",   color: "var(--color-chart-4)" },
+} satisfies ChartConfig
+
+&lt;ChartContainer config={config} className="h-[280px] w-full"&gt;
+  &lt;LineChart data={data}&gt;
+    &lt;CartesianGrid vertical={false} /&gt;
+    &lt;XAxis dataKey="day" tickLine={false} axisLine={false} /&gt;
+    &lt;YAxis tickLine={false} axisLine={false} /&gt;
+    &lt;ChartTooltip content={&lt;ChartTooltipContent indicator="line" /&gt;} /&gt;
+    &lt;Legend content={&lt;ChartLegendContent /&gt;} /&gt;
+    &lt;Line type="monotone" dataKey="ingresos" stroke="var(--color-chart-1)" strokeWidth={2} dot={false} /&gt;
+    &lt;Line type="monotone" dataKey="gastos" stroke="var(--color-chart-4)" strokeWidth={2} dot={false} /&gt;
+  &lt;/LineChart&gt;
+&lt;/ChartContainer&gt;</code></pre>
+          </div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Bar chart</h2>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code standalone"><code>import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from "recharts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@amalgama/ds/chart"
+
+const config = {
+  vacantes: { label: "Vacantes abiertas", color: "var(--color-chart-1)" },
+} satisfies ChartConfig
+
+&lt;ChartContainer config={config} className="h-[280px] w-full"&gt;
+  &lt;BarChart data={data}&gt;
+    &lt;CartesianGrid vertical={false} /&gt;
+    &lt;XAxis dataKey="area" tickLine={false} axisLine={false} /&gt;
+    &lt;YAxis tickLine={false} axisLine={false} /&gt;
+    &lt;ChartTooltip content={&lt;ChartTooltipContent indicator="dashed" /&gt;} /&gt;
+    &lt;Bar dataKey="vacantes" fill="var(--color-chart-1)" radius={[6, 6, 0, 0]} /&gt;
+  &lt;/BarChart&gt;
+&lt;/ChartContainer&gt;</code></pre>
+          </div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Pie chart</h2>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code standalone"><code>import { PieChart, Pie, Cell, Legend } from "recharts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegendContent, type ChartConfig } from "@amalgama/ds/chart"
+
+const COLORS = ["var(--color-chart-1)", "var(--color-chart-2)", "var(--color-chart-3)", "var(--color-chart-5)"]
+
+&lt;ChartContainer config={config} className="mx-auto aspect-square h-[280px]"&gt;
+  &lt;PieChart&gt;
+    &lt;ChartTooltip content={&lt;ChartTooltipContent hideLabel /&gt;} /&gt;
+    &lt;Pie data={data} dataKey="value" nameKey="name" innerRadius={60} strokeWidth={4}&gt;
+      {data.map((entry, i) =&gt; &lt;Cell key={entry.name} fill={COLORS[i % COLORS.length]} stroke="var(--color-card)" /&gt;)}
+    &lt;/Pie&gt;
+    &lt;Legend content={&lt;ChartLegendContent nameKey="name" /&gt;} /&gt;
+  &lt;/PieChart&gt;
+&lt;/ChartContainer&gt;</code></pre>
+          </div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Estados vacío / cargando / error</h2>
+          <p class="docs-section-desc">No son parte de <code>@amalgama/ds/chart</code> — son markup simple que reemplaza al gráfico mientras no hay datos que graficar.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code standalone"><code>if (isLoading) return &lt;ChartSkeleton /&gt;         // barras con animate-pulse, misma altura que el chart real
+if (isError)   return &lt;ChartError onRetry={refetch} /&gt;
+if (!data?.length) return &lt;ChartEmpty /&gt;
+return &lt;LineChart data={data} /&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
     <!-- ═══════════ CHECKBOX ═══════════ -->
     <section class="ds-section" id="s-c-checkbox">
 
@@ -20655,6 +20972,7 @@ const SECTIONS = {
   'c-card':            { label: 'Cards',                 group: 'Components' },
   'c-basic-card':      { label: 'Basic Card',            group: 'Components', parent: 'c-card' },
   'c-carousel':        { label: 'Carousels',             group: 'Components' },
+  'c-charts':          { label: 'Charts',                group: 'Components' },
   'c-checkbox':        { label: 'Checkbox',              group: 'Components' },
   'c-chip':            { label: 'Chips',                 group: 'Components' },
   'c-date-picker':     { label: 'Date Picker',  group: 'Components' },
@@ -20733,6 +21051,10 @@ function navigate(id) {
   });
   var target = document.getElementById('s-' + id);
   if (target) target.classList.add('active');
+  // Let islands (e.g. Chart) that measure their own box know a section just
+  // became visible — browser resize/intersection observers don't always fire
+  // reliably on a display:none -> block toggle, so this is a direct signal.
+  window.dispatchEvent(new CustomEvent('ds:section-shown', { detail: { id: id } }));
 
   // Update drawer nav active state
   document.querySelectorAll('[data-section]').forEach(function(el) {

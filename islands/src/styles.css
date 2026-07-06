@@ -326,6 +326,13 @@
   --color-snackbar-action-press:      var(--color-snackbar-action-press);
   --color-snackbar-close-hover:       var(--color-snackbar-close-hover);
   --color-snackbar-close-press:       var(--color-snackbar-close-press);
+
+  /* Chart categorical palette — never --color-primary (flips white in dark mode) */
+  --color-chart-1: var(--color-secondary);
+  --color-chart-2: var(--color-tertiary);
+  --color-chart-3: var(--color-success);
+  --color-chart-4: var(--color-warning);
+  --color-chart-5: var(--color-info);
 }
 
 /* ── Dark mode variant ───────────────────────────────────────────────────── */

@@ -192,6 +192,15 @@
   --color-snackbar-close-hover:      var(--color-snackbar-close-hover);
   --color-snackbar-close-press:      var(--color-snackbar-close-press);
   --color-error-ring:                var(--color-error-ring);
+
+  /* ── Chart categorical palette (Chart component) ──
+     Never --color-primary: it flips to white in dark mode (same rule as
+     Tabs, GOVERNANCE.md §5.6) and would read as "no series" on a chart. */
+  --color-chart-1: var(--color-secondary);
+  --color-chart-2: var(--color-tertiary);
+  --color-chart-3: var(--color-success);
+  --color-chart-4: var(--color-warning);
+  --color-chart-5: var(--color-info);
 }
 
 /* ── Keyframes for modal / overlay animations ── */

@@ -42,6 +42,15 @@ import { TopBarShowcase } from "./islands/TopBarShowcase"
 import { ButtonConfigShowcase } from "./islands/ButtonConfigShowcase"
 import { MotionCardGridShowcase } from "./islands/MotionCardGridShowcase"
 import { ComponentTabsNav } from "./islands/ComponentTabsNav"
+import {
+  LineChartShowcase,
+  BarChartShowcase,
+  PieChartShowcase,
+  ChartTimeRangeShowcase,
+  ChartEmptyState,
+  ChartLoadingState,
+  ChartErrorState,
+} from "./islands/ChartShowcase"
 import { ButtonStatesShowcase, ButtonShapeShowcase, ButtonHierarchyFilled, ButtonHierarchyTonal, ButtonHierarchyOutlined, ButtonHierarchyText, ButtonHierarchyIcon, ButtonToggleOff, ButtonToggleOn, ButtonLayoutDo, ButtonLayoutDont, ButtonAdaptiveMobile, ButtonAdaptiveDense, ButtonAdaptiveHero, ButtonIconsDo, ButtonIconsDont, ButtonShapeDo, ButtonShapeDont, ButtonSemanticDo, ButtonSemanticDont, ButtonDoSinglePrimary, ButtonDontMultiPrimary, ButtonDoSpecificLabel, ButtonDontGenericLabel, ButtonDoIconAria, ButtonDontNavLinks, ButtonFocusShowcase, ButtonSemanticPreview, ButtonSizesPreview, ButtonIconPreview, ButtonDisabledPreview, ButtonLoadingPreview, ButtonFormFooterPreview, ButtonDestructivePreview } from "./islands/ButtonPhaseB"
 import { TextareaBasic, TextareaDisabled } from "./islands/TextareaPhaseB"
 import { SelectSpecBasic, SelectSpecLabeled, SelectSpecDisabled } from "./islands/SelectPhaseB"
@@ -346,6 +355,13 @@ const registry: Record<string, ComponentType> = {
   "button-config-showcase": ButtonConfigShowcase,
   "motion-card-grid-showcase": MotionCardGridShowcase,
   "component-tabs-nav": ComponentTabsNav,
+  "line-chart-showcase": LineChartShowcase,
+  "bar-chart-showcase": BarChartShowcase,
+  "pie-chart-showcase": PieChartShowcase,
+  "chart-time-range-showcase": ChartTimeRangeShowcase,
+  "chart-empty-state": ChartEmptyState,
+  "chart-loading-state": ChartLoadingState,
+  "chart-error-state": ChartErrorState,
 }
 
 function mountIslands() {
