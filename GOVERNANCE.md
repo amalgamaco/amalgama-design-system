@@ -193,8 +193,8 @@ When a component has nested elements (e.g. a card with an inner image or an inpu
 | Page / app background | `--color-surface` / `--bg` | `--color-on-surface` / `--text-primary` |
 | Card, panel, dialog | `--color-surface-container` / `--card-bg` | `--color-on-surface` |
 | Subtle container | `--color-surface-variant` | `--color-on-surface-variant` |
-| Borders (interactive elements) | — | `--color-outline` |
-| Borders (subtle, decorative) | — | `--color-outline-variant` |
+| Borders (primary interactive controls — Button tertiary/ghost/icon, Input, Textarea, Checkbox, Radio, Switch) | — | `--color-outline` |
+| Borders (filter/selection controls — Chip, Segmented Button) & decorative/dividers | — | `--color-outline-variant` |
 | Error / danger | `--color-error` | `--color-on-error` |
 | Error container | `--color-error-container` | `--color-on-error-container` |
 | Success | `--color-success` | `--color-on-success` |
@@ -327,6 +327,8 @@ The mapping splits by anatomy, not by "emphasis" (the previous wording here allo
 `--color-primary` is reserved for actual page-level/sidebar navigation active state, which lives in the docs shell's own chrome (`index.html`), not in `packages/ds` components — it is out of this rule's scope, not a second option for it.
 
 **Segmented Button — softer "Option B" variant (2026-06):** the segmented button uses a *lighter* tonal selection — container `--color-primary-container` + content `--color-on-primary-container`, with an `--color-outline-variant` frame and `--color-on-surface-variant` unselected labels. This is a deliberate, documented deviation from the MD3 segmented-button spec (which assigns `secondaryContainer`): it stays within MD3 *roles* and the tonal-selection principle while reading lighter/cleaner. Canonical token mapping lives in `packages/ds/components/ui/segmented-button.tsx` and the component's Specs → Color Roles table.
+
+**Chip — outline-variant frame (2026-07):** unselected Chip's border was `--color-outline` — identical to Button tertiary/ghost/icon's border, so the two components read as the same control when placed side by side, even though Chip is meant to feel like a lighter-weight filter/metadata control, not a primary action. Fixed by moving Chip's frame to `--color-outline-variant`, the same token (and the same rationale) already used by Segmented Button's "Option B" frame above — no new token, just correcting Chip's tier assignment in the borders table (§5.1). Button and Input/Checkbox/Radio/Switch keep `--color-outline` unchanged; they remain the stronger-emphasis tier. Canonical mapping lives in `packages/ds/components/ui/chip.tsx`.
 
 ---
 

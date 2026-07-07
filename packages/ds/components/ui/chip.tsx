@@ -6,13 +6,19 @@
  * Reemplaza a: toggles de filtro ad-hoc, tags clickeables legacy.
  *
  * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/chip.css.
+ *
+ * Border token (2026-07): unselected Chip uses --color-outline-variant, not --color-outline.
+ * --color-outline is reserved for primary interactive controls (Button tertiary/ghost/icon,
+ * Input, Checkbox, Radio, Switch) — Chip is a filter/metadata control and needs a visibly
+ * lighter stroke so it doesn't read as another button next to them. Mirrors the Segmented
+ * Button's documented "Option B" frame (see segmented-button.tsx) — same role, same token.
  */
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "../lib/utils"
 
 const chipVariants = cva(
-  "inline-flex items-center gap-2 h-8 px-4 rounded-full border border-outline bg-transparent text-on-surface text-body-lg font-medium cursor-pointer whitespace-nowrap transition-all duration-fast ease-default focus-visible:focus-ring",
+  "inline-flex items-center gap-2 h-8 px-4 rounded-full border border-outline-variant bg-transparent text-on-surface text-body-lg font-medium cursor-pointer whitespace-nowrap transition-all duration-fast ease-default focus-visible:focus-ring",
   {
     variants: {
       variant: {
