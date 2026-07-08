@@ -6,6 +6,11 @@
  * Snackbar/Sonner), confirmación que interrumpe (usar Alert Dialog).
  * Reemplaza a: banners de aviso ad-hoc.
  *
+ * Alert vs Snackbar (NO son duplicados): Alert es INLINE y PERSISTENTE — queda en el flujo
+ * de la página hasta que se resuelve (resumen de errores de un form, aviso de mantenimiento).
+ * Snackbar es FLOTANTE y EFÍMERO — se auto-descarta tras confirmar que algo ya pasó. Regla:
+ * si debe seguir visible hasta que la persona actúe → Alert; si solo confirma un hecho → Snackbar.
+ *
  * shadcn Alert structure (Alert / AlertTitle / AlertDescription, `role="alert"`, grid with
  * an optional leading icon), Embassy tokens. Adds semantic variants (info/success/warning/
  * error) mapped to Embassy container roles — MD3-flavored, still the shadcn skeleton.

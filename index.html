@@ -3482,6 +3482,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="interaction-state" onclick="navigate('interaction-state')"><i data-lucide="mouse-pointer-click" style="width:13px;height:13px"></i> Interaction State</div>
       <div class="ds-nav-item" data-section="grid"              onclick="navigate('grid')"><i             data-lucide="layout-grid"          style="width:13px;height:13px"></i> Layout</div>
       <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-aspect-ratio" onclick="navigate('c-aspect-ratio')">Aspect Ratio</div>
         <div class="ds-nav-item" data-section="c-empty"    onclick="navigate('c-empty')">Empty State</div>
         <div class="ds-nav-item" data-section="c-skeleton" onclick="navigate('c-skeleton')">Skeleton</div>
       </div>
@@ -3519,7 +3520,6 @@ body { overflow-x: clip; }
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-topbar" onclick="navigate('c-topbar')">Top Bar</div>
       </div>
-      <div class="ds-nav-item" data-section="c-aspect-ratio" onclick="navigate('c-aspect-ratio')">Aspect Ratio</div>
       <div class="ds-nav-item" data-section="c-avatar" onclick="navigate('c-avatar')">Avatar</div>
       <div class="ds-nav-item" data-section="c-badge" onclick="navigate('c-badge')">Badges</div>
       <div class="ds-nav-item" data-section="c-breadcrumb" onclick="navigate('c-breadcrumb')">Breadcrumb</div>
@@ -3544,12 +3544,10 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-date-picker" onclick="navigate('c-date-picker')">Date Picker</div>
       <div class="ds-nav-item" data-section="c-dialog" onclick="navigate('c-dialog')">Dialog</div>
       <div class="ds-nav-sub">
-        <div class="ds-nav-item" data-section="c-alert-dialog" onclick="navigate('c-alert-dialog')">Alert Dialog</div>
+        <div class="ds-nav-item" data-section="c-dialog" onclick="navigate('c-dialog')">Alert Dialog (variant)</div>
       </div>
       <div class="ds-nav-item" data-section="c-divider" onclick="navigate('c-divider')">Divider</div>
-      <div class="ds-nav-item" data-section="c-hover-card" onclick="navigate('c-hover-card')">Hover Card</div>
       <div class="ds-nav-item" data-section="c-input" onclick="navigate('c-input')">Input</div>
-      <div class="ds-nav-item" data-section="c-label" onclick="navigate('c-label')">Label</div>
       <div class="ds-nav-item" data-section="c-list" onclick="navigate('c-list')">Lists</div>
       <div class="ds-nav-item" data-section="c-loading" onclick="navigate('c-loading')">Loading and progress</div>
       <div class="ds-nav-item" data-section="c-menu" onclick="navigate('c-menu')">Menu</div>
@@ -3576,6 +3574,9 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-textarea" onclick="navigate('c-textarea')">Textarea</div>
       <div class="ds-nav-item" data-section="c-toggle" onclick="navigate('c-toggle')">Toggle</div>
       <div class="ds-nav-item" data-section="c-tooltip" onclick="navigate('c-tooltip')">Tooltips</div>
+      <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-hover-card" onclick="navigate('c-hover-card')">Hover Card</div>
+      </div>
     </nav>
   </div>
 
@@ -9704,6 +9705,37 @@ TabsContent.displayName = &quot;TabsContent&quot;</code></pre>
             <li><b>Formulario corto:</b> <code>DialogBody</code> con campos (<code>Input</code>) para tareas rápidas que no justifican una página dedicada.</li>
             <li><b>Alerta crítica:</b> dialog que exige atención inmediata; la acción de descarte nunca se deshabilita.</li>
           </ol>
+
+          <!-- ── Variant: Alert Dialog ── -->
+          <h2 class="docs-section-title" id="dialog-alert-variant" style="margin-top:36px;scroll-margin-top:84px">Variante — Alert Dialog</h2>
+          <p class="bd-lead" style="margin-top:8px">El <b>Alert Dialog</b> es la variante de <b>confirmación bloqueante</b> del Dialog, sobre <code>@radix-ui/react-alert-dialog</code>. Se usa para acciones destructivas o irreversibles: a diferencia del Dialog común, <b>no</b> se cierra al hacer clic afuera ni con la <code>X</code> — exige elegir Confirmar o Cancelar. No es un componente aparte; es una composición especializada del Dialog.</p>
+          <div class="bd-family-wrap"><div data-island="alert-dialog-showcase"></div></div>
+          <ul class="bd-overview-list" style="margin-top:8px">
+            <li><b>Composición:</b> <code>AlertDialog</code> · <code>Trigger</code> · <code>Content</code> · <code>Header</code>/<code>Footer</code> · <code>Title</code>/<code>Description</code> · <code>Action</code>/<code>Cancel</code> — desde <code>@amalgama/ds/alert-dialog</code>.</li>
+            <li><b>Botones:</b> <code>AlertDialogAction</code> compone el <code>Button</code> primary (o combinalo con <code>variant="danger"</code> en el trigger); <code>AlertDialogCancel</code> es el <code>Button</code> tertiary/outline.</li>
+            <li><b>Accesibilidad:</b> <code>role="alertdialog"</code>, focus trap, foco inicial en Cancelar (acción segura); <code>Esc</code> = Cancelar; el foco vuelve al trigger al cerrar.</li>
+            <li><b>Cuándo NO:</b> diálogos con contenido o tareas → Dialog común; avisos no bloqueantes → <a href="#" onclick="navigate('c-alert');return false;">Alert</a> / <a href="#" onclick="navigate('c-snackbar');return false;">Snackbar</a>.</li>
+          </ul>
+          <div class="docs-code-wrapper" style="margin-top:16px"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import {
+  AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter,
+  AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,
+} from &quot;@amalgama/ds/alert-dialog&quot;
+import { Button } from &quot;@amalgama/ds/button&quot;
+
+&lt;AlertDialog&gt;
+  &lt;AlertDialogTrigger asChild&gt;&lt;Button variant=&quot;danger&quot;&gt;Eliminar&lt;/Button&gt;&lt;/AlertDialogTrigger&gt;
+  &lt;AlertDialogContent&gt;
+    &lt;AlertDialogHeader&gt;
+      &lt;AlertDialogTitle&gt;¿Eliminar esta vacante?&lt;/AlertDialogTitle&gt;
+      &lt;AlertDialogDescription&gt;Esta acción no se puede deshacer.&lt;/AlertDialogDescription&gt;
+    &lt;/AlertDialogHeader&gt;
+    &lt;AlertDialogFooter&gt;
+      &lt;AlertDialogCancel&gt;Cancelar&lt;/AlertDialogCancel&gt;
+      &lt;AlertDialogAction&gt;Eliminar&lt;/AlertDialogAction&gt;
+    &lt;/AlertDialogFooter&gt;
+  &lt;/AlertDialogContent&gt;
+&lt;/AlertDialog&gt;</code></pre></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -20911,6 +20943,22 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Avisos persistentes ligados a la página o a un formulario.</li><li>Resumen del estado de una operación que debe seguir visible.</li><li>Notas informativas contextuales.</li></ul></div></div>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Feedback efímero de una acción → <b>Snackbar</b>.</li><li>Confirmación que interrumpe → <b>Alert Dialog</b>.</li><li>Como único indicador por color (agregá título/ícono).</li></ul></div></div>
           </div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Alert vs. Snackbar</h2>
+          <p class="ds-p">Se parecen, pero resuelven problemas distintos — no son duplicados. Elegí por <b>permanencia</b> y <b>ubicación</b>:</p>
+          <div class="ds-table-wrap">
+            <table class="docs-props-table">
+              <thead><tr><th>&nbsp;</th><th>Alert</th><th>Snackbar</th></tr></thead>
+              <tbody>
+                <tr><td><b>Permanencia</b></td><td>Persistente — queda hasta que se resuelve o se descarta</td><td>Efímero — se auto-descarta (~4–10s)</td></tr>
+                <tr><td><b>Ubicación</b></td><td>Inline, en el flujo de la página</td><td>Flotante, superpuesto (bottom)</td></tr>
+                <tr><td><b>Cantidad</b></td><td>Varios a la vez, en contexto</td><td>Uno por vez, en cola</td></tr>
+                <tr><td><b>Uso típico</b></td><td>Resumen de errores de un formulario, aviso de mantenimiento, nota informativa de la sección</td><td>«Vacante publicada», «Cambios guardados» tras una acción</td></tr>
+                <tr><td><b>Interrumpe</b></td><td>No — convive con el contenido</td><td>No — pero desaparece solo</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="ds-p" style="color:var(--text-secondary)">Regla rápida: si el mensaje <b>debe seguir visible</b> hasta que la persona actúe, es un <b>Alert</b>; si solo confirma que algo <b>ya pasó</b>, es un <b>Snackbar</b>.</p>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="accessibility">
@@ -20939,73 +20987,9 @@ import { Info } from &quot;lucide-react&quot;
       </div>
     </section>
 
-    <!-- ═══════════ ALERT DIALOG ═══════════ -->
-    <section class="ds-section" id="s-c-alert-dialog">
-      <div class="ds-page-tag">Components · Communication</div>
-      <h1 class="ds-page-title">Alert Dialog</h1>
-      <p class="ds-page-desc">Modal que interrumpe para confirmar una acción consecuente o destructiva.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza <code>AlertDialog</code> (Radix UI) desde <code>@amalgama/ds/alert-dialog</code>; Action/Cancel componen el <code>Button</code> canónico (Action = primary, Cancel = tertiary). Mismo scrim y zoom Expressive que Dialog.</div>
-      <div data-island="component-tabs-nav"></div>
-      <div class="ds-comp-tab-panel active" data-tab="overview">
-        <section class="docs-section">
-          <p class="bd-lead">El Alert Dialog bloquea la interfaz hasta que la persona confirma o cancela. Reservalo para acciones irreversibles — eliminar, descartar cambios.</p>
-          <ul class="bd-overview-list">
-            <li><b>Composición shadcn:</b> <code>AlertDialog</code> · <code>Trigger</code> · <code>Content</code> · <code>Header</code>/<code>Footer</code> · <code>Title</code>/<code>Description</code> · <code>Action</code>/<code>Cancel</code>.</li>
-            <li>A diferencia de Dialog, <b>no</b> se cierra al hacer clic afuera ni con la <code>X</code>: exige una decisión explícita.</li>
-            <li>La acción destructiva usa el <code>Button</code> primary; combinala con <code>variant="danger"</code> en el trigger.</li>
-          </ul>
-          <div class="bd-family-wrap"><div data-island="alert-dialog-showcase"></div></div>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Confirmar acciones destructivas (eliminar, descartar).</li><li>Cambios irreversibles que requieren atención plena.</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Diálogos con contenido o tareas → <b>Dialog</b>.</li><li>Avisos no bloqueantes → <b>Alert</b> / <b>Snackbar</b>.</li></ul></div></div>
-          </div>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="accessibility">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Accesibilidad</h2>
-          <ul class="ds-a11y-list">
-            <li><span class="ds-a11y-icon">♿</span>Radix aplica <code>role="alertdialog"</code>, focus trap y foco inicial en Cancel (acción segura).</li>
-            <li><span class="ds-a11y-icon">♿</span><code>Esc</code> equivale a Cancelar; el foco vuelve al trigger al cerrar.</li>
-            <li><span class="ds-a11y-icon">♿</span>Title y Description se conectan vía <code>aria-labelledby</code>/<code>aria-describedby</code>.</li>
-          </ul>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="code">
-        <section class="docs-section">
-          <h2 class="docs-section-title">React — @amalgama/ds</h2>
-          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-<pre class="docs-code"><code>import {
-  AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter,
-  AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,
-} from &quot;@amalgama/ds/alert-dialog&quot;
-import { Button } from &quot;@amalgama/ds/button&quot;
-
-&lt;AlertDialog&gt;
-  &lt;AlertDialogTrigger asChild&gt;&lt;Button variant=&quot;danger&quot;&gt;Eliminar&lt;/Button&gt;&lt;/AlertDialogTrigger&gt;
-  &lt;AlertDialogContent&gt;
-    &lt;AlertDialogHeader&gt;
-      &lt;AlertDialogTitle&gt;¿Eliminar esta vacante?&lt;/AlertDialogTitle&gt;
-      &lt;AlertDialogDescription&gt;Esta acción no se puede deshacer.&lt;/AlertDialogDescription&gt;
-    &lt;/AlertDialogHeader&gt;
-    &lt;AlertDialogFooter&gt;
-      &lt;AlertDialogCancel&gt;Cancelar&lt;/AlertDialogCancel&gt;
-      &lt;AlertDialogAction&gt;Eliminar&lt;/AlertDialogAction&gt;
-    &lt;/AlertDialogFooter&gt;
-  &lt;/AlertDialogContent&gt;
-&lt;/AlertDialog&gt;</code></pre></div>
-        </section>
-      </div>
-    </section>
-
     <!-- ═══════════ ASPECT RATIO ═══════════ -->
     <section class="ds-section" id="s-c-aspect-ratio">
-      <div class="ds-page-tag">Components · Layout</div>
+      <div class="ds-page-tag">Foundations · Layout</div>
       <h1 class="ds-page-title">Aspect Ratio</h1>
       <p class="ds-page-desc">Mantiene una proporción de ancho/alto constante mientras el ancho es fluido.</p>
       <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Re-export de la primitiva <code>AspectRatio</code> (Radix UI) desde <code>@amalgama/ds/aspect-ratio</code>. Pasá <code>ratio={16/9}</code>.</div>
@@ -21185,39 +21169,6 @@ import { Button } from &quot;@amalgama/ds/button&quot;
   &lt;HoverCardTrigger asChild&gt;&lt;a href=&quot;#&quot;&gt;@ana&lt;/a&gt;&lt;/HoverCardTrigger&gt;
   &lt;HoverCardContent&gt;Ana Borthagaray · Product Designer&lt;/HoverCardContent&gt;
 &lt;/HoverCard&gt;</code></pre></div>
-        </section>
-      </div>
-    </section>
-
-    <!-- ═══════════ LABEL ═══════════ -->
-    <section class="ds-section" id="s-c-label">
-      <div class="ds-page-tag">Components · Inputs</div>
-      <h1 class="ds-page-title">Label</h1>
-      <p class="ds-page-desc">Etiqueta accesible para asociar a un control de formulario.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza <code>Label</code> (Radix UI) desde <code>@amalgama/ds/label</code>, tematizado con el token tipográfico <code>--text-label</code>.</div>
-      <div data-island="component-tabs-nav"></div>
-      <div class="ds-comp-tab-panel active" data-tab="overview">
-        <section class="docs-section">
-          <p class="bd-lead">El Label etiqueta un control standalone (Checkbox, Switch, Radio, o un Input sin su prop <code>label</code>). Radix reenvía el clic al control asociado.</p>
-          <ul class="bd-overview-list">
-            <li>Asociá con <code>htmlFor</code> apuntando al <code>id</code> del control.</li>
-            <li>Se atenúa automáticamente cuando el control par está deshabilitado (<code>peer-disabled</code>).</li>
-            <li>Si usás la prop <code>label</code> de Input/Textarea, ya renderizan su propio <code>&lt;label&gt;</code> — no necesitás este.</li>
-          </ul>
-          <div class="bd-family-wrap"><div data-island="label-showcase"></div></div>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="code">
-        <section class="docs-section">
-          <h2 class="docs-section-title">React — @amalgama/ds</h2>
-          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-<pre class="docs-code"><code>import { Label } from &quot;@amalgama/ds/label&quot;
-import { Checkbox } from &quot;@amalgama/ds/checkbox&quot;
-
-&lt;div className=&quot;flex items-center gap-2&quot;&gt;
-  &lt;Checkbox id=&quot;news&quot; /&gt;
-  &lt;Label htmlFor=&quot;news&quot;&gt;Recibir novedades&lt;/Label&gt;
-&lt;/div&gt;</code></pre></div>
         </section>
       </div>
     </section>
@@ -21689,8 +21640,7 @@ const SECTIONS = {
   'c-avatar':          { label: 'Avatar',                group: 'Components' },
   'c-accordion':       { label: 'Accordion',             group: 'Components' },
   'c-alert':           { label: 'Alert',                 group: 'Components' },
-  'c-alert-dialog':    { label: 'Alert Dialog',          group: 'Components', parent: 'c-dialog' },
-  'c-aspect-ratio':    { label: 'Aspect Ratio',          group: 'Components' },
+  'c-aspect-ratio':    { label: 'Aspect Ratio',          group: 'Foundations', parent: 'grid' },
   'c-badge':           { label: 'Badges',                group: 'Components' },
   'c-breadcrumb':      { label: 'Breadcrumb',            group: 'Components' },
   'c-button':          { label: 'Buttons',               group: 'Components' },
@@ -21705,8 +21655,7 @@ const SECTIONS = {
   'c-date-picker':     { label: 'Date Picker',  group: 'Components' },
   'c-dialog':          { label: 'Dialog',                group: 'Components' },
   'c-divider':         { label: 'Divider',               group: 'Components' },
-  'c-hover-card':      { label: 'Hover Card',            group: 'Components' },
-  'c-label':           { label: 'Label',                 group: 'Components' },
+  'c-hover-card':      { label: 'Hover Card',            group: 'Components', parent: 'c-tooltip' },
   'c-pagination':      { label: 'Pagination',            group: 'Components' },
   'c-scroll-area':     { label: 'Scroll Area',           group: 'Components' },
   'c-toggle':          { label: 'Toggle',                group: 'Components' },
