@@ -9,6 +9,7 @@
  */
 import * as React from "react"
 import { cn } from "../lib/utils"
+import { Button } from "./button"
 
 const DescSection = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
@@ -46,13 +47,16 @@ const DescTitleInput = React.forwardRef<HTMLInputElement, React.InputHTMLAttribu
 )
 DescTitleInput.displayName = "DescTitleInput"
 
+// Canonical icon button (Button variant="icon") per the dialog-close precedent — only the
+// size (28px, tighter than the 36px default) and the destructive red hover are overridden.
 const DescDeleteBtn = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
   ({ className, ...props }, ref) => (
-    <button
+    <Button
       ref={ref}
       type="button"
+      variant="icon"
       className={cn(
-        "w-7 h-7 rounded-md border-none bg-transparent inline-flex items-center justify-center text-fg-muted cursor-pointer transition-[background,color] duration-fast ease-default flex-shrink-0 opacity-0 group-hover:opacity-100 hover:bg-error-container hover:text-error",
+        "w-7 h-7 border-none bg-transparent text-fg-muted opacity-0 group-hover:opacity-100 hover:bg-error-container hover:text-error",
         className
       )}
       {...props}

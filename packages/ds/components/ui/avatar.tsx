@@ -63,4 +63,66 @@ const AvatarFallback = React.forwardRef<
 ))
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
 
-export { Avatar, AvatarImage, AvatarFallback }
+// AvatarGroup — overlapping stack (assignees, participants). Negative margin
+// overlaps siblings; each avatar gets a surface-colored ring so the overlap reads
+// as separate discs. Mirrors shadcn's newer AvatarGroup composition.
+const AvatarGroup = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn(
+        "flex items-center -space-x-2 [&>*]:ring-2 [&>*]:ring-surface [&>*]:rounded-full",
+        className
+      )}
+      {...props}
+    />
+  )
+)
+AvatarGroup.displayName = "AvatarGroup"
+
+// AvatarGroupCount — the "+N" overflow disc that closes a stack. Matches Avatar
+// sizing; consumers pass the same `size` used on the group's avatars.
+const AvatarGroupCount = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement> & VariantProps<typeof avatarVariants>>(
+  ({ className, size, ...props }, ref) => (
+    <span
+      ref={ref}
+      className={cn(
+        avatarVariants({ size }),
+        "items-center justify-center bg-surface-variant text-on-surface-variant",
+        className
+      )}
+      {...props}
+    />
+  )
+)
+AvatarGroupCount.displayName = "AvatarGroupCount"
+
+// AvatarBadge — status dot / small indicator anchored to a corner of an Avatar.
+// Place inside a `relative` Avatar. `tone` maps to semantic Embassy roles.
+const badgeToneMap = {
+  online: "bg-success",
+  busy: "bg-error",
+  away: "bg-warning",
+  neutral: "bg-outline",
+} as const
+
+interface AvatarBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
+  tone?: keyof typeof badgeToneMap
+}
+
+const AvatarBadge = React.forwardRef<HTMLSpanElement, AvatarBadgeProps>(
+  ({ className, tone = "online", ...props }, ref) => (
+    <span
+      ref={ref}
+      className={cn(
+        "absolute bottom-0 right-0 block size-[28%] min-w-2.5 min-h-2.5 rounded-full ring-2 ring-surface",
+        badgeToneMap[tone],
+        className
+      )}
+      {...props}
+    />
+  )
+)
+AvatarBadge.displayName = "AvatarBadge"
+
+export { Avatar, AvatarImage, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarBadge, avatarVariants }

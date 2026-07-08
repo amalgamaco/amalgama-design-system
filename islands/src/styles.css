@@ -36,21 +36,42 @@
 @source "../../index.html";
 @source "../../docs/*.html";
 
-/* Box-sizing reset scoped to island roots only (replaces preflight). */
+/* Box-sizing reset scoped to island roots only (replaces preflight).
+   Also covers Radix Portal content (Popover/DropdownMenu/Select/Tooltip/Dialog) —
+   Portals re-parent their content to `document.body`, so it's no longer a DOM
+   descendant of `[data-island]` even though it's logically part of that island's
+   React tree. `[data-radix-popper-content-wrapper]` is the floating-ui wrapper
+   Radix's popper-based primitives (Popover/DropdownMenu/Select/Tooltip) render;
+   `[data-radix-portal]` covers Dialog/Sheet's own portal marker. Without this,
+   any island content that opens inside one of these (e.g. a Calendar inside a
+   Popover, per the Date Picker "docked" composition) silently loses the reset
+   the moment it's portaled, even though it never left the island's React tree. */
 [data-island],
 [data-island] *,
 [data-island] *::before,
-[data-island] *::after { box-sizing: border-box; }
+[data-island] *::after,
+[data-radix-popper-content-wrapper],
+[data-radix-popper-content-wrapper] *,
+[data-radix-popper-content-wrapper] *::before,
+[data-radix-popper-content-wrapper] *::after,
+[data-radix-portal],
+[data-radix-portal] *,
+[data-radix-portal] *::before,
+[data-radix-portal] *::after { box-sizing: border-box; }
 
 /* Minimal button reset scoped to islands (the part of Tailwind preflight we
    still need without enabling full preflight). Embassy base.css does NOT
    neutralize the UA button appearance, so any island button that doesn't set
    its own background or border leaks the native control look (grey #efefef
    fill + 2px outset border) — e.g. calendar day cells and segmented-button
-   segments. Element-selector specificity (0,0,1) stays below utility classes
-   (0,1,0), so components that set their own colour utilities still win. */
+   segments. Same Portal caveat as the box-sizing reset above applies here —
+   scoped to both the island's own DOM subtree and any Radix portal it opens.
+   Element-selector specificity (0,0,1) stays below utility classes (0,1,0), so
+   components that set their own colour utilities still win. */
 @layer base {
-  [data-island] button {
+  [data-island] button,
+  [data-radix-popper-content-wrapper] button,
+  [data-radix-portal] button {
     -webkit-appearance: none;
     appearance: none;
     background-color: transparent;

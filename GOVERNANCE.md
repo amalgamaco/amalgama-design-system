@@ -193,8 +193,10 @@ When a component has nested elements (e.g. a card with an inner image or an inpu
 | Page / app background | `--color-surface` / `--bg` | `--color-on-surface` / `--text-primary` |
 | Card, panel, dialog | `--color-surface-container` / `--card-bg` | `--color-on-surface` |
 | Subtle container | `--color-surface-variant` | `--color-on-surface-variant` |
-| Borders (primary interactive controls — Button tertiary/ghost/icon, Input, Textarea, Checkbox, Radio, Switch) | — | `--color-outline` |
+| Borders (resting state, strong — the border itself is the primary affordance) — Button tertiary/ghost/icon, Checkbox, Radio, Switch | — | `--color-outline` |
+| Borders (resting state, subtle — text-entry / content fields) — Input, Textarea, Select, SearchBar, SearchField; also containers (cards/tables/panels) | — | `--border` (`color-mix(on-surface 10%, transparent)`) |
 | Borders (filter/selection controls — Chip, Segmented Button) & decorative/dividers | — | `--color-outline-variant` |
+| Borders (hover/disabled accent on subtle-tier fields) — Input, Textarea step up to a stronger frame on hover/disabled | — | `--color-outline` |
 | Error / danger | `--color-error` | `--color-on-error` |
 | Error container | `--color-error-container` | `--color-on-error-container` |
 | Success | `--color-success` | `--color-on-success` |
@@ -328,7 +330,9 @@ The mapping splits by anatomy, not by "emphasis" (the previous wording here allo
 
 **Segmented Button — softer "Option B" variant (2026-06):** the segmented button uses a *lighter* tonal selection — container `--color-primary-container` + content `--color-on-primary-container`, with an `--color-outline-variant` frame and `--color-on-surface-variant` unselected labels. This is a deliberate, documented deviation from the MD3 segmented-button spec (which assigns `secondaryContainer`): it stays within MD3 *roles* and the tonal-selection principle while reading lighter/cleaner. Canonical token mapping lives in `packages/ds/components/ui/segmented-button.tsx` and the component's Specs → Color Roles table.
 
-**Chip — outline-variant frame (2026-07):** unselected Chip's border was `--color-outline` — identical to Button tertiary/ghost/icon's border, so the two components read as the same control when placed side by side, even though Chip is meant to feel like a lighter-weight filter/metadata control, not a primary action. Fixed by moving Chip's frame to `--color-outline-variant`, the same token (and the same rationale) already used by Segmented Button's "Option B" frame above — no new token, just correcting Chip's tier assignment in the borders table (§5.1). Button and Input/Checkbox/Radio/Switch keep `--color-outline` unchanged; they remain the stronger-emphasis tier. Canonical mapping lives in `packages/ds/components/ui/chip.tsx`.
+**Chip — outline-variant frame (2026-07):** unselected Chip's border was `--color-outline` — identical to Button tertiary/ghost/icon's border, so the two components read as the same control when placed side by side, even though Chip is meant to feel like a lighter-weight filter/metadata control, not a primary action. Fixed by moving Chip's frame to `--color-outline-variant`, the same token (and the same rationale) already used by Segmented Button's "Option B" frame above — no new token, just correcting Chip's tier assignment in the borders table (§5.1). Button (tertiary/ghost/icon), Checkbox, Radio and Switch keep `--color-outline` unchanged; they remain the stronger resting-border tier. Canonical mapping lives in `packages/ds/components/ui/chip.tsx`.
+
+**Search Bar / Search Field — shared subtle-border tier, not a new one (2026-07):** `SearchField` (`toolbar.tsx`), the desktop/toolbar variant of Search, was built reusing `SearchBar`'s existing `--border` frame and `--search-field-hover/-focus/-border-hover` state tokens — the same subtle resting-border tier already used by Input/Textarea/Select (§5.1). This is why it integrates cleanly into a toolbar row next to `Select`: they already shared a border tier before this decision, it just hadn't been documented as an intentional Search/Select pairing. `SearchField` differs from `SearchBar` only in shape (`--radius-md` vs. pill) and height (padding-driven vs. fixed 56px) — not in color role. Canonical mapping lives in `packages/ds/components/ui/toolbar.tsx` and `packages/ds/components/ui/search.tsx`.
 
 ---
 

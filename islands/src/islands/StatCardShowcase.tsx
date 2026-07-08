@@ -7,19 +7,19 @@ export function StatCardShowcase() {
         label="Vacantes activas"
         value="24"
         change="↑ 4 desde el mes pasado"
-        changeColor="var(--color-success)"
+        trend="positive"
       />
       <StatCard
         label="Candidatos en proceso"
         value="138"
         change="↓ 12 desde la semana pasada"
-        changeColor="var(--color-error)"
+        trend="negative"
       />
       <StatCard
         label="Posiciones cubiertas"
         value="91%"
         change="↑ 3% vs. trimestre anterior"
-        changeColor="var(--color-success)"
+        trend="positive"
       />
     </StatsGrid>
   )
@@ -29,10 +29,10 @@ export function StatCardShowcase() {
 export function StatCardGrid() {
   return (
     <StatsGrid>
-      <StatCard label="Vacantes activas" value="24" change="+3 este mes" changeColor="var(--color-success)" />
-      <StatCard label="Candidatos" value="156" change="+12 esta semana" changeColor="var(--color-success)" />
-      <StatCard label="Entrevistas hoy" value="8" change="Sin cambios" changeColor="var(--text-muted)" />
-      <StatCard label="Tiempo promedio" value="18d" change="+2d vs anterior" changeColor="var(--color-error)" />
+      <StatCard label="Vacantes activas" value="24" change="+3 este mes" trend="positive" />
+      <StatCard label="Candidatos" value="156" change="+12 esta semana" trend="positive" />
+      <StatCard label="Entrevistas hoy" value="8" change="Sin cambios" trend="neutral" />
+      <StatCard label="Tiempo promedio" value="18d" change="+2d vs anterior" trend="negative" />
     </StatsGrid>
   )
 }

@@ -1,14 +1,24 @@
 /**
  * Toolbar — barra de búsqueda con filtros y acciones para listas de datos.
  *
- * Cuándo usar: barra de controles sobre listas/tablas — search-field compacto + filtros + acciones.
- * Cuándo no: búsqueda standalone de página (usar search-bar de search.css).
+ * Cuándo usar: barra de controles sobre listas/tablas — SearchField compacto + Select/
+ * ToolbarButton para filtros y acciones, todo a la misma altura de fila.
+ * Cuándo no: búsqueda standalone de página, sin filtros vecinos (usar `SearchBar` de
+ * search.tsx — mobile/hero, forma píldora 56px).
  * Reemplaza a: filter bars legacy.
+ *
+ * Search Bar / Search Field (2026-07): `SearchField` (abajo) es la variante desktop
+ * oficial de Search — reutiliza los mismos tokens de estado que `SearchBar`
+ * (--search-field-hover/-focus/-border-hover) y la misma tier de borde `--border` que
+ * Select/Input/Textarea. Solo cambia forma (`--radius-md` vs. píldora) y altura (por
+ * padding, no fija) para integrarse con sus vecinos de toolbar. No tiene slot trailing ni
+ * abre una search view — ver Search → Guidelines → "Ubicación".
  *
  * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/toolbar.css.
  */
 import * as React from "react"
 import { cn } from "../lib/utils"
+import { Button } from "./button"
 
 const Toolbar = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
@@ -25,8 +35,9 @@ export interface SearchFieldProps extends React.InputHTMLAttributes<HTMLInputEle
 const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
   ({ className, containerClassName, icon, ...props }, ref) => (
     <div
+      role="search"
       className={cn(
-        "group flex-1 flex items-center gap-2 px-4 py-2 bg-surface-container-high border border-border rounded-md text-on-surface-variant cursor-text transition-[background,border-color] duration-fast ease-default hover:bg-search-field-hover hover:border-search-field-border-hover focus-within:bg-search-field-focus focus-within:border-secondary",
+        "group flex-1 flex items-center gap-2 min-h-10 px-4 py-2 bg-surface-container-high border border-border rounded-md text-on-surface-variant cursor-text transition-[background,border-color] duration-fast ease-default hover:bg-search-field-hover hover:border-search-field-border-hover focus-within:bg-search-field-focus focus-within:border-secondary",
         containerClassName
       )}
     >
@@ -51,19 +62,23 @@ const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
 )
 SearchField.displayName = "SearchField"
 
+// ToolbarButton composes the canonical Button (variant="icon" is the only variant
+// whose neutral coloring — surface-container fill, on-surface-variant label, neutral
+// hover — matches the toolbar filter aesthetic) and overrides its square icon geometry
+// for a labeled, min-h-10 (SearchField-parity) shape. No hand-rolled class string.
 const ToolbarButton = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
   ({ className, children, ...props }, ref) => (
-    <button
+    <Button
       ref={ref}
-      type="button"
+      variant="icon"
       className={cn(
-        "inline-flex items-center gap-2 px-4 py-2 bg-surface-container border border-outline rounded-md font-body text-body-md font-medium text-on-surface-variant cursor-pointer whitespace-nowrap transition-[background,border-color,color] duration-fast ease-default hover:bg-surface-variant hover:border-outline-variant hover:text-on-surface active:opacity-85 focus-visible:focus-ring [&_svg]:w-[18px] [&_svg]:h-[18px]",
+        "w-auto h-auto min-h-10 px-4 py-2 gap-2 rounded-md text-body-md font-medium whitespace-nowrap active:scale-[0.98] [&_svg]:w-[18px] [&_svg]:h-[18px]",
         className
       )}
       {...props}
     >
       {children}
-    </button>
+    </Button>
   )
 )
 ToolbarButton.displayName = "ToolbarButton"

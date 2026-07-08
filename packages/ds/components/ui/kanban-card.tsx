@@ -11,6 +11,7 @@ import * as React from "react"
 import { cn } from "../lib/utils"
 import { Card } from "./card"
 import { Badge, type BadgeProps } from "./badge"
+import { Avatar, AvatarFallback } from "./avatar"
 
 interface KanbanCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string
@@ -44,9 +45,11 @@ function KanbanCard({
       <div className="flex items-center justify-between gap-2">
         {meta && <div className="text-label text-fg-subtle">{meta}</div>}
         {avatarLabel && (
-          <div className="h-6 w-6 rounded-full bg-primary-container text-on-primary-container text-[10px] font-semibold flex items-center justify-center ml-auto">
-            {avatarLabel}
-          </div>
+          <Avatar className="h-6 w-6 ml-auto">
+            <AvatarFallback className="bg-primary-container text-on-primary-container text-[10px] font-semibold">
+              {avatarLabel}
+            </AvatarFallback>
+          </Avatar>
         )}
       </div>
     </Card>

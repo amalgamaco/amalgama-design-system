@@ -1,9 +1,19 @@
 /**
  * Search — búsqueda de contenido (search-bar standalone + search-view expandida).
  *
- * Cuándo usar: search-bar standalone para vistas de búsqueda (desktop y mobile). Acompañar con .search-icon-btn para acciones contextuales (Filtros, Ordenar, Vista).
- * Cuándo no: reemplazar search-bar con un input de formulario (usar .form-input).
- * Reemplaza a: inputs de búsqueda legacy, toolbar search-field.
+ * Cuándo usar: SearchBar standalone cuando la búsqueda es la acción principal de la
+ * pantalla — mobile/hero, o desktop encabezando una vista dedicada de búsqueda. Acompañar
+ * con .search-icon-btn para acciones contextuales (Filtros, Ordenar, Vista) en la misma fila.
+ * Cuándo no: búsqueda como UN filtro más dentro de una toolbar de escritorio (usar
+ * `SearchField` de toolbar.tsx — misma familia de tokens, forma compacta `--radius-md`);
+ * reemplazar search-bar con un input de formulario (usar .form-input).
+ * Reemplaza a: inputs de búsqueda legacy.
+ *
+ * Search Bar / Search Field (2026-07): Embassy soporta oficialmente dos variantes según
+ * la plataforma — SearchBar (este archivo, mobile/standalone/hero, píldora 56px) y
+ * SearchField (toolbar.tsx, desktop/compacta, dentro de una toolbar). No son alternativas
+ * intercambiables: son la misma familia de tokens de estado con distinta forma/altura
+ * según el contexto. Ver Search → Guidelines → "Ubicación" en la doc del componente.
  *
  * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/search.css.
  */

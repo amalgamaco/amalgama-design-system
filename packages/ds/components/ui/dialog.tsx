@@ -55,6 +55,18 @@ export const DialogTitle = React.forwardRef<
 ))
 DialogTitle.displayName = "DialogTitle"
 
+// shadcn parity: DialogDescription wraps Radix's Description primitive (wires
+// aria-describedby to the content automatically). Embassy's DialogBody remains the
+// padded content-region wrapper; use DialogDescription for the accessible summary
+// line inside a header/body.
+export const DialogDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description ref={ref} className={cn("text-sm text-on-surface-variant", className)} {...props} />
+))
+DialogDescription.displayName = "DialogDescription"
+
 export function DialogBody({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={cn("px-5 py-4 text-sm text-on-surface-variant", className)} {...props} />
 }

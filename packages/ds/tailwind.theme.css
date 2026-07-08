@@ -81,6 +81,12 @@
   --animate-fade-in:        fadeIn var(--duration-normal) var(--ease-enter) both;
   --animate-slide-in-up:    slideInUp var(--duration-medium) var(--ease-enter) both;
   --animate-slide-in-right: slideInRight var(--duration-normal) var(--ease-enter) both;
+
+  /* ── Accordion / Collapsible height animations (Radix drives the target height
+     via --radix-*-content-height). Registers the `animate-accordion-down/up`
+     utilities the Accordion component consumes. ── */
+  --animate-accordion-down: accordion-down var(--duration-fast) var(--ease-default);
+  --animate-accordion-up:   accordion-up var(--duration-fast) var(--ease-default);
 }
 
 /* ══════════════════════════════════════
@@ -221,6 +227,16 @@
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* ── Accordion / Collapsible height keyframes (Radix sets the content-height var) ── */
+@keyframes accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
 }
 
 /* ── Grid/list entrance — spatial (translateY + scale), pairs with per-item

@@ -29,10 +29,12 @@ import { TooltipShowcase } from "./islands/TooltipShowcase"
 import { SheetShowcase, BottomSheetShowcase, SideSheetShowcase } from "./islands/SheetShowcase"
 import { CarouselShowcase } from "./islands/CarouselShowcase"
 import { DatePickerShowcase } from "./islands/DatePickerShowcase"
+import { DatePickerFieldShowcase } from "./islands/DatePickerField"
 import { SegmentedButtonShowcase } from "./islands/SegmentedButtonShowcase"
 import { SegBtnSizeSm, SegBtnSizeMd, SegBtnSizeLg, SegBtnStateDefault, SegBtnStateSelected, SegBtnStateDisabled, SegBtnDoViews, SegBtnDontActions, SegBtnDoPeriod, SegBtnDontTooMany, SegBtnAnatomy, SegBtnIcons, SegBtnIconsOnly, SegBtnSingle, SegBtnMulti, RoleBoardMode, BtCatTabs, BtColorVariants, BtSizeVariants } from "./islands/SegBtnPhaseB"
 import { SearchActionsShowcase, SearchDesktopShowcase, SearchBarMobileShowcase, SearchBarShowcase as SearchBarPhaseB, SearchActionsCodeShowcase } from "./islands/SearchPhaseB"
 import { SearchConfigBar, SearchConfigTrailing, SearchConfigMulti, SearchConfigAvatar } from "./islands/SearchConfigShowcase"
+import { SearchVariantsShowcase, SearchFieldToolbarShowcase, SearchFieldAnatomy, SearchFieldMeasures } from "./islands/SearchFieldShowcase"
 import { VacancyCardShowcase } from "./islands/VacancyCardShowcase"
 import { PersonCardShowcase } from "./islands/PersonCardShowcase"
 import { KanbanShowcase } from "./islands/KanbanShowcase"
@@ -88,7 +90,24 @@ import { ButtonSizeMatrix, ButtonTouchTarget } from "./islands/ButtonSpecs"
 import { ButtonTokens, MenuTokens, InputTokens, SelectTokens, TextareaTokens, CheckboxTokens, RadioTokens, SwitchTokens, SliderTokens, BasicCardTokens, DialogTokens, BottomSheetTokens, SideSheetTokens, TableTokens, TabsTokens, BadgeTokens, ChipTokens, AvatarTokens, StatCardTokens, SkeletonTokens, DividerTokens, SnackbarTokens, TooltipTokens, SearchTokens, CarouselTokens, DatePickerTokens, SegBtnTokens, LoadingTokens, EmptyTokens, KanbanTokens, VacancyTokens, PersonTokens, ListTokens, NavDrawerTokens, NavBarTokens, NavCardTokens, TopbarTokens } from "./islands/TokenPanel"
 import { ChipSceneRestaurant, ChipSceneDialog, ChipSceneTaskButton, ChipSceneTaskChip, ChipSceneScroll, ChipSceneSingle, ChipSceneElevHero, ChipSceneElevDoBorder, ChipSceneElevDoImage, ChipSceneElevDontPage, ChipSceneElevDontPressed, ChipSceneLabelShort, ChipSceneLabelLong, ChipSceneTrailingTouch, ChipSceneAssistHero, ChipSceneAssistInfo, ChipSceneAssistModal, ChipSceneAssistActionsA, ChipSceneAssistActionsB, ChipSceneAssistPlacement, ChipSceneFilterHero, ChipSceneFilterShopping, ChipSceneFilterRealEstate, ChipSceneFilterMultiSelected, ChipSceneFilterMultiDynamic, ChipSceneFilterSingle, ChipSceneFilterTrailingClose, ChipSceneFilterTrailingMenu, ChipSceneFilterCaution, ChipSceneFilterIntegration } from "./islands/ChipScenes"
 
+import {
+  ToggleShowcase, LabelShowcase, AccordionShowcase, AlertShowcase, BreadcrumbShowcase,
+  CollapsibleShowcase, HoverCardShowcase, ScrollAreaShowcase, AspectRatioShowcase,
+  PaginationShowcase, AlertDialogShowcase,
+} from "./islands/NewPrimitivesShowcase"
+
 const registry: Record<string, ComponentType> = {
+  "toggle-showcase": ToggleShowcase,
+  "label-showcase": LabelShowcase,
+  "accordion-showcase": AccordionShowcase,
+  "alert-showcase": AlertShowcase,
+  "breadcrumb-showcase": BreadcrumbShowcase,
+  "collapsible-showcase": CollapsibleShowcase,
+  "hover-card-showcase": HoverCardShowcase,
+  "scroll-area-showcase": ScrollAreaShowcase,
+  "aspect-ratio-showcase": AspectRatioShowcase,
+  "pagination-showcase": PaginationShowcase,
+  "alert-dialog-showcase": AlertDialogShowcase,
   "chip-showcase": ChipShowcase,
   "button-showcase": ButtonShowcase,
   "button-states-showcase": ButtonStatesShowcase,
@@ -179,6 +198,8 @@ const registry: Record<string, ComponentType> = {
   "search-states": SearchStates,
   "search-bar-measures": SearchBarMeasures,
   "search-view-measures": SearchViewMeasures,
+  "search-field-anatomy": SearchFieldAnatomy,
+  "search-field-measures": SearchFieldMeasures,
   "snackbar-anatomy": SnackbarAnatomy,
   "snackbar-color": SnackbarColor,
   "snackbar-measures": SnackbarMeasures,
@@ -313,6 +334,8 @@ const registry: Record<string, ComponentType> = {
   "search-config-trailing": SearchConfigTrailing,
   "search-config-multi": SearchConfigMulti,
   "search-config-avatar": SearchConfigAvatar,
+  "search-variants-showcase": SearchVariantsShowcase,
+  "search-field-toolbar-showcase": SearchFieldToolbarShowcase,
   "card-showcase": CardShowcase,
   "card-elevated": CardElevated,
   "card-filled": CardFilled,
@@ -326,6 +349,7 @@ const registry: Record<string, ComponentType> = {
   "side-sheet-showcase": SideSheetShowcase,
   "carousel-showcase": CarouselShowcase,
   "date-picker-showcase": DatePickerShowcase,
+  "date-picker-field-showcase": DatePickerFieldShowcase,
   "seg-btn-showcase": SegmentedButtonShowcase,
   "seg-btn-size-sm": SegBtnSizeSm,
   "seg-btn-size-md": SegBtnSizeMd,

@@ -11,6 +11,7 @@ import * as React from "react"
 import { cn } from "../lib/utils"
 import { Card } from "./card"
 import { Badge, type BadgeProps } from "./badge"
+import { Avatar, AvatarFallback } from "./avatar"
 
 interface VacancyCardProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode
@@ -39,9 +40,11 @@ function VacancyCard({
       )}
       {...props}
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-container text-on-primary-container text-body-sm font-semibold">
-        {icon ?? name.slice(0, 2).toUpperCase()}
-      </div>
+      <Avatar className="h-10 w-10 shrink-0">
+        <AvatarFallback className="bg-primary-container text-on-primary-container text-body-sm font-semibold [&_svg]:size-5">
+          {icon ?? name.slice(0, 2).toUpperCase()}
+        </AvatarFallback>
+      </Avatar>
       <div className="flex flex-1 min-w-0 flex-col gap-0.5">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="font-semibold text-body-sm text-fg truncate">{name}</span>

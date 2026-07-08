@@ -32,6 +32,8 @@ const sheetVariants = cva(
   {
     variants: {
       side: {
+        top:
+          "inset-x-0 top-0 h-auto border-b rounded-b-2xl sm:mx-auto sm:max-w-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
         right:
           "inset-y-0 right-0 w-80 border-l data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
         left:

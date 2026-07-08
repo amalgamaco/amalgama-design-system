@@ -3513,12 +3513,16 @@ body { overflow-x: clip; }
   <div class="ds-sidebar-drawer" id="drawer-components">
     <div class="ds-drawer-section-title">Components</div>
     <nav class="ds-nav">
+      <div class="ds-nav-item" data-section="c-accordion" onclick="navigate('c-accordion')">Accordion</div>
+      <div class="ds-nav-item" data-section="c-alert" onclick="navigate('c-alert')">Alert</div>
       <div class="ds-nav-item" data-section="c-app-bar" onclick="navigate('c-app-bar')">App bar</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-topbar" onclick="navigate('c-topbar')">Top Bar</div>
       </div>
+      <div class="ds-nav-item" data-section="c-aspect-ratio" onclick="navigate('c-aspect-ratio')">Aspect Ratio</div>
       <div class="ds-nav-item" data-section="c-avatar" onclick="navigate('c-avatar')">Avatar</div>
       <div class="ds-nav-item" data-section="c-badge" onclick="navigate('c-badge')">Badges</div>
+      <div class="ds-nav-item" data-section="c-breadcrumb" onclick="navigate('c-breadcrumb')">Breadcrumb</div>
       <div class="ds-nav-item" data-section="c-button" onclick="navigate('c-button')">Buttons</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-seg-btn" onclick="navigate('c-seg-btn')">Segmented Button</div>
@@ -3536,10 +3540,16 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-charts" onclick="navigate('c-charts')">Charts</div>
       <div class="ds-nav-item" data-section="c-checkbox" onclick="navigate('c-checkbox')">Checkbox</div>
       <div class="ds-nav-item" data-section="c-chip" onclick="navigate('c-chip')">Chips</div>
+      <div class="ds-nav-item" data-section="c-collapsible" onclick="navigate('c-collapsible')">Collapsible</div>
       <div class="ds-nav-item" data-section="c-date-picker" onclick="navigate('c-date-picker')">Date Picker</div>
       <div class="ds-nav-item" data-section="c-dialog" onclick="navigate('c-dialog')">Dialog</div>
+      <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-alert-dialog" onclick="navigate('c-alert-dialog')">Alert Dialog</div>
+      </div>
       <div class="ds-nav-item" data-section="c-divider" onclick="navigate('c-divider')">Divider</div>
+      <div class="ds-nav-item" data-section="c-hover-card" onclick="navigate('c-hover-card')">Hover Card</div>
       <div class="ds-nav-item" data-section="c-input" onclick="navigate('c-input')">Input</div>
+      <div class="ds-nav-item" data-section="c-label" onclick="navigate('c-label')">Label</div>
       <div class="ds-nav-item" data-section="c-list" onclick="navigate('c-list')">Lists</div>
       <div class="ds-nav-item" data-section="c-loading" onclick="navigate('c-loading')">Loading and progress</div>
       <div class="ds-nav-item" data-section="c-menu" onclick="navigate('c-menu')">Menu</div>
@@ -3548,7 +3558,9 @@ body { overflow-x: clip; }
         <div class="ds-nav-item" data-section="c-nav-drawer" onclick="navigate('c-nav-drawer')">Navigation Drawer</div>
         <div class="ds-nav-item" data-section="c-nav-bar" onclick="navigate('c-nav-bar')">Navigation Bar</div>
       </div>
+      <div class="ds-nav-item" data-section="c-pagination" onclick="navigate('c-pagination')">Pagination</div>
       <div class="ds-nav-item" data-section="c-radio" onclick="navigate('c-radio')">Radio button</div>
+      <div class="ds-nav-item" data-section="c-scroll-area" onclick="navigate('c-scroll-area')">Scroll Area</div>
       <div class="ds-nav-item" data-section="c-search" onclick="navigate('c-search')">Search</div>
       <div class="ds-nav-item" data-section="c-select" onclick="navigate('c-select')">Select</div>
       <div class="ds-nav-item ds-nav-parent-label">Sheets</div>
@@ -3562,6 +3574,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-table" onclick="navigate('c-table')">Table</div>
       <div class="ds-nav-item" data-section="c-tabs" onclick="navigate('c-tabs')">Tabs</div>
       <div class="ds-nav-item" data-section="c-textarea" onclick="navigate('c-textarea')">Textarea</div>
+      <div class="ds-nav-item" data-section="c-toggle" onclick="navigate('c-toggle')">Toggle</div>
       <div class="ds-nav-item" data-section="c-tooltip" onclick="navigate('c-tooltip')">Tooltips</div>
     </nav>
   </div>
@@ -11304,9 +11317,9 @@ export { EmptyState }</code></pre>
           <pre class="docs-code standalone"><code>import { StatsGrid, StatCard } from &quot;@amalgama/ds/stat-card&quot;
 
 &lt;StatsGrid&gt;
-  &lt;StatCard label=&quot;Vacantes abiertas&quot; value={24} change=&quot;+12%&quot; changeColor=&quot;var(--green)&quot; /&gt;
+  &lt;StatCard label=&quot;Vacantes abiertas&quot; value={24} change=&quot;+12%&quot; trend=&quot;positive&quot; /&gt;
   &lt;StatCard label=&quot;Candidatos activos&quot; value={156} /&gt;
-  &lt;StatCard label=&quot;Entrevistas hoy&quot; value={8} change=&quot;-3%&quot; changeColor=&quot;var(--red)&quot; /&gt;
+  &lt;StatCard label=&quot;Entrevistas hoy&quot; value={8} change=&quot;-3%&quot; trend=&quot;negative&quot; /&gt;
 &lt;/StatsGrid&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
@@ -11317,7 +11330,19 @@ export { EmptyState }</code></pre>
         <p class="docs-section-desc">Provisto por <code>@amalgama/ds</code> (fuente: <code>packages/ds/components/ui/stat-card.tsx</code>) &mdash; mostrado como referencia; no lo redefinas en tu proyecto</p>
         <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>import * as React from &quot;react&quot;
+import { cva } from &quot;class-variance-authority&quot;
 import { cn } from &quot;../lib/utils&quot;
+import { Card } from &quot;./card&quot;
+
+const statChangeVariants = cva(&quot;text-caption mt-1&quot;, {
+  variants: {
+    trend: {
+      positive: &quot;text-success&quot;,
+      negative: &quot;text-error&quot;,
+      neutral: &quot;text-fg-muted&quot;,
+    },
+  },
+})
 
 const StatsGrid = React.forwardRef&lt;HTMLDivElement, React.HTMLAttributes&lt;HTMLDivElement&gt;&gt;(
   ({ className, ...props }, ref) =&gt; (
@@ -11334,20 +11359,26 @@ export interface StatCardProps extends React.HTMLAttributes&lt;HTMLDivElement&gt
   label: string
   value: string | number
   change?: string
+  /** Token-bound color for the change indicator — prefer this over `changeColor`. */
+  trend?: &quot;positive&quot; | &quot;negative&quot; | &quot;neutral&quot;
+  /** @deprecated arbitrary CSS color escape hatch — prefer `trend` for token-bound colors. */
   changeColor?: string
 }
 
 const StatCard = React.forwardRef&lt;HTMLDivElement, StatCardProps&gt;(
-  ({ className, label, value, change, changeColor, ...props }, ref) =&gt; (
-    &lt;div ref={ref} className={cn(&quot;bg-card border border-border rounded-lg p-5&quot;, className)} {...props}&gt;
+  ({ className, label, value, change, trend, changeColor, ...props }, ref) =&gt; (
+    &lt;Card ref={ref} className={cn(&quot;p-5&quot;, className)} {...props}&gt;
       &lt;div className=&quot;text-body-sm text-fg-muted mb-2&quot;&gt;{label}&lt;/div&gt;
       &lt;div className=&quot;font-heading text-display font-bold text-fg tracking-[-0.5px]&quot;&gt;{value}&lt;/div&gt;
       {change &amp;&amp; (
-        &lt;div className=&quot;text-caption mt-1&quot; style={changeColor ? { color: changeColor } : undefined}&gt;
+        &lt;div
+          className={trend ? statChangeVariants({ trend }) : &quot;text-caption mt-1&quot;}
+          style={!trend &amp;&amp; changeColor ? { color: changeColor } : undefined}
+        &gt;
           {change}
         &lt;/div&gt;
       )}
-    &lt;/div&gt;
+    &lt;/Card&gt;
   )
 )
 StatCard.displayName = &quot;StatCard&quot;
@@ -11363,10 +11394,10 @@ export { StatsGrid, StatCard }</code></pre>
 <div class="docs-code-wrapper">
         <button class="docs-copy-btn">Copiar</button>
         <pre class="docs-code"><code>&lt;StatsGrid&gt;
-  &lt;StatCard label=&quot;Vacantes activas&quot; value={24} change=&quot;+3 este mes&quot; changeColor=&quot;var(--color-success)&quot; /&gt;
-  &lt;StatCard label=&quot;Candidatos&quot; value={156} change=&quot;+12 esta semana&quot; changeColor=&quot;var(--color-success)&quot; /&gt;
-  &lt;StatCard label=&quot;Entrevistas hoy&quot; value={8} change=&quot;Sin cambios&quot; /&gt;
-  &lt;StatCard label=&quot;Tiempo promedio&quot; value=&quot;18d&quot; change=&quot;+2d vs anterior&quot; changeColor=&quot;var(--color-error)&quot; /&gt;
+  &lt;StatCard label=&quot;Vacantes activas&quot; value={24} change=&quot;+3 este mes&quot; trend=&quot;positive&quot; /&gt;
+  &lt;StatCard label=&quot;Candidatos&quot; value={156} change=&quot;+12 esta semana&quot; trend=&quot;positive&quot; /&gt;
+  &lt;StatCard label=&quot;Entrevistas hoy&quot; value={8} change=&quot;Sin cambios&quot; trend=&quot;neutral&quot; /&gt;
+  &lt;StatCard label=&quot;Tiempo promedio&quot; value=&quot;18d&quot; change=&quot;+2d vs anterior&quot; trend=&quot;negative&quot; /&gt;
 &lt;/StatsGrid&gt;</code></pre>
       </div>
       </div>
@@ -16931,6 +16962,7 @@ const [on, setOn] = useState(false)
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
             <li><b>Calendario en línea</b> basado en <code>react-day-picker</code>, tematizado con tokens de Embassy.</li>
+            <li><b>Campo anclado (docked):</b> <code>Popover</code> + <code>Button</code> trigger + <code>Calendar</code> — la composición shadcn/shadcnstudio para elegir fecha sin ocupar espacio permanente en el layout.</li>
             <li><b>Dos modos:</b> selección de día único (<code>mode="single"</code>) y de rango (<code>mode="range"</code>).</li>
             <li><b>Celda de día</b> de 36×36&nbsp;px (<code>w-9 h-9</code>); contenedor <code>bg-surface</code> con borde y <code>rounded-lg</code>.</li>
             <li><b>Fecha seleccionada:</b> relleno <code>--color-primary</code> + texto <code>--color-on-primary</code>.</li>
@@ -16939,13 +16971,23 @@ const [on, setOn] = useState(false)
             <li>Localizable vía <code>locale</code> de <code>date-fns</code> (ej. <code>es</code>).</li>
           </ul>
 
-          <!-- Component variants — Calendar island -->
+          <!-- Platform-composition comparison -->
           <div class="bd-family-wrap">
-            <div data-island="date-picker-showcase"></div>
+            <div style="display:flex;flex-direction:column;gap:28px">
+              <div>
+                <p style="font:600 12px 'Inter',sans-serif;color:var(--ds-text-2);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Campo anclado — Popover + Button + Calendar</p>
+                <div data-island="date-picker-field-showcase"></div>
+              </div>
+              <div>
+                <p style="font:600 12px 'Inter',sans-serif;color:var(--ds-text-2);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Calendario en línea — siempre visible</p>
+                <div data-island="date-picker-showcase"></div>
+              </div>
+            </div>
           </div>
 
           <!-- Legend — variant references -->
           <ol class="bd-family-legend">
+            <li>Campo anclado — abre al hacer clic, cierra al elegir fecha</li>
             <li>Selección de día — <code>mode="single"</code></li>
             <li>Selección de rango — <code>mode="range"</code> (dos meses)</li>
           </ol>
@@ -17014,7 +17056,7 @@ const [on, setOn] = useState(false)
         </section>
         <section class="docs-section" id="tc-date-picker-s-4">
           <div class="ds-callout">
-            <strong>Relación con Material Design 3.</strong> MD3 define cuatro presentaciones de date picker — <b>Docked</b>, <b>Modal</b>, <b>Modal date input</b> y <b>Full-screen</b>, con celda de día de 40&nbsp;dp, ancho de 360&nbsp;dp y diálogo de 28&nbsp;dp. <b>Embassy implementa una única variante: un calendario en línea</b> (<code>Calendar</code>, sobre <code>react-day-picker</code>) con celda de 36&nbsp;px y contenedor <code>rounded-lg</code>. Para presentarlo como modal, envolvelo en un <code>Dialog</code>; para anclarlo a un campo, combinalo con un <code>Input</code> + <code>Popover</code> — esas composiciones no son variantes incorporadas del componente.
+            <strong>Relación con Material Design 3.</strong> MD3 define cuatro presentaciones de date picker — <b>Docked</b>, <b>Modal</b>, <b>Modal date input</b> y <b>Full-screen</b>, con celda de día de 40&nbsp;dp, ancho de 360&nbsp;dp y diálogo de 28&nbsp;dp. Embassy implementa el <code>Calendar</code> en línea (sobre <code>react-day-picker</code>, celda de 36&nbsp;px, contenedor <code>rounded-lg</code>) como base para dos composiciones, siguiendo el patrón canónico de shadcn/shadcnstudio: <b>docked</b> — <code>Popover</code> + <code>Button</code> trigger + <code>Calendar</code>, con <code>className="w-auto p-0"</code> en el popover para que el padding <code>p-3</code> del propio Calendar controle el espaciado — y <b>modal</b>, envolviendo <code>Calendar</code> en un <code>Dialog</code>. Ninguna es un componente <code>packages/ds</code> nuevo; ambas son composiciones documentadas de <code>Popover</code>/<code>Dialog</code> + <code>Button</code> + <code>Calendar</code> ya existentes.
           </div>
         </section>
       
@@ -17055,9 +17097,9 @@ const [on, setOn] = useState(false)
         </section>
         <section class="docs-section" id="tc-date-picker-g-3">
           <h2 class="docs-section-title">Docked date picker</h2>
-          <p class="ds-p">Variante <b>anclada</b>: el <code>Calendar</code> se muestra inline, junto al campo o dentro de un popover, para elegir fechas cercanas sin cambiar de contexto.</p>
-          <div class="bd-family-wrap"><div data-island="date-picker-showcase"></div></div>
-          <p class="ds-p" style="color:var(--text-secondary)">En Embassy es el uso por defecto del <code>Calendar</code> (inline / dentro de un popover).</p>
+          <p class="ds-p">Variante <b>anclada</b>: un campo con ícono de calendario abre un <code>Popover</code> con el <code>Calendar</code> adentro; cierra al elegir. Es la recomendación por defecto — no ocupa espacio permanente en el layout, a diferencia del calendario siempre visible.</p>
+          <div class="bd-family-wrap"><div data-island="date-picker-field-showcase"></div></div>
+          <p class="ds-p" style="color:var(--text-secondary)">Composición: <code>Popover</code> + <code>Button variant="tertiary"</code> (equivalente al <code>outline</code> de shadcn) + <code>Calendar</code>. Ver la pestaña Code para el snippet completo.</p>
         </section>
         <section class="docs-section" id="tc-date-picker-g-4">
           <h2 class="docs-section-title">Modal date picker</h2>
@@ -17103,8 +17145,45 @@ const [on, setOn] = useState(false)
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
-          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn)</h2>
-          <p class="docs-section-desc">El calendario se implementa con <code>react-day-picker</code> tematizado con tokens Embassy (celda seleccionada en <code>--color-primary</code>, hoy en negrita, rango en <code>--color-primary-container</code>). Importá <code>Calendar</code> desde <code>@amalgama/ds/calendar</code>.</p>
+          <h2 class="docs-section-title">Docked — Popover + Button + Calendar</h2>
+          <p class="docs-section-desc">La composición recomendada por defecto — patrón canónico de shadcn/shadcnstudio. <code>PopoverContent</code> usa <code>className="w-auto p-0"</code> para que el padding <code>p-3</code> del propio <code>Calendar</code> controle el espaciado, igual que en shadcn.</p>
+          <div class="bd-stage" style="margin-bottom:16px"><div data-island="date-picker-field-showcase"></div></div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { useState } from &quot;react&quot;
+import { Popover, PopoverTrigger, PopoverContent } from &quot;@amalgama/ds/popover&quot;
+import { Button } from &quot;@amalgama/ds/button&quot;
+import { Calendar } from &quot;@amalgama/ds/calendar&quot;
+import { CalendarIcon } from &quot;lucide-react&quot;
+import { format } from &quot;date-fns&quot;
+
+const [open, setOpen] = useState(false)
+const [date, setDate] = useState&lt;Date | undefined&gt;()
+
+&lt;Popover open={open} onOpenChange={setOpen}&gt;
+  &lt;PopoverTrigger asChild&gt;
+    &lt;Button
+      variant=&quot;tertiary&quot;
+      className={cn(&quot;w-[240px] justify-start font-normal&quot;, !date &amp;&amp; &quot;text-fg-subtle&quot;)}
+    &gt;
+      &lt;CalendarIcon className=&quot;mr-2 size-[18px]&quot; /&gt;
+      {date ? format(date, &quot;PPP&quot;) : &quot;Elegir fecha&quot;}
+    &lt;/Button&gt;
+  &lt;/PopoverTrigger&gt;
+  &lt;PopoverContent className=&quot;w-auto p-0&quot; align=&quot;start&quot;&gt;
+    &lt;Calendar
+      mode=&quot;single&quot;
+      selected={date}
+      onSelect={(d) =&gt; { setDate(d); setOpen(false) }}
+    /&gt;
+  &lt;/PopoverContent&gt;
+&lt;/Popover&gt;</code></pre>
+          </div>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">Calendario en línea — React (@amalgama/ds)</h2>
+          <p class="docs-section-desc">El calendario se implementa con <code>react-day-picker</code> tematizado con tokens Embassy (celda seleccionada en <code>--color-primary</code>, hoy en negrita, rango en <code>--color-primary-container</code>). Importá <code>Calendar</code> desde <code>@amalgama/ds/calendar</code> directamente cuando lo necesites siempre visible, sin popover.</p>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre class="docs-code"><code>import { Calendar } from &quot;@amalgama/ds/calendar&quot;
@@ -18089,7 +18168,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
     <section class="ds-section" id="s-c-search">
       <div class="ds-page-tag">Components · Input</div>
       <h1 class="ds-page-title">Search</h1>
-      <p class="ds-page-desc">Search permite a las personas buscar contenido. El componente incluye una barra de búsqueda y una vista de búsqueda, con modos acoplado (docked) y a pantalla completa.</p>
+      <p class="ds-page-desc">Search permite a las personas buscar contenido. Se adapta a la plataforma: <code>SearchBar</code> standalone (mobile) o <code>SearchField</code> compacta (desktop, en toolbar) — más una vista de búsqueda expandida, con modos acoplado (docked) y a pantalla completa.</p>
 
       <!-- ══ Component Tabs ══ -->
       <div data-island="component-tabs-nav"></div>
@@ -18103,14 +18182,24 @@ import { Button } from &quot;@amalgama/ds/button&quot;
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li><b>Search bar:</b> campo con forma de píldora (<code>--radius-full</code>); <b>40px</b> en fila con icon buttons, <b>56px</b> standalone (mobile/hero). El ícono inicial (lupa) es siempre obligatorio; los íconos finales son opcionales.</li>
-            <li><b>Search view:</b> experiencia expandida con sugerencias y resultados mientras se escribe; modo <b>docked</b> (ventanas medianas/expandidas) o <b>full-screen</b> (compactas).</li>
+            <li><b>Dos variantes según plataforma:</b> <code>SearchBar</code> (mobile, standalone, píldora <code>--radius-full</code>, 56px) y <code>SearchField</code> (desktop, compacta, <code>--radius-md</code>, dentro de una toolbar junto a Select/Button). Mismos tokens de estado — distinta forma/altura según el contexto, no dos sistemas de color separados.</li>
+            <li><b>Search bar:</b> el ícono inicial (lupa) es siempre obligatorio; los íconos finales son opcionales.</li>
+            <li><b>Search view:</b> experiencia expandida con sugerencias y resultados mientras se escribe; modo <b>docked</b> (ventanas medianas/expandidas) o <b>full-screen</b> (compactas). Exclusiva de <code>SearchBar</code> — <code>SearchField</code> no se expande a pantalla completa, sus resultados caen en la lista/tabla que filtra.</li>
             <li><b>Una por pantalla:</b> la search bar representa el alcance global de la vista; los refinamientos van en <a href="#" onclick="navigate('c-chip');return false;">chips</a> o filtros.</li>
             <li><b>Estado inicial útil:</b> al enfocar, ofrecé búsquedas recientes o sugerencias — nunca una superficie vacía.</li>
             <li><b>Alcance explícito:</b> el placeholder nombra qué se busca («Buscar candidatos»), no solo «Buscar».</li>
           </ul>
 
-          <!-- Component variants -->
+          <!-- Platform variants -->
+          <div class="bd-family-wrap">
+            <div data-island="search-variants-showcase"></div>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Search Bar — mobile, standalone, encabeza la vista</li>
+            <li>Search Field — desktop, compacta, comparte fila con filtros</li>
+          </ol>
+
+          <!-- Component variants — Search bar trailing configurations -->
           <div class="bd-family-wrap">
             <div data-island="search-showcase"></div>
           </div>
@@ -18131,7 +18220,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
 
             <!-- 1. CONFIGURACIONES -->
             <div class="docs-section" id="ss-configs">
-              <h2 class="docs-section-title">Configuraciones</h2>
+              <h2 class="docs-section-title">Configuraciones — Search bar</h2>
               <p class="docs-section-desc">La search bar admite diferentes combinaciones de elementos opcionales en el lado derecho. El ícono inicial (lupa) es siempre obligatorio. El fondo <code>surface-container-high</code> y el borde sutil <code>var(--border)</code> son constantes en todas las configuraciones.</p>
               <div class="cg-two-col">
                 <!-- 1: Search solo -->
@@ -18161,6 +18250,15 @@ import { Button } from &quot;@amalgama/ds/button&quot;
               </div>
             </div>
 
+            <!-- 2b. SEARCH FIELD EN TOOLBAR -->
+            <div class="docs-section" id="ss-field-toolbar">
+              <h2 class="docs-section-title">Search Field — en toolbar</h2>
+              <p class="docs-section-desc">La variante desktop reemplaza la forma de píldora por <code>--radius-md</code> y comparte fila con otros controles de filtro (<code>Select</code>, <code>ToolbarButton</code>). Mismo fondo y borde que Search bar — <code>surface-container-high</code> + <code>var(--border)</code> — y misma altura efectiva que sus vecinos de toolbar.</p>
+              <div class="docs-preview full-width">
+                <div data-island="search-field-toolbar-showcase"></div>
+              </div>
+            </div>
+
             <!-- 3. TOKENS Y ESPECIFICACIONES -->
             <div class="docs-section" id="ss-tokens">
               <h2 class="docs-section-title">Tokens y especificaciones</h2>
@@ -18169,6 +18267,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
 
               <div class="ds-comp-tabs" role="tablist" style="margin-bottom:24px;">
                 <button class="ds-comp-tab-btn active" type="button" onclick="ssTokVariant('bar',this)">Search bar</button>
+                <button class="ds-comp-tab-btn" type="button" onclick="ssTokVariant('field',this)">Search field</button>
                 <button class="ds-comp-tab-btn" type="button" onclick="ssTokVariant('view',this)">Search view</button>
               </div>
 
@@ -18243,6 +18342,61 @@ import { Button } from &quot;@amalgama/ds/button&quot;
                 </div>
               </div><!-- /sstv-bar -->
 
+              <!-- ── SEARCH FIELD ── -->
+              <div class="ss-tok-variant" id="sstv-field" style="display:none;">
+                <p class="docs-section-desc" style="margin-top:0">Mismos tokens de color y de estado que Search bar — solo cambian forma (<code>--radius-md</code> en vez de <code>--radius-full</code>) y altura (compacta, definida por padding en vez de un alto fijo). No tiene slot de avatar.</p>
+                <div class="ds-color-acc-list">
+
+                  <div class="ds-color-acc open">
+                    <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="true">
+                      <span class="ds-sem-grp-dot" style="background:#EAEBED;border:1px solid #9FA3AE;"></span>
+                      <span class="ds-color-acc-name">Habilitado</span>
+                      <span class="ds-color-acc-count">5</span>
+                      <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
+                    </button>
+                    <div class="ds-color-acc-body">
+                      <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Claro</th><th>Oscuro</th></tr></thead><tbody>
+                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">--color-surface-container-high</span></td><td><span class="ds-sem-hex">#EAEBED</span> <span class="ds-sem-sw" style="background:#EAEBED;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#282C39</span> <span class="ds-sem-sw" style="background:#282C39;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Ícono inicial</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Texto de entrada</td><td><span class="ds-sem-tok">--color-on-surface</span></td><td><span class="ds-sem-hex">#0A0C12</span> <span class="ds-sem-sw" style="background:#0A0C12;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#EAEBED</span> <span class="ds-sem-sw" style="background:#EAEBED;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Placeholder</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Borde</td><td><span class="ds-sem-tok">--border</span></td><td><span class="ds-sem-hex">rgba(10,12,18,.10)</span> <span class="ds-sem-sw" style="background:rgba(10,12,18,.10);display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">rgba(234,235,237,.10)</span> <span class="ds-sem-sw" style="background:rgba(234,235,237,.10);display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                      </tbody></table></div>
+                    </div>
+                  </div>
+
+                  <div class="ds-color-acc">
+                    <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
+                      <span class="ds-sem-grp-dot" style="background:rgba(10,12,18,.08);border:1px solid #ccc;"></span>
+                      <span class="ds-color-acc-name">Hover</span>
+                      <span class="ds-color-acc-count">1</span>
+                      <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
+                    </button>
+                    <div class="ds-color-acc-body">
+                      <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Valor</th></tr></thead><tbody>
+                        <tr><td>Contenedor + borde</td><td><span class="ds-sem-tok">--search-field-hover</span> / <span class="ds-sem-tok">--search-field-border-hover</span></td><td>Mismo token que Search bar</td></tr>
+                      </tbody></table></div>
+                    </div>
+                  </div>
+
+                  <div class="ds-color-acc">
+                    <button class="ds-color-acc-head" onclick="toggleColorAcc(this)" aria-expanded="false">
+                      <span class="ds-sem-grp-dot" style="background:rgba(10,12,18,.12);border:1px solid #ccc;"></span>
+                      <span class="ds-color-acc-name">Enfocado</span>
+                      <span class="ds-color-acc-count">2</span>
+                      <span class="ds-color-acc-chevron"><i data-lucide="chevron-down" style="width:18px;height:18px"></i></span>
+                    </button>
+                    <div class="ds-color-acc-body">
+                      <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Valor</th></tr></thead><tbody>
+                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">--search-field-focus</span></td><td>Mismo token que Search bar</td></tr>
+                        <tr><td>Borde (foco)</td><td><span class="ds-sem-tok">--color-secondary</span></td><td><span class="ds-sem-hex">#4F80FF</span> claro · <span class="ds-sem-hex">#B9CCFF</span> oscuro</td></tr>
+                      </tbody></table></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div><!-- /sstv-field -->
+
               <!-- ── SEARCH VIEW ── -->
               <div class="ss-tok-variant" id="sstv-view" style="display:none;">
                 <div class="ds-color-acc-list">
@@ -18293,6 +18447,14 @@ import { Button } from &quot;@amalgama/ds/button&quot;
                 <div><span class="cs-legend-num">5</span> Avatar (opcional)</div>
               </div>
 
+              <p class="cs-h3">Search field</p>
+              <div data-island="search-field-anatomy"></div>
+              <div class="cs-legend">
+                <div><span class="cs-legend-num">1</span> Contenedor</div>
+                <div><span class="cs-legend-num">2</span> Ícono inicial</div>
+                <div><span class="cs-legend-num">3</span> Texto de apoyo / input</div>
+              </div>
+
               <p class="cs-h3">Search view</p>
               <div data-island="search-view-anatomy"></div>
               <div class="cs-legend">
@@ -18308,7 +18470,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <!-- 5. COLOR -->
             <div class="docs-section" id="ss-color">
               <h2 class="docs-section-title">Color</h2>
-              <p class="docs-section-desc">Los colores de la search bar y la search view se definen con roles semánticos del esquema de Embassy, y se adaptan automáticamente entre modo claro y oscuro.</p>
+              <p class="docs-section-desc">Los colores de la search bar, la search field y la search view se definen con roles semánticos del esquema de Embassy, y se adaptan automáticamente entre modo claro y oscuro. Search field reutiliza exactamente esta misma tabla — no tiene tokens de color propios.</p>
               <div data-island="search-color"></div>
               <div class="ds-table-wrap" style="margin-top:24px;"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Claro</th><th>Oscuro</th></tr></thead><tbody>
                 <tr><td>Contenedor</td><td><span class="ds-sem-tok">--color-surface-container-high</span></td><td><span class="ds-sem-hex">#EAEBED</span></td><td><span class="ds-sem-hex">#282C39</span></td></tr>
@@ -18347,6 +18509,18 @@ import { Button } from &quot;@amalgama/ds/button&quot;
                 <div class="cs-meas-item"><b>360–720dp</b>Ancho mín–máx</div>
               </div>
 
+              <p class="cs-h3">Search field</p>
+              <div class="cs-meas-canvas">
+                <div data-island="search-field-measures"></div>
+              </div>
+              <div class="cs-meas-grid">
+                <div class="cs-meas-item"><b>40dp</b>Alto (padding vertical, no altura fija)</div>
+                <div class="cs-meas-item"><b>8dp</b>Radio visual (--radius-md)</div>
+                <div class="cs-meas-item"><b>18dp</b>Ícono inicial</div>
+                <div class="cs-meas-item"><b>16dp</b>Padding horizontal</div>
+                <div class="cs-meas-item"><b>flex: 1</b>Ancho — ocupa el espacio sobrante en la toolbar</div>
+              </div>
+
               <p class="cs-h3">Search view</p>
               <div class="cs-meas-canvas">
                 <div data-island="search-view-measures"></div>
@@ -18369,6 +18543,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
               <div class="ds-toc-title">En esta página</div>
               <ul class="ds-toc-list">
                 <li><a class="ds-toc-link" data-target="ss-configs">Configuraciones</a></li>
+                <li><a class="ds-toc-link" data-target="ss-field-toolbar">Search Field — en toolbar</a></li>
                 <li><a class="ds-toc-link" data-target="ss-tokens">Tokens y especificaciones</a></li>
                 <li><a class="ds-toc-link" data-target="ss-anatomy">Anatomía</a></li>
                 <li><a class="ds-toc-link" data-target="ss-color">Color</a></li>
@@ -18404,7 +18579,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <section class="docs-section">
           <div class="bd-callout">
             <span class="bd-ico">⚑</span>
-            <span><b>Embassy vs Search MD3:</b> Embassy se alinea estrechamente con MD3 en la anatomía del search bar (forma <code>corner-full</code> / píldora). Divergencia de altura: MD3 usa 56dp siempre; Embassy diferencia por contexto — <b>40dp en <code>.search-row</code></b> (desktop, alineado con icon buttons) y <b>56dp standalone</b> (mobile, hero de página). Divergencias puntuales: <b>Superficie:</b> MD3 usa <code>$surface-container-high</code> y elevación nivel 3 (6dp) en la search bar en reposo. <b>Vista acoplada (docked view):</b> MD3 reduce las esquinas a <code>28dp</code> cuando el search bar se expande a una vista de resultados con foco activo. <b>Vista a pantalla completa (full-screen view):</b> 0dp de esquinas y altura de header <code>72dp</code>; se usa en pantallas compactas donde la búsqueda ocupa toda la pantalla. <b>Indicador de foco:</b> MD3 usa <code>$secondary</code> como color de foco en el search bar — no <code>$primary</code>.</span>
+            <span><b>Embassy vs Search MD3:</b> Embassy se alinea estrechamente con MD3 en la anatomía del search bar (forma <code>corner-full</code> / píldora). Divergencia de altura: MD3 usa 56dp siempre; Embassy diferencia por contexto — <b>40dp en <code>.search-row</code></b> (desktop, alineado con icon buttons) y <b>56dp standalone</b> (mobile, hero de página). Divergencias puntuales: <b>Superficie:</b> MD3 usa <code>$surface-container-high</code> y elevación nivel 3 (6dp) en la search bar en reposo. <b>Vista acoplada (docked view):</b> MD3 reduce las esquinas a <code>28dp</code> cuando el search bar se expande a una vista de resultados con foco activo. <b>Vista a pantalla completa (full-screen view):</b> 0dp de esquinas y altura de header <code>72dp</code>; se usa en pantallas compactas donde la búsqueda ocupa toda la pantalla. <b>Indicador de foco:</b> MD3 usa <code>$secondary</code> como color de foco en el search bar — no <code>$primary</code>. <b>Search Field:</b> no es parte de la spec de MD3 — es la adaptación de Embassy para toolbars de escritorio (misma familia de tokens, forma <code>--radius-md</code> en vez de píldora), siguiendo el mismo principio de MD3 de adaptar el componente de búsqueda al contexto de la plataforma.</span>
           </div>
         </section>
       </div>
@@ -18421,13 +18596,14 @@ import { Button } from &quot;@amalgama/ds/button&quot;
           </div>
         </section>
         <section class="docs-section" id="tc-search-g-1">
-          <h2 class="docs-section-title">Ubicación</h2>
-          <p class="ds-p">Dónde ubicar la búsqueda según su rol:</p>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li><b>SearchBar</b> standalone: encabezando la vista cuando la búsqueda es la acción principal.</li>
-            <li><b>SearchField</b> compacto: dentro de una toolbar, junto a otras acciones.</li>
-            <li>El ícono de lupa va al leading; filtros o voz al trailing.</li>
-          </ul>
+          <h2 class="docs-section-title">Ubicación — SearchBar vs. SearchField</h2>
+          <p class="ds-p">Embassy soporta oficialmente <b>dos variantes según la plataforma</b>, siguiendo el mismo principio de MD3 de adaptar el componente de búsqueda al contexto — no dos componentes distintos, sino la misma familia de tokens con distinta forma y ubicación:</p>
+          <div class="bd-grid c2">
+            <div class="bd-dd"><div class="bd-dd-head" style="border-bottom:1px solid var(--border)">SearchBar — Mobile</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Standalone, encabeza la vista.</li><li>Forma píldora (<code>--radius-full</code>), 56px.</li><li>Puede expandirse a <b>Search view</b> a pantalla completa.</li><li>La búsqueda es la acción principal de la pantalla.</li></ul></div></div>
+            <div class="bd-dd"><div class="bd-dd-head" style="border-bottom:1px solid var(--border)">SearchField — Desktop</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Compacta, dentro de una <b>toolbar</b> junto a <code>Select</code> / <code>ToolbarButton</code>.</li><li>Forma rectangular (<code>--radius-md</code>), sin altura fija — se alinea con sus vecinos.</li><li>No se expande a pantalla completa — los resultados caen en la lista/tabla que filtra.</li><li>La búsqueda es <b>un filtro más</b> entre varios, no la acción principal.</li></ul></div></div>
+          </div>
+          <p class="ds-p" style="margin-top:14px">El ícono de lupa va siempre al leading; filtros o voz al trailing (solo disponible en <code>SearchBar</code> — <code>SearchField</code> no tiene slot trailing, delega esas acciones a los controles vecinos de la toolbar).</p>
+          <div class="bd-callout" style="margin-top:12px"><span class="bd-ico">⇄</span><span><b>Migración:</b> un input de búsqueda ad-hoc dentro de una fila de filtros de dashboard (borde genérico, alto inconsistente con los <code>Select</code> vecinos) migra a <code>SearchField</code> — no a <code>SearchBar</code> forzado a <code>width:100%</code>, que reintroduce la forma píldora fuera de su contexto (mobile/hero) y rompe la alineación de altura con el resto de la toolbar.</span></div>
         </section>
         <section class="docs-section" id="tc-search-g-2">
           <h2 class="docs-section-title">Anatomía</h2>
@@ -18437,12 +18613,16 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         </section>
         <section class="docs-section" id="tc-search-g-3">
           <h2 class="docs-section-title">Diseño adaptativo</h2>
-          <p class="ds-p">La búsqueda se adapta al ancho disponible:</p>
+          <p class="ds-p">La búsqueda se adapta a la plataforma, no solo al ancho disponible:</p>
+          <p class="ch-variant-label">Desktop — SearchField en toolbar</p>
+          <div class="bd-family-wrap"><div data-island="search-field-toolbar-showcase"></div></div>
+          <p class="ch-variant-label" style="margin-top:20px">Mobile — SearchBar standalone</p>
           <div class="bd-family-wrap"><div data-island="search-bar-mobile-showcase"></div></div>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li>En <b>desktop</b>, la barra convive con otras acciones; los resultados caen en un panel bajo la barra.</li>
-            <li>En <b>mobile</b>, al enfocarse puede expandirse a pantalla completa (search view) con resultados debajo.</li>
+            <li>En <b>desktop</b>, usá <code>SearchField</code>: convive con otras acciones en una toolbar; los resultados caen en la lista/tabla que filtra, no en un panel propio.</li>
+            <li>En <b>mobile</b>, usá <code>SearchBar</code>: standalone, y al enfocarse puede expandirse a pantalla completa (search view) con resultados debajo.</li>
             <li>El campo ocupa el ancho disponible sin volverse desproporcionadamente largo.</li>
+            <li>No migres <code>SearchBar</code> a <code>width:100%</code> para simular una toolbar — usá <code>SearchField</code>, pensado para ese contexto (ver Ubicación, arriba).</li>
           </ul>
         </section>
         <section class="docs-section" id="tc-search-g-4">
@@ -18452,6 +18632,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <li>Ofrecé una acción para <b>limpiar</b> el término; conservá búsquedas recientes cuando aporte.</li>
             <li><code>Esc</code> limpia o cierra la vista; <code>Enter</code> ejecuta la búsqueda.</li>
             <li>Estado vacío y sin-resultados claros, con sugerencias de reformulación.</li>
+            <li><code>SearchField</code> no abre una search view — <code>Esc</code> solo limpia el texto ingresado.</li>
           </ul>
         </section>
         </div>
@@ -18480,11 +18661,11 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <table class="docs-props-table">
               <thead><tr><th>Parte</th><th>Marcado</th><th>Por qué</th></tr></thead>
               <tbody>
-                <tr><td>Contenedor (bar o view)</td><td><code>role="search"</code></td><td>Landmark navegable — los lectores listan «búsqueda» en el rotor</td></tr>
-                <tr><td>Campo de texto</td><td><code>&lt;input type="search" aria-label="…"&gt;</code></td><td>El placeholder NO es una etiqueta: desaparece al escribir y los lectores pueden ignorarlo</td></tr>
-                <tr><td>Ícono final / volver</td><td><code>&lt;button aria-label="…"&gt;</code></td><td>Acción solo-ícono necesita equivalente textual</td></tr>
-                <tr><td>Lista de resultados</td><td><code>role="listbox"</code> + <code>role="option"</code></td><td>Patrón combobox: permite navegar resultados con flechas sin perder el foco del input</td></tr>
-                <tr><td>Cantidad de resultados</td><td><code>aria-live="polite"</code></td><td>Anuncia «12 resultados» al escribir, sin interrumpir</td></tr>
+                <tr><td>Contenedor (bar, field o view)</td><td><code>role="search"</code></td><td>Landmark navegable — los lectores listan «búsqueda» en el rotor. <code>SearchField</code> lo lleva igual que <code>SearchBar</code>, aunque comparta fila con otros filtros</td></tr>
+                <tr><td>Campo de texto</td><td><code>&lt;input type="search" aria-label="…"&gt;</code></td><td>El placeholder NO es una etiqueta: desaparece al escribir y los lectores pueden ignorarlo. Aplica igual en <code>SearchField</code></td></tr>
+                <tr><td>Ícono final / volver</td><td><code>&lt;button aria-label="…"&gt;</code></td><td>Acción solo-ícono necesita equivalente textual. <code>SearchField</code> no tiene ícono final — sus acciones (filtros, reset) son los controles vecinos de la toolbar, cada uno con su propio <code>aria-label</code></td></tr>
+                <tr><td>Lista de resultados</td><td><code>role="listbox"</code> + <code>role="option"</code></td><td>Patrón combobox: permite navegar resultados con flechas sin perder el foco del input — exclusivo de <b>Search view</b> (<code>SearchField</code> filtra en línea la lista/tabla existente, que ya tiene su propia semántica)</td></tr>
+                <tr><td>Cantidad de resultados</td><td><code>aria-live="polite"</code></td><td>Anuncia «12 resultados» al escribir, sin interrumpir. En <code>SearchField</code>, anunciá el conteo desde el <code>ResultCount</code> de la toolbar, no desde el campo</td></tr>
               </tbody>
             </table>
           </div>
@@ -18510,6 +18691,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
                 <li>En modo full-screen, el foco queda contenido dentro de la vista (focus trap)</li>
                 <li>Al cerrar, el foco vuelve al elemento que abrió la búsqueda</li>
                 <li>El cursor de texto usa <code>--color-secondary</code> — visible en ambos temas</li>
+                <li><code>SearchField</code> no tiene search view que abrir: <code>Tab</code>/<code>Esc</code> se comportan como en cualquier <code>&lt;input&gt;</code> — sin focus trap ni retorno de foco</li>
               </ul>
             </div>
           </div>
@@ -18519,7 +18701,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         <!-- 3. Contrast -->
         <section class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
-          <p class="docs-section-desc">Los pares de tokens del componente mantienen ≥ 4.5:1 en ambos temas: <code>--color-on-surface</code> sobre <code>--color-surface-container-high</code> para el texto de entrada, y <code>--color-on-surface-variant</code> para el texto de apoyo. El texto de apoyo nunca es la única indicación del alcance — el <code>aria-label</code> del input lo replica.</p>
+          <p class="docs-section-desc">Los pares de tokens del componente mantienen ≥ 4.5:1 en ambos temas: <code>--color-on-surface</code> sobre <code>--color-surface-container-high</code> para el texto de entrada, y <code>--color-on-surface-variant</code> para el texto de apoyo. El texto de apoyo nunca es la única indicación del alcance — el <code>aria-label</code> del input lo replica. <code>SearchField</code> comparte exactamente estos mismos pares — no reduce contraste por ser la variante "más sutil" visualmente; la sutileza está en la forma y el borde, no en el texto.</p>
         </section>
 
       </div>
@@ -18557,6 +18739,40 @@ import { Mic } from &quot;lucide-react&quot;
     &lt;SearchBarTrailing aria-label=&quot;Buscar por voz&quot;&gt;&lt;Mic /&gt;&lt;/SearchBarTrailing&gt;
   }
 /&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ── Search field (desktop) ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Search field — @amalgama/ds (desktop)</h2>
+          <p class="docs-section-desc">La variante desktop vive en <code>@amalgama/ds/toolbar</code> junto con <code>Toolbar</code>, <code>ToolbarButton</code> y <code>ResultCount</code> — no en <code>@amalgama/ds/search</code>. <code>SearchField</code> no tiene slot <code>trailing</code>; sus acciones (filtros, orden, reset) son los controles vecinos dentro del mismo <code>Toolbar</code>. Combinala con <code>Select</code> de <code>@amalgama/ds/select</code> para una fila de filtros completa.</p>
+          <div class="bd-stage" style="margin-bottom:16px">
+            <div data-island="search-field-toolbar-showcase"></div>
+          </div>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Toolbar, SearchField, ToolbarButton } from &quot;@amalgama/ds/toolbar&quot;
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from &quot;@amalgama/ds/select&quot;
+
+&lt;Toolbar&gt;
+  &lt;SearchField
+    placeholder=&quot;Buscar por nombre o link&quot;
+    aria-label=&quot;Buscar por nombre o link&quot;
+    onChange={(e) =&gt; setQuery(e.target.value)}
+  /&gt;
+
+  &lt;Select&gt;
+    &lt;SelectTrigger aria-label=&quot;Todos los estados&quot; className=&quot;w-[170px] shrink-0&quot;&gt;
+      &lt;SelectValue placeholder=&quot;Todos los estados&quot; /&gt;
+    &lt;/SelectTrigger&gt;
+    &lt;SelectContent&gt;
+      &lt;SelectItem value=&quot;all&quot;&gt;Todos los estados&lt;/SelectItem&gt;
+      &lt;SelectItem value=&quot;active&quot;&gt;Activo&lt;/SelectItem&gt;
+    &lt;/SelectContent&gt;
+  &lt;/Select&gt;
+
+  &lt;ToolbarButton onClick={resetFilters}&gt;Restablecer filtros&lt;/ToolbarButton&gt;
+&lt;/Toolbar&gt;</code></pre>
           </div>
         </section>
 
@@ -20616,6 +20832,523 @@ import { Button } from &quot;@amalgama/ds/button&quot;
     <!-- ══════════════════════════════════════════════════════
          NAV CARD DOCUMENTATION
     ══════════════════════════════════════════════════════ -->
+    <!-- ═══════════ ACCORDION ═══════════ -->
+    <section class="ds-section" id="s-c-accordion">
+      <div class="ds-page-tag">Components · Containment</div>
+      <h1 class="ds-page-title">Accordion</h1>
+      <p class="ds-page-desc">Secciones apiladas que se expanden y colapsan para organizar contenido extenso.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza <code>Accordion</code> (Radix UI) desde <code>@amalgama/ds/accordion</code>, tematizado con tokens de Embassy y la rotación Expressive del chevron. Specs / Guidelines / Accessibility siguen el modelo de <strong>Material Design 3</strong>.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Accordion agrupa contenido en secciones colapsables. Ideal para FAQs, filtros avanzados o detalles opcionales donde mostrar todo a la vez abrumaría.</p>
+          <ul class="bd-overview-list">
+            <li><b>Composición shadcn:</b> <code>Accordion</code> · <code>AccordionItem</code> · <code>AccordionTrigger</code> · <code>AccordionContent</code>.</li>
+            <li><b>Modos:</b> <code>type="single"</code> (una sección abierta) con <code>collapsible</code>, o <code>type="multiple"</code>.</li>
+            <li><b>Chevron</b> que rota 180° al abrir, con la curva Expressive de Embassy.</li>
+            <li>Contenido animado por altura (<code>animate-accordion-down/up</code>) vía la variable de Radix.</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="accordion-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>FAQs y contenido de referencia largo.</li><li>Agrupar detalles opcionales que no todos necesitan.</li><li>Reducir el scroll en formularios/paneles densos.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Navegar entre vistas → <b>Tabs</b>.</li><li>Un solo bloque mostrar/ocultar → <b>Collapsible</b>.</li><li>Contenido crítico que siempre debe verse.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Radix expone cada trigger como <code>button</code> con <code>aria-expanded</code> y <code>aria-controls</code> hacia su panel.</li>
+            <li><span class="ds-a11y-icon">♿</span>Navegable por teclado: <code>Tab</code> entre triggers, <code>Enter</code>/<code>Espacio</code> para expandir.</li>
+            <li><span class="ds-a11y-icon">♿</span>El estado abierto no depende solo del color: el chevron rota además de cambiar el foco.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from &quot;@amalgama/ds/accordion&quot;
+
+&lt;Accordion type=&quot;single&quot; collapsible&gt;
+  &lt;AccordionItem value=&quot;a&quot;&gt;
+    &lt;AccordionTrigger&gt;¿Cómo aplico el DS?&lt;/AccordionTrigger&gt;
+    &lt;AccordionContent&gt;Importá el theme y copiá el componente.&lt;/AccordionContent&gt;
+  &lt;/AccordionItem&gt;
+&lt;/Accordion&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ ALERT ═══════════ -->
+    <section class="ds-section" id="s-c-alert">
+      <div class="ds-page-tag">Components · Communication</div>
+      <h1 class="ds-page-title">Alert</h1>
+      <p class="ds-page-desc">Mensaje estático en contexto que destaca información importante dentro de la página.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Estructura <code>Alert</code> / <code>AlertTitle</code> / <code>AlertDescription</code> (<code>role="alert"</code>, grid con ícono opcional) desde <code>@amalgama/ds/alert</code>. Variantes semánticas mapeadas a roles container de Embassy — MD3-flavored sobre el esqueleto de shadcn.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Alert comunica un mensaje persistente en el flujo de la página — un aviso del sistema, el resultado de una validación o una nota informativa que permanece visible.</p>
+          <ul class="bd-overview-list">
+            <li><b>Composición shadcn:</b> <code>Alert</code> · <code>AlertTitle</code> · <code>AlertDescription</code>, con un ícono opcional al inicio.</li>
+            <li><b>Cinco variantes:</b> <code>default</code> (superficie neutra) + semánticas <code>info</code> / <code>success</code> / <code>warning</code> / <code>error</code>.</li>
+            <li>El color nunca es la única señal: siempre acompañá con título e ícono.</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="alert-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Avisos persistentes ligados a la página o a un formulario.</li><li>Resumen del estado de una operación que debe seguir visible.</li><li>Notas informativas contextuales.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Feedback efímero de una acción → <b>Snackbar</b>.</li><li>Confirmación que interrumpe → <b>Alert Dialog</b>.</li><li>Como único indicador por color (agregá título/ícono).</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>El contenedor lleva <code>role="alert"</code>: los lectores anuncian el mensaje al aparecer.</li>
+            <li><span class="ds-a11y-icon">♿</span>Cada par color/on-color mantiene contraste AA en ambos temas.</li>
+            <li><span class="ds-a11y-icon">♿</span>El significado se refuerza con ícono + título, no solo con el color de fondo.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Alert, AlertTitle, AlertDescription } from &quot;@amalgama/ds/alert&quot;
+import { Info } from &quot;lucide-react&quot;
+
+&lt;Alert variant=&quot;success&quot;&gt;
+  &lt;Info /&gt;
+  &lt;AlertTitle&gt;Cambios guardados&lt;/AlertTitle&gt;
+  &lt;AlertDescription&gt;La vacante se publicó correctamente.&lt;/AlertDescription&gt;
+&lt;/Alert&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ ALERT DIALOG ═══════════ -->
+    <section class="ds-section" id="s-c-alert-dialog">
+      <div class="ds-page-tag">Components · Communication</div>
+      <h1 class="ds-page-title">Alert Dialog</h1>
+      <p class="ds-page-desc">Modal que interrumpe para confirmar una acción consecuente o destructiva.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza <code>AlertDialog</code> (Radix UI) desde <code>@amalgama/ds/alert-dialog</code>; Action/Cancel componen el <code>Button</code> canónico (Action = primary, Cancel = tertiary). Mismo scrim y zoom Expressive que Dialog.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Alert Dialog bloquea la interfaz hasta que la persona confirma o cancela. Reservalo para acciones irreversibles — eliminar, descartar cambios.</p>
+          <ul class="bd-overview-list">
+            <li><b>Composición shadcn:</b> <code>AlertDialog</code> · <code>Trigger</code> · <code>Content</code> · <code>Header</code>/<code>Footer</code> · <code>Title</code>/<code>Description</code> · <code>Action</code>/<code>Cancel</code>.</li>
+            <li>A diferencia de Dialog, <b>no</b> se cierra al hacer clic afuera ni con la <code>X</code>: exige una decisión explícita.</li>
+            <li>La acción destructiva usa el <code>Button</code> primary; combinala con <code>variant="danger"</code> en el trigger.</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="alert-dialog-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Confirmar acciones destructivas (eliminar, descartar).</li><li>Cambios irreversibles que requieren atención plena.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Diálogos con contenido o tareas → <b>Dialog</b>.</li><li>Avisos no bloqueantes → <b>Alert</b> / <b>Snackbar</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Radix aplica <code>role="alertdialog"</code>, focus trap y foco inicial en Cancel (acción segura).</li>
+            <li><span class="ds-a11y-icon">♿</span><code>Esc</code> equivale a Cancelar; el foco vuelve al trigger al cerrar.</li>
+            <li><span class="ds-a11y-icon">♿</span>Title y Description se conectan vía <code>aria-labelledby</code>/<code>aria-describedby</code>.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import {
+  AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter,
+  AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,
+} from &quot;@amalgama/ds/alert-dialog&quot;
+import { Button } from &quot;@amalgama/ds/button&quot;
+
+&lt;AlertDialog&gt;
+  &lt;AlertDialogTrigger asChild&gt;&lt;Button variant=&quot;danger&quot;&gt;Eliminar&lt;/Button&gt;&lt;/AlertDialogTrigger&gt;
+  &lt;AlertDialogContent&gt;
+    &lt;AlertDialogHeader&gt;
+      &lt;AlertDialogTitle&gt;¿Eliminar esta vacante?&lt;/AlertDialogTitle&gt;
+      &lt;AlertDialogDescription&gt;Esta acción no se puede deshacer.&lt;/AlertDialogDescription&gt;
+    &lt;/AlertDialogHeader&gt;
+    &lt;AlertDialogFooter&gt;
+      &lt;AlertDialogCancel&gt;Cancelar&lt;/AlertDialogCancel&gt;
+      &lt;AlertDialogAction&gt;Eliminar&lt;/AlertDialogAction&gt;
+    &lt;/AlertDialogFooter&gt;
+  &lt;/AlertDialogContent&gt;
+&lt;/AlertDialog&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ ASPECT RATIO ═══════════ -->
+    <section class="ds-section" id="s-c-aspect-ratio">
+      <div class="ds-page-tag">Components · Layout</div>
+      <h1 class="ds-page-title">Aspect Ratio</h1>
+      <p class="ds-page-desc">Mantiene una proporción de ancho/alto constante mientras el ancho es fluido.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Re-export de la primitiva <code>AspectRatio</code> (Radix UI) desde <code>@amalgama/ds/aspect-ratio</code>. Pasá <code>ratio={16/9}</code>.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">Aspect Ratio bloquea la proporción de su contenido (imágenes, video, thumbnails) para que no salte de tamaño al cargar ni rompa la grilla.</p>
+          <ul class="bd-overview-list">
+            <li>Primitiva de una sola pieza: <code>&lt;AspectRatio ratio={16/9}&gt;…&lt;/AspectRatio&gt;</code>.</li>
+            <li>El hijo llena el contenedor (usá <code>object-cover</code> en imágenes).</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="aspect-ratio-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Thumbnails, video, imágenes de card con ancho fluido.</li><li>Evitar layout shift mientras carga un medio.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Contenido cuya altura depende del texto.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { AspectRatio } from &quot;@amalgama/ds/aspect-ratio&quot;
+
+&lt;AspectRatio ratio={16 / 9}&gt;
+  &lt;img src=&quot;/cover.jpg&quot; alt=&quot;&quot; className=&quot;h-full w-full object-cover rounded-lg&quot; /&gt;
+&lt;/AspectRatio&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ BREADCRUMB ═══════════ -->
+    <section class="ds-section" id="s-c-breadcrumb">
+      <div class="ds-page-tag">Components · Navigation</div>
+      <h1 class="ds-page-title">Breadcrumb</h1>
+      <p class="ds-page-desc">Rastro de jerarquía que muestra la ubicación actual y permite volver a un ancestro.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Estructura <code>Breadcrumb</code> (nav &gt; ol &gt; li, Link/Page/Separator/Ellipsis, <code>asChild</code> vía Radix Slot) desde <code>@amalgama/ds/breadcrumb</code>.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Breadcrumb ubica a la persona dentro de una jerarquía de varios niveles y ofrece un camino de vuelta a cada ancestro.</p>
+          <ul class="bd-overview-list">
+            <li><b>Composición shadcn:</b> <code>Breadcrumb</code> · <code>BreadcrumbList</code> · <code>BreadcrumbItem</code> · <code>BreadcrumbLink</code> · <code>BreadcrumbPage</code> · <code>BreadcrumbSeparator</code> · <code>BreadcrumbEllipsis</code>.</li>
+            <li><code>BreadcrumbLink</code> soporta <code>asChild</code> para integrarse con el router.</li>
+            <li>La página actual usa <code>BreadcrumbPage</code> (no es un link; <code>aria-current="page"</code>).</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="breadcrumb-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Jerarquías de 2+ niveles donde importa el contexto.</li><li>Volver rápido a una categoría ancestro.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Una sola acción "volver" → <b>Back Link</b>.</li><li>Navegación primaria entre secciones → <b>Navigation</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>El <code>nav</code> lleva <code>aria-label="breadcrumb"</code>; la lista es un <code>ol</code> semántico.</li>
+            <li><span class="ds-a11y-icon">♿</span>La página actual usa <code>aria-current="page"</code> y no es un enlace.</li>
+            <li><span class="ds-a11y-icon">♿</span>Los separadores son <code>aria-hidden</code> — no se anuncian.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import {
+  Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
+} from &quot;@amalgama/ds/breadcrumb&quot;
+
+&lt;Breadcrumb&gt;
+  &lt;BreadcrumbList&gt;
+    &lt;BreadcrumbItem&gt;&lt;BreadcrumbLink href=&quot;/&quot;&gt;Inicio&lt;/BreadcrumbLink&gt;&lt;/BreadcrumbItem&gt;
+    &lt;BreadcrumbSeparator /&gt;
+    &lt;BreadcrumbItem&gt;&lt;BreadcrumbPage&gt;Vacante&lt;/BreadcrumbPage&gt;&lt;/BreadcrumbItem&gt;
+  &lt;/BreadcrumbList&gt;
+&lt;/Breadcrumb&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ COLLAPSIBLE ═══════════ -->
+    <section class="ds-section" id="s-c-collapsible">
+      <div class="ds-page-tag">Components · Containment</div>
+      <h1 class="ds-page-title">Collapsible</h1>
+      <p class="ds-page-desc">Un único bloque de contenido que se muestra u oculta bajo un disparador.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Re-export de las primitivas <code>Collapsible</code> (Radix UI) desde <code>@amalgama/ds/collapsible</code>; el trigger/contenido se estilan en el call site con tokens de Embassy.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">Collapsible muestra u oculta un solo bloque de contenido — un "ver más", detalles opcionales — sin la estructura de secciones múltiples de un Accordion.</p>
+          <ul class="bd-overview-list">
+            <li><b>Composición shadcn:</b> <code>Collapsible</code> · <code>CollapsibleTrigger</code> · <code>CollapsibleContent</code>.</li>
+            <li>Controlado o no controlado (<code>open</code> / <code>defaultOpen</code>).</li>
+            <li>Animá el contenido con <code>animate-accordion-down/up</code> (misma variable de altura de Radix).</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="collapsible-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Mostrar/ocultar UN bloque bajo un disparador.</li><li>"Ver más" / detalles opcionales.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Varias secciones expandibles agrupadas → <b>Accordion</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Collapsible, CollapsibleTrigger, CollapsibleContent } from &quot;@amalgama/ds/collapsible&quot;
+import { Button } from &quot;@amalgama/ds/button&quot;
+
+&lt;Collapsible&gt;
+  &lt;CollapsibleTrigger asChild&gt;&lt;Button variant=&quot;text&quot;&gt;Ver requisitos&lt;/Button&gt;&lt;/CollapsibleTrigger&gt;
+  &lt;CollapsibleContent&gt;…contenido…&lt;/CollapsibleContent&gt;
+&lt;/Collapsible&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ HOVER CARD ═══════════ -->
+    <section class="ds-section" id="s-c-hover-card">
+      <div class="ds-page-tag">Components · Communication</div>
+      <h1 class="ds-page-title">Hover Card</h1>
+      <p class="ds-page-desc">Vista previa enriquecida que aparece al pasar el mouse (o enfocar) un disparador.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza <code>HoverCard</code> (Radix UI) desde <code>@amalgama/ds/hover-card</code>, con la superficie de popover y el movimiento enter/exit de Embassy.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Hover Card previsualiza contenido enriquecido (un perfil, el resumen de una vacante) al pasar el mouse sobre un enlace o nombre — solo cuando ese contenido es complementario, no esencial.</p>
+          <ul class="bd-overview-list">
+            <li><b>Composición shadcn:</b> <code>HoverCard</code> · <code>HoverCardTrigger</code> · <code>HoverCardContent</code>.</li>
+            <li>Se abre por hover/focus con delay; no es accionable por touch — no pongas ahí info crítica.</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="hover-card-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Previews complementarios de perfiles/entidades.</li><li>Contenido que enriquece pero no es indispensable.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Info crítica para touch/teclado → <b>Popover</b> o navegar.</li><li>Texto corto de ayuda → <b>Tooltip</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Se abre también con foco de teclado, no solo con hover.</li>
+            <li><span class="ds-a11y-icon">♿</span>Es complementario por diseño: nunca coloques ahí la única vía a una acción o dato.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { HoverCard, HoverCardTrigger, HoverCardContent } from &quot;@amalgama/ds/hover-card&quot;
+
+&lt;HoverCard&gt;
+  &lt;HoverCardTrigger asChild&gt;&lt;a href=&quot;#&quot;&gt;@ana&lt;/a&gt;&lt;/HoverCardTrigger&gt;
+  &lt;HoverCardContent&gt;Ana Borthagaray · Product Designer&lt;/HoverCardContent&gt;
+&lt;/HoverCard&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ LABEL ═══════════ -->
+    <section class="ds-section" id="s-c-label">
+      <div class="ds-page-tag">Components · Inputs</div>
+      <h1 class="ds-page-title">Label</h1>
+      <p class="ds-page-desc">Etiqueta accesible para asociar a un control de formulario.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza <code>Label</code> (Radix UI) desde <code>@amalgama/ds/label</code>, tematizado con el token tipográfico <code>--text-label</code>.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Label etiqueta un control standalone (Checkbox, Switch, Radio, o un Input sin su prop <code>label</code>). Radix reenvía el clic al control asociado.</p>
+          <ul class="bd-overview-list">
+            <li>Asociá con <code>htmlFor</code> apuntando al <code>id</code> del control.</li>
+            <li>Se atenúa automáticamente cuando el control par está deshabilitado (<code>peer-disabled</code>).</li>
+            <li>Si usás la prop <code>label</code> de Input/Textarea, ya renderizan su propio <code>&lt;label&gt;</code> — no necesitás este.</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="label-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Label } from &quot;@amalgama/ds/label&quot;
+import { Checkbox } from &quot;@amalgama/ds/checkbox&quot;
+
+&lt;div className=&quot;flex items-center gap-2&quot;&gt;
+  &lt;Checkbox id=&quot;news&quot; /&gt;
+  &lt;Label htmlFor=&quot;news&quot;&gt;Recibir novedades&lt;/Label&gt;
+&lt;/div&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ PAGINATION ═══════════ -->
+    <section class="ds-section" id="s-c-pagination">
+      <div class="ds-page-tag">Components · Navigation</div>
+      <h1 class="ds-page-title">Pagination</h1>
+      <p class="ds-page-desc">Navegación entre páginas de un conjunto de resultados.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Estructura <code>Pagination</code> (nav &gt; ul &gt; li) desde <code>@amalgama/ds/pagination</code>. Compone el estilo de <code>Button</code> vía <code>buttonVariants</code>; la página activa usa el lenguaje de selección Secondary-container de Embassy.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">Pagination divide listas y tablas largas en páginas navegables, con anterior/siguiente, números y elipsis para rangos grandes.</p>
+          <ul class="bd-overview-list">
+            <li><b>Composición shadcn:</b> <code>Pagination</code> · <code>PaginationContent</code> · <code>PaginationItem</code> · <code>PaginationLink</code> · <code>PaginationPrevious</code>/<code>Next</code> · <code>PaginationEllipsis</code>.</li>
+            <li>La página activa (<code>isActive</code>) usa <code>aria-current="page"</code> + relleno Secondary-container.</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="pagination-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Listas/tablas largas divididas en páginas.</li><li>Cuando la persona necesita saltar a una página puntual.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Scroll infinito o feeds continuos.</li><li>Conjuntos chicos que caben en una vista.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import {
+  Pagination, PaginationContent, PaginationItem, PaginationLink,
+  PaginationPrevious, PaginationNext, PaginationEllipsis,
+} from &quot;@amalgama/ds/pagination&quot;
+
+&lt;Pagination&gt;
+  &lt;PaginationContent&gt;
+    &lt;PaginationItem&gt;&lt;PaginationPrevious href=&quot;#&quot; /&gt;&lt;/PaginationItem&gt;
+    &lt;PaginationItem&gt;&lt;PaginationLink href=&quot;#&quot; isActive&gt;2&lt;/PaginationLink&gt;&lt;/PaginationItem&gt;
+    &lt;PaginationItem&gt;&lt;PaginationNext href=&quot;#&quot; /&gt;&lt;/PaginationItem&gt;
+  &lt;/PaginationContent&gt;
+&lt;/Pagination&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ SCROLL AREA ═══════════ -->
+    <section class="ds-section" id="s-c-scroll-area">
+      <div class="ds-page-tag">Components · Layout</div>
+      <h1 class="ds-page-title">Scroll Area</h1>
+      <p class="ds-page-desc">Contenedor con scroll y una barra estilizada y consistente entre navegadores.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza <code>ScrollArea</code> (Radix UI) desde <code>@amalgama/ds/scroll-area</code>; el thumb usa <code>--color-outline</code>.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">Scroll Area reemplaza la barra de scroll nativa por una discreta y consistente, para regiones con overflow dentro de un panel, menú o sheet.</p>
+          <ul class="bd-overview-list">
+            <li><b>Composición shadcn:</b> <code>ScrollArea</code> (+ <code>ScrollBar</code> para el eje horizontal).</li>
+            <li>Definí una altura/ancho en el <code>ScrollArea</code>; el viewport hace el scroll.</li>
+            <li>No envuelvas el scroll natural de la página.</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="scroll-area-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { ScrollArea } from &quot;@amalgama/ds/scroll-area&quot;
+
+&lt;ScrollArea className=&quot;h-40 w-64 rounded-md border border-border&quot;&gt;
+  {items.map((i) =&gt; &lt;div key={i}&gt;{i}&lt;/div&gt;)}
+&lt;/ScrollArea&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ═══════════ TOGGLE ═══════════ -->
+    <section class="ds-section" id="s-c-toggle">
+      <div class="ds-page-tag">Components · Actions</div>
+      <h1 class="ds-page-title">Toggle</h1>
+      <p class="ds-page-desc">Botón de dos estados (presionado / no presionado) para alternar un ajuste.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza <code>Toggle</code> (Radix UI) desde <code>@amalgama/ds/toggle</code>. El estado presionado usa el lenguaje de selección Secondary-container compartido con Chip y la navegación activa.</div>
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Toggle alterna un único estado on/off que se aplica de inmediato — negrita en un editor, "mostrar solo favoritos".</p>
+          <ul class="bd-overview-list">
+            <li><b>Variantes:</b> <code>default</code> (sin borde) y <code>outline</code>; tamaños <code>sm</code>/<code>default</code>/<code>lg</code>.</li>
+            <li>Estado presionado vía <code>data-[state=on]</code> de Radix (no depende de JS manual).</li>
+            <li>Es la base de <b>Chip</b> (filter chip) y comparte lenguaje con <b>Segmented Button</b>.</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="toggle-showcase"></div></div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Alternar un ajuste on/off de efecto inmediato.</li><li>Barras de formato (negrita/itálica).</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir 1 de N → <b>Segmented Button</b>.</li><li>Filtros tipo tag → <b>Chip</b>.</li><li>Acción sin estado → <b>Button</b>.</li><li>On/off en preferencias con label → <b>Switch</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Radix maneja <code>aria-pressed</code> y el toggle por teclado (<code>Enter</code>/<code>Espacio</code>).</li>
+            <li><span class="ds-a11y-icon">♿</span>Si es solo-ícono, pasá <code>aria-label</code>.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Toggle } from &quot;@amalgama/ds/toggle&quot;
+import { Bold } from &quot;lucide-react&quot;
+
+&lt;Toggle aria-label=&quot;Negrita&quot;&gt;&lt;Bold /&gt;&lt;/Toggle&gt;
+&lt;Toggle variant=&quot;outline&quot; defaultPressed&gt;Favoritos&lt;/Toggle&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+
     <section class="ds-section" id="s-c-nav-card">
       <div class="ds-page-tag">Components · Navigation</div>
       <div class="docs-page-header">
@@ -20954,7 +21687,12 @@ const SECTIONS = {
   // Components
   'c-app-bar':         { label: 'App bar',               group: 'Components' },
   'c-avatar':          { label: 'Avatar',                group: 'Components' },
+  'c-accordion':       { label: 'Accordion',             group: 'Components' },
+  'c-alert':           { label: 'Alert',                 group: 'Components' },
+  'c-alert-dialog':    { label: 'Alert Dialog',          group: 'Components', parent: 'c-dialog' },
+  'c-aspect-ratio':    { label: 'Aspect Ratio',          group: 'Components' },
   'c-badge':           { label: 'Badges',                group: 'Components' },
+  'c-breadcrumb':      { label: 'Breadcrumb',            group: 'Components' },
   'c-button':          { label: 'Buttons',               group: 'Components' },
   'c-seg-btn':         { label: 'Segmented Button',      group: 'Components', parent: 'c-button' },
   'c-card':            { label: 'Cards',                 group: 'Components' },
@@ -20963,9 +21701,15 @@ const SECTIONS = {
   'c-charts':          { label: 'Charts',                group: 'Components' },
   'c-checkbox':        { label: 'Checkbox',              group: 'Components' },
   'c-chip':            { label: 'Chips',                 group: 'Components' },
+  'c-collapsible':     { label: 'Collapsible',           group: 'Components' },
   'c-date-picker':     { label: 'Date Picker',  group: 'Components' },
   'c-dialog':          { label: 'Dialog',                group: 'Components' },
   'c-divider':         { label: 'Divider',               group: 'Components' },
+  'c-hover-card':      { label: 'Hover Card',            group: 'Components' },
+  'c-label':           { label: 'Label',                 group: 'Components' },
+  'c-pagination':      { label: 'Pagination',            group: 'Components' },
+  'c-scroll-area':     { label: 'Scroll Area',           group: 'Components' },
+  'c-toggle':          { label: 'Toggle',                group: 'Components' },
   'c-empty':           { label: 'Empty State',         group: 'Foundations', parent: 'grid' },
   'c-input':           { label: 'Input',                 group: 'Components' },
   'c-kanban':          { label: 'Kanban Card',         group: 'Components', parent: 'c-card' },
