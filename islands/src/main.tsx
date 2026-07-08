@@ -92,7 +92,7 @@ import { ChipSceneRestaurant, ChipSceneDialog, ChipSceneTaskButton, ChipSceneTas
 
 import {
   ToggleShowcase, LabelShowcase, AccordionShowcase, AlertShowcase, BreadcrumbShowcase,
-  CollapsibleShowcase, HoverCardShowcase, ScrollAreaShowcase, AspectRatioShowcase,
+  CollapsibleShowcase, ScrollAreaShowcase, AspectRatioShowcase,
   PaginationShowcase, AlertDialogShowcase,
 } from "./islands/NewPrimitivesShowcase"
 
@@ -103,7 +103,6 @@ const registry: Record<string, ComponentType> = {
   "alert-showcase": AlertShowcase,
   "breadcrumb-showcase": BreadcrumbShowcase,
   "collapsible-showcase": CollapsibleShowcase,
-  "hover-card-showcase": HoverCardShowcase,
   "scroll-area-showcase": ScrollAreaShowcase,
   "aspect-ratio-showcase": AspectRatioShowcase,
   "pagination-showcase": PaginationShowcase,

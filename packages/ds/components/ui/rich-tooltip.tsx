@@ -12,6 +12,12 @@ import { cn } from "../lib/utils"
 // title, supporting text (subtitle) and an optional action row — unlike the plain
 // hover Tooltip, it is click/focus-triggered (Popover-based) so the pointer can
 // enter it to read or interact. Themed with Embassy surface tokens.
+//
+// This is Embassy's SINGLE "rich content overlay" pattern — we deliberately do NOT
+// ship a separate shadcn Hover Card (evaluated 2026-07 and dropped): it duplicated
+// this, and hover-only triggers are worse for touch/keyboard. For rich preview
+// content, use RichTooltip; for a plain text hint, use Tooltip. If you need fully
+// arbitrary content, compose Popover directly.
 
 export interface RichTooltipProps {
   /** The element that opens the tooltip (rendered via Radix `asChild`). */

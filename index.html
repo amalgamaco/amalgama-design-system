@@ -3574,9 +3574,6 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-textarea" onclick="navigate('c-textarea')">Textarea</div>
       <div class="ds-nav-item" data-section="c-toggle" onclick="navigate('c-toggle')">Toggle</div>
       <div class="ds-nav-item" data-section="c-tooltip" onclick="navigate('c-tooltip')">Tooltips</div>
-      <div class="ds-nav-sub">
-        <div class="ds-nav-item" data-section="c-hover-card" onclick="navigate('c-hover-card')">Hover Card</div>
-      </div>
     </nav>
   </div>
 
@@ -21124,55 +21121,6 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       </div>
     </section>
 
-    <!-- ═══════════ HOVER CARD ═══════════ -->
-    <section class="ds-section" id="s-c-hover-card">
-      <div class="ds-page-tag">Components · Communication</div>
-      <h1 class="ds-page-title">Hover Card</h1>
-      <p class="ds-page-desc">Vista previa enriquecida que aparece al pasar el mouse (o enfocar) un disparador.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Renderiza <code>HoverCard</code> (Radix UI) desde <code>@amalgama/ds/hover-card</code>, con la superficie de popover y el movimiento enter/exit de Embassy.</div>
-      <div data-island="component-tabs-nav"></div>
-      <div class="ds-comp-tab-panel active" data-tab="overview">
-        <section class="docs-section">
-          <p class="bd-lead">El Hover Card previsualiza contenido enriquecido (un perfil, el resumen de una vacante) al pasar el mouse sobre un enlace o nombre — solo cuando ese contenido es complementario, no esencial.</p>
-          <ul class="bd-overview-list">
-            <li><b>Composición shadcn:</b> <code>HoverCard</code> · <code>HoverCardTrigger</code> · <code>HoverCardContent</code>.</li>
-            <li>Se abre por hover/focus con delay; no es accionable por touch — no pongas ahí info crítica.</li>
-          </ul>
-          <div class="bd-family-wrap"><div data-island="hover-card-showcase"></div></div>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Cuándo usar</h2>
-          <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Previews complementarios de perfiles/entidades.</li><li>Contenido que enriquece pero no es indispensable.</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Info crítica para touch/teclado → <b>Popover</b> o navegar.</li><li>Texto corto de ayuda → <b>Tooltip</b>.</li></ul></div></div>
-          </div>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="accessibility">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Accesibilidad</h2>
-          <ul class="ds-a11y-list">
-            <li><span class="ds-a11y-icon">♿</span>Se abre también con foco de teclado, no solo con hover.</li>
-            <li><span class="ds-a11y-icon">♿</span>Es complementario por diseño: nunca coloques ahí la única vía a una acción o dato.</li>
-          </ul>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="code">
-        <section class="docs-section">
-          <h2 class="docs-section-title">React — @amalgama/ds</h2>
-          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-<pre class="docs-code"><code>import { HoverCard, HoverCardTrigger, HoverCardContent } from &quot;@amalgama/ds/hover-card&quot;
-
-&lt;HoverCard&gt;
-  &lt;HoverCardTrigger asChild&gt;&lt;a href=&quot;#&quot;&gt;@ana&lt;/a&gt;&lt;/HoverCardTrigger&gt;
-  &lt;HoverCardContent&gt;Ana Borthagaray · Product Designer&lt;/HoverCardContent&gt;
-&lt;/HoverCard&gt;</code></pre></div>
-        </section>
-      </div>
-    </section>
-
     <!-- ═══════════ PAGINATION ═══════════ -->
     <section class="ds-section" id="s-c-pagination">
       <div class="ds-page-tag">Components · Navigation</div>
@@ -21655,7 +21603,6 @@ const SECTIONS = {
   'c-date-picker':     { label: 'Date Picker',  group: 'Components' },
   'c-dialog':          { label: 'Dialog',                group: 'Components' },
   'c-divider':         { label: 'Divider',               group: 'Components' },
-  'c-hover-card':      { label: 'Hover Card',            group: 'Components', parent: 'c-tooltip' },
   'c-pagination':      { label: 'Pagination',            group: 'Components' },
   'c-scroll-area':     { label: 'Scroll Area',           group: 'Components' },
   'c-toggle':          { label: 'Toggle',                group: 'Components' },

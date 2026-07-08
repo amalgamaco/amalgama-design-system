@@ -7,7 +7,6 @@ import {
   Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator,
 } from "@ds/breadcrumb"
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@ds/collapsible"
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@ds/hover-card"
 import { ScrollArea } from "@ds/scroll-area"
 import { AspectRatio } from "@ds/aspect-ratio"
 import {
@@ -125,23 +124,6 @@ export function CollapsibleShowcase() {
         </div>
       </CollapsibleContent>
     </Collapsible>
-  )
-}
-
-/* ── Hover Card ── */
-export function HoverCardShowcase() {
-  return (
-    <HoverCard>
-      <HoverCardTrigger asChild>
-        <Button variant="text">@ana.borthagaray</Button>
-      </HoverCardTrigger>
-      <HoverCardContent>
-        <div className="flex flex-col gap-1">
-          <span className="text-body-md font-semibold text-fg">Ana Borthagaray</span>
-          <span className="text-body-sm text-on-surface-variant">Product Designer · Se unió en 2024</span>
-        </div>
-      </HoverCardContent>
-    </HoverCard>
   )
 }
 
