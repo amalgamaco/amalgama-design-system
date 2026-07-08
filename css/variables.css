@@ -356,6 +356,13 @@
   --shadow-md: 0 4px 16px rgba(28,36,56,.08);
   --shadow-lg: 0 8px 32px rgba(28,36,56,.12);
 
+  /* Elevated Button elevation (MD3 elevated button). A runtime var so it can flip in
+     dark — Tailwind inlines --shadow-* into utility classes (they can't recalibrate),
+     so the elevated button consumes THIS via shadow-[var(--btn-elevation)]. Slightly
+     stronger than the card --shadow-* so the lift reads clearly; black in dark. */
+  --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);
+  --btn-elevation-hover: 0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16);
+
   /* ─────────────────────────────────────
      Transitions
   ───────────────────────────────────── */
@@ -460,6 +467,11 @@
   --text-secondary: #BFC1C8; /* neutral-100 */
   --text-muted:     #747989; /* neutral-300 */
   --interactive-hover:   #909BBE; /* primary-200 */
+
+  /* Elevated Button elevation — black shadows so the lift is visible on dark surfaces
+     (the navy light shadows disappear against dark backgrounds). */
+  --btn-elevation:       0 1px 2px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.42);
+  --btn-elevation-hover: 0 2px 4px rgba(0,0,0,.60), 0 8px 20px rgba(0,0,0,.50);
 }
 
 /* Light-mode scoped override — permite usar data-theme="light" en un contenedor
@@ -525,4 +537,7 @@
   --text-secondary: #353A4A;                                     /* neutral-500 */
   --text-muted:     #747989;                                     /* neutral-300 */
   --interactive-hover: var(--primary-500);                       /* #253E82 */
+  /* Elevated Button — restore light (navy) elevation inside a light-scoped island */
+  --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);
+  --btn-elevation-hover: 0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16);
 }

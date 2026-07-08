@@ -94,7 +94,7 @@ Canonical component code is `packages/ds/components/ui/<name>.tsx` (Tailwind, se
 
 | Component | CSS — DELETED (`css/components/`) | React — canonical (`packages/ds/components/ui/`) | Docs page (`docs/` → redirect) |
 |---|---|---|---|
-| Button | `button.css` (`btn-primary/-secondary/-tertiary/-text`, `icon-btn`; sizes: `btn-xs/-sm/-lg/-xl`; modifiers: `btn-danger/-success/-compact`; radius scales with size: XS/SM→`--radius-sm`, MD/LG→`--radius-md`, XL→`--radius-lg`) | `button.tsx` | `button.html` |
+| Button | `button.css` (`btn-primary/-secondary/-tertiary/-text`, `icon-btn`; sizes: `btn-xs/-sm/-lg/-xl`; modifiers: `btn-danger/-success/-compact`; radius scales with size: XS/SM→`--radius-sm`, MD/LG→`--radius-md`, XL→`--radius-lg`) | `button.tsx` — variants: `primary`(filled) · `secondary`(tonal) · `elevated`(primary-container + real `--btn-elevation` shadow, theme-aware) · `tertiary`(outlined) · `text` · `icon` · `danger` · `success` · `next`. The `elevated` variant (2026-07) is the canonical Elevated Button everywhere — it replaced a fake `ghost` alias that had no shadow; the retired `ghost` variant was removed. | `button.html` |
 | **Segmented Button** | `segmented-button.css` (`seg-btn-group`, `seg-btn`, `seg-btn.selected`; sizes: `seg-btn-group-sm/-lg`; color roles: MD3 `secondaryContainer`/`onSecondaryContainer` for selected, `onSurface` for unselected, `outline` for border; state layers via `color-mix()`) | — | — |
 | Badge | `badge.css` (`badge badge-{open,active,closed,draft,archived,warning,tertiary,info}`) | `badge.tsx` | `badge.html` |
 | **Chip** | `chip.css` (`chip`, `chip-selected`, `chip-elevated`, `chip-icon`, `chip-remove`, `chip-set`) | `chip.tsx` (`Chip`, `InputChip`, `ChipSet`) | `chip.html` |

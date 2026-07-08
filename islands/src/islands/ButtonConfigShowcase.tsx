@@ -26,6 +26,7 @@ export function ButtonConfigShowcase() {
       <div className="bd-cfg-row">
         <div className="bd-cfg-num">2</div>
         <div className="bd-cfg-items">
+          <div className="bd-cfg-item-col"><Button variant="elevated" style={noPtr}>Elevado</Button></div>
           <div className="bd-cfg-item-col"><Button variant="primary" style={noPtr}>Relleno</Button></div>
           <div className="bd-cfg-item-col"><Button variant="secondary" style={noPtr}>Tonal</Button></div>
           <div className="bd-cfg-item-col"><Button variant="tertiary" style={noPtr}>Con borde</Button></div>

@@ -5174,19 +5174,6 @@ body { overflow-x: clip; }
           min-width: 100px;
           justify-content: center;
         }
-        /* Elevated — approximation (not an Embassy class) */
-        .bd-family-elevated {
-          display: inline-flex; align-items: center; justify-content: center;
-          padding: 8px 20px;
-          border: 1px solid transparent;
-          border-radius: var(--radius-md);
-          background: var(--color-surface-container);
-          color: var(--color-primary);
-          font-family: var(--font-body); font-size: var(--font-size-body-md); font-weight: 600; line-height: 1.2;
-          box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.08);
-          min-width: 100px;
-          cursor: default;
-        }
         .bd-family-num {
           width: 22px; height: 22px;
           border-radius: 50%;
@@ -5460,7 +5447,7 @@ body { overflow-x: clip; }
                 </tr>
                 <tr>
                   <td>Color</td>
-                  <td>Relleno (predeterminado), tonal, elevado, con borde, texto <span style="color:var(--ds-text-3);font-size:12px">· Elevado sin clase CSS — aplicar tokens directamente (ver Specs)</span></td>
+                  <td>Relleno (predeterminado), tonal, elevado, con borde, texto <span style="color:var(--ds-text-3);font-size:12px">· <code>variant="elevated"</code> — contenedor <code>primary-container</code> + <code>--btn-elevation</code> (sombra visible en claro y oscuro)</span></td>
                 </tr>
                 <tr>
                   <td rowspan="2">Padding del botón</td>
@@ -5515,7 +5502,7 @@ body { overflow-x: clip; }
                     <tbody>
                       <tr><td><code>--color-primary-container</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#D7DEFB;border-color:#ccc"></span> #D7DEFB</span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#475993"></span> #475993</span></td></tr>
                       <tr><td><code>--color-on-primary-container</code></td><td>Etiqueta / ícono</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#01164D"></span> #01164D</span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#E4E7EF;border-color:#ccc"></span> #E4E7EF</span></td></tr>
-                      <tr><td><code>--shadow-sm</code></td><td>Sombra (elevación 1)</td><td colspan="2" class="bt-tok-note"><code>0 1px 3px rgba(28,36,56,.06)</code> — se intensifica sobre fondos oscuros</td></tr>
+                      <tr><td><code>--btn-elevation</code></td><td>Sombra (elevación 1)</td><td colspan="2" class="bt-tok-note"><code>0 1px 2px + 0 2px 6px</code> — navy en claro, <b>recalibra a negro en dark</b> para seguir visible (token runtime, no <code>--shadow-*</code> que Tailwind inlinea)</td></tr>
                       <tr><td>transparent</td><td>Border</td><td colspan="2" class="bt-tok-note">Sin borde</td></tr>
                     </tbody></table>
                   </div>
@@ -5532,7 +5519,7 @@ body { overflow-x: clip; }
                     <tbody>
                       <tr><td><code>color-mix(in srgb, var(--color-on-primary-container) 8%, var(--color-primary-container))</code></td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Capa de estado 8% on-primary-container sobre el contenedor base (MD3 state layer)</td></tr>
                       <tr><td><code>--color-on-primary-container</code></td><td>Etiqueta / ícono</td><td colspan="2" class="bt-tok-note">Sin cambios respecto a Habilitado</td></tr>
-                      <tr><td><code>--shadow-md</code></td><td>Sombra (elevación 2)</td><td colspan="2" class="bt-tok-note"><code>0 4px 16px rgba(28,36,56,.08)</code> — la elevación aumenta al hacer hover</td></tr>
+                      <tr><td><code>--btn-elevation-hover</code></td><td>Sombra (elevación 2)</td><td colspan="2" class="bt-tok-note"><code>0 2px 4px + 0 6px 16px</code> — la elevación aumenta al hacer hover (también recalibra a negro en dark)</td></tr>
                       <tr><td><code>translateY(-1px)</code></td><td>Elevación visual</td><td colspan="2" class="bt-tok-note">Desplazamiento cosmético de 1px hacia arriba</td></tr>
                     </tbody></table>
                   </div>
@@ -5564,7 +5551,7 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td><code>color-mix(in srgb, var(--color-on-primary-container) 12%, var(--color-primary-container))</code></td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Capa de estado 12% on-primary-container sobre el contenedor base (MD3 pressed)</td></tr>
-                      <tr><td><code>--shadow-sm</code></td><td>Sombra (elevación 1)</td><td colspan="2" class="bt-tok-note">La sombra vuelve al nivel base al presionar</td></tr>
+                      <tr><td><code>--btn-elevation</code></td><td>Sombra (elevación 1)</td><td colspan="2" class="bt-tok-note">La elevación vuelve al nivel base al presionar</td></tr>
                       <tr><td><code>translateY(0)</code></td><td>Elevación visual</td><td colspan="2" class="bt-tok-note">El desplazamiento cosmético vuelve a cero</td></tr>
                     </tbody></table>
                   </div>
@@ -6687,7 +6674,7 @@ function setLoading(btn, isLoading) {
 // Componente (shadcn/Radix + cva, ya estilado con tokens Embassy)
 import { Button } from &quot;@amalgama/ds/button&quot;
 
-// Variantes: primary · secondary · tertiary · text · icon · danger · success · ghost
+// Variantes: primary · secondary · tertiary · text · icon · danger · success · elevated
 // Tamaños:   xs · sm · (default) · lg · xl      ·      prop booleana: compact
 &lt;Button variant=&quot;primary&quot; onClick={handleSubmit}&gt;Publicar vacante&lt;/Button&gt;
 &lt;Button variant=&quot;secondary&quot; size=&quot;sm&quot;&gt;Guardar borrador&lt;/Button&gt;

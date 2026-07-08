@@ -3,7 +3,7 @@ import { Button } from "@ds/button"
 // Reuses the page's .bd-family-* layout so the Overview diagram is unchanged —
 // only the rendered buttons are now the shadcn <Button> component.
 const families = [
-  { variant: "ghost", label: "Elevado" },
+  { variant: "elevated", label: "Elevado" },
   { variant: "primary", label: "Relleno" },
   { variant: "secondary", label: "Tonal" },
   { variant: "tertiary", label: "Con borde" },

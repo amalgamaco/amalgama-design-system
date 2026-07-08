@@ -9,7 +9,7 @@ import { cn } from "../lib/utils"
    <CreateHeader><CreateTitle>Crear vacante</CreateTitle></CreateHeader>
    {/* form fields */}
    <CreateFooter>
-     <Button variant="ghost">Cancelar</Button>
+     <Button variant="tertiary">Cancelar</Button>
      <Button>Publicar</Button>
    </CreateFooter>
 */

@@ -23,6 +23,14 @@ const buttonVariants = cva(
       variant: {
         primary:
           "px-6 py-2 rounded-md bg-primary text-on-primary border-transparent hover:bg-primary-hover hover:-translate-y-px active:brightness-[0.88] active:translate-y-0 active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed disabled:translate-y-0 disabled:shadow-none",
+        // Elevated (MD3 elevated button): tonal primary-container fill + a real shadow that
+        // GROWS on hover (elevation 1 → 2) and returns on press — this shadow is the whole
+        // point of the variant, and it's what makes it read distinctly from Filled (opaque
+        // primary, no shadow) and Outlined (transparent + border). Shadow tokens gain a
+        // dark-mode override (variables.css / theme) so the elevation is visible on dark
+        // surfaces too. Hover/press use MD3 state layers over the container.
+        elevated:
+          "px-6 py-2 rounded-md bg-primary-container text-on-primary-container border-transparent shadow-[var(--btn-elevation)] hover:bg-[color-mix(in_srgb,var(--color-on-primary-container)_8%,var(--color-primary-container))] hover:shadow-[var(--btn-elevation-hover)] hover:-translate-y-px active:bg-[color-mix(in_srgb,var(--color-on-primary-container)_12%,var(--color-primary-container))] active:shadow-[var(--btn-elevation)] active:translate-y-0 active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:border-transparent disabled:shadow-none disabled:translate-y-0 disabled:cursor-not-allowed",
         secondary:
           "px-6 py-2 rounded-md bg-secondary-container text-on-secondary-container border-transparent hover:bg-secondary-container-hover hover:-translate-y-px active:brightness-[0.92] active:translate-y-0 active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
         tertiary:
@@ -37,8 +45,6 @@ const buttonVariants = cva(
           "px-6 py-2 rounded-md bg-success text-on-success border-transparent hover:bg-success-hover hover:-translate-y-px active:brightness-[0.88] active:translate-y-0 active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
         next:
           "px-6 py-2 rounded-md bg-primary text-on-primary border-transparent hover:bg-primary-hover active:brightness-[0.88] active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
-        ghost:
-          "px-6 py-2 rounded-md bg-transparent border-outline text-primary font-medium hover:bg-surface-variant hover:border-primary active:bg-surface-container-high active:scale-[0.96] disabled:bg-transparent disabled:border-outline-variant disabled:text-on-disabled disabled:cursor-not-allowed",
       },
       size: {
         default: "",

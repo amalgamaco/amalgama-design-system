@@ -96,7 +96,8 @@ const BUTTON_TOKENS: TokenGroup[] = [
     { token: "--radius-lg", role: "Radio", usage: "Botón XL." },
   ]},
   { category: "Elevación", rows: [
-    { token: "--shadow-sm", role: "Sombra", usage: "Variante elevada (elevated)." },
+    { token: "--btn-elevation", role: "Sombra (elevación 1)", usage: "Reposo de la variante elevada — recalibra a negro en dark para seguir visible." },
+    { token: "--btn-elevation-hover", role: "Sombra (elevación 2)", usage: "La elevación crece al hacer hover; vuelve a --btn-elevation al presionar." },
   ]},
   { category: "Movimiento", rows: [
     { token: "--duration-fast", role: "Duración", usage: "Transición de color/elevación en hover/press." },

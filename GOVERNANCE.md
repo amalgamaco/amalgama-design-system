@@ -655,7 +655,7 @@ These are documented deviations from the rules in this document. They exist in t
 
 | Issue | Description | Correct pattern | Priority |
 |---|---|---|---|
-| Shadows (no dark mode) | `--shadow-sm/md/lg` have no dark mode override — nearly invisible on dark surfaces | Add `[data-theme="dark"]` shadow overrides in `variables.css` | Medium |
+| Shadows (no dark mode) | `--shadow-sm/md/lg` have no dark mode override — nearly invisible on dark surfaces. Note: Tailwind v4 *inlines* these into `.shadow-*` utilities (e.g. `box-shadow: … #1c24380f`), so a `[data-theme="dark"]` override of `--shadow-*` does NOT reach them. The fix is a **runtime var consumed via `shadow-[var(--token)]`** — see `--btn-elevation`/`--btn-elevation-hover` (2026-07), the theme-aware elevation token the Elevated Button uses (navy in light, black in dark). Apply the same pattern to Card/Dialog/etc. shadows. | Medium |
 | Icon button fragmentation | 5 separate icon-button implementations (`.icon-btn`, `.modal-close`, `.more-btn`, `.desc-delete-btn`, `.toast-close`) with inconsistent sizes (36/32/28/28/24px) and tokens | Extend `.icon-btn` with `ghost` modifier; standardize all to use it | High |
 | Clickable card hover inconsistency | 4 different hover strategies across vacancy-card, person-card, kanban-card, data-table rows | Standard: `border → --color-outline-variant` + `box-shadow: var(--shadow-md)` + `transform: translateY(-1px)` | Medium |
 | Avatar container fragmentation | 3 incompatible avatar patterns (semantic container, primitive gradient, alias bg) | Define shared avatar pattern with 3 size tokens; all use semantic container pairs | High |

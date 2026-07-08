@@ -218,10 +218,23 @@
   --shadow-md: 0 4px 16px rgba(28,36,56,.08);
   --shadow-lg: 0 8px 32px rgba(28,36,56,.12);
 
+  /* Elevated Button elevation — runtime var (flips in dark, see below); the elevated
+     button consumes it via shadow-[var(--btn-elevation)] since Tailwind inlines
+     --shadow-* into utilities and they can't recalibrate for dark. */
+  --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);
+  --btn-elevation-hover: 0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16);
+
   /* Modal / overlay animations (mirrors packages/ds/tailwind.theme.css) */
   --animate-fade-in:        fadeIn var(--duration-normal) var(--ease-enter) both;
   --animate-slide-in-up:    slideInUp var(--duration-medium) var(--ease-enter) both;
   --animate-slide-in-right: slideInRight var(--duration-normal) var(--ease-enter) both;
+}
+
+/* ── Elevated Button: black elevation in dark so the lift stays visible (the navy
+   light shadow disappears on dark surfaces). Mirrors css/variables.css. ── */
+[data-theme="dark"] {
+  --btn-elevation:       0 1px 2px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.42);
+  --btn-elevation-hover: 0 2px 4px rgba(0,0,0,.60), 0 8px 20px rgba(0,0,0,.50);
 }
 
 /* ── Keyframes for modal / overlay animations ── */
