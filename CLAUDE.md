@@ -162,8 +162,24 @@ Every component CSS header now carries a **`Cuándo usar / Cuándo no / Reemplaz
 | Usage guidelines / specs / accessibility (human depth) | root `index.html` |
 | Migration / restyling rules | `MIGRATION.md` |
 | Cross-component consistency rules, state patterns, audit checklist | `GOVERNANCE.md` |
+| **UX principles, laws/heuristics, interaction patterns — how to build a good *screen*** | **`guidelines/` (the Playbook)** — see below |
 
 The `docs/*.html` pages are retired redirect stubs — never read or cite them as a source.
+
+### The Playbook (`guidelines/`) — how to build great screens, not just correct components
+
+`GOVERNANCE.md` and the component docs tell you *what* is token-correct; the **`guidelines/`**
+directory tells you *whether the screen is any good*. It is the product-thinking layer: UX
+laws & heuristics, information architecture, visual hierarchy, content/UX writing,
+accessibility, motion, and pattern playbooks (forms, tables, navigation, dashboards,
+feedback/empty/loading/error states, responsive layout). Same content is mirrored on the
+docs site under the **Playbook** nav group (Spanish).
+
+**When generating or reviewing any new screen with Embassy, consult the relevant guide(s)
+first** — start at [`guidelines/README.md`](guidelines/README.md). Rule of thumb: frame with
+IA + visual hierarchy → pick the pattern guide → design empty/loading/error/success states
+up front → write the copy → check the per-guide checklist (accessibility, motion, responsive)
+before declaring it done. Token-correct but unusable is not done.
 
 ---
 

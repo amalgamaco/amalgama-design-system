@@ -122,8 +122,17 @@ cat /tmp/amalgama-ds/MIGRATION.md       # mandatory for any existing-product wor
 | Per-component decision rule (`Cuándo usar / Cuándo no / Reemplaza a`) | `packages/ds/components/ui/<name>.tsx` header comment (migrated from the deleted buildless CSS) |
 | Specs, guidelines, accessibility | root `index.html` (single-page app — canonical) |
 | Migration / restyling rules | `MIGRATION.md` |
+| **UX principles / heuristics / interaction patterns (how to build a good screen)** | **`guidelines/` — the Playbook** |
 
 **`docs/*.html` are retired** — they are now redirect stubs pointing at the canonical SPA (`index.html`). Never read or cite them as a source.
+
+> **Building a whole screen, not just dropping in a component? Read the Playbook.**
+> `guidelines/` holds Embassy's UX principles and pattern playbooks (UX laws & heuristics,
+> information architecture, visual hierarchy, content/writing, accessibility, motion; and
+> forms, tables, navigation, dashboards, feedback/empty/loading/error states, responsive).
+> Start at `guidelines/README.md`, then read the guide for the pattern you're building. A
+> screen that is token-correct but ignores these (no empty/error states, wrong action
+> hierarchy, unusable on mobile) is **not** done. `cat /tmp/amalgama-ds/guidelines/README.md`
 
 For each component you are about to use:
 
