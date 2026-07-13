@@ -56,7 +56,7 @@ Fonts: **Inter** (body/UI), **Epilogue** (headings), **DM Mono** (code/labels) �
 
 **Icons: Lucide** (CDN `unpkg.com/lucide`, `<i data-lucide="…">` + `lucide.createIcons()`), stroke inherits `currentColor`. 18px inside chips/inputs, 20px in nav, 24px in search bars. One icon set per product — never mix.
 
-**Breakpoints**: canonical values `--breakpoint-md: 768px`, `--breakpoint-lg: 1024px` live in `variables.css` (media queries can't consume `var()` — use the literal values and keep them in sync). The mobile sidebar/shell pattern is a pending design decision — flag it, don't improvise off-canvas patterns.
+**Breakpoints**: canonical values `--breakpoint-md: 768px`, `--breakpoint-lg: 1024px` live in `variables.css` (media queries can't consume `var()` — use the literal values and keep them in sync). **Mobile shell (resolved 2026-07):** below 768px the app-shell sidebar is a **modal navigation drawer** — off-canvas, slides in over a scrim on `.app.nav-open`, toggled by the `.shell-menu-btn` hamburger; shipped in `css/layout.css`, spec in GOVERNANCE.md §14.3. Use it; don't invent a different mobile nav.
 
 **Typography color is brand navy, not black.** Page text — headings AND body — uses `var(--text-primary)` = `primary-900` (`#01164D`) in light mode, recalibrated to `#EAEBED` in dark. Secondary text: `var(--text-secondary)`. `--color-on-surface` (near-black `#0A0C12`) is reserved for content *inside* components (chip labels, button text, table cells) — never for page typography. If Embassy page text renders black, a token is misapplied.
 

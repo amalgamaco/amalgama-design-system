@@ -756,9 +756,26 @@ The sidebar is `240px` wide (fixed). The topbar is `60px` tall (fixed). `shell-m
 @media (max-width: var(--breakpoint-md)) { … }
 ```
 
-### 14.3 Mobile shell (pending)
+### 14.3 Mobile shell — modal navigation drawer (resolved 2026-07)
 
-The mobile sidebar behavior (collapse, off-canvas drawer, hamburger trigger) is a **pending design decision**. Do not improvise mobile nav patterns. Flag any screen that requires sub-768px nav behavior and defer to the design team. Once specified, this document will be updated.
+Below `--breakpoint-md` (768px) the persistent sidebar becomes a **modal navigation drawer** — Embassy's canonical mobile nav pattern (MD3's modal-vs-standard drawer split; the sidebar *is* the Navigation Drawer, modal on compact and standard/persistent on expanded). This is specified — do not improvise a different one.
+
+**Behavior**
+
+| Width | Sidebar | Content | Trigger |
+|---|---|---|---|
+| **≥ 768px** | Persistent, fixed, 240px | Offset by `margin-left: var(--sidebar-width)` | none |
+| **< 768px** | Off-canvas (`translateX(-100%)`), slides in over a scrim when the shell root has `.nav-open` | Full-width (`margin-left: 0`) | `.shell-menu-btn` hamburger in the topbar |
+
+**Rules**
+- Implemented in `layout.css`: `.shell-menu-btn` (hamburger, hidden ≥768, ≥44px target, first in `.topbar`), `.sidebar-scrim` (fixed scrim at `z-index:9`, uses `--color-scrim`), and `@media (max-width:768px)` rules that take the sidebar off-canvas and slide it in on `.app.nav-open`. Media queries use the literal `768px` (`@media` can't read `var()`).
+- Motion uses `--duration-medium`/`--ease-default`; a `prefers-reduced-motion` block drops the slide.
+- The drawer is **modal** on compact: it overlays content on a scrim, does not push it.
+- **Accessibility (required):** the hamburger has `aria-label`, `aria-expanded`, and `aria-controls` pointing at the sidebar (`role="navigation"`); opening moves focus into the drawer; `Esc` and a scrim click close it; focus returns to the hamburger on close. Same contract as `Sheet`/`Dialog`.
+- Consuming apps add the ~10 lines of JS that toggle `.nav-open` on `.app` and handle Esc/scrim/focus — the CSS and structure are canonical; the toggle is app-owned.
+- `Sheet` (side variant) remains for *content* side panels (filters, detail) — it is **not** the primary-nav drawer.
+
+> Class-name note: this section and the `layout.css` implementation use `.app` / `.sidebar` / `.topbar` / `.main` (the shipped classes). §14.1's example uses aspirational `.app-shell`/`.shell-*` names — a pre-existing doc/code drift to reconcile in a future pass; follow `layout.css` for what actually works.
 
 ### 14.4 Content width
 

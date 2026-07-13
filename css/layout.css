@@ -191,3 +191,63 @@
   font-size: var(--font-size-label); font-weight: 500; cursor: pointer;
   display: flex; align-items: center; gap: 4px;
 }
+
+/* ═══════════════════════════════════════
+   MOBILE SHELL — canonical modal navigation drawer (resolved 2026-07)
+
+   ≥768px (--breakpoint-md): the sidebar is persistent/fixed (the rules above).
+   <768px: it becomes a MODAL NAVIGATION DRAWER — off-canvas by default, slides
+   in over a scrim when the shell root gets `.nav-open`, toggled by the topbar
+   hamburger (.shell-menu-btn). This is MD3's modal-vs-standard drawer split,
+   reusing Embassy's Navigation Drawer language. Media queries use the literal
+   768px because @media can't read var(--breakpoint-md).
+
+   Consuming app wires ~10 lines of JS: the hamburger toggles `.nav-open` on
+   `.app`; Esc and a scrim click remove it; on open move focus into the sidebar,
+   on close return it to the hamburger. See GOVERNANCE §14.3.
+═══════════════════════════════════════ */
+
+/* Hamburger — only shown on compact; ≥44px touch target. Place first in .topbar. */
+.shell-menu-btn {
+  display: none;
+  width: 40px; height: 40px; margin-right: 4px;
+  align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  background: var(--bg); color: var(--text-secondary);
+  cursor: pointer;
+}
+.shell-menu-btn:hover { background: var(--interactive-light); }
+.shell-menu-btn:focus-visible {
+  outline: 2px solid var(--color-focus); outline-offset: 2px;
+}
+
+/* Scrim behind the modal drawer — sits below the sidebar (z-index 10), above content. */
+.sidebar-scrim {
+  display: none;
+  position: fixed; inset: 0; z-index: 9;
+  background: var(--color-scrim);
+  opacity: 0; transition: opacity var(--duration-normal) var(--ease-default);
+}
+
+@media (max-width: 768px) {
+  /* Sidebar off-canvas by default; slides in as a modal drawer when open. */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform var(--duration-medium) var(--ease-default);
+    box-shadow: var(--shadow-lg);
+  }
+  .app.nav-open .sidebar { transform: translateX(0); }
+
+  /* Content reclaims full width; the hamburger appears in the topbar. */
+  .main { margin-left: 0; }
+  .shell-menu-btn { display: inline-flex; }
+
+  /* Scrim shown while the drawer is open. */
+  .app.nav-open .sidebar-scrim { display: block; opacity: 1; }
+}
+
+/* Respect reduced-motion — no slide, just show/hide. */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar { transition: none; }
+  .sidebar-scrim { transition: none; }
+}

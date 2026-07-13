@@ -21927,7 +21927,7 @@ import { Bold } from &quot;lucide-react&quot;
           <li><b>Estado activo claro</b> (<code>aria-current</code> + los tokens compartidos <code>--color-nav-*</code>, el «hover azul»); el activo se distingue del hover.</li>
           <li><b>Acciones de overflow</b> en un <code>Dropdown Menu</code>, no amontonadas.</li>
           <li><b>Profundidad baja</b> (ver <a href="#" onclick="navigate('pb-ia');return false;">IA</a>): preferí ancho sobre anidamiento.</li>
-          <li><b>Mobile:</b> el patrón de sidebar off-canvas es una decisión de diseño pendiente — marcala, no improvises un patrón propio.</li>
+          <li><b>Mobile:</b> debajo de 768px el sidebar es un <b>modal navigation drawer</b> (resuelto jul-2026) — off-canvas que entra sobre un scrim con <code>.nav-open</code>, disparado por la hamburguesa <code>.shell-menu-btn</code> del topbar; vive en <code>layout.css</code>. Usalo, no inventes otro.</li>
         </ul>
       </section>
       <section class="docs-section">
@@ -22034,7 +22034,7 @@ import { Bold } from &quot;lucide-react&quot;
           <li><b>Targets táctiles ≥ 44px</b> en mobile.</li>
           <li><b>Búsqueda responsive:</b> <code>SearchBar</code> (hero mobile) vs <code>SearchField</code> (toolbar desktop) — misma familia, distinta forma.</li>
           <li><b>Tablas en chico:</b> scroll horizontal o fallback a tarjetas (ver <a href="#" onclick="navigate('pb-tables');return false;">Tablas</a>).</li>
-          <li><b>Sidebar en mobile:</b> el patrón off-canvas es una decisión pendiente — marcala, no improvises.</li>
+          <li><b>Sidebar en mobile:</b> <b>modal navigation drawer</b> (resuelto jul-2026) — debajo de 768px el sidebar sale off-canvas y entra sobre un scrim (<code>.app.nav-open</code>), con hamburguesa <code>.shell-menu-btn</code>; en <code>layout.css</code>, spec en GOVERNANCE §14.3. Contrato a11y como <code>Sheet</code>/<code>Dialog</code> (foco al abrir, <code>Esc</code>/scrim cierran).</li>
         </ul>
       </section>
       <section class="docs-section">

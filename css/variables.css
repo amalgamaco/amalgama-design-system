@@ -334,8 +334,9 @@
      valores literales en @media y mantenelos sincronizados con estos tokens.
        md  768px  — debajo: layout de columna única; grids colapsan
        lg 1024px  — debajo: contenido compacto; sidebar puede colapsar
-     El comportamiento del shell (sidebar) en mobile es una decisión de
-     diseño PENDIENTE — no improvisar un patrón off-canvas. */
+     Shell en mobile (resuelto jul-2026): debajo de 768px el sidebar es un
+     modal navigation drawer (off-canvas + scrim + hamburguesa .shell-menu-btn)
+     — implementado en layout.css, spec en GOVERNANCE.md §14.3. */
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
 

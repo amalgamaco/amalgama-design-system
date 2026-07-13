@@ -90,7 +90,7 @@ A typical recruiting table screen, top to bottom: a row of `Stat Card` KPIs → 
 
 - **Let the table scroll horizontally** inside its `overflow-x-auto` wrapper as the first line of defense on tablet.
 - **On phones, prefer collapsing** each row into a stacked `Card` (label: value pairs) or switching the whole view to a `List` — a many-column table is unusable at 375px. Decide per screen which columns are essential; hide the rest below `--breakpoint-md` (768px).
-- The mobile app-shell/off-canvas nav is a **pending design decision** (GOVERNANCE §14.3) — don't improvise a mobile nav around the table; flag it if a screen needs sub-768px shell behavior.
+- Below 768px the app-shell sidebar is the canonical **modal navigation drawer** (GOVERNANCE §14.3) — rely on it; don't build a bespoke mobile nav around the table.
 
 ## Accessibility
 
@@ -138,5 +138,5 @@ A typical recruiting table screen, top to bottom: a row of `Stat Card` KPIs → 
 
 - [forms.md](forms.md) — creating and editing the records these views list.
 - Components: `Table` (`DataTable` and parts), `List`, `Card`, `Vacancy Card`, `Person Card`, `Toolbar` (`SearchField`/`Select`/`ToolbarButton`/`ResultCount`), `Search` (`SearchBar`), `Pagination`, `Badge`, `Empty State`, `Skeleton`, `Alert`, `Checkbox`, `Alert Dialog`, `Stat Card`, `Kanban`.
-- `GOVERNANCE.md` — §5.1 border tiers, §7 spacing, §14.4 widths, §14.6 grid, §14.3 mobile shell (pending).
+- `GOVERNANCE.md` — §5.1 border tiers, §7 spacing, §14.4 widths, §14.6 grid, §14.3 mobile modal navigation drawer.
 - `CLAUDE.md` — component inventory, table/list/card decision rules, responsive & breakpoint rules.

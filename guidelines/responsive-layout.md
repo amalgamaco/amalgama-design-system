@@ -4,7 +4,7 @@
 
 ## Why it matters
 
-The same product runs on a recruiter's phone and on a manager's 1440px monitor. A layout that only looks right at one width is half-built. Embassy encodes the responsive contract in tokens — two breakpoints (`--breakpoint-md`, `--breakpoint-lg`), a 4px spacing grid (`--space-*`), an app-shell structure, and two Search variants — so responsiveness is a matter of *applying* the system, not hand-tuning pixels per device. One caveat is unresolved: the sub-768px sidebar behavior is a **pending design decision** — flag it, don't improvise.
+The same product runs on a recruiter's phone and on a manager's 1440px monitor. A layout that only looks right at one width is half-built. Embassy encodes the responsive contract in tokens — two breakpoints (`--breakpoint-md`, `--breakpoint-lg`), a 4px spacing grid (`--space-*`), an app-shell structure, and two Search variants — so responsiveness is a matter of *applying* the system, not hand-tuning pixels per device. The one previously-open question, the sub-768px sidebar, is now resolved: it's a **modal navigation drawer** (see below).
 
 ## Mobile-first
 
@@ -100,9 +100,9 @@ A wide `Table` cannot shrink to 375px without becoming unreadable. Two sanctione
 
 Pick scroll for dense/exploratory data, card fallback for the main content view.
 
-## Mobile sidebar — pending, do not improvise
+## Mobile sidebar — modal navigation drawer
 
-The sub-768px sidebar behavior (collapse, off-canvas drawer, hamburger trigger) is an **open design decision** (GOVERNANCE §14.3). Do **not** invent an off-canvas pattern, a custom hamburger, or a bespoke drawer. If a screen needs sub-768px navigation, **flag it and defer to the design team**. (When you need a temporary side panel for *content* — filters, detail — `Sheet` exists; that is not a substitute for the unresolved primary-nav decision.)
+Below `--breakpoint-md` (768px) the persistent sidebar becomes a **modal navigation drawer** (resolved 2026-07, GOVERNANCE §14.3), shipped in `layout.css`: the `.sidebar` goes off-canvas (`translateX(-100%)`) and slides in over a `.sidebar-scrim` when the shell root (`.app`) gets `.nav-open`; a `.shell-menu-btn` hamburger in the topbar toggles it; content goes full-width. Motion uses `--duration-medium`/`--ease-default` and drops under `prefers-reduced-motion`. The app supplies ~10 lines of JS to toggle `.nav-open` and manage focus (open → focus into drawer; `Esc`/scrim-click → close → focus back to hamburger) — same a11y contract as `Sheet`/`Dialog`. Use this pattern; don't invent a bespoke one. (For a *content* side panel — filters, detail — `Sheet` side variant is the tool; it's not the primary-nav drawer.)
 
 ## Do / Don't
 
@@ -119,7 +119,7 @@ The sub-768px sidebar behavior (collapse, off-canvas drawer, hamburger trigger) 
 
 - Write `@media (max-width: var(--breakpoint-md))` — media queries can't read `var()`.
 - Set `max-width` inside a component — constrain at the page level.
-- Improvise a mobile off-canvas sidebar — it's a pending decision; flag it.
+- Invent a bespoke mobile sidebar — use the canonical modal navigation drawer (`layout.css`).
 - Let a table overflow the viewport — wrap in scroll or fall back to cards.
 - Reach for arbitrary spacing (`10px`, `6px`) instead of the `--space-*` grid.
 

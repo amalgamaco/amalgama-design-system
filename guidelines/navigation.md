@@ -68,9 +68,9 @@ When a row or header has more actions than fit, collapse the secondary ones into
 
 Deep nesting hides destinations and forces long breadcrumbs. Favor a flat information architecture: global sections in the sidebar, peer views in Tabs, mode switches in Segmented Button. If a screen needs more than ~3 hierarchy levels, that is an IA smell — flag it rather than papering over it with nested menus. One Primary action per context (CLAUDE.md migration rule 3): if a legacy screen has several equal-weight nav actions, introduce hierarchy instead of replicating the flatness.
 
-## Mobile / off-canvas — pending, do not improvise
+## Mobile — modal navigation drawer
 
-The sub-768px sidebar behavior (collapse, off-canvas drawer, hamburger trigger) is a **documented pending design decision** (GOVERNANCE.md §14.3). Do **not** invent an off-canvas pattern. If a screen requires mobile nav behavior, flag it and defer to the design team. Breakpoint values (`--breakpoint-md: 768px`, `--breakpoint-lg: 1024px`) live in `variables.css`; media queries use the literals since `@media` can't read `var()`.
+Below `--breakpoint-md` (768px) the sidebar becomes a **modal navigation drawer** (resolved 2026-07, GOVERNANCE.md §14.3): off-canvas by default, sliding in over a scrim when the shell root gets `.nav-open`, toggled by the topbar hamburger (`.shell-menu-btn`). At ≥768px it stays persistent. The sidebar *is* the Navigation Drawer — modal on compact, standard on expanded (the MD3 split). The behavior ships in `layout.css`; the app wires ~10 lines of JS to toggle `.nav-open` and manage focus. Accessibility contract (same as `Sheet`/`Dialog`): hamburger with `aria-label`/`aria-expanded`/`aria-controls`, focus moves into the drawer on open, `Esc` and scrim-click close, focus returns to the hamburger. `Sheet` (side variant) is for *content* panels, not primary nav. Media queries use the literal `768px` (`@media` can't read `var()`).
 
 ## Do / Don't
 
@@ -81,7 +81,7 @@ The sub-768px sidebar behavior (collapse, off-canvas drawer, hamburger trigger) 
 - **Don't** put a view-specific action (e.g. "Nueva vacante") in the topbar — it goes in the view's `Toolbar`/`PageHeader`.
 - **Don't** use `--color-primary` for a `packages/ds` selected state, or rely on color alone to show selection.
 - **Don't** use a one-item Breadcrumb where a `Back Link` is meant, or a `Back Link` for primary navigation.
-- **Don't** improvise a mobile off-canvas sidebar — it's a pending decision.
+- **Do** use the canonical modal navigation drawer below 768px (`layout.css` off-canvas sidebar + `.shell-menu-btn` + scrim); don't invent a different mobile nav.
 - **Don't** nest destinations more than ~3 levels deep; flatten the IA instead.
 
 ## Checklist for a new screen
@@ -95,11 +95,11 @@ The sub-768px sidebar behavior (collapse, off-canvas drawer, hamburger trigger) 
 - [ ] All nav/menu hover, pressed, and selected states use the `--color-nav-*` tokens (blue hover).
 - [ ] Focus is `focus-visible:focus-ring` on every interactive nav element.
 - [ ] Overflow actions collapse into a `DropdownMenu`; one Primary action per context.
-- [ ] No sub-768px nav improvised — flagged as pending if required.
+- [ ] Below 768px the sidebar uses the canonical modal navigation drawer (off-canvas + `.shell-menu-btn` + scrim + focus/Esc handling), not an improvised pattern.
 
 ## Related
 
 - [dashboards.md](dashboards.md) — dashboard layout, KPIs, and drill-down navigation
-- Components: **Tabs**, **Segmented Button**, **Select**, **Breadcrumb**, **Back Link**, **Toolbar** (`SearchField` / `ToolbarButton` / `ResultCount`), **Page Header**, **Dropdown Menu**, **List**, **Search** (`SearchBar` / `SearchField`)
-- `GOVERNANCE.md` §5.4 (nav hover), §5.6 (selected state), §14 (layout / app shell / mobile-pending)
+- Components: **Tabs**, **Segmented Button**, **Select**, **Breadcrumb**, **Back Link**, **Toolbar** (`SearchField` / `ToolbarButton` / `ResultCount`), **Page Header**, **Dropdown Menu**, **List**, **Search** (`SearchBar` / `SearchField`), **Navigation Drawer**
+- `GOVERNANCE.md` §5.4 (nav hover), §5.6 (selected state), §14 (layout / app shell / §14.3 mobile modal drawer)
 - `CLAUDE.md` — app shell inventory and migration rules
