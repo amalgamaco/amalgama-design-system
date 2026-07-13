@@ -3453,6 +3453,10 @@ body { overflow-x: clip; }
         <div class="ds-rail-icon-wrap"><i data-lucide="box"></i></div>
         <span class="ds-rail-label">Components</span>
       </button>
+      <button class="ds-rail-btn" data-rail-group="Playbook" onclick="navigate('playbook')">
+        <div class="ds-rail-icon-wrap"><i data-lucide="compass"></i></div>
+        <span class="ds-rail-label">Playbook</span>
+      </button>
     </nav>
 
     <div class="ds-rail-footer">
@@ -3574,6 +3578,28 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-textarea" onclick="navigate('c-textarea')">Textarea</div>
       <div class="ds-nav-item" data-section="c-toggle" onclick="navigate('c-toggle')">Toggle</div>
       <div class="ds-nav-item" data-section="c-tooltip" onclick="navigate('c-tooltip')">Tooltips</div>
+    </nav>
+  </div>
+
+  <!-- ── PLAYBOOK DRAWER ── -->
+  <div class="ds-sidebar-drawer" id="drawer-playbook">
+    <div class="ds-drawer-section-title">Playbook</div>
+    <nav class="ds-nav">
+      <div class="ds-nav-item" data-section="playbook" onclick="navigate('playbook')">Overview</div>
+      <div style="font:600 10px/1 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ds-text-3);padding:14px 12px 5px">Principios</div>
+      <div class="ds-nav-item" data-section="pb-ux-laws" onclick="navigate('pb-ux-laws')">Leyes y heurísticas UX</div>
+      <div class="ds-nav-item" data-section="pb-ia" onclick="navigate('pb-ia')">Arquitectura de información</div>
+      <div class="ds-nav-item" data-section="pb-visual-hierarchy" onclick="navigate('pb-visual-hierarchy')">Jerarquía visual</div>
+      <div class="ds-nav-item" data-section="pb-content" onclick="navigate('pb-content')">Contenido y redacción UX</div>
+      <div class="ds-nav-item" data-section="pb-accessibility" onclick="navigate('pb-accessibility')">Accesibilidad</div>
+      <div class="ds-nav-item" data-section="pb-motion" onclick="navigate('pb-motion')">Movimiento</div>
+      <div style="font:600 10px/1 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ds-text-3);padding:14px 12px 5px">Patrones</div>
+      <div class="ds-nav-item" data-section="pb-forms" onclick="navigate('pb-forms')">Formularios</div>
+      <div class="ds-nav-item" data-section="pb-tables" onclick="navigate('pb-tables')">Tablas y datos</div>
+      <div class="ds-nav-item" data-section="pb-navigation" onclick="navigate('pb-navigation')">Navegación</div>
+      <div class="ds-nav-item" data-section="pb-dashboards" onclick="navigate('pb-dashboards')">Dashboards</div>
+      <div class="ds-nav-item" data-section="pb-states" onclick="navigate('pb-states')">Feedback y estados</div>
+      <div class="ds-nav-item" data-section="pb-responsive" onclick="navigate('pb-responsive')">Responsive y layout</div>
     </nav>
   </div>
 
@@ -21529,6 +21555,499 @@ import { Bold } from &quot;lucide-react&quot;
       </div>
     </section>
 
+    <!-- ══════════════ PLAYBOOK ══════════════ -->
+    <section class="ds-section" id="s-playbook">
+      <div class="ds-page-tag">Playbook</div>
+      <h1 class="ds-page-title">Playbook</h1>
+      <p class="ds-page-desc">Cómo construir grandes experiencias de producto con Embassy — no solo qué componente usar, sino cómo pensar la pantalla.</p>
+      <section class="docs-section">
+        <p class="bd-lead">Los componentes te dan piezas correctas; el Playbook te dice si la pantalla es buena. Es la capa de pensamiento de producto de Embassy: principios de UX, leyes y heurísticas, y patrones de interacción que guían cada pantalla nueva. La misma referencia vive como archivos <code>.md</code> en <code>guidelines/</code> para que los agentes de IA y el equipo la consulten al generar pantallas.</p>
+        <p class="ds-p">Regla general al construir una pantalla: encuadrá con <a href="#" onclick="navigate('pb-ia');return false;">arquitectura de información</a> + <a href="#" onclick="navigate('pb-visual-hierarchy');return false;">jerarquía visual</a> → elegí el patrón (formulario, tabla, dashboard, navegación) → diseñá los estados vacío/carga/error/éxito de entrada → escribí el copy → chequeá contra accesibilidad, movimiento y responsive antes de darla por terminada. Correcto en tokens pero inusable no es terminado.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Principios — cómo pensar</h2>
+        <ul class="bd-overview-list">
+          <li><b><a href="#" onclick="navigate('pb-ux-laws');return false;">Leyes y heurísticas UX</a></b> — las 10 heurísticas de Nielsen + Hick, Fitts, Miller, Goal Gradient, Progressive Disclosure, Peak-End, Von Restorff y carga cognitiva, mapeadas a Embassy.</li>
+          <li><b><a href="#" onclick="navigate('pb-ia');return false;">Arquitectura de información</a></b> — agrupar, etiquetar, jerarquía y profundidad, modelo de navegación, findability.</li>
+          <li><b><a href="#" onclick="navigate('pb-visual-hierarchy');return false;">Jerarquía visual</a></b> — dirigir la atención con tamaño, peso, color, espacio y posición; una sola acción primaria por vista.</li>
+          <li><b><a href="#" onclick="navigate('pb-content');return false;">Contenido y redacción UX</a></b> — voz rioplatense, etiquetas, microcopy, copy de botones/errores/estados vacíos.</li>
+          <li><b><a href="#" onclick="navigate('pb-accessibility');return false;">Accesibilidad</a></b> — WCAG 2.1 AA aplicado al construir: contraste, teclado, foco, targets, semántica.</li>
+          <li><b><a href="#" onclick="navigate('pb-motion');return false;">Movimiento</a></b> — movimiento con propósito, el sistema Standard vs Expressive, tokens de duración/easing, reduced-motion.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Patrones — cómo construir</h2>
+        <ul class="bd-overview-list">
+          <li><b><a href="#" onclick="navigate('pb-forms');return false;">Formularios</a></b> — layout, labels, validación, prevención y recuperación de errores, feedback de envío.</li>
+          <li><b><a href="#" onclick="navigate('pb-tables');return false;">Tablas y datos</a></b> — densidad, alineación, orden, filtros, paginación, estados vacío/carga/error.</li>
+          <li><b><a href="#" onclick="navigate('pb-navigation');return false;">Navegación</a></b> — app shell, breadcrumbs, tabs vs segmented button, wayfinding, estado activo.</li>
+          <li><b><a href="#" onclick="navigate('pb-dashboards');return false;">Dashboards</a></b> — resumen antes que detalle, jerarquía de KPIs, gráficos, drill-down, escaneabilidad.</li>
+          <li><b><a href="#" onclick="navigate('pb-states');return false;">Feedback y estados</a></b> — vacío, carga, error y éxito: el ciclo de vida completo de una pantalla.</li>
+          <li><b><a href="#" onclick="navigate('pb-responsive');return false;">Responsive y layout</a></b> — mobile-first, breakpoints, reflow, ritmo de espaciado, targets táctiles.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Leyes y heurísticas UX ── -->
+    <section class="ds-section" id="s-pb-ux-laws">
+      <div class="ds-page-tag">Playbook · Principios</div>
+      <h1 class="ds-page-title">Leyes y heurísticas UX</h1>
+      <p class="ds-page-desc">Las heurísticas de usabilidad y las leyes cognitivas que hacen que una pantalla se sienta obvia — cada una mapeada a componentes y tokens de Embassy.</p>
+      <section class="docs-section">
+        <p class="bd-lead">Estas leyes no son teoría: son atajos de decisión. Cuando dudes entre dos diseños, el que respeta estas reglas casi siempre gana. Todas se conectan a piezas reales de Embassy.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Las 10 heurísticas de Nielsen</h2>
+        <ul class="bd-overview-list">
+          <li><b>Visibilidad del estado del sistema.</b> El sistema siempre informa qué está pasando — loading en el <code>Button</code> al enviar, <code>Snackbar</code> al confirmar, <code>Skeleton</code> mientras carga, <code>Progress</code> en tareas largas.</li>
+          <li><b>Correspondencia con el mundo real.</b> Lenguaje del usuario, no del sistema — etiquetá «Vacante», «Candidato», no «entity/record».</li>
+          <li><b>Control y libertad.</b> Salidas claras — <code>Dialog</code>/<code>Sheet</code> cierran con <code>Esc</code>, <code>Back Link</code> para volver, deshacer antes que confirmar cuando se pueda.</li>
+          <li><b>Consistencia y estándares.</b> Mismo patrón para la misma tarea en todo el producto — es literalmente el rol del Design System.</li>
+          <li><b>Prevención de errores.</b> Mejor prevenir que recuperar — <code>Select</code> en vez de texto libre, <code>hint</code> antes de escribir, <code>Alert Dialog</code> para acciones destructivas.</li>
+          <li><b>Reconocer antes que recordar.</b> Opciones visibles — <code>Select</code>, <code>Dropdown Menu</code>, filtros como <code>Chip</code>; no obligar a memorizar.</li>
+          <li><b>Flexibilidad y eficiencia.</b> Atajos para expertos sin estorbar a novatos — acciones de fila, bulk actions, teclado.</li>
+          <li><b>Diseño estético y minimalista.</b> Cada elemento compite por atención — quitá lo que no aporta (ver <a href="#" onclick="navigate('pb-visual-hierarchy');return false;">jerarquía visual</a>).</li>
+          <li><b>Ayudar a reconocer y recuperarse de errores.</b> Mensajes que dicen qué pasó y cómo arreglarlo — vía el prop <code>error</code> de <code>Input</code> + un <code>Alert</code> de resumen.</li>
+          <li><b>Ayuda y documentación.</b> Estados vacíos que enseñan, tooltips (<code>Tooltip</code>) para lo no obvio, este mismo Playbook.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Leyes cognitivas</h2>
+        <ul class="bd-overview-list">
+          <li><b>Ley de Hick.</b> Más opciones = más tiempo de decisión. <em>En Embassy:</em> limitá una <code>Toolbar</code> a ~5 filtros; si hay más de 5 opciones usá <code>Select</code>, no un <code>Segmented Button</code>; una sola acción primaria por vista.</li>
+          <li><b>Ley de Fitts.</b> Cuanto más grande y cercano el target, más rápido de alcanzar. <em>En Embassy:</em> targets táctiles ≥ 44px, botones de acción primaria amplios, acciones destructivas lejos de las frecuentes.</li>
+          <li><b>Ley de Miller.</b> ~7±2 ítems en memoria de trabajo. <em>En Embassy:</em> agrupá campos de formulario en secciones de 3–6, chunkeá la navegación, agrupá columnas de tabla.</li>
+          <li><b>Efecto Goal-Gradient.</b> La motivación crece cerca de la meta. <em>En Embassy:</em> mostrá progreso con <code>Progress</code> en flujos multi-paso; indicá «Paso 2 de 3».</li>
+          <li><b>Divulgación progresiva.</b> Mostrá lo esencial primero, el resto bajo demanda. <em>En Embassy:</em> <code>Accordion</code>/<code>Collapsible</code> para detalle opcional, <code>Sheet</code>/<code>Dialog</code> para profundizar sin cambiar de página.</li>
+          <li><b>Regla Peak-End.</b> Se recuerda el pico y el final. <em>En Embassy:</em> cuidá los momentos clave (un <code>Snackbar</code> de éxito claro, un <code>Empty State</code> amable) y el cierre de cada flujo.</li>
+          <li><b>Efecto Von Restorff.</b> Lo distinto se recuerda. <em>En Embassy:</em> un único <code>Button variant="primary"</code> (relleno) resalta entre alternativas tonales/con borde — por eso hay una sola acción primaria.</li>
+          <li><b>Carga cognitiva.</b> Minimizá el esfuerzo mental — defaults sensatos, formato de datos legible (<code>tabular-nums</code>), y quitar decisiones innecesarias.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>Una sola acción primaria visible; el resto en menor jerarquía.</li>
+          <li><span class="ds-a11y-icon">✓</span>Grupos de ≤ ~5 opciones/filtros; más de eso, colapsá o usá <code>Select</code>.</li>
+          <li><span class="ds-a11y-icon">✓</span>El estado del sistema siempre visible (loading, éxito, error).</li>
+          <li><span class="ds-a11y-icon">✓</span>Errores prevenidos con constraints; recuperables con mensajes accionables.</li>
+          <li><span class="ds-a11y-icon">✓</span>Detalle no esencial detrás de divulgación progresiva.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Arquitectura de información ── -->
+    <section class="ds-section" id="s-pb-ia">
+      <div class="ds-page-tag">Playbook · Principios</div>
+      <h1 class="ds-page-title">Arquitectura de información</h1>
+      <p class="ds-page-desc">Cómo organizar, etiquetar y estructurar el contenido para que la gente encuentre lo que busca sin pensar.</p>
+      <section class="docs-section">
+        <p class="bd-lead">Una buena IA hace que la navegación sea invisible: las cosas están donde uno espera. Se construye agrupando por significado, etiquetando con claridad y manteniendo la jerarquía poco profunda.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Principios</h2>
+        <ul class="bd-overview-list">
+          <li><b>Agrupá y fragmentá.</b> Reuní lo relacionado en grupos con sentido (Ley de Miller). En una vista de vacante: datos → equipo → postulaciones, no un muro de campos.</li>
+          <li><b>Etiquetá claro, no ingenioso.</b> Usá el término que la persona reconoce («Candidatos», «Entrevistas»), en voz rioplatense; nunca jerga interna del sistema.</li>
+          <li><b>Jerarquía poco profunda.</b> Evitá anidar en exceso — cuantos más clics para llegar, peor. Preferí ancho sobre profundidad.</li>
+          <li><b>Un modelo de navegación consistente.</b> El app shell (sidebar global + topbar de contexto); <code>Breadcrumb</code> para el rastro de jerarquía; <code>Tabs</code> para vistas pares dentro de una página; <code>Segmented Button</code> para cambiar de modo (Lista/Cuadrícula); <code>Select</code> cuando hay muchas opciones.</li>
+          <li><b>Findability.</b> Cuando el catálogo es grande o la persona sabe qué busca, ofrecé <code>Search</code> (mobile) / <code>SearchField</code> (toolbar desktop). Para explorar por categorías acotadas, filtros con <code>Chip</code>.</li>
+          <li><b>Divulgación progresiva de complejidad.</b> Empezá simple; revelá lo avanzado bajo demanda (<code>Accordion</code>, <code>Sheet</code>).</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Do / Don't</h2>
+        <div class="bd-grid c2">
+          <div class="bd-dd do"><div class="bd-dd-head">✓ Hacer</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Agrupar por la tarea del usuario, no por el modelo de datos.</li><li>Etiquetas cortas, reconocibles, consistentes.</li><li><code>Breadcrumb</code> cuando la jerarquía tiene profundidad.</li></ul></div></div>
+          <div class="bd-dd dont"><div class="bd-dd-head">✕ Evitar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Menús de navegación con 15 ítems planos.</li><li>Etiquetas ambiguas o técnicas.</li><li>Usar <code>Tabs</code> para navegar entre páginas (son para vistas pares).</li></ul></div></div>
+        </div>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>Contenido agrupado en secciones con sentido y etiquetadas.</li>
+          <li><span class="ds-a11y-icon">✓</span>El usuario sabe dónde está (breadcrumb/título) y cómo volver.</li>
+          <li><span class="ds-a11y-icon">✓</span>Tabs vs Segmented Button vs Select elegidos según el rol correcto.</li>
+          <li><span class="ds-a11y-icon">✓</span>Búsqueda disponible si el conjunto es grande.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Jerarquía visual ── -->
+    <section class="ds-section" id="s-pb-visual-hierarchy">
+      <div class="ds-page-tag">Playbook · Principios</div>
+      <h1 class="ds-page-title">Jerarquía visual</h1>
+      <p class="ds-page-desc">Cómo dirigir la mirada — qué se ve primero, segundo y tercero — con tamaño, peso, color, espacio y posición.</p>
+      <section class="docs-section">
+        <p class="bd-lead">Toda pantalla enseña al ojo un orden de lectura. Si todo pesa igual, nada resalta. La jerarquía se construye con la escala tipográfica, una sola acción dominante y espacio en blanco que agrupa.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Herramientas de énfasis</h2>
+        <ul class="bd-overview-list">
+          <li><b>Escala tipográfica.</b> Usá los tokens de tamaño (<code>display</code>, <code>heading-*</code>, <code>body-lg/md/sm</code>, <code>label</code>, <code>caption</code>) para señalar importancia; no inventes tamaños sueltos. El texto de página va en <code>--text-primary</code> (navy de marca), nunca negro.</li>
+          <li><b>Una acción primaria por vista.</b> Un solo <code>Button variant="primary"</code> (relleno) domina; las alternativas van <code>secondary</code> (tonal), <code>tertiary</code> (con borde) o <code>text</code>. Es el efecto Von Restorff aplicado.</li>
+          <li><b>Color con moderación.</b> <code>--color-primary</code> y los acentos se reservan para lo accionable/destacado; si todo es azul, nada lo es. El color de estado (success/warning/error) es semántico, no decorativo.</li>
+          <li><b>Espacio en blanco.</b> El espaciado (<code>--space-*</code>, grilla de 4px) agrupa lo relacionado y separa lo distinto — más barato y claro que líneas y cajas.</li>
+          <li><b>Posición y patrón de escaneo.</b> Lo más importante arriba-izquierda (lectura en F/Z); las acciones primarias al final del flujo de lectura (extremo trailing en footers de <code>Dialog</code>).</li>
+          <li><b>Elevación vs borde.</b> Elevá (<code>--shadow-*</code>, <code>Button</code>/<code>Card</code> elevados) para separar del fondo; usá borde sutil (<code>--border</code>, <code>--color-outline-variant</code>) para agrupar sin peso. No apiles ambos sin motivo.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Do / Don't</h2>
+        <div class="bd-grid c2">
+          <div class="bd-dd do"><div class="bd-dd-head">✓ Hacer</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Un punto focal claro por pantalla.</li><li>Diferencias de tamaño/peso deliberadas y de la escala.</li><li>Espacio para agrupar antes que bordes.</li></ul></div></div>
+          <div class="bd-dd dont"><div class="bd-dd-head">✕ Evitar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Varios botones rellenos compitiendo.</li><li>Texto de página en negro (<code>--color-on-surface</code> es para adentro de componentes).</li><li>Color de acento como decoración.</li></ul></div></div>
+        </div>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>Se identifica en 1 segundo qué es lo más importante.</li>
+          <li><span class="ds-a11y-icon">✓</span>Una sola acción primaria; jerarquía de botones correcta.</li>
+          <li><span class="ds-a11y-icon">✓</span>Tamaños tipográficos desde la escala, texto en <code>--text-primary</code>.</li>
+          <li><span class="ds-a11y-icon">✓</span>Agrupación por espacio; color de acento reservado.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Contenido y redacción UX ── -->
+    <section class="ds-section" id="s-pb-content">
+      <div class="ds-page-tag">Playbook · Principios</div>
+      <h1 class="ds-page-title">Contenido y redacción UX</h1>
+      <p class="ds-page-desc">Las palabras son material de diseño. Copy claro y humano en español rioplatense que dice exactamente qué pasa.</p>
+      <section class="docs-section">
+        <p class="bd-lead">Escribí desde el lado del usuario: nombrá las cosas por lo que la persona reconoce, no por cómo está construido el sistema. Voz directa, humana, rioplatense («vos»).</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Reglas</h2>
+        <ul class="bd-overview-list">
+          <li><b>Etiquetas = sustantivos, botones = verbos.</b> Campo: «Correo electrónico»; acción: «Crear vacante» / «Guardar cambios» — nunca un «Enviar» genérico si hay un verbo específico.</li>
+          <li><b>El control dice qué hace, y el feedback lo confirma.</b> «Publicar» → <code>Snackbar</code> «Vacante publicada».</li>
+          <li><b>Errores útiles.</b> Qué salió mal + cómo arreglarlo, sin culpar ni vaguedad: «El email ya existe — probá con otro», no «Campo inválido».</li>
+          <li><b>Estados vacíos que orientan.</b> El <code>Empty State</code> explica qué es el espacio y ofrece la acción para llenarlo — nunca un vacío mudo.</li>
+          <li><b>Sentence case</b> en labels, ayuda y botones; title case solo para títulos de página.</li>
+          <li><b>Concisión.</b> Cortá lo obvio; los <code>hint</code> dan el formato/regla, no repiten la etiqueta.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Ejemplos</h2>
+        <div class="bd-grid c2">
+          <div class="bd-dd do"><div class="bd-dd-head">✓ Así</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>«Crear vacante» → «Vacante publicada»</li><li>«Todavía no cargaste candidatos. Sumá el primero.»</li><li>«El puntaje debe estar entre 0 y 100.»</li><li>«Guardando…» en el botón mientras envía.</li></ul></div></div>
+          <div class="bd-dd dont"><div class="bd-dd-head">✕ Así no</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>«Enviar» → «Operación exitosa»</li><li>«Sin datos.»</li><li>«Error de validación.»</li><li>Botón sin cambio de estado al enviar.</li></ul></div></div>
+        </div>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>Botones con verbos específicos; el feedback confirma la acción.</li>
+          <li><span class="ds-a11y-icon">✓</span>Errores explican causa + solución.</li>
+          <li><span class="ds-a11y-icon">✓</span>Estados vacíos con próximo paso claro.</li>
+          <li><span class="ds-a11y-icon">✓</span>Sentence case; voz rioplatense consistente.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Accesibilidad ── -->
+    <section class="ds-section" id="s-pb-accessibility">
+      <div class="ds-page-tag">Playbook · Principios</div>
+      <h1 class="ds-page-title">Accesibilidad</h1>
+      <p class="ds-page-desc">WCAG 2.1 AA aplicado al construir pantallas — complementa la página de Foundations con guía práctica. <a href="#" onclick="navigate('accessibility');return false;">Ver también Foundations → Accessibility</a>.</p>
+      <section class="docs-section">
+        <p class="bd-lead">La accesibilidad no es una capa extra: es parte de construir bien. Embassy ya trae mucho resuelto (foco, roles, contraste de tokens); tu trabajo es no romperlo y componer con semántica correcta.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Fundamentos al armar una pantalla</h2>
+        <ul class="bd-overview-list">
+          <li><b>Contraste.</b> ≥ 4.5:1 para texto; los pares de tokens de Embassy ya cumplen. El color nunca es la única señal — <code>Badge</code>/<code>Alert</code> siempre llevan texto + ícono.</li>
+          <li><b>Teclado.</b> Todo lo accionable operable con teclado; usá <code>&lt;button&gt;</code>/<code>&lt;a&gt;</code> reales, no <code>div</code> con onclick.</li>
+          <li><b>Anillo de foco.</b> <code>focus-visible:focus-ring</code> (= <code>--color-focus</code> + halo <code>--color-focus-ring</code>) — nunca lo quites.</li>
+          <li><b>Foco en overlays.</b> <code>Dialog</code>/<code>Sheet</code>/<code>Alert Dialog</code> atrapan el foco y lo devuelven al cerrar; <code>Esc</code> cierra.</li>
+          <li><b>Targets táctiles ≥ 44px</b> en mobile.</li>
+          <li><b>Semántica y landmarks.</b> <code>role="search"</code>, nav landmarks; label visible o <code>aria-label</code> — el placeholder no es label.</li>
+          <li><b>Errores anunciados.</b> <code>Input</code>/<code>Textarea</code> con <code>error</code> setean <code>aria-invalid</code> + <code>aria-describedby</code>; conteos/feedback async con <code>aria-live</code>.</li>
+          <li><b>Movimiento.</b> Respetá <code>prefers-reduced-motion</code> (ver <a href="#" onclick="navigate('pb-motion');return false;">Movimiento</a>).</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">♿</span>Todo operable con teclado; foco visible en cada control.</li>
+          <li><span class="ds-a11y-icon">♿</span>Cada campo/control con nombre accesible (label o <code>aria-label</code>).</li>
+          <li><span class="ds-a11y-icon">♿</span>Color nunca como única señal.</li>
+          <li><span class="ds-a11y-icon">♿</span>Overlays con focus trap y retorno de foco; targets ≥ 44px.</li>
+          <li><span class="ds-a11y-icon">♿</span>Errores con <code>aria-invalid</code>/<code>aria-describedby</code>; async con <code>aria-live</code>.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Movimiento ── -->
+    <section class="ds-section" id="s-pb-motion">
+      <div class="ds-page-tag">Playbook · Principios</div>
+      <h1 class="ds-page-title">Movimiento</h1>
+      <p class="ds-page-desc">Cuándo y cómo animar — con propósito, con los tokens de Embassy, y respetando a quien prefiere menos movimiento. <a href="#" onclick="navigate('animations');return false;">Ver también Styles → Motion</a>.</p>
+      <section class="docs-section">
+        <p class="bd-lead">El movimiento tiene un trabajo: dar feedback, mantener continuidad, reforzar jerarquía — nunca decorar. De más, la interfaz se siente lenta y «hecha por IA».</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Principios</h2>
+        <ul class="bd-overview-list">
+          <li><b>Sistema dual (MD3).</b> Easing <code>Standard</code> para efectos (color/opacidad/sombra); easing <code>Expressive</code>/overshoot solo para movimientos <em>espaciales</em> (el press/lift de un botón, el slide de un <code>Sheet</code>). Regla: nunca hacer overshoot de efectos.</li>
+          <li><b>Tokens de duración.</b> <code>--duration-fast</code> (micro-interacciones), <code>--duration-normal</code>, <code>--duration-medium</code> (entradas de overlays); easings <code>--ease-default/enter/exit/expressive*</code>.</li>
+          <li><b>Entradas y salidas.</b> <code>Dialog</code> = fade del scrim + zoom del contenido; <code>Sheet</code> = slide; <code>Snackbar</code> = entrada breve. Consistente en toda la librería.</li>
+          <li><b>Micro-interacciones.</b> Hover/press de <code>Button</code> (<code>-translate-y-px</code> + crecimiento de sombra en el elevado) — sutil, informativo.</li>
+          <li><b>Reduced motion.</b> Respetá <code>prefers-reduced-motion</code>: desactivá lo no esencial.</li>
+          <li><b>Performance.</b> Animá <code>transform</code>/<code>opacity</code>, no propiedades de layout.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Do / Don't</h2>
+        <div class="bd-grid c2">
+          <div class="bd-dd do"><div class="bd-dd-head">✓ Hacer</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Movimiento que comunica un cambio de estado.</li><li>Duraciones y easings desde los tokens.</li><li>Overshoot solo en movimiento espacial.</li></ul></div></div>
+          <div class="bd-dd dont"><div class="bd-dd-head">✕ Evitar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Animar por adornar.</li><li>Overshoot en opacidad/color.</li><li>Ignorar <code>prefers-reduced-motion</code>.</li></ul></div></div>
+        </div>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>Cada animación tiene un propósito (feedback/continuidad/jerarquía).</li>
+          <li><span class="ds-a11y-icon">✓</span>Duración/easing desde tokens; efectos en Standard.</li>
+          <li><span class="ds-a11y-icon">✓</span><code>prefers-reduced-motion</code> respetado.</li>
+          <li><span class="ds-a11y-icon">✓</span>Solo se animan <code>transform</code>/<code>opacity</code>.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Formularios ── -->
+    <section class="ds-section" id="s-pb-forms">
+      <div class="ds-page-tag">Playbook · Patrones</div>
+      <h1 class="ds-page-title">Formularios</h1>
+      <p class="ds-page-desc">Cómo armar pantallas de carga de datos para que la gente complete rápido, se equivoque menos y siempre pueda recuperarse.</p>
+      <section class="docs-section">
+        <p class="bd-lead"><code>Input</code>, <code>Textarea</code> y <code>Select</code> ya resuelven label, hint, error y accesibilidad (<code>aria-invalid</code>/<code>aria-describedby</code>). Tu trabajo: orden claro, prevenir errores y hacer obvia la recuperación.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Layout</h2>
+        <ul class="bd-overview-list">
+          <li><b>Una columna.</b> Los campos se apilan; nunca dos al lado salvo que sean un par genuino (día/mes). Lee mejor y funciona en mobile.</li>
+          <li><b>Labels arriba, siempre.</b> El label es el nombre accesible — nunca un campo con solo placeholder.</li>
+          <li><b>Ritmo uniforme.</b> Dejá que los componentes manejen el gap (<code>--space-5</code>); no agregues márgenes ad-hoc.</li>
+          <li><b>Agrupá en secciones</b> de 3–6 campos, en orden lógico (identidad → detalle → metadata opcional).</li>
+          <li><b>Marcá opcional u obligatorio — pero consistente.</b> Elegí una convención por formulario y sostenela.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Prevención de errores</h2>
+        <ul class="bd-overview-list">
+          <li><b>Restringí la entrada:</b> <code>Select</code> en vez de texto libre, <code>type="number"</code> con <code>min</code>/<code>max</code>, máscaras.</li>
+          <li><b>Hints por adelantado</b> con el prop <code>hint</code> (formato, regla) antes de que la persona escriba.</li>
+          <li><b>Desactivá el envío con criterio</b> — un botón permanentemente deshabilitado sin explicación parece roto.</li>
+          <li><b>Acciones destructivas con <code>Alert Dialog</code></b> (eliminar, descartar), nunca un onclick pelado.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Recuperación de errores</h2>
+        <ul class="bd-overview-list">
+          <li><b>Validá al salir del campo (blur)</b>, no en cada tecla; una vez en error, revalidá al tipear para limpiarlo apenas se corrige.</li>
+          <li><b>Usá el prop <code>error</code></b>: borde rojo + ring de error + <code>aria-invalid</code> + mensaje que reemplaza al hint. No inventes bordes rojos a mano.</li>
+          <li><b>Resumen con un <code>Alert variant="error"</code></b> arriba del formulario al fallar el envío — es inline y persistente, ideal para el resumen (a diferencia del <code>Snackbar</code>).</li>
+          <li><b>Nunca borres lo que la persona cargó;</b> llevá el foco al primer campo con error.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Envío y estructura</h2>
+        <ul class="bd-overview-list">
+          <li><b>Estado de carga en el <code>Button</code></b> (<code>aria-busy</code> + deshabilitado) para evitar doble envío; éxito → <code>Snackbar</code>.</li>
+          <li><b>Formulario corto → <code>Dialog</code></b> (mantiene contexto); largo/multi-sección → página dedicada con <code>create-form</code> (<code>CreateHeader</code>/<code>CreateFooter</code> sticky).</li>
+          <li><b>Una sola acción primaria</b> (un <code>Button</code> relleno; alternativas <code>tertiary</code>/<code>text</code>).</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>Una columna; campos agrupados y en orden lógico.</li>
+          <li><span class="ds-a11y-icon">✓</span>Todo campo con label visible; convención obligatorio/opcional consistente.</li>
+          <li><span class="ds-a11y-icon">✓</span>Control correcto por tipo de dato; defaults sensatos.</li>
+          <li><span class="ds-a11y-icon">✓</span>Validación en blur vía prop <code>error</code>; resumen con <code>Alert</code>; input preservado.</li>
+          <li><span class="ds-a11y-icon">✓</span>Envío con loading + <code>Snackbar</code>; destructivas con <code>Alert Dialog</code>.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Tablas y datos ── -->
+    <section class="ds-section" id="s-pb-tables">
+      <div class="ds-page-tag">Playbook · Patrones</div>
+      <h1 class="ds-page-title">Tablas y datos</h1>
+      <p class="ds-page-desc">Interfaces densas en datos que se escanean sin esfuerzo — candidatos, vacantes, listados.</p>
+      <section class="docs-section">
+        <p class="bd-lead">Una tabla es para comparar filas por columnas. Si no estás comparando, quizás querés una <code>List</code> o un grid de <code>Card</code>. La legibilidad viene de la alineación, la densidad justa y poco borde.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Estructura y legibilidad</h2>
+        <ul class="bd-overview-list">
+          <li><b>Alineación.</b> Texto a la izquierda, números a la derecha con <code>tabular-nums</code> para que las cifras se alineen.</li>
+          <li><b>Densidad legible</b> y alto de fila cómodo; poco borde (<code>--border</code>), el espacio hace el trabajo.</li>
+          <li><b>Encabezados ordenables</b> y header pegajoso; envolvé la tabla en un contenedor con <code>overflow-x-auto</code>.</li>
+          <li><b>Estado por <code>Badge</code></b> (abierta/activa/cerrada), nunca solo por color.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Controles y estados</h2>
+        <ul class="bd-overview-list">
+          <li><b>Barra de filtros con <code>Toolbar</code></b> arriba: <code>SearchField</code> + <code>Select</code> de filtros + <code>ToolbarButton</code>; conteo con <code>ResultCount</code>.</li>
+          <li><b>Paginación</b> con <code>Pagination</code> para conjuntos grandes; scroll infinito solo cuando aporta.</li>
+          <li><b>Selección de filas + bulk actions</b> con <code>Checkbox</code>.</li>
+          <li><b>Estados:</b> vacío (<code>Empty State</code>), carga (<code>Skeleton</code> en filas), error — diseñalos, no solo el caso feliz (ver <a href="#" onclick="navigate('pb-states');return false;">Feedback y estados</a>).</li>
+          <li><b>En mobile</b>, scroll horizontal o fallback a tarjetas (ver <a href="#" onclick="navigate('pb-responsive');return false;">Responsive</a>).</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>Tabla solo si se comparan filas; si no, <code>List</code>/<code>Card</code>.</li>
+          <li><span class="ds-a11y-icon">✓</span>Números a la derecha con <code>tabular-nums</code>; estado por <code>Badge</code>.</li>
+          <li><span class="ds-a11y-icon">✓</span><code>Toolbar</code> de filtros + <code>Pagination</code>; header pegajoso + <code>overflow-x-auto</code>.</li>
+          <li><span class="ds-a11y-icon">✓</span>Estados vacío/carga/error diseñados; plan responsive.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Navegación ── -->
+    <section class="ds-section" id="s-pb-navigation">
+      <div class="ds-page-tag">Playbook · Patrones</div>
+      <h1 class="ds-page-title">Navegación</h1>
+      <p class="ds-page-desc">Cómo la gente se mueve por el producto y siempre sabe dónde está y cómo volver.</p>
+      <section class="docs-section">
+        <p class="bd-lead">El app shell es la columna vertebral: sidebar para navegación global, topbar para contexto y acciones globales. Las acciones secundarias de una vista van en una <code>Toolbar</code>, no en el topbar.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Patrones</h2>
+        <ul class="bd-overview-list">
+          <li><b>Breadcrumb</b> para el rastro de jerarquía; <code>Back Link</code> para volver un paso.</li>
+          <li><b>Tabs vs Segmented Button vs Select.</b> <code>Tabs</code> = vistas pares dentro de una página; <code>Segmented Button</code> = cambio de modo (Lista/Cuadrícula, Día/Semana); <code>Select</code> = muchas opciones.</li>
+          <li><b>Estado activo claro</b> (<code>aria-current</code> + los tokens compartidos <code>--color-nav-*</code>, el «hover azul»); el activo se distingue del hover.</li>
+          <li><b>Acciones de overflow</b> en un <code>Dropdown Menu</code>, no amontonadas.</li>
+          <li><b>Profundidad baja</b> (ver <a href="#" onclick="navigate('pb-ia');return false;">IA</a>): preferí ancho sobre anidamiento.</li>
+          <li><b>Mobile:</b> el patrón de sidebar off-canvas es una decisión de diseño pendiente — marcala, no improvises un patrón propio.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>El usuario sabe dónde está y cómo volver (breadcrumb / back).</li>
+          <li><span class="ds-a11y-icon">✓</span>Tabs/Segmented/Select según su rol; estado activo evidente.</li>
+          <li><span class="ds-a11y-icon">✓</span>Acciones secundarias en <code>Toolbar</code>, no en el topbar.</li>
+          <li><span class="ds-a11y-icon">✓</span>Overflow en menú; navegación poco profunda.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Dashboards ── -->
+    <section class="ds-section" id="s-pb-dashboards">
+      <div class="ds-page-tag">Playbook · Patrones</div>
+      <h1 class="ds-page-title">Dashboards</h1>
+      <p class="ds-page-desc">Pantallas de métricas que se leen de un vistazo: resumen antes que detalle, jerarquía clara de KPIs.</p>
+      <section class="docs-section">
+        <p class="bd-lead">Un dashboard responde «¿cómo venimos?» en segundos. Poné el resumen arriba (KPIs), el detalle después, y no lo sobrecargues.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Principios</h2>
+        <ul class="bd-overview-list">
+          <li><b>Resumen antes que detalle.</b> KPIs primero con <code>Stat Card</code>/<code>Stats Grid</code>; el detalle y las tablas debajo.</li>
+          <li><b>Jerarquía de métricas.</b> La más importante, más grande y arriba-izquierda (patrón F).</li>
+          <li><b>Tendencia con token, no color pelado.</b> Usá el prop <code>trend</code> (positive/negative/neutral → <code>text-success</code>/<code>text-error</code>/<code>text-fg-muted</code>), no un color inline.</li>
+          <li><b>Gráficos con cuidado.</b> <code>Chart</code> (Recharts) con labels claros, paleta contenida (<code>--chart-1..5</code>) y el punto final enfatizado.</li>
+          <li><b>Drill-down por divulgación progresiva</b> — abrí el detalle en <code>Dialog</code>/<code>Sheet</code> o navegando, sin abarrotar la vista.</li>
+          <li><b>Estados de los widgets:</b> <code>Skeleton</code> al cargar, <code>Empty State</code> sin datos.</li>
+          <li><b>No abarrotes:</b> agrupá widgets relacionados y dejá aire (<code>--space-*</code>).</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>KPIs de resumen arriba; detalle después.</li>
+          <li><span class="ds-a11y-icon">✓</span>Métrica principal jerárquicamente dominante.</li>
+          <li><span class="ds-a11y-icon">✓</span><code>trend</code> token-bound; gráficos con paleta contenida.</li>
+          <li><span class="ds-a11y-icon">✓</span>Widgets con estados de carga/vacío; sin sobrecarga.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Feedback y estados ── -->
+    <section class="ds-section" id="s-pb-states">
+      <div class="ds-page-tag">Playbook · Patrones</div>
+      <h1 class="ds-page-title">Feedback y estados</h1>
+      <p class="ds-page-desc">El ciclo de vida completo de una pantalla con datos: vacío, carga, error y éxito — no solo el caso feliz.</p>
+      <section class="docs-section">
+        <p class="bd-lead">Toda pantalla que trae datos tiene cuatro estados además del ideal. Diseñalos de entrada; son la diferencia entre una interfaz sólida y una que «se rompe» ante lo inesperado.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Los estados</h2>
+        <ul class="bd-overview-list">
+          <li><b>Vacío.</b> <code>Empty State</code> — distinguí primer uso (enseñá + acción para empezar), sin resultados (sugerí reformular) y error-vacío. Nunca un vacío mudo; <code>Placeholder</code> para andamiaje.</li>
+          <li><b>Carga.</b> <code>Skeleton</code> con la forma del contenido (preferido); <code>Progress</code> lineal/circular + <code>indeterminate</code> para acciones. Evitá saltos de layout; nada de spinners porque sí.</li>
+          <li><b>Error.</b> <code>Alert</code> inline y persistente para lo bloqueante/importante; <code>Snackbar</code> para lo transitorio. Siempre una vía de reintento.</li>
+          <li><b>Éxito.</b> <code>Snackbar</code> que confirma y se va solo («Cambios guardados»).</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Situación → componente</h2>
+        <div class="ds-table-wrap">
+          <table class="docs-props-table">
+            <thead><tr><th>Situación</th><th>Componente</th></tr></thead>
+            <tbody>
+              <tr><td>Aún no hay datos / primer uso</td><td><code>Empty State</code></td></tr>
+              <tr><td>Cargando contenido</td><td><code>Skeleton</code></td></tr>
+              <tr><td>Acción en progreso</td><td><code>Progress</code> (indeterminate) / <code>Button</code> con <code>aria-busy</code></td></tr>
+              <tr><td>Error persistente / resumen</td><td><code>Alert</code> (inline)</td></tr>
+              <tr><td>Confirmación efímera</td><td><code>Snackbar</code> (flotante)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="ds-p" style="margin-top:12px"><b>Alert vs Snackbar</b> (no son duplicados): <code>Alert</code> = inline y persistente, queda hasta resolverse; <code>Snackbar</code> = flotante y efímero, confirma algo que ya pasó. Si debe seguir visible hasta que la persona actúe → Alert; si solo confirma un hecho → Snackbar.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>Estados vacío / carga / error / éxito diseñados, no solo el feliz.</li>
+          <li><span class="ds-a11y-icon">✓</span>Carga con <code>Skeleton</code> sin salto de layout.</li>
+          <li><span class="ds-a11y-icon">✓</span>Errores con vía de reintento; Alert vs Snackbar según permanencia.</li>
+          <li><span class="ds-a11y-icon">✓</span>Vacío con próximo paso claro.</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- ── Playbook · Responsive y layout ── -->
+    <section class="ds-section" id="s-pb-responsive">
+      <div class="ds-page-tag">Playbook · Patrones</div>
+      <h1 class="ds-page-title">Responsive y layout</h1>
+      <p class="ds-page-desc">Mobile-first, con breakpoints, reflow y ritmo de espaciado consistentes en todo el producto.</p>
+      <section class="docs-section">
+        <p class="bd-lead">Diseñá primero para la pantalla chica y expandí. El layout se apoya en la grilla de 12 columnas, el app shell y el sistema de espaciado de 4px.</p>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Principios</h2>
+        <ul class="bd-overview-list">
+          <li><b>Breakpoints.</b> <code>--breakpoint-md: 768px</code> y <code>--breakpoint-lg: 1024px</code> (mobile-first). Las media queries usan los valores literales — mantenelos en sincronía.</li>
+          <li><b>Grilla + shell.</b> 12 columnas; app shell = sidebar + topbar + contenido.</li>
+          <li><b>Prioridad de contenido / reflow.</b> Apilá columnas en chico; escondé-y-revelá con divulgación progresiva (<code>Accordion</code>).</li>
+          <li><b>Ritmo de espaciado.</b> Todo desde <code>--space-*</code> (grilla de 4px); nada de valores sueltos.</li>
+          <li><b>Targets táctiles ≥ 44px</b> en mobile.</li>
+          <li><b>Búsqueda responsive:</b> <code>SearchBar</code> (hero mobile) vs <code>SearchField</code> (toolbar desktop) — misma familia, distinta forma.</li>
+          <li><b>Tablas en chico:</b> scroll horizontal o fallback a tarjetas (ver <a href="#" onclick="navigate('pb-tables');return false;">Tablas</a>).</li>
+          <li><b>Sidebar en mobile:</b> el patrón off-canvas es una decisión pendiente — marcala, no improvises.</li>
+        </ul>
+      </section>
+      <section class="docs-section">
+        <h2 class="docs-section-title">Checklist para una pantalla nueva</h2>
+        <ul class="ds-a11y-list">
+          <li><span class="ds-a11y-icon">✓</span>Diseñada mobile-first; reflow correcto en 768 y 1024.</li>
+          <li><span class="ds-a11y-icon">✓</span>Espaciado desde <code>--space-*</code>; targets ≥ 44px en mobile.</li>
+          <li><span class="ds-a11y-icon">✓</span>Tablas con estrategia para pantalla chica.</li>
+          <li><span class="ds-a11y-icon">✓</span>Variante de búsqueda correcta por contexto.</li>
+        </ul>
+      </section>
+    </section>
+
   </div><!-- end ds-content -->
 </div><!-- end ds-main -->
 </div><!-- end ds-app -->
@@ -21548,6 +22067,21 @@ const SECTIONS = {
   'foundations':       { label: 'Foundations',           group: null },
   'styles':            { label: 'Styles',                group: null },
   'components':        { label: 'Components',            group: null },
+  'playbook':          { label: 'Playbook',              group: null },
+  // Playbook · Principios
+  'pb-ux-laws':          { label: 'Leyes y heurísticas UX',      group: 'Playbook', parent: 'playbook' },
+  'pb-ia':               { label: 'Arquitectura de información',  group: 'Playbook', parent: 'playbook' },
+  'pb-visual-hierarchy': { label: 'Jerarquía visual',            group: 'Playbook', parent: 'playbook' },
+  'pb-content':          { label: 'Contenido y redacción UX',    group: 'Playbook', parent: 'playbook' },
+  'pb-accessibility':    { label: 'Accesibilidad',               group: 'Playbook', parent: 'playbook' },
+  'pb-motion':           { label: 'Movimiento',                  group: 'Playbook', parent: 'playbook' },
+  // Playbook · Patrones
+  'pb-forms':            { label: 'Formularios',                 group: 'Playbook', parent: 'playbook' },
+  'pb-tables':           { label: 'Tablas y datos',              group: 'Playbook', parent: 'playbook' },
+  'pb-navigation':       { label: 'Navegación',                  group: 'Playbook', parent: 'playbook' },
+  'pb-dashboards':       { label: 'Dashboards',                  group: 'Playbook', parent: 'playbook' },
+  'pb-states':           { label: 'Feedback y estados',          group: 'Playbook', parent: 'playbook' },
+  'pb-responsive':       { label: 'Responsive y layout',         group: 'Playbook', parent: 'playbook' },
   // Develop
   'develop-web':       { label: 'Web',                   group: 'Develop' },
   'develop-mobile':    { label: 'Mobile',                group: 'Develop' },
