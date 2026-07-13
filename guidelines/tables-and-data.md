@@ -92,6 +92,20 @@ A typical recruiting table screen, top to bottom: a row of `Stat Card` KPIs → 
 - **On phones, prefer collapsing** each row into a stacked `Card` (label: value pairs) or switching the whole view to a `List` — a many-column table is unusable at 375px. Decide per screen which columns are essential; hide the rest below `--breakpoint-md` (768px).
 - The mobile app-shell/off-canvas nav is a **pending design decision** (GOVERNANCE §14.3) — don't improvise a mobile nav around the table; flag it if a screen needs sub-768px shell behavior.
 
+## Accessibility
+
+- **Real table semantics.** Use `DataTable`'s native `<table>`/`<thead>`/`<th>`/`<td>` structure so screen readers announce rows and column headers — never fake a grid out of `<div>`s.
+- **Sortable headers expose `aria-sort`** (`ascending`/`descending`/`none`) on the `<th>`, and the sort control has an accessible name.
+- **Clickable rows are keyboard-reachable.** The `clickable` prop adds `focus-visible:focus-ring`; make the row (or a cell link) focusable and Enter-activatable, not mouse-only.
+- **Status isn't color-only.** `Badge` carries a text label alongside its container color, so state survives for colorblind users and screen readers.
+- **Selection checkboxes have labels** (e.g. `aria-label="Seleccionar candidato Ana"`), and the header "select all" is labeled too.
+
+## Scale & performance
+
+- **Paginate or window large sets** — don't render thousands of `<tr>`s at once. Fetch per page (`Pagination`) or virtualize the body for very long lists; either way keep the sticky header and scroll wrapper intact.
+- **Filter server-side** when the dataset is large — the `Toolbar` inputs drive the query, and `ResultCount` reflects the filtered total, not the page length.
+- **Keep row content light.** Heavy per-cell components (charts, live widgets) belong in a detail view, not multiplied across hundreds of rows.
+
 ## Do / Don't
 
 - **Do** right-align numeric columns with `tabular-nums`; left-align text.
