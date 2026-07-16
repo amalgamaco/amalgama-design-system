@@ -76,7 +76,7 @@ export const SelectContent = React.forwardRef<
       position={position}
       className={cn(
         "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-border bg-surface-container-high text-on-surface shadow-lg",
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95",
         "data-[state=open]:duration-fast data-[state=open]:ease-expressive-enter data-[state=closed]:duration-fast data-[state=closed]:ease-exit",
         position === "popper" && "data-[side=bottom]:translate-y-1",
         className
@@ -114,7 +114,14 @@ export const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-pointer select-none items-center rounded-sm py-2 pl-3 pr-8 text-sm outline-none focus:bg-surface-variant data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      // Base geometry — check indicator on the right (pr-8), the canonical Radix/shadcn Select layout.
+      "relative flex w-full cursor-pointer select-none items-center rounded-sm py-2 pl-3 pr-8 text-sm outline-none transition-colors duration-fast ease-default",
+      // Highlight is Radix's data-[highlighted] — it fires on BOTH pointer hover and keyboard roving,
+      // which is the canonical shadcn Select interaction (the previous focus:bg-surface-variant only
+      // reacted to DOM focus, so hover did nothing). Uses the shared Embassy "blue hover" menu tokens
+      // (identical to Dropdown Menu / List / Menu) instead of a one-off grey; focus: kept as a fallback.
+      "data-[highlighted]:bg-[var(--color-nav-hover)] data-[highlighted]:text-[var(--color-nav-hover-content)] focus:bg-[var(--color-nav-hover)] focus:text-[var(--color-nav-hover-content)]",
+      "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className
     )}
     {...props}
