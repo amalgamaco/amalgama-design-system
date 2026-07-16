@@ -1054,16 +1054,32 @@ assembled, token-correct pattern without re-wiring it — while still composing 
 
 ## 20. Cross-component consistency — overlays
 
-### 20.1 Overlay action buttons (Dialog, Alert Dialog, Sheet)
+### 20.1 Action-emphasis hierarchy (dialogs, overlays, forms)
 
-Every modal/overlay footer follows the same button contract:
+Buttons carry MD3 emphasis levels. Match the button's emphasis to the action's importance so the
+primary action always dominates and the dismiss action stays subordinate:
 
-- **Confirm / primary action** → `Button variant="primary"` (or `danger`/`success` for a semantic
-  destructive/positive confirm). One per overlay.
-- **Cancel / dismiss action** → `Button variant="secondary"` (the tonal button). This is the DS-wide
-  standard; `AlertDialogCancel` defaults to it. **Never** use `text`/`tertiary` for an overlay Cancel,
-  and **never** invent a new variant for it. (Inline **form** footers are a separate pattern where the
-  escape action may be `tertiary` — that is not an overlay and is out of this rule.)
+| MD3 emphasis | Embassy variant | Use for |
+|---|---|---|
+| **Filled** (highest) | `primary` (or `danger`/`success`) | The one affirmative/primary action — Confirm, Save, Delete. **One per context.** |
+| **Filled Tonal** (medium) | `secondary` | A *constructive secondary* action that should be gently encouraged and needs medium weight — e.g. "Save draft" beside "Publish", "Add to cart", MD3's "Next". **Not** a dismiss action. |
+| **Elevated** (medium) | `elevated` | A secondary action that must lift off a busy/colored surface. |
+| **Outlined** (medium-low) | `tertiary` | **Cancel / Dismiss / Back**, and neutral secondary actions (Export, Filter). Visible but clearly subordinate. |
+| **Text** (lowest) | `text` | Minor/tertiary inline actions — "Learn more", dismiss a snackbar. |
+
+**The dialog/overlay footer rule (Dialog, Alert Dialog, Sheet):**
+
+- **Confirm / affirmative** → `primary` (or `danger`/`success`). Exactly one.
+- **Cancel / dismiss** → **`tertiary` (Outlined)**. `AlertDialogCancel` defaults to it.
+  **Never Tonal (`secondary`) for Cancel** — Tonal is medium emphasis and competes with the Filled
+  primary (worst when the primary is disabled and greys out, leaving a heavy tonal Cancel as the
+  loudest control). **Never** two Filled, or Filled + Tonal, as a Confirm/Cancel pair.
+- Optional third action → `text`.
+
+Tonal vs Outlined, in one line: **Tonal** = a secondary action you want to *encourage* (constructive,
+medium weight); **Outlined** = a secondary action that must *step back* (cancel/neutral). A Cancel
+always steps back → Outlined. This applies to overlays **and** inline form footers (the escape action
+is `tertiary` there too — the earlier "forms may differ" carve-out is retired; the hierarchy is uniform).
 
 ### 20.2 Edge-anchored surface motion (Sheet — all sides)
 

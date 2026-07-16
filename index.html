@@ -15,8 +15,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=84">
-<script type="module" src="islands/dist/embassy-islands.js?v=84"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=85">
+<script type="module" src="islands/dist/embassy-islands.js?v=85"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -6634,6 +6634,27 @@ function setLoading(btn, isLoading) {
           </div>
         </section>
 
+        <!-- ── Action-emphasis hierarchy ── -->
+        <section class="docs-section">
+          <h2 class="docs-section-title">Jerarquía de acciones (diálogos, overlays, formularios)</h2>
+          <p class="docs-section-desc">Cada variante tiene un nivel de énfasis (modelo MD3). Emparejá el énfasis del botón con la importancia de la acción: la acción primaria siempre domina y la de descarte queda subordinada.</p>
+          <div class="ds-table-wrap"><table class="ds-table">
+            <thead><tr><th>Énfasis (MD3)</th><th>Variante Embassy</th><th>Usar para</th></tr></thead>
+            <tbody>
+              <tr><td><b>Filled</b> (máximo)</td><td><code>primary</code> (o <code>danger</code>/<code>success</code>)</td><td>La única acción afirmativa/primaria — Confirmar, Guardar, Eliminar. <b>Una por contexto.</b></td></tr>
+              <tr><td><b>Filled Tonal</b> (medio)</td><td><code>secondary</code></td><td>Acción secundaria <b>constructiva</b> que conviene alentar y necesita peso medio — “Guardar borrador” junto a “Publicar”, “Agregar al carrito”, el “Next” de un onboarding. <b>No</b> es una acción de descarte.</td></tr>
+              <tr><td><b>Elevated</b> (medio)</td><td><code>elevated</code></td><td>Acción secundaria que debe despegarse de una superficie cargada o con color.</td></tr>
+              <tr><td><b>Outlined</b> (medio-bajo)</td><td><code>tertiary</code></td><td><b>Cancelar / Descartar / Volver</b> y acciones secundarias neutras (Exportar, Filtrar). Visible pero claramente subordinada.</td></tr>
+              <tr><td><b>Text</b> (mínimo)</td><td><code>text</code></td><td>Acciones terciarias/inline menores — “Ver más”, descartar un snackbar.</td></tr>
+            </tbody>
+          </table></div>
+          <div class="bd-grid c2" style="margin-top:16px">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Hacer</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Diálogo/overlay: <b>Confirmar = Filled (primary)</b>, <b>Cancelar = Outlined (tertiary)</b>.</li><li>Tonal para una segunda acción <b>constructiva</b> (no para cancelar).</li><li>Una sola Filled por contexto.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ Evitar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Cancelar en Tonal</b> — compite con la primaria (peor si la primaria está deshabilitada/gris).</li><li>Dos Filled, o Filled + Tonal, como par Confirmar/Cancelar.</li><li>Inventar una variante nueva para “cancelar”.</li></ul></div></div>
+          </div>
+          <p class="ds-p" style="margin-top:12px"><b>Tonal vs. Outlined en una línea:</b> <b>Tonal</b> = una acción secundaria que querés <em>alentar</em> (constructiva, peso medio); <b>Outlined</b> = una acción secundaria que debe <em>hacerse a un lado</em> (cancelar/neutra). Un Cancelar siempre se hace a un lado → Outlined. Ver <a href="#" onclick="navigate('c-dialog');return false;">Dialog</a> · <a href="#" onclick="navigate('c-side-sheet');return false;">Side Sheet</a>.</p>
+        </section>
+
         <!-- ── Form pattern ── -->
         <section class="docs-section">
           <h2 class="docs-section-title">Patrón: pie de formulario</h2>
@@ -6649,7 +6670,7 @@ function setLoading(btn, isLoading) {
   &lt;!-- campos del formulario --&gt;
 
   &lt;div class=&quot;form-actions&quot; style=&quot;display:flex;gap:10px;justify-content:flex-end&quot;&gt;
-    &lt;!-- Escape en formularios inline: tertiary. En modales/overlays (Dialog, Drawer, Sheet): secondary. Nunca danger. --&gt;
+    &lt;!-- Escape (Cancelar): siempre tertiary/Outlined — en formularios y en modales/overlays. Nunca Tonal ni danger. --&gt;
     &lt;button type=&quot;button&quot; class=&quot;btn-tertiary&quot; onclick=&quot;closeModal()&quot;&gt;Cancelar&lt;/button&gt;
 
     &lt;!-- Acción principal: type=&quot;submit&quot; --&gt;
@@ -6676,7 +6697,7 @@ function setLoading(btn, isLoading) {
   &lt;h2 id=&quot;dlg-title&quot;&gt;¿Eliminar esta vacante?&lt;/h2&gt;
   &lt;p id=&quot;dlg-desc&quot;&gt;Esta acción no se puede deshacer.&lt;/p&gt;
   &lt;div style=&quot;display:flex;gap:10px;justify-content:flex-end&quot;&gt;
-    &lt;button class=&quot;btn-secondary&quot; onclick=&quot;closeDialog()&quot;&gt;Cancelar&lt;/button&gt;
+    &lt;button class=&quot;btn-tertiary&quot; onclick=&quot;closeDialog()&quot;&gt;Cancelar&lt;/button&gt;
     &lt;button class=&quot;btn-primary btn-danger&quot; onclick=&quot;confirmDelete()&quot;&gt;Eliminar&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -9722,7 +9743,7 @@ TabsContent.displayName = &quot;TabsContent&quot;</code></pre>
           <div class="bd-family-wrap"><div data-island="alert-dialog-showcase"></div></div>
           <ul class="bd-overview-list" style="margin-top:8px">
             <li><b>Composición:</b> <code>AlertDialog</code> · <code>Trigger</code> · <code>Content</code> · <code>Header</code>/<code>Footer</code> · <code>Title</code>/<code>Description</code> · <code>Action</code>/<code>Cancel</code> — desde <code>@amalgama/ds/alert-dialog</code>.</li>
-            <li><b>Botones:</b> <code>AlertDialogAction</code> compone el <code>Button</code> primary (o combinalo con <code>variant="danger"</code> en el trigger); <code>AlertDialogCancel</code> es el <code>Button</code> <b>secondary</b> — el estándar del DS para la acción de cancelar en todo overlay (Dialog, Drawer, Sheet, Alert Dialog).</li>
+            <li><b>Botones:</b> <code>AlertDialogAction</code> compone el <code>Button</code> primary/Filled (o <code>variant="danger"</code> para destructivo); <code>AlertDialogCancel</code> es el <code>Button</code> <b>tertiary/Outlined</b> — la acción de descarte queda subordinada a la afirmativa, nunca Tonal (que compite). Ver la jerarquía en <a href="#" onclick="navigate('c-button');return false;">Button → Guías</a>.</li>
             <li><b>Accesibilidad:</b> <code>role="alertdialog"</code>, focus trap, foco inicial en Cancelar (acción segura); <code>Esc</code> = Cancelar; el foco vuelve al trigger al cerrar.</li>
             <li><b>Cuándo NO:</b> diálogos con contenido o tareas → Dialog común; avisos no bloqueantes → <a href="#" onclick="navigate('c-alert');return false;">Alert</a> / <a href="#" onclick="navigate('c-snackbar');return false;">Snackbar</a>.</li>
           </ul>
@@ -9945,7 +9966,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       &lt;p&gt;¿Confirmás la entrevista?&lt;/p&gt;
     &lt;/DialogBody&gt;
     &lt;DialogFooter&gt;
-      &lt;DialogClose asChild&gt;&lt;Button variant=&quot;secondary&quot;&gt;Cancelar&lt;/Button&gt;&lt;/DialogClose&gt;
+      &lt;DialogClose asChild&gt;&lt;Button variant=&quot;tertiary&quot;&gt;Cancelar&lt;/Button&gt;&lt;/DialogClose&gt;
       &lt;DialogClose asChild&gt;&lt;Button variant=&quot;primary&quot;&gt;Agendar&lt;/Button&gt;&lt;/DialogClose&gt;
     &lt;/DialogFooter&gt;
   &lt;/DialogContent&gt;

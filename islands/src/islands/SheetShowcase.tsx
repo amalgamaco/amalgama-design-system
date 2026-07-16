@@ -60,7 +60,7 @@ export function SheetShowcase() {
               </SheetBody>
               <SheetFooter>
                 <SheetClose asChild>
-                  <Button variant="secondary" size="sm">Cancelar</Button>
+                  <Button variant="tertiary" size="sm">Cancelar</Button>
                 </SheetClose>
                 <SheetClose asChild>
                   <Button variant="primary" size="sm">Confirmar</Button>
@@ -100,7 +100,7 @@ function OneSheet({ side, trigger }: { side: "bottom" | "right"; trigger: string
         </SheetBody>
         <SheetFooter>
           <SheetClose asChild>
-            <Button variant="secondary" size="sm">Cancelar</Button>
+            <Button variant="tertiary" size="sm">Cancelar</Button>
           </SheetClose>
           <SheetClose asChild>
             <Button variant="primary" size="sm">Aplicar</Button>
@@ -122,8 +122,9 @@ export function SideSheetShowcase() {
 /* ────────────────────────────────────────────────────────────
  * Functional example — time-slot picker, from the RIGHT (Sheet side="right").
  * Slots use ToggleGroup (single-select): default / hover / focus-visible /
- * selected (secondary-container) / disabled out of the box. Confirm (primary,
- * gated on a selection) + Cancel (secondary). DS components + tokens only.
+ * selected (secondary-container) / disabled out of the box. Confirm (primary/Filled,
+ * gated on a selection) + Cancel (tertiary/Outlined — subordinate, per GOVERNANCE §20.1).
+ * DS components + tokens only.
  * ──────────────────────────────────────────────────────────── */
 const TIME_SLOTS = [
   { value: "09:00" }, { value: "09:30" }, { value: "10:00" },
@@ -176,7 +177,7 @@ export function SheetTimeSlotShowcase() {
           </SheetBody>
           <SheetFooter>
             <SheetClose asChild>
-              <Button variant="secondary">Cancelar</Button>
+              <Button variant="tertiary">Cancelar</Button>
             </SheetClose>
             <Button
               variant="primary"
@@ -227,7 +228,7 @@ export function SheetResponsiveShowcase() {
           <DialogHeader><DialogTitle>{title}</DialogTitle><DialogDescription>{desc}</DialogDescription></DialogHeader>
           <DialogBody>{body}</DialogBody>
           <DialogFooter>
-            <DialogClose asChild><Button variant="secondary" size="sm">Cancelar</Button></DialogClose>
+            <DialogClose asChild><Button variant="tertiary" size="sm">Cancelar</Button></DialogClose>
             <Button variant="primary" size="sm">Guardar</Button>
           </DialogFooter>
         </DialogContent>
@@ -241,7 +242,7 @@ export function SheetResponsiveShowcase() {
         <SheetHeader><SheetTitle>{title}</SheetTitle><SheetDescription>{desc}</SheetDescription></SheetHeader>
         <SheetBody>{body}</SheetBody>
         <SheetFooter>
-          <SheetClose asChild><Button variant="secondary" size="sm">Cancelar</Button></SheetClose>
+          <SheetClose asChild><Button variant="tertiary" size="sm">Cancelar</Button></SheetClose>
           <Button variant="primary" size="sm">Guardar</Button>
         </SheetFooter>
       </SheetContent>

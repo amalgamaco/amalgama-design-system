@@ -35,7 +35,7 @@ export function DialogDemo() {
         </DialogBody>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="secondary">Cancelar</Button>
+            <Button variant="tertiary">Cancelar</Button>
           </DialogClose>
           <DialogClose asChild>
             <Button variant="primary">Agendar</Button>

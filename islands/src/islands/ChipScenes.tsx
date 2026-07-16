@@ -59,7 +59,7 @@ export function ChipSceneDialog() {
           <span style={{ width: 26, height: 14, borderRadius: 7, background: "var(--color-link)", position: "relative" }}><span style={{ position: "absolute", right: 1, top: 1, width: 12, height: 12, borderRadius: "50%", background: "#fff" }} /></span>
         </div>
         <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
-          <Button className={NOINT} variant="secondary" size="sm">Cancelar</Button>
+          <Button className={NOINT} variant="tertiary" size="sm">Cancelar</Button>
           <Button className={NOINT} variant="primary" size="sm">Guardar</Button>
         </div>
       </div>

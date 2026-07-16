@@ -23,7 +23,7 @@ export function DialogShowcase() {
         <DialogBody>¿Estás seguro de continuar?</DialogBody>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="secondary" size="sm">Cancelar</Button>
+            <Button variant="tertiary" size="sm">Cancelar</Button>
           </DialogClose>
           <DialogClose asChild>
             <Button variant="primary" size="sm">Confirmar</Button>
