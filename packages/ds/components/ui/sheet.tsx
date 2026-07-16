@@ -1,3 +1,14 @@
+/**
+ * Sheet — a STATIC edge-anchored panel on Radix Dialog (top/right/bottom/left via `side`).
+ *
+ * Cuándo usar: panel lateral de escritorio sin gesto — filtros, detalle, formularios secundarios.
+ * Cuándo no: si necesitás GESTO (swipe-to-dismiss, snap points, drawers anidados) o una superficie
+ * táctil/mobile-first → usar Drawer (vaul). Diferenciador Drawer↔Sheet = interacción (gesto vs
+ * estático), no dirección. Ambos comparten superficie, scrim y el mismo sistema de movimiento
+ * (--ease-emphasized · --duration-drawer). Ver GOVERNANCE §19.1 / §20.2.
+ *
+ * shadcn Sheet structure, Embassy tokens. Canonical implementation.
+ */
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"

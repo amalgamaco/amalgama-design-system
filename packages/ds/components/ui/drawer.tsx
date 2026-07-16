@@ -24,6 +24,8 @@ Drawer.displayName = "Drawer"
 export const DrawerTrigger = DrawerPrimitive.Trigger
 export const DrawerPortal = DrawerPrimitive.Portal
 export const DrawerClose = DrawerPrimitive.Close
+/** Nested drawer root — open a Drawer from inside another Drawer (parent stays mounted, stacks behind). */
+export const DrawerNestedRoot = DrawerPrimitive.NestedRoot
 
 export const DrawerOverlay = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Overlay>,
