@@ -19,7 +19,9 @@ export const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[10rem] overflow-hidden rounded-md border border-border bg-surface-container-high p-1.5 text-on-surface shadow-lg",
+        // Surface token (white in light, lifted #1C202C in dark) — shadcn's `bg-popover`, same as Select.
+        // The menu reads light/clean; emphasis comes from hover + selected item states, not a grey fill.
+        "z-50 min-w-[10rem] overflow-hidden rounded-md border border-border bg-surface-container p-1.5 text-on-surface shadow-lg",
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
         "data-[state=open]:duration-fast data-[state=open]:ease-expressive-enter data-[state=closed]:duration-fast data-[state=closed]:ease-exit",
         className
@@ -33,7 +35,10 @@ DropdownMenuContent.displayName = "DropdownMenuContent"
 // Item base — DS navigation item geometry: 8px radius, 8px gap, 18px icons at .7 opacity.
 // Shared by Item/CheckboxItem/RadioItem/SubTrigger so every row in the menu reads identically.
 const ITEM_CLASSES = cn(
-  "relative flex cursor-pointer select-none items-center gap-2 rounded-md px-3 py-2 text-sm outline-none transition-colors duration-fast ease-default [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:opacity-70",
+  // NO transition on the highlight: on Radix's portaled items a background-color transition can stick at
+  // its transparent start value (the fill only paints after a real repaint), so states didn't render on
+  // open. Instant is canonical shadcn AND correct — same fix applied to Select.
+  "relative flex cursor-pointer select-none items-center gap-2 rounded-md px-3 py-2 text-sm outline-none [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:opacity-70",
   // Hover / keyboard highlight — shared Embassy "blue hover": soft secondary tint + blue label/icon (weaker than selected).
   "focus:bg-[var(--color-nav-hover)] focus:text-[var(--color-nav-hover-content)] data-[highlighted]:bg-[var(--color-nav-hover)] data-[highlighted]:text-[var(--color-nav-hover-content)]",
   // Keyboard focus — its own ring; Pressed — stronger secondary tint (transient, still < selected fill).
@@ -129,7 +134,7 @@ export const DropdownMenuSubContent = React.forwardRef<
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     className={cn(
-      "z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-surface-container-high p-1.5 text-on-surface shadow-lg",
+      "z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-surface-container p-1.5 text-on-surface shadow-lg",
       "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
       "data-[state=open]:duration-fast data-[state=open]:ease-expressive-enter data-[state=closed]:duration-fast data-[state=closed]:ease-exit",
       className

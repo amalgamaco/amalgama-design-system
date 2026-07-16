@@ -1009,3 +1009,38 @@ Every component CSS file must open with this header:
 ```
 
 Do not start the CSS before this block is complete. The header is the component's contract — it is read by humans, by the `/design-system` skill, and by the audit checklist.
+
+---
+
+## 19. shadcn parity — coverage & intentional non-additions
+
+Embassy tracks the official shadcn/ui component registry as its implementation reference. As of the
+2026-07 alignment pass, every applicable shadcn primitive is present in `packages/ds/components/ui/`
+**except two, which are deliberately NOT added** because Embassy already ships the same capability
+through an existing component. Duplicating them would introduce a second, competing implementation of
+the same pattern — a direct violation of §2 (one canonical component per pattern). Agents mapping a
+shadcn `drawer`/`sidebar` onto Embassy must use the mapping below, not build a parallel component.
+
+### 19.1 `drawer` (vaul) → use **Sheet (bottom variant)**
+
+shadcn's Drawer is a `vaul`-based bottom sheet. Embassy's **Sheet** already provides bottom **and**
+side sheets on Radix Dialog, with the DS's own motion tokens and the Dialog a11y contract. Adding
+`vaul` would mean two overlay/motion engines. **Map any drawer requirement to `sheet.tsx` (bottom
+variant).** Revisit only if a gesture-driven, drag-to-dismiss bottom sheet with rubber-banding becomes
+a hard product requirement that Radix Dialog cannot satisfy.
+
+### 19.2 `sidebar` → use the **app-shell** (`css/layout.css`) + resolved mobile drawer
+
+shadcn's Sidebar is a large composite (provider + collapsible rail + cookie persistence + mobile sheet).
+Embassy already owns app navigation through the **app-shell** (`.app`/`.sidebar`/`.topbar`/`.main` in
+`css/layout.css`) with the resolved modal navigation drawer below 768px (§14.3). A second React Sidebar
+component would fork the navigation story. **Map sidebar requirements to the app-shell.** If a
+component-level, per-view collapsible sidebar is later needed, extend the shell's state API rather than
+adding shadcn's Sidebar wholesale.
+
+### 19.3 Recipes exported as first-class components
+
+`date-picker`, `combobox`, and `data-table` are **compositions** in shadcn (assembled from
+Popover/Command/Calendar/Table), not standalone primitives. Embassy exports each as a first-class,
+copy-paste component (`date-picker.tsx`, `combobox.tsx`, `data-table.tsx`) so consumers get the
+assembled, token-correct pattern without re-wiring it — while still composing only canonical DS parts.

@@ -87,6 +87,9 @@
      utilities the Accordion component consumes. ── */
   --animate-accordion-down: accordion-down var(--duration-fast) var(--ease-default);
   --animate-accordion-up:   accordion-up var(--duration-fast) var(--ease-default);
+
+  /* ── Input OTP fake caret blink (registers `animate-caret-blink`). ── */
+  --animate-caret-blink: caret-blink 1s ease-out infinite;
 }
 
 /* ══════════════════════════════════════
@@ -237,6 +240,10 @@
 @keyframes accordion-up {
   from { height: var(--radix-accordion-content-height); }
   to   { height: 0; }
+}
+@keyframes caret-blink {
+  0%, 70%, 100% { opacity: 1; }
+  20%, 50%      { opacity: 0; }
 }
 
 /* ── Grid/list entrance — spatial (translateY + scale), pairs with per-item
