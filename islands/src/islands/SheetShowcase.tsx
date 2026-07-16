@@ -250,19 +250,24 @@ function useIsDesktop() {
 export function SheetResponsiveShowcase() {
   const isDesktop = useIsDesktop()
   const title = "Editar perfil"
-  const desc = "Actualizá tus datos. En desktop es un Dialog; en mobile, un Sheet."
-  const body = <p className="text-body-sm text-fg leading-relaxed">El mismo contenido se presenta como Dialog centrado en pantallas anchas y como Sheet anclado abajo en compacto.</p>
+  const desc = "Hacé cambios en tu perfil acá. Guardá cuando termines."
+  // Same edit-profile form, presented as a Dialog on desktop and a Sheet on mobile.
+  const fields = (
+    <div className="grid gap-4">
+      <Input label="Email" type="email" defaultValue="shadcn@example.com" />
+      <Input label="Usuario" defaultValue="@shadcn" />
+    </div>
+  )
 
   if (isDesktop) {
     return (
       <Dialog>
-        <DialogTrigger asChild><Button variant="secondary" size="sm">Editar perfil</Button></DialogTrigger>
+        <DialogTrigger asChild><Button variant="secondary">Editar perfil</Button></DialogTrigger>
         <DialogContent>
           <DialogHeader><DialogTitle>{title}</DialogTitle><DialogDescription>{desc}</DialogDescription></DialogHeader>
-          <DialogBody>{body}</DialogBody>
+          <DialogBody>{fields}</DialogBody>
           <DialogFooter>
-            <DialogClose asChild><Button variant="tertiary" size="sm">Cancelar</Button></DialogClose>
-            <Button variant="primary" size="sm">Guardar</Button>
+            <Button variant="primary" className="w-full">Guardar cambios</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -270,13 +275,12 @@ export function SheetResponsiveShowcase() {
   }
   return (
     <Sheet>
-      <SheetTrigger asChild><Button variant="secondary" size="sm">Editar perfil</Button></SheetTrigger>
+      <SheetTrigger asChild><Button variant="secondary">Editar perfil</Button></SheetTrigger>
       <SheetContent side="bottom">
         <SheetHeader><SheetTitle>{title}</SheetTitle><SheetDescription>{desc}</SheetDescription></SheetHeader>
-        <SheetBody>{body}</SheetBody>
+        <SheetBody>{fields}</SheetBody>
         <SheetFooter>
-          <SheetClose asChild><Button variant="tertiary" size="sm">Cancelar</Button></SheetClose>
-          <Button variant="primary" size="sm">Guardar</Button>
+          <Button variant="primary">Guardar cambios</Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>

@@ -22,7 +22,9 @@ export const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-1/2 top-1/2 z-[100] w-[calc(100%-2rem)] max-w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-card p-0 text-on-surface shadow-xl outline-none",
+        // Canonical shadcn Dialog: content owns the padding (p-6) and `gap-4` separates
+        // header / body / footer — no internal dividers. Borderless, clean surface.
+        "fixed left-1/2 top-1/2 z-[100] grid w-[calc(100%-2rem)] max-w-[480px] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-lg border border-border bg-card p-6 text-on-surface shadow-xl outline-none",
         // Expressive: the content's zoom-in is the "hero moment" — the overlay's plain
         // fade stays Standard, since MD3 never overshoots effects (opacity/color).
         "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=open]:duration-medium data-[state=open]:ease-expressive-enter",
@@ -44,12 +46,12 @@ export const DialogContent = React.forwardRef<
 ))
 DialogContent.displayName = "DialogContent"
 
-// Header — STACKS title + description vertically (a Dialog can carry both). The close button is
+// Header — borderless, STACKS title + description (a Dialog can carry both). The close button is
 // absolute on DialogContent (not a header sibling), so the header never lays its text out in a row.
-// pr-14 reserves room for the close button.
+// pr-8 reserves room for the close button; vertical rhythm comes from DialogContent's `gap-4`.
 export function DialogHeader({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("flex flex-col gap-1.5 border-b border-border px-5 py-4 pr-14", className)} {...props}>
+    <div className={cn("flex flex-col gap-1.5 pr-8", className)} {...props}>
       {children}
     </div>
   )
@@ -59,7 +61,7 @@ export const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <DialogPrimitive.Title ref={ref} className={cn("text-base font-semibold text-[var(--text-primary)]", className)} {...props} />
+  <DialogPrimitive.Title ref={ref} className={cn("text-heading-md leading-none font-semibold text-[var(--text-primary)]", className)} {...props} />
 ))
 DialogTitle.displayName = "DialogTitle"
 
@@ -75,10 +77,13 @@ export const DialogDescription = React.forwardRef<
 ))
 DialogDescription.displayName = "DialogDescription"
 
+// Body — content region; padding + vertical rhythm come from DialogContent (p-6 + gap-4).
 export function DialogBody({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("px-5 py-4 text-sm text-on-surface-variant", className)} {...props} />
+  return <div className={cn("text-sm text-on-surface-variant", className)} {...props} />
 }
 
+// Footer — borderless; stacks on mobile (reversed so the primary sits on top), right-aligns on
+// desktop (shadcn convention). For a single full-width action, pass a `w-full` button.
 export function DialogFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("flex justify-end gap-2 border-t border-border px-5 py-4", className)} {...props} />
+  return <div className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)} {...props} />
 }
