@@ -1014,20 +1014,21 @@ Do not start the CSS before this block is complete. The header is the component'
 
 ## 19. shadcn parity — coverage & intentional non-additions
 
-Embassy tracks the official shadcn/ui component registry as its implementation reference. As of the
-2026-07 alignment pass, every applicable shadcn primitive is present in `packages/ds/components/ui/`
-**except two, which are deliberately NOT added** because Embassy already ships the same capability
-through an existing component. Duplicating them would introduce a second, competing implementation of
-the same pattern — a direct violation of §2 (one canonical component per pattern). Agents mapping a
-shadcn `drawer`/`sidebar` onto Embassy must use the mapping below, not build a parallel component.
+Embassy tracks the official shadcn/ui component registry (46 components as of 2026-07) as its
+implementation reference. Every applicable shadcn component is present in `packages/ds/components/ui/`
+**except one, deliberately NOT added** (`sidebar`), because Embassy already ships that capability
+through the app-shell. Duplicating it would introduce a second, competing implementation of the same
+pattern — a violation of §2 (one canonical component per pattern).
 
-### 19.1 `drawer` (vaul) → use **Sheet (bottom variant)**
+### 19.1 `drawer` (vaul) — ADDED as a first-class component (2026-07)
 
-shadcn's Drawer is a `vaul`-based bottom sheet. Embassy's **Sheet** already provides bottom **and**
-side sheets on Radix Dialog, with the DS's own motion tokens and the Dialog a11y contract. Adding
-`vaul` would mean two overlay/motion engines. **Map any drawer requirement to `sheet.tsx` (bottom
-variant).** Revisit only if a gesture-driven, drag-to-dismiss bottom sheet with rubber-banding becomes
-a hard product requirement that Radix Dialog cannot satisfy.
+**Status: present** (`drawer.tsx`). Initially mapped to Sheet, then added on request so Embassy
+mirrors shadcn's own Sheet-vs-Drawer split. **Drawer** = the `vaul`-based, gesture-driven panel
+(drag-to-dismiss, drag handle on the bottom variant), touch-first / mobile. **Sheet** = the Radix
+Dialog side panel for desktop (filters, detail). They intentionally coexist — same token family
+(surface, scrim, header/footer), different interaction. Do **not** use both for the same destination:
+pick Drawer for touch/gesture surfaces, Sheet for desktop side panels. This is the one place Embassy
+runs two overlay engines (Radix Dialog + vaul); that cost is accepted for gesture fidelity.
 
 ### 19.2 `sidebar` → use the **app-shell** (`css/layout.css`) + resolved mobile drawer
 

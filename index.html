@@ -15,8 +15,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=78">
-<script type="module" src="islands/dist/embassy-islands.js?v=78"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=80">
+<script type="module" src="islands/dist/embassy-islands.js?v=80"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -3569,6 +3569,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-bottom-sheet" onclick="navigate('c-bottom-sheet')">Bottom Sheets</div>
         <div class="ds-nav-item" data-section="c-side-sheet" onclick="navigate('c-side-sheet')">Side Sheets</div>
+        <div class="ds-nav-item" data-section="c-drawer" onclick="navigate('c-drawer')">Drawer (vaul)</div>
       </div>
       <div class="ds-nav-item" data-section="c-slider" onclick="navigate('c-slider')">Sliders</div>
       <div class="ds-nav-item" data-section="c-snackbar" onclick="navigate('c-snackbar')">Snackbar</div>
@@ -19287,6 +19288,203 @@ import { Button } from &quot;@amalgama/ds/button&quot;
         </section>
       </div>
     </section>
+    <!-- ═══════════ DRAWER ═══════════ -->
+    <section class="ds-section" id="s-c-drawer">
+      <div class="ds-page-tag">Components · Containment</div>
+      <h1 class="ds-page-title">Drawer</h1>
+      <p class="ds-page-desc">Panel deslizable con gesto de arrastrar-para-cerrar, anclado a cualquier borde. La variante táctil del Sheet, ideal en mobile.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui (vaul).</strong> Componente <code>Drawer</code> de <code>@amalgama/ds</code> construido sobre <code>vaul</code> — sigue la estructura oficial de shadcn, tematizado con tokens de Embassy. Es <strong>distinto del Sheet</strong>: el Drawer suma el gesto de arrastrar-para-cerrar y una manija de arrastre (variante inferior); el Sheet es el panel lateral sobre Radix Dialog. La documentación sigue el modelo de profundidad de <strong>Material Design 3</strong> (Google, CC BY 4.0).</div>
+
+      <div data-island="component-tabs-nav"></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Drawer se desliza desde un <b>borde de la pantalla</b> y responde al <b>gesto de arrastre</b>: seguí con el dedo y soltá para cerrar. Es la superficie táctil por excelencia para filtros, detalle o acciones en mobile.</p>
+          <ul class="bd-overview-list">
+            <li><b>Construido sobre <code>vaul</code></b> (implementación oficial de shadcn), con seguimiento del gesto y cierre por arrastre.</li>
+            <li><b>Cuatro direcciones</b> vía la prop <code>direction</code>: <code>bottom</code> (por defecto) · <code>top</code> · <code>left</code> · <code>right</code>.</li>
+            <li><b>Manija de arrastre</b> visible solo en la variante inferior — la señal del gesto de swipe.</li>
+            <li><b>Siempre modal:</b> overlay con scrim (<code>--color-scrim</code>) + desenfoque; cierre por arrastre, <code>Esc</code>, clic en el overlay o botón.</li>
+            <li><b>Anatomía:</b> <code>DrawerHeader</code> (título + descripción) · <code>DrawerBody</code> (con scroll) · <code>DrawerFooter</code> (acciones).</li>
+            <li>¿Drawer o Sheet? <b>Drawer</b> = táctil/mobile con gesto de arrastre; <b>Sheet</b> = panel lateral de escritorio (Radix Dialog).</li>
+          </ul>
+          <div class="bd-family-wrap"><div data-island="drawer-showcase"></div></div>
+          <ol class="bd-family-legend"><li>Drawer — desde abajo (con manija), la derecha y la izquierda (<code>direction</code>).</li></ol>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout">
+        <div class="ds-toc-body">
+        <section class="docs-section" id="tc-drawer-s-0">
+          <h2 class="docs-section-title">Anatomía</h2>
+          <table class="ds-table">
+            <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
+            <tbody>
+              <tr><td>Overlay (scrim)</td><td><code>fixed inset-0</code>, scrim al 40% + desenfoque (<code>backdrop-blur-sm</code>)</td></tr>
+              <tr><td>Panel (<code>DrawerContent</code>)</td><td>Superficie anclada al borde con <code>shadow-xl</code>; radio en el borde de anclaje</td></tr>
+              <tr><td>Manija (handle)</td><td>Barra de arrastre 100×6px — solo en <code>direction="bottom"</code></td></tr>
+              <tr><td><code>DrawerHeader</code></td><td>Título (<code>font-heading text-heading-xs</code> semibold) + descripción</td></tr>
+              <tr><td><code>DrawerBody</code></td><td><code>flex-1</code> con scroll (<code>overflow-y-auto</code>)</td></tr>
+              <tr><td><code>DrawerFooter</code></td><td>Acciones apiladas, ancladas abajo (<code>mt-auto</code>)</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section" id="tc-drawer-s-1">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td>Alto (top/bottom)</td><td>Hasta 80% del viewport (<code>max-h-[80vh]</code>), ancho completo</td></tr>
+              <tr><td>Ancho (left/right)</td><td>3/4 del viewport; acotado a <code>sm:max-w-sm</code> en ≥ 640&nbsp;px</td></tr>
+              <tr><td>Manija</td><td>100×6px (<code>h-1.5 w-[100px]</code>), <code>--color-outline-variant</code></td></tr>
+              <tr><td>Padding header / footer</td><td><code>p-6</code></td></tr>
+              <tr><td>Esquinas</td><td>Redondeadas en el borde de anclaje (<code>rounded-t-2xl</code> / <code>rounded-b-2xl</code>)</td></tr>
+              <tr><td>Movimiento</td><td>Spring nativo de <code>vaul</code> con seguimiento del gesto</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section" id="tc-drawer-s-2">
+          <h2 class="docs-section-title">Estados</h2>
+          <table class="ds-table">
+            <thead><tr><th>Estado</th><th>Tratamiento</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Abierto</td><td>Panel deslizado desde el borde, sobre el scrim; siempre modal</td><td><code>--color-surface</code></td></tr>
+              <tr><td>Arrastrando</td><td>El panel sigue al dedo/puntero; soltar más allá del umbral cierra</td><td>—</td></tr>
+              <tr><td>Overlay</td><td>Scrim al 40% + desenfoque</td><td><code>--color-scrim</code></td></tr>
+              <tr><td>Cierre</td><td>Arrastre, <code>Esc</code>, clic en overlay o botón; foco atrapado</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section" id="tc-drawer-s-3">
+          <h2 class="docs-section-title">Tokens y especificaciones</h2>
+          <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy (recalibra en dark mode).</p>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="drawer-tokens"></div></div>
+          <table class="ds-table">
+            <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
+            <tbody>
+              <tr><td>Overlay</td><td><code>--color-scrim</code></td></tr>
+              <tr><td>Panel</td><td><code>--color-surface</code> + <code>--border</code> + <code>shadow-xl</code></td></tr>
+              <tr><td>Manija</td><td><code>--color-outline-variant</code></td></tr>
+              <tr><td>Título</td><td><code>--color-fg</code></td></tr>
+              <tr><td>Descripción / body</td><td><code>--color-fg-subtle</code> / <code>--color-fg</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section" id="tc-drawer-s-4">
+          <h2 class="docs-section-title">Drawer vs. Sheet</h2>
+          <div class="ds-callout">Ambos son paneles modales anclados a un borde. <b>Drawer</b> (vaul) es <b>táctil</b>: suma el gesto de arrastrar-para-cerrar y la manija — preferílo en mobile y para bottom sheets con gesto. <b>Sheet</b> (Radix Dialog) es el panel <b>lateral de escritorio</b> para filtros o detalle. Misma familia de tokens (surface, scrim, header/footer), distinta interacción. No mezcles ambos para el mismo destino.</div>
+        </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-drawer-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-drawer-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-drawer-s-1">Medidas</a></li>
+            <li><a class="ds-toc-link" data-target="tc-drawer-s-2">Estados</a></li>
+            <li><a class="ds-toc-link" data-target="tc-drawer-s-3">Tokens y especificaciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-drawer-s-4">Drawer vs. Sheet</a></li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <div class="ds-toc-layout">
+        <div class="ds-toc-body">
+        <section class="docs-section" id="tc-drawer-g-0">
+          <h2 class="docs-section-title">Uso</h2>
+          <p class="ds-p">El Drawer muestra <b>contenido o acciones suplementarias</b> con una interacción táctil de arrastre, sin abandonar la pantalla actual. Es el patrón preferido en mobile cuando el gesto importa.</p>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Filtros, detalle o acciones en mobile con gesto de arrastre.</li><li>Bottom sheets táctiles con manija de swipe.</li><li>Contenido secundario que no justifica una pantalla.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Panel lateral de escritorio → <b>Sheet</b>.</li><li>Diálogo modal centrado → <b>Dialog</b>.</li><li>Navegación principal → <b>Navigation</b> / app-shell.</li><li>Mensajes transitorios → <b>Snackbar</b>.</li></ul></div></div>
+          </div>
+        </section>
+        <section class="docs-section" id="tc-drawer-g-1">
+          <h2 class="docs-section-title">Anatomía</h2>
+          <p class="docs-section-desc">Componente real. Scrim, panel con manija, header, contenido y footer.</p>
+          <div class="bd-family-wrap"><div data-island="drawer-bottom-showcase"></div></div>
+          <ol class="bd-family-legend"><li>Scrim — bloquea el fondo (modal).</li><li>Manija — señal del gesto de arrastre.</li><li>Header — título + descripción.</li><li>Contenido — cuerpo desplazable.</li><li>Footer — acciones.</li></ol>
+        </section>
+        <section class="docs-section" id="tc-drawer-g-2">
+          <h2 class="docs-section-title">Dirección</h2>
+          <p class="ds-p">La prop <code>direction</code> ancla el drawer a un borde: <code>bottom</code> (mobile, con manija), <code>top</code>, <code>left</code> o <code>right</code>. Elegí el borde según el origen del contenido y el pulgar.</p>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li><b>bottom</b> — el más común en mobile; alcanzable con el pulgar, incluye manija de arrastre.</li>
+            <li><b>left / right</b> — filtros o navegación secundaria; 3/4 del ancho, acotado en desktop.</li>
+            <li><b>top</b> — notificaciones o búsqueda que descienden desde arriba.</li>
+          </ul>
+        </section>
+        <section class="docs-section" id="tc-drawer-g-3">
+          <h2 class="docs-section-title">Comportamiento</h2>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>Es modal: el scrim bloquea el fondo; el contenido principal queda inerte.</li>
+            <li>El gesto de arrastre acompaña al dedo; soltar más allá del umbral cierra.</li>
+            <li>Salida siempre disponible además del gesto: <code>Esc</code>, clic en overlay o botón.</li>
+            <li>Foco atrapado dentro del drawer mientras está abierto (focus trap).</li>
+          </ul>
+        </section>
+        <section class="docs-section" id="tc-drawer-g-4">
+          <h2 class="docs-section-title">Layout responsive</h2>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>Patrón preferido en <b>mobile / compacto</b>; en desktop preferí un <b>Sheet</b> lateral o un Dialog.</li>
+            <li>Alto acotado (hasta 80vh) con scroll interno; header y footer fijos, solo el body scrollea.</li>
+            <li>Las variantes laterales se acotan (<code>sm:max-w-sm</code>) en pantallas anchas.</li>
+          </ul>
+        </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-drawer-g-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-drawer-g-0">Uso</a></li>
+            <li><a class="ds-toc-link" data-target="tc-drawer-g-1">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-drawer-g-2">Dirección</a></li>
+            <li><a class="ds-toc-link" data-target="tc-drawer-g-3">Comportamiento</a></li>
+            <li><a class="ds-toc-link" data-target="tc-drawer-g-4">Layout responsive</a></li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Construido sobre <code>vaul</code>, que expone <code>role="dialog"</code> con <code>aria-modal</code> y atrapa el foco mientras está abierto.</li>
+            <li><span class="ds-a11y-icon">♿</span>Se cierra con <code>Esc</code>, clic en el scrim o el gesto de arrastre; al cerrar, el foco vuelve al disparador.</li>
+            <li><span class="ds-a11y-icon">♿</span>Asociá un título con <code>DrawerTitle</code> y una descripción con <code>DrawerDescription</code> para el nombre accesible (<code>aria-labelledby</code> / <code>aria-describedby</code>).</li>
+            <li><span class="ds-a11y-icon">♿</span>El gesto de arrastre es un extra, no la única salida: operable por completo con teclado y con los botones del <code>DrawerFooter</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Respeta <code>prefers-reduced-motion</code> a través de vaul.</li>
+          </ul>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn · vaul)</h2>
+          <p class="docs-section-desc">Se compone con el <code>Drawer</code> de <code>@amalgama/ds</code> (vaul), tematizado con tokens Embassy. <code>direction</code> ancla el panel a un borde.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose } from &quot;@amalgama/ds/drawer&quot;
+import { Button } from &quot;@amalgama/ds/button&quot;
+
+&lt;Drawer direction=&quot;bottom&quot;&gt;
+  &lt;DrawerTrigger asChild&gt;&lt;Button variant=&quot;secondary&quot;&gt;Abrir&lt;/Button&gt;&lt;/DrawerTrigger&gt;
+  &lt;DrawerContent&gt;
+    &lt;div className=&quot;mx-auto w-full max-w-sm&quot;&gt;
+      &lt;DrawerHeader&gt;
+        &lt;DrawerTitle&gt;Ajustar objetivo&lt;/DrawerTitle&gt;
+        &lt;DrawerDescription&gt;Arrastrá hacia abajo para cerrar.&lt;/DrawerDescription&gt;
+      &lt;/DrawerHeader&gt;
+      {/* contenido */}
+      &lt;DrawerFooter&gt;
+        &lt;Button&gt;Guardar&lt;/Button&gt;
+        &lt;DrawerClose asChild&gt;&lt;Button variant=&quot;secondary&quot;&gt;Cancelar&lt;/Button&gt;&lt;/DrawerClose&gt;
+      &lt;/DrawerFooter&gt;
+    &lt;/div&gt;
+  &lt;/DrawerContent&gt;
+&lt;/Drawer&gt;</code></pre>
+          </div>
+        </section>
+      </div>
+    </section>
     <section class="ds-section" id="s-c-slider">
       <div class="ds-page-tag">Components · Selección</div>
       <h1 class="docs-page-title">Slider</h1>
@@ -22143,6 +22341,7 @@ const SECTIONS = {
   'c-select':          { label: 'Select',                group: 'Components' },
   'c-bottom-sheet':    { label: 'Bottom Sheets',        group: 'Components' },
   'c-side-sheet':      { label: 'Side Sheets',          group: 'Components' },
+  'c-drawer':          { label: 'Drawer',               group: 'Components' },
   'c-skeleton':        { label: 'Skeleton',            group: 'Foundations', parent: 'grid' },
   'c-slider':          { label: 'Sliders',               group: 'Components' },
   'c-snackbar':        { label: 'Snackbar',             group: 'Components' },
