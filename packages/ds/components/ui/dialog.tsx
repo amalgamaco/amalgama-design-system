@@ -12,8 +12,11 @@ export const DialogClose = DialogPrimitive.Close
 
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
+    /** Render the built-in close button (X, top-right). Default true. */
+    showCloseButton?: boolean
+  }
+>(({ className, children, showCloseButton = true, ...props }, ref) => (
   <DialogPrimitive.Portal>
     <DialogPrimitive.Overlay className="fixed inset-0 z-[100] bg-[var(--color-scrim)] data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:duration-normal data-[state=open]:ease-enter data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:duration-fast data-[state=closed]:ease-exit" />
     <DialogPrimitive.Content
@@ -29,20 +32,25 @@ export const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
+      {showCloseButton && (
+        <DialogPrimitive.Close asChild>
+          <Button variant="icon" aria-label="Cerrar" className="absolute right-4 top-4">
+            <X className="size-[18px]" aria-hidden="true" />
+          </Button>
+        </DialogPrimitive.Close>
+      )}
     </DialogPrimitive.Content>
   </DialogPrimitive.Portal>
 ))
 DialogContent.displayName = "DialogContent"
 
+// Header — STACKS title + description vertically (a Dialog can carry both). The close button is
+// absolute on DialogContent (not a header sibling), so the header never lays its text out in a row.
+// pr-14 reserves room for the close button.
 export function DialogHeader({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("flex items-center justify-between border-b border-border px-5 py-4", className)} {...props}>
+    <div className={cn("flex flex-col gap-1.5 border-b border-border px-5 py-4 pr-14", className)} {...props}>
       {children}
-      <DialogPrimitive.Close asChild>
-        <Button variant="icon" aria-label="Cerrar">
-          <X className="size-[18px]" aria-hidden="true" />
-        </Button>
-      </DialogPrimitive.Close>
     </div>
   )
 }
