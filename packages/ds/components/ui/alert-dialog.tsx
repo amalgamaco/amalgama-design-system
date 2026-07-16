@@ -7,7 +7,8 @@
  * Dialog), avisos no bloqueantes (usar Alert / Snackbar).
  *
  * shadcn Alert Dialog structure, Embassy tokens; Action/Cancel compose the canonical Button
- * (Action = primary, Cancel = tertiary/outline). Same scrim + Expressive zoom as Dialog.
+ * (Action = primary, Cancel = secondary — the DS-wide standard for the cancel/dismiss action in
+ * every overlay: Dialog, Drawer, Sheet, Alert Dialog). Same scrim + Expressive zoom as Dialog.
  */
 import * as React from "react"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
@@ -91,7 +92,7 @@ const AlertDialogCancel = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Cancel>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>
 >(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Cancel ref={ref} className={cn(buttonVariants({ variant: "tertiary" }), className)} {...props} />
+  <AlertDialogPrimitive.Cancel ref={ref} className={cn(buttonVariants({ variant: "secondary" }), className)} {...props} />
 ))
 AlertDialogCancel.displayName = "AlertDialogCancel"
 

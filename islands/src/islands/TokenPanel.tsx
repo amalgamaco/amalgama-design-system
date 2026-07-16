@@ -437,7 +437,8 @@ const BOTTOM_SHEET_TOKENS: TokenGroup[] = [
     { token: "--shadow-xl", role: "Sombra", usage: "Elevación de la hoja." },
   ]},
   { category: "Movimiento", rows: [
-    { token: "ease-in-out", role: "Curva", usage: "Deslizamiento desde el borde inferior (apertura 300 / cierre 200ms)." },
+    { token: "--ease-emphasized", role: "Curva", usage: "Curva compartida con el Drawer (decelerate, sin overshoot)." },
+    { token: "--duration-drawer", role: "Duración", usage: "500ms, simétrico apertura/cierre — igual que el Drawer." },
   ]},
 ]
 export function BottomSheetTokens() { return <TokenPanel groups={BOTTOM_SHEET_TOKENS} /> }
@@ -465,7 +466,8 @@ const SIDE_SHEET_TOKENS: TokenGroup[] = [
     { token: "--shadow-xl", role: "Sombra", usage: "Elevación de la hoja (sin radio: bordes a tope)." },
   ]},
   { category: "Movimiento", rows: [
-    { token: "ease-in-out", role: "Curva", usage: "Deslizamiento lateral (apertura 300 / cierre 200ms)." },
+    { token: "--ease-emphasized", role: "Curva", usage: "Curva compartida con el Drawer (decelerate, sin overshoot)." },
+    { token: "--duration-drawer", role: "Duración", usage: "500ms, simétrico apertura/cierre — igual que el Drawer." },
   ]},
 ]
 export function SideSheetTokens() { return <TokenPanel groups={SIDE_SHEET_TOKENS} /> }
@@ -498,6 +500,8 @@ const DRAWER_TOKENS: TokenGroup[] = [
   ]},
   { category: "Movimiento", rows: [
     { token: "vaul", role: "Gesto", usage: "Arrastrar-para-cerrar con seguimiento del dedo (spring nativo de vaul)." },
+    { token: "--ease-emphasized", role: "Curva", usage: "Curva de entrada/salida (cubic-bezier .32,.72,0,1) — compartida con Side/Bottom Sheet." },
+    { token: "--duration-drawer", role: "Duración", usage: "500ms — la referencia que Side/Bottom Sheet replican." },
   ]},
 ]
 export function DrawerTokens() { return <TokenPanel groups={DRAWER_TOKENS} /> }

@@ -27,7 +27,7 @@ import { StatCardShowcase, StatCardGrid } from "./islands/StatCardShowcase"
 import { AvatarShowcase } from "./islands/AvatarShowcase"
 import { TooltipShowcase } from "./islands/TooltipShowcase"
 import { SheetShowcase, BottomSheetShowcase, SideSheetShowcase } from "./islands/SheetShowcase"
-import { DrawerShowcase, DrawerBottomShowcase } from "./islands/DrawerShowcase"
+import { DrawerShowcase, DrawerBottomShowcase, DrawerTimeSlotShowcase } from "./islands/DrawerShowcase"
 import { CarouselShowcase } from "./islands/CarouselShowcase"
 import { DatePickerShowcase } from "./islands/DatePickerShowcase"
 import { DatePickerFieldShowcase } from "./islands/DatePickerField"
@@ -350,6 +350,7 @@ const registry: Record<string, ComponentType> = {
   "side-sheet-showcase": SideSheetShowcase,
   "drawer-showcase": DrawerShowcase,
   "drawer-bottom-showcase": DrawerBottomShowcase,
+  "drawer-timeslot-showcase": DrawerTimeSlotShowcase,
   "carousel-showcase": CarouselShowcase,
   "date-picker-showcase": DatePickerShowcase,
   "date-picker-field-showcase": DatePickerFieldShowcase,

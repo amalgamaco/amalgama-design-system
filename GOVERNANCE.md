@@ -1045,3 +1045,29 @@ adding shadcn's Sidebar wholesale.
 Popover/Command/Calendar/Table), not standalone primitives. Embassy exports each as a first-class,
 copy-paste component (`date-picker.tsx`, `combobox.tsx`, `data-table.tsx`) so consumers get the
 assembled, token-correct pattern without re-wiring it — while still composing only canonical DS parts.
+
+---
+
+## 20. Cross-component consistency — overlays
+
+### 20.1 Overlay action buttons (Dialog, Alert Dialog, Drawer, Sheet)
+
+Every modal/overlay footer follows the same button contract:
+
+- **Confirm / primary action** → `Button variant="primary"` (or `danger`/`success` for a semantic
+  destructive/positive confirm). One per overlay.
+- **Cancel / dismiss action** → `Button variant="secondary"` (the tonal button). This is the DS-wide
+  standard; `AlertDialogCancel` defaults to it. **Never** use `text`/`tertiary` for an overlay Cancel,
+  and **never** invent a new variant for it. (Inline **form** footers are a separate pattern where the
+  escape action may be `tertiary` — that is not an overlay and is out of this rule.)
+
+### 20.2 Edge-anchored surface motion (Drawer, Side Sheet, Bottom Sheet)
+
+All three edge-anchored surfaces move as **one system**: entrance/exit on `--ease-emphasized`
+(`cubic-bezier(.32,.72,0,1)`, a smooth decelerate with **no overshoot**) at `--duration-drawer`
+(500ms), symmetric open/close, with the overlay fading on the same curve/duration. Only the axis of
+travel differs (Drawer: its `direction`; Side Sheet: from the side; Bottom Sheet: from the bottom).
+The Drawer (vaul) is the reference; Sheet replicates it via these tokens. `prefers-reduced-motion` is
+handled globally by the theme. **Do not** use `ease-expressive-*` (overshoot) on a large sliding
+panel — that bounce reads as unnatural; overshoot is for small spatial motion (zoom/rotate) on
+dialogs and menus only.

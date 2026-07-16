@@ -213,6 +213,9 @@
   --ease-expressive-enter: cubic-bezier(.175,.885,.32,1.4);
   --ease-expressive-exit:  cubic-bezier(.3,0,.8,.15);
 
+  /* Emphasized decelerate — shared Drawer/Sheet curve (registers `ease-emphasized`, matches vaul) */
+  --ease-emphasized: cubic-bezier(.32,.72,0,1);
+
   /* Shadows */
   --shadow-sm: 0 1px 3px rgba(28,36,56,.06);
   --shadow-md: 0 4px 16px rgba(28,36,56,.08);
@@ -411,6 +414,12 @@
 @utility duration-slow {
   --tw-duration: 450ms;
   transition-duration: 450ms;
+}
+
+/* Shared sheet/drawer slide duration (500ms) — matches the Drawer (vaul) engine. */
+@utility duration-drawer {
+  --tw-duration: 500ms;
+  transition-duration: 500ms;
 }
 
 /* ── Keyframes ───────────────────────────────────────────────────────────── */

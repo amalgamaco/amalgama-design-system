@@ -14,10 +14,11 @@ const SheetOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
+      // Overlay fade matches the Drawer (vaul): same 500ms + emphasized curve, symmetric
+      // enter/exit. prefers-reduced-motion is handled globally by the theme.
       "fixed inset-0 z-50 bg-scrim/40 backdrop-blur-sm",
-      "data-[state=open]:animate-in data-[state=closed]:animate-out",
-      "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      "data-[state=open]:duration-medium data-[state=open]:ease-enter data-[state=closed]:duration-normal data-[state=closed]:ease-exit",
+      "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "duration-drawer ease-emphasized",
       className
     )}
     {...props}
@@ -26,9 +27,11 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const sheetVariants = cva(
-  // Expressive: the panel's slide-in is the spatial "hero moment"; the overlay
-  // above stays Standard since its fade is effects-only (MD3 never overshoots effects).
-  "fixed z-50 flex flex-col bg-surface border-border shadow-xl transition data-[state=open]:duration-medium data-[state=open]:ease-expressive-enter data-[state=closed]:duration-normal data-[state=closed]:ease-exit",
+  // Motion unified with the Drawer (vaul): the panel slides on the shared emphasized-decelerate
+  // curve at 500ms, symmetric enter/exit — a smooth glide with NO overshoot (the previous
+  // ease-expressive-enter bounce read as unnatural on a large panel). Direction is set per side
+  // below; only the axis differs across Side (x) and Bottom (y) sheets. Reduced-motion: global.
+  "fixed z-50 flex flex-col bg-surface border-border shadow-xl duration-drawer ease-emphasized",
   {
     variants: {
       side: {

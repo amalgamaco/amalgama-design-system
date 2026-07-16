@@ -33,8 +33,10 @@ export const DrawerOverlay = React.forwardRef<
     ref={ref}
     className={cn(
       // The fade-in/out classes are REQUIRED: vaul starts the overlay at opacity 0 and relies on
-      // these to animate it in — without them the scrim never becomes visible.
-      "fixed inset-0 z-50 bg-scrim/40 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      // these to animate it in — without them the scrim never becomes visible. Duration/curve are
+      // the shared sheet/drawer tokens (vaul drives the same 500ms emphasized fade) so the Drawer
+      // overlay and the Sheet overlay transition identically.
+      "fixed inset-0 z-50 bg-scrim/40 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 duration-drawer ease-emphasized",
       className
     )}
     {...props}
