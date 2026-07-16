@@ -187,7 +187,7 @@ export function AlertDialogShowcase() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction>Eliminar</AlertDialogAction>
+          <AlertDialogAction variant="danger">Eliminar</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

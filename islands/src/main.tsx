@@ -26,7 +26,7 @@ import { CardElevated, CardFilled, CardOutlined } from "./islands/CardVariantsSh
 import { StatCardShowcase, StatCardGrid } from "./islands/StatCardShowcase"
 import { AvatarShowcase } from "./islands/AvatarShowcase"
 import { TooltipShowcase } from "./islands/TooltipShowcase"
-import { SheetShowcase, BottomSheetShowcase, SideSheetShowcase, SheetTimeSlotShowcase, SheetResponsiveShowcase } from "./islands/SheetShowcase"
+import { SheetShowcase, BottomSheetShowcase, SideSheetShowcase, SheetTimeSlotShowcase, SheetResponsiveShowcase, SheetEditProfileShowcase } from "./islands/SheetShowcase"
 import { CarouselShowcase } from "./islands/CarouselShowcase"
 import { DatePickerShowcase } from "./islands/DatePickerShowcase"
 import { DatePickerFieldShowcase } from "./islands/DatePickerField"
@@ -348,6 +348,7 @@ const registry: Record<string, ComponentType> = {
   "side-sheet-showcase": SideSheetShowcase,
   "sheet-timeslot-showcase": SheetTimeSlotShowcase,
   "sheet-responsive-showcase": SheetResponsiveShowcase,
+  "sheet-editprofile-showcase": SheetEditProfileShowcase,
   "carousel-showcase": CarouselShowcase,
   "date-picker-showcase": DatePickerShowcase,
   "date-picker-field-showcase": DatePickerFieldShowcase,

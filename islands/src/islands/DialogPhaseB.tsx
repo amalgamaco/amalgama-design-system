@@ -21,7 +21,7 @@ export function DialogDemo() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary">Abrir modal</Button>
+        <Button variant="secondary">Abrir modal</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

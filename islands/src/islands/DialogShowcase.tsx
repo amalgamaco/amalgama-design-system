@@ -14,7 +14,7 @@ export function DialogShowcase() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary" size="sm">Abrir diálogo</Button>
+        <Button variant="secondary" size="sm">Abrir diálogo</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

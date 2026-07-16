@@ -22,8 +22,41 @@ import {
   DialogClose,
 } from "@ds/dialog"
 import { Button } from "@ds/button"
+import { Input } from "@ds/input"
 import { ToggleGroup, ToggleGroupItem } from "@ds/toggle-group"
 import { Clock } from "lucide-react"
+
+/* ────────────────────────────────────────────────────────────
+ * Canonical shadcn "Edit profile" sheet — the reference composition,
+ * themed with Embassy: SheetHeader (title + description) · SheetBody
+ * (form fields, gap-6) · SheetFooter (full-width Save). Built-in close
+ * (X, top-right). Trigger = Tonal (secondary), the DS default for
+ * opening an overlay. Container is responsive (75% → 24rem).
+ * ──────────────────────────────────────────────────────────── */
+export function SheetEditProfileShowcase() {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="secondary">Editar perfil</Button>
+      </SheetTrigger>
+      <SheetContent side="right">
+        <SheetHeader>
+          <SheetTitle>Editar perfil</SheetTitle>
+          <SheetDescription>Hacé cambios en tu perfil acá. Guardá cuando termines.</SheetDescription>
+        </SheetHeader>
+        <SheetBody>
+          <div className="grid gap-6">
+            <Input label="Email" type="email" defaultValue="shadcn@example.com" />
+            <Input label="Usuario" defaultValue="@shadcn" />
+          </div>
+        </SheetBody>
+        <SheetFooter>
+          <Button variant="primary">Guardar cambios</Button>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
+  )
+}
 
 export function SheetShowcase() {
   const [side, setSide] = useState<"right" | "left" | "bottom">("right")

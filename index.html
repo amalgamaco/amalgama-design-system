@@ -15,8 +15,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=85">
-<script type="module" src="islands/dist/embassy-islands.js?v=85"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=86">
+<script type="module" src="islands/dist/embassy-islands.js?v=86"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -6653,6 +6653,8 @@ function setLoading(btn, isLoading) {
             <div class="bd-dd dont"><div class="bd-dd-head">✕ Evitar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Cancelar en Tonal</b> — compite con la primaria (peor si la primaria está deshabilitada/gris).</li><li>Dos Filled, o Filled + Tonal, como par Confirmar/Cancelar.</li><li>Inventar una variante nueva para “cancelar”.</li></ul></div></div>
           </div>
           <p class="ds-p" style="margin-top:12px"><b>Tonal vs. Outlined en una línea:</b> <b>Tonal</b> = una acción secundaria que querés <em>alentar</em> (constructiva, peso medio); <b>Outlined</b> = una acción secundaria que debe <em>hacerse a un lado</em> (cancelar/neutra). Un Cancelar siempre se hace a un lado → Outlined. Ver <a href="#" onclick="navigate('c-dialog');return false;">Dialog</a> · <a href="#" onclick="navigate('c-side-sheet');return false;">Side Sheet</a>.</p>
+          <p class="ds-p" style="margin-top:8px"><b>Triggers de overlay.</b> El botón que <em>abre</em> un Dialog / Sheet / Alert Dialog / Popover usa <b>Tonal (<code>secondary</code>)</b> por defecto — es un afordance neutro de “abrir”; la acción primaria real vive <em>dentro</em> del overlay. Excepciones: punto de entrada destructivo → <code>danger</code>; trigger tipo campo (Date Picker, Combobox) → <code>tertiary</code>; CTA hero de página → <code>primary</code>.</p>
+          <p class="ds-p" style="margin-top:8px"><b>Confirmaciones destructivas.</b> La acción destructiva usa <b><code>variant="danger"</code></b> (tokens Error de Embassy), el Cancelar es Outlined y queda como foco seguro por defecto. Ver <a href="#" onclick="navigate('c-dialog');return false;">Alert Dialog</a>.</p>
         </section>
 
         <!-- ── Form pattern ── -->
@@ -9763,7 +9765,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
     &lt;/AlertDialogHeader&gt;
     &lt;AlertDialogFooter&gt;
       &lt;AlertDialogCancel&gt;Cancelar&lt;/AlertDialogCancel&gt;
-      &lt;AlertDialogAction&gt;Eliminar&lt;/AlertDialogAction&gt;
+      &lt;AlertDialogAction variant=&quot;danger&quot;&gt;Eliminar&lt;/AlertDialogAction&gt;
     &lt;/AlertDialogFooter&gt;
   &lt;/AlertDialogContent&gt;
 &lt;/AlertDialog&gt;</code></pre></div>
@@ -9956,7 +9958,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
 
 &lt;Dialog&gt;
   &lt;DialogTrigger asChild&gt;
-    &lt;Button variant=&quot;primary&quot;&gt;Abrir modal&lt;/Button&gt;
+    &lt;Button variant=&quot;secondary&quot;&gt;Abrir modal&lt;/Button&gt;
   &lt;/DialogTrigger&gt;
   &lt;DialogContent&gt;
     &lt;DialogHeader&gt;
@@ -19154,10 +19156,25 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <li>Para filtros, detalle de ítem o formularios secundarios en desktop — no para navegación principal.</li>
           </ul>
           <div class="bd-family-wrap"><div data-island="side-sheet-showcase"></div></div>
-          <ol class="bd-family-legend"><li>Side sheet — <code>side="right"</code> (panel de 320px de ancho, alto completo). También <code>side="left"</code>.</li></ol>
+          <ol class="bd-family-legend"><li>Side sheet — <code>side="right"</code> (75% del ancho en mobile, máx. 24&nbsp;rem en desktop, alto completo). También <code>side="left"</code>.</li></ol>
+
+          <h2 class="docs-section-title" style="margin-top:36px">Ejemplo canónico — “Editar perfil”</h2>
+          <p class="bd-lead" style="margin-top:8px">La composición de referencia de shadcn, tematizada con Embassy: <code>SheetHeader</code> (título + descripción) → <code>SheetBody</code> (campos con <code>gap-6</code>) → <code>SheetFooter</code> (acción a ancho completo). Botón de cierre (✕) arriba a la derecha; trigger <b>Tonal</b> (el default del DS para abrir un overlay); contenedor responsive (75% → 24&nbsp;rem).</p>
+          <div class="bd-family-wrap"><div data-island="sheet-editprofile-showcase"></div></div>
+          <table class="ds-table" style="margin-top:16px">
+            <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
+            <tbody>
+              <tr><td>Trigger</td><td><code>Button variant="secondary"</code> (Tonal) — default para abrir overlays</td></tr>
+              <tr><td>Cierre (✕)</td><td><code>Button variant="icon"</code>, arriba a la derecha (built-in, <code>showCloseButton</code>)</td></tr>
+              <tr><td>Header</td><td><code>SheetTitle</code> (semibold) + <code>SheetDescription</code> (<code>--color-fg-subtle</code>), sin borde</td></tr>
+              <tr><td>Campos</td><td><code>SheetBody</code> con <code>grid gap-6</code>; cada campo = <code>Input</code> con label</td></tr>
+              <tr><td>Footer</td><td><code>SheetFooter</code> — acción a ancho completo (apilada), <code>mt-auto</code>, sin borde</td></tr>
+              <tr><td>Contenedor</td><td><code>w-3/4</code> mobile · <code>sm:max-w-sm</code> (24&nbsp;rem) desktop · alto completo</td></tr>
+            </tbody>
+          </table>
 
           <h2 class="docs-section-title" style="margin-top:36px">Ejemplo funcional — selector de horario (desde la derecha)</h2>
-          <p class="bd-lead" style="margin-top:8px">Elegir un horario disponible para agendar una entrevista, en un panel que abre <b>desde la derecha</b> (<code>Sheet side="right"</code>). Los slots son un <code>ToggleGroup</code> de selección única —el patrón del DS para “elegir 1 de N”— con los estados <b>default, hover, focus, seleccionado y deshabilitado</b> de fábrica. <b>Confirmar</b> (primary) se habilita sólo al elegir y <b>Cancelar</b> es <code>secondary</code>.</p>
+          <p class="bd-lead" style="margin-top:8px">Elegir un horario disponible para agendar una entrevista, en un panel que abre <b>desde la derecha</b> (<code>Sheet side="right"</code>). Los slots son un <code>ToggleGroup</code> de selección única —el patrón del DS para “elegir 1 de N”— con los estados <b>default, hover, focus, seleccionado y deshabilitado</b> de fábrica. <b>Confirmar</b> (primary) se habilita sólo al elegir y <b>Cancelar</b> es <code>tertiary</code> (Outlined).</p>
           <div class="bd-family-wrap"><div data-island="sheet-timeslot-showcase"></div></div>
           <table class="ds-table" style="margin-top:16px">
             <thead><tr><th>Estado del slot</th><th>Tratamiento</th><th>Token</th></tr></thead>

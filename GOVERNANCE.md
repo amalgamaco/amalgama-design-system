@@ -1090,3 +1090,32 @@ travel differs by `side` (right/left = x; bottom/top = y). `prefers-reduced-moti
 handled globally by the theme. **Do not** use `ease-expressive-*` (overshoot) on a large sliding
 panel — that bounce reads as unnatural; overshoot is for small spatial motion (zoom/rotate) on
 dialogs and menus only.
+
+### 20.3 Overlay triggers
+
+The button that **opens** an overlay (Dialog, Sheet, Alert Dialog, Popover) defaults to
+**`Button variant="secondary"` (Tonal)** — the DS-standard overlay trigger. A trigger is a neutral
+"open this" affordance; Filled (`primary`) over-weights it and competes with the real primary action,
+which lives *inside* the overlay. Deviate only for a **strong UX reason**:
+
+- **Destructive entry point** (e.g. a "Delete" button that opens a confirm) → `danger` — the warning
+  color is worth showing at the entry too (pairs with the destructive confirm, §20.4).
+- **Field-style trigger** (Date Picker, Combobox — reads as a form control) → `tertiary` (Outlined),
+  matching the input surface, not a Tonal button.
+- **Page hero CTA** whose whole purpose is that one action → `primary` is acceptable.
+
+Everything else: Tonal.
+
+### 20.4 Destructive confirmations
+
+Any flow that destroys/irreversibly changes data (delete, discard, revoke) uses **one canonical
+pattern**, everywhere (Alert Dialog, Dialog, Sheet, confirmation flows):
+
+- **Destructive action** → `Button variant="danger"` (Embassy **Error** tokens: `--color-error` /
+  `--color-on-error`). Never a plain `primary` for a destructive confirm. `AlertDialogAction` takes
+  `variant="danger"`.
+- **Cancel** → `tertiary` (Outlined), per §20.1 — and it should be the **safe default focus**.
+- The **confirm must be explicit** (Alert Dialog: no close-on-outside/Esc-to-confirm; Esc = Cancel).
+- Optionally the entry-point trigger is also `danger` (§20.3).
+
+Never rely on color alone — the label must name the consequence ("Eliminar vacante", not "OK").

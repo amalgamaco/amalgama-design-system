@@ -17,7 +17,9 @@
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { cva, type VariantProps } from "class-variance-authority"
+import { X } from "lucide-react"
 import { cn } from "../lib/utils"
+import { Button } from "./button"
 
 const Sheet = DialogPrimitive.Root
 const SheetTrigger = DialogPrimitive.Trigger
@@ -43,21 +45,21 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const sheetVariants = cva(
-  // The panel slides on the emphasized-decelerate curve at 500ms, symmetric enter/exit — a smooth
-  // glide with NO overshoot (a bounce curve read as unnatural on a large panel). Direction is set
-  // per side below; only the axis differs across Side (x) and Bottom (y) sheets. Reduced-motion: global.
-  "fixed z-50 flex flex-col bg-surface border-border shadow-xl duration-sheet ease-emphasized",
+  // Canonical shadcn Sheet structure, Embassy tokens. `gap-4` separates header / body / footer;
+  // the panel slides on the emphasized-decelerate curve at 500ms, symmetric enter/exit (no overshoot).
+  // Reduced-motion handled globally. Side panels fill the height and are responsive (75% → 24rem).
+  "fixed z-50 flex flex-col gap-4 bg-surface border-border shadow-xl duration-sheet ease-emphasized",
   {
     variants: {
       side: {
         top:
           "inset-x-0 top-0 h-auto border-b rounded-b-2xl sm:mx-auto sm:max-w-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
         right:
-          "inset-y-0 right-0 w-80 border-l data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
+          "inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
         left:
-          "inset-y-0 left-0 w-80 border-r data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
+          "inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
         bottom:
-          "inset-x-0 bottom-0 h-96 border-t rounded-t-2xl sm:mx-auto sm:max-w-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
+          "inset-x-0 bottom-0 h-auto max-h-[80vh] border-t rounded-t-2xl sm:mx-auto sm:max-w-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
       },
     },
     defaultVariants: { side: "right" },
@@ -66,12 +68,15 @@ const sheetVariants = cva(
 
 interface SheetContentProps
   extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>,
-    VariantProps<typeof sheetVariants> {}
+    VariantProps<typeof sheetVariants> {
+  /** Render the built-in close button (X, top-right). Default true — set false to omit. */
+  showCloseButton?: boolean
+}
 
 const SheetContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   SheetContentProps
->(({ className, side, children, ...props }, ref) => (
+>(({ className, side, children, showCloseButton = true, ...props }, ref) => (
   <DialogPrimitive.Portal>
     <SheetOverlay />
     <DialogPrimitive.Content
@@ -80,13 +85,21 @@ const SheetContent = React.forwardRef<
       {...props}
     >
       {children}
+      {showCloseButton && (
+        <DialogPrimitive.Close asChild>
+          <Button variant="icon" aria-label="Cerrar" className="absolute right-4 top-4">
+            <X className="size-[18px]" aria-hidden="true" />
+          </Button>
+        </DialogPrimitive.Close>
+      )}
     </DialogPrimitive.Content>
   </DialogPrimitive.Portal>
 ))
 SheetContent.displayName = DialogPrimitive.Content.displayName
 
+// Header — borderless (shadcn); pr-14 reserves room for the top-right close button.
 const SheetHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("flex flex-col gap-1 px-6 py-5 border-b border-border", className)} {...props} />
+  <div className={cn("flex flex-col gap-1.5 px-6 pt-6 pr-14", className)} {...props} />
 )
 SheetHeader.displayName = "SheetHeader"
 
@@ -114,13 +127,16 @@ const SheetDescription = React.forwardRef<
 ))
 SheetDescription.displayName = DialogPrimitive.Description.displayName
 
+// Body — scrollable content region; vertical rhythm comes from SheetContent's `gap-4`.
 const SheetBody = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("flex-1 overflow-y-auto px-6 py-5", className)} {...props} />
+  <div className={cn("flex-1 overflow-y-auto px-6", className)} {...props} />
 )
 SheetBody.displayName = "SheetBody"
 
+// Footer — borderless, pinned to the bottom (`mt-auto`); buttons STACK full-width
+// (flex-col + default align-stretch), the shadcn Sheet convention for a narrow panel.
 const SheetFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("flex justify-end gap-2 px-6 py-4 border-t border-border", className)} {...props} />
+  <div className={cn("mt-auto flex flex-col gap-2 px-6 pb-6", className)} {...props} />
 )
 SheetFooter.displayName = "SheetFooter"
 

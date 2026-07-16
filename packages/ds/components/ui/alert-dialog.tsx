@@ -6,15 +6,15 @@
  * — bloquea hasta que la persona elige. Cuándo no: diálogos con contenido/tareas (usar
  * Dialog), avisos no bloqueantes (usar Alert / Snackbar).
  *
- * shadcn Alert Dialog structure, Embassy tokens; Action/Cancel compose the canonical Button
- * (Action = primary/Filled, Cancel = tertiary/Outlined — the DS-wide standard: a dismiss action stays
- * subordinate to the affirmative one, never Tonal which competes. See GOVERNANCE §20.1). Same scrim +
- * Expressive zoom as Dialog.
+ * shadcn Alert Dialog structure, Embassy tokens; Action/Cancel compose the canonical Button.
+ * Action defaults to primary/Filled; for a DESTRUCTIVE confirm pass `variant="danger"` (Embassy Error
+ * tokens) — that is the DS standard for destructive dialogs. Cancel is tertiary/Outlined (subordinate,
+ * never Tonal). See GOVERNANCE §20.1 / §20.3. Same scrim + Expressive zoom as Dialog.
  */
 import * as React from "react"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"
 import { cn } from "../lib/utils"
-import { buttonVariants } from "./button"
+import { buttonVariants, type ButtonProps } from "./button"
 
 const AlertDialog = AlertDialogPrimitive.Root
 const AlertDialogTrigger = AlertDialogPrimitive.Trigger
@@ -83,9 +83,11 @@ AlertDialogDescription.displayName = "AlertDialogDescription"
 
 const AlertDialogAction = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Action>,
-  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>
->(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Action ref={ref} className={cn(buttonVariants({ variant: "primary" }), className)} {...props} />
+  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action> & { variant?: ButtonProps["variant"] }
+>(({ className, variant = "primary", ...props }, ref) => (
+  // Affirmative action. variant="danger" for destructive confirms (Embassy Error tokens); "success"
+  // for positive; default primary otherwise.
+  <AlertDialogPrimitive.Action ref={ref} className={cn(buttonVariants({ variant }), className)} {...props} />
 ))
 AlertDialogAction.displayName = "AlertDialogAction"
 
