@@ -15,8 +15,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=83">
-<script type="module" src="islands/dist/embassy-islands.js?v=83"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=84">
+<script type="module" src="islands/dist/embassy-islands.js?v=84"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -3569,7 +3569,6 @@ body { overflow-x: clip; }
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-bottom-sheet" onclick="navigate('c-bottom-sheet')">Bottom Sheets</div>
         <div class="ds-nav-item" data-section="c-side-sheet" onclick="navigate('c-side-sheet')">Side Sheets</div>
-        <div class="ds-nav-item" data-section="c-drawer" onclick="navigate('c-drawer')">Drawer (vaul)</div>
       </div>
       <div class="ds-nav-item" data-section="c-slider" onclick="navigate('c-slider')">Sliders</div>
       <div class="ds-nav-item" data-section="c-snackbar" onclick="navigate('c-snackbar')">Snackbar</div>
@@ -18971,7 +18970,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from &q
               <tr><td>Ancho</td><td>Completo en mobile (&lt; 640&nbsp;px); acotado a 512px (<code>sm:max-w-lg</code>) y centrado en ≥ 640&nbsp;px</td></tr>
               <tr><td>Padding header / body</td><td><code>px-6 py-5</code></td></tr>
               <tr><td>Padding footer</td><td><code>px-6 py-4</code></td></tr>
-              <tr><td>Animación</td><td>Slide desde abajo, 500ms, curva <code>--ease-emphasized</code> (sin overshoot) — mismo sistema de movimiento que el <a href="#" onclick="navigate('c-drawer');return false;">Drawer</a>, simétrico apertura/cierre. Respeta <code>prefers-reduced-motion</code>.</td></tr>
+              <tr><td>Animación</td><td>Slide desde abajo, 500ms, curva <code>--ease-emphasized</code> (sin overshoot), simétrico apertura/cierre. Respeta <code>prefers-reduced-motion</code>.</td></tr>
               <tr><td>Esquinas</td><td>Superiores redondeadas (<code>rounded-t-2xl</code>)</td></tr>
             </tbody>
           </table>
@@ -19120,6 +19119,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
       <h1 class="ds-page-title">Side Sheets</h1>
       <p class="ds-page-desc">Panel anclado a un lateral de la pantalla para filtros, detalle o acciones contextuales en pantallas anchas.</p>
       <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui.</strong> Componente <code>Sheet</code> de <code>@amalgama/ds</code> con <code>side="right" | "left"</code> — el primitivo <code>Dialog</code> de Radix anclado a un lateral. La estructura sigue el modelo de <strong>Material Design 3</strong> (Google, CC BY 4.0), con valores y ejemplos reemplazados por tokens y componentes de Embassy.</div>
+      <div class="ds-callout" style="margin-top:12px;border-left-color:var(--color-primary)"><strong>Panel canónico único.</strong> El <code>Sheet</code> es el <b>único</b> panel anclado a un borde del DS: <code>side="right"|"left"</code> = Side Sheet, <code>side="bottom"</code> = <a href="#" onclick="navigate('c-bottom-sheet');return false;">Bottom Sheet</a>, <code>side="top"</code> = superior. Se retiró el componente Drawer (vaul): la distinción sólo aportaba gestos (swipe / snap / anidado) que el producto no usa. Si en el futuro hace falta swipe-to-dismiss o snap points, se reintroduce un motor de gestos — hasta entonces, todo panel de borde es un Sheet.</div>
 
       <div data-island="component-tabs-nav"></div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
@@ -19134,6 +19134,24 @@ import { Button } from &quot;@amalgama/ds/button&quot;
           </ul>
           <div class="bd-family-wrap"><div data-island="side-sheet-showcase"></div></div>
           <ol class="bd-family-legend"><li>Side sheet — <code>side="right"</code> (panel de 320px de ancho, alto completo). También <code>side="left"</code>.</li></ol>
+
+          <h2 class="docs-section-title" style="margin-top:36px">Ejemplo funcional — selector de horario (desde la derecha)</h2>
+          <p class="bd-lead" style="margin-top:8px">Elegir un horario disponible para agendar una entrevista, en un panel que abre <b>desde la derecha</b> (<code>Sheet side="right"</code>). Los slots son un <code>ToggleGroup</code> de selección única —el patrón del DS para “elegir 1 de N”— con los estados <b>default, hover, focus, seleccionado y deshabilitado</b> de fábrica. <b>Confirmar</b> (primary) se habilita sólo al elegir y <b>Cancelar</b> es <code>secondary</code>.</p>
+          <div class="bd-family-wrap"><div data-island="sheet-timeslot-showcase"></div></div>
+          <table class="ds-table" style="margin-top:16px">
+            <thead><tr><th>Estado del slot</th><th>Tratamiento</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Default</td><td>Contorno sutil, texto on-surface (<code>ToggleGroupItem variant="outline"</code>)</td><td><code>--color-outline-variant</code></td></tr>
+              <tr><td>Hover</td><td>Capa de estado sobre la superficie</td><td><code>--color-on-surface</code> @ 8%</td></tr>
+              <tr><td>Focus</td><td>Anillo de foco accesible (teclado)</td><td><code>--color-focus-ring</code></td></tr>
+              <tr><td>Seleccionado</td><td>Relleno tonal + texto on-secondary-container</td><td><code>--color-secondary-container</code></td></tr>
+              <tr><td>Deshabilitado</td><td>Horario reservado — no interactivo, opacidad reducida</td><td><code>opacity 0.38</code></td></tr>
+            </tbody>
+          </table>
+
+          <h2 class="docs-section-title" style="margin-top:36px">Patrón responsive — Dialog / Sheet</h2>
+          <p class="bd-lead" style="margin-top:8px">La misma tarea se presenta como <b>Dialog centrado</b> en desktop (≥768&nbsp;px) y como <b>Sheet</b> anclado en mobile — cada plataforma usa su patrón natural. Se alterna con una media query. Redimensioná la ventana para verlo.</p>
+          <div class="bd-family-wrap"><div data-island="sheet-responsive-showcase"></div></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -19161,7 +19179,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
               <tr><td>Alto</td><td>completo de la pantalla</td></tr>
               <tr><td>Padding header / body</td><td><code>px-6 py-5</code></td></tr>
               <tr><td>Padding footer</td><td><code>px-6 py-4</code></td></tr>
-              <tr><td>Animación</td><td>Slide desde el lateral, 500ms, curva <code>--ease-emphasized</code> (sin overshoot) — mismo sistema de movimiento que el <a href="#" onclick="navigate('c-drawer');return false;">Drawer</a>, simétrico apertura/cierre. Respeta <code>prefers-reduced-motion</code>.</td></tr>
+              <tr><td>Animación</td><td>Slide desde el lateral, 500ms, curva <code>--ease-emphasized</code> (sin overshoot), simétrico apertura/cierre. Respeta <code>prefers-reduced-motion</code>.</td></tr>
             </tbody>
           </table>
         </section>
@@ -19284,365 +19302,6 @@ import { Button } from &quot;@amalgama/ds/button&quot;
     {/* contenido */}
   &lt;/SheetContent&gt;
 &lt;/Sheet&gt;</code></pre>
-          </div>
-        </section>
-      </div>
-    </section>
-    <!-- ═══════════ DRAWER ═══════════ -->
-    <section class="ds-section" id="s-c-drawer">
-      <div class="ds-page-tag">Components · Containment</div>
-      <h1 class="ds-page-title">Drawer</h1>
-      <p class="ds-page-desc">Panel deslizable con gesto de arrastrar-para-cerrar, anclado a cualquier borde. La variante táctil del Sheet, ideal en mobile.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: shadcn/ui (vaul).</strong> Componente <code>Drawer</code> de <code>@amalgama/ds</code> construido sobre <code>vaul</code> — sigue la estructura oficial de shadcn, tematizado con tokens de Embassy. Es <strong>distinto del Sheet</strong>: el Drawer suma el gesto de arrastrar-para-cerrar y una manija de arrastre (variante inferior); el Sheet es el panel lateral sobre Radix Dialog. La documentación sigue el modelo de profundidad de <strong>Material Design 3</strong> (Google, CC BY 4.0).</div>
-
-      <div data-island="component-tabs-nav"></div>
-      <div class="ds-comp-tab-panel active" data-tab="overview">
-        <section class="docs-section">
-          <p class="bd-lead">El Drawer se desliza desde un <b>borde de la pantalla</b> y responde al <b>gesto de arrastre</b>: seguí con el dedo y soltá para cerrar. Es la superficie táctil por excelencia para filtros, detalle o acciones en mobile.</p>
-          <ul class="bd-overview-list">
-            <li><b>Construido sobre <code>vaul</code></b> (implementación oficial de shadcn, default registry), con seguimiento del gesto y cierre por arrastre.</li>
-            <li><b>Cuatro direcciones</b> vía la prop <code>direction</code>: <code>right</code> · <code>left</code> · <code>bottom</code> (por defecto) · <code>top</code>. Los paneles laterales ocupan el alto; los verticales se dimensionan al contenido.</li>
-            <li><b>Capacidades:</b> swipe-to-dismiss, <b>snap points</b>, drawers <b>anidados</b>, modo <b>no-modal</b> y el patrón <b>responsive</b> (Dialog en desktop / Drawer en mobile). Todas documentadas abajo y en Guías.</li>
-            <li><b>Manija de arrastre</b> visible en la variante inferior (bottom) — la señal del gesto de swipe (igual que shadcn oficial).</li>
-            <li><b>Modal por defecto:</b> overlay con scrim (<code>--color-scrim</code>) + desenfoque; cierre por arrastre, <code>Esc</code>, clic en el overlay o botón. (El modo no-modal lo desactiva.)</li>
-            <li><b>Anatomía:</b> <code>DrawerHeader</code> (título + descripción) · <code>DrawerBody</code> (con scroll) · <code>DrawerFooter</code> (acciones).</li>
-            <li><b>¿Drawer o Sheet?</b> <b>Drawer</b> = superficie con <b>gesto</b> (swipe/snap), táctil/mobile-first, cualquier dirección. <b>Sheet</b> = panel lateral <b>estático</b> (Radix Dialog, sin gesto). Regla completa en Guías.</li>
-          </ul>
-          <div class="bd-family-wrap"><div data-island="drawer-showcase"></div></div>
-          <ol class="bd-family-legend"><li>Drawer en las cuatro direcciones (<code>direction</code>): derecha, izquierda, abajo (con manija) y arriba.</li></ol>
-
-          <h2 class="docs-section-title" style="margin-top:36px">Ejemplo funcional — selector de horario (desde la derecha)</h2>
-          <p class="bd-lead" style="margin-top:8px">El patrón de shadcn: elegir un horario disponible para agendar una entrevista, en un drawer que abre <b>desde la derecha</b> (<code>direction="right"</code>). Los slots son un <code>ToggleGroup</code> de selección única —el patrón del DS para “elegir 1 de N”— que aporta de fábrica los estados <b>default, hover, focus, seleccionado y deshabilitado</b>. <b>Confirmar</b> (primary) se habilita sólo al elegir un horario y <b>Cancelar</b> es <code>secondary</code>. Todo con componentes y tokens del DS.</p>
-          <div class="bd-family-wrap"><div data-island="drawer-timeslot-showcase"></div></div>
-          <table class="ds-table" style="margin-top:16px">
-            <thead><tr><th>Estado del slot</th><th>Tratamiento</th><th>Token</th></tr></thead>
-            <tbody>
-              <tr><td>Default</td><td>Contorno sutil, texto on-surface (<code>ToggleGroupItem variant="outline"</code>)</td><td><code>--color-outline-variant</code></td></tr>
-              <tr><td>Hover</td><td>Capa de estado sobre la superficie</td><td><code>--color-on-surface</code> @ 8%</td></tr>
-              <tr><td>Focus</td><td>Anillo de foco accesible (teclado)</td><td><code>--color-focus-ring</code></td></tr>
-              <tr><td>Seleccionado</td><td>Relleno tonal + texto on-secondary-container</td><td><code>--color-secondary-container</code></td></tr>
-              <tr><td>Deshabilitado</td><td>Horario reservado — no interactivo, opacidad reducida</td><td><code>opacity 0.38</code></td></tr>
-            </tbody>
-          </table>
-
-          <h2 class="docs-section-title" style="margin-top:36px">Variantes</h2>
-          <p class="bd-lead" style="margin-top:8px">Todas las capacidades oficiales del Drawer de shadcn, con tokens y movimiento de Embassy. La guía de cuándo/por qué usar cada una está en la pestaña <b>Guías</b>.</p>
-          <div class="bd-grid c2" style="margin-top:12px">
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Right / Left Drawer</div><div class="bd-family-wrap"><div data-island="drawer-right-showcase"></div></div><p class="text-caption" style="color:var(--text-secondary);margin-top:8px">Panel lateral que ocupa el alto — filtros, detalle, edición.</p></div>
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Bottom / Top Drawer</div><div class="bd-family-wrap"><div data-island="drawer-bottom-showcase"></div></div><p class="text-caption" style="color:var(--text-secondary);margin-top:8px">Panel vertical dimensionado al contenido, con manija de swipe.</p></div>
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Snap points</div><div class="bd-family-wrap"><div data-island="drawer-snap-showcase"></div></div><p class="text-caption" style="color:var(--text-secondary);margin-top:8px">Alturas preestablecidas (40% / 90%) para resumen → detalle.</p></div>
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Nested Drawer</div><div class="bd-family-wrap"><div data-island="drawer-nested-showcase"></div></div><p class="text-caption" style="color:var(--text-secondary);margin-top:8px">Abrir un drawer desde otro; el padre queda montado detrás.</p></div>
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Non-modal Drawer</div><div class="bd-family-wrap"><div data-island="drawer-nonmodal-showcase"></div></div><p class="text-caption" style="color:var(--text-secondary);margin-top:8px">Sin scrim bloqueante — la página sigue siendo interactiva.</p></div>
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Responsive (Dialog / Drawer)</div><div class="bd-family-wrap"><div data-island="drawer-responsive-showcase"></div></div><p class="text-caption" style="color:var(--text-secondary);margin-top:8px">Dialog en desktop (≥768px), Drawer en mobile. Redimensioná la ventana.</p></div>
-          </div>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="specs">
-        <div class="ds-toc-layout">
-        <div class="ds-toc-body">
-        <section class="docs-section" id="tc-drawer-s-0">
-          <h2 class="docs-section-title">Anatomía</h2>
-          <table class="ds-table">
-            <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
-            <tbody>
-              <tr><td>Overlay (scrim)</td><td><code>fixed inset-0</code>, scrim al 40% + desenfoque (<code>backdrop-blur-sm</code>)</td></tr>
-              <tr><td>Panel (<code>DrawerContent</code>)</td><td>Superficie anclada al borde con <code>shadow-xl</code>; radio en el borde de anclaje</td></tr>
-              <tr><td>Manija (handle)</td><td>Barra de arrastre 100×6px — solo en <code>direction="bottom"</code></td></tr>
-              <tr><td><code>DrawerHeader</code></td><td>Título (<code>font-heading text-heading-xs</code> semibold) + descripción</td></tr>
-              <tr><td><code>DrawerBody</code></td><td><code>flex-1</code> con scroll (<code>overflow-y-auto</code>)</td></tr>
-              <tr><td><code>DrawerFooter</code></td><td>Acciones apiladas, ancladas abajo (<code>mt-auto</code>)</td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="docs-section" id="tc-drawer-s-1">
-          <h2 class="docs-section-title">Medidas</h2>
-          <table class="ds-table">
-            <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
-            <tbody>
-              <tr><td>Alto (top/bottom)</td><td>Hasta 80% del viewport (<code>max-h-[80vh]</code>), ancho completo</td></tr>
-              <tr><td>Ancho (left/right)</td><td>3/4 del viewport; acotado a <code>sm:max-w-sm</code> en ≥ 640&nbsp;px</td></tr>
-              <tr><td>Manija</td><td>100×6px (<code>h-1.5 w-[100px]</code>), <code>--color-outline-variant</code></td></tr>
-              <tr><td>Padding header / footer</td><td><code>p-6</code></td></tr>
-              <tr><td>Esquinas</td><td>Redondeadas en el borde de anclaje (<code>rounded-t-2xl</code> / <code>rounded-b-2xl</code>)</td></tr>
-              <tr><td>Movimiento</td><td>Spring de <code>vaul</code> con seguimiento del gesto; entrada/salida en <code>--ease-emphasized</code> a <code>--duration-drawer</code> (500ms) — la misma curva y duración que Side/Bottom Sheet. Respeta <code>prefers-reduced-motion</code>.</td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="docs-section" id="tc-drawer-s-2">
-          <h2 class="docs-section-title">Estados</h2>
-          <table class="ds-table">
-            <thead><tr><th>Estado</th><th>Tratamiento</th><th>Token</th></tr></thead>
-            <tbody>
-              <tr><td>Abierto</td><td>Panel deslizado desde el borde, sobre el scrim; siempre modal</td><td><code>--color-surface</code></td></tr>
-              <tr><td>Arrastrando</td><td>El panel sigue al dedo/puntero; soltar más allá del umbral cierra</td><td>—</td></tr>
-              <tr><td>Overlay</td><td>Scrim al 40% + desenfoque</td><td><code>--color-scrim</code></td></tr>
-              <tr><td>Cierre</td><td>Arrastre, <code>Esc</code>, clic en overlay o botón; foco atrapado</td><td>—</td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="docs-section" id="tc-drawer-s-3">
-          <h2 class="docs-section-title">Tokens y especificaciones</h2>
-          <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy (recalibra en dark mode).</p>
-          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div data-island="drawer-tokens"></div></div>
-          <table class="ds-table">
-            <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
-            <tbody>
-              <tr><td>Overlay</td><td><code>--color-scrim</code></td></tr>
-              <tr><td>Panel</td><td><code>--color-surface</code> + <code>--border</code> + <code>shadow-xl</code></td></tr>
-              <tr><td>Manija</td><td><code>--color-outline-variant</code></td></tr>
-              <tr><td>Título</td><td><code>--color-fg</code></td></tr>
-              <tr><td>Descripción / body</td><td><code>--color-fg-subtle</code> / <code>--color-fg</code></td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="docs-section" id="tc-drawer-s-4">
-          <h2 class="docs-section-title">API y variantes</h2>
-          <p class="docs-section-desc">Props de <code>vaul</code> que el <code>Drawer</code> de Embassy pasa sin modificar (no inventamos comportamiento).</p>
-          <table class="ds-table">
-            <thead><tr><th>Prop</th><th>Valores</th><th>Variante que habilita</th></tr></thead>
-            <tbody>
-              <tr><td><code>direction</code></td><td><code>right</code> · <code>left</code> · <code>bottom</code> · <code>top</code></td><td>Right / Left / Bottom / Top Drawer</td></tr>
-              <tr><td><code>snapPoints</code> + <code>activeSnapPoint</code> / <code>setActiveSnapPoint</code></td><td>fracciones (0–1) o px</td><td>Snap points (drawers verticales)</td></tr>
-              <tr><td><code>modal</code></td><td><code>false</code></td><td>Non-modal (página interactiva, sin scrim bloqueante)</td></tr>
-              <tr><td><code>DrawerNestedRoot</code></td><td>—</td><td>Nested (drawer dentro de otro)</td></tr>
-              <tr><td>composición con <code>Dialog</code> + media query</td><td>—</td><td>Responsive (Dialog desktop / Drawer mobile)</td></tr>
-            </tbody>
-          </table>
-          <p class="docs-section-desc" style="margin-top:16px">Atributos de datos de vaul para estilar por dirección/estado:</p>
-          <table class="ds-table">
-            <thead><tr><th>Atributo</th><th>Se aplica</th></tr></thead>
-            <tbody>
-              <tr><td><code>data-vaul-drawer-direction</code></td><td>Siempre — valor = la dirección; usado para el radio, borde y la manija por lado.</td></tr>
-              <tr><td><code>data-state</code></td><td><code>open</code> / <code>closed</code> — dispara el fade del overlay.</td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="docs-section" id="tc-drawer-s-5">
-          <h2 class="docs-section-title">Drawer vs. Sheet</h2>
-          <div class="ds-callout">Ambos son paneles anclados a un borde. <b>Drawer</b> (vaul) es la superficie con <b>gesto</b> (swipe, snap points, anidado) — táctil/mobile-first, cualquier dirección. <b>Sheet</b> (Radix Dialog) es el panel <b>lateral estático</b> de escritorio, sin gesto. Comparten superficie, scrim y el <b>mismo sistema de movimiento</b> — <code>--ease-emphasized</code> a <code>--duration-drawer</code> (500ms), simétrico apertura/cierre — así que entran y salen igual; el diferenciador es la interacción. No mezcles ambos para el mismo destino (regla completa en Guías).</div>
-        </section>
-        </div>
-        <nav class="ds-toc" data-toc-auto id="tc-drawer-s-toc" aria-label="En esta página">
-          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="ds-toc-title">En esta página</div>
-          <ul class="ds-toc-list">
-            <li><a class="ds-toc-link" data-target="tc-drawer-s-0">Anatomía</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-s-1">Medidas</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-s-2">Estados</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-s-3">Tokens y especificaciones</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-s-4">API y variantes</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-s-5">Drawer vs. Sheet</a></li>
-          </ul>
-        </nav>
-        </div>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines">
-        <div class="ds-toc-layout">
-        <div class="ds-toc-body">
-        <section class="docs-section" id="tc-drawer-g-0">
-          <h2 class="docs-section-title">Uso</h2>
-          <p class="ds-p">El Drawer muestra <b>contenido o acciones suplementarias</b> con una interacción táctil de arrastre, sin abandonar la pantalla actual. Es el patrón preferido en mobile cuando el gesto importa.</p>
-          <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Filtros, detalle o acciones en mobile con gesto de arrastre.</li><li>Bottom sheets táctiles con manija de swipe.</li><li>Contenido secundario que no justifica una pantalla.</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Panel lateral de escritorio → <b>Sheet</b>.</li><li>Diálogo modal centrado → <b>Dialog</b>.</li><li>Navegación principal → <b>Navigation</b> / app-shell.</li><li>Mensajes transitorios → <b>Snackbar</b>.</li></ul></div></div>
-          </div>
-        </section>
-        <section class="docs-section" id="tc-drawer-g-1">
-          <h2 class="docs-section-title">Anatomía</h2>
-          <p class="docs-section-desc">Componente real. Scrim, panel con manija, header, contenido y footer.</p>
-          <div class="bd-family-wrap"><div data-island="drawer-bottom-showcase"></div></div>
-          <ol class="bd-family-legend"><li>Scrim — bloquea el fondo (modal).</li><li>Manija — señal del gesto de arrastre.</li><li>Header — título + descripción.</li><li>Contenido — cuerpo desplazable.</li><li>Footer — acciones.</li></ol>
-        </section>
-        <section class="docs-section" id="tc-drawer-g-2">
-          <h2 class="docs-section-title">Dirección</h2>
-          <p class="ds-p">La prop <code>direction</code> ancla el drawer a un borde: <code>bottom</code> (mobile, con manija), <code>top</code>, <code>left</code> o <code>right</code>. Elegí el borde según el origen del contenido y el pulgar.</p>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li><b>bottom</b> — el más común en mobile; alcanzable con el pulgar, incluye manija de arrastre.</li>
-            <li><b>left / right</b> — filtros o navegación secundaria; 3/4 del ancho, acotado en desktop.</li>
-            <li><b>top</b> — notificaciones o búsqueda que descienden desde arriba.</li>
-          </ul>
-        </section>
-        <section class="docs-section" id="tc-drawer-g-3">
-          <h2 class="docs-section-title">Comportamiento</h2>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li>Es modal: el scrim bloquea el fondo; el contenido principal queda inerte.</li>
-            <li>El gesto de arrastre acompaña al dedo; soltar más allá del umbral cierra.</li>
-            <li>Salida siempre disponible además del gesto: <code>Esc</code>, clic en overlay o botón.</li>
-            <li>Foco atrapado dentro del drawer mientras está abierto (focus trap).</li>
-          </ul>
-        </section>
-        <section class="docs-section" id="tc-drawer-g-4">
-          <h2 class="docs-section-title">Layout responsive</h2>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li>Patrón preferido en <b>mobile / compacto</b>; en desktop, para tareas de decisión, preferí un <b>Dialog</b> (ver la variante Responsive abajo).</li>
-            <li>Vertical (abajo/arriba): alto acotado (hasta 80vh) con scroll interno; header y footer fijos, solo el body scrollea.</li>
-            <li>Lateral (izq/der): ocupa el alto completo y se acota (<code>sm:max-w-sm</code>) en pantallas anchas.</li>
-          </ul>
-        </section>
-        <section class="docs-section" id="tc-drawer-g-5">
-          <h2 class="docs-section-title">Variantes por dirección</h2>
-          <p class="docs-section-desc">La prop <code>direction</code> ancla el drawer a un borde. Elegí el borde por el origen del contenido y el alcance del pulgar.</p>
-          <div class="ds-table-wrap"><table class="ds-table">
-            <thead><tr><th>Dirección</th><th>Cuándo / por qué</th><th>Casos de uso</th><th>Responsive</th><th>Accesibilidad</th></tr></thead>
-            <tbody>
-              <tr><td><b>Right</b><br><code>direction="right"</code></td><td>Detalle o edición contextual sin dejar la lista; el lado derecho es el patrón occidental para paneles secundarios.</td><td>Ver/editar detalle, filtros, selector de horario (este ejemplo), inspector.</td><td>Ocupa el alto; <code>3/4</code> del ancho en mobile, máx. <code>24rem</code> en desktop.</td><td>Foco al panel al abrir; <code>Esc</code>/scrim cierran; foco vuelve al trigger.</td></tr>
-              <tr><td><b>Left</b><br><code>direction="left"</code></td><td>Navegación o filtros secundarios; espejo del right para contextos RTL o cuando la acción nace a la izquierda.</td><td>Menú de navegación auxiliar, filtros, capas.</td><td>Igual que right, anclado a la izquierda.</td><td>Idéntico contrato que right (Radix/vaul dialog).</td></tr>
-              <tr><td><b>Bottom</b><br><code>direction="bottom"</code></td><td>Alcanzable con el pulgar; es el patrón mobile por excelencia. Incluye manija de arrastre.</td><td>Acciones rápidas sobre un ítem, listas de opciones, formularios cortos en mobile.</td><td>Dimensionado al contenido, hasta 80vh; ancho completo.</td><td>La manija sugiere el gesto; salida por botón/<code>Esc</code> además del swipe.</td></tr>
-              <tr><td><b>Top</b><br><code>direction="top"</code></td><td>Contenido que “desciende” desde arriba, fuera del alcance del pulgar → menos frecuente.</td><td>Búsqueda global, notificaciones, banners de sistema.</td><td>Dimensionado al contenido, hasta 80vh; ancho completo.</td><td>No captures foco de forma sorpresiva; anunciá si es informativo.</td></tr>
-            </tbody>
-          </table></div>
-        </section>
-        <section class="docs-section" id="tc-drawer-g-6">
-          <h2 class="docs-section-title">Variantes de comportamiento</h2>
-          <p class="ds-p"><b>Snap points</b> (<code>snapPoints={[0.4, 0.9]}</code>) — <b>cuándo:</b> mostrar un resumen a media altura y el detalle al expandir. <b>Por qué:</b> deja el contexto visible sin saltar a pantalla completa. <b>Casos:</b> resultados sobre un mapa, reproductor, listas largas en mobile. <b>Responsive:</b> aplica a drawers verticales; controlá el punto activo con <code>activeSnapPoint</code>. <b>A11y:</b> operable por teclado; los saltos no deben robar el foco.</p>
-          <p class="ds-p"><b>Nested</b> (<code>DrawerNestedRoot</code>) — <b>cuándo:</b> abrir un segundo drawer desde uno abierto sin perder el contexto padre. <b>Por qué:</b> el padre queda montado y se apila detrás. <b>Casos:</b> detalle → editar, lista → ítem → acción. <b>Responsive:</b> igual comportamiento en todo tamaño. <b>A11y:</b> el foco pasa al drawer frontal; al cerrarlo, vuelve al padre.</p>
-          <p class="ds-p"><b>Non-modal</b> (<code>modal={false}</code>) — <b>cuándo:</b> la persona necesita seguir usando la página con el panel abierto. <b>Por qué:</b> sin scrim bloqueante. <b>Casos:</b> panel de ayuda, filtros persistentes, inspector. <b>Responsive:</b> reservalo a desktop/tablet — en mobile suele faltar espacio. <b>A11y:</b> no atrapa el foco; asegurá una forma clara de cerrarlo y de volver a él.</p>
-          <p class="ds-p"><b>Responsive (Dialog / Drawer)</b> — <b>cuándo:</b> misma tarea que debe ser Dialog centrado en desktop y Drawer anclado en mobile. <b>Por qué:</b> cada plataforma usa su patrón natural. <b>Casos:</b> editar perfil, confirmar, formularios. <b>Responsive:</b> alterná con una media query (<code>min-width: 768px</code>) — Dialog ≥768, Drawer &lt;768. <b>A11y:</b> ambos exponen <code>role="dialog"</code>, focus trap y retorno de foco.</p>
-        </section>
-        <section class="docs-section" id="tc-drawer-g-7">
-          <h2 class="docs-section-title">Drawer vs. Side Sheet — cuál usar</h2>
-          <p class="ds-p">Son componentes <b>distintos</b>; el diferenciador es la <b>interacción</b>, no la dirección:</p>
-          <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">Usá Drawer</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Necesitás <b>gesto</b>: swipe-to-dismiss, <b>snap points</b> o drawers <b>anidados</b>.</li><li>Superficie <b>mobile-first</b> / táctil.</li><li>El patrón <b>responsive</b> (Dialog desktop / Drawer mobile).</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">Usá Side Sheet</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Panel lateral <b>estático</b> de escritorio (sin gesto).</li><li>Filtros o detalle en desktop, sobre Radix Dialog.</li><li>No necesitás swipe ni snap points.</li></ul></div></div>
-          </div>
-          <p class="ds-p" style="margin-top:12px">Comparten superficie, scrim y <b>el mismo sistema de movimiento</b> (<code>--ease-emphasized</code> a <code>--duration-drawer</code>), así que entran y salen igual. No uses ambos para el mismo destino: elegí por gesto (Drawer) vs. estático (Sheet). Ver <a href="#" onclick="navigate('c-side-sheet');return false;">Side Sheets</a> · <a href="#" onclick="navigate('c-bottom-sheet');return false;">Bottom Sheets</a>.</p>
-        </section>
-        </div>
-        <nav class="ds-toc" data-toc-auto id="tc-drawer-g-toc" aria-label="En esta página">
-          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="ds-toc-title">En esta página</div>
-          <ul class="ds-toc-list">
-            <li><a class="ds-toc-link" data-target="tc-drawer-g-0">Uso</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-g-1">Anatomía</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-g-2">Dirección</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-g-3">Comportamiento</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-g-4">Layout responsive</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-g-5">Variantes por dirección</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-g-6">Variantes de comportamiento</a></li>
-            <li><a class="ds-toc-link" data-target="tc-drawer-g-7">Drawer vs. Side Sheet</a></li>
-          </ul>
-        </nav>
-        </div>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="accessibility">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Accesibilidad</h2>
-          <ul class="ds-a11y-list">
-            <li><span class="ds-a11y-icon">♿</span>Construido sobre <code>vaul</code>, que expone <code>role="dialog"</code> con <code>aria-modal</code> y atrapa el foco mientras está abierto.</li>
-            <li><span class="ds-a11y-icon">♿</span>Se cierra con <code>Esc</code>, clic en el scrim o el gesto de arrastre; al cerrar, el foco vuelve al disparador.</li>
-            <li><span class="ds-a11y-icon">♿</span>Asociá un título con <code>DrawerTitle</code> y una descripción con <code>DrawerDescription</code> para el nombre accesible (<code>aria-labelledby</code> / <code>aria-describedby</code>).</li>
-            <li><span class="ds-a11y-icon">♿</span>El gesto de arrastre es un extra, no la única salida: operable por completo con teclado y con los botones del <code>DrawerFooter</code>.</li>
-            <li><span class="ds-a11y-icon">♿</span>Respeta <code>prefers-reduced-motion</code> (manejado globalmente por el tema, cubre también las transiciones inline de vaul).</li>
-            <li><span class="ds-a11y-icon">♿</span><b>Por variante:</b> <b>non-modal</b> (<code>modal={false}</code>) no atrapa el foco — garantizá una salida clara y un retorno de foco; <b>nested</b> mueve el foco al drawer frontal y lo devuelve al padre al cerrar; <b>responsive</b> mantiene <code>role="dialog"</code> + focus trap tanto en Dialog como en Drawer; <b>top</b> no debe robar el foco si es meramente informativo.</li>
-          </ul>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="code">
-        <section class="docs-section">
-          <h2 class="docs-section-title">React — @amalgama/ds (Tailwind + shadcn · vaul)</h2>
-          <p class="docs-section-desc">Se compone con el <code>Drawer</code> de <code>@amalgama/ds</code> (vaul), tematizado con tokens Embassy. <code>direction</code> ancla el panel a un borde.</p>
-          <div class="docs-code-wrapper">
-            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-<pre class="docs-code"><code>import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose } from &quot;@amalgama/ds/drawer&quot;
-import { Button } from &quot;@amalgama/ds/button&quot;
-
-&lt;Drawer direction=&quot;bottom&quot;&gt;
-  &lt;DrawerTrigger asChild&gt;&lt;Button variant=&quot;secondary&quot;&gt;Abrir&lt;/Button&gt;&lt;/DrawerTrigger&gt;
-  &lt;DrawerContent&gt;
-    &lt;div className=&quot;mx-auto w-full max-w-sm&quot;&gt;
-      &lt;DrawerHeader&gt;
-        &lt;DrawerTitle&gt;Ajustar objetivo&lt;/DrawerTitle&gt;
-        &lt;DrawerDescription&gt;Arrastrá hacia abajo para cerrar.&lt;/DrawerDescription&gt;
-      &lt;/DrawerHeader&gt;
-      {/* contenido */}
-      &lt;DrawerFooter&gt;
-        &lt;Button&gt;Guardar&lt;/Button&gt;
-        &lt;DrawerClose asChild&gt;&lt;Button variant=&quot;secondary&quot;&gt;Cancelar&lt;/Button&gt;&lt;/DrawerClose&gt;
-      &lt;/DrawerFooter&gt;
-    &lt;/div&gt;
-  &lt;/DrawerContent&gt;
-&lt;/Drawer&gt;</code></pre>
-          </div>
-
-          <h2 class="docs-section-title" style="margin-top:32px">Ejemplo funcional — selector de horario</h2>
-          <p class="docs-section-desc">Slots como <code>ToggleGroup</code> de selección única (estados default/hover/focus/seleccionado/deshabilitado incluidos), grilla responsive, Confirmar (primary, habilitado al elegir) y Cancelar (<code>secondary</code>).</p>
-          <div class="docs-code-wrapper">
-            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-<pre class="docs-code"><code>import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerBody, DrawerFooter, DrawerClose } from &quot;@amalgama/ds/drawer&quot;
-import { ToggleGroup, ToggleGroupItem } from &quot;@amalgama/ds/toggle-group&quot;
-import { Button } from &quot;@amalgama/ds/button&quot;
-import { useState } from &quot;react&quot;
-
-const SLOTS = [
-  { value: &quot;09:00&quot; }, { value: &quot;09:30&quot; }, { value: &quot;10:00&quot; },
-  { value: &quot;10:30&quot;, disabled: true }, { value: &quot;11:00&quot; }, { value: &quot;11:30&quot; },
-]
-
-function TimeSlotDrawer() {
-  const [open, setOpen] = useState(false)
-  const [slot, setSlot] = useState(&quot;&quot;)
-  return (
-    &lt;Drawer direction=&quot;right&quot; open={open} onOpenChange={setOpen}&gt;
-      &lt;DrawerTrigger asChild&gt;&lt;Button variant=&quot;secondary&quot;&gt;Elegir horario&lt;/Button&gt;&lt;/DrawerTrigger&gt;
-      &lt;DrawerContent&gt;
-        &lt;div className=&quot;flex h-full flex-col&quot;&gt;
-          &lt;DrawerHeader&gt;
-            &lt;DrawerTitle&gt;Elegir horario&lt;/DrawerTitle&gt;
-            &lt;DrawerDescription&gt;Seleccioná un horario disponible.&lt;/DrawerDescription&gt;
-          &lt;/DrawerHeader&gt;
-          &lt;DrawerBody&gt;
-            &lt;ToggleGroup type=&quot;single&quot; value={slot} onValueChange={(v) =&gt; v &amp;&amp; setSlot(v)}
-              aria-label=&quot;Horarios disponibles&quot; className=&quot;grid grid-cols-3 gap-2&quot;&gt;
-              {SLOTS.map((s) =&gt; (
-                &lt;ToggleGroupItem key={s.value} value={s.value} variant=&quot;outline&quot; size=&quot;lg&quot;
-                  disabled={s.disabled} className=&quot;w-full&quot;&gt;{s.value}&lt;/ToggleGroupItem&gt;
-              ))}
-            &lt;/ToggleGroup&gt;
-          &lt;/DrawerBody&gt;
-          &lt;DrawerFooter&gt;
-            &lt;Button variant=&quot;primary&quot; disabled={!slot} onClick={() =&gt; setOpen(false)}&gt;
-              {slot ? `Confirmar ${slot}` : &quot;Confirmar&quot;}
-            &lt;/Button&gt;
-            &lt;DrawerClose asChild&gt;&lt;Button variant=&quot;secondary&quot;&gt;Cancelar&lt;/Button&gt;&lt;/DrawerClose&gt;
-          &lt;/DrawerFooter&gt;
-        &lt;/div&gt;
-      &lt;/DrawerContent&gt;
-    &lt;/Drawer&gt;
-  )
-}</code></pre>
-          </div>
-
-          <h2 class="docs-section-title" style="margin-top:32px">Variantes (API de vaul)</h2>
-          <p class="docs-section-desc">Embassy pasa las props de vaul sin modificar — no inventamos comportamiento.</p>
-          <div class="docs-code-wrapper">
-            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-<pre class="docs-code"><code>{/* Dirección: right | left | bottom | top */}
-&lt;Drawer direction=&quot;right&quot;&gt;…&lt;/Drawer&gt;
-
-{/* Non-modal: la página sigue interactiva (sin scrim bloqueante) */}
-&lt;Drawer direction=&quot;right&quot; modal={false}&gt;…&lt;/Drawer&gt;
-
-{/* Snap points: alturas preestablecidas (drawers verticales) */}
-const [snap, setSnap] = useState&lt;number | string | null&gt;(0.4)
-&lt;Drawer snapPoints={[0.4, 0.9]} activeSnapPoint={snap} setActiveSnapPoint={setSnap}&gt;…&lt;/Drawer&gt;
-
-{/* Nested: un drawer dentro de otro (el padre queda montado detrás) */}
-import { DrawerNestedRoot } from &quot;@amalgama/ds/drawer&quot;
-&lt;Drawer&gt;
-  &lt;DrawerContent&gt;
-    &lt;DrawerNestedRoot&gt;
-      &lt;DrawerTrigger asChild&gt;&lt;Button&gt;Abrir anidado&lt;/Button&gt;&lt;/DrawerTrigger&gt;
-      &lt;DrawerContent&gt;…&lt;/DrawerContent&gt;
-    &lt;/DrawerNestedRoot&gt;
-  &lt;/DrawerContent&gt;
-&lt;/Drawer&gt;
-
-{/* Responsive: Dialog en desktop, Drawer en mobile */}
-const isDesktop = useMediaQuery(&quot;(min-width: 768px)&quot;)
-return isDesktop
-  ? &lt;Dialog&gt;…&lt;/Dialog&gt;
-  : &lt;Drawer&gt;…&lt;/Drawer&gt;</code></pre>
           </div>
         </section>
       </div>
@@ -22503,7 +22162,6 @@ const SECTIONS = {
   'c-select':          { label: 'Select',                group: 'Components' },
   'c-bottom-sheet':    { label: 'Bottom Sheets',        group: 'Components' },
   'c-side-sheet':      { label: 'Side Sheets',          group: 'Components' },
-  'c-drawer':          { label: 'Drawer',               group: 'Components' },
   'c-skeleton':        { label: 'Skeleton',            group: 'Foundations', parent: 'grid' },
   'c-slider':          { label: 'Sliders',               group: 'Components' },
   'c-snackbar':        { label: 'Snackbar',             group: 'Components' },

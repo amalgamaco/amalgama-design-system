@@ -1015,20 +1015,24 @@ Do not start the CSS before this block is complete. The header is the component'
 ## 19. shadcn parity — coverage & intentional non-additions
 
 Embassy tracks the official shadcn/ui component registry (46 components as of 2026-07) as its
-implementation reference. Every applicable shadcn component is present in `packages/ds/components/ui/`
-**except one, deliberately NOT added** (`sidebar`), because Embassy already ships that capability
-through the app-shell. Duplicating it would introduce a second, competing implementation of the same
-pattern — a violation of §2 (one canonical component per pattern).
+implementation reference. Two shadcn components are deliberately NOT present because Embassy already
+ships their capability through a canonical component — adding them would be a second, competing
+implementation of the same pattern (a violation of §2, one canonical component per pattern):
+`sidebar` → the app-shell; `drawer` → **Sheet** (see §19.1).
 
-### 19.1 `drawer` (vaul) — ADDED as a first-class component (2026-07)
+### 19.1 `drawer` — standardized onto **Sheet** (2026-07)
 
-**Status: present** (`drawer.tsx`). Initially mapped to Sheet, then added on request so Embassy
-mirrors shadcn's own Sheet-vs-Drawer split. **Drawer** = the `vaul`-based, gesture-driven panel
-(drag-to-dismiss, drag handle on the bottom variant), touch-first / mobile. **Sheet** = the Radix
-Dialog side panel for desktop (filters, detail). They intentionally coexist — same token family
-(surface, scrim, header/footer), different interaction. Do **not** use both for the same destination:
-pick Drawer for touch/gesture surfaces, Sheet for desktop side panels. This is the one place Embassy
-runs two overlay engines (Radix Dialog + vaul); that cost is accepted for gesture fidelity.
+**Status: removed.** A vaul-based Drawer was briefly added, then **removed** — the DS collapsed to
+**one canonical edge-anchored panel: `Sheet`** (Radix Dialog). A Drawer and a Side Sheet are visually
+and motion-identical at rest; the Drawer's *only* differentiator was gesture (swipe-to-dismiss, snap
+points, nested stacking), which the product does not use. Maintaining both violated §2 for no benefit.
+
+**`Sheet` is the single edge-anchored panel:** `side="right" | "left"` = Side Sheet · `side="bottom"`
+= Bottom Sheet · `side="top"`. Map every drawer/sheet/edge-panel requirement to `Sheet`. The `vaul`
+dependency was removed; Embassy stays 100% on Radix + `asChild`. If a genuine gesture surface
+(swipe/snap) is ever required, reintroduce a gesture engine as a deliberate, documented decision —
+do not re-add a parallel component for a static panel. (The separate **Navigation Drawer** in the
+app-shell — the mobile nav in `css/layout.css` — is unrelated and stays.)
 
 ### 19.2 `sidebar` → use the **app-shell** (`css/layout.css`) + resolved mobile drawer
 
@@ -1050,7 +1054,7 @@ assembled, token-correct pattern without re-wiring it — while still composing 
 
 ## 20. Cross-component consistency — overlays
 
-### 20.1 Overlay action buttons (Dialog, Alert Dialog, Drawer, Sheet)
+### 20.1 Overlay action buttons (Dialog, Alert Dialog, Sheet)
 
 Every modal/overlay footer follows the same button contract:
 
@@ -1061,13 +1065,12 @@ Every modal/overlay footer follows the same button contract:
   and **never** invent a new variant for it. (Inline **form** footers are a separate pattern where the
   escape action may be `tertiary` — that is not an overlay and is out of this rule.)
 
-### 20.2 Edge-anchored surface motion (Drawer, Side Sheet, Bottom Sheet)
+### 20.2 Edge-anchored surface motion (Sheet — all sides)
 
-All three edge-anchored surfaces move as **one system**: entrance/exit on `--ease-emphasized`
-(`cubic-bezier(.32,.72,0,1)`, a smooth decelerate with **no overshoot**) at `--duration-drawer`
+Every `Sheet` side moves as **one system**: entrance/exit on `--ease-emphasized`
+(`cubic-bezier(.32,.72,0,1)`, a smooth decelerate with **no overshoot**) at `--duration-sheet`
 (500ms), symmetric open/close, with the overlay fading on the same curve/duration. Only the axis of
-travel differs (Drawer: its `direction`; Side Sheet: from the side; Bottom Sheet: from the bottom).
-The Drawer (vaul) is the reference; Sheet replicates it via these tokens. `prefers-reduced-motion` is
+travel differs by `side` (right/left = x; bottom/top = y). `prefers-reduced-motion` is
 handled globally by the theme. **Do not** use `ease-expressive-*` (overshoot) on a large sliding
 panel — that bounce reads as unnatural; overshoot is for small spatial motion (zoom/rotate) on
 dialogs and menus only.

@@ -371,14 +371,14 @@
   --ease-expressive:        cubic-bezier(.34,1.56,.64,1);
   --ease-expressive-enter:  cubic-bezier(.175,.885,.32,1.4);
   --ease-expressive-exit:   cubic-bezier(.3,0,.8,.15);
-  /* Emphasized decelerate — shared "sheet/drawer" curve (matches the Drawer/vaul engine). */
+  /* Emphasized decelerate — shared Sheet curve (shared across all Sheet sides). */
   --ease-emphasized: cubic-bezier(.32,.72,0,1);
   --duration-fast:   120ms;
   --duration-normal: 200ms;
   --duration-medium: 300ms;
   --duration-slow:   450ms;
-  /* Shared sheet/drawer slide duration — matches the Drawer (vaul) 500ms. */
-  --duration-drawer: 500ms;
+  /* Shared Sheet slide duration (500ms) for all sides. */
+  --duration-sheet: 500ms;
 }
 
 /* ═══════════════════════════════════════

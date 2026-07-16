@@ -26,8 +26,7 @@ import { CardElevated, CardFilled, CardOutlined } from "./islands/CardVariantsSh
 import { StatCardShowcase, StatCardGrid } from "./islands/StatCardShowcase"
 import { AvatarShowcase } from "./islands/AvatarShowcase"
 import { TooltipShowcase } from "./islands/TooltipShowcase"
-import { SheetShowcase, BottomSheetShowcase, SideSheetShowcase } from "./islands/SheetShowcase"
-import { DrawerShowcase, DrawerBottomShowcase, DrawerRightShowcase, DrawerLeftShowcase, DrawerTopShowcase, DrawerTimeSlotShowcase, DrawerNonModalShowcase, DrawerNestedShowcase, DrawerSnapPointsShowcase, DrawerResponsiveShowcase } from "./islands/DrawerShowcase"
+import { SheetShowcase, BottomSheetShowcase, SideSheetShowcase, SheetTimeSlotShowcase, SheetResponsiveShowcase } from "./islands/SheetShowcase"
 import { CarouselShowcase } from "./islands/CarouselShowcase"
 import { DatePickerShowcase } from "./islands/DatePickerShowcase"
 import { DatePickerFieldShowcase } from "./islands/DatePickerField"
@@ -88,7 +87,7 @@ import {
   ProgressAnatomy, ProgressStates, ProgressMeasures,
 } from "./islands/ControlSpecs"
 import { ButtonSizeMatrix, ButtonTouchTarget } from "./islands/ButtonSpecs"
-import { ButtonTokens, MenuTokens, InputTokens, SelectTokens, TextareaTokens, CheckboxTokens, RadioTokens, SwitchTokens, SliderTokens, BasicCardTokens, DialogTokens, BottomSheetTokens, SideSheetTokens, DrawerTokens, TableTokens, TabsTokens, BadgeTokens, ChipTokens, AvatarTokens, StatCardTokens, SkeletonTokens, DividerTokens, SnackbarTokens, TooltipTokens, SearchTokens, CarouselTokens, DatePickerTokens, SegBtnTokens, LoadingTokens, EmptyTokens, KanbanTokens, VacancyTokens, PersonTokens, ListTokens, NavDrawerTokens, NavBarTokens, NavCardTokens, TopbarTokens } from "./islands/TokenPanel"
+import { ButtonTokens, MenuTokens, InputTokens, SelectTokens, TextareaTokens, CheckboxTokens, RadioTokens, SwitchTokens, SliderTokens, BasicCardTokens, DialogTokens, BottomSheetTokens, SideSheetTokens, TableTokens, TabsTokens, BadgeTokens, ChipTokens, AvatarTokens, StatCardTokens, SkeletonTokens, DividerTokens, SnackbarTokens, TooltipTokens, SearchTokens, CarouselTokens, DatePickerTokens, SegBtnTokens, LoadingTokens, EmptyTokens, KanbanTokens, VacancyTokens, PersonTokens, ListTokens, NavDrawerTokens, NavBarTokens, NavCardTokens, TopbarTokens } from "./islands/TokenPanel"
 import { ChipSceneRestaurant, ChipSceneDialog, ChipSceneTaskButton, ChipSceneTaskChip, ChipSceneScroll, ChipSceneSingle, ChipSceneElevHero, ChipSceneElevDoBorder, ChipSceneElevDoImage, ChipSceneElevDontPage, ChipSceneElevDontPressed, ChipSceneLabelShort, ChipSceneLabelLong, ChipSceneTrailingTouch, ChipSceneAssistHero, ChipSceneAssistInfo, ChipSceneAssistModal, ChipSceneAssistActionsA, ChipSceneAssistActionsB, ChipSceneAssistPlacement, ChipSceneFilterHero, ChipSceneFilterShopping, ChipSceneFilterRealEstate, ChipSceneFilterMultiSelected, ChipSceneFilterMultiDynamic, ChipSceneFilterSingle, ChipSceneFilterTrailingClose, ChipSceneFilterTrailingMenu, ChipSceneFilterCaution, ChipSceneFilterIntegration } from "./islands/ChipScenes"
 
 import {
@@ -276,7 +275,6 @@ const registry: Record<string, ComponentType> = {
   "dialog-tokens": DialogTokens,
   "bottom-sheet-tokens": BottomSheetTokens,
   "side-sheet-tokens": SideSheetTokens,
-  "drawer-tokens": DrawerTokens,
   "table-tokens": TableTokens,
   "tabs-tokens": TabsTokens,
   "badge-tokens": BadgeTokens,
@@ -348,16 +346,8 @@ const registry: Record<string, ComponentType> = {
   "sheet-showcase": SheetShowcase,
   "bottom-sheet-showcase": BottomSheetShowcase,
   "side-sheet-showcase": SideSheetShowcase,
-  "drawer-showcase": DrawerShowcase,
-  "drawer-bottom-showcase": DrawerBottomShowcase,
-  "drawer-right-showcase": DrawerRightShowcase,
-  "drawer-left-showcase": DrawerLeftShowcase,
-  "drawer-top-showcase": DrawerTopShowcase,
-  "drawer-timeslot-showcase": DrawerTimeSlotShowcase,
-  "drawer-nonmodal-showcase": DrawerNonModalShowcase,
-  "drawer-nested-showcase": DrawerNestedShowcase,
-  "drawer-snap-showcase": DrawerSnapPointsShowcase,
-  "drawer-responsive-showcase": DrawerResponsiveShowcase,
+  "sheet-timeslot-showcase": SheetTimeSlotShowcase,
+  "sheet-responsive-showcase": SheetResponsiveShowcase,
   "carousel-showcase": CarouselShowcase,
   "date-picker-showcase": DatePickerShowcase,
   "date-picker-field-showcase": DatePickerFieldShowcase,

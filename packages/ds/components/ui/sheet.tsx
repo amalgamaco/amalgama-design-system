@@ -1,11 +1,16 @@
 /**
- * Sheet — a STATIC edge-anchored panel on Radix Dialog (top/right/bottom/left via `side`).
+ * Sheet — THE canonical edge-anchored panel of the DS (Radix Dialog, static).
+ * `side="right" | "left"` = Side Sheet · `side="bottom"` = Bottom Sheet · `side="top"`.
  *
- * Cuándo usar: panel lateral de escritorio sin gesto — filtros, detalle, formularios secundarios.
- * Cuándo no: si necesitás GESTO (swipe-to-dismiss, snap points, drawers anidados) o una superficie
- * táctil/mobile-first → usar Drawer (vaul). Diferenciador Drawer↔Sheet = interacción (gesto vs
- * estático), no dirección. Ambos comparten superficie, scrim y el mismo sistema de movimiento
- * (--ease-emphasized · --duration-drawer). Ver GOVERNANCE §19.1 / §20.2.
+ * Cuándo usar: cualquier panel anclado a un borde — filtros, detalle, formularios secundarios,
+ * bottom sheet en mobile. Cuándo no: navegación principal (usar el app-shell / Navigation Drawer);
+ * diálogo modal centrado (usar Dialog).
+ *
+ * Standardization (2026-07): the DS collapsed to ONE edge-anchored panel. The separate vaul Drawer
+ * was removed — its only added value was gesture (swipe / snap points / nesting), which the product
+ * doesn't use. If a gesture surface is ever needed, reintroduce a gesture engine; until then every
+ * edge panel is a Sheet. Motion: --ease-emphasized · --duration-sheet (500ms, no overshoot),
+ * reduced-motion handled globally by the theme.
  *
  * shadcn Sheet structure, Embassy tokens. Canonical implementation.
  */
@@ -25,11 +30,11 @@ const SheetOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      // Overlay fade matches the Drawer (vaul): same 500ms + emphasized curve, symmetric
-      // enter/exit. prefers-reduced-motion is handled globally by the theme.
+      // Overlay fade on the shared emphasized curve at 500ms, symmetric enter/exit.
+      // prefers-reduced-motion is handled globally by the theme.
       "fixed inset-0 z-50 bg-scrim/40 backdrop-blur-sm",
       "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      "duration-drawer ease-emphasized",
+      "duration-sheet ease-emphasized",
       className
     )}
     {...props}
@@ -38,11 +43,10 @@ const SheetOverlay = React.forwardRef<
 SheetOverlay.displayName = DialogPrimitive.Overlay.displayName
 
 const sheetVariants = cva(
-  // Motion unified with the Drawer (vaul): the panel slides on the shared emphasized-decelerate
-  // curve at 500ms, symmetric enter/exit — a smooth glide with NO overshoot (the previous
-  // ease-expressive-enter bounce read as unnatural on a large panel). Direction is set per side
-  // below; only the axis differs across Side (x) and Bottom (y) sheets. Reduced-motion: global.
-  "fixed z-50 flex flex-col bg-surface border-border shadow-xl duration-drawer ease-emphasized",
+  // The panel slides on the emphasized-decelerate curve at 500ms, symmetric enter/exit — a smooth
+  // glide with NO overshoot (a bounce curve read as unnatural on a large panel). Direction is set
+  // per side below; only the axis differs across Side (x) and Bottom (y) sheets. Reduced-motion: global.
+  "fixed z-50 flex flex-col bg-surface border-border shadow-xl duration-sheet ease-emphasized",
   {
     variants: {
       side: {

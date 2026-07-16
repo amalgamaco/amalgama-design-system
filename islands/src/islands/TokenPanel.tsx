@@ -438,7 +438,7 @@ const BOTTOM_SHEET_TOKENS: TokenGroup[] = [
   ]},
   { category: "Movimiento", rows: [
     { token: "--ease-emphasized", role: "Curva", usage: "Curva compartida con el Drawer (decelerate, sin overshoot)." },
-    { token: "--duration-drawer", role: "Duración", usage: "500ms, simétrico apertura/cierre — igual que el Drawer." },
+    { token: "--duration-sheet", role: "Duración", usage: "500ms, simétrico apertura/cierre — igual que el Drawer." },
   ]},
 ]
 export function BottomSheetTokens() { return <TokenPanel groups={BOTTOM_SHEET_TOKENS} /> }
@@ -467,44 +467,10 @@ const SIDE_SHEET_TOKENS: TokenGroup[] = [
   ]},
   { category: "Movimiento", rows: [
     { token: "--ease-emphasized", role: "Curva", usage: "Curva compartida con el Drawer (decelerate, sin overshoot)." },
-    { token: "--duration-drawer", role: "Duración", usage: "500ms, simétrico apertura/cierre — igual que el Drawer." },
+    { token: "--duration-sheet", role: "Duración", usage: "500ms, simétrico apertura/cierre — igual que el Drawer." },
   ]},
 ]
 export function SideSheetTokens() { return <TokenPanel groups={SIDE_SHEET_TOKENS} /> }
-
-const DRAWER_TOKENS: TokenGroup[] = [
-  { category: "Color", rows: [
-    { token: "--color-surface", role: "Contenedor", usage: "Superficie del drawer (igual que Sheet)." },
-    { token: "--color-border", role: "Borde", usage: "Borde del lado de anclaje." },
-    { token: "--color-outline-variant", role: "Handle", usage: "Manija de arrastre (solo variante inferior)." },
-    { token: "--color-fg", role: "Título", usage: "Texto del título (semibold)." },
-    { token: "--color-fg-subtle", role: "Descripción", usage: "Texto secundario." },
-  ]},
-  { category: "Estado", rows: [
-    { token: "--color-scrim", role: "Overlay", usage: "Fondo oscurecido al 40% con desenfoque." },
-  ]},
-  { category: "Tipografía", rows: [
-    { token: "--font-heading", role: "Familia", usage: "Epilogue para el título." },
-    { token: "--text-heading-xs", role: "Título", usage: "Título del drawer." },
-    { token: "--text-label", role: "Descripción", usage: "Texto secundario." },
-  ]},
-  { category: "Espaciado", note: "grilla de 4px", rows: [
-    { token: "p-6", role: "Padding", usage: "Relleno de header y footer (24px)." },
-    { token: "gap-2", role: "Footer", usage: "Separación entre acciones (8px)." },
-  ]},
-  { category: "Radio", rows: [
-    { token: "rounded-t-2xl / rounded-b-2xl", role: "Radio", usage: "Esquinas del borde de anclaje (top/bottom)." },
-  ]},
-  { category: "Elevación", rows: [
-    { token: "--shadow-xl", role: "Sombra", usage: "Elevación del drawer." },
-  ]},
-  { category: "Movimiento", rows: [
-    { token: "vaul", role: "Gesto", usage: "Arrastrar-para-cerrar con seguimiento del dedo (spring nativo de vaul)." },
-    { token: "--ease-emphasized", role: "Curva", usage: "Curva de entrada/salida (cubic-bezier .32,.72,0,1) — compartida con Side/Bottom Sheet." },
-    { token: "--duration-drawer", role: "Duración", usage: "500ms — la referencia que Side/Bottom Sheet replican." },
-  ]},
-]
-export function DrawerTokens() { return <TokenPanel groups={DRAWER_TOKENS} /> }
 
 const TABLE_TOKENS: TokenGroup[] = [
   { category: "Color", rows: [

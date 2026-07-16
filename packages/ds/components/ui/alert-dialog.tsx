@@ -8,7 +8,7 @@
  *
  * shadcn Alert Dialog structure, Embassy tokens; Action/Cancel compose the canonical Button
  * (Action = primary, Cancel = secondary — the DS-wide standard for the cancel/dismiss action in
- * every overlay: Dialog, Drawer, Sheet, Alert Dialog). Same scrim + Expressive zoom as Dialog.
+ * every overlay: Dialog, Sheet, Alert Dialog). Same scrim + Expressive zoom as Dialog.
  */
 import * as React from "react"
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog"

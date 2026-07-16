@@ -379,16 +379,16 @@
   --ease-expressive:        cubic-bezier(.34,1.56,.64,1);
   --ease-expressive-enter:  cubic-bezier(.175,.885,.32,1.4);
   --ease-expressive-exit:   cubic-bezier(.3,0,.8,.15);
-  /* Emphasized decelerate — the shared "sheet/drawer" curve. Smooth, no overshoot;
-     matches the Drawer (vaul) engine exactly so Drawer + Side Sheet + Bottom Sheet
+  /* Emphasized decelerate — the shared Sheet curve. Smooth, no overshoot;
+     the shared curve for every edge-anchored Sheet (Side + Bottom Sheet)
      enter/exit as one motion system. Use for large edge-anchored surfaces. */
   --ease-emphasized: cubic-bezier(.32,.72,0,1);
   --duration-fast:   120ms;
   --duration-normal: 200ms;
   --duration-medium: 300ms;
   --duration-slow:   450ms;
-  /* Shared sheet/drawer slide duration — matches the Drawer (vaul) 500ms. */
-  --duration-drawer: 500ms;
+  /* Shared Sheet slide duration (500ms) for all sides. */
+  --duration-sheet: 500ms;
 }
 
 /* ═══════════════════════════════════════
