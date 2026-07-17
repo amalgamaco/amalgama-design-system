@@ -72,6 +72,12 @@
   border-radius: var(--radius-sm);
   box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
+/* Disabled item — trigger inerte con opacidad reducida (mismo patrón que shadcn). */
+.accordion-trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
 .accordion-chevron {
   width: 18px;
@@ -101,4 +107,30 @@
   font-size: var(--font-size-body-md);
   color: var(--text-secondary);
   line-height: 1.6;
+}
+
+/* ═══ Variantes de estilo (solo clases — misma estructura y comportamiento) ═══ */
+
+/* Bordered — todo el accordion en un contenedor con borde y radio; filas divididas. */
+.accordion-bordered {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding-inline: 16px;
+}
+
+/* Card — cada ítem es una tarjeta independiente (superficie + borde + separación). */
+.accordion-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.accordion-card .accordion-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-container);
+  padding-inline: 16px;
+}
+/* La regla base quita el borde inferior del último ítem; en card cada tarjeta lo conserva. */
+.accordion-card .accordion-item:last-child {
+  border-bottom: 1px solid var(--border);
 }
