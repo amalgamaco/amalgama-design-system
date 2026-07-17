@@ -26433,6 +26433,44 @@ if (document.readyState !== 'loading') initAllCommands();
 else document.addEventListener('DOMContentLoaded', initAllCommands);
 window.addEventListener('ds:section-shown', initAllCommands);
 
+// ── Combobox ── select filtrable = trigger + panel con un Command adentro.
+// Abre/cierra el panel, filtra vía initCommand, y al elegir un ítem actualiza el
+// label del trigger + la tilde (.combobox-check) y cierra. Par shadcn Combobox
+// (Popover + Command). Cierra con click-afuera / Escape.
+function initCombobox(cb) {
+  if (cb.__cbInit) return; cb.__cbInit = 1;
+  var trigger = cb.querySelector('.combobox-trigger');
+  var panel = cb.querySelector('.combobox-panel');
+  var cmd = cb.querySelector('.command');
+  var labelEl = trigger && trigger.querySelector('.combobox-label');
+  if (!trigger || !panel) return;
+  if (cmd) initCommand(cmd);
+  function open() {
+    panel.hidden = false; trigger.setAttribute('aria-expanded', 'true');
+    var inp = cmd && cmd.querySelector('.command-input');
+    if (inp) { inp.value = ''; inp.dispatchEvent(new Event('input')); setTimeout(function () { inp.focus(); }, 0); }
+  }
+  function close() { panel.hidden = true; trigger.setAttribute('aria-expanded', 'false'); }
+  trigger.addEventListener('click', function (e) { e.stopPropagation(); if (panel.hidden) open(); else close(); });
+  Array.prototype.forEach.call(cb.querySelectorAll('.command-item'), function (it) {
+    it.addEventListener('click', function () {
+      Array.prototype.forEach.call(cb.querySelectorAll('.combobox-check'), function (c) { c.classList.remove('is-selected'); });
+      Array.prototype.forEach.call(cb.querySelectorAll('.command-item'), function (o) { o.removeAttribute('aria-selected'); });
+      var chk = it.querySelector('.combobox-check'); if (chk) chk.classList.add('is-selected');
+      it.setAttribute('aria-selected', 'true');
+      if (labelEl) labelEl.textContent = it.getAttribute('data-label') || it.textContent.trim();
+      trigger.classList.remove('is-placeholder');
+      close(); trigger.focus();
+    });
+  });
+  document.addEventListener('click', function (e) { if (!panel.hidden && !cb.contains(e.target)) close(); });
+  cb.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { close(); trigger.focus(); } });
+}
+function initAllComboboxes() { Array.prototype.forEach.call(document.querySelectorAll('.combobox'), initCombobox); }
+if (document.readyState !== 'loading') initAllComboboxes();
+else document.addEventListener('DOMContentLoaded', initAllComboboxes);
+window.addEventListener('ds:section-shown', initAllComboboxes);
+
 // ── Chart rich tooltip ── indicador de color + etiqueta + valor, posicionado
 // por JS sobre .chart-dot/.chart-bar (lee el <title> del elemento y su color).
 // Par shadcn ChartTooltipContent; el <title> nativo queda como fallback a11y.

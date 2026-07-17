@@ -11,7 +11,9 @@
 
    Uso:
    <div class="vacancies-list">
-     <div class="vacancy-card">
+     <!-- Interactiva: agregá tabindex="0" role="button" (o usá <a>/<button>) —
+          la card es focusable y trae :focus-visible. -->
+     <div class="vacancy-card" tabindex="0" role="button">
        <div class="vacancy-icon">💼</div>
        <div class="vacancy-info">
          <div class="vacancy-name">

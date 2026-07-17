@@ -11,7 +11,10 @@
 
    Uso:
    <div class="people-grid">
-     <div class="person-card">
+     <!-- Interactiva: agregá tabindex="0" role="button" (o usá <a>/<button>) —
+          la card trae cursor:pointer + :focus-visible, así que necesita ser
+          focusable y anunciarse como control. -->
+     <div class="person-card" tabindex="0" role="button">
        <div class="person-avatar">MG</div>
        <div class="person-info">
          <div class="person-name">Maria Garcia</div>

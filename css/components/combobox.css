@@ -42,6 +42,7 @@
   opacity: .5;
 }
 
+.combobox-panel[hidden] { display: none; }
 .combobox-panel {
   position: absolute;
   top: calc(100% + 4px);

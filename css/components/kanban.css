@@ -16,7 +16,9 @@
          Aplicados <span class="count">5</span>
        </div>
        <div class="kanban-column-body">
-         <div class="kanban-card">
+         <!-- Interactiva/arrastrable: agregá tabindex="0" role="button" — la card
+              es focusable y trae :focus-visible + estado dragging. -->
+         <div class="kanban-card" tabindex="0" role="button">
            <div class="kanban-card-title">Juan Perez</div>
            <div class="kanban-card-meta">Frontend · 3 dias</div>
          </div>
