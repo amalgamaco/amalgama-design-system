@@ -94,6 +94,11 @@
 /* Modificadores semánticos de Primary */
 .btn-primary.btn-danger  { background: var(--color-error);   color: var(--color-on-error);   }
 .btn-primary.btn-danger:hover  { background: var(--color-error-hover);   }
+/* Anillo de foco teñido de error (par shadcn destructive focus-visible:ring-destructive/20). */
+.btn-primary.btn-danger:focus-visible {
+  outline-color: var(--color-error);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-error) 25%, transparent);
+}
 .btn-primary.btn-success { background: var(--color-success); color: var(--color-on-success); }
 .btn-primary.btn-success:hover { background: var(--color-success-hover); }
 

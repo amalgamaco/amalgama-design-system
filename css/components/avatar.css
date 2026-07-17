@@ -66,7 +66,13 @@
   border-radius: var(--radius-full);
   background: var(--color-success);
   box-shadow: 0 0 0 2px var(--color-surface);
+  /* Puede alojar un ícono de estado (par shadcn AvatarBadge con SVG). */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-surface);
 }
+.avatar-badge svg { width: 64%; height: 64%; }
 .avatar-badge-online  { background: var(--color-success); }
 .avatar-badge-busy    { background: var(--color-error); }
 .avatar-badge-away    { background: var(--color-warning); }

@@ -90,6 +90,17 @@
 .toast-error { border-left: 3px solid var(--red); }
 .toast-info { border-left: 3px solid var(--interactive); }
 .toast-warning { border-left: 3px solid var(--color-warning); }
+.toast-loading { border-left: 3px solid var(--color-outline); }
+/* Spinner para el toast de carga (par sonner loading). Usar como .toast-icon. */
+.toast-spinner {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--color-outline-variant);
+  border-top-color: var(--color-primary);
+  animation: toast-spin .7s linear infinite;
+}
+@keyframes toast-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .toast-spinner { animation-duration: 1.6s; } }
 .toast .toast-icon { flex-shrink: 0; align-self: flex-start; margin-top: 1px; }
 .toast .toast-message { flex: 1; }
 /* Título + descripción (par sonner: dos líneas). Usar .toast-content como slot

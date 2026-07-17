@@ -131,6 +131,14 @@
   background: var(--color-surface-variant);
   outline: none;
 }
+/* Enlace actual (par shadcn NavigationMenuLink data-active) — marca la sección en
+   la que está la persona; mismo lenguaje de selección que Nav/Menu/List. */
+.nav-menu-link[aria-current="page"],
+.nav-menu-link.is-active {
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  font-weight: 600;
+}
 .nav-menu-link-title { font-weight: 600; display: block; }
 .nav-menu-link-desc {
   display: block;

@@ -8,10 +8,17 @@
 
    Dependencia: variables.css (Color Roles)
 
+   Accesibilidad: un divisor puramente decorativo puede ser un <div> (default).
+   Para un separador SEMÁNTICO entre grupos de contenido, usá un <hr class="divider">
+   (rol "separator" implícito) o agregá role="separator" + aria-orientation al div
+   — igual que el Separator de shadcn con decorative={false}. El reset border:none
+   de abajo ya deja el <hr> con el mismo aspecto.
+
    Uso:
-   <div class="divider"></div>
+   <hr class="divider">                            <!-- separador semántico -->
+   <div class="divider" role="separator"></div>    <!-- equivalente explícito -->
    <div class="divider divider-inset"></div>
-   <div class="divider divider-vertical"></div>
+   <div class="divider divider-vertical" role="separator" aria-orientation="vertical"></div>
 ═══════════════════════════════════════ */
 
 .divider {

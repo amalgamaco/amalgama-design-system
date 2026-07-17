@@ -79,6 +79,27 @@
 }
 .field-input::placeholder { color: var(--text-muted); }
 
+/* ── File input (par shadcn: botón de selección tonal + texto) ── */
+.field-input[type="file"] {
+  padding: 7px 14px;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+.field-input[type="file"]::file-selector-button {
+  margin: 0 12px 0 0;
+  padding: 4px 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+.field-input[type="file"]:hover::file-selector-button {
+  background: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
+}
+
 /* ── Error a nivel de elemento (par shadcn aria-invalid) ──
    Además del wrapper .field-group.is-error, un control con aria-invalid="true"
    se pinta en rojo por sí solo — robusto cuando no hay wrapper y consistente

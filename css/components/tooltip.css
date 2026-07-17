@@ -79,3 +79,17 @@
 }
 .tooltip-wrap:hover .tooltip-right,
 .tooltip-wrap:focus-within .tooltip-right { transform: translate(0, -50%); }
+
+/* ── Flecha (par shadcn TooltipContent Arrow: rombo rotado del color del panel) ── */
+.tooltip-content::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--color-inverse-surface);
+  transform: rotate(45deg);
+}
+.tooltip-top::after    { bottom: -3px; left: 50%; margin-left: -4px; }
+.tooltip-bottom::after { top: -3px;    left: 50%; margin-left: -4px; }
+.tooltip-left::after   { right: -3px;  top: 50%;  margin-top: -4px; }
+.tooltip-right::after  { left: -3px;   top: 50%;  margin-top: -4px; }
