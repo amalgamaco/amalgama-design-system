@@ -13,6 +13,8 @@ export const Checkbox = React.forwardRef<
       "peer size-[18px] shrink-0 rounded-[4px] border-2 border-outline bg-transparent transition-colors align-middle",
       "outline-none focus-visible:focus-ring",
       "disabled:cursor-not-allowed disabled:opacity-40",
+      // Error/invalid — red border via the shared error token (same as Input/Select), set aria-invalid.
+      "aria-invalid:border-error",
       "data-[state=checked]:border-transparent data-[state=checked]:bg-primary data-[state=checked]:text-on-primary",
       "data-[state=indeterminate]:border-transparent data-[state=indeterminate]:bg-primary data-[state=indeterminate]:text-on-primary",
       className

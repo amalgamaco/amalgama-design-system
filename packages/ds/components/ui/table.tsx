@@ -55,6 +55,8 @@ const DataTableRow = React.forwardRef<HTMLTableRowElement, DataTableRowProps>(
       ref={ref}
       className={cn(
         "transition-colors duration-fast hover:bg-surface-variant",
+        // Selected row (DataTable/TanStack sets data-state=selected) — subtle tint via a token.
+        "data-[state=selected]:bg-surface-container-high",
         clickable && "cursor-pointer focus-visible:focus-ring",
         className
       )}

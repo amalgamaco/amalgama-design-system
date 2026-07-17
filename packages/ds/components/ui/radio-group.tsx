@@ -19,6 +19,8 @@ export const RadioGroupItem = React.forwardRef<
     className={cn(
       "aspect-square size-5 rounded-full border-2 border-outline text-primary transition-colors duration-fast ease-default align-middle",
       "outline-none focus-visible:focus-ring",
+      // Error/invalid — red border via the shared error token (set aria-invalid on the item).
+      "aria-invalid:border-error",
       "disabled:cursor-not-allowed disabled:opacity-40 data-[state=checked]:border-primary",
       className
     )}

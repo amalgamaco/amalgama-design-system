@@ -31,12 +31,13 @@ export function SwitchAnatomy() {
 const COL: React.CSSProperties = { font: "400 10px 'Inter',sans-serif", color: "var(--color-on-surface-variant)", textAlign: "center" }
 const ROW: React.CSSProperties = { font: "500 11px 'Inter',sans-serif", color: "var(--color-on-surface-variant)" }
 
-function Cell({ on, focus, disabled }: { on?: boolean; focus?: boolean; disabled?: boolean }) {
+function Cell({ on, focus, disabled, error }: { on?: boolean; focus?: boolean; disabled?: boolean; error?: boolean }) {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <Switch
         defaultChecked={on}
         disabled={disabled}
+        aria-invalid={error || undefined}
         aria-hidden="true"
         tabIndex={-1}
         className={focus ? "pointer-events-none bd-sim-focus" : "pointer-events-none"}
@@ -46,14 +47,14 @@ function Cell({ on, focus, disabled }: { on?: boolean; focus?: boolean; disabled
 }
 
 export function SwitchStates() {
-  const cols = ["Habilitado", "Enfocado", "Deshabilitado"]
+  const cols = ["Habilitado", "Enfocado", "Deshabilitado", "Error"]
   return (
     <div style={{ background: "var(--color-surface-container-lowest)", border: "1px solid var(--border)", borderRadius: 12, padding: "24px 20px" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "88px repeat(3,1fr)", gap: "16px 8px", maxWidth: 460, alignItems: "center" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "88px repeat(4,1fr)", gap: "16px 8px", maxWidth: 520, alignItems: "center" }}>
         <div style={ROW}>Apagado</div>
-        <Cell /><Cell focus /><Cell disabled />
+        <Cell /><Cell focus /><Cell disabled /><Cell error />
         <div style={ROW}>Encendido</div>
-        <Cell on /><Cell on focus /><Cell on disabled />
+        <Cell on /><Cell on focus /><Cell on disabled /><Cell on error />
         <div />
         {cols.map((c) => <div key={c} style={COL}>{c}</div>)}
       </div>

@@ -15,8 +15,8 @@
 <!-- shadcn/ui React islands: renders real shadcn components into [data-island]
      example slots only. The docs IA/structure is unchanged; this bundle just
      hydrates the example areas. Built from islands/ (npm run build). -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=88">
-<script type="module" src="islands/dist/embassy-islands.js?v=88"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=90">
+<script type="module" src="islands/dist/embassy-islands.js?v=90"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <!-- Components render via the shadcn/Tailwind React islands (islands/dist/embassy-islands.js).
      css/md-sys-bridge.css is kept — the Embassy CSS layer and Segmented Button consume its
@@ -15650,6 +15650,7 @@ return &lt;LineChart data={data} /&gt;</code></pre>
             <tbody>
               <tr><td>Sin marcar</td><td>Contenedor transparente, borde de 2px</td><td><code>--color-outline</code></td></tr>
               <tr><td>Marcado / Indeterminado</td><td>Relleno sólido con ícono</td><td><code>--color-primary</code> + <code>--color-on-primary</code></td></tr>
+              <tr><td>Error / inválido</td><td>Borde rojo cuando <code>aria-invalid</code> (mismo token que Input/Select)</td><td><code>--color-error</code></td></tr>
               <tr><td>Focus visible</td><td>Anillo de foco de 2px + 4px</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
               <tr><td>Disabled</td><td>Opacidad 40% (<code>opacity-40</code>), no interactivo</td><td>—</td></tr>
             </tbody>
@@ -17095,6 +17096,7 @@ const [on, setOn] = useState(false)
             <tbody>
               <tr><td>Reposo / Hover</td><td>Sin relleno; hover con fondo sólido</td><td><code>--color-fg</code> · hover <code>--color-surface-variant</code></td></tr>
               <tr><td>Seleccionado</td><td>Relleno sólido + texto de contraste</td><td><code>--color-primary</code> + <code>--color-on-primary</code></td></tr>
+              <tr><td>Error / inválido</td><td>Borde rojo del track cuando <code>aria-invalid</code> (mismo token que Input/Select)</td><td><code>--color-error</code></td></tr>
               <tr><td>Hoy</td><td>Número en negrita y color de marca (sin relleno)</td><td><code>--color-primary</code></td></tr>
               <tr><td>Rango (intermedio)</td><td>Tira de contenedor entre inicio y fin</td><td><code>--color-primary-container</code> + <code>--color-on-primary-container</code></td></tr>
               <tr><td>Fuera de mes / Disabled</td><td>Opacidad reducida</td><td><code>--color-fg-subtle</code> (opacidad 40%) · disabled 30%</td></tr>
@@ -18121,6 +18123,7 @@ import { Button } from &quot;@amalgama/ds/button&quot;
             <tbody>
               <tr><td>No seleccionado</td><td>Anillo vacío, borde de 2px</td><td><code>--color-outline</code></td></tr>
               <tr><td>Seleccionado</td><td>Borde + punto central relleno</td><td><code>--color-primary</code></td></tr>
+              <tr><td>Error / inválido</td><td>Borde rojo cuando <code>aria-invalid</code> (mismo token que Input/Select)</td><td><code>--color-error</code></td></tr>
               <tr><td>Focus visible</td><td>Anillo de foco de 2px + 4px</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
               <tr><td>Disabled</td><td>Opacidad 40% (<code>opacity-40</code>), no interactivo</td><td>—</td></tr>
             </tbody>

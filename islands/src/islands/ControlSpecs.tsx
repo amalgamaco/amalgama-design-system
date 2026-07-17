@@ -61,15 +61,15 @@ export function CheckboxAnatomy() {
     </Anatomy>
   )
 }
-function Cb({ state, focus, disabled }: { state?: boolean | "indeterminate"; focus?: boolean; disabled?: boolean }) {
-  return <Cell><Checkbox checked={state} disabled={disabled} aria-hidden="true" tabIndex={-1} className={`${NOINT}${focus ? " bd-sim-focus" : ""}`} /></Cell>
+function Cb({ state, focus, disabled, error }: { state?: boolean | "indeterminate"; focus?: boolean; disabled?: boolean; error?: boolean }) {
+  return <Cell><Checkbox checked={state} disabled={disabled} aria-invalid={error || undefined} aria-hidden="true" tabIndex={-1} className={`${NOINT}${focus ? " bd-sim-focus" : ""}`} /></Cell>
 }
 export function CheckboxStates() {
   return (
-    <StatesGrid cols={["Habilitado", "Enfocado", "Deshabilitado"]}>
-      <div style={ROW}>Sin marcar</div><Cb /><Cb focus /><Cb disabled />
-      <div style={ROW}>Marcado</div><Cb state /><Cb state focus /><Cb state disabled />
-      <div style={ROW}>Indeterminado</div><Cb state="indeterminate" /><Cb state="indeterminate" focus /><Cb state="indeterminate" disabled />
+    <StatesGrid cols={["Habilitado", "Enfocado", "Deshabilitado", "Error"]}>
+      <div style={ROW}>Sin marcar</div><Cb /><Cb focus /><Cb disabled /><Cb error />
+      <div style={ROW}>Marcado</div><Cb state /><Cb state focus /><Cb state disabled /><Cb state error />
+      <div style={ROW}>Indeterminado</div><Cb state="indeterminate" /><Cb state="indeterminate" focus /><Cb state="indeterminate" disabled /><Cb state="indeterminate" error />
     </StatesGrid>
   )
 }
@@ -85,20 +85,20 @@ export function RadioAnatomy() {
     </Anatomy>
   )
 }
-function Rb({ on, focus, disabled }: { on?: boolean; focus?: boolean; disabled?: boolean }) {
+function Rb({ on, focus, disabled, error }: { on?: boolean; focus?: boolean; disabled?: boolean; error?: boolean }) {
   return (
     <Cell>
       <RadioGroup value={on ? "a" : "b"} className={NOINT} aria-hidden="true">
-        <RadioGroupItem value="a" disabled={disabled} tabIndex={-1} className={focus ? "bd-sim-focus" : undefined} />
+        <RadioGroupItem value="a" disabled={disabled} aria-invalid={error || undefined} tabIndex={-1} className={focus ? "bd-sim-focus" : undefined} />
       </RadioGroup>
     </Cell>
   )
 }
 export function RadioStates() {
   return (
-    <StatesGrid cols={["Habilitado", "Enfocado", "Deshabilitado"]}>
-      <div style={ROW}>No seleccionado</div><Rb /><Rb focus /><Rb disabled />
-      <div style={ROW}>Seleccionado</div><Rb on /><Rb on focus /><Rb on disabled />
+    <StatesGrid cols={["Habilitado", "Enfocado", "Deshabilitado", "Error"]}>
+      <div style={ROW}>No seleccionado</div><Rb /><Rb focus /><Rb disabled /><Rb error />
+      <div style={ROW}>Seleccionado</div><Rb on /><Rb on focus /><Rb on disabled /><Rb on error />
     </StatesGrid>
   )
 }
