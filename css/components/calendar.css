@@ -55,6 +55,28 @@
   color: var(--color-on-surface);
   text-transform: capitalize;
 }
+
+/* ── Caption con dropdowns de mes/año (par shadcn captionLayout="dropdown") ──
+   para saltar rápido de mes/año sin clickear las flechas repetidamente. */
+.calendar-caption-dropdowns { display: inline-flex; gap: 6px; }
+.calendar-caption-select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--color-on-surface);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-body-sm);
+  font-weight: 600;
+  padding: 4px 8px;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.calendar-caption-select:focus-visible {
+  outline: 2px solid var(--color-focus, var(--color-primary));
+  outline-offset: 2px;
+}
 .calendar-nav-btn {
   position: absolute;
   display: flex;

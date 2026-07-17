@@ -26271,10 +26271,82 @@ function calendarDaySelect(dayBtn) {
   }
 }
 function calendarNav(navBtn) {
-  // Simplified equivalent: only the current month (July 2026) is populated with real
-  // day data, per this revert's "no locale system" scope note (calendar.css header).
-  // Prev/Next are wired for future expansion but a no-op today.
+  // Backward-compat no-op for legacy STATIC calendars (hardcoded month markup).
+  // Dynamic calendars use [data-calendar] + initCalendar() below (real month nav).
 }
+
+// ── Calendar (dynamic) ── renderer vanilla con matemática de Date nativa +
+// Intl.DateTimeFormat para nombres (sin librería de locale). Un .calendar con
+// [data-calendar] (YYYY-MM opcional, si no el mes actual) se rendea acá con
+// navegación real de mes y, con data-cal-caption="dropdown", selects de mes/año
+// para saltar rápido (par shadcn captionLayout="dropdown").
+var CAL_MONTH_FMT = new Intl.DateTimeFormat('es', { month: 'long' });
+function calCap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function renderCalendar(cal) {
+  var y = cal._y, m = cal._m, sel = cal._sel;
+  var today = new Date(), ty = today.getFullYear(), tm = today.getMonth(), td = today.getDate();
+  var dropdown = cal.getAttribute('data-cal-caption') === 'dropdown';
+  var first = new Date(y, m, 1);
+  var startDow = (first.getDay() + 6) % 7;            // lunes primero
+  var daysInMonth = new Date(y, m + 1, 0).getDate();
+  var head, i, mo, yr;
+  if (dropdown) {
+    var months = '';
+    for (mo = 0; mo < 12; mo++) months += '<option value="' + mo + '"' + (mo === m ? ' selected' : '') + '>' + calCap(CAL_MONTH_FMT.format(new Date(2000, mo, 1))) + '</option>';
+    var years = '';
+    for (yr = y - 10; yr <= y + 10; yr++) years += '<option value="' + yr + '"' + (yr === y ? ' selected' : '') + '>' + yr + '</option>';
+    head = '<div class="calendar-header"><button type="button" class="calendar-nav-btn prev" data-cal-nav="-1" aria-label="Mes anterior">‹</button>'
+      + '<span class="calendar-caption-dropdowns"><select class="calendar-caption-select" data-cal-month aria-label="Mes">' + months + '</select>'
+      + '<select class="calendar-caption-select" data-cal-year aria-label="Año">' + years + '</select></span>'
+      + '<button type="button" class="calendar-nav-btn next" data-cal-nav="1" aria-label="Mes siguiente">›</button></div>';
+  } else {
+    head = '<div class="calendar-header"><button type="button" class="calendar-nav-btn prev" data-cal-nav="-1" aria-label="Mes anterior">‹</button>'
+      + '<span class="calendar-caption">' + calCap(CAL_MONTH_FMT.format(first)) + ' ' + y + '</span>'
+      + '<button type="button" class="calendar-nav-btn next" data-cal-nav="1" aria-label="Mes siguiente">›</button></div>';
+  }
+  var wk = '<div class="calendar-weekdays">' + ['L', 'M', 'X', 'J', 'V', 'S', 'D'].map(function (d) { return '<span class="calendar-weekday">' + d + '</span>'; }).join('') + '</div>';
+  var cells = '';
+  for (i = 0; i < startDow; i++) cells += '<span class="calendar-day calendar-day-outside" aria-hidden="true"></span>';
+  for (var day = 1; day <= daysInMonth; day++) {
+    var cls = 'calendar-day';
+    if (y === ty && m === tm && day === td) cls += ' calendar-day-today';
+    if (sel && sel.getFullYear() === y && sel.getMonth() === m && sel.getDate() === day) cls += ' calendar-day-selected';
+    cells += '<button type="button" class="' + cls + '" data-cal-day="' + day + '">' + day + '</button>';
+  }
+  var used = startDow + daysInMonth, rows = Math.ceil(used / 7), trail = rows * 7 - used;
+  if (rows < 6) trail += (6 - rows) * 7;             // altura estable de 6 filas
+  for (i = 0; i < trail; i++) cells += '<span class="calendar-day calendar-day-outside" aria-hidden="true"></span>';
+  cal.innerHTML = head + wk + '<div class="calendar-grid">' + cells + '</div>';
+}
+function initCalendar(cal) {
+  if (cal.__calInit) return; cal.__calInit = 1;
+  var init = cal.getAttribute('data-calendar');
+  var d = init && /^\d{4}-\d{2}$/.test(init) ? new Date(+init.slice(0, 4), +init.slice(5, 7) - 1, 1) : new Date();
+  cal._y = d.getFullYear(); cal._m = d.getMonth(); cal._sel = null;
+  cal.addEventListener('click', function (e) {
+    var nav = e.target.closest('[data-cal-nav]');
+    if (nav) { cal._m += parseInt(nav.getAttribute('data-cal-nav'), 10); if (cal._m < 0) { cal._m = 11; cal._y--; } if (cal._m > 11) { cal._m = 0; cal._y++; } renderCalendar(cal); return; }
+    var day = e.target.closest('[data-cal-day]');
+    if (day) { cal._sel = new Date(cal._y, cal._m, parseInt(day.getAttribute('data-cal-day'), 10)); renderCalendar(cal); calOnSelect(cal); }
+  });
+  cal.addEventListener('change', function (e) {
+    if (e.target.hasAttribute('data-cal-month')) { cal._m = parseInt(e.target.value, 10); renderCalendar(cal); }
+    else if (e.target.hasAttribute('data-cal-year')) { cal._y = parseInt(e.target.value, 10); renderCalendar(cal); }
+  });
+  renderCalendar(cal);
+}
+function calOnSelect(cal) {
+  var picker = cal.closest('.date-picker');
+  if (!picker || !cal._sel) return;
+  var trigger = picker.querySelector('.date-picker-trigger');
+  var panel = picker.querySelector('.date-picker-panel');
+  if (trigger) { trigger.classList.remove('date-picker-trigger-empty'); trigger.lastChild.textContent = ' ' + new Intl.DateTimeFormat('es', { day: 'numeric', month: 'long', year: 'numeric' }).format(cal._sel); }
+  if (panel) panel.setAttribute('hidden', '');
+}
+function initAllCalendars() { Array.prototype.forEach.call(document.querySelectorAll('[data-calendar]'), initCalendar); }
+if (document.readyState !== 'loading') initAllCalendars();
+else document.addEventListener('DOMContentLoaded', initAllCalendars);
+window.addEventListener('ds:section-shown', initAllCalendars);
 
 // ── Carousel — native scroll-snap, Prev/Next scroll by one item's width ──
 function carouselScroll(btn, dir) {
@@ -26282,8 +26354,13 @@ function carouselScroll(btn, dir) {
   var content = carousel && carousel.querySelector('.carousel-content');
   if (!content) return;
   var item = content.querySelector('.carousel-item');
-  var step = item ? item.getBoundingClientRect().width + 12 : content.clientWidth;
-  content.scrollBy({ left: dir * step, behavior: 'smooth' });
+  if (carousel.classList.contains('carousel-vertical')) {
+    var stepY = item ? item.getBoundingClientRect().height + 16 : content.clientHeight;
+    content.scrollBy({ top: dir * stepY, behavior: 'smooth' });
+  } else {
+    var step = item ? item.getBoundingClientRect().width + 16 : content.clientWidth;
+    content.scrollBy({ left: dir * step, behavior: 'smooth' });
+  }
 }
 </script>
 </body>
