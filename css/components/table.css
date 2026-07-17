@@ -67,6 +67,10 @@
 .data-table tbody tr.clickable {
   cursor: pointer;
 }
+/* Selected row (e.g. Data Table's row-selection feature) */
+.data-table tbody tr.selected {
+  background: var(--color-surface-container-high);
+}
 /* Las filas clickeables necesitan tabindex="0" para recibir foco de teclado */
 .data-table tbody tr.clickable:focus-visible {
   outline: 2px solid var(--color-focus);

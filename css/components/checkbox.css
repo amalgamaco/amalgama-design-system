@@ -61,6 +61,11 @@
   background: var(--color-primary);
 }
 
+/* Error/invalid — red border via the shared error token (same signal as Input/Select) */
+.checkbox[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
 /* Check icon (rendered via a rotated-box CSS checkmark — no external SVG needed) */
 .checkbox:checked::after {
   content: "";

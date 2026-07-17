@@ -74,6 +74,12 @@
   background: var(--color-on-primary);
 }
 
+/* Error/invalid — red track border via the shared error token. Only the unchecked
+   track shows a visible border at rest, so that's the state this needs to override. */
+.switch[aria-invalid="true"]:not(:checked) {
+  border-color: var(--color-error);
+}
+
 .switch:disabled {
   cursor: not-allowed;
   opacity: 0.4;

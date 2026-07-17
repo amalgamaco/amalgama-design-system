@@ -29,11 +29,11 @@ TableBody.displayName = "TableBody"
 
 const TableRow = React.forwardRef<
   HTMLTableRowElement,
-  React.HTMLAttributes<HTMLTableRowElement> & { clickable?: boolean }
->(({ className, clickable, ...props }, ref) => (
+  React.HTMLAttributes<HTMLTableRowElement> & { clickable?: boolean; selected?: boolean }
+>(({ className, clickable, selected, ...props }, ref) => (
   <tr
     ref={ref}
-    className={cn(clickable && "clickable", className)}
+    className={cn(clickable && "clickable", selected && "selected", className)}
     tabIndex={clickable ? 0 : undefined}
     {...props}
   />
