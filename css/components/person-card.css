@@ -54,14 +54,19 @@
   flex-shrink: 0;
 }
 .person-card .person-info { flex: 1; min-width: 0; }
+/* Guard: nombre/rol nunca desbordan su columna (aunque el ancho se comprima) —
+   los nombres largos se cortan por palabra en vez de derramarse sobre el avatar
+   o las acciones. */
 .person-card .person-name {
   font-weight: 600; font-size: var(--font-size-body-lg);
   color: var(--text-primary);
   margin-bottom: 2px;
+  overflow-wrap: anywhere;
 }
 .person-card .person-role {
   font-size: var(--font-size-body-sm);
   color: var(--text-muted);
+  overflow-wrap: anywhere;
 }
 .person-card .person-actions {
   display: flex; align-items: center; gap: 8px;
