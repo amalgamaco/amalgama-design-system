@@ -153,3 +153,18 @@
   padding-right: 0;
 }
 .modal-centered .modal-media { margin: 0 auto; }
+
+/* ── Tamaño lg ── panel más ancho para contenido con más densidad (par shadcn
+   sm:max-w-2xl). Combinable con las demás clases. */
+.modal-lg { width: min(720px, calc(100vw - 48px)); }
+
+/* ── Contenido scrolleable + footer fijo ── par shadcn "scrollable content" +
+   sticky footer: sólo el .modal-body scrollea; header y footer quedan fijos.
+   El .modal ya es flex-column con max-height, así que basta con contener el
+   overflow y dejar que el body crezca/scrollee. */
+.modal-scrollable { overflow: hidden; }
+.modal-scrollable .modal-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}

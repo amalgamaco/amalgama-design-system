@@ -10067,6 +10067,51 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
             </tbody>
           </table>
         </section>
+        <section class="docs-section" id="tc-dialog-s-comp">
+          <h2 class="docs-section-title">Composiciones</h2>
+          <p class="docs-section-desc">Patrones oficiales del Dialog de shadcn, reproducidos con la misma estructura y tokens Embassy. Cada uno es un ejemplo real — abrilos.</p>
+          <div class="docs-preview" style="gap:10px;flex-wrap:wrap;justify-content:flex-start">
+            <button class="btn-secondary btn-sm" type="button" onclick="openOverlay('dlgc-custom')">Cierre custom</button>
+            <button class="btn-secondary btn-sm" type="button" onclick="openOverlay('dlgc-noclose')">Sin cierre (X)</button>
+            <button class="btn-secondary btn-sm" type="button" onclick="openOverlay('dlgc-sm')">Tamaño sm</button>
+            <button class="btn-secondary btn-sm" type="button" onclick="openOverlay('dlgc-lg')">Tamaño lg</button>
+            <button class="btn-secondary btn-sm" type="button" onclick="openOverlay('dlgc-scroll')">Scrolleable + footer fijo</button>
+            <button class="btn-secondary btn-sm" type="button" onclick="openOverlay('dlgc-form')">Formulario</button>
+            <button class="btn-primary btn-danger btn-sm" type="button" onclick="openOverlay('dlgc-destructive')">Confirmación destructiva</button>
+
+            <!-- Custom close button (label en vez de la X) -->
+            <div class="modal-overlay" id="dlgc-custom" style="display:none"><div class="modal" role="dialog" aria-modal="true"><div class="modal-header"><div class="modal-title">Novedades de la versión</div><div class="modal-description">El cierre es un botón con etiqueta, no el ícono ✕ de la esquina.</div></div><div class="modal-body">Agregamos filtros guardados y exportación a CSV en el listado de vacantes.</div><div class="modal-footer"><button class="btn-primary btn-sm" type="button" onclick="closeOverlay('dlgc-custom')">Entendido</button></div></div></div>
+
+            <!-- No close button -->
+            <div class="modal-overlay" id="dlgc-noclose" style="display:none"><div class="modal" role="dialog" aria-modal="true"><div class="modal-header"><div class="modal-title">Sin botón de cierre</div><div class="modal-description">Sin la ✕ — el cierre ocurre sólo por las acciones del footer (par shadcn showCloseButton=false).</div></div><div class="modal-footer"><button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('dlgc-noclose')">Cancelar</button><button class="btn-primary btn-sm" type="button" onclick="closeOverlay('dlgc-noclose')">Aceptar</button></div></div></div>
+
+            <!-- Size sm -->
+            <div class="modal-overlay" id="dlgc-sm" style="display:none"><div class="modal modal-sm" role="dialog" aria-modal="true"><button class="modal-close" type="button" aria-label="Cerrar" onclick="closeOverlay('dlgc-sm')">✕</button><div class="modal-header"><div class="modal-title">Panel compacto</div><div class="modal-description">Ancho reducido con <code>.modal-sm</code>.</div></div><div class="modal-footer"><button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('dlgc-sm')">Cancelar</button><button class="btn-primary btn-sm" type="button" onclick="closeOverlay('dlgc-sm')">OK</button></div></div></div>
+
+            <!-- Size lg -->
+            <div class="modal-overlay" id="dlgc-lg" style="display:none"><div class="modal modal-lg" role="dialog" aria-modal="true"><button class="modal-close" type="button" aria-label="Cerrar" onclick="closeOverlay('dlgc-lg')">✕</button><div class="modal-header"><div class="modal-title">Panel amplio</div><div class="modal-description">Más ancho para contenido denso con <code>.modal-lg</code>.</div></div><div class="modal-body">Ideal para tablas, comparativas o formularios de dos columnas dentro del diálogo.</div><div class="modal-footer"><button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('dlgc-lg')">Cancelar</button><button class="btn-primary btn-sm" type="button" onclick="closeOverlay('dlgc-lg')">Guardar</button></div></div></div>
+
+            <!-- Scrollable content + sticky footer -->
+            <div class="modal-overlay" id="dlgc-scroll" style="display:none"><div class="modal modal-scrollable" role="dialog" aria-modal="true" style="max-height:min(360px,80vh)"><button class="modal-close" type="button" aria-label="Cerrar" onclick="closeOverlay('dlgc-scroll')">✕</button><div class="modal-header"><div class="modal-title">Términos y condiciones</div></div><div class="modal-body"><p style="margin:0 0 12px">1. Al usar Embassy aceptás las siguientes condiciones de servicio. Este texto es largo a propósito para demostrar el scroll interno con header y footer fijos.</p><p style="margin:0 0 12px">2. El contenido del cuerpo scrollea de forma independiente mientras el título y las acciones permanecen visibles.</p><p style="margin:0 0 12px">3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p style="margin:0 0 12px">4. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><p style="margin:0 0 12px">5. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p><p style="margin:0 0 12px">6. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p style="margin:0">7. Al presionar Aceptar confirmás que leíste y estás de acuerdo con todo lo anterior.</p></div><div class="modal-footer"><button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('dlgc-scroll')">Rechazar</button><button class="btn-primary btn-sm" type="button" onclick="closeOverlay('dlgc-scroll')">Aceptar</button></div></div></div>
+
+            <!-- Form dialog -->
+            <div class="modal-overlay" id="dlgc-form" style="display:none"><div class="modal" role="dialog" aria-modal="true"><button class="modal-close" type="button" aria-label="Cerrar" onclick="closeOverlay('dlgc-form')">✕</button><div class="modal-header"><div class="modal-title">Editar perfil</div><div class="modal-description">Hacé cambios y guardá cuando termines.</div></div><div class="modal-body"><div class="field-group"><label class="field-label">Nombre</label><input class="field-input" value="Ana Torres"></div><div class="field-group" style="margin-top:12px"><label class="field-label">Usuario</label><input class="field-input" value="@anatorres"></div></div><div class="modal-footer"><button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('dlgc-form')">Cancelar</button><button class="btn-primary btn-sm" type="button" onclick="closeOverlay('dlgc-form')">Guardar cambios</button></div></div></div>
+
+            <!-- Destructive confirmation (Alert Dialog + media + Error) -->
+            <div class="modal-overlay" id="dlgc-destructive" style="display:none"><div class="modal modal-sm modal-centered" role="alertdialog" aria-modal="true" data-alert="true"><div class="modal-media modal-media-error"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><div class="modal-header"><div class="modal-title">¿Eliminar vacante?</div><div class="modal-description">Esta acción no se puede deshacer. Se eliminarán también sus postulaciones.</div></div><div class="modal-footer"><button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('dlgc-destructive')">Cancelar</button><button class="btn-primary btn-danger btn-sm" type="button" onclick="closeOverlay('dlgc-destructive')">Eliminar</button></div></div></div>
+          </div>
+          <table class="ds-table" style="margin-top:16px">
+            <thead><tr><th>Composición shadcn</th><th>Cómo</th></tr></thead>
+            <tbody>
+              <tr><td>Custom close</td><td>Botón etiquetado en el footer en vez de la ✕</td></tr>
+              <tr><td>No close button</td><td>Omitir <code>.modal-close</code> (par <code>showCloseButton=false</code>)</td></tr>
+              <tr><td>Tamaños</td><td><code>.modal-sm</code> · default · <code>.modal-lg</code></td></tr>
+              <tr><td>Scrolleable + footer fijo</td><td><code>.modal-scrollable</code> + <code>max-height</code> en <code>.modal</code></td></tr>
+              <tr><td>Formulario</td><td><code>.field-group</code> en el <code>.modal-body</code></td></tr>
+              <tr><td>Destructiva</td><td><code>data-alert</code> + <code>.modal-media-error</code> + <code>.btn-danger</code> (§20.4)</td></tr>
+            </tbody>
+          </table>
+        </section>
         <section class="docs-section" id="tc-dialog-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
@@ -10104,6 +10149,7 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
             <li><a class="ds-toc-link" data-target="tc-dialog-s-0">Anatomía</a></li>
             <li><a class="ds-toc-link" data-target="tc-dialog-s-1">Medidas</a></li>
             <li><a class="ds-toc-link" data-target="tc-dialog-s-2">Estados</a></li>
+            <li><a class="ds-toc-link" data-target="tc-dialog-s-comp">Composiciones</a></li>
             <li><a class="ds-toc-link" data-target="tc-dialog-s-3">Tokens y especificaciones</a></li>
             <li><a class="ds-toc-link" data-target="tc-dialog-s-4">Sección 5</a></li>
           </ul>
