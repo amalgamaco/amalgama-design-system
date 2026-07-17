@@ -1,0 +1,63 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Data Table
+   Tabla con columnas ordenables + paginación. Extiende .data-table
+   (css/components/table.css) — no duplica sus estilos base.
+
+   Cuándo usar: tablas con datos reales que necesitan ordenar/paginar por
+   columna.
+   Cuándo no: una tabla estática de layout (usar Table directamente).
+   Reemplaza a: tablas con lógica de sort/paginado cableada a mano.
+
+   Versión simplificada (revert a plain CSS/vanilla JS): sort en memoria
+   (array.sort) + paginación por slice. Sin resize/pin/drag de columnas,
+   sin filtros facetados, sin virtualización — fuera de alcance a propósito.
+
+   Dependencia: variables.css, table.css, pagination.css, button.css
+
+   Uso:
+   <DataTable columns={[{ key:"name", header:"Nombre", sortable:true }]} data={rows} />
+═══════════════════════════════════════ */
+
+.data-table-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: -6px -8px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+}
+.data-table-sort-btn:hover {
+  background: var(--color-surface-variant);
+}
+.data-table-sort-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.data-table-sort-icon {
+  width: 14px;
+  height: 14px;
+  opacity: .5;
+  flex-shrink: 0;
+}
+.data-table-sort-icon.is-active {
+  opacity: 1;
+}
+
+.data-table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.data-table-count {
+  font-size: var(--font-size-caption);
+  color: var(--text-muted);
+}

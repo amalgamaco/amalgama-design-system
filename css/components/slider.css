@@ -1,0 +1,112 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Slider
+   Selección de un valor (o rango) dentro de un continuo — volumen, brillo, precio.
+
+   Cuándo usar: valores donde el número exacto importa poco, con feedback inmediato.
+   Cuándo no: valores que requieren precisión exacta (usar Input numérico).
+   Reemplaza a: sliders custom hechos con <div> + drag handlers a mano.
+
+   Dependencia: variables.css (Color Roles)
+   Pista en --color-surface-variant, rango activo y thumb en --color-primary.
+
+   Implementación: <input type="range"> nativo — drag físico, teclado
+   (flechas, Home/End, Page Up/Down) y semántica de foco vienen gratis del
+   navegador. Modo rango (dos thumbs): dos <input type="range"> apilados con
+   pointer-events:none en el input y pointer-events:auto reactivado solo en
+   el thumb (::-webkit-slider-thumb / ::-moz-range-thumb) — técnica estándar
+   para simular un slider de dos manijas sin una librería.
+
+   Uso:
+   <div class="slider">
+     <div class="slider-track"></div>
+     <div class="slider-range" style="width: 50%"></div>
+     <input type="range" class="slider-input" min="0" max="100" value="50">
+   </div>
+═══════════════════════════════════════ */
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  touch-action: none;
+}
+.slider[data-disabled] {
+  opacity: .4;
+}
+
+.slider-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-variant);
+  pointer-events: none;
+}
+.slider-range {
+  position: absolute;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  pointer-events: none;
+}
+
+.slider-input {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+}
+.slider-input:focus {
+  outline: none;
+}
+.slider-input::-webkit-slider-runnable-track {
+  background: transparent;
+  height: 4px;
+}
+.slider-input::-moz-range-track {
+  background: transparent;
+  height: 4px;
+  border: none;
+}
+
+.slider-input::-webkit-slider-thumb {
+  appearance: none;
+  pointer-events: auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: box-shadow var(--duration-fast) var(--ease-default);
+}
+.slider-input::-moz-range-thumb {
+  pointer-events: auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: box-shadow var(--duration-fast) var(--ease-default);
+}
+.slider-input:focus-visible::-webkit-slider-thumb,
+.slider-input:hover:not(:disabled)::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.slider-input:focus-visible::-moz-range-thumb,
+.slider-input:hover:not(:disabled)::-moz-range-thumb {
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.slider-input:disabled::-webkit-slider-thumb,
+.slider-input:disabled::-moz-range-thumb {
+  cursor: not-allowed;
+}

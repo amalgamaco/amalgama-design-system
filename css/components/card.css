@@ -1,0 +1,70 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Card
+   Contenedor basico con borde y fondo blanco.
+
+   Cuándo usar: contenedor genérico de contenido agrupado sobre superficie.
+   Cuándo no: métricas (stat-card), personas (person-card), vacantes (vacancy-card).
+   Reemplaza a: paneles/boxes legacy con borde o sombra.
+
+   MD3 tiene tres variantes, todas expresadas con roles Embassy:
+     .card           (outlined, predeterminado) · superficie + borde 1px, sin elevación
+     .card-elevated  · surface-container-low + sombra sm, sin borde
+     .card-filled    · surface-container-highest, sin borde ni sombra
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <div class="card">
+     <div class="card-header">
+       <div class="card-title">Título</div>
+       <p class="card-desc">Descripción breve.</p>
+     </div>
+     <div class="card-content">Contenido de la tarjeta</div>
+     <div class="card-footer"><button class="btn-text">Acción</button></div>
+   </div>
+═══════════════════════════════════════ */
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+
+/* ── Variantes MD3 ── */
+.card-elevated {
+  background: var(--color-surface-container-low);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-sm);
+}
+.card-filled {
+  background: var(--color-surface-container-highest);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+
+/* ── Sub-partes (Basic Card) ── */
+.card-header { margin-bottom: 12px; }
+.card-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.card-desc {
+  font-size: var(--font-size-label);
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+.card-content {
+  font-size: var(--font-size-body-md);
+  color: var(--text-primary);
+}
+.card-footer {
+  margin-top: 16px;
+  display: flex; align-items: center; gap: 8px;
+}

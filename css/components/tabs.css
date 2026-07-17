@@ -1,0 +1,82 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Tabs
+   Pestanas para organizar contenido en secciones.
+
+   Cuándo usar: alternar vistas dentro del MISMO contexto/página.
+   Cuándo no: navegación entre páginas (usar sidebar de layout.css).
+   Reemplaza a: tab bars legacy.
+
+   Dependencia: variables.css
+   Requiere: (ninguno) — la barra indicadora animada usa JS mínimo (ver js/components.js).
+
+   Selected-state token: usa --color-secondary, NUNCA --color-primary — Primary
+   se invierte a blanco en dark mode, lo que en un indicador de selección pasivo
+   se lee como "sin color" y rompe la consistencia visual con el resto de los
+   estados seleccionados de la librería (Chip, Segmented Button — familia
+   secondary-container). Secondary se mantiene azul en ambos temas.
+
+   Uso:
+   <div class="tabs" role="tablist">
+     <button class="tab active" role="tab" aria-selected="true" id="tab-general" aria-controls="panel-general">General</button>
+     <button class="tab" role="tab" aria-selected="false" id="tab-requisitos" aria-controls="panel-requisitos" tabindex="-1">Requisitos</button>
+     <span class="tab-indicator"></span>
+   </div>
+   <div class="tab-panel active" id="panel-general" role="tabpanel" aria-labelledby="tab-general">...</div>
+   <div class="tab-panel" id="panel-requisitos" role="tabpanel" aria-labelledby="tab-requisitos" hidden>...</div>
+═══════════════════════════════════════ */
+
+.tabs {
+  position: relative;
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  gap: 0;
+  margin-bottom: 28px;
+}
+.tab {
+  padding: 11px 20px;
+  font-size: var(--font-size-body-md);
+  font-family: inherit;
+  color: var(--color-on-surface-variant);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color var(--duration-fast) var(--ease-default);
+  white-space: nowrap;
+  user-select: none;
+}
+.tab:hover { color: var(--color-on-surface); }
+.tab:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.tab:active { color: var(--color-secondary); }
+.tab.active {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+.tab:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Barra indicadora deslizante — una sola vez por .tabs, posicionada por JS
+   sobre el tab activo (left/width vía offsetLeft/offsetWidth). El salto entre
+   tabs usa la curva Expressive (transform/width), igual que el resto de los
+   indicadores "seleccionados" con overshoot espacial. */
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-secondary);
+  transition: transform var(--duration-normal, 220ms) var(--ease-expressive, ease-out),
+              width var(--duration-normal, 220ms) var(--ease-expressive, ease-out);
+  pointer-events: none;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }

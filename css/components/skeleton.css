@@ -1,0 +1,31 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Skeleton
+   Animacion de carga shimmer para placeholders.
+
+   Cuándo usar: carga de contenido con estructura conocida (mientras llega la data).
+   Cuándo no: estados vacíos (usar Empty State). No usar spinners ad-hoc.
+   Reemplaza a: spinners/loaders custom.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <div class="skeleton skeleton-title"></div>
+   <div class="skeleton skeleton-text"></div>
+   <div class="skeleton skeleton-text" style="width:80%"></div>
+   <div class="skeleton skeleton-card"></div>
+═══════════════════════════════════════ */
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-surface-variant) 25%, var(--color-surface-container-highest) 50%, var(--color-surface-variant) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-text { height: 14px; margin-bottom: 8px; }
+.skeleton-title { height: 22px; width: 60%; margin-bottom: 12px; }
+.skeleton-card { height: 80px; margin-bottom: 8px; }

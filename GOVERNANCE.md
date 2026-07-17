@@ -15,7 +15,7 @@ When a rule in a component file conflicts with this document, **this document wi
 
 1. **Consistency over customization.** A component must look and behave identically wherever it is used — in a demo, in a spec, in a live product. Visual drift between contexts is always a bug.
 2. **Reuse before creating.** Before adding a new token, pattern, or component, verify that an existing one doesn't already solve the problem. The cost of a new abstraction is paid by every future reader and every consumer of the DS.
-3. **One source of truth.** Token values live in `css/variables.css`. **Component code (variants, contracts) lives in `packages/ds/components/ui/*.tsx`** (Tailwind, self-contained — the `@amalgama/ds` package). Behavior specifications live in `index.html`. Nothing else is authoritative. *(The buildless `css/components/*.css` layer was **deleted** in 2026-06; each component's `Cuándo usar / Cuándo no` decision rule now lives in its `.tsx` header comment.)*
+3. **One source of truth.** Token values live in `css/variables.css`. **Component code (variants, contracts) lives in `css/components/*.css`** — flat, self-contained, no build step. Optional thin React wrappers live in `components/ui/*.tsx` and apply the same classes with zero extra styling. Behavior specifications live in `index.html`. Nothing else is authoritative. *(This repo was migrated to a Tailwind v4 + React/Radix implementation 2026-06-22→26, then that migration was **reverted** 2026-07-17 — `css/components/*.css` is canonical again; each component's `Cuándo usar / Cuándo no` decision rule lives in its CSS header comment.)*
 4. **Semantic tokens only in component code.** Components must never reference primitive tokens directly (e.g. `--primary-900`, `--neutral-100`). They always go through a Color Role (`--color-primary`, `--color-disabled`). Primitives are referenced only in `css/variables.css` and in documentation that explicitly teaches the hierarchy.
 5. **No per-theme overrides in components.** Semantic tokens recalibrate in `[data-theme="dark"]` inside `variables.css`. A component that needs a `[data-theme="dark"]` override block has chosen the wrong token.
 6. **Zero hardcoded values.** No raw hex, no raw px for font-size or radius, no arbitrary `rgba()` outside `variables.css`. The only exception is computed values that cannot be expressed as a token reference (e.g. `color-mix()` expressions) — these are implementation expressions, not tokens, and must be documented as such.
@@ -49,7 +49,7 @@ In all other cases, consume a Color Role directly. The `--button-secondary-*` to
 
 #### Sanctioned exception — MD3 component-token layer
 
-A component **may** declare a full component-token layer that mirrors Material Design 3's "Tokens and specs" table — **one custom property per MD3 component token**, declared on the component root, consumed by every rule. **Reference implementation: `segmented-button.tsx`** (canonical Tailwind component; the `--seg-btn-*` MD3 component-token layer is retained in the docs site's `index.html` for the doc-chrome switchers). This is normally a "shadow token" (§2.3) but is permitted here because it reproduces MD3's *documented three-layer architecture* (palette → system role → component token → CSS), making the component's spec table machine-mappable and each instance themeable by overriding one token.
+A component **may** declare a full component-token layer that mirrors Material Design 3's "Tokens and specs" table — **one custom property per MD3 component token**, declared on the component root, consumed by every rule. **Reference implementation: `css/components/segmented-button.css`** (canonical; the `--seg-btn-*` MD3 component-token layer is defined locally in the component's own file). This is normally a "shadow token" (§2.3) but is permitted here because it reproduces MD3's *documented three-layer architecture* (palette → system role → component token → CSS), making the component's spec table machine-mappable and each instance themeable by overriding one token.
 
 Rules for adopting this pattern:
 1. **Every** component token defaults to its MD3 system role via the bridge, with the Embassy role as fallback: `var(--md-sys-color-X, var(--color-X))`. Never default to a primitive or a hardcoded value.
@@ -60,7 +60,7 @@ Rules for adopting this pattern:
 
 The **MD3 system bridge** (`css/md-sys-bridge.css`) exposes `--md-sys-color-*` (Material's real system-token names) as aliases of the Embassy `--color-*` roles. It is the only place those names are defined; it needs no dark override because the `--color-*` roles already recalibrate. It is optional to load — the `var(--md-sys-color-X, var(--color-X))` fallback keeps adopting components working without it (they resolve to Embassy roles directly).
 
-**Component-tier state tokens (`md.comp.*`, jul 2026).** The component/family-specific state colors — elevated chip, search field, snackbar action/close, and the **navigation/menu family** (`--md-comp-nav-*`) — live in a `--md-comp-*` component tier defined in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css`). Each derives from a role token (and, where it's a state *layer*, from the `md.sys.state.*-opacity` tokens in §5.5). The legacy `--color-chip-elevated-*` / `--color-search-field-*` / `--color-snackbar-*` / `--color-nav-*` names are **kept as backward-compatible aliases** (`--color-X: var(--md-comp-X)`) — they are what components consume (generated `bg-*` utilities for chip/search/snackbar; `bg-[var(--color-nav-*)]` and raw CSS vars for nav) — so no component code changed. **This is the single canonical shape for every derived component/family state-token set**; a new one MUST follow it (canonical `--md-comp-<family>-<state>` + `--color-*` alias), never a `--color-*`-only or one-off token. To restyle one family's state, retarget its `--md-comp-*` var. Role-level state layers (`--color-on-surface-state-*`, `--color-primary-state-*`, `--color-on-secondary-state-*`) stay in the `md.sys` tier and use the `--color-<role>-state-<state>` naming; the `-state-` segment is **reserved** for those role layers and is intentionally absent from the `md.comp` tier.
+**Component-tier state tokens — post-revert state (2026-07).** During the Tailwind era, component/family-specific state colors (elevated chip, search field, snackbar action/close, nav/menu) were routed through a `--md-comp-*` component tier defined in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css`). Both files were deleted when that architecture was reverted, and the `--md-comp-*` indirection layer did **not** get restored — it was Tailwind/islands-only infrastructure, not a design decision. What *did* survive, because `layout.css`'s nav styling depends on it, is the **navigation/menu family**: `--color-nav-hover`, `--color-nav-hover-content`, `--color-nav-press`, `--color-nav-selected`, `--color-nav-selected-content` are real named tokens, defined directly in `css/variables.css` (no `--md-comp-*` indirection — see §5.4 below for the full table). Every other family's state colors (chip-elevated, search-field, snackbar action/close) are now **inline `color-mix()` expressions in each component's own CSS file**, using the same percentages the old tier used, just not routed through a shared named token. This is a known simplification, not a design change — see §12 for the reconciliation entry. If you're adding a new component/family state, follow the pattern that's actually live: either add real tokens to `css/variables.css` (nav's approach, preferred if 2+ files will consume it) or an inline `color-mix()` expression scoped to that component's file (everyone else's current approach).
 
 > Why this is **not** the rejected `material-web` path: this adopts MD3's token *structure and naming* in plain Embassy CSS (no build, no Lit, no Shadow DOM, Embassy palette as source of truth). It does **not** adopt MD3's component *implementations*. See the architecture note in this section's history (June 2026 evaluation: `material-web` is in maintenance mode and lacks ~70% of Embassy's components).
 
@@ -93,8 +93,8 @@ A component has exactly one correct visual appearance. The live demo, the anatom
 
 | Property | Source of truth |
 |---|---|
-| Colors | `packages/ds/components/ui/<name>.tsx` token-backed Tailwind utilities |
-| Spacing (padding, gap) | `packages/ds/components/ui/<name>.tsx` — uses `--space-*`-backed utilities or absolute px anchored in the component spec |
+| Colors | `css/components/<name>.css` — `var(--color-*)` role references |
+| Spacing (padding, gap) | `css/components/<name>.css` — `var(--space-*)` tokens or absolute px anchored in the component spec |
 | Border radius | `css/variables.css` radius scale |
 | Elevation (shadow) | `css/variables.css` shadow scale |
 | Typography (size, weight, family) | `css/variables.css` font scale |
@@ -131,7 +131,7 @@ Note: XL is the only size with `font-weight: 700`. All others use `font-weight: 
 **Rules:**
 - No documentation, demo, or product implementation may introduce a button size that is not in this table.
 - All documentation (Overview, Specs, Measurements, Anatomy, Guidelines, Code, audit pages) must label button sizes using these names and class names — never MD3 density labels (Small/Medium/Large/Extra Large/Extra Extra Large) or dp values.
-- The source of truth for all pixel values is `packages/ds/components/ui/button.tsx`. If a doc value conflicts with the component, the component wins and the doc must be updated.
+- The source of truth for all pixel values is `css/components/button.css`. If a doc value conflicts with the component, the component wins and the doc must be updated.
 - Every property in the table above (height, padding, font-size, font-weight, icon size, gap, radius) must be identical in every place a button of that size appears — token panels, anatomy diagrams, measurement SVGs, live demos, and product code.
 - Border radius per size is defined in §4.3.
 
@@ -155,7 +155,7 @@ A button with `--radius-full` is visually indistinguishable from a chip. The pil
 
 ### 4.3 Button radius scales with button size
 
-Radius on buttons is determined by **size, not by variant**. All five variants (Primary, Secondary, Tertiary, Text, Icon) at the same size must compute to the same `border-radius`. The radius is set once per size in `packages/ds/components/ui/button.tsx`:
+Radius on buttons is determined by **size, not by variant**. All five variants (Primary, Secondary, Tertiary, Text, Icon) at the same size must compute to the same `border-radius`. The radius is set once per size in `css/components/button.css`:
 
 | Size class | Token | Value | Min-height |
 |---|---|---|---|
@@ -249,7 +249,7 @@ A new component must declare its hover model in the CSS header comment and use i
 
 #### Navigation / menu hover — the shared "blue hover" language (jul 2026)
 
-Every **menu-like or navigation-like** surface — main app-shell nav (`.nav-item`), docs component side menu (`.ds-nav-item`), dropdown menus (`dropdown-menu.tsx`), lists (`list.tsx`), and search result rows (`search.tsx`) — shares **one** hover/selected vocabulary so hover reads **blue / light-blue, never neutral gray**. It is built on the `secondary` accent and defined once as semantic tokens in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css`):
+Every **menu-like or navigation-like** surface — main app-shell nav (`.nav-item`), docs component side menu (`.ds-nav-item`), dropdown menus (`css/components/dropdown-menu.css`), lists (`css/components/list.css`), and search result rows (`css/components/search.css`) — shares **one** hover/selected vocabulary so hover reads **blue / light-blue, never neutral gray**. It is built on the `secondary` accent and defined once as semantic tokens directly in `css/variables.css`:
 
 | Aspect | Token | Derivation |
 |---|---|---|
@@ -269,33 +269,25 @@ Consume via `bg-[var(--color-nav-*)]` / `text-[var(--color-nav-*-content)]` (Rea
 
 Material Design 3 defines **state layers** as translucent overlays that communicate interaction states without permanently altering the component's color. Embassy follows this model exactly, with `color-mix()` as the CSS implementation.
 
-#### The opacity is a system token — never a literal (jul 2026)
+#### The opacity is a standard percentage — currently applied as a literal (post-2026-07-revert state)
 
-The state-layer opacities are **`md.sys.state.*` system tokens**, defined once in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css` for the bundle). Every state-layer color is **derived** from them via `color-mix()` — no `.tsx`/CSS may hardcode a `8%`/`10%` literal inside a state expression. Change the opacity in one place and it propagates to every role/surface/component state.
+During the Tailwind era, these opacities were routed through named `md.sys.state.*` system tokens defined in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css`). Both files were deleted in the 2026-07-17 revert, and that named-token indirection did **not** get restored — components now apply the percentage directly inline in each `color-mix()` expression. **The percentages themselves are still the standard, non-negotiable values below** — this is a loss of indirection, not a design change. If you're introducing a state-layer color in a new component, use the correct percentage from this table inline; if the same derived color needs to be shared across 2+ files, promote it to a real named token in `css/variables.css` rather than reintroducing a parallel `--md-sys-*` tier for one case (see §12 for the reconciliation entry tracking a proper shared-token reintroduction).
 
 ```css
---md-sys-state-hover-opacity:              8%;
---md-sys-state-focus-opacity:              10%;
---md-sys-state-pressed-opacity:            10%;   /* reconciled from ad-hoc 12–16% */
---md-sys-state-dragged-opacity:            16%;
---md-sys-state-disabled-content-opacity:   38%;
---md-sys-state-disabled-container-opacity: 12%;
-
-/* derive any state color — never inline the % */
---color-on-surface-state-hover: color-mix(in srgb,
-  var(--color-on-surface) var(--md-sys-state-hover-opacity), transparent);
+/* current pattern — literal percentage, scoped to the component's own file */
+background: color-mix(in srgb, var(--color-on-surface) 8%, transparent); /* hover */
 ```
 
-| Interaction | Opacity | System token |
-|---|---|---|
-| Hover | 8% | `--md-sys-state-hover-opacity` |
-| Focus | 10% | `--md-sys-state-focus-opacity` |
-| Pressed | 10% | `--md-sys-state-pressed-opacity` |
-| Dragged | 16% | `--md-sys-state-dragged-opacity` |
-| Disabled content | 38% | `--md-sys-state-disabled-content-opacity` |
-| Disabled container | 12% | `--md-sys-state-disabled-container-opacity` |
+| Interaction | Opacity |
+|---|---|
+| Hover | 8% |
+| Focus | 10% |
+| Pressed | 10% |
+| Dragged | 16% |
+| Disabled content | 38% |
+| Disabled container | 12% |
 
-> **Reconciled (jul 2026):** pressed was previously an ad-hoc 12–16% per token (primary 16%, on-surface 12%) and focus 12%. Both were unified to the MD3 spec (pressed 10%, focus 10%) by routing every state color through the opacity tokens above. Token **names** were preserved, so nothing consuming `--color-*-state-*` broke — only the derivation changed. Non-state hover *darkens* (`--color-primary-hover`, `--color-secondary-container-hover`) and the input `--color-error-ring` halo are intentionally **not** state layers and keep their own values.
+> **History:** pressed was originally an ad-hoc 12–16% per token (primary 16%, on-surface 12%) and focus was 12%; both were unified to the MD3 spec (pressed 10%, focus 10%) during the Tailwind era via the now-deleted opacity-token layer. The unified *values* in the table above are what's live in the restored components (verify against `css/components/chip.css`'s `color-mix()` calls, which use 8%/12%/38% consistently) — only the shared-token mechanism was lost, not the reconciliation itself. Non-state hover *darkens* (`--color-primary-hover`, `--color-secondary-container-hover`) and the input `--color-error-ring` halo are intentionally **not** state layers and keep their own values.
 
 #### State layer color by surface type
 
@@ -326,13 +318,13 @@ The mapping splits by anatomy, not by "emphasis" (the previous wording here allo
 | Has a container (pill/segment), lighter "Option B" variant | `--color-primary-container` (MD3 `primaryContainer`) fill + `--color-on-primary-container` (MD3 `onPrimaryContainer`) content | Segmented Button |
 | Text-only, no container (underline/indicator) | `--color-secondary` directly, on both the label and the indicator | Tabs |
 
-`--color-primary` is reserved for actual page-level/sidebar navigation active state, which lives in the docs shell's own chrome (`index.html`), not in `packages/ds` components — it is out of this rule's scope, not a second option for it.
+`--color-primary` is reserved for actual page-level/sidebar navigation active state, which lives in the docs shell's own chrome (`index.html`), not in the component library — it is out of this rule's scope, not a second option for it.
 
-**Segmented Button — softer "Option B" variant (2026-06):** the segmented button uses a *lighter* tonal selection — container `--color-primary-container` + content `--color-on-primary-container`, with an `--color-outline-variant` frame and `--color-on-surface-variant` unselected labels. This is a deliberate, documented deviation from the MD3 segmented-button spec (which assigns `secondaryContainer`): it stays within MD3 *roles* and the tonal-selection principle while reading lighter/cleaner. Canonical token mapping lives in `packages/ds/components/ui/segmented-button.tsx` and the component's Specs → Color Roles table.
+**Segmented Button — softer "Option B" variant (2026-06):** the segmented button uses a *lighter* tonal selection — container `--color-primary-container` + content `--color-on-primary-container`, with an `--color-outline-variant` frame and `--color-on-surface-variant` unselected labels. This is a deliberate, documented deviation from the MD3 segmented-button spec (which assigns `secondaryContainer`): it stays within MD3 *roles* and the tonal-selection principle while reading lighter/cleaner. Canonical token mapping lives in `css/components/segmented-button.css` and the component's Specs → Color Roles table.
 
-**Chip — outline-variant frame (2026-07):** unselected Chip's border was `--color-outline` — identical to Button tertiary/ghost/icon's border, so the two components read as the same control when placed side by side, even though Chip is meant to feel like a lighter-weight filter/metadata control, not a primary action. Fixed by moving Chip's frame to `--color-outline-variant`, the same token (and the same rationale) already used by Segmented Button's "Option B" frame above — no new token, just correcting Chip's tier assignment in the borders table (§5.1). Button (tertiary/ghost/icon), Checkbox, Radio and Switch keep `--color-outline` unchanged; they remain the stronger resting-border tier. Canonical mapping lives in `packages/ds/components/ui/chip.tsx`.
+**Chip — outline-variant frame (2026-07):** unselected Chip's border was `--color-outline` — identical to Button tertiary/ghost/icon's border, so the two components read as the same control when placed side by side, even though Chip is meant to feel like a lighter-weight filter/metadata control, not a primary action. Fixed by moving Chip's frame to `--color-outline-variant`, the same token (and the same rationale) already used by Segmented Button's "Option B" frame above — no new token, just correcting Chip's tier assignment in the borders table (§5.1). Button (tertiary/ghost/icon), Checkbox, Radio and Switch keep `--color-outline` unchanged; they remain the stronger resting-border tier. Canonical mapping lives in `css/components/chip.css`.
 
-**Search Bar / Search Field — shared subtle-border tier, not a new one (2026-07):** `SearchField` (`toolbar.tsx`), the desktop/toolbar variant of Search, was built reusing `SearchBar`'s existing `--border` frame and `--search-field-hover/-focus/-border-hover` state tokens — the same subtle resting-border tier already used by Input/Textarea/Select (§5.1). This is why it integrates cleanly into a toolbar row next to `Select`: they already shared a border tier before this decision, it just hadn't been documented as an intentional Search/Select pairing. `SearchField` differs from `SearchBar` only in shape (`--radius-md` vs. pill) and height (padding-driven vs. fixed 56px) — not in color role. Canonical mapping lives in `packages/ds/components/ui/toolbar.tsx` and `packages/ds/components/ui/search.tsx`.
+**Search Bar / Search Field — shared subtle-border tier, not a new one (2026-07):** `.search-field` (`toolbar.css`), the desktop/toolbar variant of Search, reuses `SearchBar`'s existing `--border` frame and `--search-field-hover/-focus/-border-hover` state tokens — the same subtle resting-border tier already used by Input/Textarea/Select (§5.1). This is why it integrates cleanly into a toolbar row next to `.select`: they already shared a border tier before this decision, it just hadn't been documented as an intentional Search/Select pairing. `.search-field` differs from `.search-bar` only in shape (`--radius-md` vs. pill) and height (padding-driven vs. fixed 56px) — not in color role. Canonical mapping lives in `css/components/toolbar.css` and `css/components/search.css`.
 
 ---
 
@@ -532,29 +524,29 @@ Documentation copy is **Spanish (rioplatense)**. Code, token names, and class na
 
 Use this checklist when adding a new component or updating an existing one.
 
-### 11.1 Component file (`packages/ds/components/ui/<name>.tsx`)
+### 11.1 Component file (`css/components/<name>.css`)
 
-Author as a self-contained Tailwind component (see CONTRIBUTING §4). **Do not create a `css/components/*.css` file** — that layer was deleted (2026-06); component code lives only in the `.tsx`.
+Author as a self-contained flat-CSS file (see CLAUDE.md's "Adding a new component"). **This is the single source of truth** — an optional thin React wrapper in `components/ui/<name>.tsx` may follow, applying the same classes with zero extra styling.
 
-- [ ] Header comment includes: description, `Cuándo usar`, `Cuándo no`, `Reemplaza a`
-- [ ] Variants defined in-file via `cva`; classes merged through `cn()`
-- [ ] Zero raw hex — color via token utilities (`bg-primary`, `text-on-surface`, …)
-- [ ] Zero arbitrary font sizes — use the scale (`text-body-md`, `text-label`, …)
-- [ ] Border radius uses `rounded-sm/md/lg/xl`; for buttons, size-to-radius mapping matches §4.3 (same size = same radius for all variants)
-- [ ] Shadow uses `shadow-sm/md/lg`; font families use `font-body` / `font-heading` / `font-mono`
-- [ ] Focus: `focus-visible:focus-ring` (the shared utility = `--color-focus` outline + `--color-focus-ring` halo)
-- [ ] Disabled: `disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed`
+- [ ] Header comment includes: description, `Cuándo usar`, `Cuándo no`, `Reemplaza a`, `Dependencia`, `Uso:` HTML snippet
+- [ ] Flat kebab-case classes; variants/sizes as additive modifier classes (`btn-primary btn-danger btn-sm`), never BEM
+- [ ] Zero raw hex — color via `var(--color-*)` role tokens
+- [ ] Zero arbitrary font sizes — use the scale (`var(--font-size-body-md)`, `var(--font-size-label)`, …)
+- [ ] Border radius uses `var(--radius-sm/md/lg/xl)`; for buttons, size-to-radius mapping matches §4.3 (same size = same radius for all variants)
+- [ ] Shadow uses `var(--shadow-sm/md/lg)`; font families use `var(--font-body)` / `var(--font-heading)` / `var(--font-mono)`
+- [ ] Focus: the canonical `:focus-visible` pattern (§6.2) — `--color-focus` outline + `--color-focus-ring` halo
+- [ ] Disabled: the canonical pattern (§5.3) — `--color-disabled` / `--color-on-disabled`
 - [ ] Hover / pressed states declared and consistent within the component
-- [ ] No `dark:` variants or `[data-theme="dark"]` overrides (dark mode is automatic via the token layer)
-- [ ] No custom CSS class; no new `tailwind.theme.css` utility for anything expressible as atomic Tailwind
+- [ ] No `[data-theme="dark"]` override block in the component file (dark mode is automatic via the token layer recalibrating in `variables.css`)
+- [ ] No new token in `variables.css` for a single component's internal use — if a component-scoped custom-property tier is genuinely useful (see Segmented Button's `--seg-btn-*`), define it locally in the component's own file
 
 ### 11.1a Motion
 
 See the Motion page (Styles) for the full token reference and transition-pattern spec.
 
-- [ ] No raw easing/duration values (`ease-in-out`, `duration-[150ms]`, inline `"stroke .3s ease"`) — always `duration-fast/normal/medium/slow` + `ease-default/enter/exit`
-- [ ] Directional asymmetry respected: exit uses a shorter duration and `ease-exit`; enter uses `ease-enter` (never the same duration for both on anything larger than the fast tier)
-- [ ] Enter/exit overlays (Dialog, Sheet, Dropdown, Select, Popover, Tooltip) declare **both** `data-[state=open]` and `data-[state=closed]` animation classes — an entrance without a matching exit is a gap, not a style choice
+- [ ] No raw easing/duration values (`ease-in-out`, `150ms`, inline `"stroke .3s ease"`) — always `var(--duration-fast/normal/medium/slow)` + `var(--ease-default/enter/exit)`
+- [ ] Directional asymmetry respected: exit uses a shorter duration and `--ease-exit`; enter uses `--ease-enter` (never the same duration for both on anything larger than the fast tier)
+- [ ] Enter/exit overlays (Dialog, Sheet, Dropdown, Popover, Tooltip) declare **both** `[data-state="open"]` and `[data-state="closed"]` CSS attribute-selector rules (see `accordion.css`/`collapsible.css` for the live pattern) — an entrance without a matching exit is a gap, not a style choice. **Known current gap (2026-07):** Dialog/Modal and Toast/Snackbar's `openOverlay()`/`closeOverlay()` close synchronously via `display:none` with no exit transition — only Toast's dedicated `dismissToast()` has a real timed exit. Don't replicate the instant-close pattern in a new component; treat it as debt to fix, not a precedent.
 - [ ] If the component enters/exits, it maps to one of the adopted transition patterns (Enter and exit / Lateral / Top level / Skeleton loaders) documented on the Motion page — a pattern not on that list is a gap to flag, not one to improvise
 - [ ] Continuous/looping animations (shimmer, indeterminate spinners) are exempt from the enter/exit tokens — they're a different category
 
@@ -589,13 +581,15 @@ See the Motion page (Styles) for the full token reference and transition-pattern
 - [ ] Disabled state uses `disabled` attribute (not only visual styling) OR `aria-disabled="true"` + `pointer-events: none`
 - [ ] `role` and `aria-*` attributes documented in the Accessibility tab
 
-### 11.6 React API
+### 11.6 React API (optional — only if a wrapper is warranted)
 
-- [ ] Pattern: `cva` (class-variance-authority) + `cn()` from `packages/ds/components/lib/utils.ts` + `React.forwardRef`
-- [ ] All styling via Tailwind utilities in the component — no inline styles, no custom CSS class
+Not every component needs one — domain/composition-only pieces (Vacancy Card, Person Card, Kanban Card, Create Form, Placeholder, Segmented Button) are CSS-only by design; don't fabricate a wrapper where the project doesn't need one.
+
+- [ ] Pattern: `cva` (class-variance-authority) + `cn()` from `components/lib/utils.ts` + `React.forwardRef`
+- [ ] Maps props onto the flat CSS classes from `css/components/<name>.css` — zero extra styling, zero Tailwind utilities, zero inline styles beyond what the demo itself needs
 - [ ] `disabled` prop wires to the HTML `disabled` attribute
 - [ ] `aria-busy` wired for loading states
-- [ ] Exported via the package `exports` map (import as `@amalgama/ds/<name>`); islands showcase added + bundle rebuilt if it renders in the docs site
+- [ ] Added to `components/ui/` under the matching filename; no package/bundle step involved — the file itself is the deliverable
 
 ### 11.7 Cross-references
 
@@ -655,7 +649,7 @@ These are documented deviations from the rules in this document. They exist in t
 
 | Issue | Description | Correct pattern | Priority |
 |---|---|---|---|
-| Shadows (no dark mode) | `--shadow-sm/md/lg` have no dark mode override — nearly invisible on dark surfaces. Note: Tailwind v4 *inlines* these into `.shadow-*` utilities (e.g. `box-shadow: … #1c24380f`), so a `[data-theme="dark"]` override of `--shadow-*` does NOT reach them. The fix is a **runtime var consumed via `shadow-[var(--token)]`** — see `--btn-elevation`/`--btn-elevation-hover` (2026-07), the theme-aware elevation token the Elevated Button uses (navy in light, black in dark). Apply the same pattern to Card/Dialog/etc. shadows. | Medium |
+| Shadows (no dark mode) | `--shadow-sm/md/lg` (`css/variables.css`) have no `[data-theme="dark"]` override — nearly invisible on dark surfaces. Post-revert, components consume `box-shadow: var(--shadow-sm)` directly (no Tailwind inlining in the way anymore), so fixing this is now just adding a `[data-theme="dark"]` override block for the three tokens in `variables.css` — no runtime-var workaround needed. `--btn-elevation`/`--btn-elevation-hover` (2026-07, the Elevated Button's theme-aware elevation token) already does exactly this — a real dark-mode value defined alongside the light one — and is the reference pattern to extend to Card/Dialog/etc. shadows. | Medium |
 | Icon button fragmentation | 5 separate icon-button implementations (`.icon-btn`, `.modal-close`, `.more-btn`, `.desc-delete-btn`, `.toast-close`) with inconsistent sizes (36/32/28/28/24px) and tokens | Extend `.icon-btn` with `ghost` modifier; standardize all to use it | High |
 | Clickable card hover inconsistency | 4 different hover strategies across vacancy-card, person-card, kanban-card, data-table rows | Standard: `border → --color-outline-variant` + `box-shadow: var(--shadow-md)` + `transform: translateY(-1px)` | Medium |
 | Avatar container fragmentation | 3 incompatible avatar patterns (semantic container, primitive gradient, alias bg) | Define shared avatar pattern with 3 size tokens; all use semantic container pairs | High |
@@ -867,7 +861,7 @@ A brand theme is a single CSS file loaded **after** `variables.css` and **before
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="brand/client-theme.css">  <!-- brand overrides -->
 <link rel="stylesheet" href="css/base.css">
-<!-- Components are Tailwind now: @import "@amalgama/ds/tailwind.theme.css" + copy the .tsx -->
+<link rel="stylesheet" href="css/components.css">  <!-- or copy individual files from css/components/ -->
 ```
 
 ### 15.4 Verification after theming
@@ -912,7 +906,7 @@ A component moves from **Draft → Stable** when:
 
 ### 16.4 Roadmap components
 
-Roadmap components (checkbox, radio, switch, menu, tooltip, slider, date picker, sheet, list, loading, carousel, divider) are **Proposal status**. They have no consumable code. When a designer or engineer needs one:
+All components previously listed here (checkbox, radio, switch, menu, tooltip, slider, date picker, sheet, list, loading, carousel, divider) were built during the 2026-07 revert and are now **Stable** — see the CLAUDE.md component inventory. The only component genuinely absent from the library today is **Resizable panels** (dropped in the revert — no real use case beyond its own demo page). When a designer or engineer needs a component that isn't in CLAUDE.md's inventory:
 
 1. Do not improvise — compose from existing components or flag the gap
 2. Open a proposal documenting: what it is, which existing component it relates to, the markup anatomy, the states required
@@ -1012,43 +1006,71 @@ Do not start the CSS before this block is complete. The header is the component'
 
 ---
 
-## 19. shadcn parity — coverage & intentional non-additions
+## 19. Component coverage — intentional non-additions & compositions
 
-Embassy tracks the official shadcn/ui component registry (46 components as of 2026-07) as its
-implementation reference. Two shadcn components are deliberately NOT present because Embassy already
-ships their capability through a canonical component — adding them would be a second, competing
-implementation of the same pattern (a violation of §2, one canonical component per pattern):
-`sidebar` → the app-shell; `drawer` → **Sheet** (see §19.1).
+> **History:** between 2026-06-22 and 2026-06-26 Embassy was implemented on Tailwind v4 + React/Radix
+> (shadcn/ui), tracking the shadcn/ui component registry as its implementation reference. That
+> architecture was **reverted 2026-07-17** — every component is now flat CSS (`css/components/*.css`)
+> + vanilla JS, with optional thin React wrappers. The registry-tracking framing no longer applies
+> (there's no shadcn dependency to track parity against), but the specific coverage decisions below
+> were about *design*, not about which library shipped them, and they still hold: Embassy deliberately
+> does NOT ship a second, competing implementation of a pattern it already covers (a violation of §2,
+> one canonical component per pattern).
 
-### 19.1 `drawer` — standardized onto **Sheet** (2026-07)
+### 19.1 One canonical edge-anchored panel: **Sheet**
 
-**Status: removed.** A vaul-based Drawer was briefly added, then **removed** — the DS collapsed to
-**one canonical edge-anchored panel: `Sheet`** (Radix Dialog). A Drawer and a Side Sheet are visually
-and motion-identical at rest; the Drawer's *only* differentiator was gesture (swipe-to-dismiss, snap
-points, nested stacking), which the product does not use. Maintaining both violated §2 for no benefit.
+**Status: `Sheet` only, no separate Drawer.** A gesture-driven Drawer (vaul-based, during the Tailwind
+era) was briefly added, then **removed** — a Drawer and a Side Sheet are visually and motion-identical
+at rest; the Drawer's *only* differentiator was gesture (swipe-to-dismiss, snap points, nested
+stacking), which the product does not use. Maintaining both violated §2 for no benefit, and the revert
+carried this decision forward: there is still only one edge-anchored panel.
 
-**`Sheet` is the single edge-anchored panel:** `side="right" | "left"` = Side Sheet · `side="bottom"`
-= Bottom Sheet · `side="top"`. Map every drawer/sheet/edge-panel requirement to `Sheet`. The `vaul`
-dependency was removed; Embassy stays 100% on Radix + `asChild`. If a genuine gesture surface
-(swipe/snap) is ever required, reintroduce a gesture engine as a deliberate, documented decision —
-do not re-add a parallel component for a static panel. (The separate **Navigation Drawer** in the
-app-shell — the mobile nav in `css/layout.css` — is unrelated and stays.)
+**`Sheet` (`css/components/sheet.css` + `components/ui/sheet.tsx`) is the single edge-anchored panel:**
+`side="right" | "left"` = Side Sheet · `side="bottom"` = Bottom Sheet · `side="top"`. Map every
+drawer/sheet/edge-panel requirement to `Sheet`. If a genuine gesture surface (swipe/snap) is ever
+required, reintroduce a gesture engine as a deliberate, documented decision — do not re-add a parallel
+component for a static panel. (The separate **Navigation Drawer** in the app-shell — the mobile nav in
+`css/layout.css` — is unrelated and stays.)
 
-### 19.2 `sidebar` → use the **app-shell** (`css/layout.css`) + resolved mobile drawer
+### 19.2 No separate Sidebar component → use the **app-shell** (`css/layout.css`)
 
-shadcn's Sidebar is a large composite (provider + collapsible rail + cookie persistence + mobile sheet).
-Embassy already owns app navigation through the **app-shell** (`.app`/`.sidebar`/`.topbar`/`.main` in
-`css/layout.css`) with the resolved modal navigation drawer below 768px (§14.3). A second React Sidebar
-component would fork the navigation story. **Map sidebar requirements to the app-shell.** If a
+Embassy owns app navigation through the **app-shell** (`.app`/`.sidebar`/`.topbar`/`.main` in
+`css/layout.css`) with the resolved modal navigation drawer below 768px (§14.3). A second, separate
+Sidebar component would fork the navigation story. **Map sidebar requirements to the app-shell.** If a
 component-level, per-view collapsible sidebar is later needed, extend the shell's state API rather than
-adding shadcn's Sidebar wholesale.
+adding a parallel Sidebar component.
 
-### 19.3 Recipes exported as first-class components
+### 19.3 Compositions exported as first-class components
 
-`date-picker`, `combobox`, and `data-table` are **compositions** in shadcn (assembled from
-Popover/Command/Calendar/Table), not standalone primitives. Embassy exports each as a first-class,
-copy-paste component (`date-picker.tsx`, `combobox.tsx`, `data-table.tsx`) so consumers get the
-assembled, token-correct pattern without re-wiring it — while still composing only canonical DS parts.
+Date Picker, Combobox, and Data Table are **compositions** (assembled from Popover/Calendar-grid or
+Command-style filtering, and Table + Pagination respectively), not standalone primitives. Embassy
+exports each as a first-class, copy-paste component (`css/components/date-picker.css` +
+`components/ui/date-picker.tsx`, `combobox.css`/`combobox.tsx`, `data-table.css`/`data-table.tsx`) so
+consumers get the assembled, token-correct pattern without re-wiring it — while still composing only
+canonical DS parts. Note these three (plus Command, Context Menu, Menubar, Navigation Menu, Input OTP,
+and Form) have real component code but **no standalone doc page in `index.html` yet** — that's the
+remaining phase, not a sign the component doesn't exist; check `css/components/` and `components/ui/`
+directly rather than assuming from the docs site alone.
+
+### 19.4 Deliberately simplified vs. their Tailwind-era, library-backed versions
+
+The 2026-07 revert rebuilt the hardest, most library-dependent components as **simplified vanilla
+equivalents** rather than exact clones of their old Recharts/TanStack/react-day-picker/cmdk/embla
+behavior — this is an accepted, documented tradeoff, not a regression to silently fix:
+
+| Component | Simplified away |
+|---|---|
+| Chart | Legend animation, brush/zoom — hand-drawn SVG + CSS `conic-gradient`, native `<title>` tooltips |
+| Data Table | Column resize/pin/drag-reorder, faceted filtering, virtualization, row selection |
+| Calendar / Date Picker | Locale system, complex range-selection edge cases, viewport-edge collision detection on the popover |
+| Command / Combobox | Fuzzy-match scoring — substring filtering only |
+| Popover / Dropdown / Context Menu / Menubar / Navigation Menu | True focus-trap (Tab-cycling), submenu/portal support — real viewport-edge-flip positioning and keyboard nav ARE implemented |
+| Input OTP, Slider, Form | — mostly full-fidelity; Slider's range mode uses the standard two-stacked-`<input>` technique |
+| Carousel | Drag/swipe physics beyond native touch-scroll, autoplay, infinite loop, the `CarouselApi` escape hatch |
+| Resizable panels | **Not implemented at all** — dropped, no real use case beyond its own demo page |
+
+If a product need genuinely requires one of these simplified-away capabilities, that's a DS gap to
+flag and scope deliberately — not something to quietly hand-roll in product code.
 
 ---
 

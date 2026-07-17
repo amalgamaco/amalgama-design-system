@@ -1,0 +1,132 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Calendar
+   Grilla de mes para elegir un día o un rango de fechas. Bloque interno del
+   Date Picker (date-picker.css) — también usable en línea por su cuenta.
+
+   Cuándo usar: como base del Date Picker, o en línea cuando el calendario debe
+   estar siempre visible (no como popover).
+   Cuándo no: para elegir solo mes/año (usar Select); para texto libre de fecha
+   sin calendario (usar Input nativo type="date").
+   Reemplaza a: cualquier selector de fecha ad-hoc sin grilla accesible.
+
+   Dependencia: variables.css (Color Roles). Consume EXCLUSIVAMENTE tokens
+   semánticos --color-* → funciona en light y dark sin overrides por tema.
+
+   Nota de alcance (revert a vanilla): implementación simplificada respecto a la
+   versión Tailwind (react-day-picker + date-fns) — matemática de fechas con
+   Date nativo, sin soporte de locale (los nombres de mes/día usan
+   Intl.DateTimeFormat del navegador), sin edge cases avanzados de rango
+   (selección cruzando años se resuelve visualmente pero sin lógica extra).
+
+   Uso:
+   <div class="calendar">
+     <div class="calendar-header">
+       <button class="calendar-nav-btn" aria-label="Mes anterior">‹</button>
+       <span class="calendar-caption">Julio 2026</span>
+       <button class="calendar-nav-btn" aria-label="Mes siguiente">›</button>
+     </div>
+     <div class="calendar-weekdays">...</div>
+     <div class="calendar-grid">...</div>
+   </div>
+═══════════════════════════════════════ */
+
+.calendar {
+  display: inline-block;
+  padding: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Header: mes centrado, flechas a los extremos ── */
+.calendar-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  margin-bottom: 4px;
+  padding: 0 4px;
+}
+.calendar-caption {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-body-md);
+  font-weight: 600;
+  color: var(--color-on-surface);
+  text-transform: capitalize;
+}
+.calendar-nav-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-on-surface);
+  cursor: pointer;
+  transition: background-color .15s var(--ease-default, ease);
+}
+.calendar-nav-btn:hover:not(:disabled) { background: var(--color-surface-variant); }
+.calendar-nav-btn:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 2px; }
+.calendar-nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+.calendar-nav-btn.prev { left: 4px; }
+.calendar-nav-btn.next { right: 4px; }
+
+/* ── Días de la semana ── */
+.calendar-weekdays {
+  display: flex;
+}
+.calendar-weekday {
+  width: 36px;
+  padding-bottom: 4px;
+  text-align: center;
+  font-size: var(--font-size-label);
+  color: var(--text-muted);
+}
+
+/* ── Grilla (6 semanas × 7 días) ── */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 36px);
+  grid-auto-rows: 36px;
+  row-gap: 2px;
+}
+.calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-on-surface);
+  font-size: var(--font-size-body-sm);
+  cursor: pointer;
+  transition: background-color .15s var(--ease-default, ease);
+}
+.calendar-day:hover:not(:disabled):not(.calendar-day-selected) { background: var(--color-surface-variant); }
+.calendar-day:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 1px; }
+
+.calendar-day-outside { color: var(--text-muted); opacity: .4; }
+.calendar-day-today { font-weight: 700; color: var(--color-primary); }
+.calendar-day-selected,
+.calendar-day-selected:hover {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 600;
+}
+.calendar-day-disabled { opacity: .3; cursor: not-allowed; }
+
+/* ── Rango (mode="range") ── */
+.calendar-day-range-middle {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  border-radius: 0;
+}
+.calendar-day-range-start { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.calendar-day-range-end   { border-top-left-radius: 0;  border-bottom-left-radius: 0; }

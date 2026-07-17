@@ -1,0 +1,72 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Input OTP
+   Entrada de código de un solo uso / PIN, en casillas individuales.
+
+   Cuándo usar: códigos de verificación (2FA, SMS, email), PIN.
+   Cuándo no: texto libre (usar Input); un solo dígito (usar Input).
+   Reemplaza a: inputs de código hechos con N campos <input> sueltos sin
+   auto-avance ni paste-splitting.
+
+   Dependencia: variables.css (Color Roles) + form.css (mismo lenguaje de foco)
+   Cada casilla es un <input maxlength="1"> real (no un <div> + JS de caret) —
+   el navegador resuelve selección/borrado/IME gratis. El wrapper agrega:
+   auto-avance al siguiente casillero al tipear, retroceso que vuelve y limpia
+   el casillero anterior, y paste-splitting (pegar un código completo lo
+   reparte una posición por casillero desde el foco actual).
+
+   Uso:
+   <div class="otp-group" role="group" aria-label="Código de verificación">
+     <input class="otp-slot" maxlength="1" inputmode="numeric">
+     <input class="otp-slot" maxlength="1" inputmode="numeric">
+     …
+   </div>
+═══════════════════════════════════════ */
+
+.otp-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.otp-group.is-disabled {
+  opacity: .5;
+}
+
+.otp-slot {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: var(--font-size-heading-xs);
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  padding: 0;
+  outline: none;
+  transition: border-color var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
+}
+.otp-slot:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-outline);
+}
+.otp-slot:focus {
+  border-color: var(--interactive);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  z-index: 1;
+  position: relative;
+}
+.otp-slot:disabled {
+  cursor: not-allowed;
+  background: var(--color-disabled);
+  color: var(--color-on-disabled);
+}
+
+/* Separador opcional entre grupos (ej. 3 + 3) */
+.otp-separator {
+  display: flex;
+  align-items: center;
+  color: var(--color-on-surface-variant);
+  width: 12px;
+  justify-content: center;
+}

@@ -1,0 +1,223 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Segmented Button
+   Selector de opción única dentro de un conjunto discreto de opciones
+   mutuamente excluyentes, con forma de píldora.
+
+   Cuándo usar: alternar entre vistas (Lista / Cuadrícula), filtros de
+     categoría o modo dentro del mismo contexto (Día / Semana / Mes).
+   Cuándo no: acciones que disparan efectos (usar Button), selección
+     múltiple (usar Chips), navegación entre páginas (usar Tabs), más
+     de 5 opciones o etiquetas muy dispares (usar Select).
+   Reemplaza a: toggle-group custom, radio-button pill legacy.
+
+   ───────────────────────────────────────────────────────────────────
+   ARQUITECTURA DE TOKENS — estructura "Tokens and specs" de Material 3
+   ───────────────────────────────────────────────────────────────────
+   Tres capas, igual que MD3:
+       paleta Embassy  →  rol de sistema  →  token de componente  →  CSS
+       (--secondary-200)  (--md-sys-color-…)  (--seg-btn-…)          rule
+
+   Cada fila de la tabla de tokens de MD3 = UNA custom property declarada
+   en .seg-btn-group. Las reglas consumen SOLO tokens de componente.
+   Tematizar/recolorear una instancia = sobreescribir un token, no editar
+   selectores. Los defaults usan el nombre de sistema MD3 nativo con
+   fallback al rol Embassy:  var(--md-sys-color-X, var(--color-X)).
+   → Cargá css/md-sys-bridge.css para resolver los nombres --md-sys-color-*
+     contra la paleta Embassy. Sin el bridge, el componente cae al rol
+     Embassy automáticamente (sigue funcionando).
+
+   ┌─ MD3 component token ───────────── token de componente ── default ──┐
+   │ outline.color                      outline-color          outline    │
+   │ label-text.color (unselected)      label-color            on-surface  │
+   │ icon.color (unselected)            icon-color             on-surface  │
+   │ selected.container.color           selected-container     secondaryContainer        │
+   │ selected.label-text.color          selected-label         onSecondaryContainer      │
+   │ selected.icon.color                selected-icon          onSecondaryContainer      │
+   │ hover.state-layer  (8%)            hover-layer-*          onSurface 8%              │
+   │ focus.state-layer  (12%)           focus-layer-*          onSurface 12%             │
+   │ pressed.state-layer (12%)          pressed-layer-*        onSurface 12%             │
+   │ selected.hover.state-layer (8%)    selected-hover-*       onSecondaryContainer 8%   │
+   │ selected.focus.state-layer (12%)   selected-focus-*       onSecondaryContainer 12%  │
+   │ selected.pressed.state-layer(12%)  selected-pressed-*     onSecondaryContainer 12%  │
+   │ disabled.container.color (12%)     disabled-container-*   onSurface 12%             │
+   │ disabled.label-text.color (38%)    disabled-label-*       onSurface 38%             │
+   │ disabled.outline.color (12%)       disabled-outline-*     onSurface 12%             │
+   └──────────────────────────────────────────────────────────────────────┘
+
+   FOCO: MD3 combina el focus.state-layer (12%) CON un anillo de foco
+   visible (md-focus-ring). Embassy implementa ambos: state layer + anillo
+   (outline 2px + ring) por WCAG 2.4.7 (GOVERNANCE §6.2). El anillo NO se
+   elimina — es parte del patrón MD3 y un requisito de accesibilidad.
+
+   Dependencia: variables.css  ·  recomendado: md-sys-bridge.css
+   Uso:
+   <div class="seg-btn-group" role="group" aria-label="Vista">
+     <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button>
+     <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Cuadrícula</button>
+   </div>
+═══════════════════════════════════════ */
+
+/* ── Tokens de componente (capa MD3) ── */
+.seg-btn-group {
+  /* Estructura */
+  --seg-btn-container-shape:                var(--radius-full);
+  /* Borde del grupo */
+  --seg-btn-outline-color:                  var(--md-sys-color-outline, var(--color-outline));
+  /* Segmento no seleccionado */
+  --seg-btn-label-color:                    var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-icon-color:                     var(--md-sys-color-on-surface, var(--color-on-surface));
+  /* Segmento seleccionado */
+  --seg-btn-selected-container-color:       var(--md-sys-color-secondary-container, var(--color-secondary-container));
+  --seg-btn-selected-label-color:           var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-icon-color:            var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  /* State layers — no seleccionado */
+  --seg-btn-hover-layer-color:              var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-hover-layer-opacity:            8%;
+  --seg-btn-focus-layer-color:              var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-focus-layer-opacity:            12%;
+  --seg-btn-pressed-layer-color:            var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-pressed-layer-opacity:          12%;
+  /* State layers — seleccionado */
+  --seg-btn-selected-hover-layer-color:     var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-hover-layer-opacity:   8%;
+  --seg-btn-selected-focus-layer-color:     var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-focus-layer-opacity:   12%;
+  --seg-btn-selected-pressed-layer-color:   var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-pressed-layer-opacity: 12%;
+  /* Deshabilitado — alineado a MD3 (onSurface @ opacidad) */
+  --seg-btn-disabled-group-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-group-opacity:         4%;
+  --seg-btn-disabled-container-color:       var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-container-opacity:     12%;
+  --seg-btn-disabled-label-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-label-opacity:         38%;
+  --seg-btn-disabled-outline-color:         var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-outline-opacity:       12%;
+  /* Foco — anillo visible (WCAG 2.4.7 · GOVERNANCE §6.2) */
+  --seg-btn-focus-outline-color:            var(--color-focus);
+  --seg-btn-focus-ring-color:               var(--color-focus-ring);
+
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--seg-btn-outline-color);
+  border-radius: var(--seg-btn-container-shape);
+  padding: 3px;
+  gap: 2px;
+}
+
+/* ── Segmento individual ── */
+.seg-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 6px 16px;
+  border: none;
+  border-radius: var(--seg-btn-container-shape);
+  background: transparent;
+  color: var(--seg-btn-label-color);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast) var(--ease-default),
+    color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default);
+}
+.seg-btn svg,
+.seg-btn i { color: var(--seg-btn-icon-color); }
+
+/* ── Hover (unselected) — state layer ── */
+.seg-btn:hover:not(.selected):not([aria-selected="true"]):not([aria-pressed="true"]):not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-hover-layer-color) var(--seg-btn-hover-layer-opacity), transparent);
+}
+
+/* ── Estado seleccionado ── */
+.seg-btn.selected,
+.seg-btn[aria-selected="true"],
+.seg-btn[aria-pressed="true"] {
+  background: var(--seg-btn-selected-container-color);
+  color: var(--seg-btn-selected-label-color);
+  font-weight: 600;
+}
+.seg-btn.selected svg, .seg-btn.selected i,
+.seg-btn[aria-selected="true"] svg, .seg-btn[aria-selected="true"] i,
+.seg-btn[aria-pressed="true"] svg, .seg-btn[aria-pressed="true"] i {
+  color: var(--seg-btn-selected-icon-color);
+}
+
+/* ── Hover (selected) — state layer sobre el contenedor ── */
+.seg-btn.selected:hover:not(:disabled),
+.seg-btn[aria-selected="true"]:hover:not(:disabled),
+.seg-btn[aria-pressed="true"]:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-selected-hover-layer-color) var(--seg-btn-selected-hover-layer-opacity), var(--seg-btn-selected-container-color));
+}
+
+/* ── Foco — anillo visible (siempre) ── */
+.seg-btn:focus-visible {
+  outline: 2px solid var(--seg-btn-focus-outline-color);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--seg-btn-focus-ring-color);
+  z-index: 1;
+}
+/* ── Foco — state layer (unselected) ── */
+.seg-btn:focus-visible:not(.selected):not([aria-selected="true"]):not([aria-pressed="true"]):not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-focus-layer-color) var(--seg-btn-focus-layer-opacity), transparent);
+}
+/* ── Foco — state layer (selected) sobre el contenedor ── */
+.seg-btn.selected:focus-visible:not(:disabled),
+.seg-btn[aria-selected="true"]:focus-visible:not(:disabled),
+.seg-btn[aria-pressed="true"]:focus-visible:not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-selected-focus-layer-color) var(--seg-btn-selected-focus-layer-opacity), var(--seg-btn-selected-container-color));
+}
+
+/* ── Presionado (unselected) — state layer ── */
+.seg-btn:active:not(:disabled):not(.selected):not([aria-selected="true"]):not([aria-pressed="true"]) {
+  background: color-mix(in srgb, var(--seg-btn-pressed-layer-color) var(--seg-btn-pressed-layer-opacity), transparent);
+}
+
+/* ── Presionado (selected) — state layer sobre el contenedor ── */
+.seg-btn.selected:active:not(:disabled),
+.seg-btn[aria-selected="true"]:active:not(:disabled),
+.seg-btn[aria-pressed="true"]:active:not(:disabled) {
+  background: color-mix(in srgb, var(--seg-btn-selected-pressed-layer-color) var(--seg-btn-selected-pressed-layer-opacity), var(--seg-btn-selected-container-color));
+}
+
+/* ── Deshabilitado — grupo ── */
+.seg-btn-group:has(.seg-btn:disabled),
+.seg-btn-group[aria-disabled="true"] {
+  background: color-mix(in srgb, var(--seg-btn-disabled-group-color) var(--seg-btn-disabled-group-opacity), transparent);
+  border-color: color-mix(in srgb, var(--seg-btn-disabled-outline-color) var(--seg-btn-disabled-outline-opacity), transparent);
+}
+
+/* ── Deshabilitado — segmento ── */
+.seg-btn:disabled,
+.seg-btn[aria-disabled="true"] {
+  color: color-mix(in srgb, var(--seg-btn-disabled-label-color) var(--seg-btn-disabled-label-opacity), transparent);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Deshabilitado seleccionado — contenedor ── */
+.seg-btn.selected:disabled,
+.seg-btn[aria-selected="true"]:disabled,
+.seg-btn[aria-pressed="true"]:disabled {
+  background: color-mix(in srgb, var(--seg-btn-disabled-container-color) var(--seg-btn-disabled-container-opacity), transparent);
+}
+
+/* ── Tamaño SM — toolbars compactas, filtros inline ── */
+.seg-btn-group-sm .seg-btn {
+  padding: 4px 10px;
+  font-size: var(--font-size-caption);
+}
+
+/* ── Tamaño LG — touch targets, CTAs de cambio de modo ── */
+.seg-btn-group-lg .seg-btn {
+  padding: 8px 20px;
+  font-size: var(--font-size-body-md);
+}

@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Collapsible
+   Un único bloque de contenido que se muestra u oculta bajo un disparador.
+
+   Cuándo usar: mostrar/ocultar UN bloque ("ver más", detalles opcionales de un
+     formulario, una fila expandible en una tabla).
+   Cuándo no: varias secciones expandibles agrupadas con el mismo patrón (usar
+     Accordion, que además garantiza que solo una quede abierta si se necesita).
+   Reemplaza a: `display:none` toggle ad-hoc sin transición ni estado accesible.
+
+   Dependencia: variables.css (Color Roles)
+
+   Nota: a diferencia de Accordion, Collapsible no impone un trigger estilizado
+   (chevron, tipografía) — es intencionalmente mínimo, para poder envolver
+   cualquier elemento disparador (un link de texto, un ícono, un botón).
+   El único contrato de estilo es la animación de altura del contenido.
+
+   Uso:
+   <div class="collapsible">
+     <button class="collapsible-trigger" aria-expanded="false" aria-controls="col-1" onclick="collapsibleToggle(this)">
+       Ver más
+     </button>
+     <div class="collapsible-content" data-state="closed" id="col-1">
+       <div class="collapsible-content-inner">Contenido adicional…</div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.collapsible-trigger {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-body);
+  color: var(--color-primary);
+  font-size: var(--font-size-body-md);
+}
+.collapsible-trigger:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.collapsible-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows var(--duration-normal) var(--ease-default);
+}
+.collapsible-content[data-state="open"] {
+  grid-template-rows: 1fr;
+}
+.collapsible-content-inner {
+  min-height: 0;
+  overflow: hidden;
+}

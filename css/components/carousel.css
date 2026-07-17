@@ -1,0 +1,83 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Carousel
+   Colección de ítems desplazable horizontalmente.
+
+   Cuándo usar: colecciones de tarjetas/imágenes que no caben en una fila.
+   Cuándo no: listas verticales largas (usar Table/List); un solo ítem destacado.
+   Reemplaza a: carruseles custom con transform + drag handlers a mano.
+
+   Dependencia: variables.css
+   Implementación: scroll nativo con scroll-snap-type (sin librería de drag).
+   Simplificado a propósito: sin física de swipe más allá del scroll táctil
+   nativo del navegador, sin autoplay, sin loop infinito — los botones
+   Prev/Next avanzan un ítem por click via scrollBy().
+
+   Uso:
+   <div class="carousel">
+     <div class="carousel-content">
+       <div class="carousel-item">…</div>
+       <div class="carousel-item">…</div>
+     </div>
+     <button class="carousel-btn carousel-btn-prev">‹</button>
+     <button class="carousel-btn carousel-btn-next">›</button>
+   </div>
+═══════════════════════════════════════ */
+
+.carousel {
+  position: relative;
+}
+
+.carousel-content {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.carousel-content::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+/* Modifier: 2 ítems visibles por vista (descontando el gap de 16px) */
+.carousel-item-half {
+  flex: 0 0 calc(50% - 8px);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-default);
+}
+.carousel-btn:hover:not(:disabled) {
+  background: var(--color-surface-variant);
+}
+.carousel-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.carousel-btn:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+}
+.carousel-btn-prev { left: 8px; }
+.carousel-btn-next { right: 8px; }

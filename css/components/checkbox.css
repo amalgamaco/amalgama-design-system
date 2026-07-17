@@ -1,0 +1,106 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Checkbox
+   Selección múltiple dentro de una lista de opciones independientes.
+   Tres estados: unchecked · checked · indeterminate.
+
+   Cuándo usar: selección múltiple independiente (cada opción no afecta a las demás);
+   aceptar términos; seleccionar filas de una tabla (con estado indeterminate en el
+   checkbox de cabecera cuando la selección es parcial).
+   Cuándo no: selección única excluyente (usar Radio Group); on/off inmediato sin
+   lista de opciones (usar Switch).
+   Reemplaza a: checkbox HTML sin estilizar, custom div+ARIA re-implementations.
+
+   Dependencia: variables.css (Color Roles)
+   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en light y dark
+   sin overrides por tema.
+
+   Implementación: un <input type="checkbox"> real, visualmente reemplazado (no oculto)
+   vía appearance:none + un ::after para el ícono de check/dash. Mantiene el semántico
+   nativo (focus, keyboard Space, aria-checked/indeterminate vía la propiedad DOM
+   .indeterminate) sin reimplementar ARIA a mano.
+
+   Uso:
+   <label class="checkbox-label">
+     <input type="checkbox" class="checkbox">
+     Acepto los términos
+   </label>
+   <input type="checkbox" class="checkbox" id="row-1">
+   <!-- indeterminate se setea vía JS: el.indeterminate = true -->
+═══════════════════════════════════════ */
+
+.checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 2px solid var(--color-outline);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
+}
+
+.checkbox:hover {
+  border-color: var(--color-on-surface);
+}
+
+.checkbox:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+.checkbox:checked,
+.checkbox:indeterminate {
+  border-color: transparent;
+  background: var(--color-primary);
+}
+
+/* Check icon (rendered via a rotated-box CSS checkmark — no external SVG needed) */
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--color-on-primary);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Indeterminate icon: a single dash */
+.checkbox:indeterminate::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 7px;
+  width: 8px;
+  height: 2px;
+  background: var(--color-on-primary);
+  border-radius: 1px;
+}
+
+.checkbox:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ── Label wrapper (checkbox + texto, click target completo) ── */
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-on-surface);
+  font: var(--font-weight-regular) var(--font-size-body-md)/1.4 var(--font-body);
+  cursor: pointer;
+}
+.checkbox-label:has(.checkbox:disabled) {
+  cursor: not-allowed;
+  color: var(--color-on-disabled);
+}

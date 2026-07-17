@@ -1,0 +1,107 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Dropdown Menu
+   Lista de acciones flotante anclada a un trigger (click), con navegación por
+   teclado (↑↓, Home/End, Enter/Espacio) — a diferencia de Popover, que es
+   contenido libre sin semántica de lista.
+
+   Cuándo usar: menú de acciones contextual sobre un botón/ícono ("⋮").
+   Cuándo no: click derecho sobre un área → Context Menu; navegación de nivel
+   superior siempre visible → Menubar / Navigation Menu.
+   Reemplaza a: cualquier "menú" custom con `position:absolute` + z-index ad hoc.
+
+   Posicionamiento: JS (components/lib/use-flyout.ts), ver popover.css para el
+   detalle del mecanismo compartido.
+
+   Dependencia: variables.css
+
+   Uso:
+   <button class="dropdown-trigger">Opciones</button>
+   <div class="dropdown-content" role="menu" style="top:140px;left:60px">
+     <div class="dropdown-label">Cuenta</div>
+     <div class="dropdown-separator"></div>
+     <button class="dropdown-item" role="menuitem">Editar perfil</button>
+     <button class="dropdown-item" role="menuitem">Cerrar sesión</button>
+   </div>
+═══════════════════════════════════════ */
+
+.dropdown-content {
+  position: fixed;
+  z-index: 100;
+  min-width: 180px;
+  max-width: 280px;
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  animation: dropdownIn var(--duration-normal) var(--ease-default);
+}
+
+@keyframes dropdownIn {
+  from { opacity: 0; transform: scale(.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-on-surface);
+  text-align: left;
+  cursor: pointer;
+}
+.dropdown-item:hover,
+.dropdown-item:focus-visible {
+  background: var(--color-surface-variant);
+  outline: none;
+}
+.dropdown-item[data-disabled="true"] {
+  color: var(--color-on-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.dropdown-item[data-variant="danger"] {
+  color: var(--color-error);
+}
+.dropdown-item[data-variant="danger"]:hover,
+.dropdown-item[data-variant="danger"]:focus-visible {
+  background: var(--color-error-container);
+}
+
+.dropdown-item-indicator {
+  width: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dropdown-label {
+  padding: 6px 10px 4px;
+  font-size: var(--font-size-caption);
+  font-weight: 600;
+  color: var(--color-on-surface-variant);
+}
+
+.dropdown-separator {
+  height: 1px;
+  margin: 4px -2px;
+  background: var(--color-outline-variant);
+}
+
+.dropdown-shortcut {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-caption);
+  color: var(--color-on-surface-variant);
+  letter-spacing: .02em;
+}

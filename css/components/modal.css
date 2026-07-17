@@ -1,0 +1,110 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Dialog (alias histórico: Modal)
+   Diálogo centrado con scrim, header/body/footer y un único nivel de anidado.
+   Estructura canónica shadcn (2026-07): borderless — sin dividers internos, un
+   solo padding de 24px (p-6) en el contenedor y 16px (gap-4) de ritmo vertical
+   entre header/body/footer en lugar de padding por sección.
+
+   Cuándo usar: confirmaciones y tareas cortas que bloquean el contexto actual.
+   Cuándo no: formularios largos (página con create-form); feedback pasivo (usar Snackbar).
+   Reemplaza a: dialogs/popups/lightboxes legacy.
+
+   Jerarquía de acciones del footer (obligatoria, máx. 2 botones):
+     Cancelar/Descartar → btn-tertiary (Outlined) — siempre habilitado, nunca compite.
+     Confirmar          → btn-primary (Filled), verbo claro, al extremo trailing.
+     Confirmar destructivo → btn-primary btn-danger (Error), en vez de Filled normal.
+
+   Alert Dialog (confirmación bloqueante, sin componente aparte — es este mismo
+   Dialog con data-alert="true"): no se cierra con click afuera ni Escape, exige
+   elegir Cancelar/Confirmar. El wrapper React lo maneja vía la prop `alertMode`.
+
+   Dependencia: variables.css, base.css (keyframes fadeIn, slideInUp)
+   Requiere: button.css (para botones en el footer)
+
+   Uso:
+   <div class="modal-overlay">
+     <div class="modal">
+       <button class="modal-close">✕</button>
+       <div class="modal-header">
+         <div class="modal-title">¿Eliminar la vacante?</div>
+         <div class="modal-description">Esta acción no se puede deshacer.</div>
+       </div>
+       <div class="modal-body">
+         <p>Se eliminarán también sus postulaciones asociadas.</p>
+       </div>
+       <div class="modal-footer">
+         <button class="btn-tertiary">Cancelar</button>
+         <button class="btn-primary btn-danger">Eliminar</button>
+       </div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-scrim);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+  animation: fadeIn .15s ease;
+}
+.modal {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  width: min(560px, calc(100vw - 48px));
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: slideInUp .2s ease;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 32px; /* deja lugar al close button absoluto */
+}
+.modal-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-sm); font-weight: 600;
+}
+.modal-description {
+  font-size: var(--font-size-body-sm);
+  color: var(--color-on-surface-variant);
+  line-height: 1.6;
+}
+.modal-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--color-on-surface-variant);
+  transition: background var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+}
+.modal-close:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.modal-close:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.modal-body { color: var(--color-on-surface-variant); }
+.modal-footer {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+}
+@media (min-width: 640px) {
+  .modal-footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}

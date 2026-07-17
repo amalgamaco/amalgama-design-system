@@ -85,7 +85,7 @@ If no token files are found: you are building a fresh artifact. Proceed to Step 
 find . -path "*/amalgama-ds/components/*.css" | head -5
 ```
 
-If component CSS files are found in the project (e.g. `src/styles/amalgama-ds/components/`): **these are the authoritative source for class anatomy and token names in that project** (the DS itself no longer ships a buildless `css/components/` layer). The project's copies have already been adapted — the token references inside use the project's names (`var(--color-bg-surface)` instead of `var(--card-bg)`). Always read the project-local component CSS files to discover the actual available classes and their correct markup before writing component code.
+If component CSS files are found in the project (e.g. `src/styles/amalgama-ds/components/`): **these are the authoritative source for class anatomy and token names in that project.** The project's copies have already been adapted — the token references inside use the project's names (`var(--color-bg-surface)` instead of `var(--card-bg)`). Always read the project-local component CSS files to discover the actual available classes and their correct markup before writing component code.
 
 ```bash
 # Read the project-local component CSS to understand what classes exist and their anatomy
@@ -93,7 +93,7 @@ ls src/styles/amalgama-ds/components/
 cat src/styles/amalgama-ds/components/<name>.css | head -80
 ```
 
-If the component you need is not in the project's directory but exists in the DS (`packages/ds/components/ui/<name>.tsx`), read the `.tsx` for its anatomy/variants and adapt it to the project's token names before using it.
+If the component you need is not in the project's directory but exists in the DS (`css/components/<name>.css`), read the DS file for its anatomy/variants and adapt it to the project's token names before using it.
 
 ---
 
@@ -106,20 +106,21 @@ cat /tmp/amalgama-ds/CLAUDE.md          # canonical guide for consuming the DS
 cat /tmp/amalgama-ds/MIGRATION.md       # mandatory for any existing-product work
 ```
 
-> **2026-06 — component layer is Tailwind-only.** Component code is authored as
-> self-contained **Tailwind** components in `packages/ds/components/ui/*.tsx` (`@amalgama/ds`).
-> The buildless `css/components/*.css` layer (and the `components.css` barrel) was **deleted** —
-> the `.tsx` is the single source of truth, and each component's `Cuándo usar / Cuándo no`
-> decision rule now lives in the `.tsx` file's header comment. Only the token files
-> (`css/variables.css`, `css/base.css`, `css/layout.css`, `css/md-sys-bridge.css`) remain.
+> **2026-07 — reverted to buildless CSS.** This repo was migrated to a Tailwind v4 + React/Radix
+> implementation between 2026-06-22 and 2026-06-26 (`packages/ds/`, `islands/`), then that migration
+> was **reverted** on 2026-07-17: every component was hand-ported back to flat CSS
+> (`css/components/*.css`) + vanilla JS, `packages/ds/`/`islands/` were deleted, and
+> `css/components/*.css` is the single source of truth again. Optional thin React wrappers live in
+> `components/ui/*.tsx` (apply the same classes, zero extra styling — not every component has one).
+> Each component's `Cuándo usar / Cuándo no` decision rule lives in its CSS header comment.
 
 **Authoritative source per information type** (from CLAUDE.md — do not override with other sources):
 
 | Information needed | Where to read |
 |---|---|
 | Token values (colors, type scale, spacing, radii, shadows) | `css/variables.css` |
-| Component code, variants, props (the source of truth) | `packages/ds/components/ui/<name>.tsx` (canonical — Tailwind in-file) |
-| Per-component decision rule (`Cuándo usar / Cuándo no / Reemplaza a`) | `packages/ds/components/ui/<name>.tsx` header comment (migrated from the deleted buildless CSS) |
+| Component code, variants, props (the source of truth) | `css/components/<name>.css` (canonical, flat classes) + optional `components/ui/<name>.tsx` wrapper |
+| Per-component decision rule (`Cuándo usar / Cuándo no / Reemplaza a`) | `css/components/<name>.css` header comment |
 | Specs, guidelines, accessibility | root `index.html` (single-page app — canonical) |
 | Migration / restyling rules | `MIGRATION.md` |
 | **UX principles / heuristics / interaction patterns (how to build a good screen)** | **`guidelines/` — the Playbook** |
@@ -137,11 +138,14 @@ cat /tmp/amalgama-ds/MIGRATION.md       # mandatory for any existing-product wor
 For each component you are about to use:
 
 ```bash
-# 1. Canonical component code (variants, props) + the Cuándo usar/no decision rule
-#    in the file's header comment — Tailwind, self-contained
-cat /tmp/amalgama-ds/packages/ds/components/ui/<name>.tsx
+# 1. Canonical component code (variants, classes) + the Cuándo usar/no decision rule
+#    in the file's header comment — flat CSS, self-contained
+cat /tmp/amalgama-ds/css/components/<name>.css
 
-# 2. Only if you need live rendered examples
+# 2. Optional — only if a React wrapper is wanted (not every component has one)
+cat /tmp/amalgama-ds/components/ui/<name>.tsx
+
+# 3. Only if you need live rendered examples
 # Start a local server: cd /tmp/amalgama-ds && python3 -m http.server 8087
 # Open: http://localhost:8087/   (root index.html — the docs/*.html pages just redirect here)
 ```
@@ -152,15 +156,7 @@ cat /tmp/amalgama-ds/packages/ds/components/ui/<name>.tsx
 
 ### Step 2A — Fresh artifact (no existing project token layer)
 
-> **Components are Tailwind now.** The old buildless component layer (`css/components/*.css`
-> + the `components.css` barrel) was **deleted (2026-06)** — there is no longer a "link one CSS
-> file and use `btn-primary`" path. The single source of truth is the self-contained Tailwind
-> components in `packages/ds/components/ui/*.tsx`. Build the artifact with Tailwind v4 (see
-> Step 2C): `@import "@amalgama/ds/tailwind.theme.css"` (tokens + theme mapping — the only DS
-> stylesheet) and copy the `.tsx` you need. **Default to this.**
-
-**Tokens-only (no build) is still possible** for colors/typography/spacing — the token files
-(`css/variables.css`, `css/base.css`, `css/layout.css`) are not deprecated and remain on the CDN:
+**Default to this: link the DS's own component CSS — no build step, no framework.**
 
 ```html
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -169,20 +165,21 @@ cat /tmp/amalgama-ds/packages/ds/components/ui/<name>.tsx
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/variables.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/base.css">
 <!-- Add layout.css only for full app shell (sidebar + topbar + avatar) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/components.css">
+<!-- Or copy just the file(s) you need from css/components/ instead of the whole barrel -->
 ```
 
-But there is **no buildless component CSS** to link — for any real component (button, badge,
-card, …) use the Tailwind path above. If a true no-build single file is unavoidable, author the
-markup with token-driven inline styles (`background: var(--color-primary)`, `border-radius:
-var(--radius-md)`, …) using the values in `css/variables.css` and the component's `.tsx` as the
-spec — never hardcode hex.
+```html
+<button class="btn-primary">Crear vacante</button>
+```
 
-**Warning:** CDN links serve GitHub HEAD. If the local repo has token changes not yet pushed to
-GitHub, these links will serve stale CSS. For the most current tokens in an artifact, copy the
-content of `css/variables.css` into an inline `<style>` block instead.
+**Warning:** CDN links serve GitHub HEAD. If the local repo has token/component changes not yet
+pushed to GitHub, these links will serve stale CSS. For the most current tokens/components in an
+artifact, copy the content of `css/variables.css` (and the component files you need) into an
+inline `<style>` block instead.
 
 Use token names exactly as they appear in `css/variables.css`. For component anatomy/variants,
-read the component's `.tsx` in `packages/ds/components/ui/`.
+read the component's file in `css/components/`.
 
 ### Step 2B — Existing project with its own token layer (most production work)
 
@@ -221,45 +218,47 @@ When the project uses a third-party component (shadcn, base-ui, etc.) that compl
 
 Verify coverage: check `[data-theme="dark"]` in `globals.css` — if it overrides those same variables with more hardcoded hex, delete those overrides. When the third-party CSS vars reference DS semantic tokens, dark mode is automatic.
 
-#### Legacy project-local component CSS
+#### Project-local component CSS
 
-The DS no longer ships a buildless component CSS layer (`css/components/*.css` was deleted), so
-there is nothing to "re-sync" a project copy against. If a project still has vendored component
-CSS (e.g. `src/styles/amalgama-ds/components/button.css`), treat it as **legacy**: keep it working
-for existing markup, but read the canonical anatomy/variants from the Tailwind source and migrate
-to it when you touch the component.
+If a project has vendored component CSS (e.g. `src/styles/amalgama-ds/components/button.css`),
+it's a project-adapted copy of the DS's own `css/components/<name>.css` — re-sync against the
+canonical DS file when you touch the component, since the DS version is the one that gets fixes
+and new variants:
 
 ```bash
-# Canonical anatomy + variants live in the .tsx (Tailwind, self-contained)
-cat /tmp/amalgama-ds/packages/ds/components/ui/button.tsx
+# Canonical anatomy + variants live in css/components/
+cat /tmp/amalgama-ds/css/components/button.css
 ```
 
-If the project's class names diverge from the DS history (e.g. `.btn--primary` vs `.btn-primary`),
-the copy is stale — prefer migrating that surface to the `.tsx` rather than patching the old CSS.
+If the project's class names diverge from the DS (e.g. `.btn--primary` vs `.btn-primary`), the
+copy is stale — re-sync the file rather than patching around the drift.
 
-### Step 2C — React / Next.js projects (canonical)
+### Step 2C — React / Next.js projects
 
-The `@amalgama/ds` Tailwind components are the source of truth — each is **self-contained** (variants defined in-file with Tailwind utilities that resolve to Embassy tokens). This matters:
+Same rule as everywhere else: **`css/components/<name>.css` is the source of truth.** For React
+projects, an optional thin wrapper in `components/ui/<name>.tsx` gives you a typed component
+instead of raw classes — it applies the exact same CSS classes and adds zero styling of its own.
+Not every component has one; check `ls components/ui/` before assuming.
 
-- **Start from the `.tsx`** — read `packages/ds/components/ui/<name>.tsx` for the variants, props, and exact Tailwind classes
-- **Vendor it by copying** the component `.tsx` + `packages/ds/components/lib/utils.ts` (`cn()`) into the target project, and import the theme once: `@import "@amalgama/ds/tailwind.theme.css"` (tokens + theme mapping — the only DS stylesheet). No per-component CSS to copy.
-- Peer deps: `class-variance-authority`, `clsx`, `tailwind-merge`, `tailwindcss>=4`
-- If the project's Tailwind theme uses different token names, the component's token utilities (`bg-primary`, etc.) must resolve via the project's `@theme` mapping — wire those, never hardcode hex
-- If a component is missing from `packages/ds`, write a TSX component using only token-backed Tailwind utilities; do not invent raw styles, and do not author a `css/components/*.css` file
-
-> **Legacy projects** that vendored the old buildless CSS classes (`btn-primary`, …) keep working
-> from their own local copies, but the DS no longer ships that layer (`css/components/*.css` was
-> deleted). All new work adopts the Tailwind `.tsx`; migrate vendored buildless classes when you
-> touch them.
+- **Start from the CSS** — read `css/components/<name>.css` for the variants, classes, and the
+  `Cuándo usar` decision rule
+- **Vendor by copying** the CSS file (link the whole `css/components.css` barrel, or copy just
+  what you need) — and if you want the typed wrapper, also copy `components/ui/<name>.tsx` +
+  `components/lib/utils.ts` (`cn()`)
+- Peer deps for the optional wrapper only: `react`, `class-variance-authority`, `clsx` — no
+  Tailwind, no `tailwind-merge`
+- If a component is missing entirely, write the CSS file first (flat classes, header comment,
+  `Uso:` snippet — see CLAUDE.md's "Adding a new component"), then optionally the wrapper; do not
+  invent Tailwind utility classes for it
 
 ---
 
 ## Step 3 — Component selection: read the decision blocks first
 
-Before choosing a component, read its `Cuándo usar / Cuándo no / Reemplaza a` block in the `.tsx` header comment. Every component has one. These are the per-component rules that prevent mis-selection (badge vs. chip, card vs. stat-card, search-bar vs. search-field, modal vs. toast, etc.).
+Before choosing a component, read its `Cuándo usar / Cuándo no / Reemplaza a` block in the CSS header comment. Every component has one. These are the per-component rules that prevent mis-selection (badge vs. chip, card vs. stat-card, search-bar vs. search-field, modal vs. toast, etc.).
 
 ```bash
-grep -A 6 "Cuándo usar" /tmp/amalgama-ds/packages/ds/components/ui/<name>.tsx
+grep -A 6 "Cuándo usar" /tmp/amalgama-ds/css/components/<name>.css
 ```
 
 If you are migrating a legacy element, use the **Legacy pattern → DS component mapping** table in `MIGRATION.md` as the first lookup, before reading the individual CSS file.
@@ -338,4 +337,4 @@ Amalgama is a **Welltech digital product studio** — health, fitness, and welln
 2. Check MIGRATION.md's mapping table — there may be a DS equivalent for the legacy pattern.
 3. If genuinely new: follow the "Adding a new component" section in `CLAUDE.md` — propose CSS first (with standard header comment and `Cuándo usar` block), then optionally the React wrapper. Flag clearly that this is a DS extension.
 4. **Never** bypass tokens with ad-hoc hex values. If you must compose a new pattern, use `var(--…)` so the DS still owns the values.
-5. Roadmap components (checkbox, radio, switch, menu, tooltip, slider, date picker, sheet, list, loading, carousel, divider) have no consumable code yet — compose from existing components or flag as a DS gap. Do not invent styles.
+5. All components previously called out as "roadmap" (checkbox, radio, switch, menu, tooltip, slider, date picker, sheet, list, loading, carousel, divider) now have real, consumable code — check `css/components/` and CLAUDE.md's inventory before assuming something is missing. The only component genuinely absent is **Resizable panels** (dropped in the 2026-07 revert) — for that or any other true gap, compose from existing components or flag it. Do not invent styles.

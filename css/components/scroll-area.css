@@ -1,0 +1,49 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Scroll Area
+   Contenedor con scroll y una barra estilizada, consistente entre navegadores.
+   Puro CSS — sin JS: `overflow: auto` nativo + reglas de scrollbar por motor.
+
+   Cuándo usar: regiones con scroll donde querés una barra consistente y discreta
+   (listas largas dentro de un panel, contenido de un menú/sheet).
+   Cuándo no: el scroll natural de la página completa (no lo envuelvas).
+   Reemplaza a: el scrollbar default del navegador dentro de paneles/menús.
+
+   Dependencia: variables.css (thumb = --color-outline)
+
+   Uso:
+   <div class="scroll-area" style="max-height: 320px">
+     …contenido largo…
+   </div>
+═══════════════════════════════════════ */
+
+.scroll-area {
+  position: relative;
+  overflow: auto;
+  overscroll-behavior: contain;
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-outline) transparent;
+}
+
+/* Chromium / WebKit */
+.scroll-area::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-area::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-outline) 60%, transparent);
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.scroll-area::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+  background-clip: content-box;
+}
+.scroll-area::-webkit-scrollbar-corner {
+  background: transparent;
+}

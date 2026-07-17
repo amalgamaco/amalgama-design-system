@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Pagination
+   Navegación entre páginas de un conjunto de resultados.
+
+   Cuándo usar: dividir listas/tablas largas en páginas navegables.
+   Cuándo no: scroll infinito, o conjuntos chicos que caben en una vista.
+   Reemplaza a: controles de "cargar más" cuando el total es conocido y acotado.
+
+   Dependencia: variables.css (Color Roles) + button.css (Prev/Next reusan
+   .btn-text). La página activa usa el mismo lenguaje de selección que
+   Chip/Nav: --color-secondary-container / --color-on-secondary-container.
+
+   Estructura (nav > ul > li):
+   <nav class="pagination" aria-label="Paginación">
+     <ul class="pagination-list">
+       <li><a class="btn-text pagination-prev" href="#">‹ Anterior</a></li>
+       <li><a class="pagination-link" href="#">1</a></li>
+       <li><a class="pagination-link is-active" aria-current="page" href="#">2</a></li>
+       <li><span class="pagination-ellipsis" aria-hidden="true">…</span></li>
+       <li><a class="pagination-link" href="#">9</a></li>
+       <li><a class="btn-text pagination-next" href="#">Siguiente ›</a></li>
+     </ul>
+   </nav>
+═══════════════════════════════════════ */
+
+.pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.pagination-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pagination-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-width: 36px;
+  padding: 0 8px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body-md);
+  font-weight: 500;
+  color: var(--color-on-surface);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .15s var(--ease-default, ease);
+}
+.pagination-link:hover { background: var(--color-surface-variant); }
+.pagination-link:focus-visible {
+  outline: 2px solid var(--color-focus, var(--color-primary));
+  outline-offset: 2px;
+}
+.pagination-link.is-active {
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+}
+.pagination-link.is-active:hover { background: var(--color-secondary-container); }
+
+.pagination-prev,
+.pagination-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.pagination-prev svg,
+.pagination-next svg { width: 18px; height: 18px; }
+.pagination-prev { padding-left: 10px; }
+.pagination-next { padding-right: 10px; }
+
+.pagination-ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 36px;
+  color: var(--text-secondary);
+}
+.pagination-ellipsis svg { width: 16px; height: 16px; }
+
+.pagination-link[aria-disabled="true"],
+.pagination-prev[aria-disabled="true"],
+.pagination-next[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: .45;
+}

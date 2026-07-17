@@ -1,0 +1,304 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Form
+   Elementos de formulario: campos, labels, selects, textareas,
+   inputs numericos, inputs de fecha, y tarjeta de formulario.
+
+   Cuándo usar: todo campo de entrada — input, select, textarea, number, date — con label, hint y error.
+   Cuándo no: búsqueda (usar search-field de toolbar.css o search-bar de search.css).
+   Reemplaza a: cualquier form control legacy; nunca inventar campos custom.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Uso:
+   <div class="form-card">
+     <div class="form-card-title">Informacion basica</div>
+     <p class="form-card-desc">Completa los datos del puesto.</p>
+     <div class="fields-grid">
+       <div class="field-group">
+         <label class="field-label">Titulo <span class="field-required">*</span></label>
+         <input class="field-input" placeholder="Ej: Desarrollador Frontend">
+       </div>
+       <div class="field-group">
+         <label class="field-label">Ubicacion</label>
+         <div class="select-wrapper">
+           <select><option>Remoto</option></select>
+           <span class="select-caret">▾</span>
+         </div>
+       </div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.form-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 32px;
+  margin-bottom: 16px;
+}
+.form-card-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-xs); font-weight: 600;
+  margin-bottom: 6px;
+}
+.form-card-desc {
+  font-size: var(--font-size-label); color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 24px;
+  max-width: 680px;
+}
+
+.field-group { margin-bottom: 20px; }
+.field-group:last-child { margin-bottom: 0; }
+
+.field-label {
+  display: block;
+  font-size: var(--font-size-label); font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.field-required { color: var(--red); margin-left: 2px; }
+
+.field-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body-md);
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  outline: none;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+  appearance: none;
+}
+.field-input:focus {
+  border-color: var(--interactive);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+.field-input::placeholder { color: var(--text-muted); }
+
+input:disabled, select:disabled, textarea:disabled {
+  background: var(--color-surface-variant);
+  color: var(--color-on-disabled);
+  border-color: var(--color-outline);
+  cursor: not-allowed;
+}
+
+.select-wrapper { position: relative; }
+.select-wrapper select {
+  width: 100%;
+  padding: 10px 38px 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body-md);
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+.select-wrapper select:focus {
+  border-color: var(--interactive);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+.select-caret {
+  position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+  pointer-events: none; color: var(--text-muted);
+}
+
+.fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+
+.field-textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.number-input-wrapper {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  transition: border-color var(--duration-fast);
+}
+.number-input-wrapper:focus-within { border-color: var(--interactive); }
+.number-value { font-size: var(--font-size-body-md); color: var(--text-primary); }
+.number-controls { display: flex; align-items: center; gap: 4px; }
+.number-btn {
+  width: 32px; height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-secondary);
+  transition: background var(--duration-fast);
+  font-family: inherit;
+}
+.number-btn:hover { background: var(--color-surface-container-highest); color: var(--text-primary); }
+
+.date-input-wrapper { position: relative; }
+.date-input-wrapper input {
+  width: 100%;
+  padding: 10px 42px 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body-md);
+  font-family: inherit;
+  color: var(--text-muted);
+  background: var(--card-bg);
+  outline: none;
+  transition: border-color var(--duration-fast);
+  cursor: pointer;
+}
+.date-input-wrapper input:focus { border-color: var(--interactive); }
+.date-icon {
+  position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted); pointer-events: none;
+}
+
+/* ═══════════════════════════════════════
+   Hover state
+   Distingue visualmente el hover del estado habilitado sin focus.
+   Usa --color-outline (más prominente) vs --color-outline-variant (defecto).
+═══════════════════════════════════════ */
+.field-input:hover:not(:focus):not(:disabled) {
+  border-color: var(--color-outline);
+}
+
+/* ═══════════════════════════════════════
+   Label — color en focus
+   La etiqueta cambia al color interactivo cuando el campo está activo,
+   reforzando el foco visualmente.
+═══════════════════════════════════════ */
+.field-group:focus-within .field-label {
+  color: var(--interactive);
+}
+
+/* ═══════════════════════════════════════
+   Texto de soporte (Supporting text)
+   Área debajo del campo para mensajes de ayuda, errores o contadores.
+
+   Uso:
+   <div class="field-supporting">
+     <span class="field-hint">Máximo 100 caracteres</span>
+     <span class="field-char-count">0/100</span>
+   </div>
+═══════════════════════════════════════ */
+.field-supporting {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 0 2px;
+}
+.field-hint {
+  font-size: var(--font-size-caption);
+  line-height: 1.4;
+  color: var(--color-on-surface-variant);
+}
+.field-error-msg {
+  font-size: var(--font-size-caption);
+  line-height: 1.4;
+  color: var(--color-error);
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+.field-error-msg svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.field-char-count {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-badge);
+  color: var(--color-on-surface-variant);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.field-char-count.is-over {
+  color: var(--color-error);
+}
+
+/* ═══════════════════════════════════════
+   Estado de error
+   Se aplica .is-error al .field-group contenedor.
+   El mensaje de error reemplaza al texto de soporte normal.
+
+   Uso:
+   <div class="field-group is-error">
+     <label class="field-label">Email</label>
+     <input class="field-input" value="texto inválido">
+     <div class="field-supporting">
+       <span class="field-error-msg">
+         <svg>...</svg> Ingresa un correo válido.
+       </span>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+.field-group.is-error .field-label {
+  color: var(--color-error);
+}
+.field-group.is-error:focus-within .field-label {
+  color: var(--color-error); /* el error sobreescribe el color interactivo */
+}
+.field-group.is-error .field-input {
+  border-color: var(--color-error);
+}
+.field-group.is-error .field-input:hover:not(:focus):not(:disabled) {
+  border-color: var(--color-error); /* el error sobreescribe el hover */
+}
+.field-group.is-error .field-input:focus {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px var(--color-error-ring);
+}
+.field-group.is-error .field-hint {
+  display: none; /* el mensaje de error reemplaza el texto de soporte */
+}
+.field-group.is-error .field-trailing-icon {
+  color: var(--color-error);
+}
+
+/* ═══════════════════════════════════════
+   Íconos iniciales y finales
+   Usa .field-input-wrapper como contenedor relativo.
+   Agrega .has-leading o .has-trailing al .field-input para ajustar padding.
+
+   Uso:
+   <div class="field-input-wrapper">
+     <span class="field-leading-icon"><svg>...</svg></span>
+     <input class="field-input has-leading has-trailing">
+     <span class="field-trailing-icon"><svg>...</svg></span>
+   </div>
+═══════════════════════════════════════ */
+.field-input-wrapper {
+  position: relative;
+}
+.field-leading-icon,
+.field-trailing-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-on-surface-variant);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+.field-leading-icon  { left: 14px; }
+.field-trailing-icon { right: 14px; }
+
+.field-input-wrapper .field-input.has-leading  { padding-left:  42px; }
+.field-input-wrapper .field-input.has-trailing { padding-right: 42px; }

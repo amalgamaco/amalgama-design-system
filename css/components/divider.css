@@ -1,0 +1,31 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Divider
+   Línea de separación entre secciones o ítems de contenido.
+
+   Cuándo usar: separar grupos lógicos dentro de una lista, card o layout.
+   Cuándo no: para crear espaciado (usar --space-* + margin/gap) ni como borde decorativo de contenedor.
+   Reemplaza a: <hr> sin estilo / bordes CSS ad-hoc entre secciones.
+
+   Dependencia: variables.css (Color Roles)
+
+   Uso:
+   <div class="divider"></div>
+   <div class="divider divider-inset"></div>
+   <div class="divider divider-vertical"></div>
+═══════════════════════════════════════ */
+
+.divider {
+  border: none;
+  background: var(--color-outline-variant);
+  height: 1px;
+  width: 100%;
+  margin: 0;
+}
+
+.divider-inset { margin-left: 16px; width: calc(100% - 16px); }
+
+.divider-vertical {
+  height: auto;
+  width: 1px;
+  align-self: stretch;
+}

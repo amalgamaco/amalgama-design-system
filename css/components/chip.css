@@ -1,0 +1,164 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Chip
+   Elementos compactos que representan una acción, filtro,
+   entrada o sugerencia. Cuatro variantes funcionales (MD3):
+
+     Assist     · .chip (+ .chip-icon opcional)        · acción contextual
+     Filter     · .chip / .chip.chip-selected          · refinar contenido
+     Input      · .chip + .chip-remove                 · información ingresada
+     Suggestion · .chip                                · sugerencia dinámica
+
+   Cuándo usar: filtros, selección múltiple, sugerencias — siempre interactivo. Filter chips van debajo de la search bar para refinar resultados.
+   Cuándo no: estado de solo lectura (usar Badge); acción principal (usar Button).
+   Reemplaza a: toggles de filtro ad-hoc, tags clickeables legacy.
+
+   Specs (Specs → Chips en la documentación):
+     Alto 32px · radio full (píldora) · ícono 18px
+     Padding 16px (sin ícono) · 8px del lado del ícono · gap 8px
+     Tipografía Label Large · Inter 500 · 14px
+
+   Dependencia: variables.css (Color Roles)
+   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en
+   light y dark sin overrides por tema.
+
+   Border token: el Chip sin seleccionar usa --color-outline-variant, NO
+   --color-outline. --color-outline queda reservado para controles interactivos
+   primarios (Button tertiary/ghost/icon, Input, Checkbox, Radio, Switch) — el
+   Chip es un control de filtro/metadata y necesita un trazo visiblemente más
+   claro para no leerse como otro botón al lado de ellos. Mismo criterio que el
+   frame de Segmented Button (ver segmented-button.css).
+
+   Uso:
+   <button class="chip">Sugerencia</button>
+   <button class="chip"><span class="chip-icon">…</span> Asistencia</button>
+   <button class="chip" aria-pressed="false">Filtro</button>
+   <button class="chip chip-selected" aria-pressed="true">Filtro activo</button>
+   <span class="chip">Entrada <button class="chip-remove" aria-label="Quitar">✕</button></span>
+   <button class="chip chip-elevated">Elevado</button>
+═══════════════════════════════════════ */
+
+/* ── Base (outlined / plano) ── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);                  /* 8px ícono–etiqueta */
+  height: 32px;
+  padding: 0 var(--space-4);            /* 16px sin ícono */
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-outline-variant);
+  background: transparent;
+  color: var(--color-on-surface);
+  font: var(--font-weight-medium) var(--font-size-body-lg)/1 var(--font-body);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
+}
+
+/* ── Slots ── */
+.chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  color: var(--color-on-surface);
+  flex-shrink: 0;
+}
+.chip-icon svg, .chip-icon i { width: 18px; height: 18px; }
+
+.chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  margin: 0; padding: 0;
+  border: 0; background: transparent;
+  border-radius: 50%;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.chip-remove:hover { background: color-mix(in srgb, var(--color-on-surface) 12%, transparent); }
+.chip-remove svg, .chip-remove i { width: 14px; height: 14px; }
+
+/* Padding asimétrico cuando hay ícono inicial o de eliminación (8px del lado del ícono) */
+.chip:has(.chip-icon)   { padding-left: var(--space-2); }
+.chip:has(.chip-remove) { padding-right: var(--space-2); }
+
+/* ── Variante: elevado ── */
+.chip-elevated {
+  border-color: transparent;
+  background: var(--color-surface-container-low);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Variante: seleccionado (filter / input) ── */
+.chip-selected {
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  border-color: transparent;
+}
+.chip-selected .chip-icon   { color: var(--color-on-secondary-container); }
+.chip-selected .chip-remove { color: var(--color-on-secondary-container); }
+
+/* ── Estados (capas sobre on-surface, según tabla de tokens) ── */
+.chip:hover {
+  background: color-mix(in srgb, var(--color-on-surface) 8%, transparent);
+}
+.chip:active {
+  background: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+}
+.chip-elevated:hover {
+  background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface-container-low));
+}
+.chip-elevated:active {
+  background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-low));
+}
+.chip-selected:hover {
+  background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container));
+}
+.chip-selected:active {
+  background: color-mix(in srgb, var(--color-on-secondary-container) 12%, var(--color-secondary-container));
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+/* Arrastrado (input chips durante drag & drop) */
+.chip-dragged {
+  box-shadow: var(--shadow-md);
+  background: var(--color-surface-container-low);
+}
+
+/* Deshabilitado: contenedor/borde al 12%, contenido al 38% de on-surface */
+.chip:disabled,
+.chip[aria-disabled="true"] {
+  border-color: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--color-on-surface) 38%, transparent);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.chip:disabled .chip-icon,
+.chip[aria-disabled="true"] .chip-icon,
+.chip:disabled .chip-remove,
+.chip[aria-disabled="true"] .chip-remove {
+  color: color-mix(in srgb, var(--color-on-surface) 38%, transparent);
+}
+.chip-elevated:disabled,
+.chip-elevated[aria-disabled="true"] {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+}
+
+/* ── Conjunto de chips (layout helper) ── */
+.chip-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}

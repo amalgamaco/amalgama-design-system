@@ -1,0 +1,124 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Vacancy Card
+   Tarjeta de vacante con icono, titulo, metadata, stats y asignados.
+
+   Cuándo usar: ítem de vacante en listas de recruiting (ícono + nombre + meta + stats).
+   Cuándo no: personas (person-card); otros dominios (usar Card genérica).
+   Reemplaza a: rows/cards de vacante custom.
+
+   Dependencia: variables.css
+   Requiere: badge.css (para badges de status en el HTML)
+
+   Uso:
+   <div class="vacancies-list">
+     <div class="vacancy-card">
+       <div class="vacancy-icon">💼</div>
+       <div class="vacancy-info">
+         <div class="vacancy-name">
+           Desarrollador Frontend
+           <span class="badge badge-open">Abierta</span>
+         </div>
+         <div class="vacancy-meta">
+           Tecnologia <span class="meta-dot"></span> Remoto
+         </div>
+       </div>
+       <div class="vacancy-right">
+         <div class="vacancy-age">3d</div>
+       </div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.vacancies-list { display: flex; flex-direction: column; gap: 8px; }
+
+.vacancy-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex; align-items: center; gap: 16px;
+  cursor: pointer;
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast), transform var(--duration-fast);
+  position: relative;
+  animation: fadeSlideIn .3s ease both;
+}
+.vacancy-card:hover {
+  border-color: var(--color-outline-variant);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+.vacancy-card:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.vacancy-card:nth-child(1) { animation-delay: .05s; }
+.vacancy-card:nth-child(2) { animation-delay: .12s; }
+.vacancy-card:nth-child(3) { animation-delay: .19s; }
+
+.vacancy-icon {
+  width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: var(--interactive-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.vacancy-info { flex: 1; min-width: 0; }
+.vacancy-name {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-xs); font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.vacancy-meta {
+  display: flex; align-items: center; gap: 6px;
+  font-size: var(--font-size-body-sm); color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
+
+.vacancy-stats {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 10px;
+}
+.stat-pill {
+  display: flex; align-items: center; gap: 6px;
+  font-size: var(--font-size-label); color: var(--text-secondary);
+}
+.stat-pill .count { font-weight: 600; color: var(--text-primary); }
+
+.assignee {
+  display: flex; align-items: center; gap: 6px;
+  font-size: var(--font-size-label); color: var(--text-secondary);
+}
+.assignee-avatar {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--error-600), var(--error-500));
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-on-primary); font-size: 9px; font-weight: 700;
+}
+.assignee-avatar.blue { background: linear-gradient(135deg, var(--secondary-900), var(--secondary-500)); }
+.assignee-avatar.green { background: linear-gradient(135deg, var(--success-500), var(--success-300)); }
+.assignee-avatar.purple { background: linear-gradient(135deg, var(--tertiary-900), var(--tertiary-700)); }
+
+.vacancy-right {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+  flex-shrink: 0;
+}
+.vacancy-age {
+  font-size: var(--font-size-mono-md); font-weight: 600; color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.more-btn {
+  width: 28px; height: 28px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+  background: none; border: none;
+}
+.more-btn:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }

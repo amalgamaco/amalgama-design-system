@@ -1,0 +1,43 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Popover
+   Panel flotante anclado a un trigger, sin flecha, para contenido rico
+   arbitrario (no una lista de acciones — eso es Dropdown Menu).
+
+   Cuándo usar: contenido contextual breve junto a un elemento (info extra,
+   mini-formulario, selector custom).
+   Cuándo no: lista de acciones → Dropdown Menu; confirmación bloqueante →
+   Dialog; texto de una línea al hover → Tooltip.
+   Reemplaza a: cualquier "dropdown" custom que solo muestre contenido, sin
+   navegación por teclado tipo lista.
+
+   Posicionamiento: JS (components/lib/use-flyout.ts) calcula top/left vía
+   getBoundingClientRect con flip de borde de viewport; este archivo solo
+   define look & feel, no vue lógica de posición (se aplica inline desde React
+   como top/left en px sobre `.popover-content`).
+
+   Dependencia: variables.css
+
+   Uso:
+   <button class="popover-trigger">Abrir</button>
+   <div class="popover-content" style="top:120px;left:80px">…</div>
+═══════════════════════════════════════ */
+
+.popover-content {
+  position: fixed;
+  z-index: 100;
+  min-width: 220px;
+  max-width: 320px;
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 16px;
+  color: var(--color-on-surface);
+  font-size: var(--font-size-body-sm);
+  animation: popoverIn var(--duration-normal) var(--ease-default);
+}
+
+@keyframes popoverIn {
+  from { opacity: 0; transform: scale(.96); }
+  to   { opacity: 1; transform: scale(1); }
+}

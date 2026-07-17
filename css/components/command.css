@@ -1,0 +1,139 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Command
+   Paleta de comandos / lista filtrable rápida (búsqueda por substring).
+
+   Cuándo usar: búsqueda-y-ejecución rápida de comandos o navegación, pickers
+   filtrables, y es la base del Combobox.
+   Cuándo no: un select de formulario corto (usar .form-select); búsqueda de
+   contenido de la página (usar Search).
+   Reemplaza a: menús filtrables hechos a mano.
+
+   Nota de implementación: el filtrado es por coincidencia de substring
+   (`.toLowerCase().includes()`), no fuzzy-search — ver components/ui/command.tsx.
+
+   Dependencia: variables.css (Color Roles)
+   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en
+   light y dark sin overrides por tema.
+
+   Uso:
+   <div class="command">
+     <div class="command-input-wrapper">
+       <span class="command-input-icon">…lupa…</span>
+       <input class="command-input" placeholder="Buscar…">
+     </div>
+     <div class="command-list">
+       <div class="command-empty">Sin resultados.</div>
+       <div class="command-group">
+         <div class="command-group-heading">Sugerencias</div>
+         <div class="command-item" data-active="true">Item</div>
+       </div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.command {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-container);
+  color: var(--color-on-surface);
+}
+
+.command-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.command-input-icon {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--color-on-surface-variant);
+  opacity: .7;
+}
+
+.command-input {
+  flex: 1;
+  height: 44px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-on-surface);
+}
+.command-input::placeholder { color: var(--text-muted); }
+.command-input:disabled { cursor: not-allowed; opacity: .5; }
+
+.command-list {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6px;
+}
+
+.command-empty {
+  padding: 24px 0;
+  text-align: center;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-on-surface-variant);
+}
+
+.command-group {
+  overflow: hidden;
+  padding: 4px;
+}
+.command-group[hidden] { display: none; }
+
+.command-group-heading {
+  padding: 6px 8px;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-on-surface-variant);
+}
+
+.command-separator {
+  margin: 4px -4px;
+  height: 1px;
+  background: var(--border);
+}
+
+.command-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-on-surface);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+.command-item[hidden] { display: none; }
+.command-item svg { width: 18px; height: 18px; flex-shrink: 0; opacity: .7; }
+.command-item[data-active="true"] {
+  background: var(--color-surface-variant);
+}
+.command-item[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: .4;
+}
+
+.command-shortcut {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono-sm);
+  letter-spacing: .05em;
+  color: var(--color-on-surface-variant);
+  opacity: .7;
+}

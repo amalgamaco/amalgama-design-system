@@ -1,0 +1,23 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Context Menu
+   Menú de acciones anclado al cursor, disparado por click derecho sobre un
+   área. Visualmente es EL MISMO panel que Dropdown Menu (reutiliza sus clases
+   `.dropdown-content`/`.dropdown-item`/etc. de dropdown-menu.css) — lo único
+   que cambia es el disparador (contextmenu event + posición del cursor en vez
+   de un trigger-button con click).
+
+   Cuándo usar: acciones contextuales sobre un elemento de una lista/tabla/canvas.
+   Cuándo no: acción siempre visible sobre un botón → Dropdown Menu.
+   Reemplaza a: menús contextuales custom con position:fixed + z-index ad hoc.
+
+   Dependencia: variables.css, dropdown-menu.css (clases .dropdown-*)
+
+   Uso:
+   <div class="context-menu-trigger" onContextMenu="…">Click derecho acá</div>
+   <div class="dropdown-content" role="menu" style="top:200px;left:120px">…</div>
+═══════════════════════════════════════ */
+
+.context-menu-trigger {
+  /* No estilos propios — es el área que escucha el evento contextmenu.
+     El panel resultante usa las clases .dropdown-* compartidas. */
+}

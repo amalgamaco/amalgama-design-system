@@ -1,0 +1,107 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Rich Tooltip
+   Superficie persistente y descartable con título, texto de soporte y una fila de
+   acciones opcional. A diferencia del Tooltip plano (hover), este se dispara por
+   click/focus — el puntero puede entrar a leerlo o interactuar con sus acciones.
+   Esta es la ÚNICA superficie "rich content overlay" del DS — no se envía un Hover
+   Card separado (evaluado 2026-07 y descartado por duplicar esto).
+
+   Cuándo usar: preview con título + texto + acción sobre un trigger (ícono, chip, avatar).
+   Cuándo no: un hint de una sola línea → Tooltip. Contenido arbitrario grande → un
+   panel propio (Popover/Sheet).
+   Reemplaza a: Hover Card.
+
+   Extiende la base posicional de tooltip.css (mismo concepto de offset por lado)
+   pero es JS-driven (clase .open toggled por click), no :hover.
+
+   Dependencia: variables.css, tooltip.css (posicionamiento por lado)
+
+   Uso:
+   <span class="rich-tooltip-wrap">
+     <button class="icon-btn">…</button>
+     <div class="rich-tooltip-content rich-tooltip-top open" role="dialog">
+       <div class="rich-tooltip-row">
+         <div class="rich-tooltip-body">
+           <p class="rich-tooltip-title">María García</p>
+           <p class="rich-tooltip-subtitle">UX Designer · Disponible</p>
+         </div>
+         <button class="rich-tooltip-close">✕</button>
+       </div>
+       <div class="rich-tooltip-actions">
+         <button class="btn-text btn-sm">Ver perfil</button>
+       </div>
+     </div>
+   </span>
+═══════════════════════════════════════ */
+
+.rich-tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.rich-tooltip-content {
+  position: absolute;
+  z-index: 60;
+  width: max-content;
+  max-width: 280px;
+  background: var(--color-surface-container);
+  color: var(--color-on-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-default),
+              transform var(--duration-fast) var(--ease-default);
+}
+.rich-tooltip-content.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rich-tooltip-top    { bottom: calc(100% + 6px); left: 50%; transform: translate(-50%, 4px) scale(.96); }
+.rich-tooltip-bottom { top: calc(100% + 6px);    left: 50%; transform: translate(-50%, -4px) scale(.96); }
+.rich-tooltip-left   { right: calc(100% + 6px);  top: 50%;  transform: translate(4px, -50%) scale(.96); }
+.rich-tooltip-right  { left: calc(100% + 6px);   top: 50%;  transform: translate(-4px, -50%) scale(.96); }
+
+.rich-tooltip-top.open    { transform: translate(-50%, 0) scale(1); }
+.rich-tooltip-bottom.open { transform: translate(-50%, 0) scale(1); }
+.rich-tooltip-left.open   { transform: translate(0, -50%) scale(1); }
+.rich-tooltip-right.open  { transform: translate(0, -50%) scale(1); }
+
+.rich-tooltip-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.rich-tooltip-body { flex: 1; min-width: 0; }
+.rich-tooltip-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-body-md);
+  font-weight: 600;
+}
+.rich-tooltip-subtitle {
+  margin-top: 4px;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-on-surface-variant);
+}
+.rich-tooltip-close {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  margin: -4px -4px 0 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-on-surface-variant);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+}
+.rich-tooltip-close:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.rich-tooltip-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}

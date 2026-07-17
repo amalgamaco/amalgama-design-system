@@ -1,0 +1,61 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Date Picker
+   Campo anclado (docked): un botón trigger que muestra la fecha elegida y abre
+   un Calendar (calendar.css) en un panel flotante debajo.
+
+   Cuándo usar: elegir una fecha (o rango) desde un campo de formulario o toolbar.
+   Cuándo no: entrada de texto libre de fecha (usar Input nativo type="date" si
+   no hace falta calendario); elegir mes/año sueltos (usar Select).
+   Reemplaza a: inputs de fecha ad-hoc sin calendario accesible.
+
+   Dependencia: variables.css (Color Roles), button.css (.btn-tertiary), calendar.css.
+
+   Nota de alcance (revert a vanilla): panel posicionado con
+   position:absolute; top:100% simple, sin detección de colisión con el borde
+   del viewport (aceptado como limitación — ver tooltip.css/sheet.css para el
+   mismo criterio en otros componentes).
+
+   Uso:
+   <div class="date-picker">
+     <button class="date-picker-trigger btn-tertiary">
+       <svg class="date-picker-icon">…</svg> 17 de julio, 2026
+     </button>
+     <div class="date-picker-panel"><div class="calendar">…</div></div>
+   </div>
+═══════════════════════════════════════ */
+
+.date-picker {
+  position: relative;
+  display: inline-block;
+}
+
+.date-picker-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+  width: 240px;
+  font-weight: 400;
+}
+.date-picker-trigger.date-picker-trigger-empty {
+  color: var(--text-muted);
+}
+.date-picker-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.date-picker-panel {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 4px);
+  left: 0;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+  animation: date-picker-in .12s var(--ease-default, ease);
+}
+@keyframes date-picker-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

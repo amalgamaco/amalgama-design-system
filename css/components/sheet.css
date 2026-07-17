@@ -1,0 +1,156 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Sheet
+   EL único panel anclado a un borde del DS. `side-left`/`side-right` = Side Sheet ·
+   `side-bottom` = Bottom Sheet · `side-top`. Bottom Sheet y Side Sheet no son
+   componentes separados — son valores de `side` de este mismo panel.
+
+   Cuándo usar: cualquier panel anclado a un borde — filtros, detalle, formularios
+   secundarios, bottom sheet en mobile.
+   Cuándo no: navegación principal (usar el app-shell / Navigation Drawer); diálogo
+   modal centrado (usar Dialog/Modal).
+   Reemplaza a: Drawer / bottom-sheet / side-sheet legacy — el DS estandarizó en UN
+   solo panel edge-anchored (un Drawer con gestos fue evaluado y removido: su único
+   diferencial era swipe/snap points, que el producto no usa).
+
+   Motion: --ease-emphasized · --duration-sheet (500ms, sin overshoot) — compartido
+   por los 4 lados. Sin animación de salida (mismo approach que Modal: se desmonta
+   al cerrar, no hay estado "closing").
+
+   Dependencia: variables.css, button.css (para el close button / footer actions)
+
+   Uso:
+   <div class="sheet-overlay">
+     <div class="sheet-content sheet-content-right open">
+       <button class="sheet-close">✕</button>
+       <div class="sheet-header">
+         <div class="sheet-title">Editar perfil</div>
+         <div class="sheet-description">Actualizá tu información pública.</div>
+       </div>
+       <div class="sheet-body">…</div>
+       <div class="sheet-footer">
+         <button class="btn-tertiary">Cancelar</button>
+         <button class="btn-primary">Guardar</button>
+       </div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-scrim);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  animation: fadeIn .15s ease;
+}
+
+.sheet-content {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--color-surface);
+  border-color: var(--color-outline-variant);
+  border-style: solid;
+  border-width: 0;
+  box-shadow: var(--shadow-lg);
+  transition: transform var(--duration-sheet) var(--ease-emphasized);
+}
+
+/* ── Side Sheet (left/right) — full height, responsive width ── */
+.sheet-content-right,
+.sheet-content-left {
+  top: 0;
+  height: 100vh;
+  width: 75vw;
+  max-width: 384px; /* sm:max-w-sm */
+}
+.sheet-content-right { right: 0; border-left-width: 1px; transform: translateX(100%); }
+.sheet-content-left  { left: 0;  border-right-width: 1px; transform: translateX(-100%); }
+.sheet-content-right.open { transform: translateX(0); }
+.sheet-content-left.open  { transform: translateX(0); }
+
+/* ── Bottom / Top Sheet — content-sized, centered on wider viewports ── */
+.sheet-content-top,
+.sheet-content-bottom {
+  left: 0; right: 0;
+  max-height: 80vh;
+}
+.sheet-content-top {
+  top: 0;
+  border-bottom-width: 1px;
+  border-radius: 0 0 16px 16px;
+  transform: translateY(-100%);
+}
+.sheet-content-bottom {
+  bottom: 0;
+  border-top-width: 1px;
+  border-radius: 16px 16px 0 0;
+  transform: translateY(100%);
+}
+.sheet-content-top.open,
+.sheet-content-bottom.open { transform: translateY(0); }
+
+@media (min-width: 640px) {
+  .sheet-content-top,
+  .sheet-content-bottom {
+    margin: 0 auto;
+    max-width: 512px; /* sm:max-w-lg */
+  }
+}
+
+.sheet-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px 24px 0;
+  padding-right: 56px; /* deja lugar al close button absoluto */
+}
+.sheet-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-sm);
+  font-weight: 600;
+}
+.sheet-description {
+  font-size: var(--font-size-label);
+  color: var(--color-on-surface-variant);
+  line-height: 1.6;
+}
+.sheet-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--color-on-surface-variant);
+  transition: background var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+}
+.sheet-close:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.sheet-close:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 24px;
+  color: var(--color-on-surface-variant);
+}
+/* Side sheets: footer stacks full-width (narrow panel convention).
+   Top/Bottom sheets: footer follows the same trailing-aligned row as Dialog. */
+.sheet-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 24px 24px;
+}
+.sheet-content-top .sheet-footer,
+.sheet-content-bottom .sheet-footer {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}

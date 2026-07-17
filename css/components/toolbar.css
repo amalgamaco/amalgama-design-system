@@ -1,0 +1,106 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Toolbar
+   Barra de busqueda con filtros y acciones para listas de datos.
+
+   Cuándo usar: barra de controles sobre listas/tablas — search-field compacto + filtros + acciones.
+   Cuándo no: búsqueda standalone de página (usar search-bar de search.css).
+   Reemplaza a: filter bars legacy.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   search-field es la variante compacta de .search-bar (search.css) para uso en toolbar.
+   Comparte el mismo tratamiento visual: fondo surface-container-high + borde sutil var(--border).
+   Diferencias de escala: --radius-md (8px) vs --radius-lg (12px) del search-bar standalone,
+   y padding compacto que lo alinea en altura con los toolbar-btn adyacentes.
+
+   Uso:
+   <div class="toolbar">
+     <div class="search-field">
+       <svg width="18" height="18" ...>...</svg>
+       <input type="text" placeholder="Buscar vacantes...">
+     </div>
+     <button class="toolbar-btn">Filtros</button>
+     <button class="toolbar-btn">Ordenar</button>
+   </div>
+   <div class="result-count">Mostrando <strong>24</strong> vacantes</div>
+═══════════════════════════════════════ */
+
+.toolbar {
+  display: flex; align-items: center; gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+/* ── Search-field — variante compacta del Search component para toolbar ──
+   Mismo tratamiento visual que .search-bar: fondo surface-container-high + borde sutil.
+   La diferencia es contextual: --radius-md (8px) y padding compacto para convivir
+   con toolbar-btn en la misma fila. .search-bar usa --radius-lg (12px) y 56px de alto. */
+.search-field {
+  flex: 1;
+  display: flex; align-items: center; gap: var(--space-2);
+  padding: 8px var(--space-4);
+  background: var(--color-surface-container-high);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--color-on-surface-variant);
+  cursor: text;
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
+}
+.search-field:hover {
+  background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface-container-high));
+  border-color: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
+}
+.search-field:focus-within {
+  background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-high));
+  border-color: var(--color-secondary);
+}
+.search-field > svg,
+.search-field > i { width: 18px; height: 18px; flex-shrink: 0; color: inherit; }
+.search-field input {
+  flex: 1; min-width: 0;
+  border: none; outline: none; background: transparent;
+  font-family: var(--font-body); font-size: var(--font-size-body-md);
+  color: var(--color-on-surface);
+  caret-color: var(--color-secondary);
+}
+.search-field input::placeholder { color: var(--color-on-surface-variant); }
+.search-field input::-webkit-search-cancel-button { display: none; }
+
+/* ── Toolbar-btn — acción secundaria outlined (análogo a btn-secondary) ── */
+.toolbar-btn {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 8px 16px;
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-md); font-weight: 500;
+  color: var(--color-on-surface-variant);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+}
+.toolbar-btn:hover {
+  background: var(--color-surface-variant);
+  border-color: var(--color-outline-variant);
+  color: var(--color-on-surface);
+}
+.toolbar-btn:active { opacity: .85; }
+.toolbar-btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+.toolbar-btn > svg,
+.toolbar-btn > i { width: 18px; height: 18px; }
+
+.result-count {
+  font-size: var(--font-size-label);
+  color: var(--color-on-surface-variant);
+  margin-bottom: 14px;
+  padding: 0 2px;
+}
+.result-count strong { color: var(--color-on-surface); font-weight: 500; }

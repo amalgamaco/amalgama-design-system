@@ -1,0 +1,86 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Radio Group
+   Selección única entre un conjunto de opciones mutuamente excluyentes,
+   todas visibles al mismo tiempo.
+
+   Cuándo usar: 2-6 opciones mutuamente excluyentes, todas visibles a la vez.
+   Cuándo no: selección múltiple independiente (usar Checkbox); muchas opciones
+   o espacio limitado (usar Select); on/off inmediato (usar Switch).
+   Reemplaza a: radio buttons HTML sin estilizar, pill-buttons custom usados
+   como selección única (ese patrón es Segmented Button, no Radio Group).
+
+   Dependencia: variables.css (Color Roles)
+   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en light y dark
+   sin overrides por tema.
+
+   Implementación: <input type="radio" name="..."> real agrupado por `name` —
+   el navegador provee roving-tabindex (Flechas mueven la selección dentro del
+   grupo, Tab sale del grupo) sin reimplementar ARIA a mano.
+
+   Uso:
+   <div class="radio-group" role="radiogroup" aria-label="Tipo de contrato">
+     <label class="radio-label"><input type="radio" name="contract" class="radio" checked> Full-time</label>
+     <label class="radio-label"><input type="radio" name="contract" class="radio"> Part-time</label>
+   </div>
+═══════════════════════════════════════ */
+
+.radio-group {
+  display: grid;
+  gap: 10px;
+}
+
+.radio {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--color-outline);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  vertical-align: middle;
+  transition: border-color var(--duration-fast) var(--ease-default);
+}
+
+.radio:hover {
+  border-color: var(--color-on-surface);
+}
+
+.radio:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+.radio:checked {
+  border-color: var(--color-primary);
+}
+.radio:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.radio:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ── Label wrapper ── */
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-on-surface);
+  font: var(--font-weight-regular) var(--font-size-body-md)/1.4 var(--font-body);
+  cursor: pointer;
+}
+.radio-label:has(.radio:disabled) {
+  cursor: not-allowed;
+  color: var(--color-on-disabled);
+}

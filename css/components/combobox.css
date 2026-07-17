@@ -1,0 +1,65 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Combobox
+   Select filtrable: un botón trigger que abre una lista Command buscable.
+
+   Cuándo usar: elegir 1 opción de una lista larga donde hace falta buscar/filtrar
+   (país, usuario, repo). Cuándo no: listas cortas sin búsqueda (usar .form-select);
+   multi-select con tags (usar Chips + Command).
+   Reemplaza a: selects con búsqueda hechos a mano.
+
+   Dependencia: variables.css (Color Roles), button.css (.btn-tertiary), command.css
+   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en
+   light y dark sin overrides por tema.
+
+   Uso:
+   <div class="combobox">
+     <button class="btn-tertiary combobox-trigger" aria-expanded="false" aria-haspopup="listbox">
+       Seleccionar… <span class="combobox-chevron">…</span>
+     </button>
+     <div class="combobox-panel">
+       <div class="command">…</div>
+     </div>
+   </div>
+═══════════════════════════════════════ */
+
+.combobox {
+  position: relative;
+  display: inline-block;
+}
+
+.combobox-trigger {
+  width: 240px;
+  justify-content: space-between;
+  font-weight: 400;
+}
+.combobox-trigger.is-placeholder { color: var(--text-muted); }
+
+.combobox-chevron {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: .5;
+}
+
+.combobox-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 240px;
+  z-index: 40;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-container);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.combobox-check {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  flex-shrink: 0;
+  opacity: 0;
+}
+.combobox-check.is-selected { opacity: 1; }

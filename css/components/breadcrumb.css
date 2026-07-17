@@ -1,0 +1,81 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Breadcrumb
+   Rastro de jerarquía: dónde estoy, cómo vuelvo a un ancestro.
+
+   Cuándo usar: mostrar la ubicación dentro de una jerarquía de varios
+   niveles y permitir volver a un ancestro.
+   Cuándo no: una sola acción "volver" (usar Back Link); navegación
+   primaria entre secciones (usar Navigation).
+   Reemplaza a: cualquier "ruta" de texto plano con separadores ad-hoc.
+
+   Dependencia: variables.css (Color Roles)
+   Consume EXCLUSIVAMENTE tokens semánticos --color-* / --font-size-* →
+   funciona en light y dark sin overrides por tema.
+
+   Estructura (nav > ol > li):
+   <nav class="breadcrumb" aria-label="breadcrumb">
+     <ol class="breadcrumb-list">
+       <li class="breadcrumb-item"><a class="breadcrumb-link" href="/">Inicio</a></li>
+       <li class="breadcrumb-separator" aria-hidden="true">/</li>
+       <li class="breadcrumb-item"><a class="breadcrumb-link" href="/vacantes">Vacantes</a></li>
+       <li class="breadcrumb-separator" aria-hidden="true">/</li>
+       <li class="breadcrumb-item"><span class="breadcrumb-page" aria-current="page">Product Designer</span></li>
+     </ol>
+   </nav>
+
+   Para rutas largas, colapsar los ítems del medio:
+   <li class="breadcrumb-item"><span class="breadcrumb-ellipsis" aria-hidden="true">…</span></li>
+═══════════════════════════════════════ */
+
+.breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-body-sm);
+  color: var(--text-secondary);
+  word-break: break-word;
+}
+
+.breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumb-link {
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: color .15s var(--ease-default, ease);
+}
+.breadcrumb-link:hover { color: var(--color-primary); text-decoration: underline; }
+.breadcrumb-link:focus-visible {
+  outline: 2px solid var(--color-focus, var(--color-primary));
+  outline-offset: 2px;
+}
+
+.breadcrumb-page {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.breadcrumb-separator {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-outline);
+}
+.breadcrumb-separator svg { width: 14px; height: 14px; }
+
+.breadcrumb-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--text-secondary);
+}
+.breadcrumb-ellipsis svg { width: 16px; height: 16px; }

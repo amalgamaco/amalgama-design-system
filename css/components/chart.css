@@ -1,0 +1,124 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Chart
+   Gráficos de línea, barra y torta para dashboards y analytics.
+   Implementación simplificada: SVG a mano (línea/barra) + conic-gradient
+   CSS (torta) — sin librería de charting. Cubre los casos comunes de un
+   sitio de documentación; no tiene brush/zoom ni tooltips posicionados
+   por JS (usa <title> nativo del navegador como tooltip de valor).
+
+   Cuándo usar: series temporales o categóricas en dashboards y analytics
+   (línea, barra, torta).
+   Cuándo no: una sola métrica puntual (usar Stat Card); tablas de datos
+   exactos (usar Table).
+   Reemplaza a: gráficos armados con imágenes estáticas o librerías ad-hoc
+   sin theming.
+
+   Dependencia: variables.css (Color Roles)
+   Paleta categórica (--chart-1..5) definida localmente acá — no existe
+   en variables.css, se mapea 1:1 a roles semánticos existentes
+   (Secondary/Tertiary/Success/Warning/Info), nunca a --color-primary
+   (invierte a blanco en dark mode, ver Tabs/GOVERNANCE.md §5.6).
+
+   Uso:
+   <div class="chart-container">
+     <svg class="chart-svg" viewBox="0 0 600 300">…</svg>
+   </div>
+═══════════════════════════════════════ */
+
+.chart-container {
+  --chart-1: var(--color-secondary);
+  --chart-2: var(--color-tertiary);
+  --chart-3: var(--color-success);
+  --chart-4: var(--color-warning);
+  --chart-5: var(--color-info);
+
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  font-size: var(--font-size-caption);
+  color: var(--text-muted);
+}
+
+/* SVG scales responsively via viewBox — no JS measurement needed */
+.chart-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.chart-grid line {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.chart-axis-label {
+  fill: var(--text-muted);
+  font-size: 11px;
+  font-family: var(--font-body);
+}
+
+/* ── Line chart ── */
+.chart-line {
+  fill: none;
+  stroke-width: 2;
+}
+.chart-area {
+  opacity: .14;
+}
+.chart-dot {
+  transition: r var(--duration-fast);
+  cursor: default;
+}
+.chart-dot:hover {
+  r: 5;
+}
+
+/* ── Bar chart ── */
+.chart-bar {
+  transition: opacity var(--duration-fast);
+  cursor: default;
+}
+.chart-bar:hover {
+  opacity: .82;
+}
+
+/* ── Pie chart ── */
+.chart-pie {
+  width: 180px;
+  height: 180px;
+  border-radius: var(--radius-full);
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+/* ── Legend ── */
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 12px;
+  font-size: var(--font-size-caption);
+  color: var(--text-muted);
+}
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chart-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Pie layout (chart + legend side by side on wider screens) ── */
+.chart-pie-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}

@@ -1,0 +1,36 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Toggle Group
+   Un conjunto de Toggles relacionados que comparten selección única o múltiple.
+
+   Cuándo usar: agrupar varios Toggle relacionados (formato de texto:
+     negrita/cursiva/subrayado; alineación). type="single" = elegir 1;
+     type="multiple" = varios on/off a la vez.
+   Cuándo no: elegir 1 de N mutuamente excluyentes con etiqueta de vista y
+     forma de píldora (usar Segmented Button — visualmente distinto: outline
+     de grupo + contenedor selected, ver segmented-button.css); filtros tipo
+     tag (usar Chip).
+   Reemplaza a: grupos de botones on/off ad-hoc.
+
+   Nota de diseño: Toggle Group NO reutiliza los tokens de píldora de
+   Segmented Button (--seg-btn-*) — son visualmente distintos a propósito
+   (Toggle Group = fila de .toggle individuales sin contenedor de grupo;
+   Segmented Button = contenedor con borde + segmentos). Ambos comparten el
+   mismo color de selección (--color-secondary-container) por consistencia
+   de "estado seleccionado" en todo el sistema, pero la forma difiere.
+
+   Dependencia: variables.css, toggle.css (cada item es un .toggle)
+
+   Uso:
+   <div class="toggle-group" role="group" aria-label="Formato de texto">
+     <button class="toggle" aria-pressed="false">B</button>
+     <button class="toggle" aria-pressed="true">I</button>
+     <button class="toggle" aria-pressed="false">U</button>
+   </div>
+═══════════════════════════════════════ */
+
+.toggle-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}

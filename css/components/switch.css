@@ -1,0 +1,94 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Switch
+   Control binario on/off con efecto inmediato (no requiere un botón de
+   confirmación aparte).
+
+   Cuándo usar: ajustes que se aplican al instante (modo oscuro, notificaciones).
+   Cuándo no: selección dentro de una lista de opciones (usar Checkbox); elegir
+   una entre varias alternativas (usar Radio Group).
+   Reemplaza a: toggle switches ad-hoc, checkbox estilizado como switch sin
+   la semántica role="switch".
+
+   Dependencia: variables.css (Color Roles)
+   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en light y dark
+   sin overrides por tema.
+
+   Implementación: <input type="checkbox" role="switch"> real, estilizado como
+   track + thumb vía appearance:none. role="switch" hace que los lectores de
+   pantalla anuncien "activado/desactivado" en lugar de "marcado/no marcado".
+
+   Uso:
+   <label class="switch-label">
+     <input type="checkbox" role="switch" class="switch">
+     Modo oscuro
+   </label>
+═══════════════════════════════════════ */
+
+.switch {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-outline);
+  background: var(--color-surface-variant);
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
+}
+
+/* Thumb */
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-outline);
+  transition: transform var(--duration-normal) var(--ease-expressive),
+              background var(--duration-fast) var(--ease-default);
+}
+
+.switch:hover {
+  border-color: var(--color-on-surface);
+}
+
+.switch:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+.switch:checked {
+  background: var(--color-primary);
+  border-color: transparent;
+}
+.switch:checked::after {
+  transform: translateX(20px);
+  background: var(--color-on-primary);
+}
+
+.switch:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ── Label wrapper ── */
+.switch-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-on-surface);
+  font: var(--font-weight-regular) var(--font-size-body-md)/1.4 var(--font-body);
+  cursor: pointer;
+}
+.switch-label:has(.switch:disabled) {
+  cursor: not-allowed;
+  color: var(--color-on-disabled);
+}

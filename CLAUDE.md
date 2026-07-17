@@ -4,49 +4,32 @@ This file is the **single source of truth for consuming and extending the Amalga
 
 This repo has two layers:
 
-1. **The component library** — the `@amalgama/ds` package at `packages/ds/`. Tailwind v4 + shadcn/Radix React components in `components/ui/*.tsx`, each **self-contained** (variants defined in-file with Tailwind utilities that resolve to Embassy tokens). The only stylesheet is `tailwind.theme.css` (tokens + theme mapping). **This is the single source of truth for component code.**
-2. **The documentation site** — `index.html` at the repo root (single-page app, canonical). The per-component `docs/*.html` pages are **retired redirect stubs** that bounce to the SPA.
+1. **The component library** — flat kebab-case CSS classes in `css/components/*.css` (e.g. `btn-primary`, `chip-selected`), each **self-contained** and consumed by linking `css/components.css` (all components) or copying the individual file you need — **no build step, no framework required**. Optional thin React wrappers live in `components/ui/*.tsx` for projects that want a typed component instead of raw classes; they apply the exact same CSS classes and add no styling of their own. **`css/components/*.css` is the single source of truth for component styling.**
+2. **The documentation site** — `index.html` at the repo root (single-page app, canonical). The per-component `docs/*.html` pages are **retired redirect stubs** that bounce to the SPA. The docs site itself is plain HTML + vanilla JS (one inline `<script>` block driving SPA routing, tabs, sidebar, theme toggle, and every interactive component demo) — no build step, no React.
 
-> **Buildless CSS layer was deleted (2026-06).** `css/components/*.css` + the `css/components.css` barrel (the old "no-build, copy a CSS file" path) and the root `components/ui/*.tsx` thin wrappers were **removed** — the Tailwind components in `packages/ds` are the single source of truth. Each component's `Cuándo usar / Cuándo no` decision rule now lives in its `.tsx` header comment. The docs site's own chrome (hero/nav badges, CTA buttons, the token-tab switcher, the Vacantes mockup, the toast demo) carries those styles inline in `index.html`. Token files (`css/variables.css`, `css/base.css`, `css/layout.css`, `css/md-sys-bridge.css`) are **not** deprecated and remain the token source.
+> **Reverted to buildless CSS + vanilla JS (2026-07).** Between 2026-06-22 and 2026-06-26 this repo was migrated to a Tailwind v4 + React/Radix (shadcn/ui) implementation (`packages/ds/`, `islands/`), which fully replaced `css/components/*.css`. That migration was **reverted** on 2026-07-17: `packages/ds/` and `islands/` were deleted, and every component + feature built during the Tailwind era (~70 commits: Charts, ~25 new shadcn-parity primitives — Accordion, Alert, Breadcrumb, Data Table, Command/Combobox, Context Menu, etc. — the Dialog/Sheet overlay restructure, the mobile nav shell, and the Embassy Playbook guidelines) was hand-ported into the restored buildless architecture as flat CSS + vanilla JS, so nothing built in that period was lost. A handful of the hardest, most library-dependent pieces (Chart, Data Table, Calendar/Date Picker, Command/Combobox, Carousel, Slider range mode, Input OTP, Form validation) were deliberately rebuilt as **simplified vanilla equivalents** rather than exact library-behavior clones — see each component's CSS header comment for what was simplified away. Resizable panels were dropped entirely (no real use case beyond their own demo page) — flag it if you need one, don't improvise a drag-resize engine.
 
 ---
 
 ## Consuming the DS
 
-### Tailwind (canonical)
+### Buildless CSS (canonical)
 
-In any Tailwind v4 project, import the theme once and copy/import components:
-
-```css
-/* your app's global stylesheet */
-@import "@amalgama/ds/tailwind.theme.css";  /* tokens + theme mapping (the ONLY DS stylesheet) */
-```
-
-```tsx
-import { Button } from "@amalgama/ds/button"   // self-contained — no extra CSS to copy
-<Button variant="primary">Crear vacante</Button>
-```
-
-Each component file in `packages/ds/components/ui/` is the complete implementation. To vendor a component, copy its `.tsx` + `components/lib/utils.ts` (`cn()`); it needs only the theme import above.
-
-### Tokens-only load order (no build)
-
-The buildless **component** CSS was deleted (2026-06) — there is no `css/components.css` to link.
-The **token** layer still exists and can be linked directly in a no-build artifact for
-colors/typography/spacing; components themselves are Tailwind (see the Tailwind section above).
-Load the tokens in this order:
+In any project, no build step required:
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/variables.css">     <!-- 1. tokens (required) -->
-<link rel="stylesheet" href="css/md-sys-bridge.css"> <!-- 1b. optional: exposes MD3 --md-sys-color-* names as aliases of --color-* roles; load right after variables -->
-<link rel="stylesheet" href="css/base.css">          <!-- 2. reset + typography base (required) -->
-<link rel="stylesheet" href="css/layout.css">        <!-- 3. only for full app shell (sidebar, topbar, avatar) -->
+<link rel="stylesheet" href="css/md-sys-bridge.css">  <!-- 1b. optional: MD3 --md-sys-color-* aliases -->
+<link rel="stylesheet" href="css/base.css">           <!-- 2. reset + typography base (required) -->
+<link rel="stylesheet" href="css/layout.css">         <!-- 3. only for full app shell (sidebar, topbar, avatar) -->
+<link rel="stylesheet" href="css/components.css">     <!-- 4. all components — or copy one file from css/components/ -->
 ```
 
-For components, import the Tailwind theme (`@amalgama/ds/tailwind.theme.css`) and copy the `.tsx`.
+```html
+<button class="btn-primary">Crear vacante</button>
+```
 
-**MD3 system bridge (`css/md-sys-bridge.css`)** — optional layer that aliases Material Design 3's real system-token names (`--md-sys-color-*`) onto Embassy's `--color-*` roles, and maps all `--md-sys-typescale-*-font` tokens to `var(--font-body)` (Inter) so `@material/web` components don't fall back to Roboto/serif. (After editing the bridge, bump the `?v=` on its `<link>` in `index.html` or the browser serves the cached old file.) Components that adopt MD3's component-token layer (currently **Segmented Button** — the reference pattern; see GOVERNANCE.md §2.2) default each token to `var(--md-sys-color-X, var(--color-X))`: with the bridge loaded they use Material's naming; without it they fall back to the Embassy role. Embassy's palette stays the single source of truth either way, and the bridge needs no dark override (the `--color-*` roles already recalibrate). This adopts MD3's token *structure*, **not** the `material-web` component implementations (evaluated June 2026 and rejected: maintenance mode + lacks ~70% of Embassy's components).
+Each file in `css/components/` is the complete implementation for that component — copy it standalone into another project (no other CSS to bring along beyond the token layer above). `css/components.css` is a barrel that `@import`s every file in `css/components/`; link it for the whole library, or skip it and link individual files for a smaller footprint.
 
 **Tokens are the law.** All colors via `var(--color-*)` or semantic aliases (`--accent`, `--bg`, `--border`), radii via `var(--radius-*)` (scaled by component size, never by variant — see GOVERNANCE.md §4.3), shadows via `var(--shadow-*)`, spacing via `var(--space-*)`. Never raw hex. Dark mode is automatic: set `data-theme="dark"` on `<html>` — the semantic `--color-*` layer recalibrates itself; components need zero per-theme overrides.
 
@@ -56,21 +39,21 @@ Fonts: **Inter** (body/UI), **Epilogue** (headings), **DM Mono** (code/labels) �
 
 **Icons: Lucide** (CDN `unpkg.com/lucide`, `<i data-lucide="…">` + `lucide.createIcons()`), stroke inherits `currentColor`. 18px inside chips/inputs, 20px in nav, 24px in search bars. One icon set per product — never mix.
 
-**Breakpoints**: canonical values `--breakpoint-md: 768px`, `--breakpoint-lg: 1024px` live in `variables.css` (media queries can't consume `var()` — use the literal values and keep them in sync). **Mobile shell (resolved 2026-07):** below 768px the app-shell sidebar is a **modal navigation drawer** — off-canvas, slides in over a scrim on `.app.nav-open`, toggled by the `.shell-menu-btn` hamburger; shipped in `css/layout.css`, spec in GOVERNANCE.md §14.3. Use it; don't invent a different mobile nav.
+**Breakpoints**: canonical values `--breakpoint-md: 768px`, `--breakpoint-lg: 1024px` live in `variables.css` (media queries can't consume `var()` — use the literal values and keep them in sync). **Mobile shell:** below 768px the app-shell sidebar is a **modal navigation drawer** — off-canvas, slides in over a scrim on `.app.nav-open`, toggled by the `.shell-menu-btn` hamburger; shipped in `css/layout.css`, spec in GOVERNANCE.md §14.3. Use it; don't invent a different mobile nav.
 
 **Typography color is brand navy, not black.** Page text — headings AND body — uses `var(--text-primary)` = `primary-900` (`#01164D`) in light mode, recalibrated to `#EAEBED` in dark. Secondary text: `var(--text-secondary)`. `--color-on-surface` (near-black `#0A0C12`) is reserved for content *inside* components (chip labels, button text, table cells) — never for page typography. If Embassy page text renders black, a token is misapplied.
 
-### React layer — the single source of truth (Tailwind, copy-paste portable)
+### Optional React wrappers — `components/ui/*.tsx`
 
-**Component code lives in the `@amalgama/ds` package: `packages/ds/components/ui/*.tsx`.** Each component is **self-contained**: it defines all of its variants **in-file with Tailwind utility classes that resolve to Embassy tokens** (`bg-primary`, `text-on-surface`, `rounded-md`, `text-body-md`, …). There is **no per-component CSS file** — the component file *is* the complete, reusable implementation. Copy a component file (+ `packages/ds/components/lib/utils.ts` for `cn()`) into any Tailwind v4 project that imports the theme (`@amalgama/ds/tailwind.theme.css`) and it works immediately.
+**Component styling lives in `css/components/*.css` — this is the single source of truth.** For React projects that want a typed component instead of raw classes, `components/ui/*.tsx` provides thin wrappers: `cva` (class-variance-authority) mapping `variant`/`size` props onto the flat CSS class names, `cn()` (`components/lib/utils.ts`, a plain `clsx` wrapper) for class merging, and `React.forwardRef`. These wrappers apply **zero Tailwind and zero extra styling** — they're a typed API surface over the same CSS classes anyone can use directly in plain HTML/JSX. Peer deps: `react`, `class-variance-authority`, `clsx`.
 
-Pattern: `cva` (class-variance-authority) for variants + `cn()` (`packages/ds/components/lib/utils.ts`, an `extendTailwindMerge` that registers Embassy size/color tokens) + `React.forwardRef`. Peer deps: `react`, `class-variance-authority`, `clsx`, `tailwind-merge`, `tailwindcss>=4`. Dark mode is automatic via `data-theme="dark"` — never add per-theme overrides in a component.
+Not every component has a wrapper — domain/composition-only pieces (Vacancy Card, Person Card, Kanban Card, Create Form, Placeholder, Segmented Button) are CSS-only, applied via raw classes directly in markup; their doc pages say so explicitly rather than fabricating a wrapper that doesn't exist. Check `ls components/ui/` before assuming one exists for a given component.
 
-> The old root `components/ui/*.tsx` thin wrappers (which only applied buildless CSS classes like `btn-primary`) and the buildless `css/components/*.css` layer were both **deleted (2026-06)** — see the History note under Component inventory.
+Dark mode is automatic via `data-theme="dark"` on `<html>` — never add per-theme overrides in a component.
 
 ### Class conventions
 
-The canonical components are **Tailwind `.tsx`** — read `packages/ds/components/ui/<name>.tsx` for variants, props, and the `Cuándo usar` rule in its header comment. (The legacy buildless class convention — flat kebab-case, additive variants like `btn-primary btn-danger`, `chip chip-selected`, `badge badge-open` — still appears in the docs-site chrome and in migration mappings, but is no longer the source of truth.)
+Flat kebab-case, additive variants (`btn-primary btn-danger`, `chip chip-selected`, `badge badge-open`). Read `css/components/<name>.css` for that component's variants, states, and the `Cuándo usar / Cuándo no / Reemplaza a` decision rule in its header comment.
 
 Size modifier classes (e.g. `btn-sm`, `btn-lg`, `btn-xl`) carry the size-appropriate `border-radius` — adding the size class is sufficient. Never add a separate `border-radius` inline. The same variant in different size demos must use different size classes, not different inline overrides.
 
@@ -90,79 +73,72 @@ When restyling or rebuilding an existing screen, **DS rules win over visual fide
 
 ## Component inventory
 
-Canonical component code is `packages/ds/components/ui/<name>.tsx` (Tailwind, self-contained). The **CSS** column below names the `css/components/*.css` files that were **deleted (2026-06)** — kept here only as a historical reference for each component's origin; the **React** column names the canonical component in `packages/ds/components/ui/`. The **Docs page** column points at `docs/*.html` files that are now **redirect stubs** to the SPA.
+Canonical component code is `css/components/<name>.css`. The **React** column names the optional wrapper in `components/ui/` where one exists (`—` means CSS-only, no wrapper). The **Docs page** column points at `docs/*.html` files that are now **redirect stubs** to the SPA.
 
-| Component | CSS — DELETED (`css/components/`) | React — canonical (`packages/ds/components/ui/`) | Docs page (`docs/` → redirect) |
+| Component | CSS — canonical (`css/components/`) | React (optional, `components/ui/`) | Docs page (`docs/` → redirect) |
 |---|---|---|---|
-| Button | `button.css` (`btn-primary/-secondary/-tertiary/-text`, `icon-btn`; sizes: `btn-xs/-sm/-lg/-xl`; modifiers: `btn-danger/-success/-compact`; radius scales with size: XS/SM→`--radius-sm`, MD/LG→`--radius-md`, XL→`--radius-lg`) | `button.tsx` — variants: `primary`(filled) · `secondary`(tonal) · `elevated`(primary-container + real `--btn-elevation` shadow, theme-aware) · `tertiary`(outlined) · `text` · `icon` · `danger` · `success` · `next`. The `elevated` variant (2026-07) is the canonical Elevated Button everywhere — it replaced a fake `ghost` alias that had no shadow; the retired `ghost` variant was removed. | `button.html` |
-| **Segmented Button** | `segmented-button.css` (`seg-btn-group`, `seg-btn`, `seg-btn.selected`; sizes: `seg-btn-group-sm/-lg`; color roles: MD3 `secondaryContainer`/`onSecondaryContainer` for selected, `onSurface` for unselected, `outline` for border; state layers via `color-mix()`) | — | — |
-| Badge | `badge.css` (`badge badge-{open,active,closed,draft,archived,warning,tertiary,info}`) | `badge.tsx` | `badge.html` |
-| **Chip** | `chip.css` (`chip`, `chip-selected`, `chip-elevated`, `chip-icon`, `chip-remove`, `chip-set`) | `chip.tsx` (`Chip`, `InputChip`, `ChipSet`) | `chip.html` |
-| **Search** | `search.css` (`search-bar` + slots, `search-view` + `-fullscreen`, header/results) | `search.tsx` (`SearchBar`, `SearchView`, …) — **mobile/standalone variant.** Desktop/toolbar variant is `SearchField` in `toolbar.tsx` (see row below) — both are official Search variants, same state tokens, different shape/height. | `search.html` |
-| Input / Select / Textarea | `form.css` | `input.tsx`, `select.tsx`, `textarea.tsx` | `input.html`, `select.html`, `textarea.html` |
-| Card | `card.css` | `card.tsx` | `card.html` |
-| Table | `table.css` | `table.tsx` | `table.html` |
-| Tabs | `tabs.css` | `tabs.tsx` | `tabs.html` |
-| Modal | `modal.css` | `modal.tsx` | `modal.html` |
-| Toast | `toast.css` | `toast.tsx` | `toast.html` |
+| Button | `button.css` — variants: `btn-primary`(filled) · `btn-elevated`(tonal + real elevation, MD3 elevated button) · `btn-secondary`(tonal) · `btn-tertiary`/`btn-ghost`(outlined, alias) · `btn-text` · `icon-btn` · `btn-danger`/`btn-success`(modifiers) · `btn-next`; sizes `btn-xs/-sm/-lg/-xl` (radius scales with size, never variant); `btn-compact` | `button.tsx` | `button.html` |
+| Segmented Button | `segmented-button.css` (`seg-btn-group`, `seg-btn`, `.selected`/`aria-pressed`; sizes `seg-btn-group-sm/-lg`; MD3 component-token layer via `--seg-btn-*` custom properties, each with a `var(--md-sys-color-X, var(--color-X))` fallback) — driven by `segSwitch()`/`segSwitchMulti()` in the app-shell script | `segmented-button.tsx` | — |
+| Badge | `badge.css` (`badge badge-{open,active,closed,draft,archived,warning,tertiary,info}`, `label` variant) | `badge.tsx` | `badge.html` |
+| Chip | `chip.css` (`chip`, `chip-selected`, `chip-elevated`, `chip-icon`, `chip-remove`, `chip-set`) | `chip.tsx` | `chip.html` |
+| Search | `search.css` (`search-bar` + slots, `search-view` + `-fullscreen`) — mobile/standalone variant. Desktop/toolbar variant is `.search-field` in `toolbar.css` — both share state tokens, different shape/height. | `search.tsx` | `search.html` |
+| Input / Select / Textarea | `form.css` (native `<input>`/`<select>`/`<textarea>`; `field-hint`/`field-error-msg`/`is-error`/`has-leading`/`has-trailing`) | `input.tsx`, `select.tsx`, `textarea.tsx` | `input.html`, `select.html`, `textarea.html` |
+| Card | `card.css` (`.card`=outlined/default, `.card-elevated`, `.card-filled`; `card-header/-title/-desc/-content/-footer` sub-parts) | `card.tsx` | `card.html` |
+| Table | `table.css` (`.table-scroll` wrapper for horizontal overflow) | `table.tsx` | `table.html` |
+| Tabs | `tabs.css` (animated sliding `.tab-indicator`, full ARIA: `role="tablist/tab/tabpanel"`, roving `tabIndex`, Arrow/Home/End nav) | `tabs.tsx` | `tabs.html` |
+| Dialog (+ Alert Dialog variant) | `modal.css` (borderless panel, `p-6`-equivalent padding + `gap-4`-equivalent spacing, absolute close button, stacked header title+description; `alertMode` prop disables Escape/outside-click dismissal for Alert Dialog) — driven by `openOverlay()`/`closeOverlay()` | `modal.tsx` | `modal.html` |
+| Sheet (Bottom/Side/Top) | `sheet.css` — **the only edge-anchored panel** (`side="left"\|"right"\|"top"\|"bottom"`), slide-in via `--duration-sheet`/`--ease-emphasized` | `sheet.tsx` | — |
+| Toast / Snackbar | `toast.css` (`.snackbar-viewport` stacking queue, `.snackbar--exit/-multiline/-static`) — real stacking queue via `showToast()`/`dismissToast()` + `components/lib/use-toast.ts` | `toast.tsx` | `toast.html` |
 | Skeleton | `skeleton.css` | `skeleton.tsx` | `skeleton.html` |
 | Empty State | `empty-state.css` | `empty-state.tsx` | `empty-state.html` |
-| Stat Card | `stat-card.css` | `stat-card.tsx` | `stat-card.html` |
-| Toolbar (+ `search-field`) | `toolbar.css` | `toolbar.tsx` (`Toolbar`, `SearchField`, `ToolbarButton`, `ResultCount`) — `SearchField` is the **desktop/toolbar variant of Search** (compact, `--radius-md`, shares state tokens with `SearchBar`) | `toolbar.html` |
+| Stat Card | `stat-card.css` (`trend` prop → `stat-change-*` classes) | `stat-card.tsx` | `stat-card.html` |
+| Toolbar (+ `search-field`) | `toolbar.css` | `toolbar.tsx` | `toolbar.html` |
 | Page Header | `page-header.css` | `page-header.tsx` | — |
 | Back Link | `back-link.css` | `back-link.tsx` | — |
 | Description | `description.css` | `description-section.tsx` | — |
-| Topbar / Sidebar / Avatar | `layout.css` (app shell) | — | `topbar.html`, `navigation.html`, `avatar.html` |
-
-**shadcn primitives added (2026-07, shadcn-alignment pass):** `toggle.tsx` (Radix Toggle — foundation for Chip's filter state), `label.tsx` (Radix Label), `accordion.tsx` (Radix Accordion), `alert.tsx` (inline message, cva variants `default`/`info`/`success`/`warning`/`error`), `breadcrumb.tsx`, `collapsible.tsx` (Radix), `hover-card.tsx` (Radix), `scroll-area.tsx` (Radix), `aspect-ratio.tsx` (Radix), `pagination.tsx` (composes `buttonVariants`), `alert-dialog.tsx` (Radix — Action/Cancel compose `Button`). All follow the canonical shadcn structure/exports, themed with Embassy tokens. See [[shadcn-alignment-audit-2026-07]] memory.
-
-**shadcn parity completion (2026-07, second alignment pass):** added the remaining applicable shadcn primitives — `context-menu.tsx`, `menubar.tsx`, `navigation-menu.tsx` (pure Radix), `toggle-group.tsx` (standalone export; Segmented Button composes it), `command.tsx` (cmdk) + `combobox.tsx` (Popover+Command), `input-otp.tsx` (input-otp), `form.tsx` (react-hook-form + zod, auto label/aria wiring), `resizable.tsx` (react-resizable-panels), `data-table.tsx` (TanStack over the Embassy `Table`), and promoted `date-picker.tsx` (Popover+Button+Calendar) to a first-class file. Overlay surfaces (Select/DropdownMenu/Popover) unified on `bg-surface-container` (white/#1C202C), with the stuck-transition removed from menu items. New deps in `packages/ds`: `@radix-ui/react-{context-menu,menubar,navigation-menu}`, `cmdk`, `input-otp`, `react-hook-form`, `zod`, `@hookform/resolvers`, `react-resizable-panels`, `@tanstack/react-table`. **Docs-site islands + per-component doc pages + nav for these 11 are the remaining phase** (component code is the source of truth and ships first).
-
-**Edge-anchored panels standardized on Sheet (2026-07):** the DS has ONE canonical edge-anchored panel — **`Sheet`** (Radix Dialog): `side="right"|"left"` = Side Sheet, `side="bottom"` = Bottom Sheet, `side="top"`. A vaul-based `Drawer` was briefly added then **removed** (with the `vaul` dep) — a Drawer and a Side Sheet are identical at rest and in motion; the Drawer's only differentiator was gesture (swipe / snap points / nesting), which the product doesn't use, so maintaining both violated "one canonical component per pattern." Map every drawer/sheet/edge-panel need to `Sheet`. If a real gesture surface is ever required, reintroduce a gesture engine deliberately (don't re-add a parallel component for a static panel). The **Navigation Drawer** (app-shell mobile nav, `css/layout.css`) is unrelated and stays. Shared motion for all Sheet sides: `--ease-emphasized` · `--duration-sheet` (500ms, no overshoot). See GOVERNANCE §19.1 / §20.2. **Remaining shadcn non-additions: `drawer` → Sheet; `sidebar` → app-shell.**
-
-**IA placement (2026-07 IA review — all component code stays; only docs/nav classification changed):** most of the above are top-level **Components**, but per the DS's IA rules a few are placed differently — `aspect-ratio` lives under **Foundations → Layout** (it's a layout utility, not a UI component); `alert-dialog` is documented as a **variant on the Dialog page** (not a standalone component — it's a specialized Dialog composition); `hover-card` is **nested under Tooltip** in the nav (rich hover overlay; note it overlaps `rich-tooltip.tsx` — consolidation is a pending call); `label` has **no standalone page** — it's a shared form primitive (`@amalgama/ds/label`) used with Checkbox/Switch/Radio/Input. `alert` is kept **distinct from Snackbar** on purpose (Alert = inline/persistent; Snackbar = floating/ephemeral) — see the "Alert vs. Snackbar" table in the Alert Guidelines.
-
-**Extended (domain-oriented):** Vacancy Card, Person Card, Kanban, Create Form, Placeholder — canonical React in `packages/ds/components/ui/` (`vacancy-card.tsx`, `person-card.tsx`, `kanban-card.tsx`, `create-form.tsx`, `placeholder.tsx`); the matching `css/components/*.css` were deleted (2026-06). Use for recruiting/HR product surfaces. Vacancy/Kanban cards now compose `Avatar`/`AvatarFallback` for their initials disc (2026-07) instead of hand-rolled markup.
-
-**shadcn/Radix islands (interactive components, rendered in `index.html` only):** the
-interactive components are React (shadcn/ui + Radix) + Tailwind v4, built in `islands/`
-to `islands/dist/embassy-islands.{js,css}` and mounted into `[data-island]` slots in
-`index.html`. They consume tokens via the Embassy→Tailwind bridge (`islands/src/styles.css`)
-and import their implementations from the in-repo **`@amalgama/ds`** package at
-**`packages/ds/`** (linked via `file:../packages/ds`; `@ds/*` alias → the package's
-`exports`). This repo is a **monorepo**: `packages/ds/` is the single source of truth for
-component code, the root is the docs + tokens + governance. (See `islands/INTEGRATION.md`.)
-Covered: **checkbox, switch, radio, slider, menu (dropdown),
-list, divider (separator), progress, chip, input/textarea, select, tabs, dialog, tooltip,
-date picker, sheet, carousel, segmented-button, avatar, snackbar (sonner)** + domain cards
-(kanban/person/vacancy).
-
-> **History:** an earlier experiment rendered these via official `@material/web` web
-> components. That runtime was **removed (2026-06)** — there are **0 live `<md-*>` elements**.
-> `css/md-sys-bridge.css` stays (Embassy CSS + Segmented Button still consume `--md-sys-color-*`).
-> Both the islands and the canonical components import their implementations from `@amalgama/ds`
-> (`packages/ds`). The `css/components/*.css` files (button, badge, card, chip, search, etc.) and
-> the `css/components.css` barrel were **deleted (2026-06)** — the docs site's own chrome was
-> re-homed into `index.html`'s embedded `<style>`, and the `docs/*.html` pages became redirect
-> stubs to the SPA. Do not recreate `css/components/*.css`; author components in `packages/ds`.
+| Topbar / Sidebar / Avatar | `layout.css` (app shell) + `avatar.css` | `avatar.tsx` (Avatar only) | `topbar.html`, `navigation.html`, `avatar.html` |
+| Accordion | `accordion.css` — CSS-only height animation (`grid-template-rows: 0fr → 1fr`), no JS measurement | `accordion.tsx` | — |
+| Alert | `alert.css` (`default`/`info`/`success`/`warning`/`error`, reuses Badge's container/on-container token pairs) — distinct from Snackbar (Alert = inline/persistent, Snackbar = floating/ephemeral) | `alert.tsx` | — |
+| Breadcrumb | `breadcrumb.css` (plain `<nav aria-label="breadcrumb">`/`<ol>`/`<li>`) | `breadcrumb.tsx` | — |
+| Collapsible | `collapsible.css` — same grid-rows technique as Accordion, single boolean | `collapsible.tsx` | — |
+| Pagination | `pagination.css` (reuses `.icon-btn`/`.btn-tertiary` states) | `pagination.tsx` | — |
+| Scroll Area | `scroll-area.css` — pure CSS (`scrollbar-width`/`::-webkit-scrollbar`), no JS | `scroll-area.tsx` | — |
+| Toggle | `toggle.css` (pressed state = `aria-pressed` attribute, `--color-secondary-container` — not Primary, which inverts to white in dark mode) | `toggle.tsx` | — |
+| Toggle Group | `toggle-group.css` — deliberately distinct from Segmented Button (different container shape/use case: grouped toggles vs. view-switch pill), shares selection color only | `toggle-group.tsx` | — |
+| Checkbox / Switch / Radio | `checkbox.css`, `switch.css`, `radio-group.css` — real native `<input type="checkbox"/"radio">` (`role="switch"` for Switch), keyboard/screen-reader semantics free | `checkbox.tsx`, `switch.tsx`, `radio-group.tsx` | — |
+| Slider | `slider.css` — native `<input type="range">` restyled; range mode = two stacked inputs with `pointer-events` scoped to each thumb | `slider.tsx` | — |
+| Tooltip / Rich Tooltip | `tooltip.css`/`rich-tooltip.css` — CSS-only positioning (`position:relative`/`absolute` + `transition-delay`), **no viewport-edge collision flip** (accepted simplification); Rich Tooltip is click-triggered with its own open/close state | `tooltip.tsx`, `rich-tooltip.tsx` | `tooltip.html` |
+| Popover / Dropdown Menu / Context Menu / Menubar / Navigation Menu | `popover.css`, `dropdown-menu.css`, `context-menu.css`, `menubar.css`, `navigation-menu.css` — all consume one shared `components/lib/use-flyout.ts` hook (real viewport-edge-flip positioning via `getBoundingClientRect`, click-outside + Escape dismissal, roving arrow-key nav; no true focus-trap, no submenu/portal support) | `popover.tsx`, `dropdown-menu.tsx`, `context-menu.tsx`, `menubar.tsx`, `navigation-menu.tsx` | — (no standalone doc pages yet) |
+| Command / Combobox | `command.css`/`combobox.css` — substring filtering (not fuzzy), arrow-key nav | `command.tsx`, `combobox.tsx` | — (no standalone doc page yet) |
+| Chart | `chart.css` — hand-drawn inline SVG (line/bar), CSS `conic-gradient` pie, native `<title>` tooltips, `--chart-1..5` categorical tokens; no legend animation/brush/zoom | `chart.tsx` | — |
+| Data Table | `data-table.css` — plain `<table>` reusing Table + Pagination, column sort + page-slice pagination; no resize/pin/facets/virtualization/row-selection | `data-table.tsx` | — (no standalone doc page) |
+| Calendar / Date Picker | `calendar.css`/`date-picker.css` — plain `Date` math month-grid, `Intl.DateTimeFormat` for labels/formatting (no locale library), simple absolute-positioned popover panel (no collision detection); basic range selection | `calendar.tsx`, `date-picker.tsx` | `date-picker.html` |
+| Carousel | `carousel.css` — native CSS `scroll-snap-type`, Prev/Next via `scrollBy()`; no drag physics/autoplay/infinite loop, no `CarouselApi` escape hatch | `carousel.tsx` | `carousel.html` |
+| Input OTP | `input-otp.css` — real `<input maxlength="1">` boxes, auto-advance/backspace-back/paste-splitting | `input-otp.tsx` | — (no standalone doc page) |
+| Form | `form.css` (shared with Input/Select/Textarea) — native HTML5 validation + a plain `useFormField` hook, no react-hook-form/zod | `form.tsx` | — (no standalone doc page) |
+| Resizable panels | **not implemented** — dropped in the 2026-07 revert (no real use case beyond its own demo); flag if you need one | — | — |
+| Avatar / Divider / List / Progress | `avatar.css`, `divider.css`, `list.css`, `progress.css` | — (CSS-only, no wrapper) | `avatar.html` |
+| Kanban / Person / Vacancy Card, Create Form, Placeholder | `kanban.css`, `person-card.css`, `vacancy-card.css`, `create-form.css`, `placeholder.css` | — (CSS-only, no wrapper; used via raw classes directly in markup) | — |
 
 **Canonical Overview structure (all component pages):** badge → title → subtitle → 4 tabs
-(Overview / Guidelines / Accessibility / Code) → key-characteristic bullets → single-mode
+(Overview / Guidelines / Accessibility / Code — the tab switcher is real `.ds-comp-tabs`/`.ds-comp-tab-btn` markup driven by `switchCompTab()`, no framework) → key-characteristic bullets → single-mode
 variant showcase → numbered references. **Show only one color mode at a time — no side-by-side
 light/dark; examples follow the global theme toggle.** Note: in dark mode Embassy `--color-primary`
-is white, so selected controls render white — see [[md3-structure-adoption]] memory.
+is white, so selected controls render white.
 
-Component relationships: filter **chips** refine **search** results (chips below the search bar) and toolbar filters. **Search has two official platform variants** (2026-07), same state tokens, different shape/context — not two separate components: **`SearchField`** (`toolbar.tsx`) is the compact desktop variant, used inside a `Toolbar` alongside `Select`/`ToolbarButton`; **`SearchBar`** (`search.tsx`) is the standalone 56px mobile/hero variant, which can expand into the full `SearchView`. Full guidance on which to use lives in the Search component's Guidelines tab ("Ubicación").
+Component relationships: filter **chips** refine **search** results (chips below the search bar) and toolbar filters. **Search has two official platform variants**, same state tokens, different shape/context: **`.search-field`** (`toolbar.css`) is the compact desktop variant, used inside a Toolbar alongside Select/ToolbarButton; **`.search-bar`** (`search.css`) is the standalone 56px mobile/hero variant, which can expand into `.search-view`. Full guidance on which to use lives in the Search component's Guidelines tab ("Ubicación").
 
-Every component CSS header now carries a **`Cuándo usar / Cuándo no / Reemplaza a`** block — that is the per-component decision rule (badge vs chip, modal vs toast, card vs stat-card, etc.). Agents must honor it when mapping legacy elements.
+Every component CSS header carries a **`Cuándo usar / Cuándo no / Reemplaza a`** block — that is the per-component decision rule (badge vs chip, modal vs toast, card vs stat-card, etc.). Agents must honor it when mapping legacy elements.
+
+**Embassy Playbook** (`guidelines/*.md`, 12 files) — UX principles + pattern guides (forms, tables, navigation, dashboards, feedback/states, responsive layout), mirrored on the docs site under the Playbook nav group. Pure content, no framework dependency — see the "Where to look things up" table below.
 
 ### Where to look things up (authoritative source per information type)
 
 | Information | Authoritative source |
 |---|---|
 | Token values (colors, type scale, spacing, radii, shadows, breakpoints) | `css/variables.css` |
-| Component code, variants, props, usage rules | `packages/ds/components/ui/*.tsx` (canonical, Tailwind in-file) |
-| Per-component decision rule (`Cuándo usar / Cuándo no`) | the component's `packages/ds/components/ui/<name>.tsx` header comment |
+| Component code, variants, props, usage rules | `css/components/<name>.css` (canonical) + optional `components/ui/<name>.tsx` wrapper |
+| Per-component decision rule (`Cuándo usar / Cuándo no`) | the component's `css/components/<name>.css` header comment |
 | Usage guidelines / specs / accessibility (human depth) | root `index.html` |
 | Migration / restyling rules | `MIGRATION.md` |
 | Cross-component consistency rules, state patterns, audit checklist | `GOVERNANCE.md` |
@@ -189,19 +165,19 @@ before declaring it done. Token-correct but unusable is not done.
 
 ## Adding a new component
 
-Author the component in `packages/ds` as a **self-contained Tailwind component** — do **not** create a `css/components/*.css` file (that layer was deleted in 2026-06).
+Author the component as a **self-contained flat-CSS file** in `css/components/`.
 
-1. **Component first**: `packages/ds/components/ui/<name>.tsx` following the `cva` + `cn()` + `forwardRef` pattern. Define every variant in-file with Tailwind utilities that resolve to Embassy tokens (`bg-primary`, `text-on-surface`, `rounded-md`, `text-body-md`). No raw hex; must work in light and dark with zero per-theme overrides. Use `vacancy-card.tsx` / `button.tsx` as references. Carry the `Cuándo usar / Cuándo no` decision rule as a header comment in the `.tsx`.
-2. **Theme additions (only if unavoidable)**: a pattern not expressible as atomic Tailwind utilities (e.g. a shimmer, a `::before` placeholder) goes in `packages/ds/tailwind.theme.css` under `@layer utilities` / `@utility`. Never add a token here that isn't a real DS token.
-3. **Islands showcase**: add a showcase in `islands/src/islands/` and register it so the docs site can render it via a `[data-island]` slot; rebuild the islands bundle.
-4. **Docs**: section in root `index.html` (Overview/Specs/Guidelines/Accessibility/Code tabs — use Button as the reference for depth). Do **not** create a `docs/<name>.html` page — that catalog is retired (redirect stubs only).
+1. **CSS first**: `css/components/<name>.css` — flat kebab-case classes, additive variant/size modifiers, dark mode via existing `--color-*` tokens only (never a per-theme override block — `variables.css`'s `[data-theme="dark"]` block already recalibrates every token). Header comment: purpose, `Cuándo usar / Cuándo no / Reemplaza a`, dependencies, and a `Uso:` HTML snippet. If a component-scoped custom-property tier is genuinely useful (see Segmented Button's `--seg-btn-*`), define it locally in the component's own file — never add a token to `variables.css` for one component's internal use.
+2. **Vanilla JS behavior (if needed)**: small, named functions added to `index.html`'s app-shell `<script>` block (or split into `js/app-shell.js`/`js/components.js` if it grows further) — plain DOM APIs, `data-*` attributes for state, no framework. Reuse an existing pattern first (`switchCompTab`, `openOverlay`/`closeOverlay`, the shared `components/lib/use-flyout.ts`-style positioning approach) before inventing a new one.
+3. **Optional React wrapper**: only if a consuming React project would benefit — `components/ui/<name>.tsx`, `cva` + `cn()` + `forwardRef`, mapping props onto the flat CSS classes with zero extra styling.
+4. **Docs**: section in root `index.html` (Overview/Guidelines/Accessibility/Code tabs — use Button as the reference for depth). Do **not** create a `docs/<name>.html` page — that catalog is retired (redirect stubs only).
 5. Cross-link related components (related-components cards + inline `navigate()` links).
 
 ---
 
 ## Working on the documentation site
 
-The canonical docs app is **`index.html` at the repo root** (single-page, sections per component, tab system). The `docs/*.html` pages are **retired redirect stubs** that bounce to the SPA — there is no separate per-component catalog to keep in sync.
+The canonical docs app is **`index.html` at the repo root** (single-page, sections per component, tab system, plain HTML + vanilla JS — no build step, no framework). The `docs/*.html` pages are **retired redirect stubs** that bounce to the SPA — there is no separate per-component catalog to keep in sync.
 
 Structural references: **Material Design 3** and **Uber Base** — for documentation architecture, token structure, specs, behaviors and usage guidelines only. **Do not copy their visual style.** The DS must preserve Amalgama's identity: colors, typography, components, brand feel, tone and visual language.
 

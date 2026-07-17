@@ -1,0 +1,75 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Table
+   Tabla de datos con encabezados, filas hover y variante clickable.
+
+   Cuándo usar: datos tabulares; filas navegables con tr.clickable.
+   Cuándo no: layouts (usar grid); tableros de flujo (usar Kanban).
+   Reemplaza a: tablas legacy.
+
+   Dependencia: variables.css
+   Requiere: (ninguno)
+
+   Wrapper: envolvé la tabla en .table-scroll para que las tablas anchas hagan
+   scroll horizontal DENTRO de su propio contenedor en vez de estirar la página
+   o recortar contenido — el radio/borde vive en el wrapper (así las esquinas
+   siguen recortando el header), no en <table>.
+
+   Uso:
+   <div class="table-scroll">
+     <table class="data-table">
+       <thead>
+         <tr><th>Nombre</th><th>Estado</th><th>Fecha</th></tr>
+       </thead>
+       <tbody>
+         <tr class="clickable"><td>Vacante 1</td><td>Abierta</td><td>15 Mar</td></tr>
+       </tbody>
+     </table>
+   </div>
+═══════════════════════════════════════ */
+
+.table-scroll {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table thead {
+  background: var(--color-surface-variant);
+  border-bottom: 1px solid var(--border);
+}
+.data-table th {
+  padding: 10px 16px;
+  font-size: var(--font-size-overline);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  text-align: left;
+}
+.data-table td {
+  padding: 12px 16px;
+  font-size: var(--font-size-body-md);
+  color: var(--text-primary);
+  border-top: 1px solid var(--border);
+}
+.data-table tbody tr {
+  transition: background var(--duration-fast);
+}
+.data-table tbody tr:hover {
+  background: var(--color-surface-variant);
+}
+.data-table tbody tr.clickable {
+  cursor: pointer;
+}
+/* Las filas clickeables necesitan tabindex="0" para recibir foco de teclado */
+.data-table tbody tr.clickable:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}

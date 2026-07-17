@@ -1,0 +1,59 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Avatar
+   Círculo con iniciales o imagen que representa un usuario.
+
+   Cuándo usar: identificar a una persona (topbar, listas, cards de vacante/persona, asignados).
+   Cuándo no: para íconos genéricos de sistema (usar Icon Button) ni como decoración sin significado.
+   Reemplaza a: divs con gradientes hardcodeados / iniciales sin token — todo Avatar usa el fallback
+   tokenizado --color-primary-container / --color-on-primary-container, nunca hex.
+
+   Dependencia: variables.css (Color Roles)
+   Tamaños: .avatar-sm (28px) · .avatar-md (36px, default) · .avatar-lg (44px) · .avatar-xl (56px)
+
+   Uso:
+   <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>
+   <span class="avatar avatar-lg"><img class="avatar-image" src="…" alt="María González"></span>
+═══════════════════════════════════════ */
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-container);
+  color: var(--color-on-primary-container);
+  font-family: var(--font-body);
+  font-weight: 600;
+  user-select: none;
+}
+
+.avatar-sm { width: 28px; height: 28px; font-size: 11px; }
+.avatar-md { width: 36px; height: 36px; font-size: 13px; }
+.avatar-lg { width: 44px; height: 44px; font-size: 15px; }
+.avatar-xl { width: 56px; height: 56px; font-size: 18px; }
+
+.avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Grupo apilado — usado en listas de asignados */
+.avatar-group { display: flex; align-items: center; }
+.avatar-group .avatar {
+  margin-left: -8px;
+  box-shadow: 0 0 0 2px var(--color-surface);
+}
+.avatar-group .avatar:first-child { margin-left: 0; }

@@ -1,0 +1,140 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Navigation Menu
+   Fila horizontal de triggers de navegación (no acciones) que revelan un panel
+   de contenido rico (enlaces agrupados, no una lista simple de items como
+   Dropdown Menu/Menubar). Simplificación vs. Radix: sin animación de tamaño
+   de viewport entre paneles de distinto alto (el viewport se re-mide al
+   instante, sin easing de altura); hover-intent con un pequeño delay antes de
+   abrir/cerrar, igual que un navbar real.
+
+   Cuándo usar: navegación principal con sub-secciones agrupadas (mega-menu).
+   Cuándo no: lista de acciones → Dropdown Menu; barra de menú tipo desktop →
+   Menubar.
+   Reemplaza a: mega-menus custom con hover + position:absolute ad hoc.
+
+   El indicador deslizante reutiliza la misma técnica que Tabs (tabs.css):
+   una barra posicionada vía offsetLeft/offsetWidth del trigger activo.
+
+   Dependencia: variables.css
+
+   Uso:
+   <nav class="nav-menu">
+     <div class="nav-menu-list">
+       <button class="nav-menu-trigger">Productos</button>
+       <a class="nav-menu-trigger" href="/precios">Precios</a>
+       <span class="nav-menu-indicator"></span>
+     </div>
+     <div class="nav-menu-viewport">
+       <div class="nav-menu-content">…enlaces agrupados…</div>
+     </div>
+   </nav>
+═══════════════════════════════════════ */
+
+.nav-menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-menu-list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-body-sm);
+  font-weight: 500;
+  color: var(--color-on-surface);
+  text-decoration: none;
+  cursor: pointer;
+}
+.nav-menu-trigger:hover,
+.nav-menu-trigger[data-state="open"] {
+  background: var(--color-surface-variant);
+}
+.nav-menu-trigger:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+.nav-menu-trigger-icon {
+  width: 12px; height: 12px;
+  transition: transform var(--duration-fast) var(--ease-default);
+}
+.nav-menu-trigger[data-state="open"] .nav-menu-trigger-icon {
+  transform: rotate(180deg);
+}
+
+.nav-menu-indicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--color-secondary);
+  transition: transform var(--duration-normal) var(--ease-expressive, ease-out),
+              width var(--duration-normal) var(--ease-expressive, ease-out),
+              opacity var(--duration-fast) var(--ease-default);
+  pointer-events: none;
+}
+.nav-menu-indicator[data-visible="false"] { opacity: 0; }
+
+.nav-menu-viewport-wrap {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+}
+.nav-menu-viewport {
+  position: relative;
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  animation: navMenuIn var(--duration-normal) var(--ease-default);
+}
+@keyframes navMenuIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nav-menu-content {
+  padding: 16px;
+  min-width: 320px;
+  display: grid;
+  gap: 4px;
+}
+
+.nav-menu-link {
+  display: block;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--color-on-surface);
+  text-decoration: none;
+  font-size: var(--font-size-body-sm);
+}
+.nav-menu-link:hover,
+.nav-menu-link:focus-visible {
+  background: var(--color-surface-variant);
+  outline: none;
+}
+.nav-menu-link-title { font-weight: 600; display: block; }
+.nav-menu-link-desc {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-on-surface-variant);
+  font-size: var(--font-size-caption);
+}

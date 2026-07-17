@@ -364,6 +364,15 @@
   --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);
   --btn-elevation-hover: 0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16);
 
+  /* Nav/menu item interaction states — the "blue hover" unified across sidebar
+     nav and dropdown/context menus. Derived from --color-secondary-container so
+     they recalibrate automatically in dark mode with no separate override. */
+  --color-nav-hover:            color-mix(in srgb, var(--color-secondary-container) 45%, transparent);
+  --color-nav-hover-content:    var(--color-secondary);
+  --color-nav-press:            color-mix(in srgb, var(--color-secondary-container) 70%, transparent);
+  --color-nav-selected:         var(--color-secondary-container);
+  --color-nav-selected-content: var(--color-on-secondary-container);
+
   /* ─────────────────────────────────────
      Transitions
   ───────────────────────────────────── */

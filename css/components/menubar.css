@@ -1,0 +1,56 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Menubar
+   Fila horizontal de triggers de nivel superior (ej. "Archivo", "Editar"),
+   cada uno abre un panel de acciones — reutiliza `.dropdown-content`/
+   `.dropdown-item`/etc. de dropdown-menu.css para los paneles; este archivo
+   solo define la barra y sus triggers.
+
+   Comportamiento: una vez que un menú está abierto, pasar el mouse sobre otro
+   trigger cambia el menú abierto (sin necesidad de volver a hacer click) —
+   convención estándar de menubars de escritorio. Flechas ←/→ mueven el foco
+   entre triggers de nivel superior; ↑/↓ dentro de un panel abierto navegan
+   sus items (ver components/lib/use-flyout.ts).
+
+   Cuándo usar: barra de menú de aplicación tipo desktop, siempre visible.
+   Cuándo no: menú de acciones puntual sobre un botón → Dropdown Menu.
+   Reemplaza a: barras de menú custom.
+
+   Dependencia: variables.css, dropdown-menu.css (clases .dropdown-*)
+
+   Uso:
+   <div class="menubar">
+     <button class="menubar-trigger">Archivo</button>
+     <button class="menubar-trigger">Editar</button>
+   </div>
+   <div class="dropdown-content" role="menu" style="top:40px;left:8px">…</div>
+═══════════════════════════════════════ */
+
+.menubar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  background: var(--color-surface-container);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  width: fit-content;
+}
+
+.menubar-trigger {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-body-sm);
+  font-weight: 500;
+  color: var(--color-on-surface);
+  cursor: pointer;
+}
+.menubar-trigger:hover,
+.menubar-trigger[data-state="open"] {
+  background: var(--color-surface-variant);
+}
+.menubar-trigger:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
