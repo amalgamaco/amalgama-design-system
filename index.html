@@ -16428,6 +16428,7 @@ return &lt;LineChart data={data} /&gt;</code></pre>
             <tbody>
               <tr><td>Sin marcar</td><td>Contenedor transparente, borde de 2px</td><td><code>--color-outline</code></td></tr>
               <tr><td>Marcado / Indeterminado</td><td>Relleno sólido con ícono</td><td><code>--color-primary</code> + <code>--color-on-primary</code></td></tr>
+              <tr><td>Error / inválido</td><td>Borde rojo cuando <code>aria-invalid</code> (mismo token que Input/Select)</td><td><code>--color-error</code></td></tr>
               <tr><td>Focus visible</td><td>Anillo de foco de 2px + 4px</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
               <tr><td>Disabled</td><td>Opacidad 40% (<code>opacity-40</code>), no interactivo</td><td>—</td></tr>
             </tbody>
@@ -18093,6 +18094,7 @@ const [on, setOn] = useState(false)
             <tbody>
               <tr><td>Reposo / Hover</td><td>Sin relleno; hover con fondo sólido</td><td><code>--color-fg</code> · hover <code>--color-surface-variant</code></td></tr>
               <tr><td>Seleccionado</td><td>Relleno sólido + texto de contraste</td><td><code>--color-primary</code> + <code>--color-on-primary</code></td></tr>
+              <tr><td>Error / inválido</td><td>Borde rojo del track cuando <code>aria-invalid</code> (mismo token que Input/Select)</td><td><code>--color-error</code></td></tr>
               <tr><td>Hoy</td><td>Número en negrita y color de marca (sin relleno)</td><td><code>--color-primary</code></td></tr>
               <tr><td>Rango (intermedio)</td><td>Tira de contenedor entre inicio y fin</td><td><code>--color-primary-container</code> + <code>--color-on-primary-container</code></td></tr>
               <tr><td>Fuera de mes / Disabled</td><td>Opacidad reducida</td><td><code>--color-fg-subtle</code> (opacidad 40%) · disabled 30%</td></tr>
@@ -19300,6 +19302,7 @@ const [range, setRange] = useState&lt;{ from?: Date; to?: Date }&gt;({})
             <tbody>
               <tr><td>No seleccionado</td><td>Anillo vacío, borde de 2px</td><td><code>--color-outline</code></td></tr>
               <tr><td>Seleccionado</td><td>Borde + punto central relleno</td><td><code>--color-primary</code></td></tr>
+              <tr><td>Error / inválido</td><td>Borde rojo cuando <code>aria-invalid</code> (mismo token que Input/Select)</td><td><code>--color-error</code></td></tr>
               <tr><td>Focus visible</td><td>Anillo de foco de 2px + 4px</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
               <tr><td>Disabled</td><td>Opacidad 40% (<code>opacity-40</code>), no interactivo</td><td>—</td></tr>
             </tbody>
@@ -23558,7 +23561,7 @@ import { Bold } from &quot;lucide-react&quot;
       <section class="docs-section">
         <h2 class="docs-section-title">Principios</h2>
         <ul class="bd-overview-list">
-          <li><b>Sistema dual (MD3).</b> Easing <code>Standard</code> para efectos (color/opacidad/sombra); easing <code>Expressive</code>/overshoot solo para movimientos <em>espaciales</em> (el press/lift de un botón, el slide de un <code>Sheet</code>). Regla: nunca hacer overshoot de efectos.</li>
+          <li><b>Sistema dual (MD3).</b> Easing <code>Standard</code> para efectos (color/opacidad/sombra); easing <code>Expressive</code>/overshoot solo para movimientos <em>espaciales chicos</em> (el press/lift de un botón, el zoom-in de un <code>Dialog</code>). Los paneles <code>Sheet</code> usan <code>--ease-emphasized</code> (decelerate, <b>sin overshoot</b>) a <code>--duration-sheet</code> (500ms). Regla: nunca hacer overshoot de efectos ni de paneles grandes.</li>
           <li><b>Tokens de duración.</b> <code>--duration-fast</code> (micro-interacciones), <code>--duration-normal</code>, <code>--duration-medium</code> (entradas de overlays); easings <code>--ease-default/enter/exit/expressive*</code>.</li>
           <li><b>Entradas y salidas.</b> <code>Dialog</code> = fade del scrim + zoom del contenido; <code>Sheet</code> = slide; <code>Snackbar</code> = entrada breve. Consistente en toda la librería.</li>
           <li><b>Micro-interacciones.</b> Hover/press de <code>Button</code> (<code>-translate-y-px</code> + crecimiento de sombra en el elevado) — sutil, informativo.</li>

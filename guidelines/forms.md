@@ -68,7 +68,7 @@ When validation does fail, make the fix effortless.
 
 - **One Primary action per form.** The commit action is a single filled `Button variant="primary"` ("Crear vacante", "Guardar"). Never give a form two equal-weight filled buttons — introduce hierarchy (GOVERNANCE / CLAUDE: one Primary per context).
 - **Secondary actions step down.** Cancel/Volver is `variant="tertiary"` or `variant="text"`; a destructive action (Eliminar) is `variant="danger"` and is confirmed via `AlertDialog`.
-- **Consistent placement.** On a page form the actions live in the sticky `CreateFooter` (Cancelar left, primary right); in a `Dialog` they sit in the footer, primary on the right. Don't stretch a button full-width to fill the footer — buttons have intrinsic width and centered content.
+- **Consistent placement.** On a page form the actions live in the sticky `CreateFooter` (Cancelar left, primary right); in a **desktop `Dialog`** they sit in the footer right-aligned, primary on the right, intrinsic width. **Exception — narrow overlays:** in a `Sheet` (or a single-action mobile footer) the actions **stack full-width** — the shadcn convention for a narrow panel; there a centered full-width button reads correctly as an action. The anti-pattern is a full-width, *left-aligned* button in a **wide** footer/row, which reads as a form field.
 - **Don't gate the primary on nothing.** A disabled primary is only for the in-flight (`aria-busy`) state, not as a stand-in for validation feedback.
 
 ## Multi-step & unsaved work
@@ -115,7 +115,7 @@ Embassy's form components handle most of this, but you own the composition:
 - **Don't** put more than one Primary action in a form (one filled `Button`; alternatives are `tertiary`/`text`).
 - **Don't** fire an error on the first keystroke.
 - **Do** keep one Primary action; step secondary/destructive actions down to `tertiary`/`text`/`danger`.
-- **Don't** stretch a button full-width to fill a footer — it reads as a field, not an action.
+- **Don't** stretch a button full-width to fill a **wide** footer/row — it reads as a field, not an action. (A **narrow `Sheet`** or single-action mobile footer is the exception: there actions stack full-width — GOVERNANCE §20.)
 
 ## Checklist for a new screen
 
