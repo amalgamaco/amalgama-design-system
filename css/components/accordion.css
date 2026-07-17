@@ -49,9 +49,10 @@
 .accordion-trigger {
   display: flex;
   width: 100%;
-  align-items: center;
+  /* shadcn: items-start — el chevron queda arriba y el título puede tener 2 líneas */
+  align-items: flex-start;
   justify-content: space-between;
-  gap: var(--space-3);
+  gap: 16px; /* shadcn gap-4 */
   padding: 16px 0;
   background: transparent;
   border: none;
@@ -63,8 +64,9 @@
   color: var(--text-primary);
   transition: color var(--duration-fast) var(--ease-default);
 }
+/* shadcn: hover:underline — la interacción canónica es subrayado, no cambio de color */
 .accordion-trigger:hover {
-  color: var(--color-primary);
+  text-decoration: underline;
 }
 .accordion-trigger:focus-visible {
   outline: 2px solid var(--color-focus);
@@ -80,9 +82,10 @@
 }
 
 .accordion-chevron {
-  width: 18px;
-  height: 18px;
+  width: 16px;  /* shadcn size-4 */
+  height: 16px;
   flex-shrink: 0;
+  margin-top: 3px; /* shadcn translate-y-0.5 — alinea con la primera línea del título */
   color: var(--text-secondary);
   transition: transform var(--duration-normal) var(--ease-expressive);
 }
@@ -103,10 +106,18 @@
 .accordion-content-inner {
   min-height: 0;
   overflow: hidden;
-  padding-bottom: 16px;
   font-size: var(--font-size-body-md);
   color: var(--text-secondary);
   line-height: 1.6;
+}
+/* Bottom spacing as CLIPPABLE in-flow content (not padding): padding on the
+   overflow:hidden grid item is not clipped by min-height:0, so it would leave a
+   ~16px sliver of every closed panel visible. A zero-height-when-collapsed
+   spacer keeps the open spacing (shadcn pb-4) without the residual. */
+.accordion-content-inner::after {
+  content: "";
+  display: block;
+  height: 16px;
 }
 
 /* ═══ Variantes de estilo (solo clases — misma estructura y comportamiento) ═══ */
