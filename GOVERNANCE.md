@@ -1140,4 +1140,55 @@ pattern**, everywhere (Alert Dialog, Dialog, Sheet, confirmation flows):
 - The **confirm must be explicit** (Alert Dialog: no close-on-outside/Esc-to-confirm; Esc = Cancel).
 - Optionally the entry-point trigger is also `danger` (§20.3).
 
+## 21. shadcn parity — additions & intentional divergences (2026-07)
+
+A library-wide pass compared every Embassy component against canonical shadcn/ui and
+added the missing variants/sub-parts/states, Embassy tokens as the only visual layer.
+This section is the durable record of **what was added** and, more importantly, **which
+shadcn features Embassy deliberately does NOT mirror** (so they aren't "re-added" later
+as if they were gaps).
+
+### 21.1 Variants / sub-parts added (now at parity)
+
+- **Menu primitive** (`dropdown-menu.css`, shared by Dropdown/Context/Menubar): `CheckboxItem`
+  + `RadioItem` (indicator driven by `aria-checked`), `inset` (`data-inset`), `Group`.
+- **Card**: `.card-action` top-right header slot (grid). **Avatar**: status badge
+  (`.avatar-badge` online/busy/away/offline) + `.avatar-group-count` ("+N").
+- **Table**: `tfoot` + `caption`. **Toast**: `warning` type + title/description slot.
+- **Slider**: vertical orientation. **Switch**: `sm`. **Button**: `link` variant + `icon-xs`.
+- **Alert Dialog**: `sm` size + media/icon slot + centered header. **Popover**: Header/Title/
+  Description sub-parts. **Tabs**: filled/pill list + vertical orientation.
+- **Form controls**: element-level `[aria-invalid]` styling on input/select/textarea/OTP/toggle;
+  `:focus`→`:focus-visible`; textarea `field-sizing`. **Skeleton**: circle preset.
+- **Restored full behavior** (were simplified in the buildless revert): **Data Table** (row
+  selection + text filter + column-visibility + `aria-sort`, `initDataTable()`), **Calendar**
+  (dynamic renderer + month/year dropdown caption), **Carousel** (vertical), **Command**
+  (filter + keyboard nav + ⌘K `CommandDialog`), **Chart** (JS rich tooltip).
+
+### 21.2 Intentional divergences — DO NOT "fix"
+
+| shadcn feature | Embassy choice | Why |
+|---|---|---|
+| Badge generic variants (default/secondary/outline/ghost/link) | Semantic **status taxonomy** (`badge-open/active/closed/…`) | Badge = read-only status; interactive → Chip |
+| Pagination active = `outline` | Active = filled `secondary-container` | Matches the DS selection language (Chip/Nav/Tabs) |
+| Skeleton `animate-pulse` | Shimmer gradient sweep | Brand motion; richer, same intent |
+| Alert: 2 variants | 5 semantic variants (default/info/success/warning/error) | Reuses Badge container/on-container token pairs |
+| Select: composed Radix dropdown | Native `<select>` restyled | Parity dropdown behavior lives in **Combobox/Command** |
+| Toggle Group `spacing=0` (connected) | Spaced, independent toggles | Connected pill = **Segmented Button**'s job |
+| Hover Card (hover-triggered) | **Rich Tooltip** (click-triggered) | Consolidated; drops the hover-preview affordance (flagged) |
+| Menu submenus (`Sub`/`SubTrigger`/`SubContent`) | **Not built** | Buildless flyout has no portal/nested engine — flag, don't improvise |
+| Tooltip/Popover/Sheet/Dialog exit animations, collision-flip, portal | Simplified (documented per file) | Buildless accepted trade-offs |
+
+Also see §19 (Drawer→Sheet, Sidebar→app-shell, Resizable dropped — the other intentional
+non-additions). If a consumer genuinely needs one of the above, treat it as a **DS gap to
+raise with design**, not a bug to patch unilaterally.
+
+### 21.3 Implementation notes
+
+- `.dropdown-content[hidden]` needs an explicit `display:none` rule — the component's
+  `display:flex` overrides the UA `[hidden]`. Any JS-toggled flyout panel relies on this.
+- Restored behaviors are vanilla, idempotent initializers wired on load **and** on the SPA's
+  `ds:section-shown` event: `initDataTable`, `initCalendar`, `initCommand`, `initChartTooltips`
+  (+ `carouselScroll`). New demos should use the documented `data-*` hooks, not re-implement.
+
 Never rely on color alone — the label must name the consequence ("Eliminar vacante", not "OK").
