@@ -37,10 +37,11 @@ Embassy adopts MD3's two easing families, and the split is a hard rule:
 |---|---|---|
 | `--duration-fast` | 120ms | Micro-interactions: hover bg/border, icon swaps, badge fade, **all exits** on small elements |
 | `--duration-normal` | 200ms | Standard state changes: scrim fade, small panel open |
-| `--duration-medium` | 300ms | Larger surfaces entering: Dialog content zoom, Sheet panel slide |
+| `--duration-medium` | 300ms | Larger surfaces entering: Dialog content zoom |
 | `--duration-slow` | 450ms | Reserved for the largest surface transitions |
+| `--duration-sheet` | 500ms | Edge-anchored panels: **all `Sheet` sides** (right/left/bottom/top), symmetric open/close |
 
-**Smaller/faster, larger/slower.** A hover tint is `fast`; a Sheet entering is `medium`. **Exits are shorter than entrances** — getting out of the way should feel quicker than arriving (GOVERNANCE.md §11.1a).
+**Smaller/faster, larger/slower.** A hover tint is `fast`; a Dialog entering is `medium`; a `Sheet` sliding from an edge is `--duration-sheet` (500ms). **Exits are shorter than entrances** on small elements — but the `Sheet` is symmetric (same 500ms in and out, matching its emphasized curve). See GOVERNANCE.md §11.1a / §20.2.
 
 ## Easing tokens — when to use which
 
@@ -50,8 +51,9 @@ Embassy adopts MD3's two easing families, and the split is a hard rule:
 | `--ease-enter` | `cubic-bezier(0,0,0,1)` | Decelerating — element entering on an effect (scrim fade-in) |
 | `--ease-exit` | `cubic-bezier(.3,0,1,1)` | Accelerating — element leaving (fade-out, closing) |
 | `--ease-expressive` | `cubic-bezier(.34,1.56,.64,1)` | Spatial hover/press with overshoot (button lift) |
-| `--ease-expressive-enter` | `cubic-bezier(.175,.885,.32,1.4)` | Spatial element entering (Dialog zoom-in, Sheet slide-in) |
+| `--ease-expressive-enter` | `cubic-bezier(.175,.885,.32,1.4)` | Spatial element entering with overshoot (**Dialog zoom-in**, small zoom/rotate on menus) |
 | `--ease-expressive-exit` | `cubic-bezier(.3,0,.8,.15)` | Spatial element leaving |
+| `--ease-emphasized` | `cubic-bezier(.32,.72,0,1)` | Emphasized decelerate, **no overshoot** — the shared curve for **all `Sheet` sides** (a bounce reads as unnatural on a large sliding panel) |
 
 **Never hardcode a `cubic-bezier()` or a raw ms value** in component code — always a token (GOVERNANCE.md §13.3). No `ease-in-out`, no `duration-[150ms]`.
 
@@ -62,7 +64,7 @@ Embassy adopts MD3's two easing families, and the split is a hard rule:
 Overlays declare **both** `data-[state=open]` and `data-[state=closed]` animations — an entrance without a matching exit is a gap, not a style choice (GOVERNANCE.md §11.1a). The adopted patterns:
 
 - **Dialog** (`dialog.tsx`): scrim **fades** (`fade-in-0`, Standard `ease-enter`, `duration-normal`); content **zooms** (`zoom-in-95` + fade, Expressive `ease-expressive-enter`, `duration-medium`). The spatial zoom is the hero moment; the effect-only scrim never overshoots. Both exit faster on `ease-exit` / `duration-fast`.
-- **Sheet** (`sheet.tsx`): panel **slides** from its edge (`slide-in-from-{side}`, Expressive `ease-expressive-enter`, `duration-medium`); overlay fades on Standard easing. Exit slides back on `ease-exit` / `duration-normal`.
+- **Sheet** (`sheet.tsx`): panel **slides** from its edge (`slide-in-from-{side}`) on `--ease-emphasized` at `--duration-sheet` (500ms) — a smooth decelerate with **no overshoot**, **symmetric** open/close; the overlay fades on the same curve/duration. All four `side`s share this one motion system (only the axis differs). Do **not** use `ease-expressive-*` on a Sheet — the bounce reads as unnatural on a large panel (GOVERNANCE §20.2).
 - **Tooltip** (`tooltip.tsx`): quick `fade-in-0 zoom-in-95` on `duration-fast ease-enter`, with a directional `slide-in-from-*` toward the trigger; matching `data-[state=closed]` fade/zoom-out on `ease-exit`.
 - **Snackbar / Toast**: slides in on `duration-normal ease-default`; confirms feedback, then leaves.
 - **Skeleton / spinner**: continuous shimmer/rotation loops on `--ease-linear` — these are a **separate category, exempt** from the enter/exit tokens (GOVERNANCE.md §11.1a).
