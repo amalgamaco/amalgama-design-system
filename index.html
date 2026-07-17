@@ -24360,6 +24360,90 @@ function accToggle(btn) {
   if (panel) panel.setAttribute('data-state', expanded ? 'closed' : 'open');
 }
 
+// ── Data Table ── enhancer vanilla sobre un [data-datatable]: orden por columna
+// (aria-sort), filtro de texto, selección de filas (header + fila, con conteo),
+// visibilidad de columnas y paginación por slice. Paridad shadcn/TanStack sin
+// librería. Idempotente (flag __dtInit).
+function initDataTable(root) {
+  if (root.__dtInit) return; root.__dtInit = 1;
+  var tbody = root.querySelector('tbody');
+  var allRows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+  var ths = Array.prototype.slice.call(root.querySelector('thead tr').children);
+  var filterInput = root.querySelector('[data-dt-filter]');
+  var selectAll = root.querySelector('[data-dt-selectall]');
+  var countEl = root.querySelector('[data-dt-count]');
+  var pagEl = root.querySelector('[data-dt-pagination]');
+  var pageSize = parseInt(root.getAttribute('data-dt-pagesize') || '10', 10);
+  var state = { sortIdx: -1, dir: 1, filter: '', page: 0, selected: new Set() };
+  function rowCb(r) { return r.querySelector('[data-dt-row]'); }
+  function cellText(r, i) { return (r.children[i] ? r.children[i].textContent : '').trim(); }
+  function filtered() { return allRows.filter(function (r) { return !state.filter || r.textContent.toLowerCase().indexOf(state.filter.toLowerCase()) !== -1; }); }
+  function sorted(rows) {
+    if (state.sortIdx < 0) return rows;
+    var i = state.sortIdx, dir = state.dir;
+    return rows.slice().sort(function (a, b) {
+      var x = cellText(a, i), y = cellText(b, i), nx = parseFloat(x), ny = parseFloat(y);
+      var bothNum = !isNaN(nx) && !isNaN(ny) && /^\s*-?\d/.test(x) && /^\s*-?\d/.test(y);
+      return (bothNum ? (nx - ny) : x.localeCompare(y, 'es')) * dir;
+    });
+  }
+  function render() {
+    var rows = sorted(filtered()), total = rows.length;
+    var pages = Math.max(1, Math.ceil(total / pageSize));
+    if (state.page >= pages) state.page = pages - 1; if (state.page < 0) state.page = 0;
+    var pageSet = new Set(rows.slice(state.page * pageSize, state.page * pageSize + pageSize));
+    rows.forEach(function (r) { tbody.appendChild(r); });
+    allRows.forEach(function (r) {
+      if (pageSet.has(r)) r.removeAttribute('hidden'); else r.setAttribute('hidden', '');
+      var cb = rowCb(r); if (cb) cb.checked = state.selected.has(r);
+      r.classList.toggle('selected', state.selected.has(r));
+    });
+    ths.forEach(function (th, i) {
+      if (!th.querySelector('[data-dt-sort]')) return;
+      if (i === state.sortIdx) th.setAttribute('aria-sort', state.dir === 1 ? 'ascending' : 'descending');
+      else th.removeAttribute('aria-sort');
+    });
+    var empty = tbody.querySelector('.data-table-empty-row');
+    if (total === 0 && !empty) {
+      empty = document.createElement('tr'); empty.className = 'data-table-empty-row';
+      var td = document.createElement('td'); td.className = 'data-table-empty'; td.colSpan = ths.length; td.textContent = 'Sin resultados.';
+      empty.appendChild(td); tbody.appendChild(empty);
+    } else if (total > 0 && empty) empty.remove();
+    if (countEl) { var sel = filtered().filter(function (r) { return state.selected.has(r); }).length; countEl.textContent = sel + ' de ' + total + ' fila(s) seleccionada(s).'; }
+    if (selectAll) { var f = filtered(), sf = f.filter(function (r) { return state.selected.has(r); }).length; selectAll.checked = f.length > 0 && sf === f.length; selectAll.indeterminate = sf > 0 && sf < f.length; }
+    if (pagEl) {
+      if (pages <= 1) { pagEl.innerHTML = ''; return; }
+      var h = '<ul class="pagination-list"><li><button class="pagination-link pagination-prev"' + (state.page === 0 ? ' aria-disabled="true"' : '') + ' data-pg="prev" aria-label="Anterior">‹</button></li>';
+      for (var p = 0; p < pages; p++) h += '<li><button class="pagination-link' + (p === state.page ? ' is-active" aria-current="page"' : '"') + ' data-pg="' + p + '">' + (p + 1) + '</button></li>';
+      h += '<li><button class="pagination-link pagination-next"' + (state.page === pages - 1 ? ' aria-disabled="true"' : '') + ' data-pg="next" aria-label="Siguiente">›</button></li></ul>';
+      pagEl.innerHTML = h;
+    }
+  }
+  ths.forEach(function (th, i) { var b = th.querySelector('[data-dt-sort]'); if (b) b.addEventListener('click', function () { if (state.sortIdx === i) state.dir = -state.dir; else { state.sortIdx = i; state.dir = 1; } render(); }); });
+  if (filterInput) filterInput.addEventListener('input', function () { state.filter = filterInput.value; state.page = 0; render(); });
+  if (selectAll) selectAll.addEventListener('change', function () { filtered().forEach(function (r) { if (selectAll.checked) state.selected.add(r); else state.selected.delete(r); }); render(); });
+  allRows.forEach(function (r) { var cb = rowCb(r); if (cb) cb.addEventListener('change', function () { if (cb.checked) state.selected.add(r); else state.selected.delete(r); render(); }); });
+  if (pagEl) pagEl.addEventListener('click', function (e) { var b = e.target.closest('[data-pg]'); if (!b) return; var v = b.getAttribute('data-pg'); if (v === 'prev') state.page--; else if (v === 'next') state.page++; else state.page = parseInt(v, 10); render(); });
+  var colMenu = root.querySelector('[data-dt-colmenu]'), colBtn = root.querySelector('[data-dt-colmenu-btn]');
+  if (colBtn && colMenu) {
+    colBtn.addEventListener('click', function (e) { e.stopPropagation(); colMenu.hidden = !colMenu.hidden; });
+    document.addEventListener('click', function (e) { if (!colMenu.hidden && !colMenu.contains(e.target) && e.target !== colBtn) colMenu.hidden = true; });
+    Array.prototype.forEach.call(colMenu.querySelectorAll('[data-dt-col]'), function (item) {
+      item.addEventListener('click', function () {
+        var idx = parseInt(item.getAttribute('data-dt-col'), 10), on = item.getAttribute('aria-checked') === 'true';
+        item.setAttribute('aria-checked', String(!on));
+        if (ths[idx]) ths[idx].toggleAttribute('data-col-hidden', on);
+        allRows.forEach(function (r) { if (r.children[idx]) r.children[idx].toggleAttribute('data-col-hidden', on); });
+      });
+    });
+  }
+  render();
+}
+function initAllDataTables() { Array.prototype.forEach.call(document.querySelectorAll('[data-datatable]'), initDataTable); }
+if (document.readyState !== 'loading') initAllDataTables();
+else document.addEventListener('DOMContentLoaded', initAllDataTables);
+window.addEventListener('ds:section-shown', initAllDataTables);
+
 // ── Collapsible trigger toggle ──
 function collapsibleToggle(btn) {
   var expanded = btn.getAttribute('aria-expanded') === 'true';

@@ -8,11 +8,14 @@
    Cuándo no: una tabla estática de layout (usar Table directamente).
    Reemplaza a: tablas con lógica de sort/paginado cableada a mano.
 
-   Versión simplificada (revert a plain CSS/vanilla JS): sort en memoria
-   (array.sort) + paginación por slice. Sin resize/pin/drag de columnas,
-   sin filtros facetados, sin virtualización — fuera de alcance a propósito.
+   Paridad shadcn/TanStack (features de alto nivel, sin librería): orden por
+   columna (con aria-sort), filtro de texto, selección de filas (checkbox de
+   header + por fila, con conteo "N de M"), visibilidad de columnas y paginación
+   por slice — todo vanilla vía initDataTable(). Fuera de alcance a propósito:
+   resize/pin/drag de columnas, filtros facetados, virtualización de filas.
 
-   Dependencia: variables.css, table.css, pagination.css, button.css
+   Dependencia: variables.css, table.css, pagination.css, button.css,
+                checkbox.css (selección), dropdown-menu.css (visibilidad de col.)
 
    Uso:
    <DataTable columns={[{ key:"name", header:"Nombre", sortable:true }]} data={rows} />
@@ -49,6 +52,37 @@
   opacity: 1;
 }
 
+/* aria-sort en el th refleja la dirección en el caret (paridad shadcn/TanStack). */
+.data-table th[aria-sort="ascending"] .data-table-sort-icon,
+.data-table th[aria-sort="descending"] .data-table-sort-icon { opacity: 1; }
+.data-table th[aria-sort="descending"] .data-table-sort-icon { transform: rotate(180deg); }
+
+/* ── Toolbar (filtro + visibilidad de columnas) ── par shadcn DataTableToolbar:
+   filtro a la izquierda, menú de columnas a la derecha. */
+.data-table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.data-table-filter { max-width: 280px; flex: 1; min-width: 180px; }
+
+/* ── Columna de selección ── checkbox nativo en th/td (par shadcn row selection);
+   la fila seleccionada usa tr.selected (definido en table.css). */
+.data-table th.data-table-select,
+.data-table td.data-table-select {
+  width: 1%;
+  white-space: nowrap;
+}
+.data-table .data-table-select .checkbox { vertical-align: middle; }
+
+/* Fila oculta por filtro o fuera de la página actual. */
+.data-table tbody tr[hidden] { display: none; }
+/* Celda de columna oculta por el menú de visibilidad. */
+.data-table [data-col-hidden] { display: none; }
+
 .data-table-footer {
   display: flex;
   align-items: center;
@@ -60,4 +94,11 @@
 .data-table-count {
   font-size: var(--font-size-caption);
   color: var(--text-muted);
+}
+/* Estado vacío cuando el filtro no deja filas visibles. */
+.data-table-empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--font-size-body-sm);
 }

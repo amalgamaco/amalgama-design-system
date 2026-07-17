@@ -24,6 +24,11 @@
    </div>
 ═══════════════════════════════════════ */
 
+/* El display:flex de .dropdown-content pisa el [hidden] del UA stylesheet; este
+   selector combinado (más específico) restaura hidden para poder alternar el
+   panel con el atributo hidden desde JS. */
+.dropdown-content[hidden] { display: none; }
+
 .dropdown-content {
   position: fixed;
   z-index: 100;
