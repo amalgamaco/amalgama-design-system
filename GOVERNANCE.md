@@ -1183,6 +1183,23 @@ Also see §19 (Drawer→Sheet, Sidebar→app-shell, Resizable dropped — the ot
 non-additions). If a consumer genuinely needs one of the above, treat it as a **DS gap to
 raise with design**, not a bug to patch unilaterally.
 
+### 21.3b Round-2 audit additions (2026-07)
+
+A second full-library audit closed the remaining real gaps (everything else was
+already at parity or a documented divergence):
+
+- **Calendar range mode** — was advertised but non-functional; now a real two-date
+  range (`data-cal-mode="range"`, start/middle/end highlighting, "X — Y" trigger).
+- **Combobox** — was CSS-only; now wired (`initCombobox`: open/filter/select/check/close).
+- **Carousel** — Prev/Next disable at the scroll extremes + keyboard arrows + region role.
+- **Accordion** — roving Arrow/Home/End trigger focus (par Radix).
+- **List** — canonical two-part focus + leading/trailing/selected/disabled/divider states.
+- **Tooltip** arrow · **Navigation Menu** active-link · **Toast** loading spinner ·
+  **Input** `type=file` · **Button** error-tinted destructive focus ring · **Avatar**
+  badge icon slot · **Divider** semantic-`<hr>` guidance.
+- Domain-card (Person/Vacancy/Kanban) usage snippets marked focusable; Stat Card
+  snippet uses the modifier class, not an inline style.
+
 ### 21.3 Implementation notes
 
 - `.dropdown-content[hidden]` needs an explicit `display:none` rule — the component's
