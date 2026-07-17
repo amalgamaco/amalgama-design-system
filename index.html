@@ -22505,8 +22505,8 @@ import { Button } from &quot;./components/ui/button&quot;
           </ul>
           <div class="bd-family-wrap"><div class="accordion" style="width:100%;max-width:28rem">
               <div class="accordion-item">
-                <h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-ov-1" onclick="accToggle(this)">Como aplico el Design System?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3>
-                <div class="accordion-content" data-state="closed" id="acc-ov-1" role="region"><div class="accordion-content-inner">Copia el archivo <code>css/components/accordion.css</code> (o el barrel <code>css/components.css</code>) — resuelve solo a tokens Embassy, sin build ni dependencias.</div></div>
+                <h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-ov-1" onclick="accToggle(this)">Como aplico el Design System?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3>
+                <div class="accordion-content" data-state="open" id="acc-ov-1" role="region"><div class="accordion-content-inner">Copia el archivo <code>css/components/accordion.css</code> (o el barrel <code>css/components.css</code>) — resuelve solo a tokens Embassy, sin build ni dependencias.</div></div>
               </div>
               <div class="accordion-item">
                 <h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-ov-2" onclick="accToggle(this)">Funciona en dark mode?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3>
@@ -22517,9 +22517,24 @@ import { Button } from &quot;./components/ui/button&quot;
                 <div class="accordion-content" data-state="closed" id="acc-ov-3" role="region"><div class="accordion-content-inner">Cada trigger controla su panel via <code>aria-expanded</code>/<code>aria-controls</code>, con navegacion por teclado nativa del boton.</div></div>
               </div>
             </div></div>
-
-          <h2 class="docs-section-title" style="margin-top:36px">Variantes</h2>
-          <p class="bd-lead" style="margin-top:8px">Reproducen 1:1 los ejemplos oficiales de shadcn — misma estructura, espaciado y comportamiento. Sólo cambian una prop (<code>data-single</code>, <code>disabled</code>) o la composición (<code>.accordion-bordered</code>, wrap en <code>.card</code>); el theming es 100% tokens Embassy.</p>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Anatomía</h2>
+          <table class="ds-table">
+            <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
+            <tbody>
+              <tr><td><code>.accordion-item</code></td><td>Borde inferior 1px (<code>--border</code>); el último ítem sin borde</td></tr>
+              <tr><td><code>.accordion-trigger</code></td><td>Fila <code>flex</code> space-between, <code>align-items:flex-start</code> (shadcn <code>items-start</code>), <code>gap:16px</code>, <code>padding:16px 0</code>, <code>font-size-body-md</code> 500; hover = subrayado</td></tr>
+              <tr><td><code>.accordion-chevron</code></td><td>Ícono 16px (shadcn <code>size-4</code>), <code>margin-top:3px</code>; rota 180° al abrir</td></tr>
+              <tr><td><code>.accordion-content</code></td><td>Animación por altura con <code>grid-template-rows 0fr → 1fr</code> (CSS puro, sin medir por JS)</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Configuraciones</h2>
+          <p class="bd-lead" style="margin-top:8px">Cinco configuraciones soportadas, reproduciendo 1:1 los ejemplos oficiales de shadcn — misma estructura, espaciado y comportamiento. Sólo cambian una prop (<code>data-single</code>, <code>disabled</code>) o la composición (<code>.accordion-bordered</code>, wrap en <code>.card</code>); el theming es 100% tokens Embassy.</p>
 
           <h3 class="docs-subhead" style="margin-top:24px;font:700 15px var(--font-heading);color:var(--text-primary)">Basic</h3>
           <p class="ds-p" style="margin:4px 0 10px">Muestra <b>una sección a la vez</b> (<code>data-single</code>); el primer ítem abre por defecto.</p>
@@ -22563,19 +22578,6 @@ import { Button } from &quot;./components/ui/button&quot;
               <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-c3" onclick="accToggle(this)">¿Cómo cancelo mi suscripción?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-c3" role="region"><div class="accordion-content-inner">Desde Configuración → Facturación → Cancelar; mantenés el acceso hasta el fin del ciclo pago.</div></div></div>
             </div></div>
           </div></div>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="specs">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Anatomía</h2>
-          <table class="ds-table">
-            <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
-            <tbody>
-              <tr><td><code>.accordion-item</code></td><td>Borde inferior 1px (<code>--border</code>); el último ítem sin borde</td></tr>
-              <tr><td><code>.accordion-trigger</code></td><td>Fila <code>flex</code> space-between, <code>padding:16px 0</code>, <code>font-size-body-md</code> 500; chevron 18px</td></tr>
-              <tr><td><code>.accordion-content</code></td><td>Animación por altura con <code>grid-template-rows 0fr → 1fr</code> (CSS puro, sin medir por JS)</td></tr>
-            </tbody>
-          </table>
         </section>
         <section class="docs-section">
           <h2 class="docs-section-title">Variantes y API</h2>
