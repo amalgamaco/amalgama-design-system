@@ -3,8 +3,9 @@
    Gráficos de línea, barra y torta para dashboards y analytics.
    Implementación simplificada: SVG a mano (línea/barra) + conic-gradient
    CSS (torta) — sin librería de charting. Cubre los casos comunes de un
-   sitio de documentación; no tiene brush/zoom ni tooltips posicionados
-   por JS (usa <title> nativo del navegador como tooltip de valor).
+   sitio de documentación; no tiene brush/zoom. El tooltip es rico y
+   posicionado por JS (indicador de color + etiqueta + valor, initChartTooltips)
+   sobre los puntos/barras; el <title> nativo queda como fallback accesible.
 
    Cuándo usar: series temporales o categóricas en dashboards y analytics
    (línea, barra, torta).
@@ -122,3 +123,30 @@
   align-items: center;
   gap: 12px;
 }
+
+/* ── Rich tooltip (posicionado por JS) ── par shadcn ChartTooltipContent:
+   indicador de color + etiqueta + valor, sobre superficie inversa. Lo posiciona
+   initChartTooltips() al hacer hover en un .chart-dot / .chart-bar. */
+.chart-tooltip {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 8px));
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--color-inverse-surface);
+  color: var(--color-inverse-on-surface);
+  box-shadow: var(--shadow-md);
+  font-size: var(--font-size-caption);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-default);
+}
+.chart-tooltip.is-visible { opacity: 1; }
+.chart-tooltip-row { display: flex; align-items: center; gap: 8px; }
+.chart-tooltip-indicator { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.chart-tooltip-label { color: color-mix(in srgb, var(--color-inverse-on-surface) 68%, transparent); }
+.chart-tooltip-value { margin-left: auto; font-family: var(--font-mono); font-weight: 600; }
+/* Punto resaltado en hover para un objetivo más visible. */
+.chart-dot { transition: r var(--duration-fast) var(--ease-default); }
+.chart-dot:hover { r: 5.5; }

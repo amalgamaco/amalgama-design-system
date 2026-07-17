@@ -26348,6 +26348,75 @@ if (document.readyState !== 'loading') initAllCalendars();
 else document.addEventListener('DOMContentLoaded', initAllCalendars);
 window.addEventListener('ds:section-shown', initAllCalendars);
 
+// ── Command ── filtro por substring + navegación por teclado (↑↓, Enter) sobre
+// un .command; oculta grupos vacíos y muestra .command-empty. Base del Command
+// Dialog (⌘K). Paridad shadcn/cmdk (substring, no fuzzy — documentado).
+function initCommand(cmd) {
+  if (cmd.__cmdInit) return; cmd.__cmdInit = 1;
+  var input = cmd.querySelector('.command-input');
+  var empty = cmd.querySelector('.command-empty');
+  function items() { return Array.prototype.slice.call(cmd.querySelectorAll('.command-item')); }
+  function visible() { return items().filter(function (i) { return !i.hidden && i.getAttribute('aria-disabled') !== 'true'; }); }
+  function setActive(it) { items().forEach(function (i) { i.removeAttribute('data-active'); }); if (it) { it.setAttribute('data-active', 'true'); it.scrollIntoView({ block: 'nearest' }); } }
+  function filter() {
+    var q = ((input && input.value) || '').toLowerCase().trim(), any = false;
+    items().forEach(function (it) { var m = !q || it.textContent.toLowerCase().indexOf(q) !== -1; it.hidden = !m; if (m) any = true; });
+    Array.prototype.forEach.call(cmd.querySelectorAll('.command-group'), function (g) { g.hidden = g.querySelectorAll('.command-item:not([hidden])').length === 0; });
+    if (empty) empty.hidden = any;
+    setActive(visible()[0]);
+  }
+  function move(dir) { var v = visible(); if (!v.length) return; var idx = v.findIndex(function (i) { return i.getAttribute('data-active') === 'true'; }); idx = (idx + dir + v.length) % v.length; setActive(v[idx]); }
+  if (input) {
+    input.addEventListener('input', filter);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+      else if (e.key === 'Enter') { e.preventDefault(); var a = cmd.querySelector('.command-item[data-active="true"]:not([hidden])'); if (a) a.click(); }
+    });
+  }
+  items().forEach(function (it) { it.addEventListener('mousemove', function () { setActive(it); }); });
+  filter();
+}
+function openCommandDialog(id) { var d = document.getElementById(id); if (!d) return; d.hidden = false; var inp = d.querySelector('.command-input'); if (inp) { inp.value = ''; inp.dispatchEvent(new Event('input')); setTimeout(function () { inp.focus(); }, 0); } }
+function closeCommandDialog(d) { d.hidden = true; }
+document.addEventListener('keydown', function (e) {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { var d = document.querySelector('.command-dialog[data-cmdk]'); if (d) { e.preventDefault(); if (d.hidden) openCommandDialog(d.id); else closeCommandDialog(d); } }
+  else if (e.key === 'Escape') { Array.prototype.forEach.call(document.querySelectorAll('.command-dialog:not([hidden])'), closeCommandDialog); }
+});
+document.addEventListener('click', function (e) { Array.prototype.forEach.call(document.querySelectorAll('.command-dialog:not([hidden])'), function (d) { if (e.target === d) closeCommandDialog(d); }); });
+function initAllCommands() { Array.prototype.forEach.call(document.querySelectorAll('.command'), initCommand); }
+if (document.readyState !== 'loading') initAllCommands();
+else document.addEventListener('DOMContentLoaded', initAllCommands);
+window.addEventListener('ds:section-shown', initAllCommands);
+
+// ── Chart rich tooltip ── indicador de color + etiqueta + valor, posicionado
+// por JS sobre .chart-dot/.chart-bar (lee el <title> del elemento y su color).
+// Par shadcn ChartTooltipContent; el <title> nativo queda como fallback a11y.
+function initChartTooltips(container) {
+  if (container.__ctInit) return; container.__ctInit = 1;
+  var svg = container.querySelector('.chart-svg'); if (!svg) return;
+  var tip = document.createElement('div'); tip.className = 'chart-tooltip'; container.appendChild(tip);
+  function show(el) {
+    var t = el.querySelector('title'); if (!t || !t.textContent.trim()) return;
+    var parts = t.textContent.split(':'), label = parts[0].trim(), value = parts.slice(1).join(':').trim();
+    var color = el.getAttribute('fill') || el.getAttribute('stroke') || 'currentColor';
+    tip.innerHTML = '<div class="chart-tooltip-row"><span class="chart-tooltip-indicator" style="background:' + color + '"></span><span class="chart-tooltip-label">' + label + '</span><span class="chart-tooltip-value">' + value + '</span></div>';
+    var cr = container.getBoundingClientRect(), er = el.getBoundingClientRect();
+    tip.style.left = (er.left + er.width / 2 - cr.left) + 'px';
+    tip.style.top = (er.top - cr.top) + 'px';
+    tip.classList.add('is-visible');
+  }
+  Array.prototype.forEach.call(svg.querySelectorAll('.chart-dot, .chart-bar'), function (el) {
+    el.style.cursor = 'pointer';
+    el.addEventListener('mouseenter', function () { show(el); });
+    el.addEventListener('mouseleave', function () { tip.classList.remove('is-visible'); });
+  });
+}
+function initAllCharts() { Array.prototype.forEach.call(document.querySelectorAll('.chart-container'), initChartTooltips); }
+if (document.readyState !== 'loading') initAllCharts();
+else document.addEventListener('DOMContentLoaded', initAllCharts);
+window.addEventListener('ds:section-shown', initAllCharts);
+
 // ── Carousel — native scroll-snap, Prev/Next scroll by one item's width ──
 function carouselScroll(btn, dir) {
   var carousel = btn.closest('.carousel');
