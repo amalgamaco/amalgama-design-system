@@ -24358,6 +24358,27 @@ function accToggle(btn) {
   if (panel) panel.setAttribute('data-state', expanded ? 'closed' : 'open');
 }
 
+// ── Accordion roving keys ── Arrow Up/Down + Home/End mueven el foco entre
+// triggers (par Radix Accordion). Enter/Espacio ya los maneja el <button>.
+function initAccordionKeys(acc) {
+  if (acc.__accKeys) return; acc.__accKeys = 1;
+  acc.addEventListener('keydown', function (e) {
+    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].indexOf(e.key) === -1) return;
+    var triggers = Array.prototype.slice.call(acc.querySelectorAll('.accordion-trigger:not(:disabled)'));
+    var i = triggers.indexOf(document.activeElement);
+    if (i === -1) return;
+    e.preventDefault();
+    var n = e.key === 'ArrowDown' ? (i + 1) % triggers.length
+      : e.key === 'ArrowUp' ? (i - 1 + triggers.length) % triggers.length
+      : e.key === 'Home' ? 0 : triggers.length - 1;
+    triggers[n].focus();
+  });
+}
+function initAllAccordions() { Array.prototype.forEach.call(document.querySelectorAll('.accordion'), initAccordionKeys); }
+if (document.readyState !== 'loading') initAllAccordions();
+else document.addEventListener('DOMContentLoaded', initAllAccordions);
+window.addEventListener('ds:section-shown', initAllAccordions);
+
 // ── Data Table ── enhancer vanilla sobre un [data-datatable]: orden por columna
 // (aria-sort), filtro de texto, selección de filas (header + fila, con conteo),
 // visibilidad de columnas y paginación por slice. Paridad shadcn/TanStack sin
@@ -26441,8 +26462,7 @@ else document.addEventListener('DOMContentLoaded', initAllCharts);
 window.addEventListener('ds:section-shown', initAllCharts);
 
 // ── Carousel — native scroll-snap, Prev/Next scroll by one item's width ──
-function carouselScroll(btn, dir) {
-  var carousel = btn.closest('.carousel');
+function carouselScrollEl(carousel, dir) {
   var content = carousel && carousel.querySelector('.carousel-content');
   if (!content) return;
   var item = content.querySelector('.carousel-item');
@@ -26454,6 +26474,35 @@ function carouselScroll(btn, dir) {
     content.scrollBy({ left: dir * step, behavior: 'smooth' });
   }
 }
+function carouselScroll(btn, dir) { carouselScrollEl(btn.closest('.carousel'), dir); }
+// Disable Prev/Next at the scroll extremes (par shadcn canScrollPrev/Next) — the
+// disabled CSS existed but nothing drove it.
+function carouselUpdate(carousel) {
+  var content = carousel.querySelector('.carousel-content'); if (!content) return;
+  var vertical = carousel.classList.contains('carousel-vertical');
+  var pos = vertical ? content.scrollTop : content.scrollLeft;
+  var max = vertical ? (content.scrollHeight - content.clientHeight) : (content.scrollWidth - content.clientWidth);
+  var prev = carousel.querySelector('.carousel-btn-prev'), next = carousel.querySelector('.carousel-btn-next');
+  if (prev) prev.disabled = pos <= 1;
+  if (next) next.disabled = pos >= max - 1;
+}
+function initCarousel(carousel) {
+  if (carousel.__carInit) return; carousel.__carInit = 1;
+  var content = carousel.querySelector('.carousel-content'); if (!content) return;
+  if (!carousel.hasAttribute('role')) { carousel.setAttribute('role', 'region'); carousel.setAttribute('aria-roledescription', 'carousel'); }
+  if (!carousel.hasAttribute('tabindex')) carousel.tabIndex = 0;
+  content.addEventListener('scroll', function () { carouselUpdate(carousel); });
+  carousel.addEventListener('keydown', function (e) {
+    var vertical = carousel.classList.contains('carousel-vertical');
+    if ((vertical && e.key === 'ArrowUp') || (!vertical && e.key === 'ArrowLeft')) { e.preventDefault(); carouselScrollEl(carousel, -1); }
+    else if ((vertical && e.key === 'ArrowDown') || (!vertical && e.key === 'ArrowRight')) { e.preventDefault(); carouselScrollEl(carousel, 1); }
+  });
+  carouselUpdate(carousel);
+}
+function initAllCarousels() { Array.prototype.forEach.call(document.querySelectorAll('.carousel'), initCarousel); }
+if (document.readyState !== 'loading') initAllCarousels();
+else document.addEventListener('DOMContentLoaded', initAllCarousels);
+window.addEventListener('ds:section-shown', initAllCarousels);
 </script>
 </body>
 </html>
