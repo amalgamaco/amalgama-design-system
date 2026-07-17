@@ -41,6 +41,7 @@
 .btn-secondary,
 .btn-tertiary,
 .btn-text,
+.btn-link,
 .btn-ghost,
 .btn-next {
   position: relative;
@@ -66,6 +67,7 @@
 .btn-secondary:focus-visible,
 .btn-tertiary:focus-visible,
 .btn-text:focus-visible,
+.btn-link:focus-visible,
 .btn-ghost:focus-visible,
 .btn-next:focus-visible,
 .icon-btn:focus-visible {
@@ -192,6 +194,27 @@
 }
 
 /* ─────────────────────────────────────
+   Link · texto subrayado en hover, sin contenedor ni bloque de fondo
+   (par shadcn variant="link"). Distinto de .btn-text (que pinta un bloque de
+   fondo en hover): el Link es un enlace de acción inline.
+───────────────────────────────────── */
+.btn-link {
+  background: transparent;
+  color: var(--color-primary);
+  padding: 8px 4px;
+  font-weight: 500;
+  text-underline-offset: 4px;
+}
+.btn-link:hover { text-decoration: underline; }
+.btn-link:active:not(:disabled) { color: var(--color-primary-hover); }
+.btn-link:disabled {
+  background: transparent;
+  color: var(--color-on-disabled);
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+/* ─────────────────────────────────────
    Tamaños (aplica a cualquier variante)
    XS  → 24px min-height · dense lists, tags
    SM  → 32px min-height · compact toolbars (default small)
@@ -251,6 +274,7 @@
   color: var(--color-on-disabled);
   cursor: not-allowed;
 }
+.icon-btn.btn-xs { width: 24px; height: 24px; border-radius: var(--radius-sm); }
 .icon-btn.btn-sm { width: 30px; height: 30px; border-radius: var(--radius-sm); }
 .icon-btn.btn-lg { width: 44px; height: 44px; border-radius: var(--radius-md); }
 .icon-btn.btn-xl { width: 52px; height: 52px; border-radius: var(--radius-lg); }

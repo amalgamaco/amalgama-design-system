@@ -73,11 +73,27 @@
   transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
   appearance: none;
 }
-.field-input:focus {
+.field-input:focus-visible {
   border-color: var(--interactive);
   box-shadow: 0 0 0 3px var(--color-focus-ring);
 }
 .field-input::placeholder { color: var(--text-muted); }
+
+/* ── Error a nivel de elemento (par shadcn aria-invalid) ──
+   Además del wrapper .field-group.is-error, un control con aria-invalid="true"
+   se pinta en rojo por sí solo — robusto cuando no hay wrapper y consistente
+   con input.tsx (que setea aria-invalid automáticamente). */
+.field-input[aria-invalid="true"],
+.select-wrapper select[aria-invalid="true"],
+.field-textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+.field-input[aria-invalid="true"]:focus-visible,
+.select-wrapper select[aria-invalid="true"]:focus-visible,
+.field-textarea[aria-invalid="true"]:focus-visible {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px var(--color-error-ring);
+}
 
 input:disabled, select:disabled, textarea:disabled {
   background: var(--color-surface-variant);
@@ -101,7 +117,7 @@ input:disabled, select:disabled, textarea:disabled {
   cursor: pointer;
   transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
 }
-.select-wrapper select:focus {
+.select-wrapper select:focus-visible {
   border-color: var(--interactive);
   box-shadow: 0 0 0 3px var(--color-focus-ring);
 }
@@ -120,6 +136,9 @@ input:disabled, select:disabled, textarea:disabled {
   resize: vertical;
   min-height: 80px;
   line-height: 1.5;
+  /* Auto-crece con el contenido donde el navegador lo soporte (par shadcn
+     field-sizing:content); progresivo — se ignora sin soporte, queda el resize. */
+  field-sizing: content;
 }
 
 .number-input-wrapper {
@@ -258,7 +277,7 @@ input:disabled, select:disabled, textarea:disabled {
 .field-group.is-error .field-input:hover:not(:focus):not(:disabled) {
   border-color: var(--color-error); /* el error sobreescribe el hover */
 }
-.field-group.is-error .field-input:focus {
+.field-group.is-error .field-input:focus-visible {
   border-color: var(--color-error);
   box-shadow: 0 0 0 3px var(--color-error-ring);
 }

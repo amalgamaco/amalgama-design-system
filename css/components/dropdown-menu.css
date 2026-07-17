@@ -105,3 +105,44 @@
   color: var(--color-on-surface-variant);
   letter-spacing: .02em;
 }
+
+/* ── Group (role="group") ── agrupa ítems relacionados; par shadcn DropdownMenuGroup. */
+.dropdown-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* ── Inset ── ítems/labels sin ícono líder se alinean con los que sí tienen uno
+   (shadcn data-inset → pl-8 = 32px = 10px padding + 16px slot + 6px gap). */
+.dropdown-item[data-inset="true"],
+.dropdown-label[data-inset="true"] {
+  padding-left: 32px;
+}
+
+/* ── Checkbox / Radio items ──
+   role="menuitemcheckbox" | role="menuitemradio" + aria-checked manejan el
+   indicador líder: check (SVG en el markup) para checkbox, punto CSS para radio.
+   El slot .dropdown-item-indicator queda siempre reservado (16px) para que las
+   etiquetas se alineen estén marcadas o no — igual que el pl-8 de shadcn. */
+.dropdown-checkbox-item .dropdown-item-indicator > svg,
+.dropdown-radio-item .dropdown-item-indicator::before {
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-default);
+}
+.dropdown-radio-item .dropdown-item-indicator::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.dropdown-checkbox-item[aria-checked="true"] .dropdown-item-indicator > svg,
+.dropdown-radio-item[aria-checked="true"] .dropdown-item-indicator::before {
+  opacity: 1;
+}
+
+/* ── Submenús (Sub/SubTrigger/SubContent) ──
+   NO soportados en la arquitectura buildless (use-flyout no hace portal/anidado).
+   Decisión de diseño documentada — para ramificar, usar acciones planas o un
+   segundo Dropdown. No improvisar un motor de submenús. */

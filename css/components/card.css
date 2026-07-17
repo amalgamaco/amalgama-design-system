@@ -48,7 +48,24 @@
 }
 
 /* ── Sub-partes (Basic Card) ── */
-.card-header { margin-bottom: 12px; }
+/* Header como grid (par shadcn CardHeader): título + descripción apilados en la
+   columna izquierda; si hay una .card-action, reserva una columna derecha para
+   ella (col-start-2, abarca ambas filas), p.ej. un icon-btn "⋮" o un Switch. */
+.card-header {
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+.card-header:has(.card-action) {
+  grid-template-columns: 1fr auto;
+}
+.card-action {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  justify-self: end;
+}
 .card-title {
   font-family: var(--font-heading);
   font-size: var(--font-size-heading-xs);

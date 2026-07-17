@@ -21,7 +21,8 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  overflow: hidden;
+  /* Sin overflow:hidden en el contenedor — recortaría el .avatar-badge a media
+     luna. La imagen se recorta sola (border-radius:inherit). */
   border-radius: var(--radius-full);
   background: var(--color-primary-container);
   color: var(--color-on-primary-container);
@@ -48,7 +49,28 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: inherit; /* recorta la imagen al círculo sin overflow en el padre */
 }
+
+/* ── Status badge ── punto de estado anclado abajo-derecha, con anillo de la
+   superficie para separarlo del avatar (par shadcn AvatarBadge). Default = online.
+   Modificadores: -online/-busy/-away/-offline. Escala con el tamaño del avatar. */
+.avatar-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 30%;
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-success);
+  box-shadow: 0 0 0 2px var(--color-surface);
+}
+.avatar-badge-online  { background: var(--color-success); }
+.avatar-badge-busy    { background: var(--color-error); }
+.avatar-badge-away    { background: var(--color-warning); }
+.avatar-badge-offline { background: var(--color-outline); }
 
 /* Grupo apilado — usado en listas de asignados */
 .avatar-group { display: flex; align-items: center; }
@@ -57,3 +79,12 @@
   box-shadow: 0 0 0 2px var(--color-surface);
 }
 .avatar-group .avatar:first-child { margin-left: 0; }
+
+/* Overflow "+N" — chip con forma de avatar que cierra el grupo cuando hay más
+   asignados de los mostrados (par shadcn AvatarGroupCount). Usar junto con un
+   tamaño: <span class="avatar avatar-md avatar-group-count">+3</span>. */
+.avatar-group-count {
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
+  font-size: 12px;
+}

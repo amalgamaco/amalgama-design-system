@@ -85,6 +85,12 @@
   opacity: 0.4;
 }
 
+/* ── Tamaño small ── par shadcn size="sm" (track más compacto para filas densas
+   o dentro de una card-action). Track 36×20, thumb 14, recorrido 16px. */
+.switch-sm { width: 36px; height: 20px; }
+.switch-sm::after { width: 14px; height: 14px; }
+.switch-sm:checked::after { transform: translateX(16px); }
+
 /* ── Label wrapper ── */
 .switch-label {
   display: inline-flex;

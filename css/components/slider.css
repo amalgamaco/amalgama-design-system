@@ -110,3 +110,39 @@
 .slider-input:disabled::-moz-range-thumb {
   cursor: not-allowed;
 }
+
+/* ═══ Orientación vertical ═══ par shadcn orientation="vertical".
+   El contenedor se vuelve alto y angosto; pista y rango van en el eje Y y el
+   <input type=range> nativo se orienta con writing-mode vertical (Chrome 111+,
+   Firefox 121+). El rango (.slider-range) recibe su alto por estado (inline/JS),
+   igual que el ancho en horizontal. Modo rango vertical = misma técnica de dos
+   inputs apilados. */
+.slider-vertical {
+  width: 20px;
+  height: 160px;
+  flex-direction: column;
+}
+.slider-vertical .slider-track {
+  left: 50%;
+  right: auto;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  height: auto;
+  transform: translateX(-50%);
+}
+.slider-vertical .slider-range {
+  left: 50%;
+  bottom: 0;
+  width: 4px;
+  transform: translateX(-50%);
+}
+.slider-vertical .slider-input {
+  writing-mode: vertical-lr;
+  direction: rtl; /* mínimo abajo, máximo arriba */
+  top: 0;
+  left: 50%;
+  width: 20px;
+  height: 100%;
+  transform: translateX(-50%);
+}

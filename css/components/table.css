@@ -77,3 +77,24 @@
   outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
+
+/* ── Footer (tfoot) ── fila de totales/resumen: borde superior, fondo tenue y
+   peso medio, par shadcn TableFooter (border-t, bg-muted/50, font-medium). */
+.data-table tfoot {
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--color-surface-variant) 50%, transparent);
+  font-weight: 600;
+}
+.data-table tfoot td {
+  border-top: none;
+  color: var(--text-primary);
+}
+
+/* ── Caption ── título o nota de la tabla, al pie (par shadcn TableCaption). */
+.data-table caption {
+  caption-side: bottom;
+  padding: 12px 16px;
+  font-size: var(--font-size-body-sm);
+  color: var(--text-secondary);
+  text-align: left;
+}

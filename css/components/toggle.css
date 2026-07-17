@@ -64,6 +64,11 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+/* Error / inválido (par shadcn aria-invalid) — poco frecuente en Toggle, pero
+   disponible para consistencia con el resto de los controles. */
+.toggle[aria-invalid="true"] {
+  border: 1px solid var(--color-error);
+}
 
 /* ── Variante Outline ── */
 .toggle-outline {

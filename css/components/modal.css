@@ -108,3 +108,48 @@
     justify-content: flex-end;
   }
 }
+
+/* ═══ Alert Dialog: tamaño sm + slot de media ═══
+   Par shadcn AlertDialog size="sm" + AlertDialogMedia. Se usan sobre el mismo
+   Dialog con data-alert="true".
+
+   .modal-sm        panel angosto (≈max-w-xs); footer en grid de 2 columnas de
+                    igual peso (para dos acciones equivalentes de confirmación).
+   .modal-media     ícono líder (típico en confirmaciones destructivas), 48px.
+   .modal-centered  centra header + media (patrón alert centrado de shadcn). */
+.modal-sm {
+  width: min(360px, calc(100vw - 48px));
+}
+@media (min-width: 640px) {
+  .modal-sm .modal-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: stretch;
+  }
+  .modal-sm .modal-footer > * { width: 100%; }
+}
+
+.modal-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
+}
+.modal-media > svg,
+.modal-media > i { width: 24px; height: 24px; }
+.modal-media-error {
+  background: var(--color-error-container);
+  color: var(--color-on-error-container);
+}
+
+.modal-centered .modal-header {
+  align-items: center;
+  text-align: center;
+  padding-right: 0;
+}
+.modal-centered .modal-media { margin: 0 auto; }

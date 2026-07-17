@@ -41,3 +41,22 @@
   from { opacity: 0; transform: scale(.96); }
   to   { opacity: 1; transform: scale(1); }
 }
+
+/* ── Sub-partes opcionales (par shadcn PopoverHeader/Title/Description) ──
+   para el patrón popover-con-título. El cuerpo sigue siendo contenido libre. */
+.popover-header { margin-bottom: 8px; }
+.popover-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-body-md);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.popover-description {
+  font-size: var(--font-size-body-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Alineación (align=start|center|end de shadcn) — la resuelve el posicionador JS
+   (use-flyout) vía left/top; no hay clase de estilo. El flip de lado/edge ya es
+   automático. */

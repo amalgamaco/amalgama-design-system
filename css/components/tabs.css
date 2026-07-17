@@ -80,3 +80,48 @@
 
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
+
+/* ═══ Variante pill / filled ═══ par shadcn default TabsList (contenedor tenue,
+   la pestaña activa como superficie elevada). Nota de diseño: para un switch de
+   vistas tipo toggle, preferí Segmented Button — esta variante existe para dar
+   paridad con la API de Tabs de shadcn cuando el patrón pill es el correcto. */
+.tabs-pill {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-bottom: none;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-variant);
+}
+.tabs-pill .tab {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+}
+.tabs-pill .tab.active {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+.tabs-pill .tab-indicator { display: none; }
+
+/* ═══ Orientación vertical ═══ par shadcn orientation="vertical": lista en
+   columna con el borde/indicador a la derecha. Usa un borde activo estático
+   (no la barra deslizante, que es horizontal), así no requiere JS extra. */
+.tabs-vertical {
+  flex-direction: column;
+  align-items: stretch;
+  border-bottom: none;
+  border-right: 1px solid var(--border);
+  margin-bottom: 0;
+}
+.tabs-vertical .tab {
+  border-bottom: none;
+  border-right: 2px solid transparent;
+  margin-bottom: 0;
+  margin-right: -1px;
+  text-align: left;
+}
+.tabs-vertical .tab.active { border-right-color: var(--color-secondary); }
+.tabs-vertical .tab-indicator { display: none; }

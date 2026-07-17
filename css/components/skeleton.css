@@ -29,3 +29,6 @@
 .skeleton-text { height: 14px; margin-bottom: 8px; }
 .skeleton-title { height: 22px; width: 60%; margin-bottom: 12px; }
 .skeleton-card { height: 80px; margin-bottom: 8px; }
+/* Círculo — placeholder para avatares/íconos (par shadcn <Skeleton className="rounded-full">). */
+.skeleton-circle,
+.skeleton-avatar { width: 40px; height: 40px; border-radius: var(--radius-full); }
