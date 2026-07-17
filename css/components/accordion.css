@@ -118,19 +118,10 @@
   padding-inline: 16px;
 }
 
-/* Card — cada ítem es una tarjeta independiente (superficie + borde + separación). */
-.accordion-card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-.accordion-card .accordion-item {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface-container);
-  padding-inline: 16px;
-}
-/* La regla base quita el borde inferior del último ítem; en card cada tarjeta lo conserva. */
-.accordion-card .accordion-item:last-child {
-  border-bottom: 1px solid var(--border);
+/* Card — el accordion COMPLETO va dentro de una única Card (con card-header opcional),
+   igual que el ejemplo canónico de shadcn (Card + CardHeader + CardContent + Accordion).
+   No hay clase propia: se compone con el componente Card del DS. El accordion adentro
+   pierde su primer borde superior visual porque el card-content ya lo separa del header. */
+.card > .card-content > .accordion:first-child .accordion-item:first-child .accordion-trigger {
+  padding-top: 0;
 }

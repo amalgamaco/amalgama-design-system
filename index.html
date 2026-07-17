@@ -22519,44 +22519,50 @@ import { Button } from &quot;./components/ui/button&quot;
             </div></div>
 
           <h2 class="docs-section-title" style="margin-top:36px">Variantes</h2>
-          <p class="bd-lead" style="margin-top:8px">Todas usan la <b>misma estructura</b> — cambian una prop de comportamiento (<code>data-single</code>, <code>disabled</code>) o una clase de estilo (<code>.accordion-bordered</code>, <code>.accordion-card</code>) con tokens Embassy. Guía de cuándo usar cada una en <b>Guidelines</b>.</p>
-          <div class="bd-grid c2" style="margin-top:12px">
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Basic — <code>data-single</code></div>
-              <div class="accordion" data-single style="width:100%">
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-b1" onclick="accToggle(this)">Sección uno<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-b1" role="region"><div class="accordion-content-inner">Al abrir otra sección, ésta se cierra (una a la vez).</div></div></div>
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-b2" onclick="accToggle(this)">Sección dos<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-b2" role="region"><div class="accordion-content-inner">El default, ideal para FAQs.</div></div></div>
-              </div>
-              <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">Una sección abierta a la vez; se puede cerrar todo.</p>
-            </div>
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Multiple — sin <code>data-single</code></div>
-              <div class="accordion" style="width:100%">
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-m1" onclick="accToggle(this)">Sección uno<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="open" id="acc-m1" role="region"><div class="accordion-content-inner">Podés dejar varias abiertas a la vez.</div></div></div>
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-m2" onclick="accToggle(this)">Sección dos<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="open" id="acc-m2" role="region"><div class="accordion-content-inner">Útil para comparar.</div></div></div>
-              </div>
-              <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">Varias secciones abiertas simultáneamente.</p>
-            </div>
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Disabled — <code>&lt;button ... disabled&gt;</code></div>
-              <div class="accordion" data-single style="width:100%">
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-d1" onclick="accToggle(this)">Sección disponible<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-d1" role="region"><div class="accordion-content-inner">Se expande normalmente.</div></div></div>
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" disabled aria-expanded="false" aria-controls="acc-d2">Sección deshabilitada<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-d2" role="region"><div class="accordion-content-inner">No accesible.</div></div></div>
-              </div>
-              <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">Ítem no interactivo (opacidad reducida, sin pointer).</p>
-            </div>
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Bordered — <code>.accordion-bordered</code></div>
-              <div class="accordion accordion-bordered" data-single style="width:100%">
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-bd1" onclick="accToggle(this)">Sección uno<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-bd1" role="region"><div class="accordion-content-inner">Todo el bloque queda delimitado por un borde.</div></div></div>
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-bd2" onclick="accToggle(this)">Sección dos<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-bd2" role="region"><div class="accordion-content-inner">Filas divididas dentro del contenedor.</div></div></div>
-              </div>
-              <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">Contenedor con borde y radio; filas divididas.</p>
-            </div>
-            <div class="bd-card"><div style="font:600 13px 'Inter';color:var(--text-primary);margin-bottom:8px">Card — <code>.accordion-card</code></div>
-              <div class="accordion accordion-card" data-single style="width:100%">
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-c1" onclick="accToggle(this)">Sección uno<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-c1" role="region"><div class="accordion-content-inner">Cada ítem es una tarjeta con superficie propia.</div></div></div>
-                <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-c2" onclick="accToggle(this)">Sección dos<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-c2" role="region"><div class="accordion-content-inner">Separadas entre sí.</div></div></div>
-              </div>
-              <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">Cada ítem como tarjeta independiente.</p>
-            </div>
-          </div>
+          <p class="bd-lead" style="margin-top:8px">Reproducen 1:1 los ejemplos oficiales de shadcn — misma estructura, espaciado y comportamiento. Sólo cambian una prop (<code>data-single</code>, <code>disabled</code>) o la composición (<code>.accordion-bordered</code>, wrap en <code>.card</code>); el theming es 100% tokens Embassy.</p>
+
+          <h3 class="docs-subhead" style="margin-top:24px;font:700 15px var(--font-heading);color:var(--text-primary)">Basic</h3>
+          <p class="ds-p" style="margin:4px 0 10px">Muestra <b>una sección a la vez</b> (<code>data-single</code>); el primer ítem abre por defecto.</p>
+          <div class="bd-family-wrap"><div class="accordion" data-single style="width:100%;max-width:36rem">
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-b1" onclick="accToggle(this)">¿Cómo restablezco mi contraseña?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="open" id="acc-b1" role="region"><div class="accordion-content-inner">Hacé clic en “Olvidé mi contraseña” en el login, ingresá tu email y te enviamos un enlace para restablecerla. El enlace vence en 24&nbsp;horas.</div></div></div>
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-b2" onclick="accToggle(this)">¿Puedo cambiar mi plan de suscripción?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-b2" role="region"><div class="accordion-content-inner">Sí. Desde Configuración → Facturación podés subir o bajar de plan cuando quieras; el prorrateo se aplica automáticamente.</div></div></div>
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-b3" onclick="accToggle(this)">¿Qué métodos de pago aceptan?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-b3" role="region"><div class="accordion-content-inner">Tarjetas de crédito y débito (Visa, Mastercard, Amex) y transferencia para planes anuales.</div></div></div>
+          </div></div>
+
+          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--text-primary)">Multiple</h3>
+          <p class="ds-p" style="margin:4px 0 10px">Sin <code>data-single</code>: se pueden abrir <b>varias secciones a la vez</b>.</p>
+          <div class="bd-family-wrap"><div class="accordion" style="width:100%;max-width:36rem">
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-m1" onclick="accToggle(this)">Notificaciones<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="open" id="acc-m1" role="region"><div class="accordion-content-inner">Gestioná cómo recibís notificaciones: alertas por email para novedades o push en el móvil.</div></div></div>
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-m2" onclick="accToggle(this)">Privacidad y seguridad<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-m2" role="region"><div class="accordion-content-inner">Controlá la visibilidad de tu perfil, la verificación en dos pasos y las sesiones activas.</div></div></div>
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-m3" onclick="accToggle(this)">Facturación y suscripción<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-m3" role="region"><div class="accordion-content-inner">Revisá tus facturas, el método de pago y el estado de la suscripción.</div></div></div>
+          </div></div>
+
+          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--text-primary)">Disabled</h3>
+          <p class="ds-p" style="margin:4px 0 10px">Agregá <code>disabled</code> al <code>&lt;button class="accordion-trigger"&gt;</code> para deshabilitar un ítem.</p>
+          <div class="bd-family-wrap"><div class="accordion" data-single style="width:100%;max-width:36rem">
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-d1" onclick="accToggle(this)">¿Puedo acceder a mi historial de cuenta?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-d1" role="region"><div class="accordion-content-inner">Sí. Desde Configuración → Actividad ves el historial completo de tu cuenta.</div></div></div>
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" disabled aria-expanded="false" aria-controls="acc-d2">Información de funciones premium<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-d2" role="region"><div class="accordion-content-inner">Requiere plan Pro.</div></div></div>
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-d3" onclick="accToggle(this)">¿Cómo actualizo mi dirección de email?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-d3" role="region"><div class="accordion-content-inner">Desde Configuración → Perfil; te pedimos confirmar el nuevo email antes de guardarlo.</div></div></div>
+          </div></div>
+
+          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--text-primary)">Borders</h3>
+          <p class="ds-p" style="margin:4px 0 10px">Sumá <code>.accordion-bordered</code> al <code>.accordion</code>: contenedor con borde y radio, filas divididas (última sin borde).</p>
+          <div class="bd-family-wrap"><div class="accordion accordion-bordered" data-single style="width:100%;max-width:36rem">
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-bd1" onclick="accToggle(this)">¿Cómo funciona la facturación?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="open" id="acc-bd1" role="region"><div class="accordion-content-inner">Ofrecemos planes mensuales y anuales. Se cobra al inicio de cada ciclo y podés cancelar cuando quieras. Todos incluyen backups automáticos y soporte.</div></div></div>
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-bd2" onclick="accToggle(this)">¿Mis datos están seguros?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-bd2" role="region"><div class="accordion-content-inner">Sí: cifrado en tránsito y en reposo, backups diarios y controles de acceso por rol.</div></div></div>
+            <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-bd3" onclick="accToggle(this)">¿Qué integraciones soportan?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-bd3" role="region"><div class="accordion-content-inner">Slack, Zapier y una API REST pública con webhooks.</div></div></div>
+          </div></div>
+
+          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--text-primary)">Card</h3>
+          <p class="ds-p" style="margin:4px 0 10px">Envolvé el <code>.accordion</code> en un <code>.card</code> (con <code>.card-header</code>), igual que el ejemplo <code>Card</code> de shadcn.</p>
+          <div class="bd-family-wrap"><div class="card" style="width:100%;max-width:36rem">
+            <div class="card-header"><div class="card-title">Suscripción y facturación</div><div class="card-desc">Preguntas frecuentes sobre tu cuenta, planes, pagos y cancelaciones.</div></div>
+            <div class="card-content"><div class="accordion" data-single>
+              <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-c1" onclick="accToggle(this)">¿Qué planes de suscripción ofrecen?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="open" id="acc-c1" role="region"><div class="accordion-content-inner">Tres niveles: Starter ($9/mes), Professional ($29/mes) y Enterprise ($99/mes), con límites de almacenamiento, acceso a API y soporte crecientes.</div></div></div>
+              <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-c2" onclick="accToggle(this)">¿Cómo funciona la facturación?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-c2" role="region"><div class="accordion-content-inner">Se cobra al inicio de cada ciclo; podés cambiar de plan con prorrateo automático.</div></div></div>
+              <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-c3" onclick="accToggle(this)">¿Cómo cancelo mi suscripción?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-c3" role="region"><div class="accordion-content-inner">Desde Configuración → Facturación → Cancelar; mantenés el acceso hasta el fin del ciclo pago.</div></div></div>
+            </div></div>
+          </div></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -22580,7 +22586,7 @@ import { Button } from &quot;./components/ui/button&quot;
               <tr><td>Multiple</td><td>Sin <code>data-single</code> — varios abiertos a la vez (default de <code>accToggle</code>)</td></tr>
               <tr><td>Disabled</td><td><code>&lt;button class="accordion-trigger" disabled&gt;</code> — opacidad 0.5, sin pointer</td></tr>
               <tr><td>Bordered</td><td><code>.accordion.accordion-bordered</code> — borde + radio + <code>padding-inline</code></td></tr>
-              <tr><td>Card</td><td><code>.accordion.accordion-card</code> — cada ítem: borde, radio, <code>--color-surface-container</code>, gap</td></tr>
+              <tr><td>Card</td><td>El <code>.accordion</code> completo dentro de un <code>.card</code> (con <code>.card-header</code>) — igual que <code>Card</code> en shadcn</td></tr>
             </tbody>
           </table>
         </section>
@@ -22614,7 +22620,7 @@ import { Button } from &quot;./components/ui/button&quot;
               <tr><td><b>Multiple</b></td><td>Cuando la persona necesita <b>comparar</b> secciones o dejar varias abiertas (filtros, configuraciones).</td></tr>
               <tr><td><b>Disabled</b></td><td>Una sección no disponible en el contexto actual — mantenela visible pero inerte, no la ocultes.</td></tr>
               <tr><td><b>Bordered</b></td><td>Cuando el accordion es un <b>bloque contenido</b> en una página densa y necesita delimitarse.</td></tr>
-              <tr><td><b>Card</b></td><td>Ítems que se leen como <b>unidades independientes</b>, o sobre fondos con ruido donde las filas simples se pierden.</td></tr>
+              <tr><td><b>Card</b></td><td>Cuando el accordion es una <b>unidad con título propio</b> (una FAQ dentro de una página de ayuda) — se envuelve en una <code>.card</code> con header para darle contexto y elevarlo del fondo.</td></tr>
             </tbody>
           </table>
           <p class="ds-p" style="margin-top:12px">Regla: <b>un accordion, un estilo</b>. No mezcles filas simples y cards en la misma lista — la elección es de presentación; la estructura y el comportamiento son idénticos.</p>
@@ -22666,8 +22672,16 @@ import { Button } from &quot;./components/ui/button&quot;
 &lt;!-- Bordered: contenedor con borde + radio --&gt;
 &lt;div class=&quot;accordion accordion-bordered&quot; data-single&gt; … &lt;/div&gt;
 
-&lt;!-- Card: cada ítem como tarjeta --&gt;
-&lt;div class=&quot;accordion accordion-card&quot; data-single&gt; … &lt;/div&gt;</code></pre></div>
+&lt;!-- Card: el accordion completo dentro de una Card (con header) --&gt;
+&lt;div class=&quot;card&quot;&gt;
+  &lt;div class=&quot;card-header&quot;&gt;
+    &lt;div class=&quot;card-title&quot;&gt;Suscripción y facturación&lt;/div&gt;
+    &lt;div class=&quot;card-desc&quot;&gt;Preguntas frecuentes…&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;card-content&quot;&gt;
+    &lt;div class=&quot;accordion&quot; data-single&gt; … &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
         </section>
 
         <section class="docs-section">
