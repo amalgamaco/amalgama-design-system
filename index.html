@@ -3610,6 +3610,12 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-textarea" onclick="navigate('c-textarea')">Textarea</div>
       <div class="ds-nav-item" data-section="c-toggle" onclick="navigate('c-toggle')">Toggle</div>
       <div class="ds-nav-item" data-section="c-tooltip" onclick="navigate('c-tooltip')">Tooltips</div>
+      <div class="ds-nav-item" data-section="c-attachment" onclick="navigate('c-attachment')">Attachment</div>
+      <div class="ds-nav-item" data-section="c-button-group" onclick="navigate('c-button-group')">Button Group</div>
+      <div class="ds-nav-item" data-section="c-input-group" onclick="navigate('c-input-group')">Input Group</div>
+      <div class="ds-nav-item" data-section="c-item" onclick="navigate('c-item')">Item</div>
+      <div class="ds-nav-item" data-section="c-kbd" onclick="navigate('c-kbd')">Kbd</div>
+      <div class="ds-nav-item" data-section="c-spinner" onclick="navigate('c-spinner')">Spinner</div>
     </nav>
   </div>
 
@@ -21642,6 +21648,178 @@ import { Button } from &quot;./components/ui/button&quot;
     </section>
 
 
+    <!-- ═══════════ KBD ═══════════ -->
+    <section class="ds-section" id="s-c-kbd">
+      <div class="ds-page-tag">Components · Display</div>
+      <h1 class="ds-page-title">Kbd</h1>
+      <p class="ds-page-desc">Tecla de teclado en línea para mostrar atajos.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/kbd.css</code> — <code>.kbd</code> / <code>.kbd-group</code>, superficie tenue, se recalibra solo en dark. Par shadcn Base UI <b>Kbd</b>.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
+        <p class="bd-lead">Muestra una tecla o combinación de teclas — atajos en menús, tooltips y documentación.</p>
+        <ul class="bd-overview-list"><li><b>Composición:</b> <code>.kbd</code> por tecla; <code>.kbd-group</code> para combinaciones.</li><li>Alto 20px, superficie <code>--color-surface-variant</code>, no interactiva.</li><li>Dentro de un tooltip inverso usa la superficie del tooltip automáticamente.</li></ul>
+        <div class="bd-family-wrap"><span class="kbd-group"><kbd class="kbd">⌘</kbd><kbd class="kbd">K</kbd></span></div>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
+        <h2 class="docs-section-title">Variantes</h2>
+        <div class="bd-family-wrap" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><kbd class="kbd">Esc</kbd><span class="kbd-group"><kbd class="kbd">Ctrl</kbd><kbd class="kbd">S</kbd></span><span class="kbd-group"><kbd class="kbd">⇧</kbd><kbd class="kbd">⌘</kbd><kbd class="kbd">P</kbd></span></div>
+        <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Cómo</th></tr></thead><tbody><tr><td>Tecla simple</td><td><code>.kbd</code></td></tr><tr><td>Combinación</td><td><code>.kbd-group</code> con varias <code>.kbd</code></td></tr><tr><td>En tooltip</td><td>usa la superficie inversa del tooltip (automático)</td></tr></tbody></table>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Atajos de teclado en menús/paletas.</li><li>Documentar shortcuts.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Código inline → <code>&lt;code&gt;</code>.</li></ul></div></div></div></section></div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Usá el elemento semántico <code>&lt;kbd&gt;</code>.</li><li><span class="ds-a11y-icon">♿</span>Es decorativa/no interactiva (<code>pointer-events:none</code>).</li></ul></section></div>
+      <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;span class="kbd-group"&gt;&lt;kbd class="kbd"&gt;⌘&lt;/kbd&gt;&lt;kbd class="kbd"&gt;K&lt;/kbd&gt;&lt;/span&gt;</code></pre></div></section></div>
+    </section>
+
+    <!-- ═══════════ SPINNER ═══════════ -->
+    <section class="ds-section" id="s-c-spinner">
+      <div class="ds-page-tag">Components · Feedback</div>
+      <h1 class="ds-page-title">Spinner</h1>
+      <p class="ds-page-desc">Indicador de carga rotatorio e indeterminado.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/spinner.css</code> — <code>.spinner</code> (+ <code>-sm</code>/<code>-lg</code>/<code>-on-primary</code>), respeta <code>prefers-reduced-motion</code>. Par shadcn Base UI <b>Spinner</b>.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
+        <p class="bd-lead">Carga breve o indeterminada, dentro de botones, inputs o junto a un texto.</p>
+        <ul class="bd-overview-list"><li><b>Tamaños:</b> <code>.spinner-sm</code> · default · <code>.spinner-lg</code>.</li><li>Sobre superficies de color: <code>.spinner-on-primary</code>.</li><li>Para carga con estructura conocida usá <b>Skeleton</b>; para progreso medible, <b>Progress</b>.</li></ul>
+        <div class="bd-family-wrap"><span class="spinner" role="status" aria-label="Cargando"></span></div>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
+        <h2 class="docs-section-title">Variantes</h2>
+        <div class="bd-family-wrap" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap"><span class="spinner spinner-sm"></span><span class="spinner"></span><span class="spinner spinner-lg"></span><button class="btn-primary btn-sm"><span class="spinner spinner-sm spinner-on-primary"></span> Guardando…</button></div>
+        <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>Small / default / large</td><td><code>.spinner-sm</code> · <code>.spinner</code> · <code>.spinner-lg</code></td></tr><tr><td>Sobre filled</td><td><code>.spinner-on-primary</code></td></tr></tbody></table>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Cargas cortas/indeterminadas.</li><li>Dentro de botones al enviar.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Carga con layout conocido → Skeleton.</li><li>Progreso medible → Progress.</li></ul></div></div></div></section></div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span><code>role="status"</code> + <code>aria-label="Cargando"</code>.</li><li><span class="ds-a11y-icon">♿</span>Reduce la velocidad con <code>prefers-reduced-motion</code>.</li></ul></section></div>
+      <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;span class="spinner" role="status" aria-label="Cargando"&gt;&lt;/span&gt;
+&lt;button class="btn-primary"&gt;&lt;span class="spinner spinner-sm spinner-on-primary"&gt;&lt;/span&gt; Guardando…&lt;/button&gt;</code></pre></div></section></div>
+    </section>
+
+    <!-- ═══════════ BUTTON GROUP ═══════════ -->
+    <section class="ds-section" id="s-c-button-group">
+      <div class="ds-page-tag">Components · Actions</div>
+      <h1 class="ds-page-title">Button Group</h1>
+      <p class="ds-page-desc">Botones contiguos con bordes y radios compartidos.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/button-group.css</code> — los hijos pierden el radio/borde adyacente. Par shadcn Base UI <b>Button Group</b>. Distinto de Segmented Button (elegir 1 de N con estado).</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
+        <p class="bd-lead">Agrupa acciones relacionadas del mismo peso en una sola unidad visual.</p>
+        <ul class="bd-overview-list"><li><b>Orientación:</b> horizontal (default) o <code>.button-group-vertical</code>.</li><li><b>Addon:</b> <code>.button-group-text</code> (prefijo/sufijo, p.ej. <code>https://</code>).</li><li>Para elegir una opción con estado usá <b>Segmented Button</b> o <b>Toggle Group</b>.</li></ul>
+        <div class="bd-family-wrap"><div class="button-group"><button class="btn-tertiary btn-sm" type="button">Día</button><button class="btn-tertiary btn-sm" type="button">Semana</button><button class="btn-tertiary btn-sm" type="button">Mes</button></div></div>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
+        <h2 class="docs-section-title">Variantes</h2>
+        <div class="bd-family-wrap" style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap">
+          <div class="button-group"><button class="btn-tertiary btn-sm" type="button">Día</button><button class="btn-tertiary btn-sm" type="button">Semana</button><button class="btn-tertiary btn-sm" type="button">Mes</button></div>
+          <div class="button-group"><span class="button-group-text">https://</span><input class="field-input" placeholder="tu-sitio.com" style="width:160px;border-top-left-radius:0;border-bottom-left-radius:0;border-left:0"></div>
+          <div class="button-group button-group-vertical"><button class="icon-btn btn-sm" type="button" aria-label="Subir">↑</button><button class="icon-btn btn-sm" type="button" aria-label="Bajar">↓</button></div>
+        </div>
+        <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>Horizontal</td><td><code>.button-group</code></td></tr><tr><td>Vertical</td><td><code>.button-group.button-group-vertical</code></td></tr><tr><td>Addon de texto</td><td><code>.button-group-text</code></td></tr><tr><td>Separador</td><td><code>.button-group-separator</code></td></tr></tbody></table>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Acciones relacionadas del mismo peso.</li><li>Input + botón / addon de texto.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir 1 de N con estado → Segmented Button.</li></ul></div></div></div></section></div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Contenedor con <code>role="group"</code> y un <code>aria-label</code> que describa el conjunto.</li><li><span class="ds-a11y-icon">♿</span>El foco de cada botón se eleva sobre los vecinos (<code>z-index</code>).</li></ul></section></div>
+      <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;div class="button-group" role="group" aria-label="Rango"&gt;
+  &lt;button class="btn-tertiary"&gt;Día&lt;/button&gt;
+  &lt;button class="btn-tertiary"&gt;Semana&lt;/button&gt;
+&lt;/div&gt;</code></pre></div></section></div>
+    </section>
+
+    <!-- ═══════════ INPUT GROUP ═══════════ -->
+    <section class="ds-section" id="s-c-input-group">
+      <div class="ds-page-tag">Components · Inputs</div>
+      <h1 class="ds-page-title">Input Group</h1>
+      <p class="ds-page-desc">Input con addons (íconos, texto o botones) en un contenedor único.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/input-group.css</code> — foco/error viven en el contenedor; el control interno va sin borde. Par shadcn Base UI <b>Input Group</b>.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
+        <p class="bd-lead">Combina un input con prefijos/sufijos (íconos, unidades, atajos o botones) bajo un solo borde con foco unificado.</p>
+        <ul class="bd-overview-list"><li><b>Addons:</b> <code>.input-group-addon</code> (inline) · <code>-end</code> al final; <code>.input-group-text</code> para texto.</li><li>El foco y el estado de error (<code>aria-invalid</code>) viven en <code>.input-group</code>.</li><li>Para búsqueda filtrable con panel usá <b>Combobox</b>.</li></ul>
+        <div class="bd-family-wrap"><div class="input-group" style="max-width:340px"><span class="input-group-addon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input class="input-group-control" placeholder="Buscar…"><span class="input-group-addon input-group-addon-end"><kbd class="kbd">⌘K</kbd></span></div></div>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
+        <h2 class="docs-section-title">Variantes</h2>
+        <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:12px;max-width:360px">
+          <div class="input-group"><span class="input-group-addon input-group-text">$</span><input class="input-group-control" placeholder="0.00"><span class="input-group-addon input-group-addon-end input-group-text">USD</span></div>
+          <div class="input-group is-error"><input class="input-group-control" value="valor inválido"><span class="input-group-addon input-group-addon-end"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-error)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg></span></div>
+        </div>
+        <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>Addon líder / final</td><td><code>.input-group-addon</code> · <code>.input-group-addon-end</code></td></tr><tr><td>Texto (prefijo/sufijo)</td><td><code>.input-group-text</code></td></tr><tr><td>Error</td><td><code>.input-group.is-error</code> / <code>[aria-invalid]</code></td></tr><tr><td>Apilado (textarea)</td><td><code>.input-group-block</code></td></tr></tbody></table>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Input con ícono, unidad o botón inline.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Input simple → <code>.field-input</code>.</li><li>Búsqueda con panel → Combobox.</li></ul></div></div></div></section></div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El estado de error va con <code>aria-invalid</code> en el control; el borde lo refleja el contenedor.</li><li><span class="ds-a11y-icon">♿</span>El foco se muestra en todo el grupo (<code>:focus-within</code>).</li></ul></section></div>
+      <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;div class="input-group"&gt;
+  &lt;span class="input-group-addon"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/span&gt;
+  &lt;input class="input-group-control" placeholder="Buscar…"&gt;
+  &lt;span class="input-group-addon input-group-addon-end"&gt;&lt;kbd class="kbd"&gt;⌘K&lt;/kbd&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre></div></section></div>
+    </section>
+
+    <!-- ═══════════ ITEM ═══════════ -->
+    <section class="ds-section" id="s-c-item">
+      <div class="ds-page-tag">Components · Display</div>
+      <h1 class="ds-page-title">Item</h1>
+      <p class="ds-page-desc">Fila de contenido flexible: media + texto + acciones.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/item.css</code> — primitiva genérica (par shadcn Base UI <b>Item</b>). Más flexible que List (MD3) y que las cards de dominio.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
+        <p class="bd-lead">Fila reutilizable con media (ícono/imagen), contenido (título + descripción) y acciones — settings rows, resultados, notificaciones.</p>
+        <ul class="bd-overview-list"><li><b>Variantes:</b> default · <code>.item-outline</code> · <code>.item-muted</code>; tamaño <code>.item-sm</code>.</li><li><b>Media:</b> <code>.item-media-icon</code> (chip) · <code>.item-media-image</code>.</li><li>Agrupá con <code>.item-group</code> + <code>.item-separator</code>; interactiva con <code>a.item</code> / <code>.item-clickable</code>.</li></ul>
+        <div class="bd-family-wrap"><div class="item item-outline" style="max-width:420px"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/></svg></div><div class="item-content"><div class="item-title">Notificaciones</div><div class="item-description">Recibí avisos por email sobre novedades.</div></div><div class="item-actions"><button class="btn-tertiary btn-sm" type="button">Config</button></div></div></div>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
+        <h2 class="docs-section-title">Variantes</h2>
+        <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:12px;max-width:440px">
+          <div class="item-group" style="border:1px solid var(--border);border-radius:10px;overflow:hidden">
+            <div class="item"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/></svg></div><div class="item-content"><div class="item-title">Con ícono + acción</div><div class="item-description">default, dentro de un grupo con separadores.</div></div><div class="item-actions"><button class="btn-tertiary btn-sm" type="button">Ver</button></div></div>
+            <hr class="item-separator">
+            <div class="item item-clickable"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><div class="item-content"><div class="item-title">Clickable</div><div class="item-description">a.item / .item-clickable con hover.</div></div></div>
+          </div>
+          <div class="item item-muted"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg></div><div class="item-content"><div class="item-title">Muted</div><div class="item-description">.item-muted.</div></div></div>
+        </div>
+        <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>default / outline / muted</td><td><code>.item</code> · <code>.item-outline</code> · <code>.item-muted</code></td></tr><tr><td>Tamaño sm</td><td><code>.item-sm</code></td></tr><tr><td>Media</td><td><code>.item-media-icon</code> · <code>.item-media-image</code></td></tr><tr><td>Grupo</td><td><code>.item-group</code> + <code>.item-separator</code></td></tr></tbody></table>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Filas ricas reutilizables (settings, resultados).</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Datos tabulares → Table.</li><li>Card con header/footer → Card.</li></ul></div></div></div></section></div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Interactiva: usá <code>&lt;a&gt;</code>/<code>&lt;button&gt;</code> o <code>role</code>+<code>tabindex</code>; trae <code>:focus-visible</code>.</li><li><span class="ds-a11y-icon">♿</span><code>.item-group</code> puede exponer <code>role="list"</code>.</li></ul></section></div>
+      <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;div class="item item-outline"&gt;
+  &lt;div class="item-media item-media-icon"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/div&gt;
+  &lt;div class="item-content"&gt;
+    &lt;div class="item-title"&gt;Notificaciones&lt;/div&gt;
+    &lt;div class="item-description"&gt;Recibí avisos por email.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="item-actions"&gt;&lt;button class="btn-tertiary btn-sm"&gt;Config&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></div></section></div>
+    </section>
+
+    <!-- ═══════════ ATTACHMENT ═══════════ -->
+    <section class="ds-section" id="s-c-attachment">
+      <div class="ds-page-tag">Components · Display</div>
+      <h1 class="ds-page-title">Attachment</h1>
+      <p class="ds-page-desc">Fila de archivo adjunto con nombre, metadata y estado.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/attachment.css</code> — ícono/miniatura + nombre + meta + acción; estados subiendo (progreso) y error. Par shadcn Base UI <b>Attachment</b>.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
+        <p class="bd-lead">Lista archivos subidos o por subir (CVs, adjuntos), con progreso y botón de quitar.</p>
+        <ul class="bd-overview-list"><li><b>Composición:</b> <code>.attachment</code> = <code>.attachment-icon</code> + <code>.attachment-body</code> (nombre + meta) + acción.</li><li><b>Estados:</b> subiendo (<code>.attachment-progress</code>) · error (<code>.attachment-error</code>).</li><li>Se apilan en <code>.attachment-list</code>. Para subir el archivo usá <code>&lt;input type="file"&gt;</code> (Input).</li></ul>
+        <div class="bd-family-wrap"><ul class="attachment-list" style="max-width:420px;width:100%"><li class="attachment"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><div class="attachment-body"><div class="attachment-name">CV_Ana_Torres.pdf</div><div class="attachment-meta">240 KB · PDF</div></div><button class="icon-btn btn-sm attachment-remove" type="button" aria-label="Quitar">✕</button></li></ul></div>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
+        <h2 class="docs-section-title">Variantes / estados</h2>
+        <div class="bd-family-wrap"><ul class="attachment-list" style="max-width:420px;width:100%">
+          <li class="attachment"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><div class="attachment-body"><div class="attachment-name">CV_Ana_Torres.pdf</div><div class="attachment-meta">240 KB · PDF</div></div><button class="icon-btn btn-sm attachment-remove" type="button" aria-label="Quitar">✕</button></li>
+          <li class="attachment"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></span><div class="attachment-body"><div class="attachment-name">portfolio.zip</div><div class="attachment-meta">Subiendo… 60%</div><div class="attachment-progress"><div class="attachment-progress-bar" style="width:60%"></div></div></div></li>
+          <li class="attachment attachment-error"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg></span><div class="attachment-body"><div class="attachment-name">imagen.psd</div><div class="attachment-meta">Formato no permitido</div></div><button class="icon-btn btn-sm attachment-remove" type="button" aria-label="Quitar">✕</button></li>
+        </ul></div>
+        <table class="ds-table" style="margin-top:16px"><thead><tr><th>Estado</th><th>Cómo</th></tr></thead><tbody><tr><td>Listo</td><td><code>.attachment</code> con acción de quitar</td></tr><tr><td>Subiendo</td><td><code>.attachment-progress</code> + <code>.attachment-progress-bar</code></td></tr><tr><td>Error</td><td><code>.attachment-error</code></td></tr></tbody></table>
+      </section></div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Listar archivos subidos/por subir.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Subir el archivo → input file.</li><li>Galería de imágenes → Carousel.</li></ul></div></div></div></section></div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Botón de quitar con <code>aria-label</code>.</li><li><span class="ds-a11y-icon">♿</span>El progreso puede exponer <code>role="progressbar"</code> + <code>aria-valuenow</code>.</li></ul></section></div>
+      <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;li class="attachment"&gt;
+  &lt;span class="attachment-icon"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/span&gt;
+  &lt;div class="attachment-body"&gt;
+    &lt;div class="attachment-name"&gt;CV_Ana_Torres.pdf&lt;/div&gt;
+    &lt;div class="attachment-meta"&gt;240 KB · PDF&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="icon-btn btn-sm attachment-remove" aria-label="Quitar"&gt;✕&lt;/button&gt;
+&lt;/li&gt;</code></pre></div></section></div>
+    </section>
+
     <!-- ═══════════ LOGOS ═══════════ -->
     <section class="ds-section" id="s-logos">
       <div class="ds-page-tag">Foundations · Brand</div>
@@ -24263,6 +24441,12 @@ const SECTIONS = {
   'c-tooltip':         { label: 'Tooltips',              group: 'Components' },
   'c-topbar':          { label: 'Top Bar',             group: 'Components', parent: 'c-app-bar' },
   'c-vacancy':         { label: 'Vacancy Card',        group: 'Components', parent: 'c-card' },
+  'c-attachment':      { label: 'Attachment',            group: 'Components' },
+  'c-button-group':    { label: 'Button Group',          group: 'Components', parent: 'c-button' },
+  'c-input-group':     { label: 'Input Group',           group: 'Components', parent: 'c-input' },
+  'c-item':            { label: 'Item',                  group: 'Components' },
+  'c-kbd':             { label: 'Kbd',                   group: 'Components' },
+  'c-spinner':         { label: 'Spinner',               group: 'Components', parent: 'c-loading' },
   // Legacy sub-pages (accessible via hash)
   'radius':            { label: 'Radius',                group: 'Styles' },
   'tokens-color':      { label: 'Color Tokens',          group: 'Foundations' },
