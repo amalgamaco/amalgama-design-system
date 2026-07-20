@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=4">
+<link rel="stylesheet" href="css/components.css?v=5">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -3573,6 +3573,7 @@ body { overflow-x: clip; }
         <div class="ds-nav-item" data-section="c-stat-card" onclick="navigate('c-stat-card')">Stat Card</div>
         <div class="ds-nav-item" data-section="c-nav-card" onclick="navigate('c-nav-card')">Nav Card</div>
       </div>
+      <div class="ds-nav-item" data-section="c-calendar" onclick="navigate('c-calendar')">Calendar</div>
       <div class="ds-nav-item" data-section="c-carousel" onclick="navigate('c-carousel')">Carousels</div>
       <div class="ds-nav-item" data-section="c-charts" onclick="navigate('c-charts')">Charts</div>
       <div class="ds-nav-item" data-section="c-checkbox" onclick="navigate('c-checkbox')">Checkbox</div>
@@ -18336,6 +18337,130 @@ const [on, setOn] = useState(false)
 
       </div>
     </section>
+    <!-- ═══════════ CALENDAR ═══════════ -->
+    <section class="ds-section" id="s-c-calendar">
+      <div class="ds-page-tag">Components · Input</div>
+      <h1 class="ds-page-title">Calendar</h1>
+      <p class="ds-page-desc">Grilla de mes para elegir un día o un rango, con navegación real de mes/año.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>css/components/calendar.css</code> + <code>initCalendar()</code> sobre <code>[data-calendar]</code> — matemática de fechas con <code>Date</code> nativo + <code>Intl.DateTimeFormat</code> (sin react-day-picker/date-fns; el DS es buildless). Equivalente funcional de las variantes de shadcn Calendar, tematizado con tokens Embassy.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Calendar muestra un mes en grilla y permite elegir un día. Es la base del Date Picker, y también se usa en línea cuando el calendario debe estar siempre visible.</p>
+          <ul class="bd-overview-list">
+            <li><b>Composición:</b> <code>.calendar</code> · <code>.calendar-header</code> (nav ‹ ›) · <code>.calendar-weekdays</code> · <code>.calendar-grid</code> con <code>.calendar-day</code>.</li>
+            <li><b>Patrones</b> (en Specs): rango, selector de mes/año, presets, fecha + hora, días reservados, tamaño de celda y números de semana.</li>
+            <li>Estados por token: <code>today</code>, <code>selected</code>, <code>range</code>, <code>disabled</code>, <code>booked</code> — sin overrides por tema.</li>
+          </ul>
+          <!-- Overview = solo el Calendar básico. Los demás patrones viven en Specs. -->
+          <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07"></div></div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Range calendar</h2>
+          <p class="docs-section-desc"><code>data-cal-mode="range"</code> — el primer clic fija el inicio, el segundo el fin; el tramo intermedio usa <code>primary-container</code>.</p>
+          <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07" data-cal-mode="range"></div></div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Selector de mes y año</h2>
+          <p class="docs-section-desc"><code>data-cal-caption="dropdown"</code> — reemplaza el caption por selects de mes y año para saltar rápido (par shadcn <code>captionLayout="dropdown"</code>).</p>
+          <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07" data-cal-caption="dropdown"></div></div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Presets</h2>
+          <p class="docs-section-desc">Accesos rápidos junto a la grilla que fijan la selección (par shadcn presets). Acá en modo rango.</p>
+          <div class="bd-family-wrap"><div class="calendar-with-presets">
+            <div class="calendar-presets">
+              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'today')">Hoy</button>
+              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'7')">Últimos 7 días</button>
+              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'30')">Últimos 30 días</button>
+              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'month')">Este mes</button>
+            </div>
+            <div class="calendar" data-calendar="2026-07" data-cal-mode="range"></div>
+          </div></div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Date and time picker</h2>
+          <p class="docs-section-desc">Compuesto: el <b>Date Picker</b> (trigger + popover) con el Calendar y una fila de hora (<code>&lt;input type="time"&gt;</code> nativo) dentro del panel — el trigger refleja fecha · hora.</p>
+          <div class="bd-family-wrap"><div class="date-picker"><button type="button" class="date-picker-trigger btn-tertiary date-picker-trigger-empty" onclick="toggleDatePicker(this)" style="width:260px;justify-content:flex-start"><svg class="date-picker-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Elegir fecha y hora</button>
+            <div class="date-picker-panel" hidden>
+              <div class="calendar" data-calendar="2026-07"></div>
+              <div class="calendar-time-row"><label for="cal-dt-time">Hora</label><input type="time" id="cal-dt-time" value="09:30" onchange="calTimeSync(this)"></div>
+            </div>
+          </div></div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Booked dates</h2>
+          <p class="docs-section-desc"><code>data-cal-booked="YYYY-MM-DD,…"</code> — días reservados / no disponibles: se marcan con línea tachada y no son seleccionables (par shadcn "booked").</p>
+          <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07" data-cal-booked="2026-07-18,2026-07-21,2026-07-22,2026-07-29"></div></div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Custom cell size</h2>
+          <p class="docs-section-desc">La celda se controla con <code>--cal-cell</code>: <code>.calendar-sm</code> (30px) y <code>.calendar-lg</code> (44px) para densidad compacta o táctil.</p>
+          <div class="bd-family-wrap" style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
+            <div class="calendar calendar-sm" data-calendar="2026-07"></div>
+            <div class="calendar calendar-lg" data-calendar="2026-07"></div>
+          </div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Week numbers</h2>
+          <p class="docs-section-desc"><code>data-cal-weeknumbers</code> — agrega una columna líder con el número de semana ISO-8601 (par shadcn <code>showWeekNumber</code>).</p>
+          <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07" data-cal-weeknumbers data-cal-caption="dropdown"></div></div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir una fecha o rango con contexto de mes.</li><li>Inline cuando el calendario debe estar siempre visible.</li><li>Con presets para rangos frecuentes (últimos 7/30 días).</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir solo mes/año → <b>Select</b>.</li><li>Fecha por teclado sin grilla → Input nativo <code>type="date"</code>.</li><li>Como popover anclado a un campo → <b>Date Picker</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Cada día es un <code>&lt;button&gt;</code> real — foco con Tab y activación con Enter/Espacio; el foco muestra anillo (<code>--color-focus</code>).</li>
+            <li><span class="ds-a11y-icon">♿</span>Las flechas de navegación llevan <code>aria-label</code> ("Mes anterior/siguiente"); los selects de mes/año, <code>aria-label</code> propio.</li>
+            <li><span class="ds-a11y-icon">♿</span>Los días reservados llevan <code>aria-disabled="true"</code> y no reciben selección; los números de semana son <code>aria-hidden</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Contraste AA en <code>today</code>/<code>selected</code>/<code>range</code> en claro y oscuro, sin overrides por tema.</li>
+            <li><span class="ds-a11y-icon">♿</span><b>Simplificación documentada (buildless):</b> sin navegación con flechas del teclado entre días (roving grid) ni <code>aria-selected</code> por celda — para eso hace falta react-day-picker; ver GOVERNANCE §19.4.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Copiá <code>css/components/calendar.css</code> + <code>initCalendar()</code>. Un <code>.calendar[data-calendar]</code> se rendea solo (mes actual, o <code>YYYY-MM</code>).</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;!-- Básico --&gt;
+&lt;div class=&quot;calendar&quot; data-calendar&gt;&lt;/div&gt;
+
+&lt;!-- Rango · mes/año · números de semana · tamaño · reservados --&gt;
+&lt;div class=&quot;calendar&quot; data-calendar data-cal-mode=&quot;range&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;calendar&quot; data-calendar data-cal-caption=&quot;dropdown&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;calendar&quot; data-calendar data-cal-weeknumbers&gt;&lt;/div&gt;
+&lt;div class=&quot;calendar calendar-lg&quot; data-calendar&gt;&lt;/div&gt;
+&lt;div class=&quot;calendar&quot; data-calendar data-cal-booked=&quot;2026-07-21,2026-07-22&quot;&gt;&lt;/div&gt;
+
+&lt;!-- Presets --&gt;
+&lt;div class=&quot;calendar-with-presets&quot;&gt;
+  &lt;div class=&quot;calendar-presets&quot;&gt;
+    &lt;button class=&quot;calendar-preset-btn&quot; onclick=&quot;calApplyPreset(this,'7')&quot;&gt;Últimos 7 días&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;calendar&quot; data-calendar data-cal-mode=&quot;range&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Date + time (dentro del panel del Date Picker) --&gt;
+&lt;div class=&quot;date-picker-panel&quot;&gt;
+  &lt;div class=&quot;calendar&quot; data-calendar&gt;&lt;/div&gt;
+  &lt;div class=&quot;calendar-time-row&quot;&gt;&lt;label&gt;Hora&lt;/label&gt;&lt;input type=&quot;time&quot; onchange=&quot;calTimeSync(this)&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
     <!-- ═══════════ DATE AND TIME PICKER ═══════════ -->
     <section class="ds-section" id="s-c-date-picker">
       <div class="ds-page-tag">Components · Input</div>
@@ -24759,6 +24884,7 @@ const SECTIONS = {
   'c-checkbox':        { label: 'Checkbox',              group: 'Components' },
   'c-chip':            { label: 'Chips',                 group: 'Components' },
   'c-collapsible':     { label: 'Collapsible',           group: 'Components' },
+  'c-calendar':        { label: 'Calendar',     group: 'Components' },
   'c-date-picker':     { label: 'Date Picker',  group: 'Components' },
   'c-dialog':          { label: 'Dialog',                group: 'Components' },
   'c-divider':         { label: 'Divider',               group: 'Components' },
@@ -27051,10 +27177,19 @@ function calendarNav(navBtn) {
 // para saltar rápido (par shadcn captionLayout="dropdown").
 var CAL_MONTH_FMT = new Intl.DateTimeFormat('es', { month: 'long' });
 function calCap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function calIsoDate(y, m, d) { return y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0'); }
+function calIsoWeek(dt) {                              // número de semana ISO-8601
+  var d = new Date(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate()));
+  d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7) + 3);
+  var firstThu = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+  return 1 + Math.round(((d - firstThu) / 86400000 - 3 + ((firstThu.getUTCDay() + 6) % 7)) / 7);
+}
 function renderCalendar(cal) {
   var y = cal._y, m = cal._m, sel = cal._sel, range = cal._mode === 'range', rs = cal._start, re = cal._end;
   var today = new Date(), ty = today.getFullYear(), tm = today.getMonth(), td = today.getDate();
   var dropdown = cal.getAttribute('data-cal-caption') === 'dropdown';
+  var weeknums = !!cal._weeknums, booked = cal._booked || [];
+  cal.classList.toggle('calendar-has-weeknums', weeknums);
   var first = new Date(y, m, 1);
   var startDow = (first.getDay() + 6) % 7;            // lunes primero
   var daysInMonth = new Date(y, m + 1, 0).getDate();
@@ -27074,8 +27209,10 @@ function renderCalendar(cal) {
       + '<button type="button" class="calendar-nav-btn next" data-cal-nav="1" aria-label="Mes siguiente">›</button></div>';
   }
   var wk = '<div class="calendar-weekdays">' + ['L', 'M', 'X', 'J', 'V', 'S', 'D'].map(function (d) { return '<span class="calendar-weekday">' + d + '</span>'; }).join('') + '</div>';
-  var cells = '';
-  for (i = 0; i < startDow; i++) cells += '<span class="calendar-day calendar-day-outside" aria-hidden="true"></span>';
+  // Construimos las 6 filas de celdas en un array plano, luego lo ensamblamos
+  // (con o sin columna de número de semana).
+  var all = [];
+  for (i = 0; i < startDow; i++) all.push('<span class="calendar-day calendar-day-outside" aria-hidden="true"></span>');
   for (var day = 1; day <= daysInMonth; day++) {
     var cls = 'calendar-day', dts = new Date(y, m, day).getTime();
     if (y === ty && m === tm && day === td) cls += ' calendar-day-today';
@@ -27087,11 +27224,21 @@ function renderCalendar(cal) {
     } else if (sel && sel.getFullYear() === y && sel.getMonth() === m && sel.getDate() === day) {
       cls += ' calendar-day-selected';
     }
-    cells += '<button type="button" class="' + cls + '" data-cal-day="' + day + '">' + day + '</button>';
+    var isBooked = booked.indexOf(calIsoDate(y, m, day)) !== -1;
+    if (isBooked) cls += ' calendar-day-booked';
+    all.push('<button type="button" class="' + cls + '" data-cal-day="' + day + '"' + (isBooked ? ' aria-disabled="true"' : '') + '>' + day + '</button>');
   }
-  var used = startDow + daysInMonth, rows = Math.ceil(used / 7), trail = rows * 7 - used;
-  if (rows < 6) trail += (6 - rows) * 7;             // altura estable de 6 filas
-  for (i = 0; i < trail; i++) cells += '<span class="calendar-day calendar-day-outside" aria-hidden="true"></span>';
+  var used = startDow + daysInMonth, rows = Math.max(Math.ceil(used / 7), 6);
+  for (i = all.length; i < rows * 7; i++) all.push('<span class="calendar-day calendar-day-outside" aria-hidden="true"></span>');
+  var cells = '';
+  if (weeknums) {
+    for (var r = 0; r < rows; r++) {
+      var monday = new Date(y, m, 1 - startDow + r * 7);
+      cells += '<span class="calendar-weeknum" aria-hidden="true">' + calIsoWeek(monday) + '</span>' + all.slice(r * 7, r * 7 + 7).join('');
+    }
+  } else {
+    cells = all.join('');
+  }
   cal.innerHTML = head + wk + '<div class="calendar-grid">' + cells + '</div>';
 }
 function initCalendar(cal) {
@@ -27101,11 +27248,15 @@ function initCalendar(cal) {
   cal._y = d.getFullYear(); cal._m = d.getMonth(); cal._sel = null;
   cal._mode = cal.getAttribute('data-cal-mode') === 'range' ? 'range' : 'single';
   cal._start = null; cal._end = null;
+  cal._weeknums = cal.hasAttribute('data-cal-weeknumbers');
+  var bk = cal.getAttribute('data-cal-booked');
+  cal._booked = bk ? bk.split(',').map(function (s) { return s.trim(); }).filter(Boolean) : [];
   cal.addEventListener('click', function (e) {
     var nav = e.target.closest('[data-cal-nav]');
     if (nav) { cal._m += parseInt(nav.getAttribute('data-cal-nav'), 10); if (cal._m < 0) { cal._m = 11; cal._y--; } if (cal._m > 11) { cal._m = 0; cal._y++; } renderCalendar(cal); return; }
     var day = e.target.closest('[data-cal-day]');
     if (day) {
+      if (day.classList.contains('calendar-day-booked')) return;   // reservado → no seleccionable
       var picked = new Date(cal._y, cal._m, parseInt(day.getAttribute('data-cal-day'), 10));
       if (cal._mode === 'range') {
         if (!cal._start || cal._end) { cal._start = picked; cal._end = null; }       // start a new range
@@ -27118,24 +27269,56 @@ function initCalendar(cal) {
   cal.addEventListener('change', function (e) {
     if (e.target.hasAttribute('data-cal-month')) { cal._m = parseInt(e.target.value, 10); renderCalendar(cal); }
     else if (e.target.hasAttribute('data-cal-year')) { cal._y = parseInt(e.target.value, 10); renderCalendar(cal); }
+    else if (e.target.matches('input[type="time"]')) { cal._time = e.target.value; calOnSelect(cal); }
   });
   renderCalendar(cal);
+}
+// Presets: aplica un atajo (hoy/mañana/rango) al calendario hermano y re-renderiza.
+function calApplyPreset(btn, kind) {
+  var wrap = btn.closest('.calendar-with-presets') || btn.closest('.date-picker');
+  var cal = wrap ? wrap.querySelector('[data-calendar]') : null;
+  if (!cal) return;
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  if (cal._mode === 'range') {
+    var start = new Date(today), end = new Date(today);
+    if (kind === '7') start.setDate(start.getDate() - 6);
+    else if (kind === '30') start.setDate(start.getDate() - 29);
+    else if (kind === 'month') start = new Date(today.getFullYear(), today.getMonth(), 1);
+    cal._start = start; cal._end = end; cal._y = end.getFullYear(); cal._m = end.getMonth();
+  } else {
+    var dd = new Date(today);
+    if (kind === 'tomorrow') dd.setDate(dd.getDate() + 1);
+    else if (kind === 'in7') dd.setDate(dd.getDate() + 7);
+    else if (kind === 'in30') dd.setDate(dd.getDate() + 30);
+    cal._sel = dd; cal._y = dd.getFullYear(); cal._m = dd.getMonth();
+  }
+  var group = btn.closest('.calendar-presets');
+  if (group) Array.prototype.forEach.call(group.querySelectorAll('.calendar-preset-btn'), function (b) { b.removeAttribute('aria-current'); });
+  btn.setAttribute('aria-current', 'true');
+  renderCalendar(cal); calOnSelect(cal);
+}
+function calTimeSync(input) {
+  var picker = input.closest('.date-picker');
+  var cal = picker && picker.querySelector('[data-calendar]');
+  if (cal) calOnSelect(cal);
 }
 function calOnSelect(cal) {
   var picker = cal.closest('.date-picker');
   if (!picker) return;
+  var timeInput = picker.querySelector('input[type="time"]');
+  var timeStr = (timeInput && timeInput.value) ? ' · ' + timeInput.value : '';
   var trigger = picker.querySelector('.date-picker-trigger');
   var panel = picker.querySelector('.date-picker-panel');
   if (cal._mode === 'range') {
     if (!cal._start) return;
     var rf = new Intl.DateTimeFormat('es', { day: 'numeric', month: 'short', year: 'numeric' });
     if (trigger) { trigger.classList.remove('date-picker-trigger-empty'); trigger.lastChild.textContent = ' ' + rf.format(cal._start) + (cal._end ? ' — ' + rf.format(cal._end) : ' — …'); }
-    if (cal._end && panel) panel.setAttribute('hidden', ''); // close only once the range is complete
+    if (cal._end && panel && !timeInput) panel.setAttribute('hidden', ''); // close only once the range is complete
     return;
   }
   if (!cal._sel) return;
-  if (trigger) { trigger.classList.remove('date-picker-trigger-empty'); trigger.lastChild.textContent = ' ' + new Intl.DateTimeFormat('es', { day: 'numeric', month: 'long', year: 'numeric' }).format(cal._sel); }
-  if (panel) panel.setAttribute('hidden', '');
+  if (trigger) { trigger.classList.remove('date-picker-trigger-empty'); trigger.lastChild.textContent = ' ' + new Intl.DateTimeFormat('es', { day: 'numeric', month: 'long', year: 'numeric' }).format(cal._sel) + timeStr; }
+  if (panel && !timeInput) panel.setAttribute('hidden', '');   // con hora, el panel queda abierto para elegir la hora
 }
 function initAllCalendars() { Array.prototype.forEach.call(document.querySelectorAll('[data-calendar]'), initCalendar); }
 if (document.readyState !== 'loading') initAllCalendars();

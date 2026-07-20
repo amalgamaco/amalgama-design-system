@@ -31,12 +31,16 @@
 ═══════════════════════════════════════ */
 
 .calendar {
+  --cal-cell: 36px;              /* tamaño de celda; overridable por .calendar-sm/-lg */
   display: inline-block;
   padding: 12px;
   background: var(--color-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
 }
+/* Tamaño de celda custom (par shadcn cell size) */
+.calendar-sm { --cal-cell: 30px; }
+.calendar-lg { --cal-cell: 44px; }
 
 /* ── Header: mes centrado, flechas a los extremos ── */
 .calendar-header {
@@ -102,7 +106,7 @@
   display: flex;
 }
 .calendar-weekday {
-  width: 36px;
+  width: var(--cal-cell);
   padding-bottom: 4px;
   text-align: center;
   font-size: var(--font-size-label);
@@ -112,16 +116,16 @@
 /* ── Grilla (6 semanas × 7 días) ── */
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 36px);
-  grid-auto-rows: 36px;
+  grid-template-columns: repeat(7, var(--cal-cell));
+  grid-auto-rows: var(--cal-cell);
   row-gap: 2px;
 }
 .calendar-day {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: var(--cal-cell);
+  height: var(--cal-cell);
   padding: 0;
   border: none;
   border-radius: var(--radius-sm);
@@ -152,3 +156,64 @@
 }
 .calendar-day-range-start { border-top-right-radius: 0; border-bottom-right-radius: 0; }
 .calendar-day-range-end   { border-top-left-radius: 0;  border-bottom-left-radius: 0; }
+
+/* ── Booked (día reservado / no disponible) ── par shadcn "booked". No
+   seleccionable; se marca con línea tachada y color atenuado. */
+.calendar-day-booked {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  opacity: .6;
+  cursor: not-allowed;
+}
+.calendar-day-booked:hover:not(.calendar-day-selected) { background: transparent; }
+
+/* ── Week numbers (par shadcn showWeekNumber) ── columna líder con la semana ISO. */
+.calendar-has-weeknums .calendar-grid { grid-template-columns: var(--cal-cell) repeat(7, var(--cal-cell)); }
+.calendar-has-weeknums .calendar-weekdays { padding-left: var(--cal-cell); }
+.calendar-weeknum {
+  display: flex; align-items: center; justify-content: center;
+  width: var(--cal-cell); height: var(--cal-cell);
+  font-size: var(--font-size-label);
+  color: var(--text-muted);
+  opacity: .7;
+}
+
+/* ── Presets ── columna de accesos rápidos junto al calendario (par shadcn presets). */
+.calendar-with-presets { display: flex; align-items: stretch; gap: 12px; flex-wrap: wrap; }
+.calendar-presets {
+  display: flex; flex-direction: column; gap: 4px;
+  min-width: 132px;
+  border-right: 1px solid var(--border);
+  padding-right: 12px;
+}
+@media (max-width: 480px) {
+  .calendar-presets { border-right: 0; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 12px; flex-direction: row; flex-wrap: wrap; min-width: 0; }
+}
+.calendar-preset-btn {
+  text-align: left; padding: 8px 10px;
+  border: 0; border-radius: var(--radius-sm);
+  background: transparent; color: var(--color-on-surface);
+  font: inherit; font-size: var(--font-size-body-sm); cursor: pointer;
+  transition: background-color .15s var(--ease-default, ease);
+}
+.calendar-preset-btn:hover { background: var(--color-surface-variant); }
+.calendar-preset-btn:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 2px; }
+
+/* ── Date + time ── fila de hora bajo la grilla (par shadcn date-and-time picker). */
+.calendar-time-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 8px; padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-on-surface-variant);
+}
+.calendar-time-row input[type="time"] {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card-bg);
+  color: var(--color-on-surface);
+  font: inherit;
+}
+.calendar-time-row input[type="time"]:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 1px; }
