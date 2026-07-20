@@ -5506,6 +5506,7 @@ body { overflow-x: clip; }
               <div class="bd-cfg-item-col"><button class="btn-secondary" type="button" style="pointer-events:none">Tonal</button></div>
               <div class="bd-cfg-item-col"><button class="btn-tertiary" type="button" style="pointer-events:none">Con borde</button></div>
               <div class="bd-cfg-item-col"><button class="btn-text" type="button" style="pointer-events:none">Texto</button></div>
+              <div class="bd-cfg-item-col"><button class="btn-link" type="button" style="pointer-events:none">Link</button></div>
             </div></div>
             <div class="bd-cfg-row"><div class="bd-cfg-num">3</div><div class="bd-cfg-items">
               <div class="bd-cfg-item-col"><button class="btn-secondary" type="button" style="pointer-events:none">24px padding</button></div>
@@ -16303,6 +16304,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           </ol>
 
           <div class="bd-family-wrap" style="margin-top:20px">
+            <div><div class="chart-container"><svg class="chart-svg" viewBox="0 0 660 280" role="img" aria-label="Postulaciones por semana (área)"><g class="chart-grid"><line x1="40" y1="20" x2="40" y2="240"/><line x1="40" y1="240" x2="620" y2="240"/></g><polygon class="chart-area" points="40,240 40,145.7 136.7,98.6 233.3,114.3 330,75 426.7,35.7 523.3,90.7 620,130 620,240" fill="var(--chart-1)"/><polyline class="chart-line" points="40,145.7 136.7,98.6 233.3,114.3 330,75 426.7,35.7 523.3,90.7 620,130" stroke="var(--chart-1)"/><circle class="chart-dot" cx="40" cy="145.7" r="3.5" fill="var(--chart-1)"><title>Lun: 120</title></circle><circle class="chart-dot" cx="136.7" cy="98.6" r="3.5" fill="var(--chart-1)"><title>Mar: 180</title></circle><circle class="chart-dot" cx="233.3" cy="114.3" r="3.5" fill="var(--chart-1)"><title>Mié: 160</title></circle><circle class="chart-dot" cx="330" cy="75" r="3.5" fill="var(--chart-1)"><title>Jue: 210</title></circle><circle class="chart-dot" cx="426.7" cy="35.7" r="3.5" fill="var(--chart-1)"><title>Vie: 260</title></circle><circle class="chart-dot" cx="523.3" cy="90.7" r="3.5" fill="var(--chart-1)"><title>Sáb: 190</title></circle><circle class="chart-dot" cx="620" cy="130" r="3.5" fill="var(--chart-1)"><title>Dom: 140</title></circle><text class="chart-axis-label" x="40" y="262" text-anchor="middle">Lun</text><text class="chart-axis-label" x="136.7" y="262" text-anchor="middle">Mar</text><text class="chart-axis-label" x="233.3" y="262" text-anchor="middle">Mié</text><text class="chart-axis-label" x="330" y="262" text-anchor="middle">Jue</text><text class="chart-axis-label" x="426.7" y="262" text-anchor="middle">Vie</text><text class="chart-axis-label" x="523.3" y="262" text-anchor="middle">Sáb</text><text class="chart-axis-label" x="620" y="262" text-anchor="middle">Dom</text></svg></div></div>
+          </div>
+          <ol class="bd-family-legend">
+            <li><b>Area chart</b> — igual que line pero con relleno (<code>.chart-area</code>) para enfatizar volumen acumulado.</li>
+          </ol>
+
+          <div class="bd-family-wrap" style="margin-top:20px">
             <div><div class="chart-container"><svg class="chart-svg" viewBox="0 0 660 280" role="img" aria-label="Vacantes abiertas por área"><g class="chart-grid"><line x1="40" y1="20" x2="40" y2="240"/><line x1="40" y1="240" x2="620" y2="240"/></g><rect class="chart-bar" x="68" y="51.4" width="60" height="188.6" rx="6" fill="var(--chart-1)"><title>Ingeniería: 24 vacantes</title></rect><rect class="chart-bar" x="184" y="145.7" width="60" height="94.3" rx="6" fill="var(--chart-1)"><title>Producto: 12 vacantes</title></rect><rect class="chart-bar" x="300" y="177.1" width="60" height="62.9" rx="6" fill="var(--chart-1)"><title>Diseño: 8 vacantes</title></rect><rect class="chart-bar" x="416" y="98.6" width="60" height="141.4" rx="6" fill="var(--chart-1)"><title>Ventas: 18 vacantes</title></rect><rect class="chart-bar" x="532" y="192.9" width="60" height="47.1" rx="6" fill="var(--chart-1)"><title>Soporte: 6 vacantes</title></rect><text class="chart-axis-label" x="98" y="262" text-anchor="middle">Ingeniería</text><text class="chart-axis-label" x="214" y="262" text-anchor="middle">Producto</text><text class="chart-axis-label" x="330" y="262" text-anchor="middle">Diseño</text><text class="chart-axis-label" x="446" y="262" text-anchor="middle">Ventas</text><text class="chart-axis-label" x="562" y="262" text-anchor="middle">Soporte</text></svg></div></div>
           </div>
           <ol class="bd-family-legend">
@@ -20922,6 +20930,10 @@ import { Select } from &quot;./components/ui/select&quot;
               <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Deshabilitado</div>
               <div class="slider" data-disabled="true"><div class="slider-track"></div><div class="slider-range" style="left:0;width:30%"></div><input type="range" class="slider-input" min="0" max="100" value="30" disabled aria-label="Deshabilitado"></div>
             </div>
+            <div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Vertical (<code>.slider-vertical</code>)</div>
+              <div class="slider slider-vertical"><div class="slider-track"></div><div class="slider-range" style="height:60%"></div><input type="range" class="slider-input" min="0" max="100" value="60" aria-label="Vertical" oninput="sliderSync(this)"></div>
+            </div>
           </div>
           </div>
 
@@ -20930,6 +20942,7 @@ import { Select } from &quot;./components/ui/select&quot;
             <li>Default — un único thumb sobre un rango continuo (<code>defaultValue={[50]}</code>)</li>
             <li>Con step — avanza en pasos discretos (<code>step={10}</code>)</li>
             <li>Rango — dos thumbs definen un intervalo (<code>defaultValue={[20, 70]}</code>)</li>
+            <li>Vertical — <code>.slider-vertical</code> (mínimo abajo, máximo arriba)</li>
           </ol>
 
         </section>
@@ -23608,6 +23621,14 @@ import { Info } from &quot;lucide-react&quot;
               <button type="button" class="toggle" aria-label="Itálica" aria-pressed="true" onclick="togglePress(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg></button>
               <button type="button" class="toggle toggle-outline" aria-pressed="false" onclick="togglePress(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z"/></svg> Negrita con borde</button>
             </div></div>
+
+          <p class="ch-variant-label" style="margin-top:20px">Tamaños — <code>toggle-sm</code> · default · <code>toggle-lg</code></p>
+          <div class="bd-family-wrap"><div style="display:flex;align-items:center;gap:12px">
+              <button type="button" class="toggle toggle-sm" aria-pressed="true" onclick="togglePress(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z"/></svg> Small</button>
+              <button type="button" class="toggle" aria-pressed="true" onclick="togglePress(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z"/></svg> Default</button>
+              <button type="button" class="toggle toggle-lg" aria-pressed="true" onclick="togglePress(this)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z"/></svg> Large</button>
+              <button type="button" class="toggle" aria-pressed="false" disabled><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z"/></svg> Disabled</button>
+            </div></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -25131,6 +25152,9 @@ function sliderSync(input) {
     }
     range.style.left = pct(v0) + '%';
     range.style.right = (100 - pct(v1)) + '%';
+  } else if (wrap.classList.contains('slider-vertical')) {
+    range.style.bottom = '0';
+    range.style.height = pct(+input.value) + '%';
   } else {
     range.style.left = '0';
     range.style.width = pct(+input.value) + '%';
