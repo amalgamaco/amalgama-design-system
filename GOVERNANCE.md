@@ -1216,6 +1216,26 @@ chat/messaging components **Bubble**, **Message**, **Message Scroller**, and **M
 Native Select = Embassy's native `<select>`; Field = `form.css` field-group; Empty =
 `empty-state.css`; Label folded into field (§23).
 
+### 21.3d Item as the row primitive — card reuse review (2026-07)
+
+**Item** (`item.css`) is now organized under **Cards** (nav: Card → Item → Basic → Person
+→ Vacancy → Kanban → Stat → Nav) as the canonical **compact row primitive** (media +
+content + actions), with the full shadcn composition set rendered in its Specs (variant,
+size, icon/avatar/image media, group, header, link, dropdown). The specialized Embassy
+cards are compositions to be understood *on top of* this primitive:
+
+| Card | Reuse Item? | Verdict |
+|---|---|---|
+| **Person Card** | **Yes — strong candidate.** Structurally identical (avatar media + name/role + optional action) | Documented as an Item composition; kept as its own class for now (has a domain gradient avatar + verified page). Safe to fold onto `.item` in a dedicated refactor — flagged, not done unilaterally to avoid breaking its page. |
+| **Nav Card** | Partial | Doc-shell chrome (tag + big visual + arrow); shares the media+content+action shape but is not a consumable component. |
+| **Vacancy / Kanban Card** | No | Domain compositions with badges, assignee stacks, drag state, entrance animation — richer than a row. |
+| **Stat Card** | No | Metric display (big number + trend), not a row. |
+| **Basic Card** | No | A panel (header/title/content/footer), not a row — the complement to Item, not a reuse of it. |
+
+Rule going forward: **new** compact list/row content → build on `.item`; reach for a
+domain card only when it adds domain structure. Person Card is the one existing candidate
+to migrate onto `.item` internally (tracked, not yet done).
+
 ### 21.3 Implementation notes
 
 - `.dropdown-content[hidden]` needs an explicit `display:none` rule — the component's

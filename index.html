@@ -3565,6 +3565,7 @@ body { overflow-x: clip; }
       </div>
       <div class="ds-nav-item" data-section="c-card" onclick="navigate('c-card')">Card</div>
       <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-item" onclick="navigate('c-item')">Item</div>
         <div class="ds-nav-item" data-section="c-basic-card" onclick="navigate('c-basic-card')">Basic Card</div>
         <div class="ds-nav-item" data-section="c-person" onclick="navigate('c-person')">Person Card</div>
         <div class="ds-nav-item" data-section="c-vacancy" onclick="navigate('c-vacancy')">Vacancy Card</div>
@@ -3613,7 +3614,6 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-attachment" onclick="navigate('c-attachment')">Attachment</div>
       <div class="ds-nav-item" data-section="c-button-group" onclick="navigate('c-button-group')">Button Group</div>
       <div class="ds-nav-item" data-section="c-input-group" onclick="navigate('c-input-group')">Input Group</div>
-      <div class="ds-nav-item" data-section="c-item" onclick="navigate('c-item')">Item</div>
       <div class="ds-nav-item" data-section="c-spinner" onclick="navigate('c-spinner')">Spinner</div>
     </nav>
   </div>
@@ -8593,6 +8593,7 @@ export { Textarea }</code></pre>
         <h1 class="docs-page-title">Card</h1>
         <p class="docs-page-desc">Contenedor base para agrupar contenido relacionado. Seleccioná una variante para ver su documentación completa.</p>
         <div class="ds-card-grid" style="margin:14px 0 4px">
+          <div class="ds-card-link" onclick="navigate('c-item')"><div class="ds-card-icon"><i data-lucide="rows-3"></i></div><div class="ds-card-name">Item</div><div class="ds-card-desc">Primitiva de fila: media + texto + acciones.</div></div>
           <div class="ds-card-link" onclick="navigate('c-basic-card')"><div class="ds-card-icon"><i data-lucide="square"></i></div><div class="ds-card-name">Basic Card</div><div class="ds-card-desc">Contenedor base genérico.</div></div>
           <div class="ds-card-link" onclick="navigate('c-person')"><div class="ds-card-icon"><i data-lucide="user"></i></div><div class="ds-card-name">Person Card</div><div class="ds-card-desc">Persona con avatar, nombre y rol.</div></div>
           <div class="ds-card-link" onclick="navigate('c-vacancy')"><div class="ds-card-icon"><i data-lucide="briefcase"></i></div><div class="ds-card-name">Vacancy Card</div><div class="ds-card-desc">Vacante con estado y asignados.</div></div>
@@ -21741,19 +21742,56 @@ import { Button } from &quot;./components/ui/button&quot;
         <div class="bd-family-wrap"><div class="item item-outline" style="max-width:420px"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/></svg></div><div class="item-content"><div class="item-title">Notificaciones</div><div class="item-description">Recibí avisos por email sobre novedades.</div></div><div class="item-actions"><button class="btn-tertiary btn-sm" type="button">Config</button></div></div></div>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
-        <h2 class="docs-section-title">Variantes</h2>
-        <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:12px;max-width:440px">
-          <div class="item-group" style="border:1px solid var(--border);border-radius:10px;overflow:hidden">
-            <div class="item"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/></svg></div><div class="item-content"><div class="item-title">Con ícono + acción</div><div class="item-description">default, dentro de un grupo con separadores.</div></div><div class="item-actions"><button class="btn-tertiary btn-sm" type="button">Ver</button></div></div>
-            <hr class="item-separator">
-            <div class="item item-clickable"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><div class="item-content"><div class="item-title">Clickable</div><div class="item-description">a.item / .item-clickable con hover.</div></div></div>
-          </div>
-          <div class="item item-muted"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg></div><div class="item-content"><div class="item-title">Muted</div><div class="item-description">.item-muted.</div></div></div>
+        <h2 class="docs-section-title">Composiciones</h2>
+        <p class="docs-section-desc">Reproducen las composiciones oficiales del Item de shadcn con tokens Embassy. Overview muestra el Item básico.</p>
+
+        <p class="ch-variant-label">Variant — default · outline · muted</p>
+        <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:10px;max-width:460px">
+          <div class="item"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/></svg></div><div class="item-content"><div class="item-title">Default</div><div class="item-description">Sin borde ni fondo.</div></div></div>
+          <div class="item item-outline"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/></svg></div><div class="item-content"><div class="item-title">Outline</div><div class="item-description"><code>.item-outline</code> — con borde.</div></div></div>
+          <div class="item item-muted"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/></svg></div><div class="item-content"><div class="item-title">Muted</div><div class="item-description"><code>.item-muted</code> — fondo tenue.</div></div></div>
         </div>
-        <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>default / outline / muted</td><td><code>.item</code> · <code>.item-outline</code> · <code>.item-muted</code></td></tr><tr><td>Tamaño sm</td><td><code>.item-sm</code></td></tr><tr><td>Media</td><td><code>.item-media-icon</code> · <code>.item-media-image</code></td></tr><tr><td>Grupo</td><td><code>.item-group</code> + <code>.item-separator</code></td></tr></tbody></table>
+
+        <p class="ch-variant-label" style="margin-top:20px">Size — default · sm</p>
+        <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:10px;max-width:460px">
+          <div class="item item-outline"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg></div><div class="item-content"><div class="item-title">Default</div><div class="item-description">gap 16 · padding 16.</div></div></div>
+          <div class="item item-outline item-sm"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg></div><div class="item-content"><div class="item-title">Small (<code>.item-sm</code>)</div><div class="item-description">gap 10 · padding 12/16.</div></div></div>
+        </div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Media — icon · avatar · image</p>
+        <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:10px;max-width:460px">
+          <div class="item item-outline"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/></svg></div><div class="item-content"><div class="item-title">Icon</div><div class="item-description"><code>.item-media-icon</code> — chip con ícono.</div></div></div>
+          <div class="item item-outline"><div class="item-media"><span class="avatar avatar-md"><span class="avatar-fallback">AT</span></span></div><div class="item-content"><div class="item-title">Ana Torres</div><div class="item-description">Avatar dentro de <code>.item-media</code>.</div></div></div>
+          <div class="item item-outline"><div class="item-media item-media-image"><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--color-primary-container),var(--color-tertiary-container))"></div></div><div class="item-content"><div class="item-title">Image</div><div class="item-description"><code>.item-media-image</code> — miniatura 40px.</div></div></div>
+        </div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Group + Header — filas con separadores y encabezado</p>
+        <div class="bd-family-wrap"><div class="item-group" style="max-width:460px;width:100%;border:1px solid var(--border);border-radius:10px;overflow:hidden">
+          <div class="item"><div class="item-header"><div class="item-title" style="font:600 12px var(--font-body);text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted)">Miembros del equipo</div><a class="btn-link btn-xs" href="#" onclick="return false">Ver todos</a></div></div>
+          <hr class="item-separator">
+          <div class="item"><div class="item-media"><span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span></div><div class="item-content"><div class="item-title">Carlos López</div><div class="item-description">Frontend</div></div><div class="item-actions"><span class="badge badge-active">Activo</span></div></div>
+          <hr class="item-separator">
+          <div class="item"><div class="item-media"><span class="avatar avatar-md"><span class="avatar-fallback">AM</span></span></div><div class="item-content"><div class="item-title">Ana Martínez</div><div class="item-description">Producto</div></div><div class="item-actions"><span class="badge badge-warning">Pendiente</span></div></div>
+        </div></div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Link — item completo navegable (<code>a.item</code>)</p>
+        <div class="bd-family-wrap"><a class="item item-outline" href="#" onclick="return false" style="max-width:460px;width:100%"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="item-content"><div class="item-title">Documentación de onboarding</div><div class="item-description">Toda la fila es un enlace — hover + focus-visible.</div></div><div class="item-actions"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div></a></div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Dropdown — acción con menú</p>
+        <div class="bd-family-wrap"><div class="item item-outline" style="max-width:460px;width:100%"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/></svg></div><div class="item-content"><div class="item-title">CV_Ana_Torres.pdf</div><div class="item-description">Subido hace 2 días</div></div><div class="item-actions" style="position:relative"><button class="icon-btn btn-sm" type="button" aria-label="Opciones" aria-haspopup="menu" onclick="var p=this.nextElementSibling;p.hidden=!p.hidden;event.stopPropagation()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button><div class="dropdown-content" role="menu" hidden style="position:absolute;right:0;top:calc(100% + 4px)"><button class="dropdown-item" role="menuitem" type="button">Descargar</button><button class="dropdown-item" role="menuitem" type="button">Renombrar</button><div class="dropdown-separator"></div><button class="dropdown-item" data-variant="danger" role="menuitem" type="button">Eliminar</button></div></div></div></div>
+
+        <table class="ds-table" style="margin-top:20px"><thead><tr><th>Composición</th><th>Cómo</th></tr></thead><tbody>
+          <tr><td>Variant</td><td><code>.item</code> · <code>.item-outline</code> · <code>.item-muted</code></td></tr>
+          <tr><td>Size</td><td>default · <code>.item-sm</code></td></tr>
+          <tr><td>Icon / Avatar / Image</td><td><code>.item-media-icon</code> · <code>.item-media</code> + <code>.avatar</code> · <code>.item-media-image</code></td></tr>
+          <tr><td>Group</td><td><code>.item-group</code> + <code>.item-separator</code></td></tr>
+          <tr><td>Header</td><td><code>.item-header</code> (fila full-width, título + acción)</td></tr>
+          <tr><td>Link</td><td><code>a.item</code> — fila navegable con hover/focus</td></tr>
+          <tr><td>Dropdown</td><td><code>.item-actions</code> + Dropdown Menu (⋮)</td></tr>
+        </tbody></table>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Filas ricas reutilizables (settings, resultados).</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Datos tabulares → Table.</li><li>Card con header/footer → Card.</li></ul></div></div></div></section></div>
-      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Interactiva: usá <code>&lt;a&gt;</code>/<code>&lt;button&gt;</code> o <code>role</code>+<code>tabindex</code>; trae <code>:focus-visible</code>.</li><li><span class="ds-a11y-icon">♿</span><code>.item-group</code> puede exponer <code>role="list"</code>.</li></ul></section></div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span><b>Link:</b> un Item navegable es un <code>&lt;a class="item"&gt;</code> real — toda la fila es un enlace con hover + <code>:focus-visible</code>; no anides otros controles focusables dentro (romperías el link).</li><li><span class="ds-a11y-icon">♿</span><b>Dropdown:</b> el trigger de acciones va aparte del área navegable; usá <code>aria-haspopup="menu"</code> + <code>aria-expanded</code>, y <code>role="menu"</code>/<code>role="menuitem"</code> en el panel.</li><li><span class="ds-a11y-icon">♿</span>Interactiva no-enlace: <code>&lt;button class="item"&gt;</code> o <code>role="button"</code>+<code>tabindex="0"</code>.</li><li><span class="ds-a11y-icon">♿</span><code>.item-group</code> puede exponer <code>role="list"</code> y cada Item <code>role="listitem"</code>.</li><li><span class="ds-a11y-icon">♿</span>La descripción usa <code>line-clamp</code>; asegurá que el texto completo esté disponible si es esencial.</li></ul></section></div>
       <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;div class="item item-outline"&gt;
   &lt;div class="item-media item-media-icon"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/div&gt;
   &lt;div class="item-content"&gt;
@@ -21761,6 +21799,29 @@ import { Button } from &quot;./components/ui/button&quot;
     &lt;div class="item-description"&gt;Recibí avisos por email.&lt;/div&gt;
   &lt;/div&gt;
   &lt;div class="item-actions"&gt;&lt;button class="btn-tertiary btn-sm"&gt;Config&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Link: toda la fila navegable --&gt;
+&lt;a class="item item-outline" href="/onboarding"&gt;
+  &lt;div class="item-media item-media-icon"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/div&gt;
+  &lt;div class="item-content"&gt;&lt;div class="item-title"&gt;Onboarding&lt;/div&gt;&lt;/div&gt;
+&lt;/a&gt;
+
+&lt;!-- Avatar / Image media --&gt;
+&lt;div class="item-media"&gt;&lt;span class="avatar avatar-md"&gt;…&lt;/span&gt;&lt;/div&gt;
+&lt;div class="item-media item-media-image"&gt;&lt;img src="…" alt=""&gt;&lt;/div&gt;
+
+&lt;!-- Group + Header --&gt;
+&lt;div class="item-group" role="list"&gt;
+  &lt;div class="item"&gt;&lt;div class="item-header"&gt;…título + acción…&lt;/div&gt;&lt;/div&gt;
+  &lt;hr class="item-separator"&gt;
+  &lt;div class="item" role="listitem"&gt;…&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Dropdown en las acciones --&gt;
+&lt;div class="item-actions"&gt;
+  &lt;button class="icon-btn btn-sm" aria-haspopup="menu" aria-expanded="false"&gt;⋮&lt;/button&gt;
+  &lt;div class="dropdown-content" role="menu" hidden&gt;…&lt;/div&gt;
 &lt;/div&gt;</code></pre></div></section></div>
     </section>
 
@@ -24421,7 +24482,7 @@ const SECTIONS = {
   'c-attachment':      { label: 'Attachment',            group: 'Components' },
   'c-button-group':    { label: 'Button Group',          group: 'Components', parent: 'c-button' },
   'c-input-group':     { label: 'Input Group',           group: 'Components', parent: 'c-input' },
-  'c-item':            { label: 'Item',                  group: 'Components' },
+  'c-item':            { label: 'Item',                  group: 'Components', parent: 'c-card' },
   'c-spinner':         { label: 'Spinner',               group: 'Components', parent: 'c-loading' },
   // Legacy sub-pages (accessible via hash)
   'radius':            { label: 'Radius',                group: 'Styles' },
