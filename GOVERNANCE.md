@@ -1211,10 +1211,12 @@ The **utility set** that was genuinely missing was added as flat CSS + full DS p
 **Attachment** (`attachment.css`). (Kbd was added then removed — not needed.)
 
 ⚠️ **Intentionally NOT added** — out of Embassy's product scope (recruiting/HR): the
-chat/messaging components **Bubble**, **Message**, **Message Scroller**, and **Marker**
-(map pin). Add only if a chat or map surface is introduced; flag with design first.
-Native Select = Embassy's native `<select>`; Field = `form.css` field-group; Empty =
-`empty-state.css`; Label folded into field (§23).
+chat/messaging family **Bubble** (message bubble), **Message** (message-row scaffold),
+**Message Scroller** (auto-scroll chat viewport), and **Marker** (chat/timeline
+label-separator — *not* a map pin). Add only if a chat surface is introduced; flag with
+design first. **Direction** (`DirectionProvider`/`useDirection`, RTL context) is N/A for a
+buildless LTR-only DS — no code to add. Native Select = Embassy's native `<select>`;
+Field = `form.css` field-group; Empty = `empty-state.css`; Label folded into field (§23).
 
 ### 21.3d Cards architecture — one reusable primitive (2026-07, final)
 

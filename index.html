@@ -11250,6 +11250,10 @@ export function Toaster() {
   <div class="skeleton skeleton-text" style="width:85%"></div>
   <div class="skeleton skeleton-text" style="width:70%"></div>
   <div style="margin-top:16px"><div class="skeleton skeleton-card" style="width:100%"></div></div>
+  <div style="display:flex;align-items:center;gap:12px;margin-top:16px">
+    <div class="skeleton skeleton-circle"></div>
+    <div style="flex:1"><div class="skeleton skeleton-text" style="width:50%"></div><div class="skeleton skeleton-text" style="width:80%;margin-top:6px"></div></div>
+  </div>
 </div>
           </div>
 
@@ -11258,6 +11262,7 @@ export function Toaster() {
             <li>Text — <code>skeleton-text</code> (14px)</li>
             <li>Title — <code>skeleton-title</code> (22px, 60% de ancho)</li>
             <li>Card — <code>skeleton-card</code> (80px)</li>
+            <li>Circle — <code>skeleton-circle</code> / <code>skeleton-avatar</code> (40px, para avatares en list rows)</li>
           </ol>
 
         </section>
@@ -13826,15 +13831,21 @@ css/layout.css</code></pre>
     </div>
   </div>
   <div>
-    <p class="ch-variant-label">Grupo</p>
-    <div style="display:flex;align-items:center">
-      <div class="avatar-group">
-        <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>
-        <span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span>
-        <span class="avatar avatar-md"><span class="avatar-fallback">AM</span></span>
-        <span class="avatar avatar-md"><span class="avatar-fallback">JP</span></span>
-      </div>
-      <span style="margin-left:8px;font-size:var(--font-size-label);color:var(--text-muted)">+4 más</span>
+    <p class="ch-variant-label">Con estado (<code>.avatar-badge</code>)</p>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span class="avatar avatar-lg"><span class="avatar-fallback">MG</span><span class="avatar-badge avatar-badge-online" title="En línea"></span></span>
+      <span class="avatar avatar-lg"><span class="avatar-fallback">CL</span><span class="avatar-badge avatar-badge-busy" title="Ocupado"></span></span>
+      <span class="avatar avatar-lg"><span class="avatar-fallback">AM</span><span class="avatar-badge avatar-badge-away" title="Ausente"></span></span>
+      <span class="avatar avatar-lg"><span class="avatar-fallback">JP</span><span class="avatar-badge avatar-badge-offline" title="Desconectado"></span></span>
+    </div>
+  </div>
+  <div>
+    <p class="ch-variant-label">Grupo + overflow (<code>.avatar-group-count</code>)</p>
+    <div class="avatar-group">
+      <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>
+      <span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span>
+      <span class="avatar avatar-md"><span class="avatar-fallback">AM</span></span>
+      <span class="avatar avatar-md avatar-group-count">+4</span>
     </div>
   </div>
 </div>
@@ -23291,6 +23302,37 @@ import { Info } from &quot;lucide-react&quot;
                 <li class="breadcrumb-item"><span class="breadcrumb-page" role="link" aria-disabled="true" aria-current="page">Diseñador/a UX</span></li>
               </ol>
             </nav></div>
+
+          <p class="ch-variant-label" style="margin-top:24px">Separador custom — ícono chevron en vez de <code>/</code></p>
+          <div class="bd-family-wrap"><nav class="breadcrumb" aria-label="breadcrumb">
+              <ol class="breadcrumb-list">
+                <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Inicio</a></li>
+                <li class="breadcrumb-separator" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></li>
+                <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Vacantes</a></li>
+                <li class="breadcrumb-separator" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></li>
+                <li class="breadcrumb-item"><span class="breadcrumb-page" aria-current="page">Diseñador/a UX</span></li>
+              </ol>
+            </nav></div>
+
+          <p class="ch-variant-label" style="margin-top:24px">Colapsado — ancestros ocultos tras un menú (<code>.breadcrumb-ellipsis</code> + Dropdown)</p>
+          <div class="bd-family-wrap"><nav class="breadcrumb" aria-label="breadcrumb">
+              <ol class="breadcrumb-list">
+                <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Inicio</a></li>
+                <li class="breadcrumb-separator" aria-hidden="true">/</li>
+                <li class="breadcrumb-item" style="position:relative">
+                  <button class="breadcrumb-ellipsis" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Mostrar ancestros ocultos" onclick="var p=this.nextElementSibling;var o=p.hidden;p.hidden=!o;this.setAttribute('aria-expanded',String(o));event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg></button>
+                  <div class="dropdown-content" role="menu" hidden style="position:absolute;left:0;top:calc(100% + 4px);min-width:160px">
+                    <a class="dropdown-item" role="menuitem" href="#">Vacantes</a>
+                    <a class="dropdown-item" role="menuitem" href="#">Diseño</a>
+                    <a class="dropdown-item" role="menuitem" href="#">Equipo</a>
+                  </div>
+                </li>
+                <li class="breadcrumb-separator" aria-hidden="true">/</li>
+                <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Postulantes</a></li>
+                <li class="breadcrumb-separator" aria-hidden="true">/</li>
+                <li class="breadcrumb-item"><span class="breadcrumb-page" aria-current="page">Ana Torres</span></li>
+              </ol>
+            </nav></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -23509,12 +23551,24 @@ import { Info } from &quot;lucide-react&quot;
                 <div style="padding:6px 0;font-size:var(--font-size-body-sm)">Candidato #10</div>
               </div>
             </div></div>
+
+          <p class="ch-variant-label" style="margin-top:24px">Horizontal — scroll en eje X (fila de tarjetas)</p>
+          <div class="bd-family-wrap"><div class="scroll-area" style="width:100%;max-width:26rem;border-radius:var(--radius-md);border:1px solid var(--border)">
+              <div style="display:flex;gap:10px;padding:12px;width:max-content">
+                <div style="flex:0 0 auto;width:8.5rem;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:var(--font-size-body-sm)">Diseño</div>
+                <div style="flex:0 0 auto;width:8.5rem;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:var(--font-size-body-sm)">Frontend</div>
+                <div style="flex:0 0 auto;width:8.5rem;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:var(--font-size-body-sm)">Backend</div>
+                <div style="flex:0 0 auto;width:8.5rem;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:var(--font-size-body-sm)">Producto</div>
+                <div style="flex:0 0 auto;width:8.5rem;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:var(--font-size-body-sm)">Data</div>
+                <div style="flex:0 0 auto;width:8.5rem;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:var(--font-size-body-sm)">Marketing</div>
+              </div>
+            </div></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <section class="docs-section">
           <h2 class="docs-section-title">HTML</h2>
-          <p class="docs-section-desc">Copiá <code>css/components/scroll-area.css</code>. Sin dependencias, sin JS.</p>
+          <p class="docs-section-desc">Copiá <code>css/components/scroll-area.css</code>. Sin dependencias, sin JS. Para scroll horizontal, poné el contenido en una fila con <code>width:max-content</code>.</p>
           <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre class="docs-code"><code>&lt;div class=&quot;scroll-area&quot; style=&quot;height:10rem;width:16rem;border-radius:var(--radius-md);border:1px solid var(--border)&quot;&gt;
   &lt;div style=&quot;padding:12px&quot;&gt;…contenido…&lt;/div&gt;
