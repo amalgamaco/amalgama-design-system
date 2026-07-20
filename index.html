@@ -9290,6 +9290,18 @@ export { Badge, badgeVariants }</code></pre>
   <tbody><tr class="clickable" tabindex="0"><td>Mercedes Garcia</td><td>Disenadora UX</td><td>Producto</td><td><span class="badge badge-active">Activa</span></td></tr><tr class="clickable" tabindex="0"><td>Carlos Lopez</td><td>Desarrollador</td><td>Ingenieria</td><td><span class="badge badge-active">Activa</span></td></tr><tr class="clickable" tabindex="0"><td>Ana Martinez</td><td>PM</td><td>Producto</td><td><span class="badge badge-warning">Pendiente</span></td></tr></tbody>
 </table></div>
         </div>
+        <p class="ch-variant-label" style="margin-top:16px">Con caption y pie de totales</p>
+        <p class="docs-section-desc">Un <code>&lt;caption&gt;</code> describe la tabla (al pie) y un <code>&lt;tfoot&gt;</code> muestra la fila de totales (borde superior, fondo tenue, peso medio) — par shadcn TableCaption + TableFooter.</p>
+        <div class="docs-preview full-width">
+          <div class="table-scroll"><table class="data-table">
+  <caption>Ventas por trimestre — 2026</caption>
+  <thead><tr><th>Trimestre</th><th>Región</th><th style="text-align:right">Monto</th></tr></thead>
+  <tbody><tr><td>Q1</td><td>LATAM</td><td style="text-align:right">$12.000</td></tr><tr><td>Q2</td><td>LATAM</td><td style="text-align:right">$18.500</td></tr><tr><td>Q3</td><td>LATAM</td><td style="text-align:right">$15.200</td></tr></tbody>
+  <tfoot><tr><td colspan="2">Total</td><td style="text-align:right">$45.700</td></tr></tfoot>
+</table></div>
+        </div>
+        <p class="ch-variant-label" style="margin-top:16px">Selección de filas, filtro y orden</p>
+        <p class="docs-section-desc">Para selección (checkbox por fila + “N de M”), filtro de texto, orden por columna, visibilidad de columnas y paginación, usá <b>Data Table</b> (<code>data-datatable</code> + <code>initDataTable()</code>) — construida sobre esta misma Table.</p>
       </div>
 
       <!-- Medidas -->
