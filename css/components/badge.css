@@ -49,3 +49,26 @@
   text-transform: uppercase; letter-spacing: .1em;
 }
 
+
+/* ── Ícono / spinner líder ── el badge admite un SVG o un spinner al inicio
+   (par shadcn "with icon" / "with spinner"). El gap no afecta a los badges de
+   solo texto. */
+.badge { gap: 4px; }
+.badge > svg { width: 12px; height: 12px; flex-shrink: 0; }
+/* El spinner dentro de un badge hereda el color del texto para contrastar sobre
+   cualquier variante (en vez de los tokens fijos primary/outline). */
+.badge .spinner {
+  width: 12px; height: 12px; border-width: 2px;
+  border-color: color-mix(in srgb, currentColor 30%, transparent);
+  border-top-color: currentColor;
+  vertical-align: baseline;
+}
+
+/* ── Link ── badge navegable. Como <a class="badge …"> (asChild) hereda su
+   variante y agrega hover; la variante .badge-link es el estilo de enlace de
+   texto de shadcn (sin relleno, color de acento, subrayado en hover). */
+a.badge { text-decoration: none; cursor: pointer; transition: opacity var(--duration-fast) var(--ease-default); }
+a.badge:hover { opacity: .85; }
+a.badge:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.badge-link { background: transparent; color: var(--color-primary); padding-left: 2px; padding-right: 2px; }
+a.badge-link:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }

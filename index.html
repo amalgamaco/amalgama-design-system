@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=3">
+<link rel="stylesheet" href="css/components.css?v=4">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -9013,27 +9013,20 @@ export { Textarea }</code></pre>
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li><b>8 variantes semánticas</b> (prop <code>variant</code>): <code>open</code>, <code>active</code>, <code>closed</code>, <code>draft</code>, <code>archived</code>, <code>warning</code>, <code>tertiary</code>, <code>info</code> — cada color comunica un significado fijo.</li>
-            <li><b>Prop <code>label</code>:</b> tipografía monoespaciada en mayúsculas para etiquetas de categoría/sección.</li>
-            <li><b>Solo lectura:</b> el badge no define estados interactivos — si es filtrable o clickeable, es un Chip.</li>
+            <li><b>Solo lectura:</b> comunica estado o categoría; si es filtrable o clickeable, es un Chip.</li>
+            <li><b>Variantes semánticas</b> (en Specs): <code>open</code>/<code>active</code>/<code>closed</code>/<code>draft</code>/<code>archived</code>/<code>warning</code>/<code>tertiary</code>/<code>info</code> — cada color con un significado fijo — más el modificador <code>label</code>.</li>
+            <li><b>Composiciones</b> (en Specs): con ícono, con spinner y como enlace.</li>
             <li><b>Regla clave:</b> todo label categórico debe ser badge — nunca texto plano coloreado.</li>
           </ul>
 
-          <!-- Component variants -->
+          <!-- Overview = solo el Badge básico. Variantes y composiciones en Specs. -->
           <div class="bd-family-wrap" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-            <div><div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span class="badge badge-open">Abierta</span><span class="badge badge-active">Activa</span><span class="badge badge-closed">Cerrada</span><span class="badge badge-draft">Borrador</span><span class="badge badge-archived">Archivada</span><span class="badge badge-warning">En revisión</span><span class="badge badge-tertiary">Terciaria</span><span class="badge badge-info">Info</span></div></div>
+            <span class="badge badge-open">Abierta</span>
           </div>
 
           <!-- Legend — variant references -->
           <ol class="bd-family-legend">
-            <li>Abierta · <code>variant="open"</code> — vacante abierta / disponible</li>
-            <li>Activa · <code>variant="active"</code> — proceso activo / en curso</li>
-            <li>Cerrada · <code>variant="closed"</code> — cerrada / finalizada</li>
-            <li>Borrador · <code>variant="draft"</code> — sin publicar (con borde)</li>
-            <li>Archivada · <code>variant="archived"</code> — inactiva (opacidad reducida)</li>
-            <li>Pendiente · <code>variant="warning"</code> — requiere atención</li>
-            <li>Nueva · <code>variant="tertiary"</code> — destacada</li>
-            <li>Información · <code>variant="info"</code> — informativo / categoría / versión</li>
+            <li>Badge básico — píldora de solo lectura; la variante de color fija el significado (acá <code>variant="open"</code>)</li>
           </ol>
 
         </section>
@@ -9068,6 +9061,29 @@ export { Textarea }</code></pre>
           <div class="docs-preview" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
             <div><div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><span class="badge badge-info badge-label">Styles · Color</span><span class="badge badge-info badge-label">Components · Actions</span><span class="badge badge-draft badge-label">Foundations · Tokens</span></div></div>
           </div>
+          <p class="ch-variant-label" style="margin-top:16px">Con ícono</p>
+          <p class="docs-section-desc">El badge admite un SVG líder (12px) con <code>gap</code> automático — refuerza el significado del estado.</p>
+          <div class="docs-preview" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <span class="badge badge-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Verificada</span>
+            <span class="badge badge-warning"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>Pendiente</span>
+            <span class="badge badge-closed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Rechazada</span>
+          </div>
+
+          <p class="ch-variant-label" style="margin-top:16px">Con spinner</p>
+          <p class="docs-section-desc">Para un estado en curso: un <code>.spinner</code> líder que hereda el color del texto del badge.</p>
+          <div class="docs-preview" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <span class="badge badge-info"><span class="spinner" role="status" aria-label="Procesando"></span>Procesando</span>
+            <span class="badge badge-warning"><span class="spinner" role="status" aria-label="Sincronizando"></span>Sincronizando</span>
+          </div>
+
+          <p class="ch-variant-label" style="margin-top:16px">Link</p>
+          <p class="docs-section-desc">Un badge navegable: envolvé cualquier variante en <code>&lt;a class="badge …"&gt;</code> (hover con opacidad), o usá <code>.badge-link</code> para el estilo de enlace de texto (subrayado en hover).</p>
+          <div class="docs-preview" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <a class="badge badge-info" href="#" onclick="return false">v2.4.0</a>
+            <a class="badge badge-tertiary" href="#" onclick="return false">3 nuevas</a>
+            <a class="badge badge-link" href="#" onclick="return false">Ver changelog</a>
+          </div>
+
           <p class="ch-variant-label" style="margin-top:16px">Uso en contexto</p>
           <div class="docs-preview" style="display:flex;flex-direction:column;gap:12px">
             <div><div style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center;gap:8px;font-weight:600">Diseñador UX <span class="badge badge-open">Abierta</span></div><div class="text-on-surface-variant" style="display:flex;align-items:center;gap:8px;font-size:13px"><span class="badge badge-info badge-label">Components · Buttons</span></div></div></div>
@@ -9200,7 +9216,7 @@ export { Textarea }</code></pre>
       <div class="ds-comp-tab-panel" data-tab="accessibility">
         <div class="docs-section">
           <h2 class="docs-section-title">Foco visible</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El badge es de solo lectura y no recibe foco — el componente no define estados de foco; si necesitás interacción, el componente correcto es Chip</li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El badge de estado es de solo lectura y no recibe foco — para interacción de filtro usá Chip</li><li><span class="ds-a11y-icon">♿</span><b>Excepción link:</b> un <code>&lt;a class="badge"&gt;</code> sí es focusable y muestra anillo de foco (2px <code>--color-focus</code>); el spinner líder lleva <code>role="status"</code> + <code>aria-label</code></li></ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
@@ -9227,7 +9243,17 @@ export { Textarea }</code></pre>
 &lt;span class=&quot;badge badge-warning&quot;&gt;Urgente&lt;/span&gt;
 &lt;span class=&quot;badge badge-draft&quot;&gt;Borrador&lt;/span&gt;
 &lt;span class=&quot;badge badge-tertiary&quot;&gt;Nuevo&lt;/span&gt;
-&lt;span class=&quot;badge badge-info&quot;&gt;Informativo&lt;/span&gt;</code></pre>
+&lt;span class=&quot;badge badge-info&quot;&gt;Informativo&lt;/span&gt;
+
+&lt;!-- Con ícono (SVG líder, 12px) --&gt;
+&lt;span class=&quot;badge badge-active&quot;&gt;&lt;svg&gt;…&lt;/svg&gt;Verificada&lt;/span&gt;
+
+&lt;!-- Con spinner (estado en curso) --&gt;
+&lt;span class=&quot;badge badge-info&quot;&gt;&lt;span class=&quot;spinner&quot; role=&quot;status&quot; aria-label=&quot;Procesando&quot;&gt;&lt;/span&gt;Procesando&lt;/span&gt;
+
+&lt;!-- Link: cualquier variante como &lt;a&gt;, o la variante .badge-link --&gt;
+&lt;a class=&quot;badge badge-info&quot; href=&quot;/changelog&quot;&gt;v2.4.0&lt;/a&gt;
+&lt;a class=&quot;badge badge-link&quot; href=&quot;/changelog&quot;&gt;Ver changelog&lt;/a&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
         </div>
