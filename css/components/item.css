@@ -1,0 +1,75 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Item
+   Primitiva de fila de contenido flexible: media + contenido (título/descripción)
+   + acciones (par shadcn Item). Más genérica que List (que es MD3, una sola/dos
+   líneas) y que las cards de dominio.
+
+   Cuándo usar: filas ricas y reutilizables (settings rows, resultados, notif con
+     ícono/avatar + texto + acción), listas con separadores.
+   Cuándo no: tabla de datos (Table); tarjeta con header/footer (Card).
+   Reemplaza a: divs flex ad-hoc con ícono + texto + botón.
+
+   Dependencia: variables.css
+
+   Uso:
+   <div class="item item-outline">
+     <div class="item-media item-media-icon"><svg>…</svg></div>
+     <div class="item-content">
+       <div class="item-title">Notificaciones</div>
+       <div class="item-description">Recibí avisos por email.</div>
+     </div>
+     <div class="item-actions"><button class="btn-tertiary btn-sm">Config</button></div>
+   </div>
+═══════════════════════════════════════ */
+
+.item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-body-md);
+  color: var(--text-primary);
+  transition: background-color var(--duration-fast) var(--ease-default),
+              border-color var(--duration-fast) var(--ease-default);
+}
+/* Variantes */
+.item-outline { border-color: var(--border); }
+.item-muted { background: color-mix(in srgb, var(--color-surface-variant) 50%, transparent); }
+/* Tamaño sm */
+.item-sm { gap: 10px; padding: 12px 16px; }
+
+/* Interactiva (a.item o .item-clickable) */
+a.item, .item-clickable { cursor: pointer; text-decoration: none; color: inherit; }
+a.item:hover, .item-clickable:hover { background: var(--color-surface-variant); }
+.item:focus-visible {
+  outline: none;
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+.item.is-disabled { opacity: .5; pointer-events: none; }
+
+/* Media: default (nada), icon (chip), image */
+.item-media { display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex-shrink: 0; align-self: flex-start; }
+.item-media-icon {
+  width: 32px; height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
+}
+.item-media-icon svg { width: 16px; height: 16px; }
+.item-media-image { width: 40px; height: 40px; border-radius: var(--radius-sm); overflow: hidden; }
+.item-media-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.item-content { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.item-title { display: flex; align-items: center; gap: 8px; font-weight: 500; color: var(--text-primary); line-height: 1.4; }
+.item-description { color: var(--text-secondary); font-size: var(--font-size-body-sm); line-height: 1.5; }
+.item-actions { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.item-header, .item-footer { display: flex; flex-basis: 100%; align-items: center; justify-content: space-between; gap: 8px; }
+
+/* Grupo + separador */
+.item-group { display: flex; flex-direction: column; }
+.item-separator { height: 1px; border: 0; margin: 0; background: var(--border); }

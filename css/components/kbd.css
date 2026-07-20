@@ -1,0 +1,44 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Kbd
+   Tecla de teclado en línea (par shadcn Kbd / KbdGroup).
+
+   Cuándo usar: mostrar atajos de teclado (⌘K, Ctrl+S) en menús, tooltips, docs.
+   Cuándo no: texto de código inline (usar <code>).
+   Reemplaza a: <kbd> sin estilo / spans ad-hoc.
+
+   Dependencia: variables.css
+
+   Uso:
+   <kbd class="kbd">⌘</kbd><kbd class="kbd">K</kbd>
+   <span class="kbd-group"><kbd class="kbd">Ctrl</kbd><kbd class="kbd">S</kbd></span>
+═══════════════════════════════════════ */
+
+.kbd {
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 20px;
+  min-width: 20px;
+  padding: 0 5px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface-variant);
+  font-family: var(--font-body);
+  font-size: var(--font-size-caption);
+  font-weight: 500;
+  line-height: 1;
+  user-select: none;
+}
+.kbd svg { width: 12px; height: 12px; }
+
+/* Grupo de teclas (secuencia/combinación) */
+.kbd-group { display: inline-flex; align-items: center; gap: 4px; }
+
+/* Dentro de un tooltip inverso, la tecla usa la superficie del tooltip. */
+.tooltip-content .kbd,
+.rich-tooltip .kbd {
+  background: color-mix(in srgb, var(--color-inverse-on-surface) 18%, transparent);
+  color: var(--color-inverse-on-surface);
+}

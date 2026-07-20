@@ -1,0 +1,76 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Button Group
+   Botones contiguos con radios y bordes compartidos (par shadcn ButtonGroup).
+
+   Cuándo usar: agrupar acciones relacionadas del mismo peso (paginador de
+     acciones, split button, input + botón), o un addon de texto junto a un input.
+   Cuándo no: elegir 1 de N con estado (usar Segmented Button / Toggle Group);
+     una sola acción (usar Button).
+   Reemplaza a: filas de botones pegados con overrides de radio a mano.
+
+   Dependencia: variables.css, button.css
+   Los hijos (btn-*, icon-btn, button-group-text) pierden el radio y el borde
+   adyacentes para leerse como una sola unidad.
+
+   Uso:
+   <div class="button-group">
+     <button class="btn-tertiary">Anterior</button>
+     <button class="btn-tertiary">Siguiente</button>
+   </div>
+   <div class="button-group"><span class="button-group-text">https://</span>
+     <input class="field-input" placeholder="tu-sitio.com"></div>
+═══════════════════════════════════════ */
+
+.button-group {
+  display: inline-flex;
+  width: fit-content;
+  align-items: stretch;
+}
+.button-group > *:focus-visible { position: relative; z-index: 1; }
+
+/* Horizontal (default) */
+.button-group:not(.button-group-vertical) > *:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 0;
+}
+.button-group:not(.button-group-vertical) > *:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Vertical */
+.button-group-vertical { flex-direction: column; }
+.button-group-vertical > *:not(:first-child) {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-width: 0;
+}
+.button-group-vertical > *:not(:last-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Addon de texto (par ButtonGroupText): superficie neutra + borde. */
+.button-group-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.button-group-text svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* Separador entre sub-grupos. */
+.button-group-separator {
+  align-self: stretch;
+  width: 1px;
+  background: var(--color-outline-variant);
+}

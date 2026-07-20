@@ -1,0 +1,38 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Spinner
+   Indicador de carga rotatorio (par shadcn Spinner).
+
+   Cuándo usar: carga breve/indeterminada dentro de botones, inputs, celdas,
+     o junto a un texto ("Guardando…").
+   Cuándo no: carga con estructura conocida (usar Skeleton); progreso medible
+     (usar Progress).
+   Reemplaza a: spinners custom ad-hoc.
+
+   Dependencia: variables.css
+   Hereda currentColor: por defecto el aro activo usa --color-primary; dentro de
+   un botón filled poné .spinner-on-primary para que contraste.
+
+   Uso:
+   <span class="spinner" role="status" aria-label="Cargando"></span>
+   <button class="btn-primary"><span class="spinner spinner-sm spinner-on-primary"></span> Guardando…</button>
+═══════════════════════════════════════ */
+
+.spinner {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-outline-variant);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  vertical-align: -3px;
+  animation: spinner-rotate .7s linear infinite;
+}
+.spinner-sm { width: 12px; height: 12px; }
+.spinner-lg { width: 24px; height: 24px; border-width: 3px; }
+
+/* Sobre superficies de color (botón filled, snackbar) */
+.spinner-on-primary { border-color: color-mix(in srgb, var(--color-on-primary) 35%, transparent); border-top-color: var(--color-on-primary); }
+
+@keyframes spinner-rotate { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1.6s; } }
