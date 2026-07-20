@@ -109,3 +109,26 @@
   cursor: not-allowed;
   color: var(--color-on-disabled);
 }
+
+/* ── Card composition ── tarjeta seleccionable con borde (par shadcn checkbox card).
+   El estado marcado se resuelve con :has(input:checked) — sin JS. */
+.checkbox-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-default),
+              background-color var(--duration-fast) var(--ease-default);
+}
+.checkbox-card:hover { border-color: var(--color-outline); }
+.checkbox-card:has(input:checked) {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+.checkbox-card:has(input:disabled) { opacity: .5; cursor: not-allowed; }
+.checkbox-card-content { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.checkbox-card-title { font-weight: 500; color: var(--text-primary); }
+.checkbox-card-desc { font-size: var(--font-size-body-sm); color: var(--text-secondary); line-height: 1.45; }

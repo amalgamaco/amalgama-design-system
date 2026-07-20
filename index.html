@@ -10149,6 +10149,22 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
               </div>
             </div>
           </div></div>
+
+          <p class="ch-variant-label" style="margin-top:24px">Compacto + centrado con ícono (<code>.modal-sm .modal-centered</code> + <code>.modal-media</code>)</p>
+          <div class="bd-family-wrap"><button class="btn-primary btn-danger btn-sm" type="button" onclick="document.getElementById('alert-dialog-centered').style.display='flex'">Eliminar cuenta</button>
+          <div class="modal-overlay" id="alert-dialog-centered" style="display:none">
+            <div class="modal modal-sm modal-centered" role="alertdialog" aria-modal="true">
+              <div class="modal-media modal-media-error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+              <div class="modal-header">
+                <div class="modal-title">¿Eliminar tu cuenta?</div>
+                <div class="modal-description">Esta acción es permanente. Se borrarán todos tus datos y no se pueden recuperar.</div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn-secondary" type="button" onclick="document.getElementById('alert-dialog-centered').style.display='none'">Cancelar</button>
+                <button class="btn-primary btn-danger" type="button" onclick="document.getElementById('alert-dialog-centered').style.display='none'">Eliminar cuenta</button>
+              </div>
+            </div>
+          </div></div>
           <ul class="bd-overview-list" style="margin-top:8px">
             <li><b>Composición:</b> no es un componente aparte — es <code>.modal</code>/<code>.modal-overlay</code> (el mismo Dialog) con <code>data-alert="true"</code>, que en <code>components/ui/modal.tsx</code> corresponde a la prop <code>alertMode</code>.</li>
             <li><b>Botones:</b> el botón de confirmación es <code>btn-primary</code> (o <code>btn-primary btn-danger</code> para destructivo); el de cancelar es <b>tertiary/Outlined</b> — la acción de descarte queda subordinada a la afirmativa, nunca Tonal (que compite). Ver la jerarquía en <a href="#" onclick="navigate('c-button');return false;">Button → Guías</a>.</li>
@@ -16616,6 +16632,12 @@ return &lt;LineChart data={data} /&gt;</code></pre>
             <li>Deshabilitado — opacidad 40%, no interactivo</li>
           </ol>
 
+          <p class="ch-variant-label" style="margin-top:24px">Card — opción seleccionable con título y descripción (<code>.checkbox-card</code>)</p>
+          <div class="bd-family-wrap"><div style="display:flex;flex-direction:column;gap:10px;max-width:420px">
+              <label class="checkbox-card"><input type="checkbox" class="checkbox" checked><span class="checkbox-card-content"><span class="checkbox-card-title">Notificaciones por email</span><span class="checkbox-card-desc">Recibí un resumen diario de la actividad de tus vacantes.</span></span></label>
+              <label class="checkbox-card"><input type="checkbox" class="checkbox"><span class="checkbox-card-content"><span class="checkbox-card-title">Notificaciones push</span><span class="checkbox-card-desc">Avisos en tiempo real en el navegador.</span></span></label>
+            </div></div>
+
         </section>
       </div>
 
@@ -19183,6 +19205,26 @@ const [range, setRange] = useState&lt;{ from?: Date; to?: Date }&gt;({})
             <li><b>Ítem deshabilitado</b> — <code>disabled</code>, no interactivo.</li>
             <li><b>Ítem destructivo</b> — al final, en color de error.</li>
           </ul>
+
+          <p class="ch-variant-label" style="margin-top:24px">Checkbox · Radio · Label + Group · Inset</p>
+          <p class="docs-section-desc">Ítems seleccionables (<code>menuitemcheckbox</code>/<code>menuitemradio</code>) con indicador líder, encabezados de grupo (<code>DropdownMenuLabel</code>) e ítems <code>inset</code> alineados con los que llevan ícono. Los ítems seleccionables no cierran el menú.</p>
+          <div class="bd-family-wrap"><div class="dropdown-wrap">
+              <button class="btn-secondary btn-sm" type="button" onclick="toggleDropdown(this,'menucfg-sel')">Ver</button>
+              <div class="dropdown-content" id="menucfg-sel" role="menu" style="display:none;min-width:220px">
+                <div class="dropdown-label">Mostrar columnas</div>
+                <button class="dropdown-item dropdown-checkbox-item" role="menuitemcheckbox" aria-checked="true" type="button" onclick="this.setAttribute('aria-checked', String(this.getAttribute('aria-checked')!=='true')); event.stopPropagation()"><span class="dropdown-item-indicator"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Estado</button>
+                <button class="dropdown-item dropdown-checkbox-item" role="menuitemcheckbox" aria-checked="false" type="button" onclick="this.setAttribute('aria-checked', String(this.getAttribute('aria-checked')!=='true')); event.stopPropagation()"><span class="dropdown-item-indicator"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Asignado</button>
+                <div class="dropdown-separator"></div>
+                <div class="dropdown-label">Ordenar por</div>
+                <div class="dropdown-group" role="group">
+                  <button class="dropdown-item dropdown-radio-item" role="menuitemradio" aria-checked="true" type="button" onclick="Array.prototype.forEach.call(this.parentElement.children,function(r){r.setAttribute('aria-checked','false')});this.setAttribute('aria-checked','true');event.stopPropagation()"><span class="dropdown-item-indicator"></span>Más recientes</button>
+                  <button class="dropdown-item dropdown-radio-item" role="menuitemradio" aria-checked="false" type="button" onclick="Array.prototype.forEach.call(this.parentElement.children,function(r){r.setAttribute('aria-checked','false')});this.setAttribute('aria-checked','true');event.stopPropagation()"><span class="dropdown-item-indicator"></span>Más antiguos</button>
+                  <button class="dropdown-item dropdown-radio-item" role="menuitemradio" aria-checked="false" type="button" onclick="Array.prototype.forEach.call(this.parentElement.children,function(r){r.setAttribute('aria-checked','false')});this.setAttribute('aria-checked','true');event.stopPropagation()"><span class="dropdown-item-indicator"></span>Alfabético</button>
+                </div>
+                <div class="dropdown-separator"></div>
+                <button class="dropdown-item" data-inset="true" role="menuitem" type="button" onclick="closeDropdownItem(this)">Restablecer vista</button>
+              </div>
+            </div></div>
         </section>
         <section class="docs-section" id="tc-menu-s-2">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
@@ -19482,6 +19524,13 @@ const [range, setRange] = useState&lt;{ from?: Date; to?: Date }&gt;({})
             <div class="bd-state"><label class="radio-label" style="display:flex;align-items:center;gap:10px;font-size:14px;opacity:.6"><input type="radio" name="rst-3" class="radio" disabled> Deshabilitado</label></div>
             <div class="bd-state"><label class="radio-label" style="display:flex;align-items:center;gap:10px;font-size:14px;opacity:.6"><input type="radio" name="rst-4" class="radio" checked disabled> Deshab. selec.</label></div>
           </div>
+            <div>
+              <p class="ch-variant-label">Card — opción seleccionable con título y descripción (<code>.radio-card</code>)</p>
+              <div class="radio-group" role="radiogroup" aria-label="Plan" style="display:flex;flex-direction:column;gap:10px;max-width:420px">
+                <label class="radio-card"><input type="radio" name="plan-demo" class="radio" checked><span class="radio-card-content"><span class="radio-card-title">Plan Starter</span><span class="radio-card-desc">Hasta 3 vacantes activas y 1 usuario.</span></span></label>
+                <label class="radio-card"><input type="radio" name="plan-demo" class="radio"><span class="radio-card-content"><span class="radio-card-title">Plan Pro</span><span class="radio-card-desc">Vacantes ilimitadas, equipo y reportes.</span></span></label>
+              </div>
+            </div>
           </div>
 
           <!-- Legend — variant references -->
@@ -20621,7 +20670,7 @@ import { Select } from &quot;./components/ui/select&quot;
             <li><b>Anatomía:</b> <code>SheetHeader</code> (título) · <code>SheetBody</code> (con scroll) · <code>SheetFooter</code> (acciones).</li>
             <li>Para filtros, detalle de ítem o formularios secundarios en desktop — no para navegación principal.</li>
           </ul>
-          <div class="bd-family-wrap"><button class="btn-secondary btn-sm" type="button" onclick="openOverlay('sshsc-7')">Abrir side sheet</button><div class="sheet-overlay" id="sshsc-7" style="display:none">
+          <div class="bd-family-wrap" style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn-secondary btn-sm" type="button" onclick="openOverlay('sshsc-7')">Abrir a la derecha</button><button class="btn-secondary btn-sm" type="button" onclick="openOverlay('sshsc-left')">Abrir a la izquierda</button><button class="btn-secondary btn-sm" type="button" onclick="openOverlay('sshsc-top')">Abrir arriba</button><div class="sheet-overlay" id="sshsc-7" style="display:none">
               <div class="sheet-content sheet-content-right">
                 <button class="sheet-close" type="button" aria-label="Cerrar" onclick="closeOverlay('sshsc-7')">✕</button>
                 <div class="sheet-header">
@@ -20633,8 +20682,23 @@ import { Select } from &quot;./components/ui/select&quot;
                 <div class="sheet-footer"><button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('sshsc-7')">Cancelar</button>
                   <button class="btn-primary btn-sm" type="button" onclick="closeOverlay('sshsc-7')">Aplicar</button></div>
               </div>
+            </div>
+            <div class="sheet-overlay" id="sshsc-left" style="display:none">
+              <div class="sheet-content sheet-content-left">
+                <button class="sheet-close" type="button" aria-label="Cerrar" onclick="closeOverlay('sshsc-left')">✕</button>
+                <div class="sheet-header"><div class="sheet-title">Navegación</div><div class="sheet-description">Side sheet <code>side="left"</code> — mismo panel, anclado al lateral izquierdo.</div></div>
+                <div class="sheet-body"><p style="font-size:var(--font-size-body-sm);color:var(--color-on-surface);line-height:1.6">Se desliza desde la izquierda; útil para navegación o filtros según el layout.</p></div>
+                <div class="sheet-footer"><button class="btn-primary btn-sm" type="button" onclick="closeOverlay('sshsc-left')">Cerrar</button></div>
+              </div>
+            </div>
+            <div class="sheet-overlay" id="sshsc-top" style="display:none">
+              <div class="sheet-content sheet-content-top">
+                <button class="sheet-close" type="button" aria-label="Cerrar" onclick="closeOverlay('sshsc-top')">✕</button>
+                <div class="sheet-header"><div class="sheet-title">Aviso</div><div class="sheet-description">Sheet <code>side="top"</code> — se desliza desde el borde superior, ancho completo.</div></div>
+                <div class="sheet-body"><p style="font-size:var(--font-size-body-sm);color:var(--color-on-surface);line-height:1.6">Para banners o avisos globales que bajan desde arriba.</p></div>
+              </div>
             </div></div>
-          <ol class="bd-family-legend"><li>Side sheet — <code>side="right"</code> (75% del ancho en mobile, máx. 24&nbsp;rem en desktop, alto completo). También <code>side="left"</code>.</li></ol>
+          <ol class="bd-family-legend"><li>Side sheet — <code>side="right"</code> / <code>side="left"</code> (75% del ancho en mobile, máx. 24&nbsp;rem en desktop, alto completo) · <code>side="top"</code> (ancho completo, baja desde arriba).</li></ol>
 
           <h2 class="docs-section-title" style="margin-top:36px">Ejemplo canónico — “Editar perfil”</h2>
           <p class="bd-lead" style="margin-top:8px">La composición de referencia de shadcn, tematizada con Embassy: <code>SheetHeader</code> (título + descripción) → <code>SheetBody</code> (campos con <code>gap-6</code>) → <code>SheetFooter</code> (acción a ancho completo). Botón de cierre (✕) arriba a la derecha; trigger <b>Tonal</b> (el default del DS para abrir un overlay); contenedor responsive (75% → 24&nbsp;rem).</p>
@@ -21719,7 +21783,9 @@ import { Button } from &quot;./components/ui/button&quot;
           <div class="button-group"><button class="btn-tertiary btn-sm" type="button">Día</button><button class="btn-tertiary btn-sm" type="button">Semana</button><button class="btn-tertiary btn-sm" type="button">Mes</button></div>
           <div class="button-group"><span class="button-group-text">https://</span><input class="field-input" placeholder="tu-sitio.com" style="width:160px;border-top-left-radius:0;border-bottom-left-radius:0;border-left:0"></div>
           <div class="button-group button-group-vertical"><button class="icon-btn btn-sm" type="button" aria-label="Subir">↑</button><button class="icon-btn btn-sm" type="button" aria-label="Bajar">↓</button></div>
+          <div class="button-group" role="group" aria-label="Guardar"><button class="btn-primary btn-sm" type="button">Guardar</button><span class="button-group-separator"></span><button class="btn-primary btn-sm icon-btn" type="button" aria-label="Más opciones de guardado"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></div>
         </div>
+        <p class="docs-section-desc" style="margin-top:12px"><b>Split button</b> — acción primaria + disparador secundario con <code>.button-group-separator</code> entre ambos.</p>
         <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>Horizontal</td><td><code>.button-group</code></td></tr><tr><td>Vertical</td><td><code>.button-group.button-group-vertical</code></td></tr><tr><td>Addon de texto</td><td><code>.button-group-text</code></td></tr><tr><td>Separador</td><td><code>.button-group-separator</code></td></tr></tbody></table>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Acciones relacionadas del mismo peso.</li><li>Input + botón / addon de texto.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir 1 de N con estado → Segmented Button.</li></ul></div></div></div></section></div>
@@ -21747,6 +21813,8 @@ import { Button } from &quot;./components/ui/button&quot;
         <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:12px;max-width:360px">
           <div class="input-group"><span class="input-group-addon input-group-text">$</span><input class="input-group-control" placeholder="0.00"><span class="input-group-addon input-group-addon-end input-group-text">USD</span></div>
           <div class="input-group is-error"><input class="input-group-control" value="valor inválido"><span class="input-group-addon input-group-addon-end"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-error)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg></span></div>
+          <div class="input-group"><input class="input-group-control" placeholder="Agregar etiqueta…"><span class="input-group-addon input-group-addon-end"><button class="btn-text btn-sm" type="button">Agregar</button></span></div>
+          <div class="input-group input-group-block"><textarea class="input-group-control" rows="3" placeholder="Escribí un comentario…"></textarea><span class="input-group-addon"><button class="icon-btn btn-sm" type="button" aria-label="Adjuntar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button><button class="btn-primary btn-sm" type="button" style="margin-left:auto">Comentar</button></span></div>
         </div>
         <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>Addon líder / final</td><td><code>.input-group-addon</code> · <code>.input-group-addon-end</code></td></tr><tr><td>Texto (prefijo/sufijo)</td><td><code>.input-group-text</code></td></tr><tr><td>Error</td><td><code>.input-group.is-error</code> / <code>[aria-invalid]</code></td></tr><tr><td>Apilado (textarea)</td><td><code>.input-group-block</code></td></tr></tbody></table>
       </section></div>
