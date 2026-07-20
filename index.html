@@ -3565,9 +3565,9 @@ body { overflow-x: clip; }
       </div>
       <div class="ds-nav-item" data-section="c-card" onclick="navigate('c-card')">Cards</div>
       <div class="ds-nav-sub">
-        <div class="ds-nav-item" data-section="c-item" onclick="navigate('c-item')">Item</div>
-        <div class="ds-nav-item" data-section="c-basic-card" onclick="navigate('c-basic-card')">Card</div>
-        <div class="ds-nav-item" data-section="c-person" onclick="navigate('c-person')">Person Card</div>
+        <!-- id c-item = "Basic Card" (primitive, par shadcn Item); id c-basic-card = "Full Card" (panel). ids kept stable to preserve anchors. -->
+        <div class="ds-nav-item" data-section="c-item" onclick="navigate('c-item')">Basic Card</div>
+        <div class="ds-nav-item" data-section="c-basic-card" onclick="navigate('c-basic-card')">Full Card</div>
         <div class="ds-nav-item" data-section="c-vacancy" onclick="navigate('c-vacancy')">Vacancy Card</div>
         <div class="ds-nav-item" data-section="c-kanban" onclick="navigate('c-kanban')">Kanban Card</div>
         <div class="ds-nav-item" data-section="c-stat-card" onclick="navigate('c-stat-card')">Stat Card</div>
@@ -8591,11 +8591,10 @@ export { Textarea }</code></pre>
       <div class="ds-page-tag">Components · Display</div>
       <div class="docs-page-header">
         <h1 class="docs-page-title">Cards</h1>
-        <p class="docs-page-desc">La familia de contenedores: el primitivo <b>Item</b> (fila) y <b>Card</b> (panel) como bloques base, más composiciones de dominio construidas sobre ellos. Seleccioná una para ver su documentación.</p>
+        <p class="docs-page-desc">La familia de contenedores: el primitivo reutilizable <b>Basic Card</b> (fila, par shadcn Item) como bloque base, <b>Full Card</b> (panel rico) y las composiciones de dominio construidas sobre ellos. Seleccioná una para ver su documentación.</p>
         <div class="ds-card-grid" style="margin:14px 0 4px">
-          <div class="ds-card-link" onclick="navigate('c-item')"><div class="ds-card-icon"><i data-lucide="rows-3"></i></div><div class="ds-card-name">Item</div><div class="ds-card-desc">Primitiva de fila: media + texto + acciones.</div></div>
-          <div class="ds-card-link" onclick="navigate('c-basic-card')"><div class="ds-card-icon"><i data-lucide="square"></i></div><div class="ds-card-name">Card</div><div class="ds-card-desc">Panel contenedor (header/contenido/footer).</div></div>
-          <div class="ds-card-link" onclick="navigate('c-person')"><div class="ds-card-icon"><i data-lucide="user"></i></div><div class="ds-card-name">Person Card</div><div class="ds-card-desc">Persona con avatar, nombre y rol.</div></div>
+          <div class="ds-card-link" onclick="navigate('c-item')"><div class="ds-card-icon"><i data-lucide="rows-3"></i></div><div class="ds-card-name">Basic Card</div><div class="ds-card-desc">Primitiva reutilizable: media + texto + acciones.</div></div>
+          <div class="ds-card-link" onclick="navigate('c-basic-card')"><div class="ds-card-icon"><i data-lucide="square"></i></div><div class="ds-card-name">Full Card</div><div class="ds-card-desc">Panel rico (header/contenido/footer).</div></div>
           <div class="ds-card-link" onclick="navigate('c-vacancy')"><div class="ds-card-icon"><i data-lucide="briefcase"></i></div><div class="ds-card-name">Vacancy Card</div><div class="ds-card-desc">Vacante con estado y asignados.</div></div>
           <div class="ds-card-link" onclick="navigate('c-kanban')"><div class="ds-card-icon"><i data-lucide="square-kanban"></i></div><div class="ds-card-name">Kanban Card</div><div class="ds-card-desc">Tarjeta para tableros Kanban.</div></div>
           <div class="ds-card-link" onclick="navigate('c-stat-card')"><div class="ds-card-icon"><i data-lucide="bar-chart-2"></i></div><div class="ds-card-name">Stat Card</div><div class="ds-card-desc">Métrica o estadística destacada.</div></div>
@@ -8608,22 +8607,22 @@ export { Textarea }</code></pre>
     <section class="ds-section" id="s-c-basic-card">
       <div class="ds-page-tag">Components · Display</div>
       <div class="docs-page-header">
-        <h1 class="docs-page-title">Card</h1>
-        <p class="docs-page-desc">Panel contenedor con header, contenido y footer. El primitivo de panel de la familia Cards (par shadcn Card); para filas compactas usá <b>Item</b>.</p>
+        <h1 class="docs-page-title">Full Card</h1>
+        <p class="docs-page-desc">Panel contenedor rico con header, contenido y footer (par shadcn Card). Para una fila compacta reutilizable usá <b>Basic Card</b>.</p>
       </div>
       <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
 
           <!-- Short introduction -->
-          <p class="bd-lead">La Card es el <b>panel contenedor</b> base de la librería (header · título · descripción · contenido · footer, con slot de acción). Par shadcn Card; para una fila compacta (media + texto + acciones) usá <b>Item</b>.</p>
+          <p class="bd-lead">La Full Card es el <b>panel contenedor rico</b> de la librería (header · título · descripción · contenido · footer, con slot de acción). Par shadcn Card; para una fila compacta reutilizable (media + texto + acciones) usá <b>Basic Card</b>.</p>
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
             <li>Panel de superficie que agrupa contenido relacionado con partes opcionales: <code>card-header</code> · <code>card-title</code> · <code>card-desc</code> · <code>card-content</code> · <code>card-footer</code>.</li>
             <li><b>Tres variantes</b> por separación: <code>.card</code> (outlined, borde), <code>.card-elevated</code> (elevación + sombra, sin borde) y <code>.card-filled</code> (relleno tonal).</li>
             <li>El slot <code>card-action</code> (esquina superior derecha) aparece solo cuando la card navega o ejecuta una acción explícita.</li>
-            <li>Para una <b>fila</b> compacta (media + texto + acciones) usá <b>Item</b>; para una card ilustrada completa, <b>Nav Card</b>.</li>
+            <li>Para una <b>fila</b> compacta (media + texto + acciones) usá <b>Basic Card</b>; para una card ilustrada completa, <b>Nav Card</b>.</li>
             <li>Tokens semánticos garantizan contraste AA en claro y oscuro sin overrides por tema.</li>
           </ul>
 
@@ -13306,7 +13305,7 @@ css/layout.css</code></pre>
             <li><b>Card interactiva:</b> toda la tarjeta es clickeable y navega al detalle de la vacante; hover con borde, sombra y elevación.</li>
             <li><b>Entrada animada:</b> las primeras tres cards entran con <code>fadeSlideIn</code> escalonado.</li>
             <li><b>Badge de estado:</b> el estado de la vacante usa el componente <code>Badge</code> (<code>variant="open"</code>, etc.).</li>
-            <li><b>Regla clave:</b> componente de dominio recruiting — para otros dominios usar Card genérica, para personas usar Person Card.</li>
+            <li><b>Regla clave:</b> componente de dominio recruiting — para otros dominios usar Full Card, para personas usar la variante <b>Person</b> de Basic Card.</li>
           </ul>
 
           <!-- Component variants -->
@@ -14248,7 +14247,7 @@ css/layout.css</code></pre>
           <tr>
             <td>Container transform</td>
             <td>Un elemento se transforma visualmente en otro, creando una conexión de contenedor a contenedor (ej. card → detalle a pantalla completa). El patrón más expresivo y con mayor relación entre elementos.</td>
-            <td>Sin componente que lo requiera hoy — Vacancy Card / Person Card no expanden a una vista de detalle animada.</td>
+            <td>Sin componente que lo requiera hoy — Vacancy Card / Basic Card (Person) no expanden a una vista de detalle animada.</td>
             <td>⛔ No adoptado — gap, no improvisar</td>
           </tr>
           <tr>
@@ -21739,18 +21738,18 @@ import { Button } from &quot;./components/ui/button&quot;
     <!-- ═══════════ ITEM ═══════════ -->
     <section class="ds-section" id="s-c-item">
       <div class="ds-page-tag">Components · Display</div>
-      <h1 class="ds-page-title">Item</h1>
-      <p class="ds-page-desc">Fila de contenido flexible: media + texto + acciones.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/item.css</code> — primitiva genérica (par shadcn Base UI <b>Item</b>). Más flexible que List (MD3) y que las cards de dominio.</div>
+      <h1 class="ds-page-title">Basic Card</h1>
+      <p class="ds-page-desc">El primitivo reutilizable de la familia Cards: una fila flexible con media + texto + acciones.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/item.css</code> — es el <b>bloque base</b> de todas las cards compactas (par shadcn Base UI <b>Item</b>). Las clases usan el prefijo <code>.item*</code>. Las cards de dominio (Person, etc.) son variantes documentadas sobre este primitivo; para un panel rico con header/footer usá <b>Full Card</b>.</div>
       <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
       <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
-        <p class="bd-lead">Fila reutilizable con media (ícono/imagen), contenido (título + descripción) y acciones — settings rows, resultados, notificaciones.</p>
-        <ul class="bd-overview-list"><li><b>Variantes:</b> default · <code>.item-outline</code> · <code>.item-muted</code>; tamaño <code>.item-sm</code>.</li><li><b>Media:</b> <code>.item-media-icon</code> (chip) · <code>.item-media-image</code>.</li><li>Agrupá con <code>.item-group</code> + <code>.item-separator</code>; interactiva con <code>a.item</code> / <code>.item-clickable</code>.</li></ul>
+        <p class="bd-lead">La Basic Card es la fila reutilizable con media (ícono/avatar/imagen), contenido (título + descripción) y acciones — settings rows, resultados, notificaciones, personas. Es el bloque base sobre el que se componen las cards compactas de dominio.</p>
+        <ul class="bd-overview-list"><li><b>Primitivo único:</b> todas las cards compactas (Person, etc.) son composiciones de esta Basic Card — un solo bloque reutilizable, par shadcn Item.</li><li><b>Variantes:</b> default · <code>.item-outline</code> · <code>.item-muted</code>; tamaño <code>.item-sm</code>.</li><li><b>Media:</b> <code>.item-media-icon</code> (chip) · avatar · <code>.item-media-image</code>.</li><li>Agrupá con <code>.item-group</code> + <code>.item-separator</code>; interactiva con <code>a.item</code> / <code>.item-clickable</code>.</li></ul>
         <div class="bd-family-wrap"><div class="item item-outline" style="max-width:420px"><div class="item-media item-media-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/></svg></div><div class="item-content"><div class="item-title">Notificaciones</div><div class="item-description">Recibí avisos por email sobre novedades.</div></div><div class="item-actions"><button class="btn-tertiary btn-sm" type="button">Config</button></div></div></div>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
         <h2 class="docs-section-title">Composiciones</h2>
-        <p class="docs-section-desc">Reproducen las composiciones oficiales del Item de shadcn con tokens Embassy. Overview muestra el Item básico.</p>
+        <p class="docs-section-desc">Reproducen las composiciones oficiales del Item de shadcn con tokens Embassy, más <b>Person</b> (la card de persona, antes componente aparte, ahora una variante de Basic Card). Overview muestra la Basic Card básica.</p>
 
         <p class="ch-variant-label">Variant — default · outline · muted</p>
         <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:10px;max-width:460px">
@@ -21772,6 +21771,13 @@ import { Button } from &quot;./components/ui/button&quot;
           <div class="item item-outline"><div class="item-media item-media-image"><div style="width:100%;height:100%;background:linear-gradient(135deg,var(--color-primary-container),var(--color-tertiary-container))"></div></div><div class="item-content"><div class="item-title">Image</div><div class="item-description"><code>.item-media-image</code> — miniatura 40px.</div></div></div>
         </div>
 
+        <p class="ch-variant-label" style="margin-top:20px">Person — card de persona (variante de dominio sobre Basic Card)</p>
+        <p class="docs-body" style="margin:0 0 8px">Composición <code>.item item-outline item-clickable person-card</code>: avatar de marca en <code>.item-media</code>, nombre en <code>.item-title</code>, rol en <code>.item-description</code>. Se distribuyen en una <code>.people-grid</code> responsive. Requiere <code>person-card.css</code>.</p>
+        <div class="bd-family-wrap"><div class="people-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));max-width:460px;width:100%">
+          <div class="item item-outline item-clickable person-card" tabindex="0" role="button"><div class="item-media person-avatar">MG</div><div class="item-content"><div class="item-title">María González</div><div class="item-description">Diseñadora UX</div></div></div>
+          <div class="item item-outline item-clickable person-card" tabindex="0" role="button"><div class="item-media person-avatar">CL</div><div class="item-content"><div class="item-title">Carlos López</div><div class="item-description">Frontend Engineer</div></div></div>
+        </div></div>
+
         <p class="ch-variant-label" style="margin-top:20px">Group + Header — filas con separadores y encabezado</p>
         <div class="bd-family-wrap"><div class="item-group" style="max-width:460px;width:100%;border:1px solid var(--border);border-radius:10px;overflow:hidden">
           <div class="item"><div class="item-header"><div class="item-title" style="font:600 12px var(--font-body);text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted)">Miembros del equipo</div><a class="btn-link btn-xs" href="#" onclick="return false">Ver todos</a></div></div>
@@ -21791,13 +21797,14 @@ import { Button } from &quot;./components/ui/button&quot;
           <tr><td>Variant</td><td><code>.item</code> · <code>.item-outline</code> · <code>.item-muted</code></td></tr>
           <tr><td>Size</td><td>default · <code>.item-sm</code></td></tr>
           <tr><td>Icon / Avatar / Image</td><td><code>.item-media-icon</code> · <code>.item-media</code> + <code>.avatar</code> · <code>.item-media-image</code></td></tr>
+          <tr><td>Person (dominio)</td><td><code>.item item-outline item-clickable person-card</code> + <code>.item-media.person-avatar</code>; grilla <code>.people-grid</code></td></tr>
           <tr><td>Group</td><td><code>.item-group</code> + <code>.item-separator</code></td></tr>
           <tr><td>Header</td><td><code>.item-header</code> (fila full-width, título + acción)</td></tr>
           <tr><td>Link</td><td><code>a.item</code> — fila navegable con hover/focus</td></tr>
           <tr><td>Dropdown</td><td><code>.item-actions</code> + Dropdown Menu (⋮)</td></tr>
         </tbody></table>
       </section></div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Filas ricas reutilizables (settings, resultados).</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Datos tabulares → Table.</li><li>Card con header/footer → Card.</li></ul></div></div></div></section></div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Filas ricas reutilizables (settings, resultados).</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Datos tabulares → Table.</li><li>Panel con header/footer → Full Card.</li></ul></div></div></div></section></div>
       <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span><b>Link:</b> un Item navegable es un <code>&lt;a class="item"&gt;</code> real — toda la fila es un enlace con hover + <code>:focus-visible</code>; no anides otros controles focusables dentro (romperías el link).</li><li><span class="ds-a11y-icon">♿</span><b>Dropdown:</b> el trigger de acciones va aparte del área navegable; usá <code>aria-haspopup="menu"</code> + <code>aria-expanded</code>, y <code>role="menu"</code>/<code>role="menuitem"</code> en el panel.</li><li><span class="ds-a11y-icon">♿</span>Interactiva no-enlace: <code>&lt;button class="item"&gt;</code> o <code>role="button"</code>+<code>tabindex="0"</code>.</li><li><span class="ds-a11y-icon">♿</span><code>.item-group</code> puede exponer <code>role="list"</code> y cada Item <code>role="listitem"</code>.</li><li><span class="ds-a11y-icon">♿</span>La descripción usa <code>line-clamp</code>; asegurá que el texto completo esté disponible si es esencial.</li></ul></section></div>
       <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;div class="item item-outline"&gt;
   &lt;div class="item-media item-media-icon"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/div&gt;
@@ -22740,9 +22747,13 @@ import { Button } from &quot;./components/ui/button&quot;
     <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
     <div class="nav-card-content"><div class="nav-card-title">Badges</div><div class="nav-card-desc">Status, priority, and label badges.</div></div>
   </div>
+  <div class="nav-card nav-card--compact" onclick="navigate('c-item')">
+    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
+    <div class="nav-card-content"><div class="nav-card-title">Basic Card</div><div class="nav-card-desc">Primitiva de fila reutilizable: media + texto + acciones.</div></div>
+  </div>
   <div class="nav-card nav-card--compact" onclick="navigate('c-basic-card')">
     <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
-    <div class="nav-card-content"><div class="nav-card-title">Card</div><div class="nav-card-desc">Panel contenedor con header, contenido y footer.</div></div>
+    <div class="nav-card-content"><div class="nav-card-title">Full Card</div><div class="nav-card-desc">Panel rico con header, contenido y footer.</div></div>
   </div>
   <div class="nav-card nav-card--compact" onclick="navigate('c-breadcrumb')">
     <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
@@ -22831,10 +22842,6 @@ import { Button } from &quot;./components/ui/button&quot;
   <div class="nav-card nav-card--compact" onclick="navigate('c-pagination')">
     <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
     <div class="nav-card-content"><div class="nav-card-title">Pagination</div><div class="nav-card-desc">Navegación entre páginas de un conjunto de resultados.</div></div>
-  </div>
-  <div class="nav-card nav-card--compact" onclick="navigate('c-person')">
-    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
-    <div class="nav-card-content"><div class="nav-card-title">Person Card</div><div class="nav-card-desc">Compact candidate/person card.</div></div>
   </div>
   <div class="nav-card nav-card--compact" onclick="navigate('c-radio')">
     <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
@@ -24446,7 +24453,7 @@ const SECTIONS = {
   'c-button':          { label: 'Buttons',               group: 'Components' },
   'c-seg-btn':         { label: 'Segmented Button',      group: 'Components', parent: 'c-button' },
   'c-card':            { label: 'Cards',                 group: 'Components' },
-  'c-basic-card':      { label: 'Card',                  group: 'Components', parent: 'c-card' },
+  'c-basic-card':      { label: 'Full Card',             group: 'Components', parent: 'c-card' },
   'c-carousel':        { label: 'Carousels',             group: 'Components' },
   'c-charts':          { label: 'Charts',                group: 'Components' },
   'c-checkbox':        { label: 'Checkbox',              group: 'Components' },
@@ -24468,7 +24475,7 @@ const SECTIONS = {
   'c-nav-bar':         { label: 'Navigation Bar',         group: 'Components', parent: 'c-navigation' },
   'c-nav-drawer':      { label: 'Navigation Drawer',      group: 'Components', parent: 'c-navigation' },
   'c-nav-card':        { label: 'Nav Card',              group: 'Components', parent: 'c-card' },
-  'c-person':          { label: 'Person Card',         group: 'Components', parent: 'c-card' },
+  'c-person':          { label: 'Person Card',         group: 'Components', parent: 'c-card', hidden: true, redirect: 'c-item' },
   'c-radio':           { label: 'Radio button',          group: 'Components' },
   'c-search':          { label: 'Search',                group: 'Components' },
   'c-select':          { label: 'Select',                group: 'Components' },
@@ -24489,7 +24496,7 @@ const SECTIONS = {
   'c-attachment':      { label: 'Attachment',            group: 'Components' },
   'c-button-group':    { label: 'Button Group',          group: 'Components', parent: 'c-button' },
   'c-input-group':     { label: 'Input Group',           group: 'Components', parent: 'c-input' },
-  'c-item':            { label: 'Item',                  group: 'Components', parent: 'c-card' },
+  'c-item':            { label: 'Basic Card',            group: 'Components', parent: 'c-card' },
   'c-spinner':         { label: 'Spinner',               group: 'Components', parent: 'c-loading' },
   // Legacy sub-pages (accessible via hash)
   'radius':            { label: 'Radius',                group: 'Styles' },
@@ -24529,6 +24536,8 @@ function setRoleBoardMode(btn, mode) {
 // ── Navigation ──
 function navigate(id) {
   if (!SECTIONS[id]) return;
+  // Retired sections redirect to their replacement (e.g. Person Card → Basic Card).
+  if (SECTIONS[id].redirect) { navigate(SECTIONS[id].redirect); return; }
 
   // Hide all sections, show target
   document.querySelectorAll('.ds-section').forEach(function(s) {

@@ -1,12 +1,14 @@
 /* ═══════════════════════════════════════
-   Embassy DS — Item
+   Embassy DS — Basic Card (primitivo de fila)
+   Nombre en la doc: "Basic Card". Clases con prefijo .item* (paridad shadcn Item).
    Primitiva de fila de contenido flexible: media + contenido (título/descripción)
-   + acciones (par shadcn Item). Más genérica que List (que es MD3, una sola/dos
-   líneas) y que las cards de dominio.
+   + acciones. Es el BLOQUE BASE reutilizable de todas las cards compactas de
+   dominio (Person, etc. — ver person-card.css). Más genérica que List (MD3) y que
+   el panel Full Card (card.css).
 
    Cuándo usar: filas ricas y reutilizables (settings rows, resultados, notif con
-     ícono/avatar + texto + acción), listas con separadores.
-   Cuándo no: tabla de datos (Table); tarjeta con header/footer (Card).
+     ícono/avatar + texto + acción), personas en grilla, listas con separadores.
+   Cuándo no: tabla de datos (Table); panel con header/footer (Full Card → card.css).
    Reemplaza a: divs flex ad-hoc con ícono + texto + botón.
 
    Dependencia: variables.css

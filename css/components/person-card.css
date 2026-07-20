@@ -1,16 +1,17 @@
 /* ═══════════════════════════════════════
-   Amalgama DS — Person Card
-   Tarjeta de persona (avatar + nombre + rol), construida como COMPOSICIÓN sobre
-   el primitivo .item (ver item.css). Person Card solo aporta el avatar circular
-   con gradiente de marca; el layout, padding, gap, hover, foco, título y
-   descripción vienen de .item / .item-content / .item-title / .item-description.
+   Amalgama DS — Person (variante de Basic Card)
+   NO es un componente aparte: es la variante de dominio "Person" de la Basic Card
+   (el primitivo .item — ver item.css), documentada dentro de Basic Card. Solo
+   aporta el avatar circular con gradiente de marca + fondo de superficie; el
+   layout, padding, gap, hover, foco, título y descripción vienen de
+   .item / .item-content / .item-title / .item-description.
 
-   Cuándo usar: ítem de persona en grillas (avatar + nombre + rol).
+   Cuándo usar: persona en grillas (avatar + nombre + rol).
    Cuándo no: vacantes (vacancy-card); datos tabulares de personas (Table);
      una fila genérica sin avatar de marca (usá .item directamente).
    Reemplaza a: cards de perfil custom.
 
-   Dependencia: variables.css, item.css (primitivo base)
+   Dependencia: variables.css, item.css (primitivo base / Basic Card)
 
    Uso:
    <div class="people-grid">
