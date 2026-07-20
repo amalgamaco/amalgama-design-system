@@ -9631,6 +9631,39 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
         </table>
       </div>
 
+      <!-- Composiciones -->
+      <div class="docs-section" id="tc-tabs-s-comp">
+        <h2 class="docs-section-title">Composiciones</h2>
+        <p class="docs-section-desc">Variantes de la lista de tabs de shadcn, con tokens Embassy. Overview usa la variante de línea (underline) canónica.</p>
+        <p class="ch-variant-label">Pill / filled — con íconos y una pestaña deshabilitada</p>
+        <div class="docs-preview full-width">
+          <div class="tabs tabs-pill" role="tablist">
+            <button class="tab active" type="button" role="tab" aria-selected="true" onclick="var l=this.closest('.tabs');l.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});this.classList.add('active');this.setAttribute('aria-selected','true');"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;vertical-align:-3px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Vista previa</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" onclick="var l=this.closest('.tabs');l.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});this.classList.add('active');this.setAttribute('aria-selected','true');"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;vertical-align:-3px"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Código</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" disabled>Ajustes</button>
+            <span class="tab-indicator"></span>
+          </div>
+        </div>
+        <p class="ch-variant-label" style="margin-top:16px">Orientación vertical</p>
+        <div class="docs-preview full-width">
+          <div class="tabs tabs-vertical" role="tablist" style="max-width:220px">
+            <button class="tab active" type="button" role="tab" aria-selected="true" onclick="var l=this.closest('.tabs');l.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});this.classList.add('active');this.setAttribute('aria-selected','true');">General</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" onclick="var l=this.closest('.tabs');l.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});this.classList.add('active');this.setAttribute('aria-selected','true');">Seguridad</button>
+            <button class="tab" type="button" role="tab" aria-selected="false" onclick="var l=this.closest('.tabs');l.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});this.classList.add('active');this.setAttribute('aria-selected','true');">Facturación</button>
+            <span class="tab-indicator"></span>
+          </div>
+        </div>
+        <table class="ds-table" style="margin-top:16px">
+          <thead><tr><th>Composición</th><th>Cómo</th></tr></thead>
+          <tbody>
+            <tr><td>Línea (default)</td><td><code>.tabs</code> — indicador deslizante (Overview)</td></tr>
+            <tr><td>Pill / filled</td><td><code>.tabs.tabs-pill</code> — contenedor tenue, activo elevado (par shadcn default list)</td></tr>
+            <tr><td>Vertical</td><td><code>.tabs.tabs-vertical</code> — columna con borde/indicador a la derecha</td></tr>
+            <tr><td>Íconos / deshabilitada</td><td><code>&lt;svg&gt;</code> en el trigger; <code>disabled</code> en la pestaña</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <!-- Medidas -->
       <div class="docs-section" id="tc-tabs-s-1">
         <h2 class="docs-section-title">Medidas</h2>
@@ -9690,6 +9723,7 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
           <div class="ds-toc-title">En esta página</div>
           <ul class="ds-toc-list">
             <li><a class="ds-toc-link" data-target="tc-tabs-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-tabs-s-comp">Composiciones</a></li>
             <li><a class="ds-toc-link" data-target="tc-tabs-s-1">Medidas</a></li>
             <li><a class="ds-toc-link" data-target="tc-tabs-s-2">Estados</a></li>
             <li><a class="ds-toc-link" data-target="tc-tabs-s-3">Tokens y especificaciones</a></li>
