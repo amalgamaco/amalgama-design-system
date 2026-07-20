@@ -8670,7 +8670,42 @@ export { Textarea }</code></pre>
             </tbody>
           </table>
         </section>
-      
+        <section class="docs-section" id="tc-card-s-comp">
+          <h2 class="docs-section-title">Composiciones</h2>
+          <p class="docs-section-desc">Patrones de composición del Card de shadcn con tokens Embassy. Overview muestra la card canónica; acá van las composiciones.</p>
+          <div class="docs-preview" style="gap:16px;flex-wrap:wrap;align-items:flex-start;justify-content:flex-start">
+            <div class="card" style="width:280px">
+              <div class="card-header">
+                <div class="card-title">Notificaciones</div>
+                <div class="card-desc">Recibí avisos por email.</div>
+                <div class="card-action"><button class="icon-btn btn-sm" type="button" aria-label="Opciones"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button></div>
+              </div>
+              <div class="card-content">Tenés 3 novedades sin leer.</div>
+            </div>
+            <div class="card" style="width:280px">
+              <div class="card-header"><div class="card-title">Plan Pro</div><div class="card-desc">Facturación mensual.</div></div>
+              <div class="card-content">Todas las funciones y soporte prioritario.</div>
+              <div class="card-footer"><button class="btn-tertiary btn-sm" type="button">Cancelar</button><button class="btn-primary btn-sm" type="button">Mejorar</button></div>
+            </div>
+            <div class="card" style="width:300px">
+              <div class="card-header"><div class="card-title">Crear cuenta</div><div class="card-desc">Ingresá tus datos para empezar.</div></div>
+              <div class="card-content">
+                <div class="field-group"><label class="field-label">Email</label><input class="field-input" placeholder="tu@email.com"></div>
+                <div class="field-group" style="margin-top:12px"><label class="field-label">Contraseña</label><input class="field-input" type="password" placeholder="••••••••"></div>
+              </div>
+              <div class="card-footer"><button class="btn-primary btn-sm" type="button" style="width:100%">Crear cuenta</button></div>
+            </div>
+          </div>
+          <table class="ds-table" style="margin-top:16px">
+            <thead><tr><th>Composición</th><th>Cómo</th></tr></thead>
+            <tbody>
+              <tr><td>Header con acción</td><td><code>.card-action</code> dentro de <code>.card-header</code> (grid, esquina superior derecha)</td></tr>
+              <tr><td>Footer con acciones</td><td><code>.card-footer</code> con jerarquía (tertiary + primary)</td></tr>
+              <tr><td>Form card</td><td><code>.field-group</code> en <code>.card-content</code> + acción full-width en el footer</td></tr>
+            </tbody>
+          </table>
+        </section>
+
         </div>
         <nav class="ds-toc" data-toc-auto id="tc-card-s-toc" aria-label="En esta página">
           <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -8681,6 +8716,7 @@ export { Textarea }</code></pre>
             <li><a class="ds-toc-link" data-target="tc-card-s-2">Filled card</a></li>
             <li><a class="ds-toc-link" data-target="tc-card-s-3">Outlined card</a></li>
             <li><a class="ds-toc-link" data-target="tc-card-s-4">Medidas</a></li>
+            <li><a class="ds-toc-link" data-target="tc-card-s-comp">Composiciones</a></li>
           </ul>
         </nav>
         </div>
