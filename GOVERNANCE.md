@@ -1206,9 +1206,9 @@ A full audit against the current shadcn **Base UI** catalog (62 components) foun
 already present + the documented non-additions (§19: Drawer→Sheet, Sidebar→app-shell,
 Resizable dropped; Hover Card→Rich Tooltip; Direction = RTL provider, N/A LTR-only).
 The **utility set** that was genuinely missing was added as flat CSS + full DS pages
-(nav + 5 tabs + rendered variants): **Kbd** (`kbd.css`), **Spinner** (`spinner.css`),
-**Button Group** (`button-group.css`), **Input Group** (`input-group.css`), **Item**
-(`item.css`), **Attachment** (`attachment.css`).
+(nav + 5 tabs + rendered variants): **Spinner** (`spinner.css`), **Button Group**
+(`button-group.css`), **Input Group** (`input-group.css`), **Item** (`item.css`),
+**Attachment** (`attachment.css`). (Kbd was added then removed — not needed.)
 
 ⚠️ **Intentionally NOT added** — out of Embassy's product scope (recruiting/HR): the
 chat/messaging components **Bubble**, **Message**, **Message Scroller**, and **Marker**

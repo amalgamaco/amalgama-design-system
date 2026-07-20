@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=1">
+<link rel="stylesheet" href="css/components.css?v=2">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -3614,7 +3614,6 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-button-group" onclick="navigate('c-button-group')">Button Group</div>
       <div class="ds-nav-item" data-section="c-input-group" onclick="navigate('c-input-group')">Input Group</div>
       <div class="ds-nav-item" data-section="c-item" onclick="navigate('c-item')">Item</div>
-      <div class="ds-nav-item" data-section="c-kbd" onclick="navigate('c-kbd')">Kbd</div>
       <div class="ds-nav-item" data-section="c-spinner" onclick="navigate('c-spinner')">Spinner</div>
     </nav>
   </div>
@@ -21648,28 +21647,6 @@ import { Button } from &quot;./components/ui/button&quot;
     </section>
 
 
-    <!-- ═══════════ KBD ═══════════ -->
-    <section class="ds-section" id="s-c-kbd">
-      <div class="ds-page-tag">Components · Display</div>
-      <h1 class="ds-page-title">Kbd</h1>
-      <p class="ds-page-desc">Tecla de teclado en línea para mostrar atajos.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/kbd.css</code> — <code>.kbd</code> / <code>.kbd-group</code>, superficie tenue, se recalibra solo en dark. Par shadcn Base UI <b>Kbd</b>.</div>
-      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
-      <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
-        <p class="bd-lead">Muestra una tecla o combinación de teclas — atajos en menús, tooltips y documentación.</p>
-        <ul class="bd-overview-list"><li><b>Composición:</b> <code>.kbd</code> por tecla; <code>.kbd-group</code> para combinaciones.</li><li>Alto 20px, superficie <code>--color-surface-variant</code>, no interactiva.</li><li>Dentro de un tooltip inverso usa la superficie del tooltip automáticamente.</li></ul>
-        <div class="bd-family-wrap"><span class="kbd-group"><kbd class="kbd">⌘</kbd><kbd class="kbd">K</kbd></span></div>
-      </section></div>
-      <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
-        <h2 class="docs-section-title">Variantes</h2>
-        <div class="bd-family-wrap" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><kbd class="kbd">Esc</kbd><span class="kbd-group"><kbd class="kbd">Ctrl</kbd><kbd class="kbd">S</kbd></span><span class="kbd-group"><kbd class="kbd">⇧</kbd><kbd class="kbd">⌘</kbd><kbd class="kbd">P</kbd></span></div>
-        <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Cómo</th></tr></thead><tbody><tr><td>Tecla simple</td><td><code>.kbd</code></td></tr><tr><td>Combinación</td><td><code>.kbd-group</code> con varias <code>.kbd</code></td></tr><tr><td>En tooltip</td><td>usa la superficie inversa del tooltip (automático)</td></tr></tbody></table>
-      </section></div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Atajos de teclado en menús/paletas.</li><li>Documentar shortcuts.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Código inline → <code>&lt;code&gt;</code>.</li></ul></div></div></div></section></div>
-      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Usá el elemento semántico <code>&lt;kbd&gt;</code>.</li><li><span class="ds-a11y-icon">♿</span>Es decorativa/no interactiva (<code>pointer-events:none</code>).</li></ul></section></div>
-      <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;span class="kbd-group"&gt;&lt;kbd class="kbd"&gt;⌘&lt;/kbd&gt;&lt;kbd class="kbd"&gt;K&lt;/kbd&gt;&lt;/span&gt;</code></pre></div></section></div>
-    </section>
-
     <!-- ═══════════ SPINNER ═══════════ -->
     <section class="ds-section" id="s-c-spinner">
       <div class="ds-page-tag">Components · Feedback</div>
@@ -21732,7 +21709,7 @@ import { Button } from &quot;./components/ui/button&quot;
       <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
         <p class="bd-lead">Combina un input con prefijos/sufijos (íconos, unidades, atajos o botones) bajo un solo borde con foco unificado.</p>
         <ul class="bd-overview-list"><li><b>Addons:</b> <code>.input-group-addon</code> (inline) · <code>-end</code> al final; <code>.input-group-text</code> para texto.</li><li>El foco y el estado de error (<code>aria-invalid</code>) viven en <code>.input-group</code>.</li><li>Para búsqueda filtrable con panel usá <b>Combobox</b>.</li></ul>
-        <div class="bd-family-wrap"><div class="input-group" style="max-width:340px"><span class="input-group-addon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input class="input-group-control" placeholder="Buscar…"><span class="input-group-addon input-group-addon-end"><kbd class="kbd">⌘K</kbd></span></div></div>
+        <div class="bd-family-wrap"><div class="input-group" style="max-width:340px"><span class="input-group-addon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input class="input-group-control" placeholder="Buscar…"><span class="input-group-addon input-group-addon-end input-group-text">⌘K</span></div></div>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
         <h2 class="docs-section-title">Variantes</h2>
@@ -21747,7 +21724,7 @@ import { Button } from &quot;./components/ui/button&quot;
       <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;div class="input-group"&gt;
   &lt;span class="input-group-addon"&gt;&lt;svg&gt;…&lt;/svg&gt;&lt;/span&gt;
   &lt;input class="input-group-control" placeholder="Buscar…"&gt;
-  &lt;span class="input-group-addon input-group-addon-end"&gt;&lt;kbd class="kbd"&gt;⌘K&lt;/kbd&gt;&lt;/span&gt;
+  &lt;span class="input-group-addon input-group-addon-end input-group-text"&gt;⌘K&lt;/span&gt;
 &lt;/div&gt;</code></pre></div></section></div>
     </section>
 
@@ -24445,7 +24422,6 @@ const SECTIONS = {
   'c-button-group':    { label: 'Button Group',          group: 'Components', parent: 'c-button' },
   'c-input-group':     { label: 'Input Group',           group: 'Components', parent: 'c-input' },
   'c-item':            { label: 'Item',                  group: 'Components' },
-  'c-kbd':             { label: 'Kbd',                   group: 'Components' },
   'c-spinner':         { label: 'Spinner',               group: 'Components', parent: 'c-loading' },
   // Legacy sub-pages (accessible via hash)
   'radius':            { label: 'Radius',                group: 'Styles' },
