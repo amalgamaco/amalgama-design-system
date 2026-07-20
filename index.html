@@ -8002,7 +8002,70 @@ export { Input }
               <span class="select-caret">▾</span>
             </div>
           </div></div></div>
+          <div><p class="ch-variant-label">Con grupos (optgroup)</p><div class="docs-preview"><div style="max-width:320px">
+            <div class="select-wrapper">
+              <select aria-label="Ciudad">
+                <option value="" disabled selected>Seleccionar ciudad…</option>
+                <optgroup label="Argentina"><option>Buenos Aires</option><option>Córdoba</option><option>Rosario</option></optgroup>
+                <optgroup label="Uruguay"><option>Montevideo</option><option>Punta del Este</option></optgroup>
+              </select>
+              <span class="select-caret">▾</span>
+            </div>
+          </div></div></div>
+          <div><p class="ch-variant-label">Inválido (aria-invalid)</p><div class="docs-preview"><div style="max-width:320px">
+            <div class="select-wrapper">
+              <select aria-label="Estado" aria-invalid="true">
+                <option value="" disabled selected>Seleccionar…</option>
+                <option>Abierta</option><option>Cerrada</option>
+              </select>
+              <span class="select-caret">▾</span>
+            </div>
+          </div></div></div>
+          <div><p class="ch-variant-label">Scrollable (lista larga)</p><div class="docs-preview"><div style="max-width:320px">
+            <div class="select-wrapper">
+              <select aria-label="Zona horaria">
+                <option value="" disabled selected>Seleccionar zona…</option>
+                <option>GMT-05 · Bogotá</option><option>GMT-04 · Santiago</option><option>GMT-03 · Buenos Aires</option><option>GMT-03 · Montevideo</option><option>GMT-02 · Fernando de Noronha</option><option>GMT+00 · Londres</option><option>GMT+01 · Madrid</option><option>GMT+02 · Atenas</option><option>GMT+03 · Estambul</option><option>GMT+05:30 · Nueva Delhi</option><option>GMT+08 · Singapur</option><option>GMT+09 · Tokio</option>
+              </select>
+              <span class="select-caret">▾</span>
+            </div>
+          </div></div></div>
         </div>
+        <p class="ch-variant-label" style="margin-top:20px">Select compuesto (panel estilizado) — grupos · separador · scrollable · ítem deshabilitado · check</p>
+        <p class="docs-section-desc">El <code>&lt;select&gt;</code> nativo delega el panel al sistema operativo. Cuando necesitás el panel estilizado de shadcn (grupos con label, separador, tilde en el seleccionado, alto máximo con scroll, ítem deshabilitado, alineado al trigger), usá el <b>Select compuesto</b> sobre el patrón Combobox/Command — misma estructura shadcn (Trigger + Content + Group + Item), tokens Embassy.</p>
+        <div class="docs-preview" style="justify-content:flex-start">
+          <div class="combobox">
+            <button class="btn-tertiary combobox-trigger is-placeholder" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="combobox-label">Seleccionar zona horaria…</span><span class="combobox-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+            <div class="combobox-panel" hidden>
+              <div class="command">
+                <div class="command-list">
+                  <div class="command-group"><div class="command-group-heading">América</div>
+                    <div class="command-item" data-label="Buenos Aires (GMT-3)"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Buenos Aires (GMT-3)</div>
+                    <div class="command-item" data-label="Santiago (GMT-4)"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Santiago (GMT-4)</div>
+                    <div class="command-item" data-label="Bogotá (GMT-5)"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Bogotá (GMT-5)</div>
+                  </div>
+                  <div class="command-separator"></div>
+                  <div class="command-group"><div class="command-group-heading">Europa</div>
+                    <div class="command-item" data-label="Madrid (GMT+1)"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Madrid (GMT+1)</div>
+                    <div class="command-item" data-label="Atenas (GMT+2)"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Atenas (GMT+2)</div>
+                    <div class="command-item" aria-disabled="true"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Kiev (no disponible)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="ds-table" style="margin-top:16px">
+          <thead><tr><th>Composición shadcn</th><th>Cómo</th></tr></thead>
+          <tbody>
+            <tr><td>Grupos</td><td>Nativo: <code>&lt;optgroup&gt;</code> · Compuesto: <code>.command-group</code> + <code>.command-group-heading</code></td></tr>
+            <tr><td>Scrollable</td><td>Nativo: el SO scrollea · Compuesto: <code>.command-list</code> con <code>max-height</code> + scroll</td></tr>
+            <tr><td>Ítem deshabilitado</td><td>Nativo: <code>&lt;option disabled&gt;</code> · Compuesto: <code>.command-item[aria-disabled]</code></td></tr>
+            <tr><td>Inválido</td><td><code>aria-invalid="true"</code> en el control (borde error)</td></tr>
+            <tr><td>Deshabilitado</td><td>Nativo: <code>&lt;select disabled&gt;</code></td></tr>
+            <tr><td>Alineado al trigger + check en seleccionado</td><td>Select compuesto (Combobox/Command): panel bajo el trigger + <code>.combobox-check</code></td></tr>
+          </tbody>
+        </table>
       </section>
 
       <!-- Medidas -->
