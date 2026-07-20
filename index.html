@@ -3563,10 +3563,10 @@ body { overflow-x: clip; }
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-seg-btn" onclick="navigate('c-seg-btn')">Segmented Button</div>
       </div>
-      <div class="ds-nav-item" data-section="c-card" onclick="navigate('c-card')">Card</div>
+      <div class="ds-nav-item" data-section="c-card" onclick="navigate('c-card')">Cards</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-item" onclick="navigate('c-item')">Item</div>
-        <div class="ds-nav-item" data-section="c-basic-card" onclick="navigate('c-basic-card')">Basic Card</div>
+        <div class="ds-nav-item" data-section="c-basic-card" onclick="navigate('c-basic-card')">Card</div>
         <div class="ds-nav-item" data-section="c-person" onclick="navigate('c-person')">Person Card</div>
         <div class="ds-nav-item" data-section="c-vacancy" onclick="navigate('c-vacancy')">Vacancy Card</div>
         <div class="ds-nav-item" data-section="c-kanban" onclick="navigate('c-kanban')">Kanban Card</div>
@@ -8590,11 +8590,11 @@ export { Textarea }</code></pre>
     <section class="ds-section" id="s-c-card">
       <div class="ds-page-tag">Components · Display</div>
       <div class="docs-page-header">
-        <h1 class="docs-page-title">Card</h1>
-        <p class="docs-page-desc">Contenedor base para agrupar contenido relacionado. Seleccioná una variante para ver su documentación completa.</p>
+        <h1 class="docs-page-title">Cards</h1>
+        <p class="docs-page-desc">La familia de contenedores: el primitivo <b>Item</b> (fila) y <b>Card</b> (panel) como bloques base, más composiciones de dominio construidas sobre ellos. Seleccioná una para ver su documentación.</p>
         <div class="ds-card-grid" style="margin:14px 0 4px">
           <div class="ds-card-link" onclick="navigate('c-item')"><div class="ds-card-icon"><i data-lucide="rows-3"></i></div><div class="ds-card-name">Item</div><div class="ds-card-desc">Primitiva de fila: media + texto + acciones.</div></div>
-          <div class="ds-card-link" onclick="navigate('c-basic-card')"><div class="ds-card-icon"><i data-lucide="square"></i></div><div class="ds-card-name">Basic Card</div><div class="ds-card-desc">Contenedor base genérico.</div></div>
+          <div class="ds-card-link" onclick="navigate('c-basic-card')"><div class="ds-card-icon"><i data-lucide="square"></i></div><div class="ds-card-name">Card</div><div class="ds-card-desc">Panel contenedor (header/contenido/footer).</div></div>
           <div class="ds-card-link" onclick="navigate('c-person')"><div class="ds-card-icon"><i data-lucide="user"></i></div><div class="ds-card-name">Person Card</div><div class="ds-card-desc">Persona con avatar, nombre y rol.</div></div>
           <div class="ds-card-link" onclick="navigate('c-vacancy')"><div class="ds-card-icon"><i data-lucide="briefcase"></i></div><div class="ds-card-name">Vacancy Card</div><div class="ds-card-desc">Vacante con estado y asignados.</div></div>
           <div class="ds-card-link" onclick="navigate('c-kanban')"><div class="ds-card-icon"><i data-lucide="square-kanban"></i></div><div class="ds-card-name">Kanban Card</div><div class="ds-card-desc">Tarjeta para tableros Kanban.</div></div>
@@ -8608,22 +8608,22 @@ export { Textarea }</code></pre>
     <section class="ds-section" id="s-c-basic-card">
       <div class="ds-page-tag">Components · Display</div>
       <div class="docs-page-header">
-        <h1 class="docs-page-title">Basic Card</h1>
-        <p class="docs-page-desc">Tarjeta base con tag, título y subtítulo. El botón de acción superior derecha aparece solo cuando la tarjeta es interactiva.</p>
+        <h1 class="docs-page-title">Card</h1>
+        <p class="docs-page-desc">Panel contenedor con header, contenido y footer. El primitivo de panel de la familia Cards (par shadcn Card); para filas compactas usá <b>Item</b>.</p>
       </div>
       <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
 
           <!-- Short introduction -->
-          <p class="bd-lead">La Basic Card agrupa un <b>tag</b> de categoría, un <b>título</b> y un <b>subtítulo</b>. Es el patrón de tarjeta base de la librería — sin área visual ilustrada.</p>
+          <p class="bd-lead">La Card es el <b>panel contenedor</b> base de la librería (header · título · descripción · contenido · footer, con slot de acción). Par shadcn Card; para una fila compacta (media + texto + acciones) usá <b>Item</b>.</p>
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li>Compone tag de categoría, título y subtítulo en un contenedor de superficie con borde.</li>
-            <li><b>Dos variantes:</b> estática (sin interacción) e interactiva (con botón de acción y hover).</li>
-            <li>El botón de acción (flecha superior derecha) aparece solo cuando la tarjeta navega o tiene una acción explícita.</li>
-            <li>Sin área visual ilustrada — para ilustración usá Nav Card completa.</li>
+            <li>Panel de superficie que agrupa contenido relacionado con partes opcionales: <code>card-header</code> · <code>card-title</code> · <code>card-desc</code> · <code>card-content</code> · <code>card-footer</code>.</li>
+            <li><b>Tres variantes</b> por separación: <code>.card</code> (outlined, borde), <code>.card-elevated</code> (elevación + sombra, sin borde) y <code>.card-filled</code> (relleno tonal).</li>
+            <li>El slot <code>card-action</code> (esquina superior derecha) aparece solo cuando la card navega o ejecuta una acción explícita.</li>
+            <li>Para una <b>fila</b> compacta (media + texto + acciones) usá <b>Item</b>; para una card ilustrada completa, <b>Nav Card</b>.</li>
             <li>Tokens semánticos garantizan contraste AA en claro y oscuro sin overrides por tema.</li>
           </ul>
 
@@ -8663,8 +8663,8 @@ export { Textarea }</code></pre>
 
           <!-- Legend — variant references -->
           <ol class="bd-family-legend">
-            <li>Estática — sin botón de acción ni interacción; para ítems no navegables</li>
-            <li>Interactiva — con botón de acción (flecha) y hover; cuando la tarjeta navega o ejecuta una acción</li>
+            <li>Outlined (<code>.card</code>) — variante por defecto, borde sobre la superficie; separación por línea</li>
+            <li>Con footer de acciones — <code>card-footer</code> aloja los botones (jerarquía: un <code>btn-primary</code> + alternativas)</li>
           </ol>
 
         </section>
@@ -8916,75 +8916,83 @@ export { Textarea }</code></pre>
           <ul class="ds-a11y-list">
             <li><span class="ds-a11y-icon">♿</span>Si la tarjeta entera es clickeable, usá un <code>&lt;a&gt;</code> o <code>&lt;button&gt;</code> como raíz con <code>aria-label</code> descriptivo</li>
             <li><span class="ds-a11y-icon">♿</span>No wrappear en <code>&lt;div onclick&gt;</code> — no es accesible con teclado ni lector de pantalla</li>
-            <li><span class="ds-a11y-icon">♿</span>El ícono de flecha debe llevar <code>aria-hidden="true"</code> — el label del contenedor comunica la acción</li>
+            <li><span class="ds-a11y-icon">♿</span>Los botones de solo-ícono del <code>card-action</code>/<code>card-footer</code> deben llevar <code>aria-label</code>; los íconos decorativos, <code>aria-hidden="true"</code></li>
           </ul>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <div class="docs-section">
           <h2 class="docs-section-title">CSS requerido</h2>
-          <p class="docs-section-desc">Los estilos de Basic Card forman parte del sistema de <code>.nav-card</code>, definido inline en <code>index.html</code>. No tienen wrapper dedicado en <code>components/ui/</code>. Para usarlos en un producto, flaggearlo como gap del DS o copiar los bloques <code>.nav-card</code> y <code>.nav-card--compact</code>.</p>
-        </div>
-        <div class="docs-section">
-          <h2 class="docs-section-title">HTML — Variante estática</h2>
-          <p class="docs-body">Sin interacción. Omitir <code>onclick</code> y el botón de acción.</p>
+          <p class="docs-section-desc">La Card vive en <code>css/components/card.css</code> — un solo archivo autocontenido. Linkeá <code>css/components.css</code> (barrel) o copiá <code>card.css</code> más la capa de tokens (<code>variables.css</code> + <code>base.css</code>).</p>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn">Copiar</button>
-            <pre class="docs-code"><code>&lt;div class="nav-card nav-card--compact"&gt;
-  &lt;div class="nav-card-header"&gt;
-    &lt;span class="nav-card-tag"&gt;Component&lt;/span&gt;
+            <pre class="docs-code"><code>&lt;link rel="stylesheet" href="css/variables.css"&gt;
+&lt;link rel="stylesheet" href="css/base.css"&gt;
+&lt;link rel="stylesheet" href="css/components/card.css"&gt;</code></pre>
+          </div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">HTML — Card completa</h2>
+          <p class="docs-body">Todas las partes son opcionales; componé solo las que necesites.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn">Copiar</button>
+            <pre class="docs-code"><code>&lt;div class="card"&gt;
+  &lt;div class="card-header"&gt;
+    &lt;div class="card-title"&gt;Título de la card&lt;/div&gt;
+    &lt;div class="card-desc"&gt;Texto de apoyo que describe el contenido.&lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class="nav-card-content"&gt;
-    &lt;div class="nav-card-title"&gt;Button&lt;/div&gt;
-    &lt;div class="nav-card-desc"&gt;Primary, secondary, and icon buttons.&lt;/div&gt;
+  &lt;div class="card-content"&gt;Contenido agrupado.&lt;/div&gt;
+  &lt;div class="card-footer"&gt;
+    &lt;button class="btn-primary btn-sm"&gt;Acción&lt;/button&gt;
+    &lt;button class="btn-text btn-sm"&gt;Cancelar&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
           </div>
         </div>
         <div class="docs-section">
-          <h2 class="docs-section-title">HTML — Variante interactiva</h2>
-          <p class="docs-body">Con navegación. Incluir <code>onclick</code> y el botón de acción.</p>
+          <h2 class="docs-section-title">HTML — Variantes</h2>
+          <p class="docs-body"><code>.card</code> (outlined, default) · <code>.card-elevated</code> (sombra, sin borde) · <code>.card-filled</code> (relleno tonal).</p>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn">Copiar</button>
-            <pre class="docs-code"><code>&lt;div class="nav-card nav-card--compact" onclick="navigate('...')"&gt;
-  &lt;div class="nav-card-header"&gt;
-    &lt;span class="nav-card-tag"&gt;Component&lt;/span&gt;
-    &lt;span class="nav-card-arrow-btn" aria-hidden="true"&gt;
-      &lt;i data-lucide="arrow-up-right"&gt;&lt;/i&gt;
-    &lt;/span&gt;
-  &lt;/div&gt;
-  &lt;div class="nav-card-content"&gt;
-    &lt;div class="nav-card-title"&gt;Button&lt;/div&gt;
-    &lt;div class="nav-card-desc"&gt;Primary, secondary, and icon buttons.&lt;/div&gt;
+            <pre class="docs-code"><code>&lt;div class="card card-elevated"&gt;…&lt;/div&gt;
+&lt;div class="card card-filled"&gt;…&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">HTML — Header con acción</h2>
+          <p class="docs-body">El slot <code>card-action</code> se ancla arriba a la derecha del header.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn">Copiar</button>
+            <pre class="docs-code"><code>&lt;div class="card"&gt;
+  &lt;div class="card-header"&gt;
+    &lt;div class="card-title"&gt;Notificaciones&lt;/div&gt;
+    &lt;div class="card-desc"&gt;Preferencias de aviso.&lt;/div&gt;
+    &lt;div class="card-action"&gt;
+      &lt;button class="icon-btn btn-sm" aria-label="Más opciones"&gt;
+        &lt;i data-lucide="more-vertical"&gt;&lt;/i&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
           </div>
         </div>
         <div class="docs-section">
-          <h2 class="docs-section-title">React — componente wrapper</h2>
-          <p class="docs-section-desc">El patrón <code>.nav-card</code> de la Basic Card no tiene wrapper React propio. Para tarjetas en proyectos React usá el componente <code>Card</code> (<code>components/ui/card.tsx</code>) como contenedor base y componé el header/título/subtítulo con las clases <code>.nav-card-*</code>. No redefinas <code>Card</code> — importalo de <code>./components/ui/card</code>.</p>
+          <h2 class="docs-section-title">React — wrapper</h2>
+          <p class="docs-section-desc">Wrapper tipado opcional en <code>components/ui/card.tsx</code> — aplica las mismas clases, sin estilos extra.</p>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn">Copiar</button>
-            <pre class="docs-code"><code>import { Card } from "./components/ui/card"
+            <pre class="docs-code"><code>import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "./components/ui/card"
 
-&lt;Card className="nav-card nav-card--compact"&gt;
-  &lt;div className="nav-card-header"&gt;
-    &lt;span className="nav-card-tag"&gt;Component&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;div className="nav-card-content"&gt;
-    &lt;div className="nav-card-title"&gt;Button&lt;/div&gt;
-    &lt;div className="nav-card-desc"&gt;Primary, secondary, and icon buttons.&lt;/div&gt;
-  &lt;/div&gt;
+&lt;Card&gt;
+  &lt;CardHeader&gt;
+    &lt;CardTitle&gt;Título de la card&lt;/CardTitle&gt;
+    &lt;CardDescription&gt;Texto de apoyo.&lt;/CardDescription&gt;
+  &lt;/CardHeader&gt;
+  &lt;CardContent&gt;Contenido agrupado.&lt;/CardContent&gt;
+  &lt;CardFooter&gt;
+    &lt;Button size="sm"&gt;Acción&lt;/Button&gt;
+  &lt;/CardFooter&gt;
 &lt;/Card&gt;</code></pre>
-          </div>
-        </div>
-        <div class="docs-section">
-          <h2 class="docs-section-title">Grid wrapper</h2>
-          <div class="docs-code-wrapper">
-            <button class="docs-copy-btn">Copiar</button>
-            <pre class="docs-code"><code>&lt;div class="nav-card-grid"&gt;
-  &lt;!-- basic-card items --&gt;
-&lt;/div&gt;</code></pre>
           </div>
         </div>
       </div>
@@ -22735,7 +22743,7 @@ import { Button } from &quot;./components/ui/button&quot;
   </div>
   <div class="nav-card nav-card--compact" onclick="navigate('c-basic-card')">
     <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
-    <div class="nav-card-content"><div class="nav-card-title">Basic Card</div><div class="nav-card-desc">Tarjeta base con tag, título y subtítulo.</div></div>
+    <div class="nav-card-content"><div class="nav-card-title">Card</div><div class="nav-card-desc">Panel contenedor con header, contenido y footer.</div></div>
   </div>
   <div class="nav-card nav-card--compact" onclick="navigate('c-breadcrumb')">
     <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
@@ -24439,7 +24447,7 @@ const SECTIONS = {
   'c-button':          { label: 'Buttons',               group: 'Components' },
   'c-seg-btn':         { label: 'Segmented Button',      group: 'Components', parent: 'c-button' },
   'c-card':            { label: 'Cards',                 group: 'Components' },
-  'c-basic-card':      { label: 'Basic Card',            group: 'Components', parent: 'c-card' },
+  'c-basic-card':      { label: 'Card',                  group: 'Components', parent: 'c-card' },
   'c-carousel':        { label: 'Carousels',             group: 'Components' },
   'c-charts':          { label: 'Charts',                group: 'Components' },
   'c-checkbox':        { label: 'Checkbox',              group: 'Components' },
