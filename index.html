@@ -13561,35 +13561,35 @@ css/layout.css</code></pre>
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li><b>Anatomía:</b> avatar (iniciales sobre gradiente) + nombre + rol; las cards se distribuyen en una <code>people-grid</code> responsive.</li>
+            <li><b>Composición sobre <a href="#c-item" onclick="navigate('c-item');return false">Item</a>:</b> es una fila <code>.item item-outline item-clickable</code>; solo aporta el avatar circular de marca — layout, padding, hover, foco, título y descripción vienen del primitivo Item.</li>
+            <li><b>Anatomía:</b> avatar en <code>.item-media</code> + nombre (<code>.item-title</code>) + rol (<code>.item-description</code>); las cards se distribuyen en una <code>people-grid</code> responsive.</li>
             <li><b>Grid responsive:</b> <code>repeat(auto-fill, minmax(280px, 1fr))</code> — las cards se acomodan solas al ancho disponible.</li>
             <li><b>Avatar con iniciales:</b> círculo de 44px con gradiente de marca (<code>--secondary-900</code> → <code>--secondary-500</code>) — no requiere foto.</li>
-            <li><b>Card interactiva:</b> cursor pointer con hover de borde + sombra; pensada como punto de navegación al perfil.</li>
             <li><b>Regla clave:</b> es para personas en grillas — vacantes van en Vacancy Card, datos tabulares de personas en Table.</li>
           </ul>
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <div class="people-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))"><div class="person-card" tabindex="0">
-    <div class="person-avatar">MG</div>
-    <div class="person-info">
-      <div class="person-name">María González</div>
-      <div class="person-role">Diseñadora UX</div>
-    </div>  </div><div class="person-card" tabindex="0">
-    <div class="person-avatar">CL</div>
-    <div class="person-info">
-      <div class="person-name">Carlos López</div>
-      <div class="person-role">Frontend Engineer</div>
-    </div>  </div><div class="person-card" tabindex="0">
-    <div class="person-avatar">AM</div>
-    <div class="person-info">
-      <div class="person-name">Ana Martínez</div>
-      <div class="person-role">Product Manager</div>
-    </div>  </div><div class="person-card" tabindex="0">
-    <div class="person-avatar">JP</div>
-    <div class="person-info">
-      <div class="person-name">Juan Pérez</div>
-      <div class="person-role">Data Analyst</div>
+            <div class="people-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))"><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
+    <div class="item-media person-avatar">MG</div>
+    <div class="item-content">
+      <div class="item-title">María González</div>
+      <div class="item-description">Diseñadora UX</div>
+    </div>  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
+    <div class="item-media person-avatar">CL</div>
+    <div class="item-content">
+      <div class="item-title">Carlos López</div>
+      <div class="item-description">Frontend Engineer</div>
+    </div>  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
+    <div class="item-media person-avatar">AM</div>
+    <div class="item-content">
+      <div class="item-title">Ana Martínez</div>
+      <div class="item-description">Product Manager</div>
+    </div>  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
+    <div class="item-media person-avatar">JP</div>
+    <div class="item-content">
+      <div class="item-title">Juan Pérez</div>
+      <div class="item-description">Data Analyst</div>
     </div>  </div></div>
           </div>
 
@@ -13607,35 +13607,33 @@ css/layout.css</code></pre>
 <div class="docs-section" id="tc-person-s-0">
         <h2 class="docs-section-title">Anatomía</h2>
         <div class="docs-preview">
-          <div class="people-grid"><div class="person-card" tabindex="0">
-    <div class="person-avatar">MG</div>
-    <div class="person-info">
-      <div class="person-name">Mercedes Garcia</div>
-      <div class="person-role">Diseñadora UX</div>
+          <div class="people-grid"><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
+    <div class="item-media person-avatar">MG</div>
+    <div class="item-content">
+      <div class="item-title">Mercedes Garcia</div>
+      <div class="item-description">Diseñadora UX</div>
     </div>
-    
-  </div><div class="person-card" tabindex="0">
-    <div class="person-avatar">CL</div>
-    <div class="person-info">
-      <div class="person-name">Carlos Lopez</div>
-      <div class="person-role">Desarrollador Frontend</div>
+  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
+    <div class="item-media person-avatar">CL</div>
+    <div class="item-content">
+      <div class="item-title">Carlos Lopez</div>
+      <div class="item-description">Desarrollador Frontend</div>
     </div>
-    
-  </div><div class="person-card" tabindex="0">
-    <div class="person-avatar">AM</div>
-    <div class="person-info">
-      <div class="person-name">Ana Martinez</div>
-      <div class="person-role">Product Manager</div>
+  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
+    <div class="item-media person-avatar">AM</div>
+    <div class="item-content">
+      <div class="item-title">Ana Martinez</div>
+      <div class="item-description">Product Manager</div>
     </div>
-    
   </div></div>
         </div>
         <table class="ds-table" style="margin-top:16px">
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
           <tbody>
-            <tr><td><code>.person-avatar</code></td><td>Iniciales en círculo de 44px sobre gradiente de marca</td></tr>
-            <tr><td><code>.person-name</code></td><td>Nombre, peso 600</td></tr>
-            <tr><td><code>.person-role</code></td><td>Rol o puesto</td></tr>
+            <tr><td><code>.item item-outline item-clickable</code></td><td>Fila base (primitivo Item): layout, padding, borde, hover y foco</td></tr>
+            <tr><td><code>.item-media.person-avatar</code></td><td>Iniciales en círculo de 44px sobre gradiente de marca</td></tr>
+            <tr><td><code>.item-title</code></td><td>Nombre, peso 500</td></tr>
+            <tr><td><code>.item-description</code></td><td>Rol o puesto</td></tr>
             <tr><td><code>.people-grid</code></td><td>Grilla responsive que contiene las cards</td></tr>
           </tbody>
         </table>
@@ -13646,9 +13644,9 @@ css/layout.css</code></pre>
           <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
           <tbody>
             <tr><td>Grid</td><td><code>repeat(auto-fill, minmax(280px, 1fr))</code>, gap <code>12px</code></td></tr>
-            <tr><td>Card</td><td>padding <code>16px</code>, gap interno <code>14px</code>, radio <code>var(--radius)</code></td></tr>
+            <tr><td>Card (Item)</td><td>padding <code>16px</code>, gap interno <code>16px</code>, radio <code>var(--radius-md)</code></td></tr>
             <tr><td>Avatar</td><td><code>44×44px</code>, círculo, tipografía <code>15px</code> peso 600</td></tr>
-            <tr><td>Nombre</td><td>margin-bottom <code>2px</code></td></tr>
+            <tr><td>Nombre / rol</td><td>gap <code>2px</code> en <code>.item-content</code></td></tr>
           </tbody>
         </table>
       </div>
@@ -13657,8 +13655,8 @@ css/layout.css</code></pre>
         <table class="ds-table">
           <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
           <tbody>
-            <tr><td>Hover</td><td>Borde a <code>--color-outline-variant</code> + <code>--shadow-md</code></td><td><code>--color-outline-variant</code>, <code>--shadow-md</code>, <code>--duration-fast</code></td></tr>
-            <tr><td>Focus-visible</td><td>Outline 2px + ring de 4px</td><td><code>--color-focus</code>, <code>--color-focus-ring</code></td></tr>
+            <tr><td>Hover</td><td>Fondo <code>--color-surface-variant</code> (de <code>.item-clickable</code>) + <code>--shadow-md</code></td><td><code>--color-surface-variant</code>, <code>--shadow-md</code>, <code>--duration-fast</code></td></tr>
+            <tr><td>Focus-visible</td><td>Borde a <code>--color-focus</code> + ring de 3px (patrón de foco de Item)</td><td><code>--color-focus</code>, <code>--color-focus-ring</code></td></tr>
           </tbody>
         </table>
       </div>
@@ -13669,10 +13667,10 @@ css/layout.css</code></pre>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
-            <tr><td><code>.person-card</code></td><td><code>--card-bg</code> + <code>--border</code> + <code>--radius</code> + <code>--shadow-md</code></td></tr>
+            <tr><td><code>.item item-outline</code></td><td><code>--border</code> + <code>--radius-md</code>; hover suma <code>--shadow-md</code></td></tr>
             <tr><td><code>.person-avatar</code></td><td>Gradiente <code>--secondary-900</code> → <code>--secondary-500</code>, texto <code>--color-on-primary</code></td></tr>
-            <tr><td><code>.person-name</code></td><td><code>--text-primary</code> (<code>--font-size-body-lg</code>)</td></tr>
-            <tr><td><code>.person-role</code></td><td><code>--text-muted</code> (<code>--font-size-body-sm</code>)</td></tr>
+            <tr><td><code>.item-title</code></td><td><code>--text-primary</code>, peso 500</td></tr>
+            <tr><td><code>.item-description</code></td><td><code>--text-secondary</code> (<code>--font-size-body-sm</code>)</td></tr>
             <tr><td>Card — foco</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
           </tbody>
         </table>
@@ -13736,7 +13734,7 @@ css/layout.css</code></pre>
       <div class="ds-comp-tab-panel" data-tab="accessibility">
         <div class="docs-section">
           <h2 class="docs-section-title">Foco visible</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span><code>.person-card:focus-visible</code> define outline de 2px <code>var(--color-focus)</code> con offset 2px + ring de 4px <code>var(--color-focus-ring)</code></li><li><span class="ds-a11y-icon">♿</span>La card es un <code>&lt;div&gt;</code> clickeable — necesita <code>tabindex="0"</code> para recibir foco con teclado</li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Hereda el foco de Item: <code>.item:focus-visible</code> pinta el borde a <code>var(--color-focus)</code> + ring de 3px <code>var(--color-focus-ring)</code></li><li><span class="ds-a11y-icon">♿</span>La card es un <code>&lt;div&gt;</code> clickeable — necesita <code>tabindex="0"</code> y <code>role="button"</code> para recibir foco y anunciarse con teclado</li></ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
@@ -13750,32 +13748,33 @@ css/layout.css</code></pre>
       <div class="ds-comp-tab-panel" data-tab="code">
         <div class="docs-section">
           <h2 class="docs-section-title">Instalación</h2>
-          <p class="docs-section-desc">Sin build ni dependencias — copiá el archivo CSS y usá las clases. Componente interno del sitio de docs sin wrapper React dedicado.</p>
+          <p class="docs-section-desc">Sin build ni dependencias. Person Card es una <b>composición sobre el primitivo Item</b>, así que necesita <code>item.css</code> además de <code>person-card.css</code> (o el barrel <code>css/components.css</code>).</p>
           <h3>CSS requerido</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>&lt;link rel="stylesheet" href="css/components/person-card.css"&gt;</code></pre>
+          <pre class="docs-code standalone"><code>&lt;link rel="stylesheet" href="css/components/item.css"&gt;
+&lt;link rel="stylesheet" href="css/components/person-card.css"&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
         </div>
             <div class="docs-section">
         <h2 class="docs-section-title">Uso</h2>
-        <p class="docs-section-desc">Snippets de código para implementar cada variante.</p>
+        <p class="docs-section-desc">Person Card = una fila <code>.item</code> con el avatar de marca en <code>.item-media</code> y nombre/rol en <code>.item-content</code>.</p>
         <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">People Grid</h3>
 <div class="docs-code-wrapper">
         <button class="docs-copy-btn">Copiar</button>
         <pre class="docs-code"><code>&lt;div class="people-grid"&gt;
-  &lt;div class="person-card"&gt;
-    &lt;div class="person-avatar"&gt;MG&lt;/div&gt;
-    &lt;div class="person-info"&gt;
-      &lt;div class="person-name"&gt;Mercedes Garcia&lt;/div&gt;
-      &lt;div class="person-role"&gt;Disenadora UX&lt;/div&gt;
+  &lt;div class="item item-outline item-clickable person-card" tabindex="0" role="button"&gt;
+    &lt;div class="item-media person-avatar"&gt;MG&lt;/div&gt;
+    &lt;div class="item-content"&gt;
+      &lt;div class="item-title"&gt;Mercedes Garcia&lt;/div&gt;
+      &lt;div class="item-description"&gt;Disenadora UX&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class="person-card"&gt;
-    &lt;div class="person-avatar"&gt;CL&lt;/div&gt;
-    &lt;div class="person-info"&gt;
-      &lt;div class="person-name"&gt;Carlos Lopez&lt;/div&gt;
-      &lt;div class="person-role"&gt;Desarrollador Frontend&lt;/div&gt;
+  &lt;div class="item item-outline item-clickable person-card" tabindex="0" role="button"&gt;
+    &lt;div class="item-media person-avatar"&gt;CL&lt;/div&gt;
+    &lt;div class="item-content"&gt;
+      &lt;div class="item-title"&gt;Carlos Lopez&lt;/div&gt;
+      &lt;div class="item-description"&gt;Desarrollador Frontend&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -14010,9 +14009,9 @@ css/layout.css</code></pre>
 &lt;div class="assignee-avatar green"&gt;AP&lt;/div&gt;
 &lt;div class="assignee-avatar purple"&gt;JR&lt;/div&gt;
 
-&lt;!-- Person card (44px) — requiere ancestro .person-card --&gt;
-&lt;div class="person-card"&gt;
-  &lt;div class="person-avatar"&gt;MG&lt;/div&gt;
+&lt;!-- Person card (44px) — el avatar va en .item-media dentro de .person-card --&gt;
+&lt;div class="item person-card"&gt;
+  &lt;div class="item-media person-avatar"&gt;MG&lt;/div&gt;
 &lt;/div&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>

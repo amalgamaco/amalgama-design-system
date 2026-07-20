@@ -118,7 +118,9 @@ Canonical component code is `css/components/<name>.css`. The **React** column na
 | Form | `form.css` (shared with Input/Select/Textarea) — native HTML5 validation + a plain `useFormField` hook, no react-hook-form/zod | `form.tsx` | — (no standalone doc page) |
 | Resizable panels | **not implemented** — dropped in the 2026-07 revert (no real use case beyond its own demo); flag if you need one | — | — |
 | Avatar / Divider / List / Progress | `avatar.css`, `divider.css`, `list.css`, `progress.css` | — (CSS-only, no wrapper) | `avatar.html` |
+| Item | `item.css` (compact row primitive: `.item` + `item-outline`/`item-muted`/`item-sm`, `item-media`/`-icon`/`-image`, `item-content`/`-title`/`-description`/`-actions`/`-header`/`-footer`, `item-group`/`-separator`, `a.item`/`item-clickable`) — par shadcn Item; the base for row-shaped domain cards | — (CSS-only) | — (under Cards) |
 | Kanban / Person / Vacancy Card, Create Form, Placeholder | `kanban.css`, `person-card.css`, `vacancy-card.css`, `create-form.css`, `placeholder.css` | — (CSS-only, no wrapper; used via raw classes directly in markup) | — |
+| ↳ Person Card | `person-card.css` — **composition on `.item`**: markup `.item item-outline item-clickable person-card`, avatar in `item-media`, name/role in `item-title`/`item-description`; the CSS only adds the brand gradient avatar + surface bg. Depends on `item.css`. | — | — |
 
 **Canonical Overview structure (all component pages):** badge → title → subtitle → 4 tabs
 (Overview / Guidelines / Accessibility / Code — the tab switcher is real `.ds-comp-tabs`/`.ds-comp-tab-btn` markup driven by `switchCompTab()`, no framework) → key-characteristic bullets → single-mode
