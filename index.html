@@ -13822,57 +13822,24 @@ css/layout.css</code></pre>
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li><b>Anatomía:</b> círculo con iniciales de 2 letras sobre gradiente de marca; la clase <code>.avatar</code> (32px) vive en <code>css/layout.css</code> como parte del app shell.</li>
+            <li><b>Anatomía:</b> <code>.avatar</code> (círculo) con <code>.avatar-image</code> y <code>.avatar-fallback</code> (iniciales sobre gradiente de marca cuando no hay foto).</li>
             <li><b>Gradiente de marca:</b> <code>--primary-500</code> → <code>--secondary-900</code> en diagonal (135deg), con iniciales en <code>--color-on-primary</code>.</li>
-            <li><b>Tres tamaños según contexto:</b> 32px en el topbar (<code>.avatar</code>), 44px en person cards (<code>.person-avatar</code>) y 22px para asignados (<code>.assignee-avatar</code>).</li>
+            <li><b>Composiciones</b> (en Specs): tamaños, badge de estado, badge con ícono, grupo apilado, contador de overflow, grupo con ícono y avatar como disparador de menú (dropdown).</li>
             <li><b>Regla clave:</b> solo para personas — imágenes de producto, categorías u otros elementos no-persona usan íconos, no avatares.</li>
           </ul>
 
-          <!-- Component variants -->
+          <!-- Overview = solo el Avatar básico (imagen + fallback). Las demás composiciones viven en Specs. -->
           <div class="bd-family-wrap">
-            <div style="display:flex;flex-direction:column;gap:24px">
-  <div>
-    <p class="ch-variant-label">Tamaños</p>
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <span class="avatar avatar-sm"><span class="avatar-fallback">MG</span></span>
-      <span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span>
-      <span class="avatar avatar-lg"><span class="avatar-fallback">AM</span></span>
-      <span class="avatar avatar-xl"><span class="avatar-fallback">JP</span></span>
-    </div>
-  </div>
-  <div>
-    <p class="ch-variant-label">Con imagen</p>
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-      <span class="avatar avatar-lg"><img class="avatar-image" src="https://i.pravatar.cc/150?u=mg" alt="María González"></span>
-      <span class="avatar avatar-lg"><span class="avatar-fallback">CL</span></span>
-    </div>
-  </div>
-  <div>
-    <p class="ch-variant-label">Con estado (<code>.avatar-badge</code>)</p>
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-      <span class="avatar avatar-lg"><span class="avatar-fallback">MG</span><span class="avatar-badge avatar-badge-online" title="En línea"></span></span>
-      <span class="avatar avatar-lg"><span class="avatar-fallback">CL</span><span class="avatar-badge avatar-badge-busy" title="Ocupado"></span></span>
-      <span class="avatar avatar-lg"><span class="avatar-fallback">AM</span><span class="avatar-badge avatar-badge-away" title="Ausente"></span></span>
-      <span class="avatar avatar-lg"><span class="avatar-fallback">JP</span><span class="avatar-badge avatar-badge-offline" title="Desconectado"></span></span>
-    </div>
-  </div>
-  <div>
-    <p class="ch-variant-label">Grupo + overflow (<code>.avatar-group-count</code>)</p>
-    <div class="avatar-group">
-      <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>
-      <span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span>
-      <span class="avatar avatar-md"><span class="avatar-fallback">AM</span></span>
-      <span class="avatar avatar-md avatar-group-count">+4</span>
-    </div>
-  </div>
-</div>
+            <div style="display:flex;align-items:center;gap:16px">
+              <span class="avatar avatar-lg"><img class="avatar-image" src="https://i.pravatar.cc/150?u=mg" alt="María González"></span>
+              <span class="avatar avatar-lg"><span class="avatar-fallback">CL</span></span>
+            </div>
           </div>
 
           <!-- Legend — variant references -->
           <ol class="bd-family-legend">
-            <li>Topbar — 32px (<code>.avatar</code>)</li>
-            <li>Person card — 44px (<code>.person-avatar</code>)</li>
-            <li>Asignado — 22px (<code>.assignee-avatar</code>)</li>
+            <li>Con imagen — <code>.avatar-image</code> (cae al fallback si la imagen no carga)</li>
+            <li>Fallback — <code>.avatar-fallback</code> con las iniciales sobre el gradiente de marca</li>
           </ol>
 
         </section>
@@ -13894,13 +13861,66 @@ css/layout.css</code></pre>
       </div>
       <div class="docs-section" id="tc-avatar-s-1">
         <h2 class="docs-section-title">Configuraciones</h2>
-        <p class="docs-section-desc">Tres tamaños según el contexto de uso.</p>
-        <p class="ch-variant-label">Principal — 32px (topbar)</p>
-        <div class="docs-preview"><span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span></div>
-        <p class="ch-variant-label" style="margin-top:16px">Asignado — 22px (vacancy card, 4 colores)</p>
-        <div class="docs-preview"><div class="avatar-group"><span class="avatar avatar-sm"><span class="avatar-fallback">CL</span></span><span class="avatar avatar-sm"><span class="avatar-fallback">MG</span></span><span class="avatar avatar-sm"><span class="avatar-fallback">AP</span></span><span class="avatar avatar-sm"><span class="avatar-fallback">JR</span></span></div></div>
-        <p class="ch-variant-label" style="margin-top:16px">Persona — 44px (person card / perfil)</p>
-        <div class="docs-preview"><div style="display:flex;align-items:center;gap:12px"><span class="avatar avatar-lg"><span class="avatar-fallback">MG</span></span><span class="avatar avatar-lg"><span class="avatar-fallback">CL</span></span><span class="avatar avatar-lg"><span class="avatar-fallback">AM</span></span></div></div>
+        <p class="docs-section-desc">Todas las composiciones oficiales del Avatar de shadcn, con tokens Embassy. Overview muestra el Avatar básico.</p>
+
+        <p class="ch-variant-label">Tamaños — <code>sm</code> (24px) · <code>md</code> (32px) · <code>lg</code> (40px) · <code>xl</code></p>
+        <div class="docs-preview"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <span class="avatar avatar-sm"><span class="avatar-fallback">MG</span></span>
+          <span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span>
+          <span class="avatar avatar-lg"><span class="avatar-fallback">AM</span></span>
+          <span class="avatar avatar-xl"><span class="avatar-fallback">JP</span></span>
+        </div></div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Badge de estado — <code>.avatar-badge</code> (<code>online</code>/<code>busy</code>/<code>away</code>/<code>offline</code>)</p>
+        <div class="docs-preview"><div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <span class="avatar avatar-lg"><span class="avatar-fallback">MG</span><span class="avatar-badge avatar-badge-online" title="En línea"></span></span>
+          <span class="avatar avatar-lg"><span class="avatar-fallback">CL</span><span class="avatar-badge avatar-badge-busy" title="Ocupado"></span></span>
+          <span class="avatar avatar-lg"><span class="avatar-fallback">AM</span><span class="avatar-badge avatar-badge-away" title="Ausente"></span></span>
+          <span class="avatar avatar-lg"><span class="avatar-fallback">JP</span><span class="avatar-badge avatar-badge-offline" title="Desconectado"></span></span>
+        </div></div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Badge con ícono — el slot <code>.avatar-badge</code> aloja un SVG (p.ej. verificado)</p>
+        <div class="docs-preview"><div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <span class="avatar avatar-xl"><img class="avatar-image" src="https://i.pravatar.cc/150?u=mg" alt="María González"><span class="avatar-badge avatar-badge-online"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></span>
+          <span class="avatar avatar-xl"><span class="avatar-fallback">CL</span><span class="avatar-badge avatar-badge-busy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></span>
+        </div></div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Grupo apilado — <code>.avatar-group</code> (solapado, con anillo de superficie)</p>
+        <div class="docs-preview"><div class="avatar-group">
+          <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>
+          <span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span>
+          <span class="avatar avatar-md"><span class="avatar-fallback">AM</span></span>
+          <span class="avatar avatar-md"><img class="avatar-image" src="https://i.pravatar.cc/150?u=jp" alt="Juan Pérez"></span>
+        </div></div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Grupo con contador — <code>.avatar-group-count</code> cierra el grupo con «+N»</p>
+        <div class="docs-preview"><div class="avatar-group">
+          <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>
+          <span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span>
+          <span class="avatar avatar-md"><span class="avatar-fallback">AM</span></span>
+          <span class="avatar avatar-md avatar-group-count">+4</span>
+        </div></div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Grupo con ícono — la celda final del grupo aloja un ícono (p.ej. agregar)</p>
+        <div class="docs-preview"><div class="avatar-group">
+          <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>
+          <span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span>
+          <button type="button" class="avatar avatar-md avatar-group-count" aria-label="Agregar persona" style="border:0;padding:0;cursor:pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        </div></div>
+
+        <p class="ch-variant-label" style="margin-top:20px">Dropdown — el avatar es el disparador de un menú de cuenta</p>
+        <div class="docs-preview"><div class="dropdown-wrap">
+          <button type="button" aria-label="Menú de cuenta" aria-haspopup="menu" onclick="toggleDropdown(this,'avatar-dd')" style="background:none;border:0;padding:0;border-radius:var(--radius-full);cursor:pointer">
+            <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>
+          </button>
+          <div class="dropdown-content" id="avatar-dd" role="menu" style="display:none;min-width:200px">
+            <div class="dropdown-label">María González</div>
+            <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Perfil</button>
+            <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Configuración</button>
+            <div class="dropdown-separator"></div>
+            <button class="dropdown-item" role="menuitem" type="button" data-variant="danger" onclick="closeDropdownItem(this)">Cerrar sesión</button>
+          </div>
+        </div></div>
       </div>
       <div class="docs-section" id="tc-avatar-s-2">
         <h2 class="docs-section-title">Medidas</h2>
@@ -14003,7 +14023,7 @@ css/layout.css</code></pre>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Teclado y ARIA</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El avatar sin imagen tiene <code>aria-label="Iniciales de [Nombre]"</code> o está dentro de un elemento con label</li><li><span class="ds-a11y-icon">♿</span>Grupos de avatares apilados deben tener <code>aria-label</code> con la lista de personas: "Asignado a: MG, CL, AP"</li><li><span class="ds-a11y-icon">♿</span>Si el avatar es interactivo (abre menú), debe ser un <code>&lt;button&gt;</code> con <code>aria-haspopup</code> y <code>aria-expanded</code></li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El avatar sin imagen tiene <code>aria-label="Iniciales de [Nombre]"</code> o está dentro de un elemento con label</li><li><span class="ds-a11y-icon">♿</span>Grupos de avatares apilados deben tener <code>aria-label</code> con la lista de personas: "Asignado a: MG, CL, AP"</li><li><span class="ds-a11y-icon">♿</span>Si el avatar es interactivo (abre menú), debe ser un <code>&lt;button&gt;</code> con <code>aria-haspopup</code> y <code>aria-expanded</code></li><li><span class="ds-a11y-icon">♿</span>El <code>.avatar-badge</code> de estado comunica su significado con <code>title</code>/<code>aria-label</code> (p.ej. "En línea"), no solo con el color; si lleva ícono, este es decorativo (<code>aria-hidden</code>)</li></ul>
         </div>
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
@@ -14020,7 +14040,28 @@ css/layout.css</code></pre>
 &lt;!-- Con imagen + fallback de iniciales mientras carga / si falla --&gt;
 &lt;span class="avatar avatar-lg"&gt;
   &lt;img class="avatar-image" src="/users/mg.jpg" alt="Martina González"&gt;
-&lt;/span&gt;</code></pre>
+&lt;/span&gt;
+
+&lt;!-- Badge de estado (y badge con ícono) --&gt;
+&lt;span class="avatar avatar-lg"&gt;
+  &lt;span class="avatar-fallback"&gt;MG&lt;/span&gt;
+  &lt;span class="avatar-badge avatar-badge-online" title="En línea"&gt;&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Grupo apilado + contador de overflow --&gt;
+&lt;div class="avatar-group"&gt;
+  &lt;span class="avatar avatar-md"&gt;&lt;span class="avatar-fallback"&gt;MG&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="avatar avatar-md"&gt;&lt;span class="avatar-fallback"&gt;CL&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="avatar avatar-md avatar-group-count"&gt;+4&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Avatar como disparador de menú (dropdown) --&gt;
+&lt;div class="dropdown-wrap"&gt;
+  &lt;button aria-haspopup="menu" onclick="toggleDropdown(this,'m')"&gt;
+    &lt;span class="avatar avatar-md"&gt;&lt;span class="avatar-fallback"&gt;MG&lt;/span&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;div class="dropdown-content" id="m" role="menu"&gt;…&lt;/div&gt;
+&lt;/div&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
         </div>
         <p class="docs-section-desc">Tamaños vía la prop <code>size</code>: <code>sm</code> (28px), <code>md</code> (36px, default), <code>lg</code> (44px), <code>xl</code> (56px). El fallback usa <code>bg-primary</code> / <code>text-on-primary</code> (tokens Embassy), sin hex hardcodeado.</p>
