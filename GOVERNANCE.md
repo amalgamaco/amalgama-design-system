@@ -583,7 +583,7 @@ See the Motion page (Styles) for the full token reference and transition-pattern
 
 ### 11.6 React API (optional — only if a wrapper is warranted)
 
-Not every component needs one — domain/composition-only pieces (Vacancy Card, Person Card, Kanban Card, Create Form, Placeholder, Segmented Button) are CSS-only by design; don't fabricate a wrapper where the project doesn't need one.
+Not every component needs one — domain/composition-only pieces (Vacancy Card, Person variant of Basic Card, Kanban Card, Create Form, Placeholder, Segmented Button) are CSS-only by design; don't fabricate a wrapper where the project doesn't need one.
 
 - [ ] Pattern: `cva` (class-variance-authority) + `cn()` from `components/lib/utils.ts` + `React.forwardRef`
 - [ ] Maps props onto the flat CSS classes from `css/components/<name>.css` — zero extra styling, zero Tailwind utilities, zero inline styles beyond what the demo itself needs
@@ -1216,34 +1216,40 @@ chat/messaging components **Bubble**, **Message**, **Message Scroller**, and **M
 Native Select = Embassy's native `<select>`; Field = `form.css` field-group; Empty =
 `empty-state.css`; Label folded into field (§23).
 
-### 21.3d Item as the row primitive — card reuse review (2026-07)
+### 21.3d Cards architecture — one reusable primitive (2026-07, final)
 
-The **Cards** family is organized around two base building blocks that mirror shadcn 1:1:
+The **Cards** family converged on a single reusable primitive plus a rich panel, mirroring
+shadcn's Item/Card split but using **designer-facing names**:
 
-- **Item** (`item.css`) — the canonical **compact row primitive** (media + content +
-  actions), with the full shadcn composition set rendered in its Specs (variant, size,
-  icon/avatar/image media, group, header, link, dropdown).
-- **Card** (`card.css`) — the **panel primitive** (header/title/description/content/footer
-  + action slot; variants `.card` / `.card-elevated` / `.card-filled`), par shadcn Card.
+- **Basic Card** (`item.css`, classes `.item*`) — the canonical **reusable primitive**: a
+  compact row (media + content + actions), par shadcn **Item**, with the full official
+  composition set rendered in its Specs (variant, size, icon/avatar/image media, **person**,
+  group, header, link, dropdown). This is the base block for every compact domain card.
+- **Full Card** (`card.css`, classes `.card*`) — the **rich panel** (header/title/
+  description/content/footer + action slot; variants `.card` / `.card-elevated` /
+  `.card-filled`), par shadcn **Card**.
 
-> **Rename (2026-07):** the page formerly titled *"Basic Card"* is now **Card** — it was
-> never a "basic" building block but the panel composition itself. The Cards **hub** page
-> is now titled *"Cards"* (nav parent), and its Code/Overview/a11y copy was rewritten off
-> the legacy `.nav-card` chrome onto the real `.card` classes. Section ids are unchanged
-> (`c-card` = hub "Cards", `c-basic-card` = "Card" panel page) to preserve anchors.
+> **Naming history (do not re-litigate):** this section oscillated. Final state (2026-07):
+> the shadcn **Item** primitive is surfaced as **"Basic Card"**; the panel formerly shown as
+> "Basic Card" then briefly "Card" is now **"Full Card"**. Class names were kept (`.item*`
+> for Basic Card, `.card*` for Full Card) for shadcn parity — only the **display names**
+> changed. **Section ids are stable and intentionally do not match the labels:** `c-item` =
+> "Basic Card", `c-basic-card` = "Full Card", `c-card` = the "Cards" hub. `c-person` is
+> retired → `SECTIONS['c-person'].redirect = 'c-item'` (navigate() honors `redirect`).
 
-The specialized Embassy cards are compositions understood *on top of* these primitives:
+The specialized Embassy cards are compositions understood *on top of* Basic Card:
 
-| Card | Reuse a primitive? | Verdict |
+| Card | Fold into Basic Card? | Verdict |
 |---|---|---|
-| **Person Card** | **Yes — done.** Now a composition on `.item` | Refactored (2026-07): markup is `.item item-outline item-clickable person-card` with the avatar in `.item-media` and name/role in `.item-title`/`.item-description`. `person-card.css` keeps only the brand gradient avatar + card surface bg + hover-shadow; layout/padding/hover/focus come from Item. `person-card.css` now depends on `item.css`. |
+| **Person** | **Yes — done.** No longer a separate component | It is a documented **variant of Basic Card**: markup `.item item-outline item-clickable person-card`, avatar in `.item-media`, name/role in `.item-title`/`.item-description`. `person-card.css` only adds the brand gradient avatar + surface bg + hover-shadow and **depends on `item.css`**. Its old top-level page/nav entry was removed (redirect kept). |
 | **Nav Card** | Partial | Doc-shell chrome (tag + big visual + arrow); shares the media+content+action shape but is not a consumable component. |
 | **Vacancy / Kanban Card** | No | Domain compositions with badges, assignee stacks, drag state, entrance animation — richer than a row. |
 | **Stat Card** | No | Metric display (big number + trend), not a row. |
 
-Rule going forward: **new** compact list/row content → build on `.item`; a panel that
-groups content → build on `.card`; reach for a domain card only when it adds domain
-structure. Person Card is the reference example of an Item-based domain composition.
+Rule going forward: **new** compact list/row content → build on Basic Card (`.item*`); a
+rich panel that groups content → Full Card (`.card*`); reach for a standalone domain card
+only when it adds real domain structure (badges/drag/animation). Person is the reference
+example of a Basic Card domain variant.
 
 ### 21.3 Implementation notes
 
