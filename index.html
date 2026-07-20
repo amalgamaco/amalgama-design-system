@@ -23469,15 +23469,16 @@ import { Info } from &quot;lucide-react&quot;
       <h1 class="ds-page-title">Breadcrumb</h1>
       <p class="ds-page-desc">Rastro de jerarquía que muestra la ubicación actual y permite volver a un ancestro.</p>
       <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> Estructura <code>nav &gt; ol &gt; li</code> semántica (<code>.breadcrumb-list</code>, <code>.breadcrumb-link</code>, <code>.breadcrumb-page</code>, <code>.breadcrumb-separator</code>) en <code>css/components/breadcrumb.css</code>. Sin JS.</div>
-      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
           <p class="bd-lead">El Breadcrumb ubica a la persona dentro de una jerarquía de varios niveles y ofrece un camino de vuelta a cada ancestro.</p>
           <ul class="bd-overview-list">
             <li><b>Composición:</b> <code>.breadcrumb-list</code> · <code>.breadcrumb-item</code> · <code>.breadcrumb-link</code> · <code>.breadcrumb-page</code> · <code>.breadcrumb-separator</code> · <code>.breadcrumb-ellipsis</code>.</li>
-            <li>Sin dependencia de Radix Slot: para integrarlo con un router, renderizá el componente de link de tu router con la clase <code>breadcrumb-link</code>.</li>
+            <li><b>Patrones</b> (en Specs): separador custom, dropdown, colapsado (ellipsis) y componente Link.</li>
             <li>La página actual usa <code>.breadcrumb-page</code> (un <code>&lt;span&gt;</code>, no un link; <code>aria-current="page"</code>).</li>
           </ul>
+          <!-- Overview = solo el Breadcrumb básico. Los demás patrones viven en Specs. -->
           <div class="bd-family-wrap"><nav class="breadcrumb" aria-label="breadcrumb">
               <ol class="breadcrumb-list">
                 <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Inicio</a></li>
@@ -23487,8 +23488,12 @@ import { Info } from &quot;lucide-react&quot;
                 <li class="breadcrumb-item"><span class="breadcrumb-page" role="link" aria-disabled="true" aria-current="page">Diseñador/a UX</span></li>
               </ol>
             </nav></div>
-
-          <p class="ch-variant-label" style="margin-top:24px">Separador custom — ícono chevron en vez de <code>/</code></p>
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Separador custom</h2>
+          <p class="docs-section-desc">El <code>.breadcrumb-separator</code> acepta cualquier contenido — reemplazá el <code>/</code> por un ícono chevron (queda <code>aria-hidden</code> igual).</p>
           <div class="bd-family-wrap"><nav class="breadcrumb" aria-label="breadcrumb">
               <ol class="breadcrumb-list">
                 <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Inicio</a></li>
@@ -23499,7 +23504,27 @@ import { Info } from &quot;lucide-react&quot;
               </ol>
             </nav></div>
 
-          <p class="ch-variant-label" style="margin-top:24px">Colapsado — ancestros ocultos tras un menú (<code>.breadcrumb-ellipsis</code> + Dropdown)</p>
+          <h2 class="docs-section-title" style="margin-top:32px">Dropdown</h2>
+          <p class="docs-section-desc">Un ítem del rastro puede abrir un menú de páginas hermanas — un <code>&lt;button&gt;</code> con <code>aria-haspopup="menu"</code> dentro del <code>.breadcrumb-item</code>.</p>
+          <div class="bd-family-wrap"><nav class="breadcrumb" aria-label="breadcrumb">
+              <ol class="breadcrumb-list">
+                <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Inicio</a></li>
+                <li class="breadcrumb-separator" aria-hidden="true">/</li>
+                <li class="breadcrumb-item" style="position:relative">
+                  <button class="breadcrumb-link" type="button" aria-haspopup="menu" aria-expanded="false" style="display:inline-flex;align-items:center;gap:2px;background:none;border:0;cursor:pointer;font:inherit" onclick="var p=this.nextElementSibling;var o=p.hidden;p.hidden=!o;this.setAttribute('aria-expanded',String(o));event.stopPropagation()">Componentes <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+                  <div class="dropdown-content" role="menu" hidden style="position:absolute;left:0;top:calc(100% + 4px);min-width:160px">
+                    <a class="dropdown-item" role="menuitem" href="#">Botones</a>
+                    <a class="dropdown-item" role="menuitem" href="#">Badges</a>
+                    <a class="dropdown-item" role="menuitem" href="#">Inputs</a>
+                  </div>
+                </li>
+                <li class="breadcrumb-separator" aria-hidden="true">/</li>
+                <li class="breadcrumb-item"><span class="breadcrumb-page" aria-current="page">Breadcrumb</span></li>
+              </ol>
+            </nav></div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Colapsado</h2>
+          <p class="docs-section-desc">Cuando el rastro es largo, colapsá los ancestros del medio en un <code>.breadcrumb-ellipsis</code> (…) que abre un menú con los niveles ocultos.</p>
           <div class="bd-family-wrap"><nav class="breadcrumb" aria-label="breadcrumb">
               <ol class="breadcrumb-list">
                 <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Inicio</a></li>
@@ -23516,6 +23541,16 @@ import { Info } from &quot;lucide-react&quot;
                 <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Postulantes</a></li>
                 <li class="breadcrumb-separator" aria-hidden="true">/</li>
                 <li class="breadcrumb-item"><span class="breadcrumb-page" aria-current="page">Ana Torres</span></li>
+              </ol>
+            </nav></div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Componente Link</h2>
+          <p class="docs-section-desc">Embassy no depende de Radix <code>Slot</code>/<code>asChild</code>: para integrarlo con un router, renderizá el componente de link de tu router (p.ej. <code>&lt;Link&gt;</code> de Next/React Router) con la clase <code>.breadcrumb-link</code>. Los enlaces intermedios son navegables (hover + <code>:focus-visible</code>); la página actual es un <code>&lt;span class="breadcrumb-page"&gt;</code> con <code>aria-current="page"</code>, no un enlace.</p>
+          <div class="bd-family-wrap"><nav class="breadcrumb" aria-label="breadcrumb">
+              <ol class="breadcrumb-list">
+                <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Inicio</a></li>
+                <li class="breadcrumb-separator" aria-hidden="true">/</li>
+                <li class="breadcrumb-item"><span class="breadcrumb-page" aria-current="page">Vacantes</span></li>
               </ol>
             </nav></div>
         </section>
@@ -23536,6 +23571,8 @@ import { Info } from &quot;lucide-react&quot;
             <li><span class="ds-a11y-icon">♿</span>El <code>nav</code> lleva <code>aria-label="breadcrumb"</code>; la lista es un <code>ol</code> semántico.</li>
             <li><span class="ds-a11y-icon">♿</span>La página actual usa <code>aria-current="page"</code> y no es un enlace.</li>
             <li><span class="ds-a11y-icon">♿</span>Los separadores son <code>aria-hidden</code> — no se anuncian.</li>
+            <li><span class="ds-a11y-icon">♿</span>El disparador de dropdown / ellipsis es un <code>&lt;button&gt;</code> real con <code>aria-haspopup="menu"</code> + <code>aria-expanded</code> (operable con Enter/Espacio); el ellipsis colapsado lleva <code>aria-label</code> ("Mostrar ancestros ocultos") y el menú usa <code>role="menu"</code>/<code>menuitem</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Los enlaces navegables muestran <code>:focus-visible</code>; la página actual (<code>.breadcrumb-page</code>) no es focusable.</li>
           </ul>
         </section>
       </div>
@@ -23551,6 +23588,22 @@ import { Info } from &quot;lucide-react&quot;
     &lt;li class=&quot;breadcrumb-item&quot;&gt;&lt;span class=&quot;breadcrumb-page&quot; aria-current=&quot;page&quot;&gt;Vacante&lt;/span&gt;&lt;/li&gt;
   &lt;/ol&gt;
 &lt;/nav&gt;</code></pre></div>
+          <h2 class="docs-section-title" style="margin-top:24px">Separador custom · Dropdown · Colapsado</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;!-- Separador custom: cualquier contenido dentro de .breadcrumb-separator --&gt;
+&lt;li class=&quot;breadcrumb-separator&quot; aria-hidden=&quot;true&quot;&gt;&lt;svg&gt;…chevron…&lt;/svg&gt;&lt;/li&gt;
+
+&lt;!-- Dropdown / Colapsado: botón + menú dentro del .breadcrumb-item --&gt;
+&lt;li class=&quot;breadcrumb-item&quot; style=&quot;position:relative&quot;&gt;
+  &lt;button class=&quot;breadcrumb-ellipsis&quot; aria-haspopup=&quot;menu&quot; aria-expanded=&quot;false&quot;
+          aria-label=&quot;Mostrar ancestros ocultos&quot;&gt;…&lt;/button&gt;
+  &lt;div class=&quot;dropdown-content&quot; role=&quot;menu&quot; hidden&gt;
+    &lt;a class=&quot;dropdown-item&quot; role=&quot;menuitem&quot; href=&quot;…&quot;&gt;Vacantes&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/li&gt;
+
+&lt;!-- Componente Link: renderizá el link de tu router con la clase --&gt;
+&lt;Link to=&quot;/vacantes&quot; className=&quot;breadcrumb-link&quot;&gt;Vacantes&lt;/Link&gt;</code></pre></div>
         </section>
 
         <section class="docs-section">
