@@ -78,7 +78,7 @@
   height: 56px;
   padding: 0 var(--space-4);          /* 16px horizontal */
   border-radius: var(--radius-full);  /* píldora — forma canónica del Search */
-  background: var(--color-surface-container-high);
+  background: var(--color-surface);   /* superficie (blanco en light) — par shadcn */
   border: 1px solid var(--border);    /* borde sutil semitransparente */
   min-width: min(360px, 100%);
   max-width: 720px;
@@ -87,11 +87,11 @@
               border-color var(--duration-fast) var(--ease-default);
 }
 .search-bar:hover {
-  background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface-container-high));
+  background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface));
   border-color: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
 }
 .search-bar:focus-within {
-  background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-high));
+  background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface));
   border-color: var(--color-secondary);
 }
 
