@@ -7978,11 +7978,12 @@ export { Input }
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
           <tbody>
-            <tr><td><code>SelectTrigger</code></td><td>Radio <code>--radius-md</code>, padding 14px&nbsp;10px (<code>px-3.5 py-2.5</code>), texto 13.5px</td></tr>
-            <tr><td>Caret (<code>ChevronDown</code>)</td><td>16px (<code>size-4</code>), decorativo, fuera del foco</td></tr>
-            <tr><td><code>SelectContent</code> (panel)</td><td>Radio <code>--radius-md</code>, viewport <code>p-1.5</code>, ancho mín. 8rem, alto máx. 24rem, <code>--shadow-lg</code></td></tr>
-            <tr><td><code>SelectItem</code></td><td>Padding <code>py-2 pl-3 pr-8</code>, radio <code>--radius-sm</code>; check de 16px a la derecha</td></tr>
-            <tr><td><code>.field-group</code> / <code>.field-label</code></td><td>Anatomía de campo compartida con Input</td></tr>
+            <tr><td><code>.select-trigger</code></td><td>Alto 40px, radio <code>--radius-md</code>, padding 8px&nbsp;12px&nbsp;8px&nbsp;14px, texto <code>body-md</code> (13.5px); fondo <code>--card-bg</code>, borde <code>--border</code></td></tr>
+            <tr><td>Caret (<code>.select-icon</code>, ChevronDown)</td><td>16px (<code>size-4</code>), decorativo, no rota; opacidad .5</td></tr>
+            <tr><td><code>.select-content</code> (panel, <code>role="listbox"</code>)</td><td>Radio <code>--radius-md</code>, viewport <code>p-1</code> (4px), ancho = trigger (mín. 100%), alto máx. <code>min(320px, 60vh)</code> con scroll, <code>--shadow-md</code>, fondo <code>--color-surface-container</code></td></tr>
+            <tr><td><code>.select-item</code> (<code>role="option"</code>)</td><td>Padding <code>py-1.5 pr-8 pl-2</code>, radio <code>--radius-sm</code>; highlight <code>--color-surface-variant</code>; check de 16px a la derecha (<code>.select-item-check</code>) en el seleccionado</td></tr>
+            <tr><td><code>.select-label</code> / <code>.select-group</code> / <code>.select-separator</code></td><td>Label <code>px-2 py-1.5</code> <code>text-xs</code> muted; grupo <code>role="group"</code>; separador 1px <code>--color-outline-variant</code></td></tr>
+            <tr><td><code>.field-group</code> / <code>.field-label</code></td><td>Anatomía de campo compartida con Input (para el patrón "con label")</td></tr>
           </tbody>
         </table>
       </section>
@@ -7991,71 +7992,17 @@ export { Input }
       <section class="docs-section" id="tc-select-s-1">
         <h2 class="docs-section-title">Configuraciones</h2>
         <div class="cg-two-col">
-          <div><p class="ch-variant-label">Básico</p><div class="docs-preview"><div style="max-width:320px">
-            <div class="select-wrapper">
-              <select aria-label="Seleccionar opción">
-                <option value="" disabled selected>Seleccionar...</option>
-                <option value="1">Opcion 1</option>
-                <option value="2">Opcion 2</option>
-                <option value="3">Opcion 3</option>
-              </select>
-              <span class="select-caret">▾</span>
-            </div>
-          </div></div></div>
-          <div><p class="ch-variant-label">Con label</p><div class="docs-preview"><div class="field-group" style="max-width:320px">
-            <label class="field-label">Departamento</label>
-            <div class="select-wrapper">
-              <select aria-label="Departamento">
-                <option value="" disabled selected>Seleccionar...</option>
-                <option value="rh">Recursos Humanos</option>
-                <option value="tech">Tecnologia</option>
-                <option value="mkt">Marketing</option>
-              </select>
-              <span class="select-caret">▾</span>
-            </div>
-          </div></div></div>
-          <div><p class="ch-variant-label">Disabled</p><div class="docs-preview"><div style="max-width:320px">
-            <div class="select-wrapper">
-              <select aria-label="Seleccionar opción" disabled>
-                <option value="" disabled selected>Seleccionar...</option>
-                <option value="1">Opcion 1</option>
-                <option value="2">Opcion 2</option>
-                <option value="3">Opcion 3</option>
-              </select>
-              <span class="select-caret">▾</span>
-            </div>
-          </div></div></div>
-          <div><p class="ch-variant-label">Con grupos (optgroup)</p><div class="docs-preview"><div style="max-width:320px">
-            <div class="select-wrapper">
-              <select aria-label="Ciudad">
-                <option value="" disabled selected>Seleccionar ciudad…</option>
-                <optgroup label="Argentina"><option>Buenos Aires</option><option>Córdoba</option><option>Rosario</option></optgroup>
-                <optgroup label="Uruguay"><option>Montevideo</option><option>Punta del Este</option></optgroup>
-              </select>
-              <span class="select-caret">▾</span>
-            </div>
-          </div></div></div>
-          <div><p class="ch-variant-label">Inválido (aria-invalid)</p><div class="docs-preview"><div style="max-width:320px">
-            <div class="select-wrapper">
-              <select aria-label="Estado" aria-invalid="true">
-                <option value="" disabled selected>Seleccionar…</option>
-                <option>Abierta</option><option>Cerrada</option>
-              </select>
-              <span class="select-caret">▾</span>
-            </div>
-          </div></div></div>
-          <div><p class="ch-variant-label">Scrollable (lista larga)</p><div class="docs-preview"><div style="max-width:320px">
-            <div class="select-wrapper">
-              <select aria-label="Zona horaria">
-                <option value="" disabled selected>Seleccionar zona…</option>
-                <option>GMT-05 · Bogotá</option><option>GMT-04 · Santiago</option><option>GMT-03 · Buenos Aires</option><option>GMT-03 · Montevideo</option><option>GMT-02 · Fernando de Noronha</option><option>GMT+00 · Londres</option><option>GMT+01 · Madrid</option><option>GMT+02 · Atenas</option><option>GMT+03 · Estambul</option><option>GMT+05:30 · Nueva Delhi</option><option>GMT+08 · Singapur</option><option>GMT+09 · Tokio</option>
-              </select>
-              <span class="select-caret">▾</span>
-            </div>
-          </div></div></div>
+          <div><p class="ch-variant-label">Básico</p><div class="docs-preview"><div class="select" data-select style="width:320px;max-width:100%"><button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Opción"><span class="select-value" data-placeholder>Seleccionar...</span><svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="select-content" role="listbox" aria-label="Opción" hidden><div class="select-viewport"><div class="select-item" role="option" data-value="1" aria-selected="false"><span class="select-item-text">Opción 1</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="2" aria-selected="false"><span class="select-item-text">Opción 2</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="3" aria-selected="false"><span class="select-item-text">Opción 3</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div></div></div></div></div></div>
+          <div><p class="ch-variant-label">Con label</p><div class="docs-preview"><div class="field-group" style="max-width:320px"><label class="field-label" id="sel-dep-lbl">Departamento</label><div class="select" data-select style="width:100%"><button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="sel-dep-lbl"><span class="select-value" data-placeholder>Seleccionar...</span><svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="select-content" role="listbox" aria-labelledby="sel-dep-lbl" hidden><div class="select-viewport"><div class="select-item" role="option" data-value="rh" aria-selected="false"><span class="select-item-text">Recursos Humanos</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="tech" aria-selected="false"><span class="select-item-text">Tecnología</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="mkt" aria-selected="false"><span class="select-item-text">Marketing</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div></div></div></div></div></div></div>
+          <div><p class="ch-variant-label">Disabled</p><div class="docs-preview"><div class="select" style="width:320px;max-width:100%"><button type="button" class="select-trigger" disabled aria-haspopup="listbox" aria-label="Opción"><span class="select-value" data-placeholder>Seleccionar...</span><svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button></div></div></div>
+          <div><p class="ch-variant-label">Con grupos + separador</p><div class="docs-preview"><div class="select" data-select style="width:320px;max-width:100%"><button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Ciudad"><span class="select-value" data-placeholder>Seleccionar ciudad…</span><svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="select-content" role="listbox" aria-label="Ciudad" hidden><div class="select-viewport"><div class="select-group" role="group" aria-label="Argentina"><div class="select-label">Argentina</div><div class="select-item" role="option" data-value="bue" aria-selected="false"><span class="select-item-text">Buenos Aires</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="cor" aria-selected="false"><span class="select-item-text">Córdoba</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="ros" aria-selected="false"><span class="select-item-text">Rosario</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div></div><div class="select-separator"></div><div class="select-group" role="group" aria-label="Uruguay"><div class="select-label">Uruguay</div><div class="select-item" role="option" data-value="mvd" aria-selected="false"><span class="select-item-text">Montevideo</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="pde" aria-selected="false"><span class="select-item-text">Punta del Este</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div></div></div></div></div></div></div>
+          <div><p class="ch-variant-label">Inválido (aria-invalid)</p><div class="docs-preview"><div class="select" data-select style="width:320px;max-width:100%"><button type="button" class="select-trigger" aria-invalid="true" aria-haspopup="listbox" aria-expanded="false" aria-label="Estado"><span class="select-value" data-placeholder>Seleccionar…</span><svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="select-content" role="listbox" aria-label="Estado" hidden><div class="select-viewport"><div class="select-item" role="option" data-value="abierta" aria-selected="false"><span class="select-item-text">Abierta</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="cerrada" aria-selected="false"><span class="select-item-text">Cerrada</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div></div></div></div></div></div>
+          <div><p class="ch-variant-label">Scrollable (lista larga)</p><div class="docs-preview"><div class="select" data-select style="width:320px;max-width:100%"><button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Zona horaria"><span class="select-value" data-placeholder>Seleccionar zona…</span><svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="select-content" role="listbox" aria-label="Zona horaria" hidden><div class="select-scroll-up" hidden aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></div><div class="select-viewport">
+            <div class="select-item" role="option" data-value="gmt-5" aria-selected="false"><span class="select-item-text">GMT-05 · Bogotá</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt-4" aria-selected="false"><span class="select-item-text">GMT-04 · Santiago</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt-3a" aria-selected="false"><span class="select-item-text">GMT-03 · Buenos Aires</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt-3b" aria-selected="false"><span class="select-item-text">GMT-03 · Montevideo</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt-2" aria-selected="false"><span class="select-item-text">GMT-02 · Fernando de Noronha</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt0" aria-selected="false"><span class="select-item-text">GMT+00 · Londres</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt1" aria-selected="false"><span class="select-item-text">GMT+01 · Madrid</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt2" aria-selected="false"><span class="select-item-text">GMT+02 · Atenas</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt3" aria-selected="false"><span class="select-item-text">GMT+03 · Estambul</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt530" aria-selected="false"><span class="select-item-text">GMT+05:30 · Nueva Delhi</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt8" aria-selected="false"><span class="select-item-text">GMT+08 · Singapur</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="gmt9" aria-selected="false"><span class="select-item-text">GMT+09 · Tokio</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+          </div><div class="select-scroll-down" hidden aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div></div></div></div></div>
         </div>
-        <p class="ch-variant-label" style="margin-top:20px">Select compuesto (panel estilizado) — grupos · separador · scrollable · ítem deshabilitado · check</p>
-        <p class="docs-section-desc">El <code>&lt;select&gt;</code> nativo delega el panel al sistema operativo. Cuando necesitás el panel estilizado de shadcn (grupos con label, separador, tilde en el seleccionado, alto máximo con scroll, ítem deshabilitado, alineado al trigger), usá el <b>Select compuesto</b> sobre el patrón Combobox/Command — misma estructura shadcn (Trigger + Content + Group + Item), tokens Embassy.</p>
+        <p class="ch-variant-label" style="margin-top:20px">Combobox — Select con búsqueda (type-to-filter)</p>
+        <p class="docs-section-desc">El Select estilado de arriba ya cubre grupos, separador, scroll, ítem deshabilitado y check en el seleccionado con su propio panel <code>role="listbox"</code>. Cuando además necesitás <b>filtrar escribiendo</b> sobre una lista larga, usá el <b>Combobox/Command</b> — el mismo panel anclado al trigger, con un input de búsqueda arriba (par shadcn Combobox).</p>
         <div class="docs-preview" style="justify-content:flex-start">
           <div class="combobox">
             <button class="btn-tertiary combobox-trigger is-placeholder" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="combobox-label">Seleccionar zona horaria…</span><span class="combobox-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
@@ -8081,12 +8028,13 @@ export { Input }
         <table class="ds-table" style="margin-top:16px">
           <thead><tr><th>Composición shadcn</th><th>Cómo</th></tr></thead>
           <tbody>
-            <tr><td>Grupos</td><td>Nativo: <code>&lt;optgroup&gt;</code> · Compuesto: <code>.command-group</code> + <code>.command-group-heading</code></td></tr>
-            <tr><td>Scrollable</td><td>Nativo: el SO scrollea · Compuesto: <code>.command-list</code> con <code>max-height</code> + scroll</td></tr>
-            <tr><td>Ítem deshabilitado</td><td>Nativo: <code>&lt;option disabled&gt;</code> · Compuesto: <code>.command-item[aria-disabled]</code></td></tr>
-            <tr><td>Inválido</td><td><code>aria-invalid="true"</code> en el control (borde error)</td></tr>
-            <tr><td>Deshabilitado</td><td>Nativo: <code>&lt;select disabled&gt;</code></td></tr>
-            <tr><td>Alineado al trigger + check en seleccionado</td><td>Select compuesto (Combobox/Command): panel bajo el trigger + <code>.combobox-check</code></td></tr>
+            <tr><td>Grupos</td><td>Select estilado: <code>.select-group</code> + <code>.select-label</code> · Combobox: <code>.command-group</code> + <code>.command-group-heading</code></td></tr>
+            <tr><td>Separador</td><td><code>.select-separator</code> (1px <code>--color-outline-variant</code>)</td></tr>
+            <tr><td>Scrollable</td><td><code>.select-content</code> con <code>max-height</code> + scroll; <code>.select-scroll-up</code>/<code>-down</code> al desbordar</td></tr>
+            <tr><td>Ítem deshabilitado</td><td><code>.select-item[aria-disabled="true"]</code></td></tr>
+            <tr><td>Inválido</td><td><code>.select-trigger[aria-invalid="true"]</code> (borde error)</td></tr>
+            <tr><td>Deshabilitado</td><td><code>.select-trigger[disabled]</code></td></tr>
+            <tr><td>Check en seleccionado</td><td><code>.select-item[aria-selected="true"]</code> → <code>.select-item-check</code> visible (a la derecha)</td></tr>
           </tbody>
         </table>
       </section>
@@ -8172,18 +8120,8 @@ export { Input }
         <section class="docs-section" id="tc-select-g-1">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Componente real. Las partes que lo componen:</p>
-          <div class="bd-family-wrap"><div style="max-width:320px">
-            <div class="select-wrapper">
-              <select aria-label="Seleccionar opción">
-                <option value="" disabled selected>Seleccionar...</option>
-                <option value="1">Opcion 1</option>
-                <option value="2">Opcion 2</option>
-                <option value="3">Opcion 3</option>
-              </select>
-              <span class="select-caret">▾</span>
-            </div>
-          </div></div>
-          <ol class="bd-family-legend"><li>Label — sobre el control.</li><li>Trigger — el valor seleccionado + chevron.</li><li>Placeholder — "Seleccionar…" cuando no hay valor.</li><li>Lista de opciones — el menú desplegable.</li></ol>
+          <div class="bd-family-wrap"><div class="select" data-select style="width:320px;max-width:100%"><button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Opción"><span class="select-value" data-placeholder>Seleccionar...</span><svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="select-content" role="listbox" aria-label="Opción" hidden><div class="select-viewport"><div class="select-item" role="option" data-value="1" aria-selected="false"><span class="select-item-text">Opción 1</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="2" aria-selected="false"><span class="select-item-text">Opción 2</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="3" aria-selected="false"><span class="select-item-text">Opción 3</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div></div></div></div></div>
+          <ol class="bd-family-legend"><li>Trigger — el valor seleccionado + chevron (<code>.select-trigger</code> / <code>.select-value</code>).</li><li>Placeholder — "Seleccionar…" cuando no hay valor (<code>data-placeholder</code>).</li><li>Panel — <code>.select-content</code> <code>role="listbox"</code> anclado al trigger.</li><li>Opción — <code>.select-item</code> <code>role="option"</code>; check a la derecha en la elegida.</li></ol>
         </section>
         <section class="docs-section" id="tc-select-g-2">
           <h2 class="docs-section-title">Comportamiento</h2>
