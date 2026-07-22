@@ -1607,6 +1607,12 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   background: var(--color-warning-container);
   color: var(--color-on-warning-container);
 }
+/* Dark: mismo tratamiento tonal suave que Badge (tinte del color sobre surface +
+   texto claro) para que los chips del hero no queden como rellenos saturados
+   fuertes y sean cohesivos con los badges refinados. */
+[data-theme="dark"] .emb-collage-chip.success { background: color-mix(in srgb, var(--color-success-container) 42%, var(--color-surface)); }
+[data-theme="dark"] .emb-collage-chip.info    { background: color-mix(in srgb, var(--color-info-container)    42%, var(--color-surface)); }
+[data-theme="dark"] .emb-collage-chip.warning { background: color-mix(in srgb, var(--color-warning-container) 42%, var(--color-surface)); }
 /* Search row — pinned to bottom of feed card */
 .emb-collage-search {
   margin-top: auto;
