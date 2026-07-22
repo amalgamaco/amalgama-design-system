@@ -31,15 +31,15 @@
 ═══════════════════════════════════════ */
 
 .calendar {
-  --cal-cell: 36px;              /* tamaño de celda; overridable por .calendar-sm/-lg */
-  display: inline-block;
-  padding: 12px;
+  --cal-cell: 32px;              /* shadcn --cell-size: 2rem (32px); overridable por .calendar-sm/-lg */
+  display: inline-block;         /* w-fit */
+  padding: 12px;                 /* p-3 */
   background: var(--color-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
 }
-/* Tamaño de celda custom (par shadcn cell size) */
-.calendar-sm { --cal-cell: 30px; }
+/* Tamaño de celda custom (par shadcn --cell-size) */
+.calendar-sm { --cal-cell: 28px; }
 .calendar-lg { --cal-cell: 44px; }
 
 /* ── Header: mes centrado, flechas a los extremos ── */
@@ -48,14 +48,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
-  margin-bottom: 4px;
-  padding: 0 4px;
+  height: var(--cal-cell);       /* month_caption: h-(--cell-size) */
+  margin-bottom: 16px;           /* month: gap-4 */
+  padding: 0 var(--cal-cell);    /* px-(--cell-size) — deja lugar a las flechas absolutas */
 }
 .calendar-caption {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-body-md);
-  font-weight: 600;
+  font-family: var(--font-body);         /* shadcn caption_label: sans */
+  font-size: var(--font-size-body-md);   /* text-sm */
+  font-weight: 600;                      /* font-medium */
   color: var(--color-on-surface);
   text-transform: capitalize;
 }
@@ -66,13 +66,13 @@
 .calendar-caption-select {
   appearance: none;
   -webkit-appearance: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--card-bg);
+  border: 1px solid var(--color-input, var(--border));   /* dropdown_root: border-input */
+  border-radius: var(--radius-md);                         /* rounded-md */
+  background: var(--color-surface);
   color: var(--color-on-surface);
-  font-family: var(--font-heading);
-  font-size: var(--font-size-body-sm);
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-md);                     /* text-sm */
+  font-weight: 600;                                        /* font-medium */
   padding: 4px 8px;
   cursor: pointer;
   text-transform: capitalize;
@@ -86,20 +86,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: var(--cal-cell);        /* button_previous/next: size-(--cell-size) */
+  height: var(--cal-cell);
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);   /* ghost button: rounded-md */
   background: transparent;
   color: var(--color-on-surface);
   cursor: pointer;
   transition: background-color .15s var(--ease-default, ease);
 }
+.calendar-nav-btn svg { width: 16px; height: 16px; pointer-events: none; }   /* Chevron: size-4 */
 .calendar-nav-btn:hover:not(:disabled) { background: var(--color-surface-variant); }
 .calendar-nav-btn:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 2px; }
-.calendar-nav-btn:disabled { opacity: .3; cursor: not-allowed; }
-.calendar-nav-btn.prev { left: 4px; }
-.calendar-nav-btn.next { right: 4px; }
+.calendar-nav-btn:disabled { opacity: .5; cursor: not-allowed; }
+.calendar-nav-btn.prev { left: 0; }
+.calendar-nav-btn.next { right: 0; }
 
 /* ── Días de la semana ── */
 .calendar-weekdays {
@@ -107,18 +108,19 @@
 }
 .calendar-weekday {
   width: var(--cal-cell);
-  padding-bottom: 4px;
+  padding-bottom: 8px;                 /* week: mt-2 (separa del primer renglón) */
   text-align: center;
-  font-size: var(--font-size-label);
+  font-size: var(--font-size-label);   /* weekday: text-[0.8rem] */
+  font-weight: 400;
   color: var(--text-muted);
 }
 
-/* ── Grilla (6 semanas × 7 días) ── */
+/* ── Grilla (semanas × 7 días) ── */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, var(--cal-cell));
   grid-auto-rows: var(--cal-cell);
-  row-gap: 2px;
+  row-gap: 8px;                        /* week: mt-2 */
 }
 .calendar-day {
   display: flex;
@@ -128,30 +130,39 @@
   height: var(--cal-cell);
   padding: 0;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);         /* day_button: rounded-md */
   background: transparent;
   color: var(--color-on-surface);
-  font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-body-md);     /* day_button: text-sm */
+  font-weight: 400;                        /* font-normal */
+  line-height: 1;                          /* leading-none */
   cursor: pointer;
   transition: background-color .15s var(--ease-default, ease);
 }
-.calendar-day:hover:not(:disabled):not(.calendar-day-selected) { background: var(--color-surface-variant); }
+/* hover = ghost button hover (bg-accent) */
+.calendar-day:hover:not(:disabled):not(.calendar-day-selected):not(.calendar-day-range-middle) { background: var(--color-surface-variant); }
 .calendar-day:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 1px; }
 
-.calendar-day-outside { color: var(--text-muted); opacity: .4; }
-.calendar-day-today { font-weight: 700; color: var(--color-primary); }
+/* outside = text-muted-foreground (sin opacidad extra, par shadcn) */
+.calendar-day-outside { color: var(--text-muted); }
+/* today = bg-accent text-accent-foreground rounded-md (no negrita) */
+.calendar-day-today {
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface);
+}
+/* selected single = bg-primary text-primary-foreground */
 .calendar-day-selected,
 .calendar-day-selected:hover {
   background: var(--color-primary);
   color: var(--color-on-primary);
-  font-weight: 600;
+  font-weight: 500;
 }
-.calendar-day-disabled { opacity: .3; cursor: not-allowed; }
+.calendar-day-disabled { opacity: .5; cursor: not-allowed; }   /* disabled: opacity-50 */
 
-/* ── Rango (mode="range") ── */
+/* ── Rango (mode="range") ── medio = bg-accent, extremos = bg-primary ── */
 .calendar-day-range-middle {
-  background: var(--color-primary-container);
-  color: var(--color-on-primary-container);
+  background: var(--color-surface-variant);
+  color: var(--color-on-surface);
   border-radius: 0;
 }
 .calendar-day-range-start { border-top-right-radius: 0; border-bottom-right-radius: 0; }

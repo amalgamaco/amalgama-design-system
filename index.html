@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=10">
+<link rel="stylesheet" href="css/components.css?v=11">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -27286,14 +27286,14 @@ function renderCalendar(cal) {
     for (mo = 0; mo < 12; mo++) months += '<option value="' + mo + '"' + (mo === m ? ' selected' : '') + '>' + calCap(CAL_MONTH_FMT.format(new Date(2000, mo, 1))) + '</option>';
     var years = '';
     for (yr = y - 10; yr <= y + 10; yr++) years += '<option value="' + yr + '"' + (yr === y ? ' selected' : '') + '>' + yr + '</option>';
-    head = '<div class="calendar-header"><button type="button" class="calendar-nav-btn prev" data-cal-nav="-1" aria-label="Mes anterior">‹</button>'
+    head = '<div class="calendar-header"><button type="button" class="calendar-nav-btn prev" data-cal-nav="-1" aria-label="Mes anterior"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>'
       + '<span class="calendar-caption-dropdowns"><select class="calendar-caption-select" data-cal-month aria-label="Mes">' + months + '</select>'
       + '<select class="calendar-caption-select" data-cal-year aria-label="Año">' + years + '</select></span>'
-      + '<button type="button" class="calendar-nav-btn next" data-cal-nav="1" aria-label="Mes siguiente">›</button></div>';
+      + '<button type="button" class="calendar-nav-btn next" data-cal-nav="1" aria-label="Mes siguiente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button></div>';
   } else {
-    head = '<div class="calendar-header"><button type="button" class="calendar-nav-btn prev" data-cal-nav="-1" aria-label="Mes anterior">‹</button>'
+    head = '<div class="calendar-header"><button type="button" class="calendar-nav-btn prev" data-cal-nav="-1" aria-label="Mes anterior"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>'
       + '<span class="calendar-caption">' + calCap(CAL_MONTH_FMT.format(first)) + ' ' + y + '</span>'
-      + '<button type="button" class="calendar-nav-btn next" data-cal-nav="1" aria-label="Mes siguiente">›</button></div>';
+      + '<button type="button" class="calendar-nav-btn next" data-cal-nav="1" aria-label="Mes siguiente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button></div>';
   }
   var wk = '<div class="calendar-weekdays">' + ['L', 'M', 'X', 'J', 'V', 'S', 'D'].map(function (d) { return '<span class="calendar-weekday">' + d + '</span>'; }).join('') + '</div>';
   // Construimos las 6 filas de celdas en un array plano, luego lo ensamblamos
