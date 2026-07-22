@@ -2184,6 +2184,11 @@ body { overflow-x: clip; }
   max-width: 100%;
   overflow-x: auto;
 }
+/* A preview holding a Select listbox (or Combobox) must let its floating panel
+   escape — otherwise overflow-x:auto (which forces overflow-y:auto) clips the
+   open dropdown in short previews. */
+.docs-preview:has(.select[data-select]),
+.docs-preview:has(.combobox) { overflow: visible; }
 
 /* 3. Code blocks scroll internally */
 .docs-code, pre { max-width: 100%; overflow-x: auto; }
