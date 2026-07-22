@@ -3286,7 +3286,7 @@ body { overflow-x: clip; }
   flex: 1;
   display: flex; align-items: center; gap: var(--space-2);
   padding: 8px var(--space-4);
-  background: var(--color-surface-container-high);
+  background: var(--color-surface);   /* desktop: superficie (blanco en light) — par shadcn. Debe coincidir con toolbar.css */
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--color-on-surface-variant);
@@ -3295,11 +3295,11 @@ body { overflow-x: clip; }
               border-color var(--duration-fast) var(--ease-default);
 }
 .search-field:hover {
-  background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface-container-high));
+  background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface));
   border-color: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
 }
 .search-field:focus-within {
-  background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-high));
+  background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface));
   border-color: var(--color-secondary);
 }
 .search-field > svg,
