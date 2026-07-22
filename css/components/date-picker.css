@@ -51,8 +51,11 @@
   z-index: 30;
   top: calc(100% + 4px);
   left: 0;
-  box-shadow: var(--shadow-md);
+  padding: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   animation: date-picker-in .12s var(--ease-default, ease);
 }
 @keyframes date-picker-in {

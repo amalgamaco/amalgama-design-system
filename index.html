@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=9">
+<link rel="stylesheet" href="css/components.css?v=10">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -5221,6 +5221,12 @@ body { overflow-x: clip; }
           border-radius: var(--radius-lg);
           padding: 48px 32px 40px;
           margin-bottom: 0;
+        }
+        /* On narrow screens, shrink the preview padding and let any demo wider than
+           the viewport scroll horizontally inside its card instead of being clipped
+           (e.g. the large-cell Calendar). */
+        @media (max-width: 640px) {
+          .bd-family-wrap { padding: 24px 16px; overflow-x: auto; }
         }
         .bd-family-stage {
           display: flex;

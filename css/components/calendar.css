@@ -178,8 +178,27 @@
   opacity: .7;
 }
 
+/* ── Superficie compuesta ── cuando el Calendar convive con presets o con la fila
+   de hora dentro de un panel, la superficie (borde + fondo + radio + padding) la
+   provee el contenedor —  par shadcn (Calendar dentro de un Card/Popover único).
+   El propio .calendar queda sin marco para no dibujar un borde doble. */
+.calendar-with-presets > .calendar,
+.date-picker-panel > .calendar {
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
 /* ── Presets ── columna de accesos rápidos junto al calendario (par shadcn presets). */
-.calendar-with-presets { display: flex; align-items: stretch; gap: 12px; flex-wrap: wrap; }
+.calendar-with-presets {
+  display: inline-flex; align-items: stretch; gap: 12px; flex-wrap: wrap;
+  padding: 12px;
+  max-width: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
 .calendar-presets {
   display: flex; flex-direction: column; gap: 4px;
   min-width: 132px;
@@ -187,6 +206,7 @@
   padding-right: 12px;
 }
 @media (max-width: 480px) {
+  .calendar-with-presets { display: flex; }
   .calendar-presets { border-right: 0; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 12px; flex-direction: row; flex-wrap: wrap; min-width: 0; }
 }
 .calendar-preset-btn {
