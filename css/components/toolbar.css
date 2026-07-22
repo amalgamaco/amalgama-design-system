@@ -10,9 +10,11 @@
    Requiere: (ninguno)
 
    search-field es la variante compacta de .search-bar (search.css) para uso en toolbar.
-   Comparte el mismo tratamiento visual: fondo surface-container-high + borde sutil var(--border).
-   Diferencias de escala: --radius-md (8px) vs --radius-lg (12px) del search-bar standalone,
-   y padding compacto que lo alinea en altura con los toolbar-btn adyacentes.
+   DIFERENCIA CLAVE DE FONDO: search-field usa --color-surface (blanco en light) y NUNCA
+   es transparente — sobre la toolbar necesita destacarse; la .search-bar mobile usa el gris
+   --color-surface-container-high. Comparten borde sutil var(--border) y los mismos tokens de
+   texto/estado. Diferencias de escala: --radius-md (8px) vs --radius-lg (12px) del search-bar
+   standalone, y padding compacto que lo alinea en altura con los toolbar-btn adyacentes.
 
    Uso:
    <div class="toolbar">
@@ -32,8 +34,9 @@
 }
 
 /* ── Search-field — variante compacta del Search component para toolbar ──
-   Mismo tratamiento visual que .search-bar: fondo surface-container-high + borde sutil.
-   La diferencia es contextual: --radius-md (8px) y padding compacto para convivir
+   Fondo --color-surface (blanco en light), NUNCA transparente — a diferencia de la
+   .search-bar mobile, que es gris (--color-surface-container-high). Comparte borde y
+   tokens de texto/estado. Forma --radius-md (8px) y padding compacto para convivir
    con toolbar-btn en la misma fila. .search-bar usa --radius-lg (12px) y 56px de alto. */
 .search-field {
   flex: 1;
