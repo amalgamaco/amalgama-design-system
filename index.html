@@ -27299,7 +27299,8 @@ function renderCalendar(cal) {
   // Construimos las 6 filas de celdas en un array plano, luego lo ensamblamos
   // (con o sin columna de número de semana).
   var all = [];
-  for (i = 0; i < startDow; i++) all.push('<span class="calendar-day calendar-day-outside" aria-hidden="true"></span>');
+  var prevLast = new Date(y, m, 0).getDate();   // último día del mes anterior
+  for (i = 0; i < startDow; i++) all.push('<span class="calendar-day calendar-day-outside" aria-hidden="true">' + (prevLast - startDow + 1 + i) + '</span>');
   for (var day = 1; day <= daysInMonth; day++) {
     var cls = 'calendar-day', dts = new Date(y, m, day).getTime();
     if (y === ty && m === tm && day === td) cls += ' calendar-day-today';
@@ -27316,7 +27317,8 @@ function renderCalendar(cal) {
     all.push('<button type="button" class="' + cls + '" data-cal-day="' + day + '"' + (isBooked ? ' aria-disabled="true"' : '') + '>' + day + '</button>');
   }
   var used = startDow + daysInMonth, rows = Math.max(Math.ceil(used / 7), 6);
-  for (i = all.length; i < rows * 7; i++) all.push('<span class="calendar-day calendar-day-outside" aria-hidden="true"></span>');
+  var nd = 1;   // días del mes siguiente para completar la grilla (outside days)
+  for (i = all.length; i < rows * 7; i++) all.push('<span class="calendar-day calendar-day-outside" aria-hidden="true">' + (nd++) + '</span>');
   var cells = '';
   if (weeknums) {
     for (var r = 0; r < rows; r++) {
