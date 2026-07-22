@@ -19957,24 +19957,13 @@ const RadioGroupItem = React.forwardRef&lt;HTMLInputElement, RadioGroupItemProps
             <li><b>Alcance explícito:</b> el placeholder nombra qué se busca («Buscar candidatos»), no solo «Buscar».</li>
           </ul>
 
-          <!-- Platform variants -->
+          <!-- The two canonical responsive implementations -->
           <div class="bd-family-wrap">
-            <div style="display:flex;flex-direction:column;gap:28px"><div><p style="font:600 12px 'Inter',sans-serif;color:var(--color-on-surface-variant);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Search Bar — Mobile</p><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes, personas, empresas…" aria-label="Buscar vacantes, personas, empresas…"></div></div><div><p style="font:600 12px 'Inter',sans-serif;color:var(--color-on-surface-variant);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Search Field — Desktop</p><div class="toolbar"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><div class="select-wrapper" style="width:170px;flex-shrink:0"><select aria-label="Todos los estados"><option>Todos los estados</option></select><span class="select-caret">▾</span></div><button type="button" class="toolbar-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="6" y1="18" x2="18" y2="6"/></svg> Restablecer filtros</button></div></div></div>
+            <div style="display:flex;flex-direction:column;gap:28px"><div><p style="font:600 12px 'Inter',sans-serif;color:var(--color-on-surface-variant);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Search Field — Desktop · fondo blanco (surface)</p><div class="toolbar"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><div class="select-wrapper" style="width:170px;flex-shrink:0"><select aria-label="Todos los estados"><option>Todos los estados</option></select><span class="select-caret">▾</span></div><button type="button" class="toolbar-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="6" y1="18" x2="18" y2="6"/></svg> Restablecer filtros</button></div></div><div><p style="font:600 12px 'Inter',sans-serif;color:var(--color-on-surface-variant);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Search Bar — Mobile · fondo gris (surface-container-high)</p><div style="max-width:390px"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes, personas…" aria-label="Buscar vacantes, personas…"></div></div></div></div>
           </div>
           <ol class="bd-family-legend">
-            <li>Search Bar — mobile, standalone, encabeza la vista</li>
-            <li>Search Field — desktop, compacta, comparte fila con filtros</li>
-          </ol>
-
-          <!-- Component variants — Search bar trailing configurations -->
-          <div class="bd-family-wrap">
-            <div style="display:flex;flex-direction:column;gap:16px"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes, personas, empresas…" aria-label="Buscar vacantes, personas, empresas…"><span class="search-bar-trailing"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg></span></div><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Sin ícono trailing" aria-label="Sin ícono trailing"></div></div>
-          </div>
-
-          <!-- Legend — variant references -->
-          <ol class="bd-family-legend">
-            <li>Con ícono final — acción secundaria (ej. búsqueda por voz)</li>
-            <li>Sin ícono final — variante mínima</li>
+            <li>Search Field — desktop: compacta, fondo blanco (<code>--color-surface</code>), dentro de una toolbar junto a filtros</li>
+            <li>Search Bar — mobile: standalone, píldora de 56&nbsp;px, fondo gris (<code>--color-surface-container-high</code>), encabeza la vista</li>
           </ol>
 
         </section>
@@ -19985,45 +19974,131 @@ const RadioGroupItem = React.forwardRef&lt;HTMLInputElement, RadioGroupItemProps
           <!-- ── MAIN CONTENT ── -->
           <div>
 
-            <!-- 1. CONFIGURACIONES -->
-            <div class="docs-section" id="ss-configs">
-              <h2 class="docs-section-title">Configuraciones — Search bar</h2>
-              <p class="docs-section-desc">La search bar admite diferentes combinaciones de elementos opcionales en el lado derecho. El ícono inicial (lupa) es siempre obligatorio. El fondo <code>surface-container-high</code> y el borde sutil <code>var(--border)</code> son constantes en todas las configuraciones.</p>
+            <!-- 1. DESKTOP — SEARCH FIELD (white surface) -->
+            <div class="docs-section" id="ss-desktop">
+              <h2 class="docs-section-title">Desktop — Search Field</h2>
+              <p class="docs-section-desc">En desktop la búsqueda es <b>siempre</b> el <code>.search-field</code>: fondo blanco <code>--color-surface</code> (nunca transparente, nunca el gris mobile), forma <code>--radius-md</code>, dentro de una <code>.toolbar</code> donde crece con <code>flex:1</code> y convive con filtros, orden y acciones. Todas las composiciones usan clases reales del DS — Search Field, Select, Segmented Button, ToolbarButton, Button y Chip.</p>
+              <div class="docs-preview full-width">
+                <div style="display:flex;flex-direction:column;gap:20px">
+
+                  <!-- Search Field only -->
+                  <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search Field only</div>
+                    <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div></div>
+                  </div>
+
+                  <!-- Search + Filter -->
+                  <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + Filter</div>
+                    <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><div class="select-wrapper" style="width:170px;flex-shrink:0"><select aria-label="Estado"><option>Todos los estados</option></select><span class="select-caret">▾</span></div></div>
+                  </div>
+
+                  <!-- Search + Filter + Sort -->
+                  <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + Filter + Sort</div>
+                    <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><div class="select-wrapper" style="width:160px;flex-shrink:0"><select aria-label="Estado"><option>Todos los estados</option></select><span class="select-caret">▾</span></div><div class="select-wrapper" style="width:160px;flex-shrink:0"><select aria-label="Ordenar por"><option>Más recientes</option></select><span class="select-caret">▾</span></div></div>
+                  </div>
+
+                  <!-- Search + CTA -->
+                  <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + CTA</div>
+                    <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar vacantes" aria-label="Buscar vacantes"></div><button type="button" class="btn-primary" style="flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nueva vacante</button></div>
+                  </div>
+
+                  <!-- Search + Segmented Control -->
+                  <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + Segmented Control</div>
+                    <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar candidatos" aria-label="Buscar candidatos"></div><div class="seg-btn-group" role="group" aria-label="Vista" style="--seg-btn-size:sm;flex-shrink:0"><button type="button" class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Grilla</button></div></div>
+                  </div>
+
+                  <!-- Search + Multiple icon actions -->
+                  <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + Multiple icon actions (filtro + orden + vista)</div>
+                    <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><button type="button" class="toolbar-btn" aria-label="Filtros" style="flex-shrink:0;padding:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button><button type="button" class="toolbar-btn" aria-label="Ordenar" style="flex-shrink:0;padding:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M6 12h12M9 18h6"/></svg></button><button type="button" class="toolbar-btn" aria-label="Vista en grilla" style="flex-shrink:0;padding:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></button></div>
+                  </div>
+
+                  <!-- Search + Multiple actions (filter + reset + CTA) -->
+                  <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + Multiple actions (filtro + reset + CTA)</div>
+                    <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><div class="select-wrapper" style="width:150px;flex-shrink:0"><select aria-label="Estado"><option>Todos los estados</option></select><span class="select-caret">▾</span></div><button type="button" class="toolbar-btn" style="flex-shrink:0"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="6" y1="18" x2="18" y2="6"/></svg> Reset</button><button type="button" class="btn-primary" style="flex-shrink:0">Nueva vacante</button></div>
+                  </div>
+
+                  <!-- Search con filtro activo -->
+                  <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search con filtro activo</div>
+                    <div class="toolbar" style="margin-bottom:8px"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar vacantes" aria-label="Buscar vacantes" value="diseño"></div><div class="select-wrapper" style="width:150px;flex-shrink:0"><select aria-label="Estado"><option selected>Abierta</option><option>Todos los estados</option></select><span class="select-caret">▾</span></div></div>
+                    <div class="chip-set" style="margin-bottom:6px"><span class="chip chip-selected">Estado: Abierta <button class="chip-remove" type="button" aria-label="Quitar filtro Estado"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span><span class="chip chip-selected">«diseño» <button class="chip-remove" type="button" aria-label="Quitar término de búsqueda"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></span></div>
+                    <div class="result-count">Mostrando <strong>12</strong> vacantes</div>
+                  </div>
+
+                </div>
+              </div>
+              <ul style="margin:10px 0 0;padding-left:18px;line-height:1.9;font-size:var(--font-size-body-sm);color:var(--color-on-surface-variant)">
+                <li><b>Fondo:</b> siempre <code>--color-surface</code> (blanco en light) — nunca transparente ni el gris <code>surface-container-high</code> de la Search bar mobile.</li>
+                <li><b>Jerarquía:</b> una sola acción primaria (<code>btn-primary</code>) por toolbar; filtros y orden son <code>Select</code>, acciones secundarias <code>toolbar-btn</code>.</li>
+                <li><b>Alineación:</b> todos los controles comparten la altura del <code>.search-field</code> (<code>align-items:center</code>); el campo crece con <code>flex:1</code> y los controles llevan <code>flex-shrink:0</code>.</li>
+                <li><b>Filtro activo:</b> los refinamientos aplicados se muestran como <code>chip-selected</code> con <code>chip-remove</code> debajo de la toolbar, más un <code>result-count</code>.</li>
+                <li><b>Espaciado:</b> <code>gap:var(--space-2)</code> heredado de <code>.toolbar</code> — nunca valores ad-hoc.</li>
+                <li><b>Responsive:</b> en pantallas chicas el <code>.search-field</code> cede el paso a la <code>.search-bar</code> mobile (ver Guidelines → Diseño adaptativo).</li>
+              </ul>
+            </div>
+
+            <!-- 2. MOBILE — SEARCH BAR (gray surface-container-high) -->
+            <div class="docs-section" id="ss-mobile">
+              <h2 class="docs-section-title">Mobile — Search Bar</h2>
+              <p class="docs-section-desc">En mobile la búsqueda es <b>siempre</b> la <code>.search-bar</code>: fondo gris <code>--color-surface-container-high</code>, forma píldora <code>--radius-full</code>, 56&nbsp;px de alto y ancho completo — el hero de la pantalla. El ícono inicial (lupa) es obligatorio; los íconos finales son opcionales. Puede expandirse a una <b>Search view</b> a pantalla completa con resultados y sugerencias.</p>
+
+              <p class="ch-variant-label">Configuraciones de la barra</p>
               <div class="cg-two-col">
-                <!-- 1: Search solo -->
                 <div>
                   <p class="ch-variant-label">Search bar</p>
                   <div class="cg-device" style="padding:18px;"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."></div></div>
                   <p class="cg-caption">Solo ícono inicial — variante mínima</p>
                 </div>
-                <!-- 2: Search + trailing icon -->
                 <div>
                   <p class="ch-variant-label">Search + ícono final</p>
                   <div class="cg-device" style="padding:18px;"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."><span class="search-bar-trailing"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="9" y1="22" x2="15" y2="22"/></svg></span></div></div>
                   <p class="cg-caption">Ícono final — acción secundaria (ej. micrófono)</p>
                 </div>
-                <!-- 3: Search + multiple trailing icons -->
                 <div>
                   <p class="ch-variant-label">Search + múltiples íconos finales</p>
                   <div class="cg-device" style="padding:18px;"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."><span class="search-bar-trailing"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span></div></div>
                   <p class="cg-caption">Dos íconos finales — acción + desbordamiento</p>
                 </div>
-                <!-- 4: Search + avatar -->
                 <div>
                   <p class="ch-variant-label">Search + avatar</p>
                   <div class="cg-device" style="padding:18px;"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."><span class="search-bar-trailing"><span class="search-bar-avatar">AV</span></span></div></div>
                   <p class="cg-caption">Avatar de cuenta — acceso rápido al perfil</p>
                 </div>
               </div>
-            </div>
 
-            <!-- 2b. SEARCH FIELD EN TOOLBAR -->
-            <div class="docs-section" id="ss-field-toolbar">
-              <h2 class="docs-section-title">Search Field — en toolbar</h2>
-              <p class="docs-section-desc">La variante desktop reemplaza la forma de píldora por <code>--radius-md</code> y comparte fila con otros controles de filtro (<code>Select</code>, <code>ToolbarButton</code>). Fondo <code>--color-surface</code> (blanco en light) — <b>no</b> el gris <code>surface-container-high</code> de la Search bar mobile: sobre la toolbar necesita un fondo propio siempre visible, nunca transparente. Borde <code>var(--border)</code> y altura alineada con sus vecinos de toolbar.</p>
+              <p class="ch-variant-label" style="margin-top:28px">SearchBar standalone + expansión a Search view</p>
+              <p class="docs-section-desc">La barra a ancho completo es el hero de la pantalla; las acciones van como <b>ícono trailing dentro de la barra</b> (filtro / voz / limpiar) o esta se <b>expande a una Search view</b> a pantalla completa donde viven filtros y resultados.</p>
               <div class="docs-preview full-width">
-                <div class="toolbar"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><div class="select-wrapper" style="width:170px;flex-shrink:0"><select aria-label="Todos los estados"><option>Todos los estados</option></select><span class="select-caret">▾</span></div><div class="select-wrapper" style="width:190px;flex-shrink:0"><select aria-label="Filtrar por etiqueta"><option>Filtrar por etiqueta</option></select><span class="select-caret">▾</span></div><button type="button" class="toolbar-btn"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="6" y1="18" x2="18" y2="6"/></svg> Restablecer filtros</button></div>
+                <div style="max-width:390px;margin:0 auto;display:flex;flex-direction:column;gap:16px;width:100%">
+                  <div class="search-bar" role="search">
+                    <span class="search-bar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+                    <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes...">
+                    <button type="button" class="search-bar-trailing" aria-label="Filtros"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button>
+                  </div>
+                  <div class="search-view" style="height:236px">
+                    <div class="search-view-header">
+                      <button type="button" class="search-view-back" aria-label="Volver"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg></button>
+                      <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..." value="dise">
+                    </div>
+                    <ul class="search-view-results">
+                      <li class="search-view-result"><span class="search-view-result-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>Diseñador/a de producto</li>
+                      <li class="search-view-result"><span class="search-view-result-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>Diseñador/a UX</li>
+                      <li class="search-view-result"><span class="search-view-result-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>Diseño de servicios</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
+
+              <p class="ch-variant-label" style="margin-top:28px">SearchBar + icon actions (search-row) · con filtro activo</p>
+              <p class="docs-section-desc">Cuando la barra convive con acciones inline, la <code>.search-row</code> agrega <code>.search-icon-btn</code> circulares a su derecha; en esa fila la barra se alinea a 40&nbsp;px con los botones. El último ejemplo muestra un <b>filtro activo</b> (<code>aria-pressed="true"</code>).</p>
+              <div class="docs-preview full-width">
+                <div style="display:flex;flex-direction:column;gap:24px"><div class="search-row"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."></div><button type="button" class="search-icon-btn" aria-label="Filtros"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button></div><div class="search-row"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."></div><button type="button" class="search-icon-btn" aria-label="Filtros"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button><button type="button" class="search-icon-btn" aria-label="Ordenar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M6 12h12M9 18h6"/></svg></button></div><div class="search-row"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."></div><button type="button" class="search-icon-btn active" aria-label="Filtros" aria-pressed="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button><button type="button" class="search-icon-btn" aria-label="Ordenar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M6 12h12M9 18h6"/></svg></button><button type="button" class="search-icon-btn" aria-label="Vista en grilla"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></button></div></div>
+              </div>
+              <ul style="margin:10px 0 0;padding-left:18px;line-height:1.9;font-size:var(--font-size-body-sm);color:var(--color-on-surface-variant)">
+                <li><b>Fondo:</b> siempre el gris <code>--color-surface-container-high</code> — nunca el blanco del <code>.search-field</code> desktop.</li>
+                <li><b>Alto:</b> 56&nbsp;px standalone; 40&nbsp;px cuando se alinea con <code>.search-icon-btn</code> en una <code>.search-row</code>.</li>
+                <li><b>Acciones:</b> ícono trailing dentro de la barra, <code>.search-icon-btn</code> circulares en fila, o expansión a <b>Search view</b> full-screen (header 72&nbsp;px, esquinas 0).</li>
+                <li><b>Filtro activo:</b> el botón muestra <code>--color-surface-container-high</code> con <code>aria-pressed="true"</code> — mismo tratamiento que el estado Presionado de <code>btn-tertiary</code>.</li>
+                <li><b>Foco:</b> borde <code>--color-secondary</code>.</li>
+              </ul>
             </div>
 
             <!-- 3. TOKENS Y ESPECIFICACIONES -->
@@ -20310,14 +20385,13 @@ const RadioGroupItem = React.forwardRef&lt;HTMLInputElement, RadioGroupItemProps
             <div class="ds-toc-body">
               <div class="ds-toc-title">En esta página</div>
               <ul class="ds-toc-list">
-                <li><a class="ds-toc-link" data-target="ss-configs">Configuraciones</a></li>
-                <li><a class="ds-toc-link" data-target="ss-field-toolbar">Search Field — en toolbar</a></li>
+                <li><a class="ds-toc-link" data-target="ss-desktop">Desktop — Search Field</a></li>
+                <li><a class="ds-toc-link" data-target="ss-mobile">Mobile — Search Bar</a></li>
                 <li><a class="ds-toc-link" data-target="ss-tokens">Tokens y especificaciones</a></li>
                 <li><a class="ds-toc-link" data-target="ss-anatomy">Anatomía</a></li>
                 <li><a class="ds-toc-link" data-target="ss-color">Color</a></li>
                 <li><a class="ds-toc-link" data-target="ss-states">Estados</a></li>
                 <li><a class="ds-toc-link" data-target="ss-measures">Medidas</a></li>
-                <li><a class="ds-toc-link" data-target="ss-actions">Search + acciones</a></li>
               </ul>
             </div>
           </aside>
@@ -20336,90 +20410,10 @@ const RadioGroupItem = React.forwardRef&lt;HTMLInputElement, RadioGroupItemProps
             });
           })();
         </script>
-        <section class="docs-section" id="ss-actions" style="scroll-margin-top:84px;">
-          <h2 class="docs-section-title">Search + acciones</h2>
-          <p class="docs-section-desc">La composición cambia según la plataforma. <b>Mobile</b> — la <code>.search-bar</code> standalone a <b>ancho completo</b> (56&nbsp;px, píldora, fondo gris) es el hero de la pantalla; las acciones van como ícono trailing dentro de la barra o esta se expande a una <b>Search view</b> a pantalla completa. <b>Desktop</b> — dos composiciones: la <code>.search-bar</code> con <code>.search-icon-btn</code> circulares en una <code>.search-row</code> (40&nbsp;px, alineada), o el <code>.search-field</code> compacto dentro de una <code>.toolbar</code> junto a Select / Segmented Button / ToolbarButton / CTA.</p>
-
-          <p class="ch-variant-label">Mobile — SearchBar standalone</p>
-          <p class="docs-section-desc">En mobile la búsqueda es el <b>hero de la pantalla</b>: una <code>.search-bar</code> a <b>ancho completo</b>, <b>56&nbsp;px</b>, forma píldora y fondo gris. Las acciones van como <b>ícono trailing dentro de la barra</b> (filtro / voz / limpiar) o la barra se <b>expande a una Search view</b> a pantalla completa donde viven filtros y resultados — no una fila de icon buttons de escritorio.</p>
-          <div class="docs-preview full-width">
-            <div style="max-width:390px;margin:0 auto;display:flex;flex-direction:column;gap:16px;width:100%">
-              <div class="search-bar" role="search">
-                <span class="search-bar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
-                <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes...">
-                <button type="button" class="search-bar-trailing" aria-label="Filtros"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button>
-              </div>
-              <div class="search-view" style="height:236px">
-                <div class="search-view-header">
-                  <button type="button" class="search-view-back" aria-label="Volver"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg></button>
-                  <input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..." value="dise">
-                </div>
-                <ul class="search-view-results">
-                  <li class="search-view-result"><span class="search-view-result-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>Diseñador/a de producto</li>
-                  <li class="search-view-result"><span class="search-view-result-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>Diseñador/a UX</li>
-                  <li class="search-view-result"><span class="search-view-result-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>Diseño de servicios</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <ul style="margin:10px 0 0;padding-left:18px;line-height:1.9;font-size:var(--font-size-body-sm);color:var(--color-on-surface-variant)">
-            <li><b>Alto:</b> 56&nbsp;px standalone — no 40&nbsp;px (ese es el alto compacto del <code>.search-row</code> en desktop).</li>
-            <li><b>Ancho:</b> completo (<code>width:100%</code>) — la búsqueda es la acción principal de la pantalla.</li>
-            <li><b>Forma:</b> píldora <code>--radius-full</code>.</li>
-            <li><b>Fondo:</b> gris <code>--color-surface-container-high</code> — nunca el blanco (<code>--color-surface</code>) del <code>.search-field</code> desktop.</li>
-            <li><b>Acciones:</b> ícono trailing dentro de la barra (<code>.search-bar-trailing</code>) o expansión a <b>Search view</b> full-screen (header 72&nbsp;px, esquinas 0) — no una fila de <code>.search-icon-btn</code>.</li>
-            <li><b>Foco:</b> borde <code>--color-secondary</code>.</li>
-          </ul>
-
-          <p class="ch-variant-label" style="margin-top:28px">Desktop — SearchBar + icon buttons (search-row · 40&nbsp;px)</p>
-          <div class="docs-preview full-width">
-            <div style="display:flex;flex-direction:column;gap:24px"><div class="search-row"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."></div><button type="button" class="search-icon-btn" aria-label="Filtros"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button></div><div class="search-row"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."></div><button type="button" class="search-icon-btn" aria-label="Filtros"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button><button type="button" class="search-icon-btn" aria-label="Ordenar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M6 12h12M9 18h6"/></svg></button></div><div class="search-row"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."></div><button type="button" class="search-icon-btn active" aria-label="Filtros" aria-pressed="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg></button><button type="button" class="search-icon-btn" aria-label="Ordenar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M6 12h12M9 18h6"/></svg></button><button type="button" class="search-icon-btn" aria-label="Vista en grilla"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></button></div></div>
-          </div>
-          <p class="cg-caption" style="margin-top:8px;">Estado activo (filtro aplicado): el botón muestra <code>--color-surface-container-high</code> con <code>aria-pressed="true"</code> — mismo tratamiento que el estado Presionado de <code>btn-tertiary</code>.</p>
-
-          <p class="ch-variant-label" style="margin-top:28px">Desktop — SearchField + controles de toolbar</p>
-          <p class="docs-section-desc">Composiciones reutilizables sobre <code>.toolbar</code> (gap <code>--space-2</code>, <code>align-items:center</code>). El <code>.search-field</code> crece (<code>flex:1</code>) y los controles quedan a su derecha; una sola acción primaria (CTA) por fila. Todas usan clases reales del DS — Select, Segmented Button, ToolbarButton, Button.</p>
-          <div class="docs-preview full-width">
-            <div style="display:flex;flex-direction:column;gap:20px">
-
-              <!-- Search + Filter -->
-              <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + Filter</div>
-                <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><div class="select-wrapper" style="width:170px;flex-shrink:0"><select aria-label="Estado"><option>Todos los estados</option></select><span class="select-caret">▾</span></div></div>
-              </div>
-
-              <!-- Search + Filter + Sort -->
-              <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + Filter + Sort</div>
-                <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><div class="select-wrapper" style="width:160px;flex-shrink:0"><select aria-label="Estado"><option>Todos los estados</option></select><span class="select-caret">▾</span></div><div class="select-wrapper" style="width:160px;flex-shrink:0"><select aria-label="Ordenar por"><option>Más recientes</option></select><span class="select-caret">▾</span></div></div>
-              </div>
-
-              <!-- Search + CTA -->
-              <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + CTA</div>
-                <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar vacantes" aria-label="Buscar vacantes"></div><button type="button" class="btn-primary" style="flex-shrink:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nueva vacante</button></div>
-              </div>
-
-              <!-- Search + Segmented Control -->
-              <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + Segmented Control</div>
-                <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar candidatos" aria-label="Buscar candidatos"></div><div class="seg-btn-group" role="group" aria-label="Vista" style="--seg-btn-size:sm;flex-shrink:0"><button type="button" class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Grilla</button></div></div>
-              </div>
-
-              <!-- Search + Multiple actions -->
-              <div><div style="font:600 11px var(--font-body);color:var(--color-on-surface-variant);margin-bottom:8px">Search + Multiple actions (filtro + reset + CTA)</div>
-                <div class="toolbar" style="margin-bottom:0"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div><div class="select-wrapper" style="width:150px;flex-shrink:0"><select aria-label="Estado"><option>Todos los estados</option></select><span class="select-caret">▾</span></div><button type="button" class="toolbar-btn" style="flex-shrink:0"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="6" y1="18" x2="18" y2="6"/></svg> Reset</button><button type="button" class="btn-primary" style="flex-shrink:0">Nueva vacante</button></div>
-              </div>
-
-            </div>
-          </div>
-          <ul style="margin:10px 0 0;padding-left:18px;line-height:1.9;font-size:var(--font-size-body-sm);color:var(--color-on-surface-variant)">
-            <li><b>Jerarquía:</b> una sola acción primaria (<code>btn-primary</code>) por toolbar; filtros y orden son <code>Select</code>, acciones secundarias <code>toolbar-btn</code>.</li>
-            <li><b>Alineación:</b> todos los controles comparten la altura del <code>.search-field</code> (<code>align-items:center</code>); el campo crece con <code>flex:1</code> y los controles llevan <code>flex-shrink:0</code>.</li>
-            <li><b>Espaciado:</b> <code>gap:var(--space-2)</code> entre controles, heredado de <code>.toolbar</code> — nunca valores ad-hoc.</li>
-            <li><b>Responsive:</b> en pantallas chicas, la toolbar apila o colapsa filtros a un Sheet/menú, y el <code>.search-field</code> desktop cede el paso a la <code>.search-bar</code> mobile — no se estira un único patrón (ver Guidelines → Diseño adaptativo).</li>
-          </ul>
-        </section>
         <section class="docs-section">
           <div class="bd-callout">
             <span class="bd-ico">⚑</span>
-            <span><b>Embassy vs Search MD3:</b> Embassy se alinea estrechamente con MD3 en la anatomía del search bar (forma <code>corner-full</code> / píldora). Divergencia de altura: MD3 usa 56dp siempre; Embassy diferencia por contexto — <b>40dp en <code>.search-row</code></b> (desktop, alineado con icon buttons) y <b>56dp standalone</b> (mobile, hero de página). Divergencias puntuales: <b>Superficie:</b> MD3 usa <code>$surface-container-high</code> y elevación nivel 3 (6dp) en la search bar en reposo. <b>Vista acoplada (docked view):</b> MD3 reduce las esquinas a <code>28dp</code> cuando el search bar se expande a una vista de resultados con foco activo. <b>Vista a pantalla completa (full-screen view):</b> 0dp de esquinas y altura de header <code>72dp</code>; se usa en pantallas compactas donde la búsqueda ocupa toda la pantalla. <b>Indicador de foco:</b> MD3 usa <code>$secondary</code> como color de foco en el search bar — no <code>$primary</code>. <b>Search Field:</b> no es parte de la spec de MD3 — es la adaptación de Embassy para toolbars de escritorio: misma familia de tokens de texto/estado, pero <b>contenedor <code>--color-surface</code> (blanco en light)</b> en vez del <code>surface-container-high</code> gris de la Search bar, y forma <code>--radius-md</code> en vez de píldora. Sigue el principio de MD3 de adaptar el componente de búsqueda al contexto de la plataforma.</span>
+            <span><b>Embassy vs Search MD3:</b> Embassy se alinea estrechamente con MD3 en la anatomía del search bar (forma <code>corner-full</code> / píldora). <b>Modelo por plataforma:</b> el <b>Search Bar</b> (mobile) es la píldora gris <code>surface-container-high</code> de 56dp standalone; el <b>Search Field</b> (desktop) es la variante de Embassy para toolbars, con <b>contenedor <code>--color-surface</code> (blanco en light)</b> y forma <code>--radius-md</code>. La <code>.search-row</code> (search bar + icon buttons circulares, alineada a 40dp) es una composición <b>de la familia mobile</b>, no la búsqueda de escritorio. Divergencias puntuales: <b>Superficie:</b> MD3 usa <code>$surface-container-high</code> y elevación nivel 3 (6dp) en la search bar en reposo. <b>Vista acoplada (docked view):</b> MD3 reduce las esquinas a <code>28dp</code> cuando el search bar se expande a una vista de resultados con foco activo. <b>Vista a pantalla completa (full-screen view):</b> 0dp de esquinas y altura de header <code>72dp</code>; se usa en pantallas compactas donde la búsqueda ocupa toda la pantalla. <b>Indicador de foco:</b> MD3 usa <code>$secondary</code> como color de foco en el search bar — no <code>$primary</code>. <b>Search Field:</b> no es parte de la spec de MD3 — es la adaptación de Embassy para toolbars de escritorio: misma familia de tokens de texto/estado, pero contenedor blanco (<code>--color-surface</code>) en vez del gris de la Search bar, y forma <code>--radius-md</code> en vez de píldora. Sigue el principio de MD3 de adaptar el componente de búsqueda al contexto de la plataforma.</span>
           </div>
         </section>
       </div>
