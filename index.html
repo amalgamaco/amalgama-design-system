@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=5">
+<link rel="stylesheet" href="css/components.css?v=7">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -9221,7 +9221,7 @@ export { Textarea }</code></pre>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Los pares <code>--color-*-container</code> / <code>--color-on-*-container</code> garantizan contraste AA en tema claro y oscuro — nunca sobreescribir colores por tema</li><li><span class="ds-a11y-icon">♿</span>No comunicar estados solo con color — incluir el texto del label siempre</li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Contraste AA en ambos temas: en light, tinte pálido <code>-container</code> + texto oscuro <code>-900</code>; en dark, tinte sutil del color sobre <code>surface</code> + texto claro <code>on-container</code> (~8:1) — un tratamiento tonal parejo entre variantes, sin relleno saturado que bajaba el texto por debajo de AA</li><li><span class="ds-a11y-icon">♿</span>No comunicar estados solo con color — incluir el texto del label siempre; <code>open</code> (verde) y <code>active</code> (azul) usan colores distintos para no confundirse</li></ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Teclado y ARIA</h2>

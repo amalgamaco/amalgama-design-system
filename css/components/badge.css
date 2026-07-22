@@ -34,7 +34,9 @@
 
 /* ── Variantes de color ── */
 .badge-open   { background: var(--color-success-container); color: var(--color-on-success-container); }
-.badge-active { background: var(--color-success-container); color: var(--color-on-success-container); }
+/* Activa = proceso en curso: color distinto de open (secondary-container), para que
+   "abierta" (verde) y "activa" (en curso) no se lean idénticas. */
+.badge-active { background: var(--color-secondary-container); color: var(--color-on-secondary-container); }
 .badge-closed { background: var(--color-error-container);   color: var(--color-on-error-container); }
 .badge-draft  { background: var(--color-surface-variant);   color: var(--color-on-surface-variant); border: 1px solid var(--color-outline); }
 .badge-archived { background: var(--color-surface-variant); color: var(--color-on-surface-variant); opacity: .75; }
@@ -72,3 +74,16 @@ a.badge:hover { opacity: .85; }
 a.badge:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .badge-link { background: transparent; color: var(--color-primary); padding-left: 2px; padding-right: 2px; }
 a.badge-link:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── Dark: tratamiento tonal suave ── en dark, en vez del relleno saturado
+   profundo (que además dejaba texto claro sobre color medio por debajo de AA),
+   el badge usa un TINTE sutil del color sobre la superficie + el texto claro
+   on-container. Es el mismo lenguaje que light, invertido: pill tenue + texto
+   vívido → contraste AA holgado y vividez pareja entre variantes.
+   Excepción documentada al "sin bloque por-tema" (aprobada; scope = badge). */
+[data-theme="dark"] .badge-open    { background: color-mix(in srgb, var(--color-success-container)   42%, var(--color-surface)); }
+[data-theme="dark"] .badge-active  { background: color-mix(in srgb, var(--color-secondary-container) 55%, var(--color-surface)); }
+[data-theme="dark"] .badge-closed  { background: color-mix(in srgb, var(--color-error-container)     42%, var(--color-surface)); }
+[data-theme="dark"] .badge-warning { background: color-mix(in srgb, var(--color-warning-container)   42%, var(--color-surface)); }
+[data-theme="dark"] .badge-tertiary{ background: color-mix(in srgb, var(--color-tertiary-container)  42%, var(--color-surface)); }
+[data-theme="dark"] .badge-info    { background: color-mix(in srgb, var(--color-info-container)      42%, var(--color-surface)); }
