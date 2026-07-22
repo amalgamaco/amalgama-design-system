@@ -201,34 +201,41 @@
   background: transparent;
 }
 
-/* ── Presets ── columna de accesos rápidos junto al calendario (par shadcn presets). */
+/* ── Presets ── atajos de fecha DEBAJO de la grilla, como el bloque shadcn
+   "calendar con presets": botones outline que se reparten el ancho y hacen wrap. */
 .calendar-with-presets {
-  display: inline-flex; align-items: stretch; gap: 12px; flex-wrap: wrap;
+  display: inline-flex;
+  flex-direction: column;          /* calendario arriba, presets abajo */
   padding: 12px;
-  max-width: 100%;
+  /* la card se ancla al ancho del calendario (7×32 celdas + 24 padding = 248px)
+     → los presets hacen wrap (3+2) en vez de estirar la card, igual que el
+     bloque shadcn calendar-32. (--cal-cell vive en .calendar, no acá.) */
+  max-width: min(100%, 248px);
   background: var(--color-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
 }
 .calendar-presets {
-  display: flex; flex-direction: column; gap: 4px;
-  min-width: 132px;
-  border-right: 1px solid var(--border);
-  padding-right: 12px;
-}
-@media (max-width: 480px) {
-  .calendar-with-presets { display: flex; }
-  .calendar-presets { border-right: 0; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 12px; flex-direction: row; flex-wrap: wrap; min-width: 0; }
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 12px -12px 0;            /* divisor a ancho completo de la card (border-t + px-4 !pt-4) */
+  padding: 12px 12px 0;
+  border-top: 1px solid var(--border);
 }
 .calendar-preset-btn {
-  text-align: left; padding: 8px 10px;
-  border: 0; border-radius: var(--radius-sm);
+  flex: 1 1 auto;                  /* se reparten el ancho; wrap cuando no entran */
+  white-space: nowrap;
+  text-align: center;
+  padding: 8px 6px;
+  border: 1px solid var(--color-outline-variant);   /* Button variant="outline" size="sm" */
+  border-radius: var(--radius-md);
   background: transparent; color: var(--color-on-surface);
-  font: inherit; font-size: var(--font-size-body-sm); cursor: pointer;
-  transition: background-color .15s var(--ease-default, ease);
+  font: inherit; font-size: var(--font-size-body-sm); font-weight: 500;
+  cursor: pointer;
+  transition: background-color .15s var(--ease-default, ease), border-color .15s var(--ease-default, ease);
 }
-.calendar-preset-btn:hover { background: var(--color-surface-variant); }
+.calendar-preset-btn:hover { background: var(--color-surface-variant); border-color: var(--color-outline); }
 .calendar-preset-btn:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 2px; }
+.calendar-preset-btn[aria-current="true"] { background: var(--color-secondary-container); border-color: var(--color-secondary); color: var(--color-on-secondary-container); }
 
 /* ── Date + time ── fila de hora bajo la grilla (par shadcn date-and-time picker). */
 .calendar-time-row {

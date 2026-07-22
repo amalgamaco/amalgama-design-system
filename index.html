@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=11">
+<link rel="stylesheet" href="css/components.css?v=15">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -18381,15 +18381,16 @@ const [on, setOn] = useState(false)
           <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07" data-cal-caption="dropdown"></div></div>
 
           <h2 class="docs-section-title" style="margin-top:32px">Presets</h2>
-          <p class="docs-section-desc">Accesos rápidos junto a la grilla que fijan la selección (par shadcn presets). Acá en modo rango.</p>
+          <p class="docs-section-desc">Atajos de fecha <b>debajo</b> de la grilla, como el bloque <em>calendar con presets</em> de shadcn: botones outline que se reparten el ancho y hacen wrap. Cada uno fija una fecha.</p>
           <div class="bd-family-wrap"><div class="calendar-with-presets">
+            <div class="calendar" data-calendar="2026-07"></div>
             <div class="calendar-presets">
               <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'today')">Hoy</button>
-              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'7')">Últimos 7 días</button>
-              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'30')">Últimos 30 días</button>
-              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'month')">Este mes</button>
+              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'tomorrow')">Mañana</button>
+              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'in3')">En 3 días</button>
+              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'in7')">En una semana</button>
+              <button type="button" class="calendar-preset-btn" onclick="calApplyPreset(this,'in14')">En 2 semanas</button>
             </div>
-            <div class="calendar" data-calendar="2026-07" data-cal-mode="range"></div>
           </div></div>
 
           <h2 class="docs-section-title" style="margin-top:32px">Date and time picker</h2>
@@ -18456,12 +18457,16 @@ const [on, setOn] = useState(false)
 &lt;div class=&quot;calendar calendar-lg&quot; data-calendar&gt;&lt;/div&gt;
 &lt;div class=&quot;calendar&quot; data-calendar data-cal-booked=&quot;2026-07-21,2026-07-22&quot;&gt;&lt;/div&gt;
 
-&lt;!-- Presets --&gt;
+&lt;!-- Presets — calendario arriba, atajos outline abajo (par shadcn) --&gt;
 &lt;div class=&quot;calendar-with-presets&quot;&gt;
+  &lt;div class=&quot;calendar&quot; data-calendar&gt;&lt;/div&gt;
   &lt;div class=&quot;calendar-presets&quot;&gt;
-    &lt;button class=&quot;calendar-preset-btn&quot; onclick=&quot;calApplyPreset(this,'7')&quot;&gt;Últimos 7 días&lt;/button&gt;
+    &lt;button class=&quot;calendar-preset-btn&quot; onclick=&quot;calApplyPreset(this,'today')&quot;&gt;Hoy&lt;/button&gt;
+    &lt;button class=&quot;calendar-preset-btn&quot; onclick=&quot;calApplyPreset(this,'tomorrow')&quot;&gt;Mañana&lt;/button&gt;
+    &lt;button class=&quot;calendar-preset-btn&quot; onclick=&quot;calApplyPreset(this,'in3')&quot;&gt;En 3 días&lt;/button&gt;
+    &lt;button class=&quot;calendar-preset-btn&quot; onclick=&quot;calApplyPreset(this,'in7')&quot;&gt;En una semana&lt;/button&gt;
+    &lt;button class=&quot;calendar-preset-btn&quot; onclick=&quot;calApplyPreset(this,'in14')&quot;&gt;En 2 semanas&lt;/button&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;calendar&quot; data-calendar data-cal-mode=&quot;range&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;!-- Date + time (dentro del panel del Date Picker) --&gt;
@@ -27377,7 +27382,9 @@ function calApplyPreset(btn, kind) {
   } else {
     var dd = new Date(today);
     if (kind === 'tomorrow') dd.setDate(dd.getDate() + 1);
+    else if (kind === 'in3') dd.setDate(dd.getDate() + 3);
     else if (kind === 'in7') dd.setDate(dd.getDate() + 7);
+    else if (kind === 'in14') dd.setDate(dd.getDate() + 14);
     else if (kind === 'in30') dd.setDate(dd.getDate() + 30);
     cal._sel = dd; cal._y = dd.getFullYear(); cal._m = dd.getMonth();
   }
