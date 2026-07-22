@@ -1173,7 +1173,7 @@ as if they were gaps).
 | Pagination active = `outline` | Active = filled `secondary-container` | Matches the DS selection language (Chip/Nav/Tabs) |
 | Skeleton `animate-pulse` | Shimmer gradient sweep | Brand motion; richer, same intent |
 | Alert: 2 variants | 5 semantic variants (default/info/success/warning/error) | Reuses Badge container/on-container token pairs |
-| Select: composed Radix dropdown | Native `<select>` restyled | Parity dropdown behavior lives in **Combobox/Command** |
+| Select: composed Radix dropdown | Styled **listbox** (`select.css` + `initSelect()`) — `.select[data-select]` trigger + `role="listbox"` panel, check on selected, keyboard/type-ahead; native `<select>` (`.select-wrapper`, form.css) kept for dense form fields | 2026-07: the styled dropdown was rebuilt so the opened Select matches shadcn `SelectContent` (the native `<select>` popup is OS-drawn/unstylable). Position is absolute-below-trigger (no viewport-collision flip — same simplification as Date Picker/Popover); no portal. Combobox/Command remain the filter-as-you-type variants. |
 | Toggle Group `spacing=0` (connected) | Spaced, independent toggles | Connected pill = **Segmented Button**'s job |
 | Hover Card (hover-triggered) | **Rich Tooltip** (click-triggered) | Consolidated; drops the hover-preview affordance (flagged) |
 | Menu submenus (`Sub`/`SubTrigger`/`SubContent`) | **Not built** | Buildless flyout has no portal/nested engine — flag, don't improvise |

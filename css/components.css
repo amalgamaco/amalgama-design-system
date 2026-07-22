@@ -25,6 +25,7 @@
 @import url('components/toast.css?v=9');
 @import url('components/chip.css?v=9');
 @import url('components/search.css?v=9');
+@import url('components/select.css?v=17');
 
 /* ── Extended components (domain-oriented) ── */
 @import url('components/vacancy-card.css?v=9');

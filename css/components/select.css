@@ -1,0 +1,141 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Select (listbox)
+   Select con dropdown ESTILADO (par shadcn/Radix Select): un trigger + un panel
+   flotante role="listbox" con ítems role="option", indicador de check a la
+   derecha del ítem seleccionado, grupos, labels, separadores y botones de scroll.
+   A diferencia del <select> nativo de form.css (cuyo desplegable lo dibuja el SO
+   y no se puede tematizar), este componente reimplementa el listbox para replicar
+   el SelectContent de shadcn con tokens Embassy.
+
+   Cuándo usar: elegir UNA opción de una lista corta/media cuando el desplegable
+   debe verse igual que el resto del DS (tokens, dark mode, foco).
+   Cuándo no: búsqueda/filtrado dentro de la lista → Combobox/Command; campo de
+   formulario denso donde alcanza el nativo → <select> de form.css.
+
+   Estructura (slots par shadcn):
+     .select            → Root (position:relative)
+     .select-trigger    → SelectTrigger (button, aria-haspopup="listbox")
+       .select-value    → SelectValue (texto elegido / placeholder)
+       .select-icon     → ChevronDown
+     .select-content    → SelectContent (role="listbox")
+       .select-scroll-up   → SelectScrollUpButton
+       .select-viewport    → SelectViewport (área scrolleable, p-1)
+         .select-group     → SelectGroup (role="group")
+           .select-label   → SelectLabel
+           .select-item    → SelectItem (role="option")
+             .select-item-text  → SelectItemText
+             .select-item-check → SelectItemIndicator (CheckIcon)
+         .select-separator → SelectSeparator
+       .select-scroll-down → SelectScrollDownButton
+
+   Comportamiento: initSelect() en index.html (abrir/cerrar, teclado ↑↓/Home/End/
+   type-ahead/Enter/Esc, foco al panel, retorno al trigger, check en seleccionado).
+   Posicionamiento: absolute bajo el trigger (sin detección de colisión de viewport
+   — misma simplificación aceptada que Date Picker / Popover buildless).
+
+   Dependencia: variables.css. Consume sólo tokens semánticos → light/dark sin overrides.
+═══════════════════════════════════════ */
+
+.select { position: relative; display: inline-block; }
+
+/* ── Trigger — replica la anatomía de campo del <select> nativo (form.css) ── */
+.select-trigger {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 8px;
+  width: 100%;
+  min-height: 40px;                                  /* alineado con los field selects */
+  padding: 8px 12px 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-family: inherit; font-size: var(--font-size-body-md);
+  text-align: left; white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-default),
+              box-shadow var(--duration-fast) var(--ease-default);
+}
+.select-trigger:focus-visible,
+.select-trigger[aria-expanded="true"] {
+  outline: none;
+  border-color: var(--interactive);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+.select-trigger[aria-invalid="true"] { border-color: var(--color-error); }
+.select-trigger[aria-invalid="true"]:focus-visible { box-shadow: 0 0 0 3px var(--color-error-ring); }
+.select-trigger:disabled,
+.select-trigger[aria-disabled="true"] {
+  background: var(--color-surface-variant);
+  color: var(--color-on-disabled);
+  border-color: var(--color-outline);
+  cursor: not-allowed;
+}
+.select-trigger[data-size="sm"] { min-height: 32px; padding: 4px 10px 4px 12px; }
+.select-value { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.select-value[data-placeholder] { color: var(--text-muted); }
+.select-icon { width: 16px; height: 16px; flex-shrink: 0; color: var(--text-muted); opacity: .5; }   /* shadcn: ChevronDown estático (no rota) */
+
+/* ── Content (SelectContent, role="listbox") ── */
+.select-content[hidden] { display: none; }
+.select-content {
+  position: absolute;
+  z-index: 100;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 100%;                                   /* = ancho del trigger (crece con el contenido) */
+  max-height: min(320px, 60vh);                      /* max-h disponible → scroll */
+  overflow-y: auto; overflow-x: hidden;
+  background: var(--color-surface-container);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  animation: selectContentIn var(--duration-fast) var(--ease-default);
+}
+@keyframes selectContentIn {
+  from { opacity: 0; transform: scale(.96) translateY(-2px); }
+  to   { opacity: 1; transform: none; }
+}
+.select-viewport { padding: 4px; }                   /* p-1 */
+
+/* ── Item (SelectItem, role="option") ── */
+.select-item {
+  position: relative;
+  display: flex; align-items: center; gap: 8px;
+  width: 100%;
+  padding: 6px 32px 6px 8px;                         /* py-1.5 pr-8 pl-2 (check a la derecha) */
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-body-md);
+  color: var(--color-on-surface);
+  cursor: default; user-select: none; outline: none;
+}
+/* highlight (hover + navegación por teclado) = accent, igual que Dropdown Menu */
+.select-item.highlighted,
+.select-item:hover:not([aria-disabled="true"]) { background: var(--color-surface-variant); }
+.select-item[aria-disabled="true"] { color: var(--color-on-disabled); opacity: .5; pointer-events: none; }
+.select-item-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.select-item-check {
+  position: absolute; right: 8px;                    /* right-2 */
+  width: 14px; height: 14px;                         /* size-3.5 */
+  display: inline-flex; align-items: center; justify-content: center;
+  opacity: 0;
+}
+.select-item-check svg { width: 16px; height: 16px; }
+.select-item[aria-selected="true"] .select-item-check { opacity: 1; }
+
+/* ── Label / Group / Separator ── */
+.select-label { padding: 6px 8px; font-size: var(--font-size-caption); font-weight: 600; color: var(--color-on-surface-variant); }
+.select-group { display: block; }
+.select-separator { height: 1px; margin: 4px -4px; background: var(--color-outline-variant); }
+
+/* ── Scroll buttons (SelectScrollUp/DownButton) ── se muestran vía JS al desbordar ── */
+.select-scroll-up, .select-scroll-down {
+  position: sticky; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  height: 22px; cursor: default;
+  color: var(--color-on-surface-variant);
+  background: var(--color-surface-container);
+}
+.select-scroll-up { top: 0; }
+.select-scroll-down { bottom: 0; }
+.select-scroll-up[hidden], .select-scroll-down[hidden] { display: none; }
+.select-scroll-up svg, .select-scroll-down svg { width: 16px; height: 16px; }

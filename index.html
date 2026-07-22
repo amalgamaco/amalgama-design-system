@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=15">
+<link rel="stylesheet" href="css/components.css?v=17">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -7923,7 +7923,7 @@ export { Input }
       <div class="ds-page-tag">Components · Inputs</div>
       <h1 class="docs-page-title">Select</h1>
       <p class="docs-page-desc">Selector desplegable de una opción — trigger con caret y panel de opciones anclado.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> Un <code>&lt;select&gt;</code> nativo dentro de <code>.select-wrapper</code> con un caret propio (<code>css/components/form.css</code>) — el listado de opciones lo renderiza el sistema operativo, sin reimplementar un listbox a mano; el trigger replica la anatomía de campo de la familia Form (input / select / textarea). La estructura de Specs / anatomía / guías sigue el modelo de documentación de <strong>Material Design 3</strong> (Google, CC BY 4.0), con todos los valores y ejemplos reemplazados por componentes y tokens de Embassy.</div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> Listbox estilado (<code>css/components/select.css</code> + <code>initSelect()</code> sobre <code>.select[data-select]</code>): trigger + panel <code>role="listbox"</code> con check en la opción elegida — réplica del <code>SelectContent</code> de shadcn/Radix con tokens Embassy, porque el desplegable del <code>&lt;select&gt;</code> nativo lo dibuja el SO y no se puede tematizar. El <code>&lt;select&gt;</code> nativo dentro de <code>.select-wrapper</code> (<code>form.css</code>) sigue disponible para campos de formulario densos. La estructura de Specs / anatomía / guías sigue el modelo de documentación de <strong>Material Design 3</strong> (Google, CC BY 4.0), con todos los valores y ejemplos reemplazados por componentes y tokens de Embassy.</div>
       <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -7933,33 +7933,37 @@ export { Input }
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li><b>Select de Radix:</b> trigger + panel anclado (<code>SelectContent</code> en portal) con caret <code>ChevronDown</code>; teclado, foco y patrón <em>listbox</em> de WAI-ARIA incluidos.</li>
-            <li><b>Variantes:</b> básico, con label y disabled.</li>
-            <li><b>Estados:</b> focus (borde <code>--color-primary</code> + anillo de 3px <code>--color-focus-ring</code>) y disabled (opacidad 50%).</li>
-            <li><b>Regla clave:</b> usar siempre un <code>placeholder</code> en <code>SelectValue</code> («Seleccionar…») y un label asociado.</li>
+            <li><b>Dropdown estilado (listbox):</b> <code>SelectTrigger</code> + <code>SelectContent</code> (<code>role="listbox"</code>) anclado al trigger, con caret <code>ChevronDown</code> y <b>check en la opción elegida</b> — réplica del <code>SelectContent</code> de shadcn con tokens Embassy (no el desplegable nativo del SO).</li>
+            <li><b>Ancho:</b> el panel toma el ancho del trigger por defecto y crece con el contenido más largo.</li>
+            <li><b>Teclado:</b> <code>↑</code>/<code>↓</code>, <code>Home</code>/<code>End</code>, type-ahead, <code>Enter</code>/<code>Espacio</code> para elegir, <code>Esc</code> para cerrar; foco va al panel al abrir y vuelve al trigger al elegir.</li>
+            <li><b>Estados:</b> focus (borde <code>--interactive</code> + anillo 3px <code>--color-focus-ring</code>), disabled, <code>aria-invalid</code>.</li>
+            <li><b>Regla clave:</b> siempre un <code>placeholder</code> en <code>SelectValue</code> y un label asociado.</li>
           </ul>
 
-          <!-- Component variants -->
+          <!-- Canonical Select (styled listbox) -->
           <div class="bd-family-wrap">
-            <div style="max-width:320px">
-            <div class="select-wrapper">
-              <select aria-label="Seleccionar opción">
-                <option value="" disabled selected>Seleccionar...</option>
-                <option value="1">Opcion 1</option>
-                <option value="2">Opcion 2</option>
-                <option value="3">Opcion 3</option>
-              </select>
-              <span class="select-caret">▾</span>
+            <div class="select" data-select style="width:220px">
+              <button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Fruta">
+                <span class="select-value" data-placeholder>Seleccioná una fruta</span>
+                <svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="select-content" role="listbox" aria-label="Fruta" hidden>
+                <div class="select-scroll-up" hidden aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></div>
+                <div class="select-viewport">
+                  <div class="select-group" role="group" aria-label="Frutas">
+                    <div class="select-label">Frutas</div>
+                    <div class="select-item" role="option" data-value="manzana" aria-selected="false"><span class="select-item-text">Manzana</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                    <div class="select-item" role="option" data-value="banana" aria-selected="false"><span class="select-item-text">Banana</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                    <div class="select-item" role="option" data-value="arandano" aria-selected="false"><span class="select-item-text">Arándano</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                    <div class="select-item" role="option" data-value="uvas" aria-selected="false"><span class="select-item-text">Uvas</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                    <div class="select-item" role="option" data-value="anana" aria-selected="false"><span class="select-item-text">Ananá</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                  </div>
+                </div>
+                <div class="select-scroll-down" hidden aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+              </div>
             </div>
           </div>
-          </div>
-
-          <!-- Legend — variant references -->
-          <ol class="bd-family-legend">
-            <li>Básico — <code>Select</code> con <code>SelectTrigger</code> + <code>SelectContent</code> y caret <code>ChevronDown</code></li>
-            <li>Con label — envuelto en <code>.field-group</code> con <code>.field-label</code> asociado</li>
-            <li>Disabled — prop <code>disabled</code>: opacidad 50% y cursor <code>not-allowed</code></li>
-          </ol>
+          <p class="cg-caption" style="margin-top:12px">Abrí el Select: el panel replica el <code>SelectContent</code> de shadcn — misma superficie, radios, sombra, alto de ítem y check a la derecha, con tokens Embassy. El <code>&lt;select&gt;</code> nativo (<code>form.css</code>) sigue disponible para campos de formulario densos donde alcanza el desplegable del sistema.</p>
 
         </section>
       </div>
@@ -8220,15 +8224,40 @@ export { Input }
       </div>
       <div class="ds-comp-tab-panel" data-tab="code">
         <div class="docs-section">
-          <h2 class="docs-section-title">HTML</h2>
-          <p class="docs-section-desc">Copiá y pegá. Un <code>&lt;select&gt;</code> nativo — sin dependencias.</p>
+          <h2 class="docs-section-title">HTML — Select (listbox estilado)</h2>
+          <p class="docs-section-desc">Enlazá <code>css/components/select.css</code>. El comportamiento (abrir/cerrar, teclado, foco, check) lo aporta <code>initSelect()</code>, que se auto-inicializa sobre <code>.select[data-select]</code> — sin dependencias. Es el mismo markup que se ve arriba.</p>
+<div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>&lt;div class="select" data-select style="width:220px"&gt;
+  &lt;button type="button" class="select-trigger"
+          aria-haspopup="listbox" aria-expanded="false" aria-label="Fruta"&gt;
+    &lt;span class="select-value" data-placeholder&gt;Seleccioná una fruta&lt;/span&gt;
+    &lt;svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" aria-hidden="true"&gt;&lt;polyline points="6 9 12 15 18 9"/&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;div class="select-content" role="listbox" aria-label="Fruta" hidden&gt;
+    &lt;div class="select-viewport"&gt;
+      &lt;div class="select-group" role="group" aria-label="Frutas"&gt;
+        &lt;div class="select-label"&gt;Frutas&lt;/div&gt;
+        &lt;div class="select-item" role="option" data-value="manzana" aria-selected="false"&gt;
+          &lt;span class="select-item-text"&gt;Manzana&lt;/span&gt;
+          &lt;span class="select-item-check"&gt;&lt;svg viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;!-- …más .select-item… (separá grupos con &lt;div class="select-separator"&gt;) --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 8px;color:var(--ds-text-2)">Campo nativo (form.css) — para formularios densos</h3>
+        <p class="docs-section-desc">Cuando alcanza el desplegable del sistema (formularios densos, mobile), usá el <code>&lt;select&gt;</code> nativo restilado. Su lista la dibuja el SO (no tematizable).</p>
 <div class="docs-code-wrapper">
           <pre class="docs-code standalone"><code>&lt;div class="select-wrapper"&gt;
   &lt;select&gt;
     &lt;option value="" disabled selected&gt;Elegí una ubicación&lt;/option&gt;
     &lt;option value="remoto"&gt;Remoto&lt;/option&gt;
     &lt;option value="presencial"&gt;Presencial&lt;/option&gt;
-    &lt;option value="hibrido"&gt;Híbrido&lt;/option&gt;
   &lt;/select&gt;
   &lt;span class="select-caret"&gt;▾&lt;/span&gt;
 &lt;/div&gt;</code></pre>
@@ -27499,6 +27528,92 @@ function initAllComboboxes() { Array.prototype.forEach.call(document.querySelect
 if (document.readyState !== 'loading') initAllComboboxes();
 else document.addEventListener('DOMContentLoaded', initAllComboboxes);
 window.addEventListener('ds:section-shown', initAllComboboxes);
+
+// ── Select (listbox) — dropdown estilado, par shadcn Select ──
+// Trigger + panel role="listbox"; teclado (↑↓/Home/End/type-ahead/Enter/Esc/Tab),
+// foco al panel y retorno al trigger, check en el ítem seleccionado, scroll buttons.
+function initSelect(root) {
+  if (root.__selInit) return; root.__selInit = 1;
+  var trigger = root.querySelector('.select-trigger');
+  var content = root.querySelector('.select-content');
+  var value = trigger && trigger.querySelector('.select-value');
+  if (!trigger || !content) return;
+  content.setAttribute('tabindex', '-1');
+  var scrollUp = content.querySelector('.select-scroll-up');
+  var scrollDown = content.querySelector('.select-scroll-down');
+  var typeBuf = '', typeTimer = null;
+  // Ids estables para aria-activedescendant
+  Array.prototype.forEach.call(content.querySelectorAll('.select-item'), function (it) {
+    if (!it.id) { initSelect._n = (initSelect._n || 0) + 1; it.id = 'select-opt-' + initSelect._n; }
+  });
+  function enabledItems() { return Array.prototype.slice.call(content.querySelectorAll('.select-item:not([aria-disabled="true"])')); }
+  function setHighlight(el) {
+    Array.prototype.forEach.call(content.querySelectorAll('.select-item.highlighted'), function (i) { i.classList.remove('highlighted'); });
+    if (el) { el.classList.add('highlighted'); el.scrollIntoView({ block: 'nearest' }); content.setAttribute('aria-activedescendant', el.id); updateScrollButtons(); }
+  }
+  function updateScrollButtons() {
+    if (!scrollUp || !scrollDown) return;
+    var overflow = content.scrollHeight > content.clientHeight + 1;
+    scrollUp.hidden = !overflow || content.scrollTop <= 0;
+    scrollDown.hidden = !overflow || content.scrollTop + content.clientHeight >= content.scrollHeight - 1;
+  }
+  function onDocClick(e) { if (!root.contains(e.target)) close(false); }
+  function open() {
+    content.style.minWidth = trigger.getBoundingClientRect().width + 'px';   // = ancho del trigger (par --radix-select-trigger-width)
+    content.hidden = false; trigger.setAttribute('aria-expanded', 'true');
+    var sel = content.querySelector('.select-item[aria-selected="true"]:not([aria-disabled="true"])');
+    setHighlight(sel || enabledItems()[0]);
+    content.focus(); updateScrollButtons();
+    document.addEventListener('click', onDocClick, true);
+  }
+  function close(focusTrigger) {
+    if (content.hidden) return;
+    content.hidden = true; trigger.setAttribute('aria-expanded', 'false');
+    document.removeEventListener('click', onDocClick, true);
+    if (focusTrigger) trigger.focus();
+  }
+  function selectItem(item) {
+    if (!item || item.hasAttribute('aria-disabled')) return;
+    Array.prototype.forEach.call(content.querySelectorAll('.select-item'), function (o) { o.setAttribute('aria-selected', 'false'); });
+    item.setAttribute('aria-selected', 'true');
+    var txt = item.querySelector('.select-item-text');
+    if (value) { value.textContent = txt ? txt.textContent : item.textContent.trim(); value.removeAttribute('data-placeholder'); }
+    root.setAttribute('data-value', item.getAttribute('data-value') || '');
+    root.dispatchEvent(new CustomEvent('change', { bubbles: true, detail: { value: item.getAttribute('data-value') || '' } }));
+    close(true);
+  }
+  trigger.addEventListener('click', function (e) { e.stopPropagation(); if (content.hidden) open(); else close(false); });
+  trigger.addEventListener('keydown', function (e) {
+    if (content.hidden && (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); open(); }
+  });
+  content.addEventListener('click', function (e) { var it = e.target.closest('.select-item'); if (it) selectItem(it); });
+  content.addEventListener('mousemove', function (e) { var it = e.target.closest('.select-item:not([aria-disabled="true"])'); if (it && !it.classList.contains('highlighted')) setHighlight(it); });
+  content.addEventListener('scroll', updateScrollButtons);
+  content.addEventListener('keydown', function (e) {
+    var list = enabledItems(); if (!list.length) return;
+    var cur = content.querySelector('.select-item.highlighted'), idx = list.indexOf(cur);
+    if (e.key === 'ArrowDown') { e.preventDefault(); setHighlight(list[Math.min(idx + 1, list.length - 1)] || list[0]); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setHighlight(idx <= 0 ? list[0] : list[idx - 1]); }
+    else if (e.key === 'Home') { e.preventDefault(); setHighlight(list[0]); }
+    else if (e.key === 'End') { e.preventDefault(); setHighlight(list[list.length - 1]); }
+    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectItem(cur); }
+    else if (e.key === 'Escape') { e.preventDefault(); close(true); }
+    else if (e.key === 'Tab') { close(false); }
+    else if (e.key.length === 1 && /\S/.test(e.key)) {
+      typeBuf += e.key.toLowerCase(); clearTimeout(typeTimer); typeTimer = setTimeout(function () { typeBuf = ''; }, 500);
+      var match = list.filter(function (it) { return ((it.querySelector('.select-item-text') || it).textContent || '').trim().toLowerCase().indexOf(typeBuf) === 0; })[0];
+      if (match) setHighlight(match);
+    }
+  });
+  [scrollUp, scrollDown].forEach(function (btn) {
+    if (!btn) return; var dir = btn === scrollUp ? -1 : 1;
+    btn.addEventListener('click', function () { content.scrollBy({ top: dir * 96, behavior: 'smooth' }); });
+  });
+}
+function initAllSelects() { Array.prototype.forEach.call(document.querySelectorAll('.select[data-select]'), initSelect); }
+if (document.readyState !== 'loading') initAllSelects();
+else document.addEventListener('DOMContentLoaded', initAllSelects);
+window.addEventListener('ds:section-shown', initAllSelects);
 
 // ── Chart rich tooltip ── indicador de color + etiqueta + valor, posicionado
 // por JS sobre .chart-dot/.chart-bar (lee el <title> del elemento y su color).
