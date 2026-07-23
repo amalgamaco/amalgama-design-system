@@ -79,6 +79,7 @@ import {
   SearchBarAnatomy, SearchViewAnatomy, SearchColor, SearchStates, SearchBarMeasures, SearchViewMeasures,
 } from "./islands/SearchSpecs"
 import { SnackbarAnatomy, SnackbarColor, SnackbarMeasures, SnackbarAnimation } from "./islands/SnackbarSpecs"
+import { ItemShowcase, ButtonGroupShowcase, InputGroupShowcase, SpinnerShowcase, AttachmentShowcase } from "./islands/Batch1Showcase"
 import { SwitchAnatomy, SwitchStates, SwitchMeasures } from "./islands/SwitchSpecs"
 import {
   CheckboxAnatomy, CheckboxStates, CheckboxMeasures,
@@ -97,6 +98,11 @@ import {
 } from "./islands/NewPrimitivesShowcase"
 
 const registry: Record<string, ComponentType> = {
+  "item-showcase": ItemShowcase,
+  "button-group-showcase": ButtonGroupShowcase,
+  "input-group-showcase": InputGroupShowcase,
+  "spinner-showcase": SpinnerShowcase,
+  "attachment-showcase": AttachmentShowcase,
   "toggle-showcase": ToggleShowcase,
   "label-showcase": LabelShowcase,
   "accordion-showcase": AccordionShowcase,
