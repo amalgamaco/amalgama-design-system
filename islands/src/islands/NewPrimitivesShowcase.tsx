@@ -132,7 +132,7 @@ export function ScrollAreaShowcase() {
   return (
     <ScrollArea className="h-40 w-64 rounded-md border border-border">
       <div className="flex flex-col p-3">
-        {Array.from({ length: 20 }, (_, i) => (
+        {Array.from({ length: 10 }, (_, i) => (
           <div key={i} className="py-1.5 text-body-sm text-on-surface border-b border-border last:border-0">
             Candidato #{i + 1}
           </div>

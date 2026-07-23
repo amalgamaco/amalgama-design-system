@@ -23356,7 +23356,7 @@ import { Info } from &quot;lucide-react&quot;
             <li>Primitiva de una sola pieza: <code>&lt;AspectRatio ratio={16/9}&gt;…&lt;/AspectRatio&gt;</code>.</li>
             <li>El hijo llena el contenedor (usá <code>object-cover</code> en imágenes).</li>
           </ul>
-          <div class="bd-family-wrap"><div style="width:18rem"><div style="aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-lg);background:var(--color-secondary-container);color:var(--color-on-secondary-container);font-size:var(--font-size-body-md);font-weight:500">16 : 9</div></div></div>
+          <div class="bd-family-wrap"><div data-island="aspect-ratio-showcase"></div></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="guidelines">
@@ -23692,20 +23692,7 @@ import { Info } from &quot;lucide-react&quot;
             <li>Definí una altura/ancho inline; el contenedor con <code>overflow:auto</code> hace el scroll.</li>
             <li>No envuelvas el scroll natural de la página.</li>
           </ul>
-          <div class="bd-family-wrap"><div class="scroll-area" style="height:10rem;width:16rem;border-radius:var(--radius-md);border:1px solid var(--border)">
-              <div style="display:flex;flex-direction:column;padding:12px">
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm);border-bottom:1px solid var(--border)">Candidato #1</div>
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm);border-bottom:1px solid var(--border)">Candidato #2</div>
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm);border-bottom:1px solid var(--border)">Candidato #3</div>
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm);border-bottom:1px solid var(--border)">Candidato #4</div>
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm);border-bottom:1px solid var(--border)">Candidato #5</div>
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm);border-bottom:1px solid var(--border)">Candidato #6</div>
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm);border-bottom:1px solid var(--border)">Candidato #7</div>
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm);border-bottom:1px solid var(--border)">Candidato #8</div>
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm);border-bottom:1px solid var(--border)">Candidato #9</div>
-                <div style="padding:6px 0;font-size:var(--font-size-body-sm)">Candidato #10</div>
-              </div>
-            </div></div>
+          <div class="bd-family-wrap"><div data-island="scroll-area-showcase"></div></div>
 
           <p class="ch-variant-label" style="margin-top:24px">Horizontal — scroll en eje X (fila de tarjetas)</p>
           <div class="bd-family-wrap"><div class="scroll-area" style="width:100%;max-width:26rem;border-radius:var(--radius-md);border:1px solid var(--border)">
