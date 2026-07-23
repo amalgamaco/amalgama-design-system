@@ -13,8 +13,16 @@
 <link rel="stylesheet" href="css/layout.css?v=3">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
-     css/components/ into another Tailwind-free project to vendor a component. -->
+     css/components/ into another Tailwind-free project to vendor a component.
+     MIGRATION (Phase 2, in progress): being incrementally replaced by the Tailwind
+     v4 + shadcn/Radix islands below. Both coexist until every live example is a
+     [data-island]; this buildless layer is removed only once nothing references it. -->
 <link rel="stylesheet" href="css/components.css?v=18">
+<!-- Tailwind v4 + shadcn/Radix React islands: mount real @amalgama/ds components into
+     any [data-island="<name>"] placeholder. Additive — does nothing until a placeholder
+     exists, so it is safe to load alongside the buildless examples during the cutover. -->
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=1">
+<script type="module" src="islands/dist/embassy-islands.js?v=1"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
