@@ -134,12 +134,14 @@
   background: var(--color-surface-container-low);
 }
 
-/* Deshabilitado: contenedor/borde al 12%, contenido al 38% de on-surface */
+/* Deshabilitado: tokens dedicados de Embassy (--color-disabled / --color-on-disabled),
+   no el modelo de opacidad MD3 (38%/12% de on-surface). Alinea al patrón canónico
+   §5.3 de GOVERNANCE — reconciliación pendiente resuelta jul-2026. */
 .chip:disabled,
 .chip[aria-disabled="true"] {
-  border-color: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+  border-color: var(--color-disabled);
   background: transparent;
-  color: color-mix(in srgb, var(--color-on-surface) 38%, transparent);
+  color: var(--color-on-disabled);
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -147,12 +149,12 @@
 .chip[aria-disabled="true"] .chip-icon,
 .chip:disabled .chip-remove,
 .chip[aria-disabled="true"] .chip-remove {
-  color: color-mix(in srgb, var(--color-on-surface) 38%, transparent);
+  color: var(--color-on-disabled);
 }
 .chip-elevated:disabled,
 .chip-elevated[aria-disabled="true"] {
   border-color: transparent;
-  background: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+  background: var(--color-disabled);
 }
 
 /* ── Conjunto de chips (layout helper) ── */

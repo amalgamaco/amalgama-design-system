@@ -59,7 +59,7 @@
   opacity: 0;
 }
 .desc-section:hover .desc-delete-btn { opacity: 1; }
-.desc-delete-btn:hover { background: var(--red-light); color: var(--red); }
+.desc-delete-btn:hover { background: var(--color-error-container); color: var(--color-on-error-container); }
 .desc-editor {
   min-height: 100px;
   padding: 14px 16px;

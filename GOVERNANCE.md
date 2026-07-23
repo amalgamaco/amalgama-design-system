@@ -362,7 +362,7 @@ Every interactive component must implement all applicable states from this table
 - Ring: `0 0 0 4px` — the spread is always 4px. Exceptions must be documented as deliberate DS decisions.
 - Token: always `--color-focus` for the outline color and `--color-focus-ring` for the ring shadow. Never `--interactive`, never `--color-secondary`, never hardcoded blue.
 - `--color-focus = var(--secondary-900) = #4F80FF`. It has **no dark mode override** — this is intentional: the focus ring provides a consistent accessibility signal regardless of theme.
-- `--color-focus-ring = rgba(79,128,255,.15)`. It is currently hardcoded rather than derived from `--color-focus` — a known architectural debt. Do not replicate this pattern; use `color-mix(in srgb, var(--color-focus) 15%, transparent)` in any new component that needs a custom ring.
+- `--color-focus-ring` is now derived: `color-mix(in srgb, var(--color-focus) 15%, transparent)` (resolved in the 2026-07 color audit; previously the hardcoded duplicate `rgba(79,128,255,.15)`). It follows `--color-focus` as the single source of truth. Since `--color-focus` has no dark override, the resolved ring is the same in both themes — the derivation is about SSOT, not theme variation. New components needing a custom ring use this same `color-mix` form.
 
 **Known deviations to reconcile:**
 
@@ -613,19 +613,21 @@ These are documented deviations from the rules in this document. They exist in t
 
 ### 12.2 Token misuse
 
+**Resolved in the 2026-07 color audit.** The color-token misuses below were reconciled to the canonical patterns in §5 and no longer exist in the codebase:
+
+- `form.css` — disabled background `--color-surface-variant` → `--color-disabled` (§5.3).
+- `chip.css` — disabled state moved off the MD3 opacity model (38%/12% of `on-surface`) to Embassy's dedicated `--color-disabled` / `--color-on-disabled` (§5.3).
+- `variables.css` — `--color-focus-ring` is now derived, `color-mix(in srgb, var(--color-focus) 15%, transparent)` (§6.2), replacing the hardcoded duplicate `rgba(79,128,255,.15)`. Single source of truth: it now follows any change to `--color-focus` automatically. (The resolved value is unchanged and identical in both themes, since `--color-focus` intentionally has no dark override.)
+- `vacancy-card.css` / `person-card.css` — `.assignee-avatar` and `.person-avatar` gradients (raw primitives `--error-600`/`--secondary-900`/… + `--color-on-primary` text) replaced with semantic container pairs (`--color-{role}-container` + `--color-on-{role}-container`), matching the canonical Avatar. This also fixes the dark-mode contrast bug where `--color-on-primary` flipped to navy over a saturated fill.
+- `vacancy-card.css` — `.vacancy-icon` bg `--interactive-light` (shell alias) → `--color-secondary-container`; `.meta-dot` bg `--text-muted` (a text-role token) → `--color-outline-variant` (decorative separator role).
+- `description.css` — `.desc-delete-btn:hover` `--red-light` / `--red` aliases → `--color-error-container` / `--color-on-error-container`.
+- Hover-uses-`var(--bg)` (`vacancy-card`, `toolbar`, `modal`, `toast`) — reconciled in an earlier pass; no `var(--bg)` hover remains.
+
+**Still open:**
+
 | File | Inconsistency | Correct pattern | Priority |
 |---|---|---|---|
-| `form.css` | Disabled background: `--color-surface-variant` instead of `--color-disabled` | `var(--color-disabled)` | Medium |
-| `chip.css` | MD3 opacity model for disabled instead of `--color-disabled` / `--color-on-disabled` | Embassy dedicated disabled tokens | Medium |
-| `variables.css` | `--color-focus-ring` hardcoded as `rgba(79,128,255,.15)` instead of derived from `--color-focus` | `color-mix(in srgb, var(--color-focus) 15%, transparent)` | Low |
-| `vacancy-card.css` | `.assignee-avatar` gradients use raw primitive tokens (`--error-600`, `--secondary-900`, etc.) | Semantic container pairs: `--color-{role}-container` + `--color-on-{role}-container` | High |
-| `person-card.css` | `.person-avatar` gradient uses `--secondary-900`, `--secondary-500` (primitives) | `--color-secondary-container` + `--color-on-secondary-container` | High |
-| `vacancy-card.css` | `.assignee-avatar` all variants use `--color-on-primary` for text — semantically wrong for non-primary surfaces | Each variant: use its own `on-*` container pair | High |
-| `vacancy-card.css` | `.meta-dot` background uses `--text-muted` (a text-role token) | `--color-outline-variant` (decorative separator role) | Medium |
-| `description.css` | `.desc-delete-btn:hover` uses `--red-light` / `--red` aliases instead of container pair | `--color-error-container` + `--color-on-error-container` | Medium |
-| `vacancy-card.css`, `toolbar.css`, `modal.css`, `toast.css` | Hover uses `var(--bg)` — resolves to page background, not a hover surface | `var(--color-surface-variant)` for hover on secondary elements | High |
-| `vacancy-card.css` | `.vacancy-icon` uses `--interactive-light` (shell alias) for bg | `--color-secondary-container` | Low |
-| `toolbar.css` | `.toolbar-btn` font-weight `400` instead of `500`/`600` | Match button family: `600` for all button-like interactive elements | Medium |
+| `toolbar.css` | `.toolbar-btn` font-weight `400` instead of `500`/`600` (weight, not color — out of the color-audit scope) | Match button family: `600` for all button-like interactive elements | Medium |
 
 ### 12.3 Spacing off-scale values
 
@@ -652,7 +654,7 @@ These are documented deviations from the rules in this document. They exist in t
 | Shadows (no dark mode) | `--shadow-sm/md/lg` (`css/variables.css`) have no `[data-theme="dark"]` override — nearly invisible on dark surfaces. Post-revert, components consume `box-shadow: var(--shadow-sm)` directly (no Tailwind inlining in the way anymore), so fixing this is now just adding a `[data-theme="dark"]` override block for the three tokens in `variables.css` — no runtime-var workaround needed. `--btn-elevation`/`--btn-elevation-hover` (2026-07, the Elevated Button's theme-aware elevation token) already does exactly this — a real dark-mode value defined alongside the light one — and is the reference pattern to extend to Card/Dialog/etc. shadows. | Medium |
 | Icon button fragmentation | 5 separate icon-button implementations (`.icon-btn`, `.modal-close`, `.more-btn`, `.desc-delete-btn`, `.toast-close`) with inconsistent sizes (36/32/28/28/24px) and tokens | Extend `.icon-btn` with `ghost` modifier; standardize all to use it | High |
 | Clickable card hover inconsistency | 4 different hover strategies across vacancy-card, person-card, kanban-card, data-table rows | Standard: `border → --color-outline-variant` + `box-shadow: var(--shadow-md)` + `transform: translateY(-1px)` | Medium |
-| Avatar container fragmentation | 3 incompatible avatar patterns (semantic container, primitive gradient, alias bg) | Define shared avatar pattern with 3 size tokens; all use semantic container pairs | High |
+| Avatar container fragmentation | **Color reconciled (2026-07 audit):** all three avatar surfaces (`avatar.css`, `person-card.css`, `vacancy-card.css`) now use semantic container pairs — the primitive gradient and the `--interactive-light` alias bg are gone. **Still open (structural, not color):** the three still declare their own size rules rather than sharing one pattern with size tokens. | Define shared avatar pattern with 3 size tokens | Medium |
 | Kanban count pill vs Badge | Count pill is a one-off that duplicates badge functionality with different tokens | Add `badge-neutral` variant; use it instead of custom `.count` | Low |
 | Raw transition values | `.1s` used instead of `var(--duration-fast)` in `button.css`, `more-btn`, `kanban.css`, `vacancy-card.css` | Always `var(--duration-fast) var(--ease-default)` | Medium |
 
