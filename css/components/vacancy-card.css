@@ -61,7 +61,7 @@
 .vacancy-icon {
   width: 40px; height: 40px; flex-shrink: 0;
   border-radius: var(--radius-md);
-  background: var(--interactive-light);
+  background: var(--color-secondary-container);
   display: flex; align-items: center; justify-content: center;
   font-size: 18px;
 }
@@ -78,7 +78,7 @@
   font-size: var(--font-size-body-sm); color: var(--text-muted);
   flex-wrap: wrap;
 }
-.meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
+.meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-outline-variant); flex-shrink: 0; }
 
 .vacancy-stats {
   display: flex; align-items: center; gap: 16px;
@@ -94,15 +94,19 @@
   display: flex; align-items: center; gap: 6px;
   font-size: var(--font-size-label); color: var(--text-secondary);
 }
+/* Avatares tonales: rol semántico container + on-container (par al Avatar canónico),
+   nunca gradientes con primitivos. Cada variante usa su propio par → contraste
+   correcto en light Y dark (antes: --color-on-primary, que se invierte a navy en
+   dark sobre color saturado). */
 .assignee-avatar {
   width: 22px; height: 22px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--error-600), var(--error-500));
+  background: var(--color-error-container);
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-on-primary); font-size: 9px; font-weight: 700;
+  color: var(--color-on-error-container); font-size: 9px; font-weight: 700;
 }
-.assignee-avatar.blue { background: linear-gradient(135deg, var(--secondary-900), var(--secondary-500)); }
-.assignee-avatar.green { background: linear-gradient(135deg, var(--success-500), var(--success-300)); }
-.assignee-avatar.purple { background: linear-gradient(135deg, var(--tertiary-900), var(--tertiary-700)); }
+.assignee-avatar.blue   { background: var(--color-secondary-container); color: var(--color-on-secondary-container); }
+.assignee-avatar.green  { background: var(--color-success-container);   color: var(--color-on-success-container); }
+.assignee-avatar.purple { background: var(--color-tertiary-container);  color: var(--color-on-tertiary-container); }
 
 .vacancy-right {
   display: flex; flex-direction: column; align-items: flex-end; gap: 8px;

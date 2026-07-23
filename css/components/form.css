@@ -117,7 +117,7 @@
 }
 
 input:disabled, select:disabled, textarea:disabled {
-  background: var(--color-surface-variant);
+  background: var(--color-disabled);
   color: var(--color-on-disabled);
   border-color: var(--color-outline);
   cursor: not-allowed;

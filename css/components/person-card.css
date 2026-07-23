@@ -2,7 +2,7 @@
    Amalgama DS — Person (variante de Basic Card)
    NO es un componente aparte: es la variante de dominio "Person" de la Basic Card
    (el primitivo .item — ver item.css), documentada dentro de Basic Card. Solo
-   aporta el avatar circular con gradiente de marca + fondo de superficie; el
+   aporta el avatar circular tonal (Secondary container) + fondo de superficie; el
    layout, padding, gap, hover, foco, título y descripción vienen de
    .item / .item-content / .item-title / .item-description.
 
@@ -38,14 +38,15 @@
    .item es transparente; Person Card es una tarjeta, no una fila embebida). */
 .person-card { background: var(--card-bg); }
 
-/* Avatar circular con gradiente de marca — lo único propio de Person Card.
-   Se coloca en el slot .item-media; centrado vertical (el default del media es
-   align-self:flex-start). */
+/* Avatar circular tonal — usa el par semántico Secondary container/on-container,
+   igual que el Avatar canónico (item.css/avatar.css), no un gradiente con
+   primitivos. Se coloca en el slot .item-media; centrado vertical (el default
+   del media es align-self:flex-start). */
 .person-card .person-avatar {
   width: 44px; height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--secondary-900), var(--secondary-500));
-  color: var(--color-on-primary);
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
   font-size: 15px; font-weight: 600;
   align-self: center;
 }
