@@ -31,13 +31,15 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between gap-3 py-4 text-left text-body-md font-medium text-fg outline-none transition-colors duration-fast ease-default hover:text-link focus-visible:focus-ring [&[data-state=open]>svg]:rotate-180",
+        // shadcn canonical: items-start (chevron top-aligns for 2-line titles),
+        // hover:underline (not a color change), disabled dims + inert.
+        "flex flex-1 items-start justify-between gap-4 py-4 text-left text-body-md font-medium text-fg outline-none transition-colors duration-fast ease-default hover:underline focus-visible:focus-ring disabled:opacity-50 disabled:pointer-events-none [&[data-state=open]>svg]:rotate-180",
         className
       )}
       {...props}
     >
       {children}
-      <ChevronDown className="size-[18px] shrink-0 text-fg-muted transition-transform duration-normal ease-expressive-enter" aria-hidden="true" />
+      <ChevronDown className="size-4 shrink-0 translate-y-0.5 text-fg-muted transition-transform duration-normal ease-expressive-enter" aria-hidden="true" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ))

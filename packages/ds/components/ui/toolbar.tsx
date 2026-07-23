@@ -37,7 +37,9 @@ const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(
     <div
       role="search"
       className={cn(
-        "group flex-1 flex items-center gap-2 min-h-10 px-4 py-2 bg-surface-container-high border border-border rounded-md text-on-surface-variant cursor-text transition-[background,border-color] duration-fast ease-default hover:bg-search-field-hover hover:border-search-field-border-hover focus-within:bg-search-field-focus focus-within:border-secondary",
+        // Desktop SearchField rests on --color-surface (white in light) — par shadcn;
+        // distinct from the mobile SearchBar (search.tsx), which is gray (surface-container-high).
+        "group flex-1 flex items-center gap-2 min-h-10 px-4 py-2 bg-surface border border-border rounded-md text-on-surface-variant cursor-text transition-[background,border-color] duration-fast ease-default hover:bg-search-field-hover hover:border-search-field-border-hover focus-within:bg-search-field-focus focus-within:border-secondary",
         containerClassName
       )}
     >

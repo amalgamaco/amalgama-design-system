@@ -1,16 +1,18 @@
 /**
- * Person Card — tarjeta de persona con avatar, nombre y rol.
+ * Person Card — variante de dominio "Person" de la Basic Card (Item).
  *
  * Cuándo usar: ítem de persona en grillas (avatar + nombre + rol).
  * Cuándo no: vacantes (vacancy-card); datos tabulares de personas (Table).
  * Reemplaza a: cards de perfil custom.
  *
- * Canonical implementation. Decision rule migrated from the (now deleted) buildless css/components/person-card.css.
+ * NOT a standalone primitive — it's the Person variant of Basic Card, composed on the
+ * Item primitive (horizontal row: avatar in ItemMedia + name/role in ItemContent). Only
+ * adds the tonal Secondary avatar + surface bg + hover-shadow. Reconciled from the
+ * buildless rebuild (Item composition) + color audit (avatar → secondary-container pair).
  */
 import * as React from "react"
 import { cn } from "../lib/utils"
-import { Card } from "./card"
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar"
+import { Item, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions } from "./item"
 
 interface PersonCardProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string
@@ -41,24 +43,28 @@ function PersonCard({
       .toUpperCase()
 
   return (
-    <Card
-      className={cn(
-        "flex flex-col items-center text-center gap-2 bg-surface p-5 hover:bg-surface-variant transition-colors",
-        className
-      )}
+    <Item
+      variant="outline"
+      clickable
+      className={cn("bg-card hover:shadow-md", className)}
       {...props}
     >
-      <Avatar size="xl">
-        {avatarSrc && <AvatarImage src={avatarSrc} alt={name} />}
-        <AvatarFallback>{fallback}</AvatarFallback>
-      </Avatar>
-      <div>
-        <p className="font-semibold text-body-sm text-fg">{name}</p>
-        {role && <p className="text-label text-fg-subtle">{role}</p>}
-        {meta && <p className="text-label text-fg-subtle">{meta}</p>}
-      </div>
-      {actions && <div className="flex gap-2 flex-wrap justify-center">{actions}</div>}
-    </Card>
+      <ItemMedia className="self-center">
+        <span className="flex items-center justify-center size-11 rounded-full overflow-hidden bg-secondary-container text-on-secondary-container text-heading-xs font-semibold">
+          {avatarSrc ? (
+            <img src={avatarSrc} alt={name} className="size-full object-cover" />
+          ) : (
+            fallback
+          )}
+        </span>
+      </ItemMedia>
+      <ItemContent>
+        <ItemTitle>{name}</ItemTitle>
+        {role && <ItemDescription>{role}</ItemDescription>}
+        {meta && <ItemDescription>{meta}</ItemDescription>}
+      </ItemContent>
+      {actions && <ItemActions>{actions}</ItemActions>}
+    </Item>
   )
 }
 

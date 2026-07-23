@@ -17,6 +17,11 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         // v10 renders nav in normal flow otherwise, stacking both chevrons on the left.
         month_caption: "flex items-center justify-center h-8 mb-1 px-1",
         caption_label: "font-heading text-body-md font-semibold text-fg",
+        // Month/year dropdown caption (captionLayout="dropdown") — styled to Embassy tokens.
+        dropdowns: "flex items-center justify-center gap-1.5",
+        dropdown_root: "relative inline-flex items-center",
+        dropdown:
+          "appearance-none bg-surface border border-border rounded-md text-body-sm text-fg pl-2 pr-6 py-1 outline-none cursor-pointer transition-colors hover:bg-surface-variant hover:border-outline focus-visible:focus-ring",
         nav: "absolute top-0 inset-x-0 z-10 flex items-center justify-between h-8 px-1",
         button_previous: [
           "flex h-7 w-7 items-center justify-center rounded hover:bg-surface-variant text-fg",

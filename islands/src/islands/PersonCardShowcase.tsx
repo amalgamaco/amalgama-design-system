@@ -1,5 +1,4 @@
 import { PersonCard } from "@ds/person-card"
-import { Button } from "@ds/button"
 
 const people = [
   { name: "María González", role: "Diseñadora UX", meta: "Buenos Aires" },
@@ -13,18 +12,15 @@ export function PersonCardShowcase() {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
         gap: 12,
       }}
     >
+      {/* The whole card is the clickable target — no nested "Ver perfil" button.
+          A nested action inside a clickable row caused overlapping/clipped text in
+          narrow grid cells (buildless fix 41f6153). */}
       {people.map((p) => (
-        <PersonCard
-          key={p.name}
-          {...p}
-          actions={
-            <Button variant="tertiary" size="sm">Ver perfil</Button>
-          }
-        />
+        <PersonCard key={p.name} {...p} />
       ))}
     </div>
   )

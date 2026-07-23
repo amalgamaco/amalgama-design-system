@@ -140,8 +140,8 @@
   --color-chip-elevated-press:  var(--md-comp-chip-elevated-press);
 
   /* Search bar */
-  --md-comp-search-field-hover:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-hover-opacity), var(--color-surface-container-high));
-  --md-comp-search-field-focus:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-focus-opacity), var(--color-surface-container-high));
+  --md-comp-search-field-hover:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-hover-opacity), var(--color-surface));
+  --md-comp-search-field-focus:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-focus-opacity), var(--color-surface));
   --md-comp-search-field-border-hover: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
   --md-comp-search-disabled-bg:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-disabled-container-opacity), transparent);
   --md-comp-search-disabled-text:      color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-disabled-content-opacity),   transparent);
