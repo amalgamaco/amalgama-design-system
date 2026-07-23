@@ -41,7 +41,7 @@ function VacancyCard({
       {...props}
     >
       <Avatar className="h-10 w-10 shrink-0">
-        <AvatarFallback className="bg-primary-container text-on-primary-container text-body-sm font-semibold [&_svg]:size-5">
+        <AvatarFallback className="bg-secondary-container text-on-secondary-container text-body-sm font-semibold [&_svg]:size-5">
           {icon ?? name.slice(0, 2).toUpperCase()}
         </AvatarFallback>
       </Avatar>

@@ -18,6 +18,8 @@ export const Switch = React.forwardRef<
       "disabled:cursor-not-allowed disabled:opacity-40",
       "data-[state=checked]:bg-primary data-[state=checked]:border-transparent",
       "data-[state=unchecked]:bg-surface-variant data-[state=unchecked]:border-outline",
+      // Error/invalid — red track border on the unchecked track (matches buildless).
+      "aria-invalid:data-[state=unchecked]:border-error",
       className
     )}
     {...props}

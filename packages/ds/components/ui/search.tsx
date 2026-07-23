@@ -30,7 +30,11 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
   ({ className, containerClassName, icon, trailing, ...props }, ref) => (
     <div
       className={cn(
-        "flex items-center gap-4 h-14 px-4 rounded-full bg-surface-container-high border border-border min-w-[min(360px,100%)] max-w-[720px] w-full transition-[background,border-color] duration-fast ease-default hover:bg-search-field-hover hover:border-search-field-border-hover focus-within:bg-search-field-focus focus-within:border-secondary",
+        // Mobile SearchBar rests on the GRAY surface-container-high (distinct from the
+        // white desktop SearchField). Its hover/focus state layers mix over that gray
+        // base — NOT the shared --search-field-* tokens, which now mix over white
+        // surface for the desktop field (buildless keeps the two bases separate).
+        "flex items-center gap-4 h-14 px-4 rounded-full bg-surface-container-high border border-border min-w-[min(360px,100%)] max-w-[720px] w-full transition-[background,border-color] duration-fast ease-default hover:bg-[color-mix(in_srgb,var(--color-on-surface)_8%,var(--color-surface-container-high))] hover:border-search-field-border-hover focus-within:bg-[color-mix(in_srgb,var(--color-on-surface)_12%,var(--color-surface-container-high))] focus-within:border-secondary",
         containerClassName
       )}
       role="search"

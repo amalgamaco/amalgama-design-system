@@ -45,6 +45,10 @@ const buttonVariants = cva(
           "px-6 py-2 rounded-md bg-success text-on-success border-transparent hover:bg-success-hover hover:-translate-y-px active:brightness-[0.88] active:translate-y-0 active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
         next:
           "px-6 py-2 rounded-md bg-primary text-on-primary border-transparent hover:bg-primary-hover active:brightness-[0.88] active:scale-[0.96] disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
+        // shadcn variant="link" — inline text link, distinct from `text` (which paints a
+        // state-layer block). Underline on hover, primary-hover on press.
+        link:
+          "px-1 py-2 rounded-md bg-transparent border-transparent text-primary font-medium underline-offset-4 hover:underline active:text-primary-hover disabled:text-on-disabled disabled:cursor-not-allowed disabled:no-underline",
       },
       size: {
         default: "",
