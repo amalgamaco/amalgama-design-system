@@ -18507,13 +18507,7 @@ const [on, setOn] = useState(false)
 
           <!-- Component variants — Separator island -->
           <div class="bd-family-wrap">
-            <div style="max-width:380px;border:1px solid var(--border);border-radius:12px;padding:14px 0">
-  <div style="padding:6px 16px">Sección A</div>
-  <div class="divider"></div>
-  <div style="padding:6px 16px">Sección B</div>
-  <div class="divider divider-inset"></div>
-  <div style="padding:6px 16px">Sección C (divisor inset)</div>
-</div>
+            <div data-island="divider-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -19484,17 +19478,8 @@ const [on, setOn] = useState(false)
 
           <!-- Component variants -->
           <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:24px">
-            <div class="radio-group" role="radiogroup" aria-label="Frecuencia de facturación" style="display:flex;flex-direction:column;gap:10px;max-width:320px">
-            <label class="radio-label" style="display:flex;align-items:center;gap:10px;font-size:14px"><input type="radio" name="freq-demo" class="radio" checked> Mensual</label>
-            <label class="radio-label" style="display:flex;align-items:center;gap:10px;font-size:14px"><input type="radio" name="freq-demo" class="radio"> Anual</label>
-            <label class="radio-label" style="display:flex;align-items:center;gap:10px;font-size:14px"><input type="radio" name="freq-demo" class="radio"> Trimestral</label>
-          </div>
-            <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
-            <div class="bd-state"><label class="radio-label" style="display:flex;align-items:center;gap:10px;font-size:14px"><input type="radio" name="rst-1" class="radio"> Sin seleccionar</label></div>
-            <div class="bd-state"><label class="radio-label" style="display:flex;align-items:center;gap:10px;font-size:14px"><input type="radio" name="rst-2" class="radio" checked> Seleccionado</label></div>
-            <div class="bd-state"><label class="radio-label" style="display:flex;align-items:center;gap:10px;font-size:14px;opacity:.6"><input type="radio" name="rst-3" class="radio" disabled> Deshabilitado</label></div>
-            <div class="bd-state"><label class="radio-label" style="display:flex;align-items:center;gap:10px;font-size:14px;opacity:.6"><input type="radio" name="rst-4" class="radio" checked disabled> Deshab. selec.</label></div>
-          </div>
+            <div data-island="radio-group"></div>
+            <div data-island="radio-states"></div>
             <div>
               <p class="ch-variant-label">Card — opción seleccionable con título y descripción (<code>.radio-card</code>)</p>
               <div class="radio-group" role="radiogroup" aria-label="Plan" style="display:flex;flex-direction:column;gap:10px;max-width:420px">
