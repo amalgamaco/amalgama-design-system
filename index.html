@@ -8620,36 +8620,7 @@ export { Textarea }</code></pre>
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <div style="display:flex;flex-wrap:wrap;gap:16px;max-width:720px">
-  <div class="card" style="flex:1 1 300px">
-    <div class="card-header">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-        <div class="card-title">Diseñadora UX Senior</div>
-        <span class="badge badge-open">Abierta</span>
-      </div>
-      <div class="card-desc">Amalgama · Buenos Aires</div>
-    </div>
-    <div class="card-content">Buscamos una Diseñadora UX con experiencia en sistemas de diseño y productos B2B.</div>
-    <div class="card-footer">
-      <button class="btn-primary btn-sm" type="button">Ver vacante</button>
-      <button class="btn-text btn-sm" type="button">Guardar</button>
-    </div>
-  </div>
-  <div class="card" style="flex:1 1 300px">
-    <div class="card-header">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-        <div class="card-title">Frontend Developer</div>
-        <span class="badge badge-draft">Borrador</span>
-      </div>
-      <div class="card-desc">Amalgama · Remoto</div>
-    </div>
-    <div class="card-content">React, TypeScript y Tailwind. Trabajarás en el stack de productos internos de Amalgama.</div>
-    <div class="card-footer">
-      <button class="btn-primary btn-sm" type="button">Ver vacante</button>
-      <button class="btn-text btn-sm" type="button">Guardar</button>
-    </div>
-  </div>
-</div>
+            <div data-island="card-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -8672,16 +8643,7 @@ export { Textarea }</code></pre>
         <section class="docs-section" id="tc-card-s-1">
           <h2 class="docs-section-title">Elevated card</h2>
           <p class="docs-section-desc">SeparaciÃ³n por <b>elevaciÃ³n</b>: fondo <code>surface-container-low</code> + sombra <code>shadow-sm</code>, sin borde. Se usa cuando la card debe destacarse sobre un fondo del mismo tono. <code>&lt;Card variant="elevated"&gt;</code></p>
-          <div class="bd-family-wrap"><div style="display:flex;justify-content:center;padding:8px 0">
-  <div class="card card-elevated" style="width:100%;max-width:384px">
-    <div class="card-header">
-      <div class="card-title">Título de la card</div>
-      <div class="card-desc">Texto de apoyo que describe el contenido agrupado.</div>
-    </div>
-    <div class="card-content">Contenido de la card sobre la superficie del contenedor.</div>
-    <div class="card-footer"><button class="btn-text btn-sm" type="button">Acción</button></div>
-  </div>
-</div></div>
+          <div class="bd-family-wrap"><div data-island="card-elevated"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -8694,16 +8656,7 @@ export { Textarea }</code></pre>
         <section class="docs-section" id="tc-card-s-2">
           <h2 class="docs-section-title">Filled card</h2>
           <p class="docs-section-desc">Agrupación <b>sutil</b>: fondo <code>surface-container-highest</code>, sin borde ni sombra. Menor énfasis; se apoya solo en el contraste de superficie. <code>&lt;Card variant="filled"&gt;</code></p>
-          <div class="bd-family-wrap"><div style="display:flex;justify-content:center;padding:8px 0">
-  <div class="card card-filled" style="width:100%;max-width:384px">
-    <div class="card-header">
-      <div class="card-title">Título de la card</div>
-      <div class="card-desc">Texto de apoyo que describe el contenido agrupado.</div>
-    </div>
-    <div class="card-content">Contenido de la card sobre la superficie del contenedor.</div>
-    <div class="card-footer"><button class="btn-text btn-sm" type="button">Acción</button></div>
-  </div>
-</div></div>
+          <div class="bd-family-wrap"><div data-island="card-filled"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -8715,16 +8668,7 @@ export { Textarea }</code></pre>
         <section class="docs-section" id="tc-card-s-3">
           <h2 class="docs-section-title">Outlined card</h2>
           <p class="docs-section-desc">Bajo énfasis con <b>borde</b>: superficie + borde 1px, sin elevación. Variante predeterminada; máxima definición de límite en fondos claros. <code>&lt;Card&gt;</code> / <code>&lt;Card variant="outlined"&gt;</code></p>
-          <div class="bd-family-wrap"><div style="display:flex;justify-content:center;padding:8px 0">
-  <div class="card" style="width:100%;max-width:384px">
-    <div class="card-header">
-      <div class="card-title">Título de la card</div>
-      <div class="card-desc">Texto de apoyo que describe el contenido agrupado.</div>
-    </div>
-    <div class="card-content">Contenido de la card sobre la superficie del contenedor.</div>
-    <div class="card-footer"><button class="btn-text btn-sm" type="button">Acción</button></div>
-  </div>
-</div></div>
+          <div class="bd-family-wrap"><div data-island="card-outlined"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -18638,21 +18582,7 @@ const [on, setOn] = useState(false)
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <ul class="list" style="max-width:380px;border:1px solid var(--border);border-radius:12px;overflow:hidden">
-  <li class="list-item">
-    <div class="list-item-headline">Bandeja de entrada</div>
-    <div class="list-item-supporting">128 mensajes sin leer</div>
-  </li>
-  <div class="divider"></div>
-  <li class="list-item">
-    <div class="list-item-headline">Destacados</div>
-    <div class="list-item-supporting">12 mensajes</div>
-  </li>
-  <div class="divider"></div>
-  <li><button class="list-item" type="button">
-    <div class="list-item-headline">Enviados</div>
-  </button></li>
-</ul>
+            <div data-island="list-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -18748,21 +18678,7 @@ const [on, setOn] = useState(false)
         <section class="docs-section" id="tc-list-g-1">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Componente real. Ítem con leading, headline, supporting text y trailing.</p>
-          <div class="bd-family-wrap"><ul class="list" style="max-width:380px;border:1px solid var(--border);border-radius:12px;overflow:hidden">
-  <li class="list-item">
-    <div class="list-item-headline">Bandeja de entrada</div>
-    <div class="list-item-supporting">128 mensajes sin leer</div>
-  </li>
-  <div class="divider"></div>
-  <li class="list-item">
-    <div class="list-item-headline">Destacados</div>
-    <div class="list-item-supporting">12 mensajes</div>
-  </li>
-  <div class="divider"></div>
-  <li><button class="list-item" type="button">
-    <div class="list-item-headline">Enviados</div>
-  </button></li>
-</ul></div>
+          <div class="bd-family-wrap"><div data-island="list-showcase"></div></div>
           <ol class="bd-family-legend"><li>Ítem — la fila completa.</li><li>Leading — avatar, ícono o nada (uniforme).</li><li>Headline — texto principal (1 línea).</li><li>Supporting text — secundario opcional.</li><li>Trailing — metadata, acción o control.</li></ol>
         </section>
         <section class="docs-section" id="tc-list-g-2">

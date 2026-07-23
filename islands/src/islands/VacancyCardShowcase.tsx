@@ -35,7 +35,7 @@ export function VacancyCardShowcase() {
   return (
     <div className="flex flex-col gap-2 max-w-lg">
       {vacancies.map((v) => (
-        <VacancyCard key={v.name} {...v} />
+        <VacancyCard key={v.name} icon="💼" {...v} />
       ))}
     </div>
   )

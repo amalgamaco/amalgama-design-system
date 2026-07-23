@@ -19,7 +19,7 @@ export function PersonCardShowcase() {
       {/* The whole card is the clickable target — no nested "Ver perfil" button.
           A nested action inside a clickable row caused overlapping/clipped text in
           narrow grid cells (buildless fix 41f6153). */}
-      {people.map((p) => (
+      {people.map(({ meta, ...p }) => (
         <PersonCard key={p.name} {...p} />
       ))}
     </div>
