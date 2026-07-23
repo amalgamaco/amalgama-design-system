@@ -192,7 +192,9 @@
   --color-on-disabled:               var(--neutral-300);
   /* Focus & Overlay */
   --color-focus:                     var(--secondary-900);
-  --color-focus-ring:                rgba(79,128,255,.15);
+  /* Derivado de --color-focus (single source of truth), no hardcodeado.
+     Reconciliado desde el color-audit buildless (2026-07). */
+  --color-focus-ring:                color-mix(in srgb, var(--color-focus) 15%, transparent);
   /* Ring de error (inputs .is-error): derivado de --color-error vía color-mix,
      por lo que se recalibra solo en dark. Nunca hardcodear el rgba. */
   --color-error-ring:                color-mix(in srgb, var(--color-error) 12%, transparent);
