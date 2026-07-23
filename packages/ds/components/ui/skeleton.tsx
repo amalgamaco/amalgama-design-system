@@ -19,6 +19,7 @@ const skeletonVariants = cva(
         text:  "h-[14px] mb-2",
         title: "h-[22px] w-3/5 mb-3",
         card:  "h-[80px] mb-2",
+        circle: "size-10 rounded-full",
       },
     },
   }

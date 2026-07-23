@@ -9691,17 +9691,7 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <div class="tabs-demo">
-            <div class="tabs" role="tablist">
-              <button class="tab active" type="button" role="tab" aria-selected="true" id="tabsov-1-general" aria-controls="tabsov-1-panel-general" onclick="switchTab(this,'tabsov-1-general')">General</button>
-              <button class="tab" type="button" role="tab" aria-selected="false" id="tabsov-1-requisitos" aria-controls="tabsov-1-panel-requisitos" tabindex="-1" onclick="switchTab(this,'tabsov-1-requisitos')">Requisitos</button>
-              <button class="tab" type="button" role="tab" aria-selected="false" id="tabsov-1-proceso" aria-controls="tabsov-1-panel-proceso" tabindex="-1" onclick="switchTab(this,'tabsov-1-proceso')">Proceso</button>
-              <span class="tab-indicator"></span>
-            </div>
-            <div class="tab-panel active" id="panel-tabsov-1-general" role="tabpanel" aria-labelledby="tabsov-1-general">Contenido de la pestaña General. Aquí se muestra la información básica de la vacante.</div>
-            <div class="tab-panel" id="panel-tabsov-1-requisitos" role="tabpanel" aria-labelledby="tabsov-1-requisitos" hidden>Contenido de la pestaña Requisitos. Lista de habilidades y experiencia necesaria.</div>
-            <div class="tab-panel" id="panel-tabsov-1-proceso" role="tabpanel" aria-labelledby="tabsov-1-proceso" hidden>Contenido de la pestaña Proceso. Etapas de selección y timeline.</div>
-            </div>
+            <div data-island="tabs-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -11278,17 +11268,7 @@ export function Toaster() {
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <div style="max-width:360px;padding:16px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px">
-  <div class="skeleton skeleton-title"></div>
-  <div class="skeleton skeleton-text" style="width:100%"></div>
-  <div class="skeleton skeleton-text" style="width:85%"></div>
-  <div class="skeleton skeleton-text" style="width:70%"></div>
-  <div style="margin-top:16px"><div class="skeleton skeleton-card" style="width:100%"></div></div>
-  <div style="display:flex;align-items:center;gap:12px;margin-top:16px">
-    <div class="skeleton skeleton-circle"></div>
-    <div style="flex:1"><div class="skeleton skeleton-text" style="width:50%"></div><div class="skeleton skeleton-text" style="width:80%;margin-top:6px"></div></div>
-  </div>
-</div>
+            <div data-island="skeleton-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -23783,11 +23763,7 @@ import { Info } from &quot;lucide-react&quot;
             <li>Estado presionado vía el atributo <code>aria-pressed="true"</code> (selector CSS directo, sin clase extra), alternado por <code>togglePress()</code>.</li>
             <li>Es la base de <b>Chip</b> (filter chip) y comparte lenguaje con <b>Segmented Button</b>.</li>
           </ul>
-          <div class="bd-family-wrap"><div style="display:flex;align-items:center;gap:12px">
-              <button type="button" class="toggle" aria-label="Negrita" aria-pressed="false" onclick="togglePress(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z"/></svg></button>
-              <button type="button" class="toggle" aria-label="Itálica" aria-pressed="true" onclick="togglePress(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg></button>
-              <button type="button" class="toggle toggle-outline" aria-pressed="false" onclick="togglePress(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z"/></svg> Negrita con borde</button>
-            </div></div>
+          <div class="bd-family-wrap"><div data-island="toggle-showcase"></div></div>
 
           <p class="ch-variant-label" style="margin-top:20px">Tamaños — <code>toggle-sm</code> · default · <code>toggle-lg</code></p>
           <div class="bd-family-wrap"><div style="display:flex;align-items:center;gap:12px">

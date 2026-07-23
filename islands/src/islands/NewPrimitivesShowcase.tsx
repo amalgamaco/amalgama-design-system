@@ -26,7 +26,7 @@ export function ToggleShowcase() {
     <div className="flex items-center gap-3">
       <Toggle aria-label="Negrita"><Bold /></Toggle>
       <Toggle aria-label="Itálica" defaultPressed><Italic /></Toggle>
-      <Toggle variant="outline" aria-label="Negrita con borde"><Bold /> Negrita</Toggle>
+      <Toggle variant="outline" aria-label="Negrita con borde"><Bold /> Negrita con borde</Toggle>
     </div>
   )
 }
