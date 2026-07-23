@@ -7188,7 +7188,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
                 <td style="padding:12px;border-bottom:1px solid var(--border);"><code style="font-size:12px;">seg-btn-group-sm</code></td>
                 <td style="padding:12px;font-size:13px;color:var(--ds-text-2);border-bottom:1px solid var(--border);">~28px</td>
                 <td style="padding:12px;border-bottom:1px solid var(--border);">
-                  <div class="seg-btn-group seg-btn-group-sm" role="group"><button type="button" class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Opción A</button><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Opción B</button></div>
+                  <div data-island="seg-btn-size-sm"></div>
                 </td>
               </tr>
               <tr>
@@ -7196,7 +7196,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
                 <td style="padding:12px;border-bottom:1px solid var(--border);"><code style="font-size:12px;">seg-btn-group</code></td>
                 <td style="padding:12px;font-size:13px;color:var(--ds-text-2);border-bottom:1px solid var(--border);">~36px</td>
                 <td style="padding:12px;border-bottom:1px solid var(--border);">
-                  <div class="seg-btn-group" role="group"><button type="button" class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Opción A</button><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Opción B</button></div>
+                  <div data-island="seg-btn-size-md"></div>
                 </td>
               </tr>
               <tr>
@@ -7204,7 +7204,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
                 <td style="padding:12px;"><code style="font-size:12px;">seg-btn-group-lg</code></td>
                 <td style="padding:12px;font-size:13px;color:var(--ds-text-2);">~44px</td>
                 <td style="padding:12px;">
-                  <div class="seg-btn-group seg-btn-group-lg" role="group"><button type="button" class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Opción A</button><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Opción B</button></div>
+                  <div data-island="seg-btn-size-lg"></div>
                 </td>
               </tr>
             </tbody>
@@ -7216,11 +7216,11 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
           <p class="docs-section-desc">Cada segmento admite un ícono inicial (18&nbsp;dp) antes de la etiqueta — como el switch Light/Dark de <strong>Styles → Color Roles</strong>. El ícono hereda el color del segmento: <code>--color-on-surface-variant</code> (no seleccionado) / <code>--color-on-primary-container</code> (seleccionado). Para segmentos solo-ícono, agregá <code>aria-label</code> en cada item.</p>
           <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(148px,1fr));">
             <div class="bd-state">
-              <div class="seg-btn-group" role="group" aria-label="Tema"><button type="button" class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg> Light</button><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> Dark</button></div>
+              <div data-island="seg-btn-icons"></div>
               <div class="bd-state-lbl">Ícono + etiqueta</div>
             </div>
             <div class="bd-state">
-              <div class="seg-btn-group" role="group" aria-label="Vista"><button type="button" class="seg-btn selected" aria-selected="true" aria-label="Lista" onclick="segSwitch(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button><button type="button" class="seg-btn" aria-selected="false" aria-label="Cuadrícula" onclick="segSwitch(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></button></div>
+              <div data-island="seg-btn-icons-only"></div>
               <div class="bd-state-lbl">Solo ícono (con <code>aria-label</code>)</div>
             </div>
           </div>
@@ -7230,16 +7230,16 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
           <h2 class="docs-section-title">Estados</h2>
           <div class="bd-states" style="grid-template-columns:repeat(auto-fit,minmax(148px,1fr));">
             <div class="bd-state">
-              <div class="seg-btn-group" role="group" aria-label="Estado default"><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Opción A</button><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Opción B</button></div>
+              <div data-island="seg-btn-state-default"></div>
               <div class="bd-state-lbl">Default</div>
             </div>
             <div class="bd-state">
-              <div class="seg-btn-group" role="group" aria-label="Estado seleccionado"><button type="button" class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Opción A</button><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Opción B</button></div>
+              <div data-island="seg-btn-state-selected"></div>
               <div class="bd-state-lbl">Seleccionado</div>
               <div class="bd-state-tok">--color-primary-container / --color-on-primary-container</div>
             </div>
             <div class="bd-state">
-              <div class="seg-btn-group" role="group" aria-label="Estado deshabilitado"><button type="button" class="seg-btn selected" aria-selected="true" disabled aria-disabled="true">Opción A</button><button type="button" class="seg-btn" aria-selected="false" disabled aria-disabled="true">Opción B</button></div>
+              <div data-island="seg-btn-state-disabled"></div>
               <div class="bd-state-lbl">Deshabilitado</div>
               <div class="bd-state-tok">onSurface @ 38% / 12%</div>
             </div>
@@ -7317,12 +7317,12 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
         <section class="docs-section" id="tc-seg-btn-g-2">
           <h2 class="docs-section-title">Selección única</h2>
           <p class="ds-p">Por defecto es de <b>selección única</b> (<code>type="single"</code>): siempre hay exactamente un segmento activo. Ideal para cambiar de vista o de período.</p>
-          <div class="bd-family-wrap"><div class="seg-btn-group" role="group" aria-label="Período"><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Día</button><button type="button" class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Semana</button><button type="button" class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Mes</button></div></div>
+          <div class="bd-family-wrap"><div data-island="seg-btn-single"></div></div>
         </section>
         <section class="docs-section" id="tc-seg-btn-g-3">
           <h2 class="docs-section-title">Selección múltiple</h2>
           <p class="ds-p">Con <code>type="multiple"</code> permite <b>varios segmentos activos</b> a la vez — para filtros acumulables o atributos que se combinan.</p>
-          <div class="bd-family-wrap"><div class="seg-btn-group" role="group" aria-label="Días laborables"><button type="button" class="seg-btn selected" aria-pressed="true" onclick="segSwitchMulti(this)">Lun</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitchMulti(this)">Mar</button><button type="button" class="seg-btn selected" aria-pressed="true" onclick="segSwitchMulti(this)">Mié</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitchMulti(this)">Jue</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitchMulti(this)">Vie</button></div></div>
+          <div class="bd-family-wrap"><div data-island="seg-btn-multi"></div></div>
           <p class="ds-p" style="color:var(--text-secondary)">Usá selección múltiple solo cuando las opciones se combinan de verdad; si es "una de varias", mantené la selección única.</p>
         </section>
         <section class="docs-section" id="tc-seg-btn-g-4">
@@ -7492,10 +7492,7 @@ function segSwitch(el) {
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <div class="field-group">
-            <label class="field-label">Nombre completo</label>
-            <input class="field-input" type="text">
-          </div>
+            <div data-island="input-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -8317,10 +8314,7 @@ export { Select }</code></pre>
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <div class="field-group">
-            <label class="field-label">Descripción</label>
-            <textarea class="field-textarea" placeholder="Describe los requisitos del puesto..."></textarea>
-          </div>
+            <div data-island="textarea-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
