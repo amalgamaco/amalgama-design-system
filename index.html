@@ -2173,22 +2173,21 @@ body { overflow-x: clip; }
 .ds-main { overflow-x: clip; }
 .ds-content { overflow-x: clip; }
 
-/* 2. All preview boxes scroll internally, never break the page */
+/* 2. Preview boxes expand to their content — never a short internal scroll trap.
+   The page already hard-clips horizontal overflow at html/body/.ds-main/.ds-content
+   (overflow-x:clip), so previews stay overflow:visible. This is essential: any
+   overflow value other than visible forces BOTH axes to become scroll containers,
+   which clips floating content (Calendar/Date Picker panels, Select/Dropdown/Popover
+   menus) into a tiny box. Wide data (Tables, Data Table) scroll via their OWN wrapper
+   (.table-scroll / .data-table / Scroll Area) — not the preview. */
 .docs-preview {
   max-width: 100%;
-  overflow-x: auto;
   box-sizing: border-box;
 }
 .docs-preview.full-width {
   display: block;
   max-width: 100%;
-  overflow-x: auto;
 }
-/* A preview holding a Select listbox (or Combobox) must let its floating panel
-   escape — otherwise overflow-x:auto (which forces overflow-y:auto) clips the
-   open dropdown in short previews. */
-.docs-preview:has(.select[data-select]),
-.docs-preview:has(.combobox) { overflow: visible; }
 
 /* 3. Code blocks scroll internally */
 .docs-code, pre { max-width: 100%; overflow-x: auto; }
@@ -5230,7 +5229,7 @@ body { overflow-x: clip; }
            the viewport scroll horizontally inside its card instead of being clipped
            (e.g. the large-cell Calendar). */
         @media (max-width: 640px) {
-          .bd-family-wrap { padding: 24px 16px; overflow-x: auto; }
+          .bd-family-wrap { padding: 24px 16px; }
         }
         .bd-family-stage {
           display: flex;
