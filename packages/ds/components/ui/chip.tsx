@@ -34,13 +34,15 @@ const chipVariants = cva(
     // Selected (data-[state=on] from Radix Toggle, or the `.chip-selected` fallback
     // class on the non-toggle path) — Secondary container fill wins over the variant.
     "data-[state=on]:bg-secondary-container data-[state=on]:text-on-secondary-container data-[state=on]:border-transparent data-[state=on]:hover:bg-on-secondary-state-hover data-[state=on]:active:bg-on-secondary-state-press",
-    "disabled:pointer-events-none disabled:opacity-[0.38]"
+    // Disabled: Embassy's dedicated tokens (§5.3), not the MD3 opacity model.
+    // Per-variant container/border below; shared inertness + on-disabled text here.
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:text-on-disabled disabled:shadow-none"
   ),
   {
     variants: {
       variant: {
-        outlined: "border-outline-variant bg-transparent text-on-surface hover:bg-on-surface-state-hover active:bg-on-surface-state-press",
-        elevated: "border-transparent bg-surface-container-low text-on-surface shadow-sm hover:bg-chip-elevated-hover active:bg-chip-elevated-press",
+        outlined: "border-outline-variant bg-transparent text-on-surface hover:bg-on-surface-state-hover active:bg-on-surface-state-press disabled:border-disabled disabled:bg-transparent",
+        elevated: "border-transparent bg-surface-container-low text-on-surface shadow-sm hover:bg-chip-elevated-hover active:bg-chip-elevated-press disabled:border-transparent disabled:bg-disabled",
       },
     },
     defaultVariants: {

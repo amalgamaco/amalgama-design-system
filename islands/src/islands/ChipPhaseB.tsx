@@ -89,7 +89,7 @@ export function ChipElevatedDisabled() {
   return (
     <ChipSet aria-label="Elevado y deshabilitado">
       <Chip variant="elevated">Elevado</Chip>
-      <Chip disabled className="opacity-[0.38] cursor-not-allowed">Deshabilitado</Chip>
+      <Chip variant="elevated" disabled>Deshabilitado</Chip>
     </ChipSet>
   )
 }
