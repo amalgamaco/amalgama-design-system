@@ -1,0 +1,468 @@
+/* Islands CSS entry point.
+   Adapted from amalgama-tailwind-design-system/tailwind.theme.css for the
+   islands context: these components mount INTO Embassy's index.html, which
+   already loads variables.css (tokens) and Inter. We bring Tailwind utilities
+   without preflight (preflight would fight the host page's own reset). */
+
+/* Layer order: `base` (our resets) is lowest priority, then `theme`. Tailwind
+   utilities are imported UNLAYERED below, so they outrank everything here —
+   the button reset beats UA defaults but never fights a utility. */
+@layer base, theme;
+@import "tailwindcss/theme.css" layer(theme);
+
+/* CRITICAL: utilities are intentionally UNLAYERED. Embassy base.css has an
+   unlayered `*{padding:0;margin:0}` reset. Unlayered rules beat @layer by
+   definition; keeping utilities unlayered lets `.px-4` (specificity 0,1,0)
+   win over `*` (0,0,0) on specificity merit. */
+@import "tailwindcss/utilities.css";
+
+/* Enter/exit animation utilities (animate-in, fade-in-0, zoom-in-95,
+   slide-in-from-*, data-[state=closed]:animate-out …) used by Radix overlays:
+   Tooltip, Sheet, Dialog, DropdownMenu, Select. Tailwind v4 port of
+   tailwindcss-animate. */
+@import "tw-animate-css";
+
+@source "./**/*.{ts,tsx}";
+/* The @amalgama/ds package is a file: dep symlinked under node_modules, which
+   Tailwind's auto-content-detection excludes. Scan its component source
+   explicitly so utilities used ONLY inside package components (e.g. the
+   Popover's w-72) are generated. */
+@source "../../packages/ds/components/**/*.{ts,tsx}";
+
+/* The docs site (root index.html + legacy docs/*.html) now styles its component
+   examples and chrome with raw Tailwind utilities (replacing the deprecated
+   css/components/*.css). Scan those HTML files so their utilities are generated
+   into this bundle — the docs site has no other Tailwind build. */
+@source "../../index.html";
+@source "../../docs/*.html";
+
+/* Box-sizing reset scoped to island roots only (replaces preflight).
+   Also covers Radix Portal content (Popover/DropdownMenu/Select/Tooltip/Dialog) —
+   Portals re-parent their content to `document.body`, so it's no longer a DOM
+   descendant of `[data-island]` even though it's logically part of that island's
+   React tree. `[data-radix-popper-content-wrapper]` is the floating-ui wrapper
+   Radix's popper-based primitives (Popover/DropdownMenu/Select/Tooltip) render;
+   `[data-radix-portal]` covers Dialog/Sheet's own portal marker. Without this,
+   any island content that opens inside one of these (e.g. a Calendar inside a
+   Popover, per the Date Picker "docked" composition) silently loses the reset
+   the moment it's portaled, even though it never left the island's React tree. */
+[data-island],
+[data-island] *,
+[data-island] *::before,
+[data-island] *::after,
+[data-radix-popper-content-wrapper],
+[data-radix-popper-content-wrapper] *,
+[data-radix-popper-content-wrapper] *::before,
+[data-radix-popper-content-wrapper] *::after,
+[data-radix-portal],
+[data-radix-portal] *,
+[data-radix-portal] *::before,
+[data-radix-portal] *::after { box-sizing: border-box; }
+
+/* Minimal button reset scoped to islands (the part of Tailwind preflight we
+   still need without enabling full preflight). Embassy base.css does NOT
+   neutralize the UA button appearance, so any island button that doesn't set
+   its own background or border leaks the native control look (grey #efefef
+   fill + 2px outset border) — e.g. calendar day cells and segmented-button
+   segments. Same Portal caveat as the box-sizing reset above applies here —
+   scoped to both the island's own DOM subtree and any Radix portal it opens.
+   Element-selector specificity (0,0,1) stays below utility classes (0,1,0), so
+   components that set their own colour utilities still win. */
+@layer base {
+  [data-island] button,
+  [data-radix-popper-content-wrapper] button,
+  [data-radix-portal] button {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    background-image: none;
+    border: 0 solid currentColor;
+    color: inherit;
+    font: inherit;
+  }
+}
+
+/* ── Hover / press computed tokens (from TW repo hover-tokens.css) ──────── */
+:root {
+  /* Primary hover — not in hover-tokens.css, defined here for button */
+  --color-primary-hover:   color-mix(in srgb, var(--color-primary) 88%, #000);
+  --color-error-hover:     color-mix(in srgb, var(--color-error) 88%, #000);
+  --color-success-hover:   color-mix(in srgb, var(--color-success) 88%, #000);
+
+  /* Button secondary */
+  --color-secondary-container-hover: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
+
+  /* ── MD3 state-layer opacity system tokens (md.sys.state.*) ──
+     Single source of truth for every interaction-state layer (see
+     packages/ds/css/hover-tokens.css). MD3: hover 8% · focus 10% ·
+     pressed 10% · dragged 16%; disabled content 38% · container 12%. */
+  --md-sys-state-hover-opacity:              8%;
+  --md-sys-state-focus-opacity:              10%;
+  --md-sys-state-pressed-opacity:            10%;
+  --md-sys-state-dragged-opacity:            16%;
+  --md-sys-state-disabled-content-opacity:   38%;
+  --md-sys-state-disabled-container-opacity: 12%;
+
+  /* Button text state layers */
+  --color-primary-state-hover:  color-mix(in srgb, var(--color-primary) var(--md-sys-state-hover-opacity),   transparent);
+  --color-primary-state-press:  color-mix(in srgb, var(--color-primary) var(--md-sys-state-pressed-opacity), transparent);
+
+  /* Surface state layers */
+  --color-on-surface-state-hover:  color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-hover-opacity),   transparent);
+  --color-on-surface-state-press:  color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-pressed-opacity), transparent);
+
+  /* Chip selected state */
+  --color-on-secondary-state-hover:  color-mix(in srgb, var(--color-on-secondary-container) var(--md-sys-state-hover-opacity),   var(--color-secondary-container));
+  --color-on-secondary-state-press:  color-mix(in srgb, var(--color-on-secondary-container) var(--md-sys-state-pressed-opacity), var(--color-secondary-container));
+
+  /* Navigation / menu interactive states — Embassy "blue hover" language.
+     Shared by main nav, component side menu, dropdown menus, lists. Hover =
+     soft secondary tint + blue content; selected = secondary-container fill. */
+  /* Canonical md.comp tier + backward-compatible --color-nav-* aliases */
+  --md-comp-nav-hover:            color-mix(in srgb, var(--color-secondary-container) 45%, transparent);
+  --md-comp-nav-hover-content:    var(--color-secondary);
+  --md-comp-nav-press:            color-mix(in srgb, var(--color-secondary-container) 70%, transparent);
+  --md-comp-nav-selected:         var(--color-secondary-container);
+  --md-comp-nav-selected-content: var(--color-on-secondary-container);
+  --color-nav-hover:            var(--md-comp-nav-hover);
+  --color-nav-hover-content:    var(--md-comp-nav-hover-content);
+  --color-nav-press:            var(--md-comp-nav-press);
+  --color-nav-selected:         var(--md-comp-nav-selected);
+  --color-nav-selected-content: var(--md-comp-nav-selected-content);
+
+  /* ── md.comp.* — component-tier state tokens (canonical), with legacy
+     --color-* names kept as backward-compatible aliases for the bg-* utils ── */
+
+  /* Elevated chip */
+  --md-comp-chip-elevated-hover:  color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-hover-opacity),   var(--color-surface-container-low));
+  --md-comp-chip-elevated-press:  color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-pressed-opacity), var(--color-surface-container-low));
+  --color-chip-elevated-hover:  var(--md-comp-chip-elevated-hover);
+  --color-chip-elevated-press:  var(--md-comp-chip-elevated-press);
+
+  /* Search bar */
+  --md-comp-search-field-hover:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-hover-opacity), var(--color-surface-container-high));
+  --md-comp-search-field-focus:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-focus-opacity), var(--color-surface-container-high));
+  --md-comp-search-field-border-hover: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
+  --md-comp-search-disabled-bg:        color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-disabled-container-opacity), transparent);
+  --md-comp-search-disabled-text:      color-mix(in srgb, var(--color-on-surface) var(--md-sys-state-disabled-content-opacity),   transparent);
+  --color-search-field-hover:        var(--md-comp-search-field-hover);
+  --color-search-field-focus:        var(--md-comp-search-field-focus);
+  --color-search-field-border-hover: var(--md-comp-search-field-border-hover);
+  --color-search-disabled-bg:        var(--md-comp-search-disabled-bg);
+  --color-search-disabled-text:      var(--md-comp-search-disabled-text);
+
+  /* Snackbar */
+  --md-comp-snackbar-action-hover:  color-mix(in srgb, var(--color-inverse-primary)    var(--md-sys-state-hover-opacity),   transparent);
+  --md-comp-snackbar-action-press:  color-mix(in srgb, var(--color-inverse-primary)    var(--md-sys-state-pressed-opacity), transparent);
+  --md-comp-snackbar-close-hover:   color-mix(in srgb, var(--color-inverse-on-surface) var(--md-sys-state-hover-opacity),   transparent);
+  --md-comp-snackbar-close-press:   color-mix(in srgb, var(--color-inverse-on-surface) var(--md-sys-state-pressed-opacity), transparent);
+  --color-snackbar-action-hover:  var(--md-comp-snackbar-action-hover);
+  --color-snackbar-action-press:  var(--md-comp-snackbar-action-press);
+  --color-snackbar-close-hover:   var(--md-comp-snackbar-close-hover);
+  --color-snackbar-close-press:   var(--md-comp-snackbar-close-press);
+
+  /* Input error focus ring (bespoke halo, not a state layer) */
+  --color-error-ring: color-mix(in srgb, var(--color-error) 12%, transparent);
+}
+
+/* ── Static @theme — inlined at build time ─────────────────────────────── */
+@theme {
+  /* Font families */
+  --font-heading: 'Epilogue', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+  --font-sans:    'Inter', sans-serif;
+
+  /* Type scale → generates text-{name} utilities */
+  --text-display:    28px;
+  --text-heading-xl: 24px;
+  --text-heading-lg: 22px;
+  --text-heading-md: 18px;
+  --text-heading-sm: 17px;
+  --text-heading-xs: 15px;
+  --text-body-lg:    14px;
+  --text-body-md:    13.5px;
+  --text-body-sm:    12.5px;
+  --text-label:      13px;
+  --text-caption:    12px;
+  --text-badge:      11.5px;
+  --text-overline:   12px;
+  --text-mono-md:    13px;
+  --text-mono-sm:    11px;
+
+  /* Border radii */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Transition durations */
+  --duration-fast:   120ms;
+  --duration-normal: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow:   450ms;
+
+  /* Easing: Standard scheme (MD3 Web fallback) */
+  --ease-default: cubic-bezier(.4,0,.2,1);
+  --ease-enter:   cubic-bezier(0,0,0,1);
+  --ease-exit:    cubic-bezier(.3,0,1,1);
+
+  /* Easing: Expressive scheme (CSS overshoot — spatial only, never opacity/color) */
+  --ease-expressive:       cubic-bezier(.34,1.56,.64,1);
+  --ease-expressive-enter: cubic-bezier(.175,.885,.32,1.4);
+  --ease-expressive-exit:  cubic-bezier(.3,0,.8,.15);
+
+  /* Emphasized decelerate — shared Sheet curve (registers `ease-emphasized`) */
+  --ease-emphasized: cubic-bezier(.32,.72,0,1);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(28,36,56,.06);
+  --shadow-md: 0 4px 16px rgba(28,36,56,.08);
+  --shadow-lg: 0 8px 32px rgba(28,36,56,.12);
+
+  /* Elevated Button elevation — runtime var (flips in dark, see below); the elevated
+     button consumes it via shadow-[var(--btn-elevation)] since Tailwind inlines
+     --shadow-* into utilities and they can't recalibrate for dark. */
+  --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);
+  --btn-elevation-hover: 0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16);
+
+  /* Modal / overlay animations (mirrors packages/ds/tailwind.theme.css) */
+  --animate-fade-in:        fadeIn var(--duration-normal) var(--ease-enter) both;
+  --animate-slide-in-up:    slideInUp var(--duration-medium) var(--ease-enter) both;
+  --animate-slide-in-right: slideInRight var(--duration-normal) var(--ease-enter) both;
+}
+
+/* ── Elevated Button: black elevation in dark so the lift stays visible (the navy
+   light shadow disappears on dark surfaces). Mirrors css/variables.css. ── */
+[data-theme="dark"] {
+  --btn-elevation:       0 1px 2px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.42);
+  --btn-elevation-hover: 0 2px 4px rgba(0,0,0,.60), 0 8px 20px rgba(0,0,0,.50);
+}
+
+/* ── Keyframes for modal / overlay animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Runtime @theme inline — Embassy color roles ────────────────────────── */
+/* These emit var(--*) at build time so they resolve against the host page's
+   variables.css at runtime. Dark mode is automatic: Embassy roles flip under
+   [data-theme="dark"] with zero extra CSS. */
+@theme inline {
+  /* Primary */
+  --color-primary:                    var(--color-primary);
+  --color-on-primary:                 var(--color-on-primary);
+  --color-primary-container:          var(--color-primary-container);
+  --color-on-primary-container:       var(--color-on-primary-container);
+  --color-primary-hover:              var(--color-primary-hover);
+
+  /* Secondary */
+  --color-secondary:                  var(--color-secondary);
+  --color-on-secondary:               var(--color-on-secondary);
+  --color-secondary-container:        var(--color-secondary-container);
+  --color-on-secondary-container:     var(--color-on-secondary-container);
+
+  /* Tertiary */
+  --color-tertiary:                   var(--color-tertiary);
+  --color-on-tertiary:                var(--color-on-tertiary);
+  --color-tertiary-container:         var(--color-tertiary-container);
+  --color-on-tertiary-container:      var(--color-on-tertiary-container);
+
+  /* Error */
+  --color-error:                      var(--color-error);
+  --color-on-error:                   var(--color-on-error);
+  --color-error-container:            var(--color-error-container);
+  --color-on-error-container:         var(--color-on-error-container);
+  --color-error-hover:                var(--color-error-hover);
+  --color-error-ring:                 var(--color-error-ring);
+
+  /* Success */
+  --color-success:                    var(--color-success);
+  --color-on-success:                 var(--color-on-success);
+  --color-success-container:          var(--color-success-container);
+  --color-on-success-container:       var(--color-on-success-container);
+  --color-success-hover:              var(--color-success-hover);
+
+  /* Warning */
+  --color-warning:                    var(--color-warning);
+  --color-on-warning:                 var(--color-on-warning);
+  --color-warning-container:          var(--color-warning-container);
+  --color-on-warning-container:       var(--color-on-warning-container);
+
+  /* Info */
+  --color-info:                       var(--color-info);
+  --color-on-info:                    var(--color-on-info);
+  --color-info-container:             var(--color-info-container);
+  --color-on-info-container:          var(--color-on-info-container);
+
+  /* Surfaces */
+  --color-surface:                    var(--color-surface);
+  --color-surface-dim:                var(--color-surface-dim);
+  --color-surface-bright:             var(--color-surface-bright);
+  --color-surface-container-lowest:   var(--color-surface-container-lowest);
+  --color-surface-container:          var(--color-surface-container);
+  --color-surface-container-low:      var(--color-surface-container-low);
+  --color-surface-container-high:     var(--color-surface-container-high);
+  --color-surface-container-highest:  var(--color-surface-container-highest);
+  --color-surface-variant:            var(--color-surface-variant);
+  --color-on-surface:                 var(--color-on-surface);
+  --color-on-surface-variant:         var(--color-on-surface-variant);
+
+  /* Outline */
+  --color-outline:                    var(--color-outline);
+  --color-outline-variant:            var(--color-outline-variant);
+
+  /* Inverse (Snackbar) */
+  --color-inverse-surface:            var(--color-inverse-surface);
+  --color-inverse-on-surface:         var(--color-inverse-on-surface);
+  --color-inverse-primary:            var(--color-inverse-primary);
+
+  /* Utility */
+  --color-disabled:                   var(--color-disabled);
+  --color-on-disabled:                var(--color-on-disabled);
+  --color-focus:                      var(--color-focus);
+  --color-focus-ring:                 var(--color-focus-ring);
+  --color-scrim:                      var(--color-scrim);
+
+  /* Semantic aliases (fg-*, canvas, card, border) */
+  --color-fg:          var(--text-primary);
+  --color-fg-subtle:   var(--text-secondary);
+  --color-fg-muted:    var(--text-muted);
+  --color-link:        var(--interactive);
+  --color-canvas:      var(--bg);
+  --color-card:        var(--card-bg);
+  --color-border:      var(--border);
+
+  /* Hover / state computed tokens */
+  --color-primary-hover:              var(--color-primary-hover);
+  --color-secondary-container-hover:  var(--color-secondary-container-hover);
+  --color-primary-state-hover:        var(--color-primary-state-hover);
+  --color-primary-state-press:        var(--color-primary-state-press);
+  --color-on-surface-state-hover:     var(--color-on-surface-state-hover);
+  --color-on-surface-state-press:     var(--color-on-surface-state-press);
+  --color-on-secondary-state-hover:   var(--color-on-secondary-state-hover);
+  --color-on-secondary-state-press:   var(--color-on-secondary-state-press);
+  --color-chip-elevated-hover:        var(--color-chip-elevated-hover);
+  --color-chip-elevated-press:        var(--color-chip-elevated-press);
+  --color-search-field-hover:         var(--color-search-field-hover);
+  --color-search-field-focus:         var(--color-search-field-focus);
+  --color-search-field-border-hover:  var(--color-search-field-border-hover);
+  --color-search-disabled-bg:         var(--color-search-disabled-bg);
+  --color-search-disabled-text:       var(--color-search-disabled-text);
+  --color-snackbar-action-hover:      var(--color-snackbar-action-hover);
+  --color-snackbar-action-press:      var(--color-snackbar-action-press);
+  --color-snackbar-close-hover:       var(--color-snackbar-close-hover);
+  --color-snackbar-close-press:       var(--color-snackbar-close-press);
+
+  /* Chart categorical palette — never --color-primary (flips white in dark mode) */
+  --color-chart-1: var(--color-secondary);
+  --color-chart-2: var(--color-tertiary);
+  --color-chart-3: var(--color-success);
+  --color-chart-4: var(--color-warning);
+  --color-chart-5: var(--color-info);
+}
+
+/* ── Dark mode variant ───────────────────────────────────────────────────── */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ── Custom utilities (Tailwind v4 @utility) ────────────────────────────── */
+@utility focus-ring {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+@utility skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-variant) 25%,
+    var(--color-surface-container-highest) 50%,
+    var(--color-surface-variant) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* --tw-duration set alongside transition-duration: tw-animate-css's
+   animate-in/animate-out (Radix Dialog/Sheet/etc.) reads --tw-duration
+   for animation-duration, not transition-duration. */
+@utility duration-fast {
+  --tw-duration: 120ms;
+  transition-duration: 120ms;
+}
+
+@utility duration-normal {
+  --tw-duration: 200ms;
+  transition-duration: 200ms;
+}
+
+@utility duration-medium {
+  --tw-duration: 300ms;
+  transition-duration: 300ms;
+}
+
+@utility duration-slow {
+  --tw-duration: 450ms;
+  transition-duration: 450ms;
+}
+
+/* Shared Sheet slide duration (500ms) for all sides. */
+@utility duration-sheet {
+  --tw-duration: 500ms;
+  transition-duration: 500ms;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Grid/list entrance (mirrors packages/ds/tailwind.theme.css) ── */
+@keyframes ds-grid-enter {
+  from { opacity: 0; transform: translateY(16px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@utility animate-grid-enter {
+  animation-name: ds-grid-enter;
+  animation-duration: var(--tw-duration, var(--duration-medium));
+  animation-timing-function: var(--tw-ease, var(--ease-expressive-enter));
+  animation-fill-mode: both;
+}
+
+/* ── Reduced motion (mirrors packages/ds/tailwind.theme.css) ── */
+@media (prefers-reduced-motion: reduce) {
+  [data-island] *, [data-island] *::before, [data-island] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes emb-linear {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+/* ── Sonner: action button → Embassy "DESHACER" pattern ─────────────────── */
+/* Sonner portals to <body>, outside [data-island], so this rule is global. */
+[data-sonner-toast] [data-button] {
+  background: transparent !important;
+  color: var(--color-inverse-primary) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: 11.5px;
+  padding-inline: 4px;
+  height: auto;
+}

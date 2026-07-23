@@ -1,0 +1,341 @@
+/* tailwind.theme.css
+   Amalgama Design System — Tailwind v4 theme entry point.
+   Consumer usage (Next.js, Vite, etc.):
+     @import "@amalgama/ds/tailwind.theme.css";
+   This file does NOT replace the HTML CSS path — it adds a parallel Tailwind path.
+   Requires: Google Fonts loaded separately (see CLAUDE.md).
+*/
+
+@import "tailwindcss";
+
+/* 1. DS token source of truth — NEVER modify this file */
+@import "./css/variables.css";
+
+/* 2. Computed hover/press color-mix tokens */
+@import "./css/hover-tokens.css";
+
+/* ══════════════════════════════════════
+   Static @theme — Tailwind inlines these at build time.
+   Used for values that do NOT need dark-mode recalibration.
+══════════════════════════════════════ */
+@theme {
+  /* ── Border radius (DS scale overrides Tailwind defaults) ── */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* ── Font families ── */
+  --font-heading: 'Epilogue', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+
+  /* ── Font sizes → generates text-{name} utilities ── */
+  --text-display:     28px;
+  --text-heading-xl:  24px;
+  --text-heading-lg:  22px;
+  --text-heading-md:  18px;
+  --text-heading-sm:  17px;
+  --text-heading-xs:  15px;
+  --text-body-lg:     14px;
+  --text-body-md:     13.5px;
+  --text-body-sm:     12.5px;
+  --text-label:       13px;
+  --text-caption:     12px;
+  --text-badge:       11.5px;
+  --text-overline:    12px;
+  --text-mono-md:     13px;
+  --text-mono-sm:     11px;
+
+  /* ── Font weights → generates font-{name} utilities ── */
+  --font-weight-regular:   400;
+  --font-weight-medium:    500;
+  --font-weight-semibold:  600;
+  --font-weight-bold:      700;
+  --font-weight-extrabold: 800;
+
+  /* ── Transition durations ── */
+  --duration-fast:   120ms;
+  --duration-normal: 200ms;
+  --duration-medium: 300ms;
+  --duration-slow:   450ms;
+
+  /* ── Easing: Standard scheme (MD3 Web fallback — functional, minimal bounce) ── */
+  --ease-default: cubic-bezier(.4,0,.2,1);
+  --ease-enter:   cubic-bezier(0,0,0,1);
+  --ease-exit:    cubic-bezier(.3,0,1,1);
+
+  /* ── Easing: Expressive scheme (CSS overshoot approximating MD3's spring
+     physics — spatial properties only, never opacity/color) ── */
+  --ease-expressive:       cubic-bezier(.34,1.56,.64,1);
+  --ease-expressive-enter: cubic-bezier(.175,.885,.32,1.4);
+  --ease-expressive-exit:  cubic-bezier(.3,0,.8,.15);
+
+  /* ── Emphasized decelerate — shared Sheet curve (registers `ease-emphasized`).
+     Every edge-anchored Sheet side (right/left/bottom/top) moves as one system. ── */
+  --ease-emphasized: cubic-bezier(.32,.72,0,1);
+
+  /* ── Shadows (static — same in light & dark) ── */
+  --shadow-sm: 0 1px 3px rgba(28,36,56,.06);
+  --shadow-md: 0 4px 16px rgba(28,36,56,.08);
+  --shadow-lg: 0 8px 32px rgba(28,36,56,.12);
+
+  /* ── Modal / overlay animations ── */
+  --animate-fade-in:        fadeIn var(--duration-normal) var(--ease-enter) both;
+  --animate-slide-in-up:    slideInUp var(--duration-medium) var(--ease-enter) both;
+  --animate-slide-in-right: slideInRight var(--duration-normal) var(--ease-enter) both;
+
+  /* ── Accordion / Collapsible height animations (Radix drives the target height
+     via --radix-*-content-height). Registers the `animate-accordion-down/up`
+     utilities the Accordion component consumes. ── */
+  --animate-accordion-down: accordion-down var(--duration-fast) var(--ease-default);
+  --animate-accordion-up:   accordion-up var(--duration-fast) var(--ease-default);
+
+  /* ── Input OTP fake caret blink (registers `animate-caret-blink`). ── */
+  --animate-caret-blink: caret-blink 1s ease-out infinite;
+}
+
+/* ══════════════════════════════════════
+   Runtime @theme inline — utilities emit var(--*) at build time.
+   Dark mode via [data-theme="dark"] recalibrates the vars at runtime →
+   no Tailwind dark: variant needed.
+══════════════════════════════════════ */
+@theme inline {
+  /* ── Primary ── */
+  --color-primary:                    var(--color-primary);
+  --color-on-primary:                 var(--color-on-primary);
+  --color-primary-container:          var(--color-primary-container);
+  --color-on-primary-container:       var(--color-on-primary-container);
+  --color-primary-hover:              var(--color-primary-hover);
+
+  /* ── Secondary ── */
+  --color-secondary:                  var(--color-secondary);
+  --color-on-secondary:               var(--color-on-secondary);
+  --color-secondary-container:        var(--color-secondary-container);
+  --color-on-secondary-container:     var(--color-on-secondary-container);
+
+  /* ── Tertiary ── */
+  --color-tertiary:                   var(--color-tertiary);
+  --color-on-tertiary:                var(--color-on-tertiary);
+  --color-tertiary-container:         var(--color-tertiary-container);
+  --color-on-tertiary-container:      var(--color-on-tertiary-container);
+
+  /* ── Error ── */
+  --color-error:                      var(--color-error);
+  --color-on-error:                   var(--color-on-error);
+  --color-error-container:            var(--color-error-container);
+  --color-on-error-container:         var(--color-on-error-container);
+  --color-error-hover:                var(--color-error-hover);
+
+  /* ── Success ── */
+  --color-success:                    var(--color-success);
+  --color-on-success:                 var(--color-on-success);
+  --color-success-container:          var(--color-success-container);
+  --color-on-success-container:       var(--color-on-success-container);
+  --color-success-hover:              var(--color-success-hover);
+
+  /* ── Warning ── */
+  --color-warning:                    var(--color-warning);
+  --color-on-warning:                 var(--color-on-warning);
+  --color-warning-container:          var(--color-warning-container);
+  --color-on-warning-container:       var(--color-on-warning-container);
+
+  /* ── Info ── */
+  --color-info:                       var(--color-info);
+  --color-on-info:                    var(--color-on-info);
+  --color-info-container:             var(--color-info-container);
+  --color-on-info-container:          var(--color-on-info-container);
+
+  /* ── Surfaces ── */
+  --color-surface:                    var(--color-surface);
+  --color-surface-dim:                var(--color-surface-dim);
+  --color-surface-bright:             var(--color-surface-bright);
+  --color-surface-container-lowest:   var(--color-surface-container-lowest);
+  --color-surface-container:          var(--color-surface-container);
+  --color-surface-container-low:      var(--color-surface-container-low);
+  --color-surface-container-high:     var(--color-surface-container-high);
+  --color-surface-container-highest:  var(--color-surface-container-highest);
+  --color-surface-variant:            var(--color-surface-variant);
+  --color-on-surface:                 var(--color-on-surface);
+  --color-on-surface-variant:         var(--color-on-surface-variant);
+
+  /* ── Outline ── */
+  --color-outline:                    var(--color-outline);
+  --color-outline-variant:            var(--color-outline-variant);
+
+  /* ── Inverse ── */
+  --color-inverse-surface:            var(--color-inverse-surface);
+  --color-inverse-on-surface:         var(--color-inverse-on-surface);
+  --color-inverse-primary:            var(--color-inverse-primary);
+
+  /* ── Utility ── */
+  --color-disabled:                   var(--color-disabled);
+  --color-on-disabled:                var(--color-on-disabled);
+  --color-focus:                      var(--color-focus);
+  --color-focus-ring:                 var(--color-focus-ring);
+  --color-scrim:                      var(--color-scrim);
+
+  /* ── Semantic aliases (clean utility names for common roles) ── */
+  --color-fg:          var(--text-primary);    /* page headings + body text = brand navy  */
+  --color-fg-subtle:   var(--text-secondary);  /* secondary text (#353A4A / #BFC1C8 dark) */
+  --color-fg-muted:    var(--text-muted);      /* muted / disabled text                   */
+  --color-link:        var(--interactive);     /* interactive accent = color-secondary     */
+  --color-canvas:      var(--bg);              /* page background                         */
+  --color-card:        var(--card-bg);         /* card / container background             */
+  --color-border:      var(--border);          /* container border (10% on-surface)        */
+
+  /* ── Computed hover/state tokens (from hover-tokens.css) ── */
+  --color-secondary-container-hover: var(--color-secondary-container-hover);
+  --color-primary-state-hover:       var(--color-primary-state-hover);
+  --color-primary-state-press:       var(--color-primary-state-press);
+  --color-on-surface-state-hover:    var(--color-on-surface-state-hover);
+  --color-on-surface-state-press:    var(--color-on-surface-state-press);
+  --color-on-secondary-state-hover:  var(--color-on-secondary-state-hover);
+  --color-on-secondary-state-press:  var(--color-on-secondary-state-press);
+  --color-chip-elevated-hover:       var(--color-chip-elevated-hover);
+  --color-chip-elevated-press:       var(--color-chip-elevated-press);
+  --color-search-field-hover:        var(--color-search-field-hover);
+  --color-search-field-focus:        var(--color-search-field-focus);
+  --color-search-field-border-hover: var(--color-search-field-border-hover);
+  --color-search-disabled-bg:        var(--color-search-disabled-bg);
+  --color-search-disabled-text:      var(--color-search-disabled-text);
+  --color-snackbar-action-hover:     var(--color-snackbar-action-hover);
+  --color-snackbar-action-press:     var(--color-snackbar-action-press);
+  --color-snackbar-close-hover:      var(--color-snackbar-close-hover);
+  --color-snackbar-close-press:      var(--color-snackbar-close-press);
+  --color-error-ring:                var(--color-error-ring);
+
+  /* ── Chart categorical palette (Chart component) ──
+     Never --color-primary: it flips to white in dark mode (same rule as
+     Tabs, GOVERNANCE.md §5.6) and would read as "no series" on a chart. */
+  --color-chart-1: var(--color-secondary);
+  --color-chart-2: var(--color-tertiary);
+  --color-chart-3: var(--color-success);
+  --color-chart-4: var(--color-warning);
+  --color-chart-5: var(--color-info);
+}
+
+/* ── Keyframes for modal / overlay animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Custom keyframe for Skeleton shimmer ── */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Accordion / Collapsible height keyframes (Radix sets the content-height var) ── */
+@keyframes accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+@keyframes caret-blink {
+  0%, 70%, 100% { opacity: 1; }
+  20%, 50%      { opacity: 0; }
+}
+
+/* ── Grid/list entrance — spatial (translateY + scale), pairs with per-item
+   animation-delay for a staggered cascade. Reads --tw-duration/--tw-ease so
+   it inherits whichever duration-*/ease-* utility classes are applied
+   alongside it — swap ease-expressive-enter (bounce) for ease-enter
+   (Standard, no bounce) to change scheme with no other code change. ── */
+@keyframes ds-grid-enter {
+  from { opacity: 0; transform: translateY(16px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@utility animate-grid-enter {
+  animation-name: ds-grid-enter;
+  animation-duration: var(--tw-duration, var(--duration-medium));
+  animation-timing-function: var(--tw-ease, var(--ease-expressive-enter));
+  animation-fill-mode: both;
+}
+
+/* ── Reduced motion — built into the DS, not a consumer responsibility.
+   Any project that imports this theme file gets this automatically.
+   Per-component overrides (e.g. Snackbar's reduced-motion fade) may still
+   define their own tighter @media (prefers-reduced-motion: reduce) rule. ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ══════════════════════════════════════
+   Custom utilities — patterns not expressible as atomic Tailwind classes.
+══════════════════════════════════════ */
+@layer utilities {
+  /* Accessible focus ring: outline 2px + 4px shadow halo. */
+  .focus-ring {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--color-focus-ring);
+  }
+
+  /* Skeleton shimmer gradient (requires background-size + keyframe). */
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--color-surface-variant) 25%,
+      var(--color-surface-container-highest) 50%,
+      var(--color-surface-variant) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Contenteditable placeholder via ::before. */
+  .desc-placeholder:empty::before {
+    content: attr(data-placeholder);
+    color: var(--color-on-disabled);
+    pointer-events: none;
+  }
+}
+
+/* ── Transition duration utilities ──
+   Set --tw-duration alongside transition-duration: tw-animate-css's
+   animate-in/animate-out (used by Radix Dialog/Sheet/etc.) reads
+   --tw-duration for animation-duration, not transition-duration — without
+   it these utilities silently no-op on animation-based components. */
+@utility duration-fast {
+  --tw-duration: 120ms;
+  transition-duration: 120ms;
+}
+
+@utility duration-normal {
+  --tw-duration: 200ms;
+  transition-duration: 200ms;
+}
+
+@utility duration-medium {
+  --tw-duration: 300ms;
+  transition-duration: 300ms;
+}
+
+@utility duration-slow {
+  --tw-duration: 450ms;
+  transition-duration: 450ms;
+}
+
+/* Shared Sheet slide duration (500ms) for all sides. */
+@utility duration-sheet {
+  --tw-duration: 500ms;
+  transition-duration: 500ms;
+}

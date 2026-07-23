@@ -1,7 +1,20 @@
 {
   "name": "amalgama-design-system",
   "version": "1.0.0",
-  "description": "Amalgama Design System (Embassy) — docs site (index.html), tokens, governance, and the buildless css/ + components/ layer. No build step; open index.html directly.",
+  "description": "Amalgama Design System (Embassy) — monorepo root: docs site (index.html), tokens, governance, the buildless css/ + components/ layer, and the @amalgama/ds package (packages/ds).",
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "workspaces": [
+    "packages/ds",
+    "islands"
+  ],
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.16",
+    "@radix-ui/react-alert-dialog": "^1.1.19",
+    "@radix-ui/react-aspect-ratio": "^1.1.11",
+    "@radix-ui/react-collapsible": "^1.1.16",
+    "@radix-ui/react-hover-card": "^1.1.19",
+    "@radix-ui/react-label": "^2.1.11",
+    "@radix-ui/react-scroll-area": "^1.2.14"
+  }
 }
