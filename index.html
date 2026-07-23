@@ -5466,13 +5466,7 @@ body { overflow-x: clip; }
 
           <!-- Button family visual — plain HTML/CSS -->
           <div class="bd-family-wrap">
-            <div class="bd-family-stage">
-              <div class="bd-family-col"><button class="btn-elevated bd-family-btn" type="button" style="pointer-events:none">Elevado</button><div class="bd-family-num">1</div></div>
-              <div class="bd-family-col"><button class="btn-primary bd-family-btn" type="button" style="pointer-events:none">Relleno</button><div class="bd-family-num">2</div></div>
-              <div class="bd-family-col"><button class="btn-secondary bd-family-btn" type="button" style="pointer-events:none">Tonal</button><div class="bd-family-num">3</div></div>
-              <div class="bd-family-col"><button class="btn-tertiary bd-family-btn" type="button" style="pointer-events:none">Con borde</button><div class="bd-family-num">4</div></div>
-              <div class="bd-family-col"><button class="btn-text bd-family-btn" type="button" style="pointer-events:none">Texto</button><div class="bd-family-num">5</div></div>
-            </div>
+            <div data-island="button-showcase"></div>
           </div>
 
           <!-- Legend -->
@@ -6431,8 +6425,8 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Uso</h2>
           <p class="ds-p">Los botones comunican <b>acciones</b> que la persona puede tomar: la principal de una pantalla, sus alternativas secundarias y las de menor prioridad. Cada estilo carga un <b>nivel de énfasis</b> distinto, y en cada contexto hay <b>una sola acción primaria</b>.</p>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Do</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;gap:8px"><button class="btn-primary" type="button">Publicar</button><button class="btn-tertiary" type="button">Guardar borrador</button><button class="btn-text" type="button">Cancelar</button></div></div><div class="bd-dd-note">Una sola acción primaria por contexto; las demás en menor jerarquía.</div></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ Don't</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;gap:8px"><button class="btn-primary" type="button">Publicar</button><button class="btn-primary" type="button">Guardar borrador</button><button class="btn-primary" type="button">Cancelar</button></div></div><div class="bd-dd-note">Varias primarias compiten entre sí y diluyen la acción principal.</div></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Do</div><div class="bd-dd-body"><div class="sbd-stage center"><div data-island="button-do-single-primary"></div></div><div class="bd-dd-note">Una sola acción primaria por contexto; las demás en menor jerarquía.</div></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ Don't</div><div class="bd-dd-body"><div class="sbd-stage center"><div data-island="button-dont-multi-primary"></div></div><div class="bd-dd-note">Varias primarias compiten entre sí y diluyen la acción principal.</div></div></div>
           </div>
           <h3 class="ds-h3" style="margin-top:24px">Jerarquía y énfasis</h3>
           <p class="ds-p">Elegí el estilo por el peso de la acción, no por gusto visual:</p>
@@ -6452,13 +6446,7 @@ body { overflow-x: clip; }
         <section class="docs-section" id="tc-button-g-1">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Componente real. Las partes que lo componen:</p>
-          <div class="bd-family-wrap"><div class="bd-family-stage">
-              <div class="bd-family-col"><button class="btn-elevated bd-family-btn" type="button" style="pointer-events:none">Elevado</button><div class="bd-family-num">1</div></div>
-              <div class="bd-family-col"><button class="btn-primary bd-family-btn" type="button" style="pointer-events:none">Relleno</button><div class="bd-family-num">2</div></div>
-              <div class="bd-family-col"><button class="btn-secondary bd-family-btn" type="button" style="pointer-events:none">Tonal</button><div class="bd-family-num">3</div></div>
-              <div class="bd-family-col"><button class="btn-tertiary bd-family-btn" type="button" style="pointer-events:none">Con borde</button><div class="bd-family-num">4</div></div>
-              <div class="bd-family-col"><button class="btn-text bd-family-btn" type="button" style="pointer-events:none">Texto</button><div class="bd-family-num">5</div></div>
-            </div></div>
+          <div class="bd-family-wrap"><div data-island="button-showcase"></div></div>
           <ol class="bd-family-legend"><li>Contenedor — superficie con la forma y el color de la variante.</li><li>Label — verbo de acción específico.</li><li>Ícono inicial — opcional, refuerza el significado.</li><li>Estado — hover / foco (<code>focus-ring</code>) / presionado / deshabilitado.</li></ol>
         </section>
         <section class="docs-section" id="tc-button-g-2">
@@ -6686,7 +6674,7 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Modificadores semánticos</h2>
           <p class="docs-section-desc">Los modificadores <code>.btn-danger</code> y <code>.btn-success</code> se aplican <strong>sobre</strong> <code>.btn-primary</code>. Son la única excepción donde un botón cambia de color semántico.</p>
           <div class="bd-stage" style="margin-bottom:16px">
-            <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn-primary btn-danger" type="button">Eliminar</button><button class="btn-primary btn-success" type="button">Aprobar</button></div>
+            <div data-island="button-semantic-preview"></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
@@ -6883,7 +6871,7 @@ function setLoading(btn, isLoading) {
           <div class="bd-card" style="max-width:420px;margin-bottom:16px">
             <p style="font:700 15px 'Epilogue';color:var(--ds-text-1);margin:0 0 8px">¿Eliminar esta vacante?</p>
             <p style="font-size:13px;color:var(--ds-text-3);margin:0 0 20px;line-height:1.6">Esta acción no se puede deshacer. La vacante y todos sus postulantes serán eliminados permanentemente.</p>
-            <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn-tertiary" type="button">Cancelar</button><button class="btn-primary btn-danger" type="button">Eliminar</button></div>
+            <div data-island="button-destructive-preview"></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
