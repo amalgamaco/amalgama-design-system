@@ -3590,7 +3590,6 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-checkbox" onclick="navigate('c-checkbox')">Checkbox</div>
       <div class="ds-nav-item" data-section="c-chip" onclick="navigate('c-chip')">Chips</div>
       <div class="ds-nav-item" data-section="c-collapsible" onclick="navigate('c-collapsible')">Collapsible</div>
-      <div class="ds-nav-item" data-section="c-date-picker" onclick="navigate('c-date-picker')">Date Picker</div>
       <div class="ds-nav-item" data-section="c-dialog" onclick="navigate('c-dialog')">Dialog</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-dialog" onclick="navigate('c-dialog')">Alert Dialog (variant)</div>
@@ -7700,7 +7699,7 @@ function segSwitch(el) {
           <p class="ds-p">El campo de texto permite ingresar y editar texto libre — nombres, correos, búsquedas — en formularios de creación y edición.</p>
           <div class="bd-grid c2">
             <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>El usuario debe ingresar texto libre: nombres, correos, búsquedas.</li><li>Formularios de creación o edición de registros.</li><li>Campos con validación en tiempo real o al enviar.</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Selección de una lista finita de opciones → <b>Select o Radio</b>.</li><li>Fechas → <b>Date Picker</b>.</li><li>Texto largo con formato → <b>Textarea</b>.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Selección de una lista finita de opciones → <b>Select o Radio</b>.</li><li>Fechas → <b>Calendar</b> (o su composición Date Picker).</li><li>Texto largo con formato → <b>Textarea</b>.</li></ul></div></div>
           </div>
         </section>
         <section class="docs-section" id="tc-input-g-1">
@@ -18334,7 +18333,8 @@ const [on, setOn] = useState(false)
           <p class="bd-lead">El Calendar muestra un mes en grilla y permite elegir un día. Es la base del Date Picker, y también se usa en línea cuando el calendario debe estar siempre visible.</p>
           <ul class="bd-overview-list">
             <li><b>Composición:</b> <code>.calendar</code> · <code>.calendar-header</code> (nav ‹ ›) · <code>.calendar-weekdays</code> · <code>.calendar-grid</code> con <code>.calendar-day</code>.</li>
-            <li><b>Patrones</b> (en Specs): rango, selector de mes/año, presets, fecha + hora, días reservados, tamaño de celda y números de semana.</li>
+            <li><b>Patrones</b> (en Specs): rango, selector de mes/año, presets, días reservados, tamaño de celda y números de semana.</li>
+            <li><b>Composiciones</b> (en Specs): <b>Date Picker</b> (campo + popover) y <b>Date &amp; Time Picker</b> — el Calendar es la base; la presentación (inline, popover, dialog o sheet) se elige según el contexto (ver Guidelines).</li>
             <li>Estados por token: <code>today</code>, <code>selected</code>, <code>range</code>, <code>disabled</code>, <code>booked</code> — sin overrides por tema.</li>
           </ul>
           <!-- Overview = solo el Calendar básico. Los demás patrones viven en Specs. -->
@@ -18365,8 +18365,12 @@ const [on, setOn] = useState(false)
             </div>
           </div></div>
 
-          <h2 class="docs-section-title" style="margin-top:32px">Date and time picker</h2>
-          <p class="docs-section-desc">Compuesto: el <b>Date Picker</b> (trigger + popover) con el Calendar y una fila de hora (<code>&lt;input type="time"&gt;</code> nativo) dentro del panel — el trigger refleja fecha · hora.</p>
+          <h2 class="docs-section-title" style="margin-top:32px">Date Picker (campo + popover)</h2>
+          <p class="docs-section-desc">Composición <b>docked</b>: un <code>Button</code> con ícono de calendario abre un panel flotante (<code>.date-picker</code>) con el <code>Calendar</code> adentro; cierra al elegir. Es la presentación por defecto en formularios — no ocupa espacio permanente en el layout. Para rango, el mismo patrón con <code>data-cal-mode="range"</code>.</p>
+          <div class="bd-family-wrap"><div class="date-picker"><button type="button" class="date-picker-trigger btn-tertiary date-picker-trigger-empty" onclick="toggleDatePicker(this)" style="width:240px;justify-content:flex-start"><svg class="date-picker-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Elegir fecha</button><div class="date-picker-panel" hidden><div class="calendar" data-calendar="2026-07" data-cal-caption="dropdown"></div></div></div></div>
+
+          <h2 class="docs-section-title" style="margin-top:32px">Date &amp; Time Picker (composición)</h2>
+          <p class="docs-section-desc">El mismo Date Picker con una fila de hora (<code>&lt;input type="time"&gt;</code> nativo) dentro del panel — el trigger refleja fecha · hora.</p>
           <div class="bd-family-wrap"><div class="date-picker"><button type="button" class="date-picker-trigger btn-tertiary date-picker-trigger-empty" onclick="toggleDatePicker(this)" style="width:260px;justify-content:flex-start"><svg class="date-picker-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Elegir fecha y hora</button>
             <div class="date-picker-panel" hidden>
               <div class="calendar" data-calendar="2026-07"></div>
@@ -18395,9 +18399,28 @@ const [on, setOn] = useState(false)
         <section class="docs-section">
           <h2 class="docs-section-title">Cuándo usar</h2>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir una fecha o rango con contexto de mes.</li><li>Inline cuando el calendario debe estar siempre visible.</li><li>Con presets para rangos frecuentes (últimos 7/30 días).</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir solo mes/año → <b>Select</b>.</li><li>Fecha por teclado sin grilla → Input nativo <code>type="date"</code>.</li><li>Como popover anclado a un campo → <b>Date Picker</b>.</li></ul></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir una fecha o rango con contexto de mes.</li><li>Inline cuando el calendario debe estar siempre visible.</li><li>Como campo de formulario → composición <b>Date Picker</b> (campo + popover, abajo).</li><li>Con presets para rangos frecuentes (últimos 7/30 días).</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir solo mes/año → <b>Select</b>.</li><li>Fecha lejana escrita a mano como única vía → sumá Input nativo <code>type="date"</code>.</li><li>Hora exacta sola (sin fecha) → un time picker.</li></ul></div></div>
           </div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">Composiciones — cómo presentar el Calendar</h2>
+          <p class="ds-p">El <code>Calendar</code> es la base; la presentación se elige según el contexto. Todas reutilizan el mismo Calendar tematizado con tokens Embassy — no son componentes aparte.</p>
+          <div class="bd-grid c2">
+            <div class="bd-dd"><div class="bd-dd-head" style="border-bottom:1px solid var(--border)">Inline — siempre visible</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Cuando elegir la fecha <b>es la tarea principal</b> (agenda, panel de reservas embebido).</li><li>Ocupa espacio permanente — no lo uses si el calendario compite con el resto del formulario.</li></ul></div></div>
+            <div class="bd-dd"><div class="bd-dd-head" style="border-bottom:1px solid var(--border)">Popover — Date Picker (docked)</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Default en formularios:</b> un campo con ícono abre el Calendar en un panel flotante; cierra al elegir.</li><li>No ocupa espacio permanente; trigger <code>Button variant="tertiary"</code> (campo outlined).</li></ul></div></div>
+            <div class="bd-dd"><div class="bd-dd-head" style="border-bottom:1px solid var(--border)">Dialog — modal</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Pantallas compactas o cuando la elección <b>requiere foco total</b> (scrim + Calendar centrado).</li><li>Se compone envolviendo el Calendar en un <code>Dialog</code> — sin componente aparte.</li></ul></div></div>
+            <div class="bd-dd"><div class="bd-dd-head" style="border-bottom:1px solid var(--border)">Sheet — mobile</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>En <b>mobile</b>, un <b>Bottom Sheet</b> full-width es más cómodo y tocable que un popover chico.</li><li>Se compone poniendo el Calendar dentro de un <code>Sheet side="bottom"</code>.</li></ul></div></div>
+          </div>
+          <h3 class="ch-variant-label" style="margin-top:20px">Modo de selección</h3>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li><b>Fecha única</b> (por defecto) — la mayoría de los casos.</li>
+            <li><b>Rango</b> (<code>data-cal-mode="range"</code>) — reservas, filtros por período; el tramo intermedio usa <code>surface-variant</code> y los extremos <code>primary</code>.</li>
+            <li><b>Fecha + hora</b> — el Date Picker con una fila de hora (<code>&lt;input type="time"&gt;</code>) en el panel.</li>
+            <li><b>Presets</b> — atajos para rangos/fechas frecuentes (Hoy, Mañana, En 7 días) debajo de la grilla.</li>
+            <li><b>Reservas (booking)</b> — combiná <b>rango</b> + <b>booked dates</b> (<code>data-cal-booked</code>, no seleccionables) para mostrar disponibilidad.</li>
+          </ul>
+          <div class="bd-callout" style="margin-top:14px"><span class="bd-ico">⌨️</span><span><b>Entrada por teclado (modal date input):</b> para fechas lejanas, ofrecé además un Input nativo <code>type="date"</code> — navegar meses en la grilla es tedioso y menos accesible. Mostrá el formato esperado y validá al salir del campo.</span></div>
         </section>
       </div>
 
@@ -18408,7 +18431,9 @@ const [on, setOn] = useState(false)
             <li><span class="ds-a11y-icon">♿</span>Cada día es un <code>&lt;button&gt;</code> real — foco con Tab y activación con Enter/Espacio; el foco muestra anillo (<code>--color-focus</code>).</li>
             <li><span class="ds-a11y-icon">♿</span>Las flechas de navegación llevan <code>aria-label</code> ("Mes anterior/siguiente"); los selects de mes/año, <code>aria-label</code> propio.</li>
             <li><span class="ds-a11y-icon">♿</span>Los días reservados llevan <code>aria-disabled="true"</code> y no reciben selección; los números de semana son <code>aria-hidden</code>.</li>
-            <li><span class="ds-a11y-icon">♿</span>Contraste AA en <code>today</code>/<code>selected</code>/<code>range</code> en claro y oscuro, sin overrides por tema.</li>
+            <li><span class="ds-a11y-icon">♿</span>El estado no depende solo del color: <code>selected</code> es relleno <code>--color-primary</code> + texto <code>--color-on-primary</code> (contraste AA), y <code>today</code> se refuerza con un relleno propio (<code>surface-variant</code>) además del color. Contraste AA en claro y oscuro, sin overrides por tema.</li>
+            <li><span class="ds-a11y-icon">♿</span><b>Composición Date Picker (popover):</b> el trigger es un <code>Button</code> con nombre accesible; al abrir, el foco entra al panel y vuelve al trigger al elegir o cerrar; <code>Esc</code> cierra el panel.</li>
+            <li><span class="ds-a11y-icon">♿</span><b>Fechas lejanas:</b> ofrecé además entrada por teclado (Input nativo <code>type="date"</code>) — para fechas distantes es más rápida y accesible que navegar la grilla.</li>
             <li><span class="ds-a11y-icon">♿</span><b>Simplificación documentada (buildless):</b> sin navegación con flechas del teclado entre días (roving grid) ni <code>aria-selected</code> por celda — para eso hace falta react-day-picker; ver GOVERNANCE §19.4.</li>
           </ul>
         </section>
@@ -18441,7 +18466,15 @@ const [on, setOn] = useState(false)
   &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;!-- Date + time (dentro del panel del Date Picker) --&gt;
+&lt;!-- Date Picker (docked): campo + popover con el Calendar --&gt;
+&lt;div class=&quot;date-picker&quot;&gt;
+  &lt;button class=&quot;date-picker-trigger btn-tertiary&quot; onclick=&quot;toggleDatePicker(this)&quot;&gt;📅 Elegir fecha&lt;/button&gt;
+  &lt;div class=&quot;date-picker-panel&quot; hidden&gt;
+    &lt;div class=&quot;calendar&quot; data-calendar data-cal-caption=&quot;dropdown&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Date &amp; Time Picker: fila de hora dentro del panel --&gt;
 &lt;div class=&quot;date-picker-panel&quot;&gt;
   &lt;div class=&quot;calendar&quot; data-calendar&gt;&lt;/div&gt;
   &lt;div class=&quot;calendar-time-row&quot;&gt;&lt;label&gt;Hora&lt;/label&gt;&lt;input type=&quot;time&quot; onchange=&quot;calTimeSync(this)&quot;&gt;&lt;/div&gt;
@@ -18450,249 +18483,6 @@ const [on, setOn] = useState(false)
       </div>
     </section>
 
-    <!-- ═══════════ DATE AND TIME PICKER ═══════════ -->
-    <section class="ds-section" id="s-c-date-picker">
-      <div class="ds-page-tag">Components · Input</div>
-      <h1 class="ds-page-title">Date Picker</h1>
-      <p class="ds-page-desc">Calendario en línea para seleccionar una fecha o un rango de fechas.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> Grilla de mes generada con <code>Date</code> nativo (sin librería de fechas ni locale), <code>css/components/calendar.css</code> + <code>components/ui/calendar.tsx</code>; <code>DatePicker</code> (<code>components/ui/date-picker.tsx</code>) compone el trigger + panel flotante. La estructura de Specs / anatomía / guías sigue el modelo de documentación de <strong>Material Design 3</strong> (Google, CC BY 4.0), con todos los valores y ejemplos reemplazados por componentes y tokens de Embassy.</div>
-
-      <!-- ══ Component Tabs ══ -->
-      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
-      <div class="ds-comp-tab-panel active" data-tab="overview">
-        <section class="docs-section">
-
-          <!-- Short introduction -->
-          <p class="bd-lead">El Date Picker es un calendario en línea para elegir una fecha o un rango de fechas, con feedback visual inmediato sobre la selección.</p>
-
-          <!-- Key characteristics -->
-          <ul class="bd-overview-list">
-            <li><b>Calendario en línea</b> con grilla de mes generada a mano (<code>Date</code> nativo), tematizado con tokens de Embassy.</li>
-            <li><b>Campo anclado (docked):</b> <code>DatePicker</code> compone su propio trigger + panel flotante internamente — sin <code>Popover</code> externo por separado.</li>
-            <li><b>Dos modos:</b> selección de día único (<code>mode="single"</code>) y de rango (<code>mode="range"</code>).</li>
-            <li><b>Celda de día</b> de 36×36&nbsp;px (<code>w-9 h-9</code>); contenedor <code>bg-surface</code> con borde y <code>rounded-lg</code>.</li>
-            <li><b>Fecha seleccionada:</b> relleno <code>--color-primary</code> + texto <code>--color-on-primary</code>.</li>
-            <li><b>Hoy:</b> número en negrita y color <code>--color-primary</code> (sin relleno).</li>
-            <li><b>Rango:</b> fechas intermedias con <code>--color-primary-container</code> / <code>--color-on-primary-container</code>.</li>
-            <li>Sin sistema de <code>locale</code> — el formato de fecha usa <code>Intl.DateTimeFormat</code> nativo del navegador.</li>
-          </ul>
-
-          <!-- Platform-composition comparison -->
-          <div class="bd-family-wrap">
-            <div style="display:flex;flex-direction:column;gap:28px">
-              <div>
-                <p style="font:600 12px 'Inter',sans-serif;color:var(--ds-text-2);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Campo anclado — Popover + Button + Calendar</p>
-                <div><div class="date-picker"><button type="button" class="date-picker-trigger btn-tertiary" onclick="toggleDatePicker(this)" style="width:240px;justify-content:flex-start"><svg class="date-picker-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Elegir fecha</button><div class="date-picker-panel" hidden><div class="calendar" data-calendar data-cal-caption="dropdown"><div class="calendar-header"><button type="button" class="calendar-nav-btn" aria-label="Mes anterior" onclick="calendarNav(this,-1)">‹</button><span class="calendar-caption">Julio 2026</span><button type="button" class="calendar-nav-btn" aria-label="Mes siguiente" onclick="calendarNav(this,1)">›</button></div><div class="calendar-weekdays"><span class="calendar-weekday">L</span><span class="calendar-weekday">M</span><span class="calendar-weekday">X</span><span class="calendar-weekday">J</span><span class="calendar-weekday">V</span><span class="calendar-weekday">S</span><span class="calendar-weekday">D</span></div><div class="calendar-grid"><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">1</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">2</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">3</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">4</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">5</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">6</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">7</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">8</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">9</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">10</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">11</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">12</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">13</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">14</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">15</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">16</button><button type="button" class="calendar-day calendar-day-today" onclick="calendarDaySelect(this)">17</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">18</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">19</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">20</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">21</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">22</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">23</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">24</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">25</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">26</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">27</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">28</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">29</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">30</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">31</button><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span></div></div></div></div></div>
-              </div>
-              <div>
-                <p style="font:600 12px 'Inter',sans-serif;color:var(--ds-text-2);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Calendario en línea — siempre visible</p>
-                <div><div style="display:flex;flex-direction:column;gap:32px"><div><p class="ds-p" style="margin-bottom:12px">Selección de día</p><div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap"><div class="calendar" data-calendar data-cal-caption="dropdown"><div class="calendar-header"><button type="button" class="calendar-nav-btn" aria-label="Mes anterior" onclick="calendarNav(this,-1)">‹</button><span class="calendar-caption">Julio 2026</span><button type="button" class="calendar-nav-btn" aria-label="Mes siguiente" onclick="calendarNav(this,1)">›</button></div><div class="calendar-weekdays"><span class="calendar-weekday">L</span><span class="calendar-weekday">M</span><span class="calendar-weekday">X</span><span class="calendar-weekday">J</span><span class="calendar-weekday">V</span><span class="calendar-weekday">S</span><span class="calendar-weekday">D</span></div><div class="calendar-grid"><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">1</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">2</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">3</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">4</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">5</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">6</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">7</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">8</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">9</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">10</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">11</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">12</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">13</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">14</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">15</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">16</button><button type="button" class="calendar-day calendar-day-today calendar-day-selected" onclick="calendarDaySelect(this)">17</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">18</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">19</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">20</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">21</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">22</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">23</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">24</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">25</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">26</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">27</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">28</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">29</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">30</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">31</button><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span></div></div><div class="text-body-sm" style="align-self:center;color:var(--text-muted)">Seleccionado: <strong style="color:var(--text-primary)">17 de julio, 2026</strong></div></div></div><div><p class="ds-p" style="margin-bottom:12px">Selección de rango</p><div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap"><div class="calendar" data-calendar data-cal-mode="range" data-cal-caption="dropdown"><div class="calendar-header"><button type="button" class="calendar-nav-btn" aria-label="Mes anterior" onclick="calendarNav(this,-1)">‹</button><span class="calendar-caption">Julio 2026</span><button type="button" class="calendar-nav-btn" aria-label="Mes siguiente" onclick="calendarNav(this,1)">›</button></div><div class="calendar-weekdays"><span class="calendar-weekday">L</span><span class="calendar-weekday">M</span><span class="calendar-weekday">X</span><span class="calendar-weekday">J</span><span class="calendar-weekday">V</span><span class="calendar-weekday">S</span><span class="calendar-weekday">D</span></div><div class="calendar-grid"><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">1</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">2</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">3</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">4</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">5</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">6</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">7</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">8</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">9</button><button type="button" class="calendar-day calendar-day-range-start" onclick="calendarDaySelect(this)">10</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">11</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">12</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">13</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">14</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">15</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">16</button><button type="button" class="calendar-day calendar-day-today calendar-day-range-end" onclick="calendarDaySelect(this)">17</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">18</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">19</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">20</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">21</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">22</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">23</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">24</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">25</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">26</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">27</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">28</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">29</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">30</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">31</button><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span></div></div><div class="text-body-sm" style="align-self:center;color:var(--text-muted)">Desde: <strong style="color:var(--text-primary)">10 jul 2026</strong> — Hasta: <strong style="color:var(--text-primary)">17 jul 2026</strong></div></div></div></div></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Legend — variant references -->
-          <ol class="bd-family-legend">
-            <li>Campo anclado — abre al hacer clic, cierra al elegir fecha</li>
-            <li>Selección de día — <code>mode="single"</code></li>
-            <li>Selección de rango — <code>mode="range"</code> (dos meses)</li>
-          </ol>
-
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="specs">
-        <div class="ds-toc-layout">
-        <div class="ds-toc-body">
-
-        <section class="docs-section" id="tc-date-picker-s-0">
-          <h2 class="docs-section-title">Anatomía</h2>
-          <table class="ds-table">
-            <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
-            <tbody>
-              <tr><td>Contenedor</td><td>Padding <code>p-3</code> (12px), radio <code>rounded-lg</code>, borde de 1px, <code>inline-block</code></td></tr>
-              <tr><td>Encabezado (mes)</td><td>Etiqueta centrada, <code>font-heading text-body-md</code> peso semibold, alto 32px</td></tr>
-              <tr><td>Navegación (chevrons)</td><td>Botones de 28×28px (<code>h-7 w-7</code>)</td></tr>
-              <tr><td>Encabezado de día (weekday)</td><td>Ancho <code>w-9</code>, <code>text-label</code></td></tr>
-              <tr><td>Celda de día</td><td>36×36px (<code>w-9 h-9</code>), botón <code>rounded</code>, <code>text-body-sm</code></td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="docs-section" id="tc-date-picker-s-1">
-          <h2 class="docs-section-title">Medidas</h2>
-          <table class="ds-table">
-            <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
-            <tbody>
-              <tr><td>Padding del contenedor</td><td><code>p-3</code> (12px), radio <code>rounded-lg</code></td></tr>
-              <tr><td>Alto del encabezado</td><td>32px</td></tr>
-              <tr><td>Botones de navegación</td><td>28×28px (<code>h-7 w-7</code>)</td></tr>
-              <tr><td>Celda de día</td><td>36×36px (<code>w-9 h-9</code>)</td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="docs-section" id="tc-date-picker-s-2">
-          <h2 class="docs-section-title">Estados</h2>
-          <table class="ds-table">
-            <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
-            <tbody>
-              <tr><td>Reposo / Hover</td><td>Sin relleno; hover con fondo sólido</td><td><code>--color-fg</code> · hover <code>--color-surface-variant</code></td></tr>
-              <tr><td>Seleccionado</td><td>Relleno sólido + texto de contraste</td><td><code>--color-primary</code> + <code>--color-on-primary</code></td></tr>
-              <tr><td>Error / inválido</td><td>Borde rojo del track cuando <code>aria-invalid</code> (mismo token que Input/Select)</td><td><code>--color-error</code></td></tr>
-              <tr><td>Hoy</td><td>Número en negrita y color de marca (sin relleno)</td><td><code>--color-primary</code></td></tr>
-              <tr><td>Rango (intermedio)</td><td>Tira de contenedor entre inicio y fin</td><td><code>--color-primary-container</code> + <code>--color-on-primary-container</code></td></tr>
-              <tr><td>Fuera de mes / Disabled</td><td>Opacidad reducida</td><td><code>--color-fg-subtle</code> (opacidad 40%) · disabled 30%</td></tr>
-              <tr><td>Focus visible</td><td>Anillo de foco (outline 2px + halo 4px) vía <code>focus-visible:focus-ring</code></td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="docs-section" id="tc-date-picker-s-3">
-          <h2 class="docs-section-title">Tokens y especificaciones</h2>
-          <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
-          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="date-picker"></div></div>
-          <table class="ds-table">
-            <thead><tr><th>Parte / estado</th><th>Rol / token</th></tr></thead>
-            <tbody>
-              <tr><td>Contenedor</td><td><code>--color-surface</code> + <code>--border</code></td></tr>
-              <tr><td>Encabezado y celdas (texto)</td><td><code>--color-fg</code>; weekday <code>--color-fg-subtle</code></td></tr>
-              <tr><td>Día seleccionado</td><td><code>--color-primary</code> + <code>--color-on-primary</code></td></tr>
-              <tr><td>Hoy</td><td><code>--color-primary</code> (negrita, sin relleno)</td></tr>
-              <tr><td>Rango (intermedio)</td><td><code>--color-primary-container</code> + <code>--color-on-primary-container</code></td></tr>
-              <tr><td>Día — hover</td><td><code>--color-surface-variant</code></td></tr>
-              <tr><td>Anillo de foco</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
-            </tbody>
-          </table>
-        </section>
-        <section class="docs-section" id="tc-date-picker-s-4">
-          <div class="ds-callout">
-            <strong>Relación con Material Design 3.</strong> MD3 define cuatro presentaciones de date picker — <b>Docked</b>, <b>Modal</b>, <b>Modal date input</b> y <b>Full-screen</b>, con celda de día de 40&nbsp;dp, ancho de 360&nbsp;dp y diálogo de 28&nbsp;dp. Embassy implementa el <code>Calendar</code> en línea (grilla de mes con <code>Date</code> nativo, celda de 36&nbsp;px, contenedor <code>rounded-lg</code>) como base para dos composiciones: <b>docked</b> — <code>DatePicker</code> (trigger + panel flotante <code>position:absolute</code> propio, sin detección de colisión de viewport) — y <b>modal</b>, envolviendo <code>Calendar</code> en un <code>Dialog</code>. Ninguna es un componente adicional nuevo; ambas son composiciones documentadas de <code>Button</code> + <code>Calendar</code> (y <code>Dialog</code> para la variante modal) ya existentes.
-          </div>
-        </section>
-      
-        </div>
-        <nav class="ds-toc" data-toc-auto id="tc-date-picker-s-toc" aria-label="En esta página">
-          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="ds-toc-title">En esta página</div>
-          <ul class="ds-toc-list">
-            <li><a class="ds-toc-link" data-target="tc-date-picker-s-0">Anatomía</a></li>
-            <li><a class="ds-toc-link" data-target="tc-date-picker-s-1">Medidas</a></li>
-            <li><a class="ds-toc-link" data-target="tc-date-picker-s-2">Estados</a></li>
-            <li><a class="ds-toc-link" data-target="tc-date-picker-s-3">Tokens y especificaciones</a></li>
-            <li><a class="ds-toc-link" data-target="tc-date-picker-s-4">Sección 5</a></li>
-          </ul>
-        </nav>
-        </div>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines">
-
-        <div class="ds-toc-layout">
-        <div class="ds-toc-body">
-        <section class="docs-section" id="tc-date-picker-g-0">
-          <h2 class="docs-section-title">Date pickers</h2>
-          <p class="ds-p">Los date pickers permiten elegir una <b>fecha</b> o un <b>rango</b> de fechas. Embassy los compone sobre el <code>Calendar</code> (grilla de mes propia, sin librería) tematizado con tokens.</p>
-        </section>
-        <section class="docs-section" id="tc-date-picker-g-1">
-          <h2 class="docs-section-title">Uso</h2>
-          <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir una fecha cercana o un rango de forma visual.</li><li>Rangos que cruzan meses (<code>mode="range"</code>, dos meses).</li><li>Reservas, filtros por fecha, agendas.</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Fechas muy lejanas como única vía → sumá entrada por teclado.</li><li>Hora exacta → un time picker.</li><li>Escalar el calendario al viewport.</li></ul></div></div>
-          </div>
-        </section>
-        <section class="docs-section" id="tc-date-picker-g-2">
-          <h2 class="docs-section-title">Anatomía</h2>
-          <p class="docs-section-desc">Componente real. Encabezado (mes/año + navegación), fila de días, grilla de fechas, día de hoy y selección.</p>
-          <div class="bd-family-wrap"><div><div style="display:flex;flex-direction:column;gap:32px"><div><p class="ds-p" style="margin-bottom:12px">Selección de día</p><div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap"><div class="calendar" data-calendar data-cal-caption="dropdown"><div class="calendar-header"><button type="button" class="calendar-nav-btn" aria-label="Mes anterior" onclick="calendarNav(this,-1)">‹</button><span class="calendar-caption">Julio 2026</span><button type="button" class="calendar-nav-btn" aria-label="Mes siguiente" onclick="calendarNav(this,1)">›</button></div><div class="calendar-weekdays"><span class="calendar-weekday">L</span><span class="calendar-weekday">M</span><span class="calendar-weekday">X</span><span class="calendar-weekday">J</span><span class="calendar-weekday">V</span><span class="calendar-weekday">S</span><span class="calendar-weekday">D</span></div><div class="calendar-grid"><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">1</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">2</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">3</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">4</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">5</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">6</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">7</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">8</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">9</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">10</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">11</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">12</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">13</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">14</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">15</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">16</button><button type="button" class="calendar-day calendar-day-today calendar-day-selected" onclick="calendarDaySelect(this)">17</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">18</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">19</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">20</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">21</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">22</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">23</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">24</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">25</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">26</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">27</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">28</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">29</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">30</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">31</button><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span></div></div><div class="text-body-sm" style="align-self:center;color:var(--text-muted)">Seleccionado: <strong style="color:var(--text-primary)">17 de julio, 2026</strong></div></div></div><div><p class="ds-p" style="margin-bottom:12px">Selección de rango</p><div style="display:flex;align-items:flex-start;gap:24px;flex-wrap:wrap"><div class="calendar" data-calendar data-cal-mode="range" data-cal-caption="dropdown"><div class="calendar-header"><button type="button" class="calendar-nav-btn" aria-label="Mes anterior" onclick="calendarNav(this,-1)">‹</button><span class="calendar-caption">Julio 2026</span><button type="button" class="calendar-nav-btn" aria-label="Mes siguiente" onclick="calendarNav(this,1)">›</button></div><div class="calendar-weekdays"><span class="calendar-weekday">L</span><span class="calendar-weekday">M</span><span class="calendar-weekday">X</span><span class="calendar-weekday">J</span><span class="calendar-weekday">V</span><span class="calendar-weekday">S</span><span class="calendar-weekday">D</span></div><div class="calendar-grid"><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">1</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">2</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">3</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">4</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">5</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">6</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">7</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">8</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">9</button><button type="button" class="calendar-day calendar-day-range-start" onclick="calendarDaySelect(this)">10</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">11</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">12</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">13</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">14</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">15</button><button type="button" class="calendar-day calendar-day-range-middle" onclick="calendarDaySelect(this)">16</button><button type="button" class="calendar-day calendar-day-today calendar-day-range-end" onclick="calendarDaySelect(this)">17</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">18</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">19</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">20</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">21</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">22</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">23</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">24</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">25</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">26</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">27</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">28</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">29</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">30</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">31</button><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span></div></div><div class="text-body-sm" style="align-self:center;color:var(--text-muted)">Desde: <strong style="color:var(--text-primary)">10 jul 2026</strong> — Hasta: <strong style="color:var(--text-primary)">17 jul 2026</strong></div></div></div></div></div></div>
-          <ol class="bd-family-legend"><li>Encabezado — mes/año + navegación anterior/siguiente.</li><li>Días de la semana — respetando el primer día local.</li><li>Grilla de fechas — celdas seleccionables.</li><li>Hoy — marcado con claridad.</li><li>Selección / rango — resalta la fecha o el tramo.</li></ol>
-        </section>
-        <section class="docs-section" id="tc-date-picker-g-3">
-          <h2 class="docs-section-title">Docked date picker</h2>
-          <p class="ds-p">Variante <b>anclada</b>: un campo con ícono de calendario abre un <code>Popover</code> con el <code>Calendar</code> adentro; cierra al elegir. Es la recomendación por defecto — no ocupa espacio permanente en el layout, a diferencia del calendario siempre visible.</p>
-          <div class="bd-family-wrap"><div><div class="date-picker"><button type="button" class="date-picker-trigger btn-tertiary" onclick="toggleDatePicker(this)" style="width:240px;justify-content:flex-start"><svg class="date-picker-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Elegir fecha</button><div class="date-picker-panel" hidden><div class="calendar" data-calendar data-cal-caption="dropdown"><div class="calendar-header"><button type="button" class="calendar-nav-btn" aria-label="Mes anterior" onclick="calendarNav(this,-1)">‹</button><span class="calendar-caption">Julio 2026</span><button type="button" class="calendar-nav-btn" aria-label="Mes siguiente" onclick="calendarNav(this,1)">›</button></div><div class="calendar-weekdays"><span class="calendar-weekday">L</span><span class="calendar-weekday">M</span><span class="calendar-weekday">X</span><span class="calendar-weekday">J</span><span class="calendar-weekday">V</span><span class="calendar-weekday">S</span><span class="calendar-weekday">D</span></div><div class="calendar-grid"><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">1</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">2</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">3</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">4</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">5</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">6</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">7</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">8</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">9</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">10</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">11</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">12</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">13</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">14</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">15</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">16</button><button type="button" class="calendar-day calendar-day-today" onclick="calendarDaySelect(this)">17</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">18</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">19</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">20</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">21</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">22</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">23</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">24</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">25</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">26</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">27</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">28</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">29</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">30</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">31</button><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span></div></div></div></div></div></div>
-          <p class="ds-p" style="color:var(--text-secondary)">Composición: <code>DatePicker</code> internamente usa <code>Button variant="tertiary"</code> (outlined) como trigger + <code>Calendar</code> en su panel flotante propio. Ver la pestaña Code para el snippet completo.</p>
-        </section>
-        <section class="docs-section" id="tc-date-picker-g-4">
-          <h2 class="docs-section-title">Modal date picker</h2>
-          <p class="ds-p">Variante <b>modal</b>: el calendario se presenta en un diálogo centrado con scrim, ideal para pantallas compactas o cuando la selección requiere foco.</p>
-          <p class="ds-p" style="color:var(--text-secondary)">En Embassy se compone envolviendo el <code>Calendar</code> en un <code>Dialog</code>; no existe un componente modal-date-picker aparte.</p>
-        </section>
-        <section class="docs-section" id="tc-date-picker-g-5">
-          <h2 class="docs-section-title">Modal date input</h2>
-          <p class="ds-p">Permite <b>escribir</b> la fecha con el teclado en un campo, con validación de formato — útil para fechas lejanas donde navegar el calendario es tedioso.</p>
-          <div class="bd-family-wrap"><div class="field-input-wrapper" style="display:inline-flex;position:relative">
-            <input class="field-input has-trailing" type="date" aria-label="Fecha">
-            <i data-lucide="calendar" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--color-on-surface-variant);pointer-events:none"></i>
-          </div></div>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li>Mostrá el formato esperado como placeholder ("dd/mm/aaaa").</li>
-            <li>Validá al salir del campo y permití alternar con el calendario.</li>
-            <li>Deshabilitá fechas fuera del rango válido (<code>min</code>/<code>max</code>).</li>
-          </ul>
-        </section>
-        </div>
-        <nav class="ds-toc" data-toc-auto id="tc-date-picker-g-toc" aria-label="En esta página">
-          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="ds-toc-title">En esta página</div>
-          <ul class="ds-toc-list">
-            <li><a class="ds-toc-link" data-target="tc-date-picker-g-0">Date pickers</a></li>
-            <li><a class="ds-toc-link" data-target="tc-date-picker-g-1">Uso</a></li>
-            <li><a class="ds-toc-link" data-target="tc-date-picker-g-2">Anatomía</a></li>
-            <li><a class="ds-toc-link" data-target="tc-date-picker-g-3">Docked date picker</a></li>
-            <li><a class="ds-toc-link" data-target="tc-date-picker-g-4">Modal date picker</a></li>
-            <li><a class="ds-toc-link" data-target="tc-date-picker-g-5">Modal date input</a></li>
-          </ul>
-        </nav>
-        </div>
-      
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="accessibility">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Accesibilidad</h2>
-          <ul class="ds-a11y-list">
-            <li><span class="ds-a11y-icon">♿</span>La grilla del calendario se expone como <code>role="grid"</code> (<code>role="gridcell"</code> por día); cada día es un botón con su fecha como nombre accesible.</li>
-            <li><span class="ds-a11y-icon">♿</span>Navegación por teclado: <code>←/→/↑/↓</code> entre días, <code>PageUp</code>/<code>PageDown</code> entre meses, <code>Enter</code>/<code>Espacio</code> para elegir.</li>
-            <li><span class="ds-a11y-icon">♿</span>Ofrecé la entrada por teclado (date input) además del calendario: para fechas lejanas es más rápida y accesible.</li>
-            <li><span class="ds-a11y-icon">♿</span>El estado seleccionado no depende solo del color: el relleno <code>--color-primary</code> con texto <code>--color-on-primary</code> mantiene contraste AA, y "hoy" se refuerza con el número en <strong>negrita</strong> además del color.</li>
-          </ul>
-        </section>
-      </div>
-      <div class="ds-comp-tab-panel" data-tab="code">
-        <section class="docs-section">
-          <h2 class="docs-section-title">Docked — DatePicker</h2>
-          <p class="docs-section-desc">La composición recomendada por defecto. <code>DatePicker</code> ya incluye el trigger + panel flotante propio (<code>position:absolute; top:100%</code>, sin dependencia de Popover) — no hace falta componerlo vos mismo.</p>
-          <div class="bd-stage" style="margin-bottom:16px"><div><div class="date-picker"><button type="button" class="date-picker-trigger btn-tertiary" onclick="toggleDatePicker(this)" style="width:240px;justify-content:flex-start"><svg class="date-picker-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Elegir fecha</button><div class="date-picker-panel" hidden><div class="calendar" data-calendar data-cal-caption="dropdown"><div class="calendar-header"><button type="button" class="calendar-nav-btn" aria-label="Mes anterior" onclick="calendarNav(this,-1)">‹</button><span class="calendar-caption">Julio 2026</span><button type="button" class="calendar-nav-btn" aria-label="Mes siguiente" onclick="calendarNav(this,1)">›</button></div><div class="calendar-weekdays"><span class="calendar-weekday">L</span><span class="calendar-weekday">M</span><span class="calendar-weekday">X</span><span class="calendar-weekday">J</span><span class="calendar-weekday">V</span><span class="calendar-weekday">S</span><span class="calendar-weekday">D</span></div><div class="calendar-grid"><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">1</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">2</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">3</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">4</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">5</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">6</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">7</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">8</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">9</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">10</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">11</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">12</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">13</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">14</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">15</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">16</button><button type="button" class="calendar-day calendar-day-today" onclick="calendarDaySelect(this)">17</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">18</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">19</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">20</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">21</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">22</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">23</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">24</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">25</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">26</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">27</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">28</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">29</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">30</button><button type="button" class="calendar-day" onclick="calendarDaySelect(this)">31</button><span class="calendar-day calendar-day-outside" aria-hidden="true"></span><span class="calendar-day calendar-day-outside" aria-hidden="true"></span></div></div></div></div></div></div>
-          <div class="docs-code-wrapper">
-            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-<pre class="docs-code"><code>import { useState } from &quot;react&quot;
-import { DatePicker } from &quot;./components/ui/date-picker&quot;
-
-const [date, setDate] = useState&lt;Date | undefined&gt;()
-
-&lt;DatePicker
-  value={date}
-  onChange={setDate}
-  placeholder=&quot;Elegir fecha&quot;
-  className=&quot;w-[240px]&quot;
-/&gt;</code></pre>
-          </div>
-        </section>
-
-        <section class="docs-section">
-          <h2 class="docs-section-title">Calendario en línea — React</h2>
-          <p class="docs-section-desc">Grilla de mes con <code>Date</code> nativo, tematizada con tokens Embassy (celda seleccionada en <code>--color-primary</code>, hoy en negrita, rango en <code>--color-primary-container</code>). Importá <code>Calendar</code> desde <code>components/ui/calendar.tsx</code> directamente cuando lo necesites siempre visible, sin panel flotante.</p>
-          <div class="docs-code-wrapper">
-            <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
-<pre class="docs-code"><code>import { Calendar } from &quot;./components/ui/calendar&quot;
-import { useState } from &quot;react&quot;
-
-// Selección simple
-const [date, setDate] = useState&lt;Date | undefined&gt;(new Date())
-&lt;Calendar mode=&quot;single&quot; selected={date} onSelect={setDate} /&gt;
-
-// Selección de rango
-const [range, setRange] = useState&lt;{ from?: Date; to?: Date }&gt;({})
-&lt;Calendar mode=&quot;range&quot; selectedRange={range} onSelectRange={setRange} /&gt;</code></pre>
-          </div>
-        </section>
-      </div>
-    </section>
     <!-- ═══════════ DIALOG ═══════════ -->
     <!-- ═══════════ DIVIDER ═══════════ -->
     <section class="ds-section" id="s-c-divider">
@@ -23134,10 +22924,6 @@ import { Button } from &quot;./components/ui/button&quot;
     <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
     <div class="nav-card-content"><div class="nav-card-title">Collapsible</div><div class="nav-card-desc">Un único bloque de contenido que se muestra u oculta.</div></div>
   </div>
-  <div class="nav-card nav-card--compact" onclick="navigate('c-date-picker')">
-    <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
-    <div class="nav-card-content"><div class="nav-card-title">Date Picker</div><div class="nav-card-desc">Calendario para fecha o rango de fechas.</div></div>
-  </div>
   <div class="nav-card nav-card--compact" onclick="navigate('c-dialog')">
     <div class="nav-card-header"><span class="nav-card-tag">Component</span><span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span></div>
     <div class="nav-card-content"><div class="nav-card-title">Dialog</div><div class="nav-card-desc">Prompt dialogs, confirmation modals, and the Alert Dialog variant.</div></div>
@@ -24948,7 +24734,6 @@ const SECTIONS = {
   'c-chip':            { label: 'Chips',                 group: 'Components' },
   'c-collapsible':     { label: 'Collapsible',           group: 'Components' },
   'c-calendar':        { label: 'Calendar',     group: 'Components' },
-  'c-date-picker':     { label: 'Date Picker',  group: 'Components' },
   'c-dialog':          { label: 'Dialog',                group: 'Components' },
   'c-divider':         { label: 'Divider',               group: 'Components' },
   'c-pagination':      { label: 'Pagination',            group: 'Components' },

@@ -1047,7 +1047,12 @@ Command-style filtering, and Table + Pagination respectively), not standalone pr
 exports each as a first-class, copy-paste component (`css/components/date-picker.css` +
 `components/ui/date-picker.tsx`, `combobox.css`/`combobox.tsx`, `data-table.css`/`data-table.tsx`) so
 consumers get the assembled, token-correct pattern without re-wiring it — while still composing only
-canonical DS parts. Note these three (plus Command, Context Menu, Menubar, Navigation Menu, Input OTP,
+canonical DS parts. **Docs consolidation (2026-07):** the standalone **Date Picker doc page was merged
+into Calendar** — Calendar is the single canonical component, and **Date Picker** (campo + popover) and
+**Date & Time Picker** are documented as Calendar *compositions* (Specs/Guidelines/Code), with the
+presentation options — inline · Popover · Dialog · Sheet — spelled out in Calendar → Guidelines. The
+`date-picker.css`/`.tsx` files are unchanged (they still power the composition); only the duplicate doc
+page, nav entry, and section-registry key (`c-date-picker`) were removed. Note these three (plus Command, Context Menu, Menubar, Navigation Menu, Input OTP,
 and Form) have real component code but **no standalone doc page in `index.html` yet** — that's the
 remaining phase, not a sign the component doesn't exist; check `css/components/` and `components/ui/`
 directly rather than assuming from the docs site alone.
@@ -1062,7 +1067,7 @@ behavior — this is an accepted, documented tradeoff, not a regression to silen
 |---|---|
 | Chart | Legend animation, brush/zoom — hand-drawn SVG + CSS `conic-gradient`, native `<title>` tooltips |
 | Data Table | Column resize/pin/drag-reorder, faceted filtering, virtualization, row selection |
-| Calendar / Date Picker | Locale system, complex range-selection edge cases, viewport-edge collision detection on the popover |
+| Calendar (Date Picker = composition) | Locale system, complex range-selection edge cases, viewport-edge collision detection on the popover |
 | Command / Combobox | Fuzzy-match scoring — substring filtering only |
 | Popover / Dropdown / Context Menu / Menubar / Navigation Menu | True focus-trap (Tab-cycling), submenu/portal support — real viewport-edge-flip positioning and keyboard nav ARE implemented |
 | Input OTP, Slider, Form | — mostly full-fidelity; Slider's range mode uses the standard two-stacked-`<input>` technique |
