@@ -3631,6 +3631,9 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-snackbar" onclick="navigate('c-snackbar')">Snackbar</div>
       <div class="ds-nav-item" data-section="c-switch" onclick="navigate('c-switch')">Switch</div>
       <div class="ds-nav-item" data-section="c-table" onclick="navigate('c-table')">Table</div>
+      <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-data-table" onclick="navigate('c-data-table')">Data Table</div>
+      </div>
       <div class="ds-nav-item" data-section="c-tabs" onclick="navigate('c-tabs')">Tabs</div>
       <div class="ds-nav-item" data-section="c-textarea" onclick="navigate('c-textarea')">Textarea</div>
       <div class="ds-nav-item" data-section="c-toggle" onclick="navigate('c-toggle')">Toggle</div>
@@ -9670,6 +9673,337 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
   &lt;/TableBody&gt;
 &lt;/Table&gt;</code></pre>
           <button class="docs-copy-btn">Copiar</button>
+        </div>
+      </div>
+</div>
+    </section>
+
+    <!-- ═══════════ COMPONENT: DATA TABLE ═══════════ -->
+    <section class="ds-section" id="s-c-data-table">
+      <div class="ds-page-tag">Components · Display</div>
+      <div class="docs-page-header">
+        <h1 class="docs-page-title">Data Table</h1>
+        <p class="docs-page-desc">Tabla de datos con orden, filtro, selección de filas, visibilidad de columnas y paginación — para escanear y operar sobre listas de registros.</p>
+      </div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> Se construye sobre <strong>Table</strong> (<code>.data-table</code>) y agrega comportamiento con <code>initDataTable()</code> sobre un contenedor <code>[data-datatable]</code> — sin librería. Paridad de features de alto nivel con shadcn/ui + TanStack Table: orden por columna (con <code>aria-sort</code>), filtro de texto, selección de filas (checkbox de cabecera + por fila con conteo “N de M”), visibilidad de columnas y paginación por slice. Fuera de alcance a propósito: resize/pin/drag de columnas, filtros facetados y virtualización de filas.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+
+          <!-- Short introduction -->
+          <p class="bd-lead">La Data Table toma una <b>Table</b> y le suma las operaciones que hacen manejable un conjunto grande de registros: ordenar por columna, filtrar por texto, seleccionar filas, ocultar columnas y paginar — todo con teclado y estados accesibles, sin ninguna librería.</p>
+
+          <!-- Key characteristics -->
+          <ul class="bd-overview-list">
+            <li><b>Toolbar:</b> filtro de texto a la izquierda (<code>data-dt-filter</code>) y menú de <b>visibilidad de columnas</b> a la derecha (<code>data-dt-colmenu</code>).</li>
+            <li><b>Selección de filas:</b> checkbox de cabecera (<code>data-dt-selectall</code>, con estado indeterminado) + checkbox por fila (<code>data-dt-row</code>), conteo “N de M” y resalte <code>tr.selected</code>.</li>
+            <li><b>Orden por columna:</b> botón <code>data-dt-sort</code> en el <code>th</code>; refleja dirección con <code>aria-sort</code> y caret (numérico-aware).</li>
+            <li><b>Paginación por slice:</b> <code>data-dt-pagesize</code> define el tamaño de página; <code>data-dt-pagination</code> se renderiza solo. Estado vacío cuando el filtro no deja filas.</li>
+            <li><b>Regla clave:</b> los estados en celdas son <code>Badge</code>, no texto coloreado; los montos y números se alinean a la derecha.</li>
+          </ul>
+
+          <!-- Live interactive demo -->
+          <div class="bd-family-wrap">
+            <div class="data-table-wrap" data-datatable data-dt-pagesize="5" style="width:100%">
+              <div class="data-table-toolbar">
+                <div class="data-table-filter">
+                  <input type="text" class="field-input" data-dt-filter placeholder="Filtrar candidatos…" aria-label="Filtrar filas" style="width:100%">
+                </div>
+                <div style="position:relative">
+                  <button type="button" class="btn-tertiary btn-sm" data-dt-colmenu-btn aria-haspopup="true">Columnas <i data-lucide="chevron-down" style="width:16px;height:16px"></i></button>
+                  <div class="dropdown-content" data-dt-colmenu hidden role="menu" style="position:absolute;top:calc(100% + 6px);right:0;left:auto">
+                    <div class="dropdown-label">Alternar columnas</div>
+                    <button type="button" class="dropdown-item" role="menuitemcheckbox" data-dt-col="2" aria-checked="true"><span class="dropdown-item-indicator"><i data-lucide="check" style="width:15px;height:15px"></i></span>Rol</button>
+                    <button type="button" class="dropdown-item" role="menuitemcheckbox" data-dt-col="3" aria-checked="true"><span class="dropdown-item-indicator"><i data-lucide="check" style="width:15px;height:15px"></i></span>Estado</button>
+                    <button type="button" class="dropdown-item" role="menuitemcheckbox" data-dt-col="4" aria-checked="true"><span class="dropdown-item-indicator"><i data-lucide="check" style="width:15px;height:15px"></i></span>Puntaje</button>
+                    <button type="button" class="dropdown-item" role="menuitemcheckbox" data-dt-col="5" aria-checked="true"><span class="dropdown-item-indicator"><i data-lucide="check" style="width:15px;height:15px"></i></span>Fecha</button>
+                  </div>
+                </div>
+              </div>
+              <div class="table-scroll"><table class="data-table">
+                <thead><tr>
+                  <th class="data-table-select"><input type="checkbox" class="checkbox" data-dt-selectall aria-label="Seleccionar todas las filas"></th>
+                  <th scope="col"><button type="button" class="data-table-sort-btn" data-dt-sort>Candidato <i data-lucide="chevron-up" class="data-table-sort-icon"></i></button></th>
+                  <th scope="col"><button type="button" class="data-table-sort-btn" data-dt-sort>Rol <i data-lucide="chevron-up" class="data-table-sort-icon"></i></button></th>
+                  <th scope="col"><button type="button" class="data-table-sort-btn" data-dt-sort>Estado <i data-lucide="chevron-up" class="data-table-sort-icon"></i></button></th>
+                  <th scope="col" style="text-align:right"><button type="button" class="data-table-sort-btn" data-dt-sort style="justify-content:flex-end">Puntaje <i data-lucide="chevron-up" class="data-table-sort-icon"></i></button></th>
+                  <th scope="col"><button type="button" class="data-table-sort-btn" data-dt-sort>Fecha <i data-lucide="chevron-up" class="data-table-sort-icon"></i></button></th>
+                </tr></thead>
+                <tbody>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Ana García</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="text-align:right">88</td><td style="color:var(--text-muted)">12 jun 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Luis Ramírez</td><td>Frontend Dev</td><td><span class="badge badge-open">En proceso</span></td><td style="text-align:right">73</td><td style="color:var(--text-muted)">08 jun 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">María López</td><td>Product Manager</td><td><span class="badge badge-draft">Pendiente</span></td><td style="text-align:right">91</td><td style="color:var(--text-muted)">01 jun 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Carlos Pérez</td><td>Backend Dev</td><td><span class="badge badge-closed">Cerrado</span></td><td style="text-align:right">66</td><td style="color:var(--text-muted)">25 may 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Sofía Méndez</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="text-align:right">85</td><td style="color:var(--text-muted)">22 may 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Diego Torres</td><td>Frontend Dev</td><td><span class="badge badge-warning">En revisión</span></td><td style="text-align:right">79</td><td style="color:var(--text-muted)">18 may 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Valentina Ruiz</td><td>Data Analyst</td><td><span class="badge badge-open">En proceso</span></td><td style="text-align:right">82</td><td style="color:var(--text-muted)">14 may 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Martín Silva</td><td>Backend Dev</td><td><span class="badge badge-active">Activo</span></td><td style="text-align:right">70</td><td style="color:var(--text-muted)">09 may 2025</td></tr>
+                </tbody>
+              </table></div>
+              <div class="data-table-footer">
+                <div class="data-table-count" data-dt-count></div>
+                <div data-dt-pagination></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Legend — variant references -->
+          <ol class="bd-family-legend">
+            <li>Data Table de candidatos — filtrá por texto, ordená por cualquier columna (Puntaje ordena numérico), seleccioná filas con los checkboxes, ocultá columnas desde “Columnas” y navegá entre páginas (5 por página).</li>
+          </ol>
+
+        </section>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout">
+        <div class="ds-toc-body">
+
+      <!-- Anatomía -->
+      <div class="docs-section" id="tc-dt-s-0">
+        <h2 class="docs-section-title">Anatomía</h2>
+        <table class="ds-table">
+          <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
+          <tbody>
+            <tr><td>Contenedor (<code>[data-datatable]</code>)</td><td>Envuelve toolbar + tabla + footer; <code>data-dt-pagesize</code> define el tamaño de página</td></tr>
+            <tr><td><code>.data-table-toolbar</code></td><td>Fila superior: filtro a la izquierda, menú de columnas a la derecha (<code>space-between</code>)</td></tr>
+            <tr><td><code>.data-table-filter</code></td><td>Campo de filtro de texto (<code>field-input</code> + <code>data-dt-filter</code>), máx. 280px</td></tr>
+            <tr><td>Columna de selección</td><td><code>th/td.data-table-select</code> con checkbox nativo (<code>data-dt-selectall</code> / <code>data-dt-row</code>)</td></tr>
+            <tr><td>Header ordenable</td><td><code>button.data-table-sort-btn</code> + <code>data-dt-sort</code> con caret <code>.data-table-sort-icon</code></td></tr>
+            <tr><td><code>.data-table-footer</code></td><td>Conteo de selección (<code>data-dt-count</code>) + paginación (<code>data-dt-pagination</code>)</td></tr>
+            <tr><td>Menú de columnas</td><td><code>[data-dt-colmenu]</code> con ítems <code>[data-dt-col]</code> (índice de columna + <code>aria-checked</code>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Configuraciones -->
+      <div class="docs-section" id="tc-dt-s-1">
+        <h2 class="docs-section-title">Configuraciones</h2>
+        <p class="ch-variant-label">Compacta — solo orden y paginación</p>
+        <p class="docs-section-desc">La forma mínima: sin toolbar ni selección. Basta con <code>data-dt-sort</code> en los headers y un contenedor <code>data-dt-pagination</code>.</p>
+        <div class="docs-preview full-width">
+          <div class="data-table-wrap" data-datatable data-dt-pagesize="4" style="width:100%">
+            <div class="table-scroll"><table class="data-table">
+              <thead><tr>
+                <th scope="col"><button type="button" class="data-table-sort-btn" data-dt-sort>Región <i data-lucide="chevron-up" class="data-table-sort-icon"></i></button></th>
+                <th scope="col" style="text-align:right"><button type="button" class="data-table-sort-btn" data-dt-sort style="justify-content:flex-end">Vacantes <i data-lucide="chevron-up" class="data-table-sort-icon"></i></button></th>
+                <th scope="col" style="text-align:right"><button type="button" class="data-table-sort-btn" data-dt-sort style="justify-content:flex-end">Contrataciones <i data-lucide="chevron-up" class="data-table-sort-icon"></i></button></th>
+              </tr></thead>
+              <tbody>
+                <tr><td>LATAM</td><td style="text-align:right">18</td><td style="text-align:right">7</td></tr>
+                <tr><td>Norteamérica</td><td style="text-align:right">12</td><td style="text-align:right">5</td></tr>
+                <tr><td>Europa</td><td style="text-align:right">9</td><td style="text-align:right">3</td></tr>
+                <tr><td>Asia</td><td style="text-align:right">6</td><td style="text-align:right">2</td></tr>
+                <tr><td>Oceanía</td><td style="text-align:right">4</td><td style="text-align:right">1</td></tr>
+              </tbody>
+            </table></div>
+            <div class="data-table-footer">
+              <div class="data-table-count" data-dt-count></div>
+              <div data-dt-pagination></div>
+            </div>
+          </div>
+        </div>
+        <p class="ch-variant-label" style="margin-top:16px">Completa — filtro, selección y columnas</p>
+        <p class="docs-section-desc">La versión con todas las features está en el <b>Overview</b>. Combina toolbar (filtro + menú de columnas), columna de selección y footer con conteo y paginación.</p>
+      </div>
+
+      <!-- Medidas -->
+      <div class="docs-section" id="tc-dt-s-2">
+        <h2 class="docs-section-title">Medidas</h2>
+        <table class="ds-table">
+          <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td>Toolbar</td><td><code>display:flex</code>, <code>space-between</code>, <code>gap:12px</code>, <code>margin-bottom:12px</code></td></tr>
+            <tr><td>Campo de filtro</td><td><code>max-width:280px</code>, <code>flex:1</code>, <code>min-width:180px</code></td></tr>
+            <tr><td>Columna de selección</td><td><code>width:1%</code>, <code>white-space:nowrap</code> (se ajusta al checkbox)</td></tr>
+            <tr><td>Botón de orden</td><td><code>gap:6px</code>, <code>padding:6px 8px</code>, <code>border-radius:var(--radius-sm)</code>, peso <code>600</code></td></tr>
+            <tr><td>Caret de orden</td><td><code>14×14px</code>, <code>opacity:.5</code> en reposo → <code>1</code> con <code>aria-sort</code> activo</td></tr>
+            <tr><td>Footer / estado vacío</td><td>Footer <code>margin-top:12px</code>; estado vacío <code>padding:32px 16px</code>, centrado</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Estados -->
+      <div class="docs-section" id="tc-dt-s-3">
+        <h2 class="docs-section-title">Estados</h2>
+        <table class="ds-table">
+          <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
+          <tbody>
+            <tr><td>Header — hover</td><td>Fondo del botón de orden resaltado</td><td><code>--color-surface-variant</code></td></tr>
+            <tr><td>Header — orden activo</td><td>Caret al 100% de opacidad; <code>aria-sort</code> ascendente/descendente rota el caret 180°</td><td><code>aria-sort</code> + <code>.data-table-sort-icon</code></td></tr>
+            <tr><td>Fila — seleccionada</td><td>Resalte de fila con <code>tr.selected</code> (definido en Table)</td><td><code>--color-surface-container-high</code></td></tr>
+            <tr><td>Cabecera — selección parcial</td><td>Checkbox de cabecera en estado indeterminado</td><td><code>.indeterminate</code> (propiedad DOM)</td></tr>
+            <tr><td>Filtro sin resultados</td><td>Fila de estado vacío “Sin resultados.” a lo ancho de la tabla</td><td><code>--text-muted</code></td></tr>
+            <tr><td>Foco visible</td><td>Anillo de foco en botón de orden, checkboxes y controles de paginación</td><td><code>--color-focus</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Tokens y especificaciones -->
+      <div class="docs-section" id="tc-dt-s-4">
+        <h2 class="docs-section-title">Tokens y especificaciones</h2>
+        <p class="docs-section-desc">La Data Table hereda los tokens de <b>Table</b> para el contenedor, la banda de cabecera y las celdas; abajo, los tokens propios del comportamiento agregado. Se recalibra solo en dark mode.</p>
+        <table class="ds-table">
+          <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
+          <tbody>
+            <tr><td>Botón de orden — hover</td><td><code>--color-surface-variant</code></td></tr>
+            <tr><td>Botón de orden — foco</td><td><code>--color-focus</code> (outline 2px)</td></tr>
+            <tr><td>Fila seleccionada</td><td><code>--color-surface-container-high</code> (vía <code>tr.selected</code>)</td></tr>
+            <tr><td>Conteo de selección</td><td><code>--text-muted</code> (<code>--font-size-caption</code>)</td></tr>
+            <tr><td>Estado vacío</td><td><code>--text-muted</code> (<code>--font-size-body-sm</code>)</td></tr>
+            <tr><td>Menú de columnas</td><td><code>--color-surface-container</code> + <code>--color-outline-variant</code> + <code>--shadow-md</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-dt-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-dt-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-dt-s-1">Configuraciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-dt-s-2">Medidas</a></li>
+            <li><a class="ds-toc-link" data-target="tc-dt-s-3">Estados</a></li>
+            <li><a class="ds-toc-link" data-target="tc-dt-s-4">Tokens y especificaciones</a></li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <div class="ds-toc-layout">
+        <div class="ds-toc-body">
+
+        <section class="docs-section" id="tc-dt-g-0">
+          <h2 class="docs-section-title">Uso</h2>
+          <p class="ds-p">Usá la Data Table cuando la Table simple ya no alcanza: el usuario necesita <b>ordenar, filtrar, seleccionar o paginar</b> un conjunto de registros. Si solo mostrás unas pocas filas sin esas operaciones, quedate con <b>Table</b>.</p>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Listas largas donde hace falta ordenar o filtrar por columna.</li><li>Flujos con acciones en lote (seleccionar filas → aplicar una acción).</li><li>Dashboards y back-office con muchos registros comparables.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Tablas cortas y estáticas sin orden/filtro → usá <b>Table</b>.</li><li>Un solo registro con muchos detalles → un <b>panel de detalle</b>.</li><li>Mobile como caso principal → las tablas se degradan; considerá una <b>List</b> de cards.</li></ul></div></div>
+          </div>
+        </section>
+        <section class="docs-section" id="tc-dt-g-1">
+          <h2 class="docs-section-title">Comportamiento</h2>
+          <h3 class="ds-h3" style="margin-top:24px">Orden y filtro</h3>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>Un solo criterio de orden por vez; el clic alterna asc → desc y lo refleja con <code>aria-sort</code> + caret.</li>
+            <li>El orden es numérico cuando ambas celdas son números (Puntaje), alfabético (locale <code>es</code>) en el resto.</li>
+            <li>El filtro es por substring sobre el texto visible de la fila y resetea a la primera página.</li>
+          </ul>
+          <h3 class="ds-h3" style="margin-top:24px">Selección y paginación</h3>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>El checkbox de cabecera selecciona/deselecciona las filas del filtro actual y muestra estado indeterminado en selección parcial.</li>
+            <li>Mostrá siempre el conteo “N de M fila(s) seleccionada(s)” para que la acción en lote sea predecible.</li>
+            <li>Paginá con <code>data-dt-pagesize</code>; con una sola página la barra de paginación no se muestra.</li>
+          </ul>
+          <h3 class="ds-h3" style="margin-top:24px">Contenido</h3>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>Los estados van en <b>Badge</b>, nunca como texto coloreado suelto.</li>
+            <li>Alineá números, montos y fechas a la derecha; el texto a la izquierda.</li>
+            <li>Ofrecé el menú de columnas cuando hay más columnas de las que caben cómodas en pantalla.</li>
+          </ul>
+        </section>
+
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-dt-g-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-dt-g-0">Uso</a></li>
+            <li><a class="ds-toc-link" data-target="tc-dt-g-1">Comportamiento</a></li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Orden y ARIA</h2>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>El header ordenable es un <code>&lt;button&gt;</code> real (foco y activación por teclado gratis), no un <code>th</code> clickeable</li><li><span class="ds-a11y-icon">♿</span>La dirección de orden se expone con <code>aria-sort="ascending"</code> / <code>"descending"</code> en el <code>th</code> activo</li><li><span class="ds-a11y-icon">♿</span>Los headers de columna llevan <code>scope="col"</code></li></ul>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Selección</h2>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Los checkboxes son <code>&lt;input type="checkbox"&gt;</code> nativos: Espacio para marcar, semántica de screen reader incluida</li><li><span class="ds-a11y-icon">♿</span>Cada checkbox de fila y el de cabecera tienen <code>aria-label</code> descriptivo</li><li><span class="ds-a11y-icon">♿</span>La selección parcial usa la propiedad DOM <code>indeterminate</code>, que los lectores anuncian como “mixto”</li></ul>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Contraste y foco</h2>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Todos los controles (orden, checkboxes, paginación) muestran el anillo de foco oficial (<code>--color-focus</code>)</li><li><span class="ds-a11y-icon">♿</span>Los tokens semánticos garantizan contraste AA en claro y oscuro — nunca sobreescribir colores por tema</li></ul>
+        </div>
+      </div>
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Inicio rápido</h2>
+          <p class="docs-section-desc">Importá los estilos y activá el comportamiento con <code>initDataTable()</code> (o <code>initAllDataTables()</code>, que recorre todos los <code>[data-datatable]</code> de la página). No requiere ninguna librería.</p>
+          <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">CSS requerido</h3>
+<div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>css/variables.css
+css/components/table.css
+css/components/data-table.css
+css/components/pagination.css
+css/components/checkbox.css
+css/components/dropdown-menu.css</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+          <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">HTML</h3>
+<div class="docs-code-wrapper">
+          <pre class="docs-code standalone"><code>&lt;div data-datatable data-dt-pagesize=&quot;5&quot;&gt;
+  &lt;div class=&quot;data-table-toolbar&quot;&gt;
+    &lt;div class=&quot;data-table-filter&quot;&gt;
+      &lt;input class=&quot;field-input&quot; data-dt-filter placeholder=&quot;Filtrar…&quot;&gt;
+    &lt;/div&gt;
+    &lt;!-- botón + menú de visibilidad de columnas (opcional) --&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;table-scroll&quot;&gt;
+    &lt;table class=&quot;data-table&quot;&gt;
+      &lt;thead&gt;&lt;tr&gt;
+        &lt;th class=&quot;data-table-select&quot;&gt;
+          &lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; data-dt-selectall&gt;
+        &lt;/th&gt;
+        &lt;th scope=&quot;col&quot;&gt;
+          &lt;button class=&quot;data-table-sort-btn&quot; data-dt-sort&gt;
+            Nombre &lt;i data-lucide=&quot;chevron-up&quot; class=&quot;data-table-sort-icon&quot;&gt;&lt;/i&gt;
+          &lt;/button&gt;
+        &lt;/th&gt;
+        &lt;th scope=&quot;col&quot;&gt;Estado&lt;/th&gt;
+      &lt;/tr&gt;&lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td class=&quot;data-table-select&quot;&gt;
+            &lt;input type=&quot;checkbox&quot; class=&quot;checkbox&quot; data-dt-row&gt;
+          &lt;/td&gt;
+          &lt;td&gt;Ana García&lt;/td&gt;
+          &lt;td&gt;&lt;span class=&quot;badge badge-active&quot;&gt;Activo&lt;/span&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;data-table-footer&quot;&gt;
+    &lt;div class=&quot;data-table-count&quot; data-dt-count&gt;&lt;/div&gt;
+    &lt;div data-dt-pagination&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;initAllDataTables();&lt;/script&gt;</code></pre>
+          <button class="docs-copy-btn">Copiar</button>
+        </div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Atributos de comportamiento</h2>
+          <table class="ds-table">
+            <thead><tr><th>Atributo</th><th>Rol</th></tr></thead>
+            <tbody>
+              <tr><td><code>data-datatable</code></td><td>Marca el contenedor que <code>initDataTable()</code> mejora</td></tr>
+              <tr><td><code>data-dt-pagesize</code></td><td>Filas por página (default <code>10</code>)</td></tr>
+              <tr><td><code>data-dt-filter</code></td><td>Input de filtro de texto</td></tr>
+              <tr><td><code>data-dt-sort</code></td><td>Botón de orden dentro de un <code>th</code></td></tr>
+              <tr><td><code>data-dt-selectall</code> / <code>data-dt-row</code></td><td>Checkbox de cabecera / de fila</td></tr>
+              <tr><td><code>data-dt-count</code></td><td>Contenedor del conteo “N de M”</td></tr>
+              <tr><td><code>data-dt-pagination</code></td><td>Contenedor que el enhancer rellena con la barra de páginas</td></tr>
+              <tr><td><code>data-dt-colmenu</code> / <code>data-dt-colmenu-btn</code> / <code>data-dt-col</code></td><td>Menú de visibilidad de columnas, su trigger y cada ítem (índice de columna)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">React — wrapper opcional</h2>
+          <p class="docs-section-desc">Para proyectos React existe un wrapper tipado en <code>components/ui/data-table.tsx</code> que mapea columnas/datos sobre estas mismas clases. La fuente de estilos siempre es <code>css/components/data-table.css</code>.</p>
         </div>
       </div>
 </div>
@@ -26092,6 +26426,7 @@ const SECTIONS = {
   'c-stat-card':       { label: 'Stat Card',           group: 'Components', parent: 'c-card' },
   'c-switch':          { label: 'Switch',                group: 'Components' },
   'c-table':           { label: 'Table',                 group: 'Components' },
+  'c-data-table':      { label: 'Data Table',            group: 'Components', parent: 'c-table' },
   'c-tabs':            { label: 'Tabs',                  group: 'Components' },
   'c-textarea':        { label: 'Textarea',              group: 'Components' },
   'c-toolbar':         { label: 'Tool Bar',            group: 'Components', parent: 'c-app-bar' },
