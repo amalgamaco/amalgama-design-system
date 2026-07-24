@@ -74,13 +74,17 @@ export function InputGroupShowcase() {
   )
 }
 
+export function SpinnerBasic() {
+  return <Spinner role="status" aria-label="Cargando" />
+}
+
 export function SpinnerShowcase() {
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-5 flex-wrap">
       <Spinner size="sm" />
       <Spinner />
       <Spinner size="lg" />
-      <Button variant="primary" size="sm" disabled>
+      <Button variant="primary" size="sm">
         <Spinner size="sm" onPrimary /> Guardando…
       </Button>
     </div>

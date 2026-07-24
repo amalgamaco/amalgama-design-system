@@ -23,7 +23,7 @@ export function MenuShowcase() {
         </DropdownMenuContent>
       </DropdownMenu>
       <p className="docs-section-desc" style={{ marginTop: 14 }}>
-        Hacé clic en el botón para abrir el menú. Posicionamiento, foco y navegación por teclado vienen de Radix UI.
+        Hacé clic en el botón para abrir el menú.
       </p>
     </div>
   )

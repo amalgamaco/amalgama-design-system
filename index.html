@@ -21,8 +21,8 @@
 <!-- Tailwind v4 + shadcn/Radix React islands: mount real @amalgama/ds components into
      any [data-island="<name>"] placeholder. Additive — does nothing until a placeholder
      exists, so it is safe to load alongside the buildless examples during the cutover. -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=2">
-<script type="module" src="islands/dist/embassy-islands.js?v=2"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=3">
+<script type="module" src="islands/dist/embassy-islands.js?v=3"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -18659,15 +18659,7 @@ const [on, setOn] = useState(false)
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-<div class="dropdown-wrap">
-              <button class="btn-primary btn-sm" type="button" onclick="toggleDropdown(this,'menusc-2')">Opciones</button>
-              <div class="dropdown-content" id="menusc-2" role="menu" style="display:none">
-                <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Editar</button>
-                <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Duplicar</button>
-                <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Eliminar</button>
-              </div>
-            </div>
-            <p class="docs-section-desc" style="margin-top:14px">Hacé clic en el botón para abrir el menú.</p>
+<div data-island="menu-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -21322,11 +21314,11 @@ import { Button } from &quot;./components/ui/button&quot;
       <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
         <p class="bd-lead">Carga breve o indeterminada, dentro de botones, inputs o junto a un texto.</p>
         <ul class="bd-overview-list"><li><b>Tamaños:</b> <code>.spinner-sm</code> · default · <code>.spinner-lg</code>.</li><li>Sobre superficies de color: <code>.spinner-on-primary</code>.</li><li>Para carga con estructura conocida usá <b>Skeleton</b>; para progreso medible, <b>Progress</b>.</li></ul>
-        <div class="bd-family-wrap"><span class="spinner" role="status" aria-label="Cargando"></span></div>
+        <div class="bd-family-wrap"><div data-island="spinner-basic"></div></div>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
         <h2 class="docs-section-title">Variantes</h2>
-        <div class="bd-family-wrap" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap"><span class="spinner spinner-sm"></span><span class="spinner"></span><span class="spinner spinner-lg"></span><button class="btn-primary btn-sm"><span class="spinner spinner-sm spinner-on-primary"></span> Guardando…</button></div>
+        <div class="bd-family-wrap"><div data-island="spinner-showcase"></div></div>
         <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>Small / default / large</td><td><code>.spinner-sm</code> · <code>.spinner</code> · <code>.spinner-lg</code></td></tr><tr><td>Sobre filled</td><td><code>.spinner-on-primary</code></td></tr></tbody></table>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Cargas cortas/indeterminadas.</li><li>Dentro de botones al enviar.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Carga con layout conocido → Skeleton.</li><li>Progreso medible → Progress.</li></ul></div></div></div></section></div>
