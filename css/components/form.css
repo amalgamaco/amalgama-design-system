@@ -142,6 +142,12 @@ input:disabled, select:disabled, textarea:disabled {
   border-color: var(--interactive);
   box-shadow: 0 0 0 3px var(--color-focus-ring);
 }
+/* Compact size (par shadcn Select size="sm" / select-trigger[data-size="sm"]). */
+.select-wrapper select[data-size="sm"] {
+  min-height: 32px;
+  padding: 5px 34px 5px 12px;
+  font-size: var(--font-size-body-sm);
+}
 .select-caret {
   position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
   pointer-events: none; color: var(--text-muted);

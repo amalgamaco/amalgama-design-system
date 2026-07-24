@@ -45,6 +45,15 @@ const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttribu
 )
 CardDescription.displayName = "CardDescription"
 
+/** Top-right slot inside CardHeader — e.g. an icon button ("⋮") or a Switch.
+ *  The header switches to a two-column grid when a CardAction is present. */
+const CardAction = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("card-action", className)} {...props} />
+  )
+)
+CardAction.displayName = "CardAction"
+
 const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div ref={ref} className={cn("card-content", className)} {...props} />
@@ -89,6 +98,7 @@ export {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardAction,
   CardContent,
   CardFooter,
   FormCard,
