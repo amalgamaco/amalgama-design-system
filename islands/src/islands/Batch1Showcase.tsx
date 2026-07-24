@@ -75,32 +75,60 @@ export function SpinnerShowcase() {
   )
 }
 
-export function AttachmentShowcase() {
+// Exact docs SVGs so the islandized attachments render identically.
+const FileFold = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
+)
+const FilePlain = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /></svg>
+)
+const AlertCircleIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12" y2="16" /></svg>
+)
+
+// Overview — single attachment.
+export function AttachmentBasic() {
   return (
-    <AttachmentList className="w-full max-w-md">
+    <AttachmentList style={{ maxWidth: 420, width: "100%" }}>
       <Attachment>
-        <AttachmentIcon><FileText /></AttachmentIcon>
+        <AttachmentIcon><FileFold /></AttachmentIcon>
         <AttachmentBody>
           <AttachmentName>CV_Ana_Torres.pdf</AttachmentName>
           <AttachmentMeta>240 KB · PDF</AttachmentMeta>
         </AttachmentBody>
-        <AttachmentRemove aria-label="Quitar"><X className="size-4" /></AttachmentRemove>
+        <AttachmentRemove className="btn-sm" aria-label="Quitar">✕</AttachmentRemove>
+      </Attachment>
+    </AttachmentList>
+  )
+}
+
+// Specs — Variantes / estados (upload progress + error).
+export function AttachmentShowcase() {
+  return (
+    <AttachmentList style={{ maxWidth: 420, width: "100%" }}>
+      <Attachment>
+        <AttachmentIcon><FileFold /></AttachmentIcon>
+        <AttachmentBody>
+          <AttachmentName>CV_Ana_Torres.pdf</AttachmentName>
+          <AttachmentMeta>240 KB · PDF</AttachmentMeta>
+        </AttachmentBody>
+        <AttachmentRemove className="btn-sm" aria-label="Quitar">✕</AttachmentRemove>
       </Attachment>
       <Attachment>
-        <AttachmentIcon><FileText /></AttachmentIcon>
+        <AttachmentIcon><FilePlain /></AttachmentIcon>
         <AttachmentBody>
-          <AttachmentName>Portfolio.zip</AttachmentName>
+          <AttachmentName>portfolio.zip</AttachmentName>
           <AttachmentMeta>Subiendo… 60%</AttachmentMeta>
           <AttachmentProgress value={60} />
         </AttachmentBody>
       </Attachment>
       <Attachment error>
-        <AttachmentIcon><FileText /></AttachmentIcon>
+        <AttachmentIcon><AlertCircleIcon /></AttachmentIcon>
         <AttachmentBody>
-          <AttachmentName>demasiado-grande.mov</AttachmentName>
-          <AttachmentMeta>Error: supera 25 MB</AttachmentMeta>
+          <AttachmentName>imagen.psd</AttachmentName>
+          <AttachmentMeta>Formato no permitido</AttachmentMeta>
         </AttachmentBody>
-        <AttachmentRemove aria-label="Quitar"><X className="size-4" /></AttachmentRemove>
+        <AttachmentRemove className="btn-sm" aria-label="Quitar">✕</AttachmentRemove>
       </Attachment>
     </AttachmentList>
   )

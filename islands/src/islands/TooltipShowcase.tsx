@@ -1,7 +1,6 @@
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@ds/tooltip"
 import { RichTooltip } from "@ds/rich-tooltip"
 import { Button } from "@ds/button"
-import { HelpCircle } from "lucide-react"
 
 export function TooltipShowcase() {
   return (
@@ -40,7 +39,7 @@ export function TooltipShowcase() {
             </Tooltip>
           </div>
           <p className="text-label text-fg-subtle mt-3">
-            Hover sobre cualquier botón para ver el tooltip. Radix gestiona posicionamiento, foco y cierre.
+            Hover sobre cualquier botón para ver el tooltip.
           </p>
         </div>
 
@@ -51,7 +50,6 @@ export function TooltipShowcase() {
             <RichTooltip
               trigger={
                 <Button variant="secondary" size="sm">
-                  <HelpCircle className="w-4 h-4" />
                   ¿Qué es una vacante?
                 </Button>
               }
@@ -63,7 +61,7 @@ export function TooltipShowcase() {
             />
           </div>
           <p className="text-label text-fg-subtle mt-3">
-            Click para abrir. Persiste hasta cerrar con el botón ×, Escape o un click afuera — incluye título, subtítulo y acciones.
+            Click para abrir. Persiste hasta cerrar con el botón ×, Escape o un click afuera.
           </p>
         </div>
       </div>

@@ -21,8 +21,8 @@
 <!-- Tailwind v4 + shadcn/Radix React islands: mount real @amalgama/ds components into
      any [data-island="<name>"] placeholder. Additive — does nothing until a placeholder
      exists, so it is safe to load alongside the buildless examples during the cutover. -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=6">
-<script type="module" src="islands/dist/embassy-islands.js?v=6"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=7">
+<script type="module" src="islands/dist/embassy-islands.js?v=7"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -21001,47 +21001,7 @@ const Switch = React.forwardRef&lt;HTMLInputElement, SwitchProps&gt;(
           </ul>
 
           <!-- Component variants -->
-          <div class="bd-family-wrap">
-<div style="display:flex;flex-direction:column;gap:32px">
-              <div>
-                <p style="font-size:var(--font-size-label);color:var(--color-on-surface-variant);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">Plain tooltip</p>
-                <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
-                  <span class="tooltip-wrap">
-                <button class="btn-secondary btn-sm" type="button">Arriba (default)</button>
-                <span class="tooltip-content tooltip-top">Tooltip en la parte superior</span>
-              </span>
-                  <span class="tooltip-wrap">
-                <button class="btn-secondary btn-sm" type="button">Abajo</button>
-                <span class="tooltip-content tooltip-bottom">Tooltip en la parte inferior</span>
-              </span>
-                  <span class="tooltip-wrap">
-                <button class="btn-secondary btn-sm" type="button">Derecha</button>
-                <span class="tooltip-content tooltip-right">Tooltip a la derecha</span>
-              </span>
-                  <span class="tooltip-wrap">
-                <button class="btn-secondary btn-sm" type="button">Izquierda</button>
-                <span class="tooltip-content tooltip-left">Tooltip a la izquierda</span>
-              </span>
-                </div>
-                <p style="font-size:var(--font-size-label);color:var(--color-on-surface-variant);margin-top:12px">Hover sobre cualquier botón para ver el tooltip.</p>
-              </div>
-              <div>
-                <p style="font-size:var(--font-size-label);color:var(--color-on-surface-variant);margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em">Rich tooltip</p>
-                <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
-                  <span class="rich-tooltip-wrap">
-                    <button class="btn-secondary btn-sm" type="button" onclick="toggleRichTooltip(this,'ttsc-2-rich')">¿Qué es una vacante?</button>
-                    <div class="rich-tooltip-content rich-tooltip-bottom" id="ttsc-2-rich">
-                      <button class="rich-tooltip-close" type="button" aria-label="Cerrar" onclick="toggleRichTooltip(this,'ttsc-2-rich')">✕</button>
-                      <div class="rich-tooltip-title">Vacante</div>
-                      <div class="rich-tooltip-subtitle">Una posición abierta dentro de una búsqueda. Agrupa candidatos, etapas y responsables del proceso de selección.</div>
-                      <div class="rich-tooltip-actions"><button class="btn-text btn-sm" type="button">Saber más</button></div>
-                    </div>
-                  </span>
-                </div>
-                <p style="font-size:var(--font-size-label);color:var(--color-on-surface-variant);margin-top:12px">Click para abrir. Persiste hasta cerrar con el botón ×, Escape o un click afuera.</p>
-              </div>
-            </div>
-          </div>
+          <div class="bd-family-wrap"><div data-island="tooltip-showcase"></div></div>
 
           <!-- Legend — variant references -->
           <ol class="bd-family-legend">
@@ -21482,15 +21442,11 @@ import { Button } from &quot;./components/ui/button&quot;
       <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
         <p class="bd-lead">Lista archivos subidos o por subir (CVs, adjuntos), con progreso y botón de quitar.</p>
         <ul class="bd-overview-list"><li><b>Composición:</b> <code>.attachment</code> = <code>.attachment-icon</code> + <code>.attachment-body</code> (nombre + meta) + acción.</li><li><b>Estados:</b> subiendo (<code>.attachment-progress</code>) · error (<code>.attachment-error</code>).</li><li>Se apilan en <code>.attachment-list</code>. Para subir el archivo usá <code>&lt;input type="file"&gt;</code> (Input).</li></ul>
-        <div class="bd-family-wrap"><ul class="attachment-list" style="max-width:420px;width:100%"><li class="attachment"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><div class="attachment-body"><div class="attachment-name">CV_Ana_Torres.pdf</div><div class="attachment-meta">240 KB · PDF</div></div><button class="icon-btn btn-sm attachment-remove" type="button" aria-label="Quitar">✕</button></li></ul></div>
+        <div class="bd-family-wrap"><div data-island="attachment-basic"></div></div>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
         <h2 class="docs-section-title">Variantes / estados</h2>
-        <div class="bd-family-wrap"><ul class="attachment-list" style="max-width:420px;width:100%">
-          <li class="attachment"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span><div class="attachment-body"><div class="attachment-name">CV_Ana_Torres.pdf</div><div class="attachment-meta">240 KB · PDF</div></div><button class="icon-btn btn-sm attachment-remove" type="button" aria-label="Quitar">✕</button></li>
-          <li class="attachment"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg></span><div class="attachment-body"><div class="attachment-name">portfolio.zip</div><div class="attachment-meta">Subiendo… 60%</div><div class="attachment-progress"><div class="attachment-progress-bar" style="width:60%"></div></div></div></li>
-          <li class="attachment attachment-error"><span class="attachment-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg></span><div class="attachment-body"><div class="attachment-name">imagen.psd</div><div class="attachment-meta">Formato no permitido</div></div><button class="icon-btn btn-sm attachment-remove" type="button" aria-label="Quitar">✕</button></li>
-        </ul></div>
+        <div class="bd-family-wrap"><div data-island="attachment-showcase"></div></div>
         <table class="ds-table" style="margin-top:16px"><thead><tr><th>Estado</th><th>Cómo</th></tr></thead><tbody><tr><td>Listo</td><td><code>.attachment</code> con acción de quitar</td></tr><tr><td>Subiendo</td><td><code>.attachment-progress</code> + <code>.attachment-progress-bar</code></td></tr><tr><td>Error</td><td><code>.attachment-error</code></td></tr></tbody></table>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Listar archivos subidos/por subir.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Subir el archivo → input file.</li><li>Galería de imágenes → Carousel.</li></ul></div></div></div></section></div>
