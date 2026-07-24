@@ -45,18 +45,18 @@ export function LabelShowcase() {
 /* ── Accordion ── */
 export function AccordionShowcase() {
   return (
-    <Accordion type="single" collapsible className="w-full max-w-md">
+    <Accordion type="single" collapsible defaultValue="a" className="w-full max-w-md">
       <AccordionItem value="a">
-        <AccordionTrigger>¿Cómo aplico el Design System?</AccordionTrigger>
-        <AccordionContent>Importá el theme <code>@amalgama/ds/tailwind.theme.css</code> y copiá el componente que necesites — resuelve solo a tokens Embassy.</AccordionContent>
+        <AccordionTrigger>Como aplico el Design System?</AccordionTrigger>
+        <AccordionContent>Copia el archivo <code>css/components/accordion.css</code> (o el barrel <code>css/components.css</code>) — resuelve solo a tokens Embassy, sin build ni dependencias.</AccordionContent>
       </AccordionItem>
       <AccordionItem value="b">
-        <AccordionTrigger>¿Funciona en dark mode?</AccordionTrigger>
-        <AccordionContent>Sí. Poné <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code> — la capa semántica de color se recalibra sola, sin overrides por componente.</AccordionContent>
+        <AccordionTrigger>Funciona en dark mode?</AccordionTrigger>
+        <AccordionContent>Si. Pone <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code> — la capa semantica de color se recalibra sola, sin overrides por componente.</AccordionContent>
       </AccordionItem>
       <AccordionItem value="c">
-        <AccordionTrigger>¿Necesito Radix?</AccordionTrigger>
-        <AccordionContent>Los componentes interactivos envuelven primitivas de Radix, igual que shadcn/ui.</AccordionContent>
+        <AccordionTrigger>Que pasa con la accesibilidad?</AccordionTrigger>
+        <AccordionContent>Cada trigger controla su panel via <code>aria-expanded</code>/<code>aria-controls</code>, con navegacion por teclado nativa del boton.</AccordionContent>
       </AccordionItem>
     </Accordion>
   )

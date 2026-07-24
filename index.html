@@ -21,8 +21,8 @@
 <!-- Tailwind v4 + shadcn/Radix React islands: mount real @amalgama/ds components into
      any [data-island="<name>"] placeholder. Additive — does nothing until a placeholder
      exists, so it is safe to load alongside the buildless examples during the cutover. -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=1">
-<script type="module" src="islands/dist/embassy-islands.js?v=1"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=2">
+<script type="module" src="islands/dist/embassy-islands.js?v=2"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -18536,26 +18536,8 @@ const [on, setOn] = useState(false)
 
           <!-- Component variants -->
           <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:24px">
-            <div style="display:flex;gap:32px;align-items:center">
-            <div style="text-align:center">
-              <svg class="progress-circular progress-circular-indeterminate" viewBox="0 0 44 44" aria-label="Indeterminado"><circle class="progress-circular-track" cx="22" cy="22" r="18"/><circle class="progress-circular-fill" cx="22" cy="22" r="18"/></svg>
-              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px">Indeterminado</div>
-            </div>
-            <div style="text-align:center">
-              <svg class="progress-circular" viewBox="0 0 44 44" aria-label="65 por ciento"><circle class="progress-circular-track" cx="22" cy="22" r="18"/><circle class="progress-circular-fill" cx="22" cy="22" r="18" style="stroke-dashoffset:calc(113 - (113 * 65 / 100))"/></svg>
-              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px">Determinado 65%</div>
-            </div>
-          </div>
-            <div style="display:flex;flex-direction:column;gap:18px;max-width:300px">
-            <div>
-              <div class="progress progress-indeterminate" role="progressbar" aria-label="Indeterminado"><div class="progress-fill"></div></div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px">Indeterminado</div>
-            </div>
-            <div>
-              <div class="progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="40 por ciento"><div class="progress-fill" style="width:40%"></div></div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px">Determinado 40%</div>
-            </div>
-          </div>
+            <div data-island="progress-circular"></div>
+            <div data-island="progress-linear"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -22704,20 +22686,7 @@ import { Button } from &quot;./components/ui/button&quot;
             <li><b>Chevron</b> que rota 180° al abrir, con la curva Expressive de Embassy.</li>
             <li>Contenido animado por altura vía <code>grid-template-rows</code> (CSS puro, sin JS de medición).</li>
           </ul>
-          <div class="bd-family-wrap"><div class="accordion" style="width:100%;max-width:28rem">
-              <div class="accordion-item">
-                <h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-ov-1" onclick="accToggle(this)">Como aplico el Design System?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3>
-                <div class="accordion-content" data-state="open" id="acc-ov-1" role="region"><div class="accordion-content-inner">Copia el archivo <code>css/components/accordion.css</code> (o el barrel <code>css/components.css</code>) — resuelve solo a tokens Embassy, sin build ni dependencias.</div></div>
-              </div>
-              <div class="accordion-item">
-                <h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-ov-2" onclick="accToggle(this)">Funciona en dark mode?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3>
-                <div class="accordion-content" data-state="closed" id="acc-ov-2" role="region"><div class="accordion-content-inner">Si. Pone <code>data-theme="dark"</code> en el <code>&lt;html&gt;</code> — la capa semantica de color se recalibra sola, sin overrides por componente.</div></div>
-              </div>
-              <div class="accordion-item">
-                <h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-ov-3" onclick="accToggle(this)">Que pasa con la accesibilidad?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3>
-                <div class="accordion-content" data-state="closed" id="acc-ov-3" role="region"><div class="accordion-content-inner">Cada trigger controla su panel via <code>aria-expanded</code>/<code>aria-controls</code>, con navegacion por teclado nativa del boton.</div></div>
-              </div>
-            </div></div>
+          <div class="bd-family-wrap"><div data-island="accordion-showcase"></div></div>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
