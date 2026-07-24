@@ -12935,6 +12935,291 @@ css/layout.css</code></pre>
     </section>
 
     <!-- ═══════════ COMPONENT: TOOLBAR ═══════════ -->
+    <section class="ds-section" id="s-c-toolbar">
+      <div class="ds-page-tag">Components · App bar</div>
+      <h1>Tool Bar</h1>
+      <p>Barra de controles sobre una lista o tabla: búsqueda compacta, filtros y acciones de la vista.</p>
+
+      <!-- ══ Component Tabs ══ -->
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <!-- ══ OVERVIEW ══ -->
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+
+          <!-- Short introduction -->
+          <p class="bd-lead">La Tool Bar es la fila de controles que encabeza una lista o tabla: un <code>search-field</code> compacto que crece con <code>flex:1</code>, más los filtros, el orden y las acciones de la vista. Debajo, el <code>result-count</code> resume cuántos registros se están mostrando. Para la búsqueda standalone de una pantalla usá <code>search-bar</code>, no la Tool Bar.</p>
+
+          <!-- Key characteristics -->
+          <ul class="bd-overview-list">
+            <li><b>Contenedor flex de una fila</b> (<code>.toolbar</code>): <code>gap</code> de <code>--space-2</code> y <code>margin-bottom</code> de <code>--space-4</code>; alinea search, filtros y acciones a la misma altura.</li>
+            <li><b>Search Field</b> (<code>.search-field</code>): variante compacta del Search — fondo <code>--color-surface</code> (blanco en light, <b>nunca</b> transparente ni el gris de la <code>search-bar</code> mobile), forma <code>--radius-md</code>, crece con <code>flex:1</code>.</li>
+            <li><b>Tool Bar Button</b> (<code>.toolbar-btn</code>): acción secundaria outlined análoga a <code>btn-secondary</code>, para filtros, orden y acciones de la vista.</li>
+            <li><b>Result Count</b> (<code>.result-count</code>): línea de resumen debajo de la barra; el número va en <code>&lt;strong&gt;</code> con <code>--color-on-surface</code>.</li>
+            <li><b>CSS-only:</b> se consume con clases sobre markup HTML (<code>toolbar.css</code>); no tiene wrapper React propio.</li>
+            <li><b>Regla clave:</b> búsqueda que encabeza una pantalla completa → <code>search-bar</code>; contexto y acciones globales del shell → <b>Top Bar</b>. La Tool Bar es para los controles de <i>una</i> lista/tabla.</li>
+          </ul>
+
+          <!-- Component variants -->
+          <div class="bd-family-wrap">
+            <div style="display:flex;flex-direction:column;gap:28px">
+              <div>
+                <p style="font:600 12px var(--font-body);color:var(--color-on-surface-variant);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">1 · Search + filtros + orden</p>
+                <div class="toolbar" style="margin-bottom:8px">
+                  <div class="search-field">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <input type="search" placeholder="Buscar vacantes…" aria-label="Buscar vacantes">
+                  </div>
+                  <div class="select" data-select style="width:180px;flex-shrink:0"><button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Estado"><span class="select-value">Todos los estados</span><svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button><div class="select-content" role="listbox" aria-label="Estado" hidden><div class="select-viewport"><div class="select-item" role="option" data-value="todos" aria-selected="true"><span class="select-item-text">Todos los estados</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="abierta" aria-selected="false"><span class="select-item-text">Abierta</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div><div class="select-item" role="option" data-value="cerrada" aria-selected="false"><span class="select-item-text">Cerrada</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span></div></div></div></div>
+                  <button type="button" class="toolbar-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg> Filtros</button>
+                  <button type="button" class="toolbar-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5h10M11 9h7M11 13h4M3 17l3 3 3-3M6 18V4"/></svg> Ordenar</button>
+                </div>
+                <div class="result-count">Mostrando <strong>24</strong> vacantes</div>
+              </div>
+
+              <div>
+                <p style="font:600 12px var(--font-body);color:var(--color-on-surface-variant);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">2 · Search + acción primaria de la vista</p>
+                <div class="toolbar" style="margin-bottom:8px">
+                  <div class="search-field">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                    <input type="search" placeholder="Buscar candidatos…" aria-label="Buscar candidatos">
+                  </div>
+                  <button type="button" class="toolbar-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg> Filtros</button>
+                  <button type="button" class="btn-primary btn-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Nueva vacante</button>
+                </div>
+                <div class="result-count">Mostrando <strong>8</strong> de <strong>128</strong> candidatos</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Legend — variant references -->
+          <ol class="bd-family-legend">
+            <li>Search Field — búsqueda compacta que crece con <code>flex:1</code> (<code>.search-field</code>)</li>
+            <li>Filtros — <code>Select</code> y/o <code>.toolbar-btn</code> outlined para refinar la lista</li>
+            <li>Acción de la vista — un único <code>btn-primary</code> a la derecha (jerarquía: una acción principal por contexto)</li>
+            <li>Result Count — resumen de registros mostrados, debajo de la barra (<code>.result-count</code>)</li>
+          </ol>
+
+        </section>
+      </div>
+
+      <!-- ══ SPECS ══ -->
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout">
+        <div class="ds-toc-body">
+
+        <section class="docs-section" id="tc-toolbar-s-0">
+          <h2 class="docs-section-title">Anatomía</h2>
+          <p class="docs-section-desc">Un contenedor <code>.toolbar</code> en fila con el <code>.search-field</code> (crece con <code>flex:1</code>), los <code>.toolbar-btn</code> de filtro/orden y la acción de la vista; debajo, el <code>.result-count</code>.</p>
+          <div class="docs-preview">
+            <div style="width:100%;max-width:640px">
+              <div class="toolbar">
+                <div class="search-field">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                  <input type="search" placeholder="Buscar vacantes…" aria-label="Buscar vacantes">
+                </div>
+                <button type="button" class="toolbar-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg> Filtros</button>
+                <button type="button" class="toolbar-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5h10M11 9h7M11 13h4M3 17l3 3 3-3M6 18V4"/></svg> Ordenar</button>
+              </div>
+              <div class="result-count">Mostrando <strong>24</strong> vacantes</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="docs-section" id="tc-toolbar-s-1">
+          <h2 class="docs-section-title">Configuraciones</h2>
+          <p class="docs-section-desc">La barra combina un único <code>search-field</code> con una cantidad variable de filtros y acciones. Piezas disponibles:</p>
+          <table class="ds-table">
+            <thead><tr><th>Pieza</th><th>Clase</th><th>Rol en la barra</th></tr></thead>
+            <tbody>
+              <tr><td>Search Field</td><td><code>.search-field</code></td><td>Búsqueda compacta; única por barra, crece con <code>flex:1</code>.</td></tr>
+              <tr><td>Filtro (select)</td><td><code>.select[data-select]</code></td><td>Refina la lista por una faceta (estado, tipo, orden).</td></tr>
+              <tr><td>Tool Bar Button</td><td><code>.toolbar-btn</code></td><td>Acción secundaria outlined (Filtros, Ordenar, Restablecer).</td></tr>
+              <tr><td>Acción primaria</td><td><code>.btn-primary.btn-sm</code></td><td>Una sola acción principal de la vista, alineada a la derecha.</td></tr>
+              <tr><td>Result Count</td><td><code>.result-count</code></td><td>Resumen de registros, fuera de <code>.toolbar</code>, debajo.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="docs-section" id="tc-toolbar-s-2">
+          <h2 class="docs-section-title">Medidas</h2>
+          <table class="ds-table">
+            <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+            <tbody>
+              <tr><td><code>.toolbar</code> layout</td><td><code>display:flex; align-items:center</code>, gap <code>var(--space-2)</code> (8px)</td></tr>
+              <tr><td><code>.toolbar</code> separación</td><td><code>margin-bottom: var(--space-4)</code> (16px)</td></tr>
+              <tr><td><code>.search-field</code></td><td>padding <code>8px var(--space-4)</code>, radio <code>var(--radius-md)</code>, <code>flex:1</code></td></tr>
+              <tr><td><code>.search-field</code> ícono</td><td><code>18×18px</code>, <code>flex-shrink:0</code></td></tr>
+              <tr><td><code>.toolbar-btn</code></td><td>padding <code>8px 16px</code>, gap <code>var(--space-2)</code>, radio <code>var(--radius-md)</code></td></tr>
+              <tr><td><code>.toolbar-btn</code> ícono</td><td><code>18×18px</code></td></tr>
+              <tr><td><code>.result-count</code></td><td><code>font-size: var(--font-size-label)</code>, <code>margin-bottom: 14px</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="docs-section" id="tc-toolbar-s-3">
+          <h2 class="docs-section-title">Estados</h2>
+          <table class="ds-table">
+            <thead><tr><th>Elemento</th><th>Estado</th><th>Tratamiento</th></tr></thead>
+            <tbody>
+              <tr><td><code>.search-field</code></td><td>Hover</td><td>Fondo <code>on-surface 8%</code> sobre surface; borde <code>on-surface 20%</code></td></tr>
+              <tr><td><code>.search-field</code></td><td>Focus-within</td><td>Fondo <code>on-surface 12%</code>; borde <code>--color-secondary</code>; caret <code>--color-secondary</code></td></tr>
+              <tr><td><code>.toolbar-btn</code></td><td>Hover</td><td>Fondo <code>--color-surface-variant</code>, borde <code>--color-outline-variant</code>, texto <code>--color-on-surface</code></td></tr>
+              <tr><td><code>.toolbar-btn</code></td><td>Active</td><td><code>opacity: .85</code></td></tr>
+              <tr><td><code>.toolbar-btn</code></td><td>Focus-visible</td><td><code>outline 2px --color-focus</code> + halo <code>--color-focus-ring</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="docs-section" id="tc-toolbar-s-4">
+          <h2 class="docs-section-title">Tokens y especificaciones</h2>
+          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="toolbar"></div></div>
+          <table class="ds-table">
+            <thead><tr><th>Clase</th><th>Token</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td><code>.toolbar</code></td><td><code>--space-2</code>, <code>--space-4</code></td><td>Fila flex de controles con gap y separación inferior</td></tr>
+              <tr><td><code>.search-field</code></td><td><code>--color-surface</code>, <code>--border</code>, <code>--radius-md</code>, <code>--color-secondary</code></td><td>Búsqueda compacta; fondo surface (nunca transparente), foco secondary</td></tr>
+              <tr><td><code>.search-field input</code></td><td><code>--font-body</code>, <code>--font-size-body-md</code>, <code>--color-on-surface</code></td><td>Texto de la búsqueda</td></tr>
+              <tr><td><code>.toolbar-btn</code></td><td><code>--color-surface-container</code>, <code>--color-outline</code>, <code>--radius-md</code>, <code>--font-size-body-md</code></td><td>Acción secundaria outlined (filtro / orden)</td></tr>
+              <tr><td><code>.toolbar-btn:focus-visible</code></td><td><code>--color-focus</code>, <code>--color-focus-ring</code></td><td>Anillo de foco accesible</td></tr>
+              <tr><td><code>.result-count</code></td><td><code>--font-size-label</code>, <code>--color-on-surface-variant</code>, <code>--color-on-surface</code></td><td>Resumen de registros; número en <code>&lt;strong&gt;</code></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-toolbar-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-toolbar-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-toolbar-s-1">Configuraciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-toolbar-s-2">Medidas</a></li>
+            <li><a class="ds-toc-link" data-target="tc-toolbar-s-3">Estados</a></li>
+            <li><a class="ds-toc-link" data-target="tc-toolbar-s-4">Tokens y especificaciones</a></li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+
+      <!-- ══ GUIDELINES ══ -->
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <div class="ds-toc-layout">
+        <div class="ds-toc-body">
+
+        <section class="docs-section" id="tc-toolbar-g-0">
+          <h2 class="docs-section-title">Cuándo usar / Cuándo no</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Encabezar una <b>lista o tabla</b> con búsqueda, filtros, orden y la acción de la vista.</li><li>Búsqueda <b>compacta</b> que convive con otros controles en la misma fila (<code>search-field</code>).</li><li>Resumir el resultado del filtrado con <code>result-count</code>.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Búsqueda que encabeza una pantalla completa → <b>Search Bar</b> (<code>search-bar</code>, 56&nbsp;px).</li><li>Contexto y acciones globales del shell → <b>Top Bar</b>.</li><li>Varias acciones primarias en igual jerarquía → dejá <b>una</b> <code>btn-primary</code> y bajá el resto a <code>toolbar-btn</code>.</li></ul></div></div>
+          </div>
+        </section>
+
+        <section class="docs-section" id="tc-toolbar-g-1">
+          <h2 class="docs-section-title">Do / Don't</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Do</div><div class="bd-dd-body">
+              <div class="toolbar" style="margin-bottom:0"><div class="search-field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="search" placeholder="Buscar…" aria-label="Buscar"></div><button type="button" class="toolbar-btn">Filtros</button><button type="button" class="btn-primary btn-sm">Nueva vacante</button></div>
+              <p style="margin:12px 0 0;font-size:var(--font-size-label);color:var(--color-on-surface-variant)">Un search que crece, filtros secundarios y <b>una</b> acción primaria a la derecha.</p>
+            </div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ Don't</div><div class="bd-dd-body">
+              <div class="toolbar" style="margin-bottom:0"><button type="button" class="btn-primary btn-sm">Nueva vacante</button><button type="button" class="btn-primary btn-sm">Importar</button><button type="button" class="btn-primary btn-sm">Exportar</button></div>
+              <p style="margin:12px 0 0;font-size:var(--font-size-label);color:var(--color-on-surface-variant)">Varias acciones primarias en la misma jerarquía y sin búsqueda: la barra pierde foco.</p>
+            </div></div>
+          </div>
+        </section>
+
+        <section class="docs-section" id="tc-toolbar-g-2">
+          <h2 class="docs-section-title">Search Field vs. Search Bar</h2>
+          <p class="ds-p">Ambas variantes comparten los tokens de estado, pero difieren en forma, alto y contexto. Dentro de una Tool Bar la búsqueda es <b>siempre</b> el <code>search-field</code>.</p>
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div>
+              <p style="font:600 12px var(--font-body);color:var(--color-on-surface-variant);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Search Field — desktop · fondo blanco (surface), <code>--radius-md</code></p>
+              <div style="max-width:520px"><div class="toolbar" style="margin-bottom:0"><div class="search-field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div></div></div>
+            </div>
+            <div>
+              <p style="font:600 12px var(--font-body);color:var(--color-on-surface-variant);margin:0 0 10px;text-transform:uppercase;letter-spacing:.02em">Search Bar — mobile · fondo gris (surface-container-high), <code>--radius-lg</code>, 56&nbsp;px</p>
+              <div style="max-width:390px"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes, personas…" aria-label="Buscar vacantes, personas…"></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="docs-section" id="tc-toolbar-g-3">
+          <h2 class="docs-section-title">Comportamiento</h2>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li>Ordená de izquierda a derecha por frecuencia de uso: búsqueda → filtros → orden → acción de la vista.</li>
+            <li><b>Una sola</b> acción primaria por barra; el resto son <code>toolbar-btn</code> outlined.</li>
+            <li>El <code>result-count</code> se actualiza al filtrar y refleja el conteo real ("Mostrando N de M").</li>
+            <li>En viewports angostos, colapsá filtros secundarios en un único botón "Filtros" que abre un panel.</li>
+            <li>No mezcles la Tool Bar con el shell: contexto y acciones globales viven en la <b>Top Bar</b>.</li>
+          </ul>
+        </section>
+
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-toolbar-g-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-toolbar-g-0">Cuándo usar / Cuándo no</a></li>
+            <li><a class="ds-toc-link" data-target="tc-toolbar-g-1">Do / Don't</a></li>
+            <li><a class="ds-toc-link" data-target="tc-toolbar-g-2">Search Field vs. Search Bar</a></li>
+            <li><a class="ds-toc-link" data-target="tc-toolbar-g-3">Comportamiento</a></li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+
+      <!-- ══ ACCESSIBILITY ══ -->
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Foco visible</h2>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span><code>.toolbar-btn</code> define <code>:focus-visible</code> con <code>outline 2px var(--color-focus)</code> + halo <code>var(--color-focus-ring)</code>; <code>.search-field</code> muestra el foco con <code>:focus-within</code> (borde <code>--color-secondary</code>) — nunca suprimir el outline nativo del <code>&lt;input&gt;</code></li></ul>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Contraste</h2>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Todos los colores salen de tokens (<code>--color-surface</code>, <code>--color-on-surface-variant</code>, <code>--color-outline</code>) que garantizan contraste AA en tema claro y oscuro — nunca escribir overrides por tema</li></ul>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Teclado y ARIA</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>El <code>&lt;input&gt;</code> del <code>search-field</code> lleva <code>type="search"</code> y un <code>aria-label</code> descriptivo cuando no tiene <code>&lt;label&gt;</code> visible</li>
+            <li><span class="ds-a11y-icon">♿</span>Los filtros usan <code>Select</code> (<code>role="listbox"</code>, navegable con teclado) o <code>.toolbar-btn</code> nativos; el orden de tabulación sigue el orden visual</li>
+            <li><span class="ds-a11y-icon">♿</span>El <code>result-count</code> conviene marcarlo como <code>aria-live="polite"</code> para anunciar cuántos registros quedan tras filtrar</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ══ CODE ══ -->
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <div class="docs-section">
+          <h2 class="docs-section-title">Instalación</h2>
+          <p class="docs-section-desc">La Tool Bar es CSS-only: enlazá el token layer y <code>toolbar.css</code> (o el barrel <code>components.css</code>). Los filtros con <code>Select</code> agregan <code>select.css</code> + <code>initSelect()</code>.</p>
+          <div class="docs-code-wrapper">
+            <pre class="docs-code standalone"><code>css/variables.css
+css/base.css
+css/components/toolbar.css   <!-- o css/components.css --></code></pre>
+            <button class="docs-copy-btn">Copiar</button>
+          </div>
+        </div>
+        <div class="docs-section">
+          <h2 class="docs-section-title">Uso</h2>
+          <p class="docs-section-desc">Snippet base — search compacto + filtros + resumen de registros.</p>
+          <div class="docs-code-wrapper">
+            <button class="docs-copy-btn">Copiar</button>
+            <pre class="docs-code"><code>&lt;div class="toolbar"&gt;
+  &lt;div class="search-field"&gt;
+    &lt;svg width="18" height="18" ...&gt;&lt;!-- lupa --&gt;&lt;/svg&gt;
+    &lt;input type="search" placeholder="Buscar vacantes…" aria-label="Buscar vacantes"&gt;
+  &lt;/div&gt;
+  &lt;button class="toolbar-btn"&gt;Filtros&lt;/button&gt;
+  &lt;button class="toolbar-btn"&gt;Ordenar&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="result-count"&gt;Mostrando &lt;strong&gt;24&lt;/strong&gt; vacantes&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══════════ COMPONENT: KANBAN ═══════════ -->
     <section class="ds-section" id="s-c-kanban">
       <div class="ds-page-tag">Components · Card</div>
@@ -26334,6 +26619,33 @@ const TOPBAR_TOKENS = [
     { token: "--duration-fast", role: "Transición", usage: "Background de botones en hover." },
   ]},
 ]
+const TOOLBAR_TOKENS = [
+  { category: "Color", rows: [
+    { token: "--color-surface", role: "Search Field", usage: "Fondo del search-field (blanco en light) — nunca transparente ni el gris de la search-bar mobile." },
+    { token: "--border", role: "Borde", usage: "Borde del search-field en reposo." },
+    { token: "--color-secondary", role: "Foco", usage: "Borde y caret del search-field enfocado." },
+    { token: "--color-surface-container / --color-outline", role: "Tool Bar Button", usage: "Fondo y borde del botón outlined." },
+    { token: "--color-surface-variant / --color-outline-variant", role: "Botón hover", usage: "Fondo y borde de .toolbar-btn en hover." },
+    { token: "--color-on-surface-variant / --color-on-surface", role: "Contenido", usage: "Texto e íconos; el número del result-count usa on-surface." },
+    { token: "--color-focus / --color-focus-ring", role: "Foco visible", usage: "Outline y halo de .toolbar-btn:focus-visible." },
+  ]},
+  { category: "Tipografía", rows: [
+    { token: "--font-body", role: "Familia", usage: "Inter — input y botones." },
+    { token: "--font-size-body-md", role: "Controles", usage: "Texto del search-field y de los toolbar-btn." },
+    { token: "--font-size-label", role: "Result count", usage: "Línea de resumen de registros." },
+  ]},
+  { category: "Espaciado", rows: [
+    { token: "--space-2", role: "Gap", usage: "Separación entre controles de la barra y gap interno del botón." },
+    { token: "--space-4", role: "Separación", usage: "margin-bottom de .toolbar; padding horizontal del search-field." },
+    { token: "8px 16px", role: "Botón", usage: "Padding de .toolbar-btn (alineado con el search-field)." },
+  ]},
+  { category: "Radio", rows: [
+    { token: "--radius-md", role: "Controles", usage: "Search-field y toolbar-btn (8px)." },
+  ]},
+  { category: "Movimiento", rows: [
+    { token: "--duration-fast + --ease-default", role: "Transición", usage: "Background y border-color en hover/focus." },
+  ]},
+]
 const TOKEN_PANELS = {
   "button": BUTTON_TOKENS,
   "menu": MENU_TOKENS,
@@ -26372,6 +26684,7 @@ const TOKEN_PANELS = {
   "nav-bar": NAV_BAR_TOKENS,
   "nav-card": NAV_CARD_TOKENS,
   "topbar": TOPBAR_TOKENS,
+  "toolbar": TOOLBAR_TOKENS,
 };
 
 function renderTokenPanel(container, groups) {
