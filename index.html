@@ -6471,7 +6471,7 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Diseño adaptativo</h2>
           <p class="ds-p">El botón adapta su tamaño y disposición al contexto y al ancho de ventana. El ícono y la etiqueta quedan <b>anclados y centrados</b> a medida que el contenedor escala — nunca se separan hacia los extremos.</p>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Do</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn-primary" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg> Pedir licencia</button><button class="btn-tertiary" type="button">Cargar factura</button></div></div><div class="bd-dd-note">Ancho acotado o junto a otros elementos en ventanas amplias.</div></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Do</div><div class="bd-dd-body"><div class="sbd-stage center"><div data-island="button-layout-do"></div></div><div class="bd-dd-note">Ancho acotado o junto a otros elementos en ventanas amplias.</div></div></div>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ Don't</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;flex-direction:column;gap:8px;align-items:stretch"><button class="btn-tertiary" type="button" style="width:100%;justify-content:flex-start">+ Pedir licencia</button><button class="btn-tertiary" type="button" style="width:100%;justify-content:flex-start">Cargar factura</button></div></div><div class="bd-dd-note">Botón largo y plano con poco contenido estirado a todo el ancho.</div></div></div>
           </div>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
@@ -6846,7 +6846,7 @@ function setLoading(btn, isLoading) {
           <div class="bd-card" style="max-width:500px;margin-bottom:16px">
             <h3 style="font:700 16px 'Epilogue';color:var(--ds-text-1);margin:0 0 6px">Publicar vacante</h3>
             <p style="font-size:13px;color:var(--ds-text-3);margin:0 0 20px;line-height:1.6">La vacante será visible para todos los candidatos. Podés editarla después.</p>
-            <div style="border-top:1px solid var(--border);padding-top:16px"><div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn-tertiary" type="button">Cancelar</button><button class="btn-primary" type="button">Publicar vacante</button></div></div>
+            <div style="border-top:1px solid var(--border);padding-top:16px"><div data-island="button-form-footer-preview"></div></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
