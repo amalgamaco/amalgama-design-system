@@ -3572,6 +3572,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-button" onclick="navigate('c-button')">Buttons</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-seg-btn" onclick="navigate('c-seg-btn')">Segmented Button</div>
+        <div class="ds-nav-item" data-section="c-button-group" onclick="navigate('c-button-group')">Button Group</div>
       </div>
       <div class="ds-nav-item" data-section="c-card" onclick="navigate('c-card')">Cards</div>
       <div class="ds-nav-sub">
@@ -3596,6 +3597,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-divider" onclick="navigate('c-divider')">Divider</div>
       <div class="ds-nav-item" data-section="c-input" onclick="navigate('c-input')">Input</div>
       <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-input-group" onclick="navigate('c-input-group')">Input Group</div>
         <div class="ds-nav-item" data-section="c-input-otp" onclick="navigate('c-input-otp')">Input OTP</div>
         <div class="ds-nav-item" data-section="c-label" onclick="navigate('c-label')">Label</div>
       </div>
@@ -3642,9 +3644,6 @@ body { overflow-x: clip; }
       </div>
       <div class="ds-nav-item" data-section="c-tooltip" onclick="navigate('c-tooltip')">Tooltips</div>
       <div class="ds-nav-item" data-section="c-attachment" onclick="navigate('c-attachment')">Attachment</div>
-      <div class="ds-nav-item" data-section="c-button-group" onclick="navigate('c-button-group')">Button Group</div>
-      <div class="ds-nav-item" data-section="c-input-group" onclick="navigate('c-input-group')">Input Group</div>
-      <div class="ds-nav-item" data-section="c-spinner" onclick="navigate('c-spinner')">Spinner</div>
     </nav>
   </div>
 
@@ -19507,8 +19506,8 @@ const [on, setOn] = useState(false)
     <section class="ds-section" id="s-c-loading">
       <div class="ds-page-tag">Components · Feedback</div>
       <h1 class="docs-page-title">Progress</h1>
-      <p class="docs-page-desc">Indicadores de progreso circular y lineal — determinado (progreso conocido) o indeterminado (duración desconocida).</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> El lineal es un <code>&lt;div class="progress"&gt;</code> con relleno vía <code>width</code> (o una animación de barrido para indeterminado); el circular es un <code>&lt;svg&gt;</code> propio con <code>stroke-dashoffset</code> (<code>css/components/progress.css</code>). Indicador en <code>--color-primary</code>, pista en <code>--color-surface-variant</code>. La estructura de Specs / anatomía / guías sigue el modelo de documentación de <strong>Material Design 3</strong> (Google, CC BY 4.0), con todos los valores y ejemplos reemplazados por componentes y tokens de Embassy.</div>
+      <p class="docs-page-desc">Indicadores de carga: barras de progreso circular y lineal — determinado (progreso conocido) o indeterminado (duración desconocida) — más el <b>Spinner</b> (indicador rotatorio indeterminado, ver abajo).</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> El lineal es un <code>&lt;div class="progress"&gt;</code> con relleno vía <code>width</code> (o una animación de barrido para indeterminado); el circular es un <code>&lt;svg&gt;</code> propio con <code>stroke-dashoffset</code> (<code>css/components/progress.css</code>). El <b>Spinner</b> (<code>css/components/spinner.css</code>, <code>.spinner</code>) se consolidó acá desde su página anterior. Indicador en <code>--color-primary</code>, pista en <code>--color-surface-variant</code>. La estructura de Specs / anatomía / guías sigue el modelo de documentación de <strong>Material Design 3</strong> (Google, CC BY 4.0), con todos los valores y ejemplos reemplazados por componentes y tokens de Embassy.</div>
       <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
@@ -19554,6 +19553,14 @@ const [on, setOn] = useState(false)
             <li>Circular — determinado (<code>value</code>) e indeterminado (<code>indeterminate</code>)</li>
             <li>Lineal — determinado (<code>value</code>) e indeterminado (<code>indeterminate</code>)</li>
           </ol>
+
+          <h2 class="docs-section-title" style="margin-top:40px">Spinner</h2>
+          <p class="bd-lead">El <b>spinner</b> es un indicador rotatorio e indeterminado, para cargas breves dentro de botones, inputs o junto a un texto. Para progreso medible usá las barras de arriba; para estructura conocida, <b>Skeleton</b>.</p>
+          <ul class="bd-overview-list">
+            <li><b>Tamaños:</b> <code>.spinner-sm</code> · default · <code>.spinner-lg</code>.</li>
+            <li>Sobre superficies de color: <code>.spinner-on-primary</code>.</li>
+          </ul>
+          <div class="bd-family-wrap"><span class="spinner" role="status" aria-label="Cargando"></span></div>
 
         </section>
       </div>
@@ -19625,7 +19632,12 @@ const [on, setOn] = useState(false)
             </tbody>
           </table>
         </section>
-      
+        <section class="docs-section" id="tc-loading-s-4">
+          <h2 class="docs-section-title">Spinner</h2>
+          <div class="bd-family-wrap" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap"><span class="spinner spinner-sm"></span><span class="spinner"></span><span class="spinner spinner-lg"></span><button class="btn-primary btn-sm"><span class="spinner spinner-sm spinner-on-primary"></span> Guardando…</button></div>
+          <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>Small / default / large</td><td><code>.spinner-sm</code> · <code>.spinner</code> · <code>.spinner-lg</code></td></tr><tr><td>Sobre filled</td><td><code>.spinner-on-primary</code></td></tr></tbody></table>
+        </section>
+
         </div>
         <nav class="ds-toc" data-toc-auto id="tc-loading-s-toc" aria-label="En esta página">
           <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -19635,6 +19647,7 @@ const [on, setOn] = useState(false)
             <li><a class="ds-toc-link" data-target="tc-loading-s-1">Medidas</a></li>
             <li><a class="ds-toc-link" data-target="tc-loading-s-2">Modos</a></li>
             <li><a class="ds-toc-link" data-target="tc-loading-s-3">Tokens y especificaciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-loading-s-4">Spinner</a></li>
           </ul>
         </nav>
         </div>
@@ -19677,7 +19690,15 @@ const [on, setOn] = useState(false)
             <li>No alternes entre modos en la misma operación; incluí siempre un <code>aria-label</code>.</li>
           </ul>
         </section>
-      
+        <section class="docs-section" id="tc-loading-g-4">
+          <h2 class="docs-section-title">Spinner</h2>
+          <p class="ds-p">El spinner es el indicador rotatorio indeterminado. Elegí Spinner para esperas cortas sin porcentaje; Progress cuando hay avance medible; Skeleton cuando el layout de destino se conoce.</p>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Cargas cortas/indeterminadas.</li><li>Dentro de botones al enviar (<code>.spinner-sm .spinner-on-primary</code>).</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Carga con layout conocido → <b>Skeleton</b>.</li><li>Progreso medible → <b>Progress</b> (lineal/circular).</li></ul></div></div>
+          </div>
+        </section>
+
         </div>
         <nav class="ds-toc" data-toc-auto id="tc-loading-g-toc" aria-label="En esta página">
           <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -19687,6 +19708,7 @@ const [on, setOn] = useState(false)
             <li><a class="ds-toc-link" data-target="tc-loading-g-1">Anatomía</a></li>
             <li><a class="ds-toc-link" data-target="tc-loading-g-2">Tipos</a></li>
             <li><a class="ds-toc-link" data-target="tc-loading-g-3">Comportamiento</a></li>
+            <li><a class="ds-toc-link" data-target="tc-loading-g-4">Spinner</a></li>
           </ul>
         </nav>
         </div>
@@ -19700,6 +19722,8 @@ const [on, setOn] = useState(false)
             <li>Siempre pasar un <code>aria-label</code> descriptivo (p. ej. "Cargando" o "65 por ciento"): el indicador no tiene texto visible asociado.</li>
             <li>El contraste del indicador (<code>var(--color-primary)</code>) sobre la pista (<code>var(--color-surface-variant)</code>) cumple en light y dark mode sin overrides.</li>
             <li>No depender solo del color para comunicar avance; en operaciones largas acompañar con texto de estado para usuarios de lectores de pantalla.</li>
+            <li><b>Spinner:</b> exponer <code>role="status"</code> + <code>aria-label="Cargando"</code>; a diferencia de las barras, el spinner no publica <code>aria-valuenow</code>.</li>
+            <li><b>Spinner:</b> respeta <code>prefers-reduced-motion</code> — reduce la velocidad de giro para usuarios sensibles al movimiento.</li>
           </ul>
         </section>
       </div>
@@ -19728,7 +19752,13 @@ const [on, setOn] = useState(false)
 &lt;svg class="progress-circular progress-circular-indeterminate" viewBox="0 0 44 44" role="progressbar" aria-label="Cargando"&gt;
   &lt;circle class="progress-circular-track" cx="22" cy="22" r="18"/&gt;
   &lt;circle class="progress-circular-fill" cx="22" cy="22" r="18"/&gt;
-&lt;/svg&gt;</code></pre></div>
+&lt;/svg&gt;
+
+&lt;!-- Spinner (rotatorio, indeterminado) --&gt;
+&lt;span class="spinner" role="status" aria-label="Cargando"&gt;&lt;/span&gt;
+
+&lt;!-- Spinner dentro de un botón (sobre filled) --&gt;
+&lt;button class="btn-primary"&gt;&lt;span class="spinner spinner-sm spinner-on-primary"&gt;&lt;/span&gt; Guardando…&lt;/button&gt;</code></pre></div>
         </section>
       </div>
     </section>
@@ -22422,28 +22452,6 @@ import { Button } from &quot;./components/ui/button&quot;
     </section>
 
 
-    <!-- ═══════════ SPINNER ═══════════ -->
-    <section class="ds-section" id="s-c-spinner">
-      <div class="ds-page-tag">Components · Feedback</div>
-      <h1 class="ds-page-title">Spinner</h1>
-      <p class="ds-page-desc">Indicador de carga rotatorio e indeterminado.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/spinner.css</code> — <code>.spinner</code> (+ <code>-sm</code>/<code>-lg</code>/<code>-on-primary</code>), respeta <code>prefers-reduced-motion</code>. Par shadcn Base UI <b>Spinner</b>.</div>
-      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
-      <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
-        <p class="bd-lead">Carga breve o indeterminada, dentro de botones, inputs o junto a un texto.</p>
-        <ul class="bd-overview-list"><li><b>Tamaños:</b> <code>.spinner-sm</code> · default · <code>.spinner-lg</code>.</li><li>Sobre superficies de color: <code>.spinner-on-primary</code>.</li><li>Para carga con estructura conocida usá <b>Skeleton</b>; para progreso medible, <b>Progress</b>.</li></ul>
-        <div class="bd-family-wrap"><span class="spinner" role="status" aria-label="Cargando"></span></div>
-      </section></div>
-      <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
-        <h2 class="docs-section-title">Variantes</h2>
-        <div class="bd-family-wrap" style="display:flex;gap:20px;align-items:center;flex-wrap:wrap"><span class="spinner spinner-sm"></span><span class="spinner"></span><span class="spinner spinner-lg"></span><button class="btn-primary btn-sm"><span class="spinner spinner-sm spinner-on-primary"></span> Guardando…</button></div>
-        <table class="ds-table" style="margin-top:16px"><thead><tr><th>Variante</th><th>Clase</th></tr></thead><tbody><tr><td>Small / default / large</td><td><code>.spinner-sm</code> · <code>.spinner</code> · <code>.spinner-lg</code></td></tr><tr><td>Sobre filled</td><td><code>.spinner-on-primary</code></td></tr></tbody></table>
-      </section></div>
-      <div class="ds-comp-tab-panel" data-tab="guidelines"><section class="docs-section"><h2 class="docs-section-title">Cuándo usar</h2><div class="bd-grid c2"><div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Cargas cortas/indeterminadas.</li><li>Dentro de botones al enviar.</li></ul></div></div><div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Carga con layout conocido → Skeleton.</li><li>Progreso medible → Progress.</li></ul></div></div></div></section></div>
-      <div class="ds-comp-tab-panel" data-tab="accessibility"><section class="docs-section"><h2 class="docs-section-title">Accesibilidad</h2><ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span><code>role="status"</code> + <code>aria-label="Cargando"</code>.</li><li><span class="ds-a11y-icon">♿</span>Reduce la velocidad con <code>prefers-reduced-motion</code>.</li></ul></section></div>
-      <div class="ds-comp-tab-panel" data-tab="code"><section class="docs-section"><h2 class="docs-section-title">HTML</h2><div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button><pre class="docs-code"><code>&lt;span class="spinner" role="status" aria-label="Cargando"&gt;&lt;/span&gt;
-&lt;button class="btn-primary"&gt;&lt;span class="spinner spinner-sm spinner-on-primary"&gt;&lt;/span&gt; Guardando…&lt;/button&gt;</code></pre></div></section></div>
-    </section>
 
     <!-- ═══════════ BUTTON GROUP ═══════════ -->
     <section class="ds-section" id="s-c-button-group">
@@ -26722,7 +26730,7 @@ const SECTIONS = {
   'c-button-group':    { label: 'Button Group',          group: 'Components', parent: 'c-button' },
   'c-input-group':     { label: 'Input Group',           group: 'Components', parent: 'c-input' },
   'c-item':            { label: 'Basic Card',            group: 'Components', parent: 'c-card' },
-  'c-spinner':         { label: 'Spinner',               group: 'Components', parent: 'c-loading' },
+  'c-spinner':         { label: 'Spinner',               group: 'Components', parent: 'c-loading', redirect: 'c-loading' },
   'c-context-menu':    { label: 'Context Menu',          group: 'Components', parent: 'c-menu' },
   'c-menubar':         { label: 'Menubar',               group: 'Components', parent: 'c-menu' },
   'c-navigation-menu': { label: 'Navigation Menu',       group: 'Components', parent: 'c-navigation' },
