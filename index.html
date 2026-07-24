@@ -10043,20 +10043,7 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-<button class="btn-secondary btn-sm" type="button" onclick="openOverlay('dlgsc-1')">Abrir diálogo</button>
-            <div class="modal-overlay" id="dlgsc-1" style="display:none">
-              <div class="modal" role="dialog" aria-modal="true">
-                <button class="modal-close" type="button" aria-label="Cerrar" onclick="closeOverlay('dlgsc-1')">✕</button>
-                <div class="modal-header">
-                  <div class="modal-title">Confirmar acción</div>
-                </div>
-                <div class="modal-body">¿Estás seguro de continuar?</div>
-                <div class="modal-footer">
-                  <button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('dlgsc-1')">Cancelar</button>
-                  <button class="btn-primary btn-sm" type="button" onclick="closeOverlay('dlgsc-1')">Confirmar</button>
-                </div>
-              </div>
-            </div>
+<div data-island="dialog-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -10130,29 +10117,7 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
         <section class="docs-section" id="tc-dialog-s-0">
           <h2 class="docs-section-title">Anatomía</h2>
           <div class="docs-preview">
-<button class="btn-secondary" type="button" onclick="openOverlay('dlgdemo-4')">Abrir modal</button>
-            <div class="modal-overlay" id="dlgdemo-4" style="display:none">
-              <div class="modal" role="dialog" aria-modal="true">
-                <button class="modal-close" type="button" aria-label="Cerrar" onclick="closeOverlay('dlgdemo-4')">✕</button>
-                <div class="modal-header">
-                  <div class="modal-title">Agendar entrevista</div>
-                </div>
-                <div class="modal-body">
-                  <div class="field-group">
-                    <label class="field-label">Candidato</label>
-                    <input class="field-input" placeholder="Nombre del candidato">
-                  </div>
-                  <div class="field-group">
-                    <label class="field-label">Fecha</label>
-                    <input class="field-input" type="date">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn-tertiary" type="button" onclick="closeOverlay('dlgdemo-4')">Cancelar</button>
-                  <button class="btn-primary" type="button" onclick="closeOverlay('dlgdemo-4')">Agendar</button>
-                </div>
-              </div>
-            </div>
+<div data-island="dialog-demo"></div>
           </div>
           <p class="docs-section-desc" style="margin-top:12px">El dialog se compone de tres secciones dentro de <code>DialogContent</code>, sobre un <code>DialogOverlay</code> (scrim).</p>
           <table class="ds-table">
@@ -10298,48 +10263,13 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
         <section class="docs-section" id="tc-dialog-g-1">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Componente real. Scrim, contenedor centrado, título, cuerpo y footer con acciones.</p>
-          <div class="bd-family-wrap"><button class="btn-secondary" type="button" onclick="openOverlay('dlgdemo-5')">Abrir modal</button>
-            <div class="modal-overlay" id="dlgdemo-5" style="display:none">
-              <div class="modal" role="dialog" aria-modal="true">
-                <button class="modal-close" type="button" aria-label="Cerrar" onclick="closeOverlay('dlgdemo-5')">✕</button>
-                <div class="modal-header">
-                  <div class="modal-title">Agendar entrevista</div>
-                </div>
-                <div class="modal-body">
-                  <div class="field-group">
-                    <label class="field-label">Candidato</label>
-                    <input class="field-input" placeholder="Nombre del candidato">
-                  </div>
-                  <div class="field-group">
-                    <label class="field-label">Fecha</label>
-                    <input class="field-input" type="date">
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <button class="btn-tertiary" type="button" onclick="closeOverlay('dlgdemo-5')">Cancelar</button>
-                  <button class="btn-primary" type="button" onclick="closeOverlay('dlgdemo-5')">Agendar</button>
-                </div>
-              </div>
-            </div></div>
+          <div class="bd-family-wrap"><div data-island="dialog-demo"></div></div>
           <ol class="bd-family-legend"><li>Scrim — oscurece y bloquea el fondo.</li><li>Contenedor — superficie centrada.</li><li>Título — describe la decisión.</li><li>Cuerpo — contenido o campos.</li><li>Footer — máximo dos acciones.</li></ol>
         </section>
         <section class="docs-section" id="tc-dialog-g-2">
           <h2 class="docs-section-title">Basic dialog</h2>
           <p class="ds-p">Alertas, confirmaciones y selección rápida. Centrado, para ventanas medianas y expandidas. Es el <code>Dialog</code> de Embassy.</p>
-          <div class="bd-family-wrap"><button class="btn-secondary btn-sm" type="button" onclick="openOverlay('dlgsc-2')">Abrir diálogo</button>
-            <div class="modal-overlay" id="dlgsc-2" style="display:none">
-              <div class="modal" role="dialog" aria-modal="true">
-                <button class="modal-close" type="button" aria-label="Cerrar" onclick="closeOverlay('dlgsc-2')">✕</button>
-                <div class="modal-header">
-                  <div class="modal-title">Confirmar acción</div>
-                </div>
-                <div class="modal-body">¿Estás seguro de continuar?</div>
-                <div class="modal-footer">
-                  <button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('dlgsc-2')">Cancelar</button>
-                  <button class="btn-primary btn-sm" type="button" onclick="closeOverlay('dlgsc-2')">Confirmar</button>
-                </div>
-              </div>
-            </div></div>
+          <div class="bd-family-wrap"><div data-island="dialog-showcase"></div></div>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>Máximo dos acciones; la confirmatoria al trailing con <code>variant="primary"</code> y verbo claro.</li>
             <li>La acción de descarte nunca se deshabilita.</li>
@@ -16698,24 +16628,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           <div class="ch-family-wrap">
             <!-- shadcn/ui island — renders the chip showcase (real shadcn components,
                  Embassy-themed). Reuses the .ch-family-* layout so it's identical. -->
-            <div class="ch-family-stage">
-              <div class="ch-family-col">
-                <button class="chip" type="button"><span class="chip-icon"><i data-lucide="calendar"></i></span>Assist</button>
-                <div class="ch-family-num">1</div>
-              </div>
-              <div class="ch-family-col">
-                <button class="chip chip-selected" type="button" aria-pressed="true"><span class="chip-icon"><i data-lucide="check"></i></span>Filter</button>
-                <div class="ch-family-num">2</div>
-              </div>
-              <div class="ch-family-col">
-                <span class="chip">Input <button class="chip-remove" type="button" aria-label="Quitar"><i data-lucide="x"></i></button></span>
-                <div class="ch-family-num">3</div>
-              </div>
-              <div class="ch-family-col">
-                <button class="chip" type="button">Suggestion</button>
-                <div class="ch-family-num">4</div>
-              </div>
-            </div>
+            <div data-island="chip-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
