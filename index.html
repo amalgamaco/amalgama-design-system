@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=18">
+<link rel="stylesheet" href="css/components.css?v=19">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -3595,19 +3595,33 @@ body { overflow-x: clip; }
       </div>
       <div class="ds-nav-item" data-section="c-divider" onclick="navigate('c-divider')">Divider</div>
       <div class="ds-nav-item" data-section="c-input" onclick="navigate('c-input')">Input</div>
+      <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-input-otp" onclick="navigate('c-input-otp')">Input OTP</div>
+        <div class="ds-nav-item" data-section="c-label" onclick="navigate('c-label')">Label</div>
+      </div>
+      <div class="ds-nav-item" data-section="c-form" onclick="navigate('c-form')">Form</div>
       <div class="ds-nav-item" data-section="c-list" onclick="navigate('c-list')">Lists</div>
       <div class="ds-nav-item" data-section="c-loading" onclick="navigate('c-loading')">Loading and progress</div>
       <div class="ds-nav-item" data-section="c-menu" onclick="navigate('c-menu')">Menu</div>
+      <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-context-menu" onclick="navigate('c-context-menu')">Context Menu</div>
+        <div class="ds-nav-item" data-section="c-menubar" onclick="navigate('c-menubar')">Menubar</div>
+      </div>
+      <div class="ds-nav-item" data-section="c-command" onclick="navigate('c-command')">Command</div>
       <div class="ds-nav-item" data-section="c-navigation" onclick="navigate('c-navigation')">Navigation</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-nav-drawer" onclick="navigate('c-nav-drawer')">Navigation Drawer</div>
         <div class="ds-nav-item" data-section="c-nav-bar" onclick="navigate('c-nav-bar')">Navigation Bar</div>
+        <div class="ds-nav-item" data-section="c-navigation-menu" onclick="navigate('c-navigation-menu')">Navigation Menu</div>
       </div>
       <div class="ds-nav-item" data-section="c-pagination" onclick="navigate('c-pagination')">Pagination</div>
       <div class="ds-nav-item" data-section="c-radio" onclick="navigate('c-radio')">Radio button</div>
       <div class="ds-nav-item" data-section="c-scroll-area" onclick="navigate('c-scroll-area')">Scroll Area</div>
       <div class="ds-nav-item" data-section="c-search" onclick="navigate('c-search')">Search</div>
       <div class="ds-nav-item" data-section="c-select" onclick="navigate('c-select')">Select</div>
+      <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-combobox" onclick="navigate('c-combobox')">Combobox</div>
+      </div>
       <div class="ds-nav-item ds-nav-parent-label">Sheets</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-bottom-sheet" onclick="navigate('c-bottom-sheet')">Bottom Sheets</div>
@@ -3620,6 +3634,9 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="c-tabs" onclick="navigate('c-tabs')">Tabs</div>
       <div class="ds-nav-item" data-section="c-textarea" onclick="navigate('c-textarea')">Textarea</div>
       <div class="ds-nav-item" data-section="c-toggle" onclick="navigate('c-toggle')">Toggle</div>
+      <div class="ds-nav-sub">
+        <div class="ds-nav-item" data-section="c-toggle-group" onclick="navigate('c-toggle-group')">Toggle Group</div>
+      </div>
       <div class="ds-nav-item" data-section="c-tooltip" onclick="navigate('c-tooltip')">Tooltips</div>
       <div class="ds-nav-item" data-section="c-attachment" onclick="navigate('c-attachment')">Attachment</div>
       <div class="ds-nav-item" data-section="c-button-group" onclick="navigate('c-button-group')">Button Group</div>
@@ -24659,6 +24676,1321 @@ import { Bold } from &quot;lucide-react&quot;
       </section>
     </section>
 
+    <!-- ══════════════ Context Menu ══════════════ -->
+    <section class="ds-section" id="s-c-context-menu">
+      <div class="ds-page-tag">Components · Menus</div>
+      <h1 class="ds-page-title">Context Menu</h1>
+      <p class="ds-page-desc">Menú de acciones anclado al cursor, disparado con clic derecho sobre un elemento.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>css/components/context-menu.css</code> reutiliza el panel de <b>Dropdown Menu</b> (<code>.dropdown-content</code>/<code>.dropdown-item</code>); lo único distinto es el disparador — el evento <code>contextmenu</code> posiciona el panel en el cursor vía <code>openContextMenu(event, panelId)</code>. La estructura de documentación sigue el modelo de <strong>Material Design 3</strong> (Google, CC BY 4.0), con valores y ejemplos reemplazados por tokens de Embassy.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Context Menu ofrece acciones contextuales sobre un elemento concreto — una fila de tabla, una tarjeta, un nodo de canvas — sin ocupar espacio permanente en la interfaz.</p>
+          <ul class="bd-overview-list">
+            <li>Mismo panel visual que <b>Dropdown Menu</b>: comparte <code>.dropdown-content</code>, <code>.dropdown-item</code>, <code>.dropdown-separator</code> y el ítem destructivo <code>data-variant="danger"</code>.</li>
+            <li>Se dispara con <code>contextmenu</code> (clic derecho) y se posiciona en el cursor, con recorte al borde del viewport.</li>
+            <li>Se cierra con clic afuera o <code>Escape</code> (manejadores compartidos con Dropdown Menu).</li>
+          </ul>
+          <div class="bd-family-wrap">
+            <div class="context-menu-trigger" oncontextmenu="openContextMenu(event,'ctxm-demo')" style="display:flex;align-items:center;justify-content:center;height:120px;border:1px dashed var(--border);border-radius:var(--radius-md);color:var(--text-secondary);font-size:var(--font-size-body-sm);user-select:none;cursor:context-menu">Hacé clic derecho en esta área</div>
+            <div class="dropdown-content" id="ctxm-demo" role="menu" style="display:none;min-width:200px">
+              <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">✎ Editar <span class="dropdown-shortcut">⌘E</span></button>
+              <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">⧉ Duplicar</button>
+              <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">↗ Compartir</button>
+              <div class="dropdown-separator"></div>
+              <button class="dropdown-item" role="menuitem" type="button" data-variant="danger" onclick="closeDropdownItem(this)">🗑 Eliminar</button>
+            </div>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Disparador — cualquier elemento con <code>oncontextmenu="openContextMenu(event, id)"</code></li>
+            <li>Panel — <code>.dropdown-content</code> reutilizado de Dropdown Menu, posicionado en el cursor</li>
+            <li>Ítem destructivo — <code>data-variant="danger"</code>, siempre al final tras un separador</li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout"><div class="ds-toc-body">
+          <section class="docs-section" id="tc-ctxm-s-0">
+            <h2 class="docs-section-title">Anatomía</h2>
+            <table class="docs-props-table ds-table" style="margin-top:0">
+              <thead><tr><th>#</th><th>Elemento</th><th>Requerido</th><th>Notas</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Área disparadora</td><td>Sí</td><td>Elemento con <code>oncontextmenu</code>. Sin estilos propios (la clase <code>.context-menu-trigger</code> es solo un marcador).</td></tr>
+                <tr><td>2</td><td><code>.dropdown-content</code></td><td>Sí</td><td>Panel compartido con Dropdown Menu, <code>role="menu"</code>.</td></tr>
+                <tr><td>3</td><td><code>.dropdown-item</code></td><td>Sí</td><td><code>role="menuitem"</code>. Soporta <code>.dropdown-shortcut</code> y <code>data-variant="danger"</code>.</td></tr>
+                <tr><td>4</td><td><code>.dropdown-separator</code></td><td>No</td><td>Divide grupos de acciones.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-ctxm-s-1">
+            <h2 class="docs-section-title">Comportamiento</h2>
+            <table class="ds-table">
+              <thead><tr><th>Interacción</th><th>Resultado</th></tr></thead>
+              <tbody>
+                <tr><td>Clic derecho sobre el área</td><td><code>openContextMenu</code> muestra el panel en <code>(clientX, clientY)</code>, recortado 8px del borde del viewport.</td></tr>
+                <tr><td>Clic afuera</td><td>Cierra (manejador global de <code>.dropdown-content</code>).</td></tr>
+                <tr><td><code>Escape</code></td><td>Cierra todos los paneles abiertos.</td></tr>
+                <tr><td>Clic en un ítem</td><td>Ejecuta la acción y cierra vía <code>closeDropdownItem</code>.</td></tr>
+              </tbody>
+            </table>
+            <p class="docs-section-desc" style="margin-top:12px"><b>Simplificación aceptada:</b> sin submenús anidados y sin re-posicionar en <code>contextmenu</code> repetido hasta el próximo clic.</p>
+          </section>
+          <section class="docs-section" id="tc-ctxm-s-2">
+            <h2 class="docs-section-title">Tokens y especificaciones</h2>
+            <p class="docs-section-desc">Comparte el contrato de tokens de <b>Dropdown Menu</b> — superficie, borde, elevación y capa de estado de los ítems.</p>
+            <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="menu"></div></div>
+          </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-ctxm-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-ctxm-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-ctxm-s-1">Comportamiento</a></li>
+            <li><a class="ds-toc-link" data-target="tc-ctxm-s-2">Tokens y especificaciones</a></li>
+          </ul>
+        </nav></div>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Acciones sobre un ítem de lista, tabla o canvas.</li><li>Atajos "de poder" secundarios al flujo principal.</li><li>Cuando el clic derecho es una convención esperada (editores, exploradores).</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Acción siempre visible sobre un botón → <b>Dropdown Menu</b>.</li><li>Única fuente de una acción importante (el clic derecho no se descubre en touch).</li><li>Navegación entre secciones → <b>Navigation Menu</b>.</li></ul></div></div>
+          </div>
+          <h2 class="docs-section-title" style="margin-top:28px">Do / Don't</h2>
+          <ul style="margin:0;padding-left:18px;line-height:1.9">
+            <li><b>Do</b> — replicar cada acción del context menu en un punto visible (toolbar, dropdown), porque en touch no hay clic derecho.</li>
+            <li><b>Don't</b> — meter más de ~7 ítems; agrupá con separadores o pasá a un panel.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Panel con <code>role="menu"</code> e ítems <code>role="menuitem"</code> (mismo contrato que Dropdown Menu).</li>
+            <li><span class="ds-a11y-icon">♿</span><code>Escape</code> cierra; el clic afuera también.</li>
+            <li><span class="ds-a11y-icon">⚠️</span>El clic derecho no existe en touch ni con teclado — <b>toda acción debe tener una vía alternativa visible</b>.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Requiere <code>css/components/dropdown-menu.css</code> (panel) + <code>context-menu.css</code>. La función <code>openContextMenu</code> ya vive en el shell del sitio.</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;div oncontextmenu=&quot;openContextMenu(event,'ctx-1')&quot;&gt;Click derecho acá&lt;/div&gt;
+&lt;div class=&quot;dropdown-content&quot; id=&quot;ctx-1&quot; role=&quot;menu&quot; style=&quot;display:none&quot;&gt;
+  &lt;button class=&quot;dropdown-item&quot; role=&quot;menuitem&quot; onclick=&quot;closeDropdownItem(this)&quot;&gt;Editar&lt;/button&gt;
+  &lt;div class=&quot;dropdown-separator&quot;&gt;&lt;/div&gt;
+  &lt;button class=&quot;dropdown-item&quot; role=&quot;menuitem&quot; data-variant=&quot;danger&quot; onclick=&quot;closeDropdownItem(this)&quot;&gt;Eliminar&lt;/button&gt;
+&lt;/div&gt;</code></pre></div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuSeparator } from &quot;./components/ui/context-menu&quot;
+
+&lt;ContextMenu&gt;
+  &lt;ContextMenuTrigger&gt;Click derecho acá&lt;/ContextMenuTrigger&gt;
+  &lt;ContextMenuContent&gt;
+    &lt;ContextMenuItem&gt;Editar&lt;/ContextMenuItem&gt;
+    &lt;ContextMenuSeparator /&gt;
+    &lt;ContextMenuItem variant=&quot;danger&quot;&gt;Eliminar&lt;/ContextMenuItem&gt;
+  &lt;/ContextMenuContent&gt;
+&lt;/ContextMenu&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ══════════════ Menubar ══════════════ -->
+    <section class="ds-section" id="s-c-menubar">
+      <div class="ds-page-tag">Components · Menus</div>
+      <h1 class="ds-page-title">Menubar</h1>
+      <p class="ds-page-desc">Barra de menú tipo desktop: una fila de menús de nivel superior siempre visible.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>css/components/menubar.css</code> define la barra y sus triggers; los paneles reutilizan <code>.dropdown-content</code>. Cada trigger + panel viven en un <code>.dropdown-wrap</code>. Una vez abierto un menú, pasar el mouse sobre otro trigger cambia el menú abierto (<code>menubarHover</code>) — convención de menubars de escritorio.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Menubar agrupa los menús de una aplicación de escritorio (Archivo, Editar, Ver…) en una barra persistente. Es el patrón correcto cuando hay muchas acciones organizadas por categoría y siempre disponibles.</p>
+          <ul class="bd-overview-list">
+            <li>Barra <code>.menubar</code> con triggers <code>.menubar-trigger</code>; cada uno abre un panel <code>.dropdown-content</code>.</li>
+            <li>Hover-switch: con un menú abierto, hovering otro trigger lo cambia sin re-clic.</li>
+            <li>Los paneles soportan todo lo de Dropdown Menu: íconos, atajos, separadores, ítems destructivos.</li>
+          </ul>
+          <div class="bd-family-wrap">
+            <div class="menubar" role="menubar" aria-label="Menú de aplicación">
+              <div class="dropdown-wrap" style="position:relative">
+                <button class="menubar-trigger" role="menuitem" type="button" onclick="menubarToggle(this,'mb-file')" onmouseenter="menubarHover(this,'mb-file')">Archivo</button>
+                <div class="dropdown-content" id="mb-file" role="menu" style="display:none;min-width:200px">
+                  <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Nuevo <span class="dropdown-shortcut">⌘N</span></button>
+                  <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Abrir… <span class="dropdown-shortcut">⌘O</span></button>
+                  <div class="dropdown-separator"></div>
+                  <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Guardar <span class="dropdown-shortcut">⌘S</span></button>
+                </div>
+              </div>
+              <div class="dropdown-wrap" style="position:relative">
+                <button class="menubar-trigger" role="menuitem" type="button" onclick="menubarToggle(this,'mb-edit')" onmouseenter="menubarHover(this,'mb-edit')">Editar</button>
+                <div class="dropdown-content" id="mb-edit" role="menu" style="display:none;min-width:200px">
+                  <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Deshacer <span class="dropdown-shortcut">⌘Z</span></button>
+                  <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Rehacer <span class="dropdown-shortcut">⇧⌘Z</span></button>
+                  <div class="dropdown-separator"></div>
+                  <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Cortar</button>
+                  <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Copiar</button>
+                </div>
+              </div>
+              <div class="dropdown-wrap" style="position:relative">
+                <button class="menubar-trigger" role="menuitem" type="button" onclick="menubarToggle(this,'mb-view')" onmouseenter="menubarHover(this,'mb-view')">Ver</button>
+                <div class="dropdown-content" id="mb-view" role="menu" style="display:none;min-width:200px">
+                  <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Zoom +</button>
+                  <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">Zoom −</button>
+                  <div class="dropdown-separator"></div>
+                  <button class="dropdown-item" role="menuitem" type="button" data-disabled="true" disabled>Pantalla completa</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Barra — <code>.menubar</code>, <code>role="menubar"</code></li>
+            <li>Trigger — <code>.menubar-trigger</code>, estado abierto vía <code>data-state="open"</code></li>
+            <li>Panel — <code>.dropdown-content</code> reutilizado de Dropdown Menu</li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout"><div class="ds-toc-body">
+          <section class="docs-section" id="tc-mbar-s-0">
+            <h2 class="docs-section-title">Anatomía</h2>
+            <table class="docs-props-table ds-table" style="margin-top:0">
+              <thead><tr><th>#</th><th>Elemento</th><th>Requerido</th><th>Notas</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><code>.menubar</code></td><td>Sí</td><td>Fila flex, <code>role="menubar"</code>. Fondo <code>surface-container</code> + borde.</td></tr>
+                <tr><td>2</td><td><code>.dropdown-wrap</code></td><td>Sí</td><td>Contenedor relativo por trigger; ancla el panel y lo protege del click-outside.</td></tr>
+                <tr><td>3</td><td><code>.menubar-trigger</code></td><td>Sí</td><td>Botón de nivel superior. <code>data-state="open"</code> mientras su menú está abierto.</td></tr>
+                <tr><td>4</td><td><code>.dropdown-content</code></td><td>Sí</td><td>Panel de acciones (compartido con Dropdown Menu).</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-mbar-s-1">
+            <h2 class="docs-section-title">Medidas</h2>
+            <table class="docs-props-table ds-table">
+              <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
+              <tbody>
+                <tr><td>Padding de la barra</td><td>4px</td></tr>
+                <tr><td>Gap entre triggers</td><td>2px</td></tr>
+                <tr><td>Padding del trigger</td><td>6px 12px</td></tr>
+                <tr><td>Radio de la barra / trigger</td><td><code>--radius-md</code> / <code>--radius-sm</code></td></tr>
+                <tr><td>Font del trigger</td><td><code>--font-size-body-sm</code>, weight 500</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-mbar-s-2">
+            <h2 class="docs-section-title">Estados</h2>
+            <table class="ds-table">
+              <thead><tr><th>Estado</th><th>Tratamiento</th><th>Token</th></tr></thead>
+              <tbody>
+                <tr><td>Reposo</td><td>Fondo transparente</td><td>—</td></tr>
+                <tr><td>Hover / abierto</td><td>Fondo tenue</td><td><code>--color-surface-variant</code></td></tr>
+                <tr><td>Foco visible</td><td>Anillo interno 2px</td><td><code>--color-focus</code></td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-mbar-s-3">
+            <h2 class="docs-section-title">Tokens y especificaciones</h2>
+            <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="menubar"></div></div>
+          </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-mbar-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-mbar-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-mbar-s-1">Medidas</a></li>
+            <li><a class="ds-toc-link" data-target="tc-mbar-s-2">Estados</a></li>
+            <li><a class="ds-toc-link" data-target="tc-mbar-s-3">Tokens y especificaciones</a></li>
+          </ul>
+        </nav></div>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Apps tipo escritorio con muchas acciones por categoría.</li><li>Editores, herramientas de autoría, IDEs web.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Un único menú de acciones → <b>Dropdown Menu</b>.</li><li>Navegación entre secciones → <b>Navigation Menu</b> / <b>Tabs</b>.</li><li>Layouts mobile-first (el patrón es de escritorio).</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Barra con <code>role="menubar"</code>; triggers <code>role="menuitem"</code>; paneles <code>role="menu"</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>Foco visible con anillo <code>--color-focus</code>; <code>Escape</code> cierra el menú abierto.</li>
+            <li><span class="ds-a11y-icon">⚠️</span>Simplificación: la navegación por flechas ←/→ entre triggers descrita en el header CSS es aspiracional del wrapper React; la demo vanilla usa click + hover.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Requiere <code>menubar.css</code> + <code>dropdown-menu.css</code>. Funciones <code>menubarToggle</code>/<code>menubarHover</code>/<code>closeDropdownItem</code> ya en el shell.</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;div class=&quot;menubar&quot; role=&quot;menubar&quot;&gt;
+  &lt;div class=&quot;dropdown-wrap&quot; style=&quot;position:relative&quot;&gt;
+    &lt;button class=&quot;menubar-trigger&quot; onclick=&quot;menubarToggle(this,'mb-1')&quot; onmouseenter=&quot;menubarHover(this,'mb-1')&quot;&gt;Archivo&lt;/button&gt;
+    &lt;div class=&quot;dropdown-content&quot; id=&quot;mb-1&quot; role=&quot;menu&quot; style=&quot;display:none&quot;&gt;
+      &lt;button class=&quot;dropdown-item&quot; role=&quot;menuitem&quot; onclick=&quot;closeDropdownItem(this)&quot;&gt;Nuevo&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem } from &quot;./components/ui/menubar&quot;
+
+&lt;Menubar&gt;
+  &lt;MenubarMenu&gt;
+    &lt;MenubarTrigger&gt;Archivo&lt;/MenubarTrigger&gt;
+    &lt;MenubarContent&gt;
+      &lt;MenubarItem&gt;Nuevo&lt;/MenubarItem&gt;
+    &lt;/MenubarContent&gt;
+  &lt;/MenubarMenu&gt;
+&lt;/Menubar&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ══════════════ Navigation Menu ══════════════ -->
+    <section class="ds-section" id="s-c-navigation-menu">
+      <div class="ds-page-tag">Components · Menus</div>
+      <h1 class="ds-page-title">Navigation Menu</h1>
+      <p class="ds-page-desc">Fila de navegación con paneles de contenido rico agrupado (mega-menu).</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>css/components/navigation-menu.css</code> + <code>initNavMenu()</code> (auto-init sobre <code>[data-nav-menu]</code>). El indicador deslizante reutiliza la técnica de <b>Tabs</b> (posición vía <code>offsetLeft</code>/<code>offsetWidth</code>). <b>Simplificación vs. Radix:</b> sin animación de alto entre paneles; hover-intent con pequeño delay al cerrar.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Navigation Menu es para <b>navegación</b>, no acciones: revela enlaces agrupados con título y descripción. Es el mega-menú de un sitio o app con secciones ricas.</p>
+          <ul class="bd-overview-list">
+            <li>Triggers <code>.nav-menu-trigger</code> con panel (<code>data-navmenu-target</code>) o enlaces simples.</li>
+            <li>Indicador <code>.nav-menu-indicator</code> que se desliza bajo el trigger activo.</li>
+            <li>Enlaces con <code>aria-current="page"</code> o <code>.is-active</code> marcan la sección actual (mismo lenguaje de selección que Nav/Menu/List).</li>
+          </ul>
+          <div class="bd-family-wrap" style="min-height:220px">
+            <nav class="nav-menu" data-nav-menu aria-label="Navegación principal">
+              <div class="nav-menu-list">
+                <button class="nav-menu-trigger" type="button" data-navmenu-target="nm-prod">Productos <svg class="nav-menu-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <button class="nav-menu-trigger" type="button" data-navmenu-target="nm-sol">Soluciones <svg class="nav-menu-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
+                <a class="nav-menu-trigger" href="javascript:void(0)">Precios</a>
+                <span class="nav-menu-indicator" data-visible="false"></span>
+              </div>
+              <div class="nav-menu-viewport-wrap" hidden>
+                <div class="nav-menu-viewport">
+                  <div class="nav-menu-content" id="nm-prod" hidden style="min-width:360px">
+                    <a class="nav-menu-link" href="javascript:void(0)"><span class="nav-menu-link-title">Reclutamiento</span><span class="nav-menu-link-desc">Publicá vacantes y gestioná candidatos.</span></a>
+                    <a class="nav-menu-link" href="javascript:void(0)"><span class="nav-menu-link-title">Onboarding</span><span class="nav-menu-link-desc">Flujos de alta para nuevos ingresos.</span></a>
+                    <a class="nav-menu-link" href="javascript:void(0)"><span class="nav-menu-link-title">Analytics</span><span class="nav-menu-link-desc">Métricas de tu pipeline de talento.</span></a>
+                  </div>
+                  <div class="nav-menu-content" id="nm-sol" hidden style="min-width:360px">
+                    <a class="nav-menu-link" aria-current="page" href="javascript:void(0)"><span class="nav-menu-link-title">Para startups</span><span class="nav-menu-link-desc">Equipos que crecen rápido.</span></a>
+                    <a class="nav-menu-link" href="javascript:void(0)"><span class="nav-menu-link-title">Para agencias</span><span class="nav-menu-link-desc">Múltiples clientes en un panel.</span></a>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Trigger con panel — <code>.nav-menu-trigger</code> + <code>data-navmenu-target</code></li>
+            <li>Enlace simple — <code>.nav-menu-trigger</code> sin target (navega directo)</li>
+            <li>Enlace activo — <code>aria-current="page"</code> / <code>.is-active</code></li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout"><div class="ds-toc-body">
+          <section class="docs-section" id="tc-navm-s-0">
+            <h2 class="docs-section-title">Anatomía</h2>
+            <table class="docs-props-table ds-table" style="margin-top:0">
+              <thead><tr><th>#</th><th>Elemento</th><th>Requerido</th><th>Notas</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><code>.nav-menu</code> <code>[data-nav-menu]</code></td><td>Sí</td><td>Contenedor relativo; el atributo lo engancha a <code>initNavMenu</code>.</td></tr>
+                <tr><td>2</td><td><code>.nav-menu-list</code></td><td>Sí</td><td>Fila de triggers + el indicador.</td></tr>
+                <tr><td>3</td><td><code>.nav-menu-trigger</code></td><td>Sí</td><td><code>&lt;button&gt;</code> con <code>data-navmenu-target</code> o <code>&lt;a&gt;</code> simple.</td></tr>
+                <tr><td>4</td><td><code>.nav-menu-indicator</code></td><td>No</td><td>Barra deslizante bajo el trigger activo.</td></tr>
+                <tr><td>5</td><td><code>.nav-menu-viewport</code></td><td>Sí</td><td>Contiene los <code>.nav-menu-content</code> (uno visible por vez).</td></tr>
+                <tr><td>6</td><td><code>.nav-menu-link</code></td><td>Sí</td><td>Enlace con <code>-title</code> + <code>-desc</code> opcional.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-navm-s-1">
+            <h2 class="docs-section-title">Comportamiento</h2>
+            <table class="ds-table">
+              <thead><tr><th>Interacción</th><th>Resultado</th></tr></thead>
+              <tbody>
+                <tr><td>Hover / clic en trigger con target</td><td>Abre su panel, desliza el indicador, marca <code>data-state="open"</code>.</td></tr>
+                <tr><td>Hover en enlace simple</td><td>Cierra cualquier panel abierto.</td></tr>
+                <tr><td>Mouse fuera del <code>.nav-menu</code></td><td>Cierra tras ~120ms (hover-intent).</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-navm-s-2">
+            <h2 class="docs-section-title">Estados</h2>
+            <table class="ds-table">
+              <thead><tr><th>Estado</th><th>Tratamiento</th><th>Token</th></tr></thead>
+              <tbody>
+                <tr><td>Trigger hover / abierto</td><td>Fondo tenue + chevron rotado 180°</td><td><code>--color-surface-variant</code></td></tr>
+                <tr><td>Indicador</td><td>Barra 2px animada</td><td><code>--color-secondary</code></td></tr>
+                <tr><td>Enlace activo</td><td>Tinte de selección + weight 600</td><td><code>--color-secondary-container</code></td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-navm-s-3">
+            <h2 class="docs-section-title">Tokens y especificaciones</h2>
+            <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="navigation-menu"></div></div>
+          </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-navm-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-navm-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-navm-s-1">Comportamiento</a></li>
+            <li><a class="ds-toc-link" data-target="tc-navm-s-2">Estados</a></li>
+            <li><a class="ds-toc-link" data-target="tc-navm-s-3">Tokens y especificaciones</a></li>
+          </ul>
+        </nav></div>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Navegación principal de un sitio con sub-secciones agrupadas.</li><li>Mega-menús con título + descripción por enlace.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Lista de acciones → <b>Dropdown Menu</b>.</li><li>Barra de menú de app de escritorio → <b>Menubar</b>.</li><li>Cambiar de vista dentro de una misma página → <b>Tabs</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span><code>&lt;nav aria-label&gt;</code> nombra la región; los enlaces son <code>&lt;a&gt;</code> reales.</li>
+            <li><span class="ds-a11y-icon">♿</span>La sección actual se marca con <code>aria-current="page"</code>.</li>
+            <li><span class="ds-a11y-icon">⚠️</span>Al depender de hover para abrir, exponé también apertura por clic (ya soportada) para teclado/touch.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Enlazá <code>navigation-menu.css</code>. <code>initNavMenu</code> se auto-ejecuta sobre <code>[data-nav-menu]</code>.</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;nav class=&quot;nav-menu&quot; data-nav-menu&gt;
+  &lt;div class=&quot;nav-menu-list&quot;&gt;
+    &lt;button class=&quot;nav-menu-trigger&quot; data-navmenu-target=&quot;nm-1&quot;&gt;Productos&lt;/button&gt;
+    &lt;a class=&quot;nav-menu-trigger&quot; href=&quot;/precios&quot;&gt;Precios&lt;/a&gt;
+    &lt;span class=&quot;nav-menu-indicator&quot; data-visible=&quot;false&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;nav-menu-viewport-wrap&quot; hidden&gt;&lt;div class=&quot;nav-menu-viewport&quot;&gt;
+    &lt;div class=&quot;nav-menu-content&quot; id=&quot;nm-1&quot; hidden&gt;
+      &lt;a class=&quot;nav-menu-link&quot;&gt;&lt;span class=&quot;nav-menu-link-title&quot;&gt;Reclutamiento&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;&lt;/div&gt;
+&lt;/nav&gt;</code></pre></div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from &quot;./components/ui/navigation-menu&quot;
+
+&lt;NavigationMenu&gt;
+  &lt;NavigationMenuList&gt;
+    &lt;NavigationMenuItem&gt;
+      &lt;NavigationMenuTrigger&gt;Productos&lt;/NavigationMenuTrigger&gt;
+      &lt;NavigationMenuContent&gt;…&lt;/NavigationMenuContent&gt;
+    &lt;/NavigationMenuItem&gt;
+  &lt;/NavigationMenuList&gt;
+&lt;/NavigationMenu&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ══════════════ Command ══════════════ -->
+    <section class="ds-section" id="s-c-command">
+      <div class="ds-page-tag">Components · Inputs</div>
+      <h1 class="ds-page-title">Command</h1>
+      <p class="ds-page-desc">Lista de comandos filtrable por teclado — el patrón de una paleta ⌘K.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>css/components/command.css</code> + <code>initCommand()</code> (auto-init sobre <code>.command</code>): filtra por substring (no fuzzy), navega con ↑/↓, ejecuta con <code>Enter</code> y muestra <code>.command-empty</code> cuando no hay resultados. La <b>Command Dialog</b> (⌘K) usa <code>.command-dialog[data-cmdk]</code> + <code>openCommandDialog()</code>.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Command reúne comandos y navegación en una lista que se filtra mientras escribís. Inline sirve como buscador embebido; en una Command Dialog es la clásica paleta ⌘K.</p>
+          <ul class="bd-overview-list">
+            <li>Input con lupa (<code>.command-input</code>), grupos con encabezado (<code>.command-group-heading</code>), ítems con atajo (<code>.command-shortcut</code>) y estado vacío (<code>.command-empty</code>).</li>
+            <li>Navegación por teclado: ↑/↓ mueven el <code>data-active</code>, <code>Enter</code> dispara el ítem activo.</li>
+            <li>Base del <b>Combobox</b> (mismo panel filtrable dentro de un trigger).</li>
+          </ul>
+          <p class="ch-variant-label">Inline — escribí para filtrar</p>
+          <div class="bd-family-wrap">
+            <div class="command" style="max-width:420px;border:1px solid var(--border);border-radius:var(--radius-md)">
+              <div class="command-input-wrapper">
+                <span class="command-input-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+                <input class="command-input" placeholder="Escribí un comando o buscá…">
+              </div>
+              <div class="command-list">
+                <div class="command-empty">Sin resultados.</div>
+                <div class="command-group">
+                  <div class="command-group-heading">Sugerencias</div>
+                  <div class="command-item" data-active="true">📅 Calendario</div>
+                  <div class="command-item">🔍 Buscar emoji</div>
+                  <div class="command-item">🧮 Calculadora</div>
+                </div>
+                <div class="command-separator"></div>
+                <div class="command-group">
+                  <div class="command-group-heading">Configuración</div>
+                  <div class="command-item">👤 Perfil <span class="command-shortcut">⌘P</span></div>
+                  <div class="command-item">💳 Facturación <span class="command-shortcut">⌘B</span></div>
+                  <div class="command-item">⚙️ Ajustes <span class="command-shortcut">⌘S</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="ch-variant-label" style="margin-top:24px">Command Dialog — atajo ⌘K</p>
+          <div class="bd-family-wrap">
+            <button class="btn-tertiary btn-sm" type="button" onclick="openCommandDialog('cmdk-demo')">Abrir paleta <span class="dropdown-shortcut" style="margin-left:6px">⌘K</span></button>
+            <p class="docs-section-desc" style="margin-top:10px">Abrí con el botón o presioná <b>⌘K</b> / <b>Ctrl-K</b> en cualquier parte de esta página.</p>
+            <div class="command-dialog" id="cmdk-demo" data-cmdk hidden>
+              <div class="command">
+                <div class="command-input-wrapper">
+                  <span class="command-input-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+                  <input class="command-input" placeholder="Escribí un comando…">
+                </div>
+                <div class="command-list">
+                  <div class="command-empty">Sin resultados.</div>
+                  <div class="command-group">
+                    <div class="command-group-heading">Navegar</div>
+                    <div class="command-item" data-active="true" onclick="closeCommandDialog(this.closest('.command-dialog'))">🏠 Ir al inicio</div>
+                    <div class="command-item" onclick="closeCommandDialog(this.closest('.command-dialog'))">📊 Ir a dashboards</div>
+                  </div>
+                  <div class="command-separator"></div>
+                  <div class="command-group">
+                    <div class="command-group-heading">Acciones</div>
+                    <div class="command-item" onclick="closeCommandDialog(this.closest('.command-dialog'))">➕ Crear vacante <span class="command-shortcut">⌘N</span></div>
+                    <div class="command-item" onclick="closeCommandDialog(this.closest('.command-dialog'))">🌗 Cambiar tema</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Inline — <code>.command</code> embebido en la interfaz</li>
+            <li>Command Dialog — <code>.command-dialog[data-cmdk]</code>, overlay centrado, atajo ⌘K</li>
+            <li>Estado vacío — <code>.command-empty</code>, visible cuando el filtro no matchea</li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout"><div class="ds-toc-body">
+          <section class="docs-section" id="tc-cmd-s-0">
+            <h2 class="docs-section-title">Anatomía</h2>
+            <table class="docs-props-table ds-table" style="margin-top:0">
+              <thead><tr><th>#</th><th>Elemento</th><th>Notas</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><code>.command-input-wrapper</code> + <code>.command-input-icon</code></td><td>Fila superior con lupa e input de filtro.</td></tr>
+                <tr><td>2</td><td><code>.command-input</code></td><td><code>&lt;input&gt;</code> real; dispara el filtrado en cada <code>input</code>.</td></tr>
+                <tr><td>3</td><td><code>.command-list</code></td><td>Contenedor scrollable de grupos e ítems.</td></tr>
+                <tr><td>4</td><td><code>.command-group</code> + <code>.command-group-heading</code></td><td>Agrupa ítems; el grupo se oculta si queda vacío tras filtrar.</td></tr>
+                <tr><td>5</td><td><code>.command-item</code></td><td><code>data-active="true"</code> = ítem resaltado por teclado.</td></tr>
+                <tr><td>6</td><td><code>.command-shortcut</code> / <code>.command-separator</code> / <code>.command-empty</code></td><td>Atajo trailing · divisor · estado sin resultados.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-cmd-s-1">
+            <h2 class="docs-section-title">Comportamiento</h2>
+            <table class="ds-table">
+              <thead><tr><th>Interacción</th><th>Resultado</th></tr></thead>
+              <tbody>
+                <tr><td>Escribir</td><td>Filtra por substring (case-insensitive); oculta grupos vacíos; muestra <code>.command-empty</code> si nada matchea.</td></tr>
+                <tr><td>↑ / ↓</td><td>Mueve <code>data-active</code> entre ítems visibles.</td></tr>
+                <tr><td><code>Enter</code></td><td>Click en el ítem activo.</td></tr>
+                <tr><td>⌘K / Ctrl-K</td><td>Abre/cierra la Command Dialog marcada con <code>data-cmdk</code>.</td></tr>
+              </tbody>
+            </table>
+            <p class="docs-section-desc" style="margin-top:12px"><b>Simplificación aceptada:</b> filtrado por substring, no fuzzy/ranking; una sola Command Dialog <code>[data-cmdk]</code> por página para el atajo global.</p>
+          </section>
+          <section class="docs-section" id="tc-cmd-s-2">
+            <h2 class="docs-section-title">Tokens y especificaciones</h2>
+            <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="command"></div></div>
+          </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-cmd-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-cmd-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-cmd-s-1">Comportamiento</a></li>
+            <li><a class="ds-toc-link" data-target="tc-cmd-s-2">Tokens y especificaciones</a></li>
+          </ul>
+        </nav></div>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Paleta de comandos / navegación rápida (⌘K).</li><li>Pickers con muchas opciones donde buscar acelera.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir 1 valor de una lista corta → <b>Select</b>.</li><li>Elegir 1 valor buscando en lista larga dentro de un form → <b>Combobox</b>.</li><li>Buscar contenido de la app → <b>Search</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>El foco vive en el <code>&lt;input&gt;</code>; ↑/↓/Enter operan sin sacar el foco del campo.</li>
+            <li><span class="ds-a11y-icon">♿</span>La Command Dialog cierra con <code>Escape</code> y con clic en el overlay.</li>
+            <li><span class="ds-a11y-icon">♿</span>El estado vacío es texto real, anunciable por lectores de pantalla.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Enlazá <code>command.css</code>. <code>initCommand</code> se auto-ejecuta sobre cada <code>.command</code>.</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;div class=&quot;command&quot;&gt;
+  &lt;div class=&quot;command-input-wrapper&quot;&gt;
+    &lt;span class=&quot;command-input-icon&quot;&gt;…&lt;/span&gt;
+    &lt;input class=&quot;command-input&quot; placeholder=&quot;Buscar…&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;command-list&quot;&gt;
+    &lt;div class=&quot;command-empty&quot;&gt;Sin resultados.&lt;/div&gt;
+    &lt;div class=&quot;command-group&quot;&gt;
+      &lt;div class=&quot;command-group-heading&quot;&gt;Sugerencias&lt;/div&gt;
+      &lt;div class=&quot;command-item&quot;&gt;Calendario&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandShortcut } from &quot;./components/ui/command&quot;
+
+&lt;Command&gt;
+  &lt;CommandInput placeholder=&quot;Buscar…&quot; /&gt;
+  &lt;CommandList&gt;
+    &lt;CommandEmpty&gt;Sin resultados.&lt;/CommandEmpty&gt;
+    &lt;CommandGroup heading=&quot;Sugerencias&quot;&gt;
+      &lt;CommandItem&gt;Calendario&lt;/CommandItem&gt;
+    &lt;/CommandGroup&gt;
+  &lt;/CommandList&gt;
+&lt;/Command&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ══════════════ Combobox ══════════════ -->
+    <section class="ds-section" id="s-c-combobox">
+      <div class="ds-page-tag">Components · Inputs</div>
+      <h1 class="ds-page-title">Combobox</h1>
+      <p class="ds-page-desc">Elegir un valor de una lista larga, con búsqueda — un Select con filtro.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>css/components/combobox.css</code> + <code>initCombobox()</code> (auto-init sobre <code>.combobox</code>). El trigger es un <code>.btn-tertiary</code>; el panel contiene un <code>.command</code> filtrable. Al elegir un ítem, actualiza el label del trigger, marca la tilde (<code>.combobox-check</code>) y cierra.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Combobox combina un trigger tipo Select con el panel filtrable del Command. Úsalo cuando la lista es demasiado larga para un Select simple (países, usuarios, repos, zonas horarias).</p>
+          <ul class="bd-overview-list">
+            <li>Trigger <code>.combobox-trigger</code> (muestra el valor elegido o placeholder) + chevron.</li>
+            <li>Panel <code>.combobox-panel</code> con un <code>.command</code> adentro — misma búsqueda por substring.</li>
+            <li>Ítem elegido: tilde <code>.combobox-check</code>; ítems no disponibles con <code>aria-disabled</code>.</li>
+          </ul>
+          <div class="bd-family-wrap">
+            <div class="combobox" style="max-width:280px">
+              <button class="btn-tertiary combobox-trigger is-placeholder" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="combobox-label">Seleccionar framework…</span><span class="combobox-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span></button>
+              <div class="combobox-panel" hidden>
+                <div class="command">
+                  <div class="command-input-wrapper"><span class="command-input-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input class="command-input" placeholder="Buscar framework…"></div>
+                  <div class="command-list">
+                    <div class="command-empty">Sin resultados.</div>
+                    <div class="command-group">
+                      <div class="command-item" data-label="React"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>React</div>
+                      <div class="command-item" data-label="Vue"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Vue</div>
+                      <div class="command-item" data-label="Svelte"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Svelte</div>
+                      <div class="command-item" data-label="Solid"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Solid</div>
+                      <div class="command-item" aria-disabled="true"><svg class="combobox-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>Angular (no disponible)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Trigger — <code>.combobox-trigger</code>, <code>.is-placeholder</code> hasta elegir</li>
+            <li>Panel filtrable — <code>.combobox-panel</code> &gt; <code>.command</code></li>
+            <li>Tilde — <code>.combobox-check</code> en el ítem seleccionado</li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout"><div class="ds-toc-body">
+          <section class="docs-section" id="tc-cbx-s-0">
+            <h2 class="docs-section-title">Anatomía</h2>
+            <table class="docs-props-table ds-table" style="margin-top:0">
+              <thead><tr><th>#</th><th>Elemento</th><th>Notas</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><code>.combobox</code></td><td>Contenedor; <code>initCombobox</code> lo engancha.</td></tr>
+                <tr><td>2</td><td><code>.combobox-trigger</code> + <code>.combobox-label</code></td><td>Botón <code>.btn-tertiary</code>; <code>.is-placeholder</code> mientras no hay selección.</td></tr>
+                <tr><td>3</td><td><code>.combobox-chevron</code></td><td>Rota al abrir.</td></tr>
+                <tr><td>4</td><td><code>.combobox-panel</code></td><td>Contiene un <code>.command</code> completo.</td></tr>
+                <tr><td>5</td><td><code>.command-item[data-label]</code></td><td>El <code>data-label</code> se copia al trigger al elegir.</td></tr>
+                <tr><td>6</td><td><code>.combobox-check</code></td><td>Tilde visible en el ítem activo.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-cbx-s-1">
+            <h2 class="docs-section-title">Combobox vs. Select vs. Command</h2>
+            <table class="ds-table">
+              <thead><tr><th>Necesidad</th><th>Componente</th></tr></thead>
+              <tbody>
+                <tr><td>Elegir 1 de pocas opciones (&lt; ~8)</td><td><b>Select</b></td></tr>
+                <tr><td>Elegir 1 de muchas, con búsqueda</td><td><b>Combobox</b></td></tr>
+                <tr><td>Ejecutar comandos / navegar (⌘K)</td><td><b>Command</b></td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-cbx-s-2">
+            <h2 class="docs-section-title">Tokens y especificaciones</h2>
+            <p class="docs-section-desc">Hereda el panel filtrable de <b>Command</b> y el trigger de <b>Button</b> (<code>.btn-tertiary</code>).</p>
+            <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="combobox"></div></div>
+          </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-cbx-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-cbx-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-cbx-s-1">Combobox vs. Select vs. Command</a></li>
+            <li><a class="ds-toc-link" data-target="tc-cbx-s-2">Tokens y especificaciones</a></li>
+          </ul>
+        </nav></div>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Elegir 1 opción de una lista larga en un formulario.</li><li>Cuando buscar/filtrar acelera la elección (países, usuarios).</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Lista corta sin búsqueda → <b>Select</b>.</li><li>Selección múltiple → chips/checkboxes.</li><li>Comandos / navegación → <b>Command</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Trigger con <code>aria-haspopup="listbox"</code> + <code>aria-expanded</code> sincronizado al abrir/cerrar.</li>
+            <li><span class="ds-a11y-icon">♿</span>Ítems no disponibles con <code>aria-disabled="true"</code>, excluidos de la selección.</li>
+            <li><span class="ds-a11y-icon">♿</span>Cierra con <code>Escape</code> y clic afuera; el foco vuelve al trigger.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Requiere <code>combobox.css</code> + <code>command.css</code> + <code>button.css</code>. <code>initCombobox</code> se auto-ejecuta.</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;div class=&quot;combobox&quot;&gt;
+  &lt;button class=&quot;btn-tertiary combobox-trigger is-placeholder&quot; aria-haspopup=&quot;listbox&quot; aria-expanded=&quot;false&quot;&gt;
+    &lt;span class=&quot;combobox-label&quot;&gt;Seleccionar…&lt;/span&gt;&lt;span class=&quot;combobox-chevron&quot;&gt;▾&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;div class=&quot;combobox-panel&quot; hidden&gt;
+    &lt;div class=&quot;command&quot;&gt;… items con data-label + .combobox-check …&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Combobox } from &quot;./components/ui/combobox&quot;
+
+&lt;Combobox
+  placeholder=&quot;Seleccionar framework…&quot;
+  options={[{ value: &quot;react&quot;, label: &quot;React&quot; }, { value: &quot;vue&quot;, label: &quot;Vue&quot; }]}
+/&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ══════════════ Toggle Group ══════════════ -->
+    <section class="ds-section" id="s-c-toggle-group">
+      <div class="ds-page-tag">Components · Actions</div>
+      <h1 class="ds-page-title">Toggle Group</h1>
+      <p class="ds-page-desc">Un grupo de Toggles relacionados — selección múltiple o única.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>css/components/toggle-group.css</code> agrupa varios <code>.toggle</code> (cada ítem es un Toggle). Multi-select usa <code>togglePress()</code> por ítem; single-select usa <code>selectSingleToggle()</code> (deselecciona a los hermanos). Deliberadamente distinto de <b>Segmented Button</b> (otra forma y caso de uso).</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Toggle Group junta Toggles que pertenecen al mismo eje. En modo múltiple cada ítem alterna independientemente; en modo único, elegir uno deselecciona el resto.</p>
+          <ul class="bd-overview-list">
+            <li>Contenedor <code>.toggle-group</code> con <code>role="group"</code> + <code>aria-label</code>; cada ítem es un <code>.toggle</code>.</li>
+            <li>Múltiple (formato de texto) vs. único (elegir un valor manteniendo la forma de toggle).</li>
+            <li>Comparte el lenguaje de selección Secondary-container con Toggle y Chip.</li>
+          </ul>
+          <p class="ch-variant-label">Multi-select — formato de texto</p>
+          <div class="bd-family-wrap">
+            <div class="toggle-group" role="group" aria-label="Formato de texto">
+              <button type="button" class="toggle" aria-label="Negrita" aria-pressed="true" onclick="togglePress(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 0 8H6zM6 12h9a4 4 0 0 1 0 8H6z"/></svg></button>
+              <button type="button" class="toggle" aria-label="Itálica" aria-pressed="false" onclick="togglePress(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"/><line x1="14" y1="20" x2="5" y2="20"/><line x1="15" y1="4" x2="9" y2="20"/></svg></button>
+              <button type="button" class="toggle" aria-label="Subrayado" aria-pressed="false" onclick="togglePress(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v6a6 6 0 0 0 12 0V4"/><line x1="4" y1="21" x2="20" y2="21"/></svg></button>
+            </div>
+          </div>
+          <p class="ch-variant-label" style="margin-top:22px">Single-select — alineación</p>
+          <div class="bd-family-wrap">
+            <div class="toggle-group" role="group" aria-label="Alineación">
+              <button type="button" class="toggle" aria-label="Izquierda" aria-pressed="true" onclick="selectSingleToggle(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="18" y2="18"/></svg></button>
+              <button type="button" class="toggle" aria-label="Centro" aria-pressed="false" onclick="selectSingleToggle(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="5" y1="18" x2="19" y2="18"/></svg></button>
+              <button type="button" class="toggle" aria-label="Derecha" aria-pressed="false" onclick="selectSingleToggle(this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="10" y1="12" x2="20" y2="12"/><line x1="6" y1="18" x2="20" y2="18"/></svg></button>
+            </div>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Multi-select — cada ítem alterna con <code>togglePress()</code></li>
+            <li>Single-select — <code>selectSingleToggle()</code> deselecciona los hermanos</li>
+            <li>Ítem — un <code>.toggle</code> con su <code>aria-pressed</code></li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout"><div class="ds-toc-body">
+          <section class="docs-section" id="tc-tgg-s-0">
+            <h2 class="docs-section-title">Anatomía</h2>
+            <table class="docs-props-table ds-table" style="margin-top:0">
+              <thead><tr><th>#</th><th>Elemento</th><th>Notas</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><code>.toggle-group</code></td><td>Contenedor flex, <code>role="group"</code> + <code>aria-label</code>. Junta los ítems con bordes compartidos.</td></tr>
+                <tr><td>2</td><td><code>.toggle</code></td><td>Cada ítem (ver componente Toggle); estado vía <code>aria-pressed</code>.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-tgg-s-1">
+            <h2 class="docs-section-title">Modos</h2>
+            <table class="ds-table">
+              <thead><tr><th>Modo</th><th>Handler</th><th>Semántica</th></tr></thead>
+              <tbody>
+                <tr><td>Múltiple</td><td><code>togglePress(this)</code></td><td>Cada ítem independiente (0..N presionados).</td></tr>
+                <tr><td>Único</td><td><code>selectSingleToggle(this)</code></td><td>Exactamente 1 presionado; elegir otro deselecciona.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-tgg-s-2">
+            <h2 class="docs-section-title">Toggle Group vs. Segmented Button</h2>
+            <p class="ds-p">Comparten el color de selección pero no el caso de uso: <b>Segmented Button</b> es un control de cambio de vista con forma de píldora (siempre 1 activo, etiquetas de vista); <b>Toggle Group</b> agrupa toggles con forma de botón (formato de texto, filtros de barra). Elegí Segmented Button para "cambiar entre vistas" y Toggle Group para "activar formatos".</p>
+          </section>
+          <section class="docs-section" id="tc-tgg-s-3">
+            <h2 class="docs-section-title">Tokens y especificaciones</h2>
+            <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="toggle-group"></div></div>
+          </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-tgg-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-tgg-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-tgg-s-1">Modos</a></li>
+            <li><a class="ds-toc-link" data-target="tc-tgg-s-2">vs. Segmented Button</a></li>
+            <li><a class="ds-toc-link" data-target="tc-tgg-s-3">Tokens y especificaciones</a></li>
+          </ul>
+        </nav></div>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Formatos de texto (negrita/itálica/subrayado).</li><li>Grupo de filtros on/off que comparten un eje.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Cambiar de vista con etiquetas → <b>Segmented Button</b>.</li><li>Filtros tipo tag → <b>Chip</b>.</li><li>Un único on/off con label → <b>Switch</b>.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Contenedor con <code>role="group"</code> + <code>aria-label</code> que nombra el eje.</li>
+            <li><span class="ds-a11y-icon">♿</span>Cada ítem es un <code>&lt;button&gt;</code> real con <code>aria-pressed</code>; ítems solo-ícono llevan <code>aria-label</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>En modo único, exactamente un ítem queda con <code>aria-pressed="true"</code>.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Requiere <code>toggle-group.css</code> + <code>toggle.css</code>. Handlers <code>togglePress</code>/<code>selectSingleToggle</code> ya en el shell.</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;!-- Múltiple --&gt;
+&lt;div class=&quot;toggle-group&quot; role=&quot;group&quot; aria-label=&quot;Formato&quot;&gt;
+  &lt;button class=&quot;toggle&quot; aria-pressed=&quot;true&quot; onclick=&quot;togglePress(this)&quot;&gt;B&lt;/button&gt;
+  &lt;button class=&quot;toggle&quot; aria-pressed=&quot;false&quot; onclick=&quot;togglePress(this)&quot;&gt;I&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Único --&gt;
+&lt;div class=&quot;toggle-group&quot; role=&quot;group&quot; aria-label=&quot;Alineación&quot;&gt;
+  &lt;button class=&quot;toggle&quot; aria-pressed=&quot;true&quot; onclick=&quot;selectSingleToggle(this)&quot;&gt;Izq&lt;/button&gt;
+  &lt;button class=&quot;toggle&quot; aria-pressed=&quot;false&quot; onclick=&quot;selectSingleToggle(this)&quot;&gt;Centro&lt;/button&gt;
+&lt;/div&gt;</code></pre></div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { ToggleGroup, ToggleGroupItem } from &quot;./components/ui/toggle-group&quot;
+
+&lt;ToggleGroup type=&quot;single&quot; defaultValue=&quot;left&quot;&gt;
+  &lt;ToggleGroupItem value=&quot;left&quot;&gt;Izq&lt;/ToggleGroupItem&gt;
+  &lt;ToggleGroupItem value=&quot;center&quot;&gt;Centro&lt;/ToggleGroupItem&gt;
+&lt;/ToggleGroup&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ══════════════ Input OTP ══════════════ -->
+    <section class="ds-section" id="s-c-input-otp">
+      <div class="ds-page-tag">Components · Inputs</div>
+      <h1 class="ds-page-title">Input OTP</h1>
+      <p class="ds-page-desc">Casillas de un dígito para códigos de verificación (2FA, SMS, PIN).</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>css/components/input-otp.css</code> + <code>initOtp()</code> (auto-init sobre <code>.otp-group</code>). Cada casilla es un <code>&lt;input maxlength="1"&gt;</code> real — escribir auto-avanza, <code>Backspace</code> en vacío retrocede, ←/→ navegan y pegar un código lo reparte entre las casillas.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Input OTP separa un código en casillas de un carácter, dando feedback claro de cuántos dígitos faltan. Al ser inputs reales, la accesibilidad y el autocompletado de códigos SMS funcionan de fábrica.</p>
+          <ul class="bd-overview-list">
+            <li>Grupo <code>.otp-group</code> con <code>role="group"</code> + <code>aria-label</code>; casillas <code>.otp-slot</code>.</li>
+            <li>Separador opcional <code>.otp-separator</code> para partir el código (3-3, 2-2-2).</li>
+            <li><code>inputmode="numeric"</code> abre el teclado numérico en mobile; el pegado reparte el código.</li>
+          </ul>
+          <p class="ch-variant-label">6 dígitos con separador</p>
+          <div class="bd-family-wrap">
+            <div class="otp-group" role="group" aria-label="Código de verificación">
+              <input class="otp-slot" maxlength="1" inputmode="numeric" aria-label="Dígito 1">
+              <input class="otp-slot" maxlength="1" inputmode="numeric" aria-label="Dígito 2">
+              <input class="otp-slot" maxlength="1" inputmode="numeric" aria-label="Dígito 3">
+              <span class="otp-separator">–</span>
+              <input class="otp-slot" maxlength="1" inputmode="numeric" aria-label="Dígito 4">
+              <input class="otp-slot" maxlength="1" inputmode="numeric" aria-label="Dígito 5">
+              <input class="otp-slot" maxlength="1" inputmode="numeric" aria-label="Dígito 6">
+            </div>
+            <p class="docs-section-desc" style="margin-top:12px">Escribí para avanzar; probá pegar <code>123456</code> en la primera casilla.</p>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Grupo — <code>.otp-group</code>, <code>role="group"</code></li>
+            <li>Casilla — <code>.otp-slot</code>, un <code>&lt;input maxlength="1"&gt;</code></li>
+            <li>Separador — <code>.otp-separator</code> (decorativo)</li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout"><div class="ds-toc-body">
+          <section class="docs-section" id="tc-otp-s-0">
+            <h2 class="docs-section-title">Anatomía</h2>
+            <table class="docs-props-table ds-table" style="margin-top:0">
+              <thead><tr><th>#</th><th>Elemento</th><th>Notas</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><code>.otp-group</code></td><td>Fila flex; <code>role="group"</code> + <code>aria-label</code>. <code>initOtp</code> la engancha.</td></tr>
+                <tr><td>2</td><td><code>.otp-slot</code></td><td><code>&lt;input maxlength="1" inputmode="numeric"&gt;</code>. Foco con el mismo anillo que los inputs de form.</td></tr>
+                <tr><td>3</td><td><code>.otp-separator</code></td><td>Guion/punto decorativo entre grupos de casillas.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-otp-s-1">
+            <h2 class="docs-section-title">Comportamiento del teclado</h2>
+            <table class="ds-table">
+              <thead><tr><th>Tecla / acción</th><th>Resultado</th></tr></thead>
+              <tbody>
+                <tr><td>Escribir un carácter</td><td>Lo fija y mueve el foco a la casilla siguiente.</td></tr>
+                <tr><td><code>Backspace</code> en casilla vacía</td><td>Vuelve a la casilla anterior.</td></tr>
+                <tr><td>← / →</td><td>Navegan entre casillas.</td></tr>
+                <tr><td>Pegar</td><td>Reparte el texto (solo alfanumérico) desde la casilla actual.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-otp-s-2">
+            <h2 class="docs-section-title">Tokens y especificaciones</h2>
+            <p class="docs-section-desc">Comparte el lenguaje de foco de <b>Form</b> (mismo anillo y borde de input).</p>
+            <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="input-otp"></div></div>
+          </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-otp-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-otp-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-otp-s-1">Comportamiento del teclado</a></li>
+            <li><a class="ds-toc-link" data-target="tc-otp-s-2">Tokens y especificaciones</a></li>
+          </ul>
+        </nav></div>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Códigos de verificación 2FA por SMS/email.</li><li>PIN de longitud fija y conocida.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Texto libre o largo → <b>Input</b>.</li><li>Un solo dígito/carácter → <b>Input</b>.</li><li>Códigos de longitud variable.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Inputs reales: foco, teclado y anuncios de lector de pantalla vienen gratis.</li>
+            <li><span class="ds-a11y-icon">♿</span>Cada casilla lleva un <code>aria-label</code> ("Dígito N"); el grupo nombra el propósito.</li>
+            <li><span class="ds-a11y-icon">♿</span><code>autocomplete="one-time-code"</code> permite el autocompletado del código SMS en la primera casilla.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Enlazá <code>input-otp.css</code> + <code>form.css</code>. <code>initOtp</code> se auto-ejecuta sobre <code>.otp-group</code>.</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;div class=&quot;otp-group&quot; role=&quot;group&quot; aria-label=&quot;Código&quot;&gt;
+  &lt;input class=&quot;otp-slot&quot; maxlength=&quot;1&quot; inputmode=&quot;numeric&quot; autocomplete=&quot;one-time-code&quot;&gt;
+  &lt;input class=&quot;otp-slot&quot; maxlength=&quot;1&quot; inputmode=&quot;numeric&quot;&gt;
+  &lt;input class=&quot;otp-slot&quot; maxlength=&quot;1&quot; inputmode=&quot;numeric&quot;&gt;
+  &lt;span class=&quot;otp-separator&quot;&gt;–&lt;/span&gt;
+  &lt;input class=&quot;otp-slot&quot; maxlength=&quot;1&quot; inputmode=&quot;numeric&quot;&gt;
+  &lt;input class=&quot;otp-slot&quot; maxlength=&quot;1&quot; inputmode=&quot;numeric&quot;&gt;
+  &lt;input class=&quot;otp-slot&quot; maxlength=&quot;1&quot; inputmode=&quot;numeric&quot;&gt;
+&lt;/div&gt;</code></pre></div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from &quot;./components/ui/input-otp&quot;
+
+&lt;InputOTP maxLength={6}&gt;
+  &lt;InputOTPGroup&gt;&lt;InputOTPSlot index={0} /&gt;…&lt;/InputOTPGroup&gt;
+  &lt;InputOTPSeparator /&gt;
+  &lt;InputOTPGroup&gt;…&lt;/InputOTPGroup&gt;
+&lt;/InputOTP&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ══════════════ Form ══════════════ -->
+    <section class="ds-section" id="s-c-form">
+      <div class="ds-page-tag">Components · Inputs</div>
+      <h1 class="ds-page-title">Form</h1>
+      <p class="ds-page-desc">La composición de campos: tarjeta, grilla, labels, hints y errores.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>css/components/form.css</code> reúne la <b>estructura</b> de un formulario (<code>.form-card</code>, <code>.fields-grid</code>, <code>.field-group</code>, <code>.field-label</code>, <code>.field-hint</code>, <code>.field-error-msg</code>) alrededor de los controles ya documentados en <b>Input</b>, <b>Select</b> y <b>Textarea</b>. Validación con HTML5 nativo — sin react-hook-form/zod.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Form no es un control nuevo: es el andamiaje que agrupa Inputs, Selects y Textareas en una tarjeta con título, grilla responsiva de campos, labels con marca de obligatorio, textos de ayuda y mensajes de error.</p>
+          <ul class="bd-overview-list">
+            <li><code>.form-card</code> (título + descripción) envuelve una <code>.fields-grid</code> de <code>.field-group</code>.</li>
+            <li>Cada campo: <code>.field-label</code> (+ <code>.field-required</code>), el control, y opcionalmente <code>.field-hint</code> o <code>.field-error-msg</code> con <code>.is-error</code>.</li>
+            <li>Los controles son los de <b>Input</b> / <b>Select</b> / <b>Textarea</b> — este componente solo aporta la composición.</li>
+          </ul>
+          <div class="bd-family-wrap">
+            <form class="form-card" style="max-width:560px" onsubmit="return false">
+              <div class="form-card-title">Información básica</div>
+              <p class="form-card-desc">Completá los datos del puesto que querés publicar.</p>
+              <div class="fields-grid">
+                <div class="field-group">
+                  <label class="field-label" for="f-title">Título <span class="field-required">*</span></label>
+                  <input class="field-input" id="f-title" placeholder="Ej: Desarrollador Frontend">
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="f-loc">Ubicación</label>
+                  <div class="select-wrapper">
+                    <select id="f-loc"><option>Remoto</option><option>Híbrido</option><option>Presencial</option></select>
+                    <span class="select-caret">▾</span>
+                  </div>
+                </div>
+              </div>
+              <div class="field-group" style="margin-top:20px">
+                <label class="field-label" for="f-email">Email de contacto <span class="field-required">*</span></label>
+                <input class="field-input is-error" id="f-email" value="ana@" aria-invalid="true" aria-describedby="f-email-err">
+                <span class="field-error-msg" id="f-email-err">Ingresá un email válido.</span>
+              </div>
+              <div class="field-group" style="margin-top:20px">
+                <label class="field-label" for="f-desc">Descripción</label>
+                <textarea class="field-textarea" id="f-desc" rows="3" placeholder="Responsabilidades y requisitos…"></textarea>
+                <span class="field-hint">Máximo 500 caracteres.</span>
+              </div>
+              <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:24px">
+                <button class="btn-secondary btn-sm" type="button">Cancelar</button>
+                <button class="btn-primary btn-sm" type="submit">Guardar</button>
+              </div>
+            </form>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Tarjeta — <code>.form-card</code> + <code>.form-card-title</code> / <code>.form-card-desc</code></li>
+            <li>Grilla — <code>.fields-grid</code> (responsiva) de <code>.field-group</code></li>
+            <li>Estados — <code>.field-hint</code> (ayuda) · <code>.field-error-msg</code> + <code>.is-error</code> (error)</li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout"><div class="ds-toc-body">
+          <section class="docs-section" id="tc-form-s-0">
+            <h2 class="docs-section-title">Anatomía</h2>
+            <table class="docs-props-table ds-table" style="margin-top:0">
+              <thead><tr><th>#</th><th>Elemento</th><th>Notas</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><code>.form-card</code></td><td>Contenedor con borde + padding. <code>-title</code> / <code>-desc</code> encabezan.</td></tr>
+                <tr><td>2</td><td><code>.fields-grid</code></td><td>Grilla responsiva; colapsa a 1 columna en mobile.</td></tr>
+                <tr><td>3</td><td><code>.field-group</code></td><td>Un campo: label + control + supporting.</td></tr>
+                <tr><td>4</td><td><code>.field-label</code> + <code>.field-required</code></td><td>Etiqueta; la marca <code>*</code> señala obligatorio.</td></tr>
+                <tr><td>5</td><td><code>.field-input</code> / <code>.select-wrapper</code> / <code>.field-textarea</code></td><td>Controles de Input / Select / Textarea.</td></tr>
+                <tr><td>6</td><td><code>.field-hint</code> / <code>.field-error-msg</code></td><td>Texto de ayuda o error; el error pide <code>.is-error</code> en el control.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-form-s-1">
+            <h2 class="docs-section-title">Estados de campo</h2>
+            <table class="ds-table">
+              <thead><tr><th>Estado</th><th>Tratamiento</th><th>Clase / atributo</th></tr></thead>
+              <tbody>
+                <tr><td>Reposo</td><td>Borde neutro</td><td><code>--border</code></td></tr>
+                <tr><td>Foco</td><td>Anillo de foco</td><td><code>--color-focus</code></td></tr>
+                <tr><td>Error</td><td>Borde + mensaje en rojo</td><td><code>.is-error</code> + <code>aria-invalid</code> + <code>.field-error-msg</code></td></tr>
+                <tr><td>Ayuda</td><td>Texto secundario bajo el control</td><td><code>.field-hint</code></td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-form-s-2">
+            <h2 class="docs-section-title">Tokens y especificaciones</h2>
+            <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="form"></div></div>
+          </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-form-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-form-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-form-s-1">Estados de campo</a></li>
+            <li><a class="ds-toc-link" data-target="tc-form-s-2">Tokens y especificaciones</a></li>
+          </ul>
+        </nav></div>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Cualquier conjunto de campos que se guardan juntos.</li><li>Agrupá campos relacionados en una <code>.form-card</code> por tema.</li><li>Un solo botón Primary de envío por formulario.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Búsqueda → <b>Search</b>, no un campo de form.</li><li>No inventar controles custom: usá Input/Select/Textarea.</li><li>No poner varios Primary equivalentes en el footer.</li></ul></div></div>
+          </div>
+          <p class="docs-section-desc" style="margin-top:16px">Para el diseño de formularios (orden, agrupación, validación, longitud), ver la guía <a href="javascript:void(0)" onclick="navigate('pb-forms')"><b>Playbook · Formularios</b></a>.</p>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Cada control lleva un <code>&lt;label for&gt;</code> asociado por <code>id</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>En error: <code>aria-invalid="true"</code> + <code>aria-describedby</code> apuntando al <code>.field-error-msg</code>.</li>
+            <li><span class="ds-a11y-icon">♿</span>El asterisco de obligatorio es visual; reforzalo con <code>required</code> en el control.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Enlazá <code>form.css</code>. Sin JS obligatorio — la validación es HTML5 nativa.</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;form class=&quot;form-card&quot;&gt;
+  &lt;div class=&quot;form-card-title&quot;&gt;Información básica&lt;/div&gt;
+  &lt;div class=&quot;fields-grid&quot;&gt;
+    &lt;div class=&quot;field-group&quot;&gt;
+      &lt;label class=&quot;field-label&quot; for=&quot;t&quot;&gt;Título &lt;span class=&quot;field-required&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+      &lt;input class=&quot;field-input&quot; id=&quot;t&quot; required&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;field-group&quot;&gt;
+    &lt;label class=&quot;field-label&quot; for=&quot;e&quot;&gt;Email&lt;/label&gt;
+    &lt;input class=&quot;field-input is-error&quot; id=&quot;e&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;e-err&quot;&gt;
+    &lt;span class=&quot;field-error-msg&quot; id=&quot;e-err&quot;&gt;Email inválido.&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre></div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from &quot;./components/ui/form&quot;
+import { Input } from &quot;./components/ui/input&quot;
+
+&lt;FormField name=&quot;title&quot;&gt;
+  &lt;FormItem&gt;
+    &lt;FormLabel required&gt;Título&lt;/FormLabel&gt;
+    &lt;FormControl&gt;&lt;Input /&gt;&lt;/FormControl&gt;
+    &lt;FormMessage /&gt;
+  &lt;/FormItem&gt;
+&lt;/FormField&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ══════════════ Label ══════════════ -->
+    <section class="ds-section" id="s-c-label">
+      <div class="ds-page-tag">Components · Inputs</div>
+      <h1 class="ds-page-title">Label</h1>
+      <p class="ds-page-desc">Etiqueta accesible y reutilizable para cualquier control de formulario.</p>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS.</strong> <code>css/components/label.css</code> — un <code>&lt;label&gt;</code> con el mismo lenguaje tipográfico que <code>.field-label</code> (form.css) pero desacoplado del <code>.field-group</code>. La atenuación al deshabilitar el control se resuelve sin JS con <code>:has(+ :disabled)</code> o el estado explícito <code>data-disabled</code>.</div>
+      <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
+
+      <div class="ds-comp-tab-panel active" data-tab="overview">
+        <section class="docs-section">
+          <p class="bd-lead">El Label nombra un control. Dentro de un input de texto con hint/error usás <code>.field-label</code> (Form); para labels sueltos — sobre todo junto a checkbox, radio, switch o slider — usás <code>.label</code>.</p>
+          <ul class="bd-overview-list">
+            <li>Asociación nativa por <code>for</code>/<code>id</code>: clic en el label enfoca/activa el control.</li>
+            <li>Marca de obligatorio con <code>.label-required</code>.</li>
+            <li>Estado deshabilitado derivado del control (<code>:has(+ :disabled)</code>) o explícito (<code>data-disabled="true"</code>) — sin JS.</li>
+          </ul>
+          <div class="bd-family-wrap" style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
+            <div style="width:100%;max-width:320px">
+              <label class="label" for="lbl-email">Correo electrónico <span class="label-required">*</span></label>
+              <input class="field-input" id="lbl-email" type="email" placeholder="tu@correo.com" style="margin-top:8px">
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <input type="checkbox" id="lbl-tos" checked>
+              <label class="label" for="lbl-tos">Acepto los términos y condiciones</label>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <input type="checkbox" id="lbl-dis" disabled>
+              <label class="label" for="lbl-dis">Opción no disponible (deshabilitada)</label>
+            </div>
+          </div>
+          <ol class="bd-family-legend">
+            <li>Label + input — asociado por <code>for</code>/<code>id</code>, con marca de obligatorio</li>
+            <li>Label en línea — junto a un checkbox/switch/radio</li>
+            <li>Deshabilitado — atenuado automáticamente por el control hermano <code>:disabled</code></li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="specs">
+        <div class="ds-toc-layout"><div class="ds-toc-body">
+          <section class="docs-section" id="tc-lbl-s-0">
+            <h2 class="docs-section-title">Anatomía</h2>
+            <table class="docs-props-table ds-table" style="margin-top:0">
+              <thead><tr><th>#</th><th>Elemento</th><th>Notas</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td><code>.label</code></td><td><code>&lt;label&gt;</code> con <code>for</code> apuntando al control. Cursor pointer cuando tiene <code>for</code>.</td></tr>
+                <tr><td>2</td><td><code>.label-required</code></td><td>Marca <code>*</code> en color de error.</td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-lbl-s-1">
+            <h2 class="docs-section-title">Label vs. field-label</h2>
+            <table class="ds-table">
+              <thead><tr><th>Situación</th><th>Usar</th></tr></thead>
+              <tbody>
+                <tr><td>Input de texto con hint/error en un form</td><td><code>.field-label</code> (dentro de <code>.field-group</code>)</td></tr>
+                <tr><td>Checkbox / radio / switch / slider, o label suelto</td><td><code>.label</code></td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="docs-section" id="tc-lbl-s-2">
+            <h2 class="docs-section-title">Tokens y especificaciones</h2>
+            <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="label"></div></div>
+          </section>
+        </div>
+        <nav class="ds-toc" data-toc-auto id="tc-lbl-s-toc" aria-label="En esta página">
+          <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="ds-toc-title">En esta página</div>
+          <ul class="ds-toc-list">
+            <li><a class="ds-toc-link" data-target="tc-lbl-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-lbl-s-1">Label vs. field-label</a></li>
+            <li><a class="ds-toc-link" data-target="tc-lbl-s-2">Tokens y especificaciones</a></li>
+          </ul>
+        </nav></div>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="guidelines">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Cuándo usar</h2>
+          <div class="bd-grid c2">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Nombrar un checkbox/radio/switch/slider.</li><li>Label suelto asociado por <code>for</code>/<code>id</code>.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Label de un input de texto con hint/error → <b>Form</b> (<code>.field-label</code>).</li><li>Título de sección → usá tipografía de heading, no un label.</li></ul></div></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="accessibility">
+        <section class="docs-section">
+          <h2 class="docs-section-title">Accesibilidad</h2>
+          <ul class="ds-a11y-list">
+            <li><span class="ds-a11y-icon">♿</span>Asociá siempre por <code>for</code>/<code>id</code> (o envolviendo el control) — no dejes labels huérfanos.</li>
+            <li><span class="ds-a11y-icon">♿</span>Clic en el label activa el control asociado (target táctil más grande).</li>
+            <li><span class="ds-a11y-icon">♿</span>El asterisco es visual: reforzá el obligatorio con <code>required</code> en el control.</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="ds-comp-tab-panel" data-tab="code">
+        <section class="docs-section">
+          <h2 class="docs-section-title">HTML</h2>
+          <p class="docs-section-desc">Enlazá <code>label.css</code>. Sin JS.</p>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>&lt;label class=&quot;label&quot; for=&quot;email&quot;&gt;Correo &lt;span class=&quot;label-required&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+&lt;input class=&quot;field-input&quot; id=&quot;email&quot; type=&quot;email&quot;&gt;
+
+&lt;!-- En línea con un checkbox --&gt;
+&lt;div style=&quot;display:flex;align-items:center;gap:8px&quot;&gt;
+  &lt;input type=&quot;checkbox&quot; id=&quot;tos&quot;&gt;
+  &lt;label class=&quot;label&quot; for=&quot;tos&quot;&gt;Acepto los términos&lt;/label&gt;
+&lt;/div&gt;</code></pre></div>
+        </section>
+        <section class="docs-section">
+          <h2 class="docs-section-title">React — componente wrapper</h2>
+          <div class="docs-code-wrapper"><button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre class="docs-code"><code>import { Label } from &quot;./components/ui/label&quot;
+
+&lt;Label htmlFor=&quot;email&quot; required&gt;Correo&lt;/Label&gt;
+&lt;input className=&quot;field-input&quot; id=&quot;email&quot; type=&quot;email&quot; /&gt;</code></pre></div>
+        </section>
+      </div>
+    </section>
+
   </div><!-- end ds-content -->
 </div><!-- end ds-main -->
 </div><!-- end ds-app -->
@@ -24771,6 +26103,15 @@ const SECTIONS = {
   'c-input-group':     { label: 'Input Group',           group: 'Components', parent: 'c-input' },
   'c-item':            { label: 'Basic Card',            group: 'Components', parent: 'c-card' },
   'c-spinner':         { label: 'Spinner',               group: 'Components', parent: 'c-loading' },
+  'c-context-menu':    { label: 'Context Menu',          group: 'Components', parent: 'c-menu' },
+  'c-menubar':         { label: 'Menubar',               group: 'Components', parent: 'c-menu' },
+  'c-navigation-menu': { label: 'Navigation Menu',       group: 'Components', parent: 'c-navigation' },
+  'c-command':         { label: 'Command',               group: 'Components' },
+  'c-combobox':        { label: 'Combobox',              group: 'Components', parent: 'c-select' },
+  'c-toggle-group':    { label: 'Toggle Group',          group: 'Components', parent: 'c-toggle' },
+  'c-input-otp':       { label: 'Input OTP',             group: 'Components', parent: 'c-input' },
+  'c-form':            { label: 'Form',                  group: 'Components' },
+  'c-label':           { label: 'Label',                 group: 'Components', parent: 'c-input' },
   // Legacy sub-pages (accessible via hash)
   'radius':            { label: 'Radius',                group: 'Styles' },
   'tokens-color':      { label: 'Color Tokens',          group: 'Foundations' },
@@ -25309,6 +26650,130 @@ document.addEventListener('keydown', function(e) {
   if (e.key !== 'Escape') return;
   document.querySelectorAll('.dropdown-content').forEach(function(p) { p.style.display = 'none'; });
 });
+
+// ── Context menu (right-click) — reuses the .dropdown-content panel; the only
+//    difference vs Dropdown Menu is the trigger: a `contextmenu` event that
+//    positions the panel at the cursor (clamped to the viewport). The generic
+//    click-outside handler above closes it on the next click. ──
+function openContextMenu(e, panelId) {
+  e.preventDefault();
+  var panel = document.getElementById(panelId);
+  if (!panel) return;
+  document.querySelectorAll('.dropdown-content').forEach(function(p) { if (p !== panel) p.style.display = 'none'; });
+  panel.style.display = 'flex';
+  var r = panel.getBoundingClientRect();
+  var x = Math.min(e.clientX, window.innerWidth - r.width - 8);
+  var y = Math.min(e.clientY, window.innerHeight - r.height - 8);
+  panel.style.left = Math.max(8, x) + 'px';
+  panel.style.top = Math.max(8, y) + 'px';
+}
+
+// ── Menubar — desktop-style menu bar. Each trigger + its .dropdown-content live
+//    inside a .dropdown-wrap so the shared close/position logic applies. Once a
+//    menu is open, hovering a sibling trigger switches to it (no extra click). ──
+function menubarOpen(trigger, panelId) {
+  var bar = trigger.closest('.menubar');
+  var panel = document.getElementById(panelId);
+  if (!panel) return;
+  document.querySelectorAll('.dropdown-content').forEach(function(p) { if (p !== panel) p.style.display = 'none'; });
+  if (bar) bar.querySelectorAll('.menubar-trigger').forEach(function(t) { t.removeAttribute('data-state'); });
+  panel.style.display = 'flex';
+  trigger.setAttribute('data-state', 'open');
+}
+function menubarToggle(trigger, panelId) {
+  var panel = document.getElementById(panelId);
+  if (panel && panel.style.display === 'flex') { panel.style.display = 'none'; trigger.removeAttribute('data-state'); }
+  else menubarOpen(trigger, panelId);
+}
+function menubarHover(trigger, panelId) {
+  var bar = trigger.closest('.menubar');
+  if (!bar) return;
+  var anyOpen = Array.prototype.some.call(bar.querySelectorAll('.dropdown-content'), function(p) { return p.style.display === 'flex'; });
+  if (anyOpen) menubarOpen(trigger, panelId);
+}
+// Keep menubar trigger data-state in sync after a click-outside closes the panel.
+document.addEventListener('click', function() {
+  document.querySelectorAll('.menubar-trigger[data-state="open"]').forEach(function(t) {
+    var wrap = t.closest('.dropdown-wrap');
+    var panel = wrap && wrap.querySelector('.dropdown-content');
+    if (!panel || panel.style.display !== 'flex') t.removeAttribute('data-state');
+  });
+});
+
+// ── Navigation Menu — mega-menu row. Hovering (or clicking) a trigger with a
+//    data-navmenu-target reveals its rich content panel in the shared viewport
+//    and slides the indicator under it (same offsetLeft/offsetWidth technique as
+//    Tabs). Plain-link triggers just navigate. Small hover-intent delay on close. ──
+function initNavMenu(nav) {
+  var list = nav.querySelector('.nav-menu-list');
+  if (!list) return;
+  var indicator = nav.querySelector('.nav-menu-indicator');
+  var vpWrap = nav.querySelector('.nav-menu-viewport-wrap');
+  var triggers = Array.prototype.slice.call(list.querySelectorAll('.nav-menu-trigger'));
+  var closeTimer;
+  function close() {
+    triggers.forEach(function(t) { t.removeAttribute('data-state'); });
+    if (vpWrap) vpWrap.hidden = true;
+    if (indicator) indicator.setAttribute('data-visible', 'false');
+  }
+  function open(trigger) {
+    var id = trigger.getAttribute('data-navmenu-target');
+    if (!id) return;
+    clearTimeout(closeTimer);
+    triggers.forEach(function(t) { t.removeAttribute('data-state'); });
+    trigger.setAttribute('data-state', 'open');
+    nav.querySelectorAll('.nav-menu-content').forEach(function(c) { c.hidden = c.id !== id; });
+    if (vpWrap) vpWrap.hidden = false;
+    if (indicator) {
+      indicator.style.width = trigger.offsetWidth + 'px';
+      indicator.style.transform = 'translateX(' + trigger.offsetLeft + 'px)';
+      indicator.setAttribute('data-visible', 'true');
+    }
+  }
+  triggers.forEach(function(t) {
+    if (t.getAttribute('data-navmenu-target')) {
+      t.addEventListener('mouseenter', function() { open(t); });
+      t.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (t.getAttribute('data-state') === 'open') close(); else open(t);
+      });
+    } else {
+      t.addEventListener('mouseenter', close);
+    }
+  });
+  nav.addEventListener('mouseleave', function() { closeTimer = setTimeout(close, 120); });
+  nav.addEventListener('mouseenter', function() { clearTimeout(closeTimer); });
+}
+function initAllNavMenus() { document.querySelectorAll('[data-nav-menu]').forEach(initNavMenu); }
+if (document.readyState !== 'loading') initAllNavMenus();
+else document.addEventListener('DOMContentLoaded', initAllNavMenus);
+
+// ── Input OTP — each box is a real <input maxlength="1">. Typing auto-advances,
+//    Backspace on an empty box steps back, ←/→ move between boxes, and pasting a
+//    full code splits it across the boxes. ──
+function initOtp(group) {
+  var slots = Array.prototype.slice.call(group.querySelectorAll('.otp-slot'));
+  slots.forEach(function(slot, i) {
+    slot.addEventListener('input', function() {
+      slot.value = slot.value.replace(/[^0-9a-zA-Z]/g, '').slice(0, 1);
+      if (slot.value && i < slots.length - 1) slots[i + 1].focus();
+    });
+    slot.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' && !slot.value && i > 0) slots[i - 1].focus();
+      else if (e.key === 'ArrowLeft' && i > 0) { e.preventDefault(); slots[i - 1].focus(); }
+      else if (e.key === 'ArrowRight' && i < slots.length - 1) { e.preventDefault(); slots[i + 1].focus(); }
+    });
+    slot.addEventListener('paste', function(e) {
+      e.preventDefault();
+      var data = ((e.clipboardData || window.clipboardData).getData('text') || '').replace(/[^0-9a-zA-Z]/g, '');
+      for (var j = 0; j < data.length && i + j < slots.length; j++) slots[i + j].value = data[j];
+      slots[Math.min(i + data.length, slots.length - 1)].focus();
+    });
+  });
+}
+function initAllOtp() { document.querySelectorAll('.otp-group').forEach(initOtp); }
+if (document.readyState !== 'loading') initAllOtp();
+else document.addEventListener('DOMContentLoaded', initAllOtp);
 
 // ── Rich Tooltip toggle (click to open, persists for pointer interaction —
 //    CSS already handles show/hide via the .open class + opacity/pointer-events) ──
@@ -26334,9 +27799,189 @@ const TOPBAR_TOKENS = [
     { token: "--duration-fast", role: "Transición", usage: "Background de botones en hover." },
   ]},
 ]
+const MENUBAR_TOKENS = [
+  { category: "Color", rows: [
+    { token: "--color-surface-container", role: "Contenedor", usage: "Fondo de la barra." },
+    { token: "--color-outline-variant", role: "Borde", usage: "Borde de la barra." },
+    { token: "--color-on-surface", role: "Contenido", usage: "Etiqueta del trigger." },
+    { token: "--color-surface-variant", role: "Hover / abierto", usage: "Fondo del trigger en hover y con su menú abierto." },
+  ]},
+  { category: "Estado", rows: [
+    { token: "--color-surface-variant", role: "Hover / open", usage: "Trigger resaltado (hover o data-state=open)." },
+    { token: "--color-focus", role: "Foco", usage: "Anillo interno de 2px al navegar con teclado." },
+  ]},
+  { category: "Tipografía", rows: [
+    { token: "--font-body", role: "Familia", usage: "Inter — etiqueta del trigger." },
+    { token: "--font-size-body-sm", role: "Tamaño", usage: "Texto del trigger, weight 500." },
+  ]},
+  { category: "Espaciado", note: "grilla de 4px", rows: [
+    { token: "4px", role: "Padding barra", usage: "Padding interno de la barra." },
+    { token: "6px 12px", role: "Padding trigger", usage: "Padding de cada trigger." },
+    { token: "2px", role: "Gap", usage: "Separación entre triggers." },
+  ]},
+  { category: "Radio", rows: [
+    { token: "--radius-md / --radius-sm", role: "Radio", usage: "Barra / trigger." },
+  ]},
+]
+const NAVIGATION_MENU_TOKENS = [
+  { category: "Color", rows: [
+    { token: "--color-surface-container", role: "Contenedor", usage: "Fondo del viewport de contenido." },
+    { token: "--color-outline-variant", role: "Borde", usage: "Borde del viewport." },
+    { token: "--color-on-surface", role: "Contenido", usage: "Trigger y título de enlace." },
+    { token: "--color-secondary", role: "Indicador", usage: "Barra deslizante bajo el trigger activo." },
+    { token: "--color-secondary-container", role: "Selected", usage: "Enlace activo (aria-current/.is-active)." },
+    { token: "--color-on-secondary-container", role: "Selected", usage: "Texto del enlace activo." },
+    { token: "--color-surface-variant", role: "Hover", usage: "Trigger y enlace en hover." },
+  ]},
+  { category: "Tipografía", rows: [
+    { token: "--font-size-body-sm", role: "Tamaño", usage: "Trigger y enlaces, weight 500/600." },
+    { token: "--font-size-caption", role: "Tamaño", usage: "Descripción del enlace." },
+  ]},
+  { category: "Espaciado", rows: [
+    { token: "8px 14px", role: "Padding trigger", usage: "Padding del trigger." },
+    { token: "16px", role: "Padding viewport", usage: "Padding del panel de contenido." },
+  ]},
+  { category: "Radio", rows: [
+    { token: "--radius-md / --radius-sm", role: "Radio", usage: "Viewport / trigger + enlaces." },
+  ]},
+  { category: "Elevación", rows: [
+    { token: "--shadow-md", role: "Sombra", usage: "Elevación del viewport." },
+  ]},
+  { category: "Movimiento", rows: [
+    { token: "--duration-normal", role: "Duración", usage: "Deslizamiento del indicador y entrada del viewport." },
+  ]},
+]
+const COMMAND_TOKENS = [
+  { category: "Color", rows: [
+    { token: "--color-surface-container", role: "Contenedor", usage: "Fondo de la lista / dialog." },
+    { token: "--color-on-surface", role: "Contenido", usage: "Texto de los ítems." },
+    { token: "--color-on-surface-variant", role: "Contenido", usage: "Ícono de lupa, encabezado de grupo, atajos." },
+    { token: "--color-surface-variant", role: "Activo", usage: "Ítem resaltado (data-active) por hover/teclado." },
+    { token: "--border", role: "Borde", usage: "Borde del contenedor y separadores." },
+  ]},
+  { category: "Estado", rows: [
+    { token: "--color-surface-variant", role: "Active", usage: "Ítem bajo el cursor/teclado (data-active=true)." },
+    { token: "--color-focus", role: "Foco", usage: "Anillo del input de comando." },
+  ]},
+  { category: "Tipografía", rows: [
+    { token: "--font-body", role: "Familia", usage: "Inter — input e ítems." },
+    { token: "--font-size-body-sm", role: "Tamaño", usage: "Texto de los ítems." },
+    { token: "--font-mono", role: "Familia", usage: "DM Mono — atajos (.command-shortcut)." },
+  ]},
+  { category: "Radio", rows: [
+    { token: "--radius-md", role: "Radio", usage: "Contenedor y Command Dialog." },
+  ]},
+  { category: "Elevación", rows: [
+    { token: "--shadow-lg", role: "Sombra", usage: "Command Dialog flotante (overlay ⌘K)." },
+  ]},
+]
+const COMBOBOX_TOKENS = [
+  { category: "Color", rows: [
+    { token: "--color-surface-container", role: "Contenedor", usage: "Panel desplegable (reusa Command)." },
+    { token: "--border", role: "Borde", usage: "Borde del trigger (.btn-tertiary) y del panel." },
+    { token: "--color-on-surface", role: "Contenido", usage: "Valor elegido en el trigger e ítems." },
+    { token: "--color-on-surface-variant", role: "Placeholder", usage: "Trigger en estado .is-placeholder y chevron." },
+    { token: "--color-primary", role: "Selected", usage: "Tilde (.combobox-check) del ítem elegido." },
+  ]},
+  { category: "Estado", rows: [
+    { token: "--color-surface-variant", role: "Active", usage: "Ítem resaltado en el panel." },
+    { token: "opacidad reducida", role: "Disabled", usage: "Ítem con aria-disabled, no seleccionable." },
+  ]},
+  { category: "Tipografía", rows: [
+    { token: "--font-size-body-sm", role: "Tamaño", usage: "Trigger e ítems." },
+  ]},
+  { category: "Radio", rows: [
+    { token: "--radius-md", role: "Radio", usage: "Trigger y panel." },
+  ]},
+  { category: "Elevación", rows: [
+    { token: "--shadow-md", role: "Sombra", usage: "Panel desplegable." },
+  ]},
+]
+const TOGGLE_GROUP_TOKENS = [
+  { category: "Color", rows: [
+    { token: "--color-on-surface", role: "Contenido", usage: "Ícono/etiqueta del ítem en reposo." },
+    { token: "--border", role: "Borde", usage: "Borde compartido entre ítems agrupados." },
+    { token: "--color-secondary-container", role: "Selected", usage: "Fondo del ítem presionado (aria-pressed)." },
+    { token: "--color-on-secondary-container", role: "Selected", usage: "Contenido del ítem presionado." },
+  ]},
+  { category: "Estado", rows: [
+    { token: "--color-secondary-container", role: "Pressed", usage: "Ítem con aria-pressed=true (mismo lenguaje que Toggle/Chip)." },
+    { token: "--color-focus", role: "Foco", usage: "Anillo de foco del ítem." },
+    { token: "opacidad reducida", role: "Disabled", usage: "Ítem deshabilitado." },
+  ]},
+  { category: "Radio", rows: [
+    { token: "--radius-sm", role: "Radio", usage: "Radio de los ítems del grupo." },
+  ]},
+]
+const INPUT_OTP_TOKENS = [
+  { category: "Color", rows: [
+    { token: "--card-bg", role: "Contenedor", usage: "Fondo de cada casilla." },
+    { token: "--border", role: "Borde", usage: "Borde en reposo de la casilla." },
+    { token: "--text-primary", role: "Contenido", usage: "Dígito ingresado." },
+    { token: "--color-on-surface-variant", role: "Separador", usage: "Color del .otp-separator." },
+  ]},
+  { category: "Estado", rows: [
+    { token: "--color-focus", role: "Foco", usage: "Anillo de foco de la casilla activa (mismo que Form)." },
+  ]},
+  { category: "Tipografía", rows: [
+    { token: "--font-body", role: "Familia", usage: "Inter — el dígito." },
+  ]},
+  { category: "Radio", rows: [
+    { token: "--radius-md", role: "Radio", usage: "Esquinas de la casilla." },
+  ]},
+]
+const FORM_TOKENS = [
+  { category: "Color", rows: [
+    { token: "--card-bg", role: "Contenedor", usage: "Fondo de la .form-card." },
+    { token: "--border", role: "Borde", usage: "Borde de la tarjeta y de los campos en reposo." },
+    { token: "--text-primary", role: "Contenido", usage: "Labels y valores." },
+    { token: "--text-secondary", role: "Soporte", usage: "Descripción de la tarjeta y hints (.field-hint)." },
+    { token: "--red / --color-error", role: "Error", usage: "Asterisco de requerido, borde .is-error y .field-error-msg." },
+  ]},
+  { category: "Estado", rows: [
+    { token: "--color-focus", role: "Foco", usage: "Anillo de foco de los campos." },
+    { token: "--color-error", role: "Error", usage: "Borde y mensaje en estado inválido." },
+  ]},
+  { category: "Tipografía", rows: [
+    { token: "--font-heading", role: "Familia", usage: "Epilogue — título de la tarjeta." },
+    { token: "--font-size-label", role: "Tamaño", usage: "Labels y descripción." },
+  ]},
+  { category: "Espaciado", note: "grilla de 4px", rows: [
+    { token: "24px 32px", role: "Padding tarjeta", usage: "Padding de la .form-card." },
+    { token: "8px", role: "Gap label", usage: "Entre label y control." },
+    { token: "20px", role: "Gap campo", usage: "Entre campos consecutivos." },
+  ]},
+  { category: "Radio", rows: [
+    { token: "--radius", role: "Radio", usage: "Esquinas de la tarjeta y los campos." },
+  ]},
+]
+const LABEL_TOKENS = [
+  { category: "Color", rows: [
+    { token: "--text-primary", role: "Contenido", usage: "Texto del label." },
+    { token: "--red", role: "Requerido", usage: "Marca .label-required (*)." },
+  ]},
+  { category: "Estado", rows: [
+    { token: "opacidad 0.5", role: "Disabled", usage: "Label atenuado cuando el control hermano está :disabled o con data-disabled." },
+  ]},
+  { category: "Tipografía", rows: [
+    { token: "--font-body", role: "Familia", usage: "Inter." },
+    { token: "--font-size-label", role: "Tamaño", usage: "Texto del label, weight 500." },
+  ]},
+  { category: "Espaciado", rows: [
+    { token: "8px", role: "Gap", usage: "Entre el label y un control en línea (checkbox/switch)." },
+  ]},
+]
 const TOKEN_PANELS = {
   "button": BUTTON_TOKENS,
   "menu": MENU_TOKENS,
+  "menubar": MENUBAR_TOKENS,
+  "navigation-menu": NAVIGATION_MENU_TOKENS,
+  "command": COMMAND_TOKENS,
+  "combobox": COMBOBOX_TOKENS,
+  "toggle-group": TOGGLE_GROUP_TOKENS,
+  "input-otp": INPUT_OTP_TOKENS,
+  "form": FORM_TOKENS,
+  "label": LABEL_TOKENS,
   "input": INPUT_TOKENS,
   "select": SELECT_TOKENS,
   "textarea": TEXTAREA_TOKENS,

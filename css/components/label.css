@@ -1,0 +1,63 @@
+/* ═══════════════════════════════════════
+   Amalgama DS — Label
+   Etiqueta accesible y reutilizable para cualquier control de formulario
+   (input, select, checkbox, switch, radio, slider). Es el mismo lenguaje
+   tipográfico que `.field-label` (form.css) pero desacoplado del `.field-group`
+   de un input de texto — usalo cuando el control NO es un input de texto o
+   cuando querés un label suelto (checkbox + label en línea, switch + label).
+
+   Par shadcn/Radix Label: cuando el control asociado está deshabilitado, el
+   label se atenúa y deja de responder al puntero. Acá se resuelve sin JS con
+   `:has(+ :disabled)` (label inmediatamente antes del control) o con el estado
+   explícito `data-disabled="true"`.
+
+   Cuándo usar: nombrar un control de formulario, sobre todo checkbox/switch/
+     radio/slider, o un label suelto asociado por `for`/`id`.
+   Cuándo no: el label integrado de un input de texto con hint/error → usá
+     `.field-label` dentro de `.field-group` (form.css). Título de sección →
+     tipografía de heading, no un label.
+   Reemplaza a: `<label>` sin estilo o `<span>` haciendo de label.
+
+   Dependencia: variables.css
+
+   Uso:
+   <label class="label" for="email">Correo <span class="label-required">*</span></label>
+   <input class="field-input" id="email" type="email">
+
+   <!-- En línea con un control no-texto -->
+   <div style="display:flex;align-items:center;gap:8px">
+     <input type="checkbox" id="tos">
+     <label class="label" for="tos">Acepto los términos</label>
+   </div>
+═══════════════════════════════════════ */
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-label);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text-primary);
+  user-select: none;
+  cursor: default;
+}
+
+/* Cuando el label nombra un control clickeable en línea (checkbox/radio/switch),
+   compartir el cursor de puntero mejora el target táctil. */
+.label[for] { cursor: pointer; }
+
+/* Marcador de campo obligatorio — mismo tratamiento que form.css .field-required */
+.label-required { color: var(--red); margin-left: -4px; }
+
+/* Estado deshabilitado — derivado del control asociado, en cualquiera de los dos
+   órdenes (label antes del control, o control antes del label como en el patrón
+   checkbox + label), o explícito vía data-disabled. Sin necesidad de JS. */
+.label:has(+ :disabled),
+:disabled + .label,
+.label[data-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
