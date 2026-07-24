@@ -13,22 +13,17 @@ export interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string
   value: string | number
   change?: string
-  /** Token-bound color for the change indicator — prefer this over `changeColor`. */
+  /** Token-bound color for the change indicator. */
   trend?: "positive" | "negative" | "neutral"
-  /** @deprecated arbitrary CSS color escape hatch — prefer `trend` for token-bound colors. */
-  changeColor?: string
 }
 
 const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
-  ({ className, label, value, change, trend, changeColor, ...props }, ref) => (
+  ({ className, label, value, change, trend, ...props }, ref) => (
     <div ref={ref} className={cn("stat-card", className)} {...props}>
       <div className="stat-label">{label}</div>
       <div className="stat-value">{value}</div>
       {change && (
-        <div
-          className={cn("stat-change", trend && `stat-change-${trend}`)}
-          style={!trend && changeColor ? { color: changeColor } : undefined}
-        >
+        <div className={cn("stat-change", trend && `stat-change-${trend}`)}>
           {change}
         </div>
       )}
