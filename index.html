@@ -11730,23 +11730,7 @@ export { EmptyState }</code></pre>
         <section class="docs-section" id="tc-stat-card-s-0">
           <h2 class="docs-section-title">Anatomía</h2>
           <div class="docs-preview">
-            <div class="stats-grid"><div class="stat-card">
-    <div class="stat-label">Vacantes activas</div>
-    <div class="stat-value">24</div>
-    <div class="stat-change-positive">+3 este mes</div>
-  </div><div class="stat-card">
-    <div class="stat-label">Candidatos</div>
-    <div class="stat-value">156</div>
-    <div class="stat-change-positive">+12 esta semana</div>
-  </div><div class="stat-card">
-    <div class="stat-label">Entrevistas hoy</div>
-    <div class="stat-value">8</div>
-    <div class="stat-change-neutral">Sin cambios</div>
-  </div><div class="stat-card">
-    <div class="stat-label">Tiempo promedio</div>
-    <div class="stat-value">18d</div>
-    <div class="stat-change-negative">+2d vs anterior</div>
-  </div></div>
+            <div data-island="stat-card-grid"></div>
           </div>
           <table class="ds-table" style="margin-top:16px">
             <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
@@ -12870,71 +12854,7 @@ css/layout.css</code></pre>
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <div class="kanban-board">
-  <div class="kanban-column">
-    <div class="kanban-column-header">Aplicados <span class="count">3</span></div>
-    <div class="kanban-column-body">
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">María González</div><span class="badge badge-info">Nuevo</span></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">Hace 2 h</div>
-          <div class="kanban-card-avatar">MG</div>
-        </div>
-      </div>
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Carlos López</div><span class="badge badge-info">Nuevo</span></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">Hace 5 h</div>
-          <div class="kanban-card-avatar">CL</div>
-        </div>
-      </div>
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Ana Martínez</div></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">Ayer</div>
-          <div class="kanban-card-avatar">AM</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="kanban-column">
-    <div class="kanban-column-header">En revisión <span class="count">2</span></div>
-    <div class="kanban-column-body">
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Juan Pérez</div><span class="badge badge-active">Activa</span></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">3 días</div>
-          <div class="kanban-card-avatar">JP</div>
-        </div>
-      </div>
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Laura Sánchez</div></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">4 días</div>
-          <div class="kanban-card-avatar">LS</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="kanban-column">
-    <div class="kanban-column-header">Entrevistas <span class="count">1</span></div>
-    <div class="kanban-column-body">
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Roberto Díaz</div><span class="badge badge-tertiary">Entrevista</span></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">Hoy 15:00</div>
-          <div class="kanban-card-avatar">RD</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="kanban-column">
-    <div class="kanban-column-header">Oferta <span class="count">0</span></div>
-    <div class="kanban-column-body">
-      <div style="text-align:center;padding:16px 8px;font-size:var(--font-size-label);color:var(--text-muted)">Sin candidatos</div>
-    </div>
-  </div>
-</div>
+            <div data-island="kanban-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -12955,65 +12875,7 @@ css/layout.css</code></pre>
 <div class="docs-section" id="tc-kanban-s-0">
         <h2 class="docs-section-title">Anatomía</h2>
         <div class="docs-preview">
-          <div class="kanban-board">
-  <div class="kanban-column">
-    <div class="kanban-column-header">Aplicados <span class="count">3</span></div>
-    <div class="kanban-column-body">
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Maria Lopez</div></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">Disenadora UX · hace 2d</div>
-          <div class="kanban-card-avatar">ML</div>
-        </div>
-      </div>
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Pedro Ruiz</div></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">Frontend Dev · hace 3d</div>
-          <div class="kanban-card-avatar">PR</div>
-        </div>
-      </div>
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Sofia Torres</div></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">PM · hace 5d</div>
-          <div class="kanban-card-avatar">ST</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="kanban-column">
-    <div class="kanban-column-header">Entrevista <span class="count">2</span></div>
-    <div class="kanban-column-body">
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Carlos Vega</div></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">Backend Dev · hace 1d</div>
-          <div class="kanban-card-avatar">CV</div>
-        </div>
-      </div>
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Ana Garcia</div></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">QA · hace 4d</div>
-          <div class="kanban-card-avatar">AG</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="kanban-column">
-    <div class="kanban-column-header">Oferta <span class="count">1</span></div>
-    <div class="kanban-column-body">
-      <div class="kanban-card" tabindex="0">
-        <div class="kanban-card-header"><div class="kanban-card-title">Luis Mendoza</div></div>
-        <div class="kanban-card-footer">
-          <div class="kanban-card-meta">Data Analyst · hace 1d</div>
-          <div class="kanban-card-avatar">LM</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+          <div data-island="kanban-specs-board"></div>
         </div>
         <table class="ds-table" style="margin-top:16px">
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
@@ -13285,14 +13147,7 @@ css/layout.css</code></pre>
 <div class="docs-section" id="tc-vacancy-s-0">
         <h2 class="docs-section-title">Anatomía</h2>
         <div class="docs-preview">
-          <div class="vacancy-card" tabindex="0">
-    <div class="vacancy-icon">💼</div>
-    <div class="vacancy-info">
-      <div class="vacancy-name">Diseñador UX Senior <span class="badge badge-open">Abierta</span></div>
-      <div class="vacancy-meta">Producto · Remoto · Senior</div>
-    </div>
-    <div class="vacancy-right"><div class="vacancy-age">5d</div></div>
-  </div>
+          <div data-island="vacancy-spec-example"></div>
         </div>
         <table class="ds-table" style="margin-top:16px">
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
