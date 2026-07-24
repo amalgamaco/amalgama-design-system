@@ -80,6 +80,7 @@ import {
 } from "./islands/SearchSpecs"
 import { SnackbarAnatomy, SnackbarColor, SnackbarMeasures, SnackbarAnimation } from "./islands/SnackbarSpecs"
 import { ItemShowcase, ButtonGroupShowcase, InputGroupShowcase, SpinnerShowcase, SpinnerBasic, AttachmentShowcase } from "./islands/Batch1Showcase"
+import { AlertBasic, AlertDestructive, AlertSemantic } from "./islands/AlertShowcases"
 import { SwitchAnatomy, SwitchStates, SwitchMeasures } from "./islands/SwitchSpecs"
 import {
   CheckboxAnatomy, CheckboxStates, CheckboxMeasures,
@@ -103,6 +104,9 @@ const registry: Record<string, ComponentType> = {
   "input-group-showcase": InputGroupShowcase,
   "spinner-showcase": SpinnerShowcase,
   "spinner-basic": SpinnerBasic,
+  "alert-basic": AlertBasic,
+  "alert-destructive": AlertDestructive,
+  "alert-semantic": AlertSemantic,
   "attachment-showcase": AttachmentShowcase,
   "toggle-showcase": ToggleShowcase,
   "label-showcase": LabelShowcase,
