@@ -21,8 +21,8 @@
 <!-- Tailwind v4 + shadcn/Radix React islands: mount real @amalgama/ds components into
      any [data-island="<name>"] placeholder. Additive — does nothing until a placeholder
      exists, so it is safe to load alongside the buildless examples during the cutover. -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=4">
-<script type="module" src="islands/dist/embassy-islands.js?v=4"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=5">
+<script type="module" src="islands/dist/embassy-islands.js?v=5"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -7937,28 +7937,7 @@ export { Input }
           </ul>
 
           <!-- Canonical Select (styled listbox) -->
-          <div class="bd-family-wrap">
-            <div class="select" data-select style="width:220px">
-              <button type="button" class="select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Fruta">
-                <span class="select-value" data-placeholder>Seleccioná una fruta</span>
-                <svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="select-content" role="listbox" aria-label="Fruta" hidden>
-                <div class="select-scroll-up" hidden aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg></div>
-                <div class="select-viewport">
-                  <div class="select-group" role="group" aria-label="Frutas">
-                    <div class="select-label">Frutas</div>
-                    <div class="select-item" role="option" data-value="manzana" aria-selected="false"><span class="select-item-text">Manzana</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-                    <div class="select-item" role="option" data-value="banana" aria-selected="false"><span class="select-item-text">Banana</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-                    <div class="select-item" role="option" data-value="arandano" aria-selected="false"><span class="select-item-text">Arándano</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-                    <div class="select-item" role="option" data-value="uvas" aria-selected="false"><span class="select-item-text">Uvas</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-                    <div class="select-item" role="option" data-value="anana" aria-selected="false"><span class="select-item-text">Ananá</span><span class="select-item-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-                  </div>
-                </div>
-                <div class="select-scroll-down" hidden aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-              </div>
-            </div>
-          </div>
+          <div class="bd-family-wrap"><div data-island="select-showcase"></div></div>
           <p class="cg-caption" style="margin-top:12px">Abrí el Select: el panel replica el <code>SelectContent</code> de shadcn — misma superficie, radios, sombra, alto de ítem y check a la derecha, con tokens Embassy. El <code>&lt;select&gt;</code> nativo (<code>form.css</code>) sigue disponible para campos de formulario densos donde alcanza el desplegable del sistema.</p>
 
         </section>
