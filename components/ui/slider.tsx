@@ -10,6 +10,9 @@ export interface SliderProps {
   disabled?: boolean
   onValueChange?: (value: number[]) => void
   className?: string
+  /** `vertical` orients the track on the Y axis (min at the bottom); the
+   *  parent sets the height (par shadcn orientation="vertical"). */
+  orientation?: "horizontal" | "vertical"
   "aria-label"?: string
 }
 
@@ -26,6 +29,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
       disabled,
       onValueChange,
       className,
+      orientation = "horizontal",
       "aria-label": ariaLabel,
     },
     ref
@@ -34,6 +38,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
     const [internal, setInternal] = React.useState(defaultValue)
     const current = isControlled ? value! : internal
     const isRange = current.length > 1
+    const isVertical = orientation === "vertical"
 
     const setAt = (index: number, raw: number) => {
       const next = [...current]
@@ -48,17 +53,24 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
 
     const pct = (v: number) => ((v - min) / (max - min)) * 100
 
+    // Vertical fills from the bottom (min) upward via height; horizontal fills
+    // from the left via width. Range mode brackets the span between both thumbs.
+    const rangeStyle: React.CSSProperties = isVertical
+      ? isRange
+        ? { bottom: `${pct(current[0])}%`, height: `${pct(current[1]) - pct(current[0])}%` }
+        : { bottom: 0, height: `${pct(current[0])}%` }
+      : isRange
+        ? { left: `${pct(current[0])}%`, right: `${100 - pct(current[1])}%` }
+        : { left: 0, width: `${pct(current[0])}%` }
+
     return (
-      <div ref={ref} className={cn("slider", className)} data-disabled={disabled || undefined}>
+      <div
+        ref={ref}
+        className={cn("slider", isVertical && "slider-vertical", className)}
+        data-disabled={disabled || undefined}
+      >
         <div className="slider-track" />
-        <div
-          className="slider-range"
-          style={
-            isRange
-              ? { left: `${pct(current[0])}%`, right: `${100 - pct(current[1])}%` }
-              : { left: 0, width: `${pct(current[0])}%` }
-          }
-        />
+        <div className="slider-range" style={rangeStyle} />
         {current.map((v, i) => (
           <input
             key={i}

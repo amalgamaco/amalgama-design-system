@@ -13,7 +13,7 @@
 @import url('components/toolbar.css?v=9');
 @import url('components/badge.css?v=9');
 @import url('components/card.css?v=9');
-@import url('components/form.css?v=18');
+@import url('components/form.css?v=19');
 @import url('components/tabs.css?v=9');
 @import url('components/table.css?v=9');
 @import url('components/stat-card.css?v=9');
@@ -52,6 +52,7 @@
 @import url('components/divider.css?v=9');
 @import url('components/dropdown-menu.css?v=9');
 @import url('components/input-otp.css?v=9');
+@import url('components/label.css?v=1');
 @import url('components/list.css?v=9');
 @import url('components/menubar.css?v=9');
 @import url('components/navigation-menu.css?v=9');
