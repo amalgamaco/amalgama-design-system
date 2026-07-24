@@ -21,8 +21,8 @@
 <!-- Tailwind v4 + shadcn/Radix React islands: mount real @amalgama/ds components into
      any [data-island="<name>"] placeholder. Additive — does nothing until a placeholder
      exists, so it is safe to load alongside the buildless examples during the cutover. -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=7">
-<script type="module" src="islands/dist/embassy-islands.js?v=7"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=8">
+<script type="module" src="islands/dist/embassy-islands.js?v=8"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -20007,19 +20007,7 @@ import { Select } from &quot;./components/ui/select&quot;
             <li><b>Anatomía:</b> <code>SheetHeader</code> (título) · <code>SheetBody</code> (con scroll) · <code>SheetFooter</code> (acciones).</li>
             <li>Para acciones rápidas o listas en mobile — no para flujos largos ni navegación principal.</li>
           </ul>
-          <div class="bd-family-wrap"><button class="btn-secondary btn-sm" type="button" onclick="openOverlay('bshsc-5')">Abrir bottom sheet</button><div class="sheet-overlay" id="bshsc-5" style="display:none">
-              <div class="sheet-content sheet-content-bottom">
-                <button class="sheet-close" type="button" aria-label="Cerrar" onclick="closeOverlay('bshsc-5')">✕</button>
-                <div class="sheet-header">
-                  <div class="sheet-title">Acciones</div>
-                  <div class="sheet-description">Bottom sheet — anclado al borde inferior, ideal en mobile.</div>
-                </div>
-                <div class="sheet-body"><p style="font-size:var(--font-size-body-sm);color:var(--color-on-surface);line-height:1.6">Panel modal con scrim, CSS + vanilla JS (<code>css/components/sheet.css</code>) y tematizado con tokens de Embassy.</p>
-                <p style="font-size:var(--font-size-body-sm);color:var(--color-on-surface-variant);line-height:1.6;margin-top:12px">Cierre con Escape, clic en el overlay o el botón de abajo.</p></div>
-                <div class="sheet-footer"><button class="btn-tertiary btn-sm" type="button" onclick="closeOverlay('bshsc-5')">Cancelar</button>
-                  <button class="btn-primary btn-sm" type="button" onclick="closeOverlay('bshsc-5')">Aplicar</button></div>
-              </div>
-            </div></div>
+          <div class="bd-family-wrap"><div data-island="bottom-sheet-showcase"></div></div>
           <ol class="bd-family-legend"><li>Bottom sheet — <code>side="bottom"</code> (panel de 384px de alto, ancho completo).</li></ol>
         </section>
       </div>

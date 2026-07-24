@@ -125,7 +125,7 @@ function OneSheet({ side, trigger }: { side: "bottom" | "right"; trigger: string
         </SheetHeader>
         <SheetBody>
           <p className="text-body-sm text-fg leading-relaxed">
-            Panel modal con scrim, compuesto sobre el primitivo Dialog de Radix y tematizado con tokens de Embassy.
+            Panel modal con scrim, CSS + vanilla JS (<code>css/components/sheet.css</code>) y tematizado con tokens de Embassy.
           </p>
           <p className="text-body-sm text-fg-subtle leading-relaxed mt-3">
             Cierre con Escape, clic en el overlay o el botón de abajo.
