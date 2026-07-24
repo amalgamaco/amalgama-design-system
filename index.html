@@ -21,8 +21,8 @@
 <!-- Tailwind v4 + shadcn/Radix React islands: mount real @amalgama/ds components into
      any [data-island="<name>"] placeholder. Additive — does nothing until a placeholder
      exists, so it is safe to load alongside the buildless examples during the cutover. -->
-<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=5">
-<script type="module" src="islands/dist/embassy-islands.js?v=5"></script>
+<link rel="stylesheet" href="islands/dist/embassy-islands.css?v=6">
+<script type="module" src="islands/dist/embassy-islands.js?v=6"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -21316,7 +21316,7 @@ import { Button } from &quot;./components/ui/button&quot;
       <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
         <p class="bd-lead">Agrupa acciones relacionadas del mismo peso en una sola unidad visual.</p>
         <ul class="bd-overview-list"><li><b>Orientación:</b> horizontal (default) o <code>.button-group-vertical</code>.</li><li><b>Addon:</b> <code>.button-group-text</code> (prefijo/sufijo, p.ej. <code>https://</code>).</li><li>Para elegir una opción con estado usá <b>Segmented Button</b> o <b>Toggle Group</b>.</li></ul>
-        <div class="bd-family-wrap"><div class="button-group"><button class="btn-tertiary btn-sm" type="button">Día</button><button class="btn-tertiary btn-sm" type="button">Semana</button><button class="btn-tertiary btn-sm" type="button">Mes</button></div></div>
+        <div class="bd-family-wrap"><div data-island="button-group-showcase"></div></div>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
         <h2 class="docs-section-title">Variantes</h2>
@@ -21347,7 +21347,7 @@ import { Button } from &quot;./components/ui/button&quot;
       <div class="ds-comp-tab-panel active" data-tab="overview"><section class="docs-section">
         <p class="bd-lead">Combina un input con prefijos/sufijos (íconos, unidades, atajos o botones) bajo un solo borde con foco unificado.</p>
         <ul class="bd-overview-list"><li><b>Addons:</b> <code>.input-group-addon</code> (inline) · <code>-end</code> al final; <code>.input-group-text</code> para texto.</li><li>El foco y el estado de error (<code>aria-invalid</code>) viven en <code>.input-group</code>.</li><li>Para búsqueda filtrable con panel usá <b>Combobox</b>.</li></ul>
-        <div class="bd-family-wrap"><div class="input-group" style="max-width:340px"><span class="input-group-addon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input class="input-group-control" placeholder="Buscar…"><span class="input-group-addon input-group-addon-end input-group-text">⌘K</span></div></div>
+        <div class="bd-family-wrap"><div data-island="input-group-showcase"></div></div>
       </section></div>
       <div class="ds-comp-tab-panel" data-tab="specs"><section class="docs-section">
         <h2 class="docs-section-title">Variantes</h2>

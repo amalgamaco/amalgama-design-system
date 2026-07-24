@@ -40,37 +40,21 @@ export function ItemShowcase() {
 
 export function ButtonGroupShowcase() {
   return (
-    <div className="flex flex-col gap-4">
-      <ButtonGroup>
-        <Button variant="tertiary" size="sm"><ChevronLeft className="size-4" /> Anterior</Button>
-        <Button variant="tertiary" size="sm">Siguiente <ChevronRight className="size-4" /></Button>
-      </ButtonGroup>
-      <ButtonGroup>
-        <ButtonGroupText>https://</ButtonGroupText>
-        <Button variant="tertiary" size="sm">tu-sitio.com</Button>
-      </ButtonGroup>
-      <ButtonGroup>
-        <Button variant="tertiary" size="sm">Uno</Button>
-        <ButtonGroupSeparator />
-        <Button variant="tertiary" size="sm">Dos</Button>
-      </ButtonGroup>
-    </div>
+    <ButtonGroup>
+      <Button variant="tertiary" size="sm">Día</Button>
+      <Button variant="tertiary" size="sm">Semana</Button>
+      <Button variant="tertiary" size="sm">Mes</Button>
+    </ButtonGroup>
   )
 }
 
 export function InputGroupShowcase() {
   return (
-    <div className="flex flex-col gap-4 w-full max-w-md">
-      <InputGroup>
-        <InputGroupAddon><Search /></InputGroupAddon>
-        <InputGroupInput placeholder="Buscar…" />
-        <InputGroupAddon align="inline-end"><InputGroupText>⌘K</InputGroupText></InputGroupAddon>
-      </InputGroup>
-      <InputGroup aria-invalid>
-        <InputGroupAddon><Search /></InputGroupAddon>
-        <InputGroupInput placeholder="Estado de error" defaultValue="valor inválido" />
-      </InputGroup>
-    </div>
+    <InputGroup style={{ maxWidth: 340 }}>
+      <InputGroupAddon><Search /></InputGroupAddon>
+      <InputGroupInput placeholder="Buscar…" />
+      <InputGroupAddon align="inline-end"><InputGroupText>⌘K</InputGroupText></InputGroupAddon>
+    </InputGroup>
   )
 }
 
