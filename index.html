@@ -10478,7 +10478,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 
       <!-- Component variants -->
       <div class="bd-family-wrap">
-        <div><div style="display:flex;flex-wrap:wrap;gap:12px"><button type="button" class="btn-tertiary btn-sm" onclick="showToast('Archivo eliminado correctamente')">Mostrar snackbar</button><button type="button" class="btn-tertiary btn-sm" onclick="showToast('Archivo eliminado',{action:'Deshacer'})">Con acción</button><button type="button" class="btn-tertiary btn-sm" onclick="showToast('No se pudo guardar el cambio',{action:'Reintentar',persist:true,closable:true})">Persistente</button></div></div>
+        <div data-island="snackbar-showcase"></div>
       </div>
 
       <!-- Legend — variant references -->
@@ -10509,7 +10509,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
         <div>
           <p style="font-size:12px;font-weight:600;color:var(--ds-text-2);margin:0 0 8px;">Solo mensaje</p>
           <div class="ds-preview centered" style="padding:18px;">
-            <div style="max-width:320px;"><div class="snackbar snackbar--static" role="status" aria-live="polite"><span class="snackbar-message">Archivo eliminado correctamente</span></div></div>
+            <div style="max-width:320px;"><div data-island="snackbar-config-message"></div></div>
           </div>
           <p style="font-size:11px;color:var(--ds-text-3);margin:6px 0 0;text-align:center;">Variante mínima. Sin acciones.</p>
         </div>
@@ -10518,7 +10518,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
         <div>
           <p style="font-size:12px;font-weight:600;color:var(--ds-text-2);margin:0 0 8px;">Mensaje + botón de acción</p>
           <div class="ds-preview centered" style="padding:18px;">
-            <div style="max-width:320px;"><div class="snackbar snackbar--static" role="status" aria-live="polite"><span class="snackbar-message">Archivo eliminado</span><button type="button" class="snackbar-action">Deshacer</button></div></div>
+            <div style="max-width:320px;"><div data-island="snackbar-config-action"></div></div>
           </div>
           <p style="font-size:11px;color:var(--ds-text-3);margin:6px 0 0;text-align:center;">Acción en <code>inverse-primary</code>.</p>
         </div>
@@ -10527,7 +10527,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
         <div>
           <p style="font-size:12px;font-weight:600;color:var(--ds-text-2);margin:0 0 8px;">Mensaje + botón de cierre</p>
           <div class="ds-preview centered" style="padding:18px;">
-            <div style="max-width:320px;"><div class="snackbar snackbar--static" role="status" aria-live="polite"><span class="snackbar-message">Cambios guardados</span><button type="button" class="snackbar-close" aria-label="Cerrar notificación"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div></div>
+            <div style="max-width:320px;"><div data-island="snackbar-config-close"></div></div>
           </div>
           <p style="font-size:11px;color:var(--ds-text-3);margin:6px 0 0;text-align:center;">Ícono ×, 24×24dp, siempre visible.</p>
         </div>
@@ -10536,7 +10536,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
         <div>
           <p style="font-size:12px;font-weight:600;color:var(--ds-text-2);margin:0 0 8px;">Mensaje largo + acción (apilado)</p>
           <div class="ds-preview centered" style="padding:18px;">
-            <div style="max-width:320px;"><div class="snackbar snackbar--static snackbar--multiline" role="status" aria-live="polite"><span class="snackbar-message">No se pudo completar la operación en el servidor remoto</span><button type="button" class="snackbar-action">Reintentar</button></div></div>
+            <div style="max-width:320px;"><div data-island="snackbar-config-multiline"></div></div>
           </div>
           <p style="font-size:11px;color:var(--ds-text-3);margin:6px 0 0;text-align:center;">Acción centrada debajo del mensaje.</p>
         </div>
@@ -13100,35 +13100,7 @@ css/layout.css</code></pre>
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <div class="vacancies-list" style="max-width:512px"><div class="vacancy-card" tabindex="0">
-    <div class="vacancy-icon">💼</div>
-    <div class="vacancy-info">
-      <div class="vacancy-name">Diseñador UX Senior <span class="badge badge-open">Abierta</span></div>
-      <div class="vacancy-meta">Producto · Buenos Aires</div>
-    </div>
-    <div class="vacancy-right"><div class="vacancy-age">12 candidatos</div></div>
-  </div><div class="vacancy-card" tabindex="0">
-    <div class="vacancy-icon">💼</div>
-    <div class="vacancy-info">
-      <div class="vacancy-name">Frontend Engineer <span class="badge badge-warning">En revisión</span></div>
-      <div class="vacancy-meta">Tecnología · Remoto</div>
-    </div>
-    <div class="vacancy-right"><div class="vacancy-age">5 candidatos</div></div>
-  </div><div class="vacancy-card" tabindex="0">
-    <div class="vacancy-icon">💼</div>
-    <div class="vacancy-info">
-      <div class="vacancy-name">Product Manager <span class="badge badge-closed">Cerrada</span></div>
-      <div class="vacancy-meta">Producto · Híbrido</div>
-    </div>
-    <div class="vacancy-right"><div class="vacancy-age">0 candidatos</div></div>
-  </div><div class="vacancy-card" tabindex="0">
-    <div class="vacancy-icon">💼</div>
-    <div class="vacancy-info">
-      <div class="vacancy-name">Data Analyst <span class="badge badge-draft">Borrador</span></div>
-      <div class="vacancy-meta">Datos · Remoto</div>
-    </div>
-    
-  </div></div>
+            <div data-island="vacancy-card-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -13352,27 +13324,7 @@ css/layout.css</code></pre>
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-            <div class="people-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))"><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
-    <div class="item-media person-avatar">MG</div>
-    <div class="item-content">
-      <div class="item-title">María González</div>
-      <div class="item-description">Diseñadora UX</div>
-    </div>  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
-    <div class="item-media person-avatar">CL</div>
-    <div class="item-content">
-      <div class="item-title">Carlos López</div>
-      <div class="item-description">Frontend Engineer</div>
-    </div>  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
-    <div class="item-media person-avatar">AM</div>
-    <div class="item-content">
-      <div class="item-title">Ana Martínez</div>
-      <div class="item-description">Product Manager</div>
-    </div>  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
-    <div class="item-media person-avatar">JP</div>
-    <div class="item-content">
-      <div class="item-title">Juan Pérez</div>
-      <div class="item-description">Data Analyst</div>
-    </div>  </div></div>
+            <div data-island="person-card-showcase"></div>
           </div>
 
           <!-- Legend — variant references -->
@@ -13389,25 +13341,7 @@ css/layout.css</code></pre>
 <div class="docs-section" id="tc-person-s-0">
         <h2 class="docs-section-title">Anatomía</h2>
         <div class="docs-preview">
-          <div class="people-grid"><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
-    <div class="item-media person-avatar">MG</div>
-    <div class="item-content">
-      <div class="item-title">Mercedes Garcia</div>
-      <div class="item-description">Diseñadora UX</div>
-    </div>
-  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
-    <div class="item-media person-avatar">CL</div>
-    <div class="item-content">
-      <div class="item-title">Carlos Lopez</div>
-      <div class="item-description">Desarrollador Frontend</div>
-    </div>
-  </div><div class="item item-outline item-clickable person-card" tabindex="0" role="button">
-    <div class="item-media person-avatar">AM</div>
-    <div class="item-content">
-      <div class="item-title">Ana Martinez</div>
-      <div class="item-description">Product Manager</div>
-    </div>
-  </div></div>
+          <div data-island="person-grid-specs-showcase"></div>
         </div>
         <table class="ds-table" style="margin-top:16px">
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
