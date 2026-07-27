@@ -6876,7 +6876,7 @@ function setLoading(btn, isLoading) {
             <pre class="docs-code"><code>&lt;form&gt;
   &lt;!-- campos del formulario --&gt;
 
-  &lt;div class=&quot;form-actions&quot; style=&quot;display:flex;gap:var(--space-2);justify-content:flex-end&quot;&gt;
+  &lt;div class=&quot;form-actions&quot; style=&quot;display:flex;gap:8px;justify-content:flex-end&quot;&gt;
     &lt;!-- Escape (Cancelar): siempre tertiary/Outlined — en formularios y en modales/overlays. Nunca Tonal ni danger. --&gt;
     &lt;button type=&quot;button&quot; class=&quot;btn-tertiary&quot; onclick=&quot;closeModal()&quot;&gt;Cancelar&lt;/button&gt;
 
@@ -6903,7 +6903,7 @@ function setLoading(btn, isLoading) {
      aria-labelledby=&quot;dlg-title&quot; aria-describedby=&quot;dlg-desc&quot;&gt;
   &lt;h2 id=&quot;dlg-title&quot;&gt;¿Eliminar esta vacante?&lt;/h2&gt;
   &lt;p id=&quot;dlg-desc&quot;&gt;Esta acción no se puede deshacer.&lt;/p&gt;
-  &lt;div style=&quot;display:flex;gap:var(--space-2);justify-content:flex-end&quot;&gt;
+  &lt;div style=&quot;display:flex;gap:8px;justify-content:flex-end&quot;&gt;
     &lt;button class=&quot;btn-tertiary&quot; onclick=&quot;closeDialog()&quot;&gt;Cancelar&lt;/button&gt;
     &lt;button class=&quot;btn-primary btn-danger&quot; onclick=&quot;confirmDelete()&quot;&gt;Eliminar&lt;/button&gt;
   &lt;/div&gt;
@@ -12698,21 +12698,21 @@ export { StatsGrid, StatCard }</code></pre>
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-<div style="width:400px;max-width:100%;border:1px solid var(--color-outline-variant);border-radius:8px;overflow:hidden" id="nbsc-4">
-              <div style="height:80px;display:flex;align-items:center;justify-content:center;padding:16px;border-bottom:1px solid var(--color-outline-variant);font-size:13px;color:var(--color-on-surface-variant)" class="nbsc-4-content">Contenido de la vista activa: Inicio</div>
+<div style="width:400px;max-width:100%;border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);overflow:hidden" id="nbsc-4">
+              <div style="height:80px;display:flex;align-items:center;justify-content:center;padding:var(--space-4);border-bottom:1px solid var(--color-outline-variant);font-size:var(--font-size-label);color:var(--color-on-surface-variant)" class="nbsc-4-content">Contenido de la vista activa: Inicio</div>
               <nav aria-label="Navegación principal" style="display:flex;height:80px;background:var(--color-surface-container);border-top:1px solid var(--color-outline-variant)">
-                <button type="button" class="navbar-item active" onclick="navBarSelect(this,'nbsc-4')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:transparent;border:none;cursor:pointer;position:relative">
-                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:4px;position:relative" class="navbar-item-icon-wrap">●</span>
-                <span style="font-size:12px" class="navbar-item-label">Inicio</span>
-              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-4')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:transparent;border:none;cursor:pointer;position:relative">
-                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:4px;position:relative" class="navbar-item-icon-wrap">●<span style="position:absolute;top:2px;right:6px;background:var(--color-primary);color:var(--color-on-primary);font-size:9px;font-weight:700;border-radius:99px;padding:2px 5px">3</span></span>
-                <span style="font-size:12px" class="navbar-item-label">Vacantes</span>
-              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-4')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:transparent;border:none;cursor:pointer;position:relative">
-                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:4px;position:relative" class="navbar-item-icon-wrap">●</span>
-                <span style="font-size:12px" class="navbar-item-label">Candidatos</span>
-              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-4')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:transparent;border:none;cursor:pointer;position:relative">
-                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:4px;position:relative" class="navbar-item-icon-wrap">●</span>
-                <span style="font-size:12px" class="navbar-item-label">Más</span>
+                <button type="button" class="navbar-item active" onclick="navBarSelect(this,'nbsc-4')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:var(--space-3);background:transparent;border:none;cursor:pointer;position:relative">
+                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);margin-bottom:var(--space-1);position:relative" class="navbar-item-icon-wrap">●</span>
+                <span style="font-size:var(--font-size-caption)" class="navbar-item-label">Inicio</span>
+              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-4')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:var(--space-3);background:transparent;border:none;cursor:pointer;position:relative">
+                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);margin-bottom:var(--space-1);position:relative" class="navbar-item-icon-wrap">●<span style="position:absolute;top:2px;right:6px;background:var(--color-primary);color:var(--color-on-primary);font-size:9px;font-weight:700;border-radius:var(--radius-full);padding:2px 5px">3</span></span>
+                <span style="font-size:var(--font-size-caption)" class="navbar-item-label">Vacantes</span>
+              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-4')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:var(--space-3);background:transparent;border:none;cursor:pointer;position:relative">
+                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);margin-bottom:var(--space-1);position:relative" class="navbar-item-icon-wrap">●</span>
+                <span style="font-size:var(--font-size-caption)" class="navbar-item-label">Candidatos</span>
+              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-4')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:var(--space-3);background:transparent;border:none;cursor:pointer;position:relative">
+                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);margin-bottom:var(--space-1);position:relative" class="navbar-item-icon-wrap">●</span>
+                <span style="font-size:var(--font-size-caption)" class="navbar-item-label">Más</span>
               </button>
               </nav>
             </div>
@@ -12782,7 +12782,7 @@ export { StatsGrid, StatCard }</code></pre>
         <section class="docs-section" id="tc-nav-bar-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
-          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="nav-bar"></div></div>
+          <div class="bd-family-wrap" style="margin:var(--space-2) 0 var(--space-5);"><div class="token-panel" data-token-panel="nav-bar"></div></div>
           <table class="ds-table">
             <thead><tr><th>Parte / estado</th><th>Rol / token</th></tr></thead>
             <tbody>
@@ -12818,28 +12818,28 @@ export { StatsGrid, StatCard }</code></pre>
           <h2 class="docs-section-title">Uso</h2>
           <p class="ds-p">La navigation bar expone <b>3–5 destinos</b> de nivel superior, mutuamente excluyentes y siempre visibles, en contextos compactos.</p>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>3–5 destinos de nivel superior sin sub-secciones.</li><li>Mobile / tablet / layout compacto (&lt; 768&nbsp;px).</li><li>Destinos de igual jerarquía, siempre visibles.</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Más de 5 destinos → <b>Navigation Drawer</b>.</li><li>Desktop con espacio para un drawer lateral.</li><li>Destinos con sub-secciones que requieren agrupación.</li></ul></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:var(--space-5);line-height:1.9"><li>3–5 destinos de nivel superior sin sub-secciones.</li><li>Mobile / tablet / layout compacto (&lt; 768&nbsp;px).</li><li>Destinos de igual jerarquía, siempre visibles.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:var(--space-5);line-height:1.9"><li>Más de 5 destinos → <b>Navigation Drawer</b>.</li><li>Desktop con espacio para un drawer lateral.</li><li>Destinos con sub-secciones que requieren agrupación.</li></ul></div></div>
           </div>
         </section>
         <section class="docs-section" id="tc-nav-bar-g-1">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Componente real. Contenedor, ítems de destino (ícono + label) e indicador de activo.</p>
-<div class="bd-family-wrap"><div style="width:400px;max-width:100%;border:1px solid var(--color-outline-variant);border-radius:8px;overflow:hidden" id="nbsc-w-5">
-              <div style="height:80px;display:flex;align-items:center;justify-content:center;padding:16px;border-bottom:1px solid var(--color-outline-variant);font-size:13px;color:var(--color-on-surface-variant)" class="nbsc-w-5-content">Contenido de la vista activa: Inicio</div>
+<div class="bd-family-wrap"><div style="width:400px;max-width:100%;border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);overflow:hidden" id="nbsc-w-5">
+              <div style="height:80px;display:flex;align-items:center;justify-content:center;padding:var(--space-4);border-bottom:1px solid var(--color-outline-variant);font-size:var(--font-size-label);color:var(--color-on-surface-variant)" class="nbsc-w-5-content">Contenido de la vista activa: Inicio</div>
               <nav aria-label="Navegación principal" style="display:flex;height:80px;background:var(--color-surface-container);border-top:1px solid var(--color-outline-variant)">
-                <button type="button" class="navbar-item active" onclick="navBarSelect(this,'nbsc-w-5')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:transparent;border:none;cursor:pointer;position:relative">
-                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:4px;position:relative" class="navbar-item-icon-wrap">●</span>
-                <span style="font-size:12px" class="navbar-item-label">Inicio</span>
-              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-w-5')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:transparent;border:none;cursor:pointer;position:relative">
-                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:4px;position:relative" class="navbar-item-icon-wrap">●<span style="position:absolute;top:2px;right:6px;background:var(--color-primary);color:var(--color-on-primary);font-size:9px;font-weight:700;border-radius:99px;padding:2px 5px">3</span></span>
-                <span style="font-size:12px" class="navbar-item-label">Vacantes</span>
-              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-w-5')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:transparent;border:none;cursor:pointer;position:relative">
-                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:4px;position:relative" class="navbar-item-icon-wrap">●</span>
-                <span style="font-size:12px" class="navbar-item-label">Candidatos</span>
-              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-w-5')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:12px;background:transparent;border:none;cursor:pointer;position:relative">
-                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:4px;position:relative" class="navbar-item-icon-wrap">●</span>
-                <span style="font-size:12px" class="navbar-item-label">Más</span>
+                <button type="button" class="navbar-item active" onclick="navBarSelect(this,'nbsc-w-5')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:var(--space-3);background:transparent;border:none;cursor:pointer;position:relative">
+                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);margin-bottom:var(--space-1);position:relative" class="navbar-item-icon-wrap">●</span>
+                <span style="font-size:var(--font-size-caption)" class="navbar-item-label">Inicio</span>
+              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-w-5')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:var(--space-3);background:transparent;border:none;cursor:pointer;position:relative">
+                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);margin-bottom:var(--space-1);position:relative" class="navbar-item-icon-wrap">●<span style="position:absolute;top:2px;right:6px;background:var(--color-primary);color:var(--color-on-primary);font-size:9px;font-weight:700;border-radius:var(--radius-full);padding:2px 5px">3</span></span>
+                <span style="font-size:var(--font-size-caption)" class="navbar-item-label">Vacantes</span>
+              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-w-5')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:var(--space-3);background:transparent;border:none;cursor:pointer;position:relative">
+                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);margin-bottom:var(--space-1);position:relative" class="navbar-item-icon-wrap">●</span>
+                <span style="font-size:var(--font-size-caption)" class="navbar-item-label">Candidatos</span>
+              </button><button type="button" class="navbar-item" onclick="navBarSelect(this,'nbsc-w-5')" style="flex:1;display:flex;flex-direction:column;align-items:center;padding-top:var(--space-3);background:transparent;border:none;cursor:pointer;position:relative">
+                <span style="width:64px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full);margin-bottom:var(--space-1);position:relative" class="navbar-item-icon-wrap">●</span>
+                <span style="font-size:var(--font-size-caption)" class="navbar-item-label">Más</span>
               </button>
               </nav>
             </div></div>
@@ -12847,7 +12847,7 @@ export { StatsGrid, StatCard }</code></pre>
         </section>
         <section class="docs-section" id="tc-nav-bar-g-2">
           <h2 class="docs-section-title">Ubicación</h2>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>Anclada al borde <b>inferior</b> en mobile; siempre visible sobre el contenido.</li>
             <li>No la combines con un Navigation Drawer en el mismo breakpoint.</li>
             <li>Orden de destinos estable entre pantallas y sesiones.</li>
@@ -12855,7 +12855,7 @@ export { StatsGrid, StatCard }</code></pre>
         </section>
         <section class="docs-section" id="tc-nav-bar-g-3">
           <h2 class="docs-section-title">Diseño adaptativo</h2>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>En compacto: barra inferior con 3–5 destinos.</li>
             <li>Al crecer el ancho, migrá a un <b>Navigation Drawer</b> (lateral) en vez de estirar la barra.</li>
             <li>Cada destino conserva ícono + label; no ocultes el label en inactivo.</li>
@@ -12863,7 +12863,7 @@ export { StatsGrid, StatCard }</code></pre>
         </section>
         <section class="docs-section" id="tc-nav-bar-g-4">
           <h2 class="docs-section-title">Comportamiento</h2>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>Un solo destino activo a la vez.</li>
             <li>Reservá badges para notificaciones/contadores relevantes, no en todos los ítems.</li>
             <li>No la uses para acciones (eso es un botón/FAB), solo navegación.</li>
@@ -13047,22 +13047,22 @@ export { StatsGrid, StatCard }</code></pre>
 
           <!-- Component variants -->
           <div class="bd-family-wrap">
-<div style="border:1px solid var(--color-outline-variant);border-radius:8px;overflow:hidden" id="tbsc-6">
-              <div style="display:flex;align-items:center;gap:12px;padding:0 28px;height:56px;background:var(--color-surface-container);border-bottom:1px solid var(--color-outline-variant)">
-                <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;flex:1;font-size:13px">
+<div style="border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);overflow:hidden" id="tbsc-6">
+              <div style="display:flex;align-items:center;gap:var(--space-3);padding:0 var(--space-8);height:56px;background:var(--color-surface-container);border-bottom:1px solid var(--color-outline-variant)">
+                <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;flex:1;font-size:var(--font-size-label)">
                   <a href="#" onclick="return false" style="color:var(--color-on-surface-variant);text-decoration:none">Reclutamiento</a>
-                  <span style="color:var(--color-outline);font-size:12px">/</span>
+                  <span style="color:var(--color-outline);font-size:var(--font-size-caption)">/</span>
                   <span style="color:var(--color-on-surface);font-weight:600">Vacantes</span>
                 </nav>
-                <div style="display:flex;align-items:center;gap:8px">
+                <div style="display:flex;align-items:center;gap:var(--space-2)">
                   <button class="btn-secondary btn-sm" type="button">+ Nueva vacante</button>
-                  <button type="button" aria-label="Notificaciones" style="position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;border:none;background:transparent;cursor:pointer;color:var(--color-on-surface-variant)">
-                    🔔<span style="position:absolute;top:4px;right:4px;width:8px;height:8px;background:var(--color-primary);border-radius:50%;border:2px solid var(--color-surface-container)"></span>
+                  <button type="button" aria-label="Notificaciones" style="position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--radius-md);border:none;background:transparent;cursor:pointer;color:var(--color-on-surface-variant)">
+                    🔔<span style="position:absolute;top:4px;right:4px;width:8px;height:8px;background:var(--color-primary);border-radius:var(--radius-full);border:2px solid var(--color-surface-container)"></span>
                   </button>
-                  <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--color-primary-container);color:var(--color-on-primary-container);font-size:12px;font-weight:600">MG</span>
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-full);background:var(--color-primary-container);color:var(--color-on-primary-container);font-size:var(--font-size-caption);font-weight:600">MG</span>
                 </div>
               </div>
-              <div style="padding:20px 16px;background:var(--color-surface);font-size:13px;color:var(--color-on-surface-variant);min-height:60px">Contenido de la vista — área debajo del topbar</div>
+              <div style="padding:var(--space-5) var(--space-4);background:var(--color-surface);font-size:var(--font-size-label);color:var(--color-on-surface-variant);min-height:60px">Contenido de la vista — área debajo del topbar</div>
             </div>
           </div>
 
@@ -13131,7 +13131,7 @@ export { StatsGrid, StatCard }</code></pre>
         </section>
         <section class="docs-section" id="tc-topbar-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
-          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="topbar"></div></div>
+          <div class="bd-family-wrap" style="margin:var(--space-2) 0 var(--space-5);"><div class="token-panel" data-token-panel="topbar"></div></div>
           <table class="ds-table">
             <thead><tr><th>Clase</th><th>Token</th><th>Uso</th></tr></thead>
             <tbody>
@@ -13166,15 +13166,15 @@ export { StatsGrid, StatCard }</code></pre>
           <h2 class="docs-section-title">Uso</h2>
           <p class="ds-p">La barra superior (top app bar) es la <b>cabecera de cada vista</b>: identifica la pantalla, muestra el contexto de navegación y expone las acciones de la vista actual.</p>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Cabecera principal de cada vista de la aplicación.</li><li>Contexto de navegación (breadcrumbs) + acciones de la vista actual.</li><li>Acceso rápido a notificaciones y perfil.</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Barra de herramientas de acciones secundarias → <b>Toolbar</b>.</li><li>Vistas de onboarding o login donde la navegación no aplica.</li><li>Filtros y acciones de tabla → <b>Toolbar</b>.</li></ul></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:var(--space-5);line-height:1.9"><li>Cabecera principal de cada vista de la aplicación.</li><li>Contexto de navegación (breadcrumbs) + acciones de la vista actual.</li><li>Acceso rápido a notificaciones y perfil.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:var(--space-5);line-height:1.9"><li>Barra de herramientas de acciones secundarias → <b>Toolbar</b>.</li><li>Vistas de onboarding o login donde la navegación no aplica.</li><li>Filtros y acciones de tabla → <b>Toolbar</b>.</li></ul></div></div>
           </div>
         </section>
         <section class="docs-section" id="tc-topbar-g-1">
           <h2 class="docs-section-title">Barra de búsqueda</h2>
           <p class="ds-p">Cuando la búsqueda es la acción primaria de la pantalla, el área de la barra superior se reemplaza por un campo de búsqueda (la variante <i>search</i> del app bar de Material).</p>
           <div class="bd-family-wrap"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar candidatos" aria-label="Buscar candidatos"><span class="search-bar-trailing"><span class="search-bar-avatar">AB</span></span></div></div>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>Usá <code>SearchBar</code> (56&nbsp;px, standalone) cuando la búsqueda encabeza la vista; <code>SearchField</code> compacto cuando comparte la barra con otras acciones.</li>
             <li>El ícono de lupa va al leading; acciones como filtro o voz al trailing.</li>
             <li>Al enfocarse, abre la vista de resultados/sugerencias sin cambiar de pantalla.</li>
@@ -13183,28 +13183,28 @@ export { StatsGrid, StatCard }</code></pre>
         <section class="docs-section" id="tc-topbar-g-2">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Componente real. Las partes que lo componen:</p>
-<div class="bd-family-wrap"><div style="border:1px solid var(--color-outline-variant);border-radius:8px;overflow:hidden" id="tbsc-w-7">
-              <div style="display:flex;align-items:center;gap:12px;padding:0 28px;height:56px;background:var(--color-surface-container);border-bottom:1px solid var(--color-outline-variant)">
-                <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;flex:1;font-size:13px">
+<div class="bd-family-wrap"><div style="border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);overflow:hidden" id="tbsc-w-7">
+              <div style="display:flex;align-items:center;gap:var(--space-3);padding:0 var(--space-8);height:56px;background:var(--color-surface-container);border-bottom:1px solid var(--color-outline-variant)">
+                <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;flex:1;font-size:var(--font-size-label)">
                   <a href="#" onclick="return false" style="color:var(--color-on-surface-variant);text-decoration:none">Reclutamiento</a>
-                  <span style="color:var(--color-outline);font-size:12px">/</span>
+                  <span style="color:var(--color-outline);font-size:var(--font-size-caption)">/</span>
                   <span style="color:var(--color-on-surface);font-weight:600">Vacantes</span>
                 </nav>
-                <div style="display:flex;align-items:center;gap:8px">
+                <div style="display:flex;align-items:center;gap:var(--space-2)">
                   <button class="btn-secondary btn-sm" type="button">+ Nueva vacante</button>
-                  <button type="button" aria-label="Notificaciones" style="position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;border:none;background:transparent;cursor:pointer;color:var(--color-on-surface-variant)">
-                    🔔<span style="position:absolute;top:4px;right:4px;width:8px;height:8px;background:var(--color-primary);border-radius:50%;border:2px solid var(--color-surface-container)"></span>
+                  <button type="button" aria-label="Notificaciones" style="position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--radius-md);border:none;background:transparent;cursor:pointer;color:var(--color-on-surface-variant)">
+                    🔔<span style="position:absolute;top:4px;right:4px;width:8px;height:8px;background:var(--color-primary);border-radius:var(--radius-full);border:2px solid var(--color-surface-container)"></span>
                   </button>
-                  <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--color-primary-container);color:var(--color-on-primary-container);font-size:12px;font-weight:600">MG</span>
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--radius-full);background:var(--color-primary-container);color:var(--color-on-primary-container);font-size:var(--font-size-caption);font-weight:600">MG</span>
                 </div>
               </div>
-              <div style="padding:20px 16px;background:var(--color-surface);font-size:13px;color:var(--color-on-surface-variant);min-height:60px">Contenido de la vista — área debajo del topbar</div>
+              <div style="padding:var(--space-5) var(--space-4);background:var(--color-surface);font-size:var(--font-size-label);color:var(--color-on-surface-variant);min-height:60px">Contenido de la vista — área debajo del topbar</div>
             </div></div>
           <ol class="bd-family-legend"><li>Navegación — back o menú, a la izquierda.</li><li>Título — la pantalla actual.</li><li>Acciones de la vista — 1–3 íconos relevantes.</li><li>Acciones globales — perfil y notificaciones, a la derecha.</li></ol>
         </section>
         <section class="docs-section" id="tc-topbar-g-3">
           <h2 class="docs-section-title">Comportamiento</h2>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>El título va a la izquierda junto a la navegación; máximo <b>1–3 acciones de ícono</b>, el resto a un overflow menu.</li>
             <li>Las acciones globales (perfil, notificaciones) van siempre a la derecha, en posición consistente entre pantallas.</li>
             <li>Al hacer scroll la barra puede elevarse (sombra) para separarse del contenido.</li>
@@ -13253,7 +13253,7 @@ css/layout.css</code></pre>
       <div class="docs-section">
         <h2 class="docs-section-title">Uso</h2>
         <p class="docs-section-desc">Snippets de código para implementar cada variante.</p>
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">Topbar</h3>
+        <h3 style="font-family:var(--font-heading);font-size:var(--font-size-body-lg);font-weight:600;margin:var(--space-5) 0 var(--space-2);color:var(--ds-text-2)">Topbar</h3>
 <div class="docs-code-wrapper">
         <button class="docs-copy-btn">Copiar</button>
         <pre class="docs-code"><code>&lt;div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden"&gt;
@@ -17347,8 +17347,8 @@ return &lt;LineChart data={data} /&gt;</code></pre>
           <div class="cs-anat-stage" style="padding:40px 72px 48px">
             <div class="cs-anat-anchor">
               <input type="checkbox" class="checkbox" checked aria-hidden="true" tabindex="-1" style="pointer-events:none">
-              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">18dp</span></div>
-              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">18dp</span></div>
+              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">18dp</span></div>
+              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">18dp</span></div>
             </div>
           </div>
           <table class="ds-table" style="margin-top:16px">
@@ -17796,6 +17796,13 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
             border:1.5px solid var(--color-on-surface-variant,#474D61);
             font:600 var(--font-size-badge) var(--font-body);
             color:var(--color-on-surface-variant,#474D61);
+          }
+          /* Measurement-label variant: rectangular pill showing a dp/px value
+             on an anatomy pin (keeps base min-width). Replaces the inline block
+             that was copy-pasted across checkbox/radio/switch anatomy pins. */
+          .cs-legend-num.cs-legend-meas {
+            width:auto; height:auto; border-radius:var(--radius-sm);
+            padding:2px 6px; font-size:10px;
           }
 
           /* ── Anatomy pin overlay: live component + numbered callout pins ── */
@@ -20217,8 +20224,8 @@ const [on, setOn] = useState(false)
           <div class="cs-anat-stage" style="padding:40px 72px 48px">
             <div class="cs-anat-anchor">
               <input type="radio" name="meas-radio" class="radio" checked aria-hidden="true" tabindex="-1" style="pointer-events:none">
-              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">20dp</span></div>
-              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">20dp</span></div>
+              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">20dp</span></div>
+              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">20dp</span></div>
             </div>
           </div>
           <table class="ds-table" style="margin-top:16px">
@@ -22029,8 +22036,8 @@ import { Select } from &quot;./components/ui/select&quot;
           <div class="cs-anat-stage" style="padding:40px 72px 48px">
             <div class="cs-anat-anchor">
               <input type="checkbox" role="switch" class="switch" checked aria-hidden="true" tabindex="-1" style="pointer-events:none">
-              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">24dp</span></div>
-              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">44dp</span></div>
+              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">24dp</span></div>
+              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">44dp</span></div>
             </div>
           </div>
           <table class="ds-table" style="margin-top:12px">
