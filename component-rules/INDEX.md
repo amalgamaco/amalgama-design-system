@@ -22,18 +22,18 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | toggle | ✅ authored | c-toggle | toggle.css |
 | toggle-group | ✅ authored | c-toggle-group | toggle-group.css |
 | badge | ✅ authored | c-badge | badge.css |
-| input | 🟡 pending | c-input | form.css |
-| select | 🟡 pending | c-select | select.css |
-| textarea | 🟡 pending | c-textarea | form.css |
-| input-group | 🟡 pending | c-input-group | input-group.css |
-| input-otp | 🟡 pending | c-input-otp | input-otp.css |
-| form | 🟡 pending | c-form | form.css |
-| label | 🟡 pending | c-label | label.css |
+| input | ✅ authored | c-input | form.css |
+| select | ✅ authored | c-select | select.css |
+| textarea | ✅ authored | c-textarea | form.css |
+| input-group | ✅ authored | c-input-group | input-group.css |
+| input-otp | ✅ authored | c-input-otp | input-otp.css |
+| form | ✅ authored | c-form | form.css |
+| label | ✅ authored | c-label | label.css |
 | checkbox | ✅ authored | c-checkbox | checkbox.css |
 | radio | ✅ authored | c-radio | radio-group.css |
-| switch | 🟡 pending | c-switch | switch.css |
-| slider | 🟡 pending | c-slider | slider.css |
-| search | 🟡 pending | c-search | search.css |
+| switch | ✅ authored | c-switch | switch.css |
+| slider | ✅ authored | c-slider | slider.css |
+| search | ✅ authored | c-search | search.css |
 | card (Full Card) | 🟡 pending | c-basic-card | card.css |
 | item (Basic Card) | 🟡 pending | c-item | item.css |
 | stat-card | 🟡 pending | c-stat-card | stat-card.css |
@@ -76,5 +76,5 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | kanban-card | 🟡 pending | c-kanban | kanban.css |
 | person-card | 🟡 pending | c-person | person-card.css |
 
-**Coverage: 10 / 61 authored.** The remaining 51 are the primary #5 work item
+**Coverage: 20 / 61 authored.** The remaining 41 are the primary #5 work item
 (tracked as a phased backlog in the audit report).
