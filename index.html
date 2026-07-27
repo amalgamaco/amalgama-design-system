@@ -12445,13 +12445,13 @@ export { StatsGrid, StatCard }</code></pre>
         <section class="docs-section">
 
           <!-- Short introduction -->
-          <p class="bd-lead">El Navigation Drawer es el panel lateral deslizable de 220&nbsp;px con la navegación contextual, adosado al rail fijo de 72&nbsp;px. Organiza los destinos en ítems bajo títulos de sección.</p>
+          <p class="bd-lead">El Navigation Drawer es el panel lateral de 220&nbsp;px (<code>--sidebar-width</code>) con la navegación contextual. En desktop es persistente (fijo); bajo 768&nbsp;px se vuelve un drawer modal off-canvas. Organiza los destinos en ítems bajo títulos de sección.</p>
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li><b>Anatomía:</b> ítems <code>ds-nav-item</code> con ícono de 14&nbsp;px y texto de 13&nbsp;px, agrupados bajo <code>ds-drawer-section-title</code>.</li>
-            <li><b>Estados:</b> hover y <code>.active</code> usan el fondo <code>--ds-accent-bg</code> y texto <code>--ds-accent</code>; el activo añade <code>font-weight: 600</code>.</li>
-            <li><b>Shell:</b> vive dentro del <code>ds-sidebar-drawer</code> de 220&nbsp;px, deslizando sobre el rail de 72&nbsp;px.</li>
+            <li><b>Anatomía:</b> ítems <code>nav-item</code> con ícono de 16&nbsp;px, agrupados bajo <code>nav-section-label</code>.</li>
+            <li><b>Estados:</b> hover usa <code>--color-nav-hover</code>; <code>.active</code> usa <code>--color-nav-selected</code>/<code>--color-nav-selected-content</code>, peso 500.</li>
+            <li><b>Shell:</b> vive en el <code>.sidebar</code> de 220&nbsp;px; persistente en desktop, drawer modal off-canvas bajo 768&nbsp;px.</li>
             <li><b>Sin wrapper React:</b> se consume como markup HTML puro.</li>
           </ul>
 
@@ -12462,10 +12462,10 @@ export { StatsGrid, StatCard }</code></pre>
 
           <!-- Legend — variant references -->
           <ol class="bd-family-legend">
-            <li>Ítem por defecto — <code>ds-nav-item</code> en reposo, texto secundario, sin fondo</li>
-            <li>Ítem activo — <code>ds-nav-item.active</code>, fondo y texto de acento, peso 600, sincronizado con la ruta</li>
+            <li>Ítem por defecto — <code>nav-item</code> en reposo, texto secundario, sin fondo</li>
+            <li>Ítem activo — <code>nav-item.active</code>, relleno y texto secondary-container, peso 500, sincronizado con la ruta</li>
             <li>Ítem con badge — contador alineado a la derecha para destinos que requieren atención</li>
-            <li>Título de sección — <code>ds-drawer-section-title</code> que agrupa ítems relacionados</li>
+            <li>Título de sección — <code>nav-section-label</code> que agrupa ítems relacionados</li>
           </ol>
 
         </section>
@@ -12476,7 +12476,7 @@ export { StatsGrid, StatCard }</code></pre>
 
         <section class="docs-section" id="tc-navigation-s-0">
           <h2 class="docs-section-title">Anatomía</h2>
-          <p class="docs-section-desc">Panel deslizable (<code>ds-sidebar-drawer</code>) con títulos de sección (<code>ds-drawer-section-title</code>) e ítems (<code>ds-nav-item</code>, con ícono + etiqueta + badge opcional), adosado al rail fijo.</p>
+          <p class="docs-section-desc">Panel deslizable (<code>sidebar</code>) con títulos de sección (<code>nav-section-label</code>) e ítems (<code>nav-item</code>, con ícono + etiqueta + badge opcional), dentro del sidebar persistente.</p>
           <div class="docs-preview">
 <div style="width:220px;overflow:hidden;border-radius:8px;border:1px solid var(--color-outline-variant);background:var(--color-surface-container);padding:4px 0" id="ndsc-2"><div class="nav-section-label">Reclutamiento</div><div style="padding:0 8px 8px"><div class="nav-item active" onclick="navDrawerSelect(this,'ndsc-2')">Dashboard</div><div class="nav-item" onclick="navDrawerSelect(this,'ndsc-2')">Vacantes<span class="nav-badge">12</span></div><div class="nav-item" onclick="navDrawerSelect(this,'ndsc-2')">Candidatos</div></div><div class="nav-section-label">Organización</div><div style="padding:0 8px 8px"><div class="nav-item" onclick="navDrawerSelect(this,'ndsc-2')">People</div><div class="nav-item" onclick="navDrawerSelect(this,'ndsc-2')">Equipos</div><div class="nav-item" style="pointer-events:none;opacity:.4">Reportes</div></div></div>
           </div>
@@ -12486,13 +12486,14 @@ export { StatsGrid, StatCard }</code></pre>
           <table class="ds-table">
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
-              <tr><td>Ancho del drawer</td><td><code>220 px</code>, <code>position: absolute</code> a 72 px del rail; deslizamiento con <code>transform</code></td></tr>
-              <tr><td>Ancho del rail</td><td><code>72 px</code>, siempre visible</td></tr>
-              <tr><td>Encabezado del drawer</td><td><code>56 px</code> de altura; padding <code>14px 16px 10px</code></td></tr>
-              <tr><td>Padding de ítem (<code>.ds-nav-item</code>)</td><td><code>6px 12px 6px 20px</code>, gap <code>8px</code>, ícono <code>14×14 px</code>, font-size <code>13px</code></td></tr>
-              <tr><td>Padding de ítem solo (<code>.ds-nav-solo</code>)</td><td><code>6px 12px</code>, gap <code>8px</code></td></tr>
-              <tr><td>Radio de ítem</td><td><code>8px</code></td></tr>
-              <tr><td>Section label</td><td><code>10px</code> uppercase, letter-spacing <code>.9px</code>, padding <code>14px 16px 10px</code></td></tr>
+              <tr><td>Ancho del sidebar</td><td><code>220px</code> (<code>--sidebar-width</code>), <code>position: fixed</code>, <code>border-right: 1px</code> (<code>--border</code>)</td></tr>
+              <tr><td>Responsive (&lt;768px)</td><td>Drawer modal off-canvas: <code>transform: translateX(-100%)</code>, entra sobre un scrim al agregar <code>.nav-open</code> al shell</td></tr>
+              <tr><td>Logo / encabezado (<code>.sidebar-logo</code>)</td><td><code>56px</code> de alto (<code>--topbar-height</code>), padding <code>0 20px</code>, borde inferior 1px</td></tr>
+              <tr><td>Contenedor de nav (<code>.sidebar-nav</code>)</td><td>padding <code>4px 8px</code></td></tr>
+              <tr><td>Ítem (<code>.nav-item</code>)</td><td>padding <code>8px 12px</code>, gap <code>10px</code>, ícono <code>16×16px</code>, font-size <code>--font-size-body-md</code>, radio <code>--radius-md</code></td></tr>
+              <tr><td>Sub-ítem (<code>.nav-sub-items .nav-item</code>)</td><td>padding <code>6px 12px</code>, font-size <code>--font-size-label</code>; contenedor con <code>padding-left: 20px</code> de sangría</td></tr>
+              <tr><td>Section label (<code>.nav-section-label</code>)</td><td><code>10px</code> uppercase, letter-spacing <code>.8px</code>, padding <code>16px 12px 6px</code>, color <code>--text-muted</code></td></tr>
+              <tr><td>Badge (<code>.nav-badge</code>)</td><td><code>11px</code>/600, padding <code>1px 7px</code>, radio <code>--radius-full</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -12501,10 +12502,10 @@ export { StatsGrid, StatCard }</code></pre>
           <table class="ds-table">
             <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
             <tbody>
-              <tr><td><code>.ds-nav-item</code> hover</td><td>Tinte secondary suave + etiqueta/ícono azul (más débil que selected), transición 0.12s</td><td><code>--color-nav-hover</code>, <code>--color-nav-hover-content</code></td></tr>
-              <tr><td><code>.ds-nav-item</code> pressed</td><td>Tinte secondary más fuerte (transitorio, aún &lt; relleno selected)</td><td><code>--color-nav-press</code></td></tr>
-              <tr><td><code>.ds-nav-item.active</code> (selected)</td><td>Relleno secondary-container, etiqueta/ícono on-secondary-container, peso 600</td><td><code>--color-nav-selected</code>, <code>--color-nav-selected-content</code>, <code>font-weight: 600</code></td></tr>
-              <tr><td><code>.ds-rail-btn</code> hover/active</td><td>Color acento; pill indicator (44×28px) con fondo acento claro</td><td><code>--ds-accent</code>, <code>--ds-accent-bg</code></td></tr>
+              <tr><td><code>.nav-item</code> reposo</td><td>Texto secundario, sin fondo</td><td><code>--text-secondary</code></td></tr>
+              <tr><td><code>.nav-item:hover</code></td><td>Tinte secondary suave + etiqueta/ícono azul (más débil que selected)</td><td><code>--color-nav-hover</code>, <code>--color-nav-hover-content</code></td></tr>
+              <tr><td><code>.nav-item.active</code> (selected)</td><td>Relleno secondary-container, etiqueta/ícono on-secondary-container, peso 500</td><td><code>--color-nav-selected</code>, <code>--color-nav-selected-content</code>, <code>font-weight: 500</code></td></tr>
+              <tr><td><code>.nav-item</code> disabled</td><td><code>pointer-events: none</code> + opacidad reducida</td><td><code>opacity</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -12514,13 +12515,12 @@ export { StatsGrid, StatCard }</code></pre>
           <table class="ds-table">
             <thead><tr><th>Clase</th><th>Token</th><th>Uso</th></tr></thead>
             <tbody>
-              <tr><td><code>.ds-sidebar-drawer</code></td><td><code>--ds-sidebar-bg</code>, <code>--ds-sidebar-border</code></td><td>Panel de 220 px que desliza sobre el rail; <code>box-shadow</code> lateral</td></tr>
-              <tr><td><code>.ds-drawer-section-title</code></td><td><code>--ds-text-3</code>, <code>--ds-sidebar-border</code></td><td>Encabezado de sección — 10 px uppercase, borde inferior</td></tr>
-              <tr><td><code>.ds-nav</code></td><td>—</td><td>Contenedor de ítems; <code>padding: 8px 8px 24px</code></td></tr>
-              <tr><td><code>.ds-nav-item</code></td><td><code>--ds-text-2</code>, <code>--ds-accent-bg</code>, <code>--ds-accent</code></td><td>Ítem con ícono de 14 px; 20 px de sangría izquierda; hover y active idénticos en fondo/color</td></tr>
-              <tr><td><code>.ds-nav-solo</code></td><td><code>--ds-text-2</code>, <code>--ds-accent-bg</code>, <code>--ds-accent</code></td><td>Ítem sin grupo; padding sin sangría adicional (<code>6px 12px</code>)</td></tr>
-              <tr><td><code>.ds-nav-sub</code></td><td>—</td><td>Contenedor semántico de sub-ítems sin estilos propios</td></tr>
-              <tr><td><code>.ds-nav-group-label</code></td><td><code>--ds-text-3</code></td><td>Etiqueta de grupo colapsable con chevron; 10 px uppercase</td></tr>
+              <tr><td><code>.sidebar</code></td><td><code>--sidebar-bg</code> (<code>--color-surface-container</code>), <code>--border</code></td><td>Panel de 220px, <code>position: fixed</code>, borde derecho 1px</td></tr>
+              <tr><td><code>.nav-section-label</code></td><td><code>--text-muted</code></td><td>Encabezado de sección — 10px uppercase, letter-spacing .8px</td></tr>
+              <tr><td><code>.sidebar-nav</code></td><td>—</td><td>Contenedor de ítems; <code>padding: 4px 8px</code></td></tr>
+              <tr><td><code>.nav-item</code></td><td><code>--text-secondary</code>, <code>--color-nav-hover</code>, <code>--color-nav-selected</code></td><td>Ítem con ícono de 16px; hover (nav-hover) y <code>.active</code> (nav-selected) distintos</td></tr>
+              <tr><td><code>.nav-sub-items</code></td><td>—</td><td>Contenedor de sub-ítems; <code>padding-left: 20px</code> de sangría</td></tr>
+              <tr><td><code>.nav-badge</code></td><td><code>--interactive-light</code>, <code>--interactive</code></td><td>Contador/estado en el ítem; 11px, radio <code>--radius-full</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -12529,9 +12529,9 @@ export { StatsGrid, StatCard }</code></pre>
             <span class="bd-ico">⚑</span>
             <span><b>Embassy vs Navigation Drawer MD3:</b> Embassy diverge intencionalmente en cuatro puntos:<br>
             <b>Ancho:</b> MD3 = 280dp; Embassy = 220px — más compacto para UI de producto densa con sidebar siempre visible.<br>
-            <b>Ícono:</b> MD3 = 24dp; Embassy = 14px — decisión de densidad de plataforma, coherente con la escala visual del DS.<br>
-            <b>Padding de ítem:</b> MD3 = 28dp horizontal; Embassy = 20px izquierda / 12px derecha — misma razón de densidad.<br>
-            <b>Indicador activo:</b> MD3 usa una píldora completamente redondeada con fondo <code>$secondary-container</code> y contenido <code>$on-secondary-container</code>; Embassy usa <code>--ds-accent-bg</code> con <code>border-radius: 8px</code> — alineado con el radio del sistema en lugar del corner-full de MD3.<br>
+            <b>Ícono:</b> MD3 = 24dp; Embassy = 16px — decisión de densidad de plataforma, coherente con la escala visual del DS.<br>
+            <b>Padding de ítem:</b> MD3 = 28dp horizontal; Embassy = 8px 12px — misma razón de densidad.<br>
+            <b>Indicador activo:</b> MD3 usa una píldora completamente redondeada con fondo <code>$secondary-container</code> y contenido <code>$on-secondary-container</code>; Embassy usa <code>--color-nav-selected</code> (secondary-container) con <code>--radius-md</code> — alineado con el radio del sistema en lugar del corner-full de MD3.<br>
             <b>Variante modal:</b> MD3 define Standard (drawer persistente, sin scrim) y Modal (con scrim, bloquea el fondo, mobile). Embassy solo implementa la variante Standard. La variante Modal está en el roadmap.</span>
           </div>
         </section>
@@ -12631,32 +12631,32 @@ export { StatsGrid, StatCard }</code></pre>
           <h2 class="docs-section-title">Uso</h2>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn">Copiar</button>
-            <pre class="docs-code"><code>&lt;aside class="ds-sidebar-drawer"&gt;
-  &lt;div class="ds-drawer-section-title"&gt;Reclutamiento&lt;/div&gt;
-  &lt;nav class="ds-nav" aria-label="Navegación principal"&gt;
-    &lt;a class="ds-nav-item active" href="/dashboard" aria-current="page"&gt;
-      &lt;i data-lucide="layout-grid" style="width:14px;height:14px"&gt;&lt;/i&gt;
+            <pre class="docs-code"><code>&lt;aside class="sidebar"&gt;
+  &lt;div class="nav-section-label"&gt;Reclutamiento&lt;/div&gt;
+  &lt;nav class="sidebar-nav" aria-label="Navegación principal"&gt;
+    &lt;a class="nav-item active" href="/dashboard" aria-current="page"&gt;
+      &lt;i data-lucide="layout-grid" style="width:16px;height:16px"&gt;&lt;/i&gt;
       Dashboard
     &lt;/a&gt;
-    &lt;a class="ds-nav-item" href="/vacantes"&gt;
-      &lt;i data-lucide="briefcase" style="width:14px;height:14px"&gt;&lt;/i&gt;
+    &lt;a class="nav-item" href="/vacantes"&gt;
+      &lt;i data-lucide="briefcase" style="width:16px;height:16px"&gt;&lt;/i&gt;
       Vacantes
     &lt;/a&gt;
-    &lt;a class="ds-nav-item" href="/candidatos"&gt;
-      &lt;i data-lucide="users" style="width:14px;height:14px"&gt;&lt;/i&gt;
+    &lt;a class="nav-item" href="/candidatos"&gt;
+      &lt;i data-lucide="users" style="width:16px;height:16px"&gt;&lt;/i&gt;
       Candidatos
     &lt;/a&gt;
   &lt;/nav&gt;
-  &lt;div class="ds-drawer-section-title"&gt;Organización&lt;/div&gt;
-  &lt;nav class="ds-nav"&gt;
-    &lt;a class="ds-nav-item" href="/people"&gt;
-      &lt;i data-lucide="user-check" style="width:14px;height:14px"&gt;&lt;/i&gt;
+  &lt;div class="nav-section-label"&gt;Organización&lt;/div&gt;
+  &lt;nav class="sidebar-nav"&gt;
+    &lt;a class="nav-item" href="/people"&gt;
+      &lt;i data-lucide="user-check" style="width:16px;height:16px"&gt;&lt;/i&gt;
       People
     &lt;/a&gt;
-    &lt;!-- Sub-ítems sin encabezado propio: ds-nav-sub --&gt;
-    &lt;div class="ds-nav-sub"&gt;
-      &lt;a class="ds-nav-item" href="/people/org"&gt;Organigrama&lt;/a&gt;
-      &lt;a class="ds-nav-item" href="/people/roles"&gt;Roles&lt;/a&gt;
+    &lt;!-- Sub-ítems sin encabezado propio: nav-sub-items --&gt;
+    &lt;div class="nav-sub-items"&gt;
+      &lt;a class="nav-item" href="/people/org"&gt;Organigrama&lt;/a&gt;
+      &lt;a class="nav-item" href="/people/roles"&gt;Roles&lt;/a&gt;
     &lt;/div&gt;
   &lt;/nav&gt;
 &lt;/aside&gt;</code></pre>
@@ -28300,10 +28300,10 @@ const LIST_TOKENS = [
 ]
 const NAV_DRAWER_TOKENS = [
   { category: "Color", rows: [
-    { token: "--ds-sidebar-bg", role: "Superficie", usage: "Fondo del drawer contextual (chrome del docs-shell)." },
-    { token: "--ds-sidebar-border", role: "Borde", usage: "Borde derecho y separadores de sección." },
-    { token: "--ds-text-2", role: "Contenido", usage: "Etiqueta base del ítem (.ds-nav-item / .ds-nav-solo)." },
-    { token: "--ds-text-3", role: "Sección", usage: "Títulos de grupo (overline en mayúsculas)." },
+    { token: "--sidebar-bg", role: "Superficie", usage: "Fondo del sidebar (--color-surface-container, app-shell)." },
+    { token: "--border", role: "Borde", usage: "Borde derecho del sidebar y separadores de sección." },
+    { token: "--text-secondary", role: "Contenido", usage: "Etiqueta base del ítem (.nav-item)." },
+    { token: "--text-muted", role: "Sección", usage: "Títulos de grupo (.nav-section-label, overline en mayúsculas)." },
   ]},
   NAV_SHARED_COMPONENT,
   NAV_SHARED_STATE,
@@ -28313,8 +28313,8 @@ const NAV_DRAWER_TOKENS = [
     { token: "--text-overline", role: "Sección", usage: "Título de grupo (~10px, mayúsculas)." },
   ]},
   { category: "Espaciado", rows: [
-    { token: "6px 12px 6px 20px", role: "Padding ítem", usage: "Ítem con 20px de sangría para el ícono." },
-    { token: "gap 8px", role: "Gap", usage: "Ícono (14×14) y etiqueta." },
+    { token: "8px 12px", role: "Padding ítem", usage: "Ítem base; sub-ítems 6px 12px con 20px de sangría en el contenedor." },
+    { token: "gap 10px", role: "Gap", usage: "Ícono (16×16) y etiqueta." },
   ]},
   { category: "Radio", rows: [
     { token: "--radius-md", role: "Ítem", usage: "Esquinas del ítem (8px) para hover/selected." },
