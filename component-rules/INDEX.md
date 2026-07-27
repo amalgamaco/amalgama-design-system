@@ -52,18 +52,18 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | calendar | ✅ authored | c-calendar | calendar.css |
 | carousel | ✅ authored | c-carousel | carousel.css |
 | charts | ✅ authored | c-charts | chart.css |
-| snackbar (toast) | 🟡 pending | c-snackbar | toast.css |
-| alert | 🟡 pending | c-alert | alert.css |
-| tooltip | 🟡 pending | c-tooltip | tooltip.css / rich-tooltip.css |
+| snackbar (toast) | ✅ authored | c-snackbar | toast.css |
+| alert | ✅ authored | c-alert | alert.css |
+| tooltip | ✅ authored | c-tooltip | tooltip.css / rich-tooltip.css |
 | skeleton | ✅ authored | c-skeleton | skeleton.css |
-| loading (progress + spinner) | 🟡 pending | c-loading | progress.css / spinner.css |
+| loading (progress + spinner) | ✅ authored | c-loading | progress.css / spinner.css |
 | empty-state | ✅ authored | c-empty | empty-state.css |
-| attachment | 🟡 pending | c-attachment | attachment.css |
-| menu (dropdown/popover) | 🟡 pending | c-menu | dropdown-menu.css / popover.css |
-| context-menu | 🟡 pending | c-context-menu | context-menu.css |
-| menubar | 🟡 pending | c-menubar | menubar.css |
-| navigation-menu | 🟡 pending | c-navigation-menu | navigation-menu.css |
-| command | 🟡 pending | c-command | command.css |
+| attachment | ✅ authored | c-attachment | attachment.css |
+| menu (dropdown/popover) | ✅ authored | c-menu | dropdown-menu.css / popover.css |
+| context-menu | ✅ authored | c-context-menu | context-menu.css |
+| menubar | ✅ authored | c-menubar | menubar.css |
+| navigation-menu | ✅ authored | c-navigation-menu | navigation-menu.css |
+| command | ✅ authored | c-command | command.css |
 | combobox | 🟡 pending | c-combobox | combobox.css |
 | sheet-bottom | 🟡 pending | c-bottom-sheet | sheet.css |
 | sheet-side | 🟡 pending | c-side-sheet | sheet.css |
@@ -76,5 +76,5 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | kanban-card | 🟡 pending | c-kanban | kanban.css |
 | person-card | 🟡 pending | c-person | person-card.css |
 
-**Coverage: 40 / 61 authored.** The remaining 21 are the primary #5 work item
+**Coverage: 50 / 61 authored.** The remaining 11 are the primary #5 work item
 (tracked as a phased backlog in the audit report).
