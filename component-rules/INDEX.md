@@ -8,6 +8,9 @@ See `README.md` for the schema and how skills consume these files.
   `css/components/<id>.css` header (`Cuándo usar / Cuándo no / Reemplaza a`) and
   its `index.html` Guidelines/Accessibility tabs. Port those into this schema.
 
+**All 61 components are now authored** — the directory is fully operational for the
+`design-system` skill and UI-generation workflows.
+
 Porting a component = lift its CSS-header decision rule + Guidelines/Accessibility
 tab content into the frontmatter schema, then enrich states/keyboard/heuristics/
 relationships and add correct/incorrect examples (see `button.md` as the reference).
@@ -64,17 +67,17 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | menubar | ✅ authored | c-menubar | menubar.css |
 | navigation-menu | ✅ authored | c-navigation-menu | navigation-menu.css |
 | command | ✅ authored | c-command | command.css |
-| combobox | 🟡 pending | c-combobox | combobox.css |
-| sheet-bottom | 🟡 pending | c-bottom-sheet | sheet.css |
-| sheet-side | 🟡 pending | c-side-sheet | sheet.css |
-| nav-drawer | 🟡 pending | c-nav-drawer | layout.css |
-| nav-bar | 🟡 pending | c-nav-bar | (inline / layout.css) |
-| topbar | 🟡 pending | c-topbar | layout.css |
-| toolbar | 🟡 pending | c-toolbar | toolbar.css |
-| nav-card | 🟡 pending | c-nav-card | (docs-internal) |
-| vacancy-card | 🟡 pending | c-vacancy | vacancy-card.css |
-| kanban-card | 🟡 pending | c-kanban | kanban.css |
-| person-card | 🟡 pending | c-person | person-card.css |
+| combobox | ✅ authored | c-combobox | combobox.css |
+| sheet-bottom | ✅ authored | c-bottom-sheet | sheet.css |
+| sheet-side | ✅ authored | c-side-sheet | sheet.css |
+| nav-drawer | ✅ authored | c-nav-drawer | layout.css |
+| nav-bar | ✅ authored | c-nav-bar | (inline / layout.css) |
+| topbar | ✅ authored | c-topbar | layout.css |
+| toolbar | ✅ authored | c-toolbar | toolbar.css |
+| nav-card | ✅ authored | c-nav-card | (docs-internal) |
+| vacancy-card | ✅ authored | c-vacancy | vacancy-card.css |
+| kanban-card | ✅ authored | c-kanban | kanban.css |
+| person-card | ✅ authored | c-person | person-card.css |
 
-**Coverage: 50 / 61 authored.** The remaining 11 are the primary #5 work item
-(tracked as a phased backlog in the audit report).
+**Coverage: 61 / 61 authored.** ✅ Complete — the #5 work item from the audit
+report is fully delivered.
