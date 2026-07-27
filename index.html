@@ -7573,7 +7573,7 @@ function segSwitch(el) {
             <tr><td>Label</td><td>Prop <code>label</code>. Texto <code>--font-size-label</code>, peso medium, <code>mb-2</code>; toma color de enlace en focus</td></tr>
             <tr><td>Asterisco requerido</td><td>Prop <code>required</code> — asterisco en <code>--color-error</code></td></tr>
             <tr><td>Ícono leading / trailing</td><td>Props <code>leadingIcon</code> / <code>trailingIcon</code> — 18px, <code>aria-hidden</code>; padding del campo <code>42px</code> del lado del ícono</td></tr>
-            <tr><td>Campo (input)</td><td>Padding 14px&nbsp;10px (<code>px-[14px] py-[10px]</code>), radio <code>--radius-md</code>, texto <code>--font-size-body-md</code>, borde de 1px</td></tr>
+            <tr><td>Campo (input)</td><td>Padding 10px&nbsp;14px (<code>px-[14px] py-[10px]</code>), radio <code>--radius-md</code>, texto <code>--font-size-body-md</code>, borde de 1px</td></tr>
             <tr><td>Supporting text</td><td>Prop <code>hint</code> — bajo el campo, <code>--font-size-caption</code>, <code>--text-secondary</code></td></tr>
             <tr><td>Mensaje de error</td><td>Prop <code>error</code> — reemplaza al hint, en <code>--color-error</code>; enlazado por <code>aria-describedby</code></td></tr>
           </tbody>
@@ -7625,7 +7625,7 @@ function segSwitch(el) {
         <table class="ds-table">
           <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
           <tbody>
-            <tr><td>Padding del campo</td><td><code>14px 10px</code> (<code>px-[14px] py-[10px]</code>)</td></tr>
+            <tr><td>Padding del campo</td><td><code>10px 14px</code> (<code>px-[14px] py-[10px]</code>)</td></tr>
             <tr><td>Radio</td><td><code>var(--radius-md)</code></td></tr>
             <tr><td>Tipografía del campo</td><td><code>var(--font-size-body-md)</code></td></tr>
             <tr><td>Margen bajo el label</td><td><code>8px</code> (<code>mb-2</code>)</td></tr>
@@ -8351,7 +8351,7 @@ export { Select }</code></pre>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
           <tbody>
-            <tr><td>Campo (textarea)</td><td>Padding 14px&nbsp;10px, radio <code>--radius-md</code>, texto <code>--font-size-body-md</code>, <code>min-h-[80px]</code>, <code>resize-y</code>, line-height 1.5</td></tr>
+            <tr><td>Campo (textarea)</td><td>Padding 10px&nbsp;14px, radio <code>--radius-md</code>, texto <code>--font-size-body-md</code>, <code>min-h-[80px]</code>, <code>resize-y</code>, line-height 1.5</td></tr>
             <tr><td>Contenedor con label</td><td>Wrapper <code>group mb-5</code> (solo si se pasa <code>label</code>)</td></tr>
             <tr><td>Label</td><td>Texto <code>--font-size-label</code>, peso medium, <code>mb-2</code></td></tr>
             <tr><td>Asterisco requerido</td><td>Con la prop <code>required</code></td></tr>
@@ -8399,7 +8399,7 @@ export { Select }</code></pre>
             <tr><td>Altura mínima</td><td><code>80px</code> (<code>min-h-[80px]</code>)</td></tr>
             <tr><td>Resize</td><td><code>vertical</code> (<code>resize-y</code>)</td></tr>
             <tr><td>Line-height</td><td><code>1.5</code></td></tr>
-            <tr><td>Padding</td><td><code>14px 10px</code> (<code>px-[14px] py-[10px]</code>)</td></tr>
+            <tr><td>Padding</td><td><code>10px 14px</code> (<code>px-[14px] py-[10px]</code>)</td></tr>
             <tr><td>Radio</td><td><code>var(--radius-md)</code></td></tr>
             <tr><td>Tipografía</td><td><code>var(--font-size-body-md)</code></td></tr>
           </tbody>
@@ -11078,7 +11078,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
     <div class="docs-section" id="ss-sn-states">
       <h2 class="docs-section-title">Estados y animación</h2>
       <p class="docs-section-desc">El Snackbar tiene tres fases: entrada, visible y salida. Las transiciones son intencionalmente rápidas para no interrumpir el flujo del usuario.</p>
-      <div class="ds-preview" style="flex-direction:column;gap:0;padding:0;overflow:hidden;background:#F5F6F8;">
+      <div class="ds-preview" style="flex-direction:column;gap:0;padding:0;overflow:hidden;background:var(--color-surface-container-lowest);">
         <div><div style="display:flex;flex-direction:column;gap:16px;padding:8px 0;width:100%"><div style="display:flex;align-items:center;gap:16px"><div style="width:96px;flex-shrink:0;font:600 11px 'Inter',sans-serif;color:var(--color-on-surface-variant)">Entrada<div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant)">250ms ease-out</div></div><div style="opacity:0.5;transform:translateY(10px);transition:none"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button></div></div></div><div style="display:flex;align-items:center;gap:16px"><div style="width:96px;flex-shrink:0;font:600 11px 'Inter',sans-serif;color:var(--color-on-surface-variant)">Visible<div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant)">4000ms</div></div><div style=";transition:none"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button></div></div></div><div style="display:flex;align-items:center;gap:16px"><div style="width:96px;flex-shrink:0;font:600 11px 'Inter',sans-serif;color:var(--color-on-surface-variant)">Salida<div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant)">200ms ease-in</div></div><div style="opacity:0.35;transition:none"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button></div></div></div></div></div>
       </div>
       <table class="ds-table" style="margin-top:20px;">
@@ -11089,14 +11089,14 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
           <tr><td>Salida</td><td>200ms</td><td>ease-in</td><td><code>opacity: 1 → 0</code></td></tr>
         </tbody>
       </table>
-      <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">⚑</span><span>El timer de auto-dismiss se pausa mientras el cursor o el foco estén dentro del Snackbar. Si el usuario activa el botón de acción o el botón de cierre, la salida se dispara inmediatamente (no espera los 4s). Si aparece un segundo Snackbar mientras hay uno visible, el primero se descarta sin animación de salida.</span></div>
+      <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">⚑</span><span>El timer de auto-dismiss se pausa mientras el cursor o el foco estén dentro del Snackbar. Si el usuario activa el botón de acción o el botón de cierre, la salida se dispara inmediatamente (no espera los 4s). Si aparece un segundo Snackbar mientras hay uno visible, se apila en la cola (<code>.snackbar-viewport</code>) — el nuevo entra abajo y el anterior sube, sin descartarse.</span></div>
     </div>
 
     <!-- 6. Medidas -->
     <div class="docs-section" id="ss-sn-measures">
       <h2 class="docs-section-title">Medidas</h2>
       <p class="docs-section-desc">Todas las medidas en dp (density-independent pixels). Las anotaciones en magenta son doc chrome — no son tokens.</p>
-      <div><div style="position:relative;display:flex;justify-content:center;padding:44px 80px 56px;background:var(--color-surface-container-lowest);border:1px solid var(--border);border-radius:12px"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button><button type="button" class="snackbar-close" aria-label="Cerrar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div></div><table class="cs-meas-grid" style="margin-top:12px"><tbody><tr><td>Alto</td><td>48dp (una línea) · ~68dp apilado</td></tr><tr><td>Radio</td><td>--radius-sm (4dp)</td></tr><tr><td>Padding horizontal</td><td>16dp</td></tr><tr><td>Gap</td><td>8dp</td></tr><tr><td>Ancho</td><td>min 288dp / max 568dp</td></tr></tbody></table></div>
+      <div><div style="position:relative;display:flex;justify-content:center;padding:44px 80px 56px;background:var(--color-surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg)"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button><button type="button" class="snackbar-close" aria-label="Cerrar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div></div><table class="cs-meas-grid" style="margin-top:12px"><tbody><tr><td>Alto</td><td>48dp (una línea) · ~68dp apilado</td></tr><tr><td>Radio</td><td>--radius-sm (4dp)</td></tr><tr><td>Padding horizontal</td><td>16dp</td></tr><tr><td>Gap</td><td>8dp</td></tr><tr><td>Ancho</td><td>min 288dp / max 568dp</td></tr></tbody></table></div>
       <table class="ds-table" style="margin-top:16px;">
         <thead><tr><th>Propiedad</th><th>Valor</th><th>Token</th></tr></thead>
         <tbody>
@@ -11156,7 +11156,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>Aparece anclado al <b>borde inferior</b>, centrado o alineado según el layout.</li>
             <li>Se ubica por <b>encima</b> de la navigation bar o de un FAB, sin taparlos.</li>
-            <li>Un solo snackbar a la vez; el nuevo reemplaza al anterior (no se apilan).</li>
+            <li>Se apilan en una cola (<code>.snackbar-viewport</code>): el más nuevo entra abajo, pegado al borde, y los anteriores suben. Mantené la cola corta — de a uno o dos mensajes visibles.</li>
           </ul>
         </section>
         <section class="docs-section" id="tc-snackbar-g-3">
@@ -11245,7 +11245,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
     opacity: 1;
     transform: none;
   }
-  .snackbar.snackbar--exiting {
+  .snackbar.snackbar--exit {
     transition: opacity 50ms ease-in;
   }
 }</code></pre></div>
@@ -11309,7 +11309,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 
       <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Solo mensaje</h3>
       <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;!-- Contenedor live region — debe existir en DOM desde el inicio --&gt;
-&lt;div class="snackbar-region" role="status" aria-live="polite" aria-atomic="true"&gt;
+&lt;div class="snackbar-viewport" role="status" aria-live="polite" aria-atomic="true"&gt;
 
   &lt;!-- Snackbar — solo mensaje --&gt;
   &lt;div class="snackbar" role="presentation"&gt;
@@ -11319,7 +11319,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 &lt;/div&gt;</code></pre></div>
 
       <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Mensaje + botón de acción</h3>
-      <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;div class="snackbar-region" role="status" aria-live="polite" aria-atomic="true"&gt;
+      <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;div class="snackbar-viewport" role="status" aria-live="polite" aria-atomic="true"&gt;
   &lt;div class="snackbar" role="presentation"&gt;
     &lt;span class="snackbar-message"&gt;Archivo eliminado&lt;/span&gt;
     &lt;button class="snackbar-action"&gt;Deshacer&lt;/button&gt;
@@ -11327,7 +11327,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 &lt;/div&gt;</code></pre></div>
 
       <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Mensaje + acción + cierre</h3>
-      <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;div class="snackbar-region" role="status" aria-live="polite" aria-atomic="true"&gt;
+      <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;div class="snackbar-viewport" role="status" aria-live="polite" aria-atomic="true"&gt;
   &lt;div class="snackbar" role="presentation"&gt;
     &lt;span class="snackbar-message"&gt;Invitación enviada&lt;/span&gt;
     &lt;button class="snackbar-action"&gt;Ver&lt;/button&gt;
@@ -11341,7 +11341,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 
       <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Mensaje de error (alert)</h3>
       <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;!-- Para errores: role="alert" + aria-live="assertive" --&gt;
-&lt;div class="snackbar-region" role="alert" aria-live="assertive" aria-atomic="true"&gt;
+&lt;div class="snackbar-viewport" role="alert" aria-live="assertive" aria-atomic="true"&gt;
   &lt;div class="snackbar" role="presentation"&gt;
     &lt;span class="snackbar-message"&gt;No se pudo guardar. Revisá tu conexión.&lt;/span&gt;
     &lt;button class="snackbar-action"&gt;Reintentar&lt;/button&gt;
@@ -11362,77 +11362,60 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
  * Uso: ver sección Specs → Medidas y Anatomía
  */
 
-/* ── Región live (siempre en DOM) ── */
-.snackbar-region {
+/* ── Contenedor del Snackbar (standalone: position:fixed) ── */
+.snackbar {
   position: fixed;
   bottom: 16px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(0);
   z-index: 300;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  pointer-events: none;
-}
-
-/* ── Contenedor del Snackbar ── */
-.snackbar {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);                          /* 8px */
   min-width: 288px;
   max-width: 568px;
   min-height: 48px;
-  padding: 0 16px;
+  padding: 0 var(--space-2) 0 var(--space-4);   /* 0 8 0 16 */
   background: var(--color-inverse-surface);
-  border-radius: var(--radius-sm); /* 4dp */
-  pointer-events: auto;
-
-  /* Entrada: slide up */
-  animation: snackbar-enter 250ms ease-out both;
+  border-radius: var(--radius-sm);              /* 4dp */
+  box-shadow: var(--shadow-lg);
+  animation: snackbar-in 250ms var(--ease-default) both;
 }
+.snackbar--exit { animation: snackbar-out 200ms ease-in forwards; }
 
-/* Variante apilada: mensaje largo */
-.snackbar--stacked {
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 12px 16px 8px;
-  gap: 4px;
+@keyframes snackbar-in {
+  from { transform: translateX(-50%) translateY(16px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0);    opacity: 1; }
 }
-.snackbar--stacked .snackbar-action {
-  align-self: center;
-  margin-top: 4px;
+@keyframes snackbar-out {
+  to { transform: translateX(-50%) translateY(16px); opacity: 0; }
 }
 
 /* ── Mensaje ── */
 .snackbar-message {
   flex: 1;
-  font-family: var(--font-body);
-  font-size: var(--font-size-body-md);
-  font-weight: 400;
-  line-height: 1.5;
+  min-width: 0;
   color: var(--color-inverse-on-surface);
-  padding: 12px 0;
+  font: var(--font-weight-regular) var(--font-size-body-md)/1.4 var(--font-body);
+  padding: 14px 0;
 }
 
 /* ── Botón de acción (texto puro) ── */
 .snackbar-action {
   flex-shrink: 0;
-  padding: 8px 0 8px 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-size: var(--font-size-label);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-inverse-primary);
+  border: 0;
+  background: transparent;
+  padding: 8px var(--space-2);
   border-radius: var(--radius-sm);
-  transition: opacity 150ms;
+  color: var(--color-inverse-primary);
+  font: var(--font-weight-bold) var(--font-size-label)/1 var(--font-body);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-default);
 }
-.snackbar-action:hover { opacity: 0.85; }
+.snackbar-action:hover  { background: color-mix(in srgb, var(--color-inverse-primary) 8%, transparent); }
+.snackbar-action:active { background: color-mix(in srgb, var(--color-inverse-primary) 12%, transparent); }
 .snackbar-action:focus-visible {
   outline: 2px solid var(--color-inverse-primary);
   outline-offset: 2px;
@@ -11441,51 +11424,73 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 /* ── Botón de cierre ── */
 .snackbar-close {
   flex-shrink: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: none;
-  border: none;
-  cursor: pointer;
+  border: 0;
+  background: transparent;
+  border-radius: 50%;
   color: var(--color-inverse-on-surface);
-  border-radius: var(--radius-sm);
-  opacity: 0.85;
-  transition: opacity 150ms;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-default);
 }
-.snackbar-close:hover { opacity: 1; }
+.snackbar-close:hover  { background: color-mix(in srgb, var(--color-inverse-on-surface) 8%, transparent); }
 .snackbar-close:focus-visible {
   outline: 2px solid var(--color-inverse-primary);
   outline-offset: 2px;
 }
 
-/* ── Salida (clase añadida por JS) ── */
-.snackbar--exiting {
-  animation: snackbar-exit 200ms ease-in forwards;
+/* ── Variante estática (Specs: sin fixed ni animación) ── */
+.snackbar--static {
+  position: static; bottom: auto; left: auto;
+  transform: none; animation: none; width: 100%;
 }
 
-/* ── Animaciones ── */
-@keyframes snackbar-enter {
-  from { transform: translateY(100%); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+/* ── Variante apilada (mensaje largo + acción debajo) ── */
+.snackbar--multiline {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px var(--space-2) var(--space-2) var(--space-4);
+  min-height: 68px;
 }
-
-@keyframes snackbar-exit {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
+.snackbar--multiline .snackbar-message { padding: 0 0 4px; }
+.snackbar--multiline .snackbar-action  { align-self: flex-end; }
 
 /* ── Reducción de movimiento ── */
 @media (prefers-reduced-motion: reduce) {
-  .snackbar { animation: snackbar-enter-reduced 80ms ease-out both; }
-  @keyframes snackbar-enter-reduced {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  .snackbar--exiting {
-    animation: snackbar-exit 50ms ease-in forwards;
-  }
+  .snackbar { animation: none; }
+  .snackbar--exit { animation: none; transition: opacity 50ms ease-in; }
+}
+
+/* ── Cola de apilado — N .snackbar dentro de .snackbar-viewport ── */
+.snackbar-viewport {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  display: flex;
+  flex-direction: column-reverse;   /* el más nuevo entra abajo */
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.snackbar-viewport .snackbar {
+  position: relative; bottom: auto; left: auto;
+  transform: none; pointer-events: auto;
+  animation: snackbar-stack-in 250ms var(--ease-default) both;
+}
+.snackbar-viewport .snackbar.snackbar--exit {
+  animation: snackbar-stack-out 200ms ease-in forwards;
+}
+@keyframes snackbar-stack-in {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes snackbar-stack-out {
+  to { transform: translateY(16px); opacity: 0; }
 }</code></pre></div>
     </div>
 
@@ -12148,15 +12153,15 @@ export { EmptyState }</code></pre>
             <div class="stats-grid"><div class="stat-card">
     <div class="stat-label">Vacantes activas</div>
     <div class="stat-value">24</div>
-    <div class="stat-change-positive">↑ 4 desde el mes pasado</div>
+    <div class="stat-change stat-change-positive">↑ 4 desde el mes pasado</div>
   </div><div class="stat-card">
     <div class="stat-label">Candidatos en proceso</div>
     <div class="stat-value">138</div>
-    <div class="stat-change-negative">↓ 12 desde la semana pasada</div>
+    <div class="stat-change stat-change-negative">↓ 12 desde la semana pasada</div>
   </div><div class="stat-card">
     <div class="stat-label">Posiciones cubiertas</div>
     <div class="stat-value">91%</div>
-    <div class="stat-change-positive">↑ 3% vs. trimestre anterior</div>
+    <div class="stat-change stat-change-positive">↑ 3% vs. trimestre anterior</div>
   </div></div>
           </div>
 
@@ -12177,19 +12182,19 @@ export { EmptyState }</code></pre>
             <div class="stats-grid"><div class="stat-card">
     <div class="stat-label">Vacantes activas</div>
     <div class="stat-value">24</div>
-    <div class="stat-change-positive">+3 este mes</div>
+    <div class="stat-change stat-change-positive">+3 este mes</div>
   </div><div class="stat-card">
     <div class="stat-label">Candidatos</div>
     <div class="stat-value">156</div>
-    <div class="stat-change-positive">+12 esta semana</div>
+    <div class="stat-change stat-change-positive">+12 esta semana</div>
   </div><div class="stat-card">
     <div class="stat-label">Entrevistas hoy</div>
     <div class="stat-value">8</div>
-    <div class="stat-change-neutral">Sin cambios</div>
+    <div class="stat-change stat-change-neutral">Sin cambios</div>
   </div><div class="stat-card">
     <div class="stat-label">Tiempo promedio</div>
     <div class="stat-value">18d</div>
-    <div class="stat-change-negative">+2d vs anterior</div>
+    <div class="stat-change stat-change-negative">+2d vs anterior</div>
   </div></div>
           </div>
           <table class="ds-table" style="margin-top:16px">
@@ -14015,9 +14020,17 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
     <div class="vacancy-icon">💼</div>
     <div class="vacancy-info">
       <div class="vacancy-name">Diseñador UX Senior <span class="badge badge-open">Abierta</span></div>
-      <div class="vacancy-meta">Producto · Remoto · Senior</div>
+      <div class="vacancy-meta">Producto <span class="meta-dot"></span> Remoto <span class="meta-dot"></span> Senior</div>
+      <div class="vacancy-stats">
+        <div class="stat-pill"><span class="count">12</span> candidatos</div>
+        <div class="stat-pill"><span class="count">3</span> entrevistas</div>
+      </div>
     </div>
-    <div class="vacancy-right"><div class="vacancy-age">5d</div></div>
+    <div class="vacancy-right">
+      <button type="button" class="more-btn" aria-label="Más acciones"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+      <div class="assignee" style="display:flex;gap:4px"><div class="assignee-avatar blue">MG</div><div class="assignee-avatar green">CL</div></div>
+      <div class="vacancy-age">5d</div>
+    </div>
   </div>
         </div>
         <table class="ds-table" style="margin-top:16px">
@@ -14065,11 +14078,11 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
             <tr><td><code>.vacancy-card</code></td><td><code>--card-bg</code> + <code>--border</code> + <code>--radius</code> + <code>--shadow-md</code></td></tr>
-            <tr><td><code>.vacancy-icon</code></td><td><code>--interactive-light</code> + <code>--radius-md</code></td></tr>
+            <tr><td><code>.vacancy-icon</code></td><td><code>--color-secondary-container</code> + <code>--radius-md</code></td></tr>
             <tr><td><code>.vacancy-name</code></td><td><code>--text-primary</code> (<code>--font-heading</code>, <code>--font-size-heading-xs</code>)</td></tr>
             <tr><td><code>.vacancy-meta</code></td><td><code>--text-muted</code></td></tr>
             <tr><td><code>.stat-pill</code></td><td><code>--text-secondary</code> / <code>--text-primary</code></td></tr>
-            <tr><td><code>.assignee-avatar</code></td><td>Gradientes de paleta (<code>--secondary-*</code>, <code>--success-*</code>, <code>--tertiary-*</code>)</td></tr>
+            <tr><td><code>.assignee-avatar</code></td><td>Pares container/on-container por variante (<code>--color-secondary-container</code>, <code>--color-success-container</code>, <code>--color-tertiary-container</code>, <code>--color-error-container</code>) — sin gradientes</td></tr>
             <tr><td><code>.vacancy-age</code></td><td><code>--text-muted</code> (<code>--font-mono</code>)</td></tr>
             <tr><td>Card — foco</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
           </tbody>
@@ -16773,7 +16786,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <li>Rota un conjunto de ítems (imágenes o cards) con scroll horizontal y snap.</li>
             <li><b>Variantes:</b> un ítem por slide y múltiples ítems por slide (<code>basis-1/2</code>).</li>
             <li>Controles de navegación previo/siguiente (<code>CarouselPrevious</code> / <code>CarouselNext</code>).</li>
-            <li>Radio de ítem <code>corner-extra-large</code>; gap de 8&nbsp;dp entre ítems; elevación nivel&nbsp;1 en hover.</li>
+            <li>Gap de 16px entre ítems; el radio del ítem lo define su contenido (sin radio impuesto) y no hay elevación en hover del ítem.</li>
             <li>El indicador de foco usa el rol <code>secondary</code>, no <code>primary</code>.</li>
           </ul>
 
@@ -16800,7 +16813,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="ds-toc-layout">
         <div class="ds-toc-body">
 
-        <section class="docs-section" id="tc-app-bar-s-0">
+        <section class="docs-section" id="tc-carousel-s-0">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Construido con scroll nativo CSS (<code>scroll-snap-type</code>), sin librería de drag. Ver el ejemplo en vivo en la pestaña Overview.</p>
           <table class="ds-table">
@@ -16813,17 +16826,18 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-1">
+        <section class="docs-section" id="tc-carousel-s-1">
           <h2 class="docs-section-title">Configuraciones</h2>
           <table class="ds-table">
             <thead><tr><th>Variante</th><th>Especificación</th></tr></thead>
             <tbody>
-              <tr><td>Un ítem por slide</td><td><code>CarouselItem</code> con <code>basis-full</code> — cada slide ocupa el ancho completo</td></tr>
-              <tr><td>Múltiples ítems por slide</td><td><code>basis-1/2</code> (u otra fracción) — varios ítems visibles a la vez</td></tr>
+              <tr><td>Un ítem por slide</td><td><code>.carousel-item</code> a ancho completo — cada slide ocupa el ancho del viewport</td></tr>
+              <tr><td>Múltiples ítems por slide</td><td><code>.carousel-item-half</code> (u otra fracción) — varios ítems visibles a la vez</td></tr>
+              <tr><td>Orientación vertical</td><td><code>.carousel-vertical</code> — scroll-snap en Y con controles arriba/abajo; el contenedor necesita un alto acotado</td></tr>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-2">
+        <section class="docs-section" id="tc-carousel-s-2">
           <h2 class="docs-section-title">Medidas</h2>
           <table class="ds-table">
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
@@ -16834,7 +16848,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-3">
+        <section class="docs-section" id="tc-carousel-s-3">
           <h2 class="docs-section-title">Estados</h2>
           <table class="ds-table">
             <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
@@ -16845,7 +16859,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-4">
+        <section class="docs-section" id="tc-carousel-s-4">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
           <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="carousel"></div></div>
@@ -16859,23 +16873,23 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-5">
+        <section class="docs-section" id="tc-carousel-s-5">
           <div class="ds-callout">
             <strong>Relación con Material Design 3.</strong> MD3 define cuatro layouts de carousel — <b>multi-browse</b>, <b>uncontained</b>, <b>hero</b> y <b>full-screen</b> — con radio de ítem de 28&nbsp;dp y gap de 8&nbsp;dp. <b>Embassy implementa un carousel básico</b> (scroll nativo con <code>scroll-snap-type</code>, sin librería) con ítems de ancho configurable (clase <code>.carousel-item</code>/<code>.carousel-item-half</code>), gap de 16px y botones de navegación superpuestos — sin radio de ítem impuesto (lo define el contenido), sin física de swipe/autoplay/loop más allá del scroll táctil nativo, ni las cuatro presentaciones MD3. Divergencia documentada.
           </div>
         </section>
       
         </div>
-        <nav class="ds-toc" data-toc-auto id="tc-app-bar-s-toc" aria-label="En esta página">
+        <nav class="ds-toc" data-toc-auto id="tc-carousel-s-toc" aria-label="En esta página">
           <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="ds-toc-title">En esta página</div>
           <ul class="ds-toc-list">
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-0">Anatomía</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-1">Configuraciones</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-2">Medidas</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-3">Estados</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-4">Tokens y especificaciones</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-5">Sección 6</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-1">Configuraciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-2">Medidas</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-3">Estados</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-4">Tokens y especificaciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-5">Material Design 3</a></li>
           </ul>
         </nav>
         </div>
@@ -16884,7 +16898,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="ds-toc-layout">
         <div class="ds-toc-body">
 
-        <section class="docs-section" id="tc-app-bar-g-0">
+        <section class="docs-section" id="tc-carousel-g-0">
           <h2 class="docs-section-title">Uso</h2>
           <p class="ds-p">El carousel permite recorrer una colección de <b>ítems visuales homogéneos</b> (imágenes, cards) cuando el espacio es limitado y el contenido es secundario.</p>
           <div class="bd-grid c2">
@@ -16892,13 +16906,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Contenido crítico que el usuario debe ver sí o sí.</li><li>Comparar opciones lado a lado → una grilla o <b>Table</b>.</li><li>Navegación principal o pasos de un flujo → <b>Tabs</b> / pantallas.</li></ul></div></div>
           </div>
         </section>
-        <section class="docs-section" id="tc-app-bar-g-1">
+        <section class="docs-section" id="tc-carousel-g-1">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Componente real. Las partes que lo componen:</p>
           <div class="bd-family-wrap"><div><div style="display:flex;flex-direction:column;gap:32px"><div><p class="ds-p" style="margin-bottom:12px">Un ítem por slide</p><div class="carousel" style="max-width:384px;margin:0 auto"><div class="carousel-content"><div class="carousel-item"><div style="display:flex;align-items:center;justify-content:center;height:128px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:16px;background:var(--color-primary-container);color:var(--color-on-primary-container)">Slide 1</div></div><div class="carousel-item"><div style="display:flex;align-items:center;justify-content:center;height:128px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:16px;background:var(--color-secondary-container);color:var(--color-on-secondary-container)">Slide 2</div></div><div class="carousel-item"><div style="display:flex;align-items:center;justify-content:center;height:128px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:16px;background:var(--color-tertiary-container);color:var(--color-on-tertiary-container)">Slide 3</div></div><div class="carousel-item"><div style="display:flex;align-items:center;justify-content:center;height:128px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:16px;background:var(--color-success-container);color:var(--color-on-success-container)">Slide 4</div></div></div><button type="button" class="carousel-btn carousel-btn-prev" aria-label="Anterior" onclick="carouselScroll(this,-1)">‹</button><button type="button" class="carousel-btn carousel-btn-next" aria-label="Siguiente" onclick="carouselScroll(this,1)">›</button></div></div><div><p class="ds-p" style="margin-bottom:12px">Múltiples ítems (2 por vista)</p><div class="carousel" style="max-width:512px;margin:0 auto"><div class="carousel-content"><div class="carousel-item carousel-item-half"><div style="display:flex;align-items:center;justify-content:center;height:96px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:14px;background:var(--color-primary-container);color:var(--color-on-primary-container)">Slide 1</div></div><div class="carousel-item carousel-item-half"><div style="display:flex;align-items:center;justify-content:center;height:96px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:14px;background:var(--color-secondary-container);color:var(--color-on-secondary-container)">Slide 2</div></div><div class="carousel-item carousel-item-half"><div style="display:flex;align-items:center;justify-content:center;height:96px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:14px;background:var(--color-tertiary-container);color:var(--color-on-tertiary-container)">Slide 3</div></div><div class="carousel-item carousel-item-half"><div style="display:flex;align-items:center;justify-content:center;height:96px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:14px;background:var(--color-success-container);color:var(--color-on-success-container)">Slide 4</div></div></div><button type="button" class="carousel-btn carousel-btn-prev" aria-label="Anterior" onclick="carouselScroll(this,-1)">‹</button><button type="button" class="carousel-btn carousel-btn-next" aria-label="Siguiente" onclick="carouselScroll(this,1)">›</button></div></div></div></div></div>
           <ol class="bd-family-legend"><li>Viewport — la ventana que recorta el contenido desplazable.</li><li>Ítem (slide) — cada tarjeta o imagen de la colección.</li><li>Recorte del siguiente ítem — señala que hay más contenido.</li><li>Controles anterior / siguiente — navegación explícita en desktop.</li></ol>
         </section>
-        <section class="docs-section" id="tc-app-bar-g-2">
+        <section class="docs-section" id="tc-carousel-g-2">
           <h2 class="docs-section-title">Layout responsive</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>Ajustá los ítems visibles por breakpoint con <code>basis-*</code>: <code>basis-full</code> en mobile, <code>basis-1/2</code> o más en desktop.</li>
@@ -16907,7 +16921,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <li>No escales los ítems proporcionalmente al viewport: mantené un tamaño de tarjeta legible.</li>
           </ul>
         </section>
-        <section class="docs-section" id="tc-app-bar-g-3">
+        <section class="docs-section" id="tc-carousel-g-3">
           <h2 class="docs-section-title">Comportamiento</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>El desplazamiento hace <b>snap</b> al ítem; los controles se deshabilitan en los extremos (sin loop).</li>
@@ -16918,14 +16932,14 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         </section>
       
         </div>
-        <nav class="ds-toc" data-toc-auto id="tc-app-bar-g-toc" aria-label="En esta página">
+        <nav class="ds-toc" data-toc-auto id="tc-carousel-g-toc" aria-label="En esta página">
           <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="ds-toc-title">En esta página</div>
           <ul class="ds-toc-list">
-            <li><a class="ds-toc-link" data-target="tc-app-bar-g-0">Uso</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-g-1">Anatomía</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-g-2">Layout responsive</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-g-3">Comportamiento</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-g-0">Uso</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-g-1">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-g-2">Layout responsive</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-g-3">Comportamiento</a></li>
           </ul>
         </nav>
         </div>
@@ -16972,7 +16986,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Components · Data display</div>
       <h1 class="ds-page-title">Charts</h1>
       <p class="ds-page-desc">Gráficos de línea, barra y torta para dashboards y analytics — SVG dibujado a mano (línea/barra) + CSS <code>conic-gradient</code> (torta), tematizados con tokens Embassy.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>ChartContainer</code>/<code>LineChart</code>/<code>BarChart</code>/<code>PieChart</code> son los primitivos de <code>css/components/chart.css</code> + <code>components/ui/chart.tsx</code> — sin librería de charting. Cubre línea/barra/torta con datos estáticos; usa <code>&lt;title&gt;</code> nativo del navegador como tooltip de valor, sin brush/zoom ni animación de leyenda.</div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>ChartContainer</code>/<code>LineChart</code>/<code>BarChart</code>/<code>PieChart</code> son los primitivos de <code>css/components/chart.css</code> + <code>components/ui/chart.tsx</code> — sin librería de charting. Cubre línea/área/barra/torta con datos estáticos; el tooltip es rico y posicionado por JS (<code>initChartTooltips</code>), con <code>&lt;title&gt;</code> nativo como fallback accesible; sin brush/zoom ni animación de leyenda.</div>
 
       <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
 
@@ -16980,7 +16994,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
 
-          <p class="bd-lead">La familia Chart dibuja SVG a mano (línea/barra) y CSS <code>conic-gradient</code> (torta) — sin librería de charting, sin imágenes. Tres tipos disponibles:</p>
+          <p class="bd-lead">La familia Chart dibuja SVG a mano (línea/barra) y CSS <code>conic-gradient</code> (torta) — sin librería de charting, sin imágenes. Cuatro tipos disponibles:</p>
 
           <div class="bd-family-wrap">
             <div><div class="chart-container"><svg class="chart-svg" viewBox="0 0 660 280" role="img" aria-label="Ingresos vs gastos, semanal"><g class="chart-grid"><line x1="40" y1="20" x2="40" y2="240"/><line x1="40" y1="240" x2="620" y2="240"/></g><polyline class="chart-line" points="40,145.7 136.7,98.6 233.3,114.3 330,75 426.7,35.7 523.3,90.7 620,130" stroke="var(--chart-1)"/><polyline class="chart-line" points="40,169.3 136.7,153.6 233.3,137.9 330,130 426.7,122.1 523.3,161.4 620,185" stroke="var(--chart-4)"/><circle class="chart-dot" cx="40" cy="145.7" r="3.5" fill="var(--chart-1)"><title>Lun: $1</title></circle><circle class="chart-dot" cx="136.7" cy="98.6" r="3.5" fill="var(--chart-1)"><title>Mar: $1</title></circle><circle class="chart-dot" cx="233.3" cy="114.3" r="3.5" fill="var(--chart-1)"><title>Mié: $1</title></circle><circle class="chart-dot" cx="330" cy="75" r="3.5" fill="var(--chart-1)"><title>Jue: $1</title></circle><circle class="chart-dot" cx="426.7" cy="35.7" r="3.5" fill="var(--chart-1)"><title>Vie: $1</title></circle><circle class="chart-dot" cx="523.3" cy="90.7" r="3.5" fill="var(--chart-1)"><title>Sáb: $1</title></circle><circle class="chart-dot" cx="620" cy="130" r="3.5" fill="var(--chart-1)"><title>Dom: $1</title></circle><circle class="chart-dot" cx="40" cy="169.3" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="136.7" cy="153.6" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="233.3" cy="137.9" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="330" cy="130" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="426.7" cy="122.1" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="523.3" cy="161.4" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="620" cy="185" r="3.5" fill="var(--chart-4)"></circle><text class="chart-axis-label" x="40" y="262" text-anchor="middle">Lun</text><text class="chart-axis-label" x="136.7" y="262" text-anchor="middle">Mar</text><text class="chart-axis-label" x="233.3" y="262" text-anchor="middle">Mié</text><text class="chart-axis-label" x="330" y="262" text-anchor="middle">Jue</text><text class="chart-axis-label" x="426.7" y="262" text-anchor="middle">Vie</text><text class="chart-axis-label" x="523.3" y="262" text-anchor="middle">Sáb</text><text class="chart-axis-label" x="620" y="262" text-anchor="middle">Dom</text></svg><div class="chart-legend"><span class="chart-legend-item"><span class="chart-legend-swatch" style="background:var(--chart-1)"></span>Ingresos</span><span class="chart-legend-item"><span class="chart-legend-swatch" style="background:var(--chart-4)"></span>Gastos</span></div></div></div>
@@ -17023,22 +17037,23 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <table class="ds-table">
             <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
             <tbody>
-              <tr><td><code>ChartContainer</code></td><td>Envoltorio responsive — mide su propio contenedor y le pasa dimensiones explícitas al gráfico; inyecta las variables CSS de color por serie</td><td><code>bg-transparent</code></td></tr>
-              <tr><td>Grilla (<code>CartesianGrid</code>)</td><td>Solo líneas horizontales (<code>vertical={false}</code>), color sutil</td><td><code>--color-border</code></td></tr>
-              <tr><td>Ejes y etiquetas (<code>XAxis</code>/<code>YAxis</code>)</td><td>Sin línea ni tick marks, solo etiquetas de categoría/valor</td><td><code>--text-muted</code>, <code>text-caption</code></td></tr>
-              <tr><td>Tooltip (<code>ChartTooltipContent</code>)</td><td>Tarjeta flotante con indicador de color + valor por serie al pasar el cursor</td><td><code>bg-card</code>, <code>border-border</code>, <code>shadow-lg</code></td></tr>
-              <tr><td>Leyenda (<code>ChartLegendContent</code>)</td><td>Fila de chips de color + etiqueta debajo del gráfico, siempre presente con más de una serie</td><td><code>text-fg-muted</code></td></tr>
-              <tr><td>Series (Line/Bar/Pie)</td><td>Color por <code>ChartConfig</code>, nunca hardcodeado</td><td><code>--chart-1</code>…<code>--chart-5</code></td></tr>
+              <tr><td><code>.chart-container</code></td><td>Envoltorio responsive (<code>aspect-ratio 16/9</code>) que escala el SVG por <code>viewBox</code>; define localmente las variables de color por serie</td><td><code>transparent</code></td></tr>
+              <tr><td>Grilla (<code>.chart-grid line</code>)</td><td>Líneas de eje/base dibujadas a mano dentro del SVG, color sutil</td><td><code>--border</code></td></tr>
+              <tr><td>Etiquetas de eje (<code>.chart-axis-label</code>)</td><td>Texto SVG de categoría/valor, sin línea ni tick marks</td><td><code>--text-muted</code>, 11px</td></tr>
+              <tr><td>Tooltip (<code>.chart-tooltip</code>, <code>initChartTooltips</code>)</td><td>Tarjeta flotante posicionada por JS: indicador de color + etiqueta + valor al pasar el cursor</td><td><code>--color-inverse-surface</code>, <code>--shadow-md</code></td></tr>
+              <tr><td>Leyenda (<code>.chart-legend</code>)</td><td>Fila de swatches de color + etiqueta debajo del gráfico</td><td><code>--text-muted</code></td></tr>
+              <tr><td>Series (line/bar/pie)</td><td>Color por variable <code>--chart-*</code>, nunca hardcodeado</td><td><code>--chart-1</code>…<code>--chart-5</code></td></tr>
             </tbody>
           </table>
-          <p class="docs-section-desc" style="margin-top:10px">Responsive por diseño: cada gráfico vive dentro de un contenedor medido en tiempo real y se adapta al ancho del padre — no tiene un ancho fijo.</p>
+          <p class="docs-section-desc" style="margin-top:10px">Responsive por diseño: el SVG escala por <code>viewBox</code> al ancho del padre — no tiene un ancho fijo ni requiere medición por JS.</p>
         </section>
         <section class="docs-section" id="tc-charts-s-1">
           <h2 class="docs-section-title">Configuraciones</h2>
           <ul style="margin:0 0 16px;padding-left:20px;font-size:14px;line-height:1.8;">
-            <li><b>Line chart</b> — <code>&lt;LineChart&gt;</code> + <code>&lt;Line&gt;</code> por serie; usar para tendencias temporales.</li>
-            <li><b>Bar chart</b> — <code>&lt;BarChart&gt;</code> + <code>&lt;Bar&gt;</code> por serie; usar para comparar categorías discretas.</li>
-            <li><b>Pie chart</b> — <code>&lt;PieChart&gt;</code> + <code>&lt;Pie&gt;</code>/<code>&lt;Cell&gt;</code> por segmento; usar para composición/proporciones (máx. 5–6 segmentos).</li>
+            <li><b>Line chart</b> — <code>&lt;LineChart&gt;</code> con <code>series</code>; usar para tendencias temporales.</li>
+            <li><b>Area chart</b> — line con relleno (<code>.chart-area</code>, un <code>&lt;polygon&gt;</code> bajo la polilínea); enfatiza volumen acumulado.</li>
+            <li><b>Bar chart</b> — <code>&lt;BarChart&gt;</code> con <code>series</code>; usar para comparar categorías discretas.</li>
+            <li><b>Pie chart</b> — <code>&lt;PieChart&gt;</code> con <code>data</code> (<code>conic-gradient</code> CSS); usar para composición/proporciones (máx. 5–6 segmentos).</li>
           </ul>
           <h3 class="bd-sub-title">Rango de tiempo: semanal / mensual / anual</h3>
           <p class="docs-section-desc">El mismo <code>ChartContainer</code> puede alternar granularidad con un <code>SegmentedButtonGroup</code> — solo cambia el array de datos, no el componente.</p>
@@ -17052,7 +17067,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
             <tbody>
               <tr><td>Con datos</td><td>Series dibujadas como SVG estático (línea/barra) o conic-gradient (torta), sin animación de entrada</td><td><code>--chart-*</code></td></tr>
-              <tr><td>Hover / tooltip activo</td><td>Cursor de referencia + tarjeta de tooltip</td><td><code>--color-border</code>, <code>bg-card</code></td></tr>
+              <tr><td>Hover / tooltip activo</td><td>El punto/barra crece + tarjeta de tooltip posicionada por JS</td><td><code>--color-inverse-surface</code>, <code>--shadow-md</code></td></tr>
               <tr><td>Vacío</td><td>Contenedor con borde punteado y mensaje, misma altura que el gráfico real</td><td><code>border-dashed border-border</code></td></tr>
               <tr><td>Cargando</td><td>Barras esqueleto con <code>animate-pulse</code>, sin layout shift al llegar los datos</td><td><code>--color-surface-variant</code></td></tr>
               <tr><td>Error</td><td>Mensaje + acción de reintento (<code>Button variant="tertiary"</code>)</td><td><code>--color-error</code></td></tr>
@@ -17080,9 +17095,9 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
               <tr><td>Alto por defecto</td><td>280px (ancho: 100% del contenedor padre, responsive)</td></tr>
-              <tr><td>Radio de barras</td><td><code>rounded-t</code> (6px) en el borde superior</td></tr>
-              <tr><td>Radio interior de torta (donut)</td><td>60px</td></tr>
-              <tr><td>Grosor de línea</td><td>2px, sin puntos salvo en el punto activo (hover)</td></tr>
+              <tr><td>Radio de barras</td><td>6px (<code>rx="6"</code>) en el rect de la barra</td></tr>
+              <tr><td>Torta</td><td>180px, círculo completo <code>conic-gradient</code> (sin hueco donut)</td></tr>
+              <tr><td>Grosor de línea</td><td>2px; punto activo crece a <code>r=5.5</code> en hover</td></tr>
             </tbody>
           </table>
         </section>
@@ -17127,7 +17142,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <section class="docs-section" id="tc-charts-g-0">
           <h2 class="docs-section-title">Cuándo usar cada tipo</h2>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Line</b> para tendencias en el tiempo (ingresos, tráfico, uso).</li><li><b>Bar</b> para comparar categorías discretas entre sí.</li><li><b>Pie/donut</b> para mostrar composición de un total en pocos segmentos (≤ 6).</li></ul></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Line</b> para tendencias en el tiempo (ingresos, tráfico, uso).</li><li><b>Bar</b> para comparar categorías discretas entre sí.</li><li><b>Pie</b> para mostrar composición de un total en pocos segmentos (≤ 6).</li></ul></div></div>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Pie chart con más de 6–7 segmentos → usar Bar chart.</li><li>Un solo número puntual → <b>Stat Card</b>, no un gráfico.</li><li>Datos exactos que el usuario necesita leer uno por uno → <b>Table</b>.</li></ul></div></div>
           </div>
         </section>
@@ -17142,7 +17157,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <h2 class="docs-section-title">Accesibilidad de color</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>No comuniques una serie solo por color: la leyenda y el tooltip siempre repiten la etiqueta en texto.</li>
-            <li>En pie/donut, cada segmento lleva su nombre en la leyenda — nunca solo el color.</li>
+            <li>En pie, cada segmento lleva su nombre en la leyenda — nunca solo el color.</li>
             <li>Los pares de color de la paleta (secondary/tertiary/success/warning/info) fueron elegidos por ser distinguibles entre sí, pero para datos críticos (ej. aprobado/rechazado) preferí <code>--color-success</code>/<code>--color-error</code> explícitos en vez de la paleta genérica.</li>
           </ul>
         </section>
@@ -18977,7 +18992,7 @@ const [on, setOn] = useState(false)
       <div class="ds-comp-tab-panel" data-tab="specs">
         <section class="docs-section">
           <h2 class="docs-section-title">Range calendar</h2>
-          <p class="docs-section-desc"><code>data-cal-mode="range"</code> — el primer clic fija el inicio, el segundo el fin; el tramo intermedio usa <code>primary-container</code>.</p>
+          <p class="docs-section-desc"><code>data-cal-mode="range"</code> — el primer clic fija el inicio, el segundo el fin; el tramo intermedio usa <code>--color-surface-variant</code> y los extremos <code>--color-primary</code>.</p>
           <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07" data-cal-mode="range"></div></div>
 
           <h2 class="docs-section-title" style="margin-top:32px">Selector de mes y año</h2>
@@ -19015,7 +19030,7 @@ const [on, setOn] = useState(false)
           <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07" data-cal-booked="2026-07-18,2026-07-21,2026-07-22,2026-07-29"></div></div>
 
           <h2 class="docs-section-title" style="margin-top:32px">Custom cell size</h2>
-          <p class="docs-section-desc">La celda se controla con <code>--cal-cell</code>: <code>.calendar-sm</code> (30px) y <code>.calendar-lg</code> (44px) para densidad compacta o táctil.</p>
+          <p class="docs-section-desc">La celda se controla con <code>--cal-cell</code>: <code>.calendar-sm</code> (28px) y <code>.calendar-lg</code> (44px) para densidad compacta o táctil.</p>
           <div class="bd-family-wrap" style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
             <div class="calendar calendar-sm" data-calendar="2026-07"></div>
             <div class="calendar calendar-lg" data-calendar="2026-07"></div>
@@ -19131,7 +19146,7 @@ const [on, setOn] = useState(false)
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li>Línea de 1px que usa el token <code>--border</code>; recalibra en dark mode automáticamente, sin overrides por tema.</li>
+            <li>Línea de 1px que usa el token <code>--color-outline-variant</code>; recalibra en dark mode automáticamente, sin overrides por tema.</li>
             <li><b>Dos variantes:</b> <strong>full-width</strong> (de borde a borde) e <strong>inset</strong> (con sangría izquierda de 16px para alinearse con el contenido del ítem).</li>
             <li>Separa grupos de contenido dentro de listas y layouts; no agrega peso visual ni color de marca.</li>
             <li>Orientación horizontal por defecto; soporta <code>orientation="vertical"</code> para divisiones en línea.</li>
@@ -19191,7 +19206,7 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
-              <tr><td>Línea (horizontal y vertical)</td><td><code>--border</code></td></tr>
+              <tr><td>Línea (horizontal y vertical)</td><td><code>--color-outline-variant</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -19222,7 +19237,7 @@ const [on, setOn] = useState(false)
         </section>
         <section class="docs-section" id="tc-divider-g-1">
           <h2 class="docs-section-title">Anatomía</h2>
-          <p class="docs-section-desc">Componente real: una línea de 1&nbsp;px con el token <code>--border</code> (recalibra en dark mode).</p>
+          <p class="docs-section-desc">Componente real: una línea de 1&nbsp;px con el token <code>--color-outline-variant</code> (recalibra en dark mode).</p>
           <div class="bd-family-wrap"><div style="max-width:380px;border:1px solid var(--border);border-radius:12px;padding:14px 0">
   <div style="padding:6px 16px">Sección A</div>
   <div class="divider"></div>
@@ -19252,7 +19267,7 @@ const [on, setOn] = useState(false)
         <section class="docs-section" id="tc-divider-g-4">
           <h2 class="docs-section-title">Vertical divider</h2>
           <p class="ds-p">Separa elementos dispuestos en una <b>fila</b> (acciones en una toolbar, metadatos en línea).</p>
-          <p class="ds-p" style="color:var(--text-secondary)">En Embassy se compone con <code>Separator orientation="vertical"</code>; ocupa el alto del contenedor y usa el mismo token <code>--border</code>.</p>
+          <p class="ds-p" style="color:var(--text-secondary)">En Embassy se compone con <code>Separator orientation="vertical"</code>; ocupa el alto del contenedor y usa el mismo token <code>--color-outline-variant</code>.</p>
         </section>
         </div>
         <nav class="ds-toc" data-toc-auto id="tc-divider-g-toc" aria-label="En esta página">
@@ -19276,7 +19291,7 @@ const [on, setOn] = useState(false)
             <li><span class="ds-a11y-icon">♿</span>Si el divider separa contenido con significado semántico, agregá <code>role="separator"</code> y <code>aria-orientation="vertical"</code> en la variante vertical.</li>
             <li><span class="ds-a11y-icon">♿</span>Si el divider es puramente decorativo (el caso más común), dejalo sin rol — un <code>&lt;div&gt;</code> vacío no agrega ruido al lector de pantalla por defecto.</li>
             <li><span class="ds-a11y-icon">♿</span>No dependas solo del divider para comunicar agrupación: reforzá con encabezados de sección o espaciado.</li>
-            <li><span class="ds-a11y-icon">♿</span>El contraste de 1px sobre la superficie cumple porque deriva de <code>--border</code>, calibrado para ambos temas.</li>
+            <li><span class="ds-a11y-icon">♿</span>El contraste de 1px sobre la superficie cumple porque deriva de <code>--color-outline-variant</code>, calibrado para ambos temas.</li>
           </ul>
         </section>
       </div>
@@ -19308,7 +19323,7 @@ const [on, setOn] = useState(false)
             <li><b>Contenedor vertical</b> de ítems: cada <code>ListItem</code> tiene <code>headline</code> y <code>supporting</code> opcional.</li>
             <li>Los ítems pueden ser estáticos o accionables (<code>asButton</code>), con estados hover/focus tematizados con tokens de superficie.</li>
             <li>Usá <code>Separator</code> para dividir grupos de ítems dentro de una misma lista.</li>
-            <li>Tematizada con tokens de superficie de Embassy (<code>bg-card</code>, <code>text-on-surface</code>, <code>text-on-surface-variant</code>); se adapta a modo claro/oscuro sin overrides.</li>
+            <li>Tematizada con tokens de superficie de Embassy (<code>--color-surface</code>, <code>--color-on-surface</code>, <code>--color-on-surface-variant</code>); se adapta a modo claro/oscuro sin overrides.</li>
           </ul>
 
           <!-- Component variants -->
@@ -19346,7 +19361,7 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
             <tbody>
-              <tr><td>Contenedor (<code>List</code>)</td><td>Columna a ancho completo, fondo de tarjeta</td></tr>
+              <tr><td>Contenedor (<code>List</code>)</td><td>Columna a ancho completo, fondo de superficie</td></tr>
               <tr><td>Ítem (<code>ListItem</code>)</td><td>Línea principal (<code>headline</code>) + texto de soporte opcional (<code>supporting</code>); estático o accionable (<code>asButton</code>)</td></tr>
               <tr><td>Headline</td><td>Texto principal</td></tr>
               <tr><td>Supporting</td><td>Texto secundario</td></tr>
@@ -19360,7 +19375,7 @@ const [on, setOn] = useState(false)
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
               <tr><td>Altura mínima del ítem</td><td>56px (<code>min-h-14</code>)</td></tr>
-              <tr><td>Padding del ítem</td><td>16px&nbsp;10px (<code>px-4 py-2.5</code>)</td></tr>
+              <tr><td>Padding del ítem</td><td>12px&nbsp;16px (<code>py-3 px-4</code>)</td></tr>
               <tr><td>Separación entre líneas</td><td><code>gap-0.5</code></td></tr>
               <tr><td>Headline</td><td><code>text-sm</code> (<code>--font-size-body-md</code>)</td></tr>
               <tr><td>Supporting</td><td>12.5px</td></tr>
@@ -19372,12 +19387,14 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
             <tbody>
-              <tr><td>Reposo</td><td>Fondo de tarjeta</td><td><code>--card-bg</code></td></tr>
-              <tr><td>Hover</td><td>Fondo sólido sobre el ítem, solo con <code>asButton</code> (<code>hover:bg-surface-variant</code>)</td><td><code>--color-surface-variant</code></td></tr>
-              <tr><td>Focus visible</td><td>Fondo sólido sobre el ítem (<code>focus-visible:bg-surface-variant</code>)</td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Reposo</td><td>Fondo de superficie</td><td><code>--color-surface</code></td></tr>
+              <tr><td>Hover (accionable)</td><td>Fondo sólido sobre el ítem, solo en <code>button.list-item</code></td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Focus visible (accionable)</td><td>Anillo de foco canónico de dos partes (outline + anillo interno), no cambia el fondo</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+              <tr><td>Seleccionado</td><td>Relleno tonal (<code>aria-selected="true"</code> / <code>.is-selected</code>), mismo lenguaje que Nav/Menu</td><td><code>--color-secondary-container</code> + <code>--color-on-secondary-container</code></td></tr>
+              <tr><td>Deshabilitado</td><td>Ítem atenuado, no interactivo (<code>:disabled</code> / <code>.is-disabled</code>)</td><td>opacidad 50%</td></tr>
             </tbody>
           </table>
-          <p class="docs-caption">El ítem accionable usa un fondo sólido en hover/focus, no la capa de estado (state layer) ni el anillo de foco de MD3 — desviación documentada.</p>
+          <p class="docs-caption">El ítem accionable usa el foco canónico de dos partes del DS (outline + anillo interno, GOVERNANCE §6.2) y un fondo sólido en hover; el estado seleccionado reutiliza el relleno tonal de Nav/Menu.</p>
         </section>
         <section class="docs-section" id="tc-list-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
@@ -19386,11 +19403,13 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
-              <tr><td>Contenedor / fondo</td><td><code>--card-bg</code></td></tr>
+              <tr><td>Contenedor / fondo</td><td><code>--color-surface</code></td></tr>
               <tr><td>Headline / texto</td><td><code>--color-on-surface</code></td></tr>
               <tr><td>Supporting</td><td><code>--color-on-surface-variant</code></td></tr>
-              <tr><td>Ítem accionable — hover/focus</td><td><code>--color-surface-variant</code></td></tr>
-              <tr><td>Separador</td><td><code>--border</code></td></tr>
+              <tr><td>Ítem accionable — hover</td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Ítem accionable — focus</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+              <tr><td>Ítem seleccionado</td><td><code>--color-secondary-container</code> + <code>--color-on-secondary-container</code></td></tr>
+              <tr><td>Separador (<code>.list--divided</code>)</td><td><code>--border</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -19833,7 +19852,7 @@ const [on, setOn] = useState(false)
               </div>
             </div></div>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li><b>Leading icon</b> — refuerza el significado de la acción (18px).</li>
+            <li><b>Leading icon</b> — refuerza el significado de la acción (16px).</li>
             <li><b>Trailing</b> — atajo de teclado o chevron de submenú.</li>
             <li><b>Separador</b> — <code>DropdownMenuSeparator</code> divide grupos.</li>
             <li><b>Ítem deshabilitado</b> — <code>disabled</code>, no interactivo.</li>
@@ -19867,7 +19886,7 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
-              <tr><td>Contenedor (surface)</td><td><code>--color-surface-container-high</code> + <code>--border</code> + <code>shadow-lg</code></td></tr>
+              <tr><td>Contenedor (surface)</td><td><code>--color-surface-container-high</code> + <code>--color-outline-variant</code> + <code>--shadow-md</code></td></tr>
               <tr><td>Ítem — texto</td><td><code>--color-on-surface</code></td></tr>
               <tr><td>Ítem — hover</td><td>tinte azul suave + etiqueta/ícono azul <code>--color-nav-hover</code> / <code>--color-nav-hover-content</code></td></tr>
               <tr><td>Ítem — focus (teclado)</td><td><code>--color-nav-hover</code> + anillo <code>--color-focus-ring</code></td></tr>
@@ -19875,7 +19894,7 @@ const [on, setOn] = useState(false)
               <tr><td>Ítem — selected (activo)</td><td><code>--color-nav-selected</code> + <code>--color-nav-selected-content</code> (semibold)</td></tr>
               <tr><td>Ítem — deshabilitado</td><td>opacidad 40%</td></tr>
               <tr><td>Ícono / atajo</td><td><code>--color-on-surface-variant</code></td></tr>
-              <tr><td>Separador</td><td><code>--border</code></td></tr>
+              <tr><td>Separador</td><td><code>--color-outline-variant</code></td></tr>
               <tr><td>Ítem destructivo</td><td><code>--color-error</code> / <code>--color-error-container</code></td></tr>
             </tbody>
           </table>
@@ -19963,13 +19982,13 @@ const [on, setOn] = useState(false)
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
               <tr><td>Padding del contenedor</td><td>6px (<code>p-1.5</code>)</td></tr>
-              <tr><td>Padding del ítem</td><td>12px&nbsp;8px (<code>px-3 py-2</code>)</td></tr>
+              <tr><td>Padding del ítem</td><td>8px&nbsp;10px (<code>py-2 px-2.5</code>)</td></tr>
               <tr><td>Radio del contenedor</td><td><code>--radius-md</code> (<code>rounded-md</code>)</td></tr>
-              <tr><td>Radio del ítem</td><td><code>--radius-md</code> (<code>rounded-md</code>, 8px — igual que la navegación)</td></tr>
-              <tr><td>Ancho mínimo</td><td>160px (<code>min-w-[10rem]</code>)</td></tr>
-              <tr><td>Ícono leading</td><td>18×18px, gap 8px (<code>gap-2</code>)</td></tr>
-              <tr><td>Separador</td><td>1px, margen vertical 6px (<code>my-1.5</code>)</td></tr>
-              <tr><td>Elevación</td><td><code>shadow-lg</code>; <code>sideOffset</code> 6px del trigger</td></tr>
+              <tr><td>Radio del ítem</td><td><code>--radius-sm</code> (<code>rounded-sm</code>)</td></tr>
+              <tr><td>Ancho mínimo</td><td>180px (<code>min-w-[11.25rem]</code>)</td></tr>
+              <tr><td>Ícono leading</td><td>16×16px, gap 8px (<code>gap-2</code>)</td></tr>
+              <tr><td>Separador</td><td>1px, margen vertical 4px (<code>my-1</code>)</td></tr>
+              <tr><td>Elevación</td><td><code>--shadow-md</code>; <code>sideOffset</code> 6px del trigger</td></tr>
             </tbody>
           </table>
         </section>
@@ -19978,7 +19997,7 @@ const [on, setOn] = useState(false)
           <p class="docs-section-desc">Alineación y ritmo vertical de los ítems:</p>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>Alto de ítem cómodo para toque (<code>py-2</code> + texto <code>text-sm</code>); densidad consistente en todo el menú.</li>
-            <li>El ícono leading (18px) se alinea verticalmente al centro del texto; el texto arranca a una distancia constante del borde con o sin ícono.</li>
+            <li>El ícono leading (16px) se alinea verticalmente al centro del texto; el texto arranca a una distancia constante del borde con o sin ícono.</li>
             <li>El contenido trailing (atajo o chevron) se alinea a la derecha con <code>ml-auto</code>, en <code>--color-on-surface-variant</code>.</li>
             <li>La superficie abre anclada al trigger; su alto máximo deja al menos una fila menos que el alto de la app para señalar scroll.</li>
           </ul>
@@ -22188,7 +22207,7 @@ const Switch = React.forwardRef&lt;HTMLInputElement, SwitchProps&gt;(
           <ul class="bd-overview-list">
             <li>Aparece al hacer hover, focus o tap sobre un elemento; el texto debe ser breve y no repetir el contenido adyacente.</li>
             <li><b>Dos tipos:</b> <b>plain tooltip</b> (etiqueta corta sobre <code>inverse-surface</code>) y <b>rich tooltip</b> (con subheader, cuerpo y acciones opcionales).</li>
-            <li>Timing: 500ms de hover para aparecer, inmediato en foco de teclado; se cierra al salir el cursor o con Escape.</li>
+            <li>Timing: 400ms de hover para aparecer, inmediato en foco de teclado; se cierra al salir el cursor o con Escape.</li>
             <li>Envolvé el trigger en <code>.tooltip-wrap</code> (ancla <code>position: relative</code>) y agregá <code>.tooltip-content</code> como hijo — sin dependencias, sin Provider.</li>
           </ul>
 
@@ -22256,7 +22275,7 @@ const Switch = React.forwardRef&lt;HTMLInputElement, SwitchProps&gt;(
               <tr><td>Plain tooltip (<code>TooltipContent</code>)</td><td>Etiqueta corta de una línea sobre superficie invertida, con sombra</td></tr>
               <tr><td>Rich tooltip — header</td><td>Título (<code>text-body-md</code> semibold) + subtítulo opcional (<code>text-body-sm</code>)</td></tr>
               <tr><td>Rich tooltip — body + acciones</td><td>Cuerpo de texto y fila de acciones alineadas a la derecha</td></tr>
-              <tr><td>Trigger</td><td>Envuelto en <code>TooltipProvider</code>; el contenido se asocia con <code>aria-describedby</code></td></tr>
+              <tr><td>Trigger</td><td>Envuelto en <code>.tooltip-wrap</code> (ancla <code>position: relative</code>); el contenido se asocia con <code>aria-describedby</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -22396,15 +22415,15 @@ const Switch = React.forwardRef&lt;HTMLInputElement, SwitchProps&gt;(
         <section class="docs-section" id="tc-tooltip-g-3">
           <h2 class="docs-section-title">Comportamiento</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li>Aparece <b>~500&nbsp;ms</b> tras el hover e <b>inmediatamente</b> al recibir foco por teclado.</li>
+            <li>Aparece <b>~400&nbsp;ms</b> tras el hover e <b>inmediatamente</b> al recibir foco por teclado.</li>
             <li>Se cierra con <code>Esc</code> o al salir; no debe tapar el control que describe.</li>
-            <li>Envolvé el árbol en un <code>TooltipProvider</code>; el texto no repite lo que ya dice la UI.</li>
+            <li>Envolvé el trigger en <code>.tooltip-wrap</code> (CSS puro, sin Provider); el texto no repite lo que ya dice la UI.</li>
           </ul>
         </section>
         <section class="docs-section" id="tc-tooltip-g-4">
           <h2 class="docs-section-title">Do / Don't</h2>
           <div class="ds-guideline-grid">
-            <div class="ds-guideline-card do"><h3>✓ Do</h3><ul><li>Usar <code>TooltipProvider</code> una sola vez en el árbol, no por instancia.</li><li>Mantener el texto del plain tooltip a una línea.</li></ul></div>
+            <div class="ds-guideline-card do"><h3>✓ Do</h3><ul><li>Envolver cada trigger en su propio <code>.tooltip-wrap</code> (CSS puro, sin Provider global).</li><li>Mantener el texto del plain tooltip a una línea.</li></ul></div>
             <div class="ds-guideline-card dont"><h3>✕ Don't</h3><ul><li>Meter contenido interactivo extenso en un plain tooltip — usar Rich tooltip o Popover.</li><li>Depender del tooltip como única fuente de información crítica (no existe hover en táctil).</li></ul></div>
           </div>
         </section>
@@ -22436,9 +22455,9 @@ const Switch = React.forwardRef&lt;HTMLInputElement, SwitchProps&gt;(
           <h2 class="docs-section-title">Accesibilidad</h2>
           <ul class="ds-a11y-list">
             <li><span class="ds-a11y-icon">♿</span>El <b>plain tooltip</b> se asocia al trigger con <code>aria-describedby</code> y se muestra tanto en hover (CSS) como en foco de teclado (<code>:focus-within</code>).</li>
-            <li><span class="ds-a11y-icon">♿</span>El <b>rich tooltip</b> usa Popover: se abre con click/Enter, atrapa el foco, se cierra con <code>Esc</code> o click afuera y devuelve el foco al trigger.</li>
+            <li><span class="ds-a11y-icon">♿</span>El <b>rich tooltip</b> se abre con click/Enter (vanilla JS, sin Popover/Radix), se cierra con <code>Esc</code> o click afuera y devuelve el foco al trigger.</li>
             <li><span class="ds-a11y-icon">♿</span>No metas información crítica solo en un tooltip — debe estar disponible por otra vía, ya que el hover no existe en táctil.</li>
-            <li><span class="ds-a11y-icon">♿</span>El contraste de texto sobre <code>inverse-surface</code> / <code>surface-container-high</code> cumple AA en ambos temas.</li>
+            <li><span class="ds-a11y-icon">♿</span>El contraste de texto sobre <code>inverse-surface</code> / <code>surface-container</code> cumple AA en ambos temas.</li>
           </ul>
         </section>
       </div>
@@ -22457,7 +22476,7 @@ import { Button } from &quot;./components/ui/button&quot;
           </div>
 
           <h2 class="docs-section-title" style="margin-top:32px">Rich tooltip — persistente con título, subtítulo y cierre</h2>
-          <p class="docs-section-desc">El <code>RichTooltip</code> (CSS + vanilla JS, sin Popover/Radix) es persistente y se abre con click. Acepta <code>title</code>, <code>subtitle</code>, <code>actions</code> opcionales y un botón de cierre (×) por defecto. Fondo <code>surface-container-high</code> con elevación. Importá desde <code>./components/ui/rich-tooltip</code>.</p>
+          <p class="docs-section-desc">El <code>RichTooltip</code> (CSS + vanilla JS, sin Popover/Radix) es persistente y se abre con click. Acepta <code>title</code>, <code>subtitle</code>, <code>actions</code> opcionales y un botón de cierre (×) por defecto. Fondo <code>surface-container</code> con elevación. Importá desde <code>./components/ui/rich-tooltip</code>.</p>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre class="docs-code"><code>import { RichTooltip } from &quot;./components/ui/rich-tooltip&quot;
