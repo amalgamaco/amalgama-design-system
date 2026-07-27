@@ -34,17 +34,17 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | switch | ✅ authored | c-switch | switch.css |
 | slider | ✅ authored | c-slider | slider.css |
 | search | ✅ authored | c-search | search.css |
-| card (Full Card) | 🟡 pending | c-basic-card | card.css |
-| item (Basic Card) | 🟡 pending | c-item | item.css |
-| stat-card | 🟡 pending | c-stat-card | stat-card.css |
-| table | 🟡 pending | c-table | table.css |
-| data-table | 🟡 pending | c-data-table | data-table.css |
-| tabs | 🟡 pending | c-tabs | tabs.css |
-| accordion | 🟡 pending | c-accordion | accordion.css |
-| collapsible | 🟡 pending | c-collapsible | collapsible.css |
-| list | 🟡 pending | c-list | list.css |
-| pagination | 🟡 pending | c-pagination | pagination.css |
-| breadcrumb | 🟡 pending | c-breadcrumb | breadcrumb.css |
+| card (Full Card) | ✅ authored | c-basic-card | card.css |
+| item (Basic Card) | ✅ authored | c-item | item.css |
+| stat-card | ✅ authored | c-stat-card | stat-card.css |
+| table | ✅ authored | c-table | table.css |
+| data-table | ✅ authored | c-data-table | data-table.css |
+| tabs | ✅ authored | c-tabs | tabs.css |
+| accordion | ✅ authored | c-accordion | accordion.css |
+| collapsible | ✅ authored | c-collapsible | collapsible.css |
+| list | ✅ authored | c-list | list.css |
+| pagination | ✅ authored | c-pagination | pagination.css |
+| breadcrumb | ✅ authored | c-breadcrumb | breadcrumb.css |
 | avatar | ✅ authored | c-avatar | avatar.css |
 | divider | ✅ authored | c-divider | divider.css |
 | scroll-area | ✅ authored | c-scroll-area | scroll-area.css |
@@ -76,5 +76,5 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | kanban-card | 🟡 pending | c-kanban | kanban.css |
 | person-card | 🟡 pending | c-person | person-card.css |
 
-**Coverage: 29 / 61 authored.** The remaining 32 are the primary #5 work item
+**Coverage: 40 / 61 authored.** The remaining 21 are the primary #5 work item
 (tracked as a phased backlog in the audit report).
