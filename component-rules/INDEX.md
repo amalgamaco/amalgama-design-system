@@ -45,19 +45,19 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | list | 🟡 pending | c-list | list.css |
 | pagination | 🟡 pending | c-pagination | pagination.css |
 | breadcrumb | 🟡 pending | c-breadcrumb | breadcrumb.css |
-| avatar | 🟡 pending | c-avatar | avatar.css |
-| divider | 🟡 pending | c-divider | divider.css |
-| scroll-area | 🟡 pending | c-scroll-area | scroll-area.css |
-| aspect-ratio | 🟡 pending | c-aspect-ratio | (layout primitive) |
-| calendar | 🟡 pending | c-calendar | calendar.css |
-| carousel | 🟡 pending | c-carousel | carousel.css |
-| charts | 🟡 pending | c-charts | chart.css |
+| avatar | ✅ authored | c-avatar | avatar.css |
+| divider | ✅ authored | c-divider | divider.css |
+| scroll-area | ✅ authored | c-scroll-area | scroll-area.css |
+| aspect-ratio | ✅ authored | c-aspect-ratio | (layout primitive) |
+| calendar | ✅ authored | c-calendar | calendar.css |
+| carousel | ✅ authored | c-carousel | carousel.css |
+| charts | ✅ authored | c-charts | chart.css |
 | snackbar (toast) | 🟡 pending | c-snackbar | toast.css |
 | alert | 🟡 pending | c-alert | alert.css |
 | tooltip | 🟡 pending | c-tooltip | tooltip.css / rich-tooltip.css |
-| skeleton | 🟡 pending | c-skeleton | skeleton.css |
+| skeleton | ✅ authored | c-skeleton | skeleton.css |
 | loading (progress + spinner) | 🟡 pending | c-loading | progress.css / spinner.css |
-| empty-state | 🟡 pending | c-empty | empty-state.css |
+| empty-state | ✅ authored | c-empty | empty-state.css |
 | attachment | 🟡 pending | c-attachment | attachment.css |
 | menu (dropdown/popover) | 🟡 pending | c-menu | dropdown-menu.css / popover.css |
 | context-menu | 🟡 pending | c-context-menu | context-menu.css |
@@ -76,5 +76,5 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | kanban-card | 🟡 pending | c-kanban | kanban.css |
 | person-card | 🟡 pending | c-person | person-card.css |
 
-**Coverage: 20 / 61 authored.** The remaining 41 are the primary #5 work item
+**Coverage: 29 / 61 authored.** The remaining 32 are the primary #5 work item
 (tracked as a phased backlog in the audit report).
