@@ -139,14 +139,18 @@ Every component CSS header carries a **`Cuándo usar / Cuándo no / Reemplaza a`
 
 | Information | Authoritative source |
 |---|---|
-| Token values (colors, type scale, spacing, radii, shadows, breakpoints) | `css/variables.css` |
+| Token values (colors, type scale, spacing, radii, shadows, breakpoints) | `css/variables.css` (source) · **`TOKENS.md`** (reference: semantic purpose + when/when-not per token) |
 | Component code, variants, props, usage rules | `css/components/<name>.css` (canonical) + optional `components/ui/<name>.tsx` wrapper |
-| **Operational per-component rules — when/when-not to use, variants+purpose, size criteria, states, a11y, keyboard, heuristics, relationships, correct/incorrect examples (machine-readable, for skills + UI-generation)** | **`component-rules/<id>.md`** (YAML frontmatter + prose; schema in `component-rules/README.md`) — **consult this first when selecting/using a component** |
+| **Operational per-component rules — when/when-not to use, variants+purpose, size criteria, states, a11y, keyboard, heuristics, relationships, correct/incorrect examples (machine-readable, for skills + UI-generation)** | **`component-rules/<id>.md`** (YAML frontmatter + prose; schema in `component-rules/README.md`; 61/61 authored) — **consult this first when selecting/using a component** |
+| **Machine-readable component registry** (aggregated metadata for all 61 — status/variants/sizes/states/tokens/source) | **`component-rules/manifest.json`** (regenerate: `python3 scripts/build-manifest.py`) |
 | Per-component decision rule (`Cuándo usar / Cuándo no`) | `component-rules/<id>.md` (authored) or the component's `css/components/<name>.css` header comment (fallback) |
 | Usage guidelines / specs / accessibility (human depth) | root `index.html` |
-| Migration / restyling rules | `MIGRATION.md` |
+| Migration / restyling rules (generic) | `MIGRATION.md` |
+| **Applying Embassy to Gamaforce — screen audit, migration workflow, screen patterns, checklists, DoD** | **`GAMAFORCE-MIGRATION.md`** |
+| **How AI agents/skills should consume the DS to build/migrate screens** | **`AI-USAGE-GUIDE.md`** |
 | Cross-component consistency rules, state patterns, audit checklist | `GOVERNANCE.md` |
 | **UX principles, laws/heuristics, interaction patterns — how to build a good *screen*** | **`guidelines/` (the Playbook)** — see below |
+| Automated validation (token-lint, routes/anchors, manifest/metadata coverage) | `node scripts/validate-ds.mjs` |
 
 The `docs/*.html` pages are retired redirect stubs — never read or cite them as a source.
 
