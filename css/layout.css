@@ -180,11 +180,16 @@
   border: 2px solid var(--color-surface);
 }
 
+/* Shell avatar. Flat tonal fill (matches the Avatar component in
+   css/components/avatar.css; the color audit removed gradient/primitives).
+   NOTE: this .avatar shares the class name with avatar.css's component base;
+   components.css loads after layout.css so the component rules win where both
+   are present — kept token-identical here so the shell renders the same. */
 .avatar {
   width: 32px; height: 32px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-500), var(--secondary-900));
+  background: var(--color-primary-container);
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-on-primary); font-size: var(--font-size-caption); font-weight: 600;
+  color: var(--color-on-primary-container); font-size: var(--font-size-caption); font-weight: 600;
   cursor: pointer;
 }
 .avatar-label {
