@@ -71,6 +71,15 @@ tokens:
   color: [--card-bg, --color-secondary-container, --color-on-secondary-container, --text-primary, --text-muted]
   radius: ["50% (avatar)"]
   shadow: [--shadow-md]
+motion:
+  enter: "none — inherits the Basic Card (item.css), which has no entrance animation."
+  exit: "none."
+  stateChange: "Hover (item-clickable / a.item) → surface-variant background (from item.css) plus a box-shadow (shadow-md) added by person-card; :focus-visible ring inherited from .item."
+  duration: "--duration-fast (background transition inherited from item.css); the added box-shadow has NO declared transition (item.css tweens only background-color + border-color) → the shadow change is instant."
+  easing: "--ease-default (item.css background/border transition)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover surface + shadow apply instantly."
+  constraints: "Animate background/color only via the inherited state-layer (Standard easing); person-card adds only a static surface bg + a hover shadow. Don't animate layout, and don't add a transform lift — the Basic Card doesn't lift."
+  relatedPatterns: [state-layer]
 source:
   css: css/components/person-card.css
   classes: [people-grid, "item", "item-outline", "item-clickable", person-card, "item-media", person-avatar, "item-content", "item-title", "item-description"]

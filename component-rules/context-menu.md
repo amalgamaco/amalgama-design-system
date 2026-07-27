@@ -67,6 +67,15 @@ tokens:
   color: [--color-surface-container, --color-outline-variant, --color-on-surface, --color-error]
   radius: [--radius-md]
   motion: [--duration-normal, --ease-default]
+motion:
+  enter: "Panel scales + fades in on open, reusing Dropdown Menu's @keyframes dropdownIn (opacity 0→1, scale .96→1) — context-menu.css adds no motion of its own."
+  exit: "none defined in CSS — the panel is removed instantly on dismiss (known buildless gap vs. the Radix open/closed pair)."
+  stateChange: "Item hover/focus background tint, inherited from the shared .dropdown-item styles."
+  duration: "--duration-normal (panel enter), via dropdown-menu.css."
+  easing: "--ease-default (panel enter)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the open scale/fade becomes instant."
+  constraints: "Reuses the Dropdown Menu panel — do not fork its motion; animate transform/opacity only. Positioned at the cursor by JS; no submenu support."
+  relatedPatterns: [overlay-enter-exit]
 source:
   css: css/components/context-menu.css
   classes: [context-menu-trigger, dropdown-content, dropdown-item, dropdown-separator, dropdown-label]

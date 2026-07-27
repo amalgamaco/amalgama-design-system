@@ -78,6 +78,16 @@ tokens:
   spacing: ["20px padding", "16px grid gap"]
   typography: [--font-size-display, --font-size-body-sm, --font-size-caption]
 
+motion:
+  enter: "none — a static KPI tile with no CSS entrance"
+  exit: "none"
+  stateChange: "none — Stat Card declares no transition or hover. The trend color modifiers (stat-change-positive/-negative/-neutral) are fixed at rest."
+  duration: "none (no transition declared)"
+  easing: "none (no transition declared)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The component defines no motion of its own, so nothing extra to reduce."
+  constraints: "A static display tile — do not add hover motion. If the metric updates live, avoid a count-up animation unless it genuinely serves feedback, and it must honor prefers-reduced-motion (fall back to an instant value swap)."
+  relatedPatterns: ["motion.md → Motion has a purpose (a static metric tile needs no motion)"]
+
 source:
   css: css/components/stat-card.css
   classes: [stats-grid, stat-card, stat-label, stat-value, stat-change, stat-change-positive, stat-change-negative, stat-change-neutral]

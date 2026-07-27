@@ -69,6 +69,16 @@ tokens:
   radius: [--radius-sm]
   motion: [--duration-normal, --ease-default]
 
+motion:
+  enter: "Expand — the single region animates grid-template-rows 0fr → 1fr (data-state=open), revealing its content in flow."
+  exit: "Collapse — the same grid-template-rows transition reversed (1fr → 0fr)."
+  stateChange: "Content height via grid-template-rows only (transition grid-template-rows var(--duration-normal) var(--ease-default)). No chevron, no color transition — intentionally minimal so the trigger can be any element."
+  duration: "--duration-normal"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The region snaps open/closed; state stays legible via aria-expanded on the trigger."
+  constraints: "Same sanctioned grid-template-rows 0fr→1fr CSS-only height animation as Accordion (no JS measurement). Collapsible deliberately styles nothing else that moves — don't add a chevron/label transition here (that distinction is what separates it from Accordion). Effect on Standard easing; never Expressive on a height change."
+  relatedPatterns: ["Progressive disclosure (single show/hide region)", "Shares Accordion's grid-rows expand/collapse pattern"]
+
 source:
   css: css/components/collapsible.css
   classes: [collapsible, collapsible-trigger, collapsible-content, collapsible-content-inner]

@@ -52,7 +52,7 @@
   color: var(--color-on-surface);
   text-decoration: none;
   cursor: pointer;
-  transition: background-color .15s var(--ease-default, ease);
+  transition: background-color var(--duration-fast) var(--ease-default);
 }
 .pagination-link:hover { background: var(--color-surface-variant); }
 .pagination-link:focus-visible {

@@ -89,6 +89,16 @@ tokens:
   spacing: ["4px 10px padding"]
   typography: [--font-size-badge, --font-mono]
 
+motion:
+  enter: "none — always present (read-only status/category label)."
+  exit: "none."
+  stateChange: "The base badge is fully static (no transition). Only the link variant (a.badge) transitions opacity and fades to .85 on hover, with a 2px --color-focus focus-visible outline. An optional leading spinner inside a badge is a continuous Loading loop, not a badge state change."
+  duration: "--duration-fast (link variant only)"
+  easing: "--ease-default (link variant only)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css. No component-specific override. Note: a spinner embedded in a badge is a Loading-family loop (exempt category per guidelines/motion.md) and stops under reduced motion via the same global rule."
+  constraints: "Static by default — do not animate a status/category badge appearing or changing. Only the navigable a.badge earns a hover fade (opacity, compositor-safe)."
+  relatedPatterns: [state-layer]
+
 source:
   css: css/components/badge.css
   classes: [badge, badge-open, badge-active, badge-closed, badge-draft, badge-archived, badge-warning, badge-tertiary, badge-info, badge-label, badge-link]

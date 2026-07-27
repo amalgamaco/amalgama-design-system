@@ -95,6 +95,16 @@ tokens:
   motion: [--duration-fast]
   elevation: "--btn-elevation (elevated variant only)"
 
+motion:
+  enter: "none — always present (static control, not an overlay)."
+  exit: "none."
+  stateChange: "Hover: filled variants darken (primary→--color-primary-hover, secondary/elevated via color-mix) AND lift with transform: translateY(-1px); elevated also grows box-shadow (--btn-elevation→--btn-elevation-hover). Active/pressed: settle to translateY(0) + a 12% press layer (filter: brightness(.88/.92) on filled, surface-container-high on tertiary/icon, primary 16% on text). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring."
+  duration: "--duration-fast (background/border-color/color/box-shadow). Transform (the lift/settle) uses a hardcoded .1s — should be tokenized to --duration-fast."
+  easing: "--ease-default for every property, including transform (this buildless CSS does NOT use --ease-expressive for the lift, unlike the retired Tailwind button.tsx described in guidelines/motion.md)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific override — the lift/press simply collapse."
+  constraints: "Never animate layout (width/padding) — a button has intrinsic width. Only compositor-friendly props: transform (lift), plus color/shadow effects. --translateY(-1px) is the only approved transform effect; no scale-up/rotate on hover."
+  relatedPatterns: [state-layer, hover-press-lift, per-property-easing-split]
+
 source:
   css: css/components/button.css
   classes: [btn-primary, btn-elevated, btn-secondary, btn-tertiary, btn-ghost, btn-text, icon-btn, btn-danger, btn-success, btn-xs, btn-sm, btn-lg, btn-xl, btn-compact, btn-next]

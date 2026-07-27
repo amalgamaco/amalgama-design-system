@@ -74,6 +74,15 @@ tokens:
   radius: [--radius, --radius-md]
   shadow: [--shadow-md]
   motion: [--duration-fast]
+motion:
+  enter: "fadeSlideIn keyframe (fade + upward slide) with animation-fill-mode:both, staggered per row via nth-child animation-delay (first three rows)."
+  exit: "none."
+  stateChange: "Hover → border-color (outline-variant) + box-shadow (shadow-md) + lift transform translateY(-1px); more-btn hover → surface-variant bg + on-surface color; :focus-visible ring."
+  duration: "HARDCODED .3s (fadeSlideIn entrance) + HARDCODED .05s/.12s/.19s stagger delays — NOT tokens. Hover uses --duration-fast (border/shadow/transform); more-btn --duration-fast."
+  easing: "HARDCODED `ease` on the fadeSlideIn entrance (no --ease-* token). The hover transition declares --duration-fast with no explicit easing → browser default. more-btn uses --ease-default."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Cards appear in place (no fade/slide/stagger); the hover lift applies instantly."
+  constraints: "Animate transform/opacity/shadow only (translateY lift, entrance fade+slide); keep the -1px lift (approved hover transform). Don't animate width/height/margin."
+  relatedPatterns: [staggered-entrance, hover-lift, state-layer]
 source:
   css: css/components/vacancy-card.css
   classes: [vacancies-list, vacancy-card, vacancy-icon, vacancy-info, vacancy-name, vacancy-meta, meta-dot, vacancy-stats, stat-pill, assignee, assignee-avatar, vacancy-right, vacancy-age, more-btn]

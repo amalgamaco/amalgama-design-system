@@ -59,7 +59,7 @@
               border-color var(--duration-fast) var(--ease-default),
               color var(--duration-fast) var(--ease-default),
               box-shadow var(--duration-fast) var(--ease-default),
-              transform .1s var(--ease-default);
+              transform var(--duration-fast) var(--ease-default);
 }
 
 /* Foco visible accesible — común a todas las variantes (WCAG 2.4.7) */

@@ -72,6 +72,15 @@ tokens:
   color: [--color-info-container, --color-on-info-container, --color-success-container, --color-warning-container, --color-error-container, --color-surface-container]
   radius: [--radius-lg]
   spacing: ["12px 16px padding", "12px column gap"]
+motion:
+  enter: "none — Alert is inline and persistent; it appears with the page, no entrance animation."
+  exit: "none — dismissal via .alert-close removes it immediately; no exit animation."
+  stateChange: ".alert-close fades opacity (.7→1) and shows a currentColor state-layer background on hover; focus ring on :focus-visible."
+  duration: "--duration-fast (close button opacity + background)."
+  easing: "--ease-default (close button transitions)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the close-button hover fade becomes instant. Nothing else moves."
+  constraints: "Inline/persistent — never animate it like an overlay; animate opacity/background only on the close affordance. Meaning must not rely on motion or color alone (pair with title/icon)."
+  relatedPatterns: [hover-press]
 source:
   css: css/components/alert.css
   classes: [alert, alert-info, alert-success, alert-warning, alert-error, alert-icon, alert-body, alert-title, alert-description, alert-actions, alert-close]

@@ -81,6 +81,16 @@ tokens:
   radius: [--radius-md]
   spacing: [--space-2]
 
+motion:
+  enter: "none — always present; the group is a flex layout wrapper only (gap between items)."
+  exit: "none."
+  stateChange: "The group declares no transition of its own. Each item is a .toggle, so all hover/pressed/focus motion is delegated to toggle.css (see toggle.md): hover state layer, aria-pressed background/color flip, focus ring."
+  duration: "none of its own — items use --duration-fast (toggle.css)."
+  easing: "none of its own — items use --ease-default (toggle.css)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css. No component-specific override; each Toggle collapses its own motion."
+  constraints: "Motion belongs to the individual Toggle items, not the group container; do not add group-level animation."
+  relatedPatterns: [state-layer]
+
 source:
   css: css/components/toggle-group.css
   classes: [toggle-group, toggle]

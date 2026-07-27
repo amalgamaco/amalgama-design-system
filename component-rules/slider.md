@@ -80,6 +80,16 @@ tokens:
   shadow: [--shadow-sm]
   motion: [--duration-fast, --ease-default]
 
+motion:
+  enter: "none — the control is always present"
+  exit: "none"
+  stateChange: "On hover (not disabled) and focus-visible the thumb grows a 4px --color-focus-ring halo — a box-shadow effect (transition: box-shadow). The track fill (.slider-range) and thumb position update via inline style/JS as the user drags and are NOT transitioned — they track the pointer 1:1."
+  duration: "--duration-fast"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the focus halo still appears, just without the fade."
+  constraints: "Only box-shadow transitions. Never add a transition to .slider-range width/height or the thumb position — the fill must follow the drag with zero lag. Effect-only, Standard easing; no overshoot."
+  relatedPatterns: ["motion.md → Hover & press micro-interactions (focus/hover shadow = effect, Standard easing)"]
+
 source:
   css: css/components/slider.css
   classes: [slider, slider-track, slider-range, slider-input, slider-vertical]

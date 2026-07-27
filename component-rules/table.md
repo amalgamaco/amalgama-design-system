@@ -83,6 +83,16 @@ tokens:
   spacing: ["10px 16px header padding", "12px 16px cell padding"]
   typography: [--font-size-overline, --font-size-body-md]
 
+motion:
+  enter: "none — the table is always present (rows are not animated in/out)"
+  exit: "none"
+  stateChange: "tbody rows recolor their background to --color-surface-variant on :hover (transition: background). A .selected row uses --color-surface-container-high (the selected state itself is not transitioned). A .clickable row's :focus-visible shows an outline + 3px --color-focus-ring box-shadow (not transitioned)."
+  duration: "--duration-fast (row-hover background)"
+  easing: "None specified — the row-hover transition declares only --duration-fast with no --ease-* token, so it falls back to the browser default ease. Per motion.md it should carry --ease-default."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the hover tint still applies, just without the fade."
+  constraints: "Only the row background is transitioned (effect, no layout). Don't animate row height or row insertion/removal — sort/filter/paginate should swap rows instantly (no reflow-driven motion)."
+  relatedPatterns: ["motion.md → Hover & press micro-interactions (row-hover background = effect, Standard easing)"]
+
 source:
   css: css/components/table.css
   classes: [table-scroll, data-table, clickable, selected, tfoot, caption]

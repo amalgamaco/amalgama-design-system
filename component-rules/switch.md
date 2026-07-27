@@ -80,6 +80,16 @@ tokens:
   radius: [--radius-full]
   motion: [--duration-fast, --duration-normal, --ease-expressive]
 
+motion:
+  enter: "none — the control is always present"
+  exit: "none"
+  stateChange: "Toggling slides the ::after thumb via transform: translateX (20px full / 16px .switch-sm) — a spatial move on --ease-expressive at --duration-normal. In parallel, the track background + border-color and the thumb background are color effects on --duration-fast/--ease-default. This is the per-property split: transform on Expressive, color on Standard."
+  duration: "--duration-normal (thumb travel) · --duration-fast (track + thumb color)"
+  easing: "--ease-expressive (thumb transform) · --ease-default (track/thumb color effects)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The thumb still moves to its on/off position, just without the slide."
+  constraints: "Animate transform + color only (thumb via translateX — no left/margin, no layout). Keep the split: the spatial thumb move is Expressive (approved overshoot), the color stays Standard — never put the color on an Expressive curve."
+  relatedPatterns: ["motion.md → The dual system: Standard vs. Expressive", "motion.md → Hover & press micro-interactions (per-property timing split)"]
+
 source:
   css: css/components/switch.css
   classes: [switch, switch-sm, switch-label]

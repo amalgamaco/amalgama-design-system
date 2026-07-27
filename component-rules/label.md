@@ -72,6 +72,16 @@ tokens:
   typography: [--font-body, --font-size-label, "font-weight 500"]
   spacing: ["8px gap"]
 
+motion:
+  enter: "none — always present"
+  exit: "none"
+  stateChange: "none — the label declares no transition. Its disabled dimming (opacity 0.5 + pointer-events:none, derived from the associated control via :has(+ :disabled) / :disabled + .label / data-disabled) applies instantly."
+  duration: "none (no transition declared)"
+  easing: "none (no transition declared)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The component defines no motion of its own, so there is nothing extra to reduce."
+  constraints: "A static text control — do not add entrance or hover motion. The disabled dimming is an immediate state change, not an animation; keep it instant."
+  relatedPatterns: ["motion.md → Motion has a purpose (a static control that gives no feedback/continuity/hierarchy needs no motion)"]
+
 source:
   css: css/components/label.css
   classes: [label, label-required]

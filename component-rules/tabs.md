@@ -83,6 +83,16 @@ tokens:
   radius: [--radius-md, --radius-sm]
   motion: [--duration-fast, --duration-normal, --ease-default, --ease-expressive]
 
+motion:
+  enter: "none — tab panels swap via display none/block (.tab-panel / .tab-panel.active); the incoming panel appears instantly with no entrance animation."
+  exit: "none — the outgoing panel is hidden instantly (display:none)."
+  stateChange: "The sliding .tab-indicator glides to the active tab, transitioning transform + width (var(--duration-normal) var(--ease-expressive)) — positioned per-tab by JS via offsetLeft/offsetWidth. Tab labels transition color on hover/active/selected (var(--duration-fast) var(--ease-default))."
+  duration: "--duration-normal (indicator slide), --duration-fast (label color)"
+  easing: "--ease-expressive (indicator — spatial move with overshoot), --ease-default (label color effect)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The indicator jumps to the active tab instantly; selection stays clear via aria-selected + the active label weight/color."
+  constraints: "Indicator animates transform + width — width is a layout property but scoped to a 2px bar, an accepted exception. Panels are display-toggled (no fade), so there is no entrance/exit motion to reduce. The pill (.tabs-pill) and vertical (.tabs-vertical) variants hide the sliding indicator and use a static active surface/border instead. Keep the indicator on Expressive (spatial) and the label color on Standard (effect)."
+  relatedPatterns: ["Hierarchy — the moving indicator directs attention to the active view (motion.md)", "Standard-vs-Expressive split (spatial indicator vs. effect label color)"]
+
 source:
   css: css/components/tabs.css
   classes: [tabs, tab, tab-indicator, tab-panel, tabs-pill, tabs-vertical]

@@ -78,6 +78,15 @@ tokens:
   spacing: [--sidebar-width]
   motion: [--duration-medium, --ease-default]
   shadow: [--shadow-lg]
+motion:
+  enter: "Mobile modal drawer (<768px): the sidebar slides in from the left edge translateX(-100%→0) when .app.nav-open is set; the scrim fades in (opacity 0→1). ≥768px it is persistent/fixed and does not animate in."
+  exit: "Slide-out translateX(0→-100%) + scrim fade-out when .nav-open is removed (symmetric show/hide)."
+  stateChange: "nav-item hover → nav-hover background + nav-hover-content color; .active → nav-selected background + selected-content color; sidebar-search hover → border-color."
+  duration: "--duration-medium (drawer slide), --duration-normal (scrim opacity), --duration-fast (nav-item hover, sidebar-search hover)"
+  easing: "--ease-default (drawer slide, scrim fade, nav-item/search hover)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). PLUS layout.css ships its own @media (prefers-reduced-motion: reduce) block setting `.sidebar` and `.sidebar-scrim` transition:none — the drawer shows/hides instantly with no slide and no scrim fade."
+  constraints: "Animate transform/opacity only (translateX + scrim opacity). Never animate width/margin/left — the ≥768px→<768px switch is a media-query layout change, not an animated one."
+  relatedPatterns: [edge-anchored-slide, overlay-fade, state-layer]
 source:
   css: css/layout.css
   classes: [sidebar, "app.nav-open", sidebar-scrim, shell-menu-btn, nav-item, nav-section-label]

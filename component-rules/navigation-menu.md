@@ -75,6 +75,15 @@ tokens:
   color: [--color-surface-container, --color-on-surface, --color-primary, --color-outline-variant]
   radius: [--radius-md]
   motion: [--duration-normal, --ease-default]
+motion:
+  enter: "Viewport panel: navMenuIn keyframe — fade + translateY(-4px→0) as the mega-menu opens; a small hover-intent delay precedes open/close (JS), like a real navbar."
+  exit: "none — the viewport unmounts on close (no data-[state=closed] exit; and no viewport size/height easing between panels of different heights — accepted simplification vs. Radix)."
+  stateChange: "Trigger hover / [data-state=open] → surface-variant background; chevron icon rotate 180deg on open; sliding underline indicator tracks the active trigger via transform + width (same technique as Tabs); link hover → surface-variant, active link → secondary-container."
+  duration: "--duration-normal (panel entrance, indicator transform/width), --duration-fast (chevron rotate, indicator opacity)"
+  easing: "--ease-default (panel entrance, chevron, indicator opacity); --ease-expressive (indicator transform/width, with an ease-out fallback)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Panel appears instantly, the underline jumps to the active trigger, the chevron flips without a tween."
+  constraints: "Animate transform/opacity only (panel translateY, indicator transform/width); no height easing on the viewport (accepted simplification). Never animate the panel width/height — layout thrash."
+  relatedPatterns: [panel-entrance, sliding-indicator, state-layer]
 source:
   css: css/components/navigation-menu.css
   classes: [nav-menu, nav-menu-list, nav-menu-trigger, nav-menu-trigger-icon, nav-menu-indicator, nav-menu-viewport, nav-menu-viewport-wrap, nav-menu-content, nav-menu-link, nav-menu-link-title, nav-menu-link-desc]

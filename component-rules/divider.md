@@ -64,6 +64,16 @@ tokens:
   color: [--border]
   spacing: [--space-2]
 
+motion:
+  enter: "none — a static separator line."
+  exit: "none"
+  stateChange: "none — divider.css declares no transitions, states, or animations."
+  duration: "none"
+  easing: "none"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — a divider never moves."
+  constraints: "Never animate a divider; it is a purely static structural line. Its job is separation, which motion cannot improve."
+  relatedPatterns: ["No motion — static structural element"]
+
 source:
   css: css/components/divider.css
   classes: [divider, divider-inset, divider-vertical]

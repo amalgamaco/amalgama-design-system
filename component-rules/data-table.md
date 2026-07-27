@@ -85,6 +85,16 @@ tokens:
   spacing: ["12px toolbar/footer gaps", "6px 8px sort-button padding"]
   typography: [--font-size-caption, --font-size-body-sm]
 
+motion:
+  enter: "none — the table renders in place; sorting, filtering and pagination re-slice rows instantly."
+  exit: "none — filtered-out or off-page rows are hidden via the [hidden] attribute, no exit animation."
+  stateChange: "All instant — no CSS transition is declared anywhere in data-table.css. The sort caret rotates 180deg (transform, descending) and gains full opacity when active; the sort button and rows change background/visibility with no timed transition; column-visibility toggles set display:none."
+  duration: "none — data-table.css declares no motion tokens"
+  easing: "none"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — nothing here animates in the first place, so state changes already read as instant."
+  constraints: "Sort/filter/paginate are instant state swaps by design — don't add row entrance/exit motion (a table reflowing on every sort is layout thrash). If feedback is ever wanted, animate opacity only on row show/hide, keep the caret a transform, and pull real --duration-*/--ease-* tokens rather than hardcoding."
+  relatedPatterns: ["Visibility of system status — the caret/aria-sort communicate sort direction without motion", "Feedback (row hover) if ever added, as an effect on Standard easing"]
+
 source:
   css: css/components/data-table.css
   classes: [data-table-sort-btn, data-table-sort-icon, data-table-toolbar, data-table-filter, data-table-select, data-table-footer, data-table-count, data-table-empty]

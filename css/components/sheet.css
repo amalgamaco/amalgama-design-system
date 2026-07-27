@@ -41,7 +41,7 @@
   background: var(--color-scrim);
   backdrop-filter: blur(4px);
   z-index: 100;
-  animation: fadeIn .15s ease;
+  animation: fadeIn var(--duration-fast) var(--ease-enter);
 }
 
 .sheet-content {

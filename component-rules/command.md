@@ -76,6 +76,15 @@ tokens:
   color: [--color-surface-container, --color-on-surface, --color-surface-variant]
   radius: [--radius-md]
   motion: [--duration-normal, --ease-default]
+motion:
+  enter: "Base Command: none (inline list, no entrance). Command Dialog (⌘K): scrim fadeIn + panel slideInUp (fade + upward translate) on open."
+  exit: "none — closing toggles [hidden]/display:none (no data-[state=closed] exit animation)."
+  stateChange: "command-item[data-active=true] → surface-variant highlight as Arrow keys move through results (applied instantly, no transition declared); input focus is native; filtered items toggle [hidden]."
+  duration: "HARDCODED .15s (scrim fadeIn) and .2s (panel slideInUp) — NOT --duration-* tokens (should map to --duration-normal / --duration-fast)."
+  easing: "HARDCODED `ease` on both dialog animations — NOT an --ease-* token (should map to --ease-default / --ease-enter)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The ⌘K dialog appears without fade/slide; the active-item highlight is already instant."
+  constraints: "Animate transform/opacity only (slideInUp translate + scrim opacity). Keep the filtered-list re-render cheap; never animate the list height on filter."
+  relatedPatterns: [overlay-fade, panel-entrance, state-layer]
 source:
   css: css/components/command.css
   classes: [command, command-input-wrapper, command-input-icon, command-input, command-list, command-empty, command-group, command-group-heading, command-item, command-separator, command-shortcut, command-dialog]

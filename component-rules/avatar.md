@@ -82,6 +82,16 @@ tokens:
   radius: [--radius-full]
   typography: [--font-body]
 
+motion:
+  enter: "none — the avatar is a static identity element."
+  exit: "none"
+  stateChange: "none — avatar.css declares no transitions, hover states, or animations. Presence is shown with a static color dot (.avatar-badge / -online/-busy/-away/-offline) and stacking uses static negative margins + a surface ring."
+  duration: "none"
+  easing: "none"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — the avatar and its presence badge are already fully static."
+  constraints: "Do not animate an avatar — it is an identity marker, not a control. If a presence badge needs attention, convey it with color, never a pulsing/blinking loop (would risk the WCAG 2.3.1 >3 flashes/second threshold)."
+  relatedPatterns: ["No motion — static identity element (motion.md: animate only for feedback/continuity/hierarchy)"]
+
 source:
   css: css/components/avatar.css
   classes: [avatar, avatar-sm, avatar-md, avatar-lg, avatar-xl, avatar-image, avatar-fallback, avatar-badge, avatar-badge-online, avatar-badge-busy, avatar-badge-away, avatar-badge-offline, avatar-group, avatar-group-count]

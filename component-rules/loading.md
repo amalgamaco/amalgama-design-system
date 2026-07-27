@@ -71,6 +71,15 @@ tokens:
   color: [--color-primary, --color-surface-variant, --color-outline-variant, --color-on-primary]
   radius: [--radius-full]
   motion: ["1.4s indeterminate slide", "0.7s spinner rotation", "prefers-reduced-motion aware"]
+motion:
+  enter: "none — indicators appear in place."
+  exit: "none."
+  stateChange: "Determinate progress animates its fill width (linear bar) / stroke-dashoffset (circular). Indeterminate + spinner are continuous loops: bar slide (@keyframes progress-indeterminate-slide), circular spin+rotate, and .spinner rotate (@keyframes spinner-rotate)."
+  duration: "--duration-fast (determinate width / stroke-dashoffset). Loops hardcoded: 1.4s bar slide, 1.2s circular spin, 1.6s circular rotate, .7s spinner (1.6s under its reduced-motion rule). NOT tokens."
+  easing: "--ease-default (determinate transitions, bar slide); linear for circular spin/rotate and .spinner."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); every loop (indeterminate bar, circular, spinner) becomes static. The spinner's own 1.6s @media rule lacks !important, so it too is overridden to static; role/aria-label still convey progress."
+  constraints: "Essential status motion — keep loops cheap and on linear easing; animate transform/opacity/background-position, never layout. Use a spinner only if an action exceeds ~300ms."
+  relatedPatterns: [loading]
 source:
   css: [css/components/progress.css, css/components/spinner.css]
   classes: [progress, progress-fill, progress-indeterminate, progress-circular, progress-circular-track, progress-circular-fill, progress-circular-indeterminate, spinner, spinner-sm, spinner-lg, spinner-on-primary]

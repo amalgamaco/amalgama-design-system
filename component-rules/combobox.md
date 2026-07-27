@@ -78,6 +78,15 @@ tokens:
   radius: [--radius-md]
   shadow: [--shadow-md]
   spacing: [--space-2, --space-4]
+motion:
+  enter: "none — the panel is shown/hidden via a [hidden]/display toggle with no entrance animation (unlike the ⌘K Command Dialog, which slides up)."
+  exit: "none — panel hidden via [hidden]."
+  stateChange: "Trigger inherits btn-tertiary hover/focus transitions; combobox-check opacity 0→1 marks the selected option (instant, no transition declared); chevron is static."
+  duration: "none of its own (trigger uses button.css --duration-fast); the panel has no timed animation."
+  easing: "none of its own (trigger inherits button.css --ease-default)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific motion to neutralize — the panel already appears instantly."
+  constraints: "Panel open/close is a display toggle. If an entrance is ever added, use transform/opacity + tokens (mirror the Command Dialog slideInUp) — never animate width/height."
+  relatedPatterns: [state-layer]
 source:
   css: css/components/combobox.css
   classes: [combobox, combobox-trigger, combobox-chevron, combobox-panel, combobox-check, command]

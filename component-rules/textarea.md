@@ -78,6 +78,16 @@ tokens:
   typography: [--font-size-body-md, --font-size-caption, --font-size-badge]
   motion: [--duration-fast]
 
+motion:
+  enter: "none — always present (static form field)."
+  exit: "none."
+  stateChange: "Shares the form field transition (border-color + box-shadow). Focus-visible: border→--interactive + 3px --color-focus-ring, label recolors via :focus-within. Error (is-error / aria-invalid): border→--color-error + --color-error-ring. Auto-grow via field-sizing: content changes height with typed content but is intentionally NOT transitioned (animating height would thrash layout)."
+  duration: "--duration-fast (border/box-shadow)"
+  easing: "none specified — the shared field transition lists durations with no --ease-* token, falling back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override."
+  constraints: "Only animate border-color + box-shadow (focus/error effects). Never transition the field-sizing height change or the user-driven resize handle — height/layout animation is a layout-thrash source."
+  relatedPatterns: [state-layer]
+
 source:
   css: css/components/form.css
   classes: [field-group, field-label, field-textarea, field-supporting, field-hint, field-error-msg, field-char-count, is-over, is-error]

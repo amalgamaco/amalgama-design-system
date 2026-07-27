@@ -80,6 +80,16 @@ tokens:
   typography: [--font-size-heading-xs, --font-mono, --font-weight-medium]
   motion: [--duration-fast, --ease-default]
 
+motion:
+  enter: "none — the boxes are always present (static; JS auto-advance/backspace/paste move the caret, not animation)"
+  exit: "none"
+  stateChange: "Focus moves the border to --interactive and adds a 3px --color-focus-ring box-shadow; hover (when not focused/disabled) darkens the border to --color-outline; error/invalid swaps to --color-error + --color-error-ring. Only border-color and box-shadow transition."
+  duration: "--duration-fast"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping or essential motion to preserve — the focus ring still appears, just without the fade."
+  constraints: "Transition border-color/box-shadow only (cheap effects, no layout). Auto-advance, backspace-back and paste-splitting are instant caret/value changes — never animate them. Don't animate box width or the group gap."
+  relatedPatterns: ["motion.md → Hover & press micro-interactions (state-layer/border effects on --ease-default)"]
+
 source:
   css: css/components/input-otp.css
   classes: [otp-group, otp-slot, otp-separator, is-disabled, is-error]

@@ -69,6 +69,15 @@ tokens:
   typography: [--font-heading, --font-size-heading-md, --font-size-body-lg]
   spacing: ["48px 24px container padding", "400px max description width"]
 
+motion:
+  enter: "none — static placeholder; renders with no entrance animation."
+  exit: "none."
+  stateChange: "none in this component's CSS — the optional CTA carries its own Button motion (hover lift/press)."
+  duration: "none (no transitions or animations defined)."
+  easing: "none."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); nothing in Empty State moves regardless. Any motion comes from the embedded Button/CTA."
+  constraints: "Keep it static — no decorative animation on the icon/illustration. Any motion belongs to the CTA (Button) it contains."
+  relatedPatterns: []
 source:
   css: css/components/empty-state.css
   classes: [empty-state, empty-state-icon, empty-state-title, empty-state-desc]

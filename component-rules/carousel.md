@@ -82,6 +82,15 @@ tokens:
   radius: [--radius-md, --radius-full]
   spacing: ["16px inter-item gap"]
 
+motion:
+  enter: "none — items are present in the scroll track from the start (no entrance animation)."
+  exit: "none."
+  stateChange: "Nav button background tint on hover (.carousel-btn:hover → --color-surface-variant); prev/next scroll the track via native scroll-behavior: smooth (scrollBy)."
+  duration: "--duration-fast (nav button background); native smooth scroll for the track (no token)."
+  easing: "--ease-default (nav button background); browser default for smooth scroll."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the same rule sets scroll-behavior: auto, so prev/next jump instantly instead of smooth-scrolling. If autoplay is ever added it must pause and honor reduced motion."
+  constraints: "No autoplay, no infinite loop, no drag physics; animate transform/opacity only; never animate the track's width/height — rely on native scroll. Controls disable at the ends rather than looping."
+  relatedPatterns: [hover-press]
 source:
   css: css/components/carousel.css
   classes: [carousel, carousel-content, carousel-item, carousel-item-half, carousel-vertical, carousel-btn, carousel-btn-prev, carousel-btn-next]

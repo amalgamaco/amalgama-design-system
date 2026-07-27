@@ -59,7 +59,7 @@
   border-top: 1px solid var(--border);
 }
 .data-table tbody tr {
-  transition: background var(--duration-fast);
+  transition: background var(--duration-fast) var(--ease-default);
 }
 .data-table tbody tr:hover {
   background: var(--color-surface-variant);

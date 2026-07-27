@@ -66,6 +66,15 @@ relationships:
 tokens:
   color: ["semantic tint tokens on .nav-card-visual (nv-*)"]
   note: "Docs-chrome styles inline in index.html — no css/components token contract to import."
+motion:
+  enter: "none — nav-cards are static grid tiles (docs-internal; styles inline in index.html)."
+  exit: "none."
+  stateChange: "Card hover → lift transform translateY(-2px) + soft box-shadow; nested nav-card-arrow-btn hover → primary-tinted background + primary color."
+  duration: "HARDCODED .15s (card transform + box-shadow) and .12s (arrow-btn background + color) — NOT --duration-* tokens (would map to --duration-normal / --duration-fast)."
+  easing: "HARDCODED `ease` on the card transition; the arrow-btn transition has no easing (browser default) — neither is an --ease-* token."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Card lift and arrow tint apply instantly. (This is docs chrome, not a shipped DS component.)"
+  constraints: "Animate transform/opacity/shadow only (translateY lift + box-shadow). The -2px lift is a docs-chrome affordance — a shipped card should follow the approved -1px hover-lift. Don't animate layout."
+  relatedPatterns: [hover-lift, state-layer]
 source:
   css: "(docs-internal — no css/components file; styles inline in index.html)"
   classes: [nav-card, "nav-card--compact", nav-card-header, nav-card-tag, nav-card-arrow-btn, nav-card-content, nav-card-title, nav-card-desc, nav-card-visual, nav-card-grid]

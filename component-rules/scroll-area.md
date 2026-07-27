@@ -67,6 +67,16 @@ tokens:
   color: [--color-outline]
   radius: [--radius-full]
 
+motion:
+  enter: "none — a static scroll container; content scrolls via native browser behavior."
+  exit: "none"
+  stateChange: "The WebKit scrollbar thumb changes color on hover (from color-mix outline 60% to solid --color-outline) with no declared transition (instant). Scrolling itself is native and not driven by any CSS animation."
+  duration: "none — scroll-area.css declares no motion tokens"
+  easing: "none"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Native scrolling continues to honor the user's OS/browser scroll settings; the thumb color change is already instant."
+  constraints: "Don't add scroll-behavior:smooth or a custom scroll-animation engine — it would fight native scrolling and the reduced-motion preference. Thumb feedback stays a color change only; never animate the scrollbar size/layout."
+  relatedPatterns: ["No entrance/exit motion — native scroll respects OS reduced-motion settings", "Feedback — thumb color on hover (effect)"]
+
 source:
   css: css/components/scroll-area.css
   classes: [scroll-area]

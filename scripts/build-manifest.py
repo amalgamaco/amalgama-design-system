@@ -35,7 +35,7 @@ for f in sorted(files):
         "sizes": [s.get("name") if isinstance(s, dict) else s for s in (d.get("sizes") or [])],
         "states": list((d.get("states") or {}).keys()) if isinstance(d.get("states"), dict) else (d.get("states") or []),
         "tokens": d.get("tokens", {}), "relationships": d.get("relationships", {}),
-        "source": d.get("source", {}), "rules_file": rel,
+        "motion": d.get("motion", {}), "source": d.get("source", {}), "rules_file": rel,
     }
     missing = [k for k in ("id", "display_name", "category", "status", "summary") if not entry.get(k)]
     if missing:

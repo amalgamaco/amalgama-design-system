@@ -70,7 +70,7 @@
   color: var(--text-primary);
   background: var(--card-bg);
   outline: none;
-  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+  transition: border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
   appearance: none;
 }
 .field-input:focus-visible {
@@ -136,7 +136,7 @@ input:disabled, select:disabled, textarea:disabled {
   outline: none;
   appearance: none;
   cursor: pointer;
-  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+  transition: border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
 }
 .select-wrapper select:focus-visible {
   border-color: var(--interactive);
@@ -174,7 +174,7 @@ input:disabled, select:disabled, textarea:disabled {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--card-bg);
-  transition: border-color var(--duration-fast);
+  transition: border-color var(--duration-fast) var(--ease-default);
 }
 .number-input-wrapper:focus-within { border-color: var(--interactive); }
 .number-value { font-size: var(--font-size-body-md); color: var(--text-primary); }
@@ -186,7 +186,7 @@ input:disabled, select:disabled, textarea:disabled {
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; color: var(--text-secondary);
-  transition: background var(--duration-fast);
+  transition: background var(--duration-fast) var(--ease-default);
   font-family: inherit;
 }
 .number-btn:hover { background: var(--color-surface-container-highest); color: var(--text-primary); }
@@ -202,7 +202,7 @@ input:disabled, select:disabled, textarea:disabled {
   color: var(--text-muted);
   background: var(--card-bg);
   outline: none;
-  transition: border-color var(--duration-fast);
+  transition: border-color var(--duration-fast) var(--ease-default);
   cursor: pointer;
 }
 .date-input-wrapper input:focus { border-color: var(--interactive); }

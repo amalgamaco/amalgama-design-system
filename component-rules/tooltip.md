@@ -73,6 +73,15 @@ tokens:
   color: [--color-inverse-surface, --color-inverse-on-surface, --color-surface-container, --color-on-surface]
   radius: [--radius-sm, --radius-md]
   motion: [--duration-fast, "0.4s hover-intent delay"]
+motion:
+  enter: "Tooltip fades in and slides toward the trigger (opacity 0→1 + a 4px directional translate settling to 0), gated by a .4s hover-intent delay. Rich Tooltip fades + scales in (scale .96→1) on .open (click/focus-driven)."
+  exit: "Tooltip fades/slides out instantly on mouse-leave/blur (transition-delay resets to 0s — hides with no delay). Rich Tooltip fades + scales back to .96 when .open is removed."
+  stateChange: "Opacity + transform (translate/scale) driven by :hover/:focus-within (Tooltip) or the .open class (Rich Tooltip); rich-tooltip-close shows a hover tint."
+  duration: "--duration-fast (fade/slide/scale); hardcoded .4s transition-delay for hover-intent (show only)."
+  easing: "--ease-default (all transitions)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the fade/slide/scale collapse to an instant show/hide and the hover-intent delay is zeroed."
+  constraints: "CSS-only positioning — no viewport-edge collision flip (accepted simplification); animate transform/opacity only. Tooltip is pointer-events:none; Rich Tooltip is dismissible and may receive the pointer."
+  relatedPatterns: [tooltip, overlay-enter-exit]
 source:
   css: [css/components/tooltip.css, css/components/rich-tooltip.css]
   classes: [tooltip-wrap, tooltip-content, tooltip-top, tooltip-bottom, tooltip-left, tooltip-right, rich-tooltip-wrap, rich-tooltip-content, rich-tooltip-row, rich-tooltip-body, rich-tooltip-title, rich-tooltip-subtitle, rich-tooltip-close, rich-tooltip-actions]

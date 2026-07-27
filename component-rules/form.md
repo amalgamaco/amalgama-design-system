@@ -83,6 +83,16 @@ tokens:
   spacing: ["24px 32px card padding", "20px field gap", "16px grid gap"]
   typography: [--font-size-label, --font-size-body-md, --font-size-caption]
 
+motion:
+  enter: "none — fields are always present (no CSS entrance)"
+  exit: "none"
+  stateChange: "Inputs/selects: focus-visible moves the border to --interactive and adds a 3px --color-focus-ring box-shadow (border-color + box-shadow transition); hover (not focused/disabled) darkens the border to --color-outline; is-error / aria-invalid swaps to --color-error + --color-error-ring. The .field-label recolors to --interactive on :focus-within (or --color-error in error). number-input-wrapper/date-input recolor border on focus-within/focus; number-btn recolors background on hover."
+  duration: "--duration-fast (every field transition)"
+  easing: "None specified — the field transitions declare only --duration-fast with no --ease-* token, so they fall back to the browser default ease. Per motion.md these effect transitions should carry --ease-default."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No essential/looping motion; the focus border/ring still appears, just without the fade."
+  constraints: "Transition border-color/box-shadow/background only (effects, no layout). Don't animate field width/height or the caret; validation state flips are effect-only color changes, never a spatial move."
+  relatedPatterns: ["motion.md → Hover & press micro-interactions (state-layer/border color = effect, Standard easing)"]
+
 source:
   css: css/components/form.css
   classes: [form-card, form-card-title, form-card-desc, fields-grid, field-group, field-label, field-required, field-input, field-supporting, field-hint, field-error-msg, is-error]

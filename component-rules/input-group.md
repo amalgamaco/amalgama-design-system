@@ -80,6 +80,16 @@ tokens:
   typography: [--font-size-body-md, --font-size-body-sm]
   motion: [--duration-fast]
 
+motion:
+  enter: "none — always present (static composite field)."
+  exit: "none."
+  stateChange: "Focus and error live on the .input-group container, not the inner control. :focus-within: border→--interactive + 3px --color-focus-ring box-shadow. Error (aria-invalid / is-error): border→--color-error, focus→--color-error-ring. Disabled: opacity .5 (no transition). The inner control is borderless/transparent and inherits the container's focus visuals."
+  duration: "--duration-fast"
+  easing: "none specified — the container transition lists border-color/box-shadow with only a duration and no --ease-* token, falling back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override."
+  constraints: "Only animate the container's border-color + box-shadow (focus ring) effect; never animate its width/height. Addons and the inner control carry no motion of their own."
+  relatedPatterns: [state-layer]
+
 source:
   css: css/components/input-group.css
   classes: [input-group, input-group-control, input-group-addon, input-group-addon-end, input-group-text, input-group-block, is-error, is-disabled]

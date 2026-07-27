@@ -90,6 +90,16 @@ tokens:
   spacing: [--space-2]
   typography: [--font-size-body-md]
 
+motion:
+  enter: "none — the control is always present"
+  exit: "none"
+  stateChange: "On :checked the ring border recolors to --color-primary (transition: border-color). Hover darkens the border to --color-on-surface. The ::after inner dot has NO transition — it appears instantly. .radio-card transitions border-color + background-color on :has(input:checked)/hover."
+  duration: "--duration-fast"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the selected border still shows, just without the fade."
+  constraints: "Animate border-color/background-color only (effects, no layout). The inner dot stays instant — don't add a scale/fade to ::after. Never overshoot a color effect (Standard easing only)."
+  relatedPatterns: ["motion.md → Hover & press micro-interactions (state-layer color change = effect, Standard easing)"]
+
 source:
   css: css/components/radio-group.css
   classes: [radio-group, radio, radio-label, radio-card, radio-card-content, radio-card-title, radio-card-desc]

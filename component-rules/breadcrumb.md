@@ -80,6 +80,16 @@ tokens:
   spacing: ["6px gap"]
   typography: [--font-size-body-sm]
 
+motion:
+  enter: "none — the trail renders statically with the page."
+  exit: "none"
+  stateChange: "Links transition text color on hover (transition: color .15s var(--ease-default, ease)) and add an underline. The collapse ellipsis, when a <button>, changes background on hover with no declared transition (instant)."
+  duration: "hardcoded .15s on .breadcrumb-link — NOT a --duration-* token; should be --duration-fast"
+  easing: "--ease-default (with an `ease` literal fallback)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The hover color/underline applies instantly; navigation remains fully usable."
+  constraints: "Only text color animates (an effect → Standard easing) — correct; the underline is instant. No layout animation. Fix the hardcoded .15s to --duration-fast to satisfy the no-raw-ms rule (GOVERNANCE §13.3)."
+  relatedPatterns: ["Feedback — hover color/underline signals a clickable ancestor", "Hover micro-interaction (color change is an effect on Standard easing)"]
+
 source:
   css: css/components/breadcrumb.css
   classes: [breadcrumb, breadcrumb-list, breadcrumb-item, breadcrumb-link, breadcrumb-page, breadcrumb-separator, breadcrumb-ellipsis]

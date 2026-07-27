@@ -67,6 +67,15 @@ tokens:
   color: [--color-surface-container, --color-outline-variant, --color-on-surface, --color-focus]
   radius: [--radius-md, --radius-sm]
   motion: [--duration-normal, --ease-default]
+motion:
+  enter: "Each menu panel scales + fades in on open, reusing Dropdown Menu's @keyframes dropdownIn (opacity 0→1, scale .96→1). The menubar row and its triggers have no entrance animation."
+  exit: "none defined in CSS — panels are removed instantly on close (known buildless gap vs. the Radix open/closed pair)."
+  stateChange: "Trigger background changes on :hover / [data-state=\"open\"] to --color-surface-variant — no transition declared, so it is instant; focus ring on :focus-visible. Hovering another trigger while one menu is open switches the open panel."
+  duration: "--duration-normal (panel enter, via dropdown-menu.css); trigger background change is instant (no transition)."
+  easing: "--ease-default (panel enter)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the panel open scale/fade becomes instant. Trigger hover was already instant."
+  constraints: "Reuses the Dropdown Menu panel motion — don't fork it; animate transform/opacity only. Menubar triggers switch on hover once a menu is open (desktop convention)."
+  relatedPatterns: [overlay-enter-exit]
 source:
   css: css/components/menubar.css
   classes: [menubar, menubar-trigger, dropdown-content, dropdown-item, dropdown-separator]

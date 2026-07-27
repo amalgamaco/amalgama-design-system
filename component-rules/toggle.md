@@ -86,6 +86,16 @@ tokens:
   spacing: [--space-2]
   motion: [--duration-fast, --ease-default]
 
+motion:
+  enter: "none — always present (static two-state control)."
+  exit: "none."
+  stateChange: "Hover: state layer color-mix over --color-on-surface 8% (unselected) or over the secondary-container when pressed. Pressed on (aria-pressed=true): background→--color-secondary-container, color→--color-on-secondary-container (transitions on background-color + color). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring. Disabled: opacity .38 (no transition)."
+  duration: "--duration-fast"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override."
+  constraints: "Only animate the background-color + color state change; no transform lift. The transition list is scoped to background-color/color so the aria-pressed flip reads as a tint change, not a move."
+  relatedPatterns: [state-layer]
+
 source:
   css: css/components/toggle.css
   classes: [toggle, toggle-outline, toggle-sm, toggle-lg]

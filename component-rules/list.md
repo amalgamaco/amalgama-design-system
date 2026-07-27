@@ -83,6 +83,16 @@ tokens:
   spacing: ["12px 16px item padding", "56px min-height"]
   typography: [--font-size-body-md, --font-size-body-sm]
 
+motion:
+  enter: "none — list items render statically; there is no per-item entrance animation."
+  exit: "none"
+  stateChange: "Instant — no CSS transition is declared in list.css. Interactive rows (button.list-item) swap background on hover (--color-surface-variant) and on selection (--color-secondary-container / on-secondary-container); disabled rows drop to opacity .5. All applied with no timed transition."
+  duration: "none — list.css declares no motion tokens"
+  easing: "none"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — the hover/selection background changes are already instant."
+  constraints: "Row feedback is background-color only; if a hover/selection transition is ever added, keep it background-color on Standard easing and pull a --duration-* token. Never animate item height or reflow the list (layout thrash). Selection shares the menu/nav secondary-container language — style, not motion."
+  relatedPatterns: ["Feedback — hover/selection background confirms which row is active", "Shared selection language with Menu/Nav (color, not motion)"]
+
 source:
   css: css/components/list.css
   classes: [list, list-item, list-item-text, list-item-headline, list-item-supporting, list-item-leading, list-item-trailing, list-item-divider, list--divided]

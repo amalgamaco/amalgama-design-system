@@ -87,6 +87,16 @@ tokens:
   spacing: [--space-2, --space-4]
   typography: [--font-size-body-lg]
 
+motion:
+  enter: "none — always present (static filter/input element)."
+  exit: "none (an input chip being removed is a DOM removal, not an animated exit)."
+  stateChange: "Hover/active: state layer via color-mix over the base — unselected on-surface 8%/12%, selected on-secondary-container 8%/12% over the container, elevated the same mixed over surface-container-low. Selected: fill flips to --color-secondary-container (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring. Dragged: box-shadow lifts to --shadow-md."
+  duration: "--duration-fast"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific override."
+  constraints: "Only animate compositor-friendly effects (background/color state layer, box-shadow); no transform lift. Do not animate the height/padding-asymmetry change when an icon/remove slot appears."
+  relatedPatterns: [state-layer]
+
 source:
   css: css/components/chip.css
   classes: [chip, chip-selected, chip-elevated, chip-icon, chip-remove, chip-set]

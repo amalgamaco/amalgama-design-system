@@ -85,6 +85,16 @@ tokens:
   typography: [--font-size-body-md, --font-size-label, --font-size-caption]
   motion: [--duration-fast]
 
+motion:
+  enter: "none — always present (static form field)."
+  exit: "none."
+  stateChange: "Hover: border-color→--color-outline (more prominent than the resting --color-outline-variant). Focus-visible: border→--interactive + 3px --color-focus-ring box-shadow, and the field label recolors to --interactive via :focus-within. Error (is-error / aria-invalid): border→--color-error, focus ring→--color-error-ring. All of these transition on border-color + box-shadow."
+  duration: "--duration-fast"
+  easing: "none specified — the transition lists only durations (border-color var(--duration-fast), box-shadow var(--duration-fast)) with no --ease-* token, so it falls back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override."
+  constraints: "Only animate the border-color + box-shadow (focus ring) effects; never animate the field's width/height. The focus ring is an effect → Standard easing (once tokenized), never a spatial overshoot."
+  relatedPatterns: [state-layer]
+
 source:
   css: css/components/form.css
   classes: [field-group, field-label, field-required, field-input, field-input-wrapper, field-leading-icon, field-trailing-icon, has-leading, has-trailing, field-supporting, field-hint, field-error-msg, field-char-count, is-error]

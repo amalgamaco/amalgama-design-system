@@ -79,6 +79,15 @@ tokens:
   radius: [--radius-md, --radius-full]
   spacing: [--sidebar-width]
   motion: [--duration-fast]
+motion:
+  enter: "none — the sidebar nav is persistent/fixed on ≥768px; it only ever slides in as the mobile Nav Drawer (see nav-drawer)."
+  exit: "none (persistent)."
+  stateChange: "nav-item hover → nav-hover background + nav-hover-content color; .active → nav-selected background + selected-content color (including the active icon color); nav-badge/chevron are static; sidebar-search hover → border-color."
+  duration: "--duration-fast (nav-item background + color, sidebar-search border)"
+  easing: "browser default `ease` — nav-item declares `transition: background var(--duration-fast), color var(--duration-fast)` with NO explicit --ease-* token (the tint is a Standard effect; adding --ease-default would be the token-correct form)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover/active tints apply instantly. (The reduced-motion @media in layout.css targets the .sidebar/.sidebar-scrim slide, not these nav-item tints.)"
+  constraints: "Animate color/background only (state-layer effect) — no transform/lift on nav items. Don't animate layout."
+  relatedPatterns: [state-layer]
 source:
   css: css/layout.css
   classes: [sidebar, sidebar-nav, nav-item, nav-section-label, nav-sub-items, nav-badge, sidebar-footer]

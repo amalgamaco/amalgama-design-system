@@ -1,6 +1,5 @@
 {
-  "$schema": "./manifest.schema (see README.md for the per-file frontmatter schema)",
-  "generator": "scripts/build-manifest.mjs / regenerate from component-rules/*.md frontmatter",
+  "note": "Machine-readable registry. Source of truth = component-rules/<id>.md frontmatter (schema in component-rules/README.md). Regenerate with scripts/build-manifest.py.",
   "count": 61,
   "components": [
     {
@@ -75,6 +74,19 @@
             "component": "tabs",
             "why": "Tabs switch views; Accordion stacks disclosable content"
           }
+        ]
+      },
+      "motion": {
+        "enter": "Expand — panel animates grid-template-rows 0fr → 1fr (data-state=open), revealing content in flow; the chevron rotates 180deg.",
+        "exit": "Collapse — the same grid-template-rows transition reversed (1fr → 0fr); chevron rotates back to 0.",
+        "stateChange": "Content height via grid-template-rows (var(--duration-normal) var(--ease-default)); chevron rotate 180deg (transform, var(--duration-normal) var(--ease-expressive)); trigger label color on hover/focus (var(--duration-fast) var(--ease-default)).",
+        "duration": "--duration-normal (expand/collapse + chevron), --duration-fast (trigger color)",
+        "easing": "--ease-default (expand/collapse + trigger color), --ease-expressive (chevron rotation — the spatial move)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The panel snaps open/closed and the chevron flips instantly; disclosure still works because state is conveyed by aria-expanded + the rotated chevron, not motion alone.",
+        "constraints": "The grid-template-rows 0fr→1fr technique is the DS's sanctioned CSS-only height animation (no JS scrollHeight measurement) — the one place a size-like property is animated. Bottom spacing rides a zero-height ::after spacer, never animated padding. Keep the chevron a transform (Expressive) and the label color an effect (Standard) — don't cross the curves.",
+        "relatedPatterns": [
+          "Progressive disclosure (motion.md: motion serves feedback/continuity)",
+          "Standard-vs-Expressive split (effect color on --ease-default, spatial chevron on --ease-expressive)"
         ]
       },
       "source": {
@@ -165,6 +177,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — Alert is inline and persistent; it appears with the page, no entrance animation.",
+        "exit": "none — dismissal via .alert-close removes it immediately; no exit animation.",
+        "stateChange": ".alert-close fades opacity (.7→1) and shows a currentColor state-layer background on hover; focus ring on :focus-visible.",
+        "duration": "--duration-fast (close button opacity + background).",
+        "easing": "--ease-default (close button transitions).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the close-button hover fade becomes instant. Nothing else moves.",
+        "constraints": "Inline/persistent — never animate it like an overlay; animate opacity/background only on the close affordance. Meaning must not rely on motion or color alone (pair with title/icon).",
+        "relatedPatterns": [
+          "hover-press"
+        ]
+      },
       "source": {
         "css": "css/components/alert.css",
         "classes": [
@@ -235,6 +259,18 @@
             "component": "skeleton",
             "why": "Skeleton is the loading placeholder; Aspect Ratio reserves the final media's shape"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — a layout primitive; it reserves space so media can load without shift, but it does not animate in.",
+        "exit": "none",
+        "stateChange": "none — it is the native CSS aspect-ratio property on a div, with no interactive states or transitions of its own.",
+        "duration": "none",
+        "easing": "none",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — the ratio box never animates; reserving space up front is itself the anti-jank measure.",
+        "constraints": "Never animate the ratio box or its dimensions — its whole purpose is to hold a stable shape and prevent layout shift while media loads. Any motion belongs to the media child (e.g. a Skeleton→image fade), not to the wrapper.",
+        "relatedPatterns": [
+          "No motion — stable layout prevents reflow/shift as assets load (motion.md performance: never animate layout)"
         ]
       },
       "source": {
@@ -316,6 +352,19 @@
             "component": "input",
             "why": "the <input type=file> does the picking; Attachment displays the result"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — rows appear in the list statically.",
+        "exit": "none — removing a row (attachment-remove) is immediate.",
+        "stateChange": "Uploading state animates the progress bar width (.attachment-progress-bar); the remove control is a standard icon-btn with its own hover/press.",
+        "duration": "--duration-normal (progress bar width).",
+        "easing": "--ease-default (progress bar width).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the upload progress bar snaps to its width instead of animating. Upload status is still conveyed by the numeric/aria state.",
+        "constraints": "The small 4px meter transitions width — a deliberate exception to the transform-only rule; animate transform/opacity elsewhere. Don't animate row insertion/removal (keep the list stable).",
+        "relatedPatterns": [
+          "loading",
+          "hover-press"
         ]
       },
       "source": {
@@ -413,6 +462,18 @@
             "component": "skeleton",
             "why": "skeleton-circle is the loading placeholder for an avatar, not an avatar"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — the avatar is a static identity element.",
+        "exit": "none",
+        "stateChange": "none — avatar.css declares no transitions, hover states, or animations. Presence is shown with a static color dot (.avatar-badge / -online/-busy/-away/-offline) and stacking uses static negative margins + a surface ring.",
+        "duration": "none",
+        "easing": "none",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — the avatar and its presence badge are already fully static.",
+        "constraints": "Do not animate an avatar — it is an identity marker, not a control. If a presence badge needs attention, convey it with color, never a pulsing/blinking loop (would risk the WCAG 2.3.1 >3 flashes/second threshold).",
+        "relatedPatterns": [
+          "No motion — static identity element (motion.md: animate only for feedback/continuity/hierarchy)"
         ]
       },
       "source": {
@@ -525,6 +586,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — always present (read-only status/category label).",
+        "exit": "none.",
+        "stateChange": "The base badge is fully static (no transition). Only the link variant (a.badge) transitions opacity and fades to .85 on hover, with a 2px --color-focus focus-visible outline. An optional leading spinner inside a badge is a continuous Loading loop, not a badge state change.",
+        "duration": "--duration-fast (link variant only)",
+        "easing": "--ease-default (link variant only)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css. No component-specific override. Note: a spinner embedded in a badge is a Loading-family loop (exempt category per guidelines/motion.md) and stops under reduced motion via the same global rule.",
+        "constraints": "Static by default — do not animate a status/category badge appearing or changing. Only the navigable a.badge earns a hover fade (opacity, compositor-safe).",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/components/badge.css",
         "classes": [
@@ -619,6 +692,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the trail renders statically with the page.",
+        "exit": "none",
+        "stateChange": "Links transition text color on hover (transition: color .15s var(--ease-default, ease)) and add an underline. The collapse ellipsis, when a <button>, changes background on hover with no declared transition (instant).",
+        "duration": "hardcoded .15s on .breadcrumb-link — NOT a --duration-* token; should be --duration-fast",
+        "easing": "--ease-default (with an `ease` literal fallback)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The hover color/underline applies instantly; navigation remains fully usable.",
+        "constraints": "Only text color animates (an effect → Standard easing) — correct; the underline is instant. No layout animation. Fix the hardcoded .15s to --duration-fast to satisfy the no-raw-ms rule (GOVERNANCE §13.3).",
+        "relatedPatterns": [
+          "Feedback — hover color/underline signals a clickable ancestor",
+          "Hover micro-interaction (color change is an effect on Standard easing)"
+        ]
+      },
       "source": {
         "css": "css/components/breadcrumb.css",
         "classes": [
@@ -696,6 +782,18 @@
             "component": "toggle-group",
             "why": "toggle-group holds stateful on/off toggles; button group holds plain actions"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — always present; the group is a layout wrapper only (joins children by collapsing inner radii/borders).",
+        "exit": "none.",
+        "stateChange": "The group itself declares no transition — on focus-visible a child is raised via z-index: 1 (no animated property). All hover/press/focus motion is delegated to the child controls (see button.css → button.md: hover lift, press layer, focus ring).",
+        "duration": "none of its own — inherits --duration-fast from the child buttons.",
+        "easing": "none of its own — inherits --ease-default from the child buttons.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css. No component-specific override; children collapse their own motion.",
+        "constraints": "Never animate the radius/border collapse that joins members — it is a static structural style. Motion belongs to the child buttons, not the group.",
+        "relatedPatterns": [
+          "state-layer"
         ]
       },
       "source": {
@@ -791,6 +889,20 @@
             "component": "badge",
             "why": "badge is a read-only status; not interactive"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — always present (static control, not an overlay).",
+        "exit": "none.",
+        "stateChange": "Hover: filled variants darken (primary→--color-primary-hover, secondary/elevated via color-mix) AND lift with transform: translateY(-1px); elevated also grows box-shadow (--btn-elevation→--btn-elevation-hover). Active/pressed: settle to translateY(0) + a 12% press layer (filter: brightness(.88/.92) on filled, surface-container-high on tertiary/icon, primary 16% on text). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring.",
+        "duration": "--duration-fast (background/border-color/color/box-shadow). Transform (the lift/settle) uses a hardcoded .1s — should be tokenized to --duration-fast.",
+        "easing": "--ease-default for every property, including transform (this buildless CSS does NOT use --ease-expressive for the lift, unlike the retired Tailwind button.tsx described in guidelines/motion.md).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific override — the lift/press simply collapse.",
+        "constraints": "Never animate layout (width/padding) — a button has intrinsic width. Only compositor-friendly props: transform (lift), plus color/shadow effects. --translateY(-1px) is the only approved transform effect; no scale-up/rotate on hover.",
+        "relatedPatterns": [
+          "state-layer",
+          "hover-press-lift",
+          "per-property-easing-split"
         ]
       },
       "source": {
@@ -911,6 +1023,20 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the calendar grid renders in place. When shown inside a Date Picker the popover's entrance/exit is governed by date-picker.css, not calendar.css.",
+        "exit": "none (see enter — popover presentation lives in date-picker.css).",
+        "stateChange": "Day cells and nav buttons transition background-color on hover (transition: background-color .15s var(--ease-default, ease)); preset buttons transition background + border-color on the same timing. Month/year navigation is an instant JS re-render of the grid — no CSS transition. Selected/today/range states apply instantly via class swaps.",
+        "duration": "hardcoded .15s on .calendar-day, .calendar-nav-btn and .calendar-preset-btn — NOT --duration-* tokens; should be --duration-fast",
+        "easing": "--ease-default (with an `ease` literal fallback)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover tints apply instantly; the month re-render is already instant, so navigation and selection stay fully legible.",
+        "constraints": "Hover feedback is background-color/border only (effect → Standard easing) — correct. Do NOT animate the month change: it is a full grid re-render and animating it would be layout thrash. Selection and range states are instant class swaps by design. Replace the hardcoded .15s values with --duration-fast to satisfy the no-raw-ms rule (GOVERNANCE §13.3).",
+        "relatedPatterns": [
+          "Feedback — day/nav hover confirms the target (effect on Standard easing)",
+          "Visibility of system status — today/selected/range states (color, not motion)",
+          "Date Picker popover entrance belongs to date-picker.css (Popover/Dialog/Sheet presentation)"
+        ]
+      },
       "source": {
         "css": "css/components/calendar.css",
         "classes": [
@@ -1026,6 +1152,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — a static container with no CSS entrance",
+        "exit": "none",
+        "stateChange": "none — Card declares no transition. The three variants (.card outlined, .card-elevated shadow, .card-filled) are fixed at rest; there is no hover lift or shadow-grow.",
+        "duration": "none (no transition declared)",
+        "easing": "none (no transition declared)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The component defines no motion of its own, so nothing extra to reduce.",
+        "constraints": "Card is a static surface — do not add a hover lift or shadow-grow (that is Button/Elevated behavior, GOVERNANCE §9; elevation is a fixed rest state here). If the card must be clickable, use Basic Card (item.css), which carries the interactive background/border state transition.",
+        "relatedPatterns": [
+          "motion.md → Motion has a purpose (a static surface needs no motion)",
+          "component-rules/item.md → motion (interactive-row state transition)"
+        ]
+      },
       "source": {
         "css": "css/components/card.css",
         "classes": [
@@ -1116,6 +1255,18 @@
             "component": "table",
             "why": "compare options in a grid/Table, not a carousel"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — items are present in the scroll track from the start (no entrance animation).",
+        "exit": "none.",
+        "stateChange": "Nav button background tint on hover (.carousel-btn:hover → --color-surface-variant); prev/next scroll the track via native scroll-behavior: smooth (scrollBy).",
+        "duration": "--duration-fast (nav button background); native smooth scroll for the track (no token).",
+        "easing": "--ease-default (nav button background); browser default for smooth scroll.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the same rule sets scroll-behavior: auto, so prev/next jump instantly instead of smooth-scrolling. If autoplay is ever added it must pause and honor reduced motion.",
+        "constraints": "No autoplay, no infinite loop, no drag physics; animate transform/opacity only; never animate the track's width/height — rely on native scroll. Controls disable at the ends rather than looping.",
+        "relatedPatterns": [
+          "hover-press"
         ]
       },
       "source": {
@@ -1212,6 +1363,19 @@
             "component": "table",
             "why": "Table gives exact per-row values; a chart shows the shape of the data"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — the SVG chart renders statically (no draw-on or grow-in animation).",
+        "exit": "none.",
+        "stateChange": "On hover, .chart-dot grows its radius (r → 5.5) and .chart-bar dims (opacity → .82); the JS-positioned rich tooltip fades in/out via .chart-tooltip.is-visible (opacity 0↔1).",
+        "duration": "--duration-fast (dot radius, bar opacity, tooltip opacity).",
+        "easing": "--ease-default (all transitions).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); hover feedback and the tooltip fade become instant. Values are still conveyed by the native <title> a11y fallback.",
+        "constraints": "No draw/brush/zoom/legend animation (out of scope for the buildless chart); animate opacity and the SVG r attribute only. The tooltip is pointer-events:none and must not trap focus.",
+        "relatedPatterns": [
+          "hover-press",
+          "tooltip"
         ]
       },
       "source": {
@@ -1316,6 +1480,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the control is always present",
+        "exit": "none",
+        "stateChange": "On :checked / :indeterminate the box fills --color-primary and its border goes transparent — a color effect (transition: background + border-color). Hover darkens the border to --color-on-surface. The ::after check glyph (and the indeterminate dash) has NO transition — it appears instantly. .checkbox-card transitions border-color + background-color on :has(input:checked)/hover.",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the checked fill still shows, just without the fade.",
+        "constraints": "Animate background/border-color only (effects, no layout). The check/dash glyph stays instant — don't add a draw/scale/fade to ::after. Never overshoot a color fill (Standard easing only).",
+        "relatedPatterns": [
+          "motion.md → Hover & press micro-interactions (state-layer color change = effect, Standard easing)"
+        ]
+      },
       "source": {
         "css": "css/components/checkbox.css",
         "classes": [
@@ -1411,6 +1587,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — always present (static filter/input element).",
+        "exit": "none (an input chip being removed is a DOM removal, not an animated exit).",
+        "stateChange": "Hover/active: state layer via color-mix over the base — unselected on-surface 8%/12%, selected on-secondary-container 8%/12% over the container, elevated the same mixed over surface-container-low. Selected: fill flips to --color-secondary-container (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring. Dragged: box-shadow lifts to --shadow-md.",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific override.",
+        "constraints": "Only animate compositor-friendly effects (background/color state layer, box-shadow); no transform lift. Do not animate the height/padding-asymmetry change when an icon/remove slot appears.",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/components/chip.css",
         "classes": [
@@ -1480,6 +1668,19 @@
             "component": "accordion",
             "why": "Accordion is multiple stacked sections; Collapsible is a single region"
           }
+        ]
+      },
+      "motion": {
+        "enter": "Expand — the single region animates grid-template-rows 0fr → 1fr (data-state=open), revealing its content in flow.",
+        "exit": "Collapse — the same grid-template-rows transition reversed (1fr → 0fr).",
+        "stateChange": "Content height via grid-template-rows only (transition grid-template-rows var(--duration-normal) var(--ease-default)). No chevron, no color transition — intentionally minimal so the trigger can be any element.",
+        "duration": "--duration-normal",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The region snaps open/closed; state stays legible via aria-expanded on the trigger.",
+        "constraints": "Same sanctioned grid-template-rows 0fr→1fr CSS-only height animation as Accordion (no JS measurement). Collapsible deliberately styles nothing else that moves — don't add a chevron/label transition here (that distinction is what separates it from Accordion). Effect on Standard easing; never Expressive on a height change.",
+        "relatedPatterns": [
+          "Progressive disclosure (single show/hide region)",
+          "Shares Accordion's grid-rows expand/collapse pattern"
         ]
       },
       "source": {
@@ -1573,6 +1774,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the panel is shown/hidden via a [hidden]/display toggle with no entrance animation (unlike the ⌘K Command Dialog, which slides up).",
+        "exit": "none — panel hidden via [hidden].",
+        "stateChange": "Trigger inherits btn-tertiary hover/focus transitions; combobox-check opacity 0→1 marks the selected option (instant, no transition declared); chevron is static.",
+        "duration": "none of its own (trigger uses button.css --duration-fast); the panel has no timed animation.",
+        "easing": "none of its own (trigger inherits button.css --ease-default).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific motion to neutralize — the panel already appears instantly.",
+        "constraints": "Panel open/close is a display toggle. If an entrance is ever added, use transform/opacity + tokens (mirror the Command Dialog slideInUp) — never animate width/height.",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/components/combobox.css",
         "classes": [
@@ -1660,6 +1873,20 @@
           }
         ]
       },
+      "motion": {
+        "enter": "Base Command: none (inline list, no entrance). Command Dialog (⌘K): scrim fadeIn + panel slideInUp (fade + upward translate) on open.",
+        "exit": "none — closing toggles [hidden]/display:none (no data-[state=closed] exit animation).",
+        "stateChange": "command-item[data-active=true] → surface-variant highlight as Arrow keys move through results (applied instantly, no transition declared); input focus is native; filtered items toggle [hidden].",
+        "duration": "HARDCODED .15s (scrim fadeIn) and .2s (panel slideInUp) — NOT --duration-* tokens (should map to --duration-normal / --duration-fast).",
+        "easing": "HARDCODED `ease` on both dialog animations — NOT an --ease-* token (should map to --ease-default / --ease-enter).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The ⌘K dialog appears without fade/slide; the active-item highlight is already instant.",
+        "constraints": "Animate transform/opacity only (slideInUp translate + scrim opacity). Keep the filtered-list re-render cheap; never animate the list height on filter.",
+        "relatedPatterns": [
+          "overlay-fade",
+          "panel-entrance",
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/components/command.css",
         "classes": [
@@ -1744,6 +1971,18 @@
             "component": "navigation-menu",
             "why": "Navigation Menu moves between sections; Context Menu acts on an element"
           }
+        ]
+      },
+      "motion": {
+        "enter": "Panel scales + fades in on open, reusing Dropdown Menu's @keyframes dropdownIn (opacity 0→1, scale .96→1) — context-menu.css adds no motion of its own.",
+        "exit": "none defined in CSS — the panel is removed instantly on dismiss (known buildless gap vs. the Radix open/closed pair).",
+        "stateChange": "Item hover/focus background tint, inherited from the shared .dropdown-item styles.",
+        "duration": "--duration-normal (panel enter), via dropdown-menu.css.",
+        "easing": "--ease-default (panel enter).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the open scale/fade becomes instant.",
+        "constraints": "Reuses the Dropdown Menu panel — do not fork its motion; animate transform/opacity only. Positioned at the cursor by JS; no submenu support.",
+        "relatedPatterns": [
+          "overlay-enter-exit"
         ]
       },
       "source": {
@@ -1840,6 +2079,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the table renders in place; sorting, filtering and pagination re-slice rows instantly.",
+        "exit": "none — filtered-out or off-page rows are hidden via the [hidden] attribute, no exit animation.",
+        "stateChange": "All instant — no CSS transition is declared anywhere in data-table.css. The sort caret rotates 180deg (transform, descending) and gains full opacity when active; the sort button and rows change background/visibility with no timed transition; column-visibility toggles set display:none.",
+        "duration": "none — data-table.css declares no motion tokens",
+        "easing": "none",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — nothing here animates in the first place, so state changes already read as instant.",
+        "constraints": "Sort/filter/paginate are instant state swaps by design — don't add row entrance/exit motion (a table reflowing on every sort is layout thrash). If feedback is ever wanted, animate opacity only on row show/hide, keep the caret a transform, and pull real --duration-*/--ease-* tokens rather than hardcoding.",
+        "relatedPatterns": [
+          "Visibility of system status — the caret/aria-sort communicate sort direction without motion",
+          "Feedback (row hover) if ever added, as an effect on Standard easing"
+        ]
+      },
       "source": {
         "css": "css/components/data-table.css",
         "classes": [
@@ -1931,6 +2183,20 @@
           }
         ]
       },
+      "motion": {
+        "enter": "Two coordinated entrances: the scrim overlay fades in (@keyframes fadeIn, opacity 0→1) while the panel slides up + fades (@keyframes slideInUp, translateY(20px)→0 with opacity 0→1). The scrim is an effect (fade only, no overshoot); the panel is the spatial hero move (per guidelines/motion.md the ideal is a zoom, here it is a slide-up — either way effect vs. spatial is respected).",
+        "exit": "none defined in CSS — the overlay/panel are removed by JS (openOverlay/closeOverlay) with no data-state=closed animation. This is a gap vs. the motion.md rule that overlays declare BOTH enter and exit; flag to add a fade/slide-down exit on --duration-fast --ease-exit.",
+        "stateChange": "modal-close button hover: background→--color-surface-variant, color→--color-on-surface; focus-visible ring (2px --color-focus + 4px --color-focus-ring).",
+        "duration": "Currently HARDCODED: overlay fadeIn .15s, panel slideInUp .2s. Intended tokens: --duration-fast (scrim) and --duration-normal (panel). modal-close transition uses --duration-fast.",
+        "easing": "Currently HARDCODED `ease` on both keyframes. Intended tokens: --ease-enter for the scrim fade-in, --ease-exit for the (missing) exit; modal-close uses --ease-default.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (fadeIn/slideInUp durations collapse to ~0.01ms, so the Dialog appears instantly). No component-specific override.",
+        "constraints": "Both keyframes animate only opacity + transform (compositor-safe). The scrim must never overshoot (effect); reserve any spatial spring for the panel. Do not animate the panel's width/max-height. Declare a matching exit before shipping.",
+        "relatedPatterns": [
+          "overlay-enter-exit",
+          "scrim-fade",
+          "content-zoom"
+        ]
+      },
       "source": {
         "css": "css/components/modal.css",
         "classes": [
@@ -2002,6 +2268,18 @@
             "component": "card",
             "why": "a Card frames/contains content; a Divider only draws a separating line"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — a static separator line.",
+        "exit": "none",
+        "stateChange": "none — divider.css declares no transitions, states, or animations.",
+        "duration": "none",
+        "easing": "none",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — a divider never moves.",
+        "constraints": "Never animate a divider; it is a purely static structural line. Its job is separation, which motion cannot improve.",
+        "relatedPatterns": [
+          "No motion — static structural element"
         ]
       },
       "source": {
@@ -2083,6 +2361,16 @@
             "why": "Placeholder = feature under construction; Empty State = feature works but has no data"
           }
         ]
+      },
+      "motion": {
+        "enter": "none — static placeholder; renders with no entrance animation.",
+        "exit": "none.",
+        "stateChange": "none in this component's CSS — the optional CTA carries its own Button motion (hover lift/press).",
+        "duration": "none (no transitions or animations defined).",
+        "easing": "none.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); nothing in Empty State moves regardless. Any motion comes from the embedded Button/CTA.",
+        "constraints": "Keep it static — no decorative animation on the icon/illustration. Any motion belongs to the CTA (Button) it contains.",
+        "relatedPatterns": []
       },
       "source": {
         "css": "css/components/empty-state.css",
@@ -2183,6 +2471,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — fields are always present (no CSS entrance)",
+        "exit": "none",
+        "stateChange": "Inputs/selects: focus-visible moves the border to --interactive and adds a 3px --color-focus-ring box-shadow (border-color + box-shadow transition); hover (not focused/disabled) darkens the border to --color-outline; is-error / aria-invalid swaps to --color-error + --color-error-ring. The .field-label recolors to --interactive on :focus-within (or --color-error in error). number-input-wrapper/date-input recolor border on focus-within/focus; number-btn recolors background on hover.",
+        "duration": "--duration-fast (every field transition)",
+        "easing": "None specified — the field transitions declare only --duration-fast with no --ease-* token, so they fall back to the browser default ease. Per motion.md these effect transitions should carry --ease-default.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No essential/looping motion; the focus border/ring still appears, just without the fade.",
+        "constraints": "Transition border-color/box-shadow/background only (effects, no layout). Don't animate field width/height or the caret; validation state flips are effect-only color changes, never a spatial move.",
+        "relatedPatterns": [
+          "motion.md → Hover & press micro-interactions (state-layer/border color = effect, Standard easing)"
+        ]
+      },
       "source": {
         "css": "css/components/form.css",
         "classes": [
@@ -2280,6 +2580,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — always present (static composite field).",
+        "exit": "none.",
+        "stateChange": "Focus and error live on the .input-group container, not the inner control. :focus-within: border→--interactive + 3px --color-focus-ring box-shadow. Error (aria-invalid / is-error): border→--color-error, focus→--color-error-ring. Disabled: opacity .5 (no transition). The inner control is borderless/transparent and inherits the container's focus visuals.",
+        "duration": "--duration-fast",
+        "easing": "none specified — the container transition lists border-color/box-shadow with only a duration and no --ease-* token, falling back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override.",
+        "constraints": "Only animate the container's border-color + box-shadow (focus ring) effect; never animate its width/height. Addons and the inner control carry no motion of their own.",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/components/input-group.css",
         "classes": [
@@ -2368,6 +2680,18 @@
             "component": "input",
             "why": "input is free-form; OTP is fixed-length per-character code entry"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — the boxes are always present (static; JS auto-advance/backspace/paste move the caret, not animation)",
+        "exit": "none",
+        "stateChange": "Focus moves the border to --interactive and adds a 3px --color-focus-ring box-shadow; hover (when not focused/disabled) darkens the border to --color-outline; error/invalid swaps to --color-error + --color-error-ring. Only border-color and box-shadow transition.",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping or essential motion to preserve — the focus ring still appears, just without the fade.",
+        "constraints": "Transition border-color/box-shadow only (cheap effects, no layout). Auto-advance, backspace-back and paste-splitting are instant caret/value changes — never animate them. Don't animate box width or the group gap.",
+        "relatedPatterns": [
+          "motion.md → Hover & press micro-interactions (state-layer/border effects on --ease-default)"
         ]
       },
       "source": {
@@ -2466,6 +2790,18 @@
             "component": "select",
             "why": "select picks from a fixed list; input is free-form"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — always present (static form field).",
+        "exit": "none.",
+        "stateChange": "Hover: border-color→--color-outline (more prominent than the resting --color-outline-variant). Focus-visible: border→--interactive + 3px --color-focus-ring box-shadow, and the field label recolors to --interactive via :focus-within. Error (is-error / aria-invalid): border→--color-error, focus ring→--color-error-ring. All of these transition on border-color + box-shadow.",
+        "duration": "--duration-fast",
+        "easing": "none specified — the transition lists only durations (border-color var(--duration-fast), box-shadow var(--duration-fast)) with no --ease-* token, so it falls back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override.",
+        "constraints": "Only animate the border-color + box-shadow (focus ring) effects; never animate the field's width/height. The focus ring is an effect → Standard easing (once tokenized), never a spatial overshoot.",
+        "relatedPatterns": [
+          "state-layer"
         ]
       },
       "source": {
@@ -2575,6 +2911,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the row is always present",
+        "exit": "none",
+        "stateChange": "Interactive rows (a.item / .item-clickable) recolor their background to --color-surface-variant on hover; :focus-visible moves the border to --color-focus and adds a 3px --color-focus-ring box-shadow. Transition covers background-color + border-color.",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the hover tint and focus ring still apply, just without the fade.",
+        "constraints": "Animate background-color/border-color only (effects, no layout, no lift). Don't add a translate/scale on hover — this is a content-row primitive, not a Button. Standard easing, no overshoot.",
+        "relatedPatterns": [
+          "motion.md → Hover & press micro-interactions (state-layer color = effect, Standard easing)"
+        ]
+      },
       "source": {
         "css": "css/components/item.css",
         "classes": [
@@ -2677,6 +3025,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none.",
+        "exit": "none.",
+        "stateChange": "Hover → box-shadow (shadow-md) + lift transform translateY(-1px); .dragging → opacity .5 + transform rotate(2deg) (the drag-pickup state); cursor:grab; :focus-visible ring.",
+        "duration": "--duration-fast (box-shadow on hover); HARDCODED .1s for the transform (lift + drag rotate) — NOT a --duration-* token.",
+        "easing": "browser default `ease` — the box-shadow/transform transitions declare durations only, with NO explicit --ease-* token.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover lift and the drag rotate/opacity apply instantly; the dragging card stays legible via the .5 opacity.",
+        "constraints": "Animate transform/opacity/shadow only (translateY lift, rotate + opacity on drag); the rotate(2deg) is scoped to the .dragging state only. Don't animate layout during reorder.",
+        "relatedPatterns": [
+          "drag-reorder",
+          "hover-lift"
+        ]
+      },
       "source": {
         "css": "css/components/kanban.css",
         "classes": [
@@ -2760,6 +3121,18 @@
             "component": "badge",
             "why": "badge is read-only status; a label names an interactive control"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — always present",
+        "exit": "none",
+        "stateChange": "none — the label declares no transition. Its disabled dimming (opacity 0.5 + pointer-events:none, derived from the associated control via :has(+ :disabled) / :disabled + .label / data-disabled) applies instantly.",
+        "duration": "none (no transition declared)",
+        "easing": "none (no transition declared)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The component defines no motion of its own, so there is nothing extra to reduce.",
+        "constraints": "A static text control — do not add entrance or hover motion. The disabled dimming is an immediate state change, not an animation; keep it instant.",
+        "relatedPatterns": [
+          "motion.md → Motion has a purpose (a static control that gives no feedback/continuity/hierarchy needs no motion)"
         ]
       },
       "source": {
@@ -2854,6 +3227,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — list items render statically; there is no per-item entrance animation.",
+        "exit": "none",
+        "stateChange": "Instant — no CSS transition is declared in list.css. Interactive rows (button.list-item) swap background on hover (--color-surface-variant) and on selection (--color-secondary-container / on-secondary-container); disabled rows drop to opacity .5. All applied with no timed transition.",
+        "duration": "none — list.css declares no motion tokens",
+        "easing": "none",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — the hover/selection background changes are already instant.",
+        "constraints": "Row feedback is background-color only; if a hover/selection transition is ever added, keep it background-color on Standard easing and pull a --duration-* token. Never animate item height or reflow the list (layout thrash). Selection shares the menu/nav secondary-container language — style, not motion.",
+        "relatedPatterns": [
+          "Feedback — hover/selection background confirms which row is active",
+          "Shared selection language with Menu/Nav (color, not motion)"
+        ]
+      },
       "source": {
         "css": "css/components/list.css",
         "classes": [
@@ -2943,6 +3329,18 @@
             "component": "empty-state",
             "why": "Empty State handles no-data; Loading handles in-progress"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — indicators appear in place.",
+        "exit": "none.",
+        "stateChange": "Determinate progress animates its fill width (linear bar) / stroke-dashoffset (circular). Indeterminate + spinner are continuous loops: bar slide (@keyframes progress-indeterminate-slide), circular spin+rotate, and .spinner rotate (@keyframes spinner-rotate).",
+        "duration": "--duration-fast (determinate width / stroke-dashoffset). Loops hardcoded: 1.4s bar slide, 1.2s circular spin, 1.6s circular rotate, .7s spinner (1.6s under its reduced-motion rule). NOT tokens.",
+        "easing": "--ease-default (determinate transitions, bar slide); linear for circular spin/rotate and .spinner.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); every loop (indeterminate bar, circular, spinner) becomes static. The spinner's own 1.6s @media rule lacks !important, so it too is overridden to static; role/aria-label still convey progress.",
+        "constraints": "Essential status motion — keep loops cheap and on linear easing; animate transform/opacity/background-position, never layout. Use a spinner only if an action exceeds ~300ms.",
+        "relatedPatterns": [
+          "loading"
         ]
       },
       "source": {
@@ -3059,6 +3457,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "Panel scales + fades in on open (@keyframes dropdownIn / popoverIn: opacity 0→1, scale .96→1).",
+        "exit": "none defined in CSS — the panel is removed instantly (toggled via [hidden] / JS), no closed-state animation (a known buildless gap vs. the Radix open/closed pair).",
+        "stateChange": "Items show a hover/focus background tint (--color-surface-variant; danger → --color-error-container); checkbox/radio indicators fade opacity 0↔1.",
+        "duration": "--duration-normal (panel enter); --duration-fast (checkbox/radio indicator).",
+        "easing": "--ease-default (panel enter and indicator).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the open scale/fade and indicator fade become instant.",
+        "constraints": "Animate transform/opacity only; no submenu/portal animation (unsupported). Enter-only today — if an exit animation is added, declare a matching closed state per the overlay pattern.",
+        "relatedPatterns": [
+          "overlay-enter-exit"
+        ]
+      },
       "source": {
         "css": [
           "css/components/dropdown-menu.css",
@@ -3153,6 +3563,18 @@
             "component": "toolbar",
             "why": "Toolbar exposes controls directly; Menubar nests commands under category triggers"
           }
+        ]
+      },
+      "motion": {
+        "enter": "Each menu panel scales + fades in on open, reusing Dropdown Menu's @keyframes dropdownIn (opacity 0→1, scale .96→1). The menubar row and its triggers have no entrance animation.",
+        "exit": "none defined in CSS — panels are removed instantly on close (known buildless gap vs. the Radix open/closed pair).",
+        "stateChange": "Trigger background changes on :hover / [data-state=\"open\"] to --color-surface-variant — no transition declared, so it is instant; focus ring on :focus-visible. Hovering another trigger while one menu is open switches the open panel.",
+        "duration": "--duration-normal (panel enter, via dropdown-menu.css); trigger background change is instant (no transition).",
+        "easing": "--ease-default (panel enter).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the panel open scale/fade becomes instant. Trigger hover was already instant.",
+        "constraints": "Reuses the Dropdown Menu panel motion — don't fork it; animate transform/opacity only. Menubar triggers switch on hover once a menu is open (desktop convention).",
+        "relatedPatterns": [
+          "overlay-enter-exit"
         ]
       },
       "source": {
@@ -3252,6 +3674,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the sidebar nav is persistent/fixed on ≥768px; it only ever slides in as the mobile Nav Drawer (see nav-drawer).",
+        "exit": "none (persistent).",
+        "stateChange": "nav-item hover → nav-hover background + nav-hover-content color; .active → nav-selected background + selected-content color (including the active icon color); nav-badge/chevron are static; sidebar-search hover → border-color.",
+        "duration": "--duration-fast (nav-item background + color, sidebar-search border)",
+        "easing": "browser default `ease` — nav-item declares `transition: background var(--duration-fast), color var(--duration-fast)` with NO explicit --ease-* token (the tint is a Standard effect; adding --ease-default would be the token-correct form).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover/active tints apply instantly. (The reduced-motion @media in layout.css targets the .sidebar/.sidebar-scrim slide, not these nav-item tints.)",
+        "constraints": "Animate color/background only (state-layer effect) — no transform/lift on nav items. Don't animate layout.",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/layout.css",
         "classes": [
@@ -3322,6 +3756,19 @@
             "component": "item",
             "why": "Basic Card (item) is the consumable compact row; Nav Card is docs-only"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — nav-cards are static grid tiles (docs-internal; styles inline in index.html).",
+        "exit": "none.",
+        "stateChange": "Card hover → lift transform translateY(-2px) + soft box-shadow; nested nav-card-arrow-btn hover → primary-tinted background + primary color.",
+        "duration": "HARDCODED .15s (card transform + box-shadow) and .12s (arrow-btn background + color) — NOT --duration-* tokens (would map to --duration-normal / --duration-fast).",
+        "easing": "HARDCODED `ease` on the card transition; the arrow-btn transition has no easing (browser default) — neither is an --ease-* token.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Card lift and arrow tint apply instantly. (This is docs chrome, not a shipped DS component.)",
+        "constraints": "Animate transform/opacity/shadow only (translateY lift + box-shadow). The -2px lift is a docs-chrome affordance — a shipped card should follow the approved -1px hover-lift. Don't animate layout.",
+        "relatedPatterns": [
+          "hover-lift",
+          "state-layer"
         ]
       },
       "source": {
@@ -3419,6 +3866,20 @@
           }
         ]
       },
+      "motion": {
+        "enter": "Mobile modal drawer (<768px): the sidebar slides in from the left edge translateX(-100%→0) when .app.nav-open is set; the scrim fades in (opacity 0→1). ≥768px it is persistent/fixed and does not animate in.",
+        "exit": "Slide-out translateX(0→-100%) + scrim fade-out when .nav-open is removed (symmetric show/hide).",
+        "stateChange": "nav-item hover → nav-hover background + nav-hover-content color; .active → nav-selected background + selected-content color; sidebar-search hover → border-color.",
+        "duration": "--duration-medium (drawer slide), --duration-normal (scrim opacity), --duration-fast (nav-item hover, sidebar-search hover)",
+        "easing": "--ease-default (drawer slide, scrim fade, nav-item/search hover)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). PLUS layout.css ships its own @media (prefers-reduced-motion: reduce) block setting `.sidebar` and `.sidebar-scrim` transition:none — the drawer shows/hides instantly with no slide and no scrim fade.",
+        "constraints": "Animate transform/opacity only (translateX + scrim opacity). Never animate width/margin/left — the ≥768px→<768px switch is a media-query layout change, not an animated one.",
+        "relatedPatterns": [
+          "edge-anchored-slide",
+          "overlay-fade",
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/layout.css",
         "classes": [
@@ -3504,6 +3965,20 @@
             "component": "tabs",
             "why": "Tabs switch views within one page; Navigation Menu goes between pages/sections"
           }
+        ]
+      },
+      "motion": {
+        "enter": "Viewport panel: navMenuIn keyframe — fade + translateY(-4px→0) as the mega-menu opens; a small hover-intent delay precedes open/close (JS), like a real navbar.",
+        "exit": "none — the viewport unmounts on close (no data-[state=closed] exit; and no viewport size/height easing between panels of different heights — accepted simplification vs. Radix).",
+        "stateChange": "Trigger hover / [data-state=open] → surface-variant background; chevron icon rotate 180deg on open; sliding underline indicator tracks the active trigger via transform + width (same technique as Tabs); link hover → surface-variant, active link → secondary-container.",
+        "duration": "--duration-normal (panel entrance, indicator transform/width), --duration-fast (chevron rotate, indicator opacity)",
+        "easing": "--ease-default (panel entrance, chevron, indicator opacity); --ease-expressive (indicator transform/width, with an ease-out fallback)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Panel appears instantly, the underline jumps to the active trigger, the chevron flips without a tween.",
+        "constraints": "Animate transform/opacity only (panel translateY, indicator transform/width); no height easing on the viewport (accepted simplification). Never animate the panel width/height — layout thrash.",
+        "relatedPatterns": [
+          "panel-entrance",
+          "sliding-indicator",
+          "state-layer"
         ]
       },
       "source": {
@@ -3600,6 +4075,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the pagination bar is static; changing pages is a content update handled by the consumer, not an animation here.",
+        "exit": "none",
+        "stateChange": "Page links transition background-color on hover (transition: background-color .15s var(--ease-default, ease)). The active page (.is-active) uses a static --color-secondary-container fill with no transition; disabled controls drop to opacity .45.",
+        "duration": "hardcoded .15s on .pagination-link — NOT a --duration-* token; should be --duration-fast",
+        "easing": "--ease-default (with an `ease` literal fallback)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The hover tint applies instantly; the active page stays clear via aria-current + the secondary-container fill.",
+        "constraints": "Only background-color animates (an effect → Standard easing) — correct. Don't animate the active fill or any layout. Fix the hardcoded .15s to --duration-fast to satisfy the no-raw-ms rule (GOVERNANCE §13.3).",
+        "relatedPatterns": [
+          "Feedback — hover tint confirms the target page",
+          "Hover micro-interaction (state-layer color change is an effect on Standard easing)"
+        ]
+      },
       "source": {
         "css": "css/components/pagination.css",
         "classes": [
@@ -3679,6 +4167,18 @@
             "component": "avatar",
             "why": "Avatar is just the image/initials; Person Card is the whole profile row"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — inherits the Basic Card (item.css), which has no entrance animation.",
+        "exit": "none.",
+        "stateChange": "Hover (item-clickable / a.item) → surface-variant background (from item.css) plus a box-shadow (shadow-md) added by person-card; :focus-visible ring inherited from .item.",
+        "duration": "--duration-fast (background transition inherited from item.css); the added box-shadow has NO declared transition (item.css tweens only background-color + border-color) → the shadow change is instant.",
+        "easing": "--ease-default (item.css background/border transition).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover surface + shadow apply instantly.",
+        "constraints": "Animate background/color only via the inherited state-layer (Standard easing); person-card adds only a static surface bg + a hover shadow. Don't animate layout, and don't add a transform lift — the Basic Card doesn't lift.",
+        "relatedPatterns": [
+          "state-layer"
         ]
       },
       "source": {
@@ -3782,6 +4282,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the control is always present",
+        "exit": "none",
+        "stateChange": "On :checked the ring border recolors to --color-primary (transition: border-color). Hover darkens the border to --color-on-surface. The ::after inner dot has NO transition — it appears instantly. .radio-card transitions border-color + background-color on :has(input:checked)/hover.",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the selected border still shows, just without the fade.",
+        "constraints": "Animate border-color/background-color only (effects, no layout). The inner dot stays instant — don't add a scale/fade to ::after. Never overshoot a color effect (Standard easing only).",
+        "relatedPatterns": [
+          "motion.md → Hover & press micro-interactions (state-layer color change = effect, Standard easing)"
+        ]
+      },
       "source": {
         "css": "css/components/radio-group.css",
         "classes": [
@@ -3853,6 +4365,19 @@
             "component": "table",
             "why": "table horizontal overflow uses .table-scroll, not scroll-area"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — a static scroll container; content scrolls via native browser behavior.",
+        "exit": "none",
+        "stateChange": "The WebKit scrollbar thumb changes color on hover (from color-mix outline 60% to solid --color-outline) with no declared transition (instant). Scrolling itself is native and not driven by any CSS animation.",
+        "duration": "none — scroll-area.css declares no motion tokens",
+        "easing": "none",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Native scrolling continues to honor the user's OS/browser scroll settings; the thumb color change is already instant.",
+        "constraints": "Don't add scroll-behavior:smooth or a custom scroll-animation engine — it would fight native scrolling and the reduced-motion preference. Thumb feedback stays a color change only; never animate the scrollbar size/layout.",
+        "relatedPatterns": [
+          "No entrance/exit motion — native scroll respects OS reduced-motion settings",
+          "Feedback — thumb color on hover (effect)"
         ]
       },
       "source": {
@@ -3949,6 +4474,19 @@
             "component": "input",
             "why": "input captures a form value; search queries content and carries role=search"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — the .search-bar is always present; .search-view is toggled by JS but declares NO CSS open/close animation (it appears/hides instantly — a gap vs. the Sheet/Dialog entrance patterns)",
+        "exit": "none",
+        "stateChange": ".search-bar recolors its background (color-mix state layer) + border-color on :hover and :focus-within (transition: background + border-color). .search-icon-btn transitions background/border-color/color on hover/active/aria-pressed. .search-view-result recolors on hover with NO transition declared (instant).",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; hover/focus tints still apply, just without the fade.",
+        "constraints": "State-layer color changes are effects — keep them on Standard easing, no overshoot. The .search-view open/close is not animated in CSS; if an entrance is wanted, map it to the Dialog/Sheet pattern (fade + zoom / slide) rather than improvising.",
+        "relatedPatterns": [
+          "motion.md → Hover & press micro-interactions (state-layer color = effect)",
+          "motion.md → Entrance & exit patterns (search-view has no declared open/close — flag as a gap)"
         ]
       },
       "source": {
@@ -4058,6 +4596,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — always present (static view/mode switch).",
+        "exit": "none.",
+        "stateChange": "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the secondary-container. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring (kept alongside the focus state layer, per WCAG 2.4.7).",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override.",
+        "constraints": "Only animate compositor-friendly effects (background/color/box-shadow state layers); no transform lift or moving-pill indicator. State-layer opacities are driven by the --seg-btn-* component tokens, not hardcoded.",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/components/segmented-button.css",
         "classes": [
@@ -4154,6 +4704,19 @@
             "component": "radio-group",
             "why": "radio shows all options at once for a few choices"
           }
+        ]
+      },
+      "motion": {
+        "enter": "The listbox panel (.select-content) animates in via @keyframes selectContentIn — opacity 0→1 + transform scale(.96) translateY(-2px)→none — a small fade+zoom from just below the trigger.",
+        "exit": "none — the panel is hidden instantly via the [hidden] attribute (JS initSelect), with no data-state=closed animation. Gap vs. the motion.md overlay rule; flag to add a matching fade/scale-out on --duration-fast --ease-exit.",
+        "stateChange": "Trigger focus-visible / aria-expanded: border→--interactive + 3px --color-focus-ring box-shadow (transitions on border-color + box-shadow). Item highlight (hover + keyboard nav): background→--color-surface-variant (no transition). Selected item check indicator: opacity 0→1 (instant).",
+        "duration": "--duration-fast (both the selectContentIn entrance and the trigger focus transition)",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (selectContentIn collapses to ~0, panel appears instantly). No component-specific override.",
+        "constraints": "The entrance animates only opacity + transform (compositor-safe). Absolute positioning, no viewport-collision flip (accepted buildless simplification). Add a matching exit before treating the overlay motion as complete.",
+        "relatedPatterns": [
+          "overlay-enter-exit",
+          "state-layer"
         ]
       },
       "source": {
@@ -4254,6 +4817,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "Edge-anchored slide-in from the bottom edge: translateY(100%→0) when .open is added; the overlay scrim fades in.",
+        "exit": "Symmetric slide-out (translateY(0→100%)) as .open is removed — the panel then unmounts (same approach as Dialog: no distinct 'closing' state).",
+        "stateChange": "sheet-close hover → surface-variant background + on-surface color; only .sheet-body scrolls (header/footer stay fixed).",
+        "duration": "--duration-sheet (500ms — panel slide, symmetric in/out); --duration-fast (close-button hover). Overlay fadeIn is HARDCODED .15s.",
+        "easing": "--ease-emphasized (panel slide — decelerate, NO overshoot, shared by all 4 sides); --ease-default (close-button hover). Overlay uses a HARDCODED `ease`.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The sheet appears/disappears without the slide and the scrim without the fade — there is no sheet-specific opt-back-in rule.",
+        "constraints": "Animate transform/opacity only (translateY + scrim opacity); never ease-expressive-* on a Sheet — a bounce reads as unnatural on a large panel (GOVERNANCE §20.2). Don't animate width/height/top/bottom.",
+        "relatedPatterns": [
+          "edge-anchored-slide",
+          "overlay-fade"
+        ]
+      },
       "source": {
         "css": "css/components/sheet.css",
         "classes": [
@@ -4351,6 +4927,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "Edge-anchored slide-in from the lateral edge: translateX(±100%→0) for right/left (top variant slides translateY(-100%→0)) when .open is added; the overlay scrim fades in.",
+        "exit": "Symmetric slide-out as .open is removed — the panel then unmounts (same approach as Dialog: no distinct 'closing' state).",
+        "stateChange": "sheet-close hover → surface-variant background + on-surface color; only .sheet-body scrolls (header/footer stay fixed).",
+        "duration": "--duration-sheet (500ms — panel slide, symmetric in/out); --duration-fast (close-button hover). Overlay fadeIn is HARDCODED .15s.",
+        "easing": "--ease-emphasized (panel slide — decelerate, NO overshoot, shared by all 4 sides); --ease-default (close-button hover). Overlay uses a HARDCODED `ease`.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The sheet appears/disappears without the slide and the scrim without the fade — there is no sheet-specific opt-back-in rule.",
+        "constraints": "Animate transform/opacity only (translateX/Y + scrim opacity); never ease-expressive-* on a Sheet — a bounce reads as unnatural on a large panel (GOVERNANCE §20.2). Don't animate width/left/right/top.",
+        "relatedPatterns": [
+          "edge-anchored-slide",
+          "overlay-fade"
+        ]
+      },
       "source": {
         "css": "css/components/sheet.css",
         "classes": [
@@ -4435,6 +5024,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the placeholder appears in place; its only motion is the continuous shimmer loop.",
+        "exit": "none — removed when real content replaces it.",
+        "stateChange": "Continuous shimmer loop (@keyframes shimmer: background-position 200%→-200% over a 200% 100% gradient) — a looping loading motion, not a state transition.",
+        "duration": "Hardcoded 1.5s loop (NOT a token).",
+        "easing": "Default (no easing token declared; steady background-position loop).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the shimmer loop becomes static (Skeleton does not opt back in with an !important rule). The placeholder shape still conveys loading.",
+        "constraints": "Loading loop only — animate background-position (composited); don't animate layout. Keep the shimmer cheap; don't stack many simultaneous loops on one screen.",
+        "relatedPatterns": [
+          "loading"
+        ]
+      },
       "source": {
         "css": "css/components/skeleton.css",
         "classes": [
@@ -4516,6 +5117,18 @@
             "component": "input",
             "why": "input captures exact typed values; slider is approximate"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — the control is always present",
+        "exit": "none",
+        "stateChange": "On hover (not disabled) and focus-visible the thumb grows a 4px --color-focus-ring halo — a box-shadow effect (transition: box-shadow). The track fill (.slider-range) and thumb position update via inline style/JS as the user drags and are NOT transitioned — they track the pointer 1:1.",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the focus halo still appears, just without the fade.",
+        "constraints": "Only box-shadow transitions. Never add a transition to .slider-range width/height or the thumb position — the fill must follow the drag with zero lag. Effect-only, Standard easing; no overshoot.",
+        "relatedPatterns": [
+          "motion.md → Hover & press micro-interactions (focus/hover shadow = effect, Standard easing)"
         ]
       },
       "source": {
@@ -4605,6 +5218,20 @@
             "component": "toast",
             "why": "Toast (.toast panel) is the top-right system notification with a semantic icon; Snackbar is the bottom inverse-surface confirmation bar"
           }
+        ]
+      },
+      "motion": {
+        "enter": "Snackbar slides up + fades in (@keyframes snackbar-in / snackbar-stack-in: translateY(16px)→0, opacity 0→1). Toast slides in from the right (@keyframes slideInRight).",
+        "exit": "Snackbar fades out + slides down via .snackbar--exit (@keyframes snackbar-out / snackbar-stack-out: translateY→16px, opacity→0).",
+        "stateChange": "Action/close buttons show hover/press state-layer tints (color-mix on --color-inverse-primary / --color-inverse-on-surface); toast-close animates background + color.",
+        "duration": "Hardcoded 250ms in / 200ms out (NOT tokens); button tints use --duration-fast; the toast-spinner loader loops at .7s.",
+        "easing": "--ease-default (snackbar enter, button tints); exit is hardcoded ease-in; toast enter is hardcoded ease.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the component's own @media rule also zeroes the slide, falling back to a near-instant appearance / short opacity fade. The looping toast-spinner loader becomes static.",
+        "constraints": "One snackbar action button max; queue via .snackbar-viewport (column-reverse), no swipe-to-dismiss; animate transform/opacity only. Static side-by-side demos use .snackbar--static (animation:none).",
+        "relatedPatterns": [
+          "snackbar",
+          "toast-stack",
+          "loading"
         ]
       },
       "source": {
@@ -4700,6 +5327,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — a static KPI tile with no CSS entrance",
+        "exit": "none",
+        "stateChange": "none — Stat Card declares no transition or hover. The trend color modifiers (stat-change-positive/-negative/-neutral) are fixed at rest.",
+        "duration": "none (no transition declared)",
+        "easing": "none (no transition declared)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The component defines no motion of its own, so nothing extra to reduce.",
+        "constraints": "A static display tile — do not add hover motion. If the metric updates live, avoid a count-up animation unless it genuinely serves feedback, and it must honor prefers-reduced-motion (fall back to an instant value swap).",
+        "relatedPatterns": [
+          "motion.md → Motion has a purpose (a static metric tile needs no motion)"
+        ]
+      },
       "source": {
         "css": "css/components/stat-card.css",
         "classes": [
@@ -4793,6 +5432,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the control is always present",
+        "exit": "none",
+        "stateChange": "Toggling slides the ::after thumb via transform: translateX (20px full / 16px .switch-sm) — a spatial move on --ease-expressive at --duration-normal. In parallel, the track background + border-color and the thumb background are color effects on --duration-fast/--ease-default. This is the per-property split: transform on Expressive, color on Standard.",
+        "duration": "--duration-normal (thumb travel) · --duration-fast (track + thumb color)",
+        "easing": "--ease-expressive (thumb transform) · --ease-default (track/thumb color effects)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The thumb still moves to its on/off position, just without the slide.",
+        "constraints": "Animate transform + color only (thumb via translateX — no left/margin, no layout). Keep the split: the spatial thumb move is Expressive (approved overshoot), the color stays Standard — never put the color on an Expressive curve.",
+        "relatedPatterns": [
+          "motion.md → The dual system: Standard vs. Expressive",
+          "motion.md → Hover & press micro-interactions (per-property timing split)"
+        ]
+      },
       "source": {
         "css": "css/components/switch.css",
         "classes": [
@@ -4880,6 +5532,18 @@
             "component": "list",
             "why": "List is a simple 1–2 attribute vertical list; Table compares columns"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — the table is always present (rows are not animated in/out)",
+        "exit": "none",
+        "stateChange": "tbody rows recolor their background to --color-surface-variant on :hover (transition: background). A .selected row uses --color-surface-container-high (the selected state itself is not transitioned). A .clickable row's :focus-visible shows an outline + 3px --color-focus-ring box-shadow (not transitioned).",
+        "duration": "--duration-fast (row-hover background)",
+        "easing": "None specified — the row-hover transition declares only --duration-fast with no --ease-* token, so it falls back to the browser default ease. Per motion.md it should carry --ease-default.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the hover tint still applies, just without the fade.",
+        "constraints": "Only the row background is transitioned (effect, no layout). Don't animate row height or row insertion/removal — sort/filter/paginate should swap rows instantly (no reflow-driven motion).",
+        "relatedPatterns": [
+          "motion.md → Hover & press micro-interactions (row-hover background = effect, Standard easing)"
         ]
       },
       "source": {
@@ -4972,6 +5636,19 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — tab panels swap via display none/block (.tab-panel / .tab-panel.active); the incoming panel appears instantly with no entrance animation.",
+        "exit": "none — the outgoing panel is hidden instantly (display:none).",
+        "stateChange": "The sliding .tab-indicator glides to the active tab, transitioning transform + width (var(--duration-normal) var(--ease-expressive)) — positioned per-tab by JS via offsetLeft/offsetWidth. Tab labels transition color on hover/active/selected (var(--duration-fast) var(--ease-default)).",
+        "duration": "--duration-normal (indicator slide), --duration-fast (label color)",
+        "easing": "--ease-expressive (indicator — spatial move with overshoot), --ease-default (label color effect)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The indicator jumps to the active tab instantly; selection stays clear via aria-selected + the active label weight/color.",
+        "constraints": "Indicator animates transform + width — width is a layout property but scoped to a 2px bar, an accepted exception. Panels are display-toggled (no fade), so there is no entrance/exit motion to reduce. The pill (.tabs-pill) and vertical (.tabs-vertical) variants hide the sliding indicator and use a static active surface/border instead. Keep the indicator on Expressive (spatial) and the label color on Standard (effect).",
+        "relatedPatterns": [
+          "Hierarchy — the moving indicator directs attention to the active view (motion.md)",
+          "Standard-vs-Expressive split (spatial indicator vs. effect label color)"
+        ]
+      },
       "source": {
         "css": "css/components/tabs.css",
         "classes": [
@@ -5057,6 +5734,18 @@
             "component": "input-group",
             "why": "input-group joins addons to a single-line control"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — always present (static form field).",
+        "exit": "none.",
+        "stateChange": "Shares the form field transition (border-color + box-shadow). Focus-visible: border→--interactive + 3px --color-focus-ring, label recolors via :focus-within. Error (is-error / aria-invalid): border→--color-error + --color-error-ring. Auto-grow via field-sizing: content changes height with typed content but is intentionally NOT transitioned (animating height would thrash layout).",
+        "duration": "--duration-fast (border/box-shadow)",
+        "easing": "none specified — the shared field transition lists durations with no --ease-* token, falling back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override.",
+        "constraints": "Only animate border-color + box-shadow (focus/error effects). Never transition the field-sizing height change or the user-driven resize handle — height/layout animation is a layout-thrash source.",
+        "relatedPatterns": [
+          "state-layer"
         ]
       },
       "source": {
@@ -5145,6 +5834,18 @@
             "component": "switch",
             "why": "Switch is a single labelled on/off; toggle-group is a set"
           }
+        ]
+      },
+      "motion": {
+        "enter": "none — always present; the group is a flex layout wrapper only (gap between items).",
+        "exit": "none.",
+        "stateChange": "The group declares no transition of its own. Each item is a .toggle, so all hover/pressed/focus motion is delegated to toggle.css (see toggle.md): hover state layer, aria-pressed background/color flip, focus ring.",
+        "duration": "none of its own — items use --duration-fast (toggle.css).",
+        "easing": "none of its own — items use --ease-default (toggle.css).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css. No component-specific override; each Toggle collapses its own motion.",
+        "constraints": "Motion belongs to the individual Toggle items, not the group container; do not add group-level animation.",
+        "relatedPatterns": [
+          "state-layer"
         ]
       },
       "source": {
@@ -5241,6 +5942,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — always present (static two-state control).",
+        "exit": "none.",
+        "stateChange": "Hover: state layer color-mix over --color-on-surface 8% (unselected) or over the secondary-container when pressed. Pressed on (aria-pressed=true): background→--color-secondary-container, color→--color-on-secondary-container (transitions on background-color + color). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring. Disabled: opacity .38 (no transition).",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override.",
+        "constraints": "Only animate the background-color + color state change; no transform lift. The transition list is scoped to background-color/color so the aria-pressed flip reads as a tint change, not a move.",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/components/toggle.css",
         "classes": [
@@ -5332,6 +6045,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the toolbar is a static controls row above a list/table.",
+        "exit": "none.",
+        "stateChange": "search-field hover / focus-within → color-mix state-layer background + border-color (secondary on focus); toolbar-btn hover → surface-variant bg + outline-variant border + on-surface color, :active → opacity .85; more-btn hover → surface-variant.",
+        "duration": "--duration-fast (search-field bg/border, toolbar-btn bg/border/color, more-btn)",
+        "easing": "--ease-default (all toolbar hover/focus transitions)",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover/focus tints apply instantly.",
+        "constraints": "Animate background/border/color only (state-layer effects, Standard easing) — no transform/lift on toolbar controls. Don't animate width/height.",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/components/toolbar.css",
         "classes": [
@@ -5412,6 +6137,19 @@
             "component": "dialog",
             "why": "Dialog is modal/blocking; tooltip never blocks"
           }
+        ]
+      },
+      "motion": {
+        "enter": "Tooltip fades in and slides toward the trigger (opacity 0→1 + a 4px directional translate settling to 0), gated by a .4s hover-intent delay. Rich Tooltip fades + scales in (scale .96→1) on .open (click/focus-driven).",
+        "exit": "Tooltip fades/slides out instantly on mouse-leave/blur (transition-delay resets to 0s — hides with no delay). Rich Tooltip fades + scales back to .96 when .open is removed.",
+        "stateChange": "Opacity + transform (translate/scale) driven by :hover/:focus-within (Tooltip) or the .open class (Rich Tooltip); rich-tooltip-close shows a hover tint.",
+        "duration": "--duration-fast (fade/slide/scale); hardcoded .4s transition-delay for hover-intent (show only).",
+        "easing": "--ease-default (all transitions).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the fade/slide/scale collapse to an instant show/hide and the hover-intent delay is zeroed.",
+        "constraints": "CSS-only positioning — no viewport-edge collision flip (accepted simplification); animate transform/opacity only. Tooltip is pointer-events:none; Rich Tooltip is dismissible and may receive the pointer.",
+        "relatedPatterns": [
+          "tooltip",
+          "overlay-enter-exit"
         ]
       },
       "source": {
@@ -5521,6 +6259,18 @@
           }
         ]
       },
+      "motion": {
+        "enter": "none — the topbar is sticky and persistent (position:sticky, top:0).",
+        "exit": "none (persistent).",
+        "stateChange": "topbar-btn.secondary hover → interactive-light background; shell-menu-btn (mobile hamburger) hover → interactive-light + focus-visible ring; topbar-breadcrumb links → text-primary on hover (untimed); topbar-notif is static.",
+        "duration": "--duration-fast (topbar-btn background)",
+        "easing": "browser default `ease` — topbar-btn declares `transition: background var(--duration-fast)` with NO explicit --ease-* token (--ease-default would be the token-correct form).",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Button/hamburger hover tints apply instantly.",
+        "constraints": "Animate background/color only (state-layer) — no transform/lift on topbar controls. Don't animate layout.",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
       "source": {
         "css": "css/layout.css",
         "classes": [
@@ -5612,6 +6362,20 @@
             "component": "card",
             "why": "Full Card is generic; Vacancy Card is the recruiting-domain unit"
           }
+        ]
+      },
+      "motion": {
+        "enter": "fadeSlideIn keyframe (fade + upward slide) with animation-fill-mode:both, staggered per row via nth-child animation-delay (first three rows).",
+        "exit": "none.",
+        "stateChange": "Hover → border-color (outline-variant) + box-shadow (shadow-md) + lift transform translateY(-1px); more-btn hover → surface-variant bg + on-surface color; :focus-visible ring.",
+        "duration": "HARDCODED .3s (fadeSlideIn entrance) + HARDCODED .05s/.12s/.19s stagger delays — NOT tokens. Hover uses --duration-fast (border/shadow/transform); more-btn --duration-fast.",
+        "easing": "HARDCODED `ease` on the fadeSlideIn entrance (no --ease-* token). The hover transition declares --duration-fast with no explicit easing → browser default. more-btn uses --ease-default.",
+        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Cards appear in place (no fade/slide/stagger); the hover lift applies instantly.",
+        "constraints": "Animate transform/opacity/shadow only (translateY lift, entrance fade+slide); keep the -1px lift (approved hover transform). Don't animate width/height/margin.",
+        "relatedPatterns": [
+          "staggered-entrance",
+          "hover-lift",
+          "state-layer"
         ]
       },
       "source": {

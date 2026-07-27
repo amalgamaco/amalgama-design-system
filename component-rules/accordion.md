@@ -82,6 +82,16 @@ tokens:
   spacing: ["16px trigger padding", "16px pb spacer"]
   motion: [--duration-normal, --duration-fast, --ease-default, --ease-expressive]
 
+motion:
+  enter: "Expand — panel animates grid-template-rows 0fr → 1fr (data-state=open), revealing content in flow; the chevron rotates 180deg."
+  exit: "Collapse — the same grid-template-rows transition reversed (1fr → 0fr); chevron rotates back to 0."
+  stateChange: "Content height via grid-template-rows (var(--duration-normal) var(--ease-default)); chevron rotate 180deg (transform, var(--duration-normal) var(--ease-expressive)); trigger label color on hover/focus (var(--duration-fast) var(--ease-default))."
+  duration: "--duration-normal (expand/collapse + chevron), --duration-fast (trigger color)"
+  easing: "--ease-default (expand/collapse + trigger color), --ease-expressive (chevron rotation — the spatial move)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The panel snaps open/closed and the chevron flips instantly; disclosure still works because state is conveyed by aria-expanded + the rotated chevron, not motion alone."
+  constraints: "The grid-template-rows 0fr→1fr technique is the DS's sanctioned CSS-only height animation (no JS scrollHeight measurement) — the one place a size-like property is animated. Bottom spacing rides a zero-height ::after spacer, never animated padding. Keep the chevron a transform (Expressive) and the label color an effect (Standard) — don't cross the curves."
+  relatedPatterns: ["Progressive disclosure (motion.md: motion serves feedback/continuity)", "Standard-vs-Expressive split (effect color on --ease-default, spatial chevron on --ease-expressive)"]
+
 source:
   css: css/components/accordion.css
   classes: [accordion, accordion-item, accordion-trigger, accordion-chevron, accordion-content, accordion-content-inner, accordion-bordered]

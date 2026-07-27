@@ -110,5 +110,40 @@ console.log("\n[7] index.html inline hex (informational)");
          : ok("no raw hex in inline style attributes");
 }
 
+// ── 8. hardcoded motion durations in css/components (soft) ───────────────
+console.log("\n[8] css/components motion tokens (informational)");
+{
+  const dir = path.join(ROOT, "css/components");
+  let hits = [];
+  for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".css"))) {
+    let src = fs.readFileSync(path.join(dir, f), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    // Exclude prefers-reduced-motion blocks (intentional reduced values) from the lint.
+    src = src.replace(/@media[^{]*prefers-reduced-motion[^{]*\{[\s\S]*?\}\s*\}/g, "");
+    // raw duration in a transition:/animation: (shorthand or -duration), not via var(--duration), not a *-delay
+    for (const m of src.matchAll(/\b(transition|animation)(-duration)?\s*:\s*[^;]*;/g)) {
+      const decl = m[0];
+      if (/\bvar\(--duration/.test(decl)) continue;
+      const dur = decl.match(/(?:^|[^-\w.])([0-9]*\.?[0-9]+m?s)\b/);
+      if (dur) hits.push(`${f}: ${dur[1]} in ${m[1]}${m[2] || ""}`);
+    }
+  }
+  hits.length
+    ? warn(`${hits.length} raw duration(s) in transition/animation (verify each is an intentional keyframe loop or delay, else use --duration-*):\n      ${[...new Set(hits)].join("\n      ")}`)
+    : ok("all transition/animation durations use --duration-* tokens");
+}
+
+// ── 9. motion metadata in component-rules (fail) ─────────────────────────
+console.log("\n[9] component-rules motion metadata");
+{
+  const dir = path.join(ROOT, "component-rules");
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".md") && !["README.md", "INDEX.md"].includes(f));
+  const missing = files.filter((f) => {
+    const fm = fs.readFileSync(path.join(dir, f), "utf8").split("---")[1] || "";
+    return !/\nmotion:/.test(fm);
+  });
+  missing.length ? fail(`${missing.length} rule file(s) missing a motion: block: ${missing.slice(0, 8).join(", ")}${missing.length > 8 ? "…" : ""}`)
+                 : ok(`all ${files.length} rule files expose a motion: block`);
+}
+
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);

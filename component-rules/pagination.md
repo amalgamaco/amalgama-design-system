@@ -80,6 +80,16 @@ tokens:
   spacing: ["36px link height/min-width", "4px gap"]
   typography: [--font-size-body-md]
 
+motion:
+  enter: "none — the pagination bar is static; changing pages is a content update handled by the consumer, not an animation here."
+  exit: "none"
+  stateChange: "Page links transition background-color on hover (transition: background-color .15s var(--ease-default, ease)). The active page (.is-active) uses a static --color-secondary-container fill with no transition; disabled controls drop to opacity .45."
+  duration: "hardcoded .15s on .pagination-link — NOT a --duration-* token; should be --duration-fast"
+  easing: "--ease-default (with an `ease` literal fallback)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The hover tint applies instantly; the active page stays clear via aria-current + the secondary-container fill."
+  constraints: "Only background-color animates (an effect → Standard easing) — correct. Don't animate the active fill or any layout. Fix the hardcoded .15s to --duration-fast to satisfy the no-raw-ms rule (GOVERNANCE §13.3)."
+  relatedPatterns: ["Feedback — hover tint confirms the target page", "Hover micro-interaction (state-layer color change is an effect on Standard easing)"]
+
 source:
   css: css/components/pagination.css
   classes: [pagination, pagination-list, pagination-link, pagination-prev, pagination-next, pagination-ellipsis]

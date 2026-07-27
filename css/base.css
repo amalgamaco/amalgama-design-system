@@ -88,3 +88,26 @@ input, select, textarea { font-family: inherit; }
 
 .font-mono { font-family: var(--font-mono); }
 .font-heading { font-family: var(--font-heading); }
+
+/* ============================================================================
+   Reduced motion — shared, DS-wide (a11y).
+   Honors prefers-reduced-motion: reduce by neutralizing transitions and
+   entrance/exit animations across EVERY Embassy component at once, so
+   product screens (and generated screens) get accessible motion for free —
+   no per-component opt-in needed. Near-zero (0.01ms) rather than `none` so
+   JS that waits for transitionend/animationend still fires. Essential loaders
+   (spinner, indeterminate progress, skeleton) become static; their role/
+   aria-label still convey status. Any component that MUST keep a reduced
+   looping motion opts back in with its own `@media (prefers-reduced-motion:
+   reduce) { … !important }` rule (see component-rules <id>.md → motion.reducedMotion).
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}

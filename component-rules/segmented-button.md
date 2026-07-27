@@ -94,6 +94,16 @@ tokens:
   motion: [--duration-fast, --ease-default]
   component: "MD3 component-token tier --seg-btn-* (each with var(--md-sys-color-X, var(--color-X)) fallback); resolve via css/md-sys-bridge.css"
 
+motion:
+  enter: "none — always present (static view/mode switch)."
+  exit: "none."
+  stateChange: "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the secondary-container. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring (kept alongside the focus state layer, per WCAG 2.4.7)."
+  duration: "--duration-fast"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override."
+  constraints: "Only animate compositor-friendly effects (background/color/box-shadow state layers); no transform lift or moving-pill indicator. State-layer opacities are driven by the --seg-btn-* component tokens, not hardcoded."
+  relatedPatterns: [state-layer]
+
 source:
   css: css/components/segmented-button.css
   classes: [seg-btn-group, seg-btn, selected, seg-btn-group-sm, seg-btn-group-lg]

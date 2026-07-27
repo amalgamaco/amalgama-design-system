@@ -152,7 +152,7 @@
   justify-content: center;
   padding: 12vh 16px 16px;
   background: var(--color-scrim);
-  animation: fadeIn .15s ease;
+  animation: fadeIn var(--duration-fast) var(--ease-enter);
 }
 .command-dialog .command {
   width: min(640px, 100%);
@@ -160,5 +160,5 @@
   max-height: 60vh;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-lg);
-  animation: slideInUp .2s ease;
+  animation: slideInUp var(--duration-normal) var(--ease-enter);
 }

@@ -94,6 +94,16 @@ tokens:
   typography: [--font-body, --font-size-body-md]
   spacing: ["--cal-cell (32px default; sm/lg override)", "12px panel padding"]
 
+motion:
+  enter: "none — the calendar grid renders in place. When shown inside a Date Picker the popover's entrance/exit is governed by date-picker.css, not calendar.css."
+  exit: "none (see enter — popover presentation lives in date-picker.css)."
+  stateChange: "Day cells and nav buttons transition background-color on hover (transition: background-color .15s var(--ease-default, ease)); preset buttons transition background + border-color on the same timing. Month/year navigation is an instant JS re-render of the grid — no CSS transition. Selected/today/range states apply instantly via class swaps."
+  duration: "hardcoded .15s on .calendar-day, .calendar-nav-btn and .calendar-preset-btn — NOT --duration-* tokens; should be --duration-fast"
+  easing: "--ease-default (with an `ease` literal fallback)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover tints apply instantly; the month re-render is already instant, so navigation and selection stay fully legible."
+  constraints: "Hover feedback is background-color/border only (effect → Standard easing) — correct. Do NOT animate the month change: it is a full grid re-render and animating it would be layout thrash. Selection and range states are instant class swaps by design. Replace the hardcoded .15s values with --duration-fast to satisfy the no-raw-ms rule (GOVERNANCE §13.3)."
+  relatedPatterns: ["Feedback — day/nav hover confirms the target (effect on Standard easing)", "Visibility of system status — today/selected/range states (color, not motion)", "Date Picker popover entrance belongs to date-picker.css (Popover/Dialog/Sheet presentation)"]
+
 source:
   css: css/components/calendar.css
   classes: [calendar, calendar-sm, calendar-lg, calendar-header, calendar-caption, calendar-caption-dropdowns, calendar-caption-select, calendar-nav-btn, calendar-weekdays, calendar-grid, calendar-day, calendar-day-outside, calendar-day-today, calendar-day-selected, calendar-day-disabled, calendar-day-range-middle, calendar-day-range-start, calendar-day-range-end, calendar-day-booked, calendar-weeknum, calendar-with-presets, calendar-presets, calendar-preset-btn, calendar-time-row, date-picker, date-picker-trigger, date-picker-panel]

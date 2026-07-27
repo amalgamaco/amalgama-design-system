@@ -85,6 +85,16 @@ tokens:
   spacing: ["16px 20px container padding", "12px header gap", "16px footer offset"]
   elevation: [--shadow-sm]
 
+motion:
+  enter: "none — a static container with no CSS entrance"
+  exit: "none"
+  stateChange: "none — Card declares no transition. The three variants (.card outlined, .card-elevated shadow, .card-filled) are fixed at rest; there is no hover lift or shadow-grow."
+  duration: "none (no transition declared)"
+  easing: "none (no transition declared)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The component defines no motion of its own, so nothing extra to reduce."
+  constraints: "Card is a static surface — do not add a hover lift or shadow-grow (that is Button/Elevated behavior, GOVERNANCE §9; elevation is a fixed rest state here). If the card must be clickable, use Basic Card (item.css), which carries the interactive background/border state transition."
+  relatedPatterns: ["motion.md → Motion has a purpose (a static surface needs no motion)", "component-rules/item.md → motion (interactive-row state transition)"]
+
 source:
   css: css/components/card.css
   classes: [card, card-elevated, card-filled, card-header, card-title, card-desc, card-content, card-footer, card-action]

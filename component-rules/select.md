@@ -87,6 +87,16 @@ tokens:
   shadow: [--shadow-md]
   motion: [--duration-fast, --ease-default]
 
+motion:
+  enter: "The listbox panel (.select-content) animates in via @keyframes selectContentIn — opacity 0→1 + transform scale(.96) translateY(-2px)→none — a small fade+zoom from just below the trigger."
+  exit: "none — the panel is hidden instantly via the [hidden] attribute (JS initSelect), with no data-state=closed animation. Gap vs. the motion.md overlay rule; flag to add a matching fade/scale-out on --duration-fast --ease-exit."
+  stateChange: "Trigger focus-visible / aria-expanded: border→--interactive + 3px --color-focus-ring box-shadow (transitions on border-color + box-shadow). Item highlight (hover + keyboard nav): background→--color-surface-variant (no transition). Selected item check indicator: opacity 0→1 (instant)."
+  duration: "--duration-fast (both the selectContentIn entrance and the trigger focus transition)"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (selectContentIn collapses to ~0, panel appears instantly). No component-specific override."
+  constraints: "The entrance animates only opacity + transform (compositor-safe). Absolute positioning, no viewport-collision flip (accepted buildless simplification). Add a matching exit before treating the overlay motion as complete."
+  relatedPatterns: [overlay-enter-exit, state-layer]
+
 source:
   css: css/components/select.css
   classes: [select, select-trigger, select-value, select-icon, select-content, select-viewport, select-group, select-label, select-item, select-item-text, select-item-check, select-separator, select-scroll-up, select-scroll-down]

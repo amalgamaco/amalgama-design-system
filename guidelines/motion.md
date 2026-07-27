@@ -27,7 +27,7 @@ Embassy adopts MD3's two easing families, and the split is a hard rule:
 - **Standard easing** (`--ease-default`, `--ease-enter`, `--ease-exit`) drives **effects** — anything about color, opacity, or shadow. Effects **never overshoot**.
 - **Expressive easing** (`--ease-expressive`, `--ease-expressive-enter`, `--ease-expressive-exit`) drives **spatial moves** — transform: translate, scale, a panel sliding, a button lifting/pressing. These carry a controlled overshoot that approximates spring physics.
 
-**The rule: never overshoot an effect.** A fade or color change on an Expressive curve looks like a glitch. This is why `button.tsx` splits its transition timing per-property — `background-color`, `border-color`, `color`, `box-shadow` all use `--ease-default`, while `transform` (the press/lift) uses `--ease-expressive`. Mirror that pattern: if one transition animates both a color and a transform, give each property its own curve.
+**The rule: never overshoot an effect.** A fade or color change on an Expressive curve looks like a glitch. Split per-property timing when one transition mixes an effect and a spatial move: `background-color`, `border-color`, `color`, `box-shadow` use `--ease-default`; a **large** spatial move (a Sheet/Dialog panel, a drawer) uses `--ease-emphasized`/`--ease-expressive`. A **micro-lift** (`button.css`'s `translateY(-1px)` hover) is small enough that `--ease-default` reads clean — reserve Expressive overshoot for moves the eye can actually track. If one transition animates both a color and a larger transform, give each property its own curve.
 
 ---
 
@@ -84,7 +84,7 @@ If a new component enters/exits, it must map to one of these patterns — an unl
 
 ## Respecting `prefers-reduced-motion` (WCAG 2.3.3)
 
-- Embassy ships a global `@media (prefers-reduced-motion: reduce)` block in `tailwind.theme.css` that collapses animation/transition durations to ~0 for everything importing the theme — you get it for free.
+- Embassy ships a global `@media (prefers-reduced-motion: reduce)` block in **`css/base.css`** that collapses animation/transition durations to ~0 (and neutralizes delays, loop iteration counts, and scroll-behavior) for **every** component the moment `base.css` is linked — you get it for free, no per-component opt-in. Essential loaders (spinner, indeterminate progress, skeleton) become static; their `role`/`aria-label` still convey status.
 - **Don't defeat it:** no `!important` durations, no JS animation that ignores the media query.
 - **Preserve essential motion.** Feedback that carries meaning (a spinner indicating progress) may remain, but non-essential entrance/continuity motion should honor the reduced setting. A component with special reduced-motion behavior (e.g. Snackbar falling back to a plain fade) may define its own tighter `@media` rule.
 - Nothing may flash more than **3 times per second** (WCAG 2.3.1).
@@ -104,7 +104,7 @@ If a new component enters/exits, it must map to one of these patterns — an unl
 
 - **Do** animate to give feedback, continuity, or hierarchy; **don't** animate for decoration.
 - **Do** use Expressive easing for spatial moves (button lift, Sheet slide); **don't** overshoot an effect (fade/color/shadow stays Standard).
-- **Do** split per-property timing when one transition mixes transform + color (see `button.tsx`); **don't** put a color fade on an Expressive curve.
+- **Do** split per-property timing when one transition mixes transform + color (see `button.css`); **don't** put a color fade on an Expressive curve.
 - **Do** make exits shorter than entrances (`ease-exit` / `duration-fast`); **don't** reuse the entrance duration for the exit.
 - **Do** declare both open and closed animations on overlays; **don't** ship an entrance with no exit.
 - **Do** reference `--duration-*` / `--ease-*` tokens; **don't** hardcode ms or `cubic-bezier()`.

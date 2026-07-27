@@ -77,6 +77,15 @@ tokens:
   radius: [--radius, --radius-md, --radius-full]
   shadow: [--shadow-md]
   motion: [--duration-fast]
+motion:
+  enter: "none."
+  exit: "none."
+  stateChange: "Hover → box-shadow (shadow-md) + lift transform translateY(-1px); .dragging → opacity .5 + transform rotate(2deg) (the drag-pickup state); cursor:grab; :focus-visible ring."
+  duration: "--duration-fast (box-shadow on hover); HARDCODED .1s for the transform (lift + drag rotate) — NOT a --duration-* token."
+  easing: "browser default `ease` — the box-shadow/transform transitions declare durations only, with NO explicit --ease-* token."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover lift and the drag rotate/opacity apply instantly; the dragging card stays legible via the .5 opacity."
+  constraints: "Animate transform/opacity/shadow only (translateY lift, rotate + opacity on drag); the rotate(2deg) is scoped to the .dragging state only. Don't animate layout during reorder."
+  relatedPatterns: [drag-reorder, hover-lift]
 source:
   css: css/components/kanban.css
   classes: [kanban-board, kanban-column, kanban-column-header, kanban-column-body, kanban-card, kanban-card-title, kanban-card-meta, kanban-card-header, kanban-card-footer, kanban-card-avatar]

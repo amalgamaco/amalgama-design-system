@@ -72,6 +72,15 @@ tokens:
   color: [--color-surface-variant, --color-on-surface-variant, --color-error, --color-error-container, --color-primary]
   radius: [--radius-md, --radius-sm, --radius-full]
   spacing: ["10px 12px padding", "12px gap"]
+motion:
+  enter: "none — rows appear in the list statically."
+  exit: "none — removing a row (attachment-remove) is immediate."
+  stateChange: "Uploading state animates the progress bar width (.attachment-progress-bar); the remove control is a standard icon-btn with its own hover/press."
+  duration: "--duration-normal (progress bar width)."
+  easing: "--ease-default (progress bar width)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the upload progress bar snaps to its width instead of animating. Upload status is still conveyed by the numeric/aria state."
+  constraints: "The small 4px meter transitions width — a deliberate exception to the transform-only rule; animate transform/opacity elsewhere. Don't animate row insertion/removal (keep the list stable)."
+  relatedPatterns: [loading, hover-press]
 source:
   css: css/components/attachment.css
   classes: [attachment-list, attachment, attachment-icon, attachment-icon-image, attachment-body, attachment-name, attachment-meta, attachment-remove, attachment-progress, attachment-progress-bar, attachment-error]

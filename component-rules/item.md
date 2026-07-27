@@ -85,6 +85,16 @@ tokens:
   spacing: ["16px padding / 16px gap (default)", "12px 16px / 10px gap (item-sm)"]
   motion: [--duration-fast, --ease-default]
 
+motion:
+  enter: "none — the row is always present"
+  exit: "none"
+  stateChange: "Interactive rows (a.item / .item-clickable) recolor their background to --color-surface-variant on hover; :focus-visible moves the border to --color-focus and adds a 3px --color-focus-ring box-shadow. Transition covers background-color + border-color."
+  duration: "--duration-fast"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the hover tint and focus ring still apply, just without the fade."
+  constraints: "Animate background-color/border-color only (effects, no layout, no lift). Don't add a translate/scale on hover — this is a content-row primitive, not a Button. Standard easing, no overshoot."
+  relatedPatterns: ["motion.md → Hover & press micro-interactions (state-layer color = effect, Standard easing)"]
+
 source:
   css: css/components/item.css
   classes: [item, item-outline, item-muted, item-sm, item-media, item-media-icon, item-media-image, item-content, item-title, item-description, item-actions, item-header, item-footer, item-group, item-separator, item-clickable]

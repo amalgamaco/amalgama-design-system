@@ -70,6 +70,15 @@ tokens:
   radius: [--radius-md, --radius-full]
   motion: ["shimmer 1.5s infinite (background-size 200% 100%)"]
 
+motion:
+  enter: "none — the placeholder appears in place; its only motion is the continuous shimmer loop."
+  exit: "none — removed when real content replaces it."
+  stateChange: "Continuous shimmer loop (@keyframes shimmer: background-position 200%→-200% over a 200% 100% gradient) — a looping loading motion, not a state transition."
+  duration: "Hardcoded 1.5s loop (NOT a token)."
+  easing: "Default (no easing token declared; steady background-position loop)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the shimmer loop becomes static (Skeleton does not opt back in with an !important rule). The placeholder shape still conveys loading."
+  constraints: "Loading loop only — animate background-position (composited); don't animate layout. Keep the shimmer cheap; don't stack many simultaneous loops on one screen."
+  relatedPatterns: [loading]
 source:
   css: css/components/skeleton.css
   classes: [skeleton, skeleton-text, skeleton-title, skeleton-card, skeleton-circle, skeleton-avatar]

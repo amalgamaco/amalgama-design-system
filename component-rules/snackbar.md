@@ -80,6 +80,15 @@ tokens:
   radius: [--radius-sm]
   spacing: [--space-2, --space-4]
   motion: ["250ms slide-up in", "200ms fade-out"]
+motion:
+  enter: "Snackbar slides up + fades in (@keyframes snackbar-in / snackbar-stack-in: translateY(16px)→0, opacity 0→1). Toast slides in from the right (@keyframes slideInRight)."
+  exit: "Snackbar fades out + slides down via .snackbar--exit (@keyframes snackbar-out / snackbar-stack-out: translateY→16px, opacity→0)."
+  stateChange: "Action/close buttons show hover/press state-layer tints (color-mix on --color-inverse-primary / --color-inverse-on-surface); toast-close animates background + color."
+  duration: "Hardcoded 250ms in / 200ms out (NOT tokens); button tints use --duration-fast; the toast-spinner loader loops at .7s."
+  easing: "--ease-default (snackbar enter, button tints); exit is hardcoded ease-in; toast enter is hardcoded ease."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the component's own @media rule also zeroes the slide, falling back to a near-instant appearance / short opacity fade. The looping toast-spinner loader becomes static."
+  constraints: "One snackbar action button max; queue via .snackbar-viewport (column-reverse), no swipe-to-dismiss; animate transform/opacity only. Static side-by-side demos use .snackbar--static (animation:none)."
+  relatedPatterns: [snackbar, toast-stack, loading]
 source:
   css: css/components/toast.css
   classes: [snackbar, snackbar-message, snackbar-action, snackbar-close, "snackbar--multiline", "snackbar--static", "snackbar--exit", snackbar-viewport, toast, toast-container, toast-success, toast-error, toast-info]

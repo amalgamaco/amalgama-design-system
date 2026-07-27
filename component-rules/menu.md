@@ -88,6 +88,15 @@ tokens:
   color: [--color-surface-container, --color-outline-variant, --color-on-surface, --color-surface-variant, --color-error, --color-error-container]
   radius: [--radius-md, --radius-sm]
   motion: [--duration-normal, --ease-default]
+motion:
+  enter: "Panel scales + fades in on open (@keyframes dropdownIn / popoverIn: opacity 0→1, scale .96→1)."
+  exit: "none defined in CSS — the panel is removed instantly (toggled via [hidden] / JS), no closed-state animation (a known buildless gap vs. the Radix open/closed pair)."
+  stateChange: "Items show a hover/focus background tint (--color-surface-variant; danger → --color-error-container); checkbox/radio indicators fade opacity 0↔1."
+  duration: "--duration-normal (panel enter); --duration-fast (checkbox/radio indicator)."
+  easing: "--ease-default (panel enter and indicator)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the open scale/fade and indicator fade become instant."
+  constraints: "Animate transform/opacity only; no submenu/portal animation (unsupported). Enter-only today — if an exit animation is added, declare a matching closed state per the overlay pattern."
+  relatedPatterns: [overlay-enter-exit]
 source:
   css: [css/components/dropdown-menu.css, css/components/popover.css]
   classes: [dropdown-trigger, dropdown-content, dropdown-item, dropdown-item-indicator, dropdown-label, dropdown-separator, dropdown-shortcut, dropdown-group, dropdown-checkbox-item, dropdown-radio-item, popover-trigger, popover-content, popover-header, popover-title, popover-description]

@@ -88,6 +88,16 @@ tokens:
   spacing: [--space-2, --space-4]
   typography: [--font-size-body-lg, --font-size-body-md]
 
+motion:
+  enter: "none — the .search-bar is always present; .search-view is toggled by JS but declares NO CSS open/close animation (it appears/hides instantly — a gap vs. the Sheet/Dialog entrance patterns)"
+  exit: "none"
+  stateChange: ".search-bar recolors its background (color-mix state layer) + border-color on :hover and :focus-within (transition: background + border-color). .search-icon-btn transitions background/border-color/color on hover/active/aria-pressed. .search-view-result recolors on hover with NO transition declared (instant)."
+  duration: "--duration-fast"
+  easing: "--ease-default"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; hover/focus tints still apply, just without the fade."
+  constraints: "State-layer color changes are effects — keep them on Standard easing, no overshoot. The .search-view open/close is not animated in CSS; if an entrance is wanted, map it to the Dialog/Sheet pattern (fade + zoom / slide) rather than improvising."
+  relatedPatterns: ["motion.md → Hover & press micro-interactions (state-layer color = effect)", "motion.md → Entrance & exit patterns (search-view has no declared open/close — flag as a gap)"]
+
 source:
   css: css/components/search.css
   classes: [search-bar, search-bar-icon, search-bar-input, search-bar-trailing, search-bar-avatar, search-row, search-icon-btn, search-view, search-view-fullscreen, search-view-header, search-view-back, search-view-results, "search-field (toolbar.css)"]

@@ -81,6 +81,15 @@ tokens:
   radius: ["6px bar top corners", "--radius-lg (state containers)"]
   typography: [--font-size-caption]
 
+motion:
+  enter: "none — the SVG chart renders statically (no draw-on or grow-in animation)."
+  exit: "none."
+  stateChange: "On hover, .chart-dot grows its radius (r → 5.5) and .chart-bar dims (opacity → .82); the JS-positioned rich tooltip fades in/out via .chart-tooltip.is-visible (opacity 0↔1)."
+  duration: "--duration-fast (dot radius, bar opacity, tooltip opacity)."
+  easing: "--ease-default (all transitions)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); hover feedback and the tooltip fade become instant. Values are still conveyed by the native <title> a11y fallback."
+  constraints: "No draw/brush/zoom/legend animation (out of scope for the buildless chart); animate opacity and the SVG r attribute only. The tooltip is pointer-events:none and must not trap focus."
+  relatedPatterns: [hover-press, tooltip]
 source:
   css: css/components/chart.css
   classes: [chart-container, chart-svg, chart-grid, chart-axis-label, chart-line, chart-area, chart-dot, chart-bar, chart-pie, chart-pie-wrap, chart-legend, chart-legend-item, chart-legend-swatch]

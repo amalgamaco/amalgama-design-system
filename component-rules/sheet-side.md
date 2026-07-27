@@ -81,6 +81,15 @@ tokens:
   radius: ["0 0 16px 16px (top variant)"]
   motion: [--duration-sheet, --ease-emphasized]
   shadow: [--shadow-lg]
+motion:
+  enter: "Edge-anchored slide-in from the lateral edge: translateX(±100%→0) for right/left (top variant slides translateY(-100%→0)) when .open is added; the overlay scrim fades in."
+  exit: "Symmetric slide-out as .open is removed — the panel then unmounts (same approach as Dialog: no distinct 'closing' state)."
+  stateChange: "sheet-close hover → surface-variant background + on-surface color; only .sheet-body scrolls (header/footer stay fixed)."
+  duration: "--duration-sheet (500ms — panel slide, symmetric in/out); --duration-fast (close-button hover). Overlay fadeIn is HARDCODED .15s."
+  easing: "--ease-emphasized (panel slide — decelerate, NO overshoot, shared by all 4 sides); --ease-default (close-button hover). Overlay uses a HARDCODED `ease`."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The sheet appears/disappears without the slide and the scrim without the fade — there is no sheet-specific opt-back-in rule."
+  constraints: "Animate transform/opacity only (translateX/Y + scrim opacity); never ease-expressive-* on a Sheet — a bounce reads as unnatural on a large panel (GOVERNANCE §20.2). Don't animate width/left/right/top."
+  relatedPatterns: [edge-anchored-slide, overlay-fade]
 source:
   css: css/components/sheet.css
   classes: [sheet-overlay, sheet-content, sheet-content-right, sheet-content-left, sheet-content-top, sheet-close, sheet-header, sheet-title, sheet-description, sheet-body, sheet-footer]

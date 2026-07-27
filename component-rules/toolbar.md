@@ -75,6 +75,15 @@ tokens:
   radius: [--radius-md]
   spacing: [--space-2, --space-4]
   motion: [--duration-fast]
+motion:
+  enter: "none — the toolbar is a static controls row above a list/table."
+  exit: "none."
+  stateChange: "search-field hover / focus-within → color-mix state-layer background + border-color (secondary on focus); toolbar-btn hover → surface-variant bg + outline-variant border + on-surface color, :active → opacity .85; more-btn hover → surface-variant."
+  duration: "--duration-fast (search-field bg/border, toolbar-btn bg/border/color, more-btn)"
+  easing: "--ease-default (all toolbar hover/focus transitions)"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover/focus tints apply instantly."
+  constraints: "Animate background/border/color only (state-layer effects, Standard easing) — no transform/lift on toolbar controls. Don't animate width/height."
+  relatedPatterns: [state-layer]
 source:
   css: css/components/toolbar.css
   classes: [toolbar, search-field, toolbar-btn, result-count]

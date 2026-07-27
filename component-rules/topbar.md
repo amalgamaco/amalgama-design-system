@@ -76,6 +76,15 @@ tokens:
   radius: [--radius-md, --radius-full]
   spacing: [--topbar-height]
   motion: [--duration-fast]
+motion:
+  enter: "none — the topbar is sticky and persistent (position:sticky, top:0)."
+  exit: "none (persistent)."
+  stateChange: "topbar-btn.secondary hover → interactive-light background; shell-menu-btn (mobile hamburger) hover → interactive-light + focus-visible ring; topbar-breadcrumb links → text-primary on hover (untimed); topbar-notif is static."
+  duration: "--duration-fast (topbar-btn background)"
+  easing: "browser default `ease` — topbar-btn declares `transition: background var(--duration-fast)` with NO explicit --ease-* token (--ease-default would be the token-correct form)."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Button/hamburger hover tints apply instantly."
+  constraints: "Animate background/color only (state-layer) — no transform/lift on topbar controls. Don't animate layout."
+  relatedPatterns: [state-layer]
 source:
   css: css/layout.css
   classes: [topbar, topbar-breadcrumb, topbar-btn, topbar-notif, notif-badge, avatar, avatar-label, shell-menu-btn]

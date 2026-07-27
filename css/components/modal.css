@@ -46,7 +46,7 @@
   background: var(--color-scrim);
   display: flex; align-items: center; justify-content: center;
   z-index: 100;
-  animation: fadeIn .15s ease;
+  animation: fadeIn var(--duration-fast) var(--ease-enter);
 }
 .modal {
   position: relative;
@@ -56,7 +56,7 @@
   max-height: calc(100vh - 96px);
   overflow-y: auto;
   box-shadow: var(--shadow-lg);
-  animation: slideInUp .2s ease;
+  animation: slideInUp var(--duration-normal) var(--ease-enter);
   padding: 24px;
   display: flex;
   flex-direction: column;

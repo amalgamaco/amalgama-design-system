@@ -84,6 +84,16 @@ tokens:
   radius: "--radius-* inherited from the child buttons; inner corners collapse to 0"
   spacing: "children share a single 1px border (no gap between joined members)"
 
+motion:
+  enter: "none — always present; the group is a layout wrapper only (joins children by collapsing inner radii/borders)."
+  exit: "none."
+  stateChange: "The group itself declares no transition — on focus-visible a child is raised via z-index: 1 (no animated property). All hover/press/focus motion is delegated to the child controls (see button.css → button.md: hover lift, press layer, focus ring)."
+  duration: "none of its own — inherits --duration-fast from the child buttons."
+  easing: "none of its own — inherits --ease-default from the child buttons."
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css. No component-specific override; children collapse their own motion."
+  constraints: "Never animate the radius/border collapse that joins members — it is a static structural style. Motion belongs to the child buttons, not the group."
+  relatedPatterns: [state-layer]
+
 source:
   css: css/components/button-group.css
   classes: [button-group, button-group-vertical, button-group-text, button-group-separator]

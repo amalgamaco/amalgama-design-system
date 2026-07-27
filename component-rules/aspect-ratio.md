@@ -61,6 +61,16 @@ relationships:
 tokens:
   radius: ["--radius-lg (applied to the media child, optional)"]
 
+motion:
+  enter: "none — a layout primitive; it reserves space so media can load without shift, but it does not animate in."
+  exit: "none"
+  stateChange: "none — it is the native CSS aspect-ratio property on a div, with no interactive states or transitions of its own."
+  duration: "none"
+  easing: "none"
+  reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — the ratio box never animates; reserving space up front is itself the anti-jank measure."
+  constraints: "Never animate the ratio box or its dimensions — its whole purpose is to hold a stable shape and prevent layout shift while media loads. Any motion belongs to the media child (e.g. a Skeleton→image fade), not to the wrapper."
+  relatedPatterns: ["No motion — stable layout prevents reflow/shift as assets load (motion.md performance: never animate layout)"]
+
 source:
   css: "layout primitive — no dedicated css/components file; uses the native CSS aspect-ratio property"
   classes: []
