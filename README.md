@@ -1,33 +1,31 @@
 # Embassy — Amalgama Design System
 
-Librería de componentes UI reutilizable. El código de componentes vive en el paquete **`@amalgama/ds`** (`packages/ds/`): componentes React **Tailwind v4 + shadcn/Radix**, cada uno **autocontenido** — define sus variantes in-file con utilidades Tailwind que resuelven a tokens Embassy. La única hoja de estilos es `tailwind.theme.css` (tokens + mapeo de theme). Copiás el archivo del componente y funciona.
+Librería de componentes UI reutilizable, **sin build**. El código de cada componente vive en **`css/components/<nombre>.css`** — clases planas kebab-case (`btn-primary`, `chip-selected`, `badge-open`), cada archivo **autocontenido**: lo copiás o linkeás `css/components.css` (el barrel) y funciona, sin framework ni paso de compilación. El sitio de documentación canónico es **`index.html`** (SPA de una sola página, HTML + JS vanilla).
 
-> **La capa CSS buildless (`css/components/*.css` + el barrel `css/components.css`) fue eliminada (2026-06).** El único origen de verdad de los componentes es Tailwind (`packages/ds/components/ui/*.tsx`). Los tokens (`css/variables.css`, `css/base.css`, `css/layout.css`, `css/md-sys-bridge.css`) **no** están deprecados y siguen siendo el origen de los tokens.
+> **Arquitectura buildless (canónica, confirmada 2026-07).** `css/components/*.css` + `index.html` (vanilla) son el origen de verdad. Entre 2026-06-22 y 2026-06-26 el repo se migró a Tailwind v4 + React/Radix (`packages/ds/`, `islands/`); esa migración fue **revertida** el 2026-07-17 y todo se re-portó a CSS buildless. `packages/ds/` e `islands/` **no existen** en `main`. Wrappers React opcionales y tipados viven en `components/ui/*.tsx` (aplican las mismas clases, cero estilos propios) para proyectos que los quieran.
 
-> **AI agents**: ver [CLAUDE.md](./CLAUDE.md) para la guía de consumo completa. Ver [GOVERNANCE.md](./GOVERNANCE.md) para el contrato de calidad. Ver [MIGRATION.md](./MIGRATION.md) para aplicar el DS a un producto existente. Ver [WHITE-LABEL.md](./WHITE-LABEL.md) para implementaciones de marca cliente.
+> **AI agents / skills**: empezá por **[AI-USAGE-GUIDE.md](./AI-USAGE-GUIDE.md)** (cómo consumir el DS para construir/migrar pantallas) y **[CLAUDE.md](./CLAUDE.md)**. Para elegir/usar un componente: **[component-rules/](./component-rules/)** (reglas operativas por componente, machine-readable) + **[component-rules/manifest.json](./component-rules/manifest.json)** (registro). Para aplicar Embassy a Gamaforce: **[GAMAFORCE-MIGRATION.md](./GAMAFORCE-MIGRATION.md)**.
 
 ---
 
-## Inicio rápido (Tailwind — canónico)
+## Inicio rápido (buildless — canónico)
 
-En un proyecto Tailwind v4, importá el theme una vez y usá los componentes:
+Sin build. Linkeá las capas de tokens/base y las clases de componentes:
 
-```css
-/* tu hoja de estilos global */
-@import "@amalgama/ds/tailwind.theme.css";  /* tokens + mapeo de theme — la ÚNICA hoja del DS */
+```html
+<link rel="stylesheet" href="css/variables.css">     <!-- 1. tokens (requerido) -->
+<link rel="stylesheet" href="css/base.css">           <!-- 2. reset + tipografía base -->
+<link rel="stylesheet" href="css/layout.css">         <!-- 3. solo para el app shell (sidebar/topbar) -->
+<link rel="stylesheet" href="css/components.css">     <!-- 4. todos los componentes — o copiá uno de css/components/ -->
 ```
 
-```tsx
-import { Button } from "@amalgama/ds/button"   // autocontenido — no hay CSS extra que copiar
-
-<Button variant="primary">Crear vacante</Button>
+```html
+<button class="btn-primary">Crear vacante</button>
 ```
 
-Cada archivo en `packages/ds/components/ui/` es la implementación completa. Para "vendorizar" un componente, copiá su `.tsx` + `components/lib/utils.ts` (`cn()`); solo necesita el import del theme de arriba. Cargá las fuentes (DM Mono / Epilogue / Inter) por separado.
+Cada archivo en `css/components/` es la implementación completa de ese componente — copialo standalone (solo necesita la capa de tokens de arriba). Fuentes: **Inter** (body), **Epilogue** (headings), **DM Mono** (code) vía `var(--font-*)`. Íconos: **Lucide**.
 
-> **Sin componentes buildless.** El viejo path "linkeá `css/components.css` y usá `btn-primary`" ya no existe (fue eliminado en 2026-06). Para tokens sin build podés seguir linkeando `css/variables.css` + `css/base.css`, pero los componentes son Tailwind: importá `@amalgama/ds/tailwind.theme.css` y copiá el `.tsx`.
-
-Abrí `index.html` en un servidor local para ver el catálogo interactivo:
+Ver el catálogo interactivo:
 
 ```bash
 python3 -m http.server 8087
@@ -41,154 +39,123 @@ python3 -m http.server 8087
 ```
 amalgama-ds/
 ├── index.html                # Sitio de documentación canónico (SPA, una sola página)
-├── css/                      # Tokens + base (fuente de verdad de tokens)
-│   ├── variables.css         # Design tokens (fuente de verdad)
+├── css/
+│   ├── variables.css         # Design tokens — ORIGEN DE VERDAD de tokens (ver TOKENS.md)
 │   ├── base.css              # Reset, tipografía, animaciones
 │   ├── layout.css            # App shell (sidebar, topbar, avatar)
-│   ├── md-sys-bridge.css     # Alias de nombres MD3 (--md-sys-color-*) → roles Embassy
-│   ├── components.css        # ⚠️ DEPRECADO/congelado — barrel buildless (solo para el docs site)
-│   └── components/           # ⚠️ DEPRECADO/congelado — CSS por componente (no agregar nada)
-├── packages/ds/              # @amalgama/ds — FUENTE DE VERDAD de los componentes (Tailwind v4 + shadcn/Radix)
-│   ├── components/ui/        # Componentes React autocontenidos (variantes Tailwind in-file)
-│   ├── components/lib/utils.ts # cn() (extendTailwindMerge con tokens Embassy)
-│   ├── css/                  # Copia GENERADA de los tokens (no editar; ver scripts/sync-tokens.mjs)
-│   └── tailwind.theme.css    # Tokens + mapeo de theme — la única hoja de estilos del paquete
-├── islands/                  # Glue Vite: monta @amalgama/ds en el index.html
-│   ├── src/                  # Showcases + registro (main.tsx)
-│   └── dist/                 # Bundle COMMITEADO y servido (embassy-islands.{js,css})
-├── docs/                     # Stubs de redirect a la SPA index.html (+ docs.css, requerido por index.html)
-├── scripts/sync-tokens.mjs   # Sincroniza css/variables.css → packages/ds (con --check para CI)
+│   ├── md-sys-bridge.css     # Alias MD3 (--md-sys-color-*) → roles Embassy (opcional)
+│   ├── components.css         # Barrel: @import de todos los css/components/*.css
+│   └── components/           # CSS por componente — ORIGEN DE VERDAD de componentes (62 archivos)
+├── components/ui/*.tsx        # Wrappers React opcionales (cva + cn, mismas clases, cero estilos propios)
+├── component-rules/          # Reglas operativas por componente (machine-readable) — ver README + INDEX + manifest.json
+│   ├── <id>.md               # 61 archivos: frontmatter YAML (schema) + prosa (ejemplos correcto/incorrecto)
+│   ├── manifest.json         # Registro agregado (regenerar: python3 scripts/build-manifest.py)
+│   ├── README.md             # Schema + cómo lo consumen los skills
+│   └── INDEX.md              # Cobertura (61/61)
+├── guidelines/               # Playbook UX (13 .md): principios, IA, jerarquía, forms, tablas, nav, estados, motion, a11y…
 ├── skills/design-system/     # SKILL.md — instrucciones para el skill de IA
+├── scripts/
+│   ├── validate-ds.mjs       # Validación automatizada (node scripts/validate-ds.mjs)
+│   ├── build-manifest.py     # Regenera component-rules/manifest.json desde los frontmatter
+│   └── sync-tokens.mjs       # (legacy Tailwind — no aplica en buildless)
+├── docs/                     # Stubs de redirect a la SPA index.html
 ├── CLAUDE.md                 # Guía de consumo (humanos + IA)
+├── AI-USAGE-GUIDE.md         # Cómo los agentes/skills consumen el DS
+├── GAMAFORCE-MIGRATION.md    # Aplicar Embassy a Gamaforce (audit + workflow + screen patterns + DoD)
+├── TOKENS.md                 # Referencia de tokens (propósito + cuándo/cuándo no)
 ├── GOVERNANCE.md             # Contrato de consistencia
-├── MIGRATION.md              # Guía de migración desde legacy
+├── MIGRATION.md              # Guía de migración genérica desde legacy
 ├── WHITE-LABEL.md            # Theming de marca cliente
-├── DEPLOYMENT.md             # Cómo se actualiza producción y por qué puede no reflejarse
-└── CONTRIBUTING.md           # Cómo agregar o modificar componentes
+├── CONTRIBUTING.md           # Cómo agregar o modificar componentes
+└── DEPLOYMENT.md             # Cómo se actualiza producción
 ```
 
 ---
 
 ## Componentes
 
+Origen de verdad = `css/components/<nombre>.css` (clases planas). La columna **React** nombra el wrapper opcional en `components/ui/` donde existe (`—` = solo-CSS). Cada componente tiene además su regla operativa en `component-rules/<id>.md`.
+
 ### Core (genéricos)
 
-| Componente | CSS (legacy — eliminado) | TSX (canónico) | Descripción |
-|---|---|---|---|
-| Button | `button.css` | `button.tsx` | Primary, secondary, tertiary, text, icon; 5 tamaños |
-| Badge | `badge.css` | `badge.tsx` | Indicadores de estado (9 variantes) |
-| Chip | `chip.css` | `chip.tsx` | Filtros interactivos, tags seleccionables |
-| Card | `card.css` | `card.tsx` | Contenedor con borde y fondo |
-| Input / Select / Textarea | `form.css` | `input.tsx`, `select.tsx`, `textarea.tsx` | Campos de formulario con label y hint |
-| Search Bar | `search.css` | `search.tsx` | Barra de búsqueda standalone (56px, pill) |
-| Table | `table.css` | `table.tsx` | Tabla de datos con filas clickeables |
-| Tabs | `tabs.css` | `tabs.tsx` | Pestañas con paneles |
-| Modal | `modal.css` | `modal.tsx` | Diálogo modal con overlay |
-| Toast | `toast.css` | `toast.tsx` | Notificaciones temporales |
-| Toolbar | `toolbar.css` | `toolbar.tsx` | Barra de filtros con search-field compacto |
-| Segmented Button | `segmented-button.css` | — | Selector de opciones mutuamente excluyentes |
-| Page Header | `page-header.css` | `page-header.tsx` | Encabezado de página con acciones |
-| Stat Card | `stat-card.css` | `stat-card.tsx` | Tarjetas KPI / métricas |
-| Skeleton | `skeleton.css` | `skeleton.tsx` | Placeholder de carga |
-| Empty State | `empty-state.css` | `empty-state.tsx` | Estado vacío |
-| Back Link | `back-link.css` | `back-link.tsx` | Enlace de retorno con ícono |
-| Description Section | `description.css` | `description-section.tsx` | Sección editable con título + editor |
-
-### Extended (orientados a dominio)
-
-| Componente | CSS (legacy — eliminado) | TSX (canónico) | Descripción |
-|---|---|---|---|
-| Vacancy Card | `vacancy-card.css` | `vacancy-card.tsx` | Tarjeta de vacante con stats y asignados |
-| Person Card | `person-card.css` | `person-card.tsx` | Tarjeta de persona / candidato |
-| Kanban | `kanban.css` | `kanban-card.tsx` | Tablero kanban con columnas y cards |
-| Create Form | `create-form.css` | `create-form.tsx` | Header/footer para formularios de creación |
-| Placeholder | `placeholder.css` | `placeholder.tsx` | Panel para secciones en construcción |
-
-### App Shell (layout.css)
-
-| Elemento | Clase | Descripción |
+| Componente | CSS (canónico) | React (opcional) |
 |---|---|---|
-| Topbar | `.topbar` | Barra superior de la aplicación |
-| Sidebar | `.sidebar` / `.nav-item` | Navegación lateral |
-| Avatar | `.avatar` | Círculo con iniciales o imagen |
+| Button | `button.css` | `button.tsx` |
+| Badge | `badge.css` | `badge.tsx` |
+| Chip | `chip.css` | `chip.tsx` |
+| Card / Item (Basic Card) | `card.css` / `item.css` | `card.tsx` / — |
+| Input / Select / Textarea | `form.css` / `select.css` | `input.tsx`, `select.tsx`, `textarea.tsx` |
+| Search | `search.css` (+ `.search-field` en `toolbar.css`) | `search.tsx` |
+| Table / Data Table | `table.css` / `data-table.css` | `table.tsx` / `data-table.tsx` |
+| Tabs | `tabs.css` | `tabs.tsx` |
+| Dialog (+ Alert Dialog) / Sheet | `modal.css` / `sheet.css` | `modal.tsx` / `sheet.tsx` |
+| Toast / Snackbar | `toast.css` | `toast.tsx` |
+| Toolbar | `toolbar.css` | `toolbar.tsx` |
+| Segmented Button | `segmented-button.css` | `segmented-button.tsx` |
+| Stat Card / Skeleton / Empty State | `stat-card.css` / `skeleton.css` / `empty-state.css` | `*.tsx` |
 
-### Interactivos (en `@amalgama/ds`, vía islands)
+### Extended (dominio)
 
-Checkbox, radio, switch, menú (dropdown), tooltip, slider, date picker (calendar), sheet, list, progress, carousel, divider (separator), dialog, popover, avatar, snackbar (sonner). Implementados en `packages/ds/components/ui/` (Tailwind + Radix) y renderizados en el docs site vía islands. No improvises estilos — usá estos componentes o reportá el gap.
+Vacancy Card (`vacancy-card.css`), Kanban Card (`kanban.css`), Person Card (`person-card.css`, variante de Basic Card), Create Form (`create-form.css`), Placeholder (`placeholder.css`) — solo-CSS, aplicados con clases directas.
 
----
+### App Shell (`layout.css`)
 
-## Uso con React
+Topbar (`.topbar`), Sidebar / Navigation Drawer (`.sidebar` / `.nav-item`, drawer modal &lt;768px), Avatar (`.avatar`).
 
-Los componentes son autocontenidos: definen sus variantes con utilidades Tailwind (que resuelven a tokens Embassy). Solo necesitás importar el theme una vez (`@amalgama/ds/tailwind.theme.css`) y los peer deps:
-
-```bash
-npm install class-variance-authority clsx tailwind-merge tailwindcss
-```
-
-```tsx
-import { Button } from "@amalgama/ds/button"
-
-<Button variant="primary">Crear vacante</Button>
-<Button variant="secondary">Cancelar</Button>
-<Button variant="tertiary">Ver detalle</Button>
-<Button variant="text">Más opciones</Button>
-```
-
-> En las tablas de arriba, la columna **CSS** lista los archivos `css/components/*.css` **ya eliminados** (2026-06) — referencia histórica del origen de cada componente; la columna **TSX** es el componente canónico en `packages/ds/components/ui/`.
+> El inventario completo con variantes y reglas de decisión (`Cuándo usar / Cuándo no`) está en **CLAUDE.md** (tabla de inventario) y en **`component-rules/<id>.md`** por componente.
 
 ---
 
 ## Dark mode
 
-Dark mode es automático — no requiere overrides por componente:
+Automático — sin overrides por componente:
 
 ```html
-<html data-theme="dark">
-  <!-- todos los componentes se adaptan solos -->
-</html>
+<html data-theme="dark"><!-- todos los componentes se adaptan solos --></html>
 ```
 
-Los tokens semánticos (`--color-*`, `--text-*`, `--bg`) se recalibran solos bajo `data-theme="dark"`. Los componentes son ciegos al tema.
+Los roles semánticos (`--color-*`, `--text-*`, `--bg`) se recalibran solos bajo `data-theme="dark"`. Los componentes son ciegos al tema. Ver **TOKENS.md**.
 
 ---
 
 ## Personalización de tokens
 
-Para personalizar el DS (en un proyecto interno o un producto cliente), **sobreescribí las primitivas**, no los roles semánticos:
+Sobreescribí las **primitivas**, no los roles semánticos:
 
 ```css
-/* brand-theme.css — cargá ANTES de variables.css o en :root después */
 :root {
-  /* Paleta de marca del cliente */
-  --primary-900: #1a3a5c;   /* navy del cliente */
-  --primary-500: #2d6db4;   /* primary base */
-  --secondary-500: #00a86b; /* accent del cliente */
-
-  /* Personalidad de forma */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 6px;
-  --radius-xl: 8px;
-
-  /* Tipografía de marca (solo si tenés licencia de las fuentes) */
-  --font-heading: 'Brand Heading', sans-serif;
-  --font-body: 'Brand Body', sans-serif;
+  --primary-900: #1a3a5c;  --primary-500: #2d6db4;  --secondary-500: #00a86b;
+  --radius-sm: 2px; --radius-md: 4px; --radius-lg: 6px; --radius-xl: 8px;
+  --font-heading: 'Brand Heading', sans-serif; --font-body: 'Brand Body', sans-serif;
 }
 ```
 
-Ver [WHITE-LABEL.md](./WHITE-LABEL.md) para el proceso completo con checklist de verificación.
+Ver [WHITE-LABEL.md](./WHITE-LABEL.md) para el proceso completo.
 
 ---
 
-## Documentación
+## Validación
+
+```bash
+node scripts/validate-ds.mjs      # token-lint + rutas/anchors + cobertura de manifest/metadata
+python3 scripts/build-manifest.py # regenera component-rules/manifest.json desde los frontmatter
+```
+
+---
+
+## Documentación (mapa)
 
 | Documento | Propósito |
 |---|---|
-| `index.html` (raíz) | Catálogo interactivo — la doc canónica |
-| [CLAUDE.md](./CLAUDE.md) | Guía de consumo completa para humanos e IA |
-| [GOVERNANCE.md](./GOVERNANCE.md) | Contrato de consistencia — reglas que todos los componentes deben cumplir |
-| [MIGRATION.md](./MIGRATION.md) | Cómo migrar un producto existente al DS |
+| `index.html` (raíz) | Catálogo interactivo — doc humana canónica |
+| [AI-USAGE-GUIDE.md](./AI-USAGE-GUIDE.md) | Cómo agentes/skills consumen el DS para construir/migrar pantallas |
+| [component-rules/](./component-rules/) + `manifest.json` | Reglas operativas por componente (machine-readable) — elegir/usar un componente |
+| [GAMAFORCE-MIGRATION.md](./GAMAFORCE-MIGRATION.md) | Aplicar Embassy a Gamaforce — audit, workflow, screen patterns, checklists, DoD |
+| [guidelines/](./guidelines/) | Playbook UX — cómo construir una buena *pantalla* (principios, IA, forms, tablas, estados, motion, a11y) |
+| [TOKENS.md](./TOKENS.md) | Referencia de tokens (propósito + cuándo/cuándo no) — fuente: `css/variables.css` |
+| [CLAUDE.md](./CLAUDE.md) | Guía de consumo completa (humanos + IA) + tabla de inventario |
+| [GOVERNANCE.md](./GOVERNANCE.md) | Contrato de consistencia — reglas transversales |
+| [MIGRATION.md](./MIGRATION.md) | Migración genérica desde legacy (algoritmo de reemplazo de tokens, mapeo, anti-patrones) |
 | [WHITE-LABEL.md](./WHITE-LABEL.md) | Theming de marca cliente |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Cómo agregar o modificar componentes |
-| [DEPLOYMENT.md](./DEPLOYMENT.md) | Cómo se actualiza el sitio publicado y por qué los cambios pueden no reflejarse |
+| [DEPLOYMENT.md](./DEPLOYMENT.md) | Cómo se actualiza el sitio publicado |
