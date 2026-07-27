@@ -17,11 +17,11 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | button | ✅ authored | c-button | button.css |
 | chip | ✅ authored | c-chip | chip.css |
 | dialog | ✅ authored | c-dialog | modal.css |
-| segmented-button (seg-btn) | 🟡 pending | c-seg-btn | segmented-button.css |
-| button-group | 🟡 pending | c-button-group | button-group.css |
-| toggle | 🟡 pending | c-toggle | toggle.css |
-| toggle-group | 🟡 pending | c-toggle-group | toggle-group.css |
-| badge | 🟡 pending | c-badge | badge.css |
+| segmented-button (seg-btn) | ✅ authored | c-seg-btn | segmented-button.css |
+| button-group | ✅ authored | c-button-group | button-group.css |
+| toggle | ✅ authored | c-toggle | toggle.css |
+| toggle-group | ✅ authored | c-toggle-group | toggle-group.css |
+| badge | ✅ authored | c-badge | badge.css |
 | input | 🟡 pending | c-input | form.css |
 | select | 🟡 pending | c-select | select.css |
 | textarea | 🟡 pending | c-textarea | form.css |
@@ -29,8 +29,8 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | input-otp | 🟡 pending | c-input-otp | input-otp.css |
 | form | 🟡 pending | c-form | form.css |
 | label | 🟡 pending | c-label | label.css |
-| checkbox | 🟡 pending | c-checkbox | checkbox.css |
-| radio | 🟡 pending | c-radio | radio-group.css |
+| checkbox | ✅ authored | c-checkbox | checkbox.css |
+| radio | ✅ authored | c-radio | radio-group.css |
 | switch | 🟡 pending | c-switch | switch.css |
 | slider | 🟡 pending | c-slider | slider.css |
 | search | 🟡 pending | c-search | search.css |
@@ -76,5 +76,5 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | kanban-card | 🟡 pending | c-kanban | kanban.css |
 | person-card | 🟡 pending | c-person | person-card.css |
 
-**Coverage: 3 / 61 authored.** The remaining 58 are the primary #5 work item
+**Coverage: 10 / 61 authored.** The remaining 51 are the primary #5 work item
 (tracked as a phased backlog in the audit report).
