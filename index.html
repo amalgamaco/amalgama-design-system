@@ -10666,7 +10666,7 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
             <thead><tr><th>Parte (shadcn)</th><th>Rol / token</th></tr></thead>
             <tbody>
               <tr><td><code>DialogOverlay</code></td><td><code>--color-scrim</code></td></tr>
-              <tr><td><code>DialogContent</code></td><td><code>bg-card</code> + <code>border-border</code> + <code>rounded-lg</code> + <code>shadow-xl</code></td></tr>
+              <tr><td><code>DialogContent</code></td><td><code>bg-card</code> + <code>border-border</code> + <code>rounded-lg</code> + <code>--shadow-lg</code></td></tr>
               <tr><td><code>DialogHeader</code> / <code>DialogFooter</code> — borde</td><td><code>--border</code></td></tr>
               <tr><td><code>DialogTitle</code></td><td><code>--text-primary</code> (<code>text-base</code>, <code>font-semibold</code>)</td></tr>
               <tr><td><code>DialogClose</code> (X)</td><td><code>--color-on-surface-variant</code>; hover <code>--color-surface-variant</code></td></tr>
@@ -14574,13 +14574,13 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
       </div>
       <div class="docs-section" id="tc-avatar-s-4">
         <h2 class="docs-section-title">Tokens y especificaciones</h2>
-        <p class="docs-section-desc">Cada variante usa un gradiente de la paleta; las iniciales en <code>--color-on-primary</code>. Se recalibra solo en dark mode.</p>
+        <p class="docs-section-desc">Cada variante usa el relleno tonal de la paleta; las iniciales en <code>--color-on-primary</code>. Se recalibra solo en dark mode.</p>
           <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="avatar"></div></div>
         <table class="ds-table">
           <thead><tr><th>Variante</th><th>Rol / token</th></tr></thead>
           <tbody>
             <tr><td><code>.avatar</code> (fallback)</td><td>Relleno <code>--color-primary-container</code>; texto <code>--color-on-primary-container</code></td></tr>
-            <tr><td><code>.person-avatar</code> (44px)</td><td>Gradiente <code>--secondary-900</code> → <code>--secondary-500</code>; texto <code>--color-on-primary</code></td></tr>
+            <tr><td><code>.person-avatar</code> (44px)</td><td>Relleno <code>--color-secondary-container</code>; texto <code>--color-on-secondary-container</code></td></tr>
             <tr><td><code>.assignee-avatar</code> (22px)</td><td>Gradientes de paleta (<code>--secondary-*</code>, <code>--success-*</code>, <code>--tertiary-*</code>, <code>--error-*</code>)</td></tr>
           </tbody>
         </table>
@@ -14622,7 +14622,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
           <div class="ds-guideline-grid">
             <div class="ds-guideline-card do">
               <h3>✓ Do</h3>
-              <ul><li>Usar siempre iniciales de 2 letras (Nombre + Apellido) para máxima legibilidad</li><li>Asignar colores de gradiente de forma consistente para el mismo usuario</li><li>Usar el tamaño correcto según el contexto: 22px asignados, 32px topbar, 44px perfil</li></ul>
+              <ul><li>Usar siempre iniciales de 2 letras (Nombre + Apellido) para máxima legibilidad</li><li>Asignar el color de fondo de forma consistente para el mismo usuario</li><li>Usar el tamaño correcto según el contexto: 22px asignados, 32px topbar, 44px perfil</li></ul>
             </div>
             <div class="ds-guideline-card dont">
               <h3>✕ Don't</h3>
@@ -14649,7 +14649,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Las iniciales usan <code>--color-on-primary</code> sobre el relleno tonal — contraste AA garantizado en tema claro y oscuro, sin overrides por tema</li><li><span class="ds-a11y-icon">♿</span>No usar el color del avatar como único indicador de identidad — incluir nombre visible cuando el espacio lo permita</li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Las iniciales usan <code>--color-on-primary-container</code> sobre el relleno tonal — contraste AA garantizado en tema claro y oscuro, sin overrides por tema</li><li><span class="ds-a11y-icon">♿</span>No usar el color del avatar como único indicador de identidad — incluir nombre visible cuando el espacio lo permita</li></ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Teclado y ARIA</h2>
@@ -21151,7 +21151,7 @@ import { Select } from &quot;./components/ui/select&quot;
           <p class="bd-lead">El bottom sheet es un panel que se desliza desde el <b>borde inferior</b> de la pantalla para mostrar acciones o contenido suplementario sin abandonar la vista — ideal en contextos compactos y mobile.</p>
           <ul class="bd-overview-list">
             <li><b>Anclado al borde inferior</b>, construido sobre el primitivo <code>Dialog</code> de Radix (<code>Sheet side="bottom"</code>).</li>
-            <li><b>Medidas:</b> 384px de alto (<code>h-96</code>). Ancho <b>completo en mobile</b>; acotado a 512px (<code>sm:max-w-lg</code>) y <b>centrado</b> en pantallas anchas, con esquinas superiores redondeadas.</li>
+            <li><b>Medidas:</b> alto máximo <b>80vh</b> (<code>max-h-[80vh]</code>). Ancho <b>completo en mobile</b>; acotado a 512px (<code>sm:max-w-lg</code>) y <b>centrado</b> en pantallas anchas, con esquinas superiores redondeadas.</li>
             <li><b>Siempre modal:</b> overlay con scrim (<code>--color-scrim</code>) + desenfoque; cierre con <code>Esc</code>, clic en el overlay o botón.</li>
             <li><b>Anatomía:</b> <code>SheetHeader</code> (título) · <code>SheetBody</code> (con scroll) · <code>SheetFooter</code> (acciones).</li>
             <li>Para acciones rápidas o listas en mobile — no para flujos largos ni navegación principal.</li>
@@ -21169,7 +21169,7 @@ import { Select } from &quot;./components/ui/select&quot;
                   <button class="btn-primary btn-sm" type="button" onclick="closeOverlay('bshsc-5')">Aplicar</button></div>
               </div>
             </div></div>
-          <ol class="bd-family-legend"><li>Bottom sheet — <code>side="bottom"</code> (panel de 384px de alto, ancho completo).</li></ol>
+          <ol class="bd-family-legend"><li>Bottom sheet — <code>side="bottom"</code> (panel de alto máx. 80vh, ancho completo).</li></ol>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="specs">
@@ -21181,10 +21181,10 @@ import { Select } from &quot;./components/ui/select&quot;
             <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
             <tbody>
               <tr><td>Overlay (scrim)</td><td><code>fixed inset-0</code>, scrim al 40% + desenfoque (<code>backdrop-blur-sm</code>)</td></tr>
-              <tr><td>Panel (<code>SheetContent</code>)</td><td>Superficie anclada abajo con borde superior y <code>shadow-xl</code></td></tr>
-              <tr><td><code>SheetHeader</code></td><td>Título (<code>font-heading text-heading-xs</code> semibold), borde inferior 1px</td></tr>
+              <tr><td>Panel (<code>SheetContent</code>)</td><td>Superficie anclada abajo con borde superior y <code>--shadow-lg</code></td></tr>
+              <tr><td><code>SheetHeader</code></td><td>Título (<code>font-heading text-heading-xs</code> semibold)</td></tr>
               <tr><td><code>SheetBody</code></td><td><code>flex-1</code> con scroll (<code>overflow-y-auto</code>)</td></tr>
-              <tr><td><code>SheetFooter</code></td><td>Acciones a la derecha, borde superior 1px</td></tr>
+              <tr><td><code>SheetFooter</code></td><td>Acciones a la derecha</td></tr>
             </tbody>
           </table>
         </section>
@@ -21193,7 +21193,7 @@ import { Select } from &quot;./components/ui/select&quot;
           <table class="ds-table">
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
-              <tr><td>Alto</td><td>384px (<code>h-96</code>)</td></tr>
+              <tr><td>Alto</td><td>máx. <code>80vh</code></td></tr>
               <tr><td>Ancho</td><td>Completo en mobile (&lt; 640&nbsp;px); acotado a 512px (<code>sm:max-w-lg</code>) y centrado en ≥ 640&nbsp;px</td></tr>
               <tr><td>Padding header / body</td><td><code>px-6 py-5</code></td></tr>
               <tr><td>Padding footer</td><td><code>px-6 py-4</code></td></tr>
@@ -21221,7 +21221,7 @@ import { Select } from &quot;./components/ui/select&quot;
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
               <tr><td>Overlay</td><td><code>--color-scrim</code></td></tr>
-              <tr><td>Panel</td><td><code>--color-surface</code> + <code>--border</code> + <code>shadow-xl</code></td></tr>
+              <tr><td>Panel</td><td><code>--color-surface</code> + <code>--border</code> + <code>--shadow-lg</code></td></tr>
               <tr><td>Bordes header/footer</td><td><code>--border</code></td></tr>
               <tr><td>Título</td><td><code>--color-on-surface</code></td></tr>
               <tr><td>Body / descripción</td><td><code>--color-on-surface</code> / <code>--color-on-surface-variant</code></td></tr>
@@ -21293,7 +21293,7 @@ import { Select } from &quot;./components/ui/select&quot;
           <h2 class="docs-section-title">Layout responsive</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>Patrón preferido en <b>mobile / compacto</b>; en desktop preferí un <b>side sheet</b> o un Dialog.</li>
-            <li>Alto acotado (384px) con scroll interno; pantalla completa solo si la tarea lo exige.</li>
+            <li>Alto acotado (máx. 80vh) con scroll interno; pantalla completa solo si la tarea lo exige.</li>
             <li>Header y footer fijos; solo el body scrollea.</li>
           </ul>
         </section>
@@ -21360,7 +21360,7 @@ import { Select } from &quot;./components/ui/select&quot;
           <p class="bd-lead">El side sheet es un panel que se desliza desde un <b>lateral</b> de la pantalla (derecha o izquierda) para mostrar filtros, detalle o acciones contextuales — pensado para pantallas anchas.</p>
           <ul class="bd-overview-list">
             <li><b>Anclado a un lateral</b>, mismo panel edge-anchored del DS (<code>Sheet side="right" | "left"</code>), CSS + vanilla JS.</li>
-            <li><b>Medidas:</b> 320px de ancho (<code>w-80</code>), alto completo de la pantalla.</li>
+            <li><b>Medidas:</b> <code>75vw</code> de ancho (máx. <b>384px</b>, <code>sm:max-w-sm</code>), alto completo de la pantalla.</li>
             <li><b>Siempre modal:</b> overlay con scrim (<code>--color-scrim</code>) + desenfoque; cierre con <code>Esc</code>, clic en el overlay o botón.</li>
             <li><b>Anatomía:</b> <code>SheetHeader</code> (título) · <code>SheetBody</code> (con scroll) · <code>SheetFooter</code> (acciones).</li>
             <li>Para filtros, detalle de ítem o formularios secundarios en desktop — no para navegación principal.</li>
@@ -21501,10 +21501,10 @@ import { Select } from &quot;./components/ui/select&quot;
             <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
             <tbody>
               <tr><td>Overlay (scrim)</td><td><code>fixed inset-0</code>, scrim al 40% + desenfoque (<code>backdrop-blur-sm</code>)</td></tr>
-              <tr><td>Panel (<code>SheetContent</code>)</td><td>Superficie anclada al lateral con borde y <code>shadow-xl</code></td></tr>
-              <tr><td><code>SheetHeader</code></td><td>Título (<code>font-heading text-heading-xs</code> semibold), borde inferior 1px</td></tr>
+              <tr><td>Panel (<code>SheetContent</code>)</td><td>Superficie anclada al lateral con borde y <code>--shadow-lg</code></td></tr>
+              <tr><td><code>SheetHeader</code></td><td>Título (<code>font-heading text-heading-xs</code> semibold)</td></tr>
               <tr><td><code>SheetBody</code></td><td><code>flex-1</code> con scroll (<code>overflow-y-auto</code>)</td></tr>
-              <tr><td><code>SheetFooter</code></td><td>Acciones a la derecha, borde superior 1px</td></tr>
+              <tr><td><code>SheetFooter</code></td><td>Acciones a la derecha</td></tr>
             </tbody>
           </table>
         </section>
@@ -21513,7 +21513,7 @@ import { Select } from &quot;./components/ui/select&quot;
           <table class="ds-table">
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
-              <tr><td>Ancho</td><td>320px (<code>w-80</code>)</td></tr>
+              <tr><td>Ancho</td><td><code>75vw</code> (máx. 384px)</td></tr>
               <tr><td>Alto</td><td>completo de la pantalla</td></tr>
               <tr><td>Padding header / body</td><td><code>px-6 py-5</code></td></tr>
               <tr><td>Padding footer</td><td><code>px-6 py-4</code></td></tr>
@@ -21540,7 +21540,7 @@ import { Select } from &quot;./components/ui/select&quot;
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
               <tr><td>Overlay</td><td><code>--color-scrim</code></td></tr>
-              <tr><td>Panel</td><td><code>--color-surface</code> + <code>--border</code> + <code>shadow-xl</code></td></tr>
+              <tr><td>Panel</td><td><code>--color-surface</code> + <code>--border</code> + <code>--shadow-lg</code></td></tr>
               <tr><td>Bordes header/footer</td><td><code>--border</code></td></tr>
               <tr><td>Título</td><td><code>--color-on-surface</code></td></tr>
               <tr><td>Body / descripción</td><td><code>--color-on-surface</code> / <code>--color-on-surface-variant</code></td></tr>
@@ -21549,7 +21549,7 @@ import { Select } from &quot;./components/ui/select&quot;
         </section>
         <section class="docs-section" id="tc-side-sheet-s-4">
           <h2 class="docs-section-title">Relación con Material Design 3</h2>
-          <div class="ds-callout">MD3 define el <b>side sheet</b> con un ancho de referencia de 256&nbsp;dp, en modos <b>standard</b>, <b>modal</b> y <b>detached</b>. Embassy implementa un único panel lateral (Radix Dialog) de 320px, <b>siempre modal</b> (con scrim), sin variantes standard/detached — divergencia documentada.</div>
+          <div class="ds-callout">MD3 define el <b>side sheet</b> con un ancho de referencia de 256&nbsp;dp, en modos <b>standard</b>, <b>modal</b> y <b>detached</b>. Embassy implementa un único panel lateral (CSS + vanilla JS) de <code>75vw</code> (máx. 384px), <b>siempre modal</b> (con scrim), sin variantes standard/detached — divergencia documentada.</div>
         </section>
         </div>
         <nav class="ds-toc" data-toc-auto id="tc-side-sheet-s-toc" aria-label="En esta página">
@@ -21598,7 +21598,7 @@ import { Select } from &quot;./components/ui/select&quot;
           <h2 class="docs-section-title">Diseño adaptativo</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>Usá el side sheet en <b>pantallas anchas</b> (desktop); en mobile/compacto migrá a un <b>bottom sheet</b> o pantalla completa.</li>
-            <li>Ancho acotado (320px) al contenido; no lo estires a media pantalla salvo que el detalle lo requiera.</li>
+            <li>Ancho acotado (75vw, máx. 384px) al contenido; no lo estires a media pantalla salvo que el detalle lo requiera.</li>
             <li>El panel convive visualmente con el contenido principal, que queda detrás del scrim.</li>
             <li>En viewports muy angostos, el side sheet puede ocupar casi todo el ancho.</li>
           </ul>
