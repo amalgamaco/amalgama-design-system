@@ -14,8 +14,10 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+// fileURLToPath decodes %20 etc. — robust for repo paths containing spaces.
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8");
 let fails = 0, warns = 0;
 const fail = (m) => { console.error("  ✗ " + m); fails++; };
