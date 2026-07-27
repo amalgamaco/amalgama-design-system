@@ -119,8 +119,9 @@ cat /tmp/amalgama-ds/MIGRATION.md       # mandatory for any existing-product wor
 | Information needed | Where to read |
 |---|---|
 | Token values (colors, type scale, spacing, radii, shadows) | `css/variables.css` |
+| **Which component to pick + how to use it correctly** (when/when-not, variants+purpose, size criteria, states, a11y, keyboard, heuristics, relationships, correct/incorrect examples) | **`component-rules/<id>.md`** — machine-readable YAML frontmatter + prose; **read this FIRST to select and configure a component.** Schema + coverage in `component-rules/README.md` and `component-rules/INDEX.md`. Falls back to the CSS-header rule where a file is still pending. |
 | Component code, variants, props (the source of truth) | `css/components/<name>.css` (canonical, flat classes) + optional `components/ui/<name>.tsx` wrapper |
-| Per-component decision rule (`Cuándo usar / Cuándo no / Reemplaza a`) | `css/components/<name>.css` header comment |
+| Per-component decision rule (`Cuándo usar / Cuándo no / Reemplaza a`) | `component-rules/<id>.md` (authored) or `css/components/<name>.css` header comment (fallback) |
 | Specs, guidelines, accessibility | root `index.html` (single-page app — canonical) |
 | Migration / restyling rules | `MIGRATION.md` |
 | **UX principles / heuristics / interaction patterns (how to build a good screen)** | **`guidelines/` — the Playbook** |

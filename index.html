@@ -7574,7 +7574,7 @@ function segSwitch(el) {
             <tr><td>Asterisco requerido</td><td>Prop <code>required</code> — asterisco en <code>--color-error</code></td></tr>
             <tr><td>Ícono leading / trailing</td><td>Props <code>leadingIcon</code> / <code>trailingIcon</code> — 18px, <code>aria-hidden</code>; padding del campo <code>42px</code> del lado del ícono</td></tr>
             <tr><td>Campo (input)</td><td>Padding 14px&nbsp;10px (<code>px-[14px] py-[10px]</code>), radio <code>--radius-md</code>, texto <code>--font-size-body-md</code>, borde de 1px</td></tr>
-            <tr><td>Supporting text</td><td>Prop <code>hint</code> — bajo el campo, <code>--font-size-caption</code>, <code>--color-fg-subtle</code></td></tr>
+            <tr><td>Supporting text</td><td>Prop <code>hint</code> — bajo el campo, <code>--font-size-caption</code>, <code>--text-secondary</code></td></tr>
             <tr><td>Mensaje de error</td><td>Prop <code>error</code> — reemplaza al hint, en <code>--color-error</code>; enlazado por <code>aria-describedby</code></td></tr>
           </tbody>
         </table>
@@ -7651,7 +7651,7 @@ function segSwitch(el) {
         <table class="ds-table" style="margin-top:16px">
           <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
           <tbody>
-            <tr><td>Enabled (reposo)</td><td>Borde de 1px, fondo de tarjeta, texto de contenido</td><td><code>--border</code> + <code>--card-bg</code> + <code>--color-fg</code></td></tr>
+            <tr><td>Enabled (reposo)</td><td>Borde de 1px, fondo de tarjeta, texto de contenido</td><td><code>--border</code> + <code>--card-bg</code> + <code>--text-primary</code></td></tr>
             <tr><td>Hover</td><td>Borde más prominente (<code>hover:border-outline</code>)</td><td><code>--color-outline</code></td></tr>
             <tr><td>Focus</td><td>Borde de enlace + anillo de 3px; el label toma color de enlace</td><td><code>--color-link</code> + <code>--color-focus-ring</code></td></tr>
             <tr><td>Disabled</td><td>Fondo atenuado, texto deshabilitado, borde outline, cursor <code>not-allowed</code></td><td><code>--color-surface-variant</code> + <code>--color-on-disabled</code> + <code>--color-outline</code></td></tr>
@@ -7673,13 +7673,13 @@ function segSwitch(el) {
             <tr><td>Campo — borde (reposo)</td><td><code>--border</code></td></tr>
             <tr><td>Campo — borde (hover)</td><td><code>--color-outline</code></td></tr>
             <tr><td>Campo — borde (focus)</td><td><code>--color-link</code></td></tr>
-            <tr><td>Texto del campo</td><td><code>--color-fg</code></td></tr>
-            <tr><td>Label (reposo → focus)</td><td><code>--color-fg</code> → <code>--color-link</code></td></tr>
+            <tr><td>Texto del campo</td><td><code>--text-primary</code></td></tr>
+            <tr><td>Label (reposo → focus)</td><td><code>--text-primary</code> → <code>--color-link</code></td></tr>
             <tr><td>Asterisco requerido</td><td><code>--color-error</code></td></tr>
             <tr><td>Anillo de foco</td><td><code>--color-focus-ring</code></td></tr>
             <tr><td>Campo — borde (error)</td><td><code>--color-error</code></td></tr>
             <tr><td>Anillo de foco (error)</td><td><code>--color-error-ring</code></td></tr>
-            <tr><td>Supporting text</td><td><code>--color-fg-subtle</code></td></tr>
+            <tr><td>Supporting text</td><td><code>--text-secondary</code></td></tr>
             <tr><td>Mensaje de error</td><td><code>--color-error</code></td></tr>
             <tr><td>Disabled</td><td><code>--color-surface-variant</code> + <code>--color-on-disabled</code> + <code>--color-outline</code></td></tr>
           </tbody>
@@ -8412,7 +8412,7 @@ export { Select }</code></pre>
         <table class="ds-table">
           <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
           <tbody>
-            <tr><td>Reposo</td><td>Borde de 1px, fondo de tarjeta, texto de contenido</td><td><code>--border</code> + <code>--card-bg</code> + <code>--color-fg</code></td></tr>
+            <tr><td>Reposo</td><td>Borde de 1px, fondo de tarjeta, texto de contenido</td><td><code>--border</code> + <code>--card-bg</code> + <code>--text-primary</code></td></tr>
             <tr><td>Hover</td><td>Borde más prominente (<code>hover:border-outline</code>)</td><td><code>--color-outline</code></td></tr>
             <tr><td>Focus</td><td>Borde de enlace + anillo de 3px; el label toma <code>group-focus-within:text-link</code></td><td><code>--color-link</code> + <code>--color-focus-ring</code></td></tr>
             <tr><td>Disabled</td><td>Fondo atenuado, texto deshabilitado, borde outline, cursor <code>not-allowed</code></td><td><code>--color-surface-variant</code> + <code>--color-on-disabled</code> + <code>--color-outline</code></td></tr>
@@ -8430,8 +8430,8 @@ export { Select }</code></pre>
           <tbody>
             <tr><td>Campo — fondo</td><td><code>--card-bg</code></td></tr>
             <tr><td>Campo — borde (reposo → hover → focus)</td><td><code>--border</code> → <code>--color-outline</code> → <code>--color-link</code></td></tr>
-            <tr><td>Texto del campo</td><td><code>--color-fg</code></td></tr>
-            <tr><td>Label (reposo → focus)</td><td><code>--color-fg</code> → <code>--color-link</code></td></tr>
+            <tr><td>Texto del campo</td><td><code>--text-primary</code></td></tr>
+            <tr><td>Label (reposo → focus)</td><td><code>--text-primary</code> → <code>--color-link</code></td></tr>
             <tr><td>Asterisco requerido</td><td><code>--color-error</code></td></tr>
             <tr><td>Anillo de foco</td><td><code>--color-focus-ring</code></td></tr>
             <tr><td>Disabled</td><td><code>--color-surface-variant</code> + <code>--color-on-disabled</code> + <code>--color-outline</code></td></tr>
@@ -9462,8 +9462,8 @@ export { Badge, badgeVariants }</code></pre>
           <tbody>
             <tr><td><code>Table</code> (contenedor)</td><td><code>--card-bg</code> + <code>--border</code> + <code>--radius-lg</code></td></tr>
             <tr><td><code>TableHeader</code> (banda)</td><td><code>--color-surface-variant</code> + <code>--border</code></td></tr>
-            <tr><td><code>TableHead</code> (th)</td><td><code>--color-fg-muted</code> (<code>--font-size-overline</code>)</td></tr>
-            <tr><td><code>TableCell</code> (td)</td><td><code>--color-fg</code> + borde superior <code>--border</code></td></tr>
+            <tr><td><code>TableHead</code> (th)</td><td><code>--text-muted</code> (<code>--font-size-overline</code>)</td></tr>
+            <tr><td><code>TableCell</code> (td)</td><td><code>--text-primary</code> + borde superior <code>--border</code></td></tr>
             <tr><td>Fila — hover</td><td><code>--color-surface-variant</code></td></tr>
             <tr><td>Fila clickable — foco</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
           </tbody>
@@ -10019,8 +10019,8 @@ css/components/dropdown-menu.css</code></pre>
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li><b>Anatomía:</b> <code>TabsList</code> con borde inferior, <code>TabsTrigger</code> por pestaña y <code>TabsContent</code> por panel; el estado activo lo maneja Radix vía <code>data-[state=active]</code>.</li>
-            <li><b>Estados:</b> reposo (<code>on-surface-variant</code>), hover/focus (<code>on-surface</code>) y activo (texto + borde inferior de 2px en <code>--color-primary</code>).</li>
+            <li><b>Anatomía:</b> <code>TabsList</code> con borde inferior, <code>TabsTrigger</code> por pestaña y <code>TabsContent</code> por panel; el estado activo se marca con la clase <code>.active</code> (vanilla JS, sin Radix).</li>
+            <li><b>Estados:</b> reposo (<code>on-surface-variant</code>), hover/focus (<code>on-surface</code>) y activo (texto + borde inferior de 2px en <code>--color-secondary</code>).</li>
             <li><b>Indicador activo:</b> borde inferior de 2px en color primario, superpuesto al borde del contenedor (<code>-mb-px</code>).</li>
             <li><b>Regla clave:</b> tabs alternan vistas dentro del mismo contexto — la navegación entre páginas es del sidebar.</li>
           </ul>
@@ -10042,7 +10042,7 @@ css/components/dropdown-menu.css</code></pre>
 
           <!-- Legend — variant references -->
           <ol class="bd-family-legend">
-            <li>Tab activa — texto y borde inferior de 2px en <code>--color-primary</code>, peso medium</li>
+            <li>Tab activa — texto y borde inferior de 2px en <code>--color-secondary</code>, peso medium</li>
             <li>Tabs en reposo — texto <code>--color-on-surface-variant</code>, borde inferior transparente</li>
             <li>Panel — solo el <code>TabsContent</code> de la tab activa se muestra (lo gestiona Radix)</li>
           </ol>
@@ -10072,7 +10072,7 @@ css/components/dropdown-menu.css</code></pre>
         <table class="ds-table" style="margin-top:16px">
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
           <tbody>
-            <tr><td><code>TabsList</code></td><td><code>inline-flex w-full</code>, <code>gap-1</code>, borde inferior de 1px</td></tr>
+            <tr><td><code>TabsList</code></td><td><code>inline-flex w-full</code>, <code>gap-0</code>, borde inferior de 1px</td></tr>
             <tr><td><code>TabsTrigger</code></td><td>Padding 16px&nbsp;10px (<code>px-4 py-2.5</code>), <code>text-sm</code> peso medium, borde inferior de 2px transparente</td></tr>
             <tr><td><code>TabsTrigger</code> activo</td><td>Borde inferior + texto en primario, <code>-mb-px</code> para superponerse al borde del contenedor</td></tr>
             <tr><td><code>TabsContent</code></td><td>Padding vertical <code>py-4</code>, <code>text-sm</code></td></tr>
@@ -10119,9 +10119,9 @@ css/components/dropdown-menu.css</code></pre>
         <table class="ds-table">
           <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
           <tbody>
-            <tr><td>Padding del trigger</td><td><code>16px 10px</code> (<code>px-4 py-2.5</code>)</td></tr>
+            <tr><td>Padding del trigger</td><td><code>11px 20px</code> (<code>py-[11px] px-5</code>)</td></tr>
             <tr><td>Indicador activo</td><td>Borde inferior de 2px, <code>-mb-px</code> (superpuesto al borde del contenedor)</td></tr>
-            <tr><td>Separación entre triggers</td><td><code>gap-1</code></td></tr>
+            <tr><td>Separación entre triggers</td><td><code>gap-0</code> (sin separación; el indicador desliza)</td></tr>
             <tr><td>Tipografía</td><td><code>text-sm</code>, activo en peso medium</td></tr>
             <tr><td>Padding del panel</td><td><code>py-4</code></td></tr>
           </tbody>
@@ -10137,7 +10137,7 @@ css/components/dropdown-menu.css</code></pre>
             <tr><td>Reposo</td><td>Texto atenuado, borde inferior transparente</td><td><code>--color-on-surface-variant</code></td></tr>
             <tr><td>Hover</td><td>El texto sube a primario de contenido (<code>hover:text-on-surface</code>)</td><td><code>--color-on-surface</code></td></tr>
             <tr><td>Focus visible</td><td>Anillo de foco (outline 2px + halo 4px) vía <code>focus-visible:focus-ring</code>, + texto <code>on-surface</code></td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
-            <tr><td>Activo</td><td>Texto + borde inferior de 2px en primario, peso medium (<code>data-[state=active]</code>)</td><td><code>--color-primary</code></td></tr>
+            <tr><td>Activo</td><td>Texto + borde inferior de 2px en secundario, peso medium (<code>.active</code>)</td><td><code>--color-secondary</code></td></tr>
           </tbody>
         </table>
       </div>
@@ -10153,7 +10153,7 @@ css/components/dropdown-menu.css</code></pre>
             <tr><td><code>TabsList</code> — borde</td><td><code>--border</code></td></tr>
             <tr><td><code>TabsTrigger</code> — reposo</td><td><code>--color-on-surface-variant</code></td></tr>
             <tr><td><code>TabsTrigger</code> — hover/focus</td><td><code>--color-on-surface</code></td></tr>
-            <tr><td><code>TabsTrigger</code> — activo (texto + borde)</td><td><code>--color-primary</code></td></tr>
+            <tr><td><code>TabsTrigger</code> — activo (texto + borde)</td><td><code>--color-secondary</code></td></tr>
             <tr><td>Anillo de foco</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
             <tr><td><code>TabsContent</code></td><td><code>--color-on-surface-variant</code></td></tr>
           </tbody>
@@ -10266,7 +10266,7 @@ css/components/dropdown-menu.css</code></pre>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Los tokens semánticos (<code>--color-on-surface-variant</code>, <code>--color-primary</code>) garantizan contraste AA en tema claro y oscuro — nunca sobreescribir colores por tema</li><li><span class="ds-a11y-icon">♿</span>El estado activo no depende solo del color: suma borde inferior de 2px y peso medium</li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Los tokens semánticos (<code>--color-on-surface-variant</code>, <code>--color-secondary</code>) garantizan contraste AA en tema claro y oscuro — nunca sobreescribir colores por tema</li><li><span class="ds-a11y-icon">♿</span>El estado activo no depende solo del color: suma borde inferior de 2px y peso medium</li></ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Teclado y ARIA</h2>
@@ -10579,9 +10579,9 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
             <tbody>
               <tr><td><code>DialogOverlay</code></td><td>Scrim fijo que cubre la pantalla (Radix Portal)</td></tr>
               <tr><td><code>DialogContent</code></td><td>Contenedor centrado del diálogo (focus trap)</td></tr>
-              <tr><td><code>DialogHeader</code> + <code>DialogTitle</code> + <code>DialogClose</code></td><td>Título y botón de cierre (X), borde inferior 1px</td></tr>
+              <tr><td><code>DialogHeader</code> + <code>DialogTitle</code> + <code>DialogClose</code></td><td>Título y botón de cierre (X)</td></tr>
               <tr><td><code>DialogBody</code></td><td>Contenido principal</td></tr>
-              <tr><td><code>DialogFooter</code></td><td>Acciones alineadas a la derecha, borde superior 1px</td></tr>
+              <tr><td><code>DialogFooter</code></td><td>Acciones alineadas a la derecha</td></tr>
             </tbody>
           </table>
         </section>
@@ -10590,13 +10590,13 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
           <table class="ds-table">
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
-              <tr><td>Ancho del modal</td><td><code>max-w-[480px]</code>, ancho <code>calc(100% - 2rem)</code> en pantallas chicas</td></tr>
+              <tr><td>Ancho del modal</td><td><code>min(560px, calc(100vw - 48px))</code> — se encoge en pantallas chicas</td></tr>
               <tr><td>Radio</td><td><code>rounded-lg</code> (<code>var(--radius-lg)</code> = 12px)</td></tr>
               <tr><td>z-index del overlay/contenido</td><td><code>100</code> (los snackbars de Sonner quedan por encima)</td></tr>
-              <tr><td>Padding header</td><td><code>px-5 py-4</code> (20px&nbsp;/&nbsp;16px), borde inferior 1px</td></tr>
-              <tr><td>Padding body</td><td><code>px-5 py-4</code> (20px&nbsp;/&nbsp;16px)</td></tr>
-              <tr><td>Padding footer</td><td><code>px-5 py-4</code>, gap <code>gap-2</code> (8px), borde superior 1px</td></tr>
-              <tr><td>Botón de cierre</td><td><code>size-7</code> (28×28px), radio <code>rounded-md</code></td></tr>
+              <tr><td>Padding header</td><td>parte del padding único de <code>24px</code> del contenedor — sin borde inferior</td></tr>
+              <tr><td>Ritmo vertical</td><td><code>16px</code> (gap-4) entre header / body / footer; padding único de <code>24px</code> en el contenedor</td></tr>
+              <tr><td>Footer</td><td><code>gap-2</code> (8px) entre acciones — sin borde superior</td></tr>
+              <tr><td>Botón de cierre</td><td><code>32×32px</code>, radio <code>--radius-md</code></td></tr>
               <tr><td>Animación</td><td>overlay <code>data-[state=open]:animate-in fade-in-0</code> (Radix); el contenido no anima por defecto</td></tr>
             </tbody>
           </table>
@@ -10679,7 +10679,7 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
           <div class="bd-callout" style="margin-bottom:0">
             <span class="bd-ico">⚑</span>
             <span><b>Relación con Material Design 3:</b> MD3 define dos variantes de Dialog:<br>
-            <b>Basic dialog</b> (flotante, centrado sobre scrim) — la variante que implementa Embassy, con esquinas <code>rounded-lg</code> (12px) y ancho máximo 480px (divergencia intencional respecto a los 28dp/560dp de MD3, alineada con la identidad Amalgama). <b>Full-screen dialog</b> (0dp corners, header y barra de acciones de 56dp, solo en pantallas compactas/mobile) — no implementado en Embassy.<br><br>
+            <b>Basic dialog</b> (flotante, centrado sobre scrim) — la variante que implementa Embassy, con esquinas <code>rounded-lg</code> (12px) y ancho máximo 560px (divergencia intencional respecto a los 28dp/560dp de MD3, alineada con la identidad Amalgama). <b>Full-screen dialog</b> (0dp corners, header y barra de acciones de 56dp, solo en pantallas compactas/mobile) — no implementado en Embassy.<br><br>
             <b>Reglas de acciones:</b> máximo 2 botones. La acción confirmatoria va siempre al extremo trailing; la acción de descarte nunca se deshabilita. Evitar una tercera acción (e.g. "Saber más") — si es necesaria, usar un enlace dentro del body.<br><br>
             <b>Scroll (guía MD3):</b> para diálogos largos, mantené el título y las acciones fijos y dejá que solo el <code>DialogBody</code> scrollee. El componente base de Embassy no incorpora un alto máximo ni scroll interno — agregalos por <code>className</code> en el <code>DialogContent</code>/<code>DialogBody</code> si el contenido lo requiere.<br><br>
             <b>Focus trap:</b> el dialog debe retener el foco hasta que el usuario tome una acción — requerido para accesibilidad con teclado y lectores de pantalla.<br><br>
@@ -13043,7 +13043,7 @@ export { StatsGrid, StatCard }</code></pre>
           <!-- Component variants -->
           <div class="bd-family-wrap">
 <div style="border:1px solid var(--color-outline-variant);border-radius:8px;overflow:hidden" id="tbsc-6">
-              <div style="display:flex;align-items:center;gap:12px;padding:0 16px;height:56px;background:var(--color-surface-container);border-bottom:1px solid var(--color-outline-variant)">
+              <div style="display:flex;align-items:center;gap:12px;padding:0 28px;height:56px;background:var(--color-surface-container);border-bottom:1px solid var(--color-outline-variant)">
                 <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;flex:1;font-size:13px">
                   <a href="#" onclick="return false" style="color:var(--color-on-surface-variant);text-decoration:none">Reclutamiento</a>
                   <span style="color:var(--color-outline);font-size:12px">/</span>
@@ -13054,7 +13054,7 @@ export { StatsGrid, StatCard }</code></pre>
                   <button type="button" aria-label="Notificaciones" style="position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;border:none;background:transparent;cursor:pointer;color:var(--color-on-surface-variant)">
                     🔔<span style="position:absolute;top:4px;right:4px;width:8px;height:8px;background:var(--color-primary);border-radius:50%;border:2px solid var(--color-surface-container)"></span>
                   </button>
-                  <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--color-primary-container);color:var(--color-on-primary-container);font-size:12px;font-weight:600">MG</span>
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--color-primary-container);color:var(--color-on-primary-container);font-size:12px;font-weight:600">MG</span>
                 </div>
               </div>
               <div style="padding:20px 16px;background:var(--color-surface);font-size:13px;color:var(--color-on-surface-variant);min-height:60px">Contenido de la vista — área debajo del topbar</div>
@@ -13179,7 +13179,7 @@ export { StatsGrid, StatCard }</code></pre>
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Componente real. Las partes que lo componen:</p>
 <div class="bd-family-wrap"><div style="border:1px solid var(--color-outline-variant);border-radius:8px;overflow:hidden" id="tbsc-w-7">
-              <div style="display:flex;align-items:center;gap:12px;padding:0 16px;height:56px;background:var(--color-surface-container);border-bottom:1px solid var(--color-outline-variant)">
+              <div style="display:flex;align-items:center;gap:12px;padding:0 28px;height:56px;background:var(--color-surface-container);border-bottom:1px solid var(--color-outline-variant)">
                 <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:6px;flex:1;font-size:13px">
                   <a href="#" onclick="return false" style="color:var(--color-on-surface-variant);text-decoration:none">Reclutamiento</a>
                   <span style="color:var(--color-outline);font-size:12px">/</span>
@@ -13190,7 +13190,7 @@ export { StatsGrid, StatCard }</code></pre>
                   <button type="button" aria-label="Notificaciones" style="position:relative;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;border:none;background:transparent;cursor:pointer;color:var(--color-on-surface-variant)">
                     🔔<span style="position:absolute;top:4px;right:4px;width:8px;height:8px;background:var(--color-primary);border-radius:50%;border:2px solid var(--color-surface-container)"></span>
                   </button>
-                  <span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--color-primary-container);color:var(--color-on-primary-container);font-size:12px;font-weight:600">MG</span>
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--color-primary-container);color:var(--color-on-primary-container);font-size:12px;font-weight:600">MG</span>
                 </div>
               </div>
               <div style="padding:20px 16px;background:var(--color-surface);font-size:13px;color:var(--color-on-surface-variant);min-height:60px">Contenido de la vista — área debajo del topbar</div>
@@ -14216,7 +14216,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
             <li><b>Composición sobre <a href="#c-item" onclick="navigate('c-item');return false">Item</a>:</b> es una fila <code>.item item-outline item-clickable</code>; solo aporta el avatar circular de marca — layout, padding, hover, foco, título y descripción vienen del primitivo Item.</li>
             <li><b>Anatomía:</b> avatar en <code>.item-media</code> + nombre (<code>.item-title</code>) + rol (<code>.item-description</code>); las cards se distribuyen en una <code>people-grid</code> responsive.</li>
             <li><b>Grid responsive:</b> <code>repeat(auto-fill, minmax(280px, 1fr))</code> — las cards se acomodan solas al ancho disponible.</li>
-            <li><b>Avatar con iniciales:</b> círculo de 44px con gradiente de marca (<code>--secondary-900</code> → <code>--secondary-500</code>) — no requiere foto.</li>
+            <li><b>Avatar con iniciales:</b> círculo de 44px con relleno tonal (<code>--color-secondary-container</code> / <code>--color-on-secondary-container</code>) — no requiere foto.</li>
             <li><b>Regla clave:</b> es para personas en grillas — vacantes van en Vacancy Card, datos tabulares de personas en Table.</li>
           </ul>
 
@@ -14283,7 +14283,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
           <tbody>
             <tr><td><code>.item item-outline item-clickable</code></td><td>Fila base (primitivo Item): layout, padding, borde, hover y foco</td></tr>
-            <tr><td><code>.item-media.person-avatar</code></td><td>Iniciales en círculo de 44px sobre gradiente de marca</td></tr>
+            <tr><td><code>.item-media.person-avatar</code></td><td>Iniciales en círculo de 44px sobre relleno tonal <code>--color-secondary-container</code></td></tr>
             <tr><td><code>.item-title</code></td><td>Nombre, peso 500</td></tr>
             <tr><td><code>.item-description</code></td><td>Rol o puesto</td></tr>
             <tr><td><code>.people-grid</code></td><td>Grilla responsive que contiene las cards</td></tr>
@@ -14320,7 +14320,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
             <tr><td><code>.item item-outline</code></td><td><code>--border</code> + <code>--radius-md</code>; hover suma <code>--shadow-md</code></td></tr>
-            <tr><td><code>.person-avatar</code></td><td>Gradiente <code>--secondary-900</code> → <code>--secondary-500</code>, texto <code>--color-on-primary</code></td></tr>
+            <tr><td><code>.person-avatar</code></td><td>Relleno <code>--color-secondary-container</code>, texto <code>--color-on-secondary-container</code></td></tr>
             <tr><td><code>.item-title</code></td><td><code>--text-primary</code>, peso 500</td></tr>
             <tr><td><code>.item-description</code></td><td><code>--text-secondary</code> (<code>--font-size-body-sm</code>)</td></tr>
             <tr><td>Card — foco</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
@@ -14390,7 +14390,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span><code>--text-primary</code> y <code>--text-muted</code> garantizan contraste AA en tema claro y oscuro — nunca escribir overrides por tema</li><li><span class="ds-a11y-icon">♿</span>Las iniciales del avatar usan <code>--color-on-primary</code> sobre el gradiente de marca</li><li><span class="ds-a11y-icon">♿</span>No usar solo el color del avatar como identificador único de una persona</li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span><code>--text-primary</code> y <code>--text-muted</code> garantizan contraste AA en tema claro y oscuro — nunca escribir overrides por tema</li><li><span class="ds-a11y-icon">♿</span>Las iniciales del avatar usan <code>--color-on-secondary-container</code> sobre el relleno tonal</li><li><span class="ds-a11y-icon">♿</span>No usar solo el color del avatar como identificador único de una persona</li></ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Teclado y ARIA</h2>
@@ -14439,7 +14439,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
       <div class="ds-page-tag">Components · Display</div>
       <div class="docs-page-header">
         <h1 class="docs-page-title">Avatar</h1>
-        <p class="docs-page-desc">Indicador visual de usuario con iniciales y colores de gradiente.</p>
+        <p class="docs-page-desc">Indicador visual de usuario con iniciales y colores tonales de marca.</p>
       </div>
 
       <!-- ══ Component Tabs ══ -->
@@ -14448,12 +14448,12 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
         <section class="docs-section">
 
           <!-- Short introduction -->
-          <p class="bd-lead">El Avatar es un círculo con las iniciales de una persona sobre un gradiente de marca. Solo para personas — los elementos no-persona usan íconos, no avatares.</p>
+          <p class="bd-lead">El Avatar es un círculo con las iniciales de una persona sobre un relleno tonal de marca. Solo para personas — los elementos no-persona usan íconos, no avatares.</p>
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li><b>Anatomía:</b> <code>.avatar</code> (círculo) con <code>.avatar-image</code> y <code>.avatar-fallback</code> (iniciales sobre gradiente de marca cuando no hay foto).</li>
-            <li><b>Gradiente de marca:</b> <code>--primary-500</code> → <code>--secondary-900</code> en diagonal (135deg), con iniciales en <code>--color-on-primary</code>.</li>
+            <li><b>Anatomía:</b> <code>.avatar</code> (círculo) con <code>.avatar-image</code> y <code>.avatar-fallback</code> (iniciales sobre relleno tonal cuando no hay foto).</li>
+            <li><b>Relleno tonal de marca:</b> <code>--color-primary-container</code>, con iniciales en <code>--color-on-primary-container</code>.</li>
             <li><b>Composiciones</b> (en Specs): tamaños, badge de estado, badge con ícono, grupo apilado, contador de overflow, grupo con ícono y avatar como disparador de menú (dropdown).</li>
             <li><b>Regla clave:</b> solo para personas — imágenes de producto, categorías u otros elementos no-persona usan íconos, no avatares.</li>
           </ul>
@@ -14469,7 +14469,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
           <!-- Legend — variant references -->
           <ol class="bd-family-legend">
             <li>Con imagen — <code>.avatar-image</code> (cae al fallback si la imagen no carga)</li>
-            <li>Fallback — <code>.avatar-fallback</code> con las iniciales sobre el gradiente de marca</li>
+            <li>Fallback — <code>.avatar-fallback</code> con las iniciales sobre el relleno tonal</li>
           </ol>
 
         </section>
@@ -14480,11 +14480,11 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
 
 <div class="docs-section" id="tc-avatar-s-0">
         <h2 class="docs-section-title">Anatomía</h2>
-        <p class="docs-section-desc">Círculo con las iniciales (2 letras) de la persona sobre un gradiente de marca. Solo para personas.</p>
+        <p class="docs-section-desc">Círculo con las iniciales (2 letras) de la persona sobre un relleno tonal. Solo para personas.</p>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
           <tbody>
-            <tr><td>Contenedor</td><td>Círculo con gradiente diagonal (135deg)</td></tr>
+            <tr><td>Contenedor</td><td>Círculo con relleno tonal <code>--color-primary-container</code></td></tr>
             <tr><td>Iniciales</td><td>2 letras en <code>--color-on-primary</code>, peso 600–700 según tamaño</td></tr>
           </tbody>
         </table>
@@ -14493,7 +14493,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
         <h2 class="docs-section-title">Configuraciones</h2>
         <p class="docs-section-desc">Todas las composiciones oficiales del Avatar de shadcn, con tokens Embassy. Overview muestra el Avatar básico.</p>
 
-        <p class="ch-variant-label">Tamaños — <code>sm</code> (24px) · <code>md</code> (32px) · <code>lg</code> (40px) · <code>xl</code></p>
+        <p class="ch-variant-label">Tamaños — <code>sm</code> (28px) · <code>md</code> (36px, default) · <code>lg</code> (44px) · <code>xl</code> (56px)</p>
         <div class="docs-preview"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
           <span class="avatar avatar-sm"><span class="avatar-fallback">MG</span></span>
           <span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span>
@@ -14557,9 +14557,9 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
         <table class="ds-table">
           <thead><tr><th>Variante</th><th>Tamaño</th><th>Tipografía</th></tr></thead>
           <tbody>
-            <tr><td><code>.avatar</code> (topbar)</td><td><code>32×32px</code>, círculo</td><td><code>var(--font-size-caption)</code>, peso 600</td></tr>
-            <tr><td><code>.person-avatar</code> (person card)</td><td><code>44×44px</code>, círculo</td><td><code>15px</code>, peso 600</td></tr>
-            <tr><td><code>.assignee-avatar</code> (vacancy card)</td><td><code>22×22px</code>, círculo</td><td><code>9px</code>, peso 700</td></tr>
+            <tr><td><code>.avatar-sm</code></td><td><code>28×28px</code>, círculo</td><td><code>11px</code>, peso 600</td></tr>
+            <tr><td><code>.avatar-md</code> (default)</td><td><code>36×36px</code>, círculo</td><td><code>13px</code>, peso 600</td></tr>
+            <tr><td><code>.avatar-lg</code> / <code>.avatar-xl</code></td><td><code>44×44px</code> / <code>56×56px</code></td><td><code>15px</code> / <code>18px</code>, peso 600</td></tr>
           </tbody>
         </table>
       </div>
@@ -14568,7 +14568,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
         <table class="ds-table">
           <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
           <tbody>
-            <tr><td>Estático (único)</td><td>Gradiente <code>135deg, --primary-500 → --secondary-900</code> con iniciales en <code>--color-on-primary</code>; tiene <code>cursor: pointer</code> pero no define hover ni focus propios</td><td><code>--primary-500</code>, <code>--secondary-900</code>, <code>--color-on-primary</code></td></tr>
+            <tr><td>Estático (único)</td><td>Relleno <code>--color-primary-container</code> con iniciales en <code>--color-on-primary-container</code>; tiene <code>cursor: pointer</code> pero no define hover ni focus propios</td><td><code>--primary-500</code>, <code>--secondary-900</code>, <code>--color-on-primary</code></td></tr>
           </tbody>
         </table>
       </div>
@@ -14579,7 +14579,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
         <table class="ds-table">
           <thead><tr><th>Variante</th><th>Rol / token</th></tr></thead>
           <tbody>
-            <tr><td><code>.avatar</code> (topbar, 32px)</td><td>Gradiente <code>--primary-500</code> → <code>--secondary-900</code>; texto <code>--color-on-primary</code></td></tr>
+            <tr><td><code>.avatar</code> (fallback)</td><td>Relleno <code>--color-primary-container</code>; texto <code>--color-on-primary-container</code></td></tr>
             <tr><td><code>.person-avatar</code> (44px)</td><td>Gradiente <code>--secondary-900</code> → <code>--secondary-500</code>; texto <code>--color-on-primary</code></td></tr>
             <tr><td><code>.assignee-avatar</code> (22px)</td><td>Gradientes de paleta (<code>--secondary-*</code>, <code>--success-*</code>, <code>--tertiary-*</code>, <code>--error-*</code>)</td></tr>
           </tbody>
@@ -14649,7 +14649,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Las iniciales usan <code>--color-on-primary</code> sobre el gradiente de marca — contraste AA garantizado en tema claro y oscuro, sin overrides por tema</li><li><span class="ds-a11y-icon">♿</span>No usar el color del avatar como único indicador de identidad — incluir nombre visible cuando el espacio lo permita</li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Las iniciales usan <code>--color-on-primary</code> sobre el relleno tonal — contraste AA garantizado en tema claro y oscuro, sin overrides por tema</li><li><span class="ds-a11y-icon">♿</span>No usar el color del avatar como único indicador de identidad — incluir nombre visible cuando el espacio lo permita</li></ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Teclado y ARIA</h2>
@@ -14662,7 +14662,7 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
         <p class="docs-section-desc">Markup plano (<code>css/components/avatar.css</code>) — sin dependencias. No tiene wrapper React propio en <code>components/ui/</code>; componelo directamente con las clases de abajo.</p>
         <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:20px 0 8px;color:var(--ds-text-2)">HTML</h3>
 <div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;!-- Solo iniciales (fallback sobre el gradiente de marca) --&gt;
+          <pre class="docs-code"><code>&lt;!-- Solo iniciales (fallback sobre el relleno tonal) --&gt;
 &lt;span class="avatar avatar-sm"&gt;
   &lt;span class="avatar-fallback"&gt;MG&lt;/span&gt;
 &lt;/span&gt;
@@ -16854,7 +16854,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <tbody>
               <tr><td>Botón de navegación — fondo</td><td><code>--color-surface</code></td></tr>
               <tr><td>Botón — borde</td><td><code>--border</code></td></tr>
-              <tr><td>Botón — ícono</td><td><code>--color-fg</code></td></tr>
+              <tr><td>Botón — ícono</td><td><code>--text-primary</code></td></tr>
               <tr><td>Botón — hover</td><td><code>--color-surface-variant</code></td></tr>
             </tbody>
           </table>
@@ -17025,10 +17025,10 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <tbody>
               <tr><td><code>ChartContainer</code></td><td>Envoltorio responsive — mide su propio contenedor y le pasa dimensiones explícitas al gráfico; inyecta las variables CSS de color por serie</td><td><code>bg-transparent</code></td></tr>
               <tr><td>Grilla (<code>CartesianGrid</code>)</td><td>Solo líneas horizontales (<code>vertical={false}</code>), color sutil</td><td><code>--color-border</code></td></tr>
-              <tr><td>Ejes y etiquetas (<code>XAxis</code>/<code>YAxis</code>)</td><td>Sin línea ni tick marks, solo etiquetas de categoría/valor</td><td><code>--color-fg-muted</code>, <code>text-caption</code></td></tr>
+              <tr><td>Ejes y etiquetas (<code>XAxis</code>/<code>YAxis</code>)</td><td>Sin línea ni tick marks, solo etiquetas de categoría/valor</td><td><code>--text-muted</code>, <code>text-caption</code></td></tr>
               <tr><td>Tooltip (<code>ChartTooltipContent</code>)</td><td>Tarjeta flotante con indicador de color + valor por serie al pasar el cursor</td><td><code>bg-card</code>, <code>border-border</code>, <code>shadow-lg</code></td></tr>
               <tr><td>Leyenda (<code>ChartLegendContent</code>)</td><td>Fila de chips de color + etiqueta debajo del gráfico, siempre presente con más de una serie</td><td><code>text-fg-muted</code></td></tr>
-              <tr><td>Series (Line/Bar/Pie)</td><td>Color por <code>ChartConfig</code>, nunca hardcodeado</td><td><code>--color-chart-1</code>…<code>--color-chart-5</code></td></tr>
+              <tr><td>Series (Line/Bar/Pie)</td><td>Color por <code>ChartConfig</code>, nunca hardcodeado</td><td><code>--chart-1</code>…<code>--chart-5</code></td></tr>
             </tbody>
           </table>
           <p class="docs-section-desc" style="margin-top:10px">Responsive por diseño: cada gráfico vive dentro de un contenedor medido en tiempo real y se adapta al ancho del padre — no tiene un ancho fijo.</p>
@@ -17051,7 +17051,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <table class="ds-table">
             <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
             <tbody>
-              <tr><td>Con datos</td><td>Series dibujadas como SVG estático (línea/barra) o conic-gradient (torta), sin animación de entrada</td><td><code>--color-chart-*</code></td></tr>
+              <tr><td>Con datos</td><td>Series dibujadas como SVG estático (línea/barra) o conic-gradient (torta), sin animación de entrada</td><td><code>--chart-*</code></td></tr>
               <tr><td>Hover / tooltip activo</td><td>Cursor de referencia + tarjeta de tooltip</td><td><code>--color-border</code>, <code>bg-card</code></td></tr>
               <tr><td>Vacío</td><td>Contenedor con borde punteado y mensaje, misma altura que el gráfico real</td><td><code>border-dashed border-border</code></td></tr>
               <tr><td>Cargando</td><td>Barras esqueleto con <code>animate-pulse</code>, sin layout shift al llegar los datos</td><td><code>--color-surface-variant</code></td></tr>
@@ -17092,11 +17092,11 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <table class="ds-table">
             <thead><tr><th>Token</th><th>Rol Embassy</th></tr></thead>
             <tbody>
-              <tr><td><code>--color-chart-1</code></td><td><code>--color-secondary</code></td></tr>
-              <tr><td><code>--color-chart-2</code></td><td><code>--color-tertiary</code></td></tr>
-              <tr><td><code>--color-chart-3</code></td><td><code>--color-success</code></td></tr>
-              <tr><td><code>--color-chart-4</code></td><td><code>--color-warning</code></td></tr>
-              <tr><td><code>--color-chart-5</code></td><td><code>--color-info</code></td></tr>
+              <tr><td><code>--chart-1</code></td><td><code>--color-secondary</code></td></tr>
+              <tr><td><code>--chart-2</code></td><td><code>--color-tertiary</code></td></tr>
+              <tr><td><code>--chart-3</code></td><td><code>--color-success</code></td></tr>
+              <tr><td><code>--chart-4</code></td><td><code>--color-warning</code></td></tr>
+              <tr><td><code>--chart-5</code></td><td><code>--color-info</code></td></tr>
             </tbody>
           </table>
           <div class="ds-callout" style="margin-top:12px">
@@ -17134,8 +17134,8 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <section class="docs-section" id="tc-charts-g-1">
           <h2 class="docs-section-title">Do / Don't</h2>
           <div class="ds-guideline-grid">
-            <div class="ds-guideline-card do"><h3>✓ Do</h3><ul><li>Incluir siempre leyenda cuando hay más de una serie.</li><li>Usar la paleta <code>--color-chart-*</code> en orden — no elegir colores salteados entre gráficos de la misma página.</li><li>Mostrar el estado vacío/cargando/error en vez de un gráfico con datos falsos.</li></ul></div>
-            <div class="ds-guideline-card dont"><h3>✕ Don't</h3><ul><li>Usar imágenes estáticas o capturas de pantalla de un gráfico.</li><li>Hardcodear colores hex por serie — siempre <code>--color-chart-*</code> u otro rol semántico.</li><li>Animar el gráfico si el usuario tiene <code>prefers-reduced-motion</code> activado.</li></ul></div>
+            <div class="ds-guideline-card do"><h3>✓ Do</h3><ul><li>Incluir siempre leyenda cuando hay más de una serie.</li><li>Usar la paleta <code>--chart-*</code> en orden — no elegir colores salteados entre gráficos de la misma página.</li><li>Mostrar el estado vacío/cargando/error en vez de un gráfico con datos falsos.</li></ul></div>
+            <div class="ds-guideline-card dont"><h3>✕ Don't</h3><ul><li>Usar imágenes estáticas o capturas de pantalla de un gráfico.</li><li>Hardcodear colores hex por serie — siempre <code>--chart-*</code> u otro rol semántico.</li><li>Animar el gráfico si el usuario tiene <code>prefers-reduced-motion</code> activado.</li></ul></div>
           </div>
         </section>
         <section class="docs-section" id="tc-charts-g-2">
@@ -17150,7 +17150,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <h2 class="docs-section-title">Migración</h2>
           <p class="ds-p"><b>Reemplaza a:</b> gráficos armados con imágenes estáticas, canvas custom o librerías de charting sin theming.</p>
           <ul>
-            <li>Todo gráfico legacy se mapea a <code>ChartContainer</code> + <code>LineChart</code>/<code>BarChart</code>/<code>PieChart</code> (<code>components/ui/chart.tsx</code>), con la paleta <code>--color-chart-*</code>.</li>
+            <li>Todo gráfico legacy se mapea a <code>ChartContainer</code> + <code>LineChart</code>/<code>BarChart</code>/<code>PieChart</code> (<code>components/ui/chart.tsx</code>), con la paleta <code>--chart-*</code>.</li>
             <li>Si el "gráfico" en realidad muestra un solo valor, migrar a <b>Stat Card</b>, no a Chart.</li>
           </ul>
         </section>
@@ -17175,7 +17175,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <h2 class="docs-section-title">Accesibilidad</h2>
           <ul class="ds-a11y-list">
             <li><span class="ds-a11y-icon">♿</span>Cada serie se identifica por texto en la leyenda y el tooltip, nunca solo por color — cumple con no depender del color como único indicador.</li>
-            <li><span class="ds-a11y-icon">♿</span>El contraste de <code>--color-chart-1</code>…<code>-5</code> contra <code>--color-card</code> cumple AA en ambos temas (son los mismos roles usados en botones/badges de la librería).</li>
+            <li><span class="ds-a11y-icon">♿</span>El contraste de <code>--chart-1</code>…<code>-5</code> contra <code>--color-card</code> cumple AA en ambos temas (son los mismos roles usados en botones/badges de la librería).</li>
             <li><span class="ds-a11y-icon">♿</span>Sin animación de entrada — el SVG/conic-gradient se renderiza estático, no hay nada que pausar para <code>prefers-reduced-motion</code>.</li>
             <li><span class="ds-a11y-icon">♿</span>Para datos tabulares que un usuario de lector de pantalla necesite consultar con precisión, acompañá el gráfico con una <b>Table</b> equivalente o datos en texto — SVG puro no es accesible por sí solo.</li>
             <li><span class="ds-a11y-icon">♿</span>El <code>SegmentedButtonGroup</code> de rango de tiempo hereda el mismo soporte de teclado/ARIA documentado en su propia página.</li>
@@ -17204,8 +17204,8 @@ const data = [
 ]
 
 const config = {
-  ingresos: { label: "Ingresos", color: "var(--color-chart-1)" },
-  gastos:   { label: "Gastos",   color: "var(--color-chart-4)" },
+  ingresos: { label: "Ingresos", color: "var(--chart-1)" },
+  gastos:   { label: "Gastos",   color: "var(--chart-4)" },
 } satisfies ChartConfig
 
 &lt;LineChart data={data} categoryKey="day" series={["ingresos", "gastos"]} config={config} /&gt;</code></pre>
@@ -17218,7 +17218,7 @@ const config = {
 <pre class="docs-code standalone"><code>import { BarChart, type ChartConfig } from "./components/ui/chart"
 
 const config = {
-  vacantes: { label: "Vacantes abiertas", color: "var(--color-chart-1)" },
+  vacantes: { label: "Vacantes abiertas", color: "var(--chart-1)" },
 } satisfies ChartConfig
 
 &lt;BarChart data={data} categoryKey="area" series={["vacantes"]} config={config} /&gt;</code></pre>
@@ -21223,8 +21223,8 @@ import { Select } from &quot;./components/ui/select&quot;
               <tr><td>Overlay</td><td><code>--color-scrim</code></td></tr>
               <tr><td>Panel</td><td><code>--color-surface</code> + <code>--border</code> + <code>shadow-xl</code></td></tr>
               <tr><td>Bordes header/footer</td><td><code>--border</code></td></tr>
-              <tr><td>Título</td><td><code>--color-fg</code></td></tr>
-              <tr><td>Body / descripción</td><td><code>--color-fg</code> / <code>--color-fg-subtle</code></td></tr>
+              <tr><td>Título</td><td><code>--color-on-surface</code></td></tr>
+              <tr><td>Body / descripción</td><td><code>--color-on-surface</code> / <code>--color-on-surface-variant</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -21422,7 +21422,7 @@ import { Select } from &quot;./components/ui/select&quot;
             <tbody>
               <tr><td>Trigger</td><td><code>Button variant="secondary"</code> (Tonal) — default para abrir overlays</td></tr>
               <tr><td>Cierre (✕)</td><td><code>Button variant="icon"</code>, arriba a la derecha (built-in, <code>showCloseButton</code>)</td></tr>
-              <tr><td>Header</td><td><code>SheetTitle</code> (semibold) + <code>SheetDescription</code> (<code>--color-fg-subtle</code>), sin borde</td></tr>
+              <tr><td>Header</td><td><code>SheetTitle</code> (semibold) + <code>SheetDescription</code> (<code>--color-on-surface-variant</code>), sin borde</td></tr>
               <tr><td>Campos</td><td><code>SheetBody</code> con <code>grid gap-6</code>; cada campo = <code>Input</code> con label</td></tr>
               <tr><td>Footer</td><td><code>SheetFooter</code> — acción a ancho completo (apilada), <code>mt-auto</code>, sin borde</td></tr>
               <tr><td>Contenedor</td><td><code>w-3/4</code> mobile · <code>sm:max-w-sm</code> (24&nbsp;rem) desktop · alto completo</td></tr>
@@ -21542,8 +21542,8 @@ import { Select } from &quot;./components/ui/select&quot;
               <tr><td>Overlay</td><td><code>--color-scrim</code></td></tr>
               <tr><td>Panel</td><td><code>--color-surface</code> + <code>--border</code> + <code>shadow-xl</code></td></tr>
               <tr><td>Bordes header/footer</td><td><code>--border</code></td></tr>
-              <tr><td>Título</td><td><code>--color-fg</code></td></tr>
-              <tr><td>Body / descripción</td><td><code>--color-fg</code> / <code>--color-fg-subtle</code></td></tr>
+              <tr><td>Título</td><td><code>--color-on-surface</code></td></tr>
+              <tr><td>Body / descripción</td><td><code>--color-on-surface</code> / <code>--color-on-surface-variant</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -21973,8 +21973,8 @@ import { Select } from &quot;./components/ui/select&quot;
           <div class="cs-anat-stage" style="padding:40px 72px 48px">
             <div class="cs-anat-anchor">
               <input type="checkbox" role="switch" class="switch" checked aria-hidden="true" tabindex="-1" style="pointer-events:none">
-              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">36dp</span></div>
-              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">20dp</span></div>
+              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">24dp</span></div>
+              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">44dp</span></div>
             </div>
           </div>
           <table class="ds-table" style="margin-top:12px">
@@ -21982,7 +21982,7 @@ import { Select } from &quot;./components/ui/select&quot;
             <tbody>
               <tr><td>Alto de la pista</td><td>24&nbsp;dp</td></tr>
               <tr><td>Ancho de la pista</td><td>44&nbsp;dp</td></tr>
-              <tr><td>Diámetro del handle</td><td>20&nbsp;dp (fijo)</td></tr>
+              <tr><td>Diámetro del handle</td><td>18&nbsp;dp (fijo)</td></tr>
               <tr><td>Grosor del borde (apagado)</td><td>2&nbsp;dp</td></tr>
               <tr><td>Desplazamiento del handle</td><td>20&nbsp;dp</td></tr>
               <tr><td>Radio de la pista</td><td>Full (píldora)</td></tr>
@@ -27536,9 +27536,9 @@ const MENU_TOKENS = [
 const INPUT_TOKENS = [
   { category: "Color", rows: [
     { token: "--color-card", role: "Contenedor", usage: "Fondo del campo (bg-card)." },
-    { token: "--color-fg", role: "Contenido", usage: "Texto ingresado y label (text-fg)." },
-    { token: "--color-fg-muted", role: "Placeholder", usage: "Placeholder e íconos leading/trailing." },
-    { token: "--color-fg-subtle", role: "Soporte", usage: "Texto de ayuda (hint) bajo el campo." },
+    { token: "--text-primary", role: "Contenido", usage: "Texto ingresado y label (text-fg)." },
+    { token: "--text-muted", role: "Placeholder", usage: "Placeholder e íconos leading/trailing." },
+    { token: "--text-secondary", role: "Soporte", usage: "Texto de ayuda (hint) bajo el campo." },
     { token: "--color-border", role: "Borde", usage: "Borde en reposo del campo." },
   ]},
   { category: "Estado", rows: [
@@ -27603,8 +27603,8 @@ const SELECT_TOKENS = [
 const TEXTAREA_TOKENS = [
   { category: "Color", rows: [
     { token: "--color-card", role: "Contenedor", usage: "Fondo del campo multilínea (bg-card)." },
-    { token: "--color-fg", role: "Contenido", usage: "Texto ingresado y label (text-fg)." },
-    { token: "--color-fg-muted", role: "Placeholder", usage: "Placeholder del campo." },
+    { token: "--text-primary", role: "Contenido", usage: "Texto ingresado y label (text-fg)." },
+    { token: "--text-muted", role: "Placeholder", usage: "Placeholder del campo." },
     { token: "--color-border", role: "Borde", usage: "Borde en reposo del campo." },
     { token: "--color-error", role: "Requerido", usage: "Asterisco de campo requerido." },
   ]},
@@ -27730,8 +27730,8 @@ const BASIC_CARD_TOKENS = [
   { category: "Color", rows: [
     { token: "--color-card", role: "Contenedor", usage: "Fondo de la tarjeta." },
     { token: "--color-border", role: "Borde", usage: "Borde del contenedor." },
-    { token: "--color-fg", role: "Texto", usage: "Título, contenido y valores." },
-    { token: "--color-fg-subtle", role: "Texto secundario", usage: "Descripción de la tarjeta." },
+    { token: "--text-primary", role: "Texto", usage: "Título, contenido y valores." },
+    { token: "--text-secondary", role: "Texto secundario", usage: "Descripción de la tarjeta." },
   ]},
   { category: "Tipografía", rows: [
     { token: "--font-heading", role: "Familia", usage: "Epilogue para el título." },
@@ -27777,8 +27777,8 @@ const BOTTOM_SHEET_TOKENS = [
   { category: "Color", rows: [
     { token: "--color-surface", role: "Contenedor", usage: "Superficie de la hoja inferior." },
     { token: "--color-border", role: "Borde", usage: "Borde superior y divisores de header/footer." },
-    { token: "--color-fg", role: "Título", usage: "Texto del título (semibold)." },
-    { token: "--color-fg-subtle", role: "Descripción", usage: "Texto secundario." },
+    { token: "--text-primary", role: "Título", usage: "Texto del título (semibold)." },
+    { token: "--text-secondary", role: "Descripción", usage: "Texto secundario." },
   ]},
   { category: "Estado", rows: [
     { token: "--color-scrim", role: "Overlay", usage: "Fondo oscurecido al 40% con desenfoque." },
@@ -27807,8 +27807,8 @@ const SIDE_SHEET_TOKENS = [
   { category: "Color", rows: [
     { token: "--color-surface", role: "Contenedor", usage: "Superficie de la hoja lateral." },
     { token: "--color-border", role: "Borde", usage: "Borde lateral y divisores de header/footer." },
-    { token: "--color-fg", role: "Título", usage: "Texto del título (semibold)." },
-    { token: "--color-fg-subtle", role: "Descripción", usage: "Texto secundario." },
+    { token: "--text-primary", role: "Título", usage: "Texto del título (semibold)." },
+    { token: "--text-secondary", role: "Descripción", usage: "Texto secundario." },
   ]},
   { category: "Estado", rows: [
     { token: "--color-scrim", role: "Overlay", usage: "Fondo oscurecido al 40% con desenfoque." },
@@ -27835,8 +27835,8 @@ const TABLE_TOKENS = [
     { token: "--color-card", role: "Contenedor", usage: "Fondo de la tabla." },
     { token: "--color-border", role: "Borde", usage: "Borde del contenedor y líneas entre filas." },
     { token: "--color-surface-variant", role: "Encabezado", usage: "Fondo de la fila de encabezado." },
-    { token: "--color-fg-muted", role: "Encabezado", usage: "Texto de las celdas de encabezado." },
-    { token: "--color-fg", role: "Celda", usage: "Texto de las celdas de datos." },
+    { token: "--text-muted", role: "Encabezado", usage: "Texto de las celdas de encabezado." },
+    { token: "--text-primary", role: "Celda", usage: "Texto de las celdas de datos." },
   ]},
   { category: "Estado", rows: [
     { token: "--color-surface-variant", role: "Hover", usage: "Fondo de la fila al pasar el cursor." },
@@ -27957,8 +27957,8 @@ const AVATAR_TOKENS = [
 ]
 const STAT_CARD_TOKENS = [
   { category: "Color", rows: [
-    { token: "--color-fg-muted", role: "Etiqueta", usage: "Etiqueta descriptiva de la métrica." },
-    { token: "--color-fg", role: "Valor", usage: "Valor numérico grande." },
+    { token: "--text-muted", role: "Etiqueta", usage: "Etiqueta descriptiva de la métrica." },
+    { token: "--text-primary", role: "Valor", usage: "Valor numérico grande." },
   ]},
   { category: "Tipografía", rows: [
     { token: "--font-heading", role: "Familia (valor)", usage: "Epilogue — valor numérico (bold)." },
@@ -28086,7 +28086,7 @@ const CAROUSEL_TOKENS = [
     { token: "--color-surface", role: "Botón nav", usage: "Fondo de los botones prev/next." },
     { token: "--color-surface-variant", role: "Botón nav · Hover", usage: "Fondo de los botones en hover." },
     { token: "--color-border", role: "Borde", usage: "Borde de los botones de navegación." },
-    { token: "--color-fg", role: "Ícono", usage: "Chevron de los botones." },
+    { token: "--text-primary", role: "Ícono", usage: "Chevron de los botones." },
   ]},
   { category: "Estado", rows: [
     { token: "disabled:opacity-30", role: "Disabled", usage: "Botón atenuado cuando no hay más slides." },
@@ -28109,8 +28109,8 @@ const DATE_PICKER_TOKENS = [
   { category: "Color", rows: [
     { token: "--color-surface", role: "Contenedor", usage: "Fondo del calendario." },
     { token: "--color-border", role: "Borde", usage: "Borde del contenedor." },
-    { token: "--color-fg", role: "Texto", usage: "Mes, días y chevrons." },
-    { token: "--color-fg-subtle", role: "Texto secundario", usage: "Encabezados de semana y días fuera del mes." },
+    { token: "--text-primary", role: "Texto", usage: "Mes, días y chevrons." },
+    { token: "--text-secondary", role: "Texto secundario", usage: "Encabezados de semana y días fuera del mes." },
     { token: "--color-primary / --color-on-primary", role: "Día seleccionado", usage: "Fondo y texto del día seleccionado." },
     { token: "--color-primary-container / --color-on-primary-container", role: "Rango", usage: "Días intermedios de un rango." },
   ]},
@@ -28182,8 +28182,8 @@ const LOADING_TOKENS = [
 ]
 const EMPTY_TOKENS = [
   { category: "Color", rows: [
-    { token: "--color-fg-muted", role: "Ícono / descripción", usage: "Ícono y texto de descripción." },
-    { token: "--color-fg-subtle", role: "Título", usage: "Color del título." },
+    { token: "--text-muted", role: "Ícono / descripción", usage: "Ícono y texto de descripción." },
+    { token: "--text-secondary", role: "Título", usage: "Color del título." },
   ]},
   { category: "Tipografía", rows: [
     { token: "--font-heading", role: "Familia (título)", usage: "Epilogue — título (semibold)." },
@@ -28199,8 +28199,8 @@ const KANBAN_TOKENS = [
   { category: "Color", rows: [
     { token: "--color-surface", role: "Tarjeta (fondo)", usage: "Fondo de la tarjeta (sobre el contenedor Card)." },
     { token: "--color-border", role: "Borde", usage: "Borde de la tarjeta (heredado de Card)." },
-    { token: "--color-fg", role: "Título", usage: "Título de la tarjeta (semibold)." },
-    { token: "--color-fg-subtle", role: "Meta / columna", usage: "Metadata y encabezado de columna." },
+    { token: "--text-primary", role: "Título", usage: "Título de la tarjeta (semibold)." },
+    { token: "--text-secondary", role: "Meta / columna", usage: "Metadata y encabezado de columna." },
     { token: "--color-surface-variant", role: "Contador columna", usage: "Fondo del badge contador." },
     { token: "--color-primary-container / --color-on-primary-container", role: "Avatar", usage: "Fondo e iniciales del avatar." },
   ]},
@@ -28230,8 +28230,8 @@ const VACANCY_TOKENS = [
     { token: "--color-surface", role: "Tarjeta (fondo)", usage: "Fondo de la tarjeta (sobre el contenedor Card)." },
     { token: "--color-border", role: "Borde", usage: "Borde de la tarjeta (heredado de Card)." },
     { token: "--color-primary-container / --color-on-primary-container", role: "Ícono", usage: "Fondo e ícono/iniciales circular." },
-    { token: "--color-fg", role: "Nombre", usage: "Nombre de la vacante (semibold)." },
-    { token: "--color-fg-subtle", role: "Departamento / meta", usage: "Departamento y metadata." },
+    { token: "--text-primary", role: "Nombre", usage: "Nombre de la vacante (semibold)." },
+    { token: "--text-secondary", role: "Departamento / meta", usage: "Departamento y metadata." },
     { token: "--color-surface-variant", role: "Hover (fondo)", usage: "Fondo al pasar el mouse (hover:bg-surface-variant)." },
   ]},
   { category: "Tipografía", rows: [
@@ -28256,8 +28256,8 @@ const PERSON_TOKENS = [
   { category: "Color", rows: [
     { token: "--color-surface", role: "Tarjeta (fondo)", usage: "Fondo de la tarjeta (sobre el contenedor Card)." },
     { token: "--color-border", role: "Borde", usage: "Borde de la tarjeta (heredado de Card)." },
-    { token: "--color-fg", role: "Nombre", usage: "Nombre de la persona (semibold)." },
-    { token: "--color-fg-subtle", role: "Rol / meta", usage: "Rol y metadata." },
+    { token: "--text-primary", role: "Nombre", usage: "Nombre de la persona (semibold)." },
+    { token: "--text-secondary", role: "Rol / meta", usage: "Rol y metadata." },
     { token: "--color-surface-variant", role: "Hover (fondo)", usage: "Fondo al pasar el mouse (hover:bg-surface-variant)." },
   ]},
   { category: "Tipografía", rows: [
@@ -28861,23 +28861,40 @@ window.addEventListener('hashchange', function() {
       links.forEach(function(l) { l.classList.toggle('active', l.getAttribute('data-target') === id); });
       if (currentLabel && byId[id]) currentLabel.textContent = byId[id].textContent;
     }
-    links.forEach(function(l) {
-      l.addEventListener('click', function(e) {
-        e.preventDefault();
-        var t = document.getElementById(l.getAttribute('data-target'));
-        if (t) {
-          // scrollIntoView auto-detects the correct scroll container and honors
-          // the section's scroll-margin-top (96px). Force instant since CSS
-          // scroll-behavior:smooth no-ops in some engines.
-          var html = document.documentElement;
-          var prev = html.style.scrollBehavior;
-          html.style.scrollBehavior = 'auto';
-          t.scrollIntoView({ block: 'start' });
-          html.style.scrollBehavior = prev;
-          setActive(l.getAttribute('data-target'));
+    function go(l) {
+      var t = document.getElementById(l.getAttribute('data-target'));
+      if (t) {
+        // scrollIntoView auto-detects the correct scroll container and honors
+        // the section's scroll-margin-top (96px). Force instant since CSS
+        // scroll-behavior:smooth no-ops in some engines.
+        var html = document.documentElement;
+        var prev = html.style.scrollBehavior;
+        html.style.scrollBehavior = 'auto';
+        t.scrollIntoView({ block: 'start' });
+        html.style.scrollBehavior = prev;
+        setActive(l.getAttribute('data-target'));
+      }
+      toc.classList.remove('open');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    }
+    links.forEach(function(l, i) {
+      // These are <a> without href, so they aren't focusable/operable by
+      // default. Make them real, keyboard-accessible in-page links: focusable
+      // (tabindex), announced as links (role), Enter/Space to activate, and
+      // roving Arrow/Home/End navigation between entries.
+      if (!l.hasAttribute('tabindex')) l.setAttribute('tabindex', '0');
+      if (!l.hasAttribute('role')) l.setAttribute('role', 'link');
+      l.addEventListener('click', function(e) { e.preventDefault(); go(l); });
+      l.addEventListener('keydown', function(e) {
+        var k = e.key;
+        if (k === 'Enter' || k === ' ' || k === 'Spacebar') { e.preventDefault(); go(l); }
+        else if (k === 'ArrowDown' || k === 'ArrowUp') {
+          e.preventDefault();
+          var n = k === 'ArrowDown' ? i + 1 : i - 1;
+          if (n >= 0 && n < links.length) links[n].focus();
         }
-        toc.classList.remove('open');
-        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        else if (k === 'Home') { e.preventDefault(); links[0].focus(); }
+        else if (k === 'End') { e.preventDefault(); links[links.length - 1].focus(); }
       });
     });
     if (toggle) {

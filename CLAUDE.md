@@ -141,7 +141,8 @@ Every component CSS header carries a **`Cuándo usar / Cuándo no / Reemplaza a`
 |---|---|
 | Token values (colors, type scale, spacing, radii, shadows, breakpoints) | `css/variables.css` |
 | Component code, variants, props, usage rules | `css/components/<name>.css` (canonical) + optional `components/ui/<name>.tsx` wrapper |
-| Per-component decision rule (`Cuándo usar / Cuándo no`) | the component's `css/components/<name>.css` header comment |
+| **Operational per-component rules — when/when-not to use, variants+purpose, size criteria, states, a11y, keyboard, heuristics, relationships, correct/incorrect examples (machine-readable, for skills + UI-generation)** | **`component-rules/<id>.md`** (YAML frontmatter + prose; schema in `component-rules/README.md`) — **consult this first when selecting/using a component** |
+| Per-component decision rule (`Cuándo usar / Cuándo no`) | `component-rules/<id>.md` (authored) or the component's `css/components/<name>.css` header comment (fallback) |
 | Usage guidelines / specs / accessibility (human depth) | root `index.html` |
 | Migration / restyling rules | `MIGRATION.md` |
 | Cross-component consistency rules, state patterns, audit checklist | `GOVERNANCE.md` |
