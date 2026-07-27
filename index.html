@@ -17729,15 +17729,10 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
             padding:48px 32px 32px; margin:12px 0;
             display:flex; flex-direction:column; align-items:center; gap:28px;
           }
+          /* .cs-meas-grid: only the Snackbar Medidas table still uses this class */
           .cs-meas-grid {
             display:flex; flex-wrap:wrap; gap:10px 28px; justify-content:center; max-width:480px;
           }
-          .cs-meas-item {
-            display:flex; flex-direction:column; align-items:center; gap:2px;
-            font:400 11px 'Inter',sans-serif; color:var(--color-on-surface-variant,#474D61);
-            min-width:80px;
-          }
-          .cs-meas-item b { font:700 13px 'Inter',sans-serif; color:var(--color-on-surface,#0A0C12); }
 
           /* ── Elevation row ── */
           .cs-elev-row { display:flex; gap:40px; flex-wrap:wrap; margin:16px 0; }
@@ -18385,16 +18380,21 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                     <div style="font:400 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">Seleccionado</div>
                   </div>
                 </div>
-                <div class="cs-meas-grid">
-                  <div class="cs-meas-item"><b>32dp</b>Alto</div>
-                  <div class="cs-meas-item"><b>18dp</b>Ícono de selección</div>
-                  <div class="cs-meas-item"><b>8dp</b>Padding izq. (con ícono)</div>
-                  <div class="cs-meas-item"><b>12dp</b>Padding der.</div>
-                  <div class="cs-meas-item"><b>8dp</b>Gap ícono–etiqueta</div>
-                  <div class="cs-meas-item"><b>12dp</b>Padding H (sin ícono, c/lado)</div>
-                  <div class="cs-meas-item"><b>Full</b>Radio de esquina</div>
-                  <div class="cs-meas-item"><b>1dp</b>Borde (no sel.)</div>
-                </div>
+              </div>
+              <div class="ds-table-wrap">
+                <table class="ds-table">
+                  <thead><tr><th>Elemento</th><th>Medida</th><th>Token</th></tr></thead>
+                  <tbody>
+                    <tr><td>Alto</td><td><code>32px</code></td><td>—</td></tr>
+                    <tr><td>Radio de esquina</td><td><code>Full</code> (píldora)</td><td><code>--radius-full</code></td></tr>
+                    <tr><td>Borde (no seleccionado)</td><td><code>1px</code></td><td><code>--color-outline-variant</code></td></tr>
+                    <tr><td>Ícono de selección</td><td><code>18px</code></td><td>—</td></tr>
+                    <tr><td>Gap ícono–etiqueta</td><td><code>8px</code></td><td><code>--space-2</code></td></tr>
+                    <tr><td>Padding horizontal (sin ícono)</td><td><code>16px</code></td><td><code>--space-4</code></td></tr>
+                    <tr><td>Padding del lado del ícono</td><td><code>8px</code></td><td><code>--space-2</code></td></tr>
+                    <tr><td>Tipografía</td><td><code>14px</code> · peso <code>500</code></td><td><code>--font-size-body-lg</code> · <code>--font-weight-medium</code></td></tr>
+                  </tbody>
+                </table>
               </div>
 
               <!-- ── COLOR ── -->
@@ -18532,16 +18532,23 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                     <div style="font:400 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">con avatar + ícono de eliminación</div>
                   </div>
                 </div>
-                <div class="cs-meas-grid">
-                  <div class="cs-meas-item"><b>32dp</b>Alto</div>
-                  <div class="cs-meas-item"><b>18dp</b>Ícono inicial / trailing</div>
-                  <div class="cs-meas-item"><b>8dp</b>Padding izq. (con ícono)</div>
-                  <div class="cs-meas-item"><b>4dp</b>Padding der. (al borde del ícono ×)</div>
-                  <div class="cs-meas-item"><b>8dp</b>Gap ícono–etiqueta</div>
-                  <div class="cs-meas-item"><b>12dp</b>Padding izq. (sin ícono)</div>
-                  <div class="cs-meas-item"><b>Full</b>Radio de esquina</div>
-                  <div class="cs-meas-item"><b>1dp</b>Borde</div>
-                </div>
+              </div>
+              <div class="ds-table-wrap">
+                <table class="ds-table">
+                  <thead><tr><th>Elemento</th><th>Medida</th><th>Token</th></tr></thead>
+                  <tbody>
+                    <tr><td>Alto</td><td><code>32px</code></td><td>—</td></tr>
+                    <tr><td>Radio de esquina</td><td><code>Full</code> (píldora)</td><td><code>--radius-full</code></td></tr>
+                    <tr><td>Borde</td><td><code>1px</code></td><td><code>--color-outline-variant</code></td></tr>
+                    <tr><td>Ícono inicial / avatar</td><td><code>18px</code></td><td>—</td></tr>
+                    <tr><td>Ícono de eliminación (contenedor)</td><td><code>18px</code></td><td>—</td></tr>
+                    <tr><td>Ícono de eliminación (glifo)</td><td><code>14px</code></td><td>—</td></tr>
+                    <tr><td>Gap ícono–etiqueta</td><td><code>8px</code></td><td><code>--space-2</code></td></tr>
+                    <tr><td>Padding del lado del ícono</td><td><code>8px</code></td><td><code>--space-2</code></td></tr>
+                    <tr><td>Padding horizontal (sin ícono)</td><td><code>16px</code></td><td><code>--space-4</code></td></tr>
+                    <tr><td>Tipografía</td><td><code>14px</code> · peso <code>500</code></td><td><code>--font-size-body-lg</code> · <code>--font-weight-medium</code></td></tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -18572,12 +18579,18 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                 <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:flex-end;">
                   <button class="chip" type="button">Buscar proyectos</button>
                 </div>
-                <div class="cs-meas-grid">
-                  <div class="cs-meas-item"><b>32dp</b>Alto</div>
-                  <div class="cs-meas-item"><b>12dp</b>Padding H (cada lado)</div>
-                  <div class="cs-meas-item"><b>Full</b>Radio de esquina</div>
-                  <div class="cs-meas-item"><b>1dp</b>Borde</div>
-                </div>
+              </div>
+              <div class="ds-table-wrap">
+                <table class="ds-table">
+                  <thead><tr><th>Elemento</th><th>Medida</th><th>Token</th></tr></thead>
+                  <tbody>
+                    <tr><td>Alto</td><td><code>32px</code></td><td>—</td></tr>
+                    <tr><td>Radio de esquina</td><td><code>Full</code> (píldora)</td><td><code>--radius-full</code></td></tr>
+                    <tr><td>Borde</td><td><code>1px</code></td><td><code>--color-outline-variant</code></td></tr>
+                    <tr><td>Padding horizontal (cada lado)</td><td><code>16px</code></td><td><code>--space-4</code></td></tr>
+                    <tr><td>Tipografía</td><td><code>14px</code> · peso <code>500</code></td><td><code>--font-size-body-lg</code> · <code>--font-weight-medium</code></td></tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -20765,38 +20778,62 @@ const RadioGroupItem = React.forwardRef&lt;HTMLInputElement, RadioGroupItemProps
               <div class="cs-meas-canvas">
                 <div style="display:flex;justify-content:center;padding:20px 80px"><div style="width:min(420px,100%)"><div class="search-bar" role="search"><span class="search-bar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="search-bar-input" type="search" placeholder="Buscar vacantes..." aria-label="Buscar vacantes..."><span class="search-bar-trailing"><span class="search-bar-avatar">AV</span></span></div></div></div>
               </div>
-              <div class="cs-meas-grid">
-                <div class="cs-meas-item"><b>40dp</b>Alto en fila (.search-row)</div>
-                <div class="cs-meas-item"><b>56dp</b>Alto standalone (mobile)</div>
-                <div class="cs-meas-item"><b>20dp</b>Radio visual (--radius-full)</div>
-                <div class="cs-meas-item"><b>24dp</b>Ícono inicial</div>
-                <div class="cs-meas-item"><b>30dp</b>Avatar</div>
-                <div class="cs-meas-item"><b>16dp</b>Padding horizontal</div>
-                <div class="cs-meas-item"><b>360–720dp</b>Ancho mín–máx</div>
+              <div class="ds-table-wrap">
+                <table class="ds-table">
+                  <thead><tr><th>Elemento</th><th>Medida</th><th>Token</th></tr></thead>
+                  <tbody>
+                    <tr><td>Alto (standalone, mobile)</td><td><code>56px</code></td><td>—</td></tr>
+                    <tr><td>Alto en fila (<code>.search-row</code>)</td><td><code>40px</code></td><td>—</td></tr>
+                    <tr><td>Radio de esquina</td><td><code>Full</code> (píldora)</td><td><code>--radius-full</code></td></tr>
+                    <tr><td>Ícono inicial</td><td><code>24px</code></td><td>—</td></tr>
+                    <tr><td>Ícono final (trailing)</td><td><code>24px</code></td><td>—</td></tr>
+                    <tr><td>Avatar</td><td><code>30px</code></td><td>—</td></tr>
+                    <tr><td>Gap entre elementos</td><td><code>16px</code></td><td><code>--space-4</code></td></tr>
+                    <tr><td>Padding horizontal</td><td><code>16px</code></td><td><code>--space-4</code></td></tr>
+                    <tr><td>Borde</td><td><code>1px</code></td><td><code>--border</code></td></tr>
+                    <tr><td>Ancho mín–máx</td><td><code>360–720px</code></td><td>—</td></tr>
+                  </tbody>
+                </table>
               </div>
 
               <p class="cs-h3">Search field</p>
               <div class="cs-meas-canvas">
                 <div style="display:flex;justify-content:center;padding:20px 80px"><div style="width:min(360px,100%)"><div class="search-field"><span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input type="search" placeholder="Buscar por nombre o link" aria-label="Buscar por nombre o link"></div></div></div>
               </div>
-              <div class="cs-meas-grid">
-                <div class="cs-meas-item"><b>40dp</b>Alto (padding vertical, no altura fija)</div>
-                <div class="cs-meas-item"><b>8dp</b>Radio visual (--radius-md)</div>
-                <div class="cs-meas-item"><b>18dp</b>Ícono inicial</div>
-                <div class="cs-meas-item"><b>16dp</b>Padding horizontal</div>
-                <div class="cs-meas-item"><b>flex: 1</b>Ancho — ocupa el espacio sobrante en la toolbar</div>
+              <div class="ds-table-wrap">
+                <table class="ds-table">
+                  <thead><tr><th>Elemento</th><th>Medida</th><th>Token</th></tr></thead>
+                  <tbody>
+                    <tr><td>Alto</td><td>Sin altura fija (padding vertical <code>8px</code>)</td><td>—</td></tr>
+                    <tr><td>Radio de esquina</td><td><code>8px</code></td><td><code>--radius-md</code></td></tr>
+                    <tr><td>Ícono inicial</td><td><code>18px</code></td><td>—</td></tr>
+                    <tr><td>Gap ícono–texto</td><td><code>8px</code></td><td><code>--space-2</code></td></tr>
+                    <tr><td>Padding vertical</td><td><code>8px</code></td><td>—</td></tr>
+                    <tr><td>Padding horizontal</td><td><code>16px</code></td><td><code>--space-4</code></td></tr>
+                    <tr><td>Borde</td><td><code>1px</code></td><td><code>--border</code></td></tr>
+                    <tr><td>Tipografía</td><td><code>13.5px</code></td><td><code>--font-size-body-md</code></td></tr>
+                    <tr><td>Ancho</td><td><code>flex: 1</code> — ocupa el espacio sobrante en la toolbar</td><td>—</td></tr>
+                  </tbody>
+                </table>
               </div>
 
               <p class="cs-h3">Search view</p>
               <div class="cs-meas-canvas">
                 <div style="display:flex;justify-content:center;padding:20px 80px"><div style="width:min(440px,100%)"><div class="search-view" role="search"><div class="search-view-header"><button class="search-view-back" aria-label="Volver"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button><input class="search-bar-input" type="search" placeholder="Buscar" aria-label="Buscar" style="border:none;background:transparent"></div><ul class="search-view-results"><li class="search-view-result"><span class="search-view-result-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>Resultado reciente</li><li class="search-view-result"><span class="search-view-result-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>Sugerencia</li></ul></div></div></div>
               </div>
-              <div class="cs-meas-grid">
-                <div class="cs-meas-item"><b>72dp</b>Alto del encabezado</div>
-                <div class="cs-meas-item"><b>1dp</b>Divisor</div>
-                <div class="cs-meas-item"><b>28dp</b>Radio (docked)</div>
-                <div class="cs-meas-item"><b>24dp</b>Íconos</div>
-                <div class="cs-meas-item"><b>16dp</b>Padding horizontal</div>
+              <div class="ds-table-wrap">
+                <table class="ds-table">
+                  <thead><tr><th>Elemento</th><th>Medida</th><th>Token</th></tr></thead>
+                  <tbody>
+                    <tr><td>Alto del encabezado</td><td><code>72px</code></td><td>—</td></tr>
+                    <tr><td>Radio de esquina (docked)</td><td><code>28px</code></td><td>—</td></tr>
+                    <tr><td>Divisor</td><td><code>1px</code></td><td><code>--color-outline</code></td></tr>
+                    <tr><td>Íconos (volver / resultado)</td><td><code>24px</code></td><td>—</td></tr>
+                    <tr><td>Gap entre elementos</td><td><code>16px</code></td><td><code>--space-4</code></td></tr>
+                    <tr><td>Padding horizontal</td><td><code>16px</code></td><td><code>--space-4</code></td></tr>
+                    <tr><td>Ancho mín–máx</td><td><code>360–720px</code></td><td>—</td></tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
