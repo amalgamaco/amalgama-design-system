@@ -1,0 +1,5641 @@
+{
+  "$schema": "./manifest.schema (see README.md for the per-file frontmatter schema)",
+  "generator": "scripts/build-manifest.mjs / regenerate from component-rules/*.md frontmatter",
+  "count": 61,
+  "components": [
+    {
+      "id": "accordion",
+      "display_name": "Accordion",
+      "category": "Containment",
+      "status": "stable",
+      "aliases": [
+        "expander",
+        "collapsible sections",
+        "faq"
+      ],
+      "summary": "Vertically stacked, expandable sections that reveal or hide long content to keep a dense view scannable.",
+      "variants": [
+        "single",
+        "multiple",
+        "disabled",
+        "bordered",
+        "card"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "expanded",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--border",
+          "--text-primary",
+          "--text-secondary",
+          "--color-focus",
+          "--color-focus-ring"
+        ],
+        "radius": [
+          "--radius-lg",
+          "--radius-sm"
+        ],
+        "spacing": [
+          "16px trigger padding",
+          "16px pb spacer"
+        ],
+        "motion": [
+          "--duration-normal",
+          "--duration-fast",
+          "--ease-default",
+          "--ease-expressive"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "collapsible",
+          "tabs",
+          "card"
+        ],
+        "replaces": [
+          "custom stacked 'ver más' blocks without a shared pattern"
+        ],
+        "composed_with": [
+          "card"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "collapsible",
+            "why": "Collapsible is a single region; Accordion is multiple stacked sections"
+          },
+          {
+            "component": "tabs",
+            "why": "Tabs switch views; Accordion stacks disclosable content"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/accordion.css",
+        "classes": [
+          "accordion",
+          "accordion-item",
+          "accordion-trigger",
+          "accordion-chevron",
+          "accordion-content",
+          "accordion-content-inner",
+          "accordion-bordered"
+        ],
+        "react_wrapper": "components/ui/accordion.tsx",
+        "docs_anchor": "c-accordion"
+      },
+      "rules_file": "component-rules/accordion.md"
+    },
+    {
+      "id": "alert",
+      "display_name": "Alert",
+      "category": "Feedback",
+      "status": "stable",
+      "aliases": [
+        "banner",
+        "callout",
+        "inline message",
+        "notice"
+      ],
+      "summary": "An inline, persistent contextual message that stays in the page flow until the user resolves or dismisses it.",
+      "variants": [
+        "default",
+        "info",
+        "success",
+        "warning",
+        "error"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "focus",
+        "dismissed"
+      ],
+      "tokens": {
+        "color": [
+          "--color-info-container",
+          "--color-on-info-container",
+          "--color-success-container",
+          "--color-warning-container",
+          "--color-error-container",
+          "--color-surface-container"
+        ],
+        "radius": [
+          "--radius-lg"
+        ],
+        "spacing": [
+          "12px 16px padding",
+          "12px column gap"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "snackbar",
+          "dialog",
+          "badge"
+        ],
+        "replaces": [
+          "ad-hoc warning/notice banners"
+        ],
+        "composed_with": [
+          "button",
+          "form"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "snackbar",
+            "why": "Snackbar is floating + ephemeral; Alert is inline + persistent"
+          },
+          {
+            "component": "dialog",
+            "why": "Alert Dialog blocks and demands a choice; Alert coexists with content"
+          },
+          {
+            "component": "badge",
+            "why": "Badge is a compact read-only status marker; Alert is a full contextual message"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/alert.css",
+        "classes": [
+          "alert",
+          "alert-info",
+          "alert-success",
+          "alert-warning",
+          "alert-error",
+          "alert-icon",
+          "alert-body",
+          "alert-title",
+          "alert-description",
+          "alert-actions",
+          "alert-close"
+        ],
+        "react_wrapper": "components/ui/alert.tsx",
+        "docs_anchor": "c-alert"
+      },
+      "rules_file": "component-rules/alert.md"
+    },
+    {
+      "id": "aspect-ratio",
+      "display_name": "Aspect Ratio",
+      "category": "Layout",
+      "status": "stable",
+      "aliases": [
+        "ratio",
+        "media box",
+        "intrinsic ratio",
+        "embed wrapper"
+      ],
+      "summary": "A layout primitive that locks content to a fixed width:height ratio while the width stays fluid — for media, thumbnails, and embeds.",
+      "variants": [
+        "ratio"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "radius": [
+          "--radius-lg (applied to the media child, optional)"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "card",
+          "carousel",
+          "skeleton",
+          "avatar"
+        ],
+        "replaces": [
+          "padding-bottom percentage hacks for intrinsic ratio boxes"
+        ],
+        "composed_with": [
+          "card",
+          "carousel",
+          "item"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "avatar",
+            "why": "Avatar is a fixed person circle; Aspect Ratio is a fluid-width media box"
+          },
+          {
+            "component": "skeleton",
+            "why": "Skeleton is the loading placeholder; Aspect Ratio reserves the final media's shape"
+          }
+        ]
+      },
+      "source": {
+        "css": "layout primitive — no dedicated css/components file; uses the native CSS aspect-ratio property",
+        "classes": [],
+        "react_wrapper": null,
+        "docs_anchor": "c-aspect-ratio"
+      },
+      "rules_file": "component-rules/aspect-ratio.md"
+    },
+    {
+      "id": "attachment",
+      "display_name": "Attachment",
+      "category": "Data Display",
+      "status": "stable",
+      "aliases": [
+        "file row",
+        "file chip",
+        "uploaded file",
+        "adjunto"
+      ],
+      "summary": "A compact file row showing an icon/thumbnail, name and metadata, with an optional remove action, upload progress, or error state.",
+      "variants": [
+        "default",
+        "image",
+        "uploading",
+        "error",
+        "list"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "uploading",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-variant",
+          "--color-on-surface-variant",
+          "--color-error",
+          "--color-error-container",
+          "--color-primary"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-sm",
+          "--radius-full"
+        ],
+        "spacing": [
+          "10px 12px padding",
+          "12px gap"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "input",
+          "chip",
+          "list",
+          "loading"
+        ],
+        "replaces": [
+          "ad-hoc file-row markup"
+        ],
+        "composed_with": [
+          "button",
+          "form",
+          "dialog"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "chip",
+            "why": "input chips are compact removable tokens; Attachment is a file row with metadata + progress"
+          },
+          {
+            "component": "input",
+            "why": "the <input type=file> does the picking; Attachment displays the result"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/attachment.css",
+        "classes": [
+          "attachment-list",
+          "attachment",
+          "attachment-icon",
+          "attachment-icon-image",
+          "attachment-body",
+          "attachment-name",
+          "attachment-meta",
+          "attachment-remove",
+          "attachment-progress",
+          "attachment-progress-bar",
+          "attachment-error"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-attachment"
+      },
+      "rules_file": "component-rules/attachment.md"
+    },
+    {
+      "id": "avatar",
+      "display_name": "Avatar",
+      "category": "Display",
+      "status": "stable",
+      "aliases": [
+        "user avatar",
+        "profile picture",
+        "initials",
+        "gravatar"
+      ],
+      "summary": "A circle showing a person's photo or initials over a brand tonal fill — identifies a person, never a non-person entity.",
+      "variants": [
+        "image",
+        "fallback",
+        "badge",
+        "group",
+        "count"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "states": [
+        "default",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "--color-primary-container",
+          "--color-on-primary-container",
+          "--color-surface",
+          "--color-surface-variant",
+          "--color-on-surface-variant",
+          "--color-success",
+          "--color-error",
+          "--color-warning",
+          "--color-outline"
+        ],
+        "radius": [
+          "--radius-full"
+        ],
+        "typography": [
+          "--font-body"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "badge",
+          "person-card",
+          "list",
+          "item",
+          "topbar"
+        ],
+        "replaces": [
+          "hardcoded-gradient initial divs / ad-hoc profile circles"
+        ],
+        "composed_with": [
+          "person-card",
+          "item",
+          "list",
+          "topbar",
+          "dropdown-menu"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "badge",
+            "why": "Badge is read-only status text; Avatar identifies a person"
+          },
+          {
+            "component": "skeleton",
+            "why": "skeleton-circle is the loading placeholder for an avatar, not an avatar"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/avatar.css",
+        "classes": [
+          "avatar",
+          "avatar-sm",
+          "avatar-md",
+          "avatar-lg",
+          "avatar-xl",
+          "avatar-image",
+          "avatar-fallback",
+          "avatar-badge",
+          "avatar-badge-online",
+          "avatar-badge-busy",
+          "avatar-badge-away",
+          "avatar-badge-offline",
+          "avatar-group",
+          "avatar-group-count"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-avatar"
+      },
+      "rules_file": "component-rules/avatar.md"
+    },
+    {
+      "id": "badge",
+      "display_name": "Badge",
+      "category": "Display",
+      "status": "stable",
+      "aliases": [
+        "tag",
+        "status pill",
+        "label",
+        "count"
+      ],
+      "summary": "A read-only pill communicating an item's status, category, or a count — each color carries a fixed meaning; never interactive.",
+      "variants": [
+        "open",
+        "active",
+        "closed",
+        "draft",
+        "archived",
+        "warning",
+        "tertiary",
+        "info",
+        "label"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "link"
+      ],
+      "tokens": {
+        "color": [
+          "--color-success-container",
+          "--color-on-success-container",
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--color-error-container",
+          "--color-on-error-container",
+          "--color-warning-container",
+          "--color-tertiary-container",
+          "--color-info-container",
+          "--color-surface-variant",
+          "--color-outline"
+        ],
+        "radius": [
+          "--radius-full"
+        ],
+        "spacing": [
+          "4px 10px padding"
+        ],
+        "typography": [
+          "--font-size-badge",
+          "--font-mono"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "chip",
+          "alert",
+          "stat-card"
+        ],
+        "replaces": [
+          "plain coloured text labels",
+          "custom pills / legacy tags"
+        ],
+        "composed_with": [
+          "table",
+          "card",
+          "item",
+          "list",
+          "topbar"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "chip",
+            "why": "chips are interactive (filter/select/remove); a badge is read-only status"
+          },
+          {
+            "component": "button",
+            "why": "buttons act; a badge only informs"
+          },
+          {
+            "component": "alert",
+            "why": "alert is a persistent inline message block; a badge is a compact status pill"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/badge.css",
+        "classes": [
+          "badge",
+          "badge-open",
+          "badge-active",
+          "badge-closed",
+          "badge-draft",
+          "badge-archived",
+          "badge-warning",
+          "badge-tertiary",
+          "badge-info",
+          "badge-label",
+          "badge-link"
+        ],
+        "react_wrapper": "components/ui/badge.tsx",
+        "docs_anchor": "c-badge"
+      },
+      "rules_file": "component-rules/badge.md"
+    },
+    {
+      "id": "breadcrumb",
+      "display_name": "Breadcrumb",
+      "category": "Navigation",
+      "status": "stable",
+      "aliases": [
+        "breadcrumbs",
+        "location trail",
+        "path"
+      ],
+      "summary": "A hierarchy trail showing where the user is and letting them jump back to an ancestor.",
+      "variants": [
+        "link",
+        "page",
+        "separator",
+        "ellipsis"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "current",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--text-secondary",
+          "--text-primary",
+          "--color-primary",
+          "--color-outline",
+          "--color-surface-variant",
+          "--color-focus"
+        ],
+        "radius": [
+          "--radius-sm"
+        ],
+        "spacing": [
+          "6px gap"
+        ],
+        "typography": [
+          "--font-size-body-sm"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "back-link",
+          "navigation-menu",
+          "pagination"
+        ],
+        "replaces": [
+          "plain-text 'path' strings with ad-hoc separators"
+        ],
+        "composed_with": [
+          "page-header",
+          "dropdown-menu"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "back-link",
+            "why": "Back Link is a single 'volver'; Breadcrumb is a multi-level trail"
+          },
+          {
+            "component": "navigation-menu",
+            "why": "Navigation is primary wayfinding; Breadcrumb shows location"
+          },
+          {
+            "component": "pagination",
+            "why": "Pagination pages through a set; Breadcrumb shows hierarchy"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/breadcrumb.css",
+        "classes": [
+          "breadcrumb",
+          "breadcrumb-list",
+          "breadcrumb-item",
+          "breadcrumb-link",
+          "breadcrumb-page",
+          "breadcrumb-separator",
+          "breadcrumb-ellipsis"
+        ],
+        "react_wrapper": "components/ui/breadcrumb.tsx",
+        "docs_anchor": "c-breadcrumb"
+      },
+      "rules_file": "component-rules/breadcrumb.md"
+    },
+    {
+      "id": "button-group",
+      "display_name": "Button Group",
+      "category": "Actions",
+      "status": "stable",
+      "aliases": [
+        "btn-group",
+        "joined buttons",
+        "split button",
+        "input addon"
+      ],
+      "summary": "A container that visually joins related buttons (or an input + addon) into one unit by collapsing shared borders and radii — it carries no selection state of its own.",
+      "variants": [
+        "horizontal",
+        "vertical",
+        "text-addon",
+        "separator"
+      ],
+      "sizes": [
+        "inherited"
+      ],
+      "states": [
+        "default",
+        "focus",
+        "hover",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-variant",
+          "--color-on-surface",
+          "--color-outline",
+          "--color-border"
+        ],
+        "radius": "--radius-* inherited from the child buttons; inner corners collapse to 0",
+        "spacing": "children share a single 1px border (no gap between joined members)"
+      },
+      "relationships": {
+        "related": [
+          "button",
+          "segmented-button",
+          "toggle-group",
+          "input"
+        ],
+        "replaces": [
+          "rows of adjacent buttons with hand-tuned radius overrides"
+        ],
+        "composed_with": [
+          "button",
+          "input",
+          "toolbar"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "segmented-button",
+            "why": "segmented picks 1 of N with persistent selected state; button group has no selection"
+          },
+          {
+            "component": "toggle-group",
+            "why": "toggle-group holds stateful on/off toggles; button group holds plain actions"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/button-group.css",
+        "classes": [
+          "button-group",
+          "button-group-vertical",
+          "button-group-text",
+          "button-group-separator"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-button-group"
+      },
+      "rules_file": "component-rules/button-group.md"
+    },
+    {
+      "id": "button",
+      "display_name": "Button",
+      "category": "Actions",
+      "status": "stable",
+      "aliases": [
+        "btn",
+        "cta",
+        "action button"
+      ],
+      "summary": "Triggers an action. Chosen by hierarchy (color) and density (size); exactly one primary action per context.",
+      "variants": [
+        "primary",
+        "elevated",
+        "secondary",
+        "tertiary",
+        "text",
+        "icon",
+        "danger",
+        "success"
+      ],
+      "sizes": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active",
+        "disabled",
+        "loading"
+      ],
+      "tokens": {
+        "color": [
+          "--color-primary",
+          "--color-on-primary",
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--color-outline"
+        ],
+        "radius": "--radius-* scaled by size class (sm→--radius-sm … xl→--radius-lg)",
+        "motion": [
+          "--duration-fast"
+        ],
+        "elevation": "--btn-elevation (elevated variant only)"
+      },
+      "relationships": {
+        "related": [
+          "segmented-button",
+          "button-group",
+          "toggle"
+        ],
+        "replaces": [
+          "any legacy button/CTA",
+          "a flat 'action row' → map to a hierarchical button group"
+        ],
+        "composed_with": [
+          "dialog",
+          "sheet",
+          "toolbar",
+          "form",
+          "card"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "chip",
+            "why": "chips filter/select/represent input; buttons perform actions"
+          },
+          {
+            "component": "segmented-button",
+            "why": "segmented switches a view/mode; button acts once"
+          },
+          {
+            "component": "badge",
+            "why": "badge is a read-only status; not interactive"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/button.css",
+        "classes": [
+          "btn-primary",
+          "btn-elevated",
+          "btn-secondary",
+          "btn-tertiary",
+          "btn-ghost",
+          "btn-text",
+          "icon-btn",
+          "btn-danger",
+          "btn-success",
+          "btn-xs",
+          "btn-sm",
+          "btn-lg",
+          "btn-xl",
+          "btn-compact",
+          "btn-next"
+        ],
+        "react_wrapper": "components/ui/button.tsx",
+        "docs_anchor": "c-button"
+      },
+      "rules_file": "component-rules/button.md"
+    },
+    {
+      "id": "calendar",
+      "display_name": "Calendar",
+      "category": "Input",
+      "status": "stable",
+      "aliases": [
+        "date picker",
+        "datepicker",
+        "date range",
+        "month grid",
+        "date & time picker"
+      ],
+      "summary": "A month-grid date/range picker with real month/year navigation — the base of the Date Picker, usable inline or docked in a popover, dialog, or sheet.",
+      "variants": [
+        "single",
+        "range",
+        "dropdown",
+        "presets",
+        "booked",
+        "weeknumbers",
+        "date-picker",
+        "date-time"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected",
+        "today",
+        "range",
+        "disabled",
+        "booked"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface",
+          "--border",
+          "--color-on-surface",
+          "--color-primary",
+          "--color-on-primary",
+          "--color-primary-container",
+          "--color-surface-variant",
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--color-focus",
+          "--text-muted"
+        ],
+        "radius": [
+          "--radius-lg"
+        ],
+        "typography": [
+          "--font-body",
+          "--font-size-body-md"
+        ],
+        "spacing": [
+          "--cal-cell (32px default; sm/lg override)",
+          "12px panel padding"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "select",
+          "form",
+          "popover",
+          "dialog",
+          "sheet"
+        ],
+        "replaces": [
+          "ad-hoc date pickers without an accessible grid"
+        ],
+        "composed_with": [
+          "popover",
+          "dialog",
+          "sheet",
+          "button",
+          "form",
+          "input"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "select",
+            "why": "Select picks month/year or a bounded option; Calendar picks a specific day/range"
+          },
+          {
+            "component": "popover",
+            "why": "Popover is the container; the Date Picker is Calendar docked inside one"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/calendar.css",
+        "classes": [
+          "calendar",
+          "calendar-sm",
+          "calendar-lg",
+          "calendar-header",
+          "calendar-caption",
+          "calendar-caption-dropdowns",
+          "calendar-caption-select",
+          "calendar-nav-btn",
+          "calendar-weekdays",
+          "calendar-grid",
+          "calendar-day",
+          "calendar-day-outside",
+          "calendar-day-today",
+          "calendar-day-selected",
+          "calendar-day-disabled",
+          "calendar-day-range-middle",
+          "calendar-day-range-start",
+          "calendar-day-range-end",
+          "calendar-day-booked",
+          "calendar-weeknum",
+          "calendar-with-presets",
+          "calendar-presets",
+          "calendar-preset-btn",
+          "calendar-time-row",
+          "date-picker",
+          "date-picker-trigger",
+          "date-picker-panel"
+        ],
+        "react_wrapper": "components/ui/calendar.tsx",
+        "docs_anchor": "c-calendar"
+      },
+      "rules_file": "component-rules/calendar.md"
+    },
+    {
+      "id": "card",
+      "display_name": "Full Card",
+      "category": "Data display / Containment",
+      "status": "stable",
+      "aliases": [
+        "card",
+        "panel",
+        "content card",
+        "basic card panel"
+      ],
+      "summary": "A rich content panel that groups content and actions about a single subject on a surface.",
+      "variants": [
+        "outlined",
+        "elevated",
+        "filled"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--card-bg",
+          "--border",
+          "--color-surface-container-low",
+          "--color-surface-container-highest",
+          "--text-primary",
+          "--text-secondary"
+        ],
+        "radius": [
+          "--radius"
+        ],
+        "spacing": [
+          "16px 20px container padding",
+          "12px header gap",
+          "16px footer offset"
+        ],
+        "elevation": [
+          "--shadow-sm"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "item",
+          "stat-card",
+          "vacancy-card",
+          "person-card"
+        ],
+        "replaces": [
+          "legacy bordered/shadowed boxes and panels"
+        ],
+        "composed_with": [
+          "button",
+          "badge",
+          "chip",
+          "accordion",
+          "carousel"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "item",
+            "why": "Basic Card (item) is a compact row primitive; Full Card is a rich multi-part panel"
+          },
+          {
+            "component": "stat-card",
+            "why": "Stat Card shows a single KPI; Full Card groups general content"
+          },
+          {
+            "component": "vacancy-card",
+            "why": "specialized domain card; Full Card is generic"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/card.css",
+        "classes": [
+          "card",
+          "card-elevated",
+          "card-filled",
+          "card-header",
+          "card-title",
+          "card-desc",
+          "card-content",
+          "card-footer",
+          "card-action"
+        ],
+        "react_wrapper": "components/ui/card.tsx",
+        "docs_anchor": "c-basic-card"
+      },
+      "rules_file": "component-rules/card.md"
+    },
+    {
+      "id": "carousel",
+      "display_name": "Carousel",
+      "category": "Containment",
+      "status": "stable",
+      "aliases": [
+        "slider",
+        "slideshow",
+        "gallery",
+        "coverflow"
+      ],
+      "summary": "A scroll-snapping, browsable set of homogeneous items (images or cards) with prev/next controls — for secondary content that doesn't fit in one row.",
+      "variants": [
+        "single",
+        "multi",
+        "vertical",
+        "prev-btn",
+        "next-btn"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface",
+          "--border",
+          "--text-primary",
+          "--color-surface-variant"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-full"
+        ],
+        "spacing": [
+          "16px inter-item gap"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "scroll-area",
+          "tabs",
+          "table",
+          "aspect-ratio"
+        ],
+        "replaces": [
+          "custom transform + drag-handler carousels"
+        ],
+        "composed_with": [
+          "card",
+          "aspect-ratio",
+          "item",
+          "button"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "tabs",
+            "why": "Tabs switch between distinct panels; Carousel browses one homogeneous collection"
+          },
+          {
+            "component": "scroll-area",
+            "why": "Scroll Area is free scroll; Carousel snaps to discrete items with controls"
+          },
+          {
+            "component": "table",
+            "why": "compare options in a grid/Table, not a carousel"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/carousel.css",
+        "classes": [
+          "carousel",
+          "carousel-content",
+          "carousel-item",
+          "carousel-item-half",
+          "carousel-vertical",
+          "carousel-btn",
+          "carousel-btn-prev",
+          "carousel-btn-next"
+        ],
+        "react_wrapper": "components/ui/carousel.tsx",
+        "docs_anchor": "c-carousel"
+      },
+      "rules_file": "component-rules/carousel.md"
+    },
+    {
+      "id": "charts",
+      "display_name": "Charts",
+      "category": "Data display",
+      "status": "stable",
+      "aliases": [
+        "chart",
+        "graph",
+        "data viz",
+        "line chart",
+        "bar chart",
+        "pie chart"
+      ],
+      "summary": "Line, area, bar, and pie visualizations for dashboards and analytics — hand-drawn inline SVG + CSS conic-gradient, themed with the --chart-1..5 categorical palette.",
+      "variants": [
+        "line",
+        "area",
+        "bar",
+        "pie",
+        "legend"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "loading",
+        "empty",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--chart-1",
+          "--chart-2",
+          "--chart-3",
+          "--chart-4",
+          "--chart-5",
+          "--color-border",
+          "--text-muted",
+          "--color-card",
+          "--color-error"
+        ],
+        "radius": [
+          "6px bar top corners",
+          "--radius-lg (state containers)"
+        ],
+        "typography": [
+          "--font-size-caption"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "stat-card",
+          "table",
+          "skeleton",
+          "segmented-button"
+        ],
+        "replaces": [
+          "static image charts, custom canvas, or charting libs with no theming"
+        ],
+        "composed_with": [
+          "stat-card",
+          "segmented-button",
+          "skeleton",
+          "card",
+          "empty-state"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "stat-card",
+            "why": "Stat Card shows one metric; Charts show a series/comparison/composition"
+          },
+          {
+            "component": "table",
+            "why": "Table gives exact per-row values; a chart shows the shape of the data"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/chart.css",
+        "classes": [
+          "chart-container",
+          "chart-svg",
+          "chart-grid",
+          "chart-axis-label",
+          "chart-line",
+          "chart-area",
+          "chart-dot",
+          "chart-bar",
+          "chart-pie",
+          "chart-pie-wrap",
+          "chart-legend",
+          "chart-legend-item",
+          "chart-legend-swatch"
+        ],
+        "react_wrapper": "components/ui/chart.tsx",
+        "docs_anchor": "c-charts"
+      },
+      "rules_file": "component-rules/charts.md"
+    },
+    {
+      "id": "checkbox",
+      "display_name": "Checkbox",
+      "category": "Selección",
+      "status": "stable",
+      "aliases": [
+        "check",
+        "tickbox",
+        "multi-select"
+      ],
+      "summary": "A native checkbox for selecting one or more options from a set — three states (unchecked / checked / indeterminate); the change applies on confirm, not instantly.",
+      "variants": [
+        "default",
+        "label",
+        "card"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "checked",
+        "indeterminate",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--color-primary",
+          "--color-on-primary",
+          "--color-outline",
+          "--color-on-surface",
+          "--color-error",
+          "--color-focus",
+          "--color-focus-ring"
+        ],
+        "radius": [
+          "4px (--radius-sm equivalent)"
+        ],
+        "spacing": [
+          "--space-2"
+        ],
+        "typography": [
+          "--font-size-body-md"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "radio",
+          "switch",
+          "chip",
+          "form"
+        ],
+        "replaces": [
+          "unstyled HTML checkboxes",
+          "custom div+ARIA re-implementations"
+        ],
+        "composed_with": [
+          "form",
+          "table",
+          "list",
+          "card"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "radio",
+            "why": "radio is exclusive single choice; checkbox is independent multi-select"
+          },
+          {
+            "component": "switch",
+            "why": "switch applies instantly; checkbox applies on confirm"
+          },
+          {
+            "component": "chip",
+            "why": "chips are inline toolbar filters; checkboxes are form-level selection"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/checkbox.css",
+        "classes": [
+          "checkbox",
+          "checkbox-label",
+          "checkbox-card",
+          "checkbox-card-content",
+          "checkbox-card-title",
+          "checkbox-card-desc"
+        ],
+        "react_wrapper": "components/ui/checkbox.tsx",
+        "docs_anchor": "c-checkbox"
+      },
+      "rules_file": "component-rules/checkbox.md"
+    },
+    {
+      "id": "chip",
+      "display_name": "Chip",
+      "category": "Actions / Selection",
+      "status": "stable",
+      "aliases": [
+        "tag",
+        "filter",
+        "token",
+        "pill"
+      ],
+      "summary": "A compact, interactive element for filtering, selecting, or representing input — never for primary actions.",
+      "variants": [
+        "base",
+        "selected",
+        "elevated",
+        "icon",
+        "remove",
+        "set"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--color-outline-variant",
+          "--color-surface"
+        ],
+        "radius": [
+          "--radius-full"
+        ],
+        "spacing": [
+          "--space-2",
+          "--space-4"
+        ],
+        "typography": [
+          "--font-size-body-lg"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "button",
+          "segmented-button",
+          "badge",
+          "search",
+          "toggle"
+        ],
+        "replaces": [
+          "legacy filter tags / pill buttons"
+        ],
+        "composed_with": [
+          "search",
+          "toolbar",
+          "form",
+          "input-group"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "badge",
+            "why": "badge is read-only status; chip is interactive"
+          },
+          {
+            "component": "segmented-button",
+            "why": "segmented is single-select view switch; filter chips are usually multi-select"
+          },
+          {
+            "component": "button",
+            "why": "buttons act; chips filter/select/represent input"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/chip.css",
+        "classes": [
+          "chip",
+          "chip-selected",
+          "chip-elevated",
+          "chip-icon",
+          "chip-remove",
+          "chip-set"
+        ],
+        "react_wrapper": "components/ui/chip.tsx",
+        "docs_anchor": "c-chip"
+      },
+      "rules_file": "component-rules/chip.md"
+    },
+    {
+      "id": "collapsible",
+      "display_name": "Collapsible",
+      "category": "Containment",
+      "status": "stable",
+      "aliases": [
+        "disclosure",
+        "show more",
+        "expander single"
+      ],
+      "summary": "A single show/hide region toggled by any trigger — a minimal disclosure with one boolean state.",
+      "variants": [
+        "base"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "focus",
+        "expanded"
+      ],
+      "tokens": {
+        "color": [
+          "--color-primary",
+          "--color-focus"
+        ],
+        "radius": [
+          "--radius-sm"
+        ],
+        "motion": [
+          "--duration-normal",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "accordion",
+          "card",
+          "table"
+        ],
+        "replaces": [
+          "ad-hoc display:none toggles without transition or accessible state"
+        ],
+        "composed_with": [
+          "button",
+          "card",
+          "table"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "accordion",
+            "why": "Accordion is multiple stacked sections; Collapsible is a single region"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/collapsible.css",
+        "classes": [
+          "collapsible",
+          "collapsible-trigger",
+          "collapsible-content",
+          "collapsible-content-inner"
+        ],
+        "react_wrapper": "components/ui/collapsible.tsx",
+        "docs_anchor": "c-collapsible"
+      },
+      "rules_file": "component-rules/collapsible.md"
+    },
+    {
+      "id": "combobox",
+      "display_name": "Combobox",
+      "category": "Forms / Selection",
+      "status": "stable",
+      "aliases": [
+        "autocomplete",
+        "typeahead",
+        "searchable select",
+        "filtrable select"
+      ],
+      "summary": "A searchable single-select — a trigger button that opens a filterable Command list; pick one value from a long set by typing to narrow it.",
+      "variants": [
+        "base",
+        "trigger",
+        "placeholder",
+        "panel",
+        "check"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "open",
+        "selected",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-container",
+          "--color-on-surface",
+          "--text-muted",
+          "--border"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "shadow": [
+          "--shadow-md"
+        ],
+        "spacing": [
+          "--space-2",
+          "--space-4"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "select",
+          "command",
+          "chip",
+          "input"
+        ],
+        "replaces": [
+          "hand-rolled searchable selects"
+        ],
+        "composed_with": [
+          "command",
+          "form",
+          "toolbar"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "select",
+            "why": "Select has no typeahead; use it for short lists"
+          },
+          {
+            "component": "command",
+            "why": "Command runs commands / navigates (⌘K); Combobox picks a form value"
+          },
+          {
+            "component": "chip",
+            "why": "chips represent multi-select tokens; Combobox is single-select"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/combobox.css",
+        "classes": [
+          "combobox",
+          "combobox-trigger",
+          "combobox-chevron",
+          "combobox-panel",
+          "combobox-check",
+          "command"
+        ],
+        "react_wrapper": "components/ui/combobox.tsx",
+        "docs_anchor": "c-combobox"
+      },
+      "rules_file": "component-rules/combobox.md"
+    },
+    {
+      "id": "command",
+      "display_name": "Command",
+      "category": "Overlays",
+      "status": "stable",
+      "aliases": [
+        "command palette",
+        "command menu",
+        "cmdk",
+        "searchable command list"
+      ],
+      "summary": "A searchable command palette / filterable list — substring-filtered items with arrow/Enter navigation and an empty state, optionally opened as a ⌘K Command Dialog.",
+      "variants": [
+        "inline",
+        "dialog",
+        "group",
+        "item",
+        "empty",
+        "shortcut"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "active",
+        "empty",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-container",
+          "--color-on-surface",
+          "--color-surface-variant"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "motion": [
+          "--duration-normal",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "combobox",
+          "search",
+          "menu",
+          "dialog"
+        ],
+        "replaces": [
+          "hand-rolled filterable menus"
+        ],
+        "composed_with": [
+          "dialog",
+          "input"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "search",
+            "why": "Search queries app content/results; Command runs commands / navigates"
+          },
+          {
+            "component": "select",
+            "why": "Select picks one value from a short bounded list; Command is a searchable command surface"
+          },
+          {
+            "component": "combobox",
+            "why": "Combobox is a single-value form field built ON the Command filter; Command is the palette itself"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/command.css",
+        "classes": [
+          "command",
+          "command-input-wrapper",
+          "command-input-icon",
+          "command-input",
+          "command-list",
+          "command-empty",
+          "command-group",
+          "command-group-heading",
+          "command-item",
+          "command-separator",
+          "command-shortcut",
+          "command-dialog"
+        ],
+        "react_wrapper": "components/ui/command.tsx",
+        "docs_anchor": "c-command"
+      },
+      "rules_file": "component-rules/command.md"
+    },
+    {
+      "id": "context-menu",
+      "display_name": "Context Menu",
+      "category": "Overlays",
+      "status": "stable",
+      "aliases": [
+        "right-click menu",
+        "contextual menu",
+        "long-press menu"
+      ],
+      "summary": "A cursor-anchored actions menu opened by right-click (or long-press) on an element — the same panel as Dropdown Menu, just a different trigger.",
+      "variants": [
+        "trigger",
+        "panel"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled",
+        "destructive"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-container",
+          "--color-outline-variant",
+          "--color-on-surface",
+          "--color-error"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "motion": [
+          "--duration-normal",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "menu",
+          "menubar",
+          "navigation-menu"
+        ],
+        "replaces": [
+          "custom position:fixed context menus with ad-hoc z-index"
+        ],
+        "composed_with": [
+          "table",
+          "list",
+          "kanban"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "menu",
+            "why": "Dropdown Menu opens from a visible trigger on click; Context Menu opens at the cursor on right-click"
+          },
+          {
+            "component": "navigation-menu",
+            "why": "Navigation Menu moves between sections; Context Menu acts on an element"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/context-menu.css",
+        "classes": [
+          "context-menu-trigger",
+          "dropdown-content",
+          "dropdown-item",
+          "dropdown-separator",
+          "dropdown-label"
+        ],
+        "react_wrapper": "components/ui/context-menu.tsx",
+        "docs_anchor": "c-context-menu"
+      },
+      "rules_file": "component-rules/context-menu.md"
+    },
+    {
+      "id": "data-table",
+      "display_name": "Data Table",
+      "category": "Data display",
+      "status": "stable",
+      "aliases": [
+        "interactive table",
+        "sortable table",
+        "tanstack table"
+      ],
+      "summary": "An interactive table over static Table — column sort, text filter, row selection, column visibility, and slice pagination via initDataTable().",
+      "variants": [
+        "base",
+        "sortable-header",
+        "filter",
+        "selection",
+        "pagination",
+        "empty"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected",
+        "sorted",
+        "empty"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-variant",
+          "--color-focus",
+          "--color-focus-ring",
+          "--text-muted",
+          "--border"
+        ],
+        "radius": [
+          "--radius-sm"
+        ],
+        "spacing": [
+          "12px toolbar/footer gaps",
+          "6px 8px sort-button padding"
+        ],
+        "typography": [
+          "--font-size-caption",
+          "--font-size-body-sm"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "table",
+          "pagination",
+          "checkbox",
+          "dropdown-menu",
+          "empty-state"
+        ],
+        "replaces": [
+          "hand-wired sort/pagination tables"
+        ],
+        "composed_with": [
+          "badge",
+          "button",
+          "pagination",
+          "checkbox",
+          "dropdown-menu",
+          "input"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "table",
+            "why": "Table is static; Data Table adds sort/filter/selection/pagination"
+          },
+          {
+            "component": "list",
+            "why": "List is a simple vertical list, not a comparable-columns grid"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/data-table.css",
+        "classes": [
+          "data-table-sort-btn",
+          "data-table-sort-icon",
+          "data-table-toolbar",
+          "data-table-filter",
+          "data-table-select",
+          "data-table-footer",
+          "data-table-count",
+          "data-table-empty"
+        ],
+        "react_wrapper": "components/ui/data-table.tsx",
+        "docs_anchor": "c-data-table"
+      },
+      "rules_file": "component-rules/data-table.md"
+    },
+    {
+      "id": "dialog",
+      "display_name": "Dialog",
+      "category": "Overlays",
+      "status": "stable",
+      "aliases": [
+        "modal",
+        "alert dialog",
+        "confirmation"
+      ],
+      "summary": "A modal surface that interrupts the user for a focused task or a decision that must be resolved before continuing.",
+      "variants": [
+        "dialog",
+        "alert-dialog",
+        "compact",
+        "centered"
+      ],
+      "sizes": [
+        "default",
+        "sm"
+      ],
+      "states": [
+        "default",
+        "focus",
+        "destructive"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface",
+          "--color-on-surface",
+          "--color-scrim"
+        ],
+        "radius": [
+          "--radius-lg"
+        ],
+        "spacing": [
+          "24px container padding",
+          "16px section gap"
+        ],
+        "motion": [
+          "--duration-sheet",
+          "--ease-emphasized"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "sheet",
+          "snackbar",
+          "alert",
+          "popover"
+        ],
+        "replaces": [
+          "legacy modal/confirm popups"
+        ],
+        "composed_with": [
+          "button",
+          "form",
+          "input"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "sheet",
+            "why": "Sheet is edge-anchored (filters/detail); Dialog is centered/modal task"
+          },
+          {
+            "component": "snackbar",
+            "why": "Snackbar is transient non-blocking feedback"
+          },
+          {
+            "component": "alert",
+            "why": "Alert is persistent inline messaging, not modal"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/modal.css",
+        "classes": [
+          "modal",
+          "modal-overlay",
+          "modal-header",
+          "modal-title",
+          "modal-description",
+          "modal-footer",
+          "modal-sm",
+          "modal-centered",
+          "modal-media"
+        ],
+        "react_wrapper": "components/ui/modal.tsx",
+        "docs_anchor": "c-dialog"
+      },
+      "rules_file": "component-rules/dialog.md"
+    },
+    {
+      "id": "divider",
+      "display_name": "Divider",
+      "category": "Containment",
+      "status": "stable",
+      "aliases": [
+        "separator",
+        "rule",
+        "hr",
+        "line"
+      ],
+      "summary": "A 1px line that separates groups of equal-hierarchy content — the lightest separation in the system, no brand color, no elevation.",
+      "variants": [
+        "full-width",
+        "inset",
+        "vertical"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "color": [
+          "--border"
+        ],
+        "spacing": [
+          "--space-2"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "list",
+          "card",
+          "item",
+          "toolbar"
+        ],
+        "replaces": [
+          "unstyled <hr> / ad-hoc CSS borders between sections"
+        ],
+        "composed_with": [
+          "list",
+          "card",
+          "item",
+          "dropdown-menu",
+          "toolbar"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "card",
+            "why": "a Card frames/contains content; a Divider only draws a separating line"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/divider.css",
+        "classes": [
+          "divider",
+          "divider-inset",
+          "divider-vertical"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-divider"
+      },
+      "rules_file": "component-rules/divider.md"
+    },
+    {
+      "id": "empty-state",
+      "display_name": "Empty State",
+      "category": "Feedback",
+      "status": "stable",
+      "aliases": [
+        "empty",
+        "no data",
+        "zero state",
+        "blank slate"
+      ],
+      "summary": "A centered icon + message (+ optional primary action) shown when there is no content to display — always offering a clear way out, not just a message.",
+      "variants": [
+        "base"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "color": [
+          "--text-secondary",
+          "--text-muted"
+        ],
+        "typography": [
+          "--font-heading",
+          "--font-size-heading-md",
+          "--font-size-body-lg"
+        ],
+        "spacing": [
+          "48px 24px container padding",
+          "400px max description width"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "skeleton",
+          "alert",
+          "button",
+          "placeholder"
+        ],
+        "replaces": [
+          "stray 'no hay datos' text"
+        ],
+        "composed_with": [
+          "button",
+          "table",
+          "list",
+          "card",
+          "search"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "skeleton",
+            "why": "Skeleton = data loading; Empty State = no data exists"
+          },
+          {
+            "component": "alert",
+            "why": "Alert = inline error/warning message; Empty State = no-content placeholder"
+          },
+          {
+            "component": "placeholder",
+            "why": "Placeholder = feature under construction; Empty State = feature works but has no data"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/empty-state.css",
+        "classes": [
+          "empty-state",
+          "empty-state-icon",
+          "empty-state-title",
+          "empty-state-desc"
+        ],
+        "react_wrapper": "components/ui/empty-state.tsx",
+        "docs_anchor": "c-empty"
+      },
+      "rules_file": "component-rules/empty-state.md"
+    },
+    {
+      "id": "form",
+      "display_name": "Form",
+      "category": "Forms",
+      "status": "stable",
+      "aliases": [
+        "form layout",
+        "field group",
+        "validation"
+      ],
+      "summary": "The layout + validation pattern that composes labels, controls, hints, and errors into an accessible form using native HTML5 validation.",
+      "variants": [
+        "card",
+        "grid",
+        "field"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "focus",
+        "invalid",
+        "submitting",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--card-bg",
+          "--border",
+          "--text-primary",
+          "--text-secondary",
+          "--interactive",
+          "--color-error",
+          "--color-error-ring",
+          "--red"
+        ],
+        "radius": [
+          "--radius",
+          "--radius-md"
+        ],
+        "spacing": [
+          "24px 32px card padding",
+          "20px field gap",
+          "16px grid gap"
+        ],
+        "typography": [
+          "--font-size-label",
+          "--font-size-body-md",
+          "--font-size-caption"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "input",
+          "textarea",
+          "select",
+          "checkbox",
+          "radio-group",
+          "switch",
+          "label",
+          "button"
+        ],
+        "replaces": [
+          "ad-hoc form markup with inconsistent label/error handling"
+        ],
+        "composed_with": [
+          "input",
+          "textarea",
+          "select",
+          "label",
+          "button",
+          "dialog",
+          "sheet"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "dialog",
+            "why": "a dialog may contain a form; the form is the field/validation pattern itself"
+          },
+          {
+            "component": "toolbar",
+            "why": "toolbar filters a list in place; a form collects and submits input"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/form.css",
+        "classes": [
+          "form-card",
+          "form-card-title",
+          "form-card-desc",
+          "fields-grid",
+          "field-group",
+          "field-label",
+          "field-required",
+          "field-input",
+          "field-supporting",
+          "field-hint",
+          "field-error-msg",
+          "is-error"
+        ],
+        "react_wrapper": "components/ui/form.tsx",
+        "docs_anchor": "c-form"
+      },
+      "rules_file": "component-rules/form.md"
+    },
+    {
+      "id": "input-group",
+      "display_name": "Input Group",
+      "category": "Forms",
+      "status": "stable",
+      "aliases": [
+        "input addon",
+        "prefix suffix",
+        "input with button"
+      ],
+      "summary": "Joins an input with adjacent addons — icons, text, units, or buttons — into a single bordered unit that shares one focus/error state.",
+      "variants": [
+        "inline",
+        "block",
+        "addon-start",
+        "addon-end"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--border",
+          "--card-bg",
+          "--interactive",
+          "--color-focus-ring",
+          "--color-error",
+          "--color-error-ring",
+          "--color-on-surface-variant",
+          "--text-primary"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "typography": [
+          "--font-size-body-md",
+          "--font-size-body-sm"
+        ],
+        "motion": [
+          "--duration-fast"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "input",
+          "textarea",
+          "button",
+          "search",
+          "combobox"
+        ],
+        "replaces": [
+          "ad-hoc absolute-positioned icon/button wrappers around inputs"
+        ],
+        "composed_with": [
+          "form",
+          "label",
+          "button",
+          "input"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "input",
+            "why": "input is the plain field; input-group adds joined addons"
+          },
+          {
+            "component": "toolbar",
+            "why": "toolbar arranges independent controls; input-group is one field"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/input-group.css",
+        "classes": [
+          "input-group",
+          "input-group-control",
+          "input-group-addon",
+          "input-group-addon-end",
+          "input-group-text",
+          "input-group-block",
+          "is-error",
+          "is-disabled"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-input-group"
+      },
+      "rules_file": "component-rules/input-group.md"
+    },
+    {
+      "id": "input-otp",
+      "display_name": "Input OTP",
+      "category": "Forms",
+      "status": "stable",
+      "aliases": [
+        "otp",
+        "one-time code",
+        "pin",
+        "verification code"
+      ],
+      "summary": "One-time-code / PIN entry in individual single-character boxes, with auto-advance, backspace-back, and paste-splitting.",
+      "variants": [
+        "base",
+        "slot",
+        "separator"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--border",
+          "--card-bg",
+          "--text-primary",
+          "--interactive",
+          "--color-focus-ring",
+          "--color-error",
+          "--color-error-ring",
+          "--color-disabled",
+          "--color-on-disabled"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "typography": [
+          "--font-size-heading-xs",
+          "--font-mono",
+          "--font-weight-medium"
+        ],
+        "motion": [
+          "--duration-fast",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "input",
+          "form",
+          "label"
+        ],
+        "replaces": [
+          "N loose <input> code fields without auto-advance/paste-splitting"
+        ],
+        "composed_with": [
+          "form",
+          "label",
+          "dialog"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "input",
+            "why": "input is free-form; OTP is fixed-length per-character code entry"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/input-otp.css",
+        "classes": [
+          "otp-group",
+          "otp-slot",
+          "otp-separator",
+          "is-disabled",
+          "is-error"
+        ],
+        "react_wrapper": "components/ui/input-otp.tsx",
+        "docs_anchor": "c-input-otp"
+      },
+      "rules_file": "component-rules/input-otp.md"
+    },
+    {
+      "id": "input",
+      "display_name": "Input",
+      "category": "Forms",
+      "status": "stable",
+      "aliases": [
+        "text field",
+        "text input",
+        "field"
+      ],
+      "summary": "A single-line text field for free-form entry, with label, hint, error, and optional leading/trailing icons.",
+      "variants": [
+        "base",
+        "leading-icon",
+        "trailing-icon",
+        "file"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--border",
+          "--card-bg",
+          "--text-primary",
+          "--interactive",
+          "--color-focus-ring",
+          "--color-error",
+          "--color-error-ring",
+          "--text-muted"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "typography": [
+          "--font-size-body-md",
+          "--font-size-label",
+          "--font-size-caption"
+        ],
+        "motion": [
+          "--duration-fast"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "textarea",
+          "select",
+          "form",
+          "label",
+          "input-group",
+          "input-otp",
+          "search"
+        ],
+        "replaces": [
+          "any legacy text field"
+        ],
+        "composed_with": [
+          "form",
+          "label",
+          "input-group",
+          "dialog"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "textarea",
+            "why": "textarea is multi-line; input is single-line"
+          },
+          {
+            "component": "search",
+            "why": "search fields query content; inputs capture form values"
+          },
+          {
+            "component": "select",
+            "why": "select picks from a fixed list; input is free-form"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/form.css",
+        "classes": [
+          "field-group",
+          "field-label",
+          "field-required",
+          "field-input",
+          "field-input-wrapper",
+          "field-leading-icon",
+          "field-trailing-icon",
+          "has-leading",
+          "has-trailing",
+          "field-supporting",
+          "field-hint",
+          "field-error-msg",
+          "field-char-count",
+          "is-error"
+        ],
+        "react_wrapper": "components/ui/input.tsx",
+        "docs_anchor": "c-input"
+      },
+      "rules_file": "component-rules/input.md"
+    },
+    {
+      "id": "item",
+      "display_name": "Basic Card",
+      "category": "Data display / Containment",
+      "status": "stable",
+      "aliases": [
+        "item",
+        "row",
+        "list row",
+        "compact card",
+        "settings row"
+      ],
+      "summary": "The reusable compact-row primitive — media + content (title/description) + actions — that every compact domain card is built on.",
+      "variants": [
+        "base",
+        "outline",
+        "muted",
+        "clickable"
+      ],
+      "sizes": [
+        "md",
+        "sm"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--border",
+          "--color-surface-variant",
+          "--color-on-surface-variant",
+          "--text-primary",
+          "--text-secondary",
+          "--color-focus",
+          "--color-focus-ring"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-sm"
+        ],
+        "spacing": [
+          "16px padding / 16px gap (default)",
+          "12px 16px / 10px gap (item-sm)"
+        ],
+        "motion": [
+          "--duration-fast",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "card",
+          "list",
+          "person-card",
+          "vacancy-card"
+        ],
+        "replaces": [
+          "ad-hoc flex divs with icon + text + button"
+        ],
+        "composed_with": [
+          "button",
+          "badge",
+          "avatar",
+          "dropdown-menu",
+          "divider"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "card",
+            "why": "Full Card is a rich multi-part panel; Basic Card is a compact row"
+          },
+          {
+            "component": "list",
+            "why": "List is a simpler homogeneous headline+supporting list; Item is a richer, media-capable row primitive"
+          },
+          {
+            "component": "table",
+            "why": "Table aligns comparable columns across rows; Item is a self-contained row"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/item.css",
+        "classes": [
+          "item",
+          "item-outline",
+          "item-muted",
+          "item-sm",
+          "item-media",
+          "item-media-icon",
+          "item-media-image",
+          "item-content",
+          "item-title",
+          "item-description",
+          "item-actions",
+          "item-header",
+          "item-footer",
+          "item-group",
+          "item-separator",
+          "item-clickable"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-item"
+      },
+      "rules_file": "component-rules/item.md"
+    },
+    {
+      "id": "kanban-card",
+      "display_name": "Kanban Card",
+      "category": "Domain cards",
+      "status": "stable",
+      "aliases": [
+        "board card",
+        "pipeline card",
+        "draggable card"
+      ],
+      "summary": "A compact draggable card representing one item (candidate or vacancy) on a kanban board column, where the item's current stage is the primary information.",
+      "variants": [
+        "card",
+        "header",
+        "footer",
+        "title",
+        "meta",
+        "avatar"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "dragging",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "--card-bg",
+          "--border",
+          "--color-surface-variant",
+          "--color-primary-container",
+          "--text-primary",
+          "--text-muted"
+        ],
+        "radius": [
+          "--radius",
+          "--radius-md",
+          "--radius-full"
+        ],
+        "shadow": [
+          "--shadow-md"
+        ],
+        "motion": [
+          "--duration-fast"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "vacancy-card",
+          "item",
+          "badge"
+        ],
+        "replaces": [
+          "custom board cards"
+        ],
+        "composed_with": [
+          "badge",
+          "avatar"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "vacancy-card",
+            "why": "Vacancy Card is a rich list row; Kanban Card is a compact board tile"
+          },
+          {
+            "component": "table",
+            "why": "Table compares attributes across records; the board tracks stage"
+          },
+          {
+            "component": "item",
+            "why": "Basic Card is a generic compact row; Kanban Card adds drag/board semantics"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/kanban.css",
+        "classes": [
+          "kanban-board",
+          "kanban-column",
+          "kanban-column-header",
+          "kanban-column-body",
+          "kanban-card",
+          "kanban-card-title",
+          "kanban-card-meta",
+          "kanban-card-header",
+          "kanban-card-footer",
+          "kanban-card-avatar"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-kanban"
+      },
+      "rules_file": "component-rules/kanban-card.md"
+    },
+    {
+      "id": "label",
+      "display_name": "Label",
+      "category": "Forms",
+      "status": "stable",
+      "aliases": [
+        "form label",
+        "control label"
+      ],
+      "summary": "A standalone styled <label> for any form control, especially non-text controls, decoupled from the text-input field-group.",
+      "variants": [
+        "base",
+        "required"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--text-primary",
+          "--red"
+        ],
+        "typography": [
+          "--font-body",
+          "--font-size-label",
+          "font-weight 500"
+        ],
+        "spacing": [
+          "8px gap"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "input",
+          "checkbox",
+          "switch",
+          "radio-group",
+          "slider",
+          "form"
+        ],
+        "replaces": [
+          "unstyled <label> or a <span> acting as a label"
+        ],
+        "composed_with": [
+          "checkbox",
+          "switch",
+          "radio-group",
+          "slider",
+          "input",
+          "form"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "input",
+            "why": "the text-input label is .field-label in .field-group; .label is the standalone/non-text-control label"
+          },
+          {
+            "component": "badge",
+            "why": "badge is read-only status; a label names an interactive control"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/label.css",
+        "classes": [
+          "label",
+          "label-required"
+        ],
+        "react_wrapper": "components/ui/label.tsx",
+        "docs_anchor": "c-label"
+      },
+      "rules_file": "component-rules/label.md"
+    },
+    {
+      "id": "list",
+      "display_name": "List",
+      "category": "Data display",
+      "status": "stable",
+      "aliases": [
+        "list view",
+        "item list",
+        "menu list"
+      ],
+      "summary": "A simple vertical list of homogeneous items, each with a headline and optional supporting text, leading and trailing slots.",
+      "variants": [
+        "base",
+        "divided",
+        "actionable",
+        "selected",
+        "disabled"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface",
+          "--color-on-surface",
+          "--color-on-surface-variant",
+          "--color-surface-variant",
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--border",
+          "--color-focus",
+          "--color-focus-ring"
+        ],
+        "spacing": [
+          "12px 16px item padding",
+          "56px min-height"
+        ],
+        "typography": [
+          "--font-size-body-md",
+          "--font-size-body-sm"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "item",
+          "table",
+          "navigation-menu"
+        ],
+        "replaces": [
+          "unstyled <ul>/<li>"
+        ],
+        "composed_with": [
+          "avatar",
+          "badge",
+          "switch",
+          "checkbox",
+          "divider",
+          "button"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "item",
+            "why": "Basic Card (item) is a richer, media-capable row primitive; List is a simpler homogeneous list"
+          },
+          {
+            "component": "table",
+            "why": "Table aligns comparable columns; List is a single-column vertical set"
+          },
+          {
+            "component": "navigation-menu",
+            "why": "Navigation is app-level wayfinding; List is content"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/list.css",
+        "classes": [
+          "list",
+          "list-item",
+          "list-item-text",
+          "list-item-headline",
+          "list-item-supporting",
+          "list-item-leading",
+          "list-item-trailing",
+          "list-item-divider",
+          "list--divided"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-list"
+      },
+      "rules_file": "component-rules/list.md"
+    },
+    {
+      "id": "loading",
+      "display_name": "Loading (Progress + Spinner)",
+      "category": "Feedback",
+      "status": "stable",
+      "aliases": [
+        "progress",
+        "spinner",
+        "loader",
+        "progressbar",
+        "activity indicator"
+      ],
+      "summary": "Loading indicators that signal an operation is in progress — a determinate Progress bar/ring when a percentage is known, an indeterminate Spinner when it isn't.",
+      "variants": [
+        "linear",
+        "linear-indeterminate",
+        "circular",
+        "circular-indeterminate",
+        "spinner",
+        "spinner-on-primary"
+      ],
+      "sizes": [
+        "spinner-sm",
+        "spinner-md",
+        "spinner-lg",
+        "progress-circular"
+      ],
+      "states": [
+        "default",
+        "determinate",
+        "indeterminate"
+      ],
+      "tokens": {
+        "color": [
+          "--color-primary",
+          "--color-surface-variant",
+          "--color-outline-variant",
+          "--color-on-primary"
+        ],
+        "radius": [
+          "--radius-full"
+        ],
+        "motion": [
+          "1.4s indeterminate slide",
+          "0.7s spinner rotation",
+          "prefers-reduced-motion aware"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "skeleton",
+          "empty-state",
+          "button"
+        ],
+        "replaces": [
+          "hand-rolled per-screen spinners/loaders"
+        ],
+        "composed_with": [
+          "button",
+          "attachment",
+          "dialog"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "skeleton",
+            "why": "Skeleton mimics the incoming layout's shape; Loading is an abstract activity indicator"
+          },
+          {
+            "component": "empty-state",
+            "why": "Empty State handles no-data; Loading handles in-progress"
+          }
+        ]
+      },
+      "source": {
+        "css": [
+          "css/components/progress.css",
+          "css/components/spinner.css"
+        ],
+        "classes": [
+          "progress",
+          "progress-fill",
+          "progress-indeterminate",
+          "progress-circular",
+          "progress-circular-track",
+          "progress-circular-fill",
+          "progress-circular-indeterminate",
+          "spinner",
+          "spinner-sm",
+          "spinner-lg",
+          "spinner-on-primary"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-loading"
+      },
+      "rules_file": "component-rules/loading.md"
+    },
+    {
+      "id": "menu",
+      "display_name": "Menu (Dropdown Menu + Popover)",
+      "category": "Overlays",
+      "status": "stable",
+      "aliases": [
+        "dropdown",
+        "dropdown menu",
+        "popover",
+        "overflow menu",
+        "actions menu"
+      ],
+      "summary": "A trigger-anchored floating surface — a Dropdown Menu for a keyboard-navigable list of actions, or a Popover for freeform contextual content.",
+      "variants": [
+        "dropdown",
+        "dropdown-item",
+        "dropdown-danger",
+        "dropdown-checkbox",
+        "dropdown-radio",
+        "dropdown-group",
+        "popover"
+      ],
+      "sizes": [
+        "dropdown",
+        "popover"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active",
+        "selected",
+        "disabled",
+        "destructive"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-container",
+          "--color-outline-variant",
+          "--color-on-surface",
+          "--color-surface-variant",
+          "--color-error",
+          "--color-error-container"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-sm"
+        ],
+        "motion": [
+          "--duration-normal",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "context-menu",
+          "menubar",
+          "navigation-menu",
+          "select",
+          "dialog",
+          "sheet",
+          "tooltip"
+        ],
+        "replaces": [
+          "custom position:absolute dropdowns with ad-hoc z-index"
+        ],
+        "composed_with": [
+          "button",
+          "toolbar",
+          "card",
+          "table"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "select",
+            "why": "Select picks one value for a form field; a menu triggers actions"
+          },
+          {
+            "component": "context-menu",
+            "why": "Context Menu is right-click/long-press anchored to the cursor; Dropdown is a click on a visible trigger"
+          },
+          {
+            "component": "popover",
+            "why": "Popover is freeform content; Dropdown Menu is a keyboard-navigable action list (both here, chosen by content)"
+          },
+          {
+            "component": "tooltip",
+            "why": "Tooltip is a passive label; menu/popover are interactive"
+          }
+        ]
+      },
+      "source": {
+        "css": [
+          "css/components/dropdown-menu.css",
+          "css/components/popover.css"
+        ],
+        "classes": [
+          "dropdown-trigger",
+          "dropdown-content",
+          "dropdown-item",
+          "dropdown-item-indicator",
+          "dropdown-label",
+          "dropdown-separator",
+          "dropdown-shortcut",
+          "dropdown-group",
+          "dropdown-checkbox-item",
+          "dropdown-radio-item",
+          "popover-trigger",
+          "popover-content",
+          "popover-header",
+          "popover-title",
+          "popover-description"
+        ],
+        "react_wrapper": "components/ui/dropdown-menu.tsx",
+        "docs_anchor": "c-menu"
+      },
+      "rules_file": "component-rules/menu.md"
+    },
+    {
+      "id": "menubar",
+      "display_name": "Menubar",
+      "category": "Overlays",
+      "status": "stable",
+      "aliases": [
+        "app menu bar",
+        "menu bar",
+        "file/edit bar"
+      ],
+      "summary": "A horizontal, always-visible bar of top-level triggers (Archivo, Editar…), each opening an actions panel — the desktop-application menu pattern.",
+      "variants": [
+        "bar",
+        "trigger",
+        "panel"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "open"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-container",
+          "--color-outline-variant",
+          "--color-on-surface",
+          "--color-focus"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-sm"
+        ],
+        "motion": [
+          "--duration-normal",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "menu",
+          "navigation-menu",
+          "context-menu",
+          "toolbar"
+        ],
+        "replaces": [
+          "custom application menu bars"
+        ],
+        "composed_with": [
+          "button"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "navigation-menu",
+            "why": "Navigation Menu navigates between sections; Menubar issues app commands"
+          },
+          {
+            "component": "menu",
+            "why": "Dropdown Menu is one contextual menu; Menubar is a persistent row of them"
+          },
+          {
+            "component": "toolbar",
+            "why": "Toolbar exposes controls directly; Menubar nests commands under category triggers"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/menubar.css",
+        "classes": [
+          "menubar",
+          "menubar-trigger",
+          "dropdown-content",
+          "dropdown-item",
+          "dropdown-separator"
+        ],
+        "react_wrapper": "components/ui/menubar.tsx",
+        "docs_anchor": "c-menubar"
+      },
+      "rules_file": "component-rules/menubar.md"
+    },
+    {
+      "id": "nav-bar",
+      "display_name": "Navigation Bar",
+      "category": "Navigation",
+      "status": "stable",
+      "aliases": [
+        "sidebar",
+        "side nav",
+        "nav rail",
+        "primary navigation"
+      ],
+      "summary": "The app-shell sidebar rail — the persistent list of top-level destinations (icon + label) that anchors primary navigation on desktop.",
+      "variants": [
+        "sidebar",
+        "nav",
+        "item",
+        "section-label",
+        "sub-items",
+        "badge"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "active",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "--color-nav-hover",
+          "--color-nav-hover-content",
+          "--color-nav-selected",
+          "--color-nav-selected-content",
+          "--text-secondary",
+          "--sidebar-bg"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-full"
+        ],
+        "spacing": [
+          "--sidebar-width"
+        ],
+        "motion": [
+          "--duration-fast"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "nav-drawer",
+          "navigation-menu",
+          "breadcrumb",
+          "topbar"
+        ],
+        "replaces": [
+          "legacy sidebars / nav rails"
+        ],
+        "composed_with": [
+          "topbar",
+          "badge",
+          "avatar"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "nav-drawer",
+            "why": "Nav Drawer is this same rail in its compact modal form"
+          },
+          {
+            "component": "navigation-menu",
+            "why": "Navigation Menu is flyout menus off a bar, not the app-shell rail"
+          },
+          {
+            "component": "toolbar",
+            "why": "Toolbar hosts view controls/filters, not navigation"
+          },
+          {
+            "component": "tabs",
+            "why": "Tabs switch sub-views within one screen; the rail switches top-level destinations"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/layout.css",
+        "classes": [
+          "sidebar",
+          "sidebar-nav",
+          "nav-item",
+          "nav-section-label",
+          "nav-sub-items",
+          "nav-badge",
+          "sidebar-footer"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-nav-bar"
+      },
+      "rules_file": "component-rules/nav-bar.md"
+    },
+    {
+      "id": "nav-card",
+      "display_name": "Nav Card",
+      "category": "Docs shell (not a product component)",
+      "status": "stable",
+      "aliases": [
+        "navigation card",
+        "section card",
+        "docs card"
+      ],
+      "summary": "A documentation-shell-only navigation card that links into sections of the docs site — NOT part of the consumable library.",
+      "variants": [
+        "full",
+        "compact",
+        "tint"
+      ],
+      "sizes": [
+        "full",
+        "compact"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "semantic tint tokens on .nav-card-visual (nv-*)"
+        ],
+        "note": "Docs-chrome styles inline in index.html — no css/components token contract to import."
+      },
+      "relationships": {
+        "related": [
+          "card",
+          "stat-card",
+          "item"
+        ],
+        "replaces": [
+          "ad-hoc navigation cards inside the docs site"
+        ],
+        "composed_with": [],
+        "not_to_confuse_with": [
+          {
+            "component": "card",
+            "why": "Full Card is the consumable product panel; Nav Card is docs chrome"
+          },
+          {
+            "component": "stat-card",
+            "why": "Stat Card shows a metric in product UI; Nav Card links docs sections"
+          },
+          {
+            "component": "item",
+            "why": "Basic Card (item) is the consumable compact row; Nav Card is docs-only"
+          }
+        ]
+      },
+      "source": {
+        "css": "(docs-internal — no css/components file; styles inline in index.html)",
+        "classes": [
+          "nav-card",
+          "nav-card--compact",
+          "nav-card-header",
+          "nav-card-tag",
+          "nav-card-arrow-btn",
+          "nav-card-content",
+          "nav-card-title",
+          "nav-card-desc",
+          "nav-card-visual",
+          "nav-card-grid"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-nav-card"
+      },
+      "rules_file": "component-rules/nav-card.md"
+    },
+    {
+      "id": "nav-drawer",
+      "display_name": "Navigation Drawer",
+      "category": "Navigation",
+      "status": "stable",
+      "aliases": [
+        "mobile nav",
+        "off-canvas menu",
+        "hamburger menu",
+        "modal drawer"
+      ],
+      "summary": "The app-shell sidebar in its compact form — below 768px it becomes a modal, off-canvas drawer that slides in over a scrim, toggled by the topbar hamburger.",
+      "variants": [
+        "sidebar",
+        "open",
+        "scrim",
+        "trigger"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "open",
+        "hover",
+        "active",
+        "focus",
+        "reduced_motion"
+      ],
+      "tokens": {
+        "color": [
+          "--color-nav-hover",
+          "--color-nav-selected",
+          "--color-scrim",
+          "--sidebar-bg",
+          "--border"
+        ],
+        "spacing": [
+          "--sidebar-width"
+        ],
+        "motion": [
+          "--duration-medium",
+          "--ease-default"
+        ],
+        "shadow": [
+          "--shadow-lg"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "nav-bar",
+          "sheet-side",
+          "navigation-menu"
+        ],
+        "replaces": [
+          "ad-hoc hamburger / off-canvas mobile menus"
+        ],
+        "composed_with": [
+          "topbar",
+          "badge"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "nav-bar",
+            "why": "Nav Bar is the same sidebar in its persistent desktop form; Nav Drawer is its modal compact form"
+          },
+          {
+            "component": "sheet-side",
+            "why": "Side Sheet holds content (filters/detail); the drawer holds primary navigation"
+          },
+          {
+            "component": "navigation-menu",
+            "why": "Navigation Menu is flyout menus off a bar, not the app shell"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/layout.css",
+        "classes": [
+          "sidebar",
+          "app.nav-open",
+          "sidebar-scrim",
+          "shell-menu-btn",
+          "nav-item",
+          "nav-section-label"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-nav-drawer"
+      },
+      "rules_file": "component-rules/nav-drawer.md"
+    },
+    {
+      "id": "navigation-menu",
+      "display_name": "Navigation Menu",
+      "category": "Navigation",
+      "status": "stable",
+      "aliases": [
+        "mega menu",
+        "top nav",
+        "nav menu",
+        "site navigation"
+      ],
+      "summary": "A horizontal row of navigation triggers that reveal grouped-link flyout panels — the top-nav mega-menu pattern.",
+      "variants": [
+        "root",
+        "list",
+        "trigger",
+        "indicator",
+        "viewport",
+        "content",
+        "link"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-container",
+          "--color-on-surface",
+          "--color-primary",
+          "--color-outline-variant"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "motion": [
+          "--duration-normal",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "menubar",
+          "menu",
+          "tabs"
+        ],
+        "replaces": [
+          "custom hover mega-menus with position:absolute"
+        ],
+        "composed_with": [
+          "button"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "menubar",
+            "why": "Menubar issues app commands; Navigation Menu moves between sections"
+          },
+          {
+            "component": "menu",
+            "why": "Dropdown Menu lists actions; Navigation Menu lists destinations"
+          },
+          {
+            "component": "tabs",
+            "why": "Tabs switch views within one page; Navigation Menu goes between pages/sections"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/navigation-menu.css",
+        "classes": [
+          "nav-menu",
+          "nav-menu-list",
+          "nav-menu-trigger",
+          "nav-menu-trigger-icon",
+          "nav-menu-indicator",
+          "nav-menu-viewport",
+          "nav-menu-viewport-wrap",
+          "nav-menu-content",
+          "nav-menu-link",
+          "nav-menu-link-title",
+          "nav-menu-link-desc"
+        ],
+        "react_wrapper": "components/ui/navigation-menu.tsx",
+        "docs_anchor": "c-navigation-menu"
+      },
+      "rules_file": "component-rules/navigation-menu.md"
+    },
+    {
+      "id": "pagination",
+      "display_name": "Pagination",
+      "category": "Navigation",
+      "status": "stable",
+      "aliases": [
+        "pager",
+        "page navigation",
+        "paginator"
+      ],
+      "summary": "Navigate between pages of a paged result set — previous/next, numbered pages, and an ellipsis for large ranges.",
+      "variants": [
+        "link",
+        "active",
+        "prev",
+        "next",
+        "ellipsis"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-on-surface",
+          "--color-surface-variant",
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--text-secondary",
+          "--color-focus"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-sm"
+        ],
+        "spacing": [
+          "36px link height/min-width",
+          "4px gap"
+        ],
+        "typography": [
+          "--font-size-body-md"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "data-table",
+          "table",
+          "list"
+        ],
+        "replaces": [
+          "'cargar más' controls when the total is known and bounded"
+        ],
+        "composed_with": [
+          "data-table",
+          "table",
+          "button"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "data-table",
+            "why": "Data Table embeds slice pagination; standalone Pagination is the control itself"
+          },
+          {
+            "component": "breadcrumb",
+            "why": "Breadcrumb shows hierarchy/location, not page-through of a set"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/pagination.css",
+        "classes": [
+          "pagination",
+          "pagination-list",
+          "pagination-link",
+          "pagination-prev",
+          "pagination-next",
+          "pagination-ellipsis"
+        ],
+        "react_wrapper": "components/ui/pagination.tsx",
+        "docs_anchor": "c-pagination"
+      },
+      "rules_file": "component-rules/pagination.md"
+    },
+    {
+      "id": "person-card",
+      "display_name": "Person Card",
+      "category": "Domain cards",
+      "status": "stable",
+      "aliases": [
+        "profile card",
+        "candidate card",
+        "people card"
+      ],
+      "summary": "A documented Person variant of Basic Card (Item) — a compact profile row (brand avatar + name + role); NOT a separate component.",
+      "variants": [
+        "person-card",
+        "avatar"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "--card-bg",
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--text-primary",
+          "--text-muted"
+        ],
+        "radius": [
+          "50% (avatar)"
+        ],
+        "shadow": [
+          "--shadow-md"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "item",
+          "avatar",
+          "vacancy-card"
+        ],
+        "replaces": [
+          "custom profile cards"
+        ],
+        "composed_with": [
+          "avatar",
+          "badge"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "item",
+            "why": "Person Card IS the Item primitive with a brand avatar — not a distinct component"
+          },
+          {
+            "component": "vacancy-card",
+            "why": "Vacancy Card is for jobs; Person Card is for people"
+          },
+          {
+            "component": "avatar",
+            "why": "Avatar is just the image/initials; Person Card is the whole profile row"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/person-card.css",
+        "classes": [
+          "people-grid",
+          "item",
+          "item-outline",
+          "item-clickable",
+          "person-card",
+          "item-media",
+          "person-avatar",
+          "item-content",
+          "item-title",
+          "item-description"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-person"
+      },
+      "rules_file": "component-rules/person-card.md"
+    },
+    {
+      "id": "radio",
+      "display_name": "Radio Button",
+      "category": "Selección",
+      "status": "stable",
+      "aliases": [
+        "radio",
+        "radio group",
+        "single choice"
+      ],
+      "summary": "A native radio group for an exclusive single choice among 2–5 mutually exclusive values, all visible at once for comparison.",
+      "variants": [
+        "default",
+        "label",
+        "card"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "checked",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--color-primary",
+          "--color-outline",
+          "--color-on-surface",
+          "--color-error",
+          "--color-focus",
+          "--color-focus-ring"
+        ],
+        "radius": [
+          "50% (circular)"
+        ],
+        "spacing": [
+          "--space-2"
+        ],
+        "typography": [
+          "--font-size-body-md"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "checkbox",
+          "select",
+          "switch",
+          "segmented-button",
+          "form"
+        ],
+        "replaces": [
+          "unstyled HTML radio buttons",
+          "custom pill-buttons misused as single-select"
+        ],
+        "composed_with": [
+          "form",
+          "card",
+          "list"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "checkbox",
+            "why": "checkbox is independent multi-select; radio is exclusive single choice"
+          },
+          {
+            "component": "select",
+            "why": "select hides options behind a trigger for larger sets; radio shows 2–5 at once"
+          },
+          {
+            "component": "segmented-button",
+            "why": "a pill view-switch is Segmented Button, not a radio group"
+          },
+          {
+            "component": "switch",
+            "why": "switch is an instant on/off; radio is a deliberate single choice"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/radio-group.css",
+        "classes": [
+          "radio-group",
+          "radio",
+          "radio-label",
+          "radio-card",
+          "radio-card-content",
+          "radio-card-title",
+          "radio-card-desc"
+        ],
+        "react_wrapper": "components/ui/radio-group.tsx",
+        "docs_anchor": "c-radio"
+      },
+      "rules_file": "component-rules/radio.md"
+    },
+    {
+      "id": "scroll-area",
+      "display_name": "Scroll Area",
+      "category": "Layout",
+      "status": "stable",
+      "aliases": [
+        "scroll container",
+        "scrollbar",
+        "overflow region"
+      ],
+      "summary": "A scroll container with a discreet, consistent custom scrollbar — pure CSS, for overflow regions inside a panel, menu, or sheet.",
+      "variants": [
+        "base"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover"
+      ],
+      "tokens": {
+        "color": [
+          "--color-outline"
+        ],
+        "radius": [
+          "--radius-full"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "list",
+          "sheet",
+          "dropdown-menu",
+          "table"
+        ],
+        "replaces": [
+          "the default browser scrollbar inside panels/menus"
+        ],
+        "composed_with": [
+          "list",
+          "sheet",
+          "dropdown-menu",
+          "popover",
+          "card"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "carousel",
+            "why": "Carousel is snap-scrolling of discrete items with prev/next; Scroll Area is a free-scroll region"
+          },
+          {
+            "component": "table",
+            "why": "table horizontal overflow uses .table-scroll, not scroll-area"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/scroll-area.css",
+        "classes": [
+          "scroll-area"
+        ],
+        "react_wrapper": "components/ui/scroll-area.tsx",
+        "docs_anchor": "c-scroll-area"
+      },
+      "rules_file": "component-rules/scroll-area.md"
+    },
+    {
+      "id": "search",
+      "display_name": "Search",
+      "category": "Navigation / Forms",
+      "status": "stable",
+      "aliases": [
+        "search bar",
+        "search field",
+        "buscador",
+        "find"
+      ],
+      "summary": "Free-text search of content, in two official variants — a standalone pill Search Bar (mobile/hero) and a compact Search Field inside a Toolbar (desktop).",
+      "variants": [
+        "bar",
+        "field",
+        "row",
+        "view"
+      ],
+      "sizes": [
+        "standalone",
+        "row",
+        "compact"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-container-high",
+          "--color-surface",
+          "--color-on-surface",
+          "--color-on-surface-variant",
+          "--color-secondary",
+          "--border",
+          "--color-outline",
+          "--color-focus-ring"
+        ],
+        "radius": [
+          "--radius-full",
+          "--radius-md"
+        ],
+        "spacing": [
+          "--space-2",
+          "--space-4"
+        ],
+        "typography": [
+          "--font-size-body-lg",
+          "--font-size-body-md"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "combobox",
+          "command",
+          "toolbar",
+          "chip",
+          "input"
+        ],
+        "replaces": [
+          "legacy search inputs",
+          "the retired toolbar search-field pattern (now formalized as .search-field)"
+        ],
+        "composed_with": [
+          "toolbar",
+          "chip",
+          "list",
+          "empty-state"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "combobox",
+            "why": "combobox returns a chosen value from a list; search queries free-text content"
+          },
+          {
+            "component": "command",
+            "why": "command is the ⌘K palette for actions/navigation; search finds content"
+          },
+          {
+            "component": "input",
+            "why": "input captures a form value; search queries content and carries role=search"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/search.css",
+        "classes": [
+          "search-bar",
+          "search-bar-icon",
+          "search-bar-input",
+          "search-bar-trailing",
+          "search-bar-avatar",
+          "search-row",
+          "search-icon-btn",
+          "search-view",
+          "search-view-fullscreen",
+          "search-view-header",
+          "search-view-back",
+          "search-view-results",
+          "search-field (toolbar.css)"
+        ],
+        "react_wrapper": "components/ui/search.tsx",
+        "docs_anchor": "c-search"
+      },
+      "rules_file": "component-rules/search.md"
+    },
+    {
+      "id": "segmented-button",
+      "display_name": "Segmented Button",
+      "category": "Actions",
+      "status": "stable",
+      "aliases": [
+        "seg-btn",
+        "segmented control",
+        "view switch",
+        "view toggle"
+      ],
+      "summary": "A compact pill that switches between 2–5 mutually exclusive views or modes; exactly one segment is active at a time.",
+      "variants": [
+        "single",
+        "multiple"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active",
+        "selected",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--color-outline-variant",
+          "--color-on-surface",
+          "--color-focus",
+          "--color-focus-ring"
+        ],
+        "radius": [
+          "--radius-full"
+        ],
+        "spacing": [
+          "--space-2"
+        ],
+        "motion": [
+          "--duration-fast",
+          "--ease-default"
+        ],
+        "component": "MD3 component-token tier --seg-btn-* (each with var(--md-sys-color-X, var(--color-X)) fallback); resolve via css/md-sys-bridge.css"
+      },
+      "relationships": {
+        "related": [
+          "button",
+          "toggle-group",
+          "chip",
+          "tabs"
+        ],
+        "replaces": [
+          "legacy pill radio-button groups",
+          "custom view-switch toggles"
+        ],
+        "composed_with": [
+          "toolbar",
+          "page-header",
+          "card"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "tabs",
+            "why": "tabs navigate between panels/sections; segmented switches a view/mode in place"
+          },
+          {
+            "component": "toggle-group",
+            "why": "toggle-group is a row of independent button toggles (bold/italic); segmented is a bordered pill view-switch"
+          },
+          {
+            "component": "chip",
+            "why": "chips are multi-select tag filters; single-select segmented always keeps one active"
+          },
+          {
+            "component": "button",
+            "why": "buttons act once; segmented selects a persistent mode"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/segmented-button.css",
+        "classes": [
+          "seg-btn-group",
+          "seg-btn",
+          "selected",
+          "seg-btn-group-sm",
+          "seg-btn-group-lg"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-seg-btn"
+      },
+      "rules_file": "component-rules/segmented-button.md"
+    },
+    {
+      "id": "select",
+      "display_name": "Select",
+      "category": "Forms",
+      "status": "stable",
+      "aliases": [
+        "dropdown",
+        "listbox",
+        "picker",
+        "combo"
+      ],
+      "summary": "Choose exactly one option from a short-to-medium bounded list via a themed dropdown listbox.",
+      "variants": [
+        "styled",
+        "native",
+        "grouped"
+      ],
+      "sizes": [
+        "md",
+        "sm"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--border",
+          "--card-bg",
+          "--text-primary",
+          "--interactive",
+          "--color-focus-ring",
+          "--color-error",
+          "--color-surface-container",
+          "--color-surface-variant",
+          "--color-outline-variant"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-sm"
+        ],
+        "shadow": [
+          "--shadow-md"
+        ],
+        "motion": [
+          "--duration-fast",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "combobox",
+          "radio-group",
+          "segmented-button",
+          "dropdown-menu",
+          "input"
+        ],
+        "replaces": [
+          "legacy dropdowns / unstyled native selects where theming matters"
+        ],
+        "composed_with": [
+          "form",
+          "label",
+          "toolbar",
+          "dialog"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "combobox",
+            "why": "combobox filters by typing; select is a fixed pick-one list"
+          },
+          {
+            "component": "dropdown-menu",
+            "why": "dropdown-menu triggers actions; select captures a form value"
+          },
+          {
+            "component": "radio-group",
+            "why": "radio shows all options at once for a few choices"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/select.css",
+        "classes": [
+          "select",
+          "select-trigger",
+          "select-value",
+          "select-icon",
+          "select-content",
+          "select-viewport",
+          "select-group",
+          "select-label",
+          "select-item",
+          "select-item-text",
+          "select-item-check",
+          "select-separator",
+          "select-scroll-up",
+          "select-scroll-down"
+        ],
+        "react_wrapper": "components/ui/select.tsx",
+        "docs_anchor": "c-select"
+      },
+      "rules_file": "component-rules/select.md"
+    },
+    {
+      "id": "sheet-bottom",
+      "display_name": "Bottom Sheet",
+      "category": "Overlays",
+      "status": "stable",
+      "aliases": [
+        "bottom sheet",
+        "drawer bottom",
+        "action sheet"
+      ],
+      "summary": "An edge-anchored modal panel that slides up from the bottom for quick actions or supplementary content — the preferred overlay on mobile/compact.",
+      "variants": [
+        "bottom",
+        "overlay",
+        "header",
+        "body",
+        "footer"
+      ],
+      "sizes": [
+        "default",
+        "desktop-centered"
+      ],
+      "states": [
+        "default",
+        "open",
+        "focus",
+        "closing"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface",
+          "--color-scrim",
+          "--color-on-surface-variant",
+          "--color-outline-variant"
+        ],
+        "radius": [
+          "16px top corners"
+        ],
+        "motion": [
+          "--duration-sheet",
+          "--ease-emphasized"
+        ],
+        "shadow": [
+          "--shadow-lg"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "sheet-side",
+          "dialog",
+          "snackbar"
+        ],
+        "replaces": [
+          "legacy bottom-sheet / action-sheet"
+        ],
+        "composed_with": [
+          "button",
+          "form",
+          "list"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "dialog",
+            "why": "Dialog is centered/modal; Bottom Sheet is edge-anchored, mobile-first"
+          },
+          {
+            "component": "sheet-side",
+            "why": "Side Sheet anchors to a lateral edge for desktop filters/detail"
+          },
+          {
+            "component": "nav-drawer",
+            "why": "Nav Drawer is primary navigation, not a content panel"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/sheet.css",
+        "classes": [
+          "sheet-overlay",
+          "sheet-content",
+          "sheet-content-bottom",
+          "sheet-close",
+          "sheet-header",
+          "sheet-title",
+          "sheet-description",
+          "sheet-body",
+          "sheet-footer"
+        ],
+        "react_wrapper": "components/ui/sheet.tsx",
+        "docs_anchor": "c-bottom-sheet"
+      },
+      "rules_file": "component-rules/sheet-bottom.md"
+    },
+    {
+      "id": "sheet-side",
+      "display_name": "Side Sheet",
+      "category": "Overlays",
+      "status": "stable",
+      "aliases": [
+        "side sheet",
+        "side drawer",
+        "panel",
+        "sheet"
+      ],
+      "summary": "An edge-anchored modal panel that slides in from a lateral (or top) edge for filters, item detail, or secondary forms — the desktop counterpart of the Bottom Sheet.",
+      "variants": [
+        "right",
+        "left",
+        "top",
+        "overlay",
+        "header",
+        "body",
+        "footer"
+      ],
+      "sizes": [
+        "default",
+        "narrow-viewport"
+      ],
+      "states": [
+        "default",
+        "open",
+        "focus",
+        "closing"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface",
+          "--color-scrim",
+          "--color-on-surface-variant",
+          "--color-outline-variant"
+        ],
+        "radius": [
+          "0 0 16px 16px (top variant)"
+        ],
+        "motion": [
+          "--duration-sheet",
+          "--ease-emphasized"
+        ],
+        "shadow": [
+          "--shadow-lg"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "sheet-bottom",
+          "dialog",
+          "popover"
+        ],
+        "replaces": [
+          "legacy side-sheet / drawer for content panels"
+        ],
+        "composed_with": [
+          "button",
+          "form",
+          "chip",
+          "list"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "dialog",
+            "why": "Dialog is centered/modal; Side Sheet is edge-anchored filters/detail"
+          },
+          {
+            "component": "sheet-bottom",
+            "why": "Bottom Sheet is the mobile-first, bottom-anchored variant"
+          },
+          {
+            "component": "nav-drawer",
+            "why": "Nav Drawer is primary navigation, not a content panel"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/sheet.css",
+        "classes": [
+          "sheet-overlay",
+          "sheet-content",
+          "sheet-content-right",
+          "sheet-content-left",
+          "sheet-content-top",
+          "sheet-close",
+          "sheet-header",
+          "sheet-title",
+          "sheet-description",
+          "sheet-body",
+          "sheet-footer"
+        ],
+        "react_wrapper": "components/ui/sheet.tsx",
+        "docs_anchor": "c-side-sheet"
+      },
+      "rules_file": "component-rules/sheet-side.md"
+    },
+    {
+      "id": "skeleton",
+      "display_name": "Skeleton",
+      "category": "Feedback",
+      "status": "stable",
+      "aliases": [
+        "placeholder",
+        "loading placeholder",
+        "shimmer",
+        "ghost"
+      ],
+      "summary": "An animated shimmer placeholder that mimics the layout of content while data loads — for loads with a known structure, in place of ad-hoc spinners.",
+      "variants": [
+        "text",
+        "title",
+        "card",
+        "circle"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface-variant",
+          "--color-surface-container-highest"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-full"
+        ],
+        "motion": [
+          "shimmer 1.5s infinite (background-size 200% 100%)"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "empty-state",
+          "progress",
+          "avatar"
+        ],
+        "replaces": [
+          "custom spinners/loaders for structured content"
+        ],
+        "composed_with": [
+          "card",
+          "item",
+          "list",
+          "table",
+          "charts"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "empty-state",
+            "why": "Empty State = no data exists; Skeleton = data is loading"
+          },
+          {
+            "component": "progress",
+            "why": "Progress/Spinner shows indeterminate or measured progress; Skeleton mimics the awaited layout"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/skeleton.css",
+        "classes": [
+          "skeleton",
+          "skeleton-text",
+          "skeleton-title",
+          "skeleton-card",
+          "skeleton-circle",
+          "skeleton-avatar"
+        ],
+        "react_wrapper": "components/ui/skeleton.tsx",
+        "docs_anchor": "c-skeleton"
+      },
+      "rules_file": "component-rules/skeleton.md"
+    },
+    {
+      "id": "slider",
+      "display_name": "Slider",
+      "category": "Forms",
+      "status": "stable",
+      "aliases": [
+        "range",
+        "range slider",
+        "track"
+      ],
+      "summary": "Selects a value (or a range) within a continuum with immediate feedback — for values where the exact number matters little.",
+      "variants": [
+        "single",
+        "range",
+        "vertical"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-primary",
+          "--color-surface-variant",
+          "--color-focus-ring",
+          "--card-bg"
+        ],
+        "radius": [
+          "--radius-full"
+        ],
+        "shadow": [
+          "--shadow-sm"
+        ],
+        "motion": [
+          "--duration-fast",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "input",
+          "radio-group",
+          "progress"
+        ],
+        "replaces": [
+          "custom <div> + drag-handler sliders"
+        ],
+        "composed_with": [
+          "form",
+          "toolbar",
+          "label"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "progress",
+            "why": "progress is read-only status; slider is an interactive input"
+          },
+          {
+            "component": "input",
+            "why": "input captures exact typed values; slider is approximate"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/slider.css",
+        "classes": [
+          "slider",
+          "slider-track",
+          "slider-range",
+          "slider-input",
+          "slider-vertical"
+        ],
+        "react_wrapper": "components/ui/slider.tsx",
+        "docs_anchor": "c-slider"
+      },
+      "rules_file": "component-rules/slider.md"
+    },
+    {
+      "id": "snackbar",
+      "display_name": "Snackbar",
+      "category": "Feedback",
+      "status": "stable",
+      "aliases": [
+        "toast",
+        "snack",
+        "notification"
+      ],
+      "summary": "A floating, ephemeral, non-blocking message that confirms something already happened, with at most one recovery action.",
+      "variants": [
+        "message",
+        "action",
+        "close",
+        "multiline",
+        "static",
+        "queue"
+      ],
+      "sizes": [
+        "single",
+        "multiline"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active",
+        "exit"
+      ],
+      "tokens": {
+        "color": [
+          "--color-inverse-surface",
+          "--color-inverse-on-surface",
+          "--color-inverse-primary"
+        ],
+        "radius": [
+          "--radius-sm"
+        ],
+        "spacing": [
+          "--space-2",
+          "--space-4"
+        ],
+        "motion": [
+          "250ms slide-up in",
+          "200ms fade-out"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "alert",
+          "dialog",
+          "toast"
+        ],
+        "replaces": [
+          "ad-hoc floating notification bars"
+        ],
+        "composed_with": [
+          "button"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "alert",
+            "why": "Alert is inline + persistent; Snackbar is floating + ephemeral"
+          },
+          {
+            "component": "dialog",
+            "why": "Dialog blocks and demands a decision; Snackbar never blocks"
+          },
+          {
+            "component": "toast",
+            "why": "Toast (.toast panel) is the top-right system notification with a semantic icon; Snackbar is the bottom inverse-surface confirmation bar"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/toast.css",
+        "classes": [
+          "snackbar",
+          "snackbar-message",
+          "snackbar-action",
+          "snackbar-close",
+          "snackbar--multiline",
+          "snackbar--static",
+          "snackbar--exit",
+          "snackbar-viewport",
+          "toast",
+          "toast-container",
+          "toast-success",
+          "toast-error",
+          "toast-info"
+        ],
+        "react_wrapper": "components/ui/toast.tsx",
+        "docs_anchor": "c-snackbar"
+      },
+      "rules_file": "component-rules/snackbar.md"
+    },
+    {
+      "id": "stat-card",
+      "display_name": "Stat Card",
+      "category": "Data display",
+      "status": "stable",
+      "aliases": [
+        "kpi card",
+        "metric card",
+        "stat",
+        "kpi"
+      ],
+      "summary": "A single KPI/metric with a label, a large value, and an optional trend indicator.",
+      "variants": [
+        "base",
+        "trend-positive",
+        "trend-negative",
+        "trend-neutral"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "color": [
+          "--card-bg",
+          "--border",
+          "--text-primary",
+          "--text-muted",
+          "--color-success",
+          "--color-error"
+        ],
+        "radius": [
+          "--radius"
+        ],
+        "spacing": [
+          "20px padding",
+          "16px grid gap"
+        ],
+        "typography": [
+          "--font-size-display",
+          "--font-size-body-sm",
+          "--font-size-caption"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "card",
+          "chart",
+          "table"
+        ],
+        "replaces": [
+          "legacy metric widgets"
+        ],
+        "composed_with": [
+          "page-header",
+          "chart",
+          "badge"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "card",
+            "why": "Full Card groups general content; Stat Card is a single metric"
+          },
+          {
+            "component": "chart",
+            "why": "Chart shows a trend over many points; Stat Card is one value + delta"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/stat-card.css",
+        "classes": [
+          "stats-grid",
+          "stat-card",
+          "stat-label",
+          "stat-value",
+          "stat-change",
+          "stat-change-positive",
+          "stat-change-negative",
+          "stat-change-neutral"
+        ],
+        "react_wrapper": "components/ui/stat-card.tsx",
+        "docs_anchor": "c-stat-card"
+      },
+      "rules_file": "component-rules/stat-card.md"
+    },
+    {
+      "id": "switch",
+      "display_name": "Switch",
+      "category": "Forms",
+      "status": "stable",
+      "aliases": [
+        "toggle switch",
+        "on/off",
+        "toggle"
+      ],
+      "summary": "A binary on/off control with immediate effect — flipping it applies the setting instantly, no separate confirm button.",
+      "variants": [
+        "base",
+        "label"
+      ],
+      "sizes": [
+        "md",
+        "sm"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "checked",
+        "disabled",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--color-primary",
+          "--color-on-primary",
+          "--color-surface-variant",
+          "--color-outline",
+          "--color-on-surface",
+          "--color-error"
+        ],
+        "radius": [
+          "--radius-full"
+        ],
+        "motion": [
+          "--duration-fast",
+          "--duration-normal",
+          "--ease-expressive"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "checkbox",
+          "radio-group",
+          "toggle",
+          "toggle-group"
+        ],
+        "replaces": [
+          "ad-hoc toggle switches",
+          "a checkbox styled as a switch without role=switch"
+        ],
+        "composed_with": [
+          "label",
+          "list",
+          "card"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "checkbox",
+            "why": "checkbox is a deferred-submit selection; switch applies instantly"
+          },
+          {
+            "component": "toggle",
+            "why": "toggle is a pressable state button (e.g. bold); switch is a setting"
+          },
+          {
+            "component": "radio-group",
+            "why": "radio picks one of several; switch is a single binary"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/switch.css",
+        "classes": [
+          "switch",
+          "switch-sm",
+          "switch-label"
+        ],
+        "react_wrapper": "components/ui/switch.tsx",
+        "docs_anchor": "c-switch"
+      },
+      "rules_file": "component-rules/switch.md"
+    },
+    {
+      "id": "table",
+      "display_name": "Table",
+      "category": "Data display",
+      "status": "stable",
+      "aliases": [
+        "data table static",
+        "tabular data",
+        "grid"
+      ],
+      "summary": "Static tabular data — records with multiple comparable attributes in rows and columns, with an optional clickable-row variant.",
+      "variants": [
+        "base",
+        "clickable-row",
+        "selected-row",
+        "footer",
+        "caption"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "selected"
+      ],
+      "tokens": {
+        "color": [
+          "--card-bg",
+          "--border",
+          "--color-surface-variant",
+          "--text-primary",
+          "--text-muted",
+          "--color-focus",
+          "--color-focus-ring",
+          "--color-surface-container-high"
+        ],
+        "radius": [
+          "--radius"
+        ],
+        "spacing": [
+          "10px 16px header padding",
+          "12px 16px cell padding"
+        ],
+        "typography": [
+          "--font-size-overline",
+          "--font-size-body-md"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "data-table",
+          "list",
+          "item",
+          "badge"
+        ],
+        "replaces": [
+          "legacy HTML tables"
+        ],
+        "composed_with": [
+          "badge",
+          "button",
+          "pagination",
+          "empty-state"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "data-table",
+            "why": "Data Table adds sort/filter/selection/pagination; Table is static"
+          },
+          {
+            "component": "list",
+            "why": "List is a simple 1–2 attribute vertical list; Table compares columns"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/table.css",
+        "classes": [
+          "table-scroll",
+          "data-table",
+          "clickable",
+          "selected",
+          "tfoot",
+          "caption"
+        ],
+        "react_wrapper": "components/ui/table.tsx",
+        "docs_anchor": "c-table"
+      },
+      "rules_file": "component-rules/table.md"
+    },
+    {
+      "id": "tabs",
+      "display_name": "Tabs",
+      "category": "Navigation / Containment",
+      "status": "stable",
+      "aliases": [
+        "tab bar",
+        "tabbed panels",
+        "tablist"
+      ],
+      "summary": "Switch between mutually exclusive views of the same entity, showing one panel at a time.",
+      "variants": [
+        "underline",
+        "pill",
+        "vertical"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-on-surface-variant",
+          "--color-on-surface",
+          "--color-secondary",
+          "--border",
+          "--color-focus",
+          "--color-focus-ring"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-sm"
+        ],
+        "motion": [
+          "--duration-fast",
+          "--duration-normal",
+          "--ease-default",
+          "--ease-expressive"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "segmented-button",
+          "accordion",
+          "navigation-menu"
+        ],
+        "replaces": [
+          "legacy tab bars"
+        ],
+        "composed_with": [
+          "card",
+          "table",
+          "page-header"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "segmented-button",
+            "why": "Segmented switches a compact view/mode; Tabs organize panels of content"
+          },
+          {
+            "component": "navigation-menu",
+            "why": "Navigation moves between pages; Tabs stay within one page"
+          },
+          {
+            "component": "accordion",
+            "why": "Accordion stacks expandable sections; Tabs show one panel at a time"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/tabs.css",
+        "classes": [
+          "tabs",
+          "tab",
+          "tab-indicator",
+          "tab-panel",
+          "tabs-pill",
+          "tabs-vertical"
+        ],
+        "react_wrapper": "components/ui/tabs.tsx",
+        "docs_anchor": "c-tabs"
+      },
+      "rules_file": "component-rules/tabs.md"
+    },
+    {
+      "id": "textarea",
+      "display_name": "Textarea",
+      "category": "Forms",
+      "status": "stable",
+      "aliases": [
+        "multiline input",
+        "text area",
+        "comment box"
+      ],
+      "summary": "A multi-line text field for paragraph-length free-form input, with the same label/hint/error language as Input.",
+      "variants": [
+        "base"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "disabled",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--border",
+          "--card-bg",
+          "--text-primary",
+          "--interactive",
+          "--color-focus-ring",
+          "--color-error",
+          "--color-on-surface-variant"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "typography": [
+          "--font-size-body-md",
+          "--font-size-caption",
+          "--font-size-badge"
+        ],
+        "motion": [
+          "--duration-fast"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "input",
+          "form",
+          "label",
+          "input-group"
+        ],
+        "replaces": [
+          "legacy multi-line text fields"
+        ],
+        "composed_with": [
+          "form",
+          "label",
+          "dialog"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "input",
+            "why": "input is single-line; textarea is multi-line"
+          },
+          {
+            "component": "input-group",
+            "why": "input-group joins addons to a single-line control"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/form.css",
+        "classes": [
+          "field-group",
+          "field-label",
+          "field-textarea",
+          "field-supporting",
+          "field-hint",
+          "field-error-msg",
+          "field-char-count",
+          "is-over",
+          "is-error"
+        ],
+        "react_wrapper": "components/ui/textarea.tsx",
+        "docs_anchor": "c-textarea"
+      },
+      "rules_file": "component-rules/textarea.md"
+    },
+    {
+      "id": "toggle-group",
+      "display_name": "Toggle Group",
+      "category": "Actions",
+      "status": "stable",
+      "aliases": [
+        "toggle set",
+        "format toggles",
+        "grouped toggles"
+      ],
+      "summary": "A set of related Toggles on one axis — multi-select (each independent) or single-select (choosing one deselects the rest); deliberately distinct from Segmented Button.",
+      "variants": [
+        "multiple",
+        "single"
+      ],
+      "sizes": [
+        "inherited"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "pressed",
+        "disabled"
+      ],
+      "tokens": {
+        "color": [
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--color-on-surface",
+          "--color-focus",
+          "--color-focus-ring"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "spacing": [
+          "--space-2"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "toggle",
+          "segmented-button",
+          "chip",
+          "button-group",
+          "switch"
+        ],
+        "replaces": [
+          "ad-hoc rows of on/off buttons"
+        ],
+        "composed_with": [
+          "toolbar",
+          "toggle"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "segmented-button",
+            "why": "segmented is a bordered pill view-switch (always 1 active, view labels); toggle-group is a row of button toggles (formats/filters)"
+          },
+          {
+            "component": "chip",
+            "why": "chips are tag-style filters below a search/toolbar; toggle-group toggles share one axis"
+          },
+          {
+            "component": "switch",
+            "why": "Switch is a single labelled on/off; toggle-group is a set"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/toggle-group.css",
+        "classes": [
+          "toggle-group",
+          "toggle"
+        ],
+        "react_wrapper": "components/ui/toggle-group.tsx",
+        "docs_anchor": "c-toggle-group"
+      },
+      "rules_file": "component-rules/toggle-group.md"
+    },
+    {
+      "id": "toggle",
+      "display_name": "Toggle",
+      "category": "Actions",
+      "status": "stable",
+      "aliases": [
+        "toggle button",
+        "pressed button",
+        "format button"
+      ],
+      "summary": "A single two-state (pressed / not-pressed) button for a bold-style setting that applies immediately — state lives on aria-pressed.",
+      "variants": [
+        "default",
+        "outline"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "pressed",
+        "disabled",
+        "error"
+      ],
+      "tokens": {
+        "color": [
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--color-on-surface",
+          "--color-outline-variant",
+          "--color-focus",
+          "--color-focus-ring",
+          "--color-error"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "spacing": [
+          "--space-2"
+        ],
+        "motion": [
+          "--duration-fast",
+          "--ease-default"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "toggle-group",
+          "chip",
+          "segmented-button",
+          "switch",
+          "button"
+        ],
+        "replaces": [
+          "ad-hoc on/off buttons with hand-managed aria-pressed"
+        ],
+        "composed_with": [
+          "toolbar",
+          "toggle-group"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "switch",
+            "why": "Switch is a labelled on/off preference; Toggle is a bold-style button"
+          },
+          {
+            "component": "chip",
+            "why": "chips are tag-style multi-select filters; a toggle is a single setting button"
+          },
+          {
+            "component": "segmented-button",
+            "why": "segmented picks 1 of N views; a toggle is one independent on/off"
+          },
+          {
+            "component": "button",
+            "why": "buttons act statelessly; a toggle holds an on/off state"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/toggle.css",
+        "classes": [
+          "toggle",
+          "toggle-outline",
+          "toggle-sm",
+          "toggle-lg"
+        ],
+        "react_wrapper": "components/ui/toggle.tsx",
+        "docs_anchor": "c-toggle"
+      },
+      "rules_file": "component-rules/toggle.md"
+    },
+    {
+      "id": "toolbar",
+      "display_name": "Tool Bar",
+      "category": "Actions / App bar",
+      "status": "stable",
+      "aliases": [
+        "filter bar",
+        "action bar",
+        "list controls"
+      ],
+      "summary": "The row of controls that heads a list or table — a compact search field plus filters, sorting, and the view's single primary action.",
+      "variants": [
+        "toolbar",
+        "search-field",
+        "button",
+        "result-count"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface",
+          "--color-on-surface-variant",
+          "--color-surface-variant",
+          "--color-outline",
+          "--color-secondary"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "spacing": [
+          "--space-2",
+          "--space-4"
+        ],
+        "motion": [
+          "--duration-fast"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "search",
+          "select",
+          "button",
+          "page-header"
+        ],
+        "replaces": [
+          "legacy filter bars"
+        ],
+        "composed_with": [
+          "search",
+          "select",
+          "button",
+          "table",
+          "data-table",
+          "chip"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "topbar",
+            "why": "Top Bar is app chrome + global actions; Tool Bar controls one list/table"
+          },
+          {
+            "component": "page-header",
+            "why": "Page Header titles the content; the Tool Bar carries its controls"
+          },
+          {
+            "component": "search",
+            "why": "the standalone Search Bar heads a whole screen; the Tool Bar uses the compact search-field"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/toolbar.css",
+        "classes": [
+          "toolbar",
+          "search-field",
+          "toolbar-btn",
+          "result-count"
+        ],
+        "react_wrapper": "components/ui/toolbar.tsx",
+        "docs_anchor": "c-toolbar"
+      },
+      "rules_file": "component-rules/toolbar.md"
+    },
+    {
+      "id": "tooltip",
+      "display_name": "Tooltip",
+      "category": "Feedback",
+      "status": "stable",
+      "aliases": [
+        "hint",
+        "hover label",
+        "rich tooltip",
+        "hover card"
+      ],
+      "summary": "A small hover/focus text label that clarifies an ambiguous control — plus a click-triggered Rich Tooltip for a title + text + action preview. Never for essential information.",
+      "variants": [
+        "plain",
+        "rich"
+      ],
+      "sizes": [
+        "plain",
+        "rich"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "open"
+      ],
+      "tokens": {
+        "color": [
+          "--color-inverse-surface",
+          "--color-inverse-on-surface",
+          "--color-surface-container",
+          "--color-on-surface"
+        ],
+        "radius": [
+          "--radius-sm",
+          "--radius-md"
+        ],
+        "motion": [
+          "--duration-fast",
+          "0.4s hover-intent delay"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "popover",
+          "dialog",
+          "rich-tooltip"
+        ],
+        "replaces": [
+          "native title= attribute",
+          "ad-hoc hover libraries",
+          "a separate Hover Card (dropped — Rich Tooltip covers it)"
+        ],
+        "composed_with": [
+          "button",
+          "chip",
+          "avatar"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "popover",
+            "why": "Popover holds interactive/arbitrary content; tooltip is a passive label/preview"
+          },
+          {
+            "component": "dialog",
+            "why": "Dialog is modal/blocking; tooltip never blocks"
+          }
+        ]
+      },
+      "source": {
+        "css": [
+          "css/components/tooltip.css",
+          "css/components/rich-tooltip.css"
+        ],
+        "classes": [
+          "tooltip-wrap",
+          "tooltip-content",
+          "tooltip-top",
+          "tooltip-bottom",
+          "tooltip-left",
+          "tooltip-right",
+          "rich-tooltip-wrap",
+          "rich-tooltip-content",
+          "rich-tooltip-row",
+          "rich-tooltip-body",
+          "rich-tooltip-title",
+          "rich-tooltip-subtitle",
+          "rich-tooltip-close",
+          "rich-tooltip-actions"
+        ],
+        "react_wrapper": "components/ui/tooltip.tsx",
+        "docs_anchor": "c-tooltip"
+      },
+      "rules_file": "component-rules/tooltip.md"
+    },
+    {
+      "id": "topbar",
+      "display_name": "Top Bar",
+      "category": "Navigation",
+      "status": "stable",
+      "aliases": [
+        "top app bar",
+        "header bar",
+        "app header",
+        "topbar"
+      ],
+      "summary": "The app-shell header for each view — surfaces navigation context (breadcrumbs / menu), the current view's actions, and global actions (notifications, profile).",
+      "variants": [
+        "topbar",
+        "breadcrumb",
+        "button",
+        "notif",
+        "avatar",
+        "menu-btn"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "scrolled",
+        "hover",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "--sidebar-bg",
+          "--text-muted",
+          "--interactive",
+          "--interactive-light",
+          "--color-on-primary",
+          "--border"
+        ],
+        "radius": [
+          "--radius-md",
+          "--radius-full"
+        ],
+        "spacing": [
+          "--topbar-height"
+        ],
+        "motion": [
+          "--duration-fast"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "nav-bar",
+          "nav-drawer",
+          "breadcrumb",
+          "toolbar"
+        ],
+        "replaces": [
+          "legacy app headers / top bars"
+        ],
+        "composed_with": [
+          "breadcrumb",
+          "button",
+          "avatar",
+          "badge",
+          "nav-drawer"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "toolbar",
+            "why": "Toolbar hosts a list/table's controls; the topbar is app chrome + view context"
+          },
+          {
+            "component": "page-header",
+            "why": "Page Header titles the content region; the topbar is the shell header"
+          },
+          {
+            "component": "breadcrumb",
+            "why": "Breadcrumb is a part inside the topbar, not the bar itself"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/layout.css",
+        "classes": [
+          "topbar",
+          "topbar-breadcrumb",
+          "topbar-btn",
+          "topbar-notif",
+          "notif-badge",
+          "avatar",
+          "avatar-label",
+          "shell-menu-btn"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-topbar"
+      },
+      "rules_file": "component-rules/topbar.md"
+    },
+    {
+      "id": "vacancy-card",
+      "display_name": "Vacancy Card",
+      "category": "Domain cards",
+      "status": "stable",
+      "aliases": [
+        "job card",
+        "vacante card",
+        "position card"
+      ],
+      "summary": "A domain card summarizing a job vacancy — icon, title, status badge, meta, optional stats and assignees — used as a list unit that navigates to the detail.",
+      "variants": [
+        "card",
+        "icon",
+        "stats",
+        "assignees",
+        "age",
+        "more"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "--card-bg",
+          "--border",
+          "--color-secondary-container",
+          "--text-primary",
+          "--text-muted"
+        ],
+        "radius": [
+          "--radius",
+          "--radius-md"
+        ],
+        "shadow": [
+          "--shadow-md"
+        ],
+        "motion": [
+          "--duration-fast"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "item",
+          "card",
+          "kanban-card",
+          "badge"
+        ],
+        "replaces": [
+          "custom vacancy rows/cards"
+        ],
+        "composed_with": [
+          "badge",
+          "avatar",
+          "button"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "person-card",
+            "why": "Person Card is for people/candidates; Vacancy Card is for jobs"
+          },
+          {
+            "component": "kanban-card",
+            "why": "Kanban Card is a board tile in a column; Vacancy Card is a list row"
+          },
+          {
+            "component": "card",
+            "why": "Full Card is generic; Vacancy Card is the recruiting-domain unit"
+          }
+        ]
+      },
+      "source": {
+        "css": "css/components/vacancy-card.css",
+        "classes": [
+          "vacancies-list",
+          "vacancy-card",
+          "vacancy-icon",
+          "vacancy-info",
+          "vacancy-name",
+          "vacancy-meta",
+          "meta-dot",
+          "vacancy-stats",
+          "stat-pill",
+          "assignee",
+          "assignee-avatar",
+          "vacancy-right",
+          "vacancy-age",
+          "more-btn"
+        ],
+        "react_wrapper": null,
+        "docs_anchor": "c-vacancy"
+      },
+      "rules_file": "component-rules/vacancy-card.md"
+    }
+  ]
+}
