@@ -5122,77 +5122,77 @@ body { overflow-x: clip; }
 
       <!-- Buttons documentation page — Embassy (Overview · Specs · Guidelines · Accessibility) -->
       <style>
-        .bd-lead { font-size:15px; line-height:1.7; color:var(--ds-text-2); max-width:700px; margin:0 0 4px; }
-        .bd-eyebrow { font:700 11px/1 'Inter'; letter-spacing:.12em; text-transform:uppercase; color:var(--ds-accent); margin:0 0 10px; }
-        .bd-grid { display:grid; gap:16px; margin-top:4px; }
+        .bd-lead { font-size:var(--font-size-heading-xs); line-height:1.7; color:var(--ds-text-2); max-width:700px; margin:0 0 var(--space-1); }
+        .bd-eyebrow { font:700 var(--font-size-badge)/1 var(--font-body); letter-spacing:.12em; text-transform:uppercase; color:var(--ds-accent); margin:0 0 var(--space-2); }
+        .bd-grid { display:grid; gap:var(--space-4); margin-top:var(--space-1); }
         .bd-grid.c2 { grid-template-columns:repeat(2,1fr); }
         .bd-grid.c3 { grid-template-columns:repeat(3,1fr); }
         @media (max-width:820px){ .bd-grid.c2,.bd-grid.c3{ grid-template-columns:1fr; } }
 
-        .bd-card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px; }
-        .bd-stage { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:22px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+        .bd-card { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--space-5); }
+        .bd-stage { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--space-6); display:flex; flex-wrap:wrap; gap:var(--space-3); align-items:center; }
         .bd-stage.center { justify-content:center; }
 
         /* Variant card */
-        .bd-variant { display:flex; flex-direction:column; gap:14px; background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px; }
-        .bd-variant-head { display:flex; align-items:center; justify-content:space-between; gap:10px; }
-        .bd-variant-name { font:700 14px/1 'Epilogue',sans-serif; color:var(--ds-text-1); }
-        .bd-variant-desc { font-size:12.5px; line-height:1.6; color:var(--ds-text-3); margin:0; }
+        .bd-variant { display:flex; flex-direction:column; gap:var(--space-4); background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--space-5); }
+        .bd-variant-head { display:flex; align-items:center; justify-content:space-between; gap:var(--space-2); }
+        .bd-variant-name { font:700 var(--font-size-body-lg)/1 var(--font-heading); color:var(--ds-text-1); }
+        .bd-variant-desc { font-size:var(--font-size-body-sm); line-height:1.6; color:var(--ds-text-3); margin:0; }
         .bd-emphasis { display:inline-flex; gap:3px; }
-        .bd-emphasis i { width:6px; height:6px; border-radius:50%; background:var(--color-outline-variant); }
+        .bd-emphasis i { width:6px; height:6px; border-radius:var(--radius-full); background:var(--color-outline-variant); }
         .bd-emphasis i.on { background:var(--ds-accent); }
 
         /* Hierarchy bars */
-        .bd-hier { display:flex; flex-direction:column; gap:12px; }
-        .bd-hier-row { display:grid; grid-template-columns:130px 1fr; align-items:center; gap:14px; }
-        .bd-hier-label { font:600 12.5px Inter; color:var(--ds-text-2); }
-        .bd-hier-bar { height:10px; border-radius:99px; background:var(--color-outline-variant); }
+        .bd-hier { display:flex; flex-direction:column; gap:var(--space-3); }
+        .bd-hier-row { display:grid; grid-template-columns:130px 1fr; align-items:center; gap:var(--space-4); }
+        .bd-hier-label { font:600 var(--font-size-body-sm) var(--font-body); color:var(--ds-text-2); }
+        .bd-hier-bar { height:10px; border-radius:var(--radius-full); background:var(--color-outline-variant); }
 
         /* Anatomy */
-        .bd-anatomy { display:flex; flex-wrap:wrap; gap:32px; align-items:center; }
-        .bd-anatomy-legend { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
-        .bd-anatomy-legend li { display:flex; gap:11px; align-items:flex-start; font-size:13px; line-height:1.5; color:var(--ds-text-2); }
+        .bd-anatomy { display:flex; flex-wrap:wrap; gap:var(--space-8); align-items:center; }
+        .bd-anatomy-legend { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--space-3); }
+        .bd-anatomy-legend li { display:flex; gap:var(--space-3); align-items:flex-start; font-size:var(--font-size-label); line-height:1.5; color:var(--ds-text-2); }
         .bd-anatomy-legend b { color:var(--ds-text-1); font-weight:600; }
-        .bd-num { flex:none; width:21px; height:21px; border-radius:50%; background:var(--ds-accent-bg); color:var(--ds-accent); font:700 11px Inter; display:flex; align-items:center; justify-content:center; }
-        .bd-anatomy-fig { position:relative; padding:30px 38px; }
-        .bd-anatomy-pin { position:absolute; width:21px; height:21px; border-radius:50%; background:var(--ds-accent); color:var(--neutral-white); font:700 11px Inter; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,.25); }
+        .bd-num { flex:none; width:21px; height:21px; border-radius:var(--radius-full); background:var(--ds-accent-bg); color:var(--ds-accent); font:700 var(--font-size-badge) var(--font-body); display:flex; align-items:center; justify-content:center; }
+        .bd-anatomy-fig { position:relative; padding:var(--space-8) var(--space-10); }
+        .bd-anatomy-pin { position:absolute; width:21px; height:21px; border-radius:var(--radius-full); background:var(--ds-accent); color:var(--neutral-white); font:700 var(--font-size-badge) var(--font-body); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,.25); }
 
         /* States grid */
-        .bd-states { display:grid; grid-template-columns:repeat(auto-fit,minmax(132px,1fr)); gap:12px; }
-        .bd-state { display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:flex-start; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:18px 12px; }
-        .bd-state-lbl { font:600 11px Inter; color:var(--ds-text-3); text-transform:uppercase; letter-spacing:.05em; }
-        .bd-state-tok { font:500 10.5px 'DM Mono',monospace; color:var(--ds-text-3); text-align:center; line-height:1.4; }
+        .bd-states { display:grid; grid-template-columns:repeat(auto-fit,minmax(132px,1fr)); gap:var(--space-3); }
+        .bd-state { display:flex; flex-direction:column; gap:var(--space-3); align-items:center; justify-content:flex-start; background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--space-5) var(--space-3); }
+        .bd-state-lbl { font:600 var(--font-size-badge) var(--font-body); color:var(--ds-text-3); text-transform:uppercase; letter-spacing:.05em; }
+        .bd-state-tok { font:500 10.5px var(--font-mono); color:var(--ds-text-3); text-align:center; line-height:1.4; }
 
         /* Spec rows */
-        .bd-spec { display:flex; justify-content:space-between; gap:16px; padding:11px 2px; border-bottom:1px solid var(--border); font-size:13px; color:var(--ds-text-2); }
+        .bd-spec { display:flex; justify-content:space-between; gap:var(--space-4); padding:var(--space-3) 2px; border-bottom:1px solid var(--border); font-size:var(--font-size-label); color:var(--ds-text-2); }
         .bd-spec:last-child { border-bottom:none; }
         .bd-spec b { color:var(--ds-text-1); font-weight:600; }
-        .bd-mono { font-family:'DM Mono',monospace; font-size:12px; color:var(--ds-accent); background:var(--ds-accent-bg); padding:2px 8px; border-radius:5px; }
+        .bd-mono { font-family:var(--font-mono); font-size:var(--font-size-caption); color:var(--ds-accent); background:var(--ds-accent-bg); padding:2px var(--space-2); border-radius:var(--radius-sm); }
 
         /* Callout */
-        .bd-callout { display:flex; gap:11px; padding:14px 16px; border-radius:var(--radius-md); background:var(--ds-accent-bg); border:1px solid var(--color-outline-variant); font-size:13px; line-height:1.6; color:var(--ds-text-2); margin-top:4px; }
-        .bd-callout .bd-ico { flex:none; font-size:15px; line-height:1.4; }
+        .bd-callout { display:flex; gap:var(--space-3); padding:var(--space-4) var(--space-4); border-radius:var(--radius-md); background:var(--ds-accent-bg); border:1px solid var(--color-outline-variant); font-size:var(--font-size-label); line-height:1.6; color:var(--ds-text-2); margin-top:var(--space-1); }
+        .bd-callout .bd-ico { flex:none; font-size:var(--font-size-heading-xs); line-height:1.4; }
 
         /* Do / Don't */
         .bd-dd { background:var(--card-bg); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; }
-        .bd-dd-head { display:flex; align-items:center; gap:8px; padding:13px 18px; font:700 13px Inter; }
+        .bd-dd-head { display:flex; align-items:center; gap:var(--space-2); padding:var(--space-3) var(--space-5); font:700 var(--font-size-label) var(--font-body); }
         .bd-dd.do .bd-dd-head { color:var(--color-success); border-bottom:1px solid var(--border); }
         .bd-dd.dont .bd-dd-head { color:var(--color-error); border-bottom:1px solid var(--border); }
-        .bd-dd-body { padding:20px 18px; display:flex; flex-direction:column; gap:14px; }
+        .bd-dd-body { padding:var(--space-5) var(--space-5); display:flex; flex-direction:column; gap:var(--space-4); }
         .bd-dd-body .bd-stage { background:var(--bg); }
-        .bd-dd-note { font-size:12.5px; line-height:1.6; color:var(--ds-text-3); }
+        .bd-dd-note { font-size:var(--font-size-body-sm); line-height:1.6; color:var(--ds-text-3); }
 
         /* a11y list */
-        .bd-a11y { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
-        .bd-a11y li { display:flex; gap:12px; align-items:flex-start; font-size:13.5px; line-height:1.6; color:var(--ds-text-2); }
-        .bd-a11y .bd-ico { flex:none; width:28px; height:28px; border-radius:8px; background:var(--ds-accent-bg); color:var(--ds-accent); display:flex; align-items:center; justify-content:center; font-size:14px; }
+        .bd-a11y { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--space-4); }
+        .bd-a11y li { display:flex; gap:var(--space-3); align-items:flex-start; font-size:var(--font-size-body-md); line-height:1.6; color:var(--ds-text-2); }
+        .bd-a11y .bd-ico { flex:none; width:28px; height:28px; border-radius:var(--radius-md); background:var(--ds-accent-bg); color:var(--ds-accent); display:flex; align-items:center; justify-content:center; font-size:var(--font-size-body-lg); }
         .bd-a11y b { color:var(--ds-text-1); font-weight:600; }
 
         /* contrast chips */
-        .bd-contrast { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+        .bd-contrast { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:var(--space-3); }
         .bd-contrast-item { border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden; }
-        .bd-contrast-swatch { padding:16px; font:600 13px Inter; }
-        .bd-contrast-meta { padding:9px 12px; background:var(--card-bg); font:600 12px Inter; color:var(--ds-text-2); display:flex; justify-content:space-between; }
+        .bd-contrast-swatch { padding:var(--space-4); font:600 var(--font-size-label) var(--font-body); }
+        .bd-contrast-meta { padding:9px var(--space-3); background:var(--card-bg); font:600 var(--font-size-caption) var(--font-body); color:var(--ds-text-2); display:flex; justify-content:space-between; }
         .bd-pass { color:var(--color-success); font-weight:700; }
 
         .bd-sim-focus { outline:2px solid var(--color-focus); outline-offset:2px; box-shadow:0 0 0 4px var(--color-focus-ring); }
@@ -5205,35 +5205,35 @@ body { overflow-x: clip; }
         .icon-btn.btn-xl { width: 52px; height: 52px; }
 
         /* ── Button type block (Overview) ── */
-        .bd-type-block { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 24px; }
-        .bd-type-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 4px; }
-        .bd-type-name { font: 700 15px 'Epilogue', sans-serif; color: var(--ds-text-1); }
-        .bd-sub-title { font: 700 13px Inter; color: var(--ds-text-2); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 12px; }
+        .bd-type-block { border: 1px solid var(--border); border-radius: var(--radius-lg); padding:var(--space-6); margin-bottom:var(--space-6); }
+        .bd-type-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap:var(--space-2); margin-bottom:var(--space-1); }
+        .bd-type-name { font: 700 var(--font-size-heading-xs) var(--font-heading); color: var(--ds-text-1); }
+        .bd-sub-title { font: 700 var(--font-size-label) var(--font-body); color: var(--ds-text-2); text-transform: uppercase; letter-spacing: .06em; margin:0 0 var(--space-3); }
 
         /* ── Color options grid ── */
-        .bd-color-options { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+        .bd-color-options { display: grid; grid-template-columns: repeat(5, 1fr); gap:var(--space-3); }
         @media (max-width:820px) { .bd-color-options { grid-template-columns: repeat(2, 1fr); } }
-        .bd-color-opt { display: flex; flex-direction: column; gap: 8px; }
-        .bd-color-opt-name { font: 600 12px Inter; color: var(--ds-text-1); display: flex; flex-direction: column; gap: 3px; }
-        .bd-color-opt-note { font: 400 11.5px Inter; color: var(--ds-text-3); line-height: 1.4; }
+        .bd-color-opt { display: flex; flex-direction: column; gap:var(--space-2); }
+        .bd-color-opt-name { font: 600 var(--font-size-caption) var(--font-body); color: var(--ds-text-1); display: flex; flex-direction: column; gap:3px; }
+        .bd-color-opt-note { font: 400 var(--font-size-badge) var(--font-body); color: var(--ds-text-3); line-height: 1.4; }
 
         /* ── Dark mode demo container ── */
-        .bd-dark-demo { background: #13172B; border-radius: 10px; padding: 18px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+        .bd-dark-demo { background: var(--neutral-800); border-radius:var(--radius-md); padding:var(--space-5); display: flex; flex-wrap: wrap; gap:var(--space-2); align-items: center; }
 
         /* ── Toggle button demo ── */
         .btn-toggle-on  { background: var(--color-primary); color: var(--color-on-primary); border: 1px solid transparent; }
         .btn-toggle-off { background: transparent; color: var(--color-primary); border: 1px solid var(--color-outline); }
-        .btn-toggle-on, .btn-toggle-off { display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-md);font:600 13.5px Inter;cursor:pointer; }
+        .btn-toggle-on, .btn-toggle-off { display:inline-flex;align-items:center;gap:6px;padding:var(--space-2) var(--space-4);border-radius:var(--radius-md);font:600 var(--font-size-body-md) var(--font-body);cursor:pointer; }
 
         /* ── Overview intro list ── */
         .bd-overview-list {
-          margin: 0 0 32px;
-          padding-left: 20px;
-          font-size: 14px;
+          margin:0 0 var(--space-8);
+          padding-left:var(--space-5);
+          font-size:var(--font-size-body-lg);
           line-height: 2;
           color: var(--ds-text-2);
         }
-        .bd-overview-list li { padding-left: 4px; }
+        .bd-overview-list li { padding-left:var(--space-1); }
         .bd-overview-list b  { color: var(--ds-text-1); font-weight: 600; }
 
         /* ── Button family overview ── */
@@ -5241,27 +5241,27 @@ body { overflow-x: clip; }
           background: var(--color-surface-container-low);
           border: 1px solid var(--border);
           border-radius: var(--radius-lg);
-          padding: 48px 32px 40px;
+          padding:var(--space-12) var(--space-8) var(--space-10);
           margin-bottom: 0;
         }
         /* On narrow screens, shrink the preview padding and let any demo wider than
            the viewport scroll horizontally inside its card instead of being clipped
            (e.g. the large-cell Calendar). */
         @media (max-width: 640px) {
-          .bd-family-wrap { padding: 24px 16px; }
+          .bd-family-wrap { padding:var(--space-6) var(--space-4); }
         }
         .bd-family-stage {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: clamp(24px, 5vw, 64px);
+          gap:clamp(var(--space-6), 5vw, var(--space-16));
           flex-wrap: wrap;
         }
         .bd-family-col {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 20px;
+          gap:var(--space-5);
         }
         .bd-family-btn {
           pointer-events: none;
@@ -5270,41 +5270,41 @@ body { overflow-x: clip; }
         }
         .bd-family-num {
           width: 22px; height: 22px;
-          border-radius: 50%;
+          border-radius:var(--radius-full);
           background: transparent;
           border: 1.5px solid var(--color-on-surface-variant, #474D61);
           color: var(--color-on-surface-variant, #474D61);
           display: flex; align-items: center; justify-content: center;
-          font: 600 11px/1 'Inter', sans-serif;
+          font: 600 var(--font-size-badge)/1 var(--font-body);
         }
 
         /* ── Button family legend ── */
         .bd-family-legend {
-          margin: 16px 0 0;
+          margin:var(--space-4) 0 0;
           padding-left: 0;
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap:var(--space-2);
           counter-reset: legend;
         }
         .bd-family-legend li {
           counter-increment: legend;
           display: flex;
           align-items: center;
-          gap: 10px;
-          font-size: 13px;
+          gap:var(--space-2);
+          font-size:var(--font-size-label);
           color: var(--ds-text-2);
         }
         .bd-family-legend li::before {
           content: counter(legend);
           width: 22px; height: 22px;
-          border-radius: 50%;
+          border-radius:var(--radius-full);
           background: transparent;
           border: 1.5px solid var(--color-on-surface-variant, #474D61);
           color: var(--color-on-surface-variant, #474D61);
           display: flex; align-items: center; justify-content: center;
-          font: 600 11px/1 'Inter', sans-serif;
+          font: 600 var(--font-size-badge)/1 var(--font-body);
           flex-shrink: 0;
         }
         /* ── Specs tab: two-column layout (content + sticky TOC) ── */
@@ -5312,7 +5312,7 @@ body { overflow-x: clip; }
           display: grid;
           grid-template-columns: minmax(0,1fr) 200px;
           grid-template-rows: auto;
-          gap: 0 56px;
+          gap:0 56px;
           align-items: start;
         }
         /* TOC goes in column 2, row 1 */
@@ -5331,7 +5331,7 @@ body { overflow-x: clip; }
         }
         /* Scroll offset so section headings clear the fixed top bar */
         .bs-specs-layout .docs-section {
-          scroll-margin-top: 84px;
+          scroll-margin-top:84px;
         }
         @media (max-width: 860px) {
           .bs-specs-layout {
@@ -5341,37 +5341,37 @@ body { overflow-x: clip; }
             position: sticky;
             top: 56px;
             z-index: 20;
-            margin: 0 0 24px;
-            padding: 14px 0 4px;
+            margin:0 0 var(--space-6);
+            padding:var(--space-4) 0 var(--space-1);
             background: var(--ds-content-bg, var(--bg));
           }
         }
 
         /* ── Specs tab: Variants (simplified) ── */
-        .bd-var-block { display:flex; align-items:flex-start; gap:32px; padding:24px 0; border-bottom:1px solid var(--border); }
+        .bd-var-block { display:flex; align-items:flex-start; gap:var(--space-8); padding:var(--space-6) 0; border-bottom:1px solid var(--border); }
         .bd-var-block:last-of-type { border-bottom:none; }
-        .bd-var-preview { display:flex; flex-direction:column; align-items:center; gap:16px; min-width:260px; background:var(--color-surface-container-low,var(--card-bg)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px 24px; }
-        .bd-var-num { width:28px; height:28px; border-radius:50%; background:var(--color-on-surface); color:var(--color-surface); font:700 12px Inter; display:flex; align-items:center; justify-content:center; }
-        .bd-var-buttons { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-        .bd-var-meta { flex:1; min-width:0; padding-top:4px; }
-        .bd-var-title { font:700 14px 'Epilogue',sans-serif; color:var(--ds-text-1); margin:0 0 12px; }
-        .bd-var-row { display:flex; align-items:center; gap:10px; padding:6px 0; border-bottom:1px solid var(--border); font-size:13px; color:var(--ds-text-2); }
+        .bd-var-preview { display:flex; flex-direction:column; align-items:center; gap:var(--space-4); min-width:260px; background:var(--color-surface-container-low,var(--card-bg)); border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--space-8) var(--space-6); }
+        .bd-var-num { width:28px; height:28px; border-radius:var(--radius-full); background:var(--color-on-surface); color:var(--color-surface); font:700 var(--font-size-caption) var(--font-body); display:flex; align-items:center; justify-content:center; }
+        .bd-var-buttons { display:flex; flex-wrap:wrap; gap:var(--space-2); justify-content:center; }
+        .bd-var-meta { flex:1; min-width:0; padding-top:var(--space-1); }
+        .bd-var-title { font:700 var(--font-size-body-lg) var(--font-heading); color:var(--ds-text-1); margin:0 0 var(--space-3); }
+        .bd-var-row { display:flex; align-items:center; gap:var(--space-2); padding:6px 0; border-bottom:1px solid var(--border); font-size:var(--font-size-label); color:var(--ds-text-2); }
         .bd-var-row:last-child { border-bottom:none; }
         .bd-var-row span { min-width:90px; }
         @media (max-width:680px) { .bd-var-block { flex-direction:column; } .bd-var-preview { min-width:0; width:100%; } }
 
         /* ── Specs tab: Configurations diagram ── */
         .bd-cfg-diagram { border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; }
-        .bd-cfg-row { display:flex; align-items:center; gap:24px; padding:20px 24px; border-bottom:1px solid var(--border); }
+        .bd-cfg-row { display:flex; align-items:center; gap:var(--space-6); padding:var(--space-5) var(--space-6); border-bottom:1px solid var(--border); }
         .bd-cfg-row:last-child { border-bottom:none; }
-        .bd-cfg-num { flex:none; width:24px; height:24px; border-radius:50%; background:var(--ds-card); border:1.5px solid var(--ds-text-1); color:var(--ds-text-1); font:600 11px/1 'Inter',sans-serif; display:flex; align-items:center; justify-content:center; }
-        .bd-cfg-items { display:flex; flex-wrap:wrap; gap:10px; align-items:flex-end; }
+        .bd-cfg-num { flex:none; width:24px; height:24px; border-radius:var(--radius-full); background:var(--ds-card); border:1.5px solid var(--ds-text-1); color:var(--ds-text-1); font:600 var(--font-size-badge)/1 var(--font-body); display:flex; align-items:center; justify-content:center; }
+        .bd-cfg-items { display:flex; flex-wrap:wrap; gap:var(--space-2); align-items:flex-end; }
         .bd-cfg-item-col { display:flex; flex-direction:column; align-items:flex-start; }
         .bd-cfg-table td[rowspan] { vertical-align:middle; font-weight:600; color:var(--ds-text-1); }
         @media (max-width:600px) { .bd-cfg-row { flex-direction:column; align-items:flex-start; } }
 
         /* ── Specs tab: Color ── */
-        .bd-swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:middle; margin-right:4px; }
+        .bd-swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:middle; margin-right:var(--space-1); }
 
         /* ── Specs tab: Anatomy ── */
         /* ── Anatomy MD3-style canvas ── */
@@ -5380,7 +5380,7 @@ body { overflow-x: clip; }
           background-color: var(--bd-anat-bg, #F5F3FF);
           background-image: radial-gradient(circle, var(--bd-anat-dot, rgba(100,80,180,.18)) 1px, transparent 1px);
           background-size: 20px 20px;
-          border-radius: var(--radius-lg); overflow: visible; margin-bottom: 20px;
+          border-radius: var(--radius-lg); overflow: visible; margin-bottom:var(--space-5);
           display: flex; align-items: center; justify-content: center;
         }
         [data-theme="dark"] .bd-anat-canvas {
@@ -5391,55 +5391,55 @@ body { overflow-x: clip; }
         /* Pin circles — MD3 style: white bg, dark border, dark number */
         .bd-anat-pin {
           position: absolute;
-          width: 24px; height: 24px; border-radius: 50%;
+          width: 24px; height: 24px; border-radius:var(--radius-full);
           background: var(--ds-card); border: 1.5px solid var(--ds-text-1);
-          font: 600 11px/1 'Inter', sans-serif; color: var(--ds-text-1);
+          font: 600 var(--font-size-badge)/1 var(--font-body); color: var(--ds-text-1);
           display: flex; align-items: center; justify-content: center;
           z-index: 10;
         }
         /* connector line: thin horizontal/vertical pseudo line */
         .bd-anat-pin::after {
           content: ''; position: absolute;
-          background: var(--ds-text-1); border-radius: 1px;
+          background: var(--ds-text-1); border-radius:1px;
         }
         /* Pin 1 — Container — left side */
         .bd-anat-pin-1 { top: 50%; transform: translateY(-50%); left: -56px; }
         .bd-anat-pin-1::after { width: 22px; height: 1.5px; top: 50%; right: -23px; transform: translateY(-50%); }
         /* Small endpoint dot at line tip */
-        .bd-anat-pin-1::before { content:''; position:absolute; width:5px; height:5px; border-radius:50%; background:var(--ds-text-1); top:50%; right:-28px; transform:translateY(-50%); }
+        .bd-anat-pin-1::before { content:''; position:absolute; width:5px; height:5px; border-radius:var(--radius-full); background:var(--ds-text-1); top:50%; right:-28px; transform:translateY(-50%); }
         /* Pin 2 — Label text — top center (over label) */
         .bd-anat-pin-2 { top: -56px; left: 60%; transform: translateX(-50%); }
         .bd-anat-pin-2::after { width: 1.5px; height: 22px; left: 50%; bottom: -23px; transform: translateX(-50%); }
-        .bd-anat-pin-2::before { content:''; position:absolute; width:5px; height:5px; border-radius:50%; background:var(--ds-text-1); left:50%; bottom:-28px; transform:translateX(-50%); }
+        .bd-anat-pin-2::before { content:''; position:absolute; width:5px; height:5px; border-radius:var(--radius-full); background:var(--ds-text-1); left:50%; bottom:-28px; transform:translateX(-50%); }
         /* Pin 3 — Icon (optional) — bottom left (over icon) */
         .bd-anat-pin-3 { bottom: -56px; left: 18%; transform: translateX(-50%); }
         .bd-anat-pin-3::after { width: 1.5px; height: 22px; left: 50%; top: -23px; transform: translateX(-50%); }
-        .bd-anat-pin-3::before { content:''; position:absolute; width:5px; height:5px; border-radius:50%; background:var(--ds-text-1); left:50%; top:-28px; transform:translateX(-50%); }
+        .bd-anat-pin-3::before { content:''; position:absolute; width:5px; height:5px; border-radius:var(--radius-full); background:var(--ds-text-1); left:50%; top:-28px; transform:translateX(-50%); }
 
-        .bd-anat-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; margin-top: 52px; }
-        .bd-anat-legend li { display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: var(--ds-text-1); }
-        .bd-anat-legend-num { width: 24px; height: 24px; border-radius: 50%; background: var(--ds-card); border: 1.5px solid var(--ds-text-1); font: 600 11px/1 'Inter', sans-serif; color: var(--ds-text-1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .bd-anat-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap:var(--space-3); margin-top:52px; }
+        .bd-anat-legend li { display: flex; align-items: center; gap:var(--space-3); font-size:var(--font-size-body-md); color: var(--ds-text-1); }
+        .bd-anat-legend-num { width: 24px; height: 24px; border-radius:var(--radius-full); background: var(--ds-card); border: 1.5px solid var(--ds-text-1); font: 600 var(--font-size-badge)/1 var(--font-body); color: var(--ds-text-1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
         /* ── Specs tab: States ── */
-        .bd-states-row { display:flex; flex-wrap:wrap; gap:12px; }
-        .bd-state-cell { display:flex; flex-direction:column; align-items:center; gap:10px; flex:1; min-width:100px; border:1px solid var(--border); border-radius:var(--radius-md); padding:18px 12px; background:var(--card-bg); }
+        .bd-states-row { display:flex; flex-wrap:wrap; gap:var(--space-3); }
+        .bd-state-cell { display:flex; flex-direction:column; align-items:center; gap:var(--space-2); flex:1; min-width:100px; border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--space-5) var(--space-3); background:var(--card-bg); }
         .bd-state-preview { display:flex; align-items:center; justify-content:center; min-height:44px; }
-        .bd-state-lbl { font:600 11px Inter; text-transform:uppercase; letter-spacing:.05em; color:var(--ds-text-3); }
-        .bd-state-tok { font:400 10.5px 'DM Mono',monospace; color:var(--ds-text-3); text-align:center; line-height:1.5; }
+        .bd-state-lbl { font:600 var(--font-size-badge) var(--font-body); text-transform:uppercase; letter-spacing:.05em; color:var(--ds-text-3); }
+        .bd-state-tok { font:400 10.5px var(--font-mono); color:var(--ds-text-3); text-align:center; line-height:1.5; }
 
         /* ── Specs tab: Shape morph ── */
         .bd-shape-matrix { border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; }
-        .bd-shape-row { display:flex; align-items:center; gap:24px; padding:16px 20px; border-bottom:1px solid var(--border); }
+        .bd-shape-row { display:flex; align-items:center; gap:var(--space-6); padding:var(--space-4) var(--space-5); border-bottom:1px solid var(--border); }
         .bd-shape-row:last-child { border-bottom:none; }
-        .bd-shape-label { font:600 12.5px Inter; color:var(--ds-text-2); min-width:56px; }
-        .bd-shape-cells { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+        .bd-shape-label { font:600 var(--font-size-body-sm) var(--font-body); color:var(--ds-text-2); min-width:56px; }
+        .bd-shape-cells { display:flex; flex-wrap:wrap; gap:var(--space-2); align-items:center; }
 
         /* ── Specs tab: Measurements ── */
-        .bd-measure-diagram { border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px 20px 20px; background:var(--card-bg); display:flex; flex-direction:column; align-items:center; gap:8px; }
-        .bd-measure-btn-wrap { display:flex; flex-direction:column; align-items:center; gap:8px; }
-        .bd-measure-h-line,.bd-measure-pad-y { font:600 11.5px 'DM Mono',monospace; color:var(--ds-accent); text-align:center; }
+        .bd-measure-diagram { border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--space-8) var(--space-5) var(--space-5); background:var(--card-bg); display:flex; flex-direction:column; align-items:center; gap:var(--space-2); }
+        .bd-measure-btn-wrap { display:flex; flex-direction:column; align-items:center; gap:var(--space-2); }
+        .bd-measure-h-line,.bd-measure-pad-y { font:600 var(--font-size-badge) var(--font-mono); color:var(--ds-accent); text-align:center; }
         .bd-measure-btn-row { display:flex; align-items:center; gap:0; }
-        .bd-measure-pad-x { font:600 11px 'DM Mono',monospace; color:var(--color-outline); padding:0 4px; white-space:nowrap; }
+        .bd-measure-pad-x { font:600 var(--font-size-badge) var(--font-mono); color:var(--color-outline); padding:0 var(--space-1); white-space:nowrap; }
 
         /* ── States strip (hover/focus/pressed simulation) ── */
         .focus-ring { outline:2px solid var(--color-focus); outline-offset:2px; box-shadow:0 0 0 4px var(--color-focus-ring); }
@@ -5465,7 +5465,7 @@ body { overflow-x: clip; }
           </ul>
 
           <!-- Design-decision callout -->
-          <div class="bd-callout" style="margin-bottom:28px;">
+          <div class="bd-callout" style="margin-bottom:var(--space-8);">
             <span class="bd-ico">△</span>
             <div>
               <strong>Decisiones de diseño respecto a Material Design 3</strong><br>
@@ -5550,14 +5550,14 @@ body { overflow-x: clip; }
           </div>
 
           <!-- Configuration legend -->
-          <ol class="bd-anat-legend" style="margin-top:12px">
+          <ol class="bd-anat-legend" style="margin-top:var(--space-3)">
             <li><span class="bd-anat-legend-num">1</span> Tamaño</li>
             <li><span class="bd-anat-legend-num">2</span> Color</li>
             <li><span class="bd-anat-legend-num">3</span> Padding</li>
           </ol>
 
           <!-- Reference table -->
-          <div class="ds-table-wrap" style="margin-top:24px">
+          <div class="ds-table-wrap" style="margin-top:var(--space-6)">
             <table class="docs-props-table bd-cfg-table">
               <thead><tr><th>Categoría</th><th>Configuración</th></tr></thead>
               <tbody>
@@ -5570,7 +5570,7 @@ body { overflow-x: clip; }
                 </tr>
                 <tr>
                   <td>Color</td>
-                  <td>Relleno (predeterminado), tonal, elevado, con borde, texto <span style="color:var(--ds-text-3);font-size:12px">· <code>variant="elevated"</code> — contenedor <code>primary-container</code> + <code>--btn-elevation</code> (sombra visible en claro y oscuro)</span></td>
+                  <td>Relleno (predeterminado), tonal, elevado, con borde, texto <span style="color:var(--ds-text-3);font-size:var(--font-size-caption)">· <code>variant="elevated"</code> — contenedor <code>primary-container</code> + <code>--btn-elevation</code> (sombra visible en claro y oscuro)</span></td>
                 </tr>
                 <tr>
                   <td rowspan="2">Padding del botón</td>
@@ -5588,7 +5588,7 @@ body { overflow-x: clip; }
         <section class="docs-section" id="bs-tokens">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Usá el selector de variante para explorar el conjunto de tokens de cada botón, organizado por estado de interacción. Todos los tokens son <b>Color Roles globales de Embassy</b> definidos en <code>css/variables.css</code> — no son tokens propios del componente botón ni de Material Design 3 (cuya nomenclatura es diferente). Los botones consumen roles semánticos globales directamente; no existen tokens de componente dedicados (<code>--button-*</code>).</p>
-          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="button"></div></div>
+          <div class="bd-family-wrap" style="margin:var(--space-2) 0 var(--space-5);"><div class="token-panel" data-token-panel="button"></div></div>
 
           <div class="bt-tok-wrap">
 
@@ -5674,8 +5674,8 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td><code>--color-primary-container</code></td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Igual que Habilitado</td></tr>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:11px;color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -5705,8 +5705,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:11px;color:var(--text-muted)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:11px;color:var(--text-muted)">neutral-600</span></span></td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-600</span></span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                       <tr><td>none</td><td>Sombra</td><td colspan="2" class="bt-tok-note">Elevación cero — sin sombra al deshabilitar</td></tr>
                       <tr><td><code>pointer-events: none</code></td><td>Interacción</td><td colspan="2" class="bt-tok-note">No aplican estados de hover, foco ni presión</td></tr>
                     </tbody></table>
@@ -5761,8 +5761,8 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td><code>--color-primary-hover</code></td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Igual que Hover</td></tr>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:11px;color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -5792,8 +5792,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:11px;color:var(--text-muted)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:11px;color:var(--text-muted)">neutral-600</span></span></td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-600</span></span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                       <tr><td><code>pointer-events: none</code></td><td>Interacción</td><td colspan="2" class="bt-tok-note">No aplican estados de hover, foco ni presión</td></tr>
                     </tbody></table>
                   </div>
@@ -5842,8 +5842,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:11px;color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -5869,8 +5869,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:11px;color:var(--text-muted)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:11px;color:var(--text-muted)">neutral-600</span></span></td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-600</span></span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -5918,8 +5918,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:11px;color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -5946,7 +5946,7 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td>transparent</td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Sin relleno de fondo</td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                       <tr><td><code>--color-outline-variant</code></td><td>Border (1px)</td><td colspan="2" class="bt-tok-note">Borde atenuado en estado deshabilitado</td></tr>
                     </tbody></table>
                   </div>
@@ -5994,8 +5994,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:11px;color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -6022,7 +6022,7 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td>transparent</td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Sin relleno de fondo</td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -6069,8 +6069,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:11px;color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -6097,7 +6097,7 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td>transparent</td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Sin relleno de fondo</td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:11px;color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                       <tr><td><code>--color-outline-variant</code></td><td>Border (1px)</td><td colspan="2" class="bt-tok-note">Borde atenuado en estado deshabilitado</td></tr>
                     </tbody></table>
                   </div>
@@ -6197,7 +6197,7 @@ body { overflow-x: clip; }
                     <tr><td>—</td><td>Padding vertical</td><td>14px</td><td>—</td></tr>
                     <tr><td>—</td><td>Padding horizontal (solo etiqueta)</td><td>30px</td><td>—</td></tr>
                     <tr><td>—</td><td>Tamaño de fuente de etiqueta</td><td>16px</td><td>—</td></tr>
-                    <tr><td>—</td><td>Peso de fuente</td><td><b>700</b> <span style="font-size:11px;color:var(--text-muted)">⚑ distinto del resto de tamaños (600)</span></td><td>—</td></tr>
+                    <tr><td>—</td><td>Peso de fuente</td><td><b>700</b> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">⚑ distinto del resto de tamaños (600)</span></td><td>—</td></tr>
                     <tr><td>—</td><td>Tamaño de ícono</td><td>18px</td><td>—</td></tr>
                     <tr><td><code>--space-2</code></td><td>Espacio ícono–etiqueta</td><td>8px</td><td>—</td></tr>
                     <tr><td><code>--radius-lg</code></td><td>Radio de borde</td><td>12px</td><td>CornerFull (pill) ⚑</td></tr>
@@ -6234,7 +6234,7 @@ body { overflow-x: clip; }
           <ol class="bd-anat-legend">
             <li>
               <span class="bd-anat-legend-num">1</span>
-              <span><b>Contenedor</b> — <code>border-radius: var(--radius-md)</code> (8 px, MD) · <code>height: 36px</code> · <code>padding: 8px 24px</code></span>
+              <span><b>Contenedor</b> — <code>border-radius: var(--radius-md)</code> (8 px, MD) · <code>height: 36px</code> · <code>padding:var(--space-2) var(--space-6)</code></span>
             </li>
             <li>
               <span class="bd-anat-legend-num">2</span>
@@ -6242,7 +6242,7 @@ body { overflow-x: clip; }
             </li>
             <li>
               <span class="bd-anat-legend-num">3</span>
-              <span><b>Ícono</b> (opcional) — <code>16 × 16 px</code> (MD), escala con el tamaño del botón · <code>gap: 8px</code> con la etiqueta, siempre a la izquierda</span>
+              <span><b>Ícono</b> (opcional) — <code>16 × 16 px</code> (MD), escala con el tamaño del botón · <code>gap:var(--space-2)</code> con la etiqueta, siempre a la izquierda</span>
             </li>
           </ol>
         </section>
@@ -6252,62 +6252,62 @@ body { overflow-x: clip; }
         <!-- ══ 6. STATES ══ -->
         <section class="docs-section" id="bs-states">
           <h2 class="docs-section-title">Estados</h2>
-          <p class="docs-section-desc" style="margin-bottom:28px">Los estados son representaciones visuales que comunican el estado de un componente o elemento interactivo.</p>
+          <p class="docs-section-desc" style="margin-bottom:var(--space-8)">Los estados son representaciones visuales que comunican el estado de un componente o elemento interactivo.</p>
 
           <div>
-            <div style="margin-bottom:28px">
+            <div style="margin-bottom:var(--space-8)">
               <h3 class="bst-variant-title">Botón relleno</h3>
               <p class="bst-variant-desc">La acción de mayor jerarquía. Una por contexto de pantalla.</p>
               <p class="bst-sub-head">Predeterminado</p>
-              <div style="display:flex;flex-wrap:wrap;gap:24px;padding:20px;background:var(--color-surface-variant);border-radius:var(--radius-md)">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-primary" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Habilitado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-primary" type="button" disabled>Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Deshabilitado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-primary" type="button" style="background:var(--color-primary-hover);transform:translateY(-1px)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Hover</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-primary focus-ring" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Enfocado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-primary" type="button" style="filter:brightness(0.88)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Presionado</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:var(--space-6);padding:var(--space-5);background:var(--color-surface-variant);border-radius:var(--radius-md)">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-primary" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Habilitado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-primary" type="button" disabled>Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Deshabilitado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-primary" type="button" style="background:var(--color-primary-hover);transform:translateY(-1px)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Hover</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-primary focus-ring" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Enfocado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-primary" type="button" style="filter:brightness(0.88)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Presionado</span></div>
               </div>
             </div>
-            <div style="margin-bottom:28px">
+            <div style="margin-bottom:var(--space-8)">
               <h3 class="bst-variant-title">Botón tonal</h3>
               <p class="bst-variant-desc">Acción de apoyo que acompaña a un Relleno sin competir.</p>
               <p class="bst-sub-head">Predeterminado</p>
-              <div style="display:flex;flex-wrap:wrap;gap:24px;padding:20px;background:var(--color-surface-variant);border-radius:var(--radius-md)">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-secondary" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Habilitado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-secondary" type="button" disabled>Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Deshabilitado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-secondary" type="button" style="background:color-mix(in srgb, var(--color-secondary-container) 88%, #000);transform:translateY(-1px)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Hover</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-secondary focus-ring" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Enfocado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-secondary" type="button" style="filter:brightness(0.92)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Presionado</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:var(--space-6);padding:var(--space-5);background:var(--color-surface-variant);border-radius:var(--radius-md)">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-secondary" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Habilitado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-secondary" type="button" disabled>Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Deshabilitado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-secondary" type="button" style="background:color-mix(in srgb, var(--color-secondary-container) 88%, #000);transform:translateY(-1px)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Hover</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-secondary focus-ring" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Enfocado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-secondary" type="button" style="filter:brightness(0.92)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Presionado</span></div>
               </div>
             </div>
-            <div style="margin-bottom:28px">
+            <div style="margin-bottom:var(--space-8)">
               <h3 class="bst-variant-title">Botón con borde</h3>
               <p class="bst-variant-desc">Alternativa, cancelar o volver junto a un Relleno o Tonal.</p>
               <p class="bst-sub-head">Predeterminado</p>
-              <div style="display:flex;flex-wrap:wrap;gap:24px;padding:20px;background:var(--color-surface-variant);border-radius:var(--radius-md)">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-tertiary" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Habilitado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-tertiary" type="button" disabled>Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Deshabilitado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-tertiary" type="button" style="background:var(--color-surface-variant);border-color:var(--color-primary)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Hover</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-tertiary focus-ring" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Enfocado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-tertiary" type="button" style="background:var(--color-surface-container-high)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Presionado</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:var(--space-6);padding:var(--space-5);background:var(--color-surface-variant);border-radius:var(--radius-md)">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-tertiary" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Habilitado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-tertiary" type="button" disabled>Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Deshabilitado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-tertiary" type="button" style="background:var(--color-surface-variant);border-color:var(--color-primary)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Hover</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-tertiary focus-ring" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Enfocado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-tertiary" type="button" style="background:var(--color-surface-container-high)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Presionado</span></div>
               </div>
             </div>
-            <div style="margin-bottom:28px">
+            <div style="margin-bottom:var(--space-8)">
               <h3 class="bst-variant-title">Botón de texto</h3>
               <p class="bst-variant-desc">Acción de baja prioridad en diálogos o superficies saturadas.</p>
               <p class="bst-sub-head">Predeterminado</p>
-              <div style="display:flex;flex-wrap:wrap;gap:24px;padding:20px;background:var(--color-surface-variant);border-radius:var(--radius-md)">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-text" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Habilitado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-text" type="button" disabled>Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Deshabilitado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-text" type="button" style="background:color-mix(in srgb, var(--color-primary) 10%, transparent)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Hover</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-text focus-ring" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Enfocado</span></div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><button class="btn-text" type="button" style="background:color-mix(in srgb, var(--color-primary) 16%, transparent)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Presionado</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:var(--space-6);padding:var(--space-5);background:var(--color-surface-variant);border-radius:var(--radius-md)">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-text" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Habilitado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-text" type="button" disabled>Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Deshabilitado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-text" type="button" style="background:color-mix(in srgb, var(--color-primary) 10%, transparent)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Hover</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-text focus-ring" type="button">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Enfocado</span></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2)"><button class="btn-text" type="button" style="background:color-mix(in srgb, var(--color-primary) 16%, transparent)">Action</button><span class="bd-state-lbl" style="text-transform:none;letter-spacing:normal">Presionado</span></div>
               </div>
             </div>
           </div>
 
           <!-- ── State layer reference table ── -->
-          <h3 class="docs-sub-title" style="margin-top:40px">Referencia de capas de estado (MD3)</h3>
-          <p style="color:var(--ds-text-2);font-size:13.5px;margin-bottom:16px">Las capas de estado de MD3 son superposiciones de color semitransparente aplicadas sobre el componente. El color de la capa depende de la variante; la opacidad es consistente entre variantes para un mismo estado.</p>
+          <h3 class="docs-sub-title" style="margin-top:var(--space-10)">Referencia de capas de estado (MD3)</h3>
+          <p style="color:var(--ds-text-2);font-size:var(--font-size-body-md);margin-bottom:var(--space-4)">Las capas de estado de MD3 son superposiciones de color semitransparente aplicadas sobre el componente. El color de la capa depende de la variante; la opacidad es consistente entre variantes para un mismo estado.</p>
 
           <div class="ds-table-wrap">
             <table class="docs-props-table">
@@ -6359,7 +6359,7 @@ body { overflow-x: clip; }
               </tbody>
             </table>
           </div>
-          <div class="bd-callout" style="margin-top:12px">
+          <div class="bd-callout" style="margin-top:var(--space-3)">
             <span class="bd-ico">⚑</span>
             <span><b>Implementación en Embassy:</b> El botón de texto usa <code>color-mix(in srgb, var(--color-primary) 10%, transparent)</code> — alineado al modelo MD3. El botón Relleno usa <code>--color-primary-hover</code> y el Tonal usa <code>color-mix(in srgb, var(--color-secondary-container) 88%, #000)</code> en lugar de superposiciones transparentes. Funcionalmente equivalente; la unificación al modelo MD3 está en el roadmap.</span>
           </div>
@@ -6372,17 +6372,17 @@ body { overflow-x: clip; }
 
           <!-- ── Tamaños de botón ── -->
           <h3 class="bd-sub-title">Tamaños de botón</h3>
-          <p class="docs-section-desc" style="margin-bottom:20px">Embassy define cinco tamaños oficiales: XS, SM, MD, LG y XL. El padding horizontal es simétrico. El número sobre la zona de ícono indica el ancho de la caja de ícono. Las alturas y radios siguen el sistema de tokens de Embassy — no la escala MD3.</p>
+          <p class="docs-section-desc" style="margin-bottom:var(--space-5)">Embassy define cinco tamaños oficiales: XS, SM, MD, LG y XL. El padding horizontal es simétrico. El número sobre la zona de ícono indica el ancho de la caja de ícono. Las alturas y radios siguen el sistema de tokens de Embassy — no la escala MD3.</p>
 
-          <div style="display:flex;flex-direction:column;gap:20px;background:var(--color-surface-container-lowest);border:1px solid var(--border);border-radius:12px;padding:28px 24px">
-            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:16px"><div style="font:700 12px 'Inter',sans-serif;color:var(--color-on-surface-variant)">XS</div><div style="display:flex;justify-content:flex-start;padding-left:40px"><button class="btn-primary btn-xs" type="button">Botón</button></div><code style="font:500 11px var(--font-mono,monospace);color:var(--ds-accent)">--radius-sm · 24dp</code></div>
-            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:16px"><div style="font:700 12px 'Inter',sans-serif;color:var(--color-on-surface-variant)">SM</div><div style="display:flex;justify-content:flex-start;padding-left:40px"><button class="btn-primary btn-sm" type="button">Botón</button></div><code style="font:500 11px var(--font-mono,monospace);color:var(--ds-accent)">--radius-sm · 32dp</code></div>
-            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:16px"><div style="font:700 12px 'Inter',sans-serif;color:var(--color-on-surface-variant)">MD</div><div style="display:flex;justify-content:flex-start;padding-left:40px"><button class="btn-primary" type="button">Botón</button></div><code style="font:500 11px var(--font-mono,monospace);color:var(--ds-accent)">--radius-md · 36dp</code></div>
-            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:16px"><div style="font:700 12px 'Inter',sans-serif;color:var(--color-on-surface-variant)">LG</div><div style="display:flex;justify-content:flex-start;padding-left:40px"><button class="btn-primary btn-lg" type="button">Botón</button></div><code style="font:500 11px var(--font-mono,monospace);color:var(--ds-accent)">--radius-md · 44dp</code></div>
-            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:16px"><div style="font:700 12px 'Inter',sans-serif;color:var(--color-on-surface-variant)">XL</div><div style="display:flex;justify-content:flex-start;padding-left:40px"><button class="btn-primary btn-xl" type="button">Botón</button></div><code style="font:500 11px var(--font-mono,monospace);color:var(--ds-accent)">--radius-lg · 52dp</code></div>
+          <div style="display:flex;flex-direction:column;gap:var(--space-5);background:var(--color-surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-8) var(--space-6)">
+            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:var(--space-4)"><div style="font:700 var(--font-size-caption) var(--font-body);color:var(--color-on-surface-variant)">XS</div><div style="display:flex;justify-content:flex-start;padding-left:var(--space-10)"><button class="btn-primary btn-xs" type="button">Botón</button></div><code style="font:500 var(--font-size-badge) var(--font-mono,monospace);color:var(--ds-accent)">--radius-sm · 24dp</code></div>
+            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:var(--space-4)"><div style="font:700 var(--font-size-caption) var(--font-body);color:var(--color-on-surface-variant)">SM</div><div style="display:flex;justify-content:flex-start;padding-left:var(--space-10)"><button class="btn-primary btn-sm" type="button">Botón</button></div><code style="font:500 var(--font-size-badge) var(--font-mono,monospace);color:var(--ds-accent)">--radius-sm · 32dp</code></div>
+            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:var(--space-4)"><div style="font:700 var(--font-size-caption) var(--font-body);color:var(--color-on-surface-variant)">MD</div><div style="display:flex;justify-content:flex-start;padding-left:var(--space-10)"><button class="btn-primary" type="button">Botón</button></div><code style="font:500 var(--font-size-badge) var(--font-mono,monospace);color:var(--ds-accent)">--radius-md · 36dp</code></div>
+            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:var(--space-4)"><div style="font:700 var(--font-size-caption) var(--font-body);color:var(--color-on-surface-variant)">LG</div><div style="display:flex;justify-content:flex-start;padding-left:var(--space-10)"><button class="btn-primary btn-lg" type="button">Botón</button></div><code style="font:500 var(--font-size-badge) var(--font-mono,monospace);color:var(--ds-accent)">--radius-md · 44dp</code></div>
+            <div style="display:grid;grid-template-columns:48px minmax(0,1fr) 130px;align-items:center;gap:var(--space-4)"><div style="font:700 var(--font-size-caption) var(--font-body);color:var(--color-on-surface-variant)">XL</div><div style="display:flex;justify-content:flex-start;padding-left:var(--space-10)"><button class="btn-primary btn-xl" type="button">Botón</button></div><code style="font:500 var(--font-size-badge) var(--font-mono,monospace);color:var(--ds-accent)">--radius-lg · 52dp</code></div>
           </div>
 
-          <div class="ds-table-wrap" style="margin-top:16px">
+          <div class="ds-table-wrap" style="margin-top:var(--space-4)">
             <table class="docs-props-table">
               <thead>
                 <tr><th>#</th><th>Nombre</th><th>Clase</th><th>Altura</th><th>Padding H</th><th>Ícono</th><th>Gap</th><th>Radio de esquinas</th></tr>
@@ -6398,17 +6398,17 @@ body { overflow-x: clip; }
           </div>
 
           <!-- ── Área de objetivo táctil ── -->
-          <h3 class="bd-sub-title" style="margin-top:40px">Área de objetivo táctil</h3>
-          <p class="docs-section-desc" style="margin-bottom:20px">El área mínima de toque recomendada es 48×48dp (WCAG 2.5.5). <b>Fila A:</b> el botón tiene 48dp de alto — la zona de toque coincide con su tamaño visual. <b>Fila B:</b> el botón es más chico que 48dp — la zona de toque (punteada) se extiende invisiblemente más allá de los bordes del componente.</p>
+          <h3 class="bd-sub-title" style="margin-top:var(--space-10)">Área de objetivo táctil</h3>
+          <p class="docs-section-desc" style="margin-bottom:var(--space-5)">El área mínima de toque recomendada es 48×48dp (WCAG 2.5.5). <b>Fila A:</b> el botón tiene 48dp de alto — la zona de toque coincide con su tamaño visual. <b>Fila B:</b> el botón es más chico que 48dp — la zona de toque (punteada) se extiende invisiblemente más allá de los bordes del componente.</p>
 
-          <div style="display:flex;flex-direction:column;gap:24px;background:var(--color-surface-container-lowest);border:1px solid var(--border);border-radius:12px;padding:28px 24px">
-            <div style="display:flex;align-items:center;gap:20px">
-              <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:48px"><span aria-hidden="true" style="position:absolute;inset:0;border:1px dashed var(--ds-accent);border-radius:8px;min-width:48px;min-height:48px"></span><button class="btn-primary btn-xl" type="button">Botón</button></div>
-              <span style="font:400 12px 'Inter',sans-serif;color:var(--color-on-surface-variant)">Fila A — el botón mide ≥ 48dp: la zona táctil coincide con el componente.</span>
+          <div style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--color-surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-8) var(--space-6)">
+            <div style="display:flex;align-items:center;gap:var(--space-5)">
+              <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:48px"><span aria-hidden="true" style="position:absolute;inset:0;border:1px dashed var(--ds-accent);border-radius:var(--radius-md);min-width:48px;min-height:48px"></span><button class="btn-primary btn-xl" type="button">Botón</button></div>
+              <span style="font:400 var(--font-size-caption) var(--font-body);color:var(--color-on-surface-variant)">Fila A — el botón mide ≥ 48dp: la zona táctil coincide con el componente.</span>
             </div>
-            <div style="display:flex;align-items:center;gap:20px">
-              <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:48px"><span aria-hidden="true" style="position:absolute;inset:0;border:1px dashed var(--ds-accent);border-radius:8px;min-width:48px;min-height:48px"></span><button class="btn-primary btn-sm" type="button">Botón</button></div>
-              <span style="font:400 12px 'Inter',sans-serif;color:var(--color-on-surface-variant)">Fila B — el botón mide &lt; 48dp: la zona táctil (punteada) se extiende más allá del componente.</span>
+            <div style="display:flex;align-items:center;gap:var(--space-5)">
+              <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:48px"><span aria-hidden="true" style="position:absolute;inset:0;border:1px dashed var(--ds-accent);border-radius:var(--radius-md);min-width:48px;min-height:48px"></span><button class="btn-primary btn-sm" type="button">Botón</button></div>
+              <span style="font:400 var(--font-size-caption) var(--font-body);color:var(--color-on-surface-variant)">Fila B — el botón mide &lt; 48dp: la zona táctil (punteada) se extiende más allá del componente.</span>
             </div>
           </div>
         </section>
@@ -6418,15 +6418,15 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Forma y radio</h2>
           <div class="bd-card">
             <p class="bd-eyebrow">Escala de radio por tamaño</p>
-            <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px;padding:20px 0">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-xs" type="button" style="pointer-events:none">Acción</button><span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">XS · <code>--radius-sm</code> · 4px</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-sm" type="button" style="pointer-events:none">Acción</button><span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">SM · <code>--radius-sm</code> · 4px</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary" type="button" style="pointer-events:none">Acción MD</button><span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">MD · <code>--radius-md</code> · 8px</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-lg" type="button" style="pointer-events:none">Acción LG</button><span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">LG · <code>--radius-md</code> · 8px</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-xl" type="button" style="pointer-events:none">Acción XL</button><span style="font-size:11px;color:var(--text-secondary);font-family:var(--font-mono)">XL · <code>--radius-lg</code> · 12px</span></div>
+            <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--space-4);padding:var(--space-5) 0">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-xs" type="button" style="pointer-events:none">Acción</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">XS · <code>--radius-sm</code> · 4px</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-sm" type="button" style="pointer-events:none">Acción</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">SM · <code>--radius-sm</code> · 4px</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary" type="button" style="pointer-events:none">Acción MD</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">MD · <code>--radius-md</code> · 8px</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-lg" type="button" style="pointer-events:none">Acción LG</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">LG · <code>--radius-md</code> · 8px</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-xl" type="button" style="pointer-events:none">Acción XL</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">XL · <code>--radius-lg</code> · 12px</span></div>
             </div>
           </div>
-          <p style="font-size:13px;color:var(--text-secondary);margin-top:12px">Lógica de diseño y comparación visual en <a class="ds-toc-link" style="display:inline;padding:0;border:none;background:none;color:var(--color-primary);cursor:pointer" onclick="document.querySelector('[data-tab-trigger=\'guidelines\']')?.click();setTimeout(()=>{document.getElementById('bg-shape')?.scrollIntoView({behavior:'smooth',block:'start'})},300)">Guidelines → Shape &amp; Radius</a>.</p>
+          <p style="font-size:var(--font-size-label);color:var(--text-secondary);margin-top:var(--space-3)">Lógica de diseño y comparación visual en <a class="ds-toc-link" style="display:inline;padding:0;border:none;background:none;color:var(--color-primary);cursor:pointer" onclick="document.querySelector('[data-tab-trigger=\'guidelines\']')?.click();setTimeout(()=>{document.getElementById('bg-shape')?.scrollIntoView({behavior:'smooth',block:'start'})},300)">Guidelines → Shape &amp; Radius</a>.</p>
         </section>
 
         </div><!-- /ds-toc-body -->
@@ -6442,19 +6442,19 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Uso</h2>
           <p class="ds-p">Los botones comunican <b>acciones</b> que la persona puede tomar: la principal de una pantalla, sus alternativas secundarias y las de menor prioridad. Cada estilo carga un <b>nivel de énfasis</b> distinto, y en cada contexto hay <b>una sola acción primaria</b>.</p>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Do</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;gap:8px"><button class="btn-primary" type="button">Publicar</button><button class="btn-tertiary" type="button">Guardar borrador</button><button class="btn-text" type="button">Cancelar</button></div></div><div class="bd-dd-note">Una sola acción primaria por contexto; las demás en menor jerarquía.</div></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ Don't</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;gap:8px"><button class="btn-primary" type="button">Publicar</button><button class="btn-primary" type="button">Guardar borrador</button><button class="btn-primary" type="button">Cancelar</button></div></div><div class="bd-dd-note">Varias primarias compiten entre sí y diluyen la acción principal.</div></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Do</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;gap:var(--space-2)"><button class="btn-primary" type="button">Publicar</button><button class="btn-tertiary" type="button">Guardar borrador</button><button class="btn-text" type="button">Cancelar</button></div></div><div class="bd-dd-note">Una sola acción primaria por contexto; las demás en menor jerarquía.</div></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ Don't</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;gap:var(--space-2)"><button class="btn-primary" type="button">Publicar</button><button class="btn-primary" type="button">Guardar borrador</button><button class="btn-primary" type="button">Cancelar</button></div></div><div class="bd-dd-note">Varias primarias compiten entre sí y diluyen la acción principal.</div></div></div>
           </div>
-          <h3 class="ds-h3" style="margin-top:24px">Jerarquía y énfasis</h3>
+          <h3 class="ds-h3" style="margin-top:var(--space-6)">Jerarquía y énfasis</h3>
           <p class="ds-p">Elegí el estilo por el peso de la acción, no por gusto visual:</p>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li><b>Filled</b> (primary) — el de mayor impacto; reservalo para la acción final más importante (Guardar, Confirmar, Crear). Usalo con moderación, idealmente <b>una por pantalla</b>.</li>
             <li><b>Tonal</b> (secondary) — prioridad media, un poco más de énfasis que un outlined (p. ej. "Siguiente" en un onboarding).</li>
             <li><b>Outlined</b> — énfasis bajo, para acciones secundarias que acompañan a la primaria.</li>
             <li><b>Text</b> — la menor jerarquía, para acciones terciarias o complementarias (p. ej. "Cancelar").</li>
           </ul>
-          <h3 class="ds-h3" style="margin-top:24px">Ubicación y buenas prácticas</h3>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <h3 class="ds-h3" style="margin-top:var(--space-6)">Ubicación y buenas prácticas</h3>
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>Los botones viven en <b>diálogos, cards y toolbars</b>; elegí la posición según el tamaño de pantalla.</li>
             <li>No sobrecargues la pantalla: demasiados botones rompen la jerarquía visual. Mové las acciones de baja prioridad a un <b>overflow menu</b> o a <b>icon buttons</b>.</li>
             <li>Etiquetas concisas, con un verbo de acción específico ("Crear vacante", no "Aceptar"), en sentence case.</li>
@@ -6482,7 +6482,7 @@ body { overflow-x: clip; }
             <div class="bd-dd"><div class="bd-dd-body"><div class="sbd-stage center"><button class="btn-text btn-sm" type="button" style="pointer-events:none">Texto</button></div><div class="bd-dd-note" style="text-align:center">Text — acción terciaria</div></div></div>
             <div class="bd-dd"><div class="bd-dd-body"><div class="sbd-stage center"><button class="icon-btn btn-sm" type="button" aria-label="Acción" style="pointer-events:none"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button></div><div class="bd-dd-note" style="text-align:center">Icon — acción compacta</div></div></div>
           </div>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li><b>Filled</b> (<code>bg-primary</code> / <code>text-on-primary</code>) — la acción primaria.</li>
             <li><b>Tonal</b> (<code>bg-secondary-container</code> / <code>text-on-secondary-container</code>) — énfasis medio.</li>
             <li><b>Outlined</b> (borde <code>--color-outline</code>, texto <code>--color-primary</code>) — bajo énfasis.</li>
@@ -6494,19 +6494,19 @@ body { overflow-x: clip; }
           <h2 class="docs-section-title">Diseño adaptativo</h2>
           <p class="ds-p">El botón adapta su tamaño y disposición al contexto y al ancho de ventana. El ícono y la etiqueta quedan <b>anclados y centrados</b> a medida que el contenedor escala — nunca se separan hacia los extremos.</p>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Do</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;flex-wrap:wrap;gap:10px"><button class="btn-primary" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg> Pedir licencia</button><button class="btn-tertiary" type="button">Cargar factura</button></div></div><div class="bd-dd-note">Ancho acotado o junto a otros elementos en ventanas amplias.</div></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ Don't</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;flex-direction:column;gap:8px;align-items:stretch"><button class="btn-tertiary" type="button" style="width:100%;justify-content:flex-start">+ Pedir licencia</button><button class="btn-tertiary" type="button" style="width:100%;justify-content:flex-start">Cargar factura</button></div></div><div class="bd-dd-note">Botón largo y plano con poco contenido estirado a todo el ancho.</div></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Do</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;flex-wrap:wrap;gap:var(--space-2)"><button class="btn-primary" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg> Pedir licencia</button><button class="btn-tertiary" type="button">Cargar factura</button></div></div><div class="bd-dd-note">Ancho acotado o junto a otros elementos en ventanas amplias.</div></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ Don't</div><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;flex-direction:column;gap:var(--space-2);align-items:stretch"><button class="btn-tertiary" type="button" style="width:100%;justify-content:flex-start">+ Pedir licencia</button><button class="btn-tertiary" type="button" style="width:100%;justify-content:flex-start">Cargar factura</button></div></div><div class="bd-dd-note">Botón largo y plano con poco contenido estirado a todo el ancho.</div></div></div>
           </div>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>En <b>compacto / mobile</b>, un botón puede ocupar el <b>ancho completo</b> del contenedor — típico del CTA al pie de un formulario o un dialog.</li>
             <li>En <b>ventanas anchas</b>, acotá el ancho o ubicá el botón junto a otros elementos; evitá botones largos y planos con poco contenido.</li>
             <li>El tamaño y la ubicación pueden cambiar cuando el contenedor padre (una card) se adapta a pantallas más grandes.</li>
           </ul>
-          <h3 class="ds-h3" style="margin-top:24px">Ejemplos por contexto</h3>
+          <h3 class="ds-h3" style="margin-top:var(--space-6)">Ejemplos por contexto</h3>
           <div class="bd-grid c2">
             <div class="bd-dd"><div class="bd-dd-body"><div class="sbd-stage center"><button class="btn-primary" type="button" style="width:100%">Comenzar</button></div><div class="bd-dd-note" style="text-align:center">Compacto — ancho completo del contenedor</div></div></div>
             <div class="bd-dd"><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;align-items:center;gap:6px"><button class="btn-primary btn-sm" type="button">Guardar</button><button class="btn-tertiary btn-sm" type="button">Cancelar</button><button class="icon-btn btn-sm" type="button" aria-label="Editar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg></button></div></div><div class="bd-dd-note" style="text-align:center">Denso — ancho intrínseco, junto a otras acciones</div></div></div>
-            <div class="bd-dd"><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;align-items:center;gap:10px"><button class="btn-primary btn-lg" type="button">Comenzar</button><button class="btn-tertiary btn-lg" type="button">Saber más</button></div></div><div class="bd-dd-note" style="text-align:center">Hero — acción destacada en pantalla ancha</div></div></div>
+            <div class="bd-dd"><div class="bd-dd-body"><div class="sbd-stage center"><div style="display:flex;align-items:center;gap:var(--space-2)"><button class="btn-primary btn-lg" type="button">Comenzar</button><button class="btn-tertiary btn-lg" type="button">Saber más</button></div></div><div class="bd-dd-note" style="text-align:center">Hero — acción destacada en pantalla ancha</div></div></div>
           </div>
         </section>
         </div>
@@ -6553,24 +6553,24 @@ body { overflow-x: clip; }
           <div class="bd-grid c2">
             <div class="bd-card">
               <p class="bd-eyebrow">Foco visible</p>
-              <div class="bd-stage center" style="margin:10px 0">
+              <div class="bd-stage center" style="margin:var(--space-2) 0">
                 <button class="btn-primary focus-ring" type="button">Enfocado</button>
               </div>
               <p class="bd-variant-desc">Un contorno de 2px (<code>--color-focus</code>) + halo de 4px (<code>--color-focus-ring</code>) via <code>:focus-visible</code>. Solo aparece durante la navegación por teclado — no se dispara con clics de mouse. Cumple WCAG 2.4.7 (AA). Nunca suprimas con <code>outline:none</code> sin un reemplazo.</p>
             </div>
             <div class="bd-card">
               <p class="bd-eyebrow">Contraste — todas las variantes</p>
-              <div class="bd-contrast" style="margin:10px 0">
+              <div class="bd-contrast" style="margin:var(--space-2) 0">
                 <div class="bd-contrast-item">
-                  <div class="bd-contrast-swatch" style="background:var(--color-primary);color:var(--color-on-primary);font-size:12px">Primario</div>
+                  <div class="bd-contrast-swatch" style="background:var(--color-primary);color:var(--color-on-primary);font-size:var(--font-size-caption)">Primario</div>
                   <div class="bd-contrast-meta"><span>on-primary / primary</span><span class="bd-pass">AAA</span></div>
                 </div>
                 <div class="bd-contrast-item">
-                  <div class="bd-contrast-swatch" style="background:var(--color-secondary-container);color:var(--color-on-secondary-container);border:1px solid transparent;font-size:12px">Secundario</div>
+                  <div class="bd-contrast-swatch" style="background:var(--color-secondary-container);color:var(--color-on-secondary-container);border:1px solid transparent;font-size:var(--font-size-caption)">Secundario</div>
                   <div class="bd-contrast-meta"><span>on-secondary / tonal</span><span class="bd-pass">AAA</span></div>
                 </div>
                 <div class="bd-contrast-item">
-                  <div class="bd-contrast-swatch" style="background:var(--color-error);color:var(--color-on-error);font-size:12px">Peligro</div>
+                  <div class="bd-contrast-swatch" style="background:var(--color-error);color:var(--color-on-error);font-size:var(--font-size-caption)">Peligro</div>
                   <div class="bd-contrast-meta"><span>on-error / error</span><span class="bd-pass">AA+</span></div>
                 </div>
               </div>
@@ -6585,16 +6585,16 @@ body { overflow-x: clip; }
           <div class="bd-grid c2">
             <div class="bd-card">
               <p class="bd-eyebrow">Teclas</p>
-              <ul class="bd-a11y" style="margin-top:10px">
-                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:11px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Tab</span><span>Mover el foco al siguiente elemento interactivo</span></li>
-                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">⇧Tab</span><span>Mover el foco al elemento anterior</span></li>
-                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Enter</span><span>Activar el botón enfocado</span></li>
-                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Espacio</span><span>Activar el botón enfocado</span></li>
+              <ul class="bd-a11y" style="margin-top:var(--space-2)">
+                <li><span class="bd-ico" style="font-family:var(--font-mono);font-size:var(--font-size-badge);width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:var(--radius-sm)">Tab</span><span>Mover el foco al siguiente elemento interactivo</span></li>
+                <li><span class="bd-ico" style="font-family:var(--font-mono);font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:var(--radius-sm)">⇧Tab</span><span>Mover el foco al elemento anterior</span></li>
+                <li><span class="bd-ico" style="font-family:var(--font-mono);font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:var(--radius-sm)">Enter</span><span>Activar el botón enfocado</span></li>
+                <li><span class="bd-ico" style="font-family:var(--font-mono);font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:var(--radius-sm)">Espacio</span><span>Activar el botón enfocado</span></li>
               </ul>
             </div>
             <div class="bd-card">
               <p class="bd-eyebrow">Reglas de orden de Tab</p>
-              <ul style="margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+              <ul style="margin:6px 0 0;padding-left:var(--space-5);font-size:var(--font-size-label);line-height:1.9;color:var(--ds-text-2)">
                 <li>Orden de Tab = orden de la fuente DOM</li>
                 <li>No usar <code>tabindex &gt; 0</code> — rompe el flujo natural de foco</li>
                 <li>No suprimir el foco con <code>outline:none</code> — usar <code>:focus-visible</code></li>
@@ -6603,7 +6603,7 @@ body { overflow-x: clip; }
               </ul>
             </div>
           </div>
-          <div class="bd-callout" style="margin-top:12px"><span class="bd-ico">🎯</span><span>En grupos de acciones, poner la acción de escape/cancelar <strong>antes</strong> que la acción de confirmar/destructivo en el orden fuente del DOM. Esto coincide con la dirección de lectura y asegura que los usuarios de teclado encuentren la opción segura primero.</span></div>
+          <div class="bd-callout" style="margin-top:var(--space-3)"><span class="bd-ico">🎯</span><span>En grupos de acciones, poner la acción de escape/cancelar <strong>antes</strong> que la acción de confirmar/destructivo en el orden fuente del DOM. Esto coincide con la dirección de lectura y asegura que los usuarios de teclado encuentren la opción segura primero.</span></div>
         </section>
 
         <!-- 4. Labeling elements -->
@@ -6635,7 +6635,7 @@ body { overflow-x: clip; }
               <span><b>Nunca usar aria-label para sobreescribir texto visible.</b> Si un botón tiene una etiqueta visible, no agregar <code>aria-label</code> con texto diferente — crea una discrepancia entre lo que se ve y lo que se anuncia.</span>
             </li>
           </ul>
-          <div style="margin-top:20px">
+          <div style="margin-top:var(--space-5)">
             <p class="bd-eyebrow">Referencia de cumplimiento WCAG 2.1</p>
             <div class="ds-table-wrap">
               <table class="docs-props-table">
@@ -6696,8 +6696,8 @@ body { overflow-x: clip; }
         <section class="docs-section">
           <h2 class="docs-section-title">Modificadores semánticos</h2>
           <p class="docs-section-desc">Los modificadores <code>.btn-danger</code> y <code>.btn-success</code> se aplican <strong>sobre</strong> <code>.btn-primary</code>. Son la única excepción donde un botón cambia de color semántico.</p>
-          <div class="bd-stage" style="margin-bottom:16px">
-            <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn-primary btn-danger" type="button">Eliminar</button><button class="btn-primary btn-success" type="button">Aprobar</button></div>
+          <div class="bd-stage" style="margin-bottom:var(--space-4)">
+            <div style="display:flex;gap:var(--space-3);flex-wrap:wrap"><button class="btn-primary btn-danger" type="button">Eliminar</button><button class="btn-primary btn-success" type="button">Aprobar</button></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
@@ -6717,8 +6717,8 @@ body { overflow-x: clip; }
         <section class="docs-section">
           <h2 class="docs-section-title">Tamaños</h2>
           <p class="docs-section-desc">El modificador <code>.btn-sm</code> se combina con cualquier variante. Usalo en tablas, toolbars y áreas de alta densidad.</p>
-          <div class="bd-stage" style="margin-bottom:16px">
-            <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+          <div class="bd-stage" style="margin-bottom:var(--space-4)">
+            <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;align-items:center">
             <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary" type="button">Default</button><span class="bd-state-lbl">36px</span></div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-sm" type="button">Small</button><span class="bd-state-lbl">30px</span></div>
             <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-secondary" type="button">Default</button><span class="bd-state-lbl">36px</span></div>
@@ -6745,8 +6745,8 @@ body { overflow-x: clip; }
         <section class="docs-section">
           <h2 class="docs-section-title">Botones con ícono</h2>
           <p class="docs-section-desc">Los SVGs heredan el color vía <code>currentColor</code> — no pasés un color explícito al SVG. El gap de 8px entre ícono y label ya viene en el estilo base.</p>
-          <div class="bd-stage" style="gap:12px;flex-wrap:wrap;margin-bottom:16px">
-            <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div class="bd-stage" style="gap:var(--space-3);flex-wrap:wrap;margin-bottom:var(--space-4)">
+            <div style="display:flex;gap:var(--space-3);flex-wrap:wrap">
             <button class="btn-primary" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg> Nueva vacante</button>
             <button class="btn-secondary" type="button">Exportar <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
             <button class="btn-tertiary" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg> Editar</button>
@@ -6779,8 +6779,8 @@ body { overflow-x: clip; }
         <section class="docs-section">
           <h2 class="docs-section-title">Estado deshabilitado</h2>
           <p class="docs-section-desc">Usá el atributo HTML nativo <code>disabled</code> — no construyas el estado con CSS manual. El lector de pantalla anuncia el estado automáticamente.</p>
-          <div class="bd-stage" style="gap:12px;flex-wrap:wrap;margin-bottom:16px">
-            <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div class="bd-stage" style="gap:var(--space-3);flex-wrap:wrap;margin-bottom:var(--space-4)">
+            <div style="display:flex;gap:var(--space-3);flex-wrap:wrap">
             <button class="btn-primary" type="button" disabled>Publicar</button>
             <button class="btn-secondary" type="button" disabled>Guardar</button>
             <button class="btn-tertiary" type="button" disabled>Cancelar</button>
@@ -6806,8 +6806,8 @@ body { overflow-x: clip; }
         <section class="docs-section">
           <h2 class="docs-section-title">Estado de carga (loading)</h2>
           <p class="docs-section-desc">Para mostrar que una acción está procesando: deshabilitar el botón + agregar un spinner SVG animado + actualizar el label.</p>
-          <div class="bd-stage" style="margin-bottom:16px">
-            <button class="btn-primary" type="button" disabled aria-busy="true" style="display:inline-flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Publicando…</button>
+          <div class="bd-stage" style="margin-bottom:var(--space-4)">
+            <button class="btn-primary" type="button" disabled aria-busy="true" style="display:inline-flex;align-items:center;gap:var(--space-2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Publicando…</button>
           </div>
           <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
           <div class="docs-code-wrapper">
@@ -6853,30 +6853,30 @@ function setLoading(btn, isLoading) {
               <tr><td><b>Text</b> (mínimo)</td><td><code>text</code></td><td>Acciones terciarias/inline menores — “Ver más”, descartar un snackbar.</td></tr>
             </tbody>
           </table></div>
-          <div class="bd-grid c2" style="margin-top:16px">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Hacer</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Diálogo/overlay: <b>Confirmar = Filled (primary)</b>, <b>Cancelar = Outlined (tertiary)</b>.</li><li>Tonal para una segunda acción <b>constructiva</b> (no para cancelar).</li><li>Una sola Filled por contexto.</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ Evitar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Cancelar en Tonal</b> — compite con la primaria (peor si la primaria está deshabilitada/gris).</li><li>Dos Filled, o Filled + Tonal, como par Confirmar/Cancelar.</li><li>Inventar una variante nueva para “cancelar”.</li></ul></div></div>
+          <div class="bd-grid c2" style="margin-top:var(--space-4)">
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Hacer</div><div class="bd-dd-body"><ul style="margin:0;padding-left:var(--space-5);line-height:1.9"><li>Diálogo/overlay: <b>Confirmar = Filled (primary)</b>, <b>Cancelar = Outlined (tertiary)</b>.</li><li>Tonal para una segunda acción <b>constructiva</b> (no para cancelar).</li><li>Una sola Filled por contexto.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ Evitar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:var(--space-5);line-height:1.9"><li><b>Cancelar en Tonal</b> — compite con la primaria (peor si la primaria está deshabilitada/gris).</li><li>Dos Filled, o Filled + Tonal, como par Confirmar/Cancelar.</li><li>Inventar una variante nueva para “cancelar”.</li></ul></div></div>
           </div>
-          <p class="ds-p" style="margin-top:12px"><b>Tonal vs. Outlined en una línea:</b> <b>Tonal</b> = una acción secundaria que querés <em>alentar</em> (constructiva, peso medio); <b>Outlined</b> = una acción secundaria que debe <em>hacerse a un lado</em> (cancelar/neutra). Un Cancelar siempre se hace a un lado → Outlined. Ver <a href="#" onclick="navigate('c-dialog');return false;">Dialog</a> · <a href="#" onclick="navigate('c-side-sheet');return false;">Side Sheet</a>.</p>
-          <p class="ds-p" style="margin-top:8px"><b>Triggers de overlay.</b> El botón que <em>abre</em> un Dialog / Sheet / Alert Dialog / Popover usa <b>Tonal (<code>secondary</code>)</b> por defecto — es un afordance neutro de “abrir”; la acción primaria real vive <em>dentro</em> del overlay. Excepciones: punto de entrada destructivo → <code>danger</code>; trigger tipo campo (Date Picker, Combobox) → <code>tertiary</code>; CTA hero de página → <code>primary</code>.</p>
-          <p class="ds-p" style="margin-top:8px"><b>Confirmaciones destructivas.</b> La acción destructiva usa <b><code>variant="danger"</code></b> (tokens Error de Embassy), el Cancelar es Outlined y queda como foco seguro por defecto. Ver <a href="#" onclick="navigate('c-dialog');return false;">Alert Dialog</a>.</p>
+          <p class="ds-p" style="margin-top:var(--space-3)"><b>Tonal vs. Outlined en una línea:</b> <b>Tonal</b> = una acción secundaria que querés <em>alentar</em> (constructiva, peso medio); <b>Outlined</b> = una acción secundaria que debe <em>hacerse a un lado</em> (cancelar/neutra). Un Cancelar siempre se hace a un lado → Outlined. Ver <a href="#" onclick="navigate('c-dialog');return false;">Dialog</a> · <a href="#" onclick="navigate('c-side-sheet');return false;">Side Sheet</a>.</p>
+          <p class="ds-p" style="margin-top:var(--space-2)"><b>Triggers de overlay.</b> El botón que <em>abre</em> un Dialog / Sheet / Alert Dialog / Popover usa <b>Tonal (<code>secondary</code>)</b> por defecto — es un afordance neutro de “abrir”; la acción primaria real vive <em>dentro</em> del overlay. Excepciones: punto de entrada destructivo → <code>danger</code>; trigger tipo campo (Date Picker, Combobox) → <code>tertiary</code>; CTA hero de página → <code>primary</code>.</p>
+          <p class="ds-p" style="margin-top:var(--space-2)"><b>Confirmaciones destructivas.</b> La acción destructiva usa <b><code>variant="danger"</code></b> (tokens Error de Embassy), el Cancelar es Outlined y queda como foco seguro por defecto. Ver <a href="#" onclick="navigate('c-dialog');return false;">Alert Dialog</a>.</p>
         </section>
 
         <!-- ── Form pattern ── -->
         <section class="docs-section">
           <h2 class="docs-section-title">Patrón: pie de formulario</h2>
           <p class="docs-section-desc">El patrón más común: acción primaria a la derecha, escape tertiary a la izquierda. Una primaria por formulario. Si el formulario tiene múltiples pasos, usá <code>.btn-next</code> para el avance.</p>
-          <div class="bd-card" style="max-width:500px;margin-bottom:16px">
-            <h3 style="font:700 16px 'Epilogue';color:var(--ds-text-1);margin:0 0 6px">Publicar vacante</h3>
-            <p style="font-size:13px;color:var(--ds-text-3);margin:0 0 20px;line-height:1.6">La vacante será visible para todos los candidatos. Podés editarla después.</p>
-            <div style="border-top:1px solid var(--border);padding-top:16px"><div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn-tertiary" type="button">Cancelar</button><button class="btn-primary" type="button">Publicar vacante</button></div></div>
+          <div class="bd-card" style="max-width:500px;margin-bottom:var(--space-4)">
+            <h3 style="font:700 16px var(--font-heading);color:var(--ds-text-1);margin:0 0 6px">Publicar vacante</h3>
+            <p style="font-size:var(--font-size-label);color:var(--ds-text-3);margin:0 0 var(--space-5);line-height:1.6">La vacante será visible para todos los candidatos. Podés editarla después.</p>
+            <div style="border-top:1px solid var(--border);padding-top:var(--space-4)"><div style="display:flex;gap:var(--space-2);justify-content:flex-end"><button class="btn-tertiary" type="button">Cancelar</button><button class="btn-primary" type="button">Publicar vacante</button></div></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
             <pre class="docs-code"><code>&lt;form&gt;
   &lt;!-- campos del formulario --&gt;
 
-  &lt;div class=&quot;form-actions&quot; style=&quot;display:flex;gap:10px;justify-content:flex-end&quot;&gt;
+  &lt;div class=&quot;form-actions&quot; style=&quot;display:flex;gap:var(--space-2);justify-content:flex-end&quot;&gt;
     &lt;!-- Escape (Cancelar): siempre tertiary/Outlined — en formularios y en modales/overlays. Nunca Tonal ni danger. --&gt;
     &lt;button type=&quot;button&quot; class=&quot;btn-tertiary&quot; onclick=&quot;closeModal()&quot;&gt;Cancelar&lt;/button&gt;
 
@@ -6891,10 +6891,10 @@ function setLoading(btn, isLoading) {
         <section class="docs-section">
           <h2 class="docs-section-title">Patrón: confirmación destructiva</h2>
           <p class="docs-section-desc">Para acciones irreversibles (eliminar, archivar definitivamente): usá <code>btn-danger</code> solo en la confirmación final, dentro de un modal de confirmación. Nunca como acción inline directa.</p>
-          <div class="bd-card" style="max-width:420px;margin-bottom:16px">
-            <p style="font:700 15px 'Epilogue';color:var(--ds-text-1);margin:0 0 8px">¿Eliminar esta vacante?</p>
-            <p style="font-size:13px;color:var(--ds-text-3);margin:0 0 20px;line-height:1.6">Esta acción no se puede deshacer. La vacante y todos sus postulantes serán eliminados permanentemente.</p>
-            <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn-tertiary" type="button">Cancelar</button><button class="btn-primary btn-danger" type="button">Eliminar</button></div>
+          <div class="bd-card" style="max-width:420px;margin-bottom:var(--space-4)">
+            <p style="font:700 var(--font-size-heading-xs) var(--font-heading);color:var(--ds-text-1);margin:0 0 var(--space-2)">¿Eliminar esta vacante?</p>
+            <p style="font-size:var(--font-size-label);color:var(--ds-text-3);margin:0 0 var(--space-5);line-height:1.6">Esta acción no se puede deshacer. La vacante y todos sus postulantes serán eliminados permanentemente.</p>
+            <div style="display:flex;gap:var(--space-2);justify-content:flex-end"><button class="btn-tertiary" type="button">Cancelar</button><button class="btn-primary btn-danger" type="button">Eliminar</button></div>
           </div>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
@@ -6903,7 +6903,7 @@ function setLoading(btn, isLoading) {
      aria-labelledby=&quot;dlg-title&quot; aria-describedby=&quot;dlg-desc&quot;&gt;
   &lt;h2 id=&quot;dlg-title&quot;&gt;¿Eliminar esta vacante?&lt;/h2&gt;
   &lt;p id=&quot;dlg-desc&quot;&gt;Esta acción no se puede deshacer.&lt;/p&gt;
-  &lt;div style=&quot;display:flex;gap:10px;justify-content:flex-end&quot;&gt;
+  &lt;div style=&quot;display:flex;gap:var(--space-2);justify-content:flex-end&quot;&gt;
     &lt;button class=&quot;btn-tertiary&quot; onclick=&quot;closeDialog()&quot;&gt;Cancelar&lt;/button&gt;
     &lt;button class=&quot;btn-primary btn-danger&quot; onclick=&quot;confirmDelete()&quot;&gt;Eliminar&lt;/button&gt;
   &lt;/div&gt;
@@ -7006,14 +7006,14 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
                 <tr><td><code>--color-error</code></td><td>Primary Danger</td><td>background</td><td>#FD3A45</td><td>#F29AA1</td></tr>
                 <tr><td><code>--color-success</code></td><td>Primary Success</td><td>background</td><td>#00C164</td><td>#93E1B3</td></tr>
                 <tr><td><code>--color-disabled</code></td><td>All · disabled</td><td>background</td><td>#BFC1C8</td><td>#282C39</td></tr>
-                <tr><td><code>--color-on-disabled</code></td><td>All · disabled</td><td>color</td><td colspan="2">#747989 <span style="font-size:11px;color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
-                <tr><td><code>--color-focus</code></td><td>All · focus</td><td>outline</td><td colspan="2">#4F80FF <span style="font-size:11px;color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                <tr><td><code>--color-focus-ring</code></td><td>All · focus</td><td>box-shadow</td><td colspan="2">color-mix(in srgb, var(--color-focus) 15%, transparent) <span style="font-size:11px;color:var(--text-muted)">· sin variación en dark</span></td></tr>
+                <tr><td><code>--color-on-disabled</code></td><td>All · disabled</td><td>color</td><td colspan="2">#747989 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                <tr><td><code>--color-focus</code></td><td>All · focus</td><td>outline</td><td colspan="2">#4F80FF <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                <tr><td><code>--color-focus-ring</code></td><td>All · focus</td><td>box-shadow</td><td colspan="2">color-mix(in srgb, var(--color-focus) 15%, transparent) <span style="font-size:var(--font-size-badge);color:var(--text-muted)">· sin variación en dark</span></td></tr>
                 <tr><td><code>--radius-md</code></td><td>All</td><td>border-radius</td><td colspan="2">8px</td></tr>
               </tbody>
             </table>
           </div>
-          <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">🌙</span><span>No necesitás overrides por tema. Los pares <code>--color-primary</code> / <code>--color-on-primary</code> se recalibran automáticamente en <code>[data-theme="dark"]</code> dentro de <code>variables.css</code>.</span></div>
+          <div class="bd-callout" style="margin-top:var(--space-4)"><span class="bd-ico">🌙</span><span>No necesitás overrides por tema. Los pares <code>--color-primary</code> / <code>--color-on-primary</code> se recalibran automáticamente en <code>[data-theme="dark"]</code> dentro de <code>variables.css</code>.</span></div>
         </section>
 
         <!-- ── Common mistakes audit ── -->
@@ -7024,7 +7024,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
             <div class="bd-dd dont">
               <div class="bd-dd-head">✕ Usar <code>div</code> como botón</div>
               <div class="bd-dd-body">
-                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;div class=&quot;btn-primary&quot; onclick=&quot;…&quot;&gt;
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:var(--font-size-badge);margin:0"><code>&lt;div class=&quot;btn-primary&quot; onclick=&quot;…&quot;&gt;
   Crear
 &lt;/div&gt;</code></pre></div>
                 <span class="bd-dd-note">Problema: sin foco nativo, sin soporte Enter/Space, invisible para lectores de pantalla. Usá siempre <code>&lt;button&gt;</code>.</span>
@@ -7033,7 +7033,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
             <div class="bd-dd do">
               <div class="bd-dd-head">✓ Corrección</div>
               <div class="bd-dd-body">
-                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-primary&quot; onclick=&quot;…&quot;&gt;
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:var(--font-size-badge);margin:0"><code>&lt;button class=&quot;btn-primary&quot; onclick=&quot;…&quot;&gt;
   Crear
 &lt;/button&gt;</code></pre></div>
                 <span class="bd-dd-note">El <code>&lt;button&gt;</code> nativo incluye rol, foco y activación por teclado sin configuración adicional.</span>
@@ -7042,7 +7042,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
             <div class="bd-dd dont">
               <div class="bd-dd-head">✕ <code>btn-danger</code> sin <code>btn-primary</code></div>
               <div class="bd-dd-body">
-                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-danger&quot;&gt;
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:var(--font-size-badge);margin:0"><code>&lt;button class=&quot;btn-danger&quot;&gt;
   Eliminar
 &lt;/button&gt;</code></pre></div>
                 <span class="bd-dd-note"><code>btn-danger</code> es un modificador — solo funciona combinado con <code>btn-primary</code>. Solo no tiene estilos base.</span>
@@ -7051,7 +7051,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
             <div class="bd-dd do">
               <div class="bd-dd-head">✓ Corrección</div>
               <div class="bd-dd-body">
-                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-primary btn-danger&quot;&gt;
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:var(--font-size-badge);margin:0"><code>&lt;button class=&quot;btn-primary btn-danger&quot;&gt;
   Eliminar
 &lt;/button&gt;</code></pre></div>
                 <span class="bd-dd-note">Siempre <code>btn-primary btn-danger</code> juntos. Lo mismo aplica a <code>btn-success</code>.</span>
@@ -7060,7 +7060,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
             <div class="bd-dd dont">
               <div class="bd-dd-head">✕ Hard-code de color en el botón</div>
               <div class="bd-dd-body">
-                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-primary&quot;
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:var(--font-size-badge);margin:0"><code>&lt;button class=&quot;btn-primary&quot;
   style=&quot;background:#2D52D8;color:#fff&quot;&gt;
   Crear
 &lt;/button&gt;</code></pre></div>
@@ -7070,7 +7070,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
             <div class="bd-dd do">
               <div class="bd-dd-head">✓ Corrección</div>
               <div class="bd-dd-body">
-                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;btn-primary&quot;&gt;
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:var(--font-size-badge);margin:0"><code>&lt;button class=&quot;btn-primary&quot;&gt;
   Crear
 &lt;/button&gt;
 &lt;!-- Los tokens del DS manejan light y dark. --&gt;</code></pre></div>
@@ -7080,7 +7080,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
             <div class="bd-dd dont">
               <div class="bd-dd-head">✕ Icon button sin <code>aria-label</code></div>
               <div class="bd-dd-body">
-                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;icon-btn&quot;&gt;
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:var(--font-size-badge);margin:0"><code>&lt;button class=&quot;icon-btn&quot;&gt;
   &lt;svg&gt;…&lt;/svg&gt;
 &lt;/button&gt;</code></pre></div>
                 <span class="bd-dd-note">Sin <code>aria-label</code> el lector de pantalla anuncia "botón" sin contexto. El usuario no sabe qué hace.</span>
@@ -7089,7 +7089,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
             <div class="bd-dd do">
               <div class="bd-dd-head">✓ Corrección</div>
               <div class="bd-dd-body">
-                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:11px;margin:0"><code>&lt;button class=&quot;icon-btn&quot; aria-label=&quot;Editar vacante&quot;&gt;
+                <div class="docs-code-wrapper" style="margin:0"><pre class="docs-code" style="font-size:var(--font-size-badge);margin:0"><code>&lt;button class=&quot;icon-btn&quot; aria-label=&quot;Editar vacante&quot;&gt;
   &lt;svg&gt;…&lt;/svg&gt;
 &lt;/button&gt;</code></pre></div>
                 <span class="bd-dd-note">El <code>aria-label</code> describe la acción ("Editar vacante"), no el ícono ("lápiz").</span>
