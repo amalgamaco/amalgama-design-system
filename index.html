@@ -16977,7 +16977,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-page-tag">Components · Data display</div>
       <h1 class="ds-page-title">Charts</h1>
       <p class="ds-page-desc">Gráficos de línea, barra y torta para dashboards y analytics — SVG dibujado a mano (línea/barra) + CSS <code>conic-gradient</code> (torta), tematizados con tokens Embassy.</p>
-      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>ChartContainer</code>/<code>LineChart</code>/<code>BarChart</code>/<code>PieChart</code> son los primitivos de <code>css/components/chart.css</code> + <code>components/ui/chart.tsx</code> — sin librería de charting. Cubre línea/barra/torta con datos estáticos; usa <code>&lt;title&gt;</code> nativo del navegador como tooltip de valor, sin brush/zoom ni animación de leyenda.</div>
+      <div class="ds-callout" style="margin-top:0"><strong>Implementación: CSS + vanilla JS.</strong> <code>ChartContainer</code>/<code>LineChart</code>/<code>BarChart</code>/<code>PieChart</code> son los primitivos de <code>css/components/chart.css</code> + <code>components/ui/chart.tsx</code> — sin librería de charting. Cubre línea/área/barra/torta con datos estáticos; el tooltip es rico y posicionado por JS (<code>initChartTooltips</code>), con <code>&lt;title&gt;</code> nativo como fallback accesible; sin brush/zoom ni animación de leyenda.</div>
 
       <div class="ds-comp-tabs" role="tablist"><button type="button" class="ds-comp-tab-btn active" data-tab="overview" onclick="switchCompTab(this)">Overview</button><button type="button" class="ds-comp-tab-btn" data-tab="specs" onclick="switchCompTab(this)">Specs</button><button type="button" class="ds-comp-tab-btn" data-tab="guidelines" onclick="switchCompTab(this)">Guidelines</button><button type="button" class="ds-comp-tab-btn" data-tab="accessibility" onclick="switchCompTab(this)">Accessibility</button><button type="button" class="ds-comp-tab-btn" data-tab="code" onclick="switchCompTab(this)">Code</button></div>
 
@@ -16985,7 +16985,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div class="ds-comp-tab-panel active" data-tab="overview">
         <section class="docs-section">
 
-          <p class="bd-lead">La familia Chart dibuja SVG a mano (línea/barra) y CSS <code>conic-gradient</code> (torta) — sin librería de charting, sin imágenes. Tres tipos disponibles:</p>
+          <p class="bd-lead">La familia Chart dibuja SVG a mano (línea/barra) y CSS <code>conic-gradient</code> (torta) — sin librería de charting, sin imágenes. Cuatro tipos disponibles:</p>
 
           <div class="bd-family-wrap">
             <div><div class="chart-container"><svg class="chart-svg" viewBox="0 0 660 280" role="img" aria-label="Ingresos vs gastos, semanal"><g class="chart-grid"><line x1="40" y1="20" x2="40" y2="240"/><line x1="40" y1="240" x2="620" y2="240"/></g><polyline class="chart-line" points="40,145.7 136.7,98.6 233.3,114.3 330,75 426.7,35.7 523.3,90.7 620,130" stroke="var(--chart-1)"/><polyline class="chart-line" points="40,169.3 136.7,153.6 233.3,137.9 330,130 426.7,122.1 523.3,161.4 620,185" stroke="var(--chart-4)"/><circle class="chart-dot" cx="40" cy="145.7" r="3.5" fill="var(--chart-1)"><title>Lun: $1</title></circle><circle class="chart-dot" cx="136.7" cy="98.6" r="3.5" fill="var(--chart-1)"><title>Mar: $1</title></circle><circle class="chart-dot" cx="233.3" cy="114.3" r="3.5" fill="var(--chart-1)"><title>Mié: $1</title></circle><circle class="chart-dot" cx="330" cy="75" r="3.5" fill="var(--chart-1)"><title>Jue: $1</title></circle><circle class="chart-dot" cx="426.7" cy="35.7" r="3.5" fill="var(--chart-1)"><title>Vie: $1</title></circle><circle class="chart-dot" cx="523.3" cy="90.7" r="3.5" fill="var(--chart-1)"><title>Sáb: $1</title></circle><circle class="chart-dot" cx="620" cy="130" r="3.5" fill="var(--chart-1)"><title>Dom: $1</title></circle><circle class="chart-dot" cx="40" cy="169.3" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="136.7" cy="153.6" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="233.3" cy="137.9" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="330" cy="130" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="426.7" cy="122.1" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="523.3" cy="161.4" r="3.5" fill="var(--chart-4)"></circle><circle class="chart-dot" cx="620" cy="185" r="3.5" fill="var(--chart-4)"></circle><text class="chart-axis-label" x="40" y="262" text-anchor="middle">Lun</text><text class="chart-axis-label" x="136.7" y="262" text-anchor="middle">Mar</text><text class="chart-axis-label" x="233.3" y="262" text-anchor="middle">Mié</text><text class="chart-axis-label" x="330" y="262" text-anchor="middle">Jue</text><text class="chart-axis-label" x="426.7" y="262" text-anchor="middle">Vie</text><text class="chart-axis-label" x="523.3" y="262" text-anchor="middle">Sáb</text><text class="chart-axis-label" x="620" y="262" text-anchor="middle">Dom</text></svg><div class="chart-legend"><span class="chart-legend-item"><span class="chart-legend-swatch" style="background:var(--chart-1)"></span>Ingresos</span><span class="chart-legend-item"><span class="chart-legend-swatch" style="background:var(--chart-4)"></span>Gastos</span></div></div></div>
@@ -17028,22 +17028,23 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <table class="ds-table">
             <thead><tr><th>Elemento</th><th>Especificación</th><th>Token</th></tr></thead>
             <tbody>
-              <tr><td><code>ChartContainer</code></td><td>Envoltorio responsive — mide su propio contenedor y le pasa dimensiones explícitas al gráfico; inyecta las variables CSS de color por serie</td><td><code>bg-transparent</code></td></tr>
-              <tr><td>Grilla (<code>CartesianGrid</code>)</td><td>Solo líneas horizontales (<code>vertical={false}</code>), color sutil</td><td><code>--color-border</code></td></tr>
-              <tr><td>Ejes y etiquetas (<code>XAxis</code>/<code>YAxis</code>)</td><td>Sin línea ni tick marks, solo etiquetas de categoría/valor</td><td><code>--text-muted</code>, <code>text-caption</code></td></tr>
-              <tr><td>Tooltip (<code>ChartTooltipContent</code>)</td><td>Tarjeta flotante con indicador de color + valor por serie al pasar el cursor</td><td><code>bg-card</code>, <code>border-border</code>, <code>shadow-lg</code></td></tr>
-              <tr><td>Leyenda (<code>ChartLegendContent</code>)</td><td>Fila de chips de color + etiqueta debajo del gráfico, siempre presente con más de una serie</td><td><code>text-fg-muted</code></td></tr>
-              <tr><td>Series (Line/Bar/Pie)</td><td>Color por <code>ChartConfig</code>, nunca hardcodeado</td><td><code>--chart-1</code>…<code>--chart-5</code></td></tr>
+              <tr><td><code>.chart-container</code></td><td>Envoltorio responsive (<code>aspect-ratio 16/9</code>) que escala el SVG por <code>viewBox</code>; define localmente las variables de color por serie</td><td><code>transparent</code></td></tr>
+              <tr><td>Grilla (<code>.chart-grid line</code>)</td><td>Líneas de eje/base dibujadas a mano dentro del SVG, color sutil</td><td><code>--border</code></td></tr>
+              <tr><td>Etiquetas de eje (<code>.chart-axis-label</code>)</td><td>Texto SVG de categoría/valor, sin línea ni tick marks</td><td><code>--text-muted</code>, 11px</td></tr>
+              <tr><td>Tooltip (<code>.chart-tooltip</code>, <code>initChartTooltips</code>)</td><td>Tarjeta flotante posicionada por JS: indicador de color + etiqueta + valor al pasar el cursor</td><td><code>--color-inverse-surface</code>, <code>--shadow-md</code></td></tr>
+              <tr><td>Leyenda (<code>.chart-legend</code>)</td><td>Fila de swatches de color + etiqueta debajo del gráfico</td><td><code>--text-muted</code></td></tr>
+              <tr><td>Series (line/bar/pie)</td><td>Color por variable <code>--chart-*</code>, nunca hardcodeado</td><td><code>--chart-1</code>…<code>--chart-5</code></td></tr>
             </tbody>
           </table>
-          <p class="docs-section-desc" style="margin-top:10px">Responsive por diseño: cada gráfico vive dentro de un contenedor medido en tiempo real y se adapta al ancho del padre — no tiene un ancho fijo.</p>
+          <p class="docs-section-desc" style="margin-top:10px">Responsive por diseño: el SVG escala por <code>viewBox</code> al ancho del padre — no tiene un ancho fijo ni requiere medición por JS.</p>
         </section>
         <section class="docs-section" id="tc-charts-s-1">
           <h2 class="docs-section-title">Configuraciones</h2>
           <ul style="margin:0 0 16px;padding-left:20px;font-size:14px;line-height:1.8;">
-            <li><b>Line chart</b> — <code>&lt;LineChart&gt;</code> + <code>&lt;Line&gt;</code> por serie; usar para tendencias temporales.</li>
-            <li><b>Bar chart</b> — <code>&lt;BarChart&gt;</code> + <code>&lt;Bar&gt;</code> por serie; usar para comparar categorías discretas.</li>
-            <li><b>Pie chart</b> — <code>&lt;PieChart&gt;</code> + <code>&lt;Pie&gt;</code>/<code>&lt;Cell&gt;</code> por segmento; usar para composición/proporciones (máx. 5–6 segmentos).</li>
+            <li><b>Line chart</b> — <code>&lt;LineChart&gt;</code> con <code>series</code>; usar para tendencias temporales.</li>
+            <li><b>Area chart</b> — line con relleno (<code>.chart-area</code>, un <code>&lt;polygon&gt;</code> bajo la polilínea); enfatiza volumen acumulado.</li>
+            <li><b>Bar chart</b> — <code>&lt;BarChart&gt;</code> con <code>series</code>; usar para comparar categorías discretas.</li>
+            <li><b>Pie chart</b> — <code>&lt;PieChart&gt;</code> con <code>data</code> (<code>conic-gradient</code> CSS); usar para composición/proporciones (máx. 5–6 segmentos).</li>
           </ul>
           <h3 class="bd-sub-title">Rango de tiempo: semanal / mensual / anual</h3>
           <p class="docs-section-desc">El mismo <code>ChartContainer</code> puede alternar granularidad con un <code>SegmentedButtonGroup</code> — solo cambia el array de datos, no el componente.</p>
@@ -17057,7 +17058,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
             <tbody>
               <tr><td>Con datos</td><td>Series dibujadas como SVG estático (línea/barra) o conic-gradient (torta), sin animación de entrada</td><td><code>--chart-*</code></td></tr>
-              <tr><td>Hover / tooltip activo</td><td>Cursor de referencia + tarjeta de tooltip</td><td><code>--color-border</code>, <code>bg-card</code></td></tr>
+              <tr><td>Hover / tooltip activo</td><td>El punto/barra crece + tarjeta de tooltip posicionada por JS</td><td><code>--color-inverse-surface</code>, <code>--shadow-md</code></td></tr>
               <tr><td>Vacío</td><td>Contenedor con borde punteado y mensaje, misma altura que el gráfico real</td><td><code>border-dashed border-border</code></td></tr>
               <tr><td>Cargando</td><td>Barras esqueleto con <code>animate-pulse</code>, sin layout shift al llegar los datos</td><td><code>--color-surface-variant</code></td></tr>
               <tr><td>Error</td><td>Mensaje + acción de reintento (<code>Button variant="tertiary"</code>)</td><td><code>--color-error</code></td></tr>
@@ -17085,9 +17086,9 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
               <tr><td>Alto por defecto</td><td>280px (ancho: 100% del contenedor padre, responsive)</td></tr>
-              <tr><td>Radio de barras</td><td><code>rounded-t</code> (6px) en el borde superior</td></tr>
-              <tr><td>Radio interior de torta (donut)</td><td>60px</td></tr>
-              <tr><td>Grosor de línea</td><td>2px, sin puntos salvo en el punto activo (hover)</td></tr>
+              <tr><td>Radio de barras</td><td>6px (<code>rx="6"</code>) en el rect de la barra</td></tr>
+              <tr><td>Torta</td><td>180px, círculo completo <code>conic-gradient</code> (sin hueco donut)</td></tr>
+              <tr><td>Grosor de línea</td><td>2px; punto activo crece a <code>r=5.5</code> en hover</td></tr>
             </tbody>
           </table>
         </section>
@@ -17132,7 +17133,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <section class="docs-section" id="tc-charts-g-0">
           <h2 class="docs-section-title">Cuándo usar cada tipo</h2>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Line</b> para tendencias en el tiempo (ingresos, tráfico, uso).</li><li><b>Bar</b> para comparar categorías discretas entre sí.</li><li><b>Pie/donut</b> para mostrar composición de un total en pocos segmentos (≤ 6).</li></ul></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li><b>Line</b> para tendencias en el tiempo (ingresos, tráfico, uso).</li><li><b>Bar</b> para comparar categorías discretas entre sí.</li><li><b>Pie</b> para mostrar composición de un total en pocos segmentos (≤ 6).</li></ul></div></div>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Pie chart con más de 6–7 segmentos → usar Bar chart.</li><li>Un solo número puntual → <b>Stat Card</b>, no un gráfico.</li><li>Datos exactos que el usuario necesita leer uno por uno → <b>Table</b>.</li></ul></div></div>
           </div>
         </section>
@@ -17147,7 +17148,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <h2 class="docs-section-title">Accesibilidad de color</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>No comuniques una serie solo por color: la leyenda y el tooltip siempre repiten la etiqueta en texto.</li>
-            <li>En pie/donut, cada segmento lleva su nombre en la leyenda — nunca solo el color.</li>
+            <li>En pie, cada segmento lleva su nombre en la leyenda — nunca solo el color.</li>
             <li>Los pares de color de la paleta (secondary/tertiary/success/warning/info) fueron elegidos por ser distinguibles entre sí, pero para datos críticos (ej. aprobado/rechazado) preferí <code>--color-success</code>/<code>--color-error</code> explícitos en vez de la paleta genérica.</li>
           </ul>
         </section>
@@ -19123,7 +19124,7 @@ const [on, setOn] = useState(false)
 
           <!-- Key characteristics -->
           <ul class="bd-overview-list">
-            <li>Línea de 1px que usa el token <code>--border</code>; recalibra en dark mode automáticamente, sin overrides por tema.</li>
+            <li>Línea de 1px que usa el token <code>--color-outline-variant</code>; recalibra en dark mode automáticamente, sin overrides por tema.</li>
             <li><b>Dos variantes:</b> <strong>full-width</strong> (de borde a borde) e <strong>inset</strong> (con sangría izquierda de 16px para alinearse con el contenido del ítem).</li>
             <li>Separa grupos de contenido dentro de listas y layouts; no agrega peso visual ni color de marca.</li>
             <li>Orientación horizontal por defecto; soporta <code>orientation="vertical"</code> para divisiones en línea.</li>
@@ -19183,7 +19184,7 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
-              <tr><td>Línea (horizontal y vertical)</td><td><code>--border</code></td></tr>
+              <tr><td>Línea (horizontal y vertical)</td><td><code>--color-outline-variant</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -19214,7 +19215,7 @@ const [on, setOn] = useState(false)
         </section>
         <section class="docs-section" id="tc-divider-g-1">
           <h2 class="docs-section-title">Anatomía</h2>
-          <p class="docs-section-desc">Componente real: una línea de 1&nbsp;px con el token <code>--border</code> (recalibra en dark mode).</p>
+          <p class="docs-section-desc">Componente real: una línea de 1&nbsp;px con el token <code>--color-outline-variant</code> (recalibra en dark mode).</p>
           <div class="bd-family-wrap"><div style="max-width:380px;border:1px solid var(--border);border-radius:12px;padding:14px 0">
   <div style="padding:6px 16px">Sección A</div>
   <div class="divider"></div>
@@ -19244,7 +19245,7 @@ const [on, setOn] = useState(false)
         <section class="docs-section" id="tc-divider-g-4">
           <h2 class="docs-section-title">Vertical divider</h2>
           <p class="ds-p">Separa elementos dispuestos en una <b>fila</b> (acciones en una toolbar, metadatos en línea).</p>
-          <p class="ds-p" style="color:var(--text-secondary)">En Embassy se compone con <code>Separator orientation="vertical"</code>; ocupa el alto del contenedor y usa el mismo token <code>--border</code>.</p>
+          <p class="ds-p" style="color:var(--text-secondary)">En Embassy se compone con <code>Separator orientation="vertical"</code>; ocupa el alto del contenedor y usa el mismo token <code>--color-outline-variant</code>.</p>
         </section>
         </div>
         <nav class="ds-toc" data-toc-auto id="tc-divider-g-toc" aria-label="En esta página">
@@ -19268,7 +19269,7 @@ const [on, setOn] = useState(false)
             <li><span class="ds-a11y-icon">♿</span>Si el divider separa contenido con significado semántico, agregá <code>role="separator"</code> y <code>aria-orientation="vertical"</code> en la variante vertical.</li>
             <li><span class="ds-a11y-icon">♿</span>Si el divider es puramente decorativo (el caso más común), dejalo sin rol — un <code>&lt;div&gt;</code> vacío no agrega ruido al lector de pantalla por defecto.</li>
             <li><span class="ds-a11y-icon">♿</span>No dependas solo del divider para comunicar agrupación: reforzá con encabezados de sección o espaciado.</li>
-            <li><span class="ds-a11y-icon">♿</span>El contraste de 1px sobre la superficie cumple porque deriva de <code>--border</code>, calibrado para ambos temas.</li>
+            <li><span class="ds-a11y-icon">♿</span>El contraste de 1px sobre la superficie cumple porque deriva de <code>--color-outline-variant</code>, calibrado para ambos temas.</li>
           </ul>
         </section>
       </div>
@@ -19300,7 +19301,7 @@ const [on, setOn] = useState(false)
             <li><b>Contenedor vertical</b> de ítems: cada <code>ListItem</code> tiene <code>headline</code> y <code>supporting</code> opcional.</li>
             <li>Los ítems pueden ser estáticos o accionables (<code>asButton</code>), con estados hover/focus tematizados con tokens de superficie.</li>
             <li>Usá <code>Separator</code> para dividir grupos de ítems dentro de una misma lista.</li>
-            <li>Tematizada con tokens de superficie de Embassy (<code>bg-card</code>, <code>text-on-surface</code>, <code>text-on-surface-variant</code>); se adapta a modo claro/oscuro sin overrides.</li>
+            <li>Tematizada con tokens de superficie de Embassy (<code>--color-surface</code>, <code>--color-on-surface</code>, <code>--color-on-surface-variant</code>); se adapta a modo claro/oscuro sin overrides.</li>
           </ul>
 
           <!-- Component variants -->
@@ -19338,7 +19339,7 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
             <tbody>
-              <tr><td>Contenedor (<code>List</code>)</td><td>Columna a ancho completo, fondo de tarjeta</td></tr>
+              <tr><td>Contenedor (<code>List</code>)</td><td>Columna a ancho completo, fondo de superficie</td></tr>
               <tr><td>Ítem (<code>ListItem</code>)</td><td>Línea principal (<code>headline</code>) + texto de soporte opcional (<code>supporting</code>); estático o accionable (<code>asButton</code>)</td></tr>
               <tr><td>Headline</td><td>Texto principal</td></tr>
               <tr><td>Supporting</td><td>Texto secundario</td></tr>
@@ -19352,7 +19353,7 @@ const [on, setOn] = useState(false)
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
               <tr><td>Altura mínima del ítem</td><td>56px (<code>min-h-14</code>)</td></tr>
-              <tr><td>Padding del ítem</td><td>16px&nbsp;10px (<code>px-4 py-2.5</code>)</td></tr>
+              <tr><td>Padding del ítem</td><td>12px&nbsp;16px (<code>py-3 px-4</code>)</td></tr>
               <tr><td>Separación entre líneas</td><td><code>gap-0.5</code></td></tr>
               <tr><td>Headline</td><td><code>text-sm</code> (<code>--font-size-body-md</code>)</td></tr>
               <tr><td>Supporting</td><td>12.5px</td></tr>
@@ -19364,12 +19365,14 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
             <tbody>
-              <tr><td>Reposo</td><td>Fondo de tarjeta</td><td><code>--card-bg</code></td></tr>
-              <tr><td>Hover</td><td>Fondo sólido sobre el ítem, solo con <code>asButton</code> (<code>hover:bg-surface-variant</code>)</td><td><code>--color-surface-variant</code></td></tr>
-              <tr><td>Focus visible</td><td>Fondo sólido sobre el ítem (<code>focus-visible:bg-surface-variant</code>)</td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Reposo</td><td>Fondo de superficie</td><td><code>--color-surface</code></td></tr>
+              <tr><td>Hover (accionable)</td><td>Fondo sólido sobre el ítem, solo en <code>button.list-item</code></td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Focus visible (accionable)</td><td>Anillo de foco canónico de dos partes (outline + anillo interno), no cambia el fondo</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+              <tr><td>Seleccionado</td><td>Relleno tonal (<code>aria-selected="true"</code> / <code>.is-selected</code>), mismo lenguaje que Nav/Menu</td><td><code>--color-secondary-container</code> + <code>--color-on-secondary-container</code></td></tr>
+              <tr><td>Deshabilitado</td><td>Ítem atenuado, no interactivo (<code>:disabled</code> / <code>.is-disabled</code>)</td><td>opacidad 50%</td></tr>
             </tbody>
           </table>
-          <p class="docs-caption">El ítem accionable usa un fondo sólido en hover/focus, no la capa de estado (state layer) ni el anillo de foco de MD3 — desviación documentada.</p>
+          <p class="docs-caption">El ítem accionable usa el foco canónico de dos partes del DS (outline + anillo interno, GOVERNANCE §6.2) y un fondo sólido en hover; el estado seleccionado reutiliza el relleno tonal de Nav/Menu.</p>
         </section>
         <section class="docs-section" id="tc-list-s-3">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
@@ -19378,11 +19381,13 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
-              <tr><td>Contenedor / fondo</td><td><code>--card-bg</code></td></tr>
+              <tr><td>Contenedor / fondo</td><td><code>--color-surface</code></td></tr>
               <tr><td>Headline / texto</td><td><code>--color-on-surface</code></td></tr>
               <tr><td>Supporting</td><td><code>--color-on-surface-variant</code></td></tr>
-              <tr><td>Ítem accionable — hover/focus</td><td><code>--color-surface-variant</code></td></tr>
-              <tr><td>Separador</td><td><code>--border</code></td></tr>
+              <tr><td>Ítem accionable — hover</td><td><code>--color-surface-variant</code></td></tr>
+              <tr><td>Ítem accionable — focus</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
+              <tr><td>Ítem seleccionado</td><td><code>--color-secondary-container</code> + <code>--color-on-secondary-container</code></td></tr>
+              <tr><td>Separador (<code>.list--divided</code>)</td><td><code>--border</code></td></tr>
             </tbody>
           </table>
         </section>
