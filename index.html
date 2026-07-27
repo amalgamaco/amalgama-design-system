@@ -11078,7 +11078,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
     <div class="docs-section" id="ss-sn-states">
       <h2 class="docs-section-title">Estados y animación</h2>
       <p class="docs-section-desc">El Snackbar tiene tres fases: entrada, visible y salida. Las transiciones son intencionalmente rápidas para no interrumpir el flujo del usuario.</p>
-      <div class="ds-preview" style="flex-direction:column;gap:0;padding:0;overflow:hidden;background:#F5F6F8;">
+      <div class="ds-preview" style="flex-direction:column;gap:0;padding:0;overflow:hidden;background:var(--color-surface-container-lowest);">
         <div><div style="display:flex;flex-direction:column;gap:16px;padding:8px 0;width:100%"><div style="display:flex;align-items:center;gap:16px"><div style="width:96px;flex-shrink:0;font:600 11px 'Inter',sans-serif;color:var(--color-on-surface-variant)">Entrada<div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant)">250ms ease-out</div></div><div style="opacity:0.5;transform:translateY(10px);transition:none"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button></div></div></div><div style="display:flex;align-items:center;gap:16px"><div style="width:96px;flex-shrink:0;font:600 11px 'Inter',sans-serif;color:var(--color-on-surface-variant)">Visible<div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant)">4000ms</div></div><div style=";transition:none"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button></div></div></div><div style="display:flex;align-items:center;gap:16px"><div style="width:96px;flex-shrink:0;font:600 11px 'Inter',sans-serif;color:var(--color-on-surface-variant)">Salida<div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant)">200ms ease-in</div></div><div style="opacity:0.35;transition:none"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button></div></div></div></div></div>
       </div>
       <table class="ds-table" style="margin-top:20px;">
@@ -11089,14 +11089,14 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
           <tr><td>Salida</td><td>200ms</td><td>ease-in</td><td><code>opacity: 1 → 0</code></td></tr>
         </tbody>
       </table>
-      <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">⚑</span><span>El timer de auto-dismiss se pausa mientras el cursor o el foco estén dentro del Snackbar. Si el usuario activa el botón de acción o el botón de cierre, la salida se dispara inmediatamente (no espera los 4s). Si aparece un segundo Snackbar mientras hay uno visible, el primero se descarta sin animación de salida.</span></div>
+      <div class="bd-callout" style="margin-top:16px"><span class="bd-ico">⚑</span><span>El timer de auto-dismiss se pausa mientras el cursor o el foco estén dentro del Snackbar. Si el usuario activa el botón de acción o el botón de cierre, la salida se dispara inmediatamente (no espera los 4s). Si aparece un segundo Snackbar mientras hay uno visible, se apila en la cola (<code>.snackbar-viewport</code>) — el nuevo entra abajo y el anterior sube, sin descartarse.</span></div>
     </div>
 
     <!-- 6. Medidas -->
     <div class="docs-section" id="ss-sn-measures">
       <h2 class="docs-section-title">Medidas</h2>
       <p class="docs-section-desc">Todas las medidas en dp (density-independent pixels). Las anotaciones en magenta son doc chrome — no son tokens.</p>
-      <div><div style="position:relative;display:flex;justify-content:center;padding:44px 80px 56px;background:var(--color-surface-container-lowest);border:1px solid var(--border);border-radius:12px"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button><button type="button" class="snackbar-close" aria-label="Cerrar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div></div><table class="cs-meas-grid" style="margin-top:12px"><tbody><tr><td>Alto</td><td>48dp (una línea) · ~68dp apilado</td></tr><tr><td>Radio</td><td>--radius-sm (4dp)</td></tr><tr><td>Padding horizontal</td><td>16dp</td></tr><tr><td>Gap</td><td>8dp</td></tr><tr><td>Ancho</td><td>min 288dp / max 568dp</td></tr></tbody></table></div>
+      <div><div style="position:relative;display:flex;justify-content:center;padding:44px 80px 56px;background:var(--color-surface-container-lowest);border:1px solid var(--border);border-radius:var(--radius-lg)"><div class="snackbar snackbar--static" role="status" aria-live="polite" style="max-width:300px"><span class="snackbar-message">Invitación enviada</span><button type="button" class="snackbar-action">VER</button><button type="button" class="snackbar-close" aria-label="Cerrar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div></div><table class="cs-meas-grid" style="margin-top:12px"><tbody><tr><td>Alto</td><td>48dp (una línea) · ~68dp apilado</td></tr><tr><td>Radio</td><td>--radius-sm (4dp)</td></tr><tr><td>Padding horizontal</td><td>16dp</td></tr><tr><td>Gap</td><td>8dp</td></tr><tr><td>Ancho</td><td>min 288dp / max 568dp</td></tr></tbody></table></div>
       <table class="ds-table" style="margin-top:16px;">
         <thead><tr><th>Propiedad</th><th>Valor</th><th>Token</th></tr></thead>
         <tbody>
@@ -11156,7 +11156,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>Aparece anclado al <b>borde inferior</b>, centrado o alineado según el layout.</li>
             <li>Se ubica por <b>encima</b> de la navigation bar o de un FAB, sin taparlos.</li>
-            <li>Un solo snackbar a la vez; el nuevo reemplaza al anterior (no se apilan).</li>
+            <li>Se apilan en una cola (<code>.snackbar-viewport</code>): el más nuevo entra abajo, pegado al borde, y los anteriores suben. Mantené la cola corta — de a uno o dos mensajes visibles.</li>
           </ul>
         </section>
         <section class="docs-section" id="tc-snackbar-g-3">
@@ -11245,7 +11245,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
     opacity: 1;
     transform: none;
   }
-  .snackbar.snackbar--exiting {
+  .snackbar.snackbar--exit {
     transition: opacity 50ms ease-in;
   }
 }</code></pre></div>
@@ -11309,7 +11309,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 
       <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Solo mensaje</h3>
       <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;!-- Contenedor live region — debe existir en DOM desde el inicio --&gt;
-&lt;div class="snackbar-region" role="status" aria-live="polite" aria-atomic="true"&gt;
+&lt;div class="snackbar-viewport" role="status" aria-live="polite" aria-atomic="true"&gt;
 
   &lt;!-- Snackbar — solo mensaje --&gt;
   &lt;div class="snackbar" role="presentation"&gt;
@@ -11319,7 +11319,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 &lt;/div&gt;</code></pre></div>
 
       <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Mensaje + botón de acción</h3>
-      <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;div class="snackbar-region" role="status" aria-live="polite" aria-atomic="true"&gt;
+      <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;div class="snackbar-viewport" role="status" aria-live="polite" aria-atomic="true"&gt;
   &lt;div class="snackbar" role="presentation"&gt;
     &lt;span class="snackbar-message"&gt;Archivo eliminado&lt;/span&gt;
     &lt;button class="snackbar-action"&gt;Deshacer&lt;/button&gt;
@@ -11327,7 +11327,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 &lt;/div&gt;</code></pre></div>
 
       <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Mensaje + acción + cierre</h3>
-      <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;div class="snackbar-region" role="status" aria-live="polite" aria-atomic="true"&gt;
+      <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;div class="snackbar-viewport" role="status" aria-live="polite" aria-atomic="true"&gt;
   &lt;div class="snackbar" role="presentation"&gt;
     &lt;span class="snackbar-message"&gt;Invitación enviada&lt;/span&gt;
     &lt;button class="snackbar-action"&gt;Ver&lt;/button&gt;
@@ -11341,7 +11341,7 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 
       <h3 style="font-family:'Epilogue',sans-serif;font-size:14px;font-weight:600;margin:24px 0 10px;color:var(--ds-text-2)">Mensaje de error (alert)</h3>
       <div class="docs-code-wrapper"><pre class="docs-code"><code>&lt;!-- Para errores: role="alert" + aria-live="assertive" --&gt;
-&lt;div class="snackbar-region" role="alert" aria-live="assertive" aria-atomic="true"&gt;
+&lt;div class="snackbar-viewport" role="alert" aria-live="assertive" aria-atomic="true"&gt;
   &lt;div class="snackbar" role="presentation"&gt;
     &lt;span class="snackbar-message"&gt;No se pudo guardar. Revisá tu conexión.&lt;/span&gt;
     &lt;button class="snackbar-action"&gt;Reintentar&lt;/button&gt;
@@ -11362,77 +11362,60 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
  * Uso: ver sección Specs → Medidas y Anatomía
  */
 
-/* ── Región live (siempre en DOM) ── */
-.snackbar-region {
+/* ── Contenedor del Snackbar (standalone: position:fixed) ── */
+.snackbar {
   position: fixed;
   bottom: 16px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(0);
   z-index: 300;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  pointer-events: none;
-}
-
-/* ── Contenedor del Snackbar ── */
-.snackbar {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);                          /* 8px */
   min-width: 288px;
   max-width: 568px;
   min-height: 48px;
-  padding: 0 16px;
+  padding: 0 var(--space-2) 0 var(--space-4);   /* 0 8 0 16 */
   background: var(--color-inverse-surface);
-  border-radius: var(--radius-sm); /* 4dp */
-  pointer-events: auto;
-
-  /* Entrada: slide up */
-  animation: snackbar-enter 250ms ease-out both;
+  border-radius: var(--radius-sm);              /* 4dp */
+  box-shadow: var(--shadow-lg);
+  animation: snackbar-in 250ms var(--ease-default) both;
 }
+.snackbar--exit { animation: snackbar-out 200ms ease-in forwards; }
 
-/* Variante apilada: mensaje largo */
-.snackbar--stacked {
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 12px 16px 8px;
-  gap: 4px;
+@keyframes snackbar-in {
+  from { transform: translateX(-50%) translateY(16px); opacity: 0; }
+  to   { transform: translateX(-50%) translateY(0);    opacity: 1; }
 }
-.snackbar--stacked .snackbar-action {
-  align-self: center;
-  margin-top: 4px;
+@keyframes snackbar-out {
+  to { transform: translateX(-50%) translateY(16px); opacity: 0; }
 }
 
 /* ── Mensaje ── */
 .snackbar-message {
   flex: 1;
-  font-family: var(--font-body);
-  font-size: var(--font-size-body-md);
-  font-weight: 400;
-  line-height: 1.5;
+  min-width: 0;
   color: var(--color-inverse-on-surface);
-  padding: 12px 0;
+  font: var(--font-weight-regular) var(--font-size-body-md)/1.4 var(--font-body);
+  padding: 14px 0;
 }
 
 /* ── Botón de acción (texto puro) ── */
 .snackbar-action {
   flex-shrink: 0;
-  padding: 8px 0 8px 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-size: var(--font-size-label);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-inverse-primary);
+  border: 0;
+  background: transparent;
+  padding: 8px var(--space-2);
   border-radius: var(--radius-sm);
-  transition: opacity 150ms;
+  color: var(--color-inverse-primary);
+  font: var(--font-weight-bold) var(--font-size-label)/1 var(--font-body);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-default);
 }
-.snackbar-action:hover { opacity: 0.85; }
+.snackbar-action:hover  { background: color-mix(in srgb, var(--color-inverse-primary) 8%, transparent); }
+.snackbar-action:active { background: color-mix(in srgb, var(--color-inverse-primary) 12%, transparent); }
 .snackbar-action:focus-visible {
   outline: 2px solid var(--color-inverse-primary);
   outline-offset: 2px;
@@ -11441,51 +11424,73 @@ function Modal({ open, onClose, alertMode = false, className, children, ...props
 /* ── Botón de cierre ── */
 .snackbar-close {
   flex-shrink: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 32px;
   height: 32px;
-  background: none;
-  border: none;
-  cursor: pointer;
+  border: 0;
+  background: transparent;
+  border-radius: 50%;
   color: var(--color-inverse-on-surface);
-  border-radius: var(--radius-sm);
-  opacity: 0.85;
-  transition: opacity 150ms;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-default);
 }
-.snackbar-close:hover { opacity: 1; }
+.snackbar-close:hover  { background: color-mix(in srgb, var(--color-inverse-on-surface) 8%, transparent); }
 .snackbar-close:focus-visible {
   outline: 2px solid var(--color-inverse-primary);
   outline-offset: 2px;
 }
 
-/* ── Salida (clase añadida por JS) ── */
-.snackbar--exiting {
-  animation: snackbar-exit 200ms ease-in forwards;
+/* ── Variante estática (Specs: sin fixed ni animación) ── */
+.snackbar--static {
+  position: static; bottom: auto; left: auto;
+  transform: none; animation: none; width: 100%;
 }
 
-/* ── Animaciones ── */
-@keyframes snackbar-enter {
-  from { transform: translateY(100%); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+/* ── Variante apilada (mensaje largo + acción debajo) ── */
+.snackbar--multiline {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px var(--space-2) var(--space-2) var(--space-4);
+  min-height: 68px;
 }
-
-@keyframes snackbar-exit {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
+.snackbar--multiline .snackbar-message { padding: 0 0 4px; }
+.snackbar--multiline .snackbar-action  { align-self: flex-end; }
 
 /* ── Reducción de movimiento ── */
 @media (prefers-reduced-motion: reduce) {
-  .snackbar { animation: snackbar-enter-reduced 80ms ease-out both; }
-  @keyframes snackbar-enter-reduced {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  .snackbar--exiting {
-    animation: snackbar-exit 50ms ease-in forwards;
-  }
+  .snackbar { animation: none; }
+  .snackbar--exit { animation: none; transition: opacity 50ms ease-in; }
+}
+
+/* ── Cola de apilado — N .snackbar dentro de .snackbar-viewport ── */
+.snackbar-viewport {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 300;
+  display: flex;
+  flex-direction: column-reverse;   /* el más nuevo entra abajo */
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.snackbar-viewport .snackbar {
+  position: relative; bottom: auto; left: auto;
+  transform: none; pointer-events: auto;
+  animation: snackbar-stack-in 250ms var(--ease-default) both;
+}
+.snackbar-viewport .snackbar.snackbar--exit {
+  animation: snackbar-stack-out 200ms ease-in forwards;
+}
+@keyframes snackbar-stack-in {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes snackbar-stack-out {
+  to { transform: translateY(16px); opacity: 0; }
 }</code></pre></div>
     </div>
 
@@ -19820,7 +19825,7 @@ const [on, setOn] = useState(false)
               </div>
             </div></div>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li><b>Leading icon</b> — refuerza el significado de la acción (18px).</li>
+            <li><b>Leading icon</b> — refuerza el significado de la acción (16px).</li>
             <li><b>Trailing</b> — atajo de teclado o chevron de submenú.</li>
             <li><b>Separador</b> — <code>DropdownMenuSeparator</code> divide grupos.</li>
             <li><b>Ítem deshabilitado</b> — <code>disabled</code>, no interactivo.</li>
@@ -19854,7 +19859,7 @@ const [on, setOn] = useState(false)
           <table class="ds-table">
             <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
             <tbody>
-              <tr><td>Contenedor (surface)</td><td><code>--color-surface-container-high</code> + <code>--border</code> + <code>shadow-lg</code></td></tr>
+              <tr><td>Contenedor (surface)</td><td><code>--color-surface-container-high</code> + <code>--color-outline-variant</code> + <code>--shadow-md</code></td></tr>
               <tr><td>Ítem — texto</td><td><code>--color-on-surface</code></td></tr>
               <tr><td>Ítem — hover</td><td>tinte azul suave + etiqueta/ícono azul <code>--color-nav-hover</code> / <code>--color-nav-hover-content</code></td></tr>
               <tr><td>Ítem — focus (teclado)</td><td><code>--color-nav-hover</code> + anillo <code>--color-focus-ring</code></td></tr>
@@ -19862,7 +19867,7 @@ const [on, setOn] = useState(false)
               <tr><td>Ítem — selected (activo)</td><td><code>--color-nav-selected</code> + <code>--color-nav-selected-content</code> (semibold)</td></tr>
               <tr><td>Ítem — deshabilitado</td><td>opacidad 40%</td></tr>
               <tr><td>Ícono / atajo</td><td><code>--color-on-surface-variant</code></td></tr>
-              <tr><td>Separador</td><td><code>--border</code></td></tr>
+              <tr><td>Separador</td><td><code>--color-outline-variant</code></td></tr>
               <tr><td>Ítem destructivo</td><td><code>--color-error</code> / <code>--color-error-container</code></td></tr>
             </tbody>
           </table>
@@ -19950,13 +19955,13 @@ const [on, setOn] = useState(false)
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
             <tbody>
               <tr><td>Padding del contenedor</td><td>6px (<code>p-1.5</code>)</td></tr>
-              <tr><td>Padding del ítem</td><td>12px&nbsp;8px (<code>px-3 py-2</code>)</td></tr>
+              <tr><td>Padding del ítem</td><td>8px&nbsp;10px (<code>py-2 px-2.5</code>)</td></tr>
               <tr><td>Radio del contenedor</td><td><code>--radius-md</code> (<code>rounded-md</code>)</td></tr>
-              <tr><td>Radio del ítem</td><td><code>--radius-md</code> (<code>rounded-md</code>, 8px — igual que la navegación)</td></tr>
-              <tr><td>Ancho mínimo</td><td>160px (<code>min-w-[10rem]</code>)</td></tr>
-              <tr><td>Ícono leading</td><td>18×18px, gap 8px (<code>gap-2</code>)</td></tr>
-              <tr><td>Separador</td><td>1px, margen vertical 6px (<code>my-1.5</code>)</td></tr>
-              <tr><td>Elevación</td><td><code>shadow-lg</code>; <code>sideOffset</code> 6px del trigger</td></tr>
+              <tr><td>Radio del ítem</td><td><code>--radius-sm</code> (<code>rounded-sm</code>)</td></tr>
+              <tr><td>Ancho mínimo</td><td>180px (<code>min-w-[11.25rem]</code>)</td></tr>
+              <tr><td>Ícono leading</td><td>16×16px, gap 8px (<code>gap-2</code>)</td></tr>
+              <tr><td>Separador</td><td>1px, margen vertical 4px (<code>my-1</code>)</td></tr>
+              <tr><td>Elevación</td><td><code>--shadow-md</code>; <code>sideOffset</code> 6px del trigger</td></tr>
             </tbody>
           </table>
         </section>
@@ -19965,7 +19970,7 @@ const [on, setOn] = useState(false)
           <p class="docs-section-desc">Alineación y ritmo vertical de los ítems:</p>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>Alto de ítem cómodo para toque (<code>py-2</code> + texto <code>text-sm</code>); densidad consistente en todo el menú.</li>
-            <li>El ícono leading (18px) se alinea verticalmente al centro del texto; el texto arranca a una distancia constante del borde con o sin ícono.</li>
+            <li>El ícono leading (16px) se alinea verticalmente al centro del texto; el texto arranca a una distancia constante del borde con o sin ícono.</li>
             <li>El contenido trailing (atajo o chevron) se alinea a la derecha con <code>ml-auto</code>, en <code>--color-on-surface-variant</code>.</li>
             <li>La superficie abre anclada al trigger; su alto máximo deja al menos una fila menos que el alto de la app para señalar scroll.</li>
           </ul>
@@ -22151,7 +22156,7 @@ const Switch = React.forwardRef&lt;HTMLInputElement, SwitchProps&gt;(
           <ul class="bd-overview-list">
             <li>Aparece al hacer hover, focus o tap sobre un elemento; el texto debe ser breve y no repetir el contenido adyacente.</li>
             <li><b>Dos tipos:</b> <b>plain tooltip</b> (etiqueta corta sobre <code>inverse-surface</code>) y <b>rich tooltip</b> (con subheader, cuerpo y acciones opcionales).</li>
-            <li>Timing: 500ms de hover para aparecer, inmediato en foco de teclado; se cierra al salir el cursor o con Escape.</li>
+            <li>Timing: 400ms de hover para aparecer, inmediato en foco de teclado; se cierra al salir el cursor o con Escape.</li>
             <li>Envolvé el trigger en <code>.tooltip-wrap</code> (ancla <code>position: relative</code>) y agregá <code>.tooltip-content</code> como hijo — sin dependencias, sin Provider.</li>
           </ul>
 
@@ -22219,7 +22224,7 @@ const Switch = React.forwardRef&lt;HTMLInputElement, SwitchProps&gt;(
               <tr><td>Plain tooltip (<code>TooltipContent</code>)</td><td>Etiqueta corta de una línea sobre superficie invertida, con sombra</td></tr>
               <tr><td>Rich tooltip — header</td><td>Título (<code>text-body-md</code> semibold) + subtítulo opcional (<code>text-body-sm</code>)</td></tr>
               <tr><td>Rich tooltip — body + acciones</td><td>Cuerpo de texto y fila de acciones alineadas a la derecha</td></tr>
-              <tr><td>Trigger</td><td>Envuelto en <code>TooltipProvider</code>; el contenido se asocia con <code>aria-describedby</code></td></tr>
+              <tr><td>Trigger</td><td>Envuelto en <code>.tooltip-wrap</code> (ancla <code>position: relative</code>); el contenido se asocia con <code>aria-describedby</code></td></tr>
             </tbody>
           </table>
         </section>
@@ -22359,15 +22364,15 @@ const Switch = React.forwardRef&lt;HTMLInputElement, SwitchProps&gt;(
         <section class="docs-section" id="tc-tooltip-g-3">
           <h2 class="docs-section-title">Comportamiento</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
-            <li>Aparece <b>~500&nbsp;ms</b> tras el hover e <b>inmediatamente</b> al recibir foco por teclado.</li>
+            <li>Aparece <b>~400&nbsp;ms</b> tras el hover e <b>inmediatamente</b> al recibir foco por teclado.</li>
             <li>Se cierra con <code>Esc</code> o al salir; no debe tapar el control que describe.</li>
-            <li>Envolvé el árbol en un <code>TooltipProvider</code>; el texto no repite lo que ya dice la UI.</li>
+            <li>Envolvé el trigger en <code>.tooltip-wrap</code> (CSS puro, sin Provider); el texto no repite lo que ya dice la UI.</li>
           </ul>
         </section>
         <section class="docs-section" id="tc-tooltip-g-4">
           <h2 class="docs-section-title">Do / Don't</h2>
           <div class="ds-guideline-grid">
-            <div class="ds-guideline-card do"><h3>✓ Do</h3><ul><li>Usar <code>TooltipProvider</code> una sola vez en el árbol, no por instancia.</li><li>Mantener el texto del plain tooltip a una línea.</li></ul></div>
+            <div class="ds-guideline-card do"><h3>✓ Do</h3><ul><li>Envolver cada trigger en su propio <code>.tooltip-wrap</code> (CSS puro, sin Provider global).</li><li>Mantener el texto del plain tooltip a una línea.</li></ul></div>
             <div class="ds-guideline-card dont"><h3>✕ Don't</h3><ul><li>Meter contenido interactivo extenso en un plain tooltip — usar Rich tooltip o Popover.</li><li>Depender del tooltip como única fuente de información crítica (no existe hover en táctil).</li></ul></div>
           </div>
         </section>
@@ -22399,9 +22404,9 @@ const Switch = React.forwardRef&lt;HTMLInputElement, SwitchProps&gt;(
           <h2 class="docs-section-title">Accesibilidad</h2>
           <ul class="ds-a11y-list">
             <li><span class="ds-a11y-icon">♿</span>El <b>plain tooltip</b> se asocia al trigger con <code>aria-describedby</code> y se muestra tanto en hover (CSS) como en foco de teclado (<code>:focus-within</code>).</li>
-            <li><span class="ds-a11y-icon">♿</span>El <b>rich tooltip</b> usa Popover: se abre con click/Enter, atrapa el foco, se cierra con <code>Esc</code> o click afuera y devuelve el foco al trigger.</li>
+            <li><span class="ds-a11y-icon">♿</span>El <b>rich tooltip</b> se abre con click/Enter (vanilla JS, sin Popover/Radix), se cierra con <code>Esc</code> o click afuera y devuelve el foco al trigger.</li>
             <li><span class="ds-a11y-icon">♿</span>No metas información crítica solo en un tooltip — debe estar disponible por otra vía, ya que el hover no existe en táctil.</li>
-            <li><span class="ds-a11y-icon">♿</span>El contraste de texto sobre <code>inverse-surface</code> / <code>surface-container-high</code> cumple AA en ambos temas.</li>
+            <li><span class="ds-a11y-icon">♿</span>El contraste de texto sobre <code>inverse-surface</code> / <code>surface-container</code> cumple AA en ambos temas.</li>
           </ul>
         </section>
       </div>
@@ -22420,7 +22425,7 @@ import { Button } from &quot;./components/ui/button&quot;
           </div>
 
           <h2 class="docs-section-title" style="margin-top:32px">Rich tooltip — persistente con título, subtítulo y cierre</h2>
-          <p class="docs-section-desc">El <code>RichTooltip</code> (CSS + vanilla JS, sin Popover/Radix) es persistente y se abre con click. Acepta <code>title</code>, <code>subtitle</code>, <code>actions</code> opcionales y un botón de cierre (×) por defecto. Fondo <code>surface-container-high</code> con elevación. Importá desde <code>./components/ui/rich-tooltip</code>.</p>
+          <p class="docs-section-desc">El <code>RichTooltip</code> (CSS + vanilla JS, sin Popover/Radix) es persistente y se abre con click. Acepta <code>title</code>, <code>subtitle</code>, <code>actions</code> opcionales y un botón de cierre (×) por defecto. Fondo <code>surface-container</code> con elevación. Importá desde <code>./components/ui/rich-tooltip</code>.</p>
           <div class="docs-code-wrapper">
             <button class="docs-copy-btn" onclick="copyCode(this)">Copiar</button>
 <pre class="docs-code"><code>import { RichTooltip } from &quot;./components/ui/rich-tooltip&quot;
