@@ -7573,7 +7573,7 @@ function segSwitch(el) {
             <tr><td>Label</td><td>Prop <code>label</code>. Texto <code>--font-size-label</code>, peso medium, <code>mb-2</code>; toma color de enlace en focus</td></tr>
             <tr><td>Asterisco requerido</td><td>Prop <code>required</code> — asterisco en <code>--color-error</code></td></tr>
             <tr><td>Ícono leading / trailing</td><td>Props <code>leadingIcon</code> / <code>trailingIcon</code> — 18px, <code>aria-hidden</code>; padding del campo <code>42px</code> del lado del ícono</td></tr>
-            <tr><td>Campo (input)</td><td>Padding 14px&nbsp;10px (<code>px-[14px] py-[10px]</code>), radio <code>--radius-md</code>, texto <code>--font-size-body-md</code>, borde de 1px</td></tr>
+            <tr><td>Campo (input)</td><td>Padding 10px&nbsp;14px (<code>px-[14px] py-[10px]</code>), radio <code>--radius-md</code>, texto <code>--font-size-body-md</code>, borde de 1px</td></tr>
             <tr><td>Supporting text</td><td>Prop <code>hint</code> — bajo el campo, <code>--font-size-caption</code>, <code>--text-secondary</code></td></tr>
             <tr><td>Mensaje de error</td><td>Prop <code>error</code> — reemplaza al hint, en <code>--color-error</code>; enlazado por <code>aria-describedby</code></td></tr>
           </tbody>
@@ -7625,7 +7625,7 @@ function segSwitch(el) {
         <table class="ds-table">
           <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
           <tbody>
-            <tr><td>Padding del campo</td><td><code>14px 10px</code> (<code>px-[14px] py-[10px]</code>)</td></tr>
+            <tr><td>Padding del campo</td><td><code>10px 14px</code> (<code>px-[14px] py-[10px]</code>)</td></tr>
             <tr><td>Radio</td><td><code>var(--radius-md)</code></td></tr>
             <tr><td>Tipografía del campo</td><td><code>var(--font-size-body-md)</code></td></tr>
             <tr><td>Margen bajo el label</td><td><code>8px</code> (<code>mb-2</code>)</td></tr>
@@ -8351,7 +8351,7 @@ export { Select }</code></pre>
         <table class="ds-table">
           <thead><tr><th>Parte</th><th>Especificación</th></tr></thead>
           <tbody>
-            <tr><td>Campo (textarea)</td><td>Padding 14px&nbsp;10px, radio <code>--radius-md</code>, texto <code>--font-size-body-md</code>, <code>min-h-[80px]</code>, <code>resize-y</code>, line-height 1.5</td></tr>
+            <tr><td>Campo (textarea)</td><td>Padding 10px&nbsp;14px, radio <code>--radius-md</code>, texto <code>--font-size-body-md</code>, <code>min-h-[80px]</code>, <code>resize-y</code>, line-height 1.5</td></tr>
             <tr><td>Contenedor con label</td><td>Wrapper <code>group mb-5</code> (solo si se pasa <code>label</code>)</td></tr>
             <tr><td>Label</td><td>Texto <code>--font-size-label</code>, peso medium, <code>mb-2</code></td></tr>
             <tr><td>Asterisco requerido</td><td>Con la prop <code>required</code></td></tr>
@@ -8399,7 +8399,7 @@ export { Select }</code></pre>
             <tr><td>Altura mínima</td><td><code>80px</code> (<code>min-h-[80px]</code>)</td></tr>
             <tr><td>Resize</td><td><code>vertical</code> (<code>resize-y</code>)</td></tr>
             <tr><td>Line-height</td><td><code>1.5</code></td></tr>
-            <tr><td>Padding</td><td><code>14px 10px</code> (<code>px-[14px] py-[10px]</code>)</td></tr>
+            <tr><td>Padding</td><td><code>10px 14px</code> (<code>px-[14px] py-[10px]</code>)</td></tr>
             <tr><td>Radio</td><td><code>var(--radius-md)</code></td></tr>
             <tr><td>Tipografía</td><td><code>var(--font-size-body-md)</code></td></tr>
           </tbody>
@@ -12153,15 +12153,15 @@ export { EmptyState }</code></pre>
             <div class="stats-grid"><div class="stat-card">
     <div class="stat-label">Vacantes activas</div>
     <div class="stat-value">24</div>
-    <div class="stat-change-positive">↑ 4 desde el mes pasado</div>
+    <div class="stat-change stat-change-positive">↑ 4 desde el mes pasado</div>
   </div><div class="stat-card">
     <div class="stat-label">Candidatos en proceso</div>
     <div class="stat-value">138</div>
-    <div class="stat-change-negative">↓ 12 desde la semana pasada</div>
+    <div class="stat-change stat-change-negative">↓ 12 desde la semana pasada</div>
   </div><div class="stat-card">
     <div class="stat-label">Posiciones cubiertas</div>
     <div class="stat-value">91%</div>
-    <div class="stat-change-positive">↑ 3% vs. trimestre anterior</div>
+    <div class="stat-change stat-change-positive">↑ 3% vs. trimestre anterior</div>
   </div></div>
           </div>
 
@@ -12182,19 +12182,19 @@ export { EmptyState }</code></pre>
             <div class="stats-grid"><div class="stat-card">
     <div class="stat-label">Vacantes activas</div>
     <div class="stat-value">24</div>
-    <div class="stat-change-positive">+3 este mes</div>
+    <div class="stat-change stat-change-positive">+3 este mes</div>
   </div><div class="stat-card">
     <div class="stat-label">Candidatos</div>
     <div class="stat-value">156</div>
-    <div class="stat-change-positive">+12 esta semana</div>
+    <div class="stat-change stat-change-positive">+12 esta semana</div>
   </div><div class="stat-card">
     <div class="stat-label">Entrevistas hoy</div>
     <div class="stat-value">8</div>
-    <div class="stat-change-neutral">Sin cambios</div>
+    <div class="stat-change stat-change-neutral">Sin cambios</div>
   </div><div class="stat-card">
     <div class="stat-label">Tiempo promedio</div>
     <div class="stat-value">18d</div>
-    <div class="stat-change-negative">+2d vs anterior</div>
+    <div class="stat-change stat-change-negative">+2d vs anterior</div>
   </div></div>
           </div>
           <table class="ds-table" style="margin-top:16px">
@@ -14020,9 +14020,17 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
     <div class="vacancy-icon">💼</div>
     <div class="vacancy-info">
       <div class="vacancy-name">Diseñador UX Senior <span class="badge badge-open">Abierta</span></div>
-      <div class="vacancy-meta">Producto · Remoto · Senior</div>
+      <div class="vacancy-meta">Producto <span class="meta-dot"></span> Remoto <span class="meta-dot"></span> Senior</div>
+      <div class="vacancy-stats">
+        <div class="stat-pill"><span class="count">12</span> candidatos</div>
+        <div class="stat-pill"><span class="count">3</span> entrevistas</div>
+      </div>
     </div>
-    <div class="vacancy-right"><div class="vacancy-age">5d</div></div>
+    <div class="vacancy-right">
+      <button type="button" class="more-btn" aria-label="Más acciones"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+      <div class="assignee" style="display:flex;gap:4px"><div class="assignee-avatar blue">MG</div><div class="assignee-avatar green">CL</div></div>
+      <div class="vacancy-age">5d</div>
+    </div>
   </div>
         </div>
         <table class="ds-table" style="margin-top:16px">
@@ -14070,11 +14078,11 @@ css/components/toolbar.css   <!-- o css/components.css --></code></pre>
           <thead><tr><th>Parte</th><th>Rol / token</th></tr></thead>
           <tbody>
             <tr><td><code>.vacancy-card</code></td><td><code>--card-bg</code> + <code>--border</code> + <code>--radius</code> + <code>--shadow-md</code></td></tr>
-            <tr><td><code>.vacancy-icon</code></td><td><code>--interactive-light</code> + <code>--radius-md</code></td></tr>
+            <tr><td><code>.vacancy-icon</code></td><td><code>--color-secondary-container</code> + <code>--radius-md</code></td></tr>
             <tr><td><code>.vacancy-name</code></td><td><code>--text-primary</code> (<code>--font-heading</code>, <code>--font-size-heading-xs</code>)</td></tr>
             <tr><td><code>.vacancy-meta</code></td><td><code>--text-muted</code></td></tr>
             <tr><td><code>.stat-pill</code></td><td><code>--text-secondary</code> / <code>--text-primary</code></td></tr>
-            <tr><td><code>.assignee-avatar</code></td><td>Gradientes de paleta (<code>--secondary-*</code>, <code>--success-*</code>, <code>--tertiary-*</code>)</td></tr>
+            <tr><td><code>.assignee-avatar</code></td><td>Pares container/on-container por variante (<code>--color-secondary-container</code>, <code>--color-success-container</code>, <code>--color-tertiary-container</code>, <code>--color-error-container</code>) — sin gradientes</td></tr>
             <tr><td><code>.vacancy-age</code></td><td><code>--text-muted</code> (<code>--font-mono</code>)</td></tr>
             <tr><td>Card — foco</td><td><code>--color-focus</code> + <code>--color-focus-ring</code></td></tr>
           </tbody>
