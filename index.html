@@ -16778,7 +16778,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <li>Rota un conjunto de ítems (imágenes o cards) con scroll horizontal y snap.</li>
             <li><b>Variantes:</b> un ítem por slide y múltiples ítems por slide (<code>basis-1/2</code>).</li>
             <li>Controles de navegación previo/siguiente (<code>CarouselPrevious</code> / <code>CarouselNext</code>).</li>
-            <li>Radio de ítem <code>corner-extra-large</code>; gap de 8&nbsp;dp entre ítems; elevación nivel&nbsp;1 en hover.</li>
+            <li>Gap de 16px entre ítems; el radio del ítem lo define su contenido (sin radio impuesto) y no hay elevación en hover del ítem.</li>
             <li>El indicador de foco usa el rol <code>secondary</code>, no <code>primary</code>.</li>
           </ul>
 
@@ -16805,7 +16805,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="ds-toc-layout">
         <div class="ds-toc-body">
 
-        <section class="docs-section" id="tc-app-bar-s-0">
+        <section class="docs-section" id="tc-carousel-s-0">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Construido con scroll nativo CSS (<code>scroll-snap-type</code>), sin librería de drag. Ver el ejemplo en vivo en la pestaña Overview.</p>
           <table class="ds-table">
@@ -16818,17 +16818,18 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-1">
+        <section class="docs-section" id="tc-carousel-s-1">
           <h2 class="docs-section-title">Configuraciones</h2>
           <table class="ds-table">
             <thead><tr><th>Variante</th><th>Especificación</th></tr></thead>
             <tbody>
-              <tr><td>Un ítem por slide</td><td><code>CarouselItem</code> con <code>basis-full</code> — cada slide ocupa el ancho completo</td></tr>
-              <tr><td>Múltiples ítems por slide</td><td><code>basis-1/2</code> (u otra fracción) — varios ítems visibles a la vez</td></tr>
+              <tr><td>Un ítem por slide</td><td><code>.carousel-item</code> a ancho completo — cada slide ocupa el ancho del viewport</td></tr>
+              <tr><td>Múltiples ítems por slide</td><td><code>.carousel-item-half</code> (u otra fracción) — varios ítems visibles a la vez</td></tr>
+              <tr><td>Orientación vertical</td><td><code>.carousel-vertical</code> — scroll-snap en Y con controles arriba/abajo; el contenedor necesita un alto acotado</td></tr>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-2">
+        <section class="docs-section" id="tc-carousel-s-2">
           <h2 class="docs-section-title">Medidas</h2>
           <table class="ds-table">
             <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
@@ -16839,7 +16840,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-3">
+        <section class="docs-section" id="tc-carousel-s-3">
           <h2 class="docs-section-title">Estados</h2>
           <table class="ds-table">
             <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
@@ -16850,7 +16851,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-4">
+        <section class="docs-section" id="tc-carousel-s-4">
           <h2 class="docs-section-title">Tokens y especificaciones</h2>
           <p class="docs-section-desc">Mapeo de cada parte a su rol de color de Embassy. Se recalibra solo en dark mode.</p>
           <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="carousel"></div></div>
@@ -16864,23 +16865,23 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             </tbody>
           </table>
         </section>
-        <section class="docs-section" id="tc-app-bar-s-5">
+        <section class="docs-section" id="tc-carousel-s-5">
           <div class="ds-callout">
             <strong>Relación con Material Design 3.</strong> MD3 define cuatro layouts de carousel — <b>multi-browse</b>, <b>uncontained</b>, <b>hero</b> y <b>full-screen</b> — con radio de ítem de 28&nbsp;dp y gap de 8&nbsp;dp. <b>Embassy implementa un carousel básico</b> (scroll nativo con <code>scroll-snap-type</code>, sin librería) con ítems de ancho configurable (clase <code>.carousel-item</code>/<code>.carousel-item-half</code>), gap de 16px y botones de navegación superpuestos — sin radio de ítem impuesto (lo define el contenido), sin física de swipe/autoplay/loop más allá del scroll táctil nativo, ni las cuatro presentaciones MD3. Divergencia documentada.
           </div>
         </section>
       
         </div>
-        <nav class="ds-toc" data-toc-auto id="tc-app-bar-s-toc" aria-label="En esta página">
+        <nav class="ds-toc" data-toc-auto id="tc-carousel-s-toc" aria-label="En esta página">
           <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="ds-toc-title">En esta página</div>
           <ul class="ds-toc-list">
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-0">Anatomía</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-1">Configuraciones</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-2">Medidas</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-3">Estados</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-4">Tokens y especificaciones</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-s-5">Sección 6</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-0">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-1">Configuraciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-2">Medidas</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-3">Estados</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-4">Tokens y especificaciones</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-s-5">Material Design 3</a></li>
           </ul>
         </nav>
         </div>
@@ -16889,7 +16890,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         <div class="ds-toc-layout">
         <div class="ds-toc-body">
 
-        <section class="docs-section" id="tc-app-bar-g-0">
+        <section class="docs-section" id="tc-carousel-g-0">
           <h2 class="docs-section-title">Uso</h2>
           <p class="ds-p">El carousel permite recorrer una colección de <b>ítems visuales homogéneos</b> (imágenes, cards) cuando el espacio es limitado y el contenido es secundario.</p>
           <div class="bd-grid c2">
@@ -16897,13 +16898,13 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Contenido crítico que el usuario debe ver sí o sí.</li><li>Comparar opciones lado a lado → una grilla o <b>Table</b>.</li><li>Navegación principal o pasos de un flujo → <b>Tabs</b> / pantallas.</li></ul></div></div>
           </div>
         </section>
-        <section class="docs-section" id="tc-app-bar-g-1">
+        <section class="docs-section" id="tc-carousel-g-1">
           <h2 class="docs-section-title">Anatomía</h2>
           <p class="docs-section-desc">Componente real. Las partes que lo componen:</p>
           <div class="bd-family-wrap"><div><div style="display:flex;flex-direction:column;gap:32px"><div><p class="ds-p" style="margin-bottom:12px">Un ítem por slide</p><div class="carousel" style="max-width:384px;margin:0 auto"><div class="carousel-content"><div class="carousel-item"><div style="display:flex;align-items:center;justify-content:center;height:128px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:16px;background:var(--color-primary-container);color:var(--color-on-primary-container)">Slide 1</div></div><div class="carousel-item"><div style="display:flex;align-items:center;justify-content:center;height:128px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:16px;background:var(--color-secondary-container);color:var(--color-on-secondary-container)">Slide 2</div></div><div class="carousel-item"><div style="display:flex;align-items:center;justify-content:center;height:128px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:16px;background:var(--color-tertiary-container);color:var(--color-on-tertiary-container)">Slide 3</div></div><div class="carousel-item"><div style="display:flex;align-items:center;justify-content:center;height:128px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:16px;background:var(--color-success-container);color:var(--color-on-success-container)">Slide 4</div></div></div><button type="button" class="carousel-btn carousel-btn-prev" aria-label="Anterior" onclick="carouselScroll(this,-1)">‹</button><button type="button" class="carousel-btn carousel-btn-next" aria-label="Siguiente" onclick="carouselScroll(this,1)">›</button></div></div><div><p class="ds-p" style="margin-bottom:12px">Múltiples ítems (2 por vista)</p><div class="carousel" style="max-width:512px;margin:0 auto"><div class="carousel-content"><div class="carousel-item carousel-item-half"><div style="display:flex;align-items:center;justify-content:center;height:96px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:14px;background:var(--color-primary-container);color:var(--color-on-primary-container)">Slide 1</div></div><div class="carousel-item carousel-item-half"><div style="display:flex;align-items:center;justify-content:center;height:96px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:14px;background:var(--color-secondary-container);color:var(--color-on-secondary-container)">Slide 2</div></div><div class="carousel-item carousel-item-half"><div style="display:flex;align-items:center;justify-content:center;height:96px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:14px;background:var(--color-tertiary-container);color:var(--color-on-tertiary-container)">Slide 3</div></div><div class="carousel-item carousel-item-half"><div style="display:flex;align-items:center;justify-content:center;height:96px;border-radius:var(--radius-md);font-family:var(--font-heading);font-weight:600;font-size:14px;background:var(--color-success-container);color:var(--color-on-success-container)">Slide 4</div></div></div><button type="button" class="carousel-btn carousel-btn-prev" aria-label="Anterior" onclick="carouselScroll(this,-1)">‹</button><button type="button" class="carousel-btn carousel-btn-next" aria-label="Siguiente" onclick="carouselScroll(this,1)">›</button></div></div></div></div></div>
           <ol class="bd-family-legend"><li>Viewport — la ventana que recorta el contenido desplazable.</li><li>Ítem (slide) — cada tarjeta o imagen de la colección.</li><li>Recorte del siguiente ítem — señala que hay más contenido.</li><li>Controles anterior / siguiente — navegación explícita en desktop.</li></ol>
         </section>
-        <section class="docs-section" id="tc-app-bar-g-2">
+        <section class="docs-section" id="tc-carousel-g-2">
           <h2 class="docs-section-title">Layout responsive</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>Ajustá los ítems visibles por breakpoint con <code>basis-*</code>: <code>basis-full</code> en mobile, <code>basis-1/2</code> o más en desktop.</li>
@@ -16912,7 +16913,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <li>No escales los ítems proporcionalmente al viewport: mantené un tamaño de tarjeta legible.</li>
           </ul>
         </section>
-        <section class="docs-section" id="tc-app-bar-g-3">
+        <section class="docs-section" id="tc-carousel-g-3">
           <h2 class="docs-section-title">Comportamiento</h2>
           <ul style="margin:0;padding-left:18px;line-height:1.9">
             <li>El desplazamiento hace <b>snap</b> al ítem; los controles se deshabilitan en los extremos (sin loop).</li>
@@ -16923,14 +16924,14 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
         </section>
       
         </div>
-        <nav class="ds-toc" data-toc-auto id="tc-app-bar-g-toc" aria-label="En esta página">
+        <nav class="ds-toc" data-toc-auto id="tc-carousel-g-toc" aria-label="En esta página">
           <button class="ds-toc-toggle" type="button" aria-expanded="false"><span class="ds-toc-current">En esta página</span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="ds-toc-title">En esta página</div>
           <ul class="ds-toc-list">
-            <li><a class="ds-toc-link" data-target="tc-app-bar-g-0">Uso</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-g-1">Anatomía</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-g-2">Layout responsive</a></li>
-            <li><a class="ds-toc-link" data-target="tc-app-bar-g-3">Comportamiento</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-g-0">Uso</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-g-1">Anatomía</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-g-2">Layout responsive</a></li>
+            <li><a class="ds-toc-link" data-target="tc-carousel-g-3">Comportamiento</a></li>
           </ul>
         </nav>
         </div>
@@ -18970,7 +18971,7 @@ const [on, setOn] = useState(false)
       <div class="ds-comp-tab-panel" data-tab="specs">
         <section class="docs-section">
           <h2 class="docs-section-title">Range calendar</h2>
-          <p class="docs-section-desc"><code>data-cal-mode="range"</code> — el primer clic fija el inicio, el segundo el fin; el tramo intermedio usa <code>primary-container</code>.</p>
+          <p class="docs-section-desc"><code>data-cal-mode="range"</code> — el primer clic fija el inicio, el segundo el fin; el tramo intermedio usa <code>--color-surface-variant</code> y los extremos <code>--color-primary</code>.</p>
           <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07" data-cal-mode="range"></div></div>
 
           <h2 class="docs-section-title" style="margin-top:32px">Selector de mes y año</h2>
@@ -19008,7 +19009,7 @@ const [on, setOn] = useState(false)
           <div class="bd-family-wrap"><div class="calendar" data-calendar="2026-07" data-cal-booked="2026-07-18,2026-07-21,2026-07-22,2026-07-29"></div></div>
 
           <h2 class="docs-section-title" style="margin-top:32px">Custom cell size</h2>
-          <p class="docs-section-desc">La celda se controla con <code>--cal-cell</code>: <code>.calendar-sm</code> (30px) y <code>.calendar-lg</code> (44px) para densidad compacta o táctil.</p>
+          <p class="docs-section-desc">La celda se controla con <code>--cal-cell</code>: <code>.calendar-sm</code> (28px) y <code>.calendar-lg</code> (44px) para densidad compacta o táctil.</p>
           <div class="bd-family-wrap" style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start">
             <div class="calendar calendar-sm" data-calendar="2026-07"></div>
             <div class="calendar calendar-lg" data-calendar="2026-07"></div>
