@@ -17332,8 +17332,8 @@ return &lt;LineChart data={data} /&gt;</code></pre>
           <div class="cs-anat-stage" style="padding:40px 72px 48px">
             <div class="cs-anat-anchor">
               <input type="checkbox" class="checkbox" checked aria-hidden="true" tabindex="-1" style="pointer-events:none">
-              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">18dp</span></div>
-              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">18dp</span></div>
+              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">18dp</span></div>
+              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">18dp</span></div>
             </div>
           </div>
           <table class="ds-table" style="margin-top:16px">
@@ -17786,6 +17786,13 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
             border:1.5px solid var(--color-on-surface-variant,#474D61);
             font:600 var(--font-size-badge) var(--font-body);
             color:var(--color-on-surface-variant,#474D61);
+          }
+          /* Measurement-label variant: rectangular pill showing a dp/px value
+             on an anatomy pin (keeps base min-width). Replaces the inline block
+             that was copy-pasted across checkbox/radio/switch anatomy pins. */
+          .cs-legend-num.cs-legend-meas {
+            width:auto; height:auto; border-radius:var(--radius-sm);
+            padding:2px 6px; font-size:10px;
           }
 
           /* ── Anatomy pin overlay: live component + numbered callout pins ── */
@@ -20185,8 +20192,8 @@ const [on, setOn] = useState(false)
           <div class="cs-anat-stage" style="padding:40px 72px 48px">
             <div class="cs-anat-anchor">
               <input type="radio" name="meas-radio" class="radio" checked aria-hidden="true" tabindex="-1" style="pointer-events:none">
-              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">20dp</span></div>
-              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">20dp</span></div>
+              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">20dp</span></div>
+              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">20dp</span></div>
             </div>
           </div>
           <table class="ds-table" style="margin-top:16px">
@@ -21973,8 +21980,8 @@ import { Select } from &quot;./components/ui/select&quot;
           <div class="cs-anat-stage" style="padding:40px 72px 48px">
             <div class="cs-anat-anchor">
               <input type="checkbox" role="switch" class="switch" checked aria-hidden="true" tabindex="-1" style="pointer-events:none">
-              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">24dp</span></div>
-              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num" style="border-radius:4px;width:auto;height:auto;padding:2px 6px;font-size:10px">44dp</span></div>
+              <div class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">24dp</span></div>
+              <div class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num cs-legend-meas">44dp</span></div>
             </div>
           </div>
           <table class="ds-table" style="margin-top:12px">
