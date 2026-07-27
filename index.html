@@ -17516,70 +17516,70 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
       <style>
         /* ── Chip Overview ── */
         .ch-overview-list {
-          margin: 0 0 32px;
-          padding-left: 20px;
-          font-size: 14px;
+          margin:0 0 var(--space-8);
+          padding-left:var(--space-5);
+          font-size:var(--font-size-body-lg);
           line-height: 2;
           color: var(--ds-text-2);
         }
-        .ch-overview-list li { padding-left: 4px; }
+        .ch-overview-list li { padding-left:var(--space-1); }
         .ch-overview-list b  { color: var(--ds-text-1); font-weight: 600; }
 
         .ch-family-wrap {
           background: var(--color-surface-container-low);
           border: 1px solid var(--border);
           border-radius: var(--radius-lg);
-          padding: 48px 32px 40px;
+          padding:var(--space-12) var(--space-8) var(--space-10);
           margin-bottom: 0;
         }
         .ch-family-stage {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: clamp(24px, 5vw, 64px);
+          gap:clamp(var(--space-6), 5vw, var(--space-16));
           flex-wrap: wrap;
         }
         .ch-family-col {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 20px;
+          gap:var(--space-5);
         }
         .ch-family-num {
           width: 22px; height: 22px;
-          border-radius: 50%;
+          border-radius:var(--radius-full);
           background: transparent;
           border: 1.5px solid var(--color-on-surface-variant, #474D61);
           color: var(--color-on-surface-variant, #474D61);
           display: flex; align-items: center; justify-content: center;
-          font: 600 11px/1 'Inter', sans-serif;
+          font: 600 var(--font-size-badge)/1 var(--font-body);
         }
         .ch-family-legend {
-          margin: 16px 0 0;
+          margin:var(--space-4) 0 0;
           padding-left: 0;
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap:var(--space-2);
           counter-reset: ch-legend;
         }
         .ch-family-legend li {
           counter-increment: ch-legend;
           display: flex;
           align-items: center;
-          gap: 10px;
-          font-size: 13px;
+          gap:var(--space-2);
+          font-size:var(--font-size-label);
           color: var(--ds-text-2);
         }
         .ch-family-legend li::before {
           content: counter(ch-legend);
           width: 22px; height: 22px;
-          border-radius: 50%;
+          border-radius:var(--radius-full);
           background: transparent;
           border: 1.5px solid var(--color-on-surface-variant, #474D61);
           color: var(--color-on-surface-variant, #474D61);
           display: flex; align-items: center; justify-content: center;
-          font: 600 11px/1 'Inter', sans-serif;
+          font: 600 var(--font-size-badge)/1 var(--font-body);
           flex-shrink: 0;
         }
 
@@ -17588,32 +17588,32 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
         .ch-modes-wrap {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          margin-top: 32px;
+          gap:var(--space-4);
+          margin-top:var(--space-8);
         }
         @media (max-width: 600px) { .ch-modes-wrap { grid-template-columns: 1fr; } }
         .ch-mode-panel {
           border-radius: var(--radius-lg);
           border: 1px solid var(--border);
-          padding: 32px 24px;
+          padding:var(--space-8) var(--space-6);
         }
         .ch-mode-panel--light {
-          background: #FAFBFC;
+          background: var(--neutral-10);
         }
         .ch-mode-panel--dark {
-          background: #13161F;
+          background: var(--neutral-800);
         }
         .ch-mode-label {
-          font: 600 11px 'Inter', sans-serif;
+          font: 600 var(--font-size-badge) var(--font-body);
           letter-spacing: .06em;
           text-transform: uppercase;
-          margin-bottom: 20px;
-          color: #9FA3AE;
+          margin-bottom:var(--space-5);
+          color: var(--neutral-200);
         }
         .ch-mode-row {
           display: flex;
           flex-wrap: wrap;
-          gap: 10px;
+          gap:var(--space-2);
           align-items: center;
         }
       </style>
@@ -17680,81 +17680,81 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           .cs-toc { position:sticky; top:80px; }
           .cs-specs-layout > div { grid-column:1; grid-row:1; min-width:0; }
           .cs-specs-layout > aside { grid-column:2; grid-row:1; position:sticky; top:80px; align-self:start; }
-          .cs-specs-layout .docs-section { scroll-margin-top: 84px; }
+          .cs-specs-layout .docs-section { scroll-margin-top:84px; }
           @media (max-width:860px) {
             .cs-specs-layout { display:block; }
-            .cs-specs-layout > aside { position:sticky; top:56px; z-index:20; margin:0 0 24px; padding:14px 0 4px; background:var(--ds-content-bg,var(--bg)); border-bottom:1px solid var(--border); }
+            .cs-specs-layout > aside { position:sticky; top:56px; z-index:20; margin:0 0 var(--space-6); padding:var(--space-4) 0 var(--space-1); background:var(--ds-content-bg,var(--bg)); border-bottom:1px solid var(--border); }
           }
 
 
           /* ── Section sub-heading ── */
           .cs-h3 {
-            font:600 11px 'Inter',sans-serif;
+            font:600 var(--font-size-badge) var(--font-body);
             text-transform:uppercase; letter-spacing:.07em;
             color:var(--color-on-surface-variant,#474D61);
-            margin:44px 0 16px; padding-top:4px;
+            margin:44px 0 var(--space-4); padding-top:var(--space-1);
           }
 
           /* ── Color block: preview + table ── */
-          .cs-color-block { display:flex; align-items:flex-start; gap:20px; flex-wrap:wrap; margin-bottom:8px; }
-          .cs-color-previews { display:flex; flex-direction:column; gap:10px; min-width:120px; }
+          .cs-color-block { display:flex; align-items:flex-start; gap:var(--space-5); flex-wrap:wrap; margin-bottom:var(--space-2); }
+          .cs-color-previews { display:flex; flex-direction:column; gap:var(--space-2); min-width:120px; }
           .cs-color-mode {
-            font:500 10px 'Inter',sans-serif;
+            font:500 10px var(--font-body);
             text-transform:uppercase; letter-spacing:.07em;
             color:var(--color-on-surface-variant,#474D61);
-            margin:0 0 4px;
+            margin:0 0 var(--space-1);
           }
           .cs-dark-well {
-            background:#13161F; border-radius:8px;
-            padding:8px 10px; display:inline-flex;
+            background:var(--neutral-800); border-radius:var(--radius-md);
+            padding:var(--space-2) var(--space-2); display:inline-flex;
           }
 
           /* ── Anatomy: side-by-side pair ── */
           .cs-anat-row {
-            display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:0 0 8px;
+            display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); margin:0 0 var(--space-2);
           }
           @media(max-width:600px){ .cs-anat-row { grid-template-columns:1fr; } }
-          .cs-anat-group { margin:20px 0 0; }
+          .cs-anat-group { margin:var(--space-5) 0 0; }
           .cs-anat-label {
-            font:600 11px 'Inter',sans-serif;
+            font:600 var(--font-size-badge) var(--font-body);
             text-transform:uppercase; letter-spacing:.06em;
             color:var(--color-on-surface-variant,#474D61);
-            margin:0 0 10px;
+            margin:0 0 var(--space-2);
           }
 
           /* ── Measurement canvas ── */
           .cs-meas-canvas {
             background:var(--color-surface-container-lowest,#F4F5F8);
-            border:1px solid var(--border); border-radius:12px;
-            padding:48px 32px 32px; margin:12px 0;
-            display:flex; flex-direction:column; align-items:center; gap:28px;
+            border:1px solid var(--border); border-radius:var(--radius-lg);
+            padding:var(--space-12) var(--space-8) var(--space-8); margin:var(--space-3) 0;
+            display:flex; flex-direction:column; align-items:center; gap:var(--space-8);
           }
           .cs-meas-grid {
-            display:flex; flex-wrap:wrap; gap:10px 28px; justify-content:center; max-width:480px;
+            display:flex; flex-wrap:wrap; gap:var(--space-2) var(--space-8); justify-content:center; max-width:480px;
           }
           .cs-meas-item {
             display:flex; flex-direction:column; align-items:center; gap:2px;
-            font:400 11px 'Inter',sans-serif; color:var(--color-on-surface-variant,#474D61);
+            font:400 var(--font-size-badge) var(--font-body); color:var(--color-on-surface-variant,#474D61);
             min-width:80px;
           }
-          .cs-meas-item b { font:700 13px 'Inter',sans-serif; color:var(--color-on-surface,#0A0C12); }
+          .cs-meas-item b { font:700 var(--font-size-label) var(--font-body); color:var(--color-on-surface,#0A0C12); }
 
           /* ── Elevation row ── */
-          .cs-elev-row { display:flex; gap:40px; flex-wrap:wrap; margin:16px 0; }
-          .cs-elev-cell { display:flex; flex-direction:column; gap:8px; }
-          .cs-elev-label { font:500 12px 'Inter',sans-serif; color:var(--color-on-surface-variant,#474D61); }
+          .cs-elev-row { display:flex; gap:var(--space-10); flex-wrap:wrap; margin:var(--space-4) 0; }
+          .cs-elev-cell { display:flex; flex-direction:column; gap:var(--space-2); }
+          .cs-elev-label { font:500 var(--font-size-caption) var(--font-body); color:var(--color-on-surface-variant,#474D61); }
 
 
           /* ── Color role diagram ── */
-          .cs-color-diagram { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:12px 0 24px; }
+          .cs-color-diagram { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); margin:var(--space-3) 0 var(--space-6); }
           @media(max-width:580px){ .cs-color-diagram { grid-template-columns:1fr; } }
           .cs-role-pin {
             position:absolute;
-            font:500 11px 'Inter',sans-serif;
+            font:500 var(--font-size-badge) var(--font-body);
             color:var(--color-on-surface-variant,#474D61);
             background:var(--color-surface-container-lowest,#F4F5F8);
             border:1px solid var(--border);
-            border-radius:4px;
+            border-radius:var(--radius-sm);
             padding:2px 6px;
             white-space:nowrap;
             pointer-events:none;
@@ -17767,24 +17767,24 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           }
 
           /* ── Section rhythm ── */
-          .cs-specs-layout .docs-section + .docs-section { margin-top:80px; }
-          .cs-specs-layout .docs-section { padding-bottom:64px; border-bottom:1px solid var(--border,rgba(0,0,0,.06)); }
+          .cs-specs-layout .docs-section + .docs-section { margin-top:var(--space-20); }
+          .cs-specs-layout .docs-section { padding-bottom:var(--space-16); border-bottom:1px solid var(--border,rgba(0,0,0,.06)); }
           .cs-specs-layout .docs-section:last-child { border-bottom:none; padding-bottom:0; }
 
           /* ── Inline numbered legend ── */
           .cs-legend {
-            display:flex; flex-direction:column; gap:10px;
-            margin:16px 0 28px;
-            font:400 14px 'Inter',sans-serif;
+            display:flex; flex-direction:column; gap:var(--space-2);
+            margin:var(--space-4) 0 var(--space-8);
+            font:400 var(--font-size-body-lg) var(--font-body);
             color:var(--color-on-surface,#0A0C12);
             line-height:1.4;
           }
-          .cs-legend > div { display:flex; align-items:center; gap:10px; }
+          .cs-legend > div { display:flex; align-items:center; gap:var(--space-2); }
           .cs-legend-num {
             display:inline-flex; align-items:center; justify-content:center;
-            width:22px; height:22px; min-width:22px; border-radius:50%;
+            width:22px; height:22px; min-width:22px; border-radius:var(--radius-full);
             border:1.5px solid var(--color-on-surface-variant,#474D61);
-            font:600 11px 'Inter',sans-serif;
+            font:600 var(--font-size-badge) var(--font-body);
             color:var(--color-on-surface-variant,#474D61);
           }
 
@@ -17792,8 +17792,8 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           .cs-anat-stage {
             position:relative; display:inline-flex; align-items:center; justify-content:center;
             background:var(--color-surface-container-lowest,#F4F5F8);
-            border:1px solid var(--border); border-radius:12px;
-            box-sizing:border-box; padding:80px;
+            border:1px solid var(--border); border-radius:var(--radius-lg);
+            box-sizing:border-box; padding:var(--space-20);
           }
           .cs-anat-stage.pad-sm { padding:44px 72px; }
           .cs-anat-anchor { position:relative; display:inline-flex; }
@@ -17831,10 +17831,10 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
             <div class="docs-section" id="cs-tokens">
               <h2 class="docs-section-title">Tokens y especificaciones</h2>
               <p class="docs-section-desc">Seleccioná una variante para ver sus elementos, atributos, tokens y valores en modo claro y oscuro.</p>
-          <div class="bd-family-wrap" style="margin:8px 0 20px;"><div class="token-panel" data-token-panel="chip"></div></div>
+          <div class="bd-family-wrap" style="margin:var(--space-2) 0 var(--space-5);"><div class="token-panel" data-token-panel="chip"></div></div>
 
               <!-- Variant tabs -->
-              <div class="ds-comp-tabs" role="tablist" style="margin-bottom:24px;">
+              <div class="ds-comp-tabs" role="tablist" style="margin-bottom:var(--space-6);">
                 <button class="ds-comp-tab-btn active" type="button" onclick="csTokVariant('assist',this)">Chip de asistencia</button>
                 <button class="ds-comp-tab-btn" type="button" onclick="csTokVariant('filter',this)">Chip de filtro</button>
                 <button class="ds-comp-tab-btn" type="button" onclick="csTokVariant('input',this)">Chip de entrada</button>
@@ -17854,11 +17854,11 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                     </button>
                     <div class="ds-color-acc-body">
                       <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Claro</th><th>Oscuro</th></tr></thead><tbody>
-                        <tr><td>Contenedor (plano)</td><td><span class="ds-sem-tok">transparent</span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td></tr>
-                        <tr><td>Contenedor (elevado)</td><td><span class="ds-sem-tok">--color-surface-container-low</span></td><td><span class="ds-sem-hex">#FAFBFC</span> <span class="ds-sem-sw" style="background:#FAFBFC;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#13161F</span> <span class="ds-sem-sw" style="background:#13161F;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-surface</span></td><td><span class="ds-sem-hex">#0A0C12</span> <span class="ds-sem-sw" style="background:#0A0C12;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#EAEBED</span> <span class="ds-sem-sw" style="background:#EAEBED;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Ícono inicial</td><td><span class="ds-sem-tok">--color-on-surface</span></td><td><span class="ds-sem-hex">#0A0C12</span> <span class="ds-sem-sw" style="background:#0A0C12;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#EAEBED</span> <span class="ds-sem-sw" style="background:#EAEBED;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Borde (plano)</td><td><span class="ds-sem-tok">--color-outline</span></td><td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Contenedor (plano)</td><td><span class="ds-sem-tok">transparent</span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td></tr>
+                        <tr><td>Contenedor (elevado)</td><td><span class="ds-sem-tok">--color-surface-container-low</span></td><td><span class="ds-sem-hex">#FAFBFC</span> <span class="ds-sem-sw" style="background:#FAFBFC;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#13161F</span> <span class="ds-sem-sw" style="background:#13161F;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-surface</span></td><td><span class="ds-sem-hex">#0A0C12</span> <span class="ds-sem-sw" style="background:#0A0C12;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#EAEBED</span> <span class="ds-sem-sw" style="background:#EAEBED;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Ícono inicial</td><td><span class="ds-sem-tok">--color-on-surface</span></td><td><span class="ds-sem-hex">#0A0C12</span> <span class="ds-sem-sw" style="background:#0A0C12;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#EAEBED</span> <span class="ds-sem-sw" style="background:#EAEBED;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Borde (plano)</td><td><span class="ds-sem-tok">--color-outline</span></td><td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
                       </tbody></table></div>
                     </div>
                   </div>
@@ -17950,10 +17950,10 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                     </button>
                     <div class="ds-color-acc-body">
                       <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Claro</th><th>Oscuro</th></tr></thead><tbody>
-                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">transparent</span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td></tr>
-                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Ícono inicial</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Borde</td><td><span class="ds-sem-tok">--color-outline</span></td><td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">transparent</span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td></tr>
+                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Ícono inicial</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Borde</td><td><span class="ds-sem-tok">--color-outline</span></td><td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
                       </tbody></table></div>
                     </div>
                   </div>
@@ -17967,9 +17967,9 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                     </button>
                     <div class="ds-color-acc-body">
                       <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Claro</th><th>Oscuro</th></tr></thead><tbody>
-                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">--color-secondary-container</span></td><td><span class="ds-sem-hex">#CAD9FF</span> <span class="ds-sem-sw" style="background:#CAD9FF;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#3A5BB0</span> <span class="ds-sem-sw" style="background:#3A5BB0;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-secondary-container</span></td><td><span class="ds-sem-hex">#01164D</span> <span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#DCE6FF</span> <span class="ds-sem-sw" style="background:#DCE6FF;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Ícono ✓</td><td><span class="ds-sem-tok">--color-on-secondary-container</span></td><td><span class="ds-sem-hex">#01164D</span> <span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#DCE6FF</span> <span class="ds-sem-sw" style="background:#DCE6FF;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">--color-secondary-container</span></td><td><span class="ds-sem-hex">#CAD9FF</span> <span class="ds-sem-sw" style="background:#CAD9FF;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#3A5BB0</span> <span class="ds-sem-sw" style="background:#3A5BB0;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-secondary-container</span></td><td><span class="ds-sem-hex">#01164D</span> <span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#DCE6FF</span> <span class="ds-sem-sw" style="background:#DCE6FF;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Ícono ✓</td><td><span class="ds-sem-tok">--color-on-secondary-container</span></td><td><span class="ds-sem-hex">#01164D</span> <span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#DCE6FF</span> <span class="ds-sem-sw" style="background:#DCE6FF;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
                       </tbody></table></div>
                     </div>
                   </div>
@@ -18050,11 +18050,11 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                     </button>
                     <div class="ds-color-acc-body">
                       <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Claro</th><th>Oscuro</th></tr></thead><tbody>
-                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">transparent</span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td></tr>
-                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Ícono inicial</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Ícono de eliminación</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Borde</td><td><span class="ds-sem-tok">--color-outline</span></td><td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">transparent</span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td></tr>
+                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Ícono inicial</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Ícono de eliminación</td><td><span class="ds-sem-tok">--color-on-surface-variant</span></td><td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Borde</td><td><span class="ds-sem-tok">--color-outline</span></td><td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
                       </tbody></table></div>
                     </div>
                   </div>
@@ -18132,9 +18132,9 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                     </button>
                     <div class="ds-color-acc-body">
                       <div class="ds-table-wrap"><table class="ds-table ds-sem-table"><thead><tr><th>Elemento</th><th>Token</th><th>Claro</th><th>Oscuro</th></tr></thead><tbody>
-                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">transparent</span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td></tr>
-                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-surface</span></td><td><span class="ds-sem-hex">#0A0C12</span> <span class="ds-sem-sw" style="background:#0A0C12;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#EAEBED</span> <span class="ds-sem-sw" style="background:#EAEBED;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
-                        <tr><td>Borde</td><td><span class="ds-sem-tok">--color-outline</span></td><td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Contenedor</td><td><span class="ds-sem-tok">transparent</span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td><td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td></tr>
+                        <tr><td>Etiqueta</td><td><span class="ds-sem-tok">--color-on-surface</span></td><td><span class="ds-sem-hex">#0A0C12</span> <span class="ds-sem-sw" style="background:#0A0C12;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#EAEBED</span> <span class="ds-sem-sw" style="background:#EAEBED;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
+                        <tr><td>Borde</td><td><span class="ds-sem-tok">--color-outline</span></td><td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td><td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td></tr>
                       </tbody></table></div>
                     </div>
                   </div>
@@ -18242,7 +18242,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                   <span class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">4</span></span>
                 </div>
               </div>
-              <p style="font:400 11px 'Inter',sans-serif;color:var(--color-on-surface-variant,#474D61);margin:4px 0 12px;">Roles de color del chip de asistencia en temas claro y oscuro</p>
+              <p style="font:400 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant,#474D61);margin:var(--space-1) 0 var(--space-3);">Roles de color del chip de asistencia en temas claro y oscuro</p>
               <div class="cs-legend">
                 <div><span class="cs-legend-num">1</span> transparent (contenedor plano) / Surface Container Low (elevado)</div>
                 <div><span class="cs-legend-num">2</span> On Surface (etiqueta de texto)</div>
@@ -18252,17 +18252,17 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
 
               <!-- ── ESTADOS ── -->
               <p class="cs-h3">Estados</p>
-              <div style="background:var(--color-surface-container-lowest,#F4F5F8);border:1px solid var(--border);border-radius:12px;padding:24px 20px;overflow-x:auto;">
-                <div style="display:grid;grid-template-columns:72px repeat(6,1fr);gap:14px 8px;min-width:696px;align-items:center;">
+              <div style="background:var(--color-surface-container-lowest,#F4F5F8);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-6) var(--space-5);overflow-x:auto;">
+                <div style="display:grid;grid-template-columns:72px repeat(6,1fr);gap:var(--space-4) var(--space-2);min-width:696px;align-items:center;">
                   <div></div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Habilitado</div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Deshabilitado</div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Hover</div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Enfocado</div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Presionado</div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Arrastrado</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Habilitado</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Deshabilitado</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Hover</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Enfocado</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Presionado</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Arrastrado</div>
 
-                  <div style="font:500 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">Plano</div>
+                  <div style="font:500 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant);">Plano</div>
                   <div style="display:flex;justify-content:center;"><button class="chip" type="button"><span class="chip-icon"><i data-lucide="calendar"></i></span>Etiqueta</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip" type="button" disabled style="opacity:.38"><span class="chip-icon"><i data-lucide="calendar"></i></span>Etiqueta</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip" type="button" style="background:color-mix(in srgb, var(--color-on-surface) 8%, transparent)"><span class="chip-icon"><i data-lucide="calendar"></i></span>Etiqueta</button></div>
@@ -18270,7 +18270,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                   <div style="display:flex;justify-content:center;"><button class="chip" type="button" style="background:color-mix(in srgb, var(--color-on-surface) 12%, transparent)"><span class="chip-icon"><i data-lucide="calendar"></i></span>Etiqueta</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip" type="button" style="background:color-mix(in srgb, var(--color-on-surface) 16%, transparent);box-shadow:0 4px 12px rgba(0,0,0,.22)"><span class="chip-icon"><i data-lucide="calendar"></i></span>Etiqueta</button></div>
 
-                  <div style="font:500 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">Elevado</div>
+                  <div style="font:500 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant);">Elevado</div>
                   <div style="display:flex;justify-content:center;"><button class="chip chip-elevated" type="button"><span class="chip-icon"><i data-lucide="calendar"></i></span>Etiqueta</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip chip-elevated" type="button" disabled style="opacity:.38"><span class="chip-icon"><i data-lucide="calendar"></i></span>Etiqueta</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip chip-elevated" type="button" style="background:color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface-container-low))"><span class="chip-icon"><i data-lucide="calendar"></i></span>Etiqueta</button></div>
@@ -18282,17 +18282,17 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
 
               <!-- ── MEDIDAS ── -->
               <p class="cs-h3">Medidas</p>
-              <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;padding:8px 16px;">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+              <div style="display:flex;gap:var(--space-6);flex-wrap:wrap;justify-content:center;padding:var(--space-2) var(--space-4);">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-3);">
                   <button class="chip" type="button">Etiqueta</button>
-                  <div style="font:400 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">sin ícono</div>
+                  <div style="font:400 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant);">sin ícono</div>
                 </div>
-                <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-3);">
                   <button class="chip" type="button"><span class="chip-icon"><i data-lucide="calendar"></i></span>Etiqueta</button>
-                  <div style="font:400 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">con ícono</div>
+                  <div style="font:400 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant);">con ícono</div>
                 </div>
               </div>
-              <div class="ds-table-wrap" style="margin-top:16px;">
+              <div class="ds-table-wrap" style="margin-top:var(--space-4);">
                 <table class="docs-props-table">
                   <thead><tr><th>Propiedad</th><th>Valor</th></tr></thead>
                   <tbody>
@@ -18318,7 +18318,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
               <p class="docs-section-desc">Los chips de filtro permiten refinar contenido. Tienen estado activo y estado inactivo.</p>
 
               <!-- Anatomy: unselected + selected side by side -->
-              <p class="cs-h3" style="margin-top:24px;">Anatomía</p>
+              <p class="cs-h3" style="margin-top:var(--space-6);">Anatomía</p>
               <div class="cs-anat-row" style="margin-bottom:0;">
                 <div>
                   <p class="cs-anat-label">No seleccionado</p>
@@ -18330,7 +18330,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                       <span class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">3</span></span>
                     </div>
                   </div>
-                  <div class="cs-legend" style="margin-top:8px;">
+                  <div class="cs-legend" style="margin-top:var(--space-2);">
                     <div><span class="cs-legend-num">1</span> Contenedor</div>
                     <div><span class="cs-legend-num">2</span> Etiqueta</div>
                     <div><span class="cs-legend-num">3</span> Borde</div>
@@ -18346,7 +18346,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                       <span class="cs-anat-pin pin-right"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">3</span></span>
                     </div>
                   </div>
-                  <div class="cs-legend" style="margin-top:8px;">
+                  <div class="cs-legend" style="margin-top:var(--space-2);">
                     <div><span class="cs-legend-num">1</span> Contenedor (Secondary Container)</div>
                     <div><span class="cs-legend-num">2</span> Ícono de selección</div>
                     <div><span class="cs-legend-num">3</span> Etiqueta</div>
@@ -18355,7 +18355,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
               </div>
 
               <!-- Anatomy: with leading icon -->
-              <div style="margin-top:28px;">
+              <div style="margin-top:var(--space-8);">
                 <p class="cs-anat-label">Con ícono inicial (no seleccionado)</p>
                 <div class="cs-anat-stage">
                   <div class="cs-anat-anchor">
@@ -18365,7 +18365,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                     <span class="cs-anat-pin pin-right"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">3</span></span>
                   </div>
                 </div>
-                <div class="cs-legend" style="margin-top:8px;">
+                <div class="cs-legend" style="margin-top:var(--space-2);">
                   <div><span class="cs-legend-num">1</span> Contenedor</div>
                   <div><span class="cs-legend-num">2</span> Ícono inicial (opcional)</div>
                   <div><span class="cs-legend-num">3</span> Etiqueta</div>
@@ -18373,16 +18373,16 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
               </div>
 
               <!-- Measurements -->
-              <p class="cs-h3" style="margin-top:32px;">Medidas</p>
+              <p class="cs-h3" style="margin-top:var(--space-8);">Medidas</p>
               <div class="cs-meas-canvas">
-                <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:flex-end;">
-                  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+                <div style="display:flex;gap:var(--space-6);flex-wrap:wrap;justify-content:center;align-items:flex-end;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-3);">
                     <button class="chip" type="button" aria-pressed="false">Remoto</button>
-                    <div style="font:400 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">No seleccionado</div>
+                    <div style="font:400 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant);">No seleccionado</div>
                   </div>
-                  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-3);">
                     <button class="chip chip-selected" type="button" aria-pressed="true"><span class="chip-icon"><i data-lucide="check"></i></span>Remoto</button>
-                    <div style="font:400 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">Seleccionado</div>
+                    <div style="font:400 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant);">Seleccionado</div>
                   </div>
                 </div>
                 <div class="cs-meas-grid">
@@ -18399,7 +18399,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
 
               <!-- ── COLOR ── -->
               <p class="cs-h3">Color</p>
-              <div style="position:relative;display:inline-flex;background:var(--color-surface-container-lowest,#F4F5F8);border:1px solid var(--border);border-radius:12px;box-sizing:border-box;padding:88px;gap:28px;flex-wrap:wrap;">
+              <div style="position:relative;display:inline-flex;background:var(--color-surface-container-lowest,#F4F5F8);border:1px solid var(--border);border-radius:var(--radius-lg);box-sizing:border-box;padding:88px;gap:var(--space-8);flex-wrap:wrap;">
                 <button class="chip" type="button" aria-pressed="false">Remoto</button>
                 <button class="chip chip-selected" type="button" aria-pressed="true"><span class="chip-icon"><i data-lucide="check"></i></span>Remoto</button>
               </div>
@@ -18417,32 +18417,32 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                     <tr>
                       <td>Contenedor (no sel.)</td>
                       <td><span class="ds-sem-tok">transparent</span></td>
-                      <td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td>
-                      <td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:5px;"></span></td>
+                      <td><span class="ds-sem-sw" style="background:transparent;border:1px solid #9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td>
+                      <td><span class="ds-sem-sw" style="background:transparent;border:1px solid #747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);"></span></td>
                     </tr>
                     <tr>
                       <td>Borde (no sel.)</td>
                       <td><span class="ds-sem-tok">--color-outline</span></td>
-                      <td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td>
-                      <td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td>
+                      <td><span class="ds-sem-hex">#9FA3AE</span> <span class="ds-sem-sw" style="background:#9FA3AE;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td>
+                      <td><span class="ds-sem-hex">#747989</span> <span class="ds-sem-sw" style="background:#747989;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td>
                     </tr>
                     <tr>
                       <td>Etiqueta / Ícono (no sel.)</td>
                       <td><span class="ds-sem-tok">--color-on-surface-variant</span></td>
-                      <td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td>
-                      <td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td>
+                      <td><span class="ds-sem-hex">#474D61</span> <span class="ds-sem-sw" style="background:#474D61;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td>
+                      <td><span class="ds-sem-hex">#BFC1C8</span> <span class="ds-sem-sw" style="background:#BFC1C8;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td>
                     </tr>
                     <tr>
                       <td>Contenedor (sel.)</td>
                       <td><span class="ds-sem-tok">--color-secondary-container</span></td>
-                      <td><span class="ds-sem-hex">#CAD9FF</span> <span class="ds-sem-sw" style="background:#CAD9FF;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td>
-                      <td><span class="ds-sem-hex">#3A5BB0</span> <span class="ds-sem-sw" style="background:#3A5BB0;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td>
+                      <td><span class="ds-sem-hex">#CAD9FF</span> <span class="ds-sem-sw" style="background:#CAD9FF;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td>
+                      <td><span class="ds-sem-hex">#3A5BB0</span> <span class="ds-sem-sw" style="background:#3A5BB0;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td>
                     </tr>
                     <tr>
                       <td>Etiqueta / Ícono (sel.)</td>
                       <td><span class="ds-sem-tok">--color-on-secondary-container</span></td>
-                      <td><span class="ds-sem-hex">#01164D</span> <span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td>
-                      <td><span class="ds-sem-hex">#DCE6FF</span> <span class="ds-sem-sw" style="background:#DCE6FF;display:inline-block;width:48px;height:20px;border-radius:5px;border:1px solid rgba(127,127,127,.25)"></span></td>
+                      <td><span class="ds-sem-hex">#01164D</span> <span class="ds-sem-sw" style="background:#01164D;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td>
+                      <td><span class="ds-sem-hex">#DCE6FF</span> <span class="ds-sem-sw" style="background:#DCE6FF;display:inline-block;width:48px;height:20px;border-radius:var(--radius-sm);border:1px solid rgba(127,127,127,.25)"></span></td>
                     </tr>
                   </tbody>
                 </table>
@@ -18450,23 +18450,23 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
 
               <!-- ── ESTADOS ── -->
               <p class="cs-h3">Estados</p>
-              <div style="background:var(--color-surface-container-lowest,#F4F5F8);border:1px solid var(--border);border-radius:12px;padding:24px 20px;overflow-x:auto;">
-                <div style="display:grid;grid-template-columns:72px repeat(5,1fr);gap:14px 8px;min-width:600px;align-items:center;">
+              <div style="background:var(--color-surface-container-lowest,#F4F5F8);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-6) var(--space-5);overflow-x:auto;">
+                <div style="display:grid;grid-template-columns:72px repeat(5,1fr);gap:var(--space-4) var(--space-2);min-width:600px;align-items:center;">
                   <div></div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Habilitado</div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Deshabilitado</div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Hover</div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Enfocado</div>
-                  <div style="font:400 10px 'Inter',sans-serif;color:var(--color-on-surface-variant);text-align:center;">Presionado</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Habilitado</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Deshabilitado</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Hover</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Enfocado</div>
+                  <div style="font:400 10px var(--font-body);color:var(--color-on-surface-variant);text-align:center;">Presionado</div>
 
-                  <div style="font:500 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">No sel.</div>
+                  <div style="font:500 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant);">No sel.</div>
                   <div style="display:flex;justify-content:center;"><button class="chip" type="button" aria-pressed="false">Remoto</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip" type="button" disabled style="opacity:.38">Remoto</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip" type="button" aria-pressed="false" style="background:color-mix(in srgb, var(--color-on-surface) 8%, transparent)">Remoto</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip bd-sim-focus" type="button" aria-pressed="false" style="background:color-mix(in srgb, var(--color-on-surface) 12%, transparent)">Remoto</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip" type="button" aria-pressed="false" style="background:color-mix(in srgb, var(--color-on-surface) 12%, transparent)">Remoto</button></div>
 
-                  <div style="font:500 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">Sel.</div>
+                  <div style="font:500 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant);">Sel.</div>
                   <div style="display:flex;justify-content:center;"><button class="chip chip-selected" type="button" aria-pressed="true"><span class="chip-icon"><i data-lucide="check"></i></span>Remoto</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip chip-selected" type="button" disabled style="opacity:.38"><span class="chip-icon"><i data-lucide="check"></i></span>Remoto</button></div>
                   <div style="display:flex;justify-content:center;"><button class="chip chip-selected" type="button" aria-pressed="true" style="background:color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container))"><span class="chip-icon"><i data-lucide="check"></i></span>Remoto</button></div>
@@ -18504,7 +18504,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
               </div>
 
               <!-- Anatomy: with leading icon -->
-              <div class="cs-anat-group" style="margin-top:32px;">
+              <div class="cs-anat-group" style="margin-top:var(--space-8);">
                 <p class="cs-anat-label">Con ícono inicial</p>
                 <div class="cs-anat-stage">
                   <div class="cs-anat-anchor">
@@ -18524,12 +18524,12 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
               </div>
 
               <!-- Measurements -->
-              <p class="cs-h3" style="margin-top:32px;">Medidas</p>
+              <p class="cs-h3" style="margin-top:var(--space-8);">Medidas</p>
               <div class="cs-meas-canvas">
-                <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:flex-end;">
-                  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+                <div style="display:flex;gap:var(--space-6);flex-wrap:wrap;justify-content:center;align-items:flex-end;">
+                  <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-3);">
                     <span class="chip"><span class="chip-icon"><i data-lucide="user-round"></i></span>Etiqueta <button class="chip-remove" type="button" aria-label="Quitar"><i data-lucide="x"></i></button></span>
-                    <div style="font:400 11px 'Inter',sans-serif;color:var(--color-on-surface-variant);">con avatar + ícono de eliminación</div>
+                    <div style="font:400 var(--font-size-badge) var(--font-body);color:var(--color-on-surface-variant);">con avatar + ícono de eliminación</div>
                   </div>
                 </div>
                 <div class="cs-meas-grid">
@@ -18567,9 +18567,9 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
               </div>
 
               <!-- Measurements -->
-              <p class="cs-h3" style="margin-top:32px;">Medidas</p>
+              <p class="cs-h3" style="margin-top:var(--space-8);">Medidas</p>
               <div class="cs-meas-canvas">
-                <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:flex-end;">
+                <div style="display:flex;gap:var(--space-6);flex-wrap:wrap;justify-content:center;align-items:flex-end;">
                   <button class="chip" type="button">Buscar proyectos</button>
                 </div>
                 <div class="cs-meas-grid">
@@ -18586,11 +18586,11 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
               <h2 class="docs-section-title">Chip set</h2>
               <p class="docs-section-desc">Los chips siempre aparecen como grupo (nunca un chip aislado). Las siguientes reglas definen el comportamiento del conjunto.</p>
 
-              <div class="ds-table-wrap" style="margin-top:16px;">
+              <div class="ds-table-wrap" style="margin-top:var(--space-4);">
                 <table class="docs-props-table">
                   <thead><tr><th>Propiedad</th><th>Valor</th><th>Nota</th></tr></thead>
                   <tbody>
-                    <tr><td>Gap entre chips</td><td><b>8&nbsp;dp mínimo</b></td><td>Aplicar con <code>gap:8px</code> en el contenedor del set.</td></tr>
+                    <tr><td>Gap entre chips</td><td><b>8&nbsp;dp mínimo</b></td><td>Aplicar con <code>gap:var(--space-2)</code> en el contenedor del set.</td></tr>
                     <tr><td>Área táctil mínima</td><td><b>48&nbsp;×&nbsp;48&nbsp;dp</b></td><td>El contenedor visible tiene 32&nbsp;dp; el área táctil se extiende con padding del contenedor o márgenes verticales (WCAG 2.5.5).</td></tr>
                     <tr><td>Scroll horizontal</td><td>Activar cuando el set no entra en una fila</td><td>Si se necesitan más de 2 filas con wrap, cambiar a scroll horizontal.</td></tr>
                     <tr><td>Longitud de etiqueta</td><td>Máximo ~20 caracteres</td><td>Omitir artículos gramaticales para ahorrar espacio; truncar con ellipsis si el espacio es fijo.</td></tr>
@@ -18599,7 +18599,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
                 </table>
               </div>
 
-              <p class="cs-h3" style="margin-top:32px;">Chip de entrada — comportamientos especiales del set</p>
+              <p class="cs-h3" style="margin-top:var(--space-8);">Chip de entrada — comportamientos especiales del set</p>
               <div class="ds-table-wrap">
                 <table class="docs-props-table">
                   <thead><tr><th>Comportamiento</th><th>Descripción</th></tr></thead>
@@ -18646,8 +18646,8 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           <h2 class="docs-section-title">Uso</h2>
           <p class="ds-p">Los chips representan elementos discretos —atributos, filtros, entradas o sugerencias— con acciones compactas en contexto. Ayudan a la persona a completar una acción o refinar contenido.</p>
           <div class="bd-grid c2">
-            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Filtrar o refinar un conjunto de resultados.</li><li>Representar entradas del usuario (tags, destinatarios).</li><li>Ofrecer acciones o sugerencias contextuales.</li></ul></div></div>
-            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Acción primaria de la pantalla → <b>Button</b>.</li><li>Elegir una opción de una lista larga → <b>Select</b>.</li><li>Estado de solo lectura → <b>Badge</b>.</li></ul></div></div>
+            <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:var(--space-5);line-height:1.9"><li>Filtrar o refinar un conjunto de resultados.</li><li>Representar entradas del usuario (tags, destinatarios).</li><li>Ofrecer acciones o sugerencias contextuales.</li></ul></div></div>
+            <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:var(--space-5);line-height:1.9"><li>Acción primaria de la pantalla → <b>Button</b>.</li><li>Elegir una opción de una lista larga → <b>Select</b>.</li><li>Estado de solo lectura → <b>Badge</b>.</li></ul></div></div>
           </div>
         </section>
         <section class="docs-section" id="tc-chip-g-1">
@@ -18670,7 +18670,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           <h2 class="docs-section-title">Assist chips</h2>
           <p class="ds-p">Ayudan a completar una acción relacionada con el contenido — abren un flujo o disparan una tarea (p. ej. "Agendar", "Compartir"). Se comportan como botones compactos.</p>
           <div class="bd-family-wrap"><div class="cs-anat-stage"><div class="cs-anat-anchor"><button class="chip" type="button"><span class="chip-icon"><i data-lucide="calendar"></i></span>Reunión</button><span class="cs-anat-pin pin-top"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">1</span></span><span class="cs-anat-pin pin-right"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">2</span></span><span class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">3</span></span></div></div></div>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>Llevan un verbo de acción y, opcionalmente, un ícono inicial.</li>
             <li>No mantienen estado seleccionado: al tocarlos ejecutan la acción.</li>
             <li>Para la acción primaria de la pantalla usá un Button, no un assist chip.</li>
@@ -18680,7 +18680,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           <h2 class="docs-section-title">Filter chips</h2>
           <p class="ds-p">Permiten filtrar contenido con un estado <b>seleccionable</b>. Se pueden combinar (selección múltiple) y muestran un check al activarse.</p>
           <div class="bd-family-wrap"><div class="cs-anat-stage"><div class="cs-anat-anchor"><button class="chip chip-selected" type="button" aria-pressed="true"><span class="chip-icon"><i data-lucide="check"></i></span>Remoto</button><span class="cs-anat-pin pin-top"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">1</span></span><span class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">2</span></span><span class="cs-anat-pin pin-right"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">3</span></span></div></div></div>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>El estado seleccionado usa <code>--color-secondary-container</code> + check inicial.</li>
             <li>Colocá los controles de filtro juntos, por encima o al costado del contenido que filtran.</li>
             <li>Reflejá el resultado del filtro de inmediato; permití limpiar la selección.</li>
@@ -18690,7 +18690,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           <h2 class="docs-section-title">Input chips</h2>
           <p class="ds-p">Representan información ingresada por la persona —tags, destinatarios, adjuntos— y suelen incluir un <b>ícono de cierre</b> para removerlos.</p>
           <div class="bd-family-wrap"><div class="cs-anat-stage"><div class="cs-anat-anchor"><span class="chip"><span class="chip-icon"><i data-lucide="tag"></i></span>diseño-ui <button class="chip-remove" type="button" aria-label="Quitar diseño-ui"><i data-lucide="x"></i></button></span><span class="cs-anat-pin pin-top"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">1</span></span><span class="cs-anat-pin pin-left"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">2</span></span><span class="cs-anat-pin pin-bottom"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">3</span></span><span class="cs-anat-pin pin-right"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">4</span></span></div></div></div>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>Pueden llevar un avatar o ícono inicial que identifica la entrada.</li>
             <li>El ícono de cierre remueve el chip; mantené el área de toque cómoda.</li>
             <li>Se generan a partir de la entrada del usuario, no de opciones predefinidas.</li>
@@ -18700,7 +18700,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           <h2 class="docs-section-title">Suggestion chips</h2>
           <p class="ds-p">Ofrecen sugerencias dinámicas generadas por el sistema —respuestas rápidas, búsquedas recientes— para acelerar la interacción.</p>
           <div class="bd-family-wrap"><div class="cs-anat-stage"><div class="cs-anat-anchor"><button class="chip" type="button">Buscar proyectos</button><span class="cs-anat-pin pin-top"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">1</span></span><span class="cs-anat-pin pin-right"><span class="cs-anat-pin-line"></span><span class="cs-legend-num">2</span></span></div></div></div>
-          <ul style="margin:0;padding-left:18px;line-height:1.9">
+          <ul style="margin:0;padding-left:var(--space-5);line-height:1.9">
             <li>Aparecen según el contexto y desaparecen cuando dejan de ser relevantes.</li>
             <li>Texto breve; al tocarlos, aplican la sugerencia.</li>
             <li>No los uses para navegación ni para acciones destructivas.</li>
@@ -18751,11 +18751,11 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           <div class="bd-grid c2">
             <div class="bd-card">
               <p class="bd-eyebrow">Área táctil mínima</p>
-              <p class="bd-variant-desc" style="margin-top:10px">El chip mide <b>32px</b> de alto — menos que el mínimo táctil de <b>48×48px</b> (WCAG 2.5.5). Compensalo con espaciado: el <code>.chip-set</code> usa gap de 8px, y el área táctil efectiva debe extenderse con padding del contenedor o márgenes verticales. En el input chip, el botón de eliminación de 18px también necesita su propia área táctil ampliada — no pongas dos targets de 18px pegados.</p>
+              <p class="bd-variant-desc" style="margin-top:var(--space-2)">El chip mide <b>32px</b> de alto — menos que el mínimo táctil de <b>48×48px</b> (WCAG 2.5.5). Compensalo con espaciado: el <code>.chip-set</code> usa gap de 8px, y el área táctil efectiva debe extenderse con padding del contenedor o márgenes verticales. En el input chip, el botón de eliminación de 18px también necesita su propia área táctil ampliada — no pongas dos targets de 18px pegados.</p>
             </div>
             <div class="bd-card">
               <p class="bd-eyebrow">Foco visible</p>
-              <div class="bd-stage center" style="margin:10px 0">
+              <div class="bd-stage center" style="margin:var(--space-2) 0">
                 <button class="chip bd-sim-focus" type="button">Enfocado</button>
               </div>
               <p class="bd-variant-desc">Un contorno de 2px (<code>--color-focus</code>) + halo de 4px (<code>--color-focus-ring</code>) via <code>:focus-visible</code>. Solo aparece durante la navegación por teclado. Cumple WCAG 2.4.7 (AA).</p>
@@ -18769,16 +18769,16 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
           <div class="bd-grid c2">
             <div class="bd-card">
               <p class="bd-eyebrow">Teclas</p>
-              <ul class="bd-a11y" style="margin-top:10px">
-                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:11px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Tab</span><span>Mover el foco al siguiente chip del conjunto</span></li>
-                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Enter</span><span>Activar el chip enfocado (acción o alternancia)</span></li>
-                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">Espacio</span><span>Activar el chip enfocado</span></li>
-                <li><span class="bd-ico" style="font-family:'DM Mono',monospace;font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:5px">⌫ / Del</span><span>Eliminar el input chip enfocado (implementar vía JS)</span></li>
+              <ul class="bd-a11y" style="margin-top:var(--space-2)">
+                <li><span class="bd-ico" style="font-family:var(--font-mono);font-size:var(--font-size-badge);width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:var(--radius-sm)">Tab</span><span>Mover el foco al siguiente chip del conjunto</span></li>
+                <li><span class="bd-ico" style="font-family:var(--font-mono);font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:var(--radius-sm)">Enter</span><span>Activar el chip enfocado (acción o alternancia)</span></li>
+                <li><span class="bd-ico" style="font-family:var(--font-mono);font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:var(--radius-sm)">Espacio</span><span>Activar el chip enfocado</span></li>
+                <li><span class="bd-ico" style="font-family:var(--font-mono);font-size:10px;width:auto;min-width:28px;padding:0 6px;font-weight:700;border-radius:var(--radius-sm)">⌫ / Del</span><span>Eliminar el input chip enfocado (implementar vía JS)</span></li>
               </ul>
             </div>
             <div class="bd-card">
               <p class="bd-eyebrow">Reglas</p>
-              <ul style="margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.9;color:var(--ds-text-2)">
+              <ul style="margin:6px 0 0;padding-left:var(--space-5);font-size:var(--font-size-label);line-height:1.9;color:var(--ds-text-2)">
                 <li>El estado seleccionado se comunica con <code>aria-pressed</code>, nunca solo con color</li>
                 <li>Al eliminar un input chip, mover el foco al chip anterior (o al campo si era el último)</li>
                 <li>Los chips deshabilitados salen del orden de Tab automáticamente con <code>disabled</code></li>
@@ -18807,7 +18807,7 @@ const Checkbox = React.forwardRef&lt;HTMLInputElement, CheckboxProps&gt;(
         <section class="docs-section">
           <h2 class="docs-section-title">Las cuatro variantes — HTML</h2>
           <p class="docs-section-desc">Copiá y pegá. La variante es funcional, no visual: elegila según lo que el chip representa (acción, filtro, entrada o sugerencia).</p>
-          <div class="bd-stage" style="gap:10px;flex-wrap:wrap;margin-bottom:16px">
+          <div class="bd-stage" style="gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-4)">
             <div class="chip-set" aria-label="Variantes de chip">
               <button class="chip" type="button"><span class="chip-icon"><i data-lucide="calendar"></i></span>Agendar entrevista</button>
               <button class="chip" type="button" aria-pressed="false" onclick="chipToggle(this)">Remoto</button>
@@ -18902,7 +18902,7 @@ const [on, setOn] = useState(false)
         <section class="docs-section">
           <h2 class="docs-section-title">Elevado y deshabilitado</h2>
           <p class="docs-section-desc">El modificador <code>.chip-elevated</code> reemplaza el borde por una sombra — usalo solo sobre superficies con imagen o alto ruido visual. Para deshabilitar, usá el atributo nativo <code>disabled</code>.</p>
-          <div class="bd-stage" style="gap:10px;flex-wrap:wrap;margin-bottom:16px">
+          <div class="bd-stage" style="gap:var(--space-2);flex-wrap:wrap;margin-bottom:var(--space-4)">
             <div class="chip-set" aria-label="Elevado y deshabilitado">
               <button class="chip chip-elevated" type="button">Elevado</button>
               <button class="chip" type="button" disabled>Deshabilitado</button>
