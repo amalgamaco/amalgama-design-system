@@ -262,6 +262,8 @@
 .icon-btn {
   position: relative;
   width: 36px; height: 36px;
+  padding: 0;   /* fixed square box: reset any padding inherited from a size class
+                   (.btn-sm/.btn-xs/.btn-lg/.btn-xl) so the icon isn't squished */
   border-radius: var(--radius-md);
   background: var(--color-surface-container);
   border: 1px solid var(--color-outline);
