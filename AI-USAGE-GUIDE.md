@@ -75,9 +75,17 @@ carries its own border-radius — add the size class, never an inline `border-ra
 ### (f) Honor cross-component consistency — `GOVERNANCE.md`
 
 - **One primary action per context.** Additional actions step down to
-  secondary/tertiary/text. Introduce hierarchy; never flatten to equal weight.
+  secondary/tertiary/text. Introduce hierarchy; never flatten to equal weight. A standalone
+  **page action** (Page Header / Tool Bar / Filter Toolbar) is **Filled/Primary only when it is
+  the view's main action**, else **Tonal (`secondary`)** for a supportive one (GOVERNANCE §20.5).
 - Buttons have intrinsic width and centered content — **never full-width or left-aligned**
   (that reads as a form field).
+- **Filter rows are a Toolbar variant, not per-page CSS.** When a screen lines up 2+ equal-hierarchy
+  filter controls (Select + Segmented Button + Date Picker), use the **Toolbar** `.toolbar-filters`
+  variant (`component-rules/toolbar.md`, `toolbar.css`) so they share one field treatment — never
+  restyle the standalone Segmented Button / Date Picker / Select to "match", and never mix filled and
+  transparent containers without a deliberate hierarchy reason. (There is **no** separate "Filter
+  Toolbar" component — it was merged into Toolbar as this variant.)
 - No per-theme overrides, no primitive tokens in component code, no shadow tokens.
   (`GOVERNANCE.md` §§1–6 are the quality contract; it wins over any component file.)
 

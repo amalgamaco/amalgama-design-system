@@ -36,6 +36,14 @@ Readers scan in an **F-pattern** — top-left first, then across, then down. Pla
 
 `trend` maps through `statChangeVariants`; the legacy `changeColor` prop is a `@deprecated` arbitrary-CSS escape hatch — do not use it. Note that direction ≠ sentiment: for tiempo promedio de contratación *going up is bad*, so a rising value is `trend="negative"`. Choose the trend by whether the change is good for the business, not by the arithmetic sign.
 
+## Filter controls — one field group
+
+A dashboard usually opens with a row of filters — metric, group, period, date range. These controls have **equal functional hierarchy**, so they must look equal. The trap: dropped in a row as-is, a `Select` (filled field), a `Segmented Button` (transparent pill), and a `Date Picker` (outlined trigger) read as three unrelated shapes.
+
+Use the **`Toolbar`** `.toolbar-filters` variant (`toolbar.css`, doc page `c-toolbar`) instead of hand-rolling per-page CSS. It unifies every control to one field treatment — shared surface, border, radius, height, typography, icon, and hover/focus/pressed/disabled states — while the Segmented Button's selected segment keeps its primary state. It scopes the restyle to `.toolbar-filters`, so the standalone components are untouched. (The former standalone "Filter Toolbar" is now this variant.)
+
+The page action sits at the right (`.toolbar-actions`): **Filled/Primary if it is the page's main action** (e.g. "Sincronizar repos"), **Tonal (`btn-secondary`) only if it is secondary/supportive** — one primary per context (GOVERNANCE §20.5). Don't mix filled and transparent containers in the same bar unless there is a deliberate hierarchy difference.
+
 ## Charts, with care
 
 Use `Chart` (`chart.tsx`, the Recharts wrapper) for series — trends over time or categorical comparisons. Reach for it only when the shape of data matters: a single number is a `StatCard`, exact values are a `Table`.
@@ -94,6 +102,8 @@ Whitespace is what makes a dense screen scannable. Use `--space-*` tokens for ev
 - [ ] Charts use `Chart` with the `--chart-1..5` palette (no `--color-primary`), labeled axes/legend, emphasized endpoints.
 - [ ] Detail is reached via drill-down (`Dialog` / `Sheet` / navigation), not shown inline for every record.
 - [ ] Related widgets are grouped in `Card`s; arrangement is page-level CSS Grid with `--space-6` gaps.
+- [ ] Filter controls use the `Toolbar` `.toolbar-filters` variant (one field treatment), not a mix of filled fields and transparent pills.
+- [ ] The filter-bar page action is Filled/Primary only if it's the page's main action, else Tonal (one primary per context).
 - [ ] Every data widget has a `Skeleton` loading state and an `EmptyState` empty state.
 - [ ] Refreshing data sets `aria-busy` and shows a skeleton/progress cue; motion uses the tokens + reduced-motion.
 - [ ] All spacing via `--space-*`; verified readable in light and dark.
@@ -101,6 +111,6 @@ Whitespace is what makes a dense screen scannable. Use `--space-*` tokens for ev
 ## Related
 
 - [navigation.md](navigation.md) — app shell, drill-down navigation, breadcrumbs and back links
-- Components: **Stat Card** (`StatsGrid` / `StatCard`), **Chart** (`ChartContainer` / `ChartTooltipContent` / `ChartLegendContent`), **Card**, **Table**, **Dialog**, **Sheet**, **Skeleton**, **Empty State**, **Placeholder**, **Progress**
+- Components: **Toolbar** (`toolbar` + `.toolbar-filters` for filter controls), **Stat Card** (`StatsGrid` / `StatCard`), **Chart** (`ChartContainer` / `ChartTooltipContent` / `ChartLegendContent`), **Card**, **Table**, **Dialog**, **Sheet**, **Skeleton**, **Empty State**, **Placeholder**, **Progress**
 - `GOVERNANCE.md` §7 (spacing), §13 (motion), §14.5–14.6 (page spacing / grid)
 - `CLAUDE.md` — component inventory and token rules

@@ -73,7 +73,7 @@ relationships and add correct/incorrect examples (see `button.md` as the referen
 | nav-drawer | ✅ authored | c-nav-drawer | layout.css |
 | nav-bar | ✅ authored | c-nav-bar | (inline / layout.css) |
 | topbar | ✅ authored | c-topbar | layout.css |
-| toolbar | ✅ authored | c-toolbar | toolbar.css |
+| toolbar | ✅ authored | c-toolbar | toolbar.css (variants: filters · selection · overflow · sticky) |
 | nav-card | ✅ authored | c-nav-card | (docs-internal) |
 | vacancy-card | ✅ authored | c-vacancy | vacancy-card.css |
 | kanban-card | ✅ authored | c-kanban | kanban.css |

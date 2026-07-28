@@ -4452,8 +4452,7 @@
           "input"
         ],
         "replaces": [
-          "legacy search inputs",
-          "the retired toolbar search-field pattern (now formalized as .search-field)"
+          "legacy search inputs (form inputs used as a search box)"
         ],
         "composed_with": [
           "toolbar",
@@ -5969,19 +5968,28 @@
     },
     {
       "id": "toolbar",
-      "display_name": "Tool Bar",
+      "display_name": "Toolbar",
       "category": "Actions / App bar",
       "status": "stable",
       "aliases": [
+        "tool bar",
         "filter bar",
+        "filter toolbar",
         "action bar",
-        "list controls"
+        "list controls",
+        "bulk actions bar"
       ],
-      "summary": "The row of controls that heads a list or table — a compact search field plus filters, sorting, and the view's single primary action.",
+      "summary": "The row of controls that heads a list, table or dashboard — search, filters, view/period switches, and the view's actions — with variants for filters, bulk selection, overflow and sticky.",
       "variants": [
         "toolbar",
+        "actions",
         "search-field",
         "button",
+        "filters",
+        "selection",
+        "overflow",
+        "two-line",
+        "sticky",
         "result-count"
       ],
       "sizes": [
@@ -5991,79 +5999,146 @@
         "default",
         "hover",
         "focus",
-        "active"
+        "active",
+        "disabled",
+        "loading",
+        "empty",
+        "selection"
       ],
       "tokens": {
         "color": [
           "--color-surface",
+          "--card-bg",
           "--color-on-surface-variant",
           "--color-surface-variant",
           "--color-outline",
-          "--color-secondary"
+          "--color-secondary",
+          "--interactive",
+          "--color-focus-ring",
+          "--color-secondary-container",
+          "--color-on-secondary-container",
+          "--text-muted"
         ],
         "radius": [
-          "--radius-md"
+          "--radius-md",
+          "--radius-sm",
+          "--radius-full"
         ],
         "spacing": [
           "--space-2",
-          "--space-4"
+          "--space-3",
+          "--space-4",
+          "--tb-height 40px",
+          "--tb-pad-x 14px"
+        ],
+        "typography": [
+          "--font-size-body-md",
+          "--font-size-label",
+          "--font-size-caption",
+          "--font-body"
         ],
         "motion": [
-          "--duration-fast"
+          "--duration-fast",
+          "--duration-normal",
+          "--ease-default"
+        ],
+        "component": [
+          "--tb-height",
+          "--tb-surface",
+          "--tb-surface-hover",
+          "--tb-border",
+          "--tb-border-hover",
+          "--tb-border-focus",
+          "--tb-focus-ring",
+          "--tb-radius",
+          "--tb-pad-x",
+          "--tb-gap",
+          "--tb-icon",
+          "--tb-selected-bg",
+          "--tb-selected-text",
+          "--tb-motion-duration",
+          "--tb-motion-ease"
         ]
       },
       "relationships": {
         "related": [
           "search",
           "select",
+          "combobox",
+          "segmented-button",
+          "calendar",
+          "date-picker",
+          "checkbox",
           "button",
-          "page-header"
+          "page-header",
+          "data-table"
         ],
         "replaces": [
-          "legacy filter bars"
+          "legacy filter bars",
+          "flat action rows",
+          "the former standalone Filter Toolbar (now the .toolbar-filters variant)"
         ],
         "composed_with": [
           "search",
           "select",
+          "combobox",
+          "segmented-button",
+          "date-picker",
+          "calendar",
+          "checkbox",
           "button",
           "table",
           "data-table",
-          "chip"
+          "chip",
+          "dropdown-menu",
+          "popover"
         ],
         "not_to_confuse_with": [
           {
             "component": "topbar",
-            "why": "Top Bar is app chrome + global actions; Tool Bar controls one list/table"
+            "why": "Top Bar is app chrome + global actions; Toolbar controls one list/table/dashboard"
           },
           {
             "component": "page-header",
-            "why": "Page Header titles the content; the Tool Bar carries its controls"
+            "why": "Page Header titles the content; the Toolbar carries its controls"
           },
           {
             "component": "search",
-            "why": "the standalone Search Bar heads a whole screen; the Tool Bar uses the compact search-field"
+            "why": "the standalone Search Bar heads a whole screen; the Toolbar uses the compact search-field"
+          },
+          {
+            "component": "segmented-button",
+            "why": "standalone it is a transparent pill; inside .toolbar-filters only its container adopts the shared field — the component is unchanged"
           }
         ]
       },
       "motion": {
-        "enter": "none — the toolbar is a static controls row above a list/table.",
-        "exit": "none.",
-        "stateChange": "search-field hover / focus-within → color-mix state-layer background + border-color (secondary on focus); toolbar-btn hover → surface-variant bg + outline-variant border + on-surface color, :active → opacity .85; more-btn hover → surface-variant.",
-        "duration": "--duration-fast (search-field bg/border, toolbar-btn bg/border/color, more-btn)",
-        "easing": "--ease-default (all toolbar hover/focus transitions)",
-        "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Hover/focus tints apply instantly.",
-        "constraints": "Animate background/border/color only (state-layer effects, Standard easing) — no transform/lift on toolbar controls. Don't animate width/height.",
-        "relatedPatterns": [
-          "state-layer"
-        ]
+        "enter": "The bar is static. The .toolbar-selection variant enters on --duration-normal / --ease-default (opacity + translateY). Panels of child controls (Select listbox, Date Picker popover) open on --duration-fast / --ease-default (via --tb-motion-*).",
+        "exit": "Panels close on the same duration/easing; the bar has no exit motion.",
+        "stateChange": "Hover (surface/border), focus (border + ring) and Segmented Button selection transition on --tb-motion-duration / --tb-motion-ease (--duration-fast / --ease-default). toolbar-btn hover/press are --duration-fast.",
+        "duration": "--duration-fast (120ms) for control state changes and panel entrances; --duration-normal (200ms) for the selection-bar entrance.",
+        "easing": "--ease-default.",
+        "reducedMotion": "toolbar.css declares a scoped @media (prefers-reduced-motion: reduce) block neutralizing control transitions and the selection-bar animation, on top of the global rule in css/base.css.",
+        "constraints": "No transform/scale/bounce on the controls — only background/border/box-shadow (and the selection-bar's small translateY entrance). Panel entrances belong to the child components; the toolbar only guarantees they share the --duration-fast / --ease-default contract."
       },
       "source": {
         "css": "css/components/toolbar.css",
         "classes": [
           "toolbar",
+          "toolbar-group",
+          "toolbar-actions",
+          "toolbar-spacer",
           "search-field",
           "toolbar-btn",
-          "result-count"
+          "toolbar-btn-count",
+          "result-count",
+          "toolbar-filters",
+          "toolbar-selection",
+          "toolbar-selection-count",
+          "toolbar-selection-clear",
+          "toolbar-overflow-btn",
+          "toolbar-stack",
+          "toolbar-sticky"
         ],
         "react_wrapper": "components/ui/toolbar.tsx",
         "docs_anchor": "c-toolbar"

@@ -332,7 +332,8 @@ using **real flat classes**, and the Playbook guide to consult. All examples ins
 
 - **Layout:** search + filters live in the `.toolbar` above the list/table; active filters as a `.chip-set` below.
 - **Components:** `search-field` (in-toolbar; **not** `.search-bar`, which is the 56px standalone/mobile hero variant), `chip`/`chip-selected` (filtros), `select`/`dropdown-menu` (opciones), `empty-state` (no results).
-- **Action hierarchy:** filtering is not a button action — chips/selects refine; a `btn-text` "Limpiar filtros" is the only button.
+- **Equal-hierarchy filter controls:** when the bar holds 2+ filters of the same hierarchy (e.g. `select` + `seg-btn-group` + `date-picker` on a dashboard), add the **`.toolbar-filters`** variant so they share one field treatment (surface/border/radius/height) — the Segmented Button's selected segment keeps its primary state. Don't leave a transparent pill/date trigger next to filled Select fields, and don't restyle the standalone components. (There is no separate "Filter Toolbar" — it's this Toolbar variant.)
+- **Action hierarchy:** filtering is not a button action — chips/selects refine; a `btn-text` "Limpiar filtros" is the only button. A page action in `.toolbar-actions` is Filled/Primary only if it's the view's main action, else Tonal (GOVERNANCE §20.5).
 - **Responsive:** `.search-bar` can expand to `.search-view` fullscreen on mobile.
 - **Common mistakes:** chips used to trigger actions; standalone `.search-bar` inside a toolbar; no empty state for zero results.
 - **A11y:** search input in a `role="search"` region; removable chips have an accessible remove control (`chip-remove`).

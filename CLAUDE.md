@@ -92,7 +92,7 @@ Canonical component code is `css/components/<name>.css`. The **React** column na
 | Skeleton | `skeleton.css` | `skeleton.tsx` | `skeleton.html` |
 | Empty State | `empty-state.css` | `empty-state.tsx` | `empty-state.html` |
 | Stat Card | `stat-card.css` (`trend` prop → `stat-change-*` classes) | `stat-card.tsx` | `stat-card.html` |
-| Toolbar (+ `search-field`) | `toolbar.css` | `toolbar.tsx` | `toolbar.html` |
+| Toolbar (+ `search-field`) | `toolbar.css` — one component with variants: base (`.toolbar` + `.toolbar-actions`/`.search-field`/`.toolbar-btn`/`.result-count`) · **`.toolbar-filters`** (unifies Select + Segmented Button + Date Picker into one field treatment via the `--tb-*` token layer — scoped re-skin, never changes the standalone components; ex-"Filter Toolbar", merged in 2026-07) · **`.toolbar-selection`** (bulk actions) · `.toolbar-overflow-btn` · `.toolbar-sticky`. Page id `c-toolbar`; see GOVERNANCE §19.5 / §20.5. | `toolbar.tsx` | `toolbar.html` |
 | Page Header | `page-header.css` | `page-header.tsx` | — |
 | Back Link | `back-link.css` | `back-link.tsx` | — |
 | Description | `description.css` | `description-section.tsx` | — |

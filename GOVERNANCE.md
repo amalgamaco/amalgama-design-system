@@ -1079,6 +1079,40 @@ behavior — this is an accepted, documented tradeoff, not a regression to silen
 If a product need genuinely requires one of these simplified-away capabilities, that's a DS gap to
 flag and scope deliberately — not something to quietly hand-roll in product code.
 
+### 19.5 Toolbar — one component, several variants (2026-07; consolidated)
+
+**There is one `Toolbar` (`css/components/toolbar.css`, id `c-toolbar`, under App bar).** The
+short-lived standalone **`Filter Toolbar`** (2026-07-28) was **merged into it 2026-07-28** as the
+**`.toolbar-filters` variant** — a separate component duplicated the toolbar's rules and split the
+implementation, violating §2 (one canonical component per pattern). `filter-toolbar.css`,
+`component-rules/filter-toolbar.md`, the `c-filter-toolbar` route/section/nav entry, and the `--ft-*`
+token layer no longer exist; the `--ft-*` tokens were renamed `--tb-*` and live inside `.toolbar-filters`.
+
+The Toolbar's variants are all **compositions of existing Embassy components**, scoped by a modifier
+class on the same `.toolbar` container:
+
+- `.toolbar` (base) — search-field + toolbar-btn + `.toolbar-actions` (right, `margin-left:auto`).
+- **`.toolbar-filters`** — unifies equal-hierarchy filter controls (`Select` + `Segmented Button` +
+  `Date Picker`) under one **field treatment**. It exposes a component-token layer (`--tb-*`, same
+  pattern as Segmented Button's `--seg-btn-*`) and **re-skins its children in-place, strictly scoped
+  to `.toolbar-filters`**: it repoints `.select-trigger` / `.date-picker-trigger` / `.seg-btn-group`
+  to the shared field. **Selects use the official Select unchanged**; the **Segmented Button keeps its
+  selected-segment primary state** (`--color-secondary-container`) and **each segment keeps its own
+  focus ring** — only the *container* adopts the field. **It must not change the standalone Segmented
+  Button, Calendar/Date Picker or Select** (§2); the re-skin never leaks outside `.toolbar-filters`.
+- **`.toolbar-selection`** — bulk-actions variant shown when items are selected (tinted surface, count,
+  clear, bulk actions); enters on `--duration-normal`.
+- **`.toolbar-overflow-btn`** — a "more" trigger (icon-btn + Dropdown/Popover) for controls that don't
+  fit. **`.toolbar-sticky`** (+ `.is-stuck`) pins the bar on scroll. Responsive: `flex-wrap` + full-width
+  search below 768px.
+
+Motion is the shared field contract: control state changes and the child panels' entrances run on
+`--duration-fast` / `--ease-default` (via `--tb-motion-*`); the selection bar enters on
+`--duration-normal`; a scoped `prefers-reduced-motion` block sits on top of the global one (§13.3).
+
+Prefer these variants over page-specific CSS overrides whenever a screen lines up filter or bulk-action
+controls.
+
 ---
 
 ## 20. Cross-component consistency — overlays
@@ -1146,6 +1180,28 @@ pattern**, everywhere (Alert Dialog, Dialog, Sheet, confirmation flows):
 - **Cancel** → `tertiary` (Outlined), per §20.1 — and it should be the **safe default focus**.
 - The **confirm must be explicit** (Alert Dialog: no close-on-outside/Esc-to-confirm; Esc = Cancel).
 - Optionally the entry-point trigger is also `danger` (§20.3).
+
+### 20.5 Page-level action-emphasis (toolbars, page headers, filter bars)
+
+§20.1 sets emphasis by importance; §20.3 covers the button that *opens an overlay*. This rule covers a
+**standalone page action** — the button that sits in a Page Header or a Toolbar (base or the
+`.toolbar-filters` variant) and performs the view's own action (not opening an overlay, not dismissing
+anything):
+
+| The action is… | Variant | Example |
+|---|---|---|
+| **The one main action of the page/view** | `primary` (Filled) | "Sincronizar repos", "Crear vacante", "Guardar" |
+| **Secondary / supportive** (a primary lives elsewhere, or it's an aid like export/share) | `secondary` (Tonal) | "Exportar CSV" next to a Page-Header primary |
+| **Neutral / low-emphasis** (reset, back) | `tertiary` (Outlined) / `text` | "Restablecer filtros" |
+
+Rules:
+- **Exactly one Filled/Primary action per context.** If the Page Header already owns the page's primary
+  action, the Toolbar action steps **down to Tonal** (or is omitted) — never a second
+  Filled competing with it.
+- **Tonal (`secondary`) is for a supportive action you want to encourage**, not a default. Don't reach
+  for Filled just because the button "feels important" — reserve Filled for the single real primary.
+- This is the page-level counterpart of the overlay-footer rule (§20.1) and the overlay-trigger rule
+  (§20.3); together they keep one emphasis language across overlays, forms, and page chrome.
 
 ## 21. shadcn parity — additions & intentional divergences (2026-07)
 
