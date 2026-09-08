@@ -29,7 +29,7 @@ Two thresholds, defined once in `css/variables.css` (GOVERNANCE §14.2):
 @media (min-width: var(--breakpoint-md)) { … }
 ```
 
-In the Tailwind layer this is already wired: `md:` and `lg:` prefixes map to 768px/1024px, so `grid-cols-1 md:grid-cols-2 lg:grid-cols-3` is the idiomatic mobile-first ladder. Reach for the utility prefixes before writing a raw media query.
+Las media queries no pueden leer `var()`, asi que se escribe el literal `768px` / `1024px` y se mantiene sincronizado con los tokens. La escalera mobile-first idiomatica es una grilla intrinseca (`repeat(auto-fill, minmax(…, 1fr))`) que reflowea sola, y una media query solo cuando el cambio es estructural y no de tamano.
 
 ## The app shell and content grid
 
@@ -60,8 +60,8 @@ This auto-fits columns to available width — one column on a phone, several on 
 
 As width shrinks, decide what stays, what stacks, and what hides:
 
-- **Stack columns.** Multi-column regions collapse to a single column (`md:grid-cols-2` → default `grid-cols-1`). The most important column comes first in source order so it lands on top when stacked.
-- **Hide-then-reveal via progressive disclosure.** Non-essential detail collapses behind an affordance. Use `Accordion` (`@amalgama/ds/accordion`) or `Collapsible` for sections; keep the primary task always visible.
+- **Stack columns.** Las regiones multi-columna colapsan a una sola columna por debajo de `md`. La columna mas importante va primera en el orden del markup, para que quede arriba al apilarse.
+- **Hide-then-reveal via progressive disclosure.** Non-essential detail collapses behind an affordance. Use `accordion` (`css/components/accordion.css`) or `collapsible` for sections; keep the primary task always visible.
 - **Prioritize ruthlessly.** A phone shows the one primary action and the core content; secondary metadata, filters, and bulk tools move into a menu, a `Sheet`, or an accordion rather than crowding the viewport.
 
 ## Spacing system & rhythm
@@ -86,8 +86,8 @@ On touch devices every interactive element must be **≥44×44px** (WCAG 2.5.5, 
 
 Search is **one component with two official platform variants** (GOVERNANCE §5.6), not two components — same state tokens, different shape/context:
 
-- **`SearchBar`** (`@amalgama/ds/search`) — the standalone **mobile/hero** variant: 56px tall, pill (`--radius-full`), can expand into the full `SearchView`. Use it as the prominent search on a phone or a landing surface.
-- **`SearchField`** (`@amalgama/ds/toolbar`) — the compact **desktop/toolbar** variant: `--radius-md`, height driven by padding (`min-h-10`), sits inside a `Toolbar` next to `Select`/`ToolbarButton`.
+- **`.search-bar`** (`css/components/search.css`) — the standalone **mobile/hero** variant: 56px tall, pill (`--radius-full`), can expand into the full `.search-view`. Use it as the prominent search on a phone or a landing surface.
+- **`.search-field`** (`css/components/toolbar.css`) — the compact **desktop/toolbar** variant: `--radius-md`, height driven by padding, sits inside a `.toolbar` next to `.select-trigger` / `.toolbar-btn`.
 
 Swap between them responsively: a hero `SearchBar` on mobile becomes a `SearchField` in the toolbar row on desktop. They share the subtle `--border` resting tier with `Input`/`Select`, so `SearchField` integrates cleanly into a toolbar.
 
@@ -95,8 +95,8 @@ Swap between them responsively: a hero `SearchBar` on mobile becomes a `SearchFi
 
 A wide `Table` cannot shrink to 375px without becoming unreadable. Two sanctioned fallbacks:
 
-- **Horizontal scroll** — wrap the table in a `ScrollArea` (`@amalgama/ds/scroll-area`) or an `overflow-x: auto` container so it scrolls sideways while the page does not. Keep the first column (identity) visible.
-- **Card fallback** — below `md`, re-render each row as a stacked card (label/value pairs), often composing `Card` or a domain card (`vacancy-card`, `person-card`). This is preferred when the table is a primary surface on mobile.
+- **Horizontal scroll** — wrap the table in a `.scroll-area` (`css/components/scroll-area.css`) or an `overflow-x: auto` container so it scrolls sideways while the page does not. Keep the first column (identity) visible.
+- **Card fallback** — below `md`, re-render each row as a stacked card (label/value pairs), often composing `.card` or a domain card (`.vacancy-card`, `.person-card`). This is preferred when the table is a primary surface on mobile.
 
 Pick scroll for dense/exploratory data, card fallback for the main content view.
 
@@ -108,7 +108,7 @@ Below `--breakpoint-md` (768px) the persistent sidebar becomes a **modal navigat
 
 **Do**
 
-- Author the narrow layout first, then enhance with `md:` / `lg:`.
+- Author the narrow layout first, then enhance at `md` (768px) and `lg` (1024px).
 - Use intrinsic `auto-fill minmax()` grids so columns reflow without breakpoints.
 - Keep the most important column first in source order for graceful stacking.
 - Use `--space-*` tokens for all gaps and padding; step density down on mobile.

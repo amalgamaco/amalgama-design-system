@@ -169,5 +169,29 @@ console.log("\n[9] component-rules motion metadata");
                  : ok(`all ${files.length} rule files expose a motion: block`);
 }
 
+// ── 10. restos de la era Tailwind en la documentación ────────────────────
+// La migración a Tailwind + React se revirtió el 2026-07-17: packages/ds/ e
+// islands/ no existen en main. Cualquier doc que siga mandando a importar de
+// @amalgama/ds o a usar prefijos md:/lg: está mandando a un lugar que no existe.
+console.log("\n[10] restos de la arquitectura revertida (Tailwind / packages/ds)");
+{
+  const patron = /@amalgama\/ds|packages\/ds|tailwind\.theme\.css|\bmd:grid|\blg:grid|hover-tokens\.css/i;
+  const hits = [];
+  const scan = (dir) => {
+    for (const f of fs.readdirSync(path.join(ROOT, dir))) {
+      if (!f.endsWith(".md")) continue;
+      const rel = path.join(dir, f);
+      fs.readFileSync(path.join(ROOT, rel), "utf8").split("\n").forEach((l, i) => {
+        if (patron.test(l)) hits.push(`${rel}:${i + 1}`);
+      });
+    }
+  };
+  scan("guidelines");
+  scan(".");
+  hits.length
+    ? warn(`${hits.length} referencia(s) a packages/ds o utilidades Tailwind: ${hits.slice(0, 8).join(", ")}${hits.length > 8 ? ` …y ${hits.length - 8} más` : ""}`)
+    : ok("sin referencias a la arquitectura revertida");
+}
+
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);
