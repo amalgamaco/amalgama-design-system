@@ -10,6 +10,8 @@ amalgamaco/claude-code-plugins
     ├── skills/embassy-start/     ← kickoff de proyecto + tema de marca
     ├── skills/embassy-artifact/  ← entregables on-brand sin repo
     ├── skills/embassy-review/    ← auditoría
+    ├── skills/embassy-break/     ← un componente en todos sus estados
+    ├── skills/embassy-explain/   ← ingeniería inversa de una UI ajena
     └── skills/embassy-eval/      ← el loop de medición
 ```
 
@@ -31,6 +33,7 @@ La **capa pública** que las skills leen por URL, y que por eso tiene que estar 
 | `guidelines/*.md` · `component-rules/*.md` · `css/` | `design-system` |
 | `scripts/build-brand-theme.mjs` | `embassy-start` |
 | `scripts/check-screen-report.mjs` · `scripts/check-output.mjs` | el chequeo final de cada skill |
+| `component-rules/<id>.md` (bloque `states:`) | `embassy-break` — de ahí saca los escenarios, no de una lista genérica |
 
 **La regla es una sola: el criterio y el CSS viven acá; el procedimiento vive en el plugin.** Si
 cambiás un componente, esto se actualiza solo (las skills clonan en cada sesión). Si cambiás cómo

@@ -136,7 +136,7 @@ Conviene tenerlo explícito para la presentación, porque la pregunta va a salir
 | Los IDs de `FAILURES.md` | **Nuestros**, derivados de las reglas del repo. El grupo H (reflejos generados) sí es de Vercel |
 | El cuestionario de `embassy-start` | **`WHITE-LABEL.md`** del repo, no de Vercel — ellos no tienen caso white-label |
 | Las curvas OKLCH de `build-brand-theme.mjs` | **Medidas** sobre `css/variables.css` |
-| `jakubkrehel/skills` | **Descartado.** Ver §5.3: es bueno pero opinado por otra marca y varias reglas chocan con `GOVERNANCE`. Se rescatan dos formatos (`break`, `variant`), sin escribir |
+| `jakubkrehel/skills` | **Revisado skill por skill** (sep-2026, MIT). 4 ya cubiertas por equivalentes nuestros · 2 descartadas por chocar con `GOVERNANCE` · **`break` y `explain-interface` portadas** como `embassy-break` y `embassy-explain` · `better-writing` resuelta cableando `content-and-writing.md` al paso 7 de `design-system` · `variant` sin escribir. Ver §5.3 |
 
 **Dónde nos separamos de Vercel a propósito:** ellos no tienen `component-rules`. Nosotros sí, y es
 nuestro mejor activo, así que la prohibición de leer el CSS aplica **solo** a `embassy-artifact`
@@ -214,7 +214,22 @@ una sea explícita sobre cuánto puede leer. Eso es el corazón de la propuesta.
 
 ### 5.3 Qué NO recomiendo hacer
 
-- **No portar `jakubkrehel/skills` tal cual.** Es un set excelente (`better-ui`, `better-typography`,
+- **No portar `jakubkrehel/skills` tal cual** — pero sí revisarlo entero, que es lo que se hizo en
+  septiembre. El repaso de las once:
+
+  | Suya | Qué hicimos |
+  |---|---|
+  | `interface-review` · `better-interface` | Ya cubiertas por `embassy-review` |
+  | `better-colors` | Ya cubierta por `build-brand-theme.mjs`, con nuestras curvas OKLCH |
+  | `better-layout` | Ya cubierta por las cinco leyes de layout + `screen-patterns.md` |
+  | `better-accessibility` | Ya cubierta por `guidelines/accessibility.md` + los checks del grupo F |
+  | `better-ui` · `better-typography` | **Descartadas** — chocan con `GOVERNANCE` (ver abajo) |
+  | `break` | **Portada** como `embassy-break`, con los ejes salidos de `component-rules` y el eje de marca |
+  | `explain-interface` | **Portada** como `embassy-explain`, más el puente a nuestro catálogo |
+  | `better-writing` | Resuelta sin skill nueva: `content-and-writing.md` cableada al paso 7 de `design-system` |
+  | `variant` | Sin escribir — pertenece a un flujo de contribución de componentes que todavía no tenemos |
+
+  El motivo de las dos descartadas: Es un set excelente (`better-ui`, `better-typography`,
   `better-colors`, `better-layout`, `better-accessibility`, `interface-review`, `break`, `variant`)
   pero es **genérico y opinado por otra marca**: radios concéntricos, `scale(0.96)` al presionar,
   sombras sobre bordes. Varias de esas opiniones **chocan con GOVERNANCE** (nosotros escalamos el

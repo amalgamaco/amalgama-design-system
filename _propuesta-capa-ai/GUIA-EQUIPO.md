@@ -86,8 +86,8 @@ Media hora, una vez. Después el proyecto no vuelve a pensar en el DS.
 
 ## Cuándo usar cada skill
 
-Son cinco y **nunca hay duda de cuál**, porque cada una tiene un momento distinto en la vida del
-proyecto. Leelas en este orden:
+Son siete, pero **cinco son las del día a día y dos las llamás solo cuando las necesitás**. Cada una
+tiene un momento distinto en la vida del proyecto. Leelas en este orden:
 
 ### 1 · `/design:embassy-start` — el día que arranca el proyecto
 
@@ -140,7 +140,45 @@ esto no parece de Amalgama, ¿qué está mal?
 Sirve también sobre cosas que no hiciste con Claude: le pegás una URL, un screenshot, un link de
 Figma o un diff de un PR.
 
-### 5 · `/design:embassy-eval` — no la vas a usar
+### 5 · `/design:embassy-break` — cuando dudás si un componente aguanta
+
+**Antes de dar por terminado un componente, o cuando sospechás que se rompe con contenido real.**
+
+Renderiza *un* componente en todos sus estados, variantes, largos de texto y anchos **a la vez**, en
+una página que scrolleás. Y siempre incluye el eje que más nos importa: **la marca del cliente, en
+claro y en oscuro**.
+
+```
+rompé el select
+probá la card de vacante con contenido real
+¿esto aguanta la marca de Megatlón en oscuro?
+```
+
+> El bug de dark mode que arrastramos meses —los temas de cliente que no llegaban a oscuro— lo habría
+> encontrado esta skill en la primera corrida. Por eso ese eje va siempre.
+
+No arregla nada: te dice qué se rompió y **quién tiene la regla que lo arregla**. Y si lo que se
+rompió lo hace el sistema y no vos, eso es un gap del DS y se anota.
+
+### 6 · `/design:embassy-explain` — cuando el cliente manda una referencia
+
+**Cuando ves algo afuera y querés saber cómo está hecho, o si se puede con lo nuestro.**
+
+```
+el cliente mandó esta referencia, ¿se puede con Embassy?
+cómo está hecha esta animación
+cómo hicieron este gradiente
+```
+
+Te explica cómo está construido —marcando qué midió, qué calculó y qué está infiriendo, que no es lo
+mismo— y después contesta la pregunta que importa, con una de cuatro respuestas:
+
+**ya existe** en Embassy · **se compone** con lo que hay · **es un gap** de verdad y se anota ·
+**choca con el sistema**, se puede hacer y no deberíamos.
+
+Esa última es la más útil y la que nadie se anima a decir sola.
+
+### 7 · `/design:embassy-eval` — no la vas a usar
 
 **Es de los dueños del Design System.** Mide si el sistema mejora corriendo escenarios fijos y
 comparando contra un baseline. Aparece acá solo para que sepas que existe y por qué no es para el
@@ -159,15 +197,20 @@ arranca el proyecto ──▶ embassy-start        (una vez)
 
 
         en paralelo, sin repo ──▶ embassy-artifact   (propuestas, reportes)
+
+
+   cuando hace falta ──▶ embassy-break     (¿este componente aguanta?)
+                     ──▶ embassy-explain   (¿cómo hicieron esto? ¿se puede?)
 ```
 
-### Las tres confusiones que se dan siempre
+### Las confusiones que se dan siempre
 
 | Si pensás… | En realidad va… |
 |---|---|
 | "Es una pantalla, uso `embassy-artifact`" | `design-system`, si vive en el repo del producto |
 | "Quiero que revise y me lo arregle" | `embassy-review` solo diagnostica. Para que lo arregle, `design-system` |
 | "Cada pantalla nueva la arranco con `embassy-start`" | No: `embassy-start` es una vez por proyecto |
+| "Quiero ver si el componente está bien, uso `embassy-break`" | `break` muestra qué **se rompe**; si querés saber si está **bien hecho**, es `embassy-review` |
 
 El prefijo `design:` es el nombre del plugin. La forma corta (`/embassy-start`) también funciona
 si no hay otra skill con ese nombre.
