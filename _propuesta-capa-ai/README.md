@@ -23,7 +23,7 @@ en el working tree local (`component-rules/search.md`, `components/ui/carousel.t
 | `scripts/check-output.mjs` | Chequeos determinísticos sobre lo que un agente **produjo** (no sobre el DS) | `scripts/` |
 | `scripts/check-screen-report.mjs` | Verifica que el diagnóstico de una pantalla sea real y no un re-skin | **ya está en `scripts/`** |
 | `skills/embassy-start/` | El kickoff: 6 preguntas y el proyecto queda configurado (white-label incluido) | ídem |
-| `skills/embassy/` | Router del DS (reemplaza a `design-system`) + `references/decisiones.md` | `skills/` del repo, y desde ahí al plugin `design` |
+| `skills/embassy/` | Router del DS (reemplaza a `design-system`) + `references/decisiones.md` | **`amalgamaco/claude-code-plugins`** — el plugin sincroniza desde ahí, no desde este repo |
 | `skills/embassy-artifact/` | Entregables on-brand sin repo | ídem |
 | `skills/embassy-review/` | Auditoría con la taxonomía | ídem |
 | `skills/embassy-eval/` | El loop de medición + `scenarios/01-lista-coleccion.md` | ídem |
@@ -36,6 +36,14 @@ en el working tree local (`component-rules/search.md`, `components/ui/carousel.t
   igual que `embassy-artifact`.
 - **`scripts/build-brand-theme.mjs`** de esta carpeta — el canónico vive en `scripts/` del repo
   desde el commit del fix de white-label. Eran byte-idénticos.
+
+## Ojo: las skills no se distribuyen desde este repo
+
+El plugin `design` que la gente tiene instalado sincroniza desde **`amalgamaco/claude-code-plugins`**
+(repo privado), no desde acá. Esta carpeta es el borrador; para que una skill llegue a alguien hay
+que llevarla a ese otro repo. La carpeta `skills/` de la raíz de este repo es una copia congelada
+(341 líneas contra las 455 del plugin) y hay que borrarla o convertirla en la fuente — ver
+`PLAN-USO-DS.md` §9.6.
 
 ## Cómo probarlo ya mismo
 

@@ -38,13 +38,15 @@ distintos y ritmos de cambio distintos.
 | Capa | Qué es | Dónde vive | Quién la cambia | Cada cuánto |
 |---|---|---|---|---|
 | **1 · El sistema** | Tokens, 62 componentes, 61 reglas operativas, guidelines de UX, governance | `amalgamaco/amalgama-design-system` | Los dueños del DS, vía `CONTRIBUTING` | Semanal |
-| **2 · Las skills** | El *cómo se usa*: qué leer, en qué orden, qué está prohibido, cómo se valida | `skills/` **del mismo repo**, distribuidas por el plugin `design` | Los dueños del DS, en el mismo commit que el sistema | Con cada cambio del sistema |
+| **2 · Las skills** | El *cómo se usa*: qué leer, en qué orden, qué está prohibido, cómo se valida | **`amalgamaco/claude-code-plugins`** (repo privado), distribuido como plugin `design` | Los dueños del DS | Con cada cambio del sistema |
 | **3 · El proyecto** | La marca del cliente y las decisiones de ese producto | El repo del proyecto: `brand/<cliente>.css` + `DESIGN.md` | El equipo del proyecto | Al arrancar, y poco más |
 
-**La capa 2 vive adentro del repo de la capa 1 a propósito.** Si mañana cambia una variante de
-`toolbar`, la regla y la skill que la enseña tienen que cambiar en el mismo commit. Hoy eso no pasa:
-hay dos copias del `SKILL.md` que ya divergieron (341 líneas en el repo, 455 en el plugin instalado).
-Ese es exactamente el problema que este modelo cierra.
+**La capa 2 vive hoy en un repo distinto al de la capa 1**, y hay que decidirlo explícitamente
+(§9.6). El plugin `design` se sincroniza desde `amalgamaco/claude-code-plugins`, **no** desde el repo
+del design system. El repo del DS tiene además una carpeta `skills/` con una copia congelada: 341
+líneas contra las 455 del plugin instalado. Dos copias, un solo nombre, y **la que la gente usa es la
+del plugin**. Mientras siga así, cualquier cambio a la skill hay que hacerlo en el repo de plugins —
+el repo del DS no la distribuye.
 
 **La capa 3 nunca modifica la capa 1.** Un proyecto no edita componentes ni roles semánticos: solo
 sobreescribe **primitivas** (`--primary-500`, `--radius-md`, `--font-body`). Es lo que ya define
@@ -308,7 +310,7 @@ todo el tema Figma. Son decisiones de dueño, no de equipo.
 
 ## 9. Las decisiones que necesito del equipo
 
-Cinco, y las cinco son cortas:
+Seis, y todas son cortas:
 
 1. **¿Quién es el dueño del loop?** El eval solo sirve si alguien corre las rondas con una cadencia.
    Sin nombre, esto se muere en la semana tres.
@@ -321,6 +323,14 @@ Cinco, y las cinco son cortas:
 5. **¿`/embassy-start` es obligatorio en el kickoff?** O sea: ¿un proyecto puede arrancar sin correrlo?
    Mi opinión es que no debería, y que el `DESIGN.md` que genera sea parte de la Definition of Ready
    del proyecto.
+6. **¿Dónde vive el canónico de las skills?** Hoy hay dos copias en dos repos: `skills/` en el repo
+   del DS (congelada, 341 líneas) y el plugin `design`, que sincroniza desde
+   `amalgamaco/claude-code-plugins` (455 líneas, la que la gente usa). Hay que elegir una y borrar la
+   otra. **Recomiendo que el canónico sea el repo de plugins** y que `skills/` del DS se elimine: es
+   más simple y es como funciona la distribución hoy. El acoplamiento skill↔componente se resuelve
+   haciendo que la skill **apunte** a `component-rules/` en vez de repetirlo, que es como está
+   escrita. El único archivo que todavía repite contenido del repo es `references/decisiones.md`, y
+   por eso es el candidato a llevar un check o a desaparecer.
 
 ---
 
