@@ -121,6 +121,31 @@ Y las seis recomendaciones que dan para replicarlo:
 
 ---
 
+## 3.1 Procedencia: qué es de Vercel, qué es nuestro, qué descartamos
+
+Conviene tenerlo explícito para la presentación, porque la pregunta va a salir.
+
+| Pieza | De dónde viene |
+|---|---|
+| La arquitectura de tres partes (archivo de juicio + API acotada + loop) | **Vercel**, tal cual |
+| `design.md` — su forma: orden de prioridad, cuatro pasadas, "rechazá estos reflejos" | **Vercel**, la estructura; el contenido es de Embassy |
+| "Nunca inspecciones el CSS, usá la lista publicada" | **Vercel**, literal |
+| Escenarios fijos + baseline + corridas pareadas + corregir en el punto más angosto | **Vercel**, las seis recomendaciones de su cierre |
+| `PUBLIC-API.md` | La idea es de Vercel; la lista se **genera** de nuestro `manifest.json` |
+| Las cinco leyes de layout, las tablas de componentes confundibles, el screen gate | **Embassy** — salen de `GOVERNANCE.md`, `guidelines/` y `component-rules/` |
+| Los IDs de `FAILURES.md` | **Nuestros**, derivados de las reglas del repo. El grupo H (reflejos generados) sí es de Vercel |
+| El cuestionario de `embassy-start` | **`WHITE-LABEL.md`** del repo, no de Vercel — ellos no tienen caso white-label |
+| Las curvas OKLCH de `build-brand-theme.mjs` | **Medidas** sobre `css/variables.css` |
+| `jakubkrehel/skills` | **Descartado.** Ver §5.3: es bueno pero opinado por otra marca y varias reglas chocan con `GOVERNANCE`. Se rescatan dos formatos (`break`, `variant`), sin escribir |
+
+**Dónde nos separamos de Vercel a propósito:** ellos no tienen `component-rules`. Nosotros sí, y es
+nuestro mejor activo, así que la prohibición de leer el CSS aplica **solo** a `embassy-artifact`
+(carril sin repo). En el carril producto, `embassy` sí lee la regla y el CSS del componente que está
+usando. Ellos hacen lo mismo con su skill `product-design`, que vive dentro de sus repos: su
+`design.md` es para páginas **fuera** del producto, no para pantallas de producto.
+
+---
+
 ## 4. Vercel → Embassy: qué tenemos y qué falta
 
 | Pieza del modelo Vercel | Estado en Amalgama | Veredicto |
