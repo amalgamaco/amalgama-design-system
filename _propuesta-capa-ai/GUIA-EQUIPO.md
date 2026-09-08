@@ -84,18 +84,93 @@ Media hora, una vez. Después el proyecto no vuelve a pensar en el DS.
 
 ---
 
-## El día a día
+## Cuándo usar cada skill
 
-| Quiero… | Escribo | Qué me devuelve |
-|---|---|---|
-| Armar o rediseñar una pantalla | **`/design:design-system`** *"armá la vista de listado de socios"* | El diagnóstico de la pantalla, la pantalla construida, y qué se movió y por qué |
-| Una propuesta, un reporte, un one-pager | **`/design:embassy-artifact`** *"armá una propuesta para Megatlón"* | Un HTML on-brand, sin repo |
-| Revisar algo antes de entregar o mergear | **`/design:embassy-review`** *"revisá esta pantalla"* | Problemas con severidad y cómo arreglar cada uno |
-| Arrancar un proyecto | **`/design:embassy-start`** | Lo de arriba |
-| Medir si el sistema mejora | **`/design:embassy-eval`** | Solo dueños del DS |
+Son cinco y **nunca hay duda de cuál**, porque cada una tiene un momento distinto en la vida del
+proyecto. Leelas en este orden:
 
-El prefijo `design:` es el nombre del plugin. Si no hay otra skill con el mismo nombre, la forma
-corta (`/embassy-start`) también funciona.
+### 1 · `/design:embassy-start` — el día que arranca el proyecto
+
+**Una sola vez, al principio.** Antes de que exista la primera pantalla.
+
+Es la que hace las seis preguntas, genera el tema de la marca, verifica contraste y deja el
+proyecto configurado. Si ya la corriste en este proyecto, no la volvés a correr nunca —
+salvo que el cliente cambie de marca.
+
+> *"¿Ya existe `brand/<cliente>.css` en la carpeta?"* Si sí, esta skill ya cumplió.
+
+### 2 · `/design:design-system` — todos los días, para cada pantalla
+
+**Es la que más vas a usar.** Cada vez que haya que armar una pantalla nueva, rediseñar una que
+está mal, o migrar una vieja al DS.
+
+```
+armá la vista de listado de socios
+esta pantalla no se entiende, rediseñala
+migrá esta pantalla a Embassy
+```
+
+No te devuelve solo la pantalla: primero te dice **qué está mal y por qué** (citando la ley de UX
+que se rompe), después qué movió, y recién ahí el código. Si te devuelve una pantalla donde solo
+cambiaron los colores y los botones, algo falló — eso es un re-skin y la skill está hecha
+justamente para no hacer eso.
+
+### 3 · `/design:embassy-artifact` — cuando NO hay repo
+
+**El corte es este: ¿esto vive en un repo de producto que se mantiene, o es un entregable de una
+vez?**
+
+Propuestas comerciales, reportes de proyecto, one-pagers, la página de resultados del trimestre,
+un brief, una demo. Sale un HTML solo, on-brand, sin clonar nada y sin instalar nada.
+
+> Si dudás entre esta y `design-system`, preguntate: *¿alguien va a volver a editar esto dentro de
+> tres meses?* Sí → `design-system`. No → `embassy-artifact`.
+
+### 4 · `/design:embassy-review` — antes de entregar o mergear
+
+**El paso previo a mostrar algo.** No construye ni arregla: audita y te dice qué está mal, con
+severidad y con el arreglo propuesto.
+
+```
+revisá esta pantalla antes de que la mande
+¿esto respeta el DS?
+esto no parece de Amalgama, ¿qué está mal?
+```
+
+Sirve también sobre cosas que no hiciste con Claude: le pegás una URL, un screenshot, un link de
+Figma o un diff de un PR.
+
+### 5 · `/design:embassy-eval` — no la vas a usar
+
+**Es de los dueños del Design System.** Mide si el sistema mejora corriendo escenarios fijos y
+comparando contra un baseline. Aparece acá solo para que sepas que existe y por qué no es para el
+día a día.
+
+---
+
+### En una línea de tiempo
+
+```
+arranca el proyecto ──▶ embassy-start        (una vez)
+                          │
+        cada pantalla ──▶ design-system      (todo el tiempo)
+                          │
+     antes de entregar ──▶ embassy-review    (cada vez que mostrás algo)
+
+
+        en paralelo, sin repo ──▶ embassy-artifact   (propuestas, reportes)
+```
+
+### Las tres confusiones que se dan siempre
+
+| Si pensás… | En realidad va… |
+|---|---|
+| "Es una pantalla, uso `embassy-artifact`" | `design-system`, si vive en el repo del producto |
+| "Quiero que revise y me lo arregle" | `embassy-review` solo diagnostica. Para que lo arregle, `design-system` |
+| "Cada pantalla nueva la arranco con `embassy-start`" | No: `embassy-start` es una vez por proyecto |
+
+El prefijo `design:` es el nombre del plugin. La forma corta (`/embassy-start`) también funciona
+si no hay otra skill con ese nombre.
 
 ---
 
