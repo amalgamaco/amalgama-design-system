@@ -1,0 +1,2196 @@
+{
+  "generated_from": "css/components",
+  "components": [
+    {
+      "id": "accordion",
+      "display_name": "Accordion",
+      "category": "Containment",
+      "status": "stable",
+      "file": "css/components/accordion.css",
+      "summary": "Vertically stacked, expandable sections that reveal or hide long content to keep a dense view scannable.",
+      "when": "FAQs, filtros avanzados o detalles opcionales donde mostrar todo a la vez abrumaría.",
+      "when_not": "navegar entre vistas (usar Tabs); un único bloque mostrar/ocultar (usar Collapsible); contenido crítico que siempre debe verse.",
+      "variants": [
+        "single",
+        "multiple",
+        "disabled",
+        "bordered",
+        "card"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/accordion.md"
+      ],
+      "usage": "",
+      "classes": [
+        "accordion",
+        "accordion-bordered",
+        "accordion-chevron",
+        "accordion-content",
+        "accordion-content-inner",
+        "accordion-item",
+        "accordion-trigger"
+      ],
+      "internal_class_count": 9
+    },
+    {
+      "id": "alert",
+      "display_name": "Alert",
+      "category": "Feedback",
+      "status": "stable",
+      "file": "css/components/alert.css",
+      "summary": "An inline, persistent contextual message that stays in the page flow until the user resolves or dismisses it.",
+      "when": "mensajes persistentes en la página — un aviso de sistema, la validación completa de un formulario, una nota informativa que debe seguir visible hasta que la persona actúe.",
+      "when_not": "feedback efímero de una acción (usar Snackbar); confirmación que interrumpe (usar Alert Dialog); como único indicador por color (acompañá siempre con título/ícono).",
+      "variants": [
+        "default",
+        "info",
+        "success",
+        "warning",
+        "error"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/alert.md"
+      ],
+      "usage": "<div class=\"alert alert-info\" role=\"alert\">\n  <svg class=\"alert-icon\">…</svg>\n  <div class=\"alert-body\">\n    <div class=\"alert-title\">Mantenimiento programado</div>\n    <div class=\"alert-description\">El sistema estará en modo lectura el sábado de 2 a 4am.</div>\n  </div>\n</div>",
+      "classes": [
+        "alert",
+        "alert-actions",
+        "alert-body",
+        "alert-close",
+        "alert-description",
+        "alert-error",
+        "alert-icon",
+        "alert-info",
+        "alert-success",
+        "alert-title",
+        "alert-warning"
+      ],
+      "internal_class_count": 11
+    },
+    {
+      "id": "attachment",
+      "display_name": "Attachment",
+      "category": "Data Display",
+      "status": "stable",
+      "file": "css/components/attachment.css",
+      "summary": "A compact file row showing an icon/thumbnail, name and metadata, with an optional remove action, upload progress, or error state.",
+      "when": "listar archivos subidos o por subir (CV de candidatos, adjuntos de un mensaje), con progreso o botón de quitar.",
+      "when_not": "subir el archivo (usar <input type=\"file\">, ver Input); galería de imágenes (Carousel).",
+      "variants": [
+        "default",
+        "image",
+        "uploading",
+        "error",
+        "list"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/attachment.md"
+      ],
+      "usage": "<ul class=\"attachment-list\">\n  <li class=\"attachment\">\n    <span class=\"attachment-icon\"><svg>…</svg></span>\n    <div class=\"attachment-body\">\n      <div class=\"attachment-name\">CV_Ana_Torres.pdf</div>\n      <div class=\"attachment-meta\">240 KB · PDF</div>\n    </div>\n    <button class=\"icon-btn btn-sm attachment-remove\" aria-label=\"Quitar\">✕</button>\n  </li>\n</ul>",
+      "classes": [
+        "attachment",
+        "attachment-body",
+        "attachment-error",
+        "attachment-icon",
+        "attachment-icon-image",
+        "attachment-list",
+        "attachment-meta",
+        "attachment-name",
+        "attachment-progress",
+        "attachment-progress-bar",
+        "attachment-remove",
+        "btn-sm",
+        "icon-btn"
+      ],
+      "internal_class_count": 11
+    },
+    {
+      "id": "avatar",
+      "display_name": "Avatar",
+      "category": "Display",
+      "status": "stable",
+      "file": "css/components/avatar.css",
+      "summary": "A circle showing a person's photo or initials over a brand tonal fill — identifies a person, never a non-person entity.",
+      "when": "identificar a una persona (topbar, listas, cards de vacante/persona, asignados).",
+      "when_not": "para íconos genéricos de sistema (usar Icon Button) ni como decoración sin significado.",
+      "variants": [
+        "image",
+        "fallback",
+        "badge",
+        "group",
+        "count"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "rules_files": [
+        "component-rules/avatar.md"
+      ],
+      "usage": "<span class=\"avatar avatar-md\"><span class=\"avatar-fallback\">MG</span></span>\n<span class=\"avatar avatar-lg\"><img class=\"avatar-image\" src=\"…\" alt=\"María González\"></span>",
+      "classes": [
+        "avatar",
+        "avatar-badge",
+        "avatar-badge-away",
+        "avatar-badge-busy",
+        "avatar-badge-offline",
+        "avatar-badge-online",
+        "avatar-fallback",
+        "avatar-group",
+        "avatar-group-count",
+        "avatar-image",
+        "avatar-lg",
+        "avatar-md",
+        "avatar-sm",
+        "avatar-xl"
+      ],
+      "internal_class_count": 14
+    },
+    {
+      "id": "back-link",
+      "display_name": "back-link",
+      "category": "",
+      "status": "",
+      "file": "css/components/back-link.css",
+      "summary": "volver a la vista padre desde una página de detalle.",
+      "when": "volver a la vista padre desde una página de detalle.",
+      "when_not": "navegación principal (usar sidebar/tabs) ni acciones (usar btn-text).",
+      "variants": [],
+      "sizes": [],
+      "rules_files": [],
+      "usage": "<button class=\"back-link\">\n  <svg width=\"16\" height=\"16\" ...>...</svg>\n  Volver a vacantes\n</button>",
+      "classes": [
+        "back-link"
+      ],
+      "internal_class_count": 1
+    },
+    {
+      "id": "badge",
+      "display_name": "Badge",
+      "category": "Display",
+      "status": "stable",
+      "file": "css/components/badge.css",
+      "summary": "A read-only pill communicating an item's status, category, or a count — each color carries a fixed meaning; never interactive.",
+      "when": "estado o categoría de SOLO LECTURA de un ítem (tablas, cards, listas). Todo label categórico debe ser badge — nunca texto plano coloreado.",
+      "when_not": "si es interactivo/filtrable usar Chip; si es una acción usar Button.",
+      "variants": [
+        "open",
+        "active",
+        "closed",
+        "draft",
+        "archived",
+        "warning",
+        "tertiary",
+        "info",
+        "label"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/badge.md"
+      ],
+      "usage": "",
+      "classes": [
+        "badge",
+        "badge-active",
+        "badge-archived",
+        "badge-closed",
+        "badge-draft",
+        "badge-info",
+        "badge-label",
+        "badge-link",
+        "badge-open",
+        "badge-tertiary",
+        "badge-warning"
+      ],
+      "internal_class_count": 12
+    },
+    {
+      "id": "breadcrumb",
+      "display_name": "Breadcrumb",
+      "category": "Navigation",
+      "status": "stable",
+      "file": "css/components/breadcrumb.css",
+      "summary": "A hierarchy trail showing where the user is and letting them jump back to an ancestor.",
+      "when": "mostrar la ubicación dentro de una jerarquía de varios niveles y permitir volver a un ancestro.",
+      "when_not": "una sola acción \"volver\" (usar Back Link); navegación primaria entre secciones (usar Navigation).",
+      "variants": [
+        "link",
+        "page",
+        "separator",
+        "ellipsis"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/breadcrumb.md"
+      ],
+      "usage": "",
+      "classes": [
+        "breadcrumb",
+        "breadcrumb-ellipsis",
+        "breadcrumb-item",
+        "breadcrumb-link",
+        "breadcrumb-list",
+        "breadcrumb-page",
+        "breadcrumb-separator"
+      ],
+      "internal_class_count": 6
+    },
+    {
+      "id": "button-group",
+      "display_name": "Button Group",
+      "category": "Actions",
+      "status": "stable",
+      "file": "css/components/button-group.css",
+      "summary": "A container that visually joins related buttons (or an input + addon) into one unit by collapsing shared borders and radii — it carries no selection state of its own.",
+      "when": "agrupar acciones relacionadas del mismo peso (paginador de acciones, split button, input + botón), o un addon de texto junto a un input.",
+      "when_not": "elegir 1 de N con estado (usar Segmented Button / Toggle Group); una sola acción (usar Button).",
+      "variants": [
+        "horizontal",
+        "vertical",
+        "text-addon",
+        "separator"
+      ],
+      "sizes": [
+        "inherited"
+      ],
+      "rules_files": [
+        "component-rules/button-group.md"
+      ],
+      "usage": "<div class=\"button-group\">\n  <button class=\"btn-tertiary\">Anterior</button>\n  <button class=\"btn-tertiary\">Siguiente</button>\n</div>\n<div class=\"button-group\"><span class=\"button-group-text\">https://</span>\n  <input class=\"field-input\" placeholder=\"tu-sitio.com\"></div>",
+      "classes": [
+        "btn-tertiary",
+        "button-group",
+        "button-group-separator",
+        "button-group-text",
+        "button-group-vertical",
+        "field-input"
+      ],
+      "internal_class_count": 4
+    },
+    {
+      "id": "button",
+      "display_name": "Button",
+      "category": "Actions",
+      "status": "stable",
+      "file": "css/components/button.css",
+      "summary": "Triggers an action. Chosen by hierarchy (color) and density (size); exactly one primary action per context.",
+      "when": "acciones. Jerarquía obligatoria: UN solo btn-primary por contexto; btn-secondary para alternativas; btn-tertiary menor peso; btn-text acciones inline.",
+      "when_not": "navegación (usar links/nav). NUNCA estirar a full-width ni alinear contenido a la izquierda — el botón tiene ancho intrínseco y contenido centrado; si el layout legacy lo pide, se cambia el layout, no el botón.",
+      "variants": [
+        "primary",
+        "elevated",
+        "secondary",
+        "tertiary",
+        "text",
+        "icon",
+        "danger",
+        "success"
+      ],
+      "sizes": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "rules_files": [
+        "component-rules/button.md"
+      ],
+      "usage": "<button class=\"btn-primary\">Crear vacante</button>\n<button class=\"btn-elevated\">Ver detalle</button>\n<button class=\"btn-secondary\">Guardar borrador</button>\n<button class=\"btn-tertiary\">Cancelar</button>\n<button class=\"btn-text\">Ver más</button>\n<button class=\"icon-btn\" aria-label=\"Ajustes\"><svg>…</svg></button>",
+      "classes": [
+        "btn-compact",
+        "btn-danger",
+        "btn-elevated",
+        "btn-ghost",
+        "btn-lg",
+        "btn-next",
+        "btn-primary",
+        "btn-secondary",
+        "btn-sm",
+        "btn-success",
+        "btn-tertiary",
+        "btn-text",
+        "btn-xl",
+        "btn-xs",
+        "icon-btn"
+      ],
+      "internal_class_count": 16
+    },
+    {
+      "id": "calendar",
+      "display_name": "Calendar",
+      "category": "Input",
+      "status": "stable",
+      "file": "css/components/calendar.css",
+      "summary": "A month-grid date/range picker with real month/year navigation — the base of the Date Picker, usable inline or docked in a popover, dialog, or sheet.",
+      "when": "como base del Date Picker, o en línea cuando el calendario debe estar siempre visible (no como popover).",
+      "when_not": "para elegir solo mes/año (usar Select); para texto libre de fecha sin calendario (usar Input nativo type=\"date\").",
+      "variants": [
+        "single",
+        "range",
+        "dropdown",
+        "presets",
+        "booked",
+        "weeknumbers",
+        "date-picker",
+        "date-time"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "rules_files": [
+        "component-rules/calendar.md"
+      ],
+      "usage": "<div class=\"calendar\">\n  <div class=\"calendar-header\">\n    <button class=\"calendar-nav-btn\" aria-label=\"Mes anterior\">‹</button>\n    <span class=\"calendar-caption\">Julio 2026</span>\n    <button class=\"calendar-nav-btn\" aria-label=\"Mes siguiente\">›</button>\n  </div>\n  <div class=\"calendar-weekdays\">...</div>\n  <div class=\"calendar-grid\">...</div>\n</div>",
+      "classes": [
+        "calendar",
+        "calendar-caption",
+        "calendar-caption-dropdowns",
+        "calendar-caption-select",
+        "calendar-day",
+        "calendar-day-booked",
+        "calendar-day-disabled",
+        "calendar-day-outside",
+        "calendar-day-range-end",
+        "calendar-day-range-middle",
+        "calendar-day-range-start",
+        "calendar-day-selected",
+        "calendar-day-today",
+        "calendar-grid",
+        "calendar-header",
+        "calendar-lg",
+        "calendar-nav-btn",
+        "calendar-preset-btn",
+        "calendar-presets",
+        "calendar-sm",
+        "calendar-time-row",
+        "calendar-weekdays",
+        "calendar-weeknum",
+        "calendar-with-presets",
+        "date-picker",
+        "date-picker-panel",
+        "date-picker-trigger"
+      ],
+      "internal_class_count": 29
+    },
+    {
+      "id": "card",
+      "display_name": "Full Card",
+      "category": "Data display / Containment",
+      "status": "stable",
+      "file": "css/components/card.css",
+      "summary": "A rich content panel that groups content and actions about a single subject on a surface.",
+      "when": "contenedor genérico de contenido agrupado sobre superficie.",
+      "when_not": "métricas (stat-card), personas (person-card), vacantes (vacancy-card).",
+      "variants": [
+        "outlined",
+        "elevated",
+        "filled"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/card.md"
+      ],
+      "usage": "<div class=\"card\">\n  <div class=\"card-header\">\n    <div class=\"card-title\">Título</div>\n    <p class=\"card-desc\">Descripción breve.</p>\n  </div>\n  <div class=\"card-content\">Contenido de la tarjeta</div>\n  <div class=\"card-footer\"><button class=\"btn-text\">Acción</button></div>\n</div>",
+      "classes": [
+        "btn-text",
+        "card",
+        "card-action",
+        "card-content",
+        "card-desc",
+        "card-elevated",
+        "card-filled",
+        "card-footer",
+        "card-header",
+        "card-title"
+      ],
+      "internal_class_count": 9
+    },
+    {
+      "id": "carousel",
+      "display_name": "Carousel",
+      "category": "Containment",
+      "status": "stable",
+      "file": "css/components/carousel.css",
+      "summary": "A scroll-snapping, browsable set of homogeneous items (images or cards) with prev/next controls — for secondary content that doesn't fit in one row.",
+      "when": "colecciones de tarjetas/imágenes que no caben en una fila.",
+      "when_not": "listas verticales largas (usar Table/List); un solo ítem destacado.",
+      "variants": [
+        "single",
+        "multi",
+        "vertical",
+        "prev-btn",
+        "next-btn"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/carousel.md"
+      ],
+      "usage": "<div class=\"carousel\">\n  <div class=\"carousel-content\">\n    <div class=\"carousel-item\">…</div>\n    <div class=\"carousel-item\">…</div>\n  </div>\n  <button class=\"carousel-btn carousel-btn-prev\">‹</button>\n  <button class=\"carousel-btn carousel-btn-next\">›</button>\n</div>",
+      "classes": [
+        "carousel",
+        "carousel-btn",
+        "carousel-btn-next",
+        "carousel-btn-prev",
+        "carousel-content",
+        "carousel-item",
+        "carousel-item-half",
+        "carousel-vertical"
+      ],
+      "internal_class_count": 8
+    },
+    {
+      "id": "chart",
+      "display_name": "Charts",
+      "category": "Data display",
+      "status": "stable",
+      "file": "css/components/chart.css",
+      "summary": "Line, area, bar, and pie visualizations for dashboards and analytics — hand-drawn inline SVG + CSS conic-gradient, themed with the --chart-1..5 categorical palette.",
+      "when": "series temporales o categóricas en dashboards y analytics (línea, barra, torta).",
+      "when_not": "una sola métrica puntual (usar Stat Card); tablas de datos exactos (usar Table).",
+      "variants": [
+        "line",
+        "area",
+        "bar",
+        "pie",
+        "legend"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/charts.md"
+      ],
+      "usage": "<div class=\"chart-container\">\n  <svg class=\"chart-svg\" viewBox=\"0 0 600 300\">…</svg>\n</div>",
+      "classes": [
+        "chart-area",
+        "chart-axis-label",
+        "chart-bar",
+        "chart-container",
+        "chart-dot",
+        "chart-grid",
+        "chart-legend",
+        "chart-legend-item",
+        "chart-legend-swatch",
+        "chart-line",
+        "chart-pie",
+        "chart-pie-wrap",
+        "chart-svg"
+      ],
+      "internal_class_count": 19
+    },
+    {
+      "id": "checkbox",
+      "display_name": "Checkbox",
+      "category": "Selección",
+      "status": "stable",
+      "file": "css/components/checkbox.css",
+      "summary": "A native checkbox for selecting one or more options from a set — three states (unchecked / checked / indeterminate); the change applies on confirm, not instantly.",
+      "when": "selección múltiple independiente (cada opción no afecta a las demás); aceptar términos; seleccionar filas de una tabla (con estado indeterminate en el checkbox de cabecera cuando la selección es parcial).",
+      "when_not": "selección única excluyente (usar Radio Group); on/off inmediato sin lista de opciones (usar Switch).",
+      "variants": [
+        "default",
+        "label",
+        "card"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/checkbox.md"
+      ],
+      "usage": "<label class=\"checkbox-label\">\n  <input type=\"checkbox\" class=\"checkbox\">\n  Acepto los términos\n</label>\n<input type=\"checkbox\" class=\"checkbox\" id=\"row-1\">\n<!-- indeterminate se setea vía JS: el.indeterminate = true -->",
+      "classes": [
+        "checkbox",
+        "checkbox-card",
+        "checkbox-card-content",
+        "checkbox-card-desc",
+        "checkbox-card-title",
+        "checkbox-label",
+        "indeterminate"
+      ],
+      "internal_class_count": 6
+    },
+    {
+      "id": "chip",
+      "display_name": "Chip",
+      "category": "Actions / Selection",
+      "status": "stable",
+      "file": "css/components/chip.css",
+      "summary": "A compact, interactive element for filtering, selecting, or representing input — never for primary actions.",
+      "when": "filtros, selección múltiple, sugerencias — siempre interactivo. Filter chips van debajo de la search bar para refinar resultados.",
+      "when_not": "estado de solo lectura (usar Badge); acción principal (usar Button).",
+      "variants": [
+        "base",
+        "selected",
+        "elevated",
+        "icon",
+        "remove",
+        "set"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/chip.md"
+      ],
+      "usage": "<button class=\"chip\">Sugerencia</button>\n<button class=\"chip\"><span class=\"chip-icon\">…</span> Asistencia</button>\n<button class=\"chip\" aria-pressed=\"false\">Filtro</button>\n<button class=\"chip chip-selected\" aria-pressed=\"true\">Filtro activo</button>\n<span class=\"chip\">Entrada <button class=\"chip-remove\" aria-label=\"Quitar\">✕</button></span>\n<button class=\"chip chip-elevated\">Elevado</button>",
+      "classes": [
+        "chip",
+        "chip-elevated",
+        "chip-icon",
+        "chip-remove",
+        "chip-selected",
+        "chip-set"
+      ],
+      "internal_class_count": 7
+    },
+    {
+      "id": "collapsible",
+      "display_name": "Collapsible",
+      "category": "Containment",
+      "status": "stable",
+      "file": "css/components/collapsible.css",
+      "summary": "A single show/hide region toggled by any trigger — a minimal disclosure with one boolean state.",
+      "when": "mostrar/ocultar UN bloque (\"ver más\", detalles opcionales de un formulario, una fila expandible en una tabla).",
+      "when_not": "varias secciones expandibles agrupadas con el mismo patrón (usar Accordion, que además garantiza que solo una quede abierta si se necesita).",
+      "variants": [
+        "base"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/collapsible.md"
+      ],
+      "usage": "<div class=\"collapsible\">\n  <button class=\"collapsible-trigger\" aria-expanded=\"false\" aria-controls=\"col-1\" onclick=\"collapsibleToggle(this)\">\n    Ver más\n  </button>\n  <div class=\"collapsible-content\" data-state=\"closed\" id=\"col-1\">\n    <div class=\"collapsible-content-inner\">Contenido adicional…</div>\n  </div>\n</div>",
+      "classes": [
+        "collapsible",
+        "collapsible-content",
+        "collapsible-content-inner",
+        "collapsible-trigger"
+      ],
+      "internal_class_count": 3
+    },
+    {
+      "id": "combobox",
+      "display_name": "Combobox",
+      "category": "Forms / Selection",
+      "status": "stable",
+      "file": "css/components/combobox.css",
+      "summary": "A searchable single-select — a trigger button that opens a filterable Command list; pick one value from a long set by typing to narrow it.",
+      "when": "elegir 1 opción de una lista larga donde hace falta buscar/filtrar (país, usuario, repo). Cuándo no: listas cortas sin búsqueda (usar .form-select); multi-select con tags (usar Chips + Command).",
+      "when_not": "",
+      "variants": [
+        "base",
+        "trigger",
+        "placeholder",
+        "panel",
+        "check"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/combobox.md"
+      ],
+      "usage": "<div class=\"combobox\">\n  <button class=\"btn-tertiary combobox-trigger\" aria-expanded=\"false\" aria-haspopup=\"listbox\">\n    Seleccionar… <span class=\"combobox-chevron\">…</span>\n  </button>\n  <div class=\"combobox-panel\">\n    <div class=\"command\">…</div>\n  </div>\n</div>",
+      "classes": [
+        "btn-tertiary",
+        "combobox",
+        "combobox-check",
+        "combobox-chevron",
+        "combobox-panel",
+        "combobox-trigger",
+        "command",
+        "form-select"
+      ],
+      "internal_class_count": 7
+    },
+    {
+      "id": "command",
+      "display_name": "Command",
+      "category": "Overlays",
+      "status": "stable",
+      "file": "css/components/command.css",
+      "summary": "A searchable command palette / filterable list — substring-filtered items with arrow/Enter navigation and an empty state, optionally opened as a ⌘K Command Dialog.",
+      "when": "búsqueda-y-ejecución rápida de comandos o navegación, pickers filtrables, y es la base del Combobox.",
+      "when_not": "un select de formulario corto (usar .form-select); búsqueda de contenido de la página (usar Search).",
+      "variants": [
+        "inline",
+        "dialog",
+        "group",
+        "item",
+        "empty",
+        "shortcut"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/command.md"
+      ],
+      "usage": "<div class=\"command\">\n  <div class=\"command-input-wrapper\">\n    <span class=\"command-input-icon\">…lupa…</span>\n    <input class=\"command-input\" placeholder=\"Buscar…\">\n  </div>\n  <div class=\"command-list\">\n    <div class=\"command-empty\">Sin resultados.</div>\n    <div class=\"command-group\">\n      <div class=\"command-group-heading\">Sugerencias</div>\n      <div class=\"command-item\" data-active=\"true\">Item</div>\n    </div>\n  </div>\n</div>",
+      "classes": [
+        "command",
+        "command-dialog",
+        "command-empty",
+        "command-group",
+        "command-group-heading",
+        "command-input",
+        "command-input-icon",
+        "command-input-wrapper",
+        "command-item",
+        "command-list",
+        "command-separator",
+        "command-shortcut",
+        "form-select"
+      ],
+      "internal_class_count": 12
+    },
+    {
+      "id": "context-menu",
+      "display_name": "Context Menu",
+      "category": "Overlays",
+      "status": "stable",
+      "file": "css/components/context-menu.css",
+      "summary": "A cursor-anchored actions menu opened by right-click (or long-press) on an element — the same panel as Dropdown Menu, just a different trigger.",
+      "when": "acciones contextuales sobre un elemento de una lista/tabla/canvas.",
+      "when_not": "acción siempre visible sobre un botón → Dropdown Menu.",
+      "variants": [
+        "trigger",
+        "panel"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/context-menu.md"
+      ],
+      "usage": "<div class=\"context-menu-trigger\" onContextMenu=\"…\">Click derecho acá</div>\n<div class=\"dropdown-content\" role=\"menu\" style=\"top:200px;left:120px\">…</div>",
+      "classes": [
+        "context-menu-trigger",
+        "dropdown-",
+        "dropdown-content",
+        "dropdown-item",
+        "dropdown-label",
+        "dropdown-separator"
+      ],
+      "internal_class_count": 1
+    },
+    {
+      "id": "create-form",
+      "display_name": "create-form",
+      "category": "",
+      "status": "",
+      "file": "css/components/create-form.css",
+      "summary": "header + footer pegajoso de formularios de creación full-page.",
+      "when": "header + footer pegajoso de formularios de creación full-page.",
+      "when_not": "tareas cortas que caben en un Modal.",
+      "variants": [],
+      "sizes": [],
+      "rules_files": [],
+      "usage": "<div class=\"create-header\">\n  <h1 class=\"create-title\">Crear vacante</h1>\n</div>\n<!-- formulario -->\n<div class=\"create-footer\">\n  <button class=\"btn-tertiary\">Cancelar</button>\n  <button class=\"btn-primary\">Publicar</button>\n</div>",
+      "classes": [
+        "btn-primary",
+        "btn-tertiary",
+        "create-footer",
+        "create-header",
+        "create-title"
+      ],
+      "internal_class_count": 3
+    },
+    {
+      "id": "data-table",
+      "display_name": "Data Table",
+      "category": "Data display",
+      "status": "stable",
+      "file": "css/components/data-table.css",
+      "summary": "An interactive table over static Table — column sort, text filter, row selection, column visibility, and slice pagination via initDataTable().",
+      "when": "tablas con datos reales que necesitan ordenar/paginar por columna.",
+      "when_not": "una tabla estática de layout (usar Table directamente).",
+      "variants": [
+        "base",
+        "sortable-header",
+        "filter",
+        "selection",
+        "pagination",
+        "empty"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/data-table.md"
+      ],
+      "usage": "<DataTable columns={[{ key:\"name\", header:\"Nombre\", sortable:true }]} data={rows} />",
+      "classes": [
+        "data-table",
+        "data-table-count",
+        "data-table-empty",
+        "data-table-filter",
+        "data-table-footer",
+        "data-table-select",
+        "data-table-sort-btn",
+        "data-table-sort-icon",
+        "data-table-toolbar"
+      ],
+      "internal_class_count": 11
+    },
+    {
+      "id": "date-picker",
+      "display_name": "date-picker",
+      "category": "",
+      "status": "",
+      "file": "css/components/date-picker.css",
+      "summary": "elegir una fecha (o rango) desde un campo de formulario o toolbar.",
+      "when": "elegir una fecha (o rango) desde un campo de formulario o toolbar.",
+      "when_not": "entrada de texto libre de fecha (usar Input nativo type=\"date\" si no hace falta calendario); elegir mes/año sueltos (usar Select).",
+      "variants": [],
+      "sizes": [],
+      "rules_files": [],
+      "usage": "<div class=\"date-picker\">\n  <button class=\"date-picker-trigger btn-tertiary\">\n    <svg class=\"date-picker-icon\">…</svg> 17 de julio, 2026\n  </button>\n  <div class=\"date-picker-panel\"><div class=\"calendar\">…</div></div>\n</div>",
+      "classes": [
+        "btn-tertiary",
+        "calendar",
+        "date-picker",
+        "date-picker-icon",
+        "date-picker-panel",
+        "date-picker-trigger"
+      ],
+      "internal_class_count": 5
+    },
+    {
+      "id": "description",
+      "display_name": "description",
+      "category": "",
+      "status": "",
+      "file": "css/components/description.css",
+      "summary": "secciones de descripción editables (título + editor rich-text).",
+      "when": "secciones de descripción editables (título + editor rich-text).",
+      "when_not": "campos simples de formulario (usar form.css).",
+      "variants": [],
+      "sizes": [],
+      "rules_files": [],
+      "usage": "<div class=\"desc-section\">\n  <div class=\"desc-section-header\">\n    <input class=\"desc-title-input\" value=\"Responsabilidades\">\n    <button class=\"desc-delete-btn\">✕</button>\n  </div>\n  <div class=\"desc-editor\" contenteditable=\"true\"\n       data-placeholder=\"Escribe aqui...\">\n  </div>\n</div>",
+      "classes": [
+        "desc-delete-btn",
+        "desc-editor",
+        "desc-section",
+        "desc-section-header",
+        "desc-title-input"
+      ],
+      "internal_class_count": 5
+    },
+    {
+      "id": "divider",
+      "display_name": "Divider",
+      "category": "Containment",
+      "status": "stable",
+      "file": "css/components/divider.css",
+      "summary": "A 1px line that separates groups of equal-hierarchy content — the lightest separation in the system, no brand color, no elevation.",
+      "when": "separar grupos lógicos dentro de una lista, card o layout.",
+      "when_not": "para crear espaciado (usar --space-* + margin/gap) ni como borde decorativo de contenedor.",
+      "variants": [
+        "full-width",
+        "inset",
+        "vertical"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/divider.md"
+      ],
+      "usage": "<hr class=\"divider\">                            <!-- separador semántico -->\n<div class=\"divider\" role=\"separator\"></div>    <!-- equivalente explícito -->\n<div class=\"divider divider-inset\"></div>\n<div class=\"divider divider-vertical\" role=\"separator\" aria-orientation=\"vertical\"></div>",
+      "classes": [
+        "divider",
+        "divider-inset",
+        "divider-vertical"
+      ],
+      "internal_class_count": 3
+    },
+    {
+      "id": "dropdown-menu",
+      "display_name": "Menu (Dropdown Menu + Popover)",
+      "category": "Overlays",
+      "status": "stable",
+      "file": "css/components/dropdown-menu.css",
+      "summary": "A trigger-anchored floating surface — a Dropdown Menu for a keyboard-navigable list of actions, or a Popover for freeform contextual content.",
+      "when": "menú de acciones contextual sobre un botón/ícono (\"⋮\").",
+      "when_not": "click derecho sobre un área → Context Menu; navegación de nivel superior siempre visible → Menubar / Navigation Menu.",
+      "variants": [
+        "dropdown",
+        "dropdown-item",
+        "dropdown-danger",
+        "dropdown-checkbox",
+        "dropdown-radio",
+        "dropdown-group",
+        "popover"
+      ],
+      "sizes": [
+        "dropdown",
+        "popover"
+      ],
+      "rules_files": [
+        "component-rules/menu.md"
+      ],
+      "usage": "<button class=\"dropdown-trigger\">Opciones</button>\n<div class=\"dropdown-content\" role=\"menu\" style=\"top:140px;left:60px\">\n  <div class=\"dropdown-label\">Cuenta</div>\n  <div class=\"dropdown-separator\"></div>\n  <button class=\"dropdown-item\" role=\"menuitem\">Editar perfil</button>\n  <button class=\"dropdown-item\" role=\"menuitem\">Cerrar sesión</button>\n</div>",
+      "classes": [
+        "dropdown-checkbox-item",
+        "dropdown-content",
+        "dropdown-group",
+        "dropdown-item",
+        "dropdown-item-indicator",
+        "dropdown-label",
+        "dropdown-radio-item",
+        "dropdown-separator",
+        "dropdown-shortcut",
+        "dropdown-trigger",
+        "popover-content",
+        "popover-description",
+        "popover-header",
+        "popover-title",
+        "popover-trigger"
+      ],
+      "internal_class_count": 9
+    },
+    {
+      "id": "empty-state",
+      "display_name": "Empty State",
+      "category": "Feedback",
+      "status": "stable",
+      "file": "css/components/empty-state.css",
+      "summary": "A centered icon + message (+ optional primary action) shown when there is no content to display — always offering a clear way out, not just a message.",
+      "when": "listas/tablas/búsquedas sin resultados o sin datos aún.",
+      "when_not": "features en construcción (usar Placeholder); carga en progreso (usar Skeleton).",
+      "variants": [
+        "base"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/empty-state.md"
+      ],
+      "usage": "<div class=\"empty-state\">\n  <div class=\"empty-state-icon\">📭</div>\n  <div class=\"empty-state-title\">No hay vacantes</div>\n  <p class=\"empty-state-desc\">Crea tu primera vacante para empezar.</p>\n  <button class=\"btn-primary\">+ Nueva vacante</button>\n</div>",
+      "classes": [
+        "btn-primary",
+        "empty-state",
+        "empty-state-desc",
+        "empty-state-icon",
+        "empty-state-title"
+      ],
+      "internal_class_count": 4
+    },
+    {
+      "id": "form",
+      "display_name": "Form / Input / Textarea",
+      "category": "Forms",
+      "status": "stable",
+      "file": "css/components/form.css",
+      "summary": "The layout + validation pattern that composes labels, controls, hints, and errors into an accessible form using native HTML5 validation.",
+      "when": "todo campo de entrada — input, select, textarea, number, date — con label, hint y error.",
+      "when_not": "búsqueda (usar search-field de toolbar.css o search-bar de search.css).",
+      "variants": [
+        "card",
+        "grid",
+        "field"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/form.md",
+        "component-rules/input.md",
+        "component-rules/textarea.md"
+      ],
+      "usage": "<div class=\"form-card\">\n  <div class=\"form-card-title\">Informacion basica</div>\n  <p class=\"form-card-desc\">Completa los datos del puesto.</p>\n  <div class=\"fields-grid\">\n    <div class=\"field-group\">\n      <label class=\"field-label\">Titulo <span class=\"field-required\">*</span></label>\n      <input class=\"field-input\" placeholder=\"Ej: Desarrollador Frontend\">\n    </div>\n    <div class=\"field-group\">\n      <label class=\"field-label\">Ubicacion</label>\n      <div class=\"select-wrapper\">\n        <select><option>Remoto</option></select>\n        <span class=\"select-caret\">▾</span>\n      </div>\n    </div>\n  </div>\n</div>",
+      "classes": [
+        "field-char-count",
+        "field-error-msg",
+        "field-group",
+        "field-hint",
+        "field-input",
+        "field-input-wrapper",
+        "field-label",
+        "field-leading-icon",
+        "field-required",
+        "field-supporting",
+        "field-textarea",
+        "field-trailing-icon",
+        "fields-grid",
+        "form-card",
+        "form-card-desc",
+        "form-card-title",
+        "has-leading",
+        "has-trailing",
+        "is-error",
+        "is-over",
+        "select-caret",
+        "select-wrapper"
+      ],
+      "internal_class_count": 28
+    },
+    {
+      "id": "input-group",
+      "display_name": "Input Group",
+      "category": "Forms",
+      "status": "stable",
+      "file": "css/components/input-group.css",
+      "summary": "Joins an input with adjacent addons — icons, text, units, or buttons — into a single bordered unit that shares one focus/error state.",
+      "when": "input con prefijo/sufijo (íconos, unidades, botón de acción), o un textarea con toolbar arriba/abajo.",
+      "when_not": "input simple (usar .field-input); búsqueda filtrable (Combobox).",
+      "variants": [
+        "inline",
+        "block",
+        "addon-start",
+        "addon-end"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/input-group.md"
+      ],
+      "usage": "<div class=\"input-group\">\n  <span class=\"input-group-addon\"><svg>…</svg></span>\n  <input class=\"input-group-control\" placeholder=\"Buscar…\">\n  <span class=\"input-group-addon input-group-addon-end\"><kbd class=\"kbd\">⌘K</kbd></span>\n</div>",
+      "classes": [
+        "field-input",
+        "input-group",
+        "input-group-addon",
+        "input-group-addon-end",
+        "input-group-block",
+        "input-group-control",
+        "input-group-text",
+        "is-disabled",
+        "is-error",
+        "kbd"
+      ],
+      "internal_class_count": 11
+    },
+    {
+      "id": "input-otp",
+      "display_name": "Input OTP",
+      "category": "Forms",
+      "status": "stable",
+      "file": "css/components/input-otp.css",
+      "summary": "One-time-code / PIN entry in individual single-character boxes, with auto-advance, backspace-back, and paste-splitting.",
+      "when": "códigos de verificación (2FA, SMS, email), PIN.",
+      "when_not": "texto libre (usar Input); un solo dígito (usar Input).",
+      "variants": [
+        "base",
+        "slot",
+        "separator"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/input-otp.md"
+      ],
+      "usage": "<div class=\"otp-group\" role=\"group\" aria-label=\"Código de verificación\">\n  <input class=\"otp-slot\" maxlength=\"1\" inputmode=\"numeric\">\n  <input class=\"otp-slot\" maxlength=\"1\" inputmode=\"numeric\">\n  …\n</div>",
+      "classes": [
+        "is-disabled",
+        "is-error",
+        "otp-group",
+        "otp-separator",
+        "otp-slot"
+      ],
+      "internal_class_count": 5
+    },
+    {
+      "id": "item",
+      "display_name": "Basic Card",
+      "category": "Data display / Containment",
+      "status": "stable",
+      "file": "css/components/item.css",
+      "summary": "The reusable compact-row primitive — media + content (title/description) + actions — that every compact domain card is built on.",
+      "when": "filas ricas y reutilizables (settings rows, resultados, notif con ícono/avatar + texto + acción), personas en grilla, listas con separadores.",
+      "when_not": "tabla de datos (Table); panel con header/footer (Full Card → card.css).",
+      "variants": [
+        "base",
+        "outline",
+        "muted",
+        "clickable"
+      ],
+      "sizes": [
+        "md",
+        "sm"
+      ],
+      "rules_files": [
+        "component-rules/item.md"
+      ],
+      "usage": "<div class=\"item item-outline\">\n  <div class=\"item-media item-media-icon\"><svg>…</svg></div>\n  <div class=\"item-content\">\n    <div class=\"item-title\">Notificaciones</div>\n    <div class=\"item-description\">Recibí avisos por email.</div>\n  </div>\n  <div class=\"item-actions\"><button class=\"btn-tertiary btn-sm\">Config</button></div>\n</div>",
+      "classes": [
+        "btn-sm",
+        "btn-tertiary",
+        "item",
+        "item-actions",
+        "item-clickable",
+        "item-content",
+        "item-description",
+        "item-footer",
+        "item-group",
+        "item-header",
+        "item-media",
+        "item-media-icon",
+        "item-media-image",
+        "item-muted",
+        "item-outline",
+        "item-separator",
+        "item-sm",
+        "item-title"
+      ],
+      "internal_class_count": 17
+    },
+    {
+      "id": "kanban",
+      "display_name": "Kanban Card",
+      "category": "Domain cards",
+      "status": "stable",
+      "file": "css/components/kanban.css",
+      "summary": "A compact draggable card representing one item (candidate or vacancy) on a kanban board column, where the item's current stage is the primary information.",
+      "when": "tableros de flujo por columnas (pipelines de recruiting/HR).",
+      "when_not": "datos tabulares (usar Table); listas simples (usar cards).",
+      "variants": [
+        "card",
+        "header",
+        "footer",
+        "title",
+        "meta",
+        "avatar"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/kanban-card.md"
+      ],
+      "usage": "<div class=\"kanban-board\">\n  <div class=\"kanban-column\">\n    <div class=\"kanban-column-header\">\n      Aplicados <span class=\"count\">5</span>\n    </div>\n    <div class=\"kanban-column-body\">\n      <!-- Interactiva/arrastrable: agregá tabindex=\"0\" role=\"button\" — la card\n           es focusable y trae :focus-visible + estado dragging. -->\n      <div class=\"kanban-card\" tabindex=\"0\" role=\"button\">\n        <div class=\"kanban-card-title\">Juan Perez</div>\n        <div class=\"kanban-card-meta\">Frontend · 3 dias</div>\n      </div>\n    </div>\n  </div>\n</div>",
+      "classes": [
+        "count",
+        "kanban-board",
+        "kanban-card",
+        "kanban-card-avatar",
+        "kanban-card-footer",
+        "kanban-card-header",
+        "kanban-card-meta",
+        "kanban-card-title",
+        "kanban-column",
+        "kanban-column-body",
+        "kanban-column-header"
+      ],
+      "internal_class_count": 12
+    },
+    {
+      "id": "label",
+      "display_name": "Label",
+      "category": "Forms",
+      "status": "stable",
+      "file": "css/components/label.css",
+      "summary": "A standalone styled <label> for any form control, especially non-text controls, decoupled from the text-input field-group.",
+      "when": "nombrar un control de formulario, sobre todo checkbox/switch/ radio/slider, o un label suelto asociado por `for`/`id`.",
+      "when_not": "el label integrado de un input de texto con hint/error → usá `.field-label` dentro de `.field-group` (form.css). Título de sección → tipografía de heading, no un label.",
+      "variants": [
+        "base",
+        "required"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/label.md"
+      ],
+      "usage": "<label class=\"label\" for=\"email\">Correo <span class=\"label-required\">*</span></label>\n<input class=\"field-input\" id=\"email\" type=\"email\">\n\n<!-- En línea con un control no-texto -->\n<div style=\"display:flex;align-items:center;gap:8px\">\n  <input type=\"checkbox\" id=\"tos\">\n  <label class=\"label\" for=\"tos\">Acepto los términos</label>\n</div>",
+      "classes": [
+        "field-input",
+        "label",
+        "label-required"
+      ],
+      "internal_class_count": 2
+    },
+    {
+      "id": "list",
+      "display_name": "List",
+      "category": "Data display",
+      "status": "stable",
+      "file": "css/components/list.css",
+      "summary": "A simple vertical list of homogeneous items, each with a headline and optional supporting text, leading and trailing slots.",
+      "when": "colecciones verticales de ítems homogéneos (bandeja de entrada, resultados, menús simples).",
+      "when_not": "datos tabulares con columnas → usar Table; navegación jerárquica → usar Navigation.",
+      "variants": [
+        "base",
+        "divided",
+        "actionable",
+        "selected",
+        "disabled"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/list.md"
+      ],
+      "usage": "<ul class=\"list\">\n  <li class=\"list-item\">\n    <div class=\"list-item-headline\">Bandeja de entrada</div>\n    <div class=\"list-item-supporting\">128 mensajes sin leer</div>\n  </li>\n</ul>",
+      "classes": [
+        "list",
+        "list--divided",
+        "list-item",
+        "list-item-divider",
+        "list-item-headline",
+        "list-item-leading",
+        "list-item-supporting",
+        "list-item-text",
+        "list-item-trailing"
+      ],
+      "internal_class_count": 11
+    },
+    {
+      "id": "menubar",
+      "display_name": "Menubar",
+      "category": "Overlays",
+      "status": "stable",
+      "file": "css/components/menubar.css",
+      "summary": "A horizontal, always-visible bar of top-level triggers (Archivo, Editar…), each opening an actions panel — the desktop-application menu pattern.",
+      "when": "barra de menú de aplicación tipo desktop, siempre visible.",
+      "when_not": "menú de acciones puntual sobre un botón → Dropdown Menu.",
+      "variants": [
+        "bar",
+        "trigger",
+        "panel"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/menubar.md"
+      ],
+      "usage": "<div class=\"menubar\">\n  <button class=\"menubar-trigger\">Archivo</button>\n  <button class=\"menubar-trigger\">Editar</button>\n</div>\n<div class=\"dropdown-content\" role=\"menu\" style=\"top:40px;left:8px\">…</div>",
+      "classes": [
+        "dropdown-",
+        "dropdown-content",
+        "dropdown-item",
+        "dropdown-separator",
+        "menubar",
+        "menubar-trigger"
+      ],
+      "internal_class_count": 2
+    },
+    {
+      "id": "modal",
+      "display_name": "Dialog",
+      "category": "Overlays",
+      "status": "stable",
+      "file": "css/components/modal.css",
+      "summary": "A modal surface that interrupts the user for a focused task or a decision that must be resolved before continuing.",
+      "when": "confirmaciones y tareas cortas que bloquean el contexto actual.",
+      "when_not": "formularios largos (página con create-form); feedback pasivo (usar Snackbar).",
+      "variants": [
+        "dialog",
+        "alert-dialog",
+        "compact",
+        "centered"
+      ],
+      "sizes": [
+        "default",
+        "sm"
+      ],
+      "rules_files": [
+        "component-rules/dialog.md"
+      ],
+      "usage": "<div class=\"modal-overlay\">\n  <div class=\"modal\">\n    <button class=\"modal-close\">✕</button>\n    <div class=\"modal-header\">\n      <div class=\"modal-title\">¿Eliminar la vacante?</div>\n      <div class=\"modal-description\">Esta acción no se puede deshacer.</div>\n    </div>\n    <div class=\"modal-body\">\n      <p>Se eliminarán también sus postulaciones asociadas.</p>\n    </div>\n    <div class=\"modal-footer\">\n      <button class=\"btn-tertiary\">Cancelar</button>\n      <button class=\"btn-primary btn-danger\">Eliminar</button>\n    </div>\n  </div>\n</div>",
+      "classes": [
+        "btn-danger",
+        "btn-primary",
+        "btn-tertiary",
+        "modal",
+        "modal-body",
+        "modal-centered",
+        "modal-close",
+        "modal-description",
+        "modal-footer",
+        "modal-header",
+        "modal-media",
+        "modal-overlay",
+        "modal-sm",
+        "modal-title"
+      ],
+      "internal_class_count": 14
+    },
+    {
+      "id": "navigation-menu",
+      "display_name": "Navigation Menu",
+      "category": "Navigation",
+      "status": "stable",
+      "file": "css/components/navigation-menu.css",
+      "summary": "A horizontal row of navigation triggers that reveal grouped-link flyout panels — the top-nav mega-menu pattern.",
+      "when": "navegación principal con sub-secciones agrupadas (mega-menu).",
+      "when_not": "lista de acciones → Dropdown Menu; barra de menú tipo desktop → Menubar.",
+      "variants": [
+        "root",
+        "list",
+        "trigger",
+        "indicator",
+        "viewport",
+        "content",
+        "link"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/navigation-menu.md"
+      ],
+      "usage": "<nav class=\"nav-menu\">\n  <div class=\"nav-menu-list\">\n    <button class=\"nav-menu-trigger\">Productos</button>\n    <a class=\"nav-menu-trigger\" href=\"/precios\">Precios</a>\n    <span class=\"nav-menu-indicator\"></span>\n  </div>\n  <div class=\"nav-menu-viewport\">\n    <div class=\"nav-menu-content\">…enlaces agrupados…</div>\n  </div>\n</nav>",
+      "classes": [
+        "nav-menu",
+        "nav-menu-content",
+        "nav-menu-indicator",
+        "nav-menu-link",
+        "nav-menu-link-desc",
+        "nav-menu-link-title",
+        "nav-menu-list",
+        "nav-menu-trigger",
+        "nav-menu-trigger-icon",
+        "nav-menu-viewport",
+        "nav-menu-viewport-wrap"
+      ],
+      "internal_class_count": 12
+    },
+    {
+      "id": "page-header",
+      "display_name": "page-header",
+      "category": "",
+      "status": "",
+      "file": "css/components/page-header.css",
+      "summary": "título + acciones al tope de cada vista.",
+      "when": "título + acciones al tope de cada vista.",
+      "when_not": "dentro de cards o modales (tienen su propio header).",
+      "variants": [],
+      "sizes": [],
+      "rules_files": [],
+      "usage": "<div class=\"page-header\">\n  <h1 class=\"page-title\">Vacantes</h1>\n  <div class=\"header-actions\">\n    <button class=\"btn-primary\">+ Nueva vacante</button>\n  </div>\n</div>",
+      "classes": [
+        "btn-primary",
+        "header-actions",
+        "page-header",
+        "page-title"
+      ],
+      "internal_class_count": 3
+    },
+    {
+      "id": "pagination",
+      "display_name": "Pagination",
+      "category": "Navigation",
+      "status": "stable",
+      "file": "css/components/pagination.css",
+      "summary": "Navigate between pages of a paged result set — previous/next, numbered pages, and an ellipsis for large ranges.",
+      "when": "dividir listas/tablas largas en páginas navegables.",
+      "when_not": "scroll infinito, o conjuntos chicos que caben en una vista.",
+      "variants": [
+        "link",
+        "active",
+        "prev",
+        "next",
+        "ellipsis"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/pagination.md"
+      ],
+      "usage": "",
+      "classes": [
+        "btn-text",
+        "pagination",
+        "pagination-ellipsis",
+        "pagination-link",
+        "pagination-list",
+        "pagination-next",
+        "pagination-prev"
+      ],
+      "internal_class_count": 7
+    },
+    {
+      "id": "person-card",
+      "display_name": "Person Card",
+      "category": "Domain cards",
+      "status": "stable",
+      "file": "css/components/person-card.css",
+      "summary": "A documented Person variant of Basic Card (Item) — a compact profile row (brand avatar + name + role); NOT a separate component.",
+      "when": "persona en grillas (avatar + nombre + rol).",
+      "when_not": "vacantes (vacancy-card); datos tabulares de personas (Table); una fila genérica sin avatar de marca (usá .item directamente).",
+      "variants": [
+        "person-card",
+        "avatar"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/person-card.md"
+      ],
+      "usage": "<div class=\"people-grid\">\n  <!-- Interactiva: .item-clickable trae cursor:pointer + hover; agregá\n       tabindex=\"0\" role=\"button\" (o usá <a class=\"item person-card\">) para\n       que sea focusable y se anuncie como control. -->\n  <div class=\"item item-outline item-clickable person-card\" tabindex=\"0\" role=\"button\">\n    <div class=\"item-media person-avatar\">MG</div>\n    <div class=\"item-content\">\n      <div class=\"item-title\">María García</div>\n      <div class=\"item-description\">Desarrolladora Frontend</div>\n    </div>\n  </div>\n</div>",
+      "classes": [
+        "item",
+        "item-clickable",
+        "item-content",
+        "item-description",
+        "item-media",
+        "item-outline",
+        "item-title",
+        "people-grid",
+        "person-avatar",
+        "person-card"
+      ],
+      "internal_class_count": 5
+    },
+    {
+      "id": "placeholder",
+      "display_name": "placeholder",
+      "category": "",
+      "status": "",
+      "file": "css/components/placeholder.css",
+      "summary": "panel para secciones/features en construcción.",
+      "when": "panel para secciones/features en construcción.",
+      "when_not": "listas sin datos (usar Empty State).",
+      "variants": [],
+      "sizes": [],
+      "rules_files": [],
+      "usage": "<div class=\"placeholder-panel\">\n  <div class=\"placeholder-icon\">📋</div>\n  <p>Selecciona una vacante para ver los detalles.</p>\n</div>",
+      "classes": [
+        "placeholder-icon",
+        "placeholder-panel"
+      ],
+      "internal_class_count": 2
+    },
+    {
+      "id": "popover",
+      "display_name": "Menu (Dropdown Menu + Popover)",
+      "category": "Overlays",
+      "status": "stable",
+      "file": "css/components/popover.css",
+      "summary": "A trigger-anchored floating surface — a Dropdown Menu for a keyboard-navigable list of actions, or a Popover for freeform contextual content.",
+      "when": "contenido contextual breve junto a un elemento (info extra, mini-formulario, selector custom).",
+      "when_not": "lista de acciones → Dropdown Menu; confirmación bloqueante → Dialog; texto de una línea al hover → Tooltip.",
+      "variants": [
+        "dropdown",
+        "dropdown-item",
+        "dropdown-danger",
+        "dropdown-checkbox",
+        "dropdown-radio",
+        "dropdown-group",
+        "popover"
+      ],
+      "sizes": [
+        "dropdown",
+        "popover"
+      ],
+      "rules_files": [
+        "component-rules/menu.md"
+      ],
+      "usage": "<button class=\"popover-trigger\">Abrir</button>\n<div class=\"popover-content\" style=\"top:120px;left:80px\">…</div>",
+      "classes": [
+        "dropdown-checkbox-item",
+        "dropdown-content",
+        "dropdown-group",
+        "dropdown-item",
+        "dropdown-item-indicator",
+        "dropdown-label",
+        "dropdown-radio-item",
+        "dropdown-separator",
+        "dropdown-shortcut",
+        "dropdown-trigger",
+        "popover-content",
+        "popover-description",
+        "popover-header",
+        "popover-title",
+        "popover-trigger"
+      ],
+      "internal_class_count": 4
+    },
+    {
+      "id": "progress",
+      "display_name": "Loading (Progress + Spinner)",
+      "category": "Feedback",
+      "status": "stable",
+      "file": "css/components/progress.css",
+      "summary": "Loading indicators that signal an operation is in progress — a determinate Progress bar/ring when a percentage is known, an indeterminate Spinner when it isn't.",
+      "when": "comunicar que una operación está en curso (carga, subida, procesamiento).",
+      "when_not": "una acción instantánea no necesita indicador — usá un spinner solo si tarda más de ~300ms; para estados vacíos usá Empty State, no un progress infinito.",
+      "variants": [
+        "linear",
+        "linear-indeterminate",
+        "circular",
+        "circular-indeterminate",
+        "spinner",
+        "spinner-on-primary"
+      ],
+      "sizes": [
+        "spinner-sm",
+        "spinner-md",
+        "spinner-lg",
+        "progress-circular"
+      ],
+      "rules_files": [
+        "component-rules/loading.md"
+      ],
+      "usage": "<div class=\"progress\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\">\n  <div class=\"progress-fill\" style=\"width: 60%\"></div>\n</div>\n<div class=\"progress progress-indeterminate\" role=\"progressbar\"><div class=\"progress-fill\"></div></div>\n<svg class=\"progress-circular\" viewBox=\"0 0 44 44\"><circle class=\"progress-circular-track\" cx=\"22\" cy=\"22\" r=\"18\"/><circle class=\"progress-circular-fill\" cx=\"22\" cy=\"22\" r=\"18\" style=\"stroke-dashoffset: calc(113 - (113 * 60 / 100))\"/></svg>\n<svg class=\"progress-circular progress-circular-indeterminate\" viewBox=\"0 0 44 44\"><circle class=\"progress-circular-track\" cx=\"22\" cy=\"22\" r=\"18\"/><circle class=\"progress-circular-fill\" cx=\"22\" cy=\"22\" r=\"18\"/></svg>",
+      "classes": [
+        "progress",
+        "progress-circular",
+        "progress-circular-fill",
+        "progress-circular-indeterminate",
+        "progress-circular-track",
+        "progress-fill",
+        "progress-indeterminate",
+        "spinner",
+        "spinner-lg",
+        "spinner-on-primary",
+        "spinner-sm"
+      ],
+      "internal_class_count": 7
+    },
+    {
+      "id": "radio-group",
+      "display_name": "Radio Button",
+      "category": "Selección",
+      "status": "stable",
+      "file": "css/components/radio-group.css",
+      "summary": "A native radio group for an exclusive single choice among 2–5 mutually exclusive values, all visible at once for comparison.",
+      "when": "2-6 opciones mutuamente excluyentes, todas visibles a la vez.",
+      "when_not": "selección múltiple independiente (usar Checkbox); muchas opciones o espacio limitado (usar Select); on/off inmediato (usar Switch).",
+      "variants": [
+        "default",
+        "label",
+        "card"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/radio.md"
+      ],
+      "usage": "<div class=\"radio-group\" role=\"radiogroup\" aria-label=\"Tipo de contrato\">\n  <label class=\"radio-label\"><input type=\"radio\" name=\"contract\" class=\"radio\" checked> Full-time</label>\n  <label class=\"radio-label\"><input type=\"radio\" name=\"contract\" class=\"radio\"> Part-time</label>\n</div>",
+      "classes": [
+        "radio",
+        "radio-card",
+        "radio-card-content",
+        "radio-card-desc",
+        "radio-card-title",
+        "radio-group",
+        "radio-label"
+      ],
+      "internal_class_count": 7
+    },
+    {
+      "id": "rich-tooltip",
+      "display_name": "Tooltip",
+      "category": "Feedback",
+      "status": "stable",
+      "file": "css/components/rich-tooltip.css",
+      "summary": "A small hover/focus text label that clarifies an ambiguous control — plus a click-triggered Rich Tooltip for a title + text + action preview. Never for essential information.",
+      "when": "preview con título + texto + acción sobre un trigger (ícono, chip, avatar).",
+      "when_not": "un hint de una sola línea → Tooltip. Contenido arbitrario grande → un panel propio (Popover/Sheet).",
+      "variants": [
+        "plain",
+        "rich"
+      ],
+      "sizes": [
+        "plain",
+        "rich"
+      ],
+      "rules_files": [
+        "component-rules/tooltip.md"
+      ],
+      "usage": "<span class=\"rich-tooltip-wrap\">\n  <button class=\"icon-btn\">…</button>\n  <div class=\"rich-tooltip-content rich-tooltip-top open\" role=\"dialog\">\n    <div class=\"rich-tooltip-row\">\n      <div class=\"rich-tooltip-body\">\n        <p class=\"rich-tooltip-title\">María García</p>\n        <p class=\"rich-tooltip-subtitle\">UX Designer · Disponible</p>\n      </div>\n      <button class=\"rich-tooltip-close\">✕</button>\n    </div>\n    <div class=\"rich-tooltip-actions\">\n      <button class=\"btn-text btn-sm\">Ver perfil</button>\n    </div>\n  </div>\n</span>",
+      "classes": [
+        "btn-sm",
+        "btn-text",
+        "icon-btn",
+        "open",
+        "rich-tooltip-actions",
+        "rich-tooltip-body",
+        "rich-tooltip-close",
+        "rich-tooltip-content",
+        "rich-tooltip-row",
+        "rich-tooltip-subtitle",
+        "rich-tooltip-title",
+        "rich-tooltip-top",
+        "rich-tooltip-wrap",
+        "tooltip-bottom",
+        "tooltip-content",
+        "tooltip-left",
+        "tooltip-right",
+        "tooltip-top",
+        "tooltip-wrap"
+      ],
+      "internal_class_count": 13
+    },
+    {
+      "id": "scroll-area",
+      "display_name": "Scroll Area",
+      "category": "Layout",
+      "status": "stable",
+      "file": "css/components/scroll-area.css",
+      "summary": "A scroll container with a discreet, consistent custom scrollbar — pure CSS, for overflow regions inside a panel, menu, or sheet.",
+      "when": "regiones con scroll donde querés una barra consistente y discreta (listas largas dentro de un panel, contenido de un menú/sheet).",
+      "when_not": "el scroll natural de la página completa (no lo envuelvas).",
+      "variants": [
+        "base"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/scroll-area.md"
+      ],
+      "usage": "<div class=\"scroll-area\" style=\"max-height: 320px\">\n  …contenido largo…\n</div>",
+      "classes": [
+        "scroll-area"
+      ],
+      "internal_class_count": 1
+    },
+    {
+      "id": "search",
+      "display_name": "Search",
+      "category": "Navigation / Forms",
+      "status": "stable",
+      "file": "css/components/search.css",
+      "summary": "Free-text search of content, in two official variants — a standalone pill Search Bar (mobile/hero) and a compact Search Field inside a Toolbar (desktop).",
+      "when": "search-bar standalone para vistas de búsqueda (desktop y mobile). Acompañar con .search-icon-btn para acciones contextuales (Filtros, Ordenar, Vista).",
+      "when_not": "reemplazar search-bar con un input de formulario (usar .form-input). Search con acciones — patrón canónico Embassy: Cuando la búsqueda convive con acciones, usar .search-row + .search-icon-btn.",
+      "variants": [
+        "bar",
+        "field",
+        "row",
+        "view"
+      ],
+      "sizes": [
+        "standalone",
+        "row",
+        "compact"
+      ],
+      "rules_files": [
+        "component-rules/search.md"
+      ],
+      "usage": "<!-- Search bar standalone -->\n<div class=\"search-bar\" role=\"search\">\n  <span class=\"search-bar-icon\">…lupa…</span>\n  <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar\" aria-label=\"Buscar\">\n  <span class=\"search-bar-avatar\">AV</span>   <!-- opcional -->\n</div>\n\n<!-- Search + icon buttons (patrón canónico para toolbar-like) -->\n<div class=\"search-row\">\n  <div class=\"search-bar\" role=\"search\">\n    <span class=\"search-bar-icon\">…lupa…</span>\n    <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar\" aria-label=\"Buscar\">\n  </div>\n  <button class=\"search-icon-btn\" aria-label=\"Filtros\"><svg>…</svg></button>\n  <button class=\"search-icon-btn\" aria-label=\"Ordenar\"><svg>…</svg></button>\n</div>\n\n<!-- Search view (docked). Full-screen: + .search-view-fullscreen -->\n<div class=\"search-view\" role=\"search\">\n  <div class=\"search-view-header\">\n    <button class=\"search-view-back\" aria-label=\"Volver\">…</button>\n    <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar\">\n  </div>\n  <ul class=\"search-view-results\">…</ul>\n</div>",
+      "classes": [
+        "form-input",
+        "search-bar",
+        "search-bar-avatar",
+        "search-bar-icon",
+        "search-bar-input",
+        "search-bar-trailing",
+        "search-field (toolbar.css)",
+        "search-icon-btn",
+        "search-row",
+        "search-view",
+        "search-view-back",
+        "search-view-fullscreen",
+        "search-view-header",
+        "search-view-results"
+      ],
+      "internal_class_count": 15
+    },
+    {
+      "id": "segmented-button",
+      "display_name": "Segmented Button",
+      "category": "Actions",
+      "status": "stable",
+      "file": "css/components/segmented-button.css",
+      "summary": "A compact pill that switches between 2–5 mutually exclusive views or modes; exactly one segment is active at a time.",
+      "when": "alternar entre vistas (Lista / Cuadrícula), filtros de categoría o modo dentro del mismo contexto (Día / Semana / Mes).",
+      "when_not": "acciones que disparan efectos (usar Button), selección múltiple (usar Chips), navegación entre páginas (usar Tabs), más de 5 opciones o etiquetas muy dispares (usar Select).",
+      "variants": [
+        "single",
+        "multiple"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "rules_files": [
+        "component-rules/segmented-button.md"
+      ],
+      "usage": "<div class=\"seg-btn-group\" role=\"group\" aria-label=\"Vista\">\n  <button class=\"seg-btn selected\" aria-selected=\"true\" onclick=\"segSwitch(this)\">Lista</button>\n  <button class=\"seg-btn\" aria-selected=\"false\" onclick=\"segSwitch(this)\">Cuadrícula</button>\n</div>",
+      "classes": [
+        "seg-btn",
+        "seg-btn-group",
+        "seg-btn-group-lg",
+        "seg-btn-group-sm",
+        "selected"
+      ],
+      "internal_class_count": 5
+    },
+    {
+      "id": "select",
+      "display_name": "Select",
+      "category": "Forms",
+      "status": "stable",
+      "file": "css/components/select.css",
+      "summary": "Choose exactly one option from a short-to-medium bounded list via a themed dropdown listbox.",
+      "when": "elegir UNA opción de una lista corta/media cuando el desplegable debe verse igual que el resto del DS (tokens, dark mode, foco).",
+      "when_not": "búsqueda/filtrado dentro de la lista → Combobox/Command; campo de formulario denso donde alcanza el nativo → <select> de form.css. Estructura (slots par shadcn): .select            → Root (position:relative) .select-trigger    → SelectTrigger (button, aria-haspopup=\"listbox\") .select-value    → SelectValue (texto elegido / placeholder) .select-icon     → ChevronDown .select-content    → SelectContent (role=\"listbox\") .select-scroll-up   → SelectScrollUpButton .select-viewport    → SelectViewport (área scrolleable, p-1) .select-group     → SelectGroup (role=\"group\") .select-label   → SelectLabel .select-item    → SelectItem (role=\"option\") .select-item-text  → SelectItemText .select-item-check → SelectItemIndicator (CheckIcon) .select-separator → SelectSeparator .select-scroll-down → SelectScrollDownButton",
+      "variants": [
+        "styled",
+        "native",
+        "grouped"
+      ],
+      "sizes": [
+        "md",
+        "sm"
+      ],
+      "rules_files": [
+        "component-rules/select.md"
+      ],
+      "usage": "",
+      "classes": [
+        "select",
+        "select-content",
+        "select-group",
+        "select-icon",
+        "select-item",
+        "select-item-check",
+        "select-item-text",
+        "select-label",
+        "select-scroll-down",
+        "select-scroll-up",
+        "select-separator",
+        "select-trigger",
+        "select-value",
+        "select-viewport"
+      ],
+      "internal_class_count": 15
+    },
+    {
+      "id": "sheet",
+      "display_name": "Bottom Sheet / Side Sheet",
+      "category": "Overlays",
+      "status": "stable",
+      "file": "css/components/sheet.css",
+      "summary": "An edge-anchored modal panel that slides up from the bottom for quick actions or supplementary content — the preferred overlay on mobile/compact.",
+      "when": "cualquier panel anclado a un borde — filtros, detalle, formularios secundarios, bottom sheet en mobile.",
+      "when_not": "navegación principal (usar el app-shell / Navigation Drawer); diálogo modal centrado (usar Dialog/Modal).",
+      "variants": [
+        "bottom",
+        "overlay",
+        "header",
+        "body",
+        "footer"
+      ],
+      "sizes": [
+        "default",
+        "desktop-centered"
+      ],
+      "rules_files": [
+        "component-rules/sheet-bottom.md",
+        "component-rules/sheet-side.md"
+      ],
+      "usage": "<div class=\"sheet-overlay\">\n  <div class=\"sheet-content sheet-content-right open\">\n    <button class=\"sheet-close\">✕</button>\n    <div class=\"sheet-header\">\n      <div class=\"sheet-title\">Editar perfil</div>\n      <div class=\"sheet-description\">Actualizá tu información pública.</div>\n    </div>\n    <div class=\"sheet-body\">…</div>\n    <div class=\"sheet-footer\">\n      <button class=\"btn-tertiary\">Cancelar</button>\n      <button class=\"btn-primary\">Guardar</button>\n    </div>\n  </div>\n</div>",
+      "classes": [
+        "btn-primary",
+        "btn-tertiary",
+        "open",
+        "sheet-body",
+        "sheet-close",
+        "sheet-content",
+        "sheet-content-bottom",
+        "sheet-content-left",
+        "sheet-content-right",
+        "sheet-content-top",
+        "sheet-description",
+        "sheet-footer",
+        "sheet-header",
+        "sheet-overlay",
+        "sheet-title"
+      ],
+      "internal_class_count": 13
+    },
+    {
+      "id": "skeleton",
+      "display_name": "Skeleton",
+      "category": "Feedback",
+      "status": "stable",
+      "file": "css/components/skeleton.css",
+      "summary": "An animated shimmer placeholder that mimics the layout of content while data loads — for loads with a known structure, in place of ad-hoc spinners.",
+      "when": "carga de contenido con estructura conocida (mientras llega la data).",
+      "when_not": "estados vacíos (usar Empty State). No usar spinners ad-hoc.",
+      "variants": [
+        "text",
+        "title",
+        "card",
+        "circle"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/skeleton.md"
+      ],
+      "usage": "<div class=\"skeleton skeleton-title\"></div>\n<div class=\"skeleton skeleton-text\"></div>\n<div class=\"skeleton skeleton-text\" style=\"width:80%\"></div>\n<div class=\"skeleton skeleton-card\"></div>",
+      "classes": [
+        "skeleton",
+        "skeleton-avatar",
+        "skeleton-card",
+        "skeleton-circle",
+        "skeleton-text",
+        "skeleton-title"
+      ],
+      "internal_class_count": 6
+    },
+    {
+      "id": "slider",
+      "display_name": "Slider",
+      "category": "Forms",
+      "status": "stable",
+      "file": "css/components/slider.css",
+      "summary": "Selects a value (or a range) within a continuum with immediate feedback — for values where the exact number matters little.",
+      "when": "valores donde el número exacto importa poco, con feedback inmediato.",
+      "when_not": "valores que requieren precisión exacta (usar Input numérico).",
+      "variants": [
+        "single",
+        "range",
+        "vertical"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/slider.md"
+      ],
+      "usage": "<div class=\"slider\">\n  <div class=\"slider-track\"></div>\n  <div class=\"slider-range\" style=\"width: 50%\"></div>\n  <input type=\"range\" class=\"slider-input\" min=\"0\" max=\"100\" value=\"50\">\n</div>",
+      "classes": [
+        "slider",
+        "slider-input",
+        "slider-range",
+        "slider-track",
+        "slider-vertical"
+      ],
+      "internal_class_count": 5
+    },
+    {
+      "id": "spinner",
+      "display_name": "Loading (Progress + Spinner)",
+      "category": "Feedback",
+      "status": "stable",
+      "file": "css/components/spinner.css",
+      "summary": "Loading indicators that signal an operation is in progress — a determinate Progress bar/ring when a percentage is known, an indeterminate Spinner when it isn't.",
+      "when": "carga breve/indeterminada dentro de botones, inputs, celdas, o junto a un texto (\"Guardando…\").",
+      "when_not": "carga con estructura conocida (usar Skeleton); progreso medible (usar Progress).",
+      "variants": [
+        "linear",
+        "linear-indeterminate",
+        "circular",
+        "circular-indeterminate",
+        "spinner",
+        "spinner-on-primary"
+      ],
+      "sizes": [
+        "spinner-sm",
+        "spinner-md",
+        "spinner-lg",
+        "progress-circular"
+      ],
+      "rules_files": [
+        "component-rules/loading.md"
+      ],
+      "usage": "<span class=\"spinner\" role=\"status\" aria-label=\"Cargando\"></span>\n<button class=\"btn-primary\"><span class=\"spinner spinner-sm spinner-on-primary\"></span> Guardando…</button>",
+      "classes": [
+        "btn-primary",
+        "progress",
+        "progress-circular",
+        "progress-circular-fill",
+        "progress-circular-indeterminate",
+        "progress-circular-track",
+        "progress-fill",
+        "progress-indeterminate",
+        "spinner",
+        "spinner-lg",
+        "spinner-on-primary",
+        "spinner-sm"
+      ],
+      "internal_class_count": 4
+    },
+    {
+      "id": "stat-card",
+      "display_name": "Stat Card",
+      "category": "Data display",
+      "status": "stable",
+      "file": "css/components/stat-card.css",
+      "summary": "A single KPI/metric with a label, a large value, and an optional trend indicator.",
+      "when": "métricas numéricas con label y variación (KPIs en dashboards).",
+      "when_not": "contenido no numérico (usar Card).",
+      "variants": [
+        "base",
+        "trend-positive",
+        "trend-negative",
+        "trend-neutral"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/stat-card.md"
+      ],
+      "usage": "<div class=\"stats-grid\">\n  <div class=\"stat-card\">\n    <div class=\"stat-label\">Vacantes abiertas</div>\n    <div class=\"stat-value\">24</div>\n    <div class=\"stat-change stat-change-positive\">+12%</div>\n  </div>\n</div>",
+      "classes": [
+        "stat-card",
+        "stat-change",
+        "stat-change-negative",
+        "stat-change-neutral",
+        "stat-change-positive",
+        "stat-label",
+        "stat-value",
+        "stats-grid"
+      ],
+      "internal_class_count": 8
+    },
+    {
+      "id": "switch",
+      "display_name": "Switch",
+      "category": "Forms",
+      "status": "stable",
+      "file": "css/components/switch.css",
+      "summary": "A binary on/off control with immediate effect — flipping it applies the setting instantly, no separate confirm button.",
+      "when": "ajustes que se aplican al instante (modo oscuro, notificaciones).",
+      "when_not": "selección dentro de una lista de opciones (usar Checkbox); elegir una entre varias alternativas (usar Radio Group).",
+      "variants": [
+        "base",
+        "label"
+      ],
+      "sizes": [
+        "md",
+        "sm"
+      ],
+      "rules_files": [
+        "component-rules/switch.md"
+      ],
+      "usage": "<label class=\"switch-label\">\n  <input type=\"checkbox\" role=\"switch\" class=\"switch\">\n  Modo oscuro\n</label>",
+      "classes": [
+        "switch",
+        "switch-label",
+        "switch-sm"
+      ],
+      "internal_class_count": 3
+    },
+    {
+      "id": "table",
+      "display_name": "Table",
+      "category": "Data display",
+      "status": "stable",
+      "file": "css/components/table.css",
+      "summary": "Static tabular data — records with multiple comparable attributes in rows and columns, with an optional clickable-row variant.",
+      "when": "datos tabulares; filas navegables con tr.clickable.",
+      "when_not": "layouts (usar grid); tableros de flujo (usar Kanban).",
+      "variants": [
+        "base",
+        "clickable-row",
+        "selected-row",
+        "footer",
+        "caption"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/table.md"
+      ],
+      "usage": "<div class=\"table-scroll\">\n  <table class=\"data-table\">\n    <thead>\n      <tr><th>Nombre</th><th>Estado</th><th>Fecha</th></tr>\n    </thead>\n    <tbody>\n      <tr class=\"clickable\"><td>Vacante 1</td><td>Abierta</td><td>15 Mar</td></tr>\n    </tbody>\n  </table>\n</div>",
+      "classes": [
+        "caption",
+        "clickable",
+        "data-table",
+        "selected",
+        "table-scroll",
+        "tfoot"
+      ],
+      "internal_class_count": 4
+    },
+    {
+      "id": "tabs",
+      "display_name": "Tabs",
+      "category": "Navigation / Containment",
+      "status": "stable",
+      "file": "css/components/tabs.css",
+      "summary": "Switch between mutually exclusive views of the same entity, showing one panel at a time.",
+      "when": "alternar vistas dentro del MISMO contexto/página.",
+      "when_not": "navegación entre páginas (usar sidebar de layout.css).",
+      "variants": [
+        "underline",
+        "pill",
+        "vertical"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/tabs.md"
+      ],
+      "usage": "<div class=\"tabs\" role=\"tablist\">\n  <button class=\"tab active\" role=\"tab\" aria-selected=\"true\" id=\"tab-general\" aria-controls=\"panel-general\">General</button>\n  <button class=\"tab\" role=\"tab\" aria-selected=\"false\" id=\"tab-requisitos\" aria-controls=\"panel-requisitos\" tabindex=\"-1\">Requisitos</button>\n  <span class=\"tab-indicator\"></span>\n</div>\n<div class=\"tab-panel active\" id=\"panel-general\" role=\"tabpanel\" aria-labelledby=\"tab-general\">...</div>\n<div class=\"tab-panel\" id=\"panel-requisitos\" role=\"tabpanel\" aria-labelledby=\"tab-requisitos\" hidden>...</div>",
+      "classes": [
+        "active",
+        "tab",
+        "tab-indicator",
+        "tab-panel",
+        "tabs",
+        "tabs-pill",
+        "tabs-vertical"
+      ],
+      "internal_class_count": 7
+    },
+    {
+      "id": "toast",
+      "display_name": "Snackbar",
+      "category": "Feedback",
+      "status": "stable",
+      "file": "css/components/toast.css",
+      "summary": "A floating, ephemeral, non-blocking message that confirms something already happened, with at most one recovery action.",
+      "when": "",
+      "when_not": "confirmaciones que requieren decisión → usar Modal. Tokens Snackbar — familia inverse (auto-contraste en light y dark sin overrides): Contenedor       --color-inverse-surface       #0A0C12 claro / #EAEBED oscuro Texto mensaje    --color-inverse-on-surface     #EAEBED claro / #13161F oscuro Botón de acción  --color-inverse-primary        #4F80FF claro / #162F6F oscuro Presionado acc.  color-mix(inverse-primary 12%, inverse-surface)",
+      "variants": [
+        "message",
+        "action",
+        "close",
+        "multiline",
+        "static",
+        "queue"
+      ],
+      "sizes": [
+        "single",
+        "multiline"
+      ],
+      "rules_files": [
+        "component-rules/snackbar.md"
+      ],
+      "usage": "",
+      "classes": [
+        "snackbar",
+        "snackbar--exit",
+        "snackbar--multiline",
+        "snackbar--static",
+        "snackbar-action",
+        "snackbar-close",
+        "snackbar-message",
+        "snackbar-viewport",
+        "toast",
+        "toast-container",
+        "toast-error",
+        "toast-info",
+        "toast-success"
+      ],
+      "internal_class_count": 22
+    },
+    {
+      "id": "toggle-group",
+      "display_name": "Toggle Group",
+      "category": "Actions",
+      "status": "stable",
+      "file": "css/components/toggle-group.css",
+      "summary": "A set of related Toggles on one axis — multi-select (each independent) or single-select (choosing one deselects the rest); deliberately distinct from Segmented Button.",
+      "when": "agrupar varios Toggle relacionados (formato de texto: negrita/cursiva/subrayado; alineación). type=\"single\" = elegir 1; type=\"multiple\" = varios on/off a la vez.",
+      "when_not": "elegir 1 de N mutuamente excluyentes con etiqueta de vista y forma de píldora (usar Segmented Button — visualmente distinto: outline de grupo + contenedor selected, ver segmented-button.css); filtros tipo tag (usar Chip).",
+      "variants": [
+        "multiple",
+        "single"
+      ],
+      "sizes": [
+        "inherited"
+      ],
+      "rules_files": [
+        "component-rules/toggle-group.md"
+      ],
+      "usage": "<div class=\"toggle-group\" role=\"group\" aria-label=\"Formato de texto\">\n  <button class=\"toggle\" aria-pressed=\"false\">B</button>\n  <button class=\"toggle\" aria-pressed=\"true\">I</button>\n  <button class=\"toggle\" aria-pressed=\"false\">U</button>\n</div>",
+      "classes": [
+        "toggle",
+        "toggle-group"
+      ],
+      "internal_class_count": 1
+    },
+    {
+      "id": "toggle",
+      "display_name": "Toggle",
+      "category": "Actions",
+      "status": "stable",
+      "file": "css/components/toggle.css",
+      "summary": "A single two-state (pressed / not-pressed) button for a bold-style setting that applies immediately — state lives on aria-pressed.",
+      "when": "alternar un solo estado on/off que se aplica de inmediato (negrita en un editor, \"mostrar solo favoritos\").",
+      "when_not": "elegir 1 de N (usar Segmented Button); filtros tipo tag (usar Chip); acción sin estado (usar Button).",
+      "variants": [
+        "default",
+        "outline"
+      ],
+      "sizes": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "rules_files": [
+        "component-rules/toggle.md"
+      ],
+      "usage": "<button class=\"toggle\" aria-pressed=\"false\" onclick=\"togglePress(this)\">\n  <svg>…</svg>\n</button>\n<button class=\"toggle toggle-outline toggle-lg\" aria-pressed=\"true\">B</button>",
+      "classes": [
+        "toggle",
+        "toggle-lg",
+        "toggle-outline",
+        "toggle-sm"
+      ],
+      "internal_class_count": 4
+    },
+    {
+      "id": "toolbar",
+      "display_name": "Toolbar",
+      "category": "Actions / App bar",
+      "status": "stable",
+      "file": "css/components/toolbar.css",
+      "summary": "The row of controls that heads a list, table or dashboard — search, filters, view/period switches, and the view's actions — with variants for filters, bulk selection, overflow and sticky.",
+      "when": "barra de controles sobre UNA lista/tabla/dashboard — búsqueda, filtros, orden y las acciones de esa vista.",
+      "when_not": "búsqueda que encabeza una pantalla completa → search-bar (search.css). Contexto y acciones globales de la app → Top Bar. Navegación entre sub-vistas → Tabs.",
+      "variants": [
+        "toolbar",
+        "actions",
+        "search-field",
+        "button",
+        "filters",
+        "selection",
+        "overflow",
+        "two-line",
+        "sticky",
+        "result-count"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/toolbar.md"
+      ],
+      "usage": "",
+      "classes": [
+        "result-count",
+        "search-bar",
+        "search-field",
+        "toolbar",
+        "toolbar-actions",
+        "toolbar-btn",
+        "toolbar-btn-count",
+        "toolbar-filters",
+        "toolbar-group",
+        "toolbar-overflow-btn",
+        "toolbar-selection",
+        "toolbar-selection-clear",
+        "toolbar-selection-count",
+        "toolbar-spacer",
+        "toolbar-stack",
+        "toolbar-sticky"
+      ],
+      "internal_class_count": 24
+    },
+    {
+      "id": "tooltip",
+      "display_name": "Tooltip",
+      "category": "Feedback",
+      "status": "stable",
+      "file": "css/components/tooltip.css",
+      "summary": "A small hover/focus text label that clarifies an ambiguous control — plus a click-triggered Rich Tooltip for a title + text + action preview. Never for essential information.",
+      "when": "un hint de texto simple sobre un ícono/control ambiguo.",
+      "when_not": "contenido con título + acción → usar Rich Tooltip (rich-tooltip.css).",
+      "variants": [
+        "plain",
+        "rich"
+      ],
+      "sizes": [
+        "plain",
+        "rich"
+      ],
+      "rules_files": [
+        "component-rules/tooltip.md"
+      ],
+      "usage": "<span class=\"tooltip-wrap\">\n  <button class=\"icon-btn\" aria-describedby=\"tt-1\"><svg>…</svg></button>\n  <span class=\"tooltip-content tooltip-top\" role=\"tooltip\" id=\"tt-1\">Ajustes</span>\n</span>",
+      "classes": [
+        "icon-btn",
+        "rich-tooltip-actions",
+        "rich-tooltip-body",
+        "rich-tooltip-close",
+        "rich-tooltip-content",
+        "rich-tooltip-row",
+        "rich-tooltip-subtitle",
+        "rich-tooltip-title",
+        "rich-tooltip-wrap",
+        "tooltip-bottom",
+        "tooltip-content",
+        "tooltip-left",
+        "tooltip-right",
+        "tooltip-top",
+        "tooltip-wrap"
+      ],
+      "internal_class_count": 6
+    },
+    {
+      "id": "vacancy-card",
+      "display_name": "Vacancy Card",
+      "category": "Domain cards",
+      "status": "stable",
+      "file": "css/components/vacancy-card.css",
+      "summary": "A domain card summarizing a job vacancy — icon, title, status badge, meta, optional stats and assignees — used as a list unit that navigates to the detail.",
+      "when": "ítem de vacante en listas de recruiting (ícono + nombre + meta + stats).",
+      "when_not": "personas (person-card); otros dominios (usar Card genérica).",
+      "variants": [
+        "card",
+        "icon",
+        "stats",
+        "assignees",
+        "age",
+        "more"
+      ],
+      "sizes": [
+        "default"
+      ],
+      "rules_files": [
+        "component-rules/vacancy-card.md"
+      ],
+      "usage": "<div class=\"vacancies-list\">\n  <!-- Interactiva: agregá tabindex=\"0\" role=\"button\" (o usá <a>/<button>) —\n       la card es focusable y trae :focus-visible. -->\n  <div class=\"vacancy-card\" tabindex=\"0\" role=\"button\">\n    <div class=\"vacancy-icon\">💼</div>\n    <div class=\"vacancy-info\">\n      <div class=\"vacancy-name\">\n        Desarrollador Frontend\n        <span class=\"badge badge-open\">Abierta</span>\n      </div>\n      <div class=\"vacancy-meta\">\n        Tecnologia <span class=\"meta-dot\"></span> Remoto\n      </div>\n    </div>\n    <div class=\"vacancy-right\">\n      <div class=\"vacancy-age\">3d</div>\n    </div>\n  </div>\n</div>",
+      "classes": [
+        "assignee",
+        "assignee-avatar",
+        "badge",
+        "badge-open",
+        "meta-dot",
+        "more-btn",
+        "stat-pill",
+        "vacancies-list",
+        "vacancy-age",
+        "vacancy-card",
+        "vacancy-icon",
+        "vacancy-info",
+        "vacancy-meta",
+        "vacancy-name",
+        "vacancy-right",
+        "vacancy-stats"
+      ],
+      "internal_class_count": 18
+    }
+  ]
+}
