@@ -21,6 +21,7 @@ en el working tree local (`component-rules/search.md`, `components/ui/carousel.t
 | `FAILURES.md` | Taxonomía de fallas compartida por `embassy-review` y `embassy-eval` | **raíz del repo** |
 | `scripts/build-public-api.mjs` | Genera `PUBLIC-API.md` y `public-api.json` desde `css/components/` + el manifest | `scripts/` |
 | `scripts/check-output.mjs` | Chequeos determinísticos sobre lo que un agente **produjo** (no sobre el DS) | `scripts/` |
+| `scripts/check-screen-report.mjs` | Verifica que el diagnóstico de una pantalla sea real y no un re-skin | **ya está en `scripts/`** |
 | `skills/embassy-start/` | El kickoff: 6 preguntas y el proyecto queda configurado (white-label incluido) | ídem |
 | `skills/embassy/` | Router del DS (reemplaza a `design-system`) + `references/decisiones.md` | `skills/` del repo, y desde ahí al plugin `design` |
 | `skills/embassy-artifact/` | Entregables on-brand sin repo | ídem |
