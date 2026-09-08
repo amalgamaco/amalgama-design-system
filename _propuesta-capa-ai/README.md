@@ -16,11 +16,11 @@ en el working tree local (`component-rules/search.md`, `components/ui/carousel.t
 | `ANALISIS-SKILLS-DS.md` | El análisis: diagnóstico, mapeo contra el modelo de Vercel, mapa de skills, flujo, roadmap y guion para presentarlo | acá mismo, o `docs/` |
 | `GUIA-EQUIPO.md` | **Una página práctica para el equipo**: qué escribir, dónde y qué pasa. Es lo que se reparte | ídem |
 | `PLAN-USO-DS.md` | **El plan de uso para presentar al equipo**: las tres capas, cómo arranca un proyecto nuevo, el cuestionario de setup, el día a día y qué hay que construir | ídem |
-| `design.md` | Archivo de marca público y autocontenido — el equivalente a `vercel.com/design.md` | **raíz del repo** (para que el raw de GitHub lo sirva) |
-| `PUBLIC-API.md` + `public-api.json` | La API acotada de clases, generada. 62 componentes, 484 clases públicas de 548 selectores | **raíz del repo**, regenerados en cada release |
-| `FAILURES.md` | Taxonomía de fallas compartida por `embassy-review` y `embassy-eval` | **raíz del repo** |
-| `scripts/build-public-api.mjs` | Genera `PUBLIC-API.md` y `public-api.json` desde `css/components/` + el manifest | `scripts/` |
-| `scripts/check-output.mjs` | Chequeos determinísticos sobre lo que un agente **produjo** (no sobre el DS) | `scripts/` |
+| `design.md` | Archivo de marca público y autocontenido — el equivalente a `vercel.com/design.md` | **ya está en la raíz del repo** (el raw de GitHub lo sirve) |
+| `PUBLIC-API.md` + `public-api.json` | La API acotada de clases, generada. 62 componentes, 483 clases públicas de 548 selectores | **ya está en la raíz del repo**, regenerar en cada release |
+| `FAILURES.md` | Taxonomía de fallas compartida por `embassy-review` y `embassy-eval` | **ya está en la raíz del repo** |
+| `scripts/build-public-api.mjs` | Genera `PUBLIC-API.md` y `public-api.json` desde `css/components/` + el manifest | **ya está en `scripts/`** |
+| `scripts/check-output.mjs` | Chequeos determinísticos sobre lo que un agente **produjo** (no sobre el DS) | **ya está en `scripts/`** |
 | `scripts/check-screen-report.mjs` | Verifica que el diagnóstico de una pantalla sea real y no un re-skin | **ya está en `scripts/`** |
 | `skills/embassy-start/` | El kickoff: 6 preguntas y el proyecto queda configurado (white-label incluido) | ídem |
 | `skills/embassy/` | Router del DS (reemplaza a `design-system`) + `references/decisiones.md` | **`amalgamaco/claude-code-plugins`** — el plugin sincroniza desde ahí, no desde este repo |

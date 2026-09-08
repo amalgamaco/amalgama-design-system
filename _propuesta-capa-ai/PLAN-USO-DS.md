@@ -277,7 +277,7 @@ Nada de esto es grande. Ordenado por dependencia:
 | # | Qué | Depende de | Esfuerzo |
 |---|---|---|---|
 | 0 | ~~Los tres arreglos de §7.0~~ | — | **Hecho** (8-sep-2026), verificado sin regresión |
-| 1 | `design.md` + `PUBLIC-API.md` en la raíz del repo, y pinear el CDN a un tag | — | **Ya está escrito** en `_propuesta-capa-ai/`. Falta moverlo y decidir el tag |
+| 1 | ~~`design.md` + `PUBLIC-API.md` en la raíz del repo~~, y pinear el CDN a un tag | — | **Movidos** (8-sep-2026): `design.md`, `PUBLIC-API.md`, `public-api.json`, `FAILURES.md` y los dos scripts ya están en su lugar definitivo. Falta decidir el tag del CDN |
 | 2 | `/embassy-artifact` | 1 | Ya está escrita |
 | 3 | `/embassy-start` + `build-brand-theme.mjs` | 0, 1 | **Ya están escritos y probados** — falta la plantilla del `theme-preview.html` |
 | 4 | `FAILURES.md` + `/embassy-review` | — | Ya están escritas |
@@ -336,7 +336,8 @@ Seis, y todas son cortas:
 
 ## Anexo — archivos de esta propuesta
 
-Todos en `_propuesta-capa-ai/` del repo del DS.
+Los cinco `SKILL.md` en `_propuesta-capa-ai/skills/` del repo del DS; `design.md`, `PUBLIC-API.md`,
+`public-api.json` y `FAILURES.md` ya viven en la raíz del repo, que es de donde los leen las skills.
 
 | Archivo | Estado |
 |---|---|

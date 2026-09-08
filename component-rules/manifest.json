@@ -4503,7 +4503,7 @@
           "search-view-header",
           "search-view-back",
           "search-view-results",
-          "search-field (toolbar.css)"
+          "search-field"
         ],
         "react_wrapper": "components/ui/search.tsx",
         "docs_anchor": "c-search"

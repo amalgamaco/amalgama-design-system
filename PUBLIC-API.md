@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-62 componentes · **484 clases públicas** de 548 selectores totales en el CSS.
+62 componentes · **483 clases públicas** de 548 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -1042,7 +1042,7 @@ Free-text search of content, in two official variants — a standalone pill Sear
 **Variantes:** bar · field · row · view
 **Tamaños:** standalone · row · compact
 
-Clases públicas: `.form-input` · `.search-bar` · `.search-bar-avatar` · `.search-bar-icon` · `.search-bar-input` · `.search-bar-trailing` · `.search-field (toolbar.css)` · `.search-icon-btn` · `.search-row` · `.search-view` · `.search-view-back` · `.search-view-fullscreen` · `.search-view-header` · `.search-view-results`
+Clases públicas: `.form-input` · `.search-bar` · `.search-bar-avatar` · `.search-bar-icon` · `.search-bar-input` · `.search-bar-trailing` · `.search-field` · `.search-icon-btn` · `.search-row` · `.search-view` · `.search-view-back` · `.search-view-fullscreen` · `.search-view-header` · `.search-view-results`
 
 ```html
 <!-- Search bar standalone -->
