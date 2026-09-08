@@ -22,7 +22,9 @@
      Desktop: search-bar + icon buttons en la misma fila.
      Mobile:  search-bar ocupa el ancho completo; acciones en overflow o colapsadas.
 
-   Reemplaza a: inputs de búsqueda legacy, toolbar search-field.
+   Reemplaza a: inputs de búsqueda legacy (inputs de formulario usados como buscador).
+                NO reemplaza a .search-field (toolbar.css): ésa es la variante compacta
+                canónica de Search para toolbars de desktop — es un hermano, no un legacy.
 
    Dependencia: variables.css (Color Roles)
    Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en

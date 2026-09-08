@@ -75,7 +75,7 @@ nielsen_heuristics:
 
 relationships:
   related: [combobox, command, toolbar, chip, input]
-  replaces: ["legacy search inputs", "the retired toolbar search-field pattern (now formalized as .search-field)"]
+  replaces: ["legacy search inputs (form inputs used as a search box)"]
   composed_with: [toolbar, chip, list, empty-state]
   not_to_confuse_with:
     - {component: combobox, why: "combobox returns a chosen value from a list; search queries free-text content"}

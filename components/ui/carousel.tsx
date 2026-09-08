@@ -54,9 +54,19 @@ function Carousel({ className, children, orientation = "horizontal" }: CarouselP
     updateScrollState()
     el.addEventListener("scroll", updateScrollState, { passive: true })
     window.addEventListener("resize", updateScrollState)
+    // A carousel mounted inside a hidden container (e.g. an inactive tab/route)
+    // measures 0 for every box, latching Next to disabled. ResizeObserver fires
+    // when the element gains real dimensions — once an ancestor flips away from
+    // display:none — so the button state recovers without a scroll/resize event.
+    let ro: ResizeObserver | undefined
+    if (typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(() => updateScrollState())
+      ro.observe(el)
+    }
     return () => {
       el.removeEventListener("scroll", updateScrollState)
       window.removeEventListener("resize", updateScrollState)
+      ro?.disconnect()
     }
   }, [updateScrollState])
 

@@ -30017,16 +30017,29 @@ function carouselUpdate(carousel) {
   if (next) next.disabled = pos >= max - 1;
 }
 function initCarousel(carousel) {
-  if (carousel.__carInit) return; carousel.__carInit = 1;
   var content = carousel.querySelector('.carousel-content'); if (!content) return;
-  if (!carousel.hasAttribute('role')) { carousel.setAttribute('role', 'region'); carousel.setAttribute('aria-roledescription', 'carousel'); }
-  if (!carousel.hasAttribute('tabindex')) carousel.tabIndex = 0;
-  content.addEventListener('scroll', function () { carouselUpdate(carousel); });
-  carousel.addEventListener('keydown', function (e) {
-    var vertical = carousel.classList.contains('carousel-vertical');
-    if ((vertical && e.key === 'ArrowUp') || (!vertical && e.key === 'ArrowLeft')) { e.preventDefault(); carouselScrollEl(carousel, -1); }
-    else if ((vertical && e.key === 'ArrowDown') || (!vertical && e.key === 'ArrowRight')) { e.preventDefault(); carouselScrollEl(carousel, 1); }
-  });
+  // One-time wiring (guarded). The button-state refresh below must run on EVERY
+  // call — a carousel first inited while its section is display:none measures 0
+  // for every box, which would latch Next to disabled; re-running carouselUpdate
+  // on ds:section-shown (once the section is visible and measurable) recovers it.
+  if (!carousel.__carInit) {
+    carousel.__carInit = 1;
+    if (!carousel.hasAttribute('role')) { carousel.setAttribute('role', 'region'); carousel.setAttribute('aria-roledescription', 'carousel'); }
+    if (!carousel.hasAttribute('tabindex')) carousel.tabIndex = 0;
+    content.addEventListener('scroll', function () { carouselUpdate(carousel); });
+    carousel.addEventListener('keydown', function (e) {
+      var vertical = carousel.classList.contains('carousel-vertical');
+      if ((vertical && e.key === 'ArrowUp') || (!vertical && e.key === 'ArrowLeft')) { e.preventDefault(); carouselScrollEl(carousel, -1); }
+      else if ((vertical && e.key === 'ArrowDown') || (!vertical && e.key === 'ArrowRight')) { e.preventDefault(); carouselScrollEl(carousel, 1); }
+    });
+    // A carousel first measured inside a hidden section OR an inactive component
+    // tab reads 0 for every box, latching Next to disabled. ResizeObserver refreshes
+    // the button state the moment it gains real dimensions — whatever revealed it
+    // (section nav, tab switch, responsive resize) — without needing a scroll event.
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(function () { carouselUpdate(carousel); }).observe(content);
+    }
+  }
   carouselUpdate(carousel);
 }
 function initAllCarousels() { Array.prototype.forEach.call(document.querySelectorAll('.carousel'), initCarousel); }
