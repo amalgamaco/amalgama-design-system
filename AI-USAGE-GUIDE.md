@@ -2,8 +2,7 @@
 
 This is the **operating manual for agents and developers who consume the Amalgama
 Design System (Embassy) to build or migrate a screen** — Claude Code, the
-`/design:design-system` and `/design:presentation-builder` skills, and any future
-UI-generation workflow.
+`/design:design-system` skill, and any future UI-generation workflow.
 
 It answers one question end to end: *given a screen to build, what do I read, in what
 order, and what am I forbidden from doing?* It does **not** re-document components — it
@@ -203,16 +202,18 @@ and the per-component `common_mistakes`.
 
 ---
 
-## 5. For `/design:presentation-builder` and UI-generation specifically
+## 5. For artifact and deck generation specifically
 
 These workflows generate whole artifacts/decks, usually as fresh output with no existing
 token layer. Pull three layers from the repo — **never hardcode from memory**:
 
-1. **Brand layer** (not in component code — from `skills/design-system/SKILL.md`):
-   logo variant chosen by background (light → Logo Text 1; navy/blue → mono; square →
-   with-bg), voice/tone (direct, action-oriented; product UI in rioplatense Spanish), and
+1. **Brand layer** (not in component code — from `skills/design-system/SKILL.md` §8):
+   logo variant chosen by background (light backgrounds → navy wordmark + blue icon;
+   dark/navy → mono white or mono blue; square accents → icon-only), voice/tone (direct,
+   action-oriented; product UI in rioplatense Spanish, outward marketing in English), and
    theme strategy (hero/landing → dark `--primary-900/-700` band; internal tools/tables →
-   light). Ask the user to upload logo PNGs if needed — never invent SVG approximations.
+   light). The logo assets are transparent **SVGs**; ask the user for the file if a case
+   isn't covered — never invent a filename or approximate the mark.
 2. **Tokens** — copy `css/variables.css` (and `css/base.css`) values, or link them; for
    the most current tokens in a self-contained artifact, inline `css/variables.css` in a
    `<style>` block rather than relying on the CDN HEAD.

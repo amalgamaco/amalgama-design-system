@@ -80,6 +80,30 @@ console.log("\n[5] component manifest");
   }
 }
 
+// ── 5b. cobertura CSS → component-rules ──────────────────────────────────
+// AI-USAGE-GUIDE §6 promete que "every component in css/components/ has a
+// component-rules/<id>.md entry". El chequeo [5] solo compara manifest.count
+// contra la cantidad de .md, así que nunca miraba el CSS. Esto sí.
+// Ojo: el id de la regla NO siempre coincide con el nombre del archivo CSS
+// (modal.css → dialog.md, toast.css → snackbar.md…), así que mapeamos por source.css.
+console.log("\n[5b] cobertura css/components → component-rules");
+{
+  const mp = path.join(ROOT, "component-rules/manifest.json");
+  if (fs.existsSync(mp)) {
+    const man = JSON.parse(fs.readFileSync(mp, "utf8"));
+    const cubiertos = new Set(
+      (man.components ?? []).flatMap((c) => [c.source?.css].flat().filter(Boolean))
+    );
+    const cssFiles = fs.readdirSync(path.join(ROOT, "css/components"))
+      .filter((f) => f.endsWith(".css"))
+      .map((f) => `css/components/${f}`);
+    const sinRegla = cssFiles.filter((f) => !cubiertos.has(f));
+    sinRegla.length
+      ? warn(`${sinRegla.length} componente(s) CSS sin component-rules — un agente no los puede elegir por propósito: ${sinRegla.map((f) => path.basename(f, ".css")).join(", ")}`)
+      : ok(`${cssFiles.length} archivos CSS, todos con regla operativa`);
+  }
+}
+
 // ── 6. rules frontmatter metadata ────────────────────────────────────────
 console.log("\n[6] component-rules metadata");
 {

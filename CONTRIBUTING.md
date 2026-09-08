@@ -51,74 +51,102 @@ Share the proposal with at least one other designer before writing CSS.
 
 ---
 
-## 4. Component implementation (Tailwind, in `@amalgama/ds`)
+## 4. Component implementation (buildless CSS)
 
-> **2026-06:** components are now authored as **self-contained Tailwind components** in
-> `packages/ds/components/ui/`. **Do not create `css/components/*.css` files** — that buildless
-> layer is deprecated/frozen. All styling lives in-file as Tailwind utilities that resolve to
-> Embassy tokens.
+> **Corregido 2026-09.** Esta sección describía la arquitectura Tailwind + React de `packages/ds/`,
+> que fue **revertida el 17-jul-2026**. `packages/ds/` e `islands/` no existen en `main`. La
+> arquitectura canónica es **buildless**: `css/components/<id>.css` con clases planas kebab-case, y
+> wrappers React opcionales en `components/ui/<id>.tsx` que aplican esas mismas clases sin estilos
+> propios. Ver `README.md` y `CLAUDE.md`.
 
-### 4.1 File location and naming
+### 4.1 Dónde vive cada cosa
 
-- `packages/ds/components/ui/<component-name>.tsx` — kebab-case, all lowercase
-- No barrel to edit — the package exports `./components/ui/*.tsx` via its `exports` map (import as `@amalgama/ds/<name>`)
-- If the component should render in the docs site, add a showcase in `islands/src/islands/`, register it, and rebuild (`cd islands && npm run build`)
+Un componente nuevo son **dos archivos obligatorios** y uno opcional:
 
-### 4.2 Mandatory file structure
+| Archivo | Obligatorio | Qué es |
+|---|---|---|
+| `css/components/<id>.css` | **sí** | La implementación canónica. Autocontenida: solo depende de la capa de tokens |
+| `component-rules/<id>.md` | **sí** | La regla operativa: `when_to_use`, `when_not_to_use`, `variants` por propósito, `states`, `accessibility`, `keyboard`, `motion`, `not_to_confuse_with`, `common_mistakes`. Es lo que permite que un agente lo **elija** bien, no solo que lo pinte |
+| `components/ui/<id>.tsx` | no | Wrapper React tipado (`cva` + `cn` + `forwardRef`). Aplica las clases del CSS; **cero estilos propios** |
 
-```tsx
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "../lib/utils"
+- `<id>` en kebab-case, y es también la ruta `c-<id>` del sitio de documentación.
+- Agregá el `@import` en `css/components.css` (el barrel).
+- El id del archivo CSS **no tiene por qué coincidir** con el id de la regla cuando un CSS
+  alimenta a más de un componente conceptual (`modal.css` → `dialog.md`, `sheet.css` →
+  `sheet-side.md` + `sheet-bottom.md`). Lo que manda es el campo `source.css` de la regla.
 
+### 4.2 Estructura obligatoria del archivo CSS
+
+El header es el contrato del componente — lo leen las personas, las skills y el checklist de
+auditoría. No empieces el CSS antes de completarlo (`GOVERNANCE.md` §18.3):
+
+```css
 /* ═══════════════════════════════════════
-   Embassy DS — [Component Name]  ([Description — one sentence])
-   Cuándo usar: [use case]
-   Cuándo no: [anti-use-cases — be specific]
-   Reemplaza a: [what legacy pattern this replaces]
+   Embassy DS — [Nombre del componente]
+   [Una oración de descripción]
+
+   Cuándo usar: [caso de uso]
+   Cuándo no: [anti-casos, nombrando siempre la alternativa correcta]
+   Reemplaza a: [qué patrón legacy reemplaza]
+
+   Dependencia: variables.css[, base.css si hace falta]
+   Requiere: [peer deps, ej. íconos Lucide]
+
+   Uso:
+   <div class="mi-componente">…</div>
 ═══════════════════════════════════════ */
 
-const componentVariants = cva(
-  // base — Tailwind utilities resolving to Embassy tokens only
-  "inline-flex items-center rounded-md text-body-md transition-all duration-fast focus-visible:focus-ring disabled:bg-disabled disabled:text-on-disabled disabled:cursor-not-allowed",
-  {
-    variants: {
-      variant: {
-        primary: "bg-primary text-on-primary hover:bg-primary-hover",
-        secondary: "bg-secondary-container text-on-secondary-container hover:bg-secondary-container-hover",
-      },
-      size: { sm: "px-3 py-1.5 text-body-sm", md: "px-6 py-2", lg: "px-[22px] py-2.5" },
-    },
-    defaultVariants: { variant: "primary", size: "md" },
-  }
-)
+.mi-componente {
+  /* Solo roles semánticos. Nunca primitivas, nunca hex crudo. */
+  background: var(--color-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  font-size: var(--font-size-body-md);
+  transition: background var(--duration-fast) var(--ease-default);
+}
 
-export interface ComponentProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof componentVariants> {}
-
-export const Component = React.forwardRef<HTMLDivElement, ComponentProps>(
-  ({ className, variant, size, ...props }, ref) => (
-    <div ref={ref} className={cn(componentVariants({ variant, size }), className)} {...props} />
-  )
-)
-Component.displayName = "Component"
+.mi-componente:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
 ```
 
-### 4.3 Prohibited patterns
+Las variantes son **aditivas** y se componen sobre la base
+(`class="btn-primary btn-danger"`, `class="chip chip-selected"`). El modificador de **tamaño**
+es el que lleva el `border-radius`, nunca la variante (`GOVERNANCE.md` §4.3).
 
-These will block a PR:
+### 4.3 Patrones prohibidos
 
-- Raw hex (`bg-[#...]`, `text-[#...]`) — use token utilities (`bg-primary`, `text-on-surface`, …)
-- Arbitrary font sizes (`text-[14px]`) — use the scale (`text-body-lg`, `text-label`, …)
-- Arbitrary radii (`rounded-[8px]`) — use `rounded-sm/md/lg/xl`
-- Quoted font families — use `font-body` / `font-heading` / `font-mono` utilities
-- `dark:` variants or `[data-theme="dark"]` overrides — wrong token chosen; dark mode is automatic via the token layer
-- A **custom CSS class** (e.g. `btn-primary`) or a new `css/components/*.css` file — author variants in-file
-- Merging classes without `cn()` — always merge through `cn()` so `tailwind-merge` resolves token utilities
-- A new utility in `tailwind.theme.css` for something expressible as atomic Tailwind utilities — only add there for genuinely-unexpressible patterns (shimmer, `::before` placeholder)
+Cualquiera de estos frena el PR:
 
-Carry the `Cuándo usar / Cuándo no / Reemplaza a` decision rule as a header comment in the `.tsx`.
+- **Hex crudo o px suelto** donde existe un token. Color → `var(--color-*)`; radio →
+  `var(--radius-*)`; espaciado → `var(--space-*)`; `font-size` → `var(--font-size-*)`; familia →
+  `var(--font-body|--font-heading|--font-mono)`. El único cálculo permitido es `color-mix()` sobre
+  roles.
+- **Primitivas en código de componente** (`--primary-900`, `--neutral-100`). Siempre a través de un
+  rol semántico. Las primitivas son la capa que se overridea por marca (`WHITE-LABEL.md`).
+- **Overrides por tema** (`[data-theme="dark"]`, `.dark`, `@media (prefers-color-scheme)`) dentro de
+  un componente. El dark mode es automático; si lo necesitaste, elegiste el token equivocado.
+- **Utilidades de Tailwind u otro framework** en el CSS del componente.
+- **Radio píldora** (`--radius-full`) en cualquier cosa que no sea chip, badge o avatar.
+- **Easings o duraciones inventadas.** Solo `--duration-*` y `--ease-*`, y respetando la regla de
+  doble easing (`GOVERNANCE.md` §13).
+- **Quitar el anillo de foco** o ignorar `prefers-reduced-motion`.
+- **Duplicar un componente que ya existe** con otro nombre. Antes de crear, revisá §1 y
+  `component-rules/manifest.json`.
+
+### 4.4 Antes de abrir el PR
+
+```bash
+python3 scripts/build-manifest.py   # regenera el manifest desde los frontmatter
+node scripts/validate-ds.mjs        # token-lint, rutas, cobertura y metadata
+```
+
+El chequeo `[5b]` avisa si el CSS nuevo quedó sin su `component-rules/<id>.md`. Un componente sin
+regla no lo puede elegir ningún agente: solo se puede copiar si alguien ya sabe que existe.
 
 ---
 
