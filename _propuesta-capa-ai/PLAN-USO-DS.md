@@ -336,14 +336,15 @@ Seis, y todas son cortas:
 
 ## Anexo — archivos de esta propuesta
 
-Los cinco `SKILL.md` en `_propuesta-capa-ai/skills/` del repo del DS; `design.md`, `PUBLIC-API.md`,
-`public-api.json` y `FAILURES.md` ya viven en la raíz del repo, que es de donde los leen las skills.
+Las skills viven en el plugin `design` de `amalgamaco/claude-code-plugins` (una sola copia);
+`design.md`, `PUBLIC-API.md`, `public-api.json` y `FAILURES.md` en la raíz de este repo, que es de
+donde las skills los leen. El reparto y cómo actualizar cada lado: `SKILLS.md`.
 
 | Archivo | Estado |
 |---|---|
 | `ANALISIS-SKILLS-DS.md` | El diagnóstico que originó este plan |
 | `PLAN-USO-DS.md` | Este documento |
 | `design.md` · `PUBLIC-API.md` · `FAILURES.md` | Listos para mover a la raíz |
-| `skills/embassy-start/` | La skill del §3 |
-| `skills/embassy/` · `embassy-artifact/` · `embassy-review/` · `embassy-eval/` | Las cuatro P0 |
+| `plugins/design/skills/embassy-start/` (otro repo) | La skill del §3 |
+| `plugins/design/skills/` (otro repo) — `design-system` · `embassy-artifact` · `embassy-review` · `embassy-eval` | Las cuatro P0 |
 | `scripts/build-public-api.mjs` · `check-output.mjs` · `build-brand-theme.mjs` | Probados contra el repo real |

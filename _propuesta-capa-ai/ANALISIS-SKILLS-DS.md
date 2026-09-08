@@ -415,5 +415,5 @@ en GitHub raw, y la de Figma. Son decisiones de dueño, no de equipo.
 - `design.md` — archivo de marca público (borrador listo para revisar)
 - `PUBLIC-API.md` — API acotada de clases, generada desde el CSS
 - `FAILURES.md` — taxonomía de fallas compartida por `embassy-review` y `embassy-eval`
-- `skills/embassy/`, `skills/embassy-artifact/`, `skills/embassy-review/`, `skills/embassy-eval/`
+- las skills — publicadas en el plugin `design` de `amalgamaco/claude-code-plugins` (ver `SKILLS.md`)
 - `scripts/build-public-api.mjs` — genera `PUBLIC-API.md` desde `css/components/*.css`

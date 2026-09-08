@@ -22,11 +22,7 @@ en el working tree local (`component-rules/search.md`, `components/ui/carousel.t
 | `scripts/build-public-api.mjs` | Genera `PUBLIC-API.md` y `public-api.json` desde `css/components/` + el manifest | **ya está en `scripts/`** |
 | `scripts/check-output.mjs` | Chequeos determinísticos sobre lo que un agente **produjo** (no sobre el DS) | **ya está en `scripts/`** |
 | `scripts/check-screen-report.mjs` | Verifica que el diagnóstico de una pantalla sea real y no un re-skin | **ya está en `scripts/`** |
-| `skills/embassy-start/` | El kickoff: 6 preguntas y el proyecto queda configurado (white-label incluido) | **ya está en el plugin `design` v0.11.0** |
-| `skills/embassy/` | Router del DS (reemplaza a `design-system`) + `references/decisiones.md` | **`amalgamaco/claude-code-plugins`** — el plugin sincroniza desde ahí, no desde este repo |
-| `skills/embassy-artifact/` | Entregables on-brand sin repo | ídem |
-| `skills/embassy-review/` | Auditoría con la taxonomía | ídem |
-| `skills/embassy-eval/` | El loop de medición + `scenarios/01-lista-coleccion.md` | ídem |
+| `skills/` | **Ya no está acá.** Las cinco skills viven en el plugin `design` de `amalgamaco/claude-code-plugins` — ver `SKILLS.md` | — |
 
 ## Qué se sacó por redundante (8-sep-2026)
 
@@ -59,9 +55,8 @@ node scripts/check-output.mjs <archivo.html>
 
 ## Lo que falta y no está acá
 
-- **`references/screen-patterns.md`** — hoy existe solo en el plugin `design` instalado, no en el
-  repo. `skills/embassy/SKILL.md` lo referencia. Al adoptar, hay que moverlo al repo junto con la
-  skill, para que haya una sola copia.
+- **`references/screen-patterns.md`** vive en el plugin, junto a la skill que lo lee. Queda ahí a
+  propósito: es procedimiento, no criterio (ver `SKILLS.md`).
 - **Los escenarios 02 a 07** del eval — está escrito el 01 como plantilla; el resto sale de decidir
   cuál es el entregable que más repetimos (ver `ANALISIS-SKILLS-DS.md` §9).
 - **Las skills P1 y P2** (`embassy-contribute`, `embassy-figma`,
