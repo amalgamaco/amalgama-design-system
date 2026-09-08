@@ -79,6 +79,36 @@ if (fs.existsSync(MANIFEST)) {
   }
 }
 
+// css/layout.css es el app shell (sidebar + topbar). No vive en css/components/ y no tiene
+// component-rule, pero sus clases SÍ son API pública: toda pantalla con navegación persistente
+// las escribe. Sin esto, check-output.mjs marcaba .app/.sidebar/.topbar como clases inventadas.
+const LAYOUT = (() => {
+  const file = path.join(ROOT, "css", "layout.css");
+  if (!fs.existsSync(file)) return null;
+  const css = fs.readFileSync(file, "utf8");
+  const head = header(css);
+  const classes = [...new Set(
+    // incluye descendientes (`.topbar-breadcrumb .separator`), no solo el selector de raíz
+    [...css.replace(/\/\*[\s\S]*?\*\//g, "").matchAll(/\.([a-z][a-z0-9-]{1,40})(?=[\s,:{>+~])/g)].map((m) => m[1])
+  )].sort();
+  return {
+    id: "layout",
+    display_name: "App Shell (Sidebar + Topbar)",
+    category: "layout",
+    status: "stable",
+    file: "css/layout.css",
+    summary: "Shell de aplicación: sidebar de navegación persistente + topbar. Se carga aparte de components.css.",
+    when: field(head, "Cuándo usar"),
+    when_not: field(head, "Cuándo no"),
+    variants: [],
+    sizes: [],
+    rules_files: [],
+    usage: usage(head),
+    classes,
+    internal_class_count: classes.length,
+  };
+})();
+
 const components = fs
   .readdirSync(CSS_DIR)
   .filter((f) => f.endsWith(".css"))
@@ -114,6 +144,8 @@ const components = fs
       internal_class_count: all.length,
     };
   });
+
+if (LAYOUT) components.unshift(LAYOUT);
 
 const totalPublic = new Set(components.flatMap((c) => c.classes)).size;
 const allInternal = components.reduce((n, c) => n + c.internal_class_count, 0);
@@ -169,7 +201,7 @@ console.log(`✓ ${path.relative(ROOT, OUT_JSON)}`);
 
 // Cobertura: qué CSS no tiene ninguna regla operativa.
 // validate-ds.mjs [5] no chequea esto — solo compara manifest.count contra los .md.
-const sinRegla = components.filter((c) => !c.rules_files.length).map((c) => c.id);
+const sinRegla = components.filter((c) => !c.rules_files.length && c.id !== "layout").map((c) => c.id);
 if (sinRegla.length) {
   console.warn(`! ${sinRegla.length} componente(s) CSS sin component-rules: ${sinRegla.join(", ")}`);
   console.warn("  Un agente no puede elegirlos por propósito. Autorá la regla o documentá por qué no la lleva.");

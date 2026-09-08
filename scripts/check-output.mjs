@@ -52,7 +52,24 @@ const RULES = [
   { id: "A6", sev: "BLOQ", desc: "override por tema", re: /\[data-theme=["']?dark["']?\]\s*\{|prefers-color-scheme|\.dark\s*\{/g },
   { id: "A8", sev: "ALTA", desc: "fuga de utilidades de otro framework", re: /\b(text|bg|border)-(zinc|slate|gray|neutral|indigo|blue|red|green)-\d{2,3}\b/g },
   { id: "A10", sev: "MEDIA", desc: "border-radius inline en vez del modificador de tamaño", re: /style="[^"]*border-radius/g },
-  { id: "B3", sev: "ALTA", desc: "input genérico con placeholder de búsqueda", re: /<input[^>]*placeholder=["'][^"']*[Bb]usc/g },
+  // B3 solo aplica al input SUELTO. Un <input type="search"> dentro de .search-field o .search-bar
+  // es el markup canónico del DS — marcarlo era un falso positivo sobre páginas correctas.
+  {
+    id: "B3",
+    sev: "ALTA",
+    desc: "input genérico con placeholder de búsqueda, fuera de search-field / search-bar",
+    custom: (src) => {
+      const out = [];
+      for (const m of src.matchAll(/<input[^>]*placeholder=["'][^"']*[Bb]usc[^>]*>/g)) {
+        // ¿el contenedor abierto más cercano antes del input es un search-field/search-bar?
+        const before = src.slice(0, m.index);
+        const wrapper = [...before.matchAll(/class="[^"]*\b(search-field|search-bar|search-view-header)\b[^"]*"/g)].pop();
+        if (wrapper && before.slice(wrapper.index).split("</div>").length <= 2) continue;
+        out.push([src.slice(0, m.index).split("\n").length, m[0].slice(0, 60)]);
+      }
+      return out;
+    },
+  },
   { id: "F3", sev: "ALTA", desc: "búsqueda sin role=\"search\"", custom: (src) => (/[Bb]uscar/.test(src) && !/role=["']search["']/.test(src) ? [[1, "hay búsqueda y ningún role=\"search\""]] : []) },
   { id: "G1", sev: "ALTA", desc: "cubic-bezier o ms crudos en vez de tokens", re: /cubic-bezier\(|(?:transition|animation)[^;{]*?\b\d+m?s\b/g },
   { id: "G3", sev: "BLOQ", desc: "prefers-reduced-motion anulado", re: /prefers-reduced-motion[^}]*\{[^}]*!important/g },
@@ -64,13 +81,34 @@ function lineOf(src, index) {
 }
 
 const findings = [];
+const allowed = [];
+
+/**
+ * Excepción declarada por la propia página, con motivo obligatorio:
+ *   <!-- ds-allow: A5, C1 — esta página es un catálogo de tema, muestra la rampa a propósito -->
+ * Existe porque un preview de tema o un catálogo de componentes dispara reglas escritas para
+ * pantallas de producto. La excepción queda escrita en el archivo y se ve en el reporte: nadie
+ * la apaga en silencio. Sin motivo (texto después del guion) no vale.
+ */
+function declaredAllows(src) {
+  const out = new Map();
+  for (const m of src.matchAll(/ds-allow\s*:\s*([A-Z]\d+(?:\s*,\s*[A-Z]\d+)*)\s*[—-]\s*(.+?)\s*(?:-->|$)/gm)) {
+    const motivo = m[2].trim();
+    if (motivo.length < 10) continue; // un motivo de una palabra no es un motivo
+    for (const id of m[1].split(",").map((x) => x.trim())) out.set(id, motivo);
+  }
+  return out;
+}
 
 for (const file of files) {
   if (!fs.existsSync(file)) { console.warn(`! no existe: ${file}`); continue; }
   const src = fs.readFileSync(file, "utf8");
   const lines = src.split("\n");
+  const allows = declaredAllows(src);
+  for (const [id, motivo] of allows) allowed.push({ file, id, motivo });
 
   for (const rule of RULES) {
+    if (allows.has(rule.id)) continue;
     if (rule.custom) {
       for (const [ln, ev] of rule.custom(src)) findings.push({ file, line: ln, ...rule, evidence: ev });
       continue;
@@ -85,7 +123,7 @@ for (const file of files) {
 
   // C1 — más de un btn-primary. Heurística: contamos por archivo y avisamos si hay >1.
   const primaries = [...src.matchAll(/class="[^"]*\bbtn-primary\b/g)];
-  if (primaries.length > 1) {
+  if (primaries.length > 1 && !allows.has("C1")) {
     findings.push({
       id: "C1", sev: "BLOQ", desc: "más de un btn-primary — verificá si están en el mismo contexto",
       file, line: lineOf(src, primaries[1].index), evidence: `${primaries.length} ocurrencias`,
@@ -93,14 +131,14 @@ for (const file of files) {
   }
 
   // F2 — icon-btn sin aria-label, mirando el tag completo.
-  for (const m of src.matchAll(/<[a-z]+[^>]*\bicon-btn\b[^>]*>/g)) {
+  if (!allows.has("F2")) for (const m of src.matchAll(/<[a-z]+[^>]*\bicon-btn\b[^>]*>/g)) {
     if (!/aria-label\s*=/.test(m[0])) {
       findings.push({ id: "F2", sev: "BLOQ", desc: "icon-btn sin aria-label", file, line: lineOf(src, m.index), evidence: m[0].slice(0, 60) });
     }
   }
 
   // B1 — clases fuera de la API pública.
-  if (publicClasses) {
+  if (publicClasses && !allows.has("B1")) {
     const used = new Set();
     for (const m of src.matchAll(/class="([^"]+)"/g)) m[1].split(/\s+/).forEach((c) => c && used.add(c));
     for (const c of used) {
@@ -115,13 +153,14 @@ const count = (s) => findings.filter((f) => f.sev === s).length;
 const summary = { BLOQ: count("BLOQ"), ALTA: count("ALTA"), MEDIA: count("MEDIA"), BAJA: count("BAJA"), total: findings.length };
 
 if (asJson) {
-  console.log(JSON.stringify({ files, summary, findings }, null, 2));
+  console.log(JSON.stringify({ files, summary, findings, allowed }, null, 2));
 } else {
   const order = { BLOQ: 0, ALTA: 1, MEDIA: 2, BAJA: 3 };
   for (const f of findings.sort((a, b) => order[a.sev] - order[b.sev])) {
     console.log(`[${f.id} · ${f.sev}] ${path.basename(f.file)}${f.line ? `:${f.line}` : ""} — ${f.desc}\n    ${f.evidence}`);
   }
-  console.log(`\nBLOQUEANTES ${summary.BLOQ} · ALTAS ${summary.ALTA} · MEDIAS ${summary.MEDIA} · BAJAS ${summary.BAJA} · total ${summary.total}`);
+  for (const a of allowed) console.log(`[${a.id} · EXCEPCIÓN DECLARADA] ${path.basename(a.file)} — ${a.motivo}`);
+  console.log(`\nBLOQUEANTES ${summary.BLOQ} · ALTAS ${summary.ALTA} · MEDIAS ${summary.MEDIA} · BAJAS ${summary.BAJA} · total ${summary.total}${allowed.length ? ` · ${allowed.length} excepción(es) declarada(s)` : ""}`);
   console.log("Lo que no se puede chequear acá (jerarquía, layout, estados, copy, contraste) lo juzga embassy-review.");
 }
 

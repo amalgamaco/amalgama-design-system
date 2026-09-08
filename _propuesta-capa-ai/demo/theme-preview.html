@@ -15,25 +15,25 @@
 
 <style>
   /* Solo andamiaje del preview. Ningún estilo de componente, ningún color literal. */
-  .pv-section { margin-bottom: var(--space-12); }
-  .pv-section > h2 {
+  .page-section { margin-bottom: var(--space-12); }
+  .page-section > h2 {
     font-family: var(--font-heading); font-size: var(--font-size-heading-lg);
     color: var(--text-primary); margin: 0 0 var(--space-2);
   }
-  .pv-section > p {
+  .page-section > p {
     color: var(--text-secondary); font-size: var(--font-size-body-md);
     margin: 0 0 var(--space-6); max-width: 68ch;
   }
-  .pv-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
-  .pv-grid { display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-  .pv-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: var(--space-2); }
-  .pv-swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
-  .pv-swatch i { display: block; height: 48px; }
-  .pv-swatch span {
+  .page-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+  .page-grid { display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  .page-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: var(--space-2); }
+  .page-swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .page-swatch i { display: block; height: 48px; }
+  .page-swatch span {
     display: block; padding: var(--space-2); font-family: var(--font-mono);
     font-size: var(--font-size-mono-sm); color: var(--text-secondary); background: var(--card-bg);
   }
-  .pv-note {
+  .page-note {
     font-size: var(--font-size-caption); color: var(--text-muted);
     margin-top: var(--space-3); font-style: normal;
   }
@@ -41,6 +41,7 @@
 </head>
 
 <body>
+<!-- ds-allow: A5, C1 — esta página es el catálogo del tema: muestra la rampa de primitivas a propósito y repite btn-primary en secciones distintas de la galería, no en un mismo contexto -->
 <div class="app">
 
   <!-- ─────────── Sidebar ─────────── -->
@@ -81,13 +82,13 @@
           <button class="btn-primary">Nuevo envío</button>
         </div>
       </div>
-      <p class="pv-note" style="margin-bottom:var(--space-8)">
+      <p class="page-note" style="margin-bottom:var(--space-8)">
         Una sola acción primaria. «Importar» es de menor prioridad y va outline, no tonal — si fuera
         tonal competiría con la primaria y el ojo no encontraría la acción.
       </p>
 
       <!-- ─────────── KPIs ─────────── -->
-      <section class="pv-section">
+      <section class="page-section">
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-label">Envíos activos</div>
@@ -105,11 +106,11 @@
             <div class="stat-change stat-change-neutral">sin cambios</div>
           </div>
         </div>
-        <p class="pv-note">Cada número lleva su comparador y su período. Un «+8,2%» sin base no dice nada.</p>
+        <p class="page-note">Cada número lleva su comparador y su período. Un «+8,2%» sin base no dice nada.</p>
       </section>
 
       <!-- ─────────── Toolbar + tabla ─────────── -->
-      <section class="pv-section">
+      <section class="page-section">
         <h2>Colección</h2>
         <p>Buscador, filtros, resultados y paginación alineados a la misma columna. El buscador filtra
            esta lista, así que es un <code>search-field</code> dentro del toolbar — no una barra píldora centrada.</p>
@@ -149,7 +150,7 @@
             </tbody>
           </table>
         </div>
-        <p class="pv-note">
+        <p class="page-note">
           La columna «Ruta» usa <code>badge</code>, no <code>chip</code>: es una etiqueta de solo
           lectura, no un filtro que se pueda tocar. Es de los errores que el sistema marca solo.
         </p>
@@ -168,10 +169,10 @@
       </section>
 
       <!-- ─────────── Escala de botones ─────────── -->
-      <section class="pv-section">
+      <section class="page-section">
         <h2>Jerarquía de acciones</h2>
         <p>Seis niveles. La marca aparece en el relleno de la primaria y en el foco; el resto baja de peso.</p>
-        <div class="pv-row">
+        <div class="page-row">
           <button class="btn-primary">Primary</button>
           <button class="btn-elevated">Elevated</button>
           <button class="btn-secondary">Secondary</button>
@@ -184,7 +185,7 @@
       </section>
 
       <!-- ─────────── Formulario ─────────── -->
-      <section class="pv-section">
+      <section class="page-section">
         <h2>Formulario</h2>
         <div class="form-card">
           <div class="form-card-title">Datos del envío</div>
@@ -212,7 +213,7 @@
               <span class="field-hint">Aparece en el remito del cliente.</span>
             </div>
           </div>
-          <div class="pv-row" style="margin-top:var(--space-6)">
+          <div class="page-row" style="margin-top:var(--space-6)">
             <label class="checkbox-label"><input type="checkbox" class="checkbox" checked> Notificar al destinatario</label>
             <label class="switch-label"><input type="checkbox" role="switch" class="switch"> Envío prioritario</label>
           </div>
@@ -220,10 +221,10 @@
       </section>
 
       <!-- ─────────── Estados ─────────── -->
-      <section class="pv-section">
+      <section class="page-section">
         <h2>Estados</h2>
         <p>Una pantalla sin estado vacío, de carga y de error no está terminada. Estos son los cuatro que más se olvidan.</p>
-        <div class="pv-grid">
+        <div class="page-grid">
           <div>
             <div class="alert alert-error" role="alert">
               <div class="alert-body">
@@ -255,37 +256,37 @@
       </section>
 
       <!-- ─────────── Paleta ─────────── -->
-      <section class="pv-section">
+      <section class="page-section">
         <h2>La paleta generada</h2>
         <p>Las dos rampas salieron de un hex por paleta, siguiendo la curva de luminosidad de Embassy con
            el tono de Nortia. Ninguna se escribió a mano.</p>
 
         <h3 style="font-family:var(--font-heading);font-size:var(--font-size-heading-xs);color:var(--text-secondary);margin:var(--space-6) 0 var(--space-2)">Primary — texto de página, sidebar, relleno primario</h3>
-        <div class="pv-swatches">
-          <div class="pv-swatch"><i style="background:var(--primary-50)"></i><span>50</span></div>
-          <div class="pv-swatch"><i style="background:var(--primary-60)"></i><span>60</span></div>
-          <div class="pv-swatch"><i style="background:var(--primary-100)"></i><span>100</span></div>
-          <div class="pv-swatch"><i style="background:var(--primary-200)"></i><span>200</span></div>
-          <div class="pv-swatch"><i style="background:var(--primary-300)"></i><span>300</span></div>
-          <div class="pv-swatch"><i style="background:var(--primary-400)"></i><span>400</span></div>
-          <div class="pv-swatch"><i style="background:var(--primary-500)"></i><span>500</span></div>
-          <div class="pv-swatch"><i style="background:var(--primary-700)"></i><span>700</span></div>
-          <div class="pv-swatch"><i style="background:var(--primary-900)"></i><span>900</span></div>
+        <div class="page-swatches">
+          <div class="page-swatch"><i style="background:var(--primary-50)"></i><span>50</span></div>
+          <div class="page-swatch"><i style="background:var(--primary-60)"></i><span>60</span></div>
+          <div class="page-swatch"><i style="background:var(--primary-100)"></i><span>100</span></div>
+          <div class="page-swatch"><i style="background:var(--primary-200)"></i><span>200</span></div>
+          <div class="page-swatch"><i style="background:var(--primary-300)"></i><span>300</span></div>
+          <div class="page-swatch"><i style="background:var(--primary-400)"></i><span>400</span></div>
+          <div class="page-swatch"><i style="background:var(--primary-500)"></i><span>500</span></div>
+          <div class="page-swatch"><i style="background:var(--primary-700)"></i><span>700</span></div>
+          <div class="page-swatch"><i style="background:var(--primary-900)"></i><span>900</span></div>
         </div>
 
         <h3 style="font-family:var(--font-heading);font-size:var(--font-size-heading-xs);color:var(--text-secondary);margin:var(--space-6) 0 var(--space-2)">Secondary — acento interactivo, links, foco</h3>
-        <div class="pv-swatches">
-          <div class="pv-swatch"><i style="background:var(--secondary-100)"></i><span>100</span></div>
-          <div class="pv-swatch"><i style="background:var(--secondary-200)"></i><span>200</span></div>
-          <div class="pv-swatch"><i style="background:var(--secondary-300)"></i><span>300</span></div>
-          <div class="pv-swatch"><i style="background:var(--secondary-500)"></i><span>500</span></div>
-          <div class="pv-swatch"><i style="background:var(--secondary-700)"></i><span>700</span></div>
-          <div class="pv-swatch"><i style="background:var(--secondary-900)"></i><span>900</span></div>
-          <div class="pv-swatch"><i style="background:var(--secondary-925)"></i><span>925</span></div>
-          <div class="pv-swatch"><i style="background:var(--secondary-950)"></i><span>950</span></div>
+        <div class="page-swatches">
+          <div class="page-swatch"><i style="background:var(--secondary-100)"></i><span>100</span></div>
+          <div class="page-swatch"><i style="background:var(--secondary-200)"></i><span>200</span></div>
+          <div class="page-swatch"><i style="background:var(--secondary-300)"></i><span>300</span></div>
+          <div class="page-swatch"><i style="background:var(--secondary-500)"></i><span>500</span></div>
+          <div class="page-swatch"><i style="background:var(--secondary-700)"></i><span>700</span></div>
+          <div class="page-swatch"><i style="background:var(--secondary-900)"></i><span>900</span></div>
+          <div class="page-swatch"><i style="background:var(--secondary-925)"></i><span>925</span></div>
+          <div class="page-swatch"><i style="background:var(--secondary-950)"></i><span>950</span></div>
         </div>
 
-        <p class="pv-note">
+        <p class="page-note">
           Chequeo de contraste al generar: cinco pares pasan AA. Uno quedó en 3,26:1 — blanco sobre el
           acento. Alcanza para texto grande y para componentes, no para texto normal. Embassy tiene el
           mismo caso (3,58:1), así que no lo introdujo esta marca.

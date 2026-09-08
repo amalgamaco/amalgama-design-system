@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-62 componentes · **483 clases públicas** de 548 selectores totales en el CSS.
+63 componentes · **508 clases públicas** de 575 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -27,6 +27,18 @@
 ```
 
 Dark mode: `<html data-theme="dark">`. No agregues overrides por tema.
+
+---
+
+### `layout` — App Shell (Sidebar + Topbar) · layout
+
+Shell de aplicación: sidebar de navegación persistente + topbar. Se carga aparte de components.css.
+**Cuándo usar:** shell de aplicación completo — sidebar + topbar + avatar. Solo para apps con navegación persistente.
+**Cuándo no:** páginas standalone (auth, landing) — no cargar layout.css.
+
+Clases públicas: `.active` · `.app` · `.avatar` · `.avatar-label` · `.chevron` · `.content` · `.main` · `.nav-badge` · `.nav-item` · `.nav-open` · `.nav-section-label` · `.nav-sub-items` · `.notif-badge` · `.secondary` · `.separator` · `.shell-menu-btn` · `.shortcut` · `.sidebar` · `.sidebar-footer` · `.sidebar-logo` · `.sidebar-nav` · `.sidebar-scrim` · `.sidebar-search` · `.topbar` · `.topbar-breadcrumb` · `.topbar-btn` · `.topbar-notif`
+
+Regla completa: _(sin regla — revisar cobertura del manifest)_ · CSS: `css/layout.css`
 
 ---
 
