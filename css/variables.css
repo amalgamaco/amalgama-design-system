@@ -421,43 +421,51 @@
      surface-bright neutral-700 #1C202C   (la más luminosa)
 ═══════════════════════════════════════ */
 [data-theme="dark"] {
+  /* Las familias de marca y estado (primary/secondary/tertiary/error/success/
+     warning/info) se referencian con var(--primitiva) para que un tema de marca
+     white-label llegue también a dark (ver WHITE-LABEL.md). Los tokens derivados
+     de la rampa neutral se escriben con valor literal a propósito, por la misma
+     razón documentada en el bloque [data-theme="light"] de abajo: el shell de la
+     doc reasigna esos primitivos a valores de superficie y se produce resolución
+     cruzada. El hex del comentario es el valor de Embassy, como referencia. */
+
   /* Primary · Navy → en dark mode el rol Primary se invierte a BLANCO.
      #01164D sobre #FFFFFF = 18.4:1 (WCAG AAA). Es la "Dark Mode definition"
      oficial de Embassy: máximo énfasis, máximo contraste. Single source of
      truth — todo Primary (botón relleno, FAB, CTA) lo consume desde aquí. */
   --color-primary:                   #FFFFFF; /* neutral-white */
-  --color-on-primary:                #01164D; /* primary-900   */
-  --color-primary-container:         #475993; /* primary-400 — más claro, mejor contraste en dark */
-  --color-on-primary-container:      #E4E7EF; /* primary-50    */
-  --color-primary-hover:             #E4E7EF; /* primary-50 — leve gris al hover */
+  --color-on-primary:                var(--primary-900);          /* #01164D */
+  --color-primary-container:         var(--primary-400);          /* #475993 */
+  --color-on-primary-container:      var(--primary-50);           /* #E4E7EF */
+  --color-primary-hover:             var(--primary-50);           /* #E4E7EF */
   /* Secondary · Agile Blue — 4 valores distintos (sin duplicación) */
-  --color-secondary:                 #B9CCFF; /* secondary-300 — más claro, ≠ on-container */
-  --color-on-secondary:              #1E3A8C; /* secondary-950 */
-  --color-secondary-container:       #3A5BB0; /* secondary-925 — mid, menos oscuro, botón Secondary */
-  --color-on-secondary-container:    #DCE6FF; /* secondary-100 */
+  --color-secondary:                 var(--secondary-300);        /* #B9CCFF */
+  --color-on-secondary:              var(--secondary-950);        /* #1E3A8C */
+  --color-secondary-container:       var(--secondary-925);        /* #3A5BB0 */
+  --color-on-secondary-container:    var(--secondary-100);        /* #DCE6FF */
   /* Tertiary (Purple) */
-  --color-tertiary:                    #C6BCFB; /* tertiary-300 */
+  --color-tertiary:                  var(--tertiary-300);         /* #C6BCFB */
   --color-on-tertiary:                 #0A0C12; /* neutral-900 — máximo contraste sobre tertiary claro */
-  --color-tertiary-container:          #7F69F5; /* tertiary-800 */
-  --color-on-tertiary-container:       #F1EEFE; /* tertiary-50 */
+  --color-tertiary-container:        var(--tertiary-800);         /* #7F69F5 */
+  --color-on-tertiary-container:     var(--tertiary-50);          /* #F1EEFE */
   /* Estados · mains en dark — se ACLARAN (tono ~80) como los acentos, criterio MD3 */
-  --color-error:                     #F29AA1; /* error-200  */
+  --color-error:                     var(--error-200);            /* #F29AA1 */
   --color-on-error:                  #5C0010; /* rojo profundo */
-  --color-success:                   #93E1B3; /* success-200 */
+  --color-success:                   var(--success-200);          /* #93E1B3 */
   --color-on-success:                #00351A; /* verde profundo */
-  --color-warning:                   #FFC97D; /* warning-200 */
+  --color-warning:                   var(--warning-200);          /* #FFC97D */
   --color-on-warning:                #5A2A00; /* ámbar profundo */
-  --color-info:                      #9FABF8; /* info-200    */
+  --color-info:                      var(--info-200);             /* #9FABF8 */
   --color-on-info:                   #00177A; /* azul profundo */
   /* Estados · containers en dark (flip MD3: container oscuro + on-container claro) */
-  --color-error-container:           #DB263C; /* error-700 */
-  --color-on-error-container:        #FFCDD7; /* error-100 */
-  --color-success-container:         #006D2C; /* success-900 */
-  --color-on-success-container:      #93E1B3; /* success-200 */
-  --color-warning-container:         #ED4403; /* warning-900 */
-  --color-on-warning-container:      #FFDEB0; /* warning-100 */
-  --color-info-container:            #0032CB; /* info-800 */
-  --color-on-info-container:         #C7CCFA; /* info-100 */
+  --color-error-container:           var(--error-700);            /* #DB263C */
+  --color-on-error-container:        var(--error-100);            /* #FFCDD7 */
+  --color-success-container:         var(--success-900);          /* #006D2C */
+  --color-on-success-container:      var(--success-200);          /* #93E1B3 */
+  --color-warning-container:         var(--warning-900);          /* #ED4403 */
+  --color-on-warning-container:      var(--warning-100);          /* #FFDEB0 */
+  --color-info-container:            var(--info-800);             /* #0032CB */
+  --color-on-info-container:         var(--info-100);             /* #C7CCFA */
   /* Surfaces — rampa Neutral profunda (separación pareja y clara) */
   --color-surface:                   #13161F; /* neutral-800 */
   --color-surface-dim:               #0A0C12; /* neutral-900 */
@@ -476,7 +484,7 @@
   /* Inverse */
   --color-inverse-surface:           #EAEBED; /* neutral-50  */
   --color-inverse-on-surface:        #13161F; /* neutral-800 */
-  --color-inverse-primary:           #162F6F; /* primary-700 */
+  --color-inverse-primary:           var(--primary-700);          /* #162F6F */
   /* Disabled */
   --color-disabled:                  #282C39; /* neutral-600 */
   --color-on-disabled:               #747989; /* neutral-300 */
@@ -487,7 +495,7 @@
   --text-primary:   #EAEBED; /* neutral-50 — en dark el navy no contrasta; vuelve a on-surface */
   --text-secondary: #BFC1C8; /* neutral-100 */
   --text-muted:     #747989; /* neutral-300 */
-  --interactive-hover:   #909BBE; /* primary-200 */
+  --interactive-hover:               var(--primary-200);          /* #909BBE */
 
   /* Elevated Button elevation — black shadows so the lift is visible on dark surfaces
      (the navy light shadows disappear against dark backgrounds). */

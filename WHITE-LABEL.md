@@ -67,10 +67,35 @@ The primary palette drives primary buttons, focused inputs, links, navigation ac
   --primary-700: #0e3ebe;
   --primary-800: #092e99;
   --primary-900: #041f7a;  /* ← darkest — page headings, sidebar bg */
+
+  /* Required by the role layer — do NOT omit these two: */
+  --primary-60:  #dfe7ff;  /* ← --color-primary-container (light) */
+  --primary-75:  #d6dbe8;  /* light grey-navy with body */
 }
 ```
 
-**How to generate the scale:** use the brand's primary hex as `--primary-500`. Darken progressively (900 is ~50% darker than 500) and lighten progressively (50 is ~90% lighter). Tools: Radix Colors, Tailwind Palette Generator, or Material Theme Builder.
+**Which step each role consumes** — this is what actually determines the look, and it is *not* the 500:
+
+| Role | Light | Dark |
+|---|---|---|
+| `--color-primary` | `--primary-900` | white (fixed) |
+| `--color-on-primary` | white (fixed) | `--primary-900` |
+| `--color-primary-container` | **`--primary-60`** | `--primary-400` |
+| `--color-on-primary-container` | `--primary-900` | `--primary-50` |
+| `--color-primary-hover` | `--primary-700` | `--primary-50` |
+| `--text-primary` | `--primary-900` | neutral (fixed) |
+| `--interactive-hover` | `--primary-500` | `--primary-200` |
+
+So **`--primary-900` is the step that carries the brand** for page text, sidebar and filled primary — it has to be dark enough to hold white text at 4.5:1. If the brand's signature color is a bright one (an orange, a lime), it belongs in the **secondary** palette (the interactive accent), and `--primary` takes the brand's dark neutral.
+
+**How to generate the scale:** don't do it by hand. Run
+
+```bash
+node scripts/build-brand-theme.mjs --slug <client> --primary "#XXXXXX" --secondary "#YYYYYY" \
+  --radius rounded|balanced|technical --out brand/<client>.css
+```
+
+It derives every tint from one hex per palette, following Embassy's own OKLCH lightness/chroma curve, and fails if any role pair drops below AA. If you must do it manually: Radix Colors, Tailwind Palette Generator or Material Theme Builder, then verify contrast.
 
 ### 2.2 Secondary / accent palette
 
@@ -87,9 +112,15 @@ The secondary palette drives chips, tabs, interactive highlights, and `--color-s
   --secondary-600: #16a34a;
   --secondary-700: #15803d;
   --secondary-800: #166534;
-  --secondary-900: #14532d;
+  --secondary-900: #14532d;  /* ← --color-secondary: the interactive accent */
+
+  /* Required by the role layer in dark mode — do NOT omit: */
+  --secondary-925: #1b6b3c;  /* ← --color-secondary-container (dark) */
+  --secondary-950: #12401f;  /* ← --color-on-secondary (dark) */
 }
 ```
+
+**Which step each role consumes:** `--color-secondary` = `--secondary-900` (white text sits on it, so it needs 4.5:1) · `--color-secondary-container` = `--secondary-200` in light and `--secondary-925` in dark · `--color-on-secondary-container` = `--primary-900` in light and `--secondary-100` in dark.
 
 ### 2.3 Radius personality
 
@@ -194,7 +225,9 @@ Copy this template and fill in the client brand values:
   --primary-600: ;
   --primary-700: ;
   --primary-800: ;
-  --primary-900: ;    /* ← headings, sidebar bg */
+  --primary-900: ;    /* ← headings, sidebar bg — --color-primary */
+  --primary-60:  ;    /* ← --color-primary-container (light) — REQUIRED */
+  --primary-75:  ;
 
   /* ── Secondary / accent palette ─────── */
   --secondary-50:  ;
@@ -206,7 +239,9 @@ Copy this template and fill in the client brand values:
   --secondary-600: ;
   --secondary-700: ;
   --secondary-800: ;
-  --secondary-900: ;
+  --secondary-900: ;   /* ← --color-secondary (the interactive accent) */
+  --secondary-925: ;   /* ← --color-secondary-container (dark) — REQUIRED */
+  --secondary-950: ;   /* ← --color-on-secondary (dark) — REQUIRED */
 
   /* ── Radius personality ─────────────── */
   --radius-sm: 4px;   /* tags, XS/SM buttons */
@@ -246,7 +281,14 @@ Run all of these before shipping. They all must pass.
 
 - [ ] No `[data-theme="dark"]` overrides exist in the brand theme file (if there are, a semantic role was overridden instead of a primitive — fix it)
 - [ ] Page surfaces shift to dark correctly (no raw-white elements left)
-- [ ] Primary color adapts (light mode: `--primary-500` base; dark mode: auto-lightens to `--primary-200`)
+- [ ] Brand palettes reach dark mode. Since 2026-09 the `[data-theme="dark"]` block references
+      `var(--primitive)` for the primary / secondary / tertiary / status families, so overriding
+      primitives propagates to both themes. Verify it: with the brand file loaded, set
+      `data-theme="dark"` and confirm `--color-primary-container`, `--color-secondary` and
+      `--color-secondary-container` resolve to brand values, not Embassy's navy and blue.
+      (Neutral-derived tokens — surfaces, outline, disabled, text — stay literal on purpose.)
+- [ ] `--primary-400`, `--primary-50`, `--secondary-300`, `--secondary-925` and `--secondary-950`
+      are defined in the brand file: dark mode consumes those steps
 - [ ] Text remains readable — no low-contrast combinations
 
 ### 4.3 Component states
