@@ -21,12 +21,20 @@ en el working tree local (`component-rules/search.md`, `components/ui/carousel.t
 | `FAILURES.md` | Taxonomía de fallas compartida por `embassy-review` y `embassy-eval` | **raíz del repo** |
 | `scripts/build-public-api.mjs` | Genera `PUBLIC-API.md` y `public-api.json` desde `css/components/` + el manifest | `scripts/` |
 | `scripts/check-output.mjs` | Chequeos determinísticos sobre lo que un agente **produjo** (no sobre el DS) | `scripts/` |
-| `scripts/build-brand-theme.mjs` | Genera el tema de marca de un cliente desde un hex por paleta, con las curvas OKLCH de Embassy, y verifica contraste | **ya está en `scripts/`** — la copia de acá es redundante y se puede borrar |
 | `skills/embassy-start/` | El kickoff: 6 preguntas y el proyecto queda configurado (white-label incluido) | ídem |
-| `skills/embassy/` | Router del DS (reemplaza a `design-system`) + `references/decisiones.md` y `references/marca.md` | `skills/` del repo, y desde ahí al plugin `design` |
+| `skills/embassy/` | Router del DS (reemplaza a `design-system`) + `references/decisiones.md` | `skills/` del repo, y desde ahí al plugin `design` |
 | `skills/embassy-artifact/` | Entregables on-brand sin repo | ídem |
 | `skills/embassy-review/` | Auditoría con la taxonomía | ídem |
 | `skills/embassy-eval/` | El loop de medición + `scenarios/01-lista-coleccion.md` | ídem |
+
+## Qué se sacó por redundante (8-sep-2026)
+
+- **`skills/embassy/references/marca.md`** — era un subconjunto literal de `design.md` (las mismas
+  7 filas de logo, la misma voz, la misma estrategia de tema). Dos fuentes para lo mismo es
+  justamente el problema que este trabajo intenta cerrar. `embassy` ahora apunta a `design.md`,
+  igual que `embassy-artifact`.
+- **`scripts/build-brand-theme.mjs`** de esta carpeta — el canónico vive en `scripts/` del repo
+  desde el commit del fix de white-label. Eran byte-idénticos.
 
 ## Cómo probarlo ya mismo
 

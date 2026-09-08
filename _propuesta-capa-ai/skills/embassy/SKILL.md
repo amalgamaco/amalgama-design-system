@@ -129,8 +129,12 @@ python3 -c "import json;[print(c['id'],'—',c['summary'][:66]) for c in json.lo
 ```
 
 Los que más se confunden (buttons, search, select/menu/combobox/command, overlays, calendar,
-loading, toolbar) están resueltos en **`references/decisiones.md`**. La capa de marca —logo, voz,
-estrategia de tema— está en **`references/marca.md`** (no está en el repo).
+loading, toolbar) están resueltos en **`references/decisiones.md`** — es el atajo, no la fuente:
+ante cualquier duda gana `component-rules/<id>.md`.
+
+La **capa de marca** —logo, voz, estrategia de tema— no está en el código del repo: está en
+**`design.md`** de la raíz (§1 contexto y voz · §6.6 logo · §6.7 estrategia de tema). Es el mismo
+archivo que consume `embassy-artifact`, así que hay una sola fuente para las dos skills.
 
 ---
 
