@@ -100,7 +100,7 @@ motion:
 
 source:
   css: css/components/search.css
-  classes: [search-bar, search-bar-icon, search-bar-input, search-bar-trailing, search-bar-avatar, search-row, search-icon-btn, search-view, search-view-fullscreen, search-view-header, search-view-back, search-view-results, "search-field (toolbar.css)"]
+  classes: [search-bar, search-bar-icon, search-bar-input, search-bar-trailing, search-bar-avatar, search-row, search-icon-btn, search-view, search-view-fullscreen, search-view-header, search-view-back, search-view-results, search-field]
   react_wrapper: components/ui/search.tsx
   docs_anchor: c-search
 ---
