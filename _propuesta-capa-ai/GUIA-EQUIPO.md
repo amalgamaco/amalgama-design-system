@@ -41,16 +41,39 @@ No necesitás clonar nada. Las skills traen el Design System solas.
 
 En la app de Claude, botón **Add folder**, elegí la carpeta del proyecto. Puede estar vacía.
 
-### Paso 2 · Escribí esto **[todos]**
+### Paso 2 · Pedilo, en una frase **[todos]**
+
+**No hay una fórmula que memorizar.** Cualquiera de estas dos arranca exactamente lo mismo:
 
 ```
 /embassy-start
 ```
 
-O en tus palabras: *"necesito arrancar este proyecto con el Design System de Amalgama, white-label
-para Megatlón"*.
+```
+Necesito arrancar este proyecto con el Design System de Amalgama, white-label para Gamafit.
+```
 
-### Paso 3 · Respondé seis preguntas **[todos]**
+La única diferencia es si te hace las preguntas o ya se las respondiste. **Si tenés los datos a
+mano, pegalos de una y te ahorrás la ida y vuelta:**
+
+```
+Necesito arrancar este proyecto con el Design System de Amalgama, white-label.
+
+Cliente: Gamafit
+Stack: React / Next
+Superficie: dashboard
+Densidad: herramienta interna densa      ← cuán apretada es la UI, NO cuántos usuarios hay
+Idioma de la UI: español rioplatense
+Marca: primario #XXXXXX, acento #YYYYYY
+Forma: redondeada
+Tipografía: las de Embassy
+```
+
+> **La línea de «Densidad» es la que más se contesta mal.** No pregunta cuántos usuarios tiene el
+> negocio — eso no cambia ningún token. Pregunta en qué contexto se usa: herramienta interna densa,
+> producto consumer con targets grandes, o mixto. Eso sí define tamaños, targets táctiles y tema.
+
+### Paso 3 · Respondé lo que falte **[todos]**
 
 Vienen en dos tandas. **Un hex por paleta alcanza** — las diez tintas las genera el sistema.
 
@@ -156,11 +179,8 @@ Ordenado por el momento del proyecto en el que estás.
 
 | Momento | Skill | Por qué |
 |---|---|---|
-| Pantalla nueva desde cero | **`embassy`** | Decide qué es la pantalla antes de elegir componentes |
-| Rediseñar una que ya existe y no funciona | **`embassy`** | Mismo flujo: primero el diagnóstico, después el código |
-| Migrar una pantalla legacy a Embassy | **`embassy`** | Ídem — reorganiza, no re-skinea |
-| Antes de entregar, mergear o mostrar al cliente | **`embassy-review`** | Te dice qué está mal y con qué severidad. No toca nada |
-| «Esto no parece nuestro» y no sabés por qué | **`embassy-review`** | Traduce la sensación a hallazgos con nombre |
+| **Cualquier pantalla** — nueva, rediseño de una que no funciona, o migración de una legacy | **`embassy`** | Es el mismo trabajo con distinto punto de partida: primero decide qué es la pantalla, después la construye |
+| Antes de entregar, mergear o mostrar al cliente. O cuando algo «no parece nuestro» | **`embassy-review`** | Te dice qué está mal y con qué severidad. No toca nada |
 
 ### Cosas que no son producto
 

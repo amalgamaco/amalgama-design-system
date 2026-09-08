@@ -202,6 +202,22 @@ const pairs = [
   ["borde interactivo sobre fondo (no-texto)", S[900], SURFACE, 3.0, false],
 ];
 
+// Aviso de encaje: dónde va a caer realmente el color de marca.
+// En Embassy --color-primary = --primary-900 (texto de página, sidebar, relleno
+// primario), así que tiene que ser oscuro. Un hex de marca claro y vivo no entra
+// por ese lado: su lugar es --secondary, el acento interactivo.
+{
+  const { L: Lp } = rgbToOklch(hexToRgb(primaryHex));
+  if (Lp > 0.55) {
+    console.log(`
+⚠ El primary de marca (${primaryHex}) es claro (L=${Lp.toFixed(2)}). La rampa lo lleva a
+  ${P[900]} conservando el tono, porque --color-primary se usa para texto de página y sidebar
+  y necesita sostener texto blanco. El color vivo de la marca casi no va a aparecer por ahí.
+  Si la marca ES ese color vivo, pasalo como --secondary y usá de --primary un neutro
+  oscuro de la marca.`);
+  }
+}
+
 console.log("\nContraste (WCAG 2.1 AA)");
 let fails = 0, warns = 0;
 for (const [label, fg, bg, min, hard] of pairs) {
