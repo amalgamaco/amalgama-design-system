@@ -22,7 +22,7 @@ Embassy's layout is a fixed **app shell** (GOVERNANCE.md §14.1): a left `sideba
 
 Responsibilities are strict — do not blur them:
 
-- **Sidebar** — global, cross-section navigation only (Vacantes, Candidatos, Reportes). Uses the `.nav-item` chrome with the shared nav tokens (below). This is the *only* place `--color-primary` is used for an active nav state (GOVERNANCE.md §5.6); it lives in the shell chrome, not in `packages/ds` components.
+- **Sidebar** — global, cross-section navigation only (Vacantes, Candidatos, Reportes). Uses the `.nav-item` chrome with the shared nav tokens (below). This is the *only* place `--color-primary` is used for an active nav state (GOVERNANCE.md §5.6); it lives in the shell chrome (`css/layout.css`), not in the component layer.
 - **Topbar** — page context (title, breadcrumb) and *global* actions (search, profile, notifications). Never put a view-specific action here.
 - **View-scoped actions go in a `Toolbar`** (`toolbar.tsx`), not the topbar. A "Nueva vacante" button, list filters, and search over *this list* belong in a `Toolbar` above the list — composed of `SearchField` + `Select` + `ToolbarButton`, all at the same `min-h-10` row height. Use `PageHeader` (`page-header.tsx`) for the title + primary action row at the top of the view.
 
@@ -48,7 +48,7 @@ Use `Breadcrumb` (`breadcrumb.tsx`) to show location within a multi-level hierar
 
 ## Active / current state and the shared "blue hover"
 
-Every menu-like or navigation-like surface shares **one** hover/selected vocabulary so hover always reads **blue / light-blue, never neutral gray** (GOVERNANCE.md §5.4). This covers the app-shell `.nav-item`, `dropdown-menu.tsx`, `list.tsx`, and search result rows in `search.tsx`. The tokens (defined in `packages/ds/css/hover-tokens.css`, derived from the `secondary` accent) are:
+Every menu-like or navigation-like surface shares **one** hover/selected vocabulary so hover always reads **blue / light-blue, never neutral gray** (GOVERNANCE.md §5.4). This covers the app-shell `.nav-item`, `.dropdown-item` (`css/components/dropdown-menu.css`), `.list-item` (`css/components/list.css`), and `.search-view-result` (`css/components/search.css`). The tokens (the `--color-nav-*` family in `css/variables.css`, derived from the `secondary` accent) are:
 
 | Aspect | Token | Derivation |
 |---|---|---|
@@ -79,7 +79,7 @@ Below `--breakpoint-md` (768px) the sidebar becomes a **modal navigation drawer*
 - **Do** choose Tabs vs Segmented Button vs Select by role: peer views vs view-mode vs many-options.
 - **Do** style every nav/menu hover with the `--color-nav-*` tokens so hover reads blue.
 - **Don't** put a view-specific action (e.g. "Nueva vacante") in the topbar — it goes in the view's `Toolbar`/`PageHeader`.
-- **Don't** use `--color-primary` for a `packages/ds` selected state, or rely on color alone to show selection.
+- **Don't** use `--color-primary` for a component-level selected state — it is reserved for the app-shell active nav item — and don't rely on color alone to show selection.
 - **Don't** use a one-item Breadcrumb where a `Back Link` is meant, or a `Back Link` for primary navigation.
 - **Do** use the canonical modal navigation drawer below 768px (`layout.css` off-canvas sidebar + `.shell-menu-btn` + scrim); don't invent a different mobile nav.
 - **Don't** nest destinations more than ~3 levels deep; flatten the IA instead.

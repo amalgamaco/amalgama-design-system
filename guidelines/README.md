@@ -1,7 +1,7 @@
 # Embassy Playbook — Product Guidelines
 
 This directory is the **product-thinking layer** of the Amalgama Design System. Where
-`packages/ds` documents *what* components exist and `GOVERNANCE.md` documents *how they're
+`css/components/` and `component-rules/` document *what* components exist and `GOVERNANCE.md` documents *how they're
 built*, these guides document **how to build great product experiences with them** — the
 UX principles, laws, heuristics, and interaction patterns that should guide every new
 screen built with Embassy.

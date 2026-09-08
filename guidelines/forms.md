@@ -82,7 +82,7 @@ When validation does fail, make the fix effortless.
 - **Checkbox** — independent boolean choices, or "select all" in a list. Multiple can be on at once (recibir alertas por email + por push). Also the leading control for row selection in tables.
 - **RadioGroup** — exactly one choice from a small, visible set (2–5), e.g. tipo de contrato. If the set is long or space is tight, use `Select` instead; radios are for when seeing all options at once aids the decision.
 - **Switch** — an immediate on/off setting that takes effect on toggle (vacante visible / oculta). Do not use a Switch where the change only applies after a submit — that's a Checkbox.
-- Always pair these with a `Label` (`@amalgama/ds/label`) so the hit target includes the text and the control has an accessible name. Group a set of radios/checkboxes under a `fieldset`-style heading describing the choice.
+- Always pair these with a `.label` (`css/components/label.css`) so the hit target includes the text and the control has an accessible name. Group a set of radios/checkboxes under a `fieldset`-style heading describing the choice.
 
 ## Microcopy
 

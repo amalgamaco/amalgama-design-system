@@ -35,14 +35,14 @@ Create `brand/<client-slug>-theme.css`. Load it **after** `variables.css` and **
 <link rel="stylesheet" href="css/variables.css">
 <link rel="stylesheet" href="brand/<client-slug>-theme.css">   <!-- ← brand overrides here -->
 <link rel="stylesheet" href="css/base.css">
-<!-- Components are Tailwind: @import "@amalgama/ds/tailwind.theme.css" + copy the .tsx
-     (the buildless css/components layer was deleted in 2026-06) -->
+<link rel="stylesheet" href="css/layout.css">                  <!-- only for the app shell -->
+<link rel="stylesheet" href="css/components.css">
 ```
 
-> **Tailwind consumers** (canonical): white-labeling is identical — it overrides the **primitive
-> palette**, which both layers read. Load the brand override before the theme import
-> (`@import "brand/<client-slug>-theme.css"; @import "@amalgama/ds/tailwind.theme.css";`) or
-> redefine the primitives in `:root` after it. Components need no changes either way.
+> **React consumers**: identical. The optional wrappers in `components/ui/*.tsx` apply the same
+> flat classes and carry no styles of their own, so they read the brand override for free. What
+> matters is the load order above: the brand file goes after `variables.css` and before `base.css`.
+> Components need no changes either way.
 
 ---
 

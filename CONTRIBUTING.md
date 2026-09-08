@@ -196,9 +196,9 @@ Overview  |  Specs  |  Guidelines  |  Accessibility  |  Code
 
 ### 7.1 Non-breaking changes (variants, states, sizing)
 
-1. Read the component's current `.tsx` (`packages/ds/components/ui/<name>.tsx`) + docs before touching anything
+1. Read the component's current CSS (`css/components/<id>.css`) and its rule (`component-rules/<id>.md`) before touching anything
 2. Verify the change against GOVERNANCE.md — the change must comply with all rules in §§ 2–11
-3. Update the component `.tsx` (and its islands showcase, then rebuild the bundle)
+3. Update `css/components/<id>.css`, its `component-rules/<id>.md`, the optional wrapper, and the section in `index.html`
 4. Update `index.html` documentation to reflect the change
 5. If the change affects CLAUDE.md's component inventory table, update it
 
@@ -224,9 +224,10 @@ Run through GOVERNANCE.md §11 (the full audit checklist). Additionally:
 
 - [ ] The component has a clear proposal answering the questions in §2 above
 - [ ] The design was reviewed by at least one other designer
-- [ ] `packages/ds/components/ui/<name>.tsx` created, self-contained, with the header comment (incl. `Cuándo usar / Cuándo no`)
-- [ ] No prohibited patterns (§4.3): no raw hex, no arbitrary sizes/radii, no custom CSS class, no `css/components/*.css` file, classes merged via `cn()`
-- [ ] Dark mode tested manually: `data-theme="dark"` on `<html>`, all states readable (no `dark:` overrides)
+- [ ] `css/components/<id>.css` created, self-contained, with the mandatory header (incl. `Cuándo usar / Cuándo no / Uso:`)
+- [ ] `component-rules/<id>.md` written and the manifest regenerated
+- [ ] No prohibited patterns (§4.3): no raw hex, no loose px, no primitives, no per-theme overrides, no pill radius outside chip/badge/avatar
+- [ ] Dark mode tested manually: `data-theme="dark"` on `<html>`, all states readable (no per-theme overrides)
 - [ ] WCAG color contrast verified for all text/background combinations in the component
 - [ ] `index.html` has the 5-tab documentation section (+ islands showcase if interactive)
 - [ ] `CLAUDE.md` component inventory updated

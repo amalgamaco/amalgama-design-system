@@ -23,7 +23,7 @@ Map each edge to a component before you build the happy path.
 
 ## Empty states — never a blank void
 
-Use the `EmptyState` component (`@amalgama/ds/empty-state`: `icon` + `title` + `description` + `children` for a next-action slot). It centers content, renders the title in `font-heading text-heading-md` and the description in `text-body-lg text-fg-muted`, and reserves room for a CTA. An empty region must always be *helpful* and offer a clear next step — never an unexplained gap.
+Use the `.empty-state` component (`css/components/empty-state.css`: `.empty-state-icon` + `.empty-state-title` + `.empty-state-desc`, plus room for a next action). It centers content, renders the title with `--font-heading` at `--font-size-heading-md` and the description at `--font-size-body-lg` in `--text-secondary`, and reserves room for a CTA. An empty region must always be *helpful* and offer a clear next step — never an unexplained gap.
 
 There are three distinct empty states; they are not interchangeable:
 
@@ -33,17 +33,17 @@ There are three distinct empty states; they are not interchangeable:
 | **No-results** (filter/search miss) | Data exists but the current query/filter excludes it | Say what was searched, offer "Limpiar filtros" (`Button variant="tertiary"` or `text`). Do **not** show a "create" CTA here — the data already exists. |
 | **Error-empty** (fetch failed, nothing to show) | The list could not load at all | State the failure plainly and offer a **retry** action. |
 
-`PlaceholderPanel` (`@amalgama/ds/placeholder`) is a *different* tool: it is scaffolding for a section that is under construction or awaiting selection ("Selecciona una vacante para ver los detalles", "Próximamente"). Use `EmptyState` for "no data"; use `PlaceholderPanel` for "no content wired up here yet." Its header comment states this split explicitly.
+`.placeholder-panel` (`css/components/placeholder.css`) is a *different* tool: it is scaffolding for a section that is under construction or awaiting selection ("Selecciona una vacante para ver los detalles", "Próximamente"). Use `.empty-state` for "no data"; use `.placeholder-panel` for "no content wired up here yet." Its header comment states this split explicitly.
 
 ## Loading states
 
 ### Skeleton is the default for content-shaped waits
 
-When you know the *shape* of what is coming (a card grid, a table, a detail pane), render `Skeleton` (`@amalgama/ds/skeleton`) in that shape while the data loads. Variants: `text`, `title`, `card`. The shimmer runs on the `skeleton-shimmer` utility (a continuous `--ease-linear` loop, exempt from enter/exit motion tokens per GOVERNANCE §11.1a). Skeletons preserve layout, so the page does not jump when data arrives — **avoid layout shift** by matching the skeleton's dimensions to the real content.
+When you know the *shape* of what is coming (a card grid, a table, a detail pane), render `.skeleton` (`css/components/skeleton.css`) in that shape while the data loads. Variants: `.skeleton-text`, `.skeleton-title`, `.skeleton-card`, `.skeleton-circle`, `.skeleton-avatar`. The shimmer runs on the `skeleton-shimmer` utility (a continuous `--ease-linear` loop, exempt from enter/exit motion tokens per GOVERNANCE §11.1a). Skeletons preserve layout, so the page does not jump when data arrives — **avoid layout shift** by matching the skeleton's dimensions to the real content.
 
 ### Progress for actions, not content
 
-`Progress` (`@amalgama/ds/progress`) covers two shapes, both track = `--color-surface-variant`, indicator = `--color-primary`:
+`.progress` (`css/components/progress.css`) covers two shapes, both track = `--color-surface-variant`, indicator = `--color-primary`:
 
 - **Linear** (`<Progress />`) — a thin bar (`h-1`, `rounded-full`). Pass `value` (0–100) for determinate work (upload, multi-step import); pass `indeterminate` for "working, duration unknown."
 - **Circular** (`<CircularProgress />`) — SVG ring for compact/inline spots. `value` for determinate, `indeterminate` to spin a partial arc.
@@ -62,8 +62,8 @@ Whatever the loading affordance, set `aria-busy="true"` on the region and `point
 
 Handle errors at the screen level, not just per-request. Two components, chosen by persistence:
 
-- **`Alert`** (`@amalgama/ds/alert`; `Alert` / `AlertTitle` / `AlertDescription`, `role="alert"`, variant `error`) — **inline and persistent**. Use for blocking or standing errors that must stay visible until resolved: a form's validation summary, a "no se pudo guardar" banner above the form, a degraded-service notice. It sits in the page flow with `bg-error-container` / `text-on-error-container`.
-- **`Snackbar`** (`@amalgama/ds/sonner`, via `toast`) — **floating and ephemeral**. Use for transient failures where the context still works: `toast("No se pudo actualizar", { action: { label: "Reintentar", onClick: … } })`.
+- **`.alert`** (`css/components/alert.css`; `.alert-title` / `.alert-description`, `role="alert"`, variant `.alert-error`) — **inline and persistent**. Use for blocking or standing errors that must stay visible until resolved: a form's validation summary, a "no se pudo guardar" banner above the form, a degraded-service notice. It sits in the page flow with `--color-error-container` / `--color-on-error-container`.
+- **`.snackbar`** (`css/components/toast.css`) — **floating and ephemeral**. Use for transient failures where the context still works: `toast("No se pudo actualizar", { action: { label: "Reintentar", onClick: … } })`.
 
 Recovery principles:
 

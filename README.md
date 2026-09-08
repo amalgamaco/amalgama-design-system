@@ -57,7 +57,7 @@ amalgama-ds/
 ├── scripts/
 │   ├── validate-ds.mjs       # Validación automatizada (node scripts/validate-ds.mjs)
 │   ├── build-manifest.py     # Regenera component-rules/manifest.json desde los frontmatter
-│   └── sync-tokens.mjs       # (legacy Tailwind — no aplica en buildless)
+│   ├── build-brand-theme.mjs # Genera el tema de marca de un cliente desde un hex por paleta
 ├── docs/                     # Stubs de redirect a la SPA index.html
 ├── CLAUDE.md                 # Guía de consumo (humanos + IA)
 ├── AI-USAGE-GUIDE.md         # Cómo los agentes/skills consumen el DS

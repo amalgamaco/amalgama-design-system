@@ -85,7 +85,7 @@ Overlays must trap focus while open and return it on close — Embassy's Radix-b
 
 ## Labels & names (WCAG 4.1.2, 3.3.2)
 
-- **Every control has an accessible name** — a visible `<label>` (use the shared `Label` primitive, `@amalgama/ds/label`) or `aria-label`/`aria-labelledby`.
+- **Every control has an accessible name** — a visible `<label>` (use the shared `.label` primitive, `css/components/label.css`) or `aria-label`/`aria-labelledby`.
 - **Placeholder is not a label.** `Input`'s placeholder disappears on entry and often fails contrast — always pair a real label. Use the placeholder for format hints only ("dd/mm/aaaa").
 - **Icon-only buttons require `aria-label`** — an unlabeled `Button variant="icon"` is a defect.
 - Use **sentence case** for labels; keep names concise and matched to the visible text.
@@ -113,7 +113,7 @@ Content that changes without a reload must be announced:
 
 ## Motion & reduced motion (WCAG 2.3.3)
 
-- Embassy ships a global `@media (prefers-reduced-motion: reduce)` rule in `tailwind.theme.css` that near-zeroes animation/transition durations — inherited by any consumer of the theme.
+- Embassy ships a global `@media (prefers-reduced-motion: reduce)` rule in `css/base.css` that near-zeroes animation/transition durations — inherited by anything that loads the base layer. Never defeat it with `!important` or by ignoring the query from JS.
 - Don't defeat it with `!important` durations or JS-driven animation that ignores the query.
 - No content may flash more than **3 times per second** (WCAG 2.3.1). See `guidelines/motion.md` for the full motion contract.
 

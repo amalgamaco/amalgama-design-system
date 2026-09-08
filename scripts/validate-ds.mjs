@@ -176,21 +176,28 @@ console.log("\n[9] component-rules motion metadata");
 console.log("\n[10] restos de la arquitectura revertida (Tailwind / packages/ds)");
 {
   const patron = /@amalgama\/ds|packages\/ds|tailwind\.theme\.css|\bmd:grid|\blg:grid|hover-tokens\.css/i;
+  // Las menciones que EXPLICAN la reversión son legítimas y tienen que quedar
+  // (CLAUDE.md, README.md, DEPLOYMENT.md, GOVERNANCE.md las documentan a propósito).
+  // Solo interesan las que todavía INSTRUYEN a usar algo que no existe.
+  const historico = /revert|revertida|reverted|deleted|no existen|está vacío|esta vacio|post-revert|era Tailwind|Tailwind era|2026-07-17|Corregido 2026/i;
   const hits = [];
   const scan = (dir) => {
     for (const f of fs.readdirSync(path.join(ROOT, dir))) {
       if (!f.endsWith(".md")) continue;
       const rel = path.join(dir, f);
-      fs.readFileSync(path.join(ROOT, rel), "utf8").split("\n").forEach((l, i) => {
-        if (patron.test(l)) hits.push(`${rel}:${i + 1}`);
+      const lineas = fs.readFileSync(path.join(ROOT, rel), "utf8").split("\n");
+      lineas.forEach((l, i) => {
+        // La marca histórica puede estar en la línea siguiente (párrafos envueltos).
+        const ventana = lineas.slice(Math.max(0, i - 1), i + 3).join(" ");
+        if (patron.test(l) && !historico.test(ventana)) hits.push(`${rel}:${i + 1}`);
       });
     }
   };
   scan("guidelines");
   scan(".");
   hits.length
-    ? warn(`${hits.length} referencia(s) a packages/ds o utilidades Tailwind: ${hits.slice(0, 8).join(", ")}${hits.length > 8 ? ` …y ${hits.length - 8} más` : ""}`)
-    : ok("sin referencias a la arquitectura revertida");
+    ? warn(`${hits.length} doc(s) todavía instruyen usar packages/ds o utilidades Tailwind: ${hits.slice(0, 8).join(", ")}${hits.length > 8 ? ` …y ${hits.length - 8} más` : ""}`)
+    : ok("ningún doc instruye usar la arquitectura revertida (las menciones históricas se ignoran)");
 }
 
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
