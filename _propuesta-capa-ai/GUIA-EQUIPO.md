@@ -136,24 +136,93 @@ táctil, un botón de 30px es un botón que falla.
 
 ---
 
-## 5. El día a día
+## 5. Cuándo usar cada skill
 
-Abrís la carpeta del proyecto y escribís lo que necesitás. Para elegir hay **una sola pregunta:
-¿esto vive en el repo del producto?**
+Ordenado por el momento del proyecto en el que estás.
 
-| Quiero… | Escribo | Quién |
+### Antes de que el proyecto exista
+
+| Momento | Skill | Por qué |
 |---|---|---|
-| Armar o rediseñar una pantalla | `/embassy` | diseño + dev |
-| Una propuesta, un reporte, un one-pager | `/embassy-artifact` | todos |
-| Revisar antes de entregar o mergear | `/embassy-review` | todos |
-| Arrancar un proyecto | `/embassy-start` | todos |
+| Armar la propuesta comercial para ganarlo | **`embassy-artifact`** | Todavía no hay repo ni marca del cliente. Sale on-brand de Amalgama, sin clonar nada |
 
-`/embassy-artifact` es la única que no necesita el repo. Sirve para lo que no vive en un producto:
-una propuesta comercial, un reporte de proyecto, una página de resultados.
+### El día que arranca
+
+| Momento | Skill | Por qué |
+|---|---|---|
+| Configurar el proyecto por primera vez | **`embassy-start`** | Seis preguntas y queda listo. **Una sola vez por proyecto** |
+
+### Todos los días, construyendo
+
+| Momento | Skill | Por qué |
+|---|---|---|
+| Pantalla nueva desde cero | **`embassy`** | Decide qué es la pantalla antes de elegir componentes |
+| Rediseñar una que ya existe y no funciona | **`embassy`** | Mismo flujo: primero el diagnóstico, después el código |
+| Migrar una pantalla legacy a Embassy | **`embassy`** | Ídem — reorganiza, no re-skinea |
+| Antes de entregar, mergear o mostrar al cliente | **`embassy-review`** | Te dice qué está mal y con qué severidad. No toca nada |
+| «Esto no parece nuestro» y no sabés por qué | **`embassy-review`** | Traduce la sensación a hallazgos con nombre |
+
+### Cosas que no son producto
+
+| Momento | Skill | Por qué |
+|---|---|---|
+| Reporte de proyecto, one-pager, página de resultados, demo | **`embassy-artifact`** | No vive en un repo. No necesita el DS clonado |
+
+### Sobre el sistema, no sobre un proyecto
+
+| Momento | Skill | Por qué |
+|---|---|---|
+| Falta un componente y hay que agregarlo | **`embassy-contribute`** *(pendiente de escribir)* | CSS + regla + manifest + docs + validación |
+| Saber si el sistema mejoró después de un cambio | **`embassy-eval`** | Solo para los dueños del DS |
+
+### Los tres pares que se confunden
+
+**`embassy` vs `embassy-artifact`** — la pregunta es *¿esto vive en el repo de un producto?*
+Sí → `embassy`, que lee el detalle del componente en el repo.
+No → `embassy-artifact`, que trabaja con una lista acotada de clases y tiene prohibido leer el CSS.
+
+**`embassy` vs `embassy-review`** — *¿querés que cambie algo, o que te diga qué está mal?*
+`embassy` construye. `embassy-review` diagnostica y no toca nada. En un PR ajeno, review.
+
+**`embassy-start` vs `embassy`** — *¿es la primera vez en este proyecto?*
+`embassy-start` se corre una vez y configura. `embassy` se corre en cada pantalla, siempre.
+
+### Cuándo no usar ninguna
+
+- Preguntas sobre el sistema («¿qué componente uso para X?») — se contestan leyendo
+  `component-rules/` o el catálogo, sin skill.
+- Código que no es UI.
+- Cambiar un texto o un dato en una pantalla que ya está bien.
+
+### Cómo se disparan
+
+Dos formas:
+
+- **Por nombre:** escribís `/embassy` y arranca. Siempre funciona.
+- **Por lo que decís:** cada skill tiene una lista de frases que la activan. *"mejorá esta
+  pantalla"*, *"armá la vista de X"*, *"revisá esto antes de entregar"* disparan la que
+  corresponde, sin nombrarla.
+
+El disparo automático es una comodidad, no una garantía: depende de que tu frase se parezca a
+la descripción de la skill. **Si el trabajo importa, escribila con `/`.**
+
+**Cómo saber si se disparó:** se ve en la interfaz, arriba de la respuesta. Y en el contenido —
+si se cargó, Claude registra el commit del Design System y te dice qué componente eligió y por
+qué. Si te devuelve UI sin mencionar nada de eso, no se disparó: escribila con `/` y repetí.
 
 ---
 
-## 6. Por qué la UI sale clara y legible
+## 6. El día a día, en una línea
+
+La pregunta que rutea es siempre la misma: **¿esto vive en el repo del producto?**
+
+- **Sí** → `/embassy` para construir, `/embassy-review` antes de entregar.
+- **No** → `/embassy-artifact`.
+- **Primera vez en este proyecto** → `/embassy-start`.
+
+---
+
+## 7. Por qué la UI sale clara y legible
 
 No es estilo: son reglas que el sistema aplica solo. Conviene conocerlas para poder discutirlas.
 
@@ -179,7 +248,7 @@ Si algo de esto se rompe, `/embassy-review` lo nombra con su severidad y dice c�
 
 ---
 
-## 7. El loop: lo que nos hace trabajar como Vercel
+## 8. El loop: lo que nos hace trabajar como Vercel
 
 Esta es la parte que convierte "tenemos un design system" en "el design system mejora".
 
@@ -201,7 +270,7 @@ sistema y la próxima vez no vuelve a pasar.
 
 ---
 
-## 8. Cuando algo sale mal
+## 9. Cuando algo sale mal
 
 | Pasa esto | Hacé esto |
 |---|---|
@@ -213,7 +282,7 @@ sistema y la próxima vez no vuelve a pasar.
 
 ---
 
-## 9. Estado actual (septiembre 2026)
+## 10. Estado actual (septiembre 2026)
 
 Hoy está instalada **`/design:design-system`**, que hace lo de `embassy` pero en un solo archivo
 grande. Las cinco skills de esta guía están escritas y probadas en `_propuesta-capa-ai/`,
