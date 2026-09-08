@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nortia · preview de tema — Embassy</title>
+
+<!-- Orden de carga: tokens → marca → base → shell → componentes -->
+<link rel="stylesheet" href="../../css/variables.css">
+<link rel="stylesheet" href="nortia.css">
+<link rel="stylesheet" href="../../css/base.css">
+<link rel="stylesheet" href="../../css/layout.css">
+<link rel="stylesheet" href="../../css/components.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Solo andamiaje del preview. Ningún estilo de componente, ningún color literal. */
+  .pv-section { margin-bottom: var(--space-12); }
+  .pv-section > h2 {
+    font-family: var(--font-heading); font-size: var(--font-size-heading-lg);
+    color: var(--text-primary); margin: 0 0 var(--space-2);
+  }
+  .pv-section > p {
+    color: var(--text-secondary); font-size: var(--font-size-body-md);
+    margin: 0 0 var(--space-6); max-width: 68ch;
+  }
+  .pv-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+  .pv-grid { display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  .pv-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: var(--space-2); }
+  .pv-swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border); }
+  .pv-swatch i { display: block; height: 48px; }
+  .pv-swatch span {
+    display: block; padding: var(--space-2); font-family: var(--font-mono);
+    font-size: var(--font-size-mono-sm); color: var(--text-secondary); background: var(--card-bg);
+  }
+  .pv-note {
+    font-size: var(--font-size-caption); color: var(--text-muted);
+    margin-top: var(--space-3); font-style: normal;
+  }
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <!-- ─────────── Sidebar ─────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+      Nortia
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Operación</div>
+      <a class="nav-item active" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg> Envíos</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Clientes</a>
+      <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg> Reportes</a>
+      <div class="nav-section-label">Configuración</div>
+      <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg> Ajustes</a>
+    </nav>
+  </aside>
+
+  <div class="main">
+    <!-- ─────────── Topbar ─────────── -->
+    <header class="topbar">
+      <div class="topbar-breadcrumb"><a href="#">Nortia</a><span class="separator">/</span> Envíos</div>
+      <div class="toolbar-spacer"></div>
+      <label class="switch-label">
+        <input type="checkbox" role="switch" class="switch" id="theme-toggle">
+        Modo oscuro
+      </label>
+      <span class="avatar avatar-md"><span class="avatar-fallback">AB</span></span>
+    </header>
+
+    <main class="content">
+
+      <!-- ─────────── Encabezado + acción primaria ─────────── -->
+      <div class="page-header">
+        <h1 class="page-title">Envíos</h1>
+        <div class="header-actions">
+          <button class="btn-tertiary">Importar</button>
+          <button class="btn-primary">Nuevo envío</button>
+        </div>
+      </div>
+      <p class="pv-note" style="margin-bottom:var(--space-8)">
+        Una sola acción primaria. «Importar» es de menor prioridad y va outline, no tonal — si fuera
+        tonal competiría con la primaria y el ojo no encontraría la acción.
+      </p>
+
+      <!-- ─────────── KPIs ─────────── -->
+      <section class="pv-section">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Envíos activos</div>
+            <div class="stat-value">1.284</div>
+            <div class="stat-change stat-change-positive">+8,2% vs. mes anterior</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Demorados</div>
+            <div class="stat-value">37</div>
+            <div class="stat-change stat-change-negative">+14 vs. mes anterior</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Tiempo medio de entrega</div>
+            <div class="stat-value">2,4 d</div>
+            <div class="stat-change stat-change-neutral">sin cambios</div>
+          </div>
+        </div>
+        <p class="pv-note">Cada número lleva su comparador y su período. Un «+8,2%» sin base no dice nada.</p>
+      </section>
+
+      <!-- ─────────── Toolbar + tabla ─────────── -->
+      <section class="pv-section">
+        <h2>Colección</h2>
+        <p>Buscador, filtros, resultados y paginación alineados a la misma columna. El buscador filtra
+           esta lista, así que es un <code>search-field</code> dentro del toolbar — no una barra píldora centrada.</p>
+
+        <div class="toolbar">
+          <div class="search-field" role="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="search" placeholder="Buscar por destinatario o guía" aria-label="Buscar envíos">
+          </div>
+          <div class="toolbar-filters">
+            <div class="select-wrapper">
+              <select aria-label="Estado"><option>Todos los estados</option><option>En tránsito</option><option>Entregado</option></select>
+              <span class="select-caret">▾</span>
+            </div>
+            <div class="seg-btn-group seg-btn-group-sm">
+              <button class="seg-btn selected" aria-selected="true">Lista</button>
+              <button class="seg-btn" aria-selected="false">Mapa</button>
+            </div>
+          </div>
+          <div class="toolbar-actions">
+            <button class="toolbar-btn">Ordenar <span class="toolbar-btn-count">2</span></button>
+          </div>
+        </div>
+
+        <div class="result-count" aria-live="polite">Mostrando <strong>25</strong> de <strong>1.284</strong></div>
+
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>Guía</th><th>Destinatario</th><th>Estado</th><th>Ruta</th><th>Actualizado</th></tr>
+            </thead>
+            <tbody>
+              <tr class="clickable"><td>NX-40912</td><td>Farmacia del Puerto</td><td><span class="badge badge-active">En tránsito</span></td><td><span class="badge badge-tertiary">Zona norte</span></td><td>hace 12 min</td></tr>
+              <tr class="clickable"><td>NX-40908</td><td>Clínica Riolar</td><td><span class="badge badge-open">Preparando</span></td><td><span class="badge badge-tertiary">Centro</span></td><td>hace 40 min</td></tr>
+              <tr class="clickable"><td>NX-40887</td><td>Depósito Sur</td><td><span class="badge badge-warning">Demorado</span></td><td><span class="badge badge-tertiary">Zona sur</span></td><td>hace 3 h</td></tr>
+              <tr class="clickable"><td>NX-40851</td><td>Mercado Central</td><td><span class="badge badge-closed">Entregado</span></td><td><span class="badge badge-tertiary">Centro</span></td><td>ayer</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="pv-note">
+          La columna «Ruta» usa <code>badge</code>, no <code>chip</code>: es una etiqueta de solo
+          lectura, no un filtro que se pueda tocar. Es de los errores que el sistema marca solo.
+        </p>
+
+        <nav class="pagination" aria-label="Paginación">
+          <a class="pagination-prev" href="#">Anterior</a>
+          <ul class="pagination-list">
+            <li><a class="pagination-link is-active" href="#" aria-current="page">1</a></li>
+            <li><a class="pagination-link" href="#">2</a></li>
+            <li><a class="pagination-link" href="#">3</a></li>
+            <li><span class="pagination-ellipsis">…</span></li>
+            <li><a class="pagination-link" href="#">52</a></li>
+          </ul>
+          <a class="pagination-next" href="#">Siguiente</a>
+        </nav>
+      </section>
+
+      <!-- ─────────── Escala de botones ─────────── -->
+      <section class="pv-section">
+        <h2>Jerarquía de acciones</h2>
+        <p>Seis niveles. La marca aparece en el relleno de la primaria y en el foco; el resto baja de peso.</p>
+        <div class="pv-row">
+          <button class="btn-primary">Primary</button>
+          <button class="btn-elevated">Elevated</button>
+          <button class="btn-secondary">Secondary</button>
+          <button class="btn-tertiary">Tertiary</button>
+          <button class="btn-text">Text</button>
+          <button class="icon-btn" aria-label="Más opciones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+          <button class="btn-primary btn-danger">Eliminar</button>
+          <button class="btn-primary" disabled>Deshabilitado</button>
+        </div>
+      </section>
+
+      <!-- ─────────── Formulario ─────────── -->
+      <section class="pv-section">
+        <h2>Formulario</h2>
+        <div class="form-card">
+          <div class="form-card-title">Datos del envío</div>
+          <p class="form-card-desc">Los campos marcados son obligatorios.</p>
+          <div class="fields-grid">
+            <div class="field-group">
+              <label class="field-label">Destinatario <span class="field-required">*</span></label>
+              <input class="field-input" placeholder="Ej: Farmacia del Puerto">
+            </div>
+            <div class="field-group">
+              <label class="field-label">Zona</label>
+              <div class="select-wrapper">
+                <select><option>Zona norte</option><option>Centro</option><option>Zona sur</option></select>
+                <span class="select-caret">▾</span>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Peso declarado</label>
+              <input class="field-input is-error" value="—">
+              <span class="field-error-msg">Ingresá un peso en kilos.</span>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Referencia</label>
+              <input class="field-input" placeholder="Opcional">
+              <span class="field-hint">Aparece en el remito del cliente.</span>
+            </div>
+          </div>
+          <div class="pv-row" style="margin-top:var(--space-6)">
+            <label class="checkbox-label"><input type="checkbox" class="checkbox" checked> Notificar al destinatario</label>
+            <label class="switch-label"><input type="checkbox" role="switch" class="switch"> Envío prioritario</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────── Estados ─────────── -->
+      <section class="pv-section">
+        <h2>Estados</h2>
+        <p>Una pantalla sin estado vacío, de carga y de error no está terminada. Estos son los cuatro que más se olvidan.</p>
+        <div class="pv-grid">
+          <div>
+            <div class="alert alert-error" role="alert">
+              <div class="alert-body">
+                <div class="alert-title">No se pudo sincronizar</div>
+                <div class="alert-description">Reintentá en unos minutos. Los cambios locales se conservan.</div>
+              </div>
+            </div>
+            <div class="alert alert-info" role="alert" style="margin-top:var(--space-3)">
+              <div class="alert-body">
+                <div class="alert-title">Mantenimiento programado</div>
+                <div class="alert-description">Modo lectura el sábado de 2 a 4 am.</div>
+              </div>
+            </div>
+          </div>
+          <div class="empty-state">
+            <div class="empty-state-title">Sin resultados</div>
+            <p class="empty-state-desc">Ningún envío coincide con «depósito norte».</p>
+            <button class="btn-tertiary">Limpiar filtros</button>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">Cargando</div></div>
+            <div class="card-content" aria-busy="true">
+              <div class="skeleton skeleton-title" aria-hidden="true"></div>
+              <div class="skeleton skeleton-text" aria-hidden="true"></div>
+              <div class="skeleton skeleton-text" aria-hidden="true" style="width:70%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────── Paleta ─────────── -->
+      <section class="pv-section">
+        <h2>La paleta generada</h2>
+        <p>Las dos rampas salieron de un hex por paleta, siguiendo la curva de luminosidad de Embassy con
+           el tono de Nortia. Ninguna se escribió a mano.</p>
+
+        <h3 style="font-family:var(--font-heading);font-size:var(--font-size-heading-xs);color:var(--text-secondary);margin:var(--space-6) 0 var(--space-2)">Primary — texto de página, sidebar, relleno primario</h3>
+        <div class="pv-swatches">
+          <div class="pv-swatch"><i style="background:var(--primary-50)"></i><span>50</span></div>
+          <div class="pv-swatch"><i style="background:var(--primary-60)"></i><span>60</span></div>
+          <div class="pv-swatch"><i style="background:var(--primary-100)"></i><span>100</span></div>
+          <div class="pv-swatch"><i style="background:var(--primary-200)"></i><span>200</span></div>
+          <div class="pv-swatch"><i style="background:var(--primary-300)"></i><span>300</span></div>
+          <div class="pv-swatch"><i style="background:var(--primary-400)"></i><span>400</span></div>
+          <div class="pv-swatch"><i style="background:var(--primary-500)"></i><span>500</span></div>
+          <div class="pv-swatch"><i style="background:var(--primary-700)"></i><span>700</span></div>
+          <div class="pv-swatch"><i style="background:var(--primary-900)"></i><span>900</span></div>
+        </div>
+
+        <h3 style="font-family:var(--font-heading);font-size:var(--font-size-heading-xs);color:var(--text-secondary);margin:var(--space-6) 0 var(--space-2)">Secondary — acento interactivo, links, foco</h3>
+        <div class="pv-swatches">
+          <div class="pv-swatch"><i style="background:var(--secondary-100)"></i><span>100</span></div>
+          <div class="pv-swatch"><i style="background:var(--secondary-200)"></i><span>200</span></div>
+          <div class="pv-swatch"><i style="background:var(--secondary-300)"></i><span>300</span></div>
+          <div class="pv-swatch"><i style="background:var(--secondary-500)"></i><span>500</span></div>
+          <div class="pv-swatch"><i style="background:var(--secondary-700)"></i><span>700</span></div>
+          <div class="pv-swatch"><i style="background:var(--secondary-900)"></i><span>900</span></div>
+          <div class="pv-swatch"><i style="background:var(--secondary-925)"></i><span>925</span></div>
+          <div class="pv-swatch"><i style="background:var(--secondary-950)"></i><span>950</span></div>
+        </div>
+
+        <p class="pv-note">
+          Chequeo de contraste al generar: cinco pares pasan AA. Uno quedó en 3,26:1 — blanco sobre el
+          acento. Alcanza para texto grande y para componentes, no para texto normal. Embassy tiene el
+          mismo caso (3,58:1), así que no lo introdujo esta marca.
+        </p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // El toggle solo pone o saca data-theme. Ningún estilo por tema en esta página.
+  document.getElementById('theme-toggle').addEventListener('change', (e) => {
+    document.documentElement.toggleAttribute('data-theme', e.target.checked);
+    if (e.target.checked) document.documentElement.setAttribute('data-theme', 'dark');
+    else document.documentElement.removeAttribute('data-theme');
+  });
+</script>
+</body>
+</html>
