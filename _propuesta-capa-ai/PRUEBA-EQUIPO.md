@@ -287,10 +287,9 @@ real**. Los hexes de verdad rompen cosas que un cliente inventado no rompe.
 
 Para que no gastes tiempo en esto:
 
-- **Seis componentes no tienen regla escrita**: `back-link`, `create-form`, `date-picker`,
-  `description`, `page-header`, `placeholder`. Alrededor de esos seis la skill compone a ojo.
-- **`--color-on-secondary`** queda en 3.58:1 (blanco sobre el acento). Está bajo AA para texto
-  chico; es una decisión de diseño pendiente.
+- **`--color-on-secondary`** queda en 3.58:1. No lo usa ningún componente todavía —el par que sí
+  se usa da 12.16:1— así que es una trampa latente, no una falla activa. Queda por documentar la
+  restricción.
 - **El CDN sirve desde `@main`**, sin tag pineado.
 - **El loop de medición nunca se corrió.** Justamente por eso te estamos pidiendo esto.
 - **Si un comando "no existe", reiniciá Claude Code antes de reportarlo.** Los plugins se refrescan
