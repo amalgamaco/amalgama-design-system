@@ -49,6 +49,43 @@ const RAMPS = {
   ],
 };
 
+// Los tres ejes que se agregaron en sep-2026 para que dos productos white-label
+// no se distingan solo por el color. Cada uno tiene presets cerrados a propósito:
+// un valor libre por cliente es como el sistema se fractura.
+
+// Densidad — cuánto respira. Es el eje que más cambia la sensación, y funciona
+// porque los componentes consumen --space-* (291 valores tokenizados en sep-2026).
+// Los medios pasos escalan con el resto: si no, el interior de los componentes
+// quedaría inmune y la densidad no se sentiría donde más importa.
+const DENSITY = {
+  compacta:  { "0-5": 2, "1": 3,  "1-5": 5,  "2": 6,  "2-5": 8,  "3": 10, "3-5": 12, "4": 12, "5": 16, "6": 20, "8": 24, "10": 32, "12": 40, "16": 48, "20": 64 },
+  estandar:  { "0-5": 2, "1": 4,  "1-5": 6,  "2": 8,  "2-5": 10, "3": 12, "3-5": 14, "4": 16, "5": 20, "6": 24, "8": 32, "10": 40, "12": 48, "16": 64, "20": 80 },
+  amplia:    { "0-5": 2, "1": 4,  "1-5": 8,  "2": 10, "2-5": 12, "3": 16, "3-5": 18, "4": 20, "5": 24, "6": 32, "8": 40, "10": 52, "12": 64, "16": 80, "20": 96 },
+};
+
+// Elevación — cómo se separan las superficies. Sombra difusa se lee cálido y de
+// producto; borde nítido con sombra mínima se lee técnico y sostiene mejor la
+// densidad alta. No se mezclan: elegir uno es la decisión.
+const ELEVATION = {
+  sombra:  { sm: "0 1px 3px rgba(28,36,56,.06)",  md: "0 4px 16px rgba(28,36,56,.08)", lg: "0 8px 32px rgba(28,36,56,.12)" },
+  plana:   { sm: "0 0 0 1px rgba(28,36,56,.08)",  md: "0 1px 4px rgba(28,36,56,.06)",  lg: "0 2px 8px rgba(28,36,56,.08)"  },
+};
+
+// Movimiento — el ritmo. Sobrio no llama la atención sobre sí mismo y es lo que
+// quiere una herramienta de trabajo; expresivo tiene un rebote leve al entrar y
+// es lo que espera un producto de público. Las curvas ya existen en el sistema.
+const MOTION = {
+  sobrio:    { fast: 120, normal: 200, medium: 300, ease: "cubic-bezier(.4,0,.2,1)",      enter: "cubic-bezier(0,0,0,1)" },
+  expresivo: { fast: 160, normal: 260, medium: 380, ease: "cubic-bezier(.34,1.56,.64,1)", enter: "cubic-bezier(.175,.885,.32,1.4)" },
+};
+
+// Trazo de los íconos. Liviano se lee elegante, robusto se lee utilitario.
+const ICON_STROKE = { liviano: 1.5, estandar: 2, robusto: 2.5 };
+
+// El orden de emisión: la escala se lee de menor a mayor, con los medios pasos
+// intercalados donde corresponden y no apelotonados al final.
+const SPACE_ORDER = ["0-5", "1", "1-5", "2", "2-5", "3", "3-5", "4", "5", "6", "8", "10", "12", "16", "20"];
+
 const RADIUS = {
   rounded:   { sm: 6, md: 12, lg: 16, xl: 24 },
   balanced:  { sm: 4, md: 8,  lg: 12, xl: 16 },   // default Embassy
@@ -133,18 +170,38 @@ const slug = arg("slug");
 const primaryHex = arg("primary");
 const secondaryHex = arg("secondary", primaryHex);
 const radiusKey = arg("radius", "balanced");
+const densityKey = arg("density", "estandar");
+const elevationKey = arg("elevation", "sombra");
+const motionKey = arg("motion", "sobrio");
+const strokeKey = arg("icon-stroke", "estandar");
 const fontHeading = arg("font-heading");
 const fontBody = arg("font-body");
 
 if (!slug || !primaryHex) {
-  console.error("uso: node scripts/build-brand-theme.mjs --slug <cliente> --primary <#hex> [--secondary <#hex>] [--radius rounded|balanced|technical] [--font-heading X] [--font-body Y]");
+  console.error(`uso: node scripts/build-brand-theme.mjs --slug <cliente> --primary <#hex>
+       [--secondary <#hex>]
+       [--radius      rounded | balanced | technical]
+       [--density     compacta | estandar | amplia]
+       [--elevation   sombra | plana]
+       [--motion      sobrio | expresivo]
+       [--icon-stroke liviano | estandar | robusto]
+       [--font-heading X] [--font-body Y]`);
   process.exit(2);
 }
-if (!RADIUS[radiusKey]) { console.error(`--radius inválido: ${radiusKey}`); process.exit(2); }
+const bad = (n, k, o) => { if (!o[k]) { console.error(`--${n} inválido: ${k} — opciones: ${Object.keys(o).join(" | ")}`); process.exit(2); } };
+bad("radius", radiusKey, RADIUS);
+bad("density", densityKey, DENSITY);
+bad("elevation", elevationKey, ELEVATION);
+bad("motion", motionKey, MOTION);
+bad("icon-stroke", strokeKey, ICON_STROKE);
 
 const P = buildRamp("primary", primaryHex);
 const S = buildRamp("secondary", secondaryHex);
 const R = RADIUS[radiusKey];
+const D = DENSITY[densityKey];
+const E = ELEVATION[elevationKey];
+const M = MOTION[motionKey];
+const K = ICON_STROKE[strokeKey];
 
 const line = (k, v) => `  --${k}:${" ".repeat(Math.max(1, 18 - k.length))}${v};`;
 
@@ -171,6 +228,24 @@ ${Object.entries(S).map(([s, v]) => line(`secondary-${s}`, v)).join("\n")}
   --radius-lg: ${R.lg}px;
   --radius-xl: ${R.xl}px;
   /* --radius-full: 9999px  ← nunca se overridea */
+
+  /* ── Densidad (${densityKey}) ── */
+${SPACE_ORDER.map((k) => `  --space-${k}:${" ".repeat(Math.max(1, 8 - k.length))}${String(D[k]).padStart(2)}px;`).join("\n")}
+
+  /* ── Elevación (${elevationKey}) ── */
+  --shadow-sm: ${E.sm};
+  --shadow-md: ${E.md};
+  --shadow-lg: ${E.lg};
+
+  /* ── Movimiento (${motionKey}) ── */
+  --duration-fast:   ${M.fast}ms;
+  --duration-normal: ${M.normal}ms;
+  --duration-medium: ${M.medium}ms;
+  --ease-default:    ${M.ease};
+  --ease-enter:      ${M.enter};
+
+  /* ── Íconos (${strokeKey}) ── */
+  --icon-stroke: ${K};
 ${fontHeading || fontBody ? `
   /* ── Tipografía ── */${fontHeading ? `
   --font-heading: '${fontHeading}', sans-serif;` : ""}${fontBody ? `

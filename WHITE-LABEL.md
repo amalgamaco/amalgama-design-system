@@ -150,6 +150,39 @@ Radius is the single most impactful change for "brand feel":
 
 `--radius-full` (9999px) should never be overridden — it is reserved for pills and avatars and must remain circular regardless of brand.
 
+### 2.35 Product personality — density, elevation, motion, icon weight
+
+Colour, type and radius make two products look different. These four make them
+*feel* different, and they are what stops every white-label build reading as the
+same product in a new palette. Each is a **closed set of presets**: a free value
+per client is how a design system fragments.
+
+| Axis | Presets | What it changes | Pick by |
+|---|---|---|---|
+| **Density** | `compacta` · `estandar` · `amplia` | The whole `--space-*` scale, half-steps included | Who uses it daily. Staff tools earn `compacta`; consumer products earn `amplia` |
+| **Elevation** | `sombra` · `plana` | `--shadow-sm/md/lg` | How surfaces separate. Diffuse shadow reads warm and product-like; a crisp hairline with almost no shadow reads technical and holds up better at high density |
+| **Motion** | `sobrio` · `expresivo` | `--duration-*` and `--ease-default/enter` | `sobrio` never draws attention to itself, which is what a work tool wants. `expresivo` has a slight overshoot on entry, which is what a consumer product expects |
+| **Icon weight** | `liviano` · `estandar` · `robusto` | `--icon-stroke` | 1.5 reads light and elegant, 2.5 reads sturdy and utilitarian |
+
+Density is the one that moves the needle most, and it only works because the
+components consume `--space-*` — 291 declarations were tokenized in September
+2026 precisely so this axis could exist. The half-steps (`--space-0-5`, `-1-5`,
+`-2-5`, `-3-5`) scale with the rest on purpose: leave them fixed and component
+interiors stay immune, which is exactly where density is felt.
+
+```bash
+node scripts/build-brand-theme.mjs --slug nortia --primary "#14524A" --secondary "#0E9F6E" \
+  --radius rounded --density compacta --elevation plana --motion sobrio --icon-stroke robusto
+```
+
+Every axis defaults to the value already in `variables.css`, so a theme that
+names none of them renders exactly as Embassy does today.
+
+**Two combinations to avoid.** `amplia` + `plana` leaves surfaces floating with
+nothing separating them — pick one source of separation. And `compacta` +
+`expresivo` puts bouncy motion on a dense work tool, where it reads as noise
+rather than personality.
+
 ### 2.4 Typography
 
 Override fonts only if you have a valid license for the client's typefaces and they can be loaded via Google Fonts or a self-hosted @font-face:
