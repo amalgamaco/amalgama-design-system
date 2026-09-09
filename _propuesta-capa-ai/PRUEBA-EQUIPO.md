@@ -69,6 +69,10 @@ pregunte usando estos datos, que son los mismos para todos:
 > del negocio** (recepción y entrenadores) · sobre todo en **computadora** · es **una aplicación con
 > varias secciones y su propio menú** · en español · color oscuro **#14524A**, color vivo **#0E9F6E** ·
 > esquinas **redondeadas** · las tipografías de Amalgama
+>
+> Y en las cuatro últimas (aire, tarjetas, movimiento, íconos): **aceptá lo que te recomiende,
+> salvo el aire, donde elegís espacioso**. Así todos terminamos con el mismo producto y de paso
+> probamos que apartarse de la recomendación funcione.
 
 Chequeá mientras tanto:
 
@@ -84,8 +88,9 @@ Chequeá mientras tanto:
       venir con una opción **ya recomendada** y el motivo en media línea (para Nortia debería
       recomendar compacto · borde nítido · sobrio · gruesos, porque lo usa el personal del negocio
       en computadora). Si te las tira sin recomendación, o directamente no te las hace, anotalo.
-- [ ] **Elegí a propósito algo distinto de lo recomendado** en una de las cuatro — por ejemplo
-      espacioso en vez de compacto. Tiene que aceptarlo y que se note en el resultado.
+- [ ] **Al elegir espacioso en vez de compacto**, tiene que aceptarlo sin discutir, y el
+      resultado tiene que verse más aireado que el de alguien que dejó la recomendación. Comparalo
+      con la pantalla de otra persona del equipo.
 
 ### 1.3 · Qué tiene que quedarte en la carpeta
 
@@ -169,6 +174,10 @@ Los usuarios entran mayormente a buscar a una persona puntual.
 - [ ] **Están los estados**: vacío, cargando, error, sin resultados. Que falten es la falla que más
       se repite.
 - [ ] **Nada de `<input placeholder="Buscar">`** suelto.
+- [ ] **El item del menú que está seleccionado no puede ser del mismo color que un botón
+      secundario.** Hasta septiembre salían idénticos —los dos usaban el mismo token— y se
+      arregló: el menú se queda con el color de la marca y el botón secundario es neutro, gris con
+      un borde. Si los ves iguales otra vez, **reportalo**.
 - [ ] **Achicá la ventana hasta el ancho de un celular** (375px). No tiene que aparecer scroll
       horizontal, y los botones y el menú tienen que agrandarse para el dedo. Encontramos las dos
       fallas en septiembre construyendo un dashboard de verdad; si volvieron, queremos saberlo.
