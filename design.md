@@ -205,7 +205,9 @@ Funcional, nunca decorativo. **No inventes `cubic-bezier()` ni milisegundos crud
   el expresivo. Si una transición mezcla ambos, separalos por propiedad.
 - El único transform de hover aprobado en botones es `translateY(-1px)`.
 - Animá solo `transform` y `opacity`. Respetá `prefers-reduced-motion` siempre — nunca lo anules
-  con `!important` ni ignorándolo desde JS.
+  con `!important` ni ignorándolo desde JS. **Y no lo re-implementes:** `base.css` ya trae el bloque
+  que neutraliza transiciones y animaciones. Un `* { transition-duration: 1ms !important }` propio
+  encima no agrega nada y pisa el que sí sabe qué componentes tienen que seguir moviéndose.
 
 ### 6.6 Logo
 
@@ -223,6 +225,24 @@ transparente:
 | `amalgama-logo-white-text-white-icon.svg` | monocromo blanco, fondos oscuros |
 | `amalgama-icon-{blue,navy,white}.svg` | solo ícono — favicons, avatares, acentos cuadrados |
 | `amalgama-wordmark-{blue,navy,white}.svg` | solo wordmark |
+
+**Para que el logo acompañe el modo oscuro, mirá `data-theme`, no `prefers-color-scheme`.** El tema
+en Embassy lo maneja el atributo en `<html>`, así que un `<picture>` con `media="(prefers-color-scheme: dark)"`
+se queda en la variante equivocada cada vez que alguien cambia el tema a mano. Poné las dos y dejá
+que el tema elija:
+
+```html
+<img class="logo logo-light" src="…/amalgama-logo-navy-text-blue-icon.svg" alt="Amalgama">
+<img class="logo logo-dark"  src="…/amalgama-logo-white-text-blue-icon.svg" alt="" aria-hidden="true">
+```
+```css
+.logo-dark { display: none; }
+[data-theme="dark"] .logo-light { display: none; }
+[data-theme="dark"] .logo-dark  { display: block; }
+```
+
+Es la única excepción razonable a "no escribas reglas por tema": no estás recalibrando tokens, estás
+eligiendo entre dos archivos distintos.
 
 Sin variantes con fondo incrustado: si hace falta un fondo, dibujalo con CSS (token navy, esquinas
 redondeadas, padding) y poné el SVG transparente encima. Nunca estirar, recolorear, sombrear ni
@@ -307,6 +327,14 @@ Nombro los que aparecen una y otra vez. Si tu página tiene alguno, sacalo antes
 14. **Full-bleed sin ancho máximo** en un monitor ancho: líneas de más de ~120 caracteres.
 15. **Solo el happy path.** Sin estado vacío, de carga ni de error, la página no está terminada.
 16. **Copy de relleno** — "Bienvenido a nuestra plataforma", "Impulsá tu negocio", "Descubrí más".
+17. **Todos los estados visibles a la vez.** Incluirlos es obligatorio; mostrarlos juntos es un
+    defecto. El que no corresponde va en el markup con `hidden` y lo prende el runtime. Un alert de
+    error arriba de los resultados cargados, o un snackbar clavado sobre la tabla, es esto.
+18. **La clase de un componente contenedor puesta en su hijo.** `.search-field`, `.select-wrapper`,
+    `.field-input-wrapper` y compañía envuelven; no se le ponen al `<input>` ni al `<select>`. Si lo
+    hacés, perdés el ícono, el anillo de foco y el `flex` que hace que el campo crezca — y después
+    aparece una utilidad inventada para compensarlo, que es el segundo síntoma del mismo error. El
+    markup exacto de cada uno está en `PUBLIC-API.md`: copialo de ahí en vez de deducirlo del nombre.
 
 Y una pregunta para el final: **¿qué superficie, borde, píldora, ícono, label, color, párrafo o
 sección se puede sacar sin perder significado?** Sacala.

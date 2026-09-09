@@ -42,7 +42,7 @@ Lo que decide si es mejor es la revisión humana, y ahí el resultado es otro.
 | `B3` | `class="search-field"` puesta en el `<input>` en vez del `<div>` que lo envuelve | guiada | El markup canónico es `<div class="search-field"><i…><input></div>`. Con la clase en el input se pierden la lupa y el anillo de foco |
 | `D4` | El toolbar no es una fila: la búsqueda quedó a la izquierda, los tres filtros apilados a la derecha, y el contador flotando abajo, fuera del toolbar | guiada | Hay un hueco vertical grande entre el título y la tabla |
 | *(nueva)* | El alert de error, el snackbar y la tabla visibles **al mismo tiempo** | guiada | Los estados estaban en el HTML pero sin ocultar. Un reclutador ve "no pudimos cargar las vacantes" arriba de las vacantes cargadas |
-| *(nueva)* | `<img>` de logo rota | guiada | Apunta a un asset que no existe |
+| ~~*(nueva)*~~ | ~~`<img>` de logo rota~~ | — | **Descartada: era un error de medición.** El logo apunta al S3 de Amalgama y el navegador con el que saqué el screenshot no tenía salida a internet. No es una falla del output |
 
 El baseline, en cambio, **se ve bien**: el toolbar es una fila coherente, los chips de estado
 funcionan, la tabla está prolija. Sus fallas son de sistema (todo hardcodeado, `role="search"`

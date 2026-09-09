@@ -1,0 +1,13 @@
+! public-api.json no encontrado — se saltea B1. Corré: node scripts/build-public-api.mjs
+[A6 · BLOQ] 01-lista-coleccion.html:77 — override por tema
+    prefers-color-scheme
+[G3 · BLOQ] 01-lista-coleccion.html:65 — prefers-reduced-motion anulado
+    prefers-reduced-motion: reduce) {
+    * { animation-duration
+[G1 · ALTA] 01-lista-coleccion.html:66 — cubic-bezier o ms crudos en vez de tokens
+    animation-duration: 1ms
+[G1 · ALTA] 01-lista-coleccion.html:66 — cubic-bezier o ms crudos en vez de tokens
+    transition-duration: 1ms
+
+BLOQUEANTES 2 · ALTAS 2 · MEDIAS 0 · BAJAS 0 · total 4
+Lo que no se puede chequear acá (jerarquía, layout, estados, copy, contraste) lo juzga embassy-review.
