@@ -229,7 +229,7 @@ en dos minutos.
 **¿Puedo usar esto en un proyecto que ya existe?**
 Sí. Si el proyecto ya tiene sus propios tokens, se usan esos.
 
-Para un proyecto grande y entero hay un agente dedicado, `design-system-implementer`. **Ojo con qué
+Para un proyecto grande y entero hay un agente dedicado, `embassy:rollout`. **Ojo con qué
 hace**: migra tokens y componentes, o sea que el proyecto pasa a *verse* como Amalgama. No rediseña
 las pantallas. Al terminar te deja una lista de las que necesitan más que eso, ordenada de peor a
 mejor, y esas las agarrás de a una con `/embassy:screen`.

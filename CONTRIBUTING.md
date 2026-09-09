@@ -214,7 +214,8 @@ Breaking changes require:
 
 - Old class stays for at least one release cycle with a deprecation comment
 - `CLAUDE.md` and `MIGRATION.md` must be updated to reflect the new name
-- The `/design-system` skill's SKILL.md may also need updating
+- The `screen` skill may also need updating — it lives in `amalgamaco/claude-code-plugins`
+  (`plugins/embassy/skills/screen/SKILL.md`), not here; see `_propuesta-capa-ai/SKILLS.md`
 
 ---
 

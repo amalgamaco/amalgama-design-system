@@ -49,7 +49,7 @@ de trabajo de tres carriles según quién trabaja y con qué acceso.
 | Contratos | `GOVERNANCE.md` (1.326 líneas), `TOKENS.md`, `MIGRATION.md`, `WHITE-LABEL.md`, `CONTRIBUTING.md`, `AI-USAGE-GUIDE.md`, `GAMAFORCE-MIGRATION.md` | ~200 KB |
 | Docs humana | `index.html` (SPA) | 2,4 MB |
 | Validación | `scripts/validate-ds.mjs` (9 chequeos), `build-manifest.py` | corre en verde |
-| Capa de agentes | **1 skill** (`design:design-system` (el nombre viejo), 455 líneas) + **1 agente** (`design-system-implementer`) + 1 reference (`screen-patterns.md`, 639 líneas) | — |
+| Capa de agentes | **1 skill** (`design:design-system` (el nombre viejo), 455 líneas) + **1 agente** (`embassy:rollout`) + 1 reference (`screen-patterns.md`, 639 líneas) | — |
 | Distribución | CSS servido por jsDelivr desde `@main` | sin pin de versión |
 
 ### 2.2 Lo que está muy bien (y hay que defender)
@@ -328,7 +328,7 @@ node scripts/validate-ds.mjs  +  lint/typecheck/test del proyecto
   └─ screen report (qué se movió, qué variante y por qué)
 ```
 
-Para un rollout completo sobre un proyecto existente, el agente `design-system-implementer` sigue
+Para un rollout completo sobre un proyecto existente, el agente `embassy:rollout` sigue
 siendo la herramienta correcta; `embassy` es para una pantalla.
 
 ### Carril B — Artefacto (una sola vez, sin repo)

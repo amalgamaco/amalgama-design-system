@@ -120,7 +120,7 @@ for these structured sources.**
 | Screen patterns & UX (IA, hierarchy, forms, tables, dashboards, states, motion, a11y, copy) | `guidelines/*.md` (start at `guidelines/README.md`) |
 | Applying the DS to an existing product (transformation rules) | `MIGRATION.md` (+ the project-specific `GAMAFORCE-MIGRATION.md`) |
 | Cross-component consistency, token rules, audit checklist | `GOVERNANCE.md` |
-| Load order, brand layer, consuming as artifact / React / existing project | `CLAUDE.md`, `skills/design-system/SKILL.md` |
+| Load order, brand layer, consuming as artifact / React / existing project | `CLAUDE.md`, `WHITE-LABEL.md`, `design.md` |
 
 **Do NOT** read or cite `docs/*.html` (retired redirect stubs) and **do NOT** reverse-engineer
 rules from `index.html` markup. The structured sources above are the contract.
@@ -207,7 +207,7 @@ and the per-component `common_mistakes`.
 These workflows generate whole artifacts/decks, usually as fresh output with no existing
 token layer. Pull three layers from the repo — **never hardcode from memory**:
 
-1. **Brand layer** (not in component code — from `skills/design-system/SKILL.md` §8):
+1. **Brand layer** (not in component code — from `design.md` §6, at the repo root):
    logo variant chosen by background (light backgrounds → navy wordmark + blue icon;
    dark/navy → mono white or mono blue; square accents → icon-only), voice/tone (direct,
    action-oriented; product UI in rioplatense Spanish, outward marketing in English), and

@@ -53,7 +53,6 @@ amalgama-ds/
 │   ├── README.md             # Schema + cómo lo consumen los skills
 │   └── INDEX.md              # Cobertura (61/61)
 ├── guidelines/               # Playbook UX (13 .md): principios, IA, jerarquía, forms, tablas, nav, estados, motion, a11y…
-├── skills/design-system/     # SKILL.md — instrucciones para el skill de IA
 ├── scripts/
 │   ├── validate-ds.mjs       # Validación automatizada (node scripts/validate-ds.mjs)
 │   ├── build-manifest.py     # Regenera component-rules/manifest.json desde los frontmatter

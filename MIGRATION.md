@@ -1,6 +1,6 @@
 # MIGRATION.md — Applying Embassy to an existing product
 
-This file is the **reverse-mapping contract** for restyling or rebuilding an existing product (legacy screens, external platforms) with the Amalgama Design System. It is written for AI agents (the `/design-system` skill and the `design-system-implementer` agent) and humans doing migrations.
+This file is the **reverse-mapping contract** for restyling or rebuilding an existing product (legacy screens, external platforms) with the Amalgama Design System. It is written for AI agents (the `/embassy:screen` skill and the `embassy:rollout` agent) and humans doing migrations.
 
 CLAUDE.md tells you how to *build with* the DS. This file tells you how to *transform into* the DS. Read both before touching legacy code. **DS rules win over visual fidelity to the legacy design — always.**
 
