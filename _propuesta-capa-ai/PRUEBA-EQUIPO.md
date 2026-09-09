@@ -1,329 +1,110 @@
-# Probemos el flujo — protocolo para el equipo
+# Probalo vos
 
-**Qué te pedimos:** 45 minutos, una vez, y que anotes lo que salió mal. Hay 10 minutos más al final, opcionales.
+**Qué te pedimos:** una hora, una vez, y que nos cuentes qué te molestó.
 
-No estamos pidiendo que confirmes que funciona. Estamos pidiendo que **rompas cosas**: las skills
-están construidas y revisadas, pero **nadie midió todavía si las pantallas salen mejor que antes**.
-Tus hallazgos son el primer número que vamos a tener.
+No hace falta que sigas una checklist ni que sepas nada del Design System. La idea es que uses el
+chat como lo usarías un martes cualquiera y que lo que salga mal, salga mal solo. Eso es lo que
+queremos saber.
 
-Si algo te sale mal, **eso es el resultado útil**. Un "anduvo todo" sin detalles no nos dice nada.
-
----
-
-## Antes de arrancar (5 min)
-
-1. **Instalá el plugin `embassy`** desde el marketplace de Amalgama.
-2. **Desinstalá el plugin `design` de Amalgama**, el viejo. Quedó vacío de novedades y solo
-   confunde. *(Hasta septiembre nuestro plugin se llamaba `design`, igual que uno de Anthropic. Los
-   dos peleaban por el mismo nombre y según la máquina te respondía uno u otro.)*
-3. **Cerrá y reabrí Claude Code.** El plugin se refresca al arrancar.
-4. Escribí `/embassy:` y confirmá que aparecen. Deberían estar `start`, `screen`, `artifact`,
-   `review` y `eval`.
-
-> `break` y `explain` pueden no figurar en el listado: son de invocación explícita a propósito.
-> Escribí `/embassy:break` entero y fijate si te lo toma. Si te lo toma, están.
-
-**Si algo de esto falla, pará acá y avisá.** No sigas: el resto de la prueba no significa nada con
-el plugin mal instalado.
+Si algo te resultó confuso, aunque no sepas explicar por qué, **eso también cuenta**. Sobre todo
+eso.
 
 ---
 
-# Prueba 0 · La puerta de entrada (2 min)
+## Antes de arrancar
 
-En una carpeta cualquiera, escribí solamente:
+1. Instalá el plugin **`embassy`** desde el marketplace de Amalgama.
+2. Si tenés uno viejo llamado **`design`**, desinstalalo.
+3. **Cerrá y reabrí Claude Code.** Los plugins se refrescan al arrancar, y si no lo hacés vas a
+   pensar que faltan comandos que en realidad están.
+4. Escribí `/embassy:` y fijate que aparezcan `start`, `screen`, `artifact`, `review` y `eval`.
+
+> `break` y `explain` pueden no figurar en la lista: se invocan escribiendo el comando entero.
+
+Si algo de esto no funciona, avisá y pará acá.
+
+---
+
+## 1 · Arrancá un proyecto
+
+Creá una carpeta vacía en cualquier lado y hacé **Add folder** sobre esa carpeta.
+
+> Nunca sobre la carpeta del Design System. El DS no se abre, se consume.
+
+Escribí solamente esto:
 
 ```
 /embassy:start
 ```
 
-Sin decir nada más. Como no le diste contexto, tiene que preguntarte qué necesitás.
+**Sin pegar datos ni explicar nada.** Te va a ir preguntando de a una. Contestá como si fuera un
+cliente tuyo — inventá el que quieras, o usá este si no tenés ganas de pensar:
 
-- [ ] Te ofrece opciones planteadas como situaciones, no una lista de nombres de comandos.
-- [ ] Elegís una que **no** sea "arrancar un proyecto" y **arranca esa otra skill** — no te contesta
-      "ahora escribí `/embassy:screen`". Si te devuelve el comando en vez de ejecutarlo,
-      **reportalo**: es el punto de toda la skill.
+> Un gimnasio que se llama **Nortia**. Lo usa la gente de recepción, desde la computadora. Los
+> colores son un verde oscuro `#14524A` y un verde vivo `#0E9F6E`. Esquinas redondeadas.
 
----
+Sobre el final te va a preguntar cuatro cosas más: cuánto aire querés entre las cosas, cómo se
+separan las tarjetas del fondo, cómo se mueve la interfaz y qué tan gruesos son los íconos. Cada
+una viene con una recomendación puesta; podés dejarla o cambiarla.
 
-# Prueba 1 · Arrancar un proyecto white-label (15 min)
-
-**Usá el mismo cliente inventado que todos** — así podemos comparar resultados entre personas.
-
-### 1.1 · Carpeta nueva
-
-Creá una carpeta vacía en cualquier lado. En Claude, **Add folder** sobre **esa** carpeta.
-
-> ⚠️ **Nunca sobre la carpeta del Design System.** El DS no se abre, se consume. Este es el error
-> más común y arruina la prueba entera.
-
-### 1.2 · Escribí solo esto
-
-```
-/embassy:start
-```
-
-**Sin pegar ningún dato.** Queremos probar justamente que te vaya guiando. Contestá lo que te
-pregunte usando estos datos, que son los mismos para todos:
-
-> Es para un cliente, **Nortia** · lo construye alguien a mano, con HTML y CSS · lo usa **la gente
-> del negocio** (recepción y entrenadores) · sobre todo en **computadora** · es **una aplicación con
-> varias secciones y su propio menú** · en español · color oscuro **#14524A**, color vivo **#0E9F6E** ·
-> esquinas **redondeadas** · las tipografías de Amalgama
->
-> Y en las cuatro últimas (aire, tarjetas, movimiento, íconos): **aceptá lo que te recomiende,
-> salvo el aire, donde elegís espacioso**. Así todos terminamos con el mismo producto y de paso
-> probamos que apartarse de la recomendación funcione.
-
-Chequeá mientras tanto:
-
-- [ ] Pregunta **de a una**, no todas juntas.
-- [ ] Las opciones se entienden **sin saber nada del design system**. Si tenés que adivinar qué
-      significa una palabra, **anotalo** — esa pregunta está mal escrita.
-- [ ] Si decís "no sé", sigue igual con un default en vez de trabarse.
-- [ ] **Te pregunta en qué dispositivo se usa.** Si no lo pregunta, es una falla: de ahí salen los
-      tamaños táctiles.
-- [ ] Lo que puede averiguar mirando la carpeta **no te lo pregunta**.
-- [ ] **Al final te hace cuatro preguntas más**, después de las de marca: cuánto aire, cómo se
-      separan las tarjetas, cómo se mueve y qué tan gruesos son los íconos. Cada una tiene que
-      venir con una opción **ya recomendada** y el motivo en media línea (para Nortia debería
-      recomendar compacto · borde nítido · sobrio · gruesos, porque lo usa el personal del negocio
-      en computadora). Si te las tira sin recomendación, o directamente no te las hace, anotalo.
-- [ ] **Al elegir espacioso en vez de compacto**, tiene que aceptarlo sin discutir, y el
-      resultado tiene que verse más aireado que el de alguien que dejó la recomendación. Comparalo
-      con la pantalla de otra persona del equipo.
-
-### 1.3 · Qué tiene que quedarte en la carpeta
-
-```
-brand/nortia.css      ← la marca del cliente
-DESIGN.md             ← qué se decidió, para quién es, y qué quedó pendiente
-design/               ← vacía por ahora
-theme-preview.html    ← para mostrar y aprobar
-CLAUDE.md             ← le dice al agente qué usar
-index.html            ← el layout base
-```
-
-### 1.4 · La prueba que importa: el toggle de dark
-
-Abrí `theme-preview.html` y **cambiá a oscuro**.
-
-| Qué ves | Qué significa |
-|---|---|
-| Los verdes de Nortia siguen ahí, y el fondo es un **negro verdoso** | ✅ El white-label funciona de punta a punta |
-| Los verdes están pero el fondo es el **negro azulado** de Amalgama | ❌ No se generaron las superficies de oscuro — **reportalo** |
-| En oscuro vuelven los colores de Amalgama | ❌ **Falla grave — reportala ya** |
-
-> El último caso es un bug que arrastramos meses y se arregló en septiembre. Si volvió,
-> queremos saberlo el mismo día. El del medio es más sutil y por eso está acá: el negro de
-> Embassy no es neutro, es azul, y si las superficies no se tiñen todos los clientes se ven
-> iguales en oscuro. Poné las dos pantallas al lado y comparalas contra un producto Amalgama.
-
-### 1.5 · Chequeá también
-
-- [ ] Abrí `DESIGN.md`: tiene que decir **para quién es, en qué dispositivo y si el menú es
-      nuestro** — las tres respuestas que diste. Si no están, las pantallas después no las van a
-      tener en cuenta.
-- [ ] `DESIGN.md` dice qué quedó **pendiente**, no solo qué se hizo.
-- [ ] Abrí `brand/nortia.css`: además de los colores tiene que haber **espaciados, sombras,
-      tiempos de animación y grosor de íconos**, y tienen que coincidir con lo que elegiste en las
-      preguntas 10 a 13. Si solo tiene colores, tus respuestas quedaron en el chat y no se
-      aplicaron — **reportalo**.
-- [ ] Al final de ese mismo archivo tiene que haber un bloque `[data-theme="dark"]` con las
-      superficies oscuras teñidas del color de la marca.
-- [ ] No te preguntó por modo oscuro ni por tamaños de tipografía. Esos ya están decididos.
-- [ ] **Al terminar te ofrece armar la primera pantalla.** Si te deja sin próximo paso, anotalo.
+Cuando termine, abrí el **`theme-preview.html`** que te dejó y pasalo a modo oscuro.
 
 ---
 
-# Prueba 2 · Una pantalla (15 min) — la prueba principal
+## 2 · Hacé una pantalla
 
-Esta es la que más nos interesa, porque es el problema original: **la skill cambiaba los
-componentes pero no el sentido de la pantalla.**
-
-### 2.1 · En la misma carpeta, pegá esto
+En la misma carpeta:
 
 ```
 /embassy:screen
 
 Armá la vista de listado de socios. Se puede filtrar por estado y por plan.
-La acción principal es dar de alta un socio nuevo.
-Los usuarios entran mayormente a buscar a una persona puntual.
+La acción principal es dar de alta un socio nuevo. Los usuarios entran
+mayormente a buscar a una persona puntual.
 ```
 
-### 2.2 · Antes del código tiene que haber un diagnóstico
-
-**Esto es lo que estamos probando.** El output tiene que traer, *antes* de cualquier markup:
-
-- El **encuadre**: objetivo · objeto · acciones · patrón · responsive · estados
-- Los **problemas**, cada uno citando la ley que rompe (Hick, Fitts, Miller, Nielsen…)
-- La lista de **movimientos**: qué se resecuencia, agrupa, mueve, reemplaza o elimina, y por qué
-- El **commit del DS** con el que trabajó
-
-| Qué recibís | Veredicto |
-|---|---|
-| Diagnóstico con leyes nombradas + movimientos + después el código | ✅ Funcionando |
-| Una pantalla linda y ningún diagnóstico | ❌ **La skill no se disparó, o falló. Reportalo.** |
-| Diagnóstico donde todos los "movimientos" son de color o de componente | ❌ **Es un re-skin disfrazado. Reportalo — es el bug original.** |
-
-### 2.3 · Sobre el resultado, chequeá lo obvio
-
-- [ ] **Una sola acción primaria.** Si hay dos botones que compiten, falta jerarquía.
-- [ ] **El buscador es un `search-field` dentro del toolbar**, no una barra píldora centrada. Filtra
-      una lista de esta pantalla, así que va en el toolbar.
-- [ ] **No hay ningún color a mano.** Buscá un `#` en el código: si aparece un hex suelto, es falla.
-- [ ] **Están los estados**: vacío, cargando, error, sin resultados. Que falten es la falla que más
-      se repite.
-- [ ] **Nada de `<input placeholder="Buscar">`** suelto.
-- [ ] **El item del menú que está seleccionado no puede ser del mismo color que un botón
-      secundario.** Hasta septiembre salían idénticos —los dos usaban el mismo token— y se
-      arregló: el menú se queda con el color de la marca y el botón secundario es neutro, gris con
-      un borde. Si los ves iguales otra vez, **reportalo**.
-- [ ] **Achicá la ventana hasta el ancho de un celular** (375px). No tiene que aparecer scroll
-      horizontal, y los botones y el menú tienen que agrandarse para el dedo. Encontramos las dos
-      fallas en septiembre construyendo un dashboard de verdad; si volvieron, queremos saberlo.
-- [ ] **Si la tabla tiene números** (importes, cantidades, porcentajes), van alineados a la
-      derecha, no a la izquierda como el texto.
-- [ ] **Apareció un archivo nuevo en `design/`** con el diagnóstico, y `DESIGN.md` lo lista. Si el
-      diagnóstico quedó solo en el chat, se pierde al cerrar la pestaña — **reportalo**.
-- [ ] **Al terminar te ofrece revisarla** antes de mandarla. Si te deja sin próximo paso, anotalo.
-
-### 2.4 · Ahora rompela a propósito
-
-Pedile algo mal y fijate si te frena:
-
-```
-Poné el botón de "Dar de alta" y el de "Importar" los dos como acción principal,
-y usá el color #3A5BB0 para el header.
-```
-
-**Tiene que negarse o corregirte**, explicando que hay una sola primaria por contexto y que el color
-sale de tokens. Si te lo hace sin chistar, **reportalo** — es la falla más importante que podés
-encontrar.
+Miralo como mirarías el trabajo de alguien del equipo.
 
 ---
 
-# Prueba 3 · Un entregable sin repo (5 min)
+## 3 · Contanos
 
-Carpeta cualquiera, no hace falta que tenga nada:
+Las únicas preguntas que nos importan:
 
-```
-/embassy:artifact
+- **¿Se lo mandarías a un cliente?** Si no, ¿qué le falta o qué le sobra?
+- **¿Alguna pregunta no se entendió?** Copiala tal cual. Si tuviste que adivinar qué significaba
+  una palabra, esa pregunta está mal escrita y la reescribimos.
+- **¿Te trabaste en algún momento?** Dónde y con qué.
+- **¿Algo se ve mal?** Un color raro, texto que no se lee, algo desalineado, la pantalla en el
+  celular. Un screenshot alcanza.
+- **¿Te dijo que sí a algo que debería haber frenado?** Por ejemplo si le pedís dos botones
+  principales o un color a mano, tendría que corregirte.
 
-Armá un one-pager con los resultados del último trimestre de un proyecto
-imaginario: 3 métricas, un gráfico y las próximas tres prioridades.
-```
-
-- [ ] Sale un HTML solo, que abre y se ve on-brand.
-- [ ] **No clonó ningún repo.** Si te pidió clonar, es falla: esta skill trabaja por URL.
-- [ ] Los colores son de Amalgama, no inventados.
-- [ ] **Al terminar te ofrece revisarlo** antes de que lo mandes.
-
----
-
-# Prueba 4 · Auditar algo que ya existe (5 min)
-
-Agarrá **una pantalla real de un proyecto tuyo** —la que quieras, cuanto más vieja mejor— y pegale:
-
-```
-/embassy:review
-
-<pegá acá el HTML, o el link, o un screenshot>
-```
-
-- [ ] Devuelve hallazgos con **ID de falla, severidad y la regla** que los justifica.
-- [ ] **No te arregla nada sin permiso.** Diagnostica; si te reescribe el código de una, es falla.
-- [ ] Pero **sí te ofrece arreglarlo** al final ("¿las arreglo?"). Diagnosticar y desaparecer te
-      deja a mitad de camino — si no te lo ofrece, anotalo.
-- [ ] Los hallazgos son ciertos. Si te marca cosas que están bien, **eso es un falso positivo y lo
-      queremos saber** — ya encontramos cuatro así.
+Mandale lo que encuentres a Ana, con el prompt que usaste y un screenshot. No hace falta que lo
+clasifiques ni que propongas el arreglo: eso lo hacemos nosotros, y se arregla en el sistema, no en
+tu proyecto.
 
 ---
 
-# Prueba 5 · Las tres que nadie probó todavía (10 min, opcional)
+## Si te sobran ganas
 
-Si te sobra tiempo, estas son las que menos ojos tuvieron encima.
+Cualquiera de estas tres suma, y ninguna lleva más de diez minutos:
 
-### 5a · ¿El componente aguanta?
-
-En la carpeta de Nortia:
-
-```
-/embassy:break
-
-Probá el select con contenido real.
-```
-
-- [ ] Te deja **una página** con el mismo componente repetido en muchas situaciones, no una lista de
-      texto.
-- [ ] Incluye **la marca de Nortia en claro y en oscuro**. Ese eje va siempre.
-- [ ] Te dice qué se rompió y **quién tiene la regla** que lo arregla. No lo arregla solo.
-
-### 5b · ¿Cómo hicieron esto?
-
-Buscá cualquier web que te guste y pegale el link:
-
-```
-/embassy:explain
-
-<el link> — ¿cómo está hecha esta animación / este gradiente?
-```
-
-- [ ] Distingue lo que **midió** de lo que está **suponiendo**. Si te tira números sin aclarar de
-      dónde salen, es falla.
-- [ ] Termina diciendo **si se puede con Embassy**: ya existe · se compone · es un gap · choca con
-      el sistema.
-- [ ] **No te cierra con un bloque de código para copiar.** Eso trae valores de otra página que no
-      son nuestros.
-
-### 5c · Migrar un proyecto entero
-
-**Solo si tenés un proyecto viejo a mano y ganas.** Es la más larga.
-
-```
-Migrá este proyecto entero a Embassy.
-```
-
-- [ ] Te muestra un **plan por fases** y espera que apruebes antes de tocar nada.
-- [ ] Al terminar dice, con todas las letras, que **migró tokens y componentes y no rediseñó
-      ninguna pantalla**. Si te deja creer que arregló la UX, es la falla más grave de esta prueba.
-- [ ] Te deja una **lista de pantallas** que necesitan rediseño, ordenada de peor a mejor.
+- **Repetilo con un cliente real tuyo y su marca real.** Es lo que más sirve: los colores de verdad
+  rompen cosas que un cliente inventado no rompe.
+- **Pegale una pantalla vieja tuya a `/embassy:review`** y fijate si lo que te marca es cierto. Si
+  te marca algo que está bien, queremos saberlo.
+- **Pedile un one-pager con `/embassy:artifact`**, sin repo ni carpeta de por medio.
 
 ---
 
-# Cómo reportar
+## Lo que ya sabemos
 
-Copiá esta plantilla y completala. Una por prueba que haya fallado.
+Para que no gastes tiempo escribiéndolo:
 
-```
-[Prueba N · qué skill] título corto de lo que pasó
-
-  Qué pedí:    (el prompt, tal cual lo pegaste)
-  Qué esperaba:
-  Qué pasó:
-  Evidencia:   (el pedazo de output, el archivo, o un screenshot)
-  Commit DS:   (lo dice el output de la skill)
-```
-
-**Mandalo a Ana.** Cada hallazgo se clasifica en la taxonomía de `FAILURES.md` del repo del DS
-(grupos A a I: tokens, selección de componente, jerarquía, layout, estados, accesibilidad, motion,
-reflejos de diseño generado, proceso) y se arregla **en el sistema**, no en tu proyecto.
-
-Si te sobra tiempo, la joya es esta: **repetí la Prueba 2 con un cliente real tuyo y su marca
-real**. Los hexes de verdad rompen cosas que un cliente inventado no rompe.
-
----
-
-# Lo que ya sabemos que está flojo — no hace falta reportarlo
-
-Para que no gastes tiempo en esto:
-
-- **El loop de medición ya tiene su primer número**, pero uno solo: escenario 01, corrida
-  `runs/20260909-2100`. Faltan los otros seis escenarios. Lo tuyo sigue siendo lo que más aporta:
-  el baseline es sintético y vos vas a usar esto con un cliente de verdad.
-- **La composición es lo flojo, no los tokens.** En esa corrida la pantalla guiada no tenía ni un
-  color a mano, pero el toolbar quedó partido en dos y los estados salieron todos visibles a la
-  vez. Si ves algo así, reportalo aunque el código parezca impecable: es justo lo que el chequeo
-  automático no ve.
+- **Lo flojo es la composición, no los colores.** Medimos una pantalla generada con el DS y no
+  tenía un solo color a mano, pero el toolbar quedó partido en dos y los mensajes de error
+  aparecían encima de los resultados. Si ves algo así, contalo igual —queremos saber cuánto pasa—
+  pero no te sorprendas.
 - **Si un comando "no existe", reiniciá Claude Code antes de reportarlo.** Los plugins se refrescan
-  al arrancar; una skill nueva no aparece hasta entonces. Nos pasó y perdimos un rato buscando un
-  bug que no estaba.
+  al arrancar y una skill nueva no aparece hasta entonces.

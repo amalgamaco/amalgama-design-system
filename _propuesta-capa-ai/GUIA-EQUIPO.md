@@ -13,8 +13,8 @@ tenés que saber ningún comando de antemano** — y cuando termina una cosa, te
 
 El resto de esta página es para cuando quieras entender el mapa completo, o buscar algo puntual.
 
-> **¿Querés probarlo antes de usarlo con un cliente?** `PRUEBA-EQUIPO.md` es un protocolo de 45
-> minutos con casos concretos y qué esperar en cada uno.
+> **¿Querés probarlo antes de usarlo con un cliente?** `PRUEBA-EQUIPO.md` te lleva de la mano por
+> un proyecto de punta a punta, en una hora, con un cliente inventado.
 
 ---
 
