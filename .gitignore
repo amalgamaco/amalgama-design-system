@@ -16,3 +16,12 @@ phase-a-patches.json
 phase-b-batch1.json
 phase-b-batch2.json
 specs-svg-audit.json
+
+# Carpetas de trabajo local — deliberadamente fuera del repo (2026-09).
+# "Claude outputs/": entregables sueltos y registros de sesión (borradores de PR,
+# patches rescatados, previews). Ojo: tiene copias de GUIA-EQUIPO.md y
+# PRUEBA-EQUIPO.md que YA divergieron de las versionadas en _propuesta-capa-ai/ —
+# esas dos son la fuente, no las copias de acá.
+# "_proyecto-org/": instrucciones de proyecto y los .md generados por sus scripts.
+Claude outputs/
+_proyecto-org/
