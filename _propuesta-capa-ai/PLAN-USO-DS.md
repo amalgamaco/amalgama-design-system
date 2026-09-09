@@ -43,10 +43,10 @@ distintos y ritmos de cambio distintos.
 
 **La capa 2 vive hoy en un repo distinto al de la capa 1**, y hay que decidirlo explícitamente
 (§9.6). El plugin `embassy` se sincroniza desde `amalgamaco/claude-code-plugins`, **no** desde el repo
-del design system. El repo del DS tiene además una carpeta `skills/` con una copia congelada: 341
-líneas contra las 455 del plugin instalado. Dos copias, un solo nombre, y **la que la gente usa es la
-del plugin**. Mientras siga así, cualquier cambio a la skill hay que hacerlo en el repo de plugins —
-el repo del DS no la distribuye.
+del design system. Hasta septiembre el repo del DS tenía además una carpeta `skills/` con una copia
+congelada (341 líneas contra las 455 del plugin instalado): dos copias, un solo nombre, y la que la
+gente usaba era la del plugin. Esa copia **ya se borró**, así que hoy hay una sola. Cualquier cambio
+a una skill se hace en el repo de plugins — el repo del DS no las distribuye.
 
 **La capa 3 nunca modifica la capa 1.** Un proyecto no edita componentes ni roles semánticos: solo
 sobreescribe **primitivas** (`--primary-500`, `--radius-md`, `--font-body`). Es lo que ya define
