@@ -84,15 +84,41 @@ mantienen para no romper links viejos, no son páginas reales.
 
 ## Consumidores externos por CDN
 
-Artifacts y proyectos que no clonan el repo pueden linkear los tokens vía jsDelivr:
+Artifacts y proyectos que no clonan el repo linkean los tokens vía jsDelivr, **contra un tag**:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/variables.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/variables.css">
 ```
 
-jsDelivr cachea agresivamente (hasta ~7 días) contra `@main`. Después de tocar
-`css/variables.css`, purgá: `https://purge.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/variables.css`.
-Esto es independiente del sitio de docs, que no pasa por jsDelivr.
+`@main` en un entregable significa que una pantalla que el cliente ya aprobó puede cambiar de
+aspecto porque alguien mergeó algo un martes. Un tag lo congela. jsDelivr además cachea un tag
+para siempre, así que no hay que purgar nada.
+
+### Releases
+
+La regla en una línea: **lo que se entrega pinea, las skills leen `main`.**
+
+| Quién | Contra qué | Por qué |
+|---|---|---|
+| El HTML de un proyecto o un artifact | `@v<x.y.z>` | Lo entregado no cambia solo |
+| Las skills, leyendo `design.md`, `PUBLIC-API.md`, `public-api.json` | `main` | El criterio conviene tenerlo al día, y no viaja con el entregable |
+| El sitio de docs | el repo | No pasa por jsDelivr |
+
+Para sacar una versión:
+
+```bash
+node scripts/build-public-api.mjs      # el manifiesto tiene que estar al día
+git tag -a v1.1.0 -m "qué cambió, en una línea"
+git push origin v1.1.0
+```
+
+Cuándo sube cada número: **patch** si es un arreglo que no cambia cómo se ve nada (un contraste
+que ya estaba mal, un bug de cascada); **minor** si hay componentes o tokens nuevos, o si algo se
+ve distinto a propósito; **major** si un proyecto que actualiza tiene que tocar su código.
+
+Después del tag, actualizá el número en `scripts/build-public-api.mjs` y en las dos skills que
+emiten HTML (`screen`, `artifact`) — si no, los proyectos nuevos siguen naciendo en la versión
+vieja. Los proyectos que ya existen suben cuando alguien decide subirlos, que es el punto.
 
 ---
 

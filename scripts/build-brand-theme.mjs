@@ -234,6 +234,26 @@ bad("icon-stroke", strokeKey, ICON_STROKE);
 
 const P = buildRamp("primary", primaryHex);
 const S = buildRamp("secondary", secondaryHex);
+
+// El acento tiene que sostener texto oscuro a 4.5:1 — --color-on-secondary es primary-900
+// desde sep-2026 (blanco encima de un acento vivo no llega a AA en ninguna marca). Algunos
+// tonos, sobre todo los rojos, quedan a centésimas: un rosa fuerte dio 4.47:1. En vez de
+// rechazar la marca por 0.03, bajamos la luminosidad del 900 en pasos chicos hasta que
+// pase. Es la misma clase de ajuste que ya hace la rampa, que tampoco usa el hex tal cual.
+let accentAdjust = null;
+{
+  const { H, C } = rgbToOklch(hexToRgb(S[900]));
+  let L = rgbToOklch(hexToRgb(S[900])).L;
+  const L0 = L;
+  // Más claro, no más oscuro: el texto encima es oscuro, así que subir la luminosidad del
+  // acento es lo que abre el contraste. (Lo escribí al revés la primera vez y el chequeo lo
+  // agarró: bajando la L el par empeoraba hasta 2.09:1.)
+  while (contrast(P[900], S[900]) < 4.5 && L < 0.80) {
+    L += 0.005;
+    S[900] = toHexInGamut({ L, C, H });
+  }
+  if (L !== L0) accentAdjust = { from: L0, to: L, hex: S[900] };
+}
 const R = RADIUS[radiusKey];
 const D = DENSITY[densityKey];
 const E = ELEVATION[elevationKey];
@@ -327,9 +347,10 @@ const pairs = [
   ["--color-on-primary (blanco) sobre --color-primary", WHITE, P[900], 4.5, true],
   ["--color-on-primary-container sobre --color-primary-container", P[900], P[60], 4.5, true],
   ["--color-on-secondary-container sobre --color-secondary-container", P[900], S[200], 4.5, true],
-  // Embassy mismo está en 3.58:1 acá (blanco sobre #4F80FF): es una deuda del sistema,
-  // no algo que introduzca la marca del cliente. Por eso avisa y no bloquea.
-  ["--color-on-secondary (blanco) sobre --color-secondary", WHITE, S[900], 4.5, false],
+  // Hasta sep-2026 este par era blanco sobre el acento y daba 3.58:1 en Embassy — se
+  // avisaba y no bloqueaba, porque ningún componente lo usaba. Ahora --color-on-secondary
+  // es primary-900 (texto oscuro), así que el par pasa AA en cualquier marca y sí bloquea.
+  ["--color-on-secondary (texto oscuro) sobre --color-secondary", P[900], S[900], 4.5, true],
   ["borde interactivo sobre fondo (no-texto)", S[900], SURFACE, 3.0, false],
   // Dark: los tres grises de texto sobre las superficies ya teñidas con el tono de
   // la marca. Rehuear conserva la L, así que esto se mueve centésimas — pero es
@@ -358,6 +379,14 @@ const pairs = [
   }
 }
 
+if (accentAdjust) {
+  console.log(`
+· Aclaré el acento de L=${accentAdjust.from.toFixed(3)} a L=${accentAdjust.to.toFixed(3)} (${accentAdjust.hex})
+  para que el texto encima llegue a 4.5:1. Es un ajuste de luminosidad: el tono de la marca
+  se mantiene. Si el cliente necesita el hex exacto, va como color de acento decorativo y el
+  texto encima no se usa.`);
+}
+
 console.log("\nContraste (WCAG 2.1 AA)");
 let fails = 0, warns = 0;
 for (const [label, fg, bg, min, hard] of pairs) {
@@ -370,9 +399,7 @@ for (const [label, fg, bg, min, hard] of pairs) {
 if (warns) {
   console.log(`
 ! ${warns} par(es) por debajo del umbral de texto normal pero por encima de 3:1 — sirven para texto
-  grande y para componentes de interfaz, no para body text. El acento de Embassy tiene el mismo
-  problema (3.58:1), así que no lo introdujo esta marca. Si el acento va a llevar texto normal
-  encima, oscurecelo o poné texto oscuro.`);
+  grande y para componentes de interfaz, no para body text.`);
 }
 
 console.log(`

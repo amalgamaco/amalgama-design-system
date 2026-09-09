@@ -140,7 +140,12 @@
   --color-primary-hover:             var(--primary-700);
   /* Secondary · Agile Blue */
   --color-secondary:                 var(--secondary-900);
-  --color-on-secondary:              var(--neutral-white);
+  /* Texto oscuro, no blanco. El acento en claro es un color vivo y saturado: blanco
+     encima da 3.58:1 en Embassy y 3.26:1 en un verde de marca, o sea por debajo de AA
+     para texto normal. Con primary-900 da 4.79:1 en Embassy y 5.11:1 en Nortia, y
+     escala a cualquier marca porque el 900 de la rampa siempre es el paso más oscuro.
+     En dark el rol ya usa secondary-950 sobre secondary-300 (6.45:1) y no cambia. */
+  --color-on-secondary:              var(--primary-900);
   /* Container = secondary-200 + on = primary navy: el botón/chip Secondary
      (tonal) se diferencia del Primary por inversión (claro + texto navy). */
   --color-secondary-container:       var(--secondary-200);
@@ -570,7 +575,7 @@
   --color-on-primary-container:      var(--primary-900);         /* #01164D */
   --color-primary-hover:             var(--primary-700);         /* #162F6F */
   --color-secondary:                 var(--secondary-900);       /* #4F80FF */
-  --color-on-secondary:              #FFFFFF;                    /* neutral-white */
+  --color-on-secondary:              var(--primary-900);        /* texto oscuro: blanco sobre el acento no llega a AA */
   --color-secondary-container:       var(--secondary-200);       /* #CAD9FF */
   --color-on-secondary-container:    var(--primary-900);         /* #01164D */
   --color-tertiary:                  var(--tertiary-900);        /* #7158F4 */

@@ -171,14 +171,17 @@ ${components.length} componentes · **${totalPublic} clases públicas** de ${all
 ## Cómo cargar el sistema
 
 \`\`\`html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/variables.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/base.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/components.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/variables.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/components.css">
 <!-- app shell (sidebar + topbar) solamente: .../css/layout.css -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 \`\`\`
 
 Dark mode: \`<html data-theme="dark">\`. No agregues overrides por tema.
+
+El tag va pineado a propósito: lo que se entrega no cambia de aspecto porque el DS mergeó algo.
+Para subir de versión, ver DEPLOYMENT.md §Releases.
 
 ---
 
