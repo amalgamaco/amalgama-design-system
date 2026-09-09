@@ -30,7 +30,7 @@ Code. Y si tenías uno viejo llamado `design`, desinstalalo.
 
 ---
 
-## Arrancar un proyecto nuevo · 4 pasos
+## Arrancar un proyecto nuevo · 3 pasos
 
 ### 1 · Abrí la carpeta del proyecto
 
@@ -38,16 +38,31 @@ En Claude, **Add folder** sobre la carpeta **del proyecto nuevo**. Puede estar v
 
 > Nunca sobre la carpeta del Design System. Es el error más común: el DS no se abre, se consume.
 
-### 2 · Pegá esto
+### 2 · Escribí esto y contestá
 
 ```
 /embassy:start
 ```
 
-O escribilo con tus palabras: *"arranquemos este proyecto con el Design System, white-label para
-Megatlón."*
+Y ya está. **Te va a ir preguntando de a una**, con opciones para elegir, en castellano y sin dar
+por sentado que sepas nada del design system:
 
-Si ya tenés los datos, adelantalos todos en el mismo mensaje:
+> para quién es el proyecto · cómo se va a construir · cómo es la pantalla principal · cuánta
+> información entra por pantalla · los dos colores de la marca · qué tan redondeadas las esquinas ·
+> si usamos nuestras tipografías
+
+**Todas tienen un default marcado**, así que si alguna no la sabés, seguís igual. Y las que se
+pueden averiguar mirando el proyecto no te las va a preguntar.
+
+Sobre los colores, lo único que conviene tener a mano: **son dos**. El **oscuro**, el del texto y
+los menús. Y el **vivo**, el de los botones. Si la marca del cliente es un naranja fuerte, ese es
+el vivo, no el oscuro. Y si todavía no hay marca definida, se arranca igual con la de Amalgama y
+se cambia después en dos minutos.
+
+<details>
+<summary>Si ya tenés todos los datos y querés saltear las preguntas</summary>
+
+Pegalos todos juntos en el mismo mensaje y los va a tomar de ahí:
 
 ```
 /embassy:start
@@ -62,19 +77,10 @@ Forma: redondeada
 Tipografía: las de Embassy
 ```
 
-> **Densidad** es cuánta información entra por pantalla: herramienta interna densa · producto
-> consumer · mixto.
+Es un atajo, no un requisito.
+</details>
 
-### 3 · Respondé lo que falte
-
-Seis preguntas: tipo de proyecto · stack y superficie · densidad e idioma · los dos colores de
-marca · la forma (redondeada, balanceada o técnica) · tipografía y grises.
-
-> **De los dos colores, el primario es el tono oscuro** — el del texto y el sidebar. El acento es
-> el color vivo, el de los botones y los links. Si la marca del cliente es un naranja fuerte, ese
-> va como **acento**. Si te equivocás, el generador te avisa.
-
-### 4 · Mirá el preview y aprobá
+### 3 · Mirá el preview y aprobá
 
 Te deja **`theme-preview.html`**: todos los componentes con la marca del cliente, en claro y en
 oscuro. Abrilo y probá el toggle. Si algo no representa la marca, decíselo y lo regenera.

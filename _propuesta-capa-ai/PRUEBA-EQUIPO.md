@@ -53,20 +53,25 @@ Creá una carpeta vacía en cualquier lado. En Claude, **Add folder** sobre **es
 > ⚠️ **Nunca sobre la carpeta del Design System.** El DS no se abre, se consume. Este es el error
 > más común y arruina la prueba entera.
 
-### 1.2 · Pegá esto, tal cual
+### 1.2 · Escribí solo esto
 
 ```
 /embassy:start
-
-Cliente: Nortia
-Stack: buildless (HTML + CSS + JS)
-Superficie: app con shell (sidebar + topbar)
-Densidad: herramienta interna densa
-Idioma: español rioplatense
-Marca: primario #14524A · acento #0E9F6E
-Forma: redondeada
-Tipografía: las de Embassy
 ```
+
+**Sin pegar ningún dato.** Queremos probar justamente que te vaya guiando. Contestá lo que te
+pregunte usando estos datos, que son los mismos para todos:
+
+> Cliente **Nortia** · lo construye alguien a mano, HTML y CSS · un panel de trabajo con menú al
+> costado · mucha información por pantalla · español · color oscuro **#14524A**, color vivo
+> **#0E9F6E** · esquinas redondeadas · tipografías de Amalgama
+
+Chequeá mientras tanto:
+
+- [ ] Pregunta **de a una**, no todas juntas.
+- [ ] Las opciones se entienden **sin saber nada del design system**. Si tenés que adivinar qué
+      significa una palabra, **anotalo** — esa pregunta está mal escrita.
+- [ ] Si decís "no sé", sigue igual con un default en vez de trabarse.
 
 ### 1.3 · Qué tiene que quedarte en la carpeta
 
