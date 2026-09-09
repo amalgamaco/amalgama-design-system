@@ -90,6 +90,51 @@ pantalla que explica por qué quedó así — qué se movió y qué componente s
 
 ---
 
+## ¿Y si el proyecto ya existe?
+
+No corras `/embassy:start` — ese es para empezar de cero. Tenés dos caminos según el tamaño.
+
+### Pantalla por pantalla
+
+Abrís la carpeta y vas con **`/embassy:screen`**, una pantalla a la vez.
+
+```
+migrá esta pantalla a Embassy
+```
+
+Es lo mejor cuando son pocas pantallas, o cuando querés que además de verse bien **funcionen
+mejor** — porque `screen` sí rediseña: mira qué está mal, lo dice, y lo mueve.
+
+### El proyecto entero, de una
+
+Para una app completa hay un agente aparte: **`embassy:rollout`**. Le pedís *"migrá este proyecto
+entero a Embassy"* y arranca solo.
+
+Recorre todo el código y reemplaza los colores, las tipografías y los componentes hechos a mano por
+los del DS, en fases que te va mostrando para que apruebes. Al terminar el proyecto **se ve** como
+Amalgama.
+
+> **Lo importante es lo que NO hace: no rediseña ninguna pantalla.** Si una pantalla tenía tres
+> botones compitiendo y ningún estado vacío, los sigue teniendo cuando termina — ahora en los
+> colores correctos. Es una migración técnica, no una mejora de UX.
+
+Y como para hacer eso tiene que leer todas las pantallas igual, **aprovecha y te deja una lista** de
+las que están estructuralmente mal, ordenada de peor a mejor:
+
+```
+src/pages/Vacantes.tsx    3 acciones primarias compitiendo · sin estado vacío   → /embassy:screen
+src/pages/Candidatos.tsx  11 filtros sueltos sin agrupar                        → /embassy:screen
+src/pages/Reportes.tsx    tabla sin alternativa en mobile                       → /embassy:screen
+```
+
+Esa lista es el valor real del rollout: sale gratis, y te dice **por dónde empezar** cuando después
+te sientes a rediseñar de a una con `/embassy:screen`.
+
+**El orden que funciona:** primero `rollout` para que todo se vea bien y salga la lista, después
+`screen` sobre las tres o cuatro pantallas que más duelen.
+
+---
+
 ## Cuándo usar cada una
 
 ### `/embassy:start` — el día que arranca el proyecto
@@ -169,6 +214,10 @@ arranca el proyecto ──▶ /embassy:start      (una vez)
 
   cuando hace falta ──▶ /embassy:break     (¿este componente aguanta?)
                     ──▶ /embassy:explain   (¿cómo hicieron esto? ¿se puede?)
+
+
+ proyecto que ya existe ──▶ embassy:rollout  (migra todo y lista qué rediseñar)
+                              └──▶ /embassy:screen sobre lo que salió en la lista
 ```
 
 *(Hay una séptima, `/embassy:eval`, que es para los dueños del DS. No la vas a necesitar.)*
@@ -219,20 +268,16 @@ una pantalla y nada más, repetilo con el comando.
 
 ## Preguntas frecuentes
 
+**¿Puedo usar esto en un proyecto que ya existe?**
+Sí — mirá la sección *"¿Y si el proyecto ya existe?"* más arriba. Si el proyecto ya tiene sus
+propios tokens, se usan esos.
+
 **¿Tengo que saber programar?**
 Para `start` y `artifact`, no. Respondés preguntas y mirás el resultado.
 
 **¿Y si el cliente todavía no definió la marca?**
 Arrancás igual: queda la de Amalgama y se anota como pendiente. Cuando llegue el color, se regenera
 en dos minutos.
-
-**¿Puedo usar esto en un proyecto que ya existe?**
-Sí. Si el proyecto ya tiene sus propios tokens, se usan esos.
-
-Para un proyecto grande y entero hay un agente dedicado, `embassy:rollout`. **Ojo con qué
-hace**: migra tokens y componentes, o sea que el proyecto pasa a *verse* como Amalgama. No rediseña
-las pantallas. Al terminar te deja una lista de las que necesitan más que eso, ordenada de peor a
-mejor, y esas las agarrás de a una con `/embassy:screen`.
 
 **¿Dónde veo los componentes?**
 En `presentations.amalgama.co/p/amalgama-design-system/`, o abriendo el `index.html` del repo del
