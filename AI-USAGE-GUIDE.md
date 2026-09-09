@@ -2,7 +2,7 @@
 
 This is the **operating manual for agents and developers who consume the Amalgama
 Design System (Embassy) to build or migrate a screen** — Claude Code, the
-`/design:design-system` skill, and any future UI-generation workflow.
+`/embassy:screen` skill, and any future UI-generation workflow.
 
 It answers one question end to end: *given a screen to build, what do I read, in what
 order, and what am I forbidden from doing?* It does **not** re-document components — it

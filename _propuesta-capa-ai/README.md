@@ -18,24 +18,24 @@ en el working tree local (`component-rules/search.md`, `components/ui/carousel.t
 | `PLAN-USO-DS.md` | **El plan de uso para presentar al equipo**: las tres capas, cómo arranca un proyecto nuevo, el cuestionario de setup, el día a día y qué hay que construir | ídem |
 | `design.md` | Archivo de marca público y autocontenido — el equivalente a `vercel.com/design.md` | **ya está en la raíz del repo** (el raw de GitHub lo sirve) |
 | `PUBLIC-API.md` + `public-api.json` | La API acotada de clases, generada. 62 componentes, 483 clases públicas de 548 selectores | **ya está en la raíz del repo**, regenerar en cada release |
-| `FAILURES.md` | Taxonomía de fallas compartida por `embassy-review` y `embassy-eval` | **ya está en la raíz del repo** |
+| `FAILURES.md` | Taxonomía de fallas compartida por `review` y `eval` | **ya está en la raíz del repo** |
 | `scripts/build-public-api.mjs` | Genera `PUBLIC-API.md` y `public-api.json` desde `css/components/` + el manifest | **ya está en `scripts/`** |
 | `scripts/check-output.mjs` | Chequeos determinísticos sobre lo que un agente **produjo** (no sobre el DS) | **ya está en `scripts/`** |
 | `scripts/check-screen-report.mjs` | Verifica que el diagnóstico de una pantalla sea real y no un re-skin | **ya está en `scripts/`** |
-| `skills/` | **Ya no está acá.** Las cinco skills viven en el plugin `design` de `amalgamaco/claude-code-plugins` — ver `SKILLS.md` | — |
+| `skills/` | **Ya no está acá.** Las cinco skills viven en el plugin `embassy` de `amalgamaco/claude-code-plugins` — ver `SKILLS.md` | — |
 
 ## Qué se sacó por redundante (8-sep-2026)
 
-- **`skills/embassy/references/marca.md`** — era un subconjunto literal de `design.md` (las mismas
+- **`skills/embassy:screen/references/marca.md`** — era un subconjunto literal de `design.md` (las mismas
   7 filas de logo, la misma voz, la misma estrategia de tema). Dos fuentes para lo mismo es
   justamente el problema que este trabajo intenta cerrar. `embassy` ahora apunta a `design.md`,
-  igual que `embassy-artifact`.
+  igual que `artifact`.
 - **`scripts/build-brand-theme.mjs`** de esta carpeta — el canónico vive en `scripts/` del repo
   desde el commit del fix de white-label. Eran byte-idénticos.
 
 ## Ojo: las skills no se distribuyen desde este repo
 
-El plugin `design` que la gente tiene instalado sincroniza desde **`amalgamaco/claude-code-plugins`**
+El plugin `embassy` que la gente tiene instalado sincroniza desde **`amalgamaco/claude-code-plugins`**
 (repo privado), no desde acá. Esta carpeta es el borrador; para que una skill llegue a alguien hay
 que llevarla a ese otro repo. La carpeta `skills/` de la raíz de este repo es una copia congelada
 (341 líneas contra las 455 del plugin) y hay que borrarla o convertirla en la fuente — ver
@@ -50,7 +50,7 @@ node scripts/build-public-api.mjs
 # 2. probar los chequeos sobre cualquier HTML generado
 node scripts/check-output.mjs <archivo.html>
 
-# 3. las skills: copiar la carpeta que quieras probar al plugin `design` y usarla
+# 3. las skills: copiar la carpeta que quieras probar al plugin `embassy` y usarla
 ```
 
 ## Lo que falta y no está acá
@@ -61,7 +61,7 @@ node scripts/check-output.mjs <archivo.html>
   cuál es el entregable que más repetimos (ver `ANALISIS-SKILLS-DS.md` §9).
 - **Las skills P1 y P2** (`embassy-contribute`, `embassy-figma`,
   `embassy-copy`, y las de a11y / motion / dataviz / mobile). Están especificadas en el análisis
-  §5.2, sin escribir. (`embassy-white-label` quedó absorbida por `embassy-start`.)
+  §5.2, sin escribir. (`embassy-white-label` quedó absorbida por `start`.)
 
 ## Dos gaps de cobertura que encontró el generador
 
@@ -101,7 +101,7 @@ Estos sí se tocaron, fuera de esta carpeta. Van en su propio commit.
 
 ## Pendiente, no lo toqué
 
-1. `skills/design-system/SKILL.md` del repo (341 líneas) ≠ la copia del plugin instalado
+1. `skills/screen/SKILL.md` del repo (341 líneas) ≠ la copia del plugin instalado
    (455 líneas). Hay que definir cuál es la fuente y sincronizar con un check.
 2. `logos/` tiene PNGs; el SKILL.md dice que los PNG están retirados y apunta a SVGs en S3.
    Hay que decidir si se reemplazan o se borran.

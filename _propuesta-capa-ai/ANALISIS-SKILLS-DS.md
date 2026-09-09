@@ -26,7 +26,7 @@ tenemos**:
    el agente produce con él*. Sin escenarios fijos, baseline y conteo de fallas, no sabemos si
    una skill mejora o empeora las cosas — solo sabemos si el repo está prolijo.
 
-La propuesta: **4 skills P0** (`embassy`, `embassy-artifact`, `embassy-review`, `embassy-eval`)
+La propuesta: **4 skills P0** (`embassy`, `artifact`, `review`, `eval`)
 más tres artefactos de soporte (`design.md`, `PUBLIC-API.md` generado, `FAILURES.md`), y un flujo
 de trabajo de tres carriles según quién trabaja y con qué acceso.
 
@@ -49,7 +49,7 @@ de trabajo de tres carriles según quién trabaja y con qué acceso.
 | Contratos | `GOVERNANCE.md` (1.326 líneas), `TOKENS.md`, `MIGRATION.md`, `WHITE-LABEL.md`, `CONTRIBUTING.md`, `AI-USAGE-GUIDE.md`, `GAMAFORCE-MIGRATION.md` | ~200 KB |
 | Docs humana | `index.html` (SPA) | 2,4 MB |
 | Validación | `scripts/validate-ds.mjs` (9 chequeos), `build-manifest.py` | corre en verde |
-| Capa de agentes | **1 skill** (`design:design-system`, 455 líneas) + **1 agente** (`design-system-implementer`) + 1 reference (`screen-patterns.md`, 639 líneas) | — |
+| Capa de agentes | **1 skill** (`design:design-system` (el nombre viejo), 455 líneas) + **1 agente** (`design-system-implementer`) + 1 reference (`screen-patterns.md`, 639 líneas) | — |
 | Distribución | CSS servido por jsDelivr desde `@main` | sin pin de versión |
 
 ### 2.2 Lo que está muy bien (y hay que defender)
@@ -70,7 +70,7 @@ de trabajo de tres carriles según quién trabaja y con qué acceso.
 |---|---|---|
 | 1 | **El corpus no entra en un contexto.** El skill manda a leer `AI-USAGE-GUIDE` + `CLAUDE.md` + `TOKENS.md` + la regla + el CSS + el wrapper + `guidelines/` + `GOVERNANCE.md`. Sumado: ~1 MB ≈ 250k tokens. | 489 KB rules + 268 KB CSS + 144 KB guidelines + 94 KB governance |
 | 2 | **Skill duplicada y en drift.** Hay dos copias del mismo `SKILL.md` que ya divergieron. | repo: 341 líneas · plugin instalado: 455 líneas |
-| 3 | **Docs que apuntan a cosas que no existen.** `AI-USAGE-GUIDE.md` §5 instruye usar `/design:presentation-builder`. Esa skill no está en el plugin `design`. | referencia rota |
+| 3 | **Docs que apuntan a cosas que no existen.** `AI-USAGE-GUIDE.md` §5 instruye usar `/design:presentation-builder`. Esa skill no está en el plugin `embassy`. | referencia rota |
 | 4 | **`CONTRIBUTING.md` quedó en la era Tailwind.** §4 se llama *"Component implementation (Tailwind, in `@amalgama/ds`)"*, arquitectura revertida el 17-jul-2026. | contradice `README.md` y `CLAUDE.md` |
 | 5 | **La capa de marca tiene dos fuentes.** El repo tiene `logos/*.png`; el `SKILL.md` dice que los PNG están retirados y apunta a SVGs en S3. | `logos/horizontal/*.png` vs `SKILL.md` §8 |
 | 6 | **Cero soporte para trabajo sin repo.** Una propuesta comercial, un reporte, un one-pager, un demo para cliente: hoy no hay camino on-brand que no empiece por clonar el repo. | no existe `design.md` |
@@ -134,12 +134,12 @@ Conviene tenerlo explícito para la presentación, porque la pregunta va a salir
 | `PUBLIC-API.md` | La idea es de Vercel; la lista se **genera** de nuestro `manifest.json` |
 | Las cinco leyes de layout, las tablas de componentes confundibles, el screen gate | **Embassy** — salen de `GOVERNANCE.md`, `guidelines/` y `component-rules/` |
 | Los IDs de `FAILURES.md` | **Nuestros**, derivados de las reglas del repo. El grupo H (reflejos generados) sí es de Vercel |
-| El cuestionario de `embassy-start` | **`WHITE-LABEL.md`** del repo, no de Vercel — ellos no tienen caso white-label |
+| El cuestionario de `start` | **`WHITE-LABEL.md`** del repo, no de Vercel — ellos no tienen caso white-label |
 | Las curvas OKLCH de `build-brand-theme.mjs` | **Medidas** sobre `css/variables.css` |
-| `jakubkrehel/skills` | **Revisado skill por skill** (sep-2026, MIT). 4 ya cubiertas por equivalentes nuestros · 2 descartadas por chocar con `GOVERNANCE` · **`break` y `explain-interface` portadas** como `embassy-break` y `embassy-explain` · `better-writing` resuelta cableando `content-and-writing.md` al paso 7 de `design-system` · `variant` sin escribir. Ver §5.3 |
+| `jakubkrehel/skills` | **Revisado skill por skill** (sep-2026, MIT). 4 ya cubiertas por equivalentes nuestros · 2 descartadas por chocar con `GOVERNANCE` · **`break` y `explain-interface` portadas** como `break` y `explain` · `better-writing` resuelta cableando `content-and-writing.md` al paso 7 de `screen` · `variant` sin escribir. Ver §5.3 |
 
 **Dónde nos separamos de Vercel a propósito:** ellos no tienen `component-rules`. Nosotros sí, y es
-nuestro mejor activo, así que la prohibición de leer el CSS aplica **solo** a `embassy-artifact`
+nuestro mejor activo, así que la prohibición de leer el CSS aplica **solo** a `artifact`
 (carril sin repo). En el carril producto, `embassy` sí lee la regla y el CSS del componente que está
 usando. Ellos hacen lo mismo con su skill `product-design`, que vive dentro de sus repos: su
 `design.md` es para páginas **fuera** del producto, no para pantallas de producto.
@@ -199,10 +199,10 @@ una sea explícita sobre cuánto puede leer. Eso es el corazón de la propuesta.
 
 | # | Skill | Qué hace | Quién la usa | Necesita repo | Prioridad |
 |---|---|---|---|---|---|
-| 1 | **`embassy`** | Router del DS. Bootstrap del repo, elige el modo (crear / mejorar / migrar), abre solo lo que hace falta y aplica los gates. Reemplaza al `design-system` monolítico. | Diseño + Dev | Sí | **P0** |
-| 2 | **`embassy-artifact`** | Genera artefactos on-brand **sin repo**: propuestas, reportes, one-pagers, demos, dashboards de una vez. Usa `design.md` + CSS pineado + la API acotada. | Todo el estudio | No | **P0** |
-| 3 | **`embassy-review`** | Audita una pantalla / PR / artefacto contra Embassy y emite un reporte con la taxonomía de fallas y severidad. Es el motor de criterio compartido. | Diseño + Dev + QA | Sí (o parcial) | **P0** |
-| 4 | **`embassy-eval`** | El loop: escenarios fijos, baseline, corridas pareadas, conteo de fallas, registro de correcciones. | Dueños del DS | Sí | **P0** |
+| 1 | **`embassy`** | Router del DS. Bootstrap del repo, elige el modo (crear / mejorar / migrar), abre solo lo que hace falta y aplica los gates. Reemplaza al `screen` monolítico. | Diseño + Dev | Sí | **P0** |
+| 2 | **`artifact`** | Genera artefactos on-brand **sin repo**: propuestas, reportes, one-pagers, demos, dashboards de una vez. Usa `design.md` + CSS pineado + la API acotada. | Todo el estudio | No | **P0** |
+| 3 | **`review`** | Audita una pantalla / PR / artefacto contra Embassy y emite un reporte con la taxonomía de fallas y severidad. Es el motor de criterio compartido. | Diseño + Dev + QA | Sí (o parcial) | **P0** |
+| 4 | **`eval`** | El loop: escenarios fijos, baseline, corridas pareadas, conteo de fallas, registro de correcciones. | Dueños del DS | Sí | **P0** |
 | 5 | `embassy-white-label` | Arma el theme de marca de un cliente end-to-end desde `WHITE-LABEL.md` (override de primitivas, verificación en ambos temas, checklist). | Diseño | Sí | P1 |
 | 6 | `embassy-contribute` | Agregar o modificar un componente correctamente: CSS + `component-rules/<id>.md` + manifest + sección en `index.html` + validate. Reescribe de paso el `CONTRIBUTING.md` obsoleto. | Diseño + Dev | Sí | P1 |
 | 7 | `embassy-figma` | Paridad Figma ↔ código: variables ↔ tokens, componentes ↔ clases, Code Connect. Cierra el "dual output" del brief. | Diseño | Sí + Figma MCP | P1 |
@@ -219,14 +219,14 @@ una sea explícita sobre cuánto puede leer. Eso es el corazón de la propuesta.
 
   | Suya | Qué hicimos |
   |---|---|
-  | `interface-review` · `better-interface` | Ya cubiertas por `embassy-review` |
+  | `interface-review` · `better-interface` | Ya cubiertas por `review` |
   | `better-colors` | Ya cubierta por `build-brand-theme.mjs`, con nuestras curvas OKLCH |
   | `better-layout` | Ya cubierta por las cinco leyes de layout + `screen-patterns.md` |
   | `better-accessibility` | Ya cubierta por `guidelines/accessibility.md` + los checks del grupo F |
   | `better-ui` · `better-typography` | **Descartadas** — chocan con `GOVERNANCE` (ver abajo) |
-  | `break` | **Portada** como `embassy-break`, con los ejes salidos de `component-rules` y el eje de marca |
-  | `explain-interface` | **Portada** como `embassy-explain`, más el puente a nuestro catálogo |
-  | `better-writing` | Resuelta sin skill nueva: `content-and-writing.md` cableada al paso 7 de `design-system` |
+  | `break` | **Portada** como `break`, con los ejes salidos de `component-rules` y el eje de marca |
+  | `explain-interface` | **Portada** como `explain`, más el puente a nuestro catálogo |
+  | `better-writing` | Resuelta sin skill nueva: `content-and-writing.md` cableada al paso 7 de `screen` |
   | `variant` | Sin escribir — pertenece a un flujo de contribución de componentes que todavía no tenemos |
 
   El motivo de las dos descartadas: Es un set excelente (`better-ui`, `better-typography`,
@@ -246,20 +246,20 @@ una sea explícita sobre cuánto puede leer. Eso es el corazón de la propuesta.
 
 #### `embassy` — el router
 
-Reemplaza al `design-system` de 455 líneas. El problema del actual no es qué dice, es que **dice
+Reemplaza al `screen` de 455 líneas. El problema del actual no es qué dice, es que **dice
 todo siempre**. La versión nueva:
 
-- decide el modo en las primeras 20 líneas (artefacto sin repo → derivar a `embassy-artifact`;
+- decide el modo en las primeras 20 líneas (artefacto sin repo → derivar a `artifact`;
   proyecto con repo → seguir);
 - corre el bootstrap (`§0`: clonar/pull, registrar commit);
 - aplica el **screen gate** de 6 líneas antes de cualquier markup;
 - para cada componente abre **solo** `component-rules/<id>.md` y `css/components/<id>.css`;
-- cierra con `validate-ds.mjs` + los checks de `embassy-review`.
+- cierra con `validate-ds.mjs` + los checks de `review`.
 
 Todo lo que hoy está inline (tablas de decisión, motion, tokens, marca) pasa a `references/`, que
 se leen **bajo demanda**. El borrador que acompaña este análisis queda en 190 líneas contra las 455 de hoy, y solo abre los archivos del componente que se está usando.
 
-#### `embassy-artifact` — el equivalente a design.md
+#### `artifact` — el equivalente a design.md
 
 El desbloqueo más grande y el más barato. Una URL, cero repo, cualquier agente:
 
@@ -278,19 +278,19 @@ one-pagers, demos y cualquier cosa hecha fuera de un repo de producto.
 > en una URL propia (`amalgama.co/design.md`) o alcanza con el raw de GitHub. Vercel eligió URL
 > propia para que un agente sin contexto la pueda pedir sola.
 
-#### `embassy-review` — criterio compartido y observable
+#### `review` — criterio compartido y observable
 
 Toma una pantalla (código, URL, screenshot o Figma) y devuelve un reporte con hallazgos
 clasificados por la **taxonomía de fallas** (`FAILURES.md`), cada uno con severidad, evidencia y la
 regla del DS que lo justifica. Dos usos:
 
 - **humano:** revisión de PR o de diseño con un criterio que no depende de quién revisa;
-- **máquina:** es el juez del loop de `embassy-eval`.
+- **máquina:** es el juez del loop de `eval`.
 
 Es la traducción directa de la recomendación #3 de Vercel: convertir *"se siente apretado"* en un
 criterio que dos personas cuentan igual.
 
-#### `embassy-eval` — la parte que nadie tiene
+#### `eval` — la parte que nadie tiene
 
 7 escenarios fijos con inputs reales, una rúbrica corta, baseline guardado, corridas con y sin
 guía, y conteo de fallas por corrida. Escenarios propuestos (uno por arquetipo que realmente
@@ -318,12 +318,12 @@ sola: *¿esto vive en un repo de producto?*
 ### Carril A — Producto (repo, código que se mantiene)
 
 ```
-/embassy
+/embassy:screen
   └─ §0 bootstrap: pull del DS + registrar commit
   └─ screen gate (GOAL · OBJECT · ACTIONS · PATTERN · RESPONSIVE · STATES)
   └─ por componente: component-rules/<id>.md → css/components/<id>.css
   └─ build
-/embassy-review        → reporte de fallas
+/embassy:review        → reporte de fallas
 node scripts/validate-ds.mjs  +  lint/typecheck/test del proyecto
   └─ screen report (qué se movió, qué variante y por qué)
 ```
@@ -334,7 +334,7 @@ siendo la herramienta correcta; `embassy` es para una pantalla.
 ### Carril B — Artefacto (una sola vez, sin repo)
 
 ```
-/embassy-artifact
+/embassy:artifact
   └─ design.md (juicio + anti-patrones) + PUBLIC-API.md (clases permitidas)
   └─ CSS pineado por CDN — el CSS no se lee nunca
   └─ self-check contra FAILURES.md
@@ -347,15 +347,15 @@ cualquiera del estudio, sin saber git.
 
 ```
 /embassy-contribute   → nuevo componente o cambio (CSS + rule + manifest + docs + validate)
-/embassy-eval         → corrida sobre los 7 escenarios, con y sin guía
+/embassy:eval         → corrida sobre los 7 escenarios, con y sin guía
   └─ fallas nuevas → FAILURES.md
   └─ correcciones → al punto más angosto (design.md · CSS · check)
 ```
 
 ### 6.1 Regla de oro para el equipo
 
-> **Si el trabajo va a un repo de producto → `/embassy`. Si es un entregable de una vez →
-> `/embassy-artifact`. Si te sale "esto no parece nuestro" → `/embassy-review`, y lo que salga se
+> **Si el trabajo va a un repo de producto → `/embassy:screen`. Si es un entregable de una vez →
+> `/embassy:artifact`. Si te sale "esto no parece nuestro" → `/embassy:review`, y lo que salga se
 > anota.**
 
 ---
@@ -366,7 +366,7 @@ Cuatro métricas, todas baratas de sacar:
 
 | Métrica | Cómo se saca | Meta inicial |
 |---|---|---|
-| **Fallas conocidas por corrida** | `embassy-review` sobre los 7 escenarios | −50% contra baseline (Vercel logró −57%) |
+| **Fallas conocidas por corrida** | `review` sobre los 7 escenarios | −50% contra baseline (Vercel logró −57%) |
 | **Contexto consumido por pantalla** | tokens leídos en una sesión típica | de ~250k potenciales a < 40k |
 | **Tiempo hasta primer output on-brand** | cronómetro, escenario 5 | < 10 minutos sin repo |
 | **Drift** | diff entre copias de la skill + `validate-ds` | 0 copias divergentes |
@@ -380,10 +380,10 @@ La primera es la que importa. Las otras tres son higiene.
 | Semana | Qué | Resultado observable |
 |---|---|---|
 | 1 | `design.md` + `PUBLIC-API.md` generado + pin de versión del CDN | Cualquiera genera una propuesta on-brand sin clonar nada |
-| 1 | `embassy-artifact` | Carril B abierto |
-| 2 | `FAILURES.md` + `embassy-review` | Criterio compartido; primer baseline medido |
+| 1 | `artifact` | Carril B abierto |
+| 2 | `FAILURES.md` + `review` | Criterio compartido; primer baseline medido |
 | 2 | Refactor de `embassy` (router + references) y **borrar la copia duplicada** | Contexto por pantalla < 40k; 0 drift |
-| 3 | `embassy-eval` con los 7 escenarios | Primer número con/sin guía |
+| 3 | `eval` con los 7 escenarios | Primer número con/sin guía |
 | 4 | Arreglar los drifts de docs: `CONTRIBUTING.md` (era Tailwind), `AI-USAGE-GUIDE` §5, logos PNG vs SVG | Documentación que no miente |
 | 5–6 | P1: `embassy-white-label` y `embassy-contribute` | Template de cliente y contribución con gate |
 | 7+ | P1/P2: `embassy-figma`, `embassy-copy`, resto | Dual output del brief cerrado |
@@ -399,7 +399,7 @@ Sugerencia de guion, 20 minutos:
 2. **Mostrar el inventario propio** (§2.1). El equipo probablemente no dimensiona lo que ya hay.
 3. **Mostrar el problema #1 con el número:** 1 MB de material de lectura obligatoria. Nadie discute
    que eso hay que recortar.
-4. **La demo:** una propuesta comercial generada con `/embassy-artifact`, sin repo, en vivo. Es la
+4. **La demo:** una propuesta comercial generada con `/embassy:artifact`, sin repo, en vivo. Es la
    que convierte.
 5. **Cerrar con la regla de oro** (§6.1) y una sola pregunta abierta al equipo: *¿cuál es el
    artefacto que más repetimos?* — porque ese es el escenario 1 del eval, y Vercel es explícito en
@@ -419,7 +419,7 @@ en GitHub raw, y la de Figma. Son decisiones de dueño, no de equipo.
 3. **¿Repo público o privado?** Hoy `amalgamaco/amalgama-design-system` es clonable sin auth. Si
    `design.md` va a ser público, conviene que sea una decisión explícita y no un accidente.
 4. **¿Dónde vive el canónico de la skill?** Propongo: `skills/` en el repo del DS es la fuente, y
-   el plugin `design` se sincroniza desde ahí con un check en `validate-ds.mjs`.
+   el plugin `embassy` se sincroniza desde ahí con un check en `validate-ds.mjs`.
 5. **¿Quién es el dueño del loop?** El eval solo sirve si alguien corre las rondas. Sin nombre y
    cadencia, esto se muere en la semana 3.
 
@@ -429,6 +429,6 @@ en GitHub raw, y la de Figma. Son decisiones de dueño, no de equipo.
 
 - `design.md` — archivo de marca público (borrador listo para revisar)
 - `PUBLIC-API.md` — API acotada de clases, generada desde el CSS
-- `FAILURES.md` — taxonomía de fallas compartida por `embassy-review` y `embassy-eval`
-- las skills — publicadas en el plugin `design` de `amalgamaco/claude-code-plugins` (ver `SKILLS.md`)
+- `FAILURES.md` — taxonomía de fallas compartida por `review` y `eval`
+- las skills — publicadas en el plugin `embassy` de `amalgamaco/claude-code-plugins` (ver `SKILLS.md`)
 - `scripts/build-public-api.mjs` — genera `PUBLIC-API.md` desde `css/components/*.css`

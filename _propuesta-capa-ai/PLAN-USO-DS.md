@@ -14,12 +14,12 @@ correcta y no se olvide de ninguna regla. Eso funciona con dos o tres personas y
 La propuesta lo convierte en **un flujo con una puerta de entrada única**:
 
 ```
-Proyecto nuevo  →  /embassy-start   → te hace 6 preguntas y deja el proyecto configurado
+Proyecto nuevo  →  /embassy:start   → te hace 6 preguntas y deja el proyecto configurado
                                        (brand.css + DESIGN.md + preview + CLAUDE.md)
-Trabajo diario  →  /embassy          → construir pantallas de producto
-                →  /embassy-artifact → entregables de una vez, sin repo
-                →  /embassy-review   → auditar lo que salió
-Evolución       →  /embassy-eval     → medir si el sistema mejora o empeora
+Trabajo diario  →  /embassy:screen          → construir pantallas de producto
+                →  /embassy:artifact → entregables de una vez, sin repo
+                →  /embassy:review   → auditar lo que salió
+Evolución       →  /embassy:eval     → medir si el sistema mejora o empeora
 ```
 
 Tres ideas que sostienen todo:
@@ -38,11 +38,11 @@ distintos y ritmos de cambio distintos.
 | Capa | Qué es | Dónde vive | Quién la cambia | Cada cuánto |
 |---|---|---|---|---|
 | **1 · El sistema** | Tokens, 62 componentes, 61 reglas operativas, guidelines de UX, governance | `amalgamaco/amalgama-design-system` | Los dueños del DS, vía `CONTRIBUTING` | Semanal |
-| **2 · Las skills** | El *cómo se usa*: qué leer, en qué orden, qué está prohibido, cómo se valida | **`amalgamaco/claude-code-plugins`** (repo privado), distribuido como plugin `design` | Los dueños del DS | Con cada cambio del sistema |
+| **2 · Las skills** | El *cómo se usa*: qué leer, en qué orden, qué está prohibido, cómo se valida | **`amalgamaco/claude-code-plugins`** (repo privado), distribuido como plugin `embassy` | Los dueños del DS | Con cada cambio del sistema |
 | **3 · El proyecto** | La marca del cliente y las decisiones de ese producto | El repo del proyecto: `brand/<cliente>.css` + `DESIGN.md` | El equipo del proyecto | Al arrancar, y poco más |
 
 **La capa 2 vive hoy en un repo distinto al de la capa 1**, y hay que decidirlo explícitamente
-(§9.6). El plugin `design` se sincroniza desde `amalgamaco/claude-code-plugins`, **no** desde el repo
+(§9.6). El plugin `embassy` se sincroniza desde `amalgamaco/claude-code-plugins`, **no** desde el repo
 del design system. El repo del DS tiene además una carpeta `skills/` con una copia congelada: 341
 líneas contra las 455 del plugin instalado. Dos copias, un solo nombre, y **la que la gente usa es la
 del plugin**. Mientras siga así, cualquier cambio a la skill hay que hacerlo en el repo de plugins —
@@ -59,7 +59,7 @@ cliente — hoy no llega del todo, y es el único arreglo bloqueante del plan (�
 
 Cinco pasos. El primero es el único que requiere una conversación.
 
-### Paso 1 · `/embassy-start` — la conversación de setup (15 minutos)
+### Paso 1 · `/embassy:start` — la conversación de setup (15 minutos)
 
 Abrís Claude en la carpeta del proyecto y decís, literalmente:
 
@@ -79,12 +79,12 @@ valor y se regenera. Este es el momento de discutir, no cuando ya hay 20 pantall
 El mismo `theme-preview.html` se le muestra al cliente. Es el entregable más barato y más
 convincente del kickoff: su marca, sobre 62 componentes reales, funcionando.
 
-### Paso 4 · Se construyen pantallas con `/embassy`
+### Paso 4 · Se construyen pantallas con `/embassy:screen`
 
 Ya no hace falta explicar el DS a nadie: el `CLAUDE.md` del proyecto (que generó el paso 1) le dice
 al agente qué skill usar y con qué marca.
 
-### Paso 5 · Antes de cada entrega, `/embassy-review`
+### Paso 5 · Antes de cada entrega, `/embassy:review`
 
 Un reporte de hallazgos con severidad. Lo que sea BLOQUEANTE o ALTA se arregla antes de mostrar.
 
@@ -93,7 +93,7 @@ Un reporte de hallazgos con severidad. Lo que sea BLOQUEANTE o ALTA se arregla a
 
 ---
 
-## 3. `/embassy-start`: el cuestionario
+## 3. `/embassy:start`: el cuestionario
 
 ### 3.1 Las 6 preguntas, en dos rondas
 
@@ -101,7 +101,7 @@ Un reporte de hallazgos con severidad. Lo que sea BLOQUEANTE o ALTA se arregla a
 
 | # | Pregunta | Opciones | Qué decide |
 |---|---|---|---|
-| 1 | ¿Qué tipo de proyecto es? | Producto de cliente (white-label) · Producto interno de Amalgama · Entregable de una vez | Si hay theming o se usa la marca Amalgama. La tercera opción deriva a `/embassy-artifact` y termina acá |
+| 1 | ¿Qué tipo de proyecto es? | Producto de cliente (white-label) · Producto interno de Amalgama · Entregable de una vez | Si hay theming o se usa la marca Amalgama. La tercera opción deriva a `/embassy:artifact` y termina acá |
 | 2 | ¿Stack y superficie? | Buildless (HTML+CSS+JS) · React / Next · Proyecto existente con capa de tokens propia · — y: app con shell (sidebar+topbar) · sitio/landing · dashboard embebido | Qué archivos CSS se linkean, si se usan los wrappers `.tsx`, y si hay que respetar nombres de tokens que ya existen |
 | 3 | ¿Audiencia y densidad? | Herramienta interna densa · Producto consumer · Mixto — y el idioma de la UI | Tamaños por defecto, targets táctiles, estrategia de tema y voz del copy |
 
@@ -149,23 +149,23 @@ La pregunta que rutea es siempre la misma: **¿esto vive en un repo de producto?
 
 | Momento | Skill | Quién | Necesita el repo del DS |
 |---|---|---|---|
-| Arrancar un proyecto | `/embassy-start` | Diseño + Dev | Sí (lo clona solo) |
-| Construir o rediseñar una pantalla | `/embassy` | Diseño + Dev | Sí |
-| Propuesta, reporte, one-pager, demo | `/embassy-artifact` | **Todo el estudio** | No |
-| Auditar antes de entregar o mergear | `/embassy-review` | Diseño + Dev + QA | Sí, o parcial |
-| Medir si el sistema mejora | `/embassy-eval` | Dueños del DS | Sí |
+| Arrancar un proyecto | `/embassy:start` | Diseño + Dev | Sí (lo clona solo) |
+| Construir o rediseñar una pantalla | `/embassy:screen` | Diseño + Dev | Sí |
+| Propuesta, reporte, one-pager, demo | `/embassy:artifact` | **Todo el estudio** | No |
+| Auditar antes de entregar o mergear | `/embassy:review` | Diseño + Dev + QA | Sí, o parcial |
+| Medir si el sistema mejora | `/embassy:eval` | Dueños del DS | Sí |
 | Agregar o cambiar un componente | `/embassy-contribute` *(pendiente)* | Dueños del DS | Sí |
 
 **La regla de oro, para el equipo:**
 
-> Si va a un repo de producto → `/embassy`. Si es un entregable de una vez → `/embassy-artifact`.
-> Si te sale *"esto no parece nuestro"* → `/embassy-review`, y lo que salga se anota.
+> Si va a un repo de producto → `/embassy:screen`. Si es un entregable de una vez → `/embassy:artifact`.
+> Si te sale *"esto no parece nuestro"* → `/embassy:review`, y lo que salga se anota.
 
 Y una diferencia que conviene explicar bien porque es contraintuitiva:
 
-- **`/embassy` sí lee el detalle** del componente que estás usando — su regla, su CSS, sus estados.
+- **`/embassy:screen` sí lee el detalle** del componente que estás usando — su regla, su CSS, sus estados.
   Puede, porque tiene el repo, y le sirve: ahí está el `not_to_confuse_with` que evita elegir mal.
-- **`/embassy-artifact` tiene prohibido leer el CSS.** Trabaja con una lista acotada de 435 clases.
+- **`/embassy:artifact` tiene prohibido leer el CSS.** Trabaja con una lista acotada de 435 clases.
   Es lo que le permite funcionar en cualquier herramienta, sin repo y sin gastar el contexto entero.
 
 ---
@@ -201,8 +201,8 @@ razón de que el modelo funcione.
 |---|---|
 | Un archivo de juicio en una URL pública | `design.md` en la raíz del repo — cualquier agente, en cualquier herramienta, sin clonar |
 | Un stylesheet público con API acotada | `PUBLIC-API.md`: 435 clases publicadas de 548 selectores, generadas por script |
-| *"Nunca inspecciones el CSS"* | Regla dura de `/embassy-artifact`. Sin eso, 268 KB de CSS se comen la sesión |
-| Escenarios fijos + baseline guardado | `/embassy-eval`, con 7 escenarios que **no se tocan** mientras la guía evoluciona |
+| *"Nunca inspecciones el CSS"* | Regla dura de `/embassy:artifact`. Sin eso, 268 KB de CSS se comen la sesión |
+| Escenarios fijos + baseline guardado | `/embassy:eval`, con 7 escenarios que **no se tocan** mientras la guía evoluciona |
 | Corregir en el punto más angosto | Prosa, CSS o check — nunca los tres. Está en `FAILURES.md` |
 | Nombrar los anti-patrones | `design.md` §8: 16 reflejos de diseño generado que se rechazan por nombre |
 
@@ -225,7 +225,7 @@ guía — 57% menos**.
 ### 7.0 ~~Antes que nada~~ · RESUELTO (8-sep-2026): el theming de marca ya llega a dark mode
 
 Escribiendo este plan probé el flujo contra el repo real y apareció algo que había que arreglar
-**antes** de correr `/embassy-start` con un cliente. **Ya está arreglado en el repo** — dejo el
+**antes** de correr `/embassy:start` con un cliente. **Ya está arreglado en el repo** — dejo el
 diagnóstico porque explica por qué hacía falta y qué se verificó.
 
 El bloque `[data-theme="dark"]` de `css/variables.css` **hardcodea en hex** los roles que llevan
@@ -278,11 +278,11 @@ Nada de esto es grande. Ordenado por dependencia:
 |---|---|---|---|
 | 0 | ~~Los tres arreglos de §7.0~~ | — | **Hecho** (8-sep-2026), verificado sin regresión |
 | 1 | ~~`design.md` + `PUBLIC-API.md` en la raíz del repo~~, y pinear el CDN a un tag | — | **Movidos** (8-sep-2026): `design.md`, `PUBLIC-API.md`, `public-api.json`, `FAILURES.md` y los dos scripts ya están en su lugar definitivo. Falta decidir el tag del CDN |
-| 2 | `/embassy-artifact` | 1 | Ya está escrita |
-| 3 | `/embassy-start` + `build-brand-theme.mjs` | 0, 1 | **Ya están escritos y probados** — falta la plantilla del `theme-preview.html` |
-| 4 | `FAILURES.md` + `/embassy-review` | — | Ya están escritas |
+| 2 | `/embassy:artifact` | 1 | Ya está escrita |
+| 3 | `/embassy:start` + `build-brand-theme.mjs` | 0, 1 | **Ya están escritos y probados** — falta la plantilla del `theme-preview.html` |
+| 4 | `FAILURES.md` + `/embassy:review` | — | Ya están escritas |
 | 5 | Resolver el drift: una sola copia del `SKILL.md`, con un check en `validate-ds.mjs` | — | Media jornada |
-| 6 | `/embassy-eval` con el escenario "setup de proyecto nuevo" | 3, 4 | La skill está escrita; falta correr el primer baseline |
+| 6 | `/embassy:eval` con el escenario "setup de proyecto nuevo" | 3, 4 | La skill está escrita; falta correr el primer baseline |
 | 7 | Arreglar los docs que mienten (`CONTRIBUTING.md` Tailwind, `AI-USAGE-GUIDE` §5, logos PNG vs SVG) | — | Media jornada |
 
 Lo único que falta escribir de verdad es **la plantilla del `theme-preview.html`** y **el primer
@@ -296,7 +296,7 @@ baseline del eval**. Todo lo demás es mover archivos y tomar dos decisiones.
    persona se acuerde de 40 reglas. Mostrá los dos `SKILL.md` divergentes como síntoma.
 2. **Las tres capas** (3 min) — §1. Es el concepto que tienen que llevarse; todo lo demás cuelga
    de ahí.
-3. **La demo** (8 min): corré `/embassy-start` en vivo sobre un proyecto vacío con un cliente
+3. **La demo** (8 min): corré `/embassy:start` en vivo sobre un proyecto vacío con un cliente
    inventado. Seis preguntas, y al final el `theme-preview.html` con su marca. **Esta es la parte
    que convence** — no la expliques antes, mostrala.
 4. **La regla de oro** (2 min) — §4. Una sola línea que todos tienen que recordar.
@@ -320,11 +320,11 @@ Seis, y todas son cortas:
    conviene que sea una decisión y no un accidente.
 4. **¿Pinear el CDN?** Recomiendo sí, con un tag por release. Hoy un artefacto entregado hace un mes
    cambia solo cuando mergeamos.
-5. **¿`/embassy-start` es obligatorio en el kickoff?** O sea: ¿un proyecto puede arrancar sin correrlo?
+5. **¿`/embassy:start` es obligatorio en el kickoff?** O sea: ¿un proyecto puede arrancar sin correrlo?
    Mi opinión es que no debería, y que el `DESIGN.md` que genera sea parte de la Definition of Ready
    del proyecto.
 6. **¿Dónde vive el canónico de las skills?** Hoy hay dos copias en dos repos: `skills/` en el repo
-   del DS (congelada, 341 líneas) y el plugin `design`, que sincroniza desde
+   del DS (congelada, 341 líneas) y el plugin `embassy`, que sincroniza desde
    `amalgamaco/claude-code-plugins` (455 líneas, la que la gente usa). Hay que elegir una y borrar la
    otra. **Recomiendo que el canónico sea el repo de plugins** y que `skills/` del DS se elimine: es
    más simple y es como funciona la distribución hoy. El acoplamiento skill↔componente se resuelve
@@ -336,7 +336,7 @@ Seis, y todas son cortas:
 
 ## Anexo — archivos de esta propuesta
 
-Las skills viven en el plugin `design` de `amalgamaco/claude-code-plugins` (una sola copia);
+Las skills viven en el plugin `embassy` de `amalgamaco/claude-code-plugins` (una sola copia);
 `design.md`, `PUBLIC-API.md`, `public-api.json` y `FAILURES.md` en la raíz de este repo, que es de
 donde las skills los leen. El reparto y cómo actualizar cada lado: `SKILLS.md`.
 
@@ -345,6 +345,6 @@ donde las skills los leen. El reparto y cómo actualizar cada lado: `SKILLS.md`.
 | `ANALISIS-SKILLS-DS.md` | El diagnóstico que originó este plan |
 | `PLAN-USO-DS.md` | Este documento |
 | `design.md` · `PUBLIC-API.md` · `FAILURES.md` | Listos para mover a la raíz |
-| `plugins/design/skills/embassy-start/` (otro repo) | La skill del §3 |
-| `plugins/design/skills/` (otro repo) — `design-system` · `embassy-artifact` · `embassy-review` · `embassy-eval` | Las cuatro P0 |
+| `plugins/design/skills/start/` (otro repo) | La skill del §3 |
+| `plugins/design/skills/` (otro repo) — `screen` · `artifact` · `review` · `eval` | Las cuatro P0 |
 | `scripts/build-public-api.mjs` · `check-output.mjs` · `build-brand-theme.mjs` | Probados contra el repo real |

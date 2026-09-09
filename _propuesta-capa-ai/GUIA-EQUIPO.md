@@ -6,8 +6,18 @@ Una página. Qué escribir, dónde, y qué pasa. El razonamiento está en `PLAN-
 
 ## Antes que nada (una sola vez, por persona)
 
-Tenés que tener el **plugin `design`** instalado en Claude. Si alguna vez usaste
-`/design:design-system`, ya lo tenés y se actualiza solo.
+Tenés que tener el **plugin `embassy`** instalado en Claude, y para eso escribí `/embassy:` y fijate
+que el autocompletado te ofrezca **siete**: `screen` · `start` · `artifact` · `review` · `break` ·
+`explain` · `eval`.
+
+> **Si venías usando `/design:design-system`, ese comando ya no es el nuestro.** Hasta septiembre
+> nuestro plugin se llamaba `design`, igual que uno de Anthropic que trae su propio `design-system`.
+> Los dos peleaban por el mismo nombre y el resultado era impredecible: según la máquina te
+> respondía uno u otro, y dos de nuestras skills directamente no aparecían. Ahora el nuestro se
+> llama **`embassy`** y no se pisa con nada.
+>
+> Si tenés los dos instalados, **desinstalá el `design` de Amalgama** (el viejo): quedó vacío de
+> contenido nuevo y solo genera confusión. El de Anthropic es otra cosa y decidilo aparte.
 
 **No hace falta clonar el repo del Design System.** Las skills lo bajan solas y anotan con qué
 commit trabajaron.
@@ -24,7 +34,7 @@ Puede estar vacía. Esto es lo que más se confunde: el DS no se abre, se consum
 ### 2 · Pegá esto
 
 ```
-/design:embassy-start
+/embassy:start
 ```
 
 Y si preferís escribirlo con tus palabras, funciona igual:
@@ -34,7 +44,7 @@ Y si preferís escribirlo con tus palabras, funciona igual:
 Podés adelantar todas las respuestas en el mismo mensaje si ya las tenés:
 
 ```
-/design:embassy-start
+/embassy:start
 
 Cliente: Megatlón
 Stack: React / Next
@@ -89,7 +99,7 @@ Media hora, una vez. Después el proyecto no vuelve a pensar en el DS.
 Son siete, pero **cinco son las del día a día y dos las llamás solo cuando las necesitás**. Cada una
 tiene un momento distinto en la vida del proyecto. Leelas en este orden:
 
-### 1 · `/design:embassy-start` — el día que arranca el proyecto
+### 1 · `/embassy:start` — el día que arranca el proyecto
 
 **Una sola vez, al principio.** Antes de que exista la primera pantalla.
 
@@ -99,7 +109,7 @@ salvo que el cliente cambie de marca.
 
 > *"¿Ya existe `brand/<cliente>.css` en la carpeta?"* Si sí, esta skill ya cumplió.
 
-### 2 · `/design:design-system` — todos los días, para cada pantalla
+### 2 · `/embassy:screen` — todos los días, para cada pantalla
 
 **Es la que más vas a usar.** Cada vez que haya que armar una pantalla nueva, rediseñar una que
 está mal, o migrar una vieja al DS.
@@ -115,7 +125,7 @@ que se rompe), después qué movió, y recién ahí el código. Si te devuelve u
 cambiaron los colores y los botones, algo falló — eso es un re-skin y la skill está hecha
 justamente para no hacer eso.
 
-### 3 · `/design:embassy-artifact` — cuando NO hay repo
+### 3 · `/embassy:artifact` — cuando NO hay repo
 
 **El corte es este: ¿esto vive en un repo de producto que se mantiene, o es un entregable de una
 vez?**
@@ -123,10 +133,10 @@ vez?**
 Propuestas comerciales, reportes de proyecto, one-pagers, la página de resultados del trimestre,
 un brief, una demo. Sale un HTML solo, on-brand, sin clonar nada y sin instalar nada.
 
-> Si dudás entre esta y `design-system`, preguntate: *¿alguien va a volver a editar esto dentro de
-> tres meses?* Sí → `design-system`. No → `embassy-artifact`.
+> Si dudás entre esta y `screen`, preguntate: *¿alguien va a volver a editar esto dentro de
+> tres meses?* Sí → `screen`. No → `artifact`.
 
-### 4 · `/design:embassy-review` — antes de entregar o mergear
+### 4 · `/embassy:review` — antes de entregar o mergear
 
 **El paso previo a mostrar algo.** No construye ni arregla: audita y te dice qué está mal, con
 severidad y con el arreglo propuesto.
@@ -140,7 +150,7 @@ esto no parece de Amalgama, ¿qué está mal?
 Sirve también sobre cosas que no hiciste con Claude: le pegás una URL, un screenshot, un link de
 Figma o un diff de un PR.
 
-### 5 · `/design:embassy-break` — cuando dudás si un componente aguanta
+### 5 · `/embassy:break` — cuando dudás si un componente aguanta
 
 **Antes de dar por terminado un componente, o cuando sospechás que se rompe con contenido real.**
 
@@ -160,7 +170,7 @@ probá la card de vacante con contenido real
 No arregla nada: te dice qué se rompió y **quién tiene la regla que lo arregla**. Y si lo que se
 rompió lo hace el sistema y no vos, eso es un gap del DS y se anota.
 
-### 6 · `/design:embassy-explain` — cuando el cliente manda una referencia
+### 6 · `/embassy:explain` — cuando el cliente manda una referencia
 
 **Cuando ves algo afuera y querés saber cómo está hecho, o si se puede con lo nuestro.**
 
@@ -178,7 +188,7 @@ mismo— y después contesta la pregunta que importa, con una de cuatro respuest
 
 Esa última es la más útil y la que nadie se anima a decir sola.
 
-### 7 · `/design:embassy-eval` — no la vas a usar
+### 7 · `/embassy:eval` — no la vas a usar
 
 **Es de los dueños del Design System.** Mide si el sistema mejora corriendo escenarios fijos y
 comparando contra un baseline. Aparece acá solo para que sepas que existe y por qué no es para el
@@ -189,30 +199,30 @@ día a día.
 ### En una línea de tiempo
 
 ```
-arranca el proyecto ──▶ embassy-start        (una vez)
+arranca el proyecto ──▶ /embassy:start      (una vez)
                           │
-        cada pantalla ──▶ design-system      (todo el tiempo)
+        cada pantalla ──▶ /embassy:screen     (todo el tiempo)
                           │
-     antes de entregar ──▶ embassy-review    (cada vez que mostrás algo)
+     antes de entregar ──▶ /embassy:review    (cada vez que mostrás algo)
 
 
-        en paralelo, sin repo ──▶ embassy-artifact   (propuestas, reportes)
+        en paralelo, sin repo ──▶ /embassy:artifact   (propuestas, reportes)
 
 
-   cuando hace falta ──▶ embassy-break     (¿este componente aguanta?)
-                     ──▶ embassy-explain   (¿cómo hicieron esto? ¿se puede?)
+   cuando hace falta ──▶ /embassy:break     (¿este componente aguanta?)
+                     ──▶ /embassy:explain   (¿cómo hicieron esto? ¿se puede?)
 ```
 
 ### Las confusiones que se dan siempre
 
 | Si pensás… | En realidad va… |
 |---|---|
-| "Es una pantalla, uso `embassy-artifact`" | `design-system`, si vive en el repo del producto |
-| "Quiero que revise y me lo arregle" | `embassy-review` solo diagnostica. Para que lo arregle, `design-system` |
-| "Cada pantalla nueva la arranco con `embassy-start`" | No: `embassy-start` es una vez por proyecto |
-| "Quiero ver si el componente está bien, uso `embassy-break`" | `break` muestra qué **se rompe**; si querés saber si está **bien hecho**, es `embassy-review` |
+| "Es una pantalla, uso `artifact`" | `screen`, si vive en el repo del producto |
+| "Quiero que revise y me lo arregle" | `review` solo diagnostica. Para que lo arregle, `screen` |
+| "Cada pantalla nueva la arranco con `start`" | No: `start` es una vez por proyecto |
+| "Quiero ver si el componente está bien, uso `break`" | `break` muestra qué **se rompe**; si querés saber si está **bien hecho**, es `review` |
 
-El prefijo `design:` es el nombre del plugin. La forma corta (`/embassy-start`) también funciona
+El prefijo `design:` es el nombre del plugin. La forma corta (`/embassy:start`) también funciona
 si no hay otra skill con ese nombre.
 
 ---
@@ -227,7 +237,7 @@ después. Es el único mecanismo garantizado, y por eso esta guía los usa.
 
 **2 · El `CLAUDE.md` de la carpeta.** Claude lo lee en **cada** mensaje que mandás estando en esa
 carpeta. Si adentro dice "usá Embassy, la marca está en `brand/megatlon.css`, no hardcodees
-colores", eso aplica siempre. `/design:embassy-start` te lo deja escrito — es la razón por la que
+colores", eso aplica siempre. `/embassy:start` te lo deja escrito — es la razón por la que
 el paso 2 vale la media hora.
 
 **3 · El disparo automático.** Claude lee la descripción de cada skill instalada y decide si tu
@@ -271,7 +281,7 @@ la primera.
 ## Preguntas frecuentes
 
 **¿Tengo que saber programar?**
-Para `embassy-start` y `embassy-artifact`, no. Respondés preguntas y mirás el resultado.
+Para `start` y `artifact`, no. Respondés preguntas y mirás el resultado.
 
 **¿Y si el cliente todavía no definió la marca?**
 Arrancás igual: queda la de Amalgama y se anota como pendiente en `DESIGN.md`. Cuando llegue el
@@ -289,6 +299,6 @@ En `index.html` del repo del DS (el catálogo interactivo), o en
 **Encontré algo que el DS resuelve mal.**
 Decilo. Se anota en `FAILURES.md` y se arregla en el sistema, no en tu proyecto.
 
-**¿Por qué la skill de pantallas se llama `design-system` y no `embassy`?**
+**¿Por qué la skill de pantallas se llama `screen` y no `embassy`?**
 Porque ya existía con ese nombre y hace exactamente eso. Tener dos skills compitiendo por el mismo
 disparo es peor que una sola buena. Puede que se renombre más adelante.
