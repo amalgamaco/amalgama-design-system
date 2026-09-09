@@ -264,7 +264,10 @@ Los que más se equivocan, resueltos de una:
   `btn-text` → `icon-btn`. **Uno solo `btn-primary` por contexto.** Nunca full-width ni con el
   contenido alineado a la izquierda: eso se lee como un campo de formulario. El disparador de un
   overlay es `btn-secondary` (la acción primaria vive adentro del overlay). El vecino de menor
-  prioridad del primario va `btn-tertiary` (outline), no `btn-secondary` (tonal): el tonal compite.
+  prioridad del primario va `btn-tertiary` (outline), no `btn-secondary` (relleno neutro), que pesa
+  más. Desde sep-2026 el secundario NO es el tonal de acento: `--color-secondary-container` quedó
+  reservado para el estado **seleccionado** (chip, segmented, pagination, toggle, calendar, item de
+  menú activo), así que el botón y el item de menú ya no salen del mismo color.
 - **Búsqueda** — si filtra una lista que está en esta misma pantalla → `.search-field` dentro del
   `.toolbar`, creciendo con `flex:1` y alineado a la grilla. Si es global, hero, tipo comando, o es
   mobile → `.search-bar` (píldora). **Nunca un `<input>` genérico con placeholder "Buscar".**

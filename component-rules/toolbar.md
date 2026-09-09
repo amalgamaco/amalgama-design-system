@@ -35,7 +35,7 @@ sizes:
 size_selection: "Single density by design. The search-field grows (flex:1); pair the view action with btn-primary btn-sm to keep heights aligned. In .toolbar-filters every control is --tb-height (40px)."
 content_rules:
   - "Left→right by frequency of use: search → filters (most-used first) → view/sort switch → view action."
-  - "One primary action per bar (far right); everything else is Tonal (btn-secondary), Outlined (toolbar-btn/btn-tertiary) or icon. Secondary actions sit to the left of the primary inside .toolbar-actions."
+  - "One primary action per bar (far right); everything else is Neutral fill (btn-secondary), Outlined (toolbar-btn/btn-tertiary) or icon. Secondary actions sit to the left of the primary inside .toolbar-actions."
   - "Left holds what filters/defines the view; right (.toolbar-actions) holds the actions."
   - "result-count reflects the real filtered count ('Mostrando N de M') and updates on filter."
   - "In .toolbar-filters, controls of the same hierarchy share the same field container — don't mix filled and transparent without a documented hierarchy reason."

@@ -103,18 +103,21 @@
 .btn-primary.btn-success:hover { background: var(--color-success-hover); }
 
 /* ─────────────────────────────────────
-   Secondary · fill TONAL (Secondary Container, estilo MD3 filled-tonal).
-   Light: periwinkle claro #CAD9FF + texto navy. Dark: periwinkle medio
-   #3A5BB0 + texto claro. Menor jerarquía que el Primary (filled); se diferencia por
-   inversión de valor.
+   Secondary · fill NEUTRO (superficie tonal + borde sutil).
+   No consume el acento: en todo el sistema --color-secondary-container significa
+   SELECCIONADO (chip, segmented-button, pagination, toggle, calendar, list, y el
+   item activo del menú vía --color-nav-selected). Un botón no es un estado
+   seleccionado, y cuando compartían token el botón secundario salía igual que el
+   item de menú activo. Además, en neutro el Secondary lee como menor jerarquía
+   frente al Primary en los dos temas, que es lo que pide variables.css §Button.
 ───────────────────────────────────── */
 .btn-secondary {
-  background: var(--color-secondary-container);
-  color: var(--color-on-secondary-container);
-  border-color: transparent;
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-fg);
+  border-color: var(--button-secondary-border);
 }
 .btn-secondary:hover {
-  background: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
+  background: var(--button-secondary-bg-hover);
   transform: translateY(-1px);
 }
 .btn-secondary:active { transform: translateY(0); }

@@ -216,8 +216,22 @@
      en Light Y Dark. Los tokens semánticos ya son theme-aware, por eso
      se definen UNA sola vez (sin override por tema). Sin hardcodes.
   ───────────────────────────────────── */
-  /* --button-secondary-* tokens eliminados — btn-secondary consume
-     --color-secondary-container y --color-on-secondary-container directamente. */
+  /* Restaurados en sep-2026. Habían sido eliminados y btn-secondary pasó a consumir
+     --color-secondary-container directamente, o sea el mismo token que --color-nav-selected:
+     el item seleccionado del menú y el botón secundario salían idénticos. En todo el resto
+     del sistema secondary-container significa SELECCIONADO (chip, segmented, pagination,
+     toggle, calendar, list); el botón era el único lugar donde significaba "acción". Así que
+     el que se movió fue el botón, y vuelve al tratamiento neutro que describe el bloque de
+     arriba. Los roles ya son theme-aware: se definen una sola vez, sin override por tema. */
+  --button-secondary-bg:        var(--color-surface-container-high);
+  --button-secondary-fg:        var(--color-on-surface);
+  /* El relleno neutro contrasta 1.19:1 con la tarjeta: el borde ES lo que identifica
+     al control, así que tiene que llegar a 3:1 (WCAG 1.4.11). En claro --color-outline
+     es neutral-200 y se queda en 2.52:1, por eso acá va neutral-300 → 4.34:1. En dark
+     --color-outline YA es neutral-300 y encima viene teñido por la marca: ahí se usa
+     el rol (ver el bloque [data-theme="dark"]). */
+  --button-secondary-border:    var(--neutral-300);
+  --button-secondary-bg-hover:  var(--color-surface-container-highest);
 
 
   /* ─────────────────────────────────────
@@ -526,7 +540,10 @@
   --color-disabled:                  #282C39; /* neutral-600 */
   --color-on-disabled:               #747989; /* neutral-300 */
 
-  /* Button · Secondary — neutral treatment is theme-aware via --color-* refs (defined once in :root) */
+  /* Button · Secondary — el relleno y el texto ya son theme-aware por rol. El borde sí
+     se reasigna: en dark --color-outline es neutral-300 (el mismo peso que en claro pide
+     neutral-300) y además lo tiñe el tema de marca. 3.79:1 sobre la tarjeta. */
+  --button-secondary-border:    var(--color-outline);
 
   /* Aliases semánticos que dependen de la rampa */
   --text-primary:   #EAEBED; /* neutral-50 — en dark el navy no contrasta; vuelve a on-surface */
@@ -591,6 +608,9 @@
   /* Outline — literal hex */
   --color-outline:                   #9FA3AE;                    /* neutral-200 */
   --color-outline-variant:           #BFC1C8;                    /* neutral-100 */
+  /* Restaura el borde del botón secundario: en claro necesita neutral-300 para llegar
+     a 3:1, porque el rol outline es más liviano acá (ver :root §Button · Secondary). */
+  --button-secondary-border:         #747989;                    /* neutral-300 */
   /* Inverse */
   --color-inverse-surface:           #0A0C12;                    /* neutral-900 */
   --color-inverse-on-surface:        #EAEBED;                    /* neutral-50 */

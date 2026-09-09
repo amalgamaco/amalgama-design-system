@@ -49,7 +49,7 @@ use_cases:                      # concrete product scenarios
 
 variants:                       # every supported variant + its intended purpose
   - {name: primary,   class: btn-primary,   purpose: "the one main action of a context"}
-  - {name: secondary, class: btn-secondary, purpose: "equal-alternative actions"}
+  - {name: secondary, class: btn-secondary, purpose: "equal-alternative actions (neutral fill + outline, not the accent tonal)"}
 sizes:                          # every supported size + when to pick it
   - {name: md, class: "(default)", use: "standard density"}
 size_selection: "Rule of thumb for choosing a size."

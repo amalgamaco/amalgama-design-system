@@ -23,7 +23,7 @@ use_cases:
 variants:
   - {name: primary,   class: btn-primary,   purpose: "The single most important action of a context (filled)."}
   - {name: elevated,  class: btn-elevated,  purpose: "Tonal + real elevation; primary-container surface that needs to lift off busy backgrounds (MD3 elevated button)."}
-  - {name: secondary, class: btn-secondary, purpose: "Tonal; equal-weight alternative actions and default overlay triggers."}
+  - {name: secondary, class: btn-secondary, purpose: "Neutral fill + outline; equal-weight alternative actions and default overlay triggers. Since sep-2026 it is NOT the accent tonal: --color-secondary-container means SELECTED everywhere else in the system (chip, segmented, pagination, toggle, calendar, list, active nav item), so the button gave it up."}
   - {name: tertiary,  class: btn-tertiary,  purpose: "Outlined; lower-emphasis actions. Alias: btn-ghost."}
   - {name: text,      class: btn-text,      purpose: "Lowest emphasis; inline actions inside dense content."}
   - {name: icon,      class: icon-btn,      purpose: "Icon-only action; requires aria-label."}
