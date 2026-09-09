@@ -73,3 +73,30 @@
 @import url('components/input-group.css?v=9');
 @import url('components/item.css?v=9');
 @import url('components/attachment.css?v=9');
+
+/* El bloque de punteros gruesos va acá y no en base.css: el orden de carga es
+   variables → brand → base → layout → components, así que una regla en base
+   queda pisada por layout.css, que es donde viven .nav-item y .shell-menu-btn.
+   Lo descubrimos midiendo: con el bloque en base, .topbar-btn llegaba a 44px y
+   .nav-item se quedaba en 36. */
+/* ─────────────────────────────────────────────────────────────
+   Punteros gruesos — WCAG 2.5.5 / guidelines/accessibility.md / GOVERNANCE §7.2
+
+   Los controles miden 36px y nada los llevaba a 44px: no existía ningún bloque
+   que lo aplicara, así que la regla estaba escrita en las guidelines y en
+   ninguna hoja de estilos.
+
+   (pointer: coarse) además del ancho, porque una tablet o una pantalla táctil
+   grande necesitan el target igual y el ancho solo no las detecta.
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px), (pointer: coarse) {
+  /* min-height y no padding: el padding calculado depende del line-height y
+     quedaba en 42px. */
+  .nav-item { min-height: 44px; }
+  .icon-btn,
+  .topbar-notif,
+  .topbar-btn,
+  .shell-menu-btn { width: 44px; height: 44px; }
+  .btn-primary, .btn-secondary, .btn-tertiary, .btn-elevated, .btn-text,
+  .toolbar-btn, .seg-btn { min-height: 44px; }
+}

@@ -48,6 +48,6 @@
   margin-top: 4px;
 }
 /* Token-bound trend modifiers — prefer these over an inline `style="color:…"` escape hatch */
-.stat-change-positive { color: var(--color-success); }
-.stat-change-negative { color: var(--color-error); }
+.stat-change-positive { color: var(--color-success-text); }
+.stat-change-negative { color: var(--color-error-text); }
 .stat-change-neutral  { color: var(--text-muted); }

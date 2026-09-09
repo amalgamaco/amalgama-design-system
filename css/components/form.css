@@ -255,7 +255,7 @@ input:disabled, select:disabled, textarea:disabled {
 .field-error-msg {
   font-size: var(--font-size-caption);
   line-height: 1.4;
-  color: var(--color-error);
+  color: var(--color-error-text);
   display: flex;
   align-items: flex-start;
   gap: var(--space-1);
@@ -273,7 +273,7 @@ input:disabled, select:disabled, textarea:disabled {
   margin-left: auto;
 }
 .field-char-count.is-over {
-  color: var(--color-error);
+  color: var(--color-error-text);
 }
 
 /* ═══════════════════════════════════════
@@ -293,10 +293,10 @@ input:disabled, select:disabled, textarea:disabled {
    </div>
 ═══════════════════════════════════════ */
 .field-group.is-error .field-label {
-  color: var(--color-error);
+  color: var(--color-error-text);
 }
 .field-group.is-error:focus-within .field-label {
-  color: var(--color-error); /* el error sobreescribe el color interactivo */
+  color: var(--color-error-text); /* el error sobreescribe el color interactivo */
 }
 .field-group.is-error .field-input {
   border-color: var(--color-error);
@@ -312,7 +312,7 @@ input:disabled, select:disabled, textarea:disabled {
   display: none; /* el mensaje de error reemplaza el texto de soporte */
 }
 .field-group.is-error .field-trailing-icon {
-  color: var(--color-error);
+  color: var(--color-error-text);
 }
 
 /* ═══════════════════════════════════════

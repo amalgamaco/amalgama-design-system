@@ -75,7 +75,7 @@
   pointer-events: none;
 }
 .dropdown-item[data-variant="danger"] {
-  color: var(--color-error);
+  color: var(--color-error-text);
 }
 .dropdown-item[data-variant="danger"]:hover,
 .dropdown-item[data-variant="danger"]:focus-visible {

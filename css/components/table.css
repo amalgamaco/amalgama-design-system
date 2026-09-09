@@ -98,3 +98,17 @@
   color: var(--text-secondary);
   text-align: left;
 }
+
+
+/* ── Alineación numérica ──
+   guidelines/tables-and-data.md §32 exige columnas numéricas a la derecha con
+   tabular-nums, y el camino React lo resuelve con `text-right`. El CSS forzaba
+   text-align:left en th y td sin ningún modificador, así que toda tabla
+   buildless lo peleaba con especificidad propia. Estos dos lo resuelven. */
+.data-table th.numeric,
+.data-table td.numeric,
+.table th.numeric,
+.table td.numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

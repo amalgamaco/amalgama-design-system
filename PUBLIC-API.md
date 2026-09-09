@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-63 componentes · **509 clases públicas** de 575 selectores totales en el CSS.
+63 componentes · **509 clases públicas** de 577 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 

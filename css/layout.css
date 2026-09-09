@@ -15,6 +15,12 @@
 .main {
   margin-left: var(--sidebar-width);
   flex: 1;
+  /* min-width:0 anula el min-width:auto que traen los ítems flex. Sin esto el
+     shell no puede encogerse por debajo del min-content de su contenido, y
+     cualquier tabla ancha lo empuja más allá del viewport: en 375px medimos
+     589px de desborde. Es el arreglo de fondo — sin él cada pantalla
+     redescubre el problema la primera vez que mete una tabla en el shell. */
+  min-width: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -212,7 +218,8 @@
    on close return it to the hamburger. See GOVERNANCE §14.3.
 ═══════════════════════════════════════ */
 
-/* Hamburger — only shown on compact; ≥44px touch target. Place first in .topbar. */
+/* Hamburger — only shown on compact. Place first in .topbar. El target de 44px
+   lo aplica el bloque de punteros gruesos en base.css, no esta regla. */
 .shell-menu-btn {
   display: none;
   width: 40px; height: 40px; margin-right: 4px;
@@ -246,6 +253,17 @@
   /* Content reclaims full width; the hamburger appears in the topbar. */
   .main { margin-left: 0; }
   .shell-menu-btn { display: inline-flex; }
+
+  /* El drawer resolvía el sidebar y dejaba el topbar sin tocar: 28px de padding
+     lateral y un breadcrumb sin truncar alcanzan para desbordar solos. */
+  .topbar { padding: 0 var(--space-4); gap: var(--space-2); }
+  .topbar-breadcrumb {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .avatar-label { display: none; }
 
   /* Scrim shown while the drawer is open. */
   .app.nav-open .sidebar-scrim { display: block; opacity: 1; }
