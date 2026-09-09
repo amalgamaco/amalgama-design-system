@@ -79,11 +79,13 @@ Chequeá mientras tanto:
 - [ ] **Te pregunta en qué dispositivo se usa.** Si no lo pregunta, es una falla: de ahí salen los
       tamaños táctiles.
 - [ ] Lo que puede averiguar mirando la carpeta **no te lo pregunta**.
-- [ ] **No te hace cuatro preguntas más** sobre espaciado, sombras, movimiento e íconos. Tiene que
-      deducirlos y proponerte un perfil en una sola línea —para Nortia debería salir algo como
-      *espaciado compacto, superficies con borde nítido, movimiento sobrio, íconos robustos*— y
-      recién ahí ofrecerte cambiarlo. Si te los pregunta de a uno, **anotalo**: se volvió un
-      formulario.
+- [ ] **Al final te hace cuatro preguntas más**, después de las de marca: cuánto aire, cómo se
+      separan las tarjetas, cómo se mueve y qué tan gruesos son los íconos. Cada una tiene que
+      venir con una opción **ya recomendada** y el motivo en media línea (para Nortia debería
+      recomendar compacto · borde nítido · sobrio · gruesos, porque lo usa el personal del negocio
+      en computadora). Si te las tira sin recomendación, o directamente no te las hace, anotalo.
+- [ ] **Elegí a propósito algo distinto de lo recomendado** en una de las cuatro — por ejemplo
+      espacioso en vez de compacto. Tiene que aceptarlo y que se note en el resultado.
 
 ### 1.3 · Qué tiene que quedarte en la carpeta
 
@@ -118,8 +120,11 @@ Abrí `theme-preview.html` y **cambiá a oscuro**.
       tener en cuenta.
 - [ ] `DESIGN.md` dice qué quedó **pendiente**, no solo qué se hizo.
 - [ ] Abrí `brand/nortia.css`: además de los colores tiene que haber **espaciados, sombras,
-      tiempos de animación y grosor de íconos**. Si solo tiene colores, el perfil que te propuso
-      quedó en el chat y no se aplicó — **reportalo**.
+      tiempos de animación y grosor de íconos**, y tienen que coincidir con lo que elegiste en las
+      preguntas 10 a 13. Si solo tiene colores, tus respuestas quedaron en el chat y no se
+      aplicaron — **reportalo**.
+- [ ] Al final de ese mismo archivo tiene que haber un bloque `[data-theme="dark"]` con las
+      superficies oscuras teñidas del color de la marca.
 - [ ] No te preguntó por modo oscuro ni por tamaños de tipografía. Esos ya están decididos.
 - [ ] **Al terminar te ofrece armar la primera pantalla.** Si te deja sin próximo paso, anotalo.
 
