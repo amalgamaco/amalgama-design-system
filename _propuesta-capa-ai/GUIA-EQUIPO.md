@@ -1,29 +1,21 @@
-# Cómo usar el Design System — guía para el equipo
+# Cómo usar el Design System
 
-Una página. Qué escribir, dónde, y qué pasa. El razonamiento está en `PLAN-USO-DS.md`.
+Qué escribir, dónde, y qué pasa.
 
-> **¿Es tu primera vez y querés probarlo antes de usarlo en un proyecto real?**
-> `PRUEBA-EQUIPO.md` es un protocolo de 40 minutos con casos concretos y qué esperar en cada uno.
+> **¿Querés probarlo antes de usarlo en un proyecto real?** `PRUEBA-EQUIPO.md` es un protocolo de
+> 40 minutos con casos concretos y qué esperar en cada uno.
 
 ---
 
-## Antes que nada (una sola vez, por persona)
+## Antes que nada (una sola vez)
 
-Tenés que tener el **plugin `embassy`** instalado en Claude, y para eso escribí `/embassy:` y fijate
-que el autocompletado te ofrezca **siete**: `screen` · `start` · `artifact` · `review` · `break` ·
-`explain` · `eval`.
+Escribí `/embassy:` en Claude y fijate que el autocompletado te ofrezca **siete**: `screen` ·
+`start` · `artifact` · `review` · `break` · `explain` · `eval`.
 
-> **Si venías usando `/design:design-system`, ese comando ya no es el nuestro.** Hasta septiembre
-> nuestro plugin se llamaba `design`, igual que uno de Anthropic que trae su propio `design-system`.
-> Los dos peleaban por el mismo nombre y el resultado era impredecible: según la máquina te
-> respondía uno u otro, y dos de nuestras skills directamente no aparecían. Ahora el nuestro se
-> llama **`embassy`** y no se pisa con nada.
->
-> Si tenés los dos instalados, **desinstalá el `design` de Amalgama** (el viejo): quedó vacío de
-> contenido nuevo y solo genera confusión. El de Anthropic es otra cosa y decidilo aparte.
+Si no aparecen, instalá el plugin **`embassy`** desde el marketplace de Amalgama y reiniciá Claude
+Code. Y si tenías uno viejo llamado `design`, desinstalalo.
 
-**No hace falta clonar el repo del Design System.** Las skills lo bajan solas y anotan con qué
-commit trabajaron.
+**No hace falta clonar nada.** Las skills traen el Design System solas.
 
 ---
 
@@ -31,8 +23,9 @@ commit trabajaron.
 
 ### 1 · Abrí la carpeta del proyecto
 
-En Claude, **Add folder** sobre la carpeta **del proyecto nuevo** — no sobre la del Design System.
-Puede estar vacía. Esto es lo que más se confunde: el DS no se abre, se consume.
+En Claude, **Add folder** sobre la carpeta **del proyecto nuevo**. Puede estar vacía.
+
+> Nunca sobre la carpeta del Design System. Es el error más común: el DS no se abre, se consume.
 
 ### 2 · Pegá esto
 
@@ -40,11 +33,10 @@ Puede estar vacía. Esto es lo que más se confunde: el DS no se abre, se consum
 /embassy:start
 ```
 
-Y si preferís escribirlo con tus palabras, funciona igual:
+O escribilo con tus palabras: *"arranquemos este proyecto con el Design System, white-label para
+Megatlón."*
 
-> *"Necesito arrancar este proyecto con el Design System de Amalgama, white-label para Megatlón."*
-
-Podés adelantar todas las respuestas en el mismo mensaje si ya las tenés:
+Si ya tenés los datos, adelantalos todos en el mismo mensaje:
 
 ```
 /embassy:start
@@ -59,21 +51,17 @@ Forma: redondeada
 Tipografía: las de Embassy
 ```
 
-> **Densidad** es cuánta información entra por pantalla (herramienta interna densa · producto
-> consumer · mixto). **No** es cuántos usuarios tiene el cliente — ese dato no cambia nada.
+> **Densidad** es cuánta información entra por pantalla: herramienta interna densa · producto
+> consumer · mixto.
 
 ### 3 · Respondé lo que falte
 
-Son seis preguntas en dos rondas: **contexto** (tipo de proyecto · stack y superficie · densidad e
-idioma) y **marca** (primario y acento · personalidad de la forma · tipografía y grises).
+Seis preguntas: tipo de proyecto · stack y superficie · densidad e idioma · los dos colores de
+marca · la forma (redondeada, balanceada o técnica) · tipografía y grises.
 
-Tres cosas no te las va a preguntar, porque ya están decididas: dark mode viene siempre, los
-tamaños de tipografía no se tocan, y el volumen de usuarios no cambia nada.
-
-> **Ojo con qué color va en cada rol.** `--color-primary` es el tono **oscuro** (texto de página y
-> sidebar); `--color-secondary` es el **acento** interactivo. Si el color vivo de la marca es un
-> naranja o un lima, va como acento y el primario es el neutro oscuro de la marca. El generador te
-> avisa si el hex no encaja, y verifica contraste AA antes de dejarte seguir.
+> **De los dos colores, el primario es el tono oscuro** — el del texto y el sidebar. El acento es
+> el color vivo, el de los botones y los links. Si la marca del cliente es un naranja fuerte, ese
+> va como **acento**. Si te equivocás, el generador te avisa.
 
 ### 4 · Mirá el preview y aprobá
 
@@ -82,63 +70,36 @@ oscuro. Abrilo y probá el toggle. Si algo no representa la marca, decíselo y l
 
 **Ese archivo es lo que le mostrás al cliente en el kickoff.**
 
-### Qué te queda en la carpeta
+### Qué te queda
 
 ```
 tu-proyecto/
-├── brand/megatlon.css      ← la marca (solo primitivas, generado)
-├── DESIGN.md               ← qué marca, qué idioma, qué se decidió, qué falta
-├── design/                 ← vacía por ahora: acá va el diagnóstico de cada pantalla
+├── brand/megatlon.css      ← la marca del cliente
+├── DESIGN.md               ← qué se decidió y qué quedó pendiente
+├── design/                 ← vacía por ahora
 ├── theme-preview.html      ← para mostrar y aprobar
-├── CLAUDE.md               ← el bloque que le dice al agente qué usar
-└── index.html / src/…      ← el layout base, con el CSS en el orden correcto
+├── CLAUDE.md               ← le dice al agente qué usar
+└── index.html / src/…      ← el layout base
 ```
 
 Media hora, una vez. Después el proyecto no vuelve a pensar en el DS.
 
-### Todo queda en tu carpeta, no en el chat
-
-Las skills **escriben archivos de verdad** en la carpeta que conectaste. No te devuelven código para
-que copies y pegues: editan el proyecto. Así que todo lo que se va generando queda ahí, versionable
-y commiteable como cualquier otra cosa.
-
-A medida que armás pantallas, `design/` se va llenando:
-
-```
-tu-proyecto/design/
-├── socios-listado.md       ← por qué esa pantalla quedó así
-├── socios-detalle.md
-└── alta-socio.md
-```
-
-Cada uno tiene el diagnóstico: qué problema tenía, qué ley de UX rompía, qué se movió, y qué
-componente y variante se eligió sobre qué alternativa. **Eso es lo que el código no guarda** — y es
-lo que hace que en dos meses alguien distinga una decisión deliberada de un accidente, en vez de
-"arreglar" la jerarquía de vuelta. `DESIGN.md` los lista a todos.
-
-Lo único que vive solo en el chat es la conversación. Los entregables, no.
+**Todo esto son archivos de verdad en tu carpeta**, no código para copiar y pegar. Commiteables
+como cualquier otra cosa. A medida que armás pantallas, `design/` se va llenando con un archivo por
+pantalla que explica por qué quedó así — qué se movió y qué componente se eligió sobre cuál.
 
 ---
 
-## Cuándo usar cada skill
+## Cuándo usar cada una
 
-Son siete, pero **cinco son las del día a día y dos las llamás solo cuando las necesitás**. Cada una
-tiene un momento distinto en la vida del proyecto. Leelas en este orden:
+### `/embassy:start` — el día que arranca el proyecto
 
-### 1 · `/embassy:start` — el día que arranca el proyecto
+Una sola vez, antes de la primera pantalla. Si ya existe `brand/algo.css` en la carpeta, esta skill
+ya cumplió.
 
-**Una sola vez, al principio.** Antes de que exista la primera pantalla.
+### `/embassy:screen` — todos los días, para cada pantalla
 
-Es la que hace las seis preguntas, genera el tema de la marca, verifica contraste y deja el
-proyecto configurado. Si ya la corriste en este proyecto, no la volvés a correr nunca —
-salvo que el cliente cambie de marca.
-
-> *"¿Ya existe `brand/<cliente>.css` en la carpeta?"* Si sí, esta skill ya cumplió.
-
-### 2 · `/embassy:screen` — todos los días, para cada pantalla
-
-**Es la que más vas a usar.** Cada vez que haya que armar una pantalla nueva, rediseñar una que
-está mal, o migrar una vieja al DS.
+La que más vas a usar: armar una pantalla nueva, rediseñar una que está mal, migrar una vieja.
 
 ```
 armá la vista de listado de socios
@@ -146,26 +107,22 @@ esta pantalla no se entiende, rediseñala
 migrá esta pantalla a Embassy
 ```
 
-No te devuelve solo la pantalla: primero te dice **qué está mal y por qué** (citando la ley de UX
-que se rompe), después qué movió, y recién ahí el código. Si te devuelve una pantalla donde solo
-cambiaron los colores y los botones, algo falló — eso es un re-skin y la skill está hecha
-justamente para no hacer eso.
+Primero te dice **qué está mal y por qué**, después qué movió, y recién ahí el código.
 
-### 3 · `/embassy:artifact` — cuando NO hay repo
+> Si te devuelve una pantalla donde solo cambiaron los colores y los botones, algo falló. Eso es un
+> re-skin, y la skill está hecha justamente para no hacer eso. Avisá.
 
-**El corte es este: ¿esto vive en un repo de producto que se mantiene, o es un entregable de una
-vez?**
+### `/embassy:artifact` — cuando no hay repo
 
-Propuestas comerciales, reportes de proyecto, one-pagers, la página de resultados del trimestre,
-un brief, una demo. Sale un HTML solo, on-brand, sin clonar nada y sin instalar nada.
+Propuestas, reportes, one-pagers, la página de resultados del trimestre, un brief, una demo. Sale
+un HTML solo, on-brand, sin clonar ni instalar nada.
 
-> Si dudás entre esta y `screen`, preguntate: *¿alguien va a volver a editar esto dentro de
-> tres meses?* Sí → `screen`. No → `artifact`.
+> ¿Dudás entre esta y `screen`? Preguntate: *¿alguien va a volver a editar esto en tres meses?*
+> Sí → `screen`. No → `artifact`.
 
-### 4 · `/embassy:review` — antes de entregar o mergear
+### `/embassy:review` — antes de entregar o mergear
 
-**El paso previo a mostrar algo.** No construye ni arregla: audita y te dice qué está mal, con
-severidad y con el arreglo propuesto.
+Audita y te dice qué está mal, con severidad y con el arreglo. **No lo arregla.**
 
 ```
 revisá esta pantalla antes de que la mande
@@ -173,16 +130,13 @@ revisá esta pantalla antes de que la mande
 esto no parece de Amalgama, ¿qué está mal?
 ```
 
-Sirve también sobre cosas que no hiciste con Claude: le pegás una URL, un screenshot, un link de
-Figma o un diff de un PR.
+Sirve también sobre cosas que no hiciste con Claude: una URL, un screenshot, un link de Figma, el
+diff de un PR.
 
-### 5 · `/embassy:break` — cuando dudás si un componente aguanta
+### `/embassy:break` — cuando dudás si un componente aguanta
 
-**Antes de dar por terminado un componente, o cuando sospechás que se rompe con contenido real.**
-
-Renderiza *un* componente en todos sus estados, variantes, largos de texto y anchos **a la vez**, en
-una página que scrolleás. Y siempre incluye el eje que más nos importa: **la marca del cliente, en
-claro y en oscuro**.
+Renderiza *un* componente en todos sus estados, largos de texto y anchos a la vez, con la marca del
+cliente en claro y en oscuro, en una página que scrolleás.
 
 ```
 rompé el select
@@ -190,39 +144,18 @@ probá la card de vacante con contenido real
 ¿esto aguanta la marca de Megatlón en oscuro?
 ```
 
-> El bug de dark mode que arrastramos meses —los temas de cliente que no llegaban a oscuro— lo habría
-> encontrado esta skill en la primera corrida. Por eso ese eje va siempre.
-
-No arregla nada: te dice qué se rompió y **quién tiene la regla que lo arregla**. Y si lo que se
-rompió lo hace el sistema y no vos, eso es un gap del DS y se anota.
-
-### 6 · `/embassy:explain` — cuando el cliente manda una referencia
-
-**Cuando ves algo afuera y querés saber cómo está hecho, o si se puede con lo nuestro.**
+### `/embassy:explain` — cuando el cliente manda una referencia
 
 ```
 el cliente mandó esta referencia, ¿se puede con Embassy?
 cómo está hecha esta animación
-cómo hicieron este gradiente
 ```
 
-Te explica cómo está construido —marcando qué midió, qué calculó y qué está infiriendo, que no es lo
-mismo— y después contesta la pregunta que importa, con una de cuatro respuestas:
-
-**ya existe** en Embassy · **se compone** con lo que hay · **es un gap** de verdad y se anota ·
-**choca con el sistema**, se puede hacer y no deberíamos.
-
-Esa última es la más útil y la que nadie se anima a decir sola.
-
-### 7 · `/embassy:eval` — no la vas a usar
-
-**Es de los dueños del Design System.** Mide si el sistema mejora corriendo escenarios fijos y
-comparando contra un baseline. Aparece acá solo para que sepas que existe y por qué no es para el
-día a día.
+Te explica cómo está construido y después contesta lo que importa: **ya existe** en Embassy ·
+**se compone** con lo que hay · **es un gap** y se anota · **choca con el sistema**, se puede hacer
+y no deberíamos.
 
 ---
-
-### En una línea de tiempo
 
 ```
 arranca el proyecto ──▶ /embassy:start      (una vez)
@@ -232,61 +165,41 @@ arranca el proyecto ──▶ /embassy:start      (una vez)
      antes de entregar ──▶ /embassy:review    (cada vez que mostrás algo)
 
 
-        en paralelo, sin repo ──▶ /embassy:artifact   (propuestas, reportes)
+        sin repo ──▶ /embassy:artifact   (propuestas, reportes)
 
-
-   cuando hace falta ──▶ /embassy:break     (¿este componente aguanta?)
-                     ──▶ /embassy:explain   (¿cómo hicieron esto? ¿se puede?)
+  cuando hace falta ──▶ /embassy:break     (¿este componente aguanta?)
+                    ──▶ /embassy:explain   (¿cómo hicieron esto? ¿se puede?)
 ```
+
+*(Hay una séptima, `/embassy:eval`, que es para los dueños del DS. No la vas a necesitar.)*
 
 ### Las confusiones que se dan siempre
 
 | Si pensás… | En realidad va… |
 |---|---|
 | "Es una pantalla, uso `artifact`" | `screen`, si vive en el repo del producto |
-| "Quiero que revise y me lo arregle" | `review` solo diagnostica. Para que lo arregle, `screen` |
+| "Quiero que revise y me lo arregle" | `review` solo diagnostica. Para arreglar, `screen` |
 | "Cada pantalla nueva la arranco con `start`" | No: `start` es una vez por proyecto |
-| "Quiero ver si el componente está bien, uso `break`" | `break` muestra qué **se rompe**; si querés saber si está **bien hecho**, es `review` |
-
-El prefijo `design:` es el nombre del plugin. La forma corta (`/embassy:start`) también funciona
-si no hay otra skill con ese nombre.
+| "Quiero ver si el componente está bien, uso `break`" | `break` muestra qué **se rompe**; si está **bien hecho** lo dice `review` |
 
 ---
 
-## Cómo funcionan los prompts
+## Cómo escribir el prompt
 
-No hay una tabla de palabras mágicas con match exacto. Hay **tres mecanismos**, de más a menos
-confiable.
+**Usá el comando.** Es lo único que garantiza que la skill se ejecute. Sin comando a veces se
+dispara sola —Claude lee tu mensaje y decide— pero es probable, no seguro.
 
-**1 · El slash command.** Determinístico. Nombrás la skill y se ejecuta, escribas lo que escribas
-después. Es el único mecanismo garantizado, y por eso esta guía los usa.
-
-**2 · El `CLAUDE.md` de la carpeta.** Claude lo lee en **cada** mensaje que mandás estando en esa
-carpeta. Si adentro dice "usá Embassy, la marca está en `brand/megatlon.css`, no hardcodees
-colores", eso aplica siempre. `/embassy:start` te lo deja escrito — es la razón por la que
-el paso 2 vale la media hora.
-
-**3 · El disparo automático.** Claude lee la descripción de cada skill instalada y decide si tu
-mensaje encaja. Es **semántico, no literal**: "esta pantalla está sobrecargada" dispara aunque esa
-frase exacta no esté en ningún lado. Sube la probabilidad nombrar Embassy o Amalgama, decir
-"pantalla", "rediseñá", "aplicá el design system", nombrar un componente del DS, o pedir algo
-"con nuestra marca". Sube, no garantiza — si te importa que se dispare, usá el comando.
-
-**Cómo sabés que se disparó:** la skill aparece nombrada en la interfaz, y el resultado trae el
-commit del DS con el que trabajó y dice qué componente y qué variante eligió y por qué. Si te
-devuelve una pantalla sin nada de eso, no se disparó: repetilo con el comando.
-
-**Lo que hace bueno a un prompt**, con skill o sin skill: describí **el objetivo y el objeto** de
-la pantalla, no los componentes.
+**Y describí el objetivo, no los componentes.** Es lo que más cambia el resultado:
 
 > ✅ *"Armá la vista de listado de socios, filtrable por estado y plan; la acción principal es dar
 > de alta; los usuarios entran a buscar a una persona puntual."*
 >
 > ❌ *"Hacé una tabla con filtros y un botón."*
 
-El segundo te da componentes. El primero te da una pantalla, porque la skill arranca decidiendo
-qué **es** la pantalla antes de elegir con qué se construye — y si vos ya se lo diste, sale bien a
-la primera.
+El segundo te da componentes. El primero te da una pantalla.
+
+**Cómo sabés que funcionó:** el resultado te dice qué componente eligió y por qué. Si te devuelve
+una pantalla y nada más, repetilo con el comando.
 
 ---
 
@@ -294,13 +207,13 @@ la primera.
 
 1. **Poner un color a mano.** Todo sale de tokens. Un `#3A5BB0` suelto rompe el dark mode.
 2. **Inventar un componente que ya existe.** Hay 63. Si parece que falta, casi seguro está con otro
-   nombre — y si de verdad falta, se marca como gap, no se improvisa.
+   nombre.
 3. **Dos acciones primarias en una pantalla.** Si las dos parecen igual de importantes, falta
    jerarquía.
-4. **Un `<input placeholder="Buscar">`.** Existen `search-field` y `search-bar`, y cuál va depende
-   de si filtra una lista de esta pantalla o es global.
-5. **Tocar `variables.css` o un componente del DS desde el proyecto.** El proyecto solo escribe su
-   `brand/<cliente>.css`, y ahí solo primitivas.
+4. **Un `<input placeholder="Buscar">`.** Hay dos buscadores distintos y cuál va depende de si
+   filtra una lista de esta pantalla o busca en toda la app.
+5. **Tocar el Design System desde tu proyecto.** Tu proyecto solo escribe su propio archivo de
+   marca.
 
 ---
 
@@ -310,21 +223,16 @@ la primera.
 Para `start` y `artifact`, no. Respondés preguntas y mirás el resultado.
 
 **¿Y si el cliente todavía no definió la marca?**
-Arrancás igual: queda la de Amalgama y se anota como pendiente en `DESIGN.md`. Cuando llegue el
-color, se regenera en dos minutos.
+Arrancás igual: queda la de Amalgama y se anota como pendiente. Cuando llegue el color, se regenera
+en dos minutos.
 
 **¿Puedo usar esto en un proyecto que ya existe?**
-Sí. Si el proyecto ya tiene su propia capa de tokens, se usan esos nombres y se anota la
-divergencia. Para un rollout completo sobre un proyecto grande existe el agente
-`design-system-implementer`.
+Sí. Si el proyecto ya tiene sus propios tokens, se usan esos. Para un rollout completo sobre un
+proyecto grande hay un agente dedicado, `design-system-implementer`.
 
 **¿Dónde veo los componentes?**
-En `index.html` del repo del DS (el catálogo interactivo), o en
-`presentations.amalgama.co/p/amalgama-design-system/`.
+En `presentations.amalgama.co/p/amalgama-design-system/`, o abriendo el `index.html` del repo del
+Design System.
 
 **Encontré algo que el DS resuelve mal.**
-Decilo. Se anota en `FAILURES.md` y se arregla en el sistema, no en tu proyecto.
-
-**¿Por qué la skill de pantallas se llama `screen` y no `embassy`?**
-Porque ya existía con ese nombre y hace exactamente eso. Tener dos skills compitiendo por el mismo
-disparo es peor que una sola buena. Puede que se renombre más adelante.
+Decilo. Se arregla en el sistema, no en tu proyecto.
