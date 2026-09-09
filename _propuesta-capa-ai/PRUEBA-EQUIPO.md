@@ -98,13 +98,8 @@ Cualquiera de estas tres suma, y ninguna lleva más de diez minutos:
 
 ---
 
-## Lo que ya sabemos
+## Una sola cosa que ya sabemos
 
-Para que no gastes tiempo escribiéndolo:
-
-- **Lo flojo es la composición, no los colores.** Medimos una pantalla generada con el DS y no
-  tenía un solo color a mano, pero el toolbar quedó partido en dos y los mensajes de error
-  aparecían encima de los resultados. Si ves algo así, contalo igual —queremos saber cuánto pasa—
-  pero no te sorprendas.
-- **Si un comando "no existe", reiniciá Claude Code antes de reportarlo.** Los plugins se refrescan
-  al arrancar y una skill nueva no aparece hasta entonces.
+**Si un comando "no existe", reiniciá Claude Code antes de reportarlo.** Los plugins se refrescan al
+arrancar y una skill nueva no aparece hasta entonces. Nos pasó y perdimos un rato buscando un bug
+que no estaba.
