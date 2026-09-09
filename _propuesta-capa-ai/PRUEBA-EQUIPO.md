@@ -66,8 +66,8 @@ Creá una carpeta vacía en cualquier lado. En Claude, **Add folder** sobre **es
 pregunte usando estos datos, que son los mismos para todos:
 
 > Es para un cliente, **Nortia** · lo construye alguien a mano, con HTML y CSS · lo usa **la gente
-> del negocio** (recepción y entrenadores) · sobre todo en **computadora** · se abre solo, **con su
-> propio menú** al costado · en español · color oscuro **#14524A**, color vivo **#0E9F6E** ·
+> del negocio** (recepción y entrenadores) · sobre todo en **computadora** · es **una aplicación con
+> varias secciones y su propio menú** · en español · color oscuro **#14524A**, color vivo **#0E9F6E** ·
 > esquinas **redondeadas** · las tipografías de Amalgama
 
 Chequeá mientras tanto:
