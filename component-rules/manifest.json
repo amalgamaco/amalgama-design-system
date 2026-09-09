@@ -1,6 +1,6 @@
 {
   "note": "Machine-readable registry. Source of truth = component-rules/<id>.md frontmatter (schema in component-rules/README.md). Regenerate with scripts/build-manifest.py.",
-  "count": 61,
+  "count": 67,
   "components": [
     {
       "id": "accordion",
@@ -498,6 +498,90 @@
         "docs_anchor": "c-avatar"
       },
       "rules_file": "component-rules/avatar.md"
+    },
+    {
+      "id": "back-link",
+      "display_name": "Back Link",
+      "category": "Navigation",
+      "status": "stable",
+      "aliases": [
+        "volver",
+        "atrás",
+        "return link",
+        "‹ Volver"
+      ],
+      "summary": "A quiet inline link with a leading chevron that returns to the parent view from a detail page — one step up, never a general-purpose action.",
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "--text-secondary",
+          "--text-primary",
+          "--color-focus",
+          "--color-focus-ring"
+        ],
+        "spacing": [
+          "6px gap",
+          "6px margin-bottom"
+        ],
+        "typography": [
+          "--font-size-body-md"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "breadcrumb",
+          "page-header",
+          "tabs"
+        ],
+        "replaces": [
+          "ad-hoc '‹ Volver' links"
+        ],
+        "composed_with": [
+          "page-header"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "breadcrumb",
+            "why": "breadcrumb shows the whole trail and suits depth ≥2; back-link is one step to one known parent"
+          },
+          {
+            "component": "button",
+            "why": "a back link navigates; cancel, discard and close act on data or on an overlay"
+          },
+          {
+            "component": "tabs",
+            "why": "tabs switch between sibling views; this goes up a level"
+          }
+        ]
+      },
+      "motion": {
+        "enter": "none — present with the page.",
+        "exit": "none.",
+        "stateChange": "colour transitions on --duration-fast on hover; nothing moves.",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global rule in css/base.css. A colour transition is not motion, so nothing is suppressed.",
+        "constraints": "Never slide the chevron on hover. The only approved hover transform in Embassy is translateY(-1px), and it is not for this.",
+        "relatedPatterns": []
+      },
+      "source": {
+        "css": "css/components/back-link.css",
+        "classes": [
+          "back-link"
+        ],
+        "docs_anchor": "c-back-link"
+      },
+      "rules_file": "component-rules/back-link.md"
     },
     {
       "id": "badge",
@@ -2000,6 +2084,99 @@
       "rules_file": "component-rules/context-menu.md"
     },
     {
+      "id": "create-form",
+      "display_name": "Create Form (header + sticky footer)",
+      "category": "Layout",
+      "status": "stable",
+      "aliases": [
+        "formulario de creación",
+        "alta full-page",
+        "create page",
+        "sticky footer"
+      ],
+      "summary": "The frame for a full-page creation or editing form — a large title above, and a footer that sticks to the bottom of the viewport so the save action is reachable no matter how long the form runs.",
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "submitting",
+        "invalid"
+      ],
+      "tokens": {
+        "color": [
+          "--card-bg",
+          "--border"
+        ],
+        "radius": [],
+        "spacing": [
+          "16px 32px footer padding",
+          "20px title margin-bottom"
+        ],
+        "typography": [
+          "--font-heading",
+          "--font-size-heading-xl"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "form",
+          "dialog",
+          "page-header",
+          "description",
+          "button"
+        ],
+        "replaces": [
+          "custom form headers and footers"
+        ],
+        "composed_with": [
+          "form",
+          "description",
+          "button",
+          "alert",
+          "select",
+          "date-picker"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "dialog",
+            "why": "a dialog is for a short focused task that blocks; this is a full page for a long one"
+          },
+          {
+            "component": "page-header",
+            "why": "page-header names a view; create-header names an action in progress and pairs with the sticky footer"
+          },
+          {
+            "component": "sheet-bottom",
+            "why": "a bottom sheet is a mobile overlay for a secondary task, not the primary creation flow"
+          }
+        ]
+      },
+      "motion": {
+        "enter": "none — the frame is present with the page.",
+        "exit": "none.",
+        "stateChange": "The footer does not animate as it sticks; no shadow appears on scroll. The primary button's loading state follows button.css.",
+        "duration": "n/a for the frame",
+        "easing": "n/a for the frame",
+        "reducedMotion": "Inherits the global rule in css/base.css.",
+        "constraints": "Do not animate the footer in and out on scroll direction. A save action that hides is worse than one that scrolls.",
+        "relatedPatterns": []
+      },
+      "source": {
+        "css": "css/components/create-form.css",
+        "classes": [
+          "create-header",
+          "create-title",
+          "create-footer"
+        ],
+        "docs_anchor": "c-create-form"
+      },
+      "rules_file": "component-rules/create-form.md"
+    },
+    {
       "id": "data-table",
       "display_name": "Data Table",
       "category": "Data display",
@@ -2108,6 +2285,213 @@
         "docs_anchor": "c-data-table"
       },
       "rules_file": "component-rules/data-table.md"
+    },
+    {
+      "id": "date-picker",
+      "display_name": "Date Picker",
+      "category": "Form",
+      "status": "stable",
+      "aliases": [
+        "selector de fecha",
+        "campo de fecha",
+        "calendario desplegable",
+        "docked calendar"
+      ],
+      "summary": "A trigger button showing the chosen date, which opens a Calendar in a floating panel below it — the form and toolbar default, for when a permanent calendar would cost too much space.",
+      "variants": [
+        "default",
+        "empty"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "empty",
+        "open",
+        "disabled",
+        "focus"
+      ],
+      "tokens": {
+        "color": [
+          "--color-surface",
+          "--border",
+          "--text-muted"
+        ],
+        "radius": [
+          "--radius-lg"
+        ],
+        "spacing": [
+          "12px panel padding",
+          "8px trigger gap",
+          "240px trigger width"
+        ],
+        "shadow": [
+          "--shadow-md"
+        ],
+        "typography": []
+      },
+      "relationships": {
+        "related": [
+          "calendar",
+          "select",
+          "form",
+          "toolbar",
+          "sheet-bottom"
+        ],
+        "replaces": [
+          "ad-hoc date inputs with no accessible calendar"
+        ],
+        "composed_with": [
+          "calendar",
+          "button",
+          "toolbar",
+          "form",
+          "sheet-bottom"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "calendar",
+            "why": "Calendar is the inline, always-visible grid for when date-picking is the main task; Date Picker docks that same grid behind a trigger"
+          },
+          {
+            "component": "select",
+            "why": "Select picks one value from a short fixed list; a date is a continuous range best chosen on a grid"
+          },
+          {
+            "component": "combobox",
+            "why": "combobox filters a list by typing; there is no list of dates to filter"
+          }
+        ]
+      },
+      "motion": {
+        "enter": "The panel fades in and rises 4px on --duration-fast with --ease-default (`date-picker-in`).",
+        "exit": "Immediate. A closing overlay that lingers delays the next action.",
+        "stateChange": "The trigger follows .btn-tertiary's state layer; no motion of its own.",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global rule in css/base.css — the transform and fade are suppressed and the panel appears immediately.",
+        "constraints": "Do not scale the panel on entry, and do not animate the calendar's contents separately. One 4px rise for the whole panel.",
+        "relatedPatterns": [
+          "overlay-enter"
+        ]
+      },
+      "source": {
+        "css": "css/components/date-picker.css",
+        "classes": [
+          "date-picker",
+          "date-picker-trigger",
+          "date-picker-trigger-empty",
+          "date-picker-icon",
+          "date-picker-panel"
+        ],
+        "docs_anchor": "c-date-picker"
+      },
+      "rules_file": "component-rules/date-picker.md"
+    },
+    {
+      "id": "description",
+      "display_name": "Description Section",
+      "category": "Form",
+      "status": "stable",
+      "aliases": [
+        "sección de descripción",
+        "editor de texto largo",
+        "rich text section",
+        "bloque editable"
+      ],
+      "summary": "A bordered block with an editable heading and a rich-text body — for long-form content the person writes in named, reorderable sections, not for a plain textarea.",
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "titleFocus",
+        "bodyFocus",
+        "empty"
+      ],
+      "tokens": {
+        "color": [
+          "--border",
+          "--bg",
+          "--card-bg",
+          "--text-primary",
+          "--text-muted",
+          "--interactive",
+          "--color-focus-ring",
+          "--color-error-container",
+          "--color-on-error-container"
+        ],
+        "radius": [
+          "--radius-md"
+        ],
+        "spacing": [
+          "16px section margin",
+          "10px 12px 10px 16px header padding",
+          "14px 16px editor padding",
+          "100px min-height"
+        ],
+        "typography": [
+          "--font-size-body-md"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "form",
+          "create-form",
+          "item"
+        ],
+        "replaces": [
+          "ad-hoc rich-text editors"
+        ],
+        "composed_with": [
+          "create-form",
+          "form",
+          "icon-btn"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "form",
+            "why": "form.css covers fields with fixed labels; here the label itself is content the person writes"
+          },
+          {
+            "component": "accordion",
+            "why": "an accordion collapses existing content for reading; this is an editing surface"
+          },
+          {
+            "component": "card",
+            "why": "a card groups content for display; this one is authored in place"
+          }
+        ]
+      },
+      "motion": {
+        "enter": "A newly added section appears immediately. If it is animated, it is the shared list-item entrance on --duration-fast, never a bespoke one.",
+        "exit": "Immediate on delete, paired with an undo affordance — do not spend an animation softening a destructive act.",
+        "stateChange": "The delete button transitions background and colour on --duration-fast; the editor transitions its focus box-shadow on the same.",
+        "duration": "--duration-fast",
+        "easing": "--ease-default",
+        "reducedMotion": "Inherits the global rule in css/base.css. The opacity reveal of the delete button is a state change, not decoration, and must remain perceivable — under reduced motion it appears without a transition rather than not at all.",
+        "constraints": "Never animate the editor's height as the person types. The caret must not move under them.",
+        "relatedPatterns": [
+          "state-layer"
+        ]
+      },
+      "source": {
+        "css": "css/components/description.css",
+        "classes": [
+          "desc-section",
+          "desc-section-header",
+          "desc-title-input",
+          "desc-delete-btn",
+          "desc-editor"
+        ],
+        "docs_anchor": "c-description"
+      },
+      "rules_file": "component-rules/description.md"
     },
     {
       "id": "dialog",
@@ -4002,6 +4386,91 @@
       "rules_file": "component-rules/navigation-menu.md"
     },
     {
+      "id": "page-header",
+      "display_name": "Page Header",
+      "category": "Layout",
+      "status": "stable",
+      "aliases": [
+        "encabezado de página",
+        "título de vista",
+        "header de pantalla"
+      ],
+      "summary": "The title of a view plus its actions, on one row at the top of the content column — the anchor that tells a person which screen they are on.",
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "color": [
+          "--text-primary"
+        ],
+        "spacing": [
+          "24px margin-bottom",
+          "10px gap between actions"
+        ],
+        "typography": [
+          "--font-heading",
+          "--font-size-heading-lg"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "toolbar",
+          "back-link",
+          "breadcrumb",
+          "create-form"
+        ],
+        "replaces": [
+          "ad-hoc page headers"
+        ],
+        "composed_with": [
+          "button",
+          "dropdown-menu",
+          "badge",
+          "back-link"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "toolbar",
+            "why": "the toolbar governs the collection below it (search, filters, result count); the header names the view"
+          },
+          {
+            "component": "topbar",
+            "why": "the top bar is app-wide chrome — logo, global search, avatar — and lives in layout.css"
+          },
+          {
+            "component": "create-form",
+            "why": "a full-page creation form uses create-header + the sticky create-footer"
+          }
+        ]
+      },
+      "motion": {
+        "enter": "none — present with the page.",
+        "exit": "none.",
+        "stateChange": "none; the container is static. Its buttons animate per button.css.",
+        "duration": "n/a",
+        "easing": "n/a",
+        "reducedMotion": "Nothing to reduce; inherits the global rule in css/base.css.",
+        "constraints": "Do not animate the title in. The anchor of the page should be there the instant it paints.",
+        "relatedPatterns": []
+      },
+      "source": {
+        "css": "css/components/page-header.css",
+        "classes": [
+          "page-header",
+          "page-title",
+          "header-actions"
+        ],
+        "docs_anchor": "c-page-header"
+      },
+      "rules_file": "component-rules/page-header.md"
+    },
+    {
       "id": "pagination",
       "display_name": "Pagination",
       "category": "Navigation",
@@ -4199,6 +4668,93 @@
         "docs_anchor": "c-person"
       },
       "rules_file": "component-rules/person-card.md"
+    },
+    {
+      "id": "placeholder",
+      "display_name": "Placeholder Panel",
+      "category": "Feedback",
+      "status": "stable",
+      "aliases": [
+        "panel vacío",
+        "selecciona…",
+        "próximamente",
+        "coming soon"
+      ],
+      "summary": "A centred panel that fills a region which has nothing to show *yet in this session* — nothing selected, a feature not built. Never for a list that returned no data.",
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "color": [
+          "--card-bg",
+          "--border",
+          "--text-muted"
+        ],
+        "radius": [
+          "--radius"
+        ],
+        "spacing": [
+          "48px 32px padding",
+          "12px icon margin"
+        ],
+        "typography": [
+          "--font-size-body-lg"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "empty-state",
+          "skeleton",
+          "alert"
+        ],
+        "replaces": [
+          "loose 'próximamente' text",
+          "blank detail panes"
+        ],
+        "composed_with": [
+          "card",
+          "sheet-side"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "empty-state",
+            "why": "empty-state is the result of a query that returned nothing and usually offers an action; placeholder is a region that was never going to have content yet"
+          },
+          {
+            "component": "skeleton",
+            "why": "skeleton means content is coming in milliseconds; placeholder means nothing is coming until the user acts"
+          },
+          {
+            "component": "alert",
+            "why": "alert reports a problem; a placeholder reports a normal resting state"
+          }
+        ]
+      },
+      "motion": {
+        "enter": "none — it is the resting state of the region, not an event.",
+        "exit": "none. When real content replaces it, the content's own entrance carries the transition.",
+        "stateChange": "none; the panel has no states.",
+        "duration": "n/a",
+        "easing": "n/a",
+        "reducedMotion": "Nothing to reduce; inherits the global rule in css/base.css.",
+        "constraints": "Do not animate it in. A fading placeholder reads as loading, which is the opposite of what it means.",
+        "relatedPatterns": []
+      },
+      "source": {
+        "css": "css/components/placeholder.css",
+        "classes": [
+          "placeholder-panel",
+          "placeholder-icon"
+        ],
+        "docs_anchor": "c-placeholder"
+      },
+      "rules_file": "component-rules/placeholder.md"
     },
     {
       "id": "radio",

@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-63 componentes · **508 clases públicas** de 575 selectores totales en el CSS.
+63 componentes · **509 clases públicas** de 575 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -123,11 +123,12 @@ Regla completa: `component-rules/avatar.md` · CSS: `css/components/avatar.css`
 
 ---
 
-### `back-link` — back-link
+### `back-link` — Back Link · Navigation
 
-volver a la vista padre desde una página de detalle.
+A quiet inline link with a leading chevron that returns to the parent view from a detail page — one step up, never a general-purpose action.
 **Cuándo usar:** volver a la vista padre desde una página de detalle.
 **Cuándo no:** navegación principal (usar sidebar/tabs) ni acciones (usar btn-text).
+**Variantes:** default
 
 Clases públicas: `.back-link`
 
@@ -138,7 +139,7 @@ Clases públicas: `.back-link`
 </button>
 ```
 
-Regla completa: _(sin regla — revisar cobertura del manifest)_ · CSS: `css/components/back-link.css`
+Regla completa: `component-rules/back-link.md` · CSS: `css/components/back-link.css`
 
 ---
 
@@ -444,11 +445,12 @@ Regla completa: `component-rules/context-menu.md` · CSS: `css/components/contex
 
 ---
 
-### `create-form` — create-form
+### `create-form` — Create Form (header + sticky footer) · Layout
 
-header + footer pegajoso de formularios de creación full-page.
+The frame for a full-page creation or editing form — a large title above, and a footer that sticks to the bottom of the viewport so the save action is reachable no matter how long the form runs.
 **Cuándo usar:** header + footer pegajoso de formularios de creación full-page.
 **Cuándo no:** tareas cortas que caben en un Modal.
+**Variantes:** default
 
 Clases públicas: `.btn-primary` · `.btn-tertiary` · `.create-footer` · `.create-header` · `.create-title`
 
@@ -463,7 +465,7 @@ Clases públicas: `.btn-primary` · `.btn-tertiary` · `.create-footer` · `.cre
 </div>
 ```
 
-Regla completa: _(sin regla — revisar cobertura del manifest)_ · CSS: `css/components/create-form.css`
+Regla completa: `component-rules/create-form.md` · CSS: `css/components/create-form.css`
 
 ---
 
@@ -484,13 +486,14 @@ Regla completa: `component-rules/data-table.md` · CSS: `css/components/data-tab
 
 ---
 
-### `date-picker` — date-picker
+### `date-picker` — Date Picker · Form
 
-elegir una fecha (o rango) desde un campo de formulario o toolbar.
+A trigger button showing the chosen date, which opens a Calendar in a floating panel below it — the form and toolbar default, for when a permanent calendar would cost too much space.
 **Cuándo usar:** elegir una fecha (o rango) desde un campo de formulario o toolbar.
 **Cuándo no:** entrada de texto libre de fecha (usar Input nativo type="date" si no hace falta calendario); elegir mes/año sueltos (usar Select).
+**Variantes:** default · empty
 
-Clases públicas: `.btn-tertiary` · `.calendar` · `.date-picker` · `.date-picker-icon` · `.date-picker-panel` · `.date-picker-trigger`
+Clases públicas: `.btn-tertiary` · `.calendar` · `.date-picker` · `.date-picker-icon` · `.date-picker-panel` · `.date-picker-trigger` · `.date-picker-trigger-empty`
 
 ```html
 <div class="date-picker">
@@ -501,15 +504,16 @@ Clases públicas: `.btn-tertiary` · `.calendar` · `.date-picker` · `.date-pic
 </div>
 ```
 
-Regla completa: _(sin regla — revisar cobertura del manifest)_ · CSS: `css/components/date-picker.css`
+Regla completa: `component-rules/date-picker.md` · CSS: `css/components/date-picker.css`
 
 ---
 
-### `description` — description
+### `description` — Description Section · Form
 
-secciones de descripción editables (título + editor rich-text).
+A bordered block with an editable heading and a rich-text body — for long-form content the person writes in named, reorderable sections, not for a plain textarea.
 **Cuándo usar:** secciones de descripción editables (título + editor rich-text).
 **Cuándo no:** campos simples de formulario (usar form.css).
+**Variantes:** default
 
 Clases públicas: `.desc-delete-btn` · `.desc-editor` · `.desc-section` · `.desc-section-header` · `.desc-title-input`
 
@@ -525,7 +529,7 @@ Clases públicas: `.desc-delete-btn` · `.desc-editor` · `.desc-section` · `.d
 </div>
 ```
 
-Regla completa: _(sin regla — revisar cobertura del manifest)_ · CSS: `css/components/description.css`
+Regla completa: `component-rules/description.md` · CSS: `css/components/description.css`
 
 ---
 
@@ -584,7 +588,7 @@ Clases públicas: `.btn-primary` · `.empty-state` · `.empty-state-desc` · `.e
 
 ```html
 <div class="empty-state">
-  <div class="empty-state-icon">📭</div>
+  <svg class="empty-state-icon" aria-hidden="true" width="32" height="32"><!-- lucide --></svg>
   <div class="empty-state-title">No hay vacantes</div>
   <p class="empty-state-desc">Crea tu primera vacante para empezar.</p>
   <button class="btn-primary">+ Nueva vacante</button>
@@ -852,11 +856,12 @@ Regla completa: `component-rules/navigation-menu.md` · CSS: `css/components/nav
 
 ---
 
-### `page-header` — page-header
+### `page-header` — Page Header · Layout
 
-título + acciones al tope de cada vista.
+The title of a view plus its actions, on one row at the top of the content column — the anchor that tells a person which screen they are on.
 **Cuándo usar:** título + acciones al tope de cada vista.
 **Cuándo no:** dentro de cards o modales (tienen su propio header).
+**Variantes:** default
 
 Clases públicas: `.btn-primary` · `.header-actions` · `.page-header` · `.page-title`
 
@@ -869,7 +874,7 @@ Clases públicas: `.btn-primary` · `.header-actions` · `.page-header` · `.pag
 </div>
 ```
 
-Regla completa: _(sin regla — revisar cobertura del manifest)_ · CSS: `css/components/page-header.css`
+Regla completa: `component-rules/page-header.md` · CSS: `css/components/page-header.css`
 
 ---
 
@@ -914,22 +919,23 @@ Regla completa: `component-rules/person-card.md` · CSS: `css/components/person-
 
 ---
 
-### `placeholder` — placeholder
+### `placeholder` — Placeholder Panel · Feedback
 
-panel para secciones/features en construcción.
+A centred panel that fills a region which has nothing to show *yet in this session* — nothing selected, a feature not built. Never for a list that returned no data.
 **Cuándo usar:** panel para secciones/features en construcción.
 **Cuándo no:** listas sin datos (usar Empty State).
+**Variantes:** default
 
 Clases públicas: `.placeholder-icon` · `.placeholder-panel`
 
 ```html
 <div class="placeholder-panel">
-  <div class="placeholder-icon">📋</div>
+  <svg class="placeholder-icon" aria-hidden="true" width="32" height="32"><!-- lucide --></svg>
   <p>Selecciona una vacante para ver los detalles.</p>
 </div>
 ```
 
-Regla completa: _(sin regla — revisar cobertura del manifest)_ · CSS: `css/components/placeholder.css`
+Regla completa: `component-rules/placeholder.md` · CSS: `css/components/placeholder.css`
 
 ---
 
@@ -1410,7 +1416,7 @@ Clases públicas: `.assignee` · `.assignee-avatar` · `.badge` · `.badge-open`
   <!-- Interactiva: agregá tabindex="0" role="button" (o usá <a>/<button>) —
        la card es focusable y trae :focus-visible. -->
   <div class="vacancy-card" tabindex="0" role="button">
-    <div class="vacancy-icon">💼</div>
+    <svg class="vacancy-icon" aria-hidden="true" width="20" height="20"><!-- lucide --></svg>
     <div class="vacancy-info">
       <div class="vacancy-name">
         Desarrollador Frontend

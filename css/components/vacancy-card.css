@@ -14,7 +14,7 @@
      <!-- Interactiva: agregá tabindex="0" role="button" (o usá <a>/<button>) —
           la card es focusable y trae :focus-visible. -->
      <div class="vacancy-card" tabindex="0" role="button">
-       <div class="vacancy-icon">💼</div>
+       <svg class="vacancy-icon" aria-hidden="true" width="20" height="20"><!-- lucide --></svg>
        <div class="vacancy-info">
          <div class="vacancy-name">
            Desarrollador Frontend

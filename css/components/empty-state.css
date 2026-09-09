@@ -11,7 +11,7 @@
 
    Uso:
    <div class="empty-state">
-     <div class="empty-state-icon">📭</div>
+     <svg class="empty-state-icon" aria-hidden="true" width="32" height="32"><!-- lucide --></svg>
      <div class="empty-state-title">No hay vacantes</div>
      <p class="empty-state-desc">Crea tu primera vacante para empezar.</p>
      <button class="btn-primary">+ Nueva vacante</button>

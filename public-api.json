@@ -203,16 +203,22 @@
     },
     {
       "id": "back-link",
-      "display_name": "back-link",
-      "category": "",
-      "status": "",
+      "display_name": "Back Link",
+      "category": "Navigation",
+      "status": "stable",
       "file": "css/components/back-link.css",
-      "summary": "volver a la vista padre desde una página de detalle.",
+      "summary": "A quiet inline link with a leading chevron that returns to the parent view from a detail page — one step up, never a general-purpose action.",
       "when": "volver a la vista padre desde una página de detalle.",
       "when_not": "navegación principal (usar sidebar/tabs) ni acciones (usar btn-text).",
-      "variants": [],
-      "sizes": [],
-      "rules_files": [],
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/back-link.md"
+      ],
       "usage": "<button class=\"back-link\">\n  <svg width=\"16\" height=\"16\" ...>...</svg>\n  Volver a vacantes\n</button>",
       "classes": [
         "back-link"
@@ -745,16 +751,22 @@
     },
     {
       "id": "create-form",
-      "display_name": "create-form",
-      "category": "",
-      "status": "",
+      "display_name": "Create Form (header + sticky footer)",
+      "category": "Layout",
+      "status": "stable",
       "file": "css/components/create-form.css",
-      "summary": "header + footer pegajoso de formularios de creación full-page.",
+      "summary": "The frame for a full-page creation or editing form — a large title above, and a footer that sticks to the bottom of the viewport so the save action is reachable no matter how long the form runs.",
       "when": "header + footer pegajoso de formularios de creación full-page.",
       "when_not": "tareas cortas que caben en un Modal.",
-      "variants": [],
-      "sizes": [],
-      "rules_files": [],
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/create-form.md"
+      ],
       "usage": "<div class=\"create-header\">\n  <h1 class=\"create-title\">Crear vacante</h1>\n</div>\n<!-- formulario -->\n<div class=\"create-footer\">\n  <button class=\"btn-tertiary\">Cancelar</button>\n  <button class=\"btn-primary\">Publicar</button>\n</div>",
       "classes": [
         "btn-primary",
@@ -804,16 +816,23 @@
     },
     {
       "id": "date-picker",
-      "display_name": "date-picker",
-      "category": "",
-      "status": "",
+      "display_name": "Date Picker",
+      "category": "Form",
+      "status": "stable",
       "file": "css/components/date-picker.css",
-      "summary": "elegir una fecha (o rango) desde un campo de formulario o toolbar.",
+      "summary": "A trigger button showing the chosen date, which opens a Calendar in a floating panel below it — the form and toolbar default, for when a permanent calendar would cost too much space.",
       "when": "elegir una fecha (o rango) desde un campo de formulario o toolbar.",
       "when_not": "entrada de texto libre de fecha (usar Input nativo type=\"date\" si no hace falta calendario); elegir mes/año sueltos (usar Select).",
-      "variants": [],
-      "sizes": [],
-      "rules_files": [],
+      "variants": [
+        "default",
+        "empty"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/date-picker.md"
+      ],
       "usage": "<div class=\"date-picker\">\n  <button class=\"date-picker-trigger btn-tertiary\">\n    <svg class=\"date-picker-icon\">…</svg> 17 de julio, 2026\n  </button>\n  <div class=\"date-picker-panel\"><div class=\"calendar\">…</div></div>\n</div>",
       "classes": [
         "btn-tertiary",
@@ -821,22 +840,29 @@
         "date-picker",
         "date-picker-icon",
         "date-picker-panel",
-        "date-picker-trigger"
+        "date-picker-trigger",
+        "date-picker-trigger-empty"
       ],
       "internal_class_count": 5
     },
     {
       "id": "description",
-      "display_name": "description",
-      "category": "",
-      "status": "",
+      "display_name": "Description Section",
+      "category": "Form",
+      "status": "stable",
       "file": "css/components/description.css",
-      "summary": "secciones de descripción editables (título + editor rich-text).",
+      "summary": "A bordered block with an editable heading and a rich-text body — for long-form content the person writes in named, reorderable sections, not for a plain textarea.",
       "when": "secciones de descripción editables (título + editor rich-text).",
       "when_not": "campos simples de formulario (usar form.css).",
-      "variants": [],
-      "sizes": [],
-      "rules_files": [],
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/description.md"
+      ],
       "usage": "<div class=\"desc-section\">\n  <div class=\"desc-section-header\">\n    <input class=\"desc-title-input\" value=\"Responsabilidades\">\n    <button class=\"desc-delete-btn\">✕</button>\n  </div>\n  <div class=\"desc-editor\" contenteditable=\"true\"\n       data-placeholder=\"Escribe aqui...\">\n  </div>\n</div>",
       "classes": [
         "desc-delete-btn",
@@ -938,7 +964,7 @@
       "rules_files": [
         "component-rules/empty-state.md"
       ],
-      "usage": "<div class=\"empty-state\">\n  <div class=\"empty-state-icon\">📭</div>\n  <div class=\"empty-state-title\">No hay vacantes</div>\n  <p class=\"empty-state-desc\">Crea tu primera vacante para empezar.</p>\n  <button class=\"btn-primary\">+ Nueva vacante</button>\n</div>",
+      "usage": "<div class=\"empty-state\">\n  <svg class=\"empty-state-icon\" aria-hidden=\"true\" width=\"32\" height=\"32\"><!-- lucide --></svg>\n  <div class=\"empty-state-title\">No hay vacantes</div>\n  <p class=\"empty-state-desc\">Crea tu primera vacante para empezar.</p>\n  <button class=\"btn-primary\">+ Nueva vacante</button>\n</div>",
       "classes": [
         "btn-primary",
         "empty-state",
@@ -1324,16 +1350,22 @@
     },
     {
       "id": "page-header",
-      "display_name": "page-header",
-      "category": "",
-      "status": "",
+      "display_name": "Page Header",
+      "category": "Layout",
+      "status": "stable",
       "file": "css/components/page-header.css",
-      "summary": "título + acciones al tope de cada vista.",
+      "summary": "The title of a view plus its actions, on one row at the top of the content column — the anchor that tells a person which screen they are on.",
       "when": "título + acciones al tope de cada vista.",
       "when_not": "dentro de cards o modales (tienen su propio header).",
-      "variants": [],
-      "sizes": [],
-      "rules_files": [],
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/page-header.md"
+      ],
       "usage": "<div class=\"page-header\">\n  <h1 class=\"page-title\">Vacantes</h1>\n  <div class=\"header-actions\">\n    <button class=\"btn-primary\">+ Nueva vacante</button>\n  </div>\n</div>",
       "classes": [
         "btn-primary",
@@ -1413,17 +1445,23 @@
     },
     {
       "id": "placeholder",
-      "display_name": "placeholder",
-      "category": "",
-      "status": "",
+      "display_name": "Placeholder Panel",
+      "category": "Feedback",
+      "status": "stable",
       "file": "css/components/placeholder.css",
-      "summary": "panel para secciones/features en construcción.",
+      "summary": "A centred panel that fills a region which has nothing to show *yet in this session* — nothing selected, a feature not built. Never for a list that returned no data.",
       "when": "panel para secciones/features en construcción.",
       "when_not": "listas sin datos (usar Empty State).",
-      "variants": [],
-      "sizes": [],
-      "rules_files": [],
-      "usage": "<div class=\"placeholder-panel\">\n  <div class=\"placeholder-icon\">📋</div>\n  <p>Selecciona una vacante para ver los detalles.</p>\n</div>",
+      "variants": [
+        "default"
+      ],
+      "sizes": [
+        "md"
+      ],
+      "rules_files": [
+        "component-rules/placeholder.md"
+      ],
+      "usage": "<div class=\"placeholder-panel\">\n  <svg class=\"placeholder-icon\" aria-hidden=\"true\" width=\"32\" height=\"32\"><!-- lucide --></svg>\n  <p>Selecciona una vacante para ver los detalles.</p>\n</div>",
       "classes": [
         "placeholder-icon",
         "placeholder-panel"
@@ -2215,7 +2253,7 @@
       "rules_files": [
         "component-rules/vacancy-card.md"
       ],
-      "usage": "<div class=\"vacancies-list\">\n  <!-- Interactiva: agregá tabindex=\"0\" role=\"button\" (o usá <a>/<button>) —\n       la card es focusable y trae :focus-visible. -->\n  <div class=\"vacancy-card\" tabindex=\"0\" role=\"button\">\n    <div class=\"vacancy-icon\">💼</div>\n    <div class=\"vacancy-info\">\n      <div class=\"vacancy-name\">\n        Desarrollador Frontend\n        <span class=\"badge badge-open\">Abierta</span>\n      </div>\n      <div class=\"vacancy-meta\">\n        Tecnologia <span class=\"meta-dot\"></span> Remoto\n      </div>\n    </div>\n    <div class=\"vacancy-right\">\n      <div class=\"vacancy-age\">3d</div>\n    </div>\n  </div>\n</div>",
+      "usage": "<div class=\"vacancies-list\">\n  <!-- Interactiva: agregá tabindex=\"0\" role=\"button\" (o usá <a>/<button>) —\n       la card es focusable y trae :focus-visible. -->\n  <div class=\"vacancy-card\" tabindex=\"0\" role=\"button\">\n    <svg class=\"vacancy-icon\" aria-hidden=\"true\" width=\"20\" height=\"20\"><!-- lucide --></svg>\n    <div class=\"vacancy-info\">\n      <div class=\"vacancy-name\">\n        Desarrollador Frontend\n        <span class=\"badge badge-open\">Abierta</span>\n      </div>\n      <div class=\"vacancy-meta\">\n        Tecnologia <span class=\"meta-dot\"></span> Remoto\n      </div>\n    </div>\n    <div class=\"vacancy-right\">\n      <div class=\"vacancy-age\">3d</div>\n    </div>\n  </div>\n</div>",
       "classes": [
         "assignee",
         "assignee-avatar",
