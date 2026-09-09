@@ -79,6 +79,11 @@ Chequeá mientras tanto:
 - [ ] **Te pregunta en qué dispositivo se usa.** Si no lo pregunta, es una falla: de ahí salen los
       tamaños táctiles.
 - [ ] Lo que puede averiguar mirando la carpeta **no te lo pregunta**.
+- [ ] **No te hace cuatro preguntas más** sobre espaciado, sombras, movimiento e íconos. Tiene que
+      deducirlos y proponerte un perfil en una sola línea —para Nortia debería salir algo como
+      *espaciado compacto, superficies con borde nítido, movimiento sobrio, íconos robustos*— y
+      recién ahí ofrecerte cambiarlo. Si te los pregunta de a uno, **anotalo**: se volvió un
+      formulario.
 
 ### 1.3 · Qué tiene que quedarte en la carpeta
 
@@ -109,6 +114,9 @@ Abrí `theme-preview.html` y **cambiá a oscuro**.
       nuestro** — las tres respuestas que diste. Si no están, las pantallas después no las van a
       tener en cuenta.
 - [ ] `DESIGN.md` dice qué quedó **pendiente**, no solo qué se hizo.
+- [ ] Abrí `brand/nortia.css`: además de los colores tiene que haber **espaciados, sombras,
+      tiempos de animación y grosor de íconos**. Si solo tiene colores, el perfil que te propuso
+      quedó en el chat y no se aplicó — **reportalo**.
 - [ ] No te preguntó por modo oscuro ni por tamaños de tipografía. Esos ya están decididos.
 - [ ] **Al terminar te ofrece armar la primera pantalla.** Si te deja sin próximo paso, anotalo.
 
@@ -153,6 +161,11 @@ Los usuarios entran mayormente a buscar a una persona puntual.
 - [ ] **Están los estados**: vacío, cargando, error, sin resultados. Que falten es la falla que más
       se repite.
 - [ ] **Nada de `<input placeholder="Buscar">`** suelto.
+- [ ] **Achicá la ventana hasta el ancho de un celular** (375px). No tiene que aparecer scroll
+      horizontal, y los botones y el menú tienen que agrandarse para el dedo. Encontramos las dos
+      fallas en septiembre construyendo un dashboard de verdad; si volvieron, queremos saberlo.
+- [ ] **Si la tabla tiene números** (importes, cantidades, porcentajes), van alineados a la
+      derecha, no a la izquierda como el texto.
 - [ ] **Apareció un archivo nuevo en `design/`** con el diagnóstico, y `DESIGN.md` lo lista. Si el
       diagnóstico quedó solo en el chat, se pierde al cerrar la pestaña — **reportalo**.
 - [ ] **Al terminar te ofrece revisarla** antes de mandarla. Si te deja sin próximo paso, anotalo.
