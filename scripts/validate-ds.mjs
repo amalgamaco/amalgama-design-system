@@ -10,9 +10,11 @@
  *   4. nav-anchors    every navigate('c-*') target resolves — FAIL
  *   5. manifest       component-rules/manifest.json exists & count == rule files — FAIL
  *   6. rules-metadata each component-rules/*.md has required frontmatter fields — FAIL
+ *  11. release-tags  local v* tags must be pushed; versions cited in docs must exist — FAIL
  *   7. inline-hex     hex in index.html inline styles (swatch tables excluded) — WARN
  */
 import fs from "node:fs";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -198,6 +200,49 @@ console.log("\n[10] restos de la arquitectura revertida (Tailwind / packages/ds)
   hits.length
     ? warn(`${hits.length} doc(s) todavía instruyen usar packages/ds o utilidades Tailwind: ${hits.slice(0, 8).join(", ")}${hits.length > 8 ? ` …y ${hits.length - 8} más` : ""}`)
     : ok("ningún doc instruye usar la arquitectura revertida (las menciones históricas se ignoran)");
+}
+
+// ── 11. tags de release publicados ───────────────────────────────────────
+// DEPLOYMENT.md §Releases manda a los entregables a pinear contra @v<x.y.z> en
+// jsDelivr. Un tag que existe solo en local hace que esa URL devuelva 404 para
+// todos los demás: el doc queda apuntando a algo que no existe. Ya pasó con
+// v1.0.0, creado y no pusheado. El proceso estaba bien escrito; lo que faltaba
+// era que algo lo chequeara.
+// También al revés: la versión que los scripts emiten en el <link> tiene que
+// ser un tag real, o los proyectos nuevos nacen apuntando al vacío.
+console.log("\n[11] tags de release");
+{
+  const git = (args) => {
+    try {
+      return execFileSync("git", args, { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    } catch { return null; }
+  };
+  const locales = (git(["tag", "-l", "v*"]) ?? "").split("\n").filter(Boolean);
+  // Sin red no se puede saber qué hay publicado: se avisa y no se rompe el gate.
+  const remoto = git(["ls-remote", "--tags", "origin"]);
+  if (remoto === null) {
+    warn("no se pudo consultar origin (¿sin red?) — no se verificaron los tags publicados");
+  } else {
+    const publicados = new Set(
+      remoto.split("\n").map((l) => l.split("refs/tags/")[1]).filter(Boolean)
+            .map((t) => t.replace(/\^\{\}$/, ""))
+    );
+    const sinPushear = locales.filter((t) => !publicados.has(t));
+    sinPushear.length
+      ? fail(`${sinPushear.length} tag(s) solo en local — la URL @<tag> de jsDelivr da 404 para todos los demás: ${sinPushear.join(", ")}. Publicalos: git push origin ${sinPushear.join(" ")}`)
+      : ok(`${locales.length} tag(s) de release, todos publicados en origin`);
+    // La versión que los entregables van a llevar tiene que existir como tag.
+    const fuentes = ["scripts/build-public-api.mjs", "DEPLOYMENT.md"];
+    const citadas = new Set();
+    for (const f of fuentes) {
+      if (!fs.existsSync(path.join(ROOT, f))) continue;
+      for (const m of read(f).matchAll(/amalgama-design-system@(v\d+\.\d+\.\d+)/g)) citadas.add(m[1]);
+    }
+    const fantasma = [...citadas].filter((v) => !publicados.has(v) && !locales.includes(v));
+    fantasma.length
+      ? fail(`versión(es) citadas en los docs/scripts que no existen como tag: ${fantasma.join(", ")}`)
+      : ok(`${citadas.size} versión(es) citadas, todas existen como tag`);
+  }
 }
 
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
