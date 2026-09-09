@@ -2,6 +2,9 @@
 
 Una página. Qué escribir, dónde, y qué pasa. El razonamiento está en `PLAN-USO-DS.md`.
 
+> **¿Es tu primera vez y querés probarlo antes de usarlo en un proyecto real?**
+> `PRUEBA-EQUIPO.md` es un protocolo de 40 minutos con casos concretos y qué esperar en cada uno.
+
 ---
 
 ## Antes que nada (una sola vez, por persona)

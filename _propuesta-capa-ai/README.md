@@ -14,6 +14,7 @@ en el working tree local (`component-rules/search.md`, `components/ui/carousel.t
 | Archivo | Qué es | Dónde va cuando se adopte |
 |---|---|---|
 | `ANALISIS-SKILLS-DS.md` | El análisis: diagnóstico, mapeo contra el modelo de Vercel, mapa de skills, flujo, roadmap y guion para presentarlo | acá mismo, o `docs/` |
+| `PRUEBA-EQUIPO.md` | **El protocolo de prueba**: 40 min, cuatro casos, qué esperar y cómo reportar. Es lo que alimenta el baseline del eval | ídem |
 | `GUIA-EQUIPO.md` | **Una página práctica para el equipo**: qué escribir, dónde y qué pasa. Es lo que se reparte | ídem |
 | `PLAN-USO-DS.md` | **El plan de uso para presentar al equipo**: las tres capas, cómo arranca un proyecto nuevo, el cuestionario de setup, el día a día y qué hay que construir | ídem |
 | `design.md` | Archivo de marca público y autocontenido — el equivalente a `vercel.com/design.md` | **ya está en la raíz del repo** (el raw de GitHub lo sirve) |
