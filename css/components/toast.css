@@ -72,15 +72,15 @@
   z-index: 200;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-2);
 }
 .toast {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 12px 20px;
+  padding: var(--space-3) var(--space-5);
   box-shadow: var(--shadow-lg);
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: var(--space-2-5);
   font-size: var(--font-size-body-md);
   animation: slideInRight .25s ease;
   min-width: 280px;
@@ -105,7 +105,7 @@
 .toast .toast-message { flex: 1; }
 /* Título + descripción (par sonner: dos líneas). Usar .toast-content como slot
    flexible cuando el toast lleva encabezado y detalle. */
-.toast .toast-content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.toast .toast-content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-0-5); }
 .toast .toast-title { font-weight: 600; color: var(--text-primary); }
 .toast .toast-desc { font-size: var(--font-size-body-sm); color: var(--text-secondary); line-height: 1.45; }
 .toast .toast-close {
@@ -164,7 +164,7 @@
   min-width: 0;
   color: var(--color-inverse-on-surface);
   font: var(--font-weight-regular) var(--font-size-body-md)/1.4 var(--font-body);
-  padding: 14px 0;
+  padding: var(--space-3-5) 0;
 }
 
 /* ── Botón de acción — texto puro, inverse-primary
@@ -174,7 +174,7 @@
   flex-shrink: 0;
   border: 0;
   background: transparent;
-  padding: 8px var(--space-2);
+  padding: var(--space-2) var(--space-2);
   border-radius: var(--radius-sm);
   color: var(--color-inverse-primary);
   font: var(--font-weight-bold) var(--font-size-label)/1 var(--font-body);
@@ -238,10 +238,10 @@
 .snackbar--multiline {
   flex-direction: column;
   align-items: flex-start;
-  padding: 12px var(--space-2) var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-2) var(--space-2) var(--space-4);
   min-height: 68px;
 }
-.snackbar--multiline .snackbar-message { padding: 0 0 4px; }
+.snackbar--multiline .snackbar-message { padding: 0 0 var(--space-1); }
 .snackbar--multiline .snackbar-action  { align-self: flex-end; }
 
 /* Reducción de movimiento */
@@ -260,7 +260,7 @@
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-2);
   pointer-events: none;
 }
 .snackbar-viewport .snackbar {

@@ -24,9 +24,9 @@
 .data-table-sort-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-1-5);
   margin: -6px -8px;
-  padding: 6px 8px;
+  padding: var(--space-1-5) var(--space-2);
   border-radius: var(--radius-sm);
   background: transparent;
   border: none;
@@ -63,7 +63,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-3);
   margin-bottom: 12px;
   flex-wrap: wrap;
 }
@@ -87,7 +87,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--space-4);
   margin-top: 12px;
   flex-wrap: wrap;
 }
@@ -97,7 +97,7 @@
 }
 /* Estado vacío cuando el filtro no deja filas visibles. */
 .data-table-empty {
-  padding: 32px 16px;
+  padding: var(--space-8) var(--space-4);
   text-align: center;
   color: var(--text-muted);
   font-size: var(--font-size-body-sm);

@@ -30,7 +30,7 @@
   white-space: nowrap;
   background: var(--color-inverse-surface);
   color: var(--color-inverse-on-surface);
-  padding: 6px 12px;
+  padding: var(--space-1-5) var(--space-3);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-label);
   box-shadow: var(--shadow-md);

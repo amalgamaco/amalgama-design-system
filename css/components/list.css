@@ -29,8 +29,8 @@
 .list-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
   min-height: 56px;
 }
 /* El texto (headline + supporting) se apila; los slots leading/trailing quedan a
@@ -39,7 +39,7 @@
 .list-item-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-0-5);
   flex: 1;
   min-width: 0;
 }

@@ -20,7 +20,7 @@
 
 .empty-state {
   text-align: center;
-  padding: 48px 24px;
+  padding: var(--space-12) var(--space-6);
   color: var(--text-muted);
 }
 .empty-state-icon { font-size: 48px; margin-bottom: 16px; }

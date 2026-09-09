@@ -26,7 +26,7 @@
 
 .radio-group {
   display: grid;
-  gap: 10px;
+  gap: var(--space-2-5);
 }
 
 .radio {
@@ -94,9 +94,9 @@
    El estado seleccionado se resuelve con :has(input:checked) — sin JS. */
 .radio-card {
   display: flex;
-  gap: 12px;
+  gap: var(--space-3);
   align-items: flex-start;
-  padding: 14px;
+  padding: var(--space-3-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -109,6 +109,6 @@
   background: color-mix(in srgb, var(--color-primary) 8%, transparent);
 }
 .radio-card:has(input:disabled) { opacity: .5; cursor: not-allowed; }
-.radio-card-content { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.radio-card-content { display: flex; flex-direction: column; gap: var(--space-0-5); min-width: 0; }
 .radio-card-title { font-weight: 500; color: var(--text-primary); }
 .radio-card-desc { font-size: var(--font-size-body-sm); color: var(--text-secondary); line-height: 1.45; }

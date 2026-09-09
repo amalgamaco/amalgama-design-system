@@ -33,7 +33,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -45,7 +45,7 @@
   justify-content: center;
   height: 36px;
   min-width: 36px;
-  padding: 0 8px;
+  padding: 0 var(--space-2);
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
   font-weight: 500;
@@ -69,13 +69,13 @@
 .pagination-next {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
   cursor: pointer;
 }
 .pagination-prev svg,
 .pagination-next svg { width: 18px; height: 18px; }
-.pagination-prev { padding-left: 10px; }
-.pagination-next { padding-right: 10px; }
+.pagination-prev { padding-left: var(--space-2-5); }
+.pagination-next { padding-right: var(--space-2-5); }
 
 .pagination-ellipsis {
   display: flex;

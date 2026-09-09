@@ -103,7 +103,7 @@
   border: 1px solid var(--seg-btn-outline-color);
   border-radius: var(--seg-btn-container-shape);
   padding: 3px;
-  gap: 2px;
+  gap: var(--space-0-5);
 }
 
 /* ── Segmento individual ── */
@@ -113,7 +113,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: 6px 16px;
+  padding: var(--space-1-5) var(--space-4);
   border: none;
   border-radius: var(--seg-btn-container-shape);
   background: transparent;
@@ -212,12 +212,12 @@
 
 /* ── Tamaño SM — toolbars compactas, filtros inline ── */
 .seg-btn-group-sm .seg-btn {
-  padding: 4px 10px;
+  padding: var(--space-1) var(--space-2-5);
   font-size: var(--font-size-caption);
 }
 
 /* ── Tamaño LG — touch targets, CTAs de cambio de modo ── */
 .seg-btn-group-lg .seg-btn {
-  padding: 8px 20px;
+  padding: var(--space-2) var(--space-5);
   font-size: var(--font-size-body-md);
 }

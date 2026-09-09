@@ -22,14 +22,14 @@
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+  gap: var(--space-4);
   margin-bottom: 24px;
 }
 .stat-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: var(--space-5);
 }
 .stat-card .stat-label {
   font-size: var(--font-size-body-sm);

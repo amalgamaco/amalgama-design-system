@@ -20,7 +20,7 @@
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 48px 32px;
+  padding: var(--space-12) var(--space-8);
   text-align: center;
   color: var(--text-muted);
   font-size: var(--font-size-body-lg);

@@ -45,8 +45,8 @@
 .btn-ghost,
 .btn-next {
   position: relative;
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 8px 24px;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: var(--space-2) var(--space-6);
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   font-family: inherit;
@@ -187,7 +187,7 @@
 .btn-text {
   background: transparent;
   color: var(--color-primary);
-  padding: 8px 12px;
+  padding: var(--space-2) var(--space-3);
 }
 .btn-text:hover {
   background: color-mix(in srgb, var(--color-primary) 10%, transparent);
@@ -206,7 +206,7 @@
 .btn-link {
   background: transparent;
   color: var(--color-primary);
-  padding: 8px 4px;
+  padding: var(--space-2) var(--space-1);
   font-weight: 500;
   text-underline-offset: 4px;
 }
@@ -227,15 +227,15 @@
    LG  → 44px min-height · primary CTAs, touch targets
    XL  → 52px min-height · hero / marketing surfaces
 ───────────────────────────────────── */
-.btn-xs { padding: 3px 8px;   font-size: 11px;   font-weight: 600; min-height: 24px; border-radius: var(--radius-sm); }
-.btn-sm { padding: 6px 12px;  font-size: var(--font-size-body-sm); min-height: 32px; border-radius: var(--radius-sm); }
-.btn-lg { padding: 10px 22px; font-size: 15px;   min-height: 44px; border-radius: var(--radius-md); }
-.btn-xl { padding: 14px 30px; font-size: 16px;   font-weight: 700; min-height: 52px; border-radius: var(--radius-lg); }
+.btn-xs { padding: 3px var(--space-2);   font-size: 11px;   font-weight: 600; min-height: 24px; border-radius: var(--radius-sm); }
+.btn-sm { padding: var(--space-1-5) var(--space-3);  font-size: var(--font-size-body-sm); min-height: 32px; border-radius: var(--radius-sm); }
+.btn-lg { padding: var(--space-2-5) 22px; font-size: 15px;   min-height: 44px; border-radius: var(--radius-md); }
+.btn-xl { padding: var(--space-3-5) 30px; font-size: 16px;   font-weight: 700; min-height: 52px; border-radius: var(--radius-lg); }
 
-.btn-text.btn-xs { padding: 3px 6px; }
-.btn-text.btn-sm { padding: 6px 10px; }
-.btn-text.btn-lg { padding: 10px 16px; }
-.btn-text.btn-xl { padding: 14px 20px; }
+.btn-text.btn-xs { padding: 3px var(--space-1-5); }
+.btn-text.btn-sm { padding: var(--space-1-5) var(--space-2-5); }
+.btn-text.btn-lg { padding: var(--space-2-5) var(--space-4); }
+.btn-text.btn-xl { padding: var(--space-3-5) var(--space-5); }
 
 /* Forma: el radio escala con el tamaño del botón.
    XS/SM → --radius-sm (4px)  ·  MD/LG → --radius-md (8px)  ·  XL → --radius-lg (12px)
@@ -245,7 +245,7 @@
 /* Variante compacta (MD3): 16px izquierda y derecha.
    Usar en contextos de mayor densidad (toolbars, formularios, tablas).
    <button class="btn-primary btn-compact">Guardar</button> */
-.btn-compact { padding-left: 16px; padding-right: 16px; }
+.btn-compact { padding-left: var(--space-4); padding-right: var(--space-4); }
 
 /* ─────────────────────────────────────
    Next · avance de wizard (alias de Primary)

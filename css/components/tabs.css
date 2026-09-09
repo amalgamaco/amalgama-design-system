@@ -33,7 +33,7 @@
   margin-bottom: 28px;
 }
 .tab {
-  padding: 11px 20px;
+  padding: 11px var(--space-5);
   font-size: var(--font-size-body-md);
   font-family: inherit;
   color: var(--color-on-surface-variant);
@@ -87,8 +87,8 @@
    paridad con la API de Tabs de shadcn cuando el patrón pill es el correcto. */
 .tabs-pill {
   display: inline-flex;
-  gap: 4px;
-  padding: 4px;
+  gap: var(--space-1);
+  padding: var(--space-1);
   border-bottom: none;
   border-radius: var(--radius-md);
   background: var(--color-surface-variant);
@@ -96,7 +96,7 @@
 .tabs-pill .tab {
   border-bottom: none;
   margin-bottom: 0;
-  padding: 6px 14px;
+  padding: var(--space-1-5) var(--space-3-5);
   border-radius: var(--radius-sm);
 }
 .tabs-pill .tab.active {

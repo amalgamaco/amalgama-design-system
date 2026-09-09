@@ -28,8 +28,8 @@
 .menubar {
   display: flex;
   align-items: center;
-  gap: 2px;
-  padding: 4px;
+  gap: var(--space-0-5);
+  padding: var(--space-1);
   background: var(--color-surface-container);
   border: 1px solid var(--color-outline-variant);
   border-radius: var(--radius-md);
@@ -37,7 +37,7 @@
 }
 
 .menubar-trigger {
-  padding: 6px 12px;
+  padding: var(--space-1-5) var(--space-3);
   border: none;
   background: transparent;
   border-radius: var(--radius-sm);

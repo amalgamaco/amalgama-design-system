@@ -52,8 +52,8 @@
   /* shadcn: items-start — el chevron queda arriba y el título puede tener 2 líneas */
   align-items: flex-start;
   justify-content: space-between;
-  gap: 16px; /* shadcn gap-4 */
-  padding: 16px 0;
+  gap: var(--space-4); /* shadcn gap-4 */
+  padding: var(--space-4) 0;
   background: transparent;
   border: none;
   text-align: left;

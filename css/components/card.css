@@ -29,7 +29,7 @@
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 16px 20px;
+  padding: var(--space-4) var(--space-5);
 }
 
 /* ── Variantes MD3 ── */
@@ -37,14 +37,14 @@
   background: var(--color-surface-container-low);
   border: 1px solid transparent;
   border-radius: var(--radius);
-  padding: 16px 20px;
+  padding: var(--space-4) var(--space-5);
   box-shadow: var(--shadow-sm);
 }
 .card-filled {
   background: var(--color-surface-container-highest);
   border: 1px solid transparent;
   border-radius: var(--radius);
-  padding: 16px 20px;
+  padding: var(--space-4) var(--space-5);
 }
 
 /* ── Sub-partes (Basic Card) ── */
@@ -55,7 +55,7 @@
   margin-bottom: 12px;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4px;
+  gap: var(--space-1);
 }
 .card-header:has(.card-action) {
   grid-template-columns: 1fr auto;
@@ -83,5 +83,5 @@
 }
 .card-footer {
   margin-top: 16px;
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: var(--space-2);
 }

@@ -45,8 +45,8 @@
 .command-input-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 12px;
+  gap: var(--space-2);
+  padding: 0 var(--space-3);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
@@ -77,11 +77,11 @@
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 6px;
+  padding: var(--space-1-5);
 }
 
 .command-empty {
-  padding: 24px 0;
+  padding: var(--space-6) 0;
   text-align: center;
   font-size: var(--font-size-body-sm);
   color: var(--color-on-surface-variant);
@@ -89,12 +89,12 @@
 
 .command-group {
   overflow: hidden;
-  padding: 4px;
+  padding: var(--space-1);
 }
 .command-group[hidden] { display: none; }
 
 .command-group-heading {
-  padding: 6px 8px;
+  padding: var(--space-1-5) var(--space-2);
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-medium);
   color: var(--color-on-surface-variant);
@@ -110,8 +110,8 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-body-sm);
   color: var(--color-on-surface);
@@ -150,7 +150,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 12vh 16px 16px;
+  padding: 12vh var(--space-4) var(--space-4);
   background: var(--color-scrim);
   animation: fadeIn var(--duration-fast) var(--ease-enter);
 }

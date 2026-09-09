@@ -33,7 +33,7 @@
 .calendar {
   --cal-cell: 32px;              /* shadcn --cell-size: 2rem (32px); overridable por .calendar-sm/-lg */
   display: inline-block;         /* w-fit */
-  padding: 12px;                 /* p-3 */
+  padding: var(--space-3);                 /* p-3 */
   background: var(--color-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -62,7 +62,7 @@
 
 /* ── Caption con dropdowns de mes/año (par shadcn captionLayout="dropdown") ──
    para saltar rápido de mes/año sin clickear las flechas repetidamente. */
-.calendar-caption-dropdowns { display: inline-flex; gap: 6px; }
+.calendar-caption-dropdowns { display: inline-flex; gap: var(--space-1-5); }
 .calendar-caption-select {
   appearance: none;
   -webkit-appearance: none;
@@ -73,7 +73,7 @@
   font-family: var(--font-body);
   font-size: var(--font-size-body-md);                     /* text-sm */
   font-weight: 600;                                        /* font-medium */
-  padding: 4px 8px;
+  padding: var(--space-1) var(--space-2);
   cursor: pointer;
   text-transform: capitalize;
 }
@@ -108,7 +108,7 @@
 }
 .calendar-weekday {
   width: var(--cal-cell);
-  padding-bottom: 8px;                 /* week: mt-2 (separa del primer renglón) */
+  padding-bottom: var(--space-2);                 /* week: mt-2 (separa del primer renglón) */
   text-align: center;
   font-size: var(--font-size-label);   /* weekday: text-[0.8rem] */
   font-weight: 400;
@@ -120,7 +120,7 @@
   display: grid;
   grid-template-columns: repeat(7, var(--cal-cell));
   grid-auto-rows: var(--cal-cell);
-  row-gap: 8px;                        /* week: mt-2 */
+  row-gap: var(--space-2);                        /* week: mt-2 */
 }
 .calendar-day {
   display: flex;
@@ -206,7 +206,7 @@
 .calendar-with-presets {
   display: inline-flex;
   flex-direction: column;          /* calendario arriba, presets abajo */
-  padding: 12px;
+  padding: var(--space-3);
   /* la card se ancla al ancho del calendario (7×32 celdas + 24 padding = 248px)
      → los presets hacen wrap (3+2) en vez de estirar la card, igual que el
      bloque shadcn calendar-32. (--cal-cell vive en .calendar, no acá.) */
@@ -216,16 +216,16 @@
   border-radius: var(--radius-lg);
 }
 .calendar-presets {
-  display: flex; flex-wrap: wrap; gap: 8px;
+  display: flex; flex-wrap: wrap; gap: var(--space-2);
   margin: 12px -12px 0;            /* divisor a ancho completo de la card (border-t + px-4 !pt-4) */
-  padding: 12px 12px 0;
+  padding: var(--space-3) var(--space-3) 0;
   border-top: 1px solid var(--border);
 }
 .calendar-preset-btn {
   flex: 1 1 auto;                  /* se reparten el ancho; wrap cuando no entran */
   white-space: nowrap;
   text-align: center;
-  padding: 8px 6px;
+  padding: var(--space-2) var(--space-1-5);
   border: 1px solid var(--color-outline-variant);   /* Button variant="outline" size="sm" */
   border-radius: var(--radius-md);
   background: transparent; color: var(--color-on-surface);
@@ -239,15 +239,15 @@
 
 /* ── Date + time ── fila de hora bajo la grilla (par shadcn date-and-time picker). */
 .calendar-time-row {
-  display: flex; align-items: center; gap: 8px;
-  margin-top: 8px; padding-top: 10px;
+  display: flex; align-items: center; gap: var(--space-2);
+  margin-top: 8px; padding-top: var(--space-2-5);
   border-top: 1px solid var(--border);
   font-size: var(--font-size-body-sm);
   color: var(--color-on-surface-variant);
 }
 .calendar-time-row input[type="time"] {
   flex: 1;
-  padding: 6px 8px;
+  padding: var(--space-1-5) var(--space-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--card-bg);

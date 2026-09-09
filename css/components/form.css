@@ -34,7 +34,7 @@
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px 32px;
+  padding: var(--space-6) var(--space-8);
   margin-bottom: 16px;
 }
 .form-card-title {
@@ -62,7 +62,7 @@
 
 .field-input {
   width: 100%;
-  padding: 10px 14px;
+  padding: var(--space-2-5) var(--space-3-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
@@ -81,13 +81,13 @@
 
 /* ── File input (par shadcn: botón de selección tonal + texto) ── */
 .field-input[type="file"] {
-  padding: 7px 14px;
+  padding: 7px var(--space-3-5);
   cursor: pointer;
   color: var(--text-secondary);
 }
 .field-input[type="file"]::file-selector-button {
   margin: 0 12px 0 0;
-  padding: 4px 12px;
+  padding: var(--space-1) var(--space-3);
   border: none;
   border-radius: var(--radius-sm);
   background: var(--color-secondary-container);
@@ -126,7 +126,7 @@ input:disabled, select:disabled, textarea:disabled {
 .select-wrapper { position: relative; }
 .select-wrapper select {
   width: 100%;
-  padding: 10px 38px 10px 14px;
+  padding: var(--space-2-5) 38px var(--space-2-5) var(--space-3-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
@@ -145,7 +145,7 @@ input:disabled, select:disabled, textarea:disabled {
 /* Compact size (par shadcn Select size="sm" / select-trigger[data-size="sm"]). */
 .select-wrapper select[data-size="sm"] {
   min-height: 32px;
-  padding: 5px 34px 5px 12px;
+  padding: 5px 34px 5px var(--space-3);
   font-size: var(--font-size-body-sm);
 }
 .select-caret {
@@ -156,7 +156,7 @@ input:disabled, select:disabled, textarea:disabled {
 .fields-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px 20px;
+  gap: var(--space-4) var(--space-5);
 }
 
 .field-textarea {
@@ -170,7 +170,7 @@ input:disabled, select:disabled, textarea:disabled {
 
 .number-input-wrapper {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 14px;
+  padding: var(--space-2-5) var(--space-3-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--card-bg);
@@ -178,7 +178,7 @@ input:disabled, select:disabled, textarea:disabled {
 }
 .number-input-wrapper:focus-within { border-color: var(--interactive); }
 .number-value { font-size: var(--font-size-body-md); color: var(--text-primary); }
-.number-controls { display: flex; align-items: center; gap: 4px; }
+.number-controls { display: flex; align-items: center; gap: var(--space-1); }
 .number-btn {
   width: 32px; height: 32px;
   border-radius: var(--radius-md);
@@ -194,7 +194,7 @@ input:disabled, select:disabled, textarea:disabled {
 .date-input-wrapper { position: relative; }
 .date-input-wrapper input {
   width: 100%;
-  padding: 10px 42px 10px 14px;
+  padding: var(--space-2-5) 42px var(--space-2-5) var(--space-3-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
@@ -243,9 +243,9 @@ input:disabled, select:disabled, textarea:disabled {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--space-2);
   margin-top: 6px;
-  padding: 0 2px;
+  padding: 0 var(--space-0-5);
 }
 .field-hint {
   font-size: var(--font-size-caption);
@@ -258,7 +258,7 @@ input:disabled, select:disabled, textarea:disabled {
   color: var(--color-error);
   display: flex;
   align-items: flex-start;
-  gap: 4px;
+  gap: var(--space-1);
 }
 .field-error-msg svg {
   flex-shrink: 0;
@@ -346,5 +346,5 @@ input:disabled, select:disabled, textarea:disabled {
 .field-leading-icon  { left: 14px; }
 .field-trailing-icon { right: 14px; }
 
-.field-input-wrapper .field-input.has-leading  { padding-left:  42px; }
+.field-input-wrapper .field-input.has-leading  { padding-left: 42px; }
 .field-input-wrapper .field-input.has-trailing { padding-right: 42px; }

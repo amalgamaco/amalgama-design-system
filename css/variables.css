@@ -269,13 +269,20 @@
      Consume these tokens — never hardcode px values.
      Usage:  padding: var(--space-4);  gap: var(--space-2);
   ───────────────────────────────────── */
-  --space-1:   4px;   /* icon gaps, min separators          */
-  --space-2:   8px;   /* inline element gaps                */
-  --space-3:  12px;   /* badge / chip padding               */
-  --space-4:  16px;   /* compact card padding               */
-  --space-5:  20px;   /* form field gaps                    */
-  --space-6:  24px;   /* standard card padding              */
-  --space-8:  32px;   /* medium section padding             */
+  /* Medios pasos. Existen porque el interior de un componente los necesita:
+     6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de
+     la escala, no una excepción — y por eso también responden a la densidad. */
+  --space-0-5:  2px;  /* separación mínima, compensación de borde  */
+  --space-1:    4px;  /* icon gaps, min separators          */
+  --space-1-5:  6px;  /* ícono ↔ label, padding de control chico   */
+  --space-2:    8px;  /* inline element gaps                */
+  --space-2-5: 10px;  /* padding vertical de controles compactos   */
+  --space-3:   12px;  /* badge / chip padding               */
+  --space-3-5: 14px;  /* padding de editor, celda cómoda           */
+  --space-4:   16px;  /* compact card padding               */
+  --space-5:   20px;   /* form field gaps                    */
+  --space-6:   24px;   /* standard card padding              */
+  --space-8:   32px;   /* medium section padding             */
   --space-10: 40px;   /* block separators                   */
   --space-12: 48px;   /* main content padding               */
   --space-16: 64px;   /* section separators                 */

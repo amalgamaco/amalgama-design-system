@@ -27,7 +27,7 @@
 .badge {
   display: inline-flex; align-items: center;
   font-size: var(--font-size-badge); font-weight: 600;
-  padding: 4px 10px; border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-2-5); border-radius: var(--radius-full);
   letter-spacing: .2px;
   white-space: nowrap;
 }
@@ -55,7 +55,7 @@
 /* ── Ícono / spinner líder ── el badge admite un SVG o un spinner al inicio
    (par shadcn "with icon" / "with spinner"). El gap no afecta a los badges de
    solo texto. */
-.badge { gap: 4px; }
+.badge { gap: var(--space-1); }
 .badge > svg { width: 12px; height: 12px; flex-shrink: 0; }
 /* El spinner dentro de un badge hereda el color del texto para contrastar sobre
    cualquier variante (en vez de los tokens fijos primary/outline). */
@@ -72,7 +72,7 @@
 a.badge { text-decoration: none; cursor: pointer; transition: opacity var(--duration-fast) var(--ease-default); }
 a.badge:hover { opacity: .85; }
 a.badge:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
-.badge-link { background: transparent; color: var(--color-primary); padding-left: 2px; padding-right: 2px; }
+.badge-link { background: transparent; color: var(--color-primary); padding-left: var(--space-0-5); padding-right: var(--space-0-5); }
 a.badge-link:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── Dark: tratamiento tonal suave ── en dark, en vez del relleno saturado

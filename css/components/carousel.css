@@ -29,7 +29,7 @@
 
 .carousel-content {
   display: flex;
-  gap: 16px;
+  gap: var(--space-4);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
