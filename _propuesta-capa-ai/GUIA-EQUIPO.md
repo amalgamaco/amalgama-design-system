@@ -5,7 +5,7 @@
 Abrí la carpeta de tu proyecto en Claude y escribí:
 
 ```
-/embassy:empezar
+/embassy:start
 ```
 
 Te pregunta qué necesitás hacer, le contestás en castellano, y arranca lo que corresponda. **No
@@ -109,7 +109,8 @@ pantalla que explica por qué quedó así — qué se movió y qué componente s
 
 ## ¿Y si el proyecto ya existe?
 
-No corras `/embassy:start` — ese es para empezar de cero. Tenés dos caminos según el tamaño.
+Podés escribir `/embassy:start` igual y decirle que el proyecto ya existe — te va a mandar a donde
+corresponde. Los dos caminos posibles, según el tamaño:
 
 ### Pantalla por pantalla
 
@@ -154,12 +155,11 @@ te sientes a rediseñar de a una con `/embassy:screen`.
 
 ## Cuándo usar cada una
 
-### `/embassy:empezar` — cuando no sabés cuál te toca
+### `/embassy:start` — la puerta, y el día que arranca el proyecto
 
-Te muestra las opciones planteadas como situaciones y arranca la que elijas. Si te acordás de un
-solo comando de toda esta página, que sea este.
-
-### `/embassy:start` — el día que arranca el proyecto
+**Si te acordás de un solo comando de toda esta página, que sea este.** Si no sabés cuál te toca, te
+muestra las opciones como situaciones y arranca la que elijas. Y si venís a configurar un proyecto
+nuevo, entra directo a las preguntas.
 
 Una sola vez, antes de la primera pantalla. Si ya existe `brand/algo.css` en la carpeta, esta skill
 ya cumplió.

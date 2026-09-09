@@ -17,8 +17,8 @@ Si algo te sale mal, **eso es el resultado útil**. Un "anduvo todo" sin detalle
    confunde. *(Hasta septiembre nuestro plugin se llamaba `design`, igual que uno de Anthropic. Los
    dos peleaban por el mismo nombre y según la máquina te respondía uno u otro.)*
 3. **Cerrá y reabrí Claude Code.** El plugin se refresca al arrancar.
-4. Escribí `/embassy:` y confirmá que aparecen. Deberían estar `empezar`, `screen`, `start`,
-   `artifact`, `review` y `eval`.
+4. Escribí `/embassy:` y confirmá que aparecen. Deberían estar `start`, `screen`, `artifact`,
+   `review` y `eval`.
 
 > `break` y `explain` pueden no figurar en el listado: son de invocación explícita a propósito.
 > Escribí `/embassy:break` entero y fijate si te lo toma. Si te lo toma, están.
@@ -30,15 +30,18 @@ el plugin mal instalado.
 
 # Prueba 0 · La puerta de entrada (2 min)
 
-En cualquier carpeta, escribí:
+En una carpeta cualquiera, escribí solamente:
 
 ```
-/embassy:empezar
+/embassy:start
 ```
+
+Sin decir nada más. Como no le diste contexto, tiene que preguntarte qué necesitás.
 
 - [ ] Te ofrece opciones planteadas como situaciones, no una lista de nombres de comandos.
-- [ ] Elegís una y **arranca esa skill** — no te contesta "ahora escribí `/embassy:screen`". Si te
-      devuelve el comando en vez de ejecutarlo, **reportalo**: es el punto de toda la skill.
+- [ ] Elegís una que **no** sea "arrancar un proyecto" y **arranca esa otra skill** — no te contesta
+      "ahora escribí `/embassy:screen`". Si te devuelve el comando en vez de ejecutarlo,
+      **reportalo**: es el punto de toda la skill.
 
 ---
 
