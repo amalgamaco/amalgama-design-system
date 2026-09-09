@@ -105,6 +105,21 @@ for (const file of files) {
   const src = fs.readFileSync(file, "utf8");
   const lines = src.split("\n");
   const allows = declaredAllows(src);
+
+  // El tema de marca generado es la capa de tokens del proyecto, no código de producto: ahí
+  // los hex crudos (A1), las primitivas (A5) y los ms y curvas literales (G1) son justamente
+  // lo que el archivo tiene que declarar, igual que variables.css. A6 se suma porque las
+  // superficies oscuras están literales en variables.css y no hay primitiva que overridear
+  // (WHITE-LABEL.md §4.2b). Sin esto, un review sobre el proyecto devolvía ~55 hallazgos
+  // falsos apuntando al único archivo que está bien.
+  // Se reconoce por la firma del generador, no por el nombre del archivo: un archivo escrito
+  // a mano que se llame brand/x.css no zafa de las reglas.
+  if (/Generado por scripts\/build-brand-theme\.mjs/.test(src)) {
+    for (const id of ["A1", "A5", "A6", "G1"]) {
+      if (!allows.has(id)) allows.set(id, "tema de marca generado — WHITE-LABEL.md §4.2b");
+    }
+  }
+
   for (const [id, motivo] of allows) allowed.push({ file, id, motivo });
 
   for (const rule of RULES) {

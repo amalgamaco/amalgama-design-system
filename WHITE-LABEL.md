@@ -312,7 +312,9 @@ Run all of these before shipping. They all must pass.
 
 ### 4.2 Dark mode (`data-theme="dark"` on `<html>`)
 
-- [ ] No `[data-theme="dark"]` overrides exist in the brand theme file (if there are, a semantic role was overridden instead of a primitive — fix it)
+- [ ] The only `[data-theme="dark"]` block in the brand theme file is the generated **dark
+      surfaces** one (see 4.2b). Any other dark override means a semantic role was overridden
+      instead of a primitive — fix it
 - [ ] Page surfaces shift to dark correctly (no raw-white elements left)
 - [ ] Brand palettes reach dark mode. Since 2026-09 the `[data-theme="dark"]` block references
       `var(--primitive)` for the primary / secondary / tertiary / status families, so overriding
@@ -323,6 +325,26 @@ Run all of these before shipping. They all must pass.
 - [ ] `--primary-400`, `--primary-50`, `--secondary-300`, `--secondary-925` and `--secondary-950`
       are defined in the brand file: dark mode consumes those steps
 - [ ] Text remains readable — no low-contrast combinations
+
+### 4.2b Dark surfaces carry the brand hue
+
+Embassy's dark "neutrals" are not neutral: measured in OKLCH they sit at H≈270 — a blue-black, as
+much a brand decision as the navy. They are written literally in `variables.css`, so no primitive
+override reaches them, and before 2026-09 that made every white-label product look identical in
+dark: ~90% of the pixels stayed Embassy blue and the client's brand survived only in the accents.
+
+`build-brand-theme.mjs` therefore emits one `[data-theme="dark"]` block at the end of the brand
+file, re-hueing those same surfaces to the brand's hue at the **same L and the same C** — what
+changes is whose tint it is, not how much tint there is.
+
+- [ ] The block covers surfaces, outline, disabled and inverse-on-surface **only**. Text greys
+      (`--color-on-surface*`, `--text-*`) stay neutral on purpose: they have to read the same on
+      every brand
+- [ ] Every value carries its Embassy original in a comment, so the swap is auditable
+- [ ] The generator's contrast report shows the dark pairs passing AA (re-hueing preserves L, so
+      they move by hundredths — but it is checked, and it exits 1 if one falls below)
+- [ ] Nothing here was hand-written. This block is generated; editing it by hand is how the two
+      themes drift apart
 
 ### 4.3 Component states
 
@@ -366,7 +388,11 @@ Why: overriding roles means the dark mode recalibration can't work — the `[dat
 }
 ```
 
-Why: if you need a dark mode override in the brand file, you overrode a semantic role instead of a primitive. Fix: override the primitive. The semantic role's dark recalibration will cascade automatically.
+Why: if you need a dark mode override for a colour role, you overrode a semantic role instead of a primitive. Fix: override the primitive. The semantic role's dark recalibration will cascade automatically.
+
+**The one exception** is the generated dark-surfaces block described in 4.2b, and it exists because
+those surfaces have no primitive to override — they are literals in `variables.css`. It is written
+by `build-brand-theme.mjs`, never by hand, and it touches surfaces, outline and disabled only.
 
 ### ❌ Creating a parallel token layer
 

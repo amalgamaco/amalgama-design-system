@@ -102,11 +102,14 @@ Abrí `theme-preview.html` y **cambiá a oscuro**.
 
 | Qué ves | Qué significa |
 |---|---|
-| Los verdes de Nortia siguen ahí en oscuro | ✅ El white-label funciona de punta a punta |
+| Los verdes de Nortia siguen ahí, y el fondo es un **negro verdoso** | ✅ El white-label funciona de punta a punta |
+| Los verdes están pero el fondo es el **negro azulado** de Amalgama | ❌ No se generaron las superficies de oscuro — **reportalo** |
 | En oscuro vuelven los colores de Amalgama | ❌ **Falla grave — reportala ya** |
 
-> Ese segundo caso es un bug que arrastramos meses y se arregló en septiembre. Si volvió,
-> queremos saberlo el mismo día.
+> El último caso es un bug que arrastramos meses y se arregló en septiembre. Si volvió,
+> queremos saberlo el mismo día. El del medio es más sutil y por eso está acá: el negro de
+> Embassy no es neutro, es azul, y si las superficies no se tiñen todos los clientes se ven
+> iguales en oscuro. Poné las dos pantallas al lado y comparalas contra un producto Amalgama.
 
 ### 1.5 · Chequeá también
 

@@ -144,7 +144,9 @@ Alias semánticos de página: `--bg`, `--surface`, `--card-bg`, `--sidebar-bg`, 
 > texto de la página sale negro, hay un token mal aplicado.
 
 **Dark mode es automático:** `<html data-theme="dark">`. Los roles se recalibran solos. Si
-necesitaste un override por tema, elegiste mal el token.
+necesitaste un override por tema, elegiste mal el token. La única excepción del sistema es el
+bloque de superficies oscuras que genera el tema de marca —ahí no hay primitiva que overridear—,
+y lo escribe el generador, nunca una pantalla.
 
 ### 6.2 Tipografía
 

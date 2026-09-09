@@ -82,6 +82,37 @@ const MOTION = {
 // Trazo de los íconos. Liviano se lee elegante, robusto se lee utilitario.
 const ICON_STROKE = { liviano: 1.5, estandar: 2, robusto: 2.5 };
 
+// Superficies de dark — el eje que faltaba, y el que más se nota.
+//
+// El "gris neutro" de Embassy no es neutro: medido en OKLCH da H≈270, o sea que
+// es un negro AZUL, tan de marca como el navy. Como en [data-theme="dark"] esos
+// valores están escritos literales, dos productos white-label salían idénticos en
+// oscuro: el 90% de los píxeles seguía siendo el azul de Embassy y la marca del
+// cliente solo aparecía en los acentos (nav activo, links).
+//
+// Acá rehueamos esas mismas superficies al tono de la marca, conservando la MISMA
+// L y la MISMA C. Cambia de quién es el tinte, no cuánto tinte hay: el contraste
+// de los tres tokens de texto sobre superficie se mueve menos de 0.2:1 (verificado
+// abajo, y bloquea si algo cae de AA).
+//
+// Los tokens de texto (--text-*, --color-on-surface*) NO se tiñen: son grises y
+// tienen que seguir leyéndose igual sobre cualquier marca.
+const DARK_SURFACES = {
+  "color-surface":                   "#13161F",
+  "color-surface-dim":               "#0A0C12",
+  "color-surface-bright":            "#1C202C",
+  "color-surface-container-lowest":  "#0A0C12",
+  "color-surface-container-low":     "#13161F",
+  "color-surface-container":         "#1C202C",
+  "color-surface-container-high":    "#282C39",
+  "color-surface-container-highest": "#353A4A",
+  "color-surface-variant":           "#282C39",
+  "color-outline":                   "#747989",
+  "color-outline-variant":           "#474D61",
+  "color-disabled":                  "#282C39",
+  "color-inverse-on-surface":        "#13161F",
+};
+
 // El orden de emisión: la escala se lee de menor a mayor, con los medios pasos
 // intercalados donde corresponden y no apelotonados al final.
 const SPACE_ORDER = ["0-5", "1", "1-5", "2", "2-5", "3", "3-5", "4", "5", "6", "8", "10", "12", "16", "20"];
@@ -161,6 +192,12 @@ function buildRamp(name, brandHex) {
   );
 }
 
+// Mismo L, mismo C, otro H: la superficie neutra de Embassy pasada al tono de la marca.
+const reHue = (hex, H) => {
+  const { L, C } = rgbToOklch(hexToRgb(hex));
+  return toHexInGamut({ L, C, H });
+};
+
 // ── CLI ──────────────────────────────────────────────────────────────────────
 const arg = (n, d = null) => {
   const i = process.argv.indexOf(`--${n}`);
@@ -203,6 +240,12 @@ const E = ELEVATION[elevationKey];
 const M = MOTION[motionKey];
 const K = ICON_STROKE[strokeKey];
 
+// El tono de la marca, tomado del primary: es el que tiñe las superficies de dark.
+const brandHue = rgbToOklch(hexToRgb(primaryHex)).H;
+const DARK = Object.fromEntries(
+  Object.entries(DARK_SURFACES).map(([k, v]) => [k, [reHue(v, brandHue), v]])
+);
+
 const line = (k, v) => `  --${k}:${" ".repeat(Math.max(1, 18 - k.length))}${v};`;
 
 const css = `/* ═══════════════════════════════════════
@@ -210,7 +253,11 @@ const css = `/* ═════════════════════�
    Generado por scripts/build-brand-theme.mjs — no editar a mano.
    Marca: primary ${primaryHex} · secondary ${secondaryHex} · radio ${radiusKey}
 
-   Solo PRIMITIVAS. Nunca roles semánticos (--color-*), nunca overrides por tema.
+   Primitivas en :root — nunca roles semánticos ahí.
+   La única excepción es el bloque [data-theme="dark"] del final: las superficies
+   oscuras están escritas literales en variables.css y no llegan por primitiva, así
+   que se rehuean acá al tono de la marca. Sin eso, todos los productos white-label
+   se ven iguales en oscuro.
    Orden de carga: variables.css → ESTE ARCHIVO → base.css → components.css
 ═══════════════════════════════════════ */
 
@@ -253,6 +300,15 @@ ${fontHeading || fontBody ? `
   /* La escala --font-size-* NO se overridea: está validada y es estable entre clientes. */` : ""}
 
 }
+
+/* ── Superficies en modo oscuro ──────────────────────────────────────────────
+   El negro de Embassy es azul (H≈270 en OKLCH). Acá va el mismo negro con el tono
+   de esta marca: misma luminosidad, misma saturación, otro tono. Es lo que hace
+   que el oscuro de ${slug} no se confunda con el de cualquier otro producto.
+   Los grises de texto no se tocan a propósito. */
+[data-theme="dark"] {
+${Object.entries(DARK).map(([k, [v, orig]]) => `  --${k}:${" ".repeat(34 - k.length)}${v};  /* Embassy: ${orig} */`).join("\n")}
+}
 `;
 
 const out = arg("out", `brand/${slug}.css`);
@@ -275,6 +331,15 @@ const pairs = [
   // no algo que introduzca la marca del cliente. Por eso avisa y no bloquea.
   ["--color-on-secondary (blanco) sobre --color-secondary", WHITE, S[900], 4.5, false],
   ["borde interactivo sobre fondo (no-texto)", S[900], SURFACE, 3.0, false],
+  // Dark: los tres grises de texto sobre las superficies ya teñidas con el tono de
+  // la marca. Rehuear conserva la L, así que esto se mueve centésimas — pero es
+  // exactamente el chequeo que hay que hacer para poder teñir sin miedo.
+  ["dark · texto principal sobre fondo",        "#EAEBED", DARK["color-surface"][0],                4.5, true],
+  ["dark · texto principal sobre tarjeta",      "#EAEBED", DARK["color-surface-container"][0],      4.5, true],
+  ["dark · texto secundario sobre tarjeta",     "#BFC1C8", DARK["color-surface-container"][0],      4.5, true],
+  ["dark · texto atenuado sobre tarjeta",       "#9FA3AE", DARK["color-surface-container"][0],      4.5, true],
+  ["dark · texto atenuado sobre superficie alta","#9FA3AE", DARK["color-surface-container-high"][0], 4.5, true],
+  ["dark · borde sobre fondo (no-texto)",       DARK["color-outline"][0], DARK["color-surface"][0],  3.0, true],
 ];
 
 // Aviso de encaje: dónde va a caer realmente el color de marca.
@@ -315,7 +380,11 @@ Dark mode: desde 2026-09 el bloque [data-theme="dark"] de css/variables.css refe
   var(--primitiva) para las familias primary/secondary/tertiary/estado, así que estas
   primitivas SÍ se propagan a dark. Dark consume --primary-400, --primary-50,
   --secondary-300, --secondary-925 y --secondary-950: verificá esos cinco en el preview.
-  Los tokens derivados de la rampa neutral siguen literales a propósito.`);
+
+  Y desde 2026-09 este archivo además reescribe las superficies oscuras con el tono de
+  la marca (bloque [data-theme="dark"] al final): fondo ${DARK["color-surface"][0]},
+  tarjetas ${DARK["color-surface-container"][0]}, bordes ${DARK["color-outline"][0]}.
+  Los grises de texto se dejan neutros a propósito.`);
 
 if (fails) {
   console.error(`\n✗ ${fails} par(es) de texto por debajo de AA. Ajustá el hex de marca o pedí al cliente una variante más oscura o más clara.`);
