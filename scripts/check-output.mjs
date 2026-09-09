@@ -90,6 +90,46 @@ const allowed = [];
  * pantallas de producto. La excepción queda escrita en el archivo y se ve en el reporte: nadie
  * la apaga en silencio. Sin motivo (texto después del guion) no vale.
  */
+/**
+ * Devuelve el mismo HTML con los subárboles ocultos borrados (reemplazados por espacios, así
+ * los números de línea y los offsets no se mueven).
+ *
+ * Existe por C1. El DS EXIGE que una pantalla traiga sus estados —vacío, sin resultados, error—
+ * y en mobile un bottom sheet con su propia acción. Todos vienen ocultos en el markup. Contando
+ * a ciegas, una pantalla bien hecha tiene tres o cuatro btn-primary y el check la marcaba como
+ * bloqueante: la regla castigaba justamente a quien sigue el sistema. Lo agarramos en la primera
+ * corrida del eval, sobre la pantalla guiada.
+ *
+ * Oculto = atributo `hidden`, `aria-hidden="true"` o un `style` con display:none.
+ */
+function stripHidden(src) {
+  const OCULTO = /(?:\shidden(?=[\s/>=]|$)|aria-hidden\s*=\s*["']?true|style\s*=\s*["'][^"']*display\s*:\s*none)/i;
+  const out = src.split("");
+  const tag = /<(\/?)([a-zA-Z][a-zA-Z0-9-]*)([^>]*?)(\/?)>/g;
+  const stack = [];
+  let ocultoDesde = -1, profundidad = 0;
+  for (const m of src.matchAll(tag)) {
+    const [txt, cierre, nombre, attrs, autoCierre] = m;
+    if (cierre) {
+      while (stack.length && stack.pop() !== nombre) { /* markup roto: seguimos */ }
+      if (ocultoDesde >= 0 && stack.length < profundidad) {
+        for (let i = ocultoDesde; i < m.index + txt.length; i++) if (out[i] !== "\n") out[i] = " ";
+        ocultoDesde = -1;
+      }
+      continue;
+    }
+    if (autoCierre || /^(br|hr|img|input|link|meta|source|track|wbr|area|base|col|embed|param)$/i.test(nombre)) {
+      if (ocultoDesde < 0 && OCULTO.test(attrs)) {
+        for (let i = m.index; i < m.index + txt.length; i++) if (out[i] !== "\n") out[i] = " ";
+      }
+      continue;
+    }
+    stack.push(nombre);
+    if (ocultoDesde < 0 && OCULTO.test(attrs)) { ocultoDesde = m.index; profundidad = stack.length; }
+  }
+  return out.join("");
+}
+
 function declaredAllows(src) {
   const out = new Map();
   for (const m of src.matchAll(/ds-allow\s*:\s*([A-Z]\d+(?:\s*,\s*[A-Z]\d+)*)\s*[—-]\s*(.+?)\s*(?:-->|$)/gm)) {
@@ -136,8 +176,10 @@ for (const file of files) {
     }
   }
 
-  // C1 — más de un btn-primary. Heurística: contamos por archivo y avisamos si hay >1.
-  const primaries = [...src.matchAll(/class="[^"]*\bbtn-primary\b/g)];
+  // C1 — más de un btn-primary a la vez. Se cuenta sobre el markup VISIBLE: los estados y el
+  // bottom sheet que el DS pide vienen ocultos y cada uno trae su propia primaria, que nunca
+  // convive con la del toolbar.
+  const primaries = [...stripHidden(src).matchAll(/class="[^"]*\bbtn-primary\b/g)];
   if (primaries.length > 1 && !allows.has("C1")) {
     findings.push({
       id: "C1", sev: "BLOQ", desc: "más de un btn-primary — verificá si están en el mismo contexto",

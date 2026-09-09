@@ -43,13 +43,20 @@ function field(head, name) {
   return m ? m[1].replace(/\s*\n\s*/g, " ").trim() : "";
 }
 
-/** El bloque `Uso:` es el markup canónico: todo lo que sigue hasta el fin del header. */
+/**
+ * El bloque `Uso:` es el markup canónico: todo lo que sigue hasta el fin del header.
+ *
+ * Acepta también `Uso (búsqueda + filtros):` y `Uso Snackbar:`. Antes exigía los dos puntos
+ * pegados y por eso toolbar y toast salían SIN markup en el manifiesto — y toolbar es
+ * justamente donde vive `.search-field`, que es un contenedor: sin ver el markup, un agente
+ * le pone la clase al `<input>`. Nos pasó en la primera corrida del eval (B3, guiada).
+ */
 function usage(head) {
-  const i = head.search(/^\s*Uso\s*:/mi);
+  const i = head.search(/^\s*Uso\b[^:\n]*:/mi);
   if (i === -1) return "";
   return head
     .slice(i)
-    .replace(/^\s*Uso\s*:\s*/i, "")
+    .replace(/^\s*Uso\b[^:\n]*:\s*/i, "")
     .split("\n")
     .map((l) => l.replace(/^\s{0,3}/, ""))
     .join("\n")

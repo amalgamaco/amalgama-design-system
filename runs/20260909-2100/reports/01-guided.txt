@@ -1,0 +1,7 @@
+! public-api.json no encontrado — se saltea B1. Corré: node scripts/build-public-api.mjs
+[B3 · ALTA] 01-lista-coleccion.html:187 — input genérico con placeholder de búsqueda, fuera de search-field / search-bar
+    <input class="search-field" id="q" type="search"
+           
+
+BLOQUEANTES 0 · ALTAS 1 · MEDIAS 0 · BAJAS 0 · total 1
+Lo que no se puede chequear acá (jerarquía, layout, estados, copy, contraste) lo juzga embassy-review.

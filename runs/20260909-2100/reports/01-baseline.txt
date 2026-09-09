@@ -1,0 +1,132 @@
+! public-api.json no encontrado — se saltea B1. Corré: node scripts/build-public-api.mjs
+[A1 · BLOQ] 01-lista-coleccion.html:9 — hex crudo donde existe un token
+    #f5f6f8
+[A1 · BLOQ] 01-lista-coleccion.html:11 — hex crudo donde existe un token
+    #e2e5ea
+[A1 · BLOQ] 01-lista-coleccion.html:12 — hex crudo donde existe un token
+    #cfd4dc
+[A1 · BLOQ] 01-lista-coleccion.html:13 — hex crudo donde existe un token
+    #1c2028
+[A1 · BLOQ] 01-lista-coleccion.html:14 — hex crudo donde existe un token
+    #616b7a
+[A1 · BLOQ] 01-lista-coleccion.html:15 — hex crudo donde existe un token
+    #8a93a1
+[A1 · BLOQ] 01-lista-coleccion.html:16 — hex crudo donde existe un token
+    #2f4bd6
+[A1 · BLOQ] 01-lista-coleccion.html:17 — hex crudo donde existe un token
+    #2439a8
+[A1 · BLOQ] 01-lista-coleccion.html:18 — hex crudo donde existe un token
+    #eaeeff
+[A1 · BLOQ] 01-lista-coleccion.html:19 — hex crudo donde existe un token
+    #1f7a4d
+[A1 · BLOQ] 01-lista-coleccion.html:20 — hex crudo donde existe un token
+    #e4f5eb
+[A1 · BLOQ] 01-lista-coleccion.html:21 — hex crudo donde existe un token
+    #1c5fa8
+[A1 · BLOQ] 01-lista-coleccion.html:22 — hex crudo donde existe un token
+    #e5f0fb
+[A1 · BLOQ] 01-lista-coleccion.html:23 — hex crudo donde existe un token
+    #5c6470
+[A1 · BLOQ] 01-lista-coleccion.html:24 — hex crudo donde existe un token
+    #eceef1
+[A1 · BLOQ] 01-lista-coleccion.html:25 — hex crudo donde existe un token
+    #8a5a06
+[A1 · BLOQ] 01-lista-coleccion.html:26 — hex crudo donde existe un token
+    #fdf1dc
+[A1 · BLOQ] 01-lista-coleccion.html:27 — hex crudo donde existe un token
+    #6b5f86
+[A1 · BLOQ] 01-lista-coleccion.html:28 — hex crudo donde existe un token
+    #f0ecf7
+[A1 · BLOQ] 01-lista-coleccion.html:62 — hex crudo donde existe un token
+    #5b74e8
+[A1 · BLOQ] 01-lista-coleccion.html:73 — hex crudo donde existe un token
+    #dfe3ea
+[A1 · BLOQ] 01-lista-coleccion.html:73 — hex crudo donde existe un token
+    #4b5464
+[A1 · BLOQ] 01-lista-coleccion.html:97 — hex crudo donde existe un token
+    #f7f8fa
+[A1 · BLOQ] 01-lista-coleccion.html:146 — hex crudo donde existe un token
+    #f7f8fa
+[A1 · BLOQ] 01-lista-coleccion.html:160 — hex crudo donde existe un token
+    #fafbfc
+[A1 · BLOQ] 01-lista-coleccion.html:170 — hex crudo donde existe un token
+    #fafbfd
+[A1 · BLOQ] 01-lista-coleccion.html:180 — hex crudo donde existe un token
+    #4b5464
+[A1 · BLOQ] 01-lista-coleccion.html:227 — hex crudo donde existe un token
+    #fafbfc
+[A1 · BLOQ] 01-lista-coleccion.html:237 — hex crudo donde existe un token
+    #f2f4f7
+[A2 · BLOQ] 01-lista-coleccion.html:41 — familia tipográfica entre comillas en vez de var(--font-*)
+    font-family:"
+[A3 · ALTA] 01-lista-coleccion.html:42 — font-size en px suelto sin token
+    font-size:14px
+[A3 · ALTA] 01-lista-coleccion.html:59 — font-size en px suelto sin token
+    font-size:15px
+[A3 · ALTA] 01-lista-coleccion.html:63 — font-size en px suelto sin token
+    font-size:13px
+[A3 · ALTA] 01-lista-coleccion.html:74 — font-size en px suelto sin token
+    font-size:12px
+[A3 · ALTA] 01-lista-coleccion.html:83 — font-size en px suelto sin token
+    font-size:22px
+[A3 · ALTA] 01-lista-coleccion.html:84 — font-size en px suelto sin token
+    font-size:13px
+[A3 · ALTA] 01-lista-coleccion.html:89 — font-size en px suelto sin token
+    font-size:13.5px
+[A3 · ALTA] 01-lista-coleccion.html:98 — font-size en px suelto sin token
+    font-size:13px
+[A3 · ALTA] 01-lista-coleccion.html:110 — font-size en px suelto sin token
+    font-size:12px
+[A3 · ALTA] 01-lista-coleccion.html:114 — font-size en px suelto sin token
+    font-size:13.5px
+[A3 · ALTA] 01-lista-coleccion.html:136 — font-size en px suelto sin token
+    font-size:13px
+[A3 · ALTA] 01-lista-coleccion.html:143 — font-size en px suelto sin token
+    font-size:12.5px
+[A3 · ALTA] 01-lista-coleccion.html:158 — font-size en px suelto sin token
+    font-size:11.5px
+[A3 · ALTA] 01-lista-coleccion.html:165 — font-size en px suelto sin token
+    font-size:10px
+[A3 · ALTA] 01-lista-coleccion.html:174 — font-size en px suelto sin token
+    font-size:12px
+[A3 · ALTA] 01-lista-coleccion.html:180 — font-size en px suelto sin token
+    font-size:10.5px
+[A3 · ALTA] 01-lista-coleccion.html:184 — font-size en px suelto sin token
+    font-size:11px
+[A3 · ALTA] 01-lista-coleccion.html:190 — font-size en px suelto sin token
+    font-size:12px
+[A3 · ALTA] 01-lista-coleccion.html:214 — font-size en px suelto sin token
+    font-size:15px
+[A3 · ALTA] 01-lista-coleccion.html:215 — font-size en px suelto sin token
+    font-size:12.5px
+[A3 · ALTA] 01-lista-coleccion.html:221 — font-size en px suelto sin token
+    font-size:11px
+[A3 · ALTA] 01-lista-coleccion.html:222 — font-size en px suelto sin token
+    font-size:13px
+[A3 · ALTA] 01-lista-coleccion.html:229 — font-size en px suelto sin token
+    font-size:13px
+[A3 · ALTA] 01-lista-coleccion.html:234 — font-size en px suelto sin token
+    font-size:13px
+[A3 · ALTA] 01-lista-coleccion.html:244 — font-size en px suelto sin token
+    font-size:16px
+[A3 · ALTA] 01-lista-coleccion.html:245 — font-size en px suelto sin token
+    font-size:13.5px
+[A3 · ALTA] 01-lista-coleccion.html:262 — font-size en px suelto sin token
+    font-size:19px
+[A3 · ALTA] 01-lista-coleccion.html:504 — font-size en px suelto sin token
+    font-size:11px
+[A3 · ALTA] 01-lista-coleccion.html:516 — font-size en px suelto sin token
+    font-size:11px
+[A3 · ALTA] 01-lista-coleccion.html:540 — font-size en px suelto sin token
+    font-size:11px
+[A3 · ALTA] 01-lista-coleccion.html:576 — font-size en px suelto sin token
+    font-size:11px
+[A3 · ALTA] 01-lista-coleccion.html:600 — font-size en px suelto sin token
+    font-size:11px
+[F3 · ALTA] 01-lista-coleccion.html:1 — búsqueda sin role="search"
+    hay búsqueda y ningún role="search"
+[G1 · ALTA] 01-lista-coleccion.html:90 — cubic-bezier o ms crudos en vez de tokens
+    transition:background .12s
+
+BLOQUEANTES 30 · ALTAS 34 · MEDIAS 0 · BAJAS 0 · total 64
+Lo que no se puede chequear acá (jerarquía, layout, estados, copy, contraste) lo juzga embassy-review.

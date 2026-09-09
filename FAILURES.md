@@ -96,6 +96,7 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 | `E7` | Copy de relleno o genérico ("Bienvenido a nuestra plataforma") | MEDIA | lectura |
 | `E8` | Idioma incorrecto (producto que no es rioplatense, o comercial afuera que no es inglés) | ALTA | lectura |
 | `E9` | Tono fuera de marca: exclamaciones, emojis, entusiasmo publicitario | MEDIA | lectura |
+| `E10` | Varios estados visibles a la vez: el error encima de los resultados, el snackbar fijo, el skeleton junto a la tabla | ALTA | inspección |
 
 ## F · Accesibilidad
 

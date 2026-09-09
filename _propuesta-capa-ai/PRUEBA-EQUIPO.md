@@ -317,11 +317,13 @@ real**. Los hexes de verdad rompen cosas que un cliente inventado no rompe.
 
 Para que no gastes tiempo en esto:
 
-- **`--color-on-secondary`** queda en 3.58:1. No lo usa ningún componente todavía —el par que sí
-  se usa da 12.16:1— así que es una trampa latente, no una falla activa. Queda por documentar la
-  restricción.
-- **El CDN sirve desde `@main`**, sin tag pineado.
-- **El loop de medición nunca se corrió.** Justamente por eso te estamos pidiendo esto.
+- **El loop de medición ya tiene su primer número**, pero uno solo: escenario 01, corrida
+  `runs/20260909-2100`. Faltan los otros seis escenarios. Lo tuyo sigue siendo lo que más aporta:
+  el baseline es sintético y vos vas a usar esto con un cliente de verdad.
+- **La composición es lo flojo, no los tokens.** En esa corrida la pantalla guiada no tenía ni un
+  color a mano, pero el toolbar quedó partido en dos y los estados salieron todos visibles a la
+  vez. Si ves algo así, reportalo aunque el código parezca impecable: es justo lo que el chequeo
+  automático no ve.
 - **Si un comando "no existe", reiniciá Claude Code antes de reportarlo.** Los plugins se refrescan
   al arrancar; una skill nueva no aparece hasta entonces. Nos pasó y perdimos un rato buscando un
   bug que no estaba.

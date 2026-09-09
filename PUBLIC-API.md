@@ -1325,6 +1325,44 @@ A floating, ephemeral, non-blocking message that confirms something already happ
 
 Clases públicas: `.snackbar` · `.snackbar--exit` · `.snackbar--multiline` · `.snackbar--static` · `.snackbar-action` · `.snackbar-close` · `.snackbar-message` · `.snackbar-viewport` · `.toast` · `.toast-container` · `.toast-error` · `.toast-info` · `.toast-success`
 
+```html
+<!-- Solo mensaje -->
+<div class="snackbar" role="status" aria-live="polite">
+  <span class="snackbar-message">Archivo eliminado correctamente</span>
+</div>
+
+<!-- Mensaje + botón de acción -->
+<div class="snackbar" role="status" aria-live="polite">
+  <span class="snackbar-message">Archivo eliminado</span>
+  <button class="snackbar-action">Deshacer</button>
+</div>
+
+<!-- Mensaje + acción + cierre -->
+<div class="snackbar" role="status" aria-live="polite">
+  <span class="snackbar-message">Invitación enviada</span>
+  <button class="snackbar-action">Ver</button>
+  <button class="snackbar-close" aria-label="Cerrar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+</div>
+
+<!-- Mensaje largo apilado -->
+<div class="snackbar snackbar--multiline" role="status" aria-live="polite">
+  <span class="snackbar-message">No se pudo completar la operación en el servidor remoto</span>
+  <button class="snackbar-action">Reintentar</button>
+</div>
+
+Dependencia: variables.css (Color Roles inverse)
+
+Cola de apilado (Fase 3): .snackbar-viewport envuelve N .snackbar como
+hijos flex en column-reverse — el más nuevo entra abajo (pegado al borde)
+y los anteriores se acomodan arriba solos, sin recalcular offsets por
+índice. Dentro del viewport cada .snackbar pasa a position:relative (el
+viewport es el único position:fixed) y usa una animación de entrada/salida
+sin el translateX(-50%) del modo standalone (el centrado horizontal ya lo
+resuelve align-items:center del viewport). Ver components/lib/use-toast.ts
++ components/ui/toaster.tsx para la cola en sí (swipe-to-dismiss fuera de
+alcance — solo botón de cierre / auto-dismiss por timeout).
+```
+
 Regla completa: `component-rules/snackbar.md` · CSS: `css/components/toast.css`
 
 ---
@@ -1378,7 +1416,17 @@ The row of controls that heads a list, table or dashboard — search, filters, v
 **Cuándo no:** búsqueda que encabeza una pantalla completa → search-bar (search.css). Contexto y acciones globales de la app → Top Bar. Navegación entre sub-vistas → Tabs.
 **Variantes:** toolbar · actions · search-field · button · filters · selection · overflow · two-line · sticky · result-count
 
-Clases públicas: `.result-count` · `.search-bar` · `.search-field` · `.toolbar` · `.toolbar-actions` · `.toolbar-btn` · `.toolbar-btn-count` · `.toolbar-filters` · `.toolbar-group` · `.toolbar-overflow-btn` · `.toolbar-selection` · `.toolbar-selection-clear` · `.toolbar-selection-count` · `.toolbar-spacer` · `.toolbar-stack` · `.toolbar-sticky`
+Clases públicas: `.btn-primary` · `.result-count` · `.search-bar` · `.search-field` · `.seg-btn-group` · `.select` · `.toolbar` · `.toolbar-actions` · `.toolbar-btn` · `.toolbar-btn-count` · `.toolbar-filters` · `.toolbar-group` · `.toolbar-overflow-btn` · `.toolbar-selection` · `.toolbar-selection-clear` · `.toolbar-selection-count` · `.toolbar-spacer` · `.toolbar-stack` · `.toolbar-sticky`
+
+```html
+<div class="toolbar toolbar-filters" role="toolbar" aria-label="Controles de la lista">
+  <div class="search-field"><i data-lucide="search"></i><input type="search" aria-label="Buscar"></div>
+  <div class="select" data-select>…</div>
+  <div class="seg-btn-group" role="group" aria-label="Vista">…</div>
+  <div class="toolbar-actions"><button class="btn-primary">Nueva vacante</button></div>
+</div>
+<div class="result-count" aria-live="polite">Mostrando <strong>24</strong> vacantes</div>
+```
 
 Regla completa: `component-rules/toolbar.md` · CSS: `css/components/toolbar.css`
 

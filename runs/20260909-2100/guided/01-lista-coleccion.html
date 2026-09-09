@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vacantes · Gamaforce</title>
+
+<!--
+  ENCUADRE (pasada 1 — design.md §4)
+
+  OBJETIVO    lector: encontrar una vacante concreta y leer su avance en segundos
+              negocio: que el reclutador entre varias veces por día sin perder el hilo del pipeline
+  OBJETO      primario: la vacante
+              niveles: nombre + estado → cliente, postulantes, creada → responsable
+  ACCIONES    primaria: Crear vacante
+              secundarias: buscar por nombre, filtrar por estado y por cliente, ordenar por fecha,
+              abrir el detalle (fila / card), paginar
+  COMPOSICIÓN Encabezado por evidencia · secuencia canónica de página de colección:
+              header + acción primaria → búsqueda/filtros/estado de resultados → resultados → paginación
+  RESPONSIVE  desktop (≥768): app shell con sidebar, toolbar de una línea, tabla de 6 columnas
+              mobile (<768): sidebar → navigation drawer sobre scrim; toolbar → search-bar + botón
+              de filtros que abre un bottom sheet; tabla → vacancy-cards apiladas
+  ESTADOS     cargando (skeleton) · vacío de primer uso (empty-state + CTA crear) ·
+              sin resultados (empty-state sin CTA crear, con limpiar filtros) · error (alert inline) ·
+              éxito (snackbar de confirmación)
+-->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/variables.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/layout.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/components.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Composición local. Sin colores, tipografías, sombras ni radios propios:
+     todo sale de tokens semánticos. Prefijo u- para no colisionar con el DS. */
+
+  .u-page {
+    max-width: 1200px;            /* ancho deliberado para listas y tablas */
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  .u-stack       { display: flex; flex-direction: column; gap: var(--space-6); }
+  .u-toolbar-sel { min-width: calc(var(--space-20) * 2); }
+  .u-grow        { flex: 1; min-width: 0; }
+  .u-grow > .search-field { width: 100%; }
+
+  .u-cell-strong { font-weight: var(--font-weight-semibold); }
+  .u-cell-sub {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--font-size-caption);
+    color: var(--color-on-surface-variant);
+  }
+  .u-cell-owner { display: flex; align-items: center; gap: var(--space-2); }
+  .u-num { font-variant-numeric: tabular-nums; }
+
+  .u-skeleton-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--divider);
+  }
+  .u-skeleton-row > * { flex: 1; }
+  .u-skeleton-row > :first-child { flex: 2; }
+
+  .u-pagination-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .u-sheet-fields { display: flex; flex-direction: column; gap: var(--space-5); }
+
+  .u-visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* --- mobile primero: la estructura angosta es la base --- */
+  .u-desktop-only { display: none; }
+  .u-mobile-only  { display: block; }
+
+  @media (min-width: 768px) {
+    .u-desktop-only { display: block; }
+    .u-mobile-only  { display: none; }
+  }
+</style>
+</head>
+
+<body>
+<div class="app" id="app">
+
+  <!-- Navigation drawer en mobile, sidebar persistente en desktop -->
+  <div class="sidebar-scrim" id="scrim" hidden></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <img src="https://amalgama-static-sites.s3.us-east-1.amazonaws.com/amalgama-logos/svgs/amalgama-icon-blue.svg"
+           alt="Amalgama" width="24" height="24">
+      <span>Gamaforce</span>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <div class="nav-section-label">Reclutamiento</div>
+
+      <a class="nav-item active" href="#" aria-current="page">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Vacantes
+        <span class="nav-badge">240</span>
+      </a>
+
+      <a class="nav-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+        Candidatos
+      </a>
+
+      <a class="nav-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Entrevistas
+      </a>
+
+      <div class="nav-section-label">Clientes</div>
+
+      <a class="nav-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>
+        Cuentas
+      </a>
+
+      <a class="nav-item" href="#">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        Reportes
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="avatar avatar-sm"><span class="avatar-fallback">AB</span></span>
+      <span class="avatar-label">Ana Borthagaray</span>
+    </div>
+  </aside>
+
+  <div class="main">
+
+    <header class="topbar">
+      <button class="shell-menu-btn" id="menuBtn" aria-label="Abrir navegación" aria-expanded="false" aria-controls="sidebar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+
+      <nav class="topbar-breadcrumb" aria-label="Ubicación">
+        <span>Reclutamiento</span>
+        <span class="separator">/</span>
+        <span class="secondary">Vacantes</span>
+      </nav>
+
+      <button class="topbar-btn topbar-notif" aria-label="Notificaciones">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+        <span class="notif-badge">4</span>
+      </button>
+    </header>
+
+    <main class="content">
+      <div class="u-page u-stack">
+
+        <!-- 1 · Encabezado + única acción primaria -->
+        <div class="page-header">
+          <h1 class="page-title">Vacantes</h1>
+          <div class="header-actions">
+            <button class="btn-primary" type="button" id="createBtn">Crear vacante</button>
+          </div>
+        </div>
+
+        <!-- 2 · Búsqueda, filtros y estado de resultados -->
+
+        <!-- desktop: toolbar de una línea, alineada a la columna de contenido -->
+        <div class="u-desktop-only">
+          <div class="toolbar">
+            <div class="u-grow" role="search" aria-label="Buscar vacantes">
+              <label class="u-visually-hidden" for="q">Buscar vacante por nombre</label>
+              <input class="search-field" id="q" type="search"
+                     placeholder="Buscar por nombre de vacante" aria-label="Buscar vacante por nombre">
+            </div>
+
+            <div class="toolbar-filters">
+              <div class="select-wrapper u-toolbar-sel">
+                <select id="fEstado" aria-label="Filtrar por estado">
+                  <option value="">Estado: todos</option>
+                  <option value="open">Abierta</option>
+                  <option value="active">Activa</option>
+                  <option value="closed">Cerrada</option>
+                  <option value="draft">Borrador</option>
+                  <option value="archived">Archivada</option>
+                </select>
+                <span class="select-caret" aria-hidden="true">▾</span>
+              </div>
+
+              <div class="select-wrapper u-toolbar-sel">
+                <select id="fCliente" aria-label="Filtrar por cliente">
+                  <option value="">Cliente: todos</option>
+                  <option>Nordvik Health</option>
+                  <option>Vitala</option>
+                  <option>Kinetic Labs</option>
+                  <option>Bandera Fitness</option>
+                  <option>Onda Salud</option>
+                  <option>Meridian Care</option>
+                </select>
+                <span class="select-caret" aria-hidden="true">▾</span>
+              </div>
+
+              <div class="select-wrapper u-toolbar-sel">
+                <select id="fOrden" aria-label="Ordenar por fecha de creación">
+                  <option value="desc">Creación: más nuevas</option>
+                  <option value="asc">Creación: más viejas</option>
+                </select>
+                <span class="select-caret" aria-hidden="true">▾</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- mobile: search-bar en píldora + disparador del bottom sheet de filtros -->
+        <div class="u-mobile-only">
+          <div class="search-row">
+            <div class="search-bar" role="search" aria-label="Buscar vacantes">
+              <span class="search-bar-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </span>
+              <input class="search-bar-input" id="qm" type="search"
+                     placeholder="Buscar vacante" aria-label="Buscar vacante por nombre">
+            </div>
+            <button class="search-icon-btn" id="filtersBtn" type="button"
+                    aria-label="Filtros y orden" aria-haspopup="dialog" aria-expanded="false">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M7 12h10M11 18h2"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- estado de resultados: base, total y criterio de orden junto al dato -->
+        <p class="result-count" id="resultCount" aria-live="polite">
+          Mostrando 1–10 de 240 vacantes · orden por fecha de creación, más nuevas primero
+        </p>
+
+        <!-- 3 · Resultados -->
+
+        <!-- 3a · CARGANDO — skeleton, se conoce el layout destino -->
+        <section id="stateLoading" aria-label="Cargando vacantes" aria-busy="true" hidden>
+          <div class="u-skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div></div>
+          <div class="u-skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div></div>
+          <div class="u-skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div></div>
+          <div class="u-skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div></div>
+          <div class="u-skeleton-row"><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text"></div></div>
+        </section>
+
+        <!-- 3b · ERROR — inline, persiste hasta que la persona resuelve -->
+        <div class="alert alert-error" role="alert" id="stateError" hidden>
+          <svg class="alert-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          <div class="alert-body">
+            <div class="alert-title">No pudimos cargar las vacantes</div>
+            <div class="alert-description">La consulta al servidor falló. Los filtros que aplicaste siguen guardados.</div>
+            <div class="alert-actions">
+              <button class="btn-tertiary btn-sm" type="button">Reintentar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3c · VACÍO DE PRIMER USO — explica la función y ofrece crear -->
+        <div class="empty-state" id="stateEmpty" hidden>
+          <svg class="empty-state-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <div class="empty-state-title">Todavía no hay vacantes</div>
+          <p class="empty-state-desc">Una vacante agrupa el puesto, el cliente y los postulantes que van entrando. Creá la primera para empezar a seguir el pipeline.</p>
+          <button class="btn-primary" type="button">Crear vacante</button>
+        </div>
+
+        <!-- 3d · SIN RESULTADOS — dice qué se buscó, sin CTA de crear -->
+        <div class="empty-state" id="stateNoResults" hidden>
+          <svg class="empty-state-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <div class="empty-state-title">Sin resultados</div>
+          <p class="empty-state-desc" id="noResultsDesc">Ninguna de las 240 vacantes coincide con la búsqueda y los filtros actuales.</p>
+          <button class="btn-tertiary" type="button" id="clearFilters">Limpiar filtros</button>
+        </div>
+
+        <!-- 3e · RESULTADOS -->
+        <section id="stateResults" aria-label="Listado de vacantes">
+
+          <!-- desktop: tabla con semántica real -->
+          <div class="table-scroll u-desktop-only">
+            <table class="data-table">
+              <caption class="caption u-visually-hidden">Vacantes de Gamaforce, ordenadas por fecha de creación</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Vacante</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Postulantes</th>
+                  <th scope="col">Creada</th>
+                  <th scope="col">Responsable</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                <tr class="clickable" tabindex="0" data-name="Kinesióloga deportiva" data-client="Kinetic Labs" data-status="open">
+                  <td><span class="u-cell-strong">Kinesióloga deportiva</span><span class="u-cell-sub">VAC-2418</span></td>
+                  <td>Kinetic Labs</td>
+                  <td><span class="badge badge-open">Abierta</span></td>
+                  <td class="u-num">37</td>
+                  <td>2 sep 2026<span class="u-cell-sub">hace 7 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">MG</span></span> María González</span></td>
+                </tr>
+
+                <tr class="clickable" tabindex="0" data-name="Product Designer Senior" data-client="Vitala" data-status="active">
+                  <td><span class="u-cell-strong">Product Designer Senior</span><span class="u-cell-sub">VAC-2417</span></td>
+                  <td>Vitala</td>
+                  <td><span class="badge badge-active">Activa</span></td>
+                  <td class="u-num">112</td>
+                  <td>29 ago 2026<span class="u-cell-sub">hace 11 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">JP</span></span> Julián Paz</span></td>
+                </tr>
+
+                <tr class="clickable" tabindex="0" data-name="Backend Engineer (Go)" data-client="Nordvik Health" data-status="active">
+                  <td><span class="u-cell-strong">Backend Engineer (Go)</span><span class="u-cell-sub">VAC-2415</span></td>
+                  <td>Nordvik Health</td>
+                  <td><span class="badge badge-active">Activa</span></td>
+                  <td class="u-num">64</td>
+                  <td>26 ago 2026<span class="u-cell-sub">hace 14 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">SR</span></span> Sofía Ruiz</span></td>
+                </tr>
+
+                <tr class="clickable" tabindex="0" data-name="Nutricionista clínica" data-client="Onda Salud" data-status="open">
+                  <td><span class="u-cell-strong">Nutricionista clínica</span><span class="u-cell-sub">VAC-2412</span></td>
+                  <td>Onda Salud</td>
+                  <td><span class="badge badge-open">Abierta</span></td>
+                  <td class="u-num">18</td>
+                  <td>21 ago 2026<span class="u-cell-sub">hace 19 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">MG</span></span> María González</span></td>
+                </tr>
+
+                <tr class="clickable" tabindex="0" data-name="Coordinador de entrenamiento" data-client="Bandera Fitness" data-status="draft">
+                  <td><span class="u-cell-strong">Coordinador de entrenamiento</span><span class="u-cell-sub">VAC-2410</span></td>
+                  <td>Bandera Fitness</td>
+                  <td><span class="badge badge-draft">Borrador</span></td>
+                  <td class="u-num">0</td>
+                  <td>18 ago 2026<span class="u-cell-sub">hace 22 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">FL</span></span> Felipe Lema</span></td>
+                </tr>
+
+                <tr class="clickable" tabindex="0" data-name="QA Automation" data-client="Nordvik Health" data-status="open">
+                  <td><span class="u-cell-strong">QA Automation</span><span class="u-cell-sub">VAC-2406</span></td>
+                  <td>Nordvik Health</td>
+                  <td><span class="badge badge-open">Abierta</span></td>
+                  <td class="u-num">45</td>
+                  <td>12 ago 2026<span class="u-cell-sub">hace 28 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">SR</span></span> Sofía Ruiz</span></td>
+                </tr>
+
+                <tr class="clickable" tabindex="0" data-name="Enfermera de telemedicina" data-client="Meridian Care" data-status="active">
+                  <td><span class="u-cell-strong">Enfermera de telemedicina</span><span class="u-cell-sub">VAC-2401</span></td>
+                  <td>Meridian Care</td>
+                  <td><span class="badge badge-active">Activa</span></td>
+                  <td class="u-num">83</td>
+                  <td>5 ago 2026<span class="u-cell-sub">hace 35 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">JP</span></span> Julián Paz</span></td>
+                </tr>
+
+                <tr class="clickable" tabindex="0" data-name="Data Analyst" data-client="Vitala" data-status="closed">
+                  <td><span class="u-cell-strong">Data Analyst</span><span class="u-cell-sub">VAC-2396</span></td>
+                  <td>Vitala</td>
+                  <td><span class="badge badge-closed">Cerrada</span></td>
+                  <td class="u-num">156</td>
+                  <td>28 jul 2026<span class="u-cell-sub">hace 43 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">FL</span></span> Felipe Lema</span></td>
+                </tr>
+
+                <tr class="clickable" tabindex="0" data-name="Fisioterapeuta domiciliario" data-client="Kinetic Labs" data-status="closed">
+                  <td><span class="u-cell-strong">Fisioterapeuta domiciliario</span><span class="u-cell-sub">VAC-2390</span></td>
+                  <td>Kinetic Labs</td>
+                  <td><span class="badge badge-closed">Cerrada</span></td>
+                  <td class="u-num">71</td>
+                  <td>19 jul 2026<span class="u-cell-sub">hace 52 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">MG</span></span> María González</span></td>
+                </tr>
+
+                <tr class="clickable" tabindex="0" data-name="Community Manager wellness" data-client="Onda Salud" data-status="archived">
+                  <td><span class="u-cell-strong">Community Manager wellness</span><span class="u-cell-sub">VAC-2381</span></td>
+                  <td>Onda Salud</td>
+                  <td><span class="badge badge-archived">Archivada</span></td>
+                  <td class="u-num">29</td>
+                  <td>6 jul 2026<span class="u-cell-sub">hace 65 d</span></td>
+                  <td><span class="u-cell-owner"><span class="avatar avatar-sm"><span class="avatar-fallback">FL</span></span> Felipe Lema</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- mobile: la tabla se transforma en cards apiladas -->
+          <div class="vacancies-list u-mobile-only" id="cards">
+            <a class="vacancy-card" href="#" data-name="Kinesióloga deportiva" data-client="Kinetic Labs" data-status="open">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">Kinesióloga deportiva <span class="badge badge-open">Abierta</span></div>
+                <div class="vacancy-meta">Kinetic Labs <span class="meta-dot"></span> María González</div>
+                <div class="vacancy-stats"><span class="stat-pill">37 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">7 d</div></div>
+            </a>
+
+            <a class="vacancy-card" href="#" data-name="Product Designer Senior" data-client="Vitala" data-status="active">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">Product Designer Senior <span class="badge badge-active">Activa</span></div>
+                <div class="vacancy-meta">Vitala <span class="meta-dot"></span> Julián Paz</div>
+                <div class="vacancy-stats"><span class="stat-pill">112 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">11 d</div></div>
+            </a>
+
+            <a class="vacancy-card" href="#" data-name="Backend Engineer (Go)" data-client="Nordvik Health" data-status="active">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">Backend Engineer (Go) <span class="badge badge-active">Activa</span></div>
+                <div class="vacancy-meta">Nordvik Health <span class="meta-dot"></span> Sofía Ruiz</div>
+                <div class="vacancy-stats"><span class="stat-pill">64 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">14 d</div></div>
+            </a>
+
+            <a class="vacancy-card" href="#" data-name="Nutricionista clínica" data-client="Onda Salud" data-status="open">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">Nutricionista clínica <span class="badge badge-open">Abierta</span></div>
+                <div class="vacancy-meta">Onda Salud <span class="meta-dot"></span> María González</div>
+                <div class="vacancy-stats"><span class="stat-pill">18 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">19 d</div></div>
+            </a>
+
+            <a class="vacancy-card" href="#" data-name="Coordinador de entrenamiento" data-client="Bandera Fitness" data-status="draft">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">Coordinador de entrenamiento <span class="badge badge-draft">Borrador</span></div>
+                <div class="vacancy-meta">Bandera Fitness <span class="meta-dot"></span> Felipe Lema</div>
+                <div class="vacancy-stats"><span class="stat-pill">0 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">22 d</div></div>
+            </a>
+
+            <a class="vacancy-card" href="#" data-name="QA Automation" data-client="Nordvik Health" data-status="open">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">QA Automation <span class="badge badge-open">Abierta</span></div>
+                <div class="vacancy-meta">Nordvik Health <span class="meta-dot"></span> Sofía Ruiz</div>
+                <div class="vacancy-stats"><span class="stat-pill">45 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">28 d</div></div>
+            </a>
+
+            <a class="vacancy-card" href="#" data-name="Enfermera de telemedicina" data-client="Meridian Care" data-status="active">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">Enfermera de telemedicina <span class="badge badge-active">Activa</span></div>
+                <div class="vacancy-meta">Meridian Care <span class="meta-dot"></span> Julián Paz</div>
+                <div class="vacancy-stats"><span class="stat-pill">83 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">35 d</div></div>
+            </a>
+
+            <a class="vacancy-card" href="#" data-name="Data Analyst" data-client="Vitala" data-status="closed">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">Data Analyst <span class="badge badge-closed">Cerrada</span></div>
+                <div class="vacancy-meta">Vitala <span class="meta-dot"></span> Felipe Lema</div>
+                <div class="vacancy-stats"><span class="stat-pill">156 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">43 d</div></div>
+            </a>
+
+            <a class="vacancy-card" href="#" data-name="Fisioterapeuta domiciliario" data-client="Kinetic Labs" data-status="closed">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">Fisioterapeuta domiciliario <span class="badge badge-closed">Cerrada</span></div>
+                <div class="vacancy-meta">Kinetic Labs <span class="meta-dot"></span> María González</div>
+                <div class="vacancy-stats"><span class="stat-pill">71 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">52 d</div></div>
+            </a>
+
+            <a class="vacancy-card" href="#" data-name="Community Manager wellness" data-client="Onda Salud" data-status="archived">
+              <svg class="vacancy-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <div class="vacancy-info">
+                <div class="vacancy-name">Community Manager wellness <span class="badge badge-archived">Archivada</span></div>
+                <div class="vacancy-meta">Onda Salud <span class="meta-dot"></span> Felipe Lema</div>
+                <div class="vacancy-stats"><span class="stat-pill">29 postulantes</span></div>
+              </div>
+              <div class="vacancy-right"><div class="vacancy-age">65 d</div></div>
+            </a>
+          </div>
+        </section>
+
+        <!-- 4 · Paginación -->
+        <div class="u-pagination-row" id="paginationRow">
+          <span class="result-count">Página 1 de 24 · 10 vacantes por página</span>
+          <nav class="pagination" aria-label="Paginación de vacantes">
+            <ul class="pagination-list">
+              <li><a class="pagination-prev" href="#" aria-disabled="true" aria-label="Página anterior">Anterior</a></li>
+              <li><a class="pagination-link active" href="#" aria-current="page">1</a></li>
+              <li><a class="pagination-link" href="#">2</a></li>
+              <li><a class="pagination-link" href="#">3</a></li>
+              <li><span class="pagination-ellipsis" aria-hidden="true">…</span></li>
+              <li><a class="pagination-link" href="#">24</a></li>
+              <li><a class="pagination-next" href="#" aria-label="Página siguiente">Siguiente</a></li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Bottom sheet de filtros (mobile) — la acción primaria del overlay vive adentro -->
+<div class="sheet-overlay" id="sheetOverlay" hidden>
+  <div class="sheet-content sheet-content-bottom open" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <button class="sheet-close" type="button" id="sheetClose" aria-label="Cerrar filtros">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="sheet-header">
+      <div class="sheet-title" id="sheetTitle">Filtros y orden</div>
+      <div class="sheet-description">Se aplican sobre las 240 vacantes.</div>
+    </div>
+    <div class="sheet-body">
+      <div class="u-sheet-fields">
+        <div class="field-group">
+          <label class="field-label" for="mEstado">Estado</label>
+          <div class="select-wrapper">
+            <select id="mEstado">
+              <option value="">Todos</option>
+              <option value="open">Abierta</option>
+              <option value="active">Activa</option>
+              <option value="closed">Cerrada</option>
+              <option value="draft">Borrador</option>
+              <option value="archived">Archivada</option>
+            </select>
+            <span class="select-caret" aria-hidden="true">▾</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="mCliente">Cliente</label>
+          <div class="select-wrapper">
+            <select id="mCliente">
+              <option value="">Todos</option>
+              <option>Nordvik Health</option>
+              <option>Vitala</option>
+              <option>Kinetic Labs</option>
+              <option>Bandera Fitness</option>
+              <option>Onda Salud</option>
+              <option>Meridian Care</option>
+            </select>
+            <span class="select-caret" aria-hidden="true">▾</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="mOrden">Orden por fecha de creación</label>
+          <div class="select-wrapper">
+            <select id="mOrden">
+              <option value="desc">Más nuevas primero</option>
+              <option value="asc">Más viejas primero</option>
+            </select>
+            <span class="select-caret" aria-hidden="true">▾</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-footer">
+      <button class="btn-tertiary" type="button" id="sheetClear">Limpiar</button>
+      <button class="btn-primary btn-lg" type="button" id="sheetApply">Ver resultados</button>
+    </div>
+  </div>
+</div>
+
+<!-- ÉXITO — snackbar de confirmación (aparece después de crear una vacante) -->
+<div class="snackbar-viewport">
+  <div class="snackbar" role="status" id="snackbar" hidden>
+    <span class="snackbar-message">Vacante creada</span>
+    <button class="snackbar-action" type="button">Ver</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+
+  const app       = $('app');
+  const rows      = Array.from(document.querySelectorAll('#tbody tr'));
+  const cards     = Array.from(document.querySelectorAll('#cards .vacancy-card'));
+  const results   = $('stateResults');
+  const noResults = $('stateNoResults');
+  const count     = $('resultCount');
+  const pagination= $('paginationRow');
+  const TOTAL     = 240;
+
+  const state = { q: '', estado: '', cliente: '', orden: 'desc' };
+
+  const ORDER_LABEL = {
+    desc: 'orden por fecha de creación, más nuevas primero',
+    asc:  'orden por fecha de creación, más viejas primero'
+  };
+
+  function matches(el) {
+    const name = (el.dataset.name || '').toLowerCase();
+    return (!state.q || name.includes(state.q.toLowerCase()))
+        && (!state.estado || el.dataset.status === state.estado)
+        && (!state.cliente || el.dataset.client === state.cliente);
+  }
+
+  function applyOrder() {
+    const dir = state.orden === 'asc' ? -1 : 1;
+    // La tabla y las cards ya vienen del servidor en orden descendente.
+    // Al invertir, se reordena el DOM sin tocar el markup de cada fila.
+    const tbody = $('tbody');
+    const list  = $('cards');
+    if (dir === -1) {
+      rows.slice().reverse().forEach((r) => tbody.appendChild(r));
+      cards.slice().reverse().forEach((c) => list.appendChild(c));
+      state._reversed = true;
+    } else if (state._reversed) {
+      rows.forEach((r) => tbody.appendChild(r));
+      cards.forEach((c) => list.appendChild(c));
+      state._reversed = false;
+    }
+  }
+
+  function render() {
+    let visible = 0;
+    [...rows, ...cards].forEach((el) => {
+      const ok = matches(el);
+      el.hidden = !ok;
+      if (ok && el.tagName === 'TR') visible++;
+    });
+
+    const filtered = state.q || state.estado || state.cliente;
+
+    noResults.hidden = visible !== 0;
+    results.hidden   = visible === 0;
+    pagination.hidden = visible === 0 || Boolean(filtered);
+
+    if (visible === 0) {
+      $('noResultsDesc').textContent = state.q
+        ? 'Ninguna de las 240 vacantes coincide con "' + state.q + '" y los filtros aplicados.'
+        : 'Ninguna de las 240 vacantes coincide con los filtros aplicados.';
+      count.textContent = '0 resultados sobre 240 vacantes';
+    } else if (filtered) {
+      count.textContent = visible + ' resultados sobre 240 vacantes · ' + ORDER_LABEL[state.orden];
+    } else {
+      count.textContent = 'Mostrando 1–10 de ' + TOTAL + ' vacantes · ' + ORDER_LABEL[state.orden];
+    }
+  }
+
+  function sync() { applyOrder(); render(); }
+
+  // Búsqueda: desktop y mobile escriben sobre el mismo estado.
+  ['q', 'qm'].forEach((id) => $(id).addEventListener('input', (e) => {
+    state.q = e.target.value.trim();
+    $('q').value = state.q; $('qm').value = state.q;
+    render();
+  }));
+
+  $('fEstado').addEventListener('change', (e) => { state.estado = e.target.value; $('mEstado').value = state.estado; sync(); });
+  $('fCliente').addEventListener('change', (e) => { state.cliente = e.target.value; $('mCliente').value = state.cliente; sync(); });
+  $('fOrden').addEventListener('change', (e) => { state.orden = e.target.value; $('mOrden').value = state.orden; sync(); });
+
+  function clearAll() {
+    state.q = ''; state.estado = ''; state.cliente = ''; state.orden = 'desc';
+    ['q', 'qm'].forEach((id) => $(id).value = '');
+    ['fEstado', 'fCliente', 'mEstado', 'mCliente'].forEach((id) => $(id).value = '');
+    ['fOrden', 'mOrden'].forEach((id) => $(id).value = 'desc');
+    sync();
+  }
+  $('clearFilters').addEventListener('click', clearAll);
+  $('sheetClear').addEventListener('click', clearAll);
+
+  // Bottom sheet de filtros
+  const overlay = $('sheetOverlay');
+  const filtersBtn = $('filtersBtn');
+  function openSheet() {
+    overlay.hidden = false;
+    filtersBtn.setAttribute('aria-expanded', 'true');
+    $('mEstado').focus();
+  }
+  function closeSheet() {
+    overlay.hidden = true;
+    filtersBtn.setAttribute('aria-expanded', 'false');
+    filtersBtn.focus();
+  }
+  filtersBtn.addEventListener('click', openSheet);
+  $('sheetClose').addEventListener('click', closeSheet);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSheet(); });
+  $('sheetApply').addEventListener('click', () => {
+    state.estado = $('mEstado').value;
+    state.cliente = $('mCliente').value;
+    state.orden = $('mOrden').value;
+    $('fEstado').value = state.estado;
+    $('fCliente').value = state.cliente;
+    $('fOrden').value = state.orden;
+    sync();
+    closeSheet();
+  });
+
+  // Navigation drawer (mobile)
+  const menuBtn = $('menuBtn');
+  const scrim = $('scrim');
+  menuBtn.addEventListener('click', () => {
+    const open = app.classList.toggle('nav-open');
+    scrim.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  scrim.addEventListener('click', () => {
+    app.classList.remove('nav-open');
+    scrim.hidden = true;
+    menuBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!overlay.hidden) closeSheet();
+    else if (app.classList.contains('nav-open')) scrim.click();
+  });
+
+  // Fila de tabla navegable por teclado, igual que la card en mobile.
+  rows.forEach((r) => r.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); r.click(); }
+  }));
+
+  render();
+})();
+</script>
+</body>
+</html>
