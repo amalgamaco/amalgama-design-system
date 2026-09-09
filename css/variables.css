@@ -289,6 +289,21 @@
   --space-20: 80px;   /* hero / large section padding       */
 
   /* ─────────────────────────────────────
+     Iconografía — grosor de trazo
+
+     Un solo valor para todos los íconos del sistema. Antes convivían seis
+     grosores distintos (1, 1.5, 2, 2.2, 2.5, 3) sin ninguna regla, así que dos
+     íconos vecinos podían tener peso distinto sin que nadie lo hubiera decidido.
+
+     Es también un eje de marca: 1.5 se lee liviano y elegante, 2.5 se lee
+     robusto y utilitario. Se overridea en el brand layer, nunca por componente.
+
+     Escape hatch: un ícono que de verdad necesita otro peso lo declara inline
+     (style="stroke-width:3"), que gana sobre la hoja de estilos.
+  ───────────────────────────────────── */
+  --icon-stroke: 2;
+
+  /* ─────────────────────────────────────
      Typography — Font families
   ───────────────────────────────────── */
   --font-heading: 'Epilogue', sans-serif;

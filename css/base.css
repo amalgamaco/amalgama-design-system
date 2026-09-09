@@ -34,6 +34,11 @@ a:hover { text-decoration: underline; }
 
 img, svg { display: block; max-width: 100%; }
 
+/* Un solo grosor de trazo para todos los íconos. Gana sobre el atributo
+   stroke-width del SVG (CSS > atributo de presentación), así que no hace falta
+   tocar cada ícono. Los logos quedan afuera: su trazo es parte de la marca. */
+svg:not(.logo):not(.logo *) { stroke-width: var(--icon-stroke); }
+
 button { font-family: inherit; cursor: pointer; }
 
 input, select, textarea { font-family: inherit; }
