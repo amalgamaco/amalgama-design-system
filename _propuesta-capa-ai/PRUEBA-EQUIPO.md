@@ -1,6 +1,6 @@
 # Probemos el flujo — protocolo para el equipo
 
-**Qué te pedimos:** 45 minutos, una vez, y que anotes lo que salió mal.
+**Qué te pedimos:** 45 minutos, una vez, y que anotes lo que salió mal. Hay 10 minutos más al final, opcionales.
 
 No estamos pidiendo que confirmes que funciona. Estamos pidiendo que **rompas cosas**: las skills
 están construidas y revisadas, pero **nadie midió todavía si las pantallas salen mejor que antes**.
@@ -65,9 +65,10 @@ Creá una carpeta vacía en cualquier lado. En Claude, **Add folder** sobre **es
 **Sin pegar ningún dato.** Queremos probar justamente que te vaya guiando. Contestá lo que te
 pregunte usando estos datos, que son los mismos para todos:
 
-> Cliente **Nortia** · lo construye alguien a mano, HTML y CSS · un panel de trabajo con menú al
-> costado · mucha información por pantalla · español · color oscuro **#14524A**, color vivo
-> **#0E9F6E** · esquinas redondeadas · tipografías de Amalgama
+> Es para un cliente, **Nortia** · lo construye alguien a mano, con HTML y CSS · lo usa **la gente
+> del negocio** (recepción y entrenadores) · sobre todo en **computadora** · se abre solo, **con su
+> propio menú** al costado · en español · color oscuro **#14524A**, color vivo **#0E9F6E** ·
+> esquinas **redondeadas** · las tipografías de Amalgama
 
 Chequeá mientras tanto:
 
@@ -75,15 +76,19 @@ Chequeá mientras tanto:
 - [ ] Las opciones se entienden **sin saber nada del design system**. Si tenés que adivinar qué
       significa una palabra, **anotalo** — esa pregunta está mal escrita.
 - [ ] Si decís "no sé", sigue igual con un default en vez de trabarse.
+- [ ] **Te pregunta en qué dispositivo se usa.** Si no lo pregunta, es una falla: de ahí salen los
+      tamaños táctiles.
+- [ ] Lo que puede averiguar mirando la carpeta **no te lo pregunta**.
 
 ### 1.3 · Qué tiene que quedarte en la carpeta
 
 ```
-brand/nortia.css      ← la marca (solo primitivas, generado)
-DESIGN.md             ← qué marca, qué idioma, qué se decidió, qué falta
+brand/nortia.css      ← la marca del cliente
+DESIGN.md             ← qué se decidió, para quién es, y qué quedó pendiente
+design/               ← vacía por ahora
 theme-preview.html    ← para mostrar y aprobar
-CLAUDE.md             ← el bloque que le dice al agente qué usar
-index.html            ← el layout base, con el CSS en el orden correcto
+CLAUDE.md             ← le dice al agente qué usar
+index.html            ← el layout base
 ```
 
 ### 1.4 · La prueba que importa: el toggle de dark
@@ -100,10 +105,12 @@ Abrí `theme-preview.html` y **cambiá a oscuro**.
 
 ### 1.5 · Chequeá también
 
-- [ ] `brand/nortia.css` tiene **solo primitivas** (`--primary-900`, `--secondary-500`…), **nunca**
-      roles (`--color-primary`). Si tocó un rol, es una falla.
-- [ ] `DESIGN.md` dice qué quedó pendiente, no solo qué se hizo.
-- [ ] No te preguntó por dark mode ni por tamaños de tipografía. Esos ya están decididos.
+- [ ] Abrí `DESIGN.md`: tiene que decir **para quién es, en qué dispositivo y si el menú es
+      nuestro** — las tres respuestas que diste. Si no están, las pantallas después no las van a
+      tener en cuenta.
+- [ ] `DESIGN.md` dice qué quedó **pendiente**, no solo qué se hizo.
+- [ ] No te preguntó por modo oscuro ni por tamaños de tipografía. Esos ya están decididos.
+- [ ] **Al terminar te ofrece armar la primera pantalla.** Si te deja sin próximo paso, anotalo.
 
 ---
 
@@ -146,6 +153,9 @@ Los usuarios entran mayormente a buscar a una persona puntual.
 - [ ] **Están los estados**: vacío, cargando, error, sin resultados. Que falten es la falla que más
       se repite.
 - [ ] **Nada de `<input placeholder="Buscar">`** suelto.
+- [ ] **Apareció un archivo nuevo en `design/`** con el diagnóstico, y `DESIGN.md` lo lista. Si el
+      diagnóstico quedó solo en el chat, se pierde al cerrar la pestaña — **reportalo**.
+- [ ] **Al terminar te ofrece revisarla** antes de mandarla. Si te deja sin próximo paso, anotalo.
 
 ### 2.4 · Ahora rompela a propósito
 
@@ -176,6 +186,7 @@ imaginario: 3 métricas, un gráfico y las próximas tres prioridades.
 - [ ] Sale un HTML solo, que abre y se ve on-brand.
 - [ ] **No clonó ningún repo.** Si te pidió clonar, es falla: esta skill trabaja por URL.
 - [ ] Los colores son de Amalgama, no inventados.
+- [ ] **Al terminar te ofrece revisarlo** antes de que lo mandes.
 
 ---
 
@@ -190,9 +201,62 @@ Agarrá **una pantalla real de un proyecto tuyo** —la que quieras, cuanto más
 ```
 
 - [ ] Devuelve hallazgos con **ID de falla, severidad y la regla** que los justifica.
-- [ ] **No te arregla nada.** Esta skill solo diagnostica; si te reescribe el código, es falla.
+- [ ] **No te arregla nada sin permiso.** Diagnostica; si te reescribe el código de una, es falla.
+- [ ] Pero **sí te ofrece arreglarlo** al final ("¿las arreglo?"). Diagnosticar y desaparecer te
+      deja a mitad de camino — si no te lo ofrece, anotalo.
 - [ ] Los hallazgos son ciertos. Si te marca cosas que están bien, **eso es un falso positivo y lo
       queremos saber** — ya encontramos cuatro así.
+
+---
+
+# Prueba 5 · Las tres que nadie probó todavía (10 min, opcional)
+
+Si te sobra tiempo, estas son las que menos ojos tuvieron encima.
+
+### 5a · ¿El componente aguanta?
+
+En la carpeta de Nortia:
+
+```
+/embassy:break
+
+Probá el select con contenido real.
+```
+
+- [ ] Te deja **una página** con el mismo componente repetido en muchas situaciones, no una lista de
+      texto.
+- [ ] Incluye **la marca de Nortia en claro y en oscuro**. Ese eje va siempre.
+- [ ] Te dice qué se rompió y **quién tiene la regla** que lo arregla. No lo arregla solo.
+
+### 5b · ¿Cómo hicieron esto?
+
+Buscá cualquier web que te guste y pegale el link:
+
+```
+/embassy:explain
+
+<el link> — ¿cómo está hecha esta animación / este gradiente?
+```
+
+- [ ] Distingue lo que **midió** de lo que está **suponiendo**. Si te tira números sin aclarar de
+      dónde salen, es falla.
+- [ ] Termina diciendo **si se puede con Embassy**: ya existe · se compone · es un gap · choca con
+      el sistema.
+- [ ] **No te cierra con un bloque de código para copiar.** Eso trae valores de otra página que no
+      son nuestros.
+
+### 5c · Migrar un proyecto entero
+
+**Solo si tenés un proyecto viejo a mano y ganas.** Es la más larga.
+
+```
+Migrá este proyecto entero a Embassy.
+```
+
+- [ ] Te muestra un **plan por fases** y espera que apruebes antes de tocar nada.
+- [ ] Al terminar dice, con todas las letras, que **migró tokens y componentes y no rediseñó
+      ninguna pantalla**. Si te deja creer que arregló la UX, es la falla más grave de esta prueba.
+- [ ] Te deja una **lista de pantallas** que necesitan rediseño, ordenada de peor a mejor.
 
 ---
 
@@ -229,3 +293,6 @@ Para que no gastes tiempo en esto:
   chico; es una decisión de diseño pendiente.
 - **El CDN sirve desde `@main`**, sin tag pineado.
 - **El loop de medición nunca se corrió.** Justamente por eso te estamos pidiendo esto.
+- **Si un comando "no existe", reiniciá Claude Code antes de reportarlo.** Los plugins se refrescan
+  al arrancar; una skill nueva no aparece hasta entonces. Nos pasó y perdimos un rato buscando un
+  bug que no estaba.
