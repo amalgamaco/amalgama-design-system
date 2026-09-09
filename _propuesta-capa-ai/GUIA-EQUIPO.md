@@ -1,9 +1,20 @@
 # Cómo usar el Design System
 
-Qué escribir, dónde, y qué pasa.
+## Si no querés leer esto, no hace falta
 
-> **¿Querés probarlo antes de usarlo en un proyecto real?** `PRUEBA-EQUIPO.md` es un protocolo de
-> 40 minutos con casos concretos y qué esperar en cada uno.
+Abrí la carpeta de tu proyecto en Claude y escribí:
+
+```
+/embassy:empezar
+```
+
+Te pregunta qué necesitás hacer, le contestás en castellano, y arranca lo que corresponda. **No
+tenés que saber ningún comando de antemano** — y cuando termina una cosa, te ofrece la que sigue.
+
+El resto de esta página es para cuando quieras entender el mapa completo, o buscar algo puntual.
+
+> **¿Querés probarlo antes de usarlo con un cliente?** `PRUEBA-EQUIPO.md` es un protocolo de 45
+> minutos con casos concretos y qué esperar en cada uno.
 
 ---
 
@@ -136,6 +147,11 @@ te sientes a rediseñar de a una con `/embassy:screen`.
 ---
 
 ## Cuándo usar cada una
+
+### `/embassy:empezar` — cuando no sabés cuál te toca
+
+Te muestra las opciones planteadas como situaciones y arranca la que elijas. Si te acordás de un
+solo comando de toda esta página, que sea este.
 
 ### `/embassy:start` — el día que arranca el proyecto
 

@@ -1,6 +1,6 @@
 # Probemos el flujo — protocolo para el equipo
 
-**Qué te pedimos:** 40 minutos, una vez, y que anotes lo que salió mal.
+**Qué te pedimos:** 45 minutos, una vez, y que anotes lo que salió mal.
 
 No estamos pidiendo que confirmes que funciona. Estamos pidiendo que **rompas cosas**: las skills
 están construidas y revisadas, pero **nadie midió todavía si las pantallas salen mejor que antes**.
@@ -17,14 +17,28 @@ Si algo te sale mal, **eso es el resultado útil**. Un "anduvo todo" sin detalle
    confunde. *(Hasta septiembre nuestro plugin se llamaba `design`, igual que uno de Anthropic. Los
    dos peleaban por el mismo nombre y según la máquina te respondía uno u otro.)*
 3. **Cerrá y reabrí Claude Code.** El plugin se refresca al arrancar.
-4. Escribí `/embassy:` y confirmá que aparecen. Deberían estar `screen`, `start`, `artifact`,
-   `review` y `eval`.
+4. Escribí `/embassy:` y confirmá que aparecen. Deberían estar `empezar`, `screen`, `start`,
+   `artifact`, `review` y `eval`.
 
 > `break` y `explain` pueden no figurar en el listado: son de invocación explícita a propósito.
 > Escribí `/embassy:break` entero y fijate si te lo toma. Si te lo toma, están.
 
 **Si algo de esto falla, pará acá y avisá.** No sigas: el resto de la prueba no significa nada con
 el plugin mal instalado.
+
+---
+
+# Prueba 0 · La puerta de entrada (2 min)
+
+En cualquier carpeta, escribí:
+
+```
+/embassy:empezar
+```
+
+- [ ] Te ofrece opciones planteadas como situaciones, no una lista de nombres de comandos.
+- [ ] Elegís una y **arranca esa skill** — no te contesta "ahora escribí `/embassy:screen`". Si te
+      devuelve el comando en vez de ejecutarlo, **reportalo**: es el punto de toda la skill.
 
 ---
 
