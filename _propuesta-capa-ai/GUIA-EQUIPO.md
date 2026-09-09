@@ -88,12 +88,35 @@ oscuro. Abrilo y probá el toggle. Si algo no representa la marca, decíselo y l
 tu-proyecto/
 ├── brand/megatlon.css      ← la marca (solo primitivas, generado)
 ├── DESIGN.md               ← qué marca, qué idioma, qué se decidió, qué falta
+├── design/                 ← vacía por ahora: acá va el diagnóstico de cada pantalla
 ├── theme-preview.html      ← para mostrar y aprobar
 ├── CLAUDE.md               ← el bloque que le dice al agente qué usar
 └── index.html / src/…      ← el layout base, con el CSS en el orden correcto
 ```
 
 Media hora, una vez. Después el proyecto no vuelve a pensar en el DS.
+
+### Todo queda en tu carpeta, no en el chat
+
+Las skills **escriben archivos de verdad** en la carpeta que conectaste. No te devuelven código para
+que copies y pegues: editan el proyecto. Así que todo lo que se va generando queda ahí, versionable
+y commiteable como cualquier otra cosa.
+
+A medida que armás pantallas, `design/` se va llenando:
+
+```
+tu-proyecto/design/
+├── socios-listado.md       ← por qué esa pantalla quedó así
+├── socios-detalle.md
+└── alta-socio.md
+```
+
+Cada uno tiene el diagnóstico: qué problema tenía, qué ley de UX rompía, qué se movió, y qué
+componente y variante se eligió sobre qué alternativa. **Eso es lo que el código no guarda** — y es
+lo que hace que en dos meses alguien distinga una decisión deliberada de un accidente, en vez de
+"arreglar" la jerarquía de vuelta. `DESIGN.md` los lista a todos.
+
+Lo único que vive solo en el chat es la conversación. Los entregables, no.
 
 ---
 
