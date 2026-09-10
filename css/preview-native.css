@@ -65,7 +65,6 @@
 [data-platform="native"] .btn-xl { font-size: var(--font-size-body-lg); }
 
 /* Un control de ícono es cuadrado y también tiene piso. */
-[data-platform="native"] .icon-btn,
 [data-platform="native"] .toolbar-btn,
 [data-platform="native"] .search-icon-btn,
 [data-platform="native"] .shell-menu-btn {
@@ -88,16 +87,51 @@
   font-size: var(--font-size-body-md);
 }
 
-/* Selección y navegación. */
-[data-platform="native"] .chip,
+/* Navegación y conmutadores: acá el control ES la caja, así que se dibuja al
+   piso completo. */
 [data-platform="native"] .seg-btn,
-[data-platform="native"] .toggle,
 [data-platform="native"] .tab,
 [data-platform="native"] .nav-item,
 [data-platform="native"] .pagination-item {
   min-height: var(--control-height);
   font-size: var(--font-size-body-md);
 }
+
+/* ── La superficie tocable no es la caja dibujada ──────────────
+   Un chip, un toggle o un botón de ícono a 48 de alto se ven enormes y pesan
+   en la jerarquía como si fueran la acción principal, que no lo son. Material
+   lo resuelve al revés y tiene razón: el chip se dibuja chico y el target de
+   48 se consigue con un área invisible alrededor. Es lo mismo que hace hitSlop
+   en React Native, y es la regla que MOBILE.md §3 ya pedía.
+
+   El ::after es esa área. No se ve, no ocupa layout, y con data-targets se
+   dibuja — así se puede ver la diferencia entre lo que se toca y lo que se
+   mira. */
+[data-platform="native"] .chip,
+[data-platform="native"] .toggle,
+[data-platform="native"] .icon-btn {
+  position: relative;
+  min-height: 0;
+}
+[data-platform="native"] .chip::after,
+[data-platform="native"] .toggle::after,
+[data-platform="native"] .icon-btn::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: var(--target-min);
+  transform: translateY(-50%);
+}
+
+/* El chip se dibuja a 40 con la etiqueta en su tamaño, no en el del cuerpo:
+   es un clasificador, no una acción. */
+[data-platform="native"] .chip {
+  height: 40px;
+  font-size: var(--font-size-label);
+}
+[data-platform="native"] .toggle  { height: 40px; min-width: 40px; }
+[data-platform="native"] .icon-btn { width: 44px; height: 44px; }
 
 /* Filas: lista, tabla e ítem comparten el piso de fila. */
 [data-platform="native"] .list-item,
@@ -212,12 +246,17 @@
 
 /* Vista de targets: marca cada superficie tocable para poder contar a ojo lo
    que M2 cuenta en el chequeo. Se activa con data-targets en el marco. */
-.phone[data-targets] :is(
+[data-targets] :is(
   button, a[href], [role="button"], [role="tab"], [role="switch"],
   input, select, textarea, .chip, .list-item, .item, .nav-item, .phone-tab
 ) {
   outline: 1px dashed color-mix(in srgb, var(--color-error) 55%, transparent);
   outline-offset: 0;
+}
+/* El área invisible también se dibuja: es la diferencia entre lo que se toca y
+   lo que se mira, y es lo que hace visible por qué el chip puede ser chico. */
+[data-targets] :is(.chip, .toggle, .icon-btn)::after {
+  outline: 1px dashed color-mix(in srgb, var(--color-error) 35%, transparent);
 }
 
 /* En una ventana angosta el marco se achica solo por el max-width de arriba.
