@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Regenerate component-rules/manifest.json from the per-component frontmatter.
+"""Regenerate component-rules/manifest.json and INDEX.md from the per-component frontmatter.
 
-The 61 component-rules/<id>.md files are the source of truth; this script derives
+The component-rules/<id>.md files are the source of truth; this script derives
 the machine-readable registry (manifest.json) that skills / UI-generation
-workflows consume. Run from the repo root:  python3 scripts/build-manifest.py
+workflows consume, plus the human-readable INDEX.md. Run from the repo root:  python3 scripts/build-manifest.py
 Requires PyYAML (pip3 install pyyaml).
 """
 import os, json, glob, sys
@@ -51,6 +51,41 @@ out = os.path.abspath(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.a
       else os.path.join(RULES, "manifest.json")
 open(out, "w", encoding="utf-8").write(json.dumps(manifest, ensure_ascii=False, indent=2))
 print(f"wrote {out} ({len(comps)} components)")
+
+# INDEX.md tambien se genera: escrito a mano quedo 9 reglas atras del manifest
+# (back-link, composition, create-form, date-picker, description, mobile,
+# page-header, placeholder, space), que es exactamente el drift que este repo
+# existe para no tener.
+if True:
+    by_cat = {}
+    for c in comps:
+        by_cat.setdefault(c["category"] or "Sin categoria", []).append(c)
+    lines = [
+        "# Component Rules — coverage index",
+        "",
+        "> GENERADO por `scripts/build-manifest.py` desde los frontmatter de",
+        "> `component-rules/<id>.md`. **No editar a mano:** se regenera y se pisa.",
+        "",
+        f"**{len(comps)} reglas operativas**, todas con frontmatter valido. El schema y como las",
+        "consumen los skills estan en `README.md`; el registro machine-readable, en `manifest.json`.",
+        "",
+        "No todas son componentes: `composition`, `space` y `mobile` son reglas de sistema —",
+        "la forma de la pagina, la capa espacial de Amalgama y las apps nativas.",
+        "",
+    ]
+    for cat in sorted(by_cat):
+        lines += [f"## {cat}", "", "| id | Nombre | Fuente CSS | Resumen |", "|---|---|---|---|"]
+        for c in sorted(by_cat[cat], key=lambda x: x["id"]):
+            css = (c.get("source") or {}).get("css") or "—"
+            summ = (c.get("summary") or "").replace("|", "\\|")
+            if len(summ) > 150:
+                summ = summ[:147].rstrip() + "…"
+            lines.append(f"| `{c['id']}` | {c['display_name']} | `{css}` | {summ} |")
+        lines.append("")
+    idx = os.path.abspath(sys.argv[sys.argv.index("--out-index") + 1]) if "--out-index" in sys.argv \
+          else os.path.join(RULES, "INDEX.md")
+    open(idx, "w", encoding="utf-8").write("\n".join(lines))
+    print(f"wrote {idx} ({len(by_cat)} categorias)")
 if errors:
     print("ERRORS:\n  " + "\n  ".join(errors)); sys.exit(1)
 print("frontmatter: all valid")

@@ -15,6 +15,17 @@ This repo has two layers:
 > generada. `design.md` es el sistema visual; ése es la forma. Sus clases viven en
 > `css/composition.css` y su regla operativa en `component-rules/composition.md`.
 
+> **Si el destino es una app nativa (React Native), `MOBILE.md` también es obligatorio.** No es un
+> breakpoint chico: es otro eje. La escala de Embassy es de escritorio —el cuerpo base son 13,5px,
+> el tamaño del *caption* de iOS— y los valores de teléfono viven en el bloque
+> `[data-platform="native"]` de `variables.css`, con **los mismos nombres de token**. React Native
+> no lee CSS, así que se consumen desde `tokens/`, que es **generado** por
+> `scripts/build-tokens.mjs` y no se edita a mano (`--check` falla si quedó atrás). Ahí están
+> también la densidad (`--target-min` 48 en nativo), el mapa de los 62 componentes —19 cambian de
+> patrón, no de tamaño— y el stack: NativeWind v5 + Tailwind v4 con gluestack v5 como base
+> copy-paste, del que se toma la estructura y no el sistema visual. Regla operativa en
+> `component-rules/mobile.md`; fallas propias, grupo `M` de `FAILURES.md`.
+
 ---
 
 ## Consuming the DS

@@ -266,15 +266,24 @@ console.log("\n[12] archivos generados al día");
   };
   try {
     const objetivos = [];
-    if (run("python3", ["scripts/build-manifest.py", "--out", path.join(tmp, "manifest.json")]))
+    if (run("python3", ["scripts/build-manifest.py", "--out", path.join(tmp, "manifest.json"),
+                        "--out-index", path.join(tmp, "INDEX.md")])) {
       objetivos.push(["component-rules/manifest.json", path.join(tmp, "manifest.json"), "python3 scripts/build-manifest.py"]);
-    else warn("no se pudo correr build-manifest.py (¿falta PyYAML?) — manifest.json sin verificar");
+      objetivos.push(["component-rules/INDEX.md", path.join(tmp, "INDEX.md"), "python3 scripts/build-manifest.py"]);
+    } else warn("no se pudo correr build-manifest.py (¿falta PyYAML?) — manifest.json e INDEX.md sin verificar");
 
     if (run("node", ["scripts/build-public-api.mjs", "--out", path.join(tmp, "PUBLIC-API.md"),
                      "--out-json", path.join(tmp, "public-api.json")])) {
       objetivos.push(["PUBLIC-API.md", path.join(tmp, "PUBLIC-API.md"), "node scripts/build-public-api.mjs"]);
       objetivos.push(["public-api.json", path.join(tmp, "public-api.json"), "node scripts/build-public-api.mjs"]);
     } else warn("no se pudo correr build-public-api.mjs — la API pública quedó sin verificar");
+
+    // tokens/ sale de css/variables.css y lo consume React Native, que no puede leer
+    // el CSS: si queda atrás, la app y la web se separan sin que nada avise.
+    // build-tokens.mjs trae su propio --check, así que se delega ahí.
+    if (!run("node", ["scripts/build-tokens.mjs", ROOT, "--check"]))
+      fail("tokens/ quedó atrás de css/variables.css. Regeneralo: node scripts/build-tokens.mjs");
+    else ok("tokens/ al día con css/variables.css");
 
     const viejos = objetivos.filter(([rel, gen]) =>
       !fs.existsSync(path.join(ROOT, rel)) || read(rel) !== fs.readFileSync(gen, "utf8"));

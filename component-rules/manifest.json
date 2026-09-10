@@ -1,6 +1,6 @@
 {
   "note": "Machine-readable registry. Source of truth = component-rules/<id>.md frontmatter (schema in component-rules/README.md). Regenerate with scripts/build-manifest.py.",
-  "count": 69,
+  "count": 70,
   "components": [
     {
       "id": "accordion",
@@ -4099,6 +4099,95 @@
         "docs_anchor": "c-menubar"
       },
       "rules_file": "component-rules/menubar.md"
+    },
+    {
+      "id": "mobile",
+      "display_name": "Mobile (React Native)",
+      "category": "Layout",
+      "status": "stable",
+      "aliases": [
+        "nativo",
+        "app nativa",
+        "react native",
+        "expo",
+        "gluestack",
+        "nativewind",
+        "escala nativa",
+        "target táctil"
+      ],
+      "summary": "What changes when the target is a native app instead of a browser — the type scale, the density, the touch floor and the component map — and, more importantly, what does not change.",
+      "variants": [
+        "native",
+        "web"
+      ],
+      "sizes": [
+        "(no aplica)"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "color": [],
+        "spacing": [
+          "--target-min",
+          "--row-height",
+          "--control-height",
+          "--screen-gutter"
+        ],
+        "typography": [
+          "--font-size-body-md",
+          "--font-size-body-lg",
+          "--font-size-label",
+          "--font-size-caption",
+          "--font-size-display",
+          "--font-size-heading-md",
+          "--font-size-editorial-lg"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "composition",
+          "layout",
+          "table",
+          "data-table",
+          "sheet",
+          "toolbar",
+          "modal"
+        ],
+        "replaces": [
+          "the desktop scale used verbatim inside an app",
+          "the 44px that lived loose inside media queries in components.css"
+        ],
+        "composed_with": [
+          "composition"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "composition",
+            "why": "COMPOSICION.md still applies almost in full; this only lists what needs a viewport and therefore drops — the grid, the max-width, the ch measure"
+          },
+          {
+            "component": "layout",
+            "why": "layout.css is the web app shell. In native there is none: tab bar plus stack"
+          },
+          {
+            "component": "space",
+            "why": "the space layer is Amalgama's and never ships in a client product — that does not change on any platform"
+          }
+        ]
+      },
+      "motion": {
+        "entrance": "the platform's own — the stack navigator's transition, not a hand-written one",
+        "duration": "the navigator's default; a custom transition is a decision, not a default",
+        "easing": "Easing.bezier() with the values from --ease-*, already converted in tokens/NATIVE-NOTES.md",
+        "reduced_motion": "AccessibilityInfo.isReduceMotionEnabled() — the RN equivalent of prefers-reduced-motion"
+      },
+      "source": {
+        "css": "css/variables.css",
+        "classes": [],
+        "docs_anchor": "c-mobile"
+      },
+      "rules_file": "component-rules/mobile.md"
     },
     {
       "id": "nav-bar",

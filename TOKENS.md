@@ -282,6 +282,53 @@ reference; the literals are the enforcement.
 
 ---
 
+## 9b. Density and touch surface
+
+| Token | Web | Native | Use |
+|---|---|---|---|
+| `--target-min` | 44px | **48px** | **A floor, not a size.** The minimum touchable surface: WCAG 2.5.5 / iOS is 44, Android is 48, so native takes 48 and covers both. A control may be taller, never shorter. |
+| `--row-height` | 36px | **48px** | Table and list row. |
+| `--control-height` | 36px | **48px** | Default button, input and select. |
+| `--screen-gutter` | *(n/a)* | **20px** | Native only: the side margin of a screen. **Deliberately not `--column-gutter`** — in native there is no column to centre and no `max-width`, so they are different concepts and must not be crossed. |
+
+Before these existed the 44px lived loose inside media queries in `components.css`: it was a patch
+per file, not a decision. If a control needs to grow on touch, it reads `--target-min`.
+
+---
+
+## 9c. Platform axis (`[data-platform="native"]`)
+
+**This is not a theme.** Light/dark is a **colour** axis; desktop/native is a **size and density**
+axis. They are independent — a native app in dark mode uses both blocks at once.
+
+Embassy's scale is a desktop scale: the body base is 13.5px, which is the size of iOS's *caption*.
+The `[data-platform="native"]` block in `variables.css` holds the phone values under **the same
+token names**, so a component reads `--font-size-body-md` on either platform and does not know
+where it runs.
+
+| | Web | Native |
+|---|---|---|
+| `--font-size-body-md` (the base) | 13.5px | **16px** |
+| `--font-size-body-lg` | 14px | **17px** |
+| `--font-size-label` | 13px | **15px** |
+| `--font-size-caption` | 12px | **13px** |
+| `--font-size-display` | 28px | **32px** |
+| editorial `lg / md / sm` | `clamp()` fluid | **44 / 34 / 28**, frozen |
+
+22 tokens change value between platforms; the full table is in `MOBILE.md` §2.
+
+**React Native cannot read CSS.** `scripts/build-tokens.mjs` parses `variables.css` — still the
+only source — and emits `tokens/`: `embassy.tokens.ts` (`light`, `dark`, `native`, `nativeDark`),
+`gluestack.config.ts`, `theme.css` and `NATIVE-NOTES.md`. Everything in `tokens/` is **generated**:
+a value is changed in the CSS and regenerated, never edited there.
+`node scripts/build-tokens.mjs --check` fails on drift and belongs in CI.
+
+`NATIVE-NOTES.md` lists what does not survive the crossing: unitless `line-height` and `em`
+`letter-spacing` (RN measures both in points), `clamp()`, `color-mix()`, chained `var()`,
+multi-layer `box-shadow` and gradients.
+
+---
+
 ## 10. Opacity / z-index / state-layer tokens
 
 - **No standalone `--opacity-*` or `--z-index-*` scale exists** in `variables.css`. Opacity is

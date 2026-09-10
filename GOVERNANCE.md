@@ -777,6 +777,42 @@ Below `--breakpoint-md` (768px) the persistent sidebar becomes a **modal navigat
 
 > Class-name note: this section and the `layout.css` implementation use `.app` / `.sidebar` / `.topbar` / `.main` (the shipped classes). §14.1's example uses aspirational `.app-shell`/`.shell-*` names — a pre-existing doc/code drift to reconcile in a future pass; follow `layout.css` for what actually works.
 
+### 14.3b Native apps are a different axis, not a smaller breakpoint (2026-09)
+
+§14.2 and §14.3 are about **web at a narrow width**: there is still hover, an app shell, a viewport
+that grows and CSS. A **React Native app** is not the small end of that ladder — it is a separate
+axis, and confusing the two is what produces apps that look like a shrunk dashboard.
+
+**The rule.** Embassy's type scale is a desktop scale (body base 13.5px, the size of iOS's
+*caption*). Native values live in the **`[data-platform="native"]`** block in `variables.css`,
+under **the same token names**, so a component reads `--font-size-body-md` on either platform and
+does not know where it runs. It is **not a theme**: light/dark is a colour axis and
+desktop/native is a size axis, and a native app in dark uses both blocks at once. Full table in
+`TOKENS.md` §9c and the operative rule in `MOBILE.md`.
+
+**Density became a token.** `--target-min` (44 web / **48** native), `--row-height` and
+`--control-height` (36 / **48**), plus native-only `--screen-gutter`. Before this the 44px lived
+loose inside media queries in `components.css` — a patch per file, not a decision. `--screen-gutter`
+is deliberately **not** `--column-gutter`: in native there is no column to centre and no
+`max-width`.
+
+**React Native cannot read CSS, so the export is generated, never written.**
+`scripts/build-tokens.mjs` parses `variables.css` — still the only source — and emits `tokens/`
+(`embassy.tokens.ts` with `light`/`dark`/`native`/`nativeDark`, `gluestack.config.ts`, `theme.css`,
+`NATIVE-NOTES.md`). Nothing under `tokens/` is edited by hand; `--check` fails on drift and belongs
+in CI. This is the same principle as §3's generated-file rule, applied across a platform boundary.
+
+**What does not exist in native**, and therefore cannot be a rule there: hover, the app shell
+(`layout.css`), `max-width`, `.grid-12`, and the `ch` measure. Nineteen of the 62 components change
+pattern rather than shrinking — the map is `MOBILE.md` §5, and picking the shrunk desktop pattern
+is failure `M4`.
+
+**Component implementations.** The native stack is NativeWind v5 + Tailwind v4 with **gluestack v5
+as a copy-paste base**: its structure, accessibility and states are adopted, its palette, radii,
+scale and shadows are not. This is the same boundary §2.2 draws for MD3 on the web — token
+structure yes, component implementations no — and the same thing already done with shadcn in
+`components/ui/*.tsx`. An untranslated utility is `A8`/`M8`.
+
 ### 14.4 Content width
 
 | Context | Max width | Notes |

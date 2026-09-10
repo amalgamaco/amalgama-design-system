@@ -118,6 +118,8 @@ for these structured sources.**
 | Machine-readable registry / programmatic entry point | `component-rules/manifest.json` |
 | Component code (classes, anatomy, `Uso:` snippet, exact tokens) | `css/components/<id>.css` (canonical) + optional wrapper `components/ui/<id>.tsx` |
 | Screen patterns & UX (IA, hierarchy, forms, tables, dashboards, states, motion, a11y, copy) | `guidelines/*.md` (start at `guidelines/README.md`) |
+| **The shape of a page** (which structure, at which width, where the text stops, the rhythm, the icon placements, the anti-generic rules) | **`COMPOSICION.md`** + `component-rules/composition.md` |
+| **Native apps** (React Native): the type scale, density, touch floor, the component map, and what does not exist off the browser | **`MOBILE.md`** + `component-rules/mobile.md` + `tokens/NATIVE-NOTES.md`. The values come from `tokens/`, which is **generated** from `css/variables.css` — never edited by hand |
 | Applying the DS to an existing product (transformation rules) | `MIGRATION.md` (+ the project-specific `GAMAFORCE-MIGRATION.md`) |
 | Cross-component consistency, token rules, audit checklist | `GOVERNANCE.md` |
 | Load order, brand layer, consuming as artifact / React / existing project | `CLAUDE.md`, `WHITE-LABEL.md`, `design.md` |
