@@ -55,6 +55,7 @@ amalgama-ds/
 │   ├── theme.css             # Bloque @theme inline de Tailwind v4
 │   └── NATIVE-NOTES.md       # Los tokens que no cruzan 1:1 de CSS a RN
 ├── components/ui/*.tsx        # Wrappers React opcionales (cva + cn, mismas clases, cero estilos propios)
+├── components/native/         # La librería para React Native — copy-paste, lee tokens/ (ver su README)
 ├── component-rules/          # Reglas operativas por componente (machine-readable) — ver README + INDEX + manifest.json
 │   ├── <id>.md               # 70 archivos: frontmatter YAML (schema) + prosa (ejemplos correcto/incorrecto)
 │   ├── manifest.json         # Registro agregado (regenerar: python3 scripts/build-manifest.py)

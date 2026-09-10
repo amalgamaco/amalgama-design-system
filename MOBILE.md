@@ -240,6 +240,32 @@ distintas.
 
 ---
 
+## 5a. La librería
+
+`components/native/` es el análogo de `components/ui/*.tsx`: **copy-paste, no
+dependencia.** Se copia la carpeta al proyecto y es suya.
+
+| | Web | Nativo |
+|---|---|---|
+| Estilo | `css/components/*.css` | los tokens, aplicados en el `StyleSheet` de cada componente |
+| Estructura | `components/ui/*.tsx` (cva sobre las clases) | `components/native/*.tsx` |
+| Puente | `components/lib/utils.ts` (`cn`) | `components/native/lib/theme.ts` (`px`, `family`, `lh`, `useEmbassy`) |
+
+La primera tanda son ocho —`Button`, `Chip`, `Field`, `Card`, `ListItem`,
+`Sheet`, `Toast`, `Tabs`— y con eso se arma una pantalla entera. Sin provider:
+`useEmbassy()` lee `useColorScheme()` y devuelve `native` o `nativeDark`.
+
+Dependen de `react-native` y, `Sheet` y `Toast`, de `react-native-safe-area-context`.
+**No dependen de gluestack ni de NativeWind:** cuando el proyecto los sume, se
+copian sus componentes para lo que acá no está y se les reemplaza el styling
+por estos mismos tokens.
+
+`check-output` corre sobre ellos y da 0 hallazgos. Lo que **no** está verificado
+es que se dibujen bien: nunca corrieron en un simulador. Eso es `M9` y es la
+primera tarea del proyecto RN. Detalle completo en `components/native/README.md`.
+
+---
+
 ## 5b. Verlo antes de que exista
 
 Un `.tsx` no se puede mirar sin un proyecto y un simulador, así que una pantalla nativa entregada
