@@ -16,7 +16,7 @@
  * Uso:
  *   node scripts/build-brand-theme.mjs --slug simplefit \
  *        --primary "#FF6B00" --secondary "#1E88E5" \
- *        [--radius rounded|balanced|technical] \
+ *        [--radius rounded|balanced|technical|pildora] \
  *        [--font-heading "Poppins"] [--font-body "Inter"] \
  *        [--out brand/simplefit.css]
  *
@@ -117,10 +117,16 @@ const DARK_SURFACES = {
 // intercalados donde corresponden y no apelotonados al final.
 const SPACE_ORDER = ["0-5", "1", "1-5", "2", "2-5", "3", "3-5", "4", "5", "6", "8", "10", "12", "16", "20"];
 
+// La forma. `pildora` no es "más redondeado que rounded": usa los mismos radios para
+// tarjetas, modales y campos, y aparte declara --radius-button, que convierte a TODOS los
+// botones en píldora sin tocar nada más. Sale de un pedido concreto — el botón tipo caramelo,
+// completamente ovalado — y es el único caso donde el DS acepta un botón píldora: hasta ahora
+// era un defecto (design.md §8.5, FAILURES C3), y sigue siéndolo si la marca no lo eligió.
 const RADIUS = {
   rounded:   { sm: 6, md: 12, lg: 16, xl: 24 },
   balanced:  { sm: 4, md: 8,  lg: 12, xl: 16 },   // default Embassy
   technical: { sm: 2, md: 4,  lg: 6,  xl: 8 },
+  pildora:   { sm: 6, md: 12, lg: 16, xl: 24, button: 9999 },
 };
 
 // ── Color: sRGB ↔ OKLab/OKLCH ────────────────────────────────────────────────
@@ -294,7 +300,10 @@ ${Object.entries(S).map(([s, v]) => line(`secondary-${s}`, v)).join("\n")}
   --radius-md: ${R.md}px;
   --radius-lg: ${R.lg}px;
   --radius-xl: ${R.xl}px;
-  /* --radius-full: 9999px  ← nunca se overridea */
+  /* --radius-full: 9999px  ← nunca se overridea */${R.button ? `
+  /* Botones completamente ovalados, en todos los tamaños. Las tarjetas, los modales y los
+     campos NO se tocan: siguen la escala de arriba. */
+  --radius-button: ${R.button}px;` : ""}
 
   /* ── Densidad (${densityKey}) ── */
 ${SPACE_ORDER.map((k) => `  --space-${k}:${" ".repeat(Math.max(1, 8 - k.length))}${String(D[k]).padStart(2)}px;`).join("\n")}

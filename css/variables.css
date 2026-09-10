@@ -409,6 +409,12 @@
   --radius-lg:   12px;
   --radius-xl:   16px;
   --radius-full: 9999px;
+  /* --radius-button: NO se define acá a propósito. Los botones usan
+     var(--radius-button, <el token que le toca a ese tamaño>), así que mientras nadie
+     lo declare el radio sigue saliendo de la escala por tamaño (GOVERNANCE §4.3) y
+     nada cambia. El tema de marca con forma `pildora` lo declara en 9999px y los
+     convierte a todos en píldora de una, sin tocar tarjetas, modales ni campos.
+     Es el único token de forma pensado para que una marca lo prenda o lo apague. */
   --radius:      var(--radius-lg);
 
   /* ─────────────────────────────────────

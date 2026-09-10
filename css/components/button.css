@@ -48,7 +48,7 @@
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
   padding: var(--space-2) var(--space-6);
   border: 1px solid transparent;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-button, var(--radius-md));
   font-family: inherit;
   font-size: var(--font-size-body-md); font-weight: 600;
   line-height: 1.2;
@@ -230,10 +230,10 @@
    LG  → 44px min-height · primary CTAs, touch targets
    XL  → 52px min-height · hero / marketing surfaces
 ───────────────────────────────────── */
-.btn-xs { padding: 3px var(--space-2);   font-size: 11px;   font-weight: 600; min-height: 24px; border-radius: var(--radius-sm); }
-.btn-sm { padding: var(--space-1-5) var(--space-3);  font-size: var(--font-size-body-sm); min-height: 32px; border-radius: var(--radius-sm); }
-.btn-lg { padding: var(--space-2-5) 22px; font-size: 15px;   min-height: 44px; border-radius: var(--radius-md); }
-.btn-xl { padding: var(--space-3-5) 30px; font-size: 16px;   font-weight: 700; min-height: 52px; border-radius: var(--radius-lg); }
+.btn-xs { padding: 3px var(--space-2);   font-size: 11px;   font-weight: 600; min-height: 24px; border-radius: var(--radius-button, var(--radius-sm)); }
+.btn-sm { padding: var(--space-1-5) var(--space-3);  font-size: var(--font-size-body-sm); min-height: 32px; border-radius: var(--radius-button, var(--radius-sm)); }
+.btn-lg { padding: var(--space-2-5) 22px; font-size: 15px;   min-height: 44px; border-radius: var(--radius-button, var(--radius-md)); }
+.btn-xl { padding: var(--space-3-5) 30px; font-size: 16px;   font-weight: 700; min-height: 52px; border-radius: var(--radius-button, var(--radius-lg)); }
 
 .btn-text.btn-xs { padding: 3px var(--space-1-5); }
 .btn-text.btn-sm { padding: var(--space-1-5) var(--space-2-5); }
@@ -267,7 +267,7 @@
   width: 36px; height: 36px;
   padding: 0;   /* fixed square box: reset any padding inherited from a size class
                    (.btn-sm/.btn-xs/.btn-lg/.btn-xl) so the icon isn't squished */
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-button, var(--radius-md));
   background: var(--color-surface-container);
   border: 1px solid var(--color-outline);
   display: inline-flex; align-items: center; justify-content: center;
@@ -284,10 +284,10 @@
   color: var(--color-on-disabled);
   cursor: not-allowed;
 }
-.icon-btn.btn-xs { width: 24px; height: 24px; border-radius: var(--radius-sm); }
-.icon-btn.btn-sm { width: 30px; height: 30px; border-radius: var(--radius-sm); }
-.icon-btn.btn-lg { width: 44px; height: 44px; border-radius: var(--radius-md); }
-.icon-btn.btn-xl { width: 52px; height: 52px; border-radius: var(--radius-lg); }
+.icon-btn.btn-xs { width: 24px; height: 24px; border-radius: var(--radius-button, var(--radius-sm)); }
+.icon-btn.btn-sm { width: 30px; height: 30px; border-radius: var(--radius-button, var(--radius-sm)); }
+.icon-btn.btn-lg { width: 44px; height: 44px; border-radius: var(--radius-button, var(--radius-md)); }
+.icon-btn.btn-xl { width: 52px; height: 52px; border-radius: var(--radius-button, var(--radius-lg)); }
 
 /* ─────────────────────────────────────
    Pressed state — 12% state layer (WCAG 2.5.3)

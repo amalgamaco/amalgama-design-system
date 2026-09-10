@@ -65,7 +65,7 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 |---|---|---|---|
 | `C1` | Más de un `btn-primary` en un mismo contexto | BLOQ | conteo por contenedor |
 | `C2` | Botón full-width o con contenido alineado a la izquierda | ALTA | regex + inspección |
-| `C3` | Botón con radio píldora | ALTA | inspección |
+| `C3` | Botón con radio píldora, cuando la marca no eligió la forma `pildora` (si la eligió, son píldora TODOS los botones y no es falla) | ALTA | inspección |
 | `C4` | Acción secundaria tonal compitiendo con la primaria adyacente (debía ser outline) | ALTA | inspección |
 | `C5` | Dos objetos primarios: la pantalla no sabe de qué se trata | ALTA | revisión |
 | `C6` | Disparador de overlay con jerarquía de primaria | MEDIA | revisión |

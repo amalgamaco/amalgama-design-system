@@ -149,13 +149,17 @@ Note: XL is the only size with `font-weight: 700`. All others use `font-weight: 
 | `--radius-xl` | `16px` | Large surface containers |
 | `--radius-full` | `9999px` | Chips (filter), badges, avatars, search bars |
 
-### 4.2 Pill shape (`--radius-full`) is reserved for chips and badges
+### 4.2 Pill shape (`--radius-full`) is reserved for chips and badges — unless the brand chose it
 
-A button with `--radius-full` is visually indistinguishable from a chip. The pill shape communicates "selectable tag" — using it on a button breaks hierarchy and misleads users about the element's role. Buttons never use `--radius-full`.
+A button with `--radius-full` is visually indistinguishable from a chip. The pill shape communicates "selectable tag" — using it on a button breaks hierarchy and misleads users about the element's role. **A screen never puts a pill radius on a button.**
+
+The one exception is a brand-level decision, taken once at kickoff and not per screen: the brand theme picks the `pildora` shape preset, which declares `--radius-button: 9999px` and turns every button — every size, every variant — into a pill at the same time. That removes the ambiguity the rule protects against: when *all* the buttons are pills, pill no longer reads as "chip", it reads as the product's shape language, and the chip is still told apart by its size, weight and lack of fill. Chips, badges and avatars keep `--radius-full` regardless.
+
+What still holds: no single button, and no subset of buttons, gets a pill radius. It is all of them (because the brand said so) or none.
 
 ### 4.3 Button radius scales with button size
 
-Radius on buttons is determined by **size, not by variant**. All five variants (Primary, Secondary, Tertiary, Text, Icon) at the same size must compute to the same `border-radius`. The radius is set once per size in `css/components/button.css`:
+Radius on buttons is determined by **size, not by variant**. All five variants (Primary, Secondary, Tertiary, Text, Icon) at the same size must compute to the same `border-radius`. The radius is set once per size in `css/components/button.css`, as `var(--radius-button, <the size's token>)` — so the table below is what every button gets unless a brand theme declares `--radius-button`, in which case that one value wins at every size (see §4.2):
 
 | Size class | Token | Value | Min-height |
 |---|---|---|---|

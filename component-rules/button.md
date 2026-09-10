@@ -91,7 +91,7 @@ relationships:
 
 tokens:
   color: [--color-primary, --color-on-primary, --color-secondary-container, --color-on-secondary-container, --color-outline]
-  radius: "--radius-* scaled by size class (sm→--radius-sm … xl→--radius-lg)"
+  radius: "--radius-* scaled by size class (sm→--radius-sm … xl→--radius-lg), written as var(--radius-button, <that token>). A brand theme with the `pildora` shape declares --radius-button: 9999px and every button becomes a pill at every size — that is the only way a button is ever a pill, and it is decided once at kickoff, never per screen (GOVERNANCE §4.2)."
   motion: [--duration-fast]
   elevation: "--btn-elevation (elevated variant only)"
 

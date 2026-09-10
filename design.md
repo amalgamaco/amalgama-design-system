@@ -314,7 +314,10 @@ Nombro los que aparecen una y otra vez. Si tu página tiene alguno, sacalo antes
 3. **Gradientes decorativos, glassmorphism, blobs y sombras de colores.** Nada de eso está en el
    sistema.
 4. **Dos acciones primarias.** Si "las dos son igual de importantes", falló la jerarquía.
-5. **Botón píldora, botón full-width, botón con texto a la izquierda.**
+5. **Botón full-width, botón con texto a la izquierda.** Y **botón píldora**, salvo que el tema
+   de marca del proyecto declare `--radius-button` — ahí la forma la eligió la marca en el
+   kickoff y son píldora todos los botones, no uno. Fijate en `brand/<cliente>.css` antes de
+   marcarlo.
 6. **Emojis como íconos.** Lucide, siempre.
 7. **La grilla de tres cards de features** con ícono, título y dos líneas, cuando el contenido no
    son tres cosas paralelas.

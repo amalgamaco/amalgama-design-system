@@ -150,6 +150,8 @@ Radius is the single most impactful change for "brand feel":
 
 `--radius-full` (9999px) should never be overridden — it is reserved for pills and avatars and must remain circular regardless of brand.
 
+A brand may however choose the `pildora` shape preset, which leaves the four radii above alone and adds one token: `--radius-button: 9999px`. Buttons read it as `var(--radius-button, <the size's token>)`, so declaring it turns every button into a pill at once, and leaving it out changes nothing. Cards, modals and fields are untouched either way. See GOVERNANCE §4.2.
+
 ### 2.35 Product personality — density, elevation, motion, icon weight
 
 Colour, type and radius make two products look different. These four make them
