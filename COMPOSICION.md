@@ -13,9 +13,41 @@ Una prohibición sin reemplazo vuelve siempre, porque a la hora de llenar la sec
 algo. Todo lo que este archivo pide **está construido en `css/composition.css`**: si una regla no
 tiene clase, es que todavía no está terminada.
 
-**Alcance.** La Parte I es la firma de **Amalgama**: va en lo nuestro y en lo que firmamos
-—propuestas, reportes, nuestro sitio, demos—. En un producto white-label la firma es la del
-cliente, así que ahí rige solo la Parte II, que no es identidad sino oficio: no parecer generado.
+## Alcance — qué aplica dónde
+
+Hay **dos ejes**, y conviene no confundirlos.
+
+**Primero, de quién es la marca.** La Parte I es la firma de **Amalgama**: va en lo nuestro y en lo
+que firmamos —propuestas, reportes, nuestro sitio, demos—. En un producto white-label la firma es
+la del cliente, así que ahí rige solo la Parte II, que no es identidad sino oficio: no parecer
+generado.
+
+**Segundo, qué clase de superficie es.** No es el tamaño de pantalla: un dashboard y una landing se
+ven los dos en una pantalla grande y no se componen igual.
+
+| | **Página** (landing, propuesta, reporte, one-pager, demo) | **Producto** (pantallas adentro del app shell) |
+|---|---|---|
+| Estructura y ancho (regla 0) | Sí — se elige una y se dice cuál | Sí, para la columna de contenido adentro del shell. `bleed` casi nunca: un dashboard denso lo quiere, un formulario no |
+| Grilla de 12 | Sí | Sí |
+| Medida de línea (`.measure`) | Sí | Sí, en todo texto corrido |
+| Registro editorial (regla 0b) | Sí, una vez | **No.** Una pantalla de producto abre con `page-title` |
+| Overline (regla 1) | Sí, una vez | Con cuidado: el header de tabla y el badge ya son versalitas. Si ya hay dos, no agregues una tercera |
+| Índice de sección (eje E) | Sí — es el gesto | **No.** Numerar las secciones de un panel de administración es decoración |
+| Ritmo (regla 6) | Sí, y es donde más se nota | Menos: adentro del shell el ritmo lo dan las tarjetas y la densidad del cliente |
+| Línea de separación (`.rule`) | Sí, en vez de bandas | A veces. En un dashboard las tarjetas ya separan |
+| Hero con el control (regla 3) | Sí | No aplica: la pantalla **es** la herramienta |
+| Tres tarjetas con ícono (regla 4) | Prohibida | Prohibida |
+| Ubicación del ícono (regla 5) | Sí | Sí — y en producto es donde más se abusa del ícono decorativo |
+| Alineación a la izquierda (regla 2) | Sí | Sí |
+| Sin sombra salvo lo que flota (regla 7) | Sí | Sí |
+| Imágenes: solo material real (regla 10) | Sí | Sí |
+| Sin scroll reveal (regla 11) | Sí | Sí |
+| El dato con su base (reglas 8 y 12) | Sí | Sí — en producto suele vivir en `stat-card` o en una tabla |
+| Cero relleno (regla 9) | Sí | Sí |
+
+**La regla corta:** lo que evita parecer generado aplica a todo. Lo que es *apertura* —el titular
+editorial, el índice de sección, el hero— es de página, no de producto. Una pantalla de producto
+no abre: continúa.
 
 ---
 
@@ -81,6 +113,9 @@ Las condiciones, que son parte del gesto:
 - **Numera el total real.** `02 / 05` en una página de cinco secciones. Nunca se saltea, nunca se
   reinicia, y el total no se infla porque quede mejor.
 - **No va si hay una sola sección.** Numerar uno de uno no es un sistema, es decoración.
+- **No va en producto.** Es el gesto de una página que se lee de arriba abajo. Numerar las
+  secciones de un panel de administración, donde la persona entra a hacer una tarea puntual, es
+  decoración y además ruido.
 - **Es decorativo para un lector de pantalla** cuando el título ya nombra la sección: va con
   `aria-hidden="true"` para que nadie escuche "cero dos barra cero cinco" antes de cada título.
 - **No convierte a las secciones en una secuencia.** Es un índice, no un paso a paso: no implica

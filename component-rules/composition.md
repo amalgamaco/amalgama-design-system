@@ -8,6 +8,8 @@ summary: The skeleton of a page — which of the four structures it uses, where 
 
 when_to_use:
   - "Every page we publish, with or without the app shell. It is not optional and it is not per-project."
+  - "PAGE surfaces (landing, proposal, report, one-pager, demo) use all of it, opening included: editorial title, section index, hero with the control."
+  - "PRODUCT surfaces (screens inside the app shell) use the structure, the grid, the measure, the icon placements and every anti-generic rule — but NOT the opening ones. A product screen does not open, it continues: it starts with page-title, and numbering the sections of an admin panel is decoration. See COMPOSICION.md § Alcance for the full table."
   - "Before placing a single component: the structure is chosen first, from the four, and stated out loud."
   - "A landing, a proposal or a one-pager, where there is no shell and this is the only thing holding the page together."
 when_not_to_use:
