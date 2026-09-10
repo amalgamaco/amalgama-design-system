@@ -24,6 +24,9 @@
    <p class="overline">Informe trimestral</p>
    <h1 class="editorial-lg">Cuánto tardan las altas</h1>   <!-- uno por página, nunca en el shell -->
    <p class="measure">Texto corrido que corta a tiempo aunque la página sea ancha.</p>
+   <hr class="rule">                                 <!-- fuera de .column: cruza la pantalla -->
+   <p class="figure"><span class="figure-value">4,2</span><span class="figure-unit">min</span>
+      <span class="figure-base">mediana · 240 altas · jul–sep 2026</span></p>
 ═══════════════════════════════════════ */
 
 /* ── Estructura de página ──────────────────────────────────────────────────
@@ -130,6 +133,80 @@
 .section       { padding-block: var(--space-12); }
 .section-lead  { padding-block: var(--space-20); }
 .section-tight { padding-block: var(--space-8); }
+
+/* ── Separación entre secciones ────────────────────────────────────────────
+   Una línea de 1px que cruza toda la pantalla mientras el contenido se queda en la
+   columna. Es la alternativa a la banda de fondo alternado, que es lo que hace toda
+   página generada, y es coherente con el eje D: borde antes que sombra.
+   Va FUERA de `.column`, como hermana de la sección — si va adentro, se corta al
+   ancho del contenido y pierde la mitad del efecto. */
+.rule {
+  border: 0;
+  border-top: 1px solid var(--color-outline-variant);
+  margin: 0;
+}
+
+/* ── El dato destacado ─────────────────────────────────────────────────────
+   Una cifra sola en una página. El default es número gigante de color con flechita
+   verde; el nuestro es sobrio: la cifra en color de texto, la unidad más chica pegada,
+   y la base al lado — porque un número sin base no se publica (regla 8). */
+.figure {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.figure-value {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-editorial-sm);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-editorial);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.figure-unit {
+  font-size: var(--font-size-body-lg);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+/* La base: de qué universo sale el número, en qué período. Al lado, no debajo. */
+.figure-base {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono-sm);
+  color: var(--text-muted);
+}
+
+/* ── Aparición ─────────────────────────────────────────────────────────────
+   UNA vez, en el bloque de apertura, y al cargar — no al scrollear. El fade-up de
+   cada sección al entrar en pantalla es el gesto más repetido de las landings
+   generadas, cuesta rendimiento y molesta a quien navega con teclado.
+   Sin desplazamiento vertical: solo opacidad. El bloque ya está donde va.
+   `base.css` neutraliza esto solo con prefers-reduced-motion. */
+@keyframes amalgama-fade-in { from { opacity: 0; } to { opacity: 1; } }
+.reveal {
+  animation: amalgama-fade-in var(--duration-medium) var(--ease-enter) both;
+}
+
+/* ── Imágenes ──────────────────────────────────────────────────────────────
+   La política está en COMPOSICION.md regla 10: solo material real —capturas del
+   producto, fotos del trabajo o del equipo—, nunca stock, ilustración genérica ni 3D.
+   Acá está el marco, que es la parte que se puede hacer cumplir: todas las imágenes
+   de una página nuestra se ven igual. */
+.media {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-container);
+}
+.media-caption {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-mono-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+}
 
 /* ── Overline ──────────────────────────────────────────────────────────────
    El reemplazo del eyebrow. No está prohibido clasificar algo arriba del título: está

@@ -50,6 +50,14 @@ const RULES = [
   { id: "A3", sev: "ALTA", desc: "font-size en px suelto sin token", re: /font-size\s*:\s*-?\d+(\.\d+)?px/g },
   { id: "A5", sev: "BLOQ", desc: "token primitivo en código de producto", re: /var\(\s*--(primary|neutral|secondary|tertiary|success|error|warning|info)-\d+/g },
   { id: "A6", sev: "BLOQ", desc: "override por tema", re: /\[data-theme=["']?dark["']?\]\s*\{|prefers-color-scheme|\.dark\s*\{/g },
+  // H10 — imagen de banco. La política es "solo material real" (COMPOSICION.md regla 10): si el
+  // dato no vino del cliente no existe, y la foto tampoco. Se detecta por dominio porque es lo
+  // único determinístico; una ilustración isométrica subida a nuestro S3 la agarra el review.
+  { id: "H10", sev: "ALTA", desc: "imagen de banco (stock) — la política es solo material real",
+    re: /(unsplash|pexels|shutterstock|freepik|istockphoto|gettyimages|pixabay)\.com/gi },
+  // H11 — la página revelándose al scrollear. .reveal va una sola vez, al cargar.
+  { id: "H11", sev: "MEDIA", desc: "secciones apareciendo al scrollear (scroll reveal)",
+    re: /IntersectionObserver|data-aos|scrollreveal|wow\.js|aos\.init/gi },
   { id: "A8", sev: "ALTA", desc: "fuga de utilidades de otro framework", re: /\b(text|bg|border)-(zinc|slate|gray|neutral|indigo|blue|red|green)-\d{2,3}\b/g },
   { id: "A10", sev: "MEDIA", desc: "border-radius inline en vez del modificador de tamaño", re: /style="[^"]*border-radius/g },
   // A11 — tracking escrito a mano. La escala es cerrada (variables.css §Letter spacing) y tiene

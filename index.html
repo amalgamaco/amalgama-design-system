@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="css/variables.css?v=10">
 <link rel="stylesheet" href="css/md-sys-bridge.css?v=1">
 <link rel="stylesheet" href="css/base.css?v=3">
+<link rel="stylesheet" href="css/composition.css?v=1">
 <link rel="stylesheet" href="css/layout.css?v=3">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
@@ -598,7 +599,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 .ds-preview.centered { justify-content: center; align-items: center; }
 .ds-preview.dark-bg { background: var(--md-surface); }
 .ds-preview.padded { padding: 48px 32px; }
-.ds-preview.column { flex-direction: column; }
+.ds-preview.is-column { flex-direction: column; }   /* renombrada: `.column` ahora es una clase pública del DS (composition.css) */
 
 /* ── Code block ── */
 .ds-code-wrap { position: relative; margin-bottom: 40px; }
@@ -3527,6 +3528,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="design-tokens"     onclick="navigate('design-tokens')"><i    data-lucide="braces"               style="width:13px;height:13px"></i> Design Tokens</div>
       <div class="ds-nav-item" data-section="interaction-state" onclick="navigate('interaction-state')"><i data-lucide="mouse-pointer-click" style="width:13px;height:13px"></i> Interaction State</div>
       <div class="ds-nav-item" data-section="grid"              onclick="navigate('grid')"><i             data-lucide="layout-grid"          style="width:13px;height:13px"></i> Layout</div>
+      <div class="ds-nav-item" data-section="composition"       onclick="navigate('composition')"><i      data-lucide="columns-3"            style="width:13px;height:13px"></i> Composición</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-aspect-ratio" onclick="navigate('c-aspect-ratio')">Aspect Ratio</div>
         <div class="ds-nav-item" data-section="c-empty"    onclick="navigate('c-empty')">Empty State</div>
@@ -4789,6 +4791,147 @@ body { overflow-x: clip; }
           </tbody>
         </table>
       </div>
+    </section>
+
+
+    <!-- ═══════════ COMPOSICIÓN ═══════════ -->
+    <section class="ds-section" id="s-composition">
+      <div class="ds-page-tag">Foundations · Composición</div>
+      <h1 class="ds-page-title">Composición</h1>
+      <p class="ds-page-desc">La forma de la página, no el sistema visual. Con tokens correctos y componentes correctos todavía se puede armar la misma página que arma cualquiera: hero centrado, tres tarjetas con ícono, banda, footer. Esto es lo que lo evita. La regla completa está en <code>COMPOSICION.md</code>; las clases, en <code>css/composition.css</code>.</p>
+
+      <div class="ds-callout"><strong>Se elige antes de escribir markup:</strong> una estructura, un ancho, y cómo se compone adentro. Una página que no eligió, eligió el default — que es el que tiene todo el mundo.</div>
+
+      <h2 class="ds-h2">1 · Estructura</h2>
+      <p class="ds-p">Cuatro, y una por página. Mezclar dos rompe el borde izquierdo, que es lo único que sostiene la página.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Clase</th><th>Qué es</th><th>Cuándo</th></tr></thead>
+          <tbody>
+            <tr><td><code>.column</code></td><td>Una columna centrada</td><td>Producto, dashboards. La segura, y la que menos diferencia</td></tr>
+            <tr><td><code>.column-bleed</code></td><td>Sin ancho máximo, con márgenes que crecen</td><td>Cuando la página tiene que usar el monitor entero</td></tr>
+            <tr><td><code>.column-rail</code></td><td>Contenido + riel angosto al costado</td><td>La más “estudio”. Obliga a decidir qué es nota</td></tr>
+            <tr><td><code>.column-split</code></td><td>Dos tracks 6fr/4fr</td><td>Un hero con una herramienta o una imagen al lado</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="ds-h2">2 · Ancho</h2>
+      <p class="ds-p">1200 es el default y es el número que usa todo el mundo. La escala es cerrada, y <strong>los márgenes laterales nunca desaparecen</strong>: el ancho crece, el aire se queda.</p>
+      <div class="ds-preview" style="display:block;padding:0;overflow:hidden">
+        <div style="background:var(--color-surface);padding:16px 0">
+          <div class="column" style="outline:1px dashed var(--color-outline);outline-offset:-1px"><div style="padding:10px;font:500 12px/1 var(--font-mono);color:var(--text-muted)">.column · 1200</div></div>
+          <div style="height:10px"></div>
+          <div class="column column-1440" style="outline:1px dashed var(--color-outline);outline-offset:-1px"><div style="padding:10px;font:500 12px/1 var(--font-mono);color:var(--text-muted)">.column-1440</div></div>
+          <div style="height:10px"></div>
+          <div class="column column-bleed" style="outline:1px dashed var(--color-outline);outline-offset:-1px"><div style="padding:10px;font:500 12px/1 var(--font-mono);color:var(--text-muted)">.column-bleed · sin límite, con márgenes igual</div></div>
+        </div>
+      </div>
+      <div class="ds-table-wrap" style="margin-top:12px">
+        <table class="ds-table">
+          <thead><tr><th>Clase</th><th>Ancho</th><th>Se siente</th></tr></thead>
+          <tbody>
+            <tr><td><code>.column</code></td><td>1200px</td><td>El default. Cómodo y neutro</td></tr>
+            <tr><td><code>.column-1280</code></td><td>1280px</td><td>Apenas más respiro</td></tr>
+            <tr><td><code>.column-1440</code></td><td>1440px</td><td>Una tabla ancha entra sin apretar</td></tr>
+            <tr><td><code>.column-1600</code></td><td>1600px</td><td>Editorial, para pantallas grandes</td></tr>
+            <tr><td><code>.column-1920</code></td><td>1920px</td><td>Casi borde a borde, con un límite real</td></tr>
+            <tr><td><code>.column-read</code> / <code>.column-form</code></td><td>800 / 680px</td><td>Lectura y formularios. No es estilo, es contenido</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ds-callout"><strong>El ancho es del layout, no del texto.</strong> Aunque la página vaya borde a borde, los párrafos cortan en <code>.measure</code> (68 caracteres) o <code>.measure-lead</code> (52). Una línea de 200 caracteres es la falla <code>D9</code>.</div>
+
+      <h2 class="ds-h2">3 · La grilla de 12</h2>
+      <p class="ds-p">Adentro de la estructura elegida. Existe para que la asimetría salga barata: 7+5, 8+4, 5+4+3 son composiciones; 4+4+4 tres secciones seguidas es la grilla de tres tarjetas con otro nombre.</p>
+      <div class="ds-preview" style="display:block">
+        <div class="grid-12" style="width:100%">
+          <div class="span-7" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-7</div>
+          <div class="span-5" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-5</div>
+        </div>
+        <div class="grid-12" style="width:100%;margin-top:12px">
+          <div class="span-5" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-5</div>
+          <div class="span-4" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-4</div>
+          <div class="span-3" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-3</div>
+        </div>
+      </div>
+
+      <h2 class="ds-h2">4 · La firma</h2>
+      <p class="ds-p">Lo que no varía nunca, y es lo que hace que un trabajo se reconozca como nuestro. Los cuatro ejes de personalidad (densidad, elevación, movimiento, íconos) varían por cliente; esto no.</p>
+
+      <h3 class="ds-h3">El registro editorial</h3>
+      <p class="ds-p">La escala de producto arranca en 28px. Un hero a 28px se lee tímido — “todo un poco grande y nada dominante” es la primera impresión de una página generada. Van tres tamaños arriba, <strong>uno por página</strong>, en el <code>h1</code>, nunca adentro del app shell. <strong>El cuerpo no se toca:</strong> la firma es la distancia entre 96 y 13.5.</p>
+      <div class="ds-preview" style="display:block">
+        <p class="overline">Informe trimestral</p>
+        <h2 class="editorial-md" style="margin:0 0 10px">Cuánto tardan hoy las altas de socios</h2>
+        <p class="measure" style="margin:0;color:var(--text-secondary)">Medimos las 240 altas del último trimestre en los cuatro clubes. La mediana es de 4 minutos; el percentil 90 llega a 19.</p>
+      </div>
+
+      <h3 class="ds-h3">El overline, y el gesto</h3>
+      <p class="ds-p">El eyebrow no está prohibido: está prohibido el tracking amplio en sans (0.12–0.16em) que usa todo el mundo. El nuestro es monoespaciado y apretado — <code>--letter-spacing-overline</code>, 0.04em — y va <strong>una vez por página</strong>. Y el gesto de Amalgama es el índice de sección: numera el total real, nunca se saltea, y no va si hay una sola sección.</p>
+      <div class="ds-preview" style="display:block">
+        <span class="section-index" aria-hidden="true">02<span class="sep">/</span>05</span>
+        <h3 style="margin:0 0 6px">Dónde se pierde el tiempo</h3>
+        <p class="measure" style="margin:0;color:var(--text-secondary)">El índice va a la izquierda del título, en DM Mono y en el color de acento.</p>
+      </div>
+      <div class="ds-callout">Las versalitas de componente —badge, header de tabla, label del nav— usan el otro tracking positivo, <code>--letter-spacing-label</code> (0.08em). A 10px el tracking apretado se lee peor: resuelven problemas distintos y no se unifican.</div>
+
+      <h2 class="ds-h2">5 · Ritmo y separación</h2>
+      <p class="ds-p">Una página no es una pila de bandas iguales. Tres pesos, y la diferencia entre <code>.section-lead</code> y <code>.section-tight</code> es de 2,5× — no del 10%. Y las secciones se separan con una línea de 1px que cruza toda la pantalla mientras el contenido se queda en la columna, no con bandas de fondo alternado.</p>
+      <div class="ds-preview" style="display:block;padding:0">
+        <div style="background:var(--color-surface)">
+          <div class="column"><div class="section-tight" style="font:500 12px/1 var(--font-mono);color:var(--text-muted)">.section-tight</div></div>
+          <hr class="rule">
+          <div class="column"><div class="section" style="font:500 12px/1 var(--font-mono);color:var(--text-muted)">.section</div></div>
+          <hr class="rule">
+          <div class="column"><div class="section-lead" style="font:500 12px/1 var(--font-mono);color:var(--text-muted)">.section-lead · la que carga el argumento</div></div>
+        </div>
+      </div>
+
+      <h2 class="ds-h2">6 · El dato</h2>
+      <p class="ds-p">El default es la cifra gigante en color con una flechita verde. El nuestro: la cifra en color de texto y en números tabulares, la unidad más chica pegada, y la base al lado — porque un número sin base no se publica.</p>
+      <div class="ds-preview" style="display:block">
+        <p class="figure" style="margin:0">
+          <span class="figure-value">4,2</span><span class="figure-unit">min</span>
+          <span class="figure-base">mediana · 240 altas · jul–sep 2026</span>
+        </p>
+      </div>
+
+      <h2 class="ds-h2">7 · Íconos, imágenes y movimiento</h2>
+      <p class="ds-p"><strong>El ícono tiene cinco lugares</strong> y “arriba del título de cada card, en un cuadrado con radio” no es el default — es el reflejo más reconocible de una página generada.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Ubicación</th><th>Cuándo</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Sin ícono</strong> · el default</td><td>La mayoría de las veces. Si el título alcanza, el ícono es ruido</td></tr>
+            <tr><td>En línea, antes del texto</td><td>Cuando distingue ítems entre sí en una lista que se escanea</td></tr>
+            <tr><td>Al margen</td><td>Con <code>.column-rail</code>: ancla el bloque sin ocupar el lugar del título</td></tr>
+            <tr><td>Grande y solo</td><td>Uno por sección, cuando el ícono <em>es</em> el contenido: vacío, error</td></tr>
+            <tr><td>De fondo</td><td>Una sola vez en la página. Es textura, no información</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ds-p" style="margin-top:20px"><strong>Imágenes: solo material real</strong> — capturas del producto, fotos del trabajo o del equipo, diagramas propios. Nunca stock, ilustración isométrica, render 3D ni un degradé haciendo de foto. Si no hay material real, la sección va sin imagen. Todas con el mismo marco: <code>.media</code>, borde de 1px y sin sombra.</p>
+      <p class="ds-p"><strong>La página no se revela al scrollear.</strong> El fade-up de cada sección al entrar es el gesto más repetido de las landings generadas. <code>.reveal</code> va una sola vez, en el bloque de apertura, al cargar, y solo en opacidad.</p>
+
+      <h2 class="ds-h2">Qué se chequea</h2>
+      <p class="ds-p">Las fallas nuevas que <code>review</code> y <code>check-output.mjs</code> marcan sobre lo que se produce:</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>ID</th><th>Falla</th><th>Severidad</th></tr></thead>
+          <tbody>
+            <tr><td><code>A11</code></td><td><code>letter-spacing</code> con valor literal en vez del token</td><td>MEDIA</td></tr>
+            <tr><td><code>D9</code></td><td>Estructura sin elegir, o <code>column-bleed</code> con el texto sin acotar</td><td>ALTA</td></tr>
+            <tr><td><code>H7</code></td><td>Más de un overline: repetido deja de clasificar y es textura</td><td>MEDIA</td></tr>
+            <tr><td><code>H8</code></td><td>Ícono por reflejo, uno arriba del título de cada card</td><td>MEDIA</td></tr>
+            <tr><td><code>H9</code></td><td>Apertura en la escala de producto, o dos editoriales en una página</td><td>MEDIA</td></tr>
+            <tr><td><code>H10</code></td><td>Imagen de banco, ilustración isométrica o render 3D</td><td>ALTA</td></tr>
+            <tr><td><code>H11</code></td><td>Secciones apareciendo al scrollear</td><td>MEDIA</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-callout" style="margin-top:24px"><strong>La prueba final.</strong> Tapá el logo y los colores. Si la página podría ser de cualquier otro estudio cambiando la paleta, la composición no hizo su trabajo — los tokens ya garantizan que se vea bien; esto es lo que hace que se vea nuestra.</div>
     </section>
 
     <!-- ═══════════ ICONS ═══════════ -->
@@ -26964,6 +27107,7 @@ const SECTIONS = {
   'design-tokens':     { label: 'Design Tokens',         group: 'Foundations' },
   'interaction-state': { label: 'Interaction State',     group: 'Foundations' },
   'grid':              { label: 'Layout',                group: 'Foundations' },
+  'composition':       { label: 'Composición',           group: 'Foundations' },
   'logos':             { label: 'Logos',                 group: 'Foundations' },
   'usage':             { label: 'Usage Guidelines',      group: 'Foundations' },
   // Styles

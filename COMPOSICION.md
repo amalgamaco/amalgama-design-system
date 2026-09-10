@@ -59,6 +59,10 @@ apoyo son compactas. `.section-lead` mide 2,5 veces `.section-tight` — una dif
 
 ## D · Forma: borde antes que sombra, superficie antes que caja
 
+Las secciones se separan con **una línea de 1px que cruza toda la pantalla** (`.rule`, fuera de la
+columna), no con bandas de fondo alternado. La banda es lo que hace toda página generada; la línea
+es la misma decisión que el borde sobre la sombra.
+
 Somos precisión técnica: el borde de 1px es nuestra herramienta de separación, y la sombra queda
 para lo que **realmente flota** (overlay, modal, toast). La mayor parte del contenido no necesita
 contenedor: se agrupa con espacio. Regla 7.
@@ -292,6 +296,51 @@ va sin cuantificar, o la sección espera.
 
 **En una maqueta con datos de relleno**, un aviso persistente y visible en la página lo dice. Un
 comentario en el código no alcanza: nadie que mire la pantalla lo lee.
+
+## 10. Imágenes: solo material real
+
+**No:** stock, ilustración isométrica, render 3D, degradados como imagen, gente sonriendo en una
+oficina que no es la nuestra. Es la superficie más grande de una página y el default más
+reconocible que existe.
+
+**En su lugar:** capturas reales del producto, fotos del trabajo o del equipo, diagramas que
+expliquen algo. **Si no hay material real, la sección va sin imagen** — un bloque de texto bien
+compuesto se ve mejor que una foto de banco.
+
+**Todas con el mismo marco**, que es la parte que se puede hacer cumplir: `.media` — borde de 1px,
+radio del sistema, sin sombra. Y con `.media-caption` cuando lo que se ve necesita una aclaración
+(qué pantalla es, de qué fecha).
+
+**Verificación:** ninguna URL de banco de imágenes (unsplash, pexels, shutterstock, freepik), ni
+`<img>` sin `.media`, ni un degradé haciendo de foto.
+
+## 11. La página no se revela al scrollear
+
+**No:** cada sección apareciendo con un fade-up de 20px al entrar en pantalla. Es el gesto más
+repetido de las landings generadas, cuesta rendimiento y molesta a quien navega con teclado o
+vuelve atrás.
+
+**En su lugar:** `.reveal` en **el bloque de apertura y nada más**, al cargar la página, y solo
+opacidad — sin desplazamiento. El contenido ya está donde va. `base.css` lo apaga solo cuando el
+sistema pide menos movimiento.
+
+**Verificación:** un solo `.reveal` en la página, y cero listeners de scroll o `IntersectionObserver`
+que agreguen clases de animación.
+
+## 12. Un dato solo se muestra con su base al lado
+
+**No:** la cifra gigante en color con una flechita verde.
+
+**En su lugar:** `.figure` — la cifra en el color de texto y en números tabulares, la unidad más
+chica pegada a ella, y la base (de qué universo sale, en qué período) **al lado**, en mono. Es la
+misma regla 8 hecha componente: un número sin base no se publica.
+
+```html
+<p class="figure">
+  <span class="figure-value">4,2</span><span class="figure-unit">min</span>
+  <span class="figure-base">mediana · 240 altas · jul–sep 2026</span>
+</p>
+```
 
 ## 9. Cero relleno
 

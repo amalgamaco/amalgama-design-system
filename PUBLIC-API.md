@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-64 componentes · **543 clases públicas** de 611 selectores totales en el CSS.
+64 componentes · **551 clases públicas** de 619 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -40,7 +40,7 @@ La estructura de la página: columna, borde a borde, riel o dividida; la medida 
 **Cuándo usar:** SIEMPRE. Toda página que publicamos, con app shell o sin él. Define la estructura (columna, borde a borde, riel, dividida), la medida de línea, el ritmo entre secciones, el overline y el índice de sección. Es la contraparte construida de COMPOSICION.md: ese archivo dice qué forma tiene una página nuestra, éste la hace.
 **Cuándo no:** nunca se saltea. Una landing no carga layout.css (no tiene shell) pero sí carga esto — es justamente donde más falta hace.
 
-Clases públicas: `.column` · `.column-1280` · `.column-1440` · `.column-1600` · `.column-1920` · `.column-bleed` · `.column-form` · `.column-rail` · `.column-read` · `.column-split` · `.editorial-lg` · `.editorial-md` · `.editorial-sm` · `.grid-12` · `.measure` · `.measure-lead` · `.overline` · `.section` · `.section-index` · `.section-lead` · `.section-tight` · `.sep` · `.span-1` · `.span-10` · `.span-11` · `.span-12` · `.span-2` · `.span-3` · `.span-4` · `.span-5` · `.span-6` · `.span-7` · `.span-8` · `.span-9`
+Clases públicas: `.column` · `.column-1280` · `.column-1440` · `.column-1600` · `.column-1920` · `.column-bleed` · `.column-form` · `.column-rail` · `.column-read` · `.column-split` · `.editorial-lg` · `.editorial-md` · `.editorial-sm` · `.figure` · `.figure-base` · `.figure-unit` · `.figure-value` · `.grid-12` · `.measure` · `.measure-lead` · `.media` · `.media-caption` · `.overline` · `.reveal` · `.rule` · `.section` · `.section-index` · `.section-lead` · `.section-tight` · `.sep` · `.span-1` · `.span-10` · `.span-11` · `.span-12` · `.span-2` · `.span-3` · `.span-4` · `.span-5` · `.span-6` · `.span-7` · `.span-8` · `.span-9`
 
 ```html
 <div class="column">…</div>                      <!-- default: una columna de 1200 -->
@@ -53,6 +53,9 @@ Clases públicas: `.column` · `.column-1280` · `.column-1440` · `.column-1600
 <p class="overline">Informe trimestral</p>
 <h1 class="editorial-lg">Cuánto tardan las altas</h1>   <!-- uno por página, nunca en el shell -->
 <p class="measure">Texto corrido que corta a tiempo aunque la página sea ancha.</p>
+<hr class="rule">                                 <!-- fuera de .column: cruza la pantalla -->
+<p class="figure"><span class="figure-value">4,2</span><span class="figure-unit">min</span>
+   <span class="figure-base">mediana · 240 altas · jul–sep 2026</span></p>
 ```
 
 Regla completa: `component-rules/composition.md` · CSS: `css/composition.css`

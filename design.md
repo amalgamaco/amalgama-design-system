@@ -255,7 +255,19 @@ redondeadas, padding) y poné el SVG transparente encima. Nunca estirar, recolor
 apoyar sobre patrones. Clearspace ≥ 16px; ancho mínimo 120px en horizontal. Si un caso no está
 cubierto, **pedí el archivo — no inventes un nombre ni aproximes el logo a mano.**
 
-### 6.7 Estrategia de tema
+### 6.7 Imágenes
+
+**Solo material real:** capturas del producto, fotos del trabajo o del equipo, diagramas propios.
+**Nunca** stock, ilustración isométrica, render 3D ni un degradé haciendo de foto — es el default
+más reconocible de una página generada, y el que más rápido borra la diferencia entre nosotros y
+cualquiera. Si no hay material real, la sección va sin imagen: un bloque bien compuesto se ve mejor
+que una foto de banco.
+
+Todas llevan el mismo marco (`.media`: borde de 1px, radio del sistema, sin sombra) y, cuando hace
+falta aclarar qué se está viendo, un `.media-caption` en mono. El detalle está en `COMPOSICION.md`
+regla 10.
+
+### 6.8 Estrategia de tema
 
 - Hero / landing → banda oscura (`--primary-900` / `-700`).
 - Dashboards y herramientas internas → light.

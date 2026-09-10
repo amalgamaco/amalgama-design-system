@@ -15,7 +15,7 @@
       "rules_files": [
         "component-rules/composition.md"
       ],
-      "usage": "<div class=\"column\">…</div>                      <!-- default: una columna de 1200 -->\n<div class=\"column column-1440\">…</div>          <!-- el mismo esquema, más ancho -->\n<div class=\"column column-bleed\">…</div>         <!-- sin ancho máximo, con márgenes igual -->\n<div class=\"grid-12\"><div class=\"span-7\">…</div><div class=\"span-5\">…</div></div>\n<div class=\"column column-rail\">…<aside>…</aside></div>\n<section class=\"section section-lead\">…</section>\n<span class=\"section-index\">02 / 05</span>\n<p class=\"overline\">Informe trimestral</p>\n<h1 class=\"editorial-lg\">Cuánto tardan las altas</h1>   <!-- uno por página, nunca en el shell -->\n<p class=\"measure\">Texto corrido que corta a tiempo aunque la página sea ancha.</p>",
+      "usage": "<div class=\"column\">…</div>                      <!-- default: una columna de 1200 -->\n<div class=\"column column-1440\">…</div>          <!-- el mismo esquema, más ancho -->\n<div class=\"column column-bleed\">…</div>         <!-- sin ancho máximo, con márgenes igual -->\n<div class=\"grid-12\"><div class=\"span-7\">…</div><div class=\"span-5\">…</div></div>\n<div class=\"column column-rail\">…<aside>…</aside></div>\n<section class=\"section section-lead\">…</section>\n<span class=\"section-index\">02 / 05</span>\n<p class=\"overline\">Informe trimestral</p>\n<h1 class=\"editorial-lg\">Cuánto tardan las altas</h1>   <!-- uno por página, nunca en el shell -->\n<p class=\"measure\">Texto corrido que corta a tiempo aunque la página sea ancha.</p>\n<hr class=\"rule\">                                 <!-- fuera de .column: cruza la pantalla -->\n<p class=\"figure\"><span class=\"figure-value\">4,2</span><span class=\"figure-unit\">min</span>\n   <span class=\"figure-base\">mediana · 240 altas · jul–sep 2026</span></p>",
       "classes": [
         "column",
         "column-1280",
@@ -30,10 +30,18 @@
         "editorial-lg",
         "editorial-md",
         "editorial-sm",
+        "figure",
+        "figure-base",
+        "figure-unit",
+        "figure-value",
         "grid-12",
         "measure",
         "measure-lead",
+        "media",
+        "media-caption",
         "overline",
+        "reveal",
+        "rule",
         "section",
         "section-index",
         "section-lead",
@@ -52,7 +60,7 @@
         "span-8",
         "span-9"
       ],
-      "internal_class_count": 34
+      "internal_class_count": 42
     },
     {
       "id": "layout",

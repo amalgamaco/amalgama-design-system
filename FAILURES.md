@@ -138,6 +138,8 @@ Los de `design.md` §8, contados como una falla cada uno.
 | `H7` | Más de un overline en mayúsculas en la página — repetido deja de clasificar y es textura | MEDIA | inspección + regex |
 | `H8` | Ícono por reflejo: uno arriba del título de cada card, en superficie cuadrada con radio | MEDIA | inspección |
 | `H9` | Titular de apertura en la escala de producto (28px) donde iba el registro editorial, o dos editoriales en la misma página | MEDIA | inspección + regex |
+| `H10` | Imagen de banco, ilustración isométrica, render 3D o degradé haciendo de foto | ALTA | regex + inspección |
+| `H11` | Secciones apareciendo al scrollear (fade-up, IntersectionObserver, librería de scroll-reveal) | MEDIA | regex |
 
 ## I · Proceso y drift
 
