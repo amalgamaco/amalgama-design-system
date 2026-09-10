@@ -50,6 +50,27 @@ const RULES = [
   { id: "A3", sev: "ALTA", desc: "font-size en px suelto sin token", re: /font-size\s*:\s*-?\d+(\.\d+)?px/g },
   { id: "A5", sev: "BLOQ", desc: "token primitivo en código de producto", re: /var\(\s*--(primary|neutral|secondary|tertiary|success|error|warning|info)-\d+/g },
   { id: "A6", sev: "BLOQ", desc: "override por tema", re: /\[data-theme=["']?dark["']?\]\s*\{|prefers-color-scheme|\.dark\s*\{/g },
+  // ── M · nativo (React Native) ────────────────────────────────────────────
+  // Dos superficies distintas y las dos cuentan:
+  //   · el .tsx de la app
+  //   · el preview HTML con data-platform="native" (preview-native.css), que es
+  //     donde se diseña y se aprueba antes de que exista el .tsx
+  // Las reglas se activan solas: solo corren si el archivo es de nativo (§esNativo).
+  { id: "M1", sev: "ALTA", nativo: true, desc: "tamaño tipográfico a mano en vez de leerlo de native/nativeDark",
+    re: /fontSize\s*:\s*-?\d+(\.\d+)?\b/g },
+  { id: "M3", sev: "ALTA", nativo: true, desc: "safe area hardcodeada en vez de useSafeAreaInsets()",
+    re: /padding(Top|Bottom)\s*:\s*(2[0-9]|3[0-9]|4[0-9]|5[0-9])\b/g },
+  { id: "M5", sev: "ALTA", nativo: true, desc: "la escala web en una app: se importó light/dark en vez de native/nativeDark",
+    re: /import\s*\{[^}]*\b(light|dark)\b[^}]*\}\s*from\s*['"][^'"]*embassy\.tokens/g },
+  // M7 — el que más caro sale, porque RN no avisa: pasa lineHeight como
+  // multiplicador y dibuja mal en silencio. En RN son puntos.
+  { id: "M7", sev: "ALTA", nativo: true, desc: "lineHeight o letterSpacing como multiplicador o em — RN los mide en puntos y los ignora",
+    re: /(lineHeight|letterSpacing)\s*:\s*(['"]?-?[01]?\.\d+(em)?['"]?|['"]-?\d+(\.\d+)?em['"])/g },
+  { id: "M6", sev: "MEDIA", nativo: true, desc: "tokens de columna, grilla de 12, max-width o medida en ch en una pantalla nativa",
+    re: /--column-(gutter|max)|\bgrid-12\b|\bcolumn-(read|form|bleed|rail|split|1280|1440|1600|1920)\b|max-?[Ww]idth\s*:\s*\d|\d+ch\b/g },
+  { id: "M8", sev: "ALTA", nativo: true, desc: "utility de gluestack/Tailwind sin traducir a tokens",
+    re: /\b(bg|text|border|rounded|p|px|py|m|mx|my|gap)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{2,3}\b|\brounded-(sm|md|lg|xl|2xl|3xl|full)\b|\btext-(xs|sm|base|lg|xl|2xl|3xl)\b/g },
+
   // H10 — imagen de banco. La política es "solo material real" (COMPOSICION.md regla 10): si el
   // dato no vino del cliente no existe, y la foto tampoco. Se detecta por dominio porque es lo
   // único determinístico; una ilustración isométrica subida a nuestro S3 la agarra el review.
@@ -179,8 +200,43 @@ for (const file of files) {
 
   for (const [id, motivo] of allows) allowed.push({ file, id, motivo });
 
+  // ¿Este archivo es de una pantalla nativa? Dos señales objetivas: un .tsx que
+  // importa de react-native, o un preview con data-platform="native".
+  const esTsxNativo = /\.tsx?$/.test(file) && /from\s+['"]react-native['"]|from\s+['"]expo/.test(src);
+  const esPreview   = /data-platform\s*=\s*["']native["']/.test(src);
+  const esNativo    = esTsxNativo || esPreview;
+
+  // El preview es HTML de Embassy, así que las reglas de nativo que hablan de
+  // sintaxis de RN (M1 fontSize, M3 paddingTop, M5 import, M7 lineHeight) no
+  // aplican ahí: en el preview esos valores salen del CSS y de los tokens.
+  const soloTsx = new Set(["M1", "M3", "M5", "M7"]);
+
+  // Una pantalla nativa que se entrega SIN preview y sin .tsx no se puede medir.
+  // Y un preview sin preview-native.css muestra los controles a la altura de
+  // escritorio, o sea que miente: es la falla más barata de detectar y la que
+  // más confunde a quien aprueba.
+  if (esPreview && !/preview-native\.css/.test(src))
+    findings.push({ file, line: 1, id: "M2", sev: "BLOQ",
+      desc: "preview nativo sin preview-native.css: los controles se dibujan a la altura de escritorio y el preview miente",
+      evidence: 'data-platform="native" sin el <link> de preview-native.css' });
+
+  // M2 en el preview: un alto inline por debajo del piso táctil sobre algo que
+  // se toca. Lo inline es lo único determinístico sin navegador; lo que viene
+  // del CSS ya lo garantiza preview-native.css.
+  if (esPreview) {
+    const re = /<(button|a|input|select|textarea)\b[^>]*style="[^"]*\b(min-)?height\s*:\s*(\d+)px/gi;
+    let m;
+    while ((m = re.exec(src))) {
+      if (Number(m[3]) < 48)
+        findings.push({ file, line: lineOf(src, m.index), id: "M2", sev: "BLOQ",
+          desc: "superficie tocable por debajo de 48 (--target-min)",
+          evidence: `<${m[1]}> con ${m[2] || ""}height: ${m[3]}px` });
+    }
+  }
+
   for (const rule of RULES) {
     if (allows.has(rule.id)) continue;
+    if (rule.nativo && (!esNativo || (soloTsx.has(rule.id) && !esTsxNativo))) continue;
     if (rule.custom) {
       for (const [ln, ev] of rule.custom(src)) findings.push({ file, line: ln, ...rule, evidence: ev });
       continue;

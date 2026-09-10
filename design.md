@@ -275,6 +275,21 @@ decks. **Nunca en un producto de cliente**, ni siquiera de fondo: es la falla `H
 bloqueante. La señal es objetiva — si el proyecto carga un `brand/<cliente>.css`, la marca es de
 otro. Condiciones de uso en `COMPOSICION.md` regla 13.
 
+### 6.8b Pantallas de app
+
+Si el entregable es **una pantalla de app** y no una página, cambian dos cosas y ninguna es el
+color: la **escala** (el cuerpo base pasa de 13,5px a 16 — el 13,5 es el tamaño del *caption* de
+iOS y en un teléfono se lee chico) y la **densidad** (todo lo tocable llega a 48). Los dos salen de
+los mismos tokens, en el bloque `[data-platform="native"]`.
+
+Para verla, `css/preview-native.css` da el marco de teléfono a 390px: adentro van los componentes
+de Embassy sin cambios y `data-platform="native"` hace que los tokens resuelvan a los valores de
+teléfono. No es un mockup — lee los mismos números que va a leer la app.
+
+Y no se porta el patrón de escritorio en chico: una tabla se vuelve filas apiladas, un menú
+flotante un action sheet, un formulario una pantalla propia. La regla completa, con el mapa de los
+62 componentes, está en **`MOBILE.md`**; las fallas propias, en el grupo `M` de `FAILURES.md`.
+
 ### 6.9 Estrategia de tema
 
 - Hero / landing → banda oscura (`--primary-900` / `-700`).

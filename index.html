@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/base.css?v=3">
 <link rel="stylesheet" href="css/composition.css?v=1">
 <link rel="stylesheet" href="css/space.css?v=1">
+<link rel="stylesheet" href="css/preview-native.css?v=1">
 <link rel="stylesheet" href="css/layout.css?v=3">
 <link rel="stylesheet" href="docs/docs.css?v=2">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
@@ -3455,65 +3456,11 @@ body { overflow-x: clip; }
 .placeholder-panel p { line-height: 1.6; }
 
 
-/* ── Mobile / nativo: las dos escalas lado a lado ─────────────── */
-#s-mobile .m-preview { padding: 20px; }
-#s-mobile .m-pair { display: flex; gap: 24px; flex-wrap: wrap; }
-#s-mobile .m-cap { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
-  text-transform: uppercase; color: var(--ds-text-3); margin: 0 0 10px; }
-#s-mobile .m-cap b { color: var(--ds-text-1); }
-#s-mobile .m-phone { width: 390px; max-width: 100%; background: var(--color-surface);
-  border: 1px solid var(--ds-card-border); border-radius: 22px; overflow: hidden;
-  display: flex; flex-direction: column; }
-#s-mobile .m-nav { padding: 16px 20px 10px; display: flex; align-items: center;
-  justify-content: space-between; }
-#s-mobile .m-navttl { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); }
-#s-mobile .m-body { padding: 4px 20px 20px; }
-#s-mobile .m-h1 { font-family: var(--font-heading); font-weight: 700; color: var(--text-primary);
-  margin: 0 0 6px; letter-spacing: -.01em; }
-#s-mobile .m-sub { color: var(--text-secondary); margin: 0 0 20px; }
-#s-mobile .m-ovl { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em;
-  color: var(--text-secondary); margin: 0 0 8px; }
-#s-mobile .m-row { display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  border-bottom: 1px solid var(--border); outline: 1px dashed rgba(224,49,49,.5); }
-#s-mobile .m-row:last-of-type { border-bottom: 0; }
-#s-mobile .m-rl { color: var(--text-primary); font-weight: 500; }
-#s-mobile .m-rm { color: var(--text-secondary); margin-top: 2px; }
-#s-mobile .m-rv { font-family: var(--font-mono); color: var(--text-primary); white-space: nowrap; }
-#s-mobile .m-btn { display: flex; align-items: center; justify-content: center;
-  background: var(--color-primary); color: var(--color-on-primary);
-  border-radius: var(--radius-md); font-weight: 600; margin-top: 20px;
-  outline: 1px dashed rgba(224,49,49,.5); }
-#s-mobile .m-help { color: var(--text-secondary); margin: 10px 0 0; text-align: center; }
-#s-mobile .m-tabs { display: flex; border-top: 1px solid var(--border); }
-#s-mobile .m-tab { flex: 1; text-align: center; padding: 10px 0 14px; color: var(--text-secondary); }
-#s-mobile .m-tab.on { color: var(--color-primary); font-weight: 600; }
-#s-mobile .m-legend { font-size: 12px; color: var(--ds-text-3); margin: 16px 0 0; }
-
-/* escala ACTUAL (web) */
-#s-mobile .m-a .m-navttl { font-size: 17px; line-height: 1.35; }
-#s-mobile .m-a .m-h1     { font-size: 28px; line-height: 1.15; }
-#s-mobile .m-a .m-sub    { font-size: 13.5px; line-height: 1.5; }
-#s-mobile .m-a .m-ovl    { font-size: 12px; line-height: 1.4; }
-#s-mobile .m-a .m-row    { min-height: 36px; }
-#s-mobile .m-a .m-rl     { font-size: 13.5px; line-height: 1.5; }
-#s-mobile .m-a .m-rm     { font-size: 12.5px; line-height: 1.6; }
-#s-mobile .m-a .m-rv     { font-size: 13px; line-height: 1.4; }
-#s-mobile .m-a .m-btn    { height: 36px; font-size: 13.5px; }
-#s-mobile .m-a .m-help   { font-size: 12px; line-height: 1.4; }
-#s-mobile .m-a .m-tab    { font-size: 11.5px; }
-
-/* escala NATIVA */
-#s-mobile .m-b .m-navttl { font-size: 17px; line-height: 1.3; }
-#s-mobile .m-b .m-h1     { font-size: 32px; line-height: 1.1; }
-#s-mobile .m-b .m-sub    { font-size: 17px; line-height: 1.45; }
-#s-mobile .m-b .m-ovl    { font-size: 13px; line-height: 1.45; }
-#s-mobile .m-b .m-row    { min-height: 48px; }
-#s-mobile .m-b .m-rl     { font-size: 16px; line-height: 1.5; }
-#s-mobile .m-b .m-rm     { font-size: 14px; line-height: 1.45; }
-#s-mobile .m-b .m-rv     { font-size: 15px; line-height: 1.4; }
-#s-mobile .m-b .m-btn    { height: 48px; font-size: 16px; }
-#s-mobile .m-b .m-help   { font-size: 13px; line-height: 1.45; }
-#s-mobile .m-b .m-tab    { font-size: 11px; }
+/* ── Mobile / nativo ──────────────────────────────────────────────
+   El comparativo usa los marcos reales de css/preview-native.css: si la doc
+   demostrara el efecto con CSS propio, podría seguir "funcionando" el día que
+   el archivo real se rompa. */
+#s-mobile .phone-row { margin-block: 4px; }
 
 </style>
 </head>
@@ -5202,45 +5149,68 @@ body { overflow-x: clip; }
       <p class="ds-p"><code>heading-xl</code> (24), <code>heading-lg</code> (22) y <code>heading-sm</code> (17) no se mueven. El <strong>registro editorial</strong> deja de ser fluido —no hay viewport que crezca— y se congela en 44 / 34 / 28.</p>
 
       <h2 class="ds-h2">3 · La misma pantalla, las dos escalas</h2>
-      <div class="ds-preview m-preview" style="display:block">
-        <div class="m-pair">
-          <div>
-            <p class="m-cap"><b>Hoy</b> — la escala del DS tal cual</p>
-            <div class="m-phone m-a">
-              <div class="m-nav"><span class="m-navttl">Altas</span><span class="m-rv">jul–sep</span></div>
-              <div class="m-body">
-                <h3 class="m-h1">Altas del trimestre</h3>
-                <p class="m-sub">240 altas procesadas. La mediana bajó a 4,2 minutos.</p>
-                <p class="m-ovl">Últimas</p>
-                <div class="m-row"><div><div class="m-rl">Clínica del Sol</div><div class="m-rm">Alta completa · 3 min</div></div><span class="m-rv">4,2</span></div>
-                <div class="m-row"><div><div class="m-rl">Sanatorio Norte</div><div class="m-rm">Pendiente de firma</div></div><span class="m-rv">—</span></div>
-                <div class="m-row"><div><div class="m-rl">Centro Médico Rivera</div><div class="m-rm">Alta completa · 6 min</div></div><span class="m-rv">6,0</span></div>
-                <div class="m-btn">Procesar pendientes</div>
-                <p class="m-help">Se notifica al responsable de cada centro.</p>
-              </div>
-              <div class="m-tabs"><span class="m-tab on">Altas</span><span class="m-tab">Centros</span><span class="m-tab">Reportes</span><span class="m-tab">Perfil</span></div>
-            </div>
-          </div>
-          <div>
-            <p class="m-cap"><b>Nativo</b> — mismos tokens, valores de teléfono</p>
-            <div class="m-phone m-b">
-              <div class="m-nav"><span class="m-navttl">Altas</span><span class="m-rv">jul–sep</span></div>
-              <div class="m-body">
-                <h3 class="m-h1">Altas del trimestre</h3>
-                <p class="m-sub">240 altas procesadas. La mediana bajó a 4,2 minutos.</p>
-                <p class="m-ovl">Últimas</p>
-                <div class="m-row"><div><div class="m-rl">Clínica del Sol</div><div class="m-rm">Alta completa · 3 min</div></div><span class="m-rv">4,2</span></div>
-                <div class="m-row"><div><div class="m-rl">Sanatorio Norte</div><div class="m-rm">Pendiente de firma</div></div><span class="m-rv">—</span></div>
-                <div class="m-row"><div><div class="m-rl">Centro Médico Rivera</div><div class="m-rm">Alta completa · 6 min</div></div><span class="m-rv">6,0</span></div>
-                <div class="m-btn">Procesar pendientes</div>
-                <p class="m-help">Se notifica al responsable de cada centro.</p>
-              </div>
-              <div class="m-tabs"><span class="m-tab on">Altas</span><span class="m-tab">Centros</span><span class="m-tab">Reportes</span><span class="m-tab">Perfil</span></div>
-            </div>
-          </div>
+      <p class="ds-p">Los dos marcos de abajo tienen <strong>el mismo HTML</strong>: los mismos <code>chip</code>, el mismo <code>field-input</code>, los mismos <code>btn-primary</code>. La única diferencia es <code>data-platform="native"</code> en el de la derecha. El punteado marca cada superficie tocable.</p>
+      <div class="ds-preview" style="display:block;padding:20px">
+        <div class="phone-row">
+          <figure>
+            <p class="phone-caption"><strong>Web</strong> — sin data-platform</p>
+            <div class="phone phone-auto" data-targets>
+              <div class="phone-status"></div>
+              <header class="phone-nav"><span>Altas</span><span class="badge">24</span></header>
+              <div class="phone-screen">
+        <p class="overline">Julio – Septiembre</p>
+        <h1 class="page-title">Altas del trimestre</h1>
+        <p class="measure" style="color:var(--text-secondary);margin:0 0 16px">240 altas procesadas. La mediana bajó a 4,2 minutos.</p>
+        <div style="display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap">
+          <button class="chip chip-selected">Todas</button>
+          <button class="chip">Pendientes</button>
+          <button class="chip">Completas</button>
         </div>
-        <p class="m-legend">Las dos a 390px, el ancho real de un teléfono. El punteado marca la superficie tocable: <strong>36px</strong> a la izquierda, <strong>48px</strong> a la derecha.</p>
+        <input class="field-input" placeholder="Buscar un centro">
+        <label class="checkbox-label" style="margin-top:12px"><input type="checkbox" class="checkbox" checked> Solo con firma pendiente</label>
+        <button class="btn-primary" style="width:100%;margin-top:16px">Procesar pendientes</button>
+        <button class="btn-tertiary" style="width:100%;margin-top:8px">Exportar</button>
+              </div>
+              <nav class="phone-tabbar">
+        <button class="phone-tab" aria-current="page">Altas</button>
+        <button class="phone-tab">Centros</button>
+        <button class="phone-tab">Reportes</button>
+        <button class="phone-tab">Perfil</button>
+              </nav>
+            </div>
+          </figure>
+          <figure>
+            <p class="phone-caption"><strong>Nativo</strong> — data-platform="native"</p>
+            <div class="phone phone-auto" data-platform="native" data-targets>
+              <div class="phone-status"></div>
+              <header class="phone-nav"><span>Altas</span><span class="badge">24</span></header>
+              <div class="phone-screen">
+        <p class="overline">Julio – Septiembre</p>
+        <h1 class="page-title">Altas del trimestre</h1>
+        <p class="measure" style="color:var(--text-secondary);margin:0 0 16px">240 altas procesadas. La mediana bajó a 4,2 minutos.</p>
+        <div style="display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap">
+          <button class="chip chip-selected">Todas</button>
+          <button class="chip">Pendientes</button>
+          <button class="chip">Completas</button>
+        </div>
+        <input class="field-input" placeholder="Buscar un centro">
+        <label class="checkbox-label" style="margin-top:12px"><input type="checkbox" class="checkbox" checked> Solo con firma pendiente</label>
+        <button class="btn-primary" style="width:100%;margin-top:16px">Procesar pendientes</button>
+        <button class="btn-tertiary" style="width:100%;margin-top:8px">Exportar</button>
+              </div>
+              <nav class="phone-tabbar">
+        <button class="phone-tab" aria-current="page">Altas</button>
+        <button class="phone-tab">Centros</button>
+        <button class="phone-tab">Reportes</button>
+        <button class="phone-tab">Perfil</button>
+              </nav>
+            </div>
+          </figure>
+        </div>
+        <p style="font-size:12px;color:var(--ds-text-3);margin:16px 0 0">Medido en este render: el botón pasa de <strong>34px a 48</strong>, el campo de <strong>38 a 48</strong>, el chip de <strong>32 a 48</strong>, y el cuerpo de <strong>13,5px a 16</strong>. Mismo marcado, otros valores de token.</p>
       </div>
+
+      <div class="ds-callout"><strong>Esto es la herramienta, no una réplica.</strong> El marco lo da <code>css/preview-native.css</code> y es lo que emiten <code>artifact</code> —cuando no hay proyecto, para diseñar y aprobar antes de que exista código— y <code>screen</code>, al lado del <code>.tsx</code>. <strong>Lo que el preview no muestra:</strong> la sombra de Android, el ripple, el rebote del scroll, el teclado del sistema y las fuentes reales del dispositivo. Para eso hace falta el simulador.</div>
 
       <h2 class="ds-h2">4 · Densidad y superficie táctil</h2>
       <p class="ds-p">Los 44px vivían sueltos dentro de media queries en <code>components.css</code>: eran un parche por archivo, no una decisión. Ahora son tokens.</p>

@@ -664,6 +664,24 @@ These are documented deviations from the rules in this document. They exist in t
 
 ---
 
+### 12.x Las alturas de los componentes están literales, así que el eje de plataforma no las mueve (2026-09)
+
+`--target-min`, `--row-height` y `--control-height` existen como tokens (§14.3b, `TOKENS.md` §9b),
+pero **ningún componente los lee todavía**: cada uno declara su alto a mano
+(`button.css` `min-height: 32px` en `.btn-sm`, `chip.css` `height: 32px`, `select.css`
+`min-height: 40px`, y el botón por defecto no declara alto — sale del padding). El resultado es que
+`[data-platform="native"]` cambia la tipografía pero no la densidad, que es la mitad del problema.
+
+**Puente que hay hoy:** `css/preview-native.css` §1 sube los controles a `var(--control-height)`
+**scopeado a `[data-platform="native"]`** — en web no cambia ni un píxel. Está verificado: el botón
+pasa de 34 a 48 y el campo de 38 a 48 con el mismo HTML.
+
+**Arreglo real:** que cada componente lea el token con fallback —
+`min-height: var(--control-height)`, `min-height: var(--target-min)` para lo cuadrado — lo que en
+web no cambia nada porque el token vale 36/44 en `:root`. Son ~15 selectores en 12 archivos y
+conviene hacerlo con un diff visual componente por componente, no de una pasada. Cuando esté,
+`preview-native.css` §1 se borra entera.
+
 ## 13. Motion & Animation System
 
 ### 13.1 Duration tokens

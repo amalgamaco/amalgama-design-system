@@ -1,0 +1,231 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   preview-native.css — ver una pantalla nativa en un navegador
+
+   Uso:
+     <link rel="stylesheet" href="css/preview-native.css">
+
+     <div class="phone-row">
+       <figure class="phone" data-platform="native" data-targets>
+         <div class="phone-status"></div>
+         <header class="phone-nav">…</header>
+         <div class="phone-screen">…  ← la pantalla, con las clases normales …</div>
+         <nav class="phone-tabbar">…</nav>
+       </figure>
+     </div>
+
+   POR QUÉ ESTO NO ES UN MOCKUP. Adentro del marco van los componentes de
+   Embassy sin cambios: los mismos `btn-primary`, `chip`, `field-input`. Lo único
+   que cambia es que `data-platform="native"` hace que los tokens resuelvan a los
+   valores de teléfono —cuerpo 16, target 48— definidos en variables.css. Si el
+   preview se ve bien, la app se va a ver así, porque lee los mismos números.
+
+   Lo que el preview NO puede mostrar, y hay que tener presente al aprobar:
+   la sombra de Android (elevation), el ripple, el rebote del scroll, el teclado
+   del sistema y las fuentes reales del dispositivo. Para eso hace falta el
+   simulador. Ver MOBILE.md §7.
+
+   Dos capas, separadas a propósito:
+
+     1. DENSIDAD — hace que los controles crezcan a `--control-height` cuando el
+        contexto es nativo. Existe porque las alturas de los componentes todavía
+        están literales en su propio CSS (`min-height: 32px`, `height: 36px`…),
+        así que el eje de plataforma solo no las mueve. Está scopeada a
+        [data-platform="native"]: en web no cambia ni un píxel. La deuda —que los
+        componentes lean los tokens de densidad— está registrada en
+        GOVERNANCE.md §12.
+
+     2. MARCO — el cromo del teléfono. Es una herramienta de revisión, no parte
+        del producto: nada de `.phone*` sale en una entrega.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   1 · DENSIDAD — los controles llegan al piso táctil
+   ───────────────────────────────────────────────────────────── */
+
+/* Botones. El default no declara altura: sale del padding, así que con la
+   escala nativa llega a ~38 y no a 48. */
+[data-platform="native"] .btn-primary,
+[data-platform="native"] .btn-elevated,
+[data-platform="native"] .btn-secondary,
+[data-platform="native"] .btn-tertiary,
+[data-platform="native"] .btn-text,
+[data-platform="native"] .btn-link,
+[data-platform="native"] .btn-ghost,
+[data-platform="native"] .btn-next,
+[data-platform="native"] .btn-xs,
+[data-platform="native"] .btn-sm,
+[data-platform="native"] .btn-lg,
+[data-platform="native"] .btn-xl {
+  min-height: var(--control-height);
+  padding-inline: var(--space-6);
+  font-size: var(--font-size-body-md);
+}
+[data-platform="native"] .btn-lg,
+[data-platform="native"] .btn-xl { font-size: var(--font-size-body-lg); }
+
+/* Un control de ícono es cuadrado y también tiene piso. */
+[data-platform="native"] .icon-btn,
+[data-platform="native"] .toolbar-btn,
+[data-platform="native"] .search-icon-btn,
+[data-platform="native"] .shell-menu-btn {
+  width:  var(--target-min);
+  height: var(--target-min);
+}
+
+/* Campos y disparadores. En un teléfono no hay control chico. */
+[data-platform="native"] .field-input,
+[data-platform="native"] .field-textarea,
+[data-platform="native"] .select-trigger,
+[data-platform="native"] .search-field,
+[data-platform="native"] .search-bar,
+[data-platform="native"] .search-input,
+[data-platform="native"] .date-picker-trigger,
+[data-platform="native"] .combobox-trigger,
+[data-platform="native"] .input-group,
+[data-platform="native"] .otp-slot {
+  min-height: var(--control-height);
+  font-size: var(--font-size-body-md);
+}
+
+/* Selección y navegación. */
+[data-platform="native"] .chip,
+[data-platform="native"] .seg-btn,
+[data-platform="native"] .toggle,
+[data-platform="native"] .tab,
+[data-platform="native"] .nav-item,
+[data-platform="native"] .pagination-item {
+  min-height: var(--control-height);
+  font-size: var(--font-size-body-md);
+}
+
+/* Filas: lista, tabla e ítem comparten el piso de fila. */
+[data-platform="native"] .list-item,
+[data-platform="native"] .item,
+[data-platform="native"] .table td,
+[data-platform="native"] .table th {
+  min-height: var(--row-height);
+}
+
+/* Casillas y radios crecen su área, no su dibujo: el cuadrado sigue midiendo
+   lo mismo y lo que se agranda es la etiqueta que lo envuelve. */
+[data-platform="native"] .checkbox-label,
+[data-platform="native"] .radio-label,
+[data-platform="native"] .switch-label {
+  min-height: var(--target-min);
+  display: flex; align-items: center; gap: var(--space-3);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   2 · MARCO — el cromo del teléfono (herramienta, no producto)
+   ───────────────────────────────────────────────────────────── */
+
+.phone-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  align-items: flex-start;
+  margin: 0;
+}
+
+.phone {
+  /* 390 es el ancho real del iPhone de referencia. No se cambia para que algo
+     entre: si no entra en 390, no entra en un teléfono. */
+  --phone-width:  390px;
+  --phone-height: 760px;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: var(--phone-width);
+  max-width: 100%;
+  flex: 0 0 auto;
+  height: var(--phone-height);
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 26px;
+  box-shadow: var(--shadow-lg, 0 8px 28px color-mix(in srgb, var(--color-on-surface) 14%, transparent));
+}
+
+/* Alto libre: para una pantalla que se mide entera, sin recortar. */
+.phone-auto { height: auto; }
+
+/* La barra de estado del sistema. No es decoración: es el espacio que en la app
+   se lee con useSafeAreaInsets() y que no se puede escribir a mano. */
+.phone-status {
+  flex: 0 0 auto;
+  height: 30px;
+  background: transparent;
+}
+
+.phone-nav {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: var(--target-min);
+  padding-inline: var(--screen-gutter, var(--space-5));
+  padding-block: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.phone-screen {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-inline: var(--screen-gutter, var(--space-5));
+  padding-block: var(--space-2) var(--space-6);
+}
+
+.phone-tabbar {
+  flex: 0 0 auto;
+  display: flex;
+  border-top: 1px solid var(--border);
+  padding-bottom: var(--space-4);   /* la safe area de abajo */
+}
+.phone-tab {
+  flex: 1;
+  min-height: var(--target-min);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px;
+  font-size: var(--font-size-badge);
+  color: var(--text-secondary);
+  background: none; border: 0; cursor: pointer;
+}
+.phone-tab[aria-current] { color: var(--color-primary); font-weight: 600; }
+
+.phone-caption {
+  margin: 0 0 var(--space-2-5);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-badge);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.phone-caption strong { color: var(--text-primary); font-weight: 500; }
+
+/* Vista de targets: marca cada superficie tocable para poder contar a ojo lo
+   que M2 cuenta en el chequeo. Se activa con data-targets en el marco. */
+.phone[data-targets] :is(
+  button, a[href], [role="button"], [role="tab"], [role="switch"],
+  input, select, textarea, .chip, .list-item, .item, .nav-item, .phone-tab
+) {
+  outline: 1px dashed color-mix(in srgb, var(--color-error) 55%, transparent);
+  outline-offset: 0;
+}
+
+/* En una ventana angosta el marco se achica solo por el max-width de arriba.
+   Recién por debajo de un teléfono real conviene que ocupe todo, y el
+   breakpoint tiene que ser MENOR a 390: con 900px el marco se estiraba a
+   pantalla completa dentro de la doc, que es de escritorio. */
+@media (max-width: 420px) {
+  .phone { --phone-width: 100%; height: auto; border: 0; border-radius: 0; box-shadow: none; }
+}
+
+.phone-row figure { margin: 0; }

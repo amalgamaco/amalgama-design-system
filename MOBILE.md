@@ -173,6 +173,47 @@ Elegir la versión chica del patrón de escritorio en vez del patrón nativo es 
 
 ---
 
+## 5b. Verlo antes de que exista
+
+Un `.tsx` no se puede mirar sin un proyecto y un simulador, así que una pantalla nativa entregada
+solo como código es una pantalla que nadie revisó. `css/preview-native.css` da el marco de teléfono
+a 390px:
+
+```html
+<link rel="stylesheet" href="css/preview-native.css">
+
+<div class="phone-row">
+  <figure class="phone" data-platform="native">
+    <div class="phone-status"></div>
+    <header class="phone-nav">…</header>
+    <div class="phone-screen"><!-- la pantalla, con los componentes de Embassy sin cambios --></div>
+    <nav class="phone-tabbar">…</nav>
+  </figure>
+</div>
+```
+
+**No es un mockup.** Adentro van los mismos `btn-primary`, `chip` y `field-input` que en web; lo
+único que cambia es que `data-platform="native"` hace que los tokens resuelvan a los valores de
+teléfono. Verificado: el botón pasa de 34 a 48 y el campo de 38 a 48 con el mismo HTML.
+
+- `preview-native.css` **no es opcional**: sin él los controles se dibujan a la altura de
+  escritorio y el preview miente. Es `M2` y es bloqueante.
+- Nada de estructura de página adentro — `.grid-12`, `.column-*`, `max-width`, `ch` — es `M6`.
+- **390px no se cambia** para que algo entre. Si no entra en 390, no entra en un teléfono.
+- Para oscuro, `data-theme="dark"` **además** de `data-platform="native"`: son dos ejes
+  independientes y se combinan.
+- `data-targets` en el marco dibuja el contorno de cada superficie tocable, para contar a ojo lo
+  que `M2` cuenta en el chequeo.
+
+**Lo que el preview no muestra**, y hay que decirlo cuando se pide aprobación: la sombra de Android
+(`elevation`), el ripple, el rebote del scroll, el teclado del sistema y las fuentes reales del
+dispositivo. Para eso hace falta el simulador.
+
+Quién lo emite: `artifact` cuando no hay proyecto —para diseñar y aprobar antes de que haya
+código— y `screen` al lado del `.tsx` cuando el proyecto existe.
+
+---
+
 ## 6. Composición en un teléfono
 
 Casi todo `COMPOSICION.md` sigue valiendo. Lo que cambia:

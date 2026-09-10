@@ -156,10 +156,16 @@ Los de `design.md` §8, contados como una falla cada uno.
 Solo se pueden fallar en una app. Las demás familias aplican igual: una pantalla nativa no se
 audita distinto que una web. Ver `MOBILE.md`.
 
+Se cuentan sobre **dos** superficies, y `check-output.mjs` reconoce las dos solo: el `.tsx` de la
+app (un archivo que importa de `react-native` o `expo`) y el **preview HTML** con
+`data-platform="native"`, que es donde se diseña y se aprueba antes de que exista el `.tsx`. Las
+reglas de sintaxis de RN —`M1`, `M3`, `M5`, `M7`— solo corren sobre el `.tsx`: en el preview esos
+valores salen del CSS.
+
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
 | `M1` | Tamaño tipográfico escrito a mano en vez de leerlo de `native`/`nativeDark` | ALTA | `grep -nE "fontSize:\s*[0-9]"` |
-| `M2` | Superficie tocable por debajo de 48 (`--target-min`) | BLOQ | AST sobre `Pressable`/`TouchableOpacity` sin `hitSlop` ni alto suficiente |
+| `M2` | Superficie tocable por debajo de 48 (`--target-min`), **o** un preview con `data-platform="native"` sin `preview-native.css` (dibuja los controles a la altura de escritorio: el preview miente) | BLOQ | alto inline en el preview + el `<link>` faltante; en `.tsx`, `Pressable`/`TouchableOpacity` sin `hitSlop` ni alto suficiente |
 | `M3` | Safe area hardcodeada (`paddingTop: 44`) en vez de `useSafeAreaInsets()` | ALTA | regex |
 | `M4` | Patrón de escritorio encogido en vez del patrón nativo: tabla que scrollea de costado, modal centrado chico, menú flotante, paginación numerada | ALTA | inspección contra el mapa de `MOBILE.md` §5 |
 | `M5` | La escala web (cuerpo 13,5) en una app: se olvidó `data-platform="native"` o el export `native` | ALTA | comparación de tokens |

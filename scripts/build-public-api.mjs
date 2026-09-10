@@ -140,6 +140,14 @@ const COMPOSITION = suelto({
 // regla existe y es obligatoria: sin enlazarla, el agente ve las clases y no ve cuándo usarlas.
 if (COMPOSITION) COMPOSITION.rules_files = ["component-rules/composition.md"];
 
+const PREVIEW = suelto({
+  file: "css/preview-native.css",
+  id: "preview-native",
+  display_name: "Preview nativo (marco de teléfono)",
+  summary: "Ver una pantalla nativa en un navegador: el marco a 390px con data-platform=\"native\", que hace que los tokens resuelvan a los valores de teléfono. Adentro van los componentes de Embassy sin cambios. Es una herramienta de revisión: ninguna clase .phone* sale en una entrega.",
+});
+if (PREVIEW) PREVIEW.rules_files = ["component-rules/mobile.md"];
+
 const components = fs
   .readdirSync(CSS_DIR)
   .filter((f) => f.endsWith(".css"))
@@ -179,6 +187,7 @@ const components = fs
 if (LAYOUT) components.unshift(LAYOUT);
 if (COMPOSITION) components.unshift(COMPOSITION);
 if (SPACE) components.unshift(SPACE);
+if (PREVIEW) components.unshift(PREVIEW);
 
 const totalPublic = new Set(components.flatMap((c) => c.classes)).size;
 const allInternal = components.reduce((n, c) => n + c.internal_class_count, 0);

@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-65 componentes · **563 clases públicas** de 631 selectores totales en el CSS.
+66 componentes · **576 clases públicas** de 678 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -31,6 +31,53 @@ Dark mode: `<html data-theme="dark">`. No agregues overrides por tema.
 
 El tag va pineado a propósito: lo que se entrega no cambia de aspecto porque el DS mergeó algo.
 Para subir de versión, ver DEPLOYMENT.md §Releases.
+
+---
+
+### `preview-native` — Preview nativo (marco de teléfono) · layout
+
+Ver una pantalla nativa en un navegador: el marco a 390px con data-platform="native", que hace que los tokens resuelvan a los valores de teléfono. Adentro van los componentes de Embassy sin cambios. Es una herramienta de revisión: ninguna clase .phone* sale en una entrega.
+
+Clases públicas: `.btn-elevated` · `.btn-ghost` · `.btn-lg` · `.btn-link` · `.btn-next` · `.btn-primary` · `.btn-secondary` · `.btn-sm` · `.btn-tertiary` · `.btn-text` · `.btn-xl` · `.btn-xs` · `.checkbox-label` · `.chip` · `.combobox-trigger` · `.date-picker-trigger` · `.field-input` · `.field-textarea` · `.icon-btn` · `.input-group` · `.item` · `.list-item` · `.nav-item` · `.otp-slot` · `.pagination-item` · `.phone` · `.phone-auto` · `.phone-caption` · `.phone-nav` · `.phone-row` · `.phone-screen` · `.phone-status` · `.phone-tab` · `.phone-tabbar` · `.radio-label` · `.search-bar` · `.search-field` · `.search-icon-btn` · `.search-input` · `.seg-btn` · `.select-trigger` · `.shell-menu-btn` · `.switch-label` · `.tab` · `.table` · `.toggle` · `.toolbar-btn`
+
+```html
+<link rel="stylesheet" href="css/preview-native.css">
+
+  <div class="phone-row">
+    <figure class="phone" data-platform="native" data-targets>
+      <div class="phone-status"></div>
+      <header class="phone-nav">…</header>
+      <div class="phone-screen">…  ← la pantalla, con las clases normales …</div>
+      <nav class="phone-tabbar">…</nav>
+    </figure>
+  </div>
+
+POR QUÉ ESTO NO ES UN MOCKUP. Adentro del marco van los componentes de
+Embassy sin cambios: los mismos `btn-primary`, `chip`, `field-input`. Lo único
+que cambia es que `data-platform="native"` hace que los tokens resuelvan a los
+valores de teléfono —cuerpo 16, target 48— definidos en variables.css. Si el
+preview se ve bien, la app se va a ver así, porque lee los mismos números.
+
+Lo que el preview NO puede mostrar, y hay que tener presente al aprobar:
+la sombra de Android (elevation), el ripple, el rebote del scroll, el teclado
+del sistema y las fuentes reales del dispositivo. Para eso hace falta el
+simulador. Ver MOBILE.md §7.
+
+Dos capas, separadas a propósito:
+
+  1. DENSIDAD — hace que los controles crezcan a `--control-height` cuando el
+     contexto es nativo. Existe porque las alturas de los componentes todavía
+     están literales en su propio CSS (`min-height: 32px`, `height: 36px`…),
+     así que el eje de plataforma solo no las mueve. Está scopeada a
+     [data-platform="native"]: en web no cambia ni un píxel. La deuda —que los
+     componentes lean los tokens de densidad— está registrada en
+     GOVERNANCE.md §12.
+
+  2. MARCO — el cromo del teléfono. Es una herramienta de revisión, no parte
+     del producto: nada de `.phone*` sale en una entrega.
+```
+
+Regla completa: `component-rules/mobile.md` · CSS: `css/preview-native.css`
 
 ---
 
