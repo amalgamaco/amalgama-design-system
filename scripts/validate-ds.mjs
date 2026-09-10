@@ -10,11 +10,13 @@
  *   4. nav-anchors    every navigate('c-*') target resolves — FAIL
  *   5. manifest       component-rules/manifest.json exists & count == rule files — FAIL
  *   6. rules-metadata each component-rules/*.md has required frontmatter fields — FAIL
+ *  12. generated      manifest.json / public-api.* must match their generators — FAIL
  *  11. release-tags  local v* tags must be pushed; versions cited in docs must exist — FAIL
  *   7. inline-hex     hex in index.html inline styles (swatch tables excluded) — WARN
  */
 import fs from "node:fs";
 import { execFileSync } from "node:child_process";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -242,6 +244,47 @@ console.log("\n[11] tags de release");
     fantasma.length
       ? fail(`versión(es) citadas en los docs/scripts que no existen como tag: ${fantasma.join(", ")}`)
       : ok(`${citadas.size} versión(es) citadas, todas existen como tag`);
+  }
+}
+
+// ── 12. archivos generados al día ────────────────────────────────────────
+// manifest.json, public-api.json y PUBLIC-API.md se DERIVAN de component-rules/*.md
+// y css/components/. Tocar un .md y no regenerar deja la fuente y el registro
+// diciendo cosas distintas — y el registro es lo que leen los agentes, así que la
+// regla llega a la doc y no a las herramientas. Pasó dos veces (search.md editado a
+// mano en el manifest; button.md con --radius-button sin regenerar).
+// [5] y [5b] no lo agarran: miran cantidades y cobertura, no si el contenido está al día.
+// Sin efectos secundarios: los generadores escriben en un temp vía --out y se compara.
+console.log("\n[12] archivos generados al día");
+{
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "ds-gen-"));
+  const run = (cmd, args) => {
+    try {
+      execFileSync(cmd, args, { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "ignore", "pipe"] });
+      return true;
+    } catch { return false; }
+  };
+  try {
+    const objetivos = [];
+    if (run("python3", ["scripts/build-manifest.py", "--out", path.join(tmp, "manifest.json")]))
+      objetivos.push(["component-rules/manifest.json", path.join(tmp, "manifest.json"), "python3 scripts/build-manifest.py"]);
+    else warn("no se pudo correr build-manifest.py (¿falta PyYAML?) — manifest.json sin verificar");
+
+    if (run("node", ["scripts/build-public-api.mjs", "--out", path.join(tmp, "PUBLIC-API.md"),
+                     "--out-json", path.join(tmp, "public-api.json")])) {
+      objetivos.push(["PUBLIC-API.md", path.join(tmp, "PUBLIC-API.md"), "node scripts/build-public-api.mjs"]);
+      objetivos.push(["public-api.json", path.join(tmp, "public-api.json"), "node scripts/build-public-api.mjs"]);
+    } else warn("no se pudo correr build-public-api.mjs — la API pública quedó sin verificar");
+
+    const viejos = objetivos.filter(([rel, gen]) =>
+      !fs.existsSync(path.join(ROOT, rel)) || read(rel) !== fs.readFileSync(gen, "utf8"));
+    viejos.length
+      ? fail(`${viejos.length} archivo(s) generado(s) desactualizado(s) respecto de sus fuentes: ` +
+             viejos.map(([rel]) => rel).join(", ") +
+             `. Regeneralo(s): ${[...new Set(viejos.map(([, , cmd]) => cmd))].join(" && ")}`)
+      : ok(`${objetivos.length} archivo(s) generado(s), todos reproducibles desde sus fuentes`);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
   }
 }
 

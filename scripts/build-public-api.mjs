@@ -26,9 +26,15 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CSS_DIR = path.join(ROOT, "css", "components");
 const MANIFEST = path.join(ROOT, "component-rules", "manifest.json");
 
-const outArgIdx = process.argv.indexOf("--out");
-const OUT_MD = path.join(ROOT, outArgIdx > -1 ? process.argv[outArgIdx + 1] : "PUBLIC-API.md");
-const OUT_JSON = path.join(ROOT, "public-api.json");
+// --out / --out-json redirigen la salida sin tocar los archivos versionados: es lo que
+// usa el chequeo [12] de validate-ds.mjs para comparar sin dejar efectos secundarios.
+// path.resolve y no path.join: con join, una ruta absoluta se pegaba detrás de ROOT.
+const argAfter = (flag) => {
+  const i = process.argv.indexOf(flag);
+  return i > -1 ? process.argv[i + 1] : null;
+};
+const OUT_MD = path.resolve(ROOT, argAfter("--out") ?? "PUBLIC-API.md");
+const OUT_JSON = path.resolve(ROOT, argAfter("--out-json") ?? "public-api.json");
 
 /** Primer bloque de comentario del archivo = el header canónico. */
 function header(css) {

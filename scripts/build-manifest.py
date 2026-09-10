@@ -46,7 +46,9 @@ manifest = {
     "note": "Machine-readable registry. Source of truth = component-rules/<id>.md frontmatter (schema in component-rules/README.md). Regenerate with scripts/build-manifest.py.",
     "count": len(comps), "components": comps,
 }
-out = os.path.join(RULES, "manifest.json")
+# --out redirige la salida sin tocar el archivo versionado (chequeo [12] de validate-ds).
+out = os.path.abspath(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv \
+      else os.path.join(RULES, "manifest.json")
 open(out, "w", encoding="utf-8").write(json.dumps(manifest, ensure_ascii=False, indent=2))
 print(f"wrote {out} ({len(comps)} components)")
 if errors:
