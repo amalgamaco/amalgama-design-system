@@ -25,6 +25,7 @@ variants:
   - {name: bleed, class: column-bleed, purpose: "No max-width, generous fluid gutters. The page uses the whole monitor instead of leaving two empty margins — the fastest way out of the generated-landing silhouette. The text still stops at `.measure`."}
   - {name: rail, class: column-rail, purpose: "Wide content + a narrow side track for metadata, margin notes or an index. The most 'studio' of the four, and the one a generator imitates worst, because it forces deciding what is a note."}
   - {name: split, class: column-split, purpose: "Two asymmetric tracks, 6fr/4fr. For a hero with a working control or an image on one side. Never 50/50: equal halves do not say which one leads."}
+  - {name: "editorial", class: "editorial-lg · editorial-md · editorial-sm", purpose: "The opening title of a landing, a proposal cover or a report. One per page, on the h1, never inside the app shell — a product screen opens with page-title. The body stays on the product scale on purpose: what reads as ours is the DISTANCE between a 96px title and a 13.5px body, not everything getting bigger."}
   - {name: "grid-12", class: "grid-12 + span-1…span-12", purpose: "The 12-column grid, used INSIDE the chosen structure. This is what lets a section be 7+5 or 8+4 instead of three equal blocks. Collapses to one column below 900px."}
 sizes:
   - {name: "(no aplica)", class: "—", use: "the width is the variant, not a size modifier."}
@@ -64,6 +65,9 @@ common_mistakes:
   - "Choosing `column` at 1200 by default without asking whether the page needs to look different. It is the right answer for a dashboard and the boring one for a landing."
   - "Using `grid-12` to lay out three equal blocks three sections in a row. Twelve columns exist to make asymmetry cheap — 7+5, 8+4, 5+4+3 — not to rebuild the three-card grid with new class names."
   - "Widening the column and letting the paragraphs widen with it. The width is the layout's; the text still stops at `.measure`."
+  - "Two editorial titles on one page. Two openings is no opening."
+  - "Using an editorial size inside the app shell, or on an h2 that is not the page's opening. It is not 'the big heading style', it is the cover."
+  - "Scaling the body up to match the title. The contrast IS the signature — bump the body and it disappears."
   - "Numbering sections that are not a real set — three sections numbered `01 / 07` because seven looked better."
   - "An overline on every section. Repeated, it stops classifying and becomes texture."
   - "Five sections with the same padding, alternating background on and off. That is an accordion, not a page."
@@ -95,7 +99,7 @@ related_rules: [COMPOSICION.md]
 
 source:
   css: css/composition.css
-  classes: [column, column-1280, column-1440, column-1600, column-1920, column-read, column-form, column-bleed, column-rail, column-split, grid-12, span-1, span-2, span-3, span-4, span-5, span-6, span-7, span-8, span-9, span-10, span-11, span-12, measure, measure-lead, section, section-lead, section-tight, overline, section-index]
+  classes: [editorial-lg, editorial-md, editorial-sm, column, column-1280, column-1440, column-1600, column-1920, column-read, column-form, column-bleed, column-rail, column-split, grid-12, span-1, span-2, span-3, span-4, span-5, span-6, span-7, span-8, span-9, span-10, span-11, span-12, measure, measure-lead, section, section-lead, section-tight, overline, section-index]
   docs_anchor: c-composition
 ---
 

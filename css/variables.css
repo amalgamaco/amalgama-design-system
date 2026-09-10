@@ -350,6 +350,21 @@
      Format: --font-size-{role}  /  --line-height-{role}
   ───────────────────────────────────── */
 
+  /* Registro editorial — SOLO para el título de apertura de una landing, una portada
+     de propuesta o un reporte. No entra a producto: la escala de abajo es la de las
+     pantallas y no se toca.
+     Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee
+     tímido — que es exactamente el default de una página generada: todo un poco
+     grande y nada dominante. La identidad no está en agrandar todo, está en el
+     CONTRASTE entre un título de 96 y un cuerpo de 13.5.
+     Uno solo por página. Dos títulos editoriales son dos aperturas. */
+  --font-size-editorial-lg: clamp(52px, 8vw, 96px);  --line-height-editorial-lg: 1.02;
+  --font-size-editorial-md: clamp(40px, 6vw, 68px);  --line-height-editorial-md: 1.06;
+  --font-size-editorial-sm: clamp(32px, 4.5vw, 46px); --line-height-editorial-sm: 1.1;
+  /* A este tamaño el tracking se mide en em, no en px: -0.4px no se nota en 96 y
+     desarma un título de 32. */
+  --letter-spacing-editorial: -0.02em;
+
   /* Epilogue — Display & Headings */
   --font-size-display:     28px;   --line-height-display:     1.15;
   --font-size-heading-xl:  24px;   --line-height-heading-xl:  1.2;

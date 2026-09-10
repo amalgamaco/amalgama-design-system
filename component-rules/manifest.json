@@ -2015,6 +2015,7 @@
         "bleed",
         "rail",
         "split",
+        "editorial",
         "grid-12"
       ],
       "sizes": [
@@ -2078,6 +2079,9 @@
       "source": {
         "css": "css/composition.css",
         "classes": [
+          "editorial-lg",
+          "editorial-md",
+          "editorial-sm",
           "column",
           "column-1280",
           "column-1440",

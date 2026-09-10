@@ -137,6 +137,7 @@ Los de `design.md` §8, contados como una falla cada uno.
 | `H6` | Elemento que se puede sacar sin perder significado | BAJA |
 | `H7` | Más de un overline en mayúsculas en la página — repetido deja de clasificar y es textura | MEDIA | inspección + regex |
 | `H8` | Ícono por reflejo: uno arriba del título de cada card, en superficie cuadrada con radio | MEDIA | inspección |
+| `H9` | Titular de apertura en la escala de producto (28px) donde iba el registro editorial, o dos editoriales en la misma página | MEDIA | inspección + regex |
 
 ## I · Proceso y drift
 

@@ -22,6 +22,7 @@
    <section class="section section-lead">…</section>
    <span class="section-index">02 / 05</span>
    <p class="overline">Informe trimestral</p>
+   <h1 class="editorial-lg">Cuánto tardan las altas</h1>   <!-- uno por página, nunca en el shell -->
    <p class="measure">Texto corrido que corta a tiempo aunque la página sea ancha.</p>
 ═══════════════════════════════════════ */
 
@@ -144,6 +145,26 @@
   color: var(--text-muted);
   margin: 0 0 var(--space-3);
 }
+
+/* ── Registro editorial ────────────────────────────────────────────────────
+   El título de apertura de una landing, una portada o un reporte. Va en el h1, una
+   sola vez por página, y NUNCA adentro del app shell: una pantalla de producto abre
+   con `page-title`, no con esto.
+   El cuerpo de la página sigue en la escala de producto a propósito. Lo que se
+   reconoce no es el tamaño del título: es la distancia entre el título y el resto. */
+.editorial-lg,
+.editorial-md,
+.editorial-sm {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-editorial);
+  text-wrap: balance;          /* que no quede una palabra huérfana en la última línea */
+  margin: 0 0 var(--space-4);
+  max-width: 18ch;             /* un titular largo se parte en columnas, no en una línea eterna */
+}
+.editorial-lg { font-size: var(--font-size-editorial-lg); line-height: var(--line-height-editorial-lg); }
+.editorial-md { font-size: var(--font-size-editorial-md); line-height: var(--line-height-editorial-md); }
+.editorial-sm { font-size: var(--font-size-editorial-sm); line-height: var(--line-height-editorial-sm); max-width: 24ch; }
 
 /* ── Índice de sección — el gesto de Amalgama ──────────────────────────────
    Va en todo lo que publicamos. Es el eje E de COMPOSICION.md: el marcador formal

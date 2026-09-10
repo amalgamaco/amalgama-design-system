@@ -28,7 +28,13 @@ Esto es lo contrario: **lo que no varía nunca**, y es lo que hace que un trabaj
 nuestro. Hasta septiembre de 2026 esa firma era solo tipografía y color, y por eso alcanzaba con
 cambiar la paleta para que la página pudiera ser de cualquiera.
 
-## A · Tracking de versalitas: 0.04em en mono
+## A · Dos registros tipográficos, y la distancia entre ellos
+
+El titular de apertura vive en el registro editorial (hasta 96px) y el cuerpo se queda en la
+escala de producto (13.5px). Esa distancia es la firma; agrandar todo por igual es el default.
+Y las versalitas van apretadas y en mono. Reglas 0b y 1.
+
+## A2 · Tracking de versalitas: 0.04em en mono
 
 El default de una página generada es 0.12–0.16em en sans. El nuestro es **apretado y
 monoespaciado**, que se lee como etiqueta de sistema y no como eyebrow editorial. Es la diferencia
@@ -147,6 +153,21 @@ es una falla (`D3`), y es el error clásico de sacar el `max-width`.
 
 **Verificación:** una sola clase de estructura en la página; y si es `bleed`, todo párrafo de
 texto corrido tiene `measure` o `measure-lead`.
+
+## 0b. El titular de apertura vive en otro registro
+
+**No:** un hero de 28 o 32px porque es el tamaño más grande de la escala. Todo un poco grande y
+nada dominante es, literalmente, la primera impresión de una página generada.
+
+**En su lugar:** el registro editorial — `.editorial-lg` (hasta 96px), `.editorial-md` (68) o
+`.editorial-sm` (46). Uno solo por página, en el `h1`, y **nunca adentro del app shell**: una
+pantalla de producto abre con `page-title`, no con esto.
+
+**Y el cuerpo no se toca.** La escala de producto se queda donde está. Lo que se reconoce no es
+el tamaño del título: es la **distancia** entre un título de 96 y un cuerpo de 13.5. Si agrandás
+las dos cosas, el gesto desaparece y volvés al "todo un poco grande".
+
+**Verificación:** una sola clase `editorial-*` en la página, y está en el `h1`.
 
 ## 1. El overline se decide, y cuando va, va con nuestro tracking
 

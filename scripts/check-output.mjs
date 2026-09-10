@@ -216,6 +216,19 @@ for (const file of files) {
     }
   }
 
+  // H9 — dos titulares editoriales. El registro editorial es la apertura de la página; dos
+  // aperturas es ninguna. Y usado como "el estilo del título grande" deja de ser una portada.
+  if (!allows.has("H9")) {
+    const ed = [...src.matchAll(/class="[^"]*\beditorial-(lg|md|sm)\b/g)];
+    if (ed.length > 1) {
+      findings.push({
+        id: "H9", sev: "MEDIA",
+        desc: "más de un titular en registro editorial — es la apertura de la página, va una sola vez",
+        file, line: lineOf(src, ed[1].index), evidence: `${ed.length} usos de editorial-*`,
+      });
+    }
+  }
+
   // D9 — column-bleed sin acotar el texto. Sacar el ancho máximo es una decisión de estructura
   // válida (COMPOSICION.md regla 0); dejar que el párrafo mida 200 caracteres no lo es.
   // Se mira el atributo class, no el texto: el primer intento buscaba la palabra suelta y una
