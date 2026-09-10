@@ -151,6 +151,23 @@ Los de `design.md` §8, contados como una falla cada uno.
 | `I3` | No se emitió el screen report en un rediseño | MEDIA | falta |
 | `I4` | Gap del DS improvisado en vez de marcado | ALTA | revisión |
 
+## M · Nativo (React Native)
+
+Solo se pueden fallar en una app. Las demás familias aplican igual: una pantalla nativa no se
+audita distinto que una web. Ver `MOBILE.md`.
+
+| ID | Falla | Sev | Cómo se detecta |
+|---|---|---|---|
+| `M1` | Tamaño tipográfico escrito a mano en vez de leerlo de `native`/`nativeDark` | ALTA | `grep -nE "fontSize:\s*[0-9]"` |
+| `M2` | Superficie tocable por debajo de 48 (`--target-min`) | BLOQ | AST sobre `Pressable`/`TouchableOpacity` sin `hitSlop` ni alto suficiente |
+| `M3` | Safe area hardcodeada (`paddingTop: 44`) en vez de `useSafeAreaInsets()` | ALTA | regex |
+| `M4` | Patrón de escritorio encogido en vez del patrón nativo: tabla que scrollea de costado, modal centrado chico, menú flotante, paginación numerada | ALTA | inspección contra el mapa de `MOBILE.md` §5 |
+| `M5` | La escala web (cuerpo 13,5) en una app: se olvidó `data-platform="native"` o el export `native` | ALTA | comparación de tokens |
+| `M6` | `--column-gutter`, `.grid-12`, `max-width` o medida en `ch` en una pantalla nativa | MEDIA | regex |
+| `M7` | `lineHeight` o `letterSpacing` pasados como multiplicador o `em`, que en RN se ignoran en silencio | ALTA | `grep -nE "(lineHeight\|letterSpacing):\s*(0?\.[0-9]\|1\.[0-9])"` |
+| `M8` | Utilidades de gluestack/Tailwind sin traducir (`bg-blue-500`, `rounded-xl`, `text-sm`) | ALTA | regex — es `A8` en territorio nativo |
+| `M9` | Probado en una sola plataforma: sombras, fuentes y ripple no se dibujan igual en iOS y Android | MEDIA | falta la evidencia de las dos |
+
 ---
 
 ## Plantilla de hallazgo
