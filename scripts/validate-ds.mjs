@@ -255,6 +255,30 @@ console.log("\n[11] tags de release");
 // mano en el manifest; button.md con --radius-button sin regenerar).
 // [5] y [5b] no lo agarran: miran cantidades y cobertura, no si el contenido está al día.
 // Sin efectos secundarios: los generadores escriben en un temp vía --out y se compara.
+// ── 11c. el header no se cierra antes de tiempo ──────────────────────────
+// Pasó de verdad: accordion.css tenía "--color-*/--text-*" en la prosa del header.
+// Ese */ CIERRA el comentario, así que todo lo que seguía —incluido el bloque Uso:—
+// quedaba como CSS suelto, y el parser se comía la primera regla del archivo
+// (.accordion { width: 100% }) usando la prosa como selector. En el navegador no
+// hay error: simplemente falta una regla. Y en PUBLIC-API el componente salía sin
+// markup, que es como lo encontramos.
+console.log("\n[11c] el header de cada componente cierra donde tiene que cerrar");
+{
+  const CIERRE = "═══════════════════════════════════════ */";
+  const rotos = [];
+  for (const f of fs.readdirSync(path.join(ROOT, "css/components")).filter((f) => f.endsWith(".css"))) {
+    const src = read(`css/components/${f}`);
+    if (!src.startsWith("/*")) continue;
+    const primer = src.indexOf("*/");
+    const cierre = src.indexOf(CIERRE);
+    if (cierre !== -1 && primer !== -1 && primer < cierre) rotos.push(f);
+  }
+  rotos.length
+    ? fail(`${rotos.length} header(s) se cierran antes de tiempo por un */ en la prosa ` +
+           `(escribí "--color-* y --text-*", no "--color-*/--text-*"): ${rotos.join(", ")}`)
+    : ok("ningún header se cierra antes de tiempo");
+}
+
 console.log("\n[12] archivos generados al día");
 {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "ds-gen-"));

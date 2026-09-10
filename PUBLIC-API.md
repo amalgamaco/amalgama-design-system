@@ -150,6 +150,22 @@ Vertically stacked, expandable sections that reveal or hide long content to keep
 
 Clases públicas: `.accordion` · `.accordion-bordered` · `.accordion-chevron` · `.accordion-content` · `.accordion-content-inner` · `.accordion-item` · `.accordion-trigger`
 
+```html
+<div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-1" onclick="accToggle(this)">
+        ¿Cómo aplico el DS?
+        <svg class="accordion-chevron">…</svg>
+      </button>
+    </h3>
+    <div class="accordion-content" data-state="closed" id="acc-1" role="region">
+      <div class="accordion-content-inner">Importá el theme y copiá el componente.</div>
+    </div>
+  </div>
+</div>
+```
+
 Regla completa: `component-rules/accordion.md` · CSS: `css/components/accordion.css`
 
 ---
@@ -250,6 +266,10 @@ A read-only pill communicating an item's status, category, or a count — each c
 **Variantes:** open · active · closed · draft · archived · warning · tertiary · info · label
 
 Clases públicas: `.badge` · `.badge-active` · `.badge-archived` · `.badge-closed` · `.badge-draft` · `.badge-info` · `.badge-label` · `.badge-link` · `.badge-open` · `.badge-tertiary` · `.badge-warning`
+
+```html
+<span class="badge badge-open">Abierta</span>
+```
 
 Regla completa: `component-rules/badge.md` · CSS: `css/components/badge.css`
 
@@ -1223,6 +1243,22 @@ Choose exactly one option from a short-to-medium bounded list via a themed dropd
 **Tamaños:** md · sm
 
 Clases públicas: `.select` · `.select-content` · `.select-group` · `.select-icon` · `.select-item` · `.select-item-check` · `.select-item-text` · `.select-label` · `.select-scroll-down` · `.select-scroll-up` · `.select-separator` · `.select-trigger` · `.select-value` · `.select-viewport`
+
+```html
+<div class="select">
+  <button class="select-trigger" aria-haspopup="listbox" aria-expanded="false">
+    <span class="select-value">Últimos 90 días</span>
+    <span class="select-icon">▾</span>
+  </button>
+</div>
+
+Comportamiento: initSelect() en index.html (abrir/cerrar, teclado ↑↓/Home/End/
+type-ahead/Enter/Esc, foco al panel, retorno al trigger, check en seleccionado).
+Posicionamiento: absolute bajo el trigger (sin detección de colisión de viewport
+— misma simplificación aceptada que Date Picker / Popover buildless).
+
+Dependencia: variables.css. Consume sólo tokens semánticos → light/dark sin overrides.
+```
 
 Regla completa: `component-rules/select.md` · CSS: `css/components/select.css`
 

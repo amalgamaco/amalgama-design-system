@@ -28,6 +28,14 @@
          .select-separator → SelectSeparator
        .select-scroll-down → SelectScrollDownButton
 
+   Uso:
+   <div class="select">
+     <button class="select-trigger" aria-haspopup="listbox" aria-expanded="false">
+       <span class="select-value">Últimos 90 días</span>
+       <span class="select-icon">▾</span>
+     </button>
+   </div>
+
    Comportamiento: initSelect() en index.html (abrir/cerrar, teclado ↑↓/Home/End/
    type-ahead/Enter/Esc, foco al panel, retorno al trigger, check en seleccionado).
    Posicionamiento: absolute bajo el trigger (sin detección de colisión de viewport

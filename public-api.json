@@ -225,7 +225,7 @@
       "rules_files": [
         "component-rules/accordion.md"
       ],
-      "usage": "",
+      "usage": "<div class=\"accordion\">\n  <div class=\"accordion-item\">\n    <h3>\n      <button class=\"accordion-trigger\" aria-expanded=\"false\" aria-controls=\"acc-1\" onclick=\"accToggle(this)\">\n        ¿Cómo aplico el DS?\n        <svg class=\"accordion-chevron\">…</svg>\n      </button>\n    </h3>\n    <div class=\"accordion-content\" data-state=\"closed\" id=\"acc-1\" role=\"region\">\n      <div class=\"accordion-content-inner\">Importá el theme y copiá el componente.</div>\n    </div>\n  </div>\n</div>",
       "classes": [
         "accordion",
         "accordion-bordered",
@@ -409,7 +409,7 @@
       "rules_files": [
         "component-rules/badge.md"
       ],
-      "usage": "",
+      "usage": "<span class=\"badge badge-open\">Abierta</span>",
       "classes": [
         "badge",
         "badge-active",
@@ -1907,7 +1907,7 @@
       "rules_files": [
         "component-rules/select.md"
       ],
-      "usage": "",
+      "usage": "<div class=\"select\">\n  <button class=\"select-trigger\" aria-haspopup=\"listbox\" aria-expanded=\"false\">\n    <span class=\"select-value\">Últimos 90 días</span>\n    <span class=\"select-icon\">▾</span>\n  </button>\n</div>\n\nComportamiento: initSelect() en index.html (abrir/cerrar, teclado ↑↓/Home/End/\ntype-ahead/Enter/Esc, foco al panel, retorno al trigger, check en seleccionado).\nPosicionamiento: absolute bajo el trigger (sin detección de colisión de viewport\n— misma simplificación aceptada que Date Picker / Popover buildless).\n\nDependencia: variables.css. Consume sólo tokens semánticos → light/dark sin overrides.",
       "classes": [
         "select",
         "select-content",

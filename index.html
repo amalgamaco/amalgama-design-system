@@ -3461,6 +3461,31 @@ body { overflow-x: clip; }
    demostrara el efecto con CSS propio, podría seguir "funcionando" el día que
    el archivo real se rompa. */
 #s-mobile .phone-row { margin-block: 4px; }
+
+/* ── Components · Nativo (la lista generada) ─────────────────── */
+#s-mobile-components .mc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+#s-mobile-components .mc-cell { background: var(--ds-card); border: 1px solid var(--ds-card-border);
+  border-radius: 12px; padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+#s-mobile-components .mc-head { display: flex; flex-direction: column; gap: 3px; }
+#s-mobile-components .mc-id { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--ds-text-1); text-decoration: none; font-weight: 500; }
+#s-mobile-components .mc-id:hover { color: var(--color-primary); text-decoration: underline; }
+#s-mobile-components .mc-gs, #s-mobile-components .mc-gs-no {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .03em; }
+#s-mobile-components .mc-gs    { color: var(--color-on-success-container); }
+#s-mobile-components .mc-gs-no { color: var(--text-muted); }
+#s-mobile-components .mc-gs-inline { display: inline-block; margin-left: 6px; }
+#s-mobile-components .mc-demo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding-top: 4px; min-height: 52px; }
+#s-mobile-components .mc-demo > * { max-width: 100%; }
+#s-mobile-components .mc-nodemo { font-size: 11px; color: var(--ds-text-3); font-style: italic; }
+#s-mobile-components .mc-note { margin: 0; font-size: 11.5px; line-height: 1.45; color: var(--ds-text-3);
+  border-top: 1px solid var(--ds-card-border); padding-top: 9px; }
+/* Mismo motivo que en la galería: el snackbar es fixed y se iría de su celda. */
+#s-mobile-components .mc-demo .snackbar { position: static; transform: none; animation: none; min-width: 0; }
+#s-mobile-components .mc-demo .toast { position: static; animation: none; }
+/* Las grillas de los demos traen su propio minmax y desbordan la celda. */
+#s-mobile-components .mc-demo :is(.people-grid, .stats-grid, .card-grid) { grid-template-columns: 1fr; width: 100%; }
 /* Galería de componentes en nativo */
 #s-mobile .ng-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
 #s-mobile .ng-cell { background: var(--ds-card); border: 1px solid var(--ds-card-border); border-radius: 12px; padding: 16px; }
@@ -3561,6 +3586,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="composition"       onclick="navigate('composition')"><i      data-lucide="columns-3"            style="width:13px;height:13px"></i> Composición</div>
       <div class="ds-nav-item" data-section="space"             onclick="navigate('space')"><i            data-lucide="orbit"                style="width:13px;height:13px"></i> Capa espacial</div>
       <div class="ds-nav-item" data-section="mobile"            onclick="navigate('mobile')"><i           data-lucide="smartphone"           style="width:13px;height:13px"></i> Nativo</div>
+      <div class="ds-nav-item" data-section="mobile-components"  onclick="navigate('mobile-components')"><i data-lucide="layout-grid"          style="width:13px;height:13px"></i> Componentes en nativo</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-aspect-ratio" onclick="navigate('c-aspect-ratio')">Aspect Ratio</div>
         <div class="ds-nav-item" data-section="c-empty"    onclick="navigate('c-empty')">Empty State</div>
@@ -5496,6 +5522,537 @@ body { overflow-x: clip; }
       <p class="ds-p" style="margin-top:22px">Los otros <strong>19 no se portan: cambian de patrón</strong>, y por eso no están acá — el reemplazo de cada uno está en la tabla de la sección 7. Y hay una tercera categoría que directamente no existe sin puntero: el <code>tooltip</code>, el <code>context-menu</code> y el <code>menubar</code>.</p>
 
     </section>
+
+    <!-- BEGIN mobile-components (generado) -->
+
+    <!-- ═══════════ COMPONENTS · NATIVO (GENERADO — build-mobile-index.mjs) ═══════════ -->
+    <section class="ds-section" id="s-mobile-components">
+      <div class="ds-page-tag">Components · Nativo</div>
+      <h1 class="ds-page-title">Componentes en nativo</h1>
+      <p class="ds-page-desc">El mismo catálogo, visto desde una app. <strong>No es una segunda biblioteca:</strong> hay un solo componente por nombre y su ficha sigue siendo su página en Components — lo que cambia acá son los valores de token y, en 23 casos, el patrón. Esta página es generada desde <code>public-api.json</code>, así que no puede decir algo distinto del CSS.</p>
+
+      <div class="ds-callout"><strong>Los demos están renderizados con los tokens de teléfono</strong> (<code>data-platform="native"</code>): cuerpo 16, controles a 48. Son los componentes de Embassy, no los de gluestack — la etiqueta verde dice de qué componente de gluestack se copia la estructura y el comportamiento, y la gris con <code>✗</code>, cuáles hay que armar con primitivas. Por qué el preview no puede ser gluestack, en la página <a href="#" onclick="navigate('mobile');return false">Nativo</a>.</div>
+
+      <h2 class="ds-h2">Se portan tal cual · 37</h2>
+      <p class="ds-p">Mismo componente, otros valores. Se rediseñan cero.</p>
+      <div class="ds-preview" data-platform="native" style="display:block;padding:22px">
+        <div class="mc-grid">
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('accordion');return false">accordion</a>
+              <span class="mc-gs">Accordion</span>
+            </div>
+            <div class="mc-demo"><div class="accordion">
+  <div class="accordion-item">
+    <h3>
+      <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-1" onclick="accToggle(this)">
+        ¿Cómo aplico el DS?
+        <svg class="accordion-chevron"></svg>
+      </button>
+    </h3>
+    <div class="accordion-content" data-state="closed" id="acc-1" role="region">
+      <div class="accordion-content-inner">Importá el theme y copiá el componente.</div>
+    </div>
+  </div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('alert');return false">alert</a>
+              <span class="mc-gs">Alert</span>
+            </div>
+            <div class="mc-demo"><div class="alert alert-info" role="alert">
+  <svg class="alert-icon"></svg>
+  <div class="alert-body">
+    <div class="alert-title">Mantenimiento programado</div>
+    <div class="alert-description">El sistema estará en modo lectura el sábado de 2 a 4am.</div>
+  </div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('attachment');return false">attachment</a>
+              <span class="mc-gs-no">✗ no tiene · HStack + Icon + Text</span>
+            </div>
+            <div class="mc-demo"><ul class="attachment-list">
+  <li class="attachment">
+    <span class="attachment-icon"><svg></svg></span>
+    <div class="attachment-body">
+      <div class="attachment-name">CV_Ana_Torres.pdf</div>
+      <div class="attachment-meta">240 KB · PDF</div>
+    </div>
+    <button class="icon-btn btn-sm attachment-remove" aria-label="Quitar">✕</button>
+  </li>
+</ul></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('avatar');return false">avatar</a>
+              <span class="mc-gs">Avatar</span>
+            </div>
+            <div class="mc-demo"><span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('badge');return false">badge</a>
+              <span class="mc-gs">Badge</span>
+            </div>
+            <div class="mc-demo"><span class="badge badge-open">Abierta</span></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('button');return false">button</a>
+              <span class="mc-gs">Button</span>
+            </div>
+            <div class="mc-demo"><button class="btn-primary">Crear vacante</button></div>
+            <p class="mc-note">Sus variant (solid/outline/link) y action (primary/secondary/positive/negative) NO son nuestras variantes: se mapean a las cinco de Embassy, no se adoptan.</p>
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('calendar');return false">calendar</a>
+              <span class="mc-gs">Calendar</span>
+            </div>
+            <div class="mc-demo"><div class="calendar">
+  <div class="calendar-header">
+    <button class="calendar-nav-btn" aria-label="Mes anterior">‹</button>
+    <span class="calendar-caption">Julio 2026</span>
+    <button class="calendar-nav-btn" aria-label="Mes siguiente">›</button>
+  </div>
+  <div class="calendar-weekdays">...</div>
+  <div class="calendar-grid">...</div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('card');return false">card</a>
+              <span class="mc-gs">Card</span>
+            </div>
+            <div class="mc-demo"><div class="card">
+  <div class="card-header">
+    <div class="card-title">Título</div>
+    <p class="card-desc">Descripción breve.</p>
+  </div>
+  <div class="card-content">Contenido de la tarjeta</div>
+  <div class="card-footer"><button class="btn-text">Acción</button></div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('carousel');return false">carousel</a>
+              <span class="mc-gs-no">✗ no tiene · FlatList horizontal con paginado</span>
+            </div>
+            <div class="mc-demo"><div class="carousel">
+  <div class="carousel-content">
+    <div class="carousel-item"></div>
+    <div class="carousel-item"></div>
+  </div>
+  <button class="carousel-btn carousel-btn-prev">‹</button>
+  <button class="carousel-btn carousel-btn-next">›</button>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('checkbox');return false">checkbox</a>
+              <span class="mc-gs">Checkbox</span>
+            </div>
+            <div class="mc-demo"><label class="checkbox-label">
+  <input type="checkbox" class="checkbox">
+  Acepto los términos
+</label></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('chip');return false">chip</a>
+              <span class="mc-gs-no">✗ no tiene · Pressable + Text</span>
+            </div>
+            <div class="mc-demo"><button class="chip">Sugerencia</button></div>
+            <p class="mc-note">Su Badge es de solo lectura, igual que el nuestro: no sirve de chip. Se dibuja a 40 y se toca a 48 con hitSlop.</p>
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('collapsible');return false">collapsible</a>
+              <span class="mc-gs">Accordion</span>
+            </div>
+            <div class="mc-demo"><div class="collapsible">
+  <button class="collapsible-trigger" aria-expanded="false" aria-controls="col-1" onclick="collapsibleToggle(this)">
+    Ver más
+  </button>
+  <div class="collapsible-content" data-state="closed" id="col-1">
+    <div class="collapsible-content-inner">Contenido adicional</div>
+  </div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('description');return false">description</a>
+              <span class="mc-gs-no">✗ no tiene · VStack + Text</span>
+            </div>
+            <div class="mc-demo"><div class="desc-section">
+  <div class="desc-section-header">
+    <input class="desc-title-input" value="Responsabilidades">
+    <button class="desc-delete-btn">✕</button>
+  </div>
+  <div class="desc-editor" contenteditable="true"
+       data-placeholder="Escribe aqui...">
+  </div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('divider');return false">divider</a>
+              <span class="mc-gs">Divider</span>
+            </div>
+            <div class="mc-demo"><hr class="divider"></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('empty-state');return false">empty-state</a>
+              <span class="mc-gs-no">✗ no tiene · VStack + Text + Button</span>
+            </div>
+            <div class="mc-demo"><div class="empty-state">
+  <svg class="empty-state-icon" aria-hidden="true" width="32" height="32"></svg>
+  <div class="empty-state-title">No hay vacantes</div>
+  <p class="empty-state-desc">Crea tu primera vacante para empezar.</p>
+  <button class="btn-primary">+ Nueva vacante</button>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('form');return false">form</a>
+              <span class="mc-gs">Input + FormControl</span>
+            </div>
+            <div class="mc-demo"><div class="form-card">
+  <div class="form-card-title">Informacion basica</div>
+  <p class="form-card-desc">Completa los datos del puesto.</p>
+  <div class="fields-grid">
+    <div class="field-group">
+      <label class="field-label">Titulo <span class="field-required">*</span></label>
+      <input class="field-input" placeholder="Ej: Desarrollador Frontend">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Ubicacion</label>
+      <div class="select-wrapper">
+        <select><option>Remoto</option></select>
+        <span class="select-caret">▾</span>
+      </div>
+    </div>
+  </div>
+</div></div>
+            <p class="mc-note">FormControl trae label, helper y error: es más que nuestro field-group.</p>
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('input-otp');return false">input-otp</a>
+              <span class="mc-gs-no">✗ no tiene · HStack de Input con teclado numérico</span>
+            </div>
+            <div class="mc-demo"><div class="otp-group" role="group" aria-label="Código de verificación">
+  <input class="otp-slot" maxlength="1" inputmode="numeric">
+  <input class="otp-slot" maxlength="1" inputmode="numeric"></div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('item');return false">item</a>
+              <span class="mc-gs-no">✗ no tiene · HStack + Text</span>
+            </div>
+            <div class="mc-demo"><div class="item item-outline">
+  <div class="item-media item-media-icon"><svg></svg></div>
+  <div class="item-content">
+    <div class="item-title">Notificaciones</div>
+    <div class="item-description">Recibí avisos por email.</div>
+  </div>
+  <div class="item-actions"><button class="btn-tertiary btn-sm">Config</button></div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('label');return false">label</a>
+              <span class="mc-gs">FormControl</span>
+            </div>
+            <div class="mc-demo"><label class="label" for="email">Correo <span class="label-required">*</span></label></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('list');return false">list</a>
+              <span class="mc-gs-no">✗ no tiene · FlatList + Pressable</span>
+            </div>
+            <div class="mc-demo"><ul class="list">
+  <li class="list-item">
+    <div class="list-item-headline">Bandeja de entrada</div>
+    <div class="list-item-supporting">128 mensajes sin leer</div>
+  </li>
+</ul></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('person-card');return false">person-card</a>
+              <span class="mc-gs-no">✗ no tiene · HStack + Avatar + Text</span>
+            </div>
+            <div class="mc-demo"><div class="people-grid">
+  <div class="item item-outline item-clickable person-card" tabindex="0" role="button">
+    <div class="item-media person-avatar">MG</div>
+    <div class="item-content">
+      <div class="item-title">María García</div>
+      <div class="item-description">Desarrolladora Frontend</div>
+    </div>
+  </div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('placeholder');return false">placeholder</a>
+              <span class="mc-gs">Skeleton</span>
+            </div>
+            <div class="mc-demo"><div class="placeholder-panel">
+  <svg class="placeholder-icon" aria-hidden="true" width="32" height="32"></svg>
+  <p>Selecciona una vacante para ver los detalles.</p>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('progress');return false">progress</a>
+              <span class="mc-gs">Progress</span>
+            </div>
+            <div class="mc-demo"><div class="progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-fill" style="width: 60%"></div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('radio-group');return false">radio-group</a>
+              <span class="mc-gs">Radio</span>
+            </div>
+            <div class="mc-demo"><div class="radio-group" role="radiogroup" aria-label="Tipo de contrato">
+  <label class="radio-label"><input type="radio" name="contract" class="radio" checked> Full-time</label>
+  <label class="radio-label"><input type="radio" name="contract" class="radio"> Part-time</label>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('search');return false">search</a>
+              <span class="mc-gs-no">✗ no tiene · Input + Icon</span>
+            </div>
+            <div class="mc-demo"><div class="search-bar" role="search">
+  <span class="search-bar-icon">lupa</span>
+  <input class="search-bar-input" type="search" placeholder="Buscar" aria-label="Buscar">
+  <span class="search-bar-avatar">AV</span>   
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('segmented-button');return false">segmented-button</a>
+              <span class="mc-gs-no">✗ no tiene · HStack de Pressable, o Tabs re-skinneado</span>
+            </div>
+            <div class="mc-demo"><div class="seg-btn-group" role="group" aria-label="Vista">
+  <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button>
+  <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Cuadrícula</button>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('select');return false">select</a>
+              <span class="mc-gs">Select</span>
+            </div>
+            <div class="mc-demo"><div class="select">
+  <button class="select-trigger" aria-haspopup="listbox" aria-expanded="false">
+    <span class="select-value">Últimos 90 días</span>
+    <span class="select-icon">▾</span>
+  </button>
+</div></div>
+            <p class="mc-note">En nativo abre un actionsheet, no un popover.</p>
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('skeleton');return false">skeleton</a>
+              <span class="mc-gs">Skeleton</span>
+            </div>
+            <div class="mc-demo"><div class="skeleton skeleton-title"></div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('slider');return false">slider</a>
+              <span class="mc-gs">Slider</span>
+            </div>
+            <div class="mc-demo"><div class="slider">
+  <div class="slider-track"></div>
+  <div class="slider-range" style="width: 50%"></div>
+  <input type="range" class="slider-input" min="0" max="100" value="50">
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('spinner');return false">spinner</a>
+              <span class="mc-gs">Spinner</span>
+            </div>
+            <div class="mc-demo"><span class="spinner" role="status" aria-label="Cargando"></span></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('stat-card');return false">stat-card</a>
+              <span class="mc-gs-no">✗ no tiene · Card + Text con los tokens de .figure</span>
+            </div>
+            <div class="mc-demo"><div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-label">Vacantes abiertas</div>
+    <div class="stat-value">24</div>
+    <div class="stat-change stat-change-positive">+12%</div>
+  </div>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('switch');return false">switch</a>
+              <span class="mc-gs">Switch</span>
+            </div>
+            <div class="mc-demo"><label class="switch-label">
+  <input type="checkbox" role="switch" class="switch">
+  Modo oscuro
+</label></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('tabs');return false">tabs</a>
+              <span class="mc-gs">Tabs</span>
+            </div>
+            <div class="mc-demo"><div class="tabs" role="tablist">
+  <button class="tab active" role="tab" aria-selected="true" id="tab-general" aria-controls="panel-general">General</button>
+  <button class="tab" role="tab" aria-selected="false" id="tab-requisitos" aria-controls="panel-requisitos" tabindex="-1">Requisitos</button>
+  <span class="tab-indicator"></span>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('toast');return false">toast</a>
+              <span class="mc-gs">Toast</span>
+            </div>
+            <div class="mc-demo"><div class="snackbar" role="status" aria-live="polite">
+  <span class="snackbar-message">Archivo eliminado correctamente</span>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('toggle');return false">toggle</a>
+              <span class="mc-gs-no">✗ no tiene · Pressable con estado</span>
+            </div>
+            <div class="mc-demo"><button class="toggle" aria-pressed="false" onclick="togglePress(this)">
+  <svg></svg>
+</button></div>
+            <p class="mc-note">Se dibuja a 40 y se toca a 48.</p>
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('toggle-group');return false">toggle-group</a>
+              <span class="mc-gs-no">✗ no tiene · HStack de Pressable</span>
+            </div>
+            <div class="mc-demo"><div class="toggle-group" role="group" aria-label="Formato de texto">
+  <button class="toggle" aria-pressed="false">B</button>
+  <button class="toggle" aria-pressed="true">I</button>
+  <button class="toggle" aria-pressed="false">U</button>
+</div></div>
+            
+          </div>
+          <div class="mc-cell">
+            <div class="mc-head">
+              <a class="mc-id" href="#" onclick="navigate('vacancy-card');return false">vacancy-card</a>
+              <span class="mc-gs">Card</span>
+            </div>
+            <div class="mc-demo"><div class="vacancies-list">
+  <div class="vacancy-card" tabindex="0" role="button">
+    <svg class="vacancy-icon" aria-hidden="true" width="20" height="20"></svg>
+    <div class="vacancy-info">
+      <div class="vacancy-name">
+        Desarrollador Frontend
+        <span class="badge badge-open">Abierta</span>
+      </div>
+      <div class="vacancy-meta">
+        Tecnologia <span class="meta-dot"></span> Remoto
+      </div>
+    </div>
+    <div class="vacancy-right">
+      <div class="vacancy-age">3d</div>
+    </div>
+  </div>
+</div></div>
+            
+          </div>
+        </div>
+      </div>
+
+      <h2 class="ds-h2">Cambian de patrón · 23</h2>
+      <p class="ds-p">Acá no hay demo a propósito: renderizar la versión chica del patrón de escritorio sería enseñar justo lo que <code>M4</code> marca como falla. Lo que va en su lugar:</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Web</th><th>En nativo</th><th>Por qué</th></tr></thead>
+          <tbody>
+            <tr><td><a href="#" onclick="navigate('back-link');return false"><code>back-link</code></a></td><td><strong>El back del stack navigator</strong></td><td>La jerarquía la lleva el navegador, no la pantalla</td></tr>
+            <tr><td><a href="#" onclick="navigate('breadcrumb');return false"><code>breadcrumb</code></a></td><td><strong>El back del stack navigator</strong></td><td>Una ruta completa no entra ni se lee en 390px</td></tr>
+            <tr><td><a href="#" onclick="navigate('button-group');return false"><code>button-group</code></a></td><td><strong>Segmented button, o botones apilados a lo ancho</strong></td><td>Botones pegados de costado no llegan al piso táctil</td></tr>
+            <tr><td><a href="#" onclick="navigate('chart');return false"><code>chart</code></a></td><td><strong>El mismo dato con menos series y sin leyenda flotante</strong></td><td>Una leyenda flotante tapa el gráfico en pantalla chica</td></tr>
+            <tr><td><a href="#" onclick="navigate('combobox');return false"><code>combobox</code></a></td><td><strong>Sheet con búsqueda</strong> <span class="mc-gs mc-gs-inline">Actionsheet + Input</span></td><td>El popover con filtro es un patrón de puntero</td></tr>
+            <tr><td><a href="#" onclick="navigate('command');return false"><code>command</code></a></td><td><strong>Pantalla de búsqueda completa</strong></td><td>El ⌘K es de teclado</td></tr>
+            <tr><td><a href="#" onclick="navigate('context-menu');return false"><code>context-menu</code></a></td><td><strong>Actionsheet, con long-press</strong> <span class="mc-gs mc-gs-inline">Actionsheet</span></td><td>No hay click derecho</td></tr>
+            <tr><td><a href="#" onclick="navigate('create-form');return false"><code>create-form</code></a></td><td><strong>Pantalla propia, nunca un modal</strong></td><td>Un formulario dentro de un modal en 390px es una trampa</td></tr>
+            <tr><td><a href="#" onclick="navigate('data-table');return false"><code>data-table</code></a></td><td><strong>Lista de filas apiladas (label: valor) o card por registro</strong></td><td>Una tabla en 390px se scrollea de costado y nadie lo hace</td></tr>
+            <tr><td><a href="#" onclick="navigate('date-picker');return false"><code>date-picker</code></a></td><td><strong>El Calendar docked en un bottom sheet</strong> <span class="mc-gs mc-gs-inline">DateTimePicker</span></td><td>El popover chico es de escritorio</td></tr>
+            <tr><td><a href="#" onclick="navigate('dropdown-menu');return false"><code>dropdown-menu</code></a></td><td><strong>Actionsheet</strong> <span class="mc-gs mc-gs-inline">Menu · Actionsheet</span></td><td>No hay menú flotante</td></tr>
+            <tr><td><a href="#" onclick="navigate('input-group');return false"><code>input-group</code></a></td><td><strong>Campos apilados</strong></td><td>Un input con addon de costado no entra</td></tr>
+            <tr><td><a href="#" onclick="navigate('kanban');return false"><code>kanban</code></a></td><td><strong>Segmented button + una columna a la vez</strong></td><td>Tres columnas en 390px no son tres columnas</td></tr>
+            <tr><td><a href="#" onclick="navigate('menubar');return false"><code>menubar</code></a></td><td><strong>Tab bar + stack</strong></td><td>No existe barra de menú en una app</td></tr>
+            <tr><td><a href="#" onclick="navigate('modal');return false"><code>modal</code></a></td><td><strong>Pantalla completa o bottom sheet</strong> <span class="mc-gs mc-gs-inline">Modal · Actionsheet</span></td><td>Un diálogo chico centrado se siente web</td></tr>
+            <tr><td><a href="#" onclick="navigate('navigation-menu');return false"><code>navigation-menu</code></a></td><td><strong>Tab bar + stack</strong></td><td>La navegación la lleva el navigator</td></tr>
+            <tr><td><a href="#" onclick="navigate('page-header');return false"><code>page-header</code></a></td><td><strong>El header del stack navigator</strong></td><td>El título de pantalla lo pone la navegación</td></tr>
+            <tr><td><a href="#" onclick="navigate('pagination');return false"><code>pagination</code></a></td><td><strong>Scroll infinito o “cargar más”</strong></td><td>Paginar con números es de escritorio</td></tr>
+            <tr><td><a href="#" onclick="navigate('popover');return false"><code>popover</code></a></td><td><strong>Bottom sheet, o el contenido inline</strong> <span class="mc-gs mc-gs-inline">Actionsheet</span></td><td>Un popover necesita un ancla y espacio alrededor</td></tr>
+            <tr><td><a href="#" onclick="navigate('scroll-area');return false"><code>scroll-area</code></a></td><td><strong>ScrollView / FlatList</strong></td><td>El scroll lo maneja la plataforma</td></tr>
+            <tr><td><a href="#" onclick="navigate('sheet');return false"><code>sheet</code></a></td><td><strong>Bottom sheet</strong> <span class="mc-gs mc-gs-inline">Actionsheet · BottomSheet</span></td><td>El sheet lateral es un patrón de escritorio</td></tr>
+            <tr><td><a href="#" onclick="navigate('table');return false"><code>table</code></a></td><td><strong>Filas apiladas (label: valor)</strong></td><td>Una tabla en 390px no se lee</td></tr>
+            <tr><td><a href="#" onclick="navigate('toolbar');return false"><code>toolbar</code></a></td><td><strong>Header nativo + barra de acción abajo</strong></td><td>Lo importante va al alcance del pulgar</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="ds-h2">No existen sin puntero · 2</h2>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Web</th><th>Por qué no</th></tr></thead>
+          <tbody>
+            <tr><td><code>rich-tooltip</code></td><td>Ídem tooltip. Si tiene tanto contenido que necesita título y acciones, es un bottom sheet</td></tr>
+            <tr><td><code>tooltip</code></td><td>Necesita hover, y en un teléfono no hay hover. Si el dato hace falta, va inline</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+<!-- END mobile-components -->
 
     <!-- ═══════════ TOKENS – COLOR ═══════════ -->
     <section class="ds-section" id="s-tokens-color">
@@ -27607,6 +28164,7 @@ const SECTIONS = {
   'composition':       { label: 'Composición',           group: 'Foundations' },
   'space':             { label: 'Capa espacial',         group: 'Foundations' },
   'mobile':            { label: 'Nativo',                group: 'Foundations' },
+  'mobile-components': { label: 'Componentes en nativo', group: 'Foundations' },
   'logos':             { label: 'Logos',                 group: 'Foundations' },
   'usage':             { label: 'Usage Guidelines',      group: 'Foundations' },
   // Styles

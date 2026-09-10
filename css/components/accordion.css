@@ -9,7 +9,7 @@
    Reemplaza a: bloques "ver más" custom apilados sin patrón común.
 
    Dependencia: variables.css (Color Roles)
-   Consume EXCLUSIVAMENTE tokens semánticos --color-*/--text-* → funciona en
+   Consume EXCLUSIVAMENTE tokens semánticos --color-* y --text-* → funciona en
    light y dark sin overrides por tema.
 
    Animación: grid-template-rows 0fr → 1fr (sin medir scrollHeight por JS) —

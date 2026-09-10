@@ -146,69 +146,97 @@ el patrón equivalente es *otro*, no una versión chica del mismo.
 `radio-group` · `search` · `segmented-button` · `select` · `skeleton` · `slider` · `spinner` ·
 `stat-card` · `switch` · `tabs` · `toast` · `toggle` · `toggle-group` · `vacancy-card`
 
-### Qué da gluestack y qué hay que armar
+### Qué da gluestack, qué cambia de patrón y qué no existe
 
-Adoptar gluestack **no es adoptar 30 componentes listos**. Su catálogo v5 tiene 40 y el nuestro 62,
-y el solapamiento es parcial: casi la mitad de nuestro set de trabajo **no existe ahí** y se arma
-con primitivas (`Pressable`, `HStack`, `VStack`, `Text`). Conviene saberlo antes, porque es la
-diferencia entre "instalamos gluestack y ya está" y el trabajo real.
-
-| Embassy | gluestack v5 | Qué implica |
-|---|---|---|
-| `button` | **Button** (`Button` · `ButtonText` · `ButtonIcon` · `ButtonSpinner`) | Se copia y se re-skinnea. Sus `variant` (solid/outline/link) y `action` (primary/secondary/positive/negative) **no** son nuestras variantes: se mapean a las cinco de Embassy, no se adoptan |
-| `badge` | **Badge** | Directo |
-| `card` | **Card** | Directo |
-| `alert` | **Alert** | Directo |
-| `avatar` | **Avatar** | Directo |
-| `form` · `field-input` | **Input** + **FormControl** | FormControl trae label, helper y error: es más que nuestro `field-group` |
-| `select` | **Select** | En nativo abre un actionsheet, no un popover |
-| `checkbox` · `radio-group` · `switch` | **Checkbox** · **Radio** · **Switch** | Directos |
-| `slider` | **Slider** | Directo |
-| `progress` · `spinner` · `skeleton` | **Progress** · **Spinner** · **Skeleton** | Directos |
-| `toast` | **Toast** | Directo |
-| `tabs` | **Tabs** | Directo |
-| `accordion` | **Accordion** | Directo |
-| `divider` | **Divider** | Directo |
-| `calendar` · `date-picker` | **Calendar** · **DateTimePicker** | Directos |
-| `modal` | **Modal** | Pero en un teléfono casi siempre va **Actionsheet** o pantalla completa |
-| `sheet` | **Actionsheet** · **BottomSheet** | El lateral no existe |
-| `dropdown-menu` · `context-menu` | **Menu** · **Actionsheet** | — |
-| **`chip`** | **no tiene** | Se arma con `Pressable` + `Text`. Su `Badge` es de solo lectura, como el nuestro: no sirve de chip |
-| **`segmented-button`** | **no tiene** | `HStack` de `Pressable`, o `Tabs` re-skinneado |
-| **`search-bar`** | **no tiene** | `Input` + `Icon` |
-| **`list`** · **`item`** | **no tiene** | `FlatList` de RN + `Pressable` + `HStack` |
-| **`stat-card`** | **no tiene** | `Card` + `Text` con los tokens de `.figure` |
-| **`empty-state`** | **no tiene** | `VStack` + `Text` + `Button` |
-| **`person-card`** | **no tiene** | `HStack` + `Avatar` + `Text` |
-
-Los que dicen **no tiene** son la mitad del set que se usa todos los días. No es un problema —
-también en web los escribimos nosotros— pero define el trabajo: **gluestack ahorra el
+Adoptar gluestack **no es adoptar componentes listos**. Su catálogo v5 tiene 40 y el nuestro 62, y
+el solapamiento es parcial: casi la mitad de nuestro set de trabajo **no existe ahí** y se arma con
+primitivas (`Pressable`, `HStack`, `VStack`, `Text`). Conviene saberlo antes, porque es la
+diferencia entre "instalamos gluestack y ya está" y el trabajo real. **gluestack ahorra el
 comportamiento y la accesibilidad de los que sí están, no el sistema visual de ninguno.**
 
-### Cambian de patrón
+Las tres tablas de abajo y la página *Components · Nativo* de la doc salen del mismo mapa, que vive
+en `scripts/build-mobile-index.mjs`. Escritas a mano en los dos lados, en dos semanas dicen cosas
+distintas.
+
+### Se portan tal cual
+
+<!-- BEGIN mobile-map (generado por scripts/build-mobile-index.mjs) -->
+| Embassy | gluestack v5 | Notas |
+|---|---|---|
+| `accordion` | **Accordion** | — |
+| `alert` | **Alert** | — |
+| `attachment` | **no tiene** — HStack + Icon + Text | — |
+| `avatar` | **Avatar** | — |
+| `badge` | **Badge** | — |
+| `button` | **Button** | Sus variant (solid/outline/link) y action (primary/secondary/positive/negative) NO son nuestras variantes: se mapean a las cinco de Embassy, no se adoptan. |
+| `calendar` | **Calendar** | — |
+| `card` | **Card** | — |
+| `carousel` | **no tiene** — FlatList horizontal con paginado | — |
+| `checkbox` | **Checkbox** | — |
+| `chip` | **no tiene** — Pressable + Text | Su Badge es de solo lectura, igual que el nuestro: no sirve de chip. Se dibuja a 40 y se toca a 48 con hitSlop. |
+| `collapsible` | **Accordion** | — |
+| `description` | **no tiene** — VStack + Text | — |
+| `divider` | **Divider** | — |
+| `empty-state` | **no tiene** — VStack + Text + Button | — |
+| `form` | **Input + FormControl** | FormControl trae label, helper y error: es más que nuestro field-group. |
+| `input-otp` | **no tiene** — HStack de Input con teclado numérico | — |
+| `item` | **no tiene** — HStack + Text | — |
+| `label` | **FormControl** | — |
+| `list` | **no tiene** — FlatList + Pressable | — |
+| `person-card` | **no tiene** — HStack + Avatar + Text | — |
+| `placeholder` | **Skeleton** | — |
+| `progress` | **Progress** | — |
+| `radio-group` | **Radio** | — |
+| `search` | **no tiene** — Input + Icon | — |
+| `segmented-button` | **no tiene** — HStack de Pressable, o Tabs re-skinneado | — |
+| `select` | **Select** | En nativo abre un actionsheet, no un popover. |
+| `skeleton` | **Skeleton** | — |
+| `slider` | **Slider** | — |
+| `spinner` | **Spinner** | — |
+| `stat-card` | **no tiene** — Card + Text con los tokens de .figure | — |
+| `switch` | **Switch** | — |
+| `tabs` | **Tabs** | — |
+| `toast` | **Toast** | — |
+| `toggle` | **no tiene** — Pressable con estado | Se dibuja a 40 y se toca a 48. |
+| `toggle-group` | **no tiene** — HStack de Pressable | — |
+| `vacancy-card` | **Card** | — |
+
+### Cambian de patrón · 23
 
 | Web | En nativo | Por qué |
 |---|---|---|
-| `data-table`, `table` | Lista de filas apiladas (`label: valor`) o card por registro | Una tabla en 390px no se lee: se scrollea de costado y nadie lo hace |
-| `toolbar` | Header nativo + barra de acción abajo | Lo importante va al alcance del pulgar, no arriba |
-| `page-header` | El header del stack navigator | El título de pantalla lo pone la navegación |
-| `breadcrumb`, `back-link` | El back del stack | La jerarquía la lleva el navegador, no la pantalla |
-| `navigation-menu`, `menubar` | Tab bar + stack | — |
-| `dropdown-menu`, `context-menu` | Action sheet | No hay click derecho ni menú flotante |
-| `popover`, `rich-tooltip`, `tooltip` | Bottom sheet, o el contenido inline | Un tooltip necesita hover: en un teléfono no existe |
-| `sheet` (lateral) | Bottom sheet | El lateral es un patrón de escritorio |
-| `modal` | Pantalla completa o bottom sheet | Un diálogo chico centrado se siente web |
-| `combobox` | Sheet con búsqueda | — |
-| `command` | Pantalla de búsqueda completa | — |
+| `back-link` | El back del stack navigator | La jerarquía la lleva el navegador, no la pantalla |
+| `breadcrumb` | El back del stack navigator | Una ruta completa no entra ni se lee en 390px |
+| `button-group` | Segmented button, o botones apilados a lo ancho | Botones pegados de costado no llegan al piso táctil |
+| `chart` | El mismo dato con menos series y sin leyenda flotante | Una leyenda flotante tapa el gráfico en pantalla chica |
+| `combobox` | Sheet con búsqueda (`Actionsheet + Input`) | El popover con filtro es un patrón de puntero |
+| `command` | Pantalla de búsqueda completa | El ⌘K es de teclado |
+| `context-menu` | Actionsheet, con long-press (`Actionsheet`) | No hay click derecho |
 | `create-form` | Pantalla propia, nunca un modal | Un formulario dentro de un modal en 390px es una trampa |
-| `kanban` | Segmented button + una columna a la vez | — |
-| `pagination` | Scroll infinito o "cargar más" | Paginar con números es de escritorio |
-| `button-group` | Segmented button, o botones apilados a lo ancho | — |
-| `input-group` | Campos apilados | — |
-| `scroll-area` | `ScrollView` / `FlatList` | — |
-| `chart` | El mismo dato, menos series y sin leyenda flotante | — |
+| `data-table` | Lista de filas apiladas (label: valor) o card por registro | Una tabla en 390px se scrollea de costado y nadie lo hace |
+| `date-picker` | El Calendar docked en un bottom sheet (`DateTimePicker`) | El popover chico es de escritorio |
+| `dropdown-menu` | Actionsheet (`Menu · Actionsheet`) | No hay menú flotante |
+| `input-group` | Campos apilados | Un input con addon de costado no entra |
+| `kanban` | Segmented button + una columna a la vez | Tres columnas en 390px no son tres columnas |
+| `menubar` | Tab bar + stack | No existe barra de menú en una app |
+| `modal` | Pantalla completa o bottom sheet (`Modal · Actionsheet`) | Un diálogo chico centrado se siente web |
+| `navigation-menu` | Tab bar + stack | La navegación la lleva el navigator |
+| `page-header` | El header del stack navigator | El título de pantalla lo pone la navegación |
+| `pagination` | Scroll infinito o “cargar más” | Paginar con números es de escritorio |
+| `popover` | Bottom sheet, o el contenido inline (`Actionsheet`) | Un popover necesita un ancla y espacio alrededor |
+| `scroll-area` | ScrollView / FlatList | El scroll lo maneja la plataforma |
+| `sheet` | Bottom sheet (`Actionsheet · BottomSheet`) | El sheet lateral es un patrón de escritorio |
+| `table` | Filas apiladas (label: valor) | Una tabla en 390px no se lee |
+| `toolbar` | Header nativo + barra de acción abajo | Lo importante va al alcance del pulgar |
 
-Elegir la versión chica del patrón de escritorio en vez del patrón nativo es falla `M4`.
+### No existen sin puntero · 2
+
+| Web | Por qué no |
+|---|---|
+| `rich-tooltip` | Ídem tooltip. Si tiene tanto contenido que necesita título y acciones, es un bottom sheet |
+| `tooltip` | Necesita hover, y en un teléfono no hay hover. Si el dato hace falta, va inline |
+
+<!-- END mobile-map -->
 
 ---
 
