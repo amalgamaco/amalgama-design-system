@@ -14,6 +14,7 @@ en el working tree local (`component-rules/search.md`, `components/ui/carousel.t
 | Archivo | Qué es | Dónde va cuando se adopte |
 |---|---|---|
 | `ANALISIS-SKILLS-DS.md` | El análisis: diagnóstico, mapeo contra el modelo de Vercel, mapa de skills, flujo, roadmap y guion para presentarlo | acá mismo, o `docs/` |
+| `QUE-CAMBIAMOS.md` | **Para contarle al equipo**: qué le copiamos al `design.md` de Vercel, qué agregamos nosotros y qué cambió en la estructura del repo. Sin tecnicismos | ídem |
 | `PRUEBA-EQUIPO.md` | **Probalo vos**: una hora, un proyecto de punta a punta con un cliente inventado, y cinco preguntas para contar qué molestó. Sin checklist técnica a propósito | ídem |
 | `GUIA-EQUIPO.md` | **Una página práctica para el equipo**: qué escribir, dónde y qué pasa. Es lo que se reparte | ídem |
 | `PLAN-USO-DS.md` | **El plan de uso para presentar al equipo**: las tres capas, cómo arranca un proyecto nuevo, el cuestionario de setup, el día a día y qué hay que construir | ídem |
