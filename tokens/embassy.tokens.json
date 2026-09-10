@@ -1124,6 +1124,27 @@
       "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
       "$description": "hero / large section padding"
     },
+    "--target-min": {
+      "$type": "other",
+      "$value": "44px",
+      "section": "Densidad y superficie táctil  Los 44px de target vivían sueltos dentro de media queries en components.css, así que no existían como decisión: eran un parche por archivo. Acá son un token, y en [data-platform=\"native\"] suben a 48.  target-min es un PISO: un control puede ser más alto, nunca más bajo.",
+      "$description": "WCAG 2.5.5 / iOS. En nativo: 48",
+      "$platformNative": "48px"
+    },
+    "--row-height": {
+      "$type": "other",
+      "$value": "36px",
+      "section": "Densidad y superficie táctil  Los 44px de target vivían sueltos dentro de media queries en components.css, así que no existían como decisión: eran un parche por archivo. Acá son un token, y en [data-platform=\"native\"] suben a 48.  target-min es un PISO: un control puede ser más alto, nunca más bajo.",
+      "$description": "fila de tabla y de lista en escritorio",
+      "$platformNative": "48px"
+    },
+    "--control-height": {
+      "$type": "other",
+      "$value": "36px",
+      "section": "Densidad y superficie táctil  Los 44px de target vivían sueltos dentro de media queries en components.css, así que no existían como decisión: eran un parche por archivo. Acá son un token, y en [data-platform=\"native\"] suben a 48.  target-min es un PISO: un control puede ser más alto, nunca más bajo.",
+      "$description": "botón, input y select por defecto",
+      "$platformNative": "48px"
+    },
     "--icon-stroke": {
       "$type": "other",
       "$value": "2",
@@ -1148,6 +1169,7 @@
       "$type": "typography",
       "$value": "52px",
       "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$platformNative": "44px",
       "$fluid": {
         "min": "52px",
         "preferred": "8vw",
@@ -1165,6 +1187,7 @@
       "$type": "typography",
       "$value": "1.02",
       "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$platformNative": "1.05",
       "$native": {
         "translates": false,
         "unit": "multiplicador",
@@ -1175,6 +1198,7 @@
       "$type": "typography",
       "$value": "40px",
       "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$platformNative": "34px",
       "$fluid": {
         "min": "40px",
         "preferred": "6vw",
@@ -1192,6 +1216,7 @@
       "$type": "typography",
       "$value": "1.06",
       "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$platformNative": "1.1",
       "$native": {
         "translates": false,
         "unit": "multiplicador",
@@ -1202,6 +1227,7 @@
       "$type": "typography",
       "$value": "32px",
       "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$platformNative": "28px",
       "$fluid": {
         "min": "32px",
         "preferred": "4.5vw",
@@ -1219,6 +1245,7 @@
       "$type": "typography",
       "$value": "1.1",
       "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$platformNative": "1.15",
       "$native": {
         "translates": false,
         "unit": "multiplicador",
@@ -1238,12 +1265,14 @@
     "--font-size-display": {
       "$type": "typography",
       "$value": "28px",
-      "section": "Epilogue — Display & Headings"
+      "section": "Epilogue — Display & Headings",
+      "$platformNative": "32px"
     },
     "--line-height-display": {
       "$type": "typography",
       "$value": "1.15",
       "section": "Epilogue — Display & Headings",
+      "$platformNative": "1.1",
       "$native": {
         "translates": false,
         "unit": "multiplicador",
@@ -1283,7 +1312,8 @@
     "--font-size-heading-md": {
       "$type": "typography",
       "$value": "18px",
-      "section": "Epilogue — Display & Headings"
+      "section": "Epilogue — Display & Headings",
+      "$platformNative": "20px"
     },
     "--line-height-heading-md": {
       "$type": "typography",
@@ -1328,12 +1358,14 @@
     "--font-size-body-lg": {
       "$type": "typography",
       "$value": "14px",
-      "section": "Inter — Body & UI"
+      "section": "Inter — Body & UI",
+      "$platformNative": "17px"
     },
     "--line-height-body-lg": {
       "$type": "typography",
       "$value": "1.5",
       "section": "Inter — Body & UI",
+      "$platformNative": "1.45",
       "$native": {
         "translates": false,
         "unit": "multiplicador",
@@ -1344,7 +1376,8 @@
       "$type": "typography",
       "$value": "13.5px",
       "section": "Inter — Body & UI",
-      "$description": "base: inputs, buttons, table cells"
+      "$description": "base: inputs, buttons, table cells",
+      "$platformNative": "16px"
     },
     "--line-height-body-md": {
       "$type": "typography",
@@ -1360,12 +1393,14 @@
     "--font-size-body-sm": {
       "$type": "typography",
       "$value": "12.5px",
-      "section": "Inter — Body & UI"
+      "section": "Inter — Body & UI",
+      "$platformNative": "14px"
     },
     "--line-height-body-sm": {
       "$type": "typography",
       "$value": "1.6",
       "section": "Inter — Body & UI",
+      "$platformNative": "1.45",
       "$native": {
         "translates": false,
         "unit": "multiplicador",
@@ -1375,7 +1410,8 @@
     "--font-size-label": {
       "$type": "typography",
       "$value": "13px",
-      "section": "Inter — Body & UI"
+      "section": "Inter — Body & UI",
+      "$platformNative": "15px"
     },
     "--line-height-label": {
       "$type": "typography",
@@ -1390,12 +1426,14 @@
     "--font-size-caption": {
       "$type": "typography",
       "$value": "12px",
-      "section": "Inter — Body & UI"
+      "section": "Inter — Body & UI",
+      "$platformNative": "13px"
     },
     "--line-height-caption": {
       "$type": "typography",
       "$value": "1.4",
       "section": "Inter — Body & UI",
+      "$platformNative": "1.45",
       "$native": {
         "translates": false,
         "unit": "multiplicador",
@@ -1405,7 +1443,8 @@
     "--font-size-badge": {
       "$type": "typography",
       "$value": "11.5px",
-      "section": "Inter — Body & UI"
+      "section": "Inter — Body & UI",
+      "$platformNative": "11px"
     },
     "--line-height-badge": {
       "$type": "typography",
@@ -1778,6 +1817,13 @@
       "$type": "motion",
       "$value": "500ms",
       "section": "Shared Sheet slide duration (500ms) for all sides."
+    },
+    "--screen-gutter": {
+      "$type": "other",
+      "$value": "20px",
+      "$platformNative": "20px",
+      "section": "En nativo no hay columna: hay pantalla. El gutter no es fluido —no hay vw que valga en un teléfono— y no existe max-width que acote nada. Por eso el token se llama distinto que el  column-gutter de composition.css: no es el mismo concepto y no queremos que alguien los cruce.",
+      "$onlyNative": true
     }
   }
 }

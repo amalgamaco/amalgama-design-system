@@ -323,6 +323,18 @@
   --space-20: 80px;   /* hero / large section padding       */
 
   /* ─────────────────────────────────────
+     Densidad y superficie táctil
+
+     Los 44px de target vivían sueltos dentro de media queries en
+     components.css, así que no existían como decisión: eran un parche por
+     archivo. Acá son un token, y en [data-platform="native"] suben a 48.
+     --target-min es un PISO: un control puede ser más alto, nunca más bajo.
+  ───────────────────────────────────── */
+  --target-min:     44px;  /* WCAG 2.5.5 / iOS. En nativo: 48 */
+  --row-height:     36px;  /* fila de tabla y de lista en escritorio */
+  --control-height: 36px;  /* botón, input y select por defecto */
+
+  /* ─────────────────────────────────────
      Iconografía — grosor de trazo
 
      Un solo valor para todos los íconos del sistema. Antes convivían seis
@@ -693,4 +705,68 @@
   /* Elevated Button — restore light (navy) elevation inside a light-scoped island */
   --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);
   --btn-elevation-hover: 0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16);
+}
+
+/* ═══════════════════════════════════════
+   PLATAFORMA NATIVA  ·  el eje que no es claro/oscuro
+   ═══════════════════════════════════════
+
+   Embassy nació para pantallas de escritorio y su escala lo delata: el cuerpo
+   base son 13,5px, que es el tamaño del *caption* de iOS. Una app nativa con
+   esos valores sale chica y fuera de norma en las dos plataformas.
+
+   Esto NO es un tema. Claro/oscuro es un eje de color; escritorio/nativo es un
+   eje de tamaño y densidad. Son independientes: una app nativa en dark usa los
+   dos bloques a la vez.
+
+   Los NOMBRES no cambian — un componente lee --font-size-body-md en las dos
+   plataformas y no sabe dónde está corriendo. Cambian los valores.
+
+   Referencias: iOS body 17pt, secundario 15pt, caption 13pt · Material
+   body-large 16sp, title-large 22sp · targets 44pt (iOS) y 48dp (Android).
+
+   En web este bloque no hace nada salvo que alguien ponga data-platform="native"
+   a mano. Existe acá, y no en un archivo aparte, para que scripts/build-tokens.mjs
+   lo exporte con una sola fuente: tokens/embassy.tokens.ts sale con `native`
+   además de `light` y `dark`.
+   ═══════════════════════════════════════ */
+
+[data-platform="native"] {
+  /* ─────────────────────────────────────
+     Escala tipográfica nativa
+  ───────────────────────────────────── */
+  --font-size-display:     32px;   --line-height-display:     1.1;
+  --font-size-heading-xl:  24px;   --line-height-heading-xl:  1.2;
+  --font-size-heading-lg:  22px;   --line-height-heading-lg:  1.25;
+  --font-size-heading-md:  20px;   --line-height-heading-md:  1.3;
+  --font-size-heading-sm:  17px;   --line-height-heading-sm:  1.35;
+  --font-size-heading-xs:  15px;   --line-height-heading-xs:  1.4;
+
+  --font-size-body-lg:     17px;   --line-height-body-lg:     1.45;
+  --font-size-body-md:     16px;   --line-height-body-md:     1.5;  /* la base: inputs, botones, filas */
+  --font-size-body-sm:     14px;   --line-height-body-sm:     1.45;
+  --font-size-label:       15px;   --line-height-label:       1.4;
+  --font-size-caption:     13px;   --line-height-caption:     1.45;
+  --font-size-badge:       11px;   --line-height-badge:       1.2;
+
+  /* El registro editorial no es fluido en nativo: no hay viewport que crezca.
+     Se congela en el extremo de teléfono; en tablet se sube un escalón a mano. */
+  --font-size-editorial-lg: 44px;  --line-height-editorial-lg: 1.05;
+  --font-size-editorial-md: 34px;  --line-height-editorial-md: 1.1;
+  --font-size-editorial-sm: 28px;  --line-height-editorial-sm: 1.15;
+
+  /* ─────────────────────────────────────
+     Densidad y superficie táctil
+  ───────────────────────────────────── */
+  /* 48 cubre iOS (44) y Android (48) de una. Es un piso, no un tamaño:
+     un control puede ser más alto, nunca más bajo. */
+  --target-min:      48px;
+  --row-height:      48px;
+  --control-height:  48px;
+
+  /* En nativo no hay columna: hay pantalla. El gutter no es fluido —no hay vw
+     que valga en un teléfono— y no existe max-width que acote nada.
+     Por eso el token se llama distinto que el --column-gutter de composition.css:
+     no es el mismo concepto y no queremos que alguien los cruce. */
+  --screen-gutter:   20px;
 }

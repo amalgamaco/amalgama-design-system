@@ -79,15 +79,18 @@ function parse(body) {
   return out;
 }
 
-const light = parse(block(':root'));
-const dark  = parse(block('[data-theme="dark"]'));
+const light  = parse(block(':root'));
+const dark   = parse(block('[data-theme="dark"]'));
+/* Eje independiente del color: escritorio vs nativo es tamaño y densidad.
+   Una app nativa en dark usa los dos bloques a la vez. */
+const native = css.includes('[data-platform="native"] {') ? parse(block('[data-platform="native"]')) : new Map();
 
 /* ── 2. resolver ────────────────────────────────────────────────── */
 
 const unresolved = [];
 
 function resolve(name, theme, seen = new Set()) {
-  const map = theme === 'dark' ? dark : light;
+  const map = theme === 'dark' ? dark : theme === 'native' ? native : light;
   const entry = map.get(name) ?? light.get(name);
   if (!entry) { unresolved.push(`${name} (${theme}): no existe`); return null; }
   return expand(entry.raw, theme, seen, name);
@@ -225,6 +228,10 @@ for (const [name, e] of light) {
   const t = { $type: kind(name, L), $value: L, section: e.section };
   if (e.note) t.$description = e.note;
   if (D && D !== L) t.$dark = D;
+  if (native.has(name)) {
+    const N = resolve(name, 'native');
+    if (N && N !== L) t.$platformNative = N;
+  }
   const c = readClamp(e.raw);
   if (c) {
     t.$type = 'typography';
@@ -236,6 +243,11 @@ for (const [name, e] of light) {
   const nat = nativeNote(name, t);
   if (nat) t.$native = { ...(t.$native || {}), ...nat };
   tokens[name] = t;
+}
+// tokens que solo existen en el bloque nativo
+for (const [name] of native) if (!tokens[name]) {
+  const N = resolve(name, 'native');
+  tokens[name] = { $type: kind(name, N), $value: N, $platformNative: N, section: native.get(name).section, $onlyNative: true };
 }
 // tokens que solo existen en dark
 for (const [name] of dark) if (!tokens[name]) {
@@ -263,6 +275,10 @@ const ts = `/* ${stamp.split('\n').join('\n   ')} */\n\n` +
   Object.entries(tokens).map(([n, t]) => `  ${JSON.stringify(camel(n))}: ${JSON.stringify(t.$value)},`).join('\n') +
 `\n} as const;\n\nexport const dark = {\n` +
   Object.entries(tokens).map(([n, t]) => `  ${JSON.stringify(camel(n))}: ${JSON.stringify(t.$dark ?? t.$value)},`).join('\n') +
+`\n} as const;\n\n/* Eje de plataforma: los mismos nombres, valores de teléfono.\n   Se combina con light/dark, no lo reemplaza. */\nexport const native = {\n` +
+  Object.entries(tokens).map(([n, t]) => `  ${JSON.stringify(camel(n))}: ${JSON.stringify(t.$platformNative ?? t.$value)},`).join('\n') +
+`\n} as const;\n\nexport const nativeDark = {\n` +
+  Object.entries(tokens).map(([n, t]) => `  ${JSON.stringify(camel(n))}: ${JSON.stringify(t.$platformNative ?? t.$dark ?? t.$value)},`).join('\n') +
 `\n} as const;\n\nexport type EmbassyTokens = typeof light;\n`;
 
 const triplet = v => { const c = toRGBA(v); return c ? `${Math.round(c[0])} ${Math.round(c[1])} ${Math.round(c[2])}` : null; };
@@ -337,7 +353,7 @@ for (const [f, content] of Object.entries(files)) {
 }
 
 const n = Object.keys(tokens).length;
-console.log(`tokens: ${n}  ·  colores: ${colors.length}  ·  con dark propio: ${Object.values(tokens).filter(t => t.$dark).length}  ·  fluidos (clamp): ${Object.values(tokens).filter(t => t.$fluid).length}`);
+console.log(`tokens: ${n}  ·  colores: ${colors.length}  ·  con dark propio: ${Object.values(tokens).filter(t => t.$dark).length}  ·  con valor nativo: ${Object.values(tokens).filter(t => t.$platformNative).length}  ·  fluidos (clamp): ${Object.values(tokens).filter(t => t.$fluid).length}`);
 if (unresolved.length) { console.log(`\nSIN RESOLVER (${unresolved.length}):`); unresolved.slice(0, 20).forEach(u => console.log('  · ' + u)); }
 
 if (CHECK) {
