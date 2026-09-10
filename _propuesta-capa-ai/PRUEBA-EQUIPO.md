@@ -51,9 +51,25 @@ Cuando termine, abrí el **`theme-preview.html`** que te dejó y pasalo a modo o
 
 ---
 
-## 2 · Hacé una pantalla
+## 2 · Armá o mejorá una pantalla
 
-En la misma carpeta:
+`/embassy:screen` no es solo para pantallas nuevas: **también mira una que ya existe, te dice qué
+está mal y la rehace.** Cualquiera de estas frases va al mismo lugar, y la que uses cambia lo que
+hace:
+
+```
+/embassy:screen  armá la vista de listado de socios
+/embassy:screen  mejorá esta pantalla
+/embassy:screen  esta pantalla no se entiende, rediseñala
+/embassy:screen  hay demasiada información acá, ordenala
+/embassy:screen  migrá esta pantalla al design system
+/embassy:screen  esto no parece de Amalgama, arreglalo
+```
+
+Probá **las dos cosas**: una de cero y una sobre algo que ya tengas. La segunda es la que más nos
+interesa, porque es donde la skill puede quedarse corta y limitarse a cambiar los colores.
+
+Para la de cero, en la misma carpeta:
 
 ```
 /embassy:screen
@@ -63,7 +79,12 @@ La acción principal es dar de alta un socio nuevo. Los usuarios entran
 mayormente a buscar a una persona puntual.
 ```
 
-Miralo como mirarías el trabajo de alguien del equipo.
+Para la otra, agarrá una pantalla real de un proyecto tuyo —cuanto más vieja, mejor— y pedile que
+la mejore.
+
+Miralos como mirarías el trabajo de alguien del equipo. En el caso de la pantalla que ya existía,
+la pregunta clave es: **¿además de verse mejor, quedó más fácil de usar?** Si lo único que cambió
+son los colores y los botones, se quedó a mitad de camino y queremos saberlo.
 
 ---
 
@@ -92,8 +113,9 @@ Cualquiera de estas tres suma, y ninguna lleva más de diez minutos:
 
 - **Repetilo con un cliente real tuyo y su marca real.** Es lo que más sirve: los colores de verdad
   rompen cosas que un cliente inventado no rompe.
-- **Pegale una pantalla vieja tuya a `/embassy:review`** y fijate si lo que te marca es cierto. Si
-  te marca algo que está bien, queremos saberlo.
+- **Pegale una pantalla vieja a `/embassy:review`** y fijate si lo que te marca es cierto. Ojo con
+  la diferencia: `review` te dice qué está mal y no toca nada; `screen` lo arregla. Si te marca algo
+  que está bien, queremos saberlo.
 - **Pedile un one-pager con `/embassy:artifact`**, sin repo ni carpeta de por medio.
 
 ---
