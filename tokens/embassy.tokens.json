@@ -1,0 +1,1783 @@
+{
+  "$schema": "https://design-tokens.org/community-group/format/",
+  "$description": "Generado por scripts/build-tokens.mjs desde css/variables.css. NO editar a mano: se regenera y se pisa. Cambiá el CSS.",
+  "source": "css/variables.css",
+  "generated": "2026-09-10",
+  "tokens": {
+    "--neutral-10": {
+      "$type": "color",
+      "$value": "#FAFBFC",
+      "section": "Neutral palette"
+    },
+    "--neutral-50": {
+      "$type": "color",
+      "$value": "#EAEBED",
+      "section": "Neutral palette"
+    },
+    "--neutral-100": {
+      "$type": "color",
+      "$value": "#BFC1C8",
+      "section": "Neutral palette"
+    },
+    "--neutral-200": {
+      "$type": "color",
+      "$value": "#9FA3AE",
+      "section": "Neutral palette"
+    },
+    "--neutral-300": {
+      "$type": "color",
+      "$value": "#747989",
+      "section": "Neutral palette"
+    },
+    "--neutral-400": {
+      "$type": "color",
+      "$value": "#474D61",
+      "section": "Neutral palette"
+    },
+    "--neutral-500": {
+      "$type": "color",
+      "$value": "#353A4A",
+      "section": "Neutral palette"
+    },
+    "--neutral-600": {
+      "$type": "color",
+      "$value": "#282C39",
+      "section": "Neutral palette"
+    },
+    "--neutral-700": {
+      "$type": "color",
+      "$value": "#1C202C",
+      "section": "Neutral palette"
+    },
+    "--neutral-800": {
+      "$type": "color",
+      "$value": "#13161F",
+      "section": "Neutral palette"
+    },
+    "--neutral-900": {
+      "$type": "color",
+      "$value": "#0A0C12",
+      "section": "Neutral palette"
+    },
+    "--neutral-black": {
+      "$type": "color",
+      "$value": "#000000",
+      "section": "Neutral palette"
+    },
+    "--neutral-white": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Neutral palette"
+    },
+    "--primary-50": {
+      "$type": "color",
+      "$value": "#E4E7EF",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--primary-60": {
+      "$type": "color",
+      "$value": "#D7DEFB",
+      "section": "Primary palette  (navy blues)",
+      "$description": "periwinkle-blue tint — Primary Container (light)"
+    },
+    "--primary-75": {
+      "$type": "color",
+      "$value": "#D6DBE8",
+      "section": "Primary palette  (navy blues)",
+      "$description": "gris-navy claro con cuerpo"
+    },
+    "--primary-100": {
+      "$type": "color",
+      "$value": "#BCC2D8",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--primary-200": {
+      "$type": "color",
+      "$value": "#909BBE",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--primary-300": {
+      "$type": "color",
+      "$value": "#6675A4",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--primary-400": {
+      "$type": "color",
+      "$value": "#475993",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--primary-500": {
+      "$type": "color",
+      "$value": "#253E82",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--primary-600": {
+      "$type": "color",
+      "$value": "#1F387A",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--primary-700": {
+      "$type": "color",
+      "$value": "#162F6F",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--primary-800": {
+      "$type": "color",
+      "$value": "#0D2663",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--primary-900": {
+      "$type": "color",
+      "$value": "#01164D",
+      "section": "Primary palette  (navy blues)"
+    },
+    "--secondary-10": {
+      "$type": "color",
+      "$value": "#FBFCFF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-50": {
+      "$type": "color",
+      "$value": "#EDF2FF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-100": {
+      "$type": "color",
+      "$value": "#DCE6FF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-200": {
+      "$type": "color",
+      "$value": "#CAD9FF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-300": {
+      "$type": "color",
+      "$value": "#B9CCFF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-400": {
+      "$type": "color",
+      "$value": "#A7C0FF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-500": {
+      "$type": "color",
+      "$value": "#95B3FF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-600": {
+      "$type": "color",
+      "$value": "#84A6FF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-700": {
+      "$type": "color",
+      "$value": "#7299FF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-800": {
+      "$type": "color",
+      "$value": "#618DFF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-900": {
+      "$type": "color",
+      "$value": "#4F80FF",
+      "section": "Secondary palette  (periwinkle blues)"
+    },
+    "--secondary-925": {
+      "$type": "color",
+      "$value": "#3A5BB0",
+      "section": "Secondary palette  (periwinkle blues)",
+      "$description": "mid-dark periwinkle — Secondary Container en dark (tono ~40)"
+    },
+    "--secondary-950": {
+      "$type": "color",
+      "$value": "#1E3A8C",
+      "section": "Secondary palette  (periwinkle blues)",
+      "$description": "dark agile-blue — accessible \"on\" text within the Secondary family"
+    },
+    "--tertiary-50": {
+      "$type": "color",
+      "$value": "#F1EEFE",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-100": {
+      "$type": "color",
+      "$value": "#E3DEFD",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-200": {
+      "$type": "color",
+      "$value": "#D4CDFC",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-300": {
+      "$type": "color",
+      "$value": "#C6BCFB",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-400": {
+      "$type": "color",
+      "$value": "#B8ACFA",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-500": {
+      "$type": "color",
+      "$value": "#AA9BF8",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-600": {
+      "$type": "color",
+      "$value": "#9C8AF7",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-700": {
+      "$type": "color",
+      "$value": "#8D79F6",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-800": {
+      "$type": "color",
+      "$value": "#7F69F5",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-900": {
+      "$type": "color",
+      "$value": "#7158F4",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--success-50": {
+      "$type": "color",
+      "$value": "#E4F8EC",
+      "section": "Success palette"
+    },
+    "--success-100": {
+      "$type": "color",
+      "$value": "#BFECD1",
+      "section": "Success palette"
+    },
+    "--success-200": {
+      "$type": "color",
+      "$value": "#93E1B3",
+      "section": "Success palette"
+    },
+    "--success-300": {
+      "$type": "color",
+      "$value": "#60D594",
+      "section": "Success palette"
+    },
+    "--success-400": {
+      "$type": "color",
+      "$value": "#28CB7C",
+      "section": "Success palette"
+    },
+    "--success-500": {
+      "$type": "color",
+      "$value": "#00C164",
+      "section": "Success palette"
+    },
+    "--success-600": {
+      "$type": "color",
+      "$value": "#00B15A",
+      "section": "Success palette"
+    },
+    "--success-700": {
+      "$type": "color",
+      "$value": "#009E4D",
+      "section": "Success palette"
+    },
+    "--success-800": {
+      "$type": "color",
+      "$value": "#008D40",
+      "section": "Success palette"
+    },
+    "--success-900": {
+      "$type": "color",
+      "$value": "#006D2C",
+      "section": "Success palette"
+    },
+    "--success-950": {
+      "$type": "color",
+      "$value": "#004D1E",
+      "section": "Success palette",
+      "$description": "container en oscuro — el -900 queda en 4.24:1"
+    },
+    "--error-50": {
+      "$type": "color",
+      "$value": "#FFEBF0",
+      "section": "Error palette"
+    },
+    "--error-100": {
+      "$type": "color",
+      "$value": "#FFCDD7",
+      "section": "Error palette"
+    },
+    "--error-200": {
+      "$type": "color",
+      "$value": "#F29AA1",
+      "section": "Error palette"
+    },
+    "--error-300": {
+      "$type": "color",
+      "$value": "#EA727D",
+      "section": "Error palette"
+    },
+    "--error-400": {
+      "$type": "color",
+      "$value": "#F64F5D",
+      "section": "Error palette"
+    },
+    "--error-500": {
+      "$type": "color",
+      "$value": "#FD3A45",
+      "section": "Error palette"
+    },
+    "--error-600": {
+      "$type": "color",
+      "$value": "#EE3043",
+      "section": "Error palette"
+    },
+    "--error-700": {
+      "$type": "color",
+      "$value": "#DB263C",
+      "section": "Error palette"
+    },
+    "--error-800": {
+      "$type": "color",
+      "$value": "#CE1D35",
+      "section": "Error palette"
+    },
+    "--error-900": {
+      "$type": "color",
+      "$value": "#BF0B29",
+      "section": "Error palette"
+    },
+    "--error-950": {
+      "$type": "color",
+      "$value": "#7A0C1B",
+      "section": "Error palette",
+      "$description": "container en oscuro — el -700 era demasiado claro"
+    },
+    "--warning-50": {
+      "$type": "color",
+      "$value": "#FFF2DF",
+      "section": "Warning palette"
+    },
+    "--warning-100": {
+      "$type": "color",
+      "$value": "#FFDEB0",
+      "section": "Warning palette"
+    },
+    "--warning-200": {
+      "$type": "color",
+      "$value": "#FFC97D",
+      "section": "Warning palette"
+    },
+    "--warning-400": {
+      "$type": "color",
+      "$value": "#FFA120",
+      "section": "Warning palette"
+    },
+    "--warning-500": {
+      "$type": "color",
+      "$value": "#FFB249",
+      "section": "Warning palette"
+    },
+    "--warning-700": {
+      "$type": "color",
+      "$value": "#FC7400",
+      "section": "Warning palette"
+    },
+    "--warning-800": {
+      "$type": "color",
+      "$value": "#F66200",
+      "section": "Warning palette"
+    },
+    "--warning-900": {
+      "$type": "color",
+      "$value": "#ED4403",
+      "section": "Warning palette"
+    },
+    "--warning-925": {
+      "$type": "color",
+      "$value": "#C43800",
+      "section": "Warning palette",
+      "$description": "texto y on-container en claro — el -900 da 3.50:1"
+    },
+    "--warning-950": {
+      "$type": "color",
+      "$value": "#7A3200",
+      "section": "Warning palette",
+      "$description": "container en oscuro — el -900 es naranja saturado"
+    },
+    "--info-50": {
+      "$type": "color",
+      "$value": "#E9EBFD",
+      "section": "Information palette"
+    },
+    "--info-100": {
+      "$type": "color",
+      "$value": "#C7CCFA",
+      "section": "Information palette"
+    },
+    "--info-200": {
+      "$type": "color",
+      "$value": "#9FABF8",
+      "section": "Information palette"
+    },
+    "--info-300": {
+      "$type": "color",
+      "$value": "#748AF5",
+      "section": "Information palette"
+    },
+    "--info-400": {
+      "$type": "color",
+      "$value": "#4F6EF3",
+      "section": "Information palette"
+    },
+    "--info-500": {
+      "$type": "color",
+      "$value": "#1E52EE",
+      "section": "Information palette"
+    },
+    "--info-600": {
+      "$type": "color",
+      "$value": "#1749E2",
+      "section": "Information palette"
+    },
+    "--info-700": {
+      "$type": "color",
+      "$value": "#003ED6",
+      "section": "Information palette"
+    },
+    "--info-800": {
+      "$type": "color",
+      "$value": "#0032CB",
+      "section": "Information palette"
+    },
+    "--info-900": {
+      "$type": "color",
+      "$value": "#001ABA",
+      "section": "Information palette"
+    },
+    "--color-primary": {
+      "$type": "color",
+      "$value": "#01164D",
+      "section": "Primary · Navy",
+      "$dark": "#FFFFFF",
+      "$alias": "--primary-900"
+    },
+    "--color-on-primary": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Primary · Navy",
+      "$dark": "#01164D",
+      "$alias": "--neutral-white"
+    },
+    "--color-primary-container": {
+      "$type": "color",
+      "$value": "#D7DEFB",
+      "section": "Primary · Navy",
+      "$dark": "#475993",
+      "$alias": "--primary-60"
+    },
+    "--color-on-primary-container": {
+      "$type": "color",
+      "$value": "#01164D",
+      "section": "Primary · Navy",
+      "$dark": "#E4E7EF",
+      "$alias": "--primary-900"
+    },
+    "--color-primary-hover": {
+      "$type": "color",
+      "$value": "#162F6F",
+      "section": "Primary · Navy",
+      "$dark": "#E4E7EF",
+      "$alias": "--primary-700"
+    },
+    "--color-secondary": {
+      "$type": "color",
+      "$value": "#4F80FF",
+      "section": "Secondary · Agile Blue",
+      "$dark": "#B9CCFF",
+      "$alias": "--secondary-900"
+    },
+    "--color-on-secondary": {
+      "$type": "color",
+      "$value": "#01164D",
+      "section": "Texto oscuro, no blanco. El acento en claro es un color vivo y saturado: blanco encima da 3.58:1 en Embassy y 3.26:1 en un verde de marca, o sea por debajo de AA para texto normal. Con primary-900 da 4.79:1 en Embassy y 5.11:1 en Nortia, y escala a cualquier marca porque el 900 de la rampa siempre es el paso más oscuro. En dark el rol ya usa secondary-950 sobre secondary-300 (6.45:1) y no cambia.",
+      "$dark": "#1E3A8C",
+      "$alias": "--primary-900"
+    },
+    "--color-secondary-container": {
+      "$type": "color",
+      "$value": "#CAD9FF",
+      "section": "Container = secondary-200 + on = primary navy: el botón/chip Secondary (tonal) se diferencia del Primary por inversión (claro + texto navy).",
+      "$dark": "#3A5BB0",
+      "$alias": "--secondary-200"
+    },
+    "--color-on-secondary-container": {
+      "$type": "color",
+      "$value": "#01164D",
+      "section": "Container = secondary-200 + on = primary navy: el botón/chip Secondary (tonal) se diferencia del Primary por inversión (claro + texto navy).",
+      "$dark": "#DCE6FF",
+      "$alias": "--primary-900"
+    },
+    "--color-tertiary": {
+      "$type": "color",
+      "$value": "#7158F4",
+      "section": "Tertiary (Purple)",
+      "$dark": "#C6BCFB",
+      "$alias": "--tertiary-900"
+    },
+    "--color-on-tertiary": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Tertiary (Purple)",
+      "$dark": "#0A0C12",
+      "$alias": "--neutral-white"
+    },
+    "--color-tertiary-container": {
+      "$type": "color",
+      "$value": "#E3DEFD",
+      "section": "Tertiary (Purple)",
+      "$dark": "#7F69F5",
+      "$alias": "--tertiary-100"
+    },
+    "--color-on-tertiary-container": {
+      "$type": "color",
+      "$value": "#7158F4",
+      "section": "Tertiary (Purple)",
+      "$dark": "#F1EEFE",
+      "$alias": "--tertiary-900"
+    },
+    "--color-error": {
+      "$type": "color",
+      "$value": "#FD3A45",
+      "section": "Error",
+      "$dark": "#F29AA1",
+      "$alias": "--error-500"
+    },
+    "--color-on-error": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Error",
+      "$dark": "#5C0010",
+      "$alias": "--neutral-white"
+    },
+    "--color-error-container": {
+      "$type": "color",
+      "$value": "#FFEBF0",
+      "section": "Error",
+      "$dark": "#7A0C1B",
+      "$alias": "--error-50"
+    },
+    "--color-on-error-container": {
+      "$type": "color",
+      "$value": "#BF0B29",
+      "section": "Error",
+      "$dark": "#FFCDD7",
+      "$alias": "--error-900"
+    },
+    "--color-error-hover": {
+      "$type": "color",
+      "$value": "#DB263C",
+      "section": "Error",
+      "$alias": "--error-700"
+    },
+    "--color-success": {
+      "$type": "color",
+      "$value": "#00C164",
+      "section": "Success",
+      "$dark": "#93E1B3",
+      "$alias": "--success-500"
+    },
+    "--color-on-success": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Success",
+      "$dark": "#00351A",
+      "$alias": "--neutral-white"
+    },
+    "--color-success-container": {
+      "$type": "color",
+      "$value": "#E4F8EC",
+      "section": "Success",
+      "$dark": "#004D1E",
+      "$alias": "--success-50"
+    },
+    "--color-on-success-container": {
+      "$type": "color",
+      "$value": "#006D2C",
+      "section": "Success",
+      "$dark": "#93E1B3",
+      "$alias": "--success-900"
+    },
+    "--color-success-hover": {
+      "$type": "color",
+      "$value": "#009E4D",
+      "section": "Success",
+      "$alias": "--success-700"
+    },
+    "--color-warning": {
+      "$type": "color",
+      "$value": "#FFB249",
+      "section": "Warning",
+      "$dark": "#FFC97D",
+      "$alias": "--warning-500"
+    },
+    "--color-on-warning": {
+      "$type": "color",
+      "$value": "#0A0C12",
+      "section": "Warning",
+      "$dark": "#5A2A00",
+      "$alias": "--neutral-900"
+    },
+    "--color-warning-container": {
+      "$type": "color",
+      "$value": "#FFF2DF",
+      "section": "Warning",
+      "$dark": "#7A3200",
+      "$alias": "--warning-50"
+    },
+    "--color-on-warning-container": {
+      "$type": "color",
+      "$value": "#C43800",
+      "section": "Warning",
+      "$dark": "#FFDEB0",
+      "$alias": "--warning-925"
+    },
+    "--color-info": {
+      "$type": "color",
+      "$value": "#1E52EE",
+      "section": "Info",
+      "$dark": "#9FABF8",
+      "$alias": "--info-500"
+    },
+    "--color-on-info": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Info",
+      "$dark": "#00177A",
+      "$alias": "--neutral-white"
+    },
+    "--color-info-container": {
+      "$type": "color",
+      "$value": "#E9EBFD",
+      "section": "Info",
+      "$dark": "#0032CB",
+      "$alias": "--info-50"
+    },
+    "--color-on-info-container": {
+      "$type": "color",
+      "$value": "#001ABA",
+      "section": "Info",
+      "$dark": "#C7CCFA",
+      "$alias": "--info-900"
+    },
+    "--color-surface": {
+      "$type": "color",
+      "$value": "#FAFBFC",
+      "section": "Background & Surface",
+      "$dark": "#13161F",
+      "$alias": "--neutral-10"
+    },
+    "--color-surface-dim": {
+      "$type": "color",
+      "$value": "#EAEBED",
+      "section": "Background & Surface",
+      "$dark": "#0A0C12",
+      "$alias": "--neutral-50"
+    },
+    "--color-surface-bright": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Background & Surface",
+      "$dark": "#1C202C",
+      "$alias": "--neutral-white"
+    },
+    "--color-surface-container-lowest": {
+      "$type": "color",
+      "$value": "#FAFBFC",
+      "section": "Background & Surface",
+      "$dark": "#0A0C12",
+      "$alias": "--neutral-10"
+    },
+    "--color-surface-container-low": {
+      "$type": "color",
+      "$value": "#FAFBFC",
+      "section": "Background & Surface",
+      "$dark": "#13161F",
+      "$alias": "--neutral-10"
+    },
+    "--color-surface-container": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Background & Surface",
+      "$dark": "#1C202C",
+      "$alias": "--neutral-white"
+    },
+    "--color-surface-container-high": {
+      "$type": "color",
+      "$value": "#EAEBED",
+      "section": "Background & Surface",
+      "$dark": "#282C39",
+      "$alias": "--neutral-50"
+    },
+    "--color-surface-container-highest": {
+      "$type": "color",
+      "$value": "#BFC1C8",
+      "section": "Background & Surface",
+      "$dark": "#353A4A",
+      "$alias": "--neutral-100"
+    },
+    "--color-surface-variant": {
+      "$type": "color",
+      "$value": "#EAEBED",
+      "section": "Background & Surface",
+      "$dark": "#282C39",
+      "$alias": "--neutral-50"
+    },
+    "--color-on-surface": {
+      "$type": "color",
+      "$value": "#0A0C12",
+      "section": "Background & Surface",
+      "$dark": "#EAEBED",
+      "$alias": "--neutral-900"
+    },
+    "--color-on-surface-variant": {
+      "$type": "color",
+      "$value": "#474D61",
+      "section": "Background & Surface",
+      "$description": "texto secundario medio (#474D61) — antes neutral-700, demasiado oscuro",
+      "$dark": "#BFC1C8",
+      "$alias": "--neutral-400"
+    },
+    "--color-outline": {
+      "$type": "color",
+      "$value": "#9FA3AE",
+      "section": "Outline · bordes (outline = más prominente/oscuro; variant = sutil)",
+      "$description": "#9FA3AE",
+      "$dark": "#747989",
+      "$alias": "--neutral-200"
+    },
+    "--color-outline-variant": {
+      "$type": "color",
+      "$value": "#BFC1C8",
+      "section": "Outline · bordes (outline = más prominente/oscuro; variant = sutil)",
+      "$description": "#BFC1C8",
+      "$dark": "#474D61",
+      "$alias": "--neutral-100"
+    },
+    "--color-inverse-surface": {
+      "$type": "color",
+      "$value": "#0A0C12",
+      "section": "Inverse",
+      "$dark": "#EAEBED",
+      "$alias": "--neutral-900"
+    },
+    "--color-inverse-on-surface": {
+      "$type": "color",
+      "$value": "#EAEBED",
+      "section": "Inverse",
+      "$dark": "#13161F",
+      "$alias": "--neutral-50"
+    },
+    "--color-inverse-primary": {
+      "$type": "color",
+      "$value": "#4F80FF",
+      "section": "Inverse",
+      "$dark": "#162F6F",
+      "$alias": "--secondary-900"
+    },
+    "--color-disabled": {
+      "$type": "color",
+      "$value": "#BFC1C8",
+      "section": "Disabled",
+      "$dark": "#282C39",
+      "$alias": "--neutral-100"
+    },
+    "--color-on-disabled": {
+      "$type": "color",
+      "$value": "#747989",
+      "section": "Disabled",
+      "$alias": "--neutral-300"
+    },
+    "--color-focus": {
+      "$type": "color",
+      "$value": "#4F80FF",
+      "section": "Focus & Overlay",
+      "$alias": "--secondary-900"
+    },
+    "--color-focus-ring": {
+      "$type": "color",
+      "$value": "#4F80FF26",
+      "section": "Anillo de foco: derivado de  color-focus (single source of truth) en vez de hardcodear rgba(79,128,255,.15).  color-focus no tiene override en dark (señal de foco consistente entre temas), así que el valor resuelto es el mismo en ambos temas — pero ahora sigue automáticamente cualquier cambio de  color-focus, sin duplicar el hex."
+    },
+    "--color-error-ring": {
+      "$type": "color",
+      "$value": "#FD3A451F",
+      "section": "Ring de error (inputs .is-error): derivado de  color-error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba."
+    },
+    "--color-scrim": {
+      "$type": "color",
+      "$value": "rgba(0,0,0,.32)",
+      "section": "Ring de error (inputs .is-error): derivado de  color-error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba."
+    },
+    "--button-secondary-bg": {
+      "$type": "color",
+      "$value": "#EAEBED",
+      "section": "Restaurados en sep-2026. Habían sido eliminados y btn-secondary pasó a consumir  color-secondary-container directamente, o sea el mismo token que  color-nav-selected: el item seleccionado del menú y el botón secundario salían idénticos. En todo el resto del sistema secondary-container significa SELECCIONADO (chip, segmented, pagination, toggle, calendar, list); el botón era el único lugar donde significaba \"acción\". Así que el que se movió fue el botón, y vuelve al tratamiento neutro que describe el bloque de arriba. Los roles ya son theme-aware: se definen una sola vez, sin override por tema.",
+      "$alias": "--color-surface-container-high"
+    },
+    "--button-secondary-fg": {
+      "$type": "color",
+      "$value": "#0A0C12",
+      "section": "Restaurados en sep-2026. Habían sido eliminados y btn-secondary pasó a consumir  color-secondary-container directamente, o sea el mismo token que  color-nav-selected: el item seleccionado del menú y el botón secundario salían idénticos. En todo el resto del sistema secondary-container significa SELECCIONADO (chip, segmented, pagination, toggle, calendar, list); el botón era el único lugar donde significaba \"acción\". Así que el que se movió fue el botón, y vuelve al tratamiento neutro que describe el bloque de arriba. Los roles ya son theme-aware: se definen una sola vez, sin override por tema.",
+      "$alias": "--color-on-surface"
+    },
+    "--button-secondary-border": {
+      "$type": "color",
+      "$value": "#747989",
+      "section": "El relleno neutro contrasta 1.19:1 con la tarjeta: el borde ES lo que identifica al control, así que tiene que llegar a 3:1 (WCAG 1.4.11). En claro  color-outline es neutral-200 y se queda en 2.52:1, por eso acá va neutral-300 → 4.34:1. En dark  color-outline YA es neutral-300 y encima viene teñido por la marca: ahí se usa el rol (ver el bloque [data-theme=\"dark\"]).",
+      "$alias": "--neutral-300"
+    },
+    "--button-secondary-bg-hover": {
+      "$type": "color",
+      "$value": "#BFC1C8",
+      "section": "El relleno neutro contrasta 1.19:1 con la tarjeta: el borde ES lo que identifica al control, así que tiene que llegar a 3:1 (WCAG 1.4.11). En claro  color-outline es neutral-200 y se queda en 2.52:1, por eso acá va neutral-300 → 4.34:1. En dark  color-outline YA es neutral-300 y encima viene teñido por la marca: ahí se usa el rol (ver el bloque [data-theme=\"dark\"]).",
+      "$alias": "--color-surface-container-highest"
+    },
+    "--bg": {
+      "$type": "color",
+      "$value": "#FAFBFC",
+      "section": "Semantic aliases",
+      "$alias": "--color-surface"
+    },
+    "--surface": {
+      "$type": "color",
+      "$value": "#EAEBED",
+      "section": "Semantic aliases",
+      "$alias": "--color-surface-dim"
+    },
+    "--sidebar-bg": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Semantic aliases",
+      "$alias": "--color-surface-container"
+    },
+    "--card-bg": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Semantic aliases",
+      "$alias": "--color-surface-container"
+    },
+    "--border": {
+      "$type": "color",
+      "$value": "#0A0C121A",
+      "section": "Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad. Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el outline de elementos INTERACTIVOS ( color-outline, botones/chips/inputs) se distinga con claridad. Theme-aware vía color-mix — sin override en dark."
+    },
+    "--divider": {
+      "$type": "color",
+      "$value": "#0A0C121A",
+      "section": "Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad. Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el outline de elementos INTERACTIVOS ( color-outline, botones/chips/inputs) se distinga con claridad. Theme-aware vía color-mix — sin override en dark.",
+      "$alias": "--border"
+    },
+    "--text-primary": {
+      "$type": "color",
+      "$value": "#01164D",
+      "section": "Tipografía de página (decisión de diseño, jun 2026): el texto principal —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro neutral-900. Igual que el sitio de docs. En dark se recalibra a neutral-50 (override abajo).  color-on-surface queda para contenido interno de componentes (labels de chips, botones, celdas).",
+      "$dark": "#EAEBED",
+      "$alias": "--primary-900"
+    },
+    "--text-secondary": {
+      "$type": "color",
+      "$value": "#353A4A",
+      "section": "Tipografía de página (decisión de diseño, jun 2026): el texto principal —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro neutral-900. Igual que el sitio de docs. En dark se recalibra a neutral-50 (override abajo).  color-on-surface queda para contenido interno de componentes (labels de chips, botones, celdas).",
+      "$dark": "#BFC1C8",
+      "$alias": "--neutral-500"
+    },
+    "--text-muted": {
+      "$type": "color",
+      "$value": "#474D61",
+      "section": "Tipografía de página (decisión de diseño, jun 2026): el texto principal —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro neutral-900. Igual que el sitio de docs. En dark se recalibra a neutral-50 (override abajo).  color-on-surface queda para contenido interno de componentes (labels de chips, botones, celdas).",
+      "$description": "NO --color-on-disabled: pinta texto activo, y ahí el mínimo AA sí rige",
+      "$dark": "#9FA3AE",
+      "$alias": "--color-on-surface-variant"
+    },
+    "--color-success-text": {
+      "$type": "color",
+      "$value": "#006D2C",
+      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "$alias": "--color-on-success-container"
+    },
+    "--color-error-text": {
+      "$type": "color",
+      "$value": "#BF0B29",
+      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "$alias": "--color-on-error-container"
+    },
+    "--color-warning-text": {
+      "$type": "color",
+      "$value": "#C43800",
+      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "$alias": "--color-on-warning-container"
+    },
+    "--color-info-text": {
+      "$type": "color",
+      "$value": "#001ABA",
+      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "$alias": "--color-on-info-container"
+    },
+    "--text-on-dark": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "$alias": "--neutral-white"
+    },
+    "--interactive": {
+      "$type": "color",
+      "$value": "#4F80FF",
+      "section": "Interactive — secondary blue (links, nav, tabs, focus)",
+      "$alias": "--color-secondary"
+    },
+    "--interactive-hover": {
+      "$type": "color",
+      "$value": "#253E82",
+      "section": "Interactive — secondary blue (links, nav, tabs, focus)",
+      "$dark": "#909BBE",
+      "$alias": "--primary-500"
+    },
+    "--interactive-light": {
+      "$type": "color",
+      "$value": "#CAD9FF",
+      "section": "Interactive — secondary blue (links, nav, tabs, focus)",
+      "$alias": "--color-secondary-container"
+    },
+    "--accent": {
+      "$type": "color",
+      "$value": "#4F80FF",
+      "section": "Accent aliases — consumed by docs.css and docs shell",
+      "$alias": "--interactive"
+    },
+    "--accent-light": {
+      "$type": "color",
+      "$value": "#CAD9FF",
+      "section": "Accent aliases — consumed by docs.css and docs shell",
+      "$alias": "--interactive-light"
+    },
+    "--tertiary-purple": {
+      "$type": "color",
+      "$value": "#7158F4",
+      "section": "Purple (legacy tertiary aliases)",
+      "$alias": "--color-tertiary"
+    },
+    "--tertiary-purple-hover": {
+      "$type": "color",
+      "$value": "#7F69F5",
+      "section": "Purple (legacy tertiary aliases)",
+      "$alias": "--tertiary-800"
+    },
+    "--tertiary-purple-light": {
+      "$type": "color",
+      "$value": "#F1EEFE",
+      "section": "Purple (legacy tertiary aliases)",
+      "$alias": "--tertiary-50"
+    },
+    "--green": {
+      "$type": "color",
+      "$value": "#00C164",
+      "section": "Semantic status",
+      "$alias": "--color-success"
+    },
+    "--green-light": {
+      "$type": "color",
+      "$value": "#E4F8EC",
+      "section": "Semantic status",
+      "$alias": "--color-success-container"
+    },
+    "--red": {
+      "$type": "color",
+      "$value": "#FD3A45",
+      "section": "Semantic status",
+      "$alias": "--color-error"
+    },
+    "--red-light": {
+      "$type": "color",
+      "$value": "#FFEBF0",
+      "section": "Semantic status",
+      "$alias": "--color-error-container"
+    },
+    "--yellow": {
+      "$type": "color",
+      "$value": "#FFB249",
+      "section": "Semantic status",
+      "$alias": "--color-warning"
+    },
+    "--yellow-light": {
+      "$type": "color",
+      "$value": "#FFF2DF",
+      "section": "Semantic status",
+      "$alias": "--color-warning-container"
+    },
+    "--blue": {
+      "$type": "color",
+      "$value": "#1E52EE",
+      "section": "Semantic status",
+      "$alias": "--color-info"
+    },
+    "--blue-light": {
+      "$type": "color",
+      "$value": "#E9EBFD",
+      "section": "Semantic status",
+      "$alias": "--color-info-container"
+    },
+    "--space-0-5": {
+      "$type": "dimension",
+      "$value": "2px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "separación mínima, compensación de borde"
+    },
+    "--space-1": {
+      "$type": "dimension",
+      "$value": "4px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "icon gaps, min separators"
+    },
+    "--space-1-5": {
+      "$type": "dimension",
+      "$value": "6px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "ícono ↔ label, padding de control chico"
+    },
+    "--space-2": {
+      "$type": "dimension",
+      "$value": "8px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "inline element gaps"
+    },
+    "--space-2-5": {
+      "$type": "dimension",
+      "$value": "10px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "padding vertical de controles compactos"
+    },
+    "--space-3": {
+      "$type": "dimension",
+      "$value": "12px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "badge / chip padding"
+    },
+    "--space-3-5": {
+      "$type": "dimension",
+      "$value": "14px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "padding de editor, celda cómoda"
+    },
+    "--space-4": {
+      "$type": "dimension",
+      "$value": "16px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "compact card padding"
+    },
+    "--space-5": {
+      "$type": "dimension",
+      "$value": "20px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "form field gaps"
+    },
+    "--space-6": {
+      "$type": "dimension",
+      "$value": "24px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "standard card padding"
+    },
+    "--space-8": {
+      "$type": "dimension",
+      "$value": "32px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "medium section padding"
+    },
+    "--space-10": {
+      "$type": "dimension",
+      "$value": "40px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "block separators"
+    },
+    "--space-12": {
+      "$type": "dimension",
+      "$value": "48px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "main content padding"
+    },
+    "--space-16": {
+      "$type": "dimension",
+      "$value": "64px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "section separators"
+    },
+    "--space-20": {
+      "$type": "dimension",
+      "$value": "80px",
+      "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
+      "$description": "hero / large section padding"
+    },
+    "--icon-stroke": {
+      "$type": "other",
+      "$value": "2",
+      "section": "Iconografía — grosor de trazo  Un solo valor para todos los íconos del sistema. Antes convivían seis grosores distintos (1, 1.5, 2, 2.2, 2.5, 3) sin ninguna regla, así que dos íconos vecinos podían tener peso distinto sin que nadie lo hubiera decidido.  Es también un eje de marca: 1.5 se lee liviano y elegante, 2.5 se lee robusto y utilitario. Se overridea en el brand layer, nunca por componente.  Escape hatch: un ícono que de verdad necesita otro peso lo declara inline (style=\"stroke-width:3\"), que gana sobre la hoja de estilos."
+    },
+    "--font-heading": {
+      "$type": "fontFamily",
+      "$value": "'Epilogue', sans-serif",
+      "section": "Typography — Font families"
+    },
+    "--font-body": {
+      "$type": "fontFamily",
+      "$value": "'Inter', sans-serif",
+      "section": "Typography — Font families"
+    },
+    "--font-mono": {
+      "$type": "fontFamily",
+      "$value": "'DM Mono', monospace",
+      "section": "Typography — Font families"
+    },
+    "--font-size-editorial-lg": {
+      "$type": "typography",
+      "$value": "52px",
+      "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$fluid": {
+        "min": "52px",
+        "preferred": "8vw",
+        "max": "96px"
+      },
+      "$native": {
+        "phone": 52,
+        "tablet": 96,
+        "translates": false,
+        "unit": "clamp",
+        "rule": "Congelado en 52px (telefono). El maximo 96px vale para tablet."
+      }
+    },
+    "--line-height-editorial-lg": {
+      "$type": "typography",
+      "$value": "1.02",
+      "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.02"
+      }
+    },
+    "--font-size-editorial-md": {
+      "$type": "typography",
+      "$value": "40px",
+      "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$fluid": {
+        "min": "40px",
+        "preferred": "6vw",
+        "max": "68px"
+      },
+      "$native": {
+        "phone": 40,
+        "tablet": 68,
+        "translates": false,
+        "unit": "clamp",
+        "rule": "Congelado en 40px (telefono). El maximo 68px vale para tablet."
+      }
+    },
+    "--line-height-editorial-md": {
+      "$type": "typography",
+      "$value": "1.06",
+      "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.06"
+      }
+    },
+    "--font-size-editorial-sm": {
+      "$type": "typography",
+      "$value": "32px",
+      "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$fluid": {
+        "min": "32px",
+        "preferred": "4.5vw",
+        "max": "46px"
+      },
+      "$native": {
+        "phone": 32,
+        "tablet": 46,
+        "translates": false,
+        "unit": "clamp",
+        "rule": "Congelado en 32px (telefono). El maximo 46px vale para tablet."
+      }
+    },
+    "--line-height-editorial-sm": {
+      "$type": "typography",
+      "$value": "1.1",
+      "section": "Registro editorial — SOLO para el título de apertura de una landing, una portada de propuesta o un reporte. No entra a producto: la escala de abajo es la de las pantallas y no se toca. Existe porque la escala de producto arranca en 28px, y a 28px un hero se lee tímido — que es exactamente el default de una página generada: todo un poco grande y nada dominante. La identidad no está en agrandar todo, está en el CONTRASTE entre un título de 96 y un cuerpo de 13.5. Uno solo por página. Dos títulos editoriales son dos aperturas.",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.1"
+      }
+    },
+    "--letter-spacing-editorial": {
+      "$type": "typography",
+      "$value": "-0.02em",
+      "section": "A este tamaño el tracking se mide en em, no en px: -0.4px no se nota en 96 y desarma un título de 32.",
+      "$native": {
+        "translates": false,
+        "unit": "em",
+        "rule": "RN mide letterSpacing en puntos: letterSpacing = fontSize * -0.02"
+      }
+    },
+    "--font-size-display": {
+      "$type": "typography",
+      "$value": "28px",
+      "section": "Epilogue — Display & Headings"
+    },
+    "--line-height-display": {
+      "$type": "typography",
+      "$value": "1.15",
+      "section": "Epilogue — Display & Headings",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.15"
+      }
+    },
+    "--font-size-heading-xl": {
+      "$type": "typography",
+      "$value": "24px",
+      "section": "Epilogue — Display & Headings"
+    },
+    "--line-height-heading-xl": {
+      "$type": "typography",
+      "$value": "1.2",
+      "section": "Epilogue — Display & Headings",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.2"
+      }
+    },
+    "--font-size-heading-lg": {
+      "$type": "typography",
+      "$value": "22px",
+      "section": "Epilogue — Display & Headings"
+    },
+    "--line-height-heading-lg": {
+      "$type": "typography",
+      "$value": "1.25",
+      "section": "Epilogue — Display & Headings",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.25"
+      }
+    },
+    "--font-size-heading-md": {
+      "$type": "typography",
+      "$value": "18px",
+      "section": "Epilogue — Display & Headings"
+    },
+    "--line-height-heading-md": {
+      "$type": "typography",
+      "$value": "1.3",
+      "section": "Epilogue — Display & Headings",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.3"
+      }
+    },
+    "--font-size-heading-sm": {
+      "$type": "typography",
+      "$value": "17px",
+      "section": "Epilogue — Display & Headings"
+    },
+    "--line-height-heading-sm": {
+      "$type": "typography",
+      "$value": "1.35",
+      "section": "Epilogue — Display & Headings",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.35"
+      }
+    },
+    "--font-size-heading-xs": {
+      "$type": "typography",
+      "$value": "15px",
+      "section": "Epilogue — Display & Headings"
+    },
+    "--line-height-heading-xs": {
+      "$type": "typography",
+      "$value": "1.4",
+      "section": "Epilogue — Display & Headings",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.4"
+      }
+    },
+    "--font-size-body-lg": {
+      "$type": "typography",
+      "$value": "14px",
+      "section": "Inter — Body & UI"
+    },
+    "--line-height-body-lg": {
+      "$type": "typography",
+      "$value": "1.5",
+      "section": "Inter — Body & UI",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.5"
+      }
+    },
+    "--font-size-body-md": {
+      "$type": "typography",
+      "$value": "13.5px",
+      "section": "Inter — Body & UI",
+      "$description": "base: inputs, buttons, table cells"
+    },
+    "--line-height-body-md": {
+      "$type": "typography",
+      "$value": "1.5",
+      "section": "Inter — Body & UI",
+      "$description": "base: inputs, buttons, table cells",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.5"
+      }
+    },
+    "--font-size-body-sm": {
+      "$type": "typography",
+      "$value": "12.5px",
+      "section": "Inter — Body & UI"
+    },
+    "--line-height-body-sm": {
+      "$type": "typography",
+      "$value": "1.6",
+      "section": "Inter — Body & UI",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.6"
+      }
+    },
+    "--font-size-label": {
+      "$type": "typography",
+      "$value": "13px",
+      "section": "Inter — Body & UI"
+    },
+    "--line-height-label": {
+      "$type": "typography",
+      "$value": "1.4",
+      "section": "Inter — Body & UI",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.4"
+      }
+    },
+    "--font-size-caption": {
+      "$type": "typography",
+      "$value": "12px",
+      "section": "Inter — Body & UI"
+    },
+    "--line-height-caption": {
+      "$type": "typography",
+      "$value": "1.4",
+      "section": "Inter — Body & UI",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.4"
+      }
+    },
+    "--font-size-badge": {
+      "$type": "typography",
+      "$value": "11.5px",
+      "section": "Inter — Body & UI"
+    },
+    "--line-height-badge": {
+      "$type": "typography",
+      "$value": "1.2",
+      "section": "Inter — Body & UI",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.2"
+      }
+    },
+    "--font-size-overline": {
+      "$type": "typography",
+      "$value": "12px",
+      "section": "Inter — Body & UI",
+      "$description": "uppercase table headers"
+    },
+    "--line-height-overline": {
+      "$type": "typography",
+      "$value": "1.2",
+      "section": "Inter — Body & UI",
+      "$description": "uppercase table headers",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.2"
+      }
+    },
+    "--font-size-mono-md": {
+      "$type": "typography",
+      "$value": "13px",
+      "section": "DM Mono — Monospace"
+    },
+    "--line-height-mono-md": {
+      "$type": "typography",
+      "$value": "1.5",
+      "section": "DM Mono — Monospace",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.5"
+      }
+    },
+    "--font-size-mono-sm": {
+      "$type": "typography",
+      "$value": "11px",
+      "section": "DM Mono — Monospace"
+    },
+    "--line-height-mono-sm": {
+      "$type": "typography",
+      "$value": "1.4",
+      "section": "DM Mono — Monospace",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.4"
+      }
+    },
+    "--font-weight-regular": {
+      "$type": "typography",
+      "$value": "400",
+      "section": "Font weights"
+    },
+    "--font-weight-medium": {
+      "$type": "typography",
+      "$value": "500",
+      "section": "Font weights"
+    },
+    "--font-weight-semibold": {
+      "$type": "typography",
+      "$value": "600",
+      "section": "Font weights"
+    },
+    "--font-weight-bold": {
+      "$type": "typography",
+      "$value": "700",
+      "section": "Font weights"
+    },
+    "--font-weight-extrabold": {
+      "$type": "typography",
+      "$value": "800",
+      "section": "Font weights"
+    },
+    "--letter-spacing-display": {
+      "$type": "typography",
+      "$value": "-0.5px",
+      "section": "Escala cerrada. No hay tracking libre: si un texto necesita uno que no está acá, no lo necesita. Los dos positivos son los ÚNICOS, y no son intercambiables — ver COMPOSICION.md, eje A."
+    },
+    "--letter-spacing-heading-xl": {
+      "$type": "typography",
+      "$value": "-0.4px",
+      "section": "Escala cerrada. No hay tracking libre: si un texto necesita uno que no está acá, no lo necesita. Los dos positivos son los ÚNICOS, y no son intercambiables — ver COMPOSICION.md, eje A."
+    },
+    "--letter-spacing-heading-lg": {
+      "$type": "typography",
+      "$value": "-0.3px",
+      "section": "Escala cerrada. No hay tracking libre: si un texto necesita uno que no está acá, no lo necesita. Los dos positivos son los ÚNICOS, y no son intercambiables — ver COMPOSICION.md, eje A."
+    },
+    "--letter-spacing-heading-md": {
+      "$type": "typography",
+      "$value": "-0.2px",
+      "section": "Escala cerrada. No hay tracking libre: si un texto necesita uno que no está acá, no lo necesita. Los dos positivos son los ÚNICOS, y no son intercambiables — ver COMPOSICION.md, eje A."
+    },
+    "--letter-spacing-overline": {
+      "$type": "typography",
+      "$value": "0.04em",
+      "section": "Overline de página, en DM Mono y a 12px. Apretado a propósito: el default de una página generada es 0.12–0.16em en sans, y ese tracking amplio es lo que la vuelve reconocible a diez metros. En monoespaciada y apretado se lee como etiqueta de sistema.",
+      "$native": {
+        "translates": false,
+        "unit": "em",
+        "rule": "RN mide letterSpacing en puntos: letterSpacing = fontSize * 0.04"
+      }
+    },
+    "--letter-spacing-label": {
+      "$type": "typography",
+      "$value": "0.08em",
+      "section": "Versalitas de componente (badge, header de tabla, label del nav, acción del toast): 10–11px. Acá el tracking apretado se lee PEOR — a ese tamaño las mayúsculas necesitan aire para separarse. No unificar con el de arriba: resuelven problemas distintos.",
+      "$native": {
+        "translates": false,
+        "unit": "em",
+        "rule": "RN mide letterSpacing en puntos: letterSpacing = fontSize * 0.08"
+      }
+    },
+    "--letter-spacing-normal": {
+      "$type": "typography",
+      "$value": "0",
+      "section": "Versalitas de componente (badge, header de tabla, label del nav, acción del toast): 10–11px. Acá el tracking apretado se lee PEOR — a ese tamaño las mayúsculas necesitan aire para separarse. No unificar con el de arriba: resuelven problemas distintos."
+    },
+    "--sidebar-width": {
+      "$type": "other",
+      "$value": "220px",
+      "section": "Layout"
+    },
+    "--topbar-height": {
+      "$type": "other",
+      "$value": "56px",
+      "section": "Layout"
+    },
+    "--breakpoint-md": {
+      "$type": "dimension",
+      "$value": "768px",
+      "section": "Breakpoints — referencia canónica del DS. Limitación CSS: las media queries NO pueden consumir var(); usá estos valores literales en @media y mantenelos sincronizados con estos tokens. md  768px  — debajo: layout de columna única; grids colapsan lg 1024px  — debajo: contenido compacto; sidebar puede colapsar Shell en mobile (resuelto jul-2026): debajo de 768px el sidebar es un modal navigation drawer (off-canvas + scrim + hamburguesa .shell-menu-btn) — implementado en layout.css, spec en GOVERNANCE.md §14.3.",
+      "$native": {
+        "translates": true,
+        "rn": "useWindowDimensions().width"
+      }
+    },
+    "--breakpoint-lg": {
+      "$type": "dimension",
+      "$value": "1024px",
+      "section": "Breakpoints — referencia canónica del DS. Limitación CSS: las media queries NO pueden consumir var(); usá estos valores literales en @media y mantenelos sincronizados con estos tokens. md  768px  — debajo: layout de columna única; grids colapsan lg 1024px  — debajo: contenido compacto; sidebar puede colapsar Shell en mobile (resuelto jul-2026): debajo de 768px el sidebar es un modal navigation drawer (off-canvas + scrim + hamburguesa .shell-menu-btn) — implementado en layout.css, spec en GOVERNANCE.md §14.3.",
+      "$native": {
+        "translates": true,
+        "rn": "useWindowDimensions().width"
+      }
+    },
+    "--radius-sm": {
+      "$type": "dimension",
+      "$value": "4px",
+      "section": "Border radius  (DS scale)"
+    },
+    "--radius-md": {
+      "$type": "dimension",
+      "$value": "8px",
+      "section": "Border radius  (DS scale)"
+    },
+    "--radius-lg": {
+      "$type": "dimension",
+      "$value": "12px",
+      "section": "Border radius  (DS scale)"
+    },
+    "--radius-xl": {
+      "$type": "dimension",
+      "$value": "16px",
+      "section": "Border radius  (DS scale)"
+    },
+    "--radius-full": {
+      "$type": "dimension",
+      "$value": "9999px",
+      "section": "Border radius  (DS scale)"
+    },
+    "--radius": {
+      "$type": "other",
+      "$value": "12px",
+      "section": "radius-button: NO se define acá a propósito. Los botones usan var( radius-button, <el token que le toca a ese tamaño>), así que mientras nadie lo declare el radio sigue saliendo de la escala por tamaño (GOVERNANCE §4.3) y nada cambia. El tema de marca con forma `pildora` lo declara en 9999px y los convierte a todos en píldora de una, sin tocar tarjetas, modales ni campos. Es el único token de forma pensado para que una marca lo prenda o lo apague.",
+      "$alias": "--radius-lg"
+    },
+    "--shadow-sm": {
+      "$type": "shadow",
+      "$value": "0 1px 3px rgba(28,36,56,.06)",
+      "section": "Shadows",
+      "$native": {
+        "translates": false,
+        "rule": "RN no tiene box-shadow multi-capa: iOS usa shadowColor/Offset/Opacity/Radius y Android solo elevation."
+      }
+    },
+    "--shadow-md": {
+      "$type": "shadow",
+      "$value": "0 4px 16px rgba(28,36,56,.08)",
+      "section": "Shadows",
+      "$native": {
+        "translates": false,
+        "rule": "RN no tiene box-shadow multi-capa: iOS usa shadowColor/Offset/Opacity/Radius y Android solo elevation."
+      }
+    },
+    "--shadow-lg": {
+      "$type": "shadow",
+      "$value": "0 8px 32px rgba(28,36,56,.12)",
+      "section": "Shadows",
+      "$native": {
+        "translates": false,
+        "rule": "RN no tiene box-shadow multi-capa: iOS usa shadowColor/Offset/Opacity/Radius y Android solo elevation."
+      }
+    },
+    "--btn-elevation": {
+      "$type": "other",
+      "$value": "0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12)",
+      "section": "Elevated Button elevation (MD3 elevated button). A runtime var so it can flip in dark — Tailwind inlines  shadow  into utility classes (they can't recalibrate), so the elevated button consumes THIS via shadow-[var( btn-elevation)]. Slightly stronger than the card  shadow  so the lift reads clearly; black in dark.",
+      "$dark": "0 1px 2px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.42)"
+    },
+    "--btn-elevation-hover": {
+      "$type": "other",
+      "$value": "0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16)",
+      "section": "Elevated Button elevation (MD3 elevated button). A runtime var so it can flip in dark — Tailwind inlines  shadow  into utility classes (they can't recalibrate), so the elevated button consumes THIS via shadow-[var( btn-elevation)]. Slightly stronger than the card  shadow  so the lift reads clearly; black in dark.",
+      "$dark": "0 2px 4px rgba(0,0,0,.60), 0 8px 20px rgba(0,0,0,.50)"
+    },
+    "--color-nav-hover": {
+      "$type": "color",
+      "$value": "#CAD9FF73",
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override."
+    },
+    "--color-nav-hover-content": {
+      "$type": "color",
+      "$value": "#4F80FF",
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override.",
+      "$alias": "--color-secondary"
+    },
+    "--color-nav-press": {
+      "$type": "color",
+      "$value": "#CAD9FFB3",
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override."
+    },
+    "--color-nav-selected": {
+      "$type": "color",
+      "$value": "#CAD9FF",
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override.",
+      "$alias": "--color-secondary-container"
+    },
+    "--color-nav-selected-content": {
+      "$type": "color",
+      "$value": "#01164D",
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override.",
+      "$alias": "--color-on-secondary-container"
+    },
+    "--gradient-brand": {
+      "$type": "gradient",
+      "$value": "linear-gradient(135deg, #01164D 0%, #3A5BB0 100%)",
+      "section": "Fuerte: una banda o una tarjeta que tiene que pesar. Texto claro encima.",
+      "$native": {
+        "translates": false,
+        "rule": "RN no tiene gradientes nativos: expo-linear-gradient con los stops ya resueltos."
+      }
+    },
+    "--measure": {
+      "$type": "dimension",
+      "$value": "68ch",
+      "section": "Medida de línea. El límite de legibilidad no depende del ancho del layout: una página borde a borde sigue necesitando que el TEXTO corte a tiempo. Por eso es un token propio y no el ancho del contenedor (COMPOSICION.md, estructura).",
+      "$description": "texto corrido",
+      "$native": {
+        "translates": false,
+        "unit": "ch",
+        "rule": "RN no tiene ch. En nativo la medida de linea se acota con maxWidth en puntos o con el ancho de la columna."
+      }
+    },
+    "--measure-lead": {
+      "$type": "dimension",
+      "$value": "52ch",
+      "section": "Medida de línea. El límite de legibilidad no depende del ancho del layout: una página borde a borde sigue necesitando que el TEXTO corte a tiempo. Por eso es un token propio y no el ancho del contenedor (COMPOSICION.md, estructura).",
+      "$description": "bajadas y párrafos de apertura, más cortos",
+      "$native": {
+        "translates": false,
+        "unit": "ch",
+        "rule": "RN no tiene ch. En nativo la medida de linea se acota con maxWidth en puntos o con el ancho de la columna."
+      }
+    },
+    "--ease-default": {
+      "$type": "motion",
+      "$value": "cubic-bezier(.4,0,.2,1)",
+      "section": "Standard scheme — functional, minimal bounce (MD3 fallback for Web)",
+      "$native": {
+        "translates": true,
+        "rn": "Easing.bezier(0.4, 0, 0.2, 1)"
+      }
+    },
+    "--ease-enter": {
+      "$type": "motion",
+      "$value": "cubic-bezier(0,0,0,1)",
+      "section": "Standard scheme — functional, minimal bounce (MD3 fallback for Web)",
+      "$native": {
+        "translates": true,
+        "rn": "Easing.bezier(0, 0, 0, 1)"
+      }
+    },
+    "--ease-exit": {
+      "$type": "motion",
+      "$value": "cubic-bezier(.3,0,1,1)",
+      "section": "Standard scheme — functional, minimal bounce (MD3 fallback for Web)",
+      "$native": {
+        "translates": true,
+        "rn": "Easing.bezier(0.3, 0, 1, 1)"
+      }
+    },
+    "--ease-expressive": {
+      "$type": "motion",
+      "$value": "cubic-bezier(.34,1.56,.64,1)",
+      "section": "Expressive scheme — CSS-engineered overshoot approximating MD3's spring physics (which MD3 itself says has no native Web/CSS implementation). Spatial use only (movement/scale/rotate) — MD3 explicitly excludes effects (opacity/color) from overshoot, so never pair these with a color/opacity transition.",
+      "$native": {
+        "translates": true,
+        "rn": "Easing.bezier(0.34, 1.56, 0.64, 1)"
+      }
+    },
+    "--ease-expressive-enter": {
+      "$type": "motion",
+      "$value": "cubic-bezier(.175,.885,.32,1.4)",
+      "section": "Expressive scheme — CSS-engineered overshoot approximating MD3's spring physics (which MD3 itself says has no native Web/CSS implementation). Spatial use only (movement/scale/rotate) — MD3 explicitly excludes effects (opacity/color) from overshoot, so never pair these with a color/opacity transition.",
+      "$native": {
+        "translates": true,
+        "rn": "Easing.bezier(0.175, 0.885, 0.32, 1.4)"
+      }
+    },
+    "--ease-expressive-exit": {
+      "$type": "motion",
+      "$value": "cubic-bezier(.3,0,.8,.15)",
+      "section": "Expressive scheme — CSS-engineered overshoot approximating MD3's spring physics (which MD3 itself says has no native Web/CSS implementation). Spatial use only (movement/scale/rotate) — MD3 explicitly excludes effects (opacity/color) from overshoot, so never pair these with a color/opacity transition.",
+      "$native": {
+        "translates": true,
+        "rn": "Easing.bezier(0.3, 0, 0.8, 0.15)"
+      }
+    },
+    "--ease-emphasized": {
+      "$type": "motion",
+      "$value": "cubic-bezier(.32,.72,0,1)",
+      "section": "Emphasized decelerate — the shared Sheet curve. Smooth, no overshoot; the shared curve for every edge-anchored Sheet (Side + Bottom Sheet) enter/exit as one motion system. Use for large edge-anchored surfaces.",
+      "$native": {
+        "translates": true,
+        "rn": "Easing.bezier(0.32, 0.72, 0, 1)"
+      }
+    },
+    "--duration-fast": {
+      "$type": "motion",
+      "$value": "120ms",
+      "section": "Emphasized decelerate — the shared Sheet curve. Smooth, no overshoot; the shared curve for every edge-anchored Sheet (Side + Bottom Sheet) enter/exit as one motion system. Use for large edge-anchored surfaces."
+    },
+    "--duration-normal": {
+      "$type": "motion",
+      "$value": "200ms",
+      "section": "Emphasized decelerate — the shared Sheet curve. Smooth, no overshoot; the shared curve for every edge-anchored Sheet (Side + Bottom Sheet) enter/exit as one motion system. Use for large edge-anchored surfaces."
+    },
+    "--duration-medium": {
+      "$type": "motion",
+      "$value": "300ms",
+      "section": "Emphasized decelerate — the shared Sheet curve. Smooth, no overshoot; the shared curve for every edge-anchored Sheet (Side + Bottom Sheet) enter/exit as one motion system. Use for large edge-anchored surfaces."
+    },
+    "--duration-slow": {
+      "$type": "motion",
+      "$value": "450ms",
+      "section": "Emphasized decelerate — the shared Sheet curve. Smooth, no overshoot; the shared curve for every edge-anchored Sheet (Side + Bottom Sheet) enter/exit as one motion system. Use for large edge-anchored surfaces."
+    },
+    "--duration-sheet": {
+      "$type": "motion",
+      "$value": "500ms",
+      "section": "Shared Sheet slide duration (500ms) for all sides."
+    }
+  }
+}
