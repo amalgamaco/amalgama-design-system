@@ -4803,6 +4803,19 @@ body { overflow-x: clip; }
 
       <div class="ds-callout"><strong>Se elige antes de escribir markup:</strong> una estructura, un ancho, y cómo se compone adentro. Una página que no eligió, eligió el default — que es el que tiene todo el mundo.</div>
 
+      <h2 class="ds-h2">Qué es nuestro y qué se adapta</h2>
+      <p class="ds-p">Tres grupos, y conviene tenerlos separados: <strong>un producto de cliente se ve como el cliente y está compuesto como nosotros.</strong> Si alguien mira una pantalla de un cliente no tiene que reconocer a Amalgama en el color — tiene que reconocerla en que la pantalla está bien puesta.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th></th><th>Qué incluye</th><th>En un producto de cliente</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Es de Amalgama<br>y no sale del estudio</strong></td><td>La capa espacial: lienzo, estrellas, halo, órbitas, <strong>planetas</strong>, los colores <code>--space-*</code>. Y el índice de sección, que es nuestro gesto. Siempre con la tipografía de Embassy</td><td><strong>No va.</strong> Ni de fondo. Falla <code>H12</code>, bloqueante</td></tr>
+            <tr><td><strong>Se adapta a la estética<br>del cliente</strong></td><td>Color, tipografía, forma de las esquinas, los cuatro ejes de personalidad y <strong>los degradés</strong>, que salen de las primitivas y por eso toman su paleta</td><td>Va, con <strong>su</strong> marca. Es para lo que existe el white-label</td></tr>
+            <tr><td><strong>No se negocia,<br>sea de quien sea</strong></td><td>La composición entera, las ubicaciones del ícono, imágenes reales, sin scroll reveal, el dato con su base, accesibilidad, cero relleno</td><td>Va igual. Es oficio, no identidad: nadie contrata que su producto parezca generado</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <h2 class="ds-h2">Qué aplica dónde</h2>
       <p class="ds-p">No es el tamaño de pantalla: un dashboard y una landing se ven los dos en un monitor grande y no se componen igual. <strong>Lo que evita parecer generado aplica a todo. Lo que es apertura es de página, no de producto</strong> — una pantalla de producto no abre, continúa.</p>
       <div class="ds-table-wrap">
@@ -4932,6 +4945,20 @@ body { overflow-x: clip; }
       </div>
       <p class="ds-p" style="margin-top:20px"><strong>Imágenes: solo material real</strong> — capturas del producto, fotos del trabajo o del equipo, diagramas propios. Nunca stock, ilustración isométrica, render 3D ni un degradé haciendo de foto. Si no hay material real, la sección va sin imagen. Todas con el mismo marco: <code>.media</code>, borde de 1px y sin sombra.</p>
       <p class="ds-p"><strong>La página no se revela al scrollear.</strong> El fade-up de cada sección al entrar es el gesto más repetido de las landings generadas. <code>.reveal</code> va una sola vez, en el bloque de apertura, al cargar, y solo en opacidad.</p>
+
+      <h2 class="ds-h2">8 · Degradés</h2>
+      <p class="ds-p">Sí usamos degradés — pero tres, y salen de las primitivas de la marca, así que en un proyecto de cliente toman <strong>su</strong> paleta. La regla que los separa de la mancha de IA: <strong>un degradé es una superficie.</strong> Pinta una banda, una tarjeta o un titular. No flota, no difumina lo que tiene detrás, no rellena. Uno por sección.</p>
+      <div class="ds-preview" style="display:block;padding:0;overflow:hidden">
+        <div class="gradient-brand" style="padding:26px 28px">
+          <p class="overline" style="color:rgba(255,255,255,.75)">Propuesta</p>
+          <h3 style="margin:0;color:#fff">--gradient-brand · una banda que pesa</h3>
+        </div>
+        <div class="gradient-surface" style="padding:26px 28px">
+          <h3 style="margin:0 0 6px">--gradient-surface · separa sin dibujar una caja</h3>
+          <p class="measure" style="margin:0;color:var(--text-secondary)">Sutil, del acento al fondo. Texto normal encima sin problema.</p>
+        </div>
+      </div>
+      <div class="ds-callout"><code>.text-gradient</code> —el titular que se desvanece— va <strong>solo</strong> en el registro editorial. En cuerpo baja el contraste en su extremo débil y a 13,5px es ilegible. Y lleva siempre su <code>color</code> sólido de fallback: si el navegador no recorta el fondo, tiene que quedar un título legible y no uno invisible.</div>
 
       <h2 class="ds-h2">Qué se chequea</h2>
       <p class="ds-p">Las fallas nuevas que <code>review</code> y <code>check-output.mjs</code> marcan sobre lo que se produce:</p>

@@ -9,6 +9,7 @@ summary: Amalgama's own space layer — deep navy canvas with a starfield, one g
 when_to_use:
   - "Amalgama's own surfaces: our site, one-pagers, commercial proposals, project reports, decks and demos we sign."
   - "An internal tool that is explicitly ours and has no client brand on it."
+  - "Always with Embassy's own typography — Epilogue, Inter, DM Mono. The layer is Amalgama's brand: a page loading a client's fonts is not our page, and the layer does not belong on it."
 when_not_to_use:
   - "**Any client product.** Not a white-label screen, not a client landing, not 'just a bit of it in the background'. A client paying for their brand is not buying ours — there the space layer is failure `H12`."
   - "A page that already loads a `brand/<client>.css`. That file's presence is the signal: this is somebody else's brand."
@@ -68,6 +69,7 @@ relationships:
   composed_with: [composition]
   not_to_confuse_with:
     - {component: composition, why: "composition is the skeleton of any page, ours or a client's. This is a skin, and only ours"}
+    - {component: gradients, why: "the three gradients (--gradient-brand / -surface / -glow) are built from the brand's own primitives, so they travel to a client project and take THEIR palette. The space layer is literal Amalgama colour and never travels"}
 
 tokens:
   color: [--space-deep, --space-mid, --space-near, --space-glow, --space-star, --text-primary]

@@ -188,6 +188,31 @@
   animation: amalgama-fade-in var(--duration-medium) var(--ease-enter) both;
 }
 
+/* ── Degradés ──────────────────────────────────────────────────────────────
+   Tres, y salen de las primitivas de la marca: en un proyecto de cliente toman su
+   paleta. Por eso un degradé sí viaja a producto ajeno y la capa espacial no.
+
+   La regla que los separa de la mancha de IA: **un degradé es una superficie**. Pinta
+   una banda, una tarjeta o un titular. No flota, no es un blob, no es un vidrio
+   esmerilado y no va detrás de texto corrido. Uno por sección; dos seguidos se anulan. */
+.gradient-brand   { background: var(--gradient-brand); color: var(--color-on-primary); }
+.gradient-surface { background: var(--gradient-surface); }
+.gradient-glow    { background: var(--gradient-glow); pointer-events: none; }
+
+/* El titular que se desvanece. Solo en el registro editorial —texto grande—, nunca en
+   cuerpo: el degradé baja el contraste en su extremo débil y a 13.5px eso es ilegible.
+   El `color` va SIEMPRE como fallback: si el navegador no soporta el recorte, queda el
+   color sólido en vez de un titular invisible. */
+.text-gradient {
+  color: var(--text-primary);
+  background: linear-gradient(180deg,
+    currentColor 0%,
+    color-mix(in srgb, currentColor 55%, transparent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* ── Imágenes ──────────────────────────────────────────────────────────────
    La política está en COMPOSICION.md regla 10: solo material real —capturas del
    producto, fotos del trabajo o del equipo—, nunca stock, ilustración genérica ni 3D.

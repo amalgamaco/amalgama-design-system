@@ -338,8 +338,12 @@ Nombro los que aparecen una y otra vez. Si tu página tiene alguno, sacalo antes
 1. **El eyebrow decorativo** — la etiqueta chiquita en mayúsculas arriba del título que no aporta
    información.
 2. **Cards anidadas** — una card adentro de otra card adentro de una sección. Elegí un nivel.
-3. **Gradientes decorativos, glassmorphism, blobs y sombras de colores.** Nada de eso está en el
-   sistema.
+3. **Gradientes decorativos, glassmorphism, blobs y sombras de colores.** La mancha que flota, el
+   vidrio esmerilado, el degradé arcoíris: nada de eso está en el sistema. **Un degradé sí**, y son
+   tres —`--gradient-brand`, `--gradient-surface`, `--gradient-glow`—, construidos con las
+   primitivas de la marca. La diferencia es que **un degradé es una superficie**: pinta una banda,
+   una tarjeta o un titular grande. Si flota, si difumina lo que tiene detrás o si está para
+   rellenar, es esto.
 4. **Dos acciones primarias.** Si "las dos son igual de importantes", falló la jerarquía.
 5. **Botón full-width, botón con texto a la izquierda.** Y **botón píldora**, salvo que el tema
    de marca del proyecto declare `--radius-button` — ahí la forma la eligió la marca en el

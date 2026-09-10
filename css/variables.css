@@ -469,6 +469,27 @@
   --color-nav-selected:         var(--color-secondary-container);
   --color-nav-selected-content: var(--color-on-secondary-container);
 
+  /* ─────────────────────────────────────
+     Degradés — set cerrado, construido con las primitivas de la marca.
+     Salen de var(--primary-*) y var(--secondary-*) a propósito: en un proyecto de
+     cliente toman SU paleta, y por eso un degradé sí se puede usar en producto ajeno
+     mientras que la capa espacial no. Lo que no cambia es la regla: el degradé es una
+     SUPERFICIE (una banda, una tarjeta, un titular grande), nunca una mancha flotando
+     ni un vidrio esmerilado — eso sigue siendo la falla H2.
+     Tres, y no hay un cuarto:
+  ───────────────────────────────────── */
+  /* Fuerte: una banda o una tarjeta que tiene que pesar. Texto claro encima. */
+  --gradient-brand:   linear-gradient(135deg, var(--primary-900) 0%, var(--secondary-925) 100%);
+  /* Sutil: separa una sección del fondo sin dibujar una caja. Texto normal encima. */
+  --gradient-surface: linear-gradient(180deg,
+                        color-mix(in srgb, var(--color-secondary) 10%, var(--color-surface)) 0%,
+                        var(--color-surface) 100%);
+  /* Halo: el foco de luz detrás de una apertura. Es el mismo gesto que --space-glow,
+     pero con el color de la marca que corresponda. */
+  --gradient-glow:    radial-gradient(60% 100% at 50% 0%,
+                        color-mix(in srgb, var(--color-secondary) 35%, transparent) 0%,
+                        transparent 70%);
+
   /* Medida de línea. El límite de legibilidad no depende del ancho del layout:
      una página borde a borde sigue necesitando que el TEXTO corte a tiempo. Por eso
      es un token propio y no el ancho del contenedor (COMPOSICION.md, estructura). */

@@ -130,7 +130,7 @@ Los de `design.md` §8, contados como una falla cada uno.
 | ID | Falla | Sev |
 |---|---|---|
 | `H1` | Eyebrow decorativo | MEDIA |
-| `H2` | Gradiente decorativo / glassmorphism / blob / sombra de color | ALTA |
+| `H2` | Mancha de degradé flotando, glassmorphism, blob o sombra de color. NO es esto un degradé del set (`--gradient-brand` / `-surface` / `-glow`) usado como superficie | ALTA |
 | `H3` | Grilla de tres feature-cards sin que el contenido sean tres cosas paralelas | MEDIA |
 | `H4` | Emoji usado como ícono | ALTA |
 | `H5` | Chart donde alcanzaba una tabla, o al revés | MEDIA |

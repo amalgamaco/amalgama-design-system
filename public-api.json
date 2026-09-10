@@ -61,6 +61,9 @@
         "figure-base",
         "figure-unit",
         "figure-value",
+        "gradient-brand",
+        "gradient-glow",
+        "gradient-surface",
         "grid-12",
         "measure",
         "measure-lead",
@@ -85,9 +88,10 @@
         "span-6",
         "span-7",
         "span-8",
-        "span-9"
+        "span-9",
+        "text-gradient"
       ],
-      "internal_class_count": 42
+      "internal_class_count": 46
     },
     {
       "id": "layout",

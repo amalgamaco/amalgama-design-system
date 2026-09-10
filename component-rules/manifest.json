@@ -5993,6 +5993,10 @@
           {
             "component": "composition",
             "why": "composition is the skeleton of any page, ours or a client's. This is a skin, and only ours"
+          },
+          {
+            "component": "gradients",
+            "why": "the three gradients (--gradient-brand / -surface / -glow) are built from the brand's own primitives, so they travel to a client project and take THEIR palette. The space layer is literal Amalgama colour and never travels"
           }
         ]
       },

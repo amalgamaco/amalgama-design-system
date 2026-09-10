@@ -17,10 +17,17 @@ tiene clase, es que todavía no está terminada.
 
 Hay **dos ejes**, y conviene no confundirlos.
 
-**Primero, de quién es la marca.** La Parte I es la firma de **Amalgama**: va en lo nuestro y en lo
-que firmamos —propuestas, reportes, nuestro sitio, demos—. En un producto white-label la firma es
-la del cliente, así que ahí rige solo la Parte II, que no es identidad sino oficio: no parecer
-generado.
+**Primero, de quién es la marca.** Hay tres grupos, y conviene tenerlos separados en la cabeza:
+
+| | Qué incluye | En un producto de cliente |
+|---|---|---|
+| **Es de Amalgama y no sale del estudio** | La capa espacial: lienzo, estrellas, halo, órbitas, **planetas**, los colores `--space-*`. Y el índice de sección, que es nuestro gesto. Siempre con la tipografía de Embassy | **No va.** Ni de fondo. Falla `H12`, bloqueante |
+| **Se adapta a la estética del cliente** | El color, la tipografía, la forma de las esquinas, los cuatro ejes de personalidad (aire, elevación, movimiento, íconos) y **los degradés**, que salen de las primitivas y por eso toman su paleta | Va, con **su** marca. Es literalmente para lo que existe el white-label |
+| **No se negocia, sea de quien sea** | La composición: estructura, ancho, grilla, eje izquierdo, ritmo, medida de línea. Las cinco ubicaciones del ícono. Imágenes reales. Sin scroll reveal. El dato con su base. Accesibilidad. Cero relleno | Va igual. Es oficio, no identidad: nadie contrata que su producto parezca generado |
+
+Dicho de otra forma: **un producto de cliente se ve como el cliente y está compuesto como
+nosotros.** Si alguien mira una pantalla de Nortia no tiene que reconocer a Amalgama en el color —
+tiene que reconocerla en que la pantalla está bien puesta.
 
 **Segundo, qué clase de superficie es.** No es el tamaño de pantalla: un dashboard y una landing se
 ven los dos en una pantalla grande y no se componen igual.
@@ -378,6 +385,28 @@ misma regla 8 hecha componente: un número sin base no se publica.
 </p>
 ```
 
+## 13b. Los degradés: tres, y salen de la marca que sea
+
+**No:** la mancha de color flotando detrás del hero, el vidrio esmerilado, el degradé de tres
+colores. Eso es la falla `H2` y sigue estándolo.
+
+**En su lugar**, tres, construidos con las primitivas de la marca —o sea que en un proyecto de
+cliente toman **su** paleta, no la nuestra:
+
+| Token / clase | Qué pinta | Cuándo |
+|---|---|---|
+| `--gradient-brand` · `.gradient-brand` | Fuerte, del oscuro al acento | Una banda o una tarjeta que tiene que pesar. Texto claro encima |
+| `--gradient-surface` · `.gradient-surface` | Sutil, del acento al fondo | Separar una sección sin dibujar una caja |
+| `--gradient-glow` · `.gradient-glow` | El halo detrás de una apertura | Igual que el de la capa espacial, con el color que corresponda |
+| `.text-gradient` | El titular que se desvanece | **Solo** en registro editorial. En cuerpo es ilegible |
+
+La regla que los separa de la mancha: **un degradé es una superficie.** Pinta una banda, una
+tarjeta o un titular. No flota, no difumina lo que tiene detrás, no rellena. **Uno por sección**;
+dos seguidos se anulan.
+
+Y `.text-gradient` lleva siempre su `color` sólido de fallback: si el navegador no recorta el
+fondo, tiene que quedar un título legible y no uno invisible.
+
 ## 13. La capa espacial es nuestra, y solo nuestra
 
 Amalgama tiene una identidad espacial —fondo profundo con estrellas, un halo, órbitas finas,
@@ -403,6 +432,9 @@ Las condiciones de uso, que son parte de que se vea bien y no a fondo de pantall
   es la misma regla 11.
 - **El título fantasma es textura**, no un título: está al 12% de opacidad y no pasa contraste.
   El titular real va en el registro editorial, aparte.
+- **Siempre con la tipografía de Embassy.** Epilogue, Inter y DM Mono. La capa espacial es la marca
+  de Amalgama y va con nuestras tipografías: si una página carga las de un cliente, no es una
+  página nuestra y la capa no corresponde.
 - **Debajo sigue estando la composición.** La capa es un fondo: no reemplaza la columna, la medida
   de línea ni el ritmo.
 
