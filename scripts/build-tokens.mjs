@@ -23,7 +23,12 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT  = process.argv[2] || join(dirname(fileURLToPath(import.meta.url)), '..');
+// ROOT sale del primer argumento POSICIONAL. Antes era process.argv[2] a secas, así que
+// `build-tokens.mjs --check` —la forma que documentan el header de acá y CLAUDE.md— tomaba
+// '--check' como ROOT y moría buscando '--check/css/variables.css'. Solo andaba pasando el
+// ROOT antes del flag, que es lo que hace validate-ds [12]; a mano nunca funcionó.
+const POSITIONAL = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+const ROOT  = POSITIONAL[0] || join(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC   = join(ROOT, 'css/variables.css');
 const OUT   = join(ROOT, 'tokens');
 const CHECK = process.argv.includes('--check');
