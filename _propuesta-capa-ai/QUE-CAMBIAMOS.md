@@ -6,14 +6,27 @@ Para contarle al equipo, sin tecnicismos.
 
 ## El problema que teníamos
 
-Embassy existía y estaba bien: 62 componentes, tokens, reglas. Pero cuando alguien le pedía una
-pantalla a Claude, salía **algo parecido a Amalgama y distinto cada vez**. El agente no leía el
-design system: lo aproximaba de memoria. Ponía un `#3A5BB0` a mano, inventaba un buscador, se
-olvidaba del estado vacío.
+Embassy existía y estaba bien: 62 componentes en CSS, tokens, y documentación escrita. Pero cuando
+alguien le pedía una pantalla a Claude, salía **algo parecido a Amalgama y distinto cada vez**. El
+agente no leía el design system: lo aproximaba de memoria. Ponía un `#3A5BB0` a mano, inventaba un
+buscador, se olvidaba del estado vacío.
 
-No era un problema de conocimiento del agente. Era que **el design system no estaba escrito en un
-formato que un agente pueda consumir**: vivía en Figma, en la doc y en la cabeza de quienes lo
-armamos.
+No era un problema de conocimiento del agente, ni de que faltara documentación: había ocho
+archivos `.md` en la raíz —README, GOVERNANCE, TOKENS, WHITE-LABEL, MIGRATION, CONTRIBUTING,
+DEPLOYMENT, AI-USAGE-GUIDE— más una regla por componente. Estaba todo escrito.
+
+El problema era **para quién estaba escrito, y cómo se llegaba**:
+
+- **Estaba escrito para una persona que va a leerlo entero.** Explica el porqué de cada decisión, en
+  orden, a lo largo de cientos de líneas. Un agente entra a resolver una pantalla puntual: necesita
+  el criterio y la lista de lo permitido, no el recorrido completo.
+- **Había que clonar el repo para verlo.** Todo lo que no fuera un proyecto con el repo al lado
+  —una propuesta, un one-pager, una demo— quedaba afuera.
+- **Nada decía qué NO hacer.** Los documentos describían el sistema; ninguno enumeraba los errores
+  que un agente comete igual, que son siempre los mismos.
+- **No había una lista cerrada de clases.** El CSS tiene 548 selectores y solo algunos son API
+  pública. Sin esa frontera escrita, el agente elige por parecido y termina inventando una clase que
+  "suena" del sistema.
 
 ---
 
