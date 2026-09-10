@@ -52,6 +52,15 @@ const RULES = [
   { id: "A6", sev: "BLOQ", desc: "override por tema", re: /\[data-theme=["']?dark["']?\]\s*\{|prefers-color-scheme|\.dark\s*\{/g },
   { id: "A8", sev: "ALTA", desc: "fuga de utilidades de otro framework", re: /\b(text|bg|border)-(zinc|slate|gray|neutral|indigo|blue|red|green)-\d{2,3}\b/g },
   { id: "A10", sev: "MEDIA", desc: "border-radius inline en vez del modificador de tamaño", re: /style="[^"]*border-radius/g },
+  // A11 — tracking escrito a mano. La escala es cerrada (variables.css §Letter spacing) y tiene
+  // dos positivos que NO son intercambiables: --letter-spacing-overline (0.04em, el overline de
+  // página en mono) y --letter-spacing-label (0.08em, versalitas de 10-11px de componente).
+  // Un literal acá es casi siempre el eyebrow de 0.14em que delata una página generada.
+  {
+    id: "A11", sev: "MEDIA", desc: "letter-spacing con valor literal en vez de --letter-spacing-*",
+    re: /letter-spacing\s*:\s*(?!var\()[^;}\n]+/g,
+    skipLine: (l) => /normal|inherit|initial|unset/.test(l),
+  },
   // B3 solo aplica al input SUELTO. Un <input type="search"> dentro de .search-field o .search-bar
   // es el markup canónico del DS — marcarlo era un falso positivo sobre páginas correctas.
   {
@@ -184,6 +193,40 @@ for (const file of files) {
     findings.push({
       id: "C1", sev: "BLOQ", desc: "más de un btn-primary — verificá si están en el mismo contexto",
       file, line: lineOf(src, primaries[1].index), evidence: `${primaries.length} ocurrencias`,
+    });
+  }
+
+  // H7 — el overline repetido. Uno que clasifica algo es una decisión válida; dos o más es un
+  // reflejo, y a esa altura no clasifica: es textura (COMPOSICION.md regla 1).
+  //
+  // Se cuentan las declaraciones propias de la página, no los elementos: `.overline` del DS no
+  // suma (viene del CSS del sistema, no del markup), y tampoco suma el CSS vendorizado. Sin ese
+  // filtro, una página correcta con un badge y un overline daba 2 y salía marcada.
+  if (!allows.has("H7")) {
+    const propios = [...src.matchAll(/text-transform\s*:\s*uppercase/g)].filter((m) => {
+      const ctx = src.slice(Math.max(0, m.index - 400), m.index);
+      return !/amalgama-design-system|vendor\/|node_modules|\.badge|\.overline|th\s*\{|nav-section-label|toast-action/.test(ctx);
+    });
+    if (propios.length > 1) {
+      findings.push({
+        id: "H7", sev: "MEDIA",
+        desc: "más de un texto en mayúsculas propio de la página — repetido deja de clasificar y es textura",
+        file, line: lineOf(src, propios[1].index), evidence: `${propios.length} bloques con text-transform: uppercase`,
+      });
+    }
+  }
+
+  // D9 — column-bleed sin acotar el texto. Sacar el ancho máximo es una decisión de estructura
+  // válida (COMPOSICION.md regla 0); dejar que el párrafo mida 200 caracteres no lo es.
+  // Se mira el atributo class, no el texto: el primer intento buscaba la palabra suelta y una
+  // página que decía "sin measure" en su propio copy se daba por buena.
+  const claseBleed = /class="[^"]*\bcolumn-bleed\b/;
+  const claseMeasure = /class="[^"]*\bmeasure(-lead)?\b/;
+  if (!allows.has("D9") && claseBleed.test(src) && !claseMeasure.test(src)) {
+    findings.push({
+      id: "D9", sev: "ALTA",
+      desc: "column-bleed sin ninguna clase measure: el layout se liberó y el texto también",
+      file, line: lineOf(src, src.search(claseBleed)), evidence: "column-bleed sin measure",
     });
   }
 

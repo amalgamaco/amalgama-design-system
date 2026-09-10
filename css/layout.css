@@ -82,7 +82,7 @@
   font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .8px;
+  letter-spacing: var(--letter-spacing-label);
   color: var(--text-muted);
   padding: 16px 12px 6px;
 }

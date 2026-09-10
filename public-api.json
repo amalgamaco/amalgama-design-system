@@ -2,6 +2,39 @@
   "generated_from": "css/components",
   "components": [
     {
+      "id": "composition",
+      "display_name": "Composition (estructura de página)",
+      "category": "layout",
+      "status": "stable",
+      "file": "css/composition.css",
+      "summary": "La estructura de la página: columna, borde a borde, riel o dividida; la medida de línea, el ritmo entre secciones, el overline y el índice de sección. Se carga en TODA página, con shell o sin él.",
+      "when": "SIEMPRE. Toda página que publicamos, con app shell o sin él. Define la estructura (columna, borde a borde, riel, dividida), la medida de línea, el ritmo entre secciones, el overline y el índice de sección. Es la contraparte construida de COMPOSICION.md: ese archivo dice qué forma tiene una página nuestra, éste la hace.",
+      "when_not": "nunca se saltea. Una landing no carga layout.css (no tiene shell) pero sí carga esto — es justamente donde más falta hace.",
+      "variants": [],
+      "sizes": [],
+      "rules_files": [
+        "component-rules/composition.md"
+      ],
+      "usage": "<div class=\"column\">…</div>                      <!-- default: una columna de 1200 -->\n<div class=\"column column-bleed\">…</div>         <!-- borde a borde, sin ancho máximo -->\n<div class=\"column column-rail\">…<aside>…</aside></div>\n<section class=\"section section-lead\">…</section>\n<span class=\"section-index\">02 / 05</span>\n<p class=\"overline\">Informe trimestral</p>\n<p class=\"measure\">Texto corrido que corta a tiempo aunque la página sea ancha.</p>",
+      "classes": [
+        "column",
+        "column-bleed",
+        "column-form",
+        "column-rail",
+        "column-read",
+        "column-split",
+        "measure",
+        "measure-lead",
+        "overline",
+        "section",
+        "section-index",
+        "section-lead",
+        "section-tight",
+        "sep"
+      ],
+      "internal_class_count": 14
+    },
+    {
       "id": "layout",
       "display_name": "App Shell (Sidebar + Topbar)",
       "category": "layout",

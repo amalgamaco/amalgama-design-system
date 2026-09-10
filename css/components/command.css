@@ -133,7 +133,7 @@
   margin-left: auto;
   font-family: var(--font-mono);
   font-size: var(--font-size-mono-sm);
-  letter-spacing: .05em;
+  letter-spacing: var(--letter-spacing-overline);
   color: var(--color-on-surface-variant);
   opacity: .7;
 }

@@ -43,6 +43,7 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 | `A8` | Fuga de utilidades de otro framework (`text-zinc-*`, `bg-white`, `rounded-xl`) en un proyecto con tokens | ALTA | regex |
 | `A9` | Texto de página en negro en vez de navy (`--text-primary`) | ALTA | inspección |
 | `A10` | `border-radius` inline en vez del modificador de tamaño | MEDIA | regex |
+| `A11` | `letter-spacing` con valor literal en vez de `--letter-spacing-*` | MEDIA | regex |
 
 ## B · Selección de componente
 
@@ -82,6 +83,7 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 | `D6` | Cards anidadas | MEDIA | inspección |
 | `D7` | Mobile es el desktop encogido, no la transformación correcta | ALTA | inspección en 375px |
 | `D8` | Target táctil < 44px como única forma de accionar | ALTA | medición |
+| `D9` | Estructura de página sin elegir, o `column-bleed` con el texto sin acotar (línea > ~120 caracteres) | ALTA | inspección + regex |
 
 ## E · Estados y contenido
 
@@ -133,6 +135,8 @@ Los de `design.md` §8, contados como una falla cada uno.
 | `H4` | Emoji usado como ícono | ALTA |
 | `H5` | Chart donde alcanzaba una tabla, o al revés | MEDIA |
 | `H6` | Elemento que se puede sacar sin perder significado | BAJA |
+| `H7` | Más de un overline en mayúsculas en la página — repetido deja de clasificar y es textura | MEDIA | inspección + regex |
+| `H8` | Ícono por reflejo: uno arriba del título de cada card, en superficie cuadrada con radio | MEDIA | inspección |
 
 ## I · Proceso y drift
 

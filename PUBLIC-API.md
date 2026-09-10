@@ -14,13 +14,14 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-63 componentes · **509 clases públicas** de 577 selectores totales en el CSS.
+64 componentes · **523 clases públicas** de 591 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/variables.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/composition.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/components.css">
 <!-- app shell (sidebar + topbar) solamente: .../css/layout.css -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -30,6 +31,28 @@ Dark mode: `<html data-theme="dark">`. No agregues overrides por tema.
 
 El tag va pineado a propósito: lo que se entrega no cambia de aspecto porque el DS mergeó algo.
 Para subir de versión, ver DEPLOYMENT.md §Releases.
+
+---
+
+### `composition` — Composition (estructura de página) · layout
+
+La estructura de la página: columna, borde a borde, riel o dividida; la medida de línea, el ritmo entre secciones, el overline y el índice de sección. Se carga en TODA página, con shell o sin él.
+**Cuándo usar:** SIEMPRE. Toda página que publicamos, con app shell o sin él. Define la estructura (columna, borde a borde, riel, dividida), la medida de línea, el ritmo entre secciones, el overline y el índice de sección. Es la contraparte construida de COMPOSICION.md: ese archivo dice qué forma tiene una página nuestra, éste la hace.
+**Cuándo no:** nunca se saltea. Una landing no carga layout.css (no tiene shell) pero sí carga esto — es justamente donde más falta hace.
+
+Clases públicas: `.column` · `.column-bleed` · `.column-form` · `.column-rail` · `.column-read` · `.column-split` · `.measure` · `.measure-lead` · `.overline` · `.section` · `.section-index` · `.section-lead` · `.section-tight` · `.sep`
+
+```html
+<div class="column">…</div>                      <!-- default: una columna de 1200 -->
+<div class="column column-bleed">…</div>         <!-- borde a borde, sin ancho máximo -->
+<div class="column column-rail">…<aside>…</aside></div>
+<section class="section section-lead">…</section>
+<span class="section-index">02 / 05</span>
+<p class="overline">Informe trimestral</p>
+<p class="measure">Texto corrido que corta a tiempo aunque la página sea ancha.</p>
+```
+
+Regla completa: `component-rules/composition.md` · CSS: `css/composition.css`
 
 ---
 

@@ -1,0 +1,122 @@
+/* ═══════════════════════════════════════
+   Composition — la estructura de la página
+
+   Cuándo usar: SIEMPRE. Toda página que publicamos, con app shell o sin él. Define la
+     estructura (columna, borde a borde, riel, dividida), la medida de línea, el ritmo entre
+     secciones, el overline y el índice de sección. Es la contraparte construida de
+     COMPOSICION.md: ese archivo dice qué forma tiene una página nuestra, éste la hace.
+   Cuándo no: nunca se saltea. Una landing no carga layout.css (no tiene shell) pero sí carga
+     esto — es justamente donde más falta hace.
+   Reemplaza a: los `max-width: 1200px; margin: 0 auto` escritos a mano en cada página, y los
+     eyebrow con `text-transform: uppercase; letter-spacing: .14em` inventados por proyecto.
+
+   Dependencia: variables.css.
+   Orden de carga: variables.css → marca → base.css → ESTE ARCHIVO → components.css
+
+   Uso (una estructura por página, elegida a propósito):
+   <div class="column">…</div>                      <!-- default: una columna de 1200 -->
+   <div class="column column-bleed">…</div>         <!-- borde a borde, sin ancho máximo -->
+   <div class="column column-rail">…<aside>…</aside></div>
+   <section class="section section-lead">…</section>
+   <span class="section-index">02 / 05</span>
+   <p class="overline">Informe trimestral</p>
+   <p class="measure">Texto corrido que corta a tiempo aunque la página sea ancha.</p>
+═══════════════════════════════════════ */
+
+/* ── Estructura de página ──────────────────────────────────────────────────
+   Cuatro, y se elige UNA por página. Es la decisión que más diferencia una página de
+   otra — más que el color, más que el ícono. Ver COMPOSICION.md § Estructura. */
+
+.column {
+  --column-max:    1200px;
+  --column-gutter: clamp(20px, 5vw, 56px);
+  width: 100%;
+  max-width: var(--column-max);
+  margin-inline: auto;
+  padding-inline: var(--column-gutter);
+}
+
+/* Lectura y detalle: la columna se angosta, el texto manda. */
+.column-read { --column-max: 800px; }
+/* Un formulario o un panel de auth. */
+.column-form { --column-max: 680px; }
+
+/* Borde a borde: sin ancho máximo, con márgenes generosos que crecen con la pantalla.
+   En un monitor ancho la página usa todo el ancho en vez de dejar dos vacíos a los
+   costados, que es la silueta de cualquier landing generada.
+   ATENCIÓN: esto libera el LAYOUT, no el texto. Los párrafos siguen cortando en
+   `.measure`; sin eso son líneas de 200 caracteres y es una falla (D3). */
+.column-bleed {
+  --column-max: none;
+  --column-gutter: clamp(24px, 6vw, 96px);
+}
+
+/* Riel: contenido ancho + una columna angosta al costado para metadatos, notas al
+   margen, índice o datos de apoyo. Es la estructura más "estudio" de las cuatro y la
+   que peor imita un generador, porque exige decidir qué es principal y qué es nota. */
+.column-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 260px);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+
+/* Dividida: dos tracks asimétricos. Para heros con una herramienta o una imagen a un
+   lado. 60/40 a propósito — 50/50 no dice cuál de los dos manda. */
+.column-split {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .column-rail,
+  .column-split { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ── Medida de línea ───────────────────────────────────────────────────────
+   El límite de legibilidad no depende del ancho del contenedor. Va en el texto. */
+.measure      { max-width: var(--measure); }
+.measure-lead { max-width: var(--measure-lead); }
+
+/* ── Ritmo ─────────────────────────────────────────────────────────────────
+   Una página no es una pila de bandas iguales. Tres pesos, y la diferencia entre
+   `lead` y `tight` es real (2.5×), no del 10%: si todas las secciones miden lo mismo
+   el ojo no encuentra dónde parar. COMPOSICION.md regla 6. */
+.section       { padding-block: var(--space-12); }
+.section-lead  { padding-block: var(--space-20); }
+.section-tight { padding-block: var(--space-8); }
+
+/* ── Overline ──────────────────────────────────────────────────────────────
+   El reemplazo del eyebrow. No está prohibido clasificar algo arriba del título: está
+   prohibido hacerlo con el tracking amplio en sans que usa todo el mundo. Acá es
+   monoespaciado y apretado, y se lee como etiqueta de sistema.
+   Uno por página: repetido deja de clasificar y es textura (COMPOSICION.md regla 1). */
+.overline {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-overline);
+  line-height: var(--line-height-overline);
+  letter-spacing: var(--letter-spacing-overline);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-3);
+}
+
+/* ── Índice de sección — el gesto de Amalgama ──────────────────────────────
+   Va en todo lo que publicamos. Es el eje E de COMPOSICION.md: el marcador formal
+   repetido que hace reconocible al estudio más allá del color y la tipografía.
+   Numera el total real de secciones de la página («02 / 05»), no una secuencia
+   inventada, y nunca se reinicia ni se saltea una. */
+.section-index {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-overline);
+  line-height: var(--line-height-overline);
+  letter-spacing: var(--letter-spacing-overline);
+  color: var(--color-secondary);
+  margin-bottom: var(--space-2-5);
+  font-variant-numeric: tabular-nums;
+}
+/* La barra separadora se apaga para que los números manden. */
+.section-index .sep { color: var(--color-outline); margin-inline: var(--space-1); }

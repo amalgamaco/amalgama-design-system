@@ -9,6 +9,12 @@ This repo has two layers:
 
 > **Reverted to buildless CSS + vanilla JS (2026-07).** Between 2026-06-22 and 2026-06-26 this repo was migrated to a Tailwind v4 + React/Radix (shadcn/ui) implementation (`packages/ds/`, `islands/`), which fully replaced `css/components/*.css`. That migration was **reverted** on 2026-07-17: `packages/ds/` and `islands/` were deleted, and every component + feature built during the Tailwind era (~70 commits: Charts, ~25 new shadcn-parity primitives — Accordion, Alert, Breadcrumb, Data Table, Command/Combobox, Context Menu, etc. — the Dialog/Sheet overlay restructure, the mobile nav shell, and the Embassy Playbook guidelines) was hand-ported into the restored buildless architecture as flat CSS + vanilla JS, so nothing built in that period was lost. A handful of the hardest, most library-dependent pieces (Chart, Data Table, Calendar/Date Picker, Command/Combobox, Carousel, Slider range mode, Input OTP, Form validation) were deliberately rebuilt as **simplified vanilla equivalents** rather than exact library-behavior clones — see each component's CSS header comment for what was simplified away. **(2026-07 parity pass:** several of these were subsequently restored to full shadcn parity in vanilla JS — Chart rich tooltip, Data Table row-selection/filter/column-visibility, Calendar month/year dropdown, Carousel vertical, Command ⌘K palette — plus a sweep of missing variants across the library; the full list and the intentional divergences kept are in **GOVERNANCE.md §21**.) Resizable panels were dropped entirely (no real use case beyond their own demo page) — flag it if you need one, don't improvise a drag-resize engine.
 
+> **`COMPOSICION.md` es obligatorio antes de construir cualquier pantalla o entregable.** Define
+> la composición de la página: cuál de las cuatro estructuras usa, dónde corta el texto, el ritmo
+> entre secciones, y las dos marcas que hacen que se lea como nuestra y no como una página
+> generada. `design.md` es el sistema visual; ése es la forma. Sus clases viven en
+> `css/composition.css` y su regla operativa en `component-rules/composition.md`.
+
 ---
 
 ## Consuming the DS
@@ -21,8 +27,9 @@ In any project, no build step required:
 <link rel="stylesheet" href="css/variables.css">     <!-- 1. tokens (required) -->
 <link rel="stylesheet" href="css/md-sys-bridge.css">  <!-- 1b. optional: MD3 --md-sys-color-* aliases -->
 <link rel="stylesheet" href="css/base.css">           <!-- 2. reset + typography base (required) -->
-<link rel="stylesheet" href="css/layout.css">         <!-- 3. only for full app shell (sidebar, topbar, avatar) -->
-<link rel="stylesheet" href="css/components.css">     <!-- 4. all components — or copy one file from css/components/ -->
+<link rel="stylesheet" href="css/composition.css">    <!-- 3. page structure, measure, rhythm, overline (required) -->
+<link rel="stylesheet" href="css/layout.css">         <!-- 4. only for full app shell (sidebar, topbar, avatar) -->
+<link rel="stylesheet" href="css/components.css">     <!-- 5. all components — or copy one file from css/components/ -->
 ```
 
 ```html

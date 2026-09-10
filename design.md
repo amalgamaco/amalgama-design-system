@@ -41,6 +41,12 @@ Cuando dos reglas chocan, gana la de más arriba.
 5. **Accesibilidad y comportamiento responsive.**
 6. **Preferencia estética.** Última. Si sobrevivió a las cinco anteriores, es válida.
 
+**La composición de la página —qué forma tiene, qué formas no usamos— está en `COMPOSICION.md`,
+y es obligatoria.** Este archivo define el sistema visual; ése define cómo se arma la página con
+él, y es lo que evita que el resultado tenga la silueta de cualquier página generada: la
+estructura (una de cuatro, elegida a propósito), el eje izquierdo, el ritmo entre secciones, el
+overline y el índice de sección. Leelos juntos, y las clases salen de `css/composition.css`.
+
 ---
 
 ## 3. Integrate con el proyecto que te llama
@@ -263,6 +269,7 @@ cubierto, **pedí el archivo — no inventes un nombre ni aproximes el logo a ma
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/variables.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/composition.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/components.css">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 ```

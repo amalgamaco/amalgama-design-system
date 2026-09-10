@@ -1,0 +1,253 @@
+# COMPOSICION.md — cómo se compone una página de Amalgama
+
+Complementa `design.md`. Ahí está **el sistema visual** (color, tipografía, tokens); acá está
+**la composición**: qué forma tiene una página nuestra y qué formas no usamos.
+
+Existe porque el sistema visual solo no alcanza. Con tokens correctos y componentes correctos
+todavía se puede armar la misma página que arma cualquiera: hero centrado, tres tarjetas con
+ícono, banda, footer. `design.md` §1 pide que lo que publiquemos **no parezca una landing SaaS
+genérica** — este archivo lo hace verificable.
+
+**Cómo se lee:** cada regla dice qué no hacemos, **qué ponemos en su lugar**, y cómo se verifica.
+Una prohibición sin reemplazo vuelve siempre, porque a la hora de llenar la sección hay que poner
+algo. Todo lo que este archivo pide **está construido en `css/composition.css`**: si una regla no
+tiene clase, es que todavía no está terminada.
+
+**Alcance.** La Parte I es la firma de **Amalgama**: va en lo nuestro y en lo que firmamos
+—propuestas, reportes, nuestro sitio, demos—. En un producto white-label la firma es la del
+cliente, así que ahí rige solo la Parte II, que no es identidad sino oficio: no parecer generado.
+
+---
+
+# Parte I — La firma de Amalgama
+
+Embassy ya tiene cinco ejes que **varían por cliente** (densidad, elevación, movimiento, íconos,
+forma): existen para que dos productos white-label no se lean como el mismo repintado.
+
+Esto es lo contrario: **lo que no varía nunca**, y es lo que hace que un trabajo se reconozca como
+nuestro. Hasta septiembre de 2026 esa firma era solo tipografía y color, y por eso alcanzaba con
+cambiar la paleta para que la página pudiera ser de cualquiera.
+
+## A · Tracking de versalitas: 0.04em en mono
+
+El default de una página generada es 0.12–0.16em en sans. El nuestro es **apretado y
+monoespaciado**, que se lee como etiqueta de sistema y no como eyebrow editorial. Es la diferencia
+más barata y más visible de las cinco. Está en `.overline` y en `--letter-spacing-overline`.
+
+> **Ojo con no confundirlo con el otro tracking positivo.** Las versalitas de componente —badge,
+> header de tabla, label del nav, acción del toast— van a 10–11px y usan
+> `--letter-spacing-label` (0.08em). A ese tamaño el tracking apretado se lee peor, no mejor:
+> resuelven problemas distintos y no se unifican.
+
+## B · Alineación: izquierda, siempre
+
+Ninguna **región de la página** se centra: ni el hero, ni los títulos de sección, ni los párrafos.
+El centrado simétrico es la forma por default de toda página generada. Un eje izquierdo firme, con
+todas las regiones compartiendo borde, se lee ordenado y deliberado. Regla 2.
+
+## C · Ritmo: proporción, no uniformidad
+
+La página no es una pila de bandas iguales. La sección que carga el argumento respira; las de
+apoyo son compactas. `.section-lead` mide 2,5 veces `.section-tight` — una diferencia real, no del
+10%. Regla 6.
+
+## D · Forma: borde antes que sombra, superficie antes que caja
+
+Somos precisión técnica: el borde de 1px es nuestra herramienta de separación, y la sombra queda
+para lo que **realmente flota** (overlay, modal, toast). La mayor parte del contenido no necesita
+contenedor: se agrupa con espacio. Regla 7.
+
+## E · El gesto: el índice de sección en monoespaciada
+
+**Decidido en septiembre de 2026.** Las secciones llevan su número a la izquierda del título, en
+DM Mono, en el color de acento: `02 / 05`. Es `.section-index`.
+
+Se eligió sobre el filete corto —que usan varios estudios— y sobre el borde de un lado, porque es
+el que más refuerza lo que decimos ser: un sistema, no una campaña. Y es el más difícil de imitar
+por accidente, porque **obliga a contar**: un generador que rellena secciones no sabe cuántas hay.
+
+Las condiciones, que son parte del gesto:
+
+- **Numera el total real.** `02 / 05` en una página de cinco secciones. Nunca se saltea, nunca se
+  reinicia, y el total no se infla porque quede mejor.
+- **No va si hay una sola sección.** Numerar uno de uno no es un sistema, es decoración.
+- **Es decorativo para un lector de pantalla** cuando el título ya nombra la sección: va con
+  `aria-hidden="true"` para que nadie escuche "cero dos barra cero cinco" antes de cada título.
+- **No convierte a las secciones en una secuencia.** Es un índice, no un paso a paso: no implica
+  que haya que leerlas en orden. Si el contenido *sí* es una secuencia, mejor todavía.
+
+```html
+<span class="section-index" aria-hidden="true">02<span class="sep">/</span>05</span>
+```
+
+---
+
+# Parte II — Las reglas
+
+## 0. La estructura se elige antes de escribir markup
+
+**El default de una página generada no es un color: es una silueta.** Una columna centrada de
+1200px con dos vacíos a los costados en un monitor ancho. Es correcta para un dashboard y es la
+razón por la que todas las landings se parecen.
+
+Hay **cuatro**, están en `css/composition.css`, y se elige una:
+
+| Clase | Qué es | Cuándo |
+|---|---|---|
+| `.column` | Una columna centrada, 1200px | Producto, dashboards, pantallas de app. La segura, y la que menos diferencia |
+| `.column-bleed` | **Sin ancho máximo**, con márgenes que crecen con la pantalla | Cuando la página tiene que usar el monitor entero. La salida más rápida de la silueta genérica |
+| `.column-rail` | Contenido ancho + un riel angosto al costado para notas, metadatos o índice | La más "estudio". Obliga a decidir qué es principal y qué es nota |
+| `.column-split` | Dos tracks asimétricos, 6fr/4fr | Un hero con una herramienta o una imagen a un lado. Nunca 50/50: mitades iguales no dicen cuál manda |
+
+Y dos anchos de lectura: `.column-read` (800px) para artículos y detalle, `.column-form` (680px)
+para un formulario o un panel de auth.
+
+**Una por página.** Mezclar `bleed` en una sección y `column` en la siguiente rompe el borde
+izquierdo, que es lo único que sostiene la página.
+
+**Borde a borde libera el layout, nunca el texto.** Los párrafos siguen cortando en `.measure`
+(68 caracteres) o `.measure-lead` (52). Una línea de 200 caracteres en un monitor de 27 pulgadas
+es una falla (`D3`), y es el error clásico de sacar el `max-width`.
+
+**Verificación:** una sola clase de estructura en la página; y si es `bleed`, todo párrafo de
+texto corrido tiene `measure` o `measure-lead`.
+
+## 1. El overline se decide, y cuando va, va con nuestro tracking
+
+Las mayúsculas no son el problema. El problema son dos: que aparezcan **por reflejo** en toda
+página, y que lleven **el tracking amplio** (0.12–0.16em), que es lo que las vuelve reconocibles a
+diez metros.
+
+**Cuándo va:** cuando clasifica algo que el título no dice y el lector necesita antes de leerlo —
+el tipo de producto, la cobertura, la fecha de un informe. Es una etiqueta de clasificación, no un
+saludo.
+
+**Cuándo no va:** cuando repite lo que el h1 ya dice, cuando dice el nombre de la sección
+("SERVICIOS" arriba de "Nuestros servicios"), o cuando está sólo para que el título "no arranque
+solo". Ante la duda, sacalo y mirá si se perdió algo. Casi nunca se pierde.
+
+**Una vez por página.** Si aparece en el hero, en el logo y en los títulos de columna del footer,
+ya no clasifica nada: es una textura.
+
+**Cuando va, va con la clase**, no escrito a mano:
+
+```html
+<p class="overline">Informe trimestral</p>
+```
+
+**Verificación:** un solo `.overline` en la página, y ningún `text-transform: uppercase` propio
+con `letter-spacing` literal. Lo chequea `check-output.mjs` (`H7` y `A11`).
+
+## 2. La página no se centra
+
+**No:** hero centrado, títulos de sección centrados, párrafos centrados con `max-width` propio.
+
+**En su lugar:** todo se alinea al **borde izquierdo de la estructura elegida**, incluidas las
+secciones "de marca". Los bordes izquierdo y derecho de **todas** las regiones coinciden.
+
+**Esto es a nivel página.** Adentro de un componente que se centra a propósito el centrado se
+queda: `empty-state`, el footer de un `modal`, `placeholder`, el input de OTP, las celdas del
+calendario. La regla es sobre las regiones, no sobre los componentes.
+
+**Verificación:** medí el `left` de cada región en el navegador. Si no coinciden todos, hay una
+centrándose sola. (`screen` lo mide en su paso de validación; a ojo se ve trazando una vertical.)
+
+## 3. El hero abre con el control, no con una promesa
+
+**No:** h1 + bajada + botón sobre una imagen o un degradé. Eso es una campaña publicitaria, que
+`design.md` §1 descarta explícitamente.
+
+**En su lugar:** *precisión técnica con cercanía* significa que **la herramienta está a la vista
+desde el primer scroll**. Si la página tiene una tarea —buscar, calcular, filtrar, cotizar—, el
+control real de esa tarea va en el hero, funcionando. La frase acompaña; no ocupa el lugar.
+`.column-split` existe para esto.
+
+Si la página no tiene ninguna tarea, el hero abre con **el dato o el trabajo**, no con un adjetivo.
+
+## 4. La grilla de tres tarjetas con ícono no es una opción
+
+**No:** tres cards con ícono en cuadrado redondeado, título y dos líneas. Es el relleno de sección
+por default. Aparece cuando hay que ocupar espacio y no hay contenido.
+
+**En su lugar**, según lo que tengas de verdad:
+
+| Lo que tenés | La forma |
+|---|---|
+| Tres instancias reales de la misma categoría, comparables | Una **lista** de `label: valor`, más densa y más legible que tres cards |
+| Dos o más opciones con criterios comunes | Una **tabla comparativa**. Los criterios explícitos, no adjetivos |
+| Un punto fuerte y dos secundarios | **Un bloque grande y dos chicos.** Asimetría deliberada: el peso visual dice cuál importa |
+| Un solo argumento que sostiene la sección | **Un bloque.** Una sección de una sola cosa es una decisión, no un error |
+| Nada que decir todavía | **Sacá la sección.** No la rellenes |
+
+Y la regla que las cubre a todas: **una grilla solo cuando los ítems son intercambiables entre
+sí.** Si el segundo no podría ir en el lugar del primero sin que nada cambie, no es una grilla.
+
+## 5. El ícono tiene cinco lugares, y "arriba del título" no es el default
+
+**No:** un ícono en un cuadrado con radio, arriba a la izquierda de cada card, del mismo tamaño en
+todas. No distingue nada — el título ya dice lo mismo — y es la marca de agua más reconocible de
+una página generada.
+
+**En su lugar, elegí uno** y usalo consistente en toda la página:
+
+| Ubicación | Cómo se ve | Cuándo |
+|---|---|---|
+| **Sin ícono** ← *el default* | El título y el texto solos | La mayoría de las veces. Si el título alcanza, el ícono es ruido |
+| **En línea, antes del texto** | 16–20px, alineado a la primera línea, mismo color que el texto | Cuando distingue ítems entre sí en una lista que se escanea: estado, tipo de archivo, canal |
+| **Al margen** | Fuera de la caja, en el riel o sangrado a la izquierda del bloque | Con `.column-rail`. El ícono ancla el bloque sin ocupar el lugar del título |
+| **Grande y solo** | 40–64px, sin superficie detrás, con mucho aire | Un ícono por sección, no uno por ítem. Cuando el ícono **es** el contenido: un estado vacío, un error, un logro |
+| **De fondo** | Muy grande, muy bajo contraste, recortado por el borde del bloque | Una sección destacada, una sola vez en la página. Es textura, no información |
+
+Reglas que valen para las cinco: **Lucide**, `--icon-stroke` del tema, **nunca** una superficie
+cuadrada con radio detrás por default, y **nunca** un ícono por card cuando las cards ya se
+distinguen por el título. Un emoji no es un ícono (`H4`).
+
+**Verificación:** contá los íconos. Si hay uno por cada ítem de una grilla y los ítems ya tienen
+título, sobran todos.
+
+## 6. Las secciones no tienen todas el mismo alto
+
+**No:** cinco bandas con el mismo `padding-block`, del mismo alto, alternando fondo sí y fondo no.
+Eso es un acordeón, no una página: el ojo no encuentra dónde parar.
+
+**En su lugar:** el aire es proporcional al peso, con las tres clases del sistema —
+`.section-lead` para la que carga el argumento, `.section` para el resto, `.section-tight` para el
+apoyo.
+
+**Verificación:** si el alto de todas las secciones entra en un rango de ±15%, no hay ritmo.
+
+## 7. No todo es una tarjeta
+
+**No:** un radio y una sombra estampados en cada bloque. Borde, relleno, radio y sombra dicen
+"objeto separado" — gastados en todo, no separan nada y aplanan la jerarquía.
+
+**En su lugar:** gastalos por rol. **Elevación solo para lo que flota** (overlay, modal, toast).
+**Borde para lo que está en el plano.** Y para agrupar, primero el espacio: `--space-*` antes que
+una caja. La mayor parte del contenido de una página no necesita contenedor.
+
+## 8. Un número que no se puede verificar no se publica
+
+**No:** "+40%", "miles de usuarios", "la mayoría de nuestros clientes". Si el dato no vino del
+cliente, no existe — y el redondeo lindo es la marca de que lo inventó un modelo.
+
+**En su lugar:** la cifra real con su base, período y comparador al lado. Si no la tenés, la frase
+va sin cuantificar, o la sección espera.
+
+**En una maqueta con datos de relleno**, un aviso persistente y visible en la página lo dice. Un
+comentario en el código no alcanza: nadie que mire la pantalla lo lee.
+
+## 9. Cero relleno
+
+Si una sección existe para que la página "no quede corta", sacala. Una página de cuatro bloques
+con algo que decir vale más que una de ocho, y se nota cuál es cuál.
+
+---
+
+## La prueba final
+
+Tapá el logo y los colores. **Si la página podría ser de cualquier otro estudio cambiando la
+paleta, la composición no hizo su trabajo** — y ése es exactamente el punto: los tokens ya
+garantizan que se vea bien; esto es lo que hace que se vea nuestra.
+
+Después, la pregunta de `design.md` §8: *¿qué superficie, borde, píldora, ícono, label, color,
+párrafo o sección se puede sacar sin perder significado?* Sacala.

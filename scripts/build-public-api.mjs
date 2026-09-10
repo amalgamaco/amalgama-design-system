@@ -92,35 +92,45 @@ if (fs.existsSync(MANIFEST)) {
   }
 }
 
-// css/layout.css es el app shell (sidebar + topbar). No vive en css/components/ y no tiene
-// component-rule, pero sus clases SÍ son API pública: toda pantalla con navegación persistente
-// las escribe. Sin esto, check-output.mjs marcaba .app/.sidebar/.topbar como clases inventadas.
-const LAYOUT = (() => {
-  const file = path.join(ROOT, "css", "layout.css");
-  if (!fs.existsSync(file)) return null;
-  const css = fs.readFileSync(file, "utf8");
+// Dos archivos de css/ que no viven en css/components/ y no tienen component-rule, pero cuyas
+// clases SÍ son API pública: layout.css (el app shell) y composition.css (la estructura de
+// página). Sin esto, check-output.mjs marcaba .app/.sidebar/.column/.overline como inventadas.
+const suelto = ({ file, id, display_name, summary }) => {
+  const full = path.join(ROOT, file);
+  if (!fs.existsSync(full)) return null;
+  const css = fs.readFileSync(full, "utf8");
   const head = header(css);
   const classes = [...new Set(
     // incluye descendientes (`.topbar-breadcrumb .separator`), no solo el selector de raíz
     [...css.replace(/\/\*[\s\S]*?\*\//g, "").matchAll(/\.([a-z][a-z0-9-]{1,40})(?=[\s,:{>+~])/g)].map((m) => m[1])
   )].sort();
   return {
-    id: "layout",
-    display_name: "App Shell (Sidebar + Topbar)",
-    category: "layout",
-    status: "stable",
-    file: "css/layout.css",
-    summary: "Shell de aplicación: sidebar de navegación persistente + topbar. Se carga aparte de components.css.",
+    id, display_name, category: "layout", status: "stable", file, summary,
     when: field(head, "Cuándo usar"),
     when_not: field(head, "Cuándo no"),
-    variants: [],
-    sizes: [],
-    rules_files: [],
+    variants: [], sizes: [], rules_files: [],
     usage: usage(head),
     classes,
     internal_class_count: classes.length,
   };
-})();
+};
+
+const LAYOUT = suelto({
+  file: "css/layout.css",
+  id: "layout",
+  display_name: "App Shell (Sidebar + Topbar)",
+  summary: "Shell de aplicación: sidebar de navegación persistente + topbar. Se carga aparte de components.css.",
+});
+
+const COMPOSITION = suelto({
+  file: "css/composition.css",
+  id: "composition",
+  display_name: "Composition (estructura de página)",
+  summary: "La estructura de la página: columna, borde a borde, riel o dividida; la medida de línea, el ritmo entre secciones, el overline y el índice de sección. Se carga en TODA página, con shell o sin él.",
+});
+// El mapeo automático de reglas busca en css/components/; composition.css no vive ahí, pero su
+// regla existe y es obligatoria: sin enlazarla, el agente ve las clases y no ve cuándo usarlas.
+if (COMPOSITION) COMPOSITION.rules_files = ["component-rules/composition.md"];
 
 const components = fs
   .readdirSync(CSS_DIR)
@@ -159,6 +169,7 @@ const components = fs
   });
 
 if (LAYOUT) components.unshift(LAYOUT);
+if (COMPOSITION) components.unshift(COMPOSITION);
 
 const totalPublic = new Set(components.flatMap((c) => c.classes)).size;
 const allInternal = components.reduce((n, c) => n + c.internal_class_count, 0);
@@ -186,6 +197,7 @@ ${components.length} componentes · **${totalPublic} clases públicas** de ${all
 \`\`\`html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/variables.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/composition.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/components.css">
 <!-- app shell (sidebar + topbar) solamente: .../css/layout.css -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">

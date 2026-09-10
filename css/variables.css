@@ -379,10 +379,24 @@
   --font-weight-extrabold: 800;
 
   /* Letter spacing (heading only) */
+  /* Escala cerrada. No hay tracking libre: si un texto necesita uno que no está
+     acá, no lo necesita. Los dos positivos son los ÚNICOS, y no son
+     intercambiables — ver COMPOSICION.md, eje A. */
   --letter-spacing-display:    -0.5px;
   --letter-spacing-heading-xl: -0.4px;
   --letter-spacing-heading-lg: -0.3px;
   --letter-spacing-heading-md: -0.2px;
+  /* Overline de página, en DM Mono y a 12px. Apretado a propósito: el default de
+     una página generada es 0.12–0.16em en sans, y ese tracking amplio es lo que la
+     vuelve reconocible a diez metros. En monoespaciada y apretado se lee como
+     etiqueta de sistema. */
+  --letter-spacing-overline:    0.04em;
+  /* Versalitas de componente (badge, header de tabla, label del nav, acción del
+     toast): 10–11px. Acá el tracking apretado se lee PEOR — a ese tamaño las
+     mayúsculas necesitan aire para separarse. No unificar con el de arriba:
+     resuelven problemas distintos. */
+  --letter-spacing-label:       0.08em;
+  --letter-spacing-normal:      0;
 
   /* ─────────────────────────────────────
      Layout
@@ -439,6 +453,12 @@
   --color-nav-press:            color-mix(in srgb, var(--color-secondary-container) 70%, transparent);
   --color-nav-selected:         var(--color-secondary-container);
   --color-nav-selected-content: var(--color-on-secondary-container);
+
+  /* Medida de línea. El límite de legibilidad no depende del ancho del layout:
+     una página borde a borde sigue necesitando que el TEXTO corte a tiempo. Por eso
+     es un token propio y no el ancho del contenedor (COMPOSICION.md, estructura). */
+  --measure:      68ch;   /* texto corrido */
+  --measure-lead: 52ch;   /* bajadas y párrafos de apertura, más cortos */
 
   /* ─────────────────────────────────────
      Transitions

@@ -108,7 +108,7 @@
   font-family: var(--font-mono);
   font-size: var(--font-size-caption);
   color: var(--color-on-surface-variant);
-  letter-spacing: .02em;
+  letter-spacing: var(--letter-spacing-overline);
 }
 
 /* ── Group (role="group") ── agrupa ítems relacionados; par shadcn DropdownMenuGroup. */

@@ -41,7 +41,7 @@
   font-size: var(--font-size-display);
   font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -.5px;
+  letter-spacing: var(--letter-spacing-display);
 }
 .stat-card .stat-change {
   font-size: var(--font-size-caption);

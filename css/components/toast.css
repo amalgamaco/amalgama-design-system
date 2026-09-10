@@ -178,7 +178,7 @@
   border-radius: var(--radius-sm);
   color: var(--color-inverse-primary);
   font: var(--font-weight-bold) var(--font-size-label)/1 var(--font-body);
-  letter-spacing: .08em;
+  letter-spacing: var(--letter-spacing-label);
   text-transform: uppercase;
   cursor: pointer;
   transition: background var(--duration-fast) var(--ease-default);

@@ -23,7 +23,7 @@
 .create-header { margin-bottom: 0; }
 .create-title {
   font-family: var(--font-heading);
-  font-size: var(--font-size-heading-xl); font-weight: 600; letter-spacing: -.4px;
+  font-size: var(--font-size-heading-xl); font-weight: 600; letter-spacing: var(--letter-spacing-heading-xl);
   margin-bottom: 20px;
 }
 .create-footer {

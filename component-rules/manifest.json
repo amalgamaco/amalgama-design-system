@@ -1,6 +1,6 @@
 {
   "note": "Machine-readable registry. Source of truth = component-rules/<id>.md frontmatter (schema in component-rules/README.md). Regenerate with scripts/build-manifest.py.",
-  "count": 67,
+  "count": 68,
   "components": [
     {
       "id": "accordion",
@@ -1991,6 +1991,108 @@
         "docs_anchor": "c-command"
       },
       "rules_file": "component-rules/command.md"
+    },
+    {
+      "id": "composition",
+      "display_name": "Composition (estructura de página)",
+      "category": "Layout",
+      "status": "stable",
+      "aliases": [
+        "layout de página",
+        "grilla",
+        "columna",
+        "ancho de contenido",
+        "overline",
+        "ritmo",
+        "section index"
+      ],
+      "summary": "The skeleton of a page — which of the four structures it uses, where the text stops, how the sections breathe, and the two marks that make it read as Amalgama's rather than as a generated page.",
+      "variants": [
+        "column",
+        "read",
+        "form",
+        "bleed",
+        "rail",
+        "split"
+      ],
+      "sizes": [
+        "(no aplica)"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "color": [
+          "--text-muted",
+          "--color-secondary",
+          "--color-outline"
+        ],
+        "spacing": [
+          "--space-8",
+          "--space-12",
+          "--space-20",
+          "--measure",
+          "--measure-lead"
+        ],
+        "typography": [
+          "--font-mono",
+          "--font-size-overline",
+          "--line-height-overline",
+          "--letter-spacing-overline"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "layout",
+          "page-header",
+          "table",
+          "empty-state"
+        ],
+        "replaces": [
+          "the hand-written `max-width: 1200px; margin: 0 auto` in every project",
+          "eyebrows invented per page with `letter-spacing: .14em`"
+        ],
+        "composed_with": [
+          "layout",
+          "page-header"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "layout",
+            "why": "layout.css is the app shell — sidebar and topbar. This is the structure of the content inside it, and it is also used where there is no shell at all"
+          },
+          {
+            "component": "page-header",
+            "why": "page-header is the title block of a screen; this is the skeleton the whole page hangs from"
+          }
+        ]
+      },
+      "motion": {
+        "entrance": "none — structure does not animate in",
+        "duration": "—",
+        "easing": "—",
+        "reduced_motion": "n/a"
+      },
+      "source": {
+        "css": "css/composition.css",
+        "classes": [
+          "column",
+          "column-read",
+          "column-form",
+          "column-bleed",
+          "column-rail",
+          "column-split",
+          "measure",
+          "measure-lead",
+          "section",
+          "section-lead",
+          "section-tight",
+          "overline",
+          "section-index"
+        ],
+        "docs_anchor": "c-composition"
+      },
+      "rules_file": "component-rules/composition.md"
     },
     {
       "id": "context-menu",
