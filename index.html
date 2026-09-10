@@ -3465,7 +3465,11 @@ body { overflow-x: clip; }
 #s-mobile .ng-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
 #s-mobile .ng-cell { background: var(--ds-card); border: 1px solid var(--ds-card-border); border-radius: 12px; padding: 16px; }
 #s-mobile .ng-name { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em;
-  text-transform: uppercase; color: var(--ds-text-3); margin-bottom: 12px; }
+  text-transform: uppercase; color: var(--ds-text-3); margin-bottom: 2px; }
+#s-mobile .ng-gs, #s-mobile .ng-gs-no { display: block; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: .03em; margin-bottom: 12px; }
+#s-mobile .ng-gs    { color: var(--color-on-success-container); }
+#s-mobile .ng-gs-no { color: var(--text-muted); }
 #s-mobile .ng-stack { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
 #s-mobile .ng-row { display: flex; flex-wrap: wrap; gap: 10px 8px; }
 #s-mobile .ng-note { font-family: var(--font-mono); font-size: 10px; letter-spacing: .04em;
@@ -5328,14 +5332,18 @@ body { overflow-x: clip; }
       </div>
 
       <h2 class="ds-h2">9 · Los componentes, en nativo</h2>
+      <div class="ds-callout" style="border-left-color:var(--color-error)"><strong>Por qué estos ejemplos no son componentes de gluestack.</strong> Dos razones, y la segunda es la que importa. La primera: gluestack es React Native, así que no renderiza en una página HTML sin bundler — para verlo de verdad hace falta compilar una app y publicarla. La segunda: <strong>hoy no hay nada nuestro que mostrar.</strong> Un <code>Button</code> de gluestack sin re-skinnear muestra el diseño de gluestack, no el nuestro; y para <code>chip</code>, <code>segmented-button</code>, <code>stat-card</code>, <code>empty-state</code>, <code>item</code> y <code>search-bar</code> no hay literalmente nada que mostrar, porque gluestack no los tiene. Lo de abajo es la <strong>especificación</strong> —los valores que el componente tiene que cumplir— y es lo que se usa para diseñar y aprobar. Cuando existan los primeros ocho componentes en el proyecto RN, esa galería pasa a ser la referencia y se publica desde ahí.</div>
+
       <p class="ds-p">Los <strong>37 que se portan tal cual</strong>, con los valores de teléfono. No son componentes nuevos ni son de gluestack: son exactamente los mismos <code>btn-primary</code>, <code>chip</code> y <code>field-input</code> que en web, adentro de un contenedor con <code>data-platform="native"</code>. Por eso no viven en una sección aparte — <strong>duplicarlos sería crear dos fuentes de verdad para la misma clase.</strong> La ficha de cada uno sigue siendo su página en Components.</p>
+
+      <div class="ds-callout"><strong>Debajo del nombre de cada celda está su equivalente en gluestack.</strong> En verde, el componente que gluestack sí tiene y del que se copia estructura y comportamiento. En gris con <code>✗</code>, los que <strong>no existen ahí</strong> y se arman con primitivas: son casi la mitad del set que se usa todos los días. El mapa completo, con lo que implica cada uno, está en <code>MOBILE.md</code> §5.</div>
 
       <div class="ds-callout"><strong>La superficie tocable no es la caja dibujada.</strong> Un chip a 48 de alto se ve enorme y pesa en la jerarquía como si fuera la acción principal, que no lo es. Se dibuja a 40 y el target de 48 se consigue con un área invisible alrededor — lo mismo que hace <code>hitSlop</code> en React Native. En la celda del <code>chip</code> están dibujadas las dos: la sólida es la que se ve, la suave de afuera es la que se toca.</div>
 
       <div class="ds-preview ds-native-gallery" data-platform="native" style="display:block;padding:24px">
         <div class="ng-grid">
 
-          <div class="ng-cell"><span class="ng-name">button</span>
+          <div class="ng-cell"><span class="ng-name">button</span><span class="ng-gs">Button</span>
             <div class="ng-stack">
               <button class="btn-primary">Procesar altas</button>
               <button class="btn-secondary">Guardar borrador</button>
@@ -5344,7 +5352,7 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell" data-targets><span class="ng-name">chip</span> <span class="ng-note">se dibuja a 40, se toca a 48</span>
+          <div class="ng-cell" data-targets><span class="ng-name">chip</span><span class="ng-gs-no">✗ no tiene · Pressable + Text</span> <span class="ng-note">se dibuja a 40, se toca a 48</span>
             <div class="ng-row">
               <button class="chip chip-selected" aria-pressed="true">Todas</button>
               <button class="chip" aria-pressed="false">Pendientes</button>
@@ -5352,7 +5360,7 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">badge</span>
+          <div class="ng-cell"><span class="ng-name">badge</span><span class="ng-gs">Badge</span>
             <div class="ng-row">
               <span class="badge badge-open">Abierta</span>
               <span class="badge badge-active">En curso</span>
@@ -5361,25 +5369,25 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">form · field-input</span>
+          <div class="ng-cell"><span class="ng-name">form · field-input</span><span class="ng-gs">Input + FormControl</span>
             <div class="field-group">
               <label class="field-label">Centro médico <span class="field-required">*</span></label>
               <input class="field-input" placeholder="Ej: Clínica del Sol">
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">select</span>
+          <div class="ng-cell"><span class="ng-name">select</span><span class="ng-gs">Select</span>
             <button class="select-trigger" aria-haspopup="listbox"><span class="select-value">Últimos 90 días</span><span class="select-icon">▾</span></button>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">search · search-bar</span>
+          <div class="ng-cell"><span class="ng-name">search · search-bar</span><span class="ng-gs-no">✗ no tiene · Input + Icon</span>
             <div class="search-bar" role="search">
               <span class="search-bar-icon"><i data-lucide="search" style="width:18px;height:18px"></i></span>
               <input class="search-bar-input" type="search" placeholder="Buscar un centro" aria-label="Buscar">
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">checkbox · radio · switch</span>
+          <div class="ng-cell"><span class="ng-name">checkbox · radio · switch</span><span class="ng-gs">Checkbox · Radio · Switch</span>
             <div class="ng-stack">
               <label class="checkbox-label"><input type="checkbox" class="checkbox" checked> Solo con firma pendiente</label>
               <label class="radio-label"><input type="radio" name="ng-r" class="radio" checked> Por fecha de alta</label>
@@ -5387,14 +5395,14 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">segmented-button</span>
+          <div class="ng-cell"><span class="ng-name">segmented-button</span><span class="ng-gs-no">✗ no tiene · HStack de Pressable</span>
             <div class="seg-btn-group" role="group" aria-label="Vista">
               <button class="seg-btn selected" aria-selected="true">Lista</button>
               <button class="seg-btn" aria-selected="false">Mapa</button>
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">tabs</span>
+          <div class="ng-cell"><span class="ng-name">tabs</span><span class="ng-gs">Tabs</span>
             <div class="tabs" role="tablist">
               <button class="tab active" role="tab" aria-selected="true">Altas</button>
               <button class="tab" role="tab" aria-selected="false" tabindex="-1">Bajas</button>
@@ -5402,7 +5410,7 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">list</span>
+          <div class="ng-cell"><span class="ng-name">list</span><span class="ng-gs-no">✗ no tiene · FlatList + Pressable</span>
             <ul class="list">
               <li class="list-item">
                 <div class="list-item-headline">Clínica del Sol</div>
@@ -5415,7 +5423,7 @@ body { overflow-x: clip; }
             </ul>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">item</span>
+          <div class="ng-cell"><span class="ng-name">item</span><span class="ng-gs-no">✗ no tiene · HStack + Text</span>
             <div class="item item-outline">
               <div class="item-content">
                 <div class="item-title">Notificaciones</div>
@@ -5425,7 +5433,7 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">card</span>
+          <div class="ng-cell"><span class="ng-name">card</span><span class="ng-gs">Card</span>
             <div class="card">
               <div class="card-header">
                 <div class="card-title">Centro Médico Rivera</div>
@@ -5435,14 +5443,14 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">avatar</span>
+          <div class="ng-cell"><span class="ng-name">avatar</span><span class="ng-gs">Avatar</span>
             <div class="ng-row" style="align-items:center">
               <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>
               <span class="avatar avatar-lg"><span class="avatar-fallback">AB</span></span>
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">alert</span>
+          <div class="ng-cell"><span class="ng-name">alert</span><span class="ng-gs">Alert</span>
             <div class="alert alert-info" role="alert">
               <div class="alert-body">
                 <div class="alert-title">Cuatro altas sin firma</div>
@@ -5451,7 +5459,7 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">stat-card</span>
+          <div class="ng-cell"><span class="ng-name">stat-card</span><span class="ng-gs-no">✗ no tiene · Card + Text</span>
             <div class="stat-card">
               <div class="stat-label">Mediana de alta</div>
               <div class="stat-value">4,2 min</div>
@@ -5459,7 +5467,7 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">empty-state</span>
+          <div class="ng-cell"><span class="ng-name">empty-state</span><span class="ng-gs-no">✗ no tiene · VStack</span>
             <div class="empty-state">
               <div class="empty-state-title">No hay altas pendientes</div>
               <p class="empty-state-desc">Todo procesado hasta hoy.</p>
@@ -5467,7 +5475,7 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">progress · spinner · skeleton</span>
+          <div class="ng-cell"><span class="ng-name">progress · spinner · skeleton</span><span class="ng-gs">Progress · Spinner · Skeleton</span>
             <div class="ng-stack">
               <div class="progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"><div class="progress-fill" style="width:60%"></div></div>
               <span class="spinner" role="status" aria-label="Cargando"></span>
@@ -5476,7 +5484,7 @@ body { overflow-x: clip; }
             </div>
           </div>
 
-          <div class="ng-cell"><span class="ng-name">toast · snackbar</span>
+          <div class="ng-cell"><span class="ng-name">toast · snackbar</span><span class="ng-gs">Toast</span>
             <div class="snackbar" role="status" aria-live="polite">
               <span class="snackbar-message">Alta procesada</span>
             </div>

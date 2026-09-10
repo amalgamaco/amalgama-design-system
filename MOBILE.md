@@ -146,6 +146,45 @@ el patrón equivalente es *otro*, no una versión chica del mismo.
 `radio-group` · `search` · `segmented-button` · `select` · `skeleton` · `slider` · `spinner` ·
 `stat-card` · `switch` · `tabs` · `toast` · `toggle` · `toggle-group` · `vacancy-card`
 
+### Qué da gluestack y qué hay que armar
+
+Adoptar gluestack **no es adoptar 30 componentes listos**. Su catálogo v5 tiene 40 y el nuestro 62,
+y el solapamiento es parcial: casi la mitad de nuestro set de trabajo **no existe ahí** y se arma
+con primitivas (`Pressable`, `HStack`, `VStack`, `Text`). Conviene saberlo antes, porque es la
+diferencia entre "instalamos gluestack y ya está" y el trabajo real.
+
+| Embassy | gluestack v5 | Qué implica |
+|---|---|---|
+| `button` | **Button** (`Button` · `ButtonText` · `ButtonIcon` · `ButtonSpinner`) | Se copia y se re-skinnea. Sus `variant` (solid/outline/link) y `action` (primary/secondary/positive/negative) **no** son nuestras variantes: se mapean a las cinco de Embassy, no se adoptan |
+| `badge` | **Badge** | Directo |
+| `card` | **Card** | Directo |
+| `alert` | **Alert** | Directo |
+| `avatar` | **Avatar** | Directo |
+| `form` · `field-input` | **Input** + **FormControl** | FormControl trae label, helper y error: es más que nuestro `field-group` |
+| `select` | **Select** | En nativo abre un actionsheet, no un popover |
+| `checkbox` · `radio-group` · `switch` | **Checkbox** · **Radio** · **Switch** | Directos |
+| `slider` | **Slider** | Directo |
+| `progress` · `spinner` · `skeleton` | **Progress** · **Spinner** · **Skeleton** | Directos |
+| `toast` | **Toast** | Directo |
+| `tabs` | **Tabs** | Directo |
+| `accordion` | **Accordion** | Directo |
+| `divider` | **Divider** | Directo |
+| `calendar` · `date-picker` | **Calendar** · **DateTimePicker** | Directos |
+| `modal` | **Modal** | Pero en un teléfono casi siempre va **Actionsheet** o pantalla completa |
+| `sheet` | **Actionsheet** · **BottomSheet** | El lateral no existe |
+| `dropdown-menu` · `context-menu` | **Menu** · **Actionsheet** | — |
+| **`chip`** | **no tiene** | Se arma con `Pressable` + `Text`. Su `Badge` es de solo lectura, como el nuestro: no sirve de chip |
+| **`segmented-button`** | **no tiene** | `HStack` de `Pressable`, o `Tabs` re-skinneado |
+| **`search-bar`** | **no tiene** | `Input` + `Icon` |
+| **`list`** · **`item`** | **no tiene** | `FlatList` de RN + `Pressable` + `HStack` |
+| **`stat-card`** | **no tiene** | `Card` + `Text` con los tokens de `.figure` |
+| **`empty-state`** | **no tiene** | `VStack` + `Text` + `Button` |
+| **`person-card`** | **no tiene** | `HStack` + `Avatar` + `Text` |
+
+Los que dicen **no tiene** son la mitad del set que se usa todos los días. No es un problema —
+también en web los escribimos nosotros— pero define el trabajo: **gluestack ahorra el
+comportamiento y la accesibilidad de los que sí están, no el sistema visual de ninguno.**
+
 ### Cambian de patrón
 
 | Web | En nativo | Por qué |
