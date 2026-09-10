@@ -3454,6 +3454,67 @@ body { overflow-x: clip; }
 .placeholder-panel .placeholder-icon { font-size: 32px; margin-bottom: 12px; }
 .placeholder-panel p { line-height: 1.6; }
 
+
+/* ── Mobile / nativo: las dos escalas lado a lado ─────────────── */
+#s-mobile .m-preview { padding: 20px; }
+#s-mobile .m-pair { display: flex; gap: 24px; flex-wrap: wrap; }
+#s-mobile .m-cap { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ds-text-3); margin: 0 0 10px; }
+#s-mobile .m-cap b { color: var(--ds-text-1); }
+#s-mobile .m-phone { width: 390px; max-width: 100%; background: var(--color-surface);
+  border: 1px solid var(--ds-card-border); border-radius: 22px; overflow: hidden;
+  display: flex; flex-direction: column; }
+#s-mobile .m-nav { padding: 16px 20px 10px; display: flex; align-items: center;
+  justify-content: space-between; }
+#s-mobile .m-navttl { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); }
+#s-mobile .m-body { padding: 4px 20px 20px; }
+#s-mobile .m-h1 { font-family: var(--font-heading); font-weight: 700; color: var(--text-primary);
+  margin: 0 0 6px; letter-spacing: -.01em; }
+#s-mobile .m-sub { color: var(--text-secondary); margin: 0 0 20px; }
+#s-mobile .m-ovl { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em;
+  color: var(--text-secondary); margin: 0 0 8px; }
+#s-mobile .m-row { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  border-bottom: 1px solid var(--border); outline: 1px dashed rgba(224,49,49,.5); }
+#s-mobile .m-row:last-of-type { border-bottom: 0; }
+#s-mobile .m-rl { color: var(--text-primary); font-weight: 500; }
+#s-mobile .m-rm { color: var(--text-secondary); margin-top: 2px; }
+#s-mobile .m-rv { font-family: var(--font-mono); color: var(--text-primary); white-space: nowrap; }
+#s-mobile .m-btn { display: flex; align-items: center; justify-content: center;
+  background: var(--color-primary); color: var(--color-on-primary);
+  border-radius: var(--radius-md); font-weight: 600; margin-top: 20px;
+  outline: 1px dashed rgba(224,49,49,.5); }
+#s-mobile .m-help { color: var(--text-secondary); margin: 10px 0 0; text-align: center; }
+#s-mobile .m-tabs { display: flex; border-top: 1px solid var(--border); }
+#s-mobile .m-tab { flex: 1; text-align: center; padding: 10px 0 14px; color: var(--text-secondary); }
+#s-mobile .m-tab.on { color: var(--color-primary); font-weight: 600; }
+#s-mobile .m-legend { font-size: 12px; color: var(--ds-text-3); margin: 16px 0 0; }
+
+/* escala ACTUAL (web) */
+#s-mobile .m-a .m-navttl { font-size: 17px; line-height: 1.35; }
+#s-mobile .m-a .m-h1     { font-size: 28px; line-height: 1.15; }
+#s-mobile .m-a .m-sub    { font-size: 13.5px; line-height: 1.5; }
+#s-mobile .m-a .m-ovl    { font-size: 12px; line-height: 1.4; }
+#s-mobile .m-a .m-row    { min-height: 36px; }
+#s-mobile .m-a .m-rl     { font-size: 13.5px; line-height: 1.5; }
+#s-mobile .m-a .m-rm     { font-size: 12.5px; line-height: 1.6; }
+#s-mobile .m-a .m-rv     { font-size: 13px; line-height: 1.4; }
+#s-mobile .m-a .m-btn    { height: 36px; font-size: 13.5px; }
+#s-mobile .m-a .m-help   { font-size: 12px; line-height: 1.4; }
+#s-mobile .m-a .m-tab    { font-size: 11.5px; }
+
+/* escala NATIVA */
+#s-mobile .m-b .m-navttl { font-size: 17px; line-height: 1.3; }
+#s-mobile .m-b .m-h1     { font-size: 32px; line-height: 1.1; }
+#s-mobile .m-b .m-sub    { font-size: 17px; line-height: 1.45; }
+#s-mobile .m-b .m-ovl    { font-size: 13px; line-height: 1.45; }
+#s-mobile .m-b .m-row    { min-height: 48px; }
+#s-mobile .m-b .m-rl     { font-size: 16px; line-height: 1.5; }
+#s-mobile .m-b .m-rm     { font-size: 14px; line-height: 1.45; }
+#s-mobile .m-b .m-rv     { font-size: 15px; line-height: 1.4; }
+#s-mobile .m-b .m-btn    { height: 48px; font-size: 16px; }
+#s-mobile .m-b .m-help   { font-size: 13px; line-height: 1.45; }
+#s-mobile .m-b .m-tab    { font-size: 11px; }
+
 </style>
 </head>
 <body>
@@ -3531,6 +3592,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="grid"              onclick="navigate('grid')"><i             data-lucide="layout-grid"          style="width:13px;height:13px"></i> Layout</div>
       <div class="ds-nav-item" data-section="composition"       onclick="navigate('composition')"><i      data-lucide="columns-3"            style="width:13px;height:13px"></i> Composición</div>
       <div class="ds-nav-item" data-section="space"             onclick="navigate('space')"><i            data-lucide="orbit"                style="width:13px;height:13px"></i> Capa espacial</div>
+      <div class="ds-nav-item" data-section="mobile"            onclick="navigate('mobile')"><i           data-lucide="smartphone"           style="width:13px;height:13px"></i> Nativo</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-aspect-ratio" onclick="navigate('c-aspect-ratio')">Aspect Ratio</div>
         <div class="ds-nav-item" data-section="c-empty"    onclick="navigate('c-empty')">Empty State</div>
@@ -5098,6 +5160,185 @@ body { overflow-x: clip; }
         </div>
       </div>
       <a href="https://lucide.dev/icons/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;color:var(--ds-accent);font-size:13px;font-weight:500;text-decoration:none">Ver catálogo completo en lucide.dev <i data-lucide="arrow-up-right" style="width:13px;height:13px"></i></a>
+    </section>
+
+    <!-- ═══════════ MOBILE / NATIVO ═══════════ -->
+    <section class="ds-section" id="s-mobile">
+      <div class="ds-page-tag">Foundations · Mobile</div>
+      <h1 class="ds-page-title">Nativo</h1>
+      <p class="ds-page-desc">Qué cambia cuando el destino es una app en React Native, y —sobre todo— qué no. La regla completa está en <code>MOBILE.md</code>; los valores salen generados a <code>tokens/</code> desde <code>css/variables.css</code>, que sigue siendo la única fuente.</p>
+
+      <div class="ds-callout" style="border-left-color:var(--color-error)"><strong>Embassy nació para escritorio y su escala lo delata.</strong> El cuerpo base son <strong>13,5px</strong>, que es el tamaño del <em>caption</em> de iOS (13pt). Los botones e inputs se dibujan al mismo tamaño, contra los 17pt de iOS y los 16sp de Material. Una app construida con la escala tal cual sale chica y fuera de norma en las dos plataformas. Eso no es una impresión: es medible.</div>
+
+      <h2 class="ds-h2">1 · Qué cambia al cruzar</h2>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Grupo</th><th>Qué incluye</th><th>Por qué</th></tr></thead>
+          <tbody>
+            <tr><td><strong>No cambia nada</strong></td><td>Los <strong>182 colores</strong> con su dark, los radios, las tres familias, la grilla de 4px, la jerarquía primitiva → rol → alias, y toda la composición que aplica: eje izquierdo, un overline, el índice de sección, el dato con su base, imágenes reales, sin scroll reveal</td><td>Es la marca y es oficio. Un teléfono no cambia de quién es el producto</td></tr>
+            <tr><td><strong>Cambia de valor,<br>no de nombre</strong></td><td>La escala tipográfica, la densidad, el target mínimo y el gutter</td><td>Un componente lee <code>--font-size-body-md</code> en las dos plataformas y no sabe dónde corre</td></tr>
+            <tr><td><strong>No existe en nativo</strong></td><td>El app shell, el hover, el <code>max-width</code>, la grilla de 12, la medida en <code>ch</code>, y diecinueve componentes de escritorio</td><td>No hay puntero, no hay ventana que crezca, no hay columna: hay pantalla</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="ds-h2">2 · La escala nativa</h2>
+      <p class="ds-p">Vive en <code>css/variables.css</code>, en el bloque <code>[data-platform="native"]</code>. <strong>No es un tema:</strong> claro/oscuro es un eje de <em>color</em> y escritorio/nativo es un eje de <em>tamaño</em>. Son independientes, y por eso el generador emite cuatro exports — <code>light</code>, <code>dark</code>, <code>native</code>, <code>nativeDark</code>.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Token</th><th>Web</th><th>Nativo</th><th>Referencia</th></tr></thead>
+          <tbody>
+            <tr><td><code>--font-size-display</code></td><td>28px</td><td><strong>32px</strong></td><td>iOS large title 34</td></tr>
+            <tr><td><code>--font-size-heading-md</code></td><td>18px</td><td><strong>20px</strong></td><td>—</td></tr>
+            <tr><td><code>--font-size-body-lg</code></td><td>14px</td><td><strong>17px</strong></td><td>iOS body 17</td></tr>
+            <tr><td><code>--font-size-body-md</code> · <em>la base</em></td><td>13,5px</td><td><strong>16px</strong></td><td>Material body-large 16</td></tr>
+            <tr><td><code>--font-size-body-sm</code></td><td>12,5px</td><td><strong>14px</strong></td><td>—</td></tr>
+            <tr><td><code>--font-size-label</code></td><td>13px</td><td><strong>15px</strong></td><td>iOS secundario 15</td></tr>
+            <tr><td><code>--font-size-caption</code></td><td>12px</td><td><strong>13px</strong></td><td>iOS caption 13</td></tr>
+            <tr><td><code>--font-size-badge</code></td><td>11,5px</td><td><strong>11px</strong></td><td>El único que baja</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ds-p"><code>heading-xl</code> (24), <code>heading-lg</code> (22) y <code>heading-sm</code> (17) no se mueven. El <strong>registro editorial</strong> deja de ser fluido —no hay viewport que crezca— y se congela en 44 / 34 / 28.</p>
+
+      <h2 class="ds-h2">3 · La misma pantalla, las dos escalas</h2>
+      <div class="ds-preview m-preview" style="display:block">
+        <div class="m-pair">
+          <div>
+            <p class="m-cap"><b>Hoy</b> — la escala del DS tal cual</p>
+            <div class="m-phone m-a">
+              <div class="m-nav"><span class="m-navttl">Altas</span><span class="m-rv">jul–sep</span></div>
+              <div class="m-body">
+                <h3 class="m-h1">Altas del trimestre</h3>
+                <p class="m-sub">240 altas procesadas. La mediana bajó a 4,2 minutos.</p>
+                <p class="m-ovl">Últimas</p>
+                <div class="m-row"><div><div class="m-rl">Clínica del Sol</div><div class="m-rm">Alta completa · 3 min</div></div><span class="m-rv">4,2</span></div>
+                <div class="m-row"><div><div class="m-rl">Sanatorio Norte</div><div class="m-rm">Pendiente de firma</div></div><span class="m-rv">—</span></div>
+                <div class="m-row"><div><div class="m-rl">Centro Médico Rivera</div><div class="m-rm">Alta completa · 6 min</div></div><span class="m-rv">6,0</span></div>
+                <div class="m-btn">Procesar pendientes</div>
+                <p class="m-help">Se notifica al responsable de cada centro.</p>
+              </div>
+              <div class="m-tabs"><span class="m-tab on">Altas</span><span class="m-tab">Centros</span><span class="m-tab">Reportes</span><span class="m-tab">Perfil</span></div>
+            </div>
+          </div>
+          <div>
+            <p class="m-cap"><b>Nativo</b> — mismos tokens, valores de teléfono</p>
+            <div class="m-phone m-b">
+              <div class="m-nav"><span class="m-navttl">Altas</span><span class="m-rv">jul–sep</span></div>
+              <div class="m-body">
+                <h3 class="m-h1">Altas del trimestre</h3>
+                <p class="m-sub">240 altas procesadas. La mediana bajó a 4,2 minutos.</p>
+                <p class="m-ovl">Últimas</p>
+                <div class="m-row"><div><div class="m-rl">Clínica del Sol</div><div class="m-rm">Alta completa · 3 min</div></div><span class="m-rv">4,2</span></div>
+                <div class="m-row"><div><div class="m-rl">Sanatorio Norte</div><div class="m-rm">Pendiente de firma</div></div><span class="m-rv">—</span></div>
+                <div class="m-row"><div><div class="m-rl">Centro Médico Rivera</div><div class="m-rm">Alta completa · 6 min</div></div><span class="m-rv">6,0</span></div>
+                <div class="m-btn">Procesar pendientes</div>
+                <p class="m-help">Se notifica al responsable de cada centro.</p>
+              </div>
+              <div class="m-tabs"><span class="m-tab on">Altas</span><span class="m-tab">Centros</span><span class="m-tab">Reportes</span><span class="m-tab">Perfil</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="m-legend">Las dos a 390px, el ancho real de un teléfono. El punteado marca la superficie tocable: <strong>36px</strong> a la izquierda, <strong>48px</strong> a la derecha.</p>
+      </div>
+
+      <h2 class="ds-h2">4 · Densidad y superficie táctil</h2>
+      <p class="ds-p">Los 44px vivían sueltos dentro de media queries en <code>components.css</code>: eran un parche por archivo, no una decisión. Ahora son tokens.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Token</th><th>Web</th><th>Nativo</th><th>Regla</th></tr></thead>
+          <tbody>
+            <tr><td><code>--target-min</code></td><td>44px</td><td><strong>48px</strong></td><td>Es un <strong>piso</strong>, no un tamaño. Cubre iOS (44) y Android (48) de una. Menos es <code>M2</code>, bloqueante</td></tr>
+            <tr><td><code>--row-height</code></td><td>36px</td><td><strong>48px</strong></td><td>8px mínimo entre dos targets: dos filas de 48 pegadas se tocan mal</td></tr>
+            <tr><td><code>--control-height</code></td><td>36px</td><td><strong>48px</strong></td><td>El área tocable no es lo que se ve: un ícono de 24 se resuelve con <code>hitSlop</code>, no agrandándolo</td></tr>
+            <tr><td><code>--screen-gutter</code></td><td>—</td><td><strong>20px</strong></td><td>No es <code>--column-gutter</code>: en nativo no hay columna que centrar, hay pantalla con margen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ds-callout"><strong>La safe area no se hardcodea.</strong> <code>useSafeAreaInsets()</code> siempre. Un <code>paddingTop: 44</code> es falla <code>M3</code>: el notch mide distinto en cada teléfono y no mide nada en Android.</div>
+
+      <h2 class="ds-h2">5 · Lo que no cruza de CSS a React Native</h2>
+      <p class="ds-p">El export no es una copia — es una <strong>resolución</strong>. Estas siete cosas existen en CSS y no en RN, y el generador las deja resueltas. Token por token están en <code>tokens/NATIVE-NOTES.md</code>.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>En CSS</th><th>En RN</th><th>Regla</th></tr></thead>
+          <tbody>
+            <tr><td><code>line-height: 1.5</code></td><td>puntos</td><td><code>lineHeight = fontSize * 1.5</code> — pasarlo como multiplicador se ignora en silencio (<code>M7</code>)</td></tr>
+            <tr><td><code>letter-spacing: -0.02em</code></td><td>puntos</td><td><code>letterSpacing = fontSize * -0.02</code></td></tr>
+            <tr><td><code>clamp(52px, 8vw, 96px)</code></td><td>no existe</td><td>Congelado en el valor de teléfono; el máximo queda anotado para tablet</td></tr>
+            <tr><td><code>color-mix()</code></td><td>no existe</td><td>Se calcula y sale hex</td></tr>
+            <tr><td><code>var()</code> encadenado</td><td>no existe</td><td>Se resuelve al valor final</td></tr>
+            <tr><td><code>box-shadow</code> multicapa</td><td>no existe</td><td>iOS <code>shadow*</code>, Android solo <code>elevation</code></td></tr>
+            <tr><td><code>linear-gradient</code></td><td>no existe</td><td><code>expo-linear-gradient</code> con los stops resueltos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="ds-h2">6 · El stack</h2>
+      <p class="ds-p"><strong>NativeWind v5 + Tailwind v4</strong>, con <strong>gluestack v5</strong> como base de los componentes. Tailwind v4 abandonó <code>tailwind.config.js</code> y declara los tokens <strong>en CSS</strong>, con <code>@theme inline</code>: eso hace que el puente desde Embassy sea mecánico en vez de una transcripción a mano, que es de donde sale el drift.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Archivo generado</th><th>Qué es</th></tr></thead>
+          <tbody>
+            <tr><td><code>tokens/gluestack.config.ts</code></td><td><code>light</code> y <code>dark</code> en triplete RGB sin <code>rgb()</code>, para que Tailwind pueda aplicar opacidad (<code>bg-primary/40</code>)</td></tr>
+            <tr><td><code>tokens/theme.css</code></td><td>El bloque <code>@theme inline</code> que mapea cada color a su utility</td></tr>
+            <tr><td><code>tokens/embassy.tokens.ts</code></td><td><code>light</code>, <code>dark</code>, <code>native</code>, <code>nativeDark</code> tipados, para lo que no sea color</td></tr>
+            <tr><td><code>tokens/embassy.tokens.json</code></td><td>Neutral, con provenance — por si mañana el motor es otro</td></tr>
+            <tr><td><code>tokens/NATIVE-NOTES.md</code></td><td>Los tokens que no cruzan 1:1 y qué hacer con cada uno</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ds-callout"><strong>De gluestack se copia el archivo, no se adopta el sistema.</strong> Su CLI deja el componente en tu repo y es tuyo: se toma la estructura y el comportamiento —accesibilidad, estados, composición de slots— y se le reemplaza el styling por nuestros tokens. Es exactamente lo que ya hicimos en web con shadcn, donde <code>components/ui/*.tsx</code> es su estructura con las clases de Embassy y cero styling propio. <strong>No se adopta</strong> su paleta, sus radios, su escala, sus sombras ni su iconografía: una utility sin traducir es falla <code>A8</code>.</div>
+      <div class="ds-callout"><code>node scripts/build-tokens.mjs --check</code> falla si <code>tokens/</code> quedó atrás del CSS. Va en CI: es lo único que impide que la app y la web se separen en silencio.</div>
+
+      <h2 class="ds-h2">7 · El mapa de componentes</h2>
+      <p class="ds-p">Embassy tiene 62 componentes en web. <strong>No se portan 62.</strong> Elegir la versión chica del patrón de escritorio en vez del patrón nativo es falla <code>M4</code>.</p>
+      <p class="ds-p"><strong>Se portan tal cual</strong> (mismo componente, otros valores) — 37:<br>
+      <code>accordion</code> <code>alert</code> <code>attachment</code> <code>avatar</code> <code>badge</code> <code>button</code> <code>calendar</code> <code>card</code> <code>carousel</code> <code>checkbox</code> <code>chip</code> <code>collapsible</code> <code>description</code> <code>divider</code> <code>empty-state</code> <code>form</code> <code>input-otp</code> <code>item</code> <code>label</code> <code>list</code> <code>person-card</code> <code>placeholder</code> <code>progress</code> <code>radio-group</code> <code>search</code> <code>segmented-button</code> <code>select</code> <code>skeleton</code> <code>slider</code> <code>spinner</code> <code>stat-card</code> <code>switch</code> <code>tabs</code> <code>toast</code> <code>toggle</code> <code>toggle-group</code> <code>vacancy-card</code></p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Web</th><th>En nativo</th><th>Por qué</th></tr></thead>
+          <tbody>
+            <tr><td><code>data-table</code>, <code>table</code></td><td>Lista de filas apiladas (<code>label: valor</code>) o card por registro</td><td>Una tabla en 390px no se lee: se scrollea de costado y nadie lo hace</td></tr>
+            <tr><td><code>toolbar</code></td><td>Header nativo + barra de acción abajo</td><td>Lo importante va al alcance del pulgar, no arriba</td></tr>
+            <tr><td><code>page-header</code></td><td>El header del stack navigator</td><td>El título de pantalla lo pone la navegación</td></tr>
+            <tr><td><code>breadcrumb</code>, <code>back-link</code></td><td>El back del stack</td><td>La jerarquía la lleva el navegador, no la pantalla</td></tr>
+            <tr><td><code>navigation-menu</code>, <code>menubar</code></td><td>Tab bar + stack</td><td>—</td></tr>
+            <tr><td><code>dropdown-menu</code>, <code>context-menu</code></td><td>Action sheet</td><td>No hay click derecho ni menú flotante</td></tr>
+            <tr><td><code>popover</code>, <code>tooltip</code>, <code>rich-tooltip</code></td><td>Bottom sheet, o el contenido inline</td><td>Un tooltip necesita hover: en un teléfono no existe</td></tr>
+            <tr><td><code>sheet</code> (lateral)</td><td>Bottom sheet</td><td>El lateral es un patrón de escritorio</td></tr>
+            <tr><td><code>modal</code></td><td>Pantalla completa o bottom sheet</td><td>Un diálogo chico centrado se siente web</td></tr>
+            <tr><td><code>combobox</code></td><td>Sheet con búsqueda</td><td>—</td></tr>
+            <tr><td><code>command</code></td><td>Pantalla de búsqueda completa</td><td>—</td></tr>
+            <tr><td><code>create-form</code></td><td>Pantalla propia, nunca un modal</td><td>Un formulario dentro de un modal en 390px es una trampa</td></tr>
+            <tr><td><code>kanban</code></td><td>Segmented button + una columna a la vez</td><td>—</td></tr>
+            <tr><td><code>pagination</code></td><td>Scroll infinito o “cargar más”</td><td>Paginar con números es de escritorio</td></tr>
+            <tr><td><code>button-group</code></td><td>Segmented, o botones apilados a lo ancho</td><td>—</td></tr>
+            <tr><td><code>input-group</code></td><td>Campos apilados</td><td>—</td></tr>
+            <tr><td><code>scroll-area</code></td><td><code>ScrollView</code> / <code>FlatList</code></td><td>—</td></tr>
+            <tr><td><code>chart</code></td><td>El mismo dato, menos series, sin leyenda flotante</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="ds-h2">8 · Qué se chequea</h2>
+      <p class="ds-p">El grupo <code>M</code> de <code>FAILURES.md</code>. Las demás familias aplican igual: una pantalla nativa no se audita distinto que una web.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>ID</th><th>Falla</th><th>Severidad</th></tr></thead>
+          <tbody>
+            <tr><td><code>M1</code></td><td>Tamaño tipográfico escrito a mano en vez de leerlo de <code>native</code></td><td>ALTA</td></tr>
+            <tr><td><code>M2</code></td><td>Superficie tocable por debajo de 48</td><td>BLOQ</td></tr>
+            <tr><td><code>M3</code></td><td>Safe area hardcodeada en vez de <code>useSafeAreaInsets()</code></td><td>ALTA</td></tr>
+            <tr><td><code>M4</code></td><td>Patrón de escritorio encogido en vez del patrón nativo</td><td>ALTA</td></tr>
+            <tr><td><code>M5</code></td><td>La escala web (cuerpo 13,5) en una app</td><td>ALTA</td></tr>
+            <tr><td><code>M6</code></td><td><code>--column-gutter</code>, <code>.grid-12</code>, <code>max-width</code> o medida en <code>ch</code> en nativo</td><td>MEDIA</td></tr>
+            <tr><td><code>M7</code></td><td><code>lineHeight</code> o <code>letterSpacing</code> como multiplicador o <code>em</code></td><td>ALTA</td></tr>
+            <tr><td><code>M8</code></td><td>Utilidades de gluestack/Tailwind sin traducir</td><td>ALTA</td></tr>
+            <tr><td><code>M9</code></td><td>Probado en una sola plataforma</td><td>MEDIA</td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <!-- ═══════════ TOKENS – COLOR ═══════════ -->
@@ -27209,6 +27450,7 @@ const SECTIONS = {
   'grid':              { label: 'Layout',                group: 'Foundations' },
   'composition':       { label: 'Composición',           group: 'Foundations' },
   'space':             { label: 'Capa espacial',         group: 'Foundations' },
+  'mobile':            { label: 'Nativo',                group: 'Foundations' },
   'logos':             { label: 'Logos',                 group: 'Foundations' },
   'usage':             { label: 'Usage Guidelines',      group: 'Foundations' },
   // Styles
