@@ -6,6 +6,10 @@
 
 The same product runs on a recruiter's phone and on a manager's 1440px monitor. A layout that only looks right at one width is half-built. Embassy encodes the responsive contract in tokens — two breakpoints (`--breakpoint-md`, `--breakpoint-lg`), a 4px spacing grid (`--space-*`), an app-shell structure, and two Search variants — so responsiveness is a matter of *applying* the system, not hand-tuning pixels per device. The one previously-open question, the sub-768px sidebar, is now resolved: it's a **modal navigation drawer** (see below).
 
+> **This guideline is about web at a narrow width** — there is still hover, an app shell, a
+> viewport that grows and CSS. A **React Native app** is a different axis, not the small end of
+> this ladder: its scale, density and component map are in `MOBILE.md`.
+
 ## Mobile-first
 
 Author the narrow layout first, then add complexity as width allows. In practice: a single stacked column is the base; multi-column, side-by-side, and revealed-secondary content are progressive enhancements added at `md`/`lg`. This keeps the smallest screen coherent and makes the wide layout additive rather than a set of overrides fighting each other.
@@ -44,7 +48,7 @@ Embassy's layout is an **app shell** (GOVERNANCE §14.1): a fixed `sidebar` (240
 └──────────┴───────────────────────────┘
 ```
 
-Embassy does **not** prescribe a rigid 12-column CSS grid; it uses intrinsic CSS Grid that reflows without breakpoints (GOVERNANCE §14.6):
+For **repeating cards of equal weight**, Embassy uses intrinsic CSS Grid that reflows without any breakpoint (GOVERNANCE §14.6):
 
 ```css
 .card-grid {
@@ -53,6 +57,19 @@ Embassy does **not** prescribe a rigid 12-column CSS grid; it uses intrinsic CSS
   gap: var(--space-6);
 }
 ```
+
+**But there IS a 12-column grid, and it is not this.** `.grid-12` + `.span-1…12`
+(`css/composition.css`, added 2026-09) exists so a section can be **7+5 or 8+4 instead of three
+equal blocks** — asymmetry on purpose, which is one of the anti-generic rules in `COMPOSICION.md`.
+It collapses to one column below 900px. The two do not compete:
+
+| Use | What |
+|---|---|
+| N cards of equal weight, unknown count | `.card-grid` — intrinsic, no breakpoint |
+| A composed section where the parts weigh differently | `.grid-12` + `.span-*` |
+
+Neither exists in a **native app**: there the layout is one column and `.grid-12` is a web class
+(`MOBILE.md` §6, failure `M6`).
 
 This auto-fits columns to available width — one column on a phone, several on desktop — with zero media queries. Use it for card grids, dashboards, and kanban columns. Constrain reading width at the *page* level, never inside components: full-bleed app shell (none), centered page (1200px), form/create (800px), prose (680px) — apply `max-width` + `margin: 0 auto` on the page container (GOVERNANCE §14.4).
 
