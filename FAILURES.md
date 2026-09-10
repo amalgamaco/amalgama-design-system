@@ -140,6 +140,7 @@ Los de `design.md` §8, contados como una falla cada uno.
 | `H9` | Titular de apertura en la escala de producto (28px) donde iba el registro editorial, o dos editoriales en la misma página | MEDIA | inspección + regex |
 | `H10` | Imagen de banco, ilustración isométrica, render 3D o degradé haciendo de foto | ALTA | regex + inspección |
 | `H11` | Secciones apareciendo al scrollear (fade-up, IntersectionObserver, librería de scroll-reveal) | MEDIA | regex |
+| `H12` | La capa espacial de Amalgama (planetas, órbitas, fondo estrellado) en un producto de cliente | BLOQ | regex + inspección |
 
 ## I · Proceso y drift
 

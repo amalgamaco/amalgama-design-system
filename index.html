@@ -3529,6 +3529,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="interaction-state" onclick="navigate('interaction-state')"><i data-lucide="mouse-pointer-click" style="width:13px;height:13px"></i> Interaction State</div>
       <div class="ds-nav-item" data-section="grid"              onclick="navigate('grid')"><i             data-lucide="layout-grid"          style="width:13px;height:13px"></i> Layout</div>
       <div class="ds-nav-item" data-section="composition"       onclick="navigate('composition')"><i      data-lucide="columns-3"            style="width:13px;height:13px"></i> Composición</div>
+      <div class="ds-nav-item" data-section="space"             onclick="navigate('space')"><i            data-lucide="orbit"                style="width:13px;height:13px"></i> Capa espacial</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-aspect-ratio" onclick="navigate('c-aspect-ratio')">Aspect Ratio</div>
         <div class="ds-nav-item" data-section="c-empty"    onclick="navigate('c-empty')">Empty State</div>
@@ -4950,6 +4951,59 @@ body { overflow-x: clip; }
       </div>
 
       <div class="ds-callout" style="margin-top:24px"><strong>La prueba final.</strong> Tapá el logo y los colores. Si la página podría ser de cualquier otro estudio cambiando la paleta, la composición no hizo su trabajo — los tokens ya garantizan que se vea bien; esto es lo que hace que se vea nuestra.</div>
+    </section>
+
+
+    <!-- ═══════════ CAPA ESPACIAL ═══════════ -->
+    <section class="ds-section" id="s-space">
+      <div class="ds-page-tag">Foundations · Capa espacial</div>
+      <h1 class="ds-page-title">Capa espacial</h1>
+      <p class="ds-page-desc">La identidad espacial de Amalgama —fondo profundo con estrellas, un halo, órbitas finas y planetas— hecha sistema. Es lo más identitario que tenemos: nadie más la va a tener por accidente. Vive en <code>css/space.css</code>, se carga aparte y no entra en <code>components.css</code>.</p>
+
+      <div class="ds-callout" style="border-left-color:var(--color-error)"><strong>Solo en superficies de Amalgama.</strong> Nuestro sitio, one-pagers, propuestas, reportes, decks y demos que firmamos nosotros. <strong>Nunca en un producto de cliente</strong> —ni white-label, ni de fondo, ni “un poquito”—: un cliente que paga por su marca no compra la nuestra. Es la falla <code>H12</code> y es bloqueante. La señal es objetiva: si el proyecto carga un <code>brand/&lt;cliente&gt;.css</code>, la marca es de otro.</p></div>
+
+      <h2 class="ds-h2">Las piezas</h2>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Clase</th><th>Qué es</th><th>Cuánto</th></tr></thead>
+          <tbody>
+            <tr><td><code>.space</code></td><td>El lienzo: degradé profundo + campo de estrellas en CSS, sin imágenes</td><td>En el <code>body</code>, con <code>data-theme="dark"</code></td></tr>
+            <tr><td><code>.space-glow</code></td><td>El halo detrás de la apertura</td><td><strong>Uno por página.</strong> Dos halos son ninguno</td></tr>
+            <tr><td><code>.orbit</code></td><td>El anillo fino que enmarca un diagrama</td><td>Nunca suelto: un círculo sin nada adentro no tiene motivo</td></tr>
+            <tr><td><code>.planet</code> + <code>-sm</code> / <code>-md</code> / <code>-lg</code></td><td>Un planeta del set, con su tratamiento: sin caja, sin borde, halo suave</td><td><strong>Uno grande por sección.</strong> Tres es un wallpaper</td></tr>
+            <tr><td><code>.title-ghost</code></td><td>El titular enorme al 12%, como marca de agua</td><td>Es textura, no un título: no pasa contraste</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="ds-h2">Cómo se ve</h2>
+      <div class="ds-preview" style="display:block;padding:0;overflow:hidden;border-radius:14px">
+        <div class="space" data-theme="dark" style="position:relative;padding:28px 32px 60px">
+          <div class="space-glow" style="height:220px"></div>
+          <div style="position:relative">
+            <p class="overline">Propuesta comercial</p>
+            <h2 class="editorial-sm" style="color:#fff;margin:0 0 10px">Rediseño del back-office</h2>
+            <p class="measure" style="color:var(--text-secondary);margin:0 0 18px">Seis semanas, dos personas, y la lista de pantallas que hay que rehacer.</p>
+            <p class="figure" style="margin:0">
+              <span class="figure-value" style="color:#fff">4,2</span><span class="figure-unit">min</span>
+              <span class="figure-base">mediana · 240 altas · jul–sep 2026</span>
+            </p>
+            <div class="orbit" style="width:200px;height:200px;right:20px;top:-10px"></div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="ds-h2">Las condiciones</h2>
+      <p class="ds-p">Son parte de que la capa se vea bien y no se convierta en fondo de pantalla:</p>
+      <ul class="ds-p" style="padding-left:20px;line-height:1.7">
+        <li>Un halo por página, en la apertura.</li>
+        <li>Un planeta grande por sección como máximo, y nunca encima del texto: anclan, enmarcan o asoman por un borde.</li>
+        <li><strong>La capa no se mueve.</strong> Sin parallax, sin planetas a la deriva, sin estrellas titilando — es la misma regla que el scroll reveal.</li>
+        <li>Debajo sigue estando la composición: la capa es un fondo, no reemplaza la columna, la medida de línea ni el ritmo.</li>
+        <li>Contraste verificado sobre el lienzo: <code>--text-primary</code> da 17,9:1 sobre <code>#000B29</code> y 16,3:1 sobre la banda del halo. Un texto encima de un planeta se mide aparte — un planeta no es una superficie.</li>
+      </ul>
+
+      <div class="ds-callout"><strong>Por qué acá hay valores literales y no tokens de marca.</strong> Esta capa es de Amalgama y tiene que quedarse igual aunque el proyecto cargue el tema de un cliente. Si la construyéramos con <code>var(--primary-900)</code>, un <code>brand/&lt;cliente&gt;.css</code> la repintaría — que es justo lo que no queremos. Es el único lugar del sistema donde el literal es la decisión correcta.</div>
     </section>
 
     <!-- ═══════════ ICONS ═══════════ -->
@@ -27126,6 +27180,7 @@ const SECTIONS = {
   'interaction-state': { label: 'Interaction State',     group: 'Foundations' },
   'grid':              { label: 'Layout',                group: 'Foundations' },
   'composition':       { label: 'Composición',           group: 'Foundations' },
+  'space':             { label: 'Capa espacial',         group: 'Foundations' },
   'logos':             { label: 'Logos',                 group: 'Foundations' },
   'usage':             { label: 'Usage Guidelines',      group: 'Foundations' },
   // Styles

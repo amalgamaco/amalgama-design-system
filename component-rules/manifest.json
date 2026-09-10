@@ -1,6 +1,6 @@
 {
   "note": "Machine-readable registry. Source of truth = component-rules/<id>.md frontmatter (schema in component-rules/README.md). Regenerate with scripts/build-manifest.py.",
-  "count": 68,
+  "count": 69,
   "components": [
     {
       "id": "accordion",
@@ -5935,6 +5935,88 @@
         "docs_anchor": "c-snackbar"
       },
       "rules_file": "component-rules/snackbar.md"
+    },
+    {
+      "id": "space",
+      "display_name": "Space (capa espacial de Amalgama)",
+      "category": "Layout",
+      "status": "stable",
+      "aliases": [
+        "planetas",
+        "órbitas",
+        "fondo espacial",
+        "estrellas",
+        "identidad espacial"
+      ],
+      "summary": "Amalgama's own space layer — deep navy canvas with a starfield, one glow, thin orbits, planets and the ghost title. It is studio identity, so it goes on our surfaces and never on a client's.",
+      "variants": [
+        "canvas",
+        "glow",
+        "orbit",
+        "planet",
+        "ghost title"
+      ],
+      "sizes": [
+        "sm · md · lg"
+      ],
+      "states": [
+        "default"
+      ],
+      "tokens": {
+        "color": [
+          "--space-deep",
+          "--space-mid",
+          "--space-near",
+          "--space-glow",
+          "--space-star",
+          "--text-primary"
+        ],
+        "spacing": [],
+        "typography": [
+          "--font-heading",
+          "--font-size-editorial-lg",
+          "--letter-spacing-editorial"
+        ]
+      },
+      "relationships": {
+        "related": [
+          "composition",
+          "layout"
+        ],
+        "replaces": [
+          "dark backgrounds with an invented gradient, made up per project"
+        ],
+        "composed_with": [
+          "composition"
+        ],
+        "not_to_confuse_with": [
+          {
+            "component": "composition",
+            "why": "composition is the skeleton of any page, ours or a client's. This is a skin, and only ours"
+          }
+        ]
+      },
+      "motion": {
+        "entrance": "none",
+        "duration": "—",
+        "easing": "—",
+        "reduced_motion": "n/a — the layer is static by design"
+      },
+      "source": {
+        "css": "css/space.css",
+        "classes": [
+          "space",
+          "space-glow",
+          "orbit",
+          "planet",
+          "planet-sm",
+          "planet-md",
+          "planet-lg",
+          "title-ghost"
+        ],
+        "docs_anchor": "c-space"
+      },
+      "rules_file": "component-rules/space.md"
     },
     {
       "id": "stat-card",

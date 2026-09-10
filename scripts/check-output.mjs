@@ -237,6 +237,24 @@ for (const file of files) {
     }
   }
 
+  // H12 — la capa espacial en un producto de cliente. La señal es objetiva: si la página
+  // carga un brand/<cliente>.css, la marca es de otro, y la identidad de Amalgama no va ahí.
+  // Es BLOQUEANTE porque no es un tema de gusto: es ponerle nuestra marca a algo que el
+  // cliente pagó para que tenga la suya.
+  if (!allows.has("H12")) {
+    const espacial = /class="[^"]*\b(space|space-glow|orbit|planet|title-ghost)\b/.test(src) || /css\/space\.css/.test(src);
+    const marcaCliente = [...src.matchAll(/href="[^"]*brand\/([a-z0-9-]+)\.css/gi)]
+      .map((m) => m[1].toLowerCase())
+      .filter((n) => n !== "amalgama");
+    if (espacial && marcaCliente.length) {
+      findings.push({
+        id: "H12", sev: "BLOQ",
+        desc: `capa espacial de Amalgama en un producto de marca ajena (brand/${marcaCliente[0]}.css)`,
+        file, line: lineOf(src, src.search(/space|planet|orbit/)), evidence: `brand/${marcaCliente[0]}.css + capa espacial`,
+      });
+    }
+  }
+
   // D9 — column-bleed sin acotar el texto. Sacar el ancho máximo es una decisión de estructura
   // válida (COMPOSICION.md regla 0); dejar que el párrafo mida 200 caracteres no lo es.
   // Se mira el atributo class, no el texto: el primer intento buscaba la palabra suelta y una

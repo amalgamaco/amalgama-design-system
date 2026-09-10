@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-64 componentes · **551 clases públicas** de 619 selectores totales en el CSS.
+65 componentes · **559 clases públicas** de 627 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -31,6 +31,26 @@ Dark mode: `<html data-theme="dark">`. No agregues overrides por tema.
 
 El tag va pineado a propósito: lo que se entrega no cambia de aspecto porque el DS mergeó algo.
 Para subir de versión, ver DEPLOYMENT.md §Releases.
+
+---
+
+### `space` — Space (capa espacial de Amalgama) · layout
+
+El lienzo espacial, el halo, las órbitas, los planetas y el título fantasma. SOLO para superficies de Amalgama — en un producto de cliente es la falla H12. Se carga aparte, no entra en components.css.
+**Cuándo usar:** SOLO en superficies de Amalgama — nuestro sitio, one-pagers, propuestas, reportes, decks y demos que firmamos nosotros. Es identidad de estudio.
+**Cuándo no:** **NUNCA en un producto de cliente.** Ni en una pantalla white-label, ni en una landing de cliente, ni "un poquito" de fondo. Un cliente que paga por su marca no
+
+Clases públicas: `.orbit` · `.planet` · `.planet-lg` · `.planet-md` · `.planet-sm` · `.space` · `.space-glow` · `.title-ghost`
+
+```html
+<html data-theme="dark">
+<body class="space">
+  <div class="space-glow"></div>
+  <main class="column column-1440"> … </main>
+</body>
+```
+
+Regla completa: `component-rules/space.md` · CSS: `css/space.css`
 
 ---
 

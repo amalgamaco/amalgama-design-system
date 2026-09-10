@@ -2,6 +2,33 @@
   "generated_from": "css/components",
   "components": [
     {
+      "id": "space",
+      "display_name": "Space (capa espacial de Amalgama)",
+      "category": "layout",
+      "status": "stable",
+      "file": "css/space.css",
+      "summary": "El lienzo espacial, el halo, las órbitas, los planetas y el título fantasma. SOLO para superficies de Amalgama — en un producto de cliente es la falla H12. Se carga aparte, no entra en components.css.",
+      "when": "SOLO en superficies de Amalgama — nuestro sitio, one-pagers, propuestas, reportes, decks y demos que firmamos nosotros. Es identidad de estudio.",
+      "when_not": "**NUNCA en un producto de cliente.** Ni en una pantalla white-label, ni en una landing de cliente, ni \"un poquito\" de fondo. Un cliente que paga por su marca no",
+      "variants": [],
+      "sizes": [],
+      "rules_files": [
+        "component-rules/space.md"
+      ],
+      "usage": "<html data-theme=\"dark\">\n<body class=\"space\">\n  <div class=\"space-glow\"></div>\n  <main class=\"column column-1440\"> … </main>\n</body>",
+      "classes": [
+        "orbit",
+        "planet",
+        "planet-lg",
+        "planet-md",
+        "planet-sm",
+        "space",
+        "space-glow",
+        "title-ghost"
+      ],
+      "internal_class_count": 8
+    },
+    {
       "id": "composition",
       "display_name": "Composition (estructura de página)",
       "category": "layout",

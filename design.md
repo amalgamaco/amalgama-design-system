@@ -267,7 +267,15 @@ Todas llevan el mismo marco (`.media`: borde de 1px, radio del sistema, sin somb
 falta aclarar qué se está viendo, un `.media-caption` en mono. El detalle está en `COMPOSICION.md`
 regla 10.
 
-### 6.8 Estrategia de tema
+### 6.8 La capa espacial
+
+Amalgama tiene una identidad espacial —fondo profundo con estrellas, un halo, órbitas, planetas—
+en `css/space.css`. Va en **nuestras** superficies: el sitio, one-pagers, propuestas, reportes,
+decks. **Nunca en un producto de cliente**, ni siquiera de fondo: es la falla `H12` y es
+bloqueante. La señal es objetiva — si el proyecto carga un `brand/<cliente>.css`, la marca es de
+otro. Condiciones de uso en `COMPOSICION.md` regla 13.
+
+### 6.9 Estrategia de tema
 
 - Hero / landing → banda oscura (`--primary-900` / `-700`).
 - Dashboards y herramientas internas → light.

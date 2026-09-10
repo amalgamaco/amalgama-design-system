@@ -1,0 +1,118 @@
+/* ═══════════════════════════════════════
+   Space — la capa espacial de Amalgama
+
+   Cuándo usar: SOLO en superficies de Amalgama — nuestro sitio, one-pagers, propuestas,
+     reportes, decks y demos que firmamos nosotros. Es identidad de estudio.
+   Cuándo no: **NUNCA en un producto de cliente.** Ni en una pantalla white-label, ni en
+     una landing de cliente, ni "un poquito" de fondo. Un cliente que paga por su marca no
+     compra la nuestra: ahí la capa espacial es una falla (`H12`), no un adorno.
+   Reemplaza a: los fondos oscuros con degradé inventados por proyecto.
+
+   Dependencia: variables.css + base.css. Se carga DESPUÉS de composition.css y solo en las
+     páginas que la usan — no entra en components.css a propósito.
+
+   Por qué acá hay valores literales y no tokens de marca:
+   esta capa es de Amalgama y tiene que quedarse igual aunque el proyecto cargue el tema de
+   un cliente. Si la construyéramos con var(--primary-900), un brand/<cliente>.css la
+   repintaría, que es exactamente lo que no queremos. Es el único lugar del sistema donde
+   el literal es la decisión correcta.
+
+   Uso:
+   <html data-theme="dark">
+   <body class="space">
+     <div class="space-glow"></div>
+     <main class="column column-1440"> … </main>
+   </body>
+═══════════════════════════════════════ */
+
+:root {
+  --space-deep:  #000B29;   /* el fondo más profundo, medido sobre nuestro sitio */
+  --space-mid:   #071438;   /* la banda media */
+  --space-near:  #0B1B44;   /* lo más cerca del glow */
+  --space-glow:  #1A49CD;   /* el azul del halo */
+  --space-star:  #FFFFFF;
+}
+
+/* ── El lienzo ─────────────────────────────────────────────────────────────
+   Un degradé vertical con campo de estrellas encima. Las estrellas son gradientes
+   radiales repetidos, no una imagen: pesan cero, no piden red y no se pixelan. */
+.space {
+  background-color: var(--space-deep);
+  background-image:
+    /* estrellas chicas */
+    radial-gradient(1px 1px at 17% 12%,  var(--space-star) 50%, transparent 51%),
+    radial-gradient(1px 1px at 63% 27%,  var(--space-star) 50%, transparent 51%),
+    radial-gradient(1px 1px at 88% 8%,   var(--space-star) 50%, transparent 51%),
+    radial-gradient(1px 1px at 34% 61%,  var(--space-star) 50%, transparent 51%),
+    radial-gradient(1px 1px at 76% 73%,  var(--space-star) 50%, transparent 51%),
+    radial-gradient(1px 1px at 9%  84%,  var(--space-star) 50%, transparent 51%),
+    radial-gradient(1px 1px at 51% 93%,  var(--space-star) 50%, transparent 51%),
+    /* estrellas medianas, más separadas */
+    radial-gradient(1.6px 1.6px at 27% 38%, var(--space-star) 50%, transparent 51%),
+    radial-gradient(1.6px 1.6px at 82% 46%, var(--space-star) 50%, transparent 51%),
+    radial-gradient(1.6px 1.6px at 44% 15%, var(--space-star) 50%, transparent 51%),
+    /* el degradé de fondo */
+    linear-gradient(180deg, var(--space-near) 0%, var(--space-mid) 38%, var(--space-deep) 100%);
+  background-size: 420px 420px, 420px 420px, 420px 420px, 420px 420px, 420px 420px,
+                   420px 420px, 420px 420px, 700px 700px, 700px 700px, 700px 700px, 100% 100%;
+  background-repeat: repeat, repeat, repeat, repeat, repeat, repeat, repeat,
+                     repeat, repeat, repeat, no-repeat;
+  color: var(--text-primary);
+}
+
+/* El halo. Va una vez, arriba, detrás del contenido de apertura. Dos halos son ninguno. */
+.space-glow {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 620px;
+  pointer-events: none;
+  background: radial-gradient(60% 100% at 50% 0%,
+    color-mix(in srgb, var(--space-glow) 55%, transparent) 0%,
+    transparent 70%);
+}
+
+/* ── Órbitas ───────────────────────────────────────────────────────────────
+   El anillo fino que enmarca un diagrama. Nunca decorativo suelto: si no hay nada
+   adentro, es una circunferencia sin motivo. */
+.orbit {
+  position: absolute;
+  border: 1px solid color-mix(in srgb, var(--space-star) 14%, transparent);
+  border-radius: var(--radius-full);
+  pointer-events: none;
+}
+
+/* ── Planetas ──────────────────────────────────────────────────────────────
+   El planeta es una imagen (PNG o SVG con transparencia) del set de Amalgama, y este es
+   su tratamiento: sin caja, sin borde, sin radio — el recorte ya es un círculo — con un
+   halo suave del color del planeta.
+   Escala: `lg` es el planeta que ancla una sección; `sm` es un marcador sobre una órbita.
+   **Uno grande por sección como máximo.** Tres planetas grandes en una pantalla es un
+   fondo de pantalla, no una página. */
+.planet {
+  display: block;
+  border: 0;
+  background: none;
+  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--space-glow) 45%, transparent));
+  pointer-events: none;
+  user-select: none;
+}
+.planet-sm { width: 32px;  height: auto; }
+.planet-md { width: 96px;  height: auto; }
+.planet-lg { width: 260px; height: auto; }
+
+/* ── Título fantasma ───────────────────────────────────────────────────────
+   El titular enorme apenas más claro que el fondo, que en nuestro sitio hace de marca de
+   agua sobre el espacio. Es decorativo: el título real va aparte, o este lleva el texto y
+   entonces tiene que pasar contraste — no las dos cosas.
+   Por eso NO usa el registro editorial: no es la apertura, es textura. */
+.title-ghost {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-editorial-lg);
+  line-height: var(--line-height-editorial-lg);
+  letter-spacing: var(--letter-spacing-editorial);
+  font-weight: 700;
+  color: color-mix(in srgb, var(--space-star) 12%, transparent);
+  margin: 0;
+  user-select: none;
+}

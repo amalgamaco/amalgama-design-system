@@ -44,6 +44,7 @@ ven los dos en una pantalla grande y no se componen igual.
 | Sin scroll reveal (regla 11) | Sí | Sí |
 | El dato con su base (reglas 8 y 12) | Sí | Sí — en producto suele vivir en `stat-card` o en una tabla |
 | Cero relleno (regla 9) | Sí | Sí |
+| Capa espacial (regla 13) | Solo si la página es **de Amalgama** | Solo en herramientas internas nuestras. **Nunca** en producto de cliente |
 
 **La regla corta:** lo que evita parecer generado aplica a todo. Lo que es *apertura* —el titular
 editorial, el índice de sección, el hero— es de página, no de producto. Una pantalla de producto
@@ -376,6 +377,34 @@ misma regla 8 hecha componente: un número sin base no se publica.
   <span class="figure-base">mediana · 240 altas · jul–sep 2026</span>
 </p>
 ```
+
+## 13. La capa espacial es nuestra, y solo nuestra
+
+Amalgama tiene una identidad espacial —fondo profundo con estrellas, un halo, órbitas finas,
+planetas— que ya vive en nuestro sitio. Está construida en `css/space.css` y **es lo más
+identitario que tenemos**: nadie más la va a tener por accidente.
+
+**Dónde va:** superficies de Amalgama. Nuestro sitio, one-pagers, propuestas comerciales, reportes,
+decks y demos que firmamos nosotros.
+
+**Dónde no va, y esto no se negocia:** **cualquier producto de cliente.** Ni una pantalla
+white-label, ni la landing de un cliente, ni "un poquito" de fondo. Un cliente que paga por su
+marca no compra la nuestra. Es la falla `H12`, y es bloqueante.
+
+**La señal es objetiva:** si el proyecto carga un `brand/<cliente>.css`, la marca es de otro. El
+chequeo lo mira exactamente así.
+
+Las condiciones de uso, que son parte de que se vea bien y no a fondo de pantalla:
+
+- **Un halo por página** (`.space-glow`), en la apertura. Dos halos son ninguno.
+- **Un planeta grande por sección** como máximo. Tres en una pantalla es un wallpaper.
+- **Los planetas no van encima del texto.** Anclan, enmarcan o asoman por un borde.
+- **La capa no se mueve.** Sin parallax, sin planetas a la deriva, sin estrellas titilando —
+  es la misma regla 11.
+- **El título fantasma es textura**, no un título: está al 12% de opacidad y no pasa contraste.
+  El titular real va en el registro editorial, aparte.
+- **Debajo sigue estando la composición.** La capa es un fondo: no reemplaza la columna, la medida
+  de línea ni el ritmo.
 
 ## 9. Cero relleno
 

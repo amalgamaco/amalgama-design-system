@@ -122,6 +122,14 @@ const LAYOUT = suelto({
   summary: "Shell de aplicación: sidebar de navegación persistente + topbar. Se carga aparte de components.css.",
 });
 
+const SPACE = suelto({
+  file: "css/space.css",
+  id: "space",
+  display_name: "Space (capa espacial de Amalgama)",
+  summary: "El lienzo espacial, el halo, las órbitas, los planetas y el título fantasma. SOLO para superficies de Amalgama — en un producto de cliente es la falla H12. Se carga aparte, no entra en components.css.",
+});
+if (SPACE) SPACE.rules_files = ["component-rules/space.md"];
+
 const COMPOSITION = suelto({
   file: "css/composition.css",
   id: "composition",
@@ -170,6 +178,7 @@ const components = fs
 
 if (LAYOUT) components.unshift(LAYOUT);
 if (COMPOSITION) components.unshift(COMPOSITION);
+if (SPACE) components.unshift(SPACE);
 
 const totalPublic = new Set(components.flatMap((c) => c.classes)).size;
 const allInternal = components.reduce((n, c) => n + c.internal_class_count, 0);
