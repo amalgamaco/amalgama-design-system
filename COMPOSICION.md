@@ -90,20 +90,56 @@ Las condiciones, que son parte del gesto:
 1200px con dos vacíos a los costados en un monitor ancho. Es correcta para un dashboard y es la
 razón por la que todas las landings se parecen.
 
-Hay **cuatro**, están en `css/composition.css`, y se elige una:
+Son **tres decisiones**, y las tres se dicen en voz alta antes de escribir markup: la
+**estructura**, el **ancho** y cómo se compone **adentro**.
+
+### La estructura — una de cuatro
 
 | Clase | Qué es | Cuándo |
 |---|---|---|
-| `.column` | Una columna centrada, 1200px | Producto, dashboards, pantallas de app. La segura, y la que menos diferencia |
+| `.column` | Una columna centrada | Producto, dashboards, pantallas de app. La segura, y la que menos diferencia |
 | `.column-bleed` | **Sin ancho máximo**, con márgenes que crecen con la pantalla | Cuando la página tiene que usar el monitor entero. La salida más rápida de la silueta genérica |
 | `.column-rail` | Contenido ancho + un riel angosto al costado para notas, metadatos o índice | La más "estudio". Obliga a decidir qué es principal y qué es nota |
 | `.column-split` | Dos tracks asimétricos, 6fr/4fr | Un hero con una herramienta o una imagen a un lado. Nunca 50/50: mitades iguales no dicen cuál manda |
 
-Y dos anchos de lectura: `.column-read` (800px) para artículos y detalle, `.column-form` (680px)
-para un formulario o un panel de auth.
-
 **Una por página.** Mezclar `bleed` en una sección y `column` en la siguiente rompe el borde
 izquierdo, que es lo único que sostiene la página.
+
+### El ancho — se elige, no se hereda
+
+1200 es el default y es el número que usa todo el mundo. Si la página gana con más aire lateral, o
+tiene que ocupar mejor un monitor grande, **se elige otro** de la escala:
+
+| Clase | Ancho | Se siente |
+|---|---|---|
+| `.column` | 1200px | El default. Cómodo y neutro |
+| `.column-1280` | 1280px | Apenas más respiro, misma sensación |
+| `.column-1440` | 1440px | Una tabla ancha o un dashboard denso entran sin apretar |
+| `.column-1600` | 1600px | Editorial, para pantallas grandes |
+| `.column-1920` | 1920px | Casi borde a borde, pero con un límite real |
+| `.column-bleed` | sin límite | El ancho lo pone la pantalla |
+
+Y dos anchos de lectura, que no son elección de estilo sino de contenido: `.column-read` (800px)
+para artículos y detalle, `.column-form` (680px) para un formulario o un panel de auth.
+
+**Los márgenes laterales nunca desaparecen.** Sea 1200 o sin límite, el `padding-inline` crece con
+la pantalla (de 20px en un celular a 56px, o 96px en `bleed`). Contenido pegado al borde del
+viewport es una falla, no una decisión.
+
+### Adentro — la grilla de 12
+
+`.grid-12` con `.span-1` … `.span-12`. Es lo que permite que una sección **no** sea una fila de
+bloques iguales: 7+5, 8+4, 5+4+3 son composiciones. Debajo de 900px todo pasa a una columna.
+
+```html
+<div class="grid-12">
+  <div class="span-7">…el argumento…</div>
+  <div class="span-5">…el dato que lo sostiene…</div>
+</div>
+```
+
+Doce columnas existen para que la asimetría salga barata. Si el resultado es 4+4+4 tres secciones
+seguidas, es la grilla de tres tarjetas con otro nombre (regla 4).
 
 **Borde a borde libera el layout, nunca el texto.** Los párrafos siguen cortando en `.measure`
 (68 caracteres) o `.measure-lead` (52). Una línea de 200 caracteres en un monitor de 27 pulgadas

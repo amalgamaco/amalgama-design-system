@@ -15,7 +15,9 @@
 
    Uso (una estructura por página, elegida a propósito):
    <div class="column">…</div>                      <!-- default: una columna de 1200 -->
-   <div class="column column-bleed">…</div>         <!-- borde a borde, sin ancho máximo -->
+   <div class="column column-1440">…</div>          <!-- el mismo esquema, más ancho -->
+   <div class="column column-bleed">…</div>         <!-- sin ancho máximo, con márgenes igual -->
+   <div class="grid-12"><div class="span-7">…</div><div class="span-5">…</div></div>
    <div class="column column-rail">…<aside>…</aside></div>
    <section class="section section-lead">…</section>
    <span class="section-index">02 / 05</span>
@@ -35,6 +37,16 @@
   margin-inline: auto;
   padding-inline: var(--column-gutter);
 }
+
+/* ── El ancho, elegido a propósito ───────────────────────────────────────
+   Escala cerrada. El default de 1200 es cómodo y es el que usa todo el mundo; un
+   proyecto puede querer más aire lateral o aprovechar mejor un monitor grande, y esa
+   es una decisión de composición, no un número que se escribe a mano en cada página.
+   Los márgenes laterales NUNCA desaparecen: el ancho crece, el aire se mantiene. */
+.column-1280 { --column-max: 1280px; }
+.column-1440 { --column-max: 1440px; }
+.column-1600 { --column-max: 1600px; }
+.column-1920 { --column-max: 1920px; }
 
 /* Lectura y detalle: la columna se angosta, el texto manda. */
 .column-read { --column-max: 800px; }
@@ -73,6 +85,36 @@
 @media (max-width: 900px) {
   .column-rail,
   .column-split { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ── Grilla de 12 ──────────────────────────────────────────────────────────
+   Adentro de la columna. Es lo que permite que una sección no sea una fila de bloques
+   iguales: 7+5, 8+4, 5+4+3 son composiciones; 4+4+4 tres veces seguidas es la grilla
+   de tres tarjetas con otro nombre (COMPOSICION.md regla 4).
+
+   Debajo de 900px todo pasa a una columna: en un celular no hay doce de nada. */
+.grid-12 {
+  --grid-gap: clamp(16px, 2vw, 32px);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--grid-gap);
+  align-items: start;
+}
+.span-1  { grid-column: span 1; }
+.span-2  { grid-column: span 2; }
+.span-3  { grid-column: span 3; }
+.span-4  { grid-column: span 4; }
+.span-5  { grid-column: span 5; }
+.span-6  { grid-column: span 6; }
+.span-7  { grid-column: span 7; }
+.span-8  { grid-column: span 8; }
+.span-9  { grid-column: span 9; }
+.span-10 { grid-column: span 10; }
+.span-11 { grid-column: span 11; }
+.span-12 { grid-column: span 12; }
+
+@media (max-width: 900px) {
+  .grid-12 > * { grid-column: 1 / -1; }
 }
 
 /* ── Medida de línea ───────────────────────────────────────────────────────

@@ -19,14 +19,16 @@ use_cases:
 
 variants:
   - {name: column, class: column, purpose: "Default. One centred column, 1200px. Product, dashboards, app screens. The safe one; also the most common, so it differentiates the least."}
+  - {name: "widths", class: "column-1280 · column-1440 · column-1600 · column-1920", purpose: "The same centred column at a deliberate width. Side margins never go away — the column grows, the air stays. Pick by content density and by how much of a large monitor the page should own; a dashboard with a sidebar rarely needs more than 1440."}
   - {name: read, class: column-read, purpose: "800px. Reading and detail — an article, a case, a long section."}
   - {name: form, class: column-form, purpose: "680px. A single-column form or an auth panel."}
   - {name: bleed, class: column-bleed, purpose: "No max-width, generous fluid gutters. The page uses the whole monitor instead of leaving two empty margins — the fastest way out of the generated-landing silhouette. The text still stops at `.measure`."}
   - {name: rail, class: column-rail, purpose: "Wide content + a narrow side track for metadata, margin notes or an index. The most 'studio' of the four, and the one a generator imitates worst, because it forces deciding what is a note."}
   - {name: split, class: column-split, purpose: "Two asymmetric tracks, 6fr/4fr. For a hero with a working control or an image on one side. Never 50/50: equal halves do not say which one leads."}
+  - {name: "grid-12", class: "grid-12 + span-1…span-12", purpose: "The 12-column grid, used INSIDE the chosen structure. This is what lets a section be 7+5 or 8+4 instead of three equal blocks. Collapses to one column below 900px."}
 sizes:
   - {name: "(no aplica)", class: "—", use: "the width is the variant, not a size modifier."}
-size_selection: "Pick by content, not by taste: dense list, table or dashboard → column · reading → column-read · form → column-form · a page that must not look generic → bleed, rail or split. State which one you picked and why."
+size_selection: "Two decisions, both stated out loud: the STRUCTURE (column / bleed / rail / split) and, if it is a column, the WIDTH (1200 default · 1280 · 1440 · 1600 · 1920). Pick by content, not by taste: dense list, table or dashboard → column at 1200–1440 · reading → column-read · form → column-form · a page that must not look generic → bleed, rail or split. Inside any of them, grid-12 does the internal composition."
 
 content_rules:
   - "**One overline per page, maximum.** It classifies something the title does not say (a report period, a coverage, a section number). If it repeats the h1 or names the section, delete it."
@@ -59,7 +61,9 @@ ux_principles:
   - "Line length caps at ~68 characters because the eye loses the return sweep beyond that."
 common_mistakes:
   - "Using `column-bleed` and letting the paragraphs run the full width. The layout is edge to edge; the text is not."
-  - "Choosing `column` by default without asking whether the page needs to look different. It is the right answer for a dashboard and the boring one for a landing."
+  - "Choosing `column` at 1200 by default without asking whether the page needs to look different. It is the right answer for a dashboard and the boring one for a landing."
+  - "Using `grid-12` to lay out three equal blocks three sections in a row. Twelve columns exist to make asymmetry cheap — 7+5, 8+4, 5+4+3 — not to rebuild the three-card grid with new class names."
+  - "Widening the column and letting the paragraphs widen with it. The width is the layout's; the text still stops at `.measure`."
   - "Numbering sections that are not a real set — three sections numbered `01 / 07` because seven looked better."
   - "An overline on every section. Repeated, it stops classifying and becomes texture."
   - "Five sections with the same padding, alternating background on and off. That is an accordion, not a page."
@@ -91,7 +95,7 @@ related_rules: [COMPOSICION.md]
 
 source:
   css: css/composition.css
-  classes: [column, column-read, column-form, column-bleed, column-rail, column-split, measure, measure-lead, section, section-lead, section-tight, overline, section-index]
+  classes: [column, column-1280, column-1440, column-1600, column-1920, column-read, column-form, column-bleed, column-rail, column-split, grid-12, span-1, span-2, span-3, span-4, span-5, span-6, span-7, span-8, span-9, span-10, span-11, span-12, measure, measure-lead, section, section-lead, section-tight, overline, section-index]
   docs_anchor: c-composition
 ---
 

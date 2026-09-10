@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-64 componentes · **523 clases públicas** de 591 selectores totales en el CSS.
+64 componentes · **540 clases públicas** de 608 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -40,11 +40,13 @@ La estructura de la página: columna, borde a borde, riel o dividida; la medida 
 **Cuándo usar:** SIEMPRE. Toda página que publicamos, con app shell o sin él. Define la estructura (columna, borde a borde, riel, dividida), la medida de línea, el ritmo entre secciones, el overline y el índice de sección. Es la contraparte construida de COMPOSICION.md: ese archivo dice qué forma tiene una página nuestra, éste la hace.
 **Cuándo no:** nunca se saltea. Una landing no carga layout.css (no tiene shell) pero sí carga esto — es justamente donde más falta hace.
 
-Clases públicas: `.column` · `.column-bleed` · `.column-form` · `.column-rail` · `.column-read` · `.column-split` · `.measure` · `.measure-lead` · `.overline` · `.section` · `.section-index` · `.section-lead` · `.section-tight` · `.sep`
+Clases públicas: `.column` · `.column-1280` · `.column-1440` · `.column-1600` · `.column-1920` · `.column-bleed` · `.column-form` · `.column-rail` · `.column-read` · `.column-split` · `.grid-12` · `.measure` · `.measure-lead` · `.overline` · `.section` · `.section-index` · `.section-lead` · `.section-tight` · `.sep` · `.span-1` · `.span-10` · `.span-11` · `.span-12` · `.span-2` · `.span-3` · `.span-4` · `.span-5` · `.span-6` · `.span-7` · `.span-8` · `.span-9`
 
 ```html
 <div class="column">…</div>                      <!-- default: una columna de 1200 -->
-<div class="column column-bleed">…</div>         <!-- borde a borde, sin ancho máximo -->
+<div class="column column-1440">…</div>          <!-- el mismo esquema, más ancho -->
+<div class="column column-bleed">…</div>         <!-- sin ancho máximo, con márgenes igual -->
+<div class="grid-12"><div class="span-7">…</div><div class="span-5">…</div></div>
 <div class="column column-rail">…<aside>…</aside></div>
 <section class="section section-lead">…</section>
 <span class="section-index">02 / 05</span>
