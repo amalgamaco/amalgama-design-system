@@ -151,6 +151,67 @@
 }
 
 
+/* ── 1b · La densidad, también para los componentes de Material ───────────
+   El preview de Flutter usa @material/web, que trae SUS alturas: el botón sale
+   a 40 y el chip a 32. Nuestro piso táctil es 48, y si el preview no lo aplica
+   muestra una pantalla que no cumple M2 — o sea, miente en la dirección
+   peligrosa.
+
+   Material expone sus alturas como custom properties por componente, así que
+   se apuntan a los mismos tokens que todo lo demás. Solo bajo
+   [data-platform="native"]: en web no cambia nada. */
+[data-platform="native"] md-filled-button,
+[data-platform="native"] md-outlined-button,
+[data-platform="native"] md-text-button,
+[data-platform="native"] md-elevated-button,
+[data-platform="native"] md-filled-tonal-button {
+  --md-filled-button-container-height:       var(--control-height);
+  --md-outlined-button-container-height:     var(--control-height);
+  --md-text-button-container-height:         var(--control-height);
+  --md-elevated-button-container-height:     var(--control-height);
+  --md-filled-tonal-button-container-height: var(--control-height);
+  --md-filled-button-label-text-size:        var(--font-size-body-md);
+  --md-outlined-button-label-text-size:      var(--font-size-body-md);
+  --md-text-button-label-text-size:          var(--font-size-body-md);
+}
+
+/* El chip se dibuja a 40 y llega a 48 por el target, igual que el nuestro. */
+[data-platform="native"] md-filter-chip,
+[data-platform="native"] md-assist-chip,
+[data-platform="native"] md-input-chip,
+[data-platform="native"] md-suggestion-chip {
+  --md-filter-chip-container-height:     40px;
+  --md-assist-chip-container-height:     40px;
+  --md-input-chip-container-height:      40px;
+  --md-suggestion-chip-container-height: 40px;
+  --md-filter-chip-label-text-size:      var(--font-size-label);
+  --md-assist-chip-label-text-size:      var(--font-size-label);
+}
+
+[data-platform="native"] md-outlined-text-field,
+[data-platform="native"] md-filled-text-field {
+  --md-outlined-field-container-height: var(--control-height);
+  --md-filled-field-container-height:   var(--control-height);
+  --md-outlined-text-field-label-text-size: var(--font-size-body-md);
+  --md-filled-text-field-label-text-size:   var(--font-size-body-md);
+  --md-outlined-text-field-input-text-size: var(--font-size-body-md);
+  --md-filled-text-field-input-text-size:   var(--font-size-body-md);
+}
+
+[data-platform="native"] md-list-item {
+  --md-list-item-one-line-container-height: var(--row-height);
+  --md-list-item-two-line-container-height: var(--row-height);
+  --md-list-item-label-text-size:           var(--font-size-body-md);
+  --md-list-item-supporting-text-size:      var(--font-size-body-sm);
+}
+
+[data-platform="native"] md-primary-tab,
+[data-platform="native"] md-secondary-tab {
+  --md-primary-tab-container-height:   var(--control-height);
+  --md-secondary-tab-container-height: var(--control-height);
+}
+
+
 /* ─────────────────────────────────────────────────────────────
    2 · MARCO — el cromo del teléfono (herramienta, no producto)
    ───────────────────────────────────────────────────────────── */

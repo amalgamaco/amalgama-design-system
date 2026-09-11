@@ -97,3 +97,90 @@
   --md-sys-typescale-label-medium-font:     var(--font-body);
   --md-sys-typescale-label-small-font:      var(--font-body);
 }
+
+/* ── El mismo bloque, otra vez, para contenedores con tema propio ──────────
+   La sustitución de una custom property se resuelve DONDE SE DECLARA. Con el
+   bridge solo en :root, --md-sys-color-primary queda congelado con el valor
+   que --color-primary tenía ahí, y un <div data-theme="dark"> más abajo hereda
+   el valor ya calculado: el subárbol cambia los --color-* pero los --md-sys-*
+   no se enteran.
+
+   A nivel documento (<html data-theme="dark">) nunca se notó, porque :root
+   sigue siendo html y ahí --color-primary ya es el de oscuro. Se ve apenas
+   aparece un contenedor con tema propio — que es exactamente lo que hace la
+   doc y lo que hace el preview de Flutter con @material/web. */
+[data-theme="dark"],
+[data-theme="light"] {
+  /* Primary */
+  --md-sys-color-primary:                 var(--color-primary);
+  --md-sys-color-on-primary:              var(--color-on-primary);
+  --md-sys-color-primary-container:       var(--color-primary-container);
+  --md-sys-color-on-primary-container:    var(--color-on-primary-container);
+
+  /* Secondary */
+  --md-sys-color-secondary:               var(--color-secondary);
+  --md-sys-color-on-secondary:            var(--color-on-secondary);
+  --md-sys-color-secondary-container:     var(--color-secondary-container);
+  --md-sys-color-on-secondary-container:  var(--color-on-secondary-container);
+
+  /* Tertiary */
+  --md-sys-color-tertiary:                var(--color-tertiary);
+  --md-sys-color-on-tertiary:             var(--color-on-tertiary);
+  --md-sys-color-tertiary-container:      var(--color-tertiary-container);
+  --md-sys-color-on-tertiary-container:   var(--color-on-tertiary-container);
+
+  /* Error */
+  --md-sys-color-error:                   var(--color-error);
+  --md-sys-color-on-error:                var(--color-on-error);
+  --md-sys-color-error-container:         var(--color-error-container);
+  --md-sys-color-on-error-container:      var(--color-on-error-container);
+
+  /* Surface / Background */
+  --md-sys-color-surface:                 var(--color-surface);
+  --md-sys-color-surface-dim:             var(--color-surface-dim);
+  --md-sys-color-surface-bright:          var(--color-surface-bright);
+  --md-sys-color-surface-container-lowest: var(--color-surface-container-lowest);
+  --md-sys-color-surface-container-low:   var(--color-surface-container-low);
+  --md-sys-color-surface-container:       var(--color-surface-container);
+  --md-sys-color-surface-container-high:  var(--color-surface-container-high);
+  --md-sys-color-surface-container-highest: var(--color-surface-container-highest);
+  --md-sys-color-surface-variant:         var(--color-surface-variant);
+  --md-sys-color-on-surface:              var(--color-on-surface);
+  --md-sys-color-on-surface-variant:      var(--color-on-surface-variant);
+  --md-sys-color-background:              var(--color-surface);
+  --md-sys-color-on-background:           var(--color-on-surface);
+
+  /* Outline */
+  --md-sys-color-outline:                 var(--color-outline);
+  --md-sys-color-outline-variant:         var(--color-outline-variant);
+
+  /* Inverse */
+  --md-sys-color-inverse-surface:         var(--color-inverse-surface);
+  --md-sys-color-inverse-on-surface:      var(--color-inverse-on-surface);
+  --md-sys-color-inverse-primary:         var(--color-inverse-primary);
+
+  /* Scrim / Shadow */
+  --md-sys-color-scrim:                   var(--color-scrim);
+
+  /* ── Typography ──────────────────────────────────────────────
+     @material/web components default their typescale font to 'Roboto'
+     (not loaded → serif fallback). Map every typescale role's FONT to
+     Embassy's UI typeface (Inter) so md-* components match the system.
+     Only the font family is overridden; Material keeps its own sizes,
+     weights, line-heights and tracking. */
+  --md-sys-typescale-display-large-font:    var(--font-body);
+  --md-sys-typescale-display-medium-font:   var(--font-body);
+  --md-sys-typescale-display-small-font:    var(--font-body);
+  --md-sys-typescale-headline-large-font:   var(--font-body);
+  --md-sys-typescale-headline-medium-font:  var(--font-body);
+  --md-sys-typescale-headline-small-font:   var(--font-body);
+  --md-sys-typescale-title-large-font:      var(--font-body);
+  --md-sys-typescale-title-medium-font:     var(--font-body);
+  --md-sys-typescale-title-small-font:      var(--font-body);
+  --md-sys-typescale-body-large-font:       var(--font-body);
+  --md-sys-typescale-body-medium-font:      var(--font-body);
+  --md-sys-typescale-body-small-font:       var(--font-body);
+  --md-sys-typescale-label-large-font:      var(--font-body);
+  --md-sys-typescale-label-medium-font:     var(--font-body);
+  --md-sys-typescale-label-small-font:      var(--font-body);
+}
