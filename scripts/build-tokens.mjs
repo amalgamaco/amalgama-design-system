@@ -219,7 +219,7 @@ function kind(name, value) {
   if (isColor(value)) return 'color';
   if (/^--font-(heading|body|mono)$/.test(name)) return 'fontFamily';
   if (/^--font-size|^--line-height|^--letter-spacing|^--font-weight/.test(name)) return 'typography';
-  if (/^--space-|^--radius-|^--breakpoint-|^--measure/.test(name)) return 'dimension';
+  if (/^--space-|^--radius-|^--breakpoint-|^--measure|^--target-|^--row-height|^--control-height|^--screen-gutter|^--sidebar-width|^--topbar-height/.test(name)) return 'dimension';
   if (/^--shadow-|^--elevation/.test(name)) return 'shadow';
   if (/^--gradient-/.test(name)) return 'gradient';
   if (/^--duration|^--ease|^--transition/.test(name)) return 'motion';
@@ -323,6 +323,81 @@ const gluestack = `/* ${stamp.split('\n').join('\n   ')} */\n\n` +
   colors.map(([n, t]) => `    ${JSON.stringify(runtimeVar(n))}: ${JSON.stringify(triplet(t.$dark ?? t.$value))},`).join('\n') +
 `\n  },\n} as const;\n`;
 
+/* ── Dart / Flutter ──────────────────────────────────────────────────────
+   Amalgama hace apps en los dos stacks según el proyecto, así que el eje
+   nativo tiene DOS destinos y una sola fuente. Esto es la data; el ThemeData
+   que la consume vive en components/flutter/embassy_theme.dart, igual que
+   lib/theme.ts es el puente del lado de React Native.
+
+   Dos diferencias con RN que conviene tener presentes:
+     · TextStyle.height de Flutter SÍ es un múltiplo del fontSize, así que los
+       line-height se pasan tal cual. En RN hay que multiplicar (falla M7).
+     · letterSpacing es en píxeles lógicos, igual que RN: em × fontSize.
+   ───────────────────────────────────────────────────────────────────────── */
+
+const dartField = (n) => {
+  const base = n.replace(/^--/, '').replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
+  return /^[0-9]/.test(base) ? 'v' + base : base;
+};
+
+/** #RRGGBB o #RRGGBBAA → 0xAARRGGBB, que es lo que espera Color(). */
+function dartColor(v) {
+  const c = toRGBA(v);
+  if (!c) return null;
+  const h = (n) => Math.round(Math.max(0, Math.min(255, n))).toString(16).padStart(2, '0').toUpperCase();
+  return `Color(0x${h(c[3] * 255)}${h(c[0])}${h(c[1])}${h(c[2])})`;
+}
+
+const dartNum = (v) => {
+  if (typeof v !== 'string') return null;
+  const m = v.match(/^(-?[\d.]+)px$/) || v.match(/^(-?[\d.]+)$/);
+  if (!m) return null;
+  const n = parseFloat(m[1]);
+  return Number.isInteger(n) ? `${n}.0` : `${n}`;
+};
+
+const dims = Object.entries(tokens).filter(([n, t]) =>
+  (t.$type === 'dimension' || t.$type === 'typography') && dartNum(t.$value) !== null);
+
+const dartFile = (() => {
+  const L = ['// ' + stamp.split('\n').join('\n// '), '',
+    "import 'dart:ui' show Color;", '',
+    '/// Los colores de Embassy. Los mismos 182 que en web y en React Native:',
+    '/// lo que cambia entre plataformas es el TAMAÑO, no el color.',
+    'class EmbassyColors {', '  const EmbassyColors._();', ''];
+
+  for (const modo of ['light', 'dark']) {
+    L.push(`  // ── ${modo} ──`);
+    for (const [n, t] of colors) {
+      const v = dartColor(modo === 'dark' ? (t.$dark ?? t.$value) : t.$value);
+      if (v) L.push(`  static const ${dartField(n)}${modo === 'dark' ? 'Dark' : ''} = ${v};`);
+    }
+    L.push('');
+  }
+  L.push('}', '',
+    '/// Tamaños y densidad. Dos juegos: el de escritorio y el de teléfono.',
+    '/// En una app SIEMPRE se usa EmbassyDims.native — usar el de web es la falla M5.',
+    'class EmbassyDims {', '  const EmbassyDims._();', '');
+  for (const modo of ['web', 'native']) {
+    L.push(`  // ── ${modo} ──`);
+    for (const [n, t] of dims) {
+      const raw = modo === 'native' ? (t.$platformNative ?? t.$value) : t.$value;
+      const v = dartNum(raw);
+      if (v) L.push(`  static const ${dartField(n)}${modo === 'native' ? 'Native' : ''} = ${v};`);
+    }
+    L.push('');
+  }
+  L.push('}', '',
+    '/// Las familias, ya sin el stack de fallback: Flutter quiere un nombre.',
+    'class EmbassyFonts {', '  const EmbassyFonts._();');
+  for (const [n, t] of Object.entries(tokens)) {
+    if (t.$type !== 'fontFamily') continue;
+    L.push(`  static const ${dartField(n)} = '${String(t.$value).split(',')[0].replace(/['"]/g, '').trim()}';`);
+  }
+  L.push('}', '');
+  return L.join('\n');
+})();
+
 const themeCss = `/* ${stamp.split('\n').join('\n   ')} */\n\n` +
 `/* Tailwind v4 / NativeWind v5: los tokens se declaran en CSS, sin tailwind.config.js. */\n` +
 `@theme inline {\n` +
@@ -340,6 +415,7 @@ notes.map(([n, t]) => `| \`${n}\` | \`${t.$value}\` | ${t.$native.unit ? '`' + t
 
 const files = {
   'NATIVE-NOTES.md':      notesMd,
+  'embassy_tokens.dart':  dartFile,
   'embassy.tokens.json':  json,
   'embassy.tokens.ts':    ts,
   'gluestack.config.ts':  gluestack,

@@ -32,78 +32,84 @@ const CHECK = process.argv.includes("--check");
    porta   → mismo componente, otros valores de token
    patrón  → en nativo el patrón equivalente es OTRO, no una versión chica
    ausente → no existe sin puntero
-   gs      → el componente de gluestack v5 del que se copia estructura y
-             comportamiento; null cuando no lo tiene y hay que armarlo
-   arma    → con qué primitivas, cuando gs es null
+   gs      → el componente de gluestack v5 (React Native) del que se copia
+             estructura y comportamiento; null cuando no lo tiene
+   fl      → el widget de Material 3 en Flutter; null cuando tampoco lo tiene
+   arma    → con qué primitivas, cuando no hay de dónde copiar
+
+   Amalgama hace apps en los dos stacks según el proyecto, así que cada
+   componente tiene DOS destinos y un solo criterio. Se nota la diferencia:
+   Flutter cubre bastante más que gluestack, porque Material 3 es una
+   biblioteca completa y gluestack no.
    ─────────────────────────────────────────────────────────────────────── */
 const MAPA = {
   // ── portan tal cual ──
-  accordion:        { k: "porta", gs: "Accordion" },
-  alert:            { k: "porta", gs: "Alert" },
-  attachment:       { k: "porta", gs: null, arma: "HStack + Icon + Text" },
-  avatar:           { k: "porta", gs: "Avatar" },
-  badge:            { k: "porta", gs: "Badge" },
-  button:           { k: "porta", gs: "Button", nota: "Sus variant (solid/outline/link) y action (primary/secondary/positive/negative) NO son nuestras variantes: se mapean a las cinco de Embassy, no se adoptan." },
-  calendar:         { k: "porta", gs: "Calendar" },
-  card:             { k: "porta", gs: "Card" },
-  carousel:         { k: "porta", gs: null, arma: "FlatList horizontal con paginado" },
-  checkbox:         { k: "porta", gs: "Checkbox" },
-  chip:             { k: "porta", gs: null, arma: "Pressable + Text", nota: "Su Badge es de solo lectura, igual que el nuestro: no sirve de chip. Se dibuja a 40 y se toca a 48 con hitSlop." },
-  collapsible:      { k: "porta", gs: "Accordion" },
-  description:      { k: "porta", gs: null, arma: "VStack + Text" },
-  divider:          { k: "porta", gs: "Divider" },
-  "empty-state":    { k: "porta", gs: null, arma: "VStack + Text + Button" },
-  form:             { k: "porta", gs: "Input + FormControl", nota: "FormControl trae label, helper y error: es más que nuestro field-group." },
-  "input-otp":      { k: "porta", gs: null, arma: "HStack de Input con teclado numérico" },
-  item:             { k: "porta", gs: null, arma: "HStack + Text" },
-  label:            { k: "porta", gs: "FormControl" },
-  list:             { k: "porta", gs: null, arma: "FlatList + Pressable" },
-  "person-card":    { k: "porta", gs: null, arma: "HStack + Avatar + Text" },
-  placeholder:      { k: "porta", gs: "Skeleton" },
-  progress:         { k: "porta", gs: "Progress" },
-  "radio-group":    { k: "porta", gs: "Radio" },
-  search:           { k: "porta", gs: null, arma: "Input + Icon" },
-  "segmented-button": { k: "porta", gs: null, arma: "HStack de Pressable, o Tabs re-skinneado" },
-  select:           { k: "porta", gs: "Select", nota: "En nativo abre un actionsheet, no un popover." },
-  skeleton:         { k: "porta", gs: "Skeleton" },
-  slider:           { k: "porta", gs: "Slider" },
-  spinner:          { k: "porta", gs: "Spinner" },
-  "stat-card":      { k: "porta", gs: null, arma: "Card + Text con los tokens de .figure" },
-  switch:           { k: "porta", gs: "Switch" },
-  tabs:             { k: "porta", gs: "Tabs" },
-  toast:            { k: "porta", gs: "Toast" },
-  toggle:           { k: "porta", gs: null, arma: "Pressable con estado", nota: "Se dibuja a 40 y se toca a 48." },
-  "toggle-group":   { k: "porta", gs: null, arma: "HStack de Pressable" },
-  "vacancy-card":   { k: "porta", gs: "Card" },
+  accordion:        { k: "porta", fl: "ExpansionTile", gs: "Accordion" },
+  alert:            { k: "porta", fl: "MaterialBanner", gs: "Alert" },
+  attachment:       { k: "porta", fl: null, gs: null, arma: "HStack + Icon + Text" },
+  avatar:           { k: "porta", fl: "CircleAvatar", gs: "Avatar" },
+  badge:            { k: "porta", fl: "Badge", gs: "Badge" },
+  button:           { k: "porta", fl: "FilledButton · OutlinedButton · TextButton", gs: "Button", nota: "Sus variant (solid/outline/link) y action (primary/secondary/positive/negative) NO son nuestras variantes: se mapean a las cinco de Embassy, no se adoptan." },
+  calendar:         { k: "porta", fl: "CalendarDatePicker", gs: "Calendar" },
+  card:             { k: "porta", fl: "Card", gs: "Card" },
+  carousel:         { k: "porta", fl: null, gs: null, arma: "FlatList horizontal con paginado" },
+  checkbox:         { k: "porta", fl: "Checkbox", gs: "Checkbox" },
+  chip:             { k: "porta", fl: "FilterChip · ActionChip", gs: null, arma: "Pressable + Text", nota: "Su Badge es de solo lectura, igual que el nuestro: no sirve de chip. Se dibuja a 40 y se toca a 48 con hitSlop." },
+  collapsible:      { k: "porta", fl: "ExpansionTile", gs: "Accordion" },
+  description:      { k: "porta", fl: null, gs: null, arma: "VStack + Text" },
+  divider:          { k: "porta", fl: "Divider", gs: "Divider" },
+  "empty-state":    { k: "porta", fl: null, gs: null, arma: "VStack + Text + Button" },
+  form:             { k: "porta", fl: "TextField + InputDecoration", gs: "Input + FormControl", nota: "FormControl trae label, helper y error: es más que nuestro field-group." },
+  "input-otp":      { k: "porta", fl: null, gs: null, arma: "HStack de Input con teclado numérico" },
+  item:             { k: "porta", fl: "ListTile", gs: null, arma: "HStack + Text" },
+  label:            { k: "porta", fl: "InputDecoration.labelText", gs: "FormControl" },
+  list:             { k: "porta", fl: "ListView + ListTile", gs: null, arma: "FlatList + Pressable" },
+  "person-card":    { k: "porta", fl: "ListTile + CircleAvatar", gs: null, arma: "HStack + Avatar + Text" },
+  placeholder:      { k: "porta", fl: null, gs: "Skeleton" },
+  progress:         { k: "porta", fl: "LinearProgressIndicator", gs: "Progress" },
+  "radio-group":    { k: "porta", fl: "Radio · RadioListTile", gs: "Radio" },
+  search:           { k: "porta", fl: "SearchBar", gs: null, arma: "Input + Icon" },
+  "segmented-button": { k: "porta", fl: "SegmentedButton", gs: null, arma: "HStack de Pressable, o Tabs re-skinneado" },
+  select:           { k: "porta", fl: "DropdownMenu", gs: "Select", nota: "En nativo abre un actionsheet, no un popover." },
+  skeleton:         { k: "porta", fl: null, gs: "Skeleton" },
+  slider:           { k: "porta", fl: "Slider", gs: "Slider" },
+  spinner:          { k: "porta", fl: "CircularProgressIndicator", gs: "Spinner" },
+  "stat-card":      { k: "porta", fl: null, gs: null, arma: "Card + Text con los tokens de .figure" },
+  switch:           { k: "porta", fl: "Switch", gs: "Switch" },
+  tabs:             { k: "porta", fl: "TabBar", gs: "Tabs" },
+  toast:            { k: "porta", fl: "SnackBar", gs: "Toast" },
+  toggle:           { k: "porta", fl: "IconButton.filled", gs: null, arma: "Pressable con estado", nota: "Se dibuja a 40 y se toca a 48." },
+  "toggle-group":   { k: "porta", fl: "ToggleButtons", gs: null, arma: "HStack de Pressable" },
+  "vacancy-card":   { k: "porta", fl: "Card", gs: "Card" },
 
   // ── cambian de patrón ──
-  "back-link":      { k: "patron", en: "El back del stack navigator", porque: "La jerarquía la lleva el navegador, no la pantalla" },
-  breadcrumb:       { k: "patron", en: "El back del stack navigator", porque: "Una ruta completa no entra ni se lee en 390px" },
-  "button-group":   { k: "patron", en: "Segmented button, o botones apilados a lo ancho", porque: "Botones pegados de costado no llegan al piso táctil" },
-  chart:            { k: "patron", en: "El mismo dato con menos series y sin leyenda flotante", porque: "Una leyenda flotante tapa el gráfico en pantalla chica" },
-  combobox:         { k: "patron", en: "Sheet con búsqueda", porque: "El popover con filtro es un patrón de puntero", gs: "Actionsheet + Input" },
-  command:          { k: "patron", en: "Pantalla de búsqueda completa", porque: "El ⌘K es de teclado" },
-  "context-menu":   { k: "patron", en: "Actionsheet, con long-press", porque: "No hay click derecho", gs: "Actionsheet" },
-  "create-form":    { k: "patron", en: "Pantalla propia, nunca un modal", porque: "Un formulario dentro de un modal en 390px es una trampa" },
-  "data-table":     { k: "patron", en: "Lista de filas apiladas (label: valor) o card por registro", porque: "Una tabla en 390px se scrollea de costado y nadie lo hace" },
-  "date-picker":    { k: "patron", en: "El Calendar docked en un bottom sheet", porque: "El popover chico es de escritorio", gs: "DateTimePicker" },
-  "dropdown-menu":  { k: "patron", en: "Actionsheet", porque: "No hay menú flotante", gs: "Menu · Actionsheet" },
-  "input-group":    { k: "patron", en: "Campos apilados", porque: "Un input con addon de costado no entra" },
-  kanban:           { k: "patron", en: "Segmented button + una columna a la vez", porque: "Tres columnas en 390px no son tres columnas" },
-  menubar:          { k: "patron", en: "Tab bar + stack", porque: "No existe barra de menú en una app" },
-  modal:            { k: "patron", en: "Pantalla completa o bottom sheet", porque: "Un diálogo chico centrado se siente web", gs: "Modal · Actionsheet" },
-  "navigation-menu":{ k: "patron", en: "Tab bar + stack", porque: "La navegación la lleva el navigator" },
-  "page-header":    { k: "patron", en: "El header del stack navigator", porque: "El título de pantalla lo pone la navegación" },
-  pagination:       { k: "patron", en: "Scroll infinito o “cargar más”", porque: "Paginar con números es de escritorio" },
-  popover:          { k: "patron", en: "Bottom sheet, o el contenido inline", porque: "Un popover necesita un ancla y espacio alrededor", gs: "Actionsheet" },
-  "scroll-area":    { k: "patron", en: "ScrollView / FlatList", porque: "El scroll lo maneja la plataforma" },
-  sheet:            { k: "patron", en: "Bottom sheet", porque: "El sheet lateral es un patrón de escritorio", gs: "Actionsheet · BottomSheet" },
+  "back-link":      { k: "patron", fl: "Navigator.pop", en: "El back del stack navigator", porque: "La jerarquía la lleva el navegador, no la pantalla" },
+  breadcrumb:       { k: "patron", fl: "AppBar", en: "El back del stack navigator", porque: "Una ruta completa no entra ni se lee en 390px" },
+  "button-group":   { k: "patron", fl: "SegmentedButton", en: "Segmented button, o botones apilados a lo ancho", porque: "Botones pegados de costado no llegan al piso táctil" },
+  chart:            { k: "patron", fl: null, en: "El mismo dato con menos series y sin leyenda flotante", porque: "Una leyenda flotante tapa el gráfico en pantalla chica" },
+  combobox:         { k: "patron", fl: "SearchAnchor", en: "Sheet con búsqueda", porque: "El popover con filtro es un patrón de puntero", gs: "Actionsheet + Input" },
+  command:          { k: "patron", fl: "SearchAnchor", en: "Pantalla de búsqueda completa", porque: "El ⌘K es de teclado" },
+  "context-menu":   { k: "patron", fl: "MenuAnchor · showModalBottomSheet", en: "Actionsheet, con long-press", porque: "No hay click derecho", gs: "Actionsheet" },
+  "create-form":    { k: "patron", fl: "Route propia", en: "Pantalla propia, nunca un modal", porque: "Un formulario dentro de un modal en 390px es una trampa" },
+  "data-table":     { k: "patron", fl: "ListView + ListTile", fl: "ListView + ListTile", en: "Lista de filas apiladas (label: valor) o card por registro", porque: "Una tabla en 390px se scrollea de costado y nadie lo hace" },
+  "date-picker":    { k: "patron", fl: "showDatePicker", en: "El Calendar docked en un bottom sheet", porque: "El popover chico es de escritorio", gs: "DateTimePicker" },
+  "dropdown-menu":  { k: "patron", fl: "MenuAnchor", en: "Actionsheet", porque: "No hay menú flotante", gs: "Menu · Actionsheet" },
+  "input-group":    { k: "patron", fl: "Column", en: "Campos apilados", porque: "Un input con addon de costado no entra" },
+  kanban:           { k: "patron", fl: "SegmentedButton", en: "Segmented button + una columna a la vez", porque: "Tres columnas en 390px no son tres columnas" },
+  menubar:          { k: "patron", fl: "NavigationBar", en: "Tab bar + stack", porque: "No existe barra de menú en una app" },
+  modal:            { k: "patron", fl: "showModalBottomSheet · showDialog", en: "Pantalla completa o bottom sheet", porque: "Un diálogo chico centrado se siente web", gs: "Modal · Actionsheet" },
+  "navigation-menu":{ k: "patron", fl: "NavigationBar", en: "Tab bar + stack", porque: "La navegación la lleva el navigator" },
+  "page-header":    { k: "patron", fl: "AppBar", en: "El header del stack navigator", porque: "El título de pantalla lo pone la navegación" },
+  pagination:       { k: "patron", fl: null, en: "Scroll infinito o “cargar más”", porque: "Paginar con números es de escritorio" },
+  popover:          { k: "patron", fl: "showModalBottomSheet", en: "Bottom sheet, o el contenido inline", porque: "Un popover necesita un ancla y espacio alrededor", gs: "Actionsheet" },
+  "scroll-area":    { k: "patron", fl: "ListView", en: "ScrollView / FlatList", porque: "El scroll lo maneja la plataforma" },
+  sheet:            { k: "patron", fl: "showModalBottomSheet", en: "Bottom sheet", porque: "El sheet lateral es un patrón de escritorio", gs: "Actionsheet · BottomSheet" },
   table:            { k: "patron", en: "Filas apiladas (label: valor)", porque: "Una tabla en 390px no se lee" },
-  toolbar:          { k: "patron", en: "Header nativo + barra de acción abajo", porque: "Lo importante va al alcance del pulgar" },
+  toolbar:          { k: "patron", fl: "AppBar + BottomAppBar", en: "Header nativo + barra de acción abajo", porque: "Lo importante va al alcance del pulgar" },
 
   // ── no existen sin puntero ──
-  tooltip:          { k: "ausente", porque: "Necesita hover, y en un teléfono no hay hover. Si el dato hace falta, va inline" },
-  "rich-tooltip":   { k: "ausente", porque: "Ídem tooltip. Si tiene tanto contenido que necesita título y acciones, es un bottom sheet" },
+  tooltip:          { k: "ausente", fl: null, porque: "Necesita hover, y en un teléfono no hay hover. Si el dato hace falta, va inline" },
+  "rich-tooltip":   { k: "ausente", fl: null, porque: "Ídem tooltip. Si tiene tanto contenido que necesita título y acciones, es un bottom sheet" },
 };
 
 /* ── entrada ─────────────────────────────────────────────────────────── */
@@ -154,9 +160,11 @@ const porta   = Object.entries(MAPA).filter(([, m]) => m.k === "porta").sort();
 const patron  = Object.entries(MAPA).filter(([, m]) => m.k === "patron").sort();
 const ausente = Object.entries(MAPA).filter(([, m]) => m.k === "ausente").sort();
 
-const gsTag = (m) => m.gs
-  ? `<span class="mc-gs">${esc(m.gs)}</span>`
-  : `<span class="mc-gs-no">✗ no tiene · ${esc(m.arma || "primitivas")}</span>`;
+const stackTag = (label, v, arma) => v
+  ? `<span class="mc-gs"><b>${label}</b> ${esc(v)}</span>`
+  : `<span class="mc-gs-no"><b>${label}</b> ✗ ${esc(arma || "primitivas")}</span>`;
+const gsTag = (m) =>
+  stackTag("RN", m.gs, m.arma) + stackTag("FL", m.fl, m.arma);
 
 const celdas = porta.map(([id, m]) => {
   const c = byId.get(id);
@@ -172,7 +180,7 @@ const celdas = porta.map(([id, m]) => {
 }).join("\n");
 
 const filasPatron = patron.map(([id, m]) =>
-  `            <tr><td><a href="#" onclick="navigate('${id}');return false"><code>${esc(id)}</code></a></td><td><strong>${esc(m.en)}</strong>${m.gs ? ` <span class="mc-gs mc-gs-inline">${esc(m.gs)}</span>` : ""}</td><td>${esc(m.porque)}</td></tr>`
+  `            <tr><td><a href="#" onclick="navigate('${id}');return false"><code>${esc(id)}</code></a></td><td><strong>${esc(m.en)}</strong></td><td>${m.gs ? `<span class="mc-gs">RN ${esc(m.gs)}</span><br>` : ""}${m.fl ? `<span class="mc-gs">FL ${esc(m.fl)}</span>` : ""}</td><td>${esc(m.porque)}</td></tr>`
 ).join("\n");
 
 const filasAusente = ausente.map(([id, m]) =>
@@ -200,7 +208,7 @@ ${celdas}
       <p class="ds-p">Acá no hay demo a propósito: renderizar la versión chica del patrón de escritorio sería enseñar justo lo que <code>M4</code> marca como falla. Lo que va en su lugar:</p>
       <div class="ds-table-wrap">
         <table class="ds-table">
-          <thead><tr><th>Web</th><th>En nativo</th><th>Por qué</th></tr></thead>
+          <thead><tr><th>Web</th><th>En nativo</th><th>De dónde sale</th><th>Por qué</th></tr></thead>
           <tbody>
 ${filasPatron}
           </tbody>
@@ -225,15 +233,20 @@ const mdPorta = porta.map(([id, m]) =>
   `| \`${id}\` | ${m.gs ? `**${m.gs}**` : `**no tiene** — ${m.arma}`} |${m.nota ? ` ${m.nota}` : ""}`
 ).join("\n");
 
-const md = `| Embassy | gluestack v5 | Notas |
-|---|---|---|
-${porta.map(([id, m]) => `| \`${id}\` | ${m.gs ? `**${m.gs}**` : `**no tiene** — ${m.arma}`} | ${m.nota || "—"} |`).join("\n")}
+const cubre = (l) => `${l.filter(([, m]) => m.gs).length} de ${l.length} en gluestack · ${l.filter(([, m]) => m.fl).length} de ${l.length} en Flutter`;
+
+const md = `Cobertura de los que se portan tal cual: **${cubre(porta)}**. La diferencia no es
+casual: Material 3 es una biblioteca completa y gluestack no.
+
+| Embassy | React Native (gluestack) | Flutter (Material 3) | Notas |
+|---|---|---|---|
+${porta.map(([id, m]) => `| \`${id}\` | ${m.gs ? `**${m.gs}**` : `✗ — ${m.arma}`} | ${m.fl ? `**${m.fl}**` : `✗ — ${m.arma}`} | ${m.nota || "—"} |`).join("\n")}
 
 ### Cambian de patrón · ${patron.length}
 
-| Web | En nativo | Por qué |
-|---|---|---|
-${patron.map(([id, m]) => `| \`${id}\` | ${m.en}${m.gs ? ` (\`${m.gs}\`)` : ""} | ${m.porque} |`).join("\n")}
+| Web | En nativo | De dónde sale | Por qué |
+|---|---|---|---|
+${patron.map(([id, m]) => `| \`${id}\` | ${m.en} | ${m.gs ? `RN \`${m.gs}\`` : "RN ✗"} · ${m.fl ? `FL \`${m.fl}\`` : "FL ✗"} | ${m.porque} |`).join("\n")}
 
 ### No existen sin puntero · ${ausente.length}
 

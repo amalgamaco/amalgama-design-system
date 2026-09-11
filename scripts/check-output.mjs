@@ -56,20 +56,36 @@ const RULES = [
   //   · el preview HTML con data-platform="native" (preview-native.css), que es
   //     donde se diseña y se aprueba antes de que exista el .tsx
   // Las reglas se activan solas: solo corren si el archivo es de nativo (§esNativo).
-  { id: "M1", sev: "ALTA", nativo: true, desc: "tamaño tipográfico a mano en vez de leerlo de native/nativeDark",
+  { id: "M1", sev: "ALTA", nativo: true, stack: "rn", desc: "tamaño tipográfico a mano en vez de leerlo de native/nativeDark",
     re: /fontSize\s*:\s*-?\d+(\.\d+)?\b/g },
-  { id: "M3", sev: "ALTA", nativo: true, desc: "safe area hardcodeada en vez de useSafeAreaInsets()",
+  { id: "M3", sev: "ALTA", nativo: true, stack: "rn", desc: "safe area hardcodeada en vez de useSafeAreaInsets()",
     re: /padding(Top|Bottom)\s*:\s*(2[0-9]|3[0-9]|4[0-9]|5[0-9])\b/g },
-  { id: "M5", sev: "ALTA", nativo: true, desc: "la escala web en una app: se importó light/dark en vez de native/nativeDark",
+  { id: "M5", sev: "ALTA", nativo: true, stack: "rn", desc: "la escala web en una app: se importó light/dark en vez de native/nativeDark",
     re: /import\s*\{[^}]*\b(light|dark)\b[^}]*\}\s*from\s*['"][^'"]*embassy\.tokens/g },
   // M7 — el que más caro sale, porque RN no avisa: pasa lineHeight como
   // multiplicador y dibuja mal en silencio. En RN son puntos.
-  { id: "M7", sev: "ALTA", nativo: true, desc: "lineHeight o letterSpacing como multiplicador o em — RN los mide en puntos y los ignora",
+  { id: "M7", sev: "ALTA", nativo: true, stack: "rn", desc: "lineHeight o letterSpacing como multiplicador o em — RN los mide en puntos y los ignora",
     re: /(lineHeight|letterSpacing)\s*:\s*(['"]?-?[01]?\.\d+(em)?['"]?|['"]-?\d+(\.\d+)?em['"])/g },
   { id: "M6", sev: "MEDIA", nativo: true, desc: "tokens de columna, grilla de 12, max-width o medida en ch en una pantalla nativa",
     re: /--column-(gutter|max)|\bgrid-12\b|\bcolumn-(read|form|bleed|rail|split|1280|1440|1600|1920)\b|max-?[Ww]idth\s*:\s*\d|\d+ch\b/g },
-  { id: "M8", sev: "ALTA", nativo: true, desc: "utility de gluestack/Tailwind sin traducir a tokens",
+  { id: "M8", sev: "ALTA", nativo: true, stack: "rn", desc: "utility de gluestack/Tailwind sin traducir a tokens",
     re: /\b(bg|text|border|rounded|p|px|py|m|mx|my|gap)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{2,3}\b|\brounded-(sm|md|lg|xl|2xl|3xl|full)\b|\btext-(xs|sm|base|lg|xl|2xl|3xl)\b/g },
+
+  // ── M en Flutter ─────────────────────────────────────────────────────────
+  // Amalgama hace apps en los dos stacks según el proyecto. El criterio es el
+  // mismo; lo que cambia es cómo se escribe la falla.
+  //
+  // M7 NO está acá a propósito: en Flutter, TextStyle.height SÍ es un múltiplo
+  // del fontSize, así que pasar 1.5 es correcto. Es la única regla de nativo
+  // que no cruza, y marcarla sería un falso positivo.
+  { id: "M1", sev: "ALTA", nativo: true, stack: "flutter", desc: "tamaño tipográfico a mano en vez del TextTheme del ThemeData",
+    re: /fontSize\s*:\s*-?\d/g },
+  { id: "M5", sev: "ALTA", nativo: true, stack: "flutter", desc: "la escala web en una app: EmbassyDims sin el sufijo Native",
+    re: /EmbassyDims\.(?!\w*Native\b)\w+/g },
+  { id: "M3", sev: "ALTA", nativo: true, stack: "flutter", desc: "safe area hardcodeada en vez de MediaQuery.of(context).padding o SafeArea",
+    re: /EdgeInsets\.only\([^)]*top:\s*(2[0-9]|3[0-9]|4[0-9]|5[0-9])\b/g },
+  { id: "M8", sev: "ALTA", nativo: true, stack: "flutter", desc: "paleta de Material en vez de los roles del ColorScheme",
+    re: /\bColors\.(red|pink|purple|indigo|blue|cyan|teal|green|lime|yellow|amber|orange|brown|grey|blueGrey)\b/g },
 
   // H10 — imagen de banco. La política es "solo material real" (COMPOSICION.md regla 10): si el
   // dato no vino del cliente no existe, y la foto tampoco. Se detecta por dominio porque es lo
@@ -203,13 +219,14 @@ for (const file of files) {
   // ¿Este archivo es de una pantalla nativa? Dos señales objetivas: un .tsx que
   // importa de react-native, o un preview con data-platform="native".
   const esTsxNativo = /\.tsx?$/.test(file) && /from\s+['"]react-native['"]|from\s+['"]expo/.test(src);
+  const esDart      = /\.dart$/.test(file) && /package:flutter\//.test(src);
   const esPreview   = /data-platform\s*=\s*["']native["']/.test(src);
-  const esNativo    = esTsxNativo || esPreview;
+  const esNativo    = esTsxNativo || esDart || esPreview;
+  const stack       = esDart ? "flutter" : esTsxNativo ? "rn" : null;
 
-  // El preview es HTML de Embassy, así que las reglas de nativo que hablan de
-  // sintaxis de RN (M1 fontSize, M3 paddingTop, M5 import, M7 lineHeight) no
-  // aplican ahí: en el preview esos valores salen del CSS y de los tokens.
-  const soloTsx = new Set(["M1", "M3", "M5", "M7"]);
+  // Reservado para reglas de sintaxis que no declaren stack. Hoy todas lo
+  // declaran, así que este set queda vacío a propósito.
+  const soloTsx = new Set();
 
   // Una pantalla nativa que se entrega SIN preview y sin .tsx no se puede medir.
   // Y un preview sin preview-native.css muestra los controles a la altura de
@@ -236,7 +253,15 @@ for (const file of files) {
 
   for (const rule of RULES) {
     if (allows.has(rule.id)) continue;
-    if (rule.nativo && (!esNativo || (soloTsx.has(rule.id) && !esTsxNativo))) continue;
+    // Una regla de nativo corre si el archivo es de nativo. Si además declara
+    // stack, solo corre en ese stack: la sintaxis de RN no existe en Dart y al
+    // revés. Las que no declaran stack (M2, M4, M6, M9) valen en los dos y
+    // también sobre el preview.
+    if (rule.nativo) {
+      if (!esNativo) continue;
+      if (rule.stack && rule.stack !== stack) continue;
+      if (!rule.stack && soloTsx.has(rule.id) && !esTsxNativo) continue;
+    }
     if (rule.custom) {
       for (const [ln, ev] of rule.custom(src)) findings.push({ file, line: ln, ...rule, evidence: ev });
       continue;

@@ -2,7 +2,7 @@
   "$schema": "https://design-tokens.org/community-group/format/",
   "$description": "Generado por scripts/build-tokens.mjs desde css/variables.css. NO editar a mano: se regenera y se pisa. Cambiá el CSS.",
   "source": "css/variables.css",
-  "generated": "2026-09-10",
+  "generated": "2026-09-11",
   "tokens": {
     "--neutral-10": {
       "$type": "color",
@@ -1125,21 +1125,21 @@
       "$description": "hero / large section padding"
     },
     "--target-min": {
-      "$type": "other",
+      "$type": "dimension",
       "$value": "44px",
       "section": "Densidad y superficie táctil  Los 44px de target vivían sueltos dentro de media queries en components.css, así que no existían como decisión: eran un parche por archivo. Acá son un token, y en [data-platform=\"native\"] suben a 48.  target-min es un PISO: un control puede ser más alto, nunca más bajo.",
       "$description": "WCAG 2.5.5 / iOS. En nativo: 48",
       "$platformNative": "48px"
     },
     "--row-height": {
-      "$type": "other",
+      "$type": "dimension",
       "$value": "36px",
       "section": "Densidad y superficie táctil  Los 44px de target vivían sueltos dentro de media queries en components.css, así que no existían como decisión: eran un parche por archivo. Acá son un token, y en [data-platform=\"native\"] suben a 48.  target-min es un PISO: un control puede ser más alto, nunca más bajo.",
       "$description": "fila de tabla y de lista en escritorio",
       "$platformNative": "48px"
     },
     "--control-height": {
-      "$type": "other",
+      "$type": "dimension",
       "$value": "36px",
       "section": "Densidad y superficie táctil  Los 44px de target vivían sueltos dentro de media queries en components.css, así que no existían como decisión: eran un parche por archivo. Acá son un token, y en [data-platform=\"native\"] suben a 48.  target-min es un PISO: un control puede ser más alto, nunca más bajo.",
       "$description": "botón, input y select por defecto",
@@ -1574,12 +1574,12 @@
       "section": "Versalitas de componente (badge, header de tabla, label del nav, acción del toast): 10–11px. Acá el tracking apretado se lee PEOR — a ese tamaño las mayúsculas necesitan aire para separarse. No unificar con el de arriba: resuelven problemas distintos."
     },
     "--sidebar-width": {
-      "$type": "other",
+      "$type": "dimension",
       "$value": "220px",
       "section": "Layout"
     },
     "--topbar-height": {
-      "$type": "other",
+      "$type": "dimension",
       "$value": "56px",
       "section": "Layout"
     },
@@ -1819,7 +1819,7 @@
       "section": "Shared Sheet slide duration (500ms) for all sides."
     },
     "--screen-gutter": {
-      "$type": "other",
+      "$type": "dimension",
       "$value": "20px",
       "$platformNative": "20px",
       "section": "En nativo no hay columna: hay pantalla. El gutter no es fluido —no hay vw que valga en un teléfono— y no existe max-width que acote nada. Por eso el token se llama distinto que el  column-gutter de composition.css: no es el mismo concepto y no queremos que alguien los cruce.",

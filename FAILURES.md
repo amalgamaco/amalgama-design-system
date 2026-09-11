@@ -156,11 +156,15 @@ Los de `design.md` §8, contados como una falla cada uno.
 Solo se pueden fallar en una app. Las demás familias aplican igual: una pantalla nativa no se
 audita distinto que una web. Ver `MOBILE.md`.
 
-Se cuentan sobre **dos** superficies, y `check-output.mjs` reconoce las dos solo: el `.tsx` de la
-app (un archivo que importa de `react-native` o `expo`) y el **preview HTML** con
-`data-platform="native"`, que es donde se diseña y se aprueba antes de que exista el `.tsx`. Las
-reglas de sintaxis de RN —`M1`, `M3`, `M5`, `M7`— solo corren sobre el `.tsx`: en el preview esos
-valores salen del CSS.
+Se cuentan sobre **tres** superficies, y `check-output.mjs` las reconoce solas: el `.tsx` de una app
+React Native (importa de `react-native` o `expo`), el `.dart` de una app Flutter (importa de
+`package:flutter/`) y el **preview HTML** con `data-platform="native"`, que es donde se diseña y se
+aprueba antes de que exista el código.
+
+`M2`, `M4`, `M6` y `M9` son de criterio y valen en las tres. `M1`, `M3`, `M5` y `M8` existen en los
+dos stacks pero se escriben distinto, así que cada regla declara el suyo. **`M7` es la única que no
+cruza:** `TextStyle.height` en Flutter *sí* es un múltiplo del `fontSize`, así que ahí pasar 1,5 es
+correcto y marcarlo sería un falso positivo.
 
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
@@ -170,7 +174,7 @@ valores salen del CSS.
 | `M4` | Patrón de escritorio encogido en vez del patrón nativo: tabla que scrollea de costado, modal centrado chico, menú flotante, paginación numerada | ALTA | inspección contra el mapa de `MOBILE.md` §5 |
 | `M5` | La escala web (cuerpo 13,5) en una app: se olvidó `data-platform="native"` o el export `native` | ALTA | comparación de tokens |
 | `M6` | `--column-gutter`, `.grid-12`, `max-width` o medida en `ch` en una pantalla nativa | MEDIA | regex |
-| `M7` | `lineHeight` o `letterSpacing` pasados como multiplicador o `em`, que en RN se ignoran en silencio | ALTA | `grep -nE "(lineHeight\|letterSpacing):\s*(0?\.[0-9]\|1\.[0-9])"` |
+| `M7` | **Solo React Native.** `lineHeight` o `letterSpacing` pasados como multiplicador o `em`, que RN ignora en silencio. En Flutter `height` ES un múltiplo: ahí no aplica | ALTA | `grep -nE "(lineHeight\|letterSpacing):\s*(0?\.[0-9]\|1\.[0-9])"` |
 | `M8` | Utilidades de gluestack/Tailwind sin traducir (`bg-blue-500`, `rounded-xl`, `text-sm`) | ALTA | regex — es `A8` en territorio nativo |
 | `M9` | Probado en una sola plataforma: sombras, fuentes y ripple no se dibujan igual en iOS y Android | MEDIA | falta la evidencia de las dos |
 

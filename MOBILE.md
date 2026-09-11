@@ -161,73 +161,76 @@ distintas.
 ### Se portan tal cual
 
 <!-- BEGIN mobile-map (generado por scripts/build-mobile-index.mjs) -->
-| Embassy | gluestack v5 | Notas |
-|---|---|---|
-| `accordion` | **Accordion** | — |
-| `alert` | **Alert** | — |
-| `attachment` | **no tiene** — HStack + Icon + Text | — |
-| `avatar` | **Avatar** | — |
-| `badge` | **Badge** | — |
-| `button` | **Button** | Sus variant (solid/outline/link) y action (primary/secondary/positive/negative) NO son nuestras variantes: se mapean a las cinco de Embassy, no se adoptan. |
-| `calendar` | **Calendar** | — |
-| `card` | **Card** | — |
-| `carousel` | **no tiene** — FlatList horizontal con paginado | — |
-| `checkbox` | **Checkbox** | — |
-| `chip` | **no tiene** — Pressable + Text | Su Badge es de solo lectura, igual que el nuestro: no sirve de chip. Se dibuja a 40 y se toca a 48 con hitSlop. |
-| `collapsible` | **Accordion** | — |
-| `description` | **no tiene** — VStack + Text | — |
-| `divider` | **Divider** | — |
-| `empty-state` | **no tiene** — VStack + Text + Button | — |
-| `form` | **Input + FormControl** | FormControl trae label, helper y error: es más que nuestro field-group. |
-| `input-otp` | **no tiene** — HStack de Input con teclado numérico | — |
-| `item` | **no tiene** — HStack + Text | — |
-| `label` | **FormControl** | — |
-| `list` | **no tiene** — FlatList + Pressable | — |
-| `person-card` | **no tiene** — HStack + Avatar + Text | — |
-| `placeholder` | **Skeleton** | — |
-| `progress` | **Progress** | — |
-| `radio-group` | **Radio** | — |
-| `search` | **no tiene** — Input + Icon | — |
-| `segmented-button` | **no tiene** — HStack de Pressable, o Tabs re-skinneado | — |
-| `select` | **Select** | En nativo abre un actionsheet, no un popover. |
-| `skeleton` | **Skeleton** | — |
-| `slider` | **Slider** | — |
-| `spinner` | **Spinner** | — |
-| `stat-card` | **no tiene** — Card + Text con los tokens de .figure | — |
-| `switch` | **Switch** | — |
-| `tabs` | **Tabs** | — |
-| `toast` | **Toast** | — |
-| `toggle` | **no tiene** — Pressable con estado | Se dibuja a 40 y se toca a 48. |
-| `toggle-group` | **no tiene** — HStack de Pressable | — |
-| `vacancy-card` | **Card** | — |
+Cobertura de los que se portan tal cual: **23 de 37 en gluestack · 29 de 37 en Flutter**. La diferencia no es
+casual: Material 3 es una biblioteca completa y gluestack no.
+
+| Embassy | React Native (gluestack) | Flutter (Material 3) | Notas |
+|---|---|---|---|
+| `accordion` | **Accordion** | **ExpansionTile** | — |
+| `alert` | **Alert** | **MaterialBanner** | — |
+| `attachment` | ✗ — HStack + Icon + Text | ✗ — HStack + Icon + Text | — |
+| `avatar` | **Avatar** | **CircleAvatar** | — |
+| `badge` | **Badge** | **Badge** | — |
+| `button` | **Button** | **FilledButton · OutlinedButton · TextButton** | Sus variant (solid/outline/link) y action (primary/secondary/positive/negative) NO son nuestras variantes: se mapean a las cinco de Embassy, no se adoptan. |
+| `calendar` | **Calendar** | **CalendarDatePicker** | — |
+| `card` | **Card** | **Card** | — |
+| `carousel` | ✗ — FlatList horizontal con paginado | ✗ — FlatList horizontal con paginado | — |
+| `checkbox` | **Checkbox** | **Checkbox** | — |
+| `chip` | ✗ — Pressable + Text | **FilterChip · ActionChip** | Su Badge es de solo lectura, igual que el nuestro: no sirve de chip. Se dibuja a 40 y se toca a 48 con hitSlop. |
+| `collapsible` | **Accordion** | **ExpansionTile** | — |
+| `description` | ✗ — VStack + Text | ✗ — VStack + Text | — |
+| `divider` | **Divider** | **Divider** | — |
+| `empty-state` | ✗ — VStack + Text + Button | ✗ — VStack + Text + Button | — |
+| `form` | **Input + FormControl** | **TextField + InputDecoration** | FormControl trae label, helper y error: es más que nuestro field-group. |
+| `input-otp` | ✗ — HStack de Input con teclado numérico | ✗ — HStack de Input con teclado numérico | — |
+| `item` | ✗ — HStack + Text | **ListTile** | — |
+| `label` | **FormControl** | **InputDecoration.labelText** | — |
+| `list` | ✗ — FlatList + Pressable | **ListView + ListTile** | — |
+| `person-card` | ✗ — HStack + Avatar + Text | **ListTile + CircleAvatar** | — |
+| `placeholder` | **Skeleton** | ✗ — undefined | — |
+| `progress` | **Progress** | **LinearProgressIndicator** | — |
+| `radio-group` | **Radio** | **Radio · RadioListTile** | — |
+| `search` | ✗ — Input + Icon | **SearchBar** | — |
+| `segmented-button` | ✗ — HStack de Pressable, o Tabs re-skinneado | **SegmentedButton** | — |
+| `select` | **Select** | **DropdownMenu** | En nativo abre un actionsheet, no un popover. |
+| `skeleton` | **Skeleton** | ✗ — undefined | — |
+| `slider` | **Slider** | **Slider** | — |
+| `spinner` | **Spinner** | **CircularProgressIndicator** | — |
+| `stat-card` | ✗ — Card + Text con los tokens de .figure | ✗ — Card + Text con los tokens de .figure | — |
+| `switch` | **Switch** | **Switch** | — |
+| `tabs` | **Tabs** | **TabBar** | — |
+| `toast` | **Toast** | **SnackBar** | — |
+| `toggle` | ✗ — Pressable con estado | **IconButton.filled** | Se dibuja a 40 y se toca a 48. |
+| `toggle-group` | ✗ — HStack de Pressable | **ToggleButtons** | — |
+| `vacancy-card` | **Card** | **Card** | — |
 
 ### Cambian de patrón · 23
 
-| Web | En nativo | Por qué |
-|---|---|---|
-| `back-link` | El back del stack navigator | La jerarquía la lleva el navegador, no la pantalla |
-| `breadcrumb` | El back del stack navigator | Una ruta completa no entra ni se lee en 390px |
-| `button-group` | Segmented button, o botones apilados a lo ancho | Botones pegados de costado no llegan al piso táctil |
-| `chart` | El mismo dato con menos series y sin leyenda flotante | Una leyenda flotante tapa el gráfico en pantalla chica |
-| `combobox` | Sheet con búsqueda (`Actionsheet + Input`) | El popover con filtro es un patrón de puntero |
-| `command` | Pantalla de búsqueda completa | El ⌘K es de teclado |
-| `context-menu` | Actionsheet, con long-press (`Actionsheet`) | No hay click derecho |
-| `create-form` | Pantalla propia, nunca un modal | Un formulario dentro de un modal en 390px es una trampa |
-| `data-table` | Lista de filas apiladas (label: valor) o card por registro | Una tabla en 390px se scrollea de costado y nadie lo hace |
-| `date-picker` | El Calendar docked en un bottom sheet (`DateTimePicker`) | El popover chico es de escritorio |
-| `dropdown-menu` | Actionsheet (`Menu · Actionsheet`) | No hay menú flotante |
-| `input-group` | Campos apilados | Un input con addon de costado no entra |
-| `kanban` | Segmented button + una columna a la vez | Tres columnas en 390px no son tres columnas |
-| `menubar` | Tab bar + stack | No existe barra de menú en una app |
-| `modal` | Pantalla completa o bottom sheet (`Modal · Actionsheet`) | Un diálogo chico centrado se siente web |
-| `navigation-menu` | Tab bar + stack | La navegación la lleva el navigator |
-| `page-header` | El header del stack navigator | El título de pantalla lo pone la navegación |
-| `pagination` | Scroll infinito o “cargar más” | Paginar con números es de escritorio |
-| `popover` | Bottom sheet, o el contenido inline (`Actionsheet`) | Un popover necesita un ancla y espacio alrededor |
-| `scroll-area` | ScrollView / FlatList | El scroll lo maneja la plataforma |
-| `sheet` | Bottom sheet (`Actionsheet · BottomSheet`) | El sheet lateral es un patrón de escritorio |
-| `table` | Filas apiladas (label: valor) | Una tabla en 390px no se lee |
-| `toolbar` | Header nativo + barra de acción abajo | Lo importante va al alcance del pulgar |
+| Web | En nativo | De dónde sale | Por qué |
+|---|---|---|---|
+| `back-link` | El back del stack navigator | RN ✗ · FL `Navigator.pop` | La jerarquía la lleva el navegador, no la pantalla |
+| `breadcrumb` | El back del stack navigator | RN ✗ · FL `AppBar` | Una ruta completa no entra ni se lee en 390px |
+| `button-group` | Segmented button, o botones apilados a lo ancho | RN ✗ · FL `SegmentedButton` | Botones pegados de costado no llegan al piso táctil |
+| `chart` | El mismo dato con menos series y sin leyenda flotante | RN ✗ · FL ✗ | Una leyenda flotante tapa el gráfico en pantalla chica |
+| `combobox` | Sheet con búsqueda | RN `Actionsheet + Input` · FL `SearchAnchor` | El popover con filtro es un patrón de puntero |
+| `command` | Pantalla de búsqueda completa | RN ✗ · FL `SearchAnchor` | El ⌘K es de teclado |
+| `context-menu` | Actionsheet, con long-press | RN `Actionsheet` · FL `MenuAnchor · showModalBottomSheet` | No hay click derecho |
+| `create-form` | Pantalla propia, nunca un modal | RN ✗ · FL `Route propia` | Un formulario dentro de un modal en 390px es una trampa |
+| `data-table` | Lista de filas apiladas (label: valor) o card por registro | RN ✗ · FL `ListView + ListTile` | Una tabla en 390px se scrollea de costado y nadie lo hace |
+| `date-picker` | El Calendar docked en un bottom sheet | RN `DateTimePicker` · FL `showDatePicker` | El popover chico es de escritorio |
+| `dropdown-menu` | Actionsheet | RN `Menu · Actionsheet` · FL `MenuAnchor` | No hay menú flotante |
+| `input-group` | Campos apilados | RN ✗ · FL `Column` | Un input con addon de costado no entra |
+| `kanban` | Segmented button + una columna a la vez | RN ✗ · FL `SegmentedButton` | Tres columnas en 390px no son tres columnas |
+| `menubar` | Tab bar + stack | RN ✗ · FL `NavigationBar` | No existe barra de menú en una app |
+| `modal` | Pantalla completa o bottom sheet | RN `Modal · Actionsheet` · FL `showModalBottomSheet · showDialog` | Un diálogo chico centrado se siente web |
+| `navigation-menu` | Tab bar + stack | RN ✗ · FL `NavigationBar` | La navegación la lleva el navigator |
+| `page-header` | El header del stack navigator | RN ✗ · FL `AppBar` | El título de pantalla lo pone la navegación |
+| `pagination` | Scroll infinito o “cargar más” | RN ✗ · FL ✗ | Paginar con números es de escritorio |
+| `popover` | Bottom sheet, o el contenido inline | RN `Actionsheet` · FL `showModalBottomSheet` | Un popover necesita un ancla y espacio alrededor |
+| `scroll-area` | ScrollView / FlatList | RN ✗ · FL `ListView` | El scroll lo maneja la plataforma |
+| `sheet` | Bottom sheet | RN `Actionsheet · BottomSheet` · FL `showModalBottomSheet` | El sheet lateral es un patrón de escritorio |
+| `table` | Filas apiladas (label: valor) | RN ✗ · FL ✗ | Una tabla en 390px no se lee |
+| `toolbar` | Header nativo + barra de acción abajo | RN ✗ · FL `AppBar + BottomAppBar` | Lo importante va al alcance del pulgar |
 
 ### No existen sin puntero · 2
 
@@ -240,7 +243,32 @@ distintas.
 
 ---
 
-## 5a. La librería
+## 5a. Las librerías — una por stack, un solo criterio
+
+Amalgama hace apps en **los dos stacks según el proyecto**, así que la capa de componentes tiene dos
+destinos. Lo que **no** se duplica es nada de lo anterior: los tokens, la escala, la densidad, los
+patrones y las fallas son los mismos. Si algún día una de las dos capas necesita un valor que no
+está en los tokens, el que está mal es el token, no la capa.
+
+|  | React Native | Flutter |
+|---|---|---|
+| Tokens | `tokens/embassy.tokens.ts` | `tokens/embassy_tokens.dart` |
+| Puente | `components/native/lib/theme.ts` | `components/flutter/embassy_theme.dart` |
+| Componentes | `components/native/*.tsx` — los ocho, escritos | **el `ThemeData`** — los widgets los pone Material 3 |
+| Base externa | gluestack v5, copy-paste | Material 3, incluido en Flutter |
+| Cobertura del set de trabajo | 23 de 37 | **29 de 37** |
+
+**La asimetría es real y conviene entenderla antes de elegir.** En Flutter el `ThemeData` *es* la
+librería: Material 3 ya trae los widgets con su comportamiento y su accesibilidad, y lo único que
+falta es que se vean como Amalgama — eso se decide una vez en `embassy_theme.dart` y listo. En
+React Native no existe ese piso: gluestack no llega a la mitad del set, así que hay que escribir
+los componentes, y por eso `components/native/` tiene ocho archivos y `components/flutter/` uno.
+
+Una diferencia técnica que importa al escribir: **`TextStyle.height` de Flutter sí es un múltiplo
+del `fontSize`**, así que los line-height van tal cual. En RN hay que multiplicar, y no hacerlo es
+la falla `M7` — que por eso **no** aplica en Dart y el chequeo no la marca ahí.
+
+### La librería de React Native
 
 `components/native/` es el análogo de `components/ui/*.tsx`: **copy-paste, no
 dependencia.** Se copia la carpeta al proyecto y es suya.
