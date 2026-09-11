@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preview Flutter · Material 3 con los tokens de Embassy</title>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     Los componentes REALES de Material 3 (@material/web, de Google) pintados
+     con la paleta de Amalgama.
+
+     No hay puente que escribir: css/md-sys-bridge.css ya expone los 36 roles
+     --md-sys-color-* como alias de los --color-* de Embassy, que es
+     exactamente lo que lee Material Web. El archivo se escribió en junio 2026
+     pensando en esto y estuvo sin usarse hasta ahora.
+
+     PARA QUÉ SIRVE: ver una pantalla de una app Flutter antes de que exista.
+     Los widgets conservan la anatomía de Material —state layers, ripple,
+     formas, densidades— que el CSS de Embassy no reproduce, así que del lado
+     Flutter este preview es más fiel que el nuestro.
+
+     PARA QUÉ NO: Material Web no es el Material de Flutter. Misma
+     especificación, implementaciones distintas. Es un preview fiel del
+     ESPEC, no del render exacto de la app.
+
+     Del lado React Native NO se usa esto: ahí los componentes de gluestack se
+     re-skinnean con nuestros tokens igual, así que el preview con el CSS de
+     Embassy ya es tan fiel como sería un gluestack sin tematizar.
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/md-sys-bridge.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/preview-native.css">
+
+<script type="importmap">
+{ "imports": { "@material/web/": "https://esm.run/@material/web/" } }
+</script>
+<script type="module">
+  import '@material/web/all.js';
+  // Si el CDN no responde (red de la oficina, offline), que se vea por qué.
+  setTimeout(() => {
+    if (!customElements.get('md-filled-button')) {
+      document.getElementById('aviso').hidden = false;
+    }
+  }, 4000);
+</script>
+
+<style>
+  body { margin: 0; padding: 28px; background: var(--color-surface-dim); font-family: var(--font-body); }
+  .cab { max-width: 720px; margin: 0 auto 24px; }
+  .cab h1 { font-family: var(--font-heading); font-size: var(--font-size-heading-lg);
+            color: var(--text-primary); margin: 0 0 8px; }
+  .cab p { color: var(--text-secondary); font-size: var(--font-size-body-md); margin: 0 0 8px; line-height: 1.55; }
+  .aviso { max-width: 720px; margin: 0 auto 24px; padding: 14px 16px; border-radius: 10px;
+           background: var(--color-error-container); color: var(--color-on-error-container);
+           font-size: var(--font-size-body-sm); }
+  .fila { display: flex; flex-direction: column; gap: 14px; }
+  .et { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+        color: var(--text-muted); }
+  .par { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+</style>
+</head>
+<body>
+
+<div class="cab">
+  <h1>Preview Flutter</h1>
+  <p>Los componentes reales de <strong>Material 3</strong> con la paleta de Amalgama. El puente ya existía:
+     <code>css/md-sys-bridge.css</code> expone los roles <code>--md-sys-color-*</code> que lee Material Web.</p>
+  <p>Del lado <strong>React Native</strong> el preview va con el CSS de Embassy, no con esto — ahí los
+     componentes se re-skinnean con nuestros tokens igual.</p>
+</div>
+
+<div class="aviso" id="aviso" hidden>
+  <strong>No cargó Material Web.</strong> Se trae de <code>esm.run</code> por CDN: si la red lo bloquea,
+  los <code>&lt;md-*&gt;</code> de abajo quedan sin renderizar. Abrilo en una red que lo permita,
+  o instalá <code>@material/web</code> y apuntá el importmap a <code>node_modules</code>.
+</div>
+
+<div class="phone-row" style="justify-content:center">
+  <figure class="phone" data-platform="native">
+    <div class="phone-status"></div>
+    <header class="phone-nav"><span>Altas</span></header>
+
+    <div class="phone-screen">
+      <div class="fila">
+        <span class="et">md-filled-button · md-outlined-button · md-text-button</span>
+        <md-filled-button>Procesar altas</md-filled-button>
+        <div class="par">
+          <md-outlined-button>Cancelar</md-outlined-button>
+          <md-text-button>Ver detalle</md-text-button>
+        </div>
+
+        <span class="et">md-filter-chip</span>
+        <md-chip-set>
+          <md-filter-chip label="Todas" selected></md-filter-chip>
+          <md-filter-chip label="Pendientes"></md-filter-chip>
+          <md-filter-chip label="Completas"></md-filter-chip>
+        </md-chip-set>
+
+        <span class="et">md-outlined-text-field</span>
+        <md-outlined-text-field label="Centro médico" style="width:100%"></md-outlined-text-field>
+
+        <span class="et">md-checkbox · md-switch</span>
+        <div class="par">
+          <md-checkbox checked touch-target="wrapper"></md-checkbox> Con firma pendiente
+        </div>
+        <div class="par">
+          <md-switch selected></md-switch> Avisarme por email
+        </div>
+
+        <span class="et">md-list</span>
+        <md-list>
+          <md-list-item>
+            <div slot="headline">Clínica del Sol</div>
+            <div slot="supporting-text">Alta completa · 3 min</div>
+          </md-list-item>
+          <md-divider></md-divider>
+          <md-list-item>
+            <div slot="headline">Sanatorio Norte</div>
+            <div slot="supporting-text">Pendiente de firma</div>
+          </md-list-item>
+        </md-list>
+
+        <span class="et">md-linear-progress</span>
+        <md-linear-progress value="0.6"></md-linear-progress>
+      </div>
+    </div>
+
+    <nav class="phone-tabbar">
+      <button class="phone-tab" aria-current="page">Altas</button>
+      <button class="phone-tab">Centros</button>
+      <button class="phone-tab">Reportes</button>
+      <button class="phone-tab">Perfil</button>
+    </nav>
+  </figure>
+</div>
+
+</body>
+</html>

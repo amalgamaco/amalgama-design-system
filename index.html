@@ -5259,6 +5259,8 @@ body { overflow-x: clip; }
         <p style="font-size:12px;color:var(--ds-text-3);margin:16px 0 0">Medido en este render: el botón pasa de <strong>34px a 48</strong>, el campo de <strong>38 a 48</strong>, el chip de <strong>32 a 48</strong>, y el cuerpo de <strong>13,5px a 16</strong>. Mismo marcado, otros valores de token.</p>
       </div>
 
+      <div class="ds-callout"><strong>En Flutter el preview va con los componentes reales.</strong> <code>@material/web</code> —la implementación en web components de Material 3, de Google— se carga por CDN y toma nuestra paleta sin escribir un puente: <code>css/md-sys-bridge.css</code> ya expone los 36 roles <code>--md-sys-color-*</code> que Material lee. Los widgets conservan su anatomía (state layers, ripple, densidades), que nuestro CSS no reproduce, así que del lado Flutter es más fiel. Del lado React Native <strong>no</strong> se usa: ahí los componentes se re-skinnean con nuestros tokens igual. Ejemplo andando en <code>demos/material-preview.html</code>; los límites, en <code>MOBILE.md</code> §5b.</div>
+
       <div class="ds-callout"><strong>Esto es la herramienta, no una réplica.</strong> El marco lo da <code>css/preview-native.css</code> y es lo que emiten <code>artifact</code> —cuando no hay proyecto, para diseñar y aprobar antes de que exista código— y <code>screen</code>, al lado del <code>.tsx</code>. <strong>Lo que el preview no muestra:</strong> la sombra de Android, el ripple, el rebote del scroll, el teclado del sistema y las fuentes reales del dispositivo. Para eso hace falta el simulador.</div>
 
       <h2 class="ds-h2">4 · Densidad y superficie táctil</h2>

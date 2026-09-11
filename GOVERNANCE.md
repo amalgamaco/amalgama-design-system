@@ -62,6 +62,14 @@ The **MD3 system bridge** (`css/md-sys-bridge.css`) exposes `--md-sys-color-*` (
 
 **Component-tier state tokens — post-revert state (2026-07).** During the Tailwind era, component/family-specific state colors (elevated chip, search field, snackbar action/close, nav/menu) were routed through a `--md-comp-*` component tier defined in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css`). Both files were deleted when that architecture was reverted, and the `--md-comp-*` indirection layer did **not** get restored — it was Tailwind/islands-only infrastructure, not a design decision. What *did* survive, because `layout.css`'s nav styling depends on it, is the **navigation/menu family**: `--color-nav-hover`, `--color-nav-hover-content`, `--color-nav-press`, `--color-nav-selected`, `--color-nav-selected-content` are real named tokens, defined directly in `css/variables.css` (no `--md-comp-*` indirection — see §5.4 below for the full table). Every other family's state colors (chip-elevated, search-field, snackbar action/close) are now **inline `color-mix()` expressions in each component's own CSS file**, using the same percentages the old tier used, just not routed through a shared named token. This is a known simplification, not a design change — see §12 for the reconciliation entry. If you're adding a new component/family state, follow the pattern that's actually live: either add real tokens to `css/variables.css` (nav's approach, preferred if 2+ files will consume it) or an inline `color-mix()` expression scoped to that component's file (everyone else's current approach).
 
+> **Actualización (2026-09): `material-web` sí se usa, pero para otra cosa.** El rechazo de abajo
+> era como *implementación de componentes en el producto web*, y sigue en pie. Desde septiembre se
+> usa como **preview de una pantalla Flutter**: los `<md-*>` renderizados con el bridge muestran la
+> anatomía de Material —state layers, ripple, densidades— que nuestro CSS no reproduce, y eso es
+> justo lo que se quiere ver antes de construir la app. Son dos propósitos distintos y conviene no
+> confundirlos: en el producto web mandan `css/components/*.css`; en el preview de Flutter, Material.
+> Ver `MOBILE.md` §5b y `demos/material-preview.html`.
+>
 > Why this is **not** the rejected `material-web` path: this adopts MD3's token *structure and naming* in plain Embassy CSS (no build, no Lit, no Shadow DOM, Embassy palette as source of truth). It does **not** adopt MD3's component *implementations*. See the architecture note in this section's history (June 2026 evaluation: `material-web` is in maintenance mode and lacks ~70% of Embassy's components).
 
 ### 2.3 Prohibited patterns

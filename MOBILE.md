@@ -330,6 +330,43 @@ teléfono. Verificado: el botón pasa de 34 a 48 y el campo de 38 a 48 con el mi
 (`elevation`), el ripple, el rebote del scroll, el teclado del sistema y las fuentes reales del
 dispositivo. Para eso hace falta el simulador.
 
+### Y en Flutter, el preview va con los componentes reales
+
+Del lado Flutter hay algo mejor que nuestro CSS: **`@material/web`**, la implementación en web
+components de Material 3 que hace Google. Se carga por CDN, sin build, y **no hay puente que
+escribir** — `css/md-sys-bridge.css` ya expone los 36 roles `--md-sys-color-*` como alias de los
+`--color-*` de Embassy, que es exactamente lo que Material Web lee. El archivo se había escrito en
+junio 2026 anticipando esto y quedó sin usarse hasta ahora.
+
+```html
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/md-sys-bridge.css">
+<script type="importmap">
+{ "imports": { "@material/web/": "https://esm.run/@material/web/" } }
+</script>
+<script type="module">import '@material/web/all.js';</script>
+```
+
+Adentro del marco van los `<md-*>` en vez de nuestras clases. Ejemplo andando en
+`demos/material-preview.html`.
+
+**Por qué solo del lado Flutter.** Los widgets conservan la anatomía de Material —state layers,
+ripple, formas, densidades— que nuestro CSS no reproduce, así que ahí suma fidelidad real. En React
+Native no sumaría nada: los componentes de gluestack **se re-skinnean con nuestros tokens igual**,
+así que el preview con el CSS de Embassy ya es tan fiel como sería un gluestack sin tematizar. Y
+gluestack no puede renderizar en un navegador sin `react-native-web` y un bundler.
+
+**Tres límites, dichos de frente:**
+
+- Cubre ~18 componentes (button, checkbox, radio, switch, slider, textfield, select, tabs, menu,
+  list, chips, dialog, progress, divider, icon, iconbutton, fab), no los 62.
+- El proyecto dice en su README *"maintenance mode pending new maintainers"*, aunque publicó 2.5.0
+  en julio de 2026 y sigue sacando nightlies. Vivo, sin dueño claro.
+- **Material Web no es el Material de Flutter.** Misma especificación, implementaciones distintas:
+  es un preview fiel del *espec*, no del render exacto de la app.
+
+---
+
 Quién lo emite: `artifact` cuando no hay proyecto —para diseñar y aprobar antes de que haya
 código— y `screen` al lado del `.tsx` cuando el proyecto existe.
 
