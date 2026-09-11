@@ -87,10 +87,10 @@ mantienen para no romper links viejos, no son páginas reales.
 Artifacts y proyectos que no clonan el repo linkean los tokens vía jsDelivr, **contra un tag**:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/variables.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/base.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/composition.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/components.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.1.0/css/variables.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.1.0/css/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.1.0/css/composition.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.1.0/css/components.css">
 ```
 
 `@main` en un entregable significa que una pantalla que el cliente ya aprobó puede cambiar de

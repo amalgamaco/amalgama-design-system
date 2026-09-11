@@ -36,6 +36,11 @@ const argAfter = (flag) => {
 const OUT_MD = path.resolve(ROOT, argAfter("--out") ?? "PUBLIC-API.md");
 const OUT_JSON = path.resolve(ROOT, argAfter("--out-json") ?? "public-api.json");
 
+// La versión que van a pinear los entregables. Estaba escrita cuatro veces en el bloque
+// <link> de abajo, así que un release podía bumpear unas y olvidarse de otras. Una sola
+// constante: al sacar un tag se toca acá y se regenera (DEPLOYMENT.md §Releases).
+const DS_VERSION = "v1.1.0";
+
 /** Primer bloque de comentario del archivo = el header canónico. */
 function header(css) {
   const m = css.match(/^\s*\/\*([\s\S]*?)\*\//);
@@ -213,10 +218,10 @@ ${components.length} componentes · **${totalPublic} clases públicas** de ${all
 ## Cómo cargar el sistema
 
 \`\`\`html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/variables.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/base.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/composition.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.0.0/css/components.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@${DS_VERSION}/css/variables.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@${DS_VERSION}/css/base.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@${DS_VERSION}/css/composition.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@${DS_VERSION}/css/components.css">
 <!-- app shell (sidebar + topbar) solamente: .../css/layout.css -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 \`\`\`
