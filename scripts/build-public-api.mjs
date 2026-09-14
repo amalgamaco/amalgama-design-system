@@ -39,7 +39,7 @@ const OUT_JSON = path.resolve(ROOT, argAfter("--out-json") ?? "public-api.json")
 // La versión que van a pinear los entregables. Estaba escrita cuatro veces en el bloque
 // <link> de abajo, así que un release podía bumpear unas y olvidarse de otras. Una sola
 // constante: al sacar un tag se toca acá y se regenera (DEPLOYMENT.md §Releases).
-const DS_VERSION = "v1.1.0";
+const DS_VERSION = "v1.2.0";
 
 /** Primer bloque de comentario del archivo = el header canónico. */
 function header(css) {
