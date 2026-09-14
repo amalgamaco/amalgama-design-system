@@ -285,3 +285,266 @@
 }
 /* La barra separadora se apaga para que los números manden. */
 .section-index .sep { color: var(--color-outline); margin-inline: var(--space-1); }
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LA CAPA DE PANTALLA
+
+   La anatomía de una pantalla —de producto o nativa— como clases: el ancla, el
+   header de sección, el grupo, la fila, la acción. Las reglas están en
+   COMPOSICION.md Parte III (producto) y MOBILE.md §6b (nativa), y son las mismas:
+   la jerarquía la hace la superficie, el dato pesa más que su etiqueta, el header
+   va afuera del grupo, el divisor insetado, la acción primaria anclada.
+
+   **Las clases son el patrón; los tokens son la densidad.** Por eso esto NO está
+   scopeado a [data-platform="native"]: una pantalla de producto en desktop y una
+   pantalla de app son la misma composición en dos densidades, y escribirlas dos
+   veces garantiza que diverjan. Lo que cambia son los ocho tokens --screen-*:
+   acá están los valores de escritorio, y el bloque nativo de variables.css los
+   sube. Un proyecto los redeclara y sigue teniendo el mismo patrón.
+
+   Existe porque describir no alcanza: mientras esto vivió sólo en prosa, cada
+   pantalla la volvía a derivar a mano y cada derivación traía sus propios errores
+   —la etiqueta pesando más que el dato, el chip un escalón grande, un borde
+   encima del escalón de superficie—. Ninguno lo agarra un script.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+
+/* La pantalla: una columna, gutter a los lados, la acción primaria afuera del
+   scroll. El fondo es --color-surface y los bloques --color-surface-container:
+   ese escalón es lo que agrupa (M10). */
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-block-gap);
+  padding: 8px var(--screen-gutter) 0;
+  background: var(--color-surface);
+}
+
+/* §6b·5 — El ancla. Lo único invertido de la pantalla: concentra identidad y
+   estado en un punto de entrada, antes del contenido. Una sola por pantalla. */
+.screen-anchor {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: var(--screen-radius);
+  padding: var(--screen-block-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  /* El ancla REDEFINE los roles para lo que lleve adentro, en vez de pedir
+     variantes nuevas de cada componente.
+
+     Los componentes de Embassy leen roles (`var(--text-muted)`,
+     `var(--color-surface-variant)`), nunca literales. Redefinir esos roles acá
+     hace que un `.badge`, un `.progress` o un `.avatar` puestos adentro se
+     retiñan solos sobre la superficie invertida — sin `.badge-on-dark`, sin
+     overrides por componente, y sin que nadie tenga que acordarse.
+
+     Funciona porque la sustitución de custom properties resuelve en el elemento
+     que LEE la variable: el hijo hereda estos valores y su propio
+     `color: var(--text-muted)` resuelve contra ellos. */
+  --text-primary:          var(--color-on-primary);
+  --text-secondary:        color-mix(in srgb, var(--color-on-primary) 80%, transparent);
+  --text-muted:            color-mix(in srgb, var(--color-on-primary) 66%, transparent);
+  --color-surface:         transparent;
+  --color-surface-container: color-mix(in srgb, var(--color-primary-container) 16%, transparent);
+  --color-surface-variant: color-mix(in srgb, var(--color-on-primary) 16%, transparent);
+  --color-outline-variant: color-mix(in srgb, var(--color-on-primary) 24%, transparent);
+}
+.screen-anchor-top { display: flex; align-items: center; gap: var(--screen-item-gap); }
+.screen-anchor-id { flex: 1 1 auto; min-width: 0; }
+.screen-anchor-name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--font-size-heading-lg);
+  line-height: var(--line-height-heading-lg);
+  letter-spacing: -.015em;
+}
+.screen-anchor-meta {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  color: color-mix(in srgb, var(--color-on-primary) 66%, transparent);
+  margin-top: 3px;
+}
+/* La línea del número: la cifra a la izquierda, un dato de apoyo a la derecha,
+   alineados por línea base y no por caja — con align-items:center la cifra
+   grande y el texto chico quedan visiblemente desfasados. */
+.screen-anchor-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 9px;
+}
+.screen-anchor-aside {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  color: var(--text-muted);
+}
+.screen-anchor-figure {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-heading-xl);
+  line-height: 1;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+}
+.screen-anchor-figure span {
+  font-family: var(--font-body);
+  font-size: var(--font-size-label);
+  font-weight: 500;
+  color: color-mix(in srgb, var(--color-on-primary) 66%, transparent);
+}
+
+/* §6b·3 — El header de sección va AFUERA del grupo, en caption apagado. Adentro
+   y en escala de heading compite con los datos y gana la etiqueta (M12). */
+.screen-section { display: block; }
+.screen-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 0 4px 8px;
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* §6b·2 — El grupo. Sin borde: el escalón de superficie ya dibuja el límite, y
+   un borde encima lo dibuja dos veces (M10, M11). */
+.screen-group {
+  background: var(--color-surface-container);
+  border-radius: var(--screen-radius);
+  overflow: hidden;
+}
+/* El divisor va SOLO entre filas —nunca antes de la primera ni después de la
+   última— y arranca donde arranca el TEXTO, no en el borde de la tarjeta. A
+   sangre corta la tarjeta en dos; insetado la lee como lista (M11).
+
+   Va como pseudo-elemento y no como border-top para poder insetarlo sin tocar
+   el layout de la fila: con márgenes habría que compensarlos adentro, y esa
+   compensación se rompe apenas alguien cambia el padding del grupo. */
+.screen-group > .screen-row + .screen-row,
+.screen-group > .screen-item + .screen-item { position: relative; }
+.screen-group > .screen-row + .screen-row::before,
+.screen-group > .screen-item + .screen-item::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  height: 1px;
+  background: var(--color-surface-variant);
+}
+/* Fila simple: el divisor arranca en el padding del grupo. */
+.screen-group > .screen-row + .screen-row::before { left: var(--screen-group-padding); }
+/* Fila con ícono guía: arranca después del ícono. Se calcula, no se escribe:
+   así sigue alineado si el proyecto cambia el padding o el tamaño del ícono. */
+.screen-group > .screen-item + .screen-item::before { left: calc(var(--screen-group-padding) + var(--screen-item-icon) + var(--screen-item-gap)); }
+
+/* §6b·4 — La fila. Etiqueta y dato al MISMO cuerpo; los separa el peso, no el
+   tamaño. La inversión —etiqueta pesando más que el dato— es M13. */
+.screen-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: var(--screen-row-height);
+  padding: 0 var(--screen-group-padding);
+  margin-left: 0;
+}
+.screen-row-label {
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-label);
+  font-weight: 400;
+  color: var(--text-muted);
+  flex: 0 1 auto;
+}
+.screen-row-value {
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-label);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: right;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+/* §6b·8 — Fila con ícono guía: el ícono ayuda a encontrarla en una lista larga.
+   Acá el divisor arranca después del ícono, no del padding. */
+.screen-item {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  min-height: var(--screen-item-height);
+  padding: 0 var(--screen-group-padding);
+}
+.screen-item-icon {
+  width: var(--screen-item-icon); height: var(--screen-item-icon);
+  border-radius: var(--radius-full);
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+  background: var(--color-surface-variant);
+}
+.screen-item-body { flex: 1 1 auto; min-width: 0; }
+.screen-item-title {
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-label);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+/* El rol «monto en tarjeta» de la tabla de MOBILE.md §6b·4b: heading-md a 700.
+   Existe como clase para que no se escriba a mano cada vez — que es como el
+   chip terminó un escalón arriba de donde iba. */
+.screen-item-figure {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--font-size-heading-md);
+  line-height: var(--line-height-heading-md);
+  letter-spacing: -.015em;
+  color: var(--text-primary);
+  display: block;
+}
+.screen-item-sub { display: block; }
+.screen-item-sub,
+.screen-item-aside {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  color: var(--text-muted);
+}
+.screen-item-aside { text-align: right; font-variant-numeric: tabular-nums; flex: 0 0 auto; }
+
+
+/* §6b·6 — La acción primaria, anclada abajo y fuera del scroll. Al final del
+   contenido obliga a scrollear para actuar, y en una lista larga desaparece (M14). */
+.screen-action {
+  flex: 0 0 auto;
+  padding: 12px var(--screen-gutter) 24px;
+  background: var(--color-surface);
+}
+
+/* La acción secundaria en línea. Misma clase visual que un badge de estado, así
+   que va al MISMO cuerpo que él —caption— y no al del dato de una fila. Se dibuja
+   a 36 y llega a 48 por superficie táctil: a 48 dibujada se vuelve un botón y le
+   compite a la primaria; a 36 y sin ::after es M2, que es bloqueante. */
+.screen-inline-action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 13px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-variant);
+  color: var(--text-primary);
+  font-size: var(--font-size-caption);
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+}
+.screen-inline-action::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: var(--target-min);
+  transform: translateY(-50%);
+}

@@ -33,6 +33,8 @@ It has two audiences, one source of truth:
 
 | Guide | Covers |
 |---|---|
+| [Screen Patterns](screen-patterns.md) | **Los doce arquetipos de pantalla** — `list-collection`, `dashboard-overview`, `entity-detail`, `create-edit-form`, `multi-step-wizard`, `settings-preferences`, `pipeline-board`, `search-results`, `auth-entry`, `feed-activity`, `onboarding-first-run`, `confirmation-destructive`. Cada uno con su esqueleto de información, receta de componentes, estados obligatorios, transformación a mobile y anti-patrones. Más las reglas de transformación responsive y el playbook de auditoría. |
+| [Component Decisions](component-decisions.md) | Cómo elegir entre componentes que se parecen, y con qué no confundirlos. |
 | [Forms](forms.md) | Layout, labels, validation, error prevention & recovery, submission feedback. |
 | [Tables & Data-Heavy Interfaces](tables-and-data.md) | Density, alignment, sorting, filtering, pagination, empty/loading/error. |
 | [Navigation](navigation.md) | App shell, breadcrumbs, tabs vs segmented button, wayfinding, active state. |
@@ -44,8 +46,12 @@ It has two audiences, one source of truth:
 
 1. **Frame the screen** with [Information Architecture](information-architecture.md) and
    [Visual Hierarchy](visual-hierarchy.md) — what's the one primary action, what's secondary?
-2. **Choose the pattern** — is it a form, a table, a dashboard, a navigation surface? Read
-   that pattern guide.
+2. **Choose the archetype** in [Screen Patterns](screen-patterns.md) — it hands you the IA
+   skeleton, the component recipe and the required states. Then read the pattern guide that
+   applies (form, table, dashboard, navigation).
+2b. **Compose it.** The archetype says *what* goes on the screen; how it is drawn is
+   `COMPOSICION.md` Parte III for a product screen and `MOBILE.md` §6 for a native one —
+   surface hierarchy, row anatomy, the scale with its weights.
 3. **Design the states** up front with [Feedback & States](feedback-and-states.md) — empty,
    loading, error, success — not just the happy path.
 4. **Write the copy** per [Content & UX Writing](content-and-writing.md).

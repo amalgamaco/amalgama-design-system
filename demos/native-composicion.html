@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nativo · composición — preview de la doc</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/md-sys-bridge.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/composition.css">
+<link rel="stylesheet" href="../css/layout.css">
+<link rel="stylesheet" href="../docs/docs.css">
+<link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/preview-native.css">
+<style>
+  body { background: var(--ds-bg, #fff); }
+  .ds-section { max-width: 1100px; margin: 0 auto; padding: 40px 28px 90px; }
+
+  /* ── las dos clases nuevas que necesita la doc ── */
+  .ds-anatomy { list-style: none; margin: 0; padding: 0; counter-reset: a;
+    display: flex; flex-direction: column; gap: 14px; flex: 1 1 340px; min-width: 300px; }
+  .ds-anatomy li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
+  .ds-anatomy li::before { counter-increment: a; content: counter(a);
+    font-family: var(--font-mono); font-size: 11px; color: var(--color-primary);
+    background: var(--color-primary-container); border-radius: 3px; padding: 3px 7px; margin-top: 2px; }
+  .ds-anatomy code { display: block; font-size: 12.5px; margin-bottom: 3px; }
+  .ds-anatomy span { display: block; font-size: 13.5px; line-height: 1.55; color: var(--text-secondary); }
+  .ds-anatomy em { font-style: normal; font-family: var(--font-mono); font-size: 11.5px;
+    color: var(--color-error); }
+  .ds-rowpair { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+</style>
+</head>
+<body>
+<section class="ds-section" id="s-mobile">
+  <div class="ds-page-tag">Foundations · Mobile</div>
+  <h1 class="ds-page-title">Nativo</h1>
+  <p class="ds-page-desc" style="margin-bottom:34px"><em>— preview de los cuatro puntos nuevos. En la doc real entran después de «4 · Densidad y superficie táctil».</em></p>
+      <h2 class="ds-h2">5 · Cómo se compone una pantalla</h2>
+      <p class="ds-p">Durante mucho tiempo el sistema dijo sólo lo que <em>no</em> cruza de la web — sin grilla de 12, sin <code>max-width</code>, sin medida en <code>ch</code>. Eso alcanzaba para no poner una grilla en un teléfono, pero no para que la pantalla se pareciera a una app. Estas son las ocho convenciones que faltaban, cada una con su falla en <code>FAILURES.md</code>. <strong>No dependen de la paleta ni de la librería:</strong> valen igual con Material, con gluestack o con nuestro CSS.</p>
+
+      <div class="ds-preview" style="display:block;padding:20px">
+        <div class="phone-row" style="align-items:flex-start;gap:28px">
+          <figure class="phone" data-platform="native">
+            <div class="phone-status"></div>
+            <header class="phone-nav"><span style="flex-grow:1">Socio</span></header>
+            <div class="phone-screen">
+              <div class="screen">
+                <section class="screen-anchor">
+                  <div class="screen-anchor-top">
+                    <span class="avatar avatar-lg"><span class="avatar-fallback">LF</span></span>
+                    <div class="screen-anchor-id">
+                      <div class="screen-anchor-name">Lucía Ferrari</div>
+                      <div class="screen-anchor-meta">N° 04182 · Palermo</div>
+                    </div>
+                    <span class="badge badge-active">Al día</span>
+                  </div>
+                  <div>
+                    <div class="screen-anchor-row">
+                      <span class="screen-anchor-figure">9<span> / 12 accesos</span></span>
+                      <span class="screen-anchor-aside">quedan 3</span>
+                    </div>
+                    <div class="progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="Accesos usados">
+                      <div class="progress-fill" style="width:75%"></div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="screen-section">
+                  <div class="screen-section-header"><span>Plan</span></div>
+                  <div class="screen-group">
+                    <div class="screen-row"><span class="screen-row-label">Modalidad</span><span class="screen-row-value">Full anual</span></div>
+                    <div class="screen-row"><span class="screen-row-label">Accesos</span><span class="screen-row-value">3 por semana</span></div>
+                    <div class="screen-row"><span class="screen-row-label">Sede habitual</span><span class="screen-row-value">Palermo</span></div>
+                  </div>
+                </section>
+
+                <section class="screen-section">
+                  <div class="screen-section-header"><span>Asistencias</span><button class="screen-inline-action">Ver todas</button></div>
+                  <div class="screen-group">
+                    <div class="screen-item">
+                      <span class="screen-item-icon" style="background:var(--color-success-container)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-on-success-container)" stroke-width="2" stroke-linecap="round"><path d="M6 8v8M18 8v8M2 11v2M22 11v2M6 12h12"></path></svg>
+                      </span>
+                      <span class="screen-item-body"><span class="screen-item-title">Funcional</span><span class="screen-item-sub">Palermo</span></span>
+                      <span class="screen-item-aside">13 sep<br>07:40</span>
+                    </div>
+                    <div class="screen-item">
+                      <span class="screen-item-icon" style="background:var(--color-primary-container)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-on-primary-container)" stroke-width="2" stroke-linecap="round"><path d="M4 7v10M20 7v10M8 9v6M16 9v6M8 12h8"></path></svg>
+                      </span>
+                      <span class="screen-item-body"><span class="screen-item-title">Musculación</span><span class="screen-item-sub">Palermo</span></span>
+                      <span class="screen-item-aside">11 sep<br>19:15</span>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div class="screen-action"><button class="btn-primary" style="width:100%">Registrar acceso</button></div>
+          </figure>
+
+          <ol class="ds-anatomy">
+            <li><code>.screen</code><span>Una columna, <code>--screen-gutter</code> a los lados, la acción afuera del scroll. El fondo es <code>--color-surface</code> y los bloques <code>--color-surface-container</code>: <strong>ese escalón es lo que agrupa</strong>, y por eso no hay ni un <code>&lt;hr&gt;</code>. <em>M10</em></span></li>
+            <li><code>.screen-anchor</code><span>Lo único invertido. Concentra identidad y estado antes del contenido — y redefine los roles adentro, así el <code>badge</code> y el <code>progress</code> se retiñen solos sin variantes nuevas. Una sola por pantalla.</span></li>
+            <li><code>.screen-section-header</code><span>Afuera del grupo, en <code>caption</code> apagado. Adentro y en escala de heading compite con los datos y gana la etiqueta. <em>M12</em></span></li>
+            <li><code>.screen-group</code><span>Sin borde: el escalón ya dibujó el límite. El divisor va sólo entre filas y arranca donde arranca el texto, nunca a sangre. <em>M11</em></span></li>
+            <li><code>.screen-row</code><span>52 de alto. Etiqueta y dato <strong>al mismo cuerpo</strong>; los separa el peso. <em>M13</em></span></li>
+            <li><code>.screen-item</code><span>60 de alto, con ícono guía. El ícono ayuda a encontrar la fila en una lista larga; arriba del título de cada card sería <code>H8</code>.</span></li>
+            <li><code>.screen-inline-action</code><span>Acción secundaria: mismo cuerpo que el badge. Dibujada a 36 y tocada a 48 por <code>::after</code> — a 48 dibujada compite con la primaria, a 36 sin superficie es <em>M2</em>.</span></li>
+            <li><code>.screen-action</code><span>La primaria anclada abajo, fuera del scroll. Al final del contenido obliga a scrollear para actuar. <em>M14</em></span></li>
+          </ol>
+        </div>
+      </div>
+
+      <h2 class="ds-h2">6 · La fila, de cerca</h2>
+      <p class="ds-p">Es la falla que el sistema producía solo: la etiqueta en escala de heading y el dato chico y apagado — una pantalla que grita los nombres de los campos y susurra los valores. <strong>Quien mira vino a leer el dato.</strong> Y la separación no la puede dar el color: entre <code>--text-muted</code> y <code>--text-primary</code> hay 3,10:1, y aclarar el gris hasta el techo de AA sólo lo lleva a 3,29. El salto lo da el peso.</p>
+      <div class="ds-preview" style="display:block;padding:20px">
+        <div class="ds-rowpair">
+          <div>
+            <p class="phone-caption"><strong>M13</strong> — la etiqueta pesa más</p>
+            <div data-platform="native" style="background:var(--color-surface);padding:16px;border-radius:var(--radius-xl)">
+              <div class="screen-group">
+                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--text-primary)">Modalidad</span><span style="font-size:var(--font-size-body-sm);color:var(--text-muted)">Full anual</span></div>
+                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--text-primary)">Accesos</span><span style="font-size:var(--font-size-body-sm);color:var(--text-muted)">3 por semana</span></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="phone-caption"><strong>Correcto</strong> — mismo cuerpo, 400 contra 600</p>
+            <div data-platform="native" style="background:var(--color-surface);padding:16px;border-radius:var(--radius-xl)">
+              <div class="screen-group">
+                <div class="screen-row"><span class="screen-row-label">Modalidad</span><span class="screen-row-value">Full anual</span></div>
+                <div class="screen-row"><span class="screen-row-label">Accesos</span><span class="screen-row-value">3 por semana</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="ds-h2">7 · La escala de una pantalla, rol por rol</h2>
+      <p class="ds-p">Todo sale de la escala nativa del punto 2. Lo que faltaba escrito no eran los tamaños: eran <strong>los pesos</strong>, y son la mitad del trabajo.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Dónde</th><th>Token</th><th>Peso</th><th>Color</th></tr></thead>
+          <tbody>
+            <tr><td>Título de la barra</td><td><code>--font-size-heading-sm</code> · 17</td><td>600</td><td><code>--text-primary</code></td></tr>
+            <tr><td>Nombre en el ancla</td><td><code>--font-size-heading-lg</code> · 22</td><td>600</td><td><code>--color-on-primary</code></td></tr>
+            <tr><td>Meta bajo el nombre</td><td><code>--font-size-caption</code> · 13</td><td>400</td><td>apagado sobre el ancla</td></tr>
+            <tr><td>Badge de estado</td><td><code>--font-size-caption</code> · 13</td><td>600</td><td>el container que corresponda</td></tr>
+            <tr><td>Número principal</td><td><code>--font-size-heading-xl</code> · 24</td><td>700</td><td><code>--color-on-primary</code></td></tr>
+            <tr><td>Monto en una tarjeta</td><td><code>--font-size-heading-md</code> · 20</td><td>700</td><td><code>--text-primary</code></td></tr>
+            <tr><td>Header de sección</td><td><code>--font-size-caption</code> · 13</td><td>600</td><td><code>--text-muted</code></td></tr>
+            <tr><td><strong>Etiqueta de fila</strong></td><td><code>--font-size-label</code> · 15</td><td><strong>400</strong></td><td><code>--text-muted</code></td></tr>
+            <tr><td><strong>Dato de fila</strong></td><td><code>--font-size-label</code> · 15</td><td><strong>600</strong></td><td><code>--text-primary</code></td></tr>
+            <tr><td>Acción secundaria en línea</td><td><code>--font-size-caption</code> · 13</td><td>600</td><td><code>--text-primary</code></td></tr>
+            <tr><td>Botón primario</td><td><code>--font-size-body-md</code> · 16</td><td>600</td><td><code>--color-on-primary</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ds-p">El botón primario va a <code>--control-height</code> (48) y a <code>--radius-button</code>, que el bloque <code>[data-platform="native"]</code> declara en <code>--radius-lg</code> (12): a 8 se lee como un botón de escritorio pegado adentro de una app.</p>
+
+      <h2 class="ds-h2">8 · Lo que no va, y por qué</h2>
+      <p class="ds-p">Las seis fallan <strong>por ausencia</strong>, que es lo que antes no existía: una pantalla sin nada de composición pasaba todos los checks. Son de inspección, no de regex — ningún script las agarra.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>ID</th><th>Qué es</th><th>Qué va en su lugar</th></tr></thead>
+          <tbody>
+            <tr><td><code>M10</code></td><td>Secciones separadas por línea: fondo plano con <code>&lt;hr&gt;</code> o bordes sueltos</td><td>El escalón <code>surface</code> → <code>surface-container</code>. Un borde encima dibuja el límite dos veces</td></tr>
+            <tr><td><code>M11</code></td><td>Pares sueltos sobre el fondo, o divisor a sangre</td><td><code>.screen-group</code>, con el divisor insetado al padding del texto</td></tr>
+            <tr><td><code>M12</code></td><td>Header de sección en escala de heading y adentro del grupo</td><td><code>.screen-section-header</code>: caption, 600, apagado, afuera</td></tr>
+            <tr><td><code>M13</code></td><td><strong>La etiqueta pesa más que su dato</strong></td><td>Mismo cuerpo, 400 contra 600. Es la más frecuente</td></tr>
+            <tr><td><code>M14</code></td><td>Acción primaria al final del contenido</td><td><code>.screen-action</code>, anclada abajo y fuera del scroll</td></tr>
+            <tr><td><code>M15</code></td><td><code>--font-mono</code> en prosa, captions o fechas sueltas</td><td>En nativo el mono es sólo para datos tabulares que se comparan en columna</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ds-callout"><strong>Y en una pantalla nativa no va overline, ni índice de sección, ni apertura editorial.</strong> Son gestos de <em>página</em> — nacieron para una portada, un reporte, una propuesta— y aplicados a una pantalla de producto la vuelven un documento. La identidad en nativo la llevan el ancla invertida, el par tipográfico y el radio. Eso no es perder identidad: es ponerla donde en una app se ve. <code>MOBILE.md</code> §6d.</div>
+</section></body></html>

@@ -9,10 +9,20 @@
      Neutral palette
   ───────────────────────────────────── */
   --neutral-10:  #FAFBFC;
+  /* El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra
+     blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1,
+     que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una
+     línea. Ver MOBILE.md §6b·1. */
+  --neutral-30:  #F3F4F6;
   --neutral-50:  #EAEBED;
   --neutral-100: #BFC1C8;
   --neutral-200: #9FA3AE;
   --neutral-300: #747989;
+  /* El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1,
+     no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre
+     tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA
+     en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13. */
+  --neutral-350: #63687A;
   --neutral-400: #474D61;
   --neutral-500: #353A4A;
   --neutral-600: #282C39;
@@ -178,7 +188,7 @@
   --color-info-container:            var(--info-50);
   --color-on-info-container:         var(--info-900);
   /* Background & Surface */
-  --color-surface:                   var(--neutral-10);
+  --color-surface:                   var(--neutral-30);
   --color-surface-dim:               var(--neutral-50);
   --color-surface-bright:            var(--neutral-white);
   --color-surface-container-lowest:  var(--neutral-10);
@@ -188,7 +198,7 @@
   --color-surface-container-highest: var(--neutral-100);
   --color-surface-variant:           var(--neutral-50);
   --color-on-surface:                var(--neutral-900);
-  --color-on-surface-variant:        var(--neutral-400);  /* texto secundario medio (#474D61) — antes neutral-700, demasiado oscuro */
+  --color-on-surface-variant:        var(--neutral-350);  /* texto de énfasis medio (#63687A) — antes neutral-400, que a 8.39:1 no se leía como apagado */
   /* Outline · bordes (outline = más prominente/oscuro; variant = sutil) */
   --color-outline:                   var(--neutral-200);  /* #9FA3AE */
   --color-outline-variant:           var(--neutral-100);  /* #BFC1C8 */
@@ -333,6 +343,28 @@
   --target-min:     44px;  /* WCAG 2.5.5 / iOS. En nativo: 48 */
   --row-height:     36px;  /* fila de tabla y de lista en escritorio */
   --control-height: 36px;  /* botón, input y select por defecto */
+
+  /* ─────────────────────────────────────
+     La capa de pantalla — la densidad con la que se dibuja la composición
+
+     Las clases de composition.css (.screen-anchor, .screen-group, .screen-row…)
+     son el PATRÓN y valen igual en una pantalla de producto y en una app. Estos
+     ocho tokens son la DENSIDAD, y por eso son lo único que cambia entre las dos
+     — acá los valores de escritorio; [data-platform="native"] los sube.
+
+     Un proyecto los redeclara en su capa de marca y sigue teniendo exactamente
+     las mismas reglas. Lo que no se ajusta desde acá: --target-min (es
+     accesibilidad) y el peso de la fila (es la falla M13).
+     Ver COMPOSICION.md Parte III·d y MOBILE.md §6e.
+  ───────────────────────────────────── */
+  --screen-block-gap:      24px;  /* entre bloques: secciones, grupos, paneles   */
+  --screen-block-padding:  20px;  /* adentro de un bloque de encabezado          */
+  --screen-group-padding:  16px;  /* adentro de un grupo: el inset del divisor   */
+  --screen-row-height:     44px;  /* fila de etiqueta/dato                       */
+  --screen-item-height:    56px;  /* fila con ícono guía                         */
+  --screen-item-icon:      32px;  /* el contenedor del ícono guía                */
+  --screen-item-gap:       12px;  /* entre el ícono y el texto                   */
+  --screen-radius:  var(--radius-lg);  /* el radio del ancla y de los grupos     */
 
   /* ─────────────────────────────────────
      Iconografía — grosor de trazo
@@ -673,7 +705,7 @@
   --color-info-container:            var(--info-50);             /* #E9EBFD */
   --color-on-info-container:         var(--info-900);            /* #001ABA */
   /* Surfaces — literal hex para neutrals hijackeados por el doc shell */
-  --color-surface:                   #FAFBFC;                    /* neutral-10 */
+  --color-surface:                   #F3F4F6;                    /* neutral-30 */
   --color-surface-dim:               #EAEBED;                    /* neutral-50 */
   --color-surface-bright:            #FFFFFF;                    /* neutral-white */
   --color-surface-container-lowest:  #FAFBFC;                    /* neutral-10 */
@@ -683,7 +715,7 @@
   --color-surface-container-highest: #BFC1C8;                    /* neutral-100 */
   --color-surface-variant:           #EAEBED;                    /* neutral-50 */
   --color-on-surface:                #0A0C12;                    /* neutral-900 */
-  --color-on-surface-variant:        #474D61;                    /* neutral-400 */
+  --color-on-surface-variant:        #63687A;                    /* neutral-350 */
   /* Outline — literal hex */
   --color-outline:                   #9FA3AE;                    /* neutral-200 */
   --color-outline-variant:           #BFC1C8;                    /* neutral-100 */
@@ -700,7 +732,7 @@
   /* Aliases */
   --text-primary:   var(--primary-900);                          /* #01164D */
   --text-secondary: #353A4A;                                     /* neutral-500 */
-  --text-muted:     #474D61;                                     /* neutral-400 — 8.39:1 sobre card-bg */
+  --text-muted:     #63687A;                                     /* neutral-350 — 5.54:1 sobre card-bg */
   --interactive-hover: var(--primary-500);                       /* #253E82 */
   /* Elevated Button — restore light (navy) elevation inside a light-scoped island */
   --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);
@@ -769,4 +801,40 @@
      Por eso el token se llama distinto que el --column-gutter de composition.css:
      no es el mismo concepto y no queremos que alguien los cruce. */
   --screen-gutter:   20px;
+
+  /* ─────────────────────────────────────
+     Forma del botón
+
+     `--radius-button` es el único token de forma que el sistema deja declarar para
+     mover todos los botones de una (GOVERNANCE §4.3); en :root queda sin declarar a
+     propósito para que cada tamaño use el de su escala. Acá sí se declara: en un
+     teléfono el botón primario es de ancho completo, y a 8px de radio contra grupos
+     de 16 se lee como un botón de escritorio pegado en una app. 12 lo deja un escalón
+     por dentro de su contenedor, que es como se ven los botones de una app.
+     Un tema de marca con forma píldora sigue ganando: carga después. */
+  --radius-button:   var(--radius-lg);
+
+  /* ─────────────────────────────────────
+     La capa de pantalla — lo que un proyecto SÍ puede mover
+
+     Las convenciones de MOBILE.md §6b son el patrón y no se negocian: el dato
+     pesa más que su etiqueta, el grupo va en tarjeta, el header afuera, el
+     divisor insetado. Pero la DENSIDAD con la que ese patrón se dibuja es una
+     decisión de cada app —una de consumo respira más que una de back-office— y
+     hasta acá estaba escrita a mano adentro del CSS, así que ajustarla obligaba
+     a abandonar el patrón.
+
+     Estos ocho tokens son la superficie de ajuste. Un proyecto los redeclara en
+     su capa de marca y sigue teniendo exactamente las mismas reglas.
+     Lo que NO se mueve desde acá: --target-min (es accesibilidad, no densidad)
+     y el peso de la fila (es la falla M13). Ver MOBILE.md §6e.
+  ───────────────────────────────────── */
+  --screen-block-gap:      20px;  /* entre bloques: ancla, secciones, grupos      */
+  --screen-block-padding:  18px;  /* adentro del ancla                            */
+  --screen-group-padding:  16px;  /* adentro de un grupo: el inset del divisor    */
+  --screen-row-height:     52px;  /* fila de etiqueta/dato — piso --target-min    */
+  --screen-item-height:    60px;  /* fila con ícono guía                          */
+  --screen-item-icon:      36px;  /* el contenedor del ícono guía                 */
+  --screen-item-gap:       13px;  /* entre el ícono y el texto                    */
+  --screen-radius:  var(--radius-xl);  /* el radio del ancla y de los grupos      */
 }

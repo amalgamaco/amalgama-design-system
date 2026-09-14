@@ -453,3 +453,114 @@ garantizan que se vea bien; esto es lo que hace que se vea nuestra.
 
 Después, la pregunta de `design.md` §8: *¿qué superficie, borde, píldora, ícono, label, color,
 párrafo o sección se puede sacar sin perder significado?* Sacala.
+
+---
+
+# Parte III — La pantalla de producto
+
+Las reglas de la Parte II son de **página**. Una pantalla de producto —un listado, un tablero, el
+detalle de un registro— no abre: **continúa**. El §Alcance ya dice qué reglas de página no le
+aplican; lo que sigue es lo otro, que hasta ahora no estaba escrito: **qué anatomía sí tiene.**
+
+Es el mismo hueco que tenía `MOBILE.md` §6 hasta esta semana, y por la misma razón: el sistema
+describía la pantalla de producto por resta —sin registro editorial, sin índice de sección— y
+describir por resta no alcanza para construir. Esta parte y `MOBILE.md` §6b son deliberadamente
+la misma estructura: **estructura → anatomía → escala con pesos → contraejemplos.** Una pantalla
+de producto y una pantalla nativa son la misma pantalla en dos densidades, no dos sistemas.
+
+## III·a — Las ocho convenciones
+
+**1 · La jerarquía la hace la superficie, no la línea**
+La pantalla es `--color-surface`; los paneles, tarjetas y tablas van en
+`--color-surface-container`. Ese escalón es lo que agrupa. Una banda separada con `.rule` o con un
+borde suelto, adentro del shell, dibuja dos veces el mismo límite: el shell ya encuadra. `.rule`
+sigue siendo de página.
+
+**2 · La pantalla abre con `page-header`, no con un titular**
+Título en `--font-size-heading-lg` a 600, y **una** acción primaria a la derecha. Sin registro
+editorial (`H9`), sin overline de apertura, sin índice de sección. Si hace falta contexto, va en
+`breadcrumb` arriba, no en un subtítulo grande.
+
+**3 · Los filtros viven en un `toolbar`, en una sola fila**
+Búsqueda, filtros y conteo de resultados juntos y arriba del contenedor — nunca flotando entre
+bandas (`D4`). El conteo lleva `aria-live` (`F4`): es la única forma de que alguien sepa que el
+filtro hizo algo. En mobile ese toolbar se vuelve un botón «Filtros» que abre un `sheet`.
+
+**4 · El contenedor se elige por grano, no por costumbre**
+Comparar valores → `table`. Leer ítems → `list`. Reconocer entidades → grilla de tarjetas.
+Elegir `table` porque «es lo que se usa» para tres campos de texto es tan falla como meter
+siete columnas en una tarjeta.
+
+**5 · La fila de tabla tiene anatomía**
+Alto `--row-height`. Números a la derecha y con `tabular-nums` — una columna de importes que no
+alinea la coma no se puede comparar, que es para lo que existe la tabla. El estado va en `badge`,
+**nunca** como color de texto (`F6`). La acción de fila va última, en `dropdown-menu`, no como
+tres botones repetidos en cada fila.
+
+**6 · El dato pesa más que su etiqueta**
+Igual que en nativo (`M13`), y por la misma razón. En un `stat-card` la cifra es `display` a 700 y
+su rótulo `caption`: si se invierte, el tablero grita los nombres de las métricas. En una lista de
+pares —un panel de detalle— el dato va a 600 y la etiqueta apagada al mismo cuerpo.
+
+**7 · Una sola acción primaria, y vive en el header**
+Todo lo demás baja por la escalera: elevado → secundario → terciario → texto → ícono. Dos
+`btn-primary` en una pantalla es una falla de jerarquía, no una pantalla con dos cosas importantes.
+
+**8 · El ancho se acota aunque haya shell**
+El área de contenido no hereda el ancho de la ventana: el texto corrido lleva `.measure` y las
+regiones se alinean a una columna (`D1`, `D3`). Un párrafo de 200 caracteres adentro del shell es
+igual de ilegible que en una landing.
+
+## III·b — El bloque de decisión
+
+Paralelo al de página (§0) y al de pantalla nativa (`MOBILE.md` §6c). Cinco líneas antes del markup.
+
+```
+ARQUETIPO   <list-collection | dashboard-overview | entity-detail | create-edit-form |
+            multi-step-wizard | settings-preferences | pipeline-board | search-results |
+            auth-entry | feed-activity | onboarding-first-run | confirmation-destructive>
+SUPERFICIE  pantalla: surface        paneles: surface-container     ← el escalón, no la línea
+APERTURA    page-header: <título>    primaria: <una sola, a la derecha>
+CONTENEDOR  <table | list | card-grid>   ← por grano: comparar, leer o reconocer
+ESTADOS     vacío inicial · sin resultados · cargando · error · sin permiso
+```
+
+El arquetipo trae su esqueleto de información, su receta de componentes y sus estados
+obligatorios. No se elige mirando otra pantalla: se elige por el objetivo.
+
+> **Los doce arquetipos están en `guidelines/screen-patterns.md`**, con su esqueleto de
+> información, su receta de componentes, sus estados obligatorios, su transformación a mobile y
+> sus anti-patrones. El arquetipo dice **qué** va en la pantalla; esta parte dice **cómo se
+> dibuja**. Son complementarios y se leen en ese orden.
+
+## III·c — La escala, rol por rol
+
+**Estos valores ya están en el CSS de cada componente; lo que faltaba era el mapa.** Como la regla
+del sistema es no leer el stylesheet, nadie podía saberlos sin romperla.
+
+| Dónde | Token | Peso |
+|---|---|---|
+| Título de pantalla (`page-header`) | `--font-size-heading-lg` | 600 |
+| Encabezado de sección | `--font-size-heading-md` | 600 |
+| Encabezado de columna (`table`) | `--font-size-overline` | 600 |
+| Celda de tabla | `--font-size-body-md` | 400 |
+| Celda secundaria | `--font-size-body-sm` | 400 |
+| Cifra de `stat-card` | `--font-size-display` | **700** |
+| Rótulo de `stat-card` | `--font-size-caption` | 400 |
+| Etiqueta de un par | `--font-size-body-md` | 400 · apagado |
+| **Dato de un par** | `--font-size-body-md` | **600** |
+| Texto de `toolbar` | `--font-size-body-md` | 500 |
+| Botón | `--font-size-body-md` | 600 |
+
+## III·d — Qué puede ajustar cada proyecto
+
+La densidad de una pantalla de producto ya es ajustable y no hizo falta inventar nada:
+`--row-height` y `--control-height` son tokens desde el principio, y un producto denso los baja
+igual que una app de consumo los sube.
+
+**Lo que no se mueve:** el orden dato/etiqueta (`M13` vale igual acá), la acción primaria única, el
+conteo con `aria-live`, el estado en `badge`, y `--target-min`, que es accesibilidad y no densidad.
+
+Y los ocho tokens `--screen-*` de la capa de pantalla valen igual: son la densidad con la que se
+dibuja la misma composición. Acá están los valores de escritorio; `MOBILE.md` §6e tiene los de
+app y la lista completa de qué se ajusta y qué no.

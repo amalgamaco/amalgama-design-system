@@ -10,10 +10,12 @@ class EmbassyColors {
 
   // ── light ──
   static const neutral10 = Color(0xFFFAFBFC);
+  static const neutral30 = Color(0xFFF3F4F6);
   static const neutral50 = Color(0xFFEAEBED);
   static const neutral100 = Color(0xFFBFC1C8);
   static const neutral200 = Color(0xFF9FA3AE);
   static const neutral300 = Color(0xFF747989);
+  static const neutral350 = Color(0xFF63687A);
   static const neutral400 = Color(0xFF474D61);
   static const neutral500 = Color(0xFF353A4A);
   static const neutral600 = Color(0xFF282C39);
@@ -130,7 +132,7 @@ class EmbassyColors {
   static const colorOnInfo = Color(0xFFFFFFFF);
   static const colorInfoContainer = Color(0xFFE9EBFD);
   static const colorOnInfoContainer = Color(0xFF001ABA);
-  static const colorSurface = Color(0xFFFAFBFC);
+  static const colorSurface = Color(0xFFF3F4F6);
   static const colorSurfaceDim = Color(0xFFEAEBED);
   static const colorSurfaceBright = Color(0xFFFFFFFF);
   static const colorSurfaceContainerLowest = Color(0xFFFAFBFC);
@@ -140,7 +142,7 @@ class EmbassyColors {
   static const colorSurfaceContainerHighest = Color(0xFFBFC1C8);
   static const colorSurfaceVariant = Color(0xFFEAEBED);
   static const colorOnSurface = Color(0xFF0A0C12);
-  static const colorOnSurfaceVariant = Color(0xFF474D61);
+  static const colorOnSurfaceVariant = Color(0xFF63687A);
   static const colorOutline = Color(0xFF9FA3AE);
   static const colorOutlineVariant = Color(0xFFBFC1C8);
   static const colorInverseSurface = Color(0xFF0A0C12);
@@ -156,7 +158,7 @@ class EmbassyColors {
   static const buttonSecondaryFg = Color(0xFF0A0C12);
   static const buttonSecondaryBorder = Color(0xFF747989);
   static const buttonSecondaryBgHover = Color(0xFFBFC1C8);
-  static const bg = Color(0xFFFAFBFC);
+  static const bg = Color(0xFFF3F4F6);
   static const surface = Color(0xFFEAEBED);
   static const sidebarBg = Color(0xFFFFFFFF);
   static const cardBg = Color(0xFFFFFFFF);
@@ -164,7 +166,7 @@ class EmbassyColors {
   static const divider = Color(0x1A0A0C12);
   static const textPrimary = Color(0xFF01164D);
   static const textSecondary = Color(0xFF353A4A);
-  static const textMuted = Color(0xFF474D61);
+  static const textMuted = Color(0xFF63687A);
   static const colorSuccessText = Color(0xFF006D2C);
   static const colorErrorText = Color(0xFFBF0B29);
   static const colorWarningText = Color(0xFFC43800);
@@ -194,10 +196,12 @@ class EmbassyColors {
 
   // ── dark ──
   static const neutral10Dark = Color(0xFFFAFBFC);
+  static const neutral30Dark = Color(0xFFF3F4F6);
   static const neutral50Dark = Color(0xFFEAEBED);
   static const neutral100Dark = Color(0xFFBFC1C8);
   static const neutral200Dark = Color(0xFF9FA3AE);
   static const neutral300Dark = Color(0xFF747989);
+  static const neutral350Dark = Color(0xFF63687A);
   static const neutral400Dark = Color(0xFF474D61);
   static const neutral500Dark = Color(0xFF353A4A);
   static const neutral600Dark = Color(0xFF282C39);
@@ -340,7 +344,7 @@ class EmbassyColors {
   static const buttonSecondaryFgDark = Color(0xFF0A0C12);
   static const buttonSecondaryBorderDark = Color(0xFF747989);
   static const buttonSecondaryBgHoverDark = Color(0xFFBFC1C8);
-  static const bgDark = Color(0xFFFAFBFC);
+  static const bgDark = Color(0xFFF3F4F6);
   static const surfaceDark = Color(0xFFEAEBED);
   static const sidebarBgDark = Color(0xFFFFFFFF);
   static const cardBgDark = Color(0xFFFFFFFF);
@@ -458,6 +462,7 @@ class EmbassyDims {
   static const radiusXl = 16.0;
   static const radiusFull = 9999.0;
   static const screenGutter = 20.0;
+  static const radiusButton = 12.0;
 
   // ── native ──
   static const space05Native = 2.0;
@@ -534,6 +539,7 @@ class EmbassyDims {
   static const radiusXlNative = 16.0;
   static const radiusFullNative = 9999.0;
   static const screenGutterNative = 20.0;
+  static const radiusButtonNative = 12.0;
 
 }
 

@@ -2,72 +2,82 @@
   "$schema": "https://design-tokens.org/community-group/format/",
   "$description": "Generado por scripts/build-tokens.mjs desde css/variables.css. NO editar a mano: se regenera y se pisa. Cambiá el CSS.",
   "source": "css/variables.css",
-  "generated": "2026-09-11",
+  "generated": "2026-09-14",
   "tokens": {
     "--neutral-10": {
       "$type": "color",
       "$value": "#FAFBFC",
       "section": "Neutral palette"
     },
+    "--neutral-30": {
+      "$type": "color",
+      "$value": "#F3F4F6",
+      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
+    },
     "--neutral-50": {
       "$type": "color",
       "$value": "#EAEBED",
-      "section": "Neutral palette"
+      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
     },
     "--neutral-100": {
       "$type": "color",
       "$value": "#BFC1C8",
-      "section": "Neutral palette"
+      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
     },
     "--neutral-200": {
       "$type": "color",
       "$value": "#9FA3AE",
-      "section": "Neutral palette"
+      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
     },
     "--neutral-300": {
       "$type": "color",
       "$value": "#747989",
-      "section": "Neutral palette"
+      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
+    },
+    "--neutral-350": {
+      "$type": "color",
+      "$value": "#63687A",
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
     "--neutral-400": {
       "$type": "color",
       "$value": "#474D61",
-      "section": "Neutral palette"
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
     "--neutral-500": {
       "$type": "color",
       "$value": "#353A4A",
-      "section": "Neutral palette"
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
     "--neutral-600": {
       "$type": "color",
       "$value": "#282C39",
-      "section": "Neutral palette"
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
     "--neutral-700": {
       "$type": "color",
       "$value": "#1C202C",
-      "section": "Neutral palette"
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
     "--neutral-800": {
       "$type": "color",
       "$value": "#13161F",
-      "section": "Neutral palette"
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
     "--neutral-900": {
       "$type": "color",
       "$value": "#0A0C12",
-      "section": "Neutral palette"
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
     "--neutral-black": {
       "$type": "color",
       "$value": "#000000",
-      "section": "Neutral palette"
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
     "--neutral-white": {
       "$type": "color",
       "$value": "#FFFFFF",
-      "section": "Neutral palette"
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
     "--primary-50": {
       "$type": "color",
@@ -679,10 +689,10 @@
     },
     "--color-surface": {
       "$type": "color",
-      "$value": "#FAFBFC",
+      "$value": "#F3F4F6",
       "section": "Background & Surface",
       "$dark": "#13161F",
-      "$alias": "--neutral-10"
+      "$alias": "--neutral-30"
     },
     "--color-surface-dim": {
       "$type": "color",
@@ -749,11 +759,11 @@
     },
     "--color-on-surface-variant": {
       "$type": "color",
-      "$value": "#474D61",
+      "$value": "#63687A",
       "section": "Background & Surface",
-      "$description": "texto secundario medio (#474D61) — antes neutral-700, demasiado oscuro",
+      "$description": "texto de énfasis medio (#63687A) — antes neutral-400, que a 8.39:1 no se leía como apagado",
       "$dark": "#BFC1C8",
-      "$alias": "--neutral-400"
+      "$alias": "--neutral-350"
     },
     "--color-outline": {
       "$type": "color",
@@ -852,7 +862,7 @@
     },
     "--bg": {
       "$type": "color",
-      "$value": "#FAFBFC",
+      "$value": "#F3F4F6",
       "section": "Semantic aliases",
       "$alias": "--color-surface"
     },
@@ -901,7 +911,7 @@
     },
     "--text-muted": {
       "$type": "color",
-      "$value": "#474D61",
+      "$value": "#63687A",
       "section": "Tipografía de página (decisión de diseño, jun 2026): el texto principal —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro neutral-900. Igual que el sitio de docs. En dark se recalibra a neutral-50 (override abajo).  color-on-surface queda para contenido interno de componentes (labels de chips, botones, celdas).",
       "$description": "NO --color-on-disabled: pinta texto activo, y ahí el mínimo AA sí rige",
       "$dark": "#9FA3AE",
@@ -1144,6 +1154,62 @@
       "section": "Densidad y superficie táctil  Los 44px de target vivían sueltos dentro de media queries en components.css, así que no existían como decisión: eran un parche por archivo. Acá son un token, y en [data-platform=\"native\"] suben a 48.  target-min es un PISO: un control puede ser más alto, nunca más bajo.",
       "$description": "botón, input y select por defecto",
       "$platformNative": "48px"
+    },
+    "--screen-block-gap": {
+      "$type": "other",
+      "$value": "24px",
+      "section": "La capa de pantalla — la densidad con la que se dibuja la composición  Las clases de composition.css (.screen-anchor, .screen-group, .screen-row…) son el PATRÓN y valen igual en una pantalla de producto y en una app. Estos ocho tokens son la DENSIDAD, y por eso son lo único que cambia entre las dos — acá los valores de escritorio; [data-platform=\"native\"] los sube.  Un proyecto los redeclara en su capa de marca y sigue teniendo exactamente las mismas reglas. Lo que no se ajusta desde acá:  target-min (es accesibilidad) y el peso de la fila (es la falla M13). Ver COMPOSICION.md Parte III·d y MOBILE.md §6e.",
+      "$description": "entre bloques: secciones, grupos, paneles",
+      "$platformNative": "20px"
+    },
+    "--screen-block-padding": {
+      "$type": "other",
+      "$value": "20px",
+      "section": "La capa de pantalla — la densidad con la que se dibuja la composición  Las clases de composition.css (.screen-anchor, .screen-group, .screen-row…) son el PATRÓN y valen igual en una pantalla de producto y en una app. Estos ocho tokens son la DENSIDAD, y por eso son lo único que cambia entre las dos — acá los valores de escritorio; [data-platform=\"native\"] los sube.  Un proyecto los redeclara en su capa de marca y sigue teniendo exactamente las mismas reglas. Lo que no se ajusta desde acá:  target-min (es accesibilidad) y el peso de la fila (es la falla M13). Ver COMPOSICION.md Parte III·d y MOBILE.md §6e.",
+      "$description": "adentro de un bloque de encabezado",
+      "$platformNative": "18px"
+    },
+    "--screen-group-padding": {
+      "$type": "other",
+      "$value": "16px",
+      "section": "La capa de pantalla — la densidad con la que se dibuja la composición  Las clases de composition.css (.screen-anchor, .screen-group, .screen-row…) son el PATRÓN y valen igual en una pantalla de producto y en una app. Estos ocho tokens son la DENSIDAD, y por eso son lo único que cambia entre las dos — acá los valores de escritorio; [data-platform=\"native\"] los sube.  Un proyecto los redeclara en su capa de marca y sigue teniendo exactamente las mismas reglas. Lo que no se ajusta desde acá:  target-min (es accesibilidad) y el peso de la fila (es la falla M13). Ver COMPOSICION.md Parte III·d y MOBILE.md §6e.",
+      "$description": "adentro de un grupo: el inset del divisor"
+    },
+    "--screen-row-height": {
+      "$type": "other",
+      "$value": "44px",
+      "section": "La capa de pantalla — la densidad con la que se dibuja la composición  Las clases de composition.css (.screen-anchor, .screen-group, .screen-row…) son el PATRÓN y valen igual en una pantalla de producto y en una app. Estos ocho tokens son la DENSIDAD, y por eso son lo único que cambia entre las dos — acá los valores de escritorio; [data-platform=\"native\"] los sube.  Un proyecto los redeclara en su capa de marca y sigue teniendo exactamente las mismas reglas. Lo que no se ajusta desde acá:  target-min (es accesibilidad) y el peso de la fila (es la falla M13). Ver COMPOSICION.md Parte III·d y MOBILE.md §6e.",
+      "$description": "fila de etiqueta/dato",
+      "$platformNative": "52px"
+    },
+    "--screen-item-height": {
+      "$type": "other",
+      "$value": "56px",
+      "section": "La capa de pantalla — la densidad con la que se dibuja la composición  Las clases de composition.css (.screen-anchor, .screen-group, .screen-row…) son el PATRÓN y valen igual en una pantalla de producto y en una app. Estos ocho tokens son la DENSIDAD, y por eso son lo único que cambia entre las dos — acá los valores de escritorio; [data-platform=\"native\"] los sube.  Un proyecto los redeclara en su capa de marca y sigue teniendo exactamente las mismas reglas. Lo que no se ajusta desde acá:  target-min (es accesibilidad) y el peso de la fila (es la falla M13). Ver COMPOSICION.md Parte III·d y MOBILE.md §6e.",
+      "$description": "fila con ícono guía",
+      "$platformNative": "60px"
+    },
+    "--screen-item-icon": {
+      "$type": "other",
+      "$value": "32px",
+      "section": "La capa de pantalla — la densidad con la que se dibuja la composición  Las clases de composition.css (.screen-anchor, .screen-group, .screen-row…) son el PATRÓN y valen igual en una pantalla de producto y en una app. Estos ocho tokens son la DENSIDAD, y por eso son lo único que cambia entre las dos — acá los valores de escritorio; [data-platform=\"native\"] los sube.  Un proyecto los redeclara en su capa de marca y sigue teniendo exactamente las mismas reglas. Lo que no se ajusta desde acá:  target-min (es accesibilidad) y el peso de la fila (es la falla M13). Ver COMPOSICION.md Parte III·d y MOBILE.md §6e.",
+      "$description": "el contenedor del ícono guía",
+      "$platformNative": "36px"
+    },
+    "--screen-item-gap": {
+      "$type": "other",
+      "$value": "12px",
+      "section": "La capa de pantalla — la densidad con la que se dibuja la composición  Las clases de composition.css (.screen-anchor, .screen-group, .screen-row…) son el PATRÓN y valen igual en una pantalla de producto y en una app. Estos ocho tokens son la DENSIDAD, y por eso son lo único que cambia entre las dos — acá los valores de escritorio; [data-platform=\"native\"] los sube.  Un proyecto los redeclara en su capa de marca y sigue teniendo exactamente las mismas reglas. Lo que no se ajusta desde acá:  target-min (es accesibilidad) y el peso de la fila (es la falla M13). Ver COMPOSICION.md Parte III·d y MOBILE.md §6e.",
+      "$description": "entre el ícono y el texto",
+      "$platformNative": "13px"
+    },
+    "--screen-radius": {
+      "$type": "other",
+      "$value": "12px",
+      "section": "La capa de pantalla — la densidad con la que se dibuja la composición  Las clases de composition.css (.screen-anchor, .screen-group, .screen-row…) son el PATRÓN y valen igual en una pantalla de producto y en una app. Estos ocho tokens son la DENSIDAD, y por eso son lo único que cambia entre las dos — acá los valores de escritorio; [data-platform=\"native\"] los sube.  Un proyecto los redeclara en su capa de marca y sigue teniendo exactamente las mismas reglas. Lo que no se ajusta desde acá:  target-min (es accesibilidad) y el peso de la fila (es la falla M13). Ver COMPOSICION.md Parte III·d y MOBILE.md §6e.",
+      "$description": "el radio del ancla y de los grupos",
+      "$platformNative": "16px",
+      "$alias": "--radius-lg"
     },
     "--icon-stroke": {
       "$type": "other",
@@ -1823,6 +1889,13 @@
       "$value": "20px",
       "$platformNative": "20px",
       "section": "En nativo no hay columna: hay pantalla. El gutter no es fluido —no hay vw que valga en un teléfono— y no existe max-width que acote nada. Por eso el token se llama distinto que el  column-gutter de composition.css: no es el mismo concepto y no queremos que alguien los cruce.",
+      "$onlyNative": true
+    },
+    "--radius-button": {
+      "$type": "dimension",
+      "$value": "12px",
+      "$platformNative": "12px",
+      "section": "Forma del botón  ` radius-button` es el único token de forma que el sistema deja declarar para mover todos los botones de una (GOVERNANCE §4.3); en :root queda sin declarar a propósito para que cada tamaño use el de su escala. Acá sí se declara: en un teléfono el botón primario es de ancho completo, y a 8px de radio contra grupos de 16 se lee como un botón de escritorio pegado en una app. 12 lo deja un escalón por dentro de su contenedor, que es como se ven los botones de una app. Un tema de marca con forma píldora sigue ganando: carga después.",
       "$onlyNative": true
     }
   }

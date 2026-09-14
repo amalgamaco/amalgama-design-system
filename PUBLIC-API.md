@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-66 componentes · **576 clases públicas** de 678 selectores totales en el CSS.
+66 componentes · **600 clases públicas** de 702 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -107,7 +107,7 @@ La estructura de la página: columna, borde a borde, riel o dividida; la medida 
 **Cuándo usar:** SIEMPRE. Toda página que publicamos, con app shell o sin él. Define la estructura (columna, borde a borde, riel, dividida), la medida de línea, el ritmo entre secciones, el overline y el índice de sección. Es la contraparte construida de COMPOSICION.md: ese archivo dice qué forma tiene una página nuestra, éste la hace.
 **Cuándo no:** nunca se saltea. Una landing no carga layout.css (no tiene shell) pero sí carga esto — es justamente donde más falta hace.
 
-Clases públicas: `.column` · `.column-1280` · `.column-1440` · `.column-1600` · `.column-1920` · `.column-bleed` · `.column-form` · `.column-rail` · `.column-read` · `.column-split` · `.editorial-lg` · `.editorial-md` · `.editorial-sm` · `.figure` · `.figure-base` · `.figure-unit` · `.figure-value` · `.gradient-brand` · `.gradient-glow` · `.gradient-surface` · `.grid-12` · `.measure` · `.measure-lead` · `.media` · `.media-caption` · `.overline` · `.reveal` · `.rule` · `.section` · `.section-index` · `.section-lead` · `.section-tight` · `.sep` · `.span-1` · `.span-10` · `.span-11` · `.span-12` · `.span-2` · `.span-3` · `.span-4` · `.span-5` · `.span-6` · `.span-7` · `.span-8` · `.span-9` · `.text-gradient`
+Clases públicas: `.column` · `.column-1280` · `.column-1440` · `.column-1600` · `.column-1920` · `.column-bleed` · `.column-form` · `.column-rail` · `.column-read` · `.column-split` · `.editorial-lg` · `.editorial-md` · `.editorial-sm` · `.figure` · `.figure-base` · `.figure-unit` · `.figure-value` · `.gradient-brand` · `.gradient-glow` · `.gradient-surface` · `.grid-12` · `.measure` · `.measure-lead` · `.media` · `.media-caption` · `.overline` · `.reveal` · `.rule` · `.screen` · `.screen-action` · `.screen-anchor` · `.screen-anchor-aside` · `.screen-anchor-figure` · `.screen-anchor-id` · `.screen-anchor-meta` · `.screen-anchor-name` · `.screen-anchor-row` · `.screen-anchor-top` · `.screen-group` · `.screen-inline-action` · `.screen-item` · `.screen-item-aside` · `.screen-item-body` · `.screen-item-figure` · `.screen-item-icon` · `.screen-item-sub` · `.screen-item-title` · `.screen-row` · `.screen-row-label` · `.screen-row-value` · `.screen-section` · `.screen-section-header` · `.section` · `.section-index` · `.section-lead` · `.section-tight` · `.sep` · `.span-1` · `.span-10` · `.span-11` · `.span-12` · `.span-2` · `.span-3` · `.span-4` · `.span-5` · `.span-6` · `.span-7` · `.span-8` · `.span-9` · `.text-gradient`
 
 ```html
 <div class="column">…</div>                      <!-- default: una columna de 1200 -->

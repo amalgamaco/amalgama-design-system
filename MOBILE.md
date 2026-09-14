@@ -372,21 +372,187 @@ código— y `screen` al lado del `.tsx` cuando el proyecto existe.
 
 ---
 
-## 6. Composición en un teléfono
+## 6. Composición de una pantalla
 
-Casi todo `COMPOSICION.md` sigue valiendo. Lo que cambia:
+Esta sección existe porque durante mucho tiempo dijo solamente lo que NO cruza de la web, y
+eso alcanzaba para evitar una grilla de 12 en un teléfono pero no para que la pantalla se
+pareciera a una app. Se escribió comparando la misma pantalla en tres versiones: la que salía
+del sistema, una hecha con convenciones de app sin ninguna restricción, y esa misma estructura
+con nuestros tokens. La tercera y la segunda se parecen; la primera no se parecía a ninguna.
+Lo que sigue es lo que la segunda tenía y el sistema no nombraba.
 
-- **No hay grilla de 12.** `.grid-12` es web. En nativo es una columna, y la jerarquía la hace el
-  ritmo vertical y el peso tipográfico, no las columnas.
+### 6a. Lo que no cruza de la web
+
+- **No hay grilla de 12.** `.grid-12` es web. En nativo es una columna, y la jerarquía la hace
+  el ritmo vertical y el peso tipográfico, no las columnas.
 - **No hay `max-width`.** El ancho es el de la pantalla menos `--screen-gutter` de cada lado.
 - **La medida de línea no se mide en `ch`.** El gutter ya la acota; si un texto largo igual queda
   incómodo, se acorta el texto, no se agrega un `maxWidth` arbitrario.
-- **Una sola apertura editorial por pantalla**, igual que en web (`H9`). En un teléfono se nota más.
-- **Un overline por pantalla** (`H7`). Sigue siendo un clasificador, no textura.
-- **El índice de sección sigue siendo nuestro gesto** y es lo más barato de conservar: es mono,
-  chico y no depende del ancho.
 - **Sin reveal al scrollear** (`H11`). En nativo es peor: cuesta frames.
 - **La capa espacial sigue siendo solo de Amalgama** (`H12`). Una app de cliente no lleva planetas.
+
+### 6b. Cómo se compone una pantalla de app
+
+Ocho convenciones. No son estéticas —no dependen de la paleta ni de si el botón lo pinta
+Material, gluestack o nuestro CSS— son la gramática de una pantalla de app, y cada una tiene
+falla con nombre.
+
+**1 · La jerarquía la hace la superficie, no la línea** (`M10`)
+El fondo de la pantalla es `--color-surface`; cada bloque de contenido va en
+`--color-surface-container` con `--radius-xl` y un borde de 1px en `--color-outline-variant`.
+Un `<hr>` separando secciones es un reflejo de web: acá el escalón de superficie hace ese
+trabajo y lo hace mejor, porque además agrupa.
+
+**2 · Lo que es una lista va en una lista agrupada** (`M11`)
+Un conjunto de pares etiqueta/dato va DENTRO de una tarjeta, no suelto sobre el fondo. Los
+divisores van sólo ENTRE filas —nunca antes de la primera ni después de la última— y arrancan
+donde arranca el texto: `margin-left` igual al padding de la tarjeta, no a sangre. Un divisor a
+sangre corta la tarjeta en dos; uno insetado la lee como una lista.
+
+**3 · El header de sección va afuera del grupo** (`M12`)
+`--font-size-caption`, peso 600, `--text-muted`, 8px de aire abajo, alineado al borde del grupo.
+No es un `heading-md` adentro de la tarjeta: adentro compite con los datos y gana la etiqueta,
+que es justamente lo que no queremos. Si la sección tiene una acción de escape ("Ver todas"),
+va en esa misma línea, a la derecha.
+
+**4 · La fila tiene anatomía, y el dato pesa más que su etiqueta** (`M13`)
+Alto mínimo 52 —`--row-height` es el piso de 48, una fila de lista respira un poco más—. De
+izquierda a derecha: ícono guía opcional, la etiqueta, y el dato a la derecha.
+
+**Los dos van al mismo tamaño —`--font-size-label`, 15— y los separa el peso, no el cuerpo:**
+etiqueta en 400 sobre `--text-muted`, dato en **600** sobre `--text-primary`. Es importante que
+sea así y no con dos tamaños distintos: el color solo no alcanza. Medido, la distancia entre
+`--text-muted` y `--text-primary` es 3.10:1, y aclarar el gris hasta el techo de AA sobre el fondo
+solo la lleva a 3.29 — el salto que falta lo da el peso. Dos tamaños distintos en la misma fila,
+en cambio, desalinean la línea base y la lista deja de leerse como tabla.
+
+**La inversión de este orden es la falla más frecuente que produce el sistema**: una pantalla
+que grita los nombres de los campos y susurra los valores. Quien mira vino a leer el dato.
+
+**4b · La escala de una pantalla, rol por rol**
+
+Todo sale de la escala nativa de §2; acá está qué rol usa cada cosa y con qué peso, que es lo
+que no estaba escrito. Los pesos importan tanto como los tamaños.
+
+| Dónde | Token | Peso | Color |
+|---|---|---|---|
+| Título de la barra | `--font-size-heading-sm` · 17 | 600 | `--text-primary` |
+| Nombre en el ancla | `--font-size-heading-lg` · 22 | 600 | `--color-on-primary` |
+| Meta bajo el nombre | `--font-size-caption` · 13 | 400 | apagado sobre el ancla |
+| Pill de estado | `--font-size-caption` · 13 | 600 | el container que corresponda |
+| Número principal | `--font-size-heading-xl` · 24 | 700 | `--color-on-primary` |
+| Su unidad | `--font-size-label` · 15 | 500 | apagado |
+| Monto en una tarjeta | `--font-size-heading-md` · 20 | 700 | `--text-primary` |
+| Header de sección | `--font-size-caption` · 13 | 600 | `--text-muted` |
+| **Etiqueta de fila** | `--font-size-label` · 15 | **400** | `--text-muted` |
+| **Dato de fila** | `--font-size-label` · 15 | **600** | `--text-primary` |
+| Acción secundaria en línea («Ver», «Ver todas») | `--font-size-caption` · 13 | 600 | `--text-primary` |
+| Botón primario | `--font-size-body-md` · 16 | 600 | `--color-on-primary` |
+
+El botón primario va a `--control-height` (48) y a `--radius-button`, que en nativo el bloque
+`[data-platform="native"]` declara en `--radius-lg` (12): a 8 se lee como un botón de escritorio
+pegado adentro de una app, y a 12 queda un escalón por dentro de los grupos de 16.
+
+**La acción secundaria en línea es una píldora chica, y no se dibuja a 48.** Va al mismo cuerpo
+que la pill de estado —caption, 13— porque son la misma clase visual: dos píldoras en la misma
+pantalla a dos tamaños distintos se leen como un error. Se dibuja a **36** de alto y **llega a 48
+por superficie táctil**, con el patrón de §3: `hitSlop` en React Native, `::after` en el preview,
+`materialTapTargetSize` en Flutter. Dibujarla a 48 la convierte en un botón y le compite a la
+acción primaria; dibujarla a 36 y dejarla ahí es `M2`, que es bloqueante. Las dos cosas son
+frecuentes y las dos están mal.
+
+**5 · Arriba va un ancla, con la superficie invertida**
+Identidad y estado entran juntos en un bloque de `--color-primary` con texto en
+`--color-on-primary` y el acento en `--color-primary-container`. Adentro: avatar, nombre en
+`--font-size-heading-lg`, una línea de meta en `--font-size-caption`, el estado como pill, y el
+número que de verdad importa con su barra de progreso. Ese bloque es lo que hace que la pantalla
+se lea como una app y no como un documento: da un punto de entrada antes del contenido, y
+concentra la identidad en un solo lugar en vez de espolvorearla.
+
+**6 · La acción primaria se ancla abajo** (`M14`)
+Fuera del scroll, con `--screen-gutter` a los lados y aire de safe area debajo. Un botón al final
+del contenido obliga a scrollear para poder actuar, y en una lista larga desaparece.
+
+**7 · El mono no entra a la UI** (`M15`)
+`--font-mono` en una pantalla nativa sirve para datos tabulares que se comparan en columna, y
+para nada más. En prosa, en captions, en fechas sueltas o como gesto de marca parte líneas a la
+mitad y se lee como una terminal. El índice de sección en mono es un gesto de página, no de
+pantalla — ver 6d.
+
+**8 · El ícono es wayfinding, no decoración**
+Un ícono al principio de una fila ayuda a encontrarla en una lista larga: 18–20px con
+`--icon-stroke`, dentro de un contenedor de 36 en `--color-*-container`. Un ícono arriba del
+título de cada tarjeta, en cambio, es `H8` y sigue siéndolo en un teléfono.
+
+### 6c. El bloque de decisión, antes de maquetar
+
+Igual que el bloque de página en `COMPOSICION.md` §4, pero para una pantalla. Cinco líneas,
+escritas antes del primer tag. Si no podés completar una, estás adivinando.
+
+```
+SUPERFICIE  pantalla: surface        bloques: surface-container    ← el escalón, no la línea
+ANCLA       <qué entra en el bloque invertido de arriba, y cuál es el número que importa>
+GRUPOS      <cada grupo = una tarjeta>   headers afuera, caption/600/muted
+FILA        etiqueta: label + muted   ·   dato: body-md + 500 + primary   ·   alto ≥ 52
+ACCIÓN      primaria: <una sola>     anclada abajo, fuera del scroll
+```
+
+### 6d. Dónde vive la identidad en una pantalla
+
+Hay que decirlo derecho porque es contraintuitivo: **el índice de sección en mono y la apertura
+editorial no sobreviven a un teléfono.** Son gestos de página —nacieron para una portada, un
+reporte, una propuesta— y aplicados a una pantalla de producto la vuelven un documento. La
+comparación que originó esta sección lo mostró sin ambigüedad: la versión con más identidad
+declarada era la que menos se parecía a una app.
+
+En nativo la identidad vive en otras tres cosas, y alcanzan:
+
+- **El color**, sobre todo el bloque ancla invertido: una pantalla que abre con
+  `--color-primary` a sangre ya dice de quién es antes de que se lea una palabra.
+- **La tipografía**: `--font-heading` en el nombre y en los números, `--font-body` en todo lo
+  demás. El par ya es reconocible.
+- **La densidad y el radio**: `--radius-xl` (16) en los grupos, 52 de fila, `--screen-gutter` de 20.
+  Dos apps con la misma estructura y distinto radio no se confunden.
+
+Una pantalla nativa de Amalgama no lleva overline, no lleva índice de sección y no lleva mono
+decorativo. Eso no es perder identidad: es ponerla donde en una app se ve.
+
+---
+
+### 6e. Qué puede ajustar cada proyecto, y qué no
+
+El patrón es uno solo; **la densidad con la que se dibuja es de cada app.** Una app de consumo
+respira más que una de back-office, y forzar a las dos al mismo número garantiza que una de las
+dos lo abandone. Así que la superficie de ajuste está declarada: son ocho tokens en el bloque
+`[data-platform="native"]`, y un proyecto los redeclara en su capa de marca sin salirse de nada.
+
+| Token | Default | Qué mueve |
+|---|---|---|
+| `--screen-block-gap` | 20px | El aire entre el ancla, las secciones y los grupos |
+| `--screen-block-padding` | 18px | El interior del ancla |
+| `--screen-group-padding` | 16px | El interior de un grupo — y con él, el inset del divisor |
+| `--screen-row-height` | 52px | La fila de etiqueta/dato |
+| `--screen-item-height` | 60px | La fila con ícono guía |
+| `--screen-item-icon` | 36px | El contenedor del ícono guía |
+| `--screen-item-gap` | 13px | Entre el ícono y el texto |
+| `--screen-radius` | `--radius-xl` | El radio del ancla y de los grupos |
+
+El inset del divisor de una fila con ícono **se calcula** —padding + ícono + gap— y no se escribe:
+así sigue alineado después de que alguien cambie cualquiera de los tres.
+
+**Lo que no se mueve desde acá**, porque no es densidad:
+
+- **`--target-min`.** Es accesibilidad. Un proyecto puede querer filas más bajas; la superficie
+  táctil sigue siendo 48 y se alcanza con `hitSlop` o `::after`. Bajar `--screen-row-height` por
+  debajo de 48 es válido *si* la fila es sólo lectura; si se toca, es `M2`.
+- **Los pesos de la fila.** 400 contra 600 no es una preferencia: la separación por color tiene un
+  techo de 3,29:1 y sin el peso la fila deja de leerse. Cambiarlo es `M13`.
+- **El orden dato/etiqueta, el header afuera del grupo, el divisor insetado, la acción anclada.**
+  Son el patrón, no su densidad.
+
+Un espaciado interno chico —los 16 de un `gap`, los 8 debajo de un header— queda fijo a
+propósito: es ritmo tipográfico, no densidad, y volverlo ajustable invita a desarmarlo sin
+motivo.
 
 ---
 

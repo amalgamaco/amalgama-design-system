@@ -84,6 +84,11 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 | `D7` | Mobile es el desktop encogido, no la transformación correcta | ALTA | inspección en 375px |
 | `D8` | Target táctil < 44px como única forma de accionar | ALTA | medición |
 | `D9` | Estructura de página sin elegir, o `column-bleed` con el texto sin acotar (línea > ~120 caracteres) | ALTA | inspección + regex |
+| `D10` | En una pantalla de producto, secciones separadas por línea (`.rule`, bordes sueltos) en vez de por el escalón `--color-surface` → `--color-surface-container`. El shell ya encuadra: el borde dibuja dos veces | MEDIA | inspección · `COMPOSICION.md` III·a·1 |
+| `D11` | Pantalla de producto que abre con registro editorial, overline de apertura o índice de sección en vez de `page-header`. Una pantalla de producto no abre: continúa | ALTA | inspección · III·a·2 |
+| `D12` | **La etiqueta pesa más que su dato** — en un `stat-card` con la cifra chica y el rótulo grande, o en un panel de detalle. Es `M13` en territorio de escritorio | ALTA | inspección · III·a·6 |
+| `D13` | Contenedor elegido por costumbre y no por grano: `table` para tres campos de texto, o tarjetas para valores que hay que comparar | MEDIA | inspección · III·a·4 |
+| `D14` | Dos `btn-primary` en la misma pantalla, o la acción primaria fuera del `page-header` | ALTA | regex + inspección · III·a·7 |
 
 ## E · Estados y contenido
 
@@ -151,10 +156,10 @@ Los de `design.md` §8, contados como una falla cada uno.
 | `I3` | No se emitió el screen report en un rediseño | MEDIA | falta |
 | `I4` | Gap del DS improvisado en vez de marcado | ALTA | revisión |
 
-## M · Nativo (React Native)
+## M · Nativo
 
 Solo se pueden fallar en una app. Las demás familias aplican igual: una pantalla nativa no se
-audita distinto que una web. Ver `MOBILE.md`.
+audita distinto que una web. Ver `MOBILE.md` §6 para la composición y §5 para el mapa.
 
 Se cuentan sobre **tres** superficies, y `check-output.mjs` las reconoce solas: el `.tsx` de una app
 React Native (importa de `react-native` o `expo`), el `.dart` de una app Flutter (importa de
@@ -177,6 +182,12 @@ correcto y marcarlo sería un falso positivo.
 | `M7` | **Solo React Native.** `lineHeight` o `letterSpacing` pasados como multiplicador o `em`, que RN ignora en silencio. En Flutter `height` ES un múltiplo: ahí no aplica | ALTA | `grep -nE "(lineHeight\|letterSpacing):\s*(0?\.[0-9]\|1\.[0-9])"` |
 | `M8` | Utilidades de gluestack/Tailwind sin traducir (`bg-blue-500`, `rounded-xl`, `text-sm`) | ALTA | regex — es `A8` en territorio nativo |
 | `M9` | Probado en una sola plataforma: sombras, fuentes y ripple no se dibujan igual en iOS y Android | MEDIA | falta la evidencia de las dos |
+| `M10` | Secciones separadas por línea en vez de por superficie: fondo plano con `<hr>` o bordes sueltos, sin el escalón `--color-surface` → `--color-surface-container` | MEDIA | inspección · `MOBILE.md` §6b·1 |
+| `M11` | Pares etiqueta/dato sueltos sobre el fondo en vez de agrupados en una tarjeta, o divisores a sangre en vez de insetados al padding | MEDIA | inspección · §6b·2 |
+| `M12` | Header de sección en escala de heading y adentro del grupo, en vez de caption/600/muted y afuera | MEDIA | inspección · §6b·3 |
+| `M13` | **La etiqueta pesa más que su dato**: la etiqueta en escala de heading o en `--text-primary`, y el valor más chico o apagado. Es la falla que el sistema produce solo | ALTA | inspección · §6b·4 |
+| `M14` | Acción primaria al final del contenido en vez de anclada abajo, fuera del scroll | MEDIA | inspección · §6b·6 |
+| `M15` | `--font-mono` en prosa, captions, fechas sueltas o como gesto de marca. En nativo el mono es solo para datos tabulares que se comparan en columna | MEDIA | regex sobre `font-mono` / `DM Mono` · §6b·7 |
 
 ---
 

@@ -3461,6 +3461,19 @@ body { overflow-x: clip; }
    demostrara el efecto con CSS propio, podría seguir "funcionando" el día que
    el archivo real se rompa. */
 #s-mobile .phone-row { margin-block: 4px; }
+/* La anatomía numerada del punto 5 y el par de comparación del 6: cosmética de la
+   doc. Todo lo que es sistema —el ancla, el grupo, la fila, la acción— lo pone
+   preview-native.css, no esto. */
+#s-mobile .ds-anatomy { list-style: none; margin: 0; padding: 0; counter-reset: a;
+  display: flex; flex-direction: column; gap: 14px; flex: 1 1 340px; min-width: 300px; }
+#s-mobile .ds-anatomy li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
+#s-mobile .ds-anatomy li::before { counter-increment: a; content: counter(a);
+  font-family: var(--font-mono); font-size: 11px; color: var(--color-primary);
+  background: var(--color-primary-container); border-radius: 3px; padding: 3px 7px; margin-top: 2px; }
+#s-mobile .ds-anatomy code { display: block; font-size: 12.5px; margin-bottom: 3px; }
+#s-mobile .ds-anatomy span { display: block; font-size: 13.5px; line-height: 1.55; color: var(--text-secondary); }
+#s-mobile .ds-anatomy em { font-style: normal; font-family: var(--font-mono); font-size: 11.5px; color: var(--color-error); }
+#s-mobile .ds-rowpair { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
 
 /* ── Components · Nativo (la lista generada) ─────────────────── */
 #s-mobile-components .mc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
@@ -5198,70 +5211,82 @@ body { overflow-x: clip; }
       <p class="ds-p"><code>heading-xl</code> (24), <code>heading-lg</code> (22) y <code>heading-sm</code> (17) no se mueven. El <strong>registro editorial</strong> deja de ser fluido —no hay viewport que crezca— y se congela en 44 / 34 / 28.</p>
 
       <h2 class="ds-h2">3 · La misma pantalla, las dos escalas</h2>
-      <p class="ds-p">Los dos marcos de abajo tienen <strong>el mismo HTML</strong>: los mismos <code>chip</code>, el mismo <code>field-input</code>, los mismos <code>btn-primary</code>. La única diferencia es <code>data-platform="native"</code> en el de la derecha. El punteado marca cada superficie tocable.</p>
+      <p class="ds-p">Los dos marcos de abajo tienen <strong>el mismo HTML</strong>: las mismas clases de <code>composition.css</code> —<code>.screen-group</code>, <code>.screen-row</code>, <code>.screen-section-header</code>— y los mismos componentes. La única diferencia es <code>data-platform="native"</code> en el de la derecha, que sube los ocho tokens <code>--screen-*</code>. <strong>Las clases son el patrón; los tokens son la densidad.</strong></p>
       <div class="ds-preview" style="display:block;padding:20px">
         <div class="phone-row">
           <figure>
-            <p class="phone-caption"><strong>Web</strong> — sin data-platform</p>
-            <div class="phone phone-auto" data-targets>
+            <p class="phone-caption"><strong>Escritorio</strong> — fila 44, ícono 32, radio 12</p>
+            <div class="phone phone-auto">
               <div class="phone-status"></div>
-              <header class="phone-nav"><span>Altas</span><span class="badge">24</span></header>
+              <header class="phone-nav"><span style="flex-grow:1">Socio</span></header>
               <div class="phone-screen">
-        <p class="overline">Julio – Septiembre</p>
-        <h1 class="page-title">Altas del trimestre</h1>
-        <p class="measure" style="color:var(--text-secondary);margin:0 0 16px">240 altas procesadas. La mediana bajó a 4,2 minutos.</p>
-        <div style="display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap">
-          <button class="chip chip-selected">Todas</button>
-          <button class="chip">Pendientes</button>
-          <button class="chip">Completas</button>
-        </div>
-        <input class="field-input" placeholder="Buscar un centro">
-        <label class="checkbox-label" style="margin-top:12px"><input type="checkbox" class="checkbox" checked> Solo con firma pendiente</label>
-        <button class="btn-primary" style="width:100%;margin-top:16px">Procesar pendientes</button>
-        <button class="btn-tertiary" style="width:100%;margin-top:8px">Exportar</button>
+                <div class="screen">
+                  <section class="screen-section">
+                    <div class="screen-section-header"><span>Plan</span><button class="screen-inline-action">Editar</button></div>
+                    <div class="screen-group">
+                      <div class="screen-row"><span class="screen-row-label">Modalidad</span><span class="screen-row-value">Full anual</span></div>
+                      <div class="screen-row"><span class="screen-row-label">Accesos</span><span class="screen-row-value">3 por semana</span></div>
+                      <div class="screen-row"><span class="screen-row-label">Sede habitual</span><span class="screen-row-value">Palermo</span></div>
+                    </div>
+                  </section>
+                  <section class="screen-section">
+                    <div class="screen-section-header"><span>Asistencias</span></div>
+                    <div class="screen-group">
+                      <div class="screen-item">
+                        <span class="screen-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8v8M18 8v8M2 11v2M22 11v2M6 12h12"></path></svg></span>
+                        <span class="screen-item-body"><span class="screen-item-title">Funcional</span><span class="screen-item-sub">Palermo</span></span>
+                        <span class="screen-item-aside">13 sep</span>
+                      </div>
+                      <div class="screen-item">
+                        <span class="screen-item-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7v10M20 7v10M8 9v6M16 9v6M8 12h8"></path></svg></span>
+                        <span class="screen-item-body"><span class="screen-item-title">Musculación</span><span class="screen-item-sub">Palermo</span></span>
+                        <span class="screen-item-aside">11 sep</span>
+                      </div>
+                    </div>
+                  </section>
+                </div>
               </div>
-              <nav class="phone-tabbar">
-        <button class="phone-tab" aria-current="page">Altas</button>
-        <button class="phone-tab">Centros</button>
-        <button class="phone-tab">Reportes</button>
-        <button class="phone-tab">Perfil</button>
-              </nav>
+              <div class="screen-action"><button class="btn-primary" style="width:100%">Registrar acceso</button></div>
             </div>
           </figure>
           <figure>
-            <p class="phone-caption"><strong>Nativo</strong> — data-platform="native"</p>
-            <div class="phone phone-auto" data-platform="native" data-targets>
+            <p class="phone-caption"><strong>Nativo</strong> — fila 52, ícono 36, radio 16</p>
+            <div class="phone phone-auto" data-platform="native">
               <div class="phone-status"></div>
-              <header class="phone-nav"><span>Altas</span><span class="badge">24</span></header>
+              <header class="phone-nav"><span style="flex-grow:1">Socio</span></header>
               <div class="phone-screen">
-        <p class="overline">Julio – Septiembre</p>
-        <h1 class="page-title">Altas del trimestre</h1>
-        <p class="measure" style="color:var(--text-secondary);margin:0 0 16px">240 altas procesadas. La mediana bajó a 4,2 minutos.</p>
-        <div style="display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap">
-          <button class="chip chip-selected">Todas</button>
-          <button class="chip">Pendientes</button>
-          <button class="chip">Completas</button>
-        </div>
-        <input class="field-input" placeholder="Buscar un centro">
-        <label class="checkbox-label" style="margin-top:12px"><input type="checkbox" class="checkbox" checked> Solo con firma pendiente</label>
-        <button class="btn-primary" style="width:100%;margin-top:16px">Procesar pendientes</button>
-        <button class="btn-tertiary" style="width:100%;margin-top:8px">Exportar</button>
+                <div class="screen">
+                  <section class="screen-section">
+                    <div class="screen-section-header"><span>Plan</span><button class="screen-inline-action">Editar</button></div>
+                    <div class="screen-group">
+                      <div class="screen-row"><span class="screen-row-label">Modalidad</span><span class="screen-row-value">Full anual</span></div>
+                      <div class="screen-row"><span class="screen-row-label">Accesos</span><span class="screen-row-value">3 por semana</span></div>
+                      <div class="screen-row"><span class="screen-row-label">Sede habitual</span><span class="screen-row-value">Palermo</span></div>
+                    </div>
+                  </section>
+                  <section class="screen-section">
+                    <div class="screen-section-header"><span>Asistencias</span></div>
+                    <div class="screen-group">
+                      <div class="screen-item">
+                        <span class="screen-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 8v8M18 8v8M2 11v2M22 11v2M6 12h12"></path></svg></span>
+                        <span class="screen-item-body"><span class="screen-item-title">Funcional</span><span class="screen-item-sub">Palermo</span></span>
+                        <span class="screen-item-aside">13 sep</span>
+                      </div>
+                      <div class="screen-item">
+                        <span class="screen-item-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7v10M20 7v10M8 9v6M16 9v6M8 12h8"></path></svg></span>
+                        <span class="screen-item-body"><span class="screen-item-title">Musculación</span><span class="screen-item-sub">Palermo</span></span>
+                        <span class="screen-item-aside">11 sep</span>
+                      </div>
+                    </div>
+                  </section>
+                </div>
               </div>
-              <nav class="phone-tabbar">
-        <button class="phone-tab" aria-current="page">Altas</button>
-        <button class="phone-tab">Centros</button>
-        <button class="phone-tab">Reportes</button>
-        <button class="phone-tab">Perfil</button>
-              </nav>
+              <div class="screen-action"><button class="btn-primary" style="width:100%">Registrar acceso</button></div>
             </div>
           </figure>
         </div>
-        <p style="font-size:12px;color:var(--ds-text-3);margin:16px 0 0">Medido en este render: el botón pasa de <strong>34px a 48</strong>, el campo de <strong>38 a 48</strong>, el chip de <strong>32 a 48</strong>, y el cuerpo de <strong>13,5px a 16</strong>. Mismo marcado, otros valores de token.</p>
       </div>
-
-      <div class="ds-callout"><strong>En Flutter el preview va con los componentes reales.</strong> <code>@material/web</code> —la implementación en web components de Material 3, de Google— se carga por CDN y toma nuestra paleta sin escribir un puente: <code>css/md-sys-bridge.css</code> ya expone los 36 roles <code>--md-sys-color-*</code> que Material lee. Los widgets conservan su anatomía (state layers, ripple, densidades), que nuestro CSS no reproduce, así que del lado Flutter es más fiel. Del lado React Native <strong>no</strong> se usa: ahí los componentes se re-skinnean con nuestros tokens igual. Ejemplo andando en <code>demos/material-preview.html</code>; los límites, en <code>MOBILE.md</code> §5b.</div>
-
-      <div class="ds-callout"><strong>Esto es la herramienta, no una réplica.</strong> El marco lo da <code>css/preview-native.css</code> y es lo que emiten <code>artifact</code> —cuando no hay proyecto, para diseñar y aprobar antes de que exista código— y <code>screen</code>, al lado del <code>.tsx</code>. <strong>Lo que el preview no muestra:</strong> la sombra de Android, el ripple, el rebote del scroll, el teclado del sistema y las fuentes reales del dispositivo. Para eso hace falta el simulador.</div>
+      <div class="ds-callout"><strong>Esta demo reemplazó a la anterior, que se contradecía con los puntos 5 a 8.</strong> Mostraba una pantalla con overline, apertura editorial y dos botones de ancho completo apilados — o sea, composición de <em>página</em> metida en un marco de teléfono, que es exactamente lo que <code>MOBILE.md</code> §6d dice que no va. Servía para demostrar la escala y fallaba en todo lo demás.</div>
 
       <h2 class="ds-h2">4 · Densidad y superficie táctil</h2>
       <p class="ds-p">Los 44px vivían sueltos dentro de media queries en <code>components.css</code>: eran un parche por archivo, no una decisión. Ahora son tokens.</p>
@@ -5278,7 +5303,147 @@ body { overflow-x: clip; }
       </div>
       <div class="ds-callout"><strong>La safe area no se hardcodea.</strong> <code>useSafeAreaInsets()</code> siempre. Un <code>paddingTop: 44</code> es falla <code>M3</code>: el notch mide distinto en cada teléfono y no mide nada en Android.</div>
 
-      <h2 class="ds-h2">5 · Lo que no cruza de CSS a React Native</h2>
+            <h2 class="ds-h2">5 · Cómo se compone una pantalla</h2>
+      <p class="ds-p">Durante mucho tiempo el sistema dijo sólo lo que <em>no</em> cruza de la web — sin grilla de 12, sin <code>max-width</code>, sin medida en <code>ch</code>. Eso alcanzaba para no poner una grilla en un teléfono, pero no para que la pantalla se pareciera a una app. Estas son las ocho convenciones que faltaban, cada una con su falla en <code>FAILURES.md</code>. <strong>No dependen de la paleta ni de la librería:</strong> valen igual con Material, con gluestack o con nuestro CSS.</p>
+
+      <div class="ds-preview" style="display:block;padding:20px">
+        <div class="phone-row" style="align-items:flex-start;gap:28px">
+          <figure class="phone" data-platform="native">
+            <div class="phone-status"></div>
+            <header class="phone-nav"><span style="flex-grow:1">Socio</span></header>
+            <div class="phone-screen">
+              <div class="screen">
+                <section class="screen-anchor">
+                  <div class="screen-anchor-top">
+                    <span class="avatar avatar-lg"><span class="avatar-fallback">LF</span></span>
+                    <div class="screen-anchor-id">
+                      <div class="screen-anchor-name">Lucía Ferrari</div>
+                      <div class="screen-anchor-meta">N° 04182 · Palermo</div>
+                    </div>
+                    <span class="badge badge-active">Al día</span>
+                  </div>
+                  <div>
+                    <div class="screen-anchor-row">
+                      <span class="screen-anchor-figure">9<span> / 12 accesos</span></span>
+                      <span class="screen-anchor-aside">quedan 3</span>
+                    </div>
+                    <div class="progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="Accesos usados">
+                      <div class="progress-fill" style="width:75%"></div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="screen-section">
+                  <div class="screen-section-header"><span>Plan</span></div>
+                  <div class="screen-group">
+                    <div class="screen-row"><span class="screen-row-label">Modalidad</span><span class="screen-row-value">Full anual</span></div>
+                    <div class="screen-row"><span class="screen-row-label">Accesos</span><span class="screen-row-value">3 por semana</span></div>
+                    <div class="screen-row"><span class="screen-row-label">Sede habitual</span><span class="screen-row-value">Palermo</span></div>
+                  </div>
+                </section>
+
+                <section class="screen-section">
+                  <div class="screen-section-header"><span>Asistencias</span><button class="screen-inline-action">Ver todas</button></div>
+                  <div class="screen-group">
+                    <div class="screen-item">
+                      <span class="screen-item-icon" style="background:var(--color-success-container)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-on-success-container)" stroke-width="2" stroke-linecap="round"><path d="M6 8v8M18 8v8M2 11v2M22 11v2M6 12h12"></path></svg>
+                      </span>
+                      <span class="screen-item-body"><span class="screen-item-title">Funcional</span><span class="screen-item-sub">Palermo</span></span>
+                      <span class="screen-item-aside">13 sep<br>07:40</span>
+                    </div>
+                    <div class="screen-item">
+                      <span class="screen-item-icon" style="background:var(--color-primary-container)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-on-primary-container)" stroke-width="2" stroke-linecap="round"><path d="M4 7v10M20 7v10M8 9v6M16 9v6M8 12h8"></path></svg>
+                      </span>
+                      <span class="screen-item-body"><span class="screen-item-title">Musculación</span><span class="screen-item-sub">Palermo</span></span>
+                      <span class="screen-item-aside">11 sep<br>19:15</span>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div class="screen-action"><button class="btn-primary" style="width:100%">Registrar acceso</button></div>
+          </figure>
+
+          <ol class="ds-anatomy">
+            <li><code>.screen</code><span>Una columna, <code>--screen-gutter</code> a los lados, la acción afuera del scroll. El fondo es <code>--color-surface</code> y los bloques <code>--color-surface-container</code>: <strong>ese escalón es lo que agrupa</strong>, y por eso no hay ni un <code>&lt;hr&gt;</code>. <em>M10</em></span></li>
+            <li><code>.screen-anchor</code><span>Lo único invertido. Concentra identidad y estado antes del contenido — y redefine los roles adentro, así el <code>badge</code> y el <code>progress</code> se retiñen solos sin variantes nuevas. Una sola por pantalla.</span></li>
+            <li><code>.screen-section-header</code><span>Afuera del grupo, en <code>caption</code> apagado. Adentro y en escala de heading compite con los datos y gana la etiqueta. <em>M12</em></span></li>
+            <li><code>.screen-group</code><span>Sin borde: el escalón ya dibujó el límite. El divisor va sólo entre filas y arranca donde arranca el texto, nunca a sangre. <em>M11</em></span></li>
+            <li><code>.screen-row</code><span>52 de alto. Etiqueta y dato <strong>al mismo cuerpo</strong>; los separa el peso. <em>M13</em></span></li>
+            <li><code>.screen-item</code><span>60 de alto, con ícono guía. El ícono ayuda a encontrar la fila en una lista larga; arriba del título de cada card sería <code>H8</code>.</span></li>
+            <li><code>.screen-inline-action</code><span>Acción secundaria: mismo cuerpo que el badge. Dibujada a 36 y tocada a 48 por <code>::after</code> — a 48 dibujada compite con la primaria, a 36 sin superficie es <em>M2</em>.</span></li>
+            <li><code>.screen-action</code><span>La primaria anclada abajo, fuera del scroll. Al final del contenido obliga a scrollear para actuar. <em>M14</em></span></li>
+          </ol>
+        </div>
+      </div>
+
+      <h2 class="ds-h2">6 · La fila, de cerca</h2>
+      <p class="ds-p">Es la falla que el sistema producía solo: la etiqueta en escala de heading y el dato chico y apagado — una pantalla que grita los nombres de los campos y susurra los valores. <strong>Quien mira vino a leer el dato.</strong> Y la separación no la puede dar el color: entre <code>--text-muted</code> y <code>--text-primary</code> hay 3,10:1, y aclarar el gris hasta el techo de AA sólo lo lleva a 3,29. El salto lo da el peso.</p>
+      <div class="ds-preview" style="display:block;padding:20px">
+        <div class="ds-rowpair">
+          <div>
+            <p class="phone-caption"><strong>M13</strong> — la etiqueta pesa más</p>
+            <div data-platform="native" style="background:var(--color-surface);padding:16px;border-radius:var(--radius-xl)">
+              <div class="screen-group">
+                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--text-primary)">Modalidad</span><span style="font-size:var(--font-size-body-sm);color:var(--text-muted)">Full anual</span></div>
+                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--text-primary)">Accesos</span><span style="font-size:var(--font-size-body-sm);color:var(--text-muted)">3 por semana</span></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="phone-caption"><strong>Correcto</strong> — mismo cuerpo, 400 contra 600</p>
+            <div data-platform="native" style="background:var(--color-surface);padding:16px;border-radius:var(--radius-xl)">
+              <div class="screen-group">
+                <div class="screen-row"><span class="screen-row-label">Modalidad</span><span class="screen-row-value">Full anual</span></div>
+                <div class="screen-row"><span class="screen-row-label">Accesos</span><span class="screen-row-value">3 por semana</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="ds-h2">7 · La escala de una pantalla, rol por rol</h2>
+      <p class="ds-p">Todo sale de la escala nativa del punto 2. Lo que faltaba escrito no eran los tamaños: eran <strong>los pesos</strong>, y son la mitad del trabajo.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Dónde</th><th>Token</th><th>Peso</th><th>Color</th></tr></thead>
+          <tbody>
+            <tr><td>Título de la barra</td><td><code>--font-size-heading-sm</code> · 17</td><td>600</td><td><code>--text-primary</code></td></tr>
+            <tr><td>Nombre en el ancla</td><td><code>--font-size-heading-lg</code> · 22</td><td>600</td><td><code>--color-on-primary</code></td></tr>
+            <tr><td>Meta bajo el nombre</td><td><code>--font-size-caption</code> · 13</td><td>400</td><td>apagado sobre el ancla</td></tr>
+            <tr><td>Badge de estado</td><td><code>--font-size-caption</code> · 13</td><td>600</td><td>el container que corresponda</td></tr>
+            <tr><td>Número principal</td><td><code>--font-size-heading-xl</code> · 24</td><td>700</td><td><code>--color-on-primary</code></td></tr>
+            <tr><td>Monto en una tarjeta</td><td><code>--font-size-heading-md</code> · 20</td><td>700</td><td><code>--text-primary</code></td></tr>
+            <tr><td>Header de sección</td><td><code>--font-size-caption</code> · 13</td><td>600</td><td><code>--text-muted</code></td></tr>
+            <tr><td><strong>Etiqueta de fila</strong></td><td><code>--font-size-label</code> · 15</td><td><strong>400</strong></td><td><code>--text-muted</code></td></tr>
+            <tr><td><strong>Dato de fila</strong></td><td><code>--font-size-label</code> · 15</td><td><strong>600</strong></td><td><code>--text-primary</code></td></tr>
+            <tr><td>Acción secundaria en línea</td><td><code>--font-size-caption</code> · 13</td><td>600</td><td><code>--text-primary</code></td></tr>
+            <tr><td>Botón primario</td><td><code>--font-size-body-md</code> · 16</td><td>600</td><td><code>--color-on-primary</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ds-p">El botón primario va a <code>--control-height</code> (48) y a <code>--radius-button</code>, que el bloque <code>[data-platform="native"]</code> declara en <code>--radius-lg</code> (12): a 8 se lee como un botón de escritorio pegado adentro de una app.</p>
+
+      <h2 class="ds-h2">8 · Lo que no va, y por qué</h2>
+      <p class="ds-p">Las seis fallan <strong>por ausencia</strong>, que es lo que antes no existía: una pantalla sin nada de composición pasaba todos los checks. Son de inspección, no de regex — ningún script las agarra.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>ID</th><th>Qué es</th><th>Qué va en su lugar</th></tr></thead>
+          <tbody>
+            <tr><td><code>M10</code></td><td>Secciones separadas por línea: fondo plano con <code>&lt;hr&gt;</code> o bordes sueltos</td><td>El escalón <code>surface</code> → <code>surface-container</code>. Un borde encima dibuja el límite dos veces</td></tr>
+            <tr><td><code>M11</code></td><td>Pares sueltos sobre el fondo, o divisor a sangre</td><td><code>.screen-group</code>, con el divisor insetado al padding del texto</td></tr>
+            <tr><td><code>M12</code></td><td>Header de sección en escala de heading y adentro del grupo</td><td><code>.screen-section-header</code>: caption, 600, apagado, afuera</td></tr>
+            <tr><td><code>M13</code></td><td><strong>La etiqueta pesa más que su dato</strong></td><td>Mismo cuerpo, 400 contra 600. Es la más frecuente</td></tr>
+            <tr><td><code>M14</code></td><td>Acción primaria al final del contenido</td><td><code>.screen-action</code>, anclada abajo y fuera del scroll</td></tr>
+            <tr><td><code>M15</code></td><td><code>--font-mono</code> en prosa, captions o fechas sueltas</td><td>En nativo el mono es sólo para datos tabulares que se comparan en columna</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ds-callout"><strong>Y en una pantalla nativa no va overline, ni índice de sección, ni apertura editorial.</strong> Son gestos de <em>página</em> — nacieron para una portada, un reporte, una propuesta— y aplicados a una pantalla de producto la vuelven un documento. La identidad en nativo la llevan el ancla invertida, el par tipográfico y el radio. Eso no es perder identidad: es ponerla donde en una app se ve. <code>MOBILE.md</code> §6d.</div>
+
+      <h2 class="ds-h2">9 · Lo que no cruza de CSS a React Native</h2>
       <p class="ds-p">El export no es una copia — es una <strong>resolución</strong>. Estas siete cosas existen en CSS y no en RN, y el generador las deja resueltas. Token por token están en <code>tokens/NATIVE-NOTES.md</code>.</p>
       <div class="ds-table-wrap">
         <table class="ds-table">
@@ -5295,7 +5460,7 @@ body { overflow-x: clip; }
         </table>
       </div>
 
-      <h2 class="ds-h2">6 · El stack</h2>
+      <h2 class="ds-h2">10 · El stack</h2>
       <p class="ds-p"><strong>NativeWind v5 + Tailwind v4</strong>, con <strong>gluestack v5</strong> como base de los componentes. Tailwind v4 abandonó <code>tailwind.config.js</code> y declara los tokens <strong>en CSS</strong>, con <code>@theme inline</code>: eso hace que el puente desde Embassy sea mecánico en vez de una transcripción a mano, que es de donde sale el drift.</p>
       <div class="ds-table-wrap">
         <table class="ds-table">
@@ -5312,7 +5477,7 @@ body { overflow-x: clip; }
       <div class="ds-callout"><strong>De gluestack se copia el archivo, no se adopta el sistema.</strong> Su CLI deja el componente en tu repo y es tuyo: se toma la estructura y el comportamiento —accesibilidad, estados, composición de slots— y se le reemplaza el styling por nuestros tokens. Es exactamente lo que ya hicimos en web con shadcn, donde <code>components/ui/*.tsx</code> es su estructura con las clases de Embassy y cero styling propio. <strong>No se adopta</strong> su paleta, sus radios, su escala, sus sombras ni su iconografía: una utility sin traducir es falla <code>A8</code>.</div>
       <div class="ds-callout"><code>node scripts/build-tokens.mjs --check</code> falla si <code>tokens/</code> quedó atrás del CSS. Va en CI: es lo único que impide que la app y la web se separen en silencio.</div>
 
-      <h2 class="ds-h2">7 · El mapa de componentes</h2>
+      <h2 class="ds-h2">11 · El mapa de componentes</h2>
       <p class="ds-p">Embassy tiene 62 componentes en web. <strong>No se portan 62.</strong> Elegir la versión chica del patrón de escritorio en vez del patrón nativo es falla <code>M4</code>.</p>
       <p class="ds-p"><strong>Se portan tal cual</strong> (mismo componente, otros valores) — 37:<br>
       <code>accordion</code> <code>alert</code> <code>attachment</code> <code>avatar</code> <code>badge</code> <code>button</code> <code>calendar</code> <code>card</code> <code>carousel</code> <code>checkbox</code> <code>chip</code> <code>collapsible</code> <code>description</code> <code>divider</code> <code>empty-state</code> <code>form</code> <code>input-otp</code> <code>item</code> <code>label</code> <code>list</code> <code>person-card</code> <code>placeholder</code> <code>progress</code> <code>radio-group</code> <code>search</code> <code>segmented-button</code> <code>select</code> <code>skeleton</code> <code>slider</code> <code>spinner</code> <code>stat-card</code> <code>switch</code> <code>tabs</code> <code>toast</code> <code>toggle</code> <code>toggle-group</code> <code>vacancy-card</code></p>
@@ -5342,7 +5507,7 @@ body { overflow-x: clip; }
         </table>
       </div>
 
-      <h2 class="ds-h2">8 · Qué se chequea</h2>
+      <h2 class="ds-h2">12 · Qué se chequea</h2>
       <p class="ds-p">El grupo <code>M</code> de <code>FAILURES.md</code>. Las demás familias aplican igual: una pantalla nativa no se audita distinto que una web.</p>
       <div class="ds-table-wrap">
         <table class="ds-table">
@@ -5361,7 +5526,7 @@ body { overflow-x: clip; }
         </table>
       </div>
 
-      <h2 class="ds-h2">9 · Los componentes, en nativo</h2>
+      <h2 class="ds-h2">13 · Los componentes, en nativo</h2>
       <div class="ds-callout" style="border-left-color:var(--color-error)"><strong>Por qué estos ejemplos no son componentes de gluestack.</strong> Dos razones, y la segunda es la que importa. La primera: gluestack es React Native, así que no renderiza en una página HTML sin bundler — para verlo de verdad hace falta compilar una app y publicarla. La segunda: <strong>hoy no hay nada nuestro que mostrar.</strong> Un <code>Button</code> de gluestack sin re-skinnear muestra el diseño de gluestack, no el nuestro; y para <code>chip</code>, <code>segmented-button</code>, <code>stat-card</code>, <code>empty-state</code>, <code>item</code> y <code>search-bar</code> no hay literalmente nada que mostrar, porque gluestack no los tiene. Lo de abajo es la <strong>especificación</strong> —los valores que el componente tiene que cumplir— y es lo que se usa para diseñar y aprobar. Cuando existan los primeros ocho componentes en el proyecto RN, esa galería pasa a ser la referencia y se publica desde ahí.</div>
 
       <p class="ds-p">Los <strong>37 que se portan tal cual</strong>, con los valores de teléfono. No son componentes nuevos ni son de gluestack: son exactamente los mismos <code>btn-primary</code>, <code>chip</code> y <code>field-input</code> que en web, adentro de un contenedor con <code>data-platform="native"</code>. Por eso no viven en una sección aparte — <strong>duplicarlos sería crear dos fuentes de verdad para la misma clase.</strong> La ficha de cada uno sigue siendo su página en Components.</p>
