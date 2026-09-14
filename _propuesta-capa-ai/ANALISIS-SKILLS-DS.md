@@ -1,5 +1,13 @@
 # Skills para el Design System de Amalgama — análisis y plan
 
+> [!WARNING]
+> **Documento histórico — NO es fuente de verdad.** Esta carpeta es la propuesta de julio–septiembre
+> de 2026, analizada sobre el commit `acb86c0` (28-jul-2026). La capa de agentes ya se implementó y
+> vive en el repo `claude-code-plugins` (plugin `embassy`); la carpeta `skills/` que este texto
+> menciona **ya no existe** en la raíz de este repo. Varias decisiones de acá fueron reemplazadas.
+> Se conserva por trazabilidad. **Para lo vigente:** `COMPOSICION.md`, `MOBILE.md`, `design.md`,
+> `GOVERNANCE.md`, `PUBLIC-API.md` y `FAILURES.md`.
+
 **Autora:** Ana Borthagaray · **Fecha:** 8 de septiembre de 2026
 **Repo analizado:** `amalgamaco/amalgama-design-system` @ `acb86c0` (28-jul-2026)
 **Referencias externas:** [Vercel — *How our agents build on-brand pages with design.md*](https://vercel.com/blog/how-our-agents-build-on-brand-pages-with-design-md) · [jakubkrehel/skills](https://github.com/jakubkrehel/skills)

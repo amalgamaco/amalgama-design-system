@@ -1893,9 +1893,9 @@
     },
     "--radius-button": {
       "$type": "dimension",
-      "$value": "12px",
-      "$platformNative": "12px",
-      "section": "Forma del botón  ` radius-button` es el único token de forma que el sistema deja declarar para mover todos los botones de una (GOVERNANCE §4.3); en :root queda sin declarar a propósito para que cada tamaño use el de su escala. Acá sí se declara: en un teléfono el botón primario es de ancho completo, y a 8px de radio contra grupos de 16 se lee como un botón de escritorio pegado en una app. 12 lo deja un escalón por dentro de su contenedor, que es como se ven los botones de una app. Un tema de marca con forma píldora sigue ganando: carga después.",
+      "$value": "14px",
+      "$platformNative": "14px",
+      "section": "Forma del botón  ` radius-button` es el único token de forma que el sistema deja declarar para mover todos los botones de una (GOVERNANCE §4.3); en :root queda sin declarar a propósito para que cada tamaño use el de su escala. Acá sí se declara: en un teléfono el botón primario es de ancho completo, y a 8px contra grupos de 16 se lee como un botón de escritorio pegado adentro de una app.   14 es una excepción deliberada a la escala  (4 · 8 · 12 · 16) y es el único valor de forma fuera de escala del sistema. Sale de la pantalla que usábamos de referencia, y el motivo es la relación con el contenedor, no el número: los grupos van a ` screen-radius` (16), y el botón a 14 queda *apenas* por dentro, que es lo que lo hace leer anidado. A 16 sería idéntico a la tarjeta y esa jerarquía se pierde; a 12 el salto se nota demasiado.  Si alguna vez se mueve ` screen-radius`, este valor se mueve con él: la regla es «un escalón por dentro del grupo», no «14». Un tema de marca con forma píldora sigue ganando: carga después.",
       "$onlyNative": true
     }
   }

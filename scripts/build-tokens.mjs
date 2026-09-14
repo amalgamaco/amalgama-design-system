@@ -275,15 +275,28 @@ const json = JSON.stringify({
 
 const camel = n => n.replace(/^--/, '').replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
 
+/* Un token declarado SOLO en [data-platform="native"] no tiene valor de web: su
+   $value es el valor nativo porque no hay otro. Emitirlo igual en `light` y `dark`
+   hace que el export mienta — un consumidor web leería --screen-gutter como 20px,
+   que es un número de teléfono. Lo mismo al revés con los que sólo existen en dark.
+   Cada superficie emite únicamente los tokens que de verdad tiene. */
+const paraSuperficie = (sup) => Object.entries(tokens).filter(([, t]) =>
+  sup === 'light'      ? !t.$onlyNative && !t.$onlyDark
+: sup === 'dark'       ? !t.$onlyNative
+: sup === 'native'     ? !t.$onlyDark
+: true);
+
+const linea = (v) => ([n, t]) => `  ${JSON.stringify(camel(n))}: ${JSON.stringify(v(t))},`;
+
 const ts = `/* ${stamp.split('\n').join('\n   ')} */\n\n` +
 `export const light = {\n` +
-  Object.entries(tokens).map(([n, t]) => `  ${JSON.stringify(camel(n))}: ${JSON.stringify(t.$value)},`).join('\n') +
+  paraSuperficie('light').map(linea(t => t.$value)).join('\n') +
 `\n} as const;\n\nexport const dark = {\n` +
-  Object.entries(tokens).map(([n, t]) => `  ${JSON.stringify(camel(n))}: ${JSON.stringify(t.$dark ?? t.$value)},`).join('\n') +
+  paraSuperficie('dark').map(linea(t => t.$dark ?? t.$value)).join('\n') +
 `\n} as const;\n\n/* Eje de plataforma: los mismos nombres, valores de teléfono.\n   Se combina con light/dark, no lo reemplaza. */\nexport const native = {\n` +
-  Object.entries(tokens).map(([n, t]) => `  ${JSON.stringify(camel(n))}: ${JSON.stringify(t.$platformNative ?? t.$value)},`).join('\n') +
+  paraSuperficie('native').map(linea(t => t.$platformNative ?? t.$value)).join('\n') +
 `\n} as const;\n\nexport const nativeDark = {\n` +
-  Object.entries(tokens).map(([n, t]) => `  ${JSON.stringify(camel(n))}: ${JSON.stringify(t.$platformNative ?? t.$dark ?? t.$value)},`).join('\n') +
+  paraSuperficie('nativeDark').map(linea(t => t.$platformNative ?? t.$dark ?? t.$value)).join('\n') +
 `\n} as const;\n\nexport type EmbassyTokens = typeof light;\n`;
 
 const triplet = v => { const c = toRGBA(v); return c ? `${Math.round(c[0])} ${Math.round(c[1])} ${Math.round(c[2])}` : null; };
@@ -369,6 +382,8 @@ const dartFile = (() => {
   for (const modo of ['light', 'dark']) {
     L.push(`  // ── ${modo} ──`);
     for (const [n, t] of colors) {
+      if (modo !== 'dark' && (t.$onlyNative || t.$onlyDark)) continue;
+      if (modo === 'dark' && t.$onlyNative) continue;
       const v = dartColor(modo === 'dark' ? (t.$dark ?? t.$value) : t.$value);
       if (v) L.push(`  static const ${dartField(n)}${modo === 'dark' ? 'Dark' : ''} = ${v};`);
     }
@@ -381,6 +396,10 @@ const dartFile = (() => {
   for (const modo of ['web', 'native']) {
     L.push(`  // ── ${modo} ──`);
     for (const [n, t] of dims) {
+      // Un token que sólo existe en el bloque nativo no tiene campo de web: su
+      // $value ES el valor nativo, y emitirlo como web haría que EmbassyDims.screenGutter
+      // devuelva 20 en escritorio, que es un número de teléfono (misma trampa que en el TS).
+      if (modo === 'web' && (t.$onlyNative || t.$onlyDark)) continue;
       const raw = modo === 'native' ? (t.$platformNative ?? t.$value) : t.$value;
       const v = dartNum(raw);
       if (v) L.push(`  static const ${dartField(n)}${modo === 'native' ? 'Native' : ''} = ${v};`);

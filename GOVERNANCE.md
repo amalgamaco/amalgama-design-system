@@ -1391,3 +1391,40 @@ example of a Basic Card domain variant.
   (+ `carouselScroll`). New demos should use the documented `data-*` hooks, not re-implement.
 
 Never rely on color alone — the label must name the consequence ("Eliminar vacante", not "OK").
+
+---
+
+## 22. Dónde vive cada decisión — el mapa de fuente única (2026-09)
+
+El principio 3 («One source of truth») estaba escrito solo para **tokens y componentes**. Las
+decisiones en prosa —composición, pantalla, densidad, fallas— no tenían mapa, y sin mapa se
+copiaron: en septiembre de 2026 el bloque de decisión de pantalla vivía en tres archivos, la
+receta de preview con Material en tres, el tag del CDN en catorce, y dos de esas copias ya
+contradecían a su original. Este es el mapa, y la regla que lo sostiene.
+
+| Decisión | Vive en | Nadie más la escribe |
+|---|---|---|
+| Valor de un token | `css/variables.css` | Los docs citan el nombre, no el número |
+| Anatomía y variantes de un componente | `css/components/<x>.css` + `component-rules/<x>.md` | — |
+| Cómo se separan dos cosas (espacio → superficie → línea → sombra) | `COMPOSICION.md` Parte I §D | III·a·1 y `MOBILE.md` §6b·1 **aplican**, no re-explican |
+| Estructura, ancho y grilla de una **página** | `COMPOSICION.md` §0 | `design.md` §5 cita las clases |
+| El bloque de decisión de **página** (9 líneas) | `design.md` §4 «Pasada 1» | `artifact` manda a leerlo |
+| Los cuatro patrones de composición de página | `design.md` §5 | `artifact` apunta ahí |
+| Anatomía de una **pantalla de producto** | `COMPOSICION.md` Parte III | — |
+| Anatomía de una **pantalla nativa** | `MOBILE.md` §6 | — |
+| El bloque de decisión de pantalla (5 líneas) + las 4 fallas más frecuentes | `MOBILE.md` §6c | `screen` y `artifact` mandan a leerlo |
+| Los 8 tokens `--screen-*`: qué se ajusta y qué no | `MOBILE.md` §6e | `COMPOSICION.md` III·d apunta ahí |
+| Preview con Material Web (Flutter) | `MOBILE.md` §«Y en Flutter…» | `screen` y `artifact` apuntan ahí |
+| Cómo cargar el CSS + **el tag de versión** | `PUBLIC-API.md` §«Cómo cargar el sistema», generado desde `DS_VERSION` | Nadie escribe `@vX.Y.Z` a mano |
+| Catálogo de fallas con código | `FAILURES.md` | Todo lo demás cita el código (`M13`, `D10`) |
+| Los doce arquetipos de pantalla | `guidelines/screen-patterns.md` | — |
+
+**La regla:** una decisión se escribe **una vez**, en el archivo de la tabla. Todo lo demás
+—las otras páginas del DS, `index.html`, y sobre todo las skills del plugin `embassy`— **la
+referencia por nombre de sección; no la copia, ni parafraseada.** Una copia parafraseada es peor
+que una literal: cuando el original cambia, la copia no falla, miente.
+
+Corolario para las skills: son consumidoras del DS, no una segunda edición de él. Si una skill
+necesita que el agente escriba un bloque, le dice **dónde está** y el agente lo lee. Lo único que
+una skill escribe por su cuenta es lo que no es una decisión del sistema: el orden de sus pasos,
+sus preguntas al usuario y su formato de salida.

@@ -295,8 +295,6 @@ export const light = {
   "durationMedium": "300ms",
   "durationSlow": "450ms",
   "durationSheet": "500ms",
-  "screenGutter": "20px",
-  "radiusButton": "12px",
 } as const;
 
 export const dark = {
@@ -593,8 +591,6 @@ export const dark = {
   "durationMedium": "300ms",
   "durationSlow": "450ms",
   "durationSheet": "500ms",
-  "screenGutter": "20px",
-  "radiusButton": "12px",
 } as const;
 
 /* Eje de plataforma: los mismos nombres, valores de teléfono.
@@ -894,7 +890,7 @@ export const native = {
   "durationSlow": "450ms",
   "durationSheet": "500ms",
   "screenGutter": "20px",
-  "radiusButton": "12px",
+  "radiusButton": "14px",
 } as const;
 
 export const nativeDark = {
@@ -1192,7 +1188,7 @@ export const nativeDark = {
   "durationSlow": "450ms",
   "durationSheet": "500ms",
   "screenGutter": "20px",
-  "radiusButton": "12px",
+  "radiusButton": "14px",
 } as const;
 
 export type EmbassyTokens = typeof light;

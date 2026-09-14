@@ -3550,10 +3550,7 @@ body { overflow-x: clip; }
         <div class="ds-rail-icon-wrap"><i data-lucide="rocket"></i></div>
         <span class="ds-rail-label">Get started</span>
       </button>
-      <button class="ds-rail-btn" data-rail-group="Develop" onclick="navigate('develop')">
-        <div class="ds-rail-icon-wrap"><i data-lucide="code-2"></i></div>
-        <span class="ds-rail-label">Develop</span>
-      </button>
+      
       <button class="ds-rail-btn" data-rail-group="Foundations" onclick="navigate('foundations')">
         <div class="ds-rail-icon-wrap"><i data-lucide="layers"></i></div>
         <span class="ds-rail-label">Foundations</span>
@@ -3584,8 +3581,8 @@ body { overflow-x: clip; }
   <div class="ds-sidebar-drawer" id="drawer-develop">
     <div class="ds-drawer-section-title">Develop</div>
     <nav class="ds-nav">
-      <div class="ds-nav-item" data-section="develop-web"    onclick="navigate('develop-web')"><i data-lucide="globe"      style="width:13px;height:13px"></i> Web</div>
-      <div class="ds-nav-item" data-section="develop-mobile" onclick="navigate('develop-mobile')"><i data-lucide="smartphone" style="width:13px;height:13px"></i> Mobile</div>
+      
+      
     </nav>
   </div>
 
@@ -3597,10 +3594,7 @@ body { overflow-x: clip; }
       <div class="ds-nav-item" data-section="writing"           onclick="navigate('writing')"><i          data-lucide="pen-line"             style="width:13px;height:13px"></i> Content Design</div>
       <div class="ds-nav-item" data-section="design-tokens"     onclick="navigate('design-tokens')"><i    data-lucide="braces"               style="width:13px;height:13px"></i> Design Tokens</div>
       <div class="ds-nav-item" data-section="interaction-state" onclick="navigate('interaction-state')"><i data-lucide="mouse-pointer-click" style="width:13px;height:13px"></i> Interaction State</div>
-      <div class="ds-nav-item" data-section="grid"              onclick="navigate('grid')"><i             data-lucide="layout-grid"          style="width:13px;height:13px"></i> Layout</div>
-      <div class="ds-nav-item" data-section="composition"       onclick="navigate('composition')"><i      data-lucide="columns-3"            style="width:13px;height:13px"></i> Composición</div>
-      <div class="ds-nav-item" data-section="space"             onclick="navigate('space')"><i            data-lucide="orbit"                style="width:13px;height:13px"></i> Capa espacial</div>
-      <div class="ds-nav-item" data-section="mobile"            onclick="navigate('mobile')"><i           data-lucide="smartphone"           style="width:13px;height:13px"></i> Nativo</div>
+      <div class="ds-nav-item" data-section="composition"       onclick="navigate('composition')"><i      data-lucide="columns-3"            style="width:13px;height:13px"></i> Composición</div>      <div class="ds-nav-item" data-section="mobile"            onclick="navigate('mobile')"><i           data-lucide="smartphone"           style="width:13px;height:13px"></i> Nativo</div>
       <div class="ds-nav-item" data-section="mobile-components"  onclick="navigate('mobile-components')"><i data-lucide="layout-grid"          style="width:13px;height:13px"></i> Componentes en nativo</div>
       <div class="ds-nav-sub">
         <div class="ds-nav-item" data-section="c-aspect-ratio" onclick="navigate('c-aspect-ratio')">Aspect Ratio</div>
@@ -3622,6 +3616,7 @@ body { overflow-x: clip; }
         <div class="ds-nav-item" data-section="color-roles"    onclick="navigate('color-roles')"><i   data-lucide="tag"       style="width:13px;height:13px"></i> Color Roles</div>
       </div>
       <div class="ds-nav-item" data-section="elevation"     onclick="navigate('elevation')"><i    data-lucide="layers"           style="width:13px;height:13px"></i> Elevation</div>
+      <div class="ds-nav-item" data-section="space"             onclick="navigate('space')"><i            data-lucide="orbit"                style="width:13px;height:13px"></i> Capa espacial</div>
       <div class="ds-nav-item" data-section="icons"         onclick="navigate('icons')"><i        data-lucide="star"             style="width:13px;height:13px"></i> Icons</div>
       <div class="ds-nav-item" data-section="illustrations" onclick="navigate('illustrations')"><i data-lucide="frame"           style="width:13px;height:13px"></i> Illustrations</div>
       <div class="ds-nav-item" data-section="animations"    onclick="navigate('animations')"><i   data-lucide="zap"             style="width:13px;height:13px"></i> Motion</div>
@@ -4797,30 +4792,39 @@ body { overflow-x: clip; }
     </section>
 
     <!-- ═══════════ GRID ═══════════ -->
-    <section class="ds-section" id="s-grid">
-      <div class="ds-page-tag">Foundations · Layout</div>
-      <h1 class="ds-page-title">Layout</h1>
-      <p class="ds-page-desc">El sistema de layout usa una grilla de 12 columnas con breakpoints móvil-primero. El shell de la app tiene sidebar fijo + topbar + área de contenido.</p>
+    
 
-      <h2 class="ds-h2">Patrones estructurales</h2>
+
+    <!-- ═══════════ COMPOSICIÓN ═══════════ -->
+    <section class="ds-section" id="s-composition">
+      <div class="ds-page-tag">Foundations · Composición</div>
+      <h1 class="ds-page-title">Composición</h1>
+      <p class="ds-page-desc">La forma de la página, no el sistema visual. Con tokens correctos y componentes correctos todavía se puede armar la misma página que arma cualquiera: hero centrado, tres tarjetas con ícono, banda, footer. Esto es lo que lo evita. La regla completa está en <code>COMPOSICION.md</code>; las clases, en <code>css/composition.css</code>.</p>
+
+      <div class="ds-callout"><strong>Esta sección absorbió «Layout».</strong> Eran dos nombres para lo mismo, y encima cruzados con el código: <code>layout.css</code> no es layout —es el app shell, que ahora vive en el Playbook de navegación— mientras que la grilla de 12, los anchos y los <code>span-*</code> siempre estuvieron en <code>composition.css</code>.</div>
+
+      <h2 class="ds-h2">Las tres superficies</h2>
+      <p class="ds-p">El sistema compone tres cosas y <strong>no se componen igual</strong>. Lo que sigue —estructura, ancho, grilla, la firma— aplica a las tres; después cada una tiene su anatomía propia.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Superficie</th><th>Qué es</th><th>Su anatomía</th><th>Abre con</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Página</strong></td><td>Landing, propuesta, reporte, one-pager</td><td>Las reglas 1 a 8, más abajo</td><td>Registro editorial, una vez</td></tr>
+            <tr><td><strong>Pantalla de producto</strong></td><td>Listado, tablero, detalle — adentro del shell</td><td><code>COMPOSICION.md</code> Parte III</td><td><code>page-header</code>. No abre: continúa</td></tr>
+            <tr><td><strong>Pantalla nativa</strong></td><td>Una app en React Native o Flutter</td><td><code>MOBILE.md</code> §6 · sección <a href="#s-mobile">Nativo</a></td><td>El bloque ancla invertido</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ds-p">Las tres comparten las mismas clases de <code>composition.css</code> —<code>.screen-anchor</code>, <code>.screen-group</code>, <code>.screen-row</code>, <code>.screen-section-header</code>, <code>.screen-action</code>— y se diferencian por ocho tokens <code>--screen-*</code>. <strong>Las clases son el patrón; los tokens son la densidad.</strong></p>
+
+      <h2 class="ds-h2">La estructura sobre la que se compone</h2>
+<h2 class="ds-h2">Patrones estructurales</h2>
       <p class="ds-p">Estados estructurales que comunican la disposición y el estado del contenido.</p>
       <div class="ds-card-grid" style="margin:8px 0 32px">
         <div class="ds-card-link" onclick="navigate('c-empty')"><div class="ds-card-icon"><i data-lucide="inbox"></i></div><div class="ds-card-name">Empty State</div><div class="ds-card-desc">Estados vacíos con mensaje, ilustración y acción.</div></div>
         <div class="ds-card-link" onclick="navigate('c-skeleton')"><div class="ds-card-icon"><i data-lucide="loader"></i></div><div class="ds-card-name">Skeleton</div><div class="ds-card-desc">Placeholders de carga que anticipan la estructura.</div></div>
       </div>
-
-      <h2 class="ds-h2">App Shell</h2>
-      <div class="ds-table-wrap">
-        <table class="ds-table">
-          <thead><tr><th>Token</th><th>Valor</th><th>Descripción</th></tr></thead>
-          <tbody>
-            <tr><td><code>--sidebar-width</code></td><td>220px</td><td>Ancho del sidebar de navegación lateral</td></tr>
-            <tr><td><code>--topbar-height</code></td><td>56px</td><td>Altura de la barra superior</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="docs-section">
+<div class="docs-section">
         <h2 class="ds-h2">Breakpoints</h2>
         <p class="ds-p">Los breakpoints canónicos del DS viven en <code>css/variables.css</code>:</p>
         <div class="ds-table-wrap">
@@ -4864,14 +4868,7 @@ body { overflow-x: clip; }
           </tbody>
         </table>
       </div>
-    </section>
 
-
-    <!-- ═══════════ COMPOSICIÓN ═══════════ -->
-    <section class="ds-section" id="s-composition">
-      <div class="ds-page-tag">Foundations · Composición</div>
-      <h1 class="ds-page-title">Composición</h1>
-      <p class="ds-page-desc">La forma de la página, no el sistema visual. Con tokens correctos y componentes correctos todavía se puede armar la misma página que arma cualquiera: hero centrado, tres tarjetas con ícono, banda, footer. Esto es lo que lo evita. La regla completa está en <code>COMPOSICION.md</code>; las clases, en <code>css/composition.css</code>.</p>
 
       <div class="ds-callout"><strong>Se elige antes de escribir markup:</strong> una estructura, un ancho, y cómo se compone adentro. Una página que no eligió, eligió el default — que es el que tiene todo el mundo.</div>
 
@@ -4982,6 +4979,8 @@ body { overflow-x: clip; }
 
       <h2 class="ds-h2">5 · Ritmo y separación</h2>
       <p class="ds-p">Una página no es una pila de bandas iguales. Tres pesos, y la diferencia entre <code>.section-lead</code> y <code>.section-tight</code> es de 2,5× — no del 10%. Y las secciones se separan con una línea de 1px que cruza toda la pantalla mientras el contenido se queda en la columna, no con bandas de fondo alternado.</p>
+      <p class="ds-p"><strong>La escalera de separación es una sola y vale para las tres superficies.</strong> Se usa la primera que alcance: <strong>espacio</strong> siempre que se pueda · <strong>escalón de superficie</strong> (<code>--color-surface</code> → <code>--color-surface-container</code>) dentro de una pantalla, de producto o nativa · <strong>línea de 1px</strong> (<code>.rule</code>) entre secciones de una página · <strong>sombra</strong> solo para lo que realmente flota.</p>
+      <div class="ds-callout"><strong>Lo que parece contradicción y no lo es:</strong> <code>.rule</code> es de página y el escalón es de pantalla. Adentro de un app shell la línea sobra —el shell ya encuadra, y dibujar el borde otra vez es dibujarlo dos veces (<em>D10</em> en escritorio, <em>M10</em> en nativo)—. Al revés, una página que separa sus secciones con escalones de superficie termina siendo justo la banda alternada que esta regla prohíbe.</div>
       <div class="ds-preview" style="display:block;padding:0">
         <div style="background:var(--color-surface)">
           <div class="column"><div class="section-tight" style="font:500 12px/1 var(--font-mono);color:var(--text-muted)">.section-tight</div></div>
@@ -5091,6 +5090,39 @@ body { overflow-x: clip; }
           </div>
         </div>
       </div>
+
+      <h2 class="ds-h2">Los degradés</h2>
+      <p class="ds-p">Tres, y salen de las primitivas — por eso toman la paleta del cliente en un white-label. <strong>Cuándo usar cada uno</strong> está en <a href="#s-composition">Composición</a>; acá están los valores.</p>
+      <div class="ds-preview" style="display:block;padding:20px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+          <div><div class="gradient-brand" style="height:110px;border-radius:var(--radius-lg)"></div><p class="phone-caption" style="margin-top:10px"><strong>.gradient-brand</strong><br>primary-900 → secondary-925, 135°</p></div>
+          <div><div class="gradient-surface" style="height:110px;border-radius:var(--radius-lg)"></div><p class="phone-caption" style="margin-top:10px"><strong>.gradient-surface</strong><br>la superficie que se desvanece</p></div>
+          <div><div class="gradient-glow" style="height:110px;border-radius:var(--radius-lg);background-color:var(--space-deep)"></div><p class="phone-caption" style="margin-top:10px"><strong>.gradient-glow</strong><br>el halo radial desde arriba</p></div>
+        </div>
+      </div>
+
+      <h2 class="ds-h2">Los planetas</h2>
+      <p class="ds-p">Cuatro, exportados del archivo de marca a <code>space/planets/</code>. Son PNG con transparencia real: la clase les aplica un <code>drop-shadow</code> en <code>--space-glow</code> para el halo, y sobre un fondo sólido ese halo se dibujaría alrededor del rectángulo.</p>
+      <div class="ds-preview" style="display:block;padding:28px;background:var(--space-deep)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:24px;justify-items:center;align-items:end">
+          <div style="text-align:center"><img class="planet planet-md" src="space/planets/planeta-anillo.png" alt=""><p class="phone-caption" style="margin-top:12px"><strong>planeta-anillo</strong><br>275×271</p></div>
+          <div style="text-align:center"><img class="planet planet-md" src="space/planets/planeta-ambar.png" alt=""><p class="phone-caption" style="margin-top:12px"><strong>planeta-ambar</strong><br>248×211</p></div>
+          <div style="text-align:center"><img class="planet planet-md" src="space/planets/planeta-azul.png" alt=""><p class="phone-caption" style="margin-top:12px"><strong>planeta-azul</strong><br>386×383</p></div>
+          <div style="text-align:center"><img class="planet planet-md" src="space/planets/planeta-terracota.png" alt=""><p class="phone-caption" style="margin-top:12px"><strong>planeta-terracota</strong><br>275×288</p></div>
+        </div>
+      </div>
+      <p class="ds-p"><strong>Un archivo por planeta, no uno por tamaño.</strong> La clase no dibuja nada: enmarca un <code>&lt;img&gt;</code>, le pone el halo y lo saca del flujo de eventos. El modificador fija el ancho y el alto va <code>auto</code>, así que conserva su proporción.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Clase</th><th>Ancho</th><th>Para qué</th></tr></thead>
+          <tbody>
+            <tr><td><code>.planet-sm</code></td><td>32px</td><td>Acento suelto, lejano</td></tr>
+            <tr><td><code>.planet-md</code></td><td>96px</td><td>El uso normal</td></tr>
+            <tr><td><code>.planet-lg</code></td><td>260px</td><td>Uno solo por pieza, como ancla</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ds-callout" style="border-left-color:var(--color-warning)"><strong>Ojo con <code>.planet-lg</code>.</strong> Los originales miden entre 248 y 386px, así que a 260px de ancho quedan en 1× y en una pantalla retina se ven blandos. Para el tamaño grande hay que re-exportarlos a 2× del archivo de marca: ampliar estos no recupera detalle que el raster no tiene.</div>
 
       <h2 class="ds-h2">Las condiciones</h2>
       <p class="ds-p">Son parte de que la capa se vea bien y no se convierta en fondo de pantalla:</p>
@@ -5424,7 +5456,7 @@ body { overflow-x: clip; }
           </tbody>
         </table>
       </div>
-      <p class="ds-p">El botón primario va a <code>--control-height</code> (48) y a <code>--radius-button</code>, que el bloque <code>[data-platform="native"]</code> declara en <code>--radius-lg</code> (12): a 8 se lee como un botón de escritorio pegado adentro de una app.</p>
+      <p class="ds-p">El botón primario va a <code>--control-height</code> (48) y a <code>--radius-button</code>, que el bloque <code>[data-platform="native"]</code> declara en <strong>14</strong>: a 8 se lee como un botón de escritorio pegado adentro de una app, y a 14 queda apenas por dentro de los grupos, que van a <code>--screen-radius</code> (16 en nativo). La regla es «un escalón por dentro del grupo», no «14»: es el único valor de forma fuera de la escala 4·8·12·16 del sistema, y si se mueve <code>--screen-radius</code>, se mueve con él.</p>
 
       <h2 class="ds-h2">8 · Lo que no va, y por qué</h2>
       <p class="ds-p">Las seis fallan <strong>por ausencia</strong>, que es lo que antes no existía: una pantalla sin nada de composición pasaba todos los checks. Son de inspección, no de regex — ningún script las agarra.</p>
@@ -17451,10 +17483,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
                   <span class="emb-gs-section-link-name">Components</span>
                   <span class="emb-gs-section-link-arrow">→</span>
                 </div>
-                <div class="emb-gs-section-link" onclick="navigate('develop')">
-                  <span class="emb-gs-section-link-name">Develop</span>
-                  <span class="emb-gs-section-link-arrow">→</span>
-                </div>
+                
                 <div class="emb-gs-section-link" onclick="navigate('design-tokens')">
                   <span class="emb-gs-section-link-name">Design Tokens</span>
                   <span class="emb-gs-section-link-arrow">→</span>
@@ -17538,13 +17567,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
               <p class="emb-gs-nav-desc">Piezas de UI listas para usar: specs, estados, variantes, código HTML+CSS y guías de uso para cada componente.</p>
             </div>
           </div>
-          <div class="emb-gs-nav-row" onclick="navigate('develop')">
-            <div class="emb-gs-nav-dot"></div>
-            <div>
-              <p class="emb-gs-nav-name">Develop</p>
-              <p class="emb-gs-nav-desc">Setup técnico para desarrolladores: instalación, estructura de archivos, convenciones de nombrado y plantilla de página base.</p>
-            </div>
-          </div>
+          
           <div class="emb-gs-nav-row" onclick="navigate('design-tokens')">
             <div class="emb-gs-nav-dot"></div>
             <div>
@@ -17607,7 +17630,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             <p>Para el setup completo — estructura de archivos, convenciones de nombrado, plantilla de página base y guía de personalización de tokens — dirigite a la sección <strong>Develop</strong>. Ahí está toda la referencia técnica.</p>
           </div>
           <div style="margin-top:24px;">
-            <button class="btn-primary" onclick="navigate('develop')" style="height:44px;padding:0 24px;font-size:14px;">Ver guía técnica en Develop →</button>
+            <a class="btn-primary" href="https://github.com/amalgamaco/amalgama-design-system/blob/main/INSTALL.md" target="_blank" rel="noopener" style="height:44px;padding:0 24px;font-size:14px;display:inline-flex;align-items:center;text-decoration:none">Ver la guía de instalación →</a>
           </div>
         </div>
         <div class="emb-gs-visual-col">
@@ -17689,404 +17712,9 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
 
 </section>
     <!-- ═══════════ WEB ═══════════ -->
-    <section class="ds-section" id="s-develop-web">
-      <div class="ds-page-tag">Develop · Web</div>
-      <h1 class="docs-page-title">Guía de implementación web</h1>
-      <p class="docs-page-desc">Todo lo que necesitás para integrar el Design System en un proyecto web — instalación, estructura, componentes, tokens y plantillas. Sin npm, sin build tools, solo HTML y CSS.</p>
-
-      <div class="docs-section">
-        <h2 class="docs-section-title">1. Instalacion</h2>
-        <p class="docs-section-desc">Agrega las fuentes de Google Fonts y los 4 archivos CSS al <code>&lt;head&gt;</code> de tu HTML. No se necesita ningun otro paso.</p>
-
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>&lt;!-- Google Fonts --&gt;
-&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
-&lt;link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Epilogue:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;
-
-&lt;!-- Amalgama Design System --&gt;
-&lt;link rel="stylesheet" href="css/variables.css"&gt;
-&lt;link rel="stylesheet" href="css/base.css"&gt;
-&lt;link rel="stylesheet" href="css/layout.css"&gt;
-&lt;link rel="stylesheet" href="css/components.css"&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <table class="docs-props-table">
-          <thead><tr><th>Archivo</th><th>Contenido</th><th>Lineas</th></tr></thead>
-          <tbody>
-            <tr><td><code>variables.css</code></td><td>Design tokens: colores, radios, sombras, transiciones</td><td>82</td></tr>
-            <tr><td><code>base.css</code></td><td>Reset, tipografia, animaciones, clases utilitarias</td><td>81</td></tr>
-            <tr><td><code>layout.css</code></td><td>App shell: sidebar, topbar, contenido</td><td>189</td></tr>
-            <tr><td><code>components.css</code></td><td>Barrel: importa todos los componentes desde <code>css/components/</code></td><td>—</td></tr>
-          </tbody>
-        </table>
-
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Opcion B: Solo los componentes que necesitas</h3>
-        <p class="docs-section-desc">Copiá solo los archivos <code>.css</code> individuales que necesites desde <code>css/components/</code> — no hace falta el barrel completo:</p>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>&lt;!-- Solo los componentes que usas --&gt;
-&lt;link rel="stylesheet" href="css/components/button.css"&gt;
-&lt;link rel="stylesheet" href="css/components/form.css"&gt;
-&lt;link rel="stylesheet" href="css/components/table.css"&gt;
-&lt;link rel="stylesheet" href="css/components/badge.css"&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <!-- ════════ 2. ESTRUCTURA DE PAGINA ════════ -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">2. Estructura de pagina</h2>
-        <p class="docs-section-desc">Todas las paginas de la app usan este shell: un sidebar fijo a la izquierda con navegacion, un topbar sticky arriba, y el area de contenido principal.</p>
-
-        <div class="docs-preview full-width" style="padding:0;overflow:hidden;height:280px">
-          <div style="display:flex;height:100%">
-            <div style="width:180px;background:var(--card-bg);border-right:1px solid var(--border);padding:12px 8px;flex-shrink:0">
-              <div style="padding:8px 12px;font-family:'Epilogue',sans-serif;font-weight:600;font-size:13px;margin-bottom:12px;display:flex;align-items:center;gap:6px">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--interactive)" stroke-width="2.2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                Mi App
-              </div>
-              <div style="padding:6px 12px;font-size:12px;color:var(--interactive);background:var(--interactive-light);border-radius:6px;margin-bottom:2px">Dashboard</div>
-              <div style="padding:6px 12px;font-size:12px;color:var(--text-secondary)">Vacantes</div>
-              <div style="padding:6px 12px;font-size:12px;color:var(--text-secondary)">Candidatos</div>
-              <div style="padding:6px 12px;font-size:12px;color:var(--text-secondary)">People</div>
-            </div>
-            <div style="flex:1;display:flex;flex-direction:column">
-              <div style="height:40px;background:var(--card-bg);border-bottom:1px solid var(--border);padding:0 16px;display:flex;align-items:center;font-size:12px;color:var(--text-muted)">Reclutamiento / Dashboard</div>
-              <div style="flex:1;background:var(--bg);padding:16px">
-                <div style="font-family:'Epilogue',sans-serif;font-size:16px;font-weight:600;margin-bottom:12px">Dashboard</div>
-                <div style="display:flex;gap:8px">
-                  <div style="flex:1;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px">
-                    <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px">Vacantes</div>
-                    <div style="font-family:'Epilogue',sans-serif;font-size:20px;font-weight:700">24</div>
-                  </div>
-                  <div style="flex:1;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px">
-                    <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px">Candidatos</div>
-                    <div style="font-family:'Epilogue',sans-serif;font-size:20px;font-weight:700">156</div>
-                  </div>
-                  <div style="flex:1;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px">
-                    <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px">Entrevistas</div>
-                    <div style="font-family:'Epilogue',sans-serif;font-size:20px;font-weight:700">8</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;div class="app"&gt;
-  &lt;!-- Sidebar (220px fijo) --&gt;
-  &lt;aside class="sidebar"&gt;
-    &lt;div class="sidebar-logo"&gt;Mi App&lt;/div&gt;
-    &lt;nav class="sidebar-nav"&gt;
-      &lt;div class="nav-section-label"&gt;Reclutamiento&lt;/div&gt;
-      &lt;a class="nav-item active"&gt;Dashboard&lt;/a&gt;
-      &lt;a class="nav-item"&gt;Vacantes&lt;/a&gt;
-      &lt;a class="nav-item"&gt;Candidatos&lt;/a&gt;
-    &lt;/nav&gt;
-  &lt;/aside&gt;
-
-  &lt;!-- Main (ocupa el resto) --&gt;
-  &lt;main class="main"&gt;
-    &lt;!-- Topbar (56px sticky) --&gt;
-    &lt;header class="topbar"&gt;
-      &lt;div class="topbar-breadcrumb"&gt;
-        &lt;a href="#"&gt;Reclutamiento&lt;/a&gt;
-        &lt;span class="separator"&gt;/&lt;/span&gt;
-        Dashboard
-      &lt;/div&gt;
-      &lt;div class="avatar"&gt;MG&lt;/div&gt;
-    &lt;/header&gt;
-
-    &lt;!-- Content --&gt;
-    &lt;div class="content"&gt;
-      &lt;!-- Tu contenido aqui --&gt;
-    &lt;/div&gt;
-  &lt;/main&gt;
-&lt;/div&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <!-- ════════ 3. USAR UN COMPONENTE ════════ -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">3. Usar un componente</h2>
-        <p class="docs-section-desc">Cada componente es un archivo <code>.css</code> autocontenido en <code>css/components/</code> — usá las clases directamente en tu HTML/JSX. Si tu proyecto es React, copiá también el wrapper opcional desde <code>components/ui/</code> (+ <code>components/lib/utils.ts</code> para <code>cn()</code>). Cada archivo incluye un comment header con ejemplo de uso y la regla de decisión.</p>
-
-        <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;max-width:100%;box-sizing:border-box;">
-          <div style="flex:1;min-width:180px;background:var(--interactive-light);border-radius:var(--radius-md);padding:16px;text-align:center">
-            <div style="font-size:24px;margin-bottom:8px">1.</div>
-            <div style="font-size:13px;font-weight:600;color:var(--text-primary)">Buscar</div>
-            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">Navega por los componentes en la barra lateral</div>
-          </div>
-          <div style="flex:1;min-width:180px;background:var(--interactive-light);border-radius:var(--radius-md);padding:16px;text-align:center">
-            <div style="font-size:24px;margin-bottom:8px">2.</div>
-            <div style="font-size:13px;font-weight:600;color:var(--text-primary)">Copiar</div>
-            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">Click en "Copiar" en el bloque de codigo</div>
-          </div>
-          <div style="flex:1;min-width:180px;background:var(--interactive-light);border-radius:var(--radius-md);padding:16px;text-align:center">
-            <div style="font-size:24px;margin-bottom:8px">3.</div>
-            <div style="font-size:13px;font-weight:600;color:var(--text-primary)">Pegar</div>
-            <div style="font-size:12px;color:var(--text-secondary);margin-top:4px">Pega el HTML en tu pagina — listo</div>
-          </div>
-        </div>
-
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin-bottom:12px">Ejemplo: pagina de vacantes</h3>
-        <p class="docs-section-desc">Combinando <code>page-header</code>, <code>toolbar</code>, <code>data-table</code> y <code>badge</code> en una sola vista:</p>
-
-        <div class="docs-preview full-width">
-          <div class="page-header">
-            <h1 class="page-title">Vacantes</h1>
-            <button class="btn-primary">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              Nueva vacante
-            </button>
-          </div>
-          <div class="toolbar">
-            <div class="search-field">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              <input type="text" placeholder="Buscar vacantes...">
-            </div>
-            <button class="toolbar-btn">Filtros</button>
-          </div>
-          <div class="result-count">Mostrando <strong>3</strong> vacantes</div>
-          <table class="data-table">
-            <thead>
-              <tr><th>Puesto</th><th>Departamento</th><th>Candidatos</th><th>Estado</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="font-weight:500">Disenador UX Senior</td>
-                <td>Producto</td>
-                <td>12</td>
-                <td><span class="badge badge-open">Abierta</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight:500">Frontend Developer</td>
-                <td>Ingenieria</td>
-                <td>8</td>
-                <td><span class="badge badge-open">Abierta</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight:500">Product Manager</td>
-                <td>Producto</td>
-                <td>5</td>
-                <td><span class="badge badge-warning">Pendiente</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;div class="content"&gt;
-  &lt;div class="page-header"&gt;
-    &lt;h1 class="page-title"&gt;Vacantes&lt;/h1&gt;
-    &lt;button class="btn-primary"&gt;+ Nueva vacante&lt;/button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="toolbar"&gt;
-    &lt;div class="search-field"&gt;
-      &lt;svg ...&gt;...&lt;/svg&gt;
-      &lt;input type="text" placeholder="Buscar vacantes..."&gt;
-    &lt;/div&gt;
-    &lt;button class="toolbar-btn"&gt;Filtros&lt;/button&gt;
-  &lt;/div&gt;
-
-  &lt;div class="result-count"&gt;Mostrando &lt;strong&gt;3&lt;/strong&gt; vacantes&lt;/div&gt;
-
-  &lt;table class="data-table"&gt;
-    &lt;thead&gt;
-      &lt;tr&gt;&lt;th&gt;Puesto&lt;/th&gt;&lt;th&gt;Departamento&lt;/th&gt;&lt;th&gt;Estado&lt;/th&gt;&lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody&gt;
-      &lt;tr&gt;
-        &lt;td&gt;Disenador UX Senior&lt;/td&gt;
-        &lt;td&gt;Producto&lt;/td&gt;
-        &lt;td&gt;&lt;span class="badge badge-open"&gt;Abierta&lt;/span&gt;&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/tbody&gt;
-  &lt;/table&gt;
-&lt;/div&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <!-- ════════ 4. PERSONALIZAR TOKENS ════════ -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">4. Personalizar tokens</h2>
-        <p class="docs-section-desc">Cambia cualquier variable en <code>variables.css</code> y toda la interfaz se actualiza automaticamente. Estos son los tokens principales:</p>
-
-        <table class="docs-props-table">
-          <thead><tr><th>Token</th><th>Default</th><th>Controla</th></tr></thead>
-          <tbody>
-            <tr><td><code>--interactive</code></td><td>#4F80FF</td><td>Botones, links, estados activos, badges destacados</td></tr>
-            <tr><td><code>--primary-500</code></td><td>#253e82</td><td>Color navy del brand, hover de botones</td></tr>
-            <tr><td><code>--radius</code></td><td>12px (lg)</td><td>Border-radius de cards, modals, tables</td></tr>
-            <tr><td><code>--radius-md</code></td><td>8px</td><td>Border-radius de inputs, botones, kanban cards</td></tr>
-            <tr><td><code>--bg</code></td><td>var(--neutral-50)</td><td>Fondo de pagina</td></tr>
-            <tr><td><code>--card-bg</code></td><td>#ffffff</td><td>Fondo de tarjetas, sidebar, topbar</td></tr>
-            <tr><td><code>--text-primary</code></td><td>var(--primary-900) · #01164D</td><td>Texto principal de página (títulos y cuerpo) — navy brand. En dark: #EAEBED</td></tr>
-            <tr><td><code>--border</code></td><td>on-surface al 10% (color-mix)</td><td>Bordes de contenedores (cards, tablas, paneles). Los elementos interactivos usan <code>--color-outline</code></td></tr>
-            <tr><td><code>--shadow-md</code></td><td>0 4px 16px rgba(28,36,56,.08)</td><td>Hover en cards, dropdowns</td></tr>
-            <tr><td><code>--duration-fast</code></td><td>120ms</td><td>Todas las transiciones rapidas (hover, focus)</td></tr>
-          </tbody>
-        </table>
-
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Ejemplo: cambiar el color interactivo</h3>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>/* variables.css — cambia solo esta linea */
---interactive: #10b981;    /* de azul a verde */
-
-/* Resultado: TODOS los botones, links, tabs activos,
-   badges y focus rings cambian a verde */</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <!-- ════════ 5. ESTRUCTURA DE ARCHIVOS ════════ -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">5. Estructura de archivos</h2>
-
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>frontend/
-  css/
-    variables.css          ← Tokens: colores, radios, sombras, transiciones
-    base.css               ← Reset, tipografia, animaciones, utilidades
-    layout.css             ← App shell: sidebar, topbar, contenido
-    components.css         ← Barrel: importa todo css/components/
-    components/
-      button.css           ← clases planas (.btn-primary...), sin build step
-      badge.css
-      card.css
-      ...                  ← autocontenidos: copia el .css que necesites
-  components/ui/            ← wrappers React opcionales (mismas clases)
-    button.tsx
-    ...
-  ui/
-    index.html             ← Catalogo de componentes (SPA canonica)</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-
-        <table class="docs-props-table" style="margin-top:16px">
-          <thead><tr><th>Archivo</th><th>Que incluye</th></tr></thead>
-          <tbody>
-            <tr><td><code>variables.css</code></td><td>6 paletas de color (neutral, primary, secondary, success, error, warning), aliases semanticos (--bg, --tertiary, --border...), escala de radius (sm/md/lg/xl/full), 3 niveles de sombra, tokens de transicion</td></tr>
-            <tr><td><code>base.css</code></td><td>Box-sizing reset, tipografia body (Inter 14px), headings (Epilogue 600), scrollbar custom, 6 keyframe animations, clases utilitarias (.text-muted, .font-mono, .sr-only)</td></tr>
-            <tr><td><code>layout.css</code></td><td>App shell (.app, .main, .content), sidebar (220px fijo), topbar (56px sticky con breadcrumbs y avatar)</td></tr>
-            <tr><td><code>components.css</code></td><td>Barrel que importa todos los componentes de <code>css/components/</code>. Enlazalo una vez (<code>&lt;link rel="stylesheet" href="css/components.css"&gt;</code>).</td></tr>
-            <tr><td><code>components/ui/*.tsx</code></td><td>Wrappers React opcionales (mismas clases planas de <code>css/components/</code>, sin utilidades Tailwind). Copiá el <code>.tsx</code> + <code>components/lib/utils.ts</code> si tu proyecto es React.</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ════════ 6. CONVENCIONES ════════ -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">6. Convenciones de nombrado</h2>
-
-        <table class="docs-props-table">
-          <thead><tr><th>Patron</th><th>Ejemplo</th><th>Descripcion</th></tr></thead>
-          <tbody>
-            <tr><td><code>.componente</code></td><td><code>.card</code>, <code>.badge</code>, <code>.modal</code></td><td>Clase base del componente</td></tr>
-            <tr><td><code>.componente-elemento</code></td><td><code>.modal-header</code>, <code>.card-title</code></td><td>Elemento hijo del componente</td></tr>
-            <tr><td><code>.componente.modificador</code></td><td><code>.badge.badge-open</code>, <code>.btn-primary.btn-sm</code></td><td>Variante visual</td></tr>
-            <tr><td><code>.text-*</code></td><td><code>.text-muted</code>, <code>.text-accent</code></td><td>Utilidades de color de texto</td></tr>
-            <tr><td><code>.font-*</code></td><td><code>.font-mono</code>, <code>.font-heading</code></td><td>Utilidades de familia tipografica</td></tr>
-            <tr><td><code>--token-escala</code></td><td><code>--neutral-500</code>, <code>--radius-md</code></td><td>Tokens con escala numerica</td></tr>
-          </tbody>
-        </table>
-
-        <h3 style="font-family:'Epilogue',sans-serif;font-size:15px;font-weight:600;margin:20px 0 12px">Colores semanticos para estados</h3>
-        <div class="docs-preview">
-          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-            <span class="badge badge-open">badge-open</span>
-            <span class="badge badge-active">badge-active</span>
-            <span class="badge badge-closed">badge-closed</span>
-            <span class="badge badge-draft">badge-draft</span>
-            <span class="badge badge-warning">badge-warning</span>
-            <span class="badge badge-tertiary">badge-tertiary</span>
-            <span class="badge badge-archived">badge-archived</span>
-          </div>
-        </div>
-        <div class="docs-code-wrapper">
-          <pre class="docs-code"><code>&lt;!-- Exito / activo → verde --&gt;
-&lt;span class="badge badge-open"&gt;Abierta&lt;/span&gt;
-&lt;span class="badge badge-active"&gt;Activa&lt;/span&gt;
-
-&lt;!-- Error / cerrado → rojo --&gt;
-&lt;span class="badge badge-closed"&gt;Cerrada&lt;/span&gt;
-
-&lt;!-- Warning → amarillo --&gt;
-&lt;span class="badge badge-warning"&gt;Pendiente&lt;/span&gt;
-
-&lt;!-- Neutro → gris --&gt;
-&lt;span class="badge badge-draft"&gt;Borrador&lt;/span&gt;
-&lt;span class="badge badge-archived"&gt;Archivada&lt;/span&gt;
-
-&lt;!-- Tertiary (violeta) --&gt;
-&lt;span class="badge badge-tertiary"&gt;Nueva&lt;/span&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-      <!-- ════════ 7. PLANTILLA RAPIDA ════════ -->
-      <div class="docs-section">
-        <h2 class="docs-section-title">7. Plantilla rapida</h2>
-        <p class="docs-section-desc">Copia esta plantilla para crear una nueva pagina desde cero:</p>
-
-        <div class="docs-code-wrapper">
-          <pre class="docs-code standalone"><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="es"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;Mi Pagina — Amalgama&lt;/title&gt;
-  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
-  &lt;link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Epilogue:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;
-  &lt;link rel="stylesheet" href="css/variables.css"&gt;
-  &lt;link rel="stylesheet" href="css/base.css"&gt;
-  &lt;link rel="stylesheet" href="css/layout.css"&gt;
-  &lt;link rel="stylesheet" href="css/components.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;div class="app"&gt;
-    &lt;aside class="sidebar"&gt;
-      &lt;div class="sidebar-logo"&gt;
-        &lt;svg width="20" height="20" ...&gt;...&lt;/svg&gt;
-        NewPeopleForce
-      &lt;/div&gt;
-      &lt;nav class="sidebar-nav"&gt;
-        &lt;div class="nav-section-label"&gt;Menu&lt;/div&gt;
-        &lt;a class="nav-item active"&gt;Dashboard&lt;/a&gt;
-        &lt;a class="nav-item"&gt;Vacantes&lt;/a&gt;
-      &lt;/nav&gt;
-    &lt;/aside&gt;
-    &lt;main class="main"&gt;
-      &lt;header class="topbar"&gt;
-        &lt;div class="topbar-breadcrumb"&gt;Dashboard&lt;/div&gt;
-        &lt;div class="avatar"&gt;MG&lt;/div&gt;
-      &lt;/header&gt;
-      &lt;div class="content"&gt;
-        &lt;div class="page-header"&gt;
-          &lt;h1 class="page-title"&gt;Dashboard&lt;/h1&gt;
-        &lt;/div&gt;
-        &lt;!-- Agrega componentes aqui --&gt;
-      &lt;/div&gt;
-    &lt;/main&gt;
-  &lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-          <button class="docs-copy-btn">Copiar</button>
-        </div>
-      </div>
-
-    </section>
+    
     <!-- ═══════════ MOBILE ═══════════ -->
-    <section class="ds-section" id="s-develop-mobile">
-      <div class="ds-page-tag">Develop · Platform</div>
-      <h1 class="ds-page-title">Mobile</h1>
-      <p class="ds-page-desc">Implementation guide for iOS and Android using the Amalgama Design System token layer and component library.</p>
-      <div class="ds-callout">
-        <strong>Implementado.</strong> Avatar se implementa como <code>css/components/avatar.css</code> — un disco con iniciales o imagen, sin dependencias, tematizado con tokens Embassy.
-      </div>
-    </section>
+    
     <!-- ═══════════ DESIGN TOKENS ═══════════ -->
     <section class="ds-section has-toc" id="s-design-tokens">
       <nav class="ds-toc" id="dt-toc" aria-label="En esta página">
@@ -24623,73 +24251,7 @@ import { Button } from &quot;./components/ui/button&quot;
 
 
     <!-- ═══════════ DEVELOP OVERVIEW ═══════════ -->
-    <section class="ds-section" id="s-develop">
-      <div class="ds-page-tag">Develop</div>
-      <h1 class="ds-page-title">Develop</h1>
-      <p class="ds-page-desc">Platform-specific implementation guides for integrating the Amalgama Design System into your projects — web and mobile.</p>
-      <div class="nav-card-grid" style="margin-bottom:32px">
-  <div class="nav-card" onclick="navigate('develop-web')">
-    <div class="nav-card-header">
-      <span class="nav-card-tag">Develop</span>
-      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
-    </div>
-    <div class="nav-card-content">
-      <div class="nav-card-title">Web</div>
-      <div class="nav-card-desc">HTML + CSS + JS implementation guide for web projects.</div>
-    </div>
-    <div class="nav-card-visual nv-success">
-      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Browser window -->
-        <rect x="36" y="26" width="208" height="96" rx="10" fill="currentColor" opacity=".18"/>
-        <rect x="36" y="26" width="208" height="26" rx="10" fill="currentColor" opacity=".28"/>
-        <rect x="36" y="38" width="208" height="14" fill="currentColor" opacity=".10"/>
-        <circle cx="54" cy="39" r="4" fill="currentColor" opacity=".50"/>
-        <circle cx="66" cy="39" r="4" fill="currentColor" opacity=".38"/>
-        <circle cx="78" cy="39" r="4" fill="currentColor" opacity=".28"/>
-        <rect x="94" y="33" width="100" height="12" rx="6" fill="currentColor" opacity=".22"/>
-        <!-- HTML tags -->
-        <rect x="50" y="64" width="36" height="8" rx="4" fill="currentColor" opacity=".60"/>
-        <rect x="92" y="64" width="56" height="8" rx="4" fill="currentColor" opacity=".35"/>
-        <rect x="50" y="78" width="28" height="8" rx="4" fill="currentColor" opacity=".48"/>
-        <rect x="84" y="78" width="72" height="8" rx="4" fill="currentColor" opacity=".28"/>
-        <rect x="162" y="78" width="36" height="8" rx="4" fill="currentColor" opacity=".20"/>
-        <rect x="50" y="92" width="36" height="8" rx="4" fill="currentColor" opacity=".55"/>
-        <rect x="92" y="92" width="48" height="8" rx="4" fill="currentColor" opacity=".30"/>
-      </svg>
-    </div>
-  </div>
-
-  <div class="nav-card" onclick="navigate('develop-mobile')">
-    <div class="nav-card-header">
-      <span class="nav-card-tag">Develop</span>
-      <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>
-    </div>
-    <div class="nav-card-content">
-      <div class="nav-card-title">Mobile</div>
-      <div class="nav-card-desc">iOS and Android implementation using the Amalgama token layer.</div>
-    </div>
-    <div class="nav-card-visual nv-tertiary">
-      <svg viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- iOS phone -->
-        <rect x="84" y="16" width="56" height="100" rx="12" fill="currentColor" opacity=".20"/>
-        <rect x="84" y="16" width="56" height="100" rx="12" stroke="currentColor" stroke-width="2" opacity=".40" fill="none"/>
-        <rect x="96" y="24" width="32" height="4" rx="2" fill="currentColor" opacity=".35"/>
-        <circle cx="112" cy="108" r="5" stroke="currentColor" stroke-width="1.5" opacity=".40" fill="none"/>
-        <!-- Screen content -->
-        <rect x="92" y="34" width="40" height="6" rx="3" fill="currentColor" opacity=".45"/>
-        <rect x="92" y="46" width="32" height="5" rx="2.5" fill="currentColor" opacity=".30"/>
-        <rect x="92" y="58" width="40" height="14" rx="5" fill="currentColor" opacity=".35"/>
-        <rect x="92" y="78" width="40" height="5" rx="2.5" fill="currentColor" opacity=".22"/>
-        <!-- Android phone offset -->
-        <rect x="148" y="28" width="48" height="86" rx="10" fill="currentColor" opacity=".15"/>
-        <rect x="148" y="28" width="48" height="86" rx="10" stroke="currentColor" stroke-width="1.5" opacity=".30" fill="none"/>
-        <rect x="156" y="38" width="32" height="5" rx="2.5" fill="currentColor" opacity=".38"/>
-        <rect x="156" y="50" width="24" height="5" rx="2.5" fill="currentColor" opacity=".25"/>
-        <rect x="156" y="62" width="32" height="12" rx="4" fill="currentColor" opacity=".28"/>
-      </svg>
-    </div>
-  </div>
-    </section>
+    
 
     <!-- ═══════════ FOUNDATIONS OVERVIEW ═══════════ -->
     <section class="ds-section" id="s-foundations">
@@ -26842,7 +26404,19 @@ import { Bold } from &quot;lucide-react&quot;
       <p class="ds-page-desc">Cómo la gente se mueve por el producto y siempre sabe dónde está y cómo volver.</p>
       <section class="docs-section">
         <p class="bd-lead">El app shell es la columna vertebral: sidebar para navegación global, topbar para contexto y acciones globales. Las acciones secundarias de una vista van en una <code>Toolbar</code>, no en el topbar.</p>
-      </section>
+      
+      <h2 class="ds-h2">App Shell</h2>
+      <p class="ds-p">Vive en <code>css/layout.css</code>. Estuvo documentado en «Layout» hasta septiembre de 2026, lo cual confundía dos cosas: el shell es un <em>patrón de navegación</em>, no un fundamento de composición.</p>
+<div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>Token</th><th>Valor</th><th>Descripción</th></tr></thead>
+          <tbody>
+            <tr><td><code>--sidebar-width</code></td><td>220px</td><td>Ancho del sidebar de navegación lateral</td></tr>
+            <tr><td><code>--topbar-height</code></td><td>56px</td><td>Altura de la barra superior</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
       <section class="docs-section">
         <h2 class="docs-section-title">Patrones</h2>
         <ul class="bd-overview-list">
@@ -28302,7 +27876,6 @@ const SECTIONS = {
   'overview':          { label: 'Home',                  group: null },
   'get-started':       { label: 'Get Started',           group: null },
   // Overview pages (group entry points)
-  'develop':           { label: 'Develop',               group: null },
   'foundations':       { label: 'Foundations',           group: null },
   'styles':            { label: 'Styles',                group: null },
   'components':        { label: 'Components',            group: null },
@@ -28322,16 +27895,12 @@ const SECTIONS = {
   'pb-states':           { label: 'Feedback y estados',          group: 'Playbook', parent: 'playbook' },
   'pb-responsive':       { label: 'Responsive y layout',         group: 'Playbook', parent: 'playbook' },
   // Develop
-  'develop-web':       { label: 'Web',                   group: 'Develop' },
-  'develop-mobile':    { label: 'Mobile',                group: 'Develop' },
   // Foundations
   'accessibility':     { label: 'Accessibility',         group: 'Foundations' },
   'writing':           { label: 'Content Design',        group: 'Foundations' },
   'design-tokens':     { label: 'Design Tokens',         group: 'Foundations' },
   'interaction-state': { label: 'Interaction State',     group: 'Foundations' },
-  'grid':              { label: 'Layout',                group: 'Foundations' },
   'composition':       { label: 'Composición',           group: 'Foundations' },
-  'space':             { label: 'Capa espacial',         group: 'Foundations' },
   'mobile':            { label: 'Nativo',                group: 'Foundations' },
   'mobile-components': { label: 'Componentes en nativo', group: 'Foundations' },
   'logos':             { label: 'Logos',                 group: 'Foundations' },
@@ -28341,6 +27910,7 @@ const SECTIONS = {
   'color-palettes':    { label: 'Baseline',              group: 'Styles' },
   'color-roles':       { label: 'Color Roles',           group: 'Styles' },
   'elevation':         { label: 'Elevation',             group: 'Styles' },
+  'space':             { label: 'Capa espacial',         group: 'Styles' },
   'icons':             { label: 'Icons',                 group: 'Styles' },
   'illustrations':     { label: 'Illustrations',         group: 'Styles' },
   'animations':        { label: 'Motion',                group: 'Styles' },
@@ -28352,7 +27922,7 @@ const SECTIONS = {
   'c-avatar':          { label: 'Avatar',                group: 'Components' },
   'c-accordion':       { label: 'Accordion',             group: 'Components' },
   'c-alert':           { label: 'Alert',                 group: 'Components' },
-  'c-aspect-ratio':    { label: 'Aspect Ratio',          group: 'Foundations', parent: 'grid' },
+  'c-aspect-ratio':    { label: 'Aspect Ratio',          group: 'Foundations', parent: 'composition' },
   'c-badge':           { label: 'Badges',                group: 'Components' },
   'c-breadcrumb':      { label: 'Breadcrumb',            group: 'Components' },
   'c-button':          { label: 'Buttons',               group: 'Components' },
@@ -28370,7 +27940,7 @@ const SECTIONS = {
   'c-pagination':      { label: 'Pagination',            group: 'Components' },
   'c-scroll-area':     { label: 'Scroll Area',           group: 'Components' },
   'c-toggle':          { label: 'Toggle',                group: 'Components' },
-  'c-empty':           { label: 'Empty State',         group: 'Foundations', parent: 'grid' },
+  'c-empty':           { label: 'Empty State',         group: 'Foundations', parent: 'composition' },
   'c-input':           { label: 'Input',                 group: 'Components' },
   'c-kanban':          { label: 'Kanban Card',         group: 'Components', parent: 'c-card' },
   'c-list':            { label: 'Lists',                 group: 'Components' },
@@ -28386,7 +27956,7 @@ const SECTIONS = {
   'c-select':          { label: 'Select',                group: 'Components' },
   'c-bottom-sheet':    { label: 'Bottom Sheets',        group: 'Components' },
   'c-side-sheet':      { label: 'Side Sheets',          group: 'Components' },
-  'c-skeleton':        { label: 'Skeleton',            group: 'Foundations', parent: 'grid' },
+  'c-skeleton':        { label: 'Skeleton',            group: 'Foundations', parent: 'composition' },
   'c-slider':          { label: 'Sliders',               group: 'Components' },
   'c-snackbar':        { label: 'Snackbar',             group: 'Components' },
   'c-stat-card':       { label: 'Stat Card',           group: 'Components', parent: 'c-card' },

@@ -24,10 +24,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.2.0/css/composition.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.2.0/css/components.css">
 <!-- app shell (sidebar + topbar) solamente: .../css/layout.css -->
+<!-- preview de pantalla nativa (marco de teléfono): .../css/preview-native.css -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 ```
 
 Dark mode: `<html data-theme="dark">`. No agregues overrides por tema.
+Para un preview nativo, el marco además lleva `data-platform="native"`.
+
+**Este bloque es la única fuente de la versión.** Sale de `DS_VERSION` en
+`scripts/build-public-api.mjs`; nada más —ni una skill, ni un ejemplo, ni un README— debe
+escribir el tag a mano. Hasta septiembre de 2026 las skills lo escribían catorce veces y el
+día que el tag se movió quedaron sirviendo un CSS sin `composition.css`.
 
 El tag va pineado a propósito: lo que se entrega no cambia de aspecto porque el DS mergeó algo.
 Para subir de versión, ver DEPLOYMENT.md §Releases.

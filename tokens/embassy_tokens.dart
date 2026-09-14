@@ -461,8 +461,6 @@ class EmbassyDims {
   static const radiusLg = 12.0;
   static const radiusXl = 16.0;
   static const radiusFull = 9999.0;
-  static const screenGutter = 20.0;
-  static const radiusButton = 12.0;
 
   // ── native ──
   static const space05Native = 2.0;
@@ -539,7 +537,7 @@ class EmbassyDims {
   static const radiusXlNative = 16.0;
   static const radiusFullNative = 9999.0;
   static const screenGutterNative = 20.0;
-  static const radiusButtonNative = 12.0;
+  static const radiusButtonNative = 14.0;
 
 }
 

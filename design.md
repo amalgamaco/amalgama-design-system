@@ -67,16 +67,27 @@ Antes de escribir nada, mirá dónde vas a escribir:
 
 ### Pasada 1 — Enmarcá el trabajo del lector
 
-Escribí estas seis líneas antes del primer tag. Si no podés completar una, estás adivinando.
+**Éste es el bloque de decisión de una página, y es el único.** Nueve líneas antes del primer tag.
+Si no podés completar una, estás adivinando.
 
 ```
 OBJETIVO    lector: <verbo + objeto>       negocio: <qué vuelve más probable>
 OBJETO      primario: <una sola entidad>   niveles: <clave → soporte → bajo demanda>
 ACCIONES    primaria: <una sola>           secundarias: <cuáles y dónde>
-COMPOSICIÓN <patrón de §5>
+COMPOSICIÓN <afirmación | evidencia | comparación | herramienta>   ← §5
+ESTRUCTURA  <column | column-bleed | column-rail | column-split>    ← y por qué esa
+ANCHO       <1200 | 1280 | 1440 | 1600 | 1920 | read | form | sin límite>
+APERTURA    <editorial-lg | editorial-md | editorial-sm>            ← el h1, una sola vez
 RESPONSIVE  desktop: <estructura>          mobile: <la transformación, no un encogimiento>
 ESTADOS     vacío / cargando / error / éxito / sin permiso
 ```
+
+Las tres líneas del medio —estructura, ancho, apertura— las decide `COMPOSICION.md` §0 y §0b, y
+ahí están las tablas con las clases y cuándo va cada una. Acá están para que el bloque se escriba
+de una sola vez y no en dos lugares.
+
+Sus dos hermanos, misma forma y otra superficie: `COMPOSICION.md` III·b para una **pantalla de
+producto** y `MOBILE.md` §6c para una **pantalla nativa**. Se escribe uno, el que corresponda.
 
 ### Pasada 2 — Elegí la composición
 
@@ -105,9 +116,11 @@ arreglalo **antes** de entregar. Una entrega con fallas conocidas cuesta más qu
 
 Reglas transversales de composición:
 
-- **Una sola columna de contenido y un ancho deliberado.** Elegí por contenido, no por costumbre:
-  ~1120–1200px para listas, tablas y dashboards · ~760–800px para lectura y detalle ·
-  ~640–680px para un formulario o un panel de auth. Los bordes izquierdo y derecho de **todas** las
+- **Una sola columna de contenido y un ancho deliberado.** Elegí por contenido, no por costumbre.
+  **Los anchos son clases, no números a mano**, y la tabla única está en `COMPOSICION.md` §0
+  «El ancho — se elige, no se hereda»: `.column` (1200, el default) y sus variantes hasta
+  `.column-bleed`, más `.column-read` (800) para lectura y detalle y `.column-form` (680) para un
+  formulario o un panel de auth. Los bordes izquierdo y derecho de **todas** las
   regiones se alinean a esa columna. Una barra de búsqueda o un toolbar centrado con un ancho propio
   distinto del de los resultados que filtra es un defecto, no una decisión de estilo.
 - **Un solo sistema por eje.** Un concepto se expresa una vez. Si hay chips de filtro *y* una banda

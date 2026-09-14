@@ -97,15 +97,27 @@ La página no es una pila de bandas iguales. La sección que carga el argumento 
 apoyo son compactas. `.section-lead` mide 2,5 veces `.section-tight` — una diferencia real, no del
 10%. Regla 6.
 
-## D · Forma: borde antes que sombra, superficie antes que caja
+## D · Forma: cómo se separan dos cosas
 
-Las secciones se separan con **una línea de 1px que cruza toda la pantalla** (`.rule`, fuera de la
-columna), no con bandas de fondo alternado. La banda es lo que hace toda página generada; la línea
-es la misma decisión que el borde sobre la sombra.
+**Ésta es la única escalera de separación del sistema, y vale para las tres superficies.** Se lee
+de arriba abajo: se usa la primera que alcance.
 
-Somos precisión técnica: el borde de 1px es nuestra herramienta de separación, y la sombra queda
-para lo que **realmente flota** (overlay, modal, toast). La mayor parte del contenido no necesita
-contenedor: se agrupa con espacio. Regla 7.
+| | Herramienta | Dónde |
+|---|---|---|
+| 1 | **Espacio** | Siempre que alcance. La mayor parte del contenido no necesita contenedor: se agrupa con aire. Regla 7 |
+| 2 | **Escalón de superficie** — `--color-surface` → `--color-surface-container` | **Dentro de una pantalla**, de producto o nativa: es lo que agrupa, y agrupa mejor que una línea porque además delimita |
+| 3 | **Línea de 1px** — `.rule`, fuera de la columna | **Entre secciones de una página.** Cruza toda la pantalla. Nunca bandas de fondo alternado: la banda es lo que hace toda página generada |
+| 4 | **Sombra** | Sólo lo que **realmente flota**: overlay, modal, toast |
+
+Somos precisión técnica: separamos con la herramienta más liviana que funcione, y por eso el
+borde le gana a la sombra y el escalón le gana al borde.
+
+**Lo que parece contradicción y no lo es:** `.rule` es de página y el escalón es de pantalla.
+Adentro de un app shell la línea sobra —el shell ya encuadra, y dibujar el borde otra vez es
+dibujarlo dos veces (`D10` en escritorio, `M10` en nativo)—. Al revés, una página que separa sus
+secciones con escalones de superficie termina siendo justo la banda alternada que la tabla
+prohíbe. Las aplicaciones concretas están en III·a·1 y en `MOBILE.md` §6b·1; ninguna de las dos
+vuelve a explicar el porqué.
 
 ## E · El gesto: el índice de sección en monoespaciada
 
@@ -470,11 +482,10 @@ de producto y una pantalla nativa son la misma pantalla en dos densidades, no do
 
 ## III·a — Las ocho convenciones
 
-**1 · La jerarquía la hace la superficie, no la línea**
-La pantalla es `--color-surface`; los paneles, tarjetas y tablas van en
-`--color-surface-container`. Ese escalón es lo que agrupa. Una banda separada con `.rule` o con un
-borde suelto, adentro del shell, dibuja dos veces el mismo límite: el shell ya encuadra. `.rule`
-sigue siendo de página.
+**1 · La jerarquía la hace la superficie, no la línea** (`D10`)
+Escalón 2 de la escalera de separación (Parte I §D), aplicado acá: la pantalla es
+`--color-surface`; los paneles, tarjetas y tablas van en `--color-surface-container`. Una banda
+separada con `.rule` o con un borde suelto, adentro del shell, dibuja dos veces el mismo límite.
 
 **2 · La pantalla abre con `page-header`, no con un titular**
 Título en `--font-size-heading-lg` a 600, y **una** acción primaria a la derecha. Sin registro
@@ -513,7 +524,8 @@ igual de ilegible que en una landing.
 
 ## III·b — El bloque de decisión
 
-Paralelo al de página (§0) y al de pantalla nativa (`MOBILE.md` §6c). Cinco líneas antes del markup.
+Paralelo al de página (`design.md` §4, nueve líneas) y al de pantalla nativa (`MOBILE.md` §6c,
+cinco). Cinco líneas antes del markup.
 
 ```
 ARQUETIPO   <list-collection | dashboard-overview | entity-detail | create-edit-form |

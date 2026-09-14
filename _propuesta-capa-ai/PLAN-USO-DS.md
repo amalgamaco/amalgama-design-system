@@ -1,5 +1,13 @@
 # Plan de uso del Design System de Amalgama
 
+> [!WARNING]
+> **Documento histórico — NO es fuente de verdad.** Esta carpeta es la propuesta de julio–septiembre
+> de 2026, analizada sobre el commit `acb86c0` (28-jul-2026). La capa de agentes ya se implementó y
+> vive en el repo `claude-code-plugins` (plugin `embassy`); la carpeta `skills/` que este texto
+> menciona **ya no existe** en la raíz de este repo. Varias decisiones de acá fueron reemplazadas.
+> Se conserva por trazabilidad. **Para lo vigente:** `COMPOSICION.md`, `MOBILE.md`, `design.md`,
+> `GOVERNANCE.md`, `PUBLIC-API.md` y `FAILURES.md`.
+
 **Para presentar al equipo** · 8 de septiembre de 2026 · Ana Borthagaray
 Complementa a `ANALISIS-SKILLS-DS.md` (el diagnóstico). Este documento responde una sola pregunta:
 **¿cómo se usa Embassy, en la práctica, desde que arranca un proyecto?**

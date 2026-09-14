@@ -398,10 +398,10 @@ Material, gluestack o nuestro CSS— son la gramática de una pantalla de app, y
 falla con nombre.
 
 **1 · La jerarquía la hace la superficie, no la línea** (`M10`)
-El fondo de la pantalla es `--color-surface`; cada bloque de contenido va en
-`--color-surface-container` con `--radius-xl` y un borde de 1px en `--color-outline-variant`.
-Un `<hr>` separando secciones es un reflejo de web: acá el escalón de superficie hace ese
-trabajo y lo hace mejor, porque además agrupa.
+Escalón 2 de la escalera de separación (`COMPOSICION.md` Parte I §D), aplicado acá: el fondo de
+la pantalla es `--color-surface`; cada bloque de contenido va en `--color-surface-container` con
+`--screen-radius` y un borde de 1px en `--color-outline-variant`. Un `<hr>` separando secciones
+es un reflejo de web.
 
 **2 · Lo que es una lista va en una lista agrupada** (`M11`)
 Un conjunto de pares etiqueta/dato va DENTRO de una tarjeta, no suelto sobre el fondo. Los
@@ -450,8 +450,11 @@ que no estaba escrito. Los pesos importan tanto como los tamaños.
 | Botón primario | `--font-size-body-md` · 16 | 600 | `--color-on-primary` |
 
 El botón primario va a `--control-height` (48) y a `--radius-button`, que en nativo el bloque
-`[data-platform="native"]` declara en `--radius-lg` (12): a 8 se lee como un botón de escritorio
-pegado adentro de una app, y a 12 queda un escalón por dentro de los grupos de 16.
+`[data-platform="native"]` declara en **14**: a 8 se lee como un botón de escritorio pegado
+adentro de una app, y a 14 queda apenas por dentro de los grupos, que van a `--screen-radius`
+(16 en nativo). **La regla es «un escalón por dentro del grupo», no «14»**: si se mueve
+`--screen-radius`, este valor se mueve con él. Es el único valor de forma fuera de la escala
+4·8·12·16 del sistema, y el porqué largo está en `css/variables.css` §«Forma del botón».
 
 **La acción secundaria en línea es una píldora chica, y no se dibuja a 48.** Va al mismo cuerpo
 que la pill de estado —caption, 13— porque son la misma clase visual: dos píldoras en la misma
@@ -486,16 +489,26 @@ título de cada tarjeta, en cambio, es `H8` y sigue siéndolo en un teléfono.
 
 ### 6c. El bloque de decisión, antes de maquetar
 
-Igual que el bloque de página en `COMPOSICION.md` §4, pero para una pantalla. Cinco líneas,
+Igual que el bloque de página de `design.md` §4, pero para una pantalla. Cinco líneas,
 escritas antes del primer tag. Si no podés completar una, estás adivinando.
 
 ```
 SUPERFICIE  pantalla: surface        bloques: surface-container    ← el escalón, no la línea
 ANCLA       <qué entra en el bloque invertido de arriba, y cuál es el número que importa>
 GRUPOS      <cada grupo = una tarjeta>   headers afuera, caption/600/muted
-FILA        etiqueta: label + muted   ·   dato: body-md + 500 + primary   ·   alto ≥ 52
+FILA        etiqueta y dato al MISMO cuerpo (label) · los separa el peso: 400 vs 600 · alto ≥ 52
 ACCIÓN      primaria: <una sola>     anclada abajo, fuera del scroll
 ```
+
+**Las cuatro que más se rompen solas, en orden de frecuencia.** Es el orden en el que conviene
+revisarlas, y el que las skills citan en vez de repetir:
+
+1. **El dato tiene que pesar más que su etiqueta** (`M13`). Una pantalla que grita los nombres de
+   los campos y susurra los valores es el default del sistema, no un descuido.
+2. **Los grupos van en tarjeta, con el divisor insetado al padding**, nunca a sangre (`M11`).
+3. **El header de sección va afuera del grupo**, en caption apagado — no adentro, en escala de
+   heading (`M12`).
+4. **El mono no entra a la UI**: ni en captions, ni en fechas, ni como gesto de marca (`M15`).
 
 ### 6d. Dónde vive la identidad en una pantalla
 
@@ -511,8 +524,9 @@ En nativo la identidad vive en otras tres cosas, y alcanzan:
   `--color-primary` a sangre ya dice de quién es antes de que se lea una palabra.
 - **La tipografía**: `--font-heading` en el nombre y en los números, `--font-body` en todo lo
   demás. El par ya es reconocible.
-- **La densidad y el radio**: `--radius-xl` (16) en los grupos, 52 de fila, `--screen-gutter` de 20.
-  Dos apps con la misma estructura y distinto radio no se confunden.
+- **La densidad y el radio**: los ocho tokens `--screen-*` de §6e. Dos apps con la misma
+  estructura y distinta densidad no se confunden —y esa es exactamente la superficie de ajuste
+  que cada equipo tiene.
 
 Una pantalla nativa de Amalgama no lleva overline, no lleva índice de sección y no lleva mono
 decorativo. Eso no es perder identidad: es ponerla donde en una app se ve.
