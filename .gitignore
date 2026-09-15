@@ -25,3 +25,4 @@ specs-svg-audit.json
 # "_proyecto-org/": instrucciones de proyecto y los .md generados por sus scripts.
 Claude outputs/
 _proyecto-org/
+_to_delete/

@@ -101,9 +101,18 @@ const RULES = [
   // dos positivos que NO son intercambiables: --letter-spacing-overline (0.04em, el overline de
   // página en mono) y --letter-spacing-label (0.08em, versalitas de 10-11px de componente).
   // Un literal acá es casi siempre el eyebrow de 0.14em que delata una página generada.
+  //
+  // El negativo se ancla al VALOR entero —`(?![^;}\n]*var\()`— y no al carácter que sigue al
+  // `\s*`. Escrito como `\s*(?!var\()`, el `\s*` retrocede a cero caracteres, mira el espacio
+  // (que no es `var(`) y da por literal justamente el uso correcto del token. Cambiar `\s*` por
+  // `[ \t]*` NO alcanza: también retrocede. Casos que fijan la regla:
+  //   marca:    letter-spacing: 0.14em;   ·   letter-spacing: 2px;
+  //   no marca: letter-spacing: var(--letter-spacing-label);
+  //             letter-spacing: var(--letter-spacing-label, 0.08em);
+  //             letter-spacing: calc(var(--letter-spacing-overline) * 2);
   {
     id: "A11", sev: "MEDIA", desc: "letter-spacing con valor literal en vez de --letter-spacing-*",
-    re: /letter-spacing\s*:\s*(?!var\()[^;}\n]+/g,
+    re: /letter-spacing\s*:\s*(?![^;}\n]*var\()[^;}\n]+/g,
     skipLine: (l) => /normal|inherit|initial|unset/.test(l),
   },
   // B3 solo aplica al input SUELTO. Un <input type="search"> dentro de .search-field o .search-bar
