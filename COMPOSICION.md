@@ -298,11 +298,53 @@ por default. Aparece cuando hay que ocupar espacio y no hay contenido.
 Y la regla que las cubre a todas: **una grilla solo cuando los ítems son intercambiables entre
 sí.** Si el segundo no podría ir en el lugar del primero sin que nada cambie, no es una grilla.
 
+## 4b. Cuando la tarjeta sí va, ésta es su anatomía
+
+La regla 4 dice qué no hacer y la 7 dice que la mayoría del contenido no necesita contenedor. Pero
+cuando la tarjeta **sí** es la forma correcta, describirla por resta no alcanza para construirla.
+Ésta es la anatomía, y sale de una tarjeta real del sistema: `.nav-card`.
+
+**Cuatro zonas, de arriba abajo:**
+
+| Zona | Qué lleva | Por qué |
+|---|---|---|
+| **1 · Barra superior** | Etiqueta a la izquierda, afordancia a la derecha, `justify-content: space-between` | No es «ícono + título». Es **categoría + salida**: dice de qué familia es esto y que se puede entrar |
+| **2 · Bloque de texto** | Titular y bajada, pegados entre sí | Es lo primero que se lee, y ocupa el lugar que en la tarjeta genérica ocupa la imagen |
+| **3 · Panel visual** | Ilustración adentro de un panel tintado, **insetado del borde de la tarjeta**, con radio propio | Va **abajo**: se lee primero y se mira después |
+| **4 · La tarjeta** | Borde de 1px, sin sombra | La sombra es solo para lo que flota (regla 7) |
+
+**Las cuatro inversiones que la sacan del molde.** Cada una es deliberada, y juntas son la razón
+por la que no se lee como una página generada:
+
+1. **La imagen va abajo, no arriba.** La tarjeta genérica abre con la imagen y deja el texto de
+   pie de foto. Acá el orden de lectura es el del contenido: qué es, después cómo se ve.
+2. **Arriba va etiqueta + acción, no ícono + título.** No hay ningún ícono en cuadrado con radio
+   al lado del titular — que es `H8`, la marca de agua más reconocible.
+3. **La ilustración es un panel, no un spot.** Tiene su propia superficie, su propio radio y está
+   insetada del borde de la tarjeta, así que se lee como una lámina adentro de la tarjeta y no
+   como una foto a sangre ni como un ícono agrandado.
+4. **La ilustración hereda el color de la tarjeta.** Se dibuja con `currentColor` y opacidades,
+   no con una paleta propia. Por eso la misma tarjeta funciona en claro, en oscuro y con la marca
+   de cualquier cliente sin tocar el SVG.
+
+**La etiqueta es nuestro registro de versalitas, no un badge de color:** monoespaciada, en
+píldora **con borde y sin relleno**. Un badge relleno gritaría más que el titular.
+
+**Lo que se ajusta:** el alto del panel visual (según cuánto pese la imagen en la composición), el
+inset del panel, y si hay afordancia o no — va cuando la tarjeta entera es clickeable. Lo que no:
+el orden de las zonas, y que la ilustración use `currentColor`.
+
+> **Deuda conocida:** `.nav-card` tiene valores a mano que no salen de la escala — 9.5px y .07em
+> en la etiqueta, -.028em en el titular—. Se conservan porque la tarjeta está aprobada así; si
+> alguna vez se tokenizan, es con un escalón nuevo en la escala, no redondeando al más cercano.
+
 ## 5. El ícono tiene cinco lugares, y "arriba del título" no es el default
 
-**No:** un ícono en un cuadrado con radio, arriba a la izquierda de cada card, del mismo tamaño en
-todas. No distingue nada — el título ya dice lo mismo — y es la marca de agua más reconocible de
-una página generada.
+**No:** un ícono chico en un cuadrado con radio tintado, **al lado del título**, uno por card y del
+mismo tamaño en todas. No distingue nada — el título ya dice lo mismo — y es la marca de agua más
+reconocible de una página generada. Lo que lo delata no es que haya una superficie: es que sea
+**chica, cuadrada y al lado del texto**, o sea que rime con la tarjeta que la contiene y se lea
+como cromo.
 
 **En su lugar, elegí uno** y usalo consistente en toda la página:
 
@@ -311,15 +353,22 @@ una página generada.
 | **Sin ícono** ← *el default* | El título y el texto solos | La mayoría de las veces. Si el título alcanza, el ícono es ruido |
 | **En línea, antes del texto** | 16–20px, alineado a la primera línea, mismo color que el texto | Cuando distingue ítems entre sí en una lista que se escanea: estado, tipo de archivo, canal |
 | **Al margen** | Fuera de la caja, en el riel o sangrado a la izquierda del bloque | Con `.column-rail`. El ícono ancla el bloque sin ocupar el lugar del título |
-| **Grande y solo** | 40–64px, sin superficie detrás, con mucho aire | Un ícono por sección, no uno por ítem. Cuando el ícono **es** el contenido: un estado vacío, un error, un logro |
+| **Grande y arriba** | 40–64px, **sin superficie o en disco** — nunca en cuadrado con radio — con mucho aire, arriba del titular | Cuando el ícono **es** el contenido (estado vacío, error, logro), o cuando pocas tarjetas grandes abren una sección. El disco a 52px es la forma de Embassy: al ser redondo no rima con la tarjeta, y al ser grande deja de ser un bullet |
 | **De fondo** | Muy grande, muy bajo contraste, recortado por el borde del bloque | Una sección destacada, una sola vez en la página. Es textura, no información |
 
 Reglas que valen para las cinco: **Lucide**, `--icon-stroke` del tema, **nunca** una superficie
-cuadrada con radio detrás por default, y **nunca** un ícono por card cuando las cards ya se
-distinguen por el título. Un emoji no es un ícono (`H4`).
+cuadrada con radio detrás, y **nunca** un ícono por card cuando las cards ya se distinguen por el
+título y son muchas. Un emoji no es un ícono (`H4`).
 
-**Verificación:** contá los íconos. Si hay uno por cada ítem de una grilla y los ítems ya tienen
-título, sobran todos.
+**El disco, cuando va.** Fondo `--color-surface-variant`, ícono `--color-secondary`, 52px de disco
+y 24px de ícono. Los dos por token: un `rgba()` a ojo acá es `A1`, y es exactamente lo que tenía
+el sitio del DS hasta septiembre de 2026. Medido, ese azul sobre ese gris da 3.00:1 — justo el
+piso de WCAG 1.4.11. Alcanza porque el ícono es decorativo y va con `aria-hidden`; si alguna vez
+carga información, sube el contraste o poné la información en texto.
+
+**Verificación:** contá los íconos. Si hay uno por cada ítem de una grilla de cuatro o más y los
+ítems ya tienen título, sobran todos. Dos tarjetas grandes que abren una sección son otra cosa:
+ahí el ícono orienta antes de leer.
 
 ## 6. Las secciones no tienen todas el mismo alto
 

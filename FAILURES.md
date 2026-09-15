@@ -27,9 +27,30 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 | **MEDIA** | Correcto pero mediocre; un revisor lo marcaría | Se arregla si hay tiempo, se anota si no |
 | **BAJA** | Preferencia o pulido | Opcional |
 
+**Portabilidad — a quién le aplica cada familia**
+
+Un proyecto de Amalgama puede tener **su propio design system**, y entonces medirlo contra el
+inventario de Embassy da un número que parece un score y no mide nada. La separación de fondo ya
+está en `COMPOSICION.md` §Alcance: *un producto se ve como su marca y está compuesto como
+nosotros.* Acá está esa separación aplicada familia por familia.
+
+| Marca | Significa |
+|---|---|
+| **Universal** | Aplica a cualquier proyecto, tenga el DS que tenga. Es oficio, no identidad |
+| **Reapuntable** | Aplica igual, pero leyendo **la fuente de tokens y componentes del proyecto** en vez de la de Embassy. «Hex crudo donde existe un token» vale siempre; *cuál* es el token lo dice el proyecto |
+| **Embassy** | Solo tiene sentido si el DS del proyecto **es** Embassy. En otro proyecto no se reporta — reportarlo es un falso positivo |
+
+Quién decide el régimen: `review` y `screen` lo preguntan antes de auditar nada (Paso 0). No se
+infiere a mitad del reporte.
+
 ---
 
 ## A · Tokens y sistema visual
+
+**Reapuntable.** Todo el grupo vale contra la fuente de tokens del proyecto: si el proyecto tiene
+un token para eso, un hex crudo sigue siendo una falla. **Excepciones que no se reportan fuera de
+Embassy:** `A7` (el puente de alias es un problema de *adoptar* Embassy) y `A9` (el navy es de
+Amalgama — en otro proyecto, el color de texto lo define su DS).
 
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
@@ -47,6 +68,11 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 
 ## B · Selección de componente
 
+**Reapuntable.** El criterio —no inventar lo que ya existe, no usar la variante equivocada— vale
+con cualquier catálogo; se cruza contra el del proyecto. `B1` se lee contra su API pública, no
+contra `PUBLIC-API.md`. `B6`, `B7` y `B8` son **universales**: chip como acción, toast donde iba
+alert y confirmación destructiva sin diálogo son errores de UX, no de DS.
+
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
 | `B1` | Clase que no existe en `PUBLIC-API.md` | BLOQ | cruce contra `public-api.json` |
@@ -62,6 +88,8 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 
 ## C · Jerarquía y acciones
 
+**Universal.**
+
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
 | `C1` | Más de un `btn-primary` en un mismo contexto | BLOQ | conteo por contenedor |
@@ -72,6 +100,8 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 | `C6` | Disparador de overlay con jerarquía de primaria | MEDIA | revisión |
 
 ## D · Layout y composición
+
+**Universal.** Es la familia que más se lleva: es composición, no identidad.
 
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
@@ -89,8 +119,11 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 | `D12` | **La etiqueta pesa más que su dato** — en un `stat-card` con la cifra chica y el rótulo grande, o en un panel de detalle. Es `M13` en territorio de escritorio | ALTA | inspección · III·a·6 |
 | `D13` | Contenedor elegido por costumbre y no por grano: `table` para tres campos de texto, o tarjetas para valores que hay que comparar | MEDIA | inspección · III·a·4 |
 | `D14` | Dos `btn-primary` en la misma pantalla, o la acción primaria fuera del `page-header` | ALTA | regex + inspección · III·a·7 |
+| `D15` | **La proximidad no agrupa**: el espacio dentro de un grupo es igual o mayor que el que lo separa del grupo siguiente — típicamente una etiqueta más lejos de su propio campo que del campo que sigue. Un borde alrededor no lo arregla | ALTA | medición de los dos gaps · `guidelines/visual-hierarchy.md` §Whitespace as grouping |
 
 ## E · Estados y contenido
+
+**Universal.**
 
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
@@ -107,6 +140,8 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 
 ## F · Accesibilidad
 
+**Universal.** Es WCAG, no Embassy.
+
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
 | `F1` | Anillo de foco removido o invisible | BLOQ | inspección con teclado |
@@ -120,6 +155,9 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 
 ## G · Motion
 
+**Reapuntable.** Los tokens de duración y easing son los del proyecto; el resto
+—doble easing, `prefers-reduced-motion`, entradas no declaradas— es universal.
+
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
 | `G1` | `cubic-bezier()` o milisegundos crudos en vez de tokens | ALTA | regex |
@@ -129,6 +167,10 @@ Nunca a los tres lugares a la vez: se duplica y se desincroniza.
 | `G5` | Overlay que declara apertura pero no cierre | MEDIA | inspección |
 
 ## H · Reflejos de diseño generado
+
+**Universal, con dos excepciones.** Los reflejos de página generada no dependen de la marca.
+No se reportan fuera de Embassy: `H12` (la capa espacial es nuestra) y `H9` (el registro
+editorial es un concepto de nuestra escala).
 
 Los de `design.md` §8, contados como una falla cada uno.
 
@@ -141,13 +183,15 @@ Los de `design.md` §8, contados como una falla cada uno.
 | `H5` | Chart donde alcanzaba una tabla, o al revés | MEDIA |
 | `H6` | Elemento que se puede sacar sin perder significado | BAJA |
 | `H7` | Más de un overline en mayúsculas en la página — repetido deja de clasificar y es textura | MEDIA | inspección + regex |
-| `H8` | Ícono por reflejo: uno arriba del título de cada card, en superficie cuadrada con radio | MEDIA | inspección |
+| `H8` | Ícono por reflejo: chico, en **superficie cuadrada con radio** tintada y **al lado del título**, uno por card y del mismo tamaño en todas. NO es esto un disco grande arriba del titular, que es la ubicación 4 de la regla 5 | MEDIA | regex + inspección · `COMPOSICION.md` regla 5 |
 | `H9` | Titular de apertura en la escala de producto (28px) donde iba el registro editorial, o dos editoriales en la misma página | MEDIA | inspección + regex |
 | `H10` | Imagen de banco, ilustración isométrica, render 3D o degradé haciendo de foto | ALTA | regex + inspección |
 | `H11` | Secciones apareciendo al scrollear (fade-up, IntersectionObserver, librería de scroll-reveal) | MEDIA | regex |
 | `H12` | La capa espacial de Amalgama (planetas, órbitas, fondo estrellado) en un producto de cliente | BLOQ | regex + inspección |
 
 ## I · Proceso y drift
+
+**Reapuntable.** Hablan del DS que el proyecto use, sea cual sea.
 
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
@@ -157,6 +201,9 @@ Los de `design.md` §8, contados como una falla cada uno.
 | `I4` | Gap del DS improvisado en vez de marcado | ALTA | revisión |
 
 ## M · Nativo
+
+**Universal.** La composición de una pantalla de app no depende de quién pinte el botón: Material,
+gluestack y nuestro CSS obedecen lo mismo. Los tokens de densidad se leen del proyecto.
 
 Solo se pueden fallar en una app. Las demás familias aplican igual: una pantalla nativa no se
 audita distinto que una web. Ver `MOBILE.md` §6 para la composición y §5 para el mapa.

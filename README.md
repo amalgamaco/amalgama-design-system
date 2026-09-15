@@ -167,6 +167,7 @@ python3 scripts/build-manifest.py # regenera component-rules/manifest.json desde
 | [GAMAFORCE-MIGRATION.md](./GAMAFORCE-MIGRATION.md) | Aplicar Embassy a Gamaforce — audit, workflow, screen patterns, checklists, DoD |
 | [guidelines/](./guidelines/) | Playbook UX — cómo construir una buena *pantalla* (principios, IA, forms, tablas, estados, motion, a11y) |
 | [TOKENS.md](./TOKENS.md) | Referencia de tokens (propósito + cuándo/cuándo no) — fuente: `css/variables.css` |
+| [design.md](./design.md) | El archivo **público y autocontenido**: juicio de marca, el bloque de decisión de página y los cuatro patrones de composición. Es lo que consume `artifact` sin clonar el repo |
 | [COMPOSICION.md](./COMPOSICION.md) | La **forma** de la página: estructura, ancho, grilla, ritmo, y las reglas anti-genérico |
 | [MOBILE.md](./MOBILE.md) | **Apps nativas** (React Native): la escala nativa, densidad, targets, el stack y el mapa de los 62 componentes |
 | [FAILURES.md](./FAILURES.md) | Taxonomía de fallas — el vocabulario compartido de `review` y `eval` |
@@ -174,6 +175,7 @@ python3 scripts/build-manifest.py # regenera component-rules/manifest.json desde
 | [CLAUDE.md](./CLAUDE.md) | Guía de consumo completa (humanos + IA) + tabla de inventario |
 | [GOVERNANCE.md](./GOVERNANCE.md) | Contrato de consistencia — reglas transversales |
 | [MIGRATION.md](./MIGRATION.md) | Migración genérica desde legacy (algoritmo de reemplazo de tokens, mapeo, anti-patrones) |
+| [INSTALL.md](./INSTALL.md) | Cómo instalar y cargar Embassy en un proyecto (buildless, React/Next, app nativa) |
 | [WHITE-LABEL.md](./WHITE-LABEL.md) | Theming de marca cliente |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Cómo agregar o modificar componentes |
 | [DEPLOYMENT.md](./DEPLOYMENT.md) | Cómo se actualiza el sitio publicado |

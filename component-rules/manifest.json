@@ -4310,7 +4310,7 @@
         "section card",
         "docs card"
       ],
-      "summary": "A documentation-shell-only navigation card that links into sections of the docs site — NOT part of the consumable library.",
+      "summary": "A documentation-shell-only navigation card that links into sections of the docs site — NOT part of the consumable library. Its LAYOUT, however, is the system's reference card anatomy — the four zones and the four inversions are documented in COMPOSICION.md §4b and apply to any card, in any product.",
       "variants": [
         "full",
         "compact",

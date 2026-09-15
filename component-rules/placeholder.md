@@ -112,7 +112,7 @@ source:
 ```html
 <!-- ✕ Emoji as the icon, and an action button -->
 <div class="placeholder-panel">
-  <div class="placeholder-icon">📋</div>
+  <div class="placeholder-icon"><i data-lucide="inbox"></i></div>
   <p>Nada por acá.</p><button class="btn-primary">Crear</button>
 </div>
 ```

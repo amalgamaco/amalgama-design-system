@@ -96,7 +96,7 @@ source:
 <!-- Vacancy list item: focusable, labelled, status as a badge -->
 <div class="vacancies-list">
   <div class="vacancy-card" tabindex="0" role="button" aria-label="Ver vacante: Desarrollador Frontend">
-    <div class="vacancy-icon">💼</div>
+    <div class="vacancy-icon" aria-hidden="true"><i data-lucide="briefcase"></i></div>
     <div class="vacancy-info">
       <div class="vacancy-name">Desarrollador Frontend <span class="badge badge-open">Abierta</span></div>
       <div class="vacancy-meta">Tecnología <span class="meta-dot"></span> Remoto</div>

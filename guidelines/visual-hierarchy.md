@@ -61,13 +61,39 @@ If two things on a screen both use `--color-primary` as a fill, one of them is w
 
 ## Whitespace as grouping
 
-Space is structure. Use `--space-*` tokens (GOVERNANCE §7) and let proximity do the grouping so you need fewer borders and boxes:
+Space is structure. Let proximity do the grouping so you need fewer borders and boxes.
 
-- Related fields sit `--space-5` (20px) apart; unrelated groups separate at `--space-10` (40px).
-- Card padding is `--space-6` (24px) standard, `--space-4` (16px) compact.
-- Page header to first content: `--space-8` (32px); section header to its content: `--space-6` (24px).
+**The rule is the ratio, not the number.** What groups things is not that a gap measures 20px — it
+is that the gap *inside* a group is visibly smaller than the gap *around* it. Proximity is
+comparative (Gestalt): the eye reads whatever is closer together as one thing. So the rule that
+survives any design system is this, and it is what to audit:
 
-Tightening the gap between a label and its field while widening the gap to the next group communicates "these belong together" without a single line of chrome.
+> **Inside < around, by a clear step.** The distance between elements that belong together is at
+> least one full step of the scale below the distance that separates them from the next group.
+> When two gaps land on adjacent steps, the grouping reads as ambiguous — which is the actual
+> defect, whatever the pixel values are.
+
+Two consequences worth stating, because both are common defects:
+
+- **A gap that separates cannot be smaller than a gap that binds.** Label further from its own
+  field than from the next field is the single most common grouping bug, and no border fixes it.
+- **A border is not a substitute for the ratio.** Boxing a group whose internal spacing is as wide
+  as its external spacing draws the boundary twice and still reads loose.
+
+In Embassy the scale is `--space-*` (GOVERNANCE §7) and that lands on:
+
+- Related fields `--space-5` (20px) apart; unrelated groups separate at `--space-10` (40px) — note
+  it is double, not one notch more.
+- Card padding has **three steps, picked by the card's job**: `--space-4` (16px) **compact** for a
+  dense row or a card inside a list · `--space-6` (24px) **standard**, the default · `--space-8`
+  (32px) **spacious**, for the few large cards that open a section and carry a title, a lead and
+  a list. Spacious is not «more is better»: it is what keeps a card that holds three blocks from
+  reading as cramped. Four small cards in a grid stay standard — giving them 32 makes the grid
+  loose and the page taller for nothing.
+- Page header to first content `--space-8` (32px); section header to its content `--space-6` (24px).
+
+**In a project with its own scale**, keep the ratio and take the numbers from that scale. The
+values above are Embassy's answer to the rule, not the rule.
 
 ## Scanning patterns: F and Z
 

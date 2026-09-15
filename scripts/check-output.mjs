@@ -314,6 +314,39 @@ for (const file of files) {
     }
   }
 
+  // H8 — el ícono por reflejo. Lo que se marca NO es que haya una superficie detrás del
+  // ícono: es el reflejo concreto, que son cuatro cosas juntas (COMPOSICION.md regla 5):
+  // ícono CHICO, en superficie CUADRADA CON RADIO y tintada, AL LADO del título, uno por card.
+  //
+  // Por eso el radio se lee y se compara: un `border-radius:50%` (o 9999px) es un DISCO y es la
+  // ubicación 4 de la regla — no se marca. Un radio chico es la tarjetita de todas las páginas
+  // generadas. El umbral es 50%: por debajo, rima con la tarjeta que lo contiene.
+  //
+  //   marca:    <span style="width:28px;height:28px;border-radius:8px;background:…"><i data-lucide=…
+  //   marca:    <div class="…" style="…border-radius:var(--radius-sm);background:var(--color-primary-container)…"><svg…
+  //   no marca: <span style="width:52px;height:52px;border-radius:50%;background:…"><i data-lucide=…   ← disco
+  //   no marca: un <i data-lucide> suelto, sin superficie                                             ← en línea / al margen
+  if (!allows.has("H8")) {
+    const caja = /<(span|div)[^>]*style="([^"]*border-radius[^"]*)"[^>]*>\s*<(?:i data-lucide|svg)/gi;
+    const hits = [];
+    for (const m of src.matchAll(caja)) {
+      const st = m[2];
+      if (!/background/i.test(st)) continue;                   // sin fondo no hay superficie
+      if (/border-radius:\s*(50%|9999px|999px|100%)/i.test(st)) continue;  // disco: permitido
+      const w = /width:\s*(\d+)px/i.exec(st);
+      if (w && Number(w[1]) >= 44) continue;                   // grande: es la ubicación 4
+      hits.push(m);
+    }
+    if (hits.length) {
+      findings.push({
+        id: "H8", sev: "MEDIA",
+        desc: "ícono en superficie cuadrada con radio al lado del título (el reflejo de página generada). Un disco grande arriba del titular es la ubicación 4 de la regla 5 y no se marca",
+        file, line: lineOf(src, hits[0].index),
+        evidence: `${hits.length} ícono(s) en caja con radio y fondo`,
+      });
+    }
+  }
+
   // H9 — dos titulares editoriales. El registro editorial es la apertura de la página; dos
   // aperturas es ninguna. Y usado como "el estilo del título grande" deja de ser una portada.
   if (!allows.has("H9")) {

@@ -1417,6 +1417,9 @@ contradecían a su original. Este es el mapa, y la regla que lo sostiene.
 | Preview con Material Web (Flutter) | `MOBILE.md` §«Y en Flutter…» | `screen` y `artifact` apuntan ahí |
 | Cómo cargar el CSS + **el tag de versión** | `PUBLIC-API.md` §«Cómo cargar el sistema», generado desde `DS_VERSION` | Nadie escribe `@vX.Y.Z` a mano |
 | Catálogo de fallas con código | `FAILURES.md` | Todo lo demás cita el código (`M13`, `D10`) |
+| **Qué aplica a un proyecto con DS propio** (Universal · Reapuntable · Embassy) | `FAILURES.md`, leyenda + encabezado de cada grupo | `review` §Paso 0 y `screen` §0pre rutean; no deciden por hallazgo |
+| La **anatomía de una tarjeta** (las 4 zonas y las 4 inversiones) | `COMPOSICION.md` §4b | La regla 4 dice cuándo NO va una grilla de tarjetas; 4b dice cómo es una cuando sí va |
+| La proporción de espaciado que agrupa (proximidad) | `guidelines/visual-hierarchy.md` §Whitespace as grouping | `D15` la hace auditable; las skills la citan |
 | Los doce arquetipos de pantalla | `guidelines/screen-patterns.md` | — |
 
 **La regla:** una decisión se escribe **una vez**, en el archivo de la tabla. Todo lo demás

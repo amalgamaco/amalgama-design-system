@@ -74,7 +74,7 @@ la forma de la pagina, la capa espacial de Amalgama y las apps nativas.
 
 | id | Nombre | Fuente CSS | Resumen |
 |---|---|---|---|
-| `nav-card` | Nav Card | `(docs-internal — no css/components file; styles inline in index.html)` | A documentation-shell-only navigation card that links into sections of the docs site — NOT part of the consumable library. |
+| `nav-card` | Nav Card | `(docs-internal — no css/components file; styles inline in index.html)` | A documentation-shell-only navigation card that links into sections of the docs site — NOT part of the consumable library. Its LAYOUT, however, is… |
 
 ## Domain cards
 

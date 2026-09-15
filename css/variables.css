@@ -425,6 +425,12 @@
   --font-size-caption:     12px;   --line-height-caption:     1.4;
   --font-size-badge:       11.5px; --line-height-badge:       1.2;
   --font-size-overline:    12px;   --line-height-overline:    1.2;  /* uppercase table headers */
+  /* El registro chico de versalitas. La prosa del sistema ya lo describe —«versalitas
+     de componente: badge, header de tabla, label del nav», 10-11px con
+     --letter-spacing-label— pero no tenía token, así que el cromo lo escribía a mano
+     en 25 lugares. NO es un tamaño de texto: a 10px solo se lee en mayúsculas y con
+     tracking. Para texto corrido el piso sigue siendo --font-size-caption. */
+  --font-size-overline-sm: 10px;   --line-height-overline-sm: 1.4;
 
   /* DM Mono — Monospace */
   --font-size-mono-md:     13px;   --line-height-mono-md:     1.5;

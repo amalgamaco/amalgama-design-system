@@ -19,7 +19,7 @@ use_cases:
   - "An empty candidate pipeline column."
 
 variants:
-  - {name: base, class: empty-state, purpose: "Centered icon (48px) + title + description + optional primary Button, dimmed with secondary/muted text tokens."}
+  - {name: base, class: empty-state, purpose: "Centered Lucide icon (48px, never an emoji — `H4`) + title + description + optional primary Button, dimmed with secondary/muted text tokens."}
 sizes:
   - {name: default, class: "(default)", use: "single layout: 48px 24px padding, 400px max-width description"}
 size_selection: "One layout. Scale it by dropping the CTA for minor/expected empties, or keeping it for first-run guidance."
@@ -28,7 +28,7 @@ content_rules:
   - "Write from the user's point of view ('No tenés vacantes aún'), not technical jargon ('null results', '404')."
   - "Title is short (Epilogue, weight 600); description is one or two sentences, max ~400px wide."
   - "Include a CTA that helps the user leave the empty state whenever there is a next action."
-  - "Use an icon/illustration that reinforces the message without being condescending."
+  - "Use a Lucide icon or an illustration that reinforces the message without being condescending. Never an emoji (`H4`); the icon here is the case where the icon IS the content (COMPOSICION.md rule 5, placement 4)."
 layout_constraints:
   - "Content is centered; title uses --text-secondary, description uses --text-muted."
   - "The CTA is a single primary Button (its own states apply)."
@@ -90,7 +90,7 @@ source:
 ```html
 <!-- First-run empty with a guiding CTA -->
 <div class="empty-state">
-  <div class="empty-state-icon" aria-hidden="true">📋</div>
+  <div class="empty-state-icon" aria-hidden="true"><i data-lucide="inbox"></i></div>
   <div class="empty-state-title">Sin vacantes</div>
   <p class="empty-state-desc">Todavía no creaste ninguna vacante. Creá la primera para empezar a recibir candidatos.</p>
   <button class="btn-primary" type="button">Crear vacante</button>
@@ -101,7 +101,7 @@ source:
 ```html
 <!-- No-results after a filter, announced politely -->
 <div class="empty-state" aria-live="polite">
-  <div class="empty-state-icon" aria-hidden="true">🔍</div>
+  <div class="empty-state-icon" aria-hidden="true"><i data-lucide="search-x"></i></div>
   <div class="empty-state-title">Sin resultados</div>
   <p class="empty-state-desc">No encontramos vacantes con esos filtros.</p>
   <button class="btn-primary btn-sm" type="button">Limpiar filtros</button>

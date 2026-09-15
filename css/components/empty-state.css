@@ -23,7 +23,19 @@
   padding: var(--space-12) var(--space-6);
   color: var(--text-muted);
 }
-.empty-state-icon { font-size: 48px; margin-bottom: 16px; }
+/* El icono de un estado vacio es el caso donde el icono ES el contenido
+   (COMPOSICION.md regla 5, ubicacion 4): grande, con aire, sin superficie
+   detras. Va en Lucide. Un emoji no es un icono — falla `H4`.
+   font-size se conserva solo por compatibilidad con markup viejo que mete un
+   glifo; el markup correcto es un <svg>. */
+.empty-state-icon {
+  width: 48px; height: 48px;
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-on-surface-variant);
+  font-size: 48px;
+}
+.empty-state-icon svg { width: 48px; height: 48px; stroke-width: var(--icon-stroke, 2); }
 .empty-state-title {
   font-family: var(--font-heading);
   font-size: var(--font-size-heading-md); font-weight: 600;

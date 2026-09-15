@@ -321,5 +321,76 @@ console.log("\n[12] archivos generados al día");
   }
 }
 
+// ── 13. el cromo del sitio usa tokens ───────────────────────────────────────
+// Por qué existe: [7] cuenta el hex inline de index.html y es SOLO informativo, porque la
+// página está llena de swatches y de ejemplos de código donde el literal ES el contenido.
+// Ese permiso se le colaba al cromo: en septiembre de 2026 las tarjetas de rol tenían
+// `rgba(79,128,255,.1)` y tres eyebrows usaban el tracking ancho en sans que COMPOSICION.md
+// regla 1 prohíbe por nombre.
+//
+// La regla que hace esto enforceable sin ahogar en falsos positivos: **falla solo cuando
+// existe un token con ese valor exacto**. Si el valor no está en la escala, no es deuda de
+// quien escribió la regla — es un hueco de la escala, y se cuenta aparte.
+console.log("\n[13] el cromo del sitio usa tokens");
+{
+  const html = read("index.html");
+  const css = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map(m => m[1]).join("\n")
+    .replace(/\/\*[\s\S]*?\*\//g, "");
+  const vars = read("css/variables.css").replace(/\/\*[\s\S]*?\*\//g, "");
+  const raiz = vars.slice(vars.indexOf(":root"), vars.indexOf("}", vars.indexOf(":root")));
+  const norm = (x) => x.trim().toLowerCase().replace(/^(-?)0\./, "$1.");
+  const tok = new Map();
+  for (const [, n, v] of raiz.matchAll(/(--(?:font-size|letter-spacing)-[\w-]+)\s*:\s*([^;]+);/g))
+    if (!n.includes("editorial") && norm(v) !== "0") tok.set(norm(v), n);
+
+  // El literal ES el contenido: un swatch de color, una muestra de la escala tipográfica,
+  // una miniatura que DIBUJA una interfaz. Exentas y nombradas.
+  const DEMO = /\.(bd-color|bd-swatch|ds-swatch|bd-type|ds-type|bst-|ds-space|bd-space|ds-token|bd-elev|bd-shadow|bd-radius|emb-collage|emb-motion|emb-dm-thumb)/;
+  // Y los que MUESTRAN un esquema: una maqueta del modo oscuro, una comparación
+  // bien/mal, un panel de contraste. Ahí el hex ES el contenido, igual que un swatch:
+  // tokenizarlos haría que la demo del oscuro cambie con el tema y deje de demostrar nada.
+  const MUESTRA = /\.(ds-dark-map|ds-mode-compare|ds-vs-head|ds-ctx-pane|ds-ctx-mock|ds-scheme-board|ds-cr-panel|ds-cr-stage)/;
+
+  const conToken = [], huerfanos = new Map(), colores = [];
+  for (const m of css.matchAll(/(^|\})\s*([^{}@]*?)\{([^}]*)\}/g)) {
+    const sel = m[2].trim().replace(/\s+/g, " "), body = m[3];
+    if (!sel || sel.startsWith("@") || sel.includes(":root") || DEMO.test(sel) || MUESTRA.test(sel)) continue;
+    for (const [, prop, val] of body.matchAll(/(?:^|;)\s*([a-z-]+)\s*:\s*([^;]+)/g)) {
+      const v = norm(val);
+      if (/^(color|background|background-color|border-color)$/.test(prop) && !v.startsWith("var(")
+          && /#[0-9a-fA-F]{3,8}\b|rgba?\(/.test(v)
+          // blanco y negro con alpha son literales sancionados, igual que en [1]:
+          // un velo sobre una superficie fija no tiene token porque no es un color del sistema
+          && !/^rgba?\(\s*(255,\s*255,\s*255|0,\s*0,\s*0)\b/.test(v))   // un var(--x, #fallback) no es color crudo
+        colores.push(`${sel} { ${prop}: ${val.trim()} }`);
+      if (prop === "font-size" && /^[\d.]+px/.test(v))
+        tok.has(v) ? conToken.push(`A3 ${sel} { ${v} } -> var(${tok.get(v)})`)
+                   : huerfanos.set(v, (huerfanos.get(v) || 0) + 1);
+      if (prop === "letter-spacing" && !v.startsWith("var(") && v !== "normal" && v !== "0")
+        tok.has(v) ? conToken.push(`A11 ${sel} { ${v} } -> var(${tok.get(v)})`)
+                   : huerfanos.set(v, (huerfanos.get(v) || 0) + 1);
+    }
+  }
+  if (conToken.length)
+    fail(`${conToken.length} declaración(es) con un token exacto disponible y escritas a mano: ` +
+         conToken.slice(0, 6).join(" · ") + (conToken.length > 6 ? ` …y ${conToken.length - 6} más` : ""));
+  else ok("ninguna declaración a mano teniendo token exacto");
+
+  // Los colores crudos que quedan avisan y NO fallan todavía, a propósito y con fecha:
+  // son 16 clases mezcladas — algunas son demos que MUESTRAN el esquema oscuro (`.ds-dark-map`,
+  // `.ds-scheme-board`, `.ds-mode-compare-body`: ahí el literal es el contenido, como un swatch)
+  // y otras son cromo real (`.ds-copy`, `.ds-writing-box.good`). Separarlas es criterio de
+  // diseño, no de regex. Cuando estén clasificadas, las de cromo pasan a `fail` y las de demo
+  // entran a DEMO de arriba. Mientras tanto se cuentan para que no se olviden.
+  if (colores.length) fail(`${colores.length} color(es) crudo(s) en el cromo: ` + colores.slice(0, 3).join(" · "));
+  else ok("sin color crudo fuera de swatches y miniaturas");
+
+  // Huecos de la escala: NO fallan. Son la lista de lo que la escala todavía no cubre.
+  const tot = [...huerfanos.values()].reduce((a, b) => a + b, 0);
+  if (tot) warn(`${tot} valor(es) sin token posible — hueco de la escala, no deuda: ` +
+    [...huerfanos.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([v, n]) => `${v}×${n}`).join(" · "));
+}
+
+
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);

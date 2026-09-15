@@ -1,12 +1,12 @@
 # Screen Patterns & UX Decision Rules
 
-The **screen-level decision layer** of the design-system skill. `SKILL.md` §2–§9 govern one
+The **screen-level decision layer** of the design-system skill. la skill `screen` §2–§9 govern one
 *component*; this file governs a whole *screen* — how to turn a goal ("build/fix the candidatos
 screen") into information architecture, a pattern, components, states, a responsive plan, and copy
 **before** any markup exists.
 
 **Read this whenever you create, redesign, improve, or audit a whole screen or flow** — not for a
-single component (that's `SKILL.md` §2).
+single component (that's la skill `screen` §2).
 
 **Where it sits in the source-of-truth order.** This file *operationalizes* the repo's own flow —
 `AI-USAGE-GUIDE.md` §1 (a→h) and `guidelines/*.md` — into an executable procedure. It never
@@ -24,7 +24,7 @@ exists.
 
 ## 1. The 7-step screen decision procedure (mandatory, in order)
 
-> `SKILL.md` §1 runs these seven and inserts **copy** as its own step before the build, against
+> la skill `screen` §1 runs these seven and inserts **copy** as its own step before the build, against
 > `guidelines/content-and-writing.md`. Copy is part of the design, not a pass afterwards.
 
 Run **all seven** before writing markup, for every screen — create *and* redesign. Do not jump to
@@ -59,7 +59,7 @@ haven't made the decision yet.
 
 - Exactly **one** `btn-primary` per view — the action the user is most likely to want, driven by
   step 1. Everything else steps down the ladder: **elevated → secondary → tertiary → text → icon**
-  (`visual-hierarchy.md`; `SKILL.md` §3 Buttons).
+  (`visual-hierarchy.md`; la skill `screen` §3 Buttons).
 - Overlay/dialog/sheet *triggers* are `btn-secondary` — the real primary lives inside the overlay.
 - If the screen "needs" several equal-weight actions, that's a hierarchy failure — **introduce
   hierarchy**, don't replicate flatness. Never full-width or left-aligned buttons.
@@ -72,7 +72,7 @@ haven't made the decision yet.
   create-edit-form, wizard, settings, pipeline-board, search-results, auth-entry, feed-activity,
   onboarding-first-run, confirmation-destructive). The archetype hands you the IA skeleton, the
   component recipe, the required states, and the anti-patterns.
-- For each component the archetype names, run the per-component gate (`SKILL.md` §2): read
+- For each component the archetype names, run the per-component gate (la skill `screen` §2): read
   `component-rules/<id>.md` → `css/components/<id>.css`, and state "this variant, because …".
 - **Select by goal, never by visual resemblance.** A box with a magnifying glass is not
   automatically `search-field`; a "pick one" control is a `select`, not a styled `input`; a
@@ -101,7 +101,7 @@ haven't made the decision yet.
   `role="search"` on search, `aria-live` on result counts, real table semantics, status never
   color-only. (`accessibility.md`, each rule's `accessibility`/`keyboard`.)
 - Motion comes from each component's `motion:` block + `guidelines/motion.md` tokens — never
-  invented. Respect `prefers-reduced-motion`. (`SKILL.md` §7.)
+  invented. Respect `prefers-reduced-motion`. (la skill `screen` §7.)
 
 ### Step 7 — Embassy visual implementation
 
@@ -503,7 +503,7 @@ Each line is a UX-architecture change, not a color change — that is the proof 
 *structure*, not only the skin.
 
 This change list is **part (2)** of the mandatory **screen report** the skill emits for every screen it
-designs, redesigns, or migrates (`SKILL.md` §1). The full report has five parts and is not optional —
+designs, redesigns, or migrates (la skill `screen` §1). The full report has five parts and is not optional —
 a redesign is not done until it is written:
 
 1. **UX problems detected** (or, for a new screen, the goal/hierarchy decisions taken).
@@ -636,7 +636,7 @@ week) — recency is already the list's default sort, so it adds nothing here.
 - `AI-USAGE-GUIDE.md` §1 (the repo's consumption flow this procedure operationalizes), `GOVERNANCE.md`
   (§§1–6 quality contract, §14 layout/shell/grid, §20 action hierarchy), `MIGRATION.md` +
   `GAMAFORCE-MIGRATION.md` (legacy → DS transformation).
-- `SKILL.md` §2 (per-component gate), §3 (component decision tables), §6 (states), §7 (motion),
+- la skill `screen` §2 (per-component gate), §3 (component decision tables), §6 (states), §7 (motion),
   §9 (the "done" gate).
 </content>
 </invoke>

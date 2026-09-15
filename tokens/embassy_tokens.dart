@@ -438,6 +438,8 @@ class EmbassyDims {
   static const lineHeightBadge = 1.2;
   static const fontSizeOverline = 12.0;
   static const lineHeightOverline = 1.2;
+  static const fontSizeOverlineSm = 10.0;
+  static const lineHeightOverlineSm = 1.4;
   static const fontSizeMonoMd = 13.0;
   static const lineHeightMonoMd = 1.5;
   static const fontSizeMonoSm = 11.0;
@@ -513,6 +515,8 @@ class EmbassyDims {
   static const lineHeightBadgeNative = 1.2;
   static const fontSizeOverlineNative = 12.0;
   static const lineHeightOverlineNative = 1.2;
+  static const fontSizeOverlineSmNative = 10.0;
+  static const lineHeightOverlineSmNative = 1.4;
   static const fontSizeMonoMdNative = 13.0;
   static const lineHeightMonoMdNative = 1.5;
   static const fontSizeMonoSmNative = 11.0;

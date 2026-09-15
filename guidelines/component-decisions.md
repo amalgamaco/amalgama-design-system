@@ -1,6 +1,6 @@
 # Component decision tables — the pairs most often gotten wrong
 
-Loaded on demand from `SKILL.md` §3, when the component you are about to use appears here.
+Loaded on demand from la skill `screen` §3, when the component you are about to use appears here.
 This is the shortcut, not the source: on any disagreement `component-rules/<id>.md` wins.
 
 ---

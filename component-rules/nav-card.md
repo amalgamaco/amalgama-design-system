@@ -4,7 +4,7 @@ display_name: Nav Card
 aliases: [navigation card, section card, docs card]
 category: Docs shell (not a product component)
 status: stable
-summary: A documentation-shell-only navigation card that links into sections of the docs site — NOT part of the consumable library.
+summary: A documentation-shell-only navigation card that links into sections of the docs site — NOT part of the consumable library. Its LAYOUT, however, is the system's reference card anatomy — the four zones and the four inversions are documented in COMPOSICION.md §4b and apply to any card, in any product.
 when_to_use:
   - "Inside the documentation site only — cards that navigate to sections (foundations, styles, component overviews)."
   - "Grids of categories and shortcuts to anchors within the docs SPA."
