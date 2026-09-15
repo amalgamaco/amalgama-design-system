@@ -49,12 +49,13 @@
   font-family: var(--font-heading);
   font-size: var(--font-size-body-md);
   font-weight: 600;
+  line-height: var(--line-height-title);
   color: var(--text-primary);
 }
 .popover-description {
   font-size: var(--font-size-body-sm);
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: var(--line-height-body-sm);
 }
 
 /* Alineación (align=start|center|end de shadcn) — la resuelve el posicionador JS

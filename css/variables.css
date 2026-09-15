@@ -436,6 +436,49 @@
   --font-size-mono-md:     13px;   --line-height-mono-md:     1.5;
   --font-size-mono-sm:     11px;   --line-height-mono-sm:     1.4;
 
+  /* Interlineados que NO vienen del paso, sino del contexto.
+     La escala de arriba está pareada: usar --font-size-X implica --line-height-X.
+     Estos dos son las únicas dos excepciones con nombre, y no agregan valores
+     nuevos — son los que ya estaban, dichos por su motivo en vez de por su paso.
+     Ver GOVERNANCE.md §8.3. */
+
+  /* Una sola línea adentro de un control: botón, label, segmented button. El
+     interlineado de prosa ahí no separa nada (no hay segunda línea), infla la
+     altura del control y pelea con su padding. */
+  --line-height-control: 1.2;
+
+  /* Prosa adentro de un bloque de lectura: cuerpo de accordion, editor, bajada
+     de empty state. Se lee en párrafo, no en renglón de UI, así que el
+     interlineado lo manda el bloque y no el paso. */
+  --line-height-prose:   1.6;
+
+  /* Titular corto puesto a un tamaño de CUERPO (alert, popover, toast): el peso
+     lo hace titular, pero el interlineado de cuerpo lo devolvería a párrafo. */
+  --line-height-title:   1.3;
+
+  /* Texto centrado en una caja de alto fijo: inicial de avatar, número de día
+     del calendario. El interlineado no participa del centrado — participa la
+     caja. Cualquier valor > 1 descentra el glifo. */
+  --line-height-none:    1;
+
+  /* ── Inicial de avatar ──────────────────────────────────────────────
+     Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una
+     inicial no es tipografía de lectura, es una marca centrada en una caja.
+     Por eso no hay --font-size-* que le sirva, y mapearla por valor es el
+     error clásico (10px "es" overline-sm, 15px "es" heading-xs — y ninguno
+     de los dos lo es por rol).
+     La razón inicial/diámetro NO es constante y eso es deliberado: baja de
+     .42 a .32 a medida que el disco crece, porque en un disco chico la
+     inicial necesita proporcionalmente más cuerpo para seguir leyéndose.
+     Cuatro componentes se inventaron un escalón cada uno antes de que esto
+     estuviera escrito (avatar-group-count, kanban, person-card, vacancy).
+     Si necesitás un disco que no está acá, agregá el escalón ACÁ. */
+  --avatar-size-xs: 24px;  --avatar-initial-xs: 10px;
+  --avatar-size-sm: 28px;  --avatar-initial-sm: 11px;
+  --avatar-size-md: 36px;  --avatar-initial-md: 13px;
+  --avatar-size-lg: 44px;  --avatar-initial-lg: 15px;
+  --avatar-size-xl: 56px;  --avatar-initial-xl: 18px;
+
   /* Font weights */
   --font-weight-regular:   400;
   --font-weight-medium:    500;

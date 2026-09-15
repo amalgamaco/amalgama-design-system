@@ -437,29 +437,42 @@ Never use quoted family names (`font-family: 'Inter', sans-serif`) in component 
 
 ### 8.2 Type scale
 
-| Token | Size | Line-height | Typical use |
-|---|---|---|---|
-| `--font-size-display` | 28px | 1.15 | Hero headings |
-| `--font-size-heading-xl` | 24px | 1.2 | Section h2 |
-| `--font-size-heading-lg` | 22px | 1.25 | h3 |
-| `--font-size-heading-md` | 18px | 1.3 | h4, card titles |
-| `--font-size-heading-sm` | 17px | 1.35 | h5 |
-| `--font-size-heading-xs` | 15px | 1.4 | h6, small section headers |
-| `--font-size-body-lg` | 14px | 1.5 | Body copy, list items |
-| `--font-size-body-md` | 13.5px | 1.5 | **Default**: inputs, buttons, table cells |
-| `--font-size-body-sm` | 12.5px | 1.6 | Secondary / supporting text |
-| `--font-size-label` | 13px | 1.4 | Form labels, column headers |
-| `--font-size-caption` | 12px | 1.4 | Helper text, timestamps |
-| `--font-size-overline` | 12px | 1.2 | Uppercase table headers |
-| `--font-size-badge` | 11.5px | 1.2 | Badge text, chip labels |
+Los valores — px e interlineado de cada paso — viven en `css/variables.css` y **no se copian acá**. Esta tabla decide lo único que governance decide: **qué rol usa cada paso**. Si necesitás el número, abrí `variables.css`; si necesitás saber cuál te toca, leé esta columna.
+
+| Token | Rol |
+|---|---|
+| `--font-size-editorial-lg` / `-md` / `-sm` | Titulares editoriales fluidos (`clamp`). Portada, hero de landing. No para UI. |
+| `--font-size-display` | Encabezado de hero |
+| `--font-size-heading-xl` | h2 de sección |
+| `--font-size-heading-lg` | h3, titular de tarjeta grande |
+| `--font-size-heading-md` | h4, titular de tarjeta |
+| `--font-size-heading-sm` | h5, titular de modal y sheet |
+| `--font-size-heading-xs` | h6, encabezado de sección chico |
+| `--font-size-body-lg` | Texto corrido, ítems de lista |
+| `--font-size-body-md` | **Default**: inputs, botones, celdas de tabla |
+| `--font-size-body-sm` | Texto secundario / de apoyo |
+| `--font-size-label` | Labels de formulario, encabezados de columna |
+| `--font-size-caption` | Texto de ayuda, timestamps |
+| `--font-size-badge` | Texto de badge y de chip |
+| `--font-size-overline` | Versalitas de componente: header de tabla, label de nav |
+| `--font-size-overline-sm` | El registro chico de versalitas. **No es un tamaño de texto**: a 10px solo se lee en mayúsculas y con tracking. Para texto corrido el piso sigue siendo `--font-size-caption`. |
+| `--font-size-mono-md` / `-sm` | Código, valores numéricos, cifras que tienen que alinear |
 
 ### 8.3 Rules
 
-- **Every `font-size` in component CSS uses a `--font-size-*` token.** No raw px.
-- Font weight via `--font-weight-*` tokens: regular (400), medium (500), semibold (600), bold (700), extrabold (800).
-- Page text (headings AND body) uses `--text-primary` = `--primary-900` in light (`#01164D`). It is brand navy, not near-black. If text renders as `#0A0C12` (neutral-900 / `--color-on-surface`), the wrong token was used.
-- `--color-on-surface` is for content inside components (button labels, chip text, table cells), not page typography.
-- Sentence case for UI labels. Title case only in top-level headings and page titles.
+- **Todo `font-size` en el CSS de componente usa un token `--font-size-*`.** Nada de px crudo.
+- **Todo `line-height` también.** La escala está **pareada**: cada `--font-size-{rol}` tiene su `--line-height-{rol}`, y usar el tamaño implica usar su interlineado. Escribir un número suelto al lado de un tamaño tokenizado rompe el par en silencio: el día que la escala se mueve, el tamaño la sigue y el interlineado no.
+- **Apartarse del par es legítimo, pero se nombra.** Hay dos motivos reales y recurrentes para no usar el interlineado que el tamaño trae:
+  - **Una sola línea dentro de un control** (botón, label, segmented button). El interlineado de prosa ahí no separa nada, infla la altura del control y pelea con su `padding`. Para eso está `--line-height-control`. No lo escribas como `1.2` a mano: tres componentes ya lo hicieron por separado y ninguno dejó dicho por qué.
+  - **Prosa dentro de un bloque de lectura** (el cuerpo de un accordion, un editor, la bajada de un empty state), donde el texto se lee en párrafo y no en renglón de UI. Ahí el interlineado lo manda el bloque, no el paso: `--line-height-prose`.
+  - **Un titular corto puesto a un tamaño de cuerpo** (alert, popover, toast): el peso lo hace titular, pero el interlineado de cuerpo lo devuelve a párrafo. `--line-height-title`.
+  - **Texto centrado en una caja de alto fijo** (inicial de avatar, número de día del calendario): el interlineado no participa del centrado, participa la caja. `--line-height-none`.
+  - Un quinto motivo que aparezca no es una excepción todavía — es un token que falta. Escribilo en `variables.css` con el comentario que diga cuándo aplica, no en el componente.
+- **Una bajada es una bajada.** `card-desc`, `alert-description`, `modal-description`, `sheet-description`, `popover-description`, `item-description`, `toast-desc`, `radio-card-desc`, `checkbox-card-desc` son el mismo subcomponente en nueve carcasas distintas: todas usan `--font-size-body-sm` y su par. Antes usaban cinco tamaños y seis interlineados. La excepción es `empty-state-desc`, que va a `--font-size-body-lg` porque ahí la bajada **es** el contenido de la pantalla, no el apoyo de otra cosa.
+- Peso tipográfico vía tokens `--font-weight-*`: regular (400), medium (500), semibold (600), bold (700), extrabold (800).
+- El texto de página (encabezados Y cuerpo) usa `--text-primary` = `--primary-900` en claro (`#01164D`). Es azul de marca, no casi-negro. Si el texto renderiza `#0A0C12` (neutral-900 / `--color-on-surface`), se usó el token equivocado.
+- `--color-on-surface` es para contenido dentro de componentes (labels de botón, texto de chip, celdas de tabla), no para la tipografía de la página.
+- Sentence case en labels de UI. Title case solo en encabezados de primer nivel y títulos de página.
 
 ---
 

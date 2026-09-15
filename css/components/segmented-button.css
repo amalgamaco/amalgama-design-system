@@ -121,7 +121,7 @@
   font-family: var(--font-body);
   font-size: var(--font-size-body-sm);
   font-weight: 500;
-  line-height: 1.2;
+  line-height: var(--line-height-control);
   cursor: pointer;
   white-space: nowrap;
   transition:

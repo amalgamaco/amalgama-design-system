@@ -31,10 +31,14 @@
   user-select: none;
 }
 
-.avatar-sm { width: 28px; height: 28px; font-size: 11px; }
-.avatar-md { width: 36px; height: 36px; font-size: 13px; }
-.avatar-lg { width: 44px; height: 44px; font-size: 15px; }
-.avatar-xl { width: 56px; height: 56px; font-size: 18px; }
+/* Los cinco escalones viven en variables.css (ver "Inicial de avatar"): los
+   consumen también kanban-card, person-card y vacancy-card, así que el número
+   no puede vivir acá. */
+.avatar-xs { width: var(--avatar-size-xs); height: var(--avatar-size-xs); font-size: var(--avatar-initial-xs); }
+.avatar-sm { width: var(--avatar-size-sm); height: var(--avatar-size-sm); font-size: var(--avatar-initial-sm); }
+.avatar-md { width: var(--avatar-size-md); height: var(--avatar-size-md); font-size: var(--avatar-initial-md); }
+.avatar-lg { width: var(--avatar-size-lg); height: var(--avatar-size-lg); font-size: var(--avatar-initial-lg); }
+.avatar-xl { width: var(--avatar-size-xl); height: var(--avatar-size-xl); font-size: var(--avatar-initial-xl); }
 
 .avatar-fallback {
   display: flex;
@@ -42,7 +46,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  line-height: 1;
+  line-height: var(--line-height-none);
 }
 
 .avatar-image {
@@ -92,5 +96,6 @@
 .avatar-group-count {
   background: var(--color-surface-variant);
   color: var(--color-on-surface-variant);
-  font-size: 12px;
+  /* El tamaño lo pone el escalón (.avatar-md en el uso canónico). Este bloque
+     solo cambia el color: un +N es un avatar, no un tamaño nuevo. */
 }

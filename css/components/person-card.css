@@ -43,11 +43,12 @@
    primitivos. Se coloca en el slot .item-media; centrado vertical (el default
    del media es align-self:flex-start). */
 .person-card .person-avatar {
-  width: 44px; height: 44px;
+  /* Escalón lg de la escala de avatar (variables.css) */
+  width: var(--avatar-size-lg); height: var(--avatar-size-lg);
   border-radius: 50%;
   background: var(--color-secondary-container);
   color: var(--color-on-secondary-container);
-  font-size: 15px; font-weight: 600;
+  font-size: var(--avatar-initial-lg); font-weight: 600;
   align-self: center;
 }
 

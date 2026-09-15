@@ -1584,6 +1584,96 @@
         "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.4"
       }
     },
+    "--line-height-control": {
+      "$type": "typography",
+      "$value": "1.2",
+      "section": "Una sola línea adentro de un control: botón, label, segmented button. El interlineado de prosa ahí no separa nada (no hay segunda línea), infla la altura del control y pelea con su padding.",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.2"
+      }
+    },
+    "--line-height-prose": {
+      "$type": "typography",
+      "$value": "1.6",
+      "section": "Prosa adentro de un bloque de lectura: cuerpo de accordion, editor, bajada de empty state. Se lee en párrafo, no en renglón de UI, así que el interlineado lo manda el bloque y no el paso.",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.6"
+      }
+    },
+    "--line-height-title": {
+      "$type": "typography",
+      "$value": "1.3",
+      "section": "Titular corto puesto a un tamaño de CUERPO (alert, popover, toast): el peso lo hace titular, pero el interlineado de cuerpo lo devolvería a párrafo.",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.3"
+      }
+    },
+    "--line-height-none": {
+      "$type": "typography",
+      "$value": "1",
+      "section": "Texto centrado en una caja de alto fijo: inicial de avatar, número de día del calendario. El interlineado no participa del centrado — participa la caja. Cualquier valor > 1 descentra el glifo.",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1"
+      }
+    },
+    "--avatar-size-xs": {
+      "$type": "other",
+      "$value": "24px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
+    "--avatar-initial-xs": {
+      "$type": "other",
+      "$value": "10px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
+    "--avatar-size-sm": {
+      "$type": "other",
+      "$value": "28px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
+    "--avatar-initial-sm": {
+      "$type": "other",
+      "$value": "11px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
+    "--avatar-size-md": {
+      "$type": "other",
+      "$value": "36px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
+    "--avatar-initial-md": {
+      "$type": "other",
+      "$value": "13px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
+    "--avatar-size-lg": {
+      "$type": "other",
+      "$value": "44px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
+    "--avatar-initial-lg": {
+      "$type": "other",
+      "$value": "15px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
+    "--avatar-size-xl": {
+      "$type": "other",
+      "$value": "56px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
+    "--avatar-initial-xl": {
+      "$type": "other",
+      "$value": "18px",
+      "section": "Inicial de avatar   Escala PROPORCIONAL al diámetro del disco, no la escala de texto: una inicial no es tipografía de lectura, es una marca centrada en una caja. Por eso no hay  font-size  que le sirva, y mapearla por valor es el error clásico (10px \"es\" overline-sm, 15px \"es\" heading-xs — y ninguno de los dos lo es por rol). La razón inicial/diámetro NO es constante y eso es deliberado: baja de .42 a .32 a medida que el disco crece, porque en un disco chico la inicial necesita proporcionalmente más cuerpo para seguir leyéndose. Cuatro componentes se inventaron un escalón cada uno antes de que esto estuviera escrito (avatar-group-count, kanban, person-card, vacancy). Si necesitás un disco que no está acá, agregá el escalón ACÁ."
+    },
     "--font-weight-regular": {
       "$type": "typography",
       "$value": "400",

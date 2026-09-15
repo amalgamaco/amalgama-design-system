@@ -2,7 +2,7 @@
 
 > Generado por scripts/build-tokens.mjs desde css/variables.css.
 
-40 de 297 tokens no se copian tal cual. El valor sigue siendo el mismo — cambia como se aplica.
+44 de 311 tokens no se copian tal cual. El valor sigue siendo el mismo — cambia como se aplica.
 
 | Token | Valor | Por que | En RN |
 |---|---|---|---|
@@ -29,6 +29,10 @@
 | `--line-height-overline-sm` | `1.4` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.4 |
 | `--line-height-mono-md` | `1.5` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.5 |
 | `--line-height-mono-sm` | `1.4` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.4 |
+| `--line-height-control` | `1.2` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.2 |
+| `--line-height-prose` | `1.6` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.6 |
+| `--line-height-title` | `1.3` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.3 |
+| `--line-height-none` | `1` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1 |
 | `--letter-spacing-overline` | `0.04em` | `em` | RN mide letterSpacing en puntos: letterSpacing = fontSize * 0.04 |
 | `--letter-spacing-label` | `0.08em` | `em` | RN mide letterSpacing en puntos: letterSpacing = fontSize * 0.08 |
 | `--breakpoint-md` | `768px` | equivalente directo | `useWindowDimensions().width` |

@@ -26,11 +26,12 @@ variants:
   - {name: group,    class: avatar-group,       purpose: "Stacked/overlapped set of avatars with a surface ring (assignees)."}
   - {name: count,    class: avatar-group-count, purpose: "'+N' overflow cell that closes a group; also hosts an add-person icon."}
 sizes:
-  - {name: sm, class: avatar-sm, use: "dense list rows, assignee stacks (28px)"}
+  - {name: xs, class: avatar-xs, use: "kanban card footer, assignee chips inside a card (24px)"}
+  - {name: sm, class: avatar-sm, use: "dense list rows (28px)"}
   - {name: md, class: avatar-md, use: "topbar, standard cards (36px, default)"}
   - {name: lg, class: avatar-lg, use: "profile headers, detail panels (44px)"}
   - {name: xl, class: avatar-xl, use: "large profile / account cards (56px)"}
-size_selection: "Match the surrounding density: ~28px in assignee stacks, 36px in the topbar, 44px in a profile header. Font size scales automatically with the size class."
+size_selection: "Match the surrounding density: 24px inside a card footer or an assignee chip, 28px in dense list rows, 36px in the topbar, 44px in a profile header. The initial size comes with the class and is NOT the text scale — it is a proportional ladder defined once in variables.css (avatar-size/avatar-initial). Never set width, height or font-size on an avatar by hand: four components did that before the ladder was written and each invented a different step."
 
 content_rules:
   - "Always 2-letter initials (given name + surname) for maximum legibility — never 3+ characters."
@@ -94,7 +95,7 @@ motion:
 
 source:
   css: css/components/avatar.css
-  classes: [avatar, avatar-sm, avatar-md, avatar-lg, avatar-xl, avatar-image, avatar-fallback, avatar-badge, avatar-badge-online, avatar-badge-busy, avatar-badge-away, avatar-badge-offline, avatar-group, avatar-group-count]
+  classes: [avatar, avatar-xs, avatar-sm, avatar-md, avatar-lg, avatar-xl, avatar-image, avatar-fallback, avatar-badge, avatar-badge-online, avatar-badge-busy, avatar-badge-away, avatar-badge-offline, avatar-group, avatar-group-count]
   react_wrapper: null
   docs_anchor: c-avatar
 ---

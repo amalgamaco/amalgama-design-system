@@ -444,6 +444,10 @@ class EmbassyDims {
   static const lineHeightMonoMd = 1.5;
   static const fontSizeMonoSm = 11.0;
   static const lineHeightMonoSm = 1.4;
+  static const lineHeightControl = 1.2;
+  static const lineHeightProse = 1.6;
+  static const lineHeightTitle = 1.3;
+  static const lineHeightNone = 1.0;
   static const fontWeightRegular = 400.0;
   static const fontWeightMedium = 500.0;
   static const fontWeightSemibold = 600.0;
@@ -521,6 +525,10 @@ class EmbassyDims {
   static const lineHeightMonoMdNative = 1.5;
   static const fontSizeMonoSmNative = 11.0;
   static const lineHeightMonoSmNative = 1.4;
+  static const lineHeightControlNative = 1.2;
+  static const lineHeightProseNative = 1.6;
+  static const lineHeightTitleNative = 1.3;
+  static const lineHeightNoneNative = 1.0;
   static const fontWeightRegularNative = 400.0;
   static const fontWeightMediumNative = 500.0;
   static const fontWeightSemiboldNative = 600.0;

@@ -45,5 +45,5 @@
 .empty-state-desc {
   font-size: var(--font-size-body-lg); color: var(--text-muted);
   max-width: 400px; margin: 0 auto 20px;
-  line-height: 1.6;
+  line-height: var(--line-height-prose);
 }

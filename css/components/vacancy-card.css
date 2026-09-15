@@ -102,10 +102,12 @@
    correcto en light Y dark (antes: --color-on-primary, que se invierte a navy en
    dark sobre color saturado). */
 .assignee-avatar {
-  width: 22px; height: 22px; border-radius: 50%;
+  /* Escalón xs de la escala de avatar (variables.css) — antes 22px/9px, un
+     escalón propio a dos píxeles del que ya existía. */
+  width: var(--avatar-size-xs); height: var(--avatar-size-xs); border-radius: 50%;
   background: var(--color-error-container);
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-on-error-container); font-size: 9px; font-weight: 700;
+  color: var(--color-on-error-container); font-size: var(--avatar-initial-xs); font-weight: 700;
 }
 .assignee-avatar.blue   { background: var(--color-secondary-container); color: var(--color-on-secondary-container); }
 .assignee-avatar.green  { background: var(--color-success-container);   color: var(--color-on-success-container); }

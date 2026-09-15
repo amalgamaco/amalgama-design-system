@@ -69,11 +69,11 @@ a.item:hover, .item-clickable:hover { background: var(--color-surface-variant); 
 .item-content { display: flex; flex-direction: column; gap: var(--space-1); flex: 1; min-width: 0; }
 /* Un segundo .item-content contiguo no crece (par shadcn [&+item-content]:flex-none) */
 .item-content + .item-content { flex: none; }
-.item-title { display: flex; width: fit-content; align-items: center; gap: var(--space-2); font-weight: 500; color: var(--text-primary); line-height: 1.4; }
+.item-title { display: flex; width: fit-content; align-items: center; gap: var(--space-2); font-weight: 500; color: var(--text-primary); line-height: var(--line-height-title); }
 .item-description {
   color: var(--text-secondary);
   font-size: var(--font-size-body-sm);
-  line-height: 1.5;
+  line-height: var(--line-height-body-sm);
   /* clamp a 2 líneas, como shadcn */
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
 }

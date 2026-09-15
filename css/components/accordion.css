@@ -108,7 +108,7 @@
   overflow: hidden;
   font-size: var(--font-size-body-md);
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: var(--line-height-prose);
 }
 /* Bottom spacing as CLIPPABLE in-flow content (not padding): padding on the
    overflow:hidden grid item is not clipped by min-height:0, so it would leave a

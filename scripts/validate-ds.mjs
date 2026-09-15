@@ -340,8 +340,12 @@ console.log("\n[13] el cromo del sitio usa tokens");
   const raiz = vars.slice(vars.indexOf(":root"), vars.indexOf("}", vars.indexOf(":root")));
   const norm = (x) => x.trim().toLowerCase().replace(/^(-?)0\./, "$1.");
   const tok = new Map();
-  for (const [, n, v] of raiz.matchAll(/(--(?:font-size|letter-spacing)-[\w-]+)\s*:\s*([^;]+);/g))
-    if (!n.includes("editorial") && norm(v) !== "0") tok.set(norm(v), n);
+  // Todos los candidatos, no el último: 12px es --font-size-caption Y
+  // --font-size-overline, y quedarse con uno solo hace que el mensaje recomiende
+  // un rol que puede no ser el de este texto. El chequeo dice qué tokens tienen
+  // ese valor; cuál corresponde lo decide quien escribe.
+  for (const [, n2, v] of raiz.matchAll(/(--(?:font-size|letter-spacing)-[\w-]+)\s*:\s*([^;]+);/g))
+    if (!n2.includes("editorial") && norm(v) !== "0") tok.set(norm(v), [...(tok.get(norm(v)) || []), n2]);
 
   // El literal ES el contenido: un swatch de color, una muestra de la escala tipográfica,
   // una miniatura que DIBUJA una interfaz. Exentas y nombradas.
@@ -364,10 +368,10 @@ console.log("\n[13] el cromo del sitio usa tokens");
           && !/^rgba?\(\s*(255,\s*255,\s*255|0,\s*0,\s*0)\b/.test(v))   // un var(--x, #fallback) no es color crudo
         colores.push(`${sel} { ${prop}: ${val.trim()} }`);
       if (prop === "font-size" && /^[\d.]+px/.test(v))
-        tok.has(v) ? conToken.push(`A3 ${sel} { ${v} } -> var(${tok.get(v)})`)
+        tok.has(v) ? conToken.push(`A3 ${sel} { ${v} } → ${tok.get(v).map(t => `var(${t})`).join(" | ")}`)
                    : huerfanos.set(v, (huerfanos.get(v) || 0) + 1);
       if (prop === "letter-spacing" && !v.startsWith("var(") && v !== "normal" && v !== "0")
-        tok.has(v) ? conToken.push(`A11 ${sel} { ${v} } -> var(${tok.get(v)})`)
+        tok.has(v) ? conToken.push(`A11 ${sel} { ${v} } → ${tok.get(v).map(t => `var(${t})`).join(" | ")}`)
                    : huerfanos.set(v, (huerfanos.get(v) || 0) + 1);
     }
   }
@@ -389,6 +393,87 @@ console.log("\n[13] el cromo del sitio usa tokens");
   const tot = [...huerfanos.values()].reduce((a, b) => a + b, 0);
   if (tot) warn(`${tot} valor(es) sin token posible — hueco de la escala, no deuda: ` +
     [...huerfanos.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([v, n]) => `${v}×${n}`).join(" · "));
+}
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   [14] el interlineado del componente sale de su tamaño
+
+   La escala de variables.css está PAREADA: --font-size-{rol} trae su
+   --line-height-{rol}. Escribir el interlineado a mano al lado de un tamaño
+   tokenizado rompe el par en silencio — el día que la escala se mueve, el
+   tamaño la sigue y el número no. Y como no falla nada, nadie se entera.
+
+   Antes de que esto existiera, nueve componentes escribían la bajada con cinco
+   tamaños y seis interlineados distintos (1.45, 1.5, 1.55, 1.6) para el mismo
+   subcomponente. No era una decisión: era que nadie la tenía que tomar.
+
+   Falla cuando un componente escribe un line-height crudo. Apartarse del par
+   sigue siendo legítimo — pero se hace con un token que diga por qué
+   (--line-height-control / -prose / -title / -none, GOVERNANCE.md §8.3), no con
+   un número suelto.
+   ──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[14] el interlineado del componente sale de su tamaño");
+{
+  const dirC = path.join(ROOT, "css/components");
+  const crudos = [];
+  for (const f of fs.readdirSync(dirC).filter(x => x.endsWith(".css"))) {
+    const src = fs.readFileSync(path.join(dirC, f), "utf8")
+                  .replace(/\/\*[\s\S]*?\*\//g, c => c.replace(/[^\n]/g, " "));  // los comentarios no son CSS (se blanquean, no se borran: el nro de línea tiene que seguir sirviendo)
+    src.split("\n").forEach((line, i) => {
+      for (const m of line.matchAll(/(?:^|[;{]|\s)line-height\s*:\s*([^;}]+)/g)) {
+        const v = m[1].trim();
+        if (v.startsWith("var(") || v === "inherit" || v === "normal") continue;
+        crudos.push(`${f}:${i + 1} { line-height: ${v} }`);
+      }
+    });
+  }
+  if (crudos.length)
+    fail(`${crudos.length} interlineado(s) a mano en css/components — usá el par del tamaño, ` +
+         `o el token de la excepción (GOVERNANCE.md §8.3): ` +
+         crudos.slice(0, 6).join(" · ") + (crudos.length > 6 ? ` …y ${crudos.length - 6} más` : ""));
+  else ok("ningún line-height crudo: todos salen de un token");
+
+  /* Y el tamaño, mismo criterio que [13] en el cromo del sitio: falla solo si el
+     token exacto YA existe. Lo que no tiene token no es deuda del componente, es
+     un hueco de la escala — y se cuenta acá para que se vea, porque el punto
+     ciego de esta capa era justamente que nadie la medía. */
+  const conTok = [], huecos = new Map();
+  // SOLO el bloque :root. El archivo tiene además un bloque nativo con los mismos
+  // nombres y otros valores; leerlo entero devuelve pares inventados (16px "es"
+  // body-md). Ya me pasó: la escala se lee donde la escala vive.
+  const varsSrc = fs.readFileSync(path.join(ROOT, "css/variables.css"), "utf8");
+  const rootBlk = varsSrc.slice(varsSrc.indexOf(":root"), varsSrc.indexOf("\n}", varsSrc.indexOf(":root")));
+  const escala = new Map();
+  for (const m of rootBlk.matchAll(/(--font-size-[\w-]+):\s*([^;]+);/g)) {
+    const v = m[2].trim();
+    escala.set(v, [...(escala.get(v) || []), m[1]]);
+  }
+  for (const f of fs.readdirSync(dirC).filter(x => x.endsWith(".css"))) {
+    const src = fs.readFileSync(path.join(dirC, f), "utf8")
+                  .replace(/\/\*[\s\S]*?\*\//g, c => c.replace(/[^\n]/g, " "));
+    src.split("\n").forEach((line, i) => {
+      for (const m of line.matchAll(/(?:^|[;{]|\s)font-size\s*:\s*([^;}]+)/g)) {
+        const v = m[1].trim();
+        if (v.startsWith("var(") || !/^[\d.]+px$/.test(v)) continue;
+        escala.has(v) ? conTok.push(`${f}:${i + 1} { ${v} } → ${escala.get(v).map(t => `var(${t})`).join(" | ")}`)
+                      : huecos.set(v, (huecos.get(v) || 0) + 1);
+      }
+    });
+  }
+  // Acá AVISA, no falla, y es a propósito. Un px puede ser dos roles (11px es
+  // --font-size-mono-sm Y nada más, pero el label de un botón no es mono; 15px
+  // es --font-size-heading-xs Y el escalón lg del botón, que no es un heading).
+  // Sustituir por valor es el error que este repo ya cometió dos veces: computa
+  // igual, miente de rol y se rompe el día que la escala se mueve. La máquina
+  // encuentra el valor; el rol lo elige una persona.
+  if (conTok.length)
+    warn(`${conTok.length} font-size a mano en css/components con token del mismo valor — ` +
+         `revisar el ROL antes de sustituir: ` + conTok.join(" · "));
+  else ok("ningún font-size a mano con token del mismo valor");
+  const th = [...huecos.values()].reduce((a, b) => a + b, 0);
+  if (th) warn(`${th} tamaño(s) sin token posible en css/components — hueco de la escala: ` +
+    [...huecos.entries()].sort((a, b) => b[1] - a[1]).map(([v, n]) => `${v}×${n}`).join(" · "));
 }
 
 

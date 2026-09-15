@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-66 componentes · **600 clases públicas** de 702 selectores totales en el CSS.
+66 componentes · **601 clases públicas** de 703 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -232,9 +232,9 @@ A circle showing a person's photo or initials over a brand tonal fill — identi
 **Cuándo usar:** identificar a una persona (topbar, listas, cards de vacante/persona, asignados).
 **Cuándo no:** para íconos genéricos de sistema (usar Icon Button) ni como decoración sin significado.
 **Variantes:** image · fallback · badge · group · count
-**Tamaños:** sm · md · lg · xl
+**Tamaños:** xs · sm · md · lg · xl
 
-Clases públicas: `.avatar` · `.avatar-badge` · `.avatar-badge-away` · `.avatar-badge-busy` · `.avatar-badge-offline` · `.avatar-badge-online` · `.avatar-fallback` · `.avatar-group` · `.avatar-group-count` · `.avatar-image` · `.avatar-lg` · `.avatar-md` · `.avatar-sm` · `.avatar-xl`
+Clases públicas: `.avatar` · `.avatar-badge` · `.avatar-badge-away` · `.avatar-badge-busy` · `.avatar-badge-offline` · `.avatar-badge-online` · `.avatar-fallback` · `.avatar-group` · `.avatar-group-count` · `.avatar-image` · `.avatar-lg` · `.avatar-md` · `.avatar-sm` · `.avatar-xl` · `.avatar-xs`
 
 ```html
 <span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span>

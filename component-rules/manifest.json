@@ -407,6 +407,7 @@
         "count"
       ],
       "sizes": [
+        "xs",
         "sm",
         "md",
         "lg",
@@ -480,6 +481,7 @@
         "css": "css/components/avatar.css",
         "classes": [
           "avatar",
+          "avatar-xs",
           "avatar-sm",
           "avatar-md",
           "avatar-lg",

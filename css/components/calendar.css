@@ -135,7 +135,7 @@
   color: var(--color-on-surface);
   font-size: var(--font-size-body-md);     /* day_button: text-sm */
   font-weight: 400;                        /* font-normal */
-  line-height: 1;                          /* leading-none */
+  line-height: var(--line-height-none);    /* leading-none */
   cursor: pointer;
   transition: background-color var(--duration-fast) var(--ease-default);
 }
