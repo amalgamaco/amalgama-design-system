@@ -10,26 +10,20 @@ Todo lo que necesitás para integrar el Design System en un proyecto web — ins
 
 ## 1. Instalacion
 
-Agrega las fuentes de Google Fonts y los 4 archivos CSS al `` de tu HTML. No se necesita ningun otro paso.
+**El bloque de carga esta en [`PUBLIC-API.md` §«Como cargar el sistema»](PUBLIC-API.md#cómo-cargar-el-sistema). Copialo de ahi.** Se genera desde `DS_VERSION` en `scripts/build-public-api.mjs` y es la unica fuente de la version: escribir el tag a mano —aca o en cualquier otro lado— es como en septiembre de 2026 quedaron entregables sirviendo un CSS sin `composition.css`.
 
-```html
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+Que hoja va en cada caso:
 
-<!-- Amalgama Design System -->
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/components.css">
-```
-
-| Archivo | Contenido | Lineas |
+| Archivo | Contenido | Cuando |
 |---|---|---|
-| `variables.css` | Design tokens: colores, radios, sombras, transiciones | 82 |
-| `base.css` | Reset, tipografia, animaciones, clases utilitarias | 81 |
-| `layout.css` | App shell: sidebar, topbar, contenido | 189 |
-| `components.css` | Barrel: importa todos los componentes desde `css/components/` | — |
+| `variables.css` | Design tokens: colores, radios, sombras, transiciones | siempre |
+| `base.css` | Reset, tipografia, animaciones, clases utilitarias | siempre |
+| `composition.css` | Composicion de pagina: ancho, grilla, ritmo vertical | siempre |
+| `components.css` | Barrel: importa todos los componentes desde `css/components/` | siempre |
+| `layout.css` | App shell: sidebar, topbar, contenido | solo con app shell |
+| `preview-native.css` | Marco de telefono para revisar una pantalla nativa | solo en un preview nativo |
+
+Con marca de cliente, `brand/<cliente>.css` va inmediatamente despues de `variables.css` y antes de `base.css`.
 
 
 ### Opcion B: Solo los componentes que necesitas
@@ -237,12 +231,8 @@ Copia esta plantilla para crear una nueva pagina desde cero:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Pagina — Amalgama</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
+  <!-- Las hojas y las fuentes: copiar el bloque de PUBLIC-API.md §«Como cargar el sistema».
+       Esta plantilla lleva app shell, asi que ademas de las cuatro de siempre va layout.css. -->
 </head>
 <body>
   <div class="app">
