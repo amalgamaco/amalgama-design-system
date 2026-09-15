@@ -423,7 +423,8 @@ if (asJson) {
   }
   for (const a of allowed) console.log(`[${a.id} · EXCEPCIÓN DECLARADA] ${path.basename(a.file)} — ${a.motivo}`);
   console.log(`\nBLOQUEANTES ${summary.BLOQ} · ALTAS ${summary.ALTA} · MEDIAS ${summary.MEDIA} · BAJAS ${summary.BAJA} · total ${summary.total}${allowed.length ? ` · ${allowed.length} excepción(es) declarada(s)` : ""}`);
-  console.log("Lo que no se puede chequear acá (jerarquía, layout, estados, copy, contraste) lo juzga embassy-review.");
+  console.log("Falta el pase de render: node scripts/check-render.mjs <mismos archivos> — mide contraste, medida de línea, proximidad y targets, que en el texto no están.");
+  console.log("Y lo que sigue sin medirse —«cero relleno», la regla 4, las inversiones de §4b— es criterio, no umbral: lo juzga embassy-review.");
 }
 
 process.exit(summary.BLOQ > 0 ? 1 : 0);

@@ -1434,6 +1434,9 @@ contradecían a su original. Este es el mapa, y la regla que lo sostiene.
 | La **anatomía de una tarjeta** (las 4 zonas y las 4 inversiones) | `COMPOSICION.md` §4b | La regla 4 dice cuándo NO va una grilla de tarjetas; 4b dice cómo es una cuando sí va |
 | La proporción de espaciado que agrupa (proximidad) | `guidelines/visual-hierarchy.md` §Whitespace as grouping | `D15` la hace auditable; las skills la citan |
 | Los doce arquetipos de pantalla | `guidelines/screen-patterns.md` | — |
+| **Cómo se detecta** cada falla (texto, render, o criterio) | `FAILURES.md`, columna «Cómo se detecta» | Los scripts la implementan; ninguno inventa una falla que no esté en el catálogo |
+| El interlineado de cada paso, y las cuatro excepciones con nombre | `css/variables.css` + `GOVERNANCE.md` §8.3 | `validate-ds [14]` lo hace fallar; `screen` lo cita |
+| La escalera de la inicial de avatar (proporcional al disco, no la escala de texto) | `css/variables.css` `--avatar-size-*` / `--avatar-initial-*` | `avatar.md` explica cuál escalón; ningún componente escribe el número |
 
 **La regla:** una decisión se escribe **una vez**, en el archivo de la tabla. Todo lo demás
 —las otras páginas del DS, `index.html`, y sobre todo las skills del plugin `embassy`— **la

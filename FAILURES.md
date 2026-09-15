@@ -107,19 +107,20 @@ alert y confirmación destructiva sin diálogo son errores de UX, no de DS.
 |---|---|---|---|
 | `D1` | Regiones sin alinear a una única columna de contenido | ALTA | inspección visual |
 | `D2` | Un elemento se centra o se dimensiona con un ancho propio ajeno a la grilla | ALTA | inspección |
-| `D3` | Sin ancho máximo: líneas de más de ~120 caracteres en pantalla ancha | ALTA | medición |
+| `D3` | Sin ancho máximo: líneas de más de ~120 caracteres en pantalla ancha | ALTA | `check-render` |
 | `D4` | Fuera de la secuencia canónica (filtros flotando entre bandas ajenas) | MEDIA | inspección |
 | `D5` | Un mismo concepto expresado por dos sistemas (chips *y* carpetas para el mismo set) | ALTA | revisión |
-| `D6` | Cards anidadas | MEDIA | inspección |
+| `D6` | Cards anidadas | MEDIA | `check-render` |
 | `D7` | Mobile es el desktop encogido, no la transformación correcta | ALTA | inspección en 375px |
-| `D8` | Target táctil < 44px como única forma de accionar | ALTA | medición |
+| `D8` | Target táctil < 44px como única forma de accionar | ALTA | `check-render` (pase de 375px) |
 | `D9` | Estructura de página sin elegir, o `column-bleed` con el texto sin acotar (línea > ~120 caracteres) | ALTA | inspección + regex |
 | `D10` | En una pantalla de producto, secciones separadas por línea (`.rule`, bordes sueltos) en vez de por el escalón `--color-surface` → `--color-surface-container`. El shell ya encuadra: el borde dibuja dos veces | MEDIA | inspección · `COMPOSICION.md` III·a·1 |
 | `D11` | Pantalla de producto que abre con registro editorial, overline de apertura o índice de sección en vez de `page-header`. Una pantalla de producto no abre: continúa | ALTA | inspección · III·a·2 |
-| `D12` | **La etiqueta pesa más que su dato** — en un `stat-card` con la cifra chica y el rótulo grande, o en un panel de detalle. Es `M13` en territorio de escritorio | ALTA | inspección · III·a·6 |
+| `D12` | **La etiqueta pesa más que su dato** — en un `stat-card` con la cifra chica y el rótulo grande, o en un panel de detalle. Es `M13` en territorio de escritorio | ALTA | `check-render` + inspección · III·a·6 |
 | `D13` | Contenedor elegido por costumbre y no por grano: `table` para tres campos de texto, o tarjetas para valores que hay que comparar | MEDIA | inspección · III·a·4 |
 | `D14` | Dos `btn-primary` en la misma pantalla, o la acción primaria fuera del `page-header` | ALTA | regex + inspección · III·a·7 |
-| `D15` | **La proximidad no agrupa**: el espacio dentro de un grupo es igual o mayor que el que lo separa del grupo siguiente — típicamente una etiqueta más lejos de su propio campo que del campo que sigue. Un borde alrededor no lo arregla | ALTA | medición de los dos gaps · `guidelines/visual-hierarchy.md` §Whitespace as grouping |
+| `D15` | **La proximidad no agrupa**: el espacio dentro de un grupo es igual o mayor que el que lo separa del grupo siguiente — típicamente una etiqueta más lejos de su propio campo que del campo que sigue. Un borde alrededor no lo arregla | ALTA | `check-render` (mide los dos gaps) · `guidelines/visual-hierarchy.md` §Whitespace as grouping |
+| `D16` | **La columna quedó demasiado angosta**: el párrafo se rompe cada tres palabras. Es `D3` por el otro lado — el ancho máximo protege del renglón infinito, nada protegía del renglón de 23 caracteres. Pasa al partir en dos columnas algo que se previsualizó en una, y no se ve leyendo el CSS: se ve midiendo el render | ALTA | `check-render` |
 
 ## E · Estados y contenido
 
@@ -150,7 +151,7 @@ alert y confirmación destructiva sin diálogo son errores de UX, no de DS.
 | `F4` | Contador de resultados sin `aria-live` | MEDIA | regex |
 | `F5` | Tabla armada con divs en vez de semántica real | ALTA | inspección |
 | `F6` | Estado comunicado solo por color | ALTA | inspección |
-| `F7` | Contraste por debajo de AA | ALTA | medición |
+| `F7` | Contraste por debajo de AA | ALTA | `check-render` (color resuelto contra el fondo efectivo) |
 | `F8` | Orden de tabulación ilógico o foco atrapado sin salida | ALTA | prueba con teclado |
 
 ## G · Motion

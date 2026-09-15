@@ -334,9 +334,15 @@ píldora **con borde y sin relleno**. Un badge relleno gritaría más que el tit
 inset del panel, y si hay afordancia o no — va cuando la tarjeta entera es clickeable. Lo que no:
 el orden de las zonas, y que la ilustración use `currentColor`.
 
-> **Deuda conocida:** `.nav-card` tiene valores a mano que no salen de la escala — 9.5px y .07em
-> en la etiqueta, -.028em en el titular—. Se conservan porque la tarjeta está aprobada así; si
-> alguna vez se tokenizan, es con un escalón nuevo en la escala, no redondeando al más cercano.
+> **Resuelto (sep 2026).** Esto figuraba como deuda conocida: 9.5px y .07em en la etiqueta,
+> -.028em en el titular, más cosas que la nota no listaba (dos familias entre comillas, 12.5px a
+> mano, tres interlineados sueltos). La nota decía que si alguna vez se tokenizaban tenía que ser
+> con un escalón nuevo, no redondeando. Al medirlo resultó que **no hacía falta ningún escalón
+> nuevo**: el titular no estaba fuera de escala, estaba en el registro **editorial**
+> —`--letter-spacing-editorial`, `--line-height-editorial-sm`— usado a un tamaño de heading, que
+> es parte de por qué esta tarjeta no se lee como una tarjeta generada. La etiqueta es la versalita
+> chica (`--font-size-overline-sm`) y la bajada es una bajada como las otras ocho. La diferencia
+> visible máxima fue medio píxel en la etiqueta y 0.18px de tracking en el titular.
 
 ## 5. El ícono tiene cinco lugares, y "arriba del título" no es el default
 

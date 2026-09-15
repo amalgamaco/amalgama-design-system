@@ -3,5 +3,11 @@
   "version": "1.0.0",
   "description": "Amalgama Design System (Embassy) — docs site (index.html), tokens, governance, and the buildless css/ + components/ layer. No build step; open index.html directly.",
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "scripts": {
+    "validate": "node scripts/validate-ds.mjs",
+    "check": "node scripts/check-output.mjs",
+    "check:render": "node scripts/check-render.mjs"
+  },
+  "_scriptsNota": "check:render necesita un navegador: npm i -D playwright && npx playwright install chromium. No está en dependencies a proposito — el repo es sin build; si falta, el script avisa y sale con 0."
 }

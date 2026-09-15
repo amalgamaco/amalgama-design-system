@@ -802,13 +802,13 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 
 /* Tag — lightweight editorial label, subtle outline style */
 .nav-card-tag {
-  font-family: 'DM Mono', monospace;
-  font-size: 9.5px; font-weight: 500;
-  text-transform: uppercase; letter-spacing: .07em;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-overline-sm); font-weight: 500;
+  text-transform: uppercase; letter-spacing: var(--letter-spacing-label);
   color: var(--color-on-surface-variant);
   border: 1px solid color-mix(in srgb, var(--color-on-surface) 14%, transparent);
   padding: 3px 10px; border-radius: 999px;
-  line-height: 1.4;
+  line-height: var(--line-height-overline-sm);
 }
 
 /* Arrow — minimal circular indicator */
@@ -833,16 +833,20 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   flex: 1;
 }
 .nav-card-title {
-  font-family: 'Epilogue', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--font-size-heading-lg); font-weight: 800;
   color: var(--color-on-surface);
-  line-height: 1.1; letter-spacing: -.028em;
+  /* Registro EDITORIAL a tamaño de heading: extrabold, tracking muy cerrado y
+     interlineado de portada. No era «fuera de escala» — era la escala editorial
+     usada a un tamaño chico, que es parte de por qué esta tarjeta no se lee como
+     una tarjeta generada. Antes: 1.1 y -.028em a mano (delta real: 0.18px). */
+  line-height: var(--line-height-editorial-sm); letter-spacing: var(--letter-spacing-editorial);
   margin-bottom: 8px;
 }
 .nav-card-desc {
-  font-size: 12.5px;
+  font-size: var(--font-size-body-sm);
   color: var(--color-on-surface-variant);
-  line-height: 1.55;
+  line-height: var(--line-height-body-sm);
 }
 
 /* ── Visual / illustration area ──
