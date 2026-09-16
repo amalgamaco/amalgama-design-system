@@ -148,7 +148,7 @@ Thin aliases; prefer them where they read clearer, but they resolve to the roles
 |---|---|---|
 | `--font-heading` | `'Epilogue', sans-serif` | Display + headings (h1–h6). |
 | `--font-body` | `'Inter', sans-serif` | Body/UI text. |
-| `--font-mono` | `'DM Mono', monospace` | Code, labels, overlines. |
+| `--font-mono` | `'DM Mono', monospace` | Código, atajos de teclado, índice de sección, datos tabulares. **No el `.overline`**, que va en `--font-heading` desde sep 2026. |
 
 ### 3b. Type scale (`--font-size-*` + matching `--line-height-*`)
 

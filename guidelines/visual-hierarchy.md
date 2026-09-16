@@ -28,7 +28,7 @@ Do not pick font sizes — pick a *role* from the scale and the size follows. Ev
 | Card / block title | `--font-size-heading-md` (18px) | Epilogue | Card headers, `Stat Card` label |
 | Body | `--font-size-body-lg` (14px) / `-md` (13.5px) | Inter | Prose, table cells, inputs, buttons |
 | Supporting | `--font-size-body-sm` (12.5px) / `--font-size-caption` (12px) | Inter | Helper text, timestamps |
-| Micro | `--font-size-label` (13px) / `-overline` (12px) / `-badge` (11.5px) | Inter / DM Mono | Form labels, column headers, `Badge` |
+| Micro | `--font-size-label` (13px) / `-overline` (12px) / `-badge` (11.5px) | Inter · Epilogue en `.overline` · DM Mono en índice de sección y atajos | Form labels, column headers, `Badge`, rótulo de página |
 
 Headings are **Epilogue** (`--font-heading`); everything else is **Inter** (`--font-body`); code and eyebrow labels are **DM Mono** (`--font-mono`). One step of the scale is usually enough contrast between adjacent levels — jumping from `display` straight to `body-md` for a subtitle skips the rungs and flattens the middle.
 

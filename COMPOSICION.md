@@ -72,13 +72,19 @@ cambiar la paleta para que la página pudiera ser de cualquiera.
 
 El titular de apertura vive en el registro editorial (hasta 96px) y el cuerpo se queda en la
 escala de producto (13.5px). Esa distancia es la firma; agrandar todo por igual es el default.
-Y las versalitas van apretadas y en mono. Reglas 0b y 1.
+Y las versalitas van apretadas, en la tipografía de titulares. Reglas 0b y 1.
 
-## A2 · Tracking de versalitas: 0.04em en mono
+## A2 · Tracking de versalitas: 0.04em
 
-El default de una página generada es 0.12–0.16em en sans. El nuestro es **apretado y
-monoespaciado**, que se lee como etiqueta de sistema y no como eyebrow editorial. Es la diferencia
-más barata y más visible de las cinco. Está en `.overline` y en `--letter-spacing-overline`.
+El default de una página generada es **0.12–0.16em**, y ese tracking amplio es lo que la vuelve
+reconocible a diez metros. El nuestro es **apretado, en Epilogue** —la misma cara que el título que
+encabeza—, con `--space-5` de aire hasta el título. Es la diferencia más barata y más visible de las
+cinco. Está en `.overline` y en `--letter-spacing-overline`.
+
+Lo que diferencia es el **interletrado**, no la familia: un rótulo en sans a 0.12em se lee como
+catálogo aunque esté en la tipografía correcta, y uno apretado se lee como nuestro aunque no sea
+monoespaciado. Hasta sep 2026 iba en DM Mono; se cambió porque el registro de etiqueta de terminal
+no es el de la marca.
 
 > **Ojo con no confundirlo con el otro tracking positivo.** Las versalitas de componente —badge,
 > header de tabla, label del nav, acción del toast— van a 10–11px y usan

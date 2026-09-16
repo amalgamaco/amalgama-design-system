@@ -235,17 +235,23 @@
 
 /* ── Overline ──────────────────────────────────────────────────────────────
    El reemplazo del eyebrow. No está prohibido clasificar algo arriba del título: está
-   prohibido hacerlo con el tracking amplio en sans que usa todo el mundo. Acá es
-   monoespaciado y apretado, y se lee como etiqueta de sistema.
+   prohibido hacerlo con el TRACKING AMPLIO (0.12–0.16em) que usa todo el mundo.
+   Lo que diferencia no es la familia: es el interletrado apretado, en la tipografía
+   de titulares. Va en Epilogue —la misma cara que el título que encabeza— a 0.04em,
+   en gris, y con --space-5 de aire abajo: suficiente para que el título arranque
+   solo, no tanto como para que dejen de leerse como una unidad.
+   (Hasta sep 2026 iba en DM Mono. Se cambió porque el registro de etiqueta de
+   terminal no es el de la marca; lo que la regla 1 prohíbe sigue siendo el tracking.)
    Uno por página: repetido deja de clasificar y es textura (COMPOSICION.md regla 1). */
 .overline {
-  font-family: var(--font-mono);
+  font-family: var(--font-heading);
   font-size: var(--font-size-overline);
   line-height: var(--line-height-overline);
   letter-spacing: var(--letter-spacing-overline);
+  font-weight: 600;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-5);
 }
 
 /* ── Registro editorial ────────────────────────────────────────────────────

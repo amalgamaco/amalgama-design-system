@@ -523,10 +523,11 @@
   --letter-spacing-heading-xl: -0.4px;
   --letter-spacing-heading-lg: -0.3px;
   --letter-spacing-heading-md: -0.2px;
-  /* Overline de página, en DM Mono y a 12px. Apretado a propósito: el default de
-     una página generada es 0.12–0.16em en sans, y ese tracking amplio es lo que la
-     vuelve reconocible a diez metros. En monoespaciada y apretado se lee como
-     etiqueta de sistema. */
+  /* Overline de página, a 12px. Apretado a propósito: el default de una página
+     generada es 0.12–0.16em y ese tracking amplio es lo que la vuelve reconocible
+     a diez metros. Lo usan el rótulo de página (`.overline`, en Epilogue) y el
+     índice de sección y los atajos de teclado (en mono): comparten el VALOR, no la
+     familia. */
   --letter-spacing-overline:    0.04em;
   /* Versalitas de componente (badge, header de tabla, label del nav, acción del
      toast): 10–11px. Acá el tracking apretado se lee PEOR — a ese tamaño las

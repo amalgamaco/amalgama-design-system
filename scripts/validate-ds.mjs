@@ -641,13 +641,15 @@ console.log("\n[16] el bloque [data-theme=\"light\"] no se quedó atrás de :roo
 
    `check-output` chequea esto (`H7`) sobre las pantallas que alguien PRODUCE, y
    por eso nunca miro index.html: el catalogo no es una salida. Resultado, el sitio
-   del DS tenia cinco imitaciones de `.overline` escritas a mano, dos de ellas en
-   sans con .12em y todas en azul — exactamente lo que el sistema le pide al resto
-   del mundo que no haga. La regla estaba escrita, y chequeada para todos menos
-   para nosotros.
+   del DS tenia cinco imitaciones de `.overline` escritas a mano, dos de ellas con
+   .12em y todas en azul — exactamente lo que el sistema le pide al resto del mundo
+   que no haga. La regla estaba escrita, y chequeada para todos menos para nosotros.
 
    Falla cuando una regla del sitio pone versalitas con tracking en la banda
-   prohibida SIN ser mono. Mono y apretado es el registro del sistema y esta bien.
+   prohibida, en cualquier familia. La primera version de este chequeo eximia al
+   mono, porque en ese momento `.overline` era monoespaciado; cuando paso a Epilogue
+   (sep 2026) la exencion quedo sin sentido — lo que diferencia nunca fue la
+   familia, es el interletrado, y un rotulo en mono a .14em seria igual de tipico.
    ──────────────────────────────────────────────────────────────────────────── */
 console.log("\n[17] las versalitas del sitio no usan el tracking de catálogo");
 {
@@ -661,16 +663,14 @@ console.log("\n[17] las versalitas del sitio no usan el tracking de catálogo");
     if (!sel || sel.startsWith("@")) continue;
     if (!/text-transform\s*:\s*uppercase/.test(body)) continue;
     if (!BANDA.test(body)) continue;
-    // mono es el registro del sistema: el problema es el tracking amplio EN SANS
-    if (/--font-mono|DM Mono/.test(body)) continue;
     const ls = BANDA.exec(body)[0].split(":")[1].trim();
     malas.push(`${sel} { ${ls} }`);
   }
   if (malas.length)
-    fail(`${malas.length} regla(s) con versalitas en sans y tracking 0.12–0.16em — es el rótulo `
-         + `de catálogo que la regla 1 prohíbe; usá .overline (mono, apretado, --text-muted): `
+    fail(`${malas.length} regla(s) con versalitas y tracking 0.12–0.16em — es el rótulo `
+         + `de catálogo que la regla 1 prohíbe; usá .overline (Epilogue, apretado, --text-muted): `
          + malas.slice(0, 6).join(" · ") + (malas.length > 6 ? ` …y ${malas.length - 6} más` : ""));
-  else ok("ninguna versalita del sitio usa el tracking amplio en sans");
+  else ok("ninguna versalita del sitio usa el tracking amplio");
 }
 
 

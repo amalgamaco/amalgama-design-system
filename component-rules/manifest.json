@@ -2040,7 +2040,7 @@
           "--measure-lead"
         ],
         "typography": [
-          "--font-mono",
+          "--font-heading",
           "--font-size-overline",
           "--line-height-overline",
           "--letter-spacing-overline"

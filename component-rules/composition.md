@@ -89,7 +89,7 @@ relationships:
 tokens:
   color: [--text-muted, --color-secondary, --color-outline]
   spacing: [--space-8, --space-12, --space-20, --measure, --measure-lead]
-  typography: [--font-mono, --font-size-overline, --line-height-overline, --letter-spacing-overline]
+  typography: [--font-heading, --font-size-overline, --line-height-overline, --letter-spacing-overline]
 
 motion:
   entrance: "none — structure does not animate in"

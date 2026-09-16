@@ -1763,7 +1763,7 @@
     "--letter-spacing-overline": {
       "$type": "typography",
       "$value": "0.04em",
-      "section": "Overline de página, en DM Mono y a 12px. Apretado a propósito: el default de una página generada es 0.12–0.16em en sans, y ese tracking amplio es lo que la vuelve reconocible a diez metros. En monoespaciada y apretado se lee como etiqueta de sistema.",
+      "section": "Overline de página, a 12px. Apretado a propósito: el default de una página generada es 0.12–0.16em y ese tracking amplio es lo que la vuelve reconocible a diez metros. Lo usan el rótulo de página (`.overline`, en Epilogue) y el índice de sección y los atajos de teclado (en mono): comparten el VALOR, no la familia.",
       "$native": {
         "translates": false,
         "unit": "em",
