@@ -74,6 +74,13 @@
   --ds-text-2:        var(--neutral-400);
   --ds-text-3:        var(--neutral-350);  /* 5.54:1 sobre tarjeta. NO neutral-300: 4.34:1, bajo AA */
   --ds-accent:        var(--secondary-900);
+  /* El acento cuando hay que LEERLO, no solo verlo. --ds-accent es #4F80FF y da
+     3.58:1 sobre la página: alcanza para un borde, un ícono o un titular grande,
+     no para una versalita de 12px. Mismo criterio que --ds-text-3. El primitivo
+     existe justamente para esto («accessible on-text within the Secondary
+     family»). Lo encontró check-render, no el ojo: en el CSS se ve el token
+     correcto de la familia correcta. */
+  --ds-accent-text:   var(--secondary-950);
   --ds-accent-bg:     var(--secondary-50);
   --ds-tag-bg:        var(--secondary-50);
   --ds-code-bg:       var(--md-inverse-surface);
@@ -129,6 +136,7 @@
   --ds-text-2:        var(--md-on-surface-variant);
   --ds-text-3:        var(--neutral-200);  /* 6.44:1 sobre tarjeta oscura. En oscuro el gris se aclara, igual que --text-muted */
   --ds-accent:        #9bb4ff;
+  --ds-accent-text:   #9bb4ff;  /* en oscuro el acento ya es claro sobre fondo oscuro y pasa AA */
   --ds-accent-bg:     #1e2d52;
   --ds-tag-bg:        #1e2d52;
   --ds-code-bg:       var(--md-surface-container-lowest);
@@ -1050,7 +1058,14 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
     border-radius: 8px;
   }
   .ds-menu-btn:hover { background: var(--color-nav-hover); }
-  @media (max-width: 900px) { .ds-menu-btn { display: flex; align-items: center; } }
+  /* 44px: es la UNICA forma de abrir la navegacion en movil, y medía 30x30
+     (D8). En escritorio no se muestra, asi que el piso tactil va acá. */
+  @media (max-width: 900px) {
+    .ds-menu-btn {
+      display: flex; align-items: center; justify-content: center;
+      min-width: 44px; min-height: 44px;
+    }
+  }
   .ds-sidebar-overlay {
     display: none; position: fixed; inset: 0;
     background: var(--md-scrim); z-index: 90;
@@ -1388,7 +1403,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   font-weight: 700;
   letter-spacing: var(--letter-spacing-overline);
   text-transform: uppercase;
-  color: var(--color-secondary);
+  color: var(--ds-accent-text);
   margin: 0 0 22px;
   font-family: var(--font-mono);
 }
@@ -2138,11 +2153,17 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 /* ─ Responsive: emb-gs-principles collapses on medium screens ─ */
 @media (max-width: 900px) {
   .emb-gs-principles { grid-template-columns: repeat(2, 1fr); }
+  /* La grilla de novedades de la home tenia 3 columnas fijas y ningun breakpoint.
+     A 375px daba tarjetas de 98px con una columna de texto de 56px: 14 caracteres
+     por linea repartidos en 24 lineas. Lo encontro check-render (D16), no el ojo
+     — en el codigo se ve una grilla perfectamente razonable. */
+  .emb-latest-grid   { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
   .emb-gs-principles { grid-template-columns: 1fr; }
   .emb-gs-two-col    { grid-template-columns: 1fr; }
   .emb-gs-anchors    { grid-template-columns: 1fr; }
+  .emb-latest-grid   { grid-template-columns: 1fr; }
 }
 
 /* ─ Consistent docs-section margin rhythm ─ */
@@ -3780,7 +3801,11 @@ body { overflow-x: clip; }
 
     <!-- RIGHT — component collage -->
     <div class="emb-hero-right">
-      <div class="emb-collage">
+      <!-- El collage es una MINIATURA que dibuja una interfaz, no una interfaz: sus chips
+           de 10px son textura, no texto que alguien lea. Misma exención que ya tiene en
+           validate-ds [13], declarada acá para check-render y a nivel del nodo, no de la
+           página: apagar F7 en un archivo de 107 secciones es apagar el chequeo. -->
+      <div class="emb-collage" data-ds-allow="F7 - miniatura decorativa que dibuja una interfaz, sus chips de 10px son textura y no texto que alguien lea">
 
         <!-- Profile card — left, top -->
         <div class="emb-collage-card emb-collage-profile">

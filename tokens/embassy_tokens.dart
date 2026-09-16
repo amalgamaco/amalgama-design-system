@@ -59,6 +59,7 @@ class EmbassyColors {
   static const tertiary700 = Color(0xFF8D79F6);
   static const tertiary800 = Color(0xFF7F69F5);
   static const tertiary900 = Color(0xFF7158F4);
+  static const tertiary950 = Color(0xFF4A3BA8);
   static const success50 = Color(0xFFE4F8EC);
   static const success100 = Color(0xFFBFECD1);
   static const success200 = Color(0xFF93E1B3);
@@ -113,7 +114,7 @@ class EmbassyColors {
   static const colorTertiary = Color(0xFF7158F4);
   static const colorOnTertiary = Color(0xFFFFFFFF);
   static const colorTertiaryContainer = Color(0xFFE3DEFD);
-  static const colorOnTertiaryContainer = Color(0xFF7158F4);
+  static const colorOnTertiaryContainer = Color(0xFF4A3BA8);
   static const colorError = Color(0xFFFD3A45);
   static const colorOnError = Color(0xFFFFFFFF);
   static const colorErrorContainer = Color(0xFFFFEBF0);
@@ -245,6 +246,7 @@ class EmbassyColors {
   static const tertiary700Dark = Color(0xFF8D79F6);
   static const tertiary800Dark = Color(0xFF7F69F5);
   static const tertiary900Dark = Color(0xFF7158F4);
+  static const tertiary950Dark = Color(0xFF4A3BA8);
   static const success50Dark = Color(0xFFE4F8EC);
   static const success100Dark = Color(0xFFBFECD1);
   static const success200Dark = Color(0xFF93E1B3);
@@ -298,7 +300,7 @@ class EmbassyColors {
   static const colorOnSecondaryContainerDark = Color(0xFFDCE6FF);
   static const colorTertiaryDark = Color(0xFFC6BCFB);
   static const colorOnTertiaryDark = Color(0xFF0A0C12);
-  static const colorTertiaryContainerDark = Color(0xFF7F69F5);
+  static const colorTertiaryContainerDark = Color(0xFF4A3BA8);
   static const colorOnTertiaryContainerDark = Color(0xFFF1EEFE);
   static const colorErrorDark = Color(0xFFF29AA1);
   static const colorOnErrorDark = Color(0xFF5C0010);

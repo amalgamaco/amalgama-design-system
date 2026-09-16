@@ -477,5 +477,100 @@ console.log("\n[14] el interlineado del componente sale de su tamaño");
 }
 
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   [15] los pares semanticos del sistema pasan AA
+
+   Cada familia declara --color-X y --color-on-X: el fondo y lo que va ENCIMA.
+   Que ese par contraste es la promesa mas basica que hace un design system, y
+   hasta hoy no la verificaba nadie. Se verificaba a mano, de a un token, cuando
+   alguien se daba cuenta: asi aparecio --ds-text-3 fallando AA en los dos temas
+   y en 169 usos. Un par mal no se ve raro — se ve tenue, y se acepta.
+
+   Se resuelven las cadenas de var() hasta el primitivo y se calcula el ratio
+   WCAG en los DOS temas, porque un par puede pasar en claro y fallar en oscuro.
+
+   Exento `disabled`, y solo ese: WCAG 1.4.3 exceptua explicitamente los
+   controles inactivos. Cualquier otra exencion hay que discutirla, no agregarla.
+   ──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[15] los pares semánticos pasan AA");
+{
+  const EXENTOS = new Set(["disabled"]);   // WCAG 1.4.3: componentes inactivos
+
+  /* Pendiente de decision de marca, no de codigo (sep 2026). `success` y `error`
+     son los tonos de señal —el verde y el rojo de la marca— y el par solo se
+     renderiza en DOS lugares: .btn-primary.btn-success y .btn-primary.btn-danger.
+     Todo el resto del sistema usa los pares -container, que si pasan AA.
+     Hay dos salidas y la eleccion es de diseño, no de regex:
+       (a) el relleno se vuelve el tono profundo que ya existe en la rampa
+           —success-900 #006D2C da 6.51:1 con blanco, error-900 #BF0B29 da 6.37:1—
+           y el blanco se queda, que es la convencion para un boton de peligro;
+       (b) el relleno se queda y el texto se vuelve oscuro, que es exactamente lo
+           que `warning` ya hace hoy (neutral-900 sobre #FFB249, 10.91:1): daria
+           8.2:1 en el verde y 5.46:1 en el rojo.
+     Avisa en vez de fallar para que un par NUEVO que falle se distinga de estos
+     dos, igual que hace [13] con los colores crudos. Cuando se decida, se saca
+     esta lista y vuelven a fallar como cualquier otro. */
+  const DECISION_PENDIENTE = new Set(["success", "error"]);
+  const raw = read("css/variables.css").replace(/\/\*[\s\S]*?\*\//g, "");
+  const bloque = (marca) => {
+    const i = raw.indexOf(marca); if (i < 0) return "";
+    const o = raw.indexOf("{", i); let d = 0, j = o;
+    for (; j < raw.length; j++) { if (raw[j] === "{") d++; else if (raw[j] === "}") { d--; if (!d) break; } }
+    return raw.slice(o + 1, j);
+  };
+  const leer = (blk, base) => {
+    const m = base ? { ...base } : {};
+    for (const x of blk.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)) m[x[1]] = x[2].trim();
+    return m;
+  };
+  const claro = leer(bloque(":root"));
+  const oscuro = leer(bloque('[data-theme="dark"]'), claro);
+  const resolver = (map, v, d = 0) => {
+    if (d > 12 || v == null) return null;
+    v = v.trim();
+    const m = /^var\(\s*(--[\w-]+)\s*(?:,([^)]*))?\)$/.exec(v);
+    if (m) return map[m[1]] !== undefined ? resolver(map, map[m[1]], d + 1)
+                                          : (m[2] ? resolver(map, m[2], d + 1) : null);
+    return /^#[0-9a-fA-F]{3,8}$/.test(v) ? v : null;
+  };
+  const rgb = (h) => { h = h.replace("#", ""); if (h.length === 3) h = h.split("").map((c) => c + c).join("");
+    return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)); };
+  const lum = (c) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+    return 0.2126 * f(c[0]) + 0.7152 * f(c[1]) + 0.0722 * f(c[2]); };
+  const ratio = (a, b) => { const [x, y] = [lum(rgb(a)), lum(rgb(b))].sort((p, q) => q - p);
+    return (x + 0.05) / (y + 0.05); };
+
+  const familias = [...new Set(Object.keys(claro)
+    .filter((k) => /^--color-on-[\w-]+$/.test(k))
+    .map((k) => k.replace("--color-on-", "")))];
+
+  const bajos = [], pendientes = [], sinResolver = [];
+  let mirados = 0;
+  for (const f of familias) {
+    if (EXENTOS.has(f)) continue;
+    if (!(`--color-${f}` in claro)) continue;
+    for (const [tema, map] of [["claro", claro], ["oscuro", oscuro]]) {
+      const fg = resolver(map, map[`--color-on-${f}`]);
+      const bg = resolver(map, map[`--color-${f}`]);
+      if (!fg || !bg) { sinResolver.push(`${f} (${tema})`); continue; }
+      mirados++;
+      const r = ratio(fg, bg);
+      if (r >= 4.5) continue;
+      const linea = `${f} ${tema} ${fg} sobre ${bg} = ${r.toFixed(2)}:1`;
+      (DECISION_PENDIENTE.has(f) ? pendientes : bajos).push(linea);
+    }
+  }
+  if (bajos.length)
+    fail(`${bajos.length} par(es) por debajo de AA (4.5:1) — un par que no contrasta no se ve roto, se ve tenue: `
+         + bajos.join(" · "));
+  else ok(`los ${mirados} pares semánticos contrastan ≥ 4.5:1 en los dos temas${pendientes.length ? ` (${pendientes.length} con decisión de marca pendiente, abajo)` : ""}`);
+  if (pendientes.length)
+    warn(`${pendientes.length} par(es) esperando una decisión de MARCA, no de código — solo se renderizan en `
+         + `.btn-primary.btn-success y .btn-primary.btn-danger; ver el comentario del chequeo: ` + pendientes.join(" · "));
+  if (sinResolver.length)
+    warn(`${sinResolver.length} par(es) no se pudieron resolver hasta un hex (¿color-mix?): ` + sinResolver.join(" · "));
+}
+
+
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);

@@ -126,7 +126,32 @@ const SONDA = (U) => {
     return acc || { r: 255, g: 255, b: 255, a: 1 };
   };
 
-  const out = { contraste: [], medida: [], targets: [], proximidad: [], anidadas: [], etiquetas: [] };
+  /* Excepcion declarada por el propio elemento, con motivo obligatorio:
+       <span data-ds-allow="F7 - miniatura decorativa, no es texto que alguien lea">
+     Varias: data-ds-allow="F7 - motivo uno; D15 - motivo dos"
+     Existe porque una maqueta en miniatura que DIBUJA una interfaz dispara reglas
+     escritas para texto real. A nivel elemento y no a nivel pagina: en un archivo
+     de 107 secciones, apagar F7 entero para salvar un chip es apagar el chequeo.
+     Queda escrita en el markup y sale en el reporte: nadie la apaga en silencio.
+     Sin motivo de al menos 10 caracteres no vale. */
+  const permitido = (el, id) => {
+    const nodo = el.closest("[data-ds-allow]");
+    if (!nodo) return null;
+    const v = nodo.getAttribute("data-ds-allow") || "";
+    // Varias reglas se separan con ; — NO con coma: el motivo casi siempre lleva
+    // comas y la primera partia la frase al medio, dejando "miniatura decorativa"
+    // como motivo de algo que decia bastante mas.
+    const m = new RegExp("(?:^|;)\\s*" + id + "\\s*[-\u2014]\\s*([^;]+)").exec(v);
+    const motivo = m ? m[1].trim() : null;
+    return motivo && motivo.length >= 10 ? motivo : null;
+  };
+
+  const out = { contraste: [], medida: [], targets: [], proximidad: [], anidadas: [], etiquetas: [], exentos: [] };
+  const marcar = (el, id, dato) => {
+    const motivo = permitido(el, id);
+    if (motivo) { out.exentos.push({ id, sel: sel(el), motivo }); return null; }
+    return dato;
+  };
 
   /* ── F7 · contraste ─────────────────────────────────────────────────────── */
   for (const el of document.querySelectorAll("body *")) {
@@ -141,9 +166,11 @@ const SONDA = (U) => {
     const grande = px >= 24 || (px >= 18.66 && peso >= 700);
     const r = ratio(mezclar(fg, bg), bg);
     const piso = grande ? U.aaGrande : U.aaNormal;
-    if (r < piso)
-      out.contraste.push({ sel: sel(el), ratio: +r.toFixed(2), piso, px: +px.toFixed(1),
-                           texto: el.textContent.replace(/\s+/g, " ").trim().slice(0, 40) });
+    if (r < piso) {
+      const d = marcar(el, "F7", { sel: sel(el), ratio: +r.toFixed(2), piso, px: +px.toFixed(1),
+                                   texto: el.textContent.replace(/\s+/g, " ").trim().slice(0, 40) });
+      if (d) out.contraste.push(d);
+    }
   }
 
   /* ── D3 / D16 · medida de línea ─────────────────────────────────────────── */
@@ -162,7 +189,8 @@ const SONDA = (U) => {
     const anchoChar = totalW / txt.length;
     if (!(anchoChar > 0)) continue;
     const maxW = Math.max(...rects.map((r) => r.width));
-    out.medida.push({ sel: sel(el), cpl: Math.round(maxW / anchoChar), lineas: rects.length, chars: txt.length });
+    const dm = marcar(el, "D3", marcar(el, "D16", { sel: sel(el), cpl: Math.round(maxW / anchoChar), lineas: rects.length, chars: txt.length }));
+    if (dm) out.medida.push(dm);
   }
 
   /* ── D8 · target táctil ─────────────────────────────────────────────────── */
@@ -176,7 +204,8 @@ const SONDA = (U) => {
       if (!/btn|button|icon-btn|chip|tab|nav-item|pagination|card/.test(cls) && !el.closest("nav")) continue;
     }
     const r = el.getBoundingClientRect();
-    out.targets.push({ sel: sel(el), w: Math.round(r.width), h: Math.round(r.height) });
+    const dt = marcar(el, "D8", { sel: sel(el), w: Math.round(r.width), h: Math.round(r.height) });
+    if (dt) out.targets.push(dt);
   }
 
   /* ── D15 · la proximidad no agrupa ───────────────────────────────────────
@@ -197,18 +226,29 @@ const SONDA = (U) => {
     if (!apilado || !dentro.length) continue;
     const sig = cont.nextElementSibling;
     if (!sig || !vis(sig)) continue;
+    // Si el que sigue es un PAR —mismo tag y mismas clases— no es "el grupo
+    // siguiente": son dos items de una lista o de un riel, y ahi estar pegados es
+    // deliberado. Sin esto, un riel de botones de 1px de separacion marcaba una
+    // vez por boton: diez hallazgos, ninguno real, en el sitio del propio DS.
+    const clases = (e) => new Set((e.getAttribute("class") || "").trim().split(/\s+/).filter(Boolean));
+    const a = clases(cont), b = clases(sig);
+    const parientes = sig.tagName === cont.tagName &&
+      ((!a.size && !b.size) || [...a].some((c) => b.has(c)));   // comparten al menos una clase:
+    if (parientes) continue;                                    // el .active del riel tambien es un par
     const afuera = sig.getBoundingClientRect().top - cont.getBoundingClientRect().bottom;
     if (afuera <= 0) continue;
     const max = Math.max(...dentro);
     if (max > afuera + 0.5)
-      out.proximidad.push({ sel: sel(cont), adentro: Math.round(max), afuera: Math.round(afuera) });
+      { const dp = marcar(cont, "D15", { sel: sel(cont), adentro: Math.round(max), afuera: Math.round(afuera) });
+        if (dp) out.proximidad.push(dp); }
   }
 
   /* ── D6 · cards anidadas ────────────────────────────────────────────────── */
   for (const el of document.querySelectorAll(".card .card, .card [class*='-card'], [class*='-card'] .card")) {
     if (!vis(el)) continue;
     const padre = el.parentElement && el.parentElement.closest(".card, [class*='-card']");
-    out.anidadas.push({ sel: sel(el), dentroDe: padre ? sel(padre) : "?" });
+    const da = marcar(el, "D6", { sel: sel(el), dentroDe: padre ? sel(padre) : "?" });
+    if (da) out.anidadas.push(da);
   }
 
   /* ── D12 · la etiqueta pesa más que su dato ─────────────────────────────
@@ -227,7 +267,8 @@ const SONDA = (U) => {
     if (!top) continue;
     const t = top.textContent.trim();
     if (!/^[\s\d.,%$+\-/]*\d/.test(t))
-      out.etiquetas.push({ sel: sel(card), mayor: t.slice(0, 30), px: +topPx.toFixed(1) });
+      { const de = marcar(card, "D12", { sel: sel(card), mayor: t.slice(0, 30), px: +topPx.toFixed(1) });
+        if (de) out.etiquetas.push(de); }
   }
 
   return out;
@@ -236,6 +277,7 @@ const SONDA = (U) => {
 /* ═══════════════════════════════════════════════════════════════════════════ */
 
 const findings = [];
+const exenciones = new Map();   // clave id|sel -> {id, sel, motivo, file}
 const add = (id, sev, file, desc, evidence, vp) =>
   findings.push({ id, sev, file, desc, evidence, viewport: vp });
 
@@ -258,6 +300,8 @@ for (const file of files) {
     await page.waitForTimeout(250);
     const r = await page.evaluate(SONDA, UMBRAL);
     await page.close();
+
+    for (const e of r.exentos || []) exenciones.set(`${e.id}|${e.sel}`, { ...e, file });
 
     // F7 · contraste — se reporta UNA vez (en 1440): el color no cambia con el ancho.
     if (vp.nombre === "1440") {
@@ -316,13 +360,16 @@ const count = (s) => findings.filter((f) => f.sev === s).length;
 const summary = { BLOQ: count("BLOQ"), ALTA: count("ALTA"), MEDIA: count("MEDIA"), BAJA: count("BAJA"), total: findings.length };
 
 if (asJson) {
-  console.log(JSON.stringify({ files, summary, findings }, null, 2));
+  console.log(JSON.stringify({ files, summary, findings, exenciones: [...exenciones.values()] }, null, 2));
 } else {
   const order = { BLOQ: 0, ALTA: 1, MEDIA: 2, BAJA: 3 };
   for (const f of findings.sort((a, b) => order[a.sev] - order[b.sev] || a.id.localeCompare(b.id))) {
     console.log(`[${f.id} · ${f.sev} · ${f.viewport}px] ${path.basename(f.file)} — ${f.desc}\n    ${f.evidence}`);
   }
-  console.log(`\nBLOQUEANTES ${summary.BLOQ} · ALTAS ${summary.ALTA} · MEDIAS ${summary.MEDIA} · total ${summary.total}`);
+  for (const e of exenciones.values())
+    console.log(`[${e.id} · EXCEPCIÓN DECLARADA] ${path.basename(e.file)} — ${e.sel}\n    ${e.motivo}`);
+  console.log(`\nBLOQUEANTES ${summary.BLOQ} · ALTAS ${summary.ALTA} · MEDIAS ${summary.MEDIA} · total ${summary.total}` +
+    (exenciones.size ? ` · ${exenciones.size} excepción(es) declarada(s)` : ""));
   console.log("Lo que sigue sin medirse —«cero relleno», la regla 4, las inversiones de §4b— es criterio, no umbral: lo juzga la skill `review`.");
 }
 

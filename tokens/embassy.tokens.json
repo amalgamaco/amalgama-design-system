@@ -2,7 +2,7 @@
   "$schema": "https://design-tokens.org/community-group/format/",
   "$description": "Generado por scripts/build-tokens.mjs desde css/variables.css. NO editar a mano: se regenera y se pisa. Cambiá el CSS.",
   "source": "css/variables.css",
-  "generated": "2026-09-15",
+  "generated": "2026-09-16",
   "tokens": {
     "--neutral-10": {
       "$type": "color",
@@ -256,6 +256,11 @@
     "--tertiary-900": {
       "$type": "color",
       "$value": "#7158F4",
+      "section": "Tertiary palette (purple / violet)"
+    },
+    "--tertiary-950": {
+      "$type": "color",
+      "$value": "#4A3BA8",
       "section": "Tertiary palette (purple / violet)"
     },
     "--success-50": {
@@ -553,15 +558,16 @@
       "$type": "color",
       "$value": "#E3DEFD",
       "section": "Tertiary (Purple)",
-      "$dark": "#7F69F5",
+      "$dark": "#4A3BA8",
       "$alias": "--tertiary-100"
     },
     "--color-on-tertiary-container": {
       "$type": "color",
-      "$value": "#7158F4",
+      "$value": "#4A3BA8",
       "section": "Tertiary (Purple)",
+      "$description": "6.5:1. El -900 daba 3.66:1",
       "$dark": "#F1EEFE",
-      "$alias": "--tertiary-900"
+      "$alias": "--tertiary-950"
     },
     "--color-error": {
       "$type": "color",

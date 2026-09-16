@@ -78,6 +78,12 @@
   --tertiary-700: #8D79F6;
   --tertiary-800: #7F69F5;
   --tertiary-900: #7158F4;
+  --tertiary-950: #4A3BA8;  /* el escalon que faltaba. Todas las otras familias acento lo
+                              tienen y por el mismo motivo: sin el, on-tertiary-container
+                              se quedaba en el -900 y daba 3.66:1 sobre el container claro,
+                              y el container oscuro tenia que usar el -800, un lila brillante
+                              con luminancia 0.212 cuando el resto de los containers oscuros
+                              viven entre 0.045 y 0.115. Fallaba AA en los dos temas. */
 
   /* ─────────────────────────────────────
      Success palette
@@ -164,7 +170,7 @@
   --color-tertiary:                    var(--tertiary-900);
   --color-on-tertiary:                 var(--neutral-white);
   --color-tertiary-container:          var(--tertiary-100);
-  --color-on-tertiary-container:       var(--tertiary-900);
+  --color-on-tertiary-container:       var(--tertiary-950);  /* 6.5:1. El -900 daba 3.66:1 */
   /* Error */
   --color-error:                     var(--error-500);
   --color-on-error:                  var(--neutral-white);
@@ -657,7 +663,10 @@
   /* Tertiary (Purple) */
   --color-tertiary:                  var(--tertiary-300);         /* #C6BCFB */
   --color-on-tertiary:                 #0A0C12; /* neutral-900 — máximo contraste sobre tertiary claro */
-  --color-tertiary-container:        var(--tertiary-800);         /* #7F69F5 */
+  --color-tertiary-container:        var(--tertiary-950);         /* #4A3BA8 — 7.41:1 con el -50
+                                                                    encima. El -800 daba 3.51:1 y
+                                                                    ademas era el unico container
+                                                                    oscuro claro de la familia. */
   --color-on-tertiary-container:     var(--tertiary-50);          /* #F1EEFE */
   /* Estados · mains en dark — se ACLARAN (tono ~80) como los acentos, criterio MD3 */
   --color-error:                     var(--error-200);            /* #F29AA1 */
@@ -736,7 +745,7 @@
   --color-tertiary:                  var(--tertiary-900);        /* #7158F4 */
   --color-on-tertiary:               #FFFFFF;                    /* neutral-white */
   --color-tertiary-container:        var(--tertiary-100);        /* #E3DEFD */
-  --color-on-tertiary-container:     var(--tertiary-900);        /* #7158F4 */
+  --color-on-tertiary-container:     var(--tertiary-950);        /* #4A3BA8 */
   --color-error:                     var(--error-500);           /* #FD3A45 */
   --color-on-error:                  #FFFFFF;                    /* neutral-white */
   --color-success:                   var(--success-500);         /* #00C164 */
