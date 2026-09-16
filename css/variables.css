@@ -177,12 +177,25 @@
   --color-error-container:           var(--error-50);
   --color-on-error-container:        var(--error-900);
   --color-error-hover:               var(--error-700);
+  /* El RELLENO de un botón lleno, separado de la señal.
+     --color-error es el rojo de señal: sirve para un borde de campo, un punto de
+     estado o un anillo de foco, donde WCAG pide 3:1 porque son objetos gráficos.
+     Como superficie con texto encima es otra cosa: blanco sobre #FD3A45 da
+     3.58:1 y no pasa AA. Un token, dos trabajos.
+     El -900 ya existe en la rampa: 6.37:1 con blanco. En OSCURO no se toca —
+     ahí el par ya da 6.78:1 y pisarlo sería empeorarlo. */
+  --color-error-fill:                var(--error-900);
+  --color-error-fill-hover:          var(--error-950);
   /* Success */
   --color-success:                   var(--success-500);
   --color-on-success:                var(--neutral-white);
   --color-success-container:         var(--success-50);
   --color-on-success-container:      var(--success-900);
   --color-success-hover:             var(--success-700);
+  /* Idem verde, y acá el caso era peor: blanco sobre #00C164 da 2.38:1.
+     El -900 da 6.51:1. En oscuro tampoco se toca (8.96:1). */
+  --color-success-fill:              var(--success-900);
+  --color-success-fill-hover:        var(--success-950);
   /* Warning */
   --color-warning:                   var(--warning-500);
   --color-on-warning:                var(--neutral-900);
@@ -686,6 +699,13 @@
   --color-on-error:                  #5C0010; /* rojo profundo */
   --color-success:                   var(--success-200);          /* #93E1B3 */
   --color-on-success:                #00351A; /* verde profundo */
+  /* En oscuro el relleno y la señal vuelven a ser lo mismo: el par ya da 6.78:1
+     y 8.96:1 sin ayuda. Se redeclaran para que el token no arrastre el valor de
+     claro. */
+  --color-error-fill:                var(--error-200);            /* #F29AA1 */
+  --color-error-fill-hover:          var(--error-300);
+  --color-success-fill:              var(--success-200);          /* #93E1B3 */
+  --color-success-fill-hover:        var(--success-300);
   --color-warning:                   var(--warning-200);          /* #FFC97D */
   --color-on-warning:                #5A2A00; /* ámbar profundo */
   --color-info:                      var(--info-200);             /* #9FABF8 */
@@ -761,8 +781,12 @@
   --color-on-tertiary-container:     var(--tertiary-950);        /* #4A3BA8 */
   --color-error:                     var(--error-500);           /* #FD3A45 */
   --color-on-error:                  #FFFFFF;                    /* neutral-white */
+  --color-error-fill:                var(--error-900);           /* #BF0B29 */
+  --color-error-fill-hover:          var(--error-950);
   --color-success:                   var(--success-500);         /* #00C164 */
   --color-on-success:                #FFFFFF;                    /* neutral-white */
+  --color-success-fill:              var(--success-900);         /* #006D2C */
+  --color-success-fill-hover:        var(--success-950);
   --color-warning:                   var(--warning-500);         /* #FFB249 */
   --color-on-warning:                #0A0C12;                    /* neutral-900 */
   --color-info:                      var(--info-500);            /* #1E52EE */

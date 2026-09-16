@@ -603,6 +603,20 @@
       "section": "Error",
       "$alias": "--error-700"
     },
+    "--color-error-fill": {
+      "$type": "color",
+      "$value": "#BF0B29",
+      "section": "El RELLENO de un botón lleno, separado de la señal.  color-error es el rojo de señal: sirve para un borde de campo, un punto de estado o un anillo de foco, donde WCAG pide 3:1 porque son objetos gráficos. Como superficie con texto encima es otra cosa: blanco sobre #FD3A45 da 3.58:1 y no pasa AA. Un token, dos trabajos. El -900 ya existe en la rampa: 6.37:1 con blanco. En OSCURO no se toca — ahí el par ya da 6.78:1 y pisarlo sería empeorarlo.",
+      "$dark": "#F29AA1",
+      "$alias": "--error-900"
+    },
+    "--color-error-fill-hover": {
+      "$type": "color",
+      "$value": "#7A0C1B",
+      "section": "El RELLENO de un botón lleno, separado de la señal.  color-error es el rojo de señal: sirve para un borde de campo, un punto de estado o un anillo de foco, donde WCAG pide 3:1 porque son objetos gráficos. Como superficie con texto encima es otra cosa: blanco sobre #FD3A45 da 3.58:1 y no pasa AA. Un token, dos trabajos. El -900 ya existe en la rampa: 6.37:1 con blanco. En OSCURO no se toca — ahí el par ya da 6.78:1 y pisarlo sería empeorarlo.",
+      "$dark": "#EA727D",
+      "$alias": "--error-950"
+    },
     "--color-success": {
       "$type": "color",
       "$value": "#00C164",
@@ -636,6 +650,20 @@
       "$value": "#009E4D",
       "section": "Success",
       "$alias": "--success-700"
+    },
+    "--color-success-fill": {
+      "$type": "color",
+      "$value": "#006D2C",
+      "section": "Idem verde, y acá el caso era peor: blanco sobre #00C164 da 2.38:1. El -900 da 6.51:1. En oscuro tampoco se toca (8.96:1).",
+      "$dark": "#93E1B3",
+      "$alias": "--success-900"
+    },
+    "--color-success-fill-hover": {
+      "$type": "color",
+      "$value": "#004D1E",
+      "section": "Idem verde, y acá el caso era peor: blanco sobre #00C164 da 2.38:1. El -900 da 6.51:1. En oscuro tampoco se toca (8.96:1).",
+      "$dark": "#60D594",
+      "$alias": "--success-950"
     },
     "--color-warning": {
       "$type": "color",

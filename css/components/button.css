@@ -92,15 +92,18 @@
 }
 
 /* Modificadores semánticos de Primary */
-.btn-primary.btn-danger  { background: var(--color-error);   color: var(--color-on-error);   }
-.btn-primary.btn-danger:hover  { background: var(--color-error-hover);   }
+/* El RELLENO, no la señal: --color-error es el rojo del borde de un campo y del
+   punto de estado, y como superficie con texto encima daba 3.58:1. El par
+   -fill / -on es el que pasa AA en los dos temas (6.37:1 y 6.78:1). */
+.btn-primary.btn-danger  { background: var(--color-error-fill);   color: var(--color-on-error);   }
+.btn-primary.btn-danger:hover  { background: var(--color-error-fill-hover);   }
 /* Anillo de foco teñido de error (par shadcn destructive focus-visible:ring-destructive/20). */
 .btn-primary.btn-danger:focus-visible {
   outline-color: var(--color-error);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-error) 25%, transparent);
 }
-.btn-primary.btn-success { background: var(--color-success); color: var(--color-on-success); }
-.btn-primary.btn-success:hover { background: var(--color-success-hover); }
+.btn-primary.btn-success { background: var(--color-success-fill); color: var(--color-on-success); }
+.btn-primary.btn-success:hover { background: var(--color-success-fill-hover); }
 
 /* ─────────────────────────────────────
    Secondary · fill NEUTRO (superficie tonal + borde sutil).

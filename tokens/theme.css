@@ -114,11 +114,15 @@
   --color-error-container: rgb(var(--e-color-error-container));
   --color-on-error-container: rgb(var(--e-color-on-error-container));
   --color-error-hover: rgb(var(--e-color-error-hover));
+  --color-error-fill: rgb(var(--e-color-error-fill));
+  --color-error-fill-hover: rgb(var(--e-color-error-fill-hover));
   --color-success: rgb(var(--e-color-success));
   --color-on-success: rgb(var(--e-color-on-success));
   --color-success-container: rgb(var(--e-color-success-container));
   --color-on-success-container: rgb(var(--e-color-on-success-container));
   --color-success-hover: rgb(var(--e-color-success-hover));
+  --color-success-fill: rgb(var(--e-color-success-fill));
+  --color-success-fill-hover: rgb(var(--e-color-success-fill-hover));
   --color-warning: rgb(var(--e-color-warning));
   --color-on-warning: rgb(var(--e-color-on-warning));
   --color-warning-container: rgb(var(--e-color-warning-container));

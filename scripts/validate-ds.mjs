@@ -506,21 +506,13 @@ console.log("\n[15] los pares semánticos pasan AA");
 {
   const EXENTOS = new Set(["disabled"]);   // WCAG 1.4.3: componentes inactivos
 
-  /* Pendiente de decision de marca, no de codigo (sep 2026). `success` y `error`
-     son los tonos de señal —el verde y el rojo de la marca— y el par solo se
-     renderiza en DOS lugares: .btn-primary.btn-success y .btn-primary.btn-danger.
-     Todo el resto del sistema usa los pares -container, que si pasan AA.
-     Hay dos salidas y la eleccion es de diseño, no de regex:
-       (a) el relleno se vuelve el tono profundo que ya existe en la rampa
-           —success-900 #006D2C da 6.51:1 con blanco, error-900 #BF0B29 da 6.37:1—
-           y el blanco se queda, que es la convencion para un boton de peligro;
-       (b) el relleno se queda y el texto se vuelve oscuro, que es exactamente lo
-           que `warning` ya hace hoy (neutral-900 sobre #FFB249, 10.91:1): daria
-           8.2:1 en el verde y 5.46:1 en el rojo.
-     Avisa en vez de fallar para que un par NUEVO que falle se distinga de estos
-     dos, igual que hace [13] con los colores crudos. Cuando se decida, se saca
-     esta lista y vuelven a fallar como cualquier otro. */
-  const DECISION_PENDIENTE = new Set(["success", "error"]);
+  /* Decidido (sep 2026, opcion A): el relleno de un boton lleno se separo de la
+     señal. --color-error es el rojo del borde de un campo y del punto de estado
+     —objetos graficos, donde WCAG pide 3:1— y --color-error-fill es la superficie
+     que lleva texto encima. Por eso, cuando una familia tiene -fill, el fondo del
+     par es ESE y no el tono de señal: medir --color-on-error contra --color-error
+     mediria una combinacion que ya no se dibuja en ningun lado. */
+  const fondoDe = (f) => (`--color-${f}-fill` in claro ? `--color-${f}-fill` : `--color-${f}`);
   const raw = read("css/variables.css").replace(/\/\*[\s\S]*?\*\//g, "");
   const bloque = (marca) => {
     const i = raw.indexOf(marca); if (i < 0) return "";
@@ -554,29 +546,26 @@ console.log("\n[15] los pares semánticos pasan AA");
     .filter((k) => /^--color-on-[\w-]+$/.test(k))
     .map((k) => k.replace("--color-on-", "")))];
 
-  const bajos = [], pendientes = [], sinResolver = [];
+  const bajos = [], sinResolver = [];
   let mirados = 0;
   for (const f of familias) {
     if (EXENTOS.has(f)) continue;
     if (!(`--color-${f}` in claro)) continue;
+    const tokenFondo = fondoDe(f);
     for (const [tema, map] of [["claro", claro], ["oscuro", oscuro]]) {
       const fg = resolver(map, map[`--color-on-${f}`]);
-      const bg = resolver(map, map[`--color-${f}`]);
+      const bg = resolver(map, map[tokenFondo]);
       if (!fg || !bg) { sinResolver.push(`${f} (${tema})`); continue; }
       mirados++;
       const r = ratio(fg, bg);
       if (r >= 4.5) continue;
-      const linea = `${f} ${tema} ${fg} sobre ${bg} = ${r.toFixed(2)}:1`;
-      (DECISION_PENDIENTE.has(f) ? pendientes : bajos).push(linea);
+      bajos.push(`${f} ${tema} ${fg} sobre ${bg}${tokenFondo.endsWith("-fill") ? " (relleno)" : ""} = ${r.toFixed(2)}:1`);
     }
   }
   if (bajos.length)
     fail(`${bajos.length} par(es) por debajo de AA (4.5:1) — un par que no contrasta no se ve roto, se ve tenue: `
          + bajos.join(" · "));
-  else ok(`los ${mirados} pares semánticos contrastan ≥ 4.5:1 en los dos temas${pendientes.length ? ` (${pendientes.length} con decisión de marca pendiente, abajo)` : ""}`);
-  if (pendientes.length)
-    warn(`${pendientes.length} par(es) esperando una decisión de MARCA, no de código — solo se renderizan en `
-         + `.btn-primary.btn-success y .btn-primary.btn-danger; ver el comentario del chequeo: ` + pendientes.join(" · "));
+  else ok(`los ${mirados} pares semánticos contrastan ≥ 4.5:1 en los dos temas`);
   if (sinResolver.length)
     warn(`${sinResolver.length} par(es) no se pudieron resolver hasta un hex (¿color-mix?): ` + sinResolver.join(" · "));
 }
