@@ -837,5 +837,35 @@ console.log("\n[20] el sitio no se queda atrás de COMPOSICION §4b y GOVERNANCE
 }
 
 
+
+/* ────────────────────────────────────────────────────────────────────────────
+   [21] el ?v= de cada hoja coincide con su contenido
+
+   El sitio versiona sus hojas en el href (`css/variables.css?v=10`) y ese numero
+   se subia a mano. En sep 2026 el commit que agrego `--rail-width` movio el riel
+   de 72 a 112 y no toco el `?v=`: el HTML pedia `var(--rail-width)` y el navegador
+   seguia sirviendo de su cache la hoja vieja, sin ese token. Para cualquiera que
+   hubiera abierto el sitio antes, `width: var(--rail-width)` quedaba invalido —el
+   riel se dimensionaba solo— y `left: var(--rail-width)` tambien —el drawer
+   aterrizaba en x=0 y el riel le tapaba media palabra a cada item del menu—. En
+   el repo estaba bien; roto estaba en la pantalla de la gente, que es donde
+   importa.
+
+   El arreglo no es acordarse: es derivar el sello del contenido. Este chequeo
+   solo verifica que `build-asset-versions.mjs` este corrido.
+   ──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[21] el ?v= de cada hoja sale de su contenido");
+{
+  const { versionar } = await import("./build-asset-versions.mjs");
+  const { tocados } = versionar({ escribir: false });
+  if (tocados.length)
+    fail(`${tocados.length} hoja(s) con un ?v= que no corresponde a su contenido — `
+         + `el navegador va a servir la versión vieja de su caché. Corré `
+         + `node scripts/build-asset-versions.mjs: `
+         + tocados.map((t) => `${t.ruta} (${t.vieja})`).slice(0, 5).join(" · "));
+  else ok("las 9 hojas del sitio están selladas por contenido");
+}
+
+
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);
