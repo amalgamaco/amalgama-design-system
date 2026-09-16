@@ -1396,16 +1396,22 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 
 /* Eyebrow label */
 .emb-hero-eyebrow {
+  /* Igual que `.overline` de composition.css, que es la clase canónica para esto:
+     mono, tracking apretado y GRIS. El sitio tenía cinco imitaciones a mano y dos
+     de ellas en sans con .12em, que es exactamente el tracking amplio que la
+     regla 1 prohíbe por ser el que usa todo el mundo. Y todas en azul, cuando la
+     clase dice --text-muted. */
+  font-family: var(--font-mono);
+  font-size: var(--font-size-overline);
+  line-height: var(--line-height-overline);
+  letter-spacing: var(--letter-spacing-overline);
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-muted);
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: var(--font-size-overline);
-  font-weight: 700;
-  letter-spacing: var(--letter-spacing-overline);
-  text-transform: uppercase;
-  color: var(--ds-accent-text);
   margin: 0 0 22px;
-  font-family: var(--font-mono);
 }
 .emb-hero-eyebrow-dot {
   width: 6px; height: 6px; border-radius: 50%;
@@ -1889,11 +1895,18 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   width: 100%;
 }
 .emb-gs-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .12em;
+  /* Igual que `.overline` de composition.css, que es la clase canónica para esto:
+     mono, tracking apretado y GRIS. El sitio tenía cinco imitaciones a mano y dos
+     de ellas en sans con .12em, que es exactamente el tracking amplio que la
+     regla 1 prohíbe por ser el que usa todo el mundo. Y todas en azul, cuando la
+     clase dice --text-muted. */
+  font-family: var(--font-mono);
+  font-size: var(--font-size-overline);
+  line-height: var(--line-height-overline);
+  letter-spacing: var(--letter-spacing-overline);
+  font-weight: 500;
   text-transform: uppercase;
-  color: var(--ds-accent-text);
+  color: var(--text-muted);
   margin: 0 0 14px;
 }
 .emb-gs-title {
@@ -1927,14 +1940,19 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 }
 .emb-gs-section:first-of-type { border-top: none; }
 .emb-gs-section-eyebrow {
-  font-size: var(--font-size-overline);
-  font-weight: 700;
-  letter-spacing: var(--letter-spacing-overline);
-  text-transform: uppercase;
-  color: var(--ds-accent-text);
-  margin: 0 0 12px;
-  opacity: .8;
+  /* Igual que `.overline` de composition.css, que es la clase canónica para esto:
+     mono, tracking apretado y GRIS. El sitio tenía cinco imitaciones a mano y dos
+     de ellas en sans con .12em, que es exactamente el tracking amplio que la
+     regla 1 prohíbe por ser el que usa todo el mundo. Y todas en azul, cuando la
+     clase dice --text-muted. */
   font-family: var(--font-mono);
+  font-size: var(--font-size-overline);
+  line-height: var(--line-height-overline);
+  letter-spacing: var(--letter-spacing-overline);
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 12px;
 }
 .emb-gs-section-title {
   font-family: 'Epilogue', sans-serif;
@@ -2255,13 +2273,19 @@ body { overflow-x: clip; }
   border-bottom: 1px solid var(--ds-card-border);
 }
 .emb-gs-panel-label {
-  font-size: var(--font-size-overline);
-  font-weight: 700;
-  letter-spacing: var(--letter-spacing-overline);
-  text-transform: uppercase;
-  color: var(--ds-accent-text);
-  margin: 0 0 6px;
+  /* Igual que `.overline` de composition.css, que es la clase canónica para esto:
+     mono, tracking apretado y GRIS. El sitio tenía cinco imitaciones a mano y dos
+     de ellas en sans con .12em, que es exactamente el tracking amplio que la
+     regla 1 prohíbe por ser el que usa todo el mundo. Y todas en azul, cuando la
+     clase dice --text-muted. */
   font-family: var(--font-mono);
+  font-size: var(--font-size-overline);
+  line-height: var(--line-height-overline);
+  letter-spacing: var(--letter-spacing-overline);
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 6px;
 }
 .emb-gs-panel-title {
   font-size: 14px;
@@ -6547,7 +6571,7 @@ body { overflow-x: clip; }
       <!-- Buttons documentation page — Embassy (Overview · Specs · Guidelines · Accessibility) -->
       <style>
         .bd-lead { font-size:var(--font-size-heading-xs); line-height:1.7; color:var(--ds-text-2); max-width:700px; margin:0 0 var(--space-1); }
-        .bd-eyebrow { font:700 var(--font-size-badge)/1 var(--font-body); letter-spacing:.12em; text-transform:uppercase; color:var(--ds-accent); margin:0 0 var(--space-2); }
+        .bd-eyebrow { font-family:var(--font-mono); font-size:var(--font-size-overline); line-height:var(--line-height-overline); letter-spacing:var(--letter-spacing-overline); font-weight:500; text-transform:uppercase; color:var(--text-muted); margin:0 0 var(--space-2); }  /* era sans .12em en azul — regla 1 */
         .bd-grid { display:grid; gap:var(--space-4); margin-top:var(--space-1); }
         .bd-grid.c2 { grid-template-columns:repeat(2,1fr); }
         .bd-grid.c3 { grid-template-columns:repeat(3,1fr); }

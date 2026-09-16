@@ -631,5 +631,48 @@ console.log("\n[16] el bloque [data-theme=\"light\"] no se quedó atrás de :roo
 }
 
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   [17] el sitio obedece su propia regla 1
+
+   COMPOSICION.md regla 1: las mayusculas no son el problema, el problema es el
+   TRACKING AMPLIO en sans (0.12-0.16em), que es lo que las vuelve reconocibles a
+   diez metros como "rotulo generado". La clase canonica —`.overline` en
+   composition.css— ya resuelve el caso: mono, tracking apretado y GRIS.
+
+   `check-output` chequea esto (`H7`) sobre las pantallas que alguien PRODUCE, y
+   por eso nunca miro index.html: el catalogo no es una salida. Resultado, el sitio
+   del DS tenia cinco imitaciones de `.overline` escritas a mano, dos de ellas en
+   sans con .12em y todas en azul — exactamente lo que el sistema le pide al resto
+   del mundo que no haga. La regla estaba escrita, y chequeada para todos menos
+   para nosotros.
+
+   Falla cuando una regla del sitio pone versalitas con tracking en la banda
+   prohibida SIN ser mono. Mono y apretado es el registro del sistema y esta bien.
+   ──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[17] las versalitas del sitio no usan el tracking de catálogo");
+{
+  const html = read("index.html");
+  const css = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join("\n")
+    .replace(/\/\*[\s\S]*?\*\//g, "");
+  const BANDA = /letter-spacing\s*:\s*\.?0?\.(1[2-6])\d*em/;      // 0.12em – 0.16em
+  const malas = [];
+  for (const m of css.matchAll(/(^|\})\s*([^{}@]*?)\{([^}]*)\}/g)) {
+    const sel = m[2].trim().replace(/\s+/g, " "), body = m[3];
+    if (!sel || sel.startsWith("@")) continue;
+    if (!/text-transform\s*:\s*uppercase/.test(body)) continue;
+    if (!BANDA.test(body)) continue;
+    // mono es el registro del sistema: el problema es el tracking amplio EN SANS
+    if (/--font-mono|DM Mono/.test(body)) continue;
+    const ls = BANDA.exec(body)[0].split(":")[1].trim();
+    malas.push(`${sel} { ${ls} }`);
+  }
+  if (malas.length)
+    fail(`${malas.length} regla(s) con versalitas en sans y tracking 0.12–0.16em — es el rótulo `
+         + `de catálogo que la regla 1 prohíbe; usá .overline (mono, apretado, --text-muted): `
+         + malas.slice(0, 6).join(" · ") + (malas.length > 6 ? ` …y ${malas.length - 6} más` : ""));
+  else ok("ninguna versalita del sitio usa el tracking amplio en sans");
+}
+
+
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);
