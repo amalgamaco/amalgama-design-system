@@ -1,0 +1,79 @@
+# Los chequeos del DS corren solos, en cada push y en cada PR.
+#
+# Hasta hoy no corria NINGUNO automaticamente: validate-ds tiene 16 chequeos y
+# check-output otros 34, y los cincuenta dependian de que alguien se acordara de
+# correrlos. Un chequeo que depende de la memoria no es un chequeo, es una
+# recomendacion.
+#
+# Que bloquea y que no, a proposito:
+#
+#   · validate-ds   → BLOQUEA. Es el gate del sistema y hoy esta en verde: si algo
+#                     lo pone en rojo, es una regresion, no una discusion.
+#   · check-output  → INFORMA sobre runs/.
+#   · check-render  → INFORMA sobre runs/.
+#
+# Los dos ultimos informan y no bloquean, y la razon importa: runs/ es un REGISTRO
+# de lo que se produjo en una fecha, no codigo que tenga que quedarse en verde.
+# Las corridas baseline estan hechas a proposito SIN el DS —de ahi salen 70
+# bloqueantes, que es justamente el punto del baseline— y hasta las guiadas llevan
+# dos (un prefers-color-scheme y un prefers-reduced-motion de la corrida de
+# septiembre). Bloquear sobre un artefacto historico seria pedirle a un commit de
+# hoy que arregle una salida de hace un mes.
+#
+# Donde SI bloquea check-output es en el repo de quien produce la pantalla, que es
+# su sujeto natural: la skill `screen` lo corre antes de entregar.
+
+name: Embassy
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  sistema:
+    name: validate-ds (bloquea)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: PyYAML para el manifest
+        run: pip install pyyaml
+      # El repo no tiene dependencias a proposito: no hay npm ci que correr.
+      - name: validate-ds
+        run: node scripts/validate-ds.mjs
+
+  salida:
+    name: check-output + check-render sobre las corridas de eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: check-output (informa)
+        continue-on-error: true
+        run: |
+          shopt -s nullglob
+          archivos=(runs/*/guided/*.html runs/*/baseline/*.html)
+          if [ ${#archivos[@]} -eq 0 ]; then echo "sin corridas en runs/ — nada que chequear"; exit 0; fi
+          node scripts/check-output.mjs "${archivos[@]}"
+
+      # check-render necesita un navegador. Es la unica parte del pipeline con
+      # dependencia, y por eso va en su propio paso: si falla la instalacion, lo
+      # anterior del job ya corrio.
+      - name: Playwright
+        run: npm i -D playwright --no-audit --no-fund && npx playwright install --with-deps chromium
+
+      - name: check-render (informa)
+        continue-on-error: true
+        run: |
+          shopt -s nullglob
+          archivos=(runs/*/guided/*.html runs/*/baseline/*.html)
+          if [ ${#archivos[@]} -eq 0 ]; then echo "sin corridas en runs/"; exit 0; fi
+          node scripts/check-render.mjs "${archivos[@]}"
