@@ -449,7 +449,7 @@
         "badge-tertiary",
         "badge-warning"
       ],
-      "internal_class_count": 12
+      "internal_class_count": 15
     },
     {
       "id": "breadcrumb",
@@ -2123,8 +2123,9 @@
       "rules_files": [
         "component-rules/stat-card.md"
       ],
-      "usage": "<div class=\"stats-grid\">\n  <div class=\"stat-card\">\n    <div class=\"stat-label\">Vacantes abiertas</div>\n    <div class=\"stat-value\">24</div>\n    <div class=\"stat-change stat-change-positive\">+12%</div>\n  </div>\n</div>",
+      "usage": "<div class=\"stats-grid\">\n  <div class=\"stat-card\">\n    <div class=\"stat-label\">Vacantes abiertas</div>\n    <div class=\"stat-value\">24</div>\n    <div class=\"badge stat-change stat-change-positive\">\n      <svg width=\"12\" height=\"12\" aria-hidden=\"true\"><!-- lucide trending-up --></svg>12%\n    </div>\n  </div>\n</div>",
       "classes": [
+        "badge",
         "stat-card",
         "stat-change",
         "stat-change-negative",
@@ -2134,7 +2135,7 @@
         "stat-value",
         "stats-grid"
       ],
-      "internal_class_count": 8
+      "internal_class_count": 5
     },
     {
       "id": "switch",

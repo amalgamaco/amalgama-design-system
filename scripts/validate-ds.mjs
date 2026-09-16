@@ -674,5 +674,168 @@ console.log("\n[17] las versalitas del sitio no usan el tracking de catálogo");
 }
 
 
+
+/* ────────────────────────────────────────────────────────────────────────────
+   [18] la variacion de una Stat Card entra en su pildora
+
+   Desde sep 2026 `.stat-change` se compone con `.badge`: es una pildora, no una
+   linea de texto suelta. Una pildora tiene un ancho util y el contenido tiene que
+   caber; si no cabe, deja de leerse como un acento sobre la cifra y pasa a ser
+   una oracion con fondo de color.
+
+   El numero sale de medir, no de opinar: el chip mide ~20px de padding mas
+   ~6.1px por caracter, y la card mas angosta que `stats-grid` puede producir es
+   200px —`minmax(200px, 1fr)`— o sea 160px utiles: ~23 caracteres antes de
+   romper. El maximo de 12 es la mitad de ese margen, para que aguante una
+   traduccion mas larga o un proyecto con una escala mayor.
+
+   El periodo contra el que se compara va en `.stat-label`, no adentro del chip.
+   Esto chequea el sitio del DS, que es justo donde estaban las cuatro frases
+   ("↑ 4 desde el mes pasado") que motivaron el limite.
+   ──────────────────────────────────────────────────────────────────────────── */
+const MAX_STAT_CHANGE = 12;
+console.log(`\n[18] la variación de una Stat Card entra en su píldora (≤ ${MAX_STAT_CHANGE} caracteres)`);
+{
+  const html = read("index.html");
+  const largas = [];
+  for (const m of html.matchAll(/<div[^>]*class="[^"]*\bstat-change\b[^"]*"[^>]*>([\s\S]*?)<\/div>/g)) {
+    const txt = m[1].replace(/<[^>]+>/g, "").replace(/&[a-z]+;/g, "x").replace(/\s+/g, " ").trim();
+    if (txt.length > MAX_STAT_CHANGE) largas.push(`"${txt}" (${txt.length})`);
+  }
+  if (largas.length)
+    fail(`${largas.length} .stat-change pasa(n) de ${MAX_STAT_CHANGE} caracteres — el chip deja de `
+         + `leerse como delta; mudá el período a .stat-label: ` + largas.slice(0, 6).join(" · ")
+         + (largas.length > 6 ? ` …y ${largas.length - 6} más` : ""));
+  else ok(`todas las variaciones entran en ${MAX_STAT_CHANGE} caracteres`);
+}
+
+
+
+/* ────────────────────────────────────────────────────────────────────────────
+   [19] el foco sale de una de las tres formas
+
+   GOVERNANCE §6.2. Medido en sep 2026: 79 reglas de foco y DIECINUEVE respuestas
+   distintas, contra una seccion que declaraba un patron unico y listaba dos
+   desviaciones conocidas. Diecinueve es lo que pasa cuando el patron unico no le
+   sirve a todas las formas y cada componente se inventa su propia salida: anillos
+   de 3px y de 2px, offsets de 1px y de -2px, tres colores de outline, la forma
+   `var(--color-focus, var(--color-primary))` que solo tapa un typo, y `--interactive`
+   —que la propia seccion prohibe por nombre— en el campo de formulario.
+
+   Por eso ahora son tres formas (A outset, B inset, C campo), elegidas por la forma
+   del componente, mas una tabla de excepciones aprobadas. Este chequeo es lo que
+   hace que la tabla signifique algo: cualquier regla que dibuje foco y no caiga en
+   A, B o C y no este en la lista, falla.
+
+   Lo que cuenta como "dibujar foco": una regla con `:focus` en el selector que
+   declare outline, outline-offset o box-shadow. Una regla que solo cambia un color
+   de label o muestra un tooltip no esta dibujando un anillo y no se mide.
+   ──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[19] el foco sale de una de las tres formas (GOVERNANCE §6.2)");
+{
+  const A = ["2px solid var(--color-focus)", "2px", "0 0 0 4px var(--color-focus-ring)"];
+  const B = ["2px solid var(--color-focus)", "-2px", "inset 0 0 0 4px var(--color-focus-ring)"];
+  // C: el borde hace de outline. Anillo de 4px, normal o de error. `outline:none` es parte de C.
+  const esC = (o, off, sh, borde) =>
+    (borde === "var(--color-focus)" || sh !== "-") &&
+    off === "-" && (o === "-" || o === "none") &&
+    /^0 0 0 4px var\(--color-(focus|error)-ring\)$/.test(sh);
+
+  // Excepciones aprobadas — cada una con su fila en la tabla de §6.2.
+  const EXENTOS = [
+    /\.snackbar-(action|close):focus-visible/,          // superficie inversa
+    /\.alert-close:focus-visible/,                       // currentColor sobre 5 variantes
+    /\.btn-primary\.btn-danger:focus-visible/,           // anillo de error
+    /\.slider-input.*(slider-thumb|range-thumb)/,        // el thumb no toma outline
+    /\.slider-input:focus-visible$/,                     // su outline:none, pareja del anterior
+    /\.(dropdown-item|nav-menu-link)\b/,                 // patron de menu: el realce es el foco
+    /--seg-btn-focus-/,                                  // alias con scope de componente (§2.2)
+    /--tb-focus-ring/,                                   // idem, toolbar
+  ];
+
+  const malas = [];
+  for (const f of fs.readdirSync("css/components").filter((x) => x.endsWith(".css"))) {
+    const src = read(`css/components/${f}`).replace(/\/\*[\s\S]*?\*\//g, "");
+    for (const m of src.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      const sel = m[1].trim().replace(/\s+/g, " "), body = m[2];
+      if (!sel.includes(":focus")) continue;
+      const get = (p) => (new RegExp(`(?:^|;)\\s*${p}\\s*:\\s*([^;]+)`).exec(body)?.[1] || "-").trim();
+      const o = get("outline"), off = get("outline-offset"), sh = get("box-shadow"), bd = get("border-color");
+      if (o === "-" && off === "-" && sh === "-") continue;            // no dibuja foco
+      if (EXENTOS.some((re) => re.test(sel) || re.test(body))) continue;
+      const t = [o, off, sh];
+      const okA = t.every((v, i) => v === A[i]);
+      const okB = t.every((v, i) => v === B[i]);
+      if (okA || okB || esC(o, off, sh, bd)) {
+        if (/:focus(?!-visible)(?!-within)/.test(sel) && !sel.includes(":not("))
+          malas.push(`${f} — ${sel} usa :focus, no :focus-visible`);
+        continue;
+      }
+      malas.push(`${f} — ${sel} { ${[o!=="-"&&`outline:${o}`, off!=="-"&&`offset:${off}`, sh!=="-"&&`ring:${sh}`].filter(Boolean).join(" ")} }`);
+    }
+  }
+  if (malas.length)
+    fail(`${malas.length} regla(s) de foco fuera de las tres formas — alineala con A/B/C o agregá `
+         + `su fila a la tabla de excepciones de §6.2: ` + malas.slice(0, 8).join(" · ")
+         + (malas.length > 8 ? ` …y ${malas.length - 8} más` : ""));
+  else ok("todas las reglas de foco caen en una forma canónica o en una excepción documentada");
+}
+
+
+
+/* ────────────────────────────────────────────────────────────────────────────
+   [20] el sitio no se queda atras de las decisiones
+
+   El sitio del DS es donde una PERSONA busca como se usa esto; los .md son lo que
+   lee un agente. Cuando los dos cuentan la misma decision, el sitio deriva y nadie
+   se entera: en sep 2026 la fila "Focus" de #s-interaction-state decia «patron
+   unico en toda la libreria» y «en inputs el ring es de 3px» — las dos falsas desde
+   el dia en que el CSS cambio, y ademas dos demos del propio sitio dibujaban el
+   foco con --color-primary y 3px. El sitio le pedia al mundo algo que el mismo no
+   mostraba.
+
+   Esto NO copia los valores —el sitio nombra tokens y escalones, no numeros, y los
+   numeros viven en variables.css y en COMPOSICION.md §4b—. Chequea lo minimo que
+   detecta la deriva: que el sitio nombre las mismas cuatro familias de tarjeta que
+   §4b y que no contradiga §6.2 sobre el foco.
+   ──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[20] el sitio no se queda atrás de COMPOSICION §4b y GOVERNANCE §6.2");
+{
+  const html = read("index.html");
+  const comp = read("COMPOSICION.md");
+  const gov  = read("GOVERNANCE.md");
+  const problemas = [];
+
+  // a · las cuatro familias que nombra §4b tienen que estar en el sitio
+  const familias = ["Dato", "Entidad", "Baldosa editorial", "Panel"];
+  for (const f of familias) {
+    if (!comp.includes(f)) problemas.push(`COMPOSICION §4b ya no nombra la familia "${f}" — actualizá este chequeo junto con la decisión`);
+    else if (!html.includes(f)) problemas.push(`el sitio no nombra la familia "${f}" de §4b`);
+  }
+
+  // b · el sitio no puede seguir diciendo que el foco es un patron unico
+  if (/patr[oó]n [uú]nico en toda la librer[ií]a/i.test(html))
+    problemas.push('el sitio dice que el foco es «patrón único»; §6.2 define tres formas');
+
+  // c · ningun ring de foco o de error de 3px, ni en prosa ni en un demo inline
+  for (const m of html.matchAll(/0 0 0 3px var\(--color-(focus|error)-ring\)/g))
+    problemas.push(`el sitio dibuja un ring de 3px (${m[0]}); el spread es siempre 4px`);
+  if (/ring de 3px/i.test(html)) problemas.push('el sitio menciona «ring de 3px» en prosa');
+
+  // d · un demo de foco no puede usar --color-primary como color de foco
+  if (/border-color:var\(--color-primary\);box-shadow:0 0 0 \dpx var\(--color-focus-ring\)/.test(html))
+    problemas.push('un demo de foco del sitio usa --color-primary; §6.2 dice siempre --color-focus');
+
+  // e · §6.2 tiene que seguir declarando tres formas
+  if (!/three canonical forms/i.test(gov))
+    problemas.push('GOVERNANCE §6.2 ya no declara tres formas — este chequeo quedó viejo');
+
+  if (problemas.length)
+    fail(`${problemas.length} deriva(s) entre el sitio y las decisiones: ` + problemas.slice(0, 6).join(" · ")
+         + (problemas.length > 6 ? ` …y ${problemas.length - 6} más` : ""));
+  else ok("el sitio nombra las cuatro familias y no contradice §6.2");
+}
+
+
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);

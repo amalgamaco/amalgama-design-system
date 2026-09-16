@@ -5054,7 +5054,50 @@ body { overflow-x: clip; }
         </p>
       </div>
 
-      <h2 class="ds-h2">7 · Íconos, imágenes y movimiento</h2>
+      <h2 class="ds-h2">7 · Las cuatro tarjetas</h2>
+      <p class="ds-p">Hay <strong>cuatro formas de tarjeta y son excluyentes</strong>: toda tarjeta del sistema entra en una y sólo una. Lo que las separa es el trabajo que hacen, no el aspecto — por eso se decide cuál es <em>antes</em> de dibujar nada. La ruta va en orden y la primera que da sí, gana.</p>
+      <div class="ds-table-wrap">
+        <table class="ds-table">
+          <thead><tr><th>La pregunta</th><th>La forma</th><th>Su trabajo</th><th>Aire</th></tr></thead>
+          <tbody>
+            <tr><td>¿Lo más grande es un <strong>número</strong>?</td><td><strong>Dato</strong> · <code>.stat-card</code></td><td>Un valor con su rótulo. La cifra hace de título — es la única familia con la jerarquía invertida</td><td>compacto</td></tr>
+            <tr><td>¿Es <strong>una de muchas</strong>, intercambiables?</td><td><strong>Entidad</strong> · <code>.vacancy-card</code> <code>.person-card</code> <code>.kanban-card</code> <code>.checkbox-card</code> <code>.radio-card</code></td><td>Se escanea de arriba abajo. Puede ser clickeable, arrastrable o seleccionable — eso es un estado, no otra familia</td><td>compacto</td></tr>
+            <tr><td>¿<strong>Abre una sección</strong> o lleva a otro lado?</td><td><strong>Baldosa editorial</strong> · <code>.nav-card</code></td><td>Etiqueta + afordancia arriba, texto, panel visual insetado abajo. Es la que más pesa: una o dos por página, nunca adentro de producto</td><td>estándar</td></tr>
+            <tr><td>Si no, y realmente necesita contenedor</td><td><strong>Panel</strong> · <code>.card</code> <code>.form-card</code></td><td>Agrupa contenido sobre una superficie. Estático</td><td>estándar, u holgado cuando abre sección</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ds-p">Los tokens de cada familia —qué clase de título, qué bajada, qué escalón de padding— están en <code>COMPOSICION.md</code> §4b, que es la única fuente. Acá se muestran; ahí se definen.</p>
+      <div class="ds-preview" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:start">
+        <div>
+          <span class="ds-preview-label">Panel</span>
+          <div class="card"><div class="card-header"><div class="card-title">Notificaciones</div>
+          <p class="card-desc">Elegí cómo querés recibir los avisos.</p></div>
+          <div class="card-content">Hoy recibís un correo por cada cambio de estado.</div></div>
+        </div>
+        <div>
+          <span class="ds-preview-label">Dato</span>
+          <div class="stats-grid" style="grid-template-columns:1fr 1fr">
+            <div class="stat-card"><div class="stat-label">Vacantes · mes</div><div class="stat-value">24</div>
+              <div class="badge stat-change stat-change-positive">↑ 4</div></div>
+            <div class="stat-card"><div class="stat-label">Rechazos · semana</div><div class="stat-value">12</div>
+              <div class="badge stat-change stat-change-negative">↓ 12</div></div>
+          </div>
+        </div>
+        <div>
+          <span class="ds-preview-label">Entidad</span>
+          <div class="kanban-card"><div class="kanban-card-title">Juan Pérez</div>
+          <div class="kanban-card-meta">Frontend · 3 días</div></div>
+        </div>
+        <div>
+          <span class="ds-preview-label">Panel que abre sección</span>
+          <div class="form-card" style="margin-bottom:0"><div class="form-card-title">Datos de la cuenta</div>
+          <div class="form-card-desc" style="margin-bottom:0">Esto es lo que ve el equipo cuando te asignan una búsqueda.</div></div>
+        </div>
+      </div>
+      <p class="ds-p" style="margin-top:20px"><strong>La tarjeta seleccionable no es una quinta forma.</strong> <code>.checkbox-card</code> y <code>.radio-card</code> tienen la anatomía de Entidad y lo único que las distingue es que se pueden marcar. Eso es un estado; si los estados abrieran familias, <code>hover</code> y <code>disabled</code> también. Y dentro de una colección, las tarjetas son todas de la misma familia: mezclar un Panel con una Entidad en la misma grilla es la forma más rápida de que el ojo deje de saber qué está comparando.</p>
+
+      <h2 class="ds-h2">8 · Íconos, imágenes y movimiento</h2>
       <p class="ds-p"><strong>El ícono tiene cinco lugares</strong> y “arriba del título de cada card, en un cuadrado con radio” no es el default — es el reflejo más reconocible de una página generada.</p>
       <div class="ds-table-wrap">
         <table class="ds-table">
@@ -5071,7 +5114,7 @@ body { overflow-x: clip; }
       <p class="ds-p" style="margin-top:20px"><strong>Imágenes: solo material real</strong> — capturas del producto, fotos del trabajo o del equipo, diagramas propios. Nunca stock, ilustración isométrica, render 3D ni un degradé haciendo de foto. Si no hay material real, la sección va sin imagen. Todas con el mismo marco: <code>.media</code>, borde de 1px y sin sombra.</p>
       <p class="ds-p"><strong>La página no se revela al scrollear.</strong> El fade-up de cada sección al entrar es el gesto más repetido de las landings generadas. <code>.reveal</code> va una sola vez, en el bloque de apertura, al cargar, y solo en opacidad.</p>
 
-      <h2 class="ds-h2">8 · Degradés</h2>
+      <h2 class="ds-h2">9 · Degradés</h2>
       <p class="ds-p">Sí usamos degradés — pero tres, y salen de las primitivas de la marca, así que en un proyecto de cliente toman <strong>su</strong> paleta. La regla que los separa de la mancha de IA: <strong>un degradé es una superficie.</strong> Pinta una banda, una tarjeta o un titular. No flota, no difumina lo que tiene detrás, no rellena. Uno por sección.</p>
       <div class="ds-preview" style="display:block;padding:0;overflow:hidden">
         <div class="gradient-brand" style="padding:26px 28px">
@@ -5744,7 +5787,7 @@ body { overflow-x: clip; }
             <div class="stat-card">
               <div class="stat-label">Mediana de alta</div>
               <div class="stat-value">4,2 min</div>
-              <div class="stat-change stat-change-positive">−18%</div>
+              <div class="badge stat-change stat-change-positive">−18%</div>
             </div>
           </div>
 
@@ -6175,7 +6218,9 @@ body { overflow-x: clip; }
   <div class="stat-card">
     <div class="stat-label">Vacantes abiertas</div>
     <div class="stat-value">24</div>
-    <div class="stat-change stat-change-positive">+12%</div>
+    <div class="badge stat-change stat-change-positive">
+      <svg width="12" height="12" aria-hidden="true"></svg>12%
+    </div>
   </div>
 </div></div>
             
@@ -8982,10 +9027,10 @@ function segSwitch(el) {
           <div class="bd-family-wrap"><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px 20px">
             <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Enabled</span><input class="field-input" value="Texto ingresado" aria-label="Enabled"></div>
             <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Hover</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-outline)" aria-label="Hover"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Focus</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-primary);box-shadow:0 0 0 3px var(--color-focus-ring)" aria-label="Focus"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Focus</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-focus);box-shadow:0 0 0 4px var(--color-focus-ring)" aria-label="Focus"></div>
             <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Disabled</span><input class="field-input" value="Texto ingresado" disabled aria-label="Disabled"></div>
             <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error</span><div class="field-group is-error"><input class="field-input" value="valor@" aria-label="Error"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error + focus</span><div class="field-group is-error"><input class="field-input" value="valor@" style="box-shadow:0 0 0 3px var(--color-error-ring)" aria-label="Error con foco"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error + focus</span><div class="field-group is-error"><input class="field-input" value="valor@" style="box-shadow:0 0 0 4px var(--color-error-ring)" aria-label="Error con foco"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
           </div></div>
 
           <p class="ch-variant-label" style="margin-top:28px">Label · supporting text · required · íconos · error</p>
@@ -9087,7 +9132,7 @@ function segSwitch(el) {
             <tr><td>Radio</td><td><code>var(--radius-md)</code></td></tr>
             <tr><td>Tipografía del campo</td><td><code>var(--font-size-body-md)</code></td></tr>
             <tr><td>Margen bajo el label</td><td><code>8px</code> (<code>mb-2</code>)</td></tr>
-            <tr><td>Anillo de focus</td><td><code>box-shadow 0 0 0 3px var(--color-focus-ring)</code></td></tr>
+            <tr><td>Anillo de focus</td><td><code>box-shadow 0 0 0 4px var(--color-focus-ring)</code></td></tr>
             <tr><td>Ícono leading/trailing (compuesto)</td><td><code>16×16px</code>, a <code>14px</code> del borde; padding del input <code>42px</code> del lado del ícono</td></tr>
             <tr><td>Grilla de formulario (compuesto)</td><td><code>2 columnas</code>, gap <code>16px 20px</code></td></tr>
           </tbody>
@@ -9101,10 +9146,10 @@ function segSwitch(el) {
         <div class="bd-family-wrap"><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px 20px">
             <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Enabled</span><input class="field-input" value="Texto ingresado" aria-label="Enabled"></div>
             <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Hover</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-outline)" aria-label="Hover"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Focus</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-primary);box-shadow:0 0 0 3px var(--color-focus-ring)" aria-label="Focus"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Focus</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-focus);box-shadow:0 0 0 4px var(--color-focus-ring)" aria-label="Focus"></div>
             <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Disabled</span><input class="field-input" value="Texto ingresado" disabled aria-label="Disabled"></div>
             <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error</span><div class="field-group is-error"><input class="field-input" value="valor@" aria-label="Error"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error + focus</span><div class="field-group is-error"><input class="field-input" value="valor@" style="box-shadow:0 0 0 3px var(--color-error-ring)" aria-label="Error con foco"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error + focus</span><div class="field-group is-error"><input class="field-input" value="valor@" style="box-shadow:0 0 0 4px var(--color-error-ring)" aria-label="Error con foco"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
           </div></div>
         <table class="ds-table" style="margin-top:16px">
           <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
@@ -9147,7 +9192,7 @@ function segSwitch(el) {
         <h2 class="docs-section-title">Relación con Material Design 3</h2>
         <div class="bd-callout">
           <span class="bd-ico" aria-hidden="true"><i data-lucide="flag"></i></span>
-          <span><b>Embassy vs Text fields MD3:</b> MD3 define dos variantes: <b>Filled</b> (esquinas <code>corner-extra-small-top</code>: 4dp arriba, 0dp abajo; fondo <code>$surface-container-highest</code>; indicador de foco 1dp→3dp en borde inferior) y <b>Outlined</b> (esquinas <code>corner-extra-small</code>: 4dp todos los lados; borde <code>$outline</code> 1px→3px en foco). Embassy usa <code>--radius-md</code> (8px) para ambas variantes y <code>box-shadow 0 0 0 3px var(--color-focus-ring)</code> — divergencia intencional respecto a los 4dp de MD3 para alinearse con la identidad visual Amalgama, pero funcionalmente equivalente.<br><br><b>Label flotante:</b> MD3 anima el label de <code>body-large</code> (reposo) a <code>body-small</code> (foco/relleno). Embassy no implementa labels flotantes — el label va siempre sobre el campo.<br><br><b>Texto de soporte y error:</b> MD3 define slots de texto auxiliar (<code>$on-surface-variant</code>) y de error (<code>$error</code>) bajo el campo. Embassy los expone como <b>props del componente</b> (<code>hint</code> / <code>error</code>), con el mismo mapeo de tokens y el cableado ARIA incluido.</span>
+          <span><b>Embassy vs Text fields MD3:</b> MD3 define dos variantes: <b>Filled</b> (esquinas <code>corner-extra-small-top</code>: 4dp arriba, 0dp abajo; fondo <code>$surface-container-highest</code>; indicador de foco 1dp→3dp en borde inferior) y <b>Outlined</b> (esquinas <code>corner-extra-small</code>: 4dp todos los lados; borde <code>$outline</code> 1px→3px en foco). Embassy usa <code>--radius-md</code> (8px) para ambas variantes y <code>box-shadow 0 0 0 4px var(--color-focus-ring)</code> — divergencia intencional respecto a los 4dp de MD3 para alinearse con la identidad visual Amalgama, pero funcionalmente equivalente.<br><br><b>Label flotante:</b> MD3 anima el label de <code>body-large</code> (reposo) a <code>body-small</code> (foco/relleno). Embassy no implementa labels flotantes — el label va siempre sobre el campo.<br><br><b>Texto de soporte y error:</b> MD3 define slots de texto auxiliar (<code>$on-surface-variant</code>) y de error (<code>$error</code>) bajo el campo. Embassy los expone como <b>props del componente</b> (<code>hint</code> / <code>error</code>), con el mismo mapeo de tokens y el cableado ARIA incluido.</span>
         </div>
       </section>
       
@@ -9530,7 +9575,7 @@ export { Input }
             <tr><td>Caret</td><td>16px (<code>size-4</code>)</td></tr>
             <tr><td>Panel</td><td>Ancho mín. 8rem, alto máx. 24rem, viewport <code>p-1.5</code>, <code>--shadow-lg</code></td></tr>
             <tr><td>Ítem</td><td>Padding <code>py-2 pl-3 pr-8</code>, radio <code>--radius-sm</code></td></tr>
-            <tr><td>Anillo de focus</td><td><code>box-shadow 0 0 0 3px var(--color-focus-ring)</code></td></tr>
+            <tr><td>Anillo de focus</td><td><code>box-shadow 0 0 0 4px var(--color-focus-ring)</code></td></tr>
           </tbody>
         </table>
       </section>
@@ -13610,17 +13655,17 @@ export { EmptyState }</code></pre>
           <!-- Component variants -->
           <div class="bd-family-wrap">
             <div class="stats-grid"><div class="stat-card">
-    <div class="stat-label">Vacantes activas</div>
+    <div class="stat-label">Vacantes activas · vs. mes pasado</div>
     <div class="stat-value">24</div>
-    <div class="stat-change stat-change-positive">↑ 4 desde el mes pasado</div>
+    <div class="badge stat-change stat-change-positive">↑ 4</div>
   </div><div class="stat-card">
-    <div class="stat-label">Candidatos en proceso</div>
+    <div class="stat-label">Candidatos en proceso · vs. semana pasada</div>
     <div class="stat-value">138</div>
-    <div class="stat-change stat-change-negative">↓ 12 desde la semana pasada</div>
+    <div class="badge stat-change stat-change-negative">↓ 12</div>
   </div><div class="stat-card">
-    <div class="stat-label">Posiciones cubiertas</div>
+    <div class="stat-label">Posiciones cubiertas · vs. trimestre</div>
     <div class="stat-value">91%</div>
-    <div class="stat-change stat-change-positive">↑ 3% vs. trimestre anterior</div>
+    <div class="badge stat-change stat-change-positive">↑ 3%</div>
   </div></div>
           </div>
 
@@ -13639,21 +13684,21 @@ export { EmptyState }</code></pre>
           <h2 class="docs-section-title">Anatomía</h2>
           <div class="docs-preview">
             <div class="stats-grid"><div class="stat-card">
-    <div class="stat-label">Vacantes activas</div>
+    <div class="stat-label">Vacantes activas · mes</div>
     <div class="stat-value">24</div>
-    <div class="stat-change stat-change-positive">+3 este mes</div>
+    <div class="badge stat-change stat-change-positive">+3</div>
   </div><div class="stat-card">
-    <div class="stat-label">Candidatos</div>
+    <div class="stat-label">Candidatos · semana</div>
     <div class="stat-value">156</div>
-    <div class="stat-change stat-change-positive">+12 esta semana</div>
+    <div class="badge stat-change stat-change-positive">+12</div>
   </div><div class="stat-card">
     <div class="stat-label">Entrevistas hoy</div>
     <div class="stat-value">8</div>
-    <div class="stat-change stat-change-neutral">Sin cambios</div>
+    <div class="badge stat-change stat-change-neutral">Sin cambios</div>
   </div><div class="stat-card">
-    <div class="stat-label">Tiempo promedio</div>
+    <div class="stat-label">Tiempo promedio · vs. anterior</div>
     <div class="stat-value">18d</div>
-    <div class="stat-change stat-change-negative">+2d vs anterior</div>
+    <div class="badge stat-change stat-change-negative">+2d</div>
   </div></div>
           </div>
           <table class="ds-table" style="margin-top:16px">
@@ -13788,7 +13833,7 @@ export { EmptyState }</code></pre>
   &lt;div class=&quot;stat-card&quot;&gt;
     &lt;div class=&quot;stat-label&quot;&gt;Vacantes abiertas&lt;/div&gt;
     &lt;div class=&quot;stat-value&quot;&gt;24&lt;/div&gt;
-    &lt;div class=&quot;stat-change stat-change-positive&quot;&gt;+12%&lt;/div&gt;
+    &lt;div class=&quot;badge stat-change stat-change-positive&quot;&gt;+12%&lt;/div&gt;
   &lt;/div&gt;
   &lt;div class=&quot;stat-card&quot;&gt;
     &lt;div class=&quot;stat-label&quot;&gt;Candidatos activos&lt;/div&gt;
@@ -16035,7 +16080,7 @@ css/components/select.css · segmented-button.css · date-picker.css (+ calendar
           <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
           <tbody>
             <tr><td>Hover</td><td>Fondo <code>--color-surface-variant</code> (de <code>.item-clickable</code>) + <code>--shadow-md</code></td><td><code>--color-surface-variant</code>, <code>--shadow-md</code>, <code>--duration-fast</code></td></tr>
-            <tr><td>Focus-visible</td><td>Borde a <code>--color-focus</code> + ring de 3px (patrón de foco de Item)</td><td><code>--color-focus</code>, <code>--color-focus-ring</code></td></tr>
+            <tr><td>Focus-visible</td><td>Borde a <code>--color-focus</code> + ring de 4px — forma C (§6.2)</td><td><code>--color-focus</code>, <code>--color-focus-ring</code></td></tr>
           </tbody>
         </table>
       </div>
@@ -16113,7 +16158,7 @@ css/components/select.css · segmented-button.css · date-picker.css (+ calendar
       <div class="ds-comp-tab-panel" data-tab="accessibility">
         <div class="docs-section">
           <h2 class="docs-section-title">Foco visible</h2>
-          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Hereda el foco de Item: <code>.item:focus-visible</code> pinta el borde a <code>var(--color-focus)</code> + ring de 3px <code>var(--color-focus-ring)</code></li><li><span class="ds-a11y-icon">♿</span>La card es un <code>&lt;div&gt;</code> clickeable — necesita <code>tabindex="0"</code> y <code>role="button"</code> para recibir foco y anunciarse con teclado</li></ul>
+          <ul class="ds-a11y-list"><li><span class="ds-a11y-icon">♿</span>Hereda el foco de Item: <code>.item:focus-visible</code> pinta el borde a <code>var(--color-focus)</code> + ring de 4px <code>var(--color-focus-ring)</code> — forma C</li><li><span class="ds-a11y-icon">♿</span>La card es un <code>&lt;div&gt;</code> clickeable — necesita <code>tabindex="0"</code> y <code>role="button"</code> para recibir foco y anunciarse con teclado</li></ul>
         </div>
         <div class="docs-section">
           <h2 class="docs-section-title">Contraste</h2>
@@ -17994,8 +18039,8 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
               </tr>
               <tr>
                 <td><strong>Focus</strong></td>
-                <td>Outline de 2px + offset 2px + ring de 4px — patrón único en toda la librería (en inputs el ring es de 3px sobre el borde)</td>
-                <td><code>outline: 2px solid var(--color-focus)</code> + <code>box-shadow: 0 0 0 4px var(--color-focus-ring)</code> — <code>button.css</code>, <code>chip.css</code>, <code>tabs.css</code>, <code>table.css</code>, etc.; <code>form.css</code> usa ring 3px</td>
+                <td><strong>Tres formas</strong>, elegidas por la forma del componente. <strong>A · outset</strong> (el default): outline 2px + offset 2px + ring de 4px. <strong>B · inset</strong> (fila a sangre o trigger que el contenedor recorta): offset −2px y el ring va <code>inset</code>. <strong>C · campo</strong> (input con borde): el borde toma <code>--color-focus</code> y lleva el ring; un outline encima dibujaría una tercera línea. El spread es siempre 4px en las tres. Seis excepciones aprobadas y su motivo, en <code>GOVERNANCE.md</code> §6.2</td>
+                <td><code>outline: 2px solid var(--color-focus)</code> + <code>box-shadow: 0 0 0 4px var(--color-focus-ring)</code> — <code>button.css</code>, <code>chip.css</code>, <code>tabs.css</code>, <code>table.css</code>, etc.; forma C en <code>form.css</code>, <code>select.css</code>, <code>input-group.css</code></td>
               </tr>
               <tr>
                 <td><strong>Disabled</strong></td>
@@ -18005,7 +18050,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
               <tr>
                 <td><strong>Error</strong> (inputs)</td>
                 <td>Borde en color de error + ring de error en focus; label y hint acompañan</td>
-                <td><code>var(--color-error)</code> + <code>box-shadow: 0 0 0 3px var(--color-error-ring)</code> — <code>form.css</code> (<code>.field-group.is-error</code>)</td>
+                <td><code>var(--color-error)</code> + <code>box-shadow: 0 0 0 4px var(--color-error-ring)</code> — <code>form.css</code> (<code>.field-group.is-error</code>)</td>
               </tr>
             </tbody>
           </table>

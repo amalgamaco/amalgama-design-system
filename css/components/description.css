@@ -45,7 +45,7 @@
   padding: 0;
   min-width: 0;
 }
-.desc-title-input:focus { color: var(--interactive); }
+.desc-title-input:focus-visible { color: var(--interactive); }
 .desc-delete-btn {
   width: 28px; height: 28px;
   border-radius: var(--radius-md);
@@ -71,8 +71,10 @@
   background: var(--card-bg);
   transition: box-shadow var(--duration-fast);
 }
-.desc-editor:focus {
-  box-shadow: inset 0 0 0 2px var(--color-focus-ring);
+.desc-editor:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+  box-shadow: inset 0 0 0 4px var(--color-focus-ring);
 }
 .desc-editor:empty::before {
   content: attr(data-placeholder);

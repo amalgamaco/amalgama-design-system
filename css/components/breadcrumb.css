@@ -54,8 +54,9 @@
 }
 .breadcrumb-link:hover { color: var(--color-primary); text-decoration: underline; }
 .breadcrumb-link:focus-visible {
-  outline: 2px solid var(--color-focus, var(--color-primary));
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
 
 .breadcrumb-page {
@@ -86,5 +87,7 @@
 }
 button.breadcrumb-ellipsis { cursor: pointer; }
 button.breadcrumb-ellipsis:hover { background: var(--color-surface-variant); color: var(--text-primary); }
-button.breadcrumb-ellipsis:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+button.breadcrumb-ellipsis:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
 .breadcrumb-ellipsis svg { width: 16px; height: 16px; }

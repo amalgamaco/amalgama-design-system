@@ -32,14 +32,14 @@
 }
 .input-group:focus-within {
   border-color: var(--interactive);
-  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
 .input-group[aria-invalid="true"],
 .input-group.is-error {
   border-color: var(--color-error);
 }
 .input-group.is-error:focus-within {
-  box-shadow: 0 0 0 3px var(--color-error-ring);
+  box-shadow: 0 0 0 4px var(--color-error-ring);
 }
 
 /* Control interno — sin borde ni fondo; hereda el foco del contenedor. */

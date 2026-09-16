@@ -6144,8 +6144,12 @@
           "--border",
           "--text-primary",
           "--text-muted",
-          "--color-success",
-          "--color-error"
+          "--color-success-container",
+          "--color-on-success-container",
+          "--color-error-container",
+          "--color-on-error-container",
+          "--color-surface-variant",
+          "--color-on-surface-variant"
         ],
         "radius": [
           "--radius"
@@ -6188,7 +6192,7 @@
       "motion": {
         "enter": "none — a static KPI tile with no CSS entrance",
         "exit": "none",
-        "stateChange": "none — Stat Card declares no transition or hover. The trend color modifiers (stat-change-positive/-negative/-neutral) are fixed at rest.",
+        "stateChange": "none — Stat Card declares no transition or hover. The trend pills (stat-change-positive/-negative/-neutral) are fixed at rest; they inherit .badge, which declares no motion either.",
         "duration": "none (no transition declared)",
         "easing": "none (no transition declared)",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The component defines no motion of its own, so nothing extra to reduce.",
@@ -6209,6 +6213,7 @@
           "stat-change-negative",
           "stat-change-neutral"
         ],
+        "composed_with_css": "css/components/badge.css",
         "react_wrapper": "components/ui/stat-card.tsx",
         "docs_anchor": "c-stat-card"
       },

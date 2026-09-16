@@ -219,7 +219,7 @@
 .toolbar-filters .select-trigger:focus-visible,
 .toolbar-filters .select-trigger[aria-expanded="true"] {
   border-color: var(--tb-border-focus);
-  box-shadow: 0 0 0 3px var(--tb-focus-ring);
+  box-shadow: 0 0 0 4px var(--tb-focus-ring);
 }
 
 /* ── Date Picker trigger — adopta el mismo campo que los Selects. ── */
@@ -247,7 +247,7 @@
 .toolbar-filters .date-picker-trigger:focus-visible {
   outline: none;                                        /* reemplazado por el anillo de campo (Select) */
   border-color: var(--tb-border-focus);
-  box-shadow: 0 0 0 3px var(--tb-focus-ring);
+  box-shadow: 0 0 0 4px var(--tb-focus-ring);
 }
 .toolbar-filters .date-picker-trigger:active { transform: none; }
 .toolbar-filters .date-picker-trigger:disabled {

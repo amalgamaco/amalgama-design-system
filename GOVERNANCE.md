@@ -357,7 +357,16 @@ Every interactive component must implement all applicable states from this table
 | **Error** | `.is-error` | `--color-error` border; `--color-error-ring` ring on focus |
 | **Loading** | `[aria-busy="true"]` | Spinner + `pointer-events: none` |
 
-### 6.2 Focus — canonical pattern (mandatory for all interactive components)
+### 6.2 Focus — three canonical forms (mandatory for all interactive components)
+
+One question — *how does this component show keyboard focus?* — had **19 different answers** across
+79 rules when it was measured in September 2026, against a section that declared a single pattern.
+Nineteen answers is what happens when the single pattern does not fit every shape and each component
+invents its own way out. So the pattern is now **three forms**, chosen by the component's shape, and
+nothing else is allowed without an entry in the exception table below.
+
+**A · Outset — the default.** Anything that sits on a surface with room around it: buttons, links,
+chips, icon buttons, tabs, calendar cells, pagination.
 
 ```css
 .component:focus-visible {
@@ -367,21 +376,54 @@ Every interactive component must implement all applicable states from this table
 }
 ```
 
-**Rules:**
+**B · Inset.** A full-bleed row or trigger whose parent clips overflow — a list row, a menu trigger,
+a rich-text editor. Form A's ring gets cut off there, which is why `list.css` had already invented
+this one on its own.
+
+```css
+.component:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+  box-shadow: inset 0 0 0 4px var(--color-focus-ring);
+}
+```
+
+**C · Field.** A bordered input, select or input group. These already own a border, and an outline on
+top of it draws a third concentric line; the border **becomes** the outline.
+
+```css
+.field:focus-visible {
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+```
+Its error state swaps only the ring: `box-shadow: 0 0 0 4px var(--color-error-ring)`.
+A field that explicitly suppresses the UA outline writes `outline: none` next to the ring — that is
+part of form C, not a fourth answer.
+
+**Rules, for all three:**
 - Always `:focus-visible`, never `:focus`. `:focus` fires on mouse click and degrades the experience for mouse users.
-- Outline: `2px solid` — never `1px`, never `3px`.
-- Outline offset: `2px` — ensures the focus ring clears the component's own border.
-- Ring: `0 0 0 4px` — the spread is always 4px. Exceptions must be documented as deliberate DS decisions.
-- Token: always `--color-focus` for the outline color and `--color-focus-ring` for the ring shadow. Never `--interactive`, never `--color-secondary`, never hardcoded blue.
+- Outline: `2px solid` — never `1px`, never `3px`. Offset: `2px` in form A, `-2px` in form B.
+- Ring: the spread is **always 4px**, outset in A and C, `inset` in B. Never 2px, never 3px.
+- Token: always `--color-focus` for the outline or the focused border, and `--color-focus-ring` for the ring. **Never** `--interactive`, never `--color-secondary`, never a hardcoded blue, and never the `var(--color-focus, var(--color-primary))` fallback form — `--color-focus` always resolves, so the fallback only hides a typo.
+- A component-scoped alias is fine (§2.2) as long as it resolves to these two — `segmented-button.css` does this correctly with `--seg-btn-focus-outline-color`.
 - `--color-focus = var(--secondary-900) = #4F80FF`. It has **no dark mode override** — this is intentional: the focus ring provides a consistent accessibility signal regardless of theme.
-- `--color-focus-ring` is now derived: `color-mix(in srgb, var(--color-focus) 15%, transparent)` (resolved in the 2026-07 color audit; previously the hardcoded duplicate `rgba(79,128,255,.15)`). It follows `--color-focus` as the single source of truth. Since `--color-focus` has no dark override, the resolved ring is the same in both themes — the derivation is about SSOT, not theme variation. New components needing a custom ring use this same `color-mix` form.
+- `--color-focus-ring` is derived: `color-mix(in srgb, var(--color-focus) 15%, transparent)` (resolved in the 2026-07 color audit; previously the hardcoded duplicate `rgba(79,128,255,.15)`). It follows `--color-focus` as the single source of truth. Since `--color-focus` has no dark override, the resolved ring is the same in both themes — the derivation is about SSOT, not theme variation.
 
-**Known deviations to reconcile:**
+**Approved exceptions — deliberate, and the only ones.** Anything not on this list and not matching
+A, B or C is a bug, and `validate-ds` check `[19]` fails on it.
 
-| Component | Deviation | Status |
+| Component | Form | Why it cannot be A, B or C |
 |---|---|---|
-| `form.css` | Uses `--interactive` (border) + `:focus` + 3px ring | Pending alignment |
-| `description.css` | Inset ring, `:focus`, 2px | Pending alignment |
+| `toast.css` — `.snackbar-action`, `.snackbar-close` | outline `--color-inverse-primary`, offset 2px | The snackbar is an inverse surface. `--color-focus` on it does not reach AA; the inverse token is the same signal in the inverted palette |
+| `alert.css` — `.alert-close` | outline `currentColor`, offset 2px | The alert ships in five tinted variants. `currentColor` follows the variant's own `on-container`, which is the only value guaranteed to contrast on all five |
+| `button.css` — `.btn-primary.btn-danger` | ring `color-mix(… --color-error 25% …)` | A destructive button's ring must not read as the ordinary interactive blue at the moment of confirming a destructive action |
+| `slider.css` — `.slider-input::-webkit-slider-thumb` / `::-moz-range-thumb` | ring only, on the thumb | A range input's thumb takes no outline. The input itself is `outline: none` and the thumb carries the 4px ring |
+| `dropdown-menu.css` — `.dropdown-item`; `navigation-menu.css` — `.nav-menu-link` | background highlight, `outline: none` | Menu items follow the ARIA APG roving-focus pattern: the highlight *is* the focus indicator. Note the open concern: today the highlight is identical to `:hover`, so focus and hover look the same |
+
+*(The previous "Known deviations to reconcile" table listed `form.css` and `description.css`. Both
+were aligned in September 2026 — `form.css` used the forbidden `--interactive` and a 3px ring;
+`description.css` used `:focus` and a 2px inset ring.)*
 
 ### 6.3 State layers — implementation contract
 

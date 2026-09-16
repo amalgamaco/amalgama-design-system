@@ -68,11 +68,12 @@
   gap: var(--space-2);
   min-height: 100px;
 }
+/* Entidad (COMPOSICION.md §4b): escalon compacto. */
 .kanban-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-3-5);
+  padding: var(--space-4);
   cursor: grab;
   transition: box-shadow var(--duration-fast), transform var(--duration-fast);
 }
@@ -91,9 +92,10 @@
 }
 .kanban-card-title {
   font-size: var(--font-size-body-md);
-  font-weight: 500;
+  line-height: var(--line-height-title);
+  font-weight: var(--font-weight-medium);
   color: var(--text-primary);
-  margin-bottom: 6px;
+  margin-bottom: var(--space-1-5);
 }
 .kanban-card-meta {
   font-size: var(--font-size-caption);
@@ -107,7 +109,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-2);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 .kanban-card-header .kanban-card-title { margin-bottom: 0; }
 

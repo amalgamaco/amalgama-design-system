@@ -1369,14 +1369,16 @@ A single KPI/metric with a label, a large value, and an optional trend indicator
 **Cuándo no:** contenido no numérico (usar Card).
 **Variantes:** base · trend-positive · trend-negative · trend-neutral
 
-Clases públicas: `.stat-card` · `.stat-change` · `.stat-change-negative` · `.stat-change-neutral` · `.stat-change-positive` · `.stat-label` · `.stat-value` · `.stats-grid`
+Clases públicas: `.badge` · `.stat-card` · `.stat-change` · `.stat-change-negative` · `.stat-change-neutral` · `.stat-change-positive` · `.stat-label` · `.stat-value` · `.stats-grid`
 
 ```html
 <div class="stats-grid">
   <div class="stat-card">
     <div class="stat-label">Vacantes abiertas</div>
     <div class="stat-value">24</div>
-    <div class="stat-change stat-change-positive">+12%</div>
+    <div class="badge stat-change stat-change-positive">
+      <svg width="12" height="12" aria-hidden="true"><!-- lucide trending-up --></svg>12%
+    </div>
   </div>
 </div>
 ```

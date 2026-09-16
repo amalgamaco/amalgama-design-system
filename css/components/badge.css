@@ -35,11 +35,23 @@
 }
 
 /* ── Variantes de color ── */
-.badge-open   { background: var(--color-success-container); color: var(--color-on-success-container); }
+/* La variacion de una Stat Card es el mismo objeto que un badge: la misma
+   pildora, el mismo par container/on-container y el mismo tratamiento de
+   oscuro. Los modificadores de tendencia se listan ACA y no en stat-card.css
+   para que la forma y el tinte de dark tengan una sola fuente (GOVERNANCE
+   §22): una copia parafraseada del color-mix de abajo no fallaria cuando el
+   porcentaje cambie — mentiria. El markup compone `badge stat-change
+   stat-change-positive`. */
+.badge-open, .stat-change-positive   { background: var(--color-success-container); color: var(--color-on-success-container); }
 /* Activa = proceso en curso: color distinto de open (secondary-container), para que
    "abierta" (verde) y "activa" (en curso) no se lean idénticas. */
 .badge-active { background: var(--color-secondary-container); color: var(--color-on-secondary-container); }
-.badge-closed { background: var(--color-error-container);   color: var(--color-on-error-container); }
+.badge-closed, .stat-change-negative { background: var(--color-error-container);   color: var(--color-on-error-container); }
+/* Tendencia plana: la misma superficie tonal que .badge-draft, sin el borde
+   (draft usa el borde para decir "todavia no publicado"; una variacion de cero
+   no dice nada de eso). En oscuro el par surface-variant/on-surface-variant ya
+   es tonal, asi que no necesita la excepcion de abajo. */
+.stat-change-neutral { background: var(--color-surface-variant); color: var(--color-on-surface-variant); }
 .badge-draft  { background: var(--color-surface-variant);   color: var(--color-on-surface-variant); border: 1px solid var(--color-outline); }
 .badge-archived { background: var(--color-surface-variant); color: var(--color-on-surface-variant); opacity: .75; }
 .badge-warning  { background: var(--color-warning-container); color: var(--color-on-warning-container); }
@@ -73,7 +85,9 @@
    texto de shadcn (sin relleno, color de acento, subrayado en hover). */
 a.badge { text-decoration: none; cursor: pointer; transition: opacity var(--duration-fast) var(--ease-default); }
 a.badge:hover { opacity: .85; }
-a.badge:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+a.badge:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
 .badge-link { background: transparent; color: var(--color-primary); padding-left: var(--space-0-5); padding-right: var(--space-0-5); }
 a.badge-link:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
 
@@ -83,9 +97,11 @@ a.badge-link:hover { opacity: 1; text-decoration: underline; text-underline-offs
    on-container. Es el mismo lenguaje que light, invertido: pill tenue + texto
    vívido → contraste AA holgado y vividez pareja entre variantes.
    Excepción documentada al "sin bloque por-tema" (aprobada; scope = badge). */
-[data-theme="dark"] .badge-open    { background: color-mix(in srgb, var(--color-success-container)   42%, var(--color-surface)); }
+[data-theme="dark"] .badge-open,
+[data-theme="dark"] .stat-change-positive { background: color-mix(in srgb, var(--color-success-container)   42%, var(--color-surface)); }
 [data-theme="dark"] .badge-active  { background: color-mix(in srgb, var(--color-secondary-container) 55%, var(--color-surface)); }
-[data-theme="dark"] .badge-closed  { background: color-mix(in srgb, var(--color-error-container)     42%, var(--color-surface)); }
+[data-theme="dark"] .badge-closed,
+[data-theme="dark"] .stat-change-negative { background: color-mix(in srgb, var(--color-error-container)     42%, var(--color-surface)); }
 [data-theme="dark"] .badge-warning { background: color-mix(in srgb, var(--color-warning-container)   42%, var(--color-surface)); }
 [data-theme="dark"] .badge-tertiary{ background: color-mix(in srgb, var(--color-tertiary-container)  42%, var(--color-surface)); }
 [data-theme="dark"] .badge-info    { background: color-mix(in srgb, var(--color-info-container)      42%, var(--color-surface)); }

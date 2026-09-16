@@ -14,7 +14,9 @@
      <div class="stat-card">
        <div class="stat-label">Vacantes abiertas</div>
        <div class="stat-value">24</div>
-       <div class="stat-change stat-change-positive">+12%</div>
+       <div class="badge stat-change stat-change-positive">
+         <svg width="12" height="12" aria-hidden="true"><!-- lucide trending-up --></svg>12%
+       </div>
      </div>
    </div>
 ═══════════════════════════════════════ */
@@ -23,31 +25,48 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--space-4);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
 }
+/* Dato (§4b): escalon compacto — la cifra es lo que pesa, no el aire. */
 .stat-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: var(--space-5);
+  padding: var(--space-4);
 }
 .stat-card .stat-label {
   font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
   color: var(--text-muted);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
 }
 .stat-card .stat-value {
   font-family: var(--font-heading);
   font-size: var(--font-size-display);
+  line-height: var(--line-height-display);
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: var(--letter-spacing-display);
 }
+/* La variacion va DENTRO de una pildora: se compone con `.badge`, que aporta la
+   forma (--radius-full), el padding, --font-size-badge y el SVG a 12px. Este
+   archivo no vuelve a declarar nada de eso.
+   Los tres modificadores de tendencia (-positive / -negative / -neutral) viven
+   en badge.css, junto al resto de las variantes de color y a su excepcion de
+   oscuro. */
 .stat-card .stat-change {
-  font-size: var(--font-size-caption);
-  margin-top: 4px;
+  margin-top: var(--space-2);
+  /* Guarda, no estilo. El contenido esta limitado a 12 caracteres (ver
+     component-rules/stat-card.md): el ancho del chip es ~20px de padding mas
+     ~6.1px por caracter, y la card mas angosta que `stats-grid` puede producir
+     es 200px = 160px utiles, o sea ~23 caracteres antes de romper. El maximo
+     de 12 deja la mitad de ese margen para traducciones mas largas y para un
+     proyecto con una escala mayor.
+     Si aun asi alguien se pasa, la pildora ENVUELVE en vez de desbordar la
+     card: queda fea —que es el punto, se ve el error— pero no se pierde
+     ningun digito. Un `text-overflow: ellipsis` aca ocultaria parte de un
+     numero, y un dato a medias miente. Es la unica propiedad de `.badge` que
+     este archivo pisa, y es a proposito. */
+  max-width: 100%;
+  white-space: normal;
 }
-/* Token-bound trend modifiers — prefer these over an inline `style="color:…"` escape hatch */
-.stat-change-positive { color: var(--color-success-text); }
-.stat-change-negative { color: var(--color-error-text); }
-.stat-change-neutral  { color: var(--text-muted); }

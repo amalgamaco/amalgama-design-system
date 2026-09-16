@@ -62,7 +62,7 @@
   background: transparent;
   pointer-events: none;
 }
-.slider-input:focus {
+.slider-input:focus-visible {
   outline: none;
 }
 .slider-input::-webkit-slider-runnable-track {

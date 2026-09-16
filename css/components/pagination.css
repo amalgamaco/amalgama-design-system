@@ -56,8 +56,9 @@
 }
 .pagination-link:hover { background: var(--color-surface-variant); }
 .pagination-link:focus-visible {
-  outline: 2px solid var(--color-focus, var(--color-primary));
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
 .pagination-link.is-active {
   background: var(--color-secondary-container);

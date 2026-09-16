@@ -66,10 +66,10 @@
 .select-trigger[aria-expanded="true"] {
   outline: none;
   border-color: var(--interactive);
-  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
 .select-trigger[aria-invalid="true"] { border-color: var(--color-error); }
-.select-trigger[aria-invalid="true"]:focus-visible { box-shadow: 0 0 0 3px var(--color-error-ring); }
+.select-trigger[aria-invalid="true"]:focus-visible { box-shadow: 0 0 0 4px var(--color-error-ring); }
 .select-trigger:disabled,
 .select-trigger[aria-disabled="true"] {
   background: var(--color-surface-variant);

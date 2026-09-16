@@ -304,11 +304,51 @@ por default. Aparece cuando hay que ocupar espacio y no hay contenido.
 Y la regla que las cubre a todas: **una grilla solo cuando los ítems son intercambiables entre
 sí.** Si el segundo no podría ir en el lugar del primero sin que nada cambie, no es una grilla.
 
-## 4b. Cuando la tarjeta sí va, ésta es su anatomía
+## 4b. Cuando la tarjeta sí va, hay cuatro formas y son excluyentes
 
-La regla 4 dice qué no hacer y la 7 dice que la mayoría del contenido no necesita contenedor. Pero
-cuando la tarjeta **sí** es la forma correcta, describirla por resta no alcanza para construirla.
-Ésta es la anatomía, y sale de una tarjeta real del sistema: `.nav-card`.
+La regla 4 dice cuándo una grilla de tarjetas **no** es la forma y la 7 dice que la mayoría del
+contenido no necesita contenedor. Cuando la tarjeta **sí** va, la pregunta siguiente no es "cómo se
+ve" sino **cuál de las cuatro es**. Son cuatro, toda tarjeta del sistema entra en una y sólo una, y
+lo que las separa es el trabajo que hacen — no el aspecto. Por eso se puede decidir antes de dibujar
+nada.
+
+**La ruta, en orden. La primera que da sí, gana.**
+
+1. ¿Lo más grande de la tarjeta es un **número**? → **Dato**
+2. ¿Es **una de muchas**, todas intercambiables entre sí? → **Entidad**
+3. ¿**Abre una sección** o lleva a otro lado, con peso de portada? → **Baldosa editorial**
+4. Si no, y realmente necesita contenedor → **Panel**
+
+Sin esta ruta, "¿qué tarjeta uso?" se contesta mirando cuál se parece más a la de al lado. Medido en
+septiembre de 2026, así se contestaba: **nueve** tratamientos distintos para el título de una
+tarjeta, con cinco pesos (500, 600, 700, 800, `semibold`) y tres familias tipográficas; **nueve**
+para la bajada; y **nueve** contenedores con siete paddings, ninguno de los cuales era uno de los
+tres escalones que `guidelines/visual-hierarchy.md` ya tenía escritos.
+
+| | Su trabajo | Título | Bajada | Padding | Clases |
+|---|---|---|---|---|---|
+| **1 · Panel** | Agrupa contenido relacionado sobre una superficie. Estático: no se escanea en serie ni representa una entidad, sostiene un bloque | `.card-title` — `--font-size-heading-xs`. `.card-title-lg` (`heading-md`) cuando abre sección | `.card-desc` | `--space-6`, y `--space-8` cuando abre sección | `.card` · `.card-elevated` · `.card-filled` · `.form-card` |
+| **2 · Entidad** | Una de muchas, todas intercambiables. Se escanea de arriba abajo | `.entity-title` — `--font-size-body-md`, peso medio | `.card-desc`, y `.card-meta` para el dato accesorio | `--space-4` | `.vacancy-card` · `.person-card` · `.kanban-card` · `.checkbox-card` · `.radio-card` |
+| **3 · Dato** | Un valor con su rótulo y su variación | `.stat-value` — `--font-size-display`. **La cifra es el título** | `.stat-label`, arriba de la cifra | `--space-4` | `.stat-card` |
+| **4 · Baldosa editorial** | Navegación o portada | `.nav-card-title` — `heading-lg` en registro editorial | `.nav-card-desc` | `--space-6` | `.nav-card` |
+
+Cada tamaño arrastra su par: usar `--font-size-{rol}` obliga a `--line-height-{rol}` y su tracking
+(§8.3 de `GOVERNANCE.md`). Un título de tarjeta sin interlineado declarado no es un atajo, es la
+mitad de una decisión.
+
+**La tarjeta seleccionable no es una quinta forma.** `.checkbox-card` y `.radio-card` tienen la
+anatomía de Entidad —control o media a la izquierda, título, bajada, colección homogénea, padding
+compacto— y lo único que las distingue es que se pueden marcar. Eso es un **estado**. Si los estados
+abrieran familias, `hover` y `disabled` también.
+
+**Y una regla que vale para las cuatro:** dentro de una colección, las tarjetas son de la misma
+familia. Mezclar un Panel y una Entidad en la misma grilla es la forma más rápida de que el ojo deje
+de saber qué está comparando.
+
+### La anatomía de la Baldosa editorial
+
+Es la única de las cuatro con una anatomía propia que hay que describir, porque las otras tres son
+título + bajada + contenido. Sale de una tarjeta real del sistema: `.nav-card`.
 
 **Cuatro zonas, de arriba abajo:**
 
@@ -339,6 +379,9 @@ píldora **con borde y sin relleno**. Un badge relleno gritaría más que el tit
 **Lo que se ajusta:** el alto del panel visual (según cuánto pese la imagen en la composición), el
 inset del panel, y si hay afordancia o no — va cuando la tarjeta entera es clickeable. Lo que no:
 el orden de las zonas, y que la ilustración use `currentColor`.
+
+Va **una o dos por página**, nunca en una grilla de cuatro o más y nunca adentro de una pantalla de
+producto: es la forma que más pesa de las cuatro.
 
 > **Resuelto (sep 2026).** Esto figuraba como deuda conocida: 9.5px y .07em en la etiqueta,
 > -.028em en el titular, más cosas que la nota no listaba (dos familias entre comillas, 12.5px a

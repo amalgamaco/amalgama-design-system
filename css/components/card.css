@@ -29,7 +29,10 @@
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: var(--space-4) var(--space-5);
+  /* Panel = escalon estandar. COMPOSICION.md §4b + guidelines/visual-hierarchy.md.
+     Hasta sep 2026 eran 16/20: el escalon compacto en vertical y un valor que no
+     era escalon en horizontal, sin que nadie lo hubiera decidido. */
+  padding: var(--space-6);
 }
 
 /* ── Variantes MD3 ── */
@@ -37,14 +40,14 @@
   background: var(--color-surface-container-low);
   border: 1px solid transparent;
   border-radius: var(--radius);
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-6);
   box-shadow: var(--shadow-sm);
 }
 .card-filled {
   background: var(--color-surface-container-highest);
   border: 1px solid transparent;
   border-radius: var(--radius);
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-6);
 }
 
 /* ── Sub-partes (Basic Card) ── */
@@ -52,7 +55,7 @@
    columna izquierda; si hay una .card-action, reserva una columna derecha para
    ella (col-start-2, abarca ambas filas), p.ej. un icon-btn "⋮" o un Switch. */
 .card-header {
-  margin-bottom: 12px;
+  margin-bottom: var(--space-3);
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-1);
@@ -69,7 +72,9 @@
 .card-title {
   font-family: var(--font-heading);
   font-size: var(--font-size-heading-xs);
-  font-weight: 600;
+  line-height: var(--line-height-heading-xs);
+  letter-spacing: var(--letter-spacing-heading-xs);
+  font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
 }
 .card-desc {
@@ -101,6 +106,6 @@
   color: var(--text-primary);
 }
 .card-footer {
-  margin-top: 16px;
+  margin-top: var(--space-4);
   display: flex; align-items: center; gap: var(--space-2);
 }

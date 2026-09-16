@@ -50,9 +50,9 @@
 .otp-slot:hover:not(:disabled):not(:focus) {
   border-color: var(--color-outline);
 }
-.otp-slot:focus {
+.otp-slot:focus-visible {
   border-color: var(--interactive);
-  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
   z-index: 1;
   position: relative;
 }
@@ -68,9 +68,9 @@
 .otp-group.is-error .otp-slot {
   border-color: var(--color-error);
 }
-.otp-slot[aria-invalid="true"]:focus,
-.otp-group.is-error .otp-slot:focus {
-  box-shadow: 0 0 0 3px var(--color-error-ring);
+.otp-slot[aria-invalid="true"]:focus-visible,
+.otp-group.is-error .otp-slot:focus-visible {
+  box-shadow: 0 0 0 4px var(--color-error-ring);
 }
 
 /* Separador opcional entre grupos (ej. 3 + 3) */

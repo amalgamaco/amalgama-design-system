@@ -78,8 +78,9 @@
   text-transform: capitalize;
 }
 .calendar-caption-select:focus-visible {
-  outline: 2px solid var(--color-focus, var(--color-primary));
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
 .calendar-nav-btn {
   position: absolute;
@@ -97,7 +98,9 @@
 }
 .calendar-nav-btn svg { width: 16px; height: 16px; pointer-events: none; }   /* Chevron: size-4 */
 .calendar-nav-btn:hover:not(:disabled) { background: var(--color-surface-variant); }
-.calendar-nav-btn:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 2px; }
+.calendar-nav-btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
 .calendar-nav-btn:disabled { opacity: .5; cursor: not-allowed; }
 .calendar-nav-btn.prev { left: 0; }
 .calendar-nav-btn.next { right: 0; }
@@ -141,7 +144,9 @@
 }
 /* hover = ghost button hover (bg-accent) */
 .calendar-day:hover:not(:disabled):not(.calendar-day-selected):not(.calendar-day-range-middle) { background: var(--color-surface-variant); }
-.calendar-day:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 1px; }
+.calendar-day:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
 
 /* outside = text-muted-foreground (sin opacidad extra, par shadcn) */
 .calendar-day-outside { color: var(--text-muted); }
@@ -234,7 +239,9 @@
   transition: background-color var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default);
 }
 .calendar-preset-btn:hover { background: var(--color-surface-variant); border-color: var(--color-outline); }
-.calendar-preset-btn:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 2px; }
+.calendar-preset-btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
 .calendar-preset-btn[aria-current="true"] { background: var(--color-secondary-container); border-color: var(--color-secondary); color: var(--color-on-secondary-container); }
 
 /* ── Date + time ── fila de hora bajo la grilla (par shadcn date-and-time picker). */
@@ -254,4 +261,6 @@
   color: var(--color-on-surface);
   font: inherit;
 }
-.calendar-time-row input[type="time"]:focus-visible { outline: 2px solid var(--color-focus, var(--color-primary)); outline-offset: 1px; }
+.calendar-time-row input[type="time"]:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
+}

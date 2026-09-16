@@ -30,22 +30,28 @@
    </div>
 ═══════════════════════════════════════ */
 
+/* Panel que abre seccion (COMPOSICION.md §4b): escalon holgado, y su titulo
+   sube con el — los dos pasos son un par, no dos decisiones sueltas. */
 .form-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: var(--space-6) var(--space-8);
-  margin-bottom: 16px;
+  padding: var(--space-8);
+  margin-bottom: var(--space-4);
 }
 .form-card-title {
   font-family: var(--font-heading);
-  font-size: var(--font-size-heading-xs); font-weight: 600;
-  margin-bottom: 6px;
+  font-size: var(--font-size-heading-md);
+  line-height: var(--line-height-heading-md);
+  letter-spacing: var(--letter-spacing-heading-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-1-5);
 }
 .form-card-desc {
   font-size: var(--font-size-body-sm); color: var(--text-secondary);
   line-height: var(--line-height-body-sm);
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
   max-width: 680px;
 }
 
@@ -74,8 +80,8 @@
   appearance: none;
 }
 .field-input:focus-visible {
-  border-color: var(--interactive);
-  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
 .field-input::placeholder { color: var(--text-muted); }
 
@@ -113,7 +119,7 @@
 .select-wrapper select[aria-invalid="true"]:focus-visible,
 .field-textarea[aria-invalid="true"]:focus-visible {
   border-color: var(--color-error);
-  box-shadow: 0 0 0 3px var(--color-error-ring);
+  box-shadow: 0 0 0 4px var(--color-error-ring);
 }
 
 input:disabled, select:disabled, textarea:disabled {
@@ -140,7 +146,7 @@ input:disabled, select:disabled, textarea:disabled {
 }
 .select-wrapper select:focus-visible {
   border-color: var(--interactive);
-  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
 /* Compact size (par shadcn Select size="sm" / select-trigger[data-size="sm"]). */
 .select-wrapper select[data-size="sm"] {
@@ -205,7 +211,7 @@ input:disabled, select:disabled, textarea:disabled {
   transition: border-color var(--duration-fast) var(--ease-default);
   cursor: pointer;
 }
-.date-input-wrapper input:focus { border-color: var(--interactive); }
+.date-input-wrapper input:focus-visible { border-color: var(--interactive); }
 .date-icon {
   position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
   color: var(--text-muted); pointer-events: none;
@@ -306,7 +312,7 @@ input:disabled, select:disabled, textarea:disabled {
 }
 .field-group.is-error .field-input:focus-visible {
   border-color: var(--color-error);
-  box-shadow: 0 0 0 3px var(--color-error-ring);
+  box-shadow: 0 0 0 4px var(--color-error-ring);
 }
 .field-group.is-error .field-hint {
   display: none; /* el mensaje de error reemplaza el texto de soporte */
