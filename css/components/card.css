@@ -77,6 +77,25 @@
   color: var(--text-secondary);
   line-height: var(--line-height-body-sm);
 }
+
+/* El titular de la tarjeta que ABRE una sección — la que
+   `guidelines/visual-hierarchy.md` manda a --space-8 porque lleva título, bajada
+   y lista. El padding ya tenía tres pasos y el titular uno solo: una tarjeta con
+   32px de aire y un titular de 15px queda desbalanceada, el aire la agranda y el
+   título no la acompaña.
+   Va un escalón arriba en la MISMA escala, con su par de interlineado y su
+   tracking. No es "más grande": es el paso que le corresponde a esa tarjeta.
+   Nota: GOVERNANCE §8.2 decía que --font-size-heading-md era «titular de tarjeta»
+   mientras .card-title usaba heading-xs. Las dos cosas eran ciertas para tarjetas
+   distintas y ninguna lo aclaraba; ahora la tabla distingue las dos clases. */
+.card-title-lg {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-md);
+  line-height: var(--line-height-heading-md);
+  letter-spacing: var(--letter-spacing-heading-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
 .card-content {
   font-size: var(--font-size-body-md);
   color: var(--text-primary);

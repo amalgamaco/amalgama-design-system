@@ -90,6 +90,10 @@ In Embassy the scale is `--space-*` (GOVERNANCE §7) and that lands on:
   a list. Spacious is not «more is better»: it is what keeps a card that holds three blocks from
   reading as cramped. Four small cards in a grid stay standard — giving them 32 makes the grid
   loose and the page taller for nothing.
+- **The spacious card's title moves up with it**: `.card-title-lg`
+  (`--font-size-heading-md`) instead of `.card-title` (`--font-size-heading-xs`).
+  A card with 32px of air and a 15px title reads unbalanced — the padding grew and
+  the title did not follow. The two steps are a pair, not two independent choices.
 - Page header to first content `--space-8` (32px); section header to its content `--space-6` (24px).
 
 **In a project with its own scale**, keep the ratio and take the numbers from that scale. The

@@ -444,10 +444,10 @@ Los valores — px e interlineado de cada paso — viven en `css/variables.css` 
 | `--font-size-editorial-lg` / `-md` / `-sm` | Titulares editoriales fluidos (`clamp`). Portada, hero de landing. No para UI. |
 | `--font-size-display` | Encabezado de hero |
 | `--font-size-heading-xl` | h2 de sección |
-| `--font-size-heading-lg` | h3, titular de tarjeta grande |
-| `--font-size-heading-md` | h4, titular de tarjeta |
+| `--font-size-heading-lg` | h3 |
+| `--font-size-heading-md` | h4 · `.card-title-lg`, el titular de la tarjeta que **abre una sección** (la que va a `--space-8`) |
 | `--font-size-heading-sm` | h5, titular de modal y sheet |
-| `--font-size-heading-xs` | h6, encabezado de sección chico |
+| `--font-size-heading-xs` | h6 · `.card-title`, el titular de tarjeta por defecto |
 | `--font-size-body-lg` | Texto corrido, ítems de lista |
 | `--font-size-body-md` | **Default**: inputs, botones, celdas de tabla |
 | `--font-size-body-sm` | Texto secundario / de apoyo |

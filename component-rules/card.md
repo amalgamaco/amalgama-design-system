@@ -97,7 +97,7 @@ motion:
 
 source:
   css: css/components/card.css
-  classes: [card, card-elevated, card-filled, card-header, card-title, card-desc, card-content, card-footer, card-action]
+  classes: [card, card-elevated, card-filled, card-header, card-title, card-title-lg, card-desc, card-content, card-footer, card-action]
   react_wrapper: components/ui/card.tsx
   docs_anchor: c-basic-card
 ---

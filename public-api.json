@@ -655,9 +655,10 @@
         "card-filled",
         "card-footer",
         "card-header",
-        "card-title"
+        "card-title",
+        "card-title-lg"
       ],
-      "internal_class_count": 9
+      "internal_class_count": 10
     },
     {
       "id": "carousel",

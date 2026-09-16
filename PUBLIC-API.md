@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-66 componentes · **601 clases públicas** de 703 selectores totales en el CSS.
+66 componentes · **602 clases públicas** de 704 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -373,7 +373,7 @@ A rich content panel that groups content and actions about a single subject on a
 **Cuándo no:** métricas (stat-card), personas (person-card), vacantes (vacancy-card).
 **Variantes:** outlined · elevated · filled
 
-Clases públicas: `.btn-text` · `.card` · `.card-action` · `.card-content` · `.card-desc` · `.card-elevated` · `.card-filled` · `.card-footer` · `.card-header` · `.card-title`
+Clases públicas: `.btn-text` · `.card` · `.card-action` · `.card-content` · `.card-desc` · `.card-elevated` · `.card-filled` · `.card-footer` · `.card-header` · `.card-title` · `.card-title-lg`
 
 ```html
 <div class="card">
