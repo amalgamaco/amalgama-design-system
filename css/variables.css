@@ -539,6 +539,12 @@
   /* ─────────────────────────────────────
      Layout
   ───────────────────────────────────── */
+  /* El riel siempre visible del app shell. 112px y no 72: los labels mas largos
+     —Foundations 68.9px, Components 71.4px— no ENTRABAN en los 55px utiles que
+     dejaban 72px menos el padding, y como el label va con white-space:nowrap se
+     salian del padding y el riel los recortaba. El aire no era poco, era negativo.
+     A 112 quedan 95 utiles: 12px a cada lado del mas largo. */
+  --rail-width:    112px;
   --sidebar-width: 220px;
   --topbar-height: 56px;
 

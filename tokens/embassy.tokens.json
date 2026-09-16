@@ -1785,15 +1785,20 @@
       "$value": "0",
       "section": "Versalitas de componente (badge, header de tabla, label del nav, acción del toast): 10–11px. Acá el tracking apretado se lee PEOR — a ese tamaño las mayúsculas necesitan aire para separarse. No unificar con el de arriba: resuelven problemas distintos."
     },
+    "--rail-width": {
+      "$type": "other",
+      "$value": "112px",
+      "section": "El riel siempre visible del app shell. 112px y no 72: los labels mas largos —Foundations 68.9px, Components 71.4px— no ENTRABAN en los 55px utiles que dejaban 72px menos el padding, y como el label va con white-space:nowrap se salian del padding y el riel los recortaba. El aire no era poco, era negativo. A 112 quedan 95 utiles: 12px a cada lado del mas largo."
+    },
     "--sidebar-width": {
       "$type": "dimension",
       "$value": "220px",
-      "section": "Layout"
+      "section": "El riel siempre visible del app shell. 112px y no 72: los labels mas largos —Foundations 68.9px, Components 71.4px— no ENTRABAN en los 55px utiles que dejaban 72px menos el padding, y como el label va con white-space:nowrap se salian del padding y el riel los recortaba. El aire no era poco, era negativo. A 112 quedan 95 utiles: 12px a cada lado del mas largo."
     },
     "--topbar-height": {
       "$type": "dimension",
       "$value": "56px",
-      "section": "Layout"
+      "section": "El riel siempre visible del app shell. 112px y no 72: los labels mas largos —Foundations 68.9px, Components 71.4px— no ENTRABAN en los 55px utiles que dejaban 72px menos el padding, y como el label va con white-space:nowrap se salian del padding y el riel los recortaba. El aire no era poco, era negativo. A 112 quedan 95 utiles: 12px a cada lado del mas largo."
     },
     "--breakpoint-md": {
       "$type": "dimension",

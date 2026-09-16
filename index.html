@@ -168,7 +168,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 
 /* ════════════════════════════════════════
    SIDEBAR — Rail + Drawer architecture
-   Rail (72px): always visible, icon + label
+   Rail (--rail-width): always visible, icon + label
    Drawer (220px): slides in on hover
 ════════════════════════════════════════ */
 
@@ -177,12 +177,12 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   position: fixed; top: 0; left: 0; bottom: 0;
   z-index: 100;
   display: flex;
-  width: 72px; /* only the rail width */
+  width: var(--rail-width); /* only the rail width */
 }
 
 /* ── Navigation Rail ── */
 .ds-sidebar-rail {
-  width: 72px; min-width: 72px;
+  width: var(--rail-width); min-width: var(--rail-width);
   background: var(--ds-sidebar-bg);
   border-right: 1px solid var(--ds-sidebar-border);
   display: flex; flex-direction: column; align-items: center;
@@ -247,13 +247,18 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 .ds-rail-btn i, .ds-rail-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
 
 .ds-rail-label {
-  font-size: var(--font-size-badge); font-weight: 500; letter-spacing: .01em;
-  line-height: 1; text-align: center; white-space: nowrap;
+  /* .01em no esta en la escala de tracking, que es cerrada a proposito, y
+     line-height:1 es --line-height-none, que es para un glifo centrado en una caja
+     fija —una inicial, un numero de dia— no para texto. El label es texto: va con
+     el par de su tamano. */
+  font-size: var(--font-size-badge); font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-normal);
+  line-height: var(--line-height-badge); text-align: center; white-space: nowrap;
 }
 
 /* ── Drawer ── */
 .ds-sidebar-drawer {
-  position: absolute; left: 72px; top: 0; bottom: 0;
+  position: absolute; left: var(--rail-width); top: 0; bottom: 0;
   width: 220px;
   background: var(--ds-sidebar-bg);
   border-right: 1px solid var(--ds-sidebar-border);
@@ -347,7 +352,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 .ds-nav-solo.active { background: var(--color-nav-selected); color: var(--color-nav-selected-content); font-weight: 600; }
 
 /* ── Main ── */
-.ds-main { margin-left: 72px; flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 100vh; }
+.ds-main { margin-left: var(--rail-width); flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 100vh; }
 
 /* ── Topbar ── */
 .ds-topbar {
@@ -3578,7 +3583,7 @@ body { overflow-x: clip; }
 ═══════════════════════════════════════ -->
 <aside class="ds-sidebar" id="sidebar">
 
-  <!-- ── RAIL (always visible, 72px) ── -->
+  <!-- ── RAIL (always visible, --rail-width) ── -->
   <div class="ds-sidebar-rail">
     <div class="ds-rail-logo-btn" onclick="navigate('overview')">
       <div class="ds-rail-logo-mark">
