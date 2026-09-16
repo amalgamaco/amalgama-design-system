@@ -230,11 +230,11 @@ correcto y marcarlo sería un falso positivo.
 | `M7` | **Solo React Native.** `lineHeight` o `letterSpacing` pasados como multiplicador o `em`, que RN ignora en silencio. En Flutter `height` ES un múltiplo: ahí no aplica | ALTA | `grep -nE "(lineHeight\|letterSpacing):\s*(0?\.[0-9]\|1\.[0-9])"` |
 | `M8` | Utilidades de gluestack/Tailwind sin traducir (`bg-blue-500`, `rounded-xl`, `text-sm`) | ALTA | regex — es `A8` en territorio nativo |
 | `M9` | Probado en una sola plataforma: sombras, fuentes y ripple no se dibujan igual en iOS y Android | MEDIA | falta la evidencia de las dos |
-| `M10` | Secciones separadas por línea en vez de por superficie: fondo plano con `<hr>` o bordes sueltos, sin el escalón `--color-surface` → `--color-surface-container` | MEDIA | inspección · `MOBILE.md` §6b·1 |
-| `M11` | Pares etiqueta/dato sueltos sobre el fondo en vez de agrupados en una tarjeta, o divisores a sangre en vez de insetados al padding | MEDIA | inspección · §6b·2 |
-| `M12` | Header de sección en escala de heading y adentro del grupo, en vez de caption/600/muted y afuera | MEDIA | inspección · §6b·3 |
+| `M10` | Secciones separadas por línea en vez de por superficie: fondo plano con `<hr>` o bordes sueltos, sin el escalón `--color-surface` → `--color-surface-container` | MEDIA | `check-render` (un `<hr>`, o un bloque con borde y el mismo fondo que la pantalla) · `MOBILE.md` §6b·1 |
+| `M11` | Pares etiqueta/dato sueltos sobre el fondo en vez de agrupados en una tarjeta, o divisores a sangre en vez de insetados al padding | MEDIA | `check-render` (una `.screen-row` fuera de un `.screen-group`); el divisor a sangre sigue siendo inspección · §6b·2 |
+| `M12` | Header de sección en escala de heading y adentro del grupo, en vez de caption/600/muted y afuera | MEDIA | `check-render` (compara contra el caption **del contexto**, no el de `:root`) · §6b·3 |
 | `M13` | **La etiqueta pesa más que su dato**: la etiqueta en escala de heading o en `--text-primary`, y el valor más chico o apagado. Es la falla que el sistema produce solo | ALTA | `check-render` (compara tamaño y contraste de `.screen-row-label` contra `.screen-row-value`) · §6b·4 |
-| `M14` | Acción primaria al final del contenido en vez de anclada abajo, fuera del scroll | MEDIA | inspección · §6b·6 |
+| `M14` | Acción primaria al final del contenido en vez de anclada abajo, fuera del scroll | MEDIA | `check-render` (primaria que fluye con el contenido, sin `.screen-action` ni posición fija) · §6b·6 |
 | `M15` | `--font-mono` en prosa, captions, fechas sueltas o como gesto de marca. En nativo el mono es solo para datos tabulares que se comparan en columna | MEDIA | `check-render` (mono con 5+ palabras dentro de un contenedor nativo — un identificador en mono es el uso correcto) · §6b·7 |
 
 ---

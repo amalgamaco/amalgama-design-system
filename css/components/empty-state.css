@@ -33,7 +33,7 @@
   margin: 0 auto 16px;
   display: flex; align-items: center; justify-content: center;
   color: var(--color-on-surface-variant);
-  font-size: 48px;
+  font-size: 48px;  /* ds-allow: es la caja del glifo heredado, no tipografia — el SVG manda abajo */
 }
 .empty-state-icon svg { width: 48px; height: 48px; stroke-width: var(--icon-stroke, 2); }
 .empty-state-title {

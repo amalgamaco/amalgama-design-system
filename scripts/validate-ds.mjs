@@ -438,7 +438,7 @@ console.log("\n[14] el interlineado del componente sale de su tamaño");
      token exacto YA existe. Lo que no tiene token no es deuda del componente, es
      un hueco de la escala — y se cuenta acá para que se vea, porque el punto
      ciego de esta capa era justamente que nadie la medía. */
-  const conTok = [], huecos = new Map();
+  const conTok = [], huecos = new Map(), declarados = [];
   // SOLO el bloque :root. El archivo tiene además un bloque nativo con los mismos
   // nombres y otros valores; leerlo entero devuelve pares inventados (16px "es"
   // body-md). Ya me pasó: la escala se lee donde la escala vive.
@@ -450,12 +450,21 @@ console.log("\n[14] el interlineado del componente sale de su tamaño");
     escala.set(v, [...(escala.get(v) || []), m[1]]);
   }
   for (const f of fs.readdirSync(dirC).filter(x => x.endsWith(".css"))) {
-    const src = fs.readFileSync(path.join(dirC, f), "utf8")
-                  .replace(/\/\*[\s\S]*?\*\//g, c => c.replace(/[^\n]/g, " "));
+    const crudo = fs.readFileSync(path.join(dirC, f), "utf8");
+    const linesRaw = crudo.split("\n");                       // con comentarios: ahi vive el ds-allow
+    const src = crudo.replace(/\/\*[\s\S]*?\*\//g, c => c.replace(/[^\n]/g, " "));
     src.split("\n").forEach((line, i) => {
+      // Excepcion declarada en la propia linea, con motivo, igual que el ds-allow de
+      // check-output: `font-size: 48px; /* ds-allow: es la caja del glifo, no tipografia */`.
+      // Existe porque quedan dos font-size que NO son texto —los iconos de
+      // empty-state y placeholder, que conservan el tamano de glifo por
+      // compatibilidad— y dejarlos como warning permanente entrena a ignorar los
+      // warnings, que es peor que no tenerlos.
+      const exc = /ds-allow\s*:\s*(.{10,})/.exec(linesRaw[i] ?? "");
       for (const m of line.matchAll(/(?:^|[;{]|\s)font-size\s*:\s*([^;}]+)/g)) {
         const v = m[1].trim();
         if (v.startsWith("var(") || !/^[\d.]+px$/.test(v)) continue;
+        if (exc) { declarados.push(`${f}:${i + 1} { ${v} } — ${exc[1].replace(/\*\/.*$/, "").trim()}`); continue; }
         escala.has(v) ? conTok.push(`${f}:${i + 1} { ${v} } → ${escala.get(v).map(t => `var(${t})`).join(" | ")}`)
                       : huecos.set(v, (huecos.get(v) || 0) + 1);
       }
@@ -474,6 +483,7 @@ console.log("\n[14] el interlineado del componente sale de su tamaño");
   const th = [...huecos.values()].reduce((a, b) => a + b, 0);
   if (th) warn(`${th} tamaño(s) sin token posible en css/components — hueco de la escala: ` +
     [...huecos.entries()].sort((a, b) => b[1] - a[1]).map(([v, n]) => `${v}×${n}`).join(" · "));
+  for (const d of declarados) console.log(`  · excepción declarada — ${d}`);
 }
 
 

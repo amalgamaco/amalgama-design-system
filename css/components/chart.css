@@ -55,7 +55,11 @@
 
 .chart-axis-label {
   fill: var(--text-muted);
-  font-size: 11px;
+  /* 11px en font-body no tenía token: el único 11px de la escala es
+     --font-size-mono-sm, y un rótulo de eje no es mono. Por ROL es texto de
+     apoyo de un dato — el mismo registro que un timestamp — así que va a
+     caption. Un píxel más grande, y deja de ser un valor suelto. */
+  font-size: var(--font-size-caption);
   font-family: var(--font-body);
 }
 

@@ -224,16 +224,31 @@
 
 /* ─────────────────────────────────────
    Tamaños (aplica a cualquier variante)
-   XS  → 24px min-height · dense lists, tags
-   SM  → 32px min-height · compact toolbars (default small)
-   MD  → 36px min-height · default (base styles above)
-   LG  → 44px min-height · primary CTAs, touch targets
-   XL  → 52px min-height · hero / marketing surfaces
+
+   La escalera del botón es PROPORCIONAL al alto del control, no la escala de
+   texto: el label de un botón de 24px es chico porque el botón es chico, no
+   porque sea texto secundario. Que SM y MD coincidan con --font-size-body-sm y
+   --font-size-body-md es una coincidencia de VALOR, no de rol — mapearlos por
+   ahí es el error que este repo ya cometió dos veces (11px "es"
+   --font-size-mono-sm, y el label de un botón no es mono).
+
+   Vive acá y no en variables.css a propósito: GOVERNANCE §21 dice que un tier de
+   custom properties para UN componente se define en el archivo del componente,
+   como hace Segmented Button con --seg-btn-*. Si algún día un segundo componente
+   necesita esta escalera, se promueve.
 ───────────────────────────────────── */
-.btn-xs { padding: 3px var(--space-2);   font-size: 11px;   font-weight: 600; min-height: 24px; border-radius: var(--radius-button, var(--radius-sm)); }
-.btn-sm { padding: var(--space-1-5) var(--space-3);  font-size: var(--font-size-body-sm); min-height: 32px; border-radius: var(--radius-button, var(--radius-sm)); }
-.btn-lg { padding: var(--space-2-5) 22px; font-size: 15px;   min-height: 44px; border-radius: var(--radius-button, var(--radius-md)); }
-.btn-xl { padding: var(--space-3-5) 30px; font-size: 16px;   font-weight: 700; min-height: 52px; border-radius: var(--radius-button, var(--radius-lg)); }
+.btn-xs, .btn-sm, .btn-lg, .btn-xl,
+.btn-primary, .btn-secondary, .btn-tertiary, .btn-text, .btn-link, .btn-ghost, .btn-next {
+  --btn-h-xs: 24px;   --btn-label-xs: 11px;    /* dense lists, tags               */
+  --btn-h-sm: 32px;   --btn-label-sm: 12.5px;  /* compact toolbars                */
+  --btn-h-md: 36px;   --btn-label-md: 13.5px;  /* default — base styles de arriba */
+  --btn-h-lg: 44px;   --btn-label-lg: 15px;    /* CTAs, piso táctil               */
+  --btn-h-xl: 52px;   --btn-label-xl: 16px;    /* hero / marketing                */
+}
+.btn-xs { padding: 3px var(--space-2);   font-size: var(--btn-label-xs); font-weight: 600; min-height: var(--btn-h-xs); border-radius: var(--radius-button, var(--radius-sm)); }
+.btn-sm { padding: var(--space-1-5) var(--space-3);  font-size: var(--btn-label-sm); min-height: var(--btn-h-sm); border-radius: var(--radius-button, var(--radius-sm)); }
+.btn-lg { padding: var(--space-2-5) 22px; font-size: var(--btn-label-lg); min-height: var(--btn-h-lg); border-radius: var(--radius-button, var(--radius-md)); }
+.btn-xl { padding: var(--space-3-5) 30px; font-size: var(--btn-label-xl); font-weight: 700; min-height: var(--btn-h-xl); border-radius: var(--radius-button, var(--radius-lg)); }
 
 .btn-text.btn-xs { padding: 3px var(--space-1-5); }
 .btn-text.btn-sm { padding: var(--space-1-5) var(--space-2-5); }

@@ -170,7 +170,7 @@ const SONDA = (U) => {
   };
 
   const out = { contraste: [], medida: [], targets: [], proximidad: [], anidadas: [], etiquetas: [],
-                m13: [], m15: [], exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
+                m10: [], m11: [], m12: [], m13: [], m14: [], m15: [], exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
   const marcar = (el, id, dato) => {
     const motivo = permitido(el, id);
     if (motivo) { out.exentos.push({ id, sel: sel(el), motivo }); return null; }
@@ -334,6 +334,90 @@ const SONDA = (U) => {
     if (d) out.m13.push(d);
   }
 
+  /* ── M10 · la jerarquia la hace la superficie, no la linea ──────────────
+     MOBILE.md §6b·1: el fondo de la pantalla es --color-surface y cada bloque va
+     en --color-surface-container. Un <hr> separando secciones es un reflejo de
+     web; un bloque con borde pero el MISMO fondo que la pantalla tambien: esta
+     dibujando el limite con una linea en vez de con el escalon. */
+  for (const nat of document.querySelectorAll("[data-platform='native']")) {
+    if (!vis(nat)) continue;
+    const bgPantalla = fondo(nat);
+    for (const hr of nat.querySelectorAll("hr")) {
+      if (!vis(hr)) continue;
+      const d = marcar(hr, "M10", { sel: sel(hr), motivo: "un <hr> separa secciones" });
+      if (d) out.m10.push(d);
+    }
+    if (!bgPantalla) continue;
+    for (const hijo of nat.children) {
+      if (!vis(hijo)) continue;
+      if (hijo.tagName === "HR") continue;          // ya contado arriba, no dos veces
+      const cs = getComputedStyle(hijo);
+      const tieneBorde = ["Top", "Bottom"].some((l) =>
+        parseFloat(cs["border" + l + "Width"]) > 0 && cs["border" + l + "Style"] !== "none");
+      if (!tieneBorde) continue;
+      const bg = fondo(hijo);
+      if (!bg) continue;
+      const igual = bg.r === bgPantalla.r && bg.g === bgPantalla.g && bg.b === bgPantalla.b;
+      if (!igual) continue;
+      const d = marcar(hijo, "M10", { sel: sel(hijo), motivo: "bloque con borde y el mismo fondo que la pantalla: separa por linea, no por superficie" });
+      if (d) out.m10.push(d);
+    }
+  }
+
+  /* ── M11 · lo que es una lista va en una lista agrupada ──────────────────
+     §6b·2: un conjunto de pares etiqueta/dato va DENTRO de una tarjeta. Una
+     .screen-row suelta sobre el fondo es la falla literal. */
+  for (const row of document.querySelectorAll(".screen-row")) {
+    if (!vis(row)) continue;
+    if (row.closest(".screen-group")) continue;
+    const d = marcar(row, "M11", { sel: sel(row), motivo: "fila etiqueta/dato fuera de un .screen-group" });
+    if (d) out.m11.push(d);
+  }
+
+  /* ── M12 · el header de seccion va AFUERA del grupo ──────────────────────
+     §6b·3: caption/600/muted y alineado al borde del grupo. Adentro de la
+     tarjeta compite con los datos y gana la etiqueta, que es justo lo que no se
+     quiere. Se chequean las dos mitades: donde esta, y a que cuerpo esta puesto. */
+  {
+    for (const h of document.querySelectorAll(".screen-section-header")) {
+      if (!vis(h)) continue;
+      const cs = getComputedStyle(h);
+      // El caption se lee DESDE EL ELEMENTO, no desde :root: adentro de
+      // [data-platform="native"] la escala sube, y leer la del root marcaba
+      // headers correctos por estar "a 13px cuando caption es 12". Es la misma
+      // trampa que M5 — usar la escala de escritorio en territorio nativo.
+      const caption = parseFloat(cs.getPropertyValue("--font-size-caption")) || 12;
+      const motivos = [];
+      if (h.closest(".screen-group")) motivos.push("esta ADENTRO del grupo");
+      const px = parseFloat(cs.fontSize);
+      if (px > caption + 0.5) motivos.push(`esta a ${px}px y el rol es caption (${caption}px)`);
+      if (!motivos.length) continue;
+      const d = marcar(h, "M12", { sel: sel(h), motivo: motivos.join(" y ") });
+      if (d) out.m12.push(d);
+    }
+  }
+
+  /* ── M14 · la accion primaria se ancla abajo ─────────────────────────────
+     §6b·6: fuera del scroll. Un boton al final del contenido obliga a scrollear
+     para poder actuar, y en una lista larga desaparece. Se marca cuando la
+     primaria de una pantalla nativa fluye con el contenido —posicion static y
+     sin .screen-action alrededor— en vez de estar anclada. */
+  for (const nat of document.querySelectorAll("[data-platform='native']")) {
+    if (!vis(nat)) continue;
+    for (const btn of nat.querySelectorAll(".btn-primary")) {
+      if (!vis(btn)) continue;
+      if (btn.closest(".screen-action")) continue;
+      let anclado = false;
+      for (let n = btn; n && n !== nat.parentElement; n = n.parentElement) {
+        const pos = getComputedStyle(n).position;
+        if (pos === "sticky" || pos === "fixed" || pos === "absolute") { anclado = true; break; }
+      }
+      if (anclado) continue;
+      const d = marcar(btn, "M14", { sel: sel(btn), motivo: "la primaria fluye con el contenido en vez de estar anclada (.screen-action o posicion fija)" });
+      if (d) out.m14.push(d);
+    }
+  }
+
   /* ── M15 · mono fuera de su trabajo ──────────────────────────────────────
      "En nativo el mono es solo para datos tabulares que se comparan en columna"
      (FAILURES.md M15, MOBILE.md §6b·7). FAILURES decia que se detectaba con un
@@ -397,7 +481,7 @@ for (const file of files) {
     }
 
     const r = { contraste: [], medida: [], targets: [], proximidad: [], anidadas: [], etiquetas: [],
-                m13: [], m15: [], exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
+                m10: [], m11: [], m12: [], m13: [], m14: [], m15: [], exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
     for (const vista of vistas) {
       if (vista != null && APLICAR) {
         try {
@@ -406,8 +490,35 @@ for (const file of files) {
         } catch { /* una vista que no abre no rompe el resto */ }
       }
       const parcial = await page.evaluate(SONDA, UMBRAL);
-      for (const k of ["contraste", "medida", "targets", "proximidad", "anidadas", "etiquetas", "m13", "m15", "exentos"])
+      for (const k of ["contraste", "medida", "targets", "proximidad", "anidadas", "etiquetas", "m10", "m11", "m12", "m13", "m14", "m15", "exentos"])
         r[k].push(...parcial[k]);
+
+      /* Y de nuevo en OSCURO, solo para lo que depende del color.
+         Sin esto, el contraste se medía únicamente en claro — y la mitad de las
+         fallas de color del sistema viven en oscuro: un `color-mix(container 42%,
+         surface)` a nivel componente mueve el FONDO y deja el texto donde estaba,
+         y eso ni [15] lo ve (lee variables.css, no el componente) ni lo veía este
+         chequeo. El tema va en <html>, que es donde el DS lo documenta. */
+      if (vp.nombre === "1440") {
+        // Solo si la pagina REACCIONA al tema. Una pagina sin modo oscuro no cambia
+        // nada al ponerle el atributo, y medirla igual reportaria sus colores claros
+        // como si fueran un oscuro roto. Se comprueba mirando si el fondo se movio.
+        const reacciona = await page.evaluate(() => {
+          const antes = getComputedStyle(document.body).backgroundColor;
+          document.documentElement.setAttribute("data-theme", "dark");
+          const despues = getComputedStyle(document.body).backgroundColor;
+          if (antes === despues) { document.documentElement.removeAttribute("data-theme"); return false; }
+          return true;
+        });
+        if (!reacciona) { r.sinOscuro = true; continue; }
+        await page.waitForTimeout(120);
+        const osc = await page.evaluate(SONDA, UMBRAL);
+        for (const c of osc.contraste) r.contraste.push({ ...c, tema: "oscuro" });
+        for (const m of osc.m13) r.m13.push({ ...m, tema: "oscuro" });
+        r.exentos.push(...osc.exentos);
+        await page.evaluate(() => document.documentElement.removeAttribute("data-theme"));
+        await page.waitForTimeout(80);
+      }
       // La cobertura se queda con el MAXIMO de visibles: es cuanto se llego a ver,
       // no la suma de todas las pasadas (los elementos del shell se repiten).
       r.sinFondo += parcial.sinFondo;
@@ -424,11 +535,11 @@ for (const file of files) {
     if (vp.nombre === "1440") {
       const vistos = new Set();
       for (const c of r.contraste) {
-        const k = `${c.sel}|${c.ratio}`;
+        const k = `${c.sel}|${c.ratio}|${c.tema || "claro"}`;
         if (vistos.has(k)) continue;
         vistos.add(k);
         add("F7", "ALTA", file,
-            `contraste por debajo de AA (${c.ratio}:1, piso ${c.piso}:1 a ${c.px}px)`,
+            `contraste por debajo de AA en ${c.tema || "claro"} (${c.ratio}:1, piso ${c.piso}:1 a ${c.px}px)`,
             `${c.sel} — “${c.texto}”`, vp.nombre);
       }
     }
@@ -472,7 +583,15 @@ for (const file of files) {
     // M13 / M15 · nativo — una sola vez, no dependen del ancho
     if (vp.nombre === "1440") {
       for (const m of r.m13)
-        add("M13", "ALTA", file, `la etiqueta pesa más que su dato: ${m.motivos}`, m.sel, vp.nombre);
+        add("M13", "ALTA", file, `la etiqueta pesa más que su dato en ${m.tema || "claro"}: ${m.motivos}`, m.sel, vp.nombre);
+      for (const m of r.m10)
+        add("M10", "MEDIA", file, `separación por línea en vez de por superficie — ${m.motivo}`, m.sel, vp.nombre);
+      for (const m of r.m11)
+        add("M11", "MEDIA", file, `${m.motivo}`, m.sel, vp.nombre);
+      for (const m of r.m12)
+        add("M12", "MEDIA", file, `header de sección: ${m.motivo}`, m.sel, vp.nombre);
+      for (const m of r.m14)
+        add("M14", "MEDIA", file, `${m.motivo}`, m.sel, vp.nombre);
       for (const m of r.m15)
         add("M15", "MEDIA", file, "mono en prosa dentro de una pantalla nativa — el mono es para datos que se comparan en columna",
             `${m.sel} — “${m.txt}”`, vp.nombre);

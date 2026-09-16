@@ -25,5 +25,5 @@
   color: var(--text-muted);
   font-size: var(--font-size-body-lg);
 }
-.placeholder-panel .placeholder-icon { font-size: 32px; margin-bottom: 12px; }
+.placeholder-panel .placeholder-icon { font-size: 32px; margin-bottom: 12px; }  /* ds-allow: caja del glifo heredado, no tipografia */
 .placeholder-panel p { line-height: var(--line-height-prose); }
