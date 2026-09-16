@@ -87,9 +87,13 @@ input, select, textarea { font-family: inherit; }
 
 .text-muted { color: var(--text-muted); }
 .text-secondary { color: var(--text-secondary); }
-.text-accent { color: var(--interactive); }
-.text-success { color: var(--green); }
-.text-error { color: var(--red); }
+/* Los alias legacy --interactive / --green / --red apuntan a los tonos de SEÑAL
+   (--color-secondary, --color-success, --color-error). Como fondo o como borde
+   estan bien; como TEXTO chico ninguno llega a AA: daban 3.58:1, 2.38:1 y 3.58:1.
+   La familia *-text existe justamente para el caso de leerlos. */
+.text-accent { color: var(--color-secondary-text); }
+.text-success { color: var(--color-success-text); }
+.text-error { color: var(--color-error-text); }
 
 .font-mono { font-family: var(--font-mono); }
 .font-heading { font-family: var(--font-heading); }

@@ -162,6 +162,7 @@
   --color-text-primary: rgb(var(--e-text-primary));
   --color-text-secondary: rgb(var(--e-text-secondary));
   --color-text-muted: rgb(var(--e-text-muted));
+  --color-secondary-text: rgb(var(--e-color-secondary-text));
   --color-success-text: rgb(var(--e-color-success-text));
   --color-error-text: rgb(var(--e-color-error-text));
   --color-warning-text: rgb(var(--e-color-warning-text));

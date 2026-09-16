@@ -52,9 +52,9 @@
   outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
-.tab:active { color: var(--color-secondary); }
+.tab:active { color: var(--color-secondary-text); }
 .tab.active {
-  color: var(--color-secondary);
+  color: var(--color-secondary-text);
   font-weight: 600;
 }
 .tab:disabled {

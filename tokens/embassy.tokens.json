@@ -923,34 +923,41 @@
       "$dark": "#9FA3AE",
       "$alias": "--color-on-surface-variant"
     },
+    "--color-secondary-text": {
+      "$type": "color",
+      "$value": "#1E3A8C",
+      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
+      "$dark": "#B9CCFF",
+      "$alias": "--secondary-950"
+    },
     "--color-success-text": {
       "$type": "color",
       "$value": "#006D2C",
-      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
       "$alias": "--color-on-success-container"
     },
     "--color-error-text": {
       "$type": "color",
       "$value": "#BF0B29",
-      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
       "$alias": "--color-on-error-container"
     },
     "--color-warning-text": {
       "$type": "color",
       "$value": "#C43800",
-      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
       "$alias": "--color-on-warning-container"
     },
     "--color-info-text": {
       "$type": "color",
       "$value": "#001ABA",
-      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
       "$alias": "--color-on-info-container"
     },
     "--text-on-dark": {
       "$type": "color",
       "$value": "#FFFFFF",
-      "section": "Estados como TEXTO sobre una superficie.  color-success /  color-error están calibrados para funcionar como FONDO con su par -on  encima; usados como color de texto no llegan a AA en claro (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el contraste que corresponde. El color de marca y el color legible no tienen por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs.",
+      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
       "$alias": "--neutral-white"
     },
     "--interactive": {

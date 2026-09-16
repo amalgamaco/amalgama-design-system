@@ -168,6 +168,7 @@ class EmbassyColors {
   static const textPrimary = Color(0xFF01164D);
   static const textSecondary = Color(0xFF353A4A);
   static const textMuted = Color(0xFF63687A);
+  static const colorSecondaryText = Color(0xFF1E3A8C);
   static const colorSuccessText = Color(0xFF006D2C);
   static const colorErrorText = Color(0xFFBF0B29);
   static const colorWarningText = Color(0xFFC43800);
@@ -355,6 +356,7 @@ class EmbassyColors {
   static const textPrimaryDark = Color(0xFFEAEBED);
   static const textSecondaryDark = Color(0xFFBFC1C8);
   static const textMutedDark = Color(0xFF9FA3AE);
+  static const colorSecondaryTextDark = Color(0xFFB9CCFF);
   static const colorSuccessTextDark = Color(0xFF006D2C);
   static const colorErrorTextDark = Color(0xFFBF0B29);
   static const colorWarningTextDark = Color(0xFFC43800);

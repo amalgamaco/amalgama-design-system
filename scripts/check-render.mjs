@@ -14,6 +14,7 @@
  * Uso:
  *   node scripts/check-render.mjs <archivo.html> [...]
  *   node scripts/check-render.mjs --json runs/20260908-1430/guided/*.html
+ *   node scripts/check-render.mjs index.html --iterar "Object.keys(SECTIONS)" --aplicar "navigate(ID)"
  *
  * Necesita un navegador. El repo NO tiene dependencias a propósito, así que esto
  * es opcional: si Playwright no está, avisa cómo instalarlo y sale con 0 sin
@@ -25,7 +26,23 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 const asJson = process.argv.includes("--json");
-const files = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+const argv = process.argv.slice(2);
+const files = argv.filter((a) => !a.startsWith("--") && !/^[^-].*=/.test(a));
+const opt = (nombre) => {
+  const i = argv.indexOf(`--${nombre}`);
+  return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[i + 1] : null;
+};
+
+/* Una SPA dibuja una vista por vez y esconde el resto. Sin esto, medir el sitio
+   del DS medía 370 de 44.787 elementos —el 1%— y el "0 hallazgos" resultante
+   decía mucho menos de lo que parecía.
+     --iterar "<js que devuelve una lista de ids>"
+     --aplicar "<js con ID sustituido por cada id>"
+   Ej: --iterar "Object.keys(SECTIONS)" --aplicar "navigate(ID)"
+   No hay nada del sitio adentro del script: las dos expresiones las pone quien
+   sabe cómo navega su pagina. */
+const ITERAR = opt("iterar");
+const APLICAR = opt("aplicar");
 
 if (!files.length) {
   console.error("uso: node scripts/check-render.mjs <archivo.html> [...]");
@@ -119,7 +136,13 @@ const SONDA = (U) => {
   const fondo = (el) => {
     let n = el, acc = null;
     while (n) {
-      const c = rgb(getComputedStyle(n).backgroundColor);
+      const cs = getComputedStyle(n);
+      // Un degradado (o una imagen) no es un color y no se puede resolver a uno:
+      // el texto encima puede estar sobre cualquier punto de la rampa. Devolver
+      // null y NO medir es lo honesto — antes el chain caía hasta un ancestro
+      // blanco y reportaba blanco-sobre-blanco, 1:1, en una banda con gradiente.
+      if (cs.backgroundImage && cs.backgroundImage !== "none") return null;
+      const c = rgb(cs.backgroundColor);
       if (c && c.a > 0) { acc = acc ? mezclar(acc, c) : c; if (c.a === 1) return acc; }
       n = n.parentElement;
     }
@@ -146,7 +169,8 @@ const SONDA = (U) => {
     return motivo && motivo.length >= 10 ? motivo : null;
   };
 
-  const out = { contraste: [], medida: [], targets: [], proximidad: [], anidadas: [], etiquetas: [], exentos: [] };
+  const out = { contraste: [], medida: [], targets: [], proximidad: [], anidadas: [], etiquetas: [],
+                m13: [], m15: [], exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
   const marcar = (el, id, dato) => {
     const motivo = permitido(el, id);
     if (motivo) { out.exentos.push({ id, sel: sel(el), motivo }); return null; }
@@ -162,6 +186,7 @@ const SONDA = (U) => {
     const cs = getComputedStyle(el);
     const fg = rgb(cs.color); if (!fg || fg.a === 0) continue;
     const bg = fondo(el);
+    if (!bg) { out.sinFondo++; continue; }   // sobre degradado o imagen: no medible
     const px = parseFloat(cs.fontSize), peso = parseInt(cs.fontWeight, 10) || 400;
     const grande = px >= 24 || (px >= 18.66 && peso >= 700);
     const r = ratio(mezclar(fg, bg), bg);
@@ -271,6 +296,67 @@ const SONDA = (U) => {
         if (de) out.etiquetas.push(de); }
   }
 
+  /* ── Cobertura ───────────────────────────────────────────────────────────
+     Cuanto de la pagina se llego a medir. Un sitio de documentacion muestra UNA
+     seccion por vez y esconde el resto: en index.html eso es una de 107, asi que
+     un "0 hallazgos" sin este numero al lado dice mucho menos de lo que parece.
+     Un render mide lo que esta dibujado, no lo que esta en el archivo. */
+  {
+    const todos = document.querySelectorAll("body *");
+    out.cobertura.total = todos.length;
+    for (const el of todos) if (vis(el)) out.cobertura.visibles++;
+    out.cobertura.nativos = document.querySelectorAll("[data-platform='native']").length;
+  }
+
+  /* ── M13 · la etiqueta pesa mas que su dato ──────────────────────────────
+     La falla que el sistema produce solo (FAILURES.md M13, MOBILE.md §6b·4).
+     En una .screen-row el DATO es lo que se lee y la etiqueta lo acompaña. Se
+     compara por tamaño y por CONTRASTE contra el fondo, no por color: en claro
+     el dato es mas oscuro y en oscuro es mas claro, y el contraste ordena bien
+     en los dos. Si la etiqueta tiene mas cuerpo, o mas contraste que el dato,
+     la fila esta diciendo el rotulo en vez del dato. */
+  for (const row of document.querySelectorAll(".screen-row")) {
+    if (!vis(row)) continue;
+    const lab = row.querySelector(".screen-row-label");
+    const val = row.querySelector(".screen-row-value");
+    if (!lab || !val || !vis(lab) || !vis(val)) continue;
+    const cl = getComputedStyle(lab), cv = getComputedStyle(val);
+    const pl = parseFloat(cl.fontSize), pv = parseFloat(cv.fontSize);
+    const bg = fondo(row);
+    if (!bg) continue;
+    const rl = ratio(mezclar(rgb(cl.color) || { r: 0, g: 0, b: 0, a: 1 }, bg), bg);
+    const rv = ratio(mezclar(rgb(cv.color) || { r: 0, g: 0, b: 0, a: 1 }, bg), bg);
+    const motivos = [];
+    if (pl > pv) motivos.push(`la etiqueta mide ${pl}px y el dato ${pv}px`);
+    if (rl > rv + 0.2) motivos.push(`la etiqueta contrasta ${rl.toFixed(2)}:1 y el dato ${rv.toFixed(2)}:1`);
+    if (!motivos.length) continue;
+    const d = marcar(row, "M13", { sel: sel(row), motivos: motivos.join(" y ") });
+    if (d) out.m13.push(d);
+  }
+
+  /* ── M15 · mono fuera de su trabajo ──────────────────────────────────────
+     "En nativo el mono es solo para datos tabulares que se comparan en columna"
+     (FAILURES.md M15, MOBILE.md §6b·7). FAILURES decia que se detectaba con un
+     regex sobre font-mono y no habia ningun regex: el catalogo prometia una
+     cobertura que no existia.
+     Se mide PROSA, no presencia de mono: un identificador en mono —"accordion",
+     "ExpansionTile"— es exactamente el uso correcto, y marcarlo daba 111 falsos
+     positivos en la tabla de equivalencias del propio sitio. El corte son cinco
+     palabras: por debajo es un dato o una etiqueta, por encima es una frase.
+     Solo adentro de un contenedor nativo — en web el mono editorial es legitimo. */
+  for (const nat of document.querySelectorAll("[data-platform='native']")) {
+    if (!vis(nat)) continue;
+    for (const el of nat.querySelectorAll("*")) {
+      if (!vis(el)) continue;
+      if (!/mono/i.test(getComputedStyle(el).fontFamily)) continue;
+      const t = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.textContent).join(" ")
+                 .replace(/\s+/g, " ").trim();
+      if (t.split(" ").filter(Boolean).length < 5) continue;
+      const d = marcar(el, "M15", { sel: sel(el), txt: t.slice(0, 50) });
+      if (d) out.m15.push(d);
+    }
+  }
+
   return out;
 };
 
@@ -278,6 +364,7 @@ const SONDA = (U) => {
 
 const findings = [];
 const exenciones = new Map();   // clave id|sel -> {id, sel, motivo, file}
+const cobertura = new Map();    // file -> {total, visibles, nativos}
 const add = (id, sev, file, desc, evidence, vp) =>
   findings.push({ id, sev, file, desc, evidence, viewport: vp });
 
@@ -298,7 +385,37 @@ for (const file of files) {
       await page.goto(url, { waitUntil: "domcontentloaded", timeout: 20000 });
     }
     await page.waitForTimeout(250);
-    const r = await page.evaluate(SONDA, UMBRAL);
+
+    // Las vistas a recorrer. Sin --iterar es una sola: lo que la pagina muestra al abrir.
+    let vistas = [null];
+    if (ITERAR) {
+      try {
+        const lista = await page.evaluate(`(() => { try { return ${ITERAR}; } catch (e) { return null; } })()`);
+        if (Array.isArray(lista) && lista.length) vistas = lista;
+        else console.warn(`! --iterar no devolvió una lista en ${path.basename(file)} — se mide solo la vista inicial`);
+      } catch { console.warn(`! --iterar falló en ${path.basename(file)} — se mide solo la vista inicial`); }
+    }
+
+    const r = { contraste: [], medida: [], targets: [], proximidad: [], anidadas: [], etiquetas: [],
+                m13: [], m15: [], exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
+    for (const vista of vistas) {
+      if (vista != null && APLICAR) {
+        try {
+          await page.evaluate(`(() => { const ID = ${JSON.stringify(vista)}; try { ${APLICAR}; } catch (e) {} })()`);
+          await page.waitForTimeout(120);
+        } catch { /* una vista que no abre no rompe el resto */ }
+      }
+      const parcial = await page.evaluate(SONDA, UMBRAL);
+      for (const k of ["contraste", "medida", "targets", "proximidad", "anidadas", "etiquetas", "m13", "m15", "exentos"])
+        r[k].push(...parcial[k]);
+      // La cobertura se queda con el MAXIMO de visibles: es cuanto se llego a ver,
+      // no la suma de todas las pasadas (los elementos del shell se repiten).
+      r.sinFondo += parcial.sinFondo;
+      r.cobertura.total = Math.max(r.cobertura.total, parcial.cobertura.total);
+      r.cobertura.visibles = Math.max(r.cobertura.visibles, parcial.cobertura.visibles);
+      r.cobertura.nativos = Math.max(r.cobertura.nativos, parcial.cobertura.nativos);
+      r.cobertura.vistas = vistas.length;
+    }
     await page.close();
 
     for (const e of r.exentos || []) exenciones.set(`${e.id}|${e.sel}`, { ...e, file });
@@ -351,6 +468,16 @@ for (const file of files) {
       for (const e of r.etiquetas)
         add("D12", "ALTA", file, `lo más grande de la stat-card no es la cifra (${e.px}px)`,
             `${e.sel} — “${e.mayor}”`, vp.nombre);
+
+    // M13 / M15 · nativo — una sola vez, no dependen del ancho
+    if (vp.nombre === "1440") {
+      for (const m of r.m13)
+        add("M13", "ALTA", file, `la etiqueta pesa más que su dato: ${m.motivos}`, m.sel, vp.nombre);
+      for (const m of r.m15)
+        add("M15", "MEDIA", file, "mono en prosa dentro de una pantalla nativa — el mono es para datos que se comparan en columna",
+            `${m.sel} — “${m.txt}”`, vp.nombre);
+      cobertura.set(file, r.cobertura);
+    }
   }
 }
 
@@ -360,11 +487,21 @@ const count = (s) => findings.filter((f) => f.sev === s).length;
 const summary = { BLOQ: count("BLOQ"), ALTA: count("ALTA"), MEDIA: count("MEDIA"), BAJA: count("BAJA"), total: findings.length };
 
 if (asJson) {
-  console.log(JSON.stringify({ files, summary, findings, exenciones: [...exenciones.values()] }, null, 2));
+  console.log(JSON.stringify({ files, summary, findings, exenciones: [...exenciones.values()], cobertura: [...cobertura] }, null, 2));
 } else {
   const order = { BLOQ: 0, ALTA: 1, MEDIA: 2, BAJA: 3 };
   for (const f of findings.sort((a, b) => order[a.sev] - order[b.sev] || a.id.localeCompare(b.id))) {
     console.log(`[${f.id} · ${f.sev} · ${f.viewport}px] ${path.basename(f.file)} — ${f.desc}\n    ${f.evidence}`);
+  }
+  for (const [f, c] of cobertura) {
+    const pct = c.total ? Math.round((c.visibles / c.total) * 100) : 0;
+    const nota = pct < 60
+      ? "  ← el resto está oculto y NO se midió: un render mide lo dibujado, no el archivo"
+      : "";
+    console.log(`[cobertura] ${path.basename(f)} — ${c.visibles} de ${c.total} elementos visibles por vista (${pct}%)` +
+      (c.vistas > 1 ? ` · ${c.vistas} vista(s) recorrida(s)` : "") +
+      (c.nativos ? ` · ${c.nativos} contenedor(es) data-platform="native"` : "") +
+      (c.vistas > 1 ? "" : nota));
   }
   for (const e of exenciones.values())
     console.log(`[${e.id} · EXCEPCIÓN DECLARADA] ${path.basename(e.file)} — ${e.sel}\n    ${e.motivo}`);

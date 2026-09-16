@@ -284,6 +284,16 @@
      (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el
      contraste que corresponde. El color de marca y el color legible no tienen
      por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs. */
+  /* El acento cuando hay que LEERLO. --color-secondary es #4F80FF: 3.58:1 sobre
+     blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para
+     objetos graficos), no para el label de una pestaña seleccionada. La familia
+     *-text ya existia para los cuatro de estado y a secondary le faltaba: por eso
+     .tab.active fallaba AA en todos los productos que usan tabs, con el token
+     correcto de la familia correcta escrito en el componente.
+     No usa --color-on-secondary-container (navy #01164D) como hacen los de estado,
+     porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia
+     con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco. */
+  --color-secondary-text: var(--secondary-950);
   --color-success-text: var(--color-on-success-container);
   --color-error-text:   var(--color-on-error-container);
   --color-warning-text: var(--color-on-warning-container);
@@ -657,6 +667,9 @@
   --color-primary-hover:             var(--primary-50);           /* #E4E7EF */
   /* Secondary · Agile Blue — 4 valores distintos (sin duplicación) */
   --color-secondary:                 var(--secondary-300);        /* #B9CCFF */
+  /* En oscuro el acento YA es claro sobre fondo oscuro (11.31:1): el -950 de
+     claro seria azul oscuro sobre casi negro. Recalibra como cualquier rol. */
+  --color-secondary-text:            var(--secondary-300);        /* #B9CCFF */
   --color-on-secondary:              var(--secondary-950);        /* #1E3A8C */
   --color-secondary-container:       var(--secondary-925);        /* #3A5BB0 */
   --color-on-secondary-container:    var(--secondary-100);        /* #DCE6FF */

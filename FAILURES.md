@@ -233,9 +233,9 @@ correcto y marcarlo sería un falso positivo.
 | `M10` | Secciones separadas por línea en vez de por superficie: fondo plano con `<hr>` o bordes sueltos, sin el escalón `--color-surface` → `--color-surface-container` | MEDIA | inspección · `MOBILE.md` §6b·1 |
 | `M11` | Pares etiqueta/dato sueltos sobre el fondo en vez de agrupados en una tarjeta, o divisores a sangre en vez de insetados al padding | MEDIA | inspección · §6b·2 |
 | `M12` | Header de sección en escala de heading y adentro del grupo, en vez de caption/600/muted y afuera | MEDIA | inspección · §6b·3 |
-| `M13` | **La etiqueta pesa más que su dato**: la etiqueta en escala de heading o en `--text-primary`, y el valor más chico o apagado. Es la falla que el sistema produce solo | ALTA | inspección · §6b·4 |
+| `M13` | **La etiqueta pesa más que su dato**: la etiqueta en escala de heading o en `--text-primary`, y el valor más chico o apagado. Es la falla que el sistema produce solo | ALTA | `check-render` (compara tamaño y contraste de `.screen-row-label` contra `.screen-row-value`) · §6b·4 |
 | `M14` | Acción primaria al final del contenido en vez de anclada abajo, fuera del scroll | MEDIA | inspección · §6b·6 |
-| `M15` | `--font-mono` en prosa, captions, fechas sueltas o como gesto de marca. En nativo el mono es solo para datos tabulares que se comparan en columna | MEDIA | regex sobre `font-mono` / `DM Mono` · §6b·7 |
+| `M15` | `--font-mono` en prosa, captions, fechas sueltas o como gesto de marca. En nativo el mono es solo para datos tabulares que se comparan en columna | MEDIA | `check-render` (mono con 5+ palabras dentro de un contenedor nativo — un identificador en mono es el uso correcto) · §6b·7 |
 
 ---
 
