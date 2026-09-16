@@ -582,5 +582,65 @@ console.log("\n[15] los pares semánticos pasan AA");
 }
 
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   [16] el bloque [data-theme="light"] es un espejo de :root
+
+   Existe para poder meter un demo en claro adentro de una pagina oscura, y para
+   eso reescribe a mano 54 tokens de la capa semantica. Es una copia, con todo lo
+   que eso implica: cuando :root cambia, la copia no falla — miente.
+
+   Ya paso. Alguien descubrio que --color-on-warning-container daba 3.50:1, lo
+   movio al -925 en :root y dejo la nota explicando por que; el espejo se quedo en
+   el -900. Meses despues un badge de "En revision" renderizaba a 3.50:1 sin que
+   nada lo dijera, y aparecio midiendo el render, no leyendo el CSS.
+
+   Compara VALOR RESUELTO, no texto: el espejo escribe literales a proposito
+   (el shell de la doc reasigna primitivos), asi que comparar la expresion daria
+   54 diferencias falsas.
+   ──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[16] el bloque [data-theme=\"light\"] no se quedó atrás de :root");
+{
+  const raw = read("css/variables.css").replace(/\/\*[\s\S]*?\*\//g, "");
+  const bloque = (marca) => {
+    const i = raw.indexOf(marca); if (i < 0) return "";
+    const o = raw.indexOf("{", i); let d = 0, j = o;
+    for (; j < raw.length; j++) { if (raw[j] === "{") d++; else if (raw[j] === "}") { d--; if (!d) break; } }
+    return raw.slice(o + 1, j);
+  };
+  const leer = (blk) => {
+    const m = {};
+    for (const x of blk.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)) m[x[1]] = x[2].trim();
+    return m;
+  };
+  const raiz = leer(bloque(":root"));
+  const espejoPropio = leer(bloque('[data-theme="light"]'));
+  const espejo = { ...raiz, ...espejoPropio };
+  const resolver = (map, v, d = 0) => {
+    if (d > 12 || v == null) return null;
+    v = v.trim();
+    const m = /^var\(\s*(--[\w-]+)\s*(?:,([^)]*))?\)/.exec(v);
+    if (m) return map[m[1]] !== undefined ? resolver(map, map[m[1]], d + 1)
+                                          : (m[2] ? resolver(map, m[2], d + 1) : null);
+    return v;
+  };
+  const norm = (x) => String(x).toLowerCase().replace(/\s/g, "");
+  const distintos = [], huerfanos = [];
+  let iguales = 0;
+  for (const k of Object.keys(espejoPropio)) {
+    if (!(k in raiz)) { huerfanos.push(k); continue; }
+    const a = resolver(raiz, raiz[k]), b = resolver(espejo, espejoPropio[k]);
+    if (a == null || b == null) continue;
+    if (norm(a) !== norm(b)) distintos.push(`${k}: :root=${a} · espejo=${b}`);
+    else iguales++;
+  }
+  if (distintos.length)
+    fail(`${distintos.length} token(s) donde el espejo se quedó atrás de :root — una copia que no falla, miente: `
+         + distintos.join(" · "));
+  else ok(`los ${iguales} tokens del espejo resuelven igual que en :root`);
+  if (huerfanos.length)
+    warn(`${huerfanos.length} token(s) solo en el espejo, sin equivalente en :root: ` + huerfanos.join(" · "));
+}
+
+
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);

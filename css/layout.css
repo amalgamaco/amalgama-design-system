@@ -111,10 +111,14 @@
   margin-left: auto;
   font-size: 11px;
   font-weight: 600;
-  background: var(--interactive-light);
-  /* --interactive sobre --interactive-light daba 2.54:1: el contador del nav era
-     azul de señal sobre azul palido. Mismo caso que .text-accent. */
-  color: var(--color-secondary-text);
+  /* El par CONTAINER, no "acento sobre acento claro". Empezó en --interactive
+     sobre --interactive-light (2.54:1); lo pasé a --color-secondary-text y arregló
+     el claro pero en oscuro seguía en 3.98:1, porque ahí el acento ya es claro y
+     el fondo también. Un contador sobre superficie tintada es exactamente para lo
+     que existe el par container, y [15] lo certifica en los DOS temas:
+     12.16:1 en claro y 5.09:1 en oscuro. */
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
   padding: 1px 7px;
   border-radius: var(--radius-full);
 }
