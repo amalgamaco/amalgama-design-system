@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@v1.2.0/css/components.css">
 <!-- app shell (sidebar + topbar) solamente: .../css/layout.css -->
 <!-- preview de pantalla nativa (marco de teléfono): .../css/preview-native.css -->
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 ```
 
 Dark mode: `<html data-theme="dark">`. No agregues overrides por tema.

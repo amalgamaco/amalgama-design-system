@@ -6,8 +6,8 @@
 <title>Amalgama Design System</title>
 <meta name="description" content="Sistema de diseño de Amalgama — tokens, componentes y documentación viva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css?v=01dca082">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/variables.css?v=f1665b81">
 <link rel="stylesheet" href="css/md-sys-bridge.css?v=a6e3f4a0">
 <link rel="stylesheet" href="css/base.css?v=dafca354">
 <link rel="stylesheet" href="css/composition.css?v=3bc8e5f7">
@@ -161,7 +161,7 @@
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); font-family: 'Inter', system-ui, sans-serif; font-size: var(--font-size-body-lg); line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); font-family: var(--font-body); font-size: var(--font-size-body-lg); line-height: 1.6; font-weight: 400; -webkit-font-smoothing: antialiased; }
 
 /* ── Layout ── */
 .ds-app { display: flex; min-height: 100vh; }
@@ -17281,7 +17281,7 @@ css/components/select.css · segmented-button.css · date-picker.css (+ calendar
       <p class="ds-p">El sistema no tiene build step. Linkéalo directo desde HTML:</p>
       <div class="ds-code-wrap">
         <pre class="ds-code solo"><code>&lt;!-- 1. Fonts --&gt;
-&lt;link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Epilogue:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&amp;family=Epilogue:wght@400;500;600;700;800&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;
 
 &lt;!-- 2. Design System CSS (en este orden) --&gt;
 &lt;link rel="stylesheet" href="path/to/amalgama-ds/css/variables.css"&gt;

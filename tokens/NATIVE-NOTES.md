@@ -2,7 +2,7 @@
 
 > Generado por scripts/build-tokens.mjs desde css/variables.css.
 
-44 de 323 tokens no se copian tal cual. El valor sigue siendo el mismo — cambia como se aplica.
+45 de 335 tokens no se copian tal cual. El valor sigue siendo el mismo — cambia como se aplica.
 
 | Token | Valor | Por que | En RN |
 |---|---|---|---|
@@ -20,6 +20,7 @@
 | `--line-height-heading-sm` | `1.35` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.35 |
 | `--line-height-heading-xs` | `1.4` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.4 |
 | `--line-height-body-lg` | `1.5` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.5 |
+| `--line-height-body-editorial` | `1.875` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.875 |
 | `--line-height-body-md` | `1.5` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.5 |
 | `--line-height-body-sm` | `1.6` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.6 |
 | `--line-height-label` | `1.4` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.4 |

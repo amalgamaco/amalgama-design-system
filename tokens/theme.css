@@ -97,6 +97,13 @@
   --color-info-700: rgb(var(--e-info-700));
   --color-info-800: rgb(var(--e-info-800));
   --color-info-900: rgb(var(--e-info-900));
+  --color-accent-hot-pink: rgb(var(--e-accent-hot-pink));
+  --color-accent-chelo-yellow: rgb(var(--e-accent-chelo-yellow));
+  --color-accent-kika-green: rgb(var(--e-accent-kika-green));
+  --color-on-accent: rgb(var(--e-color-on-accent));
+  --color-accent-pink-sebiche: rgb(var(--e-accent-pink-sebiche));
+  --color-accent-sky: rgb(var(--e-accent-sky));
+  --color-accent-lime: rgb(var(--e-accent-lime));
   --color-primary: rgb(var(--e-color-primary));
   --color-on-primary: rgb(var(--e-color-on-primary));
   --color-primary-container: rgb(var(--e-color-primary-container));
@@ -167,6 +174,7 @@
   --color-text-primary: rgb(var(--e-text-primary));
   --color-text-secondary: rgb(var(--e-text-secondary));
   --color-text-muted: rgb(var(--e-text-muted));
+  --color-text-prose: rgb(var(--e-text-prose));
   --color-secondary-text: rgb(var(--e-color-secondary-text));
   --color-success-text: rgb(var(--e-color-success-text));
   --color-error-text: rgb(var(--e-color-error-text));

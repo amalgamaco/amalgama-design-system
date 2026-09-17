@@ -5,6 +5,8 @@
 > **Fuente canónica:** `amalgamaco/amalgama-design-system`. Si este archivo y el repo se contradicen,
 > gana el repo — y este archivo es el bug.
 > **Complemento obligatorio:** `PUBLIC-API.md` (la lista de clases permitidas).
+> **Capa de marca:** `BRAND.md` — voz, nombres de color, logo, valores de imprenta, la galaxia y
+> la anatomía de una lámina. Este archivo dice cómo se ve el sistema; ése dice qué significa.
 
 ---
 
@@ -161,6 +163,7 @@ solamente). El único cálculo permitido es `color-mix()` sobre roles.
 | `--color-outline` (interactivo) · `--color-outline-variant` (sutil) | bordes |
 | `--color-focus`, `--color-focus-ring`, `--color-error-ring`, `--color-scrim` | foco y overlays |
 | `--chart-1` … `--chart-5` | series de datos, en ese orden |
+| `--accent-hot-pink` · `--accent-chelo-yellow` · `--accent-kika-green` (+ `--color-on-accent`) | los acentos de marca. **Máximo dos juntos**, nunca como fondo dominante, nunca para texto corrido, y **nunca amarillo sobre azul**. El `on` de los tres es navy: blanco no llega a AA en ninguno |
 
 Alias semánticos de página: `--bg`, `--surface`, `--card-bg`, `--sidebar-bg`, `--border`
 (chrome de contenedores, más tenue que `outline`), `--divider`, `--text-primary`, `--text-secondary`,
@@ -178,9 +181,14 @@ y lo escribe el generador, nunca una pantalla.
 
 ### 6.2 Tipografía
 
-**Epilogue** para headings · **Inter** para body y UI · **DM Mono** para código y labels técnicos.
-Siempre vía `var(--font-heading)` / `var(--font-body)` / `var(--font-mono)`, nunca el nombre de la
-familia entre comillas.
+**Epilogue** para headings · **Manrope** para párrafos y UI · **DM Mono** para código y labels
+técnicos. Siempre vía `var(--font-heading)` / `var(--font-body)` / `var(--font-mono)`, nunca el
+nombre de la familia entre comillas. Inter queda en el stack de `--font-body` como fallback, no
+como decisión.
+
+> **Manrope no tiene itálica.** Un `<em>` sale oblicuo sintético. Si un texto de verdad necesita
+> cursiva —una cita, un pie de foto editorial— es un caso de colateral y se resuelve ahí, no
+> inclinando la de UI.
 
 Todo `font-size` pasa por un token. Nada de px sueltos.
 
@@ -193,6 +201,7 @@ Todo `font-size` pasa por un token. Nada de px sueltos.
 | `--font-size-heading-sm` | 17 | h5 |
 | `--font-size-heading-xs` | 15 | h6 |
 | `--font-size-body-lg` | 14 | cuerpo destacado |
+| `--font-size-body-editorial` | 16 | **sólo colateral** — el cuerpo 16/30 del Manual, al lado de un titular editorial |
 | `--font-size-body-md` | 13.5 | **base de UI** — inputs, botones, celdas |
 | `--font-size-body-sm` | 12.5 | secundario |
 | `--font-size-label` | 13 | labels de formulario |
@@ -204,11 +213,19 @@ Pesos: `--font-weight-{regular,medium,semibold,bold,extrabold}` = 400/500/600/70
 
 ### 6.3 Espaciado, forma, elevación
 
-- **Espaciado** — grilla de 4px, escala rala: `--space-1,2,3,4,5,6,8,10,12,16,20`
-  (4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80px). **No existen 7, 9 ni 11.**
-- **Radio** — `--radius-sm` 4 · `-md` 8 · `-lg` 12 · `-xl` 16 · `-full` 9999.
+- **Espaciado** — grilla de 4px, escala rala: `--space-1,2,3,4,5,6,8,10,12,16,20,24`
+  (4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96px). **No existen 7, 9 ni 11.** El `--space-24`
+  es el escalón de lámina: decks y portadas, nunca una pantalla de producto.
+- **Radio** — `--radius-sm` 4 · `-md` 8 · `-lg` 12 · `-xl` 16 · `-2xl` 24 · `-full` 9999.
   **El radio escala con el tamaño del componente, nunca con su variante.** La píldora
-  (`--radius-full`) está reservada a chips y badges: **un botón píldora está prohibido**.
+  (`--radius-full`) es la forma de chips y badges. La forma del **botón** no se decide acá:
+  la decide la marca del proyecto con `--radius-button` (abajo).
+- **La forma del botón es un interruptor, y es de marca.** `--radius-button` queda sin declarar
+  a propósito: así cada botón toma el radio de su tamaño y sale redondeado. Un tema de marca que
+  lo declara en `9999px` convierte **todos** los botones del proyecto en píldora de una, sin tocar
+  tarjetas, modales ni campos. Es el único token de forma pensado para prenderse o apagarse, se
+  decide **una vez en el kickoff** y no se discute pantalla por pantalla. Antes de marcar un botón
+  píldora como falla, mirá si el proyecto lo declaró.
 - **Elevación** — `--shadow-sm/md/lg`, con tinte navy. Bordes = en el plano; sombra = overlay.
   Las sombras **no se recalibran en dark** (desaparecen); no las uses como único separador.
 - **Layout** — `--sidebar-width` 220px · `--topbar-height` 56px ·
@@ -328,7 +345,7 @@ flotante un action sheet, un formulario una pantalla propia. La regla completa, 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/base.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/composition.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amalgamaco/amalgama-design-system@main/css/components.css">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 ```
 
 **Reglas de la API:**
@@ -382,10 +399,11 @@ Nombro los que aparecen una y otra vez. Si tu página tiene alguno, sacalo antes
    una tarjeta o un titular grande. Si flota, si difumina lo que tiene detrás o si está para
    rellenar, es esto.
 4. **Dos acciones primarias.** Si "las dos son igual de importantes", falló la jerarquía.
-5. **Botón full-width, botón con texto a la izquierda.** Y **botón píldora**, salvo que el tema
-   de marca del proyecto declare `--radius-button` — ahí la forma la eligió la marca en el
-   kickoff y son píldora todos los botones, no uno. Fijate en `brand/<cliente>.css` antes de
-   marcarlo.
+5. **Botón full-width, botón con texto a la izquierda.** El botón píldora **no** está en esta
+   lista: la forma del botón la decide la marca del proyecto con `--radius-button` (§6.3). Lo que
+   sí es una falla es un botón píldora **suelto** — uno solo con otra forma que sus hermanos,
+   o una píldora escrita con un `border-radius` a mano en vez del interruptor. Fijate en
+   `brand/<cliente>.css` antes de marcar nada.
 6. **Emojis como íconos.** Lucide, siempre.
 7. **La grilla de tres cards de features** con ícono, título y dos líneas, cuando el contenido no
    son tres cosas paralelas.

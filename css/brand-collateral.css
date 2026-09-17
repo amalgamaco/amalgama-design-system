@@ -1,0 +1,210 @@
+/* ═══════════════════════════════════════
+   Embassy DS — Colateral de marca
+   Las piezas que vienen del Manual de Marca y que sólo existen en NUESTRO
+   material: decks, one-pagers, propuestas, reportes, el sitio.
+
+   Cuándo usar: una lámina, una portada, una propuesta, el sitio de Amalgama —
+     cualquier superficie que firmamos nosotros.
+   Cuándo no: **NUNCA en producto de cliente**, ni white-label. Igual que la capa
+     espacial: un cliente que paga por su marca no compra la nuestra. La señal es
+     objetiva — si el proyecto carga un brand/<cliente>.css, esto no va.
+     Tampoco en una pantalla de producto propio: ahí manda la escala de producto.
+   Reemplaza a: el colors_and_type.css del design system de marca (jubilado en
+     sep-2026; la tabla de equivalencias está en BRAND.md §8).
+
+   Dependencia: variables.css + base.css + composition.css. Se carga DESPUÉS de
+     composition.css y sólo en las páginas que la usan — no entra en
+     components.css a propósito, igual que space.css.
+
+   Consume SÓLO tokens semánticos: funciona en claro y oscuro sin overrides.
+
+   Fuente extra: .logotype pide **Poppins**, que no está en el link de fuentes del
+   sistema porque no es una familia del sistema — es la del logo y nada más. Una
+   página que use .logotype tiene que cargarla:
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+   Uso:
+   <link rel="stylesheet" href="css/brand-collateral.css">
+
+   <article class="lamina">
+     <span class="lamina-tab"></span>
+     <p class="overline">Customer development</p>
+     <h1 class="editorial-md">Cuánto tardan las altas</h1>
+     <hr class="lamina-rule">
+     <div class="prose-editorial"> … </div>
+     <span class="lamina-page">p. 04</span>
+   </article>
+═══════════════════════════════════════ */
+
+/* ── Prosa editorial ────────────────────────────────────────────────────────
+   El par 16/30 del Manual. No es "body-lg un poco más grande": es el bloque de
+   lectura que va al lado de un titular editorial, y por eso también corta en
+   --measure. En producto no entra. */
+.prose-editorial {
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-editorial);
+  line-height: var(--line-height-body-editorial);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-prose);
+  max-width: var(--measure);
+}
+
+.prose-editorial > * + * { margin-top: var(--space-5); }
+
+/* El primer párrafo de una lámina entra más corto: es bajada, no cuerpo. */
+.prose-editorial > .lead,
+.prose-editorial > p:first-child.lead {
+  max-width: var(--measure-lead);
+  color: var(--text-secondary);
+}
+
+/* ── Link pill ──────────────────────────────────────────────────────────────
+   El enlace del Manual: una píldora tonal, no un botón. Se usa para "ver el
+   proyecto", "descargar el PDF", "seguir leyendo". Nunca para una acción que
+   cambia algo — eso es un Button. */
+.link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2-5);
+  padding: var(--space-2) var(--space-3-5);
+  border-radius: var(--radius-xl);
+  background: var(--secondary-50);
+  color: var(--color-secondary-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-control);
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-default),
+              color var(--duration-fast) var(--ease-default);
+}
+
+.link-pill:hover { background: var(--color-secondary-container); }
+.link-pill:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.link-pill strong { font-weight: var(--font-weight-bold); }
+
+/* ── Logotipo tipográfico ───────────────────────────────────────────────────
+   ATENCIÓN: esto NO es el logo. El logo es un archivo (ver BRAND.md §5) y se
+   usa como archivo, siempre. Esta clase existe para el único caso en que el
+   wordmark se compone como texto — un encabezado de documento generado donde
+   no se puede incrustar el SVG — y lleva Poppins porque el Manual p. 23 dice
+   que Poppins se usa sólo acá. Si podés poner el SVG, poné el SVG. */
+.logotype {
+  font-family: 'Poppins', var(--font-heading), sans-serif;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-normal);
+  color: var(--color-primary);
+  text-transform: lowercase;
+}
+
+/* ── Lámina ─────────────────────────────────────────────────────────────────
+   La anatomía de una página del Manual: la pestaña al ras de la izquierda que
+   marca la sección, la regla que separa el bloque de título del cuerpo, y el
+   número de página en la esquina. */
+.lamina {
+  position: relative;
+  padding-block: var(--space-16) var(--space-20);
+}
+
+/* La pestaña: 42×4px, al ras del borde izquierdo del bloque de texto. Es una
+   marca de sección, no una decoración: si la lámina no pertenece a una sección
+   con nombre, no va. */
+.lamina-tab {
+  display: block;
+  width: 42px;
+  height: 4px;
+  margin-bottom: var(--space-5);
+  background: var(--accent-hot-pink);
+  border-radius: var(--radius-sm);
+}
+
+.lamina-tab-navy { background: var(--color-primary); }
+
+/* La regla del Manual: 1px, del ancho del contenido, entre el título y el
+   cuerpo. Es más marcada que un --divider porque separa dos bloques, no dos
+   filas. */
+.lamina-rule {
+  height: 0;
+  margin-block: var(--space-8);
+  border: 0;
+  border-top: 1px solid var(--color-outline);
+}
+
+.lamina-page {
+  position: absolute;
+  right: 0;
+  bottom: var(--space-8);
+  font-family: var(--font-body);
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-caption);
+  color: var(--text-muted);
+}
+
+/* ── Galería ────────────────────────────────────────────────────────────────
+   El showcase de trabajo de cliente. Cada pieza es una foto monocroma teñida
+   sobre una tarjeta de color: la paleta de la Galería es cálida y saturada, con
+   el navy de ancla, y NO sale de los acentos de marca — es el color del
+   cliente, no el nuestro. Por eso el fondo se pasa inline o con una custom
+   property, y no hay un set cerrado acá.
+
+   Uso:
+   <div class="galeria">
+     <a class="galeria-card" style="--galeria-bg:#6B2233" href="…">
+       <img class="galeria-card-media" src="…" alt="Coach360">
+       <span class="galeria-card-label">Coach360</span>
+     </a>
+   </div> */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.galeria-card {
+  --galeria-bg: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-8);
+  border-radius: var(--radius-2xl);
+  background: var(--galeria-bg);
+  color: var(--text-on-dark);
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform var(--duration-normal) var(--ease-default);
+}
+
+.galeria-card:hover { transform: translateY(-2px); }
+.galeria-card:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+/* El borde interior blanco de 3px del mockup de dispositivo. Es del Manual y es
+   lo que hace que la captura se lea como pantalla y no como imagen pegada. */
+.galeria-card-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 3px solid var(--neutral-white);
+  border-radius: var(--radius-md);
+}
+
+.galeria-card-label {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-heading-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-control);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────
+   Una lámina no se encoge: se vuelve una columna. Ver COMPOSICION.md. */
+@media (max-width: 768px) {
+  .lamina { padding-block: var(--space-10) var(--space-12); }
+  .lamina-page { position: static; display: block; margin-top: var(--space-8); }
+  .galeria { grid-template-columns: 1fr; gap: var(--space-5); }
+  .galeria-card { padding: var(--space-6); }
+}

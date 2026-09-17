@@ -148,6 +148,30 @@
   --info-900: #001ABA;
 
   /* ─────────────────────────────────────
+     Acentos de marca  (Manual de Marca 2022)
+
+     No son estado ni jerarquía: son la voz de color de Amalgama, y por eso
+     tienen nombre propio. Vienen del Manual con sus reglas, y las reglas son
+     parte del token:
+       · Máximo DOS juntos en una composición.
+       · Nunca como fondo dominante.
+       · Nunca para texto corrido.
+       · Nunca amarillo sobre azul («no todos somos hinchas de Boca :)»).
+     El `on` de los tres es navy: blanco encima no llega a AA en ninguno
+     (3.09:1 en el rosa, 2.34:1 en el verde).
+  ───────────────────────────────────── */
+  /* Sancionados — los tres que se usan. */
+  --accent-hot-pink:      #FE566A;  /* Hot Pink      · 5.51:1 con navy encima */
+  --accent-chelo-yellow:  #FFC700;  /* Chelo Yellow  · 11.0:1 con navy encima */
+  --accent-kika-green:    #67B9A4;  /* Kika Green    · 7.28:1 con navy encima */
+  --color-on-accent:      var(--primary-900);
+  /* Documentados, NO sancionados. Existen en el Manual y se registran para que
+     nadie los reinvente, pero no entran en trabajo nuevo. */
+  --accent-pink-sebiche:  #F1A7A3;  /* Pink Sebiche */
+  --accent-sky:           #49A4FF;  /* Sky / Data — pisa de cerca a --chart-1 */
+  --accent-lime:          #E0FF4F;  /* Lime — aparece una sola vez, como highlight */
+
+  /* ─────────────────────────────────────
      Color Roles (semantic) — capa de uso
      Los componentes consumen SOLO estos tokens (o sus alias).
      Cada rol apunta a un primitivo de la paleta Embassy.
@@ -294,6 +318,13 @@
   --text-primary:   var(--primary-900);
   --text-secondary: var(--neutral-500);
   --text-muted:     var(--color-on-surface-variant);  /* NO --color-on-disabled: pinta texto activo, y ahí el mínimo AA sí rige */
+  /* Prosa larga de COLATERAL: el gris-carbón del Manual («Ink»). El navy de
+     --text-primary es el color de producto y sigue siéndolo; en un párrafo de
+     varias líneas de un deck o una propuesta, el Manual usa este.
+     No es para UI: una celda, un label o un botón siguen en los tokens de
+     componente. En oscuro no hay casi-negro que valga, así que vuelve a ser
+     el mismo color que el texto principal (ver los bloques por tema). */
+  --text-prose:     #2A2F32;
 
   /* Estados como TEXTO sobre una superficie.
      --color-success / --color-error están calibrados para funcionar como FONDO
@@ -364,6 +395,11 @@
   --space-12: 48px;   /* main content padding               */
   --space-16: 64px;   /* section separators                 */
   --space-20: 80px;   /* hero / large section padding       */
+  /* El escalón de lámina. No lo pide ninguna pantalla de producto: lo piden los
+     decks y las portadas del Manual, que respiran a otra escala. Entra acá y no
+     en una hoja de colateral porque un espaciado es un espaciado, y tenerlo
+     suelto es exactamente cómo se vuelven a inventar los valores. */
+  --space-24: 96px;   /* lámina, portada, apertura de deck   */
 
   /* ─────────────────────────────────────
      Densidad y superficie táctil
@@ -417,8 +453,14 @@
   /* ─────────────────────────────────────
      Typography — Font families
   ───────────────────────────────────── */
+  /* Epilogue es la principal: títulos, overline de página, botones.
+     Manrope es la de párrafo y de UI. Inter queda de fallback en el stack, no
+     como decisión: si Manrope no carga, el sistema no se cae a una genérica.
+     Ojo, y está dicho a propósito: Manrope NO tiene itálica. Un énfasis en
+     cursiva sale oblicuo sintético; si el texto la necesita de verdad, es un
+     caso de la capa editorial, no de producto. */
   --font-heading: 'Epilogue', sans-serif;
-  --font-body:    'Inter', sans-serif;
+  --font-body:    'Manrope', 'Inter', sans-serif;
   --font-mono:    'DM Mono', monospace;
 
   /* ─────────────────────────────────────
@@ -452,6 +494,10 @@
 
   /* Inter — Body & UI */
   --font-size-body-lg:     14px;   --line-height-body-lg:     1.5;
+  /* El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el
+     par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de
+     un titular editorial. En producto no entra: ahí la base sigue siendo body-md. */
+  --font-size-body-editorial: 16px; --line-height-body-editorial: 1.875;
   --font-size-body-md:     13.5px; --line-height-body-md:     1.5;  /* base: inputs, buttons, table cells */
   --font-size-body-sm:     12.5px; --line-height-body-sm:     1.6;
   --font-size-label:       13px;   --line-height-label:       1.4;
@@ -603,13 +649,23 @@
   --radius-md:   8px;
   --radius-lg:   12px;
   --radius-xl:   16px;
+  /* Paneles grandes de lámina. El Manual llega a usar 40, pero a 24 la familia
+     sigue cerrada (4 · 8 · 12 · 16 · 24) y la pieza se redibuja sin perder nada.
+     El 6 del Manual no entra: se metía entre dos escalones que ya existen. */
+  --radius-2xl:  24px;
   --radius-full: 9999px;
-  /* --radius-button: NO se define acá a propósito. Los botones usan
-     var(--radius-button, <el token que le toca a ese tamaño>), así que mientras nadie
-     lo declare el radio sigue saliendo de la escala por tamaño (GOVERNANCE §4.3) y
-     nada cambia. El tema de marca con forma `pildora` lo declara en 9999px y los
-     convierte a todos en píldora de una, sin tocar tarjetas, modales ni campos.
-     Es el único token de forma pensado para que una marca lo prenda o lo apague. */
+  /* --radius-button: NO se define acá a propósito, y eso ES la decisión.
+     Es el INTERRUPTOR DE FORMA del sistema, el único que existe. Sin declarar,
+     cada botón toma el radio de su tamaño (GOVERNANCE §4.3) y sale redondeado.
+     Declarado en 9999px por un tema de marca, TODOS los botones del proyecto
+     pasan a píldora de una, sin tocar tarjetas, modales ni campos.
+     Los botones lo leen como var(--radius-button, <el token de su tamaño>).
+
+     La forma del botón es una decisión de marca, no de pantalla: se toma una vez
+     en el kickoff del proyecto y no se discute botón por botón. Embassy no la
+     toma por vos y no la prohíbe — la expone. (Antes decía «un botón píldora está
+     prohibido»; era una regla escrita desde el lado del producto, y el Manual de
+     Marca usa píldora en su propio material.) Ver design.md §8.5. */
   --radius:      var(--radius-lg);
 
   /* ─────────────────────────────────────
@@ -799,6 +855,9 @@
   --text-primary:   #EAEBED; /* neutral-50 — en dark el navy no contrasta; vuelve a on-surface */
   --text-secondary: #BFC1C8; /* neutral-100 */
   --text-muted:     #9FA3AE; /* neutral-200 — 6.44:1 sobre card-bg. No neutral-100: sería igual que --text-secondary */
+  /* En oscuro no existe el casi-negro: la prosa vuelve al texto principal. El
+     token sigue existiendo para que el colateral no tenga que preguntarse por el tema. */
+  --text-prose:     #EAEBED; /* neutral-50 */
   --interactive-hover:               var(--primary-200);          /* #909BBE */
 
   /* Elevated Button elevation — black shadows so the lift is visible on dark surfaces
@@ -878,6 +937,7 @@
   --text-primary:   var(--primary-900);                          /* #01164D */
   --text-secondary: #353A4A;                                     /* neutral-500 */
   --text-muted:     #63687A;                                     /* neutral-350 — 5.54:1 sobre card-bg */
+  --text-prose:     #2A2F32;                                     /* Ink del Manual — prosa larga de colateral */
   --interactive-hover: var(--primary-500);                       /* #253E82 */
   /* Elevated Button — restore light (navy) elevation inside a light-scoped island */
   --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);

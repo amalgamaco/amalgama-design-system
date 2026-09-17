@@ -9,6 +9,15 @@ This repo has two layers:
 
 > **Reverted to buildless CSS + vanilla JS (2026-07).** Between 2026-06-22 and 2026-06-26 this repo was migrated to a Tailwind v4 + React/Radix (shadcn/ui) implementation (`packages/ds/`, `islands/`), which fully replaced `css/components/*.css`. That migration was **reverted** on 2026-07-17: `packages/ds/` and `islands/` were deleted, and every component + feature built during the Tailwind era (~70 commits: Charts, ~25 new shadcn-parity primitives — Accordion, Alert, Breadcrumb, Data Table, Command/Combobox, Context Menu, etc. — the Dialog/Sheet overlay restructure, the mobile nav shell, and the Embassy Playbook guidelines) was hand-ported into the restored buildless architecture as flat CSS + vanilla JS, so nothing built in that period was lost. A handful of the hardest, most library-dependent pieces (Chart, Data Table, Calendar/Date Picker, Command/Combobox, Carousel, Slider range mode, Input OTP, Form validation) were deliberately rebuilt as **simplified vanilla equivalents** rather than exact library-behavior clones — see each component's CSS header comment for what was simplified away. **(2026-07 parity pass:** several of these were subsequently restored to full shadcn parity in vanilla JS — Chart rich tooltip, Data Table row-selection/filter/column-visibility, Calendar month/year dropdown, Carousel vertical, Command ⌘K palette — plus a sweep of missing variants across the library; the full list and the intentional divergences kept are in **GOVERNANCE.md §21**.) Resizable panels were dropped entirely (no real use case beyond their own demo page) — flag it if you need one, don't improvise a drag-resize engine.
 
+> **`BRAND.md` es la capa de marca, y se fusionó al sistema en sep-2026.** Hasta entonces convivían
+> dos design systems: Embassy (producto) y uno de marca en Claude Design, con sus propios tokens
+> `--amg-*`. Ahora hay uno: los valores viven en `css/variables.css`, el significado en `BRAND.md`,
+> y el colateral que sólo existe en nuestro material en `css/brand-collateral.css`. El
+> `colors_and_type.css` de aquel sistema **ya no es fuente de nada**; la tabla completa de
+> equivalencias para portar piezas viejas está en **BRAND.md §8**. El único cambio que puede romper
+> en silencio es `--space-*`: los dos usaban los mismos nombres del 1 al 9 y coincidían sólo hasta
+> el 4.
+
 > **`COMPOSICION.md` es obligatorio antes de construir cualquier pantalla o entregable.** Define
 > la composición de la página: cuál de las cuatro estructuras usa, dónde corta el texto, el ritmo
 > entre secciones, y las dos marcas que hacen que se lea como nuestra y no como una página
@@ -41,6 +50,7 @@ In any project, no build step required:
 <link rel="stylesheet" href="css/composition.css">    <!-- 3. page structure, measure, rhythm, overline (required) -->
 <link rel="stylesheet" href="css/layout.css">         <!-- 4. only for full app shell (sidebar, topbar, avatar) -->
 <link rel="stylesheet" href="css/components.css">     <!-- 5. all components — or copy one file from css/components/ -->
+<link rel="stylesheet" href="css/brand-collateral.css"> <!-- 6. Amalgama-only: decks, proposals, the site. NEVER a client product -->
 ```
 
 ```html
@@ -51,7 +61,7 @@ Each file in `css/components/` is the complete implementation for that component
 
 **Tokens are the law.** All colors via `var(--color-*)` or semantic aliases (`--accent`, `--bg`, `--border`), radii via `var(--radius-*)` (scaled by component size, never by variant — see GOVERNANCE.md §4.3), shadows via `var(--shadow-*)`, spacing via `var(--space-*)`. Never raw hex. Dark mode is automatic: set `data-theme="dark"` on `<html>` — the semantic `--color-*` layer recalibrates itself; components need zero per-theme overrides.
 
-Fonts: **Inter** (body/UI), **Epilogue** (headings), **DM Mono** (code/labels) — always via `var(--font-body)` / `var(--font-heading)` / `var(--font-mono)`, never quoted family names in component code.
+Fonts: **Epilogue** (headings), **Manrope** (body/UI — Inter stays in the stack as a fallback only), **DM Mono** (code/labels) — always via `var(--font-heading)` / `var(--font-body)` / `var(--font-mono)`, never quoted family names in component code. **Poppins is the logotype face and nothing else** (Manual p. 23); it has no token because the logo is a file. **Manrope has no italic** — a real italic is a collateral case, not a product one.
 
 **Every `font-size` flows through a `--font-size-*` token** — never loose px. `base.css` binds h1–h6 to the scale (h1→`display` … h6→`heading-xs`); UI text uses `body-lg/md/sm`, `label`, `caption`, `overline`, `badge`. A legacy size with no exact token snaps to the nearest *role-appropriate* token, not a new px value.
 
@@ -163,6 +173,7 @@ Every component CSS header carries a **`Cuándo usar / Cuándo no / Reemplaza a`
 | **Machine-readable component registry** (aggregated metadata for all 61 — status/variants/sizes/states/tokens/source) | **`component-rules/manifest.json`** (regenerate: `python3 scripts/build-manifest.py`) |
 | Per-component decision rule (`Cuándo usar / Cuándo no`) | `component-rules/<id>.md` (authored) or the component's `css/components/<name>.css` header comment (fallback) |
 | Usage guidelines / specs / accessibility (human depth) | root `index.html` |
+| **Brand layer — voice, colour names, logo, print values, the galaxy, the anatomy of a deck sheet** | **`BRAND.md`** |
 | Migration / restyling rules (generic) | `MIGRATION.md` |
 | **Applying Embassy to Gamaforce — screen audit, migration workflow, screen patterns, checklists, DoD** | **`GAMAFORCE-MIGRATION.md`** |
 | **How AI agents/skills should consume the DS to build/migrate screens** | **`AI-USAGE-GUIDE.md`** |

@@ -482,6 +482,48 @@
       "$value": "#001ABA",
       "section": "Information palette"
     },
+    "--accent-hot-pink": {
+      "$type": "color",
+      "$value": "#FE566A",
+      "section": "Sancionados — los tres que se usan.",
+      "$description": "Hot Pink      · 5.51:1 con navy encima"
+    },
+    "--accent-chelo-yellow": {
+      "$type": "color",
+      "$value": "#FFC700",
+      "section": "Sancionados — los tres que se usan.",
+      "$description": "Chelo Yellow  · 11.0:1 con navy encima"
+    },
+    "--accent-kika-green": {
+      "$type": "color",
+      "$value": "#67B9A4",
+      "section": "Sancionados — los tres que se usan.",
+      "$description": "Kika Green    · 7.28:1 con navy encima"
+    },
+    "--color-on-accent": {
+      "$type": "color",
+      "$value": "#01164D",
+      "section": "Sancionados — los tres que se usan.",
+      "$alias": "--primary-900"
+    },
+    "--accent-pink-sebiche": {
+      "$type": "color",
+      "$value": "#F1A7A3",
+      "section": "Documentados, NO sancionados. Existen en el Manual y se registran para que nadie los reinvente, pero no entran en trabajo nuevo.",
+      "$description": "Pink Sebiche"
+    },
+    "--accent-sky": {
+      "$type": "color",
+      "$value": "#49A4FF",
+      "section": "Documentados, NO sancionados. Existen en el Manual y se registran para que nadie los reinvente, pero no entran en trabajo nuevo.",
+      "$description": "Sky / Data — pisa de cerca a --chart-1"
+    },
+    "--accent-lime": {
+      "$type": "color",
+      "$value": "#E0FF4F",
+      "section": "Documentados, NO sancionados. Existen en el Manual y se registran para que nadie los reinvente, pero no entran en trabajo nuevo.",
+      "$description": "Lime — aparece una sola vez, como highlight"
+    },
     "--color-primary": {
       "$type": "color",
       "$value": "#01164D",
@@ -956,6 +998,12 @@
       "$dark": "#9FA3AE",
       "$alias": "--color-on-surface-variant"
     },
+    "--text-prose": {
+      "$type": "color",
+      "$value": "#2A2F32",
+      "section": "Prosa larga de COLATERAL: el gris-carbón del Manual («Ink»). El navy de  text-primary es el color de producto y sigue siéndolo; en un párrafo de varias líneas de un deck o una propuesta, el Manual usa este. No es para UI: una celda, un label o un botón siguen en los tokens de componente. En oscuro no hay casi-negro que valga, así que vuelve a ser el mismo color que el texto principal (ver los bloques por tema).",
+      "$dark": "#EAEBED"
+    },
     "--color-secondary-text": {
       "$type": "color",
       "$value": "#1E3A8C",
@@ -1180,6 +1228,12 @@
       "section": "Medios pasos. Existen porque el interior de un componente los necesita: 6px entre un ícono y su label es correcto y 8px queda flojo. Son parte de la escala, no una excepción — y por eso también responden a la densidad.",
       "$description": "hero / large section padding"
     },
+    "--space-24": {
+      "$type": "dimension",
+      "$value": "96px",
+      "section": "El escalón de lámina. No lo pide ninguna pantalla de producto: lo piden los decks y las portadas del Manual, que respiran a otra escala. Entra acá y no en una hoja de colateral porque un espaciado es un espaciado, y tenerlo suelto es exactamente cómo se vuelven a inventar los valores.",
+      "$description": "lámina, portada, apertura de deck"
+    },
     "--target-min": {
       "$type": "dimension",
       "$value": "44px",
@@ -1265,17 +1319,17 @@
     "--font-heading": {
       "$type": "fontFamily",
       "$value": "'Epilogue', sans-serif",
-      "section": "Typography — Font families"
+      "section": "Epilogue es la principal: títulos, overline de página, botones. Manrope es la de párrafo y de UI. Inter queda de fallback en el stack, no como decisión: si Manrope no carga, el sistema no se cae a una genérica. Ojo, y está dicho a propósito: Manrope NO tiene itálica. Un énfasis en cursiva sale oblicuo sintético; si el texto la necesita de verdad, es un caso de la capa editorial, no de producto."
     },
     "--font-body": {
       "$type": "fontFamily",
-      "$value": "'Inter', sans-serif",
-      "section": "Typography — Font families"
+      "$value": "'Manrope', 'Inter', sans-serif",
+      "section": "Epilogue es la principal: títulos, overline de página, botones. Manrope es la de párrafo y de UI. Inter queda de fallback en el stack, no como decisión: si Manrope no carga, el sistema no se cae a una genérica. Ojo, y está dicho a propósito: Manrope NO tiene itálica. Un énfasis en cursiva sale oblicuo sintético; si el texto la necesita de verdad, es un caso de la capa editorial, no de producto."
     },
     "--font-mono": {
       "$type": "fontFamily",
       "$value": "'DM Mono', monospace",
-      "section": "Typography — Font families"
+      "section": "Epilogue es la principal: títulos, overline de página, botones. Manrope es la de párrafo y de UI. Inter queda de fallback en el stack, no como decisión: si Manrope no carga, el sistema no se cae a una genérica. Ojo, y está dicho a propósito: Manrope NO tiene itálica. Un énfasis en cursiva sale oblicuo sintético; si el texto la necesita de verdad, es un caso de la capa editorial, no de producto."
     },
     "--font-size-editorial-lg": {
       "$type": "typography",
@@ -1484,17 +1538,32 @@
         "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.5"
       }
     },
+    "--font-size-body-editorial": {
+      "$type": "typography",
+      "$value": "16px",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md."
+    },
+    "--line-height-body-editorial": {
+      "$type": "typography",
+      "$value": "1.875",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
+      "$native": {
+        "translates": false,
+        "unit": "multiplicador",
+        "rule": "RN mide lineHeight en puntos: lineHeight = fontSize * 1.875"
+      }
+    },
     "--font-size-body-md": {
       "$type": "typography",
       "$value": "13.5px",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$description": "base: inputs, buttons, table cells",
       "$platformNative": "16px"
     },
     "--line-height-body-md": {
       "$type": "typography",
       "$value": "1.5",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$description": "base: inputs, buttons, table cells",
       "$native": {
         "translates": false,
@@ -1505,13 +1574,13 @@
     "--font-size-body-sm": {
       "$type": "typography",
       "$value": "12.5px",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$platformNative": "14px"
     },
     "--line-height-body-sm": {
       "$type": "typography",
       "$value": "1.6",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$platformNative": "1.45",
       "$native": {
         "translates": false,
@@ -1522,13 +1591,13 @@
     "--font-size-label": {
       "$type": "typography",
       "$value": "13px",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$platformNative": "15px"
     },
     "--line-height-label": {
       "$type": "typography",
       "$value": "1.4",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$native": {
         "translates": false,
         "unit": "multiplicador",
@@ -1538,13 +1607,13 @@
     "--font-size-caption": {
       "$type": "typography",
       "$value": "12px",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$platformNative": "13px"
     },
     "--line-height-caption": {
       "$type": "typography",
       "$value": "1.4",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$platformNative": "1.45",
       "$native": {
         "translates": false,
@@ -1555,13 +1624,13 @@
     "--font-size-badge": {
       "$type": "typography",
       "$value": "11.5px",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$platformNative": "11px"
     },
     "--line-height-badge": {
       "$type": "typography",
       "$value": "1.2",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$native": {
         "translates": false,
         "unit": "multiplicador",
@@ -1571,13 +1640,13 @@
     "--font-size-overline": {
       "$type": "typography",
       "$value": "12px",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$description": "uppercase table headers"
     },
     "--line-height-overline": {
       "$type": "typography",
       "$value": "1.2",
-      "section": "Inter — Body & UI",
+      "section": "El cuerpo del registro editorial. No es «body-lg un poco más grande»: es el par que usa el Manual para leer —16 sobre 30— y sólo tiene sentido al lado de un titular editorial. En producto no entra: ahí la base sigue siendo body-md.",
       "$description": "uppercase table headers",
       "$native": {
         "translates": false,
@@ -1869,15 +1938,20 @@
       "$value": "16px",
       "section": "Border radius  (DS scale)"
     },
+    "--radius-2xl": {
+      "$type": "dimension",
+      "$value": "24px",
+      "section": "Paneles grandes de lámina. El Manual llega a usar 40, pero a 24 la familia sigue cerrada (4 · 8 · 12 · 16 · 24) y la pieza se redibuja sin perder nada. El 6 del Manual no entra: se metía entre dos escalones que ya existen."
+    },
     "--radius-full": {
       "$type": "dimension",
       "$value": "9999px",
-      "section": "Border radius  (DS scale)"
+      "section": "Paneles grandes de lámina. El Manual llega a usar 40, pero a 24 la familia sigue cerrada (4 · 8 · 12 · 16 · 24) y la pieza se redibuja sin perder nada. El 6 del Manual no entra: se metía entre dos escalones que ya existen."
     },
     "--radius": {
       "$type": "other",
       "$value": "12px",
-      "section": "radius-button: NO se define acá a propósito. Los botones usan var( radius-button, <el token que le toca a ese tamaño>), así que mientras nadie lo declare el radio sigue saliendo de la escala por tamaño (GOVERNANCE §4.3) y nada cambia. El tema de marca con forma `pildora` lo declara en 9999px y los convierte a todos en píldora de una, sin tocar tarjetas, modales ni campos. Es el único token de forma pensado para que una marca lo prenda o lo apague.",
+      "section": "radius-button: NO se define acá a propósito, y eso ES la decisión. Es el INTERRUPTOR DE FORMA del sistema, el único que existe. Sin declarar, cada botón toma el radio de su tamaño (GOVERNANCE §4.3) y sale redondeado. Declarado en 9999px por un tema de marca, TODOS los botones del proyecto pasan a píldora de una, sin tocar tarjetas, modales ni campos. Los botones lo leen como var( radius-button, <el token de su tamaño>).  La forma del botón es una decisión de marca, no de pantalla: se toma una vez en el kickoff del proyecto y no se discute botón por botón. Embassy no la toma por vos y no la prohíbe — la expone. (Antes decía «un botón píldora está prohibido»; era una regla escrita desde el lado del producto, y el Manual de Marca usa píldora en su propio material.) Ver design.md §8.5.",
       "$alias": "--radius-lg"
     },
     "--shadow-sm": {

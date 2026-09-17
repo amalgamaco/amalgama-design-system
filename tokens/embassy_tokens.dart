@@ -103,6 +103,13 @@ class EmbassyColors {
   static const info700 = Color(0xFF003ED6);
   static const info800 = Color(0xFF0032CB);
   static const info900 = Color(0xFF001ABA);
+  static const accentHotPink = Color(0xFFFE566A);
+  static const accentCheloYellow = Color(0xFFFFC700);
+  static const accentKikaGreen = Color(0xFF67B9A4);
+  static const colorOnAccent = Color(0xFF01164D);
+  static const accentPinkSebiche = Color(0xFFF1A7A3);
+  static const accentSky = Color(0xFF49A4FF);
+  static const accentLime = Color(0xFFE0FF4F);
   static const colorPrimary = Color(0xFF01164D);
   static const colorOnPrimary = Color(0xFFFFFFFF);
   static const colorPrimaryContainer = Color(0xFFD7DEFB);
@@ -173,6 +180,7 @@ class EmbassyColors {
   static const textPrimary = Color(0xFF01164D);
   static const textSecondary = Color(0xFF353A4A);
   static const textMuted = Color(0xFF63687A);
+  static const textProse = Color(0xFF2A2F32);
   static const colorSecondaryText = Color(0xFF1E3A8C);
   static const colorSuccessText = Color(0xFF006D2C);
   static const colorErrorText = Color(0xFFBF0B29);
@@ -300,6 +308,13 @@ class EmbassyColors {
   static const info700Dark = Color(0xFF003ED6);
   static const info800Dark = Color(0xFF0032CB);
   static const info900Dark = Color(0xFF001ABA);
+  static const accentHotPinkDark = Color(0xFFFE566A);
+  static const accentCheloYellowDark = Color(0xFFFFC700);
+  static const accentKikaGreenDark = Color(0xFF67B9A4);
+  static const colorOnAccentDark = Color(0xFF01164D);
+  static const accentPinkSebicheDark = Color(0xFFF1A7A3);
+  static const accentSkyDark = Color(0xFF49A4FF);
+  static const accentLimeDark = Color(0xFFE0FF4F);
   static const colorPrimaryDark = Color(0xFFFFFFFF);
   static const colorOnPrimaryDark = Color(0xFF01164D);
   static const colorPrimaryContainerDark = Color(0xFF475993);
@@ -370,6 +385,7 @@ class EmbassyColors {
   static const textPrimaryDark = Color(0xFFEAEBED);
   static const textSecondaryDark = Color(0xFFBFC1C8);
   static const textMutedDark = Color(0xFF9FA3AE);
+  static const textProseDark = Color(0xFFEAEBED);
   static const colorSecondaryTextDark = Color(0xFFB9CCFF);
   static const colorSuccessTextDark = Color(0xFF006D2C);
   static const colorErrorTextDark = Color(0xFFBF0B29);
@@ -425,6 +441,7 @@ class EmbassyDims {
   static const space12 = 48.0;
   static const space16 = 64.0;
   static const space20 = 80.0;
+  static const space24 = 96.0;
   static const targetMin = 44.0;
   static const rowHeight = 36.0;
   static const controlHeight = 36.0;
@@ -448,6 +465,8 @@ class EmbassyDims {
   static const lineHeightHeadingXs = 1.4;
   static const fontSizeBodyLg = 14.0;
   static const lineHeightBodyLg = 1.5;
+  static const fontSizeBodyEditorial = 16.0;
+  static const lineHeightBodyEditorial = 1.875;
   static const fontSizeBodyMd = 13.5;
   static const lineHeightBodyMd = 1.5;
   static const fontSizeBodySm = 12.5;
@@ -488,6 +507,7 @@ class EmbassyDims {
   static const radiusMd = 8.0;
   static const radiusLg = 12.0;
   static const radiusXl = 16.0;
+  static const radius2xl = 24.0;
   static const radiusFull = 9999.0;
 
   // ── native ──
@@ -506,6 +526,7 @@ class EmbassyDims {
   static const space12Native = 48.0;
   static const space16Native = 64.0;
   static const space20Native = 80.0;
+  static const space24Native = 96.0;
   static const targetMinNative = 48.0;
   static const rowHeightNative = 48.0;
   static const controlHeightNative = 48.0;
@@ -529,6 +550,8 @@ class EmbassyDims {
   static const lineHeightHeadingXsNative = 1.4;
   static const fontSizeBodyLgNative = 17.0;
   static const lineHeightBodyLgNative = 1.45;
+  static const fontSizeBodyEditorialNative = 16.0;
+  static const lineHeightBodyEditorialNative = 1.875;
   static const fontSizeBodyMdNative = 16.0;
   static const lineHeightBodyMdNative = 1.5;
   static const fontSizeBodySmNative = 14.0;
@@ -569,6 +592,7 @@ class EmbassyDims {
   static const radiusMdNative = 8.0;
   static const radiusLgNative = 12.0;
   static const radiusXlNative = 16.0;
+  static const radius2xlNative = 24.0;
   static const radiusFullNative = 9999.0;
   static const screenGutterNative = 20.0;
   static const radiusButtonNative = 14.0;
@@ -579,6 +603,6 @@ class EmbassyDims {
 class EmbassyFonts {
   const EmbassyFonts._();
   static const fontHeading = 'Epilogue';
-  static const fontBody = 'Inter';
+  static const fontBody = 'Manrope';
   static const fontMono = 'DM Mono';
 }

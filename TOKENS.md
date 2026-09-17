@@ -63,6 +63,24 @@ surface), on-container (text on that container). **Pair `X` with `on-X`, and `X-
 | `--color-on-secondary-container` | Navy text on secondary container. | Chip/segmented selected label. | — |
 | `--color-tertiary` / `-on-tertiary` / `-tertiary-container` / `-on-tertiary-container` | Purple accent quartet. | Tertiary-purple accents, `badge-tertiary`. | As a status color — use success/warning/error/info. |
 
+### 2a-bis. Brand accents (`--accent-*`) — the Manual de Marca palette
+
+Not status and not hierarchy: the colour voice of Amalgama, with names of their own. **The Manual's
+rules are part of the token** — honour them or the token is being misused. Full context: `BRAND.md` §3.
+
+| Token | Name · value | Rules |
+|---|---|---|
+| `--accent-hot-pink` | Hot Pink `#FE566A` | Sanctioned. The most-used accent of the Manual. Not `--color-error` — that means *error*. |
+| `--accent-chelo-yellow` | Chelo Yellow `#FFC700` | Sanctioned. **Never on blue or light blue** — *no todos somos hinchas de Boca :)* |
+| `--accent-kika-green` | Kika Green `#67B9A4` | Sanctioned. Not the success green. |
+| `--color-on-accent` | `--primary-900` | Text/icon on any of the three. **White fails AA on all of them** (3.09:1 on the pink, 2.34:1 on the green). |
+| `--accent-pink-sebiche` | Pink Sebiche `#F1A7A3` | Documented, **not sanctioned** — registered so nobody reinvents it; not for new work. |
+| `--accent-sky` | Sky / Data `#49A4FF` | Documented, not sanctioned. Sits close to `--chart-1`; in a chart use the chart token. |
+| `--accent-lime` | Lime `#E0FF4F` | Documented, not sanctioned. Appears once in the Manual, as a highlight. |
+
+Across any one composition: **at most two accents**, one if it is type. An accent is never a
+dominant background and never body copy.
+
 ### 2b. Status roles (success / warning / error / info)
 
 Same quartet shape. Each also has a `--color-X-hover` for success/error. **Status = meaning, not
@@ -132,6 +150,7 @@ Thin aliases; prefer them where they read clearer, but they resolve to the roles
 | `--text-primary` | `--primary-900` (light) → `#EAEBED` (dark) | **Page headings AND body.** Brand navy, not black. |
 | `--text-secondary` | `--neutral-500` → `#BFC1C8` | Secondary page text. |
 | `--text-muted` | `--color-on-disabled` | Muted/hint page text. |
+| `--text-prose` | `#2A2F32` (light) → `#EAEBED` (dark) | **Long-form prose in collateral only** — the Manual's "Ink". Product text stays `--text-primary` (navy). In dark there is no near-black, so it returns to the main text colour. |
 | `--text-on-dark` | `--neutral-white` | Text on permanently-dark surfaces. |
 | `--interactive` / `--interactive-hover` / `--interactive-light` | `--color-secondary` / navy-ish hover / `--color-secondary-container` | Links, nav, tabs, focus accents. |
 | `--accent` / `--accent-light` | `--interactive` / `--interactive-light` | Docs-shell chrome accents. |
@@ -147,8 +166,9 @@ Thin aliases; prefer them where they read clearer, but they resolve to the roles
 | Token | Value | Role |
 |---|---|---|
 | `--font-heading` | `'Epilogue', sans-serif` | Display + headings (h1–h6). |
-| `--font-body` | `'Inter', sans-serif` | Body/UI text. |
+| `--font-body` | `'Manrope', 'Inter', sans-serif` | Body/UI text. Manrope since sep-2026; Inter stays in the stack as a fallback, not as a decision. **Manrope has no italic** — an `<em>` renders as a synthetic oblique, so a real italic is a collateral case (see `BRAND.md` §4). |
 | `--font-mono` | `'DM Mono', monospace` | Código, atajos de teclado, índice de sección, datos tabulares. **No el `.overline`**, que va en `--font-heading` desde sep 2026. |
+| *(no token)* | `Poppins` | **The logotype, and nothing else** (Manual p. 23). It has no token because the logo is a file — `css/brand-collateral.css` `.logotype` is the single exception, for a generated document that cannot embed the SVG. |
 
 ### 3b. Type scale (`--font-size-*` + matching `--line-height-*`)
 
@@ -164,6 +184,7 @@ with no exact token snaps to the nearest **role-appropriate** token, never a new
 | `--font-size-heading-sm` | 17px / 1.35 | **h5**. | — |
 | `--font-size-heading-xs` | 15px / 1.4 | **h6**. | Body copy → body-* tiers. |
 | `--font-size-body-lg` | 14px / 1.5 | Comfortable body / base `<body>`. | — |
+| `--font-size-body-editorial` | 16px / 1.875 | **Collateral only** — the Manual's 16/30 reading block, beside an editorial headline. | A product screen → `--font-size-body-md`. |
 | `--font-size-body-md` | 13.5px / 1.5 | **UI base**: inputs, buttons, table cells. | — |
 | `--font-size-body-sm` | 12.5px / 1.6 | Dense/secondary body. | — |
 | `--font-size-label` | 13px / 1.4 | Form labels, control labels. | — |
@@ -198,6 +219,7 @@ Consume tokens; never hardcode px for padding/gap/margin. Scale = multiples of 4
 | `--space-10` | 40 | Block separators. |
 | `--space-12` | 48 | Main content padding. |
 | `--space-16` | 64 | Section separators. |
+| `--space-24` | 96 | **Collateral only** — deck sheet, cover, editorial opening. No product screen needs it. |
 | `--space-20` | 80 | Hero / large section padding. |
 
 > The scale is intentionally sparse (no `--space-7/-9/-11`…). If you need a between-value, step to the
@@ -213,8 +235,10 @@ Consume tokens; never hardcode px for padding/gap/margin. Scale = multiples of 4
 | `--radius-md` | 8px | Inputs, small buttons. |
 | `--radius-lg` | 12px | Cards, standard buttons. |
 | `--radius-xl` | 16px | Large surfaces. |
+| `--radius-2xl` | 24px | **Collateral only** — large deck panels. |
 | `--radius-full` | 9999px | Pills, avatars, circular icon buttons. |
 | `--radius` | = `--radius-lg` | Default radius alias. |
+| `--radius-button` | *undeclared* | **The shape switch, and the only one.** Left undeclared on purpose: each button then takes the radius of its size. A brand theme that declares it `9999px` turns every button in the project into a pill at once, without touching cards, modals or fields. It is a brand decision taken once at kickoff — never per screen. See `design.md` §6.3. |
 
 **Governance rule (GOVERNANCE.md §4.3): radius scales with component SIZE, never with VARIANT.** A
 size-modifier class (`btn-sm`, `btn-lg`, `btn-xl`) already carries the size-appropriate radius —
