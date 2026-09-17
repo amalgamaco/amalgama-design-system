@@ -20,6 +20,7 @@ class EmbassyColors {
   static const neutral500 = Color(0xFF353A4A);
   static const neutral600 = Color(0xFF282C39);
   static const neutral700 = Color(0xFF1C202C);
+  static const neutral750 = Color(0xFF171B26);
   static const neutral800 = Color(0xFF13161F);
   static const neutral900 = Color(0xFF0A0C12);
   static const neutralBlack = Color(0xFF000000);
@@ -212,6 +213,7 @@ class EmbassyColors {
   static const neutral500Dark = Color(0xFF353A4A);
   static const neutral600Dark = Color(0xFF282C39);
   static const neutral700Dark = Color(0xFF1C202C);
+  static const neutral750Dark = Color(0xFF171B26);
   static const neutral800Dark = Color(0xFF13161F);
   static const neutral900Dark = Color(0xFF0A0C12);
   static const neutralBlackDark = Color(0xFF000000);
@@ -333,7 +335,7 @@ class EmbassyColors {
   static const colorSurfaceDimDark = Color(0xFF0A0C12);
   static const colorSurfaceBrightDark = Color(0xFF1C202C);
   static const colorSurfaceContainerLowestDark = Color(0xFF0A0C12);
-  static const colorSurfaceContainerLowDark = Color(0xFF13161F);
+  static const colorSurfaceContainerLowDark = Color(0xFF171B26);
   static const colorSurfaceContainerDark = Color(0xFF1C202C);
   static const colorSurfaceContainerHighDark = Color(0xFF282C39);
   static const colorSurfaceContainerHighestDark = Color(0xFF353A4A);

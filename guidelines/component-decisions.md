@@ -1,7 +1,55 @@
 # Component decision tables — the pairs most often gotten wrong
 
-Loaded on demand from la skill `screen` §3, when the component you are about to use appears here.
+Loaded from la skill `screen` §3. **Leelo cuando NO sepas qué componente usar, no solo
+cuando ya elegiste uno** — la tabla de abajo entra por lo que tenés en la mano; el resto
+del archivo entra por el componente, y para eso ya hay que saber cuál abrir.
 This is the shortcut, not the source: on any disagreement `component-rules/<id>.md` wins.
+
+---
+
+## Por lo que tenés en la mano
+
+Las reglas de esta página estaban indexadas por componente, así que se encontraban
+solo si ya sabías cuál era. Esta tabla entra por la intención. Dice **a dónde ir**, no
+repite lo que dice cada regla: la fuente sigue siendo `component-rules/<id>.md`.
+
+| Lo que tenés | Lo que es | Dónde está escrito |
+|---|---|---|
+| **Cambiar el período** — Día / Semana / Mes | `segmented-button` | `segmented-button.md` lo nombra literal. **No** `tabs` (eso navega entre paneles), **no** `toggle-group` (eso son toggles independientes tipo negrita/cursiva) |
+| **Elegir una fecha** | `calendar` si elegir la fecha **es** la tarea (grilla inline siempre visible) · `date-picker` si es un campo más de un formulario (la misma grilla detrás de un trigger) | `date-picker.md` → `not_to_confuse_with` |
+| **Buscar** | `search-bar` standalone / mobile / hero (píldora, 56px) · `search-field` dentro de una toolbar sobre un listado (compacta, alinea con los botones) | `search.md` → `when_to_use`, y §«Search» acá abajo |
+| **Una etiqueta** | Tres cosas distintas, y «tag» no es ninguna — ver abajo | §«"Tag" no existe» |
+| **Marcar que algo está elegido** | Depende de qué tipo de elección — hay tres pesos | `COMPOSICION.md` §4c |
+| **Marcar que algo importa más** | No es lo mismo que elegido — ver abajo | §«Destacado no es seleccionado» |
+| **Agrupar contenido en una superficie** | Cuatro formas de tarjeta, excluyentes | `COMPOSICION.md` §4b |
+
+### «Tag» no existe, y la palabra sí se usa
+
+No hay componente `tag`, ni clase, ni regla. Quien dice «tag» quiere una de tres, y se
+eligen por lo que la cosa **hace**, no por cómo se ve:
+
+| Si el usuario… | Es | Señal |
+|---|---|---|
+| **no lo puede tocar** — dice en qué estado está algo | `badge` | Abierta, En proceso, Vencida |
+| **lo toca para filtrar o elegir** | `chip` | Sólo activas, Esta semana |
+| **lee de qué familia es** — una categoría, no un estado | `badge-label` (versalitas, mono, píldora con borde y sin relleno) | FUNDAMENTOS, PRODUCTO |
+
+Si dudás entre `badge` y `chip`, la pregunta es una sola: **¿pasa algo si lo clickeás?**
+
+### Destacado no es seleccionado
+
+Son dos cosas y el sistema las mezclaba. **Seleccionado** es un estado que el usuario
+causó: eligió esto. **Destacado** es una propiedad del contenido: esto importa más que
+lo de al lado, lo haya tocado alguien o no.
+
+| | Quién lo causa | Cómo se marca | Qué NO |
+|---|---|---|---|
+| **Seleccionado** | El usuario, al elegir | Relleno tonal del rol que corresponda según `COMPOSICION.md` §4c — `primary-container` el objeto que opera, `secondary-container` el filtro activo, neutro el modo de vista | Nunca por tamaño ni por peso tipográfico: si cambia de tamaño al elegirlo, la fila salta |
+| **Destacado** | El contenido, por lo que es | Jerarquía: más aire, un escalón más de superficie (`surface-container-high`), o posición. Y `badge-tertiary` cuando hace falta rotularlo («Nuevo») | **Nunca el token de selección.** Un destacado que usa `secondary-container` se lee como «esto está elegido», y el usuario busca cómo deseleccionarlo |
+
+**Verificación:** si sacás al usuario de la pantalla y recargás, lo seleccionado se
+pierde y lo destacado queda. Si algo que vos llamás destacado desaparece al recargar,
+era seleccionado.
 
 ---
 

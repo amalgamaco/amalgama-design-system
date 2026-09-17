@@ -411,6 +411,63 @@ for (const file of files) {
   }
 }
 
+/* ── B2 · el proyecto pisa una clase publica del DS ────────────────────────────
+   B1 mira la direccion facil: una clase USADA en el HTML que no existe en la API.
+   La cara cara es la inversa y no la miraba nadie: el CSS del proyecto usando una
+   clase publica COMO SELECTOR para cambiarle el fondo, el borde o el relleno. Eso
+   no rompe nada visible —el resultado se ve bien— y por eso ningun review humano
+   lo agarra; lo que deja es un DS que en ese proyecto ya no manda.
+
+   Medido en la consola de check-in (sep 2026): 14 reglas propias pisaban clases
+   publicas. Seis eran errores de composicion —volver al componente correcto los
+   borro— y ocho eran gaps reales del sistema. Este chequeo habria gritado las
+   catorce, que es el punto: no distingue el error del gap, obliga a declararlo.
+
+   La valvula es `@ds-gap <id>`: un comentario en la regla apuntando a un issue
+   abierto del DS. Un override declarado pasa; uno silencioso rompe el build. Asi
+   la deuda queda contada en vez de disuelta en el CSS.
+   ──────────────────────────────────────────────────────────────────────────── */
+function chequeoB2(css, file) {
+  if (!publicClasses) return;
+  /* El DS definiendo `.card` no es un override: es la fuente. Este chequeo corre
+     sobre lo que alguien PRODUCE, no sobre el repo del sistema — apuntarlo a
+     css/components/*.css marcaba las 62 definiciones canonicas como falla. */
+  const abs = path.resolve(file);
+  if (abs.startsWith(path.join(ROOT, "css")) || abs.startsWith(path.join(ROOT, "docs"))) return;
+  const out = [];
+  /* Blanquear comentarios CONSERVANDO los saltos de linea: si se reemplaza el
+     comentario entero por espacios, los \n se pierden y a partir de ahi el numero
+     de linea —y con el la busqueda de `@ds-gap`, que mira las lineas de arriba—
+     apuntan a otro lado. Pasa en silencio: el chequeo sigue corriendo y acusa la
+     regla equivocada. */
+  const limpio = css.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, " "));
+  const lineas = css.split("\n");
+  for (const m of limpio.matchAll(/([^{}@;]+)\{/g)) {
+    const bruto = m[1];
+    const sel = bruto.trim().replace(/\s+/g, " ");
+    if (!sel || sel.startsWith("@")) continue;
+    // la linea del SELECTOR, no la del cierre de la regla anterior
+    const posSel = m.index + bruto.length - bruto.trimStart().length;
+    const linea = limpio.slice(0, posSel).split("\n").length;
+    // la valvula: `@ds-gap <id>` en la regla o en las 3 lineas de arriba
+    const contexto = lineas.slice(Math.max(0, linea - 4), linea).join("\n");
+    if (/@ds-gap\s+\S+/.test(contexto)) continue;
+    for (const c of sel.matchAll(/\.([a-zA-Z][\w-]*)/g)) {
+      const clase = c[1];
+      if (!publicClasses.has(clase)) continue;
+      if (ALLOW_PREFIX.some((re) => re.test(clase))) continue;
+      out.push({ id: "B2", sev: "BLOQ", file, line: linea,
+        desc: "el CSS del proyecto pisa una clase pública del DS (declarala con @ds-gap <id> o volvé al componente)",
+        evidence: `${sel}  →  .${clase}` });
+      break;
+    }
+  }
+  findings.push(...out);
+}
+for (const file of files.filter((f) => /\.css$/.test(f))) {
+  try { chequeoB2(fs.readFileSync(file, "utf8"), file); } catch {}
+}
+
 const count = (s) => findings.filter((f) => f.sev === s).length;
 const summary = { BLOQ: count("BLOQ"), ALTA: count("ALTA"), MEDIA: count("MEDIA"), BAJA: count("BAJA"), total: findings.length };
 

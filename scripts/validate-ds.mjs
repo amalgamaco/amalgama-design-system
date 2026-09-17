@@ -867,5 +867,64 @@ console.log("\n[21] el ?v= de cada hoja sale de su contenido");
 }
 
 
+
+/* ────────────────────────────────────────────────────────────────────────────
+   [22] dos escalones de superficie no pueden resolver al mismo color
+
+   `COMPOSICION.md` III·a·1 pide un escalon entre la pagina y el panel. Medido en
+   sep 2026 sobre una pantalla real: en oscuro `--color-surface-container-low`
+   resolvia al MISMO `#13161F` que `--color-surface`, porque los dos apuntaban a
+   `--neutral-800` y entre 800 y 700 no habia escalon. Un panel en ese token era
+   invisible salvo por su borde. No lo vio nadie leyendo el CSS —los dos nombres
+   son distintos— y el chequeo de pares AA tampoco, porque mide contraste de texto,
+   no separacion entre superficies.
+
+   Esto compara los valores RESUELTOS, que es donde el bug vivia.
+   ──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[22] los escalones de superficie se distinguen entre sí");
+{
+  const css = read("css/variables.css");
+  const prim = Object.fromEntries([...css.matchAll(/(--neutral-[\w-]+):\s*(#[0-9A-Fa-f]{3,8})/g)].map((m) => [m[1], m[2].toUpperCase()]));
+  const RAMPA = ["surface", "surface-container-lowest", "surface-container-low",
+                 "surface-container", "surface-container-high", "surface-container-highest"];
+  /* Excepcion declarada: en claro el modelo es «pagina gris, tarjeta blanca», y entre
+     #F3F4F6 y #FFFFFF no entran dos escalones que se lean distintos. `lowest` y `low`
+     comparten valor a proposito; esta escrito en design.md. Cualquier OTRO par que
+     colapse es un bug. */
+  const EXENTOS = new Set(["light:surface-container-lowest=surface-container-low"]);
+
+  const bloque = (re) => { const m = re.exec(css); if (!m) return null;
+    const desde = m.index; let prof = 0, i = css.indexOf("{", desde);
+    for (let j = i; j < css.length; j++) { if (css[j] === "{") prof++; else if (css[j] === "}") { prof--; if (!prof) return css.slice(desde, j); } }
+    return css.slice(desde); };
+  const resolver = (v) => { const m = /var\((--neutral-[\w-]+)\)/.exec(v); return (m ? (prim[m[1]] || v) : v).trim().toUpperCase(); };
+
+  /* TODOS los pares, no solo los contiguos por nombre. La primera version de este
+     chequeo comparaba vecinos en el orden en que estan escritos y NO agarraba el bug
+     que lo motivo: en oscuro `lowest` (#0A0C12) es mas oscuro que `surface`, asi que
+     el par que colapsaba —surface y container-low— no era contiguo. El orden de los
+     nombres no es el orden de los valores; el invariante es que ningun escalon
+     comparta color con otro, sin importar donde este. */
+  const problemas = [];
+  for (const [tema, re] of [["light", /^:root\s*\{/m], ["dark", /\[data-theme="dark"\]\s*\{/]]) {
+    const b = bloque(re); if (!b) continue;
+    const vals = {};
+    for (const t of RAMPA) { const m = new RegExp(`--color-${t}:\\s*([^;]+);`).exec(b); if (m) vals[t] = resolver(m[1]); }
+    const presentes = RAMPA.filter((t) => vals[t]);
+    for (let i = 0; i < presentes.length; i++)
+      for (let j = i + 1; j < presentes.length; j++) {
+        const x = presentes[i], y = presentes[j];
+        if (vals[x] !== vals[y]) continue;
+        if (EXENTOS.has(`${tema}:${x}=${y}`) || EXENTOS.has(`${tema}:${y}=${x}`)) continue;
+        problemas.push(`${tema}: --color-${x} y --color-${y} resuelven los dos a ${vals[x]}`);
+      }
+  }
+  if (problemas.length)
+    fail(`${problemas.length} escalón(es) de superficie colapsado(s) — un panel en ese token es `
+         + `invisible salvo por su borde: ` + problemas.join(" · "));
+  else ok("ningún escalón de la rampa comparte valor con otro (salvo la excepción declarada en claro)");
+}
+
+
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);

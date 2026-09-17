@@ -27,6 +27,10 @@
   --neutral-500: #353A4A;
   --neutral-600: #282C39;
   --neutral-700: #1C202C;
+  --neutral-750: #171B26; /* el escalon que faltaba entre 800 y 700 — sin el,
+                             --color-surface-container-low en dark resolvia al MISMO
+                             #13161F que --color-surface y un panel en ese token era
+                             invisible salvo por su borde (medido sep 2026) */
   --neutral-800: #13161F;
   --neutral-900: #0A0C12;
   --neutral-black: #000000;
@@ -731,7 +735,7 @@
   --color-surface-dim:               #0A0C12; /* neutral-900 */
   --color-surface-bright:            #1C202C; /* neutral-700 */
   --color-surface-container-lowest:  #0A0C12; /* neutral-900 */
-  --color-surface-container-low:     #13161F; /* neutral-800 */
+  --color-surface-container-low:     #171B26; /* neutral-750 — el escalon sobre surface */
   --color-surface-container:         #1C202C; /* neutral-700 */
   --color-surface-container-high:    #282C39; /* neutral-600 */
   --color-surface-container-highest: #353A4A; /* neutral-500 */

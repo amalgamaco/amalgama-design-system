@@ -393,6 +393,34 @@ producto: es la forma que más pesa de las cuatro.
 > chica (`--font-size-overline-sm`) y la bajada es una bajada como las otras ocho. La diferencia
 > visible máxima fue medio píxel en la etiqueta y 0.18px de tracking en el titular.
 
+## 4c. «Seleccionado» no es un solo significado
+
+Embassy reserva `--color-secondary-container` para el estado seleccionado en chip,
+segmented, calendar, pagination y menú activo. Un token para un significado está
+bien; el problema es que **seleccionado no es un significado solo**, y nada decía
+cuántos sistemas de selección pueden convivir en una misma región.
+
+Medido en septiembre de 2026 sobre una consola de check-in: había **tres a menos de
+200px** —el segmento de vista activo, el chip de filtro activo y la clase abierta en
+la agenda—, los tres del mismo azul, y ninguno leía como más importante que otro.
+
+Hay tres cosas distintas que la pantalla llama «seleccionado», y se separan por peso:
+
+| Qué significa | Rol | Peso |
+|---|---|---|
+| **Qué objeto estás operando** — la fila, la clase, el asiento abierto | `primary-container` | Superficie grande. Domina: es el sujeto de la pantalla |
+| **Qué filtro está activo** — chips, facetas | `secondary-container` | Píldoras chicas. Peso medio: modifica lo que ves, no es lo que mirás |
+| **Cómo estás mirando** — día/semana/mes, lista/mapa | neutro, sin acento | El más callado. Es una preferencia de vista, no un dato |
+
+Contraste verificado: `on-primary-container` sobre `primary-container` da 12.86:1 en
+claro y 5.44:1 en oscuro.
+
+**Verificación:** contá los elementos con token de selección dentro de un mismo
+contenedor. **Más de un sistema de selección del mismo rol en una región es una
+falla** — no porque se vea mal, sino porque el ojo no puede ordenar tres azules
+iguales y termina leyendo la pantalla como una lista de cosas encendidas.
+
+
 ## 5. El ícono tiene cinco lugares, y "arriba del título" no es el default
 
 **No:** un ícono chico en un cuadrado con radio tintado, **al lado del título**, uno por card y del

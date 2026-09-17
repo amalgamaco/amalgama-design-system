@@ -36,7 +36,7 @@ content_rules:
   - "Search Field: leading 18px icon + input; keep it as one flex row with toolbar buttons."
 layout_constraints:
   - "Search Bar background is grey (--color-surface-container-high) — never --color-surface. Search Field background is --color-surface — never transparent. Don't swap them."
-  - "Search Bar width 360–720px; use .search-row to place actions beside it. Search Field flexes to fill the toolbar."
+  - "Search Bar width 360–720px RECOMENDADO cuando vive suelta; dentro de una columna de contenido el ancho lo manda la región (design.md — la composición gana). Use .search-row to place actions beside it. Search Field flexes to fill the toolbar."
   - "Don't replace a Search variant with a plain form Input — the shape/scope semantics differ."
 
 states:

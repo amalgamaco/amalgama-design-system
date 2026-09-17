@@ -59,6 +59,11 @@
       "$value": "#1C202C",
       "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
     },
+    "--neutral-750": {
+      "$type": "color",
+      "$value": "#171B26",
+      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+    },
     "--neutral-800": {
       "$type": "color",
       "$value": "#13161F",
@@ -753,7 +758,7 @@
       "$type": "color",
       "$value": "#FAFBFC",
       "section": "Background & Surface",
-      "$dark": "#13161F",
+      "$dark": "#171B26",
       "$alias": "--neutral-10"
     },
     "--color-surface-container": {

@@ -132,6 +132,15 @@ Reglas transversales de composición:
   vecino de menor prioridad baja a outline o texto.
 - **Mostrá unidades, períodos, poblaciones, bases y comparadores al lado del dato que califican.**
 
+**Cuando una regla de componente choca con una de composición, gana la de
+composición.** El rango que declara un `component-rules/<id>.md` —«Search Bar
+360–720px»— es una recomendación para cuando el componente vive suelto; adentro de
+una columna de contenido, el ancho lo manda la región. Los dos textos existían y se
+contradecían: en cualquier columna de más de 720px no se podían cumplir a la vez, y
+lo resolvía a mano quien maquetaba, que es exactamente lo que un design system
+tiene que evitar. La precedencia se escribe una vez acá y los rangos de componente
+dicen «recomendado», no «máximo».
+
 ---
 
 ## 6. El sistema visual
@@ -444,3 +453,57 @@ mejorá en `md` (768px) y `lg` (1024px). Las transformaciones canónicas:
 - [ ] Probado en light **y** dark con `data-theme`, sin ningún override por tema
 - [ ] Ningún ítem de §8 presente
 - [ ] Idioma correcto según §1
+
+
+## Qué borde le toca a cada control
+
+`--color-outline` es el borde interactivo y `--color-outline-variant` el sutil, pero
+eso no alcanza para elegir: medido en septiembre de 2026, tres tokens distintos
+convivían entre controles igual de interactivos —`seg-btn-group` e `icon-btn` en
+`--color-outline` (#9FA3AE), `chip` en `--color-outline-variant` (#BFC1C8) y
+`field-input` y `search-field` en `--border`, que es un 10% de alfa—. Un campo de
+fecha tan accionable como el grupo segmentado que tenía al lado llevaba un borde
+tres veces más tenue.
+
+La regla es por **familia de control**, no por componente:
+
+| Familia | Borde | Por qué |
+|---|---|---|
+| **Control que se acciona** — botón con contorno, `icon-btn`, `seg-btn-group`, `toggle` | `--color-outline` | El borde es la afordancia: dice «esto se toca». Tiene que leerse solo |
+| **Control que recibe texto** — `field-input`, `textarea`, `search-field`, `select` | `--border` | El contorno delimita un área de escritura sobre la superficie; compite con el texto que va adentro, así que pesa menos. En foco sube a `--color-focus` (§6.2 forma C) y ahí sí se lee |
+| **Objeto seleccionable en reposo** — `chip`, `checkbox-card`, `radio-card` | `--color-outline-variant` | Son muchos y en grilla: a `--color-outline` la pantalla se llena de rayas. Al seleccionarse cambian de relleno, no de borde |
+
+**Verificación:** dos controles de la misma familia, uno al lado del otro, tienen el
+mismo borde. Si un campo y un botón comparten borde, o dos campos no lo comparten,
+la familia está mal asignada.
+
+
+## La rampa de superficies no es una escala de elevación
+
+Medida en septiembre de 2026, la rampa en claro **cambia de dirección en el medio**:
+`surface` #F3F4F6 → `container-low` #FAFBFC → `container` #FFFFFF suben hacia el blanco,
+y `container-high` #EAEBED → `container-highest` #BFC1C8 bajan hacia el gris. En oscuro,
+en cambio, sube pareja. Así que la relación entre un contenedor y su padre se invierte
+según el tema, y quien compone no puede razonar «un escalón más arriba».
+
+**No es un error de un valor: es que el modelo en claro es «página gris, tarjeta blanca».**
+Volver la rampa monótona significaría que la tarjeta deja de ser blanca, que es una de las
+cosas que hacen que Embassy se vea como Embassy. Así que la regla no es el orden, es el rol:
+
+| Token | Qué es | Cuándo |
+|---|---|---|
+| `--color-surface` | La página | El fondo sobre el que se apoya todo |
+| `--color-surface-container-low` | Panel tenue | Una región que se separa apenas de la página — un rail, una banda |
+| `--color-surface-container` | **La tarjeta** | El default de cualquier contenedor de contenido. En claro es blanco |
+| `--color-surface-container-high` | Superficie tintada | Énfasis **anidado**: algo que va adentro de una tarjeta y tiene que despegarse de ella |
+| `--color-surface-container-highest` | La más marcada | Un solo nivel más, y rara vez. Si necesitás un cuarto anidamiento, el problema es la estructura |
+
+**Los dos de arriba no son «más elevación»: son tinte.** En claro van hacia el gris porque
+sobre blanco no hay a dónde ir; en oscuro van hacia el claro por la misma razón invertida.
+La forma de elegir es *contra qué se tiene que despegar esto*, nunca *cuán arriba está*.
+
+**Una consecuencia declarada:** en claro `container-lowest` y `container-low` comparten
+valor, porque entre #F3F4F6 y #FFFFFF no entran dos escalones que se lean distintos. Está
+exento en el chequeo `[22]`, que falla ante cualquier otro par que colapse — como el que
+tenía oscuro hasta septiembre de 2026, donde `container-low` resolvía al mismo #13161F que
+`surface` y un panel en ese token era invisible salvo por su borde.
