@@ -109,3 +109,20 @@
   margin-top: var(--space-4);
   display: flex; align-items: center; gap: var(--space-2);
 }
+
+/* ── Contexto de superficie ──────────────────────────────────────────────────
+   Una tarjeta pinta su propio fondo, asi que declara el contexto para lo que
+   vaya adentro. Sin esto, un `list` adentro de una card pintaba el gris de la
+   pagina sobre el blanco de la card y habia que escribirle `background:
+   transparent` a mano — un override de clase publica por cada uso. */
+.card                { --ctx-surface: var(--card-bg);                            --ctx-surface-raised: var(--color-surface-container-high); }
+.card-elevated       { --ctx-surface: var(--color-surface-container-low);        --ctx-surface-raised: var(--color-surface-container-high); }
+.card-filled         { --ctx-surface: var(--color-surface-container-highest);    --ctx-surface-raised: var(--color-surface-container); }
+
+/* La valvula para un panel que NO es una card del DS — un rail, un sheet, una
+   region propia del proyecto. Se declara en el contenedor y los componentes de
+   adentro se acomodan solos. */
+[data-surface="surface"]           { --ctx-surface: var(--color-surface);                        --ctx-surface-raised: var(--color-surface-container); }
+[data-surface="container-low"]     { --ctx-surface: var(--color-surface-container-low);          --ctx-surface-raised: var(--color-surface-container); }
+[data-surface="container"]         { --ctx-surface: var(--color-surface-container);              --ctx-surface-raised: var(--color-surface-container-high); }
+[data-surface="container-high"]    { --ctx-surface: var(--color-surface-container-high);         --ctx-surface-raised: var(--color-surface-container-highest); }

@@ -321,7 +321,7 @@
       "rules_files": [
         "component-rules/attachment.md"
       ],
-      "usage": "<ul class=\"attachment-list\">\n  <li class=\"attachment\">\n    <span class=\"attachment-icon\"><svg>…</svg></span>\n    <div class=\"attachment-body\">\n      <div class=\"attachment-name\">CV_Ana_Torres.pdf</div>\n      <div class=\"attachment-meta\">240 KB · PDF</div>\n    </div>\n    <button class=\"icon-btn btn-sm attachment-remove\" aria-label=\"Quitar\">✕</button>\n  </li>\n</ul>",
+      "usage": "<ul class=\"attachment-list\">\n  <li class=\"attachment\">\n    <span class=\"attachment-icon\"><i data-lucide=\"file-text\"></i></span>\n    <div class=\"attachment-body\">\n      <div class=\"attachment-name\">CV_Ana_Torres.pdf</div>\n      <div class=\"attachment-meta\">240 KB · PDF</div>\n    </div>\n    <button class=\"icon-btn btn-sm attachment-remove\" aria-label=\"Quitar\">✕</button>\n  </li>\n</ul>",
       "classes": [
         "attachment",
         "attachment-body",
@@ -403,7 +403,7 @@
       "rules_files": [
         "component-rules/back-link.md"
       ],
-      "usage": "<button class=\"back-link\">\n  <svg width=\"16\" height=\"16\" ...>...</svg>\n  Volver a vacantes\n</button>",
+      "usage": "<button class=\"back-link\">\n  <svg width=\"16\" height=\"16\">…</svg>\n  Volver a vacantes\n</button>",
       "classes": [
         "back-link"
       ],
@@ -592,7 +592,7 @@
       "rules_files": [
         "component-rules/calendar.md"
       ],
-      "usage": "<div class=\"calendar\">\n  <div class=\"calendar-header\">\n    <button class=\"calendar-nav-btn\" aria-label=\"Mes anterior\">‹</button>\n    <span class=\"calendar-caption\">Julio 2026</span>\n    <button class=\"calendar-nav-btn\" aria-label=\"Mes siguiente\">›</button>\n  </div>\n  <div class=\"calendar-weekdays\">...</div>\n  <div class=\"calendar-grid\">...</div>\n</div>",
+      "usage": "<div class=\"calendar\">\n  <div class=\"calendar-header\">\n    <button class=\"calendar-nav-btn\" aria-label=\"Mes anterior\">‹</button>\n    <span class=\"calendar-caption\">Julio 2026</span>\n    <button class=\"calendar-nav-btn\" aria-label=\"Mes siguiente\">›</button>\n  </div>\n  <div class=\"calendar-weekdays\">\n    <span class=\"calendar-weekday\">L</span><span class=\"calendar-weekday\">M</span>\n    <span class=\"calendar-weekday\">M</span><span class=\"calendar-weekday\">J</span>\n    <span class=\"calendar-weekday\">V</span><span class=\"calendar-weekday\">S</span>\n    <span class=\"calendar-weekday\">D</span>\n  </div>\n  <div class=\"calendar-grid\">\n    <button class=\"calendar-day calendar-day-outside\">29</button>\n    <button class=\"calendar-day calendar-day-outside\">30</button>\n    <button class=\"calendar-day\">1</button>\n    <button class=\"calendar-day\">2</button>\n    <button class=\"calendar-day\">3</button>\n    <button class=\"calendar-day\">4</button>\n    <button class=\"calendar-day\">5</button>\n    <button class=\"calendar-day\">6</button>\n    <button class=\"calendar-day\">7</button>\n    <button class=\"calendar-day calendar-day-today\">8</button>\n    <button class=\"calendar-day\">9</button>\n    <button class=\"calendar-day\">10</button>\n    <button class=\"calendar-day calendar-day-selected\" aria-selected=\"true\">11</button>\n    <button class=\"calendar-day\">12</button>\n  </div>\n</div>",
       "classes": [
         "calendar",
         "calendar-caption",
@@ -615,6 +615,7 @@
         "calendar-presets",
         "calendar-sm",
         "calendar-time-row",
+        "calendar-weekday",
         "calendar-weekdays",
         "calendar-weeknum",
         "calendar-with-presets",
@@ -682,7 +683,7 @@
       "rules_files": [
         "component-rules/carousel.md"
       ],
-      "usage": "<div class=\"carousel\">\n  <div class=\"carousel-content\">\n    <div class=\"carousel-item\">…</div>\n    <div class=\"carousel-item\">…</div>\n  </div>\n  <button class=\"carousel-btn carousel-btn-prev\">‹</button>\n  <button class=\"carousel-btn carousel-btn-next\">›</button>\n</div>",
+      "usage": "<div class=\"carousel\">\n  <div class=\"carousel-content\">\n    <div class=\"carousel-item\">Primera lámina</div>\n    <div class=\"carousel-item\">Segunda lámina</div>\n  </div>\n  <button class=\"carousel-btn carousel-btn-prev\">‹</button>\n  <button class=\"carousel-btn carousel-btn-next\">›</button>\n</div>",
       "classes": [
         "carousel",
         "carousel-btn",
@@ -790,7 +791,7 @@
       "rules_files": [
         "component-rules/chip.md"
       ],
-      "usage": "<button class=\"chip\">Sugerencia</button>\n<button class=\"chip\"><span class=\"chip-icon\">…</span> Asistencia</button>\n<button class=\"chip\" aria-pressed=\"false\">Filtro</button>\n<button class=\"chip chip-selected\" aria-pressed=\"true\">Filtro activo</button>\n<span class=\"chip\">Entrada <button class=\"chip-remove\" aria-label=\"Quitar\">✕</button></span>\n<button class=\"chip chip-elevated\">Elevado</button>",
+      "usage": "<button class=\"chip\">Sugerencia</button>\n<button class=\"chip\"><span class=\"chip-icon\">…</span> Asistencia</button>\n<button class=\"chip\" aria-pressed=\"false\">Filtro</button>\n<button class=\"chip\" aria-pressed=\"true\">Filtro activo</button>\n<span class=\"chip\">Entrada <button class=\"chip-remove\" aria-label=\"Quitar\">✕</button></span>\n<button class=\"chip chip-elevated\">Elevado</button>",
       "classes": [
         "chip",
         "chip-elevated",
@@ -886,7 +887,7 @@
       "rules_files": [
         "component-rules/command.md"
       ],
-      "usage": "<div class=\"command\">\n  <div class=\"command-input-wrapper\">\n    <span class=\"command-input-icon\">…lupa…</span>\n    <input class=\"command-input\" placeholder=\"Buscar…\">\n  </div>\n  <div class=\"command-list\">\n    <div class=\"command-empty\">Sin resultados.</div>\n    <div class=\"command-group\">\n      <div class=\"command-group-heading\">Sugerencias</div>\n      <div class=\"command-item\" data-active=\"true\">Item</div>\n    </div>\n  </div>\n</div>",
+      "usage": "<div class=\"command\">\n  <div class=\"command-input-wrapper\">\n    <span class=\"command-input-icon\"><i data-lucide=\"search\"></i></span>\n    <input class=\"command-input\" placeholder=\"Buscar…\">\n  </div>\n  <div class=\"command-list\">\n    <div class=\"command-empty\">Sin resultados.</div>\n    <div class=\"command-group\">\n      <div class=\"command-group-heading\">Sugerencias</div>\n      <div class=\"command-item\" data-active=\"true\">Item</div>\n    </div>\n  </div>\n</div>",
       "classes": [
         "command",
         "command-dialog",
@@ -1149,7 +1150,7 @@
       "rules_files": [
         "component-rules/empty-state.md"
       ],
-      "usage": "<div class=\"empty-state\">\n  <svg class=\"empty-state-icon\" aria-hidden=\"true\" width=\"32\" height=\"32\"><!-- lucide --></svg>\n  <div class=\"empty-state-title\">No hay vacantes</div>\n  <p class=\"empty-state-desc\">Crea tu primera vacante para empezar.</p>\n  <button class=\"btn-primary\">+ Nueva vacante</button>\n</div>",
+      "usage": "<div class=\"empty-state\">\n  <i data-lucide=\"inbox\" class=\"empty-state-icon\" aria-hidden=\"true\"></i>\n  <div class=\"empty-state-title\">No hay vacantes</div>\n  <p class=\"empty-state-desc\">Crea tu primera vacante para empezar.</p>\n  <button class=\"btn-primary\">+ Nueva vacante</button>\n</div>",
       "classes": [
         "btn-primary",
         "empty-state",
@@ -1296,7 +1297,7 @@
       "rules_files": [
         "component-rules/item.md"
       ],
-      "usage": "<div class=\"item item-outline\">\n  <div class=\"item-media item-media-icon\"><svg>…</svg></div>\n  <div class=\"item-content\">\n    <div class=\"item-title\">Notificaciones</div>\n    <div class=\"item-description\">Recibí avisos por email.</div>\n  </div>\n  <div class=\"item-actions\"><button class=\"btn-tertiary btn-sm\">Config</button></div>\n</div>",
+      "usage": "<div class=\"item item-outline\">\n  <div class=\"item-media item-media-icon\"><i data-lucide=\"bell\"></i></div>\n  <div class=\"item-content\">\n    <div class=\"item-title\">Notificaciones</div>\n    <div class=\"item-description\">Recibí avisos por email.</div>\n  </div>\n  <div class=\"item-actions\"><button class=\"btn-tertiary btn-sm\">Config</button></div>\n</div>",
       "classes": [
         "btn-sm",
         "btn-tertiary",
@@ -1517,7 +1518,7 @@
       "rules_files": [
         "component-rules/navigation-menu.md"
       ],
-      "usage": "<nav class=\"nav-menu\">\n  <div class=\"nav-menu-list\">\n    <button class=\"nav-menu-trigger\">Productos</button>\n    <a class=\"nav-menu-trigger\" href=\"/precios\">Precios</a>\n    <span class=\"nav-menu-indicator\"></span>\n  </div>\n  <div class=\"nav-menu-viewport\">\n    <div class=\"nav-menu-content\">…enlaces agrupados…</div>\n  </div>\n</nav>",
+      "usage": "<nav class=\"nav-menu\">\n  <div class=\"nav-menu-list\">\n    <button class=\"nav-menu-trigger\">Productos</button>\n    <a class=\"nav-menu-trigger\" href=\"/precios\">Precios</a>\n    <span class=\"nav-menu-indicator\"></span>\n  </div>\n  <div class=\"nav-menu-viewport\">\n    <div class=\"nav-menu-content\">…</div>\n  </div>\n</nav>",
       "classes": [
         "nav-menu",
         "nav-menu-content",
@@ -1646,7 +1647,7 @@
       "rules_files": [
         "component-rules/placeholder.md"
       ],
-      "usage": "<div class=\"placeholder-panel\">\n  <svg class=\"placeholder-icon\" aria-hidden=\"true\" width=\"32\" height=\"32\"><!-- lucide --></svg>\n  <p>Selecciona una vacante para ver los detalles.</p>\n</div>",
+      "usage": "<div class=\"placeholder-panel\">\n  <i data-lucide=\"mouse-pointer-click\" class=\"placeholder-icon\" aria-hidden=\"true\"></i>\n  <p>Selecciona una vacante para ver los detalles.</p>\n</div>",
       "classes": [
         "placeholder-icon",
         "placeholder-panel"
@@ -1834,7 +1835,7 @@
       "rules_files": [
         "component-rules/scroll-area.md"
       ],
-      "usage": "<div class=\"scroll-area\" style=\"max-height: 320px\">\n  …contenido largo…\n</div>",
+      "usage": "<div class=\"scroll-area\" style=\"max-height: 320px\">\n  …\n</div>",
       "classes": [
         "scroll-area"
       ],
@@ -1863,7 +1864,7 @@
       "rules_files": [
         "component-rules/search.md"
       ],
-      "usage": "<!-- Search bar standalone -->\n<div class=\"search-bar\" role=\"search\">\n  <span class=\"search-bar-icon\">…lupa…</span>\n  <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar\" aria-label=\"Buscar\">\n  <span class=\"search-bar-avatar\">AV</span>   <!-- opcional -->\n</div>\n\n<!-- Search + icon buttons (patrón canónico para toolbar-like) -->\n<div class=\"search-row\">\n  <div class=\"search-bar\" role=\"search\">\n    <span class=\"search-bar-icon\">…lupa…</span>\n    <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar\" aria-label=\"Buscar\">\n  </div>\n  <button class=\"search-icon-btn\" aria-label=\"Filtros\"><svg>…</svg></button>\n  <button class=\"search-icon-btn\" aria-label=\"Ordenar\"><svg>…</svg></button>\n</div>\n\n<!-- Search view (docked). Full-screen: + .search-view-fullscreen -->\n<div class=\"search-view\" role=\"search\">\n  <div class=\"search-view-header\">\n    <button class=\"search-view-back\" aria-label=\"Volver\">…</button>\n    <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar\">\n  </div>\n  <ul class=\"search-view-results\">…</ul>\n</div>",
+      "usage": "<!-- Search bar standalone -->\n<div class=\"search-bar\" role=\"search\">\n  <span class=\"search-bar-icon\"><i data-lucide=\"search\"></i></span>\n  <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar\" aria-label=\"Buscar\">\n  <span class=\"search-bar-avatar\">AV</span>   <!-- opcional -->\n</div>\n\n<!-- Search + icon buttons (patrón canónico para toolbar-like) -->\n<div class=\"search-row\">\n  <div class=\"search-bar\" role=\"search\">\n    <span class=\"search-bar-icon\"><i data-lucide=\"search\"></i></span>\n    <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar\" aria-label=\"Buscar\">\n  </div>\n  <button class=\"search-icon-btn\" aria-label=\"Filtros\"><svg>…</svg></button>\n  <button class=\"search-icon-btn\" aria-label=\"Ordenar\"><svg>…</svg></button>\n</div>\n\n<!-- Search view (docked). Full-screen: + .search-view-fullscreen -->\n<div class=\"search-view\" role=\"search\">\n  <div class=\"search-view-header\">\n    <button class=\"search-view-back\" aria-label=\"Volver\">…</button>\n    <input class=\"search-bar-input\" type=\"search\" placeholder=\"Buscar\">\n  </div>\n  <ul class=\"search-view-results\">…</ul>\n</div>",
       "classes": [
         "form-input",
         "search-bar",
@@ -1903,7 +1904,7 @@
       "rules_files": [
         "component-rules/segmented-button.md"
       ],
-      "usage": "<div class=\"seg-btn-group\" role=\"group\" aria-label=\"Vista\">\n  <button class=\"seg-btn selected\" aria-selected=\"true\" onclick=\"segSwitch(this)\">Lista</button>\n  <button class=\"seg-btn\" aria-selected=\"false\" onclick=\"segSwitch(this)\">Cuadrícula</button>\n</div>",
+      "usage": "<div class=\"seg-btn-group\" role=\"group\" aria-label=\"Vista\">\n  <!-- El estado lo declara aria-selected (única) o aria-pressed (múltiple); .selected es un alias. -->\n  <button class=\"seg-btn\" aria-selected=\"true\" onclick=\"segSwitch(this)\">Lista</button>\n  <button class=\"seg-btn\" aria-selected=\"false\" onclick=\"segSwitch(this)\">Cuadrícula</button>\n</div>",
       "classes": [
         "seg-btn",
         "seg-btn-group",
@@ -2123,7 +2124,7 @@
       "rules_files": [
         "component-rules/stat-card.md"
       ],
-      "usage": "<div class=\"stats-grid\">\n  <div class=\"stat-card\">\n    <div class=\"stat-label\">Vacantes abiertas</div>\n    <div class=\"stat-value\">24</div>\n    <div class=\"badge stat-change stat-change-positive\">\n      <svg width=\"12\" height=\"12\" aria-hidden=\"true\"><!-- lucide trending-up --></svg>12%\n    </div>\n  </div>\n</div>",
+      "usage": "<div class=\"stats-grid\">\n  <div class=\"stat-card\">\n    <div class=\"stat-label\">Vacantes abiertas</div>\n    <div class=\"stat-value\">24</div>\n    <div class=\"badge stat-change stat-change-positive\">\n      <i data-lucide=\"trending-up\" aria-hidden=\"true\"></i>12%\n    </div>\n  </div>\n</div>",
       "classes": [
         "badge",
         "stat-card",
@@ -2218,7 +2219,7 @@
       "rules_files": [
         "component-rules/tabs.md"
       ],
-      "usage": "<div class=\"tabs\" role=\"tablist\">\n  <button class=\"tab active\" role=\"tab\" aria-selected=\"true\" id=\"tab-general\" aria-controls=\"panel-general\">General</button>\n  <button class=\"tab\" role=\"tab\" aria-selected=\"false\" id=\"tab-requisitos\" aria-controls=\"panel-requisitos\" tabindex=\"-1\">Requisitos</button>\n  <span class=\"tab-indicator\"></span>\n</div>\n<div class=\"tab-panel active\" id=\"panel-general\" role=\"tabpanel\" aria-labelledby=\"tab-general\">...</div>\n<div class=\"tab-panel\" id=\"panel-requisitos\" role=\"tabpanel\" aria-labelledby=\"tab-requisitos\" hidden>...</div>",
+      "usage": "<div class=\"tabs\" role=\"tablist\">\n  <!-- El estado lo declara aria-selected; .active es un alias que el JS agrega y el CSS también pinta. -->\n  <button class=\"tab\" role=\"tab\" aria-selected=\"true\" id=\"tab-general\" aria-controls=\"panel-general\">General</button>\n  <button class=\"tab\" role=\"tab\" aria-selected=\"false\" id=\"tab-requisitos\" aria-controls=\"panel-requisitos\" tabindex=\"-1\">Requisitos</button>\n  <span class=\"tab-indicator\"></span>\n</div>\n<div class=\"tab-panel active\" id=\"panel-general\" role=\"tabpanel\" aria-labelledby=\"tab-general\">…</div>\n<div class=\"tab-panel\" id=\"panel-requisitos\" role=\"tabpanel\" aria-labelledby=\"tab-requisitos\" hidden>…</div>",
       "classes": [
         "active",
         "tab",
@@ -2442,7 +2443,7 @@
       "rules_files": [
         "component-rules/vacancy-card.md"
       ],
-      "usage": "<div class=\"vacancies-list\">\n  <!-- Interactiva: agregá tabindex=\"0\" role=\"button\" (o usá <a>/<button>) —\n       la card es focusable y trae :focus-visible. -->\n  <div class=\"vacancy-card\" tabindex=\"0\" role=\"button\">\n    <svg class=\"vacancy-icon\" aria-hidden=\"true\" width=\"20\" height=\"20\"><!-- lucide --></svg>\n    <div class=\"vacancy-info\">\n      <div class=\"vacancy-name\">\n        Desarrollador Frontend\n        <span class=\"badge badge-open\">Abierta</span>\n      </div>\n      <div class=\"vacancy-meta\">\n        Tecnologia <span class=\"meta-dot\"></span> Remoto\n      </div>\n    </div>\n    <div class=\"vacancy-right\">\n      <div class=\"vacancy-age\">3d</div>\n    </div>\n  </div>\n</div>",
+      "usage": "<div class=\"vacancies-list\">\n  <!-- Interactiva: agregá tabindex=\"0\" role=\"button\" (o usá <a>/<button>) —\n       la card es focusable y trae :focus-visible. -->\n  <div class=\"vacancy-card\" tabindex=\"0\" role=\"button\">\n    <i data-lucide=\"briefcase\" class=\"vacancy-icon\" aria-hidden=\"true\"></i>\n    <div class=\"vacancy-info\">\n      <div class=\"vacancy-name\">\n        Desarrollador Frontend\n        <span class=\"badge badge-open\">Abierta</span>\n      </div>\n      <div class=\"vacancy-meta\">\n        Tecnologia <span class=\"meta-dot\"></span> Remoto\n      </div>\n    </div>\n    <div class=\"vacancy-right\">\n      <div class=\"vacancy-age\">3d</div>\n    </div>\n  </div>\n</div>",
       "classes": [
         "assignee",
         "assignee-avatar",

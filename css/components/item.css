@@ -15,7 +15,7 @@
 
    Uso:
    <div class="item item-outline">
-     <div class="item-media item-media-icon"><svg>…</svg></div>
+     <div class="item-media item-media-icon"><i data-lucide="bell"></i></div>
      <div class="item-content">
        <div class="item-title">Notificaciones</div>
        <div class="item-description">Recibí avisos por email.</div>

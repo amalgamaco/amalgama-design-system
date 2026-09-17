@@ -41,10 +41,10 @@ layout_constraints:
 
 states:
   default: "Transparent segment, group border --color-outline-variant, label --color-on-surface."
-  hover: "State layer over the segment (unselected: on-surface @ 8%; selected: on-secondary-container @ 8% over the container)."
+  hover: "State layer over the segment (unselected: on-surface @ 8%; selected: on-surface @ 8% over the raised thumb)."
   focus: "Visible focus-visible ring (--color-focus + --color-focus-ring) plus a 12% state layer; the ring is required (WCAG 2.4.7) and never removed."
   active: "Pressed state layer at 12%."
-  selected: "Filled --color-secondary-container / --color-on-secondary-container, weight 600."
+  selected: "Neutral raised thumb — --ctx-track-thumb / --color-on-surface + --shadow-sm, weight 600. NOT the selection token: secondary-container belongs to the active filter (COMPOSICION.md §4c)."
   disabled: "Label onSurface @ 38%, container/border onSurface @ 12%; no pointer events."
 
 accessibility:
@@ -73,7 +73,7 @@ common_mistakes:
   - "Confusing it with Toggle Group — a pill view-switch vs. grouped independent toggles."
 nielsen_heuristics:
   - {id: 1, name: "Visibility of system status", note: "the active segment always shows the current view/mode"}
-  - {id: 4, name: "Consistency and standards", note: "secondary-container selection color matches Chip/Toggle across the system"}
+  - {id: 4, name: "Consistency and standards", note: "view-mode selection is neutral everywhere; the tonal secondary-container is reserved for active filters, so two selections in one region never read at the same weight"}
   - {id: 6, name: "Recognition rather than recall", note: "all options are visible, not hidden in a menu"}
   - {id: 7, name: "Flexibility and efficiency of use", note: "one compact tap to switch, no dropdown"}
 
@@ -88,7 +88,7 @@ relationships:
     - {component: button, why: "buttons act once; segmented selects a persistent mode"}
 
 tokens:
-  color: [--color-secondary-container, --color-on-secondary-container, --color-outline-variant, --color-on-surface, --color-focus, --color-focus-ring]
+  color: [--ctx-track, --ctx-track-thumb, --color-on-surface, --color-outline-variant, --color-focus, --color-focus-ring]
   radius: [--radius-full]
   spacing: [--space-2]
   motion: [--duration-fast, --ease-default]
@@ -97,7 +97,7 @@ tokens:
 motion:
   enter: "none — always present (static view/mode switch)."
   exit: "none."
-  stateChange: "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the secondary-container. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring (kept alongside the focus state layer, per WCAG 2.4.7)."
+  stateChange: "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the raised thumb. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring (kept alongside the focus state layer, per WCAG 2.4.7)."
   duration: "--duration-fast"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override."

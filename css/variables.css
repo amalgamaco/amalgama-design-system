@@ -548,6 +548,39 @@
      dejaban 72px menos el padding, y como el label va con white-space:nowrap se
      salian del padding y el riel los recortaba. El aire no era poco, era negativo.
      A 112 quedan 95 utiles: 12px a cada lado del mas largo. */
+  /* ── Contexto de superficie ──────────────────────────────────────────────
+     Todo componente asumia que estaba apoyado sobre --color-surface. Metido en
+     un panel con fondo propio, su relleno quedaba mal y habia que pisarlo a
+     mano: medido en una consola de check-in (sep 2026), ocho de catorce
+     overrides de clases publicas eran esto.
+
+     Dos tokens, y los dos los declara el CONTENEDOR, no el componente:
+       --ctx-surface         el fondo de lo que me contiene. Un componente que
+                             tiene que fundirse con su contenedor lo usa.
+       --ctx-surface-raised  el escalon que se despega de ese fondo. Un campo,
+                             un input, un track: algo que tiene que verse
+                             ENCIMA del contenedor.
+     Un contenedor del DS los setea solo. Un panel propio del proyecto declara
+     `data-surface="container"` y listo — sin pisar ninguna clase publica. */
+  --ctx-surface:        var(--color-surface);
+  --ctx-surface-raised: var(--color-surface-container);
+
+  /* ── La pista y lo que corre sobre ella ──────────────────────────────────
+     Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un
+     elemento "levantado" sobre el fondo de la pagina no se despega solo, y por
+     eso terminaba pidiendo un aro o una sombra que lo dibujara. Una pista
+     HUNDIDA usa dos escalones en vez de uno y llega a 1.19:1 en claro y 1.24:1
+     en oscuro, sin ningun borde.
+
+     Va aparte de --ctx-surface/-raised porque la rampa CAMBIA DE DIRECCION
+     entre temas: en claro container-high esta por debajo de surface, en oscuro
+     por encima. Ese override vive aca una sola vez, no en cada componente que
+     necesite una pista (segmented, slider, progress, toggle-group).
+       --ctx-track        el canal hundido
+       --ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar */
+  --ctx-track:       var(--color-surface-container-high);
+  --ctx-track-thumb: var(--color-surface-container);
+
   --rail-width:    112px;
   --sidebar-width: 220px;
   --topbar-height: 56px;
@@ -740,6 +773,10 @@
   --color-surface-container-high:    #282C39; /* neutral-600 */
   --color-surface-container-highest: #353A4A; /* neutral-500 */
   --color-surface-variant:           #282C39; /* neutral-600 */
+  /* La pista se invierte: en claro container-high esta DEBAJO de surface, en
+     oscuro esta encima. Literales por la misma razon que el resto del bloque. */
+  --ctx-track:                       #171B26; /* neutral-750 — el canal */
+  --ctx-track-thumb:                 #282C39; /* neutral-600 — lo que corre sobre el */
   --color-on-surface:                #EAEBED; /* neutral-50  */
   --color-on-surface-variant:        #BFC1C8; /* neutral-100 */
   /* Outline · bordes */

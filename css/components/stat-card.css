@@ -15,7 +15,7 @@
        <div class="stat-label">Vacantes abiertas</div>
        <div class="stat-value">24</div>
        <div class="badge stat-change stat-change-positive">
-         <svg width="12" height="12" aria-hidden="true"><!-- lucide trending-up --></svg>12%
+         <i data-lucide="trending-up" aria-hidden="true"></i>12%
        </div>
      </div>
    </div>

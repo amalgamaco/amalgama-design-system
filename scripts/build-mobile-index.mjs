@@ -91,7 +91,7 @@ const MAPA = {
   command:          { k: "patron", fl: "SearchAnchor", en: "Pantalla de búsqueda completa", porque: "El ⌘K es de teclado" },
   "context-menu":   { k: "patron", fl: "MenuAnchor · showModalBottomSheet", en: "Actionsheet, con long-press", porque: "No hay click derecho", gs: "Actionsheet" },
   "create-form":    { k: "patron", fl: "Route propia", en: "Pantalla propia, nunca un modal", porque: "Un formulario dentro de un modal en 390px es una trampa" },
-  "data-table":     { k: "patron", fl: "ListView + ListTile", fl: "ListView + ListTile", en: "Lista de filas apiladas (label: valor) o card por registro", porque: "Una tabla en 390px se scrollea de costado y nadie lo hace" },
+  "data-table":     { k: "patron", fl: "ListView + ListTile", en: "Lista de filas apiladas (label: valor) o card por registro", porque: "Una tabla en 390px se scrollea de costado y nadie lo hace" },
   "date-picker":    { k: "patron", fl: "showDatePicker", en: "El Calendar docked en un bottom sheet", porque: "El popover chico es de escritorio", gs: "DateTimePicker" },
   "dropdown-menu":  { k: "patron", fl: "MenuAnchor", en: "Actionsheet", porque: "No hay menú flotante", gs: "Menu · Actionsheet" },
   "input-group":    { k: "patron", fl: "Column", en: "Campos apilados", porque: "Un input con addon de costado no entra" },
@@ -112,10 +112,54 @@ const MAPA = {
   "rich-tooltip":   { k: "ausente", fl: null, porque: "Ídem tooltip. Si tiene tanto contenido que necesita título y acciones, es un bottom sheet" },
 };
 
+/* ── De cada componente a su ficha en el sitio ───────────────────────────
+   El id del catálogo sale del nombre del CSS; la ficha del sitio vive en
+   SECTIONS con la clave "c-<algo>", y las dos cosas no siempre se escriben
+   igual (toast.css → c-snackbar, modal.css → c-dialog). Escribir el link a
+   mano fue lo que hizo que los 60 links de esta página no llevaran a ningún
+   lado: navigate() con una clave que no existe no falla, no avisa, no hace
+   nada.
+
+   El destino ya está declarado una vez, en `docs_anchor` de cada
+   component-rule. Se lee de ahí y se verifica contra SECTIONS: si no
+   resuelve, el componente se imprime sin link y el script lo dice.
+   ───────────────────────────────────────────────────────────────────────── */
+const manifest = JSON.parse(readFileSync(join(ROOT, "component-rules/manifest.json"), "utf8"));
+const anchorPorCss = {};
+for (const c of manifest.components ?? []) {
+  for (const f of [c.source?.css].flat().filter(Boolean)) {
+    (anchorPorCss[f] ??= []).push(c.source?.docs_anchor);
+  }
+}
+
 /* ── entrada ─────────────────────────────────────────────────────────── */
 
 const api = JSON.parse(readFileSync(join(ROOT, "public-api.json"), "utf8"));
 const byId = new Map(api.components.map(c => [c.id, c]));
+
+/* Las claves de SECTIONS salen del propio index.html: la lista de destinos
+   válidos no se copia acá, se lee de donde vive. */
+const indexSrc = readFileSync(join(ROOT, "index.html"), "utf8");
+const secIni   = indexSrc.indexOf("const SECTIONS = {");
+const SECCIONES = new Set(
+  [...indexSrc.slice(secIni, indexSrc.indexOf("\n};", secIni))
+      .matchAll(/^\s*.([a-z0-9-]+).\s*:\s*\{/gm)].map((m) => m[1])
+);
+
+/* null = el componente no tiene ficha en el sitio; se imprime sin link. */
+const ficha = (id) => {
+  const declarados = (anchorPorCss[`css/components/${id}.css`] ?? []).filter(Boolean);
+  for (const k of [...declarados, `c-${id}`]) if (SECCIONES.has(k)) return k;
+  return null;
+};
+
+/* El nombre del componente: link cuando hay ficha, texto pelado cuando no. */
+const nombre = (id, cls) => {
+  const k = ficha(id);
+  return k
+    ? `<a class="${cls}" href="#" onclick="navigate('${k}');return false">${esc(id)}</a>`
+    : `<span class="${cls} mc-id-sin-ficha" title="todavía no tiene ficha en el sitio">${esc(id)}</span>`;
+};
 
 const faltan = [...byId.keys()].filter(id => !MAPA[id] && !["layout", "composition", "space", "preview-native"].includes(id));
 const sobran = Object.keys(MAPA).filter(id => !byId.has(id));
@@ -171,7 +215,7 @@ const celdas = porta.map(([id, m]) => {
   const d = demo(c);
   return `          <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('${id}');return false">${esc(id)}</a>
+              ${nombre(id, "mc-id")}
               ${gsTag(m)}
             </div>
             <div class="mc-demo">${d || '<span class="mc-nodemo">se ve en su página</span>'}</div>
@@ -180,7 +224,7 @@ const celdas = porta.map(([id, m]) => {
 }).join("\n");
 
 const filasPatron = patron.map(([id, m]) =>
-  `            <tr><td><a href="#" onclick="navigate('${id}');return false"><code>${esc(id)}</code></a></td><td><strong>${esc(m.en)}</strong></td><td>${m.gs ? `<span class="mc-gs">RN ${esc(m.gs)}</span><br>` : ""}${m.fl ? `<span class="mc-gs">FL ${esc(m.fl)}</span>` : ""}</td><td>${esc(m.porque)}</td></tr>`
+  `            <tr><td>${ficha(id) ? `<a href="#" onclick="navigate('${ficha(id)}');return false"><code>${esc(id)}</code></a>` : `<code>${esc(id)}</code>`}</td><td><strong>${esc(m.en)}</strong></td><td>${m.gs ? `<span class="mc-gs">RN ${esc(m.gs)}</span><br>` : ""}${m.fl ? `<span class="mc-gs">FL ${esc(m.fl)}</span>` : ""}</td><td>${esc(m.porque)}</td></tr>`
 ).join("\n");
 
 const filasAusente = ausente.map(([id, m]) =>
@@ -280,6 +324,8 @@ const salidas = [
 
 console.log(`componentes: ${porta.length} portan · ${patron.length} cambian de patrón · ${ausente.length} no existen`);
 if (faltan.length) console.log(`\nSIN MAPEAR (${faltan.length}): ${faltan.join(", ")}`);
+const sinFicha = [...porta, ...patron].map(([id]) => id).filter((id) => !ficha(id));
+if (sinFicha.length) console.log(`\nSIN FICHA EN EL SITIO (${sinFicha.length}): ${sinFicha.join(", ")} — se imprimen sin link`);
 if (sobran.length) console.log(`\nEN EL MAPA PERO NO EN LA API (${sobran.length}): ${sobran.join(", ")}`);
 
 if (CHECK) {

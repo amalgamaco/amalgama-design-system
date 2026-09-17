@@ -102,7 +102,7 @@ related_rules: [COMPOSICION.md]
 source:
   css: css/composition.css
   classes: [editorial-lg, editorial-md, editorial-sm, column, column-1280, column-1440, column-1600, column-1920, column-read, column-form, column-bleed, column-rail, column-split, grid-12, span-1, span-2, span-3, span-4, span-5, span-6, span-7, span-8, span-9, span-10, span-11, span-12, measure, measure-lead, section, section-lead, section-tight, overline, section-index]
-  docs_anchor: c-composition
+  docs_anchor: composition
 ---
 
 ## Correct usage

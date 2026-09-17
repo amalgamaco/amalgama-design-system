@@ -23,6 +23,37 @@ repite lo que dice cada regla: la fuente sigue siendo `component-rules/<id>.md`.
 | **Marcar que algo importa más** | No es lo mismo que elegido — ver abajo | §«Destacado no es seleccionado» |
 | **Agrupar contenido en una superficie** | Cuatro formas de tarjeta, excluyentes | `COMPOSICION.md` §4b |
 
+### Un componente adentro de un panel: lo declara el contenedor
+
+Todo componente de Embassy asumía que estaba apoyado sobre `--color-surface`. Metido
+en un panel con fondo propio quedaba mal, y se arreglaba pisando la clase pública a
+mano: medido sobre una consola de check-in en septiembre de 2026, **ocho de catorce
+overrides eran esto**.
+
+Ahora el fondo lo declara **el contenedor**, no el componente:
+
+| Token | Qué es | Quién lo usa |
+|---|---|---|
+| `--ctx-surface` | El fondo de lo que me contiene | Un componente que tiene que **fundirse** con su contenedor — `list` |
+| `--ctx-surface-raised` | El escalón que se despega de ese fondo | Algo que tiene que verse **encima** — `field-input`, un track |
+
+Las cards del DS (`card`, `card-elevated`, `card-filled`) lo setean solas. **Para un
+panel que no es una card** —un rail, un sheet, una región propia del proyecto— se
+declara en el contenedor:
+
+```html
+<aside class="mi-rail" data-surface="container">
+  <ul class="list">…</ul>          <!-- se funde con el rail -->
+  <input class="field-input">       <!-- se despega de él -->
+</aside>
+```
+
+Valores: `surface`, `container-low`, `container`, `container-high`.
+
+**Nunca escribas `background: transparent` sobre una clase pública para arreglar
+esto.** Si un componente sigue quedando mal adentro de un contenedor, es un gap del
+DS: declaralo con `@ds-gap` (lo pide el chequeo `B2`) y abrí el issue.
+
 ### «Tag» no existe, y la palabra sí se usa
 
 No hay componente `tag`, ni clase, ni regla. Quien dice «tag» quiere una de tres, y se
@@ -50,6 +81,37 @@ lo de al lado, lo haya tocado alguien o no.
 **Verificación:** si sacás al usuario de la pantalla y recargás, lo seleccionado se
 pierde y lo destacado queda. Si algo que vos llamás destacado desaparece al recargar,
 era seleccionado.
+
+### Cómo se declara que algo está seleccionado
+
+La sección de arriba dice **de qué color** se pinta. Ésta dice **qué se escribe en el
+markup**, que es lo que el sistema tenía contestado de nueve maneras distintas:
+`.active`, `.selected`, `.chip-selected`, `.is-selected`, `tr.selected`,
+`[aria-selected]`, `[aria-pressed]`, `aria-current` y `data-active`. Cinco componentes
+pintaban **sólo la clase**, así que un markup con el ARIA correcto y sin la clase se
+veía sin seleccionar: accesible y mudo a la vez.
+
+**El atributo declara el estado. La clase, cuando existe, es un alias que acompaña.**
+El CSS pinta siempre el atributo, así que el markup correcto se ve correcto sin que
+haya que acordarse de la clase.
+
+Cuál de los tres atributos, por el **rol** del control — no por cómo se ve:
+
+| Lo que es | Se declara con | Quién lo usa |
+|---|---|---|
+| Una de varias, dentro de un grupo de selección | `aria-selected="true"` | `tab`, `seg-btn` de selección única, `list-item`, fila de `data-table`, opción de `combobox` |
+| Un interruptor independiente que queda prendido | `aria-pressed="true"` | `toggle`, chip de filtro, `seg-btn` de selección múltiple |
+| El ítem que corresponde a la pantalla en la que estoy | `aria-current="page"` | `nav-item`, `breadcrumb` |
+
+Y una cuarta cosa que **no** es selección y por eso no usa ninguno de los tres: el
+ítem bajo el cursor de teclado mientras se navega una lista con las flechas
+(`command-item`) se marca con `data-active="true"`. Es transitorio — se va al soltar
+la tecla y no sobrevive a un recargo — así que es un **destacado**, no un seleccionado,
+y la verificación de la sección anterior lo confirma.
+
+*Si dudás entre `aria-selected` y `aria-pressed`:* ¿el control pertenece a un grupo
+donde elegir uno desmarca al otro? Entonces `aria-selected`. ¿Se prende y se apaga
+solo, sin mirar a sus hermanos? Entonces `aria-pressed`.
 
 ---
 
@@ -135,11 +197,11 @@ Never pair a skeleton with a spinner in one context; never skeleton a button/con
 
 - `.toolbar` container + `.toolbar-actions` (right-aligned slot, `margin-left:auto`, holds the **one** primary + supporting actions) + `.result-count` (`aria-live="polite"`, "Mostrando N de M").
 - `.search-field` (compact search that grows `flex:1`) + `.toolbar-btn` (outlined secondary filter/sort/reset; optional `.toolbar-btn-count` chip).
-- **`.toolbar-filters`** — unifies **2+ equal-hierarchy filter controls** (Select + Segmented Button + Date Picker) under one field treatment via a scoped **`--tb-*`** token layer (`--tb-height` 40px). It re-skins `.select-trigger` / `.date-picker-trigger` / `.seg-btn-group` **only within `.toolbar-filters`** — never the standalone components; the selected segment keeps its `--color-secondary-container` state and each segment keeps its own focus ring.
+- **`.toolbar-filters`** — unifies **2+ equal-hierarchy filter controls** (Select + Segmented Button + Date Picker) under one field treatment via a scoped **`--tb-*`** token layer (`--tb-height` 40px). It re-skins `.select-trigger` / `.date-picker-trigger` / `.seg-btn-group` **only within `.toolbar-filters`** — never the standalone components; the selected segment keeps its neutral raised treatment (`--ctx-track-thumb`) and each segment keeps its own focus ring.
 - **`.toolbar-selection`** — bulk-actions variant shown when items are selected (tinted secondary-container surface + `.toolbar-selection-count` + `.toolbar-selection-clear` + bulk actions; enters on `--duration-normal`).
 - **`.toolbar-overflow-btn`** — "More" trigger (`aria-haspopup="menu"`) opening a Dropdown/Popover for controls that don't fit; **`.toolbar-sticky`** (+`.is-stuck`) sticks the bar on scroll.
 - Order left→right by frequency: search → filters → sort → action. Left = what filters/defines the view; right (`.toolbar-actions`) = the actions, **one primary max**. A search that filters *this* list is a `.search-field` **in this toolbar** — even when it's the most prominent control on the screen; reserve `.search-bar` for global/hero/command search or mobile (never a centered pill over an on-screen list). Global actions → Top Bar; sub-view nav → Tabs.
-- **Segmented Button** (`.seg-btn-group`, `.seg-btn`, `.selected`/`[aria-selected]`; sizes `-sm`/`-lg`) — switch 2–5 mutually-exclusive **views/modes of the same screen** (Lista/Cuadrícula, Día/Semana/Mes). vs Tabs (navigate distinct pages) and Toggle Group (independent on/off). Inside `.toolbar-filters` its container adopts the squared field treatment but **keeps** its `secondary-container` selected state and per-segment focus ring.
+- **Segmented Button** (`.seg-btn-group`, `.seg-btn`, `.selected`/`[aria-selected]`; sizes `-sm`/`-lg`) — switch 2–5 mutually-exclusive **views/modes of the same screen** (Lista/Cuadrícula, Día/Semana/Mes). vs Tabs (navigate distinct pages) and Toggle Group (independent on/off). Its group is a **sunken track** (`--ctx-track`) with no outline and the active segment is a neutral raised thumb — never the tonal selection token, which belongs to the active filter (§«Cómo se declara que algo está seleccionado» y `COMPOSICION.md` §4c). Inside `.toolbar-filters` its container adopts the squared field treatment and **keeps** that treatment plus the per-segment focus ring.
 - **Checkbox** (`.checkbox`, `.checkbox-label`, `.checkbox-card`) — form-level multi-select and table **select-all** (header uses the indeterminate **dash** for partial selection; set `el.indeterminate=true` via DOM, not a class). **Not** for inline toolbar filtering — that's a **Chip**. Exclusive choice → Radio; instant on/off → Switch.
 
 ### Other high-frequency pairs

@@ -7,7 +7,7 @@
 <meta name="description" content="Sistema de diseño de Amalgama — tokens, componentes y documentación viva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css?v=92515d5f">
+<link rel="stylesheet" href="css/variables.css?v=01dca082">
 <link rel="stylesheet" href="css/md-sys-bridge.css?v=a6e3f4a0">
 <link rel="stylesheet" href="css/base.css?v=dafca354">
 <link rel="stylesheet" href="css/composition.css?v=3bc8e5f7">
@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="docs/docs.css?v=498986a4">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=6b45609d">
+<link rel="stylesheet" href="css/components.css?v=c2584a40">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -3182,7 +3182,7 @@ body { overflow-x: clip; }
   white-space: nowrap;
 }
 .badge-open   { background: var(--color-success-container); color: var(--color-on-success-container); }
-.badge-active { background: var(--color-success-container); color: var(--color-on-success-container); }
+/* .badge-active lo define badge.css (variante info): el override a success-container que habia aca lo volvia identico a .badge-open. */
 .badge-closed { background: var(--color-error-container);   color: var(--color-on-error-container); }
 .badge-draft  { background: var(--color-surface-variant);   color: var(--color-on-surface-variant); border: 1px solid var(--color-outline); }
 .badge-archived { background: var(--color-surface-variant); color: var(--color-on-surface-variant); opacity: .75; }
@@ -3251,7 +3251,8 @@ body { overflow-x: clip; }
   border-color: transparent;
 }
 .btn-secondary:hover {
-  background: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
+  /* el mismo token que usa button.css; antes era un color-mix con #000 a mano */
+  background: var(--button-secondary-bg-hover);
   transform: translateY(-1px);
 }
 .btn-secondary:active { transform: translateY(0); }
@@ -3533,6 +3534,10 @@ body { overflow-x: clip; }
 #s-mobile-components .mc-id { font-family: var(--font-mono); font-size: var(--font-size-badge); letter-spacing: .05em;
   text-transform: uppercase; color: var(--ds-text-1); text-decoration: none; font-weight: 500; }
 #s-mobile-components .mc-id:hover { color: var(--color-primary); text-decoration: underline; }
+/* Un componente que todavía no tiene ficha en el sitio: se nombra, pero no
+   se disfraza de link. Lo marca build-mobile-index.mjs, no la mano. */
+#s-mobile-components .mc-id-sin-ficha { color: var(--ds-text-3); cursor: default; }
+#s-mobile-components .mc-id-sin-ficha:hover { color: var(--ds-text-3); text-decoration: none; }
 #s-mobile-components .mc-gs, #s-mobile-components .mc-gs-no {
   font-family: var(--font-mono); font-size: var(--font-size-mono-sm); letter-spacing: .03em; }
 #s-mobile-components .mc-gs    { color: var(--color-on-success-container); }
@@ -3824,7 +3829,7 @@ body { overflow-x: clip; }
       <h1 class="emb-hero-title">Em<em>bassy</em></h1>
       <p class="emb-hero-sub">Una sola fuente de verdad para todos los productos Amalgama. Tokens, componentes Tailwind copy-paste y guías de uso — con paridad shadcn/ui completa.</p>
       <div class="emb-hero-actions">
-        <button class="btn-primary" onclick="navigate('s-overview')" type="button">Empezar</button>
+        <button class="btn-primary" onclick="navigate('get-started')" type="button">Empezar</button>
       </div>
     </div>
 
@@ -5837,7 +5842,7 @@ body { overflow-x: clip; }
         <div class="mc-grid">
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('accordion');return false">accordion</a>
+              <a class="mc-id" href="#" onclick="navigate('c-accordion');return false">accordion</a>
               <span class="mc-gs"><b>RN</b> Accordion</span><span class="mc-gs"><b>FL</b> ExpansionTile</span>
             </div>
             <div class="mc-demo"><div class="accordion">
@@ -5857,7 +5862,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('alert');return false">alert</a>
+              <a class="mc-id" href="#" onclick="navigate('c-alert');return false">alert</a>
               <span class="mc-gs"><b>RN</b> Alert</span><span class="mc-gs"><b>FL</b> MaterialBanner</span>
             </div>
             <div class="mc-demo"><div class="alert alert-info" role="alert">
@@ -5871,12 +5876,12 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('attachment');return false">attachment</a>
+              <a class="mc-id" href="#" onclick="navigate('c-attachment');return false">attachment</a>
               <span class="mc-gs-no"><b>RN</b> ✗ HStack + Icon + Text</span><span class="mc-gs-no"><b>FL</b> ✗ HStack + Icon + Text</span>
             </div>
             <div class="mc-demo"><ul class="attachment-list">
   <li class="attachment">
-    <span class="attachment-icon"><svg></svg></span>
+    <span class="attachment-icon"><i data-lucide="file-text"></i></span>
     <div class="attachment-body">
       <div class="attachment-name">CV_Ana_Torres.pdf</div>
       <div class="attachment-meta">240 KB · PDF</div>
@@ -5888,7 +5893,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('avatar');return false">avatar</a>
+              <a class="mc-id" href="#" onclick="navigate('c-avatar');return false">avatar</a>
               <span class="mc-gs"><b>RN</b> Avatar</span><span class="mc-gs"><b>FL</b> CircleAvatar</span>
             </div>
             <div class="mc-demo"><span class="avatar avatar-md"><span class="avatar-fallback">MG</span></span></div>
@@ -5896,7 +5901,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('badge');return false">badge</a>
+              <a class="mc-id" href="#" onclick="navigate('c-badge');return false">badge</a>
               <span class="mc-gs"><b>RN</b> Badge</span><span class="mc-gs"><b>FL</b> Badge</span>
             </div>
             <div class="mc-demo"><span class="badge badge-open">Abierta</span></div>
@@ -5904,7 +5909,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('button');return false">button</a>
+              <a class="mc-id" href="#" onclick="navigate('c-button');return false">button</a>
               <span class="mc-gs"><b>RN</b> Button</span><span class="mc-gs"><b>FL</b> FilledButton · OutlinedButton · TextButton</span>
             </div>
             <div class="mc-demo"><button class="btn-primary">Crear vacante</button></div>
@@ -5912,7 +5917,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('calendar');return false">calendar</a>
+              <a class="mc-id" href="#" onclick="navigate('c-calendar');return false">calendar</a>
               <span class="mc-gs"><b>RN</b> Calendar</span><span class="mc-gs"><b>FL</b> CalendarDatePicker</span>
             </div>
             <div class="mc-demo"><div class="calendar">
@@ -5921,14 +5926,34 @@ body { overflow-x: clip; }
     <span class="calendar-caption">Julio 2026</span>
     <button class="calendar-nav-btn" aria-label="Mes siguiente">›</button>
   </div>
-  <div class="calendar-weekdays">...</div>
-  <div class="calendar-grid">...</div>
+  <div class="calendar-weekdays">
+    <span class="calendar-weekday">L</span><span class="calendar-weekday">M</span>
+    <span class="calendar-weekday">M</span><span class="calendar-weekday">J</span>
+    <span class="calendar-weekday">V</span><span class="calendar-weekday">S</span>
+    <span class="calendar-weekday">D</span>
+  </div>
+  <div class="calendar-grid">
+    <button class="calendar-day calendar-day-outside">29</button>
+    <button class="calendar-day calendar-day-outside">30</button>
+    <button class="calendar-day">1</button>
+    <button class="calendar-day">2</button>
+    <button class="calendar-day">3</button>
+    <button class="calendar-day">4</button>
+    <button class="calendar-day">5</button>
+    <button class="calendar-day">6</button>
+    <button class="calendar-day">7</button>
+    <button class="calendar-day calendar-day-today">8</button>
+    <button class="calendar-day">9</button>
+    <button class="calendar-day">10</button>
+    <button class="calendar-day calendar-day-selected" aria-selected="true">11</button>
+    <button class="calendar-day">12</button>
+  </div>
 </div></div>
             
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('card');return false">card</a>
+              <a class="mc-id" href="#" onclick="navigate('c-basic-card');return false">card</a>
               <span class="mc-gs"><b>RN</b> Card</span><span class="mc-gs"><b>FL</b> Card</span>
             </div>
             <div class="mc-demo"><div class="card">
@@ -5943,13 +5968,13 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('carousel');return false">carousel</a>
+              <a class="mc-id" href="#" onclick="navigate('c-carousel');return false">carousel</a>
               <span class="mc-gs-no"><b>RN</b> ✗ FlatList horizontal con paginado</span><span class="mc-gs-no"><b>FL</b> ✗ FlatList horizontal con paginado</span>
             </div>
             <div class="mc-demo"><div class="carousel">
   <div class="carousel-content">
-    <div class="carousel-item"></div>
-    <div class="carousel-item"></div>
+    <div class="carousel-item">Primera lámina</div>
+    <div class="carousel-item">Segunda lámina</div>
   </div>
   <button class="carousel-btn carousel-btn-prev">‹</button>
   <button class="carousel-btn carousel-btn-next">›</button>
@@ -5958,7 +5983,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('checkbox');return false">checkbox</a>
+              <a class="mc-id" href="#" onclick="navigate('c-checkbox');return false">checkbox</a>
               <span class="mc-gs"><b>RN</b> Checkbox</span><span class="mc-gs"><b>FL</b> Checkbox</span>
             </div>
             <div class="mc-demo"><label class="checkbox-label">
@@ -5969,7 +5994,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('chip');return false">chip</a>
+              <a class="mc-id" href="#" onclick="navigate('c-chip');return false">chip</a>
               <span class="mc-gs-no"><b>RN</b> ✗ Pressable + Text</span><span class="mc-gs"><b>FL</b> FilterChip · ActionChip</span>
             </div>
             <div class="mc-demo"><button class="chip">Sugerencia</button></div>
@@ -5977,7 +6002,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('collapsible');return false">collapsible</a>
+              <a class="mc-id" href="#" onclick="navigate('c-collapsible');return false">collapsible</a>
               <span class="mc-gs"><b>RN</b> Accordion</span><span class="mc-gs"><b>FL</b> ExpansionTile</span>
             </div>
             <div class="mc-demo"><div class="collapsible">
@@ -5992,7 +6017,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('description');return false">description</a>
+              <span class="mc-id mc-id-sin-ficha" title="todavía no tiene ficha en el sitio">description</span>
               <span class="mc-gs-no"><b>RN</b> ✗ VStack + Text</span><span class="mc-gs-no"><b>FL</b> ✗ VStack + Text</span>
             </div>
             <div class="mc-demo"><div class="desc-section">
@@ -6008,7 +6033,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('divider');return false">divider</a>
+              <a class="mc-id" href="#" onclick="navigate('c-divider');return false">divider</a>
               <span class="mc-gs"><b>RN</b> Divider</span><span class="mc-gs"><b>FL</b> Divider</span>
             </div>
             <div class="mc-demo"><hr class="divider"></div>
@@ -6016,11 +6041,11 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('empty-state');return false">empty-state</a>
+              <a class="mc-id" href="#" onclick="navigate('c-empty');return false">empty-state</a>
               <span class="mc-gs-no"><b>RN</b> ✗ VStack + Text + Button</span><span class="mc-gs-no"><b>FL</b> ✗ VStack + Text + Button</span>
             </div>
             <div class="mc-demo"><div class="empty-state">
-  <svg class="empty-state-icon" aria-hidden="true" width="32" height="32"></svg>
+  <i data-lucide="inbox" class="empty-state-icon" aria-hidden="true"></i>
   <div class="empty-state-title">No hay vacantes</div>
   <p class="empty-state-desc">Crea tu primera vacante para empezar.</p>
   <button class="btn-primary">+ Nueva vacante</button>
@@ -6029,7 +6054,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('form');return false">form</a>
+              <a class="mc-id" href="#" onclick="navigate('c-form');return false">form</a>
               <span class="mc-gs"><b>RN</b> Input + FormControl</span><span class="mc-gs"><b>FL</b> TextField + InputDecoration</span>
             </div>
             <div class="mc-demo"><div class="form-card">
@@ -6053,7 +6078,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('input-otp');return false">input-otp</a>
+              <a class="mc-id" href="#" onclick="navigate('c-input-otp');return false">input-otp</a>
               <span class="mc-gs-no"><b>RN</b> ✗ HStack de Input con teclado numérico</span><span class="mc-gs-no"><b>FL</b> ✗ HStack de Input con teclado numérico</span>
             </div>
             <div class="mc-demo"><div class="otp-group" role="group" aria-label="Código de verificación">
@@ -6063,11 +6088,11 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('item');return false">item</a>
+              <a class="mc-id" href="#" onclick="navigate('c-item');return false">item</a>
               <span class="mc-gs-no"><b>RN</b> ✗ HStack + Text</span><span class="mc-gs"><b>FL</b> ListTile</span>
             </div>
             <div class="mc-demo"><div class="item item-outline">
-  <div class="item-media item-media-icon"><svg></svg></div>
+  <div class="item-media item-media-icon"><i data-lucide="bell"></i></div>
   <div class="item-content">
     <div class="item-title">Notificaciones</div>
     <div class="item-description">Recibí avisos por email.</div>
@@ -6078,7 +6103,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('label');return false">label</a>
+              <a class="mc-id" href="#" onclick="navigate('c-label');return false">label</a>
               <span class="mc-gs"><b>RN</b> FormControl</span><span class="mc-gs"><b>FL</b> InputDecoration.labelText</span>
             </div>
             <div class="mc-demo"><label class="label" for="email">Correo <span class="label-required">*</span></label></div>
@@ -6086,7 +6111,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('list');return false">list</a>
+              <a class="mc-id" href="#" onclick="navigate('c-list');return false">list</a>
               <span class="mc-gs-no"><b>RN</b> ✗ FlatList + Pressable</span><span class="mc-gs"><b>FL</b> ListView + ListTile</span>
             </div>
             <div class="mc-demo"><ul class="list">
@@ -6099,7 +6124,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('person-card');return false">person-card</a>
+              <a class="mc-id" href="#" onclick="navigate('c-person');return false">person-card</a>
               <span class="mc-gs-no"><b>RN</b> ✗ HStack + Avatar + Text</span><span class="mc-gs"><b>FL</b> ListTile + CircleAvatar</span>
             </div>
             <div class="mc-demo"><div class="people-grid">
@@ -6115,18 +6140,18 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('placeholder');return false">placeholder</a>
+              <a class="mc-id" href="#" onclick="navigate('c-empty');return false">placeholder</a>
               <span class="mc-gs"><b>RN</b> Skeleton</span><span class="mc-gs-no"><b>FL</b> ✗ primitivas</span>
             </div>
             <div class="mc-demo"><div class="placeholder-panel">
-  <svg class="placeholder-icon" aria-hidden="true" width="32" height="32"></svg>
+  <i data-lucide="mouse-pointer-click" class="placeholder-icon" aria-hidden="true"></i>
   <p>Selecciona una vacante para ver los detalles.</p>
 </div></div>
             
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('progress');return false">progress</a>
+              <a class="mc-id" href="#" onclick="navigate('c-loading');return false">progress</a>
               <span class="mc-gs"><b>RN</b> Progress</span><span class="mc-gs"><b>FL</b> LinearProgressIndicator</span>
             </div>
             <div class="mc-demo"><div class="progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
@@ -6136,7 +6161,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('radio-group');return false">radio-group</a>
+              <a class="mc-id" href="#" onclick="navigate('c-radio');return false">radio-group</a>
               <span class="mc-gs"><b>RN</b> Radio</span><span class="mc-gs"><b>FL</b> Radio · RadioListTile</span>
             </div>
             <div class="mc-demo"><div class="radio-group" role="radiogroup" aria-label="Tipo de contrato">
@@ -6147,11 +6172,11 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('search');return false">search</a>
+              <a class="mc-id" href="#" onclick="navigate('c-search');return false">search</a>
               <span class="mc-gs-no"><b>RN</b> ✗ Input + Icon</span><span class="mc-gs"><b>FL</b> SearchBar</span>
             </div>
             <div class="mc-demo"><div class="search-bar" role="search">
-  <span class="search-bar-icon">lupa</span>
+  <span class="search-bar-icon"><i data-lucide="search"></i></span>
   <input class="search-bar-input" type="search" placeholder="Buscar" aria-label="Buscar">
   <span class="search-bar-avatar">AV</span>   
 </div></div>
@@ -6159,18 +6184,18 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('segmented-button');return false">segmented-button</a>
+              <a class="mc-id" href="#" onclick="navigate('c-seg-btn');return false">segmented-button</a>
               <span class="mc-gs-no"><b>RN</b> ✗ HStack de Pressable, o Tabs re-skinneado</span><span class="mc-gs"><b>FL</b> SegmentedButton</span>
             </div>
             <div class="mc-demo"><div class="seg-btn-group" role="group" aria-label="Vista">
-  <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button>
+  <button class="seg-btn" aria-selected="true" onclick="segSwitch(this)">Lista</button>
   <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Cuadrícula</button>
 </div></div>
             
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('select');return false">select</a>
+              <a class="mc-id" href="#" onclick="navigate('c-select');return false">select</a>
               <span class="mc-gs"><b>RN</b> Select</span><span class="mc-gs"><b>FL</b> DropdownMenu</span>
             </div>
             <div class="mc-demo"><div class="select">
@@ -6183,7 +6208,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('skeleton');return false">skeleton</a>
+              <a class="mc-id" href="#" onclick="navigate('c-skeleton');return false">skeleton</a>
               <span class="mc-gs"><b>RN</b> Skeleton</span><span class="mc-gs-no"><b>FL</b> ✗ primitivas</span>
             </div>
             <div class="mc-demo"><div class="skeleton skeleton-title"></div></div>
@@ -6191,7 +6216,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('slider');return false">slider</a>
+              <a class="mc-id" href="#" onclick="navigate('c-slider');return false">slider</a>
               <span class="mc-gs"><b>RN</b> Slider</span><span class="mc-gs"><b>FL</b> Slider</span>
             </div>
             <div class="mc-demo"><div class="slider">
@@ -6203,7 +6228,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('spinner');return false">spinner</a>
+              <a class="mc-id" href="#" onclick="navigate('c-loading');return false">spinner</a>
               <span class="mc-gs"><b>RN</b> Spinner</span><span class="mc-gs"><b>FL</b> CircularProgressIndicator</span>
             </div>
             <div class="mc-demo"><span class="spinner" role="status" aria-label="Cargando"></span></div>
@@ -6211,7 +6236,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('stat-card');return false">stat-card</a>
+              <a class="mc-id" href="#" onclick="navigate('c-stat-card');return false">stat-card</a>
               <span class="mc-gs-no"><b>RN</b> ✗ Card + Text con los tokens de .figure</span><span class="mc-gs-no"><b>FL</b> ✗ Card + Text con los tokens de .figure</span>
             </div>
             <div class="mc-demo"><div class="stats-grid">
@@ -6219,7 +6244,7 @@ body { overflow-x: clip; }
     <div class="stat-label">Vacantes abiertas</div>
     <div class="stat-value">24</div>
     <div class="badge stat-change stat-change-positive">
-      <svg width="12" height="12" aria-hidden="true"></svg>12%
+      <i data-lucide="trending-up" aria-hidden="true"></i>12%
     </div>
   </div>
 </div></div>
@@ -6227,7 +6252,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('switch');return false">switch</a>
+              <a class="mc-id" href="#" onclick="navigate('c-switch');return false">switch</a>
               <span class="mc-gs"><b>RN</b> Switch</span><span class="mc-gs"><b>FL</b> Switch</span>
             </div>
             <div class="mc-demo"><label class="switch-label">
@@ -6238,11 +6263,11 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('tabs');return false">tabs</a>
+              <a class="mc-id" href="#" onclick="navigate('c-tabs');return false">tabs</a>
               <span class="mc-gs"><b>RN</b> Tabs</span><span class="mc-gs"><b>FL</b> TabBar</span>
             </div>
             <div class="mc-demo"><div class="tabs" role="tablist">
-  <button class="tab active" role="tab" aria-selected="true" id="tab-general" aria-controls="panel-general">General</button>
+  <button class="tab" role="tab" aria-selected="true" id="tab-general" aria-controls="panel-general">General</button>
   <button class="tab" role="tab" aria-selected="false" id="tab-requisitos" aria-controls="panel-requisitos" tabindex="-1">Requisitos</button>
   <span class="tab-indicator"></span>
 </div></div>
@@ -6250,7 +6275,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('toast');return false">toast</a>
+              <a class="mc-id" href="#" onclick="navigate('c-snackbar');return false">toast</a>
               <span class="mc-gs"><b>RN</b> Toast</span><span class="mc-gs"><b>FL</b> SnackBar</span>
             </div>
             <div class="mc-demo"><div class="snackbar" role="status" aria-live="polite">
@@ -6260,7 +6285,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('toggle');return false">toggle</a>
+              <a class="mc-id" href="#" onclick="navigate('c-toggle');return false">toggle</a>
               <span class="mc-gs-no"><b>RN</b> ✗ Pressable con estado</span><span class="mc-gs"><b>FL</b> IconButton.filled</span>
             </div>
             <div class="mc-demo"><button class="toggle" aria-pressed="false" onclick="togglePress(this)">
@@ -6270,7 +6295,7 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('toggle-group');return false">toggle-group</a>
+              <a class="mc-id" href="#" onclick="navigate('c-toggle-group');return false">toggle-group</a>
               <span class="mc-gs-no"><b>RN</b> ✗ HStack de Pressable</span><span class="mc-gs"><b>FL</b> ToggleButtons</span>
             </div>
             <div class="mc-demo"><div class="toggle-group" role="group" aria-label="Formato de texto">
@@ -6282,12 +6307,12 @@ body { overflow-x: clip; }
           </div>
           <div class="mc-cell">
             <div class="mc-head">
-              <a class="mc-id" href="#" onclick="navigate('vacancy-card');return false">vacancy-card</a>
+              <a class="mc-id" href="#" onclick="navigate('c-vacancy');return false">vacancy-card</a>
               <span class="mc-gs"><b>RN</b> Card</span><span class="mc-gs"><b>FL</b> Card</span>
             </div>
             <div class="mc-demo"><div class="vacancies-list">
   <div class="vacancy-card" tabindex="0" role="button">
-    <svg class="vacancy-icon" aria-hidden="true" width="20" height="20"></svg>
+    <i data-lucide="briefcase" class="vacancy-icon" aria-hidden="true"></i>
     <div class="vacancy-info">
       <div class="vacancy-name">
         Desarrollador Frontend
@@ -6313,29 +6338,29 @@ body { overflow-x: clip; }
         <table class="ds-table">
           <thead><tr><th>Web</th><th>En nativo</th><th>De dónde sale</th><th>Por qué</th></tr></thead>
           <tbody>
-            <tr><td><a href="#" onclick="navigate('back-link');return false"><code>back-link</code></a></td><td><strong>El back del stack navigator</strong></td><td><span class="mc-gs">FL Navigator.pop</span></td><td>La jerarquía la lleva el navegador, no la pantalla</td></tr>
-            <tr><td><a href="#" onclick="navigate('breadcrumb');return false"><code>breadcrumb</code></a></td><td><strong>El back del stack navigator</strong></td><td><span class="mc-gs">FL AppBar</span></td><td>Una ruta completa no entra ni se lee en 390px</td></tr>
-            <tr><td><a href="#" onclick="navigate('button-group');return false"><code>button-group</code></a></td><td><strong>Segmented button, o botones apilados a lo ancho</strong></td><td><span class="mc-gs">FL SegmentedButton</span></td><td>Botones pegados de costado no llegan al piso táctil</td></tr>
-            <tr><td><a href="#" onclick="navigate('chart');return false"><code>chart</code></a></td><td><strong>El mismo dato con menos series y sin leyenda flotante</strong></td><td></td><td>Una leyenda flotante tapa el gráfico en pantalla chica</td></tr>
-            <tr><td><a href="#" onclick="navigate('combobox');return false"><code>combobox</code></a></td><td><strong>Sheet con búsqueda</strong></td><td><span class="mc-gs">RN Actionsheet + Input</span><br><span class="mc-gs">FL SearchAnchor</span></td><td>El popover con filtro es un patrón de puntero</td></tr>
-            <tr><td><a href="#" onclick="navigate('command');return false"><code>command</code></a></td><td><strong>Pantalla de búsqueda completa</strong></td><td><span class="mc-gs">FL SearchAnchor</span></td><td>El ⌘K es de teclado</td></tr>
-            <tr><td><a href="#" onclick="navigate('context-menu');return false"><code>context-menu</code></a></td><td><strong>Actionsheet, con long-press</strong></td><td><span class="mc-gs">RN Actionsheet</span><br><span class="mc-gs">FL MenuAnchor · showModalBottomSheet</span></td><td>No hay click derecho</td></tr>
-            <tr><td><a href="#" onclick="navigate('create-form');return false"><code>create-form</code></a></td><td><strong>Pantalla propia, nunca un modal</strong></td><td><span class="mc-gs">FL Route propia</span></td><td>Un formulario dentro de un modal en 390px es una trampa</td></tr>
-            <tr><td><a href="#" onclick="navigate('data-table');return false"><code>data-table</code></a></td><td><strong>Lista de filas apiladas (label: valor) o card por registro</strong></td><td><span class="mc-gs">FL ListView + ListTile</span></td><td>Una tabla en 390px se scrollea de costado y nadie lo hace</td></tr>
-            <tr><td><a href="#" onclick="navigate('date-picker');return false"><code>date-picker</code></a></td><td><strong>El Calendar docked en un bottom sheet</strong></td><td><span class="mc-gs">RN DateTimePicker</span><br><span class="mc-gs">FL showDatePicker</span></td><td>El popover chico es de escritorio</td></tr>
-            <tr><td><a href="#" onclick="navigate('dropdown-menu');return false"><code>dropdown-menu</code></a></td><td><strong>Actionsheet</strong></td><td><span class="mc-gs">RN Menu · Actionsheet</span><br><span class="mc-gs">FL MenuAnchor</span></td><td>No hay menú flotante</td></tr>
-            <tr><td><a href="#" onclick="navigate('input-group');return false"><code>input-group</code></a></td><td><strong>Campos apilados</strong></td><td><span class="mc-gs">FL Column</span></td><td>Un input con addon de costado no entra</td></tr>
-            <tr><td><a href="#" onclick="navigate('kanban');return false"><code>kanban</code></a></td><td><strong>Segmented button + una columna a la vez</strong></td><td><span class="mc-gs">FL SegmentedButton</span></td><td>Tres columnas en 390px no son tres columnas</td></tr>
-            <tr><td><a href="#" onclick="navigate('menubar');return false"><code>menubar</code></a></td><td><strong>Tab bar + stack</strong></td><td><span class="mc-gs">FL NavigationBar</span></td><td>No existe barra de menú en una app</td></tr>
-            <tr><td><a href="#" onclick="navigate('modal');return false"><code>modal</code></a></td><td><strong>Pantalla completa o bottom sheet</strong></td><td><span class="mc-gs">RN Modal · Actionsheet</span><br><span class="mc-gs">FL showModalBottomSheet · showDialog</span></td><td>Un diálogo chico centrado se siente web</td></tr>
-            <tr><td><a href="#" onclick="navigate('navigation-menu');return false"><code>navigation-menu</code></a></td><td><strong>Tab bar + stack</strong></td><td><span class="mc-gs">FL NavigationBar</span></td><td>La navegación la lleva el navigator</td></tr>
-            <tr><td><a href="#" onclick="navigate('page-header');return false"><code>page-header</code></a></td><td><strong>El header del stack navigator</strong></td><td><span class="mc-gs">FL AppBar</span></td><td>El título de pantalla lo pone la navegación</td></tr>
-            <tr><td><a href="#" onclick="navigate('pagination');return false"><code>pagination</code></a></td><td><strong>Scroll infinito o “cargar más”</strong></td><td></td><td>Paginar con números es de escritorio</td></tr>
-            <tr><td><a href="#" onclick="navigate('popover');return false"><code>popover</code></a></td><td><strong>Bottom sheet, o el contenido inline</strong></td><td><span class="mc-gs">RN Actionsheet</span><br><span class="mc-gs">FL showModalBottomSheet</span></td><td>Un popover necesita un ancla y espacio alrededor</td></tr>
-            <tr><td><a href="#" onclick="navigate('scroll-area');return false"><code>scroll-area</code></a></td><td><strong>ScrollView / FlatList</strong></td><td><span class="mc-gs">FL ListView</span></td><td>El scroll lo maneja la plataforma</td></tr>
-            <tr><td><a href="#" onclick="navigate('sheet');return false"><code>sheet</code></a></td><td><strong>Bottom sheet</strong></td><td><span class="mc-gs">RN Actionsheet · BottomSheet</span><br><span class="mc-gs">FL showModalBottomSheet</span></td><td>El sheet lateral es un patrón de escritorio</td></tr>
-            <tr><td><a href="#" onclick="navigate('table');return false"><code>table</code></a></td><td><strong>Filas apiladas (label: valor)</strong></td><td></td><td>Una tabla en 390px no se lee</td></tr>
-            <tr><td><a href="#" onclick="navigate('toolbar');return false"><code>toolbar</code></a></td><td><strong>Header nativo + barra de acción abajo</strong></td><td><span class="mc-gs">FL AppBar + BottomAppBar</span></td><td>Lo importante va al alcance del pulgar</td></tr>
+            <tr><td><code>back-link</code></td><td><strong>El back del stack navigator</strong></td><td><span class="mc-gs">FL Navigator.pop</span></td><td>La jerarquía la lleva el navegador, no la pantalla</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-breadcrumb');return false"><code>breadcrumb</code></a></td><td><strong>El back del stack navigator</strong></td><td><span class="mc-gs">FL AppBar</span></td><td>Una ruta completa no entra ni se lee en 390px</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-button-group');return false"><code>button-group</code></a></td><td><strong>Segmented button, o botones apilados a lo ancho</strong></td><td><span class="mc-gs">FL SegmentedButton</span></td><td>Botones pegados de costado no llegan al piso táctil</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-charts');return false"><code>chart</code></a></td><td><strong>El mismo dato con menos series y sin leyenda flotante</strong></td><td></td><td>Una leyenda flotante tapa el gráfico en pantalla chica</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-combobox');return false"><code>combobox</code></a></td><td><strong>Sheet con búsqueda</strong></td><td><span class="mc-gs">RN Actionsheet + Input</span><br><span class="mc-gs">FL SearchAnchor</span></td><td>El popover con filtro es un patrón de puntero</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-command');return false"><code>command</code></a></td><td><strong>Pantalla de búsqueda completa</strong></td><td><span class="mc-gs">FL SearchAnchor</span></td><td>El ⌘K es de teclado</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-context-menu');return false"><code>context-menu</code></a></td><td><strong>Actionsheet, con long-press</strong></td><td><span class="mc-gs">RN Actionsheet</span><br><span class="mc-gs">FL MenuAnchor · showModalBottomSheet</span></td><td>No hay click derecho</td></tr>
+            <tr><td><code>create-form</code></td><td><strong>Pantalla propia, nunca un modal</strong></td><td><span class="mc-gs">FL Route propia</span></td><td>Un formulario dentro de un modal en 390px es una trampa</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-data-table');return false"><code>data-table</code></a></td><td><strong>Lista de filas apiladas (label: valor) o card por registro</strong></td><td><span class="mc-gs">FL ListView + ListTile</span></td><td>Una tabla en 390px se scrollea de costado y nadie lo hace</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-calendar');return false"><code>date-picker</code></a></td><td><strong>El Calendar docked en un bottom sheet</strong></td><td><span class="mc-gs">RN DateTimePicker</span><br><span class="mc-gs">FL showDatePicker</span></td><td>El popover chico es de escritorio</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-menu');return false"><code>dropdown-menu</code></a></td><td><strong>Actionsheet</strong></td><td><span class="mc-gs">RN Menu · Actionsheet</span><br><span class="mc-gs">FL MenuAnchor</span></td><td>No hay menú flotante</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-input-group');return false"><code>input-group</code></a></td><td><strong>Campos apilados</strong></td><td><span class="mc-gs">FL Column</span></td><td>Un input con addon de costado no entra</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-kanban');return false"><code>kanban</code></a></td><td><strong>Segmented button + una columna a la vez</strong></td><td><span class="mc-gs">FL SegmentedButton</span></td><td>Tres columnas en 390px no son tres columnas</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-menubar');return false"><code>menubar</code></a></td><td><strong>Tab bar + stack</strong></td><td><span class="mc-gs">FL NavigationBar</span></td><td>No existe barra de menú en una app</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-dialog');return false"><code>modal</code></a></td><td><strong>Pantalla completa o bottom sheet</strong></td><td><span class="mc-gs">RN Modal · Actionsheet</span><br><span class="mc-gs">FL showModalBottomSheet · showDialog</span></td><td>Un diálogo chico centrado se siente web</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-navigation-menu');return false"><code>navigation-menu</code></a></td><td><strong>Tab bar + stack</strong></td><td><span class="mc-gs">FL NavigationBar</span></td><td>La navegación la lleva el navigator</td></tr>
+            <tr><td><code>page-header</code></td><td><strong>El header del stack navigator</strong></td><td><span class="mc-gs">FL AppBar</span></td><td>El título de pantalla lo pone la navegación</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-pagination');return false"><code>pagination</code></a></td><td><strong>Scroll infinito o “cargar más”</strong></td><td></td><td>Paginar con números es de escritorio</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-menu');return false"><code>popover</code></a></td><td><strong>Bottom sheet, o el contenido inline</strong></td><td><span class="mc-gs">RN Actionsheet</span><br><span class="mc-gs">FL showModalBottomSheet</span></td><td>Un popover necesita un ancla y espacio alrededor</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-scroll-area');return false"><code>scroll-area</code></a></td><td><strong>ScrollView / FlatList</strong></td><td><span class="mc-gs">FL ListView</span></td><td>El scroll lo maneja la plataforma</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-bottom-sheet');return false"><code>sheet</code></a></td><td><strong>Bottom sheet</strong></td><td><span class="mc-gs">RN Actionsheet · BottomSheet</span><br><span class="mc-gs">FL showModalBottomSheet</span></td><td>El sheet lateral es un patrón de escritorio</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-table');return false"><code>table</code></a></td><td><strong>Filas apiladas (label: valor)</strong></td><td></td><td>Una tabla en 390px no se lee</td></tr>
+            <tr><td><a href="#" onclick="navigate('c-toolbar');return false"><code>toolbar</code></a></td><td><strong>Header nativo + barra de acción abajo</strong></td><td><span class="mc-gs">FL AppBar + BottomAppBar</span></td><td>Lo importante va al alcance del pulgar</td></tr>
           </tbody>
         </table>
       </div>
@@ -24462,7 +24487,7 @@ import { Button } from &quot;./components/ui/button&quot;
     </div>
   </div>
 
-  <div class="nav-card" onclick="navigate('grid')">
+  <div class="nav-card" onclick="navigate('composition')">
     <div class="nav-card-header">
       <span class="nav-card-tag">Foundations</span>
       <span class="nav-card-arrow-btn"><i data-lucide="arrow-up-right"></i></span>

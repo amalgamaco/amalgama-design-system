@@ -101,7 +101,7 @@ motion:
 source:
   css: css/components/date-picker.css
   classes: [date-picker, date-picker-trigger, date-picker-trigger-empty, date-picker-icon, date-picker-panel]
-  docs_anchor: c-date-picker
+  docs_anchor: c-calendar
 ---
 
 ## Correct usage

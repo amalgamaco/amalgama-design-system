@@ -18,7 +18,7 @@
    Uso:
    <div class="command">
      <div class="command-input-wrapper">
-       <span class="command-input-icon">…lupa…</span>
+       <span class="command-input-icon"><i data-lucide="search"></i></span>
        <input class="command-input" placeholder="Buscar…">
      </div>
      <div class="command-list">

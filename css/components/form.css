@@ -74,7 +74,7 @@
   font-size: var(--font-size-body-md);
   font-family: inherit;
   color: var(--text-primary);
-  background: var(--card-bg);
+  background: var(--ctx-surface-raised);
   outline: none;
   transition: border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
   appearance: none;

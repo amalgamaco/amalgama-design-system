@@ -14,7 +14,7 @@
 4. **Los modificadores son aditivos**: `class="btn-primary btn-danger"`, `class="chip chip-selected"`.
 5. **El modificador de tamaño ya trae su `border-radius`.** Nunca agregues `border-radius` inline.
 
-66 componentes · **602 clases públicas** de 704 selectores totales en el CSS.
+66 componentes · **603 clases públicas** de 704 selectores totales en el CSS.
 
 ## Cómo cargar el sistema
 
@@ -212,7 +212,7 @@ Clases públicas: `.attachment` · `.attachment-body` · `.attachment-error` · 
 ```html
 <ul class="attachment-list">
   <li class="attachment">
-    <span class="attachment-icon"><svg>…</svg></span>
+    <span class="attachment-icon"><i data-lucide="file-text"></i></span>
     <div class="attachment-body">
       <div class="attachment-name">CV_Ana_Torres.pdf</div>
       <div class="attachment-meta">240 KB · PDF</div>
@@ -256,7 +256,7 @@ Clases públicas: `.back-link`
 
 ```html
 <button class="back-link">
-  <svg width="16" height="16" ...>...</svg>
+  <svg width="16" height="16">…</svg>
   Volver a vacantes
 </button>
 ```
@@ -348,7 +348,7 @@ A month-grid date/range picker with real month/year navigation — the base of t
 **Variantes:** single · range · dropdown · presets · booked · weeknumbers · date-picker · date-time
 **Tamaños:** sm · md · lg
 
-Clases públicas: `.calendar` · `.calendar-caption` · `.calendar-caption-dropdowns` · `.calendar-caption-select` · `.calendar-day` · `.calendar-day-booked` · `.calendar-day-disabled` · `.calendar-day-outside` · `.calendar-day-range-end` · `.calendar-day-range-middle` · `.calendar-day-range-start` · `.calendar-day-selected` · `.calendar-day-today` · `.calendar-grid` · `.calendar-header` · `.calendar-lg` · `.calendar-nav-btn` · `.calendar-preset-btn` · `.calendar-presets` · `.calendar-sm` · `.calendar-time-row` · `.calendar-weekdays` · `.calendar-weeknum` · `.calendar-with-presets` · `.date-picker` · `.date-picker-panel` · `.date-picker-trigger`
+Clases públicas: `.calendar` · `.calendar-caption` · `.calendar-caption-dropdowns` · `.calendar-caption-select` · `.calendar-day` · `.calendar-day-booked` · `.calendar-day-disabled` · `.calendar-day-outside` · `.calendar-day-range-end` · `.calendar-day-range-middle` · `.calendar-day-range-start` · `.calendar-day-selected` · `.calendar-day-today` · `.calendar-grid` · `.calendar-header` · `.calendar-lg` · `.calendar-nav-btn` · `.calendar-preset-btn` · `.calendar-presets` · `.calendar-sm` · `.calendar-time-row` · `.calendar-weekday` · `.calendar-weekdays` · `.calendar-weeknum` · `.calendar-with-presets` · `.date-picker` · `.date-picker-panel` · `.date-picker-trigger`
 
 ```html
 <div class="calendar">
@@ -357,8 +357,28 @@ Clases públicas: `.calendar` · `.calendar-caption` · `.calendar-caption-dropd
     <span class="calendar-caption">Julio 2026</span>
     <button class="calendar-nav-btn" aria-label="Mes siguiente">›</button>
   </div>
-  <div class="calendar-weekdays">...</div>
-  <div class="calendar-grid">...</div>
+  <div class="calendar-weekdays">
+    <span class="calendar-weekday">L</span><span class="calendar-weekday">M</span>
+    <span class="calendar-weekday">M</span><span class="calendar-weekday">J</span>
+    <span class="calendar-weekday">V</span><span class="calendar-weekday">S</span>
+    <span class="calendar-weekday">D</span>
+  </div>
+  <div class="calendar-grid">
+    <button class="calendar-day calendar-day-outside">29</button>
+    <button class="calendar-day calendar-day-outside">30</button>
+    <button class="calendar-day">1</button>
+    <button class="calendar-day">2</button>
+    <button class="calendar-day">3</button>
+    <button class="calendar-day">4</button>
+    <button class="calendar-day">5</button>
+    <button class="calendar-day">6</button>
+    <button class="calendar-day">7</button>
+    <button class="calendar-day calendar-day-today">8</button>
+    <button class="calendar-day">9</button>
+    <button class="calendar-day">10</button>
+    <button class="calendar-day calendar-day-selected" aria-selected="true">11</button>
+    <button class="calendar-day">12</button>
+  </div>
 </div>
 ```
 
@@ -402,8 +422,8 @@ Clases públicas: `.carousel` · `.carousel-btn` · `.carousel-btn-next` · `.ca
 ```html
 <div class="carousel">
   <div class="carousel-content">
-    <div class="carousel-item">…</div>
-    <div class="carousel-item">…</div>
+    <div class="carousel-item">Primera lámina</div>
+    <div class="carousel-item">Segunda lámina</div>
   </div>
   <button class="carousel-btn carousel-btn-prev">‹</button>
   <button class="carousel-btn carousel-btn-next">›</button>
@@ -468,7 +488,7 @@ Clases públicas: `.chip` · `.chip-elevated` · `.chip-icon` · `.chip-remove` 
 <button class="chip">Sugerencia</button>
 <button class="chip"><span class="chip-icon">…</span> Asistencia</button>
 <button class="chip" aria-pressed="false">Filtro</button>
-<button class="chip chip-selected" aria-pressed="true">Filtro activo</button>
+<button class="chip" aria-pressed="true">Filtro activo</button>
 <span class="chip">Entrada <button class="chip-remove" aria-label="Quitar">✕</button></span>
 <button class="chip chip-elevated">Elevado</button>
 ```
@@ -536,7 +556,7 @@ Clases públicas: `.command` · `.command-dialog` · `.command-empty` · `.comma
 ```html
 <div class="command">
   <div class="command-input-wrapper">
-    <span class="command-input-icon">…lupa…</span>
+    <span class="command-input-icon"><i data-lucide="search"></i></span>
     <input class="command-input" placeholder="Buscar…">
   </div>
   <div class="command-list">
@@ -714,7 +734,7 @@ Clases públicas: `.btn-primary` · `.empty-state` · `.empty-state-desc` · `.e
 
 ```html
 <div class="empty-state">
-  <svg class="empty-state-icon" aria-hidden="true" width="32" height="32"><!-- lucide --></svg>
+  <i data-lucide="inbox" class="empty-state-icon" aria-hidden="true"></i>
   <div class="empty-state-title">No hay vacantes</div>
   <p class="empty-state-desc">Crea tu primera vacante para empezar.</p>
   <button class="btn-primary">+ Nueva vacante</button>
@@ -812,7 +832,7 @@ Clases públicas: `.btn-sm` · `.btn-tertiary` · `.item` · `.item-actions` · 
 
 ```html
 <div class="item item-outline">
-  <div class="item-media item-media-icon"><svg>…</svg></div>
+  <div class="item-media item-media-icon"><i data-lucide="bell"></i></div>
   <div class="item-content">
     <div class="item-title">Notificaciones</div>
     <div class="item-description">Recibí avisos por email.</div>
@@ -973,7 +993,7 @@ Clases públicas: `.nav-menu` · `.nav-menu-content` · `.nav-menu-indicator` ·
     <span class="nav-menu-indicator"></span>
   </div>
   <div class="nav-menu-viewport">
-    <div class="nav-menu-content">…enlaces agrupados…</div>
+    <div class="nav-menu-content">…</div>
   </div>
 </nav>
 ```
@@ -1056,7 +1076,7 @@ Clases públicas: `.placeholder-icon` · `.placeholder-panel`
 
 ```html
 <div class="placeholder-panel">
-  <svg class="placeholder-icon" aria-hidden="true" width="32" height="32"><!-- lucide --></svg>
+  <i data-lucide="mouse-pointer-click" class="placeholder-icon" aria-hidden="true"></i>
   <p>Selecciona una vacante para ver los detalles.</p>
 </div>
 ```
@@ -1170,7 +1190,7 @@ Clases públicas: `.scroll-area`
 
 ```html
 <div class="scroll-area" style="max-height: 320px">
-  …contenido largo…
+  …
 </div>
 ```
 
@@ -1191,7 +1211,7 @@ Clases públicas: `.form-input` · `.search-bar` · `.search-bar-avatar` · `.se
 ```html
 <!-- Search bar standalone -->
 <div class="search-bar" role="search">
-  <span class="search-bar-icon">…lupa…</span>
+  <span class="search-bar-icon"><i data-lucide="search"></i></span>
   <input class="search-bar-input" type="search" placeholder="Buscar" aria-label="Buscar">
   <span class="search-bar-avatar">AV</span>   <!-- opcional -->
 </div>
@@ -1199,7 +1219,7 @@ Clases públicas: `.form-input` · `.search-bar` · `.search-bar-avatar` · `.se
 <!-- Search + icon buttons (patrón canónico para toolbar-like) -->
 <div class="search-row">
   <div class="search-bar" role="search">
-    <span class="search-bar-icon">…lupa…</span>
+    <span class="search-bar-icon"><i data-lucide="search"></i></span>
     <input class="search-bar-input" type="search" placeholder="Buscar" aria-label="Buscar">
   </div>
   <button class="search-icon-btn" aria-label="Filtros"><svg>…</svg></button>
@@ -1232,7 +1252,8 @@ Clases públicas: `.seg-btn` · `.seg-btn-group` · `.seg-btn-group-lg` · `.seg
 
 ```html
 <div class="seg-btn-group" role="group" aria-label="Vista">
-  <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button>
+  <!-- El estado lo declara aria-selected (única) o aria-pressed (múltiple); .selected es un alias. -->
+  <button class="seg-btn" aria-selected="true" onclick="segSwitch(this)">Lista</button>
   <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Cuadrícula</button>
 </div>
 ```
@@ -1377,7 +1398,7 @@ Clases públicas: `.badge` · `.stat-card` · `.stat-change` · `.stat-change-ne
     <div class="stat-label">Vacantes abiertas</div>
     <div class="stat-value">24</div>
     <div class="badge stat-change stat-change-positive">
-      <svg width="12" height="12" aria-hidden="true"><!-- lucide trending-up --></svg>12%
+      <i data-lucide="trending-up" aria-hidden="true"></i>12%
     </div>
   </div>
 </div>
@@ -1445,12 +1466,13 @@ Clases públicas: `.active` · `.tab` · `.tab-indicator` · `.tab-panel` · `.t
 
 ```html
 <div class="tabs" role="tablist">
-  <button class="tab active" role="tab" aria-selected="true" id="tab-general" aria-controls="panel-general">General</button>
+  <!-- El estado lo declara aria-selected; .active es un alias que el JS agrega y el CSS también pinta. -->
+  <button class="tab" role="tab" aria-selected="true" id="tab-general" aria-controls="panel-general">General</button>
   <button class="tab" role="tab" aria-selected="false" id="tab-requisitos" aria-controls="panel-requisitos" tabindex="-1">Requisitos</button>
   <span class="tab-indicator"></span>
 </div>
-<div class="tab-panel active" id="panel-general" role="tabpanel" aria-labelledby="tab-general">...</div>
-<div class="tab-panel" id="panel-requisitos" role="tabpanel" aria-labelledby="tab-requisitos" hidden>...</div>
+<div class="tab-panel active" id="panel-general" role="tabpanel" aria-labelledby="tab-general">…</div>
+<div class="tab-panel" id="panel-requisitos" role="tabpanel" aria-labelledby="tab-requisitos" hidden>…</div>
 ```
 
 Regla completa: `component-rules/tabs.md` · CSS: `css/components/tabs.css`
@@ -1608,7 +1630,7 @@ Clases públicas: `.assignee` · `.assignee-avatar` · `.badge` · `.badge-open`
   <!-- Interactiva: agregá tabindex="0" role="button" (o usá <a>/<button>) —
        la card es focusable y trae :focus-visible. -->
   <div class="vacancy-card" tabindex="0" role="button">
-    <svg class="vacancy-icon" aria-hidden="true" width="20" height="20"><!-- lucide --></svg>
+    <i data-lucide="briefcase" class="vacancy-icon" aria-hidden="true"></i>
     <div class="vacancy-info">
       <div class="vacancy-name">
         Desarrollador Frontend

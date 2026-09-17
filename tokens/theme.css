@@ -189,6 +189,10 @@
   --color-yellow-light: rgb(var(--e-yellow-light));
   --color-blue: rgb(var(--e-blue));
   --color-blue-light: rgb(var(--e-blue-light));
+  --color-ctx-surface: rgb(var(--e-ctx-surface));
+  --color-ctx-surface-raised: rgb(var(--e-ctx-surface-raised));
+  --color-ctx-track: rgb(var(--e-ctx-track));
+  --color-ctx-track-thumb: rgb(var(--e-ctx-track-thumb));
   --color-nav-hover: rgb(var(--e-color-nav-hover));
   --color-nav-hover-content: rgb(var(--e-color-nav-hover-content));
   --color-nav-press: rgb(var(--e-color-nav-press));

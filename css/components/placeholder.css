@@ -11,7 +11,7 @@
 
    Uso:
    <div class="placeholder-panel">
-     <svg class="placeholder-icon" aria-hidden="true" width="32" height="32"><!-- lucide --></svg>
+     <i data-lucide="mouse-pointer-click" class="placeholder-icon" aria-hidden="true"></i>
      <p>Selecciona una vacante para ver los detalles.</p>
    </div>
 ═══════════════════════════════════════ */

@@ -91,7 +91,7 @@ related_rules: [MOBILE.md, COMPOSICION.md]
 source:
   css: css/variables.css
   classes: []
-  docs_anchor: c-mobile
+  docs_anchor: mobile
 ---
 
 ## Correct usage

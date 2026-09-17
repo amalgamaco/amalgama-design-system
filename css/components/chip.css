@@ -4,7 +4,8 @@
    entrada o sugerencia. Cuatro variantes funcionales (MD3):
 
      Assist     · .chip (+ .chip-icon opcional)        · acción contextual
-     Filter     · .chip / .chip.chip-selected          · refinar contenido
+     Filter     · .chip + aria-pressed="true"          · refinar contenido
+                  (.chip-selected es un alias aceptado; el estado lo declara el atributo)
      Input      · .chip + .chip-remove                 · información ingresada
      Suggestion · .chip                                · sugerencia dinámica
 
@@ -32,7 +33,7 @@
    <button class="chip">Sugerencia</button>
    <button class="chip"><span class="chip-icon">…</span> Asistencia</button>
    <button class="chip" aria-pressed="false">Filtro</button>
-   <button class="chip chip-selected" aria-pressed="true">Filtro activo</button>
+   <button class="chip" aria-pressed="true">Filtro activo</button>
    <span class="chip">Entrada <button class="chip-remove" aria-label="Quitar">✕</button></span>
    <button class="chip chip-elevated">Elevado</button>
 ═══════════════════════════════════════ */
@@ -94,13 +95,16 @@
 }
 
 /* ── Variante: seleccionado (filter / input) ── */
-.chip-selected {
+.chip-selected,
+.chip[aria-pressed="true"] {
   background: var(--color-secondary-container);
   color: var(--color-on-secondary-container);
   border-color: transparent;
 }
-.chip-selected .chip-icon   { color: var(--color-on-secondary-container); }
-.chip-selected .chip-remove { color: var(--color-on-secondary-container); }
+.chip-selected .chip-icon,
+.chip[aria-pressed="true"] .chip-icon   { color: var(--color-on-secondary-container); }
+.chip-selected .chip-remove,
+.chip[aria-pressed="true"] .chip-remove { color: var(--color-on-secondary-container); }
 
 /* ── Estados (capas sobre on-surface, según tabla de tokens) ── */
 .chip:hover {
@@ -115,10 +119,12 @@
 .chip-elevated:active {
   background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-low));
 }
-.chip-selected:hover {
+.chip-selected:hover,
+.chip[aria-pressed="true"]:hover {
   background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container));
 }
-.chip-selected:active {
+.chip-selected:active,
+.chip[aria-pressed="true"]:active {
   background: color-mix(in srgb, var(--color-on-secondary-container) 12%, var(--color-secondary-container));
 }
 

@@ -415,6 +415,29 @@ Hay tres cosas distintas que la pantalla llama «seleccionado», y se separan po
 Contraste verificado: `on-primary-container` sobre `primary-container` da 12.86:1 en
 claro y 5.44:1 en oscuro.
 
+### Cómo se dibuja el neutro
+
+«Sin acento» no quiere decir sin forma. El primer intento fue levantar el control
+un escalón de superficie y rodearlo de un aro para que se viera, y eso falla por
+dos lados: **un escalón de superficie da 1.10:1 y nada más** —en los dos temas—,
+así que el aro terminaba haciendo todo el trabajo; y el aro quedaba adentro del
+borde del contenedor, o sea dos anillos concéntricos a 3px.
+
+Lo que funciona es al revés: **hundir el contenedor en vez de levantar el control**.
+Dos escalones en lugar de uno, y sin ningún borde: 1.19:1 en claro, 1.24:1 en oscuro.
+
+| | Token | Qué es |
+|---|---|---|
+| El canal | `--ctx-track` | El contenedor, un escalón por debajo de la página. Sin borde |
+| Lo que corre sobre él | `--ctx-track-thumb` | El segmento activo, el pulgar del slider. Más `--shadow-sm` |
+
+Van aparte de `--ctx-surface` / `--ctx-surface-raised` porque la rampa de
+superficies **cambia de dirección entre temas** —en claro `container-high` está por
+debajo de `surface`, en oscuro por encima— así que la pista no se puede escribir con
+un solo token de la rampa. Ese override por tema vive una sola vez en
+`variables.css`, no en cada componente que necesite un canal: segmented, slider,
+progress, toggle-group.
+
 **Verificación:** contá los elementos con token de selección dentro de un mismo
 contenedor. **Más de un sistema de selección del mismo rol en una región es una
 falla** — no porque se vea mal, sino porque el ojo no puede ordenar tres azules

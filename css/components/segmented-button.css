@@ -26,19 +26,26 @@
      contra la paleta Embassy. Sin el bridge, el componente cae al rol
      Embassy automáticamente (sigue funcionando).
 
+   Ojo, una diferencia con MD3 a proposito: MD3 pinta el segmento activo con
+   secondaryContainer, y Embassy no. En una pantalla real el filtro activo ya
+   usa ese azul, y si el modo de vista usa el mismo ninguno de los dos pesa mas
+   que el otro (COMPOSICION.md §4c). Aca el grupo es una pista hundida y el
+   segmento activo se levanta, en neutro.
+
    ┌─ MD3 component token ───────────── token de componente ── default ──┐
-   │ outline.color                      outline-color          outline    │
+   │ (Embassy) container.color          container-color        ctx-track   │
+   │ outline.color                      outline-color          transparent │
    │ label-text.color (unselected)      label-color            on-surface  │
    │ icon.color (unselected)            icon-color             on-surface  │
-   │ selected.container.color           selected-container     secondaryContainer        │
-   │ selected.label-text.color          selected-label         onSecondaryContainer      │
-   │ selected.icon.color                selected-icon          onSecondaryContainer      │
+   │ selected.container.color           selected-container     ctx-track-thumb           │
+   │ selected.label-text.color          selected-label         onSurface                 │
+   │ selected.icon.color                selected-icon          onSurface                 │
    │ hover.state-layer  (8%)            hover-layer-*          onSurface 8%              │
    │ focus.state-layer  (12%)           focus-layer-*          onSurface 12%             │
    │ pressed.state-layer (12%)          pressed-layer-*        onSurface 12%             │
-   │ selected.hover.state-layer (8%)    selected-hover-*       onSecondaryContainer 8%   │
-   │ selected.focus.state-layer (12%)   selected-focus-*       onSecondaryContainer 12%  │
-   │ selected.pressed.state-layer(12%)  selected-pressed-*     onSecondaryContainer 12%  │
+   │ selected.hover.state-layer (8%)    selected-hover-*       onSurface 8%              │
+   │ selected.focus.state-layer (12%)   selected-focus-*       onSurface 12%             │
+   │ selected.pressed.state-layer(12%)  selected-pressed-*     onSurface 12%             │
    │ disabled.container.color (12%)     disabled-container-*   onSurface 12%             │
    │ disabled.label-text.color (38%)    disabled-label-*       onSurface 38%             │
    │ disabled.outline.color (12%)       disabled-outline-*     onSurface 12%             │
@@ -52,7 +59,8 @@
    Dependencia: variables.css  ·  recomendado: md-sys-bridge.css
    Uso:
    <div class="seg-btn-group" role="group" aria-label="Vista">
-     <button class="seg-btn selected" aria-selected="true" onclick="segSwitch(this)">Lista</button>
+     <!-- El estado lo declara aria-selected (única) o aria-pressed (múltiple); .selected es un alias. -->
+     <button class="seg-btn" aria-selected="true" onclick="segSwitch(this)">Lista</button>
      <button class="seg-btn" aria-selected="false" onclick="segSwitch(this)">Cuadrícula</button>
    </div>
 ═══════════════════════════════════════ */
@@ -61,15 +69,23 @@
 .seg-btn-group {
   /* Estructura */
   --seg-btn-container-shape:                var(--radius-full);
-  /* Borde del grupo */
-  --seg-btn-outline-color:                  var(--md-sys-color-outline, var(--color-outline));
+  /* Pista del grupo — COMPOSICION.md §4c: «como estas mirando» es el mas callado
+     de los tres seleccionados, y no lleva acento. En vez de un aro alrededor del
+     segmento activo, el grupo se HUNDE un escalon y el segmento se queda al
+     nivel de una tarjeta: 1.19:1 en claro, 1.24:1 en oscuro, sin ningun borde.
+     Un aro adentro del borde del grupo son dos anillos concentricos a 3px. */
+  --seg-btn-container-color:                var(--ctx-track);
+  --seg-btn-outline-color:                  transparent;
   /* Segmento no seleccionado */
   --seg-btn-label-color:                    var(--md-sys-color-on-surface, var(--color-on-surface));
   --seg-btn-icon-color:                     var(--md-sys-color-on-surface, var(--color-on-surface));
   /* Segmento seleccionado */
-  --seg-btn-selected-container-color:       var(--md-sys-color-secondary-container, var(--color-secondary-container));
-  --seg-btn-selected-label-color:           var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
-  --seg-btn-selected-icon-color:            var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  /* Neutro a proposito: el token de seleccion (secondary-container) queda para el
+     filtro activo. Si los dos usan el mismo azul, ninguno pesa mas que el otro. */
+  --seg-btn-selected-container-color:       var(--ctx-track-thumb);
+  --seg-btn-selected-label-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-selected-icon-color:            var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-selected-elevation:             var(--shadow-sm);
   /* State layers — no seleccionado */
   --seg-btn-hover-layer-color:              var(--md-sys-color-on-surface, var(--color-on-surface));
   --seg-btn-hover-layer-opacity:            8%;
@@ -78,11 +94,11 @@
   --seg-btn-pressed-layer-color:            var(--md-sys-color-on-surface, var(--color-on-surface));
   --seg-btn-pressed-layer-opacity:          12%;
   /* State layers — seleccionado */
-  --seg-btn-selected-hover-layer-color:     var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-hover-layer-color:     var(--md-sys-color-on-surface, var(--color-on-surface));
   --seg-btn-selected-hover-layer-opacity:   8%;
-  --seg-btn-selected-focus-layer-color:     var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-focus-layer-color:     var(--md-sys-color-on-surface, var(--color-on-surface));
   --seg-btn-selected-focus-layer-opacity:   12%;
-  --seg-btn-selected-pressed-layer-color:   var(--md-sys-color-on-secondary-container, var(--color-on-secondary-container));
+  --seg-btn-selected-pressed-layer-color:   var(--md-sys-color-on-surface, var(--color-on-surface));
   --seg-btn-selected-pressed-layer-opacity: 12%;
   /* Deshabilitado — alineado a MD3 (onSurface @ opacidad) */
   --seg-btn-disabled-group-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
@@ -99,7 +115,7 @@
 
   display: inline-flex;
   align-items: center;
-  background: transparent;
+  background: var(--seg-btn-container-color);
   border: 1px solid var(--seg-btn-outline-color);
   border-radius: var(--seg-btn-container-shape);
   padding: 3px;
@@ -143,6 +159,7 @@
 .seg-btn[aria-pressed="true"] {
   background: var(--seg-btn-selected-container-color);
   color: var(--seg-btn-selected-label-color);
+  box-shadow: var(--seg-btn-selected-elevation);
   font-weight: 600;
 }
 .seg-btn.selected svg, .seg-btn.selected i,

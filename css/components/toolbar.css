@@ -270,6 +270,17 @@
   border-radius: var(--tb-radius);                      /* campo cuadrado, no píldora, dentro de la barra */
   padding: var(--space-1);
   --seg-btn-outline-color: var(--tb-border);            /* re-apunta el borde del componente al campo */
+  /* Suelto, el segmented es un modo de vista y va neutro: pista hundida + pulgar
+     levantado (COMPOSICION.md §4c). Acá no: adentro de .toolbar-filters está al
+     lado de un Select y un Date picker, o sea que está eligiendo un FILTRO, y el
+     filtro activo sí lleva el tonal. Además la barra ya pintó el grupo con la
+     superficie de campo, así que un pulgar levantado quedaría del mismo color que
+     su contenedor en claro (los dos son --card-bg) y no se vería. */
+  --seg-btn-container-color:          var(--tb-surface);
+  --seg-btn-selected-container-color: var(--color-secondary-container);
+  --seg-btn-selected-label-color:     var(--color-on-secondary-container);
+  --seg-btn-selected-icon-color:      var(--color-on-secondary-container);
+  --seg-btn-selected-elevation:       none;
 }
 .toolbar-filters .seg-btn { border-radius: var(--radius-sm); }   /* segmentos anidados en el campo cuadrado */
 .toolbar-filters .seg-btn-group:hover { border-color: var(--tb-border-hover); }

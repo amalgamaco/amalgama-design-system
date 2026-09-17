@@ -23,7 +23,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  background: var(--color-surface);
+  background: var(--ctx-surface);
 }
 
 .list-item {
@@ -90,12 +90,14 @@ button.list-item:focus-visible {
   box-shadow: inset 0 0 0 4px var(--color-focus-ring);
 }
 /* Seleccionado — mismo lenguaje de selección que Nav/Menu (secondary-container). */
-button.list-item[aria-selected="true"],
+/* Sin `button.` adelante: el atributo declara el estado en cualquier etiqueta —
+   un <li> con aria-selected se veía sin seleccionar. */
+.list-item[aria-selected="true"],
 .list-item.is-selected {
   background: var(--color-secondary-container);
   color: var(--color-on-secondary-container);
 }
-button.list-item[aria-selected="true"] .list-item-supporting,
+.list-item[aria-selected="true"] .list-item-supporting,
 .list-item.is-selected .list-item-supporting { color: inherit; }
 /* Deshabilitado */
 button.list-item:disabled,

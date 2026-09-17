@@ -55,15 +55,21 @@ console.log("\n[2] phantom tokens");
 console.log("\n[3] routes & [4] nav anchors");
 {
   const html = read("index.html");
+  // Ojo: esto miraba SOLO los destinos que ya empezaban con c-. Los 60 links
+  // de la página Nativo apuntaban al id del componente pelado (`badge`, `toast`)
+  // y ninguno existía en SECTIONS: navigate() con una clave desconocida hace
+  // `return` en silencio, así que la página se veía bien y no llevaba a ningún
+  // lado. Un chequeo que cubre la mitad del problema da la misma confianza que
+  // uno completo. Ahora se miran TODOS los destinos.
   const routes = {};
-  for (const m of html.matchAll(/'(c-[a-z0-9-]+)':\s*\{([^}]*)\}/g)) routes[m[1]] = m[2];
-  const sections = new Set([...html.matchAll(/id="s-(c-[a-z0-9-]+)"/g)].map((m) => m[1]));
+  for (const m of html.matchAll(/^\s*'([a-z0-9-]+)':\s*\{([^}]*)\}/gm)) routes[m[1]] = m[2];
+  const sections = new Set([...html.matchAll(/id="s-([a-z0-9-]+)"/g)].map((m) => m[1]));
   const resolves = (k) => sections.has(k) ||
     (routes[k] && /redirect:\s*'([^']+)'/.exec(routes[k]) && sections.has(/redirect:\s*'([^']+)'/.exec(routes[k])[1]));
   const brokenRoutes = Object.keys(routes).filter((k) => !resolves(k));
   brokenRoutes.length ? fail(`routes with no section/redirect: ${brokenRoutes.join(", ")}`)
                       : ok(`${Object.keys(routes).length} routes all resolve`);
-  const navTargets = new Set([...html.matchAll(/navigate\('(c-[a-z0-9-]+)'\)/g)].map((m) => m[1]));
+  const navTargets = new Set([...html.matchAll(/navigate\('([a-z0-9-]+)'\)/g)].map((m) => m[1]));
   const dangling = [...navTargets].filter((t) => !(t in routes) && !sections.has(t));
   dangling.length ? fail(`navigate() targets with no route/section: ${dangling.join(", ")}`)
                   : ok(`${navTargets.size} navigate() targets all resolve`);
@@ -853,6 +859,12 @@ console.log("\n[20] el sitio no se queda atrás de COMPOSICION §4b y GOVERNANCE
 
    El arreglo no es acordarse: es derivar el sello del contenido. Este chequeo
    solo verifica que `build-asset-versions.mjs` este corrido.
+
+   Sep 17 — la primera version miraba solo los <link> de index.html y daba verde
+   mientras los 62 `@import` de components.css seguian en `?v=9` a mano. El sitio
+   servia badge.css de 5.145 bytes, sin la regla de `stat-change`, a todo el que
+   hubiera entrado antes. El chequeo decia que si y la pagina decia que no: un
+   chequeo que mira la mitad da MAS confianza que ninguno y la misma cobertura.
    ──────────────────────────────────────────────────────────────────────────── */
 console.log("\n[21] el ?v= de cada hoja sale de su contenido");
 {
@@ -863,7 +875,7 @@ console.log("\n[21] el ?v= de cada hoja sale de su contenido");
          + `el navegador va a servir la versión vieja de su caché. Corré `
          + `node scripts/build-asset-versions.mjs: `
          + tocados.map((t) => `${t.ruta} (${t.vieja})`).slice(0, 5).join(" · "));
-  else ok("las 9 hojas del sitio están selladas por contenido");
+  else ok("las 9 hojas del sitio y los 62 @import de components.css están sellados por contenido");
 }
 
 
@@ -923,6 +935,166 @@ console.log("\n[22] los escalones de superficie se distinguen entre sí");
     fail(`${problemas.length} escalón(es) de superficie colapsado(s) — un panel en ese token es `
          + `invisible salvo por su borde: ` + problemas.join(" · "));
   else ok("ningún escalón de la rampa comparte valor con otro (salvo la excepción declarada en claro)");
+}
+
+
+
+/* ────────────────────────────────────────────────────────────────────────────
+   [23] el contraste de un badge cuenta su opacidad
+
+   `[15]` certifica los pares --color-X / --color-on-X y pasaba limpio, porque los
+   tokens de `.badge-archived` estaban bien. Lo que fallaba era el pixel: la regla
+   agregaba `opacity: .75` encima, y la opacidad mezcla el texto Y el fondo contra
+   la pagina, asi que el contraste REAL caia de 4.64:1 a 2.91:1 en claro — por
+   debajo de AA, en una variante que se usa para decir «archivada».
+
+   Un chequeo que mira tokens no puede ver eso. Este resuelve el par de cada
+   variante y le aplica la opacidad que la propia regla declara.
+   ──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[23] el contraste de cada badge cuenta la opacidad que declara");
+{
+  const vars = read("css/variables.css");
+  const badge = read("css/components/badge.css").replace(/\/\*[\s\S]*?\*\//g, "");
+
+  const bloque = (re) => { const m = re.exec(vars); if (!m) return ""; let prof = 0;
+    const i = vars.indexOf("{", m.index);
+    for (let j = i; j < vars.length; j++) { if (vars[j] === "{") prof++; else if (vars[j] === "}") { prof--; if (!prof) return vars.slice(i, j); } }
+    return ""; };
+  const mapa = (b) => Object.fromEntries([...b.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
+  const raiz = mapa(bloque(/^:root\s*\{/m)), oscuro = mapa(bloque(/\[data-theme="dark"\]\s*\{/));
+
+  const hex = (v, t, visto = new Set()) => {           // resuelve var(...) encadenado
+    if (!v || visto.has(v)) return null; visto.add(v);
+    const m = /var\((--[\w-]+)/.exec(v);
+    if (m) { const d = t === "dark" ? (oscuro[m[1]] ?? raiz[m[1]]) : raiz[m[1]]; return hex(d, t, visto); }
+    const h = /#([0-9A-Fa-f]{6})/.exec(v); return h ? h[1] : null; };
+  const rgb = (h) => ({ r: parseInt(h.slice(0,2),16), g: parseInt(h.slice(2,4),16), b: parseInt(h.slice(4,6),16) });
+  const lum = (c) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4); };
+    return 0.2126*f(c.r) + 0.7152*f(c.g) + 0.0722*f(c.b); };
+  const mezcla = (f, g, a) => ({ r: f.r*a + g.r*(1-a), g: f.g*a + g.g*(1-a), b: f.b*a + g.b*(1-a) });
+  const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p,q) => q-p); return (x+0.05)/(y+0.05); };
+
+  const malas = [];
+  for (const m of badge.matchAll(/\.badge-([\w-]+)\s*\{([^}]*)\}/g)) {
+    const variante = m[1], cuerpo = m[2];
+    const bg = /background:\s*([^;]+);/.exec(cuerpo), fg = /(?:^|;)\s*color:\s*([^;]+);/.exec(cuerpo);
+    if (!bg || !fg) continue;
+    const op = parseFloat((/opacity:\s*([\d.]+)/.exec(cuerpo) || [, "1"])[1]);
+    for (const tema of ["light", "dark"]) {
+      const pag = hex("var(--color-surface)", tema);
+      const hb = hex(bg[1], tema), hf = hex(fg[1], tema);
+      if (!hb || !hf || !pag) continue;                 // color-mix u otra forma: no se mide acá
+      const P = rgb(pag);
+      const r = ratio(mezcla(rgb(hf), P, op), mezcla(rgb(hb), P, op));
+      if (r < 4.5) malas.push(`.badge-${variante} en ${tema}: ${r.toFixed(2)}:1${op < 1 ? ` (opacity ${op} lo baja desde ${ratio(rgb(hf), rgb(hb)).toFixed(2)})` : ""}`);
+    }
+  }
+  if (malas.length)
+    fail(`${malas.length} variante(s) de badge por debajo de 4.5:1 con su opacidad contada: ` + malas.join(" · "));
+  else ok("todas las variantes de badge llegan a 4.5:1 en los dos temas, con su opacidad");
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   [24] el estado seleccionado se pinta por su atributo, no sólo por su clase
+
+   El sistema tenía nueve maneras de escribir «esto está seleccionado», y en
+   cinco componentes el CSS pintaba SÓLO la clase: un markup con el ARIA
+   correcto y sin la clase se veía sin seleccionar. La regla está en
+   guidelines/component-decisions.md §«Cómo se declara que algo está
+   seleccionado»: el atributo declara, la clase acompaña.
+   ═══════════════════════════════════════════════════════════════════════ */
+console.log("\n[24] lo seleccionado se pinta por su atributo ARIA, no sólo por su clase");
+{
+  // .tab-panel.active no es un control seleccionado: es un panel que se muestra.
+  const EXENTOS = [/\.tab-panel\.active/];
+  const CLASE = /\.(?:is-selected|chip-selected|selected|active)\b/;
+  const ARIA  = /\[aria-(?:selected|pressed|current)/;
+  const dir = path.join(ROOT, "css/components");
+  const mudos = [];
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".css"))) {
+    const css = fs.readFileSync(path.join(dir, f), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    const selectores = css.split("}").map((r) => r.split("{")[0]).filter((r) => r.trim());
+    const conClase = selectores.filter((r) => CLASE.test(r) && !EXENTOS.some((e) => e.test(r)));
+    if (!conClase.length) continue;
+    if (!selectores.some((r) => ARIA.test(r)))
+      mudos.push(`${f}: pinta ${[...new Set(conClase.join(" ").match(new RegExp(CLASE.source, "g")))].join(" ")} y ningún atributo`);
+  }
+  if (mudos.length) fail(`${mudos.length} componente(s) pintan la clase de selección y no el atributo: ` + mudos.join(" · "));
+  else ok("todo componente que pinta una clase de selección pinta también su atributo ARIA");
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   [25] los placeholders del bloque Uso: se escriben de una sola manera
+
+   El snippet de `Uso:` es lo que un agente copia tal cual, y lo que esta doc
+   renderiza en la página Nativo. Un placeholder que no se lee como
+   placeholder termina de contenido real: `…lupa…` se renderizaba como la
+   palabra «lupa» dentro del buscador, y `...` quedaba tal cual en el
+   calendario. Una sola forma: `…` solo, sin palabras adentro y sin puntos.
+   ═══════════════════════════════════════════════════════════════════════ */
+console.log("\n[25] los placeholders de Uso: usan un solo signo");
+{
+  const dir = path.join(ROOT, "css/components");
+  const malos = [];
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".css"))) {
+    const m = /Uso[^:]*:\s*\n([\s\S]*?)\*\//.exec(fs.readFileSync(path.join(dir, f), "utf8"));
+    if (!m) continue;
+    const uso = m[1];
+    // `...` en cualquier parte del snippet
+    if (/\.\.\./.test(uso.replace(/(?:placeholder|data-placeholder)="[^"]*"/g, "")))
+      malos.push(`${f}: usa ... en vez de …`);
+    // `…palabra…` — el generador saca los … y deja la palabra suelta
+    const dentro = uso.match(/…[^…<>\n]*[A-Za-zÁÉÍÓÚáéíóúñÑ][^…<>\n]*…/g);
+    if (dentro) malos.push(`${f}: ${dentro.map((d) => d.trim()).join(", ")} deja texto suelto al renderizar`);
+  }
+  if (malos.length) fail(`${malos.length} bloque(s) Uso: con placeholder ambiguo: ` + malos.join(" · "));
+  else ok("todos los bloques Uso: usan … solo como placeholder");
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   [26] el docs_anchor de cada regla abre una ficha que existe
+
+   `docs_anchor` es lo que dice a qué página del sitio corresponde un
+   componente, y de ahí salen los links de la página Nativo. Nueve reglas
+   apuntaban a una clave que SECTIONS no tiene. Se separan dos casos, porque
+   no son el mismo problema: si el componente igual se muestra en alguna
+   sección, el anchor está mal escrito y hay a dónde apuntar (falla); si no
+   se muestra en ninguna, lo que falta es la ficha, y eso es trabajo de
+   contenido (aviso).
+   ═══════════════════════════════════════════════════════════════════════ */
+console.log("\n[26] el docs_anchor de cada regla abre una ficha que existe");
+{
+  const html = read("index.html");
+  const ini = html.indexOf("const SECTIONS = {");
+  const claves = new Set([...html.slice(ini, html.indexOf("\n};", ini))
+    .matchAll(/^\s*.([a-z0-9-]+).\s*:\s*\{/gm)].map((m) => m[1]));
+
+  // el html partido por sección, para saber dónde se muestra cada componente
+  const secciones = [];
+  { const re = /<section class="ds-section"[^>]*id="s-([a-z0-9-]+)"/g; let m, prev = null;
+    while ((m = re.exec(html))) { if (prev) secciones.push([prev[0], html.slice(prev[1], m.index)]); prev = [m[1], m.index]; }
+    if (prev) secciones.push([prev[0], html.slice(prev[1])]); }
+
+  const manifest = JSON.parse(read("component-rules/manifest.json"));
+  const rotos = [], huerfanos = [];
+  for (const c of manifest.components ?? []) {
+    const a = c.source?.docs_anchor;
+    if (!a || claves.has(a)) continue;
+    // ¿se muestra en alguna sección? se busca su clase más específica
+    const firma = (c.source?.classes ?? []).filter((k) => k.length > 6 && k.includes("-"));
+    const donde = secciones
+      .map(([id, body]) => [id, firma.filter((k) => body.includes(`class="${k}`) || body.includes(` ${k}"`)).length])
+      .filter(([id, n]) => n > 0 && id !== "mobile-components")
+      .sort((x, y) => y[1] - x[1])[0];
+    if (donde) rotos.push(`${c.id} → ${a} (se muestra en ${donde[0]})`);
+    else huerfanos.push(`${c.id} → ${a}`);
+  }
+  if (rotos.length) fail(`${rotos.length} docs_anchor apunta(n) a una clave inexistente teniendo ficha: ` + rotos.join(" · "));
+  if (huerfanos.length) warn(`${huerfanos.length} componente(s) sin ficha en el sitio: ${huerfanos.join(", ")} — se imprimen sin link`);
+  if (!rotos.length && !huerfanos.length) ok("todos los docs_anchor resuelven a una sección del sitio");
+  else if (!rotos.length) ok("ningún docs_anchor apunta a una ficha que exista con otro nombre");
 }
 
 

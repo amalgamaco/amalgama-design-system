@@ -195,6 +195,10 @@ class EmbassyColors {
   static const yellowLight = Color(0xFFFFF2DF);
   static const blue = Color(0xFF1E52EE);
   static const blueLight = Color(0xFFE9EBFD);
+  static const ctxSurface = Color(0xFFF3F4F6);
+  static const ctxSurfaceRaised = Color(0xFFFFFFFF);
+  static const ctxTrack = Color(0xFFEAEBED);
+  static const ctxTrackThumb = Color(0xFFFFFFFF);
   static const colorNavHover = Color(0x73CAD9FF);
   static const colorNavHoverContent = Color(0xFF4F80FF);
   static const colorNavPress = Color(0xB3CAD9FF);
@@ -388,6 +392,10 @@ class EmbassyColors {
   static const yellowLightDark = Color(0xFFFFF2DF);
   static const blueDark = Color(0xFF1E52EE);
   static const blueLightDark = Color(0xFFE9EBFD);
+  static const ctxSurfaceDark = Color(0xFFF3F4F6);
+  static const ctxSurfaceRaisedDark = Color(0xFFFFFFFF);
+  static const ctxTrackDark = Color(0xFF171B26);
+  static const ctxTrackThumbDark = Color(0xFF282C39);
   static const colorNavHoverDark = Color(0x73CAD9FF);
   static const colorNavHoverContentDark = Color(0xFF4F80FF);
   static const colorNavPressDark = Color(0xB3CAD9FF);

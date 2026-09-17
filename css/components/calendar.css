@@ -25,8 +25,28 @@
        <span class="calendar-caption">Julio 2026</span>
        <button class="calendar-nav-btn" aria-label="Mes siguiente">›</button>
      </div>
-     <div class="calendar-weekdays">...</div>
-     <div class="calendar-grid">...</div>
+     <div class="calendar-weekdays">
+       <span class="calendar-weekday">L</span><span class="calendar-weekday">M</span>
+       <span class="calendar-weekday">M</span><span class="calendar-weekday">J</span>
+       <span class="calendar-weekday">V</span><span class="calendar-weekday">S</span>
+       <span class="calendar-weekday">D</span>
+     </div>
+     <div class="calendar-grid">
+       <button class="calendar-day calendar-day-outside">29</button>
+       <button class="calendar-day calendar-day-outside">30</button>
+       <button class="calendar-day">1</button>
+       <button class="calendar-day">2</button>
+       <button class="calendar-day">3</button>
+       <button class="calendar-day">4</button>
+       <button class="calendar-day">5</button>
+       <button class="calendar-day">6</button>
+       <button class="calendar-day">7</button>
+       <button class="calendar-day calendar-day-today">8</button>
+       <button class="calendar-day">9</button>
+       <button class="calendar-day">10</button>
+       <button class="calendar-day calendar-day-selected" aria-selected="true">11</button>
+       <button class="calendar-day">12</button>
+     </div>
    </div>
 ═══════════════════════════════════════ */
 

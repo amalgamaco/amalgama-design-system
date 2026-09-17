@@ -2,7 +2,7 @@
   "$schema": "https://design-tokens.org/community-group/format/",
   "$description": "Generado por scripts/build-tokens.mjs desde css/variables.css. NO editar a mano: se regenera y se pisa. Cambiá el CSS.",
   "source": "css/variables.css",
-  "generated": "2026-09-16",
+  "generated": "2026-09-17",
   "tokens": {
     "--neutral-10": {
       "$type": "color",
@@ -1790,20 +1790,46 @@
       "$value": "0",
       "section": "Versalitas de componente (badge, header de tabla, label del nav, acción del toast): 10–11px. Acá el tracking apretado se lee PEOR — a ese tamaño las mayúsculas necesitan aire para separarse. No unificar con el de arriba: resuelven problemas distintos."
     },
+    "--ctx-surface": {
+      "$type": "color",
+      "$value": "#F3F4F6",
+      "section": "Contexto de superficie   Todo componente asumia que estaba apoyado sobre  color-surface. Metido en un panel con fondo propio, su relleno quedaba mal y habia que pisarlo a mano: medido en una consola de check-in (sep 2026), ocho de catorce overrides de clases publicas eran esto.  Dos tokens, y los dos los declara el CONTENEDOR, no el componente:  ctx-surface         el fondo de lo que me contiene. Un componente que tiene que fundirse con su contenedor lo usa.  ctx-surface-raised  el escalon que se despega de ese fondo. Un campo, un input, un track: algo que tiene que verse ENCIMA del contenedor. Un contenedor del DS los setea solo. Un panel propio del proyecto declara `data-surface=\"container\"` y listo — sin pisar ninguna clase publica.",
+      "$alias": "--color-surface"
+    },
+    "--ctx-surface-raised": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "Contexto de superficie   Todo componente asumia que estaba apoyado sobre  color-surface. Metido en un panel con fondo propio, su relleno quedaba mal y habia que pisarlo a mano: medido en una consola de check-in (sep 2026), ocho de catorce overrides de clases publicas eran esto.  Dos tokens, y los dos los declara el CONTENEDOR, no el componente:  ctx-surface         el fondo de lo que me contiene. Un componente que tiene que fundirse con su contenedor lo usa.  ctx-surface-raised  el escalon que se despega de ese fondo. Un campo, un input, un track: algo que tiene que verse ENCIMA del contenedor. Un contenedor del DS los setea solo. Un panel propio del proyecto declara `data-surface=\"container\"` y listo — sin pisar ninguna clase publica.",
+      "$alias": "--color-surface-container"
+    },
+    "--ctx-track": {
+      "$type": "color",
+      "$value": "#EAEBED",
+      "section": "La pista y lo que corre sobre ella   Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un elemento \"levantado\" sobre el fondo de la pagina no se despega solo, y por eso terminaba pidiendo un aro o una sombra que lo dibujara. Una pista HUNDIDA usa dos escalones en vez de uno y llega a 1.19:1 en claro y 1.24:1 en oscuro, sin ningun borde.  Va aparte de  ctx-surface/-raised porque la rampa CAMBIA DE DIRECCION entre temas: en claro container-high esta por debajo de surface, en oscuro por encima. Ese override vive aca una sola vez, no en cada componente que necesite una pista (segmented, slider, progress, toggle-group).  ctx-track        el canal hundido  ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar",
+      "$dark": "#171B26",
+      "$alias": "--color-surface-container-high"
+    },
+    "--ctx-track-thumb": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "section": "La pista y lo que corre sobre ella   Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un elemento \"levantado\" sobre el fondo de la pagina no se despega solo, y por eso terminaba pidiendo un aro o una sombra que lo dibujara. Una pista HUNDIDA usa dos escalones en vez de uno y llega a 1.19:1 en claro y 1.24:1 en oscuro, sin ningun borde.  Va aparte de  ctx-surface/-raised porque la rampa CAMBIA DE DIRECCION entre temas: en claro container-high esta por debajo de surface, en oscuro por encima. Ese override vive aca una sola vez, no en cada componente que necesite una pista (segmented, slider, progress, toggle-group).  ctx-track        el canal hundido  ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar",
+      "$dark": "#282C39",
+      "$alias": "--color-surface-container"
+    },
     "--rail-width": {
       "$type": "other",
       "$value": "112px",
-      "section": "El riel siempre visible del app shell. 112px y no 72: los labels mas largos —Foundations 68.9px, Components 71.4px— no ENTRABAN en los 55px utiles que dejaban 72px menos el padding, y como el label va con white-space:nowrap se salian del padding y el riel los recortaba. El aire no era poco, era negativo. A 112 quedan 95 utiles: 12px a cada lado del mas largo."
+      "section": "La pista y lo que corre sobre ella   Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un elemento \"levantado\" sobre el fondo de la pagina no se despega solo, y por eso terminaba pidiendo un aro o una sombra que lo dibujara. Una pista HUNDIDA usa dos escalones en vez de uno y llega a 1.19:1 en claro y 1.24:1 en oscuro, sin ningun borde.  Va aparte de  ctx-surface/-raised porque la rampa CAMBIA DE DIRECCION entre temas: en claro container-high esta por debajo de surface, en oscuro por encima. Ese override vive aca una sola vez, no en cada componente que necesite una pista (segmented, slider, progress, toggle-group).  ctx-track        el canal hundido  ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar"
     },
     "--sidebar-width": {
       "$type": "dimension",
       "$value": "220px",
-      "section": "El riel siempre visible del app shell. 112px y no 72: los labels mas largos —Foundations 68.9px, Components 71.4px— no ENTRABAN en los 55px utiles que dejaban 72px menos el padding, y como el label va con white-space:nowrap se salian del padding y el riel los recortaba. El aire no era poco, era negativo. A 112 quedan 95 utiles: 12px a cada lado del mas largo."
+      "section": "La pista y lo que corre sobre ella   Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un elemento \"levantado\" sobre el fondo de la pagina no se despega solo, y por eso terminaba pidiendo un aro o una sombra que lo dibujara. Una pista HUNDIDA usa dos escalones en vez de uno y llega a 1.19:1 en claro y 1.24:1 en oscuro, sin ningun borde.  Va aparte de  ctx-surface/-raised porque la rampa CAMBIA DE DIRECCION entre temas: en claro container-high esta por debajo de surface, en oscuro por encima. Ese override vive aca una sola vez, no en cada componente que necesite una pista (segmented, slider, progress, toggle-group).  ctx-track        el canal hundido  ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar"
     },
     "--topbar-height": {
       "$type": "dimension",
       "$value": "56px",
-      "section": "El riel siempre visible del app shell. 112px y no 72: los labels mas largos —Foundations 68.9px, Components 71.4px— no ENTRABAN en los 55px utiles que dejaban 72px menos el padding, y como el label va con white-space:nowrap se salian del padding y el riel los recortaba. El aire no era poco, era negativo. A 112 quedan 95 utiles: 12px a cada lado del mas largo."
+      "section": "La pista y lo que corre sobre ella   Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un elemento \"levantado\" sobre el fondo de la pagina no se despega solo, y por eso terminaba pidiendo un aro o una sombra que lo dibujara. Una pista HUNDIDA usa dos escalones en vez de uno y llega a 1.19:1 en claro y 1.24:1 en oscuro, sin ningun borde.  Va aparte de  ctx-surface/-raised porque la rampa CAMBIA DE DIRECCION entre temas: en claro container-high esta por debajo de surface, en oscuro por encima. Ese override vive aca una sola vez, no en cada componente que necesite una pista (segmented, slider, progress, toggle-group).  ctx-track        el canal hundido  ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar"
     },
     "--breakpoint-md": {
       "$type": "dimension",

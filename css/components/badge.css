@@ -45,7 +45,14 @@
 .badge-open, .stat-change-positive   { background: var(--color-success-container); color: var(--color-on-success-container); }
 /* Activa = proceso en curso: color distinto de open (secondary-container), para que
    "abierta" (verde) y "activa" (en curso) no se lean idénticas. */
-.badge-active { background: var(--color-secondary-container); color: var(--color-on-secondary-container); }
+/* «En proceso» comparte registro con «informativo»: los dos son el azul neutro que
+   no afirma ni exito ni error. Hasta sep 2026 `active` usaba --color-secondary-container,
+   que es el token de SELECCION (chip, segmented, calendar, pagination, menu activo):
+   un badge de estado y un estado de seleccion quedaban indistinguibles en la misma
+   pantalla. La seleccion es transversal a toda la UI y el badge es de una familia,
+   asi que cede el badge. Queda como alias de la variante info — se mantiene la clase
+   para no romper los usos existentes. */
+.badge-active { background: var(--color-info-container); color: var(--color-on-info-container); }
 .badge-closed, .stat-change-negative { background: var(--color-error-container);   color: var(--color-on-error-container); }
 /* Tendencia plana: la misma superficie tonal que .badge-draft, sin el borde
    (draft usa el borde para decir "todavia no publicado"; una variacion de cero
@@ -53,7 +60,13 @@
    es tonal, asi que no necesita la excepcion de abajo. */
 .stat-change-neutral { background: var(--color-surface-variant); color: var(--color-on-surface-variant); }
 .badge-draft  { background: var(--color-surface-variant);   color: var(--color-on-surface-variant); border: 1px solid var(--color-outline); }
-.badge-archived { background: var(--color-surface-variant); color: var(--color-on-surface-variant); opacity: .75; }
+/* Archivada = la misma superficie tonal que draft, SIN su borde. Hasta sep 2026
+   llevaba `opacity: .75` para verse "apagada": medido, eso bajaba el contraste real
+   de 4.64:1 a 2.91:1 en claro —por debajo de AA— porque la opacidad mezcla el texto
+   Y el fondo contra la pagina. El chequeo [15] no lo veia: compara tokens, y los
+   tokens estaban bien; lo que fallaba era el pixel. Lo apagado ahora lo dice la
+   ausencia de borde, que no toca el contraste. */
+.badge-archived { background: var(--color-surface-variant); color: var(--color-on-surface-variant); }
 .badge-warning  { background: var(--color-warning-container); color: var(--color-on-warning-container); }
 .badge-tertiary { background: var(--color-tertiary-container); color: var(--color-on-tertiary-container); }
 .badge-info     { background: var(--color-info-container);    color: var(--color-on-info-container); }

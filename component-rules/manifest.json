@@ -2116,7 +2116,7 @@
           "overline",
           "section-index"
         ],
-        "docs_anchor": "c-composition"
+        "docs_anchor": "composition"
       },
       "rules_file": "component-rules/composition.md"
     },
@@ -2513,7 +2513,7 @@
           "date-picker-icon",
           "date-picker-panel"
         ],
-        "docs_anchor": "c-date-picker"
+        "docs_anchor": "c-calendar"
       },
       "rules_file": "component-rules/date-picker.md"
     },
@@ -4188,7 +4188,7 @@
       "source": {
         "css": "css/variables.css",
         "classes": [],
-        "docs_anchor": "c-mobile"
+        "docs_anchor": "mobile"
       },
       "rules_file": "component-rules/mobile.md"
     },
@@ -4969,7 +4969,7 @@
           "placeholder-panel",
           "placeholder-icon"
         ],
-        "docs_anchor": "c-placeholder"
+        "docs_anchor": "c-empty"
       },
       "rules_file": "component-rules/placeholder.md"
     },
@@ -5314,10 +5314,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--color-outline-variant",
+          "--ctx-track",
+          "--ctx-track-thumb",
           "--color-on-surface",
+          "--color-outline-variant",
           "--color-focus",
           "--color-focus-ring"
         ],
@@ -5371,7 +5371,7 @@
       "motion": {
         "enter": "none — always present (static view/mode switch).",
         "exit": "none.",
-        "stateChange": "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the secondary-container. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring (kept alongside the focus state layer, per WCAG 2.4.7).",
+        "stateChange": "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the raised thumb. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring (kept alongside the focus state layer, per WCAG 2.4.7).",
         "duration": "--duration-fast",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override.",
@@ -6110,7 +6110,7 @@
           "planet-lg",
           "title-ghost"
         ],
-        "docs_anchor": "c-space"
+        "docs_anchor": "space"
       },
       "rules_file": "component-rules/space.md"
     },

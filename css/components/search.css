@@ -33,7 +33,7 @@
    Uso:
    <!-- Search bar standalone -->
    <div class="search-bar" role="search">
-     <span class="search-bar-icon">…lupa…</span>
+     <span class="search-bar-icon"><i data-lucide="search"></i></span>
      <input class="search-bar-input" type="search" placeholder="Buscar" aria-label="Buscar">
      <span class="search-bar-avatar">AV</span>   <!-- opcional -->
    </div>
@@ -41,7 +41,7 @@
    <!-- Search + icon buttons (patrón canónico para toolbar-like) -->
    <div class="search-row">
      <div class="search-bar" role="search">
-       <span class="search-bar-icon">…lupa…</span>
+       <span class="search-bar-icon"><i data-lucide="search"></i></span>
        <input class="search-bar-input" type="search" placeholder="Buscar" aria-label="Buscar">
      </div>
      <button class="search-icon-btn" aria-label="Filtros"><svg>…</svg></button>

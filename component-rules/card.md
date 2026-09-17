@@ -34,6 +34,7 @@ content_rules:
   - "Show a footer action ONLY when the card navigates or has an explicit action — one primary action per card."
   - "Icon-only buttons in card-action / card-footer need aria-label; decorative icons get aria-hidden."
 layout_constraints:
+  - "A Card declares the surface context for what goes inside it (--ctx-surface / --ctx-surface-raised), so a list blends with it and a field lifts off it. Nothing inside needs background overrides; if something still looks wrong, that is a DS gap — declare it with @ds-gap, never `background: transparent` on a public class."
   - "Only the container is required; card-header/-content/-footer/-action are all optional — compose only what you need."
   - "card-action anchors top-right of the header (reserves a second grid column)."
   - "Filter/sort controls live OUTSIDE the collection and apply to all cards — never inside a single card."

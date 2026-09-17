@@ -68,7 +68,8 @@
   cursor: pointer;
 }
 /* Selected row (e.g. Data Table's row-selection feature) */
-.data-table tbody tr.selected {
+.data-table tbody tr.selected,
+.data-table tbody tr[aria-selected="true"] {
   background: var(--color-surface-container-high);
 }
 /* Las filas clickeables necesitan tabindex="0" para recibir foco de teclado */

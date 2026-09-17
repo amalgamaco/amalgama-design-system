@@ -87,7 +87,7 @@ motion:
 source:
   css: css/components/placeholder.css
   classes: [placeholder-panel, placeholder-icon]
-  docs_anchor: c-placeholder
+  docs_anchor: c-empty
 ---
 
 ## Correct usage

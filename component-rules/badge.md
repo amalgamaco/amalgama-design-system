@@ -23,10 +23,10 @@ use_cases:
 
 variants:
   - {name: open,     class: badge-open,     purpose: "Green — vacancy open / available (success-container)."}
-  - {name: active,   class: badge-active,   purpose: "Process active / in progress (secondary-container — distinct from open so 'abierta' and 'activa' don't read alike)."}
+  - {name: active,   class: badge-active,   purpose: "Process active / in progress — SAME register as info (info-container). It used secondary-container until sep 2026, which is the SELECTION token (chip, segmented, calendar, pagination, active menu): a status badge and a selection state were indistinguishable on one screen. Selection is transversal to the whole UI, so the badge ceded. Kept as its own class so existing usages do not break."}
   - {name: closed,   class: badge-closed,   purpose: "Red — closed / finished (error-container)."}
   - {name: draft,    class: badge-draft,    purpose: "Grey + border — draft / unpublished (surface-variant + outline)."}
-  - {name: archived, class: badge-archived, purpose: "Soft grey — archived / inactive (surface-variant @ 75% opacity)."}
+  - {name: archived, class: badge-archived, purpose: "Soft grey — archived / inactive (surface-variant, SAME fill as draft, told apart by having NO border). No opacity: the 75% it carried until sep 2026 dropped its real contrast to 2.91:1 in light, under AA, because opacity blends text AND fill against the page."}
   - {name: warning,  class: badge-warning,  purpose: "Amber — pending / needs attention (warning-container)."}
   - {name: tertiary, class: badge-tertiary, purpose: "Violet — new / highlighted (tertiary-container)."}
   - {name: info,     class: badge-info,     purpose: "Blue — informational / category / version (info-container)."}

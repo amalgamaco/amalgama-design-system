@@ -87,7 +87,7 @@ related_rules: [COMPOSICION.md]
 source:
   css: css/space.css
   classes: [space, space-glow, orbit, planet, planet-sm, planet-md, planet-lg, title-ghost]
-  docs_anchor: c-space
+  docs_anchor: space
 ---
 
 ## Correct usage
