@@ -227,11 +227,15 @@ Override status colors only if the client brand mandates specific status colors 
 
 ```css
 :root {
-  /* Embassy defaults — usually keep these */
-  /* --success-500: #05A660; */
-  /* --error-500:   #DB263C; */
-  /* --warning-400: #FFC97D; */
-  /* --info-500:    #4F80FF; */
+  /* Embassy defaults — usually keep these. Estos son los valores reales de la
+     rampa; hasta sep-2026 este bloque listaba cuatro que no existían o eran de
+     otro escalón (--warning-400 no existe: ese hex es warning-200, y #4F80FF es
+     secondary-900, no info-500). Si vas a pisar un estado, pisá la rampa
+     entera, no un paso suelto: los roles -container y -on-* salen de los otros. */
+  /* --success-500: #00C164; */
+  /* --error-500:   #FD3A45; */
+  /* --warning-500: #FFB249; */
+  /* --info-500:    #1E52EE; */
 }
 ```
 
