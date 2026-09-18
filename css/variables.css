@@ -13,10 +13,7 @@
      blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1,
      que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una
      línea. Ver MOBILE.md §6b·1. */
-  /* Sin --neutral-30. Existía sólo para que --color-surface no fuera neutral-10 y
-     el fondo de página se distinguiera de la tarjeta (1.036:1). El DS publicado
-     define surface = neutral-10, así que el escalón sobra y la rampa vuelve a ser
-     la de Figma: 10 · 50 · 100 … Ver TOKENS.md §1a. */
+  --neutral-30:  #F3F4F6;
   --neutral-50:  #EAEBED;
   --neutral-100: #BFC1C8;
   --neutral-200: #9FA3AE;
@@ -25,14 +22,12 @@
      no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre
      tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA
      en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13. */
-  /* Sin --neutral-350. Era el paso de texto apagado (5.54:1 sobre tarjeta) que el
-     DS no tiene: ahí on-surface-variant es neutral-400. Vuelve a la rampa de Figma. */
+  --neutral-350: #63687A;
   --neutral-400: #474D61;
   --neutral-500: #353A4A;
   --neutral-600: #282C39;
   --neutral-700: #1C202C;
-  /* Sin --neutral-750. Servía a surface-container-low en oscuro; el DS le da
-     neutral-800. Vuelve a la rampa de Figma. */
+  --neutral-750: #171B26; /* el escalon que faltaba entre 800 y 700 — sin el,
                              --color-surface-container-low en dark resolvia al MISMO
                              #13161F que --color-surface y un panel en ese token era
                              invisible salvo por su borde (medido sep 2026) */
@@ -87,8 +82,7 @@
   --tertiary-700: #8D79F6;
   --tertiary-800: #7F69F5;
   --tertiary-900: #7158F4;
-  /* Sin --tertiary-950. Lo pedían on-tertiary-container en claro y tertiary-container
-     en oscuro para pasar AA; el DS usa -900 y -800. Vuelve a la rampa de Figma. */
+  --tertiary-950: #4A3BA8;  /* el escalon que faltaba. Todas las otras familias acento lo
                               tienen y por el mismo motivo: sin el, on-tertiary-container
                               se quedaba en el -900 y daba 3.66:1 sobre el container claro,
                               y el container oscuro tenia que usar el -800, un lila brillante
@@ -201,7 +195,7 @@
      para texto normal. Con primary-900 da 4.79:1 en Embassy y 5.11:1 en Nortia, y
      escala a cualquier marca porque el 900 de la rampa siempre es el paso más oscuro.
      En dark el rol ya usa secondary-950 sobre secondary-300 (6.45:1) y no cambia. */
-  --color-on-secondary:              var(--neutral-white);  /* ⚠ FUENTE: el par no llega a AA. Valor del DS publicado, respetado a propósito. */  /* 3.58:1 */
+  --color-on-secondary:              var(--primary-900);
   /* Container = secondary-200 + on = primary navy: el botón/chip Secondary
      (tonal) se diferencia del Primary por inversión (claro + texto navy). */
   --color-secondary-container:       var(--secondary-200);
@@ -214,7 +208,7 @@
   --color-tertiary:                    var(--tertiary-900);
   --color-on-tertiary:                 var(--neutral-white);
   --color-tertiary-container:          var(--tertiary-100);
-  --color-on-tertiary-container:       var(--tertiary-900);  /* ⚠ FUENTE: el par no llega a AA. Valor del DS publicado, respetado a propósito. */  /* 3.66:1 */
+  --color-on-tertiary-container:       var(--tertiary-950);  /* 6.5:1. El -900 daba 3.66:1 */
   /* Acentos de marca — la capa de uso sobre la paleta del Manual.
      Un componente o una lámina consume ESTOS, nunca la primitiva.
      Las reglas del Manual son parte del rol: máximo DOS juntos en una
@@ -263,7 +257,7 @@
   --color-info-container:            var(--info-50);
   --color-on-info-container:         var(--info-900);
   /* Background & Surface */
-  --color-surface:                   var(--neutral-10);   /* DS: surface y los container lowest/low comparten valor en claro; la tarjeta se separa por su borde */
+  --color-surface:                   var(--neutral-30);
   --color-surface-dim:               var(--neutral-50);
   --color-surface-bright:            var(--neutral-white);
   --color-surface-container-lowest:  var(--neutral-10);
@@ -273,7 +267,7 @@
   --color-surface-container-highest: var(--neutral-100);
   --color-surface-variant:           var(--neutral-50);
   --color-on-surface:                var(--neutral-900);
-  --color-on-surface-variant:        var(--neutral-400);  /* DS. 8.10:1 — pasa AA, pero el «apagado» se lee menos apagado (falla M13 de FAILURES.md) */
+  --color-on-surface-variant:        var(--neutral-350);  /* texto de énfasis medio (#63687A) — antes neutral-400, que a 8.39:1 no se leía como apagado */
   /* Outline · bordes (outline = más prominente/oscuro; variant = sutil) */
   --color-outline:                   var(--neutral-200);  /* #9FA3AE */
   --color-outline-variant:           var(--neutral-100);  /* #BFC1C8 */
@@ -295,7 +289,7 @@
   /* Ring de error (inputs .is-error): derivado de --color-error vía color-mix,
      por lo que se recalibra solo en dark. Nunca hardcodear el rgba. */
   --color-error-ring:                color-mix(in srgb, var(--color-error) 12%, transparent);
-  --color-scrim:                     var(--neutral-black);  /* DS: el scrim es el COLOR; la opacidad la aplica quien lo usa (32%) */
+  --color-scrim:                     rgba(0,0,0,.32);
   /* Color base de la elevación. Está en el sistema publicado (Styles · Color ·
      Baseline → Utilidad) y faltaba acá. Se agrega para cerrar el hueco, con una
      advertencia: los compuestos --shadow-sm/md/lg NO derivan de él todavía —
@@ -326,6 +320,7 @@
      y su hover --color-secondary-container-hover. Si el botón y el nav activo
      vuelven a leerse igual, lo que se mueve es el NAV —que ya tiene su propia
      capa --color-nav-*—, no el botón. */
+
 
   /* ─────────────────────────────────────
      Semantic aliases
@@ -809,8 +804,10 @@
   /* Tertiary (Purple) */
   --color-tertiary:                  var(--tertiary-300);         /* #C6BCFB */
   --color-on-tertiary: var(--neutral-900); /* neutral-900 — máximo contraste sobre tertiary claro */
-  --color-tertiary-container:        var(--tertiary-800);         /* #7F69F5 — DS. ⚠ FUENTE: el par no llega a AA. Valor del DS publicado, respetado a propósito. 3.51:1 con el -50 encima */
-
+  --color-tertiary-container:        var(--tertiary-950);         /* #4A3BA8 — 7.41:1 con el -50
+                                                                    encima. El -800 daba 3.51:1 y
+                                                                    ademas era el unico container
+                                                                    oscuro claro de la familia. */
   --color-on-tertiary-container:     var(--tertiary-50);          /* #F1EEFE */
   /* Estados · mains en dark — se ACLARAN (tono ~80) como los acentos, criterio MD3 */
   --color-error:                     var(--error-200);            /* #F29AA1 */
@@ -829,7 +826,7 @@
   --color-info:                      var(--info-200);             /* #9FABF8 */
   --color-on-info: var(--info-950); /* azul profundo */
   /* Estados · containers en dark (flip MD3: container oscuro + on-container claro) */
-  --color-error-container:           var(--error-700);            /* #DB263C — DS. ⚠ 3.44:1 con el -100 encima: no llega a AA. Valor de la fuente, respetado */
+  --color-error-container:           var(--error-950);            /* #7A0C1B */
   --color-on-error-container:        var(--error-100);            /* #FFCDD7 */
   --color-success-container:         var(--success-950);          /* #004D1E */
   --color-on-success-container:      var(--success-200);          /* #93E1B3 */
@@ -842,14 +839,14 @@
   --color-surface-dim: var(--neutral-900);
   --color-surface-bright: var(--neutral-700);
   --color-surface-container-lowest: var(--neutral-900);
-  --color-surface-container-low: var(--neutral-800); /* DS: mismo valor que surface en oscuro; el panel se separa por su borde */
+  --color-surface-container-low: var(--neutral-750); /* neutral-750 — el escalon sobre surface */
   --color-surface-container: var(--neutral-700);
   --color-surface-container-high: var(--neutral-600);
   --color-surface-container-highest: var(--neutral-500);
   --color-surface-variant: var(--neutral-600);
   /* La pista se invierte: en claro container-high esta DEBAJO de surface, en
      oscuro esta encima. Literales por la misma razon que el resto del bloque. */
-  --ctx-track: var(--neutral-900); /* el canal hundido: un escalón por DEBAJO de surface, ahora que container-low lo iguala */
+  --ctx-track: var(--neutral-750); /* neutral-750 — el canal */
   --ctx-track-thumb: var(--neutral-600); /* neutral-600 — lo que corre sobre el */
   --color-on-surface: var(--neutral-50);
   --color-on-surface-variant: var(--neutral-100);
@@ -892,14 +889,14 @@
   --color-on-primary-container:      var(--primary-900);         /* #01164D */
   --color-primary-hover:             var(--primary-700);         /* #162F6F */
   --color-secondary:                 var(--secondary-900);       /* #4F80FF */
-  --color-on-secondary:              var(--neutral-white);      /* #FFFFFF — DS. ⚠ 3.58:1 sobre el acento: no llega a AA. Valor de la fuente, respetado */
+  --color-on-secondary:              var(--primary-900);        /* texto oscuro: blanco sobre el acento no llega a AA */
   --color-secondary-container:       var(--secondary-200);       /* #CAD9FF */
   --color-on-secondary-container:    var(--primary-900);         /* #01164D */
   --color-secondary-container-hover: var(--secondary-300);        /* #B9CCFF */
   --color-tertiary:                  var(--tertiary-900);        /* #7158F4 */
   --color-on-tertiary: var(--neutral-white);
   --color-tertiary-container:        var(--tertiary-100);        /* #E3DEFD */
-  --color-on-tertiary-container:     var(--tertiary-900);        /* #7158F4 — DS. ⚠ 3.66:1: no llega a AA */
+  --color-on-tertiary-container:     var(--tertiary-950);        /* #4A3BA8 */
   --color-error:                     var(--error-500);           /* #FD3A45 */
   --color-on-error: var(--neutral-white);
   --color-error-fill:                var(--error-900);           /* #BF0B29 */
@@ -923,7 +920,7 @@
   --color-info-container:            var(--info-50);             /* #E9EBFD */
   --color-on-info-container:         var(--info-900);            /* #001ABA */
   /* Surfaces — literal hex para neutrals hijackeados por el doc shell */
-  --color-surface: var(--neutral-10);
+  --color-surface: var(--neutral-30);
   --color-surface-dim: var(--neutral-50);
   --color-surface-bright: var(--neutral-white);
   --color-surface-container-lowest: var(--neutral-10);
@@ -933,7 +930,7 @@
   --color-surface-container-highest: var(--neutral-100);
   --color-surface-variant: var(--neutral-50);
   --color-on-surface: var(--neutral-900);
-  --color-on-surface-variant: var(--neutral-400);
+  --color-on-surface-variant: var(--neutral-350);
   /* Outline — literal hex */
   --color-outline: var(--neutral-200);
   --color-outline-variant: var(--neutral-100);
@@ -948,7 +945,7 @@
   /* Aliases */
   --text-primary:   var(--primary-900);                          /* #01164D */
   --text-secondary: var(--neutral-500);
-  --text-muted: var(--neutral-400);                                     /* sigue a on-surface-variant (DS) */
+  --text-muted: var(--neutral-350);                                     /* neutral-350 — 5.54:1 sobre card-bg */
   --text-prose:     var(--ink);                                  /* Ink del Manual — prosa larga de colateral */
   /* Elevated Button — restore light (navy) elevation inside a light-scoped island */
   --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);

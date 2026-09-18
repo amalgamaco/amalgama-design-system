@@ -43,7 +43,7 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: color-mix(in srgb, var(--color-scrim) 32%, transparent);  /* el scrim es el color; la opacidad se aplica acá (DS) */
+  background: var(--color-scrim);
   display: flex; align-items: center; justify-content: center;
   z-index: 100;
   animation: fadeIn var(--duration-fast) var(--ease-enter);
