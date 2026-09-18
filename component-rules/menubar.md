@@ -31,7 +31,7 @@ layout_constraints:
 states:
   default: "Trigger transparent; bar on surface-container."
   hover: "Trigger gains a state layer; once a menu is open, hovering another trigger switches the open menu (desktop convention)."
-  focus: "Visible --color-focus ring on the focused trigger."
+  focus: "Visible --focus ring on the focused trigger."
   open: "Active trigger shows its open panel."
 accessibility:
   roles: "Bar role=menubar; triggers role=menuitem; panels role=menu."
@@ -64,13 +64,13 @@ relationships:
     - {component: menu, why: "Dropdown Menu is one contextual menu; Menubar is a persistent row of them"}
     - {component: toolbar, why: "Toolbar exposes controls directly; Menubar nests commands under category triggers"}
 tokens:
-  color: [--color-surface-container, --color-outline-variant, --color-on-surface, --color-focus]
+  color: [--surface-container, --outline-variant, --on-surface, --focus]
   radius: [--radius-md, --radius-sm]
   motion: [--duration-normal, --ease-default]
 motion:
   enter: "Each menu panel scales + fades in on open, reusing Dropdown Menu's @keyframes dropdownIn (opacity 0→1, scale .96→1). The menubar row and its triggers have no entrance animation."
   exit: "none defined in CSS — panels are removed instantly on close (known buildless gap vs. the Radix open/closed pair)."
-  stateChange: "Trigger background changes on :hover / [data-state=\"open\"] to --color-surface-variant — no transition declared, so it is instant; focus ring on :focus-visible. Hovering another trigger while one menu is open switches the open panel."
+  stateChange: "Trigger background changes on :hover / [data-state=\"open\"] to --surface-variant — no transition declared, so it is instant; focus ring on :focus-visible. Hovering another trigger while one menu is open switches the open panel."
   duration: "--duration-normal (panel enter, via dropdown-menu.css); trigger background change is instant (no transition)."
   easing: "--ease-default (panel enter)."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the panel open scale/fade becomes instant. Trigger hover was already instant."

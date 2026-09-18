@@ -9,7 +9,7 @@
    Reemplaza a: spinners custom ad-hoc.
 
    Dependencia: variables.css
-   Hereda currentColor: por defecto el aro activo usa --color-primary; dentro de
+   Hereda currentColor: por defecto el aro activo usa --primary; dentro de
    un botón filled poné .spinner-on-primary para que contraste.
 
    Uso:
@@ -22,8 +22,8 @@
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  border: 2px solid var(--color-outline-variant);
-  border-top-color: var(--color-primary);
+  border: 2px solid var(--outline-variant);
+  border-top-color: var(--primary);
   border-radius: 50%;
   vertical-align: -3px;
   animation: spinner-rotate .7s linear infinite;
@@ -32,7 +32,7 @@
 .spinner-lg { width: 24px; height: 24px; border-width: 3px; }
 
 /* Sobre superficies de color (botón filled, snackbar) */
-.spinner-on-primary { border-color: color-mix(in srgb, var(--color-on-primary) 35%, transparent); border-top-color: var(--color-on-primary); }
+.spinner-on-primary { border-color: color-mix(in srgb, var(--on-primary) 35%, transparent); border-top-color: var(--on-primary); }
 
 @keyframes spinner-rotate { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1.6s; } }

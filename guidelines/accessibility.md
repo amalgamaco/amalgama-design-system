@@ -10,8 +10,8 @@ Embassy's components ship accessible defaults (focus rings, ARIA roles, contrast
 
 ## Color contrast
 
-- **Normal text ≥ 4.5:1, large text (≥ 18px, or ≥ 14px bold) and UI/graphical objects ≥ 3:1** (WCAG 1.4.3 / 1.4.11). The token system is pre-calibrated: `--text-primary` on `--bg` is ~14:1 in light and ~15:1 in dark.
-- **Stay on the token pairs.** Foreground/background must be a matched Color Role pair — `--color-on-primary` on `--color-primary`, `--color-on-secondary-container` on `--color-secondary-container`. Mixing an unpaired foreground is how you land below 3:1.
+- **Normal text ≥ 4.5:1, large text (≥ 18px, or ≥ 14px bold) and UI/graphical objects ≥ 3:1** (WCAG 1.4.3 / 1.4.11). The token system is pre-calibrated: `--on-surface` on `--bg` is ~14:1 in light and ~15:1 in dark.
+- **Stay on the token pairs.** Foreground/background must be a matched Color Role pair — `--on-primary` on `--primary`, `--on-secondary-container` on `--secondary-container`. Mixing an unpaired foreground is how you land below 3:1.
 - **Verify both themes.** Dark mode recalibrates automatically, but re-check any custom composition with `data-theme="dark"` on `<html>`. Focus rings and disabled text are the usual dark-mode casualties.
 - **White-label brands are not exempt.** When primitives are re-themed, measure the new palette's ratios — do not assume they pass (GOVERNANCE.md §17.2).
 
@@ -41,15 +41,15 @@ Every status must carry a **text label and/or icon** in addition to color:
 Every interactive component uses **one** focus treatment — the shared `.focus-ring` utility, applied as `focus-visible:focus-ring`:
 
 ```
-outline: 2px solid var(--color-focus);   /* #4F80FF, no dark override — a constant a11y signal */
+outline: 2px solid var(--focus);   /* #4F80FF, no dark override — a constant a11y signal */
 outline-offset: 2px;
-box-shadow: 0 0 0 4px var(--color-focus-ring);
+box-shadow: 0 0 0 4px var(--focus-ring);
 ```
 
 - **Never remove it.** No `outline: none` without an equivalent replacement. `Button`, Radix primitives, and every DS control already carry `focus-visible:focus-ring`.
 - **`:focus-visible`, not `:focus`** — the ring shows for keyboard users and stays out of the way of mouse clicks.
-- **Never substitute a different color.** Always `--color-focus` + `--color-focus-ring`, never `--interactive`, `--color-secondary`, or a hardcoded blue (GOVERNANCE.md §6.2, §2.4).
-- Text `Input`/`Textarea`/`Select` use a tighter `focus:shadow-[0_0_0_3px_var(--color-focus-ring)]` frame by design — that is the sanctioned field variant, still driven by the focus tokens.
+- **Never substitute a different color.** Always `--focus` + `--focus-ring`, never `--secondary`, `--secondary`, or a hardcoded blue (GOVERNANCE.md §6.2, §2.4).
+- Text `Input`/`Textarea`/`Select` use a tighter `focus:shadow-[0_0_0_3px_var(--focus-ring)]` frame by design — that is the sanctioned field variant, still driven by the focus tokens.
 
 ---
 

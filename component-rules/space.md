@@ -44,7 +44,7 @@ accessibility:
   roles: "Purely decorative. The canvas is a background; planets are <img> with alt=\"\" and aria-hidden=true, or CSS backgrounds."
   aria: ["Nothing in this layer is announced", "The ghost title is aria-hidden when the real heading repeats its text — otherwise a screen reader reads the same words twice"]
   focus: "Nothing here is focusable."
-  contrast: "Text over the canvas uses the dark-theme tokens: --text-primary (#EAEBED) on #000B29 measures 17.9:1, --text-secondary 13.7:1. The glow lightens the top band to #0B1B44, where --text-primary still measures 16.3:1. Any text placed over a large planet must be checked on its own — a planet is not a surface token."
+  contrast: "Text over the canvas uses the dark-theme tokens: --on-surface (#EAEBED) on #000B29 measures 17.9:1, --on-surface-variant 13.7:1. The glow lightens the top band to #0B1B44, where --on-surface still measures 16.3:1. Any text placed over a large planet must be checked on its own — a planet is not a surface token."
 keyboard:
   - {keys: "—", action: "no interaction"}
 responsive:
@@ -72,7 +72,7 @@ relationships:
     - {component: gradients, why: "the three gradients (--gradient-brand / -surface / -glow) are built from the brand's own primitives, so they travel to a client project and take THEIR palette. The space layer is literal Amalgama colour and never travels"}
 
 tokens:
-  color: [--space-deep, --space-mid, --space-near, --space-glow, --space-star, --text-primary]
+  color: [--space-deep, --space-mid, --space-near, --space-glow, --space-star, --on-surface]
   spacing: []
   typography: [--font-heading, --font-size-editorial-lg, --letter-spacing-editorial]
 

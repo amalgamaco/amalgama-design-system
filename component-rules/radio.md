@@ -35,22 +35,22 @@ content_rules:
   - "Preselect the most common option when a reasonable default exists."
 layout_constraints:
   - "All radios in one group share the same name attribute (native grouping)."
-  - "Consume --color-* tokens only; no per-theme overrides."
+  - "Consume role tokens only; no per-theme overrides."
   - "Associate a clickable <label> with each option (whole row selects)."
 
 states:
-  default: "Empty ring, 2px border --color-outline."
-  hover: "Border darkens to --color-on-surface."
-  checked: "Border --color-primary + centre dot --color-primary."
-  focus: "Visible focus-visible ring (--color-focus 2px + --color-focus-ring 4px halo)."
+  default: "Empty ring, 2px border --outline."
+  hover: "Border darkens to --on-surface."
+  checked: "Border --primary + centre dot --primary."
+  focus: "Visible focus-visible ring (--focus 2px + --focus-ring 4px halo)."
   disabled: "opacity 0.4; not interactive."
-  error: "aria-invalid=true → --color-error border (same signal as Input/Select)."
+  error: "aria-invalid=true → --error border (same signal as Input/Select)."
 
 accessibility:
   roles: "Container role=radiogroup; each <input type=radio> grouped by name gives roving tabindex and aria-checked natively — no per-item ARIA."
   aria: ["role=radiogroup + aria-label on the container", "shared name attribute groups the inputs", "aria-invalid on error"]
   focus: "Tab enters the group (one tab stop); Arrow keys move the selection; each option has a clickable <label> to enlarge the target."
-  contrast: "Selected border + dot (--color-primary) meets AA in light + dark; selection is reinforced by the filled dot, not colour alone."
+  contrast: "Selected border + dot (--primary) meets AA in light + dark; selection is reinforced by the filled dot, not colour alone."
 keyboard:
   - {keys: "Tab / Shift+Tab", action: "enter / leave the group (single tab stop — roving tabindex)"}
   - {keys: "↑ / ↓ (or ← / →)", action: "move the selection between options within the group"}
@@ -85,7 +85,7 @@ relationships:
     - {component: switch, why: "switch is an instant on/off; radio is a deliberate single choice"}
 
 tokens:
-  color: [--color-primary, --color-outline, --color-on-surface, --color-error, --color-focus, --color-focus-ring]
+  color: [--primary, --outline, --on-surface, --error, --focus, --focus-ring]
   radius: ["50% (circular)"]
   spacing: [--space-2]
   typography: [--font-size-body-md]
@@ -93,7 +93,7 @@ tokens:
 motion:
   enter: "none — the control is always present"
   exit: "none"
-  stateChange: "On :checked the ring border recolors to --color-primary (transition: border-color). Hover darkens the border to --color-on-surface. The ::after inner dot has NO transition — it appears instantly. .radio-card transitions border-color + background-color on :has(input:checked)/hover."
+  stateChange: "On :checked the ring border recolors to --primary (transition: border-color). Hover darkens the border to --on-surface. The ::after inner dot has NO transition — it appears instantly. .radio-card transitions border-color + background-color on :has(input:checked)/hover."
   duration: "--duration-fast"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the selected border still shows, just without the fade."

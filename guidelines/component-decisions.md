@@ -25,7 +25,7 @@ repite lo que dice cada regla: la fuente sigue siendo `component-rules/<id>.md`.
 
 ### Un componente adentro de un panel: lo declara el contenedor
 
-Todo componente de Embassy asumía que estaba apoyado sobre `--color-surface`. Metido
+Todo componente de Embassy asumía que estaba apoyado sobre `--surface`. Metido
 en un panel con fondo propio quedaba mal, y se arreglaba pisando la clase pública a
 mano: medido sobre una consola de check-in en septiembre de 2026, **ocho de catorce
 overrides eran esto**.
@@ -34,8 +34,8 @@ Ahora el fondo lo declara **el contenedor**, no el componente:
 
 | Token | Qué es | Quién lo usa |
 |---|---|---|
-| `--ctx-surface` | El fondo de lo que me contiene | Un componente que tiene que **fundirse** con su contenedor — `list` |
-| `--ctx-surface-raised` | El escalón que se despega de ese fondo | Algo que tiene que verse **encima** — `field-input`, un track |
+| `--surface` | El fondo de lo que me contiene | Un componente que tiene que **fundirse** con su contenedor — `list` |
+| `--surface-container` | El escalón que se despega de ese fondo | Algo que tiene que verse **encima** — `field-input`, un track |
 
 Las cards del DS (`card`, `card-elevated`, `card-filled`) lo setean solas. **Para un
 panel que no es una card** —un rail, un sheet, una región propia del proyecto— se
@@ -121,7 +121,7 @@ Always confirm against the rule file's `not_to_confuse_with`. These encode the s
 
 One `btn-primary` per context; alternatives step down. Emphasis ladder: **primary → elevated → secondary → tertiary → text → icon**. Overlay/dialog/sheet **triggers** use `btn-secondary` (the real primary lives inside the overlay). **Never** full-width or left-aligned (`width:100%` reads as a form field — change the layout, not the button). Pill radius is forbidden on buttons.
 
-**Adjacency rule — the button next to the primary must not compete with it.** A secondary action that is *lower priority* than the primary (especially secondary **navigation** like "Carpetas", "Ver todo", "Configuración" sitting beside "Nueva propuesta") uses the **outlined `.btn-tertiary`**, not the tonal `.btn-secondary`. Tonal fills a `--color-secondary-container` block that reads at nearly primary weight; placed immediately beside the filled primary it creates two competing emphases and the eye can't find the one action. Reserve `.btn-secondary` (tonal) for actions that are genuinely **equal-weight alternatives** or for overlay triggers standing alone — not for a lower-priority sibling of the page primary. When two actions sit in one cluster, exactly one may carry fill; the other steps down to outline or text.
+**Adjacency rule — the button next to the primary must not compete with it.** A secondary action that is *lower priority* than the primary (especially secondary **navigation** like "Carpetas", "Ver todo", "Configuración" sitting beside "Nueva propuesta") uses the **outlined `.btn-tertiary`**, not the tonal `.btn-secondary`. Tonal fills a `--secondary-container` block that reads at nearly primary weight; placed immediately beside the filled primary it creates two competing emphases and the eye can't find the one action. Reserve `.btn-secondary` (tonal) for actions that are genuinely **equal-weight alternatives** or for overlay triggers standing alone — not for a lower-priority sibling of the page primary. When two actions sit in one cluster, exactly one may carry fill; the other steps down to outline or text.
 
 | MD3 role | Embassy class | Use for |
 |---|---|---|
@@ -144,8 +144,8 @@ Sizes (radius scales with **size**, never variant): `.btn-xs` (24px, `--radius-s
 
 | Use | Class (file) | Background | Radius | Size |
 |---|---|---|---|---|
-| Filters a desktop list/table/collection | `.search-field` (toolbar.css) | `--color-surface` (white; never grey/transparent) | `--radius-md` | compact · 18px icon · `flex:1` in the toolbar |
-| Global / hero / landing / command · or mobile | `.search-bar` (search.css) | `--color-surface-container-high` (grey; never surface) | `--radius-full` (pill) | 56px · 24px icon · 360–720px |
+| Filters a desktop list/table/collection | `.search-field` (toolbar.css) | `--surface` (white; never grey/transparent) | `--radius-md` | compact · 18px icon · `flex:1` in the toolbar |
+| Global / hero / landing / command · or mobile | `.search-bar` (search.css) | `--surface-container-high` (grey; never surface) | `--radius-full` (pill) | 56px · 24px icon · 360–720px |
 | Bar + adjacent icon actions | `.search-row` › `.search-bar` + `.search-icon-btn` | as Search Bar | as Search Bar | bar 40px · btn 40×40 · 20px icon |
 
 `.search-field` and `.search-bar` are **siblings** — different shape/height/background, same state tokens. `.search-field` is not legacy; `.search-bar` does not replace it. Search carries `role="search"` + accessible name. Use `.search-row` **only** when pairing a bar with icon actions — inside a real toolbar the search is a `.search-field`. **Never center a collection's search independently of the page grid, and never give it an arbitrary width** — the `.search-field` spans the toolbar (`flex:1`) whose edges align to the content column. Centering a standalone `.search-bar` above a list that lives on the same screen is a **defect**, not a style choice.
@@ -197,11 +197,11 @@ Never pair a skeleton with a spinner in one context; never skeleton a button/con
 
 - `.toolbar` container + `.toolbar-actions` (right-aligned slot, `margin-left:auto`, holds the **one** primary + supporting actions) + `.result-count` (`aria-live="polite"`, "Mostrando N de M").
 - `.search-field` (compact search that grows `flex:1`) + `.toolbar-btn` (outlined secondary filter/sort/reset; optional `.toolbar-btn-count` chip).
-- **`.toolbar-filters`** — unifies **2+ equal-hierarchy filter controls** (Select + Segmented Button + Date Picker) under one field treatment via a scoped **`--tb-*`** token layer (`--tb-height` 40px). It re-skins `.select-trigger` / `.date-picker-trigger` / `.seg-btn-group` **only within `.toolbar-filters`** — never the standalone components; the selected segment keeps its neutral raised treatment (`--ctx-track-thumb`) and each segment keeps its own focus ring.
+- **`.toolbar-filters`** — unifies **2+ equal-hierarchy filter controls** (Select + Segmented Button + Date Picker) under one field treatment via a scoped **`--tb-*`** token layer (`--tb-height` 40px). It re-skins `.select-trigger` / `.date-picker-trigger` / `.seg-btn-group` **only within `.toolbar-filters`** — never the standalone components; the selected segment keeps its neutral raised treatment (`--seg-btn-track-thumb`) and each segment keeps its own focus ring.
 - **`.toolbar-selection`** — bulk-actions variant shown when items are selected (tinted secondary-container surface + `.toolbar-selection-count` + `.toolbar-selection-clear` + bulk actions; enters on `--duration-normal`).
 - **`.toolbar-overflow-btn`** — "More" trigger (`aria-haspopup="menu"`) opening a Dropdown/Popover for controls that don't fit; **`.toolbar-sticky`** (+`.is-stuck`) sticks the bar on scroll.
 - Order left→right by frequency: search → filters → sort → action. Left = what filters/defines the view; right (`.toolbar-actions`) = the actions, **one primary max**. A search that filters *this* list is a `.search-field` **in this toolbar** — even when it's the most prominent control on the screen; reserve `.search-bar` for global/hero/command search or mobile (never a centered pill over an on-screen list). Global actions → Top Bar; sub-view nav → Tabs.
-- **Segmented Button** (`.seg-btn-group`, `.seg-btn`, `.selected`/`[aria-selected]`; sizes `-sm`/`-lg`) — switch 2–5 mutually-exclusive **views/modes of the same screen** (Lista/Cuadrícula, Día/Semana/Mes). vs Tabs (navigate distinct pages) and Toggle Group (independent on/off). Its group is a **sunken track** (`--ctx-track`) with no outline and the active segment is a neutral raised thumb — never the tonal selection token, which belongs to the active filter (§«Cómo se declara que algo está seleccionado» y `COMPOSICION.md` §4c). Inside `.toolbar-filters` its container adopts the squared field treatment and **keeps** that treatment plus the per-segment focus ring.
+- **Segmented Button** (`.seg-btn-group`, `.seg-btn`, `.selected`/`[aria-selected]`; sizes `-sm`/`-lg`) — switch 2–5 mutually-exclusive **views/modes of the same screen** (Lista/Cuadrícula, Día/Semana/Mes). vs Tabs (navigate distinct pages) and Toggle Group (independent on/off). Its group is a **sunken track** (`--seg-btn-track`) with no outline and the active segment is a neutral raised thumb — never the tonal selection token, which belongs to the active filter (§«Cómo se declara que algo está seleccionado» y `COMPOSICION.md` §4c). Inside `.toolbar-filters` its container adopts the squared field treatment and **keeps** that treatment plus the per-segment focus ring.
 - **Checkbox** (`.checkbox`, `.checkbox-label`, `.checkbox-card`) — form-level multi-select and table **select-all** (header uses the indeterminate **dash** for partial selection; set `el.indeterminate=true` via DOM, not a class). **Not** for inline toolbar filtering — that's a **Chip**. Exclusive choice → Radio; instant on/off → Switch.
 
 ### Other high-frequency pairs

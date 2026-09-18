@@ -41,14 +41,14 @@ layout_constraints:
 states:
   default: "Header on surface-variant; body rows on card-bg."
   hover: "tbody tr:hover → surface-variant background."
-  focus: "tr.clickable:focus-visible → 2px --color-focus outline + 4px --color-focus-ring halo (needs tabindex=0)."
+  focus: "tr.clickable:focus-visible → 2px --focus outline + 4px --focus-ring halo (needs tabindex=0)."
   selected: "tr.selected → surface-container-high background."
 
 accessibility:
   roles: "Native <table>/<thead>/<tbody>/<th>/<td>. Interactive (sortable/selectable) tables should use role=grid + arrow-key support — that's the Data Table."
   aria: ["scope=col on column headers", "scope=row where a row header applies", "caption or aria-label describing the table", "aria-sort on sortable headers (Data Table)"]
   focus: "Clickable rows need tabindex=0 to be reachable (the component doesn't add it) and respond to Enter/Space."
-  contrast: "--text-primary / --text-muted / --color-surface-variant meet AA in light + dark; never override per theme."
+  contrast: "--on-surface / --on-surface-variant / --surface-variant meet AA in light + dark; never override per theme."
 keyboard:
   - {keys: "Tab", action: "move focus to each clickable row (needs tabindex=0)"}
   - {keys: "Enter / Space", action: "activate a focused clickable row"}
@@ -78,7 +78,7 @@ relationships:
     - {component: list, why: "List is a simple 1–2 attribute vertical list; Table compares columns"}
 
 tokens:
-  color: [--card-bg, --border, --color-surface-variant, --text-primary, --text-muted, --color-focus, --color-focus-ring, --color-surface-container-high]
+  color: [--surface-container, --border, --surface-variant, --on-surface, --on-surface-variant, --focus, --focus-ring, --surface-container-high]
   radius: [--radius]
   spacing: ["10px 16px header padding", "12px 16px cell padding"]
   typography: [--font-size-overline, --font-size-body-md]
@@ -86,7 +86,7 @@ tokens:
 motion:
   enter: "none — the table is always present (rows are not animated in/out)"
   exit: "none"
-  stateChange: "tbody rows recolor their background to --color-surface-variant on :hover (transition: background). A .selected row uses --color-surface-container-high (the selected state itself is not transitioned). A .clickable row's :focus-visible shows an outline + 3px --color-focus-ring box-shadow (not transitioned)."
+  stateChange: "tbody rows recolor their background to --surface-variant on :hover (transition: background). A .selected row uses --surface-container-high (the selected state itself is not transitioned). A .clickable row's :focus-visible shows an outline + 3px --focus-ring box-shadow (not transitioned)."
   duration: "--duration-fast (row-hover background)"
   easing: "None specified — the row-hover transition declares only --duration-fast with no --ease-* token, so it falls back to the browser default ease. Per motion.md it should carry --ease-default."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the hover tint still applies, just without the fade."

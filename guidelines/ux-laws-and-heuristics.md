@@ -32,7 +32,7 @@ Embassy gives you the *pieces* (components, tokens); these laws tell you *how to
 
 - **What.** The same thing looks and behaves the same everywhere; follow platform conventions.
 - **Why.** Consistency lets learning transfer between screens; drift is a bug (GOVERNANCE §1, §3.1).
-- **In Embassy.** One `Button variant="primary"` per view; menu/nav hover is always the shared blue (`--color-nav-hover`), never gray; selected state is always the Secondary family (§5.6). Pull tokens from the repo — never hardcode a hex, radius, or font.
+- **In Embassy.** One `Button variant="primary"` per view; menu/nav hover is always the shared blue (`--nav-hover`), never gray; selected state is always the Secondary family (§5.6). Pull tokens from the repo — never hardcode a hex, radius, or font.
 
 ### 5. Error prevention
 
@@ -62,7 +62,7 @@ Embassy gives you the *pieces* (components, tokens); these laws tell you *how to
 
 - **What.** Error messages in plain language state the problem and suggest a fix.
 - **Why.** A diagnosable error is a recoverable one; a code is not.
-- **In Embassy.** Inline field errors on `Input`/`Textarea` (`error`/`hint` props, `--color-error` border + `--color-error-ring`); page- or section-level problems in an `Alert` (`variant="error"`). Say what to do next ("Revisá el email — falta @"), not "Error 422".
+- **In Embassy.** Inline field errors on `Input`/`Textarea` (`error`/`hint` props, `--error` border + `--error-ring`); page- or section-level problems in an `Alert` (`variant="error"`). Say what to do next ("Revisá el email — falta @"), not "Error 422".
 
 ### 10. Help and documentation
 
@@ -150,7 +150,7 @@ Embassy gives you the *pieces* (components, tokens); these laws tell you *how to
 - [ ] Primary targets are large and well-placed; touch targets ≥ 44px; icon buttons carry a `Tooltip` label.
 - [ ] Empty and loading states are designed (`Empty State`, `Skeleton`) — not blank screens.
 - [ ] Copy is rioplatense and domain-true (vacantes/candidatos/entrevistas); no internal jargon or error codes.
-- [ ] All color/space/radius/type come from tokens (`--color-*`, `--space-*`, `--radius-*`, type scale) — zero hardcoded values.
+- [ ] All color/space/radius/type come from tokens (the semantic roles, `--space-*`, `--radius-*`, type scale) — zero hardcoded values.
 - [ ] Selected/active state uses the Secondary family plus a non-color cue (§5.6).
 
 ## Related

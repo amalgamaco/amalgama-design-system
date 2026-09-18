@@ -37,16 +37,16 @@ layout_constraints:
 
 states:
   default: "Fields at rest; submit enabled."
-  focus: "Active field shows --interactive border + ring; its label recolors."
+  focus: "Active field shows --secondary border + ring; its label recolors."
   invalid: ".field-group.is-error / control aria-invalid → red border + label + inline message; native :invalid drives validation."
   submitting: "Disable the submit button and show an inline spinner while the request is in flight (compose it)."
-  disabled: "Disabled controls use --color-disabled / --color-on-disabled."
+  disabled: "Disabled controls use --disabled / --on-disabled."
 
 accessibility:
   roles: "Native <form> + native controls; labels associated via .field-group wrapping or for/id."
   aria: [aria-invalid (on error), aria-describedby (hint/error id), aria-required, "aria-live for a form-level error summary"]
   focus: "On submit with errors, move focus to the first invalid field; logical tab order top-to-bottom."
-  contrast: "Labels (--text-primary), hints, and error text meet AA in light + dark."
+  contrast: "Labels (--on-surface), hints, and error text meet AA in light + dark."
 keyboard:
   - {keys: "Tab / Shift+Tab", action: "move between fields in DOM order"}
   - {keys: "Enter", action: "submit from a single-line field (native)"}
@@ -78,7 +78,7 @@ relationships:
     - {component: toolbar, why: "toolbar filters a list in place; a form collects and submits input"}
 
 tokens:
-  color: [--card-bg, --border, --text-primary, --text-secondary, --interactive, --color-error, --color-error-ring, --red]
+  color: [--surface-container, --border, --on-surface, --on-surface-variant, --secondary, --error, --error-ring, --error]
   radius: [--radius, --radius-md]
   spacing: ["24px 32px card padding", "20px field gap", "16px grid gap"]
   typography: [--font-size-label, --font-size-body-md, --font-size-caption]
@@ -86,7 +86,7 @@ tokens:
 motion:
   enter: "none — fields are always present (no CSS entrance)"
   exit: "none"
-  stateChange: "Inputs/selects: focus-visible moves the border to --interactive and adds a 3px --color-focus-ring box-shadow (border-color + box-shadow transition); hover (not focused/disabled) darkens the border to --color-outline; is-error / aria-invalid swaps to --color-error + --color-error-ring. The .field-label recolors to --interactive on :focus-within (or --color-error in error). number-input-wrapper/date-input recolor border on focus-within/focus; number-btn recolors background on hover."
+  stateChange: "Inputs/selects: focus-visible moves the border to --secondary and adds a 3px --focus-ring box-shadow (border-color + box-shadow transition); hover (not focused/disabled) darkens the border to --outline; is-error / aria-invalid swaps to --error + --error-ring. The .field-label recolors to --secondary on :focus-within (or --error in error). number-input-wrapper/date-input recolor border on focus-within/focus; number-btn recolors background on hover."
   duration: "--duration-fast (every field transition)"
   easing: "None specified — the field transitions declare only --duration-fast with no --ease-* token, so they fall back to the browser default ease. Per motion.md these effect transitions should carry --ease-default."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No essential/looping motion; the focus border/ring still appears, just without the fade."

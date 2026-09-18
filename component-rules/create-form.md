@@ -80,7 +80,7 @@ relationships:
     - {component: sheet-bottom, why: "a bottom sheet is a mobile overlay for a secondary task, not the primary creation flow"}
 
 tokens:
-  color: [--card-bg, --border]
+  color: [--surface-container, --border]
   radius: []
   spacing: ["16px 32px footer padding", "20px title margin-bottom"]
   typography: [--font-heading, --font-size-heading-xl]

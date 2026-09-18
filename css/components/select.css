@@ -54,8 +54,8 @@
   padding: var(--space-2) var(--space-3) var(--space-2) var(--space-3-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--color-surface-container);
-  color: var(--color-on-surface);
+  background: var(--surface-container);
+  color: var(--on-surface);
   font-family: inherit; font-size: var(--font-size-body-md);
   text-align: left; white-space: nowrap;
   cursor: pointer;
@@ -65,22 +65,22 @@
 .select-trigger:focus-visible,
 .select-trigger[aria-expanded="true"] {
   outline: none;
-  border-color: var(--color-secondary);
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
-.select-trigger[aria-invalid="true"] { border-color: var(--color-error); }
-.select-trigger[aria-invalid="true"]:focus-visible { box-shadow: 0 0 0 4px var(--color-error-ring); }
+.select-trigger[aria-invalid="true"] { border-color: var(--error); }
+.select-trigger[aria-invalid="true"]:focus-visible { box-shadow: 0 0 0 4px var(--error-ring); }
 .select-trigger:disabled,
 .select-trigger[aria-disabled="true"] {
-  background: var(--color-surface-variant);
-  color: var(--color-on-disabled);
-  border-color: var(--color-outline);
+  background: var(--surface-variant);
+  color: var(--on-disabled);
+  border-color: var(--outline);
   cursor: not-allowed;
 }
 .select-trigger[data-size="sm"] { min-height: 32px; padding: var(--space-1) var(--space-2-5) var(--space-1) var(--space-3); }
 .select-value { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.select-value[data-placeholder] { color: var(--color-on-surface-variant); }
-.select-icon { width: 16px; height: 16px; flex-shrink: 0; color: var(--color-on-surface-variant); opacity: .5; }   /* shadcn: ChevronDown estático (no rota) */
+.select-value[data-placeholder] { color: var(--on-surface-variant); }
+.select-icon { width: 16px; height: 16px; flex-shrink: 0; color: var(--on-surface-variant); opacity: .5; }   /* shadcn: ChevronDown estático (no rota) */
 
 /* ── Content (SelectContent, role="listbox") ── */
 .select-content[hidden] { display: none; }
@@ -92,9 +92,9 @@
   min-width: 100%;                                   /* = ancho del trigger (crece con el contenido) */
   max-height: min(320px, 60vh);                      /* max-h disponible → scroll */
   overflow-y: auto; overflow-x: hidden;
-  background: var(--color-surface-container);
-  color: var(--color-on-surface);
-  border: 1px solid var(--color-outline-variant);
+  background: var(--surface-container);
+  color: var(--on-surface);
+  border: 1px solid var(--outline-variant);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   animation: selectContentIn var(--duration-fast) var(--ease-default);
@@ -113,13 +113,13 @@
   padding: var(--space-1-5) var(--space-8) var(--space-1-5) var(--space-2);                         /* py-1.5 pr-8 pl-2 (check a la derecha) */
   border-radius: var(--radius-sm);
   font-size: var(--font-size-body-md);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   cursor: default; user-select: none; outline: none;
 }
 /* highlight (hover + navegación por teclado) = accent, igual que Dropdown Menu */
 .select-item.highlighted,
-.select-item:hover:not([aria-disabled="true"]) { background: var(--color-surface-variant); }
-.select-item[aria-disabled="true"] { color: var(--color-on-disabled); opacity: .5; pointer-events: none; }
+.select-item:hover:not([aria-disabled="true"]) { background: var(--surface-variant); }
+.select-item[aria-disabled="true"] { color: var(--on-disabled); opacity: .5; pointer-events: none; }
 .select-item-text { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .select-item-check {
   position: absolute; right: 8px;                    /* right-2 */
@@ -131,17 +131,17 @@
 .select-item[aria-selected="true"] .select-item-check { opacity: 1; }
 
 /* ── Label / Group / Separator ── */
-.select-label { padding: var(--space-1-5) var(--space-2); font-size: var(--font-size-caption); font-weight: 600; color: var(--color-on-surface-variant); }
+.select-label { padding: var(--space-1-5) var(--space-2); font-size: var(--font-size-caption); font-weight: 600; color: var(--on-surface-variant); }
 .select-group { display: block; }
-.select-separator { height: 1px; margin: 4px -4px; background: var(--color-outline-variant); }
+.select-separator { height: 1px; margin: 4px -4px; background: var(--outline-variant); }
 
 /* ── Scroll buttons (SelectScrollUp/DownButton) ── se muestran vía JS al desbordar ── */
 .select-scroll-up, .select-scroll-down {
   position: sticky; z-index: 1;
   display: flex; align-items: center; justify-content: center;
   height: 22px; cursor: default;
-  color: var(--color-on-surface-variant);
-  background: var(--color-surface-container);
+  color: var(--on-surface-variant);
+  background: var(--surface-container);
 }
 .select-scroll-up { top: 0; }
 .select-scroll-down { bottom: 0; }

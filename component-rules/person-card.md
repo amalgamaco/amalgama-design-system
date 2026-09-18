@@ -35,12 +35,12 @@ layout_constraints:
 states:
   default: "Surface-bg card (item is otherwise transparent)."
   hover: "item-clickable hover + elevated shadow-md (reinforces the grid-card pattern)."
-  focus: "Inherits Item focus: border → --color-focus + 3px --color-focus-ring; needs tabindex=0 + role=button."
+  focus: "Inherits Item focus: border → --focus + 3px --focus-ring; needs tabindex=0 + role=button."
 accessibility:
   roles: "Clickable <div> — add tabindex=\"0\" and role=\"button\" (or use <a class=\"item person-card\">) so it's focusable and announced."
   aria: ['tabindex="0" + role="button" on the interactive card', "single clear activation point when it navigates", 'avatar has alt with the person''s name, or aria-hidden="true" when the name is visible']
   focus: "Inherits Item's :focus-visible; don't suppress it."
-  contrast: "--text-primary/-muted meet AA in light + dark; avatar initials use --color-on-secondary-container over the tonal fill. Never use avatar color alone as the person's unique identifier."
+  contrast: "--on-surface/-muted meet AA in light + dark; avatar initials use --on-secondary-container over the tonal fill. Never use avatar color alone as the person's unique identifier."
 keyboard:
   - {keys: "Tab", action: "focus the card"}
   - {keys: "Enter / Space", action: "open the person's profile"}
@@ -68,7 +68,7 @@ relationships:
     - {component: vacancy-card, why: "Vacancy Card is for jobs; Person Card is for people"}
     - {component: avatar, why: "Avatar is just the image/initials; Person Card is the whole profile row"}
 tokens:
-  color: [--card-bg, --color-secondary-container, --color-on-secondary-container, --text-primary, --text-muted]
+  color: [--surface-container, --secondary-container, --on-secondary-container, --on-surface, --on-surface-variant]
   radius: ["50% (avatar)"]
   shadow: [--shadow-md]
 motion:

@@ -20,7 +20,7 @@ Forms are where users hand data to the product — creating a vacante, editing a
 Every Embassy form field is one component that renders three linked parts, so you never wire them by hand:
 
 1. **Label** — above the field, `text-label` + `font-medium`, `mb-2`; turns `text-link` on focus (`group-focus-within`). Adding `required` appends a red asterisk.
-2. **Control** — the input/textarea/trigger itself: `--radius-md`, `border-border` at rest, stepping to `border-outline` on hover and `border-link` + a 3px `--color-focus-ring` halo on focus.
+2. **Control** — the input/textarea/trigger itself: `--radius-md`, `border-border` at rest, stepping to `border-outline` on hover and `border-link` + a 3px `--focus-ring` halo on focus.
 3. **Supporting text** — a single line below (`text-caption`). It shows the `hint` normally, and is **replaced** by the `error` message when `error` is set. Its `id` is wired into the field's `aria-describedby`, so whichever line is showing is announced.
 
 Because these move together, keep custom classes off the field for layout — compose fields inside your own grid/stack, not by restyling the component internals.
@@ -47,15 +47,15 @@ Preventing an error is always better than recovering from it.
 When validation does fail, make the fix effortless.
 
 - **Validate on blur, not on every keystroke.** Firing an error while the user is still typing the first character is hostile. Validate when a field loses focus (`onBlur`), and once a field is in the error state, re-validate on change so the error clears the moment it's fixed.
-- **Use the `error` prop.** Passing `error="Ingresá un email válido"` to `Input`/`Textarea` turns the border red (`border-error`), swaps the focus ring to the error ring (`--color-error-ring`), sets `aria-invalid`, and replaces the hint with the error message (wired through `aria-describedby`). Do not hand-roll red borders — the prop does the accessibility plumbing for you.
+- **Use the `error` prop.** Passing `error="Ingresá un email válido"` to `Input`/`Textarea` turns the border red (`border-error`), swaps the focus ring to the error ring (`--error-ring`), sets `aria-invalid`, and replaces the hint with the error message (wired through `aria-describedby`). Do not hand-roll red borders — the prop does the accessibility plumbing for you.
 - **Summarize with a form-level `Alert` on submit.** When a submit fails validation, render an `Alert variant="error"` at the top of the form listing what needs fixing, in addition to the per-field errors. `Alert` is inline and persistent — it stays until the user resolves it — which is exactly right for an error summary. (Contrast with `Snackbar`, below.)
 - **Preserve user input.** Never clear the form on a validation error. Keep every value the user typed; only highlight what needs changing.
 - **A clear path to fix.** Error messages say what's wrong *and* what to do ("El email ya existe — probá con otro"), not just "Campo inválido". Move focus to the first errored field on a failed submit.
 
 ## Submission feedback
 
-- **Loading state on the submit `Button`.** While the request is in flight, set `aria-busy` on the primary `Button` and disable it to prevent double-submits (Embassy's disabled state removes the lift/press transforms and applies `--color-disabled`). Show a spinner or "Guardando…" label.
-- **Success → `Snackbar` (Sonner).** On success, fire a `toast()` from the `sonner` wrapper (`Toaster`, themed to the Embassy Snackbar spec: `--color-inverse-surface` background, `bottom-center`). Snackbar is floating and ephemeral — it confirms a fact that already happened and auto-dismisses. Use it for "Vacante creada", "Cambios guardados".
+- **Loading state on the submit `Button`.** While the request is in flight, set `aria-busy` on the primary `Button` and disable it to prevent double-submits (Embassy's disabled state removes the lift/press transforms and applies `--disabled`). Show a spinner or "Guardando…" label.
+- **Success → `Snackbar` (Sonner).** On success, fire a `toast()` from the `sonner` wrapper (`Toaster`, themed to the Embassy Snackbar spec: `--inverse-surface` background, `bottom-center`). Snackbar is floating and ephemeral — it confirms a fact that already happened and auto-dismisses. Use it for "Vacante creada", "Cambios guardados".
 - **Alert vs. Snackbar (they are not duplicates).** `Alert` = inline + persistent, stays in the page flow until resolved (error summary, maintenance notice). `Snackbar` = floating + ephemeral, self-dismisses after confirming something happened. Rule of thumb: if it must remain visible until the person acts → `Alert`; if it just confirms a completed fact → `Snackbar`.
 - **Server-side failures.** If the request itself fails (network, 500), don't silently swallow it: show an `Alert variant="error"` with a retry, keep the form filled, and re-enable the submit button. A destructive Snackbar-only failure message is easy to miss.
 
@@ -97,7 +97,7 @@ Embassy's form components handle most of this, but you own the composition:
 
 - **Every field has a programmatic label.** The `label` prop links `<label htmlFor>` to the field `id` (auto-generated via `useId` if you don't pass one). A field with no `label` and no `aria-label` is a defect.
 - **Errors are announced, not just colored.** The `error` prop sets `aria-invalid` and points `aria-describedby` at the message, so the error is read on focus — color alone (`border-error`) is never the only signal.
-- **Focus is visible and canonical.** All fields and buttons use `focus-visible:focus-ring` (`--color-focus` outline + `--color-focus-ring` halo). Never suppress the outline.
+- **Focus is visible and canonical.** All fields and buttons use `focus-visible:focus-ring` (`--focus` outline + `--focus-ring` halo). Never suppress the outline.
 - **Move focus to the first error** on a failed submit, and keep the error summary `Alert` reachable (near the top of the form).
 - **Contrast holds in dark mode** automatically via the token layer — don't add per-theme overrides; verify with `data-theme="dark"`.
 - **Touch targets** ≥ 44×44px for controls per WCAG 2.5.5 (GOVERNANCE §7.2).

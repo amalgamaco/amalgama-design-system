@@ -40,11 +40,11 @@ layout_constraints:
   - "Single-select always keeps one segment active — there is no 'none selected' state (use Chips if you need that)."
 
 states:
-  default: "Transparent segment, group border --color-outline-variant, label --color-on-surface."
+  default: "Transparent segment, group border --outline-variant, label --on-surface."
   hover: "State layer over the segment (unselected: on-surface @ 8%; selected: on-surface @ 8% over the raised thumb)."
-  focus: "Visible focus-visible ring (--color-focus + --color-focus-ring) plus a 12% state layer; the ring is required (WCAG 2.4.7) and never removed."
+  focus: "Visible focus-visible ring (--focus + --focus-ring) plus a 12% state layer; the ring is required (WCAG 2.4.7) and never removed."
   active: "Pressed state layer at 12%."
-  selected: "Neutral raised thumb — --ctx-track-thumb / --color-on-surface + --shadow-sm, weight 600. NOT the selection token: secondary-container belongs to the active filter (COMPOSICION.md §4c)."
+  selected: "Neutral raised thumb — --seg-btn-track-thumb / --on-surface + --shadow-sm, weight 600. NOT the selection token: secondary-container belongs to the active filter (COMPOSICION.md §4c)."
   disabled: "Label onSurface @ 38%, container/border onSurface @ 12%; no pointer events."
 
 accessibility:
@@ -88,16 +88,16 @@ relationships:
     - {component: button, why: "buttons act once; segmented selects a persistent mode"}
 
 tokens:
-  color: [--ctx-track, --ctx-track-thumb, --color-on-surface, --color-outline-variant, --color-focus, --color-focus-ring]
+  color: [--seg-btn-track, --seg-btn-track-thumb, --on-surface, --outline-variant, --focus, --focus-ring]
   radius: [--radius-full]
   spacing: [--space-2]
   motion: [--duration-fast, --ease-default]
-  component: "MD3 component-token tier --seg-btn-* (each with var(--md-sys-color-X, var(--color-X)) fallback); resolve via css/md-sys-bridge.css"
+  component: "MD3 component-token tier --seg-btn-* (each with var(--md-sys-color-X, var(--X)) fallback); resolve via css/md-sys-bridge.css"
 
 motion:
   enter: "none — always present (static view/mode switch)."
   exit: "none."
-  stateChange: "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the raised thumb. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring (kept alongside the focus state layer, per WCAG 2.4.7)."
+  stateChange: "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the raised thumb. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --focus ring + 4px --focus-ring (kept alongside the focus state layer, per WCAG 2.4.7)."
   duration: "--duration-fast"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override."

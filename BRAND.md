@@ -64,19 +64,19 @@ de uso del token.
 
 | Nombre | Hex | Token de Embassy |
 |---|---|---|
-| **Black Hole** | `#01164D` | `--primary-900` → `--color-primary`, `--text-primary` |
-| **Agile Blue** | `#4F80FF` | `--secondary-900` → `--color-secondary`, `--interactive`, `--color-focus` |
+| **Black Hole** | `#01164D` | `--primary-900` → `--primary`, `--on-surface` |
+| **Agile Blue** | `#4F80FF` | `--secondary-900` → `--secondary`, `--focus` |
 | **Dusk** | `#1C2438` | `--neutral-700` (`#1C202C`) |
-| **Ink** | `#2A2F32` | primitiva `--ink` → rol `--text-prose` — prosa larga de colateral |
+| **Ink** | `#2A2F32` | **retirado en sep-2026** — la prosa larga usa `--on-surface`, que en claro ya es un gris-carbón calibrado a AA. El nombre queda en el Manual, no en el sistema. |
 | **Moon Grey** | `#B0B4CD` | `--neutral-100` (`#BFC1C8`) |
 | **Mist** | `#E4E7EC` | `--neutral-50` (`#EAEBED`) |
 | **Fog** | `#F1F3FA` | `--neutral-30` (`#F3F4F6`) |
 | **Slate** | `#7A8390` | `--neutral-300` (`#747989`) |
 | **Milky Way** | `#FFFFFF` | `--neutral-white` |
-| **Hot Pink** | `#FE566A` | `--color-accent-hot-pink` |
-| **Chelo Yellow** | `#FFC700` | `--color-accent-chelo-yellow` |
-| **Kika Green** | `#67B9A4` | `--color-accent-kika-green` |
-| **Pink Sebiche** | `#F1A7A3` | `--accent-pink-sebiche` — documentado, no sancionado |
+| **Hot Pink** | `#FE566A` | `--accent-hot-pink` (primitiva `--palette-accent-hot-pink`) |
+| **Chelo Yellow** | `#FFC700` | `--accent-chelo-yellow` (primitiva `--palette-accent-chelo-yellow`) |
+| **Kika Green** | `#67B9A4` | `--accent-kika-green` (primitiva `--palette-accent-kika-green`) |
+| **Pink Sebiche** | `#F1A7A3` | `--palette-accent-pink-sebiche` — documentado, no sancionado |
 | **Wish** | `#7158F4` | `--tertiary-900` |
 
 > Los neutrales del Manual y los de Embassy **no son el mismo hex**: la rampa de Embassy está
@@ -160,7 +160,7 @@ equivocada cada vez que alguien cambia el tema a mano. Ver `design.md` §6.6 par
   ancla. Los mockups de dispositivo llevan un borde interior blanco de 3px.
 - **Anatomía de una lámina.** Master 1920×1080 para marketing y decks; 1440×1024 para páginas de
   manual; 390×844 para mobile. Márgenes laterales generosos: 148–167px sobre 1920 (~8%). Una regla
-  horizontal de 1px `--color-outline` separa el bloque de título del cuerpo, y una **pestaña de
+  horizontal de 1px `--outline` separa el bloque de título del cuerpo, y una **pestaña de
   42×4px** en Hot Pink o navy, al ras de la izquierda, marca la sección actual. El número de página
   vive en la esquina, en caption navy («p. 04»).
 
@@ -204,13 +204,13 @@ decks, los tres UI kits, una landing vieja.
 | `secondary-600` | `#7299FF` | `--secondary-700` |
 | `secondary-400` | `#95B3FF` | `--secondary-500` |
 | `secondary-200` / `-100` / `-050` | — | `--secondary-300` / `-100` / `-50` |
-| `hot-pink` | `#FE566A` | `--color-accent-hot-pink` |
+| `hot-pink` | `#FE566A` | `--accent-hot-pink` (primitiva `--palette-accent-hot-pink`) |
 | `hot-pink-soft` | `#FE7888` | derivar con `color-mix()` del acento |
-| `chelo-yellow` | `#FFC700` | `--color-accent-chelo-yellow` |
-| `kika-green` | `#67B9A4` | `--color-accent-kika-green` |
-| `pink-sebiche` | `#F1A7A3` | `--accent-pink-sebiche` *(no sancionado)* |
-| `sky`, `data` | `#49A4FF` | `--accent-sky` *(no sancionado)* · en charts, `--chart-1` |
-| `lime` | `#E0FF4F` | `--accent-lime` *(no sancionado)* |
+| `chelo-yellow` | `#FFC700` | `--accent-chelo-yellow` (primitiva `--palette-accent-chelo-yellow`) |
+| `kika-green` | `#67B9A4` | `--accent-kika-green` (primitiva `--palette-accent-kika-green`) |
+| `pink-sebiche` | `#F1A7A3` | `--palette-accent-pink-sebiche` *(no sancionado)* |
+| `sky`, `data` | `#49A4FF` | `--palette-accent-sky` *(no sancionado)* · en charts, `--chart-1` |
+| `lime` | `#E0FF4F` | `--palette-accent-lime` *(no sancionado)* |
 | `moon-grey` | `#B0B4CD` | `--neutral-100` |
 | `dusk` | `#1C2438` | `--neutral-700` |
 | `white` | `#FFFFFF` | `--neutral-white` |
@@ -220,7 +220,7 @@ decks, los tres UI kits, una landing vieja.
 | `stone` | `#D9D9D9` | `--neutral-100` |
 | `slate` | `#7A8390` | `--neutral-300` |
 | `slate-dark` | `#4A536E` | `--neutral-400` |
-| `ink` | `#2A2F32` | `--text-prose` *(prosa)* · `--color-on-surface` *(dentro de componentes)* — la primitiva es `--ink` |
+| `ink` | `#2A2F32` | `--on-surface` — la primitiva propia se retiró en sep-2026 |
 | `ink-soft` | `#1F2025` | `--neutral-800` |
 | `night` | `#0F1217` | `--neutral-900` |
 | `positive`, `positive-alt` | `#28CB7D`, `#24CC71` | `--success-400` (`#28CB7C`) |
@@ -232,24 +232,24 @@ decks, los tres UI kits, una landing vieja.
 
 | `--amg-*` semántico | Embassy |
 |---|---|
-| `--bg` *(blanco)* | `--card-bg` / `--color-surface-container` |
-| `--bg-muted` | `--color-surface-container-low` |
-| `--bg-subtle` | `--color-surface` |
-| `--bg-inverse` | `--color-primary` |
+| `--bg` *(blanco)* | `--surface-container` / `--surface-container` |
+| `--bg-muted` | `--surface-container-low` |
+| `--bg-subtle` | `--surface` |
+| `--bg-inverse` | `--primary` |
 | `--bg-accent-soft` | `--secondary-50` |
-| `--fg` | `--text-primary` |
-| `--fg-body` | `--text-prose` |
-| `--fg-muted` | `--text-muted` |
-| `--fg-subtle` | `--color-on-disabled` |
-| `--fg-inverse` | `--text-on-dark` |
-| `--fg-accent` | `--color-secondary-text` *(texto)* · `--color-secondary` *(objeto)* |
-| `--fg-danger` | `--color-error-text` |
+| `--fg` | `--on-surface` |
+| `--fg-body` | `--on-surface` |
+| `--fg-muted` | `--on-surface-variant` |
+| `--fg-subtle` | `--on-disabled` |
+| `--fg-inverse` | `--inverse-on-surface` |
+| `--fg-accent` | `--secondary-text` *(texto)* · `--secondary` *(objeto)* |
+| `--fg-danger` | `--error-text` |
 | `--border` | `--border` |
-| `--border-strong` | `--color-outline` |
-| `--border-accent` | `--color-secondary` |
-| `--link` | `--interactive` |
+| `--border-strong` | `--outline` |
+| `--border-accent` | `--secondary` |
+| `--link` | `--secondary` (el color del enlace es el rol interactivo) |
 | `--link-visited` `#3E66D8` | sin equivalente — Embassy no distingue visitados |
-| `--focus-ring` | `--color-focus` + `--color-focus-ring` |
+| `--focus-ring` | `--focus` + `--focus-ring` |
 
 ### Forma, espacio, sombra, tipo
 

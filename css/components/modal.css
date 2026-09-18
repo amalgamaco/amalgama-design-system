@@ -43,14 +43,14 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: var(--color-scrim);
+  background: var(--scrim);
   display: flex; align-items: center; justify-content: center;
   z-index: 100;
   animation: fadeIn var(--duration-fast) var(--ease-enter);
 }
 .modal {
   position: relative;
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border-radius: var(--radius-lg);
   width: min(560px, calc(100vw - 48px));
   max-height: calc(100vh - 96px);
@@ -74,7 +74,7 @@
 }
 .modal-description {
   font-size: var(--font-size-body-sm);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   line-height: var(--line-height-body-sm);
 }
 .modal-close {
@@ -85,17 +85,17 @@
   border: none;
   background: transparent;
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: var(--color-on-surface-variant);
+  cursor: pointer; color: var(--on-surface-variant);
   transition: background var(--duration-fast) var(--ease-default),
               color var(--duration-fast) var(--ease-default);
 }
-.modal-close:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.modal-close:hover { background: var(--surface-variant); color: var(--on-surface); }
 .modal-close:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
-.modal-body { color: var(--color-on-surface-variant); }
+.modal-body { color: var(--on-surface-variant); }
 .modal-footer {
   display: flex;
   flex-direction: column-reverse;
@@ -137,14 +137,14 @@
   width: 48px;
   height: 48px;
   border-radius: var(--radius-full);
-  background: var(--color-surface-variant);
-  color: var(--color-on-surface-variant);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
 }
 .modal-media > svg,
 .modal-media > i { width: 24px; height: 24px; }
 .modal-media-error {
-  background: var(--color-error-container);
-  color: var(--color-on-error-container);
+  background: var(--error-container);
+  color: var(--on-error-container);
 }
 
 .modal-centered .modal-header {

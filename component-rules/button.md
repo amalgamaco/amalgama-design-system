@@ -23,7 +23,7 @@ use_cases:
 variants:
   - {name: primary,   class: btn-primary,   purpose: "The single most important action of a context (filled)."}
   - {name: elevated,  class: btn-elevated,  purpose: "Tonal + real elevation; primary-container surface that needs to lift off busy backgrounds (MD3 elevated button)."}
-  - {name: secondary, class: btn-secondary, purpose: "Neutral fill + outline; equal-weight alternative actions and default overlay triggers. Since sep-2026 it is NOT the accent tonal: --color-secondary-container means SELECTED everywhere else in the system (chip, segmented, pagination, toggle, calendar, list, active nav item), so the button gave it up."}
+  - {name: secondary, class: btn-secondary, purpose: "Neutral fill + outline; equal-weight alternative actions and default overlay triggers. Since sep-2026 it is NOT the accent tonal: --secondary-container means SELECTED everywhere else in the system (chip, segmented, pagination, toggle, calendar, list, active nav item), so the button gave it up."}
   - {name: tertiary,  class: btn-tertiary,  purpose: "Outlined; lower-emphasis actions. Alias: btn-ghost."}
   - {name: text,      class: btn-text,      purpose: "Lowest emphasis; inline actions inside dense content."}
   - {name: icon,      class: icon-btn,      purpose: "Icon-only action; requires aria-label."}
@@ -48,7 +48,7 @@ layout_constraints:
 states:
   default: "Resting fill/outline per variant."
   hover: "State-layer over the base (hover opacity token); background darkens/tints via color-mix."
-  focus: "Visible focus-visible ring (--color-focus / --color-focus-ring); never remove it."
+  focus: "Visible focus-visible ring (--focus / --focus-ring); never remove it."
   active: "Pressed state layer."
   disabled: "on-disabled tokens (38% content / 12% container equivalents); no pointer events; still in DOM for SR context."
   loading: "Show an inline spinner (spinner-sm spinner-on-primary inside a btn-primary) and keep the label; disable re-submit. (No built-in loading prop — compose it.)"
@@ -57,7 +57,7 @@ accessibility:
   roles: "Native <button type=...>. Icon-only requires aria-label."
   aria: ["aria-label for icon-only", "aria-disabled/disabled for disabled", "aria-busy while loading"]
   focus: "Keyboard-reachable in DOM order; visible focus ring; Enter/Space activate natively."
-  contrast: "Label on fill meets AA in light + dark automatically via --color-*/on-* token pairs."
+  contrast: "Label on fill meets AA in light + dark automatically via role / on-role token pairs."
 keyboard:
   - {keys: "Tab / Shift+Tab", action: "move focus"}
   - {keys: "Enter / Space", action: "activate"}
@@ -90,7 +90,7 @@ relationships:
     - {component: badge, why: "badge is a read-only status; not interactive"}
 
 tokens:
-  color: [--color-primary, --color-on-primary, --color-secondary-container, --color-on-secondary-container, --color-outline]
+  color: [--primary, --on-primary, --secondary-container, --on-secondary-container, --outline]
   radius: "--radius-* scaled by size class (sm→--radius-sm … xl→--radius-lg), written as var(--radius-button, <that token>). A brand theme with the `pildora` shape declares --radius-button: 9999px and every button becomes a pill at every size — that is the only way a button is ever a pill, and it is decided once at kickoff, never per screen (GOVERNANCE §4.2)."
   motion: [--duration-fast]
   elevation: "--btn-elevation (elevated variant only)"
@@ -98,7 +98,7 @@ tokens:
 motion:
   enter: "none — always present (static control, not an overlay)."
   exit: "none."
-  stateChange: "Hover: filled variants darken (primary→--color-primary-hover, secondary/elevated via color-mix) AND lift with transform: translateY(-1px); elevated also grows box-shadow (--btn-elevation→--btn-elevation-hover). Active/pressed: settle to translateY(0) + a 12% press layer (filter: brightness(.88/.92) on filled, surface-container-high on tertiary/icon, primary 16% on text). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring."
+  stateChange: "Hover: filled variants darken (primary→--primary-hover, secondary/elevated via color-mix) AND lift with transform: translateY(-1px); elevated also grows box-shadow (--btn-elevation→--btn-elevation-hover). Active/pressed: settle to translateY(0) + a 12% press layer (filter: brightness(.88/.92) on filled, surface-container-high on tertiary/icon, primary 16% on text). Focus-visible: 2px --focus ring + 4px --focus-ring."
   duration: "--duration-fast (background/border-color/color/box-shadow). Transform (the lift/settle) uses a hardcoded .1s — should be tokenized to --duration-fast."
   easing: "--ease-default for every property, including transform (this buildless CSS does NOT use --ease-expressive for the lift, unlike the retired Tailwind button.tsx described in guidelines/motion.md)."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific override — the lift/press simply collapse."

@@ -133,14 +133,14 @@ Cambia cualquier variable en `variables.css` y toda la interfaz se actualiza aut
 
 | Token | Default | Controla |
 |---|---|---|
-| `--interactive` | #4F80FF | Botones, links, estados activos, badges destacados |
+| `--secondary` | #4F80FF | Botones, links, estados activos, badges destacados |
 | `--primary-500` | #253e82 | Color navy del brand, hover de botones |
 | `--radius` | 12px (lg) | Border-radius de cards, modals, tables |
 | `--radius-md` | 8px | Border-radius de inputs, botones, kanban cards |
 | `--bg` | var(--neutral-50) | Fondo de pagina |
-| `--card-bg` | #ffffff | Fondo de tarjetas, sidebar, topbar |
-| `--text-primary` | var(--primary-900) · #01164D | Texto principal de página (títulos y cuerpo) — navy brand. En dark: #EAEBED |
-| `--border` | on-surface al 10% (color-mix) | Bordes de contenedores (cards, tablas, paneles). Los elementos interactivos usan `--color-outline` |
+| `--surface-container` | #ffffff | Fondo de tarjetas, sidebar, topbar |
+| `--on-surface` | var(--primary-900) · #01164D | Texto principal de página (títulos y cuerpo) — navy brand. En dark: #EAEBED |
+| `--border` | on-surface al 10% (color-mix) | Bordes de contenedores (cards, tablas, paneles). Los elementos interactivos usan `--outline` |
 | `--shadow-md` | 0 4px 16px rgba(28,36,56,.08) | Hover en cards, dropdowns |
 | `--duration-fast` | 120ms | Todas las transiciones rapidas (hover, focus) |
 
@@ -149,7 +149,7 @@ Cambia cualquier variable en `variables.css` y toda la interfaz se actualiza aut
 
 ```css
 /* variables.css — cambia solo esta linea */
---interactive: #10b981;    /* de azul a verde */
+--secondary: #10b981;    /* de azul a verde */
 
 /* Resultado: TODOS los botones, links, tabs activos,
    badges y focus rings cambian a verde */

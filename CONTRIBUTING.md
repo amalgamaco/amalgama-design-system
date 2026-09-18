@@ -98,8 +98,8 @@ auditoría. No empieces el CSS antes de completarlo (`GOVERNANCE.md` §18.3):
 
 .mi-componente {
   /* Solo roles semánticos. Nunca primitivas, nunca hex crudo. */
-  background: var(--color-surface);
-  color: var(--text-primary);
+  background: var(--surface);
+  color: var(--on-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
@@ -108,9 +108,9 @@ auditoría. No empieces el CSS antes de completarlo (`GOVERNANCE.md` §18.3):
 }
 
 .mi-componente:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 ```
 
@@ -122,7 +122,7 @@ es el que lleva el `border-radius`, nunca la variante (`GOVERNANCE.md` §4.3).
 
 Cualquiera de estos frena el PR:
 
-- **Hex crudo o px suelto** donde existe un token. Color → `var(--color-*)`; radio →
+- **Hex crudo o px suelto** donde existe un token. Color → `var(--<role>)`; radio →
   `var(--radius-*)`; espaciado → `var(--space-*)`; `font-size` → `var(--font-size-*)`; familia →
   `var(--font-body|--font-heading|--font-mono)`. El único cálculo permitido es `color-mix()` sobre
   roles.

@@ -239,10 +239,10 @@
   height: var(--phone-height);
   margin: 0;
   overflow: hidden;
-  background: var(--color-surface);
-  border: 1px solid var(--color-outline-variant);
+  background: var(--surface);
+  border: 1px solid var(--outline-variant);
   border-radius: 26px;
-  box-shadow: var(--shadow-lg, 0 8px 28px color-mix(in srgb, var(--color-on-surface) 14%, transparent));
+  box-shadow: var(--shadow-lg, 0 8px 28px color-mix(in srgb, var(--on-surface) 14%, transparent));
 }
 
 /* Alto libre: para una pantalla que se mide entera, sin recortar. */
@@ -268,7 +268,7 @@
   font-family: var(--font-heading);
   font-size: var(--font-size-heading-sm);
   font-weight: 600;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
 
 .phone-screen {
@@ -290,10 +290,10 @@
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 2px;
   font-size: var(--font-size-badge);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   background: none; border: 0; cursor: pointer;
 }
-.phone-tab[aria-current] { color: var(--color-primary); font-weight: 600; }
+.phone-tab[aria-current] { color: var(--primary); font-weight: 600; }
 
 .phone-caption {
   margin: 0 0 var(--space-2-5);
@@ -301,9 +301,9 @@
   font-size: var(--font-size-badge);
   letter-spacing: var(--letter-spacing-label);
   text-transform: uppercase;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
-.phone-caption strong { color: var(--color-on-surface); font-weight: 500; }
+.phone-caption strong { color: var(--on-surface); font-weight: 500; }
 
 /* Vista de targets: marca cada superficie tocable para poder contar a ojo lo
    que M2 cuenta en el chequeo. Se activa con data-targets en el marco. */
@@ -311,13 +311,13 @@
   button, a[href], [role="button"], [role="tab"], [role="switch"],
   input, select, textarea, .chip, .list-item, .item, .nav-item, .phone-tab
 ) {
-  outline: 1px dashed color-mix(in srgb, var(--color-error) 55%, transparent);
+  outline: 1px dashed color-mix(in srgb, var(--error) 55%, transparent);
   outline-offset: 0;
 }
 /* El área invisible también se dibuja: es la diferencia entre lo que se toca y
    lo que se mira, y es lo que hace visible por qué el chip puede ser chico. */
 [data-targets] :is(.chip, .toggle, .icon-btn)::after {
-  outline: 1px dashed color-mix(in srgb, var(--color-error) 35%, transparent);
+  outline: 1px dashed color-mix(in srgb, var(--error) 35%, transparent);
 }
 
 /* En una ventana angosta el marco se achica solo por el max-width de arriba.

@@ -33,17 +33,17 @@ content_rules:
   - "Stack options vertically under a clear heading; label text may wrap to a second line without misaligning the box."
 layout_constraints:
   - "Indeterminate reflects partial parent-child selection; don't nest more than one level."
-  - "Consume --color-* tokens only; no per-theme overrides."
+  - "Consume role tokens only; no per-theme overrides."
   - "The indeterminate state is a DOM property (el.indeterminate = true), not an attribute/class."
 
 states:
-  default: "Transparent container, 2px border --color-outline."
-  hover: "Border darkens to --color-on-surface."
-  checked: "Solid --color-primary fill + --color-on-primary check mark."
-  indeterminate: "Solid --color-primary fill + --color-on-primary dash (partial selection)."
-  focus: "Visible focus-visible ring (--color-focus 2px + --color-focus-ring 4px halo)."
+  default: "Transparent container, 2px border --outline."
+  hover: "Border darkens to --on-surface."
+  checked: "Solid --primary fill + --on-primary check mark."
+  indeterminate: "Solid --primary fill + --on-primary dash (partial selection)."
+  focus: "Visible focus-visible ring (--focus 2px + --focus-ring 4px halo)."
   disabled: "opacity 0.4; not interactive."
-  error: "aria-invalid=true → --color-error border (same signal as Input/Select)."
+  error: "aria-invalid=true → --error border (same signal as Input/Select)."
 
 accessibility:
   roles: "Real <input type=checkbox> — native focus, Space activation, and aria-checked come for free; no hand-rolled ARIA."
@@ -81,7 +81,7 @@ relationships:
     - {component: chip, why: "chips are inline toolbar filters; checkboxes are form-level selection"}
 
 tokens:
-  color: [--color-primary, --color-on-primary, --color-outline, --color-on-surface, --color-error, --color-focus, --color-focus-ring]
+  color: [--primary, --on-primary, --outline, --on-surface, --error, --focus, --focus-ring]
   radius: ["4px (--radius-sm equivalent)"]
   spacing: [--space-2]
   typography: [--font-size-body-md]
@@ -89,7 +89,7 @@ tokens:
 motion:
   enter: "none — the control is always present"
   exit: "none"
-  stateChange: "On :checked / :indeterminate the box fills --color-primary and its border goes transparent — a color effect (transition: background + border-color). Hover darkens the border to --color-on-surface. The ::after check glyph (and the indeterminate dash) has NO transition — it appears instantly. .checkbox-card transitions border-color + background-color on :has(input:checked)/hover."
+  stateChange: "On :checked / :indeterminate the box fills --primary and its border goes transparent — a color effect (transition: background + border-color). Hover darkens the border to --on-surface. The ::after check glyph (and the indeterminate dash) has NO transition — it appears instantly. .checkbox-card transitions border-color + background-color on :has(input:checked)/hover."
   duration: "--duration-fast"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the checked fill still shows, just without the fade."

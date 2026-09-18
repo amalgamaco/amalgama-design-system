@@ -32,7 +32,7 @@ content_rules:
 layout_constraints:
   - "Centred text on a card surface with a 1px border and the standard radius."
   - "Fills its region; it is not centred in the viewport."
-  - "Colour is --text-muted throughout — this panel must never compete with real content."
+  - "Colour is --on-surface-variant throughout — this panel must never compete with real content."
 
 states:
   default: "The only state. The panel does not react to hover, focus or click — it is a passive region filler."
@@ -41,7 +41,7 @@ accessibility:
   roles: "Plain container; non-interactive. Nothing inside it is focusable."
   aria: ["The decorative icon carries aria-hidden=true", "If the panel replaces content that changes on selection, the live region belongs to the pane wrapper, not to this panel"]
   focus: "Not focusable. Do not add tabindex."
-  contrast: "--text-muted on --card-bg meets AA for body text in both themes."
+  contrast: "--on-surface-variant on --surface-container meets AA for body text in both themes."
 keyboard:
   - {keys: "(none)", action: "non-interactive by design"}
 responsive:
@@ -69,7 +69,7 @@ relationships:
     - {component: alert, why: "alert reports a problem; a placeholder reports a normal resting state"}
 
 tokens:
-  color: [--card-bg, --border, --text-muted]
+  color: [--surface-container, --border, --on-surface-variant]
   radius: [--radius]
   spacing: ["48px 32px padding", "12px icon margin"]
   typography: [--font-size-body-lg]

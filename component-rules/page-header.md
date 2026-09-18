@@ -42,7 +42,7 @@ accessibility:
   roles: "`.page-title` is the view's `<h1>` — exactly one per page, and it is this one."
   aria: ["No landmark of its own; it lives inside the page's main region", "Icon-only actions in .header-actions require aria-label"]
   focus: "Not focusable. Its buttons are, in DOM order after the title."
-  contrast: "--text-primary on the page background, AA in both themes."
+  contrast: "--on-surface on the page background, AA in both themes."
 keyboard:
   - {keys: "Tab", action: "moves through .header-actions in DOM order, after any back-link above"}
 responsive:
@@ -74,7 +74,7 @@ relationships:
     - {component: create-form, why: "a full-page creation form uses create-header + the sticky create-footer"}
 
 tokens:
-  color: [--text-primary]
+  color: [--on-surface]
   spacing: ["24px margin-bottom", "10px gap between actions"]
   typography: [--font-heading, --font-size-heading-lg]
 

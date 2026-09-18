@@ -23,7 +23,7 @@ use_cases:
 
 variants:
   - {name: default, class: toggle,          purpose: "Borderless toggle; pressed fill only."}
-  - {name: outline, class: toggle-outline,  purpose: "Outlined resting state (border --color-outline-variant); border clears when pressed."}
+  - {name: outline, class: toggle-outline,  purpose: "Outlined resting state (border --outline-variant); border clears when pressed."}
 sizes:
   - {name: sm,      class: toggle-sm,        use: "dense toolbars (32px)"}
   - {name: md,      class: "toggle (default)", use: "standard density (36px)"}
@@ -36,15 +36,15 @@ content_rules:
   - "The label names the setting, not the current value ('Negrita', not 'Quitar negrita')."
 layout_constraints:
   - "Intrinsic width; not a full-width control."
-  - "Pressed state uses --color-secondary-container (never --color-primary, which inverts to white in dark and would read as 'no color')."
+  - "Pressed state uses --secondary-container (never --primary, which inverts to white in dark and would read as 'no color')."
 
 states:
-  default: "Transparent (or outlined) resting; label/icon --color-on-surface."
+  default: "Transparent (or outlined) resting; label/icon --on-surface."
   hover: "State layer on-surface @ 8% (pressed: on-secondary-container @ 8% over the container)."
-  focus: "Visible focus-visible ring (--color-focus + --color-focus-ring)."
-  pressed: "aria-pressed=true → filled --color-secondary-container / --color-on-secondary-container (outline variant drops its border)."
+  focus: "Visible focus-visible ring (--focus + --focus-ring)."
+  pressed: "aria-pressed=true → filled --secondary-container / --on-secondary-container (outline variant drops its border)."
   disabled: "opacity 0.38; no pointer events."
-  error: "aria-invalid=true adds a --color-error border (rare, kept for control consistency)."
+  error: "aria-invalid=true adds a --error border (rare, kept for control consistency)."
 
 accessibility:
   roles: "Native <button> with aria-pressed reflecting the on/off state; Enter/Space work natively."
@@ -62,7 +62,7 @@ ux_principles:
   - "Immediate application — no confirm step for a formatting toggle (efficiency of use)."
 common_mistakes:
   - "Using it to choose 1 of N (that's Segmented Button)."
-  - "Using --color-primary for the pressed fill (inverts to white in dark)."
+  - "Using --primary for the pressed fill (inverts to white in dark)."
   - "Icon-only toggle with no aria-label."
   - "Using a Toggle for an on/off preference with a label — that's a Switch."
 nielsen_heuristics:
@@ -81,7 +81,7 @@ relationships:
     - {component: button, why: "buttons act statelessly; a toggle holds an on/off state"}
 
 tokens:
-  color: [--color-secondary-container, --color-on-secondary-container, --color-on-surface, --color-outline-variant, --color-focus, --color-focus-ring, --color-error]
+  color: [--secondary-container, --on-secondary-container, --on-surface, --outline-variant, --focus, --focus-ring, --error]
   radius: [--radius-md]
   spacing: [--space-2]
   motion: [--duration-fast, --ease-default]
@@ -89,7 +89,7 @@ tokens:
 motion:
   enter: "none — always present (static two-state control)."
   exit: "none."
-  stateChange: "Hover: state layer color-mix over --color-on-surface 8% (unselected) or over the secondary-container when pressed. Pressed on (aria-pressed=true): background→--color-secondary-container, color→--color-on-secondary-container (transitions on background-color + color). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring. Disabled: opacity .38 (no transition)."
+  stateChange: "Hover: state layer color-mix over --on-surface 8% (unselected) or over the secondary-container when pressed. Pressed on (aria-pressed=true): background→--secondary-container, color→--on-secondary-container (transitions on background-color + color). Focus-visible: 2px --focus ring + 4px --focus-ring. Disabled: opacity .38 (no transition)."
   duration: "--duration-fast"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override."

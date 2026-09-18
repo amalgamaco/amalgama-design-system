@@ -8,7 +8,7 @@
 
    Dependencia: variables.css (Color Roles) + button.css (Prev/Next reusan
    .btn-text). La página activa usa el mismo lenguaje de selección que
-   Chip/Nav: --color-secondary-container / --color-on-secondary-container.
+   Chip/Nav: --secondary-container / --on-secondary-container.
 
    Estructura (nav > ul > li):
    <nav class="pagination" aria-label="Paginación">
@@ -49,22 +49,22 @@
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
   font-weight: 500;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   text-decoration: none;
   cursor: pointer;
   transition: background-color var(--duration-fast) var(--ease-default);
 }
-.pagination-link:hover { background: var(--color-surface-variant); }
+.pagination-link:hover { background: var(--surface-variant); }
 .pagination-link:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .pagination-link.is-active {
-  background: var(--color-secondary-container);
-  color: var(--color-on-secondary-container);
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
 }
-.pagination-link.is-active:hover { background: var(--color-secondary-container); }
+.pagination-link.is-active:hover { background: var(--secondary-container); }
 
 .pagination-prev,
 .pagination-next {
@@ -84,7 +84,7 @@
   justify-content: center;
   height: 36px;
   width: 36px;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 .pagination-ellipsis svg { width: 16px; height: 16px; }
 

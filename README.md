@@ -128,7 +128,7 @@ Automático — sin overrides por componente:
 <html data-theme="dark"><!-- todos los componentes se adaptan solos --></html>
 ```
 
-Los roles semánticos (`--color-*`, `--text-*`, `--bg`) se recalibran solos bajo `data-theme="dark"`. Los componentes son ciegos al tema. Ver **TOKENS.md**.
+Los roles semánticos (`--primary`, `--surface`, `--on-surface`…) se recalibran solos bajo `data-theme="dark"`. Los componentes son ciegos al tema. Ver **TOKENS.md**.
 
 ---
 

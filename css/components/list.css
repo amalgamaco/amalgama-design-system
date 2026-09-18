@@ -23,7 +23,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  background: var(--color-surface);
+  background: var(--surface);
 }
 
 .list-item {
@@ -48,12 +48,12 @@
 
 .list-item-headline {
   font: 500 var(--font-size-body-md)/1.4 var(--font-body);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
 
 .list-item-supporting {
   font: 400 var(--font-size-body-sm)/1.4 var(--font-body);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 
 /* ── Slots leading / trailing ── ícono, avatar, checkbox, badge o meta-texto. */
@@ -62,7 +62,7 @@
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 .list-item-trailing { margin-left: auto; }
 .list-item-leading svg,
@@ -82,20 +82,20 @@ button.list-item {
   cursor: pointer;
   font: inherit;
 }
-button.list-item:hover { background: var(--color-surface-variant); }
+button.list-item:hover { background: var(--surface-variant); }
 /* Foco canónico de dos partes (GOVERNANCE §6.2) — consistente con el resto del DS. */
 button.list-item:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: -2px;
-  box-shadow: inset 0 0 0 4px var(--color-focus-ring);
+  box-shadow: inset 0 0 0 4px var(--focus-ring);
 }
 /* Seleccionado — mismo lenguaje de selección que Nav/Menu (secondary-container). */
 /* Sin `button.` adelante: el atributo declara el estado en cualquier etiqueta —
    un <li> con aria-selected se veía sin seleccionar. */
 .list-item[aria-selected="true"],
 .list-item.is-selected {
-  background: var(--color-secondary-container);
-  color: var(--color-on-secondary-container);
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
 }
 .list-item[aria-selected="true"] .list-item-supporting,
 .list-item.is-selected .list-item-supporting { color: inherit; }

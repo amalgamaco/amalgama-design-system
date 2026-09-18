@@ -21,7 +21,7 @@
    en .seg-btn-group. Las reglas consumen SOLO tokens de componente.
    Tematizar/recolorear una instancia = sobreescribir un token, no editar
    selectores. Los defaults usan el nombre de sistema MD3 nativo con
-   fallback al rol Embassy:  var(--md-sys-color-X, var(--color-X)).
+   fallback al rol Embassy:  var(--md-sys-color-X, var(--X)).
    → Cargá css/md-sys-bridge.css para resolver los nombres --md-sys-color-*
      contra la paleta Embassy. Sin el bridge, el componente cae al rol
      Embassy automáticamente (sigue funcionando).
@@ -72,8 +72,8 @@
    temas —en claro container-high está por debajo de surface, en oscuro por
    encima—, y por eso el oscuro se declara aparte en vez de derivarse. */
 :root {
-  --seg-btn-track:       var(--color-surface-container-high);
-  --seg-btn-track-thumb: var(--color-surface-container);
+  --seg-btn-track:       var(--surface-container-high);
+  --seg-btn-track-thumb: var(--surface-container);
 }
 [data-theme="dark"] {
   --seg-btn-track:       var(--neutral-750);
@@ -91,41 +91,41 @@
   --seg-btn-container-color:                var(--seg-btn-track);
   --seg-btn-outline-color:                  transparent;
   /* Segmento no seleccionado */
-  --seg-btn-label-color:                    var(--md-sys-color-on-surface, var(--color-on-surface));
-  --seg-btn-icon-color:                     var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-label-color:                    var(--md-sys-color-on-surface, var(--on-surface));
+  --seg-btn-icon-color:                     var(--md-sys-color-on-surface, var(--on-surface));
   /* Segmento seleccionado */
   /* Neutro a proposito: el token de seleccion (secondary-container) queda para el
      filtro activo. Si los dos usan el mismo azul, ninguno pesa mas que el otro. */
   --seg-btn-selected-container-color:       var(--seg-btn-track-thumb);
-  --seg-btn-selected-label-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
-  --seg-btn-selected-icon-color:            var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-selected-label-color:           var(--md-sys-color-on-surface, var(--on-surface));
+  --seg-btn-selected-icon-color:            var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-selected-elevation:             var(--shadow-sm);
   /* State layers — no seleccionado */
-  --seg-btn-hover-layer-color:              var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-hover-layer-color:              var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-hover-layer-opacity:            8%;
-  --seg-btn-focus-layer-color:              var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-focus-layer-color:              var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-focus-layer-opacity:            12%;
-  --seg-btn-pressed-layer-color:            var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-pressed-layer-color:            var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-pressed-layer-opacity:          12%;
   /* State layers — seleccionado */
-  --seg-btn-selected-hover-layer-color:     var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-selected-hover-layer-color:     var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-selected-hover-layer-opacity:   8%;
-  --seg-btn-selected-focus-layer-color:     var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-selected-focus-layer-color:     var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-selected-focus-layer-opacity:   12%;
-  --seg-btn-selected-pressed-layer-color:   var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-selected-pressed-layer-color:   var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-selected-pressed-layer-opacity: 12%;
   /* Deshabilitado — alineado a MD3 (onSurface @ opacidad) */
-  --seg-btn-disabled-group-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-group-color:           var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-disabled-group-opacity:         4%;
-  --seg-btn-disabled-container-color:       var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-container-color:       var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-disabled-container-opacity:     12%;
-  --seg-btn-disabled-label-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-label-color:           var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-disabled-label-opacity:         38%;
-  --seg-btn-disabled-outline-color:         var(--md-sys-color-on-surface, var(--color-on-surface));
+  --seg-btn-disabled-outline-color:         var(--md-sys-color-on-surface, var(--on-surface));
   --seg-btn-disabled-outline-opacity:       12%;
   /* Foco — anillo visible (WCAG 2.4.7 · GOVERNANCE §6.2) */
-  --seg-btn-focus-outline-color:            var(--color-focus);
-  --seg-btn-focus-ring-color:               var(--color-focus-ring);
+  --seg-btn-focus-outline-color:            var(--focus);
+  --seg-btn-focus-ring-color:               var(--focus-ring);
 
   display: inline-flex;
   align-items: center;

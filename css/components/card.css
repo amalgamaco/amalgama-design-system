@@ -26,7 +26,7 @@
 ═══════════════════════════════════════ */
 
 .card {
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   /* Panel = escalon estandar. COMPOSICION.md §4b + guidelines/visual-hierarchy.md.
@@ -37,14 +37,14 @@
 
 /* ── Variantes MD3 ── */
 .card-elevated {
-  background: var(--color-surface-container-low);
+  background: var(--surface-container-low);
   border: 1px solid transparent;
   border-radius: var(--radius);
   padding: var(--space-6);
   box-shadow: var(--shadow-sm);
 }
 .card-filled {
-  background: var(--color-surface-container-highest);
+  background: var(--surface-container-highest);
   border: 1px solid transparent;
   border-radius: var(--radius);
   padding: var(--space-6);
@@ -73,13 +73,13 @@
   font-family: var(--font-heading);
   font-size: var(--font-size-heading-xs);
   line-height: var(--line-height-heading-xs);
-  letter-spacing: var(--letter-spacing-heading-xs);
+  letter-spacing: var(--letter-spacing-normal);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
 .card-desc {
   font-size: var(--font-size-body-sm);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   line-height: var(--line-height-body-sm);
 }
 
@@ -99,11 +99,11 @@
   line-height: var(--line-height-heading-md);
   letter-spacing: var(--letter-spacing-heading-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
 .card-content {
   font-size: var(--font-size-body-md);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
 .card-footer {
   margin-top: var(--space-4);
@@ -115,14 +115,14 @@
    vaya adentro. Sin esto, un `list` adentro de una card pintaba el gris de la
    pagina sobre el blanco de la card y habia que escribirle `background:
    transparent` a mano — un override de clase publica por cada uso. */
-.card                { --ctx-surface: var(--color-surface-container);                            --ctx-surface-raised: var(--color-surface-container-high); }
-.card-elevated       { --ctx-surface: var(--color-surface-container-low);        --ctx-surface-raised: var(--color-surface-container-high); }
-.card-filled         { --ctx-surface: var(--color-surface-container-highest);    --ctx-surface-raised: var(--color-surface-container); }
+.card                { --ctx-surface: var(--surface-container);                            --ctx-surface-raised: var(--surface-container-high); }
+.card-elevated       { --ctx-surface: var(--surface-container-low);        --ctx-surface-raised: var(--surface-container-high); }
+.card-filled         { --ctx-surface: var(--surface-container-highest);    --ctx-surface-raised: var(--surface-container); }
 
 /* La valvula para un panel que NO es una card del DS — un rail, un sheet, una
    region propia del proyecto. Se declara en el contenedor y los componentes de
    adentro se acomodan solos. */
-[data-surface="surface"]           { --ctx-surface: var(--color-surface);                        --ctx-surface-raised: var(--color-surface-container); }
-[data-surface="container-low"]     { --ctx-surface: var(--color-surface-container-low);          --ctx-surface-raised: var(--color-surface-container); }
-[data-surface="container"]         { --ctx-surface: var(--color-surface-container);              --ctx-surface-raised: var(--color-surface-container-high); }
-[data-surface="container-high"]    { --ctx-surface: var(--color-surface-container-high);         --ctx-surface-raised: var(--color-surface-container-highest); }
+[data-surface="surface"]           { --ctx-surface: var(--surface);                        --ctx-surface-raised: var(--surface-container); }
+[data-surface="container-low"]     { --ctx-surface: var(--surface-container-low);          --ctx-surface-raised: var(--surface-container); }
+[data-surface="container"]         { --ctx-surface: var(--surface-container);              --ctx-surface-raised: var(--surface-container-high); }
+[data-surface="container-high"]    { --ctx-surface: var(--surface-container-high);         --ctx-surface-raised: var(--surface-container-highest); }

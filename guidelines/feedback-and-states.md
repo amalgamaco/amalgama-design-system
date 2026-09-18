@@ -23,7 +23,7 @@ Map each edge to a component before you build the happy path.
 
 ## Empty states — never a blank void
 
-Use the `.empty-state` component (`css/components/empty-state.css`: `.empty-state-icon` + `.empty-state-title` + `.empty-state-desc`, plus room for a next action). It centers content, renders the title with `--font-heading` at `--font-size-heading-md` and the description at `--font-size-body-lg` in `--text-secondary`, and reserves room for a CTA. An empty region must always be *helpful* and offer a clear next step — never an unexplained gap.
+Use the `.empty-state` component (`css/components/empty-state.css`: `.empty-state-icon` + `.empty-state-title` + `.empty-state-desc`, plus room for a next action). It centers content, renders the title with `--font-heading` at `--font-size-heading-md` and the description at `--font-size-body-lg` in `--on-surface-variant`, and reserves room for a CTA. An empty region must always be *helpful* and offer a clear next step — never an unexplained gap.
 
 There are three distinct empty states; they are not interchangeable:
 
@@ -43,7 +43,7 @@ When you know the *shape* of what is coming (a card grid, a table, a detail pane
 
 ### Progress for actions, not content
 
-`.progress` (`css/components/progress.css`) covers two shapes, both track = `--color-surface-variant`, indicator = `--color-primary`:
+`.progress` (`css/components/progress.css`) covers two shapes, both track = `--surface-variant`, indicator = `--primary`:
 
 - **Linear** (`<Progress />`) — a thin bar (`h-1`, `rounded-full`). Pass `value` (0–100) for determinate work (upload, multi-step import); pass `indeterminate` for "working, duration unknown."
 - **Circular** (`<CircularProgress />`) — SVG ring for compact/inline spots. `value` for determinate, `indeterminate` to spin a partial arc.
@@ -62,7 +62,7 @@ Whatever the loading affordance, set `aria-busy="true"` on the region and `point
 
 Handle errors at the screen level, not just per-request. Two components, chosen by persistence:
 
-- **`.alert`** (`css/components/alert.css`; `.alert-title` / `.alert-description`, `role="alert"`, variant `.alert-error`) — **inline and persistent**. Use for blocking or standing errors that must stay visible until resolved: a form's validation summary, a "no se pudo guardar" banner above the form, a degraded-service notice. It sits in the page flow with `--color-error-container` / `--color-on-error-container`.
+- **`.alert`** (`css/components/alert.css`; `.alert-title` / `.alert-description`, `role="alert"`, variant `.alert-error`) — **inline and persistent**. Use for blocking or standing errors that must stay visible until resolved: a form's validation summary, a "no se pudo guardar" banner above the form, a degraded-service notice. It sits in the page flow with `--error-container` / `--on-error-container`.
 - **`.snackbar`** (`css/components/toast.css`) — **floating and ephemeral**. Use for transient failures where the context still works: `toast("No se pudo actualizar", { action: { label: "Reintentar", onClick: … } })`.
 
 Recovery principles:
@@ -73,7 +73,7 @@ Recovery principles:
 
 ## Success & confirmation
 
-Confirm that something happened with a **`Snackbar`** (`toast.success("Vacante publicada")`). It is floating, auto-dismissing, and themed to the Embassy Snackbar spec (`--color-inverse-surface` background, `--color-inverse-on-surface` text, action rendered as `inverse-primary`, `--radius-sm`, `bottom-center`). Do not use an `Alert` for a fleeting success — an inline banner that lingers after the user has moved on is noise. Reserve interrupting confirmations (`AlertDialog`) for irreversible actions only.
+Confirm that something happened with a **`Snackbar`** (`toast.success("Vacante publicada")`). It is floating, auto-dismissing, and themed to the Embassy Snackbar spec (`--inverse-surface` background, `--inverse-on-surface` text, action rendered as `inverse-primary`, `--radius-sm`, `bottom-center`). Do not use an `Alert` for a fleeting success — an inline banner that lingers after the user has moved on is noise. Reserve interrupting confirmations (`AlertDialog`) for irreversible actions only.
 
 ## Alert vs. Snackbar — the canonical distinction
 

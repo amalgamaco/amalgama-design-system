@@ -32,11 +32,11 @@ layout_constraints:
   - "Char count + error live in .field-supporting below the field."
 
 states:
-  default: "1px --border, --card-bg; line-height 1.5."
-  hover: "Border darkens to --color-outline (shared Input hover)."
-  focus: "Border --interactive + 3px --color-focus-ring; label recolors to --interactive."
-  disabled: "--color-disabled bg, --color-on-disabled text, not-allowed."
-  error: "aria-invalid or .field-group.is-error → --color-error border, red label, error message replaces hint."
+  default: "1px --border, --surface-container; line-height 1.5."
+  hover: "Border darkens to --outline (shared Input hover)."
+  focus: "Border --secondary + 3px --focus-ring; label recolors to --secondary."
+  disabled: "--disabled bg, --on-disabled text, not-allowed."
+  error: "aria-invalid or .field-group.is-error → --error border, red label, error message replaces hint."
 
 accessibility:
   roles: "Native <textarea>; associate a label via .field-group wrapping or for/id."
@@ -73,7 +73,7 @@ relationships:
     - {component: input-group, why: "input-group joins addons to a single-line control"}
 
 tokens:
-  color: [--border, --card-bg, --text-primary, --interactive, --color-focus-ring, --color-error, --color-on-surface-variant]
+  color: [--border, --surface-container, --on-surface, --secondary, --focus-ring, --error, --on-surface-variant]
   radius: [--radius-md]
   typography: [--font-size-body-md, --font-size-caption, --font-size-badge]
   motion: [--duration-fast]
@@ -81,7 +81,7 @@ tokens:
 motion:
   enter: "none — always present (static form field)."
   exit: "none."
-  stateChange: "Shares the form field transition (border-color + box-shadow). Focus-visible: border→--interactive + 3px --color-focus-ring, label recolors via :focus-within. Error (is-error / aria-invalid): border→--color-error + --color-error-ring. Auto-grow via field-sizing: content changes height with typed content but is intentionally NOT transitioned (animating height would thrash layout)."
+  stateChange: "Shares the form field transition (border-color + box-shadow). Focus-visible: border→--secondary + 3px --focus-ring, label recolors via :focus-within. Error (is-error / aria-invalid): border→--error + --error-ring. Auto-grow via field-sizing: content changes height with typed content but is intentionally NOT transitioned (animating height would thrash layout)."
   duration: "--duration-fast (border/box-shadow)"
   easing: "none specified — the shared field transition lists durations with no --ease-* token, falling back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override."

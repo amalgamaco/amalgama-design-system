@@ -36,7 +36,7 @@ layout_constraints:
 states:
   default: "Closed; trigger shows value or muted placeholder, chevron at 50% opacity."
   hover: "btn-tertiary hover state on the trigger."
-  focus: "focus-visible ring on the trigger (--color-focus / --color-focus-ring); arrow keys move the active option once open."
+  focus: "focus-visible ring on the trigger (--focus / --focus-ring); arrow keys move the active option once open."
   open: "aria-expanded=true; panel visible with the Command input focused for immediate typing."
   selected: "Chosen option shows combobox-check.is-selected; trigger reflects the value."
   disabled: "Unavailable options carry aria-disabled=true and are excluded from selection."
@@ -44,7 +44,7 @@ accessibility:
   roles: "Trigger is a native <button> with aria-haspopup=\"listbox\" and aria-expanded; the panel list follows Command's listbox/option semantics."
   aria: ['aria-haspopup="listbox"', "aria-expanded synced on open/close", 'aria-disabled="true" on unavailable options', "accessible name on the trigger"]
   focus: "Opening moves focus to the search input; Escape and outside-click close and return focus to the trigger."
-  contrast: "Trigger, panel surface and check all derive from --color-* tokens — AA in light + dark."
+  contrast: "Trigger, panel surface and check all derive from role tokens — AA in light + dark."
 keyboard:
   - {keys: "Enter / Space", action: "open the panel from the trigger"}
   - {keys: "Type", action: "filter the option list (substring, not fuzzy)"}
@@ -74,7 +74,7 @@ relationships:
     - {component: command, why: "Command runs commands / navigates (⌘K); Combobox picks a form value"}
     - {component: chip, why: "chips represent multi-select tokens; Combobox is single-select"}
 tokens:
-  color: [--color-surface-container, --color-on-surface, --text-muted, --border]
+  color: [--surface-container, --on-surface, --on-surface-variant, --border]
   radius: [--radius-md]
   shadow: [--shadow-md]
   spacing: [--space-2, --space-4]

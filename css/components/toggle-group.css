@@ -15,7 +15,7 @@
    Segmented Button (--seg-btn-*) — son visualmente distintos a propósito
    (Toggle Group = fila de .toggle individuales sin contenedor de grupo;
    Segmented Button = contenedor con borde + segmentos). Ambos comparten el
-   mismo color de selección (--color-secondary-container) por consistencia
+   mismo color de selección (--secondary-container) por consistencia
    de "estado seleccionado" en todo el sistema, pero la forma difiere.
 
    Dependencia: variables.css, toggle.css (cada item es un .toggle)

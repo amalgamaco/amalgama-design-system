@@ -31,7 +31,7 @@
   position: relative;
   width: 100%;
   overflow-x: auto;
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
 }
@@ -40,14 +40,14 @@
   border-collapse: collapse;
 }
 .data-table thead {
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
   border-bottom: 1px solid var(--border);
 }
 .data-table th {
   padding: var(--space-2-5) var(--space-4);
   font-size: var(--font-size-overline);
   font-weight: 600;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-label);
   text-align: left;
@@ -55,14 +55,14 @@
 .data-table td {
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-body-md);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   border-top: 1px solid var(--border);
 }
 .data-table tbody tr {
   transition: background var(--duration-fast) var(--ease-default);
 }
 .data-table tbody tr:hover {
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
 }
 .data-table tbody tr.clickable {
   cursor: pointer;
@@ -70,25 +70,25 @@
 /* Selected row (e.g. Data Table's row-selection feature) */
 .data-table tbody tr.selected,
 .data-table tbody tr[aria-selected="true"] {
-  background: var(--color-surface-container-high);
+  background: var(--surface-container-high);
 }
 /* Las filas clickeables necesitan tabindex="0" para recibir foco de teclado */
 .data-table tbody tr.clickable:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 
 /* ── Footer (tfoot) ── fila de totales/resumen: borde superior, fondo tenue y
    peso medio, par shadcn TableFooter (border-t, bg-muted/50, font-medium). */
 .data-table tfoot {
   border-top: 1px solid var(--border);
-  background: color-mix(in srgb, var(--color-surface-variant) 50%, transparent);
+  background: color-mix(in srgb, var(--surface-variant) 50%, transparent);
   font-weight: 600;
 }
 .data-table tfoot td {
   border-top: none;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
 
 /* ── Caption ── título o nota de la tabla, al pie (par shadcn TableCaption). */
@@ -96,7 +96,7 @@
   caption-side: bottom;
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-body-sm);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   text-align: left;
 }
 

@@ -42,34 +42,34 @@
    §22): una copia parafraseada del color-mix de abajo no fallaria cuando el
    porcentaje cambie — mentiria. El markup compone `badge stat-change
    stat-change-positive`. */
-.badge-open, .stat-change-positive   { background: var(--color-success-container); color: var(--color-on-success-container); }
+.badge-open, .stat-change-positive   { background: var(--success-container); color: var(--on-success-container); }
 /* Activa = proceso en curso: color distinto de open (secondary-container), para que
    "abierta" (verde) y "activa" (en curso) no se lean idénticas. */
 /* «En proceso» comparte registro con «informativo»: los dos son el azul neutro que
-   no afirma ni exito ni error. Hasta sep 2026 `active` usaba --color-secondary-container,
+   no afirma ni exito ni error. Hasta sep 2026 `active` usaba --secondary-container,
    que es el token de SELECCION (chip, segmented, calendar, pagination, menu activo):
    un badge de estado y un estado de seleccion quedaban indistinguibles en la misma
    pantalla. La seleccion es transversal a toda la UI y el badge es de una familia,
    asi que cede el badge. Queda como alias de la variante info — se mantiene la clase
    para no romper los usos existentes. */
-.badge-active { background: var(--color-info-container); color: var(--color-on-info-container); }
-.badge-closed, .stat-change-negative { background: var(--color-error-container);   color: var(--color-on-error-container); }
+.badge-active { background: var(--info-container); color: var(--on-info-container); }
+.badge-closed, .stat-change-negative { background: var(--error-container);   color: var(--on-error-container); }
 /* Tendencia plana: la misma superficie tonal que .badge-draft, sin el borde
    (draft usa el borde para decir "todavia no publicado"; una variacion de cero
    no dice nada de eso). En oscuro el par surface-variant/on-surface-variant ya
    es tonal, asi que no necesita la excepcion de abajo. */
-.stat-change-neutral { background: var(--color-surface-variant); color: var(--color-on-surface-variant); }
-.badge-draft  { background: var(--color-surface-variant);   color: var(--color-on-surface-variant); border: 1px solid var(--color-outline); }
+.stat-change-neutral { background: var(--surface-variant); color: var(--on-surface-variant); }
+.badge-draft  { background: var(--surface-variant);   color: var(--on-surface-variant); border: 1px solid var(--outline); }
 /* Archivada = la misma superficie tonal que draft, SIN su borde. Hasta sep 2026
    llevaba `opacity: .75` para verse "apagada": medido, eso bajaba el contraste real
    de 4.64:1 a 2.91:1 en claro —por debajo de AA— porque la opacidad mezcla el texto
    Y el fondo contra la pagina. El chequeo [15] no lo veia: compara tokens, y los
    tokens estaban bien; lo que fallaba era el pixel. Lo apagado ahora lo dice la
    ausencia de borde, que no toca el contraste. */
-.badge-archived { background: var(--color-surface-variant); color: var(--color-on-surface-variant); }
-.badge-warning  { background: var(--color-warning-container); color: var(--color-on-warning-container); }
-.badge-tertiary { background: var(--color-tertiary-container); color: var(--color-on-tertiary-container); }
-.badge-info     { background: var(--color-info-container);    color: var(--color-on-info-container); }
+.badge-archived { background: var(--surface-variant); color: var(--on-surface-variant); }
+.badge-warning  { background: var(--warning-container); color: var(--on-warning-container); }
+.badge-tertiary { background: var(--tertiary-container); color: var(--on-tertiary-container); }
+.badge-info     { background: var(--info-container);    color: var(--on-info-container); }
 
 /* ── Modificador Label: etiqueta de categoría/sección (tipografía monoespaciada) ── */
 .badge-label {
@@ -98,10 +98,10 @@
    texto de shadcn (sin relleno, color de acento, subrayado en hover). */
 a.badge { text-decoration: none; cursor: pointer; transition: opacity var(--duration-fast) var(--ease-default); }
 a.badge:hover { opacity: .85; }
-a.badge:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+a.badge:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
-.badge-link { background: transparent; color: var(--color-primary); padding-left: var(--space-0-5); padding-right: var(--space-0-5); }
+.badge-link { background: transparent; color: var(--primary); padding-left: var(--space-0-5); padding-right: var(--space-0-5); }
 a.badge-link:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
 
 /* ── Dark: tratamiento tonal suave ── en dark, en vez del relleno saturado
@@ -111,10 +111,10 @@ a.badge-link:hover { opacity: 1; text-decoration: underline; text-underline-offs
    vívido → contraste AA holgado y vividez pareja entre variantes.
    Excepción documentada al "sin bloque por-tema" (aprobada; scope = badge). */
 [data-theme="dark"] .badge-open,
-[data-theme="dark"] .stat-change-positive { background: color-mix(in srgb, var(--color-success-container)   42%, var(--color-surface)); }
-[data-theme="dark"] .badge-active  { background: color-mix(in srgb, var(--color-secondary-container) 55%, var(--color-surface)); }
+[data-theme="dark"] .stat-change-positive { background: color-mix(in srgb, var(--success-container)   42%, var(--surface)); }
+[data-theme="dark"] .badge-active  { background: color-mix(in srgb, var(--secondary-container) 55%, var(--surface)); }
 [data-theme="dark"] .badge-closed,
-[data-theme="dark"] .stat-change-negative { background: color-mix(in srgb, var(--color-error-container)     42%, var(--color-surface)); }
-[data-theme="dark"] .badge-warning { background: color-mix(in srgb, var(--color-warning-container)   42%, var(--color-surface)); }
-[data-theme="dark"] .badge-tertiary{ background: color-mix(in srgb, var(--color-tertiary-container)  42%, var(--color-surface)); }
-[data-theme="dark"] .badge-info    { background: color-mix(in srgb, var(--color-info-container)      42%, var(--color-surface)); }
+[data-theme="dark"] .stat-change-negative { background: color-mix(in srgb, var(--error-container)     42%, var(--surface)); }
+[data-theme="dark"] .badge-warning { background: color-mix(in srgb, var(--warning-container)   42%, var(--surface)); }
+[data-theme="dark"] .badge-tertiary{ background: color-mix(in srgb, var(--tertiary-container)  42%, var(--surface)); }
+[data-theme="dark"] .badge-info    { background: color-mix(in srgb, var(--info-container)      42%, var(--surface)); }

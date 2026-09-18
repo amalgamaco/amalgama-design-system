@@ -80,7 +80,7 @@ relationships:
     - {component: toggle-group, why: "toggle-group holds stateful on/off toggles; button group holds plain actions"}
 
 tokens:
-  color: [--color-surface-variant, --color-on-surface, --color-outline, --color-border]
+  color: [--surface-variant, --on-surface, --outline, --border]
   radius: "--radius-* inherited from the child buttons; inner corners collapse to 0"
   spacing: "children share a single 1px border (no gap between joined members)"
 

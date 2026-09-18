@@ -506,144 +506,144 @@
       "section": "Information palette",
       "$description": "on-info en oscuro: texto sobre el azul claro"
     },
-    "--accent-hot-pink": {
+    "--palette-accent-hot-pink": {
       "$type": "color",
       "$value": "#FE566A",
-      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( accent ), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Hot Pink      · 5.51:1 con navy encima"
     },
-    "--accent-chelo-yellow": {
+    "--palette-accent-chelo-yellow": {
       "$type": "color",
       "$value": "#FFC700",
-      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( accent ), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Chelo Yellow  · 11.0:1 con navy encima"
     },
-    "--accent-kika-green": {
+    "--palette-accent-kika-green": {
       "$type": "color",
       "$value": "#67B9A4",
-      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( accent ), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Kika Green    · 7.28:1 con navy encima"
     },
-    "--accent-pink-sebiche": {
+    "--palette-accent-pink-sebiche": {
       "$type": "color",
       "$value": "#F1A7A3",
-      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( accent ), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Pink Sebiche"
     },
-    "--accent-sky": {
+    "--palette-accent-sky": {
       "$type": "color",
       "$value": "#49A4FF",
-      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( accent ), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Sky / Data — pisa de cerca a --chart-1"
     },
-    "--accent-lime": {
+    "--palette-accent-lime": {
       "$type": "color",
       "$value": "#E0FF4F",
-      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( accent ), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Lime — aparece una sola vez, como highlight"
     },
-    "--color-primary": {
+    "--primary": {
       "$type": "color",
       "$value": "#01164D",
       "section": "Primary · Navy",
       "$dark": "#FFFFFF",
       "$alias": "--primary-900"
     },
-    "--color-on-primary": {
+    "--on-primary": {
       "$type": "color",
       "$value": "#FFFFFF",
       "section": "Primary · Navy",
       "$dark": "#01164D",
       "$alias": "--neutral-white"
     },
-    "--color-primary-container": {
+    "--primary-container": {
       "$type": "color",
       "$value": "#D7DEFB",
       "section": "Primary · Navy",
       "$dark": "#475993",
       "$alias": "--primary-60"
     },
-    "--color-on-primary-container": {
+    "--on-primary-container": {
       "$type": "color",
       "$value": "#01164D",
       "section": "Primary · Navy",
       "$dark": "#E4E7EF",
       "$alias": "--primary-900"
     },
-    "--color-primary-hover": {
+    "--primary-hover": {
       "$type": "color",
       "$value": "#162F6F",
       "section": "Primary · Navy",
       "$dark": "#E4E7EF",
       "$alias": "--primary-700"
     },
-    "--color-primary-state-hover": {
+    "--primary-state-hover": {
       "$type": "color",
       "$value": "#01164D1A",
       "section": "Capa de estado de la variante de TEXTO: no es un fondo, es un velo de Primary sobre lo que haya atrás. Estaba escrita a mano en button.css como color-mix inline; el sitio la documenta como rol, así que vive acá."
     },
-    "--color-primary-state-press": {
+    "--primary-state-press": {
       "$type": "color",
       "$value": "#01164D29",
       "section": "Capa de estado de la variante de TEXTO: no es un fondo, es un velo de Primary sobre lo que haya atrás. Estaba escrita a mano en button.css como color-mix inline; el sitio la documenta como rol, así que vive acá."
     },
-    "--color-secondary": {
+    "--secondary": {
       "$type": "color",
       "$value": "#4F80FF",
       "section": "Secondary · Agile Blue",
       "$dark": "#B9CCFF",
       "$alias": "--secondary-900"
     },
-    "--color-on-secondary": {
+    "--on-secondary": {
       "$type": "color",
       "$value": "#01164D",
       "section": "Texto oscuro, no blanco. El acento en claro es un color vivo y saturado: blanco encima da 3.58:1 en Embassy y 3.26:1 en un verde de marca, o sea por debajo de AA para texto normal. Con primary-900 da 4.79:1 en Embassy y 5.11:1 en Nortia, y escala a cualquier marca porque el 900 de la rampa siempre es el paso más oscuro. En dark el rol ya usa secondary-950 sobre secondary-300 (6.45:1) y no cambia.",
       "$dark": "#1E3A8C",
       "$alias": "--primary-900"
     },
-    "--color-secondary-container": {
+    "--secondary-container": {
       "$type": "color",
       "$value": "#CAD9FF",
       "section": "Container = secondary-200 + on = primary navy: el botón/chip Secondary (tonal) se diferencia del Primary por inversión (claro + texto navy).",
       "$dark": "#3A5BB0",
       "$alias": "--secondary-200"
     },
-    "--color-on-secondary-container": {
+    "--on-secondary-container": {
       "$type": "color",
       "$value": "#01164D",
       "section": "Container = secondary-200 + on = primary navy: el botón/chip Secondary (tonal) se diferencia del Primary por inversión (claro + texto navy).",
       "$dark": "#DCE6FF",
       "$alias": "--primary-900"
     },
-    "--color-secondary-container-hover": {
+    "--secondary-container-hover": {
       "$type": "color",
       "$value": "#B9CCFF",
       "section": "Hover de la variante tonal. El sitio lo documenta como rol (Components · Buttons → Tokens y especificaciones) y no existía en el CSS. Oscurece un escalón; en los dos temas el par con on-container sigue pasando.",
       "$dark": "#1E3A8C",
       "$alias": "--secondary-300"
     },
-    "--color-tertiary": {
+    "--tertiary": {
       "$type": "color",
       "$value": "#7158F4",
       "section": "Tertiary (Purple)",
       "$dark": "#C6BCFB",
       "$alias": "--tertiary-900"
     },
-    "--color-on-tertiary": {
+    "--on-tertiary": {
       "$type": "color",
       "$value": "#FFFFFF",
       "section": "Tertiary (Purple)",
       "$dark": "#0A0C12",
       "$alias": "--neutral-white"
     },
-    "--color-tertiary-container": {
+    "--tertiary-container": {
       "$type": "color",
       "$value": "#E3DEFD",
       "section": "Tertiary (Purple)",
       "$dark": "#4A3BA8",
       "$alias": "--tertiary-100"
     },
-    "--color-on-tertiary-container": {
+    "--on-tertiary-container": {
       "$type": "color",
       "$value": "#4A3BA8",
       "section": "Tertiary (Purple)",
@@ -651,253 +651,253 @@
       "$dark": "#F1EEFE",
       "$alias": "--tertiary-950"
     },
-    "--color-accent-hot-pink": {
+    "--accent-hot-pink": {
       "$type": "color",
       "$value": "#FE566A",
       "section": "Acentos de marca — la capa de uso sobre la paleta del Manual. Un componente o una lámina consume ESTOS, nunca la primitiva. Las reglas del Manual son parte del rol: máximo DOS juntos en una composición, uno si es tipografía; nunca fondo dominante; nunca texto corrido; nunca amarillo sobre azul («no todos somos hinchas de Boca :)»). El `on` de los tres es navy: blanco no llega a AA en ninguno (3.09:1 en el rosa, 2.34:1 en el verde). No se recalibran en oscuro: son color de marca, no de superficie, y su par ya pasa en los dos temas.",
-      "$alias": "--accent-hot-pink"
+      "$alias": "--palette-accent-hot-pink"
     },
-    "--color-accent-chelo-yellow": {
+    "--accent-chelo-yellow": {
       "$type": "color",
       "$value": "#FFC700",
       "section": "Acentos de marca — la capa de uso sobre la paleta del Manual. Un componente o una lámina consume ESTOS, nunca la primitiva. Las reglas del Manual son parte del rol: máximo DOS juntos en una composición, uno si es tipografía; nunca fondo dominante; nunca texto corrido; nunca amarillo sobre azul («no todos somos hinchas de Boca :)»). El `on` de los tres es navy: blanco no llega a AA en ninguno (3.09:1 en el rosa, 2.34:1 en el verde). No se recalibran en oscuro: son color de marca, no de superficie, y su par ya pasa en los dos temas.",
-      "$alias": "--accent-chelo-yellow"
+      "$alias": "--palette-accent-chelo-yellow"
     },
-    "--color-accent-kika-green": {
+    "--accent-kika-green": {
       "$type": "color",
       "$value": "#67B9A4",
       "section": "Acentos de marca — la capa de uso sobre la paleta del Manual. Un componente o una lámina consume ESTOS, nunca la primitiva. Las reglas del Manual son parte del rol: máximo DOS juntos en una composición, uno si es tipografía; nunca fondo dominante; nunca texto corrido; nunca amarillo sobre azul («no todos somos hinchas de Boca :)»). El `on` de los tres es navy: blanco no llega a AA en ninguno (3.09:1 en el rosa, 2.34:1 en el verde). No se recalibran en oscuro: son color de marca, no de superficie, y su par ya pasa en los dos temas.",
-      "$alias": "--accent-kika-green"
+      "$alias": "--palette-accent-kika-green"
     },
-    "--color-on-accent": {
+    "--on-accent": {
       "$type": "color",
       "$value": "#01164D",
       "section": "Acentos de marca — la capa de uso sobre la paleta del Manual. Un componente o una lámina consume ESTOS, nunca la primitiva. Las reglas del Manual son parte del rol: máximo DOS juntos en una composición, uno si es tipografía; nunca fondo dominante; nunca texto corrido; nunca amarillo sobre azul («no todos somos hinchas de Boca :)»). El `on` de los tres es navy: blanco no llega a AA en ninguno (3.09:1 en el rosa, 2.34:1 en el verde). No se recalibran en oscuro: son color de marca, no de superficie, y su par ya pasa en los dos temas.",
       "$alias": "--primary-900"
     },
-    "--color-error": {
+    "--error": {
       "$type": "color",
       "$value": "#FD3A45",
       "section": "Error",
       "$dark": "#F29AA1",
       "$alias": "--error-500"
     },
-    "--color-on-error": {
+    "--on-error": {
       "$type": "color",
       "$value": "#FFFFFF",
       "section": "Error",
       "$dark": "#5C0010",
       "$alias": "--neutral-white"
     },
-    "--color-error-container": {
+    "--error-container": {
       "$type": "color",
       "$value": "#FFEBF0",
       "section": "Error",
       "$dark": "#7A0C1B",
       "$alias": "--error-50"
     },
-    "--color-on-error-container": {
+    "--on-error-container": {
       "$type": "color",
       "$value": "#BF0B29",
       "section": "Error",
       "$dark": "#FFCDD7",
       "$alias": "--error-900"
     },
-    "--color-error-hover": {
+    "--error-hover": {
       "$type": "color",
       "$value": "#DB263C",
       "section": "Error",
       "$alias": "--error-700"
     },
-    "--color-error-fill": {
+    "--error-fill": {
       "$type": "color",
       "$value": "#BF0B29",
-      "section": "El RELLENO de un botón lleno, separado de la señal.  color-error es el rojo de señal: sirve para un borde de campo, un punto de estado o un anillo de foco, donde WCAG pide 3:1 porque son objetos gráficos. Como superficie con texto encima es otra cosa: blanco sobre #FD3A45 da 3.58:1 y no pasa AA. Un token, dos trabajos. El -900 ya existe en la rampa: 6.37:1 con blanco. En OSCURO no se toca — ahí el par ya da 6.78:1 y pisarlo sería empeorarlo.",
+      "section": "El RELLENO de un botón lleno, separado de la señal.  error es el rojo de señal: sirve para un borde de campo, un punto de estado o un anillo de foco, donde WCAG pide 3:1 porque son objetos gráficos. Como superficie con texto encima es otra cosa: blanco sobre #FD3A45 da 3.58:1 y no pasa AA. Un token, dos trabajos. El -900 ya existe en la rampa: 6.37:1 con blanco. En OSCURO no se toca — ahí el par ya da 6.78:1 y pisarlo sería empeorarlo.",
       "$dark": "#F29AA1",
       "$alias": "--error-900"
     },
-    "--color-error-fill-hover": {
+    "--error-fill-hover": {
       "$type": "color",
       "$value": "#7A0C1B",
-      "section": "El RELLENO de un botón lleno, separado de la señal.  color-error es el rojo de señal: sirve para un borde de campo, un punto de estado o un anillo de foco, donde WCAG pide 3:1 porque son objetos gráficos. Como superficie con texto encima es otra cosa: blanco sobre #FD3A45 da 3.58:1 y no pasa AA. Un token, dos trabajos. El -900 ya existe en la rampa: 6.37:1 con blanco. En OSCURO no se toca — ahí el par ya da 6.78:1 y pisarlo sería empeorarlo.",
+      "section": "El RELLENO de un botón lleno, separado de la señal.  error es el rojo de señal: sirve para un borde de campo, un punto de estado o un anillo de foco, donde WCAG pide 3:1 porque son objetos gráficos. Como superficie con texto encima es otra cosa: blanco sobre #FD3A45 da 3.58:1 y no pasa AA. Un token, dos trabajos. El -900 ya existe en la rampa: 6.37:1 con blanco. En OSCURO no se toca — ahí el par ya da 6.78:1 y pisarlo sería empeorarlo.",
       "$dark": "#EA727D",
       "$alias": "--error-950"
     },
-    "--color-success": {
+    "--success": {
       "$type": "color",
       "$value": "#00C164",
       "section": "Success",
       "$dark": "#93E1B3",
       "$alias": "--success-500"
     },
-    "--color-on-success": {
+    "--on-success": {
       "$type": "color",
       "$value": "#FFFFFF",
       "section": "Success",
       "$dark": "#00351A",
       "$alias": "--neutral-white"
     },
-    "--color-success-container": {
+    "--success-container": {
       "$type": "color",
       "$value": "#E4F8EC",
       "section": "Success",
       "$dark": "#004D1E",
       "$alias": "--success-50"
     },
-    "--color-on-success-container": {
+    "--on-success-container": {
       "$type": "color",
       "$value": "#006D2C",
       "section": "Success",
       "$dark": "#93E1B3",
       "$alias": "--success-900"
     },
-    "--color-success-hover": {
+    "--success-hover": {
       "$type": "color",
       "$value": "#009E4D",
       "section": "Success",
       "$alias": "--success-700"
     },
-    "--color-success-fill": {
+    "--success-fill": {
       "$type": "color",
       "$value": "#006D2C",
       "section": "Idem verde, y acá el caso era peor: blanco sobre #00C164 da 2.38:1. El -900 da 6.51:1. En oscuro tampoco se toca (8.96:1).",
       "$dark": "#93E1B3",
       "$alias": "--success-900"
     },
-    "--color-success-fill-hover": {
+    "--success-fill-hover": {
       "$type": "color",
       "$value": "#004D1E",
       "section": "Idem verde, y acá el caso era peor: blanco sobre #00C164 da 2.38:1. El -900 da 6.51:1. En oscuro tampoco se toca (8.96:1).",
       "$dark": "#60D594",
       "$alias": "--success-950"
     },
-    "--color-warning": {
+    "--warning": {
       "$type": "color",
       "$value": "#FFB249",
       "section": "Warning",
       "$dark": "#FFC97D",
       "$alias": "--warning-500"
     },
-    "--color-on-warning": {
+    "--on-warning": {
       "$type": "color",
       "$value": "#0A0C12",
       "section": "Warning",
       "$dark": "#5A2A00",
       "$alias": "--neutral-900"
     },
-    "--color-warning-container": {
+    "--warning-container": {
       "$type": "color",
       "$value": "#FFF2DF",
       "section": "Warning",
       "$dark": "#7A3200",
       "$alias": "--warning-50"
     },
-    "--color-on-warning-container": {
+    "--on-warning-container": {
       "$type": "color",
       "$value": "#C43800",
       "section": "Warning",
       "$dark": "#FFDEB0",
       "$alias": "--warning-925"
     },
-    "--color-info": {
+    "--info": {
       "$type": "color",
       "$value": "#1E52EE",
       "section": "Info",
       "$dark": "#9FABF8",
       "$alias": "--info-500"
     },
-    "--color-on-info": {
+    "--on-info": {
       "$type": "color",
       "$value": "#FFFFFF",
       "section": "Info",
       "$dark": "#00177A",
       "$alias": "--neutral-white"
     },
-    "--color-info-container": {
+    "--info-container": {
       "$type": "color",
       "$value": "#E9EBFD",
       "section": "Info",
       "$dark": "#0032CB",
       "$alias": "--info-50"
     },
-    "--color-on-info-container": {
+    "--on-info-container": {
       "$type": "color",
       "$value": "#001ABA",
       "section": "Info",
       "$dark": "#C7CCFA",
       "$alias": "--info-900"
     },
-    "--color-surface": {
+    "--surface": {
       "$type": "color",
       "$value": "#F3F4F6",
       "section": "Background & Surface",
       "$dark": "#13161F",
       "$alias": "--neutral-30"
     },
-    "--color-surface-dim": {
+    "--surface-dim": {
       "$type": "color",
       "$value": "#EAEBED",
       "section": "Background & Surface",
       "$dark": "#0A0C12",
       "$alias": "--neutral-50"
     },
-    "--color-surface-bright": {
+    "--surface-bright": {
       "$type": "color",
       "$value": "#FFFFFF",
       "section": "Background & Surface",
       "$dark": "#1C202C",
       "$alias": "--neutral-white"
     },
-    "--color-surface-container-lowest": {
+    "--surface-container-lowest": {
       "$type": "color",
       "$value": "#FAFBFC",
       "section": "Background & Surface",
       "$dark": "#0A0C12",
       "$alias": "--neutral-10"
     },
-    "--color-surface-container-low": {
+    "--surface-container-low": {
       "$type": "color",
       "$value": "#FAFBFC",
       "section": "Background & Surface",
       "$dark": "#171B26",
       "$alias": "--neutral-10"
     },
-    "--color-surface-container": {
+    "--surface-container": {
       "$type": "color",
       "$value": "#FFFFFF",
       "section": "Background & Surface",
       "$dark": "#1C202C",
       "$alias": "--neutral-white"
     },
-    "--color-surface-container-high": {
+    "--surface-container-high": {
       "$type": "color",
       "$value": "#EAEBED",
       "section": "Background & Surface",
       "$dark": "#282C39",
       "$alias": "--neutral-50"
     },
-    "--color-surface-container-highest": {
+    "--surface-container-highest": {
       "$type": "color",
       "$value": "#BFC1C8",
       "section": "Background & Surface",
       "$dark": "#353A4A",
       "$alias": "--neutral-100"
     },
-    "--color-surface-variant": {
+    "--surface-variant": {
       "$type": "color",
       "$value": "#EAEBED",
       "section": "Background & Surface",
       "$dark": "#282C39",
       "$alias": "--neutral-50"
     },
-    "--color-on-surface": {
+    "--on-surface": {
       "$type": "color",
       "$value": "#0A0C12",
       "section": "Background & Surface",
       "$dark": "#EAEBED",
       "$alias": "--neutral-900"
     },
-    "--color-on-surface-variant": {
+    "--on-surface-variant": {
       "$type": "color",
       "$value": "#63687A",
       "section": "Background & Surface",
@@ -905,7 +905,7 @@
       "$dark": "#BFC1C8",
       "$alias": "--neutral-350"
     },
-    "--color-outline": {
+    "--outline": {
       "$type": "color",
       "$value": "#9FA3AE",
       "section": "Outline · bordes (outline = más prominente/oscuro; variant = sutil)",
@@ -913,7 +913,7 @@
       "$dark": "#747989",
       "$alias": "--neutral-200"
     },
-    "--color-outline-variant": {
+    "--outline-variant": {
       "$type": "color",
       "$value": "#BFC1C8",
       "section": "Outline · bordes (outline = más prominente/oscuro; variant = sutil)",
@@ -921,119 +921,123 @@
       "$dark": "#474D61",
       "$alias": "--neutral-100"
     },
-    "--color-inverse-surface": {
+    "--inverse-surface": {
       "$type": "color",
       "$value": "#0A0C12",
       "section": "Inverse",
       "$dark": "#EAEBED",
       "$alias": "--neutral-900"
     },
-    "--color-inverse-on-surface": {
+    "--inverse-on-surface": {
       "$type": "color",
       "$value": "#EAEBED",
       "section": "Inverse",
       "$dark": "#13161F",
       "$alias": "--neutral-50"
     },
-    "--color-inverse-primary": {
+    "--inverse-primary": {
       "$type": "color",
       "$value": "#4F80FF",
       "section": "Inverse",
       "$dark": "#162F6F",
       "$alias": "--secondary-900"
     },
-    "--color-disabled": {
+    "--disabled": {
       "$type": "color",
       "$value": "#BFC1C8",
       "section": "Disabled",
       "$dark": "#282C39",
       "$alias": "--neutral-100"
     },
-    "--color-on-disabled": {
+    "--on-disabled": {
       "$type": "color",
       "$value": "#747989",
       "section": "Disabled",
       "$alias": "--neutral-300"
     },
-    "--color-focus": {
+    "--focus": {
       "$type": "color",
       "$value": "#4F80FF",
       "section": "Focus & Overlay",
       "$alias": "--secondary-900"
     },
-    "--color-focus-ring": {
+    "--focus-ring": {
       "$type": "color",
       "$value": "#4F80FF26",
-      "section": "Anillo de foco: derivado de  color-focus (single source of truth) en vez de hardcodear rgba(79,128,255,.15).  color-focus no tiene override en dark (señal de foco consistente entre temas), así que el valor resuelto es el mismo en ambos temas — pero ahora sigue automáticamente cualquier cambio de  color-focus, sin duplicar el hex."
+      "section": "Anillo de foco: derivado de  focus (single source of truth) en vez de hardcodear rgba(79,128,255,.15).  focus no tiene override en dark (señal de foco consistente entre temas), así que el valor resuelto es el mismo en ambos temas — pero ahora sigue automáticamente cualquier cambio de  focus, sin duplicar el hex."
     },
-    "--color-error-ring": {
+    "--error-ring": {
       "$type": "color",
       "$value": "#FD3A451F",
-      "section": "Ring de error (inputs .is-error): derivado de  color-error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba."
+      "section": "Ring de error (inputs .is-error): derivado de  error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba."
     },
-    "--color-scrim": {
+    "--scrim": {
       "$type": "color",
       "$value": "rgba(0,0,0,.32)",
-      "section": "Ring de error (inputs .is-error): derivado de  color-error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba."
+      "section": "Ring de error (inputs .is-error): derivado de  error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba."
     },
-    "--color-shadow": {
+    "--shadow": {
       "$type": "color",
       "$value": "#0A0C12",
       "section": "Color base de la elevación. Está en el sistema publicado (Styles · Color · Baseline → Utilidad) y faltaba acá. Se agrega para cerrar el hueco, con una advertencia: los compuestos  shadow-sm/md/lg NO derivan de él todavía — llevan su propio tinte navy rgba(28,36,56,…), que es una decisión de Embassy y no el neutral de la fuente. Dos verdades sobre el mismo concepto; unificarlas cambia el aspecto de toda la elevación, así que es una decisión aparte y no un arreglo de anclaje.",
       "$dark": "#000000",
-      "$alias": "--neutral-900"
+      "$alias": "--neutral-900",
+      "$native": {
+        "translates": false,
+        "rule": "RN no tiene box-shadow multi-capa: iOS usa shadowColor/Offset/Opacity/Radius y Android solo elevation."
+      }
     },
-    "--color-hover": {
+    "--hover": {
       "$type": "color",
       "$value": "#4F80FF14",
-      "section": "Capa de estado. Estaban documentados en el sitio (Styles · Color · Baseline, «State Palette») y no existían en el CSS: tres tokens fantasma. Se derivan de  color-secondary con color-mix, así que se recalibran solos en oscuro en vez de arrastrar el rgba de claro."
+      "section": "Capa de estado. Estaban documentados en el sitio (Styles · Color · Baseline, «State Palette») y no existían en el CSS: tres tokens fantasma. Se derivan de  secondary con color-mix, así que se recalibran solos en oscuro en vez de arrastrar el rgba de claro."
     },
-    "--color-pressed": {
+    "--pressed": {
       "$type": "color",
       "$value": "#4F80FF24",
-      "section": "Capa de estado. Estaban documentados en el sitio (Styles · Color · Baseline, «State Palette») y no existían en el CSS: tres tokens fantasma. Se derivan de  color-secondary con color-mix, así que se recalibran solos en oscuro en vez de arrastrar el rgba de claro."
+      "section": "Capa de estado. Estaban documentados en el sitio (Styles · Color · Baseline, «State Palette») y no existían en el CSS: tres tokens fantasma. Se derivan de  secondary con color-mix, así que se recalibran solos en oscuro en vez de arrastrar el rgba de claro."
     },
-    "--color-selected": {
+    "--selected": {
       "$type": "color",
       "$value": "#CAD9FF",
-      "section": "SELECCIONADO. El sitio lo documentaba en secondary-50; se unifica con el token que ya significa «seleccionado» en todo el sistema (chip, segmented, pagination, toggle, calendar, list, nav activo) en vez de abrir un segundo valor para lo mismo.  color-nav-selected sigue siendo su alias de nav.",
-      "$alias": "--color-secondary-container"
+      "section": "SELECCIONADO. El sitio lo documentaba en secondary-50; se unifica con el token que ya significa «seleccionado» en todo el sistema (chip, segmented, pagination, toggle, calendar, list, nav activo) en vez de abrir un segundo valor para lo mismo.  nav-selected sigue siendo su alias de nav.",
+      "$alias": "--secondary-container"
     },
     "--border": {
       "$type": "color",
       "$value": "#0A0C121A",
-      "section": "Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad. Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el outline de elementos INTERACTIVOS ( color-outline, botones/chips/inputs) se distinga con claridad. Theme-aware vía color-mix — sin override en dark."
+      "section": "Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad. Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el outline de elementos INTERACTIVOS ( outline, botones/chips/inputs) se distinga con claridad. Theme-aware vía color-mix — sin override en dark."
     },
-    "--color-secondary-text": {
+    "--secondary-text": {
       "$type": "color",
       "$value": "#1E3A8C",
-      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
+      "section": "El acento cuando hay que LEERLO.  secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
       "$dark": "#B9CCFF",
       "$alias": "--secondary-950"
     },
-    "--color-success-text": {
+    "--success-text": {
       "$type": "color",
       "$value": "#006D2C",
-      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
-      "$alias": "--color-on-success-container"
+      "section": "El acento cuando hay que LEERLO.  secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
+      "$alias": "--on-success-container"
     },
-    "--color-error-text": {
+    "--error-text": {
       "$type": "color",
       "$value": "#BF0B29",
-      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
-      "$alias": "--color-on-error-container"
+      "section": "El acento cuando hay que LEERLO.  secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
+      "$alias": "--on-error-container"
     },
-    "--color-warning-text": {
+    "--warning-text": {
       "$type": "color",
       "$value": "#C43800",
-      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
-      "$alias": "--color-on-warning-container"
+      "section": "El acento cuando hay que LEERLO.  secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
+      "$alias": "--on-warning-container"
     },
-    "--color-info-text": {
+    "--info-text": {
       "$type": "color",
       "$value": "#001ABA",
-      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
-      "$alias": "--color-on-info-container"
+      "section": "El acento cuando hay que LEERLO.  secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
+      "$alias": "--on-info-container"
     },
     "--space-0-5": {
       "$type": "dimension",
@@ -1864,33 +1868,33 @@
       "section": "Elevated Button elevation (MD3 elevated button). A runtime var so it can flip in dark — Tailwind inlines  shadow  into utility classes (they can't recalibrate), so the elevated button consumes THIS via shadow-[var( btn-elevation)]. Slightly stronger than the card  shadow  so the lift reads clearly; black in dark.",
       "$dark": "0 2px 4px rgba(0,0,0,.60), 0 8px 20px rgba(0,0,0,.50)"
     },
-    "--color-nav-hover": {
+    "--nav-hover": {
       "$type": "color",
       "$value": "#CAD9FF73",
-      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override."
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  secondary-container so they recalibrate automatically in dark mode with no separate override."
     },
-    "--color-nav-hover-content": {
+    "--nav-hover-content": {
       "$type": "color",
       "$value": "#4F80FF",
-      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override.",
-      "$alias": "--color-secondary"
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  secondary-container so they recalibrate automatically in dark mode with no separate override.",
+      "$alias": "--secondary"
     },
-    "--color-nav-press": {
+    "--nav-press": {
       "$type": "color",
       "$value": "#CAD9FFB3",
-      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override."
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  secondary-container so they recalibrate automatically in dark mode with no separate override."
     },
-    "--color-nav-selected": {
+    "--nav-selected": {
       "$type": "color",
       "$value": "#CAD9FF",
-      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override.",
-      "$alias": "--color-secondary-container"
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  secondary-container so they recalibrate automatically in dark mode with no separate override.",
+      "$alias": "--secondary-container"
     },
-    "--color-nav-selected-content": {
+    "--nav-selected-content": {
       "$type": "color",
       "$value": "#01164D",
-      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  color-secondary-container so they recalibrate automatically in dark mode with no separate override.",
-      "$alias": "--color-on-secondary-container"
+      "section": "Nav/menu item interaction states — the \"blue hover\" unified across sidebar nav and dropdown/context menus. Derived from  secondary-container so they recalibrate automatically in dark mode with no separate override.",
+      "$alias": "--on-secondary-container"
     },
     "--gradient-brand": {
       "$type": "gradient",

@@ -20,10 +20,10 @@ use_cases:
 variants:
   - {name: sidebar, class: sidebar, purpose: "The fixed 240px rail container (var(--sidebar-width))."}
   - {name: nav, class: sidebar-nav, purpose: "The scrollable region holding sections and items."}
-  - {name: item, class: nav-item, purpose: "A destination row: icon + label, hover/active states via the shared --color-nav-* tokens."}
+  - {name: item, class: nav-item, purpose: "A destination row: icon + label, hover/active states via the shared --nav-* tokens."}
   - {name: section-label, class: nav-section-label, purpose: "Uppercase group heading above a set of related destinations."}
   - {name: sub-items, class: nav-sub-items, purpose: "Indented nested destinations under a parent item."}
-  - {name: badge, class: nav-badge, purpose: "Trailing count/attention pill on an item (--interactive-light)."}
+  - {name: badge, class: nav-badge, purpose: "Trailing count/attention pill on an item (--secondary-container)."}
 sizes:
   - {name: default, class: "(default)", use: "240px rail; nav-item at body-md; sub-items at label size"}
 size_selection: "Single width by design (var(--sidebar-width)). Density comes from grouping with section labels, not from resizing."
@@ -37,15 +37,15 @@ layout_constraints:
   - "One active destination at a time."
   - "Don't reorder items by role without communicating it."
 states:
-  default: "Resting item at --text-secondary."
-  hover: "Shared blue-hover: --color-nav-hover background + --color-nav-hover-content text (never gray)."
-  active: "--color-nav-selected background + --color-nav-selected-content, weight 500, aria-current=\"page\"."
+  default: "Resting item at --on-surface-variant."
+  hover: "Shared blue-hover: --nav-hover background + --nav-hover-content text (never gray)."
+  active: "--nav-selected background + --nav-selected-content, weight 500, aria-current=\"page\"."
   focus: "Use native <a>/<button> items so the browser focus ring is preserved (layout.css defines no custom :focus-visible for .nav-item)."
 accessibility:
   roles: "The rail is a <nav aria-label=\"Navegación principal\"> (navigation landmark); items are native <a href> or <button>."
   aria: ['aria-label on the <nav>', 'aria-current="page" on the active item', "aria-hidden on decorative icons", "badge count folded into the item's aria-label"]
   focus: "Each item is keyboard-focusable and activates with Enter/Space; don't suppress the native outline."
-  contrast: "Tokens (--text-secondary, --color-nav-*, --interactive) recalibrate for dark automatically — never theme overrides. Active state is reinforced by weight, not color alone."
+  contrast: "Tokens (--on-surface-variant, --nav-*, --secondary) recalibrate for dark automatically — never theme overrides. Active state is reinforced by weight, not color alone."
 keyboard:
   - {keys: "Tab / Shift+Tab", action: "move focus through destinations"}
   - {keys: "Enter / Space", action: "activate the focused destination"}
@@ -55,7 +55,7 @@ responsive:
   - "Item spans the full row height, so the ≥44px touch target is covered without extra padding."
 ux_principles:
   - "Persistent, stable navigation lets users build a spatial model of the app (Jakob's law / consistency)."
-  - "Blue hover — never gray — keeps nav affordances legible in light and dark (shared --color-nav-* tokens)."
+  - "Blue hover — never gray — keeps nav affordances legible in light and dark (shared --nav-* tokens)."
 common_mistakes:
   - "Icon-only items in the expanded rail (labels are required)."
   - "Gray hover instead of the shared blue-hover nav tokens."
@@ -75,7 +75,7 @@ relationships:
     - {component: toolbar, why: "Toolbar hosts view controls/filters, not navigation"}
     - {component: tabs, why: "Tabs switch sub-views within one screen; the rail switches top-level destinations"}
 tokens:
-  color: [--color-nav-hover, --color-nav-hover-content, --color-nav-selected, --color-nav-selected-content, --text-secondary, --sidebar-bg]
+  color: [--nav-hover, --nav-hover-content, --nav-selected, --nav-selected-content, --on-surface-variant, --surface-container]
   radius: [--radius-md, --radius-full]
   spacing: [--sidebar-width]
   motion: [--duration-fast]
@@ -122,6 +122,6 @@ source:
 
 ```html
 <!-- ✕ Gray hover instead of the shared blue-hover token -->
-<a class="nav-item" style="--color-nav-hover:#eee" href="/reportes">Reportes</a>
+<a class="nav-item" style="--nav-hover:#eee" href="/reportes">Reportes</a>
 ```
-*Fix:* keep the shared `--color-nav-*` tokens; nav hover reads blue, never gray.
+*Fix:* keep the shared `--nav-*` tokens; nav hover reads blue, never gray.

@@ -57,7 +57,7 @@
                    420px 420px, 420px 420px, 700px 700px, 700px 700px, 700px 700px, 100% 100%;
   background-repeat: repeat, repeat, repeat, repeat, repeat, repeat, repeat,
                      repeat, repeat, repeat, no-repeat;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
 
 /* El halo. Va una vez, arriba, detrás del contenido de apertura. Dos halos son ninguno. */

@@ -51,7 +51,7 @@ accessibility:
   roles: "Structural containers. Use the real landmarks — <main>, <section>, <aside> for the rail — not divs with classes."
   aria: ["The section index is decorative when the heading already names the section: mark it aria-hidden=true so a screen reader does not read '02 slash 05' before every title"]
   focus: "No focusable elements of its own."
-  contrast: "The overline uses --text-muted, which meets AA in both themes (8.39:1 light, 6.44:1 dark on card)."
+  contrast: "The overline uses --on-surface-variant, which meets AA in both themes (8.39:1 light, 6.44:1 dark on card)."
 keyboard:
   - {keys: "—", action: "no interaction of its own"}
 responsive:
@@ -87,7 +87,7 @@ relationships:
     - {component: page-header, why: "page-header is the title block of a screen; this is the skeleton the whole page hangs from"}
 
 tokens:
-  color: [--text-muted, --color-secondary, --color-outline]
+  color: [--on-surface-variant, --secondary, --outline]
   spacing: [--space-8, --space-12, --space-20, --measure, --measure-lead]
   typography: [--font-heading, --font-size-overline, --line-height-overline, --letter-spacing-overline]
 

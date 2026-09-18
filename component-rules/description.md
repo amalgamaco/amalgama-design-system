@@ -36,17 +36,17 @@ layout_constraints:
   - "The title input is borderless and transparent, taking `flex: 1`. It must keep `min-width: 0` or a long title pushes the delete button out."
 
 states:
-  default: "Header on --bg, body on --card-bg, delete hidden."
+  default: "Header on --bg, body on --surface-container, delete hidden."
   hover: "The section reveals its delete button."
-  titleFocus: "The title input's text goes to --interactive, the only signal that it is editable."
-  bodyFocus: "A 2px inset --color-focus-ring on the editor."
-  empty: "The body shows `data-placeholder` via `:empty::before`, in --text-muted."
+  titleFocus: "The title input's text goes to --secondary, the only signal that it is editable."
+  bodyFocus: "A 2px inset --focus-ring on the editor."
+  empty: "The body shows `data-placeholder` via `:empty::before`, in --on-surface-variant."
 
 accessibility:
   roles: "The body is `contenteditable` and needs `role=\"textbox\"` with `aria-multiline=\"true\"`. The title is a real `<input>`."
   aria: ["aria-label on the title input ('Título de la sección')", "aria-label on the delete button naming what it removes ('Eliminar sección Responsabilidades')", "The body's accessible name comes from the title input via aria-labelledby"]
   focus: "**The delete button appears on hover only, which hides it from keyboard users.** It must also become visible on `:focus-within` of the section. A control reachable only with a mouse is a defect, not a style."
-  contrast: "The placeholder uses --text-muted, AA for body text. The focus ring meets 3:1 against the editor surface."
+  contrast: "The placeholder uses --on-surface-variant, AA for body text. The focus ring meets 3:1 against the editor surface."
 keyboard:
   - {keys: "Tab", action: "title → body → delete, then on to the next section"}
   - {keys: "Enter (in the title)", action: "moves to the body; it does not submit the surrounding form"}
@@ -82,7 +82,7 @@ relationships:
     - {component: card, why: "a card groups content for display; this one is authored in place"}
 
 tokens:
-  color: [--border, --bg, --card-bg, --text-primary, --text-muted, --interactive, --color-focus-ring, --color-error-container, --color-on-error-container]
+  color: [--border, --bg, --surface-container, --on-surface, --on-surface-variant, --secondary, --focus-ring, --error-container, --on-error-container]
   radius: [--radius-md]
   spacing: ["16px section margin", "10px 12px 10px 16px header padding", "14px 16px editor padding", "100px min-height"]
   typography: [--font-size-body-md]

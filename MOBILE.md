@@ -335,7 +335,7 @@ dispositivo. Para eso hace falta el simulador.
 Del lado Flutter hay algo mejor que nuestro CSS: **`@material/web`**, la implementación en web
 components de Material 3 que hace Google. Se carga por CDN, sin build, y **no hay puente que
 escribir** — `css/md-sys-bridge.css` ya expone los 36 roles `--md-sys-color-*` como alias de los
-`--color-*` de Embassy, que es exactamente lo que Material Web lee. El archivo se había escrito en
+los roles semánticos de Embassy, que es exactamente lo que Material Web lee. El archivo se había escrito en
 junio 2026 anticipando esto y quedó sin usarse hasta ahora.
 
 ```html
@@ -399,8 +399,8 @@ falla con nombre.
 
 **1 · La jerarquía la hace la superficie, no la línea** (`M10`)
 Escalón 2 de la escalera de separación (`COMPOSICION.md` Parte I §D), aplicado acá: el fondo de
-la pantalla es `--color-surface`; cada bloque de contenido va en `--color-surface-container` con
-`--screen-radius` y un borde de 1px en `--color-outline-variant`. Un `<hr>` separando secciones
+la pantalla es `--surface`; cada bloque de contenido va en `--surface-container` con
+`--screen-radius` y un borde de 1px en `--outline-variant`. Un `<hr>` separando secciones
 es un reflejo de web.
 
 **2 · Lo que es una lista va en una lista agrupada** (`M11`)
@@ -410,7 +410,7 @@ donde arranca el texto: `margin-left` igual al padding de la tarjeta, no a sangr
 sangre corta la tarjeta en dos; uno insetado la lee como una lista.
 
 **3 · El header de sección va afuera del grupo** (`M12`)
-`--font-size-caption`, peso 600, `--text-muted`, 8px de aire abajo, alineado al borde del grupo.
+`--font-size-caption`, peso 600, `--on-surface-variant`, 8px de aire abajo, alineado al borde del grupo.
 No es un `heading-md` adentro de la tarjeta: adentro compite con los datos y gana la etiqueta,
 que es justamente lo que no queremos. Si la sección tiene una acción de escape ("Ver todas"),
 va en esa misma línea, a la derecha.
@@ -420,9 +420,9 @@ Alto mínimo 52 —`--row-height` es el piso de 48, una fila de lista respira un
 izquierda a derecha: ícono guía opcional, la etiqueta, y el dato a la derecha.
 
 **Los dos van al mismo tamaño —`--font-size-label`, 15— y los separa el peso, no el cuerpo:**
-etiqueta en 400 sobre `--text-muted`, dato en **600** sobre `--text-primary`. Es importante que
+etiqueta en 400 sobre `--on-surface-variant`, dato en **600** sobre `--on-surface`. Es importante que
 sea así y no con dos tamaños distintos: el color solo no alcanza. Medido, la distancia entre
-`--text-muted` y `--text-primary` es 3.10:1, y aclarar el gris hasta el techo de AA sobre el fondo
+`--on-surface-variant` y `--on-surface` es 3.10:1, y aclarar el gris hasta el techo de AA sobre el fondo
 solo la lleva a 3.29 — el salto que falta lo da el peso. Dos tamaños distintos en la misma fila,
 en cambio, desalinean la línea base y la lista deja de leerse como tabla.
 
@@ -436,18 +436,18 @@ que no estaba escrito. Los pesos importan tanto como los tamaños.
 
 | Dónde | Token | Peso | Color |
 |---|---|---|---|
-| Título de la barra | `--font-size-heading-sm` · 17 | 600 | `--text-primary` |
-| Nombre en el ancla | `--font-size-heading-lg` · 22 | 600 | `--color-on-primary` |
+| Título de la barra | `--font-size-heading-sm` · 17 | 600 | `--on-surface` |
+| Nombre en el ancla | `--font-size-heading-lg` · 22 | 600 | `--on-primary` |
 | Meta bajo el nombre | `--font-size-caption` · 13 | 400 | apagado sobre el ancla |
 | Pill de estado | `--font-size-caption` · 13 | 600 | el container que corresponda |
-| Número principal | `--font-size-heading-xl` · 24 | 700 | `--color-on-primary` |
+| Número principal | `--font-size-heading-xl` · 24 | 700 | `--on-primary` |
 | Su unidad | `--font-size-label` · 15 | 500 | apagado |
-| Monto en una tarjeta | `--font-size-heading-md` · 20 | 700 | `--text-primary` |
-| Header de sección | `--font-size-caption` · 13 | 600 | `--text-muted` |
-| **Etiqueta de fila** | `--font-size-label` · 15 | **400** | `--text-muted` |
-| **Dato de fila** | `--font-size-label` · 15 | **600** | `--text-primary` |
-| Acción secundaria en línea («Ver», «Ver todas») | `--font-size-caption` · 13 | 600 | `--text-primary` |
-| Botón primario | `--font-size-body-md` · 16 | 600 | `--color-on-primary` |
+| Monto en una tarjeta | `--font-size-heading-md` · 20 | 700 | `--on-surface` |
+| Header de sección | `--font-size-caption` · 13 | 600 | `--on-surface-variant` |
+| **Etiqueta de fila** | `--font-size-label` · 15 | **400** | `--on-surface-variant` |
+| **Dato de fila** | `--font-size-label` · 15 | **600** | `--on-surface` |
+| Acción secundaria en línea («Ver», «Ver todas») | `--font-size-caption` · 13 | 600 | `--on-surface` |
+| Botón primario | `--font-size-body-md` · 16 | 600 | `--on-primary` |
 
 El botón primario va a `--control-height` (48) y a `--radius-button`, que en nativo el bloque
 `[data-platform="native"]` declara en **14**: a 8 se lee como un botón de escritorio pegado
@@ -465,8 +465,8 @@ acción primaria; dibujarla a 36 y dejarla ahí es `M2`, que es bloqueante. Las 
 frecuentes y las dos están mal.
 
 **5 · Arriba va un ancla, con la superficie invertida**
-Identidad y estado entran juntos en un bloque de `--color-primary` con texto en
-`--color-on-primary` y el acento en `--color-primary-container`. Adentro: avatar, nombre en
+Identidad y estado entran juntos en un bloque de `--primary` con texto en
+`--on-primary` y el acento en `--primary-container`. Adentro: avatar, nombre en
 `--font-size-heading-lg`, una línea de meta en `--font-size-caption`, el estado como pill, y el
 número que de verdad importa con su barra de progreso. Ese bloque es lo que hace que la pantalla
 se lea como una app y no como un documento: da un punto de entrada antes del contenido, y
@@ -484,7 +484,7 @@ pantalla — ver 6d.
 
 **8 · El ícono es wayfinding, no decoración**
 Un ícono al principio de una fila ayuda a encontrarla en una lista larga: 18–20px con
-`--icon-stroke`, dentro de un contenedor de 36 en `--color-*-container`. Un ícono arriba del
+`--icon-stroke`, dentro de un contenedor de 36 en un rol `*-container`. Un ícono arriba del
 título de cada tarjeta, en cambio, es `H8` y sigue siéndolo en un teléfono.
 
 ### 6c. El bloque de decisión, antes de maquetar
@@ -521,7 +521,7 @@ declarada era la que menos se parecía a una app.
 En nativo la identidad vive en otras tres cosas, y alcanzan:
 
 - **El color**, sobre todo el bloque ancla invertido: una pantalla que abre con
-  `--color-primary` a sangre ya dice de quién es antes de que se lea una palabra.
+  `--primary` a sangre ya dice de quién es antes de que se lea una palabra.
 - **La tipografía**: `--font-heading` en el nombre y en los números, `--font-body` en todo lo
   demás. El par ya es reconocible.
 - **La densidad y el radio**: los ocho tokens `--screen-*` de §6e. Dos apps con la misma

@@ -9,7 +9,7 @@
    Dependencia: variables.css
    Requiere: (ninguno) — la barra indicadora animada usa JS mínimo (ver js/components.js).
 
-   Selected-state token: usa --color-secondary, NUNCA --color-primary — Primary
+   Selected-state token: usa --secondary, NUNCA --primary — Primary
    se invierte a blanco en dark mode, lo que en un indicador de selección pasivo
    se lee como "sin color" y rompe la consistencia visual con el resto de los
    estados seleccionados de la librería (Chip, Segmented Button — familia
@@ -37,7 +37,7 @@
   padding: 11px var(--space-5);
   font-size: var(--font-size-body-md);
   font-family: inherit;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -47,16 +47,16 @@
   white-space: nowrap;
   user-select: none;
 }
-.tab:hover { color: var(--color-on-surface); }
+.tab:hover { color: var(--on-surface); }
 .tab:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
-.tab:active { color: var(--color-secondary-text); }
+.tab:active { color: var(--secondary-text); }
 .tab.active,
 .tab[aria-selected="true"] {
-  color: var(--color-secondary-text);
+  color: var(--secondary-text);
   font-weight: 600;
 }
 .tab:disabled {
@@ -74,7 +74,7 @@
   bottom: 0;
   left: 0;
   height: 2px;
-  background: var(--color-secondary);
+  background: var(--secondary);
   transition: transform var(--duration-normal, 220ms) var(--ease-expressive, ease-out),
               width var(--duration-normal, 220ms) var(--ease-expressive, ease-out);
   pointer-events: none;
@@ -93,7 +93,7 @@
   padding: var(--space-1);
   border-bottom: none;
   border-radius: var(--radius-md);
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
 }
 .tabs-pill .tab {
   border-bottom: none;
@@ -103,8 +103,8 @@
 }
 .tabs-pill .tab.active,
 .tabs-pill .tab[aria-selected="true"] {
-  background: var(--color-surface-container);
-  color: var(--color-on-surface);
+  background: var(--surface-container);
+  color: var(--on-surface);
   box-shadow: var(--shadow-sm);
 }
 .tabs-pill .tab-indicator { display: none; }
@@ -127,5 +127,5 @@
   text-align: left;
 }
 .tabs-vertical .tab.active,
-.tabs-vertical .tab[aria-selected="true"] { border-right-color: var(--color-secondary); }
+.tabs-vertical .tab[aria-selected="true"] { border-right-color: var(--secondary); }
 .tabs-vertical .tab-indicator { display: none; }

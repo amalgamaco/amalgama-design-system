@@ -7,7 +7,7 @@
    Reemplaza a: sliders custom hechos con <div> + drag handlers a mano.
 
    Dependencia: variables.css (Color Roles)
-   Pista en --color-surface-variant, rango activo y thumb en --color-primary.
+   Pista en --surface-variant, rango activo y thumb en --primary.
 
    Implementación: <input type="range"> nativo — drag físico, teclado
    (flechas, Home/End, Page Up/Down) y semántica de foco vienen gratis del
@@ -42,14 +42,14 @@
   right: 0;
   height: 4px;
   border-radius: var(--radius-full);
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
   pointer-events: none;
 }
 .slider-range {
   position: absolute;
   height: 4px;
   border-radius: var(--radius-full);
-  background: var(--color-primary);
+  background: var(--primary);
   pointer-events: none;
 }
 
@@ -81,8 +81,8 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-primary);
-  border: 2px solid var(--color-surface-container);
+  background: var(--primary);
+  border: 2px solid var(--surface-container);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
   transition: box-shadow var(--duration-fast) var(--ease-default);
@@ -92,19 +92,19 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-primary);
-  border: 2px solid var(--color-surface-container);
+  background: var(--primary);
+  border: 2px solid var(--surface-container);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
   transition: box-shadow var(--duration-fast) var(--ease-default);
 }
 .slider-input:focus-visible::-webkit-slider-thumb,
 .slider-input:hover:not(:disabled)::-webkit-slider-thumb {
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .slider-input:focus-visible::-moz-range-thumb,
 .slider-input:hover:not(:disabled)::-moz-range-thumb {
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .slider-input:disabled::-webkit-slider-thumb,
 .slider-input:disabled::-moz-range-thumb {

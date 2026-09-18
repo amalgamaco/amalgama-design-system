@@ -8,7 +8,7 @@
    Reemplaza a: selects con búsqueda hechos a mano.
 
    Dependencia: variables.css (Color Roles), button.css (.btn-tertiary), command.css
-   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en
+   Consume EXCLUSIVAMENTE roles semánticos de color → funciona en
    light y dark sin overrides por tema.
 
    Uso:
@@ -32,7 +32,7 @@
   justify-content: space-between;
   font-weight: 400;
 }
-.combobox-trigger.is-placeholder { color: var(--color-on-surface-variant); }
+.combobox-trigger.is-placeholder { color: var(--on-surface-variant); }
 
 .combobox-chevron {
   display: inline-flex;
@@ -51,7 +51,7 @@
   z-index: 40;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   box-shadow: var(--shadow-md);
   overflow: hidden;
 }

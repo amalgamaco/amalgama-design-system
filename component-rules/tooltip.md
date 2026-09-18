@@ -70,7 +70,7 @@ relationships:
     - {component: popover, why: "Popover holds interactive/arbitrary content; tooltip is a passive label/preview"}
     - {component: dialog, why: "Dialog is modal/blocking; tooltip never blocks"}
 tokens:
-  color: [--color-inverse-surface, --color-inverse-on-surface, --color-surface-container, --color-on-surface]
+  color: [--inverse-surface, --inverse-on-surface, --surface-container, --on-surface]
   radius: [--radius-sm, --radius-md]
   motion: [--duration-fast, "0.4s hover-intent delay"]
 motion:

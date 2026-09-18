@@ -22,12 +22,12 @@
     display: flex; flex-direction: column; gap: 14px; flex: 1 1 340px; min-width: 300px; }
   .ds-anatomy li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
   .ds-anatomy li::before { counter-increment: a; content: counter(a);
-    font-family: var(--font-mono); font-size: 11px; color: var(--color-primary);
-    background: var(--color-primary-container); border-radius: 3px; padding: 3px 7px; margin-top: 2px; }
+    font-family: var(--font-mono); font-size: 11px; color: var(--primary);
+    background: var(--primary-container); border-radius: 3px; padding: 3px 7px; margin-top: 2px; }
   .ds-anatomy code { display: block; font-size: 12.5px; margin-bottom: 3px; }
-  .ds-anatomy span { display: block; font-size: 13.5px; line-height: 1.55; color: var(--color-on-surface-variant); }
+  .ds-anatomy span { display: block; font-size: 13.5px; line-height: 1.55; color: var(--on-surface-variant); }
   .ds-anatomy em { font-style: normal; font-family: var(--font-mono); font-size: 11.5px;
-    color: var(--color-error); }
+    color: var(--error); }
   .ds-rowpair { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
 </style>
 </head>
@@ -79,15 +79,15 @@
                   <div class="screen-section-header"><span>Asistencias</span><button class="screen-inline-action">Ver todas</button></div>
                   <div class="screen-group">
                     <div class="screen-item">
-                      <span class="screen-item-icon" style="background:var(--color-success-container)">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-on-success-container)" stroke-width="2" stroke-linecap="round"><path d="M6 8v8M18 8v8M2 11v2M22 11v2M6 12h12"></path></svg>
+                      <span class="screen-item-icon" style="background:var(--success-container)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--on-success-container)" stroke-width="2" stroke-linecap="round"><path d="M6 8v8M18 8v8M2 11v2M22 11v2M6 12h12"></path></svg>
                       </span>
                       <span class="screen-item-body"><span class="screen-item-title">Funcional</span><span class="screen-item-sub">Palermo</span></span>
                       <span class="screen-item-aside">13 sep<br>07:40</span>
                     </div>
                     <div class="screen-item">
-                      <span class="screen-item-icon" style="background:var(--color-primary-container)">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-on-primary-container)" stroke-width="2" stroke-linecap="round"><path d="M4 7v10M20 7v10M8 9v6M16 9v6M8 12h8"></path></svg>
+                      <span class="screen-item-icon" style="background:var(--primary-container)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--on-primary-container)" stroke-width="2" stroke-linecap="round"><path d="M4 7v10M20 7v10M8 9v6M16 9v6M8 12h8"></path></svg>
                       </span>
                       <span class="screen-item-body"><span class="screen-item-title">Musculación</span><span class="screen-item-sub">Palermo</span></span>
                       <span class="screen-item-aside">11 sep<br>19:15</span>
@@ -100,7 +100,7 @@
           </figure>
 
           <ol class="ds-anatomy">
-            <li><code>.screen</code><span>Una columna, <code>--screen-gutter</code> a los lados, la acción afuera del scroll. El fondo es <code>--color-surface</code> y los bloques <code>--color-surface-container</code>: <strong>ese escalón es lo que agrupa</strong>, y por eso no hay ni un <code>&lt;hr&gt;</code>. <em>M10</em></span></li>
+            <li><code>.screen</code><span>Una columna, <code>--screen-gutter</code> a los lados, la acción afuera del scroll. El fondo es <code>--surface</code> y los bloques <code>--surface-container</code>: <strong>ese escalón es lo que agrupa</strong>, y por eso no hay ni un <code>&lt;hr&gt;</code>. <em>M10</em></span></li>
             <li><code>.screen-anchor</code><span>Lo único invertido. Concentra identidad y estado antes del contenido — y redefine los roles adentro, así el <code>badge</code> y el <code>progress</code> se retiñen solos sin variantes nuevas. Una sola por pantalla.</span></li>
             <li><code>.screen-section-header</code><span>Afuera del grupo, en <code>caption</code> apagado. Adentro y en escala de heading compite con los datos y gana la etiqueta. <em>M12</em></span></li>
             <li><code>.screen-group</code><span>Sin borde: el escalón ya dibujó el límite. El divisor va sólo entre filas y arranca donde arranca el texto, nunca a sangre. <em>M11</em></span></li>
@@ -118,16 +118,16 @@
         <div class="ds-rowpair">
           <div>
             <p class="phone-caption"><strong>M13</strong> — la etiqueta pesa más</p>
-            <div data-platform="native" style="background:var(--color-surface);padding:16px;border-radius:var(--radius-xl)">
+            <div data-platform="native" style="background:var(--surface);padding:16px;border-radius:var(--radius-xl)">
               <div class="screen-group">
-                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--color-on-surface)">Modalidad</span><span style="font-size:var(--font-size-body-sm);color:var(--color-on-surface-variant)">Full anual</span></div>
-                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--color-on-surface)">Accesos</span><span style="font-size:var(--font-size-body-sm);color:var(--color-on-surface-variant)">3 por semana</span></div>
+                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--on-surface)">Modalidad</span><span style="font-size:var(--font-size-body-sm);color:var(--on-surface-variant)">Full anual</span></div>
+                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--on-surface)">Accesos</span><span style="font-size:var(--font-size-body-sm);color:var(--on-surface-variant)">3 por semana</span></div>
               </div>
             </div>
           </div>
           <div>
             <p class="phone-caption"><strong>Correcto</strong> — mismo cuerpo, 400 contra 600</p>
-            <div data-platform="native" style="background:var(--color-surface);padding:16px;border-radius:var(--radius-xl)">
+            <div data-platform="native" style="background:var(--surface);padding:16px;border-radius:var(--radius-xl)">
               <div class="screen-group">
                 <div class="screen-row"><span class="screen-row-label">Modalidad</span><span class="screen-row-value">Full anual</span></div>
                 <div class="screen-row"><span class="screen-row-label">Accesos</span><span class="screen-row-value">3 por semana</span></div>
@@ -144,16 +144,16 @@
           <thead><tr><th>Dónde</th><th>Token</th><th>Peso</th><th>Color</th></tr></thead>
           <tbody>
             <tr><td>Título de la barra</td><td><code>--font-size-heading-sm</code> · 17</td><td>600</td><td><code>--text-primary</code></td></tr>
-            <tr><td>Nombre en el ancla</td><td><code>--font-size-heading-lg</code> · 22</td><td>600</td><td><code>--color-on-primary</code></td></tr>
+            <tr><td>Nombre en el ancla</td><td><code>--font-size-heading-lg</code> · 22</td><td>600</td><td><code>--on-primary</code></td></tr>
             <tr><td>Meta bajo el nombre</td><td><code>--font-size-caption</code> · 13</td><td>400</td><td>apagado sobre el ancla</td></tr>
             <tr><td>Badge de estado</td><td><code>--font-size-caption</code> · 13</td><td>600</td><td>el container que corresponda</td></tr>
-            <tr><td>Número principal</td><td><code>--font-size-heading-xl</code> · 24</td><td>700</td><td><code>--color-on-primary</code></td></tr>
+            <tr><td>Número principal</td><td><code>--font-size-heading-xl</code> · 24</td><td>700</td><td><code>--on-primary</code></td></tr>
             <tr><td>Monto en una tarjeta</td><td><code>--font-size-heading-md</code> · 20</td><td>700</td><td><code>--text-primary</code></td></tr>
             <tr><td>Header de sección</td><td><code>--font-size-caption</code> · 13</td><td>600</td><td><code>--text-muted</code></td></tr>
             <tr><td><strong>Etiqueta de fila</strong></td><td><code>--font-size-label</code> · 15</td><td><strong>400</strong></td><td><code>--text-muted</code></td></tr>
             <tr><td><strong>Dato de fila</strong></td><td><code>--font-size-label</code> · 15</td><td><strong>600</strong></td><td><code>--text-primary</code></td></tr>
             <tr><td>Acción secundaria en línea</td><td><code>--font-size-caption</code> · 13</td><td>600</td><td><code>--text-primary</code></td></tr>
-            <tr><td>Botón primario</td><td><code>--font-size-body-md</code> · 16</td><td>600</td><td><code>--color-on-primary</code></td></tr>
+            <tr><td>Botón primario</td><td><code>--font-size-body-md</code> · 16</td><td>600</td><td><code>--on-primary</code></td></tr>
           </tbody>
         </table>
       </div>

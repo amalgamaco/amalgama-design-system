@@ -35,12 +35,12 @@ layout_constraints:
   - "Place the label before the switch in a settings row; the switch sits to the right/trailing edge."
 
 states:
-  default: "Unchecked: surface-variant track, --color-outline border + thumb."
-  hover: "Track border darkens to --color-on-surface."
-  focus: "focus-visible ring (--color-focus + --color-focus-ring outline)."
-  checked: "Filled --color-primary track, thumb slides right and turns --color-on-primary."
+  default: "Unchecked: surface-variant track, --outline border + thumb."
+  hover: "Track border darkens to --on-surface."
+  focus: "focus-visible ring (--focus + --focus-ring outline)."
+  checked: "Filled --primary track, thumb slides right and turns --on-primary."
   disabled: "40% opacity, not-allowed cursor, not focusable."
-  error: "aria-invalid=\"true\" (unchecked only) → red track border via --color-error."
+  error: "aria-invalid=\"true\" (unchecked only) → red track border via --error."
 
 accessibility:
   roles: "Native <input type=\"checkbox\"> with role=\"switch\"; SRs announce 'activado/desactivado' instead of 'marcado'."
@@ -76,7 +76,7 @@ relationships:
     - {component: radio-group, why: "radio picks one of several; switch is a single binary"}
 
 tokens:
-  color: [--color-primary, --color-on-primary, --color-surface-variant, --color-outline, --color-on-surface, --color-error]
+  color: [--primary, --on-primary, --surface-variant, --outline, --on-surface, --error]
   radius: [--radius-full]
   motion: [--duration-fast, --duration-normal, --ease-expressive]
 

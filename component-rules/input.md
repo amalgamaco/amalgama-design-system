@@ -39,11 +39,11 @@ layout_constraints:
   - "Error message + char count live in .field-supporting directly below the field."
 
 states:
-  default: "1px --border, --card-bg background."
-  hover: "Border darkens to --color-outline (not on focus/disabled)."
-  focus: "Border --interactive + 3px --color-focus-ring; the label turns --interactive."
-  disabled: "--color-disabled bg, --color-on-disabled text, not-allowed cursor."
-  error: "aria-invalid or .field-group.is-error → --color-error border, red label, --color-error-ring on focus; hint hidden, error message shown."
+  default: "1px --border, --surface-container background."
+  hover: "Border darkens to --outline (not on focus/disabled)."
+  focus: "Border --secondary + 3px --focus-ring; the label turns --secondary."
+  disabled: "--disabled bg, --on-disabled text, not-allowed cursor."
+  error: "aria-invalid or .field-group.is-error → --error border, red label, --error-ring on focus; hint hidden, error message shown."
 
 accessibility:
   roles: "Native <input>; associate the label via wrapping .field-group or for/id."
@@ -80,7 +80,7 @@ relationships:
     - {component: select, why: "select picks from a fixed list; input is free-form"}
 
 tokens:
-  color: [--border, --card-bg, --text-primary, --interactive, --color-focus-ring, --color-error, --color-error-ring, --text-muted]
+  color: [--border, --surface-container, --on-surface, --secondary, --focus-ring, --error, --error-ring, --on-surface-variant]
   radius: [--radius-md]
   typography: [--font-size-body-md, --font-size-label, --font-size-caption]
   motion: [--duration-fast]
@@ -88,7 +88,7 @@ tokens:
 motion:
   enter: "none — always present (static form field)."
   exit: "none."
-  stateChange: "Hover: border-color→--color-outline (more prominent than the resting --color-outline-variant). Focus-visible: border→--interactive + 3px --color-focus-ring box-shadow, and the field label recolors to --interactive via :focus-within. Error (is-error / aria-invalid): border→--color-error, focus ring→--color-error-ring. All of these transition on border-color + box-shadow."
+  stateChange: "Hover: border-color→--outline (more prominent than the resting --outline-variant). Focus-visible: border→--secondary + 3px --focus-ring box-shadow, and the field label recolors to --secondary via :focus-within. Error (is-error / aria-invalid): border→--error, focus ring→--error-ring. All of these transition on border-color + box-shadow."
   duration: "--duration-fast"
   easing: "none specified — the transition lists only durations (border-color var(--duration-fast), box-shadow var(--duration-fast)) with no --ease-* token, so it falls back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override."

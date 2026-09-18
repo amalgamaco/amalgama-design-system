@@ -30,8 +30,8 @@ Readers scan in an **F-pattern** — top-left first, then across, then down. Pla
 
 | `trend` | Class | Token |
 |---|---|---|
-| `positive` | `text-success` | `--color-success` |
-| `negative` | `text-error` | `--color-error` |
+| `positive` | `text-success` | `--success` |
+| `negative` | `text-error` | `--error` |
 | `neutral` | `text-fg-muted` | neutral text |
 
 `trend` maps through `statChangeVariants`; the legacy `changeColor` prop is a `@deprecated` arbitrary-CSS escape hatch — do not use it. Note that direction ≠ sentiment: for tiempo promedio de contratación *going up is bad*, so a rising value is `trend="negative"`. Choose the trend by whether the change is good for the business, not by the arithmetic sign.
@@ -48,7 +48,7 @@ The page action sits at the right (`.toolbar-actions`): **Filled/Primary if it i
 
 Use `Chart` (`chart.tsx`, the Recharts wrapper) for series — trends over time or categorical comparisons. Reach for it only when the shape of data matters: a single number is a `StatCard`, exact values are a `Table`.
 
-- **Restrained, token-bound palette.** The default categorical palette is `--chart-1..5`, mapped to Embassy's secondary/tertiary/success/warning/info roles — **never `--color-primary`** (it flips to white in dark mode and reads as "no color" for a series, same rule as Tabs). Use as few series as the story needs.
+- **Restrained, token-bound palette.** The default categorical palette is `--chart-1..5`, mapped to Embassy's secondary/tertiary/success/warning/info roles — **never `--primary`** (it flips to white in dark mode and reads as "no color" for a series, same rule as Tabs). Use as few series as the story needs.
 - **Clear labels.** Axis ticks (`fill-fg-muted`), grid lines (`stroke-border`), and a `ChartLegendContent` / `ChartTooltipContent` so every mark is identifiable. Don't rely on color alone.
 - **Emphasize endpoints.** Draw the eye to the latest value / delta rather than decorating every point.
 - **Theme-aware for free.** `Chart` recalibrates via `[data-theme="dark"]` — never hardcode series colors per theme.
@@ -91,7 +91,7 @@ Whitespace is what makes a dense screen scannable. Use `--space-*` tokens for ev
 - **Do** give every widget a `Skeleton` loading state and an `EmptyState` no-data state.
 - **Do** separate widget groups with `--space-*` whitespace.
 - **Don't** use `changeColor` or any raw color for a trend — it bypasses the tokens.
-- **Don't** use `--color-primary` for a chart series (white in dark mode).
+- **Don't** use `--primary` for a chart series (white in dark mode).
 - **Don't** dump full detail onto the dashboard or crowd out whitespace to fit more.
 - **Don't** show a raw blank while data loads, or hardcode gaps / series colors / durations.
 
@@ -99,7 +99,7 @@ Whitespace is what makes a dense screen scannable. Use `--space-*` tokens for ev
 
 - [ ] Top row is a `StatsGrid` of `StatCard`s; the primary KPI is top-left, ~3–5 total.
 - [ ] Each `StatCard` change uses `trend` (token-bound), with direction judged by business impact.
-- [ ] Charts use `Chart` with the `--chart-1..5` palette (no `--color-primary`), labeled axes/legend, emphasized endpoints.
+- [ ] Charts use `Chart` with the `--chart-1..5` palette (no `--primary`), labeled axes/legend, emphasized endpoints.
 - [ ] Detail is reached via drill-down (`Dialog` / `Sheet` / navigation), not shown inline for every record.
 - [ ] Related widgets are grouped in `Card`s; arrangement is page-level CSS Grid with `--space-6` gaps.
 - [ ] Filter controls use the `Toolbar` `.toolbar-filters` variant (one field treatment), not a mix of filled fields and transparent pills.

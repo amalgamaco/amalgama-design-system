@@ -38,8 +38,8 @@ layout_constraints:
   - "Vertical carousels need a bounded height for snap to work."
 
 states:
-  default: "Native scroll-snap track; controls resting on --color-surface with --border + shadow."
-  hover: "Nav button fills to --color-surface-variant on hover."
+  default: "Native scroll-snap track; controls resting on --surface with --border + shadow."
+  hover: "Nav button fills to --surface-variant on hover."
   focus: "Controls are real <button>s with a visible focus ring (secondary role, not primary)."
   disabled: "Nav button at an end is dimmed (opacity ~30%) and inert."
 
@@ -78,14 +78,14 @@ relationships:
     - {component: table, why: "compare options in a grid/Table, not a carousel"}
 
 tokens:
-  color: [--color-surface, --border, --text-primary, --color-surface-variant]
+  color: [--surface, --border, --on-surface, --surface-variant]
   radius: [--radius-md, --radius-full]
   spacing: ["16px inter-item gap"]
 
 motion:
   enter: "none — items are present in the scroll track from the start (no entrance animation)."
   exit: "none."
-  stateChange: "Nav button background tint on hover (.carousel-btn:hover → --color-surface-variant); prev/next scroll the track via native scroll-behavior: smooth (scrollBy)."
+  stateChange: "Nav button background tint on hover (.carousel-btn:hover → --surface-variant); prev/next scroll the track via native scroll-behavior: smooth (scrollBy)."
   duration: "--duration-fast (nav button background); native smooth scroll for the track (no token)."
   easing: "--ease-default (nav button background); browser default for smooth scroll."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the same rule sets scroll-behavior: auto, so prev/next jump instantly instead of smooth-scrolling. If autoplay is ever added it must pause and honor reduced motion."

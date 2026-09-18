@@ -34,15 +34,15 @@ layout_constraints:
   - "It is a `<button>` when it pops client-side history and an `<a>` when it navigates to a real URL. Both keep this class."
 
 states:
-  default: "--text-secondary with the chevron, quiet against the page."
-  hover: "Darkens to --text-primary. No underline — the chevron already signals affordance."
-  focus: "2px --color-focus outline at 2px offset, plus a 4px --color-focus-ring halo."
+  default: "--on-surface-variant with the chevron, quiet against the page."
+  hover: "Darkens to --on-surface. No underline — the chevron already signals affordance."
+  focus: "2px --focus outline at 2px offset, plus a 4px --focus-ring halo."
 
 accessibility:
   roles: "A real <button> or <a>. Never a styled <div> — this is a navigation control and must be reachable."
   aria: ["The visible text is the accessible name; it already names the destination, so no aria-label is needed", "The chevron SVG carries aria-hidden=true"]
   focus: "Visible focus ring, never removed. It is usually the first focusable element on the page, so its ring matters more than most."
-  contrast: "--text-secondary on the page background meets AA in both themes; hover raises it further."
+  contrast: "--on-surface-variant on the page background meets AA in both themes; hover raises it further."
 keyboard:
   - {keys: "Tab", action: "reaches it — typically first in the view"}
   - {keys: "Enter / Space", action: "navigates (Space only when it is a <button>)"}
@@ -73,7 +73,7 @@ relationships:
     - {component: tabs, why: "tabs switch between sibling views; this goes up a level"}
 
 tokens:
-  color: [--text-secondary, --text-primary, --color-focus, --color-focus-ring]
+  color: [--on-surface-variant, --on-surface, --focus, --focus-ring]
   spacing: ["6px gap", "6px margin-bottom"]
   typography: [--font-size-body-md]
 

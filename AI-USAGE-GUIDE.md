@@ -59,7 +59,7 @@ If migrating a legacy element, look it up in `MIGRATION.md`'s legacy→DS mappin
 
 ### (d) Style ONLY via tokens — `css/variables.css`
 
-**Tokens are the law.** Every color → `var(--color-*)` or a semantic alias
+**Tokens are the law.** Every color → `var(--<role>)`
 (`--accent`, `--bg`, `--border`); every radius → `var(--radius-*)`; every shadow →
 `var(--shadow-*)`; every spacing → `var(--space-*)`; every `font-size` → a
 `--font-size-*` token; fonts → `var(--font-body|--font-heading|--font-mono)`. **Never a
@@ -184,7 +184,7 @@ The Markdown body's **Correct / Incorrect usage** snippets are copy-adaptable re
 These are refusals, not preferences. They come from `GOVERNANCE.md` §§1–6, `CLAUDE.md`,
 and the per-component `common_mistakes`.
 
-- **No raw hex / raw px** when a token exists. Color → `var(--color-*)`; radius →
+- **No raw hex / raw px** when a token exists. Color → `var(--<role>)`; radius →
   `var(--radius-*)`; font-size → `--font-size-*`; spacing → `var(--space-*)`. The only
   sanctioned computed values are `color-mix()` expressions built from Color Roles.
 - **No second `btn-primary` in one context.** Exactly one primary; the rest step down.
@@ -199,7 +199,7 @@ and the per-component `common_mistakes`.
   blocks in a component). Dark mode is automatic via semantic tokens; needing an override
   means the wrong token was chosen.
 - **No primitive tokens in component code** (`--primary-900`, `--neutral-100`) — always
-  go through a Color Role (`--color-primary`).
+  go through a Color Role (`--primary`).
 - **Never ignore `prefers-reduced-motion`**, and never remove the focus-visible ring.
 
 ---

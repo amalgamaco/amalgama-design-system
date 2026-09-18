@@ -3,16 +3,16 @@
    ───────────────────────────────────────────────────────────────────
    Expone los nombres de token de SISTEMA de Material Design 3
    (--md-sys-color-*) como alias de los roles semánticos Embassy
-   (--color-*). Permite que cualquier componente escrito con la
+   (--primary, --surface, --on-surface…). Permite que cualquier componente escrito con la
    nomenclatura MD3 nativa (p. ej. el prototipo segmented-button.proto.css,
    o componentes de @material/web) resuelva contra la PALETA EMBASSY.
 
    Dirección del flujo (Embassy = única fuente de verdad):
        paleta Embassy (--secondary-200)
-         → rol Embassy (--color-secondary-container)
+         → rol Embassy (--secondary-container)
            → nombre MD3 (--md-sys-color-secondary-container)   ← este archivo
 
-   THEME-AWARE GRATIS: los roles --color-* ya se recalibran en
+   THEME-AWARE GRATIS: los roles Embassy ya se recalibran en
    [data-theme="dark"] (variables.css). Como el bridge apunta al rol, NO
    necesita override en dark — hereda la recalibración automáticamente.
 
@@ -25,55 +25,55 @@
 
 :root {
   /* Primary */
-  --md-sys-color-primary:                 var(--color-primary);
-  --md-sys-color-on-primary:              var(--color-on-primary);
-  --md-sys-color-primary-container:       var(--color-primary-container);
-  --md-sys-color-on-primary-container:    var(--color-on-primary-container);
+  --md-sys-color-primary:                 var(--primary);
+  --md-sys-color-on-primary:              var(--on-primary);
+  --md-sys-color-primary-container:       var(--primary-container);
+  --md-sys-color-on-primary-container:    var(--on-primary-container);
 
   /* Secondary */
-  --md-sys-color-secondary:               var(--color-secondary);
-  --md-sys-color-on-secondary:            var(--color-on-secondary);
-  --md-sys-color-secondary-container:     var(--color-secondary-container);
-  --md-sys-color-on-secondary-container:  var(--color-on-secondary-container);
+  --md-sys-color-secondary:               var(--secondary);
+  --md-sys-color-on-secondary:            var(--on-secondary);
+  --md-sys-color-secondary-container:     var(--secondary-container);
+  --md-sys-color-on-secondary-container:  var(--on-secondary-container);
 
   /* Tertiary */
-  --md-sys-color-tertiary:                var(--color-tertiary);
-  --md-sys-color-on-tertiary:             var(--color-on-tertiary);
-  --md-sys-color-tertiary-container:      var(--color-tertiary-container);
-  --md-sys-color-on-tertiary-container:   var(--color-on-tertiary-container);
+  --md-sys-color-tertiary:                var(--tertiary);
+  --md-sys-color-on-tertiary:             var(--on-tertiary);
+  --md-sys-color-tertiary-container:      var(--tertiary-container);
+  --md-sys-color-on-tertiary-container:   var(--on-tertiary-container);
 
   /* Error */
-  --md-sys-color-error:                   var(--color-error);
-  --md-sys-color-on-error:                var(--color-on-error);
-  --md-sys-color-error-container:         var(--color-error-container);
-  --md-sys-color-on-error-container:      var(--color-on-error-container);
+  --md-sys-color-error:                   var(--error);
+  --md-sys-color-on-error:                var(--on-error);
+  --md-sys-color-error-container:         var(--error-container);
+  --md-sys-color-on-error-container:      var(--on-error-container);
 
   /* Surface / Background */
-  --md-sys-color-surface:                 var(--color-surface);
-  --md-sys-color-surface-dim:             var(--color-surface-dim);
-  --md-sys-color-surface-bright:          var(--color-surface-bright);
-  --md-sys-color-surface-container-lowest: var(--color-surface-container-lowest);
-  --md-sys-color-surface-container-low:   var(--color-surface-container-low);
-  --md-sys-color-surface-container:       var(--color-surface-container);
-  --md-sys-color-surface-container-high:  var(--color-surface-container-high);
-  --md-sys-color-surface-container-highest: var(--color-surface-container-highest);
-  --md-sys-color-surface-variant:         var(--color-surface-variant);
-  --md-sys-color-on-surface:              var(--color-on-surface);
-  --md-sys-color-on-surface-variant:      var(--color-on-surface-variant);
-  --md-sys-color-background:              var(--color-surface);
-  --md-sys-color-on-background:           var(--color-on-surface);
+  --md-sys-color-surface:                 var(--surface);
+  --md-sys-color-surface-dim:             var(--surface-dim);
+  --md-sys-color-surface-bright:          var(--surface-bright);
+  --md-sys-color-surface-container-lowest: var(--surface-container-lowest);
+  --md-sys-color-surface-container-low:   var(--surface-container-low);
+  --md-sys-color-surface-container:       var(--surface-container);
+  --md-sys-color-surface-container-high:  var(--surface-container-high);
+  --md-sys-color-surface-container-highest: var(--surface-container-highest);
+  --md-sys-color-surface-variant:         var(--surface-variant);
+  --md-sys-color-on-surface:              var(--on-surface);
+  --md-sys-color-on-surface-variant:      var(--on-surface-variant);
+  --md-sys-color-background:              var(--surface);
+  --md-sys-color-on-background:           var(--on-surface);
 
   /* Outline */
-  --md-sys-color-outline:                 var(--color-outline);
-  --md-sys-color-outline-variant:         var(--color-outline-variant);
+  --md-sys-color-outline:                 var(--outline);
+  --md-sys-color-outline-variant:         var(--outline-variant);
 
   /* Inverse */
-  --md-sys-color-inverse-surface:         var(--color-inverse-surface);
-  --md-sys-color-inverse-on-surface:      var(--color-inverse-on-surface);
-  --md-sys-color-inverse-primary:         var(--color-inverse-primary);
+  --md-sys-color-inverse-surface:         var(--inverse-surface);
+  --md-sys-color-inverse-on-surface:      var(--inverse-on-surface);
+  --md-sys-color-inverse-primary:         var(--inverse-primary);
 
   /* Scrim / Shadow */
-  --md-sys-color-scrim:                   var(--color-scrim);
+  --md-sys-color-scrim:                   var(--scrim);
 
   /* ── Typography ──────────────────────────────────────────────
      @material/web components default their typescale font to 'Roboto'
@@ -101,66 +101,66 @@
 /* ── El mismo bloque, otra vez, para contenedores con tema propio ──────────
    La sustitución de una custom property se resuelve DONDE SE DECLARA. Con el
    bridge solo en :root, --md-sys-color-primary queda congelado con el valor
-   que --color-primary tenía ahí, y un <div data-theme="dark"> más abajo hereda
-   el valor ya calculado: el subárbol cambia los --color-* pero los --md-sys-*
+   que --primary tenía ahí, y un <div data-theme="dark"> más abajo hereda
+   el valor ya calculado: el subárbol cambia los roles Embassy pero los --md-sys-*
    no se enteran.
 
    A nivel documento (<html data-theme="dark">) nunca se notó, porque :root
-   sigue siendo html y ahí --color-primary ya es el de oscuro. Se ve apenas
+   sigue siendo html y ahí --primary ya es el de oscuro. Se ve apenas
    aparece un contenedor con tema propio — que es exactamente lo que hace la
    doc y lo que hace el preview de Flutter con @material/web. */
 [data-theme="dark"],
 [data-theme="light"] {
   /* Primary */
-  --md-sys-color-primary:                 var(--color-primary);
-  --md-sys-color-on-primary:              var(--color-on-primary);
-  --md-sys-color-primary-container:       var(--color-primary-container);
-  --md-sys-color-on-primary-container:    var(--color-on-primary-container);
+  --md-sys-color-primary:                 var(--primary);
+  --md-sys-color-on-primary:              var(--on-primary);
+  --md-sys-color-primary-container:       var(--primary-container);
+  --md-sys-color-on-primary-container:    var(--on-primary-container);
 
   /* Secondary */
-  --md-sys-color-secondary:               var(--color-secondary);
-  --md-sys-color-on-secondary:            var(--color-on-secondary);
-  --md-sys-color-secondary-container:     var(--color-secondary-container);
-  --md-sys-color-on-secondary-container:  var(--color-on-secondary-container);
+  --md-sys-color-secondary:               var(--secondary);
+  --md-sys-color-on-secondary:            var(--on-secondary);
+  --md-sys-color-secondary-container:     var(--secondary-container);
+  --md-sys-color-on-secondary-container:  var(--on-secondary-container);
 
   /* Tertiary */
-  --md-sys-color-tertiary:                var(--color-tertiary);
-  --md-sys-color-on-tertiary:             var(--color-on-tertiary);
-  --md-sys-color-tertiary-container:      var(--color-tertiary-container);
-  --md-sys-color-on-tertiary-container:   var(--color-on-tertiary-container);
+  --md-sys-color-tertiary:                var(--tertiary);
+  --md-sys-color-on-tertiary:             var(--on-tertiary);
+  --md-sys-color-tertiary-container:      var(--tertiary-container);
+  --md-sys-color-on-tertiary-container:   var(--on-tertiary-container);
 
   /* Error */
-  --md-sys-color-error:                   var(--color-error);
-  --md-sys-color-on-error:                var(--color-on-error);
-  --md-sys-color-error-container:         var(--color-error-container);
-  --md-sys-color-on-error-container:      var(--color-on-error-container);
+  --md-sys-color-error:                   var(--error);
+  --md-sys-color-on-error:                var(--on-error);
+  --md-sys-color-error-container:         var(--error-container);
+  --md-sys-color-on-error-container:      var(--on-error-container);
 
   /* Surface / Background */
-  --md-sys-color-surface:                 var(--color-surface);
-  --md-sys-color-surface-dim:             var(--color-surface-dim);
-  --md-sys-color-surface-bright:          var(--color-surface-bright);
-  --md-sys-color-surface-container-lowest: var(--color-surface-container-lowest);
-  --md-sys-color-surface-container-low:   var(--color-surface-container-low);
-  --md-sys-color-surface-container:       var(--color-surface-container);
-  --md-sys-color-surface-container-high:  var(--color-surface-container-high);
-  --md-sys-color-surface-container-highest: var(--color-surface-container-highest);
-  --md-sys-color-surface-variant:         var(--color-surface-variant);
-  --md-sys-color-on-surface:              var(--color-on-surface);
-  --md-sys-color-on-surface-variant:      var(--color-on-surface-variant);
-  --md-sys-color-background:              var(--color-surface);
-  --md-sys-color-on-background:           var(--color-on-surface);
+  --md-sys-color-surface:                 var(--surface);
+  --md-sys-color-surface-dim:             var(--surface-dim);
+  --md-sys-color-surface-bright:          var(--surface-bright);
+  --md-sys-color-surface-container-lowest: var(--surface-container-lowest);
+  --md-sys-color-surface-container-low:   var(--surface-container-low);
+  --md-sys-color-surface-container:       var(--surface-container);
+  --md-sys-color-surface-container-high:  var(--surface-container-high);
+  --md-sys-color-surface-container-highest: var(--surface-container-highest);
+  --md-sys-color-surface-variant:         var(--surface-variant);
+  --md-sys-color-on-surface:              var(--on-surface);
+  --md-sys-color-on-surface-variant:      var(--on-surface-variant);
+  --md-sys-color-background:              var(--surface);
+  --md-sys-color-on-background:           var(--on-surface);
 
   /* Outline */
-  --md-sys-color-outline:                 var(--color-outline);
-  --md-sys-color-outline-variant:         var(--color-outline-variant);
+  --md-sys-color-outline:                 var(--outline);
+  --md-sys-color-outline-variant:         var(--outline-variant);
 
   /* Inverse */
-  --md-sys-color-inverse-surface:         var(--color-inverse-surface);
-  --md-sys-color-inverse-on-surface:      var(--color-inverse-on-surface);
-  --md-sys-color-inverse-primary:         var(--color-inverse-primary);
+  --md-sys-color-inverse-surface:         var(--inverse-surface);
+  --md-sys-color-inverse-on-surface:      var(--inverse-on-surface);
+  --md-sys-color-inverse-primary:         var(--inverse-primary);
 
   /* Scrim / Shadow */
-  --md-sys-color-scrim:                   var(--color-scrim);
+  --md-sys-color-scrim:                   var(--scrim);
 
   /* ── Typography ──────────────────────────────────────────────
      @material/web components default their typescale font to 'Roboto'

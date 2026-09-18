@@ -39,15 +39,15 @@ layout_constraints:
 states:
   default: "Inactive tab: on-surface-variant text."
   hover: "Text darkens to on-surface."
-  focus: "focus-visible: 2px --color-focus outline + 4px --color-focus-ring halo, distinct from hover."
-  active: "--color-secondary text + weight 600 + the sliding indicator (never --color-primary, which inverts to white in dark)."
+  focus: "focus-visible: 2px --focus outline + 4px --focus-ring halo, distinct from hover."
+  active: "--secondary text + weight 600 + the sliding indicator (never --primary, which inverts to white in dark)."
   disabled: "opacity .4, no pointer events."
 
 accessibility:
   roles: "WAI-ARIA Tabs: role=tablist / role=tab / role=tabpanel."
   aria: ["aria-selected=true on the active tab", "aria-controls linking tab→panel", "aria-labelledby linking panel→tab", "hidden on inactive panels", "roving tabindex (active tab tabindex=0, others -1)"]
   focus: "Roving tabindex; the active state adds a 2px bottom border + medium weight, not color alone."
-  contrast: "--color-on-surface-variant / --color-secondary meet AA in light + dark; never override per theme."
+  contrast: "--on-surface-variant / --secondary meet AA in light + dark; never override per theme."
 keyboard:
   - {keys: "Arrow Left / Right", action: "move focus (and selection) between tabs"}
   - {keys: "Home / End", action: "focus the first / last tab"}
@@ -62,7 +62,7 @@ ux_principles:
 common_mistakes:
   - "Using tabs for page-level navigation."
   - "More than 5–6 tabs in one bar."
-  - "Using --color-primary for the active state (disappears in dark mode)."
+  - "Using --primary for the active state (disappears in dark mode)."
   - "Nesting tabs, or mixing icon and text-only tabs."
 nielsen_heuristics:
   - {id: 1, name: "Visibility of system status", note: "the indicator shows the current view"}
@@ -79,7 +79,7 @@ relationships:
     - {component: accordion, why: "Accordion stacks expandable sections; Tabs show one panel at a time"}
 
 tokens:
-  color: [--color-on-surface-variant, --color-on-surface, --color-secondary, --border, --color-focus, --color-focus-ring]
+  color: [--on-surface-variant, --on-surface, --secondary, --border, --focus, --focus-ring]
   radius: [--radius-md, --radius-sm]
   motion: [--duration-fast, --duration-normal, --ease-default, --ease-expressive]
 
@@ -125,7 +125,7 @@ source:
 *Fix:* use the sidebar Navigation for cross-page navigation; keep Tabs for views within one page.
 
 ```html
-<!-- ✕ Active state via --color-primary -->
-<button class="tab" style="color:var(--color-primary)">General</button>
+<!-- ✕ Active state via --primary -->
+<button class="tab" style="color:var(--primary)">General</button>
 ```
-*Fix:* use the `.active` class (`--color-secondary`); primary inverts to white in dark mode.
+*Fix:* use the `.active` class (`--secondary`); primary inverts to white in dark mode.

@@ -48,7 +48,7 @@ accessibility:
   roles: "Read-only by default. If the metric navigates to a detail, the interactive element must be a real link/button with its own visible focus."
   aria: ["role=group + aria-label on stats-grid", "aria-label giving the value context ('24 vacantes activas')", "text alternative for color trends"]
   focus: "The stat-card itself is not focusable (stat-card.css defines no focus state)."
-  contrast: "--text-primary / --text-muted and the state colors meet AA in light + dark; never override per theme."
+  contrast: "--on-surface / --on-surface-variant and the state colors meet AA in light + dark; never override per theme."
 keyboard:
   - {keys: "Tab", action: "only if a nested link/button is present; the tile itself is not focusable"}
 responsive:
@@ -79,7 +79,7 @@ relationships:
     - {component: chart, why: "Chart shows a trend over many points; Stat Card is one value + delta"}
 
 tokens:
-  color: [--card-bg, --border, --text-primary, --text-muted, --color-success-container, --color-on-success-container, --color-error-container, --color-on-error-container, --color-surface-variant, --color-on-surface-variant]
+  color: [--surface-container, --border, --on-surface, --on-surface-variant, --success-container, --on-success-container, --error-container, --on-error-container, --surface-variant, --on-surface-variant]
   radius: [--radius]
   spacing: ["20px padding", "16px grid gap"]
   typography: [--font-size-display, --font-size-body-sm, --font-size-caption]

@@ -1482,7 +1482,7 @@ Regla completa: `component-rules/tabs.md` · CSS: `css/components/tabs.css`
 ### `toast` — Snackbar · Feedback
 
 A floating, ephemeral, non-blocking message that confirms something already happened, with at most one recovery action.
-**Cuándo no:** confirmaciones que requieren decisión → usar Modal. Tokens Snackbar — familia inverse (auto-contraste en light y dark sin overrides): Contenedor       --color-inverse-surface       #0A0C12 claro / #EAEBED oscuro Texto mensaje    --color-inverse-on-surface     #EAEBED claro / #13161F oscuro Botón de acción  --color-inverse-primary        #4F80FF claro / #162F6F oscuro Presionado acc.  color-mix(inverse-primary 12%, inverse-surface)
+**Cuándo no:** confirmaciones que requieren decisión → usar Modal. Tokens Snackbar — familia inverse (auto-contraste en light y dark sin overrides): Contenedor       --inverse-surface       #0A0C12 claro / #EAEBED oscuro Texto mensaje    --inverse-on-surface     #EAEBED claro / #13161F oscuro Botón de acción  --inverse-primary        #4F80FF claro / #162F6F oscuro Presionado acc.  color-mix(inverse-primary 12%, inverse-surface)
 **Variantes:** message · action · close · multiline · static · queue
 **Tamaños:** single · multiline
 

@@ -39,12 +39,12 @@ states:
   default: "Resting tile with grab cursor."
   hover: "shadow-md, lifts 1px."
   dragging: "opacity .5 + slight rotate(2deg) while being dragged."
-  focus: "Needs tabindex=0; :focus-visible = 2px --color-focus + 4px --color-focus-ring."
+  focus: "Needs tabindex=0; :focus-visible = 2px --focus + 4px --focus-ring."
 accessibility:
   roles: "Clickable/draggable <div> — add tabindex=\"0\" and role=\"button\"; cards must be Tab-navigable and Enter/Space-actionable."
   aria: ['tabindex="0" on each card', "each column has an aria-label with its name + card count", "drag & drop needs a keyboard-accessible alternative (context menu or 'Mover a…' button)"]
   focus: "Keyboard-focusable; do not rely on drag alone — a mouse-only move is inaccessible (documented gap: CSS covers only mouse drag)."
-  contrast: "--text-primary/-muted and --border meet AA in light + dark; column (--color-surface-variant) vs card (--card-bg) surface hierarchy holds in both themes."
+  contrast: "--on-surface/-muted and --border meet AA in light + dark; column (--surface-variant) vs card (--surface-container) surface hierarchy holds in both themes."
 keyboard:
   - {keys: "Tab", action: "focus each card"}
   - {keys: "Enter / Space", action: "activate / open the card"}
@@ -73,7 +73,7 @@ relationships:
     - {component: table, why: "Table compares attributes across records; the board tracks stage"}
     - {component: item, why: "Basic Card is a generic compact row; Kanban Card adds drag/board semantics"}
 tokens:
-  color: [--card-bg, --border, --color-surface-variant, --color-primary-container, --text-primary, --text-muted]
+  color: [--surface-container, --border, --surface-variant, --primary-container, --on-surface, --on-surface-variant]
   radius: [--radius, --radius-md, --radius-full]
   shadow: [--shadow-md]
   motion: [--duration-fast]

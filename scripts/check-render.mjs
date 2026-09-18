@@ -335,8 +335,8 @@ const SONDA = (U) => {
   }
 
   /* ── M10 · la jerarquia la hace la superficie, no la linea ──────────────
-     MOBILE.md §6b·1: el fondo de la pantalla es --color-surface y cada bloque va
-     en --color-surface-container. Un <hr> separando secciones es un reflejo de
+     MOBILE.md §6b·1: el fondo de la pantalla es --surface y cada bloque va
+     en --surface-container. Un <hr> separando secciones es un reflejo de
      web; un bloque con borde pero el MISMO fondo que la pantalla tambien: esta
      dibujando el limite con una linea en vez de con el escalon. */
   for (const nat of document.querySelectorAll("[data-platform='native']")) {

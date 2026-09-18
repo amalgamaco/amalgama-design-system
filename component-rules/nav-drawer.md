@@ -35,15 +35,15 @@ layout_constraints:
 states:
   default: "Off-canvas (translateX(-100%)); scrim hidden."
   open: "Slides to translateX(0) with .app.nav-open; scrim visible; focus moved into the drawer."
-  hover: "Nav items use the shared blue-hover tokens (--color-nav-hover / -hover-content)."
-  active: "Current destination: --color-nav-selected background + weight 500 + aria-current=\"page\"."
+  hover: "Nav items use the shared blue-hover tokens (--nav-hover / -hover-content)."
+  active: "Current destination: --nav-selected background + weight 500 + aria-current=\"page\"."
   focus: "Use native <a>/<button> items so the browser focus ring is preserved (layout.css defines no custom :focus-visible for .nav-item)."
   reduced_motion: "prefers-reduced-motion drops the slide — the drawer just shows/hides."
 accessibility:
   roles: "The drawer is a <nav aria-label=\"Navegación principal\"> (role=navigation); groups use role=group + aria-labelledby."
   aria: ['aria-label on the <nav>', 'aria-current="page" on the active item', "hamburger has aria-label + aria-expanded + aria-controls pointing at the sidebar", 'role="group" + aria-labelledby on item groups']
   focus: "Opening moves focus into the drawer; Escape and scrim-click close; focus returns to the hamburger — same contract as Sheet/Dialog. Don't suppress the native outline."
-  contrast: "Tokens (--text-secondary, --color-nav-*, --interactive) recalibrate for dark automatically — never theme overrides. Active state is not color-only (weight 500 + aria-current reinforce it)."
+  contrast: "Tokens (--on-surface-variant, --nav-*, --secondary) recalibrate for dark automatically — never theme overrides. Active state is not color-only (weight 500 + aria-current reinforce it)."
 keyboard:
   - {keys: "Enter / Space (on hamburger)", action: "open the drawer"}
   - {keys: "Tab / Shift+Tab", action: "move through drawer items while open"}
@@ -74,7 +74,7 @@ relationships:
     - {component: sheet-side, why: "Side Sheet holds content (filters/detail); the drawer holds primary navigation"}
     - {component: navigation-menu, why: "Navigation Menu is flyout menus off a bar, not the app shell"}
 tokens:
-  color: [--color-nav-hover, --color-nav-selected, --color-scrim, --sidebar-bg, --border]
+  color: [--nav-hover, --nav-selected, --scrim, --surface-container, --border]
   spacing: [--sidebar-width]
   motion: [--duration-medium, --ease-default]
   shadow: [--shadow-lg]
@@ -128,6 +128,6 @@ source:
 
 ```html
 <!-- ✕ Active item styled by color only -->
-<a class="nav-item" style="color:var(--color-primary)" href="/vacantes">Vacantes</a>
+<a class="nav-item" style="color:var(--primary)" href="/vacantes">Vacantes</a>
 ```
 *Fix:* add `.active` (weight 500) + `aria-current="page"` so the state isn't color-only.

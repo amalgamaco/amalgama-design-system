@@ -30,7 +30,7 @@ content_rules:
   - "Include a CTA that helps the user leave the empty state whenever there is a next action."
   - "Use a Lucide icon or an illustration that reinforces the message without being condescending. Never an emoji (`H4`); the icon here is the case where the icon IS the content (COMPOSICION.md rule 5, placement 4)."
 layout_constraints:
-  - "Content is centered; title uses --text-secondary, description uses --text-muted."
+  - "Content is centered; title uses --on-surface-variant, description uses --on-surface-variant."
   - "The CTA is a single primary Button (its own states apply)."
 
 states:
@@ -40,7 +40,7 @@ accessibility:
   roles: "A content region in the natural reading flow; the title should be a heading at the level that fits the page outline."
   aria: ["aria-live=\"polite\" on the region when it appears after a search (announce the no-results outcome)", "descriptive label on the CTA (not 'Click aquí')"]
   focus: "The empty state itself is not focusable; the only focus stop is the CTA, which inherits Button's visible focus ring."
-  contrast: "--text-secondary / --text-muted meet AA in light + dark — never write per-theme overrides."
+  contrast: "--on-surface-variant / --on-surface-variant meet AA in light + dark — never write per-theme overrides."
 
 ux_principles:
   - "An empty state is an opportunity to guide, not a dead end — always offer a route forward (user control and freedom)."
@@ -65,7 +65,7 @@ relationships:
     - {component: placeholder, why: "Placeholder = feature under construction; Empty State = feature works but has no data"}
 
 tokens:
-  color: [--text-secondary, --text-muted]
+  color: [--on-surface-variant, --on-surface-variant]
   typography: [--font-heading, --font-size-heading-md, --font-size-body-lg]
   spacing: ["48px 24px container padding", "400px max description width"]
 

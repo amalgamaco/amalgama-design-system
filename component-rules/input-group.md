@@ -37,16 +37,16 @@ layout_constraints:
   - "Use the addon slots, not position:absolute hacks, to place icons/buttons."
 
 states:
-  default: "Container: 1px --border, --card-bg."
-  focus: "focus-within → --interactive border + 3px --color-focus-ring (ring is on the container, not the control)."
+  default: "Container: 1px --border, --surface-container."
+  focus: "focus-within → --secondary border + 3px --focus-ring (ring is on the container, not the control)."
   disabled: ".is-disabled / :disabled → 50% opacity, no pointer events."
-  error: "aria-invalid=true or .is-error → --color-error border; --color-error-ring on focus-within."
+  error: "aria-invalid=true or .is-error → --error border; --error-ring on focus-within."
 
 accessibility:
   roles: "Container is presentational; the inner <input>/<textarea> keeps native semantics. Addon buttons are real <button>s."
   aria: ["aria-invalid on the container for error", "aria-label/for on the inner control", "aria-label on icon-only addon buttons"]
   focus: "Focus lands on the inner control (and separately on any addon button); the visible ring is on the group."
-  contrast: "Addon text (--color-on-surface-variant) and error border meet AA in light + dark."
+  contrast: "Addon text (--on-surface-variant) and error border meet AA in light + dark."
 keyboard:
   - {keys: "Tab / Shift+Tab", action: "focus the control, then any addon button (separate stops)"}
   - {keys: "type / edit", action: "native text entry in the control"}
@@ -75,7 +75,7 @@ relationships:
     - {component: toolbar, why: "toolbar arranges independent controls; input-group is one field"}
 
 tokens:
-  color: [--border, --card-bg, --interactive, --color-focus-ring, --color-error, --color-error-ring, --color-on-surface-variant, --text-primary]
+  color: [--border, --surface-container, --secondary, --focus-ring, --error, --error-ring, --on-surface-variant, --on-surface]
   radius: [--radius-md]
   typography: [--font-size-body-md, --font-size-body-sm]
   motion: [--duration-fast]
@@ -83,7 +83,7 @@ tokens:
 motion:
   enter: "none — always present (static composite field)."
   exit: "none."
-  stateChange: "Focus and error live on the .input-group container, not the inner control. :focus-within: border→--interactive + 3px --color-focus-ring box-shadow. Error (aria-invalid / is-error): border→--color-error, focus→--color-error-ring. Disabled: opacity .5 (no transition). The inner control is borderless/transparent and inherits the container's focus visuals."
+  stateChange: "Focus and error live on the .input-group container, not the inner control. :focus-within: border→--secondary + 3px --focus-ring box-shadow. Error (aria-invalid / is-error): border→--error, focus→--error-ring. Disabled: opacity .5 (no transition). The inner control is borderless/transparent and inherits the container's focus visuals."
   duration: "--duration-fast"
   easing: "none specified — the container transition lists border-color/box-shadow with only a duration and no --ease-* token, falling back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override."

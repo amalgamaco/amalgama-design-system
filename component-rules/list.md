@@ -41,7 +41,7 @@ layout_constraints:
 states:
   default: "Row on surface; supporting text on-surface-variant."
   hover: "Actionable rows (button.list-item) get a surface-variant background."
-  focus: "button.list-item focus-visible: inset 2px --color-focus outline + inset 4px --color-focus-ring halo."
+  focus: "button.list-item focus-visible: inset 2px --focus outline + inset 4px --focus-ring halo."
   selected: "is-selected / aria-selected=true → secondary-container / on-secondary-container."
   disabled: "opacity .5, no pointer events."
 
@@ -49,7 +49,7 @@ accessibility:
   roles: "Semantic list via role=list with role=listitem; actionable items are real <button class=\"list-item\"> elements."
   aria: ["role=list / role=listitem", "aria-selected=true on a selected row", "aria-label on icon-only trailing controls"]
   focus: "Actionable items are keyboard-operable (Enter/Space) with a visible focus ring; meaning is never conveyed by position alone."
-  contrast: "--color-on-surface / --color-on-surface-variant meet AA in light + dark; never override per theme."
+  contrast: "--on-surface / --on-surface-variant meet AA in light + dark; never override per theme."
 keyboard:
   - {keys: "Tab", action: "focus each actionable item"}
   - {keys: "Enter / Space", action: "activate a focused actionable item"}
@@ -79,14 +79,14 @@ relationships:
     - {component: navigation-menu, why: "Navigation is app-level wayfinding; List is content"}
 
 tokens:
-  color: [--color-surface, --color-on-surface, --color-on-surface-variant, --color-surface-variant, --color-secondary-container, --color-on-secondary-container, --border, --color-focus, --color-focus-ring]
+  color: [--surface, --on-surface, --on-surface-variant, --surface-variant, --secondary-container, --on-secondary-container, --border, --focus, --focus-ring]
   spacing: ["12px 16px item padding", "56px min-height"]
   typography: [--font-size-body-md, --font-size-body-sm]
 
 motion:
   enter: "none — list items render statically; there is no per-item entrance animation."
   exit: "none"
-  stateChange: "Instant — no CSS transition is declared in list.css. Interactive rows (button.list-item) swap background on hover (--color-surface-variant) and on selection (--color-secondary-container / on-secondary-container); disabled rows drop to opacity .5. All applied with no timed transition."
+  stateChange: "Instant — no CSS transition is declared in list.css. Interactive rows (button.list-item) swap background on hover (--surface-variant) and on selection (--secondary-container / on-secondary-container); disabled rows drop to opacity .5. All applied with no timed transition."
   duration: "none — list.css declares no motion tokens"
   easing: "none"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — the hover/selection background changes are already instant."

@@ -20,7 +20,7 @@ use_cases:
 
 variants:
   - {name: default, class: date-picker, purpose: "Trigger plus docked panel; the trigger reuses .btn-tertiary."}
-  - {name: empty, class: date-picker-trigger-empty, purpose: "No date chosen yet — the trigger label drops to --text-muted so the placeholder reads as absence, not as a value."}
+  - {name: empty, class: date-picker-trigger-empty, purpose: "No date chosen yet — the trigger label drops to --on-surface-variant so the placeholder reads as absence, not as a value."}
 sizes:
   - {name: md, class: "(default)", use: "the only size; 240px fixed trigger width, 18px icon."}
 size_selection: "Single size by design. The 240px width is fixed so a row of date filters stays aligned and does not reflow when a date is chosen."
@@ -46,7 +46,7 @@ accessibility:
   roles: "The trigger is a real `<button>` with `aria-haspopup=\"dialog\"` and `aria-expanded`. The panel wraps the Calendar, which brings its own grid semantics."
   aria: ["aria-expanded on the trigger reflects the panel", "The trigger's accessible name states what date is being chosen, not just the value — 'Fecha de publicación, 17 de julio 2026'", "aria-hidden=true on the calendar icon"]
   focus: "Opening moves focus into the grid; choosing a date or pressing Escape returns focus to the trigger. Focus must never be lost to the body."
-  contrast: "The empty-state label uses --text-muted, which meets AA for body text. The panel border meets 3:1 against the surface."
+  contrast: "The empty-state label uses --on-surface-variant, which meets AA for body text. The panel border meets 3:1 against the surface."
 keyboard:
   - {keys: "Enter / Space", action: "opens the panel and moves focus into the calendar"}
   - {keys: "Escape", action: "closes the panel and returns focus to the trigger"}
@@ -82,7 +82,7 @@ relationships:
     - {component: combobox, why: "combobox filters a list by typing; there is no list of dates to filter"}
 
 tokens:
-  color: [--color-surface, --border, --text-muted]
+  color: [--surface, --border, --on-surface-variant]
   radius: [--radius-lg]
   spacing: ["12px panel padding", "8px trigger gap", "240px trigger width"]
   shadow: [--shadow-md]

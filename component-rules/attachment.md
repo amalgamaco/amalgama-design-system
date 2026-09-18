@@ -38,7 +38,7 @@ states:
   hover: "Remove icon-btn shows its own button hover state."
   focus: "focus-visible ring on the remove / action control."
   uploading: "Progress bar under the name reflects upload percent."
-  error: "Error border (--color-error) + error-container media background."
+  error: "Error border (--error) + error-container media background."
 accessibility:
   roles: "Semantic list (<ul>/<li>); remove is a real <button> (icon-btn)."
   aria: ["aria-label on the remove button", "role=progressbar + aria-valuenow on the upload progress"]
@@ -69,7 +69,7 @@ relationships:
     - {component: chip, why: "input chips are compact removable tokens; Attachment is a file row with metadata + progress"}
     - {component: input, why: "the <input type=file> does the picking; Attachment displays the result"}
 tokens:
-  color: [--color-surface-variant, --color-on-surface-variant, --color-error, --color-error-container, --color-primary]
+  color: [--surface-variant, --on-surface-variant, --error, --error-container, --primary]
   radius: [--radius-md, --radius-sm, --radius-full]
   spacing: ["10px 12px padding", "12px gap"]
 motion:

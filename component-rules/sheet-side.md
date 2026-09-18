@@ -77,7 +77,7 @@ relationships:
     - {component: sheet-bottom, why: "Bottom Sheet is the mobile-first, bottom-anchored variant"}
     - {component: nav-drawer, why: "Nav Drawer is primary navigation, not a content panel"}
 tokens:
-  color: [--color-surface, --color-scrim, --color-on-surface-variant, --color-outline-variant]
+  color: [--surface, --scrim, --on-surface-variant, --outline-variant]
   radius: ["0 0 16px 16px (top variant)"]
   motion: [--duration-sheet, --ease-emphasized]
   shadow: [--shadow-lg]

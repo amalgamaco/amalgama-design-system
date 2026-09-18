@@ -28,8 +28,8 @@
   --neutral-600: #282C39;
   --neutral-700: #1C202C;
   --neutral-750: #171B26; /* el escalon que faltaba entre 800 y 700 — sin el,
-                             --color-surface-container-low en dark resolvia al MISMO
-                             #13161F que --color-surface y un panel en ese token era
+                             --surface-container-low en dark resolvia al MISMO
+                             #13161F que --surface y un panel en ese token era
                              invisible salvo por su borde (medido sep 2026) */
   --neutral-800: #13161F;
   --neutral-900: #0A0C12;
@@ -155,21 +155,18 @@
      Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS
 
      Son primitivas, no roles: valores crudos de la marca, y ningún componente
-     los escribe. Se consumen por su rol (--color-accent-*, --text-prose), igual
+     los escribe. Se consumen por su rol (--accent-*), igual
      que ninguna pantalla escribe --primary-900.
 
      No son familias con rampa: el Manual define un valor por acento, no diez.
      Por eso no llevan número de paso.
   ───────────────────────────────────── */
-  --accent-hot-pink:      #FE566A;  /* Hot Pink      · 5.51:1 con navy encima */
-  --accent-chelo-yellow:  #FFC700;  /* Chelo Yellow  · 11.0:1 con navy encima */
-  --accent-kika-green:    #67B9A4;  /* Kika Green    · 7.28:1 con navy encima */
-  --accent-pink-sebiche:  #F1A7A3;  /* Pink Sebiche */
-  --accent-sky:           #49A4FF;  /* Sky / Data — pisa de cerca a --chart-1 */
-  --accent-lime:          #E0FF4F;  /* Lime — aparece una sola vez, como highlight */
-  /* «Ink»: el gris-carbón del Manual para prosa larga. No es un paso de la rampa
-     neutral —tiene otro tono— así que es una primitiva de marca y no un
-     --neutral-*. Su rol es --text-prose. */
+  --palette-accent-hot-pink:      #FE566A;  /* Hot Pink      · 5.51:1 con navy encima */
+  --palette-accent-chelo-yellow:  #FFC700;  /* Chelo Yellow  · 11.0:1 con navy encima */
+  --palette-accent-kika-green:    #67B9A4;  /* Kika Green    · 7.28:1 con navy encima */
+  --palette-accent-pink-sebiche:  #F1A7A3;  /* Pink Sebiche */
+  --palette-accent-sky:           #49A4FF;  /* Sky / Data — pisa de cerca a --chart-1 */
+  --palette-accent-lime:          #E0FF4F;  /* Lime — aparece una sola vez, como highlight */
 
   /* ─────────────────────────────────────
      Color Roles (semantic) — capa de uso
@@ -177,37 +174,37 @@
      Cada rol apunta a un primitivo de la paleta Embassy.
   ───────────────────────────────────── */
   /* Primary · Navy */
-  --color-primary:                   var(--primary-900);
-  --color-on-primary:                var(--neutral-white);
-  --color-primary-container:         var(--primary-60);
-  --color-on-primary-container:      var(--primary-900);
-  --color-primary-hover:             var(--primary-700);
+  --primary:                   var(--primary-900);
+  --on-primary:                var(--neutral-white);
+  --primary-container:         var(--primary-60);
+  --on-primary-container:      var(--primary-900);
+  --primary-hover:             var(--primary-700);
   /* Capa de estado de la variante de TEXTO: no es un fondo, es un velo de
      Primary sobre lo que haya atrás. Estaba escrita a mano en button.css como
      color-mix inline; el sitio la documenta como rol, así que vive acá. */
-  --color-primary-state-hover:       color-mix(in srgb, var(--color-primary) 10%, transparent);
-  --color-primary-state-press:       color-mix(in srgb, var(--color-primary) 16%, transparent);
+  --primary-state-hover:       color-mix(in srgb, var(--primary) 10%, transparent);
+  --primary-state-press:       color-mix(in srgb, var(--primary) 16%, transparent);
   /* Secondary · Agile Blue */
-  --color-secondary:                 var(--secondary-900);
+  --secondary:                 var(--secondary-900);
   /* Texto oscuro, no blanco. El acento en claro es un color vivo y saturado: blanco
      encima da 3.58:1 en Embassy y 3.26:1 en un verde de marca, o sea por debajo de AA
      para texto normal. Con primary-900 da 4.79:1 en Embassy y 5.11:1 en Nortia, y
      escala a cualquier marca porque el 900 de la rampa siempre es el paso más oscuro.
      En dark el rol ya usa secondary-950 sobre secondary-300 (6.45:1) y no cambia. */
-  --color-on-secondary:              var(--primary-900);
+  --on-secondary:              var(--primary-900);
   /* Container = secondary-200 + on = primary navy: el botón/chip Secondary
      (tonal) se diferencia del Primary por inversión (claro + texto navy). */
-  --color-secondary-container:       var(--secondary-200);
-  --color-on-secondary-container:    var(--primary-900);
+  --secondary-container:       var(--secondary-200);
+  --on-secondary-container:    var(--primary-900);
   /* Hover de la variante tonal. El sitio lo documenta como rol
      (Components · Buttons → Tokens y especificaciones) y no existía en el CSS.
      Oscurece un escalón; en los dos temas el par con on-container sigue pasando. */
-  --color-secondary-container-hover: var(--secondary-300);
+  --secondary-container-hover: var(--secondary-300);
   /* Tertiary (Purple) */
-  --color-tertiary:                    var(--tertiary-900);
-  --color-on-tertiary:                 var(--neutral-white);
-  --color-tertiary-container:          var(--tertiary-100);
-  --color-on-tertiary-container:       var(--tertiary-950);  /* 6.5:1. El -900 daba 3.66:1 */
+  --tertiary:                    var(--tertiary-900);
+  --on-tertiary:                 var(--neutral-white);
+  --tertiary-container:          var(--tertiary-100);
+  --on-tertiary-container:       var(--tertiary-950);  /* 6.5:1. El -900 daba 3.66:1 */
   /* Acentos de marca — la capa de uso sobre la paleta del Manual.
      Un componente o una lámina consume ESTOS, nunca la primitiva.
      Las reglas del Manual son parte del rol: máximo DOS juntos en una
@@ -216,79 +213,79 @@
      El `on` de los tres es navy: blanco no llega a AA en ninguno (3.09:1 en el
      rosa, 2.34:1 en el verde). No se recalibran en oscuro: son color de marca,
      no de superficie, y su par ya pasa en los dos temas. */
-  --color-accent-hot-pink:           var(--accent-hot-pink);
-  --color-accent-chelo-yellow:       var(--accent-chelo-yellow);
-  --color-accent-kika-green:         var(--accent-kika-green);
-  --color-on-accent:                 var(--primary-900);
+  --accent-hot-pink:           var(--palette-accent-hot-pink);
+  --accent-chelo-yellow:       var(--palette-accent-chelo-yellow);
+  --accent-kika-green:         var(--palette-accent-kika-green);
+  --on-accent:                 var(--primary-900);
   /* Error */
-  --color-error:                     var(--error-500);
-  --color-on-error:                  var(--neutral-white);
-  --color-error-container:           var(--error-50);
-  --color-on-error-container:        var(--error-900);
-  --color-error-hover:               var(--error-700);
+  --error:                     var(--error-500);
+  --on-error:                  var(--neutral-white);
+  --error-container:           var(--error-50);
+  --on-error-container:        var(--error-900);
+  --error-hover:               var(--error-700);
   /* El RELLENO de un botón lleno, separado de la señal.
-     --color-error es el rojo de señal: sirve para un borde de campo, un punto de
+     --error es el rojo de señal: sirve para un borde de campo, un punto de
      estado o un anillo de foco, donde WCAG pide 3:1 porque son objetos gráficos.
      Como superficie con texto encima es otra cosa: blanco sobre #FD3A45 da
      3.58:1 y no pasa AA. Un token, dos trabajos.
      El -900 ya existe en la rampa: 6.37:1 con blanco. En OSCURO no se toca —
      ahí el par ya da 6.78:1 y pisarlo sería empeorarlo. */
-  --color-error-fill:                var(--error-900);
-  --color-error-fill-hover:          var(--error-950);
+  --error-fill:                var(--error-900);
+  --error-fill-hover:          var(--error-950);
   /* Success */
-  --color-success:                   var(--success-500);
-  --color-on-success:                var(--neutral-white);
-  --color-success-container:         var(--success-50);
-  --color-on-success-container:      var(--success-900);
-  --color-success-hover:             var(--success-700);
+  --success:                   var(--success-500);
+  --on-success:                var(--neutral-white);
+  --success-container:         var(--success-50);
+  --on-success-container:      var(--success-900);
+  --success-hover:             var(--success-700);
   /* Idem verde, y acá el caso era peor: blanco sobre #00C164 da 2.38:1.
      El -900 da 6.51:1. En oscuro tampoco se toca (8.96:1). */
-  --color-success-fill:              var(--success-900);
-  --color-success-fill-hover:        var(--success-950);
+  --success-fill:              var(--success-900);
+  --success-fill-hover:        var(--success-950);
   /* Warning */
-  --color-warning:                   var(--warning-500);
-  --color-on-warning:                var(--neutral-900);
-  --color-warning-container:         var(--warning-50);
-  --color-on-warning-container:      var(--warning-925);
+  --warning:                   var(--warning-500);
+  --on-warning:                var(--neutral-900);
+  --warning-container:         var(--warning-50);
+  --on-warning-container:      var(--warning-925);
   /* Info */
-  --color-info:                      var(--info-500);
-  --color-on-info:                   var(--neutral-white);
-  --color-info-container:            var(--info-50);
-  --color-on-info-container:         var(--info-900);
+  --info:                      var(--info-500);
+  --on-info:                   var(--neutral-white);
+  --info-container:            var(--info-50);
+  --on-info-container:         var(--info-900);
   /* Background & Surface */
-  --color-surface:                   var(--neutral-30);
-  --color-surface-dim:               var(--neutral-50);
-  --color-surface-bright:            var(--neutral-white);
-  --color-surface-container-lowest:  var(--neutral-10);
-  --color-surface-container-low:     var(--neutral-10);
-  --color-surface-container:         var(--neutral-white);
-  --color-surface-container-high:    var(--neutral-50);
-  --color-surface-container-highest: var(--neutral-100);
-  --color-surface-variant:           var(--neutral-50);
-  --color-on-surface:                var(--neutral-900);
-  --color-on-surface-variant:        var(--neutral-350);  /* texto de énfasis medio (#63687A) — antes neutral-400, que a 8.39:1 no se leía como apagado */
+  --surface:                   var(--neutral-30);
+  --surface-dim:               var(--neutral-50);
+  --surface-bright:            var(--neutral-white);
+  --surface-container-lowest:  var(--neutral-10);
+  --surface-container-low:     var(--neutral-10);
+  --surface-container:         var(--neutral-white);
+  --surface-container-high:    var(--neutral-50);
+  --surface-container-highest: var(--neutral-100);
+  --surface-variant:           var(--neutral-50);
+  --on-surface:                var(--neutral-900);
+  --on-surface-variant:        var(--neutral-350);  /* texto de énfasis medio (#63687A) — antes neutral-400, que a 8.39:1 no se leía como apagado */
   /* Outline · bordes (outline = más prominente/oscuro; variant = sutil) */
-  --color-outline:                   var(--neutral-200);  /* #9FA3AE */
-  --color-outline-variant:           var(--neutral-100);  /* #BFC1C8 */
+  --outline:                   var(--neutral-200);  /* #9FA3AE */
+  --outline-variant:           var(--neutral-100);  /* #BFC1C8 */
   /* Inverse */
-  --color-inverse-surface:           var(--neutral-900);
-  --color-inverse-on-surface:        var(--neutral-50);
-  --color-inverse-primary:           var(--secondary-900);
+  --inverse-surface:           var(--neutral-900);
+  --inverse-on-surface:        var(--neutral-50);
+  --inverse-primary:           var(--secondary-900);
   /* Disabled */
-  --color-disabled:                  var(--neutral-100);
-  --color-on-disabled:               var(--neutral-300);
+  --disabled:                  var(--neutral-100);
+  --on-disabled:               var(--neutral-300);
   /* Focus & Overlay */
-  --color-focus:                     var(--secondary-900);
-  /* Anillo de foco: derivado de --color-focus (single source of truth) en vez de
-     hardcodear rgba(79,128,255,.15). --color-focus no tiene override en dark
+  --focus:                     var(--secondary-900);
+  /* Anillo de foco: derivado de --focus (single source of truth) en vez de
+     hardcodear rgba(79,128,255,.15). --focus no tiene override en dark
      (señal de foco consistente entre temas), así que el valor resuelto es el
      mismo en ambos temas — pero ahora sigue automáticamente cualquier cambio de
-     --color-focus, sin duplicar el hex. */
-  --color-focus-ring:                color-mix(in srgb, var(--color-focus) 15%, transparent);
-  /* Ring de error (inputs .is-error): derivado de --color-error vía color-mix,
+     --focus, sin duplicar el hex. */
+  --focus-ring:                color-mix(in srgb, var(--focus) 15%, transparent);
+  /* Ring de error (inputs .is-error): derivado de --error vía color-mix,
      por lo que se recalibra solo en dark. Nunca hardcodear el rgba. */
-  --color-error-ring:                color-mix(in srgb, var(--color-error) 12%, transparent);
-  --color-scrim:                     rgba(0,0,0,.32);
+  --error-ring:                color-mix(in srgb, var(--error) 12%, transparent);
+  --scrim:                     rgba(0,0,0,.32);
   /* Color base de la elevación. Está en el sistema publicado (Styles · Color ·
      Baseline → Utilidad) y faltaba acá. Se agrega para cerrar el hueco, con una
      advertencia: los compuestos --shadow-sm/md/lg NO derivan de él todavía —
@@ -296,42 +293,42 @@
      Embassy y no el neutral de la fuente. Dos verdades sobre el mismo concepto;
      unificarlas cambia el aspecto de toda la elevación, así que es una decisión
      aparte y no un arreglo de anclaje. */
-  --color-shadow:                    var(--neutral-900);
+  --shadow:                    var(--neutral-900);
   /* Capa de estado. Estaban documentados en el sitio (Styles · Color · Baseline,
      «State Palette») y no existían en el CSS: tres tokens fantasma. Se derivan
-     de --color-secondary con color-mix, así que se recalibran solos en oscuro
+     de --secondary con color-mix, así que se recalibran solos en oscuro
      en vez de arrastrar el rgba de claro. */
-  --color-hover:                     color-mix(in srgb, var(--color-secondary) 8%, transparent);
-  --color-pressed:                   color-mix(in srgb, var(--color-secondary) 14%, transparent);
+  --hover:                     color-mix(in srgb, var(--secondary) 8%, transparent);
+  --pressed:                   color-mix(in srgb, var(--secondary) 14%, transparent);
   /* SELECCIONADO. El sitio lo documentaba en secondary-50; se unifica con el
      token que ya significa «seleccionado» en todo el sistema (chip, segmented,
      pagination, toggle, calendar, list, nav activo) en vez de abrir un segundo
-     valor para lo mismo. --color-nav-selected sigue siendo su alias de nav. */
-  --color-selected:                  var(--color-secondary-container);
+     valor para lo mismo. --nav-selected sigue siendo su alias de nav. */
+  --selected:                  var(--secondary-container);
 
   /* Button · Secondary: NO tiene tokens propios.
      Hasta sep-2026 existieron --button-secondary-bg/-fg/-border/-bg-hover: un
      tratamiento neutro para que el Secondary no saliera igual que el item de
-     menú activo (los dos consumían --color-secondary-container). El sistema
+     menú activo (los dos consumían --secondary-container). El sistema
      publicado dice lo contrario y gana — «los botones consumen roles semánticos
      globales directamente; no existen tokens de componente (--button-*)».
-     La variante tonal es --color-secondary-container / -on-secondary-container,
-     y su hover --color-secondary-container-hover. Si el botón y el nav activo
+     La variante tonal es --secondary-container / -on-secondary-container,
+     y su hover --secondary-container-hover. Si el botón y el nav activo
      vuelven a leerse igual, lo que se mueve es el NAV —que ya tiene su propia
-     capa --color-nav-*—, no el botón. */
+     capa --nav-*—, no el botón. */
 
   /* ─────────────────────────────────────
      Semantic aliases
   ───────────────────────────────────── */
-  /* No hay un alias --surface, y es a propósito: apuntaba a --color-surface-DIM,
+  /* No hay un alias --surface, y es a propósito: apuntaba a --surface-DIM,
      o sea que el token llamado «surface» no era la superficie. Cero usos, y una
      trampa para el que lo leyera. La superficie de página es --bg; la de tarjeta,
      --card-bg; el resto de la rampa se pide por su rol. */
   /* Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad.
      Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el
-     outline de elementos INTERACTIVOS (--color-outline, botones/chips/inputs) se
+     outline de elementos INTERACTIVOS (--outline, botones/chips/inputs) se
      distinga con claridad. Theme-aware vía color-mix — sin override en dark. */
-  --border:         color-mix(in srgb, var(--color-on-surface) 10%, transparent);
+  --border:         color-mix(in srgb, var(--on-surface) 10%, transparent);
   /* No hay --divider: era un alias exacto de --border, con cero usos, y en la
      tabla de tokens aparecía como una fila repetida sin nada que la explicara.
      Una línea divisoria se pide con --border. */
@@ -339,13 +336,13 @@
   /* Tipografía de página (decisión de diseño, jun 2026): el texto principal
      —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro
      neutral-900. Igual que el sitio de docs. En dark se recalibra a
-     neutral-50 (override abajo). --color-on-surface queda para contenido
+     neutral-50 (override abajo). --on-surface queda para contenido
      interno de componentes (labels de chips, botones, celdas). */
   /* Los alias que eran un SEGUNDO NOMBRE de un rol se retiraron en sep-2026:
      --bg, --card-bg, --sidebar-bg, --interactive(-light/-hover), --tertiary-purple*
      y los atajos de estado --green/--red/--yellow/--blue. Resolvían exactamente al
      mismo valor que su rol en los DOS temas —medido—, o sea que eran vocabulario
-     duplicado para una sola cosa. El archivo de Design System define --color-*, y
+     duplicado para una sola cosa. El archivo de Design System define los roles, y
      eso es lo que se consume. Los que siguen NO son duplicados: cada uno dice algo
      que el DS no dice, y por eso sobreviven. */
   /* Prosa larga de COLATERAL: el gris-carbón del Manual («Ink»). El navy de
@@ -356,25 +353,25 @@
      el mismo color que el texto principal (ver los bloques por tema). */
 
   /* Estados como TEXTO sobre una superficie.
-     --color-success / --color-error están calibrados para funcionar como FONDO
+     --success / --error están calibrados para funcionar como FONDO
      con su par -on-* encima; usados como color de texto no llegan a AA en claro
      (2.30:1 y 3.45:1 medidos). Estos roles son el mismo significado con el
      contraste que corresponde. El color de marca y el color legible no tienen
      por qué ser el mismo hex, y forzarlos a serlo es lo que rompía los KPIs. */
-  /* El acento cuando hay que LEERLO. --color-secondary es #4F80FF: 3.58:1 sobre
+  /* El acento cuando hay que LEERLO. --secondary es #4F80FF: 3.58:1 sobre
      blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para
      objetos graficos), no para el label de una pestaña seleccionada. La familia
      *-text ya existia para los cuatro de estado y a secondary le faltaba: por eso
      .tab.active fallaba AA en todos los productos que usan tabs, con el token
      correcto de la familia correcta escrito en el componente.
-     No usa --color-on-secondary-container (navy #01164D) como hacen los de estado,
+     No usa --on-secondary-container (navy #01164D) como hacen los de estado,
      porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia
      con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco. */
-  --color-secondary-text: var(--secondary-950);
-  --color-success-text: var(--color-on-success-container);
-  --color-error-text:   var(--color-on-error-container);
-  --color-warning-text: var(--color-on-warning-container);
-  --color-info-text:    var(--color-on-info-container);
+  --secondary-text: var(--secondary-950);
+  --success-text: var(--on-success-container);
+  --error-text:   var(--on-error-container);
+  --warning-text: var(--on-warning-container);
+  --info-text:    var(--on-info-container);
 
   /* No hay --accent ni --accent-light. Eran alias del color interactivo para el
      cromo de la doc, y desde que existen los acentos de marca (--accent-hot-pink
@@ -383,7 +380,7 @@
 
   /* No hay --text-* ni --ctx-*, y es deliberado (sep-2026).
      El Design System documenta DOS niveles de contenido sobre superficie, como
-     Material: --color-on-surface y --color-on-surface-variant. Acá habían
+     Material: --on-surface y --on-surface-variant. Acá habían
      crecido cinco tokens --text-* encima de esos dos, y cada uno coincidía con
      su rol en un tema y se separaba en el otro — imposible de razonar, y sin
      ficha en ninguna tabla del sistema. Se colapsaron a los dos roles.
@@ -616,7 +613,7 @@
      salian del padding y el riel los recortaba. El aire no era poco, era negativo.
      A 112 quedan 95 utiles: 12px a cada lado del mas largo. */
   /* ── Contexto de superficie ──────────────────────────────────────────────
-     Todo componente asumia que estaba apoyado sobre --color-surface. Metido en
+     Todo componente asumia que estaba apoyado sobre --surface. Metido en
      un panel con fondo propio, su relleno quedaba mal y habia que pisarlo a
      mano: medido en una consola de check-in (sep 2026), ocho de catorce
      overrides de clases publicas eran esto.
@@ -700,13 +697,13 @@
   --btn-elevation-hover: 0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16);
 
   /* Nav/menu item interaction states — the "blue hover" unified across sidebar
-     nav and dropdown/context menus. Derived from --color-secondary-container so
+     nav and dropdown/context menus. Derived from --secondary-container so
      they recalibrate automatically in dark mode with no separate override. */
-  --color-nav-hover:            color-mix(in srgb, var(--color-secondary-container) 45%, transparent);
-  --color-nav-hover-content:    var(--color-secondary);
-  --color-nav-press:            color-mix(in srgb, var(--color-secondary-container) 70%, transparent);
-  --color-nav-selected:         var(--color-secondary-container);
-  --color-nav-selected-content: var(--color-on-secondary-container);
+  --nav-hover:            color-mix(in srgb, var(--secondary-container) 45%, transparent);
+  --nav-hover-content:    var(--secondary);
+  --nav-press:            color-mix(in srgb, var(--secondary-container) 70%, transparent);
+  --nav-selected:         var(--secondary-container);
+  --nav-selected-content: var(--on-secondary-container);
 
   /* ─────────────────────────────────────
      Degradés — set cerrado, construido con las primitivas de la marca.
@@ -721,12 +718,12 @@
   --gradient-brand:   linear-gradient(135deg, var(--primary-900) 0%, var(--secondary-925) 100%);
   /* Sutil: separa una sección del fondo sin dibujar una caja. Texto normal encima. */
   --gradient-surface: linear-gradient(180deg,
-                        color-mix(in srgb, var(--color-secondary) 10%, var(--color-surface)) 0%,
-                        var(--color-surface) 100%);
+                        color-mix(in srgb, var(--secondary) 10%, var(--surface)) 0%,
+                        var(--surface) 100%);
   /* Halo: el foco de luz detrás de una apertura. Es el mismo gesto que --space-glow,
      pero con el color de la marca que corresponda. */
   --gradient-glow:    radial-gradient(60% 100% at 50% 0%,
-                        color-mix(in srgb, var(--color-secondary) 35%, transparent) 0%,
+                        color-mix(in srgb, var(--secondary) 35%, transparent) 0%,
                         transparent 70%);
 
   /* Medida de línea. El límite de legibilidad no depende del ancho del layout:
@@ -764,7 +761,7 @@
 
 /* ═══════════════════════════════════════
    Dark Mode — Color Roles (semantic)
-   Recalibra SOLO la capa semántica --color-*.
+   Recalibra SOLO la capa semántica de roles.
    Los componentes consumen estos roles, nunca primitivos.
 
    Todo rol apunta a su PRIMITIVA con var(). Hasta sep-2026 este bloque
@@ -788,78 +785,78 @@
      #01164D sobre #FFFFFF = 18.4:1 (WCAG AAA). Es la "Dark Mode definition"
      oficial de Embassy: máximo énfasis, máximo contraste. Single source of
      truth — todo Primary (botón relleno, FAB, CTA) lo consume desde aquí. */
-  --color-primary: var(--neutral-white);
-  --color-on-primary:                var(--primary-900);          /* #01164D */
-  --color-primary-container:         var(--primary-400);          /* #475993 */
-  --color-on-primary-container:      var(--primary-50);           /* #E4E7EF */
-  --color-primary-hover:             var(--primary-50);           /* #E4E7EF */
+  --primary: var(--neutral-white);
+  --on-primary:                var(--primary-900);          /* #01164D */
+  --primary-container:         var(--primary-400);          /* #475993 */
+  --on-primary-container:      var(--primary-50);           /* #E4E7EF */
+  --primary-hover:             var(--primary-50);           /* #E4E7EF */
   /* Secondary · Agile Blue — 4 valores distintos (sin duplicación) */
-  --color-secondary:                 var(--secondary-300);        /* #B9CCFF */
+  --secondary:                 var(--secondary-300);        /* #B9CCFF */
   /* En oscuro el acento YA es claro sobre fondo oscuro (11.31:1): el -950 de
      claro seria azul oscuro sobre casi negro. Recalibra como cualquier rol. */
-  --color-secondary-text:            var(--secondary-300);        /* #B9CCFF */
-  --color-on-secondary:              var(--secondary-950);        /* #1E3A8C */
-  --color-secondary-container:       var(--secondary-925);        /* #3A5BB0 */
-  --color-on-secondary-container:    var(--secondary-100);        /* #DCE6FF */
-  --color-secondary-container-hover: var(--secondary-950);        /* #1E3A8C */
+  --secondary-text:            var(--secondary-300);        /* #B9CCFF */
+  --on-secondary:              var(--secondary-950);        /* #1E3A8C */
+  --secondary-container:       var(--secondary-925);        /* #3A5BB0 */
+  --on-secondary-container:    var(--secondary-100);        /* #DCE6FF */
+  --secondary-container-hover: var(--secondary-950);        /* #1E3A8C */
   /* Tertiary (Purple) */
-  --color-tertiary:                  var(--tertiary-300);         /* #C6BCFB */
-  --color-on-tertiary: var(--neutral-900); /* neutral-900 — máximo contraste sobre tertiary claro */
-  --color-tertiary-container:        var(--tertiary-950);         /* #4A3BA8 — 7.41:1 con el -50
+  --tertiary:                  var(--tertiary-300);         /* #C6BCFB */
+  --on-tertiary: var(--neutral-900); /* neutral-900 — máximo contraste sobre tertiary claro */
+  --tertiary-container:        var(--tertiary-950);         /* #4A3BA8 — 7.41:1 con el -50
                                                                     encima. El -800 daba 3.51:1 y
                                                                     ademas era el unico container
                                                                     oscuro claro de la familia. */
-  --color-on-tertiary-container:     var(--tertiary-50);          /* #F1EEFE */
+  --on-tertiary-container:     var(--tertiary-50);          /* #F1EEFE */
   /* Estados · mains en dark — se ACLARAN (tono ~80) como los acentos, criterio MD3 */
-  --color-error:                     var(--error-200);            /* #F29AA1 */
-  --color-on-error: var(--error-975); /* rojo profundo */
-  --color-success:                   var(--success-200);          /* #93E1B3 */
-  --color-on-success: var(--success-975); /* verde profundo */
+  --error:                     var(--error-200);            /* #F29AA1 */
+  --on-error: var(--error-975); /* rojo profundo */
+  --success:                   var(--success-200);          /* #93E1B3 */
+  --on-success: var(--success-975); /* verde profundo */
   /* En oscuro el relleno y la señal vuelven a ser lo mismo: el par ya da 6.78:1
      y 8.96:1 sin ayuda. Se redeclaran para que el token no arrastre el valor de
      claro. */
-  --color-error-fill:                var(--error-200);            /* #F29AA1 */
-  --color-error-fill-hover:          var(--error-300);
-  --color-success-fill:              var(--success-200);          /* #93E1B3 */
-  --color-success-fill-hover:        var(--success-300);
-  --color-warning:                   var(--warning-200);          /* #FFC97D */
-  --color-on-warning: var(--warning-975); /* ámbar profundo */
-  --color-info:                      var(--info-200);             /* #9FABF8 */
-  --color-on-info: var(--info-950); /* azul profundo */
+  --error-fill:                var(--error-200);            /* #F29AA1 */
+  --error-fill-hover:          var(--error-300);
+  --success-fill:              var(--success-200);          /* #93E1B3 */
+  --success-fill-hover:        var(--success-300);
+  --warning:                   var(--warning-200);          /* #FFC97D */
+  --on-warning: var(--warning-975); /* ámbar profundo */
+  --info:                      var(--info-200);             /* #9FABF8 */
+  --on-info: var(--info-950); /* azul profundo */
   /* Estados · containers en dark (flip MD3: container oscuro + on-container claro) */
-  --color-error-container:           var(--error-950);            /* #7A0C1B */
-  --color-on-error-container:        var(--error-100);            /* #FFCDD7 */
-  --color-success-container:         var(--success-950);          /* #004D1E */
-  --color-on-success-container:      var(--success-200);          /* #93E1B3 */
-  --color-warning-container:         var(--warning-950);          /* #7A3200 */
-  --color-on-warning-container:      var(--warning-100);          /* #FFDEB0 */
-  --color-info-container:            var(--info-800);             /* #0032CB */
-  --color-on-info-container:         var(--info-100);             /* #C7CCFA */
+  --error-container:           var(--error-950);            /* #7A0C1B */
+  --on-error-container:        var(--error-100);            /* #FFCDD7 */
+  --success-container:         var(--success-950);          /* #004D1E */
+  --on-success-container:      var(--success-200);          /* #93E1B3 */
+  --warning-container:         var(--warning-950);          /* #7A3200 */
+  --on-warning-container:      var(--warning-100);          /* #FFDEB0 */
+  --info-container:            var(--info-800);             /* #0032CB */
+  --on-info-container:         var(--info-100);             /* #C7CCFA */
   /* Surfaces — rampa Neutral profunda (separación pareja y clara) */
-  --color-surface: var(--neutral-800);
-  --color-surface-dim: var(--neutral-900);
-  --color-surface-bright: var(--neutral-700);
-  --color-surface-container-lowest: var(--neutral-900);
-  --color-surface-container-low: var(--neutral-750); /* neutral-750 — el escalon sobre surface */
-  --color-surface-container: var(--neutral-700);
-  --color-surface-container-high: var(--neutral-600);
-  --color-surface-container-highest: var(--neutral-500);
-  --color-surface-variant: var(--neutral-600);
+  --surface: var(--neutral-800);
+  --surface-dim: var(--neutral-900);
+  --surface-bright: var(--neutral-700);
+  --surface-container-lowest: var(--neutral-900);
+  --surface-container-low: var(--neutral-750); /* neutral-750 — el escalon sobre surface */
+  --surface-container: var(--neutral-700);
+  --surface-container-high: var(--neutral-600);
+  --surface-container-highest: var(--neutral-500);
+  --surface-variant: var(--neutral-600);
   /* La pista se invierte: en claro container-high esta DEBAJO de surface, en
      oscuro esta encima. Literales por la misma razon que el resto del bloque. */
-  --color-on-surface: var(--neutral-50);
-  --color-on-surface-variant: var(--neutral-100);
+  --on-surface: var(--neutral-50);
+  --on-surface-variant: var(--neutral-100);
   /* Outline · bordes */
-  --color-outline: var(--neutral-300);
-  --color-outline-variant: var(--neutral-400);
+  --outline: var(--neutral-300);
+  --outline-variant: var(--neutral-400);
   /* Inverse */
-  --color-inverse-surface: var(--neutral-50);
-  --color-inverse-on-surface: var(--neutral-800);
-  --color-inverse-primary:           var(--primary-700);          /* #162F6F */
-  --color-shadow:                    var(--neutral-black);        /* #000000 */
+  --inverse-surface: var(--neutral-50);
+  --inverse-on-surface: var(--neutral-800);
+  --inverse-primary:           var(--primary-700);          /* #162F6F */
+  --shadow:                    var(--neutral-black);        /* #000000 */
   /* Disabled */
-  --color-disabled: var(--neutral-600);
-  --color-on-disabled: var(--neutral-300);
+  --disabled: var(--neutral-600);
+  --on-disabled: var(--neutral-300);
 
   /* Aliases semánticos que dependen de la rampa */
   /* En oscuro no existe el casi-negro: la prosa vuelve al texto principal. El
@@ -878,65 +875,65 @@
    acá, un contenedor data-theme="light" adentro de una página oscura se queda
    con el valor de dark. */
 [data-theme="light"] {
-  --color-primary:                   var(--primary-900);         /* #01164D */
-  --color-on-primary: var(--neutral-white);
-  --color-primary-container:         var(--primary-60);          /* #D7DEFB */
-  --color-on-primary-container:      var(--primary-900);         /* #01164D */
-  --color-primary-hover:             var(--primary-700);         /* #162F6F */
-  --color-secondary:                 var(--secondary-900);       /* #4F80FF */
-  --color-on-secondary:              var(--primary-900);        /* texto oscuro: blanco sobre el acento no llega a AA */
-  --color-secondary-container:       var(--secondary-200);       /* #CAD9FF */
-  --color-on-secondary-container:    var(--primary-900);         /* #01164D */
-  --color-secondary-container-hover: var(--secondary-300);        /* #B9CCFF */
-  --color-tertiary:                  var(--tertiary-900);        /* #7158F4 */
-  --color-on-tertiary: var(--neutral-white);
-  --color-tertiary-container:        var(--tertiary-100);        /* #E3DEFD */
-  --color-on-tertiary-container:     var(--tertiary-950);        /* #4A3BA8 */
-  --color-error:                     var(--error-500);           /* #FD3A45 */
-  --color-on-error: var(--neutral-white);
-  --color-error-fill:                var(--error-900);           /* #BF0B29 */
-  --color-error-fill-hover:          var(--error-950);
-  --color-success:                   var(--success-500);         /* #00C164 */
-  --color-on-success: var(--neutral-white);
-  --color-success-fill:              var(--success-900);         /* #006D2C */
-  --color-success-fill-hover:        var(--success-950);
-  --color-warning:                   var(--warning-500);         /* #FFB249 */
-  --color-on-warning: var(--neutral-900);
-  --color-info:                      var(--info-500);            /* #1E52EE */
-  --color-on-info: var(--neutral-white);
-  --color-error-container:           var(--error-50);            /* #FFEBF0 */
-  --color-on-error-container:        var(--error-900);           /* #BF0B29 */
-  --color-success-container:         var(--success-50);          /* #E4F8EC */
-  --color-on-success-container:      var(--success-900);         /* #006D2C */
-  --color-warning-container:         var(--warning-50);          /* #FFF2DF */
-  --color-on-warning-container:      var(--warning-925);         /* #C43800 — el -900 da 3.50:1.
+  --primary:                   var(--primary-900);         /* #01164D */
+  --on-primary: var(--neutral-white);
+  --primary-container:         var(--primary-60);          /* #D7DEFB */
+  --on-primary-container:      var(--primary-900);         /* #01164D */
+  --primary-hover:             var(--primary-700);         /* #162F6F */
+  --secondary:                 var(--secondary-900);       /* #4F80FF */
+  --on-secondary:              var(--primary-900);        /* texto oscuro: blanco sobre el acento no llega a AA */
+  --secondary-container:       var(--secondary-200);       /* #CAD9FF */
+  --on-secondary-container:    var(--primary-900);         /* #01164D */
+  --secondary-container-hover: var(--secondary-300);        /* #B9CCFF */
+  --tertiary:                  var(--tertiary-900);        /* #7158F4 */
+  --on-tertiary: var(--neutral-white);
+  --tertiary-container:        var(--tertiary-100);        /* #E3DEFD */
+  --on-tertiary-container:     var(--tertiary-950);        /* #4A3BA8 */
+  --error:                     var(--error-500);           /* #FD3A45 */
+  --on-error: var(--neutral-white);
+  --error-fill:                var(--error-900);           /* #BF0B29 */
+  --error-fill-hover:          var(--error-950);
+  --success:                   var(--success-500);         /* #00C164 */
+  --on-success: var(--neutral-white);
+  --success-fill:              var(--success-900);         /* #006D2C */
+  --success-fill-hover:        var(--success-950);
+  --warning:                   var(--warning-500);         /* #FFB249 */
+  --on-warning: var(--neutral-900);
+  --info:                      var(--info-500);            /* #1E52EE */
+  --on-info: var(--neutral-white);
+  --error-container:           var(--error-50);            /* #FFEBF0 */
+  --on-error-container:        var(--error-900);           /* #BF0B29 */
+  --success-container:         var(--success-50);          /* #E4F8EC */
+  --on-success-container:      var(--success-900);         /* #006D2C */
+  --warning-container:         var(--warning-50);          /* #FFF2DF */
+  --on-warning-container:      var(--warning-925);         /* #C43800 — el -900 da 3.50:1.
                                                                    Este bloque es un espejo de :root
                                                                    y este token se habia quedado atras. */
-  --color-info-container:            var(--info-50);             /* #E9EBFD */
-  --color-on-info-container:         var(--info-900);            /* #001ABA */
+  --info-container:            var(--info-50);             /* #E9EBFD */
+  --on-info-container:         var(--info-900);            /* #001ABA */
   /* Surfaces — literal hex para neutrals hijackeados por el doc shell */
-  --color-surface: var(--neutral-30);
-  --color-surface-dim: var(--neutral-50);
-  --color-surface-bright: var(--neutral-white);
-  --color-surface-container-lowest: var(--neutral-10);
-  --color-surface-container-low: var(--neutral-10);
-  --color-surface-container: var(--neutral-white);
-  --color-surface-container-high: var(--neutral-50);
-  --color-surface-container-highest: var(--neutral-100);
-  --color-surface-variant: var(--neutral-50);
-  --color-on-surface: var(--neutral-900);
-  --color-on-surface-variant: var(--neutral-350);
+  --surface: var(--neutral-30);
+  --surface-dim: var(--neutral-50);
+  --surface-bright: var(--neutral-white);
+  --surface-container-lowest: var(--neutral-10);
+  --surface-container-low: var(--neutral-10);
+  --surface-container: var(--neutral-white);
+  --surface-container-high: var(--neutral-50);
+  --surface-container-highest: var(--neutral-100);
+  --surface-variant: var(--neutral-50);
+  --on-surface: var(--neutral-900);
+  --on-surface-variant: var(--neutral-350);
   /* Outline — literal hex */
-  --color-outline: var(--neutral-200);
-  --color-outline-variant: var(--neutral-100);
+  --outline: var(--neutral-200);
+  --outline-variant: var(--neutral-100);
   /* Inverse */
-  --color-inverse-surface: var(--neutral-900);
-  --color-inverse-on-surface: var(--neutral-50);
-  --color-inverse-primary:           var(--secondary-900);       /* #4F80FF */
-  --color-shadow:                    var(--neutral-900);         /* #0A0C12 */
+  --inverse-surface: var(--neutral-900);
+  --inverse-on-surface: var(--neutral-50);
+  --inverse-primary:           var(--secondary-900);       /* #4F80FF */
+  --shadow:                    var(--neutral-900);         /* #0A0C12 */
   /* Disabled — literal hex */
-  --color-disabled: var(--neutral-100);
-  --color-on-disabled: var(--neutral-300);
+  --disabled: var(--neutral-100);
+  --on-disabled: var(--neutral-300);
   /* Aliases */
   /* Elevated Button — restore light (navy) elevation inside a light-scoped island */
   --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);

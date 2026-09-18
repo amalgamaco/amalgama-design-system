@@ -111,7 +111,7 @@ de arriba abajo: se usa la primera que alcance.
 | | Herramienta | Dónde |
 |---|---|---|
 | 1 | **Espacio** | Siempre que alcance. La mayor parte del contenido no necesita contenedor: se agrupa con aire. Regla 7 |
-| 2 | **Escalón de superficie** — `--color-surface` → `--color-surface-container` | **Dentro de una pantalla**, de producto o nativa: es lo que agrupa, y agrupa mejor que una línea porque además delimita |
+| 2 | **Escalón de superficie** — `--surface` → `--surface-container` | **Dentro de una pantalla**, de producto o nativa: es lo que agrupa, y agrupa mejor que una línea porque además delimita |
 | 3 | **Línea de 1px** — `.rule`, fuera de la columna | **Entre secciones de una página.** Cruza toda la pantalla. Nunca bandas de fondo alternado: la banda es lo que hace toda página generada |
 | 4 | **Sombra** | Sólo lo que **realmente flota**: overlay, modal, toast |
 
@@ -395,7 +395,7 @@ producto: es la forma que más pesa de las cuatro.
 
 ## 4c. «Seleccionado» no es un solo significado
 
-Embassy reserva `--color-secondary-container` para el estado seleccionado en chip,
+Embassy reserva `--secondary-container` para el estado seleccionado en chip,
 segmented, calendar, pagination y menú activo. Un token para un significado está
 bien; el problema es que **seleccionado no es un significado solo**, y nada decía
 cuántos sistemas de selección pueden convivir en una misma región.
@@ -428,10 +428,10 @@ Dos escalones en lugar de uno, y sin ningún borde: 1.19:1 en claro, 1.24:1 en o
 
 | | Token | Qué es |
 |---|---|---|
-| El canal | `--ctx-track` | El contenedor, un escalón por debajo de la página. Sin borde |
-| Lo que corre sobre él | `--ctx-track-thumb` | El segmento activo, el pulgar del slider. Más `--shadow-sm` |
+| El canal | `--seg-btn-track` | El contenedor, un escalón por debajo de la página. Sin borde |
+| Lo que corre sobre él | `--seg-btn-track-thumb` | El segmento activo, el pulgar del slider. Más `--shadow-sm` |
 
-Van aparte de `--ctx-surface` / `--ctx-surface-raised` porque la rampa de
+Van aparte de `--surface` / `--surface-container` porque la rampa de
 superficies **cambia de dirección entre temas** —en claro `container-high` está por
 debajo de `surface`, en oscuro por encima— así que la pista no se puede escribir con
 un solo token de la rampa. Ese override por tema vive una sola vez en
@@ -466,7 +466,7 @@ Reglas que valen para las cinco: **Lucide**, `--icon-stroke` del tema, **nunca**
 cuadrada con radio detrás, y **nunca** un ícono por card cuando las cards ya se distinguen por el
 título y son muchas. Un emoji no es un ícono (`H4`).
 
-**El disco, cuando va.** Fondo `--color-surface-variant`, ícono `--color-secondary`, 52px de disco
+**El disco, cuando va.** Fondo `--surface-variant`, ícono `--secondary`, 52px de disco
 y 24px de ícono. Los dos por token: un `rgba()` a ojo acá es `A1`, y es exactamente lo que tenía
 el sitio del DS hasta septiembre de 2026. Medido, ese azul sobre ese gris da 3.00:1 — justo el
 piso de WCAG 1.4.11. Alcanza porque el ícono es decorativo y va con `aria-hidden`; si alguna vez
@@ -639,7 +639,7 @@ de producto y una pantalla nativa son la misma pantalla en dos densidades, no do
 
 **1 · La jerarquía la hace la superficie, no la línea** (`D10`)
 Escalón 2 de la escalera de separación (Parte I §D), aplicado acá: la pantalla es
-`--color-surface`; los paneles, tarjetas y tablas van en `--color-surface-container`. Una banda
+`--surface`; los paneles, tarjetas y tablas van en `--surface-container`. Una banda
 separada con `.rule` o con un borde suelto, adentro del shell, dibuja dos veces el mismo límite.
 
 **2 · La pantalla abre con `page-header`, no con un titular**

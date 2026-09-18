@@ -85,13 +85,13 @@ relationships:
     - {component: popover, why: "Popover is freeform content; Dropdown Menu is a keyboard-navigable action list (both here, chosen by content)"}
     - {component: tooltip, why: "Tooltip is a passive label; menu/popover are interactive"}
 tokens:
-  color: [--color-surface-container, --color-outline-variant, --color-on-surface, --color-surface-variant, --color-error, --color-error-container]
+  color: [--surface-container, --outline-variant, --on-surface, --surface-variant, --error, --error-container]
   radius: [--radius-md, --radius-sm]
   motion: [--duration-normal, --ease-default]
 motion:
   enter: "Panel scales + fades in on open (@keyframes dropdownIn / popoverIn: opacity 0→1, scale .96→1)."
   exit: "none defined in CSS — the panel is removed instantly (toggled via [hidden] / JS), no closed-state animation (a known buildless gap vs. the Radix open/closed pair)."
-  stateChange: "Items show a hover/focus background tint (--color-surface-variant; danger → --color-error-container); checkbox/radio indicators fade opacity 0↔1."
+  stateChange: "Items show a hover/focus background tint (--surface-variant; danger → --error-container); checkbox/radio indicators fade opacity 0↔1."
   duration: "--duration-normal (panel enter); --duration-fast (checkbox/radio indicator)."
   easing: "--ease-default (panel enter and indicator)."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the open scale/fade and indicator fade become instant."

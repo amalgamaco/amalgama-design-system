@@ -142,7 +142,7 @@
    ancho del contenido y pierde la mitad del efecto. */
 .rule {
   border: 0;
-  border-top: 1px solid var(--color-outline-variant);
+  border-top: 1px solid var(--outline-variant);
   margin: 0;
 }
 
@@ -162,19 +162,19 @@
   line-height: 1;
   font-weight: 600;
   letter-spacing: var(--letter-spacing-editorial);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   font-variant-numeric: tabular-nums;
 }
 .figure-unit {
   font-size: var(--font-size-body-lg);
   font-weight: 500;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 /* La base: de qué universo sale el número, en qué período. Al lado, no debajo. */
 .figure-base {
   font-family: var(--font-mono);
   font-size: var(--font-size-mono-sm);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 
 /* ── Aparición ─────────────────────────────────────────────────────────────
@@ -195,7 +195,7 @@
    La regla que los separa de la mancha de IA: **un degradé es una superficie**. Pinta
    una banda, una tarjeta o un titular. No flota, no es un blob, no es un vidrio
    esmerilado y no va detrás de texto corrido. Uno por sección; dos seguidos se anulan. */
-.gradient-brand   { background: var(--gradient-brand); color: var(--color-on-primary); }
+.gradient-brand   { background: var(--gradient-brand); color: var(--on-primary); }
 .gradient-surface { background: var(--gradient-surface); }
 .gradient-glow    { background: var(--gradient-glow); pointer-events: none; }
 
@@ -204,7 +204,7 @@
    El `color` va SIEMPRE como fallback: si el navegador no soporta el recorte, queda el
    color sólido en vez de un titular invisible. */
 .text-gradient {
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   background: linear-gradient(180deg,
     currentColor 0%,
     color-mix(in srgb, currentColor 55%, transparent) 100%);
@@ -222,14 +222,14 @@
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--color-outline-variant);
+  border: 1px solid var(--outline-variant);
   border-radius: var(--radius-md);
-  background: var(--color-surface-container);
+  background: var(--surface-container);
 }
 .media-caption {
   font-family: var(--font-mono);
   font-size: var(--font-size-mono-sm);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   margin-top: var(--space-2);
 }
 
@@ -250,7 +250,7 @@
   letter-spacing: var(--letter-spacing-overline);
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   margin: 0 0 var(--space-5);
 }
 
@@ -285,12 +285,12 @@
   font-size: var(--font-size-overline);
   line-height: var(--line-height-overline);
   letter-spacing: var(--letter-spacing-overline);
-  color: var(--color-secondary);
+  color: var(--secondary);
   margin-bottom: var(--space-2-5);
   font-variant-numeric: tabular-nums;
 }
 /* La barra separadora se apaga para que los números manden. */
-.section-index .sep { color: var(--color-outline); margin-inline: var(--space-1); }
+.section-index .sep { color: var(--outline); margin-inline: var(--space-1); }
 
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -317,21 +317,21 @@
 
 
 /* La pantalla: una columna, gutter a los lados, la acción primaria afuera del
-   scroll. El fondo es --color-surface y los bloques --color-surface-container:
+   scroll. El fondo es --surface y los bloques --surface-container:
    ese escalón es lo que agrupa (M10). */
 .screen {
   display: flex;
   flex-direction: column;
   gap: var(--screen-block-gap);
   padding: 8px var(--screen-gutter) 0;
-  background: var(--color-surface);
+  background: var(--surface);
 }
 
 /* §6b·5 — El ancla. Lo único invertido de la pantalla: concentra identidad y
    estado en un punto de entrada, antes del contenido. Una sola por pantalla. */
 .screen-anchor {
-  background: var(--color-primary);
-  color: var(--color-on-primary);
+  background: var(--primary);
+  color: var(--on-primary);
   border-radius: var(--screen-radius);
   padding: var(--screen-block-padding);
   display: flex;
@@ -341,22 +341,22 @@
   /* El ancla REDEFINE los roles para lo que lleve adentro, en vez de pedir
      variantes nuevas de cada componente.
 
-     Los componentes de Embassy leen roles (`var(--color-on-surface-variant)`,
-     `var(--color-surface-variant)`), nunca literales. Redefinir esos roles acá
+     Los componentes de Embassy leen roles (`var(--on-surface-variant)`,
+     `var(--surface-variant)`), nunca literales. Redefinir esos roles acá
      hace que un `.badge`, un `.progress` o un `.avatar` puestos adentro se
      retiñan solos sobre la superficie invertida — sin `.badge-on-dark`, sin
      overrides por componente, y sin que nadie tenga que acordarse.
 
      Funciona porque la sustitución de custom properties resuelve en el elemento
      que LEE la variable: el hijo hereda estos valores y su propio
-     `color: var(--color-on-surface-variant)` resuelve contra ellos. */
-  --text-primary:          var(--color-on-primary);
-  --text-secondary:        color-mix(in srgb, var(--color-on-primary) 80%, transparent);
-  --text-muted:            color-mix(in srgb, var(--color-on-primary) 66%, transparent);
-  --color-surface:         transparent;
-  --color-surface-container: color-mix(in srgb, var(--color-primary-container) 16%, transparent);
-  --color-surface-variant: color-mix(in srgb, var(--color-on-primary) 16%, transparent);
-  --color-outline-variant: color-mix(in srgb, var(--color-on-primary) 24%, transparent);
+     `color: var(--on-surface-variant)` resuelve contra ellos. */
+  --text-primary:          var(--on-primary);
+  --text-secondary:        color-mix(in srgb, var(--on-primary) 80%, transparent);
+  --text-muted:            color-mix(in srgb, var(--on-primary) 66%, transparent);
+  --surface:         transparent;
+  --surface-container: color-mix(in srgb, var(--primary-container) 16%, transparent);
+  --surface-variant: color-mix(in srgb, var(--on-primary) 16%, transparent);
+  --outline-variant: color-mix(in srgb, var(--on-primary) 24%, transparent);
 }
 .screen-anchor-top { display: flex; align-items: center; gap: var(--screen-item-gap); }
 .screen-anchor-id { flex: 1 1 auto; min-width: 0; }
@@ -370,7 +370,7 @@
 .screen-anchor-meta {
   font-size: var(--font-size-caption);
   line-height: var(--line-height-caption);
-  color: color-mix(in srgb, var(--color-on-primary) 66%, transparent);
+  color: color-mix(in srgb, var(--on-primary) 66%, transparent);
   margin-top: 3px;
 }
 /* La línea del número: la cifra a la izquierda, un dato de apoyo a la derecha,
@@ -386,7 +386,7 @@
 .screen-anchor-aside {
   font-size: var(--font-size-caption);
   line-height: var(--line-height-caption);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 .screen-anchor-figure {
   font-family: var(--font-heading);
@@ -400,7 +400,7 @@
   font-family: var(--font-body);
   font-size: var(--font-size-label);
   font-weight: 500;
-  color: color-mix(in srgb, var(--color-on-primary) 66%, transparent);
+  color: color-mix(in srgb, var(--on-primary) 66%, transparent);
 }
 
 /* §6b·3 — El header de sección va AFUERA del grupo, en caption apagado. Adentro
@@ -415,13 +415,13 @@
   font-size: var(--font-size-caption);
   line-height: var(--line-height-caption);
   font-weight: 600;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 
 /* §6b·2 — El grupo. Sin borde: el escalón de superficie ya dibuja el límite, y
    un borde encima lo dibuja dos veces (M10, M11). */
 .screen-group {
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border-radius: var(--screen-radius);
   overflow: hidden;
 }
@@ -440,7 +440,7 @@
   position: absolute;
   top: 0; right: 0;
   height: 1px;
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
 }
 /* Fila simple: el divisor arranca en el padding del grupo. */
 .screen-group > .screen-row + .screen-row::before { left: var(--screen-group-padding); }
@@ -463,14 +463,14 @@
   font-size: var(--font-size-label);
   line-height: var(--line-height-label);
   font-weight: 400;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   flex: 0 1 auto;
 }
 .screen-row-value {
   font-size: var(--font-size-label);
   line-height: var(--line-height-label);
   font-weight: 600;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   text-align: right;
   flex: 0 1 auto;
   min-width: 0;
@@ -490,14 +490,14 @@
   border-radius: var(--radius-full);
   display: flex; align-items: center; justify-content: center;
   flex: 0 0 auto;
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
 }
 .screen-item-body { flex: 1 1 auto; min-width: 0; }
 .screen-item-title {
   font-size: var(--font-size-label);
   line-height: var(--line-height-label);
   font-weight: 600;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
 /* El rol «monto en tarjeta» de la tabla de MOBILE.md §6b·4b: heading-md a 700.
    Existe como clase para que no se escriba a mano cada vez — que es como el
@@ -508,7 +508,7 @@
   font-size: var(--font-size-heading-md);
   line-height: var(--line-height-heading-md);
   letter-spacing: -.015em;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   display: block;
 }
 .screen-item-sub { display: block; }
@@ -516,7 +516,7 @@
 .screen-item-aside {
   font-size: var(--font-size-caption);
   line-height: var(--line-height-caption);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 .screen-item-aside { text-align: right; font-variant-numeric: tabular-nums; flex: 0 0 auto; }
 
@@ -526,7 +526,7 @@
 .screen-action {
   flex: 0 0 auto;
   padding: 12px var(--screen-gutter) 24px;
-  background: var(--color-surface);
+  background: var(--surface);
 }
 
 /* La acción secundaria en línea. Misma clase visual que un badge de estado, así
@@ -540,8 +540,8 @@
   height: 36px;
   padding: 0 13px;
   border-radius: var(--radius-full);
-  background: var(--color-surface-variant);
-  color: var(--color-on-surface);
+  background: var(--surface-variant);
+  color: var(--on-surface);
   font-size: var(--font-size-caption);
   font-weight: 600;
   border: 0;

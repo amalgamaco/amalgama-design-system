@@ -18,15 +18,15 @@
 
 .back-link {
   display: inline-flex; align-items: center; gap: var(--space-1-5);
-  font-size: var(--font-size-body-md); color: var(--color-on-surface-variant);
+  font-size: var(--font-size-body-md); color: var(--on-surface-variant);
   cursor: pointer;
   transition: color var(--duration-fast);
   margin-bottom: 6px;
   background: none; border: none; font-family: inherit; padding: 0;
 }
-.back-link:hover { color: var(--color-on-surface); text-decoration: none; }
+.back-link:hover { color: var(--on-surface); text-decoration: none; }
 .back-link:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }

@@ -32,14 +32,14 @@ layout_constraints:
 
 states:
   default: "Collapsed: content grid-rows 0fr (data-state=closed)."
-  focus: "Trigger focus-visible: 2px --color-focus outline."
+  focus: "Trigger focus-visible: 2px --focus outline."
   expanded: "aria-expanded=true, data-state=open, content grid-rows 1fr."
 
 accessibility:
   roles: "Trigger is a button with aria-expanded and aria-controls pointing to the content region."
   aria: [aria-expanded, aria-controls, "aria-label when the trigger is icon-only"]
   focus: "Trigger is keyboard-focusable with a visible focus ring."
-  contrast: "Consumes only semantic --color-* tokens → AA in light + dark, no per-theme overrides."
+  contrast: "Consumes only the semantic role tokens → AA in light + dark, no per-theme overrides."
 keyboard:
   - {keys: "Tab", action: "focus the trigger"}
   - {keys: "Enter / Space", action: "toggle the region open/closed"}
@@ -65,7 +65,7 @@ relationships:
     - {component: accordion, why: "Accordion is multiple stacked sections; Collapsible is a single region"}
 
 tokens:
-  color: [--color-primary, --color-focus]
+  color: [--primary, --focus]
   radius: [--radius-sm]
   motion: [--duration-normal, --ease-default]
 

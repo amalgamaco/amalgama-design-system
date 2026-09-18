@@ -48,7 +48,7 @@ layout_constraints:
 
 states:
   default: "Read-only resting; the component defines no hover, focus, or active for the base span."
-  link: "Exception: an <a class=\"badge\"> is focusable and shows a 2px --color-focus ring on focus-visible; hover dims opacity."
+  link: "Exception: an <a class=\"badge\"> is focusable and shows a 2px --focus ring on focus-visible; hover dims opacity."
 
 accessibility:
   roles: "Non-interactive <span> — no click handlers, no tabindex. Exception: an <a class=\"badge\"> link is focusable. A leading spinner carries role=status + aria-label."
@@ -84,7 +84,7 @@ relationships:
     - {component: alert, why: "alert is a persistent inline message block; a badge is a compact status pill"}
 
 tokens:
-  color: [--color-success-container, --color-on-success-container, --color-secondary-container, --color-on-secondary-container, --color-error-container, --color-on-error-container, --color-warning-container, --color-tertiary-container, --color-info-container, --color-surface-variant, --color-outline]
+  color: [--success-container, --on-success-container, --secondary-container, --on-secondary-container, --error-container, --on-error-container, --warning-container, --tertiary-container, --info-container, --surface-variant, --outline]
   radius: [--radius-full]
   spacing: ["4px 10px padding"]
   typography: [--font-size-badge, --font-mono]
@@ -92,7 +92,7 @@ tokens:
 motion:
   enter: "none — always present (read-only status/category label)."
   exit: "none."
-  stateChange: "The base badge is fully static (no transition). Only the link variant (a.badge) transitions opacity and fades to .85 on hover, with a 2px --color-focus focus-visible outline. An optional leading spinner inside a badge is a continuous Loading loop, not a badge state change."
+  stateChange: "The base badge is fully static (no transition). Only the link variant (a.badge) transitions opacity and fades to .85 on hover, with a 2px --focus focus-visible outline. An optional leading spinner inside a badge is a continuous Loading loop, not a badge state change."
   duration: "--duration-fast (link variant only)"
   easing: "--ease-default (link variant only)"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css. No component-specific override. Note: a spinner embedded in a badge is a Loading-family loop (exempt category per guidelines/motion.md) and stops under reduced motion via the same global rule."

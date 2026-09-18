@@ -34,14 +34,14 @@ layout_constraints:
   - "When the associated control is disabled, the label dims automatically — don't hand-dim it."
 
 states:
-  default: "--text-primary, weight 500; cursor:pointer when [for] is present."
+  default: "--on-surface, weight 500; cursor:pointer when [for] is present."
   disabled: "Derived from the associated control (:has(+ :disabled), :disabled + .label, or data-disabled=true) → 50% opacity, not-allowed, no pointer events. No JS."
 
 accessibility:
   roles: "Native <label>; a for/id or wrapping association gives the control its accessible name and extends its click target."
   aria: ["for → control id (association)", "data-disabled=true to mirror a disabled control when order prevents :has"]
   focus: "The label is not a focus stop; clicking it focuses/activates the associated control."
-  contrast: "Label text meets AA against the surface in light + dark via --text-primary."
+  contrast: "Label text meets AA against the surface in light + dark via --on-surface."
 keyboard:
   - {keys: "(click / tap)", action: "focuses or toggles the associated control — labels are not focusable themselves"}
 responsive:
@@ -68,7 +68,7 @@ relationships:
     - {component: badge, why: "badge is read-only status; a label names an interactive control"}
 
 tokens:
-  color: [--text-primary, --red]
+  color: [--on-surface, --error]
   typography: [--font-body, --font-size-label, "font-weight 500"]
   spacing: ["8px gap"]
 

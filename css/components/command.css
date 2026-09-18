@@ -12,7 +12,7 @@
    (`.toLowerCase().includes()`), no fuzzy-search — ver components/ui/command.tsx.
 
    Dependencia: variables.css (Color Roles)
-   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en
+   Consume EXCLUSIVAMENTE roles semánticos de color → funciona en
    light y dark sin overrides por tema.
 
    Uso:
@@ -38,8 +38,8 @@
   height: 100%;
   overflow: hidden;
   border-radius: var(--radius-md);
-  background: var(--color-surface-container);
-  color: var(--color-on-surface);
+  background: var(--surface-container);
+  color: var(--on-surface);
 }
 
 .command-input-wrapper {
@@ -56,7 +56,7 @@
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   opacity: .7;
 }
 
@@ -68,9 +68,9 @@
   outline: none;
   font-family: var(--font-body);
   font-size: var(--font-size-body-sm);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
-.command-input::placeholder { color: var(--color-on-surface-variant); }
+.command-input::placeholder { color: var(--on-surface-variant); }
 .command-input:disabled { cursor: not-allowed; opacity: .5; }
 
 .command-list {
@@ -84,7 +84,7 @@
   padding: var(--space-6) 0;
   text-align: center;
   font-size: var(--font-size-body-sm);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 
 .command-group {
@@ -97,7 +97,7 @@
   padding: var(--space-1-5) var(--space-2);
   font-size: var(--font-size-caption);
   font-weight: var(--font-weight-medium);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 
 .command-separator {
@@ -114,7 +114,7 @@
   padding: var(--space-2) var(--space-3);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-body-sm);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   cursor: pointer;
   user-select: none;
   outline: none;
@@ -122,7 +122,7 @@
 .command-item[hidden] { display: none; }
 .command-item svg { width: 18px; height: 18px; flex-shrink: 0; opacity: .7; }
 .command-item[data-active="true"] {
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
 }
 .command-item[aria-disabled="true"] {
   pointer-events: none;
@@ -134,7 +134,7 @@
   font-family: var(--font-mono);
   font-size: var(--font-size-mono-sm);
   letter-spacing: var(--letter-spacing-overline);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   opacity: .7;
 }
 
@@ -151,7 +151,7 @@
   align-items: flex-start;
   justify-content: center;
   padding: 12vh var(--space-4) var(--space-4);
-  background: var(--color-scrim);
+  background: var(--scrim);
   animation: fadeIn var(--duration-fast) var(--ease-enter);
 }
 .command-dialog .command {

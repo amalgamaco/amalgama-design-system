@@ -23,7 +23,7 @@
 
 .divider {
   border: none;
-  background: var(--color-outline-variant);
+  background: var(--outline-variant);
   height: 1px;
   width: 100%;
   margin: 0;

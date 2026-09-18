@@ -37,7 +37,7 @@ layout_constraints:
   - "Linear spans a container width or the page top; circular/spinner live in compact/inline spots."
   - "Never switch between determinate and indeterminate within the same operation."
 states:
-  default: "Track (--color-surface-variant) + fill/indicator (--color-primary)."
+  default: "Track (--surface-variant) + fill/indicator (--primary)."
   determinate: "aria-valuenow reflects the real percentage; fill/offset animates to it."
   indeterminate: "aria-valuenow omitted; fill slides / ring spins continuously."
 accessibility:
@@ -68,7 +68,7 @@ relationships:
     - {component: skeleton, why: "Skeleton mimics the incoming layout's shape; Loading is an abstract activity indicator"}
     - {component: empty-state, why: "Empty State handles no-data; Loading handles in-progress"}
 tokens:
-  color: [--color-primary, --color-surface-variant, --color-outline-variant, --color-on-primary]
+  color: [--primary, --surface-variant, --outline-variant, --on-primary]
   radius: [--radius-full]
   motion: ["1.4s indeterminate slide", "0.7s spinner rotation", "prefers-reduced-motion aware"]
 motion:

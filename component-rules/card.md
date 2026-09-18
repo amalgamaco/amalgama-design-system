@@ -34,7 +34,7 @@ content_rules:
   - "Show a footer action ONLY when the card navigates or has an explicit action — one primary action per card."
   - "Icon-only buttons in card-action / card-footer need aria-label; decorative icons get aria-hidden."
 layout_constraints:
-  - "A Card declares the surface context for what goes inside it (--ctx-surface / --ctx-surface-raised), so a list blends with it and a field lifts off it. Nothing inside needs background overrides; if something still looks wrong, that is a DS gap — declare it with @ds-gap, never `background: transparent` on a public class."
+  - "A Card declares the surface context for what goes inside it (--surface / --surface-container), so a list blends with it and a field lifts off it. Nothing inside needs background overrides; if something still looks wrong, that is a DS gap — declare it with @ds-gap, never `background: transparent` on a public class."
   - "Only the container is required; card-header/-content/-footer/-action are all optional — compose only what you need."
   - "card-action anchors top-right of the header (reserves a second grid column)."
   - "Filter/sort controls live OUTSIDE the collection and apply to all cards — never inside a single card."
@@ -43,14 +43,14 @@ layout_constraints:
 states:
   default: "Resting surface per variant (outlined/elevated/filled)."
   hover: "Interactive card raises its shadow via --shadow-* on hover, without changing color."
-  focus: "Interactive card shows a visible focus ring (outline 2px --color-focus + offset); static card is not focusable."
+  focus: "Interactive card shows a visible focus ring (outline 2px --focus + offset); static card is not focusable."
   disabled: "Not a built-in state — an interactive card gates via its root <a>/<button>."
 
 accessibility:
   roles: "A fully clickable card is an <a> or <button> root with a descriptive aria-label — never a <div onclick>."
   aria: ["aria-label on a clickable card root", "aria-hidden on decorative icons", "aria-label on icon-only header/footer buttons"]
   focus: "Static variant must not receive focus (pointer-events:none; tabindex=-1); interactive variant has a visible focus ring."
-  contrast: "Semantic tokens (--color-surface-container, --color-on-surface) guarantee AA in light + dark; never override colors per theme."
+  contrast: "Semantic tokens (--surface-container, --on-surface) guarantee AA in light + dark; never override colors per theme."
 keyboard:
   - {keys: "Tab", action: "focus a clickable card / its footer actions"}
   - {keys: "Enter / Space", action: "activate a clickable card root or a focused action"}
@@ -81,7 +81,7 @@ relationships:
     - {component: vacancy-card, why: "specialized domain card; Full Card is generic"}
 
 tokens:
-  color: [--card-bg, --border, --color-surface-container-low, --color-surface-container-highest, --text-primary, --text-secondary]
+  color: [--surface-container, --border, --surface-container-low, --surface-container-highest, --on-surface, --on-surface-variant]
   radius: [--radius]
   spacing: ["16px 20px container padding", "12px header gap", "16px footer offset"]
   elevation: [--shadow-sm]

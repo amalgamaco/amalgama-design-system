@@ -35,10 +35,10 @@ layout_constraints:
 
 states:
   default: "1px --border box, mono font, centered."
-  hover: "Border darkens to --color-outline (not on focus/disabled)."
-  focus: "Border --interactive + 3px --color-focus-ring; the focused box lifts (z-index)."
+  hover: "Border darkens to --outline (not on focus/disabled)."
+  focus: "Border --secondary + 3px --focus-ring; the focused box lifts (z-index)."
   disabled: ".otp-group.is-disabled / :disabled → dimmed, not-allowed."
-  error: "Per-box aria-invalid, or .otp-group.is-error for the whole code → --color-error border, error ring on focus."
+  error: "Per-box aria-invalid, or .otp-group.is-error for the whole code → --error border, error ring on focus."
 
 accessibility:
   roles: "Real <input maxlength=1> boxes inside a role=group; browser handles selection/deletion/IME."
@@ -75,7 +75,7 @@ relationships:
     - {component: input, why: "input is free-form; OTP is fixed-length per-character code entry"}
 
 tokens:
-  color: [--border, --card-bg, --text-primary, --interactive, --color-focus-ring, --color-error, --color-error-ring, --color-disabled, --color-on-disabled]
+  color: [--border, --surface-container, --on-surface, --secondary, --focus-ring, --error, --error-ring, --disabled, --on-disabled]
   radius: [--radius-md]
   typography: [--font-size-heading-xs, --font-mono, --font-weight-medium]
   motion: [--duration-fast, --ease-default]
@@ -83,7 +83,7 @@ tokens:
 motion:
   enter: "none — the boxes are always present (static; JS auto-advance/backspace/paste move the caret, not animation)"
   exit: "none"
-  stateChange: "Focus moves the border to --interactive and adds a 3px --color-focus-ring box-shadow; hover (when not focused/disabled) darkens the border to --color-outline; error/invalid swaps to --color-error + --color-error-ring. Only border-color and box-shadow transition."
+  stateChange: "Focus moves the border to --secondary and adds a 3px --focus-ring box-shadow; hover (when not focused/disabled) darkens the border to --outline; error/invalid swaps to --error + --error-ring. Only border-color and box-shadow transition."
   duration: "--duration-fast"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping or essential motion to preserve — the focus ring still appears, just without the fade."

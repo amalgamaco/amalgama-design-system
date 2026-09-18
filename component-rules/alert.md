@@ -69,7 +69,7 @@ relationships:
     - {component: dialog, why: "Alert Dialog blocks and demands a choice; Alert coexists with content"}
     - {component: badge, why: "Badge is a compact read-only status marker; Alert is a full contextual message"}
 tokens:
-  color: [--color-info-container, --color-on-info-container, --color-success-container, --color-warning-container, --color-error-container, --color-surface-container]
+  color: [--info-container, --on-info-container, --success-container, --warning-container, --error-container, --surface-container]
   radius: [--radius-lg]
   spacing: ["12px 16px padding", "12px column gap"]
 motion:

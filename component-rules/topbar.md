@@ -37,13 +37,13 @@ layout_constraints:
 states:
   default: "Resting sticky header."
   scrolled: "May elevate (shadow) on scroll to separate from the content."
-  hover: "topbar-btn.secondary and topbar-notif tint on hover (--interactive-light)."
+  hover: "topbar-btn.secondary and topbar-notif tint on hover (--secondary-container)."
   focus: "Use native <a>/<button> controls so the browser focus ring is preserved (layout.css defines no custom :focus-visible for topbar controls)."
 accessibility:
   roles: "The topbar lives inside a <header> with role=banner; breadcrumbs use <nav aria-label=\"Breadcrumb\">."
   aria: ['role="banner" on the header', 'aria-label="Breadcrumb" with aria-current="page" on the last crumb', "notifications button aria-label includes the count ('3 notificaciones sin leer')", "hamburger aria-label + aria-expanded + aria-controls"]
   focus: "All controls are native and keyboard-reachable; don't suppress the native outline."
-  contrast: "Tokens (--text-muted, --interactive, --color-on-primary) guarantee AA in light + dark — never theme overrides."
+  contrast: "Tokens (--on-surface-variant, --secondary, --on-primary) guarantee AA in light + dark — never theme overrides."
 keyboard:
   - {keys: "Tab / Shift+Tab", action: "move through topbar controls"}
   - {keys: "Enter / Space", action: "activate the focused control"}
@@ -72,7 +72,7 @@ relationships:
     - {component: page-header, why: "Page Header titles the content region; the topbar is the shell header"}
     - {component: breadcrumb, why: "Breadcrumb is a part inside the topbar, not the bar itself"}
 tokens:
-  color: [--sidebar-bg, --text-muted, --interactive, --interactive-light, --color-on-primary, --border]
+  color: [--surface-container, --on-surface-variant, --secondary, --secondary-container, --on-primary, --border]
   radius: [--radius-md, --radius-full]
   spacing: [--topbar-height]
   motion: [--duration-fast]

@@ -38,7 +38,7 @@
   font-weight: 400;
 }
 .date-picker-trigger.date-picker-trigger-empty {
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 .date-picker-icon {
   width: 18px;
@@ -52,7 +52,7 @@
   top: calc(100% + 4px);
   left: 0;
   padding: var(--space-3);
-  background: var(--color-surface);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);

@@ -10,7 +10,7 @@
    Reemplaza a: cualquier selector de fecha ad-hoc sin grilla accesible.
 
    Dependencia: variables.css (Color Roles). Consume EXCLUSIVAMENTE tokens
-   semánticos --color-* → funciona en light y dark sin overrides por tema.
+   roles semánticos de color → funciona en light y dark sin overrides por tema.
 
    Nota de alcance (revert a vanilla): implementación simplificada respecto a la
    versión Tailwind (react-day-picker + date-fns) — matemática de fechas con
@@ -54,7 +54,7 @@
   --cal-cell: 32px;              /* shadcn --cell-size: 2rem (32px); overridable por .calendar-sm/-lg */
   display: inline-block;         /* w-fit */
   padding: var(--space-3);                 /* p-3 */
-  background: var(--color-surface);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
 }
@@ -76,7 +76,7 @@
   font-family: var(--font-body);         /* shadcn caption_label: sans */
   font-size: var(--font-size-body-md);   /* text-sm */
   font-weight: 600;                      /* font-medium */
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   text-transform: capitalize;
 }
 
@@ -86,10 +86,10 @@
 .calendar-caption-select {
   appearance: none;
   -webkit-appearance: none;
-  border: 1px solid var(--color-input, var(--border));   /* dropdown_root: border-input */
+  border: 1px solid var(--input, var(--border));   /* dropdown_root: border-input */
   border-radius: var(--radius-md);                         /* rounded-md */
-  background: var(--color-surface);
-  color: var(--color-on-surface);
+  background: var(--surface);
+  color: var(--on-surface);
   font-family: var(--font-body);
   font-size: var(--font-size-body-md);                     /* text-sm */
   font-weight: 600;                                        /* font-medium */
@@ -98,9 +98,9 @@
   text-transform: capitalize;
 }
 .calendar-caption-select:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .calendar-nav-btn {
   position: absolute;
@@ -112,14 +112,14 @@
   border: none;
   border-radius: var(--radius-md);   /* ghost button: rounded-md */
   background: transparent;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   cursor: pointer;
   transition: background-color var(--duration-fast) var(--ease-default);
 }
 .calendar-nav-btn svg { width: 16px; height: 16px; pointer-events: none; }   /* Chevron: size-4 */
-.calendar-nav-btn:hover:not(:disabled) { background: var(--color-surface-variant); }
-.calendar-nav-btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+.calendar-nav-btn:hover:not(:disabled) { background: var(--surface-variant); }
+.calendar-nav-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .calendar-nav-btn:disabled { opacity: .5; cursor: not-allowed; }
 .calendar-nav-btn.prev { left: 0; }
@@ -135,7 +135,7 @@
   text-align: center;
   font-size: var(--font-size-label);   /* weekday: text-[0.8rem] */
   font-weight: 400;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 
 /* ── Grilla (semanas × 7 días) ── */
@@ -155,7 +155,7 @@
   border: none;
   border-radius: var(--radius-md);         /* day_button: rounded-md */
   background: transparent;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   font-size: var(--font-size-body-md);     /* day_button: text-sm */
   font-weight: 400;                        /* font-normal */
   line-height: var(--line-height-none);    /* leading-none */
@@ -163,31 +163,31 @@
   transition: background-color var(--duration-fast) var(--ease-default);
 }
 /* hover = ghost button hover (bg-accent) */
-.calendar-day:hover:not(:disabled):not(.calendar-day-selected):not(.calendar-day-range-middle) { background: var(--color-surface-variant); }
-.calendar-day:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+.calendar-day:hover:not(:disabled):not(.calendar-day-selected):not(.calendar-day-range-middle) { background: var(--surface-variant); }
+.calendar-day:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 
 /* outside = text-muted-foreground (sin opacidad extra, par shadcn) */
-.calendar-day-outside { color: var(--color-on-surface-variant); }
+.calendar-day-outside { color: var(--on-surface-variant); }
 /* today = bg-accent text-accent-foreground rounded-md (no negrita) */
 .calendar-day-today {
-  background: var(--color-surface-variant);
-  color: var(--color-on-surface);
+  background: var(--surface-variant);
+  color: var(--on-surface);
 }
 /* selected single = bg-primary text-primary-foreground */
 .calendar-day-selected,
 .calendar-day-selected:hover {
-  background: var(--color-primary);
-  color: var(--color-on-primary);
+  background: var(--primary);
+  color: var(--on-primary);
   font-weight: 500;
 }
 .calendar-day-disabled { opacity: .5; cursor: not-allowed; }   /* disabled: opacity-50 */
 
 /* ── Rango (mode="range") ── medio = bg-accent, extremos = bg-primary ── */
 .calendar-day-range-middle {
-  background: var(--color-surface-variant);
-  color: var(--color-on-surface);
+  background: var(--surface-variant);
+  color: var(--on-surface);
   border-radius: 0;
 }
 .calendar-day-range-start { border-top-right-radius: 0; border-bottom-right-radius: 0; }
@@ -196,7 +196,7 @@
 /* ── Booked (día reservado / no disponible) ── par shadcn "booked". No
    seleccionable; se marca con línea tachada y color atenuado. */
 .calendar-day-booked {
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   text-decoration: line-through;
   opacity: .6;
   cursor: not-allowed;
@@ -210,7 +210,7 @@
   display: flex; align-items: center; justify-content: center;
   width: var(--cal-cell); height: var(--cal-cell);
   font-size: var(--font-size-label);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   opacity: .7;
 }
 
@@ -236,7 +236,7 @@
      → los presets hacen wrap (3+2) en vez de estirar la card, igual que el
      bloque shadcn calendar-32. (--cal-cell vive en .calendar, no acá.) */
   max-width: min(100%, 248px);
-  background: var(--color-surface);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
 }
@@ -251,18 +251,18 @@
   white-space: nowrap;
   text-align: center;
   padding: var(--space-2) var(--space-1-5);
-  border: 1px solid var(--color-outline-variant);   /* Button variant="outline" size="sm" */
+  border: 1px solid var(--outline-variant);   /* Button variant="outline" size="sm" */
   border-radius: var(--radius-md);
-  background: transparent; color: var(--color-on-surface);
+  background: transparent; color: var(--on-surface);
   font: inherit; font-size: var(--font-size-body-sm); font-weight: 500;
   cursor: pointer;
   transition: background-color var(--duration-fast) var(--ease-default), border-color var(--duration-fast) var(--ease-default);
 }
-.calendar-preset-btn:hover { background: var(--color-surface-variant); border-color: var(--color-outline); }
-.calendar-preset-btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+.calendar-preset-btn:hover { background: var(--surface-variant); border-color: var(--outline); }
+.calendar-preset-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
-.calendar-preset-btn[aria-current="true"] { background: var(--color-secondary-container); border-color: var(--color-secondary); color: var(--color-on-secondary-container); }
+.calendar-preset-btn[aria-current="true"] { background: var(--secondary-container); border-color: var(--secondary); color: var(--on-secondary-container); }
 
 /* ── Date + time ── fila de hora bajo la grilla (par shadcn date-and-time picker). */
 .calendar-time-row {
@@ -270,17 +270,17 @@
   margin-top: 8px; padding-top: var(--space-2-5);
   border-top: 1px solid var(--border);
   font-size: var(--font-size-body-sm);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 .calendar-time-row input[type="time"] {
   flex: 1;
   padding: var(--space-1-5) var(--space-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  background: var(--color-surface-container);
-  color: var(--color-on-surface);
+  background: var(--surface-container);
+  color: var(--on-surface);
   font: inherit;
 }
-.calendar-time-row input[type="time"]:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+.calendar-time-row input[type="time"]:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }

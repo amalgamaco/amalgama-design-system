@@ -76,14 +76,14 @@ relationships:
     - {component: dialog, why: "Dialog blocks and demands a decision; Snackbar never blocks"}
     - {component: toast, why: "Toast (.toast panel) is the top-right system notification with a semantic icon; Snackbar is the bottom inverse-surface confirmation bar"}
 tokens:
-  color: [--color-inverse-surface, --color-inverse-on-surface, --color-inverse-primary]
+  color: [--inverse-surface, --inverse-on-surface, --inverse-primary]
   radius: [--radius-sm]
   spacing: [--space-2, --space-4]
   motion: ["250ms slide-up in", "200ms fade-out"]
 motion:
   enter: "Snackbar slides up + fades in (@keyframes snackbar-in / snackbar-stack-in: translateY(16px)→0, opacity 0→1). Toast slides in from the right (@keyframes slideInRight)."
   exit: "Snackbar fades out + slides down via .snackbar--exit (@keyframes snackbar-out / snackbar-stack-out: translateY→16px, opacity→0)."
-  stateChange: "Action/close buttons show hover/press state-layer tints (color-mix on --color-inverse-primary / --color-inverse-on-surface); toast-close animates background + color."
+  stateChange: "Action/close buttons show hover/press state-layer tints (color-mix on --inverse-primary / --inverse-on-surface); toast-close animates background + color."
   duration: "Hardcoded 250ms in / 200ms out (NOT tokens); button tints use --duration-fast; the toast-spinner loader loops at .7s."
   easing: "--ease-default (snackbar enter, button tints); exit is hardcoded ease-in; toast enter is hardcoded ease."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the component's own @media rule also zeroes the slide, falling back to a near-instant appearance / short opacity fade. The looping toast-spinner loader becomes static."

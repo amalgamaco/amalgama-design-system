@@ -5,7 +5,7 @@
  *
  * Checks:
  *   1. css-hex        raw hex in css/components/*.css (outside comments; #000/#fff allowed) — FAIL
- *   2. phantom-tokens --color-fg[-*] / --color-chart-* references in index.html — FAIL
+ *   2. phantom-tokens --color-fg* y el prefijo --color- retirado, en index.html y css/ — FAIL
  *   3. routes         every SECTIONS route resolves to a section or a valid redirect — FAIL
  *   4. nav-anchors    every navigate('c-*') target resolves — FAIL
  *   5. manifest       component-rules/manifest.json exists & count == rule files — FAIL
@@ -43,13 +43,35 @@ console.log("\n[1] css/components token compliance");
   if (!violations) ok("no raw hex outside comments (only sanctioned #000/#fff)");
 }
 
-// ── 2. phantom tokens in index.html ──────────────────────────────────────
-console.log("\n[2] phantom tokens");
+/* ── 2. tokens que no existen ─────────────────────────────────────────────
+   Dos familias de fantasma, y las dos pasaron de verdad.
+
+   `--color-fg*` nunca existió: era el nombre que uno escribe de memoria para el
+   color de texto. El rol se llama --on-surface.
+
+   `--color-*` sí existió, y hasta sep-2026 era el prefijo de TODOS los roles.
+   Se retiró: el sistema sigue el nombre de Material Design, que es el rol pelado
+   (--surface, --primary, --on-surface), no el rol con "color-" adelante. Una
+   ocurrencia nueva es código copiado de antes del cambio, y no resuelve a nada. */
+console.log("\n[2] tokens que no existen");
 {
-  const html = read("index.html");
-  const phantom = (html.match(/--color-fg\b|--color-fg-[a-z]+|--color-chart-/g) || []).length;
-  phantom ? fail(`${phantom} phantom --color-fg*/--color-chart-* references (use --text-*/--color-on-surface*/--chart-*)`)
-          : ok("0 phantom --color-fg*/--color-chart-* references");
+  const objetivo = [["index.html", read("index.html")],
+                    ...fs.readdirSync(path.join(ROOT, "css"))
+                        .filter((f) => f.endsWith(".css")).map((f) => [`css/${f}`, read(`css/${f}`)]),
+                    ...fs.readdirSync(path.join(ROOT, "css/components"))
+                        .filter((f) => f.endsWith(".css"))
+                        .map((f) => [`css/components/${f}`, read(`css/components/${f}`)])];
+  const fantasmas = [];
+  for (const [f, src] of objetivo) {
+    const sinComentar = src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/<!--[\s\S]*?-->/g, "");
+    const fg = (sinComentar.match(/--color-fg\b|--color-fg-[a-z]+/g) || []).length;
+    const pref = (sinComentar.match(/--color-[a-z][a-z0-9-]*/g) || []).length - fg;
+    if (fg)   fantasmas.push(`${f}: ${fg} × --color-fg* (el rol es --on-surface)`);
+    if (pref) fantasmas.push(`${f}: ${pref} × prefijo --color- retirado (el rol va pelado: --surface, --primary)`);
+  }
+  fantasmas.length
+    ? fail(`${fantasmas.length} archivo(s) con tokens que no existen: ` + fantasmas.join(" · "))
+    : ok("ningún --color-fg* ni prefijo --color- retirado");
 }
 
 // ── 3 & 4. routes + nav anchors ──────────────────────────────────────────
@@ -282,7 +304,7 @@ console.log("\n[11c] el header de cada componente cierra donde tiene que cerrar"
   }
   rotos.length
     ? fail(`${rotos.length} header(s) se cierran antes de tiempo por un */ en la prosa ` +
-           `(escribí "--color-* y --text-*", no "--color-*/--text-*"): ${rotos.join(", ")}`)
+           `(separá dos globs con " y ", nunca con "/"): ${rotos.join(", ")}`)
     : ok("ningún header se cierra antes de tiempo");
 }
 
@@ -497,7 +519,7 @@ console.log("\n[14] el interlineado del componente sale de su tamaño");
 /* ─────────────────────────────────────────────────────────────────────────────
    [15] los pares semanticos del sistema pasan AA
 
-   Cada familia declara --color-X y --color-on-X: el fondo y lo que va ENCIMA.
+   Cada familia declara --X y --on-X: el fondo y lo que va ENCIMA.
    Que ese par contraste es la promesa mas basica que hace un design system, y
    hasta hoy no la verificaba nadie. Se verificaba a mano, de a un token, cuando
    alguien se daba cuenta: asi aparecio --ds-text-3 fallando AA en los dos temas
@@ -514,12 +536,12 @@ console.log("\n[15] los pares semánticos pasan AA");
   const EXENTOS = new Set(["disabled"]);   // WCAG 1.4.3: componentes inactivos
 
   /* Decidido (sep 2026, opcion A): el relleno de un boton lleno se separo de la
-     señal. --color-error es el rojo del borde de un campo y del punto de estado
-     —objetos graficos, donde WCAG pide 3:1— y --color-error-fill es la superficie
+     señal. --error es el rojo del borde de un campo y del punto de estado
+     —objetos graficos, donde WCAG pide 3:1— y --error-fill es la superficie
      que lleva texto encima. Por eso, cuando una familia tiene -fill, el fondo del
-     par es ESE y no el tono de señal: medir --color-on-error contra --color-error
+     par es ESE y no el tono de señal: medir --on-error contra --error
      mediria una combinacion que ya no se dibuja en ningun lado. */
-  const fondoDe = (f) => (`--color-${f}-fill` in claro ? `--color-${f}-fill` : `--color-${f}`);
+  const fondoDe = (f) => (`--${f}-fill` in claro ? `--${f}-fill` : `--${f}`);
   const raw = read("css/variables.css").replace(/\/\*[\s\S]*?\*\//g, "");
   const bloque = (marca) => {
     const i = raw.indexOf(marca); if (i < 0) return "";
@@ -550,17 +572,17 @@ console.log("\n[15] los pares semánticos pasan AA");
     return (x + 0.05) / (y + 0.05); };
 
   const familias = [...new Set(Object.keys(claro)
-    .filter((k) => /^--color-on-[\w-]+$/.test(k))
-    .map((k) => k.replace("--color-on-", "")))];
+    .filter((k) => /^--on-[\w-]+$/.test(k))
+    .map((k) => k.replace("--on-", "")))];
 
   const bajos = [], sinResolver = [];
   let mirados = 0;
   for (const f of familias) {
     if (EXENTOS.has(f)) continue;
-    if (!(`--color-${f}` in claro)) continue;
+    if (!(`--${f}` in claro)) continue;
     const tokenFondo = fondoDe(f);
     for (const [tema, map] of [["claro", claro], ["oscuro", oscuro]]) {
-      const fg = resolver(map, map[`--color-on-${f}`]);
+      const fg = resolver(map, map[`--on-${f}`]);
       const bg = resolver(map, map[tokenFondo]);
       if (!fg || !bg) { sinResolver.push(`${f} (${tema})`); continue; }
       mirados++;
@@ -585,7 +607,7 @@ console.log("\n[15] los pares semánticos pasan AA");
    eso reescribe a mano 54 tokens de la capa semantica. Es una copia, con todo lo
    que eso implica: cuando :root cambia, la copia no falla — miente.
 
-   Ya paso. Alguien descubrio que --color-on-warning-container daba 3.50:1, lo
+   Ya paso. Alguien descubrio que --on-warning-container daba 3.50:1, lo
    movio al -925 en :root y dejo la nota explicando por que; el espejo se quedo en
    el -900. Meses despues un badge de "En revision" renderizaba a 3.50:1 sin que
    nada lo dijera, y aparecio midiendo el render, no leyendo el CSS.
@@ -675,7 +697,7 @@ console.log("\n[17] las versalitas del sitio no usan el tracking de catálogo");
   }
   if (malas.length)
     fail(`${malas.length} regla(s) con versalitas y tracking 0.12–0.16em — es el rótulo `
-         + `de catálogo que la regla 1 prohíbe; usá .overline (Epilogue, apretado, --text-muted): `
+         + `de catálogo que la regla 1 prohíbe; usá .overline (Epilogue, apretado, --on-surface-variant): `
          + malas.slice(0, 6).join(" · ") + (malas.length > 6 ? ` …y ${malas.length - 6} más` : ""));
   else ok("ninguna versalita del sitio usa el tracking amplio");
 }
@@ -726,7 +748,7 @@ console.log(`\n[18] la variación de una Stat Card entra en su píldora (≤ ${M
    desviaciones conocidas. Diecinueve es lo que pasa cuando el patron unico no le
    sirve a todas las formas y cada componente se inventa su propia salida: anillos
    de 3px y de 2px, offsets de 1px y de -2px, tres colores de outline, la forma
-   `var(--color-focus, var(--color-primary))` que solo tapa un typo, y `--interactive`
+   `var(--focus, var(--primary))` que solo tapa un typo, y `--interactive`
    —que la propia seccion prohibe por nombre— en el campo de formulario.
 
    Por eso ahora son tres formas (A outset, B inset, C campo), elegidas por la forma
@@ -740,13 +762,13 @@ console.log(`\n[18] la variación de una Stat Card entra en su píldora (≤ ${M
    ──────────────────────────────────────────────────────────────────────────── */
 console.log("\n[19] el foco sale de una de las tres formas (GOVERNANCE §6.2)");
 {
-  const A = ["2px solid var(--color-focus)", "2px", "0 0 0 4px var(--color-focus-ring)"];
-  const B = ["2px solid var(--color-focus)", "-2px", "inset 0 0 0 4px var(--color-focus-ring)"];
+  const A = ["2px solid var(--focus)", "2px", "0 0 0 4px var(--focus-ring)"];
+  const B = ["2px solid var(--focus)", "-2px", "inset 0 0 0 4px var(--focus-ring)"];
   // C: el borde hace de outline. Anillo de 4px, normal o de error. `outline:none` es parte de C.
   const esC = (o, off, sh, borde) =>
-    (borde === "var(--color-focus)" || sh !== "-") &&
+    (borde === "var(--focus)" || sh !== "-") &&
     off === "-" && (o === "-" || o === "none") &&
-    /^0 0 0 4px var\(--color-(focus|error)-ring\)$/.test(sh);
+    /^0 0 0 4px var\(--(focus|error)-ring\)$/.test(sh);
 
   // Excepciones aprobadas — cada una con su fila en la tabla de §6.2.
   const EXENTOS = [
@@ -798,7 +820,7 @@ console.log("\n[19] el foco sale de una de las tres formas (GOVERNANCE §6.2)");
    se entera: en sep 2026 la fila "Focus" de #s-interaction-state decia «patron
    unico en toda la libreria» y «en inputs el ring es de 3px» — las dos falsas desde
    el dia en que el CSS cambio, y ademas dos demos del propio sitio dibujaban el
-   foco con --color-primary y 3px. El sitio le pedia al mundo algo que el mismo no
+   foco con --primary y 3px. El sitio le pedia al mundo algo que el mismo no
    mostraba.
 
    Esto NO copia los valores —el sitio nombra tokens y escalones, no numeros, y los
@@ -825,13 +847,13 @@ console.log("\n[20] el sitio no se queda atrás de COMPOSICION §4b y GOVERNANCE
     problemas.push('el sitio dice que el foco es «patrón único»; §6.2 define tres formas');
 
   // c · ningun ring de foco o de error de 3px, ni en prosa ni en un demo inline
-  for (const m of html.matchAll(/0 0 0 3px var\(--color-(focus|error)-ring\)/g))
+  for (const m of html.matchAll(/0 0 0 3px var\(--(focus|error)-ring\)/g))
     problemas.push(`el sitio dibuja un ring de 3px (${m[0]}); el spread es siempre 4px`);
   if (/ring de 3px/i.test(html)) problemas.push('el sitio menciona «ring de 3px» en prosa');
 
-  // d · un demo de foco no puede usar --color-primary como color de foco
-  if (/border-color:var\(--color-primary\);box-shadow:0 0 0 \dpx var\(--color-focus-ring\)/.test(html))
-    problemas.push('un demo de foco del sitio usa --color-primary; §6.2 dice siempre --color-focus');
+  // d · un demo de foco no puede usar --primary como color de foco
+  if (/border-color:var\(--primary\);box-shadow:0 0 0 \dpx var\(--focus-ring\)/.test(html))
+    problemas.push('un demo de foco del sitio usa --primary; §6.2 dice siempre --focus');
 
   // e · §6.2 tiene que seguir declarando tres formas
   if (!/three canonical forms/i.test(gov))
@@ -885,8 +907,8 @@ console.log("\n[21] el ?v= de cada hoja sale de su contenido");
    [22] dos escalones de superficie no pueden resolver al mismo color
 
    `COMPOSICION.md` III·a·1 pide un escalon entre la pagina y el panel. Medido en
-   sep 2026 sobre una pantalla real: en oscuro `--color-surface-container-low`
-   resolvia al MISMO `#13161F` que `--color-surface`, porque los dos apuntaban a
+   sep 2026 sobre una pantalla real: en oscuro `--surface-container-low`
+   resolvia al MISMO `#13161F` que `--surface`, porque los dos apuntaban a
    `--neutral-800` y entre 800 y 700 no habia escalon. Un panel en ese token era
    invisible salvo por su borde. No lo vio nadie leyendo el CSS —los dos nombres
    son distintos— y el chequeo de pares AA tampoco, porque mide contraste de texto,
@@ -922,14 +944,14 @@ console.log("\n[22] los escalones de superficie se distinguen entre sí");
   for (const [tema, re] of [["light", /^:root\s*\{/m], ["dark", /\[data-theme="dark"\]\s*\{/]]) {
     const b = bloque(re); if (!b) continue;
     const vals = {};
-    for (const t of RAMPA) { const m = new RegExp(`--color-${t}:\\s*([^;]+);`).exec(b); if (m) vals[t] = resolver(m[1]); }
+    for (const t of RAMPA) { const m = new RegExp(`--${t}:\\s*([^;]+);`).exec(b); if (m) vals[t] = resolver(m[1]); }
     const presentes = RAMPA.filter((t) => vals[t]);
     for (let i = 0; i < presentes.length; i++)
       for (let j = i + 1; j < presentes.length; j++) {
         const x = presentes[i], y = presentes[j];
         if (vals[x] !== vals[y]) continue;
         if (EXENTOS.has(`${tema}:${x}=${y}`) || EXENTOS.has(`${tema}:${y}=${x}`)) continue;
-        problemas.push(`${tema}: --color-${x} y --color-${y} resuelven los dos a ${vals[x]}`);
+        problemas.push(`${tema}: --${x} y --${y} resuelven los dos a ${vals[x]}`);
       }
   }
   if (problemas.length)
@@ -943,7 +965,7 @@ console.log("\n[22] los escalones de superficie se distinguen entre sí");
 /* ────────────────────────────────────────────────────────────────────────────
    [23] el contraste de un badge cuenta su opacidad
 
-   `[15]` certifica los pares --color-X / --color-on-X y pasaba limpio, porque los
+   `[15]` certifica los pares --X / --on-X y pasaba limpio, porque los
    tokens de `.badge-archived` estaban bien. Lo que fallaba era el pixel: la regla
    agregaba `opacity: .75` encima, y la opacidad mezcla el texto Y el fondo contra
    la pagina, asi que el contraste REAL caia de 4.64:1 a 2.91:1 en claro — por
@@ -982,7 +1004,7 @@ console.log("\n[23] el contraste de cada badge cuenta la opacidad que declara");
     if (!bg || !fg) continue;
     const op = parseFloat((/opacity:\s*([\d.]+)/.exec(cuerpo) || [, "1"])[1]);
     for (const tema of ["light", "dark"]) {
-      const pag = hex("var(--color-surface)", tema);
+      const pag = hex("var(--surface)", tema);
       const hb = hex(bg[1], tema), hf = hex(fg[1], tema);
       if (!hb || !hf || !pag) continue;                 // color-mix u otra forma: no se mide acá
       const P = rgb(pag);

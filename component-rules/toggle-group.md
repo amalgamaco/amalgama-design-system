@@ -33,12 +33,12 @@ content_rules:
   - "Group items that genuinely share one axis; don't mix unrelated toggles."
 layout_constraints:
   - "Container is an inline flex row of individual .toggle items (no bordered group container — that shape is Segmented Button)."
-  - "Shares only the selection color (--color-secondary-container) with Segmented Button; the shape is intentionally different."
+  - "Shares only the selection color (--secondary-container) with Segmented Button; the shape is intentionally different."
 
 states:
   default: "Each item inherits Toggle's resting state."
   hover: "Per item, Toggle's hover state layer."
-  focus: "Per item, visible focus-visible ring (--color-focus + --color-focus-ring)."
+  focus: "Per item, visible focus-visible ring (--focus + --focus-ring)."
   pressed: "aria-pressed=true on an item → filled secondary-container / on-secondary-container."
   disabled: "Per item, opacity 0.38, no pointer events."
 
@@ -77,7 +77,7 @@ relationships:
     - {component: switch, why: "Switch is a single labelled on/off; toggle-group is a set"}
 
 tokens:
-  color: [--color-secondary-container, --color-on-secondary-container, --color-on-surface, --color-focus, --color-focus-ring]
+  color: [--secondary-container, --on-secondary-container, --on-surface, --focus, --focus-ring]
   radius: [--radius-md]
   spacing: [--space-2]
 

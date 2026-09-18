@@ -39,16 +39,16 @@ content_rules:
   - "Month/day names come from Intl.DateTimeFormat (browser locale) — no locale library."
   - "For distant dates, also offer a native type=\"date\" input; navigating months by grid is tedious and less accessible."
 layout_constraints:
-  - "Consumes only semantic --color-* tokens; works in light + dark with no per-theme overrides."
+  - "Consumes only the semantic role tokens; works in light + dark with no per-theme overrides."
   - "Presets render as outline buttons that wrap below the grid; booked days are inert."
   - "Presentation (inline / popover / dialog / sheet) is a composition of the same Calendar — not a separate component."
 
 states:
   default: "Resting month grid; each day a real <button>."
-  hover: "Non-selected, non-range day tints to --color-surface-variant."
-  focus: "Day and nav buttons show a focus ring (--color-focus / --color-primary fallback)."
-  selected: "Filled --color-primary with --color-on-primary text."
-  today: "Reinforced with its own --color-surface-variant fill (not color alone)."
+  hover: "Non-selected, non-range day tints to --surface-variant."
+  focus: "Day and nav buttons show a focus ring (--focus / --primary fallback)."
+  selected: "Filled --primary with --on-primary text."
+  today: "Reinforced with its own --surface-variant fill (not color alone)."
   range: "Endpoints use primary; the middle span (calendar-day-range-middle) uses a container fill."
   disabled: "calendar-day-disabled — dimmed (opacity .5), not selectable."
   booked: "calendar-day-booked — struck through, aria-disabled, not selectable."
@@ -89,7 +89,7 @@ relationships:
     - {component: popover, why: "Popover is the container; the Date Picker is Calendar docked inside one"}
 
 tokens:
-  color: [--color-surface, --border, --color-on-surface, --color-primary, --color-on-primary, --color-primary-container, --color-surface-variant, --color-secondary-container, --color-on-secondary-container, --color-focus, --text-muted]
+  color: [--surface, --border, --on-surface, --primary, --on-primary, --primary-container, --surface-variant, --secondary-container, --on-secondary-container, --focus, --on-surface-variant]
   radius: [--radius-lg]
   typography: [--font-body, --font-size-body-md]
   spacing: ["--cal-cell (32px default; sm/lg override)", "12px panel padding"]

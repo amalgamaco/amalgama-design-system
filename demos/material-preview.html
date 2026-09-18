@@ -10,7 +10,7 @@
      con la paleta de Amalgama.
 
      No hay puente que escribir: css/md-sys-bridge.css ya expone los 36 roles
-     --md-sys-color-* como alias de los --color-* de Embassy, que es
+     --md-sys-color-* como alias de los roles semánticos de Embassy, que es
      exactamente lo que lee Material Web. El archivo se escribió en junio 2026
      pensando en esto y estuvo sin usarse hasta ahora.
 
@@ -48,17 +48,17 @@
 </script>
 
 <style>
-  body { margin: 0; padding: 28px; background: var(--color-surface-dim); font-family: var(--font-body); }
+  body { margin: 0; padding: 28px; background: var(--surface-dim); font-family: var(--font-body); }
   .cab { max-width: 720px; margin: 0 auto 24px; }
   .cab h1 { font-family: var(--font-heading); font-size: var(--font-size-heading-lg);
-            color: var(--color-on-surface); margin: 0 0 8px; }
-  .cab p { color: var(--color-on-surface-variant); font-size: var(--font-size-body-md); margin: 0 0 8px; line-height: 1.55; }
+            color: var(--on-surface); margin: 0 0 8px; }
+  .cab p { color: var(--on-surface-variant); font-size: var(--font-size-body-md); margin: 0 0 8px; line-height: 1.55; }
   .aviso { max-width: 720px; margin: 0 auto 24px; padding: 14px 16px; border-radius: 10px;
-           background: var(--color-error-container); color: var(--color-on-error-container);
+           background: var(--error-container); color: var(--on-error-container);
            font-size: var(--font-size-body-sm); }
   .fila { display: flex; flex-direction: column; gap: 14px; }
   .et { font-family: var(--font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
-        color: var(--color-on-surface-variant); }
+        color: var(--on-surface-variant); }
   .par { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 </style>
 </head>

@@ -43,16 +43,16 @@ content_rules:
 layout_constraints:
   - "One row that wraps (flex-wrap); the search-field grows, controls sit to its right at equal height."
   - ".toolbar-filters is a scoped re-skin: it restyles .select-trigger / .date-picker-trigger / .seg-btn-group ONLY within .toolbar-filters — it must not change the standalone Select, Segmented Button or Date Picker."
-  - "In .toolbar-filters the Segmented Button container adopts the field (squared --radius-md); the selected segment keeps its primary state (--color-secondary-container) and each segment keeps its own focus ring."
+  - "In .toolbar-filters the Segmented Button container adopts the field (squared --radius-md); the selected segment keeps its primary state (--secondary-container) and each segment keeps its own focus ring."
   - "On narrow viewports collapse secondary filters into a single 'Filtros' button that opens a Sheet/Popover; overflow controls go behind .toolbar-overflow-btn."
   - "Don't mix Toolbar with the shell — global context/actions live in the Top Bar."
   - "Desktop one-line vs two-line: prefer explicit two lines (.toolbar-stack — row 1 search + primary action, row 2 filters) over letting the bar wrap unpredictably; controls stay centered on one 40px baseline. When space is limited the search and the single primary action stay visible first; the view/sort switch collapses to overflow, then secondary filters collapse to a 'Filtros' button. (Mobile wrap/collapse rules are separate — see responsive.)"
 states:
   default: "Resting bar."
-  hover: "toolbar-btn tints (--color-surface-variant); search-field lightens; in .toolbar-filters the field tints (--tb-surface-hover) and border darkens (--tb-border-hover)."
-  focus: "toolbar-btn :focus-visible (2px --color-focus + 4px ring); search-field :focus-within (border --color-secondary); .toolbar-filters field focus = border --interactive + 3px --tb-focus-ring; each seg-btn keeps its own ring."
-  active: "toolbar-btn dims on press (opacity .85); Segmented Button selection → --color-secondary-container/--color-on-secondary-container."
-  disabled: "toolbar-btn / field: surface --color-surface-variant, text --color-on-disabled, border --color-outline, pointer-events:none."
+  hover: "toolbar-btn tints (--surface-variant); search-field lightens; in .toolbar-filters the field tints (--tb-surface-hover) and border darkens (--tb-border-hover)."
+  focus: "toolbar-btn :focus-visible (2px --focus + 4px ring); search-field :focus-within (border --secondary); .toolbar-filters field focus = border --secondary + 3px --tb-focus-ring; each seg-btn keeps its own ring."
+  active: "toolbar-btn dims on press (opacity .85); Segmented Button selection → --secondary-container/--on-secondary-container."
+  disabled: "toolbar-btn / field: surface --surface-variant, text --on-disabled, border --outline, pointer-events:none."
   loading: "Controls take disabled/aria-busy; the body shows Skeleton — the bar stays visible, never hidden."
   empty: "Filters stay visible; the empty result is shown in the list/table (Empty State), not in the bar."
   selection: ".toolbar-selection: tinted secondary-container surface, count + clear + bulk actions; enters on --duration-normal."
@@ -60,7 +60,7 @@ accessibility:
   roles: "Container may take role=\"toolbar\" + aria-label; search uses <input type=\"search\">; filters use Select (role=listbox), Segmented Button (button group), Date Picker (button+popover)."
   aria: ["aria-label on the search input when there's no visible <label>", 'aria-live="polite" on result-count and on .toolbar-selection-count', 'aria-haspopup="menu" + aria-label on .toolbar-overflow-btn', "Select/Segmented Button provide their own semantics"]
   focus: "Tab order follows visual order (search → filters → actions); never suppress the native <input> outline; each seg-btn segment keeps its focus ring (WCAG 2.4.7)."
-  contrast: "Tokens (--color-surface, --card-bg, --border, --interactive, --color-secondary-container) guarantee AA in light + dark — never theme overrides."
+  contrast: "Tokens (--surface, --surface-container, --border, --secondary, --secondary-container) guarantee AA in light + dark — never theme overrides."
 keyboard:
   - {keys: "Tab / Shift+Tab", action: "move through search, filters, sort, actions in visual order"}
   - {keys: "Enter / Space", action: "activate the focused control / segment / action"}
@@ -99,7 +99,7 @@ relationships:
     - {component: search, why: "the standalone Search Bar heads a whole screen; the Toolbar uses the compact search-field"}
     - {component: segmented-button, why: "standalone it is a transparent pill; inside .toolbar-filters only its container adopts the shared field — the component is unchanged"}
 tokens:
-  color: [--color-surface, --card-bg, --color-on-surface-variant, --color-surface-variant, --color-outline, --color-secondary, --interactive, --color-focus-ring, --color-secondary-container, --color-on-secondary-container, --text-muted]
+  color: [--surface, --surface-container, --on-surface-variant, --surface-variant, --outline, --secondary, --secondary, --focus-ring, --secondary-container, --on-secondary-container, --on-surface-variant]
   radius: [--radius-md, --radius-sm, --radius-full]
   spacing: [--space-2, --space-3, --space-4, "--tb-height 40px", "--tb-pad-x 14px"]
   typography: [--font-size-body-md, --font-size-label, --font-size-caption, --font-body]

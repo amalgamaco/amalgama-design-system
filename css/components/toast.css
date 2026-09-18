@@ -15,9 +15,9 @@
    Cuándo no: confirmaciones que requieren decisión → usar Modal.
 
    Tokens Snackbar — familia inverse (auto-contraste en light y dark sin overrides):
-     Contenedor       --color-inverse-surface       #0A0C12 claro / #EAEBED oscuro
-     Texto mensaje    --color-inverse-on-surface     #EAEBED claro / #13161F oscuro
-     Botón de acción  --color-inverse-primary        #4F80FF claro / #162F6F oscuro
+     Contenedor       --inverse-surface       #0A0C12 claro / #EAEBED oscuro
+     Texto mensaje    --inverse-on-surface     #EAEBED claro / #13161F oscuro
+     Botón de acción  --inverse-primary        #4F80FF claro / #162F6F oscuro
      Presionado acc.  color-mix(inverse-primary 12%, inverse-surface)
 
    Specs Snackbar:
@@ -75,7 +75,7 @@
   gap: var(--space-2);
 }
 .toast {
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-3) var(--space-5);
@@ -86,17 +86,17 @@
   min-width: 280px;
   max-width: 420px;
 }
-.toast-success { border-left: 3px solid var(--color-success); }
-.toast-error { border-left: 3px solid var(--color-error); }
-.toast-info { border-left: 3px solid var(--color-secondary); }
-.toast-warning { border-left: 3px solid var(--color-warning); }
-.toast-loading { border-left: 3px solid var(--color-outline); }
+.toast-success { border-left: 3px solid var(--success); }
+.toast-error { border-left: 3px solid var(--error); }
+.toast-info { border-left: 3px solid var(--secondary); }
+.toast-warning { border-left: 3px solid var(--warning); }
+.toast-loading { border-left: 3px solid var(--outline); }
 /* Spinner para el toast de carga (par sonner loading). Usar como .toast-icon. */
 .toast-spinner {
   width: 16px; height: 16px;
   border-radius: 50%;
-  border: 2px solid var(--color-outline-variant);
-  border-top-color: var(--color-primary);
+  border: 2px solid var(--outline-variant);
+  border-top-color: var(--primary);
   animation: toast-spin .7s linear infinite;
 }
 @keyframes toast-spin { to { transform: rotate(360deg); } }
@@ -106,22 +106,22 @@
 /* Título + descripción (par sonner: dos líneas). Usar .toast-content como slot
    flexible cuando el toast lleva encabezado y detalle. */
 .toast .toast-content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-0-5); }
-.toast .toast-title { font-weight: 600; color: var(--color-on-surface); }
-.toast .toast-desc { font-size: var(--font-size-body-sm); color: var(--color-on-surface-variant); line-height: var(--line-height-body-sm); }
+.toast .toast-title { font-weight: 600; color: var(--on-surface); }
+.toast .toast-desc { font-size: var(--font-size-body-sm); color: var(--on-surface-variant); line-height: var(--line-height-body-sm); }
 .toast .toast-close {
   width: 24px; height: 24px;
   border: none; background: none;
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: var(--color-on-surface-variant);
+  cursor: pointer; color: var(--on-surface-variant);
   border-radius: var(--radius-sm);
   transition: background var(--duration-fast) var(--ease-default),
               color var(--duration-fast) var(--ease-default);
 }
-.toast .toast-close:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.toast .toast-close:hover { background: var(--surface-variant); color: var(--on-surface); }
 .toast .toast-close:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 
 /* ══════════════════════════════════════
@@ -142,7 +142,7 @@
   min-height: 48px;
   padding: 0 var(--space-2) 0 var(--space-4);  /* 0 8 0 16 */
   border-radius: var(--radius-sm);       /* 4dp */
-  background: var(--color-inverse-surface);
+  background: var(--inverse-surface);
   box-shadow: var(--shadow-lg);
   animation: snackbar-in 250ms var(--ease-default) both;
 }
@@ -162,7 +162,7 @@
 .snackbar-message {
   flex: 1;
   min-width: 0;
-  color: var(--color-inverse-on-surface);
+  color: var(--inverse-on-surface);
   font: var(--font-weight-regular) var(--font-size-body-md)/1.4 var(--font-body);
   padding: var(--space-3-5) 0;
 }
@@ -176,7 +176,7 @@
   background: transparent;
   padding: var(--space-2) var(--space-2);
   border-radius: var(--radius-sm);
-  color: var(--color-inverse-primary);
+  color: var(--inverse-primary);
   font: var(--font-weight-bold) var(--font-size-label)/1 var(--font-body);
   letter-spacing: var(--letter-spacing-label);
   text-transform: uppercase;
@@ -184,13 +184,13 @@
   transition: background var(--duration-fast) var(--ease-default);
 }
 .snackbar-action:hover {
-  background: color-mix(in srgb, var(--color-inverse-primary) 8%, transparent);
+  background: color-mix(in srgb, var(--inverse-primary) 8%, transparent);
 }
 .snackbar-action:active {
-  background: color-mix(in srgb, var(--color-inverse-primary) 12%, transparent);
+  background: color-mix(in srgb, var(--inverse-primary) 12%, transparent);
 }
 .snackbar-action:focus-visible {
-  outline: 2px solid var(--color-inverse-primary);
+  outline: 2px solid var(--inverse-primary);
   outline-offset: 2px;
 }
 
@@ -206,18 +206,18 @@
   border: 0;
   background: transparent;
   border-radius: 50%;
-  color: var(--color-inverse-on-surface);
+  color: var(--inverse-on-surface);
   cursor: pointer;
   transition: background var(--duration-fast) var(--ease-default);
 }
 .snackbar-close:hover {
-  background: color-mix(in srgb, var(--color-inverse-on-surface) 8%, transparent);
+  background: color-mix(in srgb, var(--inverse-on-surface) 8%, transparent);
 }
 .snackbar-close:active {
-  background: color-mix(in srgb, var(--color-inverse-on-surface) 12%, transparent);
+  background: color-mix(in srgb, var(--inverse-on-surface) 12%, transparent);
 }
 .snackbar-close:focus-visible {
-  outline: 2px solid var(--color-inverse-primary);
+  outline: 2px solid var(--inverse-primary);
   outline-offset: 2px;
 }
 .snackbar-close > svg,

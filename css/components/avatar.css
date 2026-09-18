@@ -5,7 +5,7 @@
    Cuándo usar: identificar a una persona (topbar, listas, cards de vacante/persona, asignados).
    Cuándo no: para íconos genéricos de sistema (usar Icon Button) ni como decoración sin significado.
    Reemplaza a: divs con gradientes hardcodeados / iniciales sin token — todo Avatar usa el fallback
-   tokenizado --color-primary-container / --color-on-primary-container, nunca hex.
+   tokenizado --primary-container / --on-primary-container, nunca hex.
 
    Dependencia: variables.css (Color Roles)
    Tamaños: .avatar-sm (28px) · .avatar-md (36px, default) · .avatar-lg (44px) · .avatar-xl (56px)
@@ -24,8 +24,8 @@
   /* Sin overflow:hidden en el contenedor — recortaría el .avatar-badge a media
      luna. La imagen se recorta sola (border-radius:inherit). */
   border-radius: var(--radius-full);
-  background: var(--color-primary-container);
-  color: var(--color-on-primary-container);
+  background: var(--primary-container);
+  color: var(--on-primary-container);
   font-family: var(--font-body);
   font-weight: 600;
   user-select: none;
@@ -68,25 +68,25 @@
   min-width: 8px;
   min-height: 8px;
   border-radius: var(--radius-full);
-  background: var(--color-success);
-  box-shadow: 0 0 0 2px var(--color-surface);
+  background: var(--success);
+  box-shadow: 0 0 0 2px var(--surface);
   /* Puede alojar un ícono de estado (par shadcn AvatarBadge con SVG). */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-surface);
+  color: var(--surface);
 }
 .avatar-badge svg { width: 64%; height: 64%; }
-.avatar-badge-online  { background: var(--color-success); }
-.avatar-badge-busy    { background: var(--color-error); }
-.avatar-badge-away    { background: var(--color-warning); }
-.avatar-badge-offline { background: var(--color-outline); }
+.avatar-badge-online  { background: var(--success); }
+.avatar-badge-busy    { background: var(--error); }
+.avatar-badge-away    { background: var(--warning); }
+.avatar-badge-offline { background: var(--outline); }
 
 /* Grupo apilado — usado en listas de asignados */
 .avatar-group { display: flex; align-items: center; }
 .avatar-group .avatar {
   margin-left: -8px;
-  box-shadow: 0 0 0 2px var(--color-surface);
+  box-shadow: 0 0 0 2px var(--surface);
 }
 .avatar-group .avatar:first-child { margin-left: 0; }
 
@@ -94,8 +94,8 @@
    asignados de los mostrados (par shadcn AvatarGroupCount). Usar junto con un
    tamaño: <span class="avatar avatar-md avatar-group-count">+3</span>. */
 .avatar-group-count {
-  background: var(--color-surface-variant);
-  color: var(--color-on-surface-variant);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
   /* El tamaño lo pone el escalón (.avatar-md en el uso canónico). Este bloque
      solo cambia el color: un +N es un avatar, no un tamaño nuevo. */
 }

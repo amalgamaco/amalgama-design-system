@@ -40,7 +40,7 @@
   padding: var(--space-2-5) var(--space-3);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--color-surface-container);
+  background: var(--surface-container);
 }
 
 .attachment-icon {
@@ -51,8 +51,8 @@
   height: 36px;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
-  background: var(--color-surface-variant);
-  color: var(--color-on-surface-variant);
+  background: var(--surface-variant);
+  color: var(--on-surface-variant);
 }
 .attachment-icon svg { width: 18px; height: 18px; }
 /* Miniatura de imagen en vez de ícono */
@@ -63,12 +63,12 @@
 .attachment-name {
   font-size: var(--font-size-body-sm);
   font-weight: 500;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.attachment-meta { font-size: var(--font-size-caption); color: var(--color-on-surface-variant); }
+.attachment-meta { font-size: var(--font-size-caption); color: var(--on-surface-variant); }
 .attachment-remove { flex-shrink: 0; }
 
 /* Estado subiendo — barra de progreso bajo el nombre. */
@@ -76,16 +76,16 @@
   height: 4px;
   margin-top: 6px;
   border-radius: var(--radius-full);
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
   overflow: hidden;
 }
 .attachment-progress-bar {
   height: 100%;
   border-radius: inherit;
-  background: var(--color-primary);
+  background: var(--primary);
   transition: width var(--duration-normal) var(--ease-default);
 }
 
 /* Estado error */
-.attachment-error { border-color: var(--color-error); }
-.attachment-error .attachment-icon { background: var(--color-error-container); color: var(--color-on-error-container); }
+.attachment-error { border-color: var(--error); }
+.attachment-error .attachment-icon { background: var(--error-container); color: var(--on-error-container); }

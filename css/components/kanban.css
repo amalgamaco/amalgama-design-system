@@ -37,7 +37,7 @@
   min-width: 280px;
   max-width: 320px;
   flex-shrink: 0;
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   display: flex;
@@ -47,15 +47,15 @@
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-label);
   font-weight: 600;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
 }
 .kanban-column-header .count {
   font-size: var(--font-size-caption);
   font-weight: 600;
-  color: var(--color-on-surface-variant);
-  background: var(--color-surface-container);
+  color: var(--on-surface-variant);
+  background: var(--surface-container);
   border: 1px solid var(--border);
   padding: var(--space-0-5) var(--space-2);
   border-radius: var(--radius-full);
@@ -70,7 +70,7 @@
 }
 /* Entidad (COMPOSICION.md §4b): escalon compacto. */
 .kanban-card {
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
@@ -86,20 +86,20 @@
   transform: rotate(2deg);
 }
 .kanban-card:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .kanban-card-title {
   font-size: var(--font-size-body-md);
   line-height: var(--line-height-title);
   font-weight: var(--font-weight-medium);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   margin-bottom: var(--space-1-5);
 }
 .kanban-card-meta {
   font-size: var(--font-size-caption);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   display: flex; align-items: center; gap: var(--space-1-5);
 }
 
@@ -124,8 +124,8 @@
   /* Escalón xs de la escala de avatar (variables.css) */
   width: var(--avatar-size-xs); height: var(--avatar-size-xs);
   border-radius: 50%;
-  background: var(--color-primary-container);
-  color: var(--color-on-primary-container);
+  background: var(--primary-container);
+  color: var(--on-primary-container);
   display: flex; align-items: center; justify-content: center;
   font-size: var(--avatar-initial-xs); font-weight: 600;
   flex-shrink: 0;

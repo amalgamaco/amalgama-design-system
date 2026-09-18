@@ -36,8 +36,8 @@
   height: 40px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--color-surface-container);
-  color: var(--color-on-surface);
+  background: var(--surface-container);
+  color: var(--on-surface);
   font-size: var(--font-size-heading-xs);
   font-family: var(--font-mono);
   font-weight: var(--font-weight-medium);
@@ -48,36 +48,36 @@
               box-shadow var(--duration-fast) var(--ease-default);
 }
 .otp-slot:hover:not(:disabled):not(:focus) {
-  border-color: var(--color-outline);
+  border-color: var(--outline);
 }
 .otp-slot:focus-visible {
-  border-color: var(--color-secondary);
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px var(--focus-ring);
   z-index: 1;
   position: relative;
 }
 .otp-slot:disabled {
   cursor: not-allowed;
-  background: var(--color-disabled);
-  color: var(--color-on-disabled);
+  background: var(--disabled);
+  color: var(--on-disabled);
 }
 
 /* Error / inválido — borde rojo por casillero (par shadcn aria-invalid);
    .otp-group.is-error pinta todo el grupo (ej. código incorrecto). */
 .otp-slot[aria-invalid="true"],
 .otp-group.is-error .otp-slot {
-  border-color: var(--color-error);
+  border-color: var(--error);
 }
 .otp-slot[aria-invalid="true"]:focus-visible,
 .otp-group.is-error .otp-slot:focus-visible {
-  box-shadow: 0 0 0 4px var(--color-error-ring);
+  box-shadow: 0 0 0 4px var(--error-ring);
 }
 
 /* Separador opcional entre grupos (ej. 3 + 3) */
 .otp-separator {
   display: flex;
   align-items: center;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   width: 12px;
   justify-content: center;
 }

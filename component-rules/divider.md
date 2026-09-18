@@ -35,7 +35,7 @@ layout_constraints:
   - "Inset indent must match where the item text starts (after the leading media)."
 
 states:
-  default: "Static 1px line in --border (--color-outline-variant); recalibrates in dark mode automatically. The divider has no interactive states."
+  default: "Static 1px line in --border (--outline-variant); recalibrates in dark mode automatically. The divider has no interactive states."
 
 accessibility:
   roles: "Decorative divider (the common case) can be a bare <div> with no role. A semantically meaningful separator uses <hr class=\"divider\"> (implicit role=separator) or role=\"separator\" + aria-orientation on the div."

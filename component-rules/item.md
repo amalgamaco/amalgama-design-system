@@ -43,7 +43,7 @@ layout_constraints:
 states:
   default: "Flex row with transparent border (or --border with item-outline)."
   hover: "Interactive rows (a.item / item-clickable) get a surface-variant background."
-  focus: "focus-visible: border --color-focus + 3px --color-focus-ring halo."
+  focus: "focus-visible: border --focus + 3px --focus-ring halo."
   disabled: "is-disabled → opacity .5, pointer-events none."
 
 accessibility:
@@ -80,7 +80,7 @@ relationships:
     - {component: table, why: "Table aligns comparable columns across rows; Item is a self-contained row"}
 
 tokens:
-  color: [--border, --color-surface-variant, --color-on-surface-variant, --text-primary, --text-secondary, --color-focus, --color-focus-ring]
+  color: [--border, --surface-variant, --on-surface-variant, --on-surface, --on-surface-variant, --focus, --focus-ring]
   radius: [--radius-md, --radius-sm]
   spacing: ["16px padding / 16px gap (default)", "12px 16px / 10px gap (item-sm)"]
   motion: [--duration-fast, --ease-default]
@@ -88,7 +88,7 @@ tokens:
 motion:
   enter: "none — the row is always present"
   exit: "none"
-  stateChange: "Interactive rows (a.item / .item-clickable) recolor their background to --color-surface-variant on hover; :focus-visible moves the border to --color-focus and adds a 3px --color-focus-ring box-shadow. Transition covers background-color + border-color."
+  stateChange: "Interactive rows (a.item / .item-clickable) recolor their background to --surface-variant on hover; :focus-visible moves the border to --focus and adds a 3px --focus-ring box-shadow. Transition covers background-color + border-color."
   duration: "--duration-fast"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the hover tint and focus ring still apply, just without the fade."

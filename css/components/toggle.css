@@ -10,7 +10,7 @@
 
    Dependencia: variables.css (Color Roles)
    El estado presionado usa el mismo lenguaje de selección que Chip/nav-active
-   (--color-secondary-container), NUNCA --color-primary (que se invierte a
+   (--secondary-container), NUNCA --primary (que se invierte a
    blanco en dark mode y se leería como "sin color").
 
    Uso:
@@ -31,7 +31,7 @@
   border: none;
   border-radius: var(--radius-md);
   background: transparent;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   font-family: var(--font-body);
   font-size: var(--font-size-body-md);
   font-weight: 500;
@@ -45,19 +45,19 @@
   flex-shrink: 0;
 }
 .toggle:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-on-surface) 8%, transparent);
+  background: color-mix(in srgb, var(--on-surface) 8%, transparent);
 }
 .toggle:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .toggle[aria-pressed="true"] {
-  background: var(--color-secondary-container);
-  color: var(--color-on-secondary-container);
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
 }
 .toggle[aria-pressed="true"]:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container));
+  background: color-mix(in srgb, var(--on-secondary-container) 8%, var(--secondary-container));
 }
 .toggle:disabled {
   opacity: 0.38;
@@ -67,12 +67,12 @@
 /* Error / inválido (par shadcn aria-invalid) — poco frecuente en Toggle, pero
    disponible para consistencia con el resto de los controles. */
 .toggle[aria-invalid="true"] {
-  border: 1px solid var(--color-error);
+  border: 1px solid var(--error);
 }
 
 /* ── Variante Outline ── */
 .toggle-outline {
-  border: 1px solid var(--color-outline-variant);
+  border: 1px solid var(--outline-variant);
   background: transparent;
 }
 .toggle-outline[aria-pressed="true"] {

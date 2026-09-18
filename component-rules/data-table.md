@@ -42,7 +42,7 @@ layout_constraints:
 states:
   default: "Static table styling from table.css."
   hover: "Row hover from table.css; sort button hover → surface-variant."
-  focus: "All controls (sort button, checkboxes, pagination) show the official focus ring (--color-focus)."
+  focus: "All controls (sort button, checkboxes, pagination) show the official focus ring (--focus)."
   selected: "tr.selected background; header checkbox indeterminate on partial selection."
   sorted: "Active th carries aria-sort=ascending|descending; caret opacity/rotation reflects direction."
   empty: "data-table-empty message when the filter yields no rows."
@@ -80,7 +80,7 @@ relationships:
     - {component: list, why: "List is a simple vertical list, not a comparable-columns grid"}
 
 tokens:
-  color: [--color-surface-variant, --color-focus, --color-focus-ring, --text-muted, --border]
+  color: [--surface-variant, --focus, --focus-ring, --on-surface-variant, --border]
   radius: [--radius-sm]
   spacing: ["12px toolbar/footer gaps", "6px 8px sort-button padding"]
   typography: [--font-size-caption, --font-size-body-sm]

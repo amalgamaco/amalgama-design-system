@@ -44,8 +44,8 @@
   z-index: 60;
   width: max-content;
   max-width: 280px;
-  background: var(--color-surface-container);
-  color: var(--color-on-surface);
+  background: var(--surface-container);
+  color: var(--on-surface);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   padding: var(--space-4);
@@ -83,7 +83,7 @@
 .rich-tooltip-subtitle {
   margin-top: 4px;
   font-size: var(--font-size-body-sm);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 .rich-tooltip-close {
   flex-shrink: 0;
@@ -92,13 +92,13 @@
   border: none;
   border-radius: var(--radius-full);
   background: transparent;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   transition: background var(--duration-fast) var(--ease-default),
               color var(--duration-fast) var(--ease-default);
 }
-.rich-tooltip-close:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.rich-tooltip-close:hover { background: var(--surface-variant); color: var(--on-surface); }
 .rich-tooltip-actions {
   display: flex;
   justify-content: flex-end;

@@ -62,7 +62,7 @@ Amalgama — en otro proyecto, el color de texto lo define su DS).
 | `A6` | Override por tema (`.dark{}`, `[data-theme=dark]`, `prefers-color-scheme`) en un componente | BLOQ | regex |
 | `A7` | Capa de alias paralela que remapea nombres de Embassy a nombres del proyecto | ALTA | revisión |
 | `A8` | Fuga de utilidades de otro framework (`text-zinc-*`, `bg-white`, `rounded-xl`) en un proyecto con tokens | ALTA | regex |
-| `A9` | Texto de página en negro en vez de navy (`--text-primary`) | ALTA | inspección |
+| `A9` | Texto de página en negro en vez de navy (`--on-surface`) | ALTA | inspección |
 | `A10` | `border-radius` inline en vez del modificador de tamaño | MEDIA | regex |
 | `A11` | `letter-spacing` con valor literal en vez de `--letter-spacing-*` | MEDIA | regex |
 
@@ -98,6 +98,7 @@ alert y confirmación destructiva sin diálogo son errores de UX, no de DS.
 | `C4` | Acción secundaria tonal compitiendo con la primaria adyacente (debía ser outline) | ALTA | inspección |
 | `C5` | Dos objetos primarios: la pantalla no sabe de qué se trata | ALTA | revisión |
 | `C6` | Disparador de overlay con jerarquía de primaria | MEDIA | revisión |
+| `C7` | **Dos sistemas de selección del mismo peso en una región**: el modo de vista, el filtro activo y el objeto abierto pintados con el mismo token. Ninguno se lee como más importante y la pantalla queda como una lista de cosas encendidas | ALTA | conteo de tokens de selección por contenedor · `COMPOSICION.md` §4c |
 
 ## D · Layout y composición
 
@@ -114,7 +115,7 @@ alert y confirmación destructiva sin diálogo son errores de UX, no de DS.
 | `D7` | Mobile es el desktop encogido, no la transformación correcta | ALTA | inspección en 375px |
 | `D8` | Target táctil < 44px como única forma de accionar | ALTA | `check-render` (pase de 375px) |
 | `D9` | Estructura de página sin elegir, o `column-bleed` con el texto sin acotar (línea > ~120 caracteres) | ALTA | inspección + regex |
-| `D10` | En una pantalla de producto, secciones separadas por línea (`.rule`, bordes sueltos) en vez de por el escalón `--color-surface` → `--color-surface-container`. El shell ya encuadra: el borde dibuja dos veces | MEDIA | inspección · `COMPOSICION.md` III·a·1 |
+| `D10` | En una pantalla de producto, secciones separadas por línea (`.rule`, bordes sueltos) en vez de por el escalón `--surface` → `--surface-container`. El shell ya encuadra: el borde dibuja dos veces | MEDIA | inspección · `COMPOSICION.md` III·a·1 |
 | `D11` | Pantalla de producto que abre con registro editorial, overline de apertura o índice de sección en vez de `page-header`. Una pantalla de producto no abre: continúa | ALTA | inspección · III·a·2 |
 | `D12` | **La etiqueta pesa más que su dato** — en un `stat-card` con la cifra chica y el rótulo grande, o en un panel de detalle. Es `M13` en territorio de escritorio | ALTA | `check-render` + inspección · III·a·6 |
 | `D13` | Contenedor elegido por costumbre y no por grano: `table` para tres campos de texto, o tarjetas para valores que hay que comparar | MEDIA | inspección · III·a·4 |
@@ -153,6 +154,7 @@ alert y confirmación destructiva sin diálogo son errores de UX, no de DS.
 | `F6` | Estado comunicado solo por color | ALTA | inspección |
 | `F7` | Contraste por debajo de AA | ALTA | `check-render` (color resuelto contra el fondo efectivo) |
 | `F8` | Orden de tabulación ilógico o foco atrapado sin salida | ALTA | prueba con teclado |
+| `F9` | Selección marcada sólo con una clase (`.active`, `.selected`) y sin `aria-selected` / `aria-pressed` / `aria-current`: se ve elegido y el lector de pantalla no lo anuncia | ALTA | regex sobre la clase de estado, cruzado con el atributo |
 
 ## G · Motion
 
@@ -230,10 +232,10 @@ correcto y marcarlo sería un falso positivo.
 | `M7` | **Solo React Native.** `lineHeight` o `letterSpacing` pasados como multiplicador o `em`, que RN ignora en silencio. En Flutter `height` ES un múltiplo: ahí no aplica | ALTA | `grep -nE "(lineHeight\|letterSpacing):\s*(0?\.[0-9]\|1\.[0-9])"` |
 | `M8` | Utilidades de gluestack/Tailwind sin traducir (`bg-blue-500`, `rounded-xl`, `text-sm`) | ALTA | regex — es `A8` en territorio nativo |
 | `M9` | Probado en una sola plataforma: sombras, fuentes y ripple no se dibujan igual en iOS y Android | MEDIA | falta la evidencia de las dos |
-| `M10` | Secciones separadas por línea en vez de por superficie: fondo plano con `<hr>` o bordes sueltos, sin el escalón `--color-surface` → `--color-surface-container` | MEDIA | `check-render` (un `<hr>`, o un bloque con borde y el mismo fondo que la pantalla) · `MOBILE.md` §6b·1 |
+| `M10` | Secciones separadas por línea en vez de por superficie: fondo plano con `<hr>` o bordes sueltos, sin el escalón `--surface` → `--surface-container` | MEDIA | `check-render` (un `<hr>`, o un bloque con borde y el mismo fondo que la pantalla) · `MOBILE.md` §6b·1 |
 | `M11` | Pares etiqueta/dato sueltos sobre el fondo en vez de agrupados en una tarjeta, o divisores a sangre en vez de insetados al padding | MEDIA | `check-render` (una `.screen-row` fuera de un `.screen-group`); el divisor a sangre sigue siendo inspección · §6b·2 |
 | `M12` | Header de sección en escala de heading y adentro del grupo, en vez de caption/600/muted y afuera | MEDIA | `check-render` (compara contra el caption **del contexto**, no el de `:root`) · §6b·3 |
-| `M13` | **La etiqueta pesa más que su dato**: la etiqueta en escala de heading o en `--text-primary`, y el valor más chico o apagado. Es la falla que el sistema produce solo | ALTA | `check-render` (compara tamaño y contraste de `.screen-row-label` contra `.screen-row-value`) · §6b·4 |
+| `M13` | **La etiqueta pesa más que su dato**: la etiqueta en escala de heading o en `--on-surface`, y el valor más chico o apagado. Es la falla que el sistema produce solo | ALTA | `check-render` (compara tamaño y contraste de `.screen-row-label` contra `.screen-row-value`) · §6b·4 |
 | `M14` | Acción primaria al final del contenido en vez de anclada abajo, fuera del scroll | MEDIA | `check-render` (primaria que fluye con el contenido, sin `.screen-action` ni posición fija) · §6b·6 |
 | `M15` | `--font-mono` en prosa, captions, fechas sueltas o como gesto de marca. En nativo el mono es solo para datos tabulares que se comparan en columna | MEDIA | `check-render` (mono con 5+ palabras dentro de un contenedor nativo — un identificador en mono es el uso correcto) · §6b·7 |
 

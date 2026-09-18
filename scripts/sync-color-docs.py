@@ -16,7 +16,7 @@ La tabla pasa a ser una vista, no una fuente.
 
 Qué toca, y sólo esto:
   · <span class="ds-sem-hex">#XXXXXX</span> y el swatch de al lado, en las filas
-    de la tabla semántica (las que declaran emb.color.X<span>--color-X</span>).
+    de la tabla semántica (las que declaran emb.color.X<span>--X</span>).
   · Los chips y el nombre de primitiva de las fichas .ds-cr-card.
 No toca prosa, ni ejemplos, ni las tablas de paleta primitiva (ésas SON el valor).
 """
@@ -63,7 +63,7 @@ def resolver(scope, nombre, cadena=False):
 cambios, drift = 0, []
 html = HTML.read_text()
 
-# ── 1. tabla semántica: emb.color.X<span>--color-X</span> + dos celdas ──────
+# ── 1. tabla semántica: emb.color.X<span>--X</span> + dos celdas ────────────
 FILA = re.compile(
     r'(?P<a><span class="ds-sem-tok">[^<]*<span>--(?P<tok>[a-z0-9-]+)</span></span></td>'
     r'<td><div class="ds-sem-cell"><span class="ds-sem-sw" style="background:)(?P<lsw>#[0-9A-Fa-f]{6})'

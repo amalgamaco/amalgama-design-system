@@ -33,10 +33,10 @@
       "tokens": {
         "color": [
           "--border",
-          "--text-primary",
-          "--text-secondary",
-          "--color-focus",
-          "--color-focus-ring"
+          "--on-surface",
+          "--on-surface-variant",
+          "--focus",
+          "--focus-ring"
         ],
         "radius": [
           "--radius-lg",
@@ -134,12 +134,12 @@
       ],
       "tokens": {
         "color": [
-          "--color-info-container",
-          "--color-on-info-container",
-          "--color-success-container",
-          "--color-warning-container",
-          "--color-error-container",
-          "--color-surface-container"
+          "--info-container",
+          "--on-info-container",
+          "--success-container",
+          "--warning-container",
+          "--error-container",
+          "--surface-container"
         ],
         "radius": [
           "--radius-lg"
@@ -312,11 +312,11 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-variant",
-          "--color-on-surface-variant",
-          "--color-error",
-          "--color-error-container",
-          "--color-primary"
+          "--surface-variant",
+          "--on-surface-variant",
+          "--error",
+          "--error-container",
+          "--primary"
         ],
         "radius": [
           "--radius-md",
@@ -419,15 +419,15 @@
       ],
       "tokens": {
         "color": [
-          "--color-primary-container",
-          "--color-on-primary-container",
-          "--color-surface",
-          "--color-surface-variant",
-          "--color-on-surface-variant",
-          "--color-success",
-          "--color-error",
-          "--color-warning",
-          "--color-outline"
+          "--primary-container",
+          "--on-primary-container",
+          "--surface",
+          "--surface-variant",
+          "--on-surface-variant",
+          "--success",
+          "--error",
+          "--warning",
+          "--outline"
         ],
         "radius": [
           "--radius-full"
@@ -526,10 +526,10 @@
       ],
       "tokens": {
         "color": [
-          "--text-secondary",
-          "--text-primary",
-          "--color-focus",
-          "--color-focus-ring"
+          "--on-surface-variant",
+          "--on-surface",
+          "--focus",
+          "--focus-ring"
         ],
         "spacing": [
           "6px gap",
@@ -617,17 +617,17 @@
       ],
       "tokens": {
         "color": [
-          "--color-success-container",
-          "--color-on-success-container",
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--color-error-container",
-          "--color-on-error-container",
-          "--color-warning-container",
-          "--color-tertiary-container",
-          "--color-info-container",
-          "--color-surface-variant",
-          "--color-outline"
+          "--success-container",
+          "--on-success-container",
+          "--secondary-container",
+          "--on-secondary-container",
+          "--error-container",
+          "--on-error-container",
+          "--warning-container",
+          "--tertiary-container",
+          "--info-container",
+          "--surface-variant",
+          "--outline"
         ],
         "radius": [
           "--radius-full"
@@ -675,7 +675,7 @@
       "motion": {
         "enter": "none — always present (read-only status/category label).",
         "exit": "none.",
-        "stateChange": "The base badge is fully static (no transition). Only the link variant (a.badge) transitions opacity and fades to .85 on hover, with a 2px --color-focus focus-visible outline. An optional leading spinner inside a badge is a continuous Loading loop, not a badge state change.",
+        "stateChange": "The base badge is fully static (no transition). Only the link variant (a.badge) transitions opacity and fades to .85 on hover, with a 2px --focus focus-visible outline. An optional leading spinner inside a badge is a continuous Loading loop, not a badge state change.",
         "duration": "--duration-fast (link variant only)",
         "easing": "--ease-default (link variant only)",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css. No component-specific override. Note: a spinner embedded in a badge is a Loading-family loop (exempt category per guidelines/motion.md) and stops under reduced motion via the same global rule.",
@@ -733,12 +733,12 @@
       ],
       "tokens": {
         "color": [
-          "--text-secondary",
-          "--text-primary",
-          "--color-primary",
-          "--color-outline",
-          "--color-surface-variant",
-          "--color-focus"
+          "--on-surface-variant",
+          "--on-surface",
+          "--primary",
+          "--outline",
+          "--surface-variant",
+          "--focus"
         ],
         "radius": [
           "--radius-sm"
@@ -836,10 +836,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-variant",
-          "--color-on-surface",
-          "--color-outline",
-          "--color-border"
+          "--surface-variant",
+          "--on-surface",
+          "--outline",
+          "--border"
         ],
         "radius": "--radius-* inherited from the child buttons; inner corners collapse to 0",
         "spacing": "children share a single 1px border (no gap between joined members)"
@@ -933,11 +933,11 @@
       ],
       "tokens": {
         "color": [
-          "--color-primary",
-          "--color-on-primary",
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--color-outline"
+          "--primary",
+          "--on-primary",
+          "--secondary-container",
+          "--on-secondary-container",
+          "--outline"
         ],
         "radius": "--radius-* scaled by size class (sm→--radius-sm … xl→--radius-lg), written as var(--radius-button, <that token>). A brand theme with the `pildora` shape declares --radius-button: 9999px and every button becomes a pill at every size — that is the only way a button is ever a pill, and it is decided once at kickoff, never per screen (GOVERNANCE §4.2).",
         "motion": [
@@ -980,7 +980,7 @@
       "motion": {
         "enter": "none — always present (static control, not an overlay).",
         "exit": "none.",
-        "stateChange": "Hover: filled variants darken (primary→--color-primary-hover, secondary/elevated via color-mix) AND lift with transform: translateY(-1px); elevated also grows box-shadow (--btn-elevation→--btn-elevation-hover). Active/pressed: settle to translateY(0) + a 12% press layer (filter: brightness(.88/.92) on filled, surface-container-high on tertiary/icon, primary 16% on text). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring.",
+        "stateChange": "Hover: filled variants darken (primary→--primary-hover, secondary/elevated via color-mix) AND lift with transform: translateY(-1px); elevated also grows box-shadow (--btn-elevation→--btn-elevation-hover). Active/pressed: settle to translateY(0) + a 12% press layer (filter: brightness(.88/.92) on filled, surface-container-high on tertiary/icon, primary 16% on text). Focus-visible: 2px --focus ring + 4px --focus-ring.",
         "duration": "--duration-fast (background/border-color/color/box-shadow). Transform (the lift/settle) uses a hardcoded .1s — should be tokenized to --duration-fast.",
         "easing": "--ease-default for every property, including transform (this buildless CSS does NOT use --ease-expressive for the lift, unlike the retired Tailwind button.tsx described in guidelines/motion.md).",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific override — the lift/press simply collapse.",
@@ -1055,17 +1055,17 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface",
+          "--surface",
           "--border",
-          "--color-on-surface",
-          "--color-primary",
-          "--color-on-primary",
-          "--color-primary-container",
-          "--color-surface-variant",
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--color-focus",
-          "--text-muted"
+          "--on-surface",
+          "--primary",
+          "--on-primary",
+          "--primary-container",
+          "--surface-variant",
+          "--secondary-container",
+          "--on-secondary-container",
+          "--focus",
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius-lg"
@@ -1187,12 +1187,12 @@
       ],
       "tokens": {
         "color": [
-          "--card-bg",
+          "--surface-container",
           "--border",
-          "--color-surface-container-low",
-          "--color-surface-container-highest",
-          "--text-primary",
-          "--text-secondary"
+          "--surface-container-low",
+          "--surface-container-highest",
+          "--on-surface",
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius"
@@ -1300,10 +1300,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface",
+          "--surface",
           "--border",
-          "--text-primary",
-          "--color-surface-variant"
+          "--on-surface",
+          "--surface-variant"
         ],
         "radius": [
           "--radius-md",
@@ -1347,7 +1347,7 @@
       "motion": {
         "enter": "none — items are present in the scroll track from the start (no entrance animation).",
         "exit": "none.",
-        "stateChange": "Nav button background tint on hover (.carousel-btn:hover → --color-surface-variant); prev/next scroll the track via native scroll-behavior: smooth (scrollBy).",
+        "stateChange": "Nav button background tint on hover (.carousel-btn:hover → --surface-variant); prev/next scroll the track via native scroll-behavior: smooth (scrollBy).",
         "duration": "--duration-fast (nav button background); native smooth scroll for the track (no token).",
         "easing": "--ease-default (nav button background); browser default for smooth scroll.",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the same rule sets scroll-behavior: auto, so prev/next jump instantly instead of smooth-scrolling. If autoplay is ever added it must pause and honor reduced motion.",
@@ -1411,10 +1411,10 @@
           "--chart-3",
           "--chart-4",
           "--chart-5",
-          "--color-border",
-          "--text-muted",
-          "--color-card",
-          "--color-error"
+          "--border",
+          "--on-surface-variant",
+          "--card",
+          "--error"
         ],
         "radius": [
           "6px bar top corners",
@@ -1517,13 +1517,13 @@
       ],
       "tokens": {
         "color": [
-          "--color-primary",
-          "--color-on-primary",
-          "--color-outline",
-          "--color-on-surface",
-          "--color-error",
-          "--color-focus",
-          "--color-focus-ring"
+          "--primary",
+          "--on-primary",
+          "--outline",
+          "--on-surface",
+          "--error",
+          "--focus",
+          "--focus-ring"
         ],
         "radius": [
           "4px (--radius-sm equivalent)"
@@ -1570,7 +1570,7 @@
       "motion": {
         "enter": "none — the control is always present",
         "exit": "none",
-        "stateChange": "On :checked / :indeterminate the box fills --color-primary and its border goes transparent — a color effect (transition: background + border-color). Hover darkens the border to --color-on-surface. The ::after check glyph (and the indeterminate dash) has NO transition — it appears instantly. .checkbox-card transitions border-color + background-color on :has(input:checked)/hover.",
+        "stateChange": "On :checked / :indeterminate the box fills --primary and its border goes transparent — a color effect (transition: background + border-color). Hover darkens the border to --on-surface. The ::after check glyph (and the indeterminate dash) has NO transition — it appears instantly. .checkbox-card transitions border-color + background-color on :has(input:checked)/hover.",
         "duration": "--duration-fast",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the checked fill still shows, just without the fade.",
@@ -1626,10 +1626,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--color-outline-variant",
-          "--color-surface"
+          "--secondary-container",
+          "--on-secondary-container",
+          "--outline-variant",
+          "--surface"
         ],
         "radius": [
           "--radius-full"
@@ -1677,7 +1677,7 @@
       "motion": {
         "enter": "none — always present (static filter/input element).",
         "exit": "none (an input chip being removed is a DOM removal, not an animated exit).",
-        "stateChange": "Hover/active: state layer via color-mix over the base — unselected on-surface 8%/12%, selected on-secondary-container 8%/12% over the container, elevated the same mixed over surface-container-low. Selected: fill flips to --color-secondary-container (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring. Dragged: box-shadow lifts to --shadow-md.",
+        "stateChange": "Hover/active: state layer via color-mix over the base — unselected on-surface 8%/12%, selected on-secondary-container 8%/12% over the container, elevated the same mixed over surface-container-low. Selected: fill flips to --secondary-container (transitions on background). Focus-visible: 2px --focus ring + 4px --focus-ring. Dragged: box-shadow lifts to --shadow-md.",
         "duration": "--duration-fast",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific override.",
@@ -1725,8 +1725,8 @@
       ],
       "tokens": {
         "color": [
-          "--color-primary",
-          "--color-focus"
+          "--primary",
+          "--focus"
         ],
         "radius": [
           "--radius-sm"
@@ -1815,9 +1815,9 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-container",
-          "--color-on-surface",
-          "--text-muted",
+          "--surface-container",
+          "--on-surface",
+          "--on-surface-variant",
           "--border"
         ],
         "radius": [
@@ -1919,9 +1919,9 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-container",
-          "--color-on-surface",
-          "--color-surface-variant"
+          "--surface-container",
+          "--on-surface",
+          "--surface-variant"
         ],
         "radius": [
           "--radius-md"
@@ -2029,9 +2029,9 @@
       ],
       "tokens": {
         "color": [
-          "--text-muted",
-          "--color-secondary",
-          "--color-outline"
+          "--on-surface-variant",
+          "--secondary",
+          "--outline"
         ],
         "spacing": [
           "--space-8",
@@ -2147,10 +2147,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-container",
-          "--color-outline-variant",
-          "--color-on-surface",
-          "--color-error"
+          "--surface-container",
+          "--outline-variant",
+          "--on-surface",
+          "--error"
         ],
         "radius": [
           "--radius-md"
@@ -2236,7 +2236,7 @@
       ],
       "tokens": {
         "color": [
-          "--card-bg",
+          "--surface-container",
           "--border"
         ],
         "radius": [],
@@ -2336,10 +2336,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-variant",
-          "--color-focus",
-          "--color-focus-ring",
-          "--text-muted",
+          "--surface-variant",
+          "--focus",
+          "--focus-ring",
+          "--on-surface-variant",
           "--border"
         ],
         "radius": [
@@ -2442,9 +2442,9 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface",
+          "--surface",
           "--border",
-          "--text-muted"
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius-lg"
@@ -2546,13 +2546,13 @@
         "color": [
           "--border",
           "--bg",
-          "--card-bg",
-          "--text-primary",
-          "--text-muted",
-          "--interactive",
-          "--color-focus-ring",
-          "--color-error-container",
-          "--color-on-error-container"
+          "--surface-container",
+          "--on-surface",
+          "--on-surface-variant",
+          "--secondary",
+          "--focus-ring",
+          "--error-container",
+          "--on-error-container"
         ],
         "radius": [
           "--radius-md"
@@ -2649,9 +2649,9 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface",
-          "--color-on-surface",
-          "--color-scrim"
+          "--surface",
+          "--on-surface",
+          "--scrim"
         ],
         "radius": [
           "--radius-lg"
@@ -2698,7 +2698,7 @@
       "motion": {
         "enter": "Two coordinated entrances: the scrim overlay fades in (@keyframes fadeIn, opacity 0→1) while the panel slides up + fades (@keyframes slideInUp, translateY(20px)→0 with opacity 0→1). The scrim is an effect (fade only, no overshoot); the panel is the spatial hero move (per guidelines/motion.md the ideal is a zoom, here it is a slide-up — either way effect vs. spatial is respected).",
         "exit": "none defined in CSS — the overlay/panel are removed by JS (openOverlay/closeOverlay) with no data-state=closed animation. This is a gap vs. the motion.md rule that overlays declare BOTH enter and exit; flag to add a fade/slide-down exit on --duration-fast --ease-exit.",
-        "stateChange": "modal-close button hover: background→--color-surface-variant, color→--color-on-surface; focus-visible ring (2px --color-focus + 4px --color-focus-ring).",
+        "stateChange": "modal-close button hover: background→--surface-variant, color→--on-surface; focus-visible ring (2px --focus + 4px --focus-ring).",
         "duration": "Currently HARDCODED: overlay fadeIn .15s, panel slideInUp .2s. Intended tokens: --duration-fast (scrim) and --duration-normal (panel). modal-close transition uses --duration-fast.",
         "easing": "Currently HARDCODED `ease` on both keyframes. Intended tokens: --ease-enter for the scrim fade-in, --ease-exit for the (missing) exit; modal-close uses --ease-default.",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (fadeIn/slideInUp durations collapse to ~0.01ms, so the Dialog appears instantly). No component-specific override.",
@@ -2829,8 +2829,8 @@
       ],
       "tokens": {
         "color": [
-          "--text-secondary",
-          "--text-muted"
+          "--on-surface-variant",
+          "--on-surface-variant"
         ],
         "typography": [
           "--font-heading",
@@ -2925,14 +2925,14 @@
       ],
       "tokens": {
         "color": [
-          "--card-bg",
+          "--surface-container",
           "--border",
-          "--text-primary",
-          "--text-secondary",
-          "--interactive",
-          "--color-error",
-          "--color-error-ring",
-          "--red"
+          "--on-surface",
+          "--on-surface-variant",
+          "--secondary",
+          "--error",
+          "--error-ring",
+          "--error"
         ],
         "radius": [
           "--radius",
@@ -2986,7 +2986,7 @@
       "motion": {
         "enter": "none — fields are always present (no CSS entrance)",
         "exit": "none",
-        "stateChange": "Inputs/selects: focus-visible moves the border to --interactive and adds a 3px --color-focus-ring box-shadow (border-color + box-shadow transition); hover (not focused/disabled) darkens the border to --color-outline; is-error / aria-invalid swaps to --color-error + --color-error-ring. The .field-label recolors to --interactive on :focus-within (or --color-error in error). number-input-wrapper/date-input recolor border on focus-within/focus; number-btn recolors background on hover.",
+        "stateChange": "Inputs/selects: focus-visible moves the border to --secondary and adds a 3px --focus-ring box-shadow (border-color + box-shadow transition); hover (not focused/disabled) darkens the border to --outline; is-error / aria-invalid swaps to --error + --error-ring. The .field-label recolors to --secondary on :focus-within (or --error in error). number-input-wrapper/date-input recolor border on focus-within/focus; number-btn recolors background on hover.",
         "duration": "--duration-fast (every field transition)",
         "easing": "None specified — the field transitions declare only --duration-fast with no --ease-* token, so they fall back to the browser default ease. Per motion.md these effect transitions should carry --ease-default.",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No essential/looping motion; the focus border/ring still appears, just without the fade.",
@@ -3045,13 +3045,13 @@
       "tokens": {
         "color": [
           "--border",
-          "--card-bg",
-          "--interactive",
-          "--color-focus-ring",
-          "--color-error",
-          "--color-error-ring",
-          "--color-on-surface-variant",
-          "--text-primary"
+          "--surface-container",
+          "--secondary",
+          "--focus-ring",
+          "--error",
+          "--error-ring",
+          "--on-surface-variant",
+          "--on-surface"
         ],
         "radius": [
           "--radius-md"
@@ -3095,7 +3095,7 @@
       "motion": {
         "enter": "none — always present (static composite field).",
         "exit": "none.",
-        "stateChange": "Focus and error live on the .input-group container, not the inner control. :focus-within: border→--interactive + 3px --color-focus-ring box-shadow. Error (aria-invalid / is-error): border→--color-error, focus→--color-error-ring. Disabled: opacity .5 (no transition). The inner control is borderless/transparent and inherits the container's focus visuals.",
+        "stateChange": "Focus and error live on the .input-group container, not the inner control. :focus-within: border→--secondary + 3px --focus-ring box-shadow. Error (aria-invalid / is-error): border→--error, focus→--error-ring. Disabled: opacity .5 (no transition). The inner control is borderless/transparent and inherits the container's focus visuals.",
         "duration": "--duration-fast",
         "easing": "none specified — the container transition lists border-color/box-shadow with only a duration and no --ease-* token, falling back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize.",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override.",
@@ -3151,14 +3151,14 @@
       "tokens": {
         "color": [
           "--border",
-          "--card-bg",
-          "--text-primary",
-          "--interactive",
-          "--color-focus-ring",
-          "--color-error",
-          "--color-error-ring",
-          "--color-disabled",
-          "--color-on-disabled"
+          "--surface-container",
+          "--on-surface",
+          "--secondary",
+          "--focus-ring",
+          "--error",
+          "--error-ring",
+          "--disabled",
+          "--on-disabled"
         ],
         "radius": [
           "--radius-md"
@@ -3197,7 +3197,7 @@
       "motion": {
         "enter": "none — the boxes are always present (static; JS auto-advance/backspace/paste move the caret, not animation)",
         "exit": "none",
-        "stateChange": "Focus moves the border to --interactive and adds a 3px --color-focus-ring box-shadow; hover (when not focused/disabled) darkens the border to --color-outline; error/invalid swaps to --color-error + --color-error-ring. Only border-color and box-shadow transition.",
+        "stateChange": "Focus moves the border to --secondary and adds a 3px --focus-ring box-shadow; hover (when not focused/disabled) darkens the border to --outline; error/invalid swaps to --error + --error-ring. Only border-color and box-shadow transition.",
         "duration": "--duration-fast",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping or essential motion to preserve — the focus ring still appears, just without the fade.",
@@ -3250,13 +3250,13 @@
       "tokens": {
         "color": [
           "--border",
-          "--card-bg",
-          "--text-primary",
-          "--interactive",
-          "--color-focus-ring",
-          "--color-error",
-          "--color-error-ring",
-          "--text-muted"
+          "--surface-container",
+          "--on-surface",
+          "--secondary",
+          "--focus-ring",
+          "--error",
+          "--error-ring",
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius-md"
@@ -3307,7 +3307,7 @@
       "motion": {
         "enter": "none — always present (static form field).",
         "exit": "none.",
-        "stateChange": "Hover: border-color→--color-outline (more prominent than the resting --color-outline-variant). Focus-visible: border→--interactive + 3px --color-focus-ring box-shadow, and the field label recolors to --interactive via :focus-within. Error (is-error / aria-invalid): border→--color-error, focus ring→--color-error-ring. All of these transition on border-color + box-shadow.",
+        "stateChange": "Hover: border-color→--outline (more prominent than the resting --outline-variant). Focus-visible: border→--secondary + 3px --focus-ring box-shadow, and the field label recolors to --secondary via :focus-within. Error (is-error / aria-invalid): border→--error, focus ring→--error-ring. All of these transition on border-color + box-shadow.",
         "duration": "--duration-fast",
         "easing": "none specified — the transition lists only durations (border-color var(--duration-fast), box-shadow var(--duration-fast)) with no --ease-* token, so it falls back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize.",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override.",
@@ -3371,12 +3371,12 @@
       "tokens": {
         "color": [
           "--border",
-          "--color-surface-variant",
-          "--color-on-surface-variant",
-          "--text-primary",
-          "--text-secondary",
-          "--color-focus",
-          "--color-focus-ring"
+          "--surface-variant",
+          "--on-surface-variant",
+          "--on-surface",
+          "--on-surface-variant",
+          "--focus",
+          "--focus-ring"
         ],
         "radius": [
           "--radius-md",
@@ -3426,7 +3426,7 @@
       "motion": {
         "enter": "none — the row is always present",
         "exit": "none",
-        "stateChange": "Interactive rows (a.item / .item-clickable) recolor their background to --color-surface-variant on hover; :focus-visible moves the border to --color-focus and adds a 3px --color-focus-ring box-shadow. Transition covers background-color + border-color.",
+        "stateChange": "Interactive rows (a.item / .item-clickable) recolor their background to --surface-variant on hover; :focus-visible moves the border to --focus and adds a 3px --focus-ring box-shadow. Transition covers background-color + border-color.",
         "duration": "--duration-fast",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the hover tint and focus ring still apply, just without the fade.",
@@ -3490,12 +3490,12 @@
       ],
       "tokens": {
         "color": [
-          "--card-bg",
+          "--surface-container",
           "--border",
-          "--color-surface-variant",
-          "--color-primary-container",
-          "--text-primary",
-          "--text-muted"
+          "--surface-variant",
+          "--primary-container",
+          "--on-surface",
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius",
@@ -3592,8 +3592,8 @@
       ],
       "tokens": {
         "color": [
-          "--text-primary",
-          "--red"
+          "--on-surface",
+          "--error"
         ],
         "typography": [
           "--font-body",
@@ -3688,15 +3688,15 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface",
-          "--color-on-surface",
-          "--color-on-surface-variant",
-          "--color-surface-variant",
-          "--color-secondary-container",
-          "--color-on-secondary-container",
+          "--surface",
+          "--on-surface",
+          "--on-surface-variant",
+          "--surface-variant",
+          "--secondary-container",
+          "--on-secondary-container",
           "--border",
-          "--color-focus",
-          "--color-focus-ring"
+          "--focus",
+          "--focus-ring"
         ],
         "spacing": [
           "12px 16px item padding",
@@ -3742,7 +3742,7 @@
       "motion": {
         "enter": "none — list items render statically; there is no per-item entrance animation.",
         "exit": "none",
-        "stateChange": "Instant — no CSS transition is declared in list.css. Interactive rows (button.list-item) swap background on hover (--color-surface-variant) and on selection (--color-secondary-container / on-secondary-container); disabled rows drop to opacity .5. All applied with no timed transition.",
+        "stateChange": "Instant — no CSS transition is declared in list.css. Interactive rows (button.list-item) swap background on hover (--surface-variant) and on selection (--secondary-container / on-secondary-container); disabled rows drop to opacity .5. All applied with no timed transition.",
         "duration": "none — list.css declares no motion tokens",
         "easing": "none",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific behavior — the hover/selection background changes are already instant.",
@@ -3804,10 +3804,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-primary",
-          "--color-surface-variant",
-          "--color-outline-variant",
-          "--color-on-primary"
+          "--primary",
+          "--surface-variant",
+          "--outline-variant",
+          "--on-primary"
         ],
         "radius": [
           "--radius-full"
@@ -3915,12 +3915,12 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-container",
-          "--color-outline-variant",
-          "--color-on-surface",
-          "--color-surface-variant",
-          "--color-error",
-          "--color-error-container"
+          "--surface-container",
+          "--outline-variant",
+          "--on-surface",
+          "--surface-variant",
+          "--error",
+          "--error-container"
         ],
         "radius": [
           "--radius-md",
@@ -3972,7 +3972,7 @@
       "motion": {
         "enter": "Panel scales + fades in on open (@keyframes dropdownIn / popoverIn: opacity 0→1, scale .96→1).",
         "exit": "none defined in CSS — the panel is removed instantly (toggled via [hidden] / JS), no closed-state animation (a known buildless gap vs. the Radix open/closed pair).",
-        "stateChange": "Items show a hover/focus background tint (--color-surface-variant; danger → --color-error-container); checkbox/radio indicators fade opacity 0↔1.",
+        "stateChange": "Items show a hover/focus background tint (--surface-variant; danger → --error-container); checkbox/radio indicators fade opacity 0↔1.",
         "duration": "--duration-normal (panel enter); --duration-fast (checkbox/radio indicator).",
         "easing": "--ease-default (panel enter and indicator).",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the open scale/fade and indicator fade become instant.",
@@ -4035,10 +4035,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-container",
-          "--color-outline-variant",
-          "--color-on-surface",
-          "--color-focus"
+          "--surface-container",
+          "--outline-variant",
+          "--on-surface",
+          "--focus"
         ],
         "radius": [
           "--radius-md",
@@ -4080,7 +4080,7 @@
       "motion": {
         "enter": "Each menu panel scales + fades in on open, reusing Dropdown Menu's @keyframes dropdownIn (opacity 0→1, scale .96→1). The menubar row and its triggers have no entrance animation.",
         "exit": "none defined in CSS — panels are removed instantly on close (known buildless gap vs. the Radix open/closed pair).",
-        "stateChange": "Trigger background changes on :hover / [data-state=\"open\"] to --color-surface-variant — no transition declared, so it is instant; focus ring on :focus-visible. Hovering another trigger while one menu is open switches the open panel.",
+        "stateChange": "Trigger background changes on :hover / [data-state=\"open\"] to --surface-variant — no transition declared, so it is instant; focus ring on :focus-visible. Hovering another trigger while one menu is open switches the open panel.",
         "duration": "--duration-normal (panel enter, via dropdown-menu.css); trigger background change is instant (no transition).",
         "easing": "--ease-default (panel enter).",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the panel open scale/fade becomes instant. Trigger hover was already instant.",
@@ -4223,12 +4223,12 @@
       ],
       "tokens": {
         "color": [
-          "--color-nav-hover",
-          "--color-nav-hover-content",
-          "--color-nav-selected",
-          "--color-nav-selected-content",
-          "--text-secondary",
-          "--sidebar-bg"
+          "--nav-hover",
+          "--nav-hover-content",
+          "--nav-selected",
+          "--nav-selected-content",
+          "--on-surface-variant",
+          "--surface-container"
         ],
         "radius": [
           "--radius-md",
@@ -4422,10 +4422,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-nav-hover",
-          "--color-nav-selected",
-          "--color-scrim",
-          "--sidebar-bg",
+          "--nav-hover",
+          "--nav-selected",
+          "--scrim",
+          "--surface-container",
           "--border"
         ],
         "spacing": [
@@ -4528,10 +4528,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-container",
-          "--color-on-surface",
-          "--color-primary",
-          "--color-outline-variant"
+          "--surface-container",
+          "--on-surface",
+          "--primary",
+          "--outline-variant"
         ],
         "radius": [
           "--radius-md"
@@ -4624,7 +4624,7 @@
       ],
       "tokens": {
         "color": [
-          "--text-primary"
+          "--on-surface"
         ],
         "spacing": [
           "24px margin-bottom",
@@ -4717,12 +4717,12 @@
       ],
       "tokens": {
         "color": [
-          "--color-on-surface",
-          "--color-surface-variant",
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--text-secondary",
-          "--color-focus"
+          "--on-surface",
+          "--surface-variant",
+          "--secondary-container",
+          "--on-secondary-container",
+          "--on-surface-variant",
+          "--focus"
         ],
         "radius": [
           "--radius-md",
@@ -4764,7 +4764,7 @@
       "motion": {
         "enter": "none — the pagination bar is static; changing pages is a content update handled by the consumer, not an animation here.",
         "exit": "none",
-        "stateChange": "Page links transition background-color on hover (transition: background-color .15s var(--ease-default, ease)). The active page (.is-active) uses a static --color-secondary-container fill with no transition; disabled controls drop to opacity .45.",
+        "stateChange": "Page links transition background-color on hover (transition: background-color .15s var(--ease-default, ease)). The active page (.is-active) uses a static --secondary-container fill with no transition; disabled controls drop to opacity .45.",
         "duration": "hardcoded .15s on .pagination-link — NOT a --duration-* token; should be --duration-fast",
         "easing": "--ease-default (with an `ease` literal fallback)",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The hover tint applies instantly; the active page stays clear via aria-current + the secondary-container fill.",
@@ -4814,11 +4814,11 @@
       ],
       "tokens": {
         "color": [
-          "--card-bg",
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--text-primary",
-          "--text-muted"
+          "--surface-container",
+          "--secondary-container",
+          "--on-secondary-container",
+          "--on-surface",
+          "--on-surface-variant"
         ],
         "radius": [
           "50% (avatar)"
@@ -4909,9 +4909,9 @@
       ],
       "tokens": {
         "color": [
-          "--card-bg",
+          "--surface-container",
           "--border",
-          "--text-muted"
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius"
@@ -5002,12 +5002,12 @@
       ],
       "tokens": {
         "color": [
-          "--color-primary",
-          "--color-outline",
-          "--color-on-surface",
-          "--color-error",
-          "--color-focus",
-          "--color-focus-ring"
+          "--primary",
+          "--outline",
+          "--on-surface",
+          "--error",
+          "--focus",
+          "--focus-ring"
         ],
         "radius": [
           "50% (circular)"
@@ -5058,7 +5058,7 @@
       "motion": {
         "enter": "none — the control is always present",
         "exit": "none",
-        "stateChange": "On :checked the ring border recolors to --color-primary (transition: border-color). Hover darkens the border to --color-on-surface. The ::after inner dot has NO transition — it appears instantly. .radio-card transitions border-color + background-color on :has(input:checked)/hover.",
+        "stateChange": "On :checked the ring border recolors to --primary (transition: border-color). Hover darkens the border to --on-surface. The ::after inner dot has NO transition — it appears instantly. .radio-card transitions border-color + background-color on :has(input:checked)/hover.",
         "duration": "--duration-fast",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the selected border still shows, just without the fade.",
@@ -5106,7 +5106,7 @@
       ],
       "tokens": {
         "color": [
-          "--color-outline"
+          "--outline"
         ],
         "radius": [
           "--radius-full"
@@ -5143,7 +5143,7 @@
       "motion": {
         "enter": "none — a static scroll container; content scrolls via native browser behavior.",
         "exit": "none",
-        "stateChange": "The WebKit scrollbar thumb changes color on hover (from color-mix outline 60% to solid --color-outline) with no declared transition (instant). Scrolling itself is native and not driven by any CSS animation.",
+        "stateChange": "The WebKit scrollbar thumb changes color on hover (from color-mix outline 60% to solid --outline) with no declared transition (instant). Scrolling itself is native and not driven by any CSS animation.",
         "duration": "none — scroll-area.css declares no motion tokens",
         "easing": "none",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Native scrolling continues to honor the user's OS/browser scroll settings; the thumb color change is already instant.",
@@ -5194,14 +5194,14 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-container-high",
-          "--color-surface",
-          "--color-on-surface",
-          "--color-on-surface-variant",
-          "--color-secondary",
+          "--surface-container-high",
+          "--surface",
+          "--on-surface",
+          "--on-surface-variant",
+          "--secondary",
           "--border",
-          "--color-outline",
-          "--color-focus-ring"
+          "--outline",
+          "--focus-ring"
         ],
         "radius": [
           "--radius-full",
@@ -5314,12 +5314,12 @@
       ],
       "tokens": {
         "color": [
-          "--ctx-track",
-          "--ctx-track-thumb",
-          "--color-on-surface",
-          "--color-outline-variant",
-          "--color-focus",
-          "--color-focus-ring"
+          "--seg-btn-track",
+          "--seg-btn-track-thumb",
+          "--on-surface",
+          "--outline-variant",
+          "--focus",
+          "--focus-ring"
         ],
         "radius": [
           "--radius-full"
@@ -5331,7 +5331,7 @@
           "--duration-fast",
           "--ease-default"
         ],
-        "component": "MD3 component-token tier --seg-btn-* (each with var(--md-sys-color-X, var(--color-X)) fallback); resolve via css/md-sys-bridge.css"
+        "component": "MD3 component-token tier --seg-btn-* (each with var(--md-sys-color-X, var(--X)) fallback); resolve via css/md-sys-bridge.css"
       },
       "relationships": {
         "related": [
@@ -5371,7 +5371,7 @@
       "motion": {
         "enter": "none — always present (static view/mode switch).",
         "exit": "none.",
-        "stateChange": "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the raised thumb. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring (kept alongside the focus state layer, per WCAG 2.4.7).",
+        "stateChange": "State layers via color-mix per MD3 spec — unselected hover 8% / focus 12% / pressed 12% over on-surface; selected hover/focus/pressed 8%/12%/12% over the raised thumb. Selecting a segment flips background→--seg-btn-selected-container-color and weight 500→600 (transitions on background). Focus-visible: 2px --focus ring + 4px --focus-ring (kept alongside the focus state layer, per WCAG 2.4.7).",
         "duration": "--duration-fast",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override.",
@@ -5425,14 +5425,14 @@
       "tokens": {
         "color": [
           "--border",
-          "--card-bg",
-          "--text-primary",
-          "--interactive",
-          "--color-focus-ring",
-          "--color-error",
-          "--color-surface-container",
-          "--color-surface-variant",
-          "--color-outline-variant"
+          "--surface-container",
+          "--on-surface",
+          "--secondary",
+          "--focus-ring",
+          "--error",
+          "--surface-container",
+          "--surface-variant",
+          "--outline-variant"
         ],
         "radius": [
           "--radius-md",
@@ -5481,7 +5481,7 @@
       "motion": {
         "enter": "The listbox panel (.select-content) animates in via @keyframes selectContentIn — opacity 0→1 + transform scale(.96) translateY(-2px)→none — a small fade+zoom from just below the trigger.",
         "exit": "none — the panel is hidden instantly via the [hidden] attribute (JS initSelect), with no data-state=closed animation. Gap vs. the motion.md overlay rule; flag to add a matching fade/scale-out on --duration-fast --ease-exit.",
-        "stateChange": "Trigger focus-visible / aria-expanded: border→--interactive + 3px --color-focus-ring box-shadow (transitions on border-color + box-shadow). Item highlight (hover + keyboard nav): background→--color-surface-variant (no transition). Selected item check indicator: opacity 0→1 (instant).",
+        "stateChange": "Trigger focus-visible / aria-expanded: border→--secondary + 3px --focus-ring box-shadow (transitions on border-color + box-shadow). Item highlight (hover + keyboard nav): background→--surface-variant (no transition). Selected item check indicator: opacity 0→1 (instant).",
         "duration": "--duration-fast (both the selectContentIn entrance and the trigger focus transition)",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (selectContentIn collapses to ~0, panel appears instantly). No component-specific override.",
@@ -5544,10 +5544,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface",
-          "--color-scrim",
-          "--color-on-surface-variant",
-          "--color-outline-variant"
+          "--surface",
+          "--scrim",
+          "--on-surface-variant",
+          "--outline-variant"
         ],
         "radius": [
           "16px top corners"
@@ -5653,10 +5653,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface",
-          "--color-scrim",
-          "--color-on-surface-variant",
-          "--color-outline-variant"
+          "--surface",
+          "--scrim",
+          "--on-surface-variant",
+          "--outline-variant"
         ],
         "radius": [
           "0 0 16px 16px (top variant)"
@@ -5758,8 +5758,8 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface-variant",
-          "--color-surface-container-highest"
+          "--surface-variant",
+          "--surface-container-highest"
         ],
         "radius": [
           "--radius-md",
@@ -5850,10 +5850,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-primary",
-          "--color-surface-variant",
-          "--color-focus-ring",
-          "--card-bg"
+          "--primary",
+          "--surface-variant",
+          "--focus-ring",
+          "--surface-container"
         ],
         "radius": [
           "--radius-full"
@@ -5894,7 +5894,7 @@
       "motion": {
         "enter": "none — the control is always present",
         "exit": "none",
-        "stateChange": "On hover (not disabled) and focus-visible the thumb grows a 4px --color-focus-ring halo — a box-shadow effect (transition: box-shadow). The track fill (.slider-range) and thumb position update via inline style/JS as the user drags and are NOT transitioned — they track the pointer 1:1.",
+        "stateChange": "On hover (not disabled) and focus-visible the thumb grows a 4px --focus-ring halo — a box-shadow effect (transition: box-shadow). The track fill (.slider-range) and thumb position update via inline style/JS as the user drags and are NOT transitioned — they track the pointer 1:1.",
         "duration": "--duration-fast",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the focus halo still appears, just without the fade.",
@@ -5949,9 +5949,9 @@
       ],
       "tokens": {
         "color": [
-          "--color-inverse-surface",
-          "--color-inverse-on-surface",
-          "--color-inverse-primary"
+          "--inverse-surface",
+          "--inverse-on-surface",
+          "--inverse-primary"
         ],
         "radius": [
           "--radius-sm"
@@ -5995,7 +5995,7 @@
       "motion": {
         "enter": "Snackbar slides up + fades in (@keyframes snackbar-in / snackbar-stack-in: translateY(16px)→0, opacity 0→1). Toast slides in from the right (@keyframes slideInRight).",
         "exit": "Snackbar fades out + slides down via .snackbar--exit (@keyframes snackbar-out / snackbar-stack-out: translateY→16px, opacity→0).",
-        "stateChange": "Action/close buttons show hover/press state-layer tints (color-mix on --color-inverse-primary / --color-inverse-on-surface); toast-close animates background + color.",
+        "stateChange": "Action/close buttons show hover/press state-layer tints (color-mix on --inverse-primary / --inverse-on-surface); toast-close animates background + color.",
         "duration": "Hardcoded 250ms in / 200ms out (NOT tokens); button tints use --duration-fast; the toast-spinner loader loops at .7s.",
         "easing": "--ease-default (snackbar enter, button tints); exit is hardcoded ease-in; toast enter is hardcoded ease.",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0); the component's own @media rule also zeroes the slide, falling back to a near-instant appearance / short opacity fade. The looping toast-spinner loader becomes static.",
@@ -6061,7 +6061,7 @@
           "--space-near",
           "--space-glow",
           "--space-star",
-          "--text-primary"
+          "--on-surface"
         ],
         "spacing": [],
         "typography": [
@@ -6140,16 +6140,16 @@
       ],
       "tokens": {
         "color": [
-          "--card-bg",
+          "--surface-container",
           "--border",
-          "--text-primary",
-          "--text-muted",
-          "--color-success-container",
-          "--color-on-success-container",
-          "--color-error-container",
-          "--color-on-error-container",
-          "--color-surface-variant",
-          "--color-on-surface-variant"
+          "--on-surface",
+          "--on-surface-variant",
+          "--success-container",
+          "--on-success-container",
+          "--error-container",
+          "--on-error-container",
+          "--surface-variant",
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius"
@@ -6248,12 +6248,12 @@
       ],
       "tokens": {
         "color": [
-          "--color-primary",
-          "--color-on-primary",
-          "--color-surface-variant",
-          "--color-outline",
-          "--color-on-surface",
-          "--color-error"
+          "--primary",
+          "--on-primary",
+          "--surface-variant",
+          "--outline",
+          "--on-surface",
+          "--error"
         ],
         "radius": [
           "--radius-full"
@@ -6349,14 +6349,14 @@
       ],
       "tokens": {
         "color": [
-          "--card-bg",
+          "--surface-container",
           "--border",
-          "--color-surface-variant",
-          "--text-primary",
-          "--text-muted",
-          "--color-focus",
-          "--color-focus-ring",
-          "--color-surface-container-high"
+          "--surface-variant",
+          "--on-surface",
+          "--on-surface-variant",
+          "--focus",
+          "--focus-ring",
+          "--surface-container-high"
         ],
         "radius": [
           "--radius"
@@ -6400,7 +6400,7 @@
       "motion": {
         "enter": "none — the table is always present (rows are not animated in/out)",
         "exit": "none",
-        "stateChange": "tbody rows recolor their background to --color-surface-variant on :hover (transition: background). A .selected row uses --color-surface-container-high (the selected state itself is not transitioned). A .clickable row's :focus-visible shows an outline + 3px --color-focus-ring box-shadow (not transitioned).",
+        "stateChange": "tbody rows recolor their background to --surface-variant on :hover (transition: background). A .selected row uses --surface-container-high (the selected state itself is not transitioned). A .clickable row's :focus-visible shows an outline + 3px --focus-ring box-shadow (not transitioned).",
         "duration": "--duration-fast (row-hover background)",
         "easing": "None specified — the row-hover transition declares only --duration-fast with no --ease-* token, so it falls back to the browser default ease. Per motion.md it should carry --ease-default.",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the hover tint still applies, just without the fade.",
@@ -6452,12 +6452,12 @@
       ],
       "tokens": {
         "color": [
-          "--color-on-surface-variant",
-          "--color-on-surface",
-          "--color-secondary",
+          "--on-surface-variant",
+          "--on-surface",
+          "--secondary",
           "--border",
-          "--color-focus",
-          "--color-focus-ring"
+          "--focus",
+          "--focus-ring"
         ],
         "radius": [
           "--radius-md",
@@ -6554,12 +6554,12 @@
       "tokens": {
         "color": [
           "--border",
-          "--card-bg",
-          "--text-primary",
-          "--interactive",
-          "--color-focus-ring",
-          "--color-error",
-          "--color-on-surface-variant"
+          "--surface-container",
+          "--on-surface",
+          "--secondary",
+          "--focus-ring",
+          "--error",
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius-md"
@@ -6602,7 +6602,7 @@
       "motion": {
         "enter": "none — always present (static form field).",
         "exit": "none.",
-        "stateChange": "Shares the form field transition (border-color + box-shadow). Focus-visible: border→--interactive + 3px --color-focus-ring, label recolors via :focus-within. Error (is-error / aria-invalid): border→--color-error + --color-error-ring. Auto-grow via field-sizing: content changes height with typed content but is intentionally NOT transitioned (animating height would thrash layout).",
+        "stateChange": "Shares the form field transition (border-color + box-shadow). Focus-visible: border→--secondary + 3px --focus-ring, label recolors via :focus-within. Error (is-error / aria-invalid): border→--error + --error-ring. Auto-grow via field-sizing: content changes height with typed content but is intentionally NOT transitioned (animating height would thrash layout).",
         "duration": "--duration-fast (border/box-shadow)",
         "easing": "none specified — the shared field transition lists durations with no --ease-* token, falling back to the browser default `ease`. Divergence from the --ease-default convention; flag to tokenize.",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (border/ring transitions collapse to ~0). No component-specific override.",
@@ -6656,11 +6656,11 @@
       ],
       "tokens": {
         "color": [
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--color-on-surface",
-          "--color-focus",
-          "--color-focus-ring"
+          "--secondary-container",
+          "--on-secondary-container",
+          "--on-surface",
+          "--focus",
+          "--focus-ring"
         ],
         "radius": [
           "--radius-md"
@@ -6752,13 +6752,13 @@
       ],
       "tokens": {
         "color": [
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--color-on-surface",
-          "--color-outline-variant",
-          "--color-focus",
-          "--color-focus-ring",
-          "--color-error"
+          "--secondary-container",
+          "--on-secondary-container",
+          "--on-surface",
+          "--outline-variant",
+          "--focus",
+          "--focus-ring",
+          "--error"
         ],
         "radius": [
           "--radius-md"
@@ -6808,7 +6808,7 @@
       "motion": {
         "enter": "none — always present (static two-state control).",
         "exit": "none.",
-        "stateChange": "Hover: state layer color-mix over --color-on-surface 8% (unselected) or over the secondary-container when pressed. Pressed on (aria-pressed=true): background→--color-secondary-container, color→--color-on-secondary-container (transitions on background-color + color). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring. Disabled: opacity .38 (no transition).",
+        "stateChange": "Hover: state layer color-mix over --on-surface 8% (unselected) or over the secondary-container when pressed. Pressed on (aria-pressed=true): background→--secondary-container, color→--on-secondary-container (transitions on background-color + color). Focus-visible: 2px --focus ring + 4px --focus-ring. Disabled: opacity .38 (no transition).",
         "duration": "--duration-fast",
         "easing": "--ease-default",
         "reducedMotion": "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions neutralized to ~0). No component-specific override.",
@@ -6871,17 +6871,17 @@
       ],
       "tokens": {
         "color": [
-          "--color-surface",
-          "--card-bg",
-          "--color-on-surface-variant",
-          "--color-surface-variant",
-          "--color-outline",
-          "--color-secondary",
-          "--interactive",
-          "--color-focus-ring",
-          "--color-secondary-container",
-          "--color-on-secondary-container",
-          "--text-muted"
+          "--surface",
+          "--surface-container",
+          "--on-surface-variant",
+          "--surface-variant",
+          "--outline",
+          "--secondary",
+          "--secondary",
+          "--focus-ring",
+          "--secondary-container",
+          "--on-secondary-container",
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius-md",
@@ -7037,10 +7037,10 @@
       ],
       "tokens": {
         "color": [
-          "--color-inverse-surface",
-          "--color-inverse-on-surface",
-          "--color-surface-container",
-          "--color-on-surface"
+          "--inverse-surface",
+          "--inverse-on-surface",
+          "--surface-container",
+          "--on-surface"
         ],
         "radius": [
           "--radius-sm",
@@ -7148,11 +7148,11 @@
       ],
       "tokens": {
         "color": [
-          "--sidebar-bg",
-          "--text-muted",
-          "--interactive",
-          "--interactive-light",
-          "--color-on-primary",
+          "--surface-container",
+          "--on-surface-variant",
+          "--secondary",
+          "--secondary-container",
+          "--on-primary",
           "--border"
         ],
         "radius": [
@@ -7256,11 +7256,11 @@
       ],
       "tokens": {
         "color": [
-          "--card-bg",
+          "--surface-container",
           "--border",
-          "--color-secondary-container",
-          "--text-primary",
-          "--text-muted"
+          "--secondary-container",
+          "--on-surface",
+          "--on-surface-variant"
         ],
         "radius": [
           "--radius",

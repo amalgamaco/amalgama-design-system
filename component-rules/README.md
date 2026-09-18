@@ -62,7 +62,7 @@ layout_constraints:             # hard layout rules
 states:                         # ONLY the states this component actually supports
   default: "..."
   hover: "..."
-  focus: "focus-visible ring via --color-focus / --color-focus-ring"
+  focus: "focus-visible ring via --focus / --focus-ring"
   active: "..."
   disabled: "..."
   loading: "..."               # omit keys that don't apply
@@ -95,7 +95,7 @@ relationships:
   not_to_confuse_with: [{component: chip, why: "chips filter/select; buttons act"}]
 
 tokens:                         # the key token contract (not exhaustive)
-  color: [--color-primary, --color-on-primary]
+  color: [--primary, --on-primary]
   radius: "--radius-* scales with size"
   motion: [--duration-fast]
 

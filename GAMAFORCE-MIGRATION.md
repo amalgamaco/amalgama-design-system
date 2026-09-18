@@ -65,7 +65,7 @@ rule it violates** (with the doc to cite). Record every hit; they become your mi
 | Look for | Violates | Fix |
 |---|---|---|
 | Any raw hex (`#3b82f6`, `#fff`, `#1c2438`) in CSS/inline styles | Tokens are law (CLAUDE.md); MIGRATION.md §Color algorithm | Classify by element **role**, assign the semantic token — never nearest-hex |
-| A "product mode" class redefining `--bg`/`--border`/`--text-primary` to legacy values | MIGRATION.md anti-pattern #3 (parallel token layer) | Delete it; DS token values ARE the target |
+| A "product mode" class redefining `--bg`/`--border`/`--on-surface` to legacy values | MIGRATION.md anti-pattern #3 (parallel token layer) | Delete it; DS token values ARE the target |
 | Hand-written `@media (prefers-color-scheme)` / `.dark` overrides | MIGRATION.md anti-pattern #4 (per-theme CSS) | Delete; the semantic layer recalibrates under `data-theme="dark"` |
 | `font: 600 20px 'Epilogue'` / loose `font-size: 15px` | MIGRATION.md §Typography; GOVERNANCE §8 | `--font-heading` + a `--font-size-*` token; snap to nearest role token |
 | Custom rgba shadows | GOVERNANCE §9.1 | `--shadow-sm/md/lg` |
@@ -134,7 +134,7 @@ Follow in order. Each step names the concrete Embassy rule and where to consult.
 3. **Map UI elements → Embassy components.** Every element gets a DS component from MIGRATION.md's mapping table (+ the Gamaforce domain components in §5 here). No match → flag a DS gap, don't improvise.
 4. **Remove duplication.** Collapse repeated ad-hoc patterns into one Embassy component. Two card styles → one `.card`. Three status colors → `.badge` variants. → GOVERNANCE §3 (single visual identity).
 5. **Layout + spacing.** Wrap in the `.app` shell (GOVERNANCE §14.1); page-level spacing via `--space-*` (§14.5); grids via auto-fill `grid-template-columns: repeat(auto-fill, minmax(…,1fr))` (§14.6); content width per §14.4 (forms ≤800px, prose ≤680px).
-6. **Typography + color roles.** Classify each color by the **role** of the element it paints and assign the semantic token; every `font-size` via a `--font-size-*` token; page text is navy `--text-primary`, never black. → MIGRATION.md §Color algorithm + §Typography.
+6. **Typography + color roles.** Classify each color by the **role** of the element it paints and assign the semantic token; every `font-size` via a `--font-size-*` token; page text is navy `--on-surface`, never black. → MIGRATION.md §Color algorithm + §Typography.
 7. **Responsive.** Verify at 375 / 768 / 1280. Reflow multi-column → single column below 768px; sidebar → modal drawer below 768px (GOVERNANCE §14.3). → `guidelines/responsive-layout.md`.
 8. **Interaction + motion.** Use existing vanilla behaviors (`openOverlay`/`closeOverlay`, `switchCompTab`, `initDataTable`, `initCalendar`, flyout positioning) — don't reinvent. Motion via duration/easing tokens; honor `prefers-reduced-motion`. → GOVERNANCE §13, `guidelines/motion.md`.
 9. **Accessibility.** Roles/labels on icon buttons and clickable cards; visible focus ring (never removed); keyboard reachable; status by label+color, not color alone; ≥44px touch targets. → `guidelines/accessibility.md`, GOVERNANCE §6.2.

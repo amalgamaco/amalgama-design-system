@@ -77,7 +77,7 @@ relationships:
     - {component: alert, why: "Alert is persistent inline messaging, not modal"}
 
 tokens:
-  color: [--color-surface, --color-on-surface, --color-scrim]
+  color: [--surface, --on-surface, --scrim]
   radius: [--radius-lg]
   spacing: ["24px container padding", "16px section gap"]
   motion: [--duration-sheet, --ease-emphasized]
@@ -85,7 +85,7 @@ tokens:
 motion:
   enter: "Two coordinated entrances: the scrim overlay fades in (@keyframes fadeIn, opacity 0→1) while the panel slides up + fades (@keyframes slideInUp, translateY(20px)→0 with opacity 0→1). The scrim is an effect (fade only, no overshoot); the panel is the spatial hero move (per guidelines/motion.md the ideal is a zoom, here it is a slide-up — either way effect vs. spatial is respected)."
   exit: "none defined in CSS — the overlay/panel are removed by JS (openOverlay/closeOverlay) with no data-state=closed animation. This is a gap vs. the motion.md rule that overlays declare BOTH enter and exit; flag to add a fade/slide-down exit on --duration-fast --ease-exit."
-  stateChange: "modal-close button hover: background→--color-surface-variant, color→--color-on-surface; focus-visible ring (2px --color-focus + 4px --color-focus-ring)."
+  stateChange: "modal-close button hover: background→--surface-variant, color→--on-surface; focus-visible ring (2px --focus + 4px --focus-ring)."
   duration: "Currently HARDCODED: overlay fadeIn .15s, panel slideInUp .2s. Intended tokens: --duration-fast (scrim) and --duration-normal (panel). modal-close transition uses --duration-fast."
   easing: "Currently HARDCODED `ease` on both keyframes. Intended tokens: --ease-enter for the scrim fade-in, --ease-exit for the (missing) exit; modal-close uses --ease-default."
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (fadeIn/slideInUp durations collapse to ~0.01ms, so the Dialog appears instantly). No component-specific override."

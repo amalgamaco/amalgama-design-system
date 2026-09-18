@@ -41,10 +41,10 @@ layout_constraints:
   - "Filter chips sit directly below the search/toolbar they refine."
 
 states:
-  default: "Outlined resting (border --color-outline-variant)."
+  default: "Outlined resting (border --outline-variant)."
   hover: "State layer over the surface."
-  focus: "focus-visible ring (--color-focus / --color-focus-ring)."
-  selected: "Filled --color-secondary-container / on-secondary-container; toggle chips expose aria-pressed/data-state=on."
+  focus: "focus-visible ring (--focus / --focus-ring)."
+  selected: "Filled --secondary-container / on-secondary-container; toggle chips expose aria-pressed/data-state=on."
   disabled: "on-disabled tokens; not focusable."
 
 accessibility:
@@ -65,7 +65,7 @@ ux_principles:
 common_mistakes:
   - "Using a chip as a primary CTA."
   - "Adding aria-pressed to a non-toggle action chip."
-  - "Making the border identical to an outlined Button (chip uses --color-outline-variant, not --color-outline)."
+  - "Making the border identical to an outlined Button (chip uses --outline-variant, not --outline)."
   - "Read-only status shown as a chip instead of a Badge."
 nielsen_heuristics:
   - {id: 1, name: "Visibility of system status", note: "active filters are visibly selected"}
@@ -82,7 +82,7 @@ relationships:
     - {component: button, why: "buttons act; chips filter/select/represent input"}
 
 tokens:
-  color: [--color-secondary-container, --color-on-secondary-container, --color-outline-variant, --color-surface]
+  color: [--secondary-container, --on-secondary-container, --outline-variant, --surface]
   radius: [--radius-full]
   spacing: [--space-2, --space-4]
   typography: [--font-size-body-lg]
@@ -90,7 +90,7 @@ tokens:
 motion:
   enter: "none — always present (static filter/input element)."
   exit: "none (an input chip being removed is a DOM removal, not an animated exit)."
-  stateChange: "Hover/active: state layer via color-mix over the base — unselected on-surface 8%/12%, selected on-secondary-container 8%/12% over the container, elevated the same mixed over surface-container-low. Selected: fill flips to --color-secondary-container (transitions on background). Focus-visible: 2px --color-focus ring + 4px --color-focus-ring. Dragged: box-shadow lifts to --shadow-md."
+  stateChange: "Hover/active: state layer via color-mix over the base — unselected on-surface 8%/12%, selected on-secondary-container 8%/12% over the container, elevated the same mixed over surface-container-low. Selected: fill flips to --secondary-container (transitions on background). Focus-visible: 2px --focus ring + 4px --focus-ring. Dragged: box-shadow lifts to --shadow-md."
   duration: "--duration-fast"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No component-specific override."

@@ -2,10 +2,11 @@
 
 > Generado por scripts/build-tokens.mjs desde css/variables.css.
 
-45 de 315 tokens no se copian tal cual. El valor sigue siendo el mismo — cambia como se aplica.
+46 de 315 tokens no se copian tal cual. El valor sigue siendo el mismo — cambia como se aplica.
 
 | Token | Valor | Por que | En RN |
 |---|---|---|---|
+| `--shadow` | `#0A0C12` | no existe en RN | RN no tiene box-shadow multi-capa: iOS usa shadowColor/Offset/Opacity/Radius y Android solo elevation. |
 | `--font-size-editorial-lg` | `52px` | `clamp` | Congelado en 52px (telefono). El maximo 96px vale para tablet. |
 | `--line-height-editorial-lg` | `1.02` | `multiplicador` | RN mide lineHeight en puntos: lineHeight = fontSize * 1.02 |
 | `--font-size-editorial-md` | `40px` | `clamp` | Congelado en 40px (telefono). El maximo 68px vale para tablet. |

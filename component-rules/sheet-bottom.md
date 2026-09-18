@@ -76,7 +76,7 @@ relationships:
     - {component: sheet-side, why: "Side Sheet anchors to a lateral edge for desktop filters/detail"}
     - {component: nav-drawer, why: "Nav Drawer is primary navigation, not a content panel"}
 tokens:
-  color: [--color-surface, --color-scrim, --color-on-surface-variant, --color-outline-variant]
+  color: [--surface, --scrim, --on-surface-variant, --outline-variant]
   radius: ["16px top corners"]
   motion: [--duration-sheet, --ease-emphasized]
   shadow: [--shadow-lg]

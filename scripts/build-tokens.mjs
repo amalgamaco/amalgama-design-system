@@ -304,19 +304,22 @@ const triplet = v => { const c = toRGBA(v); return c ? `${Math.round(c[0])} ${Ma
 /* Dos nombres por color, para no chocar:
      runtime  --e-<token>        el valor vive acá (lo inyecta el provider)
      Tailwind --color-<utility>  lo consume bg-/text-/border-
-   Embassy ya tiene tokens llamados --color-*, así que sin el prefijo --e- el
-   mapeo saldría auto-referencial (--color-primary: rgb(var(--color-primary))). */
+   El prefijo --e- no es decorativo: sin él el mapeo de un rol saldría
+   auto-referencial, porque Tailwind nombra su utility igual que el rol. */
 const runtimeVar = n => '--e-' + n.replace(/^--/, '');
 
 /* Regla de desempate, deliberada y estable: si dos tokens compiten por el mismo
-   nombre corto (--color-surface vs el atajo --surface), gana el rol canónico
-   --color-*. El perdedor se queda con su nombre completo, o con alias-<nombre>
-   si eso también choca. Un utility que empieza con alias- avisa que casi
-   seguro querías el otro. */
+   nombre de utility, el perdedor se queda con su nombre completo, o con
+   alias-<nombre> si eso también choca. Un utility que empieza con alias- avisa
+   que casi seguro querías el otro.
+
+   Hasta sep-2026 esto desempataba de verdad: los roles llevaban prefijo
+   --color- y competían con sus atajos por el mismo nombre corto. Con el
+   prefijo retirado no quedan pares así, pero la regla se queda: es la red
+   para el día que alguien agregue un token que sí choque. */
 const taken = new Map();
 const used  = new Set();
-const canonicalFirst = [...colors].sort((a, b) =>
-  Number(b[0].startsWith('--color-')) - Number(a[0].startsWith('--color-')));
+const canonicalFirst = [...colors];
 for (const [n] of canonicalFirst) {
   const short = n.replace(/^--(color-)?/, '');
   const long  = n.replace(/^--/, '');

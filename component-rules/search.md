@@ -35,14 +35,14 @@ content_rules:
   - "Search Bar: leading search icon; optional trailing action (clear/mic) and account avatar."
   - "Search Field: leading 18px icon + input; keep it as one flex row with toolbar buttons."
 layout_constraints:
-  - "Search Bar background is grey (--color-surface-container-high) — never --color-surface. Search Field background is --color-surface — never transparent. Don't swap them."
+  - "Search Bar background is grey (--surface-container-high) — never --surface. Search Field background is --surface — never transparent. Don't swap them."
   - "Search Bar width 360–720px RECOMENDADO cuando vive suelta; dentro de una columna de contenido el ancho lo manda la región (design.md — la composición gana). Use .search-row to place actions beside it. Search Field flexes to fill the toolbar."
   - "Don't replace a Search variant with a plain form Input — the shape/scope semantics differ."
 
 states:
   default: "Bar: grey pill, subtle 1px border. Field: surface bg, subtle 1px border."
   hover: "Background tints (on-surface 8%) and border darkens."
-  focus: "focus-within → background tints (on-surface 12%) and border → --color-secondary; caret --color-secondary."
+  focus: "focus-within → background tints (on-surface 12%) and border → --secondary; caret --secondary."
   disabled: "Bar: aria-disabled / :has(input:disabled) → container 12%, content 38% of on-surface, no pointer events."
 
 accessibility:
@@ -83,7 +83,7 @@ relationships:
     - {component: input, why: "input captures a form value; search queries content and carries role=search"}
 
 tokens:
-  color: [--color-surface-container-high, --color-surface, --color-on-surface, --color-on-surface-variant, --color-secondary, --border, --color-outline, --color-focus-ring]
+  color: [--surface-container-high, --surface, --on-surface, --on-surface-variant, --secondary, --border, --outline, --focus-ring]
   radius: [--radius-full, --radius-md]
   spacing: [--space-2, --space-4]
   typography: [--font-size-body-lg, --font-size-body-md]
@@ -133,9 +133,9 @@ source:
 
 ```html
 <!-- ✕ Search Field given the grey Search Bar background -->
-<div class="search-field" style="background:var(--color-surface-container-high)">…</div>
+<div class="search-field" style="background:var(--surface-container-high)">…</div>
 ```
-*Fix:* the background is variant-defining — Search Field stays on --color-surface.
+*Fix:* the background is variant-defining — Search Field stays on --surface.
 
 ```html
 <!-- ✕ A plain form input standing in for search -->

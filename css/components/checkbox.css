@@ -11,7 +11,7 @@
    Reemplaza a: checkbox HTML sin estilizar, custom div+ARIA re-implementations.
 
    Dependencia: variables.css (Color Roles)
-   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en light y dark
+   Consume EXCLUSIVAMENTE roles semánticos de color → funciona en light y dark
    sin overrides por tema.
 
    Implementación: un <input type="checkbox"> real, visualmente reemplazado (no oculto)
@@ -36,7 +36,7 @@
   height: 18px;
   flex-shrink: 0;
   border-radius: 4px;
-  border: 2px solid var(--color-outline);
+  border: 2px solid var(--outline);
   background: transparent;
   cursor: pointer;
   position: relative;
@@ -46,24 +46,24 @@
 }
 
 .checkbox:hover {
-  border-color: var(--color-on-surface);
+  border-color: var(--on-surface);
 }
 
 .checkbox:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 
 .checkbox:checked,
 .checkbox:indeterminate {
   border-color: transparent;
-  background: var(--color-primary);
+  background: var(--primary);
 }
 
 /* Error/invalid — red border via the shared error token (same signal as Input/Select) */
 .checkbox[aria-invalid="true"] {
-  border-color: var(--color-error);
+  border-color: var(--error);
 }
 
 /* Check icon (rendered via a rotated-box CSS checkmark — no external SVG needed) */
@@ -74,7 +74,7 @@
   top: 1px;
   width: 5px;
   height: 9px;
-  border: solid var(--color-on-primary);
+  border: solid var(--on-primary);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -87,7 +87,7 @@
   top: 7px;
   width: 8px;
   height: 2px;
-  background: var(--color-on-primary);
+  background: var(--on-primary);
   border-radius: 1px;
 }
 
@@ -101,13 +101,13 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   font: var(--font-weight-regular) var(--font-size-body-md)/1.4 var(--font-body);
   cursor: pointer;
 }
 .checkbox-label:has(.checkbox:disabled) {
   cursor: not-allowed;
-  color: var(--color-on-disabled);
+  color: var(--on-disabled);
 }
 
 /* ── Card composition ── tarjeta seleccionable con borde (par shadcn checkbox card).
@@ -125,10 +125,10 @@
   transition: border-color var(--duration-fast) var(--ease-default),
               background-color var(--duration-fast) var(--ease-default);
 }
-.checkbox-card:hover { border-color: var(--color-outline); }
+.checkbox-card:hover { border-color: var(--outline); }
 .checkbox-card:has(input:checked) {
-  border-color: var(--color-primary);
-  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
 }
 .checkbox-card:has(input:disabled) { opacity: .5; cursor: not-allowed; }
 .checkbox-card-content { display: flex; flex-direction: column; gap: var(--space-0-5); min-width: 0; }
@@ -136,6 +136,6 @@
   font-size: var(--font-size-body-md);
   line-height: var(--line-height-title);
   font-weight: var(--font-weight-medium);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
-.checkbox-card-desc { font-size: var(--font-size-body-sm); color: var(--color-on-surface-variant); line-height: var(--line-height-body-sm); }
+.checkbox-card-desc { font-size: var(--font-size-body-sm); color: var(--on-surface-variant); line-height: var(--line-height-body-sm); }

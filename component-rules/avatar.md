@@ -43,14 +43,14 @@ layout_constraints:
   - "The container has no overflow:hidden (the badge would get clipped); the image clips itself via border-radius:inherit."
 
 states:
-  default: "Circle with tonal fill (--color-primary-container) + initials, or the photo."
-  focus: "Not focusable on its own; when it triggers a menu, wrap it in a <button> with its own focus-visible ring (outline 2px --color-focus + 4px --color-focus-ring)."
+  default: "Circle with tonal fill (--primary-container) + initials, or the photo."
+  focus: "Not focusable on its own; when it triggers a menu, wrap it in a <button> with its own focus-visible ring (outline 2px --focus + 4px --focus-ring)."
 
 accessibility:
   roles: "Static avatar is decorative-ish text; an image needs alt, a fallback needs an accessible name. Interactive avatar (opens a menu) must be a real <button> with aria-haspopup + aria-expanded."
   aria: ["alt on .avatar-image (person's name)", "aria-label on fallback-only avatar ('Iniciales de …')", "aria-label listing people on an avatar-group", "title/aria-label on .avatar-badge stating the status (e.g. 'En línea')"]
   focus: "Only the interactive wrapper is focusable; it carries the standard visible focus ring."
-  contrast: "Initials use --color-on-primary-container over the tonal fill — AA in light + dark, no per-theme override. Never use avatar color as the sole identity cue; show the name when space allows."
+  contrast: "Initials use --on-primary-container over the tonal fill — AA in light + dark, no per-theme override. Never use avatar color as the sole identity cue; show the name when space allows."
 keyboard:
   - {keys: "Tab", action: "focus the interactive avatar wrapper (only when it triggers a menu)"}
   - {keys: "Enter / Space", action: "open the account menu (interactive wrapper)"}
@@ -79,7 +79,7 @@ relationships:
     - {component: skeleton, why: "skeleton-circle is the loading placeholder for an avatar, not an avatar"}
 
 tokens:
-  color: [--color-primary-container, --color-on-primary-container, --color-surface, --color-surface-variant, --color-on-surface-variant, --color-success, --color-error, --color-warning, --color-outline]
+  color: [--primary-container, --on-primary-container, --surface, --surface-variant, --on-surface-variant, --success, --error, --warning, --outline]
   radius: [--radius-full]
   typography: [--font-body]
 

@@ -95,7 +95,7 @@ const ICON_STROKE = { liviano: 1.5, estandar: 2, robusto: 2.5 };
 // de los tres tokens de texto sobre superficie se mueve menos de 0.2:1 (verificado
 // abajo, y bloquea si algo cae de AA).
 //
-// Los tokens de texto (--text-*, --color-on-surface*) NO se tiñen: son grises y
+// Los tokens de texto (los roles de contenido (--on-surface*)) NO se tiñen: son grises y
 // tienen que seguir leyéndose igual sobre cualquier marca.
 const DARK_SURFACES = {
   "color-surface":                   "#13161F",
@@ -241,7 +241,7 @@ bad("icon-stroke", strokeKey, ICON_STROKE);
 const P = buildRamp("primary", primaryHex);
 const S = buildRamp("secondary", secondaryHex);
 
-// El acento tiene que sostener texto oscuro a 4.5:1 — --color-on-secondary es primary-900
+// El acento tiene que sostener texto oscuro a 4.5:1 — --on-secondary es primary-900
 // desde sep-2026 (blanco encima de un acento vivo no llega a AA en ninguna marca). Algunos
 // tonos, sobre todo los rojos, quedan a centésimas: un rosa fuerte dio 4.47:1. En vez de
 // rechazar la marca por 0.03, bajamos la luminosidad del 900 en pasos chicos hasta que
@@ -353,13 +353,13 @@ const WHITE = "#FFFFFF", SURFACE = "#FAFBFC"; // --neutral-white / --neutral-10
 // 4.5 es el de texto normal.
 const pairs = [
   ["texto de página sobre fondo", P[900], SURFACE, 4.5, true],
-  ["--color-on-primary (blanco) sobre --color-primary", WHITE, P[900], 4.5, true],
-  ["--color-on-primary-container sobre --color-primary-container", P[900], P[60], 4.5, true],
-  ["--color-on-secondary-container sobre --color-secondary-container", P[900], S[200], 4.5, true],
+  ["--on-primary (blanco) sobre --primary", WHITE, P[900], 4.5, true],
+  ["--on-primary-container sobre --primary-container", P[900], P[60], 4.5, true],
+  ["--on-secondary-container sobre --secondary-container", P[900], S[200], 4.5, true],
   // Hasta sep-2026 este par era blanco sobre el acento y daba 3.58:1 en Embassy — se
-  // avisaba y no bloqueaba, porque ningún componente lo usaba. Ahora --color-on-secondary
+  // avisaba y no bloqueaba, porque ningún componente lo usaba. Ahora --on-secondary
   // es primary-900 (texto oscuro), así que el par pasa AA en cualquier marca y sí bloquea.
-  ["--color-on-secondary (texto oscuro) sobre --color-secondary", P[900], S[900], 4.5, true],
+  ["--on-secondary (texto oscuro) sobre --secondary", P[900], S[900], 4.5, true],
   ["borde interactivo sobre fondo (no-texto)", S[900], SURFACE, 3.0, false],
   // Dark: los tres grises de texto sobre las superficies ya teñidas con el tono de
   // la marca. Rehuear conserva la L, así que esto se mueve centésimas — pero es
@@ -373,7 +373,7 @@ const pairs = [
 ];
 
 // Aviso de encaje: dónde va a caer realmente el color de marca.
-// En Embassy --color-primary = --primary-900 (texto de página, sidebar, relleno
+// En Embassy --primary = --primary-900 (texto de página, sidebar, relleno
 // primario), así que tiene que ser oscuro. Un hex de marca claro y vivo no entra
 // por ese lado: su lugar es --secondary, el acento interactivo.
 {
@@ -381,7 +381,7 @@ const pairs = [
   if (Lp > 0.55) {
     console.log(`
 ⚠ El primary de marca (${primaryHex}) es claro (L=${Lp.toFixed(2)}). La rampa lo lleva a
-  ${P[900]} conservando el tono, porque --color-primary se usa para texto de página y sidebar
+  ${P[900]} conservando el tono, porque --primary se usa para texto de página y sidebar
   y necesita sostener texto blanco. El color vivo de la marca casi no va a aparecer por ahí.
   Si la marca ES ese color vivo, pasalo como --secondary y usá de --primary un neutro
   oscuro de la marca.`);

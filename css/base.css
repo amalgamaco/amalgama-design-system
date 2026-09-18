@@ -6,8 +6,8 @@
 
 body {
   font-family: var(--font-body);
-  background: var(--color-surface);
-  color: var(--color-on-surface);
+  background: var(--surface);
+  color: var(--on-surface);
   font-size: var(--font-size-body-lg);
   line-height: var(--line-height-body-lg);
   -webkit-font-smoothing: antialiased;
@@ -29,7 +29,7 @@ h4 { font-size: var(--font-size-heading-md); line-height: var(--line-height-head
 h5 { font-size: var(--font-size-heading-sm); line-height: var(--line-height-heading-sm); }
 h6 { font-size: var(--font-size-heading-xs); line-height: var(--line-height-heading-xs); }
 
-a { color: var(--color-secondary); text-decoration: none; }
+a { color: var(--secondary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 img, svg { display: block; max-width: 100%; }
@@ -46,7 +46,7 @@ input, select, textarea { font-family: inherit; }
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: var(--outline-variant); border-radius: 4px; }
 
 /* ── Animations ── */
 @keyframes fadeSlideIn {
@@ -85,15 +85,15 @@ input, select, textarea { font-family: inherit; }
   clip: rect(0,0,0,0); border: 0;
 }
 
-.text-muted { color: var(--color-on-surface-variant); }
-.text-secondary { color: var(--color-on-surface-variant); }
+.text-muted { color: var(--on-surface-variant); }
+.text-secondary { color: var(--on-surface-variant); }
 /* Los alias legacy --interactive / --green / --red apuntan a los tonos de SEÑAL
-   (--color-secondary, --color-success, --color-error). Como fondo o como borde
+   (--secondary, --success, --error). Como fondo o como borde
    estan bien; como TEXTO chico ninguno llega a AA: daban 3.58:1, 2.38:1 y 3.58:1.
    La familia *-text existe justamente para el caso de leerlos. */
-.text-accent { color: var(--color-secondary-text); }
-.text-success { color: var(--color-success-text); }
-.text-error { color: var(--color-error-text); }
+.text-accent { color: var(--secondary-text); }
+.text-success { color: var(--success-text); }
+.text-error { color: var(--error-text); }
 
 .font-mono { font-family: var(--font-mono); }
 .font-heading { font-family: var(--font-heading); }

@@ -59,7 +59,7 @@ In any project, no build step required:
 
 Each file in `css/components/` is the complete implementation for that component — copy it standalone into another project (no other CSS to bring along beyond the token layer above). `css/components.css` is a barrel that `@import`s every file in `css/components/`; link it for the whole library, or skip it and link individual files for a smaller footprint.
 
-**Tokens are the law.** All colors via `var(--color-*)` or semantic aliases (`--accent`, `--bg`, `--border`), radii via `var(--radius-*)` (scaled by component size, never by variant — see GOVERNANCE.md §4.3), shadows via `var(--shadow-*)`, spacing via `var(--space-*)`. Never raw hex. Dark mode is automatic: set `data-theme="dark"` on `<html>` — the semantic `--color-*` layer recalibrates itself; components need zero per-theme overrides.
+**Tokens are the law.** All colors via `var(--<role>)` — `--primary`, `--surface`, `--on-surface`, `--border`, radii via `var(--radius-*)` (scaled by component size, never by variant — see GOVERNANCE.md §4.3), shadows via `var(--shadow-*)`, spacing via `var(--space-*)`. Never raw hex. Dark mode is automatic: set `data-theme="dark"` on `<html>` — the role layer recalibrates itself; components need zero per-theme overrides.
 
 Fonts: **Epilogue** (headings), **Manrope** (body/UI — Inter stays in the stack as a fallback only), **DM Mono** (code/labels) — always via `var(--font-heading)` / `var(--font-body)` / `var(--font-mono)`, never quoted family names in component code. **Poppins is the logotype face and nothing else** (Manual p. 23); it has no token because the logo is a file. **Manrope has no italic** — a real italic is a collateral case, not a product one.
 
@@ -69,9 +69,9 @@ Fonts: **Epilogue** (headings), **Manrope** (body/UI — Inter stays in the stac
 
 **Breakpoints**: canonical values `--breakpoint-md: 768px`, `--breakpoint-lg: 1024px` live in `variables.css` (media queries can't consume `var()` — use the literal values and keep them in sync). **Mobile shell:** below 768px the app-shell sidebar is a **modal navigation drawer** — off-canvas, slides in over a scrim on `.app.nav-open`, toggled by the `.shell-menu-btn` hamburger; shipped in `css/layout.css`, spec in GOVERNANCE.md §14.3. Use it; don't invent a different mobile nav.
 
-**Text colour has two levels, and only two** — the shape the Design System documents, and Material's: `var(--color-on-surface)` for primary content (page headings, body, and text inside components alike) and `var(--color-on-surface-variant)` for medium emphasis (captions, hints, secondary labels). In light that is `#0A0C12` and `#63687A`; dark recalibrates them.
+**Text colour has two levels, and only two** — the shape the Design System documents, and Material's: `var(--on-surface)` for primary content (page headings, body, and text inside components alike) and `var(--on-surface-variant)` for medium emphasis (captions, hints, secondary labels). In light that is `#0A0C12` and `#63687A`; dark recalibrates them.
 
-> **Changed in sep-2026.** Page text used to be brand navy via a `--text-primary` token, with `--color-on-surface` reserved for text *inside* components. Five `--text-*` tokens had grown on top of the two roles, each matching its role in one theme and diverging in the other, and none of them had a row in any table of the system. They were collapsed into the two documented roles, so **page text is now near-black, not navy**. The brand navy is still `--color-primary` and still carries every filled Primary action.
+> **Changed in sep-2026.** Page text used to be brand navy via a `--on-surface` token, with `--on-surface` reserved for text *inside* components. Five `--text-*` tokens had grown on top of the two roles, each matching its role in one theme and diverging in the other, and none of them had a row in any table of the system. They were collapsed into the two documented roles, so **page text is now near-black, not navy**. The brand navy is still `--primary` and still carries every filled Primary action.
 
 ### Optional React wrappers — `components/ui/*.tsx`
 
@@ -108,7 +108,7 @@ Canonical component code is `css/components/<name>.css`. The **React** column na
 | Component | CSS — canonical (`css/components/`) | React (optional, `components/ui/`) | Docs page (`docs/` → redirect) |
 |---|---|---|---|
 | Button | `button.css` — variants: `btn-primary`(filled) · `btn-elevated`(tonal + real elevation, MD3 elevated button) · `btn-secondary`(tonal) · `btn-tertiary`/`btn-ghost`(outlined, alias) · `btn-text` · `icon-btn` · `btn-danger`/`btn-success`(modifiers) · `btn-next`; sizes `btn-xs/-sm/-lg/-xl` (radius scales with size, never variant); `btn-compact` | `button.tsx` | `button.html` |
-| Segmented Button | `segmented-button.css` (`seg-btn-group`, `seg-btn`, `.selected`/`aria-pressed`; sizes `seg-btn-group-sm/-lg`; MD3 component-token layer via `--seg-btn-*` custom properties, each with a `var(--md-sys-color-X, var(--color-X))` fallback) — driven by `segSwitch()`/`segSwitchMulti()` in the app-shell script | `segmented-button.tsx` | — |
+| Segmented Button | `segmented-button.css` (`seg-btn-group`, `seg-btn`, `.selected`/`aria-pressed`; sizes `seg-btn-group-sm/-lg`; MD3 component-token layer via `--seg-btn-*` custom properties, each with a `var(--md-sys-color-X, var(--X))` fallback) — driven by `segSwitch()`/`segSwitchMulti()` in the app-shell script | `segmented-button.tsx` | — |
 | Badge | `badge.css` (`badge badge-{open,active,closed,draft,archived,warning,tertiary,info}`, `label` variant) | `badge.tsx` | `badge.html` |
 | Chip | `chip.css` (`chip`, `chip-selected`, `chip-elevated`, `chip-icon`, `chip-remove`, `chip-set`) | `chip.tsx` | `chip.html` |
 | Search | `search.css` (`search-bar` + slots, `search-view` + `-fullscreen`) — mobile/standalone variant. Desktop/toolbar variant is `.search-field` in `toolbar.css` — both share state tokens, different shape/height. | `search.tsx` | `search.html` |
@@ -133,7 +133,7 @@ Canonical component code is `css/components/<name>.css`. The **React** column na
 | Collapsible | `collapsible.css` — same grid-rows technique as Accordion, single boolean | `collapsible.tsx` | — |
 | Pagination | `pagination.css` (reuses `.icon-btn`/`.btn-tertiary` states) | `pagination.tsx` | — |
 | Scroll Area | `scroll-area.css` — pure CSS (`scrollbar-width`/`::-webkit-scrollbar`), no JS | `scroll-area.tsx` | — |
-| Toggle | `toggle.css` (pressed state = `aria-pressed` attribute, `--color-secondary-container` — not Primary, which inverts to white in dark mode) | `toggle.tsx` | — |
+| Toggle | `toggle.css` (pressed state = `aria-pressed` attribute, `--secondary-container` — not Primary, which inverts to white in dark mode) | `toggle.tsx` | — |
 | Toggle Group | `toggle-group.css` — deliberately distinct from Segmented Button (different container shape/use case: grouped toggles vs. view-switch pill), shares selection color only | `toggle-group.tsx` | SPA: `#c-toggle-group` (under Toggle) |
 | Checkbox / Switch / Radio | `checkbox.css`, `switch.css`, `radio-group.css` — real native `<input type="checkbox"/"radio">` (`role="switch"` for Switch), keyboard/screen-reader semantics free | `checkbox.tsx`, `switch.tsx`, `radio-group.tsx` | — |
 | Slider | `slider.css` — native `<input type="range">` restyled; range mode = two stacked inputs with `pointer-events` scoped to each thumb | `slider.tsx` | — |
@@ -156,7 +156,7 @@ Canonical component code is `css/components/<name>.css`. The **React** column na
 **Canonical Overview structure (all component pages):** badge → title → subtitle → 4 tabs
 (Overview / Guidelines / Accessibility / Code — the tab switcher is real `.ds-comp-tabs`/`.ds-comp-tab-btn` markup driven by `switchCompTab()`, no framework) → key-characteristic bullets → single-mode
 variant showcase → numbered references. **Show only one color mode at a time — no side-by-side
-light/dark; examples follow the global theme toggle.** Note: in dark mode Embassy `--color-primary`
+light/dark; examples follow the global theme toggle.** Note: in dark mode Embassy `--primary`
 is white, so selected controls render white.
 
 Component relationships: filter **chips** refine **search** results (chips below the search bar) and toolbar filters. **Search has two official platform variants**, same state tokens, different shape/context: **`.search-field`** (`toolbar.css`) is the compact desktop variant, used inside a Toolbar alongside Select/ToolbarButton; **`.search-bar`** (`search.css`) is the standalone 56px mobile/hero variant, which can expand into `.search-view`. Full guidance on which to use lives in the Search component's Guidelines tab ("Ubicación").
@@ -206,7 +206,7 @@ before declaring it done. Token-correct but unusable is not done.
 
 Author the component as a **self-contained flat-CSS file** in `css/components/`.
 
-1. **CSS first**: `css/components/<name>.css` — flat kebab-case classes, additive variant/size modifiers, dark mode via existing `--color-*` tokens only (never a per-theme override block — `variables.css`'s `[data-theme="dark"]` block already recalibrates every token). Header comment: purpose, `Cuándo usar / Cuándo no / Reemplaza a`, dependencies, and a `Uso:` HTML snippet. If a component-scoped custom-property tier is genuinely useful (see Segmented Button's `--seg-btn-*`), define it locally in the component's own file — never add a token to `variables.css` for one component's internal use.
+1. **CSS first**: `css/components/<name>.css` — flat kebab-case classes, additive variant/size modifiers, dark mode via the existing roles only (never a per-theme override block — `variables.css`'s `[data-theme="dark"]` block already recalibrates every token). Header comment: purpose, `Cuándo usar / Cuándo no / Reemplaza a`, dependencies, and a `Uso:` HTML snippet. If a component-scoped custom-property tier is genuinely useful (see Segmented Button's `--seg-btn-*`), define it locally in the component's own file — never add a token to `variables.css` for one component's internal use.
 2. **Vanilla JS behavior (if needed)**: small, named functions added to `index.html`'s app-shell `<script>` block (or split into `js/app-shell.js`/`js/components.js` if it grows further) — plain DOM APIs, `data-*` attributes for state, no framework. Reuse an existing pattern first (`switchCompTab`, `openOverlay`/`closeOverlay`, the shared `components/lib/use-flyout.ts`-style positioning approach) before inventing a new one.
 3. **Optional React wrapper**: only if a consuming React project would benefit — `components/ui/<name>.tsx`, `cva` + `cn()` + `forwardRef`, mapping props onto the flat CSS classes with zero extra styling.
 4. **Docs**: section in root `index.html` (Overview/Guidelines/Accessibility/Code tabs — use Button as the reference for depth). Do **not** create a `docs/<name>.html` page — that catalog is retired (redirect stubs only).

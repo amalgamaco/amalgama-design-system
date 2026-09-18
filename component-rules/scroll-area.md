@@ -18,7 +18,7 @@ use_cases:
   - "A horizontal row of category cards (content in a max-content row)."
 
 variants:
-  - {name: base, class: scroll-area, purpose: "The single class — styles the native scrollbar (thin, --color-outline thumb) over an overflow:auto container."}
+  - {name: base, class: scroll-area, purpose: "The single class — styles the native scrollbar (thin, --outline thumb) over an overflow:auto container."}
 sizes:
   - {name: default, class: "(default)", use: "single implementation; you set height/width inline and the container scrolls"}
 size_selection: "No size scale. Define an explicit max-height/height (and width for horizontal scroll); overflow:auto does the rest."
@@ -31,14 +31,14 @@ layout_constraints:
   - "Do not wrap the page's natural scroll."
 
 states:
-  default: "overflow:auto with a thin, tokenized scrollbar (transparent track, --color-outline thumb)."
-  hover: "The webkit scrollbar thumb darkens to full --color-outline on hover."
+  default: "overflow:auto with a thin, tokenized scrollbar (transparent track, --outline thumb)."
+  hover: "The webkit scrollbar thumb darkens to full --outline on hover."
 
 accessibility:
   roles: "A plain scrollable region; add role/label only if it is a distinct landmark. Keep it keyboard-scrollable (a focusable child or tabindex if it holds no focusable content)."
   aria: ["aria-label if the region is a meaningful named landmark"]
   focus: "Content inside stays in natural tab order; the region scrolls into view as focus moves."
-  contrast: "The thumb derives from --color-outline (a color-mix at rest) and recalibrates per theme."
+  contrast: "The thumb derives from --outline (a color-mix at rest) and recalibrates per theme."
 keyboard:
   - {keys: "Arrow keys / PageUp / PageDown", action: "scroll when the region or a child is focused"}
 responsive:
@@ -64,13 +64,13 @@ relationships:
     - {component: table, why: "table horizontal overflow uses .table-scroll, not scroll-area"}
 
 tokens:
-  color: [--color-outline]
+  color: [--outline]
   radius: [--radius-full]
 
 motion:
   enter: "none — a static scroll container; content scrolls via native browser behavior."
   exit: "none"
-  stateChange: "The WebKit scrollbar thumb changes color on hover (from color-mix outline 60% to solid --color-outline) with no declared transition (instant). Scrolling itself is native and not driven by any CSS animation."
+  stateChange: "The WebKit scrollbar thumb changes color on hover (from color-mix outline 60% to solid --outline) with no declared transition (instant). Scrolling itself is native and not driven by any CSS animation."
   duration: "none — scroll-area.css declares no motion tokens"
   easing: "none"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). Native scrolling continues to honor the user's OS/browser scroll settings; the thumb color change is already instant."

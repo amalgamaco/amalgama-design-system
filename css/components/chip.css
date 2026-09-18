@@ -19,11 +19,11 @@
      Tipografía Label Large · Inter 500 · 14px
 
    Dependencia: variables.css (Color Roles)
-   Consume EXCLUSIVAMENTE tokens semánticos --color-* → funciona en
+   Consume EXCLUSIVAMENTE roles semánticos de color → funciona en
    light y dark sin overrides por tema.
 
-   Border token: el Chip sin seleccionar usa --color-outline-variant, NO
-   --color-outline. --color-outline queda reservado para controles interactivos
+   Border token: el Chip sin seleccionar usa --outline-variant, NO
+   --outline. --outline queda reservado para controles interactivos
    primarios (Button tertiary/ghost/icon, Input, Checkbox, Radio, Switch) — el
    Chip es un control de filtro/metadata y necesita un trazo visiblemente más
    claro para no leerse como otro botón al lado de ellos. Mismo criterio que el
@@ -46,9 +46,9 @@
   height: 32px;
   padding: 0 var(--space-4);            /* 16px sin ícono */
   border-radius: var(--radius-full);
-  border: 1px solid var(--color-outline-variant);
+  border: 1px solid var(--outline-variant);
   background: transparent;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   font: var(--font-weight-medium) var(--font-size-body-lg)/1 var(--font-body);
   cursor: pointer;
   white-space: nowrap;
@@ -63,7 +63,7 @@
   align-items: center;
   justify-content: center;
   width: 18px; height: 18px;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   flex-shrink: 0;
 }
 .chip-icon svg, .chip-icon i { width: 18px; height: 18px; }
@@ -76,11 +76,11 @@
   margin: 0; padding: 0;
   border: 0; background: transparent;
   border-radius: 50%;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   cursor: pointer;
   flex-shrink: 0;
 }
-.chip-remove:hover { background: color-mix(in srgb, var(--color-on-surface) 12%, transparent); }
+.chip-remove:hover { background: color-mix(in srgb, var(--on-surface) 12%, transparent); }
 .chip-remove svg, .chip-remove i { width: 14px; height: 14px; }
 
 /* Padding asimétrico cuando hay ícono inicial o de eliminación (8px del lado del ícono) */
@@ -90,64 +90,64 @@
 /* ── Variante: elevado ── */
 .chip-elevated {
   border-color: transparent;
-  background: var(--color-surface-container-low);
+  background: var(--surface-container-low);
   box-shadow: var(--shadow-sm);
 }
 
 /* ── Variante: seleccionado (filter / input) ── */
 .chip-selected,
 .chip[aria-pressed="true"] {
-  background: var(--color-secondary-container);
-  color: var(--color-on-secondary-container);
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
   border-color: transparent;
 }
 .chip-selected .chip-icon,
-.chip[aria-pressed="true"] .chip-icon   { color: var(--color-on-secondary-container); }
+.chip[aria-pressed="true"] .chip-icon   { color: var(--on-secondary-container); }
 .chip-selected .chip-remove,
-.chip[aria-pressed="true"] .chip-remove { color: var(--color-on-secondary-container); }
+.chip[aria-pressed="true"] .chip-remove { color: var(--on-secondary-container); }
 
 /* ── Estados (capas sobre on-surface, según tabla de tokens) ── */
 .chip:hover {
-  background: color-mix(in srgb, var(--color-on-surface) 8%, transparent);
+  background: color-mix(in srgb, var(--on-surface) 8%, transparent);
 }
 .chip:active {
-  background: color-mix(in srgb, var(--color-on-surface) 12%, transparent);
+  background: color-mix(in srgb, var(--on-surface) 12%, transparent);
 }
 .chip-elevated:hover {
-  background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface-container-low));
+  background: color-mix(in srgb, var(--on-surface) 8%, var(--surface-container-low));
 }
 .chip-elevated:active {
-  background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface-container-low));
+  background: color-mix(in srgb, var(--on-surface) 12%, var(--surface-container-low));
 }
 .chip-selected:hover,
 .chip[aria-pressed="true"]:hover {
-  background: color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container));
+  background: color-mix(in srgb, var(--on-secondary-container) 8%, var(--secondary-container));
 }
 .chip-selected:active,
 .chip[aria-pressed="true"]:active {
-  background: color-mix(in srgb, var(--color-on-secondary-container) 12%, var(--color-secondary-container));
+  background: color-mix(in srgb, var(--on-secondary-container) 12%, var(--secondary-container));
 }
 
 .chip:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 
 /* Arrastrado (input chips durante drag & drop) */
 .chip-dragged {
   box-shadow: var(--shadow-md);
-  background: var(--color-surface-container-low);
+  background: var(--surface-container-low);
 }
 
-/* Deshabilitado: tokens dedicados de Embassy (--color-disabled / --color-on-disabled),
+/* Deshabilitado: tokens dedicados de Embassy (--disabled / --on-disabled),
    no el modelo de opacidad MD3 (38%/12% de on-surface). Alinea al patrón canónico
    §5.3 de GOVERNANCE — reconciliación pendiente resuelta jul-2026. */
 .chip:disabled,
 .chip[aria-disabled="true"] {
-  border-color: var(--color-disabled);
+  border-color: var(--disabled);
   background: transparent;
-  color: var(--color-on-disabled);
+  color: var(--on-disabled);
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -155,12 +155,12 @@
 .chip[aria-disabled="true"] .chip-icon,
 .chip:disabled .chip-remove,
 .chip[aria-disabled="true"] .chip-remove {
-  color: var(--color-on-disabled);
+  color: var(--on-disabled);
 }
 .chip-elevated:disabled,
 .chip-elevated[aria-disabled="true"] {
   border-color: transparent;
-  background: var(--color-disabled);
+  background: var(--disabled);
 }
 
 /* ── Conjunto de chips (layout helper) ── */

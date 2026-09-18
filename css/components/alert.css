@@ -43,8 +43,8 @@
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   padding: var(--space-3) var(--space-4);
-  background: var(--color-surface-container);
-  color: var(--color-on-surface);
+  background: var(--surface-container);
+  color: var(--on-surface);
 }
 .alert:has(.alert-icon) { grid-template-columns: auto 1fr; }
 
@@ -52,7 +52,7 @@
   width: 18px;
   height: 18px;
   margin-top: 2px;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   flex-shrink: 0;
 }
 
@@ -74,32 +74,32 @@
 
 /* ── Variantes semánticas — mismos roles que badge-{info,open,warning,error} ── */
 .alert-info {
-  background: var(--color-info-container);
+  background: var(--info-container);
   border-color: transparent;
-  color: var(--color-on-info-container);
+  color: var(--on-info-container);
 }
-.alert-info .alert-icon { color: var(--color-on-info-container); }
+.alert-info .alert-icon { color: var(--on-info-container); }
 
 .alert-success {
-  background: var(--color-success-container);
+  background: var(--success-container);
   border-color: transparent;
-  color: var(--color-on-success-container);
+  color: var(--on-success-container);
 }
-.alert-success .alert-icon { color: var(--color-on-success-container); }
+.alert-success .alert-icon { color: var(--on-success-container); }
 
 .alert-warning {
-  background: var(--color-warning-container);
+  background: var(--warning-container);
   border-color: transparent;
-  color: var(--color-on-warning-container);
+  color: var(--on-warning-container);
 }
-.alert-warning .alert-icon { color: var(--color-on-warning-container); }
+.alert-warning .alert-icon { color: var(--on-warning-container); }
 
 .alert-error {
-  background: var(--color-error-container);
+  background: var(--error-container);
   border-color: transparent;
-  color: var(--color-on-error-container);
+  color: var(--on-error-container);
 }
-.alert-error .alert-icon { color: var(--color-on-error-container); }
+.alert-error .alert-icon { color: var(--on-error-container); }
 
 /* ── Action ── botones de acción bajo la descripción + cierre opcional
    (par shadcn Alert "Action"). Los botones son <button>/<a> reales de Embassy. */

@@ -8,7 +8,7 @@ CLAUDE.md tells you how to *build with* the DS. This file tells you how to *tran
 
 ## The workflow (phases, in order)
 
-1. **Token audit (before any component work).** Inventory the legacy CSS: every hardcoded hex, every custom property. If the product defines its own custom-property layer that overlaps DS token names or roles (**>10 diverging vars = blocker**), STOP and reconcile tokens first — never ship a parallel token layer (e.g. a mode class redefining `--bg`, `--border`, `--text-primary` to legacy values). The DS token values ARE the target; legacy values do not survive, not even "close" ones.
+1. **Token audit (before any component work).** Inventory the legacy CSS: every hardcoded hex, every custom property. If the product defines its own custom-property layer that overlaps DS token names or roles (**>10 diverging vars = blocker**), STOP and reconcile tokens first — never ship a parallel token layer (e.g. a mode class redefining `--bg`, `--border`, `--on-surface` to legacy values). The DS token values ARE the target; legacy values do not survive, not even "close" ones.
 2. **Component inventory.** List every UI element on the screen and map each to a DS component using the table below. Elements that map to nothing get flagged (see *Gaps*), not improvised.
 3. **Apply.** Load order per CLAUDE.md; markup per each component's `Uso:` block; colors per the algorithm below. Never stretch or realign a component beyond its documented anatomy.
 4. **Hierarchy pass.** One `btn-primary` per context. If the legacy screen had several equal-weight actions, introduce hierarchy (primary + secondary/tertiary); don't replicate the flatness.
@@ -19,24 +19,24 @@ CLAUDE.md tells you how to *build with* the DS. This file tells you how to *tran
 
 ## Color replacement algorithm (deterministic)
 
-**Classify each legacy color by the ROLE of the element it paints, then assign that role's semantic token. Never match by nearest hex.** A legacy `#1c2438` on a heading is not "closest to neutral-700" — it is page text, so it becomes `var(--text-primary)`.
+**Classify each legacy color by the ROLE of the element it paints, then assign that role's semantic token. Never match by nearest hex.** A legacy `#1c2438` on a heading is not "closest to neutral-700" — it is page text, so it becomes `var(--on-surface)`.
 
 | Element role | Token | Never |
 |---|---|---|
-| Page headings & body text | `--text-primary` | `--color-on-surface` (reserved for component internals) |
-| Secondary / supporting text | `--text-secondary` | custom grays |
-| Muted / disabled text | `--text-muted` | opacity hacks |
-| Text inside components (chips, buttons, cells) | `--color-on-surface` / the component's own `on-*` token | `--text-primary` |
+| Page headings & body text | `--on-surface` | `--on-surface` (reserved for component internals) |
+| Secondary / supporting text | `--on-surface-variant` | custom grays |
+| Muted / disabled text | `--on-surface-variant` | opacity hacks |
+| Text inside components (chips, buttons, cells) | `--on-surface` / the component's own `on-*` token | `--on-surface` |
 | Page background | `--bg` | raw hex |
-| Card / panel surface | `--card-bg` | raw hex |
-| Container borders (cards, tables, panels) | `--border` | `--color-outline` |
-| Interactive element outlines (inputs, chips) | `--color-outline` | `--border` |
-| Links, nav, tabs, focus | `--interactive` / `--color-focus` | brand navy |
-| Status (success/error/warning/info) | `--color-{status}` + `-container` + `on-` pairs | raw status hex |
+| Card / panel surface | `--surface-container` | raw hex |
+| Container borders (cards, tables, panels) | `--border` | `--outline` |
+| Interactive element outlines (inputs, chips) | `--outline` | `--border` |
+| Links, nav, tabs, focus | `--secondary` / `--focus` | brand navy |
+| Status (success/error/warning/info) | `--{status}` + `-container` + `on-` pairs | raw status hex |
 | Shadows | `--shadow-sm/md/lg` | custom rgba shadows |
 
 Hard rules:
-- **Never redefine** a `--color-*`, `--text-*`, `--bg`, `--border`, or alias token to a legacy value. If a DS token "looks wrong," the wrong token was chosen — pick the right role, don't bend the token.
+- **Never redefine** a the semantic roles, `--text-*`, `--bg`, `--border`, or alias token to a legacy value. If a DS token "looks wrong," the wrong token was chosen — pick the right role, don't bend the token.
 - **Never write per-theme overrides** (`@media (prefers-color-scheme)`, `.dark` classes). Semantic tokens recalibrate themselves under `data-theme="dark"`. Legacy code that hardcodes "theme-aware-looking" hex pairs gets collapsed into the single semantic token.
 - Zero raw hex in output (the only hex allowed lives in `css/variables.css`).
 
@@ -45,7 +45,7 @@ Hard rules:
 - Font families only via `--font-heading` (Epilogue), `--font-body` (Inter), `--font-mono` (DM Mono). Never quoted family names in component code.
 - **Every `font-size` is a `--font-size-*` token.** Headings map h1→`display`, h2→`heading-xl`, h3→`heading-lg`, h4→`heading-md`, h5→`heading-sm`, h6→`heading-xs` (bound in `base.css`). UI text: 14→`body-lg`, 13.5→`body-md`, 12.5→`body-sm`, 13→`label`, 12→`caption`/`overline`, 11.5→`badge`.
 - Legacy sizes with no token equivalent: snap to the nearest **role-appropriate** token (a 20px legacy section title is an h3/`heading-lg`, not a 20px one-off). If genuinely no role fits, flag it as a DS gap.
-- Page text color is brand navy (`--text-primary`), never near-black. If migrated text renders black, a token is misapplied.
+- Page text color is brand navy (`--on-surface`), never near-black. If migrated text renders black, a token is misapplied.
 
 ---
 
@@ -95,12 +95,12 @@ Machine-checkable — all must pass:
 - [ ] `grep -nE '#[0-9a-fA-F]{3,8}\b' <output css/html>` → no hits outside `css/variables.css` (SVG fills in illustrations exempt).
 - [ ] `grep -n 'font-size:\s*[0-9]'` → no hits (all sizes via `--font-size-*`).
 - [ ] `grep -n "font-family:\s*['\"]"` → no quoted family names in component code.
-- [ ] No redefinition of `--color-*`, `--text-*`, `--bg`, `--border`, `--shadow-*` outside `variables.css`.
+- [ ] No redefinition of the semantic roles, `--text-*`, `--bg`, `--border`, `--shadow-*` outside `variables.css`.
 - [ ] At most one `btn-primary` per view context; no `width: 100%` on `.btn-*`.
 - [ ] Every categorical/status label is a `.badge`; every filter control is a `.chip`.
 - [ ] CSS `<link>` tags carry `?v=N` and were bumped if library files changed.
 - [ ] Render with `data-theme="dark"` on `<html>`: no illegible text, no per-theme overrides added to fix it.
-- [ ] Page text is navy (`--text-primary`), not black, in light mode.
+- [ ] Page text is navy (`--on-surface`), not black, in light mode.
 - [ ] Divergence report written (every DS-forced departure from legacy, for designer sign-off).
 
 ## Gaps & escalation

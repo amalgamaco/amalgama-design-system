@@ -37,13 +37,13 @@ layout_constraints:
   - "Meta items separated by .meta-dot; wraps rather than truncating mid-label."
 states:
   default: "Resting outlined card; fade-slide-in on mount."
-  hover: "Border → --color-outline-variant, shadow-md, lifts 1px (interactive)."
-  focus: "Needs tabindex=0; :focus-visible = 2px --color-focus + 4px --color-focus-ring."
+  hover: "Border → --outline-variant, shadow-md, lifts 1px (interactive)."
+  focus: "Needs tabindex=0; :focus-visible = 2px --focus + 4px --focus-ring."
 accessibility:
   roles: "The card is a clickable <div> — add tabindex=\"0\" and role=\"button\" (or use an <a>) so it's focusable and announced."
   aria: ['tabindex="0" on the interactive card', 'descriptive aria-label ("Ver vacante: Senior Designer")', 'aria-label="Más acciones" on more-btn']
   focus: "Keyboard-focusable, Enter/Space activates; more-btn is a separate focus stop, not nested inside the navigation element."
-  contrast: "--text-primary/-secondary/-muted meet AA in light + dark; status communicated by the badge text, not color alone."
+  contrast: "--on-surface/-secondary/-muted meet AA in light + dark; status communicated by the badge text, not color alone."
 keyboard:
   - {keys: "Tab", action: "focus the card and the more-btn separately"}
   - {keys: "Enter / Space", action: "open the vacancy detail"}
@@ -70,7 +70,7 @@ relationships:
     - {component: kanban-card, why: "Kanban Card is a board tile in a column; Vacancy Card is a list row"}
     - {component: card, why: "Full Card is generic; Vacancy Card is the recruiting-domain unit"}
 tokens:
-  color: [--card-bg, --border, --color-secondary-container, --text-primary, --text-muted]
+  color: [--surface-container, --border, --secondary-container, --on-surface, --on-surface-variant]
   radius: [--radius, --radius-md]
   shadow: [--shadow-md]
   motion: [--duration-fast]

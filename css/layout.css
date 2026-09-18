@@ -34,7 +34,7 @@
 /* ── SIDEBAR ── */
 .sidebar {
   width: var(--sidebar-width);
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -50,18 +50,18 @@
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 8px;
   font-family: var(--font-heading);
-  font-weight: 600; font-size: var(--font-size-heading-xs); color: var(--color-on-surface);
+  font-weight: 600; font-size: var(--font-size-heading-xs); color: var(--on-surface);
 }
-.sidebar-logo svg { color: var(--color-secondary); }
+.sidebar-logo svg { color: var(--secondary); }
 
 .sidebar-search {
   margin: 12px 12px 8px;
   display: flex; align-items: center; gap: 8px;
-  background: var(--color-surface);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 8px 12px;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   font-size: var(--font-size-label);
   cursor: pointer;
   transition: border-color var(--duration-fast) var(--ease-default);
@@ -83,7 +83,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-label);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   padding: 16px 12px 6px;
 }
 
@@ -91,20 +91,20 @@
   display: flex; align-items: center; gap: 10px;
   padding: 8px 12px;
   border-radius: var(--radius-md);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   font-size: var(--font-size-body-md);
   cursor: pointer;
   transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default);
   position: relative;
   user-select: none;
 }
-.nav-item:hover { background: var(--color-nav-hover); color: var(--color-nav-hover-content); }
+.nav-item:hover { background: var(--nav-hover); color: var(--nav-hover-content); }
 .nav-item.active {
-  background: var(--color-nav-selected);
-  color: var(--color-nav-selected-content);
+  background: var(--nav-selected);
+  color: var(--nav-selected-content);
   font-weight: 500;
 }
-.nav-item.active svg { color: var(--color-nav-selected-content); }
+.nav-item.active svg { color: var(--nav-selected-content); }
 .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
 .nav-item .chevron { margin-left: auto; opacity: .5; }
 .nav-item .nav-badge {
@@ -112,13 +112,13 @@
   font-size: 11px;
   font-weight: 600;
   /* El par CONTAINER, no "acento sobre acento claro". Empezó en --interactive
-     sobre --interactive-light (2.54:1); lo pasé a --color-secondary-text y arregló
+     sobre --interactive-light (2.54:1); lo pasé a --secondary-text y arregló
      el claro pero en oscuro seguía en 3.98:1, porque ahí el acento ya es claro y
      el fondo también. Un contador sobre superficie tintada es exactamente para lo
      que existe el par container, y [15] lo certifica en los DOS temas:
      12.16:1 en claro y 5.09:1 en oscuro. */
-  background: var(--color-secondary-container);
-  color: var(--color-on-secondary-container);
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
   padding: 1px 7px;
   border-radius: var(--radius-full);
 }
@@ -139,7 +139,7 @@
 
 /* ── TOPBAR ── */
 .topbar {
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border-bottom: 1px solid var(--border);
   padding: 0 28px;
   height: var(--topbar-height);
@@ -151,10 +151,10 @@
 .topbar-breadcrumb {
   margin-right: auto;
   display: flex; align-items: center; gap: 6px;
-  font-size: var(--font-size-label); color: var(--color-on-surface-variant);
+  font-size: var(--font-size-label); color: var(--on-surface-variant);
 }
-.topbar-breadcrumb a { color: var(--color-on-surface-variant); text-decoration: none; }
-.topbar-breadcrumb a:hover { color: var(--color-on-surface); }
+.topbar-breadcrumb a { color: var(--on-surface-variant); text-decoration: none; }
+.topbar-breadcrumb a:hover { color: var(--on-surface); }
 .topbar-breadcrumb .separator { color: var(--neutral-200); }
 
 .topbar-btn {
@@ -166,30 +166,30 @@
   transition: background var(--duration-fast) var(--ease-default);
 }
 .topbar-btn.secondary {
-  background: var(--color-surface);
-  color: var(--color-on-surface-variant);
+  background: var(--surface);
+  color: var(--on-surface-variant);
   border: 1px solid var(--border);
 }
-.topbar-btn.secondary:hover { background: var(--color-secondary-container); }
+.topbar-btn.secondary:hover { background: var(--secondary-container); }
 
 .topbar-notif {
   position: relative;
   width: 36px; height: 36px;
   border-radius: var(--radius-md);
-  background: var(--color-surface);
+  background: var(--surface);
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
 }
 .notif-badge {
   position: absolute; top: -5px; right: -5px;
-  background: var(--color-secondary);
-  color: var(--color-on-primary);
+  background: var(--secondary);
+  color: var(--on-primary);
   font-size: 10px; font-weight: 600;
   width: 17px; height: 17px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  border: 2px solid var(--color-surface);
+  border: 2px solid var(--surface);
 }
 
 /* Shell avatar. Flat tonal fill (matches the Avatar component in
@@ -199,9 +199,9 @@
    are present — kept token-identical here so the shell renders the same. */
 .avatar {
   width: 32px; height: 32px; border-radius: 50%;
-  background: var(--color-primary-container);
+  background: var(--primary-container);
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-on-primary-container); font-size: var(--font-size-caption); font-weight: 600;
+  color: var(--on-primary-container); font-size: var(--font-size-caption); font-weight: 600;
   cursor: pointer;
 }
 .avatar-label {
@@ -231,19 +231,19 @@
   width: 40px; height: 40px; margin-right: 4px;
   align-items: center; justify-content: center;
   border: 1px solid var(--border); border-radius: var(--radius-md);
-  background: var(--color-surface); color: var(--color-on-surface-variant);
+  background: var(--surface); color: var(--on-surface-variant);
   cursor: pointer;
 }
-.shell-menu-btn:hover { background: var(--color-secondary-container); }
+.shell-menu-btn:hover { background: var(--secondary-container); }
 .shell-menu-btn:focus-visible {
-  outline: 2px solid var(--color-focus); outline-offset: 2px;
+  outline: 2px solid var(--focus); outline-offset: 2px;
 }
 
 /* Scrim behind the modal drawer — sits below the sidebar (z-index 10), above content. */
 .sidebar-scrim {
   display: none;
   position: fixed; inset: 0; z-index: 9;
-  background: var(--color-scrim);
+  background: var(--scrim);
   opacity: 0; transition: opacity var(--duration-normal) var(--ease-default);
 }
 

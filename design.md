@@ -57,7 +57,7 @@ Antes de escribir nada, mirá dónde vas a escribir:
 
 - **Página nueva y autocontenida (sin repo)** → cargá el sistema por CDN (§7) y usá las clases de
   `PUBLIC-API.md`. Este es el caso por defecto de este archivo.
-- **Proyecto con su propia capa de tokens** (nombres tipo `--color-bg-*`, `--color-interactive-*`)
+- **Proyecto con su propia capa de tokens** (nombres tipo `--bg-*`, `--interactive-*`)
   → usá **los nombres que ya existen en ese proyecto**. No agregues una capa de alias que mapee
   nombres de Embassy a nombres del proyecto: rompe el dark mode y esconde el drift.
 - **Proyecto de producto con el repo de Embassy a mano** → este archivo no alcanza. Usá el repo:
@@ -149,8 +149,8 @@ dicen «recomendado», no «máximo».
 
 ### 6.1 Color
 
-Consumí **roles semánticos**, nunca primitivas (`--primary-900`, `--neutral-100`, `--accent-hot-pink`,
-`--ink` son de entrada solamente). El único cálculo permitido es `color-mix()` sobre roles.
+Consumí **roles semánticos**, nunca primitivas (`--primary-900`, `--neutral-100`,
+`--palette-accent-hot-pink` son de entrada solamente). El único cálculo permitido es `color-mix()` sobre roles.
 
 El recorrido es siempre el mismo y no tiene atajos: **primitiva → rol → componente**. La capa
 semántica *apunta* a una primitiva con `var()`; no define valores nuevos y no escribe hex. Si un rol
@@ -159,31 +159,31 @@ para los once escalones que Embassy suma al Baseline de Figma, y por qué cada u
 
 | Rol | Para qué |
 |---|---|
-| `--color-primary` / `-on-primary` / `-primary-container` / `-on-primary-container` | navy de marca. **Ojo: en dark se invierte a blanco** — nunca para series de chart ni rellenos grandes |
-| `--color-secondary` / quartet | azul interactivo (links, foco, nav, tabs) |
-| `--color-tertiary` / quartet | violeta, acento terciario |
-| `--color-success` · `-warning` · `-error` · `-info` (+ quartet) | estado |
-| `--color-surface`, `-surface-container-{lowest,low,,high,highest}`, `-surface-variant` | superficies |
-| `--color-on-surface`, `-on-surface-variant` | contenido **dentro** de componentes |
-| `--color-outline` (interactivo) · `--color-outline-variant` (sutil) | bordes |
-| `--color-focus`, `--color-focus-ring`, `--color-error-ring`, `--color-scrim` | foco y overlays |
+| `--primary` / `-on-primary` / `-primary-container` / `-on-primary-container` | navy de marca. **Ojo: en dark se invierte a blanco** — nunca para series de chart ni rellenos grandes |
+| `--secondary` / quartet | azul interactivo (links, foco, nav, tabs) |
+| `--tertiary` / quartet | violeta, acento terciario |
+| `--success` · `-warning` · `-error` · `-info` (+ quartet) | estado |
+| `--surface`, `-surface-container-{lowest,low,,high,highest}`, `-surface-variant` | superficies |
+| `--on-surface`, `-on-surface-variant` | contenido **dentro** de componentes |
+| `--outline` (interactivo) · `--outline-variant` (sutil) | bordes |
+| `--focus`, `--focus-ring`, `--error-ring`, `--scrim` | foco y overlays |
 | `--chart-1` … `--chart-5` | series de datos, en ese orden |
-| `--color-accent-hot-pink` · `--color-accent-chelo-yellow` · `--color-accent-kika-green` (+ `--color-on-accent`) | los acentos de marca. **Máximo dos juntos**, nunca como fondo dominante, nunca para texto corrido, y **nunca amarillo sobre azul**. El `on` de los tres es navy: blanco no llega a AA en ninguno |
-| `--color-hover` · `--color-pressed` · `--color-selected` | la capa de estado: overlay de hover (8%), de press (14%) y fondo de seleccionado. Derivados de `--color-secondary`, así que se recalibran solos |
+| `--accent-hot-pink` · `--accent-chelo-yellow` · `--accent-kika-green` (+ `--on-accent`) | los acentos de marca. **Máximo dos juntos**, nunca como fondo dominante, nunca para texto corrido, y **nunca amarillo sobre azul**. El `on` de los tres es navy: blanco no llega a AA en ninguno |
+| `--hover` · `--pressed` · `--selected` | la capa de estado: overlay de hover (8%), de press (14%) y fondo de seleccionado. Derivados de `--secondary`, así que se recalibran solos |
 
-Alias semánticos de página: `--bg` (fondo), `--card-bg` / `--sidebar-bg` (superficie de tarjeta y
+Alias semánticos de página: `--bg` (fondo), `--surface-container` / `--surface-container` (superficie de tarjeta y
 shell), `--border` (chrome de contenedores y línea divisoria, más tenue que `outline`),
-`--color-on-surface` (contenido primario) y `--color-on-surface-variant` (énfasis medio).
+`--on-surface` (contenido primario) y `--on-surface-variant` (énfasis medio).
 No hay `--surface`, `--divider` ni `--accent`: eran duplicados y se fueron en sep-2026.
 
 > **El texto tiene dos niveles y nada más**, que es la forma que documenta el Design System y la
-> de Material: `--color-on-surface` para contenido primario —títulos, cuerpo, y el texto adentro de
-> los componentes por igual— y `--color-on-surface-variant` para énfasis medio: pies, ayudas,
+> de Material: `--on-surface` para contenido primario —títulos, cuerpo, y el texto adentro de
+> los componentes por igual— y `--on-surface-variant` para énfasis medio: pies, ayudas,
 > labels secundarios.
 >
-> **Cambió en sep-2026.** Antes el texto de página era navy vía `--text-primary`, y encima de los
+> **Cambió en sep-2026.** Antes el texto de página era navy vía `--on-surface`, y encima de los
 > dos roles habían crecido cinco tokens `--text-*` sin ficha en ninguna tabla. Se colapsaron.
-> El texto de página ahora es casi-negro; el navy de marca sigue siendo `--color-primary`.
+> El texto de página ahora es casi-negro; el navy de marca sigue siendo `--primary`.
 
 **Dark mode es automático:** `<html data-theme="dark">`. Los roles se recalibran solos. Si
 necesitaste un override por tema, elegiste mal el token. La única excepción del sistema es el
@@ -377,7 +377,7 @@ Los que más se equivocan, resueltos de una:
   contenido alineado a la izquierda: eso se lee como un campo de formulario. El disparador de un
   overlay es `btn-secondary` (la acción primaria vive adentro del overlay). El vecino de menor
   prioridad del primario va `btn-tertiary` (outline), no `btn-secondary` (relleno neutro), que pesa
-  más. Desde sep-2026 el secundario NO es el tonal de acento: `--color-secondary-container` quedó
+  más. Desde sep-2026 el secundario NO es el tonal de acento: `--secondary-container` quedó
   reservado para el estado **seleccionado** (chip, segmented, pagination, toggle, calendar, item de
   menú activo), así que el botón y el item de menú ya no salen del mismo color.
 - **Búsqueda** — si filtra una lista que está en esta misma pantalla → `.search-field` dentro del
@@ -422,7 +422,7 @@ Nombro los que aparecen una y otra vez. Si tu página tiene alguno, sacalo antes
 9. **Un chart cuando alcanzaba una tabla, o al revés.** Tres valores no son un chart.
 10. **Color como único portador de significado** en estados, series o alertas.
 11. **Un token `--text-*` o `--ctx-*`.** No existen desde sep-2026: el contenido sobre superficie
-    tiene dos niveles, `--color-on-surface` y `--color-on-surface-variant`.
+    tiene dos niveles, `--on-surface` y `--on-surface-variant`.
 12. **Un hex crudo, un px suelto, una familia tipográfica entre comillas.** Siempre hay un token.
 13. **Una clase inventada** que "se parece" a una del sistema.
 14. **Full-bleed sin ancho máximo** en un monitor ancho: líneas de más de ~120 caracteres.
@@ -446,7 +446,7 @@ sección se puede sacar sin perder significado?** Sacala.
 
 **Accesibilidad — piso WCAG 2.1 AA, no negociable:**
 
-- Anillo de foco visible en todo lo interactivo (`--color-focus` / `--color-focus-ring`). Nunca
+- Anillo de foco visible en todo lo interactivo (`--focus` / `--focus-ring`). Nunca
   removerlo.
 - `aria-label` obligatorio en controles de solo ícono.
 - `role="search"` con nombre accesible en las búsquedas; `aria-live="polite"` en el contador de
@@ -487,10 +487,10 @@ mejorá en `md` (768px) y `lg` (1024px). Las transformaciones canónicas:
 
 ## Qué borde le toca a cada control
 
-`--color-outline` es el borde interactivo y `--color-outline-variant` el sutil, pero
+`--outline` es el borde interactivo y `--outline-variant` el sutil, pero
 eso no alcanza para elegir: medido en septiembre de 2026, tres tokens distintos
 convivían entre controles igual de interactivos —`seg-btn-group` e `icon-btn` en
-`--color-outline` (#9FA3AE), `chip` en `--color-outline-variant` (#BFC1C8) y
+`--outline` (#9FA3AE), `chip` en `--outline-variant` (#BFC1C8) y
 `field-input` y `search-field` en `--border`, que es un 10% de alfa—. Un campo de
 fecha tan accionable como el grupo segmentado que tenía al lado llevaba un borde
 tres veces más tenue.
@@ -499,9 +499,9 @@ La regla es por **familia de control**, no por componente:
 
 | Familia | Borde | Por qué |
 |---|---|---|
-| **Control que se acciona** — botón con contorno, `icon-btn`, `seg-btn-group`, `toggle` | `--color-outline` | El borde es la afordancia: dice «esto se toca». Tiene que leerse solo |
-| **Control que recibe texto** — `field-input`, `textarea`, `search-field`, `select` | `--border` | El contorno delimita un área de escritura sobre la superficie; compite con el texto que va adentro, así que pesa menos. En foco sube a `--color-focus` (§6.2 forma C) y ahí sí se lee |
-| **Objeto seleccionable en reposo** — `chip`, `checkbox-card`, `radio-card` | `--color-outline-variant` | Son muchos y en grilla: a `--color-outline` la pantalla se llena de rayas. Al seleccionarse cambian de relleno, no de borde |
+| **Control que se acciona** — botón con contorno, `icon-btn`, `seg-btn-group`, `toggle` | `--outline` | El borde es la afordancia: dice «esto se toca». Tiene que leerse solo |
+| **Control que recibe texto** — `field-input`, `textarea`, `search-field`, `select` | `--border` | El contorno delimita un área de escritura sobre la superficie; compite con el texto que va adentro, así que pesa menos. En foco sube a `--focus` (§6.2 forma C) y ahí sí se lee |
+| **Objeto seleccionable en reposo** — `chip`, `checkbox-card`, `radio-card` | `--outline-variant` | Son muchos y en grilla: a `--outline` la pantalla se llena de rayas. Al seleccionarse cambian de relleno, no de borde |
 
 **Verificación:** dos controles de la misma familia, uno al lado del otro, tienen el
 mismo borde. Si un campo y un botón comparten borde, o dos campos no lo comparten,
@@ -522,11 +522,11 @@ cosas que hacen que Embassy se vea como Embassy. Así que la regla no es el orde
 
 | Token | Qué es | Cuándo |
 |---|---|---|
-| `--color-surface` | La página | El fondo sobre el que se apoya todo |
-| `--color-surface-container-low` | Panel tenue | Una región que se separa apenas de la página — un rail, una banda |
-| `--color-surface-container` | **La tarjeta** | El default de cualquier contenedor de contenido. En claro es blanco |
-| `--color-surface-container-high` | Superficie tintada | Énfasis **anidado**: algo que va adentro de una tarjeta y tiene que despegarse de ella |
-| `--color-surface-container-highest` | La más marcada | Un solo nivel más, y rara vez. Si necesitás un cuarto anidamiento, el problema es la estructura |
+| `--surface` | La página | El fondo sobre el que se apoya todo |
+| `--surface-container-low` | Panel tenue | Una región que se separa apenas de la página — un rail, una banda |
+| `--surface-container` | **La tarjeta** | El default de cualquier contenedor de contenido. En claro es blanco |
+| `--surface-container-high` | Superficie tintada | Énfasis **anidado**: algo que va adentro de una tarjeta y tiene que despegarse de ella |
+| `--surface-container-highest` | La más marcada | Un solo nivel más, y rara vez. Si necesitás un cuarto anidamiento, el problema es la estructura |
 
 **Los dos de arriba no son «más elevación»: son tinte.** En claro van hacia el gris porque
 sobre blanco no hay a dónde ir; en oscuro van hacia el claro por la misma razón invertida.

@@ -12,10 +12,10 @@ You direct attention with four properties, in roughly this order of strength. Ea
 
 1. **Size** — the type scale (`--font-size-*`) and component size. A `display` (28px) heading outranks a `heading-md` (18px) card title outranks `body-md` (13.5px) copy.
 2. **Weight** — `--font-weight-*`. `bold`/`extrabold` for headings, `semibold` (600) for buttons and labels, `regular` (400) for body. Weight separates a selected Tab (`font-semibold`) from its neighbors.
-3. **Color** — brand navy `--text-primary` for primary text, `--text-secondary` for supporting text, and the accent roles (`--color-primary`, `--color-secondary`) reserved for the *few* things that must pull focus.
+3. **Color** — brand navy `--on-surface` for primary text, `--on-surface-variant` for supporting text, and the accent roles (`--primary`, `--secondary`) reserved for the *few* things that must pull focus.
 4. **Space & position** — `--space-*` gaps and reading order. Proximity groups; distance separates. Top-left is read first (see Scanning patterns).
 
-Reach for the weakest lever that works. If two `body-md` lines need distinguishing, change color (`--text-primary` vs `--text-secondary`) before you change size.
+Reach for the weakest lever that works. If two `body-md` lines need distinguishing, change color (`--on-surface` vs `--on-surface-variant`) before you change size.
 
 ## The type scale is the hierarchy tool
 
@@ -32,7 +32,7 @@ Do not pick font sizes — pick a *role* from the scale and the size follows. Ev
 
 Headings are **Epilogue** (`--font-heading`); everything else is **Inter** (`--font-body`); code and eyebrow labels are **DM Mono** (`--font-mono`). One step of the scale is usually enough contrast between adjacent levels — jumping from `display` straight to `body-md` for a subtitle skips the rungs and flattens the middle.
 
-**Color the type correctly.** Page text — headings *and* body — is brand navy `--text-primary` (`#01164D` light, `#EAEBED` dark), never black. `--color-on-surface` (near-black `#0A0C12`) is for content *inside* components only (button labels, chip text, table cells). Secondary text is `--text-secondary`. Getting this wrong makes a page read as flat black instead of Amalgama navy.
+**Color the type correctly.** Page text — headings *and* body — is brand navy `--on-surface` (`#01164D` light, `#EAEBED` dark), never black. `--on-surface` (near-black `#0A0C12`) is for content *inside* components only (button labels, chip text, table cells). Secondary text is `--on-surface-variant`. Getting this wrong makes a page read as flat black instead of Amalgama navy.
 
 ## One primary action per view
 
@@ -40,10 +40,10 @@ This is a rule, not a preference (GOVERNANCE §10.5). Each view has exactly **on
 
 | Emphasis | `Button` variant | When |
 |---|---|---|
-| Highest — the one action | `primary` (filled `--color-primary`) | The main thing to do on this view |
+| Highest — the one action | `primary` (filled `--primary`) | The main thing to do on this view |
 | High, lifted | `elevated` (primary-container + `--btn-elevation`) | A prominent action that needs to float off a busy surface |
-| Medium | `secondary` (tonal `--color-secondary-container`) | A common alternative alongside the primary |
-| Low | `tertiary` (outlined `--color-outline`) | Secondary choices, "Cancelar" |
+| Medium | `secondary` (tonal `--secondary-container`) | A common alternative alongside the primary |
+| Low | `tertiary` (outlined `--outline`) | Secondary choices, "Cancelar" |
 | Lowest | `text` | Inline, low-stakes ("Ver más") |
 | Neutral affordance | `icon` | Toolbar / compact actions with a clear glyph |
 
@@ -51,13 +51,13 @@ If a legacy screen has several equal-weight buttons, introduce hierarchy — do 
 
 ## Use accent color sparingly
 
-`--color-primary` (navy) and `--color-secondary` (agile blue) earn attention *because* most of the screen is neutral surface and navy text. Spend them deliberately:
+`--primary` (navy) and `--secondary` (agile blue) earn attention *because* most of the screen is neutral surface and navy text. Spend them deliberately:
 
-- **`--color-primary`** — the single primary Button, and page-level nav active state (which lives in the shell chrome, not in components — GOVERNANCE §5.6).
-- **`--color-secondary` family** — selection and interactive state: selected `Chip`, `Tabs` indicator, focus ring (`--color-focus`), and the shared "blue hover" for menu/nav surfaces.
-- **Status roles** (`--color-error/-success/-warning/-info`) — only for genuine status, via `Badge` and `Alert`. A success-green button that isn't a status is misuse.
+- **`--primary`** — the single primary Button, and page-level nav active state (which lives in the shell chrome, not in components — GOVERNANCE §5.6).
+- **`--secondary` family** — selection and interactive state: selected `Chip`, `Tabs` indicator, focus ring (`--focus`), and the shared "blue hover" for menu/nav surfaces.
+- **Status roles** (`--error/-success/-warning/-info`) — only for genuine status, via `Badge` and `Alert`. A success-green button that isn't a status is misuse.
 
-If two things on a screen both use `--color-primary` as a fill, one of them is wrong.
+If two things on a screen both use `--primary` as a fill, one of them is wrong.
 
 ## Whitespace as grouping
 
@@ -119,7 +119,7 @@ Some values deserve to pop out of the text flow:
 
 Both separate an element from its surface. Choose by *behavior*, not by taste:
 
-- **Borders** — for elements that sit *in the plane* of the page. Containers (cards, tables, panels) use the subtle `--border` (on-surface @ 10%). Interactive resting borders (tertiary/icon Button, Checkbox, Radio, Switch) use `--color-outline`; filter/selection controls (`Chip`, Segmented Button) use `--color-outline-variant`; text-entry fields (`Input`, `Textarea`, `Select`, `Search`) rest at `--border` (GOVERNANCE §5.1). A border says "here's an edge," not "this floats."
+- **Borders** — for elements that sit *in the plane* of the page. Containers (cards, tables, panels) use the subtle `--border` (on-surface @ 10%). Interactive resting borders (tertiary/icon Button, Checkbox, Radio, Switch) use `--outline`; filter/selection controls (`Chip`, Segmented Button) use `--outline-variant`; text-entry fields (`Input`, `Textarea`, `Select`, `Search`) rest at `--border` (GOVERNANCE §5.1). A border says "here's an edge," not "this floats."
 - **Elevation** — for elements that genuinely *lift off* the surface: modals/`Dialog` (`--shadow-lg`), toasts, floating panels (`--shadow-md`), and the `elevated` Button / raised `Card` at rest (`--shadow-sm`, or the theme-aware `--btn-elevation` for the Elevated Button). Elevation communicates depth; the background token still communicates role (GOVERNANCE §9.2) — never lighten a background to fake a lift.
 
 Rule of thumb: if it overlays other content or you can dismiss it, it gets a shadow. If it's part of the layout, it gets a border. Do not use both a heavy shadow and a heavy border to do one job.
@@ -131,7 +131,7 @@ Rule of thumb: if it overlays other content or you can dismiss it, it gets a sha
 - **Do** keep exactly one `Button variant="primary"` per view; step everything else down to `secondary`/`tertiary`/`text`.
 - **Don't** give two elements the same accent fill — the eye can't tell which is the real action.
 - **Do** pick a type *role* from the scale; **don't** type a raw `font-size` px value.
-- **Do** color page text `--text-primary` (navy); **don't** use `--color-on-surface` (black) for headings or body.
+- **Do** color page text `--on-surface` (navy); **don't** use `--on-surface` (black) for headings or body.
 - **Do** separate groups with `--space-*` whitespace before adding a border or box.
 - **Don't** stack a heavy border and a heavy shadow on the same element to force separation.
 - **Do** give a border to in-plane elements and a shadow to things that overlay/float.
@@ -142,11 +142,11 @@ Rule of thumb: if it overlays other content or you can dismiss it, it gets a sha
 - [ ] Exactly one `Button variant="primary"`; all other actions use a lower-emphasis variant.
 - [ ] Every text element maps to a `--font-size-*` role — no raw px sizes.
 - [ ] Headings are Epilogue; body/UI is Inter; eyebrow/code labels are DM Mono.
-- [ ] Page text uses `--text-primary` (navy), not `--color-on-surface` (black).
-- [ ] Accent roles (`--color-primary`/`--color-secondary`) appear only on the few elements that must pull focus.
+- [ ] Page text uses `--on-surface` (navy), not `--on-surface` (black).
+- [ ] Accent roles (`--primary`/`--secondary`) appear only on the few elements that must pull focus.
 - [ ] Groups are separated with `--space-*` tokens; proximity does the grouping.
 - [ ] Layout follows an F-pattern (dense) or Z-pattern (sparse); the primary action sits where the eye lands.
-- [ ] In-plane elements use borders (`--border`/`--color-outline`/`--color-outline-variant`); floating/overlay elements use `--shadow-*` / `--btn-elevation`.
+- [ ] In-plane elements use borders (`--border`/`--outline`/`--outline-variant`); floating/overlay elements use `--shadow-*` / `--btn-elevation`.
 - [ ] Status is shown with `Badge`/`Alert`; a headline metric uses `Stat Card`.
 - [ ] Checked against light *and* dark (`data-theme="dark"`) — hierarchy and shadows still read.
 

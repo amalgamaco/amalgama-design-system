@@ -36,16 +36,16 @@ layout_constraints:
 
 states:
   default: "Links inherit the trail's secondary text color."
-  hover: "breadcrumb-link:hover → --color-primary + underline."
-  focus: "breadcrumb-link:focus-visible → 2px --color-focus outline + offset."
-  current: "breadcrumb-page: bold, --text-primary, not focusable."
+  hover: "breadcrumb-link:hover → --primary + underline."
+  focus: "breadcrumb-link:focus-visible → 2px --focus outline + offset."
+  current: "breadcrumb-page: bold, --on-surface, not focusable."
   disabled: "N/A."
 
 accessibility:
   roles: "nav[aria-label=breadcrumb] wrapping a semantic <ol>; the current page uses aria-current=page and is not a link."
   aria: ["aria-label=breadcrumb on the nav", "aria-current=page on the current item", "aria-hidden on separators", "aria-haspopup=menu + aria-expanded + aria-label on an ellipsis button; role=menu/menuitem in its panel"]
   focus: "Navigable links show :focus-visible; the current page (breadcrumb-page) is not focusable."
-  contrast: "Consumes only semantic --color-* / --font-size-* tokens → AA in light + dark, no per-theme overrides."
+  contrast: "Consumes only the semantic role / --font-size-* tokens → AA in light + dark, no per-theme overrides."
 keyboard:
   - {keys: "Tab / Shift+Tab", action: "move between ancestor links (and the ellipsis button)"}
   - {keys: "Enter", action: "follow the focused ancestor link / open the ellipsis menu"}
@@ -75,7 +75,7 @@ relationships:
     - {component: pagination, why: "Pagination pages through a set; Breadcrumb shows hierarchy"}
 
 tokens:
-  color: [--text-secondary, --text-primary, --color-primary, --color-outline, --color-surface-variant, --color-focus]
+  color: [--on-surface-variant, --on-surface, --primary, --outline, --surface-variant, --focus]
   radius: [--radius-sm]
   spacing: ["6px gap"]
   typography: [--font-size-body-sm]

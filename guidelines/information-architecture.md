@@ -38,7 +38,7 @@ Container decision at a glance:
 ## Hierarchy & depth
 
 - **Shallow beats deep.** Aim for at most 2–3 levels: app section → entity → detail. If a user needs four clicks to reach a candidate, the tree is too deep — flatten it or add `Search`.
-- **Express hierarchy visually with the type scale.** Page title (`--font-size-display`/`heading-xl`), section headers (`heading-md`/`sm`), body (`body-lg`/`md`), supporting text (`body-sm`/`caption`). Page text uses `--text-primary` (brand navy), never `--color-on-surface` (§8.3).
+- **Express hierarchy visually with the type scale.** Page title (`--font-size-display`/`heading-xl`), section headers (`heading-md`/`sm`), body (`body-lg`/`md`), supporting text (`body-sm`/`caption`). Page text uses `--on-surface` (brand navy), never `--on-surface` (§8.3).
 - **One primary action per level (Von Restorff).** A single `Button variant="primary"` per view or `Dialog`; peers are `secondary`/`tertiary`/`text`.
 - **Don't nest modals.** A `Dialog` opening another `Dialog` is a depth smell; use a `Sheet` for a side branch, or a single stepped flow instead.
 - **Avoid deep menu trees.** Prefer a flat sidebar of top-level sections plus in-page `Tabs` over multi-level flyout menus.
@@ -51,7 +51,7 @@ Embassy's canonical layout is the **app shell** (GOVERNANCE §14.1): a fixed **s
 - **`Tabs`** for peer views *of the same object* within one page — a vacancy's "Detalle · Candidatos · Actividad". Tabs don't change the object, only the facet. Selected tab uses the Secondary family + `font-semibold` (§5.6).
 - **`Segmented Button`** for switching *how the same data is shown* — lista vs. tablero (kanban) vs. calendario. It's a view/representation toggle, not navigation to new content. (Selected uses its lighter "Option B" `primary-container` treatment — §5.6.)
 - **`Pagination`** for moving through long, ordered result sets (candidate lists, search results) that shouldn't all load at once.
-- **Menu/nav hover is always the shared blue** (`--color-nav-hover` / `--color-nav-hover-content`), never gray — this applies to sidebar items, `Dropdown Menu`, `List` rows, and search result rows (GOVERNANCE §5.4).
+- **Menu/nav hover is always the shared blue** (`--nav-hover` / `--nav-hover-content`), never gray — this applies to sidebar items, `Dropdown Menu`, `List` rows, and search result rows (GOVERNANCE §5.4).
 
 **Which switcher?** `Tabs` = different facets of one entity · `Segmented Button` = different renderings of one dataset · sidebar = different top-level sections · `Breadcrumb` = where am I / go up.
 
@@ -118,7 +118,7 @@ Each control has exactly one job — moving one part (say, Tabs) never changes w
 - [ ] Navigation uses the right control: sidebar (sections), `Tabs` (facets), `Segmented Button` (view modes), `Pagination` (long sets).
 - [ ] Content is grouped by task into appropriate containers (`Card`/`Stat Card`/`Table`/`List`/`Kanban`), spaced with `--space-*` tokens.
 - [ ] Labels are clear, rioplatense, sentence-case, and match the recruiter's vocabulary; icon-only controls have accessible names.
-- [ ] Visual hierarchy follows the type scale; page text uses `--text-primary`, not `--color-on-surface`.
+- [ ] Visual hierarchy follows the type scale; page text uses `--on-surface`, not `--on-surface`.
 - [ ] Large datasets are findable via `SearchField`/`SearchBar` + capped filter `Chip`s, with browse still available.
 - [ ] Empty, zero-result, and loading states are designed (`Empty State`, `Skeleton`).
 - [ ] Complexity is disclosed progressively (`Accordion`/`Collapsible`/`Sheet`/`Popover`/multi-step `Create Form`) — nothing over-dumped inline.

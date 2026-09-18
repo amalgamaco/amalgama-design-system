@@ -43,7 +43,7 @@ accessibility:
   roles: "Decorative placeholder — not focusable, not a control."
   aria: ["aria-hidden=\"true\" on the skeleton shapes (noise for screen readers)", "aria-busy=\"true\" on the loading container (removed when data arrives)", "aria-label=\"Cargando…\" on the wrapper"]
   focus: "Never receives focus; skeleton.css defines no focus/interaction states."
-  contrast: "The shimmer uses surface tokens (--color-surface-variant, --color-surface-container-highest) that recalibrate in dark mode — never write per-theme overrides. Do not block interaction with the rest of the UI while the skeleton shows."
+  contrast: "The shimmer uses surface tokens (--surface-variant, --surface-container-highest) that recalibrate in dark mode — never write per-theme overrides. Do not block interaction with the rest of the UI while the skeleton shows."
 
 ux_principles:
   - "A structural placeholder improves perceived performance vs. a bare spinner (visibility of system status)."
@@ -66,7 +66,7 @@ relationships:
     - {component: progress, why: "Progress/Spinner shows indeterminate or measured progress; Skeleton mimics the awaited layout"}
 
 tokens:
-  color: [--color-surface-variant, --color-surface-container-highest]
+  color: [--surface-variant, --surface-container-highest]
   radius: [--radius-md, --radius-full]
   motion: ["shimmer 1.5s infinite (background-size 200% 100%)"]
 

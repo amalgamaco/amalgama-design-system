@@ -50,7 +50,7 @@ Every error answers two questions: *what happened* and *what do I do now*. No bl
 - **Never blame the user** ("Ingresaste mal el correo" → "Revisá el correo: falta el @").
 - **Never be vague** ("Algo salió mal" with no path forward).
 
-Field-level errors live in `Input`/`Textarea` via the **`error`** prop (which wires `aria-invalid` + `aria-describedby` and paints the `--color-error` border and `--color-error-ring`). Use the **`hint`** prop for guidance *before* an error occurs.
+Field-level errors live in `Input`/`Textarea` via the **`error`** prop (which wires `aria-invalid` + `aria-describedby` and paints the `--error` border and `--error-ring`). Use the **`hint`** prop for guidance *before* an error occurs.
 
 - Hint (proactive): `hint="Usá tu correo de Amalgama"`
 - Error (reactive, specific + fix): `error="Este correo ya está registrado. Probá iniciar sesión."`

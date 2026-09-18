@@ -36,7 +36,7 @@
 
 /* Fondo de superficie para que la card se despegue de la página (el primitivo
    .item es transparente; Person Card es una tarjeta, no una fila embebida). */
-.person-card { background: var(--color-surface-container); }
+.person-card { background: var(--surface-container); }
 
 /* Avatar circular tonal — usa el par semántico Secondary container/on-container,
    igual que el Avatar canónico (item.css/avatar.css), no un gradiente con
@@ -46,8 +46,8 @@
   /* Escalón lg de la escala de avatar (variables.css) */
   width: var(--avatar-size-lg); height: var(--avatar-size-lg);
   border-radius: 50%;
-  background: var(--color-secondary-container);
-  color: var(--color-on-secondary-container);
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
   font-size: var(--avatar-initial-lg); font-weight: 600;
   align-self: center;
 }

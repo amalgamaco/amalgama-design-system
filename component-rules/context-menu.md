@@ -64,7 +64,7 @@ relationships:
     - {component: menu, why: "Dropdown Menu opens from a visible trigger on click; Context Menu opens at the cursor on right-click"}
     - {component: navigation-menu, why: "Navigation Menu moves between sections; Context Menu acts on an element"}
 tokens:
-  color: [--color-surface-container, --color-outline-variant, --color-on-surface, --color-error]
+  color: [--surface-container, --outline-variant, --on-surface, --error]
   radius: [--radius-md]
   motion: [--duration-normal, --ease-default]
 motion:

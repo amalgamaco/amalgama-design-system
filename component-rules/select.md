@@ -37,11 +37,11 @@ layout_constraints:
   - "The selected option carries the check indicator (aria-selected=true); exactly one at a time."
 
 states:
-  default: "Trigger: 1px --border, --card-bg; icon is a static ChevronDown (does not rotate)."
-  hover: "Panel item highlights to --color-surface-variant (hover or keyboard nav)."
-  focus: "Trigger focus / aria-expanded → --interactive border + 3px --color-focus-ring."
+  default: "Trigger: 1px --border, --surface-container; icon is a static ChevronDown (does not rotate)."
+  hover: "Panel item highlights to --surface-variant (hover or keyboard nav)."
+  focus: "Trigger focus / aria-expanded → --secondary border + 3px --focus-ring."
   disabled: "Trigger disabled/aria-disabled → surface-variant bg, on-disabled text, not-allowed."
-  error: "Trigger aria-invalid=true → --color-error border, --color-error-ring on focus."
+  error: "Trigger aria-invalid=true → --error border, --error-ring on focus."
 
 accessibility:
   roles: "Trigger is a button with aria-haspopup=listbox / aria-expanded; panel is role=listbox; items role=option; groups role=group."
@@ -82,7 +82,7 @@ relationships:
     - {component: radio-group, why: "radio shows all options at once for a few choices"}
 
 tokens:
-  color: [--border, --card-bg, --text-primary, --interactive, --color-focus-ring, --color-error, --color-surface-container, --color-surface-variant, --color-outline-variant]
+  color: [--border, --surface-container, --on-surface, --secondary, --focus-ring, --error, --surface-container, --surface-variant, --outline-variant]
   radius: [--radius-md, --radius-sm]
   shadow: [--shadow-md]
   motion: [--duration-fast, --ease-default]
@@ -90,7 +90,7 @@ tokens:
 motion:
   enter: "The listbox panel (.select-content) animates in via @keyframes selectContentIn — opacity 0→1 + transform scale(.96) translateY(-2px)→none — a small fade+zoom from just below the trigger."
   exit: "none — the panel is hidden instantly via the [hidden] attribute (JS initSelect), with no data-state=closed animation. Gap vs. the motion.md overlay rule; flag to add a matching fade/scale-out on --duration-fast --ease-exit."
-  stateChange: "Trigger focus-visible / aria-expanded: border→--interactive + 3px --color-focus-ring box-shadow (transitions on border-color + box-shadow). Item highlight (hover + keyboard nav): background→--color-surface-variant (no transition). Selected item check indicator: opacity 0→1 (instant)."
+  stateChange: "Trigger focus-visible / aria-expanded: border→--secondary + 3px --focus-ring box-shadow (transitions on border-color + box-shadow). Item highlight (hover + keyboard nav): background→--surface-variant (no transition). Selected item check indicator: opacity 0→1 (instant)."
   duration: "--duration-fast (both the selectContentIn entrance and the trigger focus transition)"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (selectContentIn collapses to ~0, panel appears instantly). No component-specific override."

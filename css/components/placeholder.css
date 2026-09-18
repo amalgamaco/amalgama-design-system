@@ -17,12 +17,12 @@
 ═══════════════════════════════════════ */
 
 .placeholder-panel {
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-12) var(--space-8);
   text-align: center;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   font-size: var(--font-size-body-lg);
 }
 .placeholder-panel .placeholder-icon { font-size: 32px; margin-bottom: 12px; }  /* ds-allow: caja del glifo heredado, no tipografia */

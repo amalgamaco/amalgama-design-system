@@ -201,7 +201,7 @@ Quick router:
 - **mobile:** KPIs stack 1–2 wide; widgets become one column, most-consulted first; charts keep a
   min height and scroll horizontally if dense; defer secondary widgets below the fold.
 - **motion:** panel updates on `--duration-normal`/`--ease-default`; no decorative chart animation.
-- **anti_patterns:** everything equal weight; `--color-primary` for a chart series (white in dark);
+- **anti_patterns:** everything equal weight; `--primary` for a chart series (white in dark);
   raw color for trend (use `stat-card` `trend`); dumping record-level detail inline; crowding out
   whitespace to fit more widgets.
 - **guides:** `dashboards.md`, `visual-hierarchy.md`; rules: `stat-card`, `chart`, `card`, `toolbar`,

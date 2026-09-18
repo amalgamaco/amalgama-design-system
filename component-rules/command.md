@@ -43,7 +43,7 @@ accessibility:
   roles: "Text input for the query + a list of selectable items; the empty state is real text."
   aria: ["aria-label / placeholder on the input", "data-active marks the active item", "role=dialog on the ⌘K Command Dialog"]
   focus: "Focus lives in the <input>; ↑/↓/Enter operate without moving focus out. The Command Dialog closes on Escape and overlay click."
-  contrast: "Palette tokens meet AA in light + dark (semantic --color-* only)."
+  contrast: "Palette tokens meet AA in light + dark (semantic roles only)."
 keyboard:
   - {keys: "Type", action: "filter items by substring"}
   - {keys: "Arrow Up / Down", action: "move the active-item highlight"}
@@ -73,7 +73,7 @@ relationships:
     - {component: select, why: "Select picks one value from a short bounded list; Command is a searchable command surface"}
     - {component: combobox, why: "Combobox is a single-value form field built ON the Command filter; Command is the palette itself"}
 tokens:
-  color: [--color-surface-container, --color-on-surface, --color-surface-variant]
+  color: [--surface-container, --on-surface, --surface-variant]
   radius: [--radius-md]
   motion: [--duration-normal, --ease-default]
 motion:

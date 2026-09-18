@@ -33,7 +33,7 @@
 /* Panel que abre seccion (COMPOSICION.md §4b): escalon holgado, y su titulo
    sube con el — los dos pasos son un par, no dos decisiones sueltas. */
 .form-card {
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-8);
@@ -45,11 +45,11 @@
   line-height: var(--line-height-heading-md);
   letter-spacing: var(--letter-spacing-heading-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   margin-bottom: var(--space-1-5);
 }
 .form-card-desc {
-  font-size: var(--font-size-body-sm); color: var(--color-on-surface-variant);
+  font-size: var(--font-size-body-sm); color: var(--on-surface-variant);
   line-height: var(--line-height-body-sm);
   margin-bottom: var(--space-6);
   max-width: 680px;
@@ -61,10 +61,10 @@
 .field-label {
   display: block;
   font-size: var(--font-size-label); font-weight: 500;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   margin-bottom: 8px;
 }
-.field-required { color: var(--color-error); margin-left: 2px; }
+.field-required { color: var(--error); margin-left: 2px; }
 
 .field-input {
   width: 100%;
@@ -73,37 +73,37 @@
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
   font-family: inherit;
-  color: var(--color-on-surface);
-  background: var(--color-surface-container);
+  color: var(--on-surface);
+  background: var(--surface-container);
   outline: none;
   transition: border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
   appearance: none;
 }
 .field-input:focus-visible {
-  border-color: var(--color-focus);
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  border-color: var(--focus);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
-.field-input::placeholder { color: var(--color-on-surface-variant); }
+.field-input::placeholder { color: var(--on-surface-variant); }
 
 /* ── File input (par shadcn: botón de selección tonal + texto) ── */
 .field-input[type="file"] {
   padding: 7px var(--space-3-5);
   cursor: pointer;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 .field-input[type="file"]::file-selector-button {
   margin: 0 12px 0 0;
   padding: var(--space-1) var(--space-3);
   border: none;
   border-radius: var(--radius-sm);
-  background: var(--color-secondary-container);
-  color: var(--color-on-secondary-container);
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
   font: inherit;
   font-weight: 500;
   cursor: pointer;
 }
 .field-input[type="file"]:hover::file-selector-button {
-  background: color-mix(in srgb, var(--color-secondary-container) 88%, #000);
+  background: color-mix(in srgb, var(--secondary-container) 88%, #000);
 }
 
 /* ── Error a nivel de elemento (par shadcn aria-invalid) ──
@@ -113,19 +113,19 @@
 .field-input[aria-invalid="true"],
 .select-wrapper select[aria-invalid="true"],
 .field-textarea[aria-invalid="true"] {
-  border-color: var(--color-error);
+  border-color: var(--error);
 }
 .field-input[aria-invalid="true"]:focus-visible,
 .select-wrapper select[aria-invalid="true"]:focus-visible,
 .field-textarea[aria-invalid="true"]:focus-visible {
-  border-color: var(--color-error);
-  box-shadow: 0 0 0 4px var(--color-error-ring);
+  border-color: var(--error);
+  box-shadow: 0 0 0 4px var(--error-ring);
 }
 
 input:disabled, select:disabled, textarea:disabled {
-  background: var(--color-disabled);
-  color: var(--color-on-disabled);
-  border-color: var(--color-outline);
+  background: var(--disabled);
+  color: var(--on-disabled);
+  border-color: var(--outline);
   cursor: not-allowed;
 }
 
@@ -137,16 +137,16 @@ input:disabled, select:disabled, textarea:disabled {
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
   font-family: inherit;
-  color: var(--color-on-surface);
-  background: var(--color-surface-container);
+  color: var(--on-surface);
+  background: var(--surface-container);
   outline: none;
   appearance: none;
   cursor: pointer;
   transition: border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
 }
 .select-wrapper select:focus-visible {
-  border-color: var(--color-secondary);
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 /* Compact size (par shadcn Select size="sm" / select-trigger[data-size="sm"]). */
 .select-wrapper select[data-size="sm"] {
@@ -156,7 +156,7 @@ input:disabled, select:disabled, textarea:disabled {
 }
 .select-caret {
   position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
-  pointer-events: none; color: var(--color-on-surface-variant);
+  pointer-events: none; color: var(--on-surface-variant);
 }
 
 .fields-grid {
@@ -179,23 +179,23 @@ input:disabled, select:disabled, textarea:disabled {
   padding: var(--space-2-5) var(--space-3-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   transition: border-color var(--duration-fast) var(--ease-default);
 }
-.number-input-wrapper:focus-within { border-color: var(--color-secondary); }
-.number-value { font-size: var(--font-size-body-md); color: var(--color-on-surface); }
+.number-input-wrapper:focus-within { border-color: var(--secondary); }
+.number-value { font-size: var(--font-size-body-md); color: var(--on-surface); }
 .number-controls { display: flex; align-items: center; gap: var(--space-1); }
 .number-btn {
   width: 32px; height: 32px;
   border-radius: var(--radius-md);
-  background: var(--color-surface);
+  background: var(--surface);
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: var(--color-on-surface-variant);
+  cursor: pointer; color: var(--on-surface-variant);
   transition: background var(--duration-fast) var(--ease-default);
   font-family: inherit;
 }
-.number-btn:hover { background: var(--color-surface-container-highest); color: var(--color-on-surface); }
+.number-btn:hover { background: var(--surface-container-highest); color: var(--on-surface); }
 
 .date-input-wrapper { position: relative; }
 .date-input-wrapper input {
@@ -205,25 +205,25 @@ input:disabled, select:disabled, textarea:disabled {
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
   font-family: inherit;
-  color: var(--color-on-surface-variant);
-  background: var(--color-surface-container);
+  color: var(--on-surface-variant);
+  background: var(--surface-container);
   outline: none;
   transition: border-color var(--duration-fast) var(--ease-default);
   cursor: pointer;
 }
-.date-input-wrapper input:focus-visible { border-color: var(--color-secondary); }
+.date-input-wrapper input:focus-visible { border-color: var(--secondary); }
 .date-icon {
   position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
-  color: var(--color-on-surface-variant); pointer-events: none;
+  color: var(--on-surface-variant); pointer-events: none;
 }
 
 /* ═══════════════════════════════════════
    Hover state
    Distingue visualmente el hover del estado habilitado sin focus.
-   Usa --color-outline (más prominente) vs --color-outline-variant (defecto).
+   Usa --outline (más prominente) vs --outline-variant (defecto).
 ═══════════════════════════════════════ */
 .field-input:hover:not(:focus):not(:disabled) {
-  border-color: var(--color-outline);
+  border-color: var(--outline);
 }
 
 /* ═══════════════════════════════════════
@@ -232,7 +232,7 @@ input:disabled, select:disabled, textarea:disabled {
    reforzando el foco visualmente.
 ═══════════════════════════════════════ */
 .field-group:focus-within .field-label {
-  color: var(--color-secondary);
+  color: var(--secondary);
 }
 
 /* ═══════════════════════════════════════
@@ -256,12 +256,12 @@ input:disabled, select:disabled, textarea:disabled {
 .field-hint {
   font-size: var(--font-size-caption);
   line-height: var(--line-height-caption);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 .field-error-msg {
   font-size: var(--font-size-caption);
   line-height: var(--line-height-caption);
-  color: var(--color-error-text);
+  color: var(--error-text);
   display: flex;
   align-items: flex-start;
   gap: var(--space-1);
@@ -273,13 +273,13 @@ input:disabled, select:disabled, textarea:disabled {
 .field-char-count {
   font-family: var(--font-mono);
   font-size: var(--font-size-badge);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   white-space: nowrap;
   flex-shrink: 0;
   margin-left: auto;
 }
 .field-char-count.is-over {
-  color: var(--color-error-text);
+  color: var(--error-text);
 }
 
 /* ═══════════════════════════════════════
@@ -299,26 +299,26 @@ input:disabled, select:disabled, textarea:disabled {
    </div>
 ═══════════════════════════════════════ */
 .field-group.is-error .field-label {
-  color: var(--color-error-text);
+  color: var(--error-text);
 }
 .field-group.is-error:focus-within .field-label {
-  color: var(--color-error-text); /* el error sobreescribe el color interactivo */
+  color: var(--error-text); /* el error sobreescribe el color interactivo */
 }
 .field-group.is-error .field-input {
-  border-color: var(--color-error);
+  border-color: var(--error);
 }
 .field-group.is-error .field-input:hover:not(:focus):not(:disabled) {
-  border-color: var(--color-error); /* el error sobreescribe el hover */
+  border-color: var(--error); /* el error sobreescribe el hover */
 }
 .field-group.is-error .field-input:focus-visible {
-  border-color: var(--color-error);
-  box-shadow: 0 0 0 4px var(--color-error-ring);
+  border-color: var(--error);
+  box-shadow: 0 0 0 4px var(--error-ring);
 }
 .field-group.is-error .field-hint {
   display: none; /* el mensaje de error reemplaza el texto de soporte */
 }
 .field-group.is-error .field-trailing-icon {
-  color: var(--color-error-text);
+  color: var(--error-text);
 }
 
 /* ═══════════════════════════════════════
@@ -341,7 +341,7 @@ input:disabled, select:disabled, textarea:disabled {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   pointer-events: none;
   display: flex;
   align-items: center;

@@ -34,8 +34,8 @@
   z-index: 100;
   min-width: 180px;
   max-width: 280px;
-  background: var(--color-surface-container);
-  border: 1px solid var(--color-outline-variant);
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
   padding: var(--space-1-5);
@@ -60,26 +60,26 @@
   background: transparent;
   border-radius: var(--radius-sm);
   font-size: var(--font-size-body-sm);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   text-align: left;
   cursor: pointer;
 }
 .dropdown-item:hover,
 .dropdown-item:focus-visible {
-  background: var(--color-surface-variant);
+  background: var(--surface-variant);
   outline: none;
 }
 .dropdown-item[data-disabled="true"] {
-  color: var(--color-on-disabled);
+  color: var(--on-disabled);
   cursor: not-allowed;
   pointer-events: none;
 }
 .dropdown-item[data-variant="danger"] {
-  color: var(--color-error-text);
+  color: var(--error-text);
 }
 .dropdown-item[data-variant="danger"]:hover,
 .dropdown-item[data-variant="danger"]:focus-visible {
-  background: var(--color-error-container);
+  background: var(--error-container);
 }
 
 .dropdown-item-indicator {
@@ -94,20 +94,20 @@
   padding: var(--space-1-5) var(--space-2-5) var(--space-1);
   font-size: var(--font-size-caption);
   font-weight: 600;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
 }
 
 .dropdown-separator {
   height: 1px;
   margin: 4px -2px;
-  background: var(--color-outline-variant);
+  background: var(--outline-variant);
 }
 
 .dropdown-shortcut {
   margin-left: auto;
   font-family: var(--font-mono);
   font-size: var(--font-size-caption);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   letter-spacing: var(--letter-spacing-overline);
 }
 

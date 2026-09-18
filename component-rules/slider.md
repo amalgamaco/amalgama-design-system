@@ -34,9 +34,9 @@ layout_constraints:
   - "Give the slider a visible track the full width/height of its container; don't shrink it below a draggable size."
 
 states:
-  default: "Track --color-surface-variant, active range + thumb --color-primary."
-  hover: "Thumb gains a focus-ring halo (--color-focus-ring) on hover."
-  focus: "focus-visible thumb halo (--color-focus-ring)."
+  default: "Track --surface-variant, active range + thumb --primary."
+  hover: "Thumb gains a focus-ring halo (--focus-ring) on hover."
+  focus: "focus-visible thumb halo (--focus-ring)."
   disabled: "Container [data-disabled] → 40% opacity, not-allowed thumb cursor."
 
 accessibility:
@@ -75,7 +75,7 @@ relationships:
     - {component: input, why: "input captures exact typed values; slider is approximate"}
 
 tokens:
-  color: [--color-primary, --color-surface-variant, --color-focus-ring, --card-bg]
+  color: [--primary, --surface-variant, --focus-ring, --surface-container]
   radius: [--radius-full]
   shadow: [--shadow-sm]
   motion: [--duration-fast, --ease-default]
@@ -83,7 +83,7 @@ tokens:
 motion:
   enter: "none — the control is always present"
   exit: "none"
-  stateChange: "On hover (not disabled) and focus-visible the thumb grows a 4px --color-focus-ring halo — a box-shadow effect (transition: box-shadow). The track fill (.slider-range) and thumb position update via inline style/JS as the user drags and are NOT transitioned — they track the pointer 1:1."
+  stateChange: "On hover (not disabled) and focus-visible the thumb grows a 4px --focus-ring halo — a box-shadow effect (transition: box-shadow). The track fill (.slider-range) and thumb position update via inline style/JS as the user drags and are NOT transitioned — they track the pointer 1:1."
   duration: "--duration-fast"
   easing: "--ease-default"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). No looping/essential motion; the focus halo still appears, just without the fade."

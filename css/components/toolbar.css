@@ -73,29 +73,29 @@
 .toolbar > .toolbar-spacer { margin-left: auto; }
 
 /* ── Search-field — variante compacta del Search component para toolbar ──
-   Fondo --color-surface (blanco en light), NUNCA transparente — a diferencia de la
-   .search-bar mobile, que es gris (--color-surface-container-high). Comparte borde y
+   Fondo --surface (blanco en light), NUNCA transparente — a diferencia de la
+   .search-bar mobile, que es gris (--surface-container-high). Comparte borde y
    tokens de texto/estado. Forma --radius-md (8px) y padding compacto para convivir
    con toolbar-btn en la misma fila. .search-bar usa --radius-lg (12px) y 56px de alto. */
 .search-field {
   flex: 1; min-width: 180px;
   display: flex; align-items: center; gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
-  background: var(--color-surface);   /* desktop: superficie (blanco en light) — par shadcn. NO igual que .search-bar mobile, que es gris (surface-container-high) */
+  background: var(--surface);   /* desktop: superficie (blanco en light) — par shadcn. NO igual que .search-bar mobile, que es gris (surface-container-high) */
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   cursor: text;
   transition: background var(--duration-fast) var(--ease-default),
               border-color var(--duration-fast) var(--ease-default);
 }
 .search-field:hover {
-  background: color-mix(in srgb, var(--color-on-surface) 8%, var(--color-surface));
-  border-color: color-mix(in srgb, var(--color-on-surface) 20%, transparent);
+  background: color-mix(in srgb, var(--on-surface) 8%, var(--surface));
+  border-color: color-mix(in srgb, var(--on-surface) 20%, transparent);
 }
 .search-field:focus-within {
-  background: color-mix(in srgb, var(--color-on-surface) 12%, var(--color-surface));
-  border-color: var(--color-secondary);
+  background: color-mix(in srgb, var(--on-surface) 12%, var(--surface));
+  border-color: var(--secondary);
 }
 .search-field > svg,
 .search-field > i { width: 18px; height: 18px; flex-shrink: 0; color: inherit; }
@@ -103,22 +103,22 @@
   flex: 1; min-width: 0;
   border: none; outline: none; background: transparent;
   font-family: var(--font-body); font-size: var(--font-size-body-md);
-  color: var(--color-on-surface);
-  caret-color: var(--color-secondary);
+  color: var(--on-surface);
+  caret-color: var(--secondary);
 }
-.search-field input::placeholder { color: var(--color-on-surface-variant); }
+.search-field input::placeholder { color: var(--on-surface-variant); }
 .search-field input::-webkit-search-cancel-button { display: none; }
 
 /* ── Toolbar-btn — acción secundaria outlined (análoga a btn-secondary) ── */
 .toolbar-btn {
   display: inline-flex; align-items: center; gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
-  background: var(--color-surface-container);
-  border: 1px solid var(--color-outline);
+  background: var(--surface-container);
+  border: 1px solid var(--outline);
   border-radius: var(--radius-md);
   font-family: var(--font-body);
   font-size: var(--font-size-body-md); font-weight: 500;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   cursor: pointer;
   white-space: nowrap;
   transition: background var(--duration-fast) var(--ease-default),
@@ -126,21 +126,21 @@
               color var(--duration-fast) var(--ease-default);
 }
 .toolbar-btn:hover {
-  background: var(--color-surface-variant);
-  border-color: var(--color-outline-variant);
-  color: var(--color-on-surface);
+  background: var(--surface-variant);
+  border-color: var(--outline-variant);
+  color: var(--on-surface);
 }
 .toolbar-btn:active { opacity: .85; }
 .toolbar-btn:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .toolbar-btn:disabled,
 .toolbar-btn[aria-disabled="true"] {
-  background: var(--color-surface-variant);
-  color: var(--color-on-disabled);
-  border-color: var(--color-outline);
+  background: var(--surface-variant);
+  color: var(--on-disabled);
+  border-color: var(--outline);
   cursor: not-allowed; pointer-events: none;
 }
 .toolbar-btn > svg,
@@ -150,18 +150,18 @@
   min-width: 18px; height: 18px; padding: 0 5px;
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: var(--radius-full);
-  background: var(--color-secondary-container); color: var(--color-on-secondary-container);
+  background: var(--secondary-container); color: var(--on-secondary-container);
   font-size: var(--font-size-caption); font-weight: 600;
 }
 
 /* ── Result count — resumen debajo de la barra ── */
 .result-count {
   font-size: var(--font-size-label);
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   margin-bottom: 14px;
   padding: 0 var(--space-0-5);
 }
-.result-count strong { color: var(--color-on-surface); font-weight: 500; }
+.result-count strong { color: var(--on-surface); font-weight: 500; }
 
 /* ═══════════════════════════════════════
    VARIANTE · Filters — tratamiento de campo unificado
@@ -174,21 +174,21 @@
   --tb-radius:            var(--radius-md);             /* radio de campo (nunca píldora aquí) */
   --tb-pad-x:             14px;                          /* padding horizontal interno del campo */
   --tb-gap:               var(--space-3);               /* separación entre controles */
-  --tb-surface:           var(--color-surface-container);               /* superficie de campo (relleno, NO transparente) */
-  --tb-surface-hover:     color-mix(in srgb, var(--color-on-surface) 6%, var(--color-surface-container));
+  --tb-surface:           var(--surface-container);               /* superficie de campo (relleno, NO transparente) */
+  --tb-surface-hover:     color-mix(in srgb, var(--on-surface) 6%, var(--surface-container));
   --tb-border:            var(--border);
-  --tb-border-hover:      color-mix(in srgb, var(--color-on-surface) 22%, transparent);
-  --tb-border-focus:      var(--color-secondary);           /* = --color-secondary */
-  --tb-focus-ring:        var(--color-focus-ring);
-  --tb-text:              var(--color-on-surface);
-  --tb-text-muted:        var(--color-on-surface-variant);
-  --tb-icon:              var(--color-on-surface-variant);
+  --tb-border-hover:      color-mix(in srgb, var(--on-surface) 22%, transparent);
+  --tb-border-focus:      var(--secondary);           /* = --secondary */
+  --tb-focus-ring:        var(--focus-ring);
+  --tb-text:              var(--on-surface);
+  --tb-text-muted:        var(--on-surface-variant);
+  --tb-icon:              var(--on-surface-variant);
   --tb-font-size:         var(--font-size-body-md);
-  --tb-selected-bg:       var(--color-secondary-container);      /* estado primary del Segmented Button */
-  --tb-selected-text:     var(--color-on-secondary-container);
-  --tb-disabled-surface:  var(--color-surface-variant);
-  --tb-disabled-text:     var(--color-on-disabled);
-  --tb-disabled-border:   var(--color-outline);
+  --tb-selected-bg:       var(--secondary-container);      /* estado primary del Segmented Button */
+  --tb-selected-text:     var(--on-secondary-container);
+  --tb-disabled-surface:  var(--surface-variant);
+  --tb-disabled-text:     var(--on-disabled);
+  --tb-disabled-border:   var(--outline);
   --tb-motion-duration:   var(--duration-fast);
   --tb-motion-ease:       var(--ease-default);
 
@@ -277,9 +277,9 @@
      superficie de campo, así que un pulgar levantado quedaría del mismo color que
      su contenedor en claro (los dos son --card-bg) y no se vería. */
   --seg-btn-container-color:          var(--tb-surface);
-  --seg-btn-selected-container-color: var(--color-secondary-container);
-  --seg-btn-selected-label-color:     var(--color-on-secondary-container);
-  --seg-btn-selected-icon-color:      var(--color-on-secondary-container);
+  --seg-btn-selected-container-color: var(--secondary-container);
+  --seg-btn-selected-label-color:     var(--on-secondary-container);
+  --seg-btn-selected-icon-color:      var(--on-secondary-container);
   --seg-btn-selected-elevation:       none;
 }
 .toolbar-filters .seg-btn { border-radius: var(--radius-sm); }   /* segmentos anidados en el campo cuadrado */
@@ -314,11 +314,11 @@
    Lo togglea el producto agregando .toolbar-selection + el conteo.
 ═══════════════════════════════════════ */
 .toolbar-selection {
-  background: color-mix(in srgb, var(--color-secondary-container) 55%, var(--color-surface-container));
-  border: 1px solid var(--color-outline-variant);
+  background: color-mix(in srgb, var(--secondary-container) 55%, var(--surface-container));
+  border: 1px solid var(--outline-variant);
   border-radius: var(--radius-md);
   padding: var(--space-2) var(--space-3);
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   animation: toolbar-selection-in var(--duration-normal) var(--ease-default) both;
 }
 @keyframes toolbar-selection-in {
@@ -327,17 +327,17 @@
 }
 .toolbar-selection-count {
   font-size: var(--font-size-body-md); font-weight: 600;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
 }
 .toolbar-selection .toolbar-selection-clear {
   display: inline-flex; align-items: center; justify-content: center;
   width: 28px; height: 28px; border: none; border-radius: var(--radius-full);
-  background: transparent; color: var(--color-on-surface-variant); cursor: pointer;
+  background: transparent; color: var(--on-surface-variant); cursor: pointer;
   transition: background var(--duration-fast) var(--ease-default);
 }
-.toolbar-selection .toolbar-selection-clear:hover { background: color-mix(in srgb, var(--color-on-surface) 8%, transparent); }
+.toolbar-selection .toolbar-selection-clear:hover { background: color-mix(in srgb, var(--on-surface) 8%, transparent); }
 .toolbar-selection .toolbar-selection-clear:focus-visible {
-  outline: 2px solid var(--color-focus); outline-offset: 2px; box-shadow: 0 0 0 4px var(--color-focus-ring);
+  outline: 2px solid var(--focus); outline-offset: 2px; box-shadow: 0 0 0 4px var(--focus-ring);
 }
 
 /* ═══════════════════════════════════════
@@ -351,13 +351,13 @@
   width: var(--tb-height, 40px); height: var(--tb-height, 40px);
   flex-shrink: 0;
   background: transparent; border: 1px solid transparent; border-radius: var(--radius-md);
-  color: var(--color-on-surface-variant); cursor: pointer;
+  color: var(--on-surface-variant); cursor: pointer;
   transition: background var(--duration-fast) var(--ease-default),
               border-color var(--duration-fast) var(--ease-default);
 }
-.toolbar-overflow-btn:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.toolbar-overflow-btn:hover { background: var(--surface-variant); color: var(--on-surface); }
 .toolbar-overflow-btn:focus-visible {
-  outline: 2px solid var(--color-focus); outline-offset: 2px; box-shadow: 0 0 0 4px var(--color-focus-ring);
+  outline: 2px solid var(--focus); outline-offset: 2px; box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .toolbar-overflow-btn > svg, .toolbar-overflow-btn > i { width: 20px; height: 20px; }
 
@@ -367,7 +367,7 @@
 ═══════════════════════════════════════ */
 .toolbar-sticky {
   position: sticky; top: 0; z-index: 20;
-  background: var(--color-surface);
+  background: var(--surface);
   /* respiro para que el contenido no “toque” la barra al scrollear */
   padding-top: var(--space-2); padding-bottom: var(--space-2);
   margin-bottom: var(--space-2);

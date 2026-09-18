@@ -16,7 +16,7 @@ When a rule in a component file conflicts with this document, **this document wi
 1. **Consistency over customization.** A component must look and behave identically wherever it is used — in a demo, in a spec, in a live product. Visual drift between contexts is always a bug.
 2. **Reuse before creating.** Before adding a new token, pattern, or component, verify that an existing one doesn't already solve the problem. The cost of a new abstraction is paid by every future reader and every consumer of the DS.
 3. **One source of truth.** Token values live in `css/variables.css`. **Component code (variants, contracts) lives in `css/components/*.css`** — flat, self-contained, no build step. Optional thin React wrappers live in `components/ui/*.tsx` and apply the same classes with zero extra styling. Behavior specifications live in `index.html`. Nothing else is authoritative. *(This repo was migrated to a Tailwind v4 + React/Radix implementation 2026-06-22→26, then that migration was **reverted** 2026-07-17 — `css/components/*.css` is canonical again; each component's `Cuándo usar / Cuándo no` decision rule lives in its CSS header comment.)*
-4. **Semantic tokens only in component code.** Components must never reference primitive tokens directly (e.g. `--primary-900`, `--neutral-100`). They always go through a Color Role (`--color-primary`, `--color-disabled`). Primitives are referenced only in `css/variables.css` and in documentation that explicitly teaches the hierarchy.
+4. **Semantic tokens only in component code.** Components must never reference primitive tokens directly (e.g. `--primary-900`, `--neutral-100`). They always go through a Color Role (`--primary`, `--disabled`). Primitives are referenced only in `css/variables.css` and in documentation that explicitly teaches the hierarchy.
 5. **No per-theme overrides in components.** Semantic tokens recalibrate in `[data-theme="dark"]` inside `variables.css`. A component that needs a `[data-theme="dark"]` override block has chosen the wrong token.
 6. **Zero hardcoded values.** No raw hex, no raw px for font-size or radius, no arbitrary `rgba()` outside `variables.css`. The only exception is computed values that cannot be expressed as a token reference (e.g. `color-mix()` expressions) — these are implementation expressions, not tokens, and must be documented as such.
 
@@ -27,16 +27,15 @@ When a rule in a component file conflicts with this document, **this document wi
 ### 2.1 Hierarchy
 
 ```
-Primitives  →  Color Roles  →  Semantic Aliases  →  (component code)
+Primitives  →  Color Roles  →  (component code)
 ```
 
 | Tier | Location | Examples | Who references it |
 |---|---|---|---|
 | **Primitives** | `css/variables.css` (top) | `--primary-900`, `--neutral-100`, `--secondary-200` | Color Roles only |
-| **Color Roles** | `css/variables.css` (middle) | `--color-primary`, `--color-disabled`, `--color-focus` | Component CSS, aliases |
-| **Semantic aliases** | `css/variables.css` (bottom) | `--bg`, `--border`, `--text-primary`, `--interactive` | Product CSS, layout code |
+| **Color Roles** | `css/variables.css` (middle) | `--primary`, `--surface`, `--on-surface`, `--focus` — the name is the role, with no prefix, as in Material | Component CSS, product CSS, layout code |
 | **Component tokens** | _opt-in per component; see §2.2_ | `--seg-btn-selected-container-color` (segmented-button, MD3 layer) | That component's CSS only |
-| **MD3 system aliases** | `css/md-sys-bridge.css` (optional) | `--md-sys-color-secondary-container` → `var(--color-secondary-container)` | Component tokens that adopt MD3 naming |
+| **MD3 system aliases** | `css/md-sys-bridge.css` (optional) | `--md-sys-color-secondary-container` → `var(--secondary-container)` | Component tokens that adopt MD3 naming |
 
 ### 2.2 When a component may introduce its own token
 
@@ -45,22 +44,22 @@ Almost never — **with one sanctioned exception (the MD3 component-token layer,
 - The token will be consumed by 2+ files (not just the component's own CSS)
 - A designer decision was made and documented
 
-In all other cases, consume a Color Role directly. The `--button-secondary-*` tokens were eliminated precisely because they duplicated `--color-secondary-container` / `--color-on-secondary-container`.
+In all other cases, consume a Color Role directly. The `--button-secondary-*` tokens were eliminated precisely because they duplicated `--secondary-container` / `--on-secondary-container`.
 
 #### Sanctioned exception — MD3 component-token layer
 
 A component **may** declare a full component-token layer that mirrors Material Design 3's "Tokens and specs" table — **one custom property per MD3 component token**, declared on the component root, consumed by every rule. **Reference implementation: `css/components/segmented-button.css`** (canonical; the `--seg-btn-*` MD3 component-token layer is defined locally in the component's own file). This is normally a "shadow token" (§2.3) but is permitted here because it reproduces MD3's *documented three-layer architecture* (palette → system role → component token → CSS), making the component's spec table machine-mappable and each instance themeable by overriding one token.
 
 Rules for adopting this pattern:
-1. **Every** component token defaults to its MD3 system role via the bridge, with the Embassy role as fallback: `var(--md-sys-color-X, var(--color-X))`. Never default to a primitive or a hardcoded value.
+1. **Every** component token defaults to its MD3 system role via the bridge, with the Embassy role as fallback: `var(--md-sys-color-X, var(--X))`. Never default to a primitive or a hardcoded value.
 2. Token names follow MD3's token path, kebab-cased and prefixed with the component (`md.comp.segmented-button.selected.container.color` → `--seg-btn-selected-container-color`).
-3. The CSS rules consume **only** component tokens — never a `--color-*` role or `--md-sys-color-*` name directly.
+3. The CSS rules consume **only** component tokens — never a role or a `--md-sys-color-*` name directly.
 4. The header comment carries the MD3-token → component-token → default mapping table.
 5. Deliberate divergences from MD3 defaults (e.g. the focus ring) are documented in the header.
 
-The **MD3 system bridge** (`css/md-sys-bridge.css`) exposes `--md-sys-color-*` (Material's real system-token names) as aliases of the Embassy `--color-*` roles. It is the only place those names are defined; it needs no dark override because the `--color-*` roles already recalibrate. It is optional to load — the `var(--md-sys-color-X, var(--color-X))` fallback keeps adopting components working without it (they resolve to Embassy roles directly).
+The **MD3 system bridge** (`css/md-sys-bridge.css`) exposes `--md-sys-color-*` (Material's real system-token names) as aliases of the Embassy roles. It is the only place those names are defined; it needs no dark override because the Embassy roles already recalibrate. It is optional to load — the `var(--md-sys-color-X, var(--X))` fallback keeps adopting components working without it (they resolve to Embassy roles directly).
 
-**Component-tier state tokens — post-revert state (2026-07).** During the Tailwind era, component/family-specific state colors (elevated chip, search field, snackbar action/close, nav/menu) were routed through a `--md-comp-*` component tier defined in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css`). Both files were deleted when that architecture was reverted, and the `--md-comp-*` indirection layer did **not** get restored — it was Tailwind/islands-only infrastructure, not a design decision. What *did* survive, because `layout.css`'s nav styling depends on it, is the **navigation/menu family**: `--color-nav-hover`, `--color-nav-hover-content`, `--color-nav-press`, `--color-nav-selected`, `--color-nav-selected-content` are real named tokens, defined directly in `css/variables.css` (no `--md-comp-*` indirection — see §5.4 below for the full table). Every other family's state colors (chip-elevated, search-field, snackbar action/close) are now **inline `color-mix()` expressions in each component's own CSS file**, using the same percentages the old tier used, just not routed through a shared named token. This is a known simplification, not a design change — see §12 for the reconciliation entry. If you're adding a new component/family state, follow the pattern that's actually live: either add real tokens to `css/variables.css` (nav's approach, preferred if 2+ files will consume it) or an inline `color-mix()` expression scoped to that component's file (everyone else's current approach).
+**Component-tier state tokens — post-revert state (2026-07).** During the Tailwind era, component/family-specific state colors (elevated chip, search field, snackbar action/close, nav/menu) were routed through a `--md-comp-*` component tier defined in `packages/ds/css/hover-tokens.css` (mirrored in `islands/src/styles.css`). Both files were deleted when that architecture was reverted, and the `--md-comp-*` indirection layer did **not** get restored — it was Tailwind/islands-only infrastructure, not a design decision. What *did* survive, because `layout.css`'s nav styling depends on it, is the **navigation/menu family**: `--nav-hover`, `--nav-hover-content`, `--nav-press`, `--nav-selected`, `--nav-selected-content` are real named tokens, defined directly in `css/variables.css` (no `--md-comp-*` indirection — see §5.4 below for the full table). Every other family's state colors (chip-elevated, search-field, snackbar action/close) are now **inline `color-mix()` expressions in each component's own CSS file**, using the same percentages the old tier used, just not routed through a shared named token. This is a known simplification, not a design change — see §12 for the reconciliation entry. If you're adding a new component/family state, follow the pattern that's actually live: either add real tokens to `css/variables.css` (nav's approach, preferred if 2+ files will consume it) or an inline `color-mix()` expression scoped to that component's file (everyone else's current approach).
 
 > **Actualización (2026-09): `material-web` sí se usa, pero para otra cosa.** El rechazo de abajo
 > era como *implementación de componentes en el producto web*, y sigue en pie. Desde septiembre se
@@ -76,18 +75,18 @@ The **MD3 system bridge** (`css/md-sys-bridge.css`) exposes `--md-sys-color-*` (
 
 | Pattern | Why prohibited | Correct alternative |
 |---|---|---|
-| Raw hex in component CSS (`color: #01164D`) | Breaks dark mode, undocumented | `var(--color-primary)` |
+| Raw hex in component CSS (`color: #01164D`) | Breaks dark mode, undocumented | `var(--primary)` |
 | Raw px for font-size (`font-size: 13px`) | Bypasses type scale | `var(--font-size-body-md)` |
 | Raw px for border-radius (`border-radius: 8px`) | Bypasses radius scale | `var(--radius-md)` |
-| `color-mix()` via primitive (`color-mix(in srgb, var(--secondary-900) …)`) | Bypasses Color Role | `color-mix(in srgb, var(--color-focus) …)` |
+| `color-mix()` via primitive (`color-mix(in srgb, var(--secondary-900) …)`) | Bypasses Color Role | `color-mix(in srgb, var(--focus) …)` |
 | Per-theme overrides in component files | Duplicates variables.css | Choose the correct semantic token |
-| Duplicate token (`--my-component-primary: var(--color-primary)`) | Shadow tokens create drift | Reference `--color-primary` directly |
+| Duplicate token (`--my-component-primary: var(--primary)`) | Shadow tokens create drift | Reference `--primary` directly |
 | `!important` for token values | Indicates wrong specificity or wrong token | Fix selector specificity |
 | Undocumented aliases (`--my-blue`) | Invisible to consumers | Use a Color Role or document as a proper alias |
 
-### 2.4 `--interactive` vs `--color-focus` (known divergence)
+### 2.4 `--secondary` vs `--focus` (known divergence)
 
-`--interactive = var(--color-secondary)` and `--color-focus = var(--secondary-900)` resolve to the same hex in light mode (`#4F80FF`). In dark mode they diverge: `--color-secondary` changes to `#B9CCFF` while `--color-focus` stays at `#4F80FF`. **Use `--color-focus` for all focus indicators.** `--interactive` is a legacy alias used in form.css and layout; do not introduce it into new components.
+`--secondary = var(--secondary)` and `--focus = var(--secondary-900)` resolve to the same hex in light mode (`#4F80FF`). In dark mode they diverge: `--secondary` changes to `#B9CCFF` while `--focus` stays at `#4F80FF`. **Use `--focus` for all focus indicators.** `--secondary` is a legacy alias used in form.css and layout; do not introduce it into new components.
 
 ---
 
@@ -101,7 +100,7 @@ A component has exactly one correct visual appearance. The live demo, the anatom
 
 | Property | Source of truth |
 |---|---|
-| Colors | `css/components/<name>.css` — `var(--color-*)` role references |
+| Colors | `css/components/<name>.css` — `var(--<role>)` references |
 | Spacing (padding, gap) | `css/components/<name>.css` — `var(--space-*)` tokens or absolute px anchored in the component spec |
 | Border radius | `css/variables.css` radius scale |
 | Elevation (shadow) | `css/variables.css` shadow scale |
@@ -199,34 +198,34 @@ When a component has nested elements (e.g. a card with an inner image or an inpu
 
 | Surface | Background | Foreground |
 |---|---|---|
-| Primary action (filled button, FAB) | `--color-primary` | `--color-on-primary` |
-| Primary container (elevated button, primary chip) | `--color-primary-container` | `--color-on-primary-container` |
-| Secondary / tonal action | `--color-secondary-container` | `--color-on-secondary-container` |
-| Page / app background | `--color-surface` / `--bg` | `--color-on-surface` / `--text-primary` |
-| Card, panel, dialog | `--color-surface-container` / `--card-bg` | `--color-on-surface` |
-| Subtle container | `--color-surface-variant` | `--color-on-surface-variant` |
-| Borders (resting state, strong — the border itself is the primary affordance) — Button tertiary/ghost/icon, Checkbox, Radio, Switch | — | `--color-outline` |
+| Primary action (filled button, FAB) | `--primary` | `--on-primary` |
+| Primary container (elevated button, primary chip) | `--primary-container` | `--on-primary-container` |
+| Secondary / tonal action | `--secondary-container` | `--on-secondary-container` |
+| Page / app background | `--surface` / `--bg` | `--on-surface` / `--on-surface` |
+| Card, panel, dialog | `--surface-container` / `--surface-container` | `--on-surface` |
+| Subtle container | `--surface-variant` | `--on-surface-variant` |
+| Borders (resting state, strong — the border itself is the primary affordance) — Button tertiary/ghost/icon, Checkbox, Radio, Switch | — | `--outline` |
 | Borders (resting state, subtle — text-entry / content fields) — Input, Textarea, Select, SearchBar, SearchField; also containers (cards/tables/panels) | — | `--border` (`color-mix(on-surface 10%, transparent)`) |
-| Borders (filter/selection controls — Chip, Segmented Button) & decorative/dividers | — | `--color-outline-variant` |
-| Borders (hover/disabled accent on subtle-tier fields) — Input, Textarea step up to a stronger frame on hover/disabled | — | `--color-outline` |
-| Error / danger | `--color-error` | `--color-on-error` |
-| Error container | `--color-error-container` | `--color-on-error-container` |
-| Success | `--color-success` | `--color-on-success` |
-| Warning | `--color-warning` | `--color-on-warning` |
+| Borders (filter/selection controls — Chip, Segmented Button) & decorative/dividers | — | `--outline-variant` |
+| Borders (hover/disabled accent on subtle-tier fields) — Input, Textarea step up to a stronger frame on hover/disabled | — | `--outline` |
+| Error / danger | `--error` | `--on-error` |
+| Error container | `--error-container` | `--on-error-container` |
+| Success | `--success` | `--on-success` |
+| Warning | `--warning` | `--on-warning` |
 
-### 5.2 `--color-on-*` rules
+### 5.2 `--on-*` rules
 
-- Use the paired `on-*` token for content that sits on a Color Role surface. `--color-on-primary` belongs on `--color-primary` surfaces only.
-- `--color-on-surface` is for component internals (chip labels, button text, table cells). **It is NOT for page headings or body text.** Page text uses `--text-primary` (`--primary-900` in light, `--neutral-50` in dark).
-- Never approximate: don't use `--color-on-surface` where `--color-on-primary` is correct just because they look similar in one mode.
+- Use the paired `on-*` token for content that sits on a Color Role surface. `--on-primary` belongs on `--primary` surfaces only.
+- `--on-surface` is for component internals (chip labels, button text, table cells). **It is NOT for page headings or body text.** Page text uses `--on-surface` (`--primary-900` in light, `--neutral-50` in dark).
+- Never approximate: don't use `--on-surface` where `--on-primary` is correct just because they look similar in one mode.
 
 ### 5.3 Disabled state — canonical pattern
 
 ```css
 /* For components with a filled container: */
 .component:disabled {
-  background: var(--color-disabled);     /* --neutral-100 light / --neutral-600 dark */
-  color: var(--color-on-disabled);       /* --neutral-300, same in both modes */
+  background: var(--disabled);     /* --neutral-100 light / --neutral-600 dark */
+  color: var(--on-disabled);       /* --neutral-300, same in both modes */
   border-color: transparent;
   cursor: not-allowed;
   transform: none;
@@ -236,12 +235,12 @@ When a component has nested elements (e.g. a card with an inner image or an inpu
 
 /* For components with a transparent container: */
 .component:disabled {
-  color: var(--color-on-disabled);
+  color: var(--on-disabled);
   cursor: not-allowed;
 }
 ```
 
-Do **not** use MD3's opacity model (`color-mix(in srgb, var(--color-on-surface) 38%, transparent)`) for disabled states in Embassy components. Embassy provides dedicated tokens; use them. The chip.css MD3 approach is a legacy inconsistency to be reconciled.
+Do **not** use MD3's opacity model (`color-mix(in srgb, var(--on-surface) 38%, transparent)`) for disabled states in Embassy components. Embassy provides dedicated tokens; use them. The chip.css MD3 approach is a legacy inconsistency to be reconciled.
 
 ### 5.4 Hover state — canonical approaches
 
@@ -249,13 +248,13 @@ Embassy does not prescribe a single hover model across all variants, but the app
 
 | Context | Approach | Token/expression |
 |---|---|---|
-| Filled, high-emphasis | Dedicated hover token | `var(--color-primary-hover)` |
-| Tonal / container (color-mix darkening) | 12% black blend | `color-mix(in srgb, var(--color-XYZ) 88%, #000)` |
-| State layer on transparent surface | 8% `onSurface` overlay | `color-mix(in srgb, var(--color-on-surface) 8%, transparent)` |
-| State layer on filled container | 8% `on-container` overlay | `color-mix(in srgb, var(--color-on-XYZ) 8%, var(--color-XYZ-container))` |
-| Text / ghost | 10% primary overlay | `color-mix(in srgb, var(--color-primary) 10%, transparent)` |
-| Surface swap | Named surface token | `var(--color-surface-variant)` |
-| **Menu-like / navigation** | **Shared "blue hover" tokens** | `var(--color-nav-hover)` + `var(--color-nav-hover-content)` |
+| Filled, high-emphasis | Dedicated hover token | `var(--primary-hover)` |
+| Tonal / container (color-mix darkening) | 12% black blend | `color-mix(in srgb, var(--XYZ) 88%, #000)` |
+| State layer on transparent surface | 8% `onSurface` overlay | `color-mix(in srgb, var(--on-surface) 8%, transparent)` |
+| State layer on filled container | 8% `on-container` overlay | `color-mix(in srgb, var(--on-XYZ) 8%, var(--XYZ-container))` |
+| Text / ghost | 10% primary overlay | `color-mix(in srgb, var(--primary) 10%, transparent)` |
+| Surface swap | Named surface token | `var(--surface-variant)` |
+| **Menu-like / navigation** | **Shared "blue hover" tokens** | `var(--nav-hover)` + `var(--nav-hover-content)` |
 
 A new component must declare its hover model in the CSS header comment and use it consistently for all its states.
 
@@ -265,15 +264,15 @@ Every **menu-like or navigation-like** surface — main app-shell nav (`.nav-ite
 
 | Aspect | Token | Derivation |
 |---|---|---|
-| Hover background | `--color-nav-hover` | `secondary-container` @ 45% over transparent |
-| Hover icon + label | `--color-nav-hover-content` | `secondary` (blue) |
-| Pressed background | `--color-nav-press` | `secondary-container` @ 70% (transient, still weaker than the selected fill) |
-| Selected background | `--color-nav-selected` | `secondary-container` (100%) |
-| Selected icon + label | `--color-nav-selected-content` | `on-secondary-container` |
+| Hover background | `--nav-hover` | `secondary-container` @ 45% over transparent |
+| Hover icon + label | `--nav-hover-content` | `secondary` (blue) |
+| Pressed background | `--nav-press` | `secondary-container` @ 70% (transient, still weaker than the selected fill) |
+| Selected background | `--nav-selected` | `secondary-container` (100%) |
+| Selected icon + label | `--nav-selected-content` | `on-secondary-container` |
 
-Hover/pressed are a **translucent fraction of `secondary-container`** — the *same family* the selected fill uses, one step lighter. This is deliberate: it (a) stays **visible in dark mode** where plain `secondary` is too light to register as a fill, and (b) mirrors the icon-rail's own hover-lighter-than-selected logic. The **lightness ramp `45% < 70% < 100%`** gives hover ≠ pressed ≠ selected on its own; the **different content color** (hover = `secondary` blue text; selected = `on-secondary-container` + bolder weight) reinforces hover ≠ selected. All recalibrate in dark via the `--color-*` roles (light `secondary-container` `#CAD9FF`; dark `#3A5BB0`).
+Hover/pressed are a **translucent fraction of `secondary-container`** — the *same family* the selected fill uses, one step lighter. This is deliberate: it (a) stays **visible in dark mode** where plain `secondary` is too light to register as a fill, and (b) mirrors the icon-rail's own hover-lighter-than-selected logic. The **lightness ramp `45% < 70% < 100%`** gives hover ≠ pressed ≠ selected on its own; the **different content color** (hover = `secondary` blue text; selected = `on-secondary-container` + bolder weight) reinforces hover ≠ selected. All recalibrate in dark via the los roles semánticos roles (light `secondary-container` `#CAD9FF`; dark `#3A5BB0`).
 
-Consume via `bg-[var(--color-nav-*)]` / `text-[var(--color-nav-*-content)]` (React) or the raw vars (CSS) — **never** a neutral `--color-on-surface-state-*` layer for a menu/nav item, and **never** a one-off blue token (the docs `--ds-accent`/`--ds-accent-bg` are documentation-chrome accents only — spec tables, kbd chips, callouts — and must NOT be used for nav/menu hover). Components with their own documented selection systems (Segmented Button → `primary-container`; Chip → chip states) are **not** menu-like and keep their own models.
+Consume via `bg-[var(--nav-*)]` / `text-[var(--nav-*-content)]` (React) or the raw vars (CSS) — **never** a neutral `--on-surface-state-*` layer for a menu/nav item, and **never** a one-off blue token (the docs `--ds-accent`/`--ds-accent-bg` are documentation-chrome accents only — spec tables, kbd chips, callouts — and must NOT be used for nav/menu hover). Components with their own documented selection systems (Segmented Button → `primary-container`; Chip → chip states) are **not** menu-like and keep their own models.
 
 **Every menu-like/nav surface uses these tokens — no exceptions, no per-item overrides:** dropdown menus, lists, search result rows, the app-shell main nav (`.nav-item`), and *all* docs-shell navigation — the icon **rail** (`.ds-rail-btn` + its `.ds-rail-icon-wrap` pill), drawer items (`.ds-nav-item`), solo items (`.ds-nav-solo`), group-label hovers (`.ds-nav-group-name`/`-toggle`), and the mobile menu button (`.ds-menu-btn`). If two items in the same menu (or two menus in the same shell) hover differently, a surface is off-token — fix the surface, don't add a local color.
 
@@ -287,7 +286,7 @@ During the Tailwind era, these opacities were routed through named `md.sys.state
 
 ```css
 /* current pattern — literal percentage, scoped to the component's own file */
-background: color-mix(in srgb, var(--color-on-surface) 8%, transparent); /* hover */
+background: color-mix(in srgb, var(--on-surface) 8%, transparent); /* hover */
 ```
 
 | Interaction | Opacity |
@@ -299,7 +298,7 @@ background: color-mix(in srgb, var(--color-on-surface) 8%, transparent); /* hove
 | Disabled content | 38% |
 | Disabled container | 12% |
 
-> **History:** pressed was originally an ad-hoc 12–16% per token (primary 16%, on-surface 12%) and focus was 12%; both were unified to the MD3 spec (pressed 10%, focus 10%) during the Tailwind era via the now-deleted opacity-token layer. The unified *values* in the table above are what's live in the restored components (verify against `css/components/chip.css`'s `color-mix()` calls, which use 8%/12%/38% consistently) — only the shared-token mechanism was lost, not the reconciliation itself. Non-state hover *darkens* (`--color-primary-hover`, `--color-secondary-container-hover`) and the input `--color-error-ring` halo are intentionally **not** state layers and keep their own values.
+> **History:** pressed was originally an ad-hoc 12–16% per token (primary 16%, on-surface 12%) and focus was 12%; both were unified to the MD3 spec (pressed 10%, focus 10%) during the Tailwind era via the now-deleted opacity-token layer. The unified *values* in the table above are what's live in the restored components (verify against `css/components/chip.css`'s `color-mix()` calls, which use 8%/12%/38% consistently) — only the shared-token mechanism was lost, not the reconciliation itself. Non-state hover *darkens* (`--primary-hover`, `--secondary-container-hover`) and the input `--error-ring` halo are intentionally **not** state layers and keep their own values.
 
 #### State layer color by surface type
 
@@ -307,10 +306,10 @@ The state layer color is always the **"on" token** of the surface the interactio
 
 | Surface | State layer color | Example expression |
 |---|---|---|
-| Transparent / unselected segment | `--color-on-surface` | `color-mix(in srgb, var(--color-on-surface) 8%, transparent)` |
-| `secondaryContainer` (selected segment) | `--color-on-secondary-container` | `color-mix(in srgb, var(--color-on-secondary-container) 8%, var(--color-secondary-container))` |
-| `primaryContainer` | `--color-on-primary-container` | `color-mix(in srgb, var(--color-on-primary-container) 8%, var(--color-primary-container))` |
-| `inverseSurface` (snackbar) | `--color-inverse-on-surface` | `color-mix(in srgb, var(--color-inverse-on-surface) 8%, transparent)` |
+| Transparent / unselected segment | `--on-surface` | `color-mix(in srgb, var(--on-surface) 8%, transparent)` |
+| `secondaryContainer` (selected segment) | `--on-secondary-container` | `color-mix(in srgb, var(--on-secondary-container) 8%, var(--secondary-container))` |
+| `primaryContainer` | `--on-primary-container` | `color-mix(in srgb, var(--on-primary-container) 8%, var(--primary-container))` |
+| `inverseSurface` (snackbar) | `--inverse-on-surface` | `color-mix(in srgb, var(--inverse-on-surface) 8%, transparent)` |
 
 #### Implementation note
 
@@ -320,21 +319,21 @@ MD3's reference implementation (Material Web Components) uses `::before` pseudo-
 
 ### 5.6 Selected state
 
-Selected state uses the **Secondary family** — never `--color-primary`. Primary flips to white in dark mode (Embassy's dark-mode definition), which reads as "no color" for a passive selection indicator and breaks visual consistency with every other selected/active state in the library. Secondary stays a consistent blue in both themes. A selected state must have a clear visual distinction from hover — do not rely solely on color to communicate selection (Tabs also gains `font-semibold`; Chip/Segmented Button already gain a filled container).
+Selected state uses the **Secondary family** — never `--primary`. Primary flips to white in dark mode (Embassy's dark-mode definition), which reads as "no color" for a passive selection indicator and breaks visual consistency with every other selected/active state in the library. Secondary stays a consistent blue in both themes. A selected state must have a clear visual distinction from hover — do not rely solely on color to communicate selection (Tabs also gains `font-semibold`; Chip/Segmented Button already gain a filled container).
 
-The mapping splits by anatomy, not by "emphasis" (the previous wording here allowed both and caused Tabs to drift onto `--color-primary` — do not reintroduce that branch):
+The mapping splits by anatomy, not by "emphasis" (the previous wording here allowed both and caused Tabs to drift onto `--primary` — do not reintroduce that branch):
 
 | Anatomy | Selected treatment | Components |
 |---|---|---|
-| Has a container (pill/segment) | `--color-secondary-container` (MD3 `secondaryContainer`) fill + `--color-on-secondary-container` (MD3 `onSecondaryContainer`) content | Chip |
-| Has a container (pill/segment), lighter "Option B" variant | `--color-primary-container` (MD3 `primaryContainer`) fill + `--color-on-primary-container` (MD3 `onPrimaryContainer`) content | Segmented Button |
-| Text-only, no container (underline/indicator) | `--color-secondary` directly, on both the label and the indicator | Tabs |
+| Has a container (pill/segment) | `--secondary-container` (MD3 `secondaryContainer`) fill + `--on-secondary-container` (MD3 `onSecondaryContainer`) content | Chip |
+| Has a container (pill/segment), lighter "Option B" variant | `--primary-container` (MD3 `primaryContainer`) fill + `--on-primary-container` (MD3 `onPrimaryContainer`) content | Segmented Button |
+| Text-only, no container (underline/indicator) | `--secondary` directly, on both the label and the indicator | Tabs |
 
-`--color-primary` is reserved for actual page-level/sidebar navigation active state, which lives in the docs shell's own chrome (`index.html`), not in the component library — it is out of this rule's scope, not a second option for it.
+`--primary` is reserved for actual page-level/sidebar navigation active state, which lives in the docs shell's own chrome (`index.html`), not in the component library — it is out of this rule's scope, not a second option for it.
 
-**Segmented Button — softer "Option B" variant (2026-06):** the segmented button uses a *lighter* tonal selection — container `--color-primary-container` + content `--color-on-primary-container`, with an `--color-outline-variant` frame and `--color-on-surface-variant` unselected labels. This is a deliberate, documented deviation from the MD3 segmented-button spec (which assigns `secondaryContainer`): it stays within MD3 *roles* and the tonal-selection principle while reading lighter/cleaner. Canonical token mapping lives in `css/components/segmented-button.css` and the component's Specs → Color Roles table.
+**Segmented Button — softer "Option B" variant (2026-06):** the segmented button uses a *lighter* tonal selection — container `--primary-container` + content `--on-primary-container`, with an `--outline-variant` frame and `--on-surface-variant` unselected labels. This is a deliberate, documented deviation from the MD3 segmented-button spec (which assigns `secondaryContainer`): it stays within MD3 *roles* and the tonal-selection principle while reading lighter/cleaner. Canonical token mapping lives in `css/components/segmented-button.css` and the component's Specs → Color Roles table.
 
-**Chip — outline-variant frame (2026-07):** unselected Chip's border was `--color-outline` — identical to Button tertiary/ghost/icon's border, so the two components read as the same control when placed side by side, even though Chip is meant to feel like a lighter-weight filter/metadata control, not a primary action. Fixed by moving Chip's frame to `--color-outline-variant`, the same token (and the same rationale) already used by Segmented Button's "Option B" frame above — no new token, just correcting Chip's tier assignment in the borders table (§5.1). Button (tertiary/ghost/icon), Checkbox, Radio and Switch keep `--color-outline` unchanged; they remain the stronger resting-border tier. Canonical mapping lives in `css/components/chip.css`.
+**Chip — outline-variant frame (2026-07):** unselected Chip's border was `--outline` — identical to Button tertiary/ghost/icon's border, so the two components read as the same control when placed side by side, even though Chip is meant to feel like a lighter-weight filter/metadata control, not a primary action. Fixed by moving Chip's frame to `--outline-variant`, the same token (and the same rationale) already used by Segmented Button's "Option B" frame above — no new token, just correcting Chip's tier assignment in the borders table (§5.1). Button (tertiary/ghost/icon), Checkbox, Radio and Switch keep `--outline` unchanged; they remain the stronger resting-border tier. Canonical mapping lives in `css/components/chip.css`.
 
 **Search Bar / Search Field — shared subtle-border tier, not a new one (2026-07):** `.search-field` (`toolbar.css`), the desktop/toolbar variant of Search, reuses `SearchBar`'s existing `--border` frame and `--search-field-hover/-focus/-border-hover` state tokens — the same subtle resting-border tier already used by Input/Textarea/Select (§5.1). This is why it integrates cleanly into a toolbar row next to `.select`: they already shared a border tier before this decision, it just hadn't been documented as an intentional Search/Select pairing. `.search-field` differs from `.search-bar` only in shape (`--radius-md` vs. pill) and height (padding-driven vs. fixed 56px) — not in color role. Canonical mapping lives in `css/components/toolbar.css` and `css/components/search.css`.
 
@@ -353,8 +352,8 @@ Every interactive component must implement all applicable states from this table
 | **Focus** | `:focus-visible` | See 6.2 |
 | **Pressed / Active** | `:active:not(:disabled)` | State layer or `filter: brightness()` per component spec. `transform: translateY(0)` where hover used translateY. |
 | **Disabled** | `:disabled` or `[aria-disabled="true"]` | See Section 5.3 |
-| **Selected** | `.selected`, `[aria-selected="true"]`, `[aria-pressed="true"]` | Filled container with `--color-secondary-container` or `--color-primary` |
-| **Error** | `.is-error` | `--color-error` border; `--color-error-ring` ring on focus |
+| **Selected** | `.selected`, `[aria-selected="true"]`, `[aria-pressed="true"]` | Filled container with `--secondary-container` or `--primary` |
+| **Error** | `.is-error` | `--error` border; `--error-ring` ring on focus |
 | **Loading** | `[aria-busy="true"]` | Spinner + `pointer-events: none` |
 
 ### 6.2 Focus — three canonical forms (mandatory for all interactive components)
@@ -370,9 +369,9 @@ chips, icon buttons, tabs, calendar cells, pagination.
 
 ```css
 .component:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 ```
 
@@ -382,9 +381,9 @@ this one on its own.
 
 ```css
 .component:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: -2px;
-  box-shadow: inset 0 0 0 4px var(--color-focus-ring);
+  box-shadow: inset 0 0 0 4px var(--focus-ring);
 }
 ```
 
@@ -393,11 +392,11 @@ top of it draws a third concentric line; the border **becomes** the outline.
 
 ```css
 .field:focus-visible {
-  border-color: var(--color-focus);
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  border-color: var(--focus);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 ```
-Its error state swaps only the ring: `box-shadow: 0 0 0 4px var(--color-error-ring)`.
+Its error state swaps only the ring: `box-shadow: 0 0 0 4px var(--error-ring)`.
 A field that explicitly suppresses the UA outline writes `outline: none` next to the ring — that is
 part of form C, not a fourth answer.
 
@@ -405,24 +404,24 @@ part of form C, not a fourth answer.
 - Always `:focus-visible`, never `:focus`. `:focus` fires on mouse click and degrades the experience for mouse users.
 - Outline: `2px solid` — never `1px`, never `3px`. Offset: `2px` in form A, `-2px` in form B.
 - Ring: the spread is **always 4px**, outset in A and C, `inset` in B. Never 2px, never 3px.
-- Token: always `--color-focus` for the outline or the focused border, and `--color-focus-ring` for the ring. **Never** `--interactive`, never `--color-secondary`, never a hardcoded blue, and never the `var(--color-focus, var(--color-primary))` fallback form — `--color-focus` always resolves, so the fallback only hides a typo.
+- Token: always `--focus` for the outline or the focused border, and `--focus-ring` for the ring. **Never** `--secondary`, never `--secondary`, never a hardcoded blue, and never the `var(--focus, var(--primary))` fallback form — `--focus` always resolves, so the fallback only hides a typo.
 - A component-scoped alias is fine (§2.2) as long as it resolves to these two — `segmented-button.css` does this correctly with `--seg-btn-focus-outline-color`.
-- `--color-focus = var(--secondary-900) = #4F80FF`. It has **no dark mode override** — this is intentional: the focus ring provides a consistent accessibility signal regardless of theme.
-- `--color-focus-ring` is derived: `color-mix(in srgb, var(--color-focus) 15%, transparent)` (resolved in the 2026-07 color audit; previously the hardcoded duplicate `rgba(79,128,255,.15)`). It follows `--color-focus` as the single source of truth. Since `--color-focus` has no dark override, the resolved ring is the same in both themes — the derivation is about SSOT, not theme variation.
+- `--focus = var(--secondary-900) = #4F80FF`. It has **no dark mode override** — this is intentional: the focus ring provides a consistent accessibility signal regardless of theme.
+- `--focus-ring` is derived: `color-mix(in srgb, var(--focus) 15%, transparent)` (resolved in the 2026-07 color audit; previously the hardcoded duplicate `rgba(79,128,255,.15)`). It follows `--focus` as the single source of truth. Since `--focus` has no dark override, the resolved ring is the same in both themes — the derivation is about SSOT, not theme variation.
 
 **Approved exceptions — deliberate, and the only ones.** Anything not on this list and not matching
 A, B or C is a bug, and `validate-ds` check `[19]` fails on it.
 
 | Component | Form | Why it cannot be A, B or C |
 |---|---|---|
-| `toast.css` — `.snackbar-action`, `.snackbar-close` | outline `--color-inverse-primary`, offset 2px | The snackbar is an inverse surface. `--color-focus` on it does not reach AA; the inverse token is the same signal in the inverted palette |
+| `toast.css` — `.snackbar-action`, `.snackbar-close` | outline `--inverse-primary`, offset 2px | The snackbar is an inverse surface. `--focus` on it does not reach AA; the inverse token is the same signal in the inverted palette |
 | `alert.css` — `.alert-close` | outline `currentColor`, offset 2px | The alert ships in five tinted variants. `currentColor` follows the variant's own `on-container`, which is the only value guaranteed to contrast on all five |
-| `button.css` — `.btn-primary.btn-danger` | ring `color-mix(… --color-error 25% …)` | A destructive button's ring must not read as the ordinary interactive blue at the moment of confirming a destructive action |
+| `button.css` — `.btn-primary.btn-danger` | ring `color-mix(… --error 25% …)` | A destructive button's ring must not read as the ordinary interactive blue at the moment of confirming a destructive action |
 | `slider.css` — `.slider-input::-webkit-slider-thumb` / `::-moz-range-thumb` | ring only, on the thumb | A range input's thumb takes no outline. The input itself is `outline: none` and the thumb carries the 4px ring |
 | `dropdown-menu.css` — `.dropdown-item`; `navigation-menu.css` — `.nav-menu-link` | background highlight, `outline: none` | Menu items follow the ARIA APG roving-focus pattern: the highlight *is* the focus indicator. Note the open concern: today the highlight is identical to `:hover`, so focus and hover look the same |
 
 *(The previous "Known deviations to reconcile" table listed `form.css` and `description.css`. Both
-were aligned in September 2026 — `form.css` used the forbidden `--interactive` and a 3px ring;
+were aligned in September 2026 — `form.css` used the forbidden `--secondary` and a 3px ring;
 `description.css` used `:focus` and a 2px inset ring.)*
 
 ### 6.3 State layers — implementation contract
@@ -512,8 +511,8 @@ Los valores — px e interlineado de cada paso — viven en `css/variables.css` 
   - Un quinto motivo que aparezca no es una excepción todavía — es un token que falta. Escribilo en `variables.css` con el comentario que diga cuándo aplica, no en el componente.
 - **Una bajada es una bajada.** `card-desc`, `alert-description`, `modal-description`, `sheet-description`, `popover-description`, `item-description`, `toast-desc`, `radio-card-desc`, `checkbox-card-desc` son el mismo subcomponente en nueve carcasas distintas: todas usan `--font-size-body-sm` y su par. Antes usaban cinco tamaños y seis interlineados. La excepción es `empty-state-desc`, que va a `--font-size-body-lg` porque ahí la bajada **es** el contenido de la pantalla, no el apoyo de otra cosa.
 - Peso tipográfico vía tokens `--font-weight-*`: regular (400), medium (500), semibold (600), bold (700), extrabold (800).
-- El texto de página (encabezados Y cuerpo) usa `--text-primary` = `--primary-900` en claro (`#01164D`). Es azul de marca, no casi-negro. Si el texto renderiza `#0A0C12` (neutral-900 / `--color-on-surface`), se usó el token equivocado.
-- `--color-on-surface` es para contenido dentro de componentes (labels de botón, texto de chip, celdas de tabla), no para la tipografía de la página.
+- El texto de página (encabezados Y cuerpo) usa `--on-surface` = `--primary-900` en claro (`#01164D`). Es azul de marca, no casi-negro. Si el texto renderiza `#0A0C12` (neutral-900 / `--on-surface`), se usó el token equivocado.
+- `--on-surface` es para contenido dentro de componentes (labels de botón, texto de chip, celdas de tabla), no para la tipografía de la página.
 - Sentence case en labels de UI. Title case solo en encabezados de primer nivel y títulos de página.
 
 ---
@@ -565,7 +564,7 @@ Never add a sixth tab without a DS-wide decision. The Button component is the re
 - Table structure: `bt-tok-table` with columns **Token / Rol / Claro / Oscuro**.
 - Each row documents a CSS custom property reference. Computed CSS expressions (`filter: brightness()`, `color-mix()`, `translateY()`) are not tokens and must be labeled as implementation expressions in the `bt-tok-note` column.
 - When a token has no dark mode override, use `colspan="2"` for the combined light/dark cell and add a note: "sin variación en dark."
-- Show the primitive mapping for focus and disabled tokens to make the hierarchy chain explicit: `--color-focus = var(--secondary-900) · sin variación en dark`.
+- Show the primitive mapping for focus and disabled tokens to make the hierarchy chain explicit: `--focus = var(--secondary-900) · sin variación en dark`.
 - The section description must state that all tokens are **Embassy Color Roles** defined in `css/variables.css` — not MD3 tokens, not component-specific aliases.
 
 ### 10.5 Guidelines
@@ -597,12 +596,12 @@ Author as a self-contained flat-CSS file (see CLAUDE.md's "Adding a new componen
 
 - [ ] Header comment includes: description, `Cuándo usar`, `Cuándo no`, `Reemplaza a`, `Dependencia`, `Uso:` HTML snippet
 - [ ] Flat kebab-case classes; variants/sizes as additive modifier classes (`btn-primary btn-danger btn-sm`), never BEM
-- [ ] Zero raw hex — color via `var(--color-*)` role tokens
+- [ ] Zero raw hex — color via role tokens (`--primary`, `--surface`, …)
 - [ ] Zero arbitrary font sizes — use the scale (`var(--font-size-body-md)`, `var(--font-size-label)`, …)
 - [ ] Border radius uses `var(--radius-sm/md/lg/xl)`; for buttons, size-to-radius mapping matches §4.3 (same size = same radius for all variants)
 - [ ] Shadow uses `var(--shadow-sm/md/lg)`; font families use `var(--font-body)` / `var(--font-heading)` / `var(--font-mono)`
-- [ ] Focus: the canonical `:focus-visible` pattern (§6.2) — `--color-focus` outline + `--color-focus-ring` halo
-- [ ] Disabled: the canonical pattern (§5.3) — `--color-disabled` / `--color-on-disabled`
+- [ ] Focus: the canonical `:focus-visible` pattern (§6.2) — `--focus` outline + `--focus-ring` halo
+- [ ] Disabled: the canonical pattern (§5.3) — `--disabled` / `--on-disabled`
 - [ ] Hover / pressed states declared and consistent within the component
 - [ ] No `[data-theme="dark"]` override block in the component file (dark mode is automatic via the token layer recalibrating in `variables.css`)
 - [ ] No new token in `variables.css` for a single component's internal use — if a component-scoped custom-property tier is genuinely useful (see Segmented Button's `--seg-btn-*`), define it locally in the component's own file
@@ -643,7 +642,7 @@ See the Motion page (Styles) for the full token reference and transition-pattern
 
 - [ ] Color contrast ≥ 4.5:1 for normal text in both light and dark
 - [ ] Color contrast ≥ 3:1 for large text and UI components
-- [ ] Focus ring visible: `--color-focus` outline + `--color-focus-ring` ring
+- [ ] Focus ring visible: `--focus` outline + `--focus-ring` ring
 - [ ] Interactive elements have accessible names (`aria-label` or visible label)
 - [ ] Disabled state uses `disabled` attribute (not only visual styling) OR `aria-disabled="true"` + `pointer-events: none`
 - [ ] `role` and `aria-*` attributes documented in the Accessibility tab
@@ -673,21 +672,21 @@ These are documented deviations from the rules in this document. They exist in t
 
 | File | Inconsistency | Correct pattern | Priority |
 |---|---|---|---|
-| `form.css` | Uses `--interactive` (border) for focus, `:focus` not `:focus-visible`, 3px ring | `outline: 2px solid var(--color-focus)` on `:focus-visible`, 4px ring | High |
+| `form.css` | Uses `--secondary` (border) for focus, `:focus` not `:focus-visible`, 3px ring | `outline: 2px solid var(--focus)` on `:focus-visible`, 4px ring | High |
 | `description.css` | Inset focus ring, `:focus`, 2px only | Standard `:focus-visible` pattern | Medium |
 | `search.css` | `.search-bar:focus-within` uses only background color change — no ring | Add `outline` + `box-shadow` ring | High |
-| `toolbar.css` | `.search-field:focus-within` border gets **lighter** on focus — wrong direction | Add ring; border should darken or add `--color-outline` | High |
+| `toolbar.css` | `.search-field:focus-within` border gets **lighter** on focus — wrong direction | Add ring; border should darken or add `--outline` | High |
 
 ### 12.2 Token misuse
 
 **Resolved in the 2026-07 color audit.** The color-token misuses below were reconciled to the canonical patterns in §5 and no longer exist in the codebase:
 
-- `form.css` — disabled background `--color-surface-variant` → `--color-disabled` (§5.3).
-- `chip.css` — disabled state moved off the MD3 opacity model (38%/12% of `on-surface`) to Embassy's dedicated `--color-disabled` / `--color-on-disabled` (§5.3).
-- `variables.css` — `--color-focus-ring` is now derived, `color-mix(in srgb, var(--color-focus) 15%, transparent)` (§6.2), replacing the hardcoded duplicate `rgba(79,128,255,.15)`. Single source of truth: it now follows any change to `--color-focus` automatically. (The resolved value is unchanged and identical in both themes, since `--color-focus` intentionally has no dark override.)
-- `vacancy-card.css` / `person-card.css` — `.assignee-avatar` and `.person-avatar` gradients (raw primitives `--error-600`/`--secondary-900`/… + `--color-on-primary` text) replaced with semantic container pairs (`--color-{role}-container` + `--color-on-{role}-container`), matching the canonical Avatar. This also fixes the dark-mode contrast bug where `--color-on-primary` flipped to navy over a saturated fill.
-- `vacancy-card.css` — `.vacancy-icon` bg `--interactive-light` (shell alias) → `--color-secondary-container`; `.meta-dot` bg `--text-muted` (a text-role token) → `--color-outline-variant` (decorative separator role).
-- `description.css` — `.desc-delete-btn:hover` `--red-light` / `--red` aliases → `--color-error-container` / `--color-on-error-container`.
+- `form.css` — disabled background `--surface-variant` → `--disabled` (§5.3).
+- `chip.css` — disabled state moved off the MD3 opacity model (38%/12% of `on-surface`) to Embassy's dedicated `--disabled` / `--on-disabled` (§5.3).
+- `variables.css` — `--focus-ring` is now derived, `color-mix(in srgb, var(--focus) 15%, transparent)` (§6.2), replacing the hardcoded duplicate `rgba(79,128,255,.15)`. Single source of truth: it now follows any change to `--focus` automatically. (The resolved value is unchanged and identical in both themes, since `--focus` intentionally has no dark override.)
+- `vacancy-card.css` / `person-card.css` — `.assignee-avatar` and `.person-avatar` gradients (raw primitives `--error-600`/`--secondary-900`/… + `--on-primary` text) replaced with semantic container pairs (`--{role}-container` + `--on-{role}-container`), matching the canonical Avatar. This also fixes the dark-mode contrast bug where `--on-primary` flipped to navy over a saturated fill.
+- `vacancy-card.css` — `.vacancy-icon` bg `--secondary-container` (shell alias) → `--secondary-container`; `.meta-dot` bg `--on-surface-variant` (a text-role token) → `--outline-variant` (decorative separator role).
+- `description.css` — `.desc-delete-btn:hover` `--error-container` / `--error` aliases → `--error-container` / `--on-error-container`.
 - Hover-uses-`var(--bg)` (`vacancy-card`, `toolbar`, `modal`, `toast`) — reconciled in an earlier pass; no `var(--bg)` hover remains.
 
 **Still open:**
@@ -720,8 +719,8 @@ These are documented deviations from the rules in this document. They exist in t
 |---|---|---|---|
 | Shadows (no dark mode) | `--shadow-sm/md/lg` (`css/variables.css`) have no `[data-theme="dark"]` override — nearly invisible on dark surfaces. Post-revert, components consume `box-shadow: var(--shadow-sm)` directly (no Tailwind inlining in the way anymore), so fixing this is now just adding a `[data-theme="dark"]` override block for the three tokens in `variables.css` — no runtime-var workaround needed. `--btn-elevation`/`--btn-elevation-hover` (2026-07, the Elevated Button's theme-aware elevation token) already does exactly this — a real dark-mode value defined alongside the light one — and is the reference pattern to extend to Card/Dialog/etc. shadows. | Medium |
 | Icon button fragmentation | 5 separate icon-button implementations (`.icon-btn`, `.modal-close`, `.more-btn`, `.desc-delete-btn`, `.toast-close`) with inconsistent sizes (36/32/28/28/24px) and tokens | Extend `.icon-btn` with `ghost` modifier; standardize all to use it | High |
-| Clickable card hover inconsistency | 4 different hover strategies across vacancy-card, person-card, kanban-card, data-table rows | Standard: `border → --color-outline-variant` + `box-shadow: var(--shadow-md)` + `transform: translateY(-1px)` | Medium |
-| Avatar container fragmentation | **Color reconciled (2026-07 audit):** all three avatar surfaces (`avatar.css`, `person-card.css`, `vacancy-card.css`) now use semantic container pairs — the primitive gradient and the `--interactive-light` alias bg are gone. **Still open (structural, not color):** the three still declare their own size rules rather than sharing one pattern with size tokens. | Define shared avatar pattern with 3 size tokens | Medium |
+| Clickable card hover inconsistency | 4 different hover strategies across vacancy-card, person-card, kanban-card, data-table rows | Standard: `border → --outline-variant` + `box-shadow: var(--shadow-md)` + `transform: translateY(-1px)` | Medium |
+| Avatar container fragmentation | **Color reconciled (2026-07 audit):** all three avatar surfaces (`avatar.css`, `person-card.css`, `vacancy-card.css`) now use semantic container pairs — the primitive gradient and the `--secondary-container` alias bg are gone. **Still open (structural, not color):** the three still declare their own size rules rather than sharing one pattern with size tokens. | Define shared avatar pattern with 3 size tokens | Medium |
 | Kanban count pill vs Badge | Count pill is a one-off that duplicates badge functionality with different tokens | Add `badge-neutral` variant; use it instead of custom `.count` | Low |
 | Raw transition values | `.1s` used instead of `var(--duration-fast)` in `button.css`, `more-btn`, `kanban.css`, `vacancy-card.css` | Always `var(--duration-fast) var(--ease-default)` | Medium |
 
@@ -849,7 +848,7 @@ Below `--breakpoint-md` (768px) the persistent sidebar becomes a **modal navigat
 | **< 768px** | Off-canvas (`translateX(-100%)`), slides in over a scrim when the shell root has `.nav-open` | Full-width (`margin-left: 0`) | `.shell-menu-btn` hamburger in the topbar |
 
 **Rules**
-- Implemented in `layout.css`: `.shell-menu-btn` (hamburger, hidden ≥768, ≥44px target, first in `.topbar`), `.sidebar-scrim` (fixed scrim at `z-index:9`, uses `--color-scrim`), and `@media (max-width:768px)` rules that take the sidebar off-canvas and slide it in on `.app.nav-open`. Media queries use the literal `768px` (`@media` can't read `var()`).
+- Implemented in `layout.css`: `.shell-menu-btn` (hamburger, hidden ≥768, ≥44px target, first in `.topbar`), `.sidebar-scrim` (fixed scrim at `z-index:9`, uses `--scrim`), and `@media (max-width:768px)` rules that take the sidebar off-canvas and slide it in on `.app.nav-open`. Media queries use the literal `768px` (`@media` can't read `var()`).
 - Motion uses `--duration-medium`/`--ease-default`; a `prefers-reduced-motion` block drops the slide.
 - The drawer is **modal** on compact: it overlays content on a scrim, does not push it.
 - **Accessibility (required):** the hamburger has `aria-label`, `aria-expanded`, and `aria-controls` pointing at the sidebar (`role="navigation"`); opening moves focus into the drawer; `Esc` and a scrim click close it; focus returns to the hamburger on close. Same contract as `Sheet`/`Dialog`.
@@ -954,7 +953,7 @@ A client brand replaces the **primitive palette** — the top layer of `variable
 ```
 Client brand overrides:  primitives (--primary-*, --secondary-*, radii, fonts)
                               ↓
-Embassy provides:        Color Roles (--color-primary, --color-secondary-container…)
+Embassy provides:        Color Roles (--primary, --secondary-container…)
                               ↓
 Embassy provides:        Component CSS (button.css, badge.css…) — unchanged
                               ↓
@@ -972,7 +971,7 @@ Result:                  Fully branded product
 | Radius personality | ✅ Yes | `--radius-sm/md/lg/xl` |
 | Font families | ✅ Yes (with license) | `--font-heading`, `--font-body`, `--font-mono` |
 | Shadows | ⚠️ Caution | Only if brand elevation feels differ |
-| Semantic Color Roles (`--color-primary`, etc.) | ❌ Never | These are derived from primitives |
+| Semantic Color Roles (`--primary`, etc.) | ❌ Never | These are derived from primitives |
 | Component CSS files | ❌ Never | Touching component files breaks portability |
 | Token names | ❌ Never | All DS token names are stable identifiers |
 
@@ -994,7 +993,7 @@ After applying a brand theme:
 - [ ] Render in dark mode (`data-theme="dark"`): automatic recalibration working
 - [ ] No `[data-theme="dark"]` blocks in the brand theme file (if there are, a semantic role token was overridden instead of a primitive)
 - [ ] All component states (hover, focus, disabled, error) still visually distinct
-- [ ] Focus ring (`--color-focus`) still visible — it does not change with brand colors by design
+- [ ] Focus ring (`--focus`) still visible — it does not change with brand colors by design
 - [ ] Run the MIGRATION.md verification checklist against any product that consumes the theme
 
 ---
@@ -1053,7 +1052,7 @@ Embassy targets **WCAG 2.1 Level AA** compliance for all components. Level AAA t
 | Focus ring against adjacent surface | 3:1 | WCAG 2.4.11 (AA) |
 | Disabled state | No requirement (non-interactive) | — |
 
-Primary text token (`--text-primary = #01164D`) on light background (`--bg ≈ #F8F9FA`) achieves ~14:1. On dark background, `--neutral-50` on `--primary-900` achieves ~15:1.
+Primary text token (`--on-surface = #01164D`) on light background (`--bg ≈ #F8F9FA`) achieves ~14:1. On dark background, `--neutral-50` on `--primary-900` achieves ~15:1.
 
 **When applying a white-label brand:** verify primary/secondary palette contrast ratios with the client's specific hex values. Do not assume they pass — measure them.
 
@@ -1218,7 +1217,7 @@ class on the same `.toolbar` container:
   pattern as Segmented Button's `--seg-btn-*`) and **re-skins its children in-place, strictly scoped
   to `.toolbar-filters`**: it repoints `.select-trigger` / `.date-picker-trigger` / `.seg-btn-group`
   to the shared field. **Selects use the official Select unchanged**; the **Segmented Button keeps its
-  selected-segment primary state** (`--color-secondary-container`) and **each segment keeps its own
+  selected-segment primary state** (`--secondary-container`) and **each segment keeps its own
   focus ring** — only the *container* adopts the field. **It must not change the standalone Segmented
   Button, Calendar/Date Picker or Select** (§2); the re-skin never leaks outside `.toolbar-filters`.
 - **`.toolbar-selection`** — bulk-actions variant shown when items are selected (tinted surface, count,
@@ -1295,8 +1294,8 @@ Everything else: Tonal.
 Any flow that destroys/irreversibly changes data (delete, discard, revoke) uses **one canonical
 pattern**, everywhere (Alert Dialog, Dialog, Sheet, confirmation flows):
 
-- **Destructive action** → `Button variant="danger"` (Embassy **Error** tokens: `--color-error` /
-  `--color-on-error`). Never a plain `primary` for a destructive confirm. `AlertDialogAction` takes
+- **Destructive action** → `Button variant="danger"` (Embassy **Error** tokens: `--error` /
+  `--on-error`). Never a plain `primary` for a destructive confirm. `AlertDialogAction` takes
   `variant="danger"`.
 - **Cancel** → `tertiary` (Outlined), per §20.1 — and it should be the **safe default focus**.
 - The **confirm must be explicit** (Alert Dialog: no close-on-outside/Esc-to-confirm; Esc = Cancel).

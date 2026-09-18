@@ -13,7 +13,7 @@ Embassy's token system has three layers:
 ```
 Layer 1 — Primitives       --primary-900, --secondary-500, --radius-md, --font-heading
                                ↓ (consumed by)
-Layer 2 — Color Roles      --color-primary, --color-secondary-container, --color-error
+Layer 2 — Color Roles      --primary, --secondary-container, --error
                                ↓ (consumed by)
 Layer 3 — Components       button.css, badge.css, card.css … (never touched)
 ```
@@ -50,7 +50,7 @@ Create `brand/<client-slug>-theme.css`. Load it **after** `variables.css` and **
 
 ### 2.1 Primary palette (most impactful)
 
-The primary palette drives primary buttons, focused inputs, links, navigation active states, focus rings, and all `--color-primary-*` roles.
+The primary palette drives primary buttons, focused inputs, links, navigation active states, focus rings, and all `--primary-*` roles.
 
 ```css
 :root {
@@ -69,7 +69,7 @@ The primary palette drives primary buttons, focused inputs, links, navigation ac
   --primary-900: #041f7a;  /* ← darkest — page headings, sidebar bg */
 
   /* Required by the role layer — do NOT omit these two: */
-  --primary-60:  #dfe7ff;  /* ← --color-primary-container (light) */
+  --primary-60:  #dfe7ff;  /* ← --primary-container (light) */
   --primary-75:  #d6dbe8;  /* light grey-navy with body */
 }
 ```
@@ -78,13 +78,13 @@ The primary palette drives primary buttons, focused inputs, links, navigation ac
 
 | Role | Light | Dark |
 |---|---|---|
-| `--color-primary` | `--primary-900` | white (fixed) |
-| `--color-on-primary` | white (fixed) | `--primary-900` |
-| `--color-primary-container` | **`--primary-60`** | `--primary-400` |
-| `--color-on-primary-container` | `--primary-900` | `--primary-50` |
-| `--color-primary-hover` | `--primary-700` | `--primary-50` |
-| `--text-primary` | `--primary-900` | neutral (fixed) |
-| `--interactive-hover` | `--primary-500` | `--primary-200` |
+| `--primary` | `--primary-900` | white (fixed) |
+| `--on-primary` | white (fixed) | `--primary-900` |
+| `--primary-container` | **`--primary-60`** | `--primary-400` |
+| `--on-primary-container` | `--primary-900` | `--primary-50` |
+| `--primary-hover` | `--primary-700` | `--primary-50` |
+| `--on-surface` | `--primary-900` | neutral (fixed) |
+| `--primary-500` | `--primary-500` | `--primary-200` |
 
 So **`--primary-900` is the step that carries the brand** for page text, sidebar and filled primary — it has to be dark enough to hold white text at 4.5:1. If the brand's signature color is a bright one (an orange, a lime), it belongs in the **secondary** palette (the interactive accent), and `--primary` takes the brand's dark neutral.
 
@@ -99,7 +99,7 @@ It derives every tint from one hex per palette, following Embassy's own OKLCH li
 
 ### 2.2 Secondary / accent palette
 
-The secondary palette drives chips, tabs, interactive highlights, and `--color-secondary-*` roles.
+The secondary palette drives chips, tabs, interactive highlights, and `--secondary-*` roles.
 
 ```css
 :root {
@@ -112,15 +112,15 @@ The secondary palette drives chips, tabs, interactive highlights, and `--color-s
   --secondary-600: #16a34a;
   --secondary-700: #15803d;
   --secondary-800: #166534;
-  --secondary-900: #14532d;  /* ← --color-secondary: the interactive accent */
+  --secondary-900: #14532d;  /* ← --secondary: the interactive accent */
 
   /* Required by the role layer in dark mode — do NOT omit: */
-  --secondary-925: #1b6b3c;  /* ← --color-secondary-container (dark) */
-  --secondary-950: #12401f;  /* ← --color-on-secondary (dark) */
+  --secondary-925: #1b6b3c;  /* ← --secondary-container (dark) */
+  --secondary-950: #12401f;  /* ← --on-secondary (dark) */
 }
 ```
 
-**Which step each role consumes:** `--color-secondary` = `--secondary-900` (white text sits on it, so it needs 4.5:1) · `--color-secondary-container` = `--secondary-200` in light and `--secondary-925` in dark · `--color-on-secondary-container` = `--primary-900` in light and `--secondary-100` in dark.
+**Which step each role consumes:** `--secondary` = `--secondary-900` (white text sits on it, so it needs 4.5:1) · `--secondary-container` = `--secondary-200` in light and `--secondary-925` in dark · `--on-secondary-container` = `--primary-900` in light and `--secondary-100` in dark.
 
 ### 2.3 Radius personality
 
@@ -203,7 +203,7 @@ Do not override `--font-size-*` tokens — the type scale is design-validated an
 
 ### 2.5 Neutral palette (caution)
 
-The neutral palette drives surfaces, borders, disabled states, and `--color-surface-*` roles. Most brands share a gray scale — change it only if the client has mandated warm/cool grays:
+The neutral palette drives surfaces, borders, disabled states, and `--surface-*` roles. Most brands share a gray scale — change it only if the client has mandated warm/cool grays:
 
 ```css
 :root {
@@ -264,8 +264,8 @@ Copy this template and fill in the client brand values:
   --primary-600: ;
   --primary-700: ;
   --primary-800: ;
-  --primary-900: ;    /* ← headings, sidebar bg — --color-primary */
-  --primary-60:  ;    /* ← --color-primary-container (light) — REQUIRED */
+  --primary-900: ;    /* ← headings, sidebar bg — --primary */
+  --primary-60:  ;    /* ← --primary-container (light) — REQUIRED */
   --primary-75:  ;
 
   /* ── Secondary / accent palette ─────── */
@@ -278,9 +278,9 @@ Copy this template and fill in the client brand values:
   --secondary-600: ;
   --secondary-700: ;
   --secondary-800: ;
-  --secondary-900: ;   /* ← --color-secondary (the interactive accent) */
-  --secondary-925: ;   /* ← --color-secondary-container (dark) — REQUIRED */
-  --secondary-950: ;   /* ← --color-on-secondary (dark) — REQUIRED */
+  --secondary-900: ;   /* ← --secondary (the interactive accent) */
+  --secondary-925: ;   /* ← --secondary-container (dark) — REQUIRED */
+  --secondary-950: ;   /* ← --on-secondary (dark) — REQUIRED */
 
   /* ── Radius personality ─────────────── */
   --radius-sm: 4px;   /* tags, XS/SM buttons */
@@ -310,7 +310,7 @@ Run all of these before shipping. They all must pass.
 ### 4.1 Light mode
 
 - [ ] Page headings render in primary-900 (brand navy), not black
-- [ ] Primary buttons use the client's primary color with readable text (`--color-on-primary`)
+- [ ] Primary buttons use the client's primary color with readable text (`--on-primary`)
 - [ ] Chips, tabs, active nav items use the secondary accent color
 - [ ] Cards and panels have visible borders
 - [ ] All text meets 4.5:1 contrast against its background
@@ -325,8 +325,8 @@ Run all of these before shipping. They all must pass.
 - [ ] Brand palettes reach dark mode. Since 2026-09 the `[data-theme="dark"]` block references
       `var(--primitive)` for the primary / secondary / tertiary / status families, so overriding
       primitives propagates to both themes. Verify it: with the brand file loaded, set
-      `data-theme="dark"` and confirm `--color-primary-container`, `--color-secondary` and
-      `--color-secondary-container` resolve to brand values, not Embassy's navy and blue.
+      `data-theme="dark"` and confirm `--primary-container`, `--secondary` and
+      `--secondary-container` resolve to brand values, not Embassy's navy and blue.
       (Neutral-derived tokens — surfaces, outline, disabled, text — stay literal on purpose.)
 - [ ] `--primary-400`, `--primary-50`, `--secondary-300`, `--secondary-925` and `--secondary-950`
       are defined in the brand file: dark mode consumes those steps
@@ -344,7 +344,7 @@ file, re-hueing those same surfaces to the brand's hue at the **same L and the s
 changes is whose tint it is, not how much tint there is.
 
 - [ ] The block covers surfaces, outline, disabled and inverse-on-surface **only**. Text greys
-      (`--color-on-surface*`, `--text-*`) stay neutral on purpose: they have to read the same on
+      (`--on-surface*`, `--text-*`) stay neutral on purpose: they have to read the same on
       every brand
 - [ ] Every value carries its Embassy original in a comment, so the swap is auditable
 - [ ] The generator's contrast report shows the dark pairs passing AA (re-hueing preserves L, so
@@ -355,7 +355,7 @@ changes is whose tint it is, not how much tint there is.
 ### 4.3 Component states
 
 - [ ] Hover state visually distinct from default
-- [ ] Focus ring visible (`--color-focus` is intentionally NOT brand-colored — it stays at Embassy blue for accessibility consistency)
+- [ ] Focus ring visible (`--focus` is intentionally NOT brand-colored — it stays at Embassy blue for accessibility consistency)
 - [ ] Pressed/active state distinct from hover
 - [ ] Error states still red (unless brand has mandated custom error color)
 
@@ -377,9 +377,9 @@ These are the most common white-label mistakes:
 ```css
 /* WRONG — breaks the token hierarchy */
 :root {
-  --color-primary: #2d6db4;              /* semantic role — never override */
-  --color-surface-container: #f0f4fa;    /* semantic role — never override */
-  --text-primary: #1a1a1a;              /* semantic alias — never override */
+  --primary: #2d6db4;              /* semantic role — never override */
+  --surface-container: #f0f4fa;    /* semantic role — never override */
+  --on-surface: #1a1a1a;              /* semantic alias — never override */
 }
 ```
 
@@ -390,7 +390,7 @@ Why: overriding roles means the dark mode recalibration can't work — the `[dat
 ```css
 /* WRONG */
 [data-theme="dark"] {
-  --color-primary: #90b8ff;  /* dark mode override in brand file */
+  --primary: #90b8ff;  /* dark mode override in brand file */
 }
 ```
 
@@ -405,12 +405,12 @@ by `build-brand-theme.mjs`, never by hand, and it touches surfaces, outline and 
 ```css
 /* WRONG — alias bridge that re-maps DS tokens */
 :root {
-  --brand-primary: var(--color-primary);     /* shadow token */
-  --brand-surface: var(--card-bg);           /* shadow token */
+  --brand-primary: var(--primary);     /* shadow token */
+  --brand-surface: var(--surface-container);           /* shadow token */
 }
 ```
 
-Then using `--brand-primary` in component overrides. This creates invisible token drift — when DS updates `--color-primary`, your `--brand-primary` follows, but nobody reading the brand file knows why components look different.
+Then using `--brand-primary` in component overrides. This creates invisible token drift — when DS updates `--primary`, your `--brand-primary` follows, but nobody reading the brand file knows why components look different.
 
 ### ❌ Editing component CSS files
 
@@ -474,6 +474,6 @@ This single file — ~30 lines — transforms all Embassy buttons, badges, cards
 
 ## About the focus ring
 
-`--color-focus` (the keyboard focus outline) is intentionally **not** tied to the brand primary color. It stays at Embassy blue (`#4F80FF`) regardless of brand. This is a deliberate accessibility decision: focus indicators must be distinguishable from surrounding brand color, and using the brand primary as the focus color creates contrast failures when the primary and surface colors are similar.
+`--focus` (the keyboard focus outline) is intentionally **not** tied to the brand primary color. It stays at Embassy blue (`#4F80FF`) regardless of brand. This is a deliberate accessibility decision: focus indicators must be distinguishable from surrounding brand color, and using the brand primary as the focus color creates contrast failures when the primary and surface colors are similar.
 
-If a client explicitly requires a branded focus color, verify that the chosen color achieves at least 3:1 contrast against all surfaces in the product (WCAG 2.4.11). Override `--color-focus` in the brand theme file only if this requirement is met.
+If a client explicitly requires a branded focus color, verify that the chosen color achieves at least 3:1 contrast against all surfaces in the product (WCAG 2.4.11). Override `--focus` in the brand theme file only if this requirement is met.

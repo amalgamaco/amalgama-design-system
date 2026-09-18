@@ -7,16 +7,16 @@ wins — fix this doc, not the CSS.
 
 **The one rule that governs everything (from CLAUDE.md — "Tokens are the law"):**
 
-- All color via `var(--color-*)` or a semantic alias (`--accent`, `--bg`, `--border`); radii via
+- All color via `var(--<role>)` — `--primary`, `--surface`, `--on-surface`, `--border`; radii via
   `var(--radius-*)`; shadows via `var(--shadow-*)`; spacing via `var(--space-*)`; every `font-size`
   via a `--font-size-*` token. **Never a raw hex, never a loose px.**
 - **Consume SEMANTIC ROLES, never PRIMITIVES, in product/component code.** Primitives
   (`--neutral-*`, `--primary-*`, `--secondary-*`, `--tertiary-*`, `--success-*`, `--error-*`,
   `--warning-*`, `--info-*`) are the raw palette — they are the *input* to the semantic roles and
   must not be referenced directly outside `variables.css`. A component that uses `--primary-900`
-  instead of `--color-primary` breaks dark mode, because only the
-  `--color-*` layer recalibrates under `[data-theme="dark"]`.
-- **Dark mode is automatic.** Set `data-theme="dark"` on `<html>`; the semantic `--color-*` layer
+  instead of `--primary` breaks dark mode, because only the
+  los roles semánticos layer recalibrates under `[data-theme="dark"]`.
+- **Dark mode is automatic.** Set `data-theme="dark"` on `<html>`; the semantic los roles semánticos layer
   recalibrates itself. Components need **zero** per-theme overrides. (See "Dark mode" at the end.)
 
 ---
@@ -25,20 +25,19 @@ wins — fix this doc, not the CSS.
 
 These are the tonal ramps. **Do not consume them in component or product code** — they exist only
 to feed the semantic roles in §2. Referencing a primitive directly is the single most common way to
-break theming. The correct alternative is always the matching `--color-*` role.
+break theming. The correct alternative is always the matching los roles semánticos role.
 
 | Group (token pattern) | Steps present | Purpose | Use directly? |
 |---|---|---|---|
 | `--neutral-*` | `10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, black, white` | Greyscale ramp feeding surfaces, text, borders, disabled. | **No** — use surface / text / outline / disabled roles. |
-| `--primary-*` (navy) | `50, 60, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900` | Brand navy; feeds the Primary role. `--primary-60` = periwinkle Primary Container (light). | **No** — use `--color-primary*`. |
-| `--secondary-*` (agile/periwinkle blue) | `10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 925, 950` | Interactive accent (links/nav/focus) + Secondary tonal role. `925`/`950` are dark-mode container/on values. | **No** — use `--color-secondary*` / `--interactive` / `--color-focus`. |
-| `--tertiary-*` (purple/violet) | `50–900` + `950` | Purple accent family. | **No** — use `--color-tertiary*`. |
-| `--success-*` | `50–900` + `950, 975` | Green status ramp. | **No** — use `--color-success*` / `--green*`. |
-| `--error-*` | `50–900` + `950, 975` | Red status ramp. | **No** — use `--color-error*` / `--red*`. |
-| `--warning-*` | `50, 100, 200, 500, 600, 700, 800, 900` + `925, 950, 975` (no `300`/`400`) | Amber status ramp. | **No** — use `--color-warning*` / `--yellow*`. |
-| `--info-*` | `50–900` + `950` | Blue status ramp. | **No** — use `--color-info*` / `--blue*`. |
-| `--accent-*` (brand) | `hot-pink, chelo-yellow, kika-green, pink-sebiche, sky, lime` | The Manual de Marca accents. **Single values, not ramps** — the Manual defines one value per accent, not ten, so they carry no step number. | **No** — use `--color-accent-*` (§2a-bis). |
-| `--ink` | — | The Manual's charcoal for long-form prose. Not a step of the neutral ramp: a different hue. | **No** — use `--text-prose`. |
+| `--primary-*` (navy) | `50, 60, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900` | Brand navy; feeds the Primary role. `--primary-60` = periwinkle Primary Container (light). | **No** — use `--primary*`. |
+| `--secondary-*` (agile/periwinkle blue) | `10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 925, 950` | Interactive accent (links/nav/focus) + Secondary tonal role. `925`/`950` are dark-mode container/on values. | **No** — use `--secondary*` / `--secondary` / `--focus`. |
+| `--tertiary-*` (purple/violet) | `50–900` + `950` | Purple accent family. | **No** — use `--tertiary*`. |
+| `--success-*` | `50–900` + `950, 975` | Green status ramp. | **No** — use `--success*` / `--success*`. |
+| `--error-*` | `50–900` + `950, 975` | Red status ramp. | **No** — use `--error*` / `--error*`. |
+| `--warning-*` | `50, 100, 200, 500, 600, 700, 800, 900` + `925, 950, 975` (no `300`/`400`) | Amber status ramp. | **No** — use `--warning` / `--warning-container`. |
+| `--info-*` | `50–900` + `950` | Blue status ramp. | **No** — use `--info` / `--info-container`. |
+| `--accent-*` (brand) | `hot-pink, chelo-yellow, kika-green, pink-sebiche, sky, lime` | The Manual de Marca accents. **Single values, not ramps** — the Manual defines one value per accent, not ten, so they carry no step number. | **No** — use the `--accent-*` roles (§2a-bis). |
 
 ### 1a. Where this ramp differs from the Figma Baseline
 
@@ -57,28 +56,49 @@ names `warning-600`. It had no consumers and was renamed to `--warning-600`; the
 
 ---
 
-## 2. Color — semantic roles (`--color-*`) — CONSUME THESE
+## 2. Color — semantic roles — CONSUME THESE
+
+### The name of a role is the role, with nothing in front of it
+
+`--surface`, `--primary`, `--on-surface`, `--outline`, `--focus`. **Not** `--color-surface`.
+
+Until sep-2026 every role carried a `--color-` prefix. It was retired because the system's
+reference is Material Design, and Material names the role and nothing else: `md.sys.color.surface`
+is written `--surface` once you drop the namespace, and there is no Embassy reason to keep a
+namespace that says only "this is a colour" — which the name already says. The prefix also made the
+token table read as a wall of the same nine characters, and it is what let a second, unprefixed
+vocabulary (`--bg`, `--card-bg`, `--interactive`) grow beside the roles without looking like a
+duplicate.
+
+The rename touched 4153 references and **changed no value**: all 630 token×theme pairs were
+resolved before and after and diffed. `--color-` is now a retired prefix, and `validate-ds` check
+`[2]` fails on any new occurrence of it.
+
+Primitives keep their family name (`--primary-900`, `--neutral-100`), so a role and its primitive
+never collide: `--primary` and `--primary-900` are two different custom properties. The three brand
+accents were the one real collision — the role is `--accent-hot-pink`, the primitive is
+`--palette-accent-hot-pink`.
 
 The usage layer. Every one is theme-aware (recalibrated in `[data-theme="dark"]`). Each accent
-comes as a **quartet**: main (`--color-X`), on-main (`--color-on-X`), container (tonal recessive
+comes as a **quartet**: main (`--X`), on-main (`--on-X`), container (tonal recessive
 surface), on-container (text on that container). **Pair `X` with `on-X`, and `X-container` with
-`on-X-container`** — never mix tiers (e.g. text set to `--color-on-primary` on a
-`--color-primary-container` background will fail contrast).
+`on-X-container`** — never mix tiers (e.g. text set to `--on-primary` on a
+`--primary-container` background will fail contrast).
 
 ### 2a. Brand / accent roles
 
 | Token | Purpose | When to use | When NOT to use → alternative |
 |---|---|---|---|
-| `--color-primary` | Highest-emphasis brand fill. | The one Primary CTA per context (filled button, FAB). | Body/heading text → `--color-on-surface`. Note: in dark it flips to **white**, so selected controls read white. |
-| `--color-on-primary` | Text/icon on `--color-primary`. | Label inside a filled Primary button. | On any other surface. |
-| `--color-primary-container` | Tonal navy surface (lower emphasis than filled). | Elevated/tonal button bg, selected nav pill backing. | As a page background → surface tiers. |
-| `--color-on-primary-container` | Text on primary container. | Label on a `-container` surface. | — |
-| `--color-primary-hover` | Primary hover state. | `:hover` of Primary fills. | Static fills → `--color-primary`. |
-| `--color-secondary` | Interactive accent (agile blue). | Links, active nav/tabs, focus accents (via `--interactive`). | A second filled CTA competing with Primary. |
-| `--color-on-secondary` | Text on `--color-secondary`. | — | — |
-| `--color-secondary-container` | Light tonal blue (inverts vs Primary: light bg + navy text). | Secondary/tonal button, selected chip, nav-selected backing. | When you need a *neutral* recessive button — that's still this token today (Button Secondary consumes it directly). |
-| `--color-on-secondary-container` | Navy text on secondary container. | Chip/segmented selected label. | — |
-| `--color-tertiary` / `-on-tertiary` / `-tertiary-container` / `-on-tertiary-container` | Purple accent quartet. | Tertiary-purple accents, `badge-tertiary`. | As a status color — use success/warning/error/info. |
+| `--primary` | Highest-emphasis brand fill. | The one Primary CTA per context (filled button, FAB). | Body/heading text → `--on-surface`. Note: in dark it flips to **white**, so selected controls read white. |
+| `--on-primary` | Text/icon on `--primary`. | Label inside a filled Primary button. | On any other surface. |
+| `--primary-container` | Tonal navy surface (lower emphasis than filled). | Elevated/tonal button bg, selected nav pill backing. | As a page background → surface tiers. |
+| `--on-primary-container` | Text on primary container. | Label on a `-container` surface. | — |
+| `--primary-hover` | Primary hover state. | `:hover` of Primary fills. | Static fills → `--primary`. |
+| `--secondary` | Interactive accent (agile blue). | Links, active nav/tabs, focus accents (via `--secondary`). | A second filled CTA competing with Primary. |
+| `--on-secondary` | Text on `--secondary`. | — | — |
+| `--secondary-container` | Light tonal blue (inverts vs Primary: light bg + navy text). | Secondary/tonal button, selected chip, nav-selected backing. | When you need a *neutral* recessive button — that's still this token today (Button Secondary consumes it directly). |
+| `--on-secondary-container` | Navy text on secondary container. | Chip/segmented selected label. | — |
+| `--tertiary` / `-on-tertiary` / `-tertiary-container` / `-on-tertiary-container` | Purple accent quartet. | Tertiary-purple accents, `badge-tertiary`. | As a status color — use success/warning/error/info. |
 
 ### 2a-bis. Brand accents (`--accent-*`) — the Manual de Marca palette
 
@@ -87,102 +107,103 @@ rules are part of the token** — honour them or the token is being misused. Ful
 
 | Role (consume this) | Primitive · value | Rules |
 |---|---|---|
-| `--color-accent-hot-pink` | `--accent-hot-pink` `#FE566A` | Sanctioned. The most-used accent of the Manual. Not `--color-error` — that means *error*. |
-| `--color-accent-chelo-yellow` | `--accent-chelo-yellow` `#FFC700` | Sanctioned. **Never on blue or light blue** — *no todos somos hinchas de Boca :)* |
-| `--color-accent-kika-green` | `--accent-kika-green` `#67B9A4` | Sanctioned. Not the success green. |
-| `--color-on-accent` | `--primary-900` | Text/icon on any of the three. **White fails AA on all of them** (3.09:1 on the pink, 2.34:1 on the green). |
-| *(no role)* | `--accent-pink-sebiche` `#F1A7A3` | Documented, **not sanctioned** — registered so nobody reinvents it. No role, so nothing can consume it by accident. |
-| *(no role)* | `--accent-sky` `#49A4FF` | Documented, not sanctioned. Sits close to `--chart-1`; in a chart use the chart token. |
-| *(no role)* | `--accent-lime` `#E0FF4F` | Documented, not sanctioned. Appears once in the Manual, as a highlight. |
+| `--accent-hot-pink` | `--palette-accent-hot-pink` `#FE566A` | Sanctioned. The most-used accent of the Manual. Not `--error` — that means *error*. |
+| `--accent-chelo-yellow` | `--palette-accent-chelo-yellow` `#FFC700` | Sanctioned. **Never on blue or light blue** — *no todos somos hinchas de Boca :)* |
+| `--accent-kika-green` | `--palette-accent-kika-green` `#67B9A4` | Sanctioned. Not the success green. |
+| `--on-accent` | `--primary-900` | Text/icon on any of the three. **White fails AA on all of them** (3.09:1 on the pink, 2.34:1 on the green). |
+| *(no role)* | `--palette-accent-pink-sebiche` `#F1A7A3` | Documented, **not sanctioned** — registered so nobody reinvents it. No role, so nothing can consume it by accident. |
+| *(no role)* | `--palette-accent-sky` `#49A4FF` | Documented, not sanctioned. Sits close to `--chart-1`; in a chart use the chart token. |
+| *(no role)* | `--palette-accent-lime` `#E0FF4F` | Documented, not sanctioned. Appears once in the Manual, as a highlight. |
 
 The three sanctioned accents **do not recalibrate in dark**: they are brand colour, not surface, and
-the pair with `--color-on-accent` already passes in both themes.
+the pair with `--on-accent` already passes in both themes.
 
 Across any one composition: **at most two accents**, one if it is type. An accent is never a
 dominant background and never body copy.
 
 ### 2b. Status roles (success / warning / error / info)
 
-Same quartet shape. Each also has a `--color-X-hover` for success/error. **Status = meaning, not
+Same quartet shape. Each also has a `--X-hover` for success/error. **Status = meaning, not
 decoration** — do not use a status color just because you like the hue.
 
 | Token family | Purpose | When to use | When NOT to use → alternative |
 |---|---|---|---|
-| `--color-success` + `-on-success` + `-success-container` + `-on-success-container` + `--color-success-hover` | Positive/confirmation. | Success alerts, "open"/"active" badges, positive stat trend. | Neutral confirmation with no valence → neutral surface. |
-| `--color-warning` + `-on-warning` + `-warning-container` + `-on-warning-container` | Caution (non-blocking). | Warning alerts, draft/pending badges. `--color-on-warning` is dark (navy/near-black) because warning is a light hue. | Hard errors → error family. |
-| `--color-error` + `-on-error` + `-error-container` + `-on-error-container` + `--color-error-hover` | Destructive / invalid. | Error alerts, `is-error` inputs, destructive buttons. | Warnings/cautions → warning family. |
-| `--color-info` + `-on-info` + `-info-container` + `-on-info-container` | Neutral informational. | Info alerts/badges. | Interactive accent (links) → `--color-secondary`. |
+| `--success` + `-on-success` + `-success-container` + `-on-success-container` + `--success-hover` | Positive/confirmation. | Success alerts, "open"/"active" badges, positive stat trend. | Neutral confirmation with no valence → neutral surface. |
+| `--warning` + `-on-warning` + `-warning-container` + `-on-warning-container` | Caution (non-blocking). | Warning alerts, draft/pending badges. `--on-warning` is dark (navy/near-black) because warning is a light hue. | Hard errors → error family. |
+| `--error` + `-on-error` + `-error-container` + `-on-error-container` + `--error-hover` | Destructive / invalid. | Error alerts, `is-error` inputs, destructive buttons. | Warnings/cautions → warning family. |
+| `--info` + `-on-info` + `-info-container` + `-on-info-container` | Neutral informational. | Info alerts/badges. | Interactive accent (links) → `--secondary`. |
 
 ### 2c. Surface tiers, text, borders, misc roles
 
 | Token | Purpose | When to use | When NOT to use → alternative |
 |---|---|---|---|
-| `--color-surface` | App base background. | Page/app canvas. | Card/panel bg → `--color-surface-container` / `--card-bg`. |
-| `--color-surface-dim` | Slightly recessed surface. | Muted section behind cards. | — |
-| `--color-surface-bright` | Brightest surface (white / lightest dark). | Raised emphasis surface. | — |
-| `--color-surface-container-lowest / -low / -(base) / -high / -highest` | Elevation ladder of container surfaces. | Cards, menus, sheets — pick the tier by elevation (higher = more raised). | Page canvas → `--color-surface`. |
-| `--color-surface-variant` | Alt subtle surface. | Zebra rows, subtle fills. | — |
-| `--color-on-surface` | **All primary content on a surface** — page headings, body, and text inside components alike. Near-black. | Any primary text or icon. | On a filled/tonal surface → that surface's own `on-` role. |
-| `--color-on-surface-variant` | Medium secondary content on a surface. | De-emphasized in-component text. | Page secondary text → `--text-secondary`. |
-| `--color-outline` | **Prominent** border — interactive elements (buttons, inputs, chips). | Outlines that must read clearly. | Container chrome (cards/tables/panels) → `--border`. |
-| `--color-outline-variant` | **Subtle** border. | Chip rest border, faint dividers within a component. | Where a border must stand out → `--color-outline`. |
-| `--color-inverse-surface` / `--color-inverse-on-surface` / `--color-inverse-primary` | Inverted surface + its content (e.g. dark tooltip on light UI) + inverse accent. | Snackbars/tooltips that invert against the theme. | Normal surfaces → surface tiers. |
-| `--color-disabled` / `--color-on-disabled` | Disabled control fill + its text. | `:disabled` states. | — |
-| `--color-focus` | Focus accent (agile blue). **No dark override** — deliberately identical across themes (consistent focus signal). | Focus outlines. | — |
-| `--color-focus-ring` | Focus halo = `color-mix(--color-focus 15%, transparent)`. SSOT-derived; never hardcode `rgba(...)`. | Focus ring/glow. | — |
-| `--color-error-ring` | Invalid-input halo = `color-mix(--color-error 12%, transparent)`. Recalibrates in dark automatically. | `.is-error` input ring. | Never hardcode the rgba. |
-| `--color-scrim` | Modal/overlay backdrop = `rgba(0,0,0,.32)`. | Dialog/sheet/drawer scrim. | — |
-| `--color-shadow` | `--neutral-900` (light) → `--neutral-black` (dark) | Base colour for elevation. Present in the published Baseline and added here in sep-2026. **The `--shadow-*` composites do not derive from it yet** — they carry Embassy's own navy tint `rgba(28,36,56,…)`. Two truths about one concept; unifying them changes every shadow in the system, so it is a separate decision, not an anchoring fix. |
+| `--surface` | App base background. | Page/app canvas. | Card/panel bg → `--surface-container` / `--surface-container`. |
+| `--surface-dim` | Slightly recessed surface. | Muted section behind cards. | — |
+| `--surface-bright` | Brightest surface (white / lightest dark). | Raised emphasis surface. | — |
+| `--surface-container-lowest / -low / -(base) / -high / -highest` | Elevation ladder of container surfaces. | Cards, menus, sheets — pick the tier by elevation (higher = more raised). | Page canvas → `--surface`. |
+| `--surface-variant` | Alt subtle surface. | Zebra rows, subtle fills. | — |
+| `--on-surface` | **All primary content on a surface** — page headings, body, and text inside components alike. Near-black. | Any primary text or icon. | On a filled/tonal surface → that surface's own `on-` role. |
+| `--on-surface-variant` | Medium secondary content on a surface. | De-emphasized in-component text. | Page secondary text → `--on-surface-variant`. |
+| `--outline` | **Prominent** border — interactive elements (buttons, inputs, chips). | Outlines that must read clearly. | Container chrome (cards/tables/panels) → `--border`. |
+| `--outline-variant` | **Subtle** border. | Chip rest border, faint dividers within a component. | Where a border must stand out → `--outline`. |
+| `--inverse-surface` / `--inverse-on-surface` / `--inverse-primary` | Inverted surface + its content (e.g. dark tooltip on light UI) + inverse accent. | Snackbars/tooltips that invert against the theme. | Normal surfaces → surface tiers. |
+| `--disabled` / `--on-disabled` | Disabled control fill + its text. | `:disabled` states. | — |
+| `--focus` | Focus accent (agile blue). **No dark override** — deliberately identical across themes (consistent focus signal). | Focus outlines. | — |
+| `--focus-ring` | Focus halo = `color-mix(--focus 15%, transparent)`. SSOT-derived; never hardcode `rgba(...)`. | Focus ring/glow. | — |
+| `--error-ring` | Invalid-input halo = `color-mix(--error 12%, transparent)`. Recalibrates in dark automatically. | `.is-error` input ring. | Never hardcode the rgba. |
+| `--scrim` | Modal/overlay backdrop = `rgba(0,0,0,.32)`. | Dialog/sheet/drawer scrim. | — |
+| `--shadow` | `--neutral-900` (light) → `--neutral-black` (dark) | Base colour for elevation. Present in the published Baseline and added here in sep-2026. **The `--shadow-*` composites do not derive from it yet** — they carry Embassy's own navy tint `rgba(28,36,56,…)`. Two truths about one concept; unifying them changes every shadow in the system, so it is a separate decision, not an anchoring fix. |
 
 ### 2d. Nav / menu interaction roles ("blue hover")
 
 Menu and sidebar-nav hover reads **blue, never grey**. All derived from
-`--color-secondary-container`, so they recalibrate in dark with no override.
+`--secondary-container`, so they recalibrate in dark with no override.
 
 | Token | Purpose | Use / avoid |
 |---|---|---|
-| `--color-nav-hover` | Nav/menu item hover bg (secondary-container @ 45%). | Hover of nav items & dropdown/context-menu rows. Do **not** substitute a grey. |
-| `--color-nav-hover-content` | Content color on hover. | Icon/label color on nav hover. |
-| `--color-nav-press` | Pressed bg (secondary-container @ 70%). | `:active` of nav/menu items. |
-| `--color-nav-selected` | Selected bg (full secondary-container). | Current nav item / selected menu row. |
-| `--color-nav-selected-content` | Content on selected. | Label/icon of the selected item. |
+| `--nav-hover` | Nav/menu item hover bg (secondary-container @ 45%). | Hover of nav items & dropdown/context-menu rows. Do **not** substitute a grey. |
+| `--nav-hover-content` | Content color on hover. | Icon/label color on nav hover. |
+| `--nav-press` | Pressed bg (secondary-container @ 70%). | `:active` of nav/menu items. |
+| `--nav-selected` | Selected bg (full secondary-container). | Current nav item / selected menu row. |
+| `--nav-selected-content` | Content on selected. | Label/icon of the selected item. |
 
 > Not for Segmented Button or Chip — those own their selection treatment.
 
 ### 2e. Chart categorical tokens (`--chart-1..5`)
 
 **Not in `variables.css`.** They are defined **locally in `css/components/chart.css`**
-(`--chart-1: var(--color-secondary)`, `-2: tertiary`, `-3: success`, `-4: warning`,
+(`--chart-1: var(--secondary)`, `-2: tertiary`, `-3: success`, `-4: warning`,
 `-5: info`) — a component-scoped custom-property tier, matching the CLAUDE.md rule that a component's
 internal token layer lives in its own file, not in `variables.css`. Use for categorical series in
 charts; they inherit theming through the roles they alias.
 
-### 2e-bis. Interaction state (`--color-hover` / `-pressed` / `-selected`)
+### 2e-bis. Interaction state (`--hover` / `-pressed` / `-selected`)
 
 Documented on the site's State Palette since v2.1 and **missing from the CSS until sep-2026** — three
 phantom tokens. They exist now, derived rather than literal:
 
 | Token | Value | Use |
 |---|---|---|
-| `--color-hover` | `color-mix(--color-secondary 8%, transparent)` | Hover overlay on an interactive element. Derived, so it recalibrates in dark on its own. |
-| `--color-pressed` | `color-mix(--color-secondary 14%, transparent)` | Press / tap overlay. |
-| `--color-selected` | `--color-secondary-container` | Selected background. The site documented `secondary-50`; it was unified with the token that already means SELECTED everywhere in the system rather than opening a second value for one meaning. `--color-nav-selected` stays as the nav-scoped alias. |
+| `--hover` | `color-mix(--secondary 8%, transparent)` | Hover overlay on an interactive element. Derived, so it recalibrates in dark on its own. |
+| `--pressed` | `color-mix(--secondary 14%, transparent)` | Press / tap overlay. |
+| `--selected` | `--secondary-container` | Selected background. The site documented `secondary-50`; it was unified with the token that already means SELECTED everywhere in the system rather than opening a second value for one meaning. `--nav-selected` stays as the nav-scoped alias. |
 
-### 2f. Semantic aliases (convenience names over the roles)
+### 2f. The alias tier (all but one of it is gone)
 
-Thin aliases; prefer them where they read clearer, but they resolve to the roles above.
+There used to be a fourth tier here: unprefixed convenience names sitting over the roles. It is
+empty now except for `--border`, and the architecture is the one Material describes —
+**primitives → roles → component tokens**.
 
-**Twenty-one were removed in sep-2026.** The Design System file defines primitives and `--color-*`
-roles; a second, unprefixed name for the same value is duplicate vocabulary, and it is what made the
+**Twenty-one were removed in sep-2026.** The Design System file defines primitives and roles; a second, unprefixed name for the same value is duplicate vocabulary, and it is what made the
 token table unreadable. Each one was checked first: removed only when it resolved to **exactly** its
 role's value in *both* themes.
 
 Gone, with their usages migrated to the role (110 replacements):
-`--bg` → `--color-surface` · `--card-bg`, `--sidebar-bg` → `--color-surface-container` ·
-`--interactive` → `--color-secondary` · `--interactive-light` → `--color-secondary-container` ·
+`--bg` → `--surface` · `--card-bg`, `--sidebar-bg` → `--surface-container` ·
+`--interactive` → `--secondary` · `--interactive-light` → `--secondary-container` ·
 `--interactive-hover` · `--tertiary-purple`, `-hover`, `-light` ·
 `--green`, `--red`, `--yellow`, `--blue` and their `-light` siblings → the status roles ·
-`--surface` (pointed at `--color-surface-`**`dim`**) · `--divider` (an exact alias of `--border`) ·
+`--surface-alias` (pointed at `--surface-`**`dim`**) · `--divider` (an exact alias of `--border`) ·
 `--accent`, `--accent-light` (prefix collided with the brand accents).
 
 Removing `--bg`/`--card-bg`/`--sidebar-bg` also let the **docs shell drop its bridge**: it used to
@@ -196,7 +217,7 @@ shape — and five `--text-*` tokens had grown on top of them, each matching its
 diverging in the other, with no row in any table of the system. `--ctx-surface` / `-raised` were
 exact duplicates of `surface` / `surface-container`, and the mechanism they existed for (a container
 redefining them) works just as well redefining the role, because custom properties already cascade.
-`--ctx-track` / `-thumb` moved into `segmented-button.css`, their only consumer.
+`--ctx-track` / `-thumb` moved into `segmented-button.css` as `--seg-btn-track` / `-thumb`, their only consumer.
 **Page text is therefore near-black now, not brand navy.**
 
 **The survivors are not duplicates** — each says something the DS does not:
@@ -204,15 +225,6 @@ redefining them) works just as well redefining the role, because custom properti
 | Alias | Why it survives |
 | --- | --- |
 | `--border` | `on-surface` at 10%. The DS has `outline` and `outline-variant`; neither is container chrome. |
-
-| Alias | Resolves to | Use for |
-|---|---|---|
-| `--bg` | `--color-surface` | Page background. |
-| `--sidebar-bg` / `--card-bg` | `--color-surface-container` | Sidebar / card backgrounds. |
-| `--border` | `color-mix(--color-on-surface 10%, transparent)` | **Container chrome** (cards, tables, panels) — deliberately fainter than `--color-outline` so interactive outlines stand out. Also the divider line. |
-| `--interactive` / `--interactive-hover` / `--interactive-light` | `--color-secondary` / navy-ish hover / `--color-secondary-container` | Links, nav, tabs, focus accents. |
-| `--tertiary-purple` / `-hover` / `-light` | tertiary role / `--tertiary-800` / `--tertiary-50` | Legacy purple accents. |
-| `--green/-light`, `--red/-light`, `--yellow/-light`, `--blue/-light` | success / error / warning / info main + container | Shorthand status colors. |
 
 ---
 
@@ -414,37 +426,37 @@ multi-layer `box-shadow` and gradients.
 
 - **No standalone `--opacity-*` or `--z-index-*` scale exists** in `variables.css`. Opacity is
   applied inline via `color-mix(... N%, transparent)` where a token needs a translucent derivative
-  (`--border`, `--color-focus-ring`, `--color-error-ring`, `--color-nav-hover/-press`). Reuse that
+  (`--border`, `--focus-ring`, `--error-ring`, `--nav-hover/-press`). Reuse that
   `color-mix` pattern rather than introducing a new opacity token.
 - **No MD3 `--md-sys-state-*-opacity` state-layer tokens are present** in this buildless snapshot
   (that system existed only in the reverted Tailwind era). State layers today are the explicit
-  `--color-*-hover`, `--color-nav-*`, and `color-mix` derivatives above.
+  `--*-hover`, `--nav-*`, and `color-mix` derivatives above.
 
 ## 11. MD3 bridge (`css/md-sys-bridge.css`) — optional
 
 Optional layer that aliases MD3 **system** names (`--md-sys-color-*`,
 `--md-sys-typescale-*-font`) onto Embassy roles, so components written in native MD3 nomenclature
 resolve against the Embassy palette. Flow is one-directional: Embassy palette → Embassy role →
-MD3 name. Because each alias points at a `--color-*` role, it inherits dark-mode recalibration for
+MD3 name. Because each alias points at a los roles semánticos role, it inherits dark-mode recalibration for
 free (no dark override in the bridge). Load it **only** if you adopt MD3-named components; otherwise
-consume `--color-*` directly.
+consume los roles semánticos directly.
 
 ---
 
 ## 12. Dark mode — automatic recalibration
 
 Set `data-theme="dark"` on `<html>`. The `[data-theme="dark"]` block in `variables.css` **overrides
-only the semantic `--color-*` layer** (and the theme-aware aliases `--text-*`, `--interactive-hover`,
+only the semantic los roles semánticos layer** (and the theme-aware aliases `--text-*`, `--primary-500`,
 `--btn-elevation*`). Primitives are left alone; the shell reassigns some neutrals, which is why the
 dark block writes literal hex for neutral-derived roles to avoid cross-resolution.
 
 **Consequences for authors:**
 - Components consume roles → they recalibrate with **zero per-theme override**. Never write a
   `[data-theme="dark"]` block inside a component file.
-- `--color-primary` **inverts to white** in dark (max contrast, WCAG AAA on navy). So Primary fills
+- `--primary` **inverts to white** in dark (max contrast, WCAG AAA on navy). So Primary fills
   and *selected* controls render white in dark — expected, not a bug.
-- `--color-focus` has **no** dark override on purpose (consistent focus signal across themes); its
-  derivative `--color-focus-ring` therefore resolves the same in both.
+- `--focus` has **no** dark override on purpose (consistent focus signal across themes); its
+  derivative `--focus-ring` therefore resolves the same in both.
 - A `[data-theme="light"]` scoped block also exists, so a light island can live inside a dark page
   (used by the docs site's state demos).
 
@@ -455,7 +467,7 @@ dark block writes literal hex for neutral-derived roles to avoid cross-resolutio
 - **`--warning-*` primitive ramp is incomplete**: it omits `--warning-300` and `--warning-600`
   (present: 50, 100, 200, 400, 500, 700, 800, 900). All other status ramps
   (success/error/info) are full 50–900. Minor; only matters if a future warning role needs one of the
-  missing steps. Because product code consumes the `--color-warning*` roles (not primitives), this
+  missing steps. Because product code consumes the `--warning*` roles (not primitives), this
   gap is invisible to consumers today — flag it only if a new warning tier is required.
 - No other unmet needs found: color (primitives + full semantic role set incl. states, surfaces,
   outlines, nav, focus/error rings, inverse, disabled, scrim), typography (families + full size scale

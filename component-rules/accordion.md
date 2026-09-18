@@ -40,7 +40,7 @@ layout_constraints:
 states:
   default: "Collapsed: content grid-rows 0fr, chevron down."
   hover: "Trigger underlines (canonical interaction, not a color change)."
-  focus: "focus-visible: 2px --color-focus outline + 4px --color-focus-ring halo."
+  focus: "focus-visible: 2px --focus outline + 4px --focus-ring halo."
   expanded: "aria-expanded=true, content grid-rows 1fr, chevron rotated 180deg."
   disabled: "Trigger disabled: opacity .5, out of focus order, inert."
 
@@ -48,7 +48,7 @@ accessibility:
   roles: "Each trigger is a real <button> with aria-expanded and aria-controls pointing to its panel (role=region)."
   aria: [aria-expanded, aria-controls, "role=region on the panel", "disabled attribute for a disabled item"]
   focus: "Tab between triggers; the open state adds chevron rotation, not color only. A disabled item uses the button's disabled attribute (out of focus order)."
-  contrast: "Consumes only semantic --color-*/--text-* tokens → AA in light + dark with no per-theme overrides."
+  contrast: "Consumes only the semantic role tokens → AA in light + dark with no per-theme overrides."
 keyboard:
   - {keys: "Tab / Shift+Tab", action: "move focus between triggers"}
   - {keys: "Enter / Space", action: "expand / collapse the focused section"}
@@ -77,7 +77,7 @@ relationships:
     - {component: tabs, why: "Tabs switch views; Accordion stacks disclosable content"}
 
 tokens:
-  color: [--border, --text-primary, --text-secondary, --color-focus, --color-focus-ring]
+  color: [--border, --on-surface, --on-surface-variant, --focus, --focus-ring]
   radius: [--radius-lg, --radius-sm]
   spacing: ["16px trigger padding", "16px pb spacer"]
   motion: [--duration-normal, --duration-fast, --ease-default, --ease-expressive]

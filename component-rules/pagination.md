@@ -38,7 +38,7 @@ layout_constraints:
 states:
   default: "Link on transparent background."
   hover: "pagination-link:hover → surface-variant (active page keeps its fill)."
-  focus: "focus-visible: 2px --color-focus outline + offset."
+  focus: "focus-visible: 2px --focus outline + offset."
   active: "is-active → secondary-container / on-secondary-container + aria-current=page."
   disabled: "aria-disabled=true → pointer-events none, opacity .45 (e.g. Prev on page 1)."
 
@@ -75,7 +75,7 @@ relationships:
     - {component: breadcrumb, why: "Breadcrumb shows hierarchy/location, not page-through of a set"}
 
 tokens:
-  color: [--color-on-surface, --color-surface-variant, --color-secondary-container, --color-on-secondary-container, --text-secondary, --color-focus]
+  color: [--on-surface, --surface-variant, --secondary-container, --on-secondary-container, --on-surface-variant, --focus]
   radius: [--radius-md, --radius-sm]
   spacing: ["36px link height/min-width", "4px gap"]
   typography: [--font-size-body-md]
@@ -83,7 +83,7 @@ tokens:
 motion:
   enter: "none — the pagination bar is static; changing pages is a content update handled by the consumer, not an animation here."
   exit: "none"
-  stateChange: "Page links transition background-color on hover (transition: background-color .15s var(--ease-default, ease)). The active page (.is-active) uses a static --color-secondary-container fill with no transition; disabled controls drop to opacity .45."
+  stateChange: "Page links transition background-color on hover (transition: background-color .15s var(--ease-default, ease)). The active page (.is-active) uses a static --secondary-container fill with no transition; disabled controls drop to opacity .45."
   duration: "hardcoded .15s on .pagination-link — NOT a --duration-* token; should be --duration-fast"
   easing: "--ease-default (with an `ease` literal fallback)"
   reducedMotion: "Inherits the global prefers-reduced-motion rule in css/base.css (all transitions/animations neutralized to ~0). The hover tint applies instantly; the active page stays clear via aria-current + the secondary-container fill."

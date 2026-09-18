@@ -31,9 +31,9 @@ size_selection: "One responsive size — the chart fills its measured container.
 content_rules:
   - "Never encode a series by color alone — the legend and tooltip always repeat the label in text."
   - "Use the --chart-1..5 palette in order; don't pick colors at random across charts on the same page."
-  - "For critical semantics (approved/rejected) prefer explicit --color-success / --color-error over the generic palette."
+  - "For critical semantics (approved/rejected) prefer explicit --success / --error over the generic palette."
 layout_constraints:
-  - "Colors come only from --chart-1..5 (mapped to secondary/tertiary/success/warning/info) — never a raw hex, never --color-primary (it inverts to white in dark mode)."
+  - "Colors come only from --chart-1..5 (mapped to secondary/tertiary/success/warning/info) — never a raw hex, never --primary (it inverts to white in dark mode)."
   - "Every data-dependent chart must render empty, loading, and error states, all at the chart's height (no layout shift)."
 
 states:
@@ -41,13 +41,13 @@ states:
   hover: "JS-positioned rich tooltip (initChartTooltips): color indicator + label + value; native <title> stays as an a11y fallback."
   loading: "Skeleton bars (animate-pulse) at the chart's height, no layout shift when data arrives."
   empty: "Dashed-border container + message at the same height as the real chart."
-  error: "Message + retry action (Button variant=\"tertiary\"), --color-error."
+  error: "Message + retry action (Button variant=\"tertiary\"), --error."
 
 accessibility:
   roles: "SVG chart carries role=\"img\" + aria-label describing the chart; the SegmentedButton time-range control inherits its own keyboard/ARIA."
   aria: ["role=img + aria-label on the chart SVG/pie", "<title> per data point as a value fallback", "legend text repeats every series/segment name"]
   focus: "The chart body is not a focus target; interactive chrome (time-range SegmentedButton, retry button) is keyboard-operable."
-  contrast: "--chart-1..5 against --color-card meet AA in both themes (same roles used by buttons/badges). Pure SVG isn't accessible alone — pair critical data with an equivalent Table or text."
+  contrast: "--chart-1..5 against --card meet AA in both themes (same roles used by buttons/badges). Pure SVG isn't accessible alone — pair critical data with an equivalent Table or text."
 keyboard:
   - {keys: "Tab / Arrow / Space", action: "operate the time-range SegmentedButton and retry control (chart body itself is non-interactive)"}
 responsive:
@@ -77,7 +77,7 @@ relationships:
     - {component: table, why: "Table gives exact per-row values; a chart shows the shape of the data"}
 
 tokens:
-  color: [--chart-1, --chart-2, --chart-3, --chart-4, --chart-5, --color-border, --text-muted, --color-card, --color-error]
+  color: [--chart-1, --chart-2, --chart-3, --chart-4, --chart-5, --border, --on-surface-variant, --card, --error]
   radius: ["6px bar top corners", "--radius-lg (state containers)"]
   typography: [--font-size-caption]
 
@@ -131,4 +131,4 @@ source:
 <!-- ✕ Hardcoded hex per series -->
 <polyline class="chart-line" points="…" stroke="#3B82F6"/>
 ```
-*Fix:* use `stroke="var(--chart-1)"` — never a raw hex, never --color-primary.
+*Fix:* use `stroke="var(--chart-1)"` — never a raw hex, never --primary.

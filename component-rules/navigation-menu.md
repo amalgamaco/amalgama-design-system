@@ -72,7 +72,7 @@ relationships:
     - {component: menu, why: "Dropdown Menu lists actions; Navigation Menu lists destinations"}
     - {component: tabs, why: "Tabs switch views within one page; Navigation Menu goes between pages/sections"}
 tokens:
-  color: [--color-surface-container, --color-on-surface, --color-primary, --color-outline-variant]
+  color: [--surface-container, --on-surface, --primary, --outline-variant]
   radius: [--radius-md]
   motion: [--duration-normal, --ease-default]
 motion:

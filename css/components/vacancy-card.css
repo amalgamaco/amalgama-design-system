@@ -34,7 +34,7 @@
 .vacancies-list { display: flex; flex-direction: column; gap: var(--space-2); }
 
 .vacancy-card {
-  background: var(--color-surface-container);
+  background: var(--surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-4);
@@ -45,14 +45,14 @@
   animation: fadeSlideIn var(--duration-medium) var(--ease-enter) both;
 }
 .vacancy-card:hover {
-  border-color: var(--color-outline-variant);
+  border-color: var(--outline-variant);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 .vacancy-card:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--color-focus-ring);
+  box-shadow: 0 0 0 4px var(--focus-ring);
 }
 .vacancy-card:nth-child(1) { animation-delay: .05s; }
 .vacancy-card:nth-child(2) { animation-delay: .12s; }
@@ -65,23 +65,23 @@
 .vacancy-icon {
   width: 40px; height: 40px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-secondary);
+  color: var(--secondary);
 }
 .vacancy-icon svg { width: 20px; height: 20px; stroke-width: var(--icon-stroke, 2); }
 .vacancy-info { flex: 1; min-width: 0; }
 .vacancy-name {
   font-family: var(--font-heading);
   font-size: var(--font-size-heading-xs); font-weight: 600;
-  color: var(--color-on-surface);
+  color: var(--on-surface);
   margin-bottom: 4px;
   display: flex; align-items: center; gap: var(--space-2);
 }
 .vacancy-meta {
   display: flex; align-items: center; gap: var(--space-1-5);
-  font-size: var(--font-size-body-sm); color: var(--color-on-surface-variant);
+  font-size: var(--font-size-body-sm); color: var(--on-surface-variant);
   flex-wrap: wrap;
 }
-.meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-outline-variant); flex-shrink: 0; }
+.meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--outline-variant); flex-shrink: 0; }
 
 .vacancy-stats {
   display: flex; align-items: center; gap: var(--space-4);
@@ -89,36 +89,36 @@
 }
 .stat-pill {
   display: flex; align-items: center; gap: var(--space-1-5);
-  font-size: var(--font-size-label); color: var(--color-on-surface-variant);
+  font-size: var(--font-size-label); color: var(--on-surface-variant);
 }
-.stat-pill .count { font-weight: 600; color: var(--color-on-surface); }
+.stat-pill .count { font-weight: 600; color: var(--on-surface); }
 
 .assignee {
   display: flex; align-items: center; gap: var(--space-1-5);
-  font-size: var(--font-size-label); color: var(--color-on-surface-variant);
+  font-size: var(--font-size-label); color: var(--on-surface-variant);
 }
 /* Avatares tonales: rol semántico container + on-container (par al Avatar canónico),
    nunca gradientes con primitivos. Cada variante usa su propio par → contraste
-   correcto en light Y dark (antes: --color-on-primary, que se invierte a navy en
+   correcto en light Y dark (antes: --on-primary, que se invierte a navy en
    dark sobre color saturado). */
 .assignee-avatar {
   /* Escalón xs de la escala de avatar (variables.css) — antes 22px/9px, un
      escalón propio a dos píxeles del que ya existía. */
   width: var(--avatar-size-xs); height: var(--avatar-size-xs); border-radius: 50%;
-  background: var(--color-error-container);
+  background: var(--error-container);
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-on-error-container); font-size: var(--avatar-initial-xs); font-weight: 700;
+  color: var(--on-error-container); font-size: var(--avatar-initial-xs); font-weight: 700;
 }
-.assignee-avatar.blue   { background: var(--color-secondary-container); color: var(--color-on-secondary-container); }
-.assignee-avatar.green  { background: var(--color-success-container);   color: var(--color-on-success-container); }
-.assignee-avatar.purple { background: var(--color-tertiary-container);  color: var(--color-on-tertiary-container); }
+.assignee-avatar.blue   { background: var(--secondary-container); color: var(--on-secondary-container); }
+.assignee-avatar.green  { background: var(--success-container);   color: var(--on-success-container); }
+.assignee-avatar.purple { background: var(--tertiary-container);  color: var(--on-tertiary-container); }
 
 .vacancy-right {
   display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-2);
   flex-shrink: 0;
 }
 .vacancy-age {
-  font-size: var(--font-size-mono-md); font-weight: 600; color: var(--color-on-surface-variant);
+  font-size: var(--font-size-mono-md); font-weight: 600; color: var(--on-surface-variant);
   font-family: var(--font-mono);
 }
 
@@ -126,10 +126,10 @@
   width: 28px; height: 28px;
   border-radius: var(--radius-md);
   display: flex; align-items: center; justify-content: center;
-  color: var(--color-on-surface-variant);
+  color: var(--on-surface-variant);
   cursor: pointer;
   transition: background var(--duration-fast) var(--ease-default),
               color var(--duration-fast) var(--ease-default);
   background: none; border: none;
 }
-.more-btn:hover { background: var(--color-surface-variant); color: var(--color-on-surface); }
+.more-btn:hover { background: var(--surface-variant); color: var(--on-surface); }
