@@ -29,7 +29,7 @@
 }
 /* Dato (§4b): escalon compacto — la cifra es lo que pesa, no el aire. */
 .stat-card {
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-4);

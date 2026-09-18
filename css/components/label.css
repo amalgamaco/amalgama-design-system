@@ -49,7 +49,7 @@
 .label[for] { cursor: pointer; }
 
 /* Marcador de campo obligatorio — mismo tratamiento que form.css .field-required */
-.label-required { color: var(--red); margin-left: -4px; }
+.label-required { color: var(--color-error); margin-left: -4px; }
 
 /* Estado deshabilitado — derivado del control asociado, en cualquiera de los dos
    órdenes (label antes del control, o control antes del label como en el patrón

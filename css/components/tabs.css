@@ -103,7 +103,7 @@
 }
 .tabs-pill .tab.active,
 .tabs-pill .tab[aria-selected="true"] {
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   color: var(--text-primary);
   box-shadow: var(--shadow-sm);
 }

@@ -36,7 +36,7 @@
   height: 40px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   color: var(--text-primary);
   font-size: var(--font-size-heading-xs);
   font-family: var(--font-mono);
@@ -51,7 +51,7 @@
   border-color: var(--color-outline);
 }
 .otp-slot:focus-visible {
-  border-color: var(--interactive);
+  border-color: var(--color-secondary);
   box-shadow: 0 0 0 4px var(--color-focus-ring);
   z-index: 1;
   position: relative;

@@ -33,7 +33,7 @@
 /* Panel que abre seccion (COMPOSICION.md §4b): escalon holgado, y su titulo
    sube con el — los dos pasos son un par, no dos decisiones sueltas. */
 .form-card {
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-8);
@@ -64,7 +64,7 @@
   color: var(--text-primary);
   margin-bottom: 8px;
 }
-.field-required { color: var(--red); margin-left: 2px; }
+.field-required { color: var(--color-error); margin-left: 2px; }
 
 .field-input {
   width: 100%;
@@ -138,14 +138,14 @@ input:disabled, select:disabled, textarea:disabled {
   font-size: var(--font-size-body-md);
   font-family: inherit;
   color: var(--text-primary);
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   outline: none;
   appearance: none;
   cursor: pointer;
   transition: border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
 }
 .select-wrapper select:focus-visible {
-  border-color: var(--interactive);
+  border-color: var(--color-secondary);
   box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
 /* Compact size (par shadcn Select size="sm" / select-trigger[data-size="sm"]). */
@@ -179,16 +179,16 @@ input:disabled, select:disabled, textarea:disabled {
   padding: var(--space-2-5) var(--space-3-5);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   transition: border-color var(--duration-fast) var(--ease-default);
 }
-.number-input-wrapper:focus-within { border-color: var(--interactive); }
+.number-input-wrapper:focus-within { border-color: var(--color-secondary); }
 .number-value { font-size: var(--font-size-body-md); color: var(--text-primary); }
 .number-controls { display: flex; align-items: center; gap: var(--space-1); }
 .number-btn {
   width: 32px; height: 32px;
   border-radius: var(--radius-md);
-  background: var(--bg);
+  background: var(--color-surface);
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; color: var(--text-secondary);
@@ -206,12 +206,12 @@ input:disabled, select:disabled, textarea:disabled {
   font-size: var(--font-size-body-md);
   font-family: inherit;
   color: var(--text-muted);
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   outline: none;
   transition: border-color var(--duration-fast) var(--ease-default);
   cursor: pointer;
 }
-.date-input-wrapper input:focus-visible { border-color: var(--interactive); }
+.date-input-wrapper input:focus-visible { border-color: var(--color-secondary); }
 .date-icon {
   position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
   color: var(--text-muted); pointer-events: none;
@@ -232,7 +232,7 @@ input:disabled, select:disabled, textarea:disabled {
    reforzando el foco visualmente.
 ═══════════════════════════════════════ */
 .field-group:focus-within .field-label {
-  color: var(--interactive);
+  color: var(--color-secondary);
 }
 
 /* ═══════════════════════════════════════

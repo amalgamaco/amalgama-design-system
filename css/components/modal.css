@@ -50,7 +50,7 @@
 }
 .modal {
   position: relative;
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border-radius: var(--radius-lg);
   width: min(560px, calc(100vw - 48px));
   max-height: calc(100vh - 96px);

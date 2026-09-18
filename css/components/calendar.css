@@ -277,7 +277,7 @@
   padding: var(--space-1-5) var(--space-2);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   color: var(--color-on-surface);
   font: inherit;
 }

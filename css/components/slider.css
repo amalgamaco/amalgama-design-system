@@ -82,7 +82,7 @@
   height: 20px;
   border-radius: 50%;
   background: var(--color-primary);
-  border: 2px solid var(--card-bg);
+  border: 2px solid var(--color-surface-container);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
   transition: box-shadow var(--duration-fast) var(--ease-default);
@@ -93,7 +93,7 @@
   height: 20px;
   border-radius: 50%;
   background: var(--color-primary);
-  border: 2px solid var(--card-bg);
+  border: 2px solid var(--color-surface-container);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
   transition: box-shadow var(--duration-fast) var(--ease-default);

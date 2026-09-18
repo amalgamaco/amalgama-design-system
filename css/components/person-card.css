@@ -36,7 +36,7 @@
 
 /* Fondo de superficie para que la card se despegue de la página (el primitivo
    .item es transparente; Person Card es una tarjeta, no una fila embebida). */
-.person-card { background: var(--card-bg); }
+.person-card { background: var(--color-surface-container); }
 
 /* Avatar circular tonal — usa el par semántico Secondary container/on-container,
    igual que el Avatar canónico (item.css/avatar.css), no un gradiente con

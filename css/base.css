@@ -6,7 +6,7 @@
 
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background: var(--color-surface);
   color: var(--text-primary);
   font-size: var(--font-size-body-lg);
   line-height: var(--line-height-body-lg);
@@ -29,7 +29,7 @@ h4 { font-size: var(--font-size-heading-md); line-height: var(--line-height-head
 h5 { font-size: var(--font-size-heading-sm); line-height: var(--line-height-heading-sm); }
 h6 { font-size: var(--font-size-heading-xs); line-height: var(--line-height-heading-xs); }
 
-a { color: var(--interactive); text-decoration: none; }
+a { color: var(--color-secondary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 img, svg { display: block; max-width: 100%; }

@@ -11,7 +11,7 @@
 
 .docs-sidebar {
   width: 260px;
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border-right: 1px solid var(--border);
   position: fixed;
   top: 0; left: 0; bottom: 0;
@@ -34,12 +34,12 @@
   text-decoration: none;
 }
 .docs-sidebar-header:hover { text-decoration: none; }
-.docs-sidebar-header svg { color: var(--interactive); flex-shrink: 0; }
+.docs-sidebar-header svg { color: var(--color-secondary); flex-shrink: 0; }
 .docs-sidebar-header span {
   font-size: 11px;
   font-weight: 600;
-  background: var(--interactive-light);
-  color: var(--interactive);
+  background: var(--color-secondary-container);
+  color: var(--color-secondary);
   padding: 2px 8px;
   border-radius: var(--radius-full);
   margin-left: auto;
@@ -71,13 +71,13 @@
   transition: background var(--duration-fast), color var(--duration-fast);
 }
 .docs-nav-item:hover {
-  background: var(--bg);
+  background: var(--color-surface);
   color: var(--text-primary);
   text-decoration: none;
 }
 .docs-nav-item.active {
-  background: var(--interactive-light);
-  color: var(--interactive);
+  background: var(--color-secondary-container);
+  color: var(--color-secondary);
   font-weight: 500;
 }
 
@@ -90,7 +90,7 @@
 
 .docs-topbar {
   height: 56px;
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border-bottom: 1px solid var(--border);
   padding: 0 32px;
   display: flex;
@@ -161,7 +161,7 @@
 
 /* ── Preview box ── */
 .docs-preview {
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius) var(--radius) 0 0;
   padding: 32px;
@@ -253,7 +253,7 @@
 }
 .docs-swatch-info {
   padding: 8px 10px;
-  background: var(--card-bg);
+  background: var(--color-surface-container);
 }
 .docs-swatch-name {
   font-family: 'DM Mono', monospace;
@@ -282,8 +282,8 @@
 .docs-radius-box {
   width: 64px;
   height: 64px;
-  background: var(--interactive-light);
-  border: 2px solid var(--interactive);
+  background: var(--color-secondary-container);
+  border: 2px solid var(--color-secondary);
 }
 .docs-radius-label {
   font-family: 'DM Mono', monospace;
@@ -306,7 +306,7 @@
 .docs-shadow-box {
   width: 96px;
   height: 64px;
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border-radius: var(--radius);
 }
 
@@ -314,7 +314,7 @@
 .docs-props-table {
   width: 100%;
   border-collapse: collapse;
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -345,7 +345,7 @@
   background: var(--neutral-50);
   padding: 2px 6px;
   border-radius: var(--radius-sm);
-  color: var(--interactive);
+  color: var(--color-secondary);
 }
 
 /* ── Index page cards ── */
@@ -355,7 +355,7 @@
   gap: 12px;
 }
 .docs-component-card {
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 20px;
@@ -373,7 +373,7 @@
   width: 36px;
   height: 36px;
   border-radius: var(--radius-md);
-  background: var(--interactive-light);
+  background: var(--color-secondary-container);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -398,7 +398,7 @@
   gap: 16px;
 }
 .docs-logo-card {
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
@@ -412,7 +412,7 @@
   justify-content: center;
   padding: 24px;
 }
-.docs-logo-preview.bg-light  { background: var(--card-bg); }
+.docs-logo-preview.bg-light  { background: var(--color-surface-container); }
 .docs-logo-preview.bg-muted  { background: var(--neutral-50); }
 .docs-logo-preview.bg-checker {
   background-color: var(--neutral-white);
@@ -462,7 +462,7 @@
   .docs-rules-grid { grid-template-columns: 1fr; }
 }
 .docs-rule {
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 16px 18px;
@@ -524,7 +524,7 @@
   align-items: center;
   gap: 0;
   padding: 0 40px;
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 56px;
@@ -551,8 +551,8 @@
   text-decoration: none;
 }
 .page-subnav-item.active {
-  color: var(--interactive);
-  border-bottom-color: var(--interactive);
+  color: var(--color-secondary);
+  border-bottom-color: var(--color-secondary);
 }
 
 /* ── Spec callout number (anatomy diagrams) ── */
@@ -580,7 +580,7 @@
   font-family: 'DM Mono', monospace;
   font-size: 11.5px;
   background: var(--neutral-50);
-  color: var(--interactive);
+  color: var(--color-secondary);
   padding: 2px 8px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
@@ -636,7 +636,7 @@
 }
 .anatomy-field-area {
   flex: 0 0 320px;
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px 24px 20px;

@@ -206,15 +206,34 @@ phantom tokens. They exist now, derived rather than literal:
 
 Thin aliases; prefer them where they read clearer, but they resolve to the roles above.
 
-**Three were removed in sep-2026** because they were duplicates that only made the token table
-harder to read: `--surface` (pointed at `--color-surface-`**`dim`**, so the token named "surface" was
-not the surface — zero uses), `--divider` (an exact alias of `--border`, zero uses) and
-`--accent` / `--accent-light` (aliases of `--interactive*` whose prefix started colliding with the
-brand accents `--accent-hot-pink` & co.; `docs/docs.css` now consumes `--interactive*` directly).
+**Twenty-one were removed in sep-2026.** The Design System file defines primitives and `--color-*`
+roles; a second, unprefixed name for the same value is duplicate vocabulary, and it is what made the
+token table unreadable. Each one was checked first: removed only when it resolved to **exactly** its
+role's value in *both* themes.
 
-The legacy status shorthands below (`--green`, `--red`, `--yellow`, `--blue` and their `-light`
-siblings) and `--tertiary-purple*` are **deprecated**: prefer the `--color-*` role. They are kept
-because a consuming product may still reference them; they will go in a major.
+Gone, with their usages migrated to the role (110 replacements):
+`--bg` → `--color-surface` · `--card-bg`, `--sidebar-bg` → `--color-surface-container` ·
+`--interactive` → `--color-secondary` · `--interactive-light` → `--color-secondary-container` ·
+`--interactive-hover` · `--tertiary-purple`, `-hover`, `-light` ·
+`--green`, `--red`, `--yellow`, `--blue` and their `-light` siblings → the status roles ·
+`--surface` (pointed at `--color-surface-`**`dim`**) · `--divider` (an exact alias of `--border`) ·
+`--accent`, `--accent-light` (prefix collided with the brand accents).
+
+Removing `--bg`/`--card-bg`/`--sidebar-bg` also let the **docs shell drop its bridge**: it used to
+re-point those three at its own `--md-*` set so component demos picked up the shell's surfaces. Once
+`color-surface` became `neutral-10` (the DS value), the `--md-*` surfaces and the roles resolve to
+the same hexes, so the bridge was redundant.
+
+**The survivors are not duplicates** — each says something the DS does not:
+
+| Alias | Why it survives |
+| --- | --- |
+| `--border` | `on-surface` at 10%. The DS has `outline` and `outline-variant`; neither is container chrome. |
+| `--text-primary` / `--text-secondary` | The "page text is navy, not black" rule. The DS has no page-text role — its `on-surface` is content *inside* components. |
+| `--text-muted` | Resolves to `neutral-200` in dark, not `neutral-100` like `on-surface-variant`. A real distinction, measured. |
+| `--text-prose` → `--ink` | The Manual's Ink for long-form collateral prose. |
+| `--text-on-dark` | Always white, whatever the theme — `color-on-primary` inverts. |
+| `--ctx-*` | The container-context layer: a container **redefines** these so the component inside adapts. The default equalling a role is the point, not a duplication. |
 
 | Alias | Resolves to | Use for |
 |---|---|---|

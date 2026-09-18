@@ -330,13 +330,10 @@
   /* ─────────────────────────────────────
      Semantic aliases
   ───────────────────────────────────── */
-  --bg:             var(--color-surface);
   /* No hay un alias --surface, y es a propósito: apuntaba a --color-surface-DIM,
      o sea que el token llamado «surface» no era la superficie. Cero usos, y una
      trampa para el que lo leyera. La superficie de página es --bg; la de tarjeta,
      --card-bg; el resto de la rampa se pide por su rol. */
-  --sidebar-bg:     var(--color-surface-container);
-  --card-bg:        var(--color-surface-container);
   /* Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad.
      Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el
      outline de elementos INTERACTIVOS (--color-outline, botones/chips/inputs) se
@@ -351,6 +348,13 @@
      neutral-900. Igual que el sitio de docs. En dark se recalibra a
      neutral-50 (override abajo). --color-on-surface queda para contenido
      interno de componentes (labels de chips, botones, celdas). */
+  /* Los alias que eran un SEGUNDO NOMBRE de un rol se retiraron en sep-2026:
+     --bg, --card-bg, --sidebar-bg, --interactive(-light/-hover), --tertiary-purple*
+     y los atajos de estado --green/--red/--yellow/--blue. Resolvían exactamente al
+     mismo valor que su rol en los DOS temas —medido—, o sea que eran vocabulario
+     duplicado para una sola cosa. El archivo de Design System define --color-*, y
+     eso es lo que se consume. Los que siguen NO son duplicados: cada uno dice algo
+     que el DS no dice, y por eso sobreviven. */
   --text-primary:   var(--primary-900);
   --text-secondary: var(--neutral-500);
   --text-muted:     var(--color-on-surface-variant);  /* NO --color-on-disabled: pinta texto activo, y ahí el mínimo AA sí rige */
@@ -384,30 +388,10 @@
   --color-info-text:    var(--color-on-info-container);
   --text-on-dark:   var(--neutral-white);
 
-  /* Interactive — secondary blue (links, nav, tabs, focus) */
-  --interactive:         var(--color-secondary);
-  --interactive-hover:   var(--primary-500);
-  --interactive-light:   var(--color-secondary-container);
-
   /* No hay --accent ni --accent-light. Eran alias del color interactivo para el
      cromo de la doc, y desde que existen los acentos de marca (--accent-hot-pink
      y compañía) el prefijo --accent- significaba dos cosas sin relación. docs.css
      consume --interactive / --interactive-light, que es lo que eran. */
-
-  /* Purple (legacy tertiary aliases) */
-  --tertiary-purple:       var(--color-tertiary);
-  --tertiary-purple-hover: var(--tertiary-800);
-  --tertiary-purple-light: var(--tertiary-50);
-
-  /* Semantic status */
-  --green:          var(--color-success);
-  --green-light:    var(--color-success-container);
-  --red:            var(--color-error);
-  --red-light:      var(--color-error-container);
-  --yellow:         var(--color-warning);
-  --yellow-light:   var(--color-warning-container);
-  --blue:           var(--color-info);
-  --blue-light:     var(--color-info-container);
 
   /* ─────────────────────────────────────
      Spacing scale  (4px base grid)
@@ -888,7 +872,6 @@
   /* En oscuro no existe el casi-negro: la prosa vuelve al texto principal. El
      token sigue existiendo para que el colateral no tenga que preguntarse por el tema. */
   --text-prose: var(--neutral-50);
-  --interactive-hover:               var(--primary-200);          /* #909BBE */
 
   /* Elevated Button elevation — black shadows so the lift is visible on dark surfaces
      (the navy light shadows disappear against dark backgrounds). */
@@ -967,7 +950,6 @@
   --text-secondary: var(--neutral-500);
   --text-muted: var(--neutral-400);                                     /* sigue a on-surface-variant (DS) */
   --text-prose:     var(--ink);                                  /* Ink del Manual — prosa larga de colateral */
-  --interactive-hover: var(--primary-500);                       /* #253E82 */
   /* Elevated Button — restore light (navy) elevation inside a light-scoped island */
   --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);
   --btn-elevation-hover: 0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16);

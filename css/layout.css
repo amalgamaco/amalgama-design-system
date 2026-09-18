@@ -34,7 +34,7 @@
 /* ── SIDEBAR ── */
 .sidebar {
   width: var(--sidebar-width);
-  background: var(--sidebar-bg);
+  background: var(--color-surface-container);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -52,12 +52,12 @@
   font-family: var(--font-heading);
   font-weight: 600; font-size: var(--font-size-heading-xs); color: var(--text-primary);
 }
-.sidebar-logo svg { color: var(--interactive); }
+.sidebar-logo svg { color: var(--color-secondary); }
 
 .sidebar-search {
   margin: 12px 12px 8px;
   display: flex; align-items: center; gap: 8px;
-  background: var(--bg);
+  background: var(--color-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 8px 12px;
@@ -139,7 +139,7 @@
 
 /* ── TOPBAR ── */
 .topbar {
-  background: var(--sidebar-bg);
+  background: var(--color-surface-container);
   border-bottom: 1px solid var(--border);
   padding: 0 28px;
   height: var(--topbar-height);
@@ -166,24 +166,24 @@
   transition: background var(--duration-fast) var(--ease-default);
 }
 .topbar-btn.secondary {
-  background: var(--bg);
+  background: var(--color-surface);
   color: var(--text-secondary);
   border: 1px solid var(--border);
 }
-.topbar-btn.secondary:hover { background: var(--interactive-light); }
+.topbar-btn.secondary:hover { background: var(--color-secondary-container); }
 
 .topbar-notif {
   position: relative;
   width: 36px; height: 36px;
   border-radius: var(--radius-md);
-  background: var(--bg);
+  background: var(--color-surface);
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
 }
 .notif-badge {
   position: absolute; top: -5px; right: -5px;
-  background: var(--interactive);
+  background: var(--color-secondary);
   color: var(--color-on-primary);
   font-size: 10px; font-weight: 600;
   width: 17px; height: 17px;
@@ -231,10 +231,10 @@
   width: 40px; height: 40px; margin-right: 4px;
   align-items: center; justify-content: center;
   border: 1px solid var(--border); border-radius: var(--radius-md);
-  background: var(--bg); color: var(--text-secondary);
+  background: var(--color-surface); color: var(--text-secondary);
   cursor: pointer;
 }
-.shell-menu-btn:hover { background: var(--interactive-light); }
+.shell-menu-btn:hover { background: var(--color-secondary-container); }
 .shell-menu-btn:focus-visible {
   outline: 2px solid var(--color-focus); outline-offset: 2px;
 }

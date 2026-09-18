@@ -174,11 +174,11 @@
   --tb-radius:            var(--radius-md);             /* radio de campo (nunca píldora aquí) */
   --tb-pad-x:             14px;                          /* padding horizontal interno del campo */
   --tb-gap:               var(--space-3);               /* separación entre controles */
-  --tb-surface:           var(--card-bg);               /* superficie de campo (relleno, NO transparente) */
-  --tb-surface-hover:     color-mix(in srgb, var(--color-on-surface) 6%, var(--card-bg));
+  --tb-surface:           var(--color-surface-container);               /* superficie de campo (relleno, NO transparente) */
+  --tb-surface-hover:     color-mix(in srgb, var(--color-on-surface) 6%, var(--color-surface-container));
   --tb-border:            var(--border);
   --tb-border-hover:      color-mix(in srgb, var(--color-on-surface) 22%, transparent);
-  --tb-border-focus:      var(--interactive);           /* = --color-secondary */
+  --tb-border-focus:      var(--color-secondary);           /* = --color-secondary */
   --tb-focus-ring:        var(--color-focus-ring);
   --tb-text:              var(--text-primary);
   --tb-text-muted:        var(--text-muted);
@@ -314,7 +314,7 @@
    Lo togglea el producto agregando .toolbar-selection + el conteo.
 ═══════════════════════════════════════ */
 .toolbar-selection {
-  background: color-mix(in srgb, var(--color-secondary-container) 55%, var(--card-bg));
+  background: color-mix(in srgb, var(--color-secondary-container) 55%, var(--color-surface-container));
   border: 1px solid var(--color-outline-variant);
   border-radius: var(--radius-md);
   padding: var(--space-2) var(--space-3);

@@ -26,7 +26,7 @@
 ═══════════════════════════════════════ */
 
 .card {
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   /* Panel = escalon estandar. COMPOSICION.md §4b + guidelines/visual-hierarchy.md.
@@ -115,7 +115,7 @@
    vaya adentro. Sin esto, un `list` adentro de una card pintaba el gris de la
    pagina sobre el blanco de la card y habia que escribirle `background:
    transparent` a mano — un override de clase publica por cada uso. */
-.card                { --ctx-surface: var(--card-bg);                            --ctx-surface-raised: var(--color-surface-container-high); }
+.card                { --ctx-surface: var(--color-surface-container);                            --ctx-surface-raised: var(--color-surface-container-high); }
 .card-elevated       { --ctx-surface: var(--color-surface-container-low);        --ctx-surface-raised: var(--color-surface-container-high); }
 .card-filled         { --ctx-surface: var(--color-surface-container-highest);    --ctx-surface-raised: var(--color-surface-container); }
 

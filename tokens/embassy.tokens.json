@@ -988,24 +988,6 @@
       "section": "SELECCIONADO. El sitio lo documentaba en secondary-50; se unifica con el token que ya significa «seleccionado» en todo el sistema (chip, segmented, pagination, toggle, calendar, list, nav activo) en vez de abrir un segundo valor para lo mismo.  color-nav-selected sigue siendo su alias de nav.",
       "$alias": "--color-secondary-container"
     },
-    "--bg": {
-      "$type": "color",
-      "$value": "#FAFBFC",
-      "section": "Semantic aliases",
-      "$alias": "--color-surface"
-    },
-    "--sidebar-bg": {
-      "$type": "color",
-      "$value": "#FFFFFF",
-      "section": "No hay un alias  surface, y es a propósito: apuntaba a  color-surface-DIM, o sea que el token llamado «surface» no era la superficie. Cero usos, y una trampa para el que lo leyera. La superficie de página es  bg; la de tarjeta,  card-bg; el resto de la rampa se pide por su rol.",
-      "$alias": "--color-surface-container"
-    },
-    "--card-bg": {
-      "$type": "color",
-      "$value": "#FFFFFF",
-      "section": "No hay un alias  surface, y es a propósito: apuntaba a  color-surface-DIM, o sea que el token llamado «surface» no era la superficie. Cero usos, y una trampa para el que lo leyera. La superficie de página es  bg; la de tarjeta,  card-bg; el resto de la rampa se pide por su rol.",
-      "$alias": "--color-surface-container"
-    },
     "--border": {
       "$type": "color",
       "$value": "#0A0C121A",
@@ -1014,21 +996,21 @@
     "--text-primary": {
       "$type": "color",
       "$value": "#01164D",
-      "section": "Tipografía de página (decisión de diseño, jun 2026): el texto principal —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro neutral-900. Igual que el sitio de docs. En dark se recalibra a neutral-50 (override abajo).  color-on-surface queda para contenido interno de componentes (labels de chips, botones, celdas).",
+      "section": "Los alias que eran un SEGUNDO NOMBRE de un rol se retiraron en sep-2026:  bg,  card-bg,  sidebar-bg,  interactive(-light/-hover),  tertiary-purple* y los atajos de estado  green/ red/ yellow/ blue. Resolvían exactamente al mismo valor que su rol en los DOS temas —medido—, o sea que eran vocabulario duplicado para una sola cosa. El archivo de Design System define  color , y eso es lo que se consume. Los que siguen NO son duplicados: cada uno dice algo que el DS no dice, y por eso sobreviven.",
       "$dark": "#EAEBED",
       "$alias": "--primary-900"
     },
     "--text-secondary": {
       "$type": "color",
       "$value": "#353A4A",
-      "section": "Tipografía de página (decisión de diseño, jun 2026): el texto principal —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro neutral-900. Igual que el sitio de docs. En dark se recalibra a neutral-50 (override abajo).  color-on-surface queda para contenido interno de componentes (labels de chips, botones, celdas).",
+      "section": "Los alias que eran un SEGUNDO NOMBRE de un rol se retiraron en sep-2026:  bg,  card-bg,  sidebar-bg,  interactive(-light/-hover),  tertiary-purple* y los atajos de estado  green/ red/ yellow/ blue. Resolvían exactamente al mismo valor que su rol en los DOS temas —medido—, o sea que eran vocabulario duplicado para una sola cosa. El archivo de Design System define  color , y eso es lo que se consume. Los que siguen NO son duplicados: cada uno dice algo que el DS no dice, y por eso sobreviven.",
       "$dark": "#BFC1C8",
       "$alias": "--neutral-500"
     },
     "--text-muted": {
       "$type": "color",
       "$value": "#474D61",
-      "section": "Tipografía de página (decisión de diseño, jun 2026): el texto principal —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro neutral-900. Igual que el sitio de docs. En dark se recalibra a neutral-50 (override abajo).  color-on-surface queda para contenido interno de componentes (labels de chips, botones, celdas).",
+      "section": "Los alias que eran un SEGUNDO NOMBRE de un rol se retiraron en sep-2026:  bg,  card-bg,  sidebar-bg,  interactive(-light/-hover),  tertiary-purple* y los atajos de estado  green/ red/ yellow/ blue. Resolvían exactamente al mismo valor que su rol en los DOS temas —medido—, o sea que eran vocabulario duplicado para una sola cosa. El archivo de Design System define  color , y eso es lo que se consume. Los que siguen NO son duplicados: cada uno dice algo que el DS no dice, y por eso sobreviven.",
       "$description": "NO --color-on-disabled: pinta texto activo, y ahí el mínimo AA sí rige",
       "$dark": "#9FA3AE",
       "$alias": "--color-on-surface-variant"
@@ -1076,91 +1058,6 @@
       "$value": "#FFFFFF",
       "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
       "$alias": "--neutral-white"
-    },
-    "--interactive": {
-      "$type": "color",
-      "$value": "#4F80FF",
-      "section": "Interactive — secondary blue (links, nav, tabs, focus)",
-      "$alias": "--color-secondary"
-    },
-    "--interactive-hover": {
-      "$type": "color",
-      "$value": "#253E82",
-      "section": "Interactive — secondary blue (links, nav, tabs, focus)",
-      "$dark": "#909BBE",
-      "$alias": "--primary-500"
-    },
-    "--interactive-light": {
-      "$type": "color",
-      "$value": "#CAD9FF",
-      "section": "Interactive — secondary blue (links, nav, tabs, focus)",
-      "$alias": "--color-secondary-container"
-    },
-    "--tertiary-purple": {
-      "$type": "color",
-      "$value": "#7158F4",
-      "section": "Purple (legacy tertiary aliases)",
-      "$alias": "--color-tertiary"
-    },
-    "--tertiary-purple-hover": {
-      "$type": "color",
-      "$value": "#7F69F5",
-      "section": "Purple (legacy tertiary aliases)",
-      "$alias": "--tertiary-800"
-    },
-    "--tertiary-purple-light": {
-      "$type": "color",
-      "$value": "#F1EEFE",
-      "section": "Purple (legacy tertiary aliases)",
-      "$alias": "--tertiary-50"
-    },
-    "--green": {
-      "$type": "color",
-      "$value": "#00C164",
-      "section": "Semantic status",
-      "$alias": "--color-success"
-    },
-    "--green-light": {
-      "$type": "color",
-      "$value": "#E4F8EC",
-      "section": "Semantic status",
-      "$alias": "--color-success-container"
-    },
-    "--red": {
-      "$type": "color",
-      "$value": "#FD3A45",
-      "section": "Semantic status",
-      "$alias": "--color-error"
-    },
-    "--red-light": {
-      "$type": "color",
-      "$value": "#FFEBF0",
-      "section": "Semantic status",
-      "$alias": "--color-error-container"
-    },
-    "--yellow": {
-      "$type": "color",
-      "$value": "#FFB249",
-      "section": "Semantic status",
-      "$alias": "--color-warning"
-    },
-    "--yellow-light": {
-      "$type": "color",
-      "$value": "#FFF2DF",
-      "section": "Semantic status",
-      "$alias": "--color-warning-container"
-    },
-    "--blue": {
-      "$type": "color",
-      "$value": "#1E52EE",
-      "section": "Semantic status",
-      "$alias": "--color-info"
-    },
-    "--blue-light": {
-      "$type": "color",
-      "$value": "#E9EBFD",
-      "section": "Semantic status",
-      "$alias": "--color-info-container"
     },
     "--space-0-5": {
       "$type": "dimension",

@@ -27,11 +27,11 @@
   height: 40px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   transition: border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
 }
 .input-group:focus-within {
-  border-color: var(--interactive);
+  border-color: var(--color-secondary);
   box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
 .input-group[aria-invalid="true"],

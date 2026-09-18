@@ -17,7 +17,7 @@
 ═══════════════════════════════════════ */
 
 .placeholder-panel {
-  background: var(--card-bg);
+  background: var(--color-surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--space-12) var(--space-8);
