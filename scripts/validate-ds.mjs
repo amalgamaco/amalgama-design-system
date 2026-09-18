@@ -15,6 +15,7 @@
  *   7. inline-hex     hex in index.html inline styles (swatch tables excluded) — WARN
  */
 import fs from "node:fs";
+import { spawnSync } from "node:child_process";
 import { execFileSync } from "node:child_process";
 import os from "node:os";
 import path from "node:path";
@@ -1097,6 +1098,32 @@ console.log("\n[26] el docs_anchor de cada regla abre una ficha que existe");
   else if (!rotos.length) ok("ningún docs_anchor apunta a una ficha que exista con otro nombre");
 }
 
+
+/* ────────────────────────────────────────────────────────────────────────────
+   [27] las tablas de color del sitio dicen lo que dice variables.css
+
+   Las fichas de Baseline y Color Roles llevan los hex tipeados a mano en el
+   HTML. Eso las vuelve una SEGUNDA fuente de verdad, y en sep-2026 once celdas
+   habían derivado de la primera sin que nadie lo notara — tanto que la tabla se
+   usó como fuente y se alinearon los tokens reales contra ella. Hubo que
+   revertir. Este chequeo existe para que esa confusión no pueda repetirse: la
+   tabla es una vista de variables.css, y si no lo es, rompe el gate.
+──────────────────────────────────────────────────────────────────────────── */
+console.log("\n[27] las tablas de color del sitio no derivaron de variables.css");
+{
+  const r = spawnSync("python3", ["scripts/sync-color-docs.py", "--check"],
+                      { cwd: ROOT, encoding: "utf8" });
+  if (r.error || r.status === null) {
+    warn("no se pudo correr sync-color-docs.py — chequeo salteado");
+  } else if (r.status !== 0) {
+    const detalle = (r.stdout || "").split("\n").filter((l) => l.trim().startsWith("--"));
+    fail(`${detalle.length} celda(s) de las tablas de color no coinciden con variables.css `
+         + `— la tabla es una VISTA, no una fuente. Corré python3 scripts/sync-color-docs.py: `
+         + detalle.map((l) => l.trim()).join(" · "));
+  } else {
+    ok("las fichas de Baseline y Color Roles resuelven al mismo valor que el CSS");
+  }
+}
 
 console.log(`\n${fails ? "✗" : "✓"} validate-ds: ${fails} failure(s), ${warns} warning(s)\n`);
 process.exit(fails ? 1 : 0);

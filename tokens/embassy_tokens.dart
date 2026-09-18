@@ -10,14 +10,17 @@ class EmbassyColors {
 
   // ── light ──
   static const neutral10 = Color(0xFFFAFBFC);
+  static const neutral30 = Color(0xFFF3F4F6);
   static const neutral50 = Color(0xFFEAEBED);
   static const neutral100 = Color(0xFFBFC1C8);
   static const neutral200 = Color(0xFF9FA3AE);
   static const neutral300 = Color(0xFF747989);
+  static const neutral350 = Color(0xFF63687A);
   static const neutral400 = Color(0xFF474D61);
   static const neutral500 = Color(0xFF353A4A);
   static const neutral600 = Color(0xFF282C39);
   static const neutral700 = Color(0xFF1C202C);
+  static const neutral750 = Color(0xFF171B26);
   static const neutral800 = Color(0xFF13161F);
   static const neutral900 = Color(0xFF0A0C12);
   static const neutralBlack = Color(0xFF000000);
@@ -57,6 +60,7 @@ class EmbassyColors {
   static const tertiary700 = Color(0xFF8D79F6);
   static const tertiary800 = Color(0xFF7F69F5);
   static const tertiary900 = Color(0xFF7158F4);
+  static const tertiary950 = Color(0xFF4A3BA8);
   static const success50 = Color(0xFFE4F8EC);
   static const success100 = Color(0xFFBFECD1);
   static const success200 = Color(0xFF93E1B3);
@@ -118,14 +122,14 @@ class EmbassyColors {
   static const colorPrimaryStateHover = Color(0x1A01164D);
   static const colorPrimaryStatePress = Color(0x2901164D);
   static const colorSecondary = Color(0xFF4F80FF);
-  static const colorOnSecondary = Color(0xFFFFFFFF);
+  static const colorOnSecondary = Color(0xFF01164D);
   static const colorSecondaryContainer = Color(0xFFCAD9FF);
   static const colorOnSecondaryContainer = Color(0xFF01164D);
   static const colorSecondaryContainerHover = Color(0xFFB9CCFF);
   static const colorTertiary = Color(0xFF7158F4);
   static const colorOnTertiary = Color(0xFFFFFFFF);
   static const colorTertiaryContainer = Color(0xFFE3DEFD);
-  static const colorOnTertiaryContainer = Color(0xFF7158F4);
+  static const colorOnTertiaryContainer = Color(0xFF4A3BA8);
   static const colorAccentHotPink = Color(0xFFFE566A);
   static const colorAccentCheloYellow = Color(0xFFFFC700);
   static const colorAccentKikaGreen = Color(0xFF67B9A4);
@@ -152,7 +156,7 @@ class EmbassyColors {
   static const colorOnInfo = Color(0xFFFFFFFF);
   static const colorInfoContainer = Color(0xFFE9EBFD);
   static const colorOnInfoContainer = Color(0xFF001ABA);
-  static const colorSurface = Color(0xFFFAFBFC);
+  static const colorSurface = Color(0xFFF3F4F6);
   static const colorSurfaceDim = Color(0xFFEAEBED);
   static const colorSurfaceBright = Color(0xFFFFFFFF);
   static const colorSurfaceContainerLowest = Color(0xFFFAFBFC);
@@ -162,7 +166,7 @@ class EmbassyColors {
   static const colorSurfaceContainerHighest = Color(0xFFBFC1C8);
   static const colorSurfaceVariant = Color(0xFFEAEBED);
   static const colorOnSurface = Color(0xFF0A0C12);
-  static const colorOnSurfaceVariant = Color(0xFF474D61);
+  static const colorOnSurfaceVariant = Color(0xFF63687A);
   static const colorOutline = Color(0xFF9FA3AE);
   static const colorOutlineVariant = Color(0xFFBFC1C8);
   static const colorInverseSurface = Color(0xFF0A0C12);
@@ -173,7 +177,7 @@ class EmbassyColors {
   static const colorFocus = Color(0xFF4F80FF);
   static const colorFocusRing = Color(0x264F80FF);
   static const colorErrorRing = Color(0x1FFD3A45);
-  static const colorScrim = Color(0xFF000000);
+  static const colorScrim = Color(0x52000000);
   static const colorShadow = Color(0xFF0A0C12);
   static const colorHover = Color(0x144F80FF);
   static const colorPressed = Color(0x244F80FF);
@@ -181,7 +185,7 @@ class EmbassyColors {
   static const border = Color(0x1A0A0C12);
   static const textPrimary = Color(0xFF01164D);
   static const textSecondary = Color(0xFF353A4A);
-  static const textMuted = Color(0xFF474D61);
+  static const textMuted = Color(0xFF63687A);
   static const textProse = Color(0xFF2A2F32);
   static const colorSecondaryText = Color(0xFF1E3A8C);
   static const colorSuccessText = Color(0xFF006D2C);
@@ -189,7 +193,7 @@ class EmbassyColors {
   static const colorWarningText = Color(0xFFC43800);
   static const colorInfoText = Color(0xFF001ABA);
   static const textOnDark = Color(0xFFFFFFFF);
-  static const ctxSurface = Color(0xFFFAFBFC);
+  static const ctxSurface = Color(0xFFF3F4F6);
   static const ctxSurfaceRaised = Color(0xFFFFFFFF);
   static const ctxTrack = Color(0xFFEAEBED);
   static const ctxTrackThumb = Color(0xFFFFFFFF);
@@ -201,14 +205,17 @@ class EmbassyColors {
 
   // ── dark ──
   static const neutral10Dark = Color(0xFFFAFBFC);
+  static const neutral30Dark = Color(0xFFF3F4F6);
   static const neutral50Dark = Color(0xFFEAEBED);
   static const neutral100Dark = Color(0xFFBFC1C8);
   static const neutral200Dark = Color(0xFF9FA3AE);
   static const neutral300Dark = Color(0xFF747989);
+  static const neutral350Dark = Color(0xFF63687A);
   static const neutral400Dark = Color(0xFF474D61);
   static const neutral500Dark = Color(0xFF353A4A);
   static const neutral600Dark = Color(0xFF282C39);
   static const neutral700Dark = Color(0xFF1C202C);
+  static const neutral750Dark = Color(0xFF171B26);
   static const neutral800Dark = Color(0xFF13161F);
   static const neutral900Dark = Color(0xFF0A0C12);
   static const neutralBlackDark = Color(0xFF000000);
@@ -248,6 +255,7 @@ class EmbassyColors {
   static const tertiary700Dark = Color(0xFF8D79F6);
   static const tertiary800Dark = Color(0xFF7F69F5);
   static const tertiary900Dark = Color(0xFF7158F4);
+  static const tertiary950Dark = Color(0xFF4A3BA8);
   static const success50Dark = Color(0xFFE4F8EC);
   static const success100Dark = Color(0xFFBFECD1);
   static const success200Dark = Color(0xFF93E1B3);
@@ -315,7 +323,7 @@ class EmbassyColors {
   static const colorSecondaryContainerHoverDark = Color(0xFF1E3A8C);
   static const colorTertiaryDark = Color(0xFFC6BCFB);
   static const colorOnTertiaryDark = Color(0xFF0A0C12);
-  static const colorTertiaryContainerDark = Color(0xFF7F69F5);
+  static const colorTertiaryContainerDark = Color(0xFF4A3BA8);
   static const colorOnTertiaryContainerDark = Color(0xFFF1EEFE);
   static const colorAccentHotPinkDark = Color(0xFFFE566A);
   static const colorAccentCheloYellowDark = Color(0xFFFFC700);
@@ -323,7 +331,7 @@ class EmbassyColors {
   static const colorOnAccentDark = Color(0xFF01164D);
   static const colorErrorDark = Color(0xFFF29AA1);
   static const colorOnErrorDark = Color(0xFF5C0010);
-  static const colorErrorContainerDark = Color(0xFFDB263C);
+  static const colorErrorContainerDark = Color(0xFF7A0C1B);
   static const colorOnErrorContainerDark = Color(0xFFFFCDD7);
   static const colorErrorHoverDark = Color(0xFFDB263C);
   static const colorErrorFillDark = Color(0xFFF29AA1);
@@ -347,7 +355,7 @@ class EmbassyColors {
   static const colorSurfaceDimDark = Color(0xFF0A0C12);
   static const colorSurfaceBrightDark = Color(0xFF1C202C);
   static const colorSurfaceContainerLowestDark = Color(0xFF0A0C12);
-  static const colorSurfaceContainerLowDark = Color(0xFF13161F);
+  static const colorSurfaceContainerLowDark = Color(0xFF171B26);
   static const colorSurfaceContainerDark = Color(0xFF1C202C);
   static const colorSurfaceContainerHighDark = Color(0xFF282C39);
   static const colorSurfaceContainerHighestDark = Color(0xFF353A4A);
@@ -364,7 +372,7 @@ class EmbassyColors {
   static const colorFocusDark = Color(0xFF4F80FF);
   static const colorFocusRingDark = Color(0x264F80FF);
   static const colorErrorRingDark = Color(0x1FFD3A45);
-  static const colorScrimDark = Color(0xFF000000);
+  static const colorScrimDark = Color(0x52000000);
   static const colorShadowDark = Color(0xFF000000);
   static const colorHoverDark = Color(0x144F80FF);
   static const colorPressedDark = Color(0x244F80FF);
@@ -380,9 +388,9 @@ class EmbassyColors {
   static const colorWarningTextDark = Color(0xFFC43800);
   static const colorInfoTextDark = Color(0xFF001ABA);
   static const textOnDarkDark = Color(0xFFFFFFFF);
-  static const ctxSurfaceDark = Color(0xFFFAFBFC);
+  static const ctxSurfaceDark = Color(0xFFF3F4F6);
   static const ctxSurfaceRaisedDark = Color(0xFFFFFFFF);
-  static const ctxTrackDark = Color(0xFF0A0C12);
+  static const ctxTrackDark = Color(0xFF171B26);
   static const ctxTrackThumbDark = Color(0xFF282C39);
   static const colorNavHoverDark = Color(0x73CAD9FF);
   static const colorNavHoverContentDark = Color(0xFF4F80FF);
