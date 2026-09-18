@@ -2,7 +2,7 @@
   "$schema": "https://design-tokens.org/community-group/format/",
   "$description": "Generado por scripts/build-tokens.mjs desde css/variables.css. NO editar a mano: se regenera y se pisa. Cambiá el CSS.",
   "source": "css/variables.css",
-  "generated": "2026-09-17",
+  "generated": "2026-09-18",
   "tokens": {
     "--neutral-10": {
       "$type": "color",
@@ -324,6 +324,12 @@
       "section": "Success palette",
       "$description": "container en oscuro — el -900 queda en 4.24:1"
     },
+    "--success-975": {
+      "$type": "color",
+      "$value": "#00351A",
+      "section": "Success palette",
+      "$description": "on-success en oscuro: texto sobre el verde claro"
+    },
     "--error-50": {
       "$type": "color",
       "$value": "#FFEBF0",
@@ -380,6 +386,12 @@
       "section": "Error palette",
       "$description": "container en oscuro — el -700 era demasiado claro"
     },
+    "--error-975": {
+      "$type": "color",
+      "$value": "#5C0010",
+      "section": "Error palette",
+      "$description": "on-error en oscuro: texto sobre el rojo claro"
+    },
     "--warning-50": {
       "$type": "color",
       "$value": "#FFF2DF",
@@ -395,7 +407,7 @@
       "$value": "#FFC97D",
       "section": "Warning palette"
     },
-    "--warning-400": {
+    "--warning-600": {
       "$type": "color",
       "$value": "#FFA120",
       "section": "Warning palette"
@@ -431,6 +443,12 @@
       "$value": "#7A3200",
       "section": "Warning palette",
       "$description": "container en oscuro — el -900 es naranja saturado"
+    },
+    "--warning-975": {
+      "$type": "color",
+      "$value": "#5A2A00",
+      "section": "Warning palette",
+      "$description": "on-warning en oscuro: texto sobre el ámbar claro"
     },
     "--info-50": {
       "$type": "color",
@@ -482,47 +500,52 @@
       "$value": "#001ABA",
       "section": "Information palette"
     },
+    "--info-950": {
+      "$type": "color",
+      "$value": "#00177A",
+      "section": "Information palette",
+      "$description": "on-info en oscuro: texto sobre el azul claro"
+    },
     "--accent-hot-pink": {
       "$type": "color",
       "$value": "#FE566A",
-      "section": "Sancionados — los tres que se usan.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Hot Pink      · 5.51:1 con navy encima"
     },
     "--accent-chelo-yellow": {
       "$type": "color",
       "$value": "#FFC700",
-      "section": "Sancionados — los tres que se usan.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Chelo Yellow  · 11.0:1 con navy encima"
     },
     "--accent-kika-green": {
       "$type": "color",
       "$value": "#67B9A4",
-      "section": "Sancionados — los tres que se usan.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Kika Green    · 7.28:1 con navy encima"
-    },
-    "--color-on-accent": {
-      "$type": "color",
-      "$value": "#01164D",
-      "section": "Sancionados — los tres que se usan.",
-      "$alias": "--primary-900"
     },
     "--accent-pink-sebiche": {
       "$type": "color",
       "$value": "#F1A7A3",
-      "section": "Documentados, NO sancionados. Existen en el Manual y se registran para que nadie los reinvente, pero no entran en trabajo nuevo.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Pink Sebiche"
     },
     "--accent-sky": {
       "$type": "color",
       "$value": "#49A4FF",
-      "section": "Documentados, NO sancionados. Existen en el Manual y se registran para que nadie los reinvente, pero no entran en trabajo nuevo.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Sky / Data — pisa de cerca a --chart-1"
     },
     "--accent-lime": {
       "$type": "color",
       "$value": "#E0FF4F",
-      "section": "Documentados, NO sancionados. Existen en el Manual y se registran para que nadie los reinvente, pero no entran en trabajo nuevo.",
+      "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Lime — aparece una sola vez, como highlight"
+    },
+    "--ink": {
+      "$type": "color",
+      "$value": "#2A2F32",
+      "section": "«Ink»: el gris-carbón del Manual para prosa larga. No es un paso de la rampa neutral —tiene otro tono— así que es una primitiva de marca y no un  neutral . Su rol es  text-prose."
     },
     "--color-primary": {
       "$type": "color",
@@ -615,6 +638,30 @@
       "$description": "6.5:1. El -900 daba 3.66:1",
       "$dark": "#F1EEFE",
       "$alias": "--tertiary-950"
+    },
+    "--color-accent-hot-pink": {
+      "$type": "color",
+      "$value": "#FE566A",
+      "section": "Acentos de marca — la capa de uso sobre la paleta del Manual. Un componente o una lámina consume ESTOS, nunca la primitiva. Las reglas del Manual son parte del rol: máximo DOS juntos en una composición, uno si es tipografía; nunca fondo dominante; nunca texto corrido; nunca amarillo sobre azul («no todos somos hinchas de Boca :)»). El `on` de los tres es navy: blanco no llega a AA en ninguno (3.09:1 en el rosa, 2.34:1 en el verde). No se recalibran en oscuro: son color de marca, no de superficie, y su par ya pasa en los dos temas.",
+      "$alias": "--accent-hot-pink"
+    },
+    "--color-accent-chelo-yellow": {
+      "$type": "color",
+      "$value": "#FFC700",
+      "section": "Acentos de marca — la capa de uso sobre la paleta del Manual. Un componente o una lámina consume ESTOS, nunca la primitiva. Las reglas del Manual son parte del rol: máximo DOS juntos en una composición, uno si es tipografía; nunca fondo dominante; nunca texto corrido; nunca amarillo sobre azul («no todos somos hinchas de Boca :)»). El `on` de los tres es navy: blanco no llega a AA en ninguno (3.09:1 en el rosa, 2.34:1 en el verde). No se recalibran en oscuro: son color de marca, no de superficie, y su par ya pasa en los dos temas.",
+      "$alias": "--accent-chelo-yellow"
+    },
+    "--color-accent-kika-green": {
+      "$type": "color",
+      "$value": "#67B9A4",
+      "section": "Acentos de marca — la capa de uso sobre la paleta del Manual. Un componente o una lámina consume ESTOS, nunca la primitiva. Las reglas del Manual son parte del rol: máximo DOS juntos en una composición, uno si es tipografía; nunca fondo dominante; nunca texto corrido; nunca amarillo sobre azul («no todos somos hinchas de Boca :)»). El `on` de los tres es navy: blanco no llega a AA en ninguno (3.09:1 en el rosa, 2.34:1 en el verde). No se recalibran en oscuro: son color de marca, no de superficie, y su par ya pasa en los dos temas.",
+      "$alias": "--accent-kika-green"
+    },
+    "--color-on-accent": {
+      "$type": "color",
+      "$value": "#01164D",
+      "section": "Acentos de marca — la capa de uso sobre la paleta del Manual. Un componente o una lámina consume ESTOS, nunca la primitiva. Las reglas del Manual son parte del rol: máximo DOS juntos en una composición, uno si es tipografía; nunca fondo dominante; nunca texto corrido; nunca amarillo sobre azul («no todos somos hinchas de Boca :)»). El `on` de los tres es navy: blanco no llega a AA en ninguno (3.09:1 en el rosa, 2.34:1 en el verde). No se recalibran en oscuro: son color de marca, no de superficie, y su par ya pasa en los dos temas.",
+      "$alias": "--primary-900"
     },
     "--color-error": {
       "$type": "color",
@@ -917,6 +964,22 @@
       "$value": "rgba(0,0,0,.32)",
       "section": "Ring de error (inputs .is-error): derivado de  color-error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba."
     },
+    "--color-hover": {
+      "$type": "color",
+      "$value": "#4F80FF14",
+      "section": "Capa de estado. Estaban documentados en el sitio (Styles · Color · Baseline, «State Palette») y no existían en el CSS: tres tokens fantasma. Se derivan de  color-secondary con color-mix, así que se recalibran solos en oscuro en vez de arrastrar el rgba de claro."
+    },
+    "--color-pressed": {
+      "$type": "color",
+      "$value": "#4F80FF24",
+      "section": "Capa de estado. Estaban documentados en el sitio (Styles · Color · Baseline, «State Palette») y no existían en el CSS: tres tokens fantasma. Se derivan de  color-secondary con color-mix, así que se recalibran solos en oscuro en vez de arrastrar el rgba de claro."
+    },
+    "--color-selected": {
+      "$type": "color",
+      "$value": "#CAD9FF",
+      "section": "SELECCIONADO. El sitio lo documentaba en secondary-50; se unifica con el token que ya significa «seleccionado» en todo el sistema (chip, segmented, pagination, toggle, calendar, list, nav activo) en vez de abrir un segundo valor para lo mismo.  color-nav-selected sigue siendo su alias de nav.",
+      "$alias": "--color-secondary-container"
+    },
     "--button-secondary-bg": {
       "$type": "color",
       "$value": "#EAEBED",
@@ -1002,7 +1065,8 @@
       "$type": "color",
       "$value": "#2A2F32",
       "section": "Prosa larga de COLATERAL: el gris-carbón del Manual («Ink»). El navy de  text-primary es el color de producto y sigue siéndolo; en un párrafo de varias líneas de un deck o una propuesta, el Manual usa este. No es para UI: una celda, un label o un botón siguen en los tokens de componente. En oscuro no hay casi-negro que valga, así que vuelve a ser el mismo color que el texto principal (ver los bloques por tema).",
-      "$dark": "#EAEBED"
+      "$dark": "#EAEBED",
+      "$alias": "--ink"
     },
     "--color-secondary-text": {
       "$type": "color",

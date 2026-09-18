@@ -7,7 +7,7 @@
 <meta name="description" content="Sistema de diseño de Amalgama — tokens, componentes y documentación viva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css?v=f1665b81">
+<link rel="stylesheet" href="css/variables.css?v=d00ef7c0">
 <link rel="stylesheet" href="css/md-sys-bridge.css?v=a6e3f4a0">
 <link rel="stylesheet" href="css/base.css?v=dafca354">
 <link rel="stylesheet" href="css/composition.css?v=3bc8e5f7">
@@ -84,7 +84,7 @@
   --ds-accent-bg:     var(--secondary-50);
   --ds-tag-bg:        var(--secondary-50);
   --ds-code-bg:       var(--md-inverse-surface);
-  --ds-code-text:     var(--neutral-100);
+  --ds-code-text:     var(--md-on-surface-variant);
 
   /* hot-pink brand accent */
   --hot-pink: #fe566a;
@@ -153,9 +153,11 @@
   --tertiary:         #9bb4ff;
   --tertiary-light:   #1e2d52;
   --sidebar-bg:     var(--md-surface-container);
-  --neutral-50:     var(--md-surface-variant);
-  --neutral-100:    var(--md-outline-variant);
-  --neutral-900:    var(--md-on-surface);
+  /* Acá el shell reasignaba --neutral-50/-100/-900 a valores de superficie. Era
+     un atajo del cromo de la doc, y salía caro: envenenaba tres PRIMITIVAS del
+     sistema, así que toda la capa semántica de variables.css tenía que escribir
+     hex literal en vez de apuntar a su primitiva, para no resolver cruzado.
+     Los dos únicos consumidores pasaron a tokens de cromo y el atajo se fue. */
 }
 
 /* ── Reset ── */
@@ -1129,7 +1131,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   transition: background var(--duration-fast);
   font-family: inherit; font-size: 16px; font-weight: 500;
 }
-.number-input-btn:hover { background: var(--neutral-100); color: var(--text-primary); }
+.number-input-btn:hover { background: var(--color-surface-container-high); color: var(--text-primary); }
 
 /* ═══════════════════════════════════════════════
    HOME PAGE — redesign (MD3-inspired, Amalgama brand)

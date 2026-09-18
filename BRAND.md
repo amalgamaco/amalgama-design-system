@@ -67,15 +67,15 @@ de uso del token.
 | **Black Hole** | `#01164D` | `--primary-900` → `--color-primary`, `--text-primary` |
 | **Agile Blue** | `#4F80FF` | `--secondary-900` → `--color-secondary`, `--interactive`, `--color-focus` |
 | **Dusk** | `#1C2438` | `--neutral-700` (`#1C202C`) |
-| **Ink** | `#2A2F32` | `--text-prose` — prosa larga de colateral |
+| **Ink** | `#2A2F32` | primitiva `--ink` → rol `--text-prose` — prosa larga de colateral |
 | **Moon Grey** | `#B0B4CD` | `--neutral-100` (`#BFC1C8`) |
 | **Mist** | `#E4E7EC` | `--neutral-50` (`#EAEBED`) |
 | **Fog** | `#F1F3FA` | `--neutral-30` (`#F3F4F6`) |
 | **Slate** | `#7A8390` | `--neutral-300` (`#747989`) |
 | **Milky Way** | `#FFFFFF` | `--neutral-white` |
-| **Hot Pink** | `#FE566A` | `--accent-hot-pink` |
-| **Chelo Yellow** | `#FFC700` | `--accent-chelo-yellow` |
-| **Kika Green** | `#67B9A4` | `--accent-kika-green` |
+| **Hot Pink** | `#FE566A` | `--color-accent-hot-pink` |
+| **Chelo Yellow** | `#FFC700` | `--color-accent-chelo-yellow` |
+| **Kika Green** | `#67B9A4` | `--color-accent-kika-green` |
 | **Pink Sebiche** | `#F1A7A3` | `--accent-pink-sebiche` — documentado, no sancionado |
 | **Wish** | `#7158F4` | `--tertiary-900` |
 
@@ -204,10 +204,10 @@ decks, los tres UI kits, una landing vieja.
 | `secondary-600` | `#7299FF` | `--secondary-700` |
 | `secondary-400` | `#95B3FF` | `--secondary-500` |
 | `secondary-200` / `-100` / `-050` | — | `--secondary-300` / `-100` / `-50` |
-| `hot-pink` | `#FE566A` | `--accent-hot-pink` |
+| `hot-pink` | `#FE566A` | `--color-accent-hot-pink` |
 | `hot-pink-soft` | `#FE7888` | derivar con `color-mix()` del acento |
-| `chelo-yellow` | `#FFC700` | `--accent-chelo-yellow` |
-| `kika-green` | `#67B9A4` | `--accent-kika-green` |
+| `chelo-yellow` | `#FFC700` | `--color-accent-chelo-yellow` |
+| `kika-green` | `#67B9A4` | `--color-accent-kika-green` |
 | `pink-sebiche` | `#F1A7A3` | `--accent-pink-sebiche` *(no sancionado)* |
 | `sky`, `data` | `#49A4FF` | `--accent-sky` *(no sancionado)* · en charts, `--chart-1` |
 | `lime` | `#E0FF4F` | `--accent-lime` *(no sancionado)* |
@@ -220,7 +220,7 @@ decks, los tres UI kits, una landing vieja.
 | `stone` | `#D9D9D9` | `--neutral-100` |
 | `slate` | `#7A8390` | `--neutral-300` |
 | `slate-dark` | `#4A536E` | `--neutral-400` |
-| `ink` | `#2A2F32` | `--text-prose` *(prosa)* · `--color-on-surface` *(dentro de componentes)* |
+| `ink` | `#2A2F32` | `--text-prose` *(prosa)* · `--color-on-surface` *(dentro de componentes)* — la primitiva es `--ink` |
 | `ink-soft` | `#1F2025` | `--neutral-800` |
 | `night` | `#0F1217` | `--neutral-900` |
 | `positive`, `positive-alt` | `#28CB7D`, `#24CC71` | `--success-400` (`#28CB7C`) |

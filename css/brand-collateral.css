@@ -117,7 +117,7 @@
   width: 42px;
   height: 4px;
   margin-bottom: var(--space-5);
-  background: var(--accent-hot-pink);
+  background: var(--color-accent-hot-pink);
   border-radius: var(--radius-sm);
 }
 

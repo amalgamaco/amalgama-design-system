@@ -32,11 +32,28 @@ break theming. The correct alternative is always the matching `--color-*` role.
 | `--neutral-*` | `10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, black, white` | Greyscale ramp feeding surfaces, text, borders, disabled. | **No** — use surface / text / outline / disabled roles. |
 | `--primary-*` (navy) | `50, 60, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900` | Brand navy; feeds Primary role + page text. `--primary-60` = periwinkle Primary Container (light). | **No** — use `--color-primary*` / `--text-primary`. |
 | `--secondary-*` (agile/periwinkle blue) | `10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 925, 950` | Interactive accent (links/nav/focus) + Secondary tonal role. `925`/`950` are dark-mode container/on values. | **No** — use `--color-secondary*` / `--interactive` / `--color-focus`. |
-| `--tertiary-*` (purple/violet) | `50, 100, 200, 300, 400, 500, 600, 700, 800, 900` | Purple accent family. | **No** — use `--color-tertiary*`. |
-| `--success-*` | `50–900` (full) | Green status ramp. | **No** — use `--color-success*` / `--green*`. |
-| `--error-*` | `50–900` (full) | Red status ramp. | **No** — use `--color-error*` / `--red*`. |
-| `--warning-*` | `50, 100, 200, 400, 500, 700, 800, 900` (no `300`/`600`) | Amber status ramp. | **No** — use `--color-warning*` / `--yellow*`. |
-| `--info-*` | `50–900` (full) | Blue status ramp. | **No** — use `--color-info*` / `--blue*`. |
+| `--tertiary-*` (purple/violet) | `50–900` + `950` | Purple accent family. | **No** — use `--color-tertiary*`. |
+| `--success-*` | `50–900` + `950, 975` | Green status ramp. | **No** — use `--color-success*` / `--green*`. |
+| `--error-*` | `50–900` + `950, 975` | Red status ramp. | **No** — use `--color-error*` / `--red*`. |
+| `--warning-*` | `50, 100, 200, 500, 600, 700, 800, 900` + `925, 950, 975` (no `300`/`400`) | Amber status ramp. | **No** — use `--color-warning*` / `--yellow*`. |
+| `--info-*` | `50–900` + `950` | Blue status ramp. | **No** — use `--color-info*` / `--blue*`. |
+| `--accent-*` (brand) | `hot-pink, chelo-yellow, kika-green, pink-sebiche, sky, lime` | The Manual de Marca accents. **Single values, not ramps** — the Manual defines one value per accent, not ten, so they carry no step number. | **No** — use `--color-accent-*` (§2a-bis). |
+| `--ink` | — | The Manual's charcoal for long-form prose. Not a step of the neutral ramp: a different hue. | **No** — use `--text-prose`. |
+
+### 1a. Where this ramp differs from the Figma Baseline
+
+The published Baseline (Styles · Color · Baseline) is the Figma source for the ramps. Embassy adds
+**eleven steps that are not in it**, every one of them because a role needed a value that passed AA
+and the ramp had no step for it. They are Embassy extensions, not Figma drift, and the reason lives
+in the comment next to each one in `css/variables.css`:
+
+`neutral-30` · `neutral-350` · `neutral-750` · `primary-60` · `tertiary-950` · `success-950` ·
+`success-975` · `error-950` · `error-975` · `warning-925` · `warning-950` · `warning-975` ·
+`info-950`.
+
+One step was **mis-numbered until sep-2026**: `--warning-400` held `#FFA120`, which the Baseline
+names `warning-600`. It had no consumers and was renamed to `--warning-600`; there is still no
+`warning-400` or `warning-300`, because the Baseline has none.
 
 ---
 
@@ -68,15 +85,18 @@ surface), on-container (text on that container). **Pair `X` with `on-X`, and `X-
 Not status and not hierarchy: the colour voice of Amalgama, with names of their own. **The Manual's
 rules are part of the token** — honour them or the token is being misused. Full context: `BRAND.md` §3.
 
-| Token | Name · value | Rules |
+| Role (consume this) | Primitive · value | Rules |
 |---|---|---|
-| `--accent-hot-pink` | Hot Pink `#FE566A` | Sanctioned. The most-used accent of the Manual. Not `--color-error` — that means *error*. |
-| `--accent-chelo-yellow` | Chelo Yellow `#FFC700` | Sanctioned. **Never on blue or light blue** — *no todos somos hinchas de Boca :)* |
-| `--accent-kika-green` | Kika Green `#67B9A4` | Sanctioned. Not the success green. |
+| `--color-accent-hot-pink` | `--accent-hot-pink` `#FE566A` | Sanctioned. The most-used accent of the Manual. Not `--color-error` — that means *error*. |
+| `--color-accent-chelo-yellow` | `--accent-chelo-yellow` `#FFC700` | Sanctioned. **Never on blue or light blue** — *no todos somos hinchas de Boca :)* |
+| `--color-accent-kika-green` | `--accent-kika-green` `#67B9A4` | Sanctioned. Not the success green. |
 | `--color-on-accent` | `--primary-900` | Text/icon on any of the three. **White fails AA on all of them** (3.09:1 on the pink, 2.34:1 on the green). |
-| `--accent-pink-sebiche` | Pink Sebiche `#F1A7A3` | Documented, **not sanctioned** — registered so nobody reinvents it; not for new work. |
-| `--accent-sky` | Sky / Data `#49A4FF` | Documented, not sanctioned. Sits close to `--chart-1`; in a chart use the chart token. |
-| `--accent-lime` | Lime `#E0FF4F` | Documented, not sanctioned. Appears once in the Manual, as a highlight. |
+| *(no role)* | `--accent-pink-sebiche` `#F1A7A3` | Documented, **not sanctioned** — registered so nobody reinvents it. No role, so nothing can consume it by accident. |
+| *(no role)* | `--accent-sky` `#49A4FF` | Documented, not sanctioned. Sits close to `--chart-1`; in a chart use the chart token. |
+| *(no role)* | `--accent-lime` `#E0FF4F` | Documented, not sanctioned. Appears once in the Manual, as a highlight. |
+
+The three sanctioned accents **do not recalibrate in dark**: they are brand colour, not surface, and
+the pair with `--color-on-accent` already passes in both themes.
 
 Across any one composition: **at most two accents**, one if it is type. An accent is never a
 dominant background and never body copy.
@@ -136,6 +156,17 @@ Menu and sidebar-nav hover reads **blue, never grey**. All derived from
 internal token layer lives in its own file, not in `variables.css`. Use for categorical series in
 charts; they inherit theming through the roles they alias.
 
+### 2e-bis. Interaction state (`--color-hover` / `-pressed` / `-selected`)
+
+Documented on the site's State Palette since v2.1 and **missing from the CSS until sep-2026** — three
+phantom tokens. They exist now, derived rather than literal:
+
+| Token | Value | Use |
+|---|---|---|
+| `--color-hover` | `color-mix(--color-secondary 8%, transparent)` | Hover overlay on an interactive element. Derived, so it recalibrates in dark on its own. |
+| `--color-pressed` | `color-mix(--color-secondary 14%, transparent)` | Press / tap overlay. |
+| `--color-selected` | `--color-secondary-container` | Selected background. The site documented `secondary-50`; it was unified with the token that already means SELECTED everywhere in the system rather than opening a second value for one meaning. `--color-nav-selected` stays as the nav-scoped alias. |
+
 ### 2f. Semantic aliases (convenience names over the roles)
 
 Thin aliases; prefer them where they read clearer, but they resolve to the roles above.
@@ -150,7 +181,7 @@ Thin aliases; prefer them where they read clearer, but they resolve to the roles
 | `--text-primary` | `--primary-900` (light) → `#EAEBED` (dark) | **Page headings AND body.** Brand navy, not black. |
 | `--text-secondary` | `--neutral-500` → `#BFC1C8` | Secondary page text. |
 | `--text-muted` | `--color-on-disabled` | Muted/hint page text. |
-| `--text-prose` | `#2A2F32` (light) → `#EAEBED` (dark) | **Long-form prose in collateral only** — the Manual's "Ink". Product text stays `--text-primary` (navy). In dark there is no near-black, so it returns to the main text colour. |
+| `--text-prose` | `--ink` (light) → `--neutral-50` (dark) | **Long-form prose in collateral only** — the Manual's "Ink". Product text stays `--text-primary` (navy). In dark there is no near-black, so it returns to the main text colour. |
 | `--text-on-dark` | `--neutral-white` | Text on permanently-dark surfaces. |
 | `--interactive` / `--interactive-hover` / `--interactive-light` | `--color-secondary` / navy-ish hover / `--color-secondary-container` | Links, nav, tabs, focus accents. |
 | `--accent` / `--accent-light` | `--interactive` / `--interactive-light` | Docs-shell chrome accents. |
