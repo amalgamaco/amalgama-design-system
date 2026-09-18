@@ -26,7 +26,7 @@
   border-top-color: var(--primary);
   border-radius: 50%;
   vertical-align: -3px;
-  animation: spinner-rotate .7s linear infinite;
+  animation: spinner-rotate .7s var(--ease-linear) infinite;
 }
 .spinner-sm { width: 12px; height: 12px; }
 .spinner-lg { width: 24px; height: 24px; border-width: 3px; }

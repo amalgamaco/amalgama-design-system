@@ -66,10 +66,10 @@
 }
 .progress-circular-indeterminate .progress-circular-fill {
   stroke-dasharray: 85 28;
-  animation: progress-circular-spin 1.2s linear infinite;
+  animation: progress-circular-spin 1.2s var(--ease-linear) infinite;
 }
 .progress-circular-indeterminate {
-  animation: progress-circular-rotate 1.6s linear infinite;
+  animation: progress-circular-rotate 1.6s var(--ease-linear) infinite;
 }
 @keyframes progress-circular-spin {
   0%   { stroke-dashoffset: 0; }

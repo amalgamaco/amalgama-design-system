@@ -65,7 +65,7 @@ rule it violates** (with the doc to cite). Record every hit; they become your mi
 | Look for | Violates | Fix |
 |---|---|---|
 | Any raw hex (`#3b82f6`, `#fff`, `#1c2438`) in CSS/inline styles | Tokens are law (CLAUDE.md); MIGRATION.md §Color algorithm | Classify by element **role**, assign the semantic token — never nearest-hex |
-| A "product mode" class redefining `--bg`/`--border`/`--on-surface` to legacy values | MIGRATION.md anti-pattern #3 (parallel token layer) | Delete it; DS token values ARE the target |
+| A "product mode" class redefining `--surface`/`--border`/`--on-surface` to legacy values | MIGRATION.md anti-pattern #3 (parallel token layer) | Delete it; DS token values ARE the target |
 | Hand-written `@media (prefers-color-scheme)` / `.dark` overrides | MIGRATION.md anti-pattern #4 (per-theme CSS) | Delete; the semantic layer recalibrates under `data-theme="dark"` |
 | `font: 600 20px 'Epilogue'` / loose `font-size: 15px` | MIGRATION.md §Typography; GOVERNANCE §8 | `--font-heading` + a `--font-size-*` token; snap to nearest role token |
 | Custom rgba shadows | GOVERNANCE §9.1 | `--shadow-sm/md/lg` |
@@ -483,7 +483,7 @@ Use as real checkboxes in the migration PR / review.
 - [ ] No invented components — every element maps to a `css/components/` class or is flagged as a DS gap.
 - [ ] Gamaforce domain patterns used where they apply (`vacancy-card`, `kanban`, `person-card`), not ad-hoc flex.
 - [ ] No raw hex / no loose `font-size` / no quoted font families in the screen's CSS or inline styles.
-- [ ] No parallel token layer (no class redefining `--bg`/`--border`/`--text-*`) and no hand-written per-theme overrides.
+- [ ] No parallel token layer (no class redefining `--surface`/`--border`/`--on-surface`) and no hand-written per-theme overrides.
 - [ ] Exactly one `btn-primary` per context; no flat action rows; no `width:100%` on buttons.
 - [ ] Spacing on the `--space-*` scale; button radius via size class, not inline.
 - [ ] Every status/categorical label is a `.badge`; every filter control is a `.chip`/select; chips don't trigger actions.

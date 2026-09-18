@@ -60,7 +60,7 @@ If migrating a legacy element, look it up in `MIGRATION.md`'s legacy→DS mappin
 ### (d) Style ONLY via tokens — `css/variables.css`
 
 **Tokens are the law.** Every color → `var(--<role>)`
-(`--accent`, `--bg`, `--border`); every radius → `var(--radius-*)`; every shadow →
+(`--primary`, `--surface`, `--on-surface`, `--border`); every radius → `var(--radius-*)`; every shadow →
 `var(--shadow-*)`; every spacing → `var(--space-*)`; every `font-size` → a
 `--font-size-*` token; fonts → `var(--font-body|--font-heading|--font-mono)`. **Never a
 raw hex, never a loose px, never a quoted font family.** (See §4.)

@@ -171,10 +171,14 @@ para los once escalones que Embassy suma al Baseline de Figma, y por qué cada u
 | `--accent-hot-pink` · `--accent-chelo-yellow` · `--accent-kika-green` (+ `--on-accent`) | los acentos de marca. **Máximo dos juntos**, nunca como fondo dominante, nunca para texto corrido, y **nunca amarillo sobre azul**. El `on` de los tres es navy: blanco no llega a AA en ninguno |
 | `--hover` · `--pressed` · `--selected` | la capa de estado: overlay de hover (8%), de press (14%) y fondo de seleccionado. Derivados de `--secondary`, así que se recalibran solos |
 
-Alias semánticos de página: `--bg` (fondo), `--surface-container` / `--surface-container` (superficie de tarjeta y
-shell), `--border` (chrome de contenedores y línea divisoria, más tenue que `outline`),
-`--on-surface` (contenido primario) y `--on-surface-variant` (énfasis medio).
-No hay `--surface`, `--divider` ni `--accent`: eran duplicados y se fueron en sep-2026.
+Superficie y contenido de página salen de los mismos roles que usa un componente, sin una capa de
+atajos encima: `--surface` (fondo), `--surface-container` (tarjeta y shell), `--border` (chrome de
+contenedores y línea divisoria, más tenue que `--outline`), `--on-surface` (contenido primario) y
+`--on-surface-variant` (énfasis medio).
+
+Había una capa de alias arriba de los roles —`--bg`, `--card-bg`, `--sidebar-bg`, `--divider`,
+`--accent`, `--interactive` y compañía— y se fue en sep-2026: eran un segundo nombre para el mismo
+valor. Si encontrás uno en código viejo, la tabla de reemplazos está en `TOKENS.md` §2f.
 
 > **El texto tiene dos niveles y nada más**, que es la forma que documenta el Design System y la
 > de Material: `--on-surface` para contenido primario —títulos, cuerpo, y el texto adentro de

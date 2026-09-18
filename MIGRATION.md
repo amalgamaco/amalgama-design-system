@@ -8,7 +8,7 @@ CLAUDE.md tells you how to *build with* the DS. This file tells you how to *tran
 
 ## The workflow (phases, in order)
 
-1. **Token audit (before any component work).** Inventory the legacy CSS: every hardcoded hex, every custom property. If the product defines its own custom-property layer that overlaps DS token names or roles (**>10 diverging vars = blocker**), STOP and reconcile tokens first — never ship a parallel token layer (e.g. a mode class redefining `--bg`, `--border`, `--on-surface` to legacy values). The DS token values ARE the target; legacy values do not survive, not even "close" ones.
+1. **Token audit (before any component work).** Inventory the legacy CSS: every hardcoded hex, every custom property. If the product defines its own custom-property layer that overlaps DS token names or roles (**>10 diverging vars = blocker**), STOP and reconcile tokens first — never ship a parallel token layer (e.g. a mode class redefining `--surface`, `--border`, `--on-surface` to legacy values). The DS token values ARE the target; legacy values do not survive, not even "close" ones.
 2. **Component inventory.** List every UI element on the screen and map each to a DS component using the table below. Elements that map to nothing get flagged (see *Gaps*), not improvised.
 3. **Apply.** Load order per CLAUDE.md; markup per each component's `Uso:` block; colors per the algorithm below. Never stretch or realign a component beyond its documented anatomy.
 4. **Hierarchy pass.** One `btn-primary` per context. If the legacy screen had several equal-weight actions, introduce hierarchy (primary + secondary/tertiary); don't replicate the flatness.
@@ -27,7 +27,7 @@ CLAUDE.md tells you how to *build with* the DS. This file tells you how to *tran
 | Secondary / supporting text | `--on-surface-variant` | custom grays |
 | Muted / disabled text | `--on-surface-variant` | opacity hacks |
 | Text inside components (chips, buttons, cells) | `--on-surface` / the component's own `on-*` token | `--on-surface` |
-| Page background | `--bg` | raw hex |
+| Page background | `--surface` | raw hex |
 | Card / panel surface | `--surface-container` | raw hex |
 | Container borders (cards, tables, panels) | `--border` | `--outline` |
 | Interactive element outlines (inputs, chips) | `--outline` | `--border` |
@@ -36,7 +36,7 @@ CLAUDE.md tells you how to *build with* the DS. This file tells you how to *tran
 | Shadows | `--shadow-sm/md/lg` | custom rgba shadows |
 
 Hard rules:
-- **Never redefine** a the semantic roles, `--text-*`, `--bg`, `--border`, or alias token to a legacy value. If a DS token "looks wrong," the wrong token was chosen — pick the right role, don't bend the token.
+- **Never redefine** a role token (`--surface`, `--on-surface`, `--border`, …) to a legacy value. If a DS token "looks wrong," the wrong token was chosen — pick the right role, don't bend the token.
 - **Never write per-theme overrides** (`@media (prefers-color-scheme)`, `.dark` classes). Semantic tokens recalibrate themselves under `data-theme="dark"`. Legacy code that hardcodes "theme-aware-looking" hex pairs gets collapsed into the single semantic token.
 - Zero raw hex in output (the only hex allowed lives in `css/variables.css`).
 
@@ -95,7 +95,7 @@ Machine-checkable — all must pass:
 - [ ] `grep -nE '#[0-9a-fA-F]{3,8}\b' <output css/html>` → no hits outside `css/variables.css` (SVG fills in illustrations exempt).
 - [ ] `grep -n 'font-size:\s*[0-9]'` → no hits (all sizes via `--font-size-*`).
 - [ ] `grep -n "font-family:\s*['\"]"` → no quoted family names in component code.
-- [ ] No redefinition of the semantic roles, `--text-*`, `--bg`, `--border`, `--shadow-*` outside `variables.css`.
+- [ ] No redefinition of a role token or `--shadow-*` outside `variables.css`.
 - [ ] At most one `btn-primary` per view context; no `width: 100%` on `.btn-*`.
 - [ ] Every categorical/status label is a `.badge`; every filter control is a `.chip`.
 - [ ] CSS `<link>` tags carry `?v=N` and were bumped if library files changed.

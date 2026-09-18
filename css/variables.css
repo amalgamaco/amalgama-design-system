@@ -739,6 +739,11 @@
   --ease-default:    cubic-bezier(.4,0,.2,1);
   --ease-enter:      cubic-bezier(0,0,0,1);
   --ease-exit:       cubic-bezier(.3,0,1,1);
+  /* Un loop continuo —shimmer, spinner, barra indeterminada— no acelera ni
+     frena: si lo hiciera, cada vuelta tendría un principio y un final visibles
+     y la espera se leería como tirones. Por eso es su propia curva, y por eso
+     GOVERNANCE §11.1a la exime del par enter/exit. */
+  --ease-linear:     linear;
   /* Expressive scheme — CSS-engineered overshoot approximating MD3's spring
      physics (which MD3 itself says has no native Web/CSS implementation).
      Spatial use only (movement/scale/rotate) — MD3 explicitly excludes

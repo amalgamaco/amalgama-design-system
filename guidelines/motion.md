@@ -67,7 +67,7 @@ Overlays declare **both** `data-[state=open]` and `data-[state=closed]` animatio
 - **Sheet** (`sheet.tsx`): panel **slides** from its edge (`slide-in-from-{side}`) on `--ease-emphasized` at `--duration-sheet` (500ms) — a smooth decelerate with **no overshoot**, **symmetric** open/close; the overlay fades on the same curve/duration. All four `side`s share this one motion system (only the axis differs). Do **not** use `ease-expressive-*` on a Sheet — the bounce reads as unnatural on a large panel (GOVERNANCE §20.2).
 - **Tooltip** (`tooltip.tsx`): quick `fade-in-0 zoom-in-95` on `duration-fast ease-enter`, with a directional `slide-in-from-*` toward the trigger; matching `data-[state=closed]` fade/zoom-out on `ease-exit`.
 - **Snackbar / Toast**: slides in on `duration-normal ease-default`; confirms feedback, then leaves.
-- **Skeleton / spinner**: continuous shimmer/rotation loops on `--ease-linear` — these are a **separate category, exempt** from the enter/exit tokens (GOVERNANCE.md §11.1a).
+- **Skeleton / spinner**: continuous shimmer/rotation loops on `var(--ease-linear)` — these are a **separate category, exempt** from the enter/exit tokens (GOVERNANCE.md §11.1a).
 
 If a new component enters/exits, it must map to one of these patterns — an unlisted pattern is a gap to flag, not to improvise.
 
@@ -96,7 +96,7 @@ If a new component enters/exits, it must map to one of these patterns — an unl
 - **Animate `transform` and `opacity` only.** These are GPU-composited and don't trigger layout/paint. The DS's slide/zoom/fade patterns all live in this safe set.
 - **Never animate layout properties** — `width`, `height`, `top`/`left`, `margin` — they force reflow and stutter. Use `transform: translate`/`scale` to achieve the same visual.
 - **Set `animation-fill-mode: both`** on any keyframe animation to prevent a flash at start/end (GOVERNANCE.md §13.3); the DS animation utilities already do.
-- Keep looping animations (shimmer, spinner) cheap and on `--ease-linear`; don't stack many simultaneous loops on one screen.
+- Keep looping animations (shimmer, spinner) cheap and on `var(--ease-linear)`; don't stack many simultaneous loops on one screen.
 
 ---
 
@@ -123,7 +123,7 @@ If a new component enters/exits, it must map to one of these patterns — an unl
 - [ ] Any entrance/exit maps to an adopted pattern (Dialog zoom / Sheet slide / Tooltip / Snackbar / Skeleton) — gaps are flagged, not improvised.
 - [ ] Button hover/press uses the approved `-translate-y-px` lift (+ shadow growth on Elevated); no scale-up/rotate.
 - [ ] Only `transform`/`opacity` are animated; no layout properties.
-- [ ] Keyframe animations set `animation-fill-mode: both`; loops use `--ease-linear`.
+- [ ] Keyframe animations set `animation-fill-mode: both`; loops use `var(--ease-linear)`.
 - [ ] `prefers-reduced-motion` respected (global rule intact); nothing flashes > 3×/s.
 
 ---

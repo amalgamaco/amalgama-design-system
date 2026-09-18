@@ -10,7 +10,7 @@ Embassy's components ship accessible defaults (focus rings, ARIA roles, contrast
 
 ## Color contrast
 
-- **Normal text ≥ 4.5:1, large text (≥ 18px, or ≥ 14px bold) and UI/graphical objects ≥ 3:1** (WCAG 1.4.3 / 1.4.11). The token system is pre-calibrated: `--on-surface` on `--bg` is ~14:1 in light and ~15:1 in dark.
+- **Normal text ≥ 4.5:1, large text (≥ 18px, or ≥ 14px bold) and UI/graphical objects ≥ 3:1** (WCAG 1.4.3 / 1.4.11). The token system is pre-calibrated: `--on-surface` on `--surface` is ~14:1 in light and ~15:1 in dark.
 - **Stay on the token pairs.** Foreground/background must be a matched Color Role pair — `--on-primary` on `--primary`, `--on-secondary-container` on `--secondary-container`. Mixing an unpaired foreground is how you land below 3:1.
 - **Verify both themes.** Dark mode recalibrates automatically, but re-check any custom composition with `data-theme="dark"` on `<html>`. Focus rings and disabled text are the usual dark-mode casualties.
 - **White-label brands are not exempt.** When primitives are re-themed, measure the new palette's ratios — do not assume they pass (GOVERNANCE.md §17.2).

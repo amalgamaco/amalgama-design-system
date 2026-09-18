@@ -39,7 +39,7 @@ There are three distinct empty states; they are not interchangeable:
 
 ### Skeleton is the default for content-shaped waits
 
-When you know the *shape* of what is coming (a card grid, a table, a detail pane), render `.skeleton` (`css/components/skeleton.css`) in that shape while the data loads. Variants: `.skeleton-text`, `.skeleton-title`, `.skeleton-card`, `.skeleton-circle`, `.skeleton-avatar`. The shimmer runs on the `skeleton-shimmer` utility (a continuous `--ease-linear` loop, exempt from enter/exit motion tokens per GOVERNANCE §11.1a). Skeletons preserve layout, so the page does not jump when data arrives — **avoid layout shift** by matching the skeleton's dimensions to the real content.
+When you know the *shape* of what is coming (a card grid, a table, a detail pane), render `.skeleton` (`css/components/skeleton.css`) in that shape while the data loads. Variants: `.skeleton-text`, `.skeleton-title`, `.skeleton-card`, `.skeleton-circle`, `.skeleton-avatar`. The shimmer runs on the `skeleton-shimmer` utility (a continuous `var(--ease-linear)` loop, exempt from enter/exit motion tokens per GOVERNANCE §11.1a). Skeletons preserve layout, so the page does not jump when data arrives — **avoid layout shift** by matching the skeleton's dimensions to the real content.
 
 ### Progress for actions, not content
 

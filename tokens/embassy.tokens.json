@@ -1954,6 +1954,11 @@
         "rn": "Easing.bezier(0.3, 0, 1, 1)"
       }
     },
+    "--ease-linear": {
+      "$type": "motion",
+      "$value": "linear",
+      "section": "Un loop continuo —shimmer, spinner, barra indeterminada— no acelera ni frena: si lo hiciera, cada vuelta tendría un principio y un final visibles y la espera se leería como tirones. Por eso es su propia curva, y por eso GOVERNANCE §11.1a la exime del par enter/exit."
+    },
     "--ease-expressive": {
       "$type": "motion",
       "$value": "cubic-bezier(.34,1.56,.64,1)",

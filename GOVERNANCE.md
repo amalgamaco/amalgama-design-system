@@ -201,7 +201,7 @@ When a component has nested elements (e.g. a card with an inner image or an inpu
 | Primary action (filled button, FAB) | `--primary` | `--on-primary` |
 | Primary container (elevated button, primary chip) | `--primary-container` | `--on-primary-container` |
 | Secondary / tonal action | `--secondary-container` | `--on-secondary-container` |
-| Page / app background | `--surface` / `--bg` | `--on-surface` / `--on-surface` |
+| Page / app background | `--surface` | `--on-surface` / `--on-surface` |
 | Card, panel, dialog | `--surface-container` / `--surface-container` | `--on-surface` |
 | Subtle container | `--surface-variant` | `--on-surface-variant` |
 | Borders (resting state, strong — the border itself is the primary affordance) — Button tertiary/ghost/icon, Checkbox, Radio, Switch | — | `--outline` |
@@ -687,7 +687,7 @@ These are documented deviations from the rules in this document. They exist in t
 - `vacancy-card.css` / `person-card.css` — `.assignee-avatar` and `.person-avatar` gradients (raw primitives `--error-600`/`--secondary-900`/… + `--on-primary` text) replaced with semantic container pairs (`--{role}-container` + `--on-{role}-container`), matching the canonical Avatar. This also fixes the dark-mode contrast bug where `--on-primary` flipped to navy over a saturated fill.
 - `vacancy-card.css` — `.vacancy-icon` bg `--secondary-container` (shell alias) → `--secondary-container`; `.meta-dot` bg `--on-surface-variant` (a text-role token) → `--outline-variant` (decorative separator role).
 - `description.css` — `.desc-delete-btn:hover` `--error-container` / `--error` aliases → `--error-container` / `--on-error-container`.
-- Hover-uses-`var(--bg)` (`vacancy-card`, `toolbar`, `modal`, `toast`) — reconciled in an earlier pass; no `var(--bg)` hover remains.
+- Hover-uses-`var(--bg)` (`vacancy-card`, `toolbar`, `modal`, `toast`) — reconciled in an earlier pass; `--bg` itself was retired in sep-2026.
 
 **Still open:**
 
@@ -709,7 +709,7 @@ These are documented deviations from the rules in this document. They exist in t
 | `kanban.css` | `14px` | `.kanban-card` padding-x | `var(--space-4)` (16px) |
 | `badge.css` | `10px` | horizontal padding | `var(--space-3)` (12px) |
 | `button.css` | `3px` | `.btn-xs` padding-y | Minimum 4px = `var(--space-1)` |
-| `button.css` | `11px` | `.btn-xs` font-size (no token) | `var(--font-size-caption)` (12px) or add `--font-size-xs` token |
+| `button.css` | `11px` | `.btn-xs` font-size (no token) | `var(--font-size-caption)` (12px). No `--font-size-xs` was ever added and none is planned — 11px is a gap in the scale, not a missing token |
 | `button.css` | `15px` | `.btn-lg` font-size (no token used) | `var(--font-size-heading-xs)` (already equals 15px) |
 | `badge.css` | `10.5px` | `.badge-label` font-size (no token) | `var(--font-size-badge)` (11.5px) |
 
@@ -752,20 +752,27 @@ conviene hacerlo con un diff visual componente por componente, no de una pasada.
 |---|---|---|
 | `--duration-fast` | `120ms` | Micro-interactions: hover bg/border change, icon transitions, badge fade |
 | `--duration-normal` | `200ms` | Standard transitions: panel open/close, modal appear, state changes |
-| `--duration-slow` | `300ms` | (Add to `variables.css`) Large surface transitions: page panel slide, drawer enter |
-| `--duration-stagger` | `70ms` | (Add to `variables.css`) Per-item delay in list animations |
+| `--duration-medium` | `300ms` | Larger surface transitions |
+| `--duration-slow` | `450ms` | The slowest step of the scale |
+| `--duration-sheet` | `500ms` | The shared Sheet curve's duration — see §20.2 |
+
+There is no stagger token. A per-item delay was proposed and never added, and nothing in
+`css/` stages a list, so a screen that needs one flags it as a DS gap (§2.2) rather than
+multiplying a duration by an index.
 
 ### 13.2 Easing tokens
 
 | Token | Value | Use |
 |---|---|---|
-| `--ease-default` | `cubic-bezier(0.2, 0, 0, 1)` | Standard ease-out. Default for all transitions. |
-| `--ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | (Add) Subtle spring for lift/pop interactions (card hover, button press-release) |
-| `--ease-linear` | `linear` | Skeleton shimmer, progress bars, spinner rotation |
+| `--ease-default` | `cubic-bezier(.4,0,.2,1)` | Standard ease-out. Default for all transitions. |
+| `--ease-enter` · `--ease-exit` | `cubic-bezier(0,0,0,1)` · `cubic-bezier(.3,0,1,1)` | The asymmetric pair: something entering decelerates, something leaving accelerates away. |
+| `--ease-linear` | `linear` | Skeleton shimmer, spinner rotation, indeterminate progress. A continuous loop must not accelerate: if it did, every cycle would have a visible start and end. Exempt from the enter/exit pair — see §11.1a. |
+| `--ease-expressive` | `cubic-bezier(.34,1.56,.64,1)` | Overshoot for lift/pop. **Spatial only** (movement/scale/rotate), never on colour or opacity. `-enter` / `-exit` variants for the asymmetric case. (This is the curve earlier drafts called `--ease-spring`; there is no separate spring token.) |
+| `--ease-emphasized` | `cubic-bezier(.32,.72,0,1)` | The shared Sheet curve. Smooth, no overshoot, for large edge-anchored surfaces — see §20.2. |
 
 ### 13.3 Rules
 
-- **Every `transition` and `animation-duration` uses a `--duration-*` token.** Raw values like `.1s` or `100ms` in component CSS are prohibited. The only exception is `animation-delay` for per-item stagger — use `--duration-stagger` multiplied by index.
+- **Every `transition` and `animation-duration` uses a `--duration-*` token.** Raw values like `.1s` or `100ms` in component CSS are prohibited.
 - **Every `transition-timing-function` uses a `--ease-*` token.** Never hardcode `cubic-bezier()` values in component CSS.
 - **Shorthand must include easing.** Write `transition: background var(--duration-fast) var(--ease-default)`, not `transition: background var(--duration-fast)`. Omitting easing silently falls back to `ease` which may differ visually.
 - **`transform: translateY()` on hover.** Clickable cards and elevated buttons may use `translateY(-1px)` on hover and `translateY(0)` on `:active`. This is the only approved transform effect — no scale, no rotate.
@@ -791,9 +798,9 @@ Add this block after every component's animation declarations. Embassy provides 
 | Card lift on hover | ✅ | `transform: translateY(-1px)`, `var(--duration-fast) var(--ease-default)` |
 | Modal appear (opacity + translateY) | ✅ | `var(--duration-normal) var(--ease-default)` |
 | Toast slide-in | ✅ | `var(--duration-normal) var(--ease-default)` |
-| Skeleton shimmer | ✅ | `--ease-linear`, 1.5s loop |
-| Spinner rotation | ✅ | `--ease-linear`, 0.7s loop |
-| Staggered list entrance | ✅ | `var(--duration-stagger)` per item, max 5 items |
+| Skeleton shimmer | ✅ | `var(--ease-linear)`, 1.5s loop |
+| Spinner rotation | ✅ | `var(--ease-linear)`, 0.7s loop |
+| Staggered list entrance | ❌ Not specified | No stagger token exists — flag as a DS gap, do not improvise a delay |
 | Page transition | ❌ Not yet specified | Flag as DS gap — do not improvise |
 | Parallax / scroll-linked | ❌ Out of scope | — |
 

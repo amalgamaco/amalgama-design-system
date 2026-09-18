@@ -344,7 +344,7 @@ file, re-hueing those same surfaces to the brand's hue at the **same L and the s
 changes is whose tint it is, not how much tint there is.
 
 - [ ] The block covers surfaces, outline, disabled and inverse-on-surface **only**. Text greys
-      (`--on-surface*`, `--text-*`) stay neutral on purpose: they have to read the same on
+      (`--on-surface`, `--on-surface-variant`) stay neutral on purpose: they have to read the same on
       every brand
 - [ ] Every value carries its Embassy original in a comment, so the swap is auditable
 - [ ] The generator's contrast report shows the dark pairs passing AA (re-hueing preserves L, so
