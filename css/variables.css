@@ -183,6 +183,11 @@
   --color-primary-container:         var(--primary-60);
   --color-on-primary-container:      var(--primary-900);
   --color-primary-hover:             var(--primary-700);
+  /* Capa de estado de la variante de TEXTO: no es un fondo, es un velo de
+     Primary sobre lo que haya atrás. Estaba escrita a mano en button.css como
+     color-mix inline; el sitio la documenta como rol, así que vive acá. */
+  --color-primary-state-hover:       color-mix(in srgb, var(--color-primary) 10%, transparent);
+  --color-primary-state-press:       color-mix(in srgb, var(--color-primary) 16%, transparent);
   /* Secondary · Agile Blue */
   --color-secondary:                 var(--secondary-900);
   /* Texto oscuro, no blanco. El acento en claro es un color vivo y saturado: blanco
@@ -195,6 +200,10 @@
      (tonal) se diferencia del Primary por inversión (claro + texto navy). */
   --color-secondary-container:       var(--secondary-200);
   --color-on-secondary-container:    var(--primary-900);
+  /* Hover de la variante tonal. El sitio lo documenta como rol
+     (Components · Buttons → Tokens y especificaciones) y no existía en el CSS.
+     Oscurece un escalón; en los dos temas el par con on-container sigue pasando. */
+  --color-secondary-container-hover: var(--secondary-300);
   /* Tertiary (Purple) */
   --color-tertiary:                    var(--tertiary-900);
   --color-on-tertiary:                 var(--neutral-white);
@@ -293,38 +302,26 @@
      valor para lo mismo. --color-nav-selected sigue siendo su alias de nav. */
   --color-selected:                  var(--color-secondary-container);
 
-  /* ─────────────────────────────────────
-     Button · Secondary (rol de componente — NEUTRAL/tonal)
-     Tratamiento NEUTRO basado en superficie, idéntico en ambos temas:
-     una superficie tonal recesiva + borde sutil + texto on-surface.
-     NO consume el rol de acento Secondary (agile blue) — así el botón
-     Secondary siempre lee como menor jerarquía frente al Primary (filled),
-     en Light Y Dark. Los tokens semánticos ya son theme-aware, por eso
-     se definen UNA sola vez (sin override por tema). Sin hardcodes.
-  ───────────────────────────────────── */
-  /* Restaurados en sep-2026. Habían sido eliminados y btn-secondary pasó a consumir
-     --color-secondary-container directamente, o sea el mismo token que --color-nav-selected:
-     el item seleccionado del menú y el botón secundario salían idénticos. En todo el resto
-     del sistema secondary-container significa SELECCIONADO (chip, segmented, pagination,
-     toggle, calendar, list); el botón era el único lugar donde significaba "acción". Así que
-     el que se movió fue el botón, y vuelve al tratamiento neutro que describe el bloque de
-     arriba. Los roles ya son theme-aware: se definen una sola vez, sin override por tema. */
-  --button-secondary-bg:        var(--color-surface-container-high);
-  --button-secondary-fg:        var(--color-on-surface);
-  /* El relleno neutro contrasta 1.19:1 con la tarjeta: el borde ES lo que identifica
-     al control, así que tiene que llegar a 3:1 (WCAG 1.4.11). En claro --color-outline
-     es neutral-200 y se queda en 2.52:1, por eso acá va neutral-300 → 4.34:1. En dark
-     --color-outline YA es neutral-300 y encima viene teñido por la marca: ahí se usa
-     el rol (ver el bloque [data-theme="dark"]). */
-  --button-secondary-border:    var(--neutral-300);
-  --button-secondary-bg-hover:  var(--color-surface-container-highest);
+  /* Button · Secondary: NO tiene tokens propios.
+     Hasta sep-2026 existieron --button-secondary-bg/-fg/-border/-bg-hover: un
+     tratamiento neutro para que el Secondary no saliera igual que el item de
+     menú activo (los dos consumían --color-secondary-container). El sistema
+     publicado dice lo contrario y gana — «los botones consumen roles semánticos
+     globales directamente; no existen tokens de componente (--button-*)».
+     La variante tonal es --color-secondary-container / -on-secondary-container,
+     y su hover --color-secondary-container-hover. Si el botón y el nav activo
+     vuelven a leerse igual, lo que se mueve es el NAV —que ya tiene su propia
+     capa --color-nav-*—, no el botón. */
 
 
   /* ─────────────────────────────────────
      Semantic aliases
   ───────────────────────────────────── */
   --bg:             var(--color-surface);
-  --surface:        var(--color-surface-dim);
+  /* No hay un alias --surface, y es a propósito: apuntaba a --color-surface-DIM,
+     o sea que el token llamado «surface» no era la superficie. Cero usos, y una
+     trampa para el que lo leyera. La superficie de página es --bg; la de tarjeta,
+     --card-bg; el resto de la rampa se pide por su rol. */
   --sidebar-bg:     var(--color-surface-container);
   --card-bg:        var(--color-surface-container);
   /* Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad.
@@ -332,7 +329,9 @@
      outline de elementos INTERACTIVOS (--color-outline, botones/chips/inputs) se
      distinga con claridad. Theme-aware vía color-mix — sin override en dark. */
   --border:         color-mix(in srgb, var(--color-on-surface) 10%, transparent);
-  --divider:        var(--border);
+  /* No hay --divider: era un alias exacto de --border, con cero usos, y en la
+     tabla de tokens aparecía como una fila repetida sin nada que la explicara.
+     Una línea divisoria se pide con --border. */
 
   /* Tipografía de página (decisión de diseño, jun 2026): el texto principal
      —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro
@@ -377,9 +376,10 @@
   --interactive-hover:   var(--primary-500);
   --interactive-light:   var(--color-secondary-container);
 
-  /* Accent aliases — consumed by docs.css and docs shell */
-  --accent:              var(--interactive);
-  --accent-light:        var(--interactive-light);
+  /* No hay --accent ni --accent-light. Eran alias del color interactivo para el
+     cromo de la doc, y desde que existen los acentos de marca (--accent-hot-pink
+     y compañía) el prefijo --accent- significaba dos cosas sin relación. docs.css
+     consume --interactive / --interactive-light, que es lo que eran. */
 
   /* Purple (legacy tertiary aliases) */
   --tertiary-purple:       var(--color-tertiary);
@@ -808,6 +808,7 @@
   --color-on-secondary:              var(--secondary-950);        /* #1E3A8C */
   --color-secondary-container:       var(--secondary-925);        /* #3A5BB0 */
   --color-on-secondary-container:    var(--secondary-100);        /* #DCE6FF */
+  --color-secondary-container-hover: var(--secondary-950);        /* #1E3A8C */
   /* Tertiary (Purple) */
   --color-tertiary:                  var(--tertiary-300);         /* #C6BCFB */
   --color-on-tertiary: var(--neutral-900); /* neutral-900 — máximo contraste sobre tertiary claro */
@@ -868,11 +869,6 @@
   --color-disabled: var(--neutral-600);
   --color-on-disabled: var(--neutral-300);
 
-  /* Button · Secondary — el relleno y el texto ya son theme-aware por rol. El borde sí
-     se reasigna: en dark --color-outline es neutral-300 (el mismo peso que en claro pide
-     neutral-300) y además lo tiñe el tema de marca. 3.79:1 sobre la tarjeta. */
-  --button-secondary-border:    var(--color-outline);
-
   /* Aliases semánticos que dependen de la rampa */
   --text-primary: var(--neutral-50); /* neutral-50 — en dark el navy no contrasta; vuelve a on-surface */
   --text-secondary: var(--neutral-100);
@@ -904,6 +900,7 @@
   --color-on-secondary:              var(--primary-900);        /* texto oscuro: blanco sobre el acento no llega a AA */
   --color-secondary-container:       var(--secondary-200);       /* #CAD9FF */
   --color-on-secondary-container:    var(--primary-900);         /* #01164D */
+  --color-secondary-container-hover: var(--secondary-300);        /* #B9CCFF */
   --color-tertiary:                  var(--tertiary-900);        /* #7158F4 */
   --color-on-tertiary: var(--neutral-white);
   --color-tertiary-container:        var(--tertiary-100);        /* #E3DEFD */
@@ -945,9 +942,6 @@
   /* Outline — literal hex */
   --color-outline: var(--neutral-200);
   --color-outline-variant: var(--neutral-100);
-  /* Restaura el borde del botón secundario: en claro necesita neutral-300 para llegar
-     a 3:1, porque el rol outline es más liviano acá (ver :root §Button · Secondary). */
-  --button-secondary-border: var(--neutral-300);
   /* Inverse */
   --color-inverse-surface: var(--neutral-900);
   --color-inverse-on-surface: var(--neutral-50);

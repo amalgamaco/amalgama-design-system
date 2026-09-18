@@ -171,9 +171,10 @@ para los once escalones que Embassy suma al Baseline de Figma, y por qué cada u
 | `--color-accent-hot-pink` · `--color-accent-chelo-yellow` · `--color-accent-kika-green` (+ `--color-on-accent`) | los acentos de marca. **Máximo dos juntos**, nunca como fondo dominante, nunca para texto corrido, y **nunca amarillo sobre azul**. El `on` de los tres es navy: blanco no llega a AA en ninguno |
 | `--color-hover` · `--color-pressed` · `--color-selected` | la capa de estado: overlay de hover (8%), de press (14%) y fondo de seleccionado. Derivados de `--color-secondary`, así que se recalibran solos |
 
-Alias semánticos de página: `--bg`, `--surface`, `--card-bg`, `--sidebar-bg`, `--border`
-(chrome de contenedores, más tenue que `outline`), `--divider`, `--text-primary`, `--text-secondary`,
-`--text-muted`, `--interactive`, `--accent`.
+Alias semánticos de página: `--bg` (fondo), `--card-bg` / `--sidebar-bg` (superficie de tarjeta y
+shell), `--border` (chrome de contenedores y línea divisoria, más tenue que `outline`),
+`--text-primary`, `--text-secondary`, `--text-muted`, `--text-prose`, `--interactive`.
+No hay `--surface`, `--divider` ni `--accent`: eran duplicados y se fueron en sep-2026.
 
 > **El texto de página es navy, no negro.** Títulos y cuerpo usan `--text-primary`
 > (`--primary-900` en light, recalibrado en dark). `--color-on-surface` (casi negro) es para

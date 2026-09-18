@@ -582,6 +582,16 @@
       "$dark": "#E4E7EF",
       "$alias": "--primary-700"
     },
+    "--color-primary-state-hover": {
+      "$type": "color",
+      "$value": "#01164D1A",
+      "section": "Capa de estado de la variante de TEXTO: no es un fondo, es un velo de Primary sobre lo que haya atrás. Estaba escrita a mano en button.css como color-mix inline; el sitio la documenta como rol, así que vive acá."
+    },
+    "--color-primary-state-press": {
+      "$type": "color",
+      "$value": "#01164D29",
+      "section": "Capa de estado de la variante de TEXTO: no es un fondo, es un velo de Primary sobre lo que haya atrás. Estaba escrita a mano en button.css como color-mix inline; el sitio la documenta como rol, así que vive acá."
+    },
     "--color-secondary": {
       "$type": "color",
       "$value": "#4F80FF",
@@ -609,6 +619,13 @@
       "section": "Container = secondary-200 + on = primary navy: el botón/chip Secondary (tonal) se diferencia del Primary por inversión (claro + texto navy).",
       "$dark": "#DCE6FF",
       "$alias": "--primary-900"
+    },
+    "--color-secondary-container-hover": {
+      "$type": "color",
+      "$value": "#B9CCFF",
+      "section": "Hover de la variante tonal. El sitio lo documenta como rol (Components · Buttons → Tokens y especificaciones) y no existía en el CSS. Oscurece un escalón; en los dos temas el par con on-container sigue pasando.",
+      "$dark": "#1E3A8C",
+      "$alias": "--secondary-300"
     },
     "--color-tertiary": {
       "$type": "color",
@@ -980,64 +997,28 @@
       "section": "SELECCIONADO. El sitio lo documentaba en secondary-50; se unifica con el token que ya significa «seleccionado» en todo el sistema (chip, segmented, pagination, toggle, calendar, list, nav activo) en vez de abrir un segundo valor para lo mismo.  color-nav-selected sigue siendo su alias de nav.",
       "$alias": "--color-secondary-container"
     },
-    "--button-secondary-bg": {
-      "$type": "color",
-      "$value": "#EAEBED",
-      "section": "Restaurados en sep-2026. Habían sido eliminados y btn-secondary pasó a consumir  color-secondary-container directamente, o sea el mismo token que  color-nav-selected: el item seleccionado del menú y el botón secundario salían idénticos. En todo el resto del sistema secondary-container significa SELECCIONADO (chip, segmented, pagination, toggle, calendar, list); el botón era el único lugar donde significaba \"acción\". Así que el que se movió fue el botón, y vuelve al tratamiento neutro que describe el bloque de arriba. Los roles ya son theme-aware: se definen una sola vez, sin override por tema.",
-      "$alias": "--color-surface-container-high"
-    },
-    "--button-secondary-fg": {
-      "$type": "color",
-      "$value": "#0A0C12",
-      "section": "Restaurados en sep-2026. Habían sido eliminados y btn-secondary pasó a consumir  color-secondary-container directamente, o sea el mismo token que  color-nav-selected: el item seleccionado del menú y el botón secundario salían idénticos. En todo el resto del sistema secondary-container significa SELECCIONADO (chip, segmented, pagination, toggle, calendar, list); el botón era el único lugar donde significaba \"acción\". Así que el que se movió fue el botón, y vuelve al tratamiento neutro que describe el bloque de arriba. Los roles ya son theme-aware: se definen una sola vez, sin override por tema.",
-      "$alias": "--color-on-surface"
-    },
-    "--button-secondary-border": {
-      "$type": "color",
-      "$value": "#747989",
-      "section": "El relleno neutro contrasta 1.19:1 con la tarjeta: el borde ES lo que identifica al control, así que tiene que llegar a 3:1 (WCAG 1.4.11). En claro  color-outline es neutral-200 y se queda en 2.52:1, por eso acá va neutral-300 → 4.34:1. En dark  color-outline YA es neutral-300 y encima viene teñido por la marca: ahí se usa el rol (ver el bloque [data-theme=\"dark\"]).",
-      "$alias": "--neutral-300"
-    },
-    "--button-secondary-bg-hover": {
-      "$type": "color",
-      "$value": "#BFC1C8",
-      "section": "El relleno neutro contrasta 1.19:1 con la tarjeta: el borde ES lo que identifica al control, así que tiene que llegar a 3:1 (WCAG 1.4.11). En claro  color-outline es neutral-200 y se queda en 2.52:1, por eso acá va neutral-300 → 4.34:1. En dark  color-outline YA es neutral-300 y encima viene teñido por la marca: ahí se usa el rol (ver el bloque [data-theme=\"dark\"]).",
-      "$alias": "--color-surface-container-highest"
-    },
     "--bg": {
       "$type": "color",
       "$value": "#F3F4F6",
       "section": "Semantic aliases",
       "$alias": "--color-surface"
     },
-    "--surface": {
-      "$type": "color",
-      "$value": "#EAEBED",
-      "section": "Semantic aliases",
-      "$alias": "--color-surface-dim"
-    },
     "--sidebar-bg": {
       "$type": "color",
       "$value": "#FFFFFF",
-      "section": "Semantic aliases",
+      "section": "No hay un alias  surface, y es a propósito: apuntaba a  color-surface-DIM, o sea que el token llamado «surface» no era la superficie. Cero usos, y una trampa para el que lo leyera. La superficie de página es  bg; la de tarjeta,  card-bg; el resto de la rampa se pide por su rol.",
       "$alias": "--color-surface-container"
     },
     "--card-bg": {
       "$type": "color",
       "$value": "#FFFFFF",
-      "section": "Semantic aliases",
+      "section": "No hay un alias  surface, y es a propósito: apuntaba a  color-surface-DIM, o sea que el token llamado «surface» no era la superficie. Cero usos, y una trampa para el que lo leyera. La superficie de página es  bg; la de tarjeta,  card-bg; el resto de la rampa se pide por su rol.",
       "$alias": "--color-surface-container"
     },
     "--border": {
       "$type": "color",
       "$value": "#0A0C121A",
       "section": "Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad. Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el outline de elementos INTERACTIVOS ( color-outline, botones/chips/inputs) se distinga con claridad. Theme-aware vía color-mix — sin override en dark."
-    },
-    "--divider": {
-      "$type": "color",
-      "$value": "#0A0C121A",
-      "section": "Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad. Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el outline de elementos INTERACTIVOS ( color-outline, botones/chips/inputs) se distinga con claridad. Theme-aware vía color-mix — sin override en dark.",
-      "$alias": "--border"
     },
     "--text-primary": {
       "$type": "color",
@@ -1123,18 +1104,6 @@
       "$value": "#CAD9FF",
       "section": "Interactive — secondary blue (links, nav, tabs, focus)",
       "$alias": "--color-secondary-container"
-    },
-    "--accent": {
-      "$type": "color",
-      "$value": "#4F80FF",
-      "section": "Accent aliases — consumed by docs.css and docs shell",
-      "$alias": "--interactive"
-    },
-    "--accent-light": {
-      "$type": "color",
-      "$value": "#CAD9FF",
-      "section": "Accent aliases — consumed by docs.css and docs shell",
-      "$alias": "--interactive-light"
     },
     "--tertiary-purple": {
       "$type": "color",

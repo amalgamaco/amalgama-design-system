@@ -171,20 +171,27 @@ phantom tokens. They exist now, derived rather than literal:
 
 Thin aliases; prefer them where they read clearer, but they resolve to the roles above.
 
+**Three were removed in sep-2026** because they were duplicates that only made the token table
+harder to read: `--surface` (pointed at `--color-surface-`**`dim`**, so the token named "surface" was
+not the surface — zero uses), `--divider` (an exact alias of `--border`, zero uses) and
+`--accent` / `--accent-light` (aliases of `--interactive*` whose prefix started colliding with the
+brand accents `--accent-hot-pink` & co.; `docs/docs.css` now consumes `--interactive*` directly).
+
+The legacy status shorthands below (`--green`, `--red`, `--yellow`, `--blue` and their `-light`
+siblings) and `--tertiary-purple*` are **deprecated**: prefer the `--color-*` role. They are kept
+because a consuming product may still reference them; they will go in a major.
+
 | Alias | Resolves to | Use for |
 |---|---|---|
 | `--bg` | `--color-surface` | Page background. |
-| `--surface` | `--color-surface-dim` | Recessed surface. |
 | `--sidebar-bg` / `--card-bg` | `--color-surface-container` | Sidebar / card backgrounds. |
-| `--border` | `color-mix(--color-on-surface 10%, transparent)` | **Container chrome** (cards, tables, panels) — deliberately fainter than `--color-outline` so interactive outlines stand out. |
-| `--divider` | `--border` | Divider lines. |
+| `--border` | `color-mix(--color-on-surface 10%, transparent)` | **Container chrome** (cards, tables, panels) — deliberately fainter than `--color-outline` so interactive outlines stand out. Also the divider line. |
 | `--text-primary` | `--primary-900` (light) → `#EAEBED` (dark) | **Page headings AND body.** Brand navy, not black. |
 | `--text-secondary` | `--neutral-500` → `#BFC1C8` | Secondary page text. |
 | `--text-muted` | `--color-on-disabled` | Muted/hint page text. |
 | `--text-prose` | `--ink` (light) → `--neutral-50` (dark) | **Long-form prose in collateral only** — the Manual's "Ink". Product text stays `--text-primary` (navy). In dark there is no near-black, so it returns to the main text colour. |
 | `--text-on-dark` | `--neutral-white` | Text on permanently-dark surfaces. |
 | `--interactive` / `--interactive-hover` / `--interactive-light` | `--color-secondary` / navy-ish hover / `--color-secondary-container` | Links, nav, tabs, focus accents. |
-| `--accent` / `--accent-light` | `--interactive` / `--interactive-light` | Docs-shell chrome accents. |
 | `--tertiary-purple` / `-hover` / `-light` | tertiary role / `--tertiary-800` / `--tertiary-50` | Legacy purple accents. |
 | `--green/-light`, `--red/-light`, `--yellow/-light`, `--blue/-light` | success / error / warning / info main + container | Shorthand status colors. |
 

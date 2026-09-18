@@ -106,21 +106,23 @@
 .btn-primary.btn-success:hover { background: var(--color-success-fill-hover); }
 
 /* ─────────────────────────────────────
-   Secondary · fill NEUTRO (superficie tonal + borde sutil).
-   No consume el acento: en todo el sistema --color-secondary-container significa
-   SELECCIONADO (chip, segmented-button, pagination, toggle, calendar, list, y el
-   item activo del menú vía --color-nav-selected). Un botón no es un estado
-   seleccionado, y cuando compartían token el botón secundario salía igual que el
-   item de menú activo. Además, en neutro el Secondary lee como menor jerarquía
-   frente al Primary en los dos temas, que es lo que pide variables.css §Button.
+   Secondary · la variante TONAL. Consume los roles globales directamente
+   (--color-secondary-container / -on-secondary-container / -container-hover);
+   el botón no tiene tokens propios, como dice el sistema publicado.
+
+   Entre sep-2026 y hoy tuvo un relleno neutro con tokens --button-secondary-*,
+   para que no saliera igual que el item de menú activo —que consume el mismo
+   secondary-container vía --color-nav-selected—. La convivencia de los dos en
+   una pantalla sigue siendo algo para mirar; si molesta, el que se mueve es el
+   nav, que tiene su propia capa de tokens.
 ───────────────────────────────────── */
 .btn-secondary {
-  background: var(--button-secondary-bg);
-  color: var(--button-secondary-fg);
-  border-color: var(--button-secondary-border);
+  background: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  border-color: transparent;
 }
 .btn-secondary:hover {
-  background: var(--button-secondary-bg-hover);
+  background: var(--color-secondary-container-hover);
   transform: translateY(-1px);
 }
 .btn-secondary:active { transform: translateY(0); }
@@ -196,7 +198,7 @@
   padding: var(--space-2) var(--space-3);
 }
 .btn-text:hover {
-  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  background: var(--color-primary-state-hover);
 }
 .btn-text:disabled {
   background: transparent;
@@ -316,5 +318,5 @@
 .btn-secondary:active:not(:disabled)            { filter: brightness(0.92); transform: translateY(0); }
 .btn-tertiary:active:not(:disabled),
 .btn-ghost:active:not(:disabled)                { background: var(--color-surface-container-high); }
-.btn-text:active:not(:disabled)                 { background: color-mix(in srgb, var(--color-primary) 16%, transparent); }
+.btn-text:active:not(:disabled)                 { background: var(--color-primary-state-press); }
 .icon-btn:active:not(:disabled)                 { background: var(--color-surface-container-high); }
