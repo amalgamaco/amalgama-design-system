@@ -47,7 +47,7 @@ accessibility:
   roles: "SVG chart carries role=\"img\" + aria-label describing the chart; the SegmentedButton time-range control inherits its own keyboard/ARIA."
   aria: ["role=img + aria-label on the chart SVG/pie", "<title> per data point as a value fallback", "legend text repeats every series/segment name"]
   focus: "The chart body is not a focus target; interactive chrome (time-range SegmentedButton, retry button) is keyboard-operable."
-  contrast: "--chart-1..5 against --card meet AA in both themes (same roles used by buttons/badges). Pure SVG isn't accessible alone — pair critical data with an equivalent Table or text."
+  contrast: "--chart-1..5 against --surface-container meet AA in both themes (same roles used by buttons/badges). Pure SVG isn't accessible alone — pair critical data with an equivalent Table or text."
 keyboard:
   - {keys: "Tab / Arrow / Space", action: "operate the time-range SegmentedButton and retry control (chart body itself is non-interactive)"}
 responsive:
@@ -77,7 +77,7 @@ relationships:
     - {component: table, why: "Table gives exact per-row values; a chart shows the shape of the data"}
 
 tokens:
-  color: [--chart-1, --chart-2, --chart-3, --chart-4, --chart-5, --border, --on-surface-variant, --card, --error]
+  color: [--chart-1, --chart-2, --chart-3, --chart-4, --chart-5, --border, --on-surface-variant, --surface-container, --error]
   radius: ["6px bar top corners", "--radius-lg (state containers)"]
   typography: [--font-size-caption]
 

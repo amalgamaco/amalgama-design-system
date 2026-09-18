@@ -36,7 +36,7 @@ layout_constraints:
   - "The title input is borderless and transparent, taking `flex: 1`. It must keep `min-width: 0` or a long title pushes the delete button out."
 
 states:
-  default: "Header on --bg, body on --surface-container, delete hidden."
+  default: "Header on --surface, body on --surface-container, delete hidden."
   hover: "The section reveals its delete button."
   titleFocus: "The title input's text goes to --secondary, the only signal that it is editable."
   bodyFocus: "A 2px inset --focus-ring on the editor."
@@ -82,7 +82,7 @@ relationships:
     - {component: card, why: "a card groups content for display; this one is authored in place"}
 
 tokens:
-  color: [--border, --bg, --surface-container, --on-surface, --on-surface-variant, --secondary, --focus-ring, --error-container, --on-error-container]
+  color: [--border, --surface, --surface-container, --on-surface, --on-surface-variant, --secondary, --focus-ring, --error-container, --on-error-container]
   radius: [--radius-md]
   spacing: ["16px section margin", "10px 12px 10px 16px header padding", "14px 16px editor padding", "100px min-height"]
   typography: [--font-size-body-md]
