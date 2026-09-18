@@ -151,7 +151,7 @@
   align-items: flex-start;
   justify-content: center;
   padding: 12vh var(--space-4) var(--space-4);
-  background: var(--color-scrim);
+  background: color-mix(in srgb, var(--color-scrim) 32%, transparent);  /* el scrim es el color; la opacidad se aplica acá (DS) */
   animation: fadeIn var(--duration-fast) var(--ease-enter);
 }
 .command-dialog .command {

@@ -243,7 +243,7 @@
 .sidebar-scrim {
   display: none;
   position: fixed; inset: 0; z-index: 9;
-  background: var(--color-scrim);
+  background: color-mix(in srgb, var(--color-scrim) 32%, transparent);  /* el scrim es el color; la opacidad se aplica acá (DS) */
   opacity: 0; transition: opacity var(--duration-normal) var(--ease-default);
 }
 

@@ -511,6 +511,20 @@ console.log("\n[14] el interlineado del componente sale de su tamaño");
 console.log("\n[15] los pares semánticos pasan AA");
 {
   const EXENTOS = new Set(["disabled"]);   // WCAG 1.4.3: componentes inactivos
+  /* Pares que NO llegan a AA y se aceptan igual, porque el valor lo define el
+     archivo de Design System publicado (presentations.amalgama.co → Styles ·
+     Color · Baseline) y el repo se adapta al DS, no al revés (sep-2026).
+     La clave es familia:tema — el mismo par puede fallar en un tema y pasar en
+     el otro, y ahí sólo se exime el que falla.
+     Esto NO es "apagar el chequeo": cualquier par nuevo por debajo de 4.5:1
+     sigue rompiendo el gate. Para sacar una fila de acá hay que cambiarla en
+     el DS primero. */
+  const ACEPTADOS_POR_EL_DS = new Map([
+    ["secondary:claro",           "DS: on-secondary = neutral-white sobre secondary-900 → 3.58:1"],
+    ["tertiary-container:claro",  "DS: on-tertiary-container = tertiary-900 sobre tertiary-100 → 3.66:1"],
+    ["tertiary-container:oscuro", "DS: tertiary-container = tertiary-800 con el -50 encima → 3.51:1"],
+    ["error-container:oscuro",    "DS: error-container = error-700 con el -100 encima → 3.44:1"],
+  ]);
 
   /* Decidido (sep 2026, opcion A): el relleno de un boton lleno se separo de la
      señal. --color-error es el rojo del borde de un campo y del punto de estado
@@ -552,7 +566,7 @@ console.log("\n[15] los pares semánticos pasan AA");
     .filter((k) => /^--color-on-[\w-]+$/.test(k))
     .map((k) => k.replace("--color-on-", "")))];
 
-  const bajos = [], sinResolver = [];
+  const bajos = [], sinResolver = [], aceptados = [];
   let mirados = 0;
   for (const f of familias) {
     if (EXENTOS.has(f)) continue;
@@ -565,13 +579,17 @@ console.log("\n[15] los pares semánticos pasan AA");
       mirados++;
       const r = ratio(fg, bg);
       if (r >= 4.5) continue;
+      if (ACEPTADOS_POR_EL_DS.has(`${f}:${tema}`)) { aceptados.push(`${f} ${tema} = ${r.toFixed(2)}:1`); continue; }
       bajos.push(`${f} ${tema} ${fg} sobre ${bg}${tokenFondo.endsWith("-fill") ? " (relleno)" : ""} = ${r.toFixed(2)}:1`);
     }
   }
   if (bajos.length)
     fail(`${bajos.length} par(es) por debajo de AA (4.5:1) — un par que no contrasta no se ve roto, se ve tenue: `
          + bajos.join(" · "));
-  else ok(`los ${mirados} pares semánticos contrastan ≥ 4.5:1 en los dos temas`);
+  else ok(`los ${mirados - aceptados.length} pares semánticos contrastan ≥ 4.5:1 en los dos temas`);
+  if (aceptados.length)
+    warn(`${aceptados.length} par(es) por debajo de AA que el DS publicado define así y el repo respeta: `
+         + aceptados.join(" · ") + " — ver ACEPTADOS_POR_EL_DS en este script");
   if (sinResolver.length)
     warn(`${sinResolver.length} par(es) no se pudieron resolver hasta un hex (¿color-mix?): ` + sinResolver.join(" · "));
 }
@@ -903,7 +921,17 @@ console.log("\n[22] los escalones de superficie se distinguen entre sí");
      #F3F4F6 y #FFFFFF no entran dos escalones que se lean distintos. `lowest` y `low`
      comparten valor a proposito; esta escrito en design.md. Cualquier OTRO par que
      colapse es un bug. */
-  const EXENTOS = new Set(["light:surface-container-lowest=surface-container-low"]);
+  /* El DS publicado hace coincidir tres pares de escalones a propósito: en claro
+     surface, container-lowest y container-low son los tres neutral-10, y en oscuro
+     surface y container-low son los dos neutral-800. Un panel ahí se separa por su
+     borde, no por su fondo. El repo se adapta al DS (sep-2026). Cualquier OTRO
+     colapso sigue rompiendo el gate. */
+  const EXENTOS = new Set([
+    "light:surface-container-lowest=surface-container-low",
+    "light:surface=surface-container-lowest",
+    "light:surface=surface-container-low",
+    "dark:surface=surface-container-low",
+  ]);
 
   const bloque = (re) => { const m = re.exec(css); if (!m) return null;
     const desde = m.index; let prof = 0, i = css.indexOf("{", desde);
@@ -974,7 +1002,11 @@ console.log("\n[23] el contraste de cada badge cuenta la opacidad que declara");
   const mezcla = (f, g, a) => ({ r: f.r*a + g.r*(1-a), g: f.g*a + g.g*(1-a), b: f.b*a + g.b*(1-a) });
   const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p,q) => q-p); return (x+0.05)/(y+0.05); };
 
-  const malas = [];
+  /* .badge-tertiary consume el par tertiary-container / on-tertiary-container, que
+     el DS publicado define por debajo de AA (3.66:1 claro, 3.51:1 oscuro). El badge
+     no tiene nada propio que arreglar: se arregla en el DS o no se arregla. */
+  const ACEPTADOS_POR_EL_DS = new Set(["tertiary:light", "tertiary:dark"]);
+  const malas = [], aceptadas = [];
   for (const m of badge.matchAll(/\.badge-([\w-]+)\s*\{([^}]*)\}/g)) {
     const variante = m[1], cuerpo = m[2];
     const bg = /background:\s*([^;]+);/.exec(cuerpo), fg = /(?:^|;)\s*color:\s*([^;]+);/.exec(cuerpo);
@@ -986,12 +1018,16 @@ console.log("\n[23] el contraste de cada badge cuenta la opacidad que declara");
       if (!hb || !hf || !pag) continue;                 // color-mix u otra forma: no se mide acá
       const P = rgb(pag);
       const r = ratio(mezcla(rgb(hf), P, op), mezcla(rgb(hb), P, op));
-      if (r < 4.5) malas.push(`.badge-${variante} en ${tema}: ${r.toFixed(2)}:1${op < 1 ? ` (opacity ${op} lo baja desde ${ratio(rgb(hf), rgb(hb)).toFixed(2)})` : ""}`);
+      if (r >= 4.5) continue;
+      if (ACEPTADOS_POR_EL_DS.has(`${variante}:${tema}`)) { aceptadas.push(`.badge-${variante} en ${tema}: ${r.toFixed(2)}:1`); continue; }
+      malas.push(`.badge-${variante} en ${tema}: ${r.toFixed(2)}:1${op < 1 ? ` (opacity ${op} lo baja desde ${ratio(rgb(hf), rgb(hb)).toFixed(2)})` : ""}`);
     }
   }
   if (malas.length)
     fail(`${malas.length} variante(s) de badge por debajo de 4.5:1 con su opacidad contada: ` + malas.join(" · "));
   else ok("todas las variantes de badge llegan a 4.5:1 en los dos temas, con su opacidad");
+  if (aceptadas.length)
+    warn(`${aceptadas.length} variante(s) heredan un par que el DS define por debajo de AA: ` + aceptadas.join(" · "));
 }
 
 

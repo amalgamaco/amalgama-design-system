@@ -9,80 +9,65 @@
       "$value": "#FAFBFC",
       "section": "Neutral palette"
     },
-    "--neutral-30": {
-      "$type": "color",
-      "$value": "#F3F4F6",
-      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
-    },
     "--neutral-50": {
       "$type": "color",
       "$value": "#EAEBED",
-      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
+      "section": "Sin  neutral-30. Existía sólo para que  color-surface no fuera neutral-10 y el fondo de página se distinguiera de la tarjeta (1.036:1). El DS publicado define surface = neutral-10, así que el escalón sobra y la rampa vuelve a ser la de Figma: 10 · 50 · 100 … Ver TOKENS.md §1a."
     },
     "--neutral-100": {
       "$type": "color",
       "$value": "#BFC1C8",
-      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
+      "section": "Sin  neutral-30. Existía sólo para que  color-surface no fuera neutral-10 y el fondo de página se distinguiera de la tarjeta (1.036:1). El DS publicado define surface = neutral-10, así que el escalón sobra y la rampa vuelve a ser la de Figma: 10 · 50 · 100 … Ver TOKENS.md §1a."
     },
     "--neutral-200": {
       "$type": "color",
       "$value": "#9FA3AE",
-      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
+      "section": "Sin  neutral-30. Existía sólo para que  color-surface no fuera neutral-10 y el fondo de página se distinguiera de la tarjeta (1.036:1). El DS publicado define surface = neutral-10, así que el escalón sobra y la rampa vuelve a ser la de Figma: 10 · 50 · 100 … Ver TOKENS.md §1a."
     },
     "--neutral-300": {
       "$type": "color",
       "$value": "#747989",
-      "section": "El fondo de una app vive entre 10 y 50, y ese tramo estaba vacío: 10 contra blanco da 1.036:1, o sea que fondo y tarjeta eran el mismo color. 30 da 1.10:1, que es el escalón mínimo para que un grupo se lea como grupo sin dibujar una línea. Ver MOBILE.md §6b·1."
-    },
-    "--neutral-350": {
-      "$type": "color",
-      "$value": "#63687A",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+      "section": "Sin  neutral-30. Existía sólo para que  color-surface no fuera neutral-10 y el fondo de página se distinguiera de la tarjeta (1.036:1). El DS publicado define surface = neutral-10, así que el escalón sobra y la rampa vuelve a ser la de Figma: 10 · 50 · 100 … Ver TOKENS.md §1a."
     },
     "--neutral-400": {
       "$type": "color",
       "$value": "#474D61",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+      "section": "Sin  neutral-350. Era el paso de texto apagado (5.54:1 sobre tarjeta) que el DS no tiene: ahí on-surface-variant es neutral-400. Vuelve a la rampa de Figma."
     },
     "--neutral-500": {
       "$type": "color",
       "$value": "#353A4A",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+      "section": "Sin  neutral-350. Era el paso de texto apagado (5.54:1 sobre tarjeta) que el DS no tiene: ahí on-surface-variant es neutral-400. Vuelve a la rampa de Figma."
     },
     "--neutral-600": {
       "$type": "color",
       "$value": "#282C39",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+      "section": "Sin  neutral-350. Era el paso de texto apagado (5.54:1 sobre tarjeta) que el DS no tiene: ahí on-surface-variant es neutral-400. Vuelve a la rampa de Figma."
     },
     "--neutral-700": {
       "$type": "color",
       "$value": "#1C202C",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
-    },
-    "--neutral-750": {
-      "$type": "color",
-      "$value": "#171B26",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+      "section": "Sin  neutral-350. Era el paso de texto apagado (5.54:1 sobre tarjeta) que el DS no tiene: ahí on-surface-variant es neutral-400. Vuelve a la rampa de Figma."
     },
     "--neutral-800": {
       "$type": "color",
       "$value": "#13161F",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+      "section": "Sin  neutral-750. Servía a surface-container-low en oscuro; el DS le da neutral-800. Vuelve a la rampa de Figma."
     },
     "--neutral-900": {
       "$type": "color",
       "$value": "#0A0C12",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+      "section": "Sin  neutral-750. Servía a surface-container-low en oscuro; el DS le da neutral-800. Vuelve a la rampa de Figma."
     },
     "--neutral-black": {
       "$type": "color",
       "$value": "#000000",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+      "section": "Sin  neutral-750. Servía a surface-container-low en oscuro; el DS le da neutral-800. Vuelve a la rampa de Figma."
     },
     "--neutral-white": {
       "$type": "color",
       "$value": "#FFFFFF",
-      "section": "El escalón de texto apagado que faltaba. 300 no se puede usar para texto (4.34:1, no llega a AA) y 400 no está apagado (8.39:1, casi cuerpo). 350 da 5.54:1 sobre tarjeta, 5.03:1 sobre el fondo de página y 4.64:1 sobre surface-variant: pasa AA en los tres y por fin se lee como jerarquía. Ver FAILURES.md M13."
+      "section": "Sin  neutral-750. Servía a surface-container-low en oscuro; el DS le da neutral-800. Vuelve a la rampa de Figma."
     },
     "--primary-50": {
       "$type": "color",
@@ -261,11 +246,6 @@
     "--tertiary-900": {
       "$type": "color",
       "$value": "#7158F4",
-      "section": "Tertiary palette (purple / violet)"
-    },
-    "--tertiary-950": {
-      "$type": "color",
-      "$value": "#4A3BA8",
       "section": "Tertiary palette (purple / violet)"
     },
     "--success-50": {
@@ -601,10 +581,11 @@
     },
     "--color-on-secondary": {
       "$type": "color",
-      "$value": "#01164D",
+      "$value": "#FFFFFF",
       "section": "Texto oscuro, no blanco. El acento en claro es un color vivo y saturado: blanco encima da 3.58:1 en Embassy y 3.26:1 en un verde de marca, o sea por debajo de AA para texto normal. Con primary-900 da 4.79:1 en Embassy y 5.11:1 en Nortia, y escala a cualquier marca porque el 900 de la rampa siempre es el paso más oscuro. En dark el rol ya usa secondary-950 sobre secondary-300 (6.45:1) y no cambia.",
+      "$description": "⚠ FUENTE: el par no llega a AA. Valor del DS publicado, respetado a propósito.",
       "$dark": "#1E3A8C",
-      "$alias": "--primary-900"
+      "$alias": "--neutral-white"
     },
     "--color-secondary-container": {
       "$type": "color",
@@ -645,16 +626,16 @@
       "$type": "color",
       "$value": "#E3DEFD",
       "section": "Tertiary (Purple)",
-      "$dark": "#4A3BA8",
+      "$dark": "#7F69F5",
       "$alias": "--tertiary-100"
     },
     "--color-on-tertiary-container": {
       "$type": "color",
-      "$value": "#4A3BA8",
+      "$value": "#7158F4",
       "section": "Tertiary (Purple)",
-      "$description": "6.5:1. El -900 daba 3.66:1",
+      "$description": "⚠ FUENTE: el par no llega a AA. Valor del DS publicado, respetado a propósito.",
       "$dark": "#F1EEFE",
-      "$alias": "--tertiary-950"
+      "$alias": "--tertiary-900"
     },
     "--color-accent-hot-pink": {
       "$type": "color",
@@ -698,7 +679,7 @@
       "$type": "color",
       "$value": "#FFEBF0",
       "section": "Error",
-      "$dark": "#7A0C1B",
+      "$dark": "#DB263C",
       "$alias": "--error-50"
     },
     "--color-on-error-container": {
@@ -834,10 +815,11 @@
     },
     "--color-surface": {
       "$type": "color",
-      "$value": "#F3F4F6",
+      "$value": "#FAFBFC",
       "section": "Background & Surface",
+      "$description": "DS: surface y los container lowest/low comparten valor en claro; la tarjeta se separa por su borde",
       "$dark": "#13161F",
-      "$alias": "--neutral-30"
+      "$alias": "--neutral-10"
     },
     "--color-surface-dim": {
       "$type": "color",
@@ -864,7 +846,7 @@
       "$type": "color",
       "$value": "#FAFBFC",
       "section": "Background & Surface",
-      "$dark": "#171B26",
+      "$dark": "#13161F",
       "$alias": "--neutral-10"
     },
     "--color-surface-container": {
@@ -904,11 +886,11 @@
     },
     "--color-on-surface-variant": {
       "$type": "color",
-      "$value": "#63687A",
+      "$value": "#474D61",
       "section": "Background & Surface",
-      "$description": "texto de énfasis medio (#63687A) — antes neutral-400, que a 8.39:1 no se leía como apagado",
+      "$description": "DS. 8.10:1 — pasa AA, pero el «apagado» se lee menos apagado (falla M13 de FAILURES.md)",
       "$dark": "#BFC1C8",
-      "$alias": "--neutral-350"
+      "$alias": "--neutral-400"
     },
     "--color-outline": {
       "$type": "color",
@@ -978,8 +960,10 @@
     },
     "--color-scrim": {
       "$type": "color",
-      "$value": "rgba(0,0,0,.32)",
-      "section": "Ring de error (inputs .is-error): derivado de  color-error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba."
+      "$value": "#000000",
+      "section": "Ring de error (inputs .is-error): derivado de  color-error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba.",
+      "$description": "DS: el scrim es el COLOR; la opacidad la aplica quien lo usa (32%)",
+      "$alias": "--neutral-black"
     },
     "--color-shadow": {
       "$type": "color",
@@ -1006,7 +990,7 @@
     },
     "--bg": {
       "$type": "color",
-      "$value": "#F3F4F6",
+      "$value": "#FAFBFC",
       "section": "Semantic aliases",
       "$alias": "--color-surface"
     },
@@ -1043,7 +1027,7 @@
     },
     "--text-muted": {
       "$type": "color",
-      "$value": "#63687A",
+      "$value": "#474D61",
       "section": "Tipografía de página (decisión de diseño, jun 2026): el texto principal —títulos y cuerpo— usa el NAVY BRAND (primary-900), no el casi-negro neutral-900. Igual que el sitio de docs. En dark se recalibra a neutral-50 (override abajo).  color-on-surface queda para contenido interno de componentes (labels de chips, botones, celdas).",
       "$description": "NO --color-on-disabled: pinta texto activo, y ahí el mínimo AA sí rige",
       "$dark": "#9FA3AE",
@@ -1901,7 +1885,7 @@
     },
     "--ctx-surface": {
       "$type": "color",
-      "$value": "#F3F4F6",
+      "$value": "#FAFBFC",
       "section": "Contexto de superficie   Todo componente asumia que estaba apoyado sobre  color-surface. Metido en un panel con fondo propio, su relleno quedaba mal y habia que pisarlo a mano: medido en una consola de check-in (sep 2026), ocho de catorce overrides de clases publicas eran esto.  Dos tokens, y los dos los declara el CONTENEDOR, no el componente:  ctx-surface         el fondo de lo que me contiene. Un componente que tiene que fundirse con su contenedor lo usa.  ctx-surface-raised  el escalon que se despega de ese fondo. Un campo, un input, un track: algo que tiene que verse ENCIMA del contenedor. Un contenedor del DS los setea solo. Un panel propio del proyecto declara `data-surface=\"container\"` y listo — sin pisar ninguna clase publica.",
       "$alias": "--color-surface"
     },
@@ -1915,7 +1899,7 @@
       "$type": "color",
       "$value": "#EAEBED",
       "section": "La pista y lo que corre sobre ella   Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un elemento \"levantado\" sobre el fondo de la pagina no se despega solo, y por eso terminaba pidiendo un aro o una sombra que lo dibujara. Una pista HUNDIDA usa dos escalones en vez de uno y llega a 1.19:1 en claro y 1.24:1 en oscuro, sin ningun borde.  Va aparte de  ctx-surface/-raised porque la rampa CAMBIA DE DIRECCION entre temas: en claro container-high esta por debajo de surface, en oscuro por encima. Ese override vive aca una sola vez, no en cada componente que necesite una pista (segmented, slider, progress, toggle-group).  ctx-track        el canal hundido  ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar",
-      "$dark": "#171B26",
+      "$dark": "#0A0C12",
       "$alias": "--color-surface-container-high"
     },
     "--ctx-track-thumb": {

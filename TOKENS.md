@@ -40,20 +40,54 @@ break theming. The correct alternative is always the matching `--color-*` role.
 | `--accent-*` (brand) | `hot-pink, chelo-yellow, kika-green, pink-sebiche, sky, lime` | The Manual de Marca accents. **Single values, not ramps** — the Manual defines one value per accent, not ten, so they carry no step number. | **No** — use `--color-accent-*` (§2a-bis). |
 | `--ink` | — | The Manual's charcoal for long-form prose. Not a step of the neutral ramp: a different hue. | **No** — use `--text-prose`. |
 
-### 1a. Where this ramp differs from the Figma Baseline
+### 1a. Where this ramp differs from the published Design System
 
-The published Baseline (Styles · Color · Baseline) is the Figma source for the ramps. Embassy adds
-**eleven steps that are not in it**, every one of them because a role needed a value that passed AA
-and the ramp had no step for it. They are Embassy extensions, not Figma drift, and the reason lives
-in the comment next to each one in `css/variables.css`:
+**The Design System file is the authority and the repo adapts to it, not the other way round.**
+The source is `presentations.amalgama.co` → Styles · Color · Baseline (ramps) and its semantic
+tables (roles). As of sep-2026 **all 37 roles the source defines resolve to exactly its value** in
+both themes — verified by expanding the `var()` chains on both sides.
 
-`neutral-30` · `neutral-350` · `neutral-750` · `primary-60` · `tertiary-950` · `success-950` ·
-`success-975` · `error-950` · `error-975` · `warning-925` · `warning-950` · `warning-975` ·
-`info-950`.
+Four ramp steps that Embassy had invented were **removed** when the roles were realigned, because
+the source gives those roles a different step and the extension then had no consumer:
+`neutral-30` (was `color-surface` light) · `neutral-350` (was `on-surface-variant` light) ·
+`neutral-750` (was `surface-container-low` dark) · `tertiary-950` (was `on-tertiary-container`
+light and `tertiary-container` dark).
+
+**Nine steps remain outside the Baseline**, and each serves a role the source does not define at
+all — so there is nothing to align them to:
+
+- `success-950/-975`, `warning-925/-950/-975`, `error-950/-975`, `info-950` — the source's semantic
+  layer has **no Success / Warning / Info quartet** and no `-fill` family; Embassy's do, and they
+  need steps below 900 for their dark containers and `on-` colours.
+- `primary-60` — the source's own semantic table gives `color-primary-container` light as `#D7DEFB`,
+  a value **absent from its own Primary ramp**. That is a gap in the source, not in the repo: the
+  step exists here so the role can point at a primitive instead of a literal.
 
 One step was **mis-numbered until sep-2026**: `--warning-400` held `#FFA120`, which the Baseline
-names `warning-600`. It had no consumers and was renamed to `--warning-600`; there is still no
-`warning-400` or `warning-300`, because the Baseline has none.
+names `warning-600`. It had no consumers and was renamed. There is still no `warning-400` or
+`warning-300`, because the Baseline has none.
+
+### 1b. Four pairs the source puts below AA, and the repo keeps
+
+Adapting to the Design System means keeping its values even where they fail WCAG AA. These four do,
+and they are **declared, not silent**: each token carries the ratio in its comment, and
+`scripts/validate-ds.mjs` lists them under `ACEPTADOS_POR_EL_DS` so the gate stays green for them
+while any *new* pair below 4.5:1 still fails.
+
+| Pair | Ratio | Source value |
+| --- | --- | --- |
+| `on-secondary` on `secondary`, light | **3.58:1** | `neutral-white` on `secondary-900` |
+| `on-tertiary-container` on `tertiary-container`, light | **3.66:1** | `tertiary-900` on `tertiary-100` |
+| `on-tertiary-container` on `tertiary-container`, dark | **3.51:1** | `tertiary-50` on `tertiary-800` |
+| `on-error-container` on `error-container`, dark | **3.44:1** | `error-100` on `error-700` |
+
+`.badge-tertiary` inherits the tertiary pair, so it is listed the same way. **To fix any of these,
+change the Design System file first** — the repo will follow.
+
+Two more places where the source's own choices collapse a distinction, also declared: in light
+`surface`, `container-lowest` and `container-low` are all `neutral-10`, and in dark `surface` and
+`container-low` are both `neutral-800`. A panel on those tokens separates by its border, not its
+fill.
 
 ---
 

@@ -7,17 +7,17 @@
 <meta name="description" content="Sistema de diseño de Amalgama — tokens, componentes y documentación viva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css?v=0c39018c">
+<link rel="stylesheet" href="css/variables.css?v=aa587205">
 <link rel="stylesheet" href="css/md-sys-bridge.css?v=a6e3f4a0">
 <link rel="stylesheet" href="css/base.css?v=dafca354">
 <link rel="stylesheet" href="css/composition.css?v=3bc8e5f7">
 <link rel="stylesheet" href="css/space.css?v=3ce6d4b3">
 <link rel="stylesheet" href="css/preview-native.css?v=f8fa3baf">
-<link rel="stylesheet" href="css/layout.css?v=10738203">
+<link rel="stylesheet" href="css/layout.css?v=e1f75e6e">
 <link rel="stylesheet" href="docs/docs.css?v=711e0042">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=0b4b2893">
+<link rel="stylesheet" href="css/components.css?v=28a19f9c">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -72,7 +72,7 @@
   --ds-card-border:   color-mix(in srgb, var(--md-outline-variant) 48%, transparent);
   --ds-text-1:        var(--primary-900);
   --ds-text-2:        var(--neutral-400);
-  --ds-text-3:        var(--neutral-350);  /* 5.54:1 sobre tarjeta. NO neutral-300: 4.34:1, bajo AA */
+  --ds-text-3:        var(--neutral-400);  /* la rampa del DS no tiene 350; el 400 da 8.39:1 */
   --ds-accent:        var(--secondary-900);
   /* El acento cuando hay que LEERLO, no solo verlo. --ds-accent es #4F80FF y da
      3.58:1 sobre la página: alcanza para un borde, un ícono o un titular grande,

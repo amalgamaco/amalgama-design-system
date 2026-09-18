@@ -2,7 +2,7 @@
 
 > Generado por scripts/build-tokens.mjs desde css/variables.css.
 
-45 de 342 tokens no se copian tal cual. El valor sigue siendo el mismo — cambia como se aplica.
+45 de 338 tokens no se copian tal cual. El valor sigue siendo el mismo — cambia como se aplica.
 
 | Token | Valor | Por que | En RN |
 |---|---|---|---|
