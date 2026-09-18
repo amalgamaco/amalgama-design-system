@@ -132,6 +132,7 @@ decoration** — do not use a status color just because you like the hue.
 | `--color-focus-ring` | Focus halo = `color-mix(--color-focus 15%, transparent)`. SSOT-derived; never hardcode `rgba(...)`. | Focus ring/glow. | — |
 | `--color-error-ring` | Invalid-input halo = `color-mix(--color-error 12%, transparent)`. Recalibrates in dark automatically. | `.is-error` input ring. | Never hardcode the rgba. |
 | `--color-scrim` | Modal/overlay backdrop = `rgba(0,0,0,.32)`. | Dialog/sheet/drawer scrim. | — |
+| `--color-shadow` | `--neutral-900` (light) → `--neutral-black` (dark) | Base colour for elevation. Present in the published Baseline and added here in sep-2026. **The `--shadow-*` composites do not derive from it yet** — they carry Embassy's own navy tint `rgba(28,36,56,…)`. Two truths about one concept; unifying them changes every shadow in the system, so it is a separate decision, not an anchoring fix. |
 
 ### 2d. Nav / menu interaction roles ("blue hover")
 

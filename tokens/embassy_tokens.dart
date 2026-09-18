@@ -178,6 +178,7 @@ class EmbassyColors {
   static const colorFocusRing = Color(0x264F80FF);
   static const colorErrorRing = Color(0x1FFD3A45);
   static const colorScrim = Color(0x52000000);
+  static const colorShadow = Color(0xFF0A0C12);
   static const colorHover = Color(0x144F80FF);
   static const colorPressed = Color(0x244F80FF);
   static const colorSelected = Color(0xFFCAD9FF);
@@ -389,6 +390,7 @@ class EmbassyColors {
   static const colorFocusRingDark = Color(0x264F80FF);
   static const colorErrorRingDark = Color(0x1FFD3A45);
   static const colorScrimDark = Color(0x52000000);
+  static const colorShadowDark = Color(0xFF000000);
   static const colorHoverDark = Color(0x144F80FF);
   static const colorPressedDark = Color(0x244F80FF);
   static const colorSelectedDark = Color(0xFFCAD9FF);

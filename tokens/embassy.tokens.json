@@ -981,6 +981,13 @@
       "$value": "rgba(0,0,0,.32)",
       "section": "Ring de error (inputs .is-error): derivado de  color-error vía color-mix, por lo que se recalibra solo en dark. Nunca hardcodear el rgba."
     },
+    "--color-shadow": {
+      "$type": "color",
+      "$value": "#0A0C12",
+      "section": "Color base de la elevación. Está en el sistema publicado (Styles · Color · Baseline → Utilidad) y faltaba acá. Se agrega para cerrar el hueco, con una advertencia: los compuestos  shadow-sm/md/lg NO derivan de él todavía — llevan su propio tinte navy rgba(28,36,56,…), que es una decisión de Embassy y no el neutral de la fuente. Dos verdades sobre el mismo concepto; unificarlas cambia el aspecto de toda la elevación, así que es una decisión aparte y no un arreglo de anclaje.",
+      "$dark": "#000000",
+      "$alias": "--neutral-900"
+    },
     "--color-hover": {
       "$type": "color",
       "$value": "#4F80FF14",

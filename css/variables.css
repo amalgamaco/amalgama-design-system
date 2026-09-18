@@ -290,6 +290,14 @@
      por lo que se recalibra solo en dark. Nunca hardcodear el rgba. */
   --color-error-ring:                color-mix(in srgb, var(--color-error) 12%, transparent);
   --color-scrim:                     rgba(0,0,0,.32);
+  /* Color base de la elevación. Está en el sistema publicado (Styles · Color ·
+     Baseline → Utilidad) y faltaba acá. Se agrega para cerrar el hueco, con una
+     advertencia: los compuestos --shadow-sm/md/lg NO derivan de él todavía —
+     llevan su propio tinte navy rgba(28,36,56,…), que es una decisión de
+     Embassy y no el neutral de la fuente. Dos verdades sobre el mismo concepto;
+     unificarlas cambia el aspecto de toda la elevación, así que es una decisión
+     aparte y no un arreglo de anclaje. */
+  --color-shadow:                    var(--neutral-900);
   /* Capa de estado. Estaban documentados en el sitio (Styles · Color · Baseline,
      «State Palette») y no existían en el CSS: tres tokens fantasma. Se derivan
      de --color-secondary con color-mix, así que se recalibran solos en oscuro
@@ -865,6 +873,7 @@
   --color-inverse-surface: var(--neutral-50);
   --color-inverse-on-surface: var(--neutral-800);
   --color-inverse-primary:           var(--primary-700);          /* #162F6F */
+  --color-shadow:                    var(--neutral-black);        /* #000000 */
   /* Disabled */
   --color-disabled: var(--neutral-600);
   --color-on-disabled: var(--neutral-300);
@@ -946,6 +955,7 @@
   --color-inverse-surface: var(--neutral-900);
   --color-inverse-on-surface: var(--neutral-50);
   --color-inverse-primary:           var(--secondary-900);       /* #4F80FF */
+  --color-shadow:                    var(--neutral-900);         /* #0A0C12 */
   /* Disabled — literal hex */
   --color-disabled: var(--neutral-100);
   --color-on-disabled: var(--neutral-300);

@@ -172,6 +172,7 @@
   --color-focus-ring: rgb(var(--e-color-focus-ring));
   --color-error-ring: rgb(var(--e-color-error-ring));
   --color-scrim: rgb(var(--e-color-scrim));
+  --color-shadow: rgb(var(--e-color-shadow));
   --color-hover: rgb(var(--e-color-hover));
   --color-pressed: rgb(var(--e-color-pressed));
   --color-selected: rgb(var(--e-color-selected));
