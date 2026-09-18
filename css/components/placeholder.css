@@ -22,7 +22,7 @@
   border-radius: var(--radius);
   padding: var(--space-12) var(--space-8);
   text-align: center;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   font-size: var(--font-size-body-lg);
 }
 .placeholder-panel .placeholder-icon { font-size: 32px; margin-bottom: 12px; }  /* ds-allow: caja del glifo heredado, no tipografia */

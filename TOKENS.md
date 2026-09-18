@@ -14,7 +14,7 @@ wins — fix this doc, not the CSS.
   (`--neutral-*`, `--primary-*`, `--secondary-*`, `--tertiary-*`, `--success-*`, `--error-*`,
   `--warning-*`, `--info-*`) are the raw palette — they are the *input* to the semantic roles and
   must not be referenced directly outside `variables.css`. A component that uses `--primary-900`
-  instead of `--color-primary` (or `--text-primary`) breaks dark mode, because only the
+  instead of `--color-primary` breaks dark mode, because only the
   `--color-*` layer recalibrates under `[data-theme="dark"]`.
 - **Dark mode is automatic.** Set `data-theme="dark"` on `<html>`; the semantic `--color-*` layer
   recalibrates itself. Components need **zero** per-theme overrides. (See "Dark mode" at the end.)
@@ -30,7 +30,7 @@ break theming. The correct alternative is always the matching `--color-*` role.
 | Group (token pattern) | Steps present | Purpose | Use directly? |
 |---|---|---|---|
 | `--neutral-*` | `10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, black, white` | Greyscale ramp feeding surfaces, text, borders, disabled. | **No** — use surface / text / outline / disabled roles. |
-| `--primary-*` (navy) | `50, 60, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900` | Brand navy; feeds Primary role + page text. `--primary-60` = periwinkle Primary Container (light). | **No** — use `--color-primary*` / `--text-primary`. |
+| `--primary-*` (navy) | `50, 60, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900` | Brand navy; feeds the Primary role. `--primary-60` = periwinkle Primary Container (light). | **No** — use `--color-primary*`. |
 | `--secondary-*` (agile/periwinkle blue) | `10, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 925, 950` | Interactive accent (links/nav/focus) + Secondary tonal role. `925`/`950` are dark-mode container/on values. | **No** — use `--color-secondary*` / `--interactive` / `--color-focus`. |
 | `--tertiary-*` (purple/violet) | `50–900` + `950` | Purple accent family. | **No** — use `--color-tertiary*`. |
 | `--success-*` | `50–900` + `950, 975` | Green status ramp. | **No** — use `--color-success*` / `--green*`. |
@@ -69,7 +69,7 @@ surface), on-container (text on that container). **Pair `X` with `on-X`, and `X-
 
 | Token | Purpose | When to use | When NOT to use → alternative |
 |---|---|---|---|
-| `--color-primary` | Highest-emphasis brand fill. | The one Primary CTA per context (filled button, FAB). | Body/heading text → `--text-primary`. Note: in dark it flips to **white**, so selected controls read white. |
+| `--color-primary` | Highest-emphasis brand fill. | The one Primary CTA per context (filled button, FAB). | Body/heading text → `--color-on-surface`. Note: in dark it flips to **white**, so selected controls read white. |
 | `--color-on-primary` | Text/icon on `--color-primary`. | Label inside a filled Primary button. | On any other surface. |
 | `--color-primary-container` | Tonal navy surface (lower emphasis than filled). | Elevated/tonal button bg, selected nav pill backing. | As a page background → surface tiers. |
 | `--color-on-primary-container` | Text on primary container. | Label on a `-container` surface. | — |
@@ -122,7 +122,7 @@ decoration** — do not use a status color just because you like the hue.
 | `--color-surface-bright` | Brightest surface (white / lightest dark). | Raised emphasis surface. | — |
 | `--color-surface-container-lowest / -low / -(base) / -high / -highest` | Elevation ladder of container surfaces. | Cards, menus, sheets — pick the tier by elevation (higher = more raised). | Page canvas → `--color-surface`. |
 | `--color-surface-variant` | Alt subtle surface. | Zebra rows, subtle fills. | — |
-| `--color-on-surface` | Content **inside** components (chip/button/table-cell labels). Near-black. | Component-internal text/icons. | **Page headings/body → `--text-primary`.** Using on-surface for page type renders black, not brand navy — a token misuse. |
+| `--color-on-surface` | **All primary content on a surface** — page headings, body, and text inside components alike. Near-black. | Any primary text or icon. | On a filled/tonal surface → that surface's own `on-` role. |
 | `--color-on-surface-variant` | Medium secondary content on a surface. | De-emphasized in-component text. | Page secondary text → `--text-secondary`. |
 | `--color-outline` | **Prominent** border — interactive elements (buttons, inputs, chips). | Outlines that must read clearly. | Container chrome (cards/tables/panels) → `--border`. |
 | `--color-outline-variant` | **Subtle** border. | Chip rest border, faint dividers within a component. | Where a border must stand out → `--color-outline`. |
@@ -190,27 +190,26 @@ re-point those three at its own `--md-*` set so component demos picked up the sh
 `color-surface` became `neutral-10` (the DS value), the `--md-*` surfaces and the roles resolve to
 the same hexes, so the bridge was redundant.
 
+**Collapsed in sep-2026 too: the whole `--text-*` and `--ctx-*` families.** The Design System
+documents two levels of content on a surface — `on-surface` and `on-surface-variant`, Material's
+shape — and five `--text-*` tokens had grown on top of them, each matching its role in one theme and
+diverging in the other, with no row in any table of the system. `--ctx-surface` / `-raised` were
+exact duplicates of `surface` / `surface-container`, and the mechanism they existed for (a container
+redefining them) works just as well redefining the role, because custom properties already cascade.
+`--ctx-track` / `-thumb` moved into `segmented-button.css`, their only consumer.
+**Page text is therefore near-black now, not brand navy.**
+
 **The survivors are not duplicates** — each says something the DS does not:
 
 | Alias | Why it survives |
 | --- | --- |
 | `--border` | `on-surface` at 10%. The DS has `outline` and `outline-variant`; neither is container chrome. |
-| `--text-primary` / `--text-secondary` | The "page text is navy, not black" rule. The DS has no page-text role — its `on-surface` is content *inside* components. |
-| `--text-muted` | Resolves to `neutral-200` in dark, not `neutral-100` like `on-surface-variant`. A real distinction, measured. |
-| `--text-prose` → `--ink` | The Manual's Ink for long-form collateral prose. |
-| `--text-on-dark` | Always white, whatever the theme — `color-on-primary` inverts. |
-| `--ctx-*` | The container-context layer: a container **redefines** these so the component inside adapts. The default equalling a role is the point, not a duplication. |
 
 | Alias | Resolves to | Use for |
 |---|---|---|
 | `--bg` | `--color-surface` | Page background. |
 | `--sidebar-bg` / `--card-bg` | `--color-surface-container` | Sidebar / card backgrounds. |
 | `--border` | `color-mix(--color-on-surface 10%, transparent)` | **Container chrome** (cards, tables, panels) — deliberately fainter than `--color-outline` so interactive outlines stand out. Also the divider line. |
-| `--text-primary` | `--primary-900` (light) → `#EAEBED` (dark) | **Page headings AND body.** Brand navy, not black. |
-| `--text-secondary` | `--neutral-500` → `#BFC1C8` | Secondary page text. |
-| `--text-muted` | `--color-on-disabled` | Muted/hint page text. |
-| `--text-prose` | `--ink` (light) → `--neutral-50` (dark) | **Long-form prose in collateral only** — the Manual's "Ink". Product text stays `--text-primary` (navy). In dark there is no near-black, so it returns to the main text colour. |
-| `--text-on-dark` | `--neutral-white` | Text on permanently-dark surfaces. |
 | `--interactive` / `--interactive-hover` / `--interactive-light` | `--color-secondary` / navy-ish hover / `--color-secondary-container` | Links, nav, tabs, focus accents. |
 | `--tertiary-purple` / `-hover` / `-light` | tertiary role / `--tertiary-800` / `--tertiary-50` | Legacy purple accents. |
 | `--green/-light`, `--red/-light`, `--yellow/-light`, `--blue/-light` | success / error / warning / info main + container | Shorthand status colors. |

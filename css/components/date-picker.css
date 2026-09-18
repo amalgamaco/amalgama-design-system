@@ -38,7 +38,7 @@
   font-weight: 400;
 }
 .date-picker-trigger.date-picker-trigger-empty {
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
 }
 .date-picker-icon {
   width: 18px;

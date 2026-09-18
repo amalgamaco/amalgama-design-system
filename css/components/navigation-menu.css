@@ -149,6 +149,6 @@
      en oscuro. Es el caso que [15] no puede ver — certifica el par contra SU
      superficie, y el componente lo usa sobre otra. --text-secondary es el mismo
      rol (la bajada de un ítem) y aguanta las dos: 10.28:1 y 10.05:1. */
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
   font-size: var(--font-size-caption);
 }

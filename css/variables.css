@@ -170,7 +170,6 @@
   /* «Ink»: el gris-carbón del Manual para prosa larga. No es un paso de la rampa
      neutral —tiene otro tono— así que es una primitiva de marca y no un
      --neutral-*. Su rol es --text-prose. */
-  --ink:                  #2A2F32;
 
   /* ─────────────────────────────────────
      Color Roles (semantic) — capa de uso
@@ -321,7 +320,6 @@
      vuelven a leerse igual, lo que se mueve es el NAV —que ya tiene su propia
      capa --color-nav-*—, no el botón. */
 
-
   /* ─────────────────────────────────────
      Semantic aliases
   ───────────────────────────────────── */
@@ -350,16 +348,12 @@
      duplicado para una sola cosa. El archivo de Design System define --color-*, y
      eso es lo que se consume. Los que siguen NO son duplicados: cada uno dice algo
      que el DS no dice, y por eso sobreviven. */
-  --text-primary:   var(--primary-900);
-  --text-secondary: var(--neutral-500);
-  --text-muted:     var(--color-on-surface-variant);  /* NO --color-on-disabled: pinta texto activo, y ahí el mínimo AA sí rige */
   /* Prosa larga de COLATERAL: el gris-carbón del Manual («Ink»). El navy de
      --text-primary es el color de producto y sigue siéndolo; en un párrafo de
      varias líneas de un deck o una propuesta, el Manual usa este.
      No es para UI: una celda, un label o un botón siguen en los tokens de
      componente. En oscuro no hay casi-negro que valga, así que vuelve a ser
      el mismo color que el texto principal (ver los bloques por tema). */
-  --text-prose:     var(--ink);
 
   /* Estados como TEXTO sobre una superficie.
      --color-success / --color-error están calibrados para funcionar como FONDO
@@ -381,12 +375,23 @@
   --color-error-text:   var(--color-on-error-container);
   --color-warning-text: var(--color-on-warning-container);
   --color-info-text:    var(--color-on-info-container);
-  --text-on-dark:   var(--neutral-white);
 
   /* No hay --accent ni --accent-light. Eran alias del color interactivo para el
      cromo de la doc, y desde que existen los acentos de marca (--accent-hot-pink
      y compañía) el prefijo --accent- significaba dos cosas sin relación. docs.css
      consume --interactive / --interactive-light, que es lo que eran. */
+
+  /* No hay --text-* ni --ctx-*, y es deliberado (sep-2026).
+     El Design System documenta DOS niveles de contenido sobre superficie, como
+     Material: --color-on-surface y --color-on-surface-variant. Acá habían
+     crecido cinco tokens --text-* encima de esos dos, y cada uno coincidía con
+     su rol en un tema y se separaba en el otro — imposible de razonar, y sin
+     ficha en ninguna tabla del sistema. Se colapsaron a los dos roles.
+     Los --ctx-* eran lo mismo en chico: --ctx-surface y --ctx-surface-raised
+     duplicaban exacto a surface y surface-container, y el mecanismo que
+     justificaban —que un contenedor los redeclare— funciona igual redeclarando
+     el rol, porque las custom properties ya cascadean. --ctx-track/-thumb
+     bajaron a segmented-button, su único consumidor. */
 
   /* ─────────────────────────────────────
      Spacing scale  (4px base grid)
@@ -624,8 +629,6 @@
                              ENCIMA del contenedor.
      Un contenedor del DS los setea solo. Un panel propio del proyecto declara
      `data-surface="container"` y listo — sin pisar ninguna clase publica. */
-  --ctx-surface:        var(--color-surface);
-  --ctx-surface-raised: var(--color-surface-container);
 
   /* ── La pista y lo que corre sobre ella ──────────────────────────────────
      Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un
@@ -640,8 +643,6 @@
      necesite una pista (segmented, slider, progress, toggle-group).
        --ctx-track        el canal hundido
        --ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar */
-  --ctx-track:       var(--color-surface-container-high);
-  --ctx-track-thumb: var(--color-surface-container);
 
   --rail-width:    112px;
   --sidebar-width: 220px;
@@ -846,8 +847,6 @@
   --color-surface-variant: var(--neutral-600);
   /* La pista se invierte: en claro container-high esta DEBAJO de surface, en
      oscuro esta encima. Literales por la misma razon que el resto del bloque. */
-  --ctx-track: var(--neutral-750); /* neutral-750 — el canal */
-  --ctx-track-thumb: var(--neutral-600); /* neutral-600 — lo que corre sobre el */
   --color-on-surface: var(--neutral-50);
   --color-on-surface-variant: var(--neutral-100);
   /* Outline · bordes */
@@ -863,12 +862,8 @@
   --color-on-disabled: var(--neutral-300);
 
   /* Aliases semánticos que dependen de la rampa */
-  --text-primary: var(--neutral-50); /* neutral-50 — en dark el navy no contrasta; vuelve a on-surface */
-  --text-secondary: var(--neutral-100);
-  --text-muted: var(--neutral-200); /* neutral-200 — 6.44:1 sobre card-bg. No neutral-100: sería igual que --text-secondary */
   /* En oscuro no existe el casi-negro: la prosa vuelve al texto principal. El
      token sigue existiendo para que el colateral no tenga que preguntarse por el tema. */
-  --text-prose: var(--neutral-50);
 
   /* Elevated Button elevation — black shadows so the lift is visible on dark surfaces
      (the navy light shadows disappear against dark backgrounds). */
@@ -943,10 +938,6 @@
   --color-disabled: var(--neutral-100);
   --color-on-disabled: var(--neutral-300);
   /* Aliases */
-  --text-primary:   var(--primary-900);                          /* #01164D */
-  --text-secondary: var(--neutral-500);
-  --text-muted: var(--neutral-350);                                     /* neutral-350 — 5.54:1 sobre card-bg */
-  --text-prose:     var(--ink);                                  /* Ink del Manual — prosa larga de colateral */
   /* Elevated Button — restore light (navy) elevation inside a light-scoped island */
   --btn-elevation:       0 1px 2px rgba(28,36,56,.18), 0 2px 6px rgba(28,36,56,.12);
   --btn-elevation-hover: 0 2px 4px rgba(28,36,56,.20), 0 6px 16px rgba(28,36,56,.16);

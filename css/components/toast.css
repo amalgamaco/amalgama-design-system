@@ -106,8 +106,8 @@
 /* Título + descripción (par sonner: dos líneas). Usar .toast-content como slot
    flexible cuando el toast lleva encabezado y detalle. */
 .toast .toast-content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--space-0-5); }
-.toast .toast-title { font-weight: 600; color: var(--text-primary); }
-.toast .toast-desc { font-size: var(--font-size-body-sm); color: var(--text-secondary); line-height: var(--line-height-body-sm); }
+.toast .toast-title { font-weight: 600; color: var(--color-on-surface); }
+.toast .toast-desc { font-size: var(--font-size-body-sm); color: var(--color-on-surface-variant); line-height: var(--line-height-body-sm); }
 .toast .toast-close {
   width: 24px; height: 24px;
   border: none; background: none;

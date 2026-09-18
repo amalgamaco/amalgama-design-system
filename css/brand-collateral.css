@@ -45,7 +45,7 @@
   font-size: var(--font-size-body-editorial);
   line-height: var(--line-height-body-editorial);
   font-weight: var(--font-weight-regular);
-  color: var(--text-prose);
+  color: var(--color-on-surface);
   max-width: var(--measure);
 }
 
@@ -55,7 +55,7 @@
 .prose-editorial > .lead,
 .prose-editorial > p:first-child.lead {
   max-width: var(--measure-lead);
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
 }
 
 /* ── Link pill ──────────────────────────────────────────────────────────────
@@ -140,7 +140,7 @@
   font-family: var(--font-body);
   font-size: var(--font-size-caption);
   line-height: var(--line-height-caption);
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
 }
 
 /* ── Galería ────────────────────────────────────────────────────────────────
@@ -171,7 +171,7 @@
   padding: var(--space-8);
   border-radius: var(--radius-2xl);
   background: var(--galeria-bg);
-  color: var(--text-on-dark);
+  color: var(--color-on-primary);
   text-decoration: none;
   overflow: hidden;
   transition: transform var(--duration-normal) var(--ease-default);

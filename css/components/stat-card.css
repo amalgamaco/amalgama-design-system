@@ -37,7 +37,7 @@
 .stat-card .stat-label {
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   margin-bottom: var(--space-2);
 }
 .stat-card .stat-value {
@@ -45,7 +45,7 @@
   font-size: var(--font-size-display);
   line-height: var(--line-height-display);
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   letter-spacing: var(--letter-spacing-display);
 }
 /* La variacion va DENTRO de una pildora: se compone con `.badge`, que aporta la

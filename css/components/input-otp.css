@@ -37,7 +37,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--color-surface-container);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   font-size: var(--font-size-heading-xs);
   font-family: var(--font-mono);
   font-weight: var(--font-weight-medium);

@@ -47,7 +47,7 @@
   padding: var(--space-2-5) var(--space-4);
   font-size: var(--font-size-overline);
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-label);
   text-align: left;
@@ -55,7 +55,7 @@
 .data-table td {
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-body-md);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   border-top: 1px solid var(--border);
 }
 .data-table tbody tr {
@@ -88,7 +88,7 @@
 }
 .data-table tfoot td {
   border-top: none;
-  color: var(--text-primary);
+  color: var(--color-on-surface);
 }
 
 /* ── Caption ── título o nota de la tabla, al pie (par shadcn TableCaption). */
@@ -96,7 +96,7 @@
   caption-side: bottom;
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-body-sm);
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
   text-align: left;
 }
 

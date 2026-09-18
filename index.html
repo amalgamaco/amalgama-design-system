@@ -7,17 +7,17 @@
 <meta name="description" content="Sistema de diseño de Amalgama — tokens, componentes y documentación viva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Epilogue:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/variables.css?v=710954ac">
+<link rel="stylesheet" href="css/variables.css?v=043e11eb">
 <link rel="stylesheet" href="css/md-sys-bridge.css?v=a6e3f4a0">
-<link rel="stylesheet" href="css/base.css?v=094e5f60">
-<link rel="stylesheet" href="css/composition.css?v=3bc8e5f7">
-<link rel="stylesheet" href="css/space.css?v=3ce6d4b3">
-<link rel="stylesheet" href="css/preview-native.css?v=f8fa3baf">
-<link rel="stylesheet" href="css/layout.css?v=b199b2a2">
-<link rel="stylesheet" href="docs/docs.css?v=2c877e84">
+<link rel="stylesheet" href="css/base.css?v=4d80349a">
+<link rel="stylesheet" href="css/composition.css?v=8a57a8e9">
+<link rel="stylesheet" href="css/space.css?v=b9d21cd7">
+<link rel="stylesheet" href="css/preview-native.css?v=dcf91360">
+<link rel="stylesheet" href="css/layout.css?v=b54c48a6">
+<link rel="stylesheet" href="docs/docs.css?v=c5a1c07c">
 <!-- Buildless component layer: no build step, no framework. Copy any file from
      css/components/ into another Tailwind-free project to vendor a component. -->
-<link rel="stylesheet" href="css/components.css?v=1176c863">
+<link rel="stylesheet" href="css/components.css?v=a69cdbb8">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 /* ═══════════════════════════════════════════
@@ -1037,7 +1037,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
 }
 
   /* ── Form field extras (not in form.css) ── */
-  .field-hint { font-size: var(--font-size-overline); color: var(--text-muted); margin-top: 5px; display: block; line-height: 1.5; }
+  .field-hint { font-size: var(--font-size-overline); color: var(--color-on-surface-variant); margin-top: 5px; display: block; line-height: 1.5; }
 
   /* ── Dark mode button overrides ──
      Eliminados: button.css ahora consume tokens semánticos --color-* que ya
@@ -1124,11 +1124,11 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   background: var(--color-surface);
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: var(--text-secondary);
+  cursor: pointer; color: var(--color-on-surface-variant);
   transition: background var(--duration-fast);
   font-family: inherit; font-size: 16px; font-weight: 500;
 }
-.number-input-btn:hover { background: var(--color-surface-container-high); color: var(--text-primary); }
+.number-input-btn:hover { background: var(--color-surface-container-high); color: var(--color-on-surface); }
 
 /* ═══════════════════════════════════════════════
    HOME PAGE — redesign (MD3-inspired, Amalgama brand)
@@ -1411,7 +1411,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   letter-spacing: var(--letter-spacing-overline);
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1910,7 +1910,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   letter-spacing: var(--letter-spacing-overline);
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   margin: 0 0 var(--space-5);
 }
 .emb-gs-title {
@@ -1955,7 +1955,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   letter-spacing: var(--letter-spacing-overline);
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   margin: 0 0 var(--space-5);
 }
 .emb-gs-section-title {
@@ -2030,7 +2030,7 @@ body { margin: 0; background: var(--ds-content-bg); color: var(--ds-text-1); fon
   border-radius: 50%;
   background: transparent;
   border: 1px solid var(--color-outline);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   font-size: 10px;
   font-weight: 700;
   display: flex;
@@ -2288,7 +2288,7 @@ body { overflow-x: clip; }
   letter-spacing: var(--letter-spacing-overline);
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   margin: 0 0 6px;
 }
 .emb-gs-panel-title {
@@ -2707,7 +2707,7 @@ body { overflow-x: clip; }
 .ds-ctx-pane.light { background: #EAEBED; }
 .ds-ctx-pane.dark  { background: #0A0C12; }
 .ds-ctx-cap { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; }
-.ds-ctx-pane.light .ds-ctx-cap { color: var(--text-secondary); }
+.ds-ctx-pane.light .ds-ctx-cap { color: var(--color-on-surface-variant); }
 .ds-ctx-pane.dark  .ds-ctx-cap { color: #747989; }
 .ds-ctx-token {
   display: inline-flex; align-items: center; gap: 8px;
@@ -3152,7 +3152,7 @@ body { overflow-x: clip; }
 .ds-cr-panel.light { background: #FAFBFC; }
 .ds-cr-panel.dark  { background: #0A0C12; border-color: #282C39; }
 .ds-cr-panel-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
-.ds-cr-panel.light .ds-cr-panel-lbl { color: var(--text-secondary); }
+.ds-cr-panel.light .ds-cr-panel-lbl { color: var(--color-on-surface-variant); }
 .ds-cr-panel.dark  .ds-cr-panel-lbl { color: #747989; }
 
 .ds-cr-cap { font-size: var(--font-size-overline); color: var(--ds-text-3); margin: 0 0 32px; line-height: 1.55; }
@@ -3423,7 +3423,7 @@ body { overflow-x: clip; }
   padding: 10px 16px;
   font-size: var(--font-size-overline);
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   text-transform: uppercase;
   letter-spacing: .5px;
   text-align: left;
@@ -3431,7 +3431,7 @@ body { overflow-x: clip; }
 .data-table td {
   padding: 12px 16px;
   font-size: var(--font-size-body-md);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   border-top: 1px solid var(--border);
 }
 .data-table tbody tr {
@@ -3499,7 +3499,7 @@ body { overflow-x: clip; }
   border-radius: var(--radius);
   padding: 48px 32px;
   text-align: center;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   font-size: var(--font-size-body-lg);
 }
 .placeholder-panel .placeholder-icon { font-size: 32px; margin-bottom: 12px; }
@@ -3521,7 +3521,7 @@ body { overflow-x: clip; }
   font-family: var(--font-mono); font-size: var(--font-size-mono-sm); color: var(--color-primary);
   background: var(--color-primary-container); border-radius: 3px; padding: 3px 7px; margin-top: 2px; }
 #s-mobile .ds-anatomy code { display: block; font-size: var(--font-size-body-sm); margin-bottom: 3px; }
-#s-mobile .ds-anatomy span { display: block; font-size: var(--font-size-body-md); line-height: 1.55; color: var(--text-secondary); }
+#s-mobile .ds-anatomy span { display: block; font-size: var(--font-size-body-md); line-height: 1.55; color: var(--color-on-surface-variant); }
 #s-mobile .ds-anatomy em { font-style: normal; font-family: var(--font-mono); font-size: var(--font-size-badge); color: var(--color-error); }
 #s-mobile .ds-rowpair { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
 
@@ -3540,7 +3540,7 @@ body { overflow-x: clip; }
 #s-mobile-components .mc-gs, #s-mobile-components .mc-gs-no {
   font-family: var(--font-mono); font-size: var(--font-size-mono-sm); letter-spacing: .03em; }
 #s-mobile-components .mc-gs    { color: var(--color-on-success-container); }
-#s-mobile-components .mc-gs-no { color: var(--text-muted); }
+#s-mobile-components .mc-gs-no { color: var(--color-on-surface-variant); }
 #s-mobile-components .mc-gs, #s-mobile-components .mc-gs-no { display: block; }
 #s-mobile-components .mc-gs b, #s-mobile-components .mc-gs-no b {
   display: inline-block; min-width: 20px; font-weight: 600; opacity: .65; }
@@ -3563,7 +3563,7 @@ body { overflow-x: clip; }
 #s-mobile .ng-gs, #s-mobile .ng-gs-no { display: block; font-family: var(--font-mono); font-size: var(--font-size-mono-sm);
   letter-spacing: .03em; margin-bottom: 12px; }
 #s-mobile .ng-gs    { color: var(--color-on-success-container); }
-#s-mobile .ng-gs-no { color: var(--text-muted); }
+#s-mobile .ng-gs-no { color: var(--color-on-surface-variant); }
 #s-mobile .ng-stack { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
 #s-mobile .ng-row { display: flex; flex-wrap: wrap; gap: 10px 8px; }
 #s-mobile .ng-note { font-family: var(--font-mono); font-size: var(--font-size-overline-sm); letter-spacing: var(--letter-spacing-overline);
@@ -4541,7 +4541,7 @@ body { overflow-x: clip; }
             </tbody>
           </table>
         </div>
-        <div class="ds-callout" style="margin-top:12px"><strong>Regla.</strong> Para tipografía de página usá siempre <code>var(--text-primary)</code> / <code>var(--text-secondary)</code> — nunca <code>--color-on-surface</code> ni hex directos. El navy es identidad: si el texto de una pantalla Embassy se ve negro, hay un token mal aplicado.</div>
+        <div class="ds-callout" style="margin-top:12px"><strong>Regla.</strong> Para tipografía de página usá siempre <code>var(--color-on-surface)</code> / <code>var(--color-on-surface-variant)</code> — nunca <code>--color-on-surface</code> ni hex directos. El navy es identidad: si el texto de una pantalla Embassy se ve negro, hay un token mal aplicado.</div>
       </div>
 
       <!-- Epilogue -->
@@ -4603,11 +4603,11 @@ body { overflow-x: clip; }
           </div>
           <div class="docs-type-row">
             <div class="docs-type-label"><code>--font-size-body-sm</code><br><span style="font-size:11px;color:var(--ds-text-3)">12.5px / 400</span></div>
-            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:12.5px;font-weight:400;color:var(--text-muted)">Meta información y texto auxiliar</div>
+            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:12.5px;font-weight:400;color:var(--color-on-surface-variant)">Meta información y texto auxiliar</div>
           </div>
           <div class="docs-type-row">
             <div class="docs-type-label"><code>--font-size-overline</code><br><span style="font-size:11px;color:var(--ds-text-3)">12px / 600 / uppercase</span></div>
-            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted)">ENCABEZADO DE TABLA</div>
+            <div class="docs-type-sample" style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--color-on-surface-variant)">ENCABEZADO DE TABLA</div>
           </div>
           <div class="docs-type-row">
             <div class="docs-type-label"><code>--font-size-badge</code><br><span style="font-size:11px;color:var(--ds-text-3)">11.5px / 600</span></div>
@@ -4623,7 +4623,7 @@ body { overflow-x: clip; }
         <div class="docs-preview column">
           <div class="docs-type-row">
             <div class="docs-type-label"><code>--font-size-mono-md</code><br><span style="font-size:11px;color:var(--ds-text-3)">13px / 400</span></div>
-            <div class="docs-type-sample" style="font-family:'DM Mono',monospace;font-size:13px;font-weight:400;color:var(--text-muted)">hace 5d · 14:30</div>
+            <div class="docs-type-sample" style="font-family:'DM Mono',monospace;font-size:13px;font-weight:400;color:var(--color-on-surface-variant)">hace 5d · 14:30</div>
           </div>
           <div class="docs-type-row">
             <div class="docs-type-label"><code>--font-size-mono-sm</code><br><span style="font-size:11px;color:var(--ds-text-3)">11px / 400</span></div>
@@ -4947,7 +4947,7 @@ body { overflow-x: clip; }
       <p class="ds-p">No es el tamaño de pantalla: un dashboard y una landing se ven los dos en un monitor grande y no se componen igual. <strong>Lo que evita parecer generado aplica a todo. Lo que es apertura es de página, no de producto</strong> — una pantalla de producto no abre, continúa.</p>
       <div class="ds-table-wrap">
         <table class="ds-table">
-          <thead><tr><th></th><th>Página <span style="font-weight:400;color:var(--text-muted)">landing, propuesta, reporte</span></th><th>Producto <span style="font-weight:400;color:var(--text-muted)">pantallas en el app shell</span></th></tr></thead>
+          <thead><tr><th></th><th>Página <span style="font-weight:400;color:var(--color-on-surface-variant)">landing, propuesta, reporte</span></th><th>Producto <span style="font-weight:400;color:var(--color-on-surface-variant)">pantallas en el app shell</span></th></tr></thead>
           <tbody>
             <tr><td>Estructura, ancho y grilla</td><td>Sí</td><td>Sí, para la columna de contenido. <code>bleed</code> casi nunca</td></tr>
             <tr><td>Medida de línea</td><td>Sí</td><td>Sí, en todo texto corrido</td></tr>
@@ -4979,11 +4979,11 @@ body { overflow-x: clip; }
       <p class="ds-p">1200 es el default y es el número que usa todo el mundo. La escala es cerrada, y <strong>los márgenes laterales nunca desaparecen</strong>: el ancho crece, el aire se queda.</p>
       <div class="ds-preview" style="display:block;padding:0;overflow:hidden">
         <div style="background:var(--color-surface);padding:16px 0">
-          <div class="column" style="outline:1px dashed var(--color-outline);outline-offset:-1px"><div style="padding:10px;font:500 12px/1 var(--font-mono);color:var(--text-muted)">.column · 1200</div></div>
+          <div class="column" style="outline:1px dashed var(--color-outline);outline-offset:-1px"><div style="padding:10px;font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.column · 1200</div></div>
           <div style="height:10px"></div>
-          <div class="column column-1440" style="outline:1px dashed var(--color-outline);outline-offset:-1px"><div style="padding:10px;font:500 12px/1 var(--font-mono);color:var(--text-muted)">.column-1440</div></div>
+          <div class="column column-1440" style="outline:1px dashed var(--color-outline);outline-offset:-1px"><div style="padding:10px;font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.column-1440</div></div>
           <div style="height:10px"></div>
-          <div class="column column-bleed" style="outline:1px dashed var(--color-outline);outline-offset:-1px"><div style="padding:10px;font:500 12px/1 var(--font-mono);color:var(--text-muted)">.column-bleed · sin límite, con márgenes igual</div></div>
+          <div class="column column-bleed" style="outline:1px dashed var(--color-outline);outline-offset:-1px"><div style="padding:10px;font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.column-bleed · sin límite, con márgenes igual</div></div>
         </div>
       </div>
       <div class="ds-table-wrap" style="margin-top:12px">
@@ -5005,13 +5005,13 @@ body { overflow-x: clip; }
       <p class="ds-p">Adentro de la estructura elegida. Existe para que la asimetría salga barata: 7+5, 8+4, 5+4+3 son composiciones; 4+4+4 tres secciones seguidas es la grilla de tres tarjetas con otro nombre.</p>
       <div class="ds-preview" style="display:block">
         <div class="grid-12" style="width:100%">
-          <div class="span-7" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-7</div>
-          <div class="span-5" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-5</div>
+          <div class="span-7" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.span-7</div>
+          <div class="span-5" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.span-5</div>
         </div>
         <div class="grid-12" style="width:100%;margin-top:12px">
-          <div class="span-5" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-5</div>
-          <div class="span-4" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-4</div>
-          <div class="span-3" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--text-secondary)">.span-3</div>
+          <div class="span-5" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.span-5</div>
+          <div class="span-4" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.span-4</div>
+          <div class="span-3" style="background:var(--color-surface-container);border:1px solid var(--color-outline-variant);border-radius:var(--radius-md);padding:14px;font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.span-3</div>
         </div>
       </div>
 
@@ -5023,7 +5023,7 @@ body { overflow-x: clip; }
       <div class="ds-preview" style="display:block">
         <p class="overline">Informe trimestral</p>
         <h2 class="editorial-md" style="margin:0 0 10px">Cuánto tardan hoy las altas de socios</h2>
-        <p class="measure" style="margin:0;color:var(--text-secondary)">Medimos las 240 altas del último trimestre en los cuatro clubes. La mediana es de 4 minutos; el percentil 90 llega a 19.</p>
+        <p class="measure" style="margin:0;color:var(--color-on-surface-variant)">Medimos las 240 altas del último trimestre en los cuatro clubes. La mediana es de 4 minutos; el percentil 90 llega a 19.</p>
       </div>
 
       <h3 class="ds-h3">El overline, y el gesto</h3>
@@ -5031,7 +5031,7 @@ body { overflow-x: clip; }
       <div class="ds-preview" style="display:block">
         <span class="section-index" aria-hidden="true">02<span class="sep">/</span>05</span>
         <h3 style="margin:0 0 6px">Dónde se pierde el tiempo</h3>
-        <p class="measure" style="margin:0;color:var(--text-secondary)">El índice va a la izquierda del título, en DM Mono y en el color de acento.</p>
+        <p class="measure" style="margin:0;color:var(--color-on-surface-variant)">El índice va a la izquierda del título, en DM Mono y en el color de acento.</p>
       </div>
       <div class="ds-callout">Las versalitas de componente —badge, header de tabla, label del nav— usan el otro tracking positivo, <code>--letter-spacing-label</code> (0.08em). A 10px el tracking apretado se lee peor: resuelven problemas distintos y no se unifican.</div>
 
@@ -5041,11 +5041,11 @@ body { overflow-x: clip; }
       <div class="ds-callout"><strong>Lo que parece contradicción y no lo es:</strong> <code>.rule</code> es de página y el escalón es de pantalla. Adentro de un app shell la línea sobra —el shell ya encuadra, y dibujar el borde otra vez es dibujarlo dos veces (<em>D10</em> en escritorio, <em>M10</em> en nativo)—. Al revés, una página que separa sus secciones con escalones de superficie termina siendo justo la banda alternada que esta regla prohíbe.</div>
       <div class="ds-preview" style="display:block;padding:0">
         <div style="background:var(--color-surface)">
-          <div class="column"><div class="section-tight" style="font:500 12px/1 var(--font-mono);color:var(--text-muted)">.section-tight</div></div>
+          <div class="column"><div class="section-tight" style="font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.section-tight</div></div>
           <hr class="rule">
-          <div class="column"><div class="section" style="font:500 12px/1 var(--font-mono);color:var(--text-muted)">.section</div></div>
+          <div class="column"><div class="section" style="font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.section</div></div>
           <hr class="rule">
-          <div class="column"><div class="section-lead" style="font:500 12px/1 var(--font-mono);color:var(--text-muted)">.section-lead · la que carga el argumento</div></div>
+          <div class="column"><div class="section-lead" style="font:500 12px/1 var(--font-mono);color:var(--color-on-surface-variant)">.section-lead · la que carga el argumento</div></div>
         </div>
       </div>
 
@@ -5127,7 +5127,7 @@ body { overflow-x: clip; }
         </div>
         <div class="gradient-surface" style="padding:26px 28px">
           <h3 style="margin:0 0 6px">--gradient-surface · separa sin dibujar una caja</h3>
-          <p class="measure" style="margin:0;color:var(--text-secondary)">Sutil, del acento al fondo. Texto normal encima sin problema.</p>
+          <p class="measure" style="margin:0;color:var(--color-on-surface-variant)">Sutil, del acento al fondo. Texto normal encima sin problema.</p>
         </div>
       </div>
       <div class="ds-callout"><code>.text-gradient</code> —el titular que se desvanece— va <strong>solo</strong> en el registro editorial. En cuerpo baja el contraste en su extremo débil y a 13,5px es ilegible. Y lleva siempre su <code>color</code> sólido de fallback: si el navegador no recorta el fondo, tiene que quedar un título legible y no uno invisible.</div>
@@ -5182,7 +5182,7 @@ body { overflow-x: clip; }
           <div style="position:relative">
             <p class="overline">Propuesta comercial</p>
             <h2 class="editorial-sm" style="color:#fff;margin:0 0 10px">Rediseño del back-office</h2>
-            <p class="measure" style="color:var(--text-secondary);margin:0 0 18px">Seis semanas, dos personas, y la lista de pantallas que hay que rehacer.</p>
+            <p class="measure" style="color:var(--color-on-surface-variant);margin:0 0 18px">Seis semanas, dos personas, y la lista de pantallas que hay que rehacer.</p>
             <p class="figure" style="margin:0">
               <span class="figure-value" style="color:#fff">4,2</span><span class="figure-unit">min</span>
               <span class="figure-base">mediana · 240 altas · jul–sep 2026</span>
@@ -5520,8 +5520,8 @@ body { overflow-x: clip; }
             <p class="phone-caption"><strong>M13</strong> — la etiqueta pesa más</p>
             <div data-platform="native" style="background:var(--color-surface);padding:16px;border-radius:var(--radius-xl)">
               <div class="screen-group">
-                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--text-primary)">Modalidad</span><span style="font-size:var(--font-size-body-sm);color:var(--text-muted)">Full anual</span></div>
-                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--text-primary)">Accesos</span><span style="font-size:var(--font-size-body-sm);color:var(--text-muted)">3 por semana</span></div>
+                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--color-on-surface)">Modalidad</span><span style="font-size:var(--font-size-body-sm);color:var(--color-on-surface-variant)">Full anual</span></div>
+                <div class="screen-row"><span style="font-size:var(--font-size-heading-md);color:var(--color-on-surface)">Accesos</span><span style="font-size:var(--font-size-body-sm);color:var(--color-on-surface-variant)">3 por semana</span></div>
               </div>
             </div>
           </div>
@@ -6645,7 +6645,7 @@ body { overflow-x: clip; }
       <!-- Buttons documentation page — Embassy (Overview · Specs · Guidelines · Accessibility) -->
       <style>
         .bd-lead { font-size:var(--font-size-heading-xs); line-height:1.7; color:var(--ds-text-2); max-width:700px; margin:0 0 var(--space-1); }
-        .bd-eyebrow { font-family:var(--font-heading); font-size:var(--font-size-overline); line-height:var(--line-height-overline); letter-spacing:var(--letter-spacing-overline); font-weight:600; text-transform:uppercase; color:var(--text-muted); margin:0 0 var(--space-3); }  /* era sans .12em en azul — regla 1 */
+        .bd-eyebrow { font-family:var(--font-heading); font-size:var(--font-size-overline); line-height:var(--line-height-overline); letter-spacing:var(--letter-spacing-overline); font-weight:600; text-transform:uppercase; color:var(--color-on-surface-variant); margin:0 0 var(--space-3); }  /* era sans .12em en azul — regla 1 */
         .bd-grid { display:grid; gap:var(--space-4); margin-top:var(--space-1); }
         .bd-grid.c2 { grid-template-columns:repeat(2,1fr); }
         .bd-grid.c3 { grid-template-columns:repeat(3,1fr); }
@@ -7200,8 +7200,8 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td><code>--color-primary-container</code></td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Igual que Habilitado</td></tr>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -7231,8 +7231,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-600</span></span></td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">neutral-600</span></span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                       <tr><td>none</td><td>Sombra</td><td colspan="2" class="bt-tok-note">Elevación cero — sin sombra al deshabilitar</td></tr>
                       <tr><td><code>pointer-events: none</code></td><td>Interacción</td><td colspan="2" class="bt-tok-note">No aplican estados de hover, foco ni presión</td></tr>
                     </tbody></table>
@@ -7287,8 +7287,8 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td><code>--color-primary-hover</code></td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Igual que Hover</td></tr>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -7318,8 +7318,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-600</span></span></td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">neutral-600</span></span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                       <tr><td><code>pointer-events: none</code></td><td>Interacción</td><td colspan="2" class="bt-tok-note">No aplican estados de hover, foco ni presión</td></tr>
                     </tbody></table>
                   </div>
@@ -7368,8 +7368,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -7395,8 +7395,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">neutral-600</span></span></td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-disabled</code></td><td>Contenedor</td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#BFC1C8"></span> #BFC1C8 <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">neutral-100</span></span></td><td><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#282C39"></span> #282C39 <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">neutral-600</span></span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -7444,8 +7444,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -7472,7 +7472,7 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td>transparent</td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Sin relleno de fondo</td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                       <tr><td><code>--color-outline-variant</code></td><td>Border (1px)</td><td colspan="2" class="bt-tok-note">Borde atenuado en estado deshabilitado</td></tr>
                     </tbody></table>
                   </div>
@@ -7520,8 +7520,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -7548,7 +7548,7 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td>transparent</td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Sin relleno de fondo</td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Etiqueta / ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -7595,8 +7595,8 @@ body { overflow-x: clip; }
                   <div class="bt-state-body">
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
-                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus</code></td><td>Contorno de foco (2px)</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#4F80FF"></span> #4F80FF</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-focus-ring</code></td><td>Sombra de anillo de foco (4px)</td><td colspan="2"><code>color-mix(in srgb, var(--color-focus) 15%, transparent)</code> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>--color-focus</code> al 15% de opacidad · sin variación en dark</span></td></tr>
                     </tbody></table>
                   </div>
                 </div>
@@ -7623,7 +7623,7 @@ body { overflow-x: clip; }
                     <table class="bt-tok-table"><thead><tr><th>Token</th><th>Rol</th><th>Claro</th><th>Oscuro</th></tr></thead>
                     <tbody>
                       <tr><td>transparent</td><td>Contenedor</td><td colspan="2" class="bt-tok-note">Sin relleno de fondo</td></tr>
-                      <tr><td><code>--color-on-disabled</code></td><td>Ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                      <tr><td><code>--color-on-disabled</code></td><td>Ícono</td><td colspan="2"><span class="bt-tok-swatch"><span class="bt-tok-chip" style="background:#747989"></span> #747989</span> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
                       <tr><td><code>--color-outline-variant</code></td><td>Border (1px)</td><td colspan="2" class="bt-tok-note">Borde atenuado en estado deshabilitado</td></tr>
                     </tbody></table>
                   </div>
@@ -7723,7 +7723,7 @@ body { overflow-x: clip; }
                     <tr><td>—</td><td>Padding vertical</td><td>14px</td><td>—</td></tr>
                     <tr><td>—</td><td>Padding horizontal (solo etiqueta)</td><td>30px</td><td>—</td></tr>
                     <tr><td>—</td><td>Tamaño de fuente de etiqueta</td><td>16px</td><td>—</td></tr>
-                    <tr><td>—</td><td>Peso de fuente</td><td><b>700</b> <span style="font-size:var(--font-size-badge);color:var(--text-muted)">⚑ distinto del resto de tamaños (600)</span></td><td>—</td></tr>
+                    <tr><td>—</td><td>Peso de fuente</td><td><b>700</b> <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">⚑ distinto del resto de tamaños (600)</span></td><td>—</td></tr>
                     <tr><td>—</td><td>Tamaño de ícono</td><td>18px</td><td>—</td></tr>
                     <tr><td><code>--space-2</code></td><td>Espacio ícono–etiqueta</td><td>8px</td><td>—</td></tr>
                     <tr><td><code>--radius-lg</code></td><td>Radio de borde</td><td>12px</td><td>CornerFull (pill) ⚑</td></tr>
@@ -7945,14 +7945,14 @@ body { overflow-x: clip; }
           <div class="bd-card">
             <p class="bd-eyebrow">Escala de radio por tamaño</p>
             <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--space-4);padding:var(--space-5) 0">
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-xs" type="button" style="pointer-events:none">Acción</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">XS · <code>--radius-sm</code> · 4px</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-sm" type="button" style="pointer-events:none">Acción</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">SM · <code>--radius-sm</code> · 4px</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary" type="button" style="pointer-events:none">Acción MD</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">MD · <code>--radius-md</code> · 8px</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-lg" type="button" style="pointer-events:none">Acción LG</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">LG · <code>--radius-md</code> · 8px</span></div>
-              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-xl" type="button" style="pointer-events:none">Acción XL</button><span style="font-size:var(--font-size-badge);color:var(--text-secondary);font-family:var(--font-mono)">XL · <code>--radius-lg</code> · 12px</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-xs" type="button" style="pointer-events:none">Acción</button><span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant);font-family:var(--font-mono)">XS · <code>--radius-sm</code> · 4px</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-sm" type="button" style="pointer-events:none">Acción</button><span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant);font-family:var(--font-mono)">SM · <code>--radius-sm</code> · 4px</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary" type="button" style="pointer-events:none">Acción MD</button><span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant);font-family:var(--font-mono)">MD · <code>--radius-md</code> · 8px</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-lg" type="button" style="pointer-events:none">Acción LG</button><span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant);font-family:var(--font-mono)">LG · <code>--radius-md</code> · 8px</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><button class="btn-primary btn-xl" type="button" style="pointer-events:none">Acción XL</button><span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant);font-family:var(--font-mono)">XL · <code>--radius-lg</code> · 12px</span></div>
             </div>
           </div>
-          <p style="font-size:var(--font-size-label);color:var(--text-secondary);margin-top:var(--space-3)">Lógica de diseño y comparación visual en <a class="ds-toc-link" style="display:inline;padding:0;border:none;background:none;color:var(--color-primary);cursor:pointer" onclick="document.querySelector('[data-tab-trigger=\'guidelines\']')?.click();setTimeout(()=>{document.getElementById('bg-shape')?.scrollIntoView({behavior:'smooth',block:'start'})},300)">Guidelines → Shape &amp; Radius</a>.</p>
+          <p style="font-size:var(--font-size-label);color:var(--color-on-surface-variant);margin-top:var(--space-3)">Lógica de diseño y comparación visual en <a class="ds-toc-link" style="display:inline;padding:0;border:none;background:none;color:var(--color-primary);cursor:pointer" onclick="document.querySelector('[data-tab-trigger=\'guidelines\']')?.click();setTimeout(()=>{document.getElementById('bg-shape')?.scrollIntoView({behavior:'smooth',block:'start'})},300)">Guidelines → Shape &amp; Radius</a>.</p>
         </section>
 
         </div><!-- /ds-toc-body -->
@@ -8532,9 +8532,9 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
                 <tr><td><code>--color-error</code></td><td>Primary Danger</td><td>background</td><td>#FD3A45</td><td>#F29AA1</td></tr>
                 <tr><td><code>--color-success</code></td><td>Primary Success</td><td>background</td><td>#00C164</td><td>#93E1B3</td></tr>
                 <tr><td><code>--color-disabled</code></td><td>All · disabled</td><td>background</td><td>#BFC1C8</td><td>#282C39</td></tr>
-                <tr><td><code>--color-on-disabled</code></td><td>All · disabled</td><td>color</td><td colspan="2">#747989 <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
-                <tr><td><code>--color-focus</code></td><td>All · focus</td><td>outline</td><td colspan="2">#4F80FF <span style="font-size:var(--font-size-badge);color:var(--text-muted)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
-                <tr><td><code>--color-focus-ring</code></td><td>All · focus</td><td>box-shadow</td><td colspan="2">color-mix(in srgb, var(--color-focus) 15%, transparent) <span style="font-size:var(--font-size-badge);color:var(--text-muted)">· sin variación en dark</span></td></tr>
+                <tr><td><code>--color-on-disabled</code></td><td>All · disabled</td><td>color</td><td colspan="2">#747989 <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--neutral-300)</code> · sin variación en dark</span></td></tr>
+                <tr><td><code>--color-focus</code></td><td>All · focus</td><td>outline</td><td colspan="2">#4F80FF <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">= <code>var(--secondary-900)</code> · sin variación en dark</span></td></tr>
+                <tr><td><code>--color-focus-ring</code></td><td>All · focus</td><td>box-shadow</td><td colspan="2">color-mix(in srgb, var(--color-focus) 15%, transparent) <span style="font-size:var(--font-size-badge);color:var(--color-on-surface-variant)">· sin variación en dark</span></td></tr>
                 <tr><td><code>--radius-md</code></td><td>All</td><td>border-radius</td><td colspan="2">8px</td></tr>
               </tbody>
             </table>
@@ -8860,7 +8860,7 @@ import { Pencil, Trash2 } from &quot;lucide-react&quot;
           <h2 class="docs-section-title">Selección múltiple</h2>
           <p class="ds-p">Con <code>type="multiple"</code> permite <b>varios segmentos activos</b> a la vez — para filtros acumulables o atributos que se combinan.</p>
           <div class="bd-family-wrap"><div class="seg-btn-group" role="group" aria-label="Días laborables"><button type="button" class="seg-btn selected" aria-pressed="true" onclick="segSwitchMulti(this)">Lun</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitchMulti(this)">Mar</button><button type="button" class="seg-btn selected" aria-pressed="true" onclick="segSwitchMulti(this)">Mié</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitchMulti(this)">Jue</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitchMulti(this)">Vie</button></div></div>
-          <p class="ds-p" style="color:var(--text-secondary)">Usá selección múltiple solo cuando las opciones se combinan de verdad; si es "una de varias", mantené la selección única.</p>
+          <p class="ds-p" style="color:var(--color-on-surface-variant)">Usá selección múltiple solo cuando las opciones se combinan de verdad; si es "una de varias", mantené la selección única.</p>
         </section>
         <section class="docs-section" id="tc-seg-btn-g-4">
           <h2 class="docs-section-title">Ubicación</h2>
@@ -9049,12 +9049,12 @@ function segSwitch(el) {
 
           <p class="ch-variant-label" style="margin-top:28px">Estados (Text Fields MD3)</p>
           <div class="bd-family-wrap"><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px 20px">
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Enabled</span><input class="field-input" value="Texto ingresado" aria-label="Enabled"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Hover</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-outline)" aria-label="Hover"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Focus</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-focus);box-shadow:0 0 0 4px var(--color-focus-ring)" aria-label="Focus"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Disabled</span><input class="field-input" value="Texto ingresado" disabled aria-label="Disabled"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error</span><div class="field-group is-error"><input class="field-input" value="valor@" aria-label="Error"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error + focus</span><div class="field-group is-error"><input class="field-input" value="valor@" style="box-shadow:0 0 0 4px var(--color-error-ring)" aria-label="Error con foco"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Enabled</span><input class="field-input" value="Texto ingresado" aria-label="Enabled"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Hover</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-outline)" aria-label="Hover"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Focus</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-focus);box-shadow:0 0 0 4px var(--color-focus-ring)" aria-label="Focus"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Disabled</span><input class="field-input" value="Texto ingresado" disabled aria-label="Disabled"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Error</span><div class="field-group is-error"><input class="field-input" value="valor@" aria-label="Error"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Error + focus</span><div class="field-group is-error"><input class="field-input" value="valor@" style="box-shadow:0 0 0 4px var(--color-error-ring)" aria-label="Error con foco"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
           </div></div>
 
           <p class="ch-variant-label" style="margin-top:28px">Label · supporting text · required · íconos · error</p>
@@ -9168,12 +9168,12 @@ function segSwitch(el) {
         <h2 class="docs-section-title">Estados</h2>
         <p class="docs-section-desc">Los seis estados renderizados con el componente real (enabled / hover / focus / disabled / error / error + focus).</p>
         <div class="bd-family-wrap"><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px 20px">
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Enabled</span><input class="field-input" value="Texto ingresado" aria-label="Enabled"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Hover</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-outline)" aria-label="Hover"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Focus</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-focus);box-shadow:0 0 0 4px var(--color-focus-ring)" aria-label="Focus"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Disabled</span><input class="field-input" value="Texto ingresado" disabled aria-label="Disabled"></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error</span><div class="field-group is-error"><input class="field-input" value="valor@" aria-label="Error"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
-            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--text-secondary)">Error + focus</span><div class="field-group is-error"><input class="field-input" value="valor@" style="box-shadow:0 0 0 4px var(--color-error-ring)" aria-label="Error con foco"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Enabled</span><input class="field-input" value="Texto ingresado" aria-label="Enabled"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Hover</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-outline)" aria-label="Hover"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Focus</span><input class="field-input" value="Texto ingresado" style="border-color:var(--color-focus);box-shadow:0 0 0 4px var(--color-focus-ring)" aria-label="Focus"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Disabled</span><input class="field-input" value="Texto ingresado" disabled aria-label="Disabled"></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Error</span><div class="field-group is-error"><input class="field-input" value="valor@" aria-label="Error"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant)">Error + focus</span><div class="field-group is-error"><input class="field-input" value="valor@" style="box-shadow:0 0 0 4px var(--color-error-ring)" aria-label="Error con foco"><div class="field-supporting"><span class="field-error-msg">Ingresá un email válido.</span></div></div></div>
           </div></div>
         <table class="ds-table" style="margin-top:16px">
           <thead><tr><th>Estado</th><th>Tratamiento visual</th><th>Token</th></tr></thead>
@@ -10890,7 +10890,7 @@ export { Badge, badgeVariants }</code></pre>
           <div class="bd-family-wrap">
             <div class="table-scroll"><table class="data-table">
   <thead><tr><th>Candidato</th><th>Rol</th><th>Estado</th><th>Fecha</th></tr></thead>
-  <tbody><tr class="clickable" tabindex="0"><td style="font-weight:500">Ana García</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="color:var(--text-muted)">12 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">Luis Ramírez</td><td>Frontend Dev</td><td><span class="badge badge-open">En proceso</span></td><td style="color:var(--text-muted)">08 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">María López</td><td>Product Manager</td><td><span class="badge badge-draft">Pendiente</span></td><td style="color:var(--text-muted)">01 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">Carlos Pérez</td><td>Backend Dev</td><td><span class="badge badge-closed">Cerrado</span></td><td style="color:var(--text-muted)">25 may 2025</td></tr></tbody>
+  <tbody><tr class="clickable" tabindex="0"><td style="font-weight:500">Ana García</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="color:var(--color-on-surface-variant)">12 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">Luis Ramírez</td><td>Frontend Dev</td><td><span class="badge badge-open">En proceso</span></td><td style="color:var(--color-on-surface-variant)">08 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">María López</td><td>Product Manager</td><td><span class="badge badge-draft">Pendiente</span></td><td style="color:var(--color-on-surface-variant)">01 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">Carlos Pérez</td><td>Backend Dev</td><td><span class="badge badge-closed">Cerrado</span></td><td style="color:var(--color-on-surface-variant)">25 may 2025</td></tr></tbody>
 </table></div>
           </div>
 
@@ -11018,7 +11018,7 @@ export { Badge, badgeVariants }</code></pre>
 
         <section class="docs-section" id="tc-table-g-0">
           <h2 class="docs-section-title">Uso</h2>
-          <p class="ds-p">La data table presenta <b>registros con múltiples atributos comparables</b> en filas y columnas, para escanear, ordenar y filtrar. <span style="color:var(--text-secondary)">Material Design 3 no incluye data tables; esta guía sigue el modelo de Material Design 2 con valores y componentes de Embassy.</span></p>
+          <p class="ds-p">La data table presenta <b>registros con múltiples atributos comparables</b> en filas y columnas, para escanear, ordenar y filtrar. <span style="color:var(--color-on-surface-variant)">Material Design 3 no incluye data tables; esta guía sigue el modelo de Material Design 2 con valores y componentes de Embassy.</span></p>
           <div class="bd-grid c2">
             <div class="bd-dd do"><div class="bd-dd-head">✓ Usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Listas de registros con múltiples atributos comparables (candidatos, vacantes).</li><li>El usuario necesita escanear, ordenar o filtrar datos en columnas.</li><li>Dashboards administrativos y reportes con datos tabulares.</li></ul></div></div>
             <div class="bd-dd dont"><div class="bd-dd-head">✕ No usar</div><div class="bd-dd-body"><ul style="margin:0;padding-left:18px;line-height:1.9"><li>Un solo registro con muchos detalles → <b>un panel de detalle</b>.</li><li>Listas simples de 1–2 atributos → <b>una List o card list</b>.</li><li>Mobile como caso de uso principal → <b>las tablas se degradan en pantallas chicas</b>.</li></ul></div></div>
@@ -11029,7 +11029,7 @@ export { Badge, badgeVariants }</code></pre>
           <p class="docs-section-desc">Componente real. Las partes que lo componen:</p>
           <div class="bd-family-wrap"><div class="table-scroll"><table class="data-table">
   <thead><tr><th>Candidato</th><th>Rol</th><th>Estado</th><th>Fecha</th></tr></thead>
-  <tbody><tr class="clickable" tabindex="0"><td style="font-weight:500">Ana García</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="color:var(--text-muted)">12 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">Luis Ramírez</td><td>Frontend Dev</td><td><span class="badge badge-open">En proceso</span></td><td style="color:var(--text-muted)">08 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">María López</td><td>Product Manager</td><td><span class="badge badge-draft">Pendiente</span></td><td style="color:var(--text-muted)">01 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">Carlos Pérez</td><td>Backend Dev</td><td><span class="badge badge-closed">Cerrado</span></td><td style="color:var(--text-muted)">25 may 2025</td></tr></tbody>
+  <tbody><tr class="clickable" tabindex="0"><td style="font-weight:500">Ana García</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="color:var(--color-on-surface-variant)">12 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">Luis Ramírez</td><td>Frontend Dev</td><td><span class="badge badge-open">En proceso</span></td><td style="color:var(--color-on-surface-variant)">08 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">María López</td><td>Product Manager</td><td><span class="badge badge-draft">Pendiente</span></td><td style="color:var(--color-on-surface-variant)">01 jun 2025</td></tr><tr class="clickable" tabindex="0"><td style="font-weight:500">Carlos Pérez</td><td>Backend Dev</td><td><span class="badge badge-closed">Cerrado</span></td><td style="color:var(--color-on-surface-variant)">25 may 2025</td></tr></tbody>
 </table></div></div>
           <ol class="bd-family-legend"><li>Header de columna — descriptivo y corto.</li><li>Fila — un registro.</li><li>Celda — un atributo del registro.</li><li>Fila clickeable — navega con foco de teclado.</li><li>Estado en celda — un Badge, no texto plano coloreado.</li></ol>
         </section>
@@ -11252,14 +11252,14 @@ export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell }</code><
                   <th scope="col"><button type="button" class="data-table-sort-btn" data-dt-sort>Fecha <i data-lucide="chevron-up" class="data-table-sort-icon"></i></button></th>
                 </tr></thead>
                 <tbody>
-                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Ana García</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="text-align:right">88</td><td style="color:var(--text-muted)">12 jun 2025</td></tr>
-                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Luis Ramírez</td><td>Frontend Dev</td><td><span class="badge badge-open">En proceso</span></td><td style="text-align:right">73</td><td style="color:var(--text-muted)">08 jun 2025</td></tr>
-                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">María López</td><td>Product Manager</td><td><span class="badge badge-draft">Pendiente</span></td><td style="text-align:right">91</td><td style="color:var(--text-muted)">01 jun 2025</td></tr>
-                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Carlos Pérez</td><td>Backend Dev</td><td><span class="badge badge-closed">Cerrado</span></td><td style="text-align:right">66</td><td style="color:var(--text-muted)">25 may 2025</td></tr>
-                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Sofía Méndez</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="text-align:right">85</td><td style="color:var(--text-muted)">22 may 2025</td></tr>
-                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Diego Torres</td><td>Frontend Dev</td><td><span class="badge badge-warning">En revisión</span></td><td style="text-align:right">79</td><td style="color:var(--text-muted)">18 may 2025</td></tr>
-                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Valentina Ruiz</td><td>Data Analyst</td><td><span class="badge badge-open">En proceso</span></td><td style="text-align:right">82</td><td style="color:var(--text-muted)">14 may 2025</td></tr>
-                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Martín Silva</td><td>Backend Dev</td><td><span class="badge badge-active">Activo</span></td><td style="text-align:right">70</td><td style="color:var(--text-muted)">09 may 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Ana García</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="text-align:right">88</td><td style="color:var(--color-on-surface-variant)">12 jun 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Luis Ramírez</td><td>Frontend Dev</td><td><span class="badge badge-open">En proceso</span></td><td style="text-align:right">73</td><td style="color:var(--color-on-surface-variant)">08 jun 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">María López</td><td>Product Manager</td><td><span class="badge badge-draft">Pendiente</span></td><td style="text-align:right">91</td><td style="color:var(--color-on-surface-variant)">01 jun 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Carlos Pérez</td><td>Backend Dev</td><td><span class="badge badge-closed">Cerrado</span></td><td style="text-align:right">66</td><td style="color:var(--color-on-surface-variant)">25 may 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Sofía Méndez</td><td>Diseñadora UX</td><td><span class="badge badge-active">Activo</span></td><td style="text-align:right">85</td><td style="color:var(--color-on-surface-variant)">22 may 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Diego Torres</td><td>Frontend Dev</td><td><span class="badge badge-warning">En revisión</span></td><td style="text-align:right">79</td><td style="color:var(--color-on-surface-variant)">18 may 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Valentina Ruiz</td><td>Data Analyst</td><td><span class="badge badge-open">En proceso</span></td><td style="text-align:right">82</td><td style="color:var(--color-on-surface-variant)">14 may 2025</td></tr>
+                  <tr><td class="data-table-select"><input type="checkbox" class="checkbox" data-dt-row aria-label="Seleccionar fila"></td><td style="font-weight:500">Martín Silva</td><td>Backend Dev</td><td><span class="badge badge-active">Activo</span></td><td style="text-align:right">70</td><td style="color:var(--color-on-surface-variant)">09 may 2025</td></tr>
                 </tbody>
               </table></div>
               <div class="data-table-footer">
@@ -11744,7 +11744,7 @@ css/components/dropdown-menu.css</code></pre>
             <li><b>Primary tabs</b> — el nivel superior de una pantalla; pueden llevar ícono + texto.</li>
             <li><b>Secondary tabs</b> — anidadas dentro de una sección de contenido, para subdividirla.</li>
           </ul>
-          <p class="ds-p" style="color:var(--text-secondary)">Embassy implementa un <b>único estilo</b> de tab; la distinción primary/secondary se expresa por jerarquía y ubicación, no por variantes de estilo separadas.</p>
+          <p class="ds-p" style="color:var(--color-on-surface-variant)">Embassy implementa un <b>único estilo</b> de tab; la distinción primary/secondary se expresa por jerarquía y ubicación, no por variantes de estilo separadas.</p>
         </section>
         <section class="docs-section" id="tc-tabs-g-3">
           <h2 class="docs-section-title">Ubicación</h2>
@@ -12296,7 +12296,7 @@ export { Tabs, TabsList, Tab, TabPanel }</code></pre>
         <section class="docs-section" id="tc-dialog-g-3">
           <h2 class="docs-section-title">Full-screen dialog</h2>
           <p class="ds-p">Para tareas de varios campos en ventanas <b>compactas</b> (&lt; 600&nbsp;px): ocupa toda la pantalla, con acciones en una barra superior.</p>
-          <p class="ds-p" style="color:var(--text-secondary)">Embassy resuelve este caso con un <code>Sheet</code> (<code>side="bottom"</code>) o una página dedicada; al descartar con cambios sin guardar, abrí un basic dialog de confirmación.</p>
+          <p class="ds-p" style="color:var(--color-on-surface-variant)">Embassy resuelve este caso con un <code>Sheet</code> (<code>side="bottom"</code>) o una página dedicada; al descartar con cambios sin guardar, abrí un basic dialog de confirmación.</p>
         </section>
         <section class="docs-section" id="tc-dialog-g-4">
           <h2 class="docs-section-title">Diseño adaptativo</h2>
@@ -13957,11 +13957,11 @@ export { StatsGrid, StatCard }</code></pre>
           <div class="ds-card-link" onclick="navigate('c-nav-drawer')"><div class="ds-card-icon"><i data-lucide="panel-left"></i></div><div class="ds-card-name">Navigation Drawer</div><div class="ds-card-desc">Sidebar lateral fijo con ítems y grupos.</div></div>
           <div class="ds-card-link" onclick="navigate('c-nav-bar')"><div class="ds-card-icon"><i data-lucide="layout-template"></i></div><div class="ds-card-name">Navigation Bar</div><div class="ds-card-desc">Barra inferior para navegar entre 3–5 destinos.</div></div>
         </div>
-        <ul style="margin:8px 0 0;padding-left:20px;color:var(--text-secondary);font-size:var(--font-size-body-md);line-height:1.7">
+        <ul style="margin:8px 0 0;padding-left:20px;color:var(--color-on-surface-variant);font-size:var(--font-size-body-md);line-height:1.7">
           <li>Elegí <strong>Navigation Drawer</strong> en pantallas anchas (desktop/tablet) y cuando tengas muchos destinos o jerarquía con grupos.</li>
           <li>Elegí <strong>Navigation Bar</strong> en mobile y cuando haya entre 3 y 5 destinos de máximo nivel.</li>
           <li>Usá un solo patrón de navegación principal por contexto — no combines drawer y bar para los mismos destinos.</li>
-          <li>El destino activo se marca con <code>var(--color-primary)</code> sobre fondo de container; el resto usa <code>var(--text-secondary)</code>.</li>
+          <li>El destino activo se marca con <code>var(--color-primary)</code> sobre fondo de container; el resto usa <code>var(--color-on-surface-variant)</code>.</li>
         </ul>
       </div>
     </section>
@@ -14503,12 +14503,12 @@ export { StatsGrid, StatCard }</code></pre>
     "&gt;
       &lt;!-- Ícono outlined (inactivo) --&gt;
       &lt;svg aria-hidden="true" width="24" height="24" fill="none"
-        stroke="var(--text-muted)" stroke-width="2"
+        stroke="var(--color-on-surface-variant)" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;
         &lt;!-- paths del ícono --&gt;
       &lt;/svg&gt;
     &lt;/div&gt;
-    &lt;span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;"&gt;Vacantes&lt;/span&gt;
+    &lt;span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant);font-family:var(--font-body);line-height:1;"&gt;Vacantes&lt;/span&gt;
   &lt;/a&gt;
 
   &lt;!-- Ítem INACTIVO con badge --&gt;
@@ -14527,7 +14527,7 @@ export { StatsGrid, StatCard }</code></pre>
       position: relative;
     "&gt;
       &lt;svg aria-hidden="true" width="24" height="24" fill="none"
-        stroke="var(--text-muted)" stroke-width="2"
+        stroke="var(--color-on-surface-variant)" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"&gt;
         &lt;!-- paths del ícono --&gt;
       &lt;/svg&gt;
@@ -14541,7 +14541,7 @@ export { StatsGrid, StatCard }</code></pre>
         font-family: var(--font-body);
       "&gt;3&lt;/span&gt;
     &lt;/div&gt;
-    &lt;span style="font-size:12px;font-weight:500;color:var(--text-muted);font-family:var(--font-body);line-height:1;"&gt;Candidatos&lt;/span&gt;
+    &lt;span style="font-size:12px;font-weight:500;color:var(--color-on-surface-variant);font-family:var(--font-body);line-height:1;"&gt;Candidatos&lt;/span&gt;
   &lt;/a&gt;
 
 &lt;/nav&gt;</code></pre>
@@ -15105,7 +15105,7 @@ css/layout.css</code></pre>
               <tr><td><code>--tb-height</code></td><td><code>40px</code></td><td>Altura de control compartida (filters)</td></tr>
               <tr><td><code>--tb-surface</code> / <code>--tb-border</code></td><td><code>var(--color-surface-container)</code> / <code>var(--border)</code></td><td>Superficie y borde de campo (filters)</td></tr>
               <tr><td><code>--tb-border-focus</code> / <code>--tb-focus-ring</code></td><td><code>var(--color-secondary)</code> / <code>var(--color-focus-ring)</code></td><td>Foco de campo (filters)</td></tr>
-              <tr><td><code>--tb-radius</code> / <code>--tb-icon</code></td><td><code>var(--radius-md)</code> / <code>var(--text-muted)</code></td><td>Radio e íconos de campo (filters)</td></tr>
+              <tr><td><code>--tb-radius</code> / <code>--tb-icon</code></td><td><code>var(--radius-md)</code> / <code>var(--color-on-surface-variant)</code></td><td>Radio e íconos de campo (filters)</td></tr>
               <tr><td><code>--tb-selected-bg</code> / <code>-text</code></td><td><code>--color-secondary-container</code> / <code>--color-on-secondary-container</code></td><td>Segmento seleccionado primary</td></tr>
               <tr><td><code>--tb-motion-duration</code> / <code>-ease</code></td><td><code>var(--duration-fast)</code> / <code>var(--ease-default)</code></td><td>Hover / foco / selección / apertura</td></tr>
               <tr><td><code>.toolbar-selection</code></td><td><code>--color-secondary-container</code>, <code>--duration-normal</code></td><td>Barra de selección + entrada</td></tr>
@@ -15446,7 +15446,7 @@ css/components/select.css · segmented-button.css · date-picker.css (+ calendar
   <div class="kanban-column">
     <div class="kanban-column-header">Oferta <span class="count">0</span></div>
     <div class="kanban-column-body">
-      <div style="text-align:center;padding:16px 8px;font-size:var(--font-size-label);color:var(--text-muted)">Sin candidatos</div>
+      <div style="text-align:center;padding:16px 8px;font-size:var(--font-size-label);color:var(--color-on-surface-variant)">Sin candidatos</div>
     </div>
   </div>
 </div>
@@ -17798,18 +17798,18 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto">
         <div class="card" style="padding:var(--space-8)">
           <p class="card-title-lg" style="margin:0 0 var(--space-2)">El criterio</p>
-          <p class="card-desc" style="margin:0 0 var(--space-3)"><strong style="color:var(--text-primary);font-weight:var(--font-weight-semibold)">Qué hace que esté bien puesto.</strong> La forma de una página y de una pantalla: estructura, ancho, grilla, ritmo, composición nativa y las reglas anti-genérico. Más el juicio de marca.</p>
-          <p style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-2);line-height:var(--line-height-mono-sm)"><code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--text-primary);white-space:nowrap">design.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--text-primary);white-space:nowrap">COMPOSICION.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--text-primary);white-space:nowrap">MOBILE.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--text-primary);white-space:nowrap">guidelines/</code></p>
+          <p class="card-desc" style="margin:0 0 var(--space-3)"><strong style="color:var(--color-on-surface);font-weight:var(--font-weight-semibold)">Qué hace que esté bien puesto.</strong> La forma de una página y de una pantalla: estructura, ancho, grilla, ritmo, composición nativa y las reglas anti-genérico. Más el juicio de marca.</p>
+          <p style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-2);line-height:var(--line-height-mono-sm)"><code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--color-on-surface);white-space:nowrap">design.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--color-on-surface);white-space:nowrap">COMPOSICION.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--color-on-surface);white-space:nowrap">MOBILE.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--color-on-surface);white-space:nowrap">guidelines/</code></p>
         </div>
         <div class="card" style="padding:var(--space-8);outline:2px solid var(--color-primary);outline-offset:-2px">
           <p class="card-title-lg" style="margin:0 0 var(--space-2)">El contrato</p>
-          <p class="card-desc" style="margin:0 0 var(--space-3)"><strong style="color:var(--text-primary);font-weight:var(--font-weight-semibold)">Qué no se negocia.</strong> Reglas transversales de consistencia y el vocabulario compartido para decir qué está mal, con severidad y con código. <strong>GOVERNANCE §22</strong> es el mapa: dónde vive cada decisión.</p>
-          <p style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-2);line-height:var(--line-height-mono-sm)"><code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--text-primary);white-space:nowrap">GOVERNANCE.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--text-primary);white-space:nowrap">FAILURES.md</code></p>
+          <p class="card-desc" style="margin:0 0 var(--space-3)"><strong style="color:var(--color-on-surface);font-weight:var(--font-weight-semibold)">Qué no se negocia.</strong> Reglas transversales de consistencia y el vocabulario compartido para decir qué está mal, con severidad y con código. <strong>GOVERNANCE §22</strong> es el mapa: dónde vive cada decisión.</p>
+          <p style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-2);line-height:var(--line-height-mono-sm)"><code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--color-on-surface);white-space:nowrap">GOVERNANCE.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--color-on-surface);white-space:nowrap">FAILURES.md</code></p>
         </div>
         <div class="card" style="padding:var(--space-8)">
           <p class="card-title-lg" style="margin:0 0 var(--space-2)">El consumo</p>
-          <p class="card-desc" style="margin:0 0 var(--space-3)"><strong style="color:var(--text-primary);font-weight:var(--font-weight-semibold)">Cómo se usa.</strong> Orden de carga, inventario de componentes, cómo agregar uno nuevo, y la lista acotada de clases públicas que un agente tiene permitido escribir.</p>
-          <p style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-2);line-height:var(--line-height-mono-sm)"><code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--text-primary);white-space:nowrap">CLAUDE.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--text-primary);white-space:nowrap">AI-USAGE-GUIDE.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--text-primary);white-space:nowrap">PUBLIC-API.md</code></p>
+          <p class="card-desc" style="margin:0 0 var(--space-3)"><strong style="color:var(--color-on-surface);font-weight:var(--font-weight-semibold)">Cómo se usa.</strong> Orden de carga, inventario de componentes, cómo agregar uno nuevo, y la lista acotada de clases públicas que un agente tiene permitido escribir.</p>
+          <p style="margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-2);line-height:var(--line-height-mono-sm)"><code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--color-on-surface);white-space:nowrap">CLAUDE.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--color-on-surface);white-space:nowrap">AI-USAGE-GUIDE.md</code> · <code style="font-family:var(--font-mono);font-size:var(--font-size-mono-sm);line-height:var(--line-height-mono-sm);font-weight:var(--font-weight-semibold);color:var(--color-on-surface);white-space:nowrap">PUBLIC-API.md</code></p>
         </div>
       </div>
       <p style="text-align:center;max-width:620px;margin:28px auto 0;font-size:12px;color:var(--ds-text-2);line-height:1.6">Los operativos —<code>MIGRATION.md</code>, <code>WHITE-LABEL.md</code>, <code>INSTALL.md</code>, <code>TOKENS.md</code>, <code>CONTRIBUTING.md</code>, <code>DEPLOYMENT.md</code>— resuelven un <em>cómo</em> puntual y no definen el sistema. El mapa completo está en el README.</p>
@@ -18417,7 +18417,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <h3 class="bd-sub-title">Rango de tiempo: semanal / mensual / anual</h3>
           <p class="docs-section-desc">El mismo <code>ChartContainer</code> puede alternar granularidad con un <code>SegmentedButtonGroup</code> — solo cambia el array de datos, no el componente.</p>
           <div class="bd-family-wrap">
-            <div><div style="width:100%"><div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px"><div><div class="text-body-sm" style="color:var(--text-muted)">Ingresos vs. gastos</div><div style="font-family:var(--font-heading);font-size:var(--font-size-heading-sm);font-weight:600;color:var(--text-primary)">Esta semana</div></div><div class="seg-btn-group" role="group" aria-label="Rango de tiempo" style="--seg-btn-size:sm"><button type="button" class="seg-btn selected" aria-pressed="true" onclick="segSwitch(this)">Semanal</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitch(this)">Mensual</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitch(this)">Anual</button></div></div><div class="chart-container"><svg class="chart-svg" viewBox="0 0 660 280" role="img" aria-label="Vacantes abiertas por área"><g class="chart-grid"><line x1="40" y1="20" x2="40" y2="240"/><line x1="40" y1="240" x2="620" y2="240"/></g><rect class="chart-bar" x="68" y="51.4" width="60" height="188.6" rx="6" fill="var(--chart-1)"><title>Ingeniería: 24 vacantes</title></rect><rect class="chart-bar" x="184" y="145.7" width="60" height="94.3" rx="6" fill="var(--chart-1)"><title>Producto: 12 vacantes</title></rect><rect class="chart-bar" x="300" y="177.1" width="60" height="62.9" rx="6" fill="var(--chart-1)"><title>Diseño: 8 vacantes</title></rect><rect class="chart-bar" x="416" y="98.6" width="60" height="141.4" rx="6" fill="var(--chart-1)"><title>Ventas: 18 vacantes</title></rect><rect class="chart-bar" x="532" y="192.9" width="60" height="47.1" rx="6" fill="var(--chart-1)"><title>Soporte: 6 vacantes</title></rect><text class="chart-axis-label" x="98" y="262" text-anchor="middle">Ingeniería</text><text class="chart-axis-label" x="214" y="262" text-anchor="middle">Producto</text><text class="chart-axis-label" x="330" y="262" text-anchor="middle">Diseño</text><text class="chart-axis-label" x="446" y="262" text-anchor="middle">Ventas</text><text class="chart-axis-label" x="562" y="262" text-anchor="middle">Soporte</text></svg></div></div></div>
+            <div><div style="width:100%"><div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px"><div><div class="text-body-sm" style="color:var(--color-on-surface-variant)">Ingresos vs. gastos</div><div style="font-family:var(--font-heading);font-size:var(--font-size-heading-sm);font-weight:600;color:var(--color-on-surface)">Esta semana</div></div><div class="seg-btn-group" role="group" aria-label="Rango de tiempo" style="--seg-btn-size:sm"><button type="button" class="seg-btn selected" aria-pressed="true" onclick="segSwitch(this)">Semanal</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitch(this)">Mensual</button><button type="button" class="seg-btn" aria-pressed="false" onclick="segSwitch(this)">Anual</button></div></div><div class="chart-container"><svg class="chart-svg" viewBox="0 0 660 280" role="img" aria-label="Vacantes abiertas por área"><g class="chart-grid"><line x1="40" y1="20" x2="40" y2="240"/><line x1="40" y1="240" x2="620" y2="240"/></g><rect class="chart-bar" x="68" y="51.4" width="60" height="188.6" rx="6" fill="var(--chart-1)"><title>Ingeniería: 24 vacantes</title></rect><rect class="chart-bar" x="184" y="145.7" width="60" height="94.3" rx="6" fill="var(--chart-1)"><title>Producto: 12 vacantes</title></rect><rect class="chart-bar" x="300" y="177.1" width="60" height="62.9" rx="6" fill="var(--chart-1)"><title>Diseño: 8 vacantes</title></rect><rect class="chart-bar" x="416" y="98.6" width="60" height="141.4" rx="6" fill="var(--chart-1)"><title>Ventas: 18 vacantes</title></rect><rect class="chart-bar" x="532" y="192.9" width="60" height="47.1" rx="6" fill="var(--chart-1)"><title>Soporte: 6 vacantes</title></rect><text class="chart-axis-label" x="98" y="262" text-anchor="middle">Ingeniería</text><text class="chart-axis-label" x="214" y="262" text-anchor="middle">Producto</text><text class="chart-axis-label" x="330" y="262" text-anchor="middle">Diseño</text><text class="chart-axis-label" x="446" y="262" text-anchor="middle">Ventas</text><text class="chart-axis-label" x="562" y="262" text-anchor="middle">Soporte</text></svg></div></div></div>
           </div>
         </section>
         <section class="docs-section" id="tc-charts-s-2">
@@ -18436,7 +18436,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
           <div class="bd-grid c3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
             <div>
               <p class="docs-section-desc" style="margin-bottom:8px"><b>Vacío</b></p>
-              <div><div style="display:flex;height:280px;width:100%;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed var(--border);border-radius:var(--radius-lg);text-align:center;padding:16px"><div class="text-body-md" style="font-weight:500;color:var(--text-secondary)">Sin datos para este período</div><p class="text-body-sm" style="max-width:280px;color:var(--text-muted);margin:0">Cuando haya actividad registrada, el gráfico va a aparecer acá.</p></div></div>
+              <div><div style="display:flex;height:280px;width:100%;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed var(--border);border-radius:var(--radius-lg);text-align:center;padding:16px"><div class="text-body-md" style="font-weight:500;color:var(--color-on-surface-variant)">Sin datos para este período</div><p class="text-body-sm" style="max-width:280px;color:var(--color-on-surface-variant);margin:0">Cuando haya actividad registrada, el gráfico va a aparecer acá.</p></div></div>
             </div>
             <div>
               <p class="docs-section-desc" style="margin-bottom:8px"><b>Cargando</b></p>
@@ -18444,7 +18444,7 @@ document.documentElement.setAttribute('data-theme', saved);</code></pre>
             </div>
             <div>
               <p class="docs-section-desc" style="margin-bottom:8px"><b>Error</b></p>
-              <div><div style="display:flex;height:280px;width:100%;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:1px solid var(--border);border-radius:var(--radius-lg);text-align:center;padding:16px"><div><div class="text-body-md" style="font-weight:500;color:var(--color-error)">No se pudo cargar el gráfico</div><p class="text-body-sm" style="max-width:280px;color:var(--text-muted);margin:4px 0 0">Hubo un error al traer los datos. Probá de nuevo en unos segundos.</p></div><button type="button" class="btn-tertiary btn-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reintentar</button></div></div>
+              <div><div style="display:flex;height:280px;width:100%;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:1px solid var(--border);border-radius:var(--radius-lg);text-align:center;padding:16px"><div><div class="text-body-md" style="font-weight:500;color:var(--color-error)">No se pudo cargar el gráfico</div><p class="text-body-sm" style="max-width:280px;color:var(--color-on-surface-variant);margin:4px 0 0">Hubo un error al traer los datos. Probá de nuevo en unos segundos.</p></div><button type="button" class="btn-tertiary btn-sm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reintentar</button></div></div>
             </div>
           </div>
         </section>
@@ -20633,7 +20633,7 @@ const [on, setOn] = useState(false)
         <section class="docs-section" id="tc-divider-g-4">
           <h2 class="docs-section-title">Vertical divider</h2>
           <p class="ds-p">Separa elementos dispuestos en una <b>fila</b> (acciones en una toolbar, metadatos en línea).</p>
-          <p class="ds-p" style="color:var(--text-secondary)">En Embassy se compone con <code>Separator orientation="vertical"</code>; ocupa el alto del contenedor y usa el mismo token <code>--color-outline-variant</code>.</p>
+          <p class="ds-p" style="color:var(--color-on-surface-variant)">En Embassy se compone con <code>Separator orientation="vertical"</code>; ocupa el alto del contenedor y usa el mismo token <code>--color-outline-variant</code>.</p>
         </section>
         </div>
         <nav class="ds-toc" data-toc-auto id="tc-divider-g-toc" aria-label="En esta página">
@@ -20912,21 +20912,21 @@ const [on, setOn] = useState(false)
             <div style="display:flex;gap:32px;align-items:center">
             <div style="text-align:center">
               <svg class="progress-circular progress-circular-indeterminate" viewBox="0 0 44 44" aria-label="Indeterminado"><circle class="progress-circular-track" cx="22" cy="22" r="18"/><circle class="progress-circular-fill" cx="22" cy="22" r="18"/></svg>
-              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px">Indeterminado</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-top:8px">Indeterminado</div>
             </div>
             <div style="text-align:center">
               <svg class="progress-circular" viewBox="0 0 44 44" aria-label="65 por ciento"><circle class="progress-circular-track" cx="22" cy="22" r="18"/><circle class="progress-circular-fill" cx="22" cy="22" r="18" style="stroke-dashoffset:calc(113 - (113 * 65 / 100))"/></svg>
-              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px">Determinado 65%</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-top:8px">Determinado 65%</div>
             </div>
           </div>
             <div style="display:flex;flex-direction:column;gap:18px;max-width:300px">
             <div>
               <div class="progress progress-indeterminate" role="progressbar" aria-label="Indeterminado"><div class="progress-fill"></div></div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px">Indeterminado</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-top:8px">Indeterminado</div>
             </div>
             <div>
               <div class="progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="40 por ciento"><div class="progress-fill" style="width:40%"></div></div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-top:8px">Determinado 40%</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-top:8px">Determinado 40%</div>
             </div>
           </div>
           </div>
@@ -21202,7 +21202,7 @@ const [on, setOn] = useState(false)
               </div>
             </div>
             <p class="docs-section-desc" style="margin-top:14px">Hacé clic en el botón para abrir el menú.</p></div>
-          <p class="ds-p" style="color:var(--text-secondary)">Embassy las separa por propósito: <code>DropdownMenu</code> para <b>acciones</b> contextuales (esta página), y <code>Select</code> para <b>elegir un valor</b> (el exposed dropdown).</p>
+          <p class="ds-p" style="color:var(--color-on-surface-variant)">Embassy las separa por propósito: <code>DropdownMenu</code> para <b>acciones</b> contextuales (esta página), y <code>Select</code> para <b>elegir un valor</b> (el exposed dropdown).</p>
         </section>
         <section class="docs-section" id="tc-menu-s-1">
           <h2 class="docs-section-title">Configuraciones</h2>
@@ -22700,7 +22700,7 @@ import { Select } from &quot;./components/ui/select&quot;
         <section class="docs-section" id="tc-bottom-sheet-g-2">
           <h2 class="docs-section-title">Standard bottom sheets</h2>
           <p class="ds-p">Conviven con el contenido principal <b>sin scrim</b>: la persona puede interactuar con el sheet y con el resto de la pantalla al mismo tiempo (p. ej. un reproductor persistente).</p>
-          <p class="ds-p" style="color:var(--text-secondary)">Embassy no implementa la variante standard sin scrim; usá el modal o un panel embebido en el layout.</p>
+          <p class="ds-p" style="color:var(--color-on-surface-variant)">Embassy no implementa la variante standard sin scrim; usá el modal o un panel embebido en el layout.</p>
         </section>
         <section class="docs-section" id="tc-bottom-sheet-g-3">
           <h2 class="docs-section-title">Modal bottom sheets</h2>
@@ -23097,23 +23097,23 @@ import { Select } from &quot;./components/ui/select&quot;
           <div class="bd-family-wrap">
             <div style="display:flex;flex-direction:column;gap:22px;max-width:360px">
             <div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Continuo</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-bottom:4px">Continuo</div>
               <div class="slider"><div class="slider-track"></div><div class="slider-range" style="left:0;width:50%"></div><input type="range" class="slider-input" min="0" max="100" value="50" aria-label="Continuo" oninput="sliderSync(this)"></div>
             </div>
             <div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Con pasos + etiqueta · <span id="slider-demo-val">40</span></div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-bottom:4px">Con pasos + etiqueta · <span id="slider-demo-val">40</span></div>
               <div class="slider"><div class="slider-track"></div><div class="slider-range" style="left:0;width:40%"></div><input type="range" class="slider-input" min="0" max="100" step="10" value="40" aria-label="Con pasos" oninput="sliderSync(this); document.getElementById('slider-demo-val').textContent=this.value"></div>
             </div>
             <div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Rango</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-bottom:4px">Rango</div>
               <div class="slider"><div class="slider-track"></div><div class="slider-range" style="left:20%;right:30%"></div><input type="range" class="slider-input" min="0" max="100" value="20" aria-label="Rango mínimo" oninput="sliderSync(this)"><input type="range" class="slider-input" min="0" max="100" value="70" aria-label="Rango máximo" oninput="sliderSync(this)"></div>
             </div>
             <div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Deshabilitado</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-bottom:4px">Deshabilitado</div>
               <div class="slider" data-disabled="true"><div class="slider-track"></div><div class="slider-range" style="left:0;width:30%"></div><input type="range" class="slider-input" min="0" max="100" value="30" disabled aria-label="Deshabilitado"></div>
             </div>
             <div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Vertical (<code>.slider-vertical</code>)</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-bottom:4px">Vertical (<code>.slider-vertical</code>)</div>
               <div class="slider slider-vertical"><div class="slider-track"></div><div class="slider-range" style="height:60%"></div><input type="range" class="slider-input" min="0" max="100" value="60" aria-label="Vertical" oninput="sliderSync(this)"></div>
             </div>
           </div>
@@ -23241,19 +23241,19 @@ import { Select } from &quot;./components/ui/select&quot;
           <p class="ds-p">El slider admite tres configuraciones según el tipo de valor:</p>
           <div class="bd-family-wrap"><div style="display:flex;flex-direction:column;gap:22px;max-width:360px">
             <div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Continuo</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-bottom:4px">Continuo</div>
               <div class="slider"><div class="slider-track"></div><div class="slider-range" style="left:0;width:50%"></div><input type="range" class="slider-input" min="0" max="100" value="50" aria-label="Continuo" oninput="sliderSync(this)"></div>
             </div>
             <div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Con pasos + etiqueta · <span id="slider-demo-val">40</span></div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-bottom:4px">Con pasos + etiqueta · <span id="slider-demo-val">40</span></div>
               <div class="slider"><div class="slider-track"></div><div class="slider-range" style="left:0;width:40%"></div><input type="range" class="slider-input" min="0" max="100" step="10" value="40" aria-label="Con pasos" oninput="sliderSync(this); document.getElementById('slider-demo-val').textContent=this.value"></div>
             </div>
             <div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Rango</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-bottom:4px">Rango</div>
               <div class="slider"><div class="slider-track"></div><div class="slider-range" style="left:20%;right:30%"></div><input type="range" class="slider-input" min="0" max="100" value="20" aria-label="Rango mínimo" oninput="sliderSync(this)"><input type="range" class="slider-input" min="0" max="100" value="70" aria-label="Rango máximo" oninput="sliderSync(this)"></div>
             </div>
             <div>
-              <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px">Deshabilitado</div>
+              <div style="font-size:12px;color:var(--color-on-surface-variant);margin-bottom:4px">Deshabilitado</div>
               <div class="slider" data-disabled="true"><div class="slider-track"></div><div class="slider-range" style="left:0;width:30%"></div><input type="range" class="slider-input" min="0" max="100" value="30" disabled aria-label="Deshabilitado"></div>
             </div>
           </div></div>
@@ -23968,7 +23968,7 @@ import { Button } from &quot;./components/ui/button&quot;
 
         <p class="ch-variant-label" style="margin-top:20px">Group + Header — filas con separadores y encabezado</p>
         <div class="bd-family-wrap"><div class="item-group" style="max-width:460px;width:100%;border:1px solid var(--border);border-radius:10px;overflow:hidden">
-          <div class="item"><div class="item-header"><div class="item-title" style="font:600 12px var(--font-body);text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted)">Miembros del equipo</div><a class="btn-link btn-xs" href="#" onclick="return false">Ver todos</a></div></div>
+          <div class="item"><div class="item-header"><div class="item-title" style="font:600 12px var(--font-body);text-transform:uppercase;letter-spacing:.04em;color:var(--color-on-surface-variant)">Miembros del equipo</div><a class="btn-link btn-xs" href="#" onclick="return false">Ver todos</a></div></div>
           <hr class="item-separator">
           <div class="item"><div class="item-media"><span class="avatar avatar-md"><span class="avatar-fallback">CL</span></span></div><div class="item-content"><div class="item-title">Carlos López</div><div class="item-description">Frontend</div></div><div class="item-actions"><span class="badge badge-active">Activo</span></div></div>
           <hr class="item-separator">
@@ -25088,7 +25088,7 @@ import { Button } from &quot;./components/ui/button&quot;
           <h2 class="docs-section-title">Configuraciones</h2>
           <p class="bd-lead" style="margin-top:8px">Cinco configuraciones soportadas, reproduciendo 1:1 los ejemplos oficiales de shadcn — misma estructura, espaciado y comportamiento. Sólo cambian una prop (<code>data-single</code>, <code>disabled</code>) o la composición (<code>.accordion-bordered</code>, wrap en <code>.card</code>); el theming es 100% tokens Embassy.</p>
 
-          <h3 class="docs-subhead" style="margin-top:24px;font:700 15px var(--font-heading);color:var(--text-primary)">Basic</h3>
+          <h3 class="docs-subhead" style="margin-top:24px;font:700 15px var(--font-heading);color:var(--color-on-surface)">Basic</h3>
           <p class="ds-p" style="margin:4px 0 10px">Muestra <b>una sección a la vez</b> (<code>data-single</code>); el primer ítem abre por defecto.</p>
           <div class="bd-family-wrap"><div class="accordion" data-single style="width:100%;max-width:36rem">
             <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-b1" onclick="accToggle(this)">¿Cómo restablezco mi contraseña?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="open" id="acc-b1" role="region"><div class="accordion-content-inner">Hacé clic en “Olvidé mi contraseña” en el login, ingresá tu email y te enviamos un enlace para restablecerla. El enlace vence en 24&nbsp;horas.</div></div></div>
@@ -25096,7 +25096,7 @@ import { Button } from &quot;./components/ui/button&quot;
             <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-b3" onclick="accToggle(this)">¿Qué métodos de pago aceptan?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-b3" role="region"><div class="accordion-content-inner">Tarjetas de crédito y débito (Visa, Mastercard, Amex) y transferencia para planes anuales.</div></div></div>
           </div></div>
 
-          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--text-primary)">Multiple</h3>
+          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--color-on-surface)">Multiple</h3>
           <p class="ds-p" style="margin:4px 0 10px">Sin <code>data-single</code>: se pueden abrir <b>varias secciones a la vez</b>.</p>
           <div class="bd-family-wrap"><div class="accordion" style="width:100%;max-width:36rem">
             <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-m1" onclick="accToggle(this)">Notificaciones<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="open" id="acc-m1" role="region"><div class="accordion-content-inner">Gestioná cómo recibís notificaciones: alertas por email para novedades o push en el móvil.</div></div></div>
@@ -25104,7 +25104,7 @@ import { Button } from &quot;./components/ui/button&quot;
             <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-m3" onclick="accToggle(this)">Facturación y suscripción<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-m3" role="region"><div class="accordion-content-inner">Revisá tus facturas, el método de pago y el estado de la suscripción.</div></div></div>
           </div></div>
 
-          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--text-primary)">Disabled</h3>
+          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--color-on-surface)">Disabled</h3>
           <p class="ds-p" style="margin:4px 0 10px">Agregá <code>disabled</code> al <code>&lt;button class="accordion-trigger"&gt;</code> para deshabilitar un ítem.</p>
           <div class="bd-family-wrap"><div class="accordion" data-single style="width:100%;max-width:36rem">
             <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-d1" onclick="accToggle(this)">¿Puedo acceder a mi historial de cuenta?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-d1" role="region"><div class="accordion-content-inner">Sí. Desde Configuración → Actividad ves el historial completo de tu cuenta.</div></div></div>
@@ -25112,7 +25112,7 @@ import { Button } from &quot;./components/ui/button&quot;
             <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-d3" onclick="accToggle(this)">¿Cómo actualizo mi dirección de email?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-d3" role="region"><div class="accordion-content-inner">Desde Configuración → Perfil; te pedimos confirmar el nuevo email antes de guardarlo.</div></div></div>
           </div></div>
 
-          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--text-primary)">Borders</h3>
+          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--color-on-surface)">Borders</h3>
           <p class="ds-p" style="margin:4px 0 10px">Sumá <code>.accordion-bordered</code> al <code>.accordion</code>: contenedor con borde y radio, filas divididas (última sin borde).</p>
           <div class="bd-family-wrap"><div class="accordion accordion-bordered" data-single style="width:100%;max-width:36rem">
             <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="true" aria-controls="acc-bd1" onclick="accToggle(this)">¿Cómo funciona la facturación?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="open" id="acc-bd1" role="region"><div class="accordion-content-inner">Ofrecemos planes mensuales y anuales. Se cobra al inicio de cada ciclo y podés cancelar cuando quieras. Todos incluyen backups automáticos y soporte.</div></div></div>
@@ -25120,7 +25120,7 @@ import { Button } from &quot;./components/ui/button&quot;
             <div class="accordion-item"><h3><button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="acc-bd3" onclick="accToggle(this)">¿Qué integraciones soportan?<svg class="accordion-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button></h3><div class="accordion-content" data-state="closed" id="acc-bd3" role="region"><div class="accordion-content-inner">Slack, Zapier y una API REST pública con webhooks.</div></div></div>
           </div></div>
 
-          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--text-primary)">Card</h3>
+          <h3 class="docs-subhead" style="margin-top:28px;font:700 15px var(--font-heading);color:var(--color-on-surface)">Card</h3>
           <p class="ds-p" style="margin:4px 0 10px">Envolvé el <code>.accordion</code> en un <code>.card</code> (con <code>.card-header</code>), igual que el ejemplo <code>Card</code> de shadcn.</p>
           <div class="bd-family-wrap"><div class="card" style="width:100%;max-width:36rem">
             <div class="card-header"><div class="card-title">Suscripción y facturación</div><div class="card-desc">Preguntas frecuentes sobre tu cuenta, planes, pagos y cancelaciones.</div></div>
@@ -25322,7 +25322,7 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from &qu
               </tbody>
             </table>
           </div>
-          <p class="ds-p" style="color:var(--text-secondary)">Regla rápida: si el mensaje <b>debe seguir visible</b> hasta que la persona actúe, es un <b>Alert</b>; si solo confirma que algo <b>ya pasó</b>, es un <b>Snackbar</b>.</p>
+          <p class="ds-p" style="color:var(--color-on-surface-variant)">Regla rápida: si el mensaje <b>debe seguir visible</b> hasta que la persona actúe, es un <b>Alert</b>; si solo confirma que algo <b>ya pasó</b>, es un <b>Snackbar</b>.</p>
         </section>
       </div>
       <div class="ds-comp-tab-panel" data-tab="accessibility">
@@ -26670,7 +26670,7 @@ import { Bold } from &quot;lucide-react&quot;
             <li>Se cierra con clic afuera o <code>Escape</code> (manejadores compartidos con Dropdown Menu).</li>
           </ul>
           <div class="bd-family-wrap">
-            <div class="context-menu-trigger" oncontextmenu="openContextMenu(event,'ctxm-demo')" style="display:flex;align-items:center;justify-content:center;height:120px;border:1px dashed var(--border);border-radius:var(--radius-md);color:var(--text-secondary);font-size:var(--font-size-body-sm);user-select:none;cursor:context-menu">Hacé clic derecho en esta área</div>
+            <div class="context-menu-trigger" oncontextmenu="openContextMenu(event,'ctxm-demo')" style="display:flex;align-items:center;justify-content:center;height:120px;border:1px dashed var(--border);border-radius:var(--radius-md);color:var(--color-on-surface-variant);font-size:var(--font-size-body-sm);user-select:none;cursor:context-menu">Hacé clic derecho en esta área</div>
             <div class="dropdown-content" id="ctxm-demo" role="menu" style="display:none;min-width:200px">
               <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">✎ Editar <span class="dropdown-shortcut">⌘E</span></button>
               <button class="dropdown-item" role="menuitem" type="button" onclick="closeDropdownItem(this)">⧉ Duplicar</button>

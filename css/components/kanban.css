@@ -47,14 +47,14 @@
   padding: var(--space-3) var(--space-4);
   font-size: var(--font-size-label);
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
 }
 .kanban-column-header .count {
   font-size: var(--font-size-caption);
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   background: var(--color-surface-container);
   border: 1px solid var(--border);
   padding: var(--space-0-5) var(--space-2);
@@ -94,12 +94,12 @@
   font-size: var(--font-size-body-md);
   line-height: var(--line-height-title);
   font-weight: var(--font-weight-medium);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   margin-bottom: var(--space-1-5);
 }
 .kanban-card-meta {
   font-size: var(--font-size-caption);
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   display: flex; align-items: center; gap: var(--space-1-5);
 }
 

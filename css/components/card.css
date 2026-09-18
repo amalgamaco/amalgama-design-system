@@ -75,11 +75,11 @@
   line-height: var(--line-height-heading-xs);
   letter-spacing: var(--letter-spacing-heading-xs);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
 }
 .card-desc {
   font-size: var(--font-size-body-sm);
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
   line-height: var(--line-height-body-sm);
 }
 
@@ -99,11 +99,11 @@
   line-height: var(--line-height-heading-md);
   letter-spacing: var(--letter-spacing-heading-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
 }
 .card-content {
   font-size: var(--font-size-body-md);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
 }
 .card-footer {
   margin-top: var(--space-4);

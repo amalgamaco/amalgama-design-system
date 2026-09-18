@@ -50,11 +50,11 @@
   font-size: var(--font-size-body-md);
   font-weight: 600;
   line-height: var(--line-height-title);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
 }
 .popover-description {
   font-size: var(--font-size-body-sm);
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
   line-height: var(--line-height-body-sm);
 }
 

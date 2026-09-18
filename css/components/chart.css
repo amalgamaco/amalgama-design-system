@@ -37,7 +37,7 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   font-size: var(--font-size-caption);
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
 }
 
 /* SVG scales responsively via viewBox — no JS measurement needed */
@@ -54,7 +54,7 @@
 }
 
 .chart-axis-label {
-  fill: var(--text-muted);
+  fill: var(--color-on-surface-variant);
   /* 11px en font-body no tenía token: el único 11px de la escala es
      --font-size-mono-sm, y un rótulo de eje no es mono. Por ROL es texto de
      apoyo de un dato — el mismo registro que un timestamp — así que va a
@@ -106,7 +106,7 @@
   gap: var(--space-4);
   padding-top: var(--space-3);
   font-size: var(--font-size-caption);
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
 }
 .chart-legend-item {
   display: flex;

@@ -66,6 +66,20 @@
 ═══════════════════════════════════════ */
 
 /* ── Tokens de componente (capa MD3) ── */
+/* El canal hundido y lo que corre sobre él. Vivían en variables.css como
+   --ctx-track/-thumb, pero el DS no los documenta y este componente era su
+   único consumidor, así que bajan acá. La rampa CAMBIA DE DIRECCIÓN entre
+   temas —en claro container-high está por debajo de surface, en oscuro por
+   encima—, y por eso el oscuro se declara aparte en vez de derivarse. */
+:root {
+  --seg-btn-track:       var(--color-surface-container-high);
+  --seg-btn-track-thumb: var(--color-surface-container);
+}
+[data-theme="dark"] {
+  --seg-btn-track:       var(--neutral-750);
+  --seg-btn-track-thumb: var(--neutral-600);
+}
+
 .seg-btn-group {
   /* Estructura */
   --seg-btn-container-shape:                var(--radius-full);
@@ -74,7 +88,7 @@
      segmento activo, el grupo se HUNDE un escalon y el segmento se queda al
      nivel de una tarjeta: 1.19:1 en claro, 1.24:1 en oscuro, sin ningun borde.
      Un aro adentro del borde del grupo son dos anillos concentricos a 3px. */
-  --seg-btn-container-color:                var(--ctx-track);
+  --seg-btn-container-color:                var(--seg-btn-track);
   --seg-btn-outline-color:                  transparent;
   /* Segmento no seleccionado */
   --seg-btn-label-color:                    var(--md-sys-color-on-surface, var(--color-on-surface));
@@ -82,7 +96,7 @@
   /* Segmento seleccionado */
   /* Neutro a proposito: el token de seleccion (secondary-container) queda para el
      filtro activo. Si los dos usan el mismo azul, ninguno pesa mas que el otro. */
-  --seg-btn-selected-container-color:       var(--ctx-track-thumb);
+  --seg-btn-selected-container-color:       var(--seg-btn-track-thumb);
   --seg-btn-selected-label-color:           var(--md-sys-color-on-surface, var(--color-on-surface));
   --seg-btn-selected-icon-color:            var(--md-sys-color-on-surface, var(--color-on-surface));
   --seg-btn-selected-elevation:             var(--shadow-sm);

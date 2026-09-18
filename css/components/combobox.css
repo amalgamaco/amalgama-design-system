@@ -32,7 +32,7 @@
   justify-content: space-between;
   font-weight: 400;
 }
-.combobox-trigger.is-placeholder { color: var(--text-muted); }
+.combobox-trigger.is-placeholder { color: var(--color-on-surface-variant); }
 
 .combobox-chevron {
   display: inline-flex;

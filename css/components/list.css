@@ -23,7 +23,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  background: var(--ctx-surface);
+  background: var(--color-surface);
 }
 
 .list-item {

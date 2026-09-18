@@ -136,6 +136,6 @@
   font-size: var(--font-size-body-md);
   line-height: var(--line-height-title);
   font-weight: var(--font-weight-medium);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
 }
-.checkbox-card-desc { font-size: var(--font-size-body-sm); color: var(--text-secondary); line-height: var(--line-height-body-sm); }
+.checkbox-card-desc { font-size: var(--font-size-body-sm); color: var(--color-on-surface-variant); line-height: var(--line-height-body-sm); }

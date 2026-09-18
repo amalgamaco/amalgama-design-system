@@ -70,7 +70,7 @@
   font-size: var(--font-size-body-sm);
   color: var(--color-on-surface);
 }
-.command-input::placeholder { color: var(--text-muted); }
+.command-input::placeholder { color: var(--color-on-surface-variant); }
 .command-input:disabled { cursor: not-allowed; opacity: .5; }
 
 .command-list {

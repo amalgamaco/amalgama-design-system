@@ -180,9 +180,9 @@
   --tb-border-hover:      color-mix(in srgb, var(--color-on-surface) 22%, transparent);
   --tb-border-focus:      var(--color-secondary);           /* = --color-secondary */
   --tb-focus-ring:        var(--color-focus-ring);
-  --tb-text:              var(--text-primary);
-  --tb-text-muted:        var(--text-muted);
-  --tb-icon:              var(--text-muted);
+  --tb-text:              var(--color-on-surface);
+  --tb-text-muted:        var(--color-on-surface-variant);
+  --tb-icon:              var(--color-on-surface-variant);
   --tb-font-size:         var(--font-size-body-md);
   --tb-selected-bg:       var(--color-secondary-container);      /* estado primary del Segmented Button */
   --tb-selected-text:     var(--color-on-secondary-container);

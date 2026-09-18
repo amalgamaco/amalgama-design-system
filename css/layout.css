@@ -50,7 +50,7 @@
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 8px;
   font-family: var(--font-heading);
-  font-weight: 600; font-size: var(--font-size-heading-xs); color: var(--text-primary);
+  font-weight: 600; font-size: var(--font-size-heading-xs); color: var(--color-on-surface);
 }
 .sidebar-logo svg { color: var(--color-secondary); }
 
@@ -61,7 +61,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 8px 12px;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   font-size: var(--font-size-label);
   cursor: pointer;
   transition: border-color var(--duration-fast) var(--ease-default);
@@ -83,7 +83,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-label);
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   padding: 16px 12px 6px;
 }
 
@@ -91,7 +91,7 @@
   display: flex; align-items: center; gap: 10px;
   padding: 8px 12px;
   border-radius: var(--radius-md);
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
   font-size: var(--font-size-body-md);
   cursor: pointer;
   transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default);
@@ -151,10 +151,10 @@
 .topbar-breadcrumb {
   margin-right: auto;
   display: flex; align-items: center; gap: 6px;
-  font-size: var(--font-size-label); color: var(--text-muted);
+  font-size: var(--font-size-label); color: var(--color-on-surface-variant);
 }
-.topbar-breadcrumb a { color: var(--text-muted); text-decoration: none; }
-.topbar-breadcrumb a:hover { color: var(--text-primary); }
+.topbar-breadcrumb a { color: var(--color-on-surface-variant); text-decoration: none; }
+.topbar-breadcrumb a:hover { color: var(--color-on-surface); }
 .topbar-breadcrumb .separator { color: var(--neutral-200); }
 
 .topbar-btn {
@@ -167,7 +167,7 @@
 }
 .topbar-btn.secondary {
   background: var(--color-surface);
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
   border: 1px solid var(--border);
 }
 .topbar-btn.secondary:hover { background: var(--color-secondary-container); }
@@ -231,7 +231,7 @@
   width: 40px; height: 40px; margin-right: 4px;
   align-items: center; justify-content: center;
   border: 1px solid var(--border); border-radius: var(--radius-md);
-  background: var(--color-surface); color: var(--text-secondary);
+  background: var(--color-surface); color: var(--color-on-surface-variant);
   cursor: pointer;
 }
 .shell-menu-btn:hover { background: var(--color-secondary-container); }

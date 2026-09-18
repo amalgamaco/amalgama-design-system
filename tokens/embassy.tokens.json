@@ -542,11 +542,6 @@
       "section": "Paleta de marca  (Manual de Marca 2022)  —  PRIMITIVAS  Son primitivas, no roles: valores crudos de la marca, y ningún componente los escribe. Se consumen por su rol ( color-accent ,  text-prose), igual que ninguna pantalla escribe  primary-900.  No son familias con rampa: el Manual define un valor por acento, no diez. Por eso no llevan número de paso.",
       "$description": "Lime — aparece una sola vez, como highlight"
     },
-    "--ink": {
-      "$type": "color",
-      "$value": "#2A2F32",
-      "section": "«Ink»: el gris-carbón del Manual para prosa larga. No es un paso de la rampa neutral —tiene otro tono— así que es una primitiva de marca y no un  neutral . Su rol es  text-prose."
-    },
     "--color-primary": {
       "$type": "color",
       "$value": "#01164D",
@@ -1009,35 +1004,6 @@
       "$value": "#0A0C121A",
       "section": "Borde de CONTENEDORES (cards, tablas, paneles): on-surface al 10% de opacidad. Decisión de diseño (jun 2026): el chrome de contenedores se atenúa para que el outline de elementos INTERACTIVOS ( color-outline, botones/chips/inputs) se distinga con claridad. Theme-aware vía color-mix — sin override en dark."
     },
-    "--text-primary": {
-      "$type": "color",
-      "$value": "#01164D",
-      "section": "Los alias que eran un SEGUNDO NOMBRE de un rol se retiraron en sep-2026:  bg,  card-bg,  sidebar-bg,  interactive(-light/-hover),  tertiary-purple* y los atajos de estado  green/ red/ yellow/ blue. Resolvían exactamente al mismo valor que su rol en los DOS temas —medido—, o sea que eran vocabulario duplicado para una sola cosa. El archivo de Design System define  color , y eso es lo que se consume. Los que siguen NO son duplicados: cada uno dice algo que el DS no dice, y por eso sobreviven.",
-      "$dark": "#EAEBED",
-      "$alias": "--primary-900"
-    },
-    "--text-secondary": {
-      "$type": "color",
-      "$value": "#353A4A",
-      "section": "Los alias que eran un SEGUNDO NOMBRE de un rol se retiraron en sep-2026:  bg,  card-bg,  sidebar-bg,  interactive(-light/-hover),  tertiary-purple* y los atajos de estado  green/ red/ yellow/ blue. Resolvían exactamente al mismo valor que su rol en los DOS temas —medido—, o sea que eran vocabulario duplicado para una sola cosa. El archivo de Design System define  color , y eso es lo que se consume. Los que siguen NO son duplicados: cada uno dice algo que el DS no dice, y por eso sobreviven.",
-      "$dark": "#BFC1C8",
-      "$alias": "--neutral-500"
-    },
-    "--text-muted": {
-      "$type": "color",
-      "$value": "#63687A",
-      "section": "Los alias que eran un SEGUNDO NOMBRE de un rol se retiraron en sep-2026:  bg,  card-bg,  sidebar-bg,  interactive(-light/-hover),  tertiary-purple* y los atajos de estado  green/ red/ yellow/ blue. Resolvían exactamente al mismo valor que su rol en los DOS temas —medido—, o sea que eran vocabulario duplicado para una sola cosa. El archivo de Design System define  color , y eso es lo que se consume. Los que siguen NO son duplicados: cada uno dice algo que el DS no dice, y por eso sobreviven.",
-      "$description": "NO --color-on-disabled: pinta texto activo, y ahí el mínimo AA sí rige",
-      "$dark": "#9FA3AE",
-      "$alias": "--color-on-surface-variant"
-    },
-    "--text-prose": {
-      "$type": "color",
-      "$value": "#2A2F32",
-      "section": "Prosa larga de COLATERAL: el gris-carbón del Manual («Ink»). El navy de  text-primary es el color de producto y sigue siéndolo; en un párrafo de varias líneas de un deck o una propuesta, el Manual usa este. No es para UI: una celda, un label o un botón siguen en los tokens de componente. En oscuro no hay casi-negro que valga, así que vuelve a ser el mismo color que el texto principal (ver los bloques por tema).",
-      "$dark": "#EAEBED",
-      "$alias": "--ink"
-    },
     "--color-secondary-text": {
       "$type": "color",
       "$value": "#1E3A8C",
@@ -1068,12 +1034,6 @@
       "$value": "#001ABA",
       "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
       "$alias": "--color-on-info-container"
-    },
-    "--text-on-dark": {
-      "$type": "color",
-      "$value": "#FFFFFF",
-      "section": "El acento cuando hay que LEERLO.  color-secondary es #4F80FF: 3.58:1 sobre blanco. Alcanza para un borde, un caret o un icono (WCAG pide 3:1 para objetos graficos), no para el label de una pestaña seleccionada. La familia  text ya existia para los cuatro de estado y a secondary le faltaba: por eso .tab.active fallaba AA en todos los productos que usan tabs, con el token correcto de la familia correcta escrito en el componente. No usa  color-on-secondary-container (navy #01164D) como hacen los de estado, porque ahi el acento deja de ser azul y la pestaña activa pierde su diferencia con las inactivas. El -950 existe justamente para esto: 10.3:1 sobre blanco.",
-      "$alias": "--neutral-white"
     },
     "--space-0-5": {
       "$type": "dimension",
@@ -1795,32 +1755,6 @@
       "$type": "typography",
       "$value": "0",
       "section": "Versalitas de componente (badge, header de tabla, label del nav, acción del toast): 10–11px. Acá el tracking apretado se lee PEOR — a ese tamaño las mayúsculas necesitan aire para separarse. No unificar con el de arriba: resuelven problemas distintos."
-    },
-    "--ctx-surface": {
-      "$type": "color",
-      "$value": "#F3F4F6",
-      "section": "Contexto de superficie   Todo componente asumia que estaba apoyado sobre  color-surface. Metido en un panel con fondo propio, su relleno quedaba mal y habia que pisarlo a mano: medido en una consola de check-in (sep 2026), ocho de catorce overrides de clases publicas eran esto.  Dos tokens, y los dos los declara el CONTENEDOR, no el componente:  ctx-surface         el fondo de lo que me contiene. Un componente que tiene que fundirse con su contenedor lo usa.  ctx-surface-raised  el escalon que se despega de ese fondo. Un campo, un input, un track: algo que tiene que verse ENCIMA del contenedor. Un contenedor del DS los setea solo. Un panel propio del proyecto declara `data-surface=\"container\"` y listo — sin pisar ninguna clase publica.",
-      "$alias": "--color-surface"
-    },
-    "--ctx-surface-raised": {
-      "$type": "color",
-      "$value": "#FFFFFF",
-      "section": "Contexto de superficie   Todo componente asumia que estaba apoyado sobre  color-surface. Metido en un panel con fondo propio, su relleno quedaba mal y habia que pisarlo a mano: medido en una consola de check-in (sep 2026), ocho de catorce overrides de clases publicas eran esto.  Dos tokens, y los dos los declara el CONTENEDOR, no el componente:  ctx-surface         el fondo de lo que me contiene. Un componente que tiene que fundirse con su contenedor lo usa.  ctx-surface-raised  el escalon que se despega de ese fondo. Un campo, un input, un track: algo que tiene que verse ENCIMA del contenedor. Un contenedor del DS los setea solo. Un panel propio del proyecto declara `data-surface=\"container\"` y listo — sin pisar ninguna clase publica.",
-      "$alias": "--color-surface-container"
-    },
-    "--ctx-track": {
-      "$type": "color",
-      "$value": "#EAEBED",
-      "section": "La pista y lo que corre sobre ella   Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un elemento \"levantado\" sobre el fondo de la pagina no se despega solo, y por eso terminaba pidiendo un aro o una sombra que lo dibujara. Una pista HUNDIDA usa dos escalones en vez de uno y llega a 1.19:1 en claro y 1.24:1 en oscuro, sin ningun borde.  Va aparte de  ctx-surface/-raised porque la rampa CAMBIA DE DIRECCION entre temas: en claro container-high esta por debajo de surface, en oscuro por encima. Ese override vive aca una sola vez, no en cada componente que necesite una pista (segmented, slider, progress, toggle-group).  ctx-track        el canal hundido  ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar",
-      "$dark": "#171B26",
-      "$alias": "--color-surface-container-high"
-    },
-    "--ctx-track-thumb": {
-      "$type": "color",
-      "$value": "#FFFFFF",
-      "section": "La pista y lo que corre sobre ella   Un escalon de superficie da 1.10:1 y nada mas, en los dos temas: un elemento \"levantado\" sobre el fondo de la pagina no se despega solo, y por eso terminaba pidiendo un aro o una sombra que lo dibujara. Una pista HUNDIDA usa dos escalones en vez de uno y llega a 1.19:1 en claro y 1.24:1 en oscuro, sin ningun borde.  Va aparte de  ctx-surface/-raised porque la rampa CAMBIA DE DIRECCION entre temas: en claro container-high esta por debajo de surface, en oscuro por encima. Ese override vive aca una sola vez, no en cada componente que necesite una pista (segmented, slider, progress, toggle-group).  ctx-track        el canal hundido  ctx-track-thumb  lo que corre sobre el: el segmento activo, el pulgar",
-      "$dark": "#282C39",
-      "$alias": "--color-surface-container"
     },
     "--rail-width": {
       "$type": "other",

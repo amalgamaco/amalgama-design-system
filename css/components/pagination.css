@@ -84,7 +84,7 @@
   justify-content: center;
   height: 36px;
   width: 36px;
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
 }
 .pagination-ellipsis svg { width: 16px; height: 16px; }
 

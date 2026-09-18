@@ -69,7 +69,9 @@ Fonts: **Epilogue** (headings), **Manrope** (body/UI — Inter stays in the stac
 
 **Breakpoints**: canonical values `--breakpoint-md: 768px`, `--breakpoint-lg: 1024px` live in `variables.css` (media queries can't consume `var()` — use the literal values and keep them in sync). **Mobile shell:** below 768px the app-shell sidebar is a **modal navigation drawer** — off-canvas, slides in over a scrim on `.app.nav-open`, toggled by the `.shell-menu-btn` hamburger; shipped in `css/layout.css`, spec in GOVERNANCE.md §14.3. Use it; don't invent a different mobile nav.
 
-**Typography color is brand navy, not black.** Page text — headings AND body — uses `var(--text-primary)` = `primary-900` (`#01164D`) in light mode, recalibrated to `#EAEBED` in dark. Secondary text: `var(--text-secondary)`. `--color-on-surface` (near-black `#0A0C12`) is reserved for content *inside* components (chip labels, button text, table cells) — never for page typography. If Embassy page text renders black, a token is misapplied.
+**Text colour has two levels, and only two** — the shape the Design System documents, and Material's: `var(--color-on-surface)` for primary content (page headings, body, and text inside components alike) and `var(--color-on-surface-variant)` for medium emphasis (captions, hints, secondary labels). In light that is `#0A0C12` and `#63687A`; dark recalibrates them.
+
+> **Changed in sep-2026.** Page text used to be brand navy via a `--text-primary` token, with `--color-on-surface` reserved for text *inside* components. Five `--text-*` tokens had grown on top of the two roles, each matching its role in one theme and diverging in the other, and none of them had a row in any table of the system. They were collapsed into the two documented roles, so **page text is now near-black, not navy**. The brand navy is still `--color-primary` and still carries every filled Primary action.
 
 ### Optional React wrappers — `components/ui/*.tsx`
 

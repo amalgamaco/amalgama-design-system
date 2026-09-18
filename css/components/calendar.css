@@ -135,7 +135,7 @@
   text-align: center;
   font-size: var(--font-size-label);   /* weekday: text-[0.8rem] */
   font-weight: 400;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
 }
 
 /* ── Grilla (semanas × 7 días) ── */
@@ -169,7 +169,7 @@
 }
 
 /* outside = text-muted-foreground (sin opacidad extra, par shadcn) */
-.calendar-day-outside { color: var(--text-muted); }
+.calendar-day-outside { color: var(--color-on-surface-variant); }
 /* today = bg-accent text-accent-foreground rounded-md (no negrita) */
 .calendar-day-today {
   background: var(--color-surface-variant);
@@ -196,7 +196,7 @@
 /* ── Booked (día reservado / no disponible) ── par shadcn "booked". No
    seleccionable; se marca con línea tachada y color atenuado. */
 .calendar-day-booked {
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   text-decoration: line-through;
   opacity: .6;
   cursor: not-allowed;
@@ -210,7 +210,7 @@
   display: flex; align-items: center; justify-content: center;
   width: var(--cal-cell); height: var(--cal-cell);
   font-size: var(--font-size-label);
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   opacity: .7;
 }
 

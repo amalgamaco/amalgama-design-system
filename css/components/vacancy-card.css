@@ -72,13 +72,13 @@
 .vacancy-name {
   font-family: var(--font-heading);
   font-size: var(--font-size-heading-xs); font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   margin-bottom: 4px;
   display: flex; align-items: center; gap: var(--space-2);
 }
 .vacancy-meta {
   display: flex; align-items: center; gap: var(--space-1-5);
-  font-size: var(--font-size-body-sm); color: var(--text-muted);
+  font-size: var(--font-size-body-sm); color: var(--color-on-surface-variant);
   flex-wrap: wrap;
 }
 .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--color-outline-variant); flex-shrink: 0; }
@@ -89,13 +89,13 @@
 }
 .stat-pill {
   display: flex; align-items: center; gap: var(--space-1-5);
-  font-size: var(--font-size-label); color: var(--text-secondary);
+  font-size: var(--font-size-label); color: var(--color-on-surface-variant);
 }
-.stat-pill .count { font-weight: 600; color: var(--text-primary); }
+.stat-pill .count { font-weight: 600; color: var(--color-on-surface); }
 
 .assignee {
   display: flex; align-items: center; gap: var(--space-1-5);
-  font-size: var(--font-size-label); color: var(--text-secondary);
+  font-size: var(--font-size-label); color: var(--color-on-surface-variant);
 }
 /* Avatares tonales: rol semántico container + on-container (par al Avatar canónico),
    nunca gradientes con primitivos. Cada variante usa su propio par → contraste
@@ -118,7 +118,7 @@
   flex-shrink: 0;
 }
 .vacancy-age {
-  font-size: var(--font-size-mono-md); font-weight: 600; color: var(--text-muted);
+  font-size: var(--font-size-mono-md); font-weight: 600; color: var(--color-on-surface-variant);
   font-family: var(--font-mono);
 }
 

@@ -7,7 +7,7 @@
 body {
   font-family: var(--font-body);
   background: var(--color-surface);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   font-size: var(--font-size-body-lg);
   line-height: var(--line-height-body-lg);
   -webkit-font-smoothing: antialiased;
@@ -85,8 +85,8 @@ input, select, textarea { font-family: inherit; }
   clip: rect(0,0,0,0); border: 0;
 }
 
-.text-muted { color: var(--text-muted); }
-.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--color-on-surface-variant); }
+.text-secondary { color: var(--color-on-surface-variant); }
 /* Los alias legacy --interactive / --green / --red apuntan a los tonos de SEÑAL
    (--color-secondary, --color-success, --color-error). Como fondo o como borde
    estan bien; como TEXTO chico ninguno llega a AA: daban 3.58:1, 2.38:1 y 3.58:1.

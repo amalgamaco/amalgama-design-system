@@ -173,13 +173,17 @@ para los once escalones que Embassy suma al Baseline de Figma, y por qué cada u
 
 Alias semánticos de página: `--bg` (fondo), `--card-bg` / `--sidebar-bg` (superficie de tarjeta y
 shell), `--border` (chrome de contenedores y línea divisoria, más tenue que `outline`),
-`--text-primary`, `--text-secondary`, `--text-muted`, `--text-prose`, `--interactive`.
+`--color-on-surface` (contenido primario) y `--color-on-surface-variant` (énfasis medio).
 No hay `--surface`, `--divider` ni `--accent`: eran duplicados y se fueron en sep-2026.
 
-> **El texto de página es navy, no negro.** Títulos y cuerpo usan `--text-primary`
-> (`--primary-900` en light, recalibrado en dark). `--color-on-surface` (casi negro) es para
-> contenido **adentro** de componentes: label de un chip, texto de un botón, celda de tabla. Si el
-> texto de la página sale negro, hay un token mal aplicado.
+> **El texto tiene dos niveles y nada más**, que es la forma que documenta el Design System y la
+> de Material: `--color-on-surface` para contenido primario —títulos, cuerpo, y el texto adentro de
+> los componentes por igual— y `--color-on-surface-variant` para énfasis medio: pies, ayudas,
+> labels secundarios.
+>
+> **Cambió en sep-2026.** Antes el texto de página era navy vía `--text-primary`, y encima de los
+> dos roles habían crecido cinco tokens `--text-*` sin ficha en ninguna tabla. Se colapsaron.
+> El texto de página ahora es casi-negro; el navy de marca sigue siendo `--color-primary`.
 
 **Dark mode es automático:** `<html data-theme="dark">`. Los roles se recalibran solos. Si
 necesitaste un override por tema, elegiste mal el token. La única excepción del sistema es el
@@ -417,7 +421,8 @@ Nombro los que aparecen una y otra vez. Si tu página tiene alguno, sacalo antes
 8. **Números sin base.** "+40%" sin decir de qué a qué, en qué período, sobre qué muestra.
 9. **Un chart cuando alcanzaba una tabla, o al revés.** Tres valores no son un chart.
 10. **Color como único portador de significado** en estados, series o alertas.
-11. **Texto de página en negro** en vez de navy (`--text-primary`).
+11. **Un token `--text-*` o `--ctx-*`.** No existen desde sep-2026: el contenido sobre superficie
+    tiene dos niveles, `--color-on-surface` y `--color-on-surface-variant`.
 12. **Un hex crudo, un px suelto, una familia tipográfica entre comillas.** Siempre hay un token.
 13. **Una clase inventada** que "se parece" a una del sistema.
 14. **Full-bleed sin ancho máximo** en un monitor ancho: líneas de más de ~120 caracteres.

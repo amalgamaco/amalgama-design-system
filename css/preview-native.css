@@ -268,7 +268,7 @@
   font-family: var(--font-heading);
   font-size: var(--font-size-heading-sm);
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-on-surface);
 }
 
 .phone-screen {
@@ -290,7 +290,7 @@
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 2px;
   font-size: var(--font-size-badge);
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
   background: none; border: 0; cursor: pointer;
 }
 .phone-tab[aria-current] { color: var(--color-primary); font-weight: 600; }
@@ -301,9 +301,9 @@
   font-size: var(--font-size-badge);
   letter-spacing: var(--letter-spacing-label);
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
 }
-.phone-caption strong { color: var(--text-primary); font-weight: 500; }
+.phone-caption strong { color: var(--color-on-surface); font-weight: 500; }
 
 /* Vista de targets: marca cada superficie tocable para poder contar a ojo lo
    que M2 cuenta en el chequeo. Se activa con data-targets en el marco. */

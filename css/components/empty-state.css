@@ -21,7 +21,7 @@
 .empty-state {
   text-align: center;
   padding: var(--space-12) var(--space-6);
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
 }
 /* El icono de un estado vacio es el caso donde el icono ES el contenido
    (COMPOSICION.md regla 5, ubicacion 4): grande, con aire, sin superficie
@@ -39,11 +39,11 @@
 .empty-state-title {
   font-family: var(--font-heading);
   font-size: var(--font-size-heading-md); font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
   margin-bottom: 8px;
 }
 .empty-state-desc {
-  font-size: var(--font-size-body-lg); color: var(--text-muted);
+  font-size: var(--font-size-body-lg); color: var(--color-on-surface-variant);
   max-width: 400px; margin: 0 auto 20px;
   line-height: var(--line-height-prose);
 }

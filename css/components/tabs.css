@@ -104,7 +104,7 @@
 .tabs-pill .tab.active,
 .tabs-pill .tab[aria-selected="true"] {
   background: var(--color-surface-container);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   box-shadow: var(--shadow-sm);
 }
 .tabs-pill .tab-indicator { display: none; }

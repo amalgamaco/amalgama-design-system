@@ -45,11 +45,11 @@
   line-height: var(--line-height-heading-md);
   letter-spacing: var(--letter-spacing-heading-md);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   margin-bottom: var(--space-1-5);
 }
 .form-card-desc {
-  font-size: var(--font-size-body-sm); color: var(--text-secondary);
+  font-size: var(--font-size-body-sm); color: var(--color-on-surface-variant);
   line-height: var(--line-height-body-sm);
   margin-bottom: var(--space-6);
   max-width: 680px;
@@ -61,7 +61,7 @@
 .field-label {
   display: block;
   font-size: var(--font-size-label); font-weight: 500;
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   margin-bottom: 8px;
 }
 .field-required { color: var(--color-error); margin-left: 2px; }
@@ -73,8 +73,8 @@
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
   font-family: inherit;
-  color: var(--text-primary);
-  background: var(--ctx-surface-raised);
+  color: var(--color-on-surface);
+  background: var(--color-surface-container);
   outline: none;
   transition: border-color var(--duration-fast) var(--ease-default), box-shadow var(--duration-fast) var(--ease-default);
   appearance: none;
@@ -83,13 +83,13 @@
   border-color: var(--color-focus);
   box-shadow: 0 0 0 4px var(--color-focus-ring);
 }
-.field-input::placeholder { color: var(--text-muted); }
+.field-input::placeholder { color: var(--color-on-surface-variant); }
 
 /* ── File input (par shadcn: botón de selección tonal + texto) ── */
 .field-input[type="file"] {
   padding: 7px var(--space-3-5);
   cursor: pointer;
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
 }
 .field-input[type="file"]::file-selector-button {
   margin: 0 12px 0 0;
@@ -137,7 +137,7 @@ input:disabled, select:disabled, textarea:disabled {
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
   font-family: inherit;
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   background: var(--color-surface-container);
   outline: none;
   appearance: none;
@@ -156,7 +156,7 @@ input:disabled, select:disabled, textarea:disabled {
 }
 .select-caret {
   position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
-  pointer-events: none; color: var(--text-muted);
+  pointer-events: none; color: var(--color-on-surface-variant);
 }
 
 .fields-grid {
@@ -183,7 +183,7 @@ input:disabled, select:disabled, textarea:disabled {
   transition: border-color var(--duration-fast) var(--ease-default);
 }
 .number-input-wrapper:focus-within { border-color: var(--color-secondary); }
-.number-value { font-size: var(--font-size-body-md); color: var(--text-primary); }
+.number-value { font-size: var(--font-size-body-md); color: var(--color-on-surface); }
 .number-controls { display: flex; align-items: center; gap: var(--space-1); }
 .number-btn {
   width: 32px; height: 32px;
@@ -191,11 +191,11 @@ input:disabled, select:disabled, textarea:disabled {
   background: var(--color-surface);
   border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: var(--text-secondary);
+  cursor: pointer; color: var(--color-on-surface-variant);
   transition: background var(--duration-fast) var(--ease-default);
   font-family: inherit;
 }
-.number-btn:hover { background: var(--color-surface-container-highest); color: var(--text-primary); }
+.number-btn:hover { background: var(--color-surface-container-highest); color: var(--color-on-surface); }
 
 .date-input-wrapper { position: relative; }
 .date-input-wrapper input {
@@ -205,7 +205,7 @@ input:disabled, select:disabled, textarea:disabled {
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
   font-family: inherit;
-  color: var(--text-muted);
+  color: var(--color-on-surface-variant);
   background: var(--color-surface-container);
   outline: none;
   transition: border-color var(--duration-fast) var(--ease-default);
@@ -214,7 +214,7 @@ input:disabled, select:disabled, textarea:disabled {
 .date-input-wrapper input:focus-visible { border-color: var(--color-secondary); }
 .date-icon {
   position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
-  color: var(--text-muted); pointer-events: none;
+  color: var(--color-on-surface-variant); pointer-events: none;
 }
 
 /* ═══════════════════════════════════════

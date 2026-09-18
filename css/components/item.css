@@ -33,7 +33,7 @@
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   font-size: var(--font-size-body-md);
-  color: var(--text-primary);
+  color: var(--color-on-surface);
   transition: background-color var(--duration-fast) var(--ease-default),
               border-color var(--duration-fast) var(--ease-default);
 }
@@ -69,9 +69,9 @@ a.item:hover, .item-clickable:hover { background: var(--color-surface-variant); 
 .item-content { display: flex; flex-direction: column; gap: var(--space-1); flex: 1; min-width: 0; }
 /* Un segundo .item-content contiguo no crece (par shadcn [&+item-content]:flex-none) */
 .item-content + .item-content { flex: none; }
-.item-title { display: flex; width: fit-content; align-items: center; gap: var(--space-2); font-weight: 500; color: var(--text-primary); line-height: var(--line-height-title); }
+.item-title { display: flex; width: fit-content; align-items: center; gap: var(--space-2); font-weight: 500; color: var(--color-on-surface); line-height: var(--line-height-title); }
 .item-description {
-  color: var(--text-secondary);
+  color: var(--color-on-surface-variant);
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
   /* clamp a 2 líneas, como shadcn */
