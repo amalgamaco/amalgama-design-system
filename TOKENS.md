@@ -460,16 +460,80 @@ multi-layer `box-shadow` and gradients.
 Optional layer that aliases MD3 **system** names (`--md-sys-color-*`,
 `--md-sys-typescale-*-font`) onto Embassy roles, so components written in native MD3 nomenclature
 resolve against the Embassy palette. Flow is one-directional: Embassy palette → Embassy role →
-MD3 name. Because each alias points at a los roles semánticos role, it inherits dark-mode recalibration for
+MD3 name. Because each alias points at a semantic role, it inherits dark-mode recalibration for
 free (no dark override in the bridge). Load it **only** if you adopt MD3-named components; otherwise
-consume los roles semánticos directly.
+consume the semantic roles directly.
+
+---
+
+## 11b. Relationship to Material Design 3 — audited 2026-09-21
+
+`CLAUDE.md` already states the stance: MD3 is a **structural** reference — "documentation
+architecture, token structure, specs, behaviors and usage guidelines only. Do not copy their visual
+style." That sentence is easy to nod at and impossible to check, so here it is layer by layer, with
+what was measured against the published MD3 token set.
+
+| Layer | MD3 structure? | What that means here |
+|---|---|---|
+| **Color · roles** | **Adopted, literally** | The four groups with their full quartet (`primary` / `on-primary` / `primary-container` / `on-primary-container`, × primary · secondary · tertiary · error), the whole surface ramp (`surface-dim`, `-bright`, `container-lowest/low/·/high/highest`, `-variant`, `on-surface`, `on-surface-variant`), `outline` + `outline-variant`, the three `inverse-*`, and `scrim`. Plus MD3's three-layer architecture — palette → system role → component token — which `GOVERNANCE.md` §2.2 writes down as a rule |
+| **Color · names** | Adopted via bridge | `css/md-sys-bridge.css` (§11) exposes the real `--md-sys-color-*` names as aliases, redeclared inside `[data-theme]` because custom-property substitution resolves where it is declared |
+| **State layers** | **Adopted, exact** | `GOVERNANCE.md` §5.5: hover 8% · focus 10% · pressed 10% · dragged 16% · disabled content 38% · disabled container 12%. The spec percentages, unmodified. The *implementation* differs (`color-mix()` on the background instead of a `::before` layer) and that divergence is documented there as equivalent |
+| **Shape** | Four of six steps | `--radius-sm/-md/-lg/-xl` = 4 · 8 · 12 · 16 coincide with MD3's extra-small → large. Our `-2xl` is **24** where MD3's extra-large is **28**, and the names are t-shirt sizes rather than MD3's `corner-*`. `--radius-button` is a brand switch with no MD3 equivalent |
+| **Typography** | **Not adopted** | MD3 is 15 roles (display · headline · title · body · label, × large/medium/small) on a 16px body base. Embassy's scale is its own — editorial, display, heading-xl…xs, body-lg/md/sm, label, caption, badge, overline, overline-sm, mono — on a **13.5px** base, because it is a desktop scale (§8.2). We have no `title-*` or `headline-*`; MD3 has no caption, overline or badge. The bridge maps **only the family** of the 15 MD3 typescale roles, so an `@material/web` component doesn't fall back to Roboto |
+| **Spacing** | Not applicable | MD3 publishes the 4dp grid, not a named spacing token set. The grid we do follow (every `--space-*` is a multiple of 4, deliberately sparse — no 7, 9 or 11); the names and the steps are ours |
+| **Elevation** | Deliberate divergence | MD3 tints the surface per level (`surface-tint`, six levels). Embassy has three navy-tinted shadows and one rule — border = in the plane, shadow = overlay — and they do **not** recalibrate in dark. See §9 |
+| **Motion** | Partly | `--ease-default` is MD3's standard curve, and the rule that effects never take an overshoot curve is MD3's too (§10) |
+
+**What Embassy adds on top of MD3.** The `success` / `warning` / `info` families (MD3 ships `error`
+only), each with its `-fill` / `-text` / `-hover` members; `--border`; `--focus` / `--focus-ring`;
+`--selected`; the `--nav-*` layer; the three brand accents; `--target-min`; the `--screen-*` density
+layer and `data-density` (§9b). None of these has an MD3 name, so someone arriving from Material
+will not find them by looking for one — that is the cost of the additions, and it is accepted.
+
+**What MD3 has and Embassy leaves out on purpose — decisions, not gaps:**
+
+- **`surface-tint`**, and tonal elevation with it. It is the other side of the elevation decision
+  above: surfaces step through the ramp, they don't get tinted by height. Written here so nobody
+  "fixes" its absence.
+- **The twelve `*-fixed*` roles** (`primary-fixed`, `on-primary-fixed-variant`, …). They exist so a
+  color can stay put across themes; every Embassy surface recalibrates on purpose, so there is
+  nothing for them to do.
+- **The 15-role typescale.** See the row above.
+
+**Open, and tracked elsewhere:**
+
+- `chip.css` applies MD3's opacity model for its disabled state, against §5.4, which tells you to
+  use the dedicated tokens. `GOVERNANCE.md` calls it a legacy inconsistency to be reconciled — it is
+  the only live contradiction this audit found, and it changes rendered output, so it gets looked at
+  before it gets changed.
+- **No named state-layer tokens.** The percentages above are right but written inline in each
+  `color-mix()`: the `md.sys.state.*` tier died in the 2026-07 revert and was never restored
+  (§5.5 and the note under §10). A loss of indirection, not of the values.
+
+*Fixed in the same pass as this section:* `--md-sys-color-shadow` was missing from the bridge
+although `--shadow` exists (a component asking for it got nothing), and the bridge's typography
+comment credited Inter as the UI typeface while the role it maps already resolved to Manrope — the
+file's own documentation contradicting its own code. Both verified in a browser afterwards:
+`--md-sys-color-shadow` now resolves to `#0A0C12` in light and `#000000` inside a
+`[data-theme="dark"]` island, so the alias recalibrates like every other one.
+
+> **Measured in the same pass, and it is not a documentation problem:** `--font-body` is
+> **`'Manrope', 'Inter', sans-serif`** in this tree. The decision that *Epilogue is Embassy's
+> default typeface, body and UI included* was taken and implemented on 2026-09-16 — the measurement
+> table, the `TOKENS.md` row, the `GOVERNANCE` §Typography edit and a regenerated `tokens/` — in a
+> commit (`32816df`) that **is not in this repository**: `git cat-file` does not know the object and
+> no branch contains it. So the type layer of the system is one decision behind what the team
+> believes is live, and every artifact built "with Embassy tokens" since that date has been using a
+> body typeface the repo never adopted. Re-applying it is a small, measured change (the recorded
+> deltas were +1.2% to +3.9% on control widths, no layout jump, and the Epilogue weights 400–700
+> were already being loaded); what it needs is the decision confirmed, not more analysis.
 
 ---
 
 ## 12. Dark mode — automatic recalibration
 
 Set `data-theme="dark"` on `<html>`. The `[data-theme="dark"]` block in `variables.css` **overrides
-only the semantic los roles semánticos layer** (and the theme-aware aliases `--text-*`, `--primary-500`,
+only the semantic role layer** (and the theme-aware aliases `--text-*`, `--primary-500`,
 `--btn-elevation*`). Primitives are left alone; the shell reassigns some neutrals, which is why the
 dark block writes literal hex for neutral-derived roles to avoid cross-resolution.
 
