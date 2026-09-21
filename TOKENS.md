@@ -526,7 +526,32 @@ file's own documentation contradicting its own code. Both verified in a browser 
 > believes is live, and every artifact built "with Embassy tokens" since that date has been using a
 > body typeface the repo never adopted. Re-applying it is a small, measured change (the recorded
 > deltas were +1.2% to +3.9% on control widths, no layout jump, and the Epilogue weights 400–700
-> were already being loaded); what it needs is the decision confirmed, not more analysis.
+> were already being loaded).
+>
+> **Where the decision stands (21/09/2026).** Epilogue as the default is **confirmed as the
+> direction**, with one reservation from the person who owns it: some components may not hold in
+> Epilogue, and those would take a second face — Manrope being the candidate. What is still missing
+> is the half that makes it writable: **which components, and by what criterion.** Until that exists
+> the token does not move, because the one shape that cannot ship is a list of per-component
+> exceptions — `GOVERNANCE.md` §Typography forbids hand-written families precisely so that an
+> exception cannot survive a refactor.
+>
+> Three shapes were evaluated side by side with the real component CSS embedded
+> (`Claude outputs/tipografia-componentes-reales.html`):
+>
+> 1. **One face.** `--font-body` becomes Epilogue; body and headings differ by scale and weight.
+> 2. **Two faces split by register** — *what the repo does today*: Epilogue for what speaks
+>    (headings, openings, large figures, the editorial layer), Manrope for what is operated and
+>    compared (cells, controls, labels, overlines). Both roles already exist and are already
+>    separate, so choosing this means changing nothing.
+> 3. **Epilogue default plus a third role** (`--font-dense`) for where density bites, with its own
+>    row here naming who consumes it and why.
+>
+> Two things measured while comparing, because they change the argument. In the library's own
+> components the text is vertically centred — deviation 0 on `.btn-primary`, the pressed `.chip` and
+> the `.seg-btn`, 0.3px on the `.badge` — because they consume `--line-height-control`, so alignment
+> argues neither for nor against either face. And **Manrope has no true italic**: a hint or an empty
+> state that asks for emphasis gets a synthetic oblique, where Epilogue has the real one.
 
 ---
 
