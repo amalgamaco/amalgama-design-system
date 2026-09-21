@@ -37,6 +37,13 @@ Start at [`guidelines/README.md`](guidelines/README.md). Before placing any comp
   ([`feedback-and-states.md`](guidelines/feedback-and-states.md)) — not just the happy path.
 - Write copy per [`content-and-writing.md`](guidelines/content-and-writing.md) (rioplatense
   Spanish for product UI).
+- **Declare the five decisions** of
+  [`aceptacion-de-pantalla.md`](guidelines/aceptacion-de-pantalla.md) §1 — density, width,
+  container, dominant object, semantic set — and write the three that the gate needs into the
+  markup: `data-ds-screen` on the root, `data-density` (`compact` / `comfortable`) and
+  `data-ds-dominant` on the region that has to win the eye. A screen that doesn't declare them
+  isn't a badly built screen: it's a screen that can't be measured, and the gate reports it as
+  `D17` / `D20`.
 
 ### (b) Select each component — `component-rules/<id>.md`
 
@@ -249,6 +256,31 @@ It checks:
   programmatic registry / entry point for skills).
 
 **A clean run means:** the screen is token-pure, every component is a real DS component
-used per its rules file, and links resolve. Pair it with the manual §1(g) checks
-(states, a11y, responsive, light/dark) — the script enforces token/registry correctness;
-the human/agent still owns hierarchy and usability. Only then is the screen done.
+used per its rules file, and links resolve. It does **not** mean the screen is acceptable: a
+screen with giant controls, four stacked white cards and every chip in bold passes
+`validate-ds` in full. That is what the next gate is for.
+
+### The acceptance gate — `scripts/check-render.mjs`
+
+```bash
+node scripts/check-render.mjs <screen>.html
+```
+
+`validate-ds` reads the design system, `check-output` reads your HTML as text, and this one
+**draws the page and measures it**. Eleven of the twelve acceptance criteria of
+[`aceptacion-de-pantalla.md`](guidelines/aceptacion-de-pantalla.md) are thresholds here —
+declared density (`D17`), control vs. data (`D18`), one value per thing (`D19`), the dominant
+actually dominating (`D20`), emphasis carriers (`D21`, `D22`), the tone budget (`D23`), the air
+ladder (`D24`), nothing stretched over emptiness (`D25`), one rhythm (`D26`), the content column
+(`D1`) and a full-width support control (`C2`).
+
+All of them are **relations, not values** — "the control can't be taller than the data row" holds
+in compact and in comfortable alike, where "36px" would hold in only one. They are measured inside
+`[data-ds-screen]`; with no such root they are skipped and the report says so.
+
+**How it closes:** zero ALTA findings and at most two MEDIA, each written down with its reason in
+`design/<screen>.md`. An ALTA is fixed, or declared per element with
+`data-ds-allow="D18 - reason"` — never per screen, and never because it looks fine. The twelfth
+criterion (one axis, one pattern) is not automated: knowing whether two controls express the same
+axis is understanding the domain, not counting nodes. That one, plus the three eye passes
+(greyscale, squint, subtract one more), stay with `review` and with whoever looks.

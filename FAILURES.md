@@ -93,7 +93,7 @@ alert y confirmación destructiva sin diálogo son errores de UX, no de DS.
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
 | `C1` | Más de un `btn-primary` en un mismo contexto | BLOQ | conteo por contenedor |
-| `C2` | Botón full-width o con contenido alineado a la izquierda | ALTA | regex + inspección |
+| `C2` | Botón full-width o con contenido alineado a la izquierda | ALTA | regex + `check-render` (ancho contra el de su contenedor) · criterio A3 |
 | `C3` | Botón con radio píldora, cuando la marca no eligió la forma `pildora` (si la eligió, son píldora TODOS los botones y no es falla) | ALTA | inspección |
 | `C4` | Acción secundaria tonal compitiendo con la primaria adyacente (debía ser outline) | ALTA | inspección |
 | `C5` | Dos objetos primarios: la pantalla no sabe de qué se trata | ALTA | revisión |
@@ -106,7 +106,7 @@ alert y confirmación destructiva sin diálogo son errores de UX, no de DS.
 
 | ID | Falla | Sev | Cómo se detecta |
 |---|---|---|---|
-| `D1` | Regiones sin alinear a una única columna de contenido | ALTA | inspección visual |
+| `D1` | Regiones sin alinear a una única columna de contenido | ALTA | `check-render` (bordes de las regiones dentro de `[data-ds-screen]`) · criterio B2 |
 | `D2` | Un elemento se centra o se dimensiona con un ancho propio ajeno a la grilla | ALTA | inspección |
 | `D3` | Sin ancho máximo: líneas de más de ~120 caracteres en pantalla ancha | ALTA | `check-render` |
 | `D4` | Fuera de la secuencia canónica (filtros flotando entre bandas ajenas) | MEDIA | inspección |
@@ -122,6 +122,22 @@ alert y confirmación destructiva sin diálogo son errores de UX, no de DS.
 | `D14` | Dos `btn-primary` en la misma pantalla, o la acción primaria fuera del `page-header` | ALTA | regex + inspección · III·a·7 |
 | `D15` | **La proximidad no agrupa**: el espacio dentro de un grupo es igual o mayor que el que lo separa del grupo siguiente — típicamente una etiqueta más lejos de su propio campo que del campo que sigue. Un borde alrededor no lo arregla | ALTA | `check-render` (mide los dos gaps) · `guidelines/visual-hierarchy.md` §Whitespace as grouping |
 | `D16` | **La columna quedó demasiado angosta**: el párrafo se rompe cada tres palabras. Es `D3` por el otro lado — el ancho máximo protege del renglón infinito, nada protegía del renglón de 23 caracteres. Pasa al partir en dos columnas algo que se previsualizó en una, y no se ve leyendo el CSS: se ve midiendo el render | ALTA | `check-render` |
+| `D17` | **La densidad no está declarada.** La pantalla no dice `data-density` y sus controles salen del default: el mismo 36px para un mostrador que la mira ocho horas y para una pantalla que el socio abre una vez al mes. Sin la declaración tampoco se puede medir si un control está fuera de escala | ALTA | `check-render` · `guidelines/aceptacion-de-pantalla.md` A1 |
+| `D18` | **El control pesa más que el dato**: un filtro más alto y más grande que la fila que filtra. El control es el medio, el dato es el fin; si el select de 40px va arriba de filas de 28, la pantalla muestra primero la herramienta. Es el síntoma que se nombra como «los componentes quedaron gigantes» | ALTA | `check-render` (alto y cuerpo, contra la fila de dato) · A2 |
+| `D19` | **Más de un valor para la misma cosa**: cuatro radios y tres alturas de control en una pantalla. No es un sistema con variedad, son decisiones sueltas tomadas de a una. La píldora no cuenta como radio propio | ALTA | `check-render` (cuenta valores computados) · B1 |
+| `D20` | **El dominante declarado no domina.** `data-ds-dominant` está puesto y la región recibe el mismo tratamiento que la leyenda: no tiene más área que las otras, o no es la única superficie elevada. La relación se pide igual en un tablero, una tabla o un formulario — cambia cuál es el dominante, no la relación | ALTA | `check-render` (área contra la segunda región, elevación) · C1 |
+| `D21` | **Un conjunto repetido de controles, todos en peso fuerte.** Cinco chips en negrita no son cinco filtros importantes: son cinco que se anularon entre sí, y encima se quedaron sin recurso para marcar el activo. El peso es el portador que hay que dejar libre | ALTA | `check-render` (hermanos de la misma clase, todos ≥ 600) · C2 |
+| `D22` | **Tres portadores de énfasis en un mismo elemento** — peso, tamaño, color y superficie se gastan de a uno; la apertura puede tomar dos. Es el recíproco de `F6`: ahí el problema es el color como único portador, acá es el color encima de todo lo demás | ALTA | `check-render` (portadores por elemento) · C2 |
+| `D23` | **El color no se gasta por rango**: más de cuatro tonos de acento compitiendo, un tono semántico sin su fila de leyenda, o acento en el cromo (filtros, riel, modo de vista). El tono de marca es de acciones y el semántico es de datos; el mismo tono no hace las dos cosas en una pantalla | MEDIA | `check-render` (familias de tono con fondo saturado) · C3 |
+| `D24` | **El salto de aire entre niveles es menor a 1,75×.** `D15` pide que el espacio de adentro sea *menor* que el de afuera, y con eso 24/24/24 pasa moviendo uno a 23. Sin salto real el espacio no agrupa, y hay que dibujar cajas para suplirlo: `D24` y las cajas de más son la misma falla a dos distancias | MEDIA | `check-render` (razón entre niveles) · D1 |
+| `D25` | **Algo se estira sobre vacío**: una grilla de cuatro columnas con cinco ítems —una fila con uno solo y tres huecos—, o un contenedor con más de la mitad de su caja vacía. Las columnas se eligen para que el contenido las complete | MEDIA | `check-render` (fila huérfana, ocupación del contenedor) · D2 |
+| `D26` | **El aire no está repartido**: una región respira más del doble por elemento que otra de la misma pantalla. La tabla al ras y el encabezado nadando en aire está desbalanceado aunque las dos mitades, por separado, estén bien | MEDIA | `check-render` (aire por elemento, entre regiones) · D3 |
+
+> **Las diez de arriba (`D17`–`D26`) son la vara de aceptación de pantalla**, y la regla que
+> justifica cada una vive en `guidelines/aceptacion-de-pantalla.md` — no acá: acá está la falla, su
+> severidad y cómo se detecta. Se miden dentro de `[data-ds-screen]`; sin esa raíz declarada,
+> `check-render` las saltea y lo avisa en el reporte, porque el catálogo del DS y una landing no son
+> pantallas de producto. **Cierre:** cero ALTAS y hasta dos MEDIAS anotadas con su razón.
 
 ## E · Estados y contenido
 

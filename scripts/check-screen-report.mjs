@@ -21,7 +21,12 @@ import fs from "node:fs";
 
 const VERBOS = ["RESECUENCIAR","INTRODUCIR-JERARQUÍA","INTRODUCIR-JERARQUIA","AGRUPAR","UNIFICAR",
   "DIVIDIR","MOVER","REEMPLAZAR","ELIMINAR","REVELAR-PROGRESIVAMENTE","ALINEAR","AGREGAR-ESTADO"];
-const ENCUADRE = ["OBJETIVO","OBJETO","ACCIONES","PATRÓN","RESPONSIVE","ESTADOS"];
+/* DENSIDAD y DOMINANTE entraron en septiembre de 2026 con la vara de aceptación
+   (guidelines/aceptacion-de-pantalla.md §1). Se piden acá porque son las dos
+   decisiones que el gate del render NECESITA declaradas para poder medir: sin
+   densidad no se puede decir si un control está fuera de escala (D17/D18), y sin
+   dominante no se puede decir si el dominante domina (D20). */
+const ENCUADRE = ["OBJETIVO","OBJETO","ACCIONES","DENSIDAD","PATRÓN","DOMINANTE","RESPONSIVE","ESTADOS"];
 const LEYES = /Nielsen|Hick|Fitts|Miller|Von Restorff|Progressive Disclosure|Peak-End|carga cognitiva|jerarquía visual|chunking|GOVERNANCE|Ley \d|ley \d/i;
 
 const arg = process.argv[2];
@@ -57,6 +62,12 @@ if (!/vac[íi]o/i.test(txt) || !/error/i.test(txt))
 // 5 · Mobile como transformación
 if (/RESPONSIVE/i.test(txt) && /(shrink|achicad|encogid|responsive autom)/i.test(txt))
   avisos.push("mobile descrito como un encogimiento: tiene que ser una estructura propia");
+
+/* 6 · Cómo cerró la vara. El diagnóstico es donde viven las MEDIAS que se
+   aceptaron con su razón: si no dice nada de la aceptación, o la corrida no se
+   hizo, o se hizo y nadie anotó qué se dejó pasar — que es lo mismo. */
+if (!/aceptaci[óo]n|check-render|ALTAS?\b/i.test(txt))
+  avisos.push("el diagnóstico no dice cómo cerró la vara de aceptación (cero ALTAS y hasta dos MEDIAS anotadas con su razón)");
 
 for (const f of fallas) console.log(`✗ ${f}`);
 for (const a of avisos) console.log(`! ${a}`);

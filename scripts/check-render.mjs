@@ -82,6 +82,51 @@ const UMBRAL = {
   // F7 — AA: 4.5:1 texto normal, 3:1 texto grande (>=24px, o >=18.66px en bold).
   aaNormal: 4.5,
   aaGrande: 3.0,
+
+  /* ── La vara de aceptación de pantalla · D17–D26, más D1 y C2 ────────────
+     Regla en guidelines/aceptacion-de-pantalla.md. Los umbrales viven ACÁ y no
+     en la prosa: si se mueven, se mueven en un solo lugar.
+
+     Todos son RELACIONES y no valores, a propósito: «el control no puede ser más
+     alto que la fila de dato» vale igual en compacta y en cómoda; «36px» vale
+     sólo en una. Un umbral absoluto obliga a una excepción por arquetipo y
+     termina siendo una plantilla con otro nombre.
+
+     Se miden dentro de [data-ds-screen]. Sin esa raíz no se mide nada de esto y
+     el reporte lo dice: el catálogo del DS y una landing no son pantallas de
+     producto, y medirlas como si lo fueran da mil cuatrocientos hallazgos que no
+     son bugs. */
+  aceptacion: {
+    // A2/D18 — tolerancia en px antes de decir que el control le gana al dato.
+    holguraControl: 2,
+    // B1/D19 — cuántos valores distintos de lo mismo. La píldora no cuenta como
+    // radio: es una forma, no un paso de la escala. Las alturas admiten 3 —un
+    // botón, un chip y un campo es una pantalla sana; cinco es acumulación.
+    radiosMax: 2,
+    alturasMax: 3,
+    gapsMax: 5,
+    escalaGap: [2, 4, 6, 8, 10, 12, 14, 16, 20, 24, 32, 40, 48, 64, 80, 96],
+    // C1/D20 — el dominante contra la segunda región.
+    razonDominante: 1.5,
+    // C2/D22 — portadores de énfasis por elemento. Un container con su texto
+    // `on-` cuenta como UNO: el badge del sistema es peso + superficie y es
+    // correcto. Tres es peso + tamaño + superficie, que ya es grito.
+    portadoresMax: 2,
+    razonTamano: 1.25,
+    // C3/D23 — familias de tono con fondo saturado, en cubos de 30°.
+    tonosMax: 4,
+    // D1/D24 — el salto entre niveles de aire. D15 pide > 1; esto pide que el
+    // salto se vea: 24/24/24 pasaba D15 moviendo uno a 23.
+    razonAire: 1.75,
+    // D2/D25 — cuánto de su caja llena el contenido de un contenedor.
+    ocupacionMin: 0.45,
+    // D3/D26 — dos ritmos en la misma pantalla: la separación entre los hijos de
+    // una región contra la de otra. 2,5 y no 2: un panel con su padding y una
+    // toolbar sin caja se separan legítimamente, y 2 marcaba eso.
+    razonAireRegiones: 2.5,
+    // A3/C2 — un control de apoyo tomando la fila entera.
+    anchoPleno: 0.92,
+  },
 };
 
 const VIEWPORTS = [
@@ -170,7 +215,8 @@ const SONDA = (U) => {
   };
 
   const out = { contraste: [], medida: [], targets: [], proximidad: [], anidadas: [], etiquetas: [],
-                m10: [], m11: [], m12: [], m13: [], m14: [], m15: [], exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
+                m10: [], m11: [], m12: [], m13: [], m14: [], m15: [], aceptacion: [], pantallas: 0,
+                exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
   const marcar = (el, id, dato) => {
     const motivo = permitido(el, id);
     if (motivo) { out.exentos.push({ id, sel: sel(el), motivo }); return null; }
@@ -294,6 +340,312 @@ const SONDA = (U) => {
     if (!/^[\s\d.,%$+\-/]*\d/.test(t))
       { const de = marcar(card, "D12", { sel: sel(card), mayor: t.slice(0, 30), px: +topPx.toFixed(1) });
         if (de) out.etiquetas.push(de); }
+  }
+
+
+  /* ── La vara de aceptación de pantalla · D17–D26, D1, C2 ──────────────────
+     Los chequeos de arriba son de ELEMENTO: este texto contrasta poco, esta
+     línea mide 140 caracteres, este target tiene 30px. Los de acá son de
+     PANTALLA: no hay ningún elemento culpable en «los componentes quedaron
+     gigantes» ni en «esto no está balanceado» — está en la relación entre las
+     partes, y por eso hay que medir la pantalla como conjunto.
+
+     Todo cuelga de [data-ds-screen]. Es el mismo criterio que --iterar: el
+     script no sabe nada de la página, así que la página declara qué es una
+     pantalla. Sin esa raíz esto no corre.
+
+     Va entero en un try: un error acá no puede llevarse puestos F7, D3 y D8,
+     que son los que ya andaban. */
+  try {
+    const areaDe = (e) => { const r = e.getBoundingClientRect(); return r.width * r.height; };
+    const hijosVis = (e) => [...e.children].filter(vis);
+    const rect = (e) => e.getBoundingClientRect();
+    const med = (a) => a.length ? a.slice().sort((x, y) => x - y)[Math.floor(a.length / 2)] : 0;
+    /* HSL a mano: hace falta la saturación para separar un fondo de acento de un
+       gris de superficie, y getComputedStyle sólo devuelve rgb. */
+    const satl = (str) => {
+      const c = rgb(str); if (!c) return null;
+      const r = c.r / 255, g = c.g / 255, b = c.b / 255;
+      const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+      const sat = d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1));
+      let h = 0;
+      if (d) { h = mx === r ? 60 * (((g - b) / d) % 6) : mx === g ? 60 * ((b - r) / d + 2) : 60 * ((r - g) / d + 4); if (h < 0) h += 360; }
+      return { h, s: sat, l, a: c.a };
+    };
+    const CONTROL = "button, [role='button'], input:not([type='hidden']), select, textarea, [class*='chip'], [class*='btn'], [class*='tab'], [class*='seg'], [class*='toggle'], [class*='search-field'], [class*='search-bar']";
+    const SETCTL = "button, [role='button'], [class*='chip'], [class*='btn'], [class*='tab'], [class*='seg'], [class*='toggle']";
+    const U2 = U.aceptacion;
+
+    const pantallas = [...document.querySelectorAll("[data-ds-screen]")].filter(vis);
+    out.pantallas = pantallas.length;
+
+    for (const scr of pantallas) {
+      const A = { sel: sel(scr), hallazgos: [] };
+      const flag = (el, id, dato) => { const d = marcar(el, id, dato); if (d) A.hallazgos.push({ id, ...d }); };
+      const areaPantalla = areaDe(scr) || 1;
+
+      /* Las REGIONES son el nivel estructural de la pantalla, y hay que
+         encontrarlo: un wrapper no es una región. Se baja mientras haya un solo
+         hijo visible, y si el nivel resulta ser una FILA —riel + contenido— se
+         toma la columna más ancha, que es la columna de contenido de la que
+         hablan B2 y D1. Es una heurística y está escrita como tal: el día que
+         una pantalla la engañe, se declara y listo. */
+      let cont = scr, guarda = 0;
+      while (guarda++ < 4) { const h = hijosVis(cont); if (h.length === 1) { cont = h[0]; continue; } break; }
+      let regiones = hijosVis(cont).filter((e) => areaDe(e) > 2000);
+      if (regiones.length >= 2) {
+        const r0 = rect(regiones[0]);
+        const esFila = regiones.slice(1).some((e) => rect(e).top < r0.bottom - 1 && rect(e).left > r0.right - 1);
+        if (esFila) {
+          const col = regiones.slice().sort((a, b) => rect(b).width - rect(a).width)[0];
+          A.columna = sel(col);
+          regiones = hijosVis(col).filter((e) => areaDe(e) > 2000);
+        }
+      }
+      A.regiones = regiones.length;
+
+      /* ── A1 · D17 · la densidad se declara ─────────────────────────────── */
+      if (!scr.closest("[data-density]") && !document.documentElement.hasAttribute("data-density"))
+        flag(scr, "D17", { motivo: "la pantalla no declara data-density" });
+
+      /* ── A2 · D18 · ningún control pesa más que el dato ─────────────────
+         La fila de dato es el conjunto repetido más numeroso de la pantalla: una
+         tabla, una lista, una grilla de tarjetas. Se compara contra los controles
+         que están AFUERA de ese conjunto, que es el cromo. */
+      let filas = null;
+      const clave = (e) => e.tagName + "|" + ((e.getAttribute("class") || "").trim().split(/\s+/)[0] || "");
+      for (const c of scr.querySelectorAll("*")) {
+        if (!vis(c)) continue;
+        const h = hijosVis(c);
+        if (h.length < 3) continue;
+        const k0 = clave(h[0]);
+        if (!h.every((e) => clave(e) === k0)) continue;
+        if (!filas || h.length > filas.items.length) filas = { cont: c, items: h };
+      }
+      if (filas) {
+        const altoDato = med(filas.items.map((e) => rect(e).height));
+        const cuerpoDato = med(filas.items.map((e) => parseFloat(getComputedStyle(e).fontSize) || 0));
+        A.dato = { sel: sel(filas.cont), n: filas.items.length, alto: Math.round(altoDato), cuerpo: +cuerpoDato.toFixed(1) };
+        if (altoDato > 8) {
+          let peor = null;
+          for (const ctl of scr.querySelectorAll(CONTROL)) {
+            if (!vis(ctl) || filas.cont.contains(ctl)) continue;
+            const h = rect(ctl).height;
+            if (h > altoDato + U2.holguraControl && (!peor || h > peor.alto))
+              peor = { control: sel(ctl), alto: Math.round(h), cuerpo: +(parseFloat(getComputedStyle(ctl).fontSize) || 0).toFixed(1) };
+          }
+          if (peor) flag(scr, "D18", { ...peor, altoDato: Math.round(altoDato), cuerpoDato: +cuerpoDato.toFixed(1), dato: A.dato.sel });
+        }
+      }
+
+      /* ── A3 · C2 · nada de apoyo toma todo el ancho ─────────────────────
+         C2 ya estaba en el catálogo y se detectaba «por regex + inspección»: el
+         regex ve un `w-full` escrito, no un botón que resultó ancho. */
+      for (const b of scr.querySelectorAll("button, [role='button'], a[class*='btn'], [class*='btn-']")) {
+        if (!vis(b)) continue;
+        const pa = b.parentElement; if (!pa) continue;
+        const cs = getComputedStyle(pa);
+        const ancho = rect(pa).width - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0);
+        if (ancho > 240 && rect(b).width >= ancho * U2.anchoPleno)
+          flag(b, "C2", { control: sel(b), w: Math.round(rect(b).width), contenedor: Math.round(ancho) });
+      }
+
+      /* ── B1 · D19 · un valor por cosa ──────────────────────────────────── */
+      const radios = new Set(), alturas = new Set(), gaps = new Set();
+      for (const e of scr.querySelectorAll("*")) {
+        if (!vis(e)) continue;
+        const cs = getComputedStyle(e);
+        const bgA = (rgb(cs.backgroundColor) || { a: 0 }).a;
+        const tieneCaja = bgA > 0.02 || (parseFloat(cs.borderTopWidth) || 0) > 0;
+        const rr = parseFloat(cs.borderTopLeftRadius) || 0;
+        if (tieneCaja && rr > 0 && rr < 100 && rect(e).height > 12) radios.add(Math.round(rr));
+        if (cs.display.includes("flex") || cs.display.includes("grid"))
+          for (const v of [cs.rowGap, cs.columnGap]) { const g = parseFloat(v) || 0; if (g > 0) gaps.add(Math.round(g)); }
+      }
+      for (const c of scr.querySelectorAll(CONTROL)) {
+        if (!vis(c)) continue;
+        const h = Math.round(rect(c).height);
+        if (h > 12) alturas.add(h);
+      }
+      A.valores = { radios: [...radios].sort((a, b) => a - b), alturas: [...alturas].sort((a, b) => a - b), gaps: [...gaps].sort((a, b) => a - b) };
+      const fuera = A.valores.gaps.filter((g) => !U2.escalaGap.includes(g));
+      if (radios.size > U2.radiosMax || alturas.size > U2.alturasMax || gaps.size > U2.gapsMax || fuera.length)
+        flag(scr, "D19", { radios: A.valores.radios, alturas: A.valores.alturas, gaps: A.valores.gaps, fueraDeEscala: fuera });
+
+      /* ── C1 · D20 · hay un dominante y domina ──────────────────────────── */
+      const dom = scr.querySelector("[data-ds-dominant]");
+      if (!dom) flag(scr, "D20", { motivo: "la pantalla no declara data-ds-dominant" });
+      else if (vis(dom)) {
+        const aDom = areaDe(dom);
+        const otras = regiones.filter((e) => e !== dom && !e.contains(dom) && !dom.contains(e))
+          .map((e) => ({ sel: sel(e), a: areaDe(e) })).sort((x, y) => y.a - x.a);
+        if (otras[0] && aDom < otras[0].a * U2.razonDominante)
+          flag(dom, "D20", { motivo: "no domina por área", dominante: sel(dom), razon: +(aDom / (otras[0].a || 1)).toFixed(2), segunda: otras[0].sel });
+        const elevadas = regiones.filter((e) => e !== dom && !dom.contains(e) && !e.contains(dom) && getComputedStyle(e).boxShadow !== "none");
+        if (elevadas.length)
+          flag(dom, "D20", { motivo: "no es la única superficie elevada", otras: elevadas.slice(0, 3).map(sel).join(" · ") });
+      }
+
+      /* ── C2 · D21 · un conjunto repetido, todo en peso fuerte ───────────
+         El caso de todos los días: cinco chips de filtro en 600. No son cinco
+         filtros importantes, son cinco que se anularon entre sí — y cuando uno se
+         active no queda peso libre para decirlo. Sólo CONTROLES: una columna de
+         datos en 600 puede ser correcta (III·c), un riel de filtros no. */
+      for (const c of scr.querySelectorAll("*")) {
+        if (!vis(c)) continue;
+        const h = hijosVis(c);
+        if (h.length < 3 || !h.every((e) => e.matches(SETCTL))) continue;
+        if (c.closest("thead, [role='columnheader']")) continue;
+        const pesos = h.map((e) => parseInt(getComputedStyle(e).fontWeight, 10) || 400);
+        if (pesos.every((pp) => pp >= 600))
+          flag(c, "D21", { conjunto: sel(c), n: h.length, peso: pesos[0] });
+      }
+
+      /* ── C2 · D22 · tres portadores en un mismo elemento ────────────────
+         Los portadores son cuatro —peso, tamaño, color, superficie— y se gastan
+         de a uno; la apertura puede tomar dos. Un container CON su texto `on-`
+         cuenta como uno solo: el badge del sistema es peso + superficie y está
+         bien. Tres es peso + tamaño + superficie, que ya es grito. */
+      const cuerpos = [];
+      const conTexto = [];
+      for (const e of scr.querySelectorAll("*")) {
+        if (!vis(e)) continue;
+        if (![...e.childNodes].some((nd) => nd.nodeType === 3 && nd.textContent.trim())) continue;
+        conTexto.push(e);
+        cuerpos.push(parseFloat(getComputedStyle(e).fontSize) || 0);
+      }
+      const cuerpoMed = med(cuerpos) || 14;
+      A.cuerpoMediano = +cuerpoMed.toFixed(1);
+      for (const e of conTexto) {
+        if (e.closest("[data-ds-rank^='1']")) continue;
+        const cs = getComputedStyle(e);
+        const port = [];
+        if ((parseInt(cs.fontWeight, 10) || 400) >= 600) port.push("peso");
+        if ((parseFloat(cs.fontSize) || 0) >= cuerpoMed * U2.razonTamano) port.push("tamaño");
+        const bg = satl(cs.backgroundColor);
+        const sup = (bg && bg.a > 0.04) || cs.boxShadow !== "none";
+        if (sup) port.push("superficie");
+        else { const col = satl(cs.color); if (col && col.s > 0.25 && col.l > 0.15 && col.l < 0.85) port.push("color"); }
+        if (port.length > U2.portadoresMax)
+          flag(e, "D22", { el: sel(e), portadores: port.join(" + "), texto: e.textContent.replace(/\s+/g, " ").trim().slice(0, 28) });
+      }
+
+      /* ── C3 · D23 · el color se gasta por rango ─────────────────────────
+         Familias de tono en cubos de 30°: dos azules distintos son un azul. Y el
+         fill sólido de marca, que es uno por pantalla: se cuenta por «saturado,
+         oscuro y chico» — una barra lateral oscura es una superficie, no un fill,
+         así que queda afuera por tamaño. */
+      const tonos = new Map(); let fills = 0;
+      for (const e of scr.querySelectorAll("*")) {
+        if (!vis(e)) continue;
+        const bg = satl(getComputedStyle(e).backgroundColor);
+        if (!bg || bg.a < 0.06 || bg.s < 0.15) continue;
+        const fam = (Math.round(bg.h / 30) * 30) % 360;
+        tonos.set(fam, (tonos.get(fam) || 0) + 1);
+        const ar = areaDe(e);
+        if (bg.l < 0.35 && ar > 1200 && ar < areaPantalla * 0.15) fills++;
+      }
+      A.tonos = [...tonos.keys()].sort((a, b) => a - b);
+      if (tonos.size > U2.tonosMax)
+        flag(scr, "D23", { motivo: "tonos de acento simultáneos", n: tonos.size, familias: A.tonos.join("° · ") + "°" });
+      if (fills > 1)
+        flag(scr, "D23", { motivo: "más de un fill sólido de marca", n: fills });
+
+      /* ── D1 · D24 · tres niveles de aire con salto real ─────────────────
+         Hermano de D15 y no su duplicado: D15 marca cuando adentro separa IGUAL o
+         más que afuera; esto marca cuando afuera gana pero no se ve que gane. */
+      for (const c of scr.querySelectorAll("*")) {
+        if (!vis(c)) continue;
+        const h = hijosVis(c);
+        if (h.length < 2) continue;
+        const rs = h.map(rect);
+        let apilado = true; const dentro = [];
+        for (let i = 1; i < rs.length; i++) {
+          const a = rs[i - 1], b = rs[i];
+          if (b.top < a.bottom - 1) { apilado = false; break; }
+          dentro.push(b.top - a.bottom);
+        }
+        if (!apilado || !dentro.length) continue;
+        const sig = c.nextElementSibling;
+        if (!sig || !vis(sig)) continue;
+        const afuera = rect(sig).top - rect(c).bottom;
+        const maxD = Math.max(...dentro);
+        if (maxD > 2 && afuera > maxD + 0.5 && afuera < maxD * U2.razonAire)
+          flag(c, "D24", { sel: sel(c), adentro: Math.round(maxD), afuera: Math.round(afuera), razon: +(afuera / maxD).toFixed(2) });
+      }
+
+      /* ── D2 · D25 · nada se estira sobre vacío ──────────────────────────── */
+      for (const c of scr.querySelectorAll("*")) {
+        if (!vis(c)) continue;
+        const cs = getComputedStyle(c);
+        const h = hijosVis(c);
+        if (cs.display.includes("grid")) {
+          const cols = (cs.gridTemplateColumns || "").split(" ").filter(Boolean).length;
+          if (cols >= 2 && h.length > cols && h.length % cols === 1)
+            flag(c, "D25", { motivo: "fila huérfana", sel: sel(c), cols, items: h.length });
+        }
+        const bgA = (rgb(cs.backgroundColor) || { a: 0 }).a;
+        const caja = bgA > 0.02 || (parseFloat(cs.borderTopWidth) || 0) > 0;
+        const rc = rect(c);
+        if (caja && rc.width * rc.height > 40000 && h.length) {
+          /* El vacío que importa es el de ALTO: un contenedor con el doble de alto
+             que su contenido es el «marco alrededor de nada». El ancho sobrante es
+             otra cosa —una fila con holgura al costado— y marcarlo daba falsos
+             positivos en cualquier leyenda o pie de panel. */
+          const tops = h.map((e) => rect(e).top), bots = h.map((e) => rect(e).bottom);
+          const altoHijos = Math.max(...bots) - Math.min(...tops);
+          if (rc.height > 0 && altoHijos / rc.height < U2.ocupacionMin)
+            flag(c, "D25", { motivo: "contenedor mayormente vacío", sel: sel(c), ocupacion: +(altoHijos / rc.height).toFixed(2) });
+        }
+      }
+
+      /* ── D3 · D26 · el aire está repartido ─────────────────────────────── */
+      /* El aire de una región es la separación entre sus hijos —su ritmo—, no el
+         área que sobra: el padding de un panel es legítimo y no tiene por qué
+         igualar al de una toolbar sin caja. Lo que no puede haber son dos ritmos
+         distintos en la misma pantalla. */
+      const aires = regiones
+        .map((e) => {
+          const h = hijosVis(e);
+          if (h.length < 2) return null;
+          const rs = h.map(rect), hu = [];
+          for (let i = 1; i < rs.length; i++) {
+            if (rs[i].top < rs[i - 1].bottom - 1) return null;   // no es una pila
+            hu.push(rs[i].top - rs[i - 1].bottom);
+          }
+          const g = med(hu);
+          return g >= 4 ? { sel: sel(e), aire: g } : null;
+        })
+        .filter(Boolean);
+      if (aires.length >= 2) {
+        aires.sort((a, b) => b.aire - a.aire);
+        const alto = aires[0], bajo = aires[aires.length - 1];
+        if (alto.aire / bajo.aire > U2.razonAireRegiones)
+          flag(scr, "D26", { masAire: alto.sel, menosAire: bajo.sel, razon: +(alto.aire / bajo.aire).toFixed(1),
+                             gaps: Math.round(alto.aire) + "px contra " + Math.round(bajo.aire) + "px" });
+      }
+
+      /* ── B2 · D1 · una sola columna de contenido ────────────────────────
+         Estaba en el catálogo desde el principio con «inspección visual» en la
+         columna de detección. La moda de los bordes es la columna; lo que se
+         aparta más de 2px se aparta. `data-ds-bleed` es la salida declarada para
+         una banda que sí va de borde a borde. */
+      if (regiones.length >= 3) {
+        const izq = regiones.map((e) => Math.round(rect(e).left));
+        const der = regiones.map((e) => Math.round(rect(e).right));
+        const moda = (arr) => { const m = new Map(); for (const v of arr) m.set(v, (m.get(v) || 0) + 1); return [...m.entries()].sort((x, y) => y[1] - x[1])[0][0]; };
+        const mi = moda(izq), md = moda(der);
+        regiones.forEach((e, i) => {
+          if (e.hasAttribute("data-ds-bleed")) return;
+          if (Math.abs(izq[i] - mi) > 2 || Math.abs(der[i] - md) > 2)
+            flag(e, "D1", { region: sel(e), bordes: izq[i] + "–" + der[i], columna: mi + "–" + md });
+        });
+      }
+
+      out.aceptacion.push(A);
+    }
+  } catch (e) {
+    out.aceptacionError = String((e && e.message) || e);
   }
 
   /* ── Cobertura ───────────────────────────────────────────────────────────
@@ -447,6 +799,7 @@ const SONDA = (U) => {
 /* ═══════════════════════════════════════════════════════════════════════════ */
 
 const findings = [];
+const sinRaiz = new Map();      // file -> cuántas [data-ds-screen] se encontraron
 const exenciones = new Map();   // clave id|sel -> {id, sel, motivo, file}
 const cobertura = new Map();    // file -> {total, visibles, nativos}
 const add = (id, sev, file, desc, evidence, vp) =>
@@ -481,7 +834,8 @@ for (const file of files) {
     }
 
     const r = { contraste: [], medida: [], targets: [], proximidad: [], anidadas: [], etiquetas: [],
-                m10: [], m11: [], m12: [], m13: [], m14: [], m15: [], exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
+                m10: [], m11: [], m12: [], m13: [], m14: [], m15: [], aceptacion: [], pantallas: 0,
+                exentos: [], sinFondo: 0, cobertura: { total: 0, visibles: 0, nativos: 0 } };
     for (const vista of vistas) {
       if (vista != null && APLICAR) {
         try {
@@ -490,8 +844,10 @@ for (const file of files) {
         } catch { /* una vista que no abre no rompe el resto */ }
       }
       const parcial = await page.evaluate(SONDA, UMBRAL);
-      for (const k of ["contraste", "medida", "targets", "proximidad", "anidadas", "etiquetas", "m10", "m11", "m12", "m13", "m14", "m15", "exentos"])
+      for (const k of ["contraste", "medida", "targets", "proximidad", "anidadas", "etiquetas", "m10", "m11", "m12", "m13", "m14", "m15", "aceptacion", "exentos"])
         r[k].push(...parcial[k]);
+      r.pantallas = Math.max(r.pantallas, parcial.pantallas || 0);
+      if (parcial.aceptacionError) r.aceptacionError = parcial.aceptacionError;
 
       /* Y de nuevo en OSCURO, solo para lo que depende del color.
          Sin esto, el contraste se medía únicamente en claro — y la mitad de las
@@ -510,14 +866,21 @@ for (const file of files) {
           if (antes === despues) { document.documentElement.removeAttribute("data-theme"); return false; }
           return true;
         });
-        if (!reacciona) { r.sinOscuro = true; continue; }
-        await page.waitForTimeout(120);
-        const osc = await page.evaluate(SONDA, UMBRAL);
-        for (const c of osc.contraste) r.contraste.push({ ...c, tema: "oscuro" });
-        for (const m of osc.m13) r.m13.push({ ...m, tema: "oscuro" });
-        r.exentos.push(...osc.exentos);
-        await page.evaluate(() => document.documentElement.removeAttribute("data-theme"));
-        await page.waitForTimeout(80);
+        /* Sin modo oscuro no hay segundo pase, pero el primero SÍ se midió: el
+           `continue` que había acá se saltaba también la cobertura de abajo, y una
+           página sin tema oscuro reportaba "0 de 0 elementos (0%)" con la nota de
+           que el resto estaba oculto. Se medía entera; faltaba el conteo. */
+        if (reacciona) {
+          await page.waitForTimeout(120);
+          const osc = await page.evaluate(SONDA, UMBRAL);
+          for (const c of osc.contraste) r.contraste.push({ ...c, tema: "oscuro" });
+          for (const m of osc.m13) r.m13.push({ ...m, tema: "oscuro" });
+          r.exentos.push(...osc.exentos);
+          await page.evaluate(() => document.documentElement.removeAttribute("data-theme"));
+          await page.waitForTimeout(80);
+        } else {
+          r.sinOscuro = true;
+        }
       }
       // La cobertura se queda con el MAXIMO de visibles: es cuanto se llego a ver,
       // no la suma de todas las pasadas (los elementos del shell se repiten).
@@ -580,6 +943,41 @@ for (const file of files) {
         add("D12", "ALTA", file, `lo más grande de la stat-card no es la cifra (${e.px}px)`,
             `${e.sel} — “${e.mayor}”`, vp.nombre);
 
+    /* La vara de aceptación · una sola vez, en 1440: son relaciones entre
+       regiones y el pase de 375px es otra composición, no la misma peor dibujada.
+       Cada hallazgo trae su severidad de FAILURES.md. */
+    if (vp.nombre === "1440") {
+      const SEV = { D17: "ALTA", D18: "ALTA", D19: "ALTA", D20: "ALTA", D21: "ALTA", D22: "ALTA",
+                    D23: "MEDIA", D24: "MEDIA", D25: "MEDIA", D26: "MEDIA", D1: "ALTA", C2: "ALTA" };
+      const DESC = {
+        D17: (h) => [h.motivo, "los controles salen del default en vez de la densidad de la pantalla"],
+        D18: (h) => [`el control pesa más que el dato: ${h.alto}px contra una fila de ${h.altoDato}px`,
+                     `${h.control} sobre ${h.dato} (cuerpo ${h.cuerpo} vs ${h.cuerpoDato})`],
+        D19: (h) => [`más de un valor para la misma cosa: ${h.radios.length} radio(s), ${h.alturas.length} altura(s) de control, ${h.gaps.length} gap(s)`,
+                     `radios ${h.radios.join("/")} · alturas ${h.alturas.join("/")} · gaps ${h.gaps.join("/")}` +
+                     (h.fueraDeEscala.length ? ` · fuera de escala: ${h.fueraDeEscala.join("/")}` : "")],
+        D20: (h) => [`el dominante ${h.motivo}`,
+                     h.segunda ? `${h.dominante} ${h.razon}× la segunda (${h.segunda}), mínimo 1,5×` : (h.otras || h.dominante || "")],
+        D21: (h) => [`${h.n} controles hermanos, todos en peso ${h.peso}: el peso deja de poder marcar el activo`, h.conjunto],
+        D22: (h) => [`tres portadores de énfasis en un elemento: ${h.portadores}`, `${h.el} — “${h.texto}”`],
+        D23: (h) => [h.motivo === "tonos de acento simultáneos" ? `${h.n} familias de tono compitiendo (máximo 4)` : `${h.motivo}: ${h.n}`,
+                     h.familias || ""],
+        D24: (h) => [`el salto de aire no se ve: ${h.adentro}px adentro contra ${h.afuera}px afuera (${h.razon}×, mínimo 1,75×)`, h.sel],
+        D25: (h) => [h.motivo === "fila huérfana" ? `fila huérfana: ${h.items} ítems en ${h.cols} columnas` : `contenedor mayormente vacío: el contenido ocupa el ${Math.round(h.ocupacion * 100)}%`, h.sel],
+        D26: (h) => [`dos ritmos en la misma pantalla: una región separa ${h.razon}× más que otra (${h.gaps})`, `${h.masAire} contra ${h.menosAire}`],
+        D1:  (h) => ["región fuera de la columna de contenido", `${h.region} en ${h.bordes} — la columna es ${h.columna}`],
+        C2:  (h) => [`control de apoyo tomando la fila entera: ${h.w}px de ${h.contenedor}px`, h.control],
+      };
+      for (const A of r.aceptacion)
+        for (const h of A.hallazgos) {
+          const f = DESC[h.id]; if (!f) continue;
+          const [desc, ev] = f(h);
+          add(h.id, SEV[h.id] || "MEDIA", file, desc, ev, vp.nombre);
+        }
+      if (r.aceptacionError) console.warn(`! la vara de aceptación falló en ${path.basename(file)}: ${r.aceptacionError}`);
+      sinRaiz.set(file, r.pantallas);
+    }
+
     // M13 / M15 · nativo — una sola vez, no dependen del ancho
     if (vp.nombre === "1440") {
       for (const m of r.m13)
@@ -622,11 +1020,15 @@ if (asJson) {
       (c.nativos ? ` · ${c.nativos} contenedor(es) data-platform="native"` : "") +
       (c.vistas > 1 ? "" : nota));
   }
+  for (const [f, cu] of sinRaiz)
+    if (!cu)
+      console.log(`[aceptación] ${path.basename(f)} — sin [data-ds-screen]: los doce criterios de aceptación NO se midieron` +
+        `\n    una pantalla de producto lo declara en su raíz; el catálogo del DS y una landing no son pantallas y por eso quedan afuera`);
   for (const e of exenciones.values())
     console.log(`[${e.id} · EXCEPCIÓN DECLARADA] ${path.basename(e.file)} — ${e.sel}\n    ${e.motivo}`);
   console.log(`\nBLOQUEANTES ${summary.BLOQ} · ALTAS ${summary.ALTA} · MEDIAS ${summary.MEDIA} · total ${summary.total}` +
     (exenciones.size ? ` · ${exenciones.size} excepción(es) declarada(s)` : ""));
-  console.log("Lo que sigue sin medirse —«cero relleno», la regla 4, las inversiones de §4b— es criterio, no umbral: lo juzga la skill `review`.");
+  console.log("Lo que sigue sin medirse —«cero relleno», la regla 4, las inversiones de §4b, y de la vara de aceptación el criterio B3 (un concepto, un patrón)— es criterio, no umbral: lo juzgan `review` y las tres pruebas de ojo de guidelines/aceptacion-de-pantalla.md §3.");
 }
 
 process.exit(summary.BLOQ > 0 ? 1 : 0);

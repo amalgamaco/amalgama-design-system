@@ -53,6 +53,13 @@ In any project, no build step required:
 <link rel="stylesheet" href="css/brand-collateral.css"> <!-- 6. Amalgama-only: decks, proposals, the site. NEVER a client product -->
 ```
 
+`css/diagnostics.css` is **not** in that list and is not part of the `components.css` barrel: it is
+the review tool, not the product. It ships `data-ds-gray` (kill the colour — if the hierarchy
+collapses, colour was doing a job that belonged to form) and `data-ds-order` (show the declared
+reading rank), which are two of the three eye passes of
+[`guidelines/aceptacion-de-pantalla.md`](guidelines/aceptacion-de-pantalla.md) §3. Link it while
+reviewing a screen and take it out again.
+
 ```html
 <button class="btn-primary">Crear vacante</button>
 ```
@@ -181,6 +188,7 @@ Every component CSS header carries a **`Cuándo usar / Cuándo no / Reemplaza a`
 | **How AI agents/skills should consume the DS to build/migrate screens** | **`AI-USAGE-GUIDE.md`** |
 | Cross-component consistency rules, state patterns, audit checklist | `GOVERNANCE.md` |
 | **UX principles, laws/heuristics, interaction patterns — how to build a good *screen*** | **`guidelines/` (the Playbook)** — see below |
+| **Whether the screen you just built is acceptable — density, homogeneity, hierarchy, balance** | **`guidelines/aceptacion-de-pantalla.md`** (the 12 acceptance criteria + the closing rule) · failures `D17`–`D26` · thresholds in `scripts/check-render.mjs` |
 | Automated validation (token-lint, routes/anchors, manifest/metadata coverage) | `node scripts/validate-ds.mjs` |
 
 The `docs/*.html` pages are retired redirect stubs — never read or cite them as a source.

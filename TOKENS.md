@@ -380,9 +380,32 @@ reference; the literals are the enforcement.
 | Token | Web | Native | Use |
 |---|---|---|---|
 | `--target-min` | 44px | **48px** | **A floor, not a size.** The minimum touchable surface: WCAG 2.5.5 / iOS is 44, Android is 48, so native takes 48 and covers both. A control may be taller, never shorter. |
-| `--row-height` | 36px | **48px** | Table and list row. |
+| `--row-height` | 36px | **48px** | Table and list row. **Comes from the screen's declared density** (below), not from this default. |
 | `--control-height` | 36px | **48px** | Default button, input and select. |
 | `--screen-gutter` | *(n/a)* | **20px** | Native only: the side margin of a screen. **Deliberately not `--column-gutter`** — in native there is no column to centre and no `max-width`, so they are different concepts and must not be crossed. |
+
+### Declared density — `data-density`
+
+Density is a **decision per screen**, not a default: who uses it, how many hours a day, with which
+pointer. Declared on the screen root, everything that depends on it recalibrates by itself.
+
+```html
+<div data-ds-screen data-density="compact">      <!-- staff, eight hours   -->
+<div data-ds-screen data-density="comfortable">  <!-- once a month         -->
+```
+
+| Density | `--row-height` / `--control-height` | When |
+|---|---|---|
+| `compact` | **32px** | Operational screens: a desk console, a dense back-office table, anything someone works in all day with a mouse |
+| `comfortable` | **36px** (the default, written explicitly) | Screens someone visits occasionally, consumer-facing flows, forms |
+| `[data-platform="native"]` | **48px** | An app. Platform always wins over density |
+
+Compact also steps the eight `--screen-*` tokens down one notch, keeping the proportion `D24`
+measures. Two things are **not** density and don't move: the touch floor (with a coarse pointer,
+compact returns to `--target-min` — 24px is enough for a mouse per WCAG 2.5.8 and not for a finger
+per 2.5.5) and the data/label weight order (`M13` / `D12`).
+
+Criterion `A1`, failure `D17`, rule in `guidelines/aceptacion-de-pantalla.md`.
 
 Before these existed the 44px lived loose inside media queries in `components.css`: it was a patch
 per file, not a decision. If a control needs to grow on touch, it reads `--target-min`.

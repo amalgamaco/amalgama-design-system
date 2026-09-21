@@ -34,6 +34,7 @@ It has two audiences, one source of truth:
 | Guide | Covers |
 |---|---|
 | [Screen Patterns](screen-patterns.md) | **Los doce arquetipos de pantalla** — `list-collection`, `dashboard-overview`, `entity-detail`, `create-edit-form`, `multi-step-wizard`, `settings-preferences`, `pipeline-board`, `search-results`, `auth-entry`, `feed-activity`, `onboarding-first-run`, `confirmation-destructive`. Cada uno con su esqueleto de información, receta de componentes, estados obligatorios, transformación a mobile y anti-patrones. Más las reglas de transformación responsive y el playbook de auditoría. |
+| [Aceptación de pantalla](aceptacion-de-pantalla.md) | **La vara: cuándo una pantalla está aceptable.** Las cinco decisiones que cada pantalla declara (densidad, ancho, contenedor, dominante, set semántico) y los doce criterios de aceptación —tamaño, homogeneidad, jerarquía, balance—, todos expresados como relaciones y no como valores, para que una consola densa y un formulario pasen la misma vara sin parecerse. Con su falla en `FAILURES.md` (`D17`–`D26`), su umbral en `check-render.mjs` y la regla de cierre. Se corre **después** de construir. |
 | [Component Decisions](component-decisions.md) | Cómo elegir entre componentes que se parecen, y con qué no confundirlos. |
 | [Forms](forms.md) | Layout, labels, validation, error prevention & recovery, submission feedback. |
 | [Tables & Data-Heavy Interfaces](tables-and-data.md) | Density, alignment, sorting, filtering, pagination, empty/loading/error. |

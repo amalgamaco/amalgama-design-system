@@ -969,6 +969,63 @@
    además de `light` y `dark`.
    ═══════════════════════════════════════ */
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   Densidad de pantalla — se declara, no se hereda
+
+   Hasta septiembre de 2026 --row-height y --control-height eran ajustables (y
+   están documentados como tales en COMPOSICION.md III·d), pero no había forma de
+   DECLARAR la decisión: cada pantalla salía con el default de 36 salvo que
+   alguien se acordara de bajarlo control por control, y de ahí venía la mitad de
+   «los componentes quedaron gigantes». Acá la densidad es un atributo: se elige
+   una vez por pantalla, por quién la usa y cuántas horas por día, y todo lo que
+   depende de ella se recalibra solo.
+
+       <div data-ds-screen data-density="compact">   ← mostrador, ocho horas
+       <div data-ds-screen data-density="comfortable"> ← el socio, una vez al mes
+
+   La escalera es 32 · 36 · 48, todos múltiplos de 4: compacta, cómoda (el
+   default, declarado acá para que se pueda escribir explícito) y nativo.
+
+   Dos cosas que NO son densidad:
+   · El piso táctil. En puntero grueso, compacta vuelve al piso de --target-min:
+     24px alcanza para un mouse (WCAG 2.5.8) y no alcanza para un dedo (2.5.5).
+     El bloque de abajo lo resuelve solo, y por eso este bloque va ANTES que
+     [data-platform="native"]: en una app nativa gana la plataforma, siempre.
+   · El peso de la fila y el orden dato/etiqueta, que son M13 / D12 y no se mueven.
+
+   Ver guidelines/aceptacion-de-pantalla.md §1 (criterio A1, falla D17).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+[data-density="comfortable"] {
+  --row-height:     36px;
+  --control-height: 36px;
+}
+
+[data-density="compact"] {
+  --row-height:     32px;
+  --control-height: 32px;
+
+  /* La capa de pantalla baja un escalón con la misma proporción: el gap entre
+     bloques sigue siendo mayor que el padding del grupo, que es lo que D24 mide. */
+  --screen-block-gap:     20px;
+  --screen-block-padding: 16px;
+  --screen-group-padding: 12px;
+  --screen-row-height:    36px;
+  --screen-item-height:   48px;
+  --screen-item-icon:     28px;
+  --screen-item-gap:      10px;
+}
+
+/* El dedo no negocia: con puntero grueso, compacta vuelve al piso. No es un
+   parche responsive —no depende del ancho— sino del dispositivo de entrada, que
+   es de lo que habla WCAG 2.5.5. Una tablet de mostrador entra por acá. */
+@media (pointer: coarse) {
+  [data-density="compact"] {
+    --row-height:     var(--target-min);
+    --control-height: var(--target-min);
+  }
+}
+
 [data-platform="native"] {
   /* ─────────────────────────────────────
      Escala tipográfica nativa

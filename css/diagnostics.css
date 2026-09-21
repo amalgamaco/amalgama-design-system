@@ -1,0 +1,96 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   diagnostics.css — las tres pruebas que no tienen umbral, como dos atributos
+
+   Las once fallas de la vara de aceptación (D17–D26, más D1 y C2) las mide
+   `check-render`. Las tres que quedan afuera son de criterio y no de número
+   —grises, ojos entrecerrados, restar uno más— y por eso vivían como un paso que
+   alguien «debería» hacer y que nadie podía ver si había hecho.
+
+   Dos de esas tres son mirar la misma pantalla con otra luz, así que son CSS:
+
+     <div data-ds-screen data-ds-gray>          apaga el color
+     <div data-ds-screen data-ds-order>         muestra el rango declarado
+     <div data-ds-screen data-ds-order="auto">  numera las regiones en orden de DOM
+
+   NO entra en `css/components.css` a propósito: es herramienta de revisión, no
+   parte del producto. Se linkea cuando se revisa y no se deja linkeado.
+
+       <link rel="stylesheet" href="css/diagnostics.css">
+
+   La tercera —restar uno más— no se puede dibujar: es un movimiento, no una
+   vista. Ver guidelines/aceptacion-de-pantalla.md §3.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Grises ────────────────────────────────────────────────────────────────
+   Si la jerarquía se cae acá, el color estaba haciendo un trabajo que le tocaba
+   a la forma — y para quien no distingue esos dos tonos no lo va a hacer. Es la
+   misma pregunta que F6 hace elemento por elemento, hecha de una vez sobre toda
+   la pantalla. */
+[data-ds-gray] { filter: grayscale(1); }
+
+/* ── Orden de lectura ──────────────────────────────────────────────────────
+   Muestra lo DECLARADO, para contrastarlo con lo que efectivamente se lee
+   primero. El rango lo escribe quien construye la pantalla:
+
+       <section class="card" data-ds-dominant data-ds-rank="4 · el trabajo">
+
+   El rango 1 y el 4 son únicos; el resto se puede repetir (varias regiones de
+   apoyo comparten rango, y eso no es una falla). */
+[data-ds-order] [data-ds-rank] {
+  position: relative;
+  outline: 1px dashed color-mix(in srgb, var(--primary) 28%, transparent);
+  outline-offset: 6px;
+  border-radius: var(--radius-md);
+}
+[data-ds-order] [data-ds-rank]::before {
+  content: attr(data-ds-rank);
+  position: absolute;
+  top: calc(-1 * var(--space-5));
+  left: 0;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  height: var(--space-5);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-overline-sm);
+  line-height: var(--line-height-overline-sm);
+  letter-spacing: var(--letter-spacing-label, .04em);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* El dominante se marca aparte: es la única declaración que el gate cruza
+   contra el render (D20), así que conviene verla sin buscarla. */
+[data-ds-order] [data-ds-dominant] {
+  outline: 2px solid var(--primary);
+  outline-offset: 6px;
+}
+
+/* Variante sin declarar nada: numera las regiones de primer nivel en orden de
+   DOM. Sirve para una pantalla ajena o para el antes de una migración, donde no
+   hay rangos escritos todavía. */
+[data-ds-order="auto"] { counter-reset: ds-region; }
+[data-ds-order="auto"] > * { position: relative; counter-increment: ds-region; }
+[data-ds-order="auto"] > *::before {
+  content: counter(ds-region);
+  position: absolute;
+  top: calc(-1 * var(--space-2));
+  left: calc(-1 * var(--space-2));
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: var(--space-5);
+  height: var(--space-5);
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-overline-sm);
+  pointer-events: none;
+}
+
+@media print { [data-ds-gray], [data-ds-order] { filter: none; } }

@@ -680,20 +680,42 @@ igual de ilegible que en una landing.
 ## III·b — El bloque de decisión
 
 Paralelo al de página (`design.md` §4, nueve líneas) y al de pantalla nativa (`MOBILE.md` §6c,
-cinco). Cinco líneas antes del markup.
+cinco). Siete líneas antes del markup.
 
 ```
 ARQUETIPO   <list-collection | dashboard-overview | entity-detail | create-edit-form |
             multi-step-wizard | settings-preferences | pipeline-board | search-results |
             auth-entry | feed-activity | onboarding-first-run | confirmation-destructive>
+DENSIDAD    <compact | comfortable>   ← quién la usa, cuántas horas por día, con qué puntero
 SUPERFICIE  pantalla: surface        paneles: surface-container     ← el escalón, no la línea
 APERTURA    page-header: <título>    primaria: <una sola, a la derecha>
 CONTENEDOR  <table | list | card-grid>   ← por grano: comparar, leer o reconocer
+DOMINANTE   <componente>   gana por: <área · única superficie elevada>   orden de lectura: 1…5
 ESTADOS     vacío inicial · sin resultados · cargando · error · sin permiso
 ```
 
+**Las dos líneas nuevas —septiembre de 2026— son las que faltaban para que la pantalla se pueda
+medir.** `DENSIDAD` porque el default de 36px salía igual para un mostrador que la mira ocho horas
+y para una pantalla que alguien abre una vez al mes, y de ahí venía la mitad de «los componentes
+quedaron gigantes». `DOMINANTE` porque III·a hacía nombrar el objeto primario sin ninguna
+consecuencia visual: se nombraba el tablero y se le daba el mismo tratamiento que a la leyenda. Las
+dos se escriben además **en el markup** —`data-density` y `data-ds-dominant`— porque el gate las
+necesita para medir, y una pantalla que no las declara no es una pantalla mal hecha: es una que no
+se puede chequear.
+
+> **El orden de lectura no es la dominancia.** El título se lee primero y no lleva ningún énfasis:
+> lo pone adelante su posición y ser el único titular. El objeto se lee después y es el que tiene
+> que dominar, porque ahí está el trabajo. Los portadores de énfasis se gastan en el segundo, no en
+> el primero — confundirlas es lo que produce la pantalla donde todo grita.
+
 El arquetipo trae su esqueleto de información, su receta de componentes y sus estados
 obligatorios. No se elige mirando otra pantalla: se elige por el objetivo.
+
+> **La vara que mide lo que salió está en `guidelines/aceptacion-de-pantalla.md`**: las cinco
+> decisiones que cada pantalla declara y los doce criterios de aceptación —tamaño, homogeneidad,
+> jerarquía y balance—, con su falla en `FAILURES.md` (`D17`–`D26`) y su umbral en
+> `check-render.mjs`. Esta parte dice cómo se dibuja; esa dice cuándo está aceptable. Once de los
+> doce criterios se miden; el que no, se pregunta.
 
 > **Los doce arquetipos están en `guidelines/screen-patterns.md`**, con su esqueleto de
 > información, su receta de componentes, sus estados obligatorios, su transformación a mobile y
